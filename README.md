@@ -1,4 +1,4 @@
-# Curió Bases 🗂️
+# A Base dos Dados  🗂️
 
 O intuito do projeto é organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery.
 Qualquer pessoa poderá fazer queries em bases tratadas e documentadas que estarão disponíveis e estáveis.
