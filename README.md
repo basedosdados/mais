@@ -193,16 +193,18 @@ columns:
 
 # Estruturação no Storage
 
-A estrutura deve seguir a mesma lógica do BigQuery. Porém, existem pastas raízes diferentes: os dados brutos devem ser alocados em `raw` e tratados em `treated`. Ambas possuem a mesma estrutura:
+A estrutura deve seguir a mesma lógica do BigQuery. Porém, existem pastas raízes diferentes: os dados brutos devem ser alocados em `raw` e prontos em `ready`. Ambas possuem a mesma estrutura:
 
 ```
-    ├── treated/raw
+    ├── ready|raw
         ├── <nome_schema>        Ex: br-eleicoes-tse
         ├── ...
             ├── <nome_tabela>    Ex: candidatos
             ├── ...
                 ├── <dados>      Dados particionados ou não.
 ```
+
+Nem todos os dados necessitam estar na pasta `raw`. Essa pasta existe somente para aqueles que precisam de um processamento prévio. 
 
 
 # Regras de Tratamento das Bases
