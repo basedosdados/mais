@@ -36,6 +36,11 @@ As diretrizes para nomenclatura dos _schemas_ e tabelas são descritas abaixo:
 - Utilizar somente letras minúsculas
 - Remover acentos, pontuações e espaços
 
+### Bases Desejadas
+
+[Lista de bases mapeadas](https://docs.google.com/spreadsheets/d/1t9kEsiyatmmdDCy2qjaCjLqdw-oJj33P7tY5bnkR0aw/edit#gid=0) que estão no nosso mapa.
+
+
 ## Mundial -- Clima, Waze
 
 ### Schema:
