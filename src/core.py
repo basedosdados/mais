@@ -109,7 +109,7 @@ class Dataset(Base):
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             try:
-                dataset = client.create_dataset(
+                dataset = self.client.create_dataset(
                     dataset, timeout=30
                 )  # Make an API request.
                 print(f"Created dataset {ds_id}")
@@ -135,7 +135,7 @@ class Dataset(Base):
             # Send the dataset to the API to update, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
-            dataset = client.update_dataset(
+            dataset = self.client.update_dataset(
                 dataset, fields=["description"], timeout=30
             )  # Make an API request.
             print(f"Updated dataset {ds_id}")
@@ -213,7 +213,7 @@ class Table(Base):
 
         json.dump(columns, (json_path).open("w"))
 
-        return client.schema_from_json(str(json_path))
+        return self.client.schema_from_json(str(json_path))
 
     def create(self, external=False, job_config_params=None):
         """
@@ -241,7 +241,7 @@ class Table(Base):
 
             job_config = bigquery.LoadJobConfig(**job_config_params)
 
-        load_job = client.load_table_from_uri(
+        load_job = self.client.load_table_from_uri(
             self.uri.format(
                 dataset=self.table_config["dataset_id"],
                 table=self.table_config["table_id"],
@@ -257,17 +257,16 @@ class Table(Base):
         for m, table_name in self.table_full_name.items():
 
             if m in mode:
-                print(table_name)
+
                 table = self.client.get_table(table_name)
                 table.description = self.render_template(
                     "table/table_description.txt", self.table_config
                 )
-                print(table.description)
+                table.schema = self.load_schema(mode)
 
-                # TODO: Update tables schema
-                self.client.update_table(table, fields=["description"])
+                self.client.update_table(table, fields=["description", "schema"])
 
-    def publish(self):
+    def publish(self, if_exists="raise"):
 
         # TODO: check if all required fields are filled
         # TODO: Add if_exists options ['replace', 'raise']: implement delete
@@ -279,7 +278,15 @@ class Table(Base):
         sql = (self.table_folder / "publish.sql").open("r").read()
 
         # Start the query, passing in the extra configuration.
-        query_job = client.query(sql, job_config=job_config)  # Make an API request.
+        query_job = self.client.query(
+            sql, job_config=job_config
+        )  # Make an API request.
         query_job.result()  # Wait for the job to complete.
 
         self.update(mode=["prod"])
+
+
+if __name__ == "__main__":
+
+    table = Table("test", "test")
+    table.publish()
