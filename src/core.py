@@ -4,6 +4,7 @@ import yaml
 from jinja2 import Template
 from pathlib import Path
 import json
+import csv
 
 from google.api_core.exceptions import Conflict
 
@@ -14,10 +15,10 @@ class Base:
         key_path="secrets/cli-admin.json",
         templates="src/templates",
         bucket="basedosdados",
-        bases_path="bases/",
+        metadata_path="bases/",
     ):
         self.templates = Path(templates)
-        self.bases_path = Path(bases_path)
+        self.metadata_path = Path(metadata_path)
 
         credentials = service_account.Credentials.from_service_account_file(
             key_path,
@@ -31,7 +32,10 @@ class Base:
 
     def load_yaml(self, file):
 
-        return yaml.load(open(file, "r"), Loader=yaml.SafeLoader)
+        try:
+            return yaml.load(open(file, "r"), Loader=yaml.SafeLoader)
+        except FileNotFoundError:
+            return None
 
     def render_template(self, template_file, kargs):
 
@@ -41,13 +45,13 @@ class Base:
 
 
 class Dataset(Base):
-    def __init__(self, dataset_id):
-        super().__init__()
+    def __init__(self, dataset_id, **kwargs):
+        super().__init__(**kwargs)
 
         self.dataset_id = dataset_id
-        self.dataset_folder = Path(self.bases_path / self.dataset_id)
+        self.dataset_folder = Path(self.metadata_path / self.dataset_id)
         self.dataset_config = self.load_yaml(
-            self.bases_path / dataset_id / "dataset_config.yaml"
+            self.metadata_path / dataset_id / "dataset_config.yaml"
         )
 
     def init(self, replace=False):
@@ -112,7 +116,6 @@ class Dataset(Base):
                 dataset = self.client.create_dataset(
                     dataset, timeout=30
                 )  # Make an API request.
-                print(f"Created dataset {ds_id}")
 
             except Conflict:
 
@@ -122,10 +125,10 @@ class Dataset(Base):
                 else:
                     raise Exception(f"Dataset {ds_id} already exists.")
 
-    def update(self, update_raw=True):
+    def update(self, update_staging=True):
 
         # Set dataset_id to the ID of the dataset to create.
-        dataset_ids = self.create_dataset_ids(update_raw)
+        dataset_ids = self.create_dataset_ids(update_staging)
 
         for ds_id in dataset_ids:
 
@@ -138,21 +141,20 @@ class Dataset(Base):
             dataset = self.client.update_dataset(
                 dataset, fields=["description"], timeout=30
             )  # Make an API request.
-            print(f"Updated dataset {ds_id}")
 
 
 class Table(Base):
-    def __init__(self, table_id, dataset_id):
-        super().__init__()
+    def __init__(self, table_id, dataset_id, **kwargs):
+        super().__init__(**kwargs)
 
         self.table_id = table_id
         self.dataset_id = dataset_id
-        self.dataset_folder = Path(self.bases_path / self.dataset_id)
+        self.dataset_folder = Path(self.metadata_path / self.dataset_id)
         self.table_folder = self.dataset_folder / table_id
         self.table_config = self.load_yaml(self.table_folder / "table_config.yaml")
         self.table_full_name = dict(
-            staging=f"{self.client.project}.staging_{self.table_config['dataset_id']}.{self.table_config['table_id']}",
-            prod=f"{self.client.project}.{self.table_config['dataset_id']}.{self.table_config['table_id']}",
+            staging=f"{self.client.project}.staging_{self.dataset_id}.{self.table_id}",
+            prod=f"{self.client.project}.{self.dataset_id}.{self.table_id}",
         )
 
     def init(self, data_sample_path=None, replace=False):
@@ -169,7 +171,7 @@ class Table(Base):
         except FileExistsError:
             raise FileExistsError(
                 f"Table folder already exists for {self.table_id}. "
-                "Set replace=True to replace current files."
+                "Add --replace flag to replace current files."
             )
 
         if isinstance(data_sample_path, str):
@@ -215,7 +217,7 @@ class Table(Base):
 
         return self.client.schema_from_json(str(json_path))
 
-    def create(self, external=False, job_config_params=None):
+    def create(self, job_config_params=None):
         """
         Creates table in staging dataset
         """
@@ -254,6 +256,9 @@ class Table(Base):
 
     def update(self, mode=["staging", "prod"]):
 
+        if isinstance(mode, str):
+            mode = [mode]
+
         for m, table_name in self.table_full_name.items():
 
             if m in mode:
@@ -269,24 +274,25 @@ class Table(Base):
     def publish(self, if_exists="raise"):
 
         # TODO: check if all required fields are filled
-        # TODO: Add if_exists options ['replace', 'raise']: implement delete
 
-        job_config = bigquery.QueryJobConfig(
-            destination=str(self.table_full_name["prod"])
-        )
+        job_config = bigquery.QueryJobConfig(destination=self.table_full_name["prod"])
 
         sql = (self.table_folder / "publish.sql").open("r").read()
 
-        # Start the query, passing in the extra configuration.
-        query_job = self.client.query(
-            sql, job_config=job_config
-        )  # Make an API request.
+        if if_exists == "replace":
+            self.delete(mode="prod")
+
+        query_job = self.client.query(sql, job_config=job_config)
         query_job.result()  # Wait for the job to complete.
 
         self.update(mode=["prod"])
 
+    def delete(self, mode):
+
+        self.client.delete_table(self.table_full_name[mode])
+
 
 if __name__ == "__main__":
 
-    table = Table("test", "test")
-    table.publish()
+    table = Table("test", "test", key_path="as")
+    table.publish("replace")
