@@ -58,7 +58,7 @@ class Dataset(Base):
 
         # Create table folder
         try:
-            self.dataset_folder.mkdir(exist_ok=replace)
+            self.dataset_folder.mkdir(exist_ok=replace, parents=True)
         except FileExistsError:
             raise FileExistsError(
                 f"Dataset {str(dataset_folder.stem)} folder does not exists. "
