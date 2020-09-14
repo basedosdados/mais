@@ -1,0 +1,6 @@
+.bases
+notebooks
+data
+secrets
+.ipynb*
+*.ipynb

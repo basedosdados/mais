@@ -20,18 +20,18 @@ Sabemos que estruturar os dados em uma plataforma privada não é o ideal para u
 
 As bases tem que ser organizadas no BigQuery de maneira consistente, que permita uma busca fácil e intuitiva, e seja escalável.
 
-Para isso, existem dois níveis de organização: _schemas_ e _tables_, nos quais:
-- Todas as tabelas devem estar organizadas em _schemas_
-- Cada tabela deve pertencer a um único _schema_
+Para isso, existem dois níveis de organização: _datasets_ e _tables_, nos quais:
+- Todas as tabelas devem estar organizadas em _datasets_
+- Cada tabela deve pertencer a um único _dataset_
 
-As diretrizes para nomenclatura dos _schemas_ e tabelas são descritas abaixo:
+As diretrizes para nomenclatura dos _datasets_ e tabelas são descritas abaixo:
 
-|           | Schema                      | Tabela                           |
+|           | Dataset                      | Tabela                           |
 |-----------|-----------------------------|----------------------------------|
-| Mundial   | mundo-\<tema\>-\<instituicao\>      | \<descrição\>                        |
-| Federal   | \<pais\>-\<tema\>-\<instituicao\>       | \<descrição\>                       |
-| Estadual  | \<pais\>-\<estado\>                 | \<instituicao\>-\<tema\>-descrição\>       |
-| Municipal | \<pais\>-\<estado\>-\<cidade\>          | \<instituicao\>-\<tema\>-descrição\>       |
+| Mundial   | mundo_\<tema\>_\<instituicao\>      | \<descrição\>                        |
+| Federal   | \<pais\>_\<tema\>_\<instituicao\>       | \<descrição\>                       |
+| Estadual  | \<pais\>_\<estado\>                 | \<instituicao\>_\<tema\>_descrição\>       |
+| Municipal | \<pais\>_\<estado\>_\<cidade\>          | \<instituicao\>_\<tema\>_descrição\>       |
 
 - Utilizar somente letras minúsculas
 - Remover acentos, pontuações e espaços
@@ -43,11 +43,11 @@ As diretrizes para nomenclatura dos _schemas_ e tabelas são descritas abaixo:
 
 ## Mundial -- Clima, Waze
 
-### Schema:
+### Dataset:
 
 Usar abrangência, um tema e nome da instituição
 
-`mundo-<tema>-<instituicao>`
+`mundo_<tema>_<instituicao>`
 
 ### Tabela:
 
@@ -55,15 +55,15 @@ Usar nome descritivo e único para os dados
 
 `<descrição>`
 
-Exemplo: Os dados de alertas do Waze estariam no schema `mundo-mobilidade-waze` e tabela `alertas`. Portanto, o caminho seria `mundo-mobilidade-waze`.`alertas`.
+Exemplo: Os dados de alertas do Waze estariam no dataset `mundo_mobilidade_waze` e tabela `alertas`. Portanto, o caminho seria `mundo_mobilidade_waze`.`alertas`.
 
 ## Federal -- IBGE, IPEA, Senado, Camara, TSE
 
-### Schema:
+### Dataset:
 
 Usar sigla do país, um tema e nome da instituição
 
-`<pais>-<tema>-<instituicao>`
+`<pais>_<tema>_<instituicao>`
 
 ### Tabela:
 
@@ -71,38 +71,38 @@ Usar nome descritivo e único para os dados:
 
 `<descrição>`
 
-Exemplo: Os dados de candidatos do TSE estariam no schema `br-eleicoes-tse` e na tabela `candidatos`.
+Exemplo: Os dados de candidatos do TSE estariam no dataset `br-eleicoes-tse` e na tabela `candidatos`.
 
 ## Estadual 
 
-### Schema:
+### Dataset:
 
 Usar país e sigla do estado (UF).
 
-`<pais>-<estado>`
+`<pais>_<estado>`
 
 ### Tabela:
 
 Usar nome da instuição estadual, tema e descrição
 
-`<instituicao>-<tema>-<descrição>`
+`<instituicao>_<tema>_<descrição>`
 
 
-Exemplo: Os dados da rede de esgoto da SANASA que atende no estado de São Paulo estariam no schema `br-sp` e tabela `sanasa-sanementobasico-redeesgoto`.
+Exemplo: Os dados da rede de esgoto da SANASA que atende no estado de São Paulo estariam no dataset `br-sp` e tabela `sanasa-sanementobasico-redeesgoto`.
 
 ## Municipal
 
-### Schema:
+### Dataset:
 
 Usar sigla do país, sigla do estado (UF), nome da cidade (sem espaço)
 
-`<pais>-<estado>-<cidade>`
+`<pais>_<estado>_<cidade>`
 
 ### Tabela:
 
 Usar nome da instuição estadual, tema e descrição
 
-`<instituicao>-<tema>-<descrição>`
+`<instituicao>_<tema>_<descrição>`
 
 Exemplo: Os dados de votações da camara municipal do rio de janeiro estariam em `br-rj-riodejaneiro` e tabela `dcmrj-legislativo-legislativo`
 
@@ -135,26 +135,26 @@ A referencia dos temas é do dados.gov.br, mas temas podem ser adicionados e tro
 | Habitação, Saneamento e Urbanismo   |               |
 
 
-# Estruturação do Github
+# Estrutura do Github
 
 A pasta `bases/` terá uma estrutura similar a do BigQuery.
 
 ```
     ├── bases
-        ├── <nome_schema>             Ex: br-eleicoes-tse
+        ├── <nome_dataset>             Ex: br_eleicoes_tse
         ├── ...
-            ├── code/                 Todo código relacionado ao schema
-            ├── <schema_config.yaml>
+            ├── code/                 Todo código relacionado ao dataset
+            ├── <dataset_config.yaml>
             ├── <nome_tabela>.yaml    Ex: candidatos.yaml
             ├── ...
 ```
 
-Os arquivos `.yaml` serão usados para documentação e configuração das tabelas e schemas.
+Os arquivos `.yaml` serão usados para documentação e configuração das tabelas e datasets.
 
-### schema_config.yaml
+### dataset_config.yaml
 
 ```yaml
-name: br-eleicoes-tse
+name: br_eleicoes_tse
 description: |
     Dados do Tribunal Superior Eleitoral disponíveis na url ...
 labels: 
@@ -191,13 +191,13 @@ columns:
         treated?: False # A coluna foi modificada (exceto mudançã de tipos)?
 ```
 
-# Estruturação no Storage
+# Estrutura no Storage
 
 A estrutura deve seguir a mesma lógica do BigQuery. Porém, existem pastas raízes diferentes: os dados brutos devem ser alocados em `raw` e prontos em `ready`. Ambas possuem a mesma estrutura:
 
 ```
     ├── ready|raw
-        ├── <nome_schema>        Ex: br-eleicoes-tse
+        ├── <nome_dataset>        Ex: br_eleicoes_tse
         ├── ...
             ├── <nome_tabela>    Ex: candidatos
             ├── ...
@@ -206,6 +206,18 @@ A estrutura deve seguir a mesma lógica do BigQuery. Porém, existem pastas raí
 
 Nem todos os dados necessitam estar na pasta `raw`. Essa pasta existe somente para aqueles que precisam de um processamento prévio. 
 
+# Tratamento no Bigquery
+
+O BigQuery é uma ótima ferramenta para tratar as bases. Portanto, recomenda-se
+que subir os dados brutos e usar uma query para tratá-los. Seja para corrigir tipos
+ou adicionar colunas úteis.
+
+Para isso, deverá ser criado uma dataset com o mesmo nome, mas precedido de `raw_`.
+
+Exemplo: `raw_br_eleicoes_tse`
+
+E todas as tabelas desse dataset serão consideradas brutas e não deverão ser abertas
+ao público.
 
 # Regras de Tratamento das Bases
 

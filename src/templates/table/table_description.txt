@@ -1,0 +1,14 @@
+# TODO: Improve this file
+{{ description }}
+ 
+Partições
+---------
+{% for partition in partitions %}
+- {{ partition }}
+{% endfor %}
+
+Tratamentos
+-----------
+{% for treatment in treatments %}
+- {{ treatment }}
+{% endfor %}
