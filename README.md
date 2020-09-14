@@ -18,7 +18,10 @@ Sabemos que estruturar os dados em uma plataforma privada não é o ideal para u
 
 #### Instale o CLI localmente
 
-`make create-env`
+```sh
+make create-env
+. .bases/bin/activate
+```
 
 # Como organizar as bases no BigQuery?
 
