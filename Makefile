@@ -7,6 +7,7 @@ create-env:
 	source .$(REPO)/bin/activate; \
 			pip3 install --upgrade  -r requirements.txt; \
 			pip install --editable .;
+	echo --> Don't forget to add the google api key as secrets/cli-admin.json;
 
 update-env:
 	source .$(REPO)/bin/activate; \
