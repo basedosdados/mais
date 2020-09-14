@@ -16,6 +16,10 @@ Sabemos que estruturar os dados em uma plataforma privada não é o ideal para u
 - O BigQuery escala magicamente para hexabytes se necessário
 - O custo é praticamente zero para usuários. São cobrados somente 5 dólares por terabyte de dados que sua query percorrer, e os primeiros 5 terabytes são gratuitos.
 
+#### Instale o CLI localmente
+
+`make create-env`
+
 # Como organizar as bases no BigQuery?
 
 As bases tem que ser organizadas no BigQuery de maneira consistente, que permita uma busca fácil e intuitiva, e seja escalável.
