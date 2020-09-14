@@ -1,0 +1,6 @@
+google-cloud-bigquery
+ipykernel
+jupyter
+pyaml
+jinja2
+blacked
