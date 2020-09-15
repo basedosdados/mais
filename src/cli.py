@@ -101,6 +101,20 @@ def update_dataset(ctx, dataset_id, update_staging):
         )
     )
 
+@cli_dataset.command(name="publicize", help="Make a dataset public")
+@click.argument("dataset_id")
+@click.pass_context
+def publicize_dataset(ctx, dataset_id):
+
+    Dataset(dataset_id=dataset_id, **ctx.obj).publicize(dataset_id=dataset_id)
+
+    click.echo(
+        click.style(
+            text,
+            fg="green",
+        )
+    )
+
 
 @click.group(name="table")
 def cli_table():

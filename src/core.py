@@ -66,7 +66,7 @@ class Dataset(Base):
 
         # Create table folder
         try:
-            self.dataset_folder.mkdir(exist_ok=replace)
+            self.dataset_folder.mkdir(exist_ok=replace, parents=True)
         except FileExistsError:
             raise FileExistsError(
                 f"Dataset {str(dataset_folder.stem)} folder does not exists. "
@@ -109,6 +109,34 @@ class Dataset(Base):
 
         return dataset
 
+    def publicize(self):
+
+        dataset = self.client["bigquery"].get_dataset(self.dataset_id)
+        entries = dataset.access_entries
+
+        entries.extend(
+            [
+                bigquery.AccessEntry(
+                    role="roles/bigquery.dataViewer",
+                    entity_type="iamMember",
+                    entity_id="allUsers",
+                ),
+                bigquery.AccessEntry(
+                    role="roles/bigquery.metadataViewer",
+                    entity_type="iamMember",
+                    entity_id="allUsers",
+                ),
+                bigquery.AccessEntry(
+                    role="roles/bigquery.user",
+                    entity_type="iamMember",
+                    entity_id="allUsers",
+                ),
+            ]
+        )
+        dataset.access_entries = entries
+
+        self.client["bigquery"].update_dataset(dataset, ["access_entries"])
+
     def create(self, create_staging=True, if_exists="raise"):
 
         # Set dataset_id to the ID of the dataset to create.
@@ -134,6 +162,9 @@ class Dataset(Base):
 
                 else:
                     raise Exception(f"Dataset {ds_id} already exists.")
+
+        # Make prod dataset public
+        self.publicize()
 
     def update(self, update_staging=True):
 
