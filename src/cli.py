@@ -205,7 +205,7 @@ def update_table(ctx, dataset_id, table_id, mode):
 @click.pass_context
 def publish_table(ctx, dataset_id, table_id, if_exists):
 
-    Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).update(
+    Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).publish(
         if_exists=if_exists,
     )
 
