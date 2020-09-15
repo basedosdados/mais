@@ -1,10 +1,11 @@
-from google.cloud import bigquery
+from google.cloud import bigquery, storage
 from google.oauth2 import service_account
 import yaml
 from jinja2 import Template
 from pathlib import Path
 import json
 import csv
+from enum import Enum
 
 from google.api_core.exceptions import Conflict
 
@@ -14,21 +15,28 @@ class Base:
         self,
         key_path="secrets/cli-admin.json",
         templates="src/templates",
-        bucket="basedosdados",
+        bucket_name="basedosdados",
         metadata_path="bases/",
     ):
         self.templates = Path(templates)
         self.metadata_path = Path(metadata_path)
+        self.bucket_name = bucket_name
 
         credentials = service_account.Credentials.from_service_account_file(
             key_path,
             scopes=["https://www.googleapis.com/auth/cloud-platform"],
         )
-        self.client = bigquery.Client(
-            credentials=credentials,
-            project=credentials.project_id,
+        self.client = dict(
+            bigquery=bigquery.Client(
+                credentials=credentials,
+                project=credentials.project_id,
+            ),
+            storage=storage.Client(
+                credentials=credentials,
+                project=credentials.project_id,
+            ),
         )
-        self.uri = f"gs://{bucket}" + "/staging/{dataset}/{table}/*"
+        self.uri = f"gs://{bucket_name}" + "/staging/{dataset}/{table}/*"
 
     def load_yaml(self, file):
 
@@ -81,11 +89,13 @@ class Dataset(Base):
 
     def create_dataset_ids(self, create_staging):
 
-        dataset_ids = [f"{self.client.project}.{self.dataset_config['dataset_id']}"]
+        dataset_ids = [
+            f"{self.client['bigquery'].project}.{self.dataset_config['dataset_id']}"
+        ]
 
         if create_staging:
             dataset_ids.append(
-                f"{self.client.project}.staging_{self.dataset_config['dataset_id']}"
+                f"{self.client['bigquery'].project}.staging_{self.dataset_config['dataset_id']}"
             )
 
         return dataset_ids
@@ -113,7 +123,7 @@ class Dataset(Base):
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             try:
-                dataset = self.client.create_dataset(
+                dataset = self.client["bigquery"].create_dataset(
                     dataset, timeout=30
                 )  # Make an API request.
 
@@ -138,7 +148,7 @@ class Dataset(Base):
             # Send the dataset to the API to update, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
-            dataset = self.client.update_dataset(
+            dataset = self.client["bigquery"].update_dataset(
                 dataset, fields=["description"], timeout=30
             )  # Make an API request.
 
@@ -153,8 +163,8 @@ class Table(Base):
         self.table_folder = self.dataset_folder / table_id
         self.table_config = self.load_yaml(self.table_folder / "table_config.yaml")
         self.table_full_name = dict(
-            staging=f"{self.client.project}.staging_{self.dataset_id}.{self.table_id}",
-            prod=f"{self.client.project}.{self.dataset_id}.{self.table_id}",
+            staging=f"{self.client['bigquery'].project}.staging_{self.dataset_id}.{self.table_id}",
+            prod=f"{self.client['bigquery'].project}.{self.dataset_id}.{self.table_id}",
         )
 
     def init(self, data_sample_path=None, replace=False):
@@ -194,7 +204,7 @@ class Table(Base):
                 template = Template(file.open("r").read()).render(
                     table_id=self.table_id,
                     dataset_id=self.dataset_folder.stem,
-                    project_id=self.client.project,
+                    project_id=self.client["bigquery"].project,
                     columns=columns,
                 )
 
@@ -215,7 +225,7 @@ class Table(Base):
 
         json.dump(columns, (json_path).open("w"))
 
-        return self.client.schema_from_json(str(json_path))
+        return self.client["bigquery"].schema_from_json(str(json_path))
 
     def create(self, job_config_params=None):
         """
@@ -243,7 +253,7 @@ class Table(Base):
 
             job_config = bigquery.LoadJobConfig(**job_config_params)
 
-        load_job = self.client.load_table_from_uri(
+        load_job = self.client["bigquery"].load_table_from_uri(
             self.uri.format(
                 dataset=self.table_config["dataset_id"],
                 table=self.table_config["table_id"],
@@ -263,13 +273,15 @@ class Table(Base):
 
             if m in mode:
 
-                table = self.client.get_table(table_name)
+                table = self.client["bigquery"].get_table(table_name)
                 table.description = self.render_template(
                     "table/table_description.txt", self.table_config
                 )
                 table.schema = self.load_schema(mode)
 
-                self.client.update_table(table, fields=["description", "schema"])
+                self.client["bigquery"].update_table(
+                    table, fields=["description", "schema"]
+                )
 
     def publish(self, if_exists="raise"):
 
@@ -282,14 +294,67 @@ class Table(Base):
         if if_exists == "replace":
             self.delete(mode="prod")
 
-        query_job = self.client.query(sql, job_config=job_config)
+        query_job = self.client["bigquery"].query(sql, job_config=job_config)
         query_job.result()  # Wait for the job to complete.
 
         self.update(mode=["prod"])
 
     def delete(self, mode):
 
-        self.client.delete_table(self.table_full_name[mode])
+        self.client["bigquery"].delete_table(self.table_full_name[mode])
+
+
+class Storage(Base):
+    def __init__(self, dataset_id=None, table_id=None, **kwargs):
+
+        super().__init__(**kwargs)
+
+        self.bucket = self.client["storage"].bucket(self.bucket_name)
+        self.dataset_id = dataset_id
+        self.table_id = table_id
+
+    def init(self, replace=False, very_sure=False):
+        """Create bucket and folders"""
+
+        if replace:
+            if not very_sure:
+                raise Warning(
+                    "\n********************************************************"
+                    "\nYou are trying to replace all the data that you have "
+                    f"in bucket {self.bucket_name}.\nAre you sure?\n"
+                    "If yes, add the flag --very_sure\n"
+                    "********************************************************"
+                )
+            else:
+                self.bucket.delete(force=True)
+
+        self.client["storage"].create_bucket(self.bucket)
+
+        for folder in ["staging/", "raw/"]:
+
+            self.bucket.blob(folder).upload_from_string("")
+
+    def upload(self, filepath, mode, replace=False, **upload_args):
+
+        filepath = Path(filepath)
+
+        if (self.dataset_id is None) or (self.table_id is None):
+            raise Exception("You need to pass dataset_id and table_id")
+
+        blob_name = f"{mode}/{self.dataset_id}/{self.table_id}/{filepath.name}"
+        blob = self.bucket.blob(blob_name)
+
+        if not blob.exists() or replace:
+
+            blob.upload_from_filename(str(filepath), **upload_args)
+
+        else:
+            raise Exception(
+                f"Data already exists at {blob_name}. "
+                "Add flag --replace to overwrite data"
+            )
+
+        return blob_name
 
 
 if __name__ == "__main__":

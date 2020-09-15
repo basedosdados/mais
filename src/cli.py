@@ -1,6 +1,6 @@
 import click
 
-from src.core import Base, Dataset, Table
+from src.core import Base, Dataset, Table, Storage
 
 
 @click.group()
@@ -8,10 +8,10 @@ from src.core import Base, Dataset, Table
     "--key_path", default="secrets/cli-admin.json", help="Gcloud key json file"
 )
 @click.option("--templates", default="src/templates", help="Templates path")
-@click.option("--bucket", default="basedosdados", help="Project bucket name")
+@click.option("--bucket_name", default="basedosdados", help="Project bucket_name name")
 @click.option("--metadata_path", default="bases/", help="Folder to store metadata")
 @click.pass_context
-def cli(ctx, key_path, templates, bucket, metadata_path):
+def cli(ctx, key_path, templates, bucket_name, metadata_path):
 
     cli.add_command(cli_dataset)
     cli.add_command(cli_table)
@@ -19,7 +19,7 @@ def cli(ctx, key_path, templates, bucket, metadata_path):
     ctx.obj = dict(
         key_path="secrets/cli-admin.json",
         templates="src/templates",
-        bucket="basedosdados",
+        bucket_name="basedosdados",
         metadata_path="bases/",
     )
 
@@ -111,7 +111,10 @@ def cli_table():
 @click.argument("dataset_id")
 @click.argument("table_id")
 @click.option(
-    "--data_sample_path", default=None, help="Sample data used to pre-fill metadata"
+    "--data_sample_path",
+    default=None,
+    help="Sample data used to pre-fill metadata",
+    type=click.Path(exists=True),
 )
 @click.option(
     "--replace/--no-replace",
@@ -214,11 +217,10 @@ def delete_table(ctx, dataset_id, table_id, mode):
         mode=mode,
     )
 
-    if mode == 'prod':
+    if mode == "prod":
         text = f"Table `{dataset_id}.{table_id}` was deleted from BigQuery"
-    elif mode == 'staging':
+    elif mode == "staging":
         text = f"Table `{dataset_id}.staging_{table_id}` was deleted from BigQuery"
-
 
     click.echo(
         click.style(
@@ -228,8 +230,72 @@ def delete_table(ctx, dataset_id, table_id, mode):
     )
 
 
+@click.group(name="storage")
+def cli_storage():
+    pass
+
+
+@cli_storage.command(name="init", help="Create bucket and initial folders")
+@click.option("--bucket_name", default="basedosdados", help="Bucket name")
+@click.option(
+    "--replace/--no-replace",
+    default=False,
+    help="Whether to replace current bucket files",
+)
+@click.option(
+    "--very-sure/--not-sure",
+    default=False,
+    help="Are you sure that you want to replace current bucket files?",
+)
+@click.pass_context
+def init_storage(ctx, bucket_name, replace, very_sure):
+
+    # TODO: Create config file to store bucket_name, etc...
+    ctx.obj.pop("bucket_name")
+    Storage(bucket_name=bucket_name, **ctx.obj).init(
+        replace=replace, very_sure=very_sure
+    )
+
+    click.echo(
+        click.style(
+            f"Bucket `{bucket_name}` was created",
+            fg="green",
+        )
+    )
+
+
+@cli_storage.command(name="upload", help="Upload file to bucket")
+@click.argument("dataset_id")
+@click.argument("table_id")
+@click.argument("filepath", type=click.Path(exists=True))
+@click.option(
+    "--mode", "-m", required=True, help="[raw|staging] where to save the file"
+)
+@click.option("--bucket_name", default="basedosdados", help="Bucket name")
+@click.option(
+    "--replace/--no-replace",
+    default=False,
+    help="Whether to replace current bucket files",
+)
+@click.pass_context
+def upload_storage(ctx, dataset_id, table_id, filepath, mode, bucket_name, replace):
+
+    ctx.obj.pop("bucket_name")
+    blob_name = Storage(
+        dataset_id, table_id, bucket_name=bucket_name, **ctx.obj
+    ).upload(filepath=filepath, mode=mode, replace=replace)
+
+    click.echo(
+        click.style(
+            f"Data was added to `{blob_name}`",
+            fg="green",
+        )
+    )
+
+
 cli.add_command(cli_dataset)
 cli.add_command(cli_table)
+cli.add_command(cli_storage)
 
 if __name__ == "__main__":
 
