@@ -1,0 +1,59 @@
+table_id: amazon_simplified # AUTO GENERATED
+dataset_id: br_mapas_geobr # AUTO GENERATED
+
+last_updated: <date> # AUTO GENERATED
+
+# REQUIRED
+description: |  
+    <table-description>
+
+treated_by:
+    name: <institution-name> [IBGE, TSE] # REQUIRED
+    website: <where to find raw data>
+    email: <>
+    logo: <logo-url>
+    code_url: <code-url-that-generated-table> # REQUIRED
+
+# Person or institution 
+published_by:
+    name: <institution-name> [IBGE, TSE] # REQUIRED
+    website: <where to find raw data>
+    email: <>
+    logo: <logo-url>
+    code_url: <code-url-that-generated-table> # REQUIRED
+
+treatment_description: | 
+    CEPESP fez X. Eu fiz K
+
+# REQUIRED
+partitions:  
+    - <first partition>
+    - <second partition>
+    - ...
+
+# REQUIRED    
+data_update_frequency: HOURLY | DAILY | WEEKLY | ...  | ONCE  
+
+# REQUIRED
+columns:   
+    -   
+        name: geometry
+        description: <columns description>
+        type: STRING 
+        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+    
+
+# Available Types (https://cloud.google.com/bigquery/docs/schemas)
+# Integer         INT64      Numeric values without fractional components
+# Floating        FLOAT64    Approximate numeric values with fractional components
+# Numeric         NUMERIC    Exact numeric values with fractional components
+# Boolean         BOOL       TRUE or FALSE (case insensitive)
+# String          STRING     Variable-length character (Unicode) data
+# Bytes           BYTES      Variable-length binary data
+# Date            DATE       A logical calendar date
+# Date/Time       DATETIME   A year, month, day, hour, minute, second, and subsecond
+# Time            TIME       A time, independent of a specific date
+# Timestamp       TIMESTAMP  An absolute point in time, with microsecond precision
+# Struct (Record  STRUCT     Container of ordered fields each with a type (required) and field name (optional)
+# Geography       GEOGRAPHY  A pointset on the Earth's surface (a set of points, 
+#                            lines and polygons on the WGS84 reference spheroid, with geodesic edges)

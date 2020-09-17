@@ -1,0 +1,1 @@
+[{"name": "code_biome", "description": "<columns description>", "type": "STRING", "is_in_staging": true}, {"name": "name_biome", "description": "<columns description>", "type": "STRING", "is_in_staging": true}, {"name": "geometry", "description": "<columns description>", "type": "STRING", "is_in_staging": true}]

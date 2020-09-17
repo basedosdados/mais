@@ -1,0 +1,10 @@
+dataset_id: br_mapas_geobr # AUTO GENERATED
+
+description: | # REQUIRED
+    <some-description>
+
+source_institution:
+    name: <institution-name> [IBGE, TSE] # REQUIRED
+    website: <where to find raw data>
+    email: <email>
+    logo: <logo-url>
