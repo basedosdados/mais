@@ -3,7 +3,10 @@ dataset_id: {{ dataset_id }} # AUTO GENERATED
 
 last_updated: <date> # AUTO GENERATED
 
-description: |  # REQUIRED
+labels: <add-labels>
+
+# REQUIRED
+description: |  
     <table-description>
 
 treated_by:
@@ -24,15 +27,20 @@ published_by:
 treatment_description: | 
     CEPESP fez X. Eu fiz K
 
-partitions:  # REQUIRED
+# REQUIRED
+partitions:  
     - <first partition>
     - <second partition>
     - ...
 
-data_update_frequency: HOURLY | DAILY | WEEKLY | ...  | ONCE  # REQUIRED
+# REQUIRED    
+data_update_frequency: HOURLY | DAILY | WEEKLY | ...  | ONCE  
 
+# REQUIRED
+license: MIT
 
-columns: {% for column in columns %}  # REQUIRED
+# REQUIRED
+columns: {% for column in columns %}  
     -   
         name: {{ column }}
         description: <columns description>
