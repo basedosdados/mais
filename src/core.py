@@ -67,34 +67,6 @@ class Dataset(Base):
             self.metadata_path / self.dataset_id / "dataset_config.yaml"
         )
 
-    def init(self, replace=False):
-
-        # Create dataset folder
-        try:
-            self.dataset_folder.mkdir(exist_ok=replace, parents=True)
-        except FileExistsError:
-            raise FileExistsError(
-                f"Dataset {str(dataset_folder.stem)} folder does not exists. "
-                "Set replace=True to replace current files."
-            )
-
-        for file in (Path(self.templates) / "dataset").glob("*"):
-
-            if file.name in ["dataset_config.yaml", "README.md"]:
-
-                # Load and fill template
-                template = Template(file.open("r").read()).render(
-                    dataset_id=self.dataset_id
-                )
-
-                # Write file
-                (self.dataset_folder / file.name).open("w").write(template)
-
-        # Add code folder
-        (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
-
-        return self
-
     def _create_dataset_ids(self, mode="all"):
 
         dataset_ids = []
@@ -121,6 +93,34 @@ class Dataset(Base):
         )
 
         return dataset
+
+    def init(self, replace=False):
+
+        # Create dataset folder
+        try:
+            self.dataset_folder.mkdir(exist_ok=replace, parents=True)
+        except FileExistsError:
+            raise FileExistsError(
+                f"Dataset {str(self.dataset_folder.stem)} folder does not exists. "
+                "Set replace=True to replace current files."
+            )
+
+        for file in (Path(self.templates) / "dataset").glob("*"):
+
+            if file.name in ["dataset_config.yaml", "README.md"]:
+
+                # Load and fill template
+                template = Template(file.open("r").read()).render(
+                    dataset_id=self.dataset_id
+                )
+
+                # Write file
+                (self.dataset_folder / file.name).open("w").write(template)
+
+        # Add code folder
+        (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
+
+        return self
 
     def publicize(self):
 

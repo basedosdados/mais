@@ -51,14 +51,14 @@ def init_dataset(ctx, dataset_id, replace):
     )
 
 
-def mode_text(mode, verb, verb_plural):
+def mode_text(mode, verb, obj_id):
 
     if mode == "all":
-        text = f"Datasets `{dataset_id}` and `{dataset_id}_staging` were {verb} in BigQuery"
+        text = f"Datasets `{obj_id}` and `{obj_id}_staging` were {verb} in BigQuery"
     elif mode == "staging":
-        text = f"Dataset `{dataset_id}_stating` was {verb} in BigQuery"
+        text = f"Dataset `{obj_id}_stating` was {verb} in BigQuery"
     elif mode == "prod":
-        text = f"Dataset `{dataset_id}` was {verb} in BigQuery"
+        text = f"Dataset `{obj_id}` was {verb} in BigQuery"
 
     return text
 
@@ -80,7 +80,7 @@ def create_dataset(ctx, dataset_id, mode, if_exists):
 
     click.echo(
         click.style(
-            mode_text(mode, "created"),
+            mode_text(mode, "created", dataset_id),
             fg="green",
         )
     )
@@ -98,7 +98,7 @@ def update_dataset(ctx, dataset_id, mode):
 
     click.echo(
         click.style(
-            mode_text(mode, "updated"),
+            mode_text(mode, "updated", dataset_id),
             fg="green",
         )
     )
@@ -113,7 +113,7 @@ def publicize_dataset(ctx, dataset_id):
 
     click.echo(
         click.style(
-            "Dataset {dataset_id} became public!",
+            f"Dataset `{dataset_id}` became public!",
             fg="green",
         )
     )
@@ -125,13 +125,15 @@ def publicize_dataset(ctx, dataset_id):
     "--mode", "-m", default="all", help="What datasets to create [all|staging|prod]"
 )
 @click.pass_context
-def publicize_dataset(ctx, dataset_id):
+def delete_dataset(ctx, dataset_id, mode):
 
-    Dataset(dataset_id=dataset_id, **ctx.obj).delete(mode=mode)
+    if click.confirm(f"Are you sure you want to delete `{dataset_id}`?"):
+
+        Dataset(dataset_id=dataset_id, **ctx.obj).delete(mode=mode)
 
     click.echo(
         click.style(
-            mode_text(mode, "deleted"),
+            mode_text(mode, "deleted", dataset_id),
             fg="green",
         )
     )
