@@ -1,9 +1,7 @@
-table_id: {{ table_id }} # AUTO GENERATED
-dataset_id: {{ dataset_id }} # AUTO GENERATED
+table_id: biomes # AUTO GENERATED
+dataset_id: br_mapas_geobr # AUTO GENERATED
 
 last_updated: <date> # AUTO GENERATED
-
-labels: <add-labels>
 
 # REQUIRED
 description: |  
@@ -37,16 +35,25 @@ partitions:
 data_update_frequency: HOURLY | DAILY | WEEKLY | ...  | ONCE  
 
 # REQUIRED
-license: MIT
-
-# REQUIRED
-columns: {% for column in columns %}  
+columns:   
     -   
-        name: {{ column }}
+        name: code_biome
         description: <columns description>
         type: STRING 
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-    {% endfor %}
+      
+    -   
+        name: name_biome
+        description: <columns description>
+        type: STRING 
+        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+      
+    -   
+        name: geometry
+        description: <columns description>
+        type: STRING 
+        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+    
 
 # Available Types (https://cloud.google.com/bigquery/docs/schemas)
 # Integer         INT64      Numeric values without fractional components

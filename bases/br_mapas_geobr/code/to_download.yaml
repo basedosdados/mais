@@ -1,0 +1,1781 @@
+amazon:
+  columns: ['geometry']
+  partitions:
+  - func: read_amazon
+    func_args:
+      simplified: false
+      year: 2012
+    partitions:
+      year: 2012
+amazon_simplified:
+  columns: ['geometry']
+  partitions:
+  - func: read_amazon
+    func_args:
+      simplified: true
+      year: 2012
+    partitions:
+      year: 2012
+biomes:
+  columns: ['code_biome', 'name_biome', 'geometry']
+  partitions:
+  - func: read_biomes
+    func_args:
+      simplified: false
+      year: 2004
+    partitions:
+      year: 2004
+  - func: read_biomes
+    func_args:
+      simplified: false
+      year: 2019
+    partitions:
+      year: 2019
+biomes_simplified:
+  columns: ['code_biome', 'name_biome', 'geometry']
+  partitions:
+  - func: read_biomes
+    func_args:
+      simplified: true
+      year: 2004
+    partitions:
+      year: 2004
+  - func: read_biomes
+    func_args:
+      simplified: true
+      year: 2019
+    partitions:
+      year: 2019
+census_tract_2010:
+  columns: ['code_tract',
+  'zone',
+  'code_muni',
+  'name_muni',
+  'name_neighborhood',
+  'code_neighborhood',
+  'code_subdistrict',
+  'name_subdistrict',
+  'code_district',
+  'name_district',
+  'code_state',
+  'geometry']
+  partitions:
+  - func: read_census_tract
+    func_args:
+      simplified: false
+      year: 2010
+      code_tract: 'all'
+    partitions:
+      year: 2010
+census_tract_urban_2000:
+  partitions:
+  - func: read_census_tract
+    func_args:
+      simplified: false
+      year: 2000
+      code_tract: 'all'
+      zone: 'urban'
+    partitions:
+      year: 2000
+census_tract_rural_2000:
+  partitions:
+  - func: read_census_tract
+    func_args:
+      simplified: false
+      year: 2000
+      code_tract: 'all'
+      zone: 'rural'
+    partitions:
+      year: 2000
+census_tract_2010:
+  partitions:
+  - func: read_census_tract
+    func_args:
+      simplified: false
+      year: 2010
+      code_tract: 'all'
+    partitions:
+      year: 2010
+census_tract_urban_2000:
+  partitions:
+  - func: read_census_tract
+    func_args:
+      simplified: false
+      year: 2000
+      code_tract: 'all'
+      zone: 'urban'
+    partitions:
+      year: 2000
+census_tract_rural_2000:
+  partitions:
+  - func: read_census_tract
+    func_args:
+      simplified: false
+      year: 2000
+      code_tract: 'all'
+      zone: 'rural'
+    partitions:
+      year: 2000
+census_tract_2010_simplified:
+  columns: ['code_tract',
+  'zone',
+  'code_muni',
+  'name_muni',
+  'name_neighborhood',
+  'code_neighborhood',
+  'code_subdistrict',
+  'name_subdistrict',
+  'code_district',
+  'name_district',
+  'code_state',
+  'geometry']
+  partitions:
+  - func: read_census_tract
+    func_args:
+      simplified: true
+      year: 2010
+      code_tract: 'all'
+    partitions:
+      year: 2010
+census_tract_urban_2000_simplified:
+  partitions:
+  - func: read_census_tract
+    func_args:
+      simplified: true
+      year: 2000
+      code_tract: 'all'
+      zone: 'urban'
+    partitions:
+      year: 2000
+census_tract_rural_2000_simplified:
+  partitions:
+  - func: read_census_tract
+    func_args:
+      simplified: true
+      year: 2000
+      code_tract: 'all'
+      zone: 'rural'
+    partitions:
+      year: 2000
+conservation_units:
+  partitions:
+  - func: read_conservation_units
+    func_args:
+      simplified: false
+      year: 201909
+    partitions:
+      year: 201909
+conservation_units_simplified:
+  partitions:
+  - func: read_conservation_units
+    func_args:
+      simplified: true
+      year: 201909
+    partitions:
+      year: 201909
+country:
+  partitions:
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 1872
+    partitions:
+      year: 1872
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 1900
+    partitions:
+      year: 1900
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 1911
+    partitions:
+      year: 1911
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 1920
+    partitions:
+      year: 1920
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 1933
+    partitions:
+      year: 1933
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 1940
+    partitions:
+      year: 1940
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 1950
+    partitions:
+      year: 1950
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 1960
+    partitions:
+      year: 1960
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 1970
+    partitions:
+      year: 1970
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 1980
+    partitions:
+      year: 1980
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 1991
+    partitions:
+      year: 1991
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 2000
+    partitions:
+      year: 2000
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_country
+    func_args:
+      simplified: false
+      year: 2018
+    partitions:
+      year: 2018
+country_simplified:
+  partitions:
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 1872
+    partitions:
+      year: 1872
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 1900
+    partitions:
+      year: 1900
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 1911
+    partitions:
+      year: 1911
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 1920
+    partitions:
+      year: 1920
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 1933
+    partitions:
+      year: 1933
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 1940
+    partitions:
+      year: 1940
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 1950
+    partitions:
+      year: 1950
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 1960
+    partitions:
+      year: 1960
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 1970
+    partitions:
+      year: 1970
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 1980
+    partitions:
+      year: 1980
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 1991
+    partitions:
+      year: 1991
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 2000
+    partitions:
+      year: 2000
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_country
+    func_args:
+      simplified: true
+      year: 2018
+    partitions:
+      year: 2018
+disaster_risk_area:
+  partitions:
+  - func: read_disaster_risk_area
+    func_args:
+      simplified: false
+      year: 2010
+    partitions:
+      year: 2010
+disaster_risk_area_simplified:
+  partitions:
+  - func: read_disaster_risk_area
+    func_args:
+      simplified: true
+      year: 2010
+    partitions:
+      year: 2010
+health_facilities:
+  partitions:
+  - func: read_health_facilities
+    func_args:
+      simplified: false
+      year: 2015
+    partitions:
+      year: 2015
+health_region:
+  partitions:
+  - func: read_health_region
+    func_args:
+      simplified: false
+      year: 1991
+    partitions:
+      year: 1991
+  - func: read_health_region
+    func_args:
+      simplified: false
+      year: 1994
+    partitions:
+      year: 1994
+  - func: read_health_region
+    func_args:
+      simplified: false
+      year: 1997
+    partitions:
+      year: 1997
+  - func: read_health_region
+    func_args:
+      simplified: false
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_health_region
+    func_args:
+      simplified: false
+      year: 2005
+    partitions:
+      year: 2005
+  - func: read_health_region
+    func_args:
+      simplified: false
+      year: 2013
+    partitions:
+      year: 2013
+health_region_simplified:
+  partitions:
+  - func: read_health_region
+    func_args:
+      simplified: true
+      year: 1991
+    partitions:
+      year: 1991
+  - func: read_health_region
+    func_args:
+      simplified: true
+      year: 1994
+    partitions:
+      year: 1994
+  - func: read_health_region
+    func_args:
+      simplified: true
+      year: 1997
+    partitions:
+      year: 1997
+  - func: read_health_region
+    func_args:
+      simplified: true
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_health_region
+    func_args:
+      simplified: true
+      year: 2005
+    partitions:
+      year: 2005
+  - func: read_health_region
+    func_args:
+      simplified: true
+      year: 2013
+    partitions:
+      year: 2013
+immediate_regions:
+  partitions:
+  - func: read_immediate_region
+    func_args:
+      simplified: false
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_immediate_region
+    func_args:
+      simplified: false
+      year: 2019
+    partitions:
+      year: 2019
+immediate_regions_simplified:
+  partitions:
+  - func: read_immediate_region
+    func_args:
+      simplified: true
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_immediate_region
+    func_args:
+      simplified: true
+      year: 2019
+    partitions:
+      year: 2019
+indigenous_land:
+  partitions:
+  - func: read_indigenous_land
+    func_args:
+      simplified: false
+      year: 201907
+    partitions:
+      year: 201907
+  - func: read_indigenous_land
+    func_args:
+      simplified: false
+      year: 201909
+    partitions:
+      year: 201909
+indigenous_land_simplified:
+  partitions:
+  - func: read_indigenous_land
+    func_args:
+      simplified: true
+      year: 201907
+    partitions:
+      year: 201907
+  - func: read_indigenous_land
+    func_args:
+      simplified: true
+      year: 201909
+    partitions:
+      year: 201909
+meso_region:
+  partitions:
+  - func: read_meso_region
+    func_args:
+      simplified: false
+      year: 2000
+    partitions:
+      year: 2000
+  - func: read_meso_region
+    func_args:
+      simplified: false
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_meso_region
+    func_args:
+      simplified: false
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_meso_region
+    func_args:
+      simplified: false
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_meso_region
+    func_args:
+      simplified: false
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_meso_region
+    func_args:
+      simplified: false
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_meso_region
+    func_args:
+      simplified: false
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_meso_region
+    func_args:
+      simplified: false
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_meso_region
+    func_args:
+      simplified: false
+      year: 2018
+    partitions:
+      year: 2018
+  - func: read_meso_region
+    func_args:
+      simplified: false
+      year: 2019
+    partitions:
+      year: 2019
+meso_region_simplified:
+  partitions:
+  - func: read_meso_region
+    func_args:
+      simplified: true
+      year: 2000
+    partitions:
+      year: 2000
+  - func: read_meso_region
+    func_args:
+      simplified: true
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_meso_region
+    func_args:
+      simplified: true
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_meso_region
+    func_args:
+      simplified: true
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_meso_region
+    func_args:
+      simplified: true
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_meso_region
+    func_args:
+      simplified: true
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_meso_region
+    func_args:
+      simplified: true
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_meso_region
+    func_args:
+      simplified: true
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_meso_region
+    func_args:
+      simplified: true
+      year: 2018
+    partitions:
+      year: 2018
+  - func: read_meso_region
+    func_args:
+      simplified: true
+      year: 2019
+    partitions:
+      year: 2019
+metropolitan_area:
+  partitions:
+  - func: read_metro_area
+    func_args:
+      simplified: false
+      year: 1970
+    partitions:
+      year: 1970
+  - func: read_metro_area
+    func_args:
+      simplified: false
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_metro_area
+    func_args:
+      simplified: false
+      year: 2002
+    partitions:
+      year: 2002
+  - func: read_metro_area
+    func_args:
+      simplified: false
+      year: 2003
+    partitions:
+      year: 2003
+  - func: read_metro_area
+    func_args:
+      simplified: false
+      year: 2005
+    partitions:
+      year: 2005
+  - func: read_metro_area
+    func_args:
+      simplified: false
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_metro_area
+    func_args:
+      simplified: false
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_metro_area
+    func_args:
+      simplified: false
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_metro_area
+    func_args:
+      simplified: false
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_metro_area
+    func_args:
+      simplified: false
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_metro_area
+    func_args:
+      simplified: false
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_metro_area
+    func_args:
+      simplified: false
+      year: 2018
+    partitions:
+      year: 2018
+metropolitan_area_simplified:
+  partitions:
+  - func: read_metro_area
+    func_args:
+      simplified: true
+      year: 1970
+    partitions:
+      year: 1970
+  - func: read_metro_area
+    func_args:
+      simplified: true
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_metro_area
+    func_args:
+      simplified: true
+      year: 2002
+    partitions:
+      year: 2002
+  - func: read_metro_area
+    func_args:
+      simplified: true
+      year: 2003
+    partitions:
+      year: 2003
+  - func: read_metro_area
+    func_args:
+      simplified: true
+      year: 2005
+    partitions:
+      year: 2005
+  - func: read_metro_area
+    func_args:
+      simplified: true
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_metro_area
+    func_args:
+      simplified: true
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_metro_area
+    func_args:
+      simplified: true
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_metro_area
+    func_args:
+      simplified: true
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_metro_area
+    func_args:
+      simplified: true
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_metro_area
+    func_args:
+      simplified: true
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_metro_area
+    func_args:
+      simplified: true
+      year: 2018
+    partitions:
+      year: 2018
+micro_region:
+  partitions:
+  - func: read_micro_region
+    func_args:
+      simplified: false
+      year: 2000
+    partitions:
+      year: 2000
+  - func: read_micro_region
+    func_args:
+      simplified: false
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_micro_region
+    func_args:
+      simplified: false
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_micro_region
+    func_args:
+      simplified: false
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_micro_region
+    func_args:
+      simplified: false
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_micro_region
+    func_args:
+      simplified: false
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_micro_region
+    func_args:
+      simplified: false
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_micro_region
+    func_args:
+      simplified: false
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_micro_region
+    func_args:
+      simplified: false
+      year: 2018
+    partitions:
+      year: 2018
+  - func: read_micro_region
+    func_args:
+      simplified: false
+      year: 2019
+    partitions:
+      year: 2019
+micro_region_simplified:
+  partitions:
+  - func: read_micro_region
+    func_args:
+      simplified: true
+      year: 2000
+    partitions:
+      year: 2000
+  - func: read_micro_region
+    func_args:
+      simplified: true
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_micro_region
+    func_args:
+      simplified: true
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_micro_region
+    func_args:
+      simplified: true
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_micro_region
+    func_args:
+      simplified: true
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_micro_region
+    func_args:
+      simplified: true
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_micro_region
+    func_args:
+      simplified: true
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_micro_region
+    func_args:
+      simplified: true
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_micro_region
+    func_args:
+      simplified: true
+      year: 2018
+    partitions:
+      year: 2018
+  - func: read_micro_region
+    func_args:
+      simplified: true
+      year: 2019
+    partitions:
+      year: 2019
+municipal_seat:
+  partitions:
+  - func: read_municipal_seat
+    func_args:
+      simplified: false
+      year: 1872
+    partitions:
+      year: 1872
+  - func: read_municipal_seat
+    func_args:
+      simplified: false
+      year: 1900
+    partitions:
+      year: 1900
+  - func: read_municipal_seat
+    func_args:
+      simplified: false
+      year: 1911
+    partitions:
+      year: 1911
+  - func: read_municipal_seat
+    func_args:
+      simplified: false
+      year: 1920
+    partitions:
+      year: 1920
+  - func: read_municipal_seat
+    func_args:
+      simplified: false
+      year: 1933
+    partitions:
+      year: 1933
+  - func: read_municipal_seat
+    func_args:
+      simplified: false
+      year: 1940
+    partitions:
+      year: 1940
+  - func: read_municipal_seat
+    func_args:
+      simplified: false
+      year: 1950
+    partitions:
+      year: 1950
+  - func: read_municipal_seat
+    func_args:
+      simplified: false
+      year: 1960
+    partitions:
+      year: 1960
+  - func: read_municipal_seat
+    func_args:
+      simplified: false
+      year: 1970
+    partitions:
+      year: 1970
+  - func: read_municipal_seat
+    func_args:
+      simplified: false
+      year: 1980
+    partitions:
+      year: 1980
+  - func: read_municipal_seat
+    func_args:
+      simplified: false
+      year: 1991
+    partitions:
+      year: 1991
+  - func: read_municipal_seat
+    func_args:
+      simplified: false
+      year: 2010
+    partitions:
+      year: 2010
+municipality:
+  partitions:
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 1872
+    partitions:
+      year: 1872
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 1900
+    partitions:
+      year: 1900
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 1911
+    partitions:
+      year: 1911
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 1920
+    partitions:
+      year: 1920
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 1933
+    partitions:
+      year: 1933
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 1940
+    partitions:
+      year: 1940
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 1950
+    partitions:
+      year: 1950
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 1960
+    partitions:
+      year: 1960
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 1970
+    partitions:
+      year: 1970
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 1980
+    partitions:
+      year: 1980
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 1991
+    partitions:
+      year: 1991
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 2000
+    partitions:
+      year: 2000
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 2005
+    partitions:
+      year: 2005
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 2007
+    partitions:
+      year: 2007
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 2018
+    partitions:
+      year: 2018
+  - func: read_municipality
+    func_args:
+      simplified: false
+      year: 2019
+    partitions:
+      year: 2019
+municipality_simplified:
+  partitions:
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 1872
+    partitions:
+      year: 1872
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 1900
+    partitions:
+      year: 1900
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 1911
+    partitions:
+      year: 1911
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 1920
+    partitions:
+      year: 1920
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 1933
+    partitions:
+      year: 1933
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 1940
+    partitions:
+      year: 1940
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 1950
+    partitions:
+      year: 1950
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 1960
+    partitions:
+      year: 1960
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 1970
+    partitions:
+      year: 1970
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 1980
+    partitions:
+      year: 1980
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 1991
+    partitions:
+      year: 1991
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 2000
+    partitions:
+      year: 2000
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 2005
+    partitions:
+      year: 2005
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 2007
+    partitions:
+      year: 2007
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 2018
+    partitions:
+      year: 2018
+  - func: read_municipality
+    func_args:
+      simplified: true
+      year: 2019
+    partitions:
+      year: 2019
+neighborhood:
+  partitions:
+  - func: read_neighborhood
+    func_args:
+      simplified: false
+      year: 2010
+    partitions:
+      year: 2010
+neighborhood_simplified:
+  partitions:
+  - func: read_neighborhood
+    func_args:
+      simplified: true
+      year: 2010
+    partitions:
+      year: 2010
+regions:
+  partitions:
+  - func: read_region
+    func_args:
+      simplified: false
+      year: 2000
+    partitions:
+      year: 2000
+  - func: read_region
+    func_args:
+      simplified: false
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_region
+    func_args:
+      simplified: false
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_region
+    func_args:
+      simplified: false
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_region
+    func_args:
+      simplified: false
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_region
+    func_args:
+      simplified: false
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_region
+    func_args:
+      simplified: false
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_region
+    func_args:
+      simplified: false
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_region
+    func_args:
+      simplified: false
+      year: 2018
+    partitions:
+      year: 2018
+regions_simplified:
+  partitions:
+  - func: read_region
+    func_args:
+      simplified: true
+      year: 2000
+    partitions:
+      year: 2000
+  - func: read_region
+    func_args:
+      simplified: true
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_region
+    func_args:
+      simplified: true
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_region
+    func_args:
+      simplified: true
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_region
+    func_args:
+      simplified: true
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_region
+    func_args:
+      simplified: true
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_region
+    func_args:
+      simplified: true
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_region
+    func_args:
+      simplified: true
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_region
+    func_args:
+      simplified: true
+      year: 2018
+    partitions:
+      year: 2018
+semiarid:
+  partitions:
+  - func: read_semiarid
+    func_args:
+      simplified: false
+      year: 2005
+    partitions:
+      year: 2005
+  - func: read_semiarid
+    func_args:
+      simplified: false
+      year: 2017
+    partitions:
+      year: 2017
+semiarid_simplified:
+  partitions:
+  - func: read_semiarid
+    func_args:
+      simplified: true
+      year: 2005
+    partitions:
+      year: 2005
+  - func: read_semiarid
+    func_args:
+      simplified: true
+      year: 2017
+    partitions:
+      year: 2017
+state:
+  partitions:
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 1872
+    partitions:
+      year: 1872
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 1900
+    partitions:
+      year: 1900
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 1911
+    partitions:
+      year: 1911
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 1920
+    partitions:
+      year: 1920
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 1933
+    partitions:
+      year: 1933
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 1940
+    partitions:
+      year: 1940
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 1950
+    partitions:
+      year: 1950
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 1960
+    partitions:
+      year: 1960
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 1970
+    partitions:
+      year: 1970
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 1980
+    partitions:
+      year: 1980
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 1991
+    partitions:
+      year: 1991
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 2000
+    partitions:
+      year: 2000
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 2018
+    partitions:
+      year: 2018
+  - func: read_state
+    func_args:
+      simplified: false
+      year: 2019
+    partitions:
+      year: 2019
+state_simplified:
+  partitions:
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 1872
+    partitions:
+      year: 1872
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 1900
+    partitions:
+      year: 1900
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 1911
+    partitions:
+      year: 1911
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 1920
+    partitions:
+      year: 1920
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 1933
+    partitions:
+      year: 1933
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 1940
+    partitions:
+      year: 1940
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 1950
+    partitions:
+      year: 1950
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 1960
+    partitions:
+      year: 1960
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 1970
+    partitions:
+      year: 1970
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 1980
+    partitions:
+      year: 1980
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 1991
+    partitions:
+      year: 1991
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 2000
+    partitions:
+      year: 2000
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 2001
+    partitions:
+      year: 2001
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 2010
+    partitions:
+      year: 2010
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 2013
+    partitions:
+      year: 2013
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 2014
+    partitions:
+      year: 2014
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 2015
+    partitions:
+      year: 2015
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 2016
+    partitions:
+      year: 2016
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 2017
+    partitions:
+      year: 2017
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 2018
+    partitions:
+      year: 2018
+  - func: read_state
+    func_args:
+      simplified: true
+      year: 2019
+    partitions:
+      year: 2019
+urban_area:
+  partitions:
+  - func: read_urban_area
+    func_args:
+      simplified: false
+      year: 2005
+    partitions:
+      year: 2005
+  - func: read_urban_area
+    func_args:
+      simplified: false
+      year: 2015
+    partitions:
+      year: 2015
+urban_area_simplified:
+  partitions:
+  - func: read_urban_area
+    func_args:
+      simplified: true
+      year: 2005
+    partitions:
+      year: 2005
+  - func: read_urban_area
+    func_args:
+      simplified: true
+      year: 2015
+    partitions:
+      year: 2015
+weighting_area:
+  partitions:
+  - func: read_weighting_area
+    func_args:
+      simplified: false
+      year: 2010
+    partitions:
+      year: 2010
+weighting_area_simplified:
+  partitions:
+  - func: read_weighting_area
+    func_args:
+      simplified: true
+      year: 2010
+    partitions:
+      year: 2010

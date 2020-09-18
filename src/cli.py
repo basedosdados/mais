@@ -51,29 +51,36 @@ def init_dataset(ctx, dataset_id, replace):
     )
 
 
+def mode_text(mode, verb, obj_id):
+
+    if mode == "all":
+        text = f"Datasets `{obj_id}` and `{obj_id}_staging` were {verb} in BigQuery"
+    elif mode == "staging":
+        text = f"Dataset `{obj_id}_stating` was {verb} in BigQuery"
+    elif mode == "prod":
+        text = f"Dataset `{obj_id}` was {verb} in BigQuery"
+
+    return text
+
+
 @cli_dataset.command(name="create", help="Create dataset on BigQuery")
 @click.argument("dataset_id")
 @click.option(
-    "--create_staging", default=True, help="Whether to create the staging dataset"
+    "--mode", "-m", default="all", help="What datasets to create [all|staging|prod]"
 )
 @click.option(
-    "--if_exists", default="raise", help="[raise, update] if dataset alread exists"
+    "--if_exists",
+    default="raise",
+    help="[raise|update|replace|pass] if dataset alread exists",
 )
 @click.pass_context
-def create_dataset(ctx, dataset_id, create_staging, if_exists):
+def create_dataset(ctx, dataset_id, mode, if_exists):
 
-    Dataset(dataset_id=dataset_id, **ctx.obj).create(
-        create_staging=create_staging, if_exists=if_exists
-    )
-
-    if create_staging:
-        text = f"Datasets `{dataset_id}` and `stagging_{dataset_id}` were created in BigQuery"
-    else:
-        text = f"Dataset `{dataset_id}`  was created in BigQuery"
+    Dataset(dataset_id=dataset_id, **ctx.obj).create(mode=mode, if_exists=if_exists)
 
     click.echo(
         click.style(
-            text,
+            mode_text(mode, "created", dataset_id),
             fg="green",
         )
     )
@@ -82,35 +89,51 @@ def create_dataset(ctx, dataset_id, create_staging, if_exists):
 @cli_dataset.command(name="update", help="Update dataset on BigQuery")
 @click.argument("dataset_id")
 @click.option(
-    "--update_staging", default=True, help="Whether to update the staging dataset"
+    "--mode", "-m", default="all", help="What datasets to create [all|staging|prod]"
 )
 @click.pass_context
-def update_dataset(ctx, dataset_id, update_staging):
+def update_dataset(ctx, dataset_id, mode):
 
-    Dataset(dataset_id=dataset_id, **ctx.obj).update(update_staging=update_staging)
-
-    if update_staging:
-        text = f"Datasets `{dataset_id}` and `stagging_{dataset_id}` were updated in BigQuery"
-    else:
-        text = f"Dataset `{dataset_id}`  was updated in BigQuery"
+    Dataset(dataset_id=dataset_id, **ctx.obj).update(mode=mode)
 
     click.echo(
         click.style(
-            text,
+            mode_text(mode, "updated", dataset_id),
             fg="green",
         )
     )
+
 
 @cli_dataset.command(name="publicize", help="Make a dataset public")
 @click.argument("dataset_id")
 @click.pass_context
 def publicize_dataset(ctx, dataset_id):
 
-    Dataset(dataset_id=dataset_id, **ctx.obj).publicize(dataset_id=dataset_id)
+    Dataset(dataset_id=dataset_id, **ctx.obj).publicize()
 
     click.echo(
         click.style(
-            text,
+            f"Dataset `{dataset_id}` became public!",
+            fg="green",
+        )
+    )
+
+
+@cli_dataset.command(name="delete", help="Delete dataset")
+@click.argument("dataset_id")
+@click.option(
+    "--mode", "-m", default="all", help="What datasets to create [all|staging|prod]"
+)
+@click.pass_context
+def delete_dataset(ctx, dataset_id, mode):
+
+    if click.confirm(f"Are you sure you want to delete `{dataset_id}`?"):
+
+        Dataset(dataset_id=dataset_id, **ctx.obj).delete(mode=mode)
+
+    click.echo(
+        click.style(
+            mode_text(mode, "deleted", dataset_id),
             fg="green",
         )
     )

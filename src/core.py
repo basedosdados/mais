@@ -2,12 +2,13 @@ from google.cloud import bigquery, storage
 from google.oauth2 import service_account
 import yaml
 from jinja2 import Template
-from pathlib import Path
+from pathlib import Path, PosixPath
 import json
 import csv
 from enum import Enum
 
 from google.api_core.exceptions import Conflict
+from google.cloud.exceptions import NotFound
 
 
 class Base:
@@ -56,26 +57,57 @@ class Dataset(Base):
     def __init__(self, dataset_id, **kwargs):
         super().__init__(**kwargs)
 
-        self.dataset_id = dataset_id
+        self.dataset_id = dataset_id.replace("-", "_")
         self.dataset_folder = Path(self.metadata_path / self.dataset_id)
-        self.dataset_config = self.load_yaml(
-            self.metadata_path / dataset_id / "dataset_config.yaml"
+
+    @property
+    def dataset_config(self):
+
+        return self.load_yaml(
+            self.metadata_path / self.dataset_id / "dataset_config.yaml"
         )
+
+    def _create_dataset_ids(self, mode="all"):
+
+        dataset_ids = []
+
+        if (mode == "prod") or (mode == "all"):
+
+            dataset_ids.append(
+                f"{self.client['bigquery'].project}.{self.dataset_config['dataset_id']}"
+            )
+
+        if (mode == "staging") or (mode == "all"):
+
+            dataset_ids.append(
+                f"{self.client['bigquery'].project}.{self.dataset_config['dataset_id']}_staging"
+            )
+
+        return dataset_ids
+
+    def _setup_dataset_object(self, dataset_id):
+
+        dataset = bigquery.Dataset(dataset_id)
+        dataset.description = self.render_template(
+            "dataset/dataset_description.txt", self.dataset_config
+        )
+
+        return dataset
 
     def init(self, replace=False):
 
-        # Create table folder
+        # Create dataset folder
         try:
             self.dataset_folder.mkdir(exist_ok=replace, parents=True)
         except FileExistsError:
             raise FileExistsError(
-                f"Dataset {str(dataset_folder.stem)} folder does not exists. "
+                f"Dataset {str(self.dataset_folder.stem)} folder does not exists. "
                 "Set replace=True to replace current files."
             )
 
         for file in (Path(self.templates) / "dataset").glob("*"):
 
-            if file.name in ["dataset_config.yaml"]:
+            if file.name in ["dataset_config.yaml", "README.md"]:
 
                 # Load and fill template
                 template = Template(file.open("r").read()).render(
@@ -85,29 +117,10 @@ class Dataset(Base):
                 # Write file
                 (self.dataset_folder / file.name).open("w").write(template)
 
+        # Add code folder
+        (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
+
         return self
-
-    def create_dataset_ids(self, create_staging):
-
-        dataset_ids = [
-            f"{self.client['bigquery'].project}.{self.dataset_config['dataset_id']}"
-        ]
-
-        if create_staging:
-            dataset_ids.append(
-                f"{self.client['bigquery'].project}.staging_{self.dataset_config['dataset_id']}"
-            )
-
-        return dataset_ids
-
-    def setup_dataset_object(self, dataset_id):
-
-        dataset = bigquery.Dataset(dataset_id)
-        dataset.description = self.render_template(
-            "dataset/dataset_description.txt", self.dataset_config
-        )
-
-        return dataset
 
     def publicize(self):
 
@@ -137,50 +150,58 @@ class Dataset(Base):
 
         self.client["bigquery"].update_dataset(dataset, ["access_entries"])
 
-    def create(self, create_staging=True, if_exists="raise"):
+    def create(self, mode="all", if_exists="raise"):
+
+        if if_exists == "replace":
+            self.delete(mode)
+        elif if_exists == "update":
+            self.update()
+            return
 
         # Set dataset_id to the ID of the dataset to create.
-        dataset_ids = self.create_dataset_ids(create_staging)
-
-        for ds_id in dataset_ids:
+        for ds_id in self._create_dataset_ids(mode):
 
             # Construct a full Dataset object to send to the API.
-            dataset = self.setup_dataset_object(ds_id)
+            dataset_obj = self._setup_dataset_object(ds_id)
 
             # Send the dataset to the API for creation, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             try:
-                dataset = self.client["bigquery"].create_dataset(
-                    dataset, timeout=30
+                job = self.client["bigquery"].create_dataset(
+                    dataset_obj
                 )  # Make an API request.
-
             except Conflict:
 
-                if if_exists == "update":
-                    self.update()
-
+                if if_exists == "pass":
+                    return
                 else:
-                    raise Exception(f"Dataset {ds_id} already exists.")
+                    raise Conflict(f"Dataset {self.dataset_id} already exists")
 
         # Make prod dataset public
         self.publicize()
 
-    def update(self, update_staging=True):
+    def delete(self, mode="all"):
+
+        for ds_id in self._create_dataset_ids(mode):
+
+            self.client["bigquery"].delete_dataset(ds_id, not_found_ok=True)
+
+    def update(self, mode="all"):
 
         # Set dataset_id to the ID of the dataset to create.
-        dataset_ids = self.create_dataset_ids(update_staging)
+        dataset_ids = self._create_dataset_ids(mode)
 
         for ds_id in dataset_ids:
 
             # Construct a full Dataset object to send to the API.
-            dataset = self.setup_dataset_object(ds_id)
+            dataset = self._setup_dataset_object(ds_id)
 
             # Send the dataset to the API to update, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             dataset = self.client["bigquery"].update_dataset(
-                dataset, fields=["description"], timeout=30
+                dataset, fields=["description"]
             )  # Make an API request.
 
 
@@ -188,25 +209,28 @@ class Table(Base):
     def __init__(self, table_id, dataset_id, **kwargs):
         super().__init__(**kwargs)
 
-        self.table_id = table_id
-        self.dataset_id = dataset_id
+        self.table_id = table_id.replace("-", "_")
+        self.dataset_id = dataset_id.replace("-", "_")
         self.dataset_folder = Path(self.metadata_path / self.dataset_id)
         self.table_folder = self.dataset_folder / table_id
-        self.table_config = self.load_yaml(self.table_folder / "table_config.yaml")
         self.table_full_name = dict(
             staging=f"{self.client['bigquery'].project}.staging_{self.dataset_id}.{self.table_id}",
             prod=f"{self.client['bigquery'].project}.{self.dataset_id}.{self.table_id}",
         )
 
+    @property
+    def table_config(self):
+        return self.load_yaml(self.table_folder / "table_config.yaml")
+
     def init(self, data_sample_path=None, replace=False):
 
         if not self.dataset_folder.exists():
+            print(self.dataset_folder)
             raise FileExistsError(
-                f"Dataset folder {dataset_folder} folder does not exists. "
+                f"Dataset folder {self.dataset_folder} folder does not exists. "
                 "Create a dataset before adding tables."
             )
 
-        # Create table folder
         try:
             self.table_folder.mkdir(exist_ok=replace)
         except FileExistsError:
@@ -215,8 +239,15 @@ class Table(Base):
                 "Add --replace flag to replace current files."
             )
 
-        if isinstance(data_sample_path, str):
-            if data_sample_path.split(".")[-1] == "csv":
+        if isinstance(
+            data_sample_path,
+            (
+                str,
+                PosixPath,
+            ),
+        ):
+            data_sample_path = Path(data_sample_path)
+            if data_sample_path.suffix == ".csv":
 
                 columns = next(csv.reader(open(data_sample_path, "r")))
 
@@ -258,7 +289,7 @@ class Table(Base):
 
         return self.client["bigquery"].schema_from_json(str(json_path))
 
-    def create(self, job_config_params=None):
+    def create(self, job_config_params=None, partitioned=False, if_exists="raise"):
         """
         Creates table in staging dataset
         """
@@ -282,7 +313,23 @@ class Table(Base):
                 )
             )
 
-            job_config = bigquery.LoadJobConfig(**job_config_params)
+        if partitioned:
+
+            hive_partitioning = bigquery.external_config.HivePartitioningOptions()
+            hive_partitioning.mode = "AUTO"
+            hive_partitioning.source_uri_prefix = self.uri.format(
+                dataset=self.dataset_id, table=self.table_id
+            ).replace("*", "")
+
+            job_config_params["hive_partitioning"] = hive_partitioning
+
+        job_config = bigquery.LoadJobConfig(**job_config_params)
+
+        if if_exists == "replace":
+            try:
+                self.delete(mode="staging")
+            except NotFound:
+                pass
 
         load_job = self.client["bigquery"].load_table_from_uri(
             self.uri.format(
@@ -341,8 +388,8 @@ class Storage(Base):
         super().__init__(**kwargs)
 
         self.bucket = self.client["storage"].bucket(self.bucket_name)
-        self.dataset_id = dataset_id
-        self.table_id = table_id
+        self.dataset_id = dataset_id.replace("-", "_")
+        self.table_id = table_id.replace("-", "_")
 
     def init(self, replace=False, very_sure=False):
         """Create bucket and folders"""
@@ -365,14 +412,24 @@ class Storage(Base):
 
             self.bucket.blob(folder).upload_from_string("")
 
-    def upload(self, filepath, mode, replace=False, **upload_args):
+    def upload(self, filepath, mode, partitions=None, replace=False, **upload_args):
 
         filepath = Path(filepath)
 
         if (self.dataset_id is None) or (self.table_id is None):
             raise Exception("You need to pass dataset_id and table_id")
 
-        blob_name = f"{mode}/{self.dataset_id}/{self.table_id}/{filepath.name}"
+        # table folder
+        blob_name = f"{mode}/{self.dataset_id}/{self.table_id}/"
+
+        # add partition folder
+        if isinstance(partitions, dict):
+
+            blob_name += "/".join([f"{k}={v}" for k, v in partitions.items()])
+
+        # add file name
+        blob_name += f"{filepath.name}"
+
         blob = self.bucket.blob(blob_name)
 
         if not blob.exists() or replace:
