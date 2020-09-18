@@ -179,11 +179,16 @@ def init_table(ctx, dataset_id, table_id, data_sample_path, replace):
 @click.option(
     "--job_config_params", default=None, help="File to advanced load config params "
 )
+@click.option(
+    "--if_exists",
+    default="raise",
+    help="[raise|replace|pass] actions if table exists",
+)
 @click.pass_context
-def create_table(ctx, dataset_id, table_id, job_config_params):
+def create_table(ctx, dataset_id, table_id, job_config_params, if_exists):
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).create(
-        job_config_params=job_config_params,
+        job_config_params=job_config_params, if_exists=if_exists
     )
 
     click.echo(
@@ -199,8 +204,8 @@ def create_table(ctx, dataset_id, table_id, job_config_params):
 @click.argument("table_id")
 @click.option(
     "--mode",
-    default=["staging", "prod"],
-    help="Choose a table from a dataset to update",
+    default="all",
+    help="Choose a table from a dataset to update [all|staging|prod]",
 )
 @click.pass_context
 def update_table(ctx, dataset_id, table_id, mode):
@@ -211,7 +216,7 @@ def update_table(ctx, dataset_id, table_id, mode):
 
     click.echo(
         click.style(
-            f"Table `{dataset_id}.stagging_{table_id}` was created in BigQuery",
+            f"All tables `{dataset_id}.{table_id}*` were created in BigQuery",
             fg="green",
         )
     )
@@ -243,10 +248,7 @@ def publish_table(ctx, dataset_id, table_id, if_exists):
 @cli_table.command(name="delete", help="Delete BigQuery table")
 @click.argument("dataset_id")
 @click.argument("table_id")
-@click.argument(
-    "mode",
-    # help="Which table to delete [prod|staging]",
-)
+@click.option("--mode", help="Which table to delete [all|prod|staging]", required=True)
 @click.pass_context
 def delete_table(ctx, dataset_id, table_id, mode):
 
@@ -254,17 +256,12 @@ def delete_table(ctx, dataset_id, table_id, mode):
         mode=mode,
     )
 
-    if mode == "prod":
-        text = f"Table `{dataset_id}.{table_id}` was deleted from BigQuery"
-    elif mode == "staging":
-        text = f"Table `{dataset_id}.staging_{table_id}` was deleted from BigQuery"
-
-    click.echo(
-        click.style(
-            text,
-            fg="green",
-        )
-    )
+    # click.echo(
+    #     click.style(
+    #         text,
+    #         fg="green",
+    #     )
+    # )
 
 
 @click.group(name="storage")

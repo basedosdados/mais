@@ -6,8 +6,10 @@ from pathlib import Path, PosixPath
 import json
 import csv
 from enum import Enum
+from copy import deepcopy
 
 from google.api_core.exceptions import Conflict
+import google.api_core.exceptions
 from google.cloud.exceptions import NotFound
 
 
@@ -51,6 +53,17 @@ class Base:
         return Template((self.templates / template_file).open("r").read()).render(
             **kargs
         )
+
+    def check_mode(self, mode):
+        ACCEPTED_MODES = ["all", "staging", "prod"]
+        if mode in ACCEPTED_MODES:
+            return True
+        else:
+            raise Exception(
+                f"Argument {mode} not supported. "
+                f"Enter one of the following: "
+                ",".join(ACCEPTED_MODES)
+            )
 
 
 class Dataset(Base):
@@ -185,7 +198,9 @@ class Dataset(Base):
 
         for ds_id in self._create_dataset_ids(mode):
 
-            self.client["bigquery"].delete_dataset(ds_id, not_found_ok=True)
+            self.client["bigquery"].delete_dataset(
+                ds_id, delete_contents=True, not_found_ok=True
+            )
 
     def update(self, mode="all"):
 
@@ -214,13 +229,29 @@ class Table(Base):
         self.dataset_folder = Path(self.metadata_path / self.dataset_id)
         self.table_folder = self.dataset_folder / table_id
         self.table_full_name = dict(
-            staging=f"{self.client['bigquery'].project}.staging_{self.dataset_id}.{self.table_id}",
             prod=f"{self.client['bigquery'].project}.{self.dataset_id}.{self.table_id}",
+            staging=f"{self.client['bigquery'].project}.{self.dataset_id}_staging.{self.table_id}",
         )
+        self.table_full_name.update(dict(all=deepcopy(self.table_full_name)))
 
     @property
     def table_config(self):
         return self.load_yaml(self.table_folder / "table_config.yaml")
+
+    def _load_schema(self, mode="staging"):
+        """Load schema from table_config.yaml"""
+
+        json_path = self.table_folder / f"schema-{mode}.json"
+
+        columns = self.table_config["columns"]
+
+        if mode == "staging":
+            for c in columns:
+                c["type"] = "STRING"
+
+        json.dump(columns, (json_path).open("w"))
+
+        return self.client["bigquery"].schema_from_json(str(json_path))
 
     def init(self, data_sample_path=None, replace=False):
 
@@ -275,23 +306,12 @@ class Table(Base):
 
         return self
 
-    def load_schema(self, mode="staging"):
-        """Load schema from table_config.yaml"""
-
-        json_path = self.table_folder / f"schema-{mode}.json"
-
-        columns = self.table_config["columns"]
-
-        if mode == "staging":
-            columns = [c for c in columns if c["is_in_staging"]]
-
-        json.dump(columns, (json_path).open("w"))
-
-        return self.client["bigquery"].schema_from_json(str(json_path))
-
     def create(self, job_config_params=None, partitioned=False, if_exists="raise"):
         """
         Creates table in staging dataset
+
+        TODO: Implement if_exists=raise
+        TODO: Implement if_exists=pass
         """
 
         if job_config_params is None:
@@ -306,7 +326,7 @@ class Table(Base):
 
             job_config_params.update(
                 dict(
-                    schema=self.load_schema(),
+                    schema=self._load_schema(),
                     destination_table_description=self.render_template(
                         "table/table_description.txt", self.table_config
                     ),
@@ -326,10 +346,7 @@ class Table(Base):
         job_config = bigquery.LoadJobConfig(**job_config_params)
 
         if if_exists == "replace":
-            try:
-                self.delete(mode="staging")
-            except NotFound:
-                pass
+            self.delete(mode="staging")
 
         load_job = self.client["bigquery"].load_table_from_uri(
             self.uri.format(
@@ -342,44 +359,53 @@ class Table(Base):
 
         load_job.result()
 
-    def update(self, mode=["staging", "prod"]):
+    def update(self, mode="all", not_found_ok=True):
 
-        if isinstance(mode, str):
-            mode = [mode]
+        for m, table_name in self.table_full_name[mode].items():
 
-        for m, table_name in self.table_full_name.items():
-
-            if m in mode:
-
+            try:
                 table = self.client["bigquery"].get_table(table_name)
-                table.description = self.render_template(
-                    "table/table_description.txt", self.table_config
-                )
-                table.schema = self.load_schema(mode)
+            except google.api_core.exceptions.NotFound:
+                continue
 
-                self.client["bigquery"].update_table(
-                    table, fields=["description", "schema"]
-                )
+            table.description = self.render_template(
+                "table/table_description.txt", self.table_config
+            )
+            table.schema = self._load_schema(m)
+
+            self.client["bigquery"].update_table(
+                table, fields=["description", "schema"]
+            )
 
     def publish(self, if_exists="raise"):
 
         # TODO: check if all required fields are filled
+        # TODO: Auto add column description
 
-        job_config = bigquery.QueryJobConfig(destination=self.table_full_name["prod"])
+        view = bigquery.Table(self.table_full_name["prod"])
 
-        sql = (self.table_folder / "publish.sql").open("r").read()
+        view.view_query = (self.table_folder / "publish.sql").open("r").read()
+
+        view.description = self.render_template(
+            "table/table_description.txt", self.table_config
+        )
 
         if if_exists == "replace":
             self.delete(mode="prod")
 
-        query_job = self.client["bigquery"].query(sql, job_config=job_config)
-        query_job.result()  # Wait for the job to complete.
+        self.client["bigquery"].create_table(view)
 
-        self.update(mode=["prod"])
+        # update
 
     def delete(self, mode):
 
-        self.client["bigquery"].delete_table(self.table_full_name[mode])
+        if mode == "all":
+            for k, n in self.table_full_name[mode].items():
+                self.client["bigquery"].delete_table(n, not_found_ok=True)
+        else:
+            self.client["bigquery"].delete_table(
+                self.table_full_name[mode], not_found_ok=True
+            )
 
 
 class Storage(Base):
@@ -412,12 +438,7 @@ class Storage(Base):
 
             self.bucket.blob(folder).upload_from_string("")
 
-    def upload(self, filepath, mode, partitions=None, replace=False, **upload_args):
-
-        filepath = Path(filepath)
-
-        if (self.dataset_id is None) or (self.table_id is None):
-            raise Exception("You need to pass dataset_id and table_id")
+    def _build_blob_name(self, filename, mode, partitions=None):
 
         # table folder
         blob_name = f"{mode}/{self.dataset_id}/{self.table_id}/"
@@ -428,21 +449,43 @@ class Storage(Base):
             blob_name += "/".join([f"{k}={v}" for k, v in partitions.items()])
 
         # add file name
-        blob_name += f"{filepath.name}"
+        blob_name += filename
+
+        return blob_name
+
+    def upload(self, filepath, mode, partitions=None, if_exists="raise", **upload_args):
+
+        self.check_mode(mode)
+
+        if (self.dataset_id is None) or (self.table_id is None):
+            raise Exception("You need to pass dataset_id and table_id")
+
+        blob_name = self._build_blob_name(Path(filepath).name, mode, partitions)
 
         blob = self.bucket.blob(blob_name)
 
-        if not blob.exists() or replace:
+        if not blob.exists() or if_exists == "replace":
 
             blob.upload_from_filename(str(filepath), **upload_args)
 
         else:
             raise Exception(
                 f"Data already exists at {blob_name}. "
-                "Add flag --replace to overwrite data"
+                "Add flag --if_exists=replace to overwrite data"
             )
 
         return blob_name
+
+    def delete_file(self, filename, mode, partitions=None, not_found_ok=False):
+
+        blob = self.bucket.blob(self._build_blob_name(filename, mode, partitions))
+
+        if blob.exists():
+            blob.delete()
+        elif not_found_ok:
+            return
+        else:
+            blob.delete()
 
 
 if __name__ == "__main__":
