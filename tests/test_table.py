@@ -32,10 +32,7 @@ def check_files(folder):
 def test_init(table, metadatadir):
 
     # remove folder
-    try:
-        shutil.rmtree(Path(metadatadir))
-    except FileNotFoundError:
-        pass
+    shutil.rmtree(Path(metadatadir) / DATASET_ID / TABLE_ID, ignore_errors=True)
 
     Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir).init(replace=True)
 
@@ -83,11 +80,15 @@ def test_delete(table):
 
 def test_create(table, metadatadir):
 
+    shutil.rmtree(Path(metadatadir) / DATASET_ID / TABLE_ID, ignore_errors=True)
+
     Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir).create(if_exists="pass")
 
     Storage(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir).upload(
         "tests/sample_data/municipios.csv", mode="staging", if_exists="replace"
     )
+
+    table.init(data_sample_path="tests/sample_data/municipios.csv", replace=True)
 
     table.delete(mode="all")
 
@@ -95,15 +96,16 @@ def test_create(table, metadatadir):
 
     assert table_exists(table, mode="staging")
 
-    # with pytest.raises(NotFound):
-    table.create()
-
     table.create(if_exists="replace")
 
     assert table_exists(table, mode="staging")
 
 
 def test_create_partitioned(metadatadir):
+
+    shutil.rmtree(
+        Path(metadatadir) / DATASET_ID / (TABLE_ID + "_partitioned"), ignore_errors=True
+    )
 
     Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir).create(if_exists="pass")
 
