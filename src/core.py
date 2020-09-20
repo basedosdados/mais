@@ -415,7 +415,7 @@ class Table(Base):
 
         self.client["bigquery"].create_table(view)
 
-        self.update()
+        self.update("prod")
 
     def delete(self, mode):
 
