@@ -3,48 +3,51 @@ dataset_id: {{ dataset_id }} # AUTO GENERATED
 
 last_updated: <date> # AUTO GENERATED
 
-labels: <add-labels>
-
-# REQUIRED
-description: |  
+description: |  # REQUIRED
     <table-description>
 
 treated_by:
-    name: <institution-name> [IBGE, TSE] # REQUIRED
-    website: <where to find raw data>
-    email: <>
-    logo: <logo-url>
+    name: <institution-name [IBGE, TSE]>  # REQUIRED
     code_url: <code-url-that-generated-table> # REQUIRED
+    website: <where to find raw data>
+    email: <name at institution.com>
+    logo: <logo-url>
 
-# Person or institution 
+
 published_by:
-    name: <institution-name> [IBGE, TSE] # REQUIRED
-    website: <where to find raw data>
-    email: <>
-    logo: <logo-url>
+    name: <your-name [you]>  # REQUIRED
     code_url: <code-url-that-generated-table> # REQUIRED
+    website: <where to find raw data>
+    email: <your at email.com>
+    logo: <your-pic>
+
 
 treatment_description: | 
     CEPESP fez X. Eu fiz K
 
-# REQUIRED
-partitions:  
+
+partitions: # REQUIRED
     - <first partition>
     - <second partition>
-    - ...
 
-# REQUIRED    
-data_update_frequency: HOURLY | DAILY | WEEKLY | ...  | ONCE  
+# Hora | Dia | Semana | Mês | Único 
+data_update_frequency: <frequency> # REQUIRED 
 
-# REQUIRED
-license: MIT
 
-# REQUIRED
-columns: {% for column in columns %}  
+license: 
+    name: MIT # REQUIRED
+    url: <url>
+
+labels: 
+    - <first label> 
+    - <second label>
+
+columns: # REQUIRED
+{% for column in columns %}  
     -   
         name: {{ column }}
         description: <columns description>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
-        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
-    {% endfor %}
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+{% endfor -%}
 
