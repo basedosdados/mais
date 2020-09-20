@@ -103,6 +103,32 @@ def test_create(table, metadatadir):
     assert table_exists(table, mode="staging")
 
 
+def test_create_partitioned(metadatadir):
+
+    Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir).create(if_exists="pass")
+
+    Storage(
+        dataset_id=DATASET_ID,
+        table_id=TABLE_ID + "_partitioned",
+        metadata_path=metadatadir,
+    ).upload(
+        "tests/sample_data/municipios.csv",
+        mode="staging",
+        if_exists="replace",
+        partitions="key1=value1/key2=value2",
+    )
+
+    table = Table(
+        dataset_id=DATASET_ID,
+        table_id=TABLE_ID + "_partitioned",
+        metadata_path=metadatadir,
+    )
+
+    table.init(data_sample_path="tests/sample_data/municipios.csv", replace=True)
+
+    table.create(partitioned=True)
+
+
 def test_update(table):
 
     table.create(if_exists="pass")

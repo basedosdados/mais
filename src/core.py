@@ -438,15 +438,32 @@ class Storage(Base):
 
             self.bucket.blob(folder).upload_from_string("")
 
+    def _resolve_partitions(self, partitions):
+
+        if isinstance(partitions, dict):
+
+            return "/".join([f"{k}={v}" for k, v in partitions.items()]) + "/"
+
+        elif isinstance(partitions, str):
+
+            # check if it fits rule
+            {b.split("=")[0]: b.split("=")[1] for b in partitions.split("/")}
+
+            return partitions if partitions.endswith("/") else partitions + "/"
+
+        else:
+
+            raise Exception(f"Partitions format or type not accepted: {partitions}")
+
     def _build_blob_name(self, filename, mode, partitions=None):
 
         # table folder
         blob_name = f"{mode}/{self.dataset_id}/{self.table_id}/"
 
         # add partition folder
-        if isinstance(partitions, dict):
+        if partitions is not None:
 
-            blob_name += "/".join([f"{k}={v}" for k, v in partitions.items()])
+            blob_name += self._resolve_partitions(partitions)
 
         # add file name
         blob_name += filename

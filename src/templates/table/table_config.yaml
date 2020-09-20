@@ -45,7 +45,8 @@ columns: {% for column in columns %}
         name: {{ column }}
         description: <columns description>
         # type: STRING 
-        # is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
     {% endfor %}
 
 # Available Types (https://cloud.google.com/bigquery/docs/schemas)
