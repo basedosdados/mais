@@ -44,21 +44,5 @@ columns: {% for column in columns %}
     -   
         name: {{ column }}
         description: <columns description>
-        # type: STRING 
-        # is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
     {% endfor %}
-
-# Available Types (https://cloud.google.com/bigquery/docs/schemas)
-# Integer         INT64      Numeric values without fractional components
-# Floating        FLOAT64    Approximate numeric values with fractional components
-# Numeric         NUMERIC    Exact numeric values with fractional components
-# Boolean         BOOL       TRUE or FALSE (case insensitive)
-# String          STRING     Variable-length character (Unicode) data
-# Bytes           BYTES      Variable-length binary data
-# Date            DATE       A logical calendar date
-# Date/Time       DATETIME   A year, month, day, hour, minute, second, and subsecond
-# Time            TIME       A time, independent of a specific date
-# Timestamp       TIMESTAMP  An absolute point in time, with microsecond precision
-# Struct (Record  STRUCT     Container of ordered fields each with a type (required) and field name (optional)
-# Geography       GEOGRAPHY  A pointset on the Earth's surface (a set of points, 
-#                            lines and polygons on the WGS84 reference spheroid, with geodesic edges)
