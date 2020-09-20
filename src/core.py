@@ -581,27 +581,6 @@ class Storage(Base):
         self.dataset_id = dataset_id.replace("-", "_")
         self.table_id = table_id.replace("-", "_")
 
-    def init(self, replace=False, very_sure=False):
-        """Create bucket and folders"""
-
-        if replace:
-            if not very_sure:
-                raise Warning(
-                    "\n********************************************************"
-                    "\nYou are trying to replace all the data that you have "
-                    f"in bucket {self.bucket_name}.\nAre you sure?\n"
-                    "If yes, add the flag --very_sure\n"
-                    "********************************************************"
-                )
-            else:
-                self.bucket.delete(force=True)
-
-        self.client["storage"].create_bucket(self.bucket)
-
-        for folder in ["staging/", "raw/"]:
-
-            self.bucket.blob(folder).upload_from_string("")
-
     def _resolve_partitions(self, partitions):
 
         if isinstance(partitions, dict):
@@ -633,6 +612,45 @@ class Storage(Base):
         blob_name += filename
 
         return blob_name
+
+    def init(self, replace=False, very_sure=False):
+        """Initializes bucket and folders.
+
+        Folder should be:
+            - `raw` : that contains really raw data
+            - `staging` : preprocessed data ready to upload to BigQuery
+
+        Parameters
+        ----------
+        replace : bool, optional
+            Whether to replace if bucket already exists, by default False
+        very_sure : bool, optional
+            Are you aware that everything is going to be erased if you
+            replace the bucket?, by default False
+
+        Raises
+        ------
+        Warning
+            very_sure argument is still False.
+        """
+
+        if replace:
+            if not very_sure:
+                raise Warning(
+                    "\n********************************************************"
+                    "\nYou are trying to replace all the data that you have "
+                    f"in bucket {self.bucket_name}.\nAre you sure?\n"
+                    "If yes, add the flag --very_sure\n"
+                    "********************************************************"
+                )
+            else:
+                self.bucket.delete(force=True)
+
+        self.client["storage"].create_bucket(self.bucket)
+
+        for folder in ["staging/", "raw/"]:
+
+            self.bucket.blob(folder).upload_from_string("")
 
     def upload(self, filepath, mode, partitions=None, if_exists="raise", **upload_args):
         """Upload file to storage following a structured path.
