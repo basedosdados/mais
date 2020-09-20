@@ -1,8 +1,12 @@
 dataset_id: {{ dataset_id }} # AUTO GENERATED
 
+# Describe the dataset. What is it about? What does the institution that 
+# provides the data takes care of?
 description: | # REQUIRED
     <some-description>
 
+# The institution where the data came from. This should point to a place to
+# find raw data.
 source_institution:
     name: <institution-name> [IBGE, TSE] # REQUIRED
     website: <where to find raw data>

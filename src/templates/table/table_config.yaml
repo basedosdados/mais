@@ -3,9 +3,15 @@ dataset_id: {{ dataset_id }} # AUTO GENERATED
 
 last_updated: <date> # AUTO GENERATED
 
+# Describe the table. This is the first words that a new user will look at.
+# You don't need to be too concise, fell free to give some examples on 
+# how to use this data. Maybe some research, application, etc that was 
+# developed using it.
 description: |  # REQUIRED
     <table-description>
 
+# Who treated the data? There are sometimes that another insitution gets 
+# the raw data and treats it to the public. Sometimes, it was just you.
 treated_by:
     name: <institution-name [IBGE, TSE]>  # REQUIRED
     code_url: <code-url-that-generated-table> # REQUIRED
@@ -13,7 +19,9 @@ treated_by:
     email: <name at institution.com>
     logo: <logo-url>
 
-
+# Who is completing this config file? Put you name and email here. You will
+# be surprised how many times people will reach you to ask questions about
+# this dataset.
 published_by:
     name: <your-name [you]>  # REQUIRED
     code_url: <code-url-that-generated-table> # REQUIRED
@@ -21,19 +29,22 @@ published_by:
     email: <your at email.com>
     logo: <your-pic>
 
-
+# If there was some treatment, what as it about?
 treatment_description: | 
-    CEPESP fez X. Eu fiz K
+    <CEPESP fez X. Eu fiz K>
 
-
+# Make sure to add the columns in the dataset that are partitions. It will
+# help people to query faster and save some money.
 partitions: # REQUIRED
     - <first partition>
     - <second partition>
 
+# How often is data updated?
 # Hora | Dia | Semana | Mês | Único 
 data_update_frequency: <frequency> # REQUIRED 
 
-
+# All data has a license. If it is public, feel free to just use MIT. If not,
+# please point out the license to our users.
 license: 
     name: MIT # REQUIRED
     url: <url>
@@ -42,6 +53,15 @@ labels:
     - <first label> 
     - <second label>
 
+# What are the columns? Make sure to write a good description, people will like
+# to know what is the column about. Also, feel free to change some encriptic names
+# to something a bit more explicit.
+# Adding all the columns manually can be quite tiresome, that is why, when 
+# initializing this config file, you can point the function to a data sample that
+# will auto fill the columns.
+# Some columns will just exist in the final table, you will build them at 
+# `publish.sql` query. For those, set is_in_staging to False.
+# Also, you have to add the partition columns here and set is_partition to True.
 columns: # REQUIRED
 {% for column in columns %}  
     -   
