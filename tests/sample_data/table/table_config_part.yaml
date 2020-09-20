@@ -1,0 +1,144 @@
+table_id: pytest_partitioned # AUTO GENERATED
+dataset_id: pytest # AUTO GENERATED
+
+last_updated: <date> # AUTO GENERATED
+
+labels: <add-labels>
+
+# REQUIRED
+description: |  
+    <table-description>
+
+treated_by:
+    name: <institution-name> [IBGE, TSE] # REQUIRED
+    website: <where to find raw data>
+    email: <>
+    logo: <logo-url>
+    code_url: <code-url-that-generated-table> # REQUIRED
+
+# Person or institution 
+published_by:
+    name: <institution-name> [IBGE, TSE] # REQUIRED
+    website: <where to find raw data>
+    email: <>
+    logo: <logo-url>
+    code_url: <code-url-that-generated-table> # REQUIRED
+
+treatment_description: | 
+    CEPESP fez X. Eu fiz K
+
+# REQUIRED
+partitions:  
+    - <first partition>
+    - <second partition>
+    - ...
+
+# REQUIRED    
+data_update_frequency: HOURLY | DAILY | WEEKLY | ...  | ONCE  
+
+# REQUIRED
+license: MIT
+
+# REQUIRED
+columns:   
+    -   
+        name: id_munic_7
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: id_munic_6
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: id_TSE
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: id_RF
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: id_BCB
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: municipio
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: id_comarca
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: id_regiao_saude
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: regiao_saude
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: id_estado
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: estado_abrev
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: estado
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: existia_1991
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: existia_2000
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+      
+    -   
+        name: existia_2010
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+    
+    -   
+        name: key1
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: True # Bool [True, False], whether the column is a partition. is_in_staging must be True
+    
+    -   
+        name: key2
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table>
+        is_partition: True # Bool [True, False], whether the column is a partition. is_in_staging must be True

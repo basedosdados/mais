@@ -126,7 +126,20 @@ def test_create_partitioned(metadatadir):
 
     table.init(data_sample_path="tests/sample_data/municipios.csv", replace=True)
 
+    shutil.copy(
+        "tests/sample_data/table/table_config_part.yaml",
+        Path(metadatadir) / "pytest" / "pytest_partitioned" / "table_config.yaml",
+    )
+    shutil.copy(
+        "tests/sample_data/table/publish_part.sql",
+        Path(metadatadir) / "pytest" / "pytest_partitioned" / "publish.sql",
+    )
+
     table.create(partitioned=True)
+
+    table.update(mode="staging")
+
+    table.publish(if_exists="replace")
 
 
 def test_update(table):

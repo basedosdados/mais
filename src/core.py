@@ -62,7 +62,7 @@ class Base:
             raise Exception(
                 f"Argument {mode} not supported. "
                 f"Enter one of the following: "
-                ",".join(ACCEPTED_MODES)
+                f'{",".join(ACCEPTED_MODES)}'
             )
 
 
@@ -241,8 +241,10 @@ class Table(Base):
     def get_table_obj(self, mode):
         return self.client["bigquery"].get_table(self.table_full_name[mode])
 
-    def _load_schema(self, mode="staging"):
+    def _load_schema(self, mode="staging", with_partition=True):
         """Load schema from table_config.yaml"""
+
+        self.check_mode(mode)
 
         json_path = self.table_folder / f"schema-{mode}.json"
 
@@ -253,6 +255,9 @@ class Table(Base):
                 c["type"] = "STRING"
 
             columns = [c for c in columns if c["is_in_staging"]]
+
+            if not with_partition:
+                columns = [c for c in columns if not c["is_partition"]]
 
         elif mode == "prod":
             schema = self.get_table_obj(mode).schema
@@ -339,7 +344,7 @@ class Table(Base):
 
             job_config_params.update(
                 dict(
-                    schema=self._load_schema(),
+                    schema=self._load_schema("staging", with_partition=False),
                     destination_table_description=self.render_template(
                         "table/table_description.txt", self.table_config
                     ),
@@ -372,9 +377,13 @@ class Table(Base):
 
         load_job.result()
 
+        self.update(mode="staging")
+
     def update(self, mode="all", not_found_ok=True):
 
         # TODO: add support for prod and staging
+
+        self.check_mode(mode)
 
         if mode == "all":
             mode = ["prod", "staging"]
@@ -418,6 +427,8 @@ class Table(Base):
         self.update("prod")
 
     def delete(self, mode):
+
+        self.check_mode(mode)
 
         if mode == "all":
             for k, n in self.table_full_name[mode].items():
