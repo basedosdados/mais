@@ -238,6 +238,9 @@ class Table(Base):
     def table_config(self):
         return self.load_yaml(self.table_folder / "table_config.yaml")
 
+    def get_table_obj(self, mode):
+        return self.client["bigquery"].get_table(self.table_full_name[mode])
+
     def _load_schema(self, mode="staging"):
         """Load schema from table_config.yaml"""
 
@@ -248,6 +251,16 @@ class Table(Base):
         if mode == "staging":
             for c in columns:
                 c["type"] = "STRING"
+
+            columns = [c for c in columns if c["is_in_staging"]]
+
+        elif mode == "prod":
+            schema = self.get_table_obj(mode).schema
+
+            for c in columns:
+                for s in schema:
+                    if c["name"] == s.name:
+                        c["type"] = s.field_type
 
         json.dump(columns, (json_path).open("w"))
 
@@ -361,10 +374,17 @@ class Table(Base):
 
     def update(self, mode="all", not_found_ok=True):
 
-        for m, table_name in self.table_full_name[mode].items():
+        # TODO: add support for prod and staging
+
+        if mode == "all":
+            mode = ["prod", "staging"]
+        else:
+            mode = [mode]
+
+        for m in mode:
 
             try:
-                table = self.client["bigquery"].get_table(table_name)
+                table = self.get_table_obj(m)
             except google.api_core.exceptions.NotFound:
                 continue
 
@@ -395,7 +415,7 @@ class Table(Base):
 
         self.client["bigquery"].create_table(view)
 
-        # update
+        self.update("prod")
 
     def delete(self, mode):
 

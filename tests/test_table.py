@@ -138,8 +138,19 @@ def test_update(table):
     table.update(mode="all")
 
 
-def test_publish(table):
+def test_publish(table, metadatadir):
 
     table.create(if_exists="pass")
 
-    table.publish()
+    shutil.copy(
+        "tests/sample_data/table/table_config.yaml",
+        Path(metadatadir) / "pytest" / "pytest" / "table_config.yaml",
+    )
+    shutil.copy(
+        "tests/sample_data/table/publish.sql",
+        Path(metadatadir) / "pytest" / "pytest" / "publish.sql",
+    )
+
+    table.publish(if_exists="replace")
+
+    assert table_exists(table, "prod")
