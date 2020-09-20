@@ -41,20 +41,20 @@ class Base:
         )
         self.uri = f"gs://{bucket_name}" + "/staging/{dataset}/{table}/*"
 
-    def load_yaml(self, file):
+    def _load_yaml(self, file):
 
         try:
             return yaml.load(open(file, "r"), Loader=yaml.SafeLoader)
         except FileNotFoundError:
             return None
 
-    def render_template(self, template_file, kargs):
+    def _render_template(self, template_file, kargs):
 
         return Template((self.templates / template_file).open("r").read()).render(
             **kargs
         )
 
-    def check_mode(self, mode):
+    def _check_mode(self, mode):
         ACCEPTED_MODES = ["all", "staging", "prod"]
         if mode in ACCEPTED_MODES:
             return True
@@ -76,7 +76,7 @@ class Dataset(Base):
     @property
     def dataset_config(self):
 
-        return self.load_yaml(
+        return self._load_yaml(
             self.metadata_path / self.dataset_id / "dataset_config.yaml"
         )
 
@@ -101,13 +101,29 @@ class Dataset(Base):
     def _setup_dataset_object(self, dataset_id):
 
         dataset = bigquery.Dataset(dataset_id)
-        dataset.description = self.render_template(
+        dataset.description = self._render_template(
             "dataset/dataset_description.txt", self.dataset_config
         )
 
         return dataset
 
     def init(self, replace=False):
+        """Initialize dataset folder at metadata_path at `metadata_path/<dataset_id>`.
+
+        The folder should contain:
+            - dataset_config.yaml
+            - README.md
+
+        Parameters
+        ----------
+        replace : bool, optional
+            Whether to replace existing folder, by default False
+
+        Raises
+        ------
+        FileExistsError
+            If dataset folder already exists and replace is False
+        """
 
         # Create dataset folder
         try:
@@ -123,7 +139,7 @@ class Dataset(Base):
             if file.name in ["dataset_config.yaml", "README.md"]:
 
                 # Load and fill template
-                template = self.render_template(
+                template = self._render_template(
                     f"dataset/{file.name}", dict(dataset_id=self.dataset_id)
                 )
 
@@ -136,6 +152,7 @@ class Dataset(Base):
         return self
 
     def publicize(self):
+        """Changes IAM configuration to turn BigQuery dataset public."""
 
         dataset = self.client["bigquery"].get_dataset(self.dataset_id)
         entries = dataset.access_entries
@@ -164,6 +181,30 @@ class Dataset(Base):
         self.client["bigquery"].update_dataset(dataset, ["access_entries"])
 
     def create(self, mode="all", if_exists="raise"):
+        """Creates BigQuery datasets given `dataset_id`.
+
+        It can create two datasets:
+            - <dataset_id>         (mode = 'prod')
+            - <dataset_id>_staging (mode = 'staging')
+
+        If mode is all, it creates both.
+
+        Parameters
+        ----------
+        mode : str, optional
+            Which dataset to create [prod|staging|all], by default "all"
+        if_exists : str, optional
+            What to do if dataset exists, by default "raise"
+            - 'raise' : Raises Conflic exception
+            - 'replace' : Drop all tables and replace dataset
+            - 'update' : Update dataset description
+            - 'pass' : Do nothing
+
+        Raises
+        ------
+        google.api_core.exceptions.Conflict
+            Dataset already exists and if_exists is set to 'raise'
+        """
 
         if if_exists == "replace":
             self.delete(mode)
@@ -195,6 +236,13 @@ class Dataset(Base):
         self.publicize()
 
     def delete(self, mode="all"):
+        """Delete dataset. Toogle mode to choose which dataset to delete.
+
+        Parameters
+        ----------
+        mode : str, optional
+            Which dataset to delete [prod|staging|all], by default "all"
+        """
 
         for ds_id in self._create_dataset_ids(mode):
 
@@ -203,6 +251,13 @@ class Dataset(Base):
             )
 
     def update(self, mode="all"):
+        """Update dataset description. Toogle mode to choose which dataset to update.
+
+        Parameters
+        ----------
+        mode : str, optional
+            Which dataset to update [prod|staging|all], by default "all"
+        """
 
         # Set dataset_id to the ID of the dataset to create.
         dataset_ids = self._create_dataset_ids(mode)
@@ -236,15 +291,15 @@ class Table(Base):
 
     @property
     def table_config(self):
-        return self.load_yaml(self.table_folder / "table_config.yaml")
+        return self._load_yaml(self.table_folder / "table_config.yaml")
 
-    def get_table_obj(self, mode):
+    def _get_table_obj(self, mode):
         return self.client["bigquery"].get_table(self.table_full_name[mode])
 
     def _load_schema(self, mode="staging", with_partition=True):
         """Load schema from table_config.yaml"""
 
-        self.check_mode(mode)
+        self._check_mode(mode)
 
         json_path = self.table_folder / f"schema-{mode}.json"
 
@@ -260,7 +315,7 @@ class Table(Base):
                 columns = [c for c in columns if not c["is_partition"]]
 
         elif mode == "prod":
-            schema = self.get_table_obj(mode).schema
+            schema = self._get_table_obj(mode).schema
 
             for c in columns:
                 for s in schema:
@@ -272,6 +327,30 @@ class Table(Base):
         return self.client["bigquery"].schema_from_json(str(json_path))
 
     def init(self, data_sample_path=None, replace=False):
+        """Initialize table folder at metadata_path at
+        `metadata_path/<dataset_id>/<table_id>`.
+
+        The folder should contain:
+            - table_config.yaml
+            - publish.sql
+
+        You can also point to a sample of the data to auto complete columns names.
+
+        Parameters
+        ----------
+        data_sample_path : (str, pathlib.PosixPath), optional
+            Data sample path to auto complete columns names, by default None.
+            It supports Comma Delimited CSV.
+        replace : bool, optional
+            Whether to replace existing folder, by default False
+
+        Raises
+        ------
+        FileExistsError
+            If folder exists and replace is False.
+        NotImplementedError
+            If data sample is not in supported type or format.
+        """
 
         if not self.dataset_folder.exists():
             print(self.dataset_folder)
@@ -325,11 +404,33 @@ class Table(Base):
         return self
 
     def create(self, job_config_params=None, partitioned=False, if_exists="raise"):
-        """
-        Creates table in staging dataset
+        """Creates BigQuery table at staging dataset.
+
+        Table should be located at `<dataset_id>_staging.<table_id>`.
+
+        It looks for data saved in Storage at `<bucket_name>/staging/<dataset_id>/<table_id>/*`
+        and builds the table.
+
+        It currently supports the types:
+            - Comma Delimited CSV
+
+        Data can also be partitioned following the hive partitioning scheme
+        `<key1>=<value1>/<key2>=<value2>`, for instance, `year=2012/country=BR`
 
         TODO: Implement if_exists=raise
         TODO: Implement if_exists=pass
+
+        Parameters
+        ----------
+        job_config_params : dict, optional
+            Job configuration params from bigquery, by default None
+        partitioned : bool, optional
+            Whether data is partitioned, by default False
+        if_exists : str, optional
+            What to do if table exists, by default "raise"
+            - 'raise' : Raises Conflict exception
+            - 'replace' : Replace table
+            - 'pass' : Do nothing
         """
 
         if job_config_params is None:
@@ -345,7 +446,7 @@ class Table(Base):
             job_config_params.update(
                 dict(
                     schema=self._load_schema("staging", with_partition=False),
-                    destination_table_description=self.render_template(
+                    destination_table_description=self._render_template(
                         "table/table_description.txt", self.table_config
                     ),
                 )
@@ -380,10 +481,17 @@ class Table(Base):
         self.update(mode="staging")
 
     def update(self, mode="all", not_found_ok=True):
+        """Updates BigQuery schema and description.
 
-        # TODO: add support for prod and staging
+        Parameters
+        ----------
+        mode : str, optional
+            Table of which table to update [prod|staging|all], by default "all"
+        not_found_ok : bool, optional
+            What to do if table is not found, by default True
+        """
 
-        self.check_mode(mode)
+        self._check_mode(mode)
 
         if mode == "all":
             mode = ["prod", "staging"]
@@ -393,11 +501,11 @@ class Table(Base):
         for m in mode:
 
             try:
-                table = self.get_table_obj(m)
+                table = self._get_table_obj(m)
             except google.api_core.exceptions.NotFound:
                 continue
 
-            table.description = self.render_template(
+            table.description = self._render_template(
                 "table/table_description.txt", self.table_config
             )
             table.schema = self._load_schema(m)
@@ -407,15 +515,33 @@ class Table(Base):
             )
 
     def publish(self, if_exists="raise"):
+        """Creates BigQuery table at production dataset.
+
+        Table should be located at `<dataset_id>.<table_id>`.
+
+        It creates a view that uses the query from
+        `<metadata_path>/<dataset_id>/<table_id>/publish.sql`.
+
+        Make sure that all columns from the query also exists at
+        `<metadata_path>/<dataset_id>/<table_id>/table_config.sql`, including
+        the partitions.
+
+        Parameters
+        ----------
+        if_exists : str, optional
+            What to do if table exists, by default "raise"
+            - 'raise' : Raises Conflict exception
+            - 'replace' : Replace table
+            - 'pass' : Do nothing
+        """
 
         # TODO: check if all required fields are filled
-        # TODO: Auto add column description
 
         view = bigquery.Table(self.table_full_name["prod"])
 
         view.view_query = (self.table_folder / "publish.sql").open("r").read()
 
-        view.description = self.render_template(
+        view.description = self._render_template(
             "table/table_description.txt", self.table_config
         )
 
@@ -427,8 +553,15 @@ class Table(Base):
         self.update("prod")
 
     def delete(self, mode):
+        """Deletes table.
 
-        self.check_mode(mode)
+        Parameters
+        ----------
+        mode : str
+            Table of which table to delete [prod|staging|all]
+        """
+
+        self._check_mode(mode)
 
         if mode == "all":
             for k, n in self.table_full_name[mode].items():
@@ -502,8 +635,32 @@ class Storage(Base):
         return blob_name
 
     def upload(self, filepath, mode, partitions=None, if_exists="raise", **upload_args):
+        """Upload file to storage following a structured path.
 
-        self.check_mode(mode)
+        You should expect the file to be saved at `<bucket_name>/<mode>/<dataset_id>/<table_id>`.
+
+        There are two modes:
+            `raw` : should contain raw files from datasource
+            `staging` : should contain pre-treated files ready to upload to BiqQuery
+
+        Parameters
+        ----------
+        filepath : str or pathlib.PosixPath
+            Where the file is stored
+        mode : str
+            Folder of which dataset to update [raw|staging], by default "all"
+        partitions : (str, pathlib.PosixPath, dict), optional
+            Hive structured partition as a string or dict, by default None
+            str : `<key>=<value>/<key2>=<value2>`
+            dict: `dict(key=value, key2=value2)`
+        if_exists : str, optional
+            What to do if data exists, by default "raise"
+            - 'raise' : Raises Conflict exception
+            - 'replace' : Replace table
+            - 'pass' : Do nothing
+        """
+
+        self._check_mode(mode)
 
         if (self.dataset_id is None) or (self.table_id is None):
             raise Exception("You need to pass dataset_id and table_id")
@@ -519,12 +676,27 @@ class Storage(Base):
         else:
             raise Exception(
                 f"Data already exists at {blob_name}. "
-                "Add flag --if_exists=replace to overwrite data"
+                "Set if_exists to 'replace' to overwrite data"
             )
 
         return blob_name
 
     def delete_file(self, filename, mode, partitions=None, not_found_ok=False):
+        """Deletes file from path `<bucket_name>/<mode>/<dataset_id>/<table_id>/<partitions>/<filename>`.
+
+        Parameters
+        ----------
+        filename : str
+            Name of the file to be deleted
+        mode : str
+            Folder of which dataset to update [raw|staging], by default "all"
+        partitions : (str, pathlib.PosixPath, dict), optional
+            Hive structured partition as a string or dict, by default None
+            str : `<key>=<value>/<key2>=<value2>`
+            dict: `dict(key=value, key2=value2)`
+        not_found_ok : bool, optional
+            What to do if file not found, by default False
+        """
 
         blob = self.bucket.blob(self._build_blob_name(filename, mode, partitions))
 
