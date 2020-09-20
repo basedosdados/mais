@@ -123,8 +123,8 @@ class Dataset(Base):
             if file.name in ["dataset_config.yaml", "README.md"]:
 
                 # Load and fill template
-                template = Template(file.open("r").read()).render(
-                    dataset_id=self.dataset_id
+                template = self.render_template(
+                    f"dataset/{file.name}", dict(dataset_id=self.dataset_id)
                 )
 
                 # Write file
@@ -305,7 +305,7 @@ class Table(Base):
                     "Data sample just supports comma separated csv files"
                 )
         else:
-            columns = ["<column-name>"]
+            columns = ["column_name"]
 
         for file in (Path(self.templates) / "table").glob("*"):
 

@@ -1,7 +1,11 @@
-#TODO: Improve this file
 {{ description }}
 
 Instituição
 -----------
-{{ source_institution.name }}
-{{ source_institution.website }}
+Nome: {{ source_institution.name }}
+{% if "<" not in source_institution.website -%}
+Website: {{ source_institution.website }}
+{%- endif -%}
+{% if "<" not in source_institution.email -%}
+Email: {{ source_institution.email }}
+{%- endif -%}

@@ -65,10 +65,3 @@ def test_upload(storage):
             if_exists="replace",
             partitions=["key1", "value1", "key2", "value1"],
         )
-
-    storage.upload(
-        "tests/sample_data/municipios.csv",
-        mode="staging",
-        if_exists="replace",
-        partitions=["key1", "value1", "key2", "value1"],
-    )
