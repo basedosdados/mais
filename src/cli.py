@@ -180,15 +180,23 @@ def init_table(ctx, dataset_id, table_id, data_sample_path, replace):
     "--job_config_params", default=None, help="File to advanced load config params "
 )
 @click.option(
+    "--partitioned",
+    "-p",
+    default=False,
+    help="[True|False] whether table is partitioned",
+)
+@click.option(
     "--if_exists",
     default="raise",
     help="[raise|replace|pass] actions if table exists",
 )
 @click.pass_context
-def create_table(ctx, dataset_id, table_id, job_config_params, if_exists):
+def create_table(ctx, dataset_id, table_id, job_config_params, partitioned, if_exists):
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).create(
-        job_config_params=job_config_params, if_exists=if_exists
+        job_config_params=job_config_params,
+        partitioned=partitioned,
+        if_exists=if_exists,
     )
 
     click.echo(
@@ -305,19 +313,19 @@ def init_storage(ctx, bucket_name, replace, very_sure):
 @click.option(
     "--mode", "-m", required=True, help="[raw|staging] where to save the file"
 )
-@click.option("--bucket_name", default="basedosdados", help="Bucket name")
+@click.option("--partitions", help="Data partition as `value=key/value2=key2`")
 @click.option(
-    "--replace/--no-replace",
-    default=False,
-    help="Whether to replace current bucket files",
+    "--if_exists",
+    default="raise",
+    help="[raise|replace|pass] if file alread exists",
 )
 @click.pass_context
-def upload_storage(ctx, dataset_id, table_id, filepath, mode, bucket_name, replace):
+def upload_storage(ctx, dataset_id, table_id, filepath, mode, partitions, if_exists):
 
     ctx.obj.pop("bucket_name")
-    blob_name = Storage(
-        dataset_id, table_id, bucket_name=bucket_name, **ctx.obj
-    ).upload(filepath=filepath, mode=mode, replace=replace)
+    blob_name = Storage(dataset_id, table_id, **ctx.obj).upload(
+        filepath=filepath, mode=mode, partitions=partitions, if_exists=if_exists
+    )
 
     click.echo(
         click.style(
