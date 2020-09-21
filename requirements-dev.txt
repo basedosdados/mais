@@ -4,4 +4,5 @@ ipykernel
 jupyter
 pyaml
 jinja2
-blacked
+black
+pytest
