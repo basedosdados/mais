@@ -37,8 +37,8 @@ As diretrizes para nomenclatura dos _datasets_ e tabelas são descritas abaixo:
 |-----------|-----------------------------|----------------------------------|
 | Mundial   | mundo_\<tema\>_\<instituicao\>      | \<descrição\>                        |
 | Federal   | \<pais\>_\<tema\>_\<instituicao\>       | \<descrição\>                       |
-| Estadual  | \<pais\>_\<estado\>                 | \<instituicao\>_\<tema\>_descrição\>       |
-| Municipal | \<pais\>_\<estado\>_\<cidade\>          | \<instituicao\>_\<tema\>_descrição\>       |
+| Estadual  | \<pais\>_\<estado\>_\<tema\>_\<instituicao\>     | \<descrição\>       |
+| Municipal | \<pais\>_\<estado\>_\<cidade\>_\<tema\>_\<instituicao\>  | \<descrição\>       |
 
 - Utilizar somente letras minúsculas
 - Remover acentos, pontuações e espaços
