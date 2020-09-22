@@ -139,6 +139,7 @@ A referencia dos temas é da busca da Base dos Dados, mas temas podem ser adicio
 | Segurança, Crime, Violência e Conflito   | seguranca        |
 | Saúde                                    | saude            |
 | Turismo                                  | turismo          |
+| Urbanização                              | urbanizacao      |
 
 # Estrutura do Github
 
