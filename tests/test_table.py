@@ -59,13 +59,11 @@ def test_init(table, metadatadir):
 
 def table_exists(table, mode):
 
-    if mode == "prod":
-
-        l = list(table.client["bigquery"].list_tables(table.dataset_id))
-    elif mode == "staging":
-
-        l = list(table.client["bigquery"].list_tables(table.dataset_id + "_staging"))
-    return len([d for d in l if TABLE_ID in d.table_id])
+    try:
+        table.client[f"bigquery_{mode}"].get_table(table.table_full_name[mode])
+        return True
+    except:
+        return False
 
 
 def test_delete(table):
@@ -120,13 +118,13 @@ def test_create_partitioned(metadatadir):
         partitions="key1=value1/key2=value2",
     )
 
-    table = Table(
+    table_part = Table(
         dataset_id=DATASET_ID,
         table_id=TABLE_ID + "_partitioned",
         metadata_path=metadatadir,
     )
 
-    table.init(data_sample_path="tests/sample_data/municipios.csv", replace=True)
+    table_part.init(data_sample_path="tests/sample_data/municipios.csv", replace=True)
 
     shutil.copy(
         "tests/sample_data/table/table_config_part.yaml",
@@ -137,11 +135,11 @@ def test_create_partitioned(metadatadir):
         Path(metadatadir) / "pytest" / "pytest_partitioned" / "publish.sql",
     )
 
-    table.create(partitioned=True)
+    table_part.create(partitioned=True)
 
-    table.update(mode="staging")
+    table_part.update(mode="staging")
 
-    table.publish(if_exists="replace")
+    table_part.publish(if_exists="replace")
 
 
 def test_update(table):
@@ -154,6 +152,10 @@ def test_update(table):
 
 
 def test_publish(table, metadatadir):
+
+    Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir).create(
+        if_exists="replace"
+    )
 
     table.create(if_exists="pass")
 

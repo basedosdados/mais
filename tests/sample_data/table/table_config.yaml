@@ -45,78 +45,93 @@ columns:
         name: id_munic_7
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
       
     -   
         name: id_munic_6
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
       
     -   
         name: id_TSE
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
       
     -   
         name: id_RF
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
       
     -   
         name: id_BCB
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
       
     -   
         name: municipio
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
       
     -   
         name: id_comarca
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
       
     -   
         name: id_regiao_saude
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
       
     -   
         name: regiao_saude
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
       
     -   
         name: id_estado
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
     -   
         name: estado_abrev
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
       
     -   
         name: estado
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
       
     -   
         name: existia_1991
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
+
     -   
         name: existia_2000
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
       
     -   
         name: existia_2010
         description: <columns description>
         is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True
     
     -
         name: new_column
         description: description
         is_in_staging: False
+        is_partition: False # Bool [True, False], whether the column is a partition. is_in_staging must be True

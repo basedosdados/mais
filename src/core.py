@@ -16,7 +16,7 @@ from google.cloud.exceptions import NotFound
 class Base:
     def __init__(
         self,
-        key_path="secrets/cli-admin.json",
+        secrets_path="secrets/",
         templates="src/templates",
         bucket_name="basedosdados",
         metadata_path="bases/",
@@ -24,22 +24,30 @@ class Base:
         self.templates = Path(templates)
         self.metadata_path = Path(metadata_path)
         self.bucket_name = bucket_name
+        self.secrets_path = Path(secrets_path)
 
-        credentials = service_account.Credentials.from_service_account_file(
-            key_path,
-            scopes=["https://www.googleapis.com/auth/cloud-platform"],
-        )
         self.client = dict(
-            bigquery=bigquery.Client(
-                credentials=credentials,
-                project=credentials.project_id,
+            bigquery_prod=bigquery.Client(
+                credentials=self._load_credentials("prod"),
+                project=self._load_credentials("prod").project_id,
             ),
-            storage=storage.Client(
-                credentials=credentials,
-                project=credentials.project_id,
+            bigquery_staging=bigquery.Client(
+                credentials=self._load_credentials("staging"),
+                project=self._load_credentials("staging").project_id,
+            ),
+            storage_staging=storage.Client(
+                credentials=self._load_credentials("staging"),
+                project=self._load_credentials("staging").project_id,
             ),
         )
         self.uri = f"gs://{bucket_name}" + "/staging/{dataset}/{table}/*"
+
+    def _load_credentials(self, mode):
+
+        return service_account.Credentials.from_service_account_file(
+            self.secrets_path / f"cli-admin-{mode}.json",
+            scopes=["https://www.googleapis.com/auth/cloud-platform"],
+        )
 
     def _load_yaml(self, file):
 
@@ -80,23 +88,20 @@ class Dataset(Base):
             self.metadata_path / self.dataset_id / "dataset_config.yaml"
         )
 
-    def _create_dataset_ids(self, mode="all"):
+    def _loop_modes(self, mode="all"):
 
-        dataset_ids = []
+        if mode == "all":
+            mode = ["prod", "staging"]
+        else:
+            mode = [mode]
 
-        if (mode == "prod") or (mode == "all"):
-
-            dataset_ids.append(
-                f"{self.client['bigquery'].project}.{self.dataset_config['dataset_id']}"
-            )
-
-        if (mode == "staging") or (mode == "all"):
-
-            dataset_ids.append(
-                f"{self.client['bigquery'].project}.{self.dataset_config['dataset_id']}_staging"
-            )
-
-        return dataset_ids
+        return (
+            {
+                "client": self.client[f"bigquery_{m}"],
+                "id": f"{self.client[f'bigquery_{m}'].project}.{self.dataset_config['dataset_id']}",
+            }
+            for m in mode
+        )
 
     def _setup_dataset_object(self, dataset_id):
 
@@ -151,34 +156,35 @@ class Dataset(Base):
 
         return self
 
-    def publicize(self):
+    def publicize(self, mode="all"):
         """Changes IAM configuration to turn BigQuery dataset public."""
 
-        dataset = self.client["bigquery"].get_dataset(self.dataset_id)
-        entries = dataset.access_entries
+        for m in self._loop_modes(mode):
+            dataset = m["client"].get_dataset(self.dataset_id)
+            entries = dataset.access_entries
 
-        entries.extend(
-            [
-                bigquery.AccessEntry(
-                    role="roles/bigquery.dataViewer",
-                    entity_type="iamMember",
-                    entity_id="allUsers",
-                ),
-                bigquery.AccessEntry(
-                    role="roles/bigquery.metadataViewer",
-                    entity_type="iamMember",
-                    entity_id="allUsers",
-                ),
-                bigquery.AccessEntry(
-                    role="roles/bigquery.user",
-                    entity_type="iamMember",
-                    entity_id="allUsers",
-                ),
-            ]
-        )
-        dataset.access_entries = entries
+            entries.extend(
+                [
+                    bigquery.AccessEntry(
+                        role="roles/bigquery.dataViewer",
+                        entity_type="iamMember",
+                        entity_id="allUsers",
+                    ),
+                    bigquery.AccessEntry(
+                        role="roles/bigquery.metadataViewer",
+                        entity_type="iamMember",
+                        entity_id="allUsers",
+                    ),
+                    bigquery.AccessEntry(
+                        role="roles/bigquery.user",
+                        entity_type="iamMember",
+                        entity_id="allUsers",
+                    ),
+                ]
+            )
+            dataset.access_entries = entries
 
-        self.client["bigquery"].update_dataset(dataset, ["access_entries"])
+            m["client"].update_dataset(dataset, ["access_entries"])
 
     def create(self, mode="all", if_exists="raise"):
         """Creates BigQuery datasets given `dataset_id`.
@@ -213,18 +219,16 @@ class Dataset(Base):
             return
 
         # Set dataset_id to the ID of the dataset to create.
-        for ds_id in self._create_dataset_ids(mode):
+        for m in self._loop_modes(mode):
 
             # Construct a full Dataset object to send to the API.
-            dataset_obj = self._setup_dataset_object(ds_id)
+            dataset_obj = self._setup_dataset_object(m["id"])
 
             # Send the dataset to the API for creation, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             try:
-                job = self.client["bigquery"].create_dataset(
-                    dataset_obj
-                )  # Make an API request.
+                job = m["client"].create_dataset(dataset_obj)  # Make an API request.
             except Conflict:
 
                 if if_exists == "pass":
@@ -244,11 +248,9 @@ class Dataset(Base):
             Which dataset to delete [prod|staging|all], by default "all"
         """
 
-        for ds_id in self._create_dataset_ids(mode):
+        for m in self._loop_modes(mode):
 
-            self.client["bigquery"].delete_dataset(
-                ds_id, delete_contents=True, not_found_ok=True
-            )
+            m["client"].delete_dataset(m["id"], delete_contents=True, not_found_ok=True)
 
     def update(self, mode="all"):
         """Update dataset description. Toogle mode to choose which dataset to update.
@@ -259,19 +261,13 @@ class Dataset(Base):
             Which dataset to update [prod|staging|all], by default "all"
         """
 
-        # Set dataset_id to the ID of the dataset to create.
-        dataset_ids = self._create_dataset_ids(mode)
-
-        for ds_id in dataset_ids:
-
-            # Construct a full Dataset object to send to the API.
-            dataset = self._setup_dataset_object(ds_id)
+        for m in self._loop_modes(mode):
 
             # Send the dataset to the API to update, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
-            dataset = self.client["bigquery"].update_dataset(
-                dataset, fields=["description"]
+            dataset = m["client"].update_dataset(
+                self._setup_dataset_object(m["id"]), fields=["description"]
             )  # Make an API request.
 
 
@@ -284,8 +280,8 @@ class Table(Base):
         self.dataset_folder = Path(self.metadata_path / self.dataset_id)
         self.table_folder = self.dataset_folder / table_id
         self.table_full_name = dict(
-            prod=f"{self.client['bigquery'].project}.{self.dataset_id}.{self.table_id}",
-            staging=f"{self.client['bigquery'].project}.{self.dataset_id}_staging.{self.table_id}",
+            prod=f"{self.client['bigquery_prod'].project}.{self.dataset_id}.{self.table_id}",
+            staging=f"{self.client['bigquery_staging'].project}.{self.dataset_id}.{self.table_id}",
         )
         self.table_full_name.update(dict(all=deepcopy(self.table_full_name)))
 
@@ -294,7 +290,7 @@ class Table(Base):
         return self._load_yaml(self.table_folder / "table_config.yaml")
 
     def _get_table_obj(self, mode):
-        return self.client["bigquery"].get_table(self.table_full_name[mode])
+        return self.client[f"bigquery_{mode}"].get_table(self.table_full_name[mode])
 
     def _load_schema(self, mode="staging", with_partition=True):
         """Load schema from table_config.yaml"""
@@ -312,7 +308,7 @@ class Table(Base):
             columns = [c for c in columns if c["is_in_staging"]]
 
             if not with_partition:
-                columns = [c for c in columns if not c["is_partition"]]
+                columns = [c for c in columns if not c.get("is_partition")]
 
         elif mode == "prod":
             schema = self._get_table_obj(mode).schema
@@ -321,10 +317,11 @@ class Table(Base):
                 for s in schema:
                     if c["name"] == s.name:
                         c["type"] = s.field_type
+                        c["mode"] = s.mode
 
         json.dump(columns, (json_path).open("w"))
 
-        return self.client["bigquery"].schema_from_json(str(json_path))
+        return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
     def init(self, data_sample_path=None, replace=False):
         """Initialize table folder at metadata_path at
@@ -394,7 +391,7 @@ class Table(Base):
                 template = Template(file.open("r").read()).render(
                     table_id=self.table_id,
                     dataset_id=self.dataset_folder.stem,
-                    project_id=self.client["bigquery"].project,
+                    project_id=self.client["bigquery_staging"].project,
                     columns=columns,
                 )
 
@@ -467,7 +464,7 @@ class Table(Base):
         if if_exists == "replace":
             self.delete(mode="staging")
 
-        load_job = self.client["bigquery"].load_table_from_uri(
+        load_job = self.client["bigquery_staging"].load_table_from_uri(
             self.uri.format(
                 dataset=self.table_config["dataset_id"],
                 table=self.table_config["table_id"],
@@ -510,7 +507,7 @@ class Table(Base):
             )
             table.schema = self._load_schema(m)
 
-            self.client["bigquery"].update_table(
+            self.client[f"bigquery_{m}"].update_table(
                 table, fields=["description", "schema"]
             )
 
@@ -548,7 +545,7 @@ class Table(Base):
         if if_exists == "replace":
             self.delete(mode="prod")
 
-        self.client["bigquery"].create_table(view)
+        self.client["bigquery_prod"].create_table(view)
 
         self.update("prod")
 
@@ -564,10 +561,10 @@ class Table(Base):
         self._check_mode(mode)
 
         if mode == "all":
-            for k, n in self.table_full_name[mode].items():
-                self.client["bigquery"].delete_table(n, not_found_ok=True)
+            for m, n in self.table_full_name[mode].items():
+                self.client[f"bigquery_{m}"].delete_table(n, not_found_ok=True)
         else:
-            self.client["bigquery"].delete_table(
+            self.client[f"bigquery_{mode}"].delete_table(
                 self.table_full_name[mode], not_found_ok=True
             )
 
@@ -577,7 +574,7 @@ class Storage(Base):
 
         super().__init__(**kwargs)
 
-        self.bucket = self.client["storage"].bucket(self.bucket_name)
+        self.bucket = self.client["storage_staging"].bucket(self.bucket_name)
         self.dataset_id = dataset_id.replace("-", "_")
         self.table_id = table_id.replace("-", "_")
 
@@ -646,7 +643,7 @@ class Storage(Base):
             else:
                 self.bucket.delete(force=True)
 
-        self.client["storage"].create_bucket(self.bucket)
+        self.client["storage_staging"].create_bucket(self.bucket)
 
         for folder in ["staging/", "raw/"]:
 
