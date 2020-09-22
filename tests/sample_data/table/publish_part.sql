@@ -24,4 +24,4 @@ existia_2000,
 existia_2010,
 key1,
 key2
-from basedosdados.pytest_staging.pytest_partitioned
+from `basedosdados-staging.pytest.pytest_partitioned`

@@ -15,4 +15,4 @@ existia_1991,
 existia_2000,
 existia_2010,
 1 new_column
-from basedosdados.pytest_staging.pytest
+from `basedosdados-staging.pytest.pytest`

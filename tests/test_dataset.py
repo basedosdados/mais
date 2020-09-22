@@ -47,13 +47,11 @@ def test_init(dataset, metadatadir):
 
 def dataset_exists(dataset):
 
-    return len(
-        [
-            d
-            for d in list(dataset.client["bigquery"].list_datasets())
-            if DATASET_ID in d.dataset_id
-        ]
-    )
+    try:
+        [m["client"].get_dataset(DATASET_ID) for m in dataset._loop_modes("all")]
+        return True
+    except:
+        return False
 
 
 def test_delete(dataset):
@@ -97,9 +95,9 @@ def test_publicize(dataset):
     dataset.publicize()
 
 
-def test_create_dataset_ids(dataset):
+def test_loop_modes(dataset):
 
-    assert len(dataset._create_dataset_ids(mode="all")) == 2
-    assert len(dataset._create_dataset_ids(mode="staging")) == 1
-    assert "staging" in dataset._create_dataset_ids(mode="staging")[0]
-    assert len(dataset._create_dataset_ids(mode="prod")) == 1
+    assert len(list(dataset._loop_modes(mode="all"))) == 2
+    assert len(list(dataset._loop_modes(mode="staging"))) == 1
+    assert "staging" in next(dataset._loop_modes(mode="staging"))["id"]
+    assert len(list(dataset._loop_modes(mode="prod"))) == 1
