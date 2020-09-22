@@ -115,32 +115,30 @@ Exemplo: Os dados de votações da camara municipal do rio de janeiro estariam e
 
 ## Tabela de Temas e Identificadores
 
-A referencia dos temas é do dados.gov.br, mas temas podem ser adicionados e trocados. Identificadores serão adicionados de acordo com demanda.
-| Tema                                | Identificador |
-|-------------------------------------|---------------|
-| Legislativo                         | legislativo   |
-| Saúde                               | saude         |
-| Educação                            | educacao      |
-| Eleições                            | eleicoes      |
-| Governo e Política                  |               |
-| Agricultura, extrativismo e pesca   |               |
-| Economia e Finanças                 |               |
-| Pessoa, Familia e Sociedade         |               |
-| Equipamentos Públicos               |               |
-| Plataforma de Gestão de Indicadores |               |
-| Cultura, Lazer e Esporte            |               |
-| Plano Plurianual                    |               |
-| Trabalho                            |               |
-| Transportes e Trânsito              |               |
-| Comércio, Serviços e Turismo        |               |
-| Defesa e Segurança                  |               |
-| Meio Ambiente                       |               |
-| Indústria                           |               |
-| Geografia                           |               |
-| Ciência, Informação e Comunição     |               |
-| Fornecedores do Governo Federal     |               |
-| Habitação, Saneamento e Urbanismo   |               |
-
+A referencia dos temas é da busca da Base dos Dados, mas temas podem ser adicionados e trocados. Identificadores serão adicionados de acordo com demanda.
+| Tema                                     | Identificador    |
+|------------------------------------------|------------------|
+| Agropecuária                             | agropecuaria     |
+| Ciência, Tecnologia e Inovação           | ciencia_tec_inov |
+| Cultura e Arte                           | cultura_arte     |
+| Diversidade e Inclusão                   | diversidade      |
+| Educação                                 | educacao         |
+| Energia                                  | energia          |
+| Esportes                                 | esportes         |
+| Economia                                 | economia         |
+| Governo e Finanças Públicas              | governo          |
+| História                                 | historia         |
+| Infraestrutura e Transportes             | infr_transp      |
+| Jornalismo e Comunicação                 | jornalismo       |
+| Meio Ambiente                            | meio_ambiente    |
+| Justiça                                  | justica          |
+| Organização Territorial                  | territorio       |
+| Política                                 | politica         |
+| População                                | populacao        |
+| Religião                                 | religiao         |
+| Segurança, Crime, Violência e Conflito   | seguranca        |
+| Saúde                                    | saude            |
+| Turismo                                  | turismo          |
 
 # Estrutura do Github
 
@@ -161,12 +159,11 @@ Os arquivos `.yaml` serão usados para documentação e configuração das tabel
 ### dataset_config.yaml
 
 ```yaml
-name: br_eleicoes_tse
+name: br_politica_tse
 description: |
     Dados do Tribunal Superior Eleitoral disponíveis na url ...
 labels: 
-    - eleicoes
-    - politica
+    - eleicao
     - candidatos
 ```
 
@@ -174,19 +171,18 @@ labels:
 
 ```yaml
 owner: 
-    name: Curio # Ou qualquer outra instituição/ pessoa
-    contact: curio-issues
+    name: Base dos Dados # Ou qualquer outra instituição/ pessoa
+    contact: bdd-issues
 code: <code-that-generated-table-url>
-name: candidatos
+name: eleicao_candidatos
 description: |
     Candidatos das eleições federais e municipais de 2010 até 2020
 
     Tratamentos:
      - ...
 labels:
-    - eleicoes
+    - eleicao
     - candidatos
-    - politica
 columns:
     ANO:
         description: asdfsfasf
@@ -204,9 +200,9 @@ A estrutura deve seguir a mesma lógica do BigQuery. Porém, existem pastas raí
 
 ```
     ├── ready|raw
-        ├── <nome_dataset>        Ex: br_eleicoes_tse
+        ├── <nome_dataset>        Ex: br_politica_tse
         ├── ...
-            ├── <nome_tabela>    Ex: candidatos
+            ├── <nome_tabela>    Ex: eleicao_candidatos
             ├── ...
                 ├── <dados>      Dados particionados ou não.
 ```
@@ -221,7 +217,7 @@ ou adicionar colunas úteis.
 
 Para isso, deverá ser criado uma dataset com o mesmo nome, mas precedido de `raw_`.
 
-Exemplo: `raw_br_eleicoes_tse`
+Exemplo: `raw_br_politica_tse`
 
 E todas as tabelas desse dataset serão consideradas brutas e não deverão ser abertas
 ao público.
