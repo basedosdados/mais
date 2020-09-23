@@ -156,7 +156,8 @@ class Base:
             c_file["templates_path"] = str(config_path / "templates")
 
             config_file.open("w").write(tomlkit.dumps(c_file))
-            print(config_path)
+
+            shutil.rmtree((config_path / "templates"))
             shutil.copytree(
                 (Path(__file__).parent / "configs" / "templates"),
                 (config_path / "templates"),
@@ -214,10 +215,12 @@ class Dataset(Base):
         else:
             mode = [mode]
 
+        dataset_tag = lambda m: f"_{m}" if m == "staging" else ""
+
         return (
             {
                 "client": self.client[f"bigquery_{m}"],
-                "id": f"{self.client[f'bigquery_{m}'].project}.{self.dataset_config['dataset_id']}",
+                "id": f"{self.client[f'bigquery_{m}'].project}.{self.dataset_config['dataset_id']}{dataset_tag(m)}",
             }
             for m in mode
         )
@@ -279,7 +282,8 @@ class Dataset(Base):
         """Changes IAM configuration to turn BigQuery dataset public."""
 
         for m in self._loop_modes(mode):
-            dataset = m["client"].get_dataset(self.dataset_id)
+
+            dataset = m["client"].get_dataset(m["id"])
             entries = dataset.access_entries
 
             entries.extend(
@@ -334,6 +338,7 @@ class Dataset(Base):
         if if_exists == "replace":
             self.delete(mode)
         elif if_exists == "update":
+
             self.update()
             return
 
@@ -400,7 +405,7 @@ class Table(Base):
         self.table_folder = self.dataset_folder / table_id
         self.table_full_name = dict(
             prod=f"{self.client['bigquery_prod'].project}.{self.dataset_id}.{self.table_id}",
-            staging=f"{self.client['bigquery_staging'].project}.{self.dataset_id}.{self.table_id}",
+            staging=f"{self.client['bigquery_staging'].project}.{self.dataset_id}_staging.{self.table_id}",
         )
         self.table_full_name.update(dict(all=deepcopy(self.table_full_name)))
 

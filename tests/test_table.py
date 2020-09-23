@@ -31,8 +31,6 @@ def check_files(folder):
 
 def test_init(table, metadatadir):
 
-    
-
     # remove folder
     shutil.rmtree(Path(metadatadir) / DATASET_ID / TABLE_ID, ignore_errors=True)
 
