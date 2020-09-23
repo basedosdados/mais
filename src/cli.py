@@ -4,20 +4,16 @@ from src.core import Base, Dataset, Table, Storage
 
 
 @click.group()
-@click.option(
-    "--key_path", default="secrets/cli-admin.json", help="Gcloud key json file"
-)
 @click.option("--templates", default="src/templates", help="Templates path")
 @click.option("--bucket_name", default="basedosdados", help="Project bucket_name name")
 @click.option("--metadata_path", default="bases/", help="Folder to store metadata")
 @click.pass_context
-def cli(ctx, key_path, templates, bucket_name, metadata_path):
+def cli(ctx, templates, bucket_name, metadata_path):
 
     cli.add_command(cli_dataset)
     cli.add_command(cli_table)
 
     ctx.obj = dict(
-        key_path="secrets/cli-admin.json",
         templates="src/templates",
         bucket_name="basedosdados",
         metadata_path="bases/",

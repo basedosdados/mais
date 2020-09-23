@@ -13,7 +13,8 @@ DATASET_FILES = ["code", "dataset_config.yaml", "README.md"]
 
 @pytest.fixture
 def metadatadir(tmpdir_factory):
-    return "tests/tmp_bases/"
+    (Path(__file__).parent / "tmp_bases").mkdir(exist_ok=True)
+    return Path(__file__).parent / "tmp_bases"
 
 
 @pytest.fixture
