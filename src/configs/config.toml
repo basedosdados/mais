@@ -1,0 +1,21 @@
+# Where to save all metadata data, such as Dataset and Table config files.
+# We reccomend this path to be the same as the github repo clone
+metadata_path = ""
+
+# What is the bucket that you are saving all the data? It should be 
+# an unique name.
+bucket_name = ""
+
+# Where the templates to generate configs and descriptions sit
+templates_path =  "~/.basedosdados/templates"
+
+[gcloud-projects]
+staging = ""
+prod = ""
+
+# Data about you to auto-fill config
+# TODO: issue 20
+[user]
+name = ""
+email = ""
+website = ""
