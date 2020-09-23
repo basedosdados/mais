@@ -49,7 +49,7 @@ def test_init(dataset, metadatadir):
 def dataset_exists(dataset):
 
     try:
-        [m["client"].get_dataset(DATASET_ID) for m in dataset._loop_modes("all")]
+        [m["client"].get_dataset(m["id"]) for m in dataset._loop_modes("all")]
         return True
     except:
         return False
@@ -63,6 +63,8 @@ def test_delete(dataset):
 
 
 def test_create(dataset):
+
+    dataset.delete(mode="all")
 
     dataset.create()
 
