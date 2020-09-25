@@ -95,7 +95,7 @@ class Storage(Base):
         Parameters
         ----------
         filepath : str or pathlib.PosixPath
-            Where the file is stored
+            Where to find the file that you want to upload to storage
         mode : str
             Folder of which dataset to update [raw|staging], by default "all"
         partitions : (str, pathlib.PosixPath, dict), optional
@@ -124,7 +124,7 @@ class Storage(Base):
 
         else:
             raise Exception(
-                f"Data already exists at {blob_name}. "
+                f"Data already exists at {self.bucket_name}/{blob_name}. "
                 "Set if_exists to 'replace' to overwrite data"
             )
 
