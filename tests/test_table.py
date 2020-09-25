@@ -182,3 +182,8 @@ def test_publish(table, metadatadir):
     table.publish(if_exists="replace")
 
     assert table_exists(table, "prod")
+
+
+def test_append(table, metadatadir):
+
+    table.append("tests/sample_data/municipios2.csv")

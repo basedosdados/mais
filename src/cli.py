@@ -278,6 +278,31 @@ def delete_table(ctx, dataset_id, table_id, mode):
     )
 
 
+@cli_table.command(name="append", help="Append new data to existing table")
+@click.argument("dataset_id")
+@click.argument("table_id")
+@click.argument("filepath", type=click.Path(exists=True))
+@click.option("--partitions", help="Data partition as `value=key/value2=key2`")
+@click.option(
+    "--if_exists",
+    default="raise",
+    help="[raise|replace|pass] if file alread exists",
+)
+@click.pass_context
+def upload_storage(ctx, dataset_id, table_id, filepath, partitions, if_exists):
+
+    blob_name = Table(dataset_id, table_id, **ctx.obj).append(
+        filepath=filepath, partitions=partitions, if_exists=if_exists
+    )
+
+    click.echo(
+        click.style(
+            f"Data was added to `{dataset_id}.{table_id}`",
+            fg="green",
+        )
+    )
+
+
 @click.group(name="storage")
 def cli_storage():
     pass
