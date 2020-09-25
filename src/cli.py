@@ -1,22 +1,22 @@
 import click
 
-from src.core import Base, Dataset, Table, Storage
+from src.base import Base
+from src.dataset import Dataset
+from src.table import Table
+from src.storage import Storage
 
 
 @click.group()
-@click.option("--templates", default="src/templates", help="Templates path")
-@click.option("--bucket_name", default="basedosdados", help="Project bucket_name name")
-@click.option("--metadata_path", default="bases/", help="Folder to store metadata")
+@click.option("--templates", default=None, help="Templates path")
+@click.option("--bucket_name", default=None, help="Project bucket_name name")
+@click.option("--metadata_path", default=None, help="Folder to store metadata")
 @click.pass_context
 def cli(ctx, templates, bucket_name, metadata_path):
 
-    cli.add_command(cli_dataset)
-    cli.add_command(cli_table)
-
     ctx.obj = dict(
-        templates="src/templates",
-        bucket_name="basedosdados",
-        metadata_path="bases/",
+        templates=templates,
+        bucket_name=bucket_name,
+        metadata_path=metadata_path,
     )
 
 
@@ -30,18 +30,18 @@ def cli_dataset(ctx):
 @cli_dataset.command(name="init", help="Initialize metadata files of dataset")
 @click.argument("dataset_id")
 @click.option(
-    "--replace/--no-replace",
-    default=False,
+    "--replace",
+    is_flag=True,
     help="Whether to replace current metadata files",
 )
 @click.pass_context
 def init_dataset(ctx, dataset_id, replace):
 
-    Dataset(dataset_id=dataset_id, **ctx.obj).init(replace=replace)
+    d = Dataset(dataset_id=dataset_id, **ctx.obj).init(replace=replace)
 
     click.echo(
         click.style(
-            f"Dataset `{dataset_id}` folder and metadata were created at {ctx.obj['metadata_path']}",
+            f"Dataset `{dataset_id}` folder and metadata were created at {d.metadata_path}",
             fg="green",
         )
     )
@@ -150,20 +150,20 @@ def cli_table():
     type=click.Path(exists=True),
 )
 @click.option(
-    "--replace/--no-replace",
-    default=False,
+    "--replace",
+    is_flag=True
     help="Whether to replace current metadata files",
 )
 @click.pass_context
 def init_table(ctx, dataset_id, table_id, data_sample_path, replace):
 
-    Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).init(
+    t = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).init(
         data_sample_path=data_sample_path, replace=replace
     )
 
     click.echo(
         click.style(
-            f"Table `{table_id}` folder and metadata were created at {ctx.obj['metadata_path']}{dataset_id}",
+            f"Table `{table_id}` folder and metadata were created at {t.metadata_path}{dataset_id}",
             fg="green",
         )
     )
@@ -260,14 +260,6 @@ def delete_table(ctx, dataset_id, table_id, mode):
         mode=mode,
     )
 
-    # click.echo(
-    #     click.style(
-    #         text,
-    #         fg="green",
-    #     )
-    # )
-
-
 @click.group(name="storage")
 def cli_storage():
     pass
@@ -276,8 +268,8 @@ def cli_storage():
 @cli_storage.command(name="init", help="Create bucket and initial folders")
 @click.option("--bucket_name", default="basedosdados", help="Bucket name")
 @click.option(
-    "--replace/--no-replace",
-    default=False,
+    "--replace",
+    is_flag=True,
     help="Whether to replace current bucket files",
 )
 @click.option(
@@ -331,9 +323,22 @@ def upload_storage(ctx, dataset_id, table_id, filepath, mode, partitions, if_exi
     )
 
 
+@click.group(name="config")
+def cli_config():
+    pass
+
+
+@cli_config.command(name="overwrite_cli_config", help="Overwrite current configuration")
+@click.pass_context
+def init_overwrite_cli_config(ctx):
+
+    Base(overwrite_cli_config=True, **ctx.obj)
+
+
 cli.add_command(cli_dataset)
 cli.add_command(cli_table)
 cli.add_command(cli_storage)
+cli.add_command(cli_config)
 
 if __name__ == "__main__":
 

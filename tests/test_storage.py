@@ -1,9 +1,9 @@
 import pytest
 from pathlib import Path
-from google.cloud import bigquery
+from google.cloud import storage
 import shutil
 from google.api_core.exceptions import NotFound
-from src.core import Storage
+from src import Storage
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
