@@ -151,7 +151,7 @@ def cli_table():
 )
 @click.option(
     "--replace",
-    is_flag=True
+    is_flag=True,
     help="Whether to replace current metadata files",
 )
 @click.pass_context
@@ -259,6 +259,7 @@ def delete_table(ctx, dataset_id, table_id, mode):
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).delete(
         mode=mode,
     )
+
 
 @click.group(name="storage")
 def cli_storage():
