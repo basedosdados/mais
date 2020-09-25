@@ -150,15 +150,15 @@ def cli_table():
     type=click.Path(exists=True),
 )
 @click.option(
-    "--replace",
-    is_flag=True,
-    help="Whether to replace current metadata files",
+    "--if_exists",
+    default="raise",
+    help="[raise|replace|pass] actions if table folder exists",
 )
 @click.pass_context
-def init_table(ctx, dataset_id, table_id, data_sample_path, replace):
+def init_table(ctx, dataset_id, table_id, data_sample_path, if_exists):
 
     t = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).init(
-        data_sample_path=data_sample_path, replace=replace
+        data_sample_path=data_sample_path, if_exists=if_exists
     )
 
     click.echo(
@@ -278,6 +278,31 @@ def delete_table(ctx, dataset_id, table_id, mode):
     )
 
 
+@cli_table.command(name="append", help="Append new data to existing table")
+@click.argument("dataset_id")
+@click.argument("table_id")
+@click.argument("filepath", type=click.Path(exists=True))
+@click.option("--partitions", help="Data partition as `value=key/value2=key2`")
+@click.option(
+    "--if_exists",
+    default="raise",
+    help="[raise|replace|pass] if file alread exists",
+)
+@click.pass_context
+def upload_storage(ctx, dataset_id, table_id, filepath, partitions, if_exists):
+
+    blob_name = Table(dataset_id, table_id, **ctx.obj).append(
+        filepath=filepath, partitions=partitions, if_exists=if_exists
+    )
+
+    click.echo(
+        click.style(
+            f"Data was added to `{dataset_id}.{table_id}`",
+            fg="green",
+        )
+    )
+
+
 @click.group(name="storage")
 def cli_storage():
     pass
@@ -351,6 +376,13 @@ def cli_config():
 def init_overwrite_cli_config(ctx):
 
     Base(overwrite_cli_config=True, **ctx.obj)
+
+
+@cli_config.command(name="refresh_template", help="Overwrite current templates")
+@click.pass_context
+def init_refresh_templates(ctx):
+
+    Base(**ctx.obj)._refresh_templates()
 
 
 cli.add_command(cli_dataset)

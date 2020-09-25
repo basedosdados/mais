@@ -107,7 +107,7 @@ class Table(Base):
                 raise FileExistsError(
                     f"Table folder already exists for {self.table_id}. "
                 )
-            elif if_exits == "pass":
+            elif if_exists == "pass":
                 return self
 
         if isinstance(
@@ -156,7 +156,11 @@ class Table(Base):
     ):
         """Creates BigQuery table at staging dataset.
 
-        Table should be located at `<dataset_id>_staging.<table_id>`.
+        If you add a filepath, it automatically saves the data in the storage,
+        creates a datasets folder and BigQuery location, besides creating the
+        table and its configuration files.
+
+        The new table should be located at `<dataset_id>_staging.<table_id>` in BigQuery.
 
         It looks for data saved in Storage at `<bucket_name>/staging/<dataset_id>/<table_id>/*`
         and builds the table.
@@ -201,19 +205,19 @@ class Table(Base):
                 filepath, mode="staging", if_exists="replace"
             )
 
-        # Create Dataset if it doesn't exist
-        if force_dataset:
+            # Create Dataset if it doesn't exist
+            if force_dataset:
 
-            dataset_obj = Dataset(self.dataset_id, **self.main_vars)
+                dataset_obj = Dataset(self.dataset_id, **self.main_vars)
 
-            try:
-                dataset_obj.init()
-            except FileExistsError:
-                pass
+                try:
+                    dataset_obj.init()
+                except FileExistsError:
+                    pass
 
-            dataset_obj.create(if_exists="raise")
+                dataset_obj.create(if_exists="pass")
 
-        self.init(data_sample_path=filepath, if_exists="replace")
+            self.init(data_sample_path=filepath, if_exists="replace")
 
         if job_config_params is None:
 
@@ -352,3 +356,30 @@ class Table(Base):
             self.client[f"bigquery_{mode}"].delete_table(
                 self.table_full_name[mode], not_found_ok=True
             )
+
+    def append(self, filepath, partitions=None, if_exists="raise", **upload_args):
+        """Appends new data to existing BigQuery table.
+
+        As long as the data has the same schema. It appends the data in the
+        filepath to the existing table.
+
+        Parameters
+        ----------
+        filepath : str or pathlib.PosixPath
+            Where to find the file that you want to upload to create a table with
+        partitions : (str, pathlib.PosixPath, dict), optional
+            Hive structured partition as a string or dict, by default None
+            str : `<key>=<value>/<key2>=<value2>`
+            dict: `dict(key=value, key2=value2)`
+        if_exists : str, optional
+            What to do if data with same name exists in storage, by default "raise"
+            - 'raise' : Raises Conflict exception
+            - 'replace' : Replace table
+            - 'pass' : Do nothing
+        """
+
+        Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
+            filepath, mode="staging", partitions=None, if_exists="raise", **upload_args
+        )
+
+        self.create(if_exists="replace")

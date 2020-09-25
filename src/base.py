@@ -12,13 +12,14 @@ warnings.filterwarnings("ignore")
 class Base:
     def __init__(
         self,
-        config_path="~/.basedosdados",
+        config_path=".basedosdados",
         templates=None,
         bucket_name=None,
         metadata_path=None,
         overwrite_cli_config=False,
     ):
 
+        self.config_path = Path.home() / config_path
         self._init_config(force=overwrite_cli_config)
         self.config = self._load_config()
 
@@ -53,12 +54,10 @@ class Base:
 
     def _init_config(self, force):
 
-        config_path = Path.home() / ".basedosdados"
-
         # Create config folder
-        config_path.mkdir(exist_ok=True, parents=True)
+        self.config_path.mkdir(exist_ok=True, parents=True)
 
-        config_file = config_path / "config.toml"
+        config_file = self.config_path / "config.toml"
         if (not config_file.exists()) or (force):
 
             input(
@@ -116,15 +115,15 @@ class Base:
             project_staging = input(
                 "\n********* STEP 4 **********\n"
                 "What is the Google Cloud Project that you are going to be using "
-                "to upload and treat data?\n"
+                "to upload and treat data? It might be something with 'staging'"
+                "in the name. If you just have one project, put its name.\n"
                 "Project id [basedosdados-staging]: "
             )
 
             res = (
                 input(
                     "\n********* STEP 5 **********\n"
-                    "Are you going to publish the final BigQuery table in the same "
-                    "Google Cloud Project? [y/n]\n"
+                    "Is your production project the same as the staging? [y/n]\n"
                 )
                 .strip()
                 .lower()
@@ -153,15 +152,9 @@ class Base:
             c_file["gcloud-projects"]["staging"] = project_staging
             c_file["gcloud-projects"]["prod"] = project_prod
             c_file["bucket_name"] = project_prod
-            c_file["templates_path"] = str(config_path / "templates")
+            c_file["templates_path"] = str(self.config_path / "templates")
 
             config_file.open("w").write(tomlkit.dumps(c_file))
-
-            shutil.rmtree((config_path / "templates"))
-            shutil.copytree(
-                (Path(__file__).parent / "configs" / "templates"),
-                (config_path / "templates"),
-            )
 
     def _load_config(self):
 
@@ -192,3 +185,10 @@ class Base:
                 f"Enter one of the following: "
                 f'{",".join(ACCEPTED_MODES)}'
             )
+
+    def _refresh_templates(self):
+        shutil.rmtree((self.config_path / "templates"))
+        shutil.copytree(
+            (Path(__file__).parent / "configs" / "templates"),
+            (self.config_path / "templates"),
+        )
