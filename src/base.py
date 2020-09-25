@@ -42,6 +42,15 @@ class Base:
         )
         self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
 
+    @property
+    def main_vars(self):
+
+        return dict(
+            templates=self.templates,
+            metadata_path=self.metadata_path,
+            bucket_name=self.bucket_name,
+        )
+
     def _init_config(self, force):
 
         config_path = Path.home() / ".basedosdados"

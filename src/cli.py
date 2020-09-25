@@ -172,6 +172,7 @@ def init_table(ctx, dataset_id, table_id, data_sample_path, replace):
 @cli_table.command(name="create", help="Create stagging table in BigQuery")
 @click.argument("dataset_id")
 @click.argument("table_id")
+@click.argument("filepath", type=click.Path(exists=True))
 @click.option(
     "--job_config_params", default=None, help="File to advanced load config params "
 )
@@ -186,13 +187,29 @@ def init_table(ctx, dataset_id, table_id, data_sample_path, replace):
     default="raise",
     help="[raise|replace|pass] actions if table exists",
 )
+@click.option(
+    "--force_dataset",
+    default=True,
+    help="Whether to automatically create the dataset folders and in BigQuery",
+)
 @click.pass_context
-def create_table(ctx, dataset_id, table_id, job_config_params, partitioned, if_exists):
+def create_table(
+    ctx,
+    dataset_id,
+    table_id,
+    filepath,
+    job_config_params,
+    partitioned,
+    if_exists,
+    force_dataset,
+):
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).create(
+        filepath=filepath,
         job_config_params=job_config_params,
         partitioned=partitioned,
         if_exists=if_exists,
+        force_dataset=force_dataset,
     )
 
     click.echo(

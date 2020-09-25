@@ -8,6 +8,8 @@ from google.cloud import bigquery
 import google.api_core.exceptions
 
 from src.base import Base
+from src.storage import Storage
+from src.dataset import Dataset
 
 
 class Table(Base):
@@ -62,7 +64,7 @@ class Table(Base):
 
         return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
-    def init(self, data_sample_path=None, replace=False):
+    def init(self, data_sample_path=None, if_exists="raise"):
         """Initialize table folder at metadata_path at
         `metadata_path/<dataset_id>/<table_id>`.
 
@@ -77,8 +79,11 @@ class Table(Base):
         data_sample_path : (str, pathlib.PosixPath), optional
             Data sample path to auto complete columns names, by default None.
             It supports Comma Delimited CSV.
-        replace : bool, optional
-            Whether to replace existing folder, by default False
+        if_exists : str, optional
+            What to do if table folder exists, by default "raise"
+            - 'raise' : Raises FileExistsError
+            - 'replace' : Replace folder
+            - 'pass' : Do nothing
 
         Raises
         ------
@@ -96,12 +101,14 @@ class Table(Base):
             )
 
         try:
-            self.table_folder.mkdir(exist_ok=replace)
+            self.table_folder.mkdir(exist_ok=(if_exists == "replace"))
         except FileExistsError:
-            raise FileExistsError(
-                f"Table folder already exists for {self.table_id}. "
-                "Add --replace flag to replace current files."
-            )
+            if if_exists == "raise":
+                raise FileExistsError(
+                    f"Table folder already exists for {self.table_id}. "
+                )
+            elif if_exits == "pass":
+                return self
 
         if isinstance(
             data_sample_path,
@@ -139,7 +146,14 @@ class Table(Base):
 
         return self
 
-    def create(self, job_config_params=None, partitioned=False, if_exists="raise"):
+    def create(
+        self,
+        filepath=None,
+        job_config_params=None,
+        partitioned=False,
+        if_exists="raise",
+        force_dataset=True,
+    ):
         """Creates BigQuery table at staging dataset.
 
         Table should be located at `<dataset_id>_staging.<table_id>`.
@@ -158,6 +172,8 @@ class Table(Base):
 
         Parameters
         ----------
+        filepath : str or pathlib.PosixPath
+            Where to find the file that you want to upload to create a table with
         job_config_params : dict, optional
             Job configuration params from bigquery, by default None
         partitioned : bool, optional
@@ -167,7 +183,37 @@ class Table(Base):
             - 'raise' : Raises Conflict exception
             - 'replace' : Replace table
             - 'pass' : Do nothing
+        force_dataset: bool, by default True
+            Creates <dataset_id> folder and BigQuery Dataset if it doesn't
+            exists.
         """
+
+        # Add data to storage
+        if isinstance(
+            filepath,
+            (
+                str,
+                PosixPath,
+            ),
+        ):
+
+            Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
+                filepath, mode="staging", if_exists="replace"
+            )
+
+        # Create Dataset if it doesn't exist
+        if force_dataset:
+
+            dataset_obj = Dataset(self.dataset_id, **self.main_vars)
+
+            try:
+                dataset_obj.init()
+            except FileExistsError:
+                pass
+
+            dataset_obj.create(if_exists="raise")
+
+        self.init(data_sample_path=filepath, if_exists="replace")
 
         if job_config_params is None:
 
