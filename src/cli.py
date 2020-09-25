@@ -353,6 +353,13 @@ def init_overwrite_cli_config(ctx):
     Base(overwrite_cli_config=True, **ctx.obj)
 
 
+@cli_config.command(name="refresh_template", help="Overwrite current templates")
+@click.pass_context
+def init_refresh_templates(ctx):
+
+    Base(**ctx.obj)._refresh_templates()
+
+
 cli.add_command(cli_dataset)
 cli.add_command(cli_table)
 cli.add_command(cli_storage)
