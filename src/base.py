@@ -116,15 +116,15 @@ class Base:
             project_staging = input(
                 "\n********* STEP 4 **********\n"
                 "What is the Google Cloud Project that you are going to be using "
-                "to upload and treat data?\n"
+                "to upload and treat data? It might be something with 'staging'"
+                "in the name. If you just have one project, put its name.\n"
                 "Project id [basedosdados-staging]: "
             )
 
             res = (
                 input(
                     "\n********* STEP 5 **********\n"
-                    "Are you going to publish the final BigQuery table in the same "
-                    "Google Cloud Project? [y/n]\n"
+                    "Is your production project the same as the staging? [y/n]\n"
                 )
                 .strip()
                 .lower()

@@ -150,15 +150,15 @@ def cli_table():
     type=click.Path(exists=True),
 )
 @click.option(
-    "--replace",
-    is_flag=True,
-    help="Whether to replace current metadata files",
+    "--if_exists",
+    default="raise",
+    help="[raise|replace|pass] actions if table folder exists",
 )
 @click.pass_context
-def init_table(ctx, dataset_id, table_id, data_sample_path, replace):
+def init_table(ctx, dataset_id, table_id, data_sample_path, if_exists):
 
     t = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).init(
-        data_sample_path=data_sample_path, replace=replace
+        data_sample_path=data_sample_path, if_exists=if_exists
     )
 
     click.echo(

@@ -44,17 +44,24 @@ def test_init(table, metadatadir):
 
     with pytest.raises(FileExistsError):
         table.init()
+        table.init(if_exists="raise")
 
-    table.init(replace=True)
+    table.init(if_exists="replace")
 
     check_files(folder)
 
-    table.init(replace=True, data_sample_path="tests/sample_data/municipios.csv")
+    table.init(if_exists="pass")
+
+    check_files(folder)
+
+    table.init(if_exists="replace", data_sample_path="tests/sample_data/municipios.csv")
 
     check_files(folder)
 
     with pytest.raises(NotImplementedError):
-        table.init(replace=True, data_sample_path="tests/sample_data/municipios.json")
+        table.init(
+            if_exists="replace", data_sample_path="tests/sample_data/municipios.json"
+        )
 
 
 def table_exists(table, mode):
@@ -86,7 +93,7 @@ def test_create(table, metadatadir):
         "tests/sample_data/municipios.csv", mode="staging", if_exists="replace"
     )
 
-    table.init(data_sample_path="tests/sample_data/municipios.csv", replace=True)
+    table.init(data_sample_path="tests/sample_data/municipios.csv", if_exists="replace")
 
     table.delete(mode="all")
 
@@ -97,6 +104,8 @@ def test_create(table, metadatadir):
     table.create(if_exists="replace")
 
     assert table_exists(table, mode="staging")
+
+    table.create("tests/sample_data/municipios.csv", if_exists="replace")
 
 
 def test_create_partitioned(metadatadir):
@@ -124,7 +133,9 @@ def test_create_partitioned(metadatadir):
         metadata_path=metadatadir,
     )
 
-    table_part.init(data_sample_path="tests/sample_data/municipios.csv", replace=True)
+    table_part.init(
+        data_sample_path="tests/sample_data/municipios.csv", if_exists="replace"
+    )
 
     shutil.copy(
         "tests/sample_data/table/table_config_part.yaml",
@@ -144,7 +155,7 @@ def test_create_partitioned(metadatadir):
 
 def test_update(table):
 
-    table.create(if_exists="pass")
+    table.create("tests/sample_data/municipios.csv", if_exists="replace")
 
     assert table_exists(table, "staging")
 
@@ -157,7 +168,7 @@ def test_publish(table, metadatadir):
         if_exists="replace"
     )
 
-    table.create(if_exists="pass")
+    table.create("tests/sample_data/municipios.csv", if_exists="replace")
 
     shutil.copy(
         "tests/sample_data/table/table_config.yaml",
