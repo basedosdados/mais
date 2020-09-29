@@ -5,6 +5,8 @@ from src.dataset import Dataset
 from src.table import Table
 from src.storage import Storage
 
+from src import Downloader
+
 
 @click.group()
 @click.option("--templates", default=None, help="Templates path")
@@ -289,7 +291,7 @@ def delete_table(ctx, dataset_id, table_id, mode):
     help="[raise|replace|pass] if file alread exists",
 )
 @click.pass_context
-def upload_storage(ctx, dataset_id, table_id, filepath, partitions, if_exists):
+def upload_table(ctx, dataset_id, table_id, filepath, partitions, if_exists):
 
     blob_name = Table(dataset_id, table_id, **ctx.obj).append(
         filepath=filepath, partitions=partitions, if_exists=if_exists
@@ -385,10 +387,65 @@ def init_refresh_templates(ctx):
     Base(**ctx.obj)._refresh_templates()
 
 
+@click.group(name="download")
+def cli_download():
+    pass
+
+
+@click.command(
+    name="download",
+    help="Download data. "
+    "You can add extra arguments accepted by pandas.to_csv. "
+    "Examples: --delimiter='|', --index=False",
+    context_settings=dict(
+        ignore_unknown_options=True,
+        allow_extra_args=True,
+    ),
+)
+@click.argument("savepath", type=click.Path(exists=False))
+@click.option(
+    "--dataset_id",
+    default=None,
+    help="Dataset_id, enter with table_id to download table",
+)
+@click.option(
+    "--table_id",
+    default=None,
+    help="Table_id, enter with dataset_id to download table ",
+)
+@click.option(
+    "--query",
+    default=None,
+    help="A SQL Standard query to download data from BigQuery",
+)
+@click.pass_context
+def download(ctx, dataset_id, table_id, savepath, query):
+
+    pandas_kwargs = dict()
+    for item in ctx.args:
+        pandas_kwargs.update([item.replace("--", "").split("=")])
+
+    blob_name = Downloader(**ctx.obj).download(
+        savepath=savepath,
+        dataset_id=dataset_id,
+        table_id=table_id,
+        query=query,
+        **pandas_kwargs,
+    )
+
+    click.echo(
+        click.style(
+            f"Table was downloaded to `{savepath}`",
+            fg="green",
+        )
+    )
+
+
 cli.add_command(cli_dataset)
 cli.add_command(cli_table)
 cli.add_command(cli_storage)
 cli.add_command(cli_config)
+cli.add_command(download)
 
 if __name__ == "__main__":
 
