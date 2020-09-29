@@ -383,3 +383,4 @@ class Table(Base):
         )
 
         self.create(if_exists="replace")
+
