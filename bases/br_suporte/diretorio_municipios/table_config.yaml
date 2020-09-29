@@ -41,7 +41,7 @@ partitions: # REQUIRED
 
 # How often is data updated?
 # Hora | Dia | Semana | Mês | Único 
-data_update_frequency: recorrente # REQUIRED 
+data_update_frequency: ano # REQUIRED 
 
 # All data has a license. If it is public, feel free to just use MIT. If not,
 # please point out the license to our users.
