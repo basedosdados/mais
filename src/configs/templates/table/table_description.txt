@@ -17,10 +17,10 @@ Tratado por
 Nome: {{ treated_by.name }}
 {% if "<" not in treated_by.code_url -%}
 Código: {{ treated_by.code_url }}
-{%- endif -%}
+{% endif -%}
 {% if "<" not in treated_by.website -%}
 Website: {{ treated_by.website }}
-{%- endif -%}
+{% endif -%}
 {% if "<" not in treated_by.email -%}
 Email: {{ treated_by.email }}
 {%- endif %}
@@ -30,13 +30,13 @@ Publicado por
 Nome: {{ published_by.name }}
 {% if "<" not in published_by.code_url -%}
 Código: {{ published_by.code_url }}
-{%- endif -%}
+{% endif -%}
 {% if "<" not in published_by.website -%}
 Website: {{ published_by.website }}
-{%- endif -%}
+{% endif -%}
 {% if "<" not in published_by.email -%}
 Email: {{ published_by.email }}
-{%- endif %}
+{% endif %}
 
 Licença
 -------
