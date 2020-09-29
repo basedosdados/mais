@@ -3,138 +3,213 @@ dataset_id: br_suporte # AUTO GENERATED
 
 last_updated: <date> # AUTO GENERATED
 
+# Describe the table. This is the first words that a new user will look at.
+# You don't need to be too concise, fell free to give some examples on 
+# how to use this data. Maybe some research, application, etc that was 
+# developed using it.
 description: |  # REQUIRED
     <table-description>
 
+# Who treated the data? There are sometimes that another insitution gets 
+# the raw data and treats it to the public. Sometimes, it was just you.
 treated_by:
-    name: <institution-name> [IBGE, TSE] # REQUIRED
-    website: <where to find raw data>
-    email: <>
-    logo: <logo-url>
+    name: <institution-name [IBGE, TSE]>  # REQUIRED
     code_url: <code-url-that-generated-table> # REQUIRED
+    website: <where to find raw data>
+    email: <name at institution.com>
+    logo: <logo-url>
 
-# Person or institution 
+# Who is completing this config file? Put you name and email here. You will
+# be surprised how many times people will reach you to ask questions about
+# this dataset.
 published_by:
-    name: <institution-name> [IBGE, TSE] # REQUIRED
-    website: <where to find raw data>
-    email: <>
-    logo: <logo-url>
+    name: <your-name [you]>  # REQUIRED
     code_url: <code-url-that-generated-table> # REQUIRED
+    website: <where to find raw data>
+    email: <your at email.com>
+    logo: <your-pic>
 
+# If there was some treatment, what as it about?
 treatment_description: | 
-    CEPESP fez X. Eu fiz K
+    <CEPESP fez X. Eu fiz K>
 
-partitions:  # REQUIRED
+# Make sure to add the columns in the dataset that are partitions. It will
+# help people to query faster and save some money.
+partitions: # REQUIRED
     - <first partition>
     - <second partition>
-    - ...
 
-data_update_frequency: HOURLY | DAILY | WEEKLY | ...  | ONCE  # REQUIRED
+# How often is data updated?
+# Hora | Dia | Semana | Mês | Único 
+data_update_frequency: <frequency> # REQUIRED 
 
+# All data has a license. If it is public, feel free to just use MIT. If not,
+# please point out the license to our users.
+license: 
+    name: MIT # REQUIRED
+    url: <url>
 
-columns:   # REQUIRED
+labels: 
+    - <first label> 
+    - <second label>
+
+# What are the columns? Make sure to write a good description, people will like
+# to know what is the column about. Also, feel free to change some encriptic names
+# to something a bit more explicit.
+# Adding all the columns manually can be quite tiresome, that is why, when 
+# initializing this config file, you can point the function to a data sample that
+# will auto fill the columns.
+# Some columns will just exist in the final table, you will build them at 
+# `publish.sql` query. For those, set is_in_staging to False.
+# Also, you have to add the partition columns here and set is_partition to True.
+columns: # REQUIRED
+  
     -   
-        name: id_munic_7
+        name: id_municipio
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
-        name: id_munic_6
+        name: id_municipio_6
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
-        name: id_TSE
+        name: id_municipio_TSE
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
-        name: id_RF
+        name: id_municipio_RF
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
-        name: id_BCB
+        name: id_municipio_BCB
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
         name: municipio
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: capital_estado
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
         name: id_comarca
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
         name: id_regiao_saude
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
         name: regiao_saude
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_regiao_imediata
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: regiao_imediata
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_regiao_intermediaria
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: regiao_intermediaria
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_microrregiao
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: microrregiao
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_mesorregiao
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mesorregiao
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
         name: id_estado
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
         name: estado_abrev
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
         name: estado
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: regiao
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
         name: existia_1991
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
         name: existia_2000
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-      # REQUIRED
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
     -   
         name: existia_2010
         description: <columns description>
-        type: STRING 
-        is_in_staging: True # <Bool [True, False], whether the column is in the staging table>
-    
-
-# Available Types (https://cloud.google.com/bigquery/docs/schemas)
-# Integer         INT64      Numeric values without fractional components
-# Floating        FLOAT64    Approximate numeric values with fractional components
-# Numeric         NUMERIC    Exact numeric values with fractional components
-# Boolean         BOOL       TRUE or FALSE (case insensitive)
-# String          STRING     Variable-length character (Unicode) data
-# Bytes           BYTES      Variable-length binary data
-# Date            DATE       A logical calendar date
-# Date/Time       DATETIME   A year, month, day, hour, minute, second, and subsecond
-# Time            TIME       A time, independent of a specific date
-# Timestamp       TIMESTAMP  An absolute point in time, with microsecond precision
-# Struct (Record  STRUCT     Container of ordered fields each with a type (required) and field name (optional)
-# Geography       GEOGRAPHY  A pointset on the Earth's surface (a set of points, 
-#                            lines and polygons on the WGS84 reference spheroid, with geodesic edges)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
