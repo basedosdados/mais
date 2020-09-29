@@ -187,12 +187,3 @@ def test_publish(table, metadatadir):
 def test_append(table, metadatadir):
 
     table.append("tests/sample_data/municipios2.csv", if_exists="replace")
-
-
-def test_download(table):
-
-    savepath = Path("tests/tmp_bases/test.csv")
-
-    table.download(savepath)
-
-    assert savepath.exists()
