@@ -1,5 +1,6 @@
 .bases
 bases/pytest/*
+bases/test/
 notebooks
 data
 secrets
