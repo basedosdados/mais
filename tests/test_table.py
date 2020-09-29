@@ -186,7 +186,7 @@ def test_publish(table, metadatadir):
 
 def test_append(table, metadatadir):
 
-    table.append("tests/sample_data/municipios2.csv")
+    table.append("tests/sample_data/municipios2.csv", if_exists="replace")
 
 
 def test_download(table):

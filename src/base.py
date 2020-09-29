@@ -52,6 +52,16 @@ class Base:
             bucket_name=self.bucket_name,
         )
 
+    @staticmethod
+    def _input_validator(context, default):
+
+        var = input(context)
+
+        if var:
+            return var
+        else:
+            return default
+
     def _init_config(self, force):
 
         # Create config folder
@@ -112,12 +122,13 @@ class Base:
                 "[press enter to continue]"
             )
 
-            project_staging = input(
+            project_staging = self._input_validator(
                 "\n********* STEP 4 **********\n"
                 "What is the Google Cloud Project that you are going to be using "
                 "to upload and treat data? It might be something with 'staging'"
                 "in the name. If you just have one project, put its name.\n"
-                "Project id [basedosdados-staging]: "
+                "Project id [basedosdados-staging]: ",
+                "basedosdados-staging",
             )
 
             res = (
@@ -135,18 +146,20 @@ class Base:
                     project_prod = project_staging
                     break
                 elif res == "n":
-                    project_prod = input(
+                    project_prod = self._input_validator(
                         "What is the production Google Cloud Project then?\n"
-                        "Project id [basedosdados]: "
+                        "Project id [basedosdados]: ",
+                        "basedosdados",
                     )
                     break
                 else:
                     print(f"{res} is not accepted as an awnser. Try y or n.\n")
 
-            bucket_name = input(
+            bucket_name = self._input_validator(
                 "\n********* STEP 6 **********\n"
                 "What is the Storage Bucket that you are going to be using to save the data?\n"
-                "Bucket name [basedosdados]: "
+                "Bucket name [basedosdados]: ",
+                "basedosdados",
             )
 
             c_file["gcloud-projects"]["staging"] = project_staging
