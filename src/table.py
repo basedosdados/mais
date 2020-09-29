@@ -223,8 +223,11 @@ class Table(Base):
 
             job_config_params = dict(
                 write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
+                allow_quoted_newlines=True,
+                allow_jagged_rows=True,
                 source_format=bigquery.SourceFormat.CSV,
                 skip_leading_rows=1,
+                max_bad_records=10,
             )
 
         if isinstance(job_config_params, dict):
