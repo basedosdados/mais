@@ -5,7 +5,7 @@ from src.dataset import Dataset
 from src.table import Table
 from src.storage import Storage
 
-from src import Downloader
+from src import download
 
 
 @click.group()
@@ -387,11 +387,6 @@ def init_refresh_templates(ctx):
     Base(**ctx.obj)._refresh_templates()
 
 
-@click.group(name="download")
-def cli_download():
-    pass
-
-
 @click.command(
     name="download",
     help="Download data. "
@@ -418,18 +413,24 @@ def cli_download():
     default=None,
     help="A SQL Standard query to download data from BigQuery",
 )
+@click.option(
+    "--limit",
+    default=None,
+    help="Number of rows returned",
+)
 @click.pass_context
-def download(ctx, dataset_id, table_id, savepath, query):
+def cli_download(ctx, dataset_id, table_id, savepath, query, limit):
 
     pandas_kwargs = dict()
     for item in ctx.args:
         pandas_kwargs.update([item.replace("--", "").split("=")])
 
-    blob_name = Downloader(**ctx.obj).download(
+    download(
         savepath=savepath,
         dataset_id=dataset_id,
         table_id=table_id,
         query=query,
+        limit=limit,
         **pandas_kwargs,
     )
 
@@ -445,7 +446,7 @@ cli.add_command(cli_dataset)
 cli.add_command(cli_table)
 cli.add_command(cli_storage)
 cli.add_command(cli_config)
-cli.add_command(download)
+cli.add_command(cli_download)
 
 if __name__ == "__main__":
 

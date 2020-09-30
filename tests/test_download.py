@@ -16,9 +16,18 @@ def test_download():
 
     assert savepath.exists()
 
+    savepath = Path("tests/tmp_bases/")
+
+    download(
+        savepath,
+        query="select * from `basedosdados.pytest.pytest` limit 10",
+    )
+
+    assert (savepath / "query_result.csv").exists()
+
     with pytest.raises(Exception):
 
-        Downloader().download()
+        download()
 
 
 def test_read_sql():
@@ -34,6 +43,6 @@ def test_read_sql():
 def test_read_table():
 
     assert isinstance(
-        read_table(dataset_id="pytest", table_id="pytest"),
+        read_table(dataset_id="pytest", table_id="pytest", limit=10),
         pd.DataFrame,
     )
