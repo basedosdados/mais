@@ -4,7 +4,7 @@ from google.cloud import bigquery
 import shutil
 from google.api_core.exceptions import NotFound
 
-from src import Dataset, Table, Storage
+from basedosdados import Dataset, Table, Storage
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"

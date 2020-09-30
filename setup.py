@@ -10,6 +10,6 @@ setup(
     ],
     entry_points="""
         [console_scripts]
-        basedosdados=src.cli:cli
+        basedosdados=basedosdados.cli:cli
     """,
 )

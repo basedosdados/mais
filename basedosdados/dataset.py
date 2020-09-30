@@ -3,7 +3,7 @@ from google.cloud import bigquery
 
 from google.api_core.exceptions import Conflict
 
-from src.base import Base
+from basedosdados.base import Base
 
 
 class Dataset(Base):

@@ -7,9 +7,9 @@ from google.cloud import bigquery
 
 import google.api_core.exceptions
 
-from src.base import Base
-from src.storage import Storage
-from src.dataset import Dataset
+from basedosdados.base import Base
+from basedosdados.storage import Storage
+from basedosdados.dataset import Dataset
 
 
 class Table(Base):
