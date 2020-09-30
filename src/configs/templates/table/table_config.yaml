@@ -35,12 +35,14 @@ treatment_description: |
 
 # Make sure to add the columns in the dataset that are partitions. It will
 # help people to query faster and save some money.
+# If there is no partitions, leave as it is.
 partitions: # REQUIRED
     - <first partition>
     - <second partition>
 
 # How often is data updated?
-# Hora | Dia | Semana | Mês | Único 
+# Some options below, fell free to write one that fits your data
+# A cada hora | Diariamente | Semanalmente | Mensalmente | Uma vez | Recorrentemente
 data_update_frequency: <frequency> # REQUIRED 
 
 # All data has a license. If it is public, feel free to just use MIT. If not,

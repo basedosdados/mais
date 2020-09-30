@@ -1,37 +1,37 @@
 table_id: diretorio_municipios # AUTO GENERATED
 dataset_id: br_suporte # AUTO GENERATED
 
-last_updated: <date> # AUTO GENERATED
+last_updated: 2020-09-29 # AUTO GENERATED
 
 # Describe the table. This is the first words that a new user will look at.
 # You don't need to be too concise, fell free to give some examples on 
 # how to use this data. Maybe some research, application, etc that was 
 # developed using it.
 description: |  # REQUIRED
-    <table-description>
+    Diretório ligando todos os códigos de municípios brasileiros entre instituições (IBGE, TSE, Receita Federal, Banco Central, etc.). Inclui também informações sobre áreas geográficas e estados.
 
 # Who treated the data? There are sometimes that another insitution gets 
 # the raw data and treats it to the public. Sometimes, it was just you.
 treated_by:
-    name: <institution-name [IBGE, TSE]>  # REQUIRED
+    name: Ricardo Dahis
     code_url: <code-url-that-generated-table> # REQUIRED
-    website: <where to find raw data>
-    email: <name at institution.com>
+    website: http://basedosdados.org/dataset/diretorio-municipios-brasileiros
+    email: rdahis@basedosdados.org
     logo: <logo-url>
 
 # Who is completing this config file? Put you name and email here. You will
 # be surprised how many times people will reach you to ask questions about
 # this dataset.
 published_by:
-    name: <your-name [you]>  # REQUIRED
+    name: Ricardo Dahis  # REQUIRED
     code_url: <code-url-that-generated-table> # REQUIRED
-    website: <where to find raw data>
-    email: <your at email.com>
+    website: http://basedosdados.org/dataset/diretorio-municipios-brasileiros
+    email: rdahis@basedosdados.org
     logo: <your-pic>
 
 # If there was some treatment, what as it about?
 treatment_description: | 
-    <CEPESP fez X. Eu fiz K>
+    Dados cruzados e manualmente checados a partir de diferentes fontes.
 
 # Make sure to add the columns in the dataset that are partitions. It will
 # help people to query faster and save some money.
@@ -41,7 +41,7 @@ partitions: # REQUIRED
 
 # How often is data updated?
 # Hora | Dia | Semana | Mês | Único 
-data_update_frequency: <frequency> # REQUIRED 
+data_update_frequency: Recorrente # REQUIRED 
 
 # All data has a license. If it is public, feel free to just use MIT. If not,
 # please point out the license to our users.
@@ -50,8 +50,7 @@ license:
     url: <url>
 
 labels: 
-    - <first label> 
-    - <second label>
+    - diretorio
 
 # What are the columns? Make sure to write a good description, people will like
 # to know what is the column about. Also, feel free to change some encriptic names
@@ -63,153 +62,154 @@ labels:
 # `publish.sql` query. For those, set is_in_staging to False.
 # Also, you have to add the partition columns here and set is_partition to True.
 columns: # REQUIRED
-  
+
     -   
         name: id_municipio
-        description: <columns description>
+        description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_municipio_6
-        description: <columns description>
+        description: ID Município - IBGE 6 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_municipio_TSE
-        description: <columns description>
+        description: ID Município - TSE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_municipio_RF
-        description: <columns description>
+        description: ID Município - Receita Federal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_municipio_BCB
-        description: <columns description>
+        description: ID Município - Banco Central do Brasil
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: municipio
-        description: <columns description>
+        description: Nome Município
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: capital_estado
-        description: <columns description>
+        description: Capital de Estado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_comarca
-        description: <columns description>
+        description: ID Sede Comarca
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_regiao_saude
-        description: <columns description>
+        description: ID Região de Saúde
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: regiao_saude
-        description: <columns description>
+        description: Região de Saúde
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_regiao_imediata
-        description: <columns description>
+        description: ID Região Imediata - IBGE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: regiao_imediata
-        description: <columns description>
+        description: Região Imediata
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_regiao_intermediaria
-        description: <columns description>
+        description: ID Região Intermediária - IBGE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: regiao_intermediaria
-        description: <columns description>
+        description: Região Intermediária
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_microrregiao
-        description: <columns description>
+        description: ID Microrregião
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: microrregiao
-        description: <columns description>
+        description: Microrregião
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_mesorregiao
-        description: <columns description>
+        description: ID Mesorregião - IBGE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mesorregiao
-        description: <columns description>
+        description: Mesorregião
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_estado
-        description: <columns description>
+        description: ID Estado - IBGE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: estado_abrev
-        description: <columns description>
+        description: Estado Abreviado (UF)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: estado
-        description: <columns description>
+        description: Estado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: regiao
-        description: <columns description>
+        description: Região
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: existia_1991
-        description: <columns description>
+        description: Município Existia em 1991
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: existia_2000
-        description: <columns description>
+        description: Município Existia em 2000
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: existia_2010
-        description: <columns description>
+        description: Município Existia em 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+  
