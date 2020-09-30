@@ -4,4 +4,3 @@ google-cloud-bigquery-storage==1.1.0
 pyaml==20.4.0
 Jinja2==2.11.2
 tomlkit==0.7.0
-pandas-gbq==0.13.2
