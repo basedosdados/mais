@@ -1,8 +1,13 @@
 {{ description }}
 
-{% if data_update_frequency != 'Único'  -%}
-Os dados são atualizados a cada {{ data_update_frequency }}.
-{% endif %}
+Tratamento
+----------
+{{ treatment_description }}
+
+Frequencia de Atualização
+-------------------------
+{{ data_update_frequency }}.
+
 {% if ((partitions is not none) and
        ("<" not in partitions[0])) -%}
 Partições
@@ -36,7 +41,7 @@ Website: {{ published_by.website }}
 {% endif -%}
 {% if "<" not in published_by.email -%}
 Email: {{ published_by.email }}
-{% endif %}
+{%- endif %}
 
 Licença
 -------
