@@ -1,11 +1,11 @@
 import click
 
-from src.base import Base
-from src.dataset import Dataset
-from src.table import Table
-from src.storage import Storage
+from basedosdados.base import Base
+from basedosdados.dataset import Dataset
+from basedosdados.table import Table
+from basedosdados.storage import Storage
 
-from src import download
+from basedosdados import download
 
 
 @click.group()

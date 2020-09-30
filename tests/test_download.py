@@ -2,7 +2,7 @@ import pytest
 from pathlib import Path
 import pandas as pd
 
-from src import download, read_sql, read_table
+from basedosdados import download, read_sql, read_table
 
 
 def test_download():
@@ -11,7 +11,7 @@ def test_download():
 
     download(
         savepath,
-        query="select * from `basedosdados.pytest.pytest` limit 10",
+        query="select * from `basedosdados.br_suporte.diretorio_municipios` limit 10",
     )
 
     assert savepath.exists()
@@ -20,7 +20,7 @@ def test_download():
 
     download(
         savepath,
-        query="select * from `basedosdados.pytest.pytest` limit 10",
+        query="select * from `basedosdados.br_suporte.diretorio_municipios` limit 10",
     )
 
     assert (savepath / "query_result.csv").exists()
@@ -34,7 +34,7 @@ def test_read_sql():
 
     assert isinstance(
         read_sql(
-            query="select * from `basedosdados.pytest.pytest` limit 10",
+            query="select * from `basedosdados.br_suporte.diretorio_municipios` limit 10",
         ),
         pd.DataFrame,
     )
@@ -43,6 +43,6 @@ def test_read_sql():
 def test_read_table():
 
     assert isinstance(
-        read_table(dataset_id="pytest", table_id="pytest", limit=10),
+        read_table(dataset_id="br_suporte", table_id="diretorio_municipios", limit=10),
         pd.DataFrame,
     )

@@ -1,4 +1,4 @@
-from pandas import read_gbq
+from google.cloud import bigquery
 from pathlib import Path
 
 
@@ -87,8 +87,8 @@ def read_sql(query):
     pd.DataFrame
         Query result
     """
-
-    return read_gbq(query)
+    client = bigquery.Client()
+    return client.query(query).to_dataframe()
 
 
 def read_table(dataset_id, table_id, project_id="basedosdados", limit=None):

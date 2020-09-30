@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.base import Base
+from basedosdados.base import Base
 
 
 class Storage(Base):

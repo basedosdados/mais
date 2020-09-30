@@ -4,7 +4,7 @@ from google.cloud import bigquery
 import shutil
 from google.api_core.exceptions import Conflict
 
-from src import Dataset
+from basedosdados import Dataset
 
 DATASET_ID = "pytest"
 

@@ -3,7 +3,7 @@ from pathlib import Path
 from google.cloud import storage
 import shutil
 from google.api_core.exceptions import NotFound
-from src import Storage
+from basedosdados import Storage
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
