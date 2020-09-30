@@ -8,6 +8,7 @@ def download(
     dataset_id=None,
     table_id=None,
     project_id="basedosdados",
+    limit=None,
     **pandas_kwargs,
 ):
     """Download table or query result from basedosdados BigQuery.
@@ -41,6 +42,8 @@ def download(
         It should always come with dataset_id.
     project_id: str, optional
         In case you want to use to query another project, by default 'basedosdados'
+    limit: int, optional
+        Number of rows.
     pandas_kwargs:
         All variables accepted by pandas.to_csv
         https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html
@@ -54,8 +57,10 @@ def download(
     savepath = Path(savepath)
 
     if (dataset_id is not None) and (table_id is not None):
-        table = read_table(dataset_id, table_id)
+        table = read_table(dataset_id, table_id, limit=limit)
     elif query is not None:
+        if limit is not None:
+            query += f" limit {limit}"
         table = read_sql(query)
     elif query is None:
         raise Exception("Either table_id, dataset_id or query should be filled.")
