@@ -418,8 +418,13 @@ def cli_download():
     default=None,
     help="A SQL Standard query to download data from BigQuery",
 )
+@click.option(
+    "--limit",
+    default=None,
+    help="Number of rows returned",
+)
 @click.pass_context
-def download(ctx, dataset_id, table_id, savepath, query):
+def download(ctx, dataset_id, table_id, savepath, query, limit):
 
     pandas_kwargs = dict()
     for item in ctx.args:
@@ -430,6 +435,7 @@ def download(ctx, dataset_id, table_id, savepath, query):
         dataset_id=dataset_id,
         table_id=table_id,
         query=query,
+        limit=limit,
         **pandas_kwargs,
     )
 
