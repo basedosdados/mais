@@ -216,7 +216,7 @@ def create_table(
 
     click.echo(
         click.style(
-            f"Table `{dataset_id}.stagging_{table_id}` was created in BigQuery",
+            f"Table `{dataset_id}_staging.{table_id}` was created in BigQuery",
             fg="green",
         )
     )
@@ -239,7 +239,7 @@ def update_table(ctx, dataset_id, table_id, mode):
 
     click.echo(
         click.style(
-            f"All tables `{dataset_id}.{table_id}*` were created in BigQuery",
+            f"All tables `{dataset_id}*.{table_id}` were updated in BigQuery",
             fg="green",
         )
     )
