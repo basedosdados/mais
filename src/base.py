@@ -6,6 +6,8 @@ import shutil
 import tomlkit
 import warnings
 
+from functools import lru_cache
+
 warnings.filterwarnings("ignore")
 
 
@@ -26,8 +28,13 @@ class Base:
         self.templates = Path(templates or self.config["templates_path"])
         self.metadata_path = Path(metadata_path or self.config["metadata_path"])
         self.bucket_name = bucket_name or self.config["bucket_name"]
+        self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
 
-        self.client = dict(
+    @property
+    @lru_cache(256)
+    def client(self):
+
+        return dict(
             bigquery_prod=bigquery.Client(
                 # credentials=self._load_credentials("prod"),
                 project=self.config["gcloud-projects"]["prod"],
@@ -41,7 +48,6 @@ class Base:
                 project=self.config["gcloud-projects"]["staging"],
             ),
         )
-        self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
 
     @property
     def main_vars(self):
