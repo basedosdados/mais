@@ -1,0 +1,26 @@
+Diretório de informações sobre estados brasileiros baseado em bases do IBGE.
+
+
+Tratamento
+----------
+Simplificação do diretório de municípios só com informações de estados.
+
+
+Frequencia de Atualização
+-------------------------
+Recorrente.
+
+
+Tratado por
+-----------
+Nome: Ricardo Dahis
+Email: rdahis@basedosdados.org
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Email: rdahis@basedosdados.org
+
+Licença
+-------
+Nome: MIT
