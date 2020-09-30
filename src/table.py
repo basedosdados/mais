@@ -297,6 +297,16 @@ class Table(Base):
             table.description = self._render_template(
                 "table/table_description.txt", self.table_config
             )
+
+            # save table description
+            open(
+                self.metadata_path
+                / self.dataset_id
+                / self.table_id
+                / "table_description.txt",
+                "w",
+            ).write(table.description)
+
             table.schema = self._load_schema(m)
 
             self.client[f"bigquery_{m}"].update_table(
@@ -386,4 +396,3 @@ class Table(Base):
         )
 
         self.create(if_exists="replace")
-

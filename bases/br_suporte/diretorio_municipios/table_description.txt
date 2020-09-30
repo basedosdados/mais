@@ -1,0 +1,22 @@
+Diretório ligando todos os códigos de municípios brasileiros entre instituições (IBGE, TSE, Receita Federal, Banco Central, etc.). Inclui também informações sobre áreas geográficas e estados.
+
+
+Os dados são atualizados a cada ano.
+
+
+Tratado por
+-----------
+Nome: Ricardo Dahis
+Website: http://basedosdados.org/dataset/diretorio-municipios-brasileiros
+Email: rdahis@basedosdados.org
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Website: http://basedosdados.org/dataset/diretorio-municipios-brasileiros
+Email: rdahis@basedosdados.org
+
+
+Licença
+-------
+Nome: MIT
