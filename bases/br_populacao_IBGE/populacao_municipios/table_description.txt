@@ -1,0 +1,19 @@
+<table-description>
+
+
+Os dados são atualizados a cada <frequency>.
+
+
+Tratado por
+-----------
+Nome: <institution-name [IBGE, TSE]>
+
+
+Publicado por
+-------------
+Nome: <your-name [you]>
+
+
+Licença
+-------
+Nome: MIT

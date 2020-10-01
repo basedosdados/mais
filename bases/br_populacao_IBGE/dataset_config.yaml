@@ -1,0 +1,14 @@
+dataset_id: br_populacao_IBGE # AUTO GENERATED
+
+# Describe the dataset. What is it about? What does the institution that 
+# provides the data takes care of?
+description: | # REQUIRED
+    Dados de população brasileira providos pelo IBGE.
+
+# The institution where the data came from. This should point to a place to
+# find raw data.
+source_institution:
+    name: IBGE
+    website: https://www.ibge.gov.br/https://www.ibge.gov.br/estatisticas/sociais/populacao.html
+    email: ibge@ibge.gov.br
+    logo: <logo-url>

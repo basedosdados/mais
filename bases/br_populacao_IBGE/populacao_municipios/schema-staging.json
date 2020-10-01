@@ -1,0 +1,1 @@
+[{"name": "id_municipio", "description": "<columns description>", "is_in_staging": true, "is_partition": false, "type": "STRING"}, {"name": "ano", "description": "<columns description>", "is_in_staging": true, "is_partition": false, "type": "STRING"}, {"name": "populacao", "description": "<columns description>", "is_in_staging": true, "is_partition": false, "type": "STRING"}]
