@@ -1,18 +1,18 @@
-<table-description>
+Dados de população a nível município-ano. Construído com base em Censos (1991, 2000, 2010) e estimativas do IBGE. As estimativas do total da população tem data de referência 1o de julho.
 
 
-Os dados são atualizados a cada <frequency>.
+Os dados são atualizados a cada ano.
 
 
 Tratado por
 -----------
-Nome: <institution-name [IBGE, TSE]>
-
+Nome: IBGE
+Website: https://www.ibge.gov.br/estatisticas/sociais/populacao.htmlEmail: ibge@ibge.gov.br
 
 Publicado por
 -------------
-Nome: <your-name [you]>
-
+Nome: Ricardo Dahis
+Website: www.ricardodahis.comEmail: rdahis@basedosdados.org
 
 Licença
 -------
