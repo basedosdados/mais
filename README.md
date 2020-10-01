@@ -1,4 +1,14 @@
-# A Base dos Dados  🗂️
+<p align="center">
+  <a href="https://squidfunk.github.io/mkdocs-material/">
+    <img src="https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4" width="320" alt="Base dos Dados">
+  </a>
+</p>
+
+<p align="center">
+  <strong>
+    Algum Slogan Legal
+  </strong>
+</p>
 
 O intuito do projeto é organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery.
 Qualquer pessoa poderá fazer queries em bases tratadas e documentadas que estarão disponíveis e estáveis.
