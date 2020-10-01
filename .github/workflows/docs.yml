@@ -12,4 +12,6 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material
+      - env:
+          GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
       - run: mkdocs gh-deploy --force
