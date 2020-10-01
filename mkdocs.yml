@@ -17,13 +17,6 @@ extra:
   social:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/basedosdados?lang=en
+
 nav:
   - Introduction: index.md
-
-markdown_extensions:
-  - codehilite
-  - admonition
-  - toc:
-      permalink: 
-  - markdown_include.include:
-      base_path: docs
