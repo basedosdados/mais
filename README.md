@@ -20,7 +20,9 @@ Sabemos que estruturar os dados em uma plataforma privada não é o ideal para u
 - O BigQuery escala magicamente para hexabytes se necessário
 - O custo é praticamente zero para usuários. São cobrados somente 5 dólares por terabyte de dados que sua query percorrer, e os primeiros 5 terabytes são gratuitos.
 
-#### Desenvolvimento
+### Desenvolvimento
+
+#### CLI
 
 Suba o CLI localmente
 
@@ -29,6 +31,8 @@ make create-env
 . .bases/bin/activate
 ```
 
+#### Versionamento
+
 Publique nova versão
 
 ```sh
@@ -36,4 +40,14 @@ poetry version [patch|minor|major]
 poetry publish --build
 ```
 
+#### Docs
+Atualize os docs adicionando ou editando `.md` em `docs/`.
+
+Se for adicionar um arquivo novo, adicione ele em `mkdocs.yml` sob a chave `nav`.
+
+Para testar a documentação, rode:
+
+```sh
+mkdocs serve 
+```
 
