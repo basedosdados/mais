@@ -88,7 +88,15 @@ def read_sql(query):
         Query result
     """
     client = bigquery.Client()
-    return client.query(query).to_dataframe()
+    try:
+        return client.query(query).to_dataframe()
+    except OSError:
+        raise OSError (
+            'The project could not be determined.\n'
+            'Set the project with `gcloud config set project <project_id>`.\n'
+            'Where <project_id> is your Google Cloud Project ID that can be found '
+            'here https://console.cloud.google.com/projectselector2/home/dashboard \n'
+    )
 
 
 def read_table(dataset_id, table_id, project_id="basedosdados", limit=None):
