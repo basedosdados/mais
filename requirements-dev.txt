@@ -10,3 +10,4 @@ ipykernel
 jupyter
 poetry
 mkdocs
+mkdocs-material
