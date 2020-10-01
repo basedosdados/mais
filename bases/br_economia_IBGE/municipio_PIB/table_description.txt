@@ -1,0 +1,21 @@
+O IBGE, em parceria com os Órgãos Estaduais de Estatística, as Secretarias Estaduais de Governo e a Superintendência da Zona Franca de Manaus - Suframa, divulga, nesta publicação, as estimativas do Produto Interno Bruto - PIB dos Municípios - referência 2010. Os resultados são comparáveis entre si e estão completamente integrados às séries das Contas Nacionais e das Contas Regionais do Brasil, em conformidade, portanto, com o novo manual System of national accounts 2008, SNA 2008, e com a Classificação Nacional de Atividades Econômicas - CNAE 2.0.
+
+São apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica – Agropecuária, Indústria e Serviços – bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita. Destaca-se o valor adicionado bruto da Administração, saúde e educação públicas e seguridade social, devido à relevância deste segmento na economia municipal. A análise dos resultados, ilustrada por meio de tabelas, quadros, gráficos e cartogramas, enfoca aspectos econômicos de abrangência nacional, regional e municipal.
+
+
+Os dados são atualizados a cada ano.
+
+
+Tratado por
+-----------
+Nome: IBGE
+Website: https://sidra.ibge.gov.br/tabela/5938Email: ibge@ibge.gov.br
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Website: www.ricardodahis.comEmail: rdahis@basedosdados.org
+
+Licença
+-------
+Nome: MIT
