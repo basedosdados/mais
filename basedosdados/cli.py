@@ -182,7 +182,7 @@ def init_table(ctx, dataset_id, table_id, data_sample_path, if_exists):
     "--partitioned",
     "-p",
     default=False,
-    help="[True|False] whether table is partitioned",
+    help="[True|False] whether folder has partitions",
 )
 @click.option(
     "--if_exists",
