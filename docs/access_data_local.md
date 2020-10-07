@@ -47,16 +47,11 @@ Obtendo toda a tabela (ou limitada) em CSV:
              limit=1000)
     ```
 
-!!! Info
-    Por padrão, o BigQuery escolhido para puxar os dados é
-    `basedosdados` - você pode mudar para o seu explicitando
-    `project_id`.
-
-    
 === "CLI"
     ```bash
     $ basedosdados download --dataset_id "br_suporte" --table_id "diretorio_municipios" --limit 1000
     ```
+
 === "R"
     ```bash
     Ainda não temos suporte :( -- TODO: add com a ferramenta do GCD em R
@@ -69,6 +64,11 @@ Obtendo toda a tabela (ou limitada) em CSV:
 
     >> Seja a primeira pessoa a contribuir (veja Issue #83 no GitHub)!
     ```
+
+!!! Info
+    Por padrão, o BigQuery escolhido para puxar os dados é
+    `basedosdados` - você pode mudar para o seu explicitando
+    `project_id`.
 
 Baixando a tabela com filtros ou condicionais:
 
