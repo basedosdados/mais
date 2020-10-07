@@ -4,6 +4,7 @@ import json
 import csv
 from copy import deepcopy
 from google.cloud import bigquery
+import datetime
 
 import google.api_core.exceptions
 
@@ -123,7 +124,9 @@ class Table(Base):
             if data_sample_path.is_dir():
 
                 data_sample_path = [
-                    f for f in data_sample_path.glob("**/*") if f.is_file()
+                    f
+                    for f in data_sample_path.glob("**/*")
+                    if f.is_file() and f.suffix == ".csv"
                 ][0]
 
                 partition_columns = [
@@ -156,6 +159,7 @@ class Table(Base):
                     project_id=self.client["bigquery_staging"].project,
                     columns=columns,
                     partition_columns=partition_columns,
+                    now=datetime.datetime.now().strftime('%Y-%m-%d')
                 )
 
                 # Write file

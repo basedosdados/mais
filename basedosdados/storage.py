@@ -1,4 +1,5 @@
 from pathlib import Path
+from tqdm import tqdm
 
 from basedosdados.base import Base
 
@@ -149,7 +150,7 @@ class Storage(Base):
         path = Path(path)
 
         if path.is_dir():
-            paths = [f for f in path.glob("**/*") if f.is_file()]
+            paths = [f for f in path.glob("**/*") if f.is_file() and f.suffix == ".csv"]
 
             parts = [
                 (
@@ -164,7 +165,7 @@ class Storage(Base):
             paths = [path]
             parts = [partitions or None]
 
-        for filepath, part in zip(paths, parts):
+        for filepath, part in tqdm(list(zip(paths, parts)), desc="Uploading files"):
 
             blob_name = self._build_blob_name(filepath.name, mode, part)
 
