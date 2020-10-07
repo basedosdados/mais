@@ -5,7 +5,7 @@ theme:
   icon:
     repo: fontawesome/brands/github
   palette:
-    primary: teal
+    primary: green
   language: pt
   # logo: https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4
   favicon: https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4
@@ -28,6 +28,8 @@ nav:
   - Acessando os dados: 
     - BigQuery: access_data_bq.md
     - Local: access_data_local.md
+  - Nomeclatura: 
+    - Regras de nomeação: naming_rules.md
 
 markdown_extensions:
   - admonition
@@ -42,3 +44,10 @@ markdown_extensions:
 google_analytics:
   - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
   - auto
+
+extra_javascript:
+- js/termynal.js
+- js/custom.js
+
+extra_css:
+- css/termynal.css

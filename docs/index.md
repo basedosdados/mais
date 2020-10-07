@@ -1,6 +1,54 @@
-# A Base dos Dados  🗂️
+<!-- Header -->
+<p align="center">
+  <a href="https://base-dos-dados.github.io/bases/">
+    <img src="https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4" width="320" alt="Base dos Dados">
+  </a>
+</p>
 
-## Quick Start
+<p align="center">
+    <em>O mais completo mecanismo de busca e <b>consulta</b> a bases de dados brasileiras e internacionais.</em>
+</p>
+
+---
+
+<div align="center">
+    <a align="center"
+    href="https://console.cloud.google.com/bigquery?p=basedosdados&page=project"
+    title="{{ lang.t('source.link.title')}}" class="md-button">
+        Clique para acessar o projeto no BigQuery
+    </a>
+</div>
+
+
+Uma simples consulta de SQL é o suficiente para cruzamento de bases que
+você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor
+e subir clusters.
+
+Por que o BigQuery?
+
+**TODO: add infografico**
+
+- **Acesso**: É possível deixar os dados públicos, i.e., qualquer
+  pessoa com uma conta no Google Cloud pode fazer uma query na base,
+  quando quiser.
+- **Rapidez**: Uma query muito longa não demora menos de minutos para
+  ser processada.
+- **Escala**: O BigQuery escala magicamente para hexabytes se necessário.
+- **Facilidade**: Você pode cruzar tabelas de diferentes organizações, temas,
+  tudo numa só query.
+- **Economia**: O custo é praticamente zero para usuários - **1
+  TB gratuito por mês para usar como quiser**. Depois disso, são cobrados
+  somente 5 dólares por TB de dados que sua query percorrer.
+
+----
+
+# Quick Start
+
+<div class="termy">
+    ```console
+    $ pip3 install basedosdados
+    ```
+</div>
 
 - [Acessando os dados pelo BigQuery](access_data_bq)
 - [Acessando os dados localmente](access_data_local)
