@@ -1,5 +1,13 @@
 # A Base dos Dados  🗂️
 
+## Quick Start
+
+- [Acessando os dados pelo BigQuery](access_data_bq)
+- [Acessando os dados localmente](access_data_local)
+- **TODO: organizar essa intro**
+
+## Sobre o projeto
+
 O intuito do projeto é organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery.
 Qualquer pessoa poderá fazer queries em bases tratadas e documentadas que estarão disponíveis e estáveis.
 
