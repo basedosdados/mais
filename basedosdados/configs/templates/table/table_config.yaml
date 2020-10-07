@@ -37,8 +37,9 @@ treatment_description: |
 # help people to query faster and save some money.
 # If there is no partitions, leave as it is.
 partitions: # REQUIRED
-    - <first partition>
-    - <second partition>
+{%- for column in partition_columns %}  
+    - {{ column }}
+{% endfor -%}
 
 # How often is data updated?
 # Some options below, fell free to write one that fits your data
