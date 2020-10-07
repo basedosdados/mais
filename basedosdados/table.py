@@ -132,8 +132,6 @@ class Table(Base):
                     if "=" in k
                 ]
 
-                print(partition_columns)
-
             if data_sample_path.suffix == ".csv":
 
                 columns = next(csv.reader(open(data_sample_path, "r")))
@@ -263,7 +261,7 @@ class Table(Base):
         if partitioned:
 
             hive_partitioning = bigquery.external_config.HivePartitioningOptions()
-            hive_partitioning.mode = "AUTO"
+            hive_partitioning.mode = "STRINGS"
             hive_partitioning.source_uri_prefix = self.uri.format(
                 dataset=self.dataset_id, table=self.table_id
             ).replace("*", "")
