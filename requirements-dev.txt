@@ -11,3 +11,4 @@ jupyter
 poetry
 mkdocs
 mkdocs-material
+flake8

@@ -20,7 +20,9 @@ def metadatadir(tmpdir_factory):
 @pytest.fixture
 def table(metadatadir):
 
-    return Table(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir)
+    t = Table(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir)
+    t._refresh_templates()
+    return t
 
 
 def check_files(folder):
@@ -151,6 +153,19 @@ def test_create_partitioned(metadatadir):
     table_part.update(mode="staging")
 
     table_part.publish(if_exists="replace")
+
+
+def test_create_auto_partitions(metadatadir):
+
+    table_part = Table(
+        dataset_id=DATASET_ID,
+        table_id=TABLE_ID + "_autopartitioned",
+        metadata_path=metadatadir,
+    )
+
+    table_part.create(
+        "tests/sample_data/partitions", partitioned=True, if_exists="replace"
+    )
 
 
 def test_update(table):

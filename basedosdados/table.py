@@ -110,6 +110,7 @@ class Table(Base):
             elif if_exists == "pass":
                 return self
 
+        partition_columns = []
         if isinstance(
             data_sample_path,
             (
@@ -117,7 +118,22 @@ class Table(Base):
                 PosixPath,
             ),
         ):
+            # Check if partitioned and get data sample and partition columns
             data_sample_path = Path(data_sample_path)
+            if data_sample_path.is_dir():
+
+                data_sample_path = [
+                    f for f in data_sample_path.glob("**/*") if f.is_file()
+                ][0]
+
+                partition_columns = [
+                    k.split("=")[0]
+                    for k in str(data_sample_path).split("/")
+                    if "=" in k
+                ]
+
+                print(partition_columns)
+
             if data_sample_path.suffix == ".csv":
 
                 columns = next(csv.reader(open(data_sample_path, "r")))
@@ -126,7 +142,9 @@ class Table(Base):
                 raise NotImplementedError(
                     "Data sample just supports comma separated csv files"
                 )
+
         else:
+
             columns = ["column_name"]
 
         for file in (Path(self.templates) / "table").glob("*"):
@@ -139,6 +157,7 @@ class Table(Base):
                     dataset_id=self.dataset_folder.stem,
                     project_id=self.client["bigquery_staging"].project,
                     columns=columns,
+                    partition_columns=partition_columns,
                 )
 
                 # Write file
@@ -148,7 +167,7 @@ class Table(Base):
 
     def create(
         self,
-        filepath=None,
+        path=None,
         job_config_params=None,
         partitioned=False,
         if_exists="raise",
@@ -156,7 +175,7 @@ class Table(Base):
     ):
         """Creates BigQuery table at staging dataset.
 
-        If you add a filepath, it automatically saves the data in the storage,
+        If you add a path, it automatically saves the data in the storage,
         creates a datasets folder and BigQuery location, besides creating the
         table and its configuration files.
 
@@ -176,7 +195,7 @@ class Table(Base):
 
         Parameters
         ----------
-        filepath : str or pathlib.PosixPath
+        path : str or pathlib.PosixPath
             Where to find the file that you want to upload to create a table with
         job_config_params : dict, optional
             Job configuration params from bigquery, by default None
@@ -192,9 +211,9 @@ class Table(Base):
             exists.
         """
 
-        # Add data to storage
+        # Add data to storaged
         if isinstance(
-            filepath,
+            path,
             (
                 str,
                 PosixPath,
@@ -202,7 +221,7 @@ class Table(Base):
         ):
 
             Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
-                filepath, mode="staging", if_exists="replace"
+                path, mode="staging", if_exists="replace"
             )
 
             # Create Dataset if it doesn't exist
@@ -217,7 +236,7 @@ class Table(Base):
 
                 dataset_obj.create(if_exists="pass")
 
-            self.init(data_sample_path=filepath, if_exists="replace")
+            self.init(data_sample_path=path, if_exists="replace")
 
         if job_config_params is None:
 
@@ -392,7 +411,11 @@ class Table(Base):
         """
 
         Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
-            filepath, mode="staging", partitions=None, if_exists="raise", **upload_args
+            filepath,
+            mode="staging",
+            partitions=None,
+            if_exists=if_exists,
+            **upload_args,
         )
 
         self.create(if_exists="replace")
