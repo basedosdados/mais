@@ -1,7 +1,7 @@
 table_id: {{ table_id }} # AUTO GENERATED
 dataset_id: {{ dataset_id }} # AUTO GENERATED
 
-last_updated: <date> # AUTO GENERATED
+last_updated: {{ now }} # AUTO GENERATED
 
 # Describe the table. This is the first words that a new user will look at.
 # You don't need to be too concise, fell free to give some examples on 
@@ -39,7 +39,7 @@ treatment_description: |
 partitions: # REQUIRED
 {%- for column in partition_columns %}  
     - {{ column }}
-{% endfor -%}
+{%- endfor %}
 
 # How often is data updated?
 # Some options below, fell free to write one that fits your data

@@ -44,8 +44,6 @@ class Table(Base):
         columns = self.table_config["columns"]
 
         if mode == "staging":
-            for c in columns:
-                c["type"] = "STRING"
 
             columns = [c for c in columns if c["is_in_staging"]]
 
@@ -159,7 +157,7 @@ class Table(Base):
                     project_id=self.client["bigquery_staging"].project,
                     columns=columns,
                     partition_columns=partition_columns,
-                    now=datetime.datetime.now().strftime('%Y-%m-%d')
+                    now=datetime.datetime.now().strftime("%Y-%m-%d"),
                 )
 
                 # Write file
@@ -213,7 +211,7 @@ class Table(Base):
             exists.
         """
 
-        # Add data to storaged
+        # Add data to storage
         if isinstance(
             path,
             (
@@ -240,27 +238,15 @@ class Table(Base):
 
             self.init(data_sample_path=path, if_exists="replace")
 
-        if job_config_params is None:
+        external_config = external_config = bigquery.ExternalConfig("CSV")
+        external_config.options.skip_leading_rows = 1
+        external_config.options.allow_quoted_newlines = True
+        external_config.options.allow_jagged_rows = True
+        external_config.autodetect = True
 
-            job_config_params = dict(
-                write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
-                allow_quoted_newlines=True,
-                allow_jagged_rows=True,
-                source_format=bigquery.SourceFormat.CSV,
-                skip_leading_rows=1,
-                max_bad_records=10,
-            )
-
-        if isinstance(job_config_params, dict):
-
-            job_config_params.update(
-                dict(
-                    schema=self._load_schema("staging", with_partition=False),
-                    destination_table_description=self._render_template(
-                        "table/table_description.txt", self.table_config
-                    ),
-                )
-            )
+        external_config.source_uris = (
+            f"gs://basedosdados/staging/{self.dataset_id}/{self.table_id}/*"
+        )
 
         if partitioned:
 
@@ -269,26 +255,20 @@ class Table(Base):
             hive_partitioning.source_uri_prefix = self.uri.format(
                 dataset=self.dataset_id, table=self.table_id
             ).replace("*", "")
+            external_config.hive_partitioning = hive_partitioning
 
-            job_config_params["hive_partitioning"] = hive_partitioning
-
-        job_config = bigquery.LoadJobConfig(**job_config_params)
+        table = bigquery.Table(self.table_full_name["staging"])
+        # table.schema = self._load_schema("staging", with_partition=True)
+        table.external_data_configuration = external_config
 
         if if_exists == "replace":
             self.delete(mode="staging")
 
-        load_job = self.client["bigquery_staging"].load_table_from_uri(
-            self.uri.format(
-                dataset=self.table_config["dataset_id"],
-                table=self.table_config["table_id"],
-            ),
-            self.table_full_name["staging"],
-            job_config=job_config,
-        )
+        self.client["bigquery_staging"].create_table(table)
 
-        load_job.result()
-
-        self.update(mode="staging")
+        table = bigquery.Table(self.table_full_name["staging"])
+        print(table.schema)
+        # self.update(mode="staging")
 
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
@@ -328,7 +308,8 @@ class Table(Base):
                 "w",
             ).write(table.description)
 
-            table.schema = self._load_schema(m)
+            if m == "prod":
+                table.schema = self._load_schema(m)
 
             self.client[f"bigquery_{m}"].update_table(
                 table, fields=["description", "schema"]

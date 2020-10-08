@@ -174,13 +174,18 @@ def init_table(ctx, dataset_id, table_id, data_sample_path, if_exists):
 @cli_table.command(name="create", help="Create stagging table in BigQuery")
 @click.argument("dataset_id")
 @click.argument("table_id")
-@click.argument("path", type=click.Path(exists=True))
+@click.option(
+    "--path",
+    "-p",
+    type=click.Path(exists=True),
+    default=None,
+    help="Path of data folder or file.",
+)
 @click.option(
     "--job_config_params", default=None, help="File to advanced load config params "
 )
 @click.option(
     "--partitioned",
-    "-p",
     is_flag=True,
     help="[True|False] whether folder has partitions",
 )
