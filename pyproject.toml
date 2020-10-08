@@ -10,7 +10,7 @@ license = "MIT"
 name = "basedosdados"
 readme = "README.md"
 repository = "https://github.com/base-dos-dados/bases"
-version = "0.1.8"
+version = "0.1.14"
 packages = [
     { include = "basedosdados"},
 ]
