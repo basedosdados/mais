@@ -5,9 +5,14 @@ theme:
   icon:
     repo: fontawesome/brands/github
   palette:
-    primary: teal
+    primary: green
   language: pt
+  # logo: https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4
   favicon: https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4
+  features:
+    # - header.autohide
+    - navigation.tabs
+
 
 repo_url: https://github.com/base-dos-dados/bases/tree/organize-docs/docs
 repo_name: base-dos-dados/bases
@@ -19,8 +24,30 @@ extra:
       link: https://twitter.com/basedosdados?lang=en
 
 nav:
-  - Introduction: index.md
-  
+  - Introdução: index.md
+  - Acessando os dados: 
+    - BigQuery: access_data_bq.md
+    - Local: access_data_local.md
+  - Nomeclatura: 
+    - Regras de nomeação: naming_rules.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.tabbed
+  - pymdownx.superfences
+
 google_analytics:
   - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
   - auto
+
+extra_javascript:
+- js/termynal.js
+- js/custom.js
+
+extra_css:
+- css/termynal.css
