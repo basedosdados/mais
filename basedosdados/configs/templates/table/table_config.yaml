@@ -1,7 +1,7 @@
 table_id: {{ table_id }} # AUTO GENERATED
 dataset_id: {{ dataset_id }} # AUTO GENERATED
 
-last_updated: <date> # AUTO GENERATED
+last_updated: {{ now }} # AUTO GENERATED
 
 # Describe the table. This is the first words that a new user will look at.
 # You don't need to be too concise, fell free to give some examples on 
@@ -37,8 +37,9 @@ treatment_description: |
 # help people to query faster and save some money.
 # If there is no partitions, leave as it is.
 partitions: # REQUIRED
-    - <first partition>
-    - <second partition>
+{%- for column in partition_columns %}  
+    - {{ column }}
+{%- endfor %}
 
 # How often is data updated?
 # Some options below, fell free to write one that fits your data
@@ -72,4 +73,10 @@ columns: # REQUIRED
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
 {% endfor -%}
-
+{%- for column in partition_columns %}  
+    -   
+        name: {{ column }}
+        description: <columns description>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+{% endfor -%}
