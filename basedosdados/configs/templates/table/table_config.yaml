@@ -1,74 +1,84 @@
 table_id: {{ table_id }} # AUTO GENERATED
 dataset_id: {{ dataset_id }} # AUTO GENERATED
 
-last_updated: <date> # AUTO GENERATED
+last_updated: <data> # AUTO GENERATED
 
-# Describe the table. This is the first words that a new user will look at.
-# You don't need to be too concise, fell free to give some examples on 
-# how to use this data. Maybe some research, application, etc that was 
-# developed using it.
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    <table-description>
+    <descrição>
 
-# Who treated the data? There are sometimes that another insitution gets 
-# the raw data and treats it to the public. Sometimes, it was just you.
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <institution-name [IBGE, TSE]>  # REQUIRED
-    code_url: <code-url-that-generated-table> # REQUIRED
-    website: <where to find raw data>
-    email: <name at institution.com>
-    logo: <logo-url>
+    name: <nome>  # REQUIRED
+    code_url: <url para o código> # REQUIRED
+    website: <onde encontrar os dados tratados>
+    email: <email>
 
-# Who is completing this config file? Put you name and email here. You will
-# be surprised how many times people will reach you to ask questions about
-# this dataset.
+# Quem está completando esse arquivo config?
 published_by:
-    name: <your-name [you]>  # REQUIRED
-    code_url: <code-url-that-generated-table> # REQUIRED
-    website: <where to find raw data>
-    email: <your at email.com>
-    logo: <your-pic>
+    name: <nome [você]>  # REQUIRED
+    code_url: <url para o código> # REQUIRED
+    website: <website>
+    email: <email>
 
-# If there was some treatment, what as it about?
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
     <CEPESP fez X. Eu fiz K>
 
-# Make sure to add the columns in the dataset that are partitions. It will
-# help people to query faster and save some money.
-# If there is no partitions, leave as it is.
+# Nível da observação: quais colunas identificam uma linha unicamente?
+# Escolha todas as opções necessárias.
+# Regras: minúsculo, sem acento, singular.
+# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+    - <primeira coluna>
+    - <segunda coluna>
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#       - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - <admin0 - pais>
+        - <admin1 - estados/regioes/etc>
+            - <admin2 - municipios/counties/etc>
+                - <admin3 - distritos/subdistritos/etc>
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: pre-1999, 2000, 2001, ..., 2019, 2020
+coverage_time:
+    - <ano 1>
+    - <ano 2>
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED
-    - <first partition>
-    - <second partition>
+    - <partição 1>
+    - <partição 2>
 
-# How often is data updated?
-# Some options below, fell free to write one that fits your data
-# A cada hora | Diariamente | Semanalmente | Mensalmente | Uma vez | Recorrentemente
-data_update_frequency: <frequency> # REQUIRED 
-
-# All data has a license. If it is public, feel free to just use MIT. If not,
-# please point out the license to our users.
-license: 
-    name: MIT # REQUIRED
-    url: <url>
-
-labels: 
-    - <first label> 
-    - <second label>
-
-# What are the columns? Make sure to write a good description, people will like
-# to know what is the column about. Also, feel free to change some encriptic names
-# to something a bit more explicit.
-# Adding all the columns manually can be quite tiresome, that is why, when 
-# initializing this config file, you can point the function to a data sample that
-# will auto fill the columns.
-# Some columns will just exist in the final table, you will build them at 
-# `publish.sql` query. For those, set is_in_staging to False.
-# Also, you have to add the partition columns here and set is_partition to True.
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
 {% for column in columns %}  
     -   
         name: {{ column }}
-        description: <columns description>
+        description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
 {% endfor -%}
