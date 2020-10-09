@@ -1,7 +1,14 @@
 # Como acessar os dados localmente
 
-!!! Info
-    Atualmente nossa aplicação tem suporte para Python e CLI. 
+**TODO: organizar aqui :)**
+
+<div class="termy">
+    ```console
+    $ pip3 install basedosdados
+    ```
+</div>
+
+!!! Info "Atualmente nossa aplicação tem suporte para Python e CLI."
     Para colaborar com R, Stata ou outra linguagem, acesse nossos [issues](https://github.com/basedosdados/bases/issues).
 
 Em apenas 2 passos você consegue obter dados estruturados para baixar e
@@ -12,13 +19,13 @@ analisar:
 
 ## Instalando a aplicação
 
-=== "Python"
-    ```bash
-    $ pip3 install basedosdados
-    ```
 === "CLI"
     ```bash
-    $ pip3 install basedosdados
+    pip3 install basedosdados
+    ```
+=== "Python"
+    ```bash
+    pip3 install gsutil && pip3 install basedosdados
     ```
 === "R"
     ```bash
@@ -37,21 +44,25 @@ analisar:
 
 Obtendo toda a tabela (ou limitada) em CSV:
 
-=== "Python"
-    ```python
-    from basedosdados import download
-
-    download(savepath="where/to/save/file",
-             dataset_id="br_suporte", 
-             table_id="diretorio_municipios",
-             limit=1000)
-    ```
-
 === "CLI"
     ```bash
     $ basedosdados download --dataset_id "br_suporte" --table_id "diretorio_municipios" --limit 1000
     ```
+=== "Python"
+    ```python
+    import basedosdados as bd
+    
+    # Você pode fazer o download no seu computador
+    bd.download(savepath="where/to/save/file",
+             dataset_id="br_suporte", 
+             table_id="diretorio_municipios",
+             limit=1000)
 
+    # Ou carregar no seu ambiente
+    df = bd.query(dataset_id="br_suporte", 
+             table_id="diretorio_municipios",
+             limit=1000)
+    ```
 === "R"
     ```bash
     Ainda não temos suporte :( -- TODO: add com a ferramenta do GCD em R
@@ -72,6 +83,10 @@ Obtendo toda a tabela (ou limitada) em CSV:
 
 Baixando a tabela com filtros ou condicionais:
 
+=== "CLI"
+    ```bash
+    $ basedosdados download "where/to/save/file" --query "SELECT * FROM `basedosdados.br_suporte.diretorio_municipios` WHERE existia_2000 = 0;"
+    ```
 === "Python"
     ```python
     from basedosdados import download
@@ -82,11 +97,6 @@ Baixando a tabela com filtros ou condicionais:
     """
 
     download(savepath="where/to/save/file", query=my_query)
-    ```
-    
-=== "CLI"
-    ```bash
-    $ basedosdados download "where/to/save/file" --query "SELECT * FROM `basedosdados.br_suporte.diretorio_municipios` WHERE existia_2000 = 0;"
     ```
 === "R"
     ```bash
