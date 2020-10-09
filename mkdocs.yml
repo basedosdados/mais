@@ -1,4 +1,4 @@
-site_name: Base Dos Dados
+site_name: Base Dos Dados Mais
 
 theme:
   name: material
@@ -15,7 +15,7 @@ theme:
 
 
 repo_url: https://github.com/basedosdados/mais
-repo_name: base-dos-dados/mais
+repo_name: basedosdados/mais
 
 extra:
   version: 2.0
