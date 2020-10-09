@@ -1,0 +1,14 @@
+dataset_id: br_economia_IBGE # AUTO GENERATED
+
+# Describe the dataset. What is it about? What does the institution that 
+# provides the data takes care of?
+description: | # REQUIRED
+    Dados econômicos do IBGE.
+
+# The institution where the data came from. This should point to a place to
+# find raw data.
+source_institution:
+    name: IBGE
+    website: https://www.ibge.gov.br/explica/pib.php
+    email: ibge@ibge.gov.br
+    logo: <logo-url>

@@ -1,0 +1,122 @@
+table_id: municipio_PIB # AUTO GENERATED
+dataset_id: br_economia_IBGE # AUTO GENERATED
+
+last_updated: 2020-09-30 # AUTO GENERATED
+
+# Describe the table. This is the first words that a new user will look at.
+# You don't need to be too concise, fell free to give some examples on 
+# how to use this data. Maybe some research, application, etc that was 
+# developed using it.
+description: |  # REQUIRED
+    O IBGE, em parceria com os Órgãos Estaduais de Estatística, as Secretarias Estaduais de Governo e a Superintendência da Zona Franca de Manaus - Suframa, divulga, nesta publicação, as estimativas do Produto Interno Bruto - PIB dos Municípios - referência 2010. Os resultados são comparáveis entre si e estão completamente integrados às séries das Contas Nacionais e das Contas Regionais do Brasil, em conformidade, portanto, com o novo manual System of national accounts 2008, SNA 2008, e com a Classificação Nacional de Atividades Econômicas - CNAE 2.0.
+
+    São apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica – Agropecuária, Indústria e Serviços – bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita. Destaca-se o valor adicionado bruto da Administração, saúde e educação públicas e seguridade social, devido à relevância deste segmento na economia municipal. A análise dos resultados, ilustrada por meio de tabelas, quadros, gráficos e cartogramas, enfoca aspectos econômicos de abrangência nacional, regional e municipal.
+
+# Who treated the data? There are sometimes that another insitution gets 
+# the raw data and treats it to the public. Sometimes, it was just you.
+treated_by:
+    name: IBGE
+    code_url: <code-url-that-generated-table> # REQUIRED
+    website: https://sidra.ibge.gov.br/tabela/5938
+    email: ibge@ibge.gov.br
+    logo: <logo-url>
+
+# Who is completing this config file? Put you name and email here. You will
+# be surprised how many times people will reach you to ask questions about
+# this dataset.
+published_by:
+    name: Ricardo Dahis
+    code_url: <code-url-that-generated-table> # REQUIRED
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
+    logo: <your-pic>
+
+# If there was some treatment, what as it about?
+treatment_description: | 
+    Baixei os dados da tabela 5938 e fiz limpezas básicas.
+
+# Make sure to add the columns in the dataset that are partitions. It will
+# help people to query faster and save some money.
+partitions: # REQUIRED
+    - <first partition>
+    - <second partition>
+
+# How often is data updated?
+# Hora | Dia | Semana | Mês | Único 
+data_update_frequency: ano # REQUIRED 
+
+# All data has a license. If it is public, feel free to just use MIT. If not,
+# please point out the license to our users.
+license: 
+    name: MIT # REQUIRED
+    url: <url>
+
+labels: 
+    - PIB
+    - renda
+    - crescimento
+
+# What are the columns? Make sure to write a good description, people will like
+# to know what is the column about. Also, feel free to change some encriptic names
+# to something a bit more explicit.
+# Adding all the columns manually can be quite tiresome, that is why, when 
+# initializing this config file, you can point the function to a data sample that
+# will auto fill the columns.
+# Some columns will just exist in the final table, you will build them at 
+# `publish.sql` query. For those, set is_in_staging to False.
+# Also, you have to add the partition columns here and set is_partition to True.
+columns: # REQUIRED
+  
+    -   
+        name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: PIB
+        description: Produto interno bruno a preços correntes (Mil Reais)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: impostos_liquidos
+        description: Impostos, líquidos de subsídios, sobre produtos a preços correntes (Mil Reais)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: VA
+        description: Valor adicionado bruto a preços correntes total (Mil Reais)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: VA_agropecuaria
+        description: Valor adicionado bruto da agropecuária a preços correntes (Mil Reais)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: VA_industria
+        description: Valor adicionado bruto da indústria a preços correntes (Mil Reais)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: VA_servicos
+        description: Valor adicionado bruto dos serviços, exclusive administração, defesa, educação e saúde públicas e seguridade social a preços correntes (Mil Reais)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: VA_ADESPSS
+        description: Valor adicionado bruto da administração, defesa, educação e saúde públicas e seguridade social a preços correntes (Mil Reais)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
