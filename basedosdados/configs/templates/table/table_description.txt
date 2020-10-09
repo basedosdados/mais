@@ -10,16 +10,15 @@
 {{ description }}
 
 Para saber mais acesse:
-Website: https://basedosdados.org/
+Website: {{ url_ckan }}
 Github: https://github.com/basedosdados/mais/
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
 {% call input(partitions) -%}
-Partições
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
-Filtre a tabela por essas colunas para economizar dinheiro.
 {% if (partitions is not none) -%}
 {% for partition in partitions -%}
 - {{ partition }}
@@ -28,9 +27,8 @@ Filtre a tabela por essas colunas para economizar dinheiro.
 {% endcall -%}
 
 {% call input(observation_level[0]) -%}
-Nível da Observação
+Nível da Observação (Colunas que identificam cada linha unicamente)
 -------------------
-Quais colunas identificam cada linha unicamente
 {% if (observation_level is not none) -%}
 {% for partition in observation_level -%}
 - {{ partition }}

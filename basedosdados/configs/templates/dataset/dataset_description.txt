@@ -16,9 +16,8 @@ Github: https://github.com/basedosdados/mais/
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
-Instituição
+Instituição (Quem mantém os dados oficiais?)
 -----------
-Quem mantém os dados oficiais?
 Nome: {{ organization -}}
 {% call input(author.name) %}
 Autor: {{ author.name }}
@@ -48,7 +47,7 @@ Grupos
 {% endcall -%}
 
 {% call input(languages[0]) -%}
-Idioma
+Idiomas
 ------
 {% if (languages is not none) -%}
 {% for partition in languages -%}
