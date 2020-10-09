@@ -1,19 +1,21 @@
 /*
-Query to publish table.
 
-This is the place to fix types, merge with other tables or create new
-support columns.
+Query para publicar a tabela.
 
-Any column defined here must exists at `table_config.yaml`.
+Esse é o lugar para:
+    - modificar nomes, ordem e tipos de colunas
+    - dar join com outras tabelas
+    - criar colunas extras (e.g. logs, proporções, etc.)
 
-TYPES:
+Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
 
-To change types, just replace STRING to a valid type.
-Ex:
+# Além disso, sinta-se à vontade para alterar alguns nomes obscuros
+# para algo um pouco mais explícito.
 
-`SAFE_CAST(column_name AS NUMERIC) column_name`
-
-Available types: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
+TIPOS:
+    - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
+    - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
+    - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
 SELECT 

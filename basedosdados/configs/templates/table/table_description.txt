@@ -1,51 +1,96 @@
+{% macro input(var) -%}
+{% if (
+       (var is not none) and
+       (("<" not in var | string) and (">" not in var | string))
+) -%}
+{{- caller() }}
+{%- endif %}
+{%- endmacro -%}
+
 {{ description }}
 
-Tratamento
-----------
-{{ treatment_description }}
+Para saber mais acesse:
+Website: {{ url_ckan }}
+Github: https://github.com/basedosdados/mais/
 
-Frequencia de Atualização
--------------------------
-{{ data_update_frequency }}.
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
 
-{% if ((partitions is not none) and
-       ("<" not in partitions[0])) -%}
-Partições
+{% call input(partitions) -%}
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
-Use essas partições para economizar tempo e dinheiro
+{% if (partitions is not none) -%}
 {% for partition in partitions -%}
 - {{ partition }}
 {% endfor -%}
-{% endif %}
+{%- endif %}
+{% endcall -%}
+
+{% call input(observation_level[0]) -%}
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+{% if (observation_level is not none) -%}
+{% for partition in observation_level -%}
+- {{ partition }}
+{% endfor -%}
+{%- endif %}
+{% endcall -%}
+
+{% call input(coverage_time[0]) -%}
+Cobertura Temporal
+------------------
+{% if (coverage_time is not none) -%}
+{% for partition in coverage_time -%}
+- {{ partition }}
+{% endfor -%}
+{%- endif %}
+{% endcall -%}
+
+{% call input(coverage_geo[0]) -%}
+Cobertura Espacial
+------------------
+{% if (coverage_geo is not none) -%}
+{% for partition in coverage_geo -%}
+- {{ partition }}
+{% endfor -%}
+{%- endif %}
+{% endcall -%}
+
+{% call input(treatment_description) -%}
+Tratamento
+----------
+{{ treatment_description }}
+{% endcall %}
+
+{%- call input(data_update_frequency) -%}
+Frequencia de Atualização
+-------------------------
+{{ data_update_frequency }}{% endcall %}
+
 Tratado por
 -----------
-Nome: {{ treated_by.name }}
-{% if "<" not in treated_by.code_url -%}
+Nome: {{ treated_by.name -}}
+{% call input(treated_by.code_url) %}
 Código: {{ treated_by.code_url }}
-{% endif -%}
-{% if "<" not in treated_by.website -%}
+{%- endcall -%}
+{% call input(treated_by.website) %}
 Website: {{ treated_by.website }}
-{% endif -%}
-{% if "<" not in treated_by.email -%}
+{%- endcall -%}
+{% call input(treated_by.email) %}
 Email: {{ treated_by.email }}
-{%- endif %}
+{%- endcall %}
 
 Publicado por
 -------------
-Nome: {{ published_by.name }}
-{% if "<" not in published_by.code_url -%}
+Nome: {{ published_by.name -}}
+{% call input(published_by.code_url ) %}
 Código: {{ published_by.code_url }}
-{% endif -%}
-{% if "<" not in published_by.website -%}
+{%- endcall -%}
+{% call input(published_by.website ) %}
 Website: {{ published_by.website }}
-{% endif -%}
-{% if "<" not in published_by.email -%}
+{%- endcall -%}
+{% call input(published_by.email ) %}
 Email: {{ published_by.email }}
-{%- endif %}
+{%- endcall -%}
 
-Licença
--------
-Nome: {{ license.name }}
-{% if "<" not in license.url -%}
-Url: {{ license.url }}
-{%- endif %}
+
