@@ -1,6 +1,6 @@
 dataset_id: {{ dataset_id }} # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/{{ dataset_id }}
+url_ckan: https://basedosdados.org/dataset/{{ dataset_id | replace("_","-") }}
 url_github: https://github.com/basedosdados/mais/tree/master/bases/{{ dataset_id }}
 
 # Descreva a base.

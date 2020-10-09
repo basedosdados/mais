@@ -1,7 +1,7 @@
 table_id: {{ table_id }} # AUTO GENERATED
 dataset_id: {{ dataset_id }} # AUTO GENERATED
 
-last_updated: <data> # AUTO GENERATED
+last_updated: {{ now }} # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -34,6 +34,7 @@ treatment_description: |
 # Escolha todas as opções necessárias.
 # Regras: minúsculo, sem acento, singular.
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level:
     - <primeira coluna>
     - <segunda coluna>
 
@@ -63,8 +64,9 @@ coverage_time:
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED
-    - <partição 1>
-    - <partição 2>
+{%- for column in partition_columns %}  
+    - {{ column }}
+{%- endfor %}
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -82,4 +84,10 @@ columns: # REQUIRED
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
 {% endfor -%}
-
+{%- for column in partition_columns %}  
+    -   
+        name: {{ column }}
+        description: <descrição da coluna>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+{% endfor -%}

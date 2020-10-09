@@ -1,22 +1,42 @@
+{% macro input(var) -%}
+{% if (
+       (var is not none) and
+       (("<" not in var) and (">" not in var))
+) -%}
+{{- caller() }}
+{%- endif %}
+{%- endmacro %}
+
 {{ description }}
 
-Tratamento
-----------
-{{ treatment_description }}
+Para saber mais acesse:
+Website: https://basedosdados.org/
+Github: https://github.com/basedosdados/mais/
 
-Frequencia de Atualização
--------------------------
-{{ data_update_frequency }}.
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
 
-{% if ((partitions is not none) and
-       ("<" not in partitions[0])) -%}
-Partições
+{% call input(partition) -%}
+"Partições
 ---------
 Use essas partições para economizar tempo e dinheiro
 {% for partition in partitions -%}
 - {{ partition }}
 {% endfor -%}
-{% endif %}
+{% endcall -%}
+
+{% call input(treatment_description) -%}
+Tratamento
+----------
+{{ treatment_description }}
+{% endcall =%}
+
+Frequencia de Atualização
+-------------------------
+{{ data_update_frequency }}.
+
+
+
 Tratado por
 -----------
 Nome: {{ treated_by.name }}
@@ -49,3 +69,5 @@ Nome: {{ license.name }}
 {% if "<" not in license.url -%}
 Url: {{ license.url }}
 {%- endif %}
+
+
