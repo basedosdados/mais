@@ -58,6 +58,12 @@ class Table(Base):
                     if c["name"] == s.name:
                         c["type"] = s.field_type
                         c["mode"] = s.mode
+                else:
+                    raise Exception(
+                        f"Column {c} was not found in schema. Are you sure that "
+                        "all your column names between table_config.yaml and "
+                        "publish.sql are the same?"
+                    )
 
         json.dump(columns, (json_path).open("w"))
 
