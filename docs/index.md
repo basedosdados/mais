@@ -11,6 +11,8 @@
 
 ---
 
+# Base dos Dados +
+
 <div align="center">
     <a align="center"
     href="https://console.cloud.google.com/bigquery?p=basedosdados&page=project"
@@ -19,12 +21,11 @@
     </a>
 </div>
 
-
 Uma simples consulta de SQL é o suficiente para cruzamento de bases que
 você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor
 e subir clusters.
 
-Por que o BigQuery?
+### Por que o BigQuery?
 
 **TODO: add infografico**
 
@@ -42,7 +43,7 @@ Por que o BigQuery?
 
 ----
 
-# Quick Start
+## Quick Start
 
 <div class="row">
     <div class="column">
@@ -62,7 +63,7 @@ Por que o BigQuery?
 </div>
 
 -----
-# Como citar o projeto
+## Como citar o projeto
 
 O projeto está licenciado sob XXX. Sempre que usar os dados cite a fonte
 como:
