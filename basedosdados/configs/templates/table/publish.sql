@@ -19,10 +19,10 @@ TIPOS:
 
 */
 SELECT 
-{% for column in columns -%}
+{% for column in columns|list + partition_columns|list -%}
 {%- if not loop.last -%}
     SAFE_CAST({{ column }} AS STRING) {{ column }},
 {% else -%}
     SAFE_CAST({{ column }} AS STRING) {{ column }}
 {% endif -%}{% endfor -%}
-from {{ project_id }}.{{ dataset_id }}_staging.{{ table_id }}
+from {{ project_id }}.{{ dataset_id }}_staging.{{ table_id }} as t

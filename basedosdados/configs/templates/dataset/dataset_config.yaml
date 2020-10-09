@@ -1,6 +1,6 @@
 dataset_id: {{ dataset_id }} # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/{{ dataset_id }}
+url_ckan: https://basedosdados.org/dataset/{{ dataset_id | replace("_","-") }}
 url_github: https://github.com/basedosdados/mais/tree/master/bases/{{ dataset_id }}
 
 # Descreva a base.
@@ -39,10 +39,6 @@ groups:
 tags:
     - <etiqueta 1> 
     - <etiqueta 2>
-
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
-data_update_frequency: <frequência> # REQUIRED 
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.

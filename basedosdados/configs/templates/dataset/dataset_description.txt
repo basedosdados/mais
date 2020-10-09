@@ -1,11 +1,66 @@
+{% macro input(var) -%}
+{% if (
+       (var is not none) and
+       (("<" not in var | string) and (">" not in var | string))
+) -%}
+{{- caller() }}
+{%- endif %}
+{%- endmacro -%}
+
 {{ description }}
+
+Para saber mais acesse:
+Website: {{ url_ckan }}
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
 
 Instituição
 -----------
-Nome: {{ source_institution.name }}
-{% if "<" not in source_institution.website -%}
-Website: {{ source_institution.website }}
-{% endif -%}
-{% if "<" not in source_institution.email -%}
-Email: {{ source_institution.email }}
-{% endif -%}
+Quem mantém os dados oficiais?
+Nome: {{ organization -}}
+{% call input(author.name) %}
+Autor: {{ author.name }}
+{%- endcall -%}
+{% call input(author.name) %}
+Email: {{ author.email }}
+{%- endcall %}
+
+{% call input(website[0]) -%}
+Onde encontrar os dados
+-----------------------
+{% if (website is not none) -%}
+{% for partition in website -%}
+- {{ partition }}
+{% endfor -%}
+{%- endif %}
+{% endcall -%}
+
+{% call input(groups[0]) -%}
+Grupos
+------
+{% if (groups is not none) -%}
+{% for partition in groups -%}
+- {{ partition }}
+{% endfor -%}
+{%- endif %}
+{% endcall -%}
+
+{% call input(languages[0]) -%}
+Idioma
+------
+{% if (languages is not none) -%}
+{% for partition in languages -%}
+- {{ partition }}
+{% endfor -%}
+{%- endif %}
+{% endcall -%}
+
+
+Licença
+-------
+Nome: {{ license.name }}
+{% call input(license.url) %}
+Website: {{ license.url }}
+{% endcall %}

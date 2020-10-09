@@ -6,7 +6,7 @@ create-env:
 	python3 -m venv .$(REPO);
 	. .$(REPO)/bin/activate; \
 			pip3 install --upgrade  -r requirements-dev.txt; \
-			pip3 install --editable .;
+			python setup.py develop;
 
 update-env:
 	. .$(REPO)/bin/activate; \

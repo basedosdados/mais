@@ -4,6 +4,7 @@ google-cloud-bigquery-storage==1.1.0
 pyaml==20.4.0
 Jinja2==2.11.2
 tomlkit==0.7.0
+tqdm==4.50.0
 black
 pytest
 ipykernel
@@ -11,3 +12,4 @@ jupyter
 poetry
 mkdocs
 mkdocs-material
+flake8

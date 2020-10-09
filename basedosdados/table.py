@@ -4,6 +4,7 @@ import json
 import csv
 from copy import deepcopy
 from google.cloud import bigquery
+import datetime
 
 import google.api_core.exceptions
 
@@ -43,8 +44,6 @@ class Table(Base):
         columns = self.table_config["columns"]
 
         if mode == "staging":
-            for c in columns:
-                c["type"] = "STRING"
 
             columns = [c for c in columns if c["is_in_staging"]]
 
@@ -110,6 +109,7 @@ class Table(Base):
             elif if_exists == "pass":
                 return self
 
+        partition_columns = []
         if isinstance(
             data_sample_path,
             (
@@ -117,7 +117,22 @@ class Table(Base):
                 PosixPath,
             ),
         ):
+            # Check if partitioned and get data sample and partition columns
             data_sample_path = Path(data_sample_path)
+            if data_sample_path.is_dir():
+
+                data_sample_path = [
+                    f
+                    for f in data_sample_path.glob("**/*")
+                    if f.is_file() and f.suffix == ".csv"
+                ][0]
+
+                partition_columns = [
+                    k.split("=")[0]
+                    for k in str(data_sample_path).split("/")
+                    if "=" in k
+                ]
+
             if data_sample_path.suffix == ".csv":
 
                 columns = next(csv.reader(open(data_sample_path, "r")))
@@ -126,7 +141,9 @@ class Table(Base):
                 raise NotImplementedError(
                     "Data sample just supports comma separated csv files"
                 )
+
         else:
+
             columns = ["column_name"]
 
         for file in (Path(self.templates) / "table").glob("*"):
@@ -139,6 +156,8 @@ class Table(Base):
                     dataset_id=self.dataset_folder.stem,
                     project_id=self.client["bigquery_staging"].project,
                     columns=columns,
+                    partition_columns=partition_columns,
+                    now=datetime.datetime.now().strftime("%Y-%m-%d"),
                 )
 
                 # Write file
@@ -148,7 +167,7 @@ class Table(Base):
 
     def create(
         self,
-        filepath=None,
+        path=None,
         job_config_params=None,
         partitioned=False,
         if_exists="raise",
@@ -156,7 +175,7 @@ class Table(Base):
     ):
         """Creates BigQuery table at staging dataset.
 
-        If you add a filepath, it automatically saves the data in the storage,
+        If you add a path, it automatically saves the data in the storage,
         creates a datasets folder and BigQuery location, besides creating the
         table and its configuration files.
 
@@ -176,7 +195,7 @@ class Table(Base):
 
         Parameters
         ----------
-        filepath : str or pathlib.PosixPath
+        path : str or pathlib.PosixPath
             Where to find the file that you want to upload to create a table with
         job_config_params : dict, optional
             Job configuration params from bigquery, by default None
@@ -194,7 +213,7 @@ class Table(Base):
 
         # Add data to storage
         if isinstance(
-            filepath,
+            path,
             (
                 str,
                 PosixPath,
@@ -202,7 +221,7 @@ class Table(Base):
         ):
 
             Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
-                filepath, mode="staging", if_exists="replace"
+                path, mode="staging", if_exists="replace"
             )
 
             # Create Dataset if it doesn't exist
@@ -217,57 +236,39 @@ class Table(Base):
 
                 dataset_obj.create(if_exists="pass")
 
-            self.init(data_sample_path=filepath, if_exists="replace")
+            self.init(data_sample_path=path, if_exists="replace")
 
-        if job_config_params is None:
+        external_config = external_config = bigquery.ExternalConfig("CSV")
+        external_config.options.skip_leading_rows = 1
+        external_config.options.allow_quoted_newlines = True
+        external_config.options.allow_jagged_rows = True
+        external_config.autodetect = True
 
-            job_config_params = dict(
-                write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
-                allow_quoted_newlines=True,
-                allow_jagged_rows=True,
-                source_format=bigquery.SourceFormat.CSV,
-                skip_leading_rows=1,
-                max_bad_records=10,
-            )
-
-        if isinstance(job_config_params, dict):
-
-            job_config_params.update(
-                dict(
-                    schema=self._load_schema("staging", with_partition=False),
-                    destination_table_description=self._render_template(
-                        "table/table_description.txt", self.table_config
-                    ),
-                )
-            )
+        external_config.source_uris = (
+            f"gs://basedosdados/staging/{self.dataset_id}/{self.table_id}/*"
+        )
 
         if partitioned:
 
             hive_partitioning = bigquery.external_config.HivePartitioningOptions()
-            hive_partitioning.mode = "AUTO"
+            hive_partitioning.mode = "STRINGS"
             hive_partitioning.source_uri_prefix = self.uri.format(
                 dataset=self.dataset_id, table=self.table_id
             ).replace("*", "")
+            external_config.hive_partitioning = hive_partitioning
 
-            job_config_params["hive_partitioning"] = hive_partitioning
-
-        job_config = bigquery.LoadJobConfig(**job_config_params)
+        table = bigquery.Table(self.table_full_name["staging"])
+        # table.schema = self._load_schema("staging", with_partition=True)
+        table.external_data_configuration = external_config
 
         if if_exists == "replace":
             self.delete(mode="staging")
 
-        load_job = self.client["bigquery_staging"].load_table_from_uri(
-            self.uri.format(
-                dataset=self.table_config["dataset_id"],
-                table=self.table_config["table_id"],
-            ),
-            self.table_full_name["staging"],
-            job_config=job_config,
-        )
+        self.client["bigquery_staging"].create_table(table)
 
-        load_job.result()
-
-        self.update(mode="staging")
+        table = bigquery.Table(self.table_full_name["staging"])
+        print(table.schema)
+        # self.update(mode="staging")
 
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
@@ -307,7 +308,8 @@ class Table(Base):
                 "w",
             ).write(table.description)
 
-            table.schema = self._load_schema(m)
+            if m == "prod":
+                table.schema = self._load_schema(m)
 
             self.client[f"bigquery_{m}"].update_table(
                 table, fields=["description", "schema"]
@@ -392,7 +394,11 @@ class Table(Base):
         """
 
         Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
-            filepath, mode="staging", partitions=None, if_exists="raise", **upload_args
+            filepath,
+            mode="staging",
+            partitions=None,
+            if_exists=if_exists,
+            **upload_args,
         )
 
         self.create(if_exists="replace")
