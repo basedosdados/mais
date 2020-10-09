@@ -258,7 +258,7 @@ class Table(Base):
         if partitioned:
 
             hive_partitioning = bigquery.external_config.HivePartitioningOptions()
-            hive_partitioning.mode = "STRINGS"
+            hive_partitioning.mode = "AUTO"
             hive_partitioning.source_uri_prefix = self.uri.format(
                 dataset=self.dataset_id, table=self.table_id
             ).replace("*", "")
