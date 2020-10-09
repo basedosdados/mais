@@ -20,7 +20,9 @@ def metadatadir(tmpdir_factory):
 @pytest.fixture
 def table(metadatadir):
 
-    return Table(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir)
+    t = Table(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir)
+    t._refresh_templates()
+    return t
 
 
 def check_files(folder):
@@ -108,49 +110,19 @@ def test_create(table, metadatadir):
     table.create("tests/sample_data/municipios.csv", if_exists="replace")
 
 
-def test_create_partitioned(metadatadir):
-
-    shutil.rmtree(
-        Path(metadatadir) / DATASET_ID / (TABLE_ID + "_partitioned"), ignore_errors=True
-    )
-
-    Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir).create(if_exists="pass")
-
-    Storage(
-        dataset_id=DATASET_ID,
-        table_id=TABLE_ID + "_partitioned",
-        metadata_path=metadatadir,
-    ).upload(
-        "tests/sample_data/municipios.csv",
-        mode="staging",
-        if_exists="replace",
-        partitions="key1=value1/key2=value2",
-    )
+def test_create_auto_partitions(metadatadir):
 
     table_part = Table(
         dataset_id=DATASET_ID,
-        table_id=TABLE_ID + "_partitioned",
+        table_id=TABLE_ID + "_autopartitioned",
         metadata_path=metadatadir,
     )
 
-    table_part.init(
-        data_sample_path="tests/sample_data/municipios.csv", if_exists="replace"
+    table_part.create(
+        "tests/sample_data/partitions", partitioned=True, if_exists="replace"
     )
 
-    shutil.copy(
-        "tests/sample_data/table/table_config_part.yaml",
-        Path(metadatadir) / "pytest" / "pytest_partitioned" / "table_config.yaml",
-    )
-    shutil.copy(
-        "tests/sample_data/table/publish_part.sql",
-        Path(metadatadir) / "pytest" / "pytest_partitioned" / "publish.sql",
-    )
-
-    table_part.create(partitioned=True)
-
-    table_part.update(mode="staging")
-
-    table_part.publish(if_exists="replace")
+    table_part.publish()
 
 
 def test_update(table):

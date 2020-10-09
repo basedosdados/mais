@@ -37,6 +37,14 @@ treatment_description: |
 observation_level:
     - <primeira coluna>
     - <segunda coluna>
+    
+# Make sure to add the columns in the dataset that are partitions. It will
+# help people to query faster and save some money.
+# If there is no partitions, leave as it is.
+partitions: # REQUIRED
+{%- for column in partition_columns %}  
+    - {{ column }}
+{%- endfor %}
 
 # Qual é a cobertura espacial da tabela?
 # Regras:

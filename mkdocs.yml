@@ -25,10 +25,11 @@ extra:
 
 nav:
   - Introdução: index.md
+  - Contribuindo no Github: github.md
   - Acessando os dados: 
     - BigQuery: access_data_bq.md
     - Local: access_data_local.md
-  - Nomeclatura: 
+  - Nomenclatura: 
     - Regras de nomeação: naming_rules.md
 
 markdown_extensions:
@@ -51,3 +52,4 @@ extra_javascript:
 
 extra_css:
 - css/termynal.css
+- css/custom.css
