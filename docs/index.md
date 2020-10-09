@@ -1,17 +1,24 @@
 <!-- Header -->
 <p align="center">
-  <a href="https://base-dos-dados.github.io/bases/">
-    <img src="https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4" width="280" alt="Base dos Dados">
+  <a href="https://basedosdados.github.io/mais/">
+    <img src="https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4" width="280" alt="Base dos Dados Mais">
   </a>
 </p>
 
 <p align="center">
-    <em>O mais completo mecanismo de busca e <b>consulta</b> a bases de dados brasileiras e internacionais.</em>
+    <em>Mecanismo de busca e <b>repositório</b> de bases de dados brasileiras e internacionais.</em>
 </p>
 
 ---
 
-# Base dos Dados +
+# Base dos Dados Mais
+
+Uma simples consulta de SQL é o suficiente para cruzamento de bases que
+você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor
+e subir clusters.
+
+Nosso repositório traz acesso, rapidez, escala, facilidade, economia, 
+curadoria, e transparência ao cenário de dados no Brasil.
 
 <div align="center">
     <a align="center"
@@ -20,10 +27,6 @@
         Clique para acessar o projeto no BigQuery
     </a>
 </div>
-
-Uma simples consulta de SQL é o suficiente para cruzamento de bases que
-você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor
-e subir clusters.
 
 ### Por que o BigQuery?
 
