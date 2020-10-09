@@ -58,6 +58,7 @@ class Table(Base):
                     if c["name"] == s.name:
                         c["type"] = s.field_type
                         c["mode"] = s.mode
+                        break
                 else:
                     raise Exception(
                         f"Column {c} was not found in schema. Are you sure that "
