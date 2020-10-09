@@ -14,8 +14,8 @@ theme:
     - navigation.tabs
 
 
-repo_url: https://github.com/base-dos-dados/bases/tree/organize-docs/docs
-repo_name: base-dos-dados/bases
+repo_url: https://github.com/basedosdados/mais
+repo_name: base-dos-dados/mais
 
 extra:
   version: 2.0
