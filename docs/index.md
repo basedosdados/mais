@@ -65,10 +65,9 @@ e subir clusters.
 -----
 ## Como citar o projeto
 
-O projeto está licenciado sob XXX. Sempre que usar os dados cite a fonte
-como:
+O projeto está licenciado sob a [Licença Hipocrática](https://firstdonoharm.dev/version/2/1/license.html). Sempre que usar os dados cite a fonte como:
 
-> ...
+> Carabetta, J.; Dahis, R.; Israel, F.; Scovino, F. (2020) Base dos Dados Mais: Repositório de Dados. Github - https://github.com/basedosdados/mais.
 
 -----
 # Idiomas
