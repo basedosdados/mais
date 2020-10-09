@@ -39,6 +39,7 @@ black = "20.8b1"
 pytest = "6.0.2"
 ipykernel = "5.3.4"
 jupyter = "1.0.0"
+tqdm = "4.50.2"
 
 [tool.black]
 # Use the more relaxed max line length permitted in PEP8.
