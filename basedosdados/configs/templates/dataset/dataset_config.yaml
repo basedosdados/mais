@@ -40,10 +40,6 @@ tags:
     - <etiqueta 1> 
     - <etiqueta 2>
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
-data_update_frequency: <frequência> # REQUIRED 
-
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.
 # Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
