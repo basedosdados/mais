@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>
-    Algum Slogan Legal
+    Mecanismo de busca e repositório de bases de dados brasileiras e internacionais
   </strong>
 </p>
 
