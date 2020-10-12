@@ -34,7 +34,7 @@ class Table(Base):
     def _get_table_obj(self, mode):
         return self.client[f"bigquery_{mode}"].get_table(self.table_full_name[mode])
 
-    def _load_schema(self, mode="staging", with_partition=True):
+    def _load_schema(self, mode="staging"):
         """Load schema from table_config.yaml"""
 
         self._check_mode(mode)
@@ -45,10 +45,14 @@ class Table(Base):
 
         if mode == "staging":
 
-            columns = [c for c in columns if c["is_in_staging"]]
+            new_columns = []
+            for c in columns:
+                if not c.get("is_partition"):
+                    c["type"] = "STRING"
+                    new_columns.append(c)
 
-            if not with_partition:
-                columns = [c for c in columns if not c.get("is_partition")]
+            del columns
+            columns = new_columns
 
         elif mode == "prod":
             schema = self._get_table_obj(mode).schema
@@ -249,7 +253,8 @@ class Table(Base):
         external_config.options.skip_leading_rows = 1
         external_config.options.allow_quoted_newlines = True
         external_config.options.allow_jagged_rows = True
-        external_config.autodetect = True
+        external_config.autodetect = False
+        external_config.schema = self._load_schema("staging")
 
         external_config.source_uris = (
             f"gs://basedosdados/staging/{self.dataset_id}/{self.table_id}/*"
@@ -265,7 +270,7 @@ class Table(Base):
             external_config.hive_partitioning = hive_partitioning
 
         table = bigquery.Table(self.table_full_name["staging"])
-        # table.schema = self._load_schema("staging", with_partition=True)
+
         table.external_data_configuration = external_config
 
         if if_exists == "replace":
@@ -274,7 +279,6 @@ class Table(Base):
         self.client["bigquery_staging"].create_table(table)
 
         table = bigquery.Table(self.table_full_name["staging"])
-        print(table.schema)
         # self.update(mode="staging")
 
     def update(self, mode="all", not_found_ok=True):
@@ -315,8 +319,8 @@ class Table(Base):
                 "w",
             ).write(table.description)
 
-            if m == "prod":
-                table.schema = self._load_schema(m)
+            # if m == "prod":/
+            table.schema = self._load_schema(m)
 
             self.client[f"bigquery_{m}"].update_table(
                 table, fields=["description", "schema"]
