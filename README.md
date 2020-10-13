@@ -11,7 +11,7 @@
 </p>
 
 O intuito do projeto é organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery.
-Qualquer pessoa poderá fazer queries em bases tratadas e documentadas que estarão disponíveis e estáveis.
+Qualquer pessoa poderá fazer queries em bases tratadas e documentadas que estarão disponíveis e estáveis. 
 
 Uma simples consulta de SQL será o suficiente para cruzamento de bases que você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor e subir clusters.
 
