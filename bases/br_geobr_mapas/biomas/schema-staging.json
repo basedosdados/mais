@@ -1,0 +1,1 @@
+[{"name": "id_bioma", "description": "C\u00f3digo do bioma", "is_in_staging": true, "is_partition": false, "type": "STRING"}, {"name": "nome_bioma", "description": "Nome do bioma", "is_in_staging": true, "is_partition": false, "type": "STRING"}, {"name": "geometria", "description": "Geometria", "is_in_staging": true, "is_partition": false, "type": "STRING"}]

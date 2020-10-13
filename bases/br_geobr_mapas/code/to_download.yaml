@@ -117,18 +117,20 @@ census_tract_rural_2000:
     partitions:
       year: 2000
 census_tract_2010_simplified:
-  columns: ['code_tract',
-  'zone',
-  'code_muni',
-  'name_muni',
-  'name_neighborhood',
-  'code_neighborhood',
-  'code_subdistrict',
-  'name_subdistrict',
-  'code_district',
-  'name_district',
-  'code_state',
-  'geometry']
+  name: setor_censitario_2010
+  columns: [
+    'code_tract',
+    'zone',
+    'code_muni',
+    'name_muni',
+    'name_neighborhood',
+    'code_neighborhood',
+    'code_subdistrict',
+    'name_subdistrict',
+    'code_district',
+    'name_district',
+    'code_state',
+    'geometry']
   partitions:
   - func: read_census_tract
     func_args:
