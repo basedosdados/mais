@@ -1,4 +1,4 @@
-Número de vagas em disputa na eleição por cargo, estado/município e ano.
+Estrutura de coligações em eleições brasileiras.
 
 
 Para saber mais acesse:
@@ -15,14 +15,19 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Nível da Observação (Colunas que identificam cada linha unicamente)
 -------------------
-- tipo_eleicao
 - ano
-- estado_abrev
-- id_municipio_TSE
+- tipo_eleicao
+- estado
+- municipio
+- partido
 - cargo
+- turno
 
 Cobertura Temporal
 ------------------
+- 1990
+- 1994
+- 1996
 - 1998
 - 2000
 - 2002
@@ -42,7 +47,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Dados foram padronizados (nomes de variáveis, strings minúsculas e limpas, etc).
+Coletei e limpei os dados para consistência.
 
 Frequencia de Atualização
 -------------------------

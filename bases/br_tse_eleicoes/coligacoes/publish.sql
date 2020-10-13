@@ -24,5 +24,11 @@ SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
 SAFE_CAST(estado_abrev AS STRING) estado_abrev,
 SAFE_CAST(id_municipio_TSE AS INT64) id_municipio_TSE,
 SAFE_CAST(cargo AS STRING) cargo,
-SAFE_CAST(vagas AS INT64) vagas
-from basedosdados-staging.br_tse_eleicoes_staging.vagas as t
+SAFE_CAST(turno AS INT64) turno,
+SAFE_CAST(numero_partido AS INT64) numero_partido,
+SAFE_CAST(partido AS STRING) partido,
+SAFE_CAST(nome_partido AS STRING) nome_partido,
+SAFE_CAST(tipo_agremiacao AS STRING) tipo_agremiacao,
+SAFE_CAST(sequencial_coligacao AS INT64) sequencial_coligacao,
+SAFE_CAST(coligacao AS STRING) coligacao
+from basedosdados-staging.br_tse_eleicoes_staging.coligacoes as t

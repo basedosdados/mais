@@ -19,10 +19,13 @@ TIPOS:
 
 */
 SELECT 
+SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
-SAFE_CAST(estado_abrev AS STRING) estado_abrev,
-SAFE_CAST(id_municipio_TSE AS INT64) id_municipio_TSE,
-SAFE_CAST(cargo AS STRING) cargo,
-SAFE_CAST(vagas AS INT64) vagas
-from basedosdados-staging.br_tse_eleicoes_staging.vagas as t
+SAFE_CAST(PIB AS INT64) PIB,
+SAFE_CAST(impostos_liquidos AS INT64) impostos_liquidos,
+SAFE_CAST(VA AS INT64) VA,
+SAFE_CAST(VA_agropecuaria AS INT64) VA_agropecuaria,
+SAFE_CAST(VA_industria AS INT64) VA_industria,
+SAFE_CAST(VA_servicos AS INT64) VA_servicos,
+SAFE_CAST(VA_ADESPSS AS INT64) VA_ADESPSS
+from basedosdados-staging.br_ibge_pib_staging.municipios as t

@@ -19,10 +19,14 @@ TIPOS:
 
 */
 SELECT 
+SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
-SAFE_CAST(estado_abrev AS STRING) estado_abrev,
-SAFE_CAST(id_municipio_TSE AS INT64) id_municipio_TSE,
-SAFE_CAST(cargo AS STRING) cargo,
-SAFE_CAST(vagas AS INT64) vagas
-from basedosdados-staging.br_tse_eleicoes_staging.vagas as t
+SAFE_CAST(area AS NUMERIC) area,
+SAFE_CAST(desmatado AS NUMERIC) desmatado,
+SAFE_CAST(incremento AS NUMERIC) incremento,
+SAFE_CAST(floresta AS NUMERIC) floresta,
+SAFE_CAST(nuvem AS NUMERIC) nuvem,
+SAFE_CAST(nao_observado AS NUMERIC) nao_observado,
+SAFE_CAST(nao_floresta AS NUMERIC) nao_floresta,
+SAFE_CAST(hidrografia AS NUMERIC) hidrografia
+from basedosdados-staging.br_inpe_prodes_staging.desmatamento_municipios as t
