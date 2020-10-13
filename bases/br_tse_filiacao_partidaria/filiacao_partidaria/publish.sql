@@ -18,16 +18,20 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
+SELECT
 SAFE_CAST(estado_abrev AS STRING) estado_abrev,
 SAFE_CAST(id_municipio_TSE AS INT64) id_municipio_TSE,
-SAFE_CAST(turno AS INT64) turno,
-SAFE_CAST(numero_candidato AS INT64) numero_candidato,
-SAFE_CAST(id_candidato_BD AS INT64) id_candidato_BD,
-SAFE_CAST(cargo AS STRING) cargo,
 SAFE_CAST(partido AS STRING) partido,
-SAFE_CAST(votos AS INT64) votos,
-SAFE_CAST(resultado AS STRING) resultado
-from basedosdados-staging.br_tse_eleicoes_staging.resultados_candidato_municipio as t
+SAFE_CAST(zona AS INT64) zona,
+SAFE_CAST(secao AS INT64) secao,
+SAFE_CAST(titulo_eleitoral AS STRING) titulo_eleitoral,
+SAFE_CAST(nome_filiado AS STRING) nome_filiado,
+SAFE_CAST(data_filiacao AS DATE) data_filiacao,
+SAFE_CAST(situacao_registro AS STRING) situacao_registro,
+SAFE_CAST(tipo_registro AS STRING) tipo_registro,
+SAFE_CAST(data_processamento AS DATE) data_processamento,
+SAFE_CAST(data_desfiliacao AS DATE) data_desfiliacao,
+SAFE_CAST(data_cancelamento AS DATE) data_cancelamento,
+SAFE_CAST(data_regularizacao AS DATE) data_regularizacao,
+SAFE_CAST(motivo_cancelamento AS STRING) motivo_cancelamento
+from basedosdados-staging.br_tse_filiacao_partidaria_staging.filiacao_partidaria as t

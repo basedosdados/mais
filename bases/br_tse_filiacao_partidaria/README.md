@@ -1,4 +1,4 @@
-Como capturar os dados de br_suporte?
+Como capturar os dados de br_tse_filiacao_partidaria?
 
 Para capturar esses dados basta entrar em X e fazer Y.
 

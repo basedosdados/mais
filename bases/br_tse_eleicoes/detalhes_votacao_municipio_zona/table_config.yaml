@@ -8,39 +8,43 @@ last_updated: 2020-10-12 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    <descrição>
+    Dados de detalhes das votações em eleições brasileiras a nível de município-zona.
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <nome>  # REQUIRED
+    name: Ricardo Dahis
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code # REQUIRED
     website: <onde encontrar os dados tratados>
-    email: <email>
+    email: rdahis@basedosdados.org
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: <nome [você]>  # REQUIRED
+    name: Ricardo Dahis
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code # REQUIRED
-    website: <website>
-    email: <email>
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    <CEPESP fez X. Eu fiz K>
+    Limpei os dados para consistência e gerei variáveis extras.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
-data_update_frequency: <frequência> # REQUIRED 
+data_update_frequency: 2 anos
 
 # Nível da observação: quais colunas identificam uma linha unicamente?
 # Escolha todas as opções necessárias.
 # Regras: minúsculo, sem acento, singular.
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
-    - <primeira coluna>
-    - <segunda coluna>
+    - tipo_eleicao
+    - estado
+    - municipio
+    - zona
+    - turno
+    - cargo
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -52,16 +56,22 @@ observation_level:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - <admin0 - pais>
-    - <admin1 - estados/regioes/etc>
-    - <admin2 - municipios/counties/etc>
-    - <admin3 - distritos/subdistritos/etc>
+    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: pre-1999, 2000, 2001, ..., 2019, 2020
 coverage_time:
-    - <ano 1>
-    - <ano 2>
+    - 1998
+    - 2000
+    - 2002
+    - 2004
+    - 2006
+    - 2008
+    - 2010
+    - 2012
+    - 2014
+    - 2016
+    - 2018
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -83,132 +93,132 @@ columns: # REQUIRED
   
     -   
         name: turno
-        description: <descrição da coluna>
+        description: Turno
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: tipo_eleicao
-        description: <descrição da coluna>
+        description: Tipo da Eleição
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_municipio_TSE
-        description: <descrição da coluna>
+        description: ID Município - TSE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: zona
-        description: <descrição da coluna>
+        description: Zona Eleitoral
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: cargo
-        description: <descrição da coluna>
+        description: Cargo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: aptos
-        description: <descrição da coluna>
+        description: Número de Eleitores Aptos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: secoes
-        description: <descrição da coluna>
+        description: Número de Seções Eleitorais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: secoes_agregadas
-        description: <descrição da coluna>
+        description: Número de Seções Eleitorais Agregadas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: aptos_tot
-        description: <descrição da coluna>
+        description: Número de Eleitores Aptos Totalizados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: secoes_tot
-        description: <descrição da coluna>
+        description: Número de Seções Eleitorais Totalizadas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: comparecimento
-        description: <descrição da coluna>
+        description: Número de Comparecimentos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: abstencoes
-        description: <descrição da coluna>
+        description: Número de Abstenções
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: votos_validos
-        description: <descrição da coluna>
+        description: Número de Votos Válidos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: votos_brancos
-        description: <descrição da coluna>
+        description: Número de Votos Brancos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: votos_nulos
-        description: <descrição da coluna>
+        description: Número de Votos Nulos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: votos_legenda
-        description: <descrição da coluna>
+        description: Número de Votos em Coligações
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_comparecimento
-        description: <descrição da coluna>
+        description: Porcentagem Comparecimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_votos_validos
-        description: <descrição da coluna>
+        description: Porcentagem Votos Válidos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_votos_brancos
-        description: <descrição da coluna>
+        description: Porcentagem Votos Brancos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_votos_nulos
-        description: <descrição da coluna>
+        description: Porcentagem Votos Nulos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: ano
-        description: <descrição da coluna>
+        description: Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
   
     -   
         name: estado_abrev
-        description: <descrição da coluna>
+        description: Estado Abreviado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
