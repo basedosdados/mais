@@ -89,7 +89,7 @@ em todos os anos disponíveis**.
     bd.download(query=pib_per_capita, savepath="where/to/save/file")
 
     # Ou carregar no pandas
-    df = bd.query(pib_per_capita)
+    df = bd.read_sql(pib_per_capita)
     ```
 
     !!! Info
