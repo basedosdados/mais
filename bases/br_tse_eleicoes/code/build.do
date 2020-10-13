@@ -9,11 +9,11 @@ set more off
 
 cd "/path/to/dados_TSE"
 
-do "code/lib/clean_string.do"
-do "code/lib/limpa_tipo_eleicao.do"
-do "code/lib/limpa_instrucao.do"
-do "code/lib/limpa_estado_civil.do"
-do "code/lib/limpa_resultado.do"
+do "code/fnc/clean_string.do"
+do "code/fnc/limpa_tipo_eleicao.do"
+do "code/fnc/limpa_instrucao.do"
+do "code/fnc/limpa_estado_civil.do"
+do "code/fnc/limpa_resultado.do"
 
 //----------------------------------------------------------------------------//
 // build
