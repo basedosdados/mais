@@ -1,23 +1,25 @@
 <p align="center">
-  <a href="https://squidfunk.github.io/mkdocs-material/">
-    <img src="https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4" width="320" alt="Base dos Dados">
+  <a href="https://basedosdados.github.io/mais/">
+    <img src="https://github.com/basedosdados/mais/raw/master/docs/images/bdmais_logo.png" width="320" alt="Base dos Dados Mais">
   </a>
 </p>
 
 <p align="center">
   <strong>
-    Mecanismo de busca e repositório de bases de dados brasileiras e internacionais
+    Mecanismo de busca e repositório de bases de dados
   </strong>
 </p>
 
 O intuito do projeto é organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery.
-Qualquer pessoa poderá fazer queries em bases tratadas e documentadas que estarão disponíveis e estáveis. 
+Qualquer pessoa poderá fazer queries em bases tratadas e documentadas que estarão disponíveis e estáveis.
 
 Uma simples consulta de SQL será o suficiente para cruzamento de bases que você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor e subir clusters.
 
+Veja nossa documentação [**aqui**](https://basedosdados.github.io/mais/).
+
 ## Instale nosso CLI
 
-`pip install basedosdados
+`pip install basedosdados`
 
 **Incentivamos que outras instituições e pessoas contribuam**. Só é requerido que o processo de captura e tratamento sejam públicos e documentados, e a inserção dos dados no BigQuery siga nossa metodologia descrita abaixo.
 
