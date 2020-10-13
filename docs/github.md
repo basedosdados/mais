@@ -19,7 +19,7 @@ Só é requerido que o processo de captura e tratamento sejam públicos
 e documentados, e a inserção dos dados no BigQuery siga nossa
 metodologia.
 
-Entre em contato conosco para colaborar: [info@basedosdados.org](mailto:info@basedosdados.org)
+Entre em contato conosco para colaborar: [contato@basedosdados.org](mailto:contato@basedosdados.org)
 
 ## Ajude a manter nosso código 👩🏻‍💻
 

@@ -52,8 +52,7 @@ favorita.
 
 Abaixo você pode seguir um exemplo de **como cruzar as tabelas de população e PIB do
 IBGE para obter o PIB per capita de todos os municípios brasileiros
-desde 1991**.
-
+em todos os anos disponíveis**.
 
 === "CLI"
     ```bash
@@ -63,8 +62,8 @@ desde 1991**.
         pop.ano,  
         pib.PIB / pop.populacao * 1000 as pib_per_capita 
     FROM `basedosdados.br_ibge_pib.municipios` as pib 
-    JOIN `basedosdados.br_ibge_populacao.municipios` as pop 
-    ON pib.id_municipio = pop.id_municipio
+    INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop 
+    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
     LIMIT 100;'
     ```
 
@@ -82,8 +81,8 @@ desde 1991**.
         pop.ano, 
         pib.PIB / pop.populacao * 1000 as pib_per_capita
     FROM `basedosdados.br_ibge_pib.municipios` as pib
-    JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-    ON pib.id_municipio = pop.id_municipio 
+    INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
+    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
     """
 
     # Você pode fazer o download no seu computador
@@ -100,6 +99,8 @@ desde 1991**.
 
 === "R"
     ```R
+    if (!require("DBI")) install.packages("DBI")
+    if (!require("bigrquery")) install.packages("bigrquery")
     library(DBI)
 
     con <- dbConnect(
@@ -109,14 +110,14 @@ desde 1991**.
     billing = "seu/projeto/para/cobranca"
     )
     
-    pib_per_capita = """SELECT 
+    pib_per_capita = "SELECT 
         pib.id_municipio ,
         pop.ano, 
         pib.PIB / pop.populacao * 1000 as pib_per_capita
     FROM `basedosdados.br_ibge_pib.municipios` as pib
-    JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-    ON pib.id_municipio = pop.id_municipio 
-    """
+    INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
+    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
+    "
 
     dbGetQuery(con, pib_per_capita)
     ```

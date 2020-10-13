@@ -58,18 +58,18 @@ rótulos (*labels*) às tabelas, que também funcionam para a busca de dados.
 | Tema                                     | Identificador (rótulo)    |
 |------------------------------------------|------------------|
 | Agropecuária                             | agropecuaria     |
-| Ciência, Tecnologia e Inovação           | ciencia_tec_inov |
-| Cultura e Arte                           | cultura_arte     |
+| Ciência, Tecnologia e Inovação           | ciencia-tec-inov |
+| Cultura e Arte                           | cultura-arte     |
 | Diversidade e Inclusão                   | diversidade      |
 | Educação                                 | educacao         |
 | Energia                                  | energia          |
 | Esportes                                 | esportes         |
 | Economia                                 | economia         |
-| Governo e Finanças Públicas              | governo          |
+| Governo e Finanças Públicas              | gov-fin-pub      |
 | História                                 | historia         |
-| Infraestrutura e Transportes             | infr_transp      |
-| Jornalismo e Comunicação                 | jornalismo       |
-| Meio Ambiente                            | meio_ambiente    |
+| Infraestrutura e Transportes             | infra-transp     |
+| Jornalismo e Comunicação                 | comunicacao      |
+| Meio Ambiente                            | meio-ambiente    |
 | Justiça                                  | justica          |
 | Organização Territorial                  | territorio       |
 | Política                                 | politica         |
