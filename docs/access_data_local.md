@@ -1,15 +1,10 @@
 # Como acessar os dados localmente
-
-**TODO: organizar aqui :)**
-
+    
 <div class="termy">
     ```console
-    $ pip3 install basedosdados
+    $ pip install basedosdados
     ```
 </div>
-
-!!! Info "Atualmente nossa aplicação tem suporte para Python e CLI."
-    Para colaborar com R, Stata ou outra linguagem, acesse nossos [issues](https://github.com/basedosdados/bases/issues).
 
 Em apenas 2 passos você consegue obter dados estruturados para baixar e
 analisar:
@@ -21,92 +16,112 @@ analisar:
 
 === "CLI"
     ```bash
-    pip3 install basedosdados
+    pip install basedosdados
+
+    # caso não tenha, instale e configure gsutil
+    pip install gsutil
+    # siga as instrucoes que irao aparecer
+    gsutil config
     ```
 === "Python"
     ```bash
-    pip3 install gsutil && pip3 install basedosdados
+    pip install basedosdados
+
+    # caso não tenha, instale e configure gsutil
+    pip install gsutil
+    # siga as instrucoes que irao aparecer
+    gsutil config
     ```
 === "R"
+    Ainda não temos suporte oficial para R, mas recomendamos o pacote [bigrquery](https://bigrquery.r-dbi.org/).
     ```bash
-    Ainda não temos suporte :(
-    
-    >> Seja a primeira pessoa a contribuir (veja Issue #82 no GitHub)!
+    install.packages("bigrquery")
     ```
+    Seja a primeira pessoa a contribuir (veja Issue #82 no GitHub)!
 === "Stata"
     ```bash
-    Ainda não temos suporte :( 
-
-    >> Seja a primeira pessoa a contribuir (veja Issue #83 no GitHub)!
+    # Ainda não temos suporte :( 
+    # Seja a primeira pessoa a contribuir (veja Issue #83 no GitHub)!
     ```
 
-## Baixando bases do projeto
+## Fazendo queries
 
-Obtendo toda a tabela (ou limitada) em CSV:
+Utilize todo o poder do BigQuery onde quiser. Para obter, filtrar ou
+cruzar bases basta escrever a query e carregar em sua linguagem
+favorita.
+
+Abaixo você pode seguir um exemplo de **como cruzar as tabelas de população e PIB do
+IBGE para obter o PIB per capita de todos os municípios brasileiros
+desde 1991**.
+
 
 === "CLI"
     ```bash
-    $ basedosdados download --dataset_id "br_suporte" --table_id "diretorio_municipios" --limit 1000
+    $ basedosdados download "where/to/save/file" --query '
+    SELECT 
+        pib.id_municipio, 
+        pop.ano,  
+        pib.PIB / pop.populacao * 1000 as pib_per_capita 
+    FROM `basedosdados.br_ibge_pib.municipios` as pib 
+    JOIN `basedosdados.br_ibge_populacao.municipios` as pop 
+    ON pib.id_municipio = pop.id_municipio
+    LIMIT 100;'
     ```
+
+    !!! Info
+        Por padrão, o BigQuery escolhido para puxar os dados é
+        `basedosdados` - mas você pode utilizar também para qualquer projeto
+        seu! Basta explicitar seu `project_id`.
+
 === "Python"
     ```python
     import basedosdados as bd
-    
-    # Você pode fazer o download no seu computador
-    bd.download(savepath="where/to/save/file",
-             dataset_id="br_suporte", 
-             table_id="diretorio_municipios",
-             limit=1000)
 
-    # Ou carregar no seu ambiente
-    df = bd.query(dataset_id="br_suporte", 
-             table_id="diretorio_municipios",
-             limit=1000)
-    ```
-=== "R"
-    ```bash
-    Ainda não temos suporte :( -- TODO: add com a ferramenta do GCD em R
-    
-    >> Seja a primeira pessoa a contribuir (veja Issue #82 no GitHub)!
-    ```
-=== "Stata"
-    ```bash
-    Ainda não temos suporte :( 
-
-    >> Seja a primeira pessoa a contribuir (veja Issue #83 no GitHub)!
-    ```
-
-!!! Info
-    Por padrão, o BigQuery escolhido para puxar os dados é
-    `basedosdados` - você pode mudar para o seu explicitando
-    `project_id`.
-
-Baixando a tabela com filtros ou condicionais:
-
-=== "CLI"
-    ```bash
-    $ basedosdados download "where/to/save/file" --query "SELECT * FROM `basedosdados.br_suporte.diretorio_municipios` WHERE existia_2000 = 0;"
-    ```
-=== "Python"
-    ```python
-    from basedosdados import download
-
-    my_query = """SELECT *
-    FROM `basedosdados.br_suporte.diretorio_municipios`
-    WHERE existia_2000 = 0;
+    pib_per_capita = """SELECT 
+        pib.id_municipio ,
+        pop.ano, 
+        pib.PIB / pop.populacao * 1000 as pib_per_capita
+    FROM `basedosdados.br_ibge_pib.municipios` as pib
+    JOIN `basedosdados.br_ibge_populacao.municipios` as pop
+    ON pib.id_municipio = pop.id_municipio 
     """
 
-    download(savepath="where/to/save/file", query=my_query)
+    # Você pode fazer o download no seu computador
+    bd.download(query=pib_per_capita, savepath="where/to/save/file")
+
+    # Ou carregar no pandas
+    df = bd.query(pib_per_capita)
     ```
+
+    !!! Info
+        Por padrão, o BigQuery escolhido para puxar os dados é
+        `basedosdados` - mas você pode utilizar também para qualquer projeto
+        seu! Basta explicitar seu `project_id`.
+
 === "R"
-    ```bash
-    Ainda não temos suporte :(
+    ```R
+    library(DBI)
+
+    con <- dbConnect(
+    bigrquery::bigquery(),
+    project = "basedosdados",
+    dataset = "br_basedosdados_diretorios_brasil",
+    billing = "seu/projeto/para/cobranca"
+    )
     
-    >> Seja a primeira pessoa a contribuir (veja Issue #82 no GitHub)!
+    pib_per_capita = """SELECT 
+        pib.id_municipio ,
+        pop.ano, 
+        pib.PIB / pop.populacao * 1000 as pib_per_capita
+    FROM `basedosdados.br_ibge_pib.municipios` as pib
+    JOIN `basedosdados.br_ibge_populacao.municipios` as pop
+    ON pib.id_municipio = pop.id_municipio 
+    """
+
+    dbGetQuery(con, pib_per_capita)
     ```
 === "Stata"
     ```bash
-    Ainda não temos suporte :( 
-
-    >> Seja a primeira pessoa a contribuir (veja Issue #83 no GitHub)!
+    # Ainda não temos suporte :( 
+    # Seja a primeira pessoa a contribuir (veja Issue #83 no GitHub)!
     ```

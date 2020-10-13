@@ -1,7 +1,7 @@
 <!-- Header -->
 <p align="center">
   <a href="https://basedosdados.github.io/mais/">
-    <img src="https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4" width="280" alt="Base dos Dados Mais">
+    <img src="images/bdmais_logo.png" width="340" alt="Base dos Dados Mais">
   </a>
 </p>
 
@@ -30,16 +30,13 @@ curadoria, e transparência ao cenário de dados no Brasil.
 
 ### Por que o BigQuery?
 
-**TODO: add infografico**
-
 - **Acesso**: É possível deixar os dados públicos, i.e., qualquer
   pessoa com uma conta no Google Cloud pode fazer uma query na base,
   quando quiser.
 - **Rapidez**: Uma query muito longa não demora menos de minutos para
   ser processada.
 - **Escala**: O BigQuery escala magicamente para hexabytes se necessário.
-- **Facilidade**: Você pode cruzar tabelas de diferentes organizações, temas,
-  tudo numa só query.
+- **Facilidade**: Você pode cruzar tabelas tratadas e atualizadas num só lugar.
 - **Economia**: O custo é praticamente zero para usuários - **1
   TB gratuito por mês para usar como quiser**. Depois disso, são cobrados
   somente 5 dólares por TB de dados que sua query percorrer.
@@ -53,14 +50,14 @@ curadoria, e transparência ao cenário de dados no Brasil.
     <a style="width: 90%; text-align: center;"
     href="/access_data_bq"
     title="{{ lang.t('source.link.title')}}" class="md-button">
-        Acesse os dados direto pelo BigQuery
+        Acesse os dados direto pelo BigQuery 🔍
     </a>
     </div>
     <div class="column">
     <a style="width: 90%; text-align: center;"
     href="/access_data_local"
     title="{{ lang.t('source.link.title')}}" class="md-button">
-        Acesse os dados pela seu computador (CLI/API)
+        Acesse os dados pelo seu computador (CLI/API) 👩🏻‍💻
     </a>
     </div>
 </div>
@@ -73,6 +70,6 @@ O projeto está licenciado sob a [Licença Hipocrática](https://firstdonoharm.d
 > Carabetta, J.; Dahis, R.; Israel, F.; Scovino, F. (2020) Base dos Dados Mais: Repositório de Dados. Github - https://github.com/basedosdados/mais.
 
 -----
-# Idiomas
+## Idiomas
 
 Documentação está em português (quando possível), código e configurações estão em inglês.

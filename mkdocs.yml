@@ -8,7 +8,7 @@ theme:
     primary: green
   language: pt
   # logo: https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4
-  favicon: https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4
+  favicon: images/bdmais_minilogo_vertical.png
   features:
     # - header.autohide
     - navigation.tabs
@@ -25,12 +25,13 @@ extra:
 
 nav:
   - Introdução: index.md
-  - Contribuindo no Github: github.md
   - Acessando os dados: 
     - BigQuery: access_data_bq.md
     - Local: access_data_local.md
   - Nomenclatura: 
     - Regras de nomeação: naming_rules.md
+  - Contribua! 💚:
+    - Como contribuir: github.md
 
 markdown_extensions:
   - admonition
