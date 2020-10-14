@@ -34,7 +34,7 @@ curadoria, e transparência ao cenário de dados no Brasil.
 
 ## Quick Start
 
-<div class="row" style="margin:500px;display:flex;flex-direction:row;justify-content:center;align-content:stretch;flex-flow: column wrap;">
+<div class="row" style="margin:400px;display:flex;flex-direction:row;justify-content:center;align-content:stretch;flex-flow: column wrap;">
 
 
   [![](docs/images/bq_button.png)](https://console.cloud.google.com/bigquery?p=basedosdados&page=project)
