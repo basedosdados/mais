@@ -13,10 +13,10 @@
 
 <p align="center">
   <a href="https://github.com/basedosdados/mais/subscription" target="_blank">
-    <img src="https://img.shields.io/github/watchers/jonsn0w/hyde.svg?style=social" alt="Watch">
+    <img src="https://img.shields.io/github/watchers/basedosdados/mais.svg?style=social" alt="Watch">
   </a>
   <a href="https://github.com/basedosdados/mais/stargazers" target="_blank">
-    <img src="https://img.shields.io/github/stars/jonsn0w/hyde.svg?style=social" alt="Start">
+    <img src="https://img.shields.io/github/stars/basedosdados/mais.svg?style=social" alt="Start">
   </a>
   <a href="https://twitter.com/intent/tweet?text=Baixe%20e%20faça%20queries%20em%20dados%20publicos,%20tratados%20e%20gratuitos%20com%20a%20Base%20dos%20Dados%20Mais%20🔍%20➕:%20https://basedosdados.github.io/mais/%20via%20@basedosdados" target="_blank">
     <img src="https://img.shields.io/twitter/url/https/github.com/jonsn0w/hyde.svg?style=social" alt="Tweet">
