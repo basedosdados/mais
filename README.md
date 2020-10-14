@@ -18,9 +18,7 @@
   <a href="https://github.com/basedosdados/mais/stargazers" target="_blank">
     <img src="https://img.shields.io/github/stars/basedosdados/mais.svg?style=social" alt="Start">
   </a>
-  <a href="https://github.com/sponsors/" target="_blank">
-    <img src="https://ghbtns.com/github-btn.html?user=basedosdados&type=sponsor" alt="Contribua!">
-  </a>
+  <iframe src="https://ghbtns.com/github-btn.html?user=basedosdados&type=sponsor" frameborder="0" scrolling="0" width="170" height="20" title="GitHub"></iframe>
   <a href="https://twitter.com/intent/tweet?text=Baixe%20e%20faça%20queries%20em%20dados%20publicos,%20tratados%20e%20gratuitos%20com%20a%20Base%20dos%20Dados%20Mais%20🔍%20➕:%20https://basedosdados.github.io/mais/%20via%20@basedosdados" target="_blank">
     <img src="https://img.shields.io/twitter/url/https/github.com/jonsn0w/hyde.svg?style=social" alt="Tweet">
   </a>
