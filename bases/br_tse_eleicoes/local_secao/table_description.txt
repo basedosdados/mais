@@ -1,0 +1,57 @@
+Geolocalização da seção de votação.
+
+Trabalho realizado por Pindorama https://pindograma.com.br/
+
+Vários métodos foram utilizados para geolocalizar as urnas. Veja uma
+descrição da metodologia aqui: https://github.com/ipeaGIT/geobr/issues/184
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- estado_abrev
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- zona
+- secao
+
+Cobertura Temporal
+------------------
+- 2012
+- 2014
+- 2016
+- 2018
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Diversos métodos foram utilizados para geolocalizar as urnas
+
+Frequencia de Atualização
+-------------------------
+2 anos
+
+Tratado por
+-----------
+Nome: Pindograma
+Código: https://github.com/pindograma/mapa
+Website: https://pindograma.com.br/
+Email: redacao@pindograma.com.br
+
+Publicado por
+-------------
+Nome: João Carabetta
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
+Website: www.basedosdados.org
+Email: joao.carabetta@gmail.com
