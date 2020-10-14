@@ -1,4 +1,5 @@
 import click
+import os
 
 from basedosdados.base import Base
 from basedosdados.dataset import Dataset
@@ -452,6 +453,43 @@ cli.add_command(cli_table)
 cli.add_command(cli_storage)
 cli.add_command(cli_config)
 cli.add_command(cli_download)
+
+
+def run_bash(command):
+    stream = os.popen(command)
+
+
+def set_config_file():
+
+    if not os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"):
+
+        project_id = input(
+            "\nWe need to finish setting up your basic enviorinment!\n"
+            "What is your project id? You should easily find it here: "
+            "https://console.developers.google.com/cloud-resource-manager?pli=1\n"
+            "Make sure to copy the ID!\n"
+            "project_id: "
+        )
+
+        run_bash("gcloud iam service-accounts create basedosdados-cli")
+
+        run_bash(
+            f"""gcloud projects add-iam-policy-binding {project_id} --member "serviceAccount:basedosdados-cli@{project_id}.iam.gserviceaccount.com" --role "roles/owner"
+            """
+        )
+
+        run_bash(
+            f"""gcloud iam service-accounts keys create ~/.basedosdados/iam.json --iam-account basedosdados-cli@{project_id}.iam.gserviceaccount.com"""
+        )
+
+        print(
+            "\nRun this command and rerun the application:\n"
+            "export GOOGLE_APPLICATION_CREDENTIALS=~/.basedosdados/iam.json"
+        )
+        exit()
+
+
+set_config_file()
 
 if __name__ == "__main__":
 
