@@ -1,0 +1,64 @@
+Dados de votação em eleições brasileiras a nível de partido-seção eleitoral.
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- estado_abrev
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- tipo_eleicao
+- estado
+- municipio
+- zona
+- secao
+- cargo
+- partido
+- ano
+
+Cobertura Temporal
+------------------
+- 1998
+- 2000
+- 2002
+- 2004
+- 2006
+- 2008
+- 2010
+- 2012
+- 2014
+- 2016
+- 2018
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Gerei essa tabela extra com base na tabela original do TSE de resultados_secao.
+
+Frequencia de Atualização
+-------------------------
+2 anos
+
+Tratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
+Email: rdahis@basedosdados.org
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
