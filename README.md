@@ -18,7 +18,10 @@
   <a href="https://github.com/basedosdados/mais/stargazers" target="_blank">
     <img src="https://img.shields.io/github/stars/basedosdados/mais.svg?style=social" alt="Start">
   </a>
-  <iframe src="https://ghbtns.com/github-btn.html?user=basedosdados&type=sponsor" frameborder="0" scrolling="0" width="170" height="20" title="GitHub"></iframe>
+  <a href="https://apoia.se/basedosdados" target="_blank">
+    <img src="http://img.shields.io/badge/%E2%9D%A4%20Contribua!%EF%B8%8F%20-%20-ff69b4?style=social" alt="Contribua">
+  </a>
+  </div>
   <a href="https://twitter.com/intent/tweet?text=Baixe%20e%20faça%20queries%20em%20dados%20publicos,%20tratados%20e%20gratuitos%20com%20a%20Base%20dos%20Dados%20Mais%20🔍%20➕:%20https://basedosdados.github.io/mais/%20via%20@basedosdados" target="_blank">
     <img src="https://img.shields.io/twitter/url/https/github.com/jonsn0w/hyde.svg?style=social" alt="Tweet">
   </a>
@@ -35,8 +38,6 @@ e subir clusters.
 Nosso repositório traz acesso, rapidez, escala, facilidade, economia,
 curadoria, e transparência ao cenário de dados no Brasil.
 
----
-
 
 <p align="center" display="inline-block">
   <a href="https://console.cloud.google.com/bigquery?p=basedosdados&page=project" target="_blank">
@@ -47,13 +48,10 @@ curadoria, e transparência ao cenário de dados no Brasil.
   </a>
 </p>
 
----
-
 ## Instale nosso CLI
 
 [![](docs/images/bdd_install.png)](basedosdados.github.io/mais)
 
----
 
 ## Por que o BigQuery?
 
@@ -67,8 +65,6 @@ curadoria, e transparência ao cenário de dados no Brasil.
 - **Economia**: O custo é praticamente zero para usuários - **1
   TB gratuito por mês para usar como quiser**. Depois disso, são cobrados
   somente 5 dólares por TB de dados que sua query percorrer.
-
----
 
 ## Contribua! 💚
 
@@ -85,8 +81,6 @@ O projeto está licenciado sob a [Licença Hipocrática](https://firstdonoharm.d
 
 Documentação está em português (quando possível), código e configurações
 estão em inglês.
-
------
 
 ## Desenvolvimento
 
