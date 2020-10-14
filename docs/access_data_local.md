@@ -19,19 +19,41 @@ analisar:
     pip install basedosdados
 
     # caso não tenha, instale e configure gsutil
-    pip install gsutil
+    pip install gsutil && pip install gcloud
     # siga as instrucoes que irao aparecer
     gsutil config
     ```
+
+    Caso não apareça o comando `gcloud` (você pode testar rodando `gloud info` na linha de comando), instale via curl:
+    
+    ```bash
+    curl https://sdk.cloud.google.com | bash
+    # reinicia shell
+    exec -l $SHELL
+    # siga as instrucoes que irao aparecer
+    gcloud init
+    ```
+
 === "Python"
     ```bash
     pip install basedosdados
 
     # caso não tenha, instale e configure gsutil
-    pip install gsutil
+    pip install gsutil && pip install gcloud
     # siga as instrucoes que irao aparecer
     gsutil config
     ```
+
+    Caso não apareça o comando `gcloud` (você pode testar rodando `gloud info` na linha de comando), instale via curl:
+    
+    ```bash
+    curl https://sdk.cloud.google.com | bash
+    # reinicia shell
+    exec -l $SHELL
+    # siga as instrucoes que irao aparecer
+    gcloud init
+    ```
+
 === "R"
     Ainda não temos suporte oficial para R, mas recomendamos o pacote [bigrquery](https://bigrquery.r-dbi.org/).
     ```bash
@@ -67,6 +89,8 @@ em todos os anos disponíveis**.
     LIMIT 100;'
     ```
 
+    Caso esteja rodando a query pela 1a vez, ela vai somente configurar seu ambiente (siga as instruções que irão aparecer). Rode a query novamente para puxar os dados.
+
     !!! Info
         Por padrão, o BigQuery escolhido para puxar os dados é
         `basedosdados` - mas você pode utilizar também para qualquer projeto
@@ -91,6 +115,8 @@ em todos os anos disponíveis**.
     # Ou carregar no pandas
     df = bd.read_sql(pib_per_capita)
     ```
+
+    Caso esteja rodando a query pela 1a vez, ela vai somente configurar seu ambiente (siga as instruções que irão aparecer). Rode a query novamente para puxar os dados.
 
     !!! Info
         Por padrão, o BigQuery escolhido para puxar os dados é
