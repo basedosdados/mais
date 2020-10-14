@@ -1,5 +1,6 @@
 import click
 import os
+import time
 
 from basedosdados.base import Base
 from basedosdados.dataset import Dataset
@@ -471,22 +472,29 @@ def set_config_file():
             "project_id: "
         )
 
-        run_bash("gcloud iam service-accounts create basedosdados-cli")
+        os.popen("gcloud iam service-accounts create basedosdados-cli")
+        time.sleep(3)
 
-        run_bash(
+        os.popen(
             f"""gcloud projects add-iam-policy-binding {project_id} --member "serviceAccount:basedosdados-cli@{project_id}.iam.gserviceaccount.com" --role "roles/owner"
             """
         )
+        time.sleep(3)
 
-        run_bash(
+        os.popen(
             f"""gcloud iam service-accounts keys create ~/.basedosdados/iam.json --iam-account basedosdados-cli@{project_id}.iam.gserviceaccount.com"""
         )
+        time.sleep(3)
 
         print(
             "\nRun this command and rerun the application:\n"
             "export GOOGLE_APPLICATION_CREDENTIALS=~/.basedosdados/iam.json"
         )
-        exit()
+
+        time.sleep(3)
+        print("\nFinishing...")
+
+        os.exit()
 
 
 set_config_file()
