@@ -11,39 +11,50 @@
     <em>Mecanismo de busca e <b>repositório</b> de bases de dados brasileiras e internacionais.</em>
 </p>
 
+<p align="center">
+  <a href="https://github.com/basedosdados/mais/subscription" target="_blank">
+    <img src="https://img.shields.io/github/watchers/jonsn0w/hyde.svg?style=social" alt="Watch">
+  </a>
+  <a href="https://github.com/basedosdados/mais/stargazers" target="_blank">
+    <img src="https://img.shields.io/github/stars/jonsn0w/hyde.svg?style=social" alt="Start">
+  </a>
+  <a href="https://twitter.com/intent/tweet?text=Baixe%20e%20faça%20queries%20em%20dados%20publicos,%20tratados%20e%20gratuitos%20com%20a%20Base%20dos%20Dados%20Mais%20🔍%20➕:%20https://basedosdados.github.io/mais/%20via%20@basedosdados" target="_blank">
+    <img src="https://img.shields.io/twitter/url/https/github.com/jonsn0w/hyde.svg?style=social" alt="Tweet">
+  </a>
+</p>
+
 ---
 
-# Base dos Dados Mais
+## Base dos Dados Mais
 
 Uma simples consulta de SQL é o suficiente para cruzamento de bases que
 você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor
 e subir clusters.
 
-Nosso repositório traz acesso, rapidez, escala, facilidade, economia, 
+Nosso repositório traz acesso, rapidez, escala, facilidade, economia,
 curadoria, e transparência ao cenário de dados no Brasil.
 
-
-[![Whatch](https://img.shields.io/github/watchers/jonsn0w/hyde.svg?style=social)](https://github.com/basedosdados/mais/subscription)
-[![Star](https://img.shields.io/github/stars/jonsn0w/hyde.svg?style=social)](https://github.com/basedosdados/mais/stargazers)
-[![Tweet](https://img.shields.io/twitter/url/https/github.com/jonsn0w/hyde.svg?style=social)](https://twitter.com/intent/tweet?text=Baixe%20e%20faça%20queries%20em%20dados%20publicos,%20tratados%20e%20gratuitos%20com%20a%20Base%20dos%20Dados%20Mais%20🔍%20➕:%20https://basedosdados.github.io/mais/%20via%20@basedosdados)
-
-<!-- <p float="left">
-  <img src="docs/images/bq_button.png" href="https://console.cloud.google.com/bigquery?p=basedosdados&page=project" width="300" />
-  <img src="docs/images/docs_button.png" href="basedosdados.github.io/mais" width="300" />
-</p> -->
-
-## Quick Start
-
-<div class="row" style="margin:400px;display:flex;flex-direction:row;justify-content:center;align-content:stretch;flex-flow: column wrap;">
+---
 
 
-  [![](docs/images/bq_button.png)](https://console.cloud.google.com/bigquery?p=basedosdados&page=project)
+<p align="center" display="inline-block">
+  <a href="https://console.cloud.google.com/bigquery?p=basedosdados&page=project" target="_blank">
+    <img src="docs/images/bq_button.png" alt="" width="300" display="inline-block" margin="200">
+  </a>
+  <a href="https://basedosdados.github.io/mais" target="_blank" display="inline-block" margin="200">
+    <img src="docs/images/docs_button.png" alt="Start" width="300">
+  </a>
+</p>
 
-  [![](docs/images/docs_button.png)](https://basedosdados.github.io/mais)
-  
-</div>
+---
 
-### Por que o BigQuery?
+## Instale nosso CLI
+
+[![](docs/images/bdd_install.png)](basedosdados.github.io/mais)
+
+---
+
+## Por que o BigQuery?
 
 - **Acesso**: É possível deixar os dados públicos, i.e., qualquer
   pessoa com uma conta no Google Cloud pode fazer uma query na base,
@@ -58,16 +69,10 @@ curadoria, e transparência ao cenário de dados no Brasil.
 
 ---
 
-### Instale nosso CLI
-
-[![](docs/images/bdd_install.png)](basedosdados.github.io/mais)
-
 ## Contribua! 💚
 
 **Incentivamos que outras instituições e pessoas contribuam**. Veja mais
 como contribuir [aqui](https://basedosdados.github.io/mais/github/).
-
----
 
 ## Como citar o projeto 📝
 
