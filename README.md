@@ -1,36 +1,87 @@
+
+<!-- Header -->
 <p align="center">
-  <a href="https://squidfunk.github.io/mkdocs-material/">
-    <img src="https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4" width="320" alt="Base dos Dados">
+  <a href="https://basedosdados.github.io/mais/">
+    <img src="docs/images/bdmais_logo.png" width="340" alt="Base dos Dados Mais">
   </a>
 </p>
 
+
 <p align="center">
-  <strong>
-    Mecanismo de busca e repositório de bases de dados brasileiras e internacionais
-  </strong>
+    <em>Mecanismo de busca e <b>repositório</b> de bases de dados brasileiras e internacionais.</em>
 </p>
 
-O intuito do projeto é organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery.
-Qualquer pessoa poderá fazer queries em bases tratadas e documentadas que estarão disponíveis e estáveis.
+---
 
-Uma simples consulta de SQL será o suficiente para cruzamento de bases que você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor e subir clusters.
+# Base dos Dados Mais
 
-## Instale nosso CLI
+Uma simples consulta de SQL é o suficiente para cruzamento de bases que
+você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor
+e subir clusters.
 
-`pip install basedosdados
+Nosso repositório traz acesso, rapidez, escala, facilidade, economia, 
+curadoria, e transparência ao cenário de dados no Brasil.
 
-**Incentivamos que outras instituições e pessoas contribuam**. Só é requerido que o processo de captura e tratamento sejam públicos e documentados, e a inserção dos dados no BigQuery siga nossa metodologia descrita abaixo.
 
-#### Porque o BigQuery?
+[![Whatch](https://img.shields.io/github/watchers/jonsn0w/hyde.svg?style=social)](https://github.com/basedosdados/mais/subscription)
+[![Star](https://img.shields.io/github/stars/jonsn0w/hyde.svg?style=social)](https://github.com/basedosdados/mais/stargazers)
+[![Tweet](https://img.shields.io/twitter/url/https/github.com/jonsn0w/hyde.svg?style=social)](https://twitter.com/intent/tweet?text=Baixe%20e%20faça%20queries%20em%20dados%20publicos,%20tratados%20e%20gratuitos%20com%20a%20Base%20dos%20Dados%20Mais%20🔍%20➕:%20https://basedosdados.github.io/mais/%20via%20@basedosdados)
 
-Sabemos que estruturar os dados em uma plataforma privada não é o ideal para um projeto de dados abertos. Porém o BigQuery oferece uma infraestrutura com algumas vantagens:
+<!-- <p float="left">
+  <img src="docs/images/bq_button.png" href="https://console.cloud.google.com/bigquery?p=basedosdados&page=project" width="300" />
+  <img src="docs/images/docs_button.png" href="basedosdados.github.io/mais" width="300" />
+</p> -->
 
-- É possível deixar os dados públicos, i.e., qualquer pessoa com uma conta no Google Cloud pode fazer uma query na base, quando quiser
-- O usuário (quem faz a query) paga por ela. Isso deixa os custos do projeto bem baixos
-- O BigQuery escala magicamente para hexabytes se necessário
-- O custo é praticamente zero para usuários. São cobrados somente 5 dólares por terabyte de dados que sua query percorrer, e os primeiros 5 terabytes são gratuitos.
+## Quick Start
 
-### Desenvolvimento
+<div class="row" style="margin:100px;display:flex;flex-direction:row;justify-content:center;align-content:stretch;flex-flow: column wrap;">
+
+  [![](docs/images/bq_button.png)](https://console.cloud.google.com/bigquery?p=basedosdados&page=project)
+  
+  [![](docs/images/docs_button.png)](basedosdados.github.io/mais)
+  
+</div>
+
+### Por que o BigQuery?
+
+- **Acesso**: É possível deixar os dados públicos, i.e., qualquer
+  pessoa com uma conta no Google Cloud pode fazer uma query na base,
+  quando quiser.
+- **Rapidez**: Uma query muito longa não demora menos de minutos para
+  ser processada.
+- **Escala**: O BigQuery escala magicamente para hexabytes se necessário.
+- **Facilidade**: Você pode cruzar tabelas tratadas e atualizadas num só lugar.
+- **Economia**: O custo é praticamente zero para usuários - **1
+  TB gratuito por mês para usar como quiser**. Depois disso, são cobrados
+  somente 5 dólares por TB de dados que sua query percorrer.
+
+---
+
+### Instale nosso CLI
+
+[![](docs/images/bdd_install.png)](basedosdados.github.io/mais)
+
+## Contribua! 💚
+
+**Incentivamos que outras instituições e pessoas contribuam**. Veja mais
+como contribuir [aqui](https://basedosdados.github.io/mais/github/).
+
+---
+
+## Como citar o projeto 📝
+
+O projeto está licenciado sob a [Licença Hipocrática](https://firstdonoharm.dev/version/2/1/license.html). Sempre que usar os dados cite a fonte como:
+
+> Carabetta, J.; Dahis, R.; Israel, F.; Scovino, F. (2020) Base dos Dados Mais: Repositório de Dados. Github - https://github.com/basedosdados/mais.
+
+## Idiomas
+
+Documentação está em português (quando possível), código e configurações
+estão em inglês.
+
+-----
+
+## Desenvolvimento
 
 #### CLI
 
@@ -60,4 +111,3 @@ Para testar a documentação, rode:
 ```sh
 mkdocs serve 
 ```
-
