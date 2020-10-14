@@ -31,5 +31,5 @@ SAFE_CAST(code_subdistrict AS NUMERIC) id_subdistrito,
 SAFE_CAST(name_subdistrict AS STRING) nome_subdistrito,
 SAFE_CAST(code_neighborhood AS NUMERIC) id_vizinhanca,
 SAFE_CAST(name_neighborhood AS STRING) nome_vizinhanca,
-ST_GEOGFROMTEXT(geometry) geometria
+SAFE.ST_GEOGFROMTEXT(geometry) geometria
 from basedosdados-staging.br_geobr_mapas_staging.setor_censitario_2010 as t
