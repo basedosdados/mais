@@ -38,7 +38,7 @@ curadoria, e transparência ao cenário de dados no Brasil.
 
   [![](docs/images/bq_button.png)](https://console.cloud.google.com/bigquery?p=basedosdados&page=project)
   
-  [![](docs/images/docs_button.png)](basedosdados.github.io/mais)
+  [![](docs/images/docs_button.png)](https://basedosdados.github.io/mais)
   
 </div>
 
