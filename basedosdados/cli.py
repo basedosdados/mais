@@ -491,10 +491,7 @@ def set_config_file():
             "export GOOGLE_APPLICATION_CREDENTIALS=~/.basedosdados/iam.json"
         )
 
-        time.sleep(3)
-        print("\nFinishing...")
-
-        os.exit()
+        exit()
 
 
 set_config_file()
