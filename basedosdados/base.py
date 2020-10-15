@@ -174,7 +174,8 @@ class Base:
             c_file["templates_path"] = str(self.config_path / "templates")
 
             config_file.open("w").write(tomlkit.dumps(c_file))
-
+            self._refresh_templates()
+            
     def _load_config(self):
 
         return tomlkit.parse(
@@ -206,7 +207,7 @@ class Base:
             )
 
     def _refresh_templates(self):
-        shutil.rmtree((self.config_path / "templates"))
+        shutil.rmtree((self.config_path / "templates"), ignore_errors=True)
         shutil.copytree(
             (Path(__file__).parent / "configs" / "templates"),
             (self.config_path / "templates"),
