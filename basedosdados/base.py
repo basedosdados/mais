@@ -84,7 +84,10 @@ class Base:
         config_file = self.config_path / "config.toml"
         
         #Create credentials folder
-        self._refresh_credentials()
+        credentials_folder = Path.home() / self.config_path / 'credentials'
+        credentials_folder.mkdir(exist_ok=True, parents=True)
+        
+        
         #Create template folder
         self._refresh_templates()
         
