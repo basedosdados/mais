@@ -157,8 +157,8 @@ class Base:
                 res = (
                     input(
                         "\n********* STEP 5 **********\n"
-                        f"Save the JSON credential with the name staging.json from the link [{credentials_url_staging}]"
-                        "in the path of your choice. "
+                        f"Save the JSON credential with the name staging.json from the link {credentials_url_staging}"
+                        " in the path of your choice. "
                         f"Is it at the current path ({credential_path_staging})? [Y/n]\n"
                     )
                     .lower()
@@ -222,7 +222,7 @@ class Base:
                     input(
                         "\n********* STEP 8 **********\n"
                         f"Save the JSON credential with the name prod.json from the link {credentials_url_prod}"
-                        "in the path of your choice. "
+                        " in the path of your choice. "
                         f"Is it at the current path ({credential_path_prod})? [Y/n]\n"
                     )
                     .lower()
