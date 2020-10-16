@@ -10,8 +10,14 @@ bucket_name = ""
 templates_path =  "~/.basedosdados/templates"
 
 [gcloud-projects]
-staging = ""
-prod = ""
+
+    [gcloud-projects.staging]
+    name = ""
+    credentials_path = ""
+
+    [gcloud-projects.prod]
+    name = ""
+    credentials_path = ""
 
 # Data about you to auto-fill config
 # TODO: issue 20
