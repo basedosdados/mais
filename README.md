@@ -90,7 +90,8 @@ Suba o CLI localmente
 
 ```sh
 make create-env
-. .bases/bin/activate
+. .mais/bin/activate
+python setup.py develop
 ```
 
 #### Versionamento
