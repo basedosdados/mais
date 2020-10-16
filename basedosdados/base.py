@@ -34,26 +34,26 @@ class Base:
     def _load_credentials(self, mode):
 
         return service_account.Credentials.from_service_account_file(
-            self.config["gcloud-projects"][mode]['credentials_path']+ f"/{mode}.json",
-            scopes=["https://www.googleapis.com/auth/cloud-platform"])
+            self.config["gcloud-projects"][mode]["credentials_path"] + f"/{mode}.json",
+            scopes=["https://www.googleapis.com/auth/cloud-platform"],
+        )
 
-        
     @property
     @lru_cache(256)
     def client(self):
 
         return dict(
             bigquery_prod=bigquery.Client(
-                credentials=self._load_credentials('prod'),
-                project=self.config["gcloud-projects"]["prod"]['name'],
+                credentials=self._load_credentials("prod"),
+                project=self.config["gcloud-projects"]["prod"]["name"],
             ),
             bigquery_staging=bigquery.Client(
-                credentials=self._load_credentials('staging'),
-                project=self.config["gcloud-projects"]["staging"]['name'],
+                credentials=self._load_credentials("staging"),
+                project=self.config["gcloud-projects"]["staging"]["name"],
             ),
             storage_staging=storage.Client(
-                credentials=self._load_credentials('staging'),
-                project=self.config["gcloud-projects"]["staging"]['name'],
+                credentials=self._load_credentials("staging"),
+                project=self.config["gcloud-projects"]["staging"]["name"],
             ),
         )
 
@@ -80,17 +80,16 @@ class Base:
 
         # Create config folder
         self.config_path.mkdir(exist_ok=True, parents=True)
-        
+
         config_file = self.config_path / "config.toml"
-        
-        #Create credentials folder
-        credentials_folder = Path.home() / self.config_path / 'credentials'
+
+        # Create credentials folder
+        credentials_folder = Path.home() / self.config_path / "credentials"
         credentials_folder.mkdir(exist_ok=True, parents=True)
-        
-        
-        #Create template folder
+
+        # Create template folder
         self._refresh_templates()
-        
+
         if (not config_file.exists()) or (force):
 
             input(
@@ -116,9 +115,9 @@ class Base:
                     .lower()
                     .strip()
                 )
-                if res=='':
-                    res='y'
-                
+                if res == "":
+                    res = "y"
+
                 if res == "y":
                     metadata_path = Path.cwd()
                     break
@@ -167,23 +166,26 @@ class Base:
                     .lower()
                     .strip()
                 )
-                
-                if res=='':
-                    res='y'
-                    
+
+                if res == "":
+                    res = "y"
+
                 if res == "y":
                     credential_path_staging = credential_path_staging
                     break
                 elif res == "n":
-                    credential_path_staging = input("\nWhere would you like to save it:\n")
+                    credential_path_staging = input(
+                        "\nWhere would you like to save it:\n"
+                    )
 
                     break
                 else:
                     print(f"{res} is not accepted as an awnser. Try y or n.\n")
 
-            c_file["gcloud-projects"]['staging']['credentials_path'] = str(credential_path_staging)
-            
-            
+            c_file["gcloud-projects"]["staging"]["credentials_path"] = str(
+                credential_path_staging
+            )
+
             res = (
                 input(
                     "\n********* STEP 6 **********\n"
@@ -192,9 +194,9 @@ class Base:
                 .strip()
                 .lower()
             )
-            
-            if res=='':
-                res='n'
+
+            if res == "":
+                res = "n"
 
             bucket_name = self._input_validator(
                 "\n********* STEP 7 **********\n"
@@ -202,7 +204,7 @@ class Base:
                 "Bucket name [basedosdados]: ",
                 "basedosdados",
             )
-            
+
             while True:
                 if res == "y":
                     print("Great!")
@@ -217,7 +219,7 @@ class Base:
                     break
                 else:
                     print(f"{res} is not accepted as an awnser. Try y or n.\n")
-            
+
             while True:
                 credential_path_prod = f"{Path.home()}/.basedosdados/credentials"
                 credentials_url_prod = f"https://console.cloud.google.com/apis/credentials/serviceaccountkey?project={project_prod}"
@@ -231,10 +233,10 @@ class Base:
                     .lower()
                     .strip()
                 )
-                
-                if res=='':
-                    res='y'
-                    
+
+                if res == "":
+                    res = "y"
+
                 if res == "y":
                     credential_path_prod = credential_path_prod
                     break
@@ -245,19 +247,17 @@ class Base:
                 else:
                     print(f"{res} is not accepted as an awnser. Try y or n.\n")
 
-            
-            c_file["gcloud-projects"]['prod']['credentials_path'] = str(credential_path_prod)
-            
-            
-            c_file["gcloud-projects"]["staging"]['name'] = project_staging
-            c_file["gcloud-projects"]["prod"]['name'] = project_prod
+            c_file["gcloud-projects"]["prod"]["credentials_path"] = str(
+                credential_path_prod
+            )
+
+            c_file["gcloud-projects"]["staging"]["name"] = project_staging
+            c_file["gcloud-projects"]["prod"]["name"] = project_prod
             c_file["bucket_name"] = project_prod
             c_file["templates_path"] = f"{Path.home()}/.basedosdados/templates"
 
             config_file.open("w").write(tomlkit.dumps(c_file))
 
-
-            
     def _load_config(self):
 
         return tomlkit.parse(
@@ -293,11 +293,4 @@ class Base:
         shutil.copytree(
             (Path(__file__).parent / "configs" / "templates"),
             (self.config_path / "templates"),
-        )
-        
-    def _refresh_credentials(self):
-        shutil.rmtree((self.config_path / "credentials"), ignore_errors=True)
-        shutil.copytree(
-            (Path(__file__).parent / "configs" / "credentials"),
-            (self.config_path / "credentials"),
         )
