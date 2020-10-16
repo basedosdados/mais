@@ -57,7 +57,7 @@ def download(
     savepath = Path(savepath)
 
     if (dataset_id is not None) and (table_id is not None):
-        table = read_table(dataset_id, table_id, limit=limit)
+        table = read_table(dataset_id, table_id, project_id, limit=limit)
     elif query is not None:
         if limit is not None:
             query += f" limit {limit}"
