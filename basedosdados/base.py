@@ -80,8 +80,14 @@ class Base:
 
         # Create config folder
         self.config_path.mkdir(exist_ok=True, parents=True)
-
+        
         config_file = self.config_path / "config.toml"
+        
+        #Create credentials folder
+        self._refresh_credentials()
+        #Create template folder
+        self._refresh_templates()
+        
         if (not config_file.exists()) or (force):
 
             input(
@@ -95,6 +101,7 @@ class Base:
             c_file = tomlkit.parse(
                 (Path(__file__).parent / "configs/config.toml").open("r").read()
             )
+
             while True:
                 res = (
                     input(
@@ -108,7 +115,7 @@ class Base:
                 )
                 if res=='':
                     res='y'
-                    
+                
                 if res == "y":
                     metadata_path = Path.cwd()
                     break
@@ -145,14 +152,14 @@ class Base:
             )
 
             while True:
-                credential_staging_path = f"{Path.home()}/.basedosdados/credentials"
+                credential_path_staging = f"{Path.home()}/.basedosdados/credentials"
                 credentials_url_staging = f"https://console.cloud.google.com/apis/credentials/serviceaccountkey?project={project_staging}"
                 res = (
                     input(
                         "\n********* STEP 5 **********\n"
                         f"Save the JSON credential with the name staging.json from the link [{credentials_url_staging}]"
                         "in the path of your choice. "
-                        f"Is it at the current path ({credential_staging_path})? [Y/n]\n"
+                        f"Is it at the current path ({credential_path_staging})? [Y/n]\n"
                     )
                     .lower()
                     .strip()
@@ -162,16 +169,16 @@ class Base:
                     res='y'
                     
                 if res == "y":
-                    credential_staging_path = credential_staging_path
+                    credential_path_staging = credential_path_staging
                     break
                 elif res == "n":
-                    credential_staging_path = input("\nWhere would you like to save it:\n")
+                    credential_path_staging = input("\nWhere would you like to save it:\n")
 
                     break
                 else:
                     print(f"{res} is not accepted as an awnser. Try y or n.\n")
 
-            c_file["gcloud-projects"]['staging']['credentials_path'] = str(credential_staging_path)
+            c_file["gcloud-projects"]['staging']['credentials_path'] = str(credential_path_staging)
             
             
             res = (
@@ -209,14 +216,14 @@ class Base:
                     print(f"{res} is not accepted as an awnser. Try y or n.\n")
             
             while True:
-                credential_prod_path = f"{Path.home()}/.basedosdados/credentials"
+                credential_path_prod = f"{Path.home()}/.basedosdados/credentials"
                 credentials_url_prod = f"https://console.cloud.google.com/apis/credentials/serviceaccountkey?project={project_prod}"
                 res = (
                     input(
                         "\n********* STEP 8 **********\n"
                         f"Save the JSON credential with the name prod.json from the link {credentials_url_prod}"
                         "in the path of your choice. "
-                        f"Is it at the current path ({credential_prod_path})? [Y/n]\n"
+                        f"Is it at the current path ({credential_path_prod})? [Y/n]\n"
                     )
                     .lower()
                     .strip()
@@ -226,17 +233,17 @@ class Base:
                     res='y'
                     
                 if res == "y":
-                    credential_prod_path = credential_prod_path
+                    credential_path_prod = credential_path_prod
                     break
                 elif res == "n":
-                    credential_prod_path = input("\nWhere would you like to save it:\n")
+                    credential_path_prod = input("\nWhere would you like to save it:\n")
 
                     break
                 else:
                     print(f"{res} is not accepted as an awnser. Try y or n.\n")
 
             
-            c_file["gcloud-projects"]['prod']['credentials_path'] = str(credential_prod_path)
+            c_file["gcloud-projects"]['prod']['credentials_path'] = str(credential_path_prod)
             
             
             c_file["gcloud-projects"]["staging"]['name'] = project_staging
@@ -245,7 +252,8 @@ class Base:
             c_file["templates_path"] = f"{Path.home()}/.basedosdados/templates"
 
             config_file.open("w").write(tomlkit.dumps(c_file))
-            self._refresh_templates()
+
+
             
     def _load_config(self):
 
@@ -282,4 +290,11 @@ class Base:
         shutil.copytree(
             (Path(__file__).parent / "configs" / "templates"),
             (self.config_path / "templates"),
+        )
+        
+    def _refresh_credentials(self):
+        shutil.rmtree((self.config_path / "credentials"), ignore_errors=True)
+        shutil.copytree(
+            (Path(__file__).parent / "configs" / "credentials"),
+            (self.config_path / "credentials"),
         )
