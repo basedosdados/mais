@@ -55,7 +55,6 @@ def download(
     Exception
         If either table_id or dataset_id were are empty.
     """
-
     savepath = Path(savepath)
 
     if savepath.is_dir():
@@ -76,8 +75,11 @@ def download(
         table = read_sql(query)
     elif query is None:
         raise Exception("Either table_id, dataset_id or query should be filled.")
+    
+    # make default value of argument `index` in `to_csv()` as False 
+    index_bool = pandas_kwargs.pop('index', False)
 
-    table.to_csv(savepath, **pandas_kwargs)
+    table.to_csv(savepath, index=index_bool, **pandas_kwargs)
 
 
 def read_sql(query):
