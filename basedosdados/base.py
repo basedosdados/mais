@@ -34,7 +34,7 @@ class Base:
     def _load_credentials(self, mode):
 
         return service_account.Credentials.from_service_account_file(
-            self.config["gcloud-projects"][mode]["credentials_path"] + f"/{mode}.json",
+            self.config["gcloud-projects"][mode]["credentials_path"],
             scopes=["https://www.googleapis.com/auth/cloud-platform"],
         )
 
@@ -67,14 +67,58 @@ class Base:
         )
 
     @staticmethod
-    def _input_validator(context, default):
+    def _input_validator(context, default=""):
 
         var = input(context)
 
         if var:
-            return var
+            return var.lower().strip()
         else:
-            return default
+            return default.lower().strip()
+
+    def _selection_yn(
+        self, first_question, default_yn, default_return, no_question, default_no=""
+    ):
+
+        while True:
+
+            res = self._input_validator(first_question, default_yn)
+
+            if res == "y":
+                return default_return
+            elif res == "n":
+                return self._input_validator(no_question, default_no)
+            else:
+                print(f"{res} is not accepted as an awnser. Try y or n.\n")
+
+    def _check_credentials(
+        self,
+        project_id,
+        mode,
+        credentials_path,
+        credentials_url="https://console.cloud.google.com/apis/credentials/serviceaccountkey?project=",
+    ):
+
+        input(
+            f"1. Go to the following link: {credentials_url}{project_id}\n"
+            "2. Create a service account\n"
+            "3. Select the Key type as JSON\n"
+            "4. Hit CREATE\n"
+            f"5. Now, save the json file in {credentials_path} as {mode}.json\n\n"
+            f"{mode} filename: {credentials_path}/{mode}.json"
+            "\n\n[Press enter to check if data is correctly saved]"
+        )
+
+        while True:
+            if (credentials_path / f"{mode}.json").exists():
+                print("We found it :)")
+                break
+            else:
+                input(
+                    "\nWe couldn't find it :( \nMake sure that the file has the following name:"
+                    f"\n\n{mode} filename: {credentials_path}/{mode}.json"
+                    "\n\n[Press enter to check if data is correctly saved]"
+                )
 
     def _init_config(self, force):
 
@@ -92,6 +136,11 @@ class Base:
 
         if (not config_file.exists()) or (force):
 
+            # Load config file
+            c_file = tomlkit.parse(
+                (Path(__file__).parent / "configs/config.toml").open("r").read()
+            )
+
             input(
                 "\n\nApparently, that is the first time that you are using "
                 "basedosdados :)\n"
@@ -100,160 +149,93 @@ class Base:
                 "[press enter to continue]"
             )
 
-            c_file = tomlkit.parse(
-                (Path(__file__).parent / "configs/config.toml").open("r").read()
+            ############# STEP 1 - METADATA PATH #######################
+
+            metadata_path = self._selection_yn(
+                first_question=(
+                    "\n********* STEP 1 **********\n"
+                    "Where are you going to save the metadata files of "
+                    "datasets and tables?\n"
+                    f"Is it at the current path ({Path.cwd()})? [Y/n]\n"
+                ),
+                default_yn="y",
+                default_return=Path.cwd(),
+                no_question=("\nWhere would you like to save it?\n" "metadata path: "),
             )
 
-            while True:
-                res = (
-                    input(
-                        "\n********* STEP 1 **********\n"
-                        "Where are you going to save the configuration files of "
-                        "datasets and tables?\n"
-                        f"Is it at the current path ({Path.cwd()})? [Y/n]\n"
-                    )
-                    .lower()
-                    .strip()
-                )
-                if res == "":
-                    res = "y"
-
-                if res == "y":
-                    metadata_path = Path.cwd()
-                    break
-                elif res == "n":
-                    metadata_path = input("\nWhere would you like to save it:\n")
-                    break
-                else:
-                    print(f"{res} is not accepted as an awnser. Try y or n.\n")
-
-            # print(f"\nMetadata path is set to {metadata_path}!")
             c_file["metadata_path"] = str(metadata_path / "bases")
 
-            input(
-                "\n********* STEP 2 **********\n"
-                "Make sure that you have gsutil intalled in your computer.\n"
-                "Instructions to install it: https://cloud.google.com/storage/docs/gsutil_install\n"
-                "[press enter to continue]"
+            ############# STEP 2 - CREDENTIALS PATH #######################
+
+            credentials_path = Path.home() / ".basedosdados/credentials"
+            credentials_path = Path(
+                self._selection_yn(
+                    first_question=(
+                        "\n********* STEP 2 **********\n"
+                        "Where do you want to save your Google Cloud credentials?\n"
+                        f"Is it at the {credentials_path}? [Y/n]\n"
+                    ),
+                    default_yn="y",
+                    default_return=credentials_path,
+                    no_question=(
+                        "\nWhere would you like to save it?\n" "credentials path: "
+                    ),
+                )
             )
 
-            input(
-                "\n********* STEP 3 **********\n"
-                "Once gsutil is installed, run the command: \n"
-                "`gcloud auth application-default login` \n"
-                "[press enter to continue]"
-            )
-
+            ############# STEP 3 - STAGING CREDS. #######################
             project_staging = self._input_validator(
-                "\n********* STEP 4 **********\n"
-                "What is the Google Cloud Project that you are going to be using "
-                "to upload and treat data? It might be something with 'staging'"
+                "\n********* STEP 3 **********\n"
+                "What is the Google Cloud Project that you are going to use "
+                "to upload and treat data?\nIt might be something with 'staging'"
                 "in the name. If you just have one project, put its name.\n"
                 "Project id [basedosdados-staging]: ",
                 "basedosdados-staging",
             )
 
-            while True:
-                credential_path_staging = f"{Path.home()}/.basedosdados/credentials"
-                credentials_url_staging = f"https://console.cloud.google.com/apis/credentials/serviceaccountkey?project={project_staging}"
-                res = (
-                    input(
-                        "\n********* STEP 5 **********\n"
-                        f"Save the JSON credential with the name staging.json from the link {credentials_url_staging}"
-                        " in the path of your choice. "
-                        f"Is it at the current path ({credential_path_staging})? [Y/n]\n"
-                    )
-                    .lower()
-                    .strip()
-                )
-
-                if res == "":
-                    res = "y"
-
-                if res == "y":
-                    credential_path_staging = credential_path_staging
-                    break
-                elif res == "n":
-                    credential_path_staging = input(
-                        "\nWhere would you like to save it:\n"
-                    )
-
-                    break
-                else:
-                    print(f"{res} is not accepted as an awnser. Try y or n.\n")
+            self._check_credentials(project_staging, "staging", credentials_path)
 
             c_file["gcloud-projects"]["staging"]["credentials_path"] = str(
-                credential_path_staging
+                credentials_path / "staging.json"
             )
+            c_file["gcloud-projects"]["staging"]["name"] = project_staging
 
-            res = (
-                input(
-                    "\n********* STEP 6 **********\n"
+            ############# STEP 5 - PROD CREDS. #######################
+
+            project_prod = self._selection_yn(
+                first_question=(
+                    "\n********* STEP 4 **********\n"
                     "Is your production project the same as the staging? [y/N]\n"
-                )
-                .strip()
-                .lower()
+                ),
+                default_yn="n",
+                default_return=project_staging,
+                no_question=(
+                    "What is the production Google Cloud Project then?\n"
+                    "Project id [basedosdados]: "
+                ),
+                default_no="basedosdados",
             )
 
-            if res == "":
-                res = "n"
+            self._check_credentials(project_prod, "prod", credentials_path)
+
+            c_file["gcloud-projects"]["prod"]["credentials_path"] = str(
+                credentials_path / "prod.json"
+            )
+            c_file["gcloud-projects"]["prod"]["name"] = project_prod
+
+            ############# STEP 5 - BUCKET NAME #######################
 
             bucket_name = self._input_validator(
-                "\n********* STEP 7 **********\n"
+                "\n********* STEP 5 **********\n"
                 "What is the Storage Bucket that you are going to be using to save the data?\n"
                 "Bucket name [basedosdados]: ",
                 "basedosdados",
             )
 
-            while True:
-                if res == "y":
-                    print("Great!")
-                    project_prod = project_staging
-                    break
-                elif res == "n":
-                    project_prod = self._input_validator(
-                        "What is the production Google Cloud Project then?\n"
-                        "Project id [basedosdados]: ",
-                        "basedosdados",
-                    )
-                    break
-                else:
-                    print(f"{res} is not accepted as an awnser. Try y or n.\n")
+            c_file["bucket_name"] = bucket_name
 
-            while True:
-                credential_path_prod = f"{Path.home()}/.basedosdados/credentials"
-                credentials_url_prod = f"https://console.cloud.google.com/apis/credentials/serviceaccountkey?project={project_prod}"
-                res = (
-                    input(
-                        "\n********* STEP 8 **********\n"
-                        f"Save the JSON credential with the name prod.json from the link {credentials_url_prod}"
-                        " in the path of your choice. "
-                        f"Is it at the current path ({credential_path_prod})? [Y/n]\n"
-                    )
-                    .lower()
-                    .strip()
-                )
+            ############# STEP 6 - SET TEMPLATES #######################
 
-                if res == "":
-                    res = "y"
-
-                if res == "y":
-                    credential_path_prod = credential_path_prod
-                    break
-                elif res == "n":
-                    credential_path_prod = input("\nWhere would you like to save it:\n")
-
-                    break
-                else:
-                    print(f"{res} is not accepted as an awnser. Try y or n.\n")
-
-            c_file["gcloud-projects"]["prod"]["credentials_path"] = str(
-                credential_path_prod
-            )
-
-            c_file["gcloud-projects"]["staging"]["name"] = project_staging
-            c_file["gcloud-projects"]["prod"]["name"] = project_prod
-            c_file["bucket_name"] = project_prod
             c_file["templates_path"] = f"{Path.home()}/.basedosdados/templates"
 
             config_file.open("w").write(tomlkit.dumps(c_file))
