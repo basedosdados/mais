@@ -13,7 +13,6 @@ theme:
     # - header.autohide
     - navigation.tabs
 
-
 repo_url: https://github.com/basedosdados/mais
 repo_name: basedosdados/mais
 
@@ -28,6 +27,8 @@ nav:
   - Acessando os dados: 
     - BigQuery: access_data_bq.md
     - Local: access_data_local.md
+  - Referência API: 
+    - Classes: reference_api.md
   - Nomenclatura: 
     - Regras de nomeação: naming_rules.md
   - Contribua! 💚:
@@ -50,6 +51,21 @@ google_analytics:
 extra_javascript:
 - js/termynal.js
 - js/custom.js
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          # selection:
+          #   selection_opt: true
+          rendering:
+            rendering_opt: "value"
+          setup_commands:
+            - import sys
+            - sys.path.append("docs")
+      watch:
+        - basedosdados
 
 extra_css:
 - css/termynal.css
