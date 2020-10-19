@@ -1,0 +1,27 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "polvoazul",
+      "name": "polvoazul",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1513181?v=4",
+      "profile": "https://github.com/polvoazul",
+      "contributions": [
+        "ideas",
+        "code",
+        "review",
+        "infra"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "mais",
+  "projectOwner": "basedosdados",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
