@@ -37,6 +37,18 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "polvoazul",
+      "name": "polvoazul",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1513181?v=4",
+      "profile": "https://github.com/polvoazul",
+      "contributions": [
+        "ideas",
+        "code",
+        "review",
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
