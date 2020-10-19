@@ -90,6 +90,32 @@ def metadata(dataset_id, table_id, project_id='basedosdados'):
         
     return pd.DataFrame(description, columns=['columns', 'type','description'])
 
+def cost(query, price=0.02):
+    """
+    Estimate the cost of a query in BigQuery considering each Gb costs.
+
+    Parameters
+    ----------
+    query : str
+        Valid SQL Standard Query.
+    price : float, optional
+        Price in US dollars per GB consumed. 
+    """
+    client = bigquery.Client()
+
+    job_config = bigquery.QueryJobConfig()
+    job_config.dry_run = True
+    job_config.use_query_cache = False
+    
+    job = client.query(query, location='US', job_config=job_config)
+    mb = _pretty_format(job.total_bytes_processed, 'bytes')
+
+    # US$ for each GB processed.
+    dollar = (job.total_bytes_processed / 1024/1024/1024) * price
+
+    print(f'Processing {mb} MB, which costs US$ {dollar:,.2f}')
+        
+    return dollar
 
 def info(dataset_id, table_id, project_id='basedosdados', pretty=True):
     """
@@ -119,16 +145,17 @@ def info(dataset_id, table_id, project_id='basedosdados', pretty=True):
 
     table = client.get_table(table_name)
 
-    # as tables are views, using table.num_rows returns 0
-    # nrows = table.num_rows
-    # nbytes = table.num_bytes
-
+    # when tables are views, using table.num_rows returns 0
     job = client.query(
         f'SELECT COUNT(*) FROM {table_name}', 
         location='US'
     )
-    nrows = job.to_dataframe().loc[0, 'f0_']
-    nbytes = job.total_bytes_processed
+    nrows = max(job.to_dataframe().loc[0, 'f0_'], table.num_rows)
+
+    # For bytes, though, if you are working with public data from bq
+    # the job will not account for any byte, so I'll get the maximum 
+    # between that and the table.num_bytes
+    nbytes = max(job.total_bytes_processed, table.num_bytes)
 
     name = table.table_id
     dataset = table.dataset_id
@@ -214,3 +241,5 @@ def _retrieve_information_schema(dataset_id, project_id='basedosdados'):
         f'SELECT * FROM `{project_id}.{dataset_id}.INFORMATION_SCHEMA.VIEWS`'
     )
     return job.to_dataframe()
+
+
