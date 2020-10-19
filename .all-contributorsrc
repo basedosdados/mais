@@ -15,6 +15,17 @@
         "blog",
         "review"
       ]
+    },
+    {
+      "login": "fernandascovino",
+      "name": "Fernanda Scovino",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/20743819?v=4",
+      "profile": "https://fernandascovino.github.io/",
+      "contributions": [
+        "ideas",
+        "doc",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
