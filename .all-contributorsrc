@@ -13,7 +13,11 @@
       "contributions": [
         "ideas",
         "blog",
-        "review"
+        "review",
+        "projectManagement",
+        "bug",
+        "maintenance",
+        "question"
       ]
     },
     {
