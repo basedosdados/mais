@@ -1,5 +1,22 @@
 from google.cloud import bigquery
+import pandas_gbq
 from pathlib import Path
+import pydata_google_auth
+from functools import lru_cache
+
+
+@lru_cache(256)
+def credentials():
+
+    SCOPES = [
+        "https://www.googleapis.com/auth/cloud-platform",
+    ]
+
+    return pydata_google_auth.get_user_credentials(
+        SCOPES,
+        # Use the NOOP cache to avoid writing credentials to disk.
+        # credentials_cache=pydata_google_auth.cache.NOOP,
+    )
 
 
 def download(
@@ -61,7 +78,7 @@ def download(
     elif query is not None:
         if limit is not None:
             query += f" limit {limit}"
-        table = read_sql(query)
+        table = read_sql(query, project_id=project_id)
     elif query is None:
         raise Exception("Either table_id, dataset_id or query should be filled.")
 
@@ -74,7 +91,7 @@ def download(
     table.to_csv(savepath, **pandas_kwargs)
 
 
-def read_sql(query):
+def read_sql(query, project_id="basedosdados"):
     """Load data from BigQuery using a query. Just a wrapper around pandas.read_gbq
 
     Parameters
@@ -87,16 +104,18 @@ def read_sql(query):
     pd.DataFrame
         Query result
     """
-    client = bigquery.Client()
+
     try:
-        return client.query(query).to_dataframe()
+        return pandas_gbq.read_gbq(
+            query, credentials=credentials(), project_id=project_id
+        )
     except OSError:
-        raise OSError (
-            'The project could not be determined.\n'
-            'Set the project with `gcloud config set project <project_id>`.\n'
-            'Where <project_id> is your Google Cloud Project ID that can be found '
-            'here https://console.cloud.google.com/projectselector2/home/dashboard \n'
-    )
+        raise OSError(
+            "The project could not be determined.\n"
+            "Set the project with `gcloud config set project <project_id>`.\n"
+            "Where <project_id> is your Google Cloud Project ID that can be found "
+            "here https://console.cloud.google.com/projectselector2/home/dashboard \n"
+        )
 
 
 def read_table(dataset_id, table_id, project_id="basedosdados", limit=None):
@@ -131,4 +150,4 @@ def read_table(dataset_id, table_id, project_id="basedosdados", limit=None):
     else:
         raise Exception("Both table_id and dataset_id should be filled.")
 
-    return read_sql(query)
+    return read_sql(query, project_id=project_id)
