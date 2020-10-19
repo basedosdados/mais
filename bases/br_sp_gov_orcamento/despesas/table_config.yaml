@@ -1,0 +1,171 @@
+table_id: despesas # AUTO GENERATED
+dataset_id: br_sp_gov_orcamento # AUTO GENERATED
+
+last_updated: 2020-10-19 # AUTO GENERATED
+
+# Descreva a tabela. Essas sao as primeiras frases que um usuario vai ver.
+# Você nao precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste tambem aplicacoes: pesquisa, apps, etc. que usem os dados.
+description: | # REQUIRED
+  Disponibilizacao de informacoes da execucao orcamentaria e financeira dos órgaos e entidades da Administracao Direta e Indireta do Estado a partir de 2010, com detalhamento das despesas empenhadas, liquidadas e pagas, do ano e de restos a pagar, incluídas as intra-orcamentarias.
+
+# Qual organizacao/departamento/pessoa tratou os dados?
+# As vezes ha um ponto intermediario entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa e você, preencha abaixo com suas informacoes.
+treated_by:
+  name: Diego Oliveira # REQUIRED
+  code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento/code # REQUIRED
+  website: https://www.fazenda.sp.gov.br/SigeoLei131/Paginas/FlexConsDespesa.aspx
+  email: ds.oliveira404@gmail.com
+
+# Quem esta completando esse arquivo config?
+published_by:
+  name: Diego Oliveira # REQUIRED
+  code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento/code # REQUIRED
+  website: github.com/d116626
+  email: ds.oliveira404@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulacao de dados, descreva-os aqui.
+treatment_description: |
+  Padronizacao do nome das colunas, remocao de textos e logos, unificacao das bases
+
+# Com qual frequência a base e atualizada?
+# Opcoes: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+data_update_frequency: mês # REQUIRED
+
+# Nível da observacao: quais colunas identificam uma linha unicamente?
+# Escolha todas as opcoes necessarias.
+# Regras: minúsculo, sem acento, singular.
+# Opcoes (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level:
+  - acao
+  - ano
+
+# Qual e a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer ate o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na America Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+  - brasil
+  - SP
+
+# Qual e a cobertura temporal (em anos) da tabela?
+# Opcoes: pre-1999, 2000, 2001, ..., 2019, 2020
+coverage_time:
+  - 2010
+  - 2011
+  - 2012
+  - 2013
+  - 2014
+  - 2015
+  - 2016
+  - 2017
+  - 2018
+  - 2019
+  - 2020
+
+# Liste as colunas da tabela que representam particoes.
+# Nao esqueca de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupara muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se nao houver particoes, nao modifique abaixo.
+partitions: # REQUIRED
+
+# Quais sao as colunas? Certifique-se de escrever uma boa descricao, as pessoas vao gostar
+# para saber sobre o que e a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuracao, você pode apontar a funcao para uma amostra de dados que
+# preenchera automaticamente as colunas.
+# Algumas colunas existirao apenas na tabela final, você as construira em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Alem disso, você deve adicionar as colunas de particao aqui e definir is_partition como True.
+columns: # REQUIRED
+  - name: orgao
+    description: secretarias do governo do estado de SP
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: uo
+    description: Unidade Orcamentaria - Entidade da administracao direta, inclusive fundo ou órgao autônomo, da administracao indireta, autarquia, fundacao ou empresa estatal, em cujo nome a lei orcamentaria ou credito adicional consigna, expressamente, dotacoes com vistas à sua manutencao e à realizacao de um determinado programa de trabalho. Constituem desdobramentos dos órgaos orcamentarios.
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: unidade_gestora
+    description: Unidade orcamentaria ou administrativa investida do poder de gerir recursos orcamentarios e financeiros, proprios ou sob descentralizacao.
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: fonte_de_recursos
+    description: Origem dos valores a serem pagos
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: funcao
+    description: A funcao pode ser traduzida como o maior nível de agregacao das diversas areas deatuacao do setor público. A funcao se relaciona com a missao institucional do órgao,por exemplo, cultura, educacao, saúde, defesa
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: sub_funcao
+    description: A subfuncao representa um nível de agregacao imediatamente inferior à funcao e deveevidenciar  cada area da atuacao governamental, por intermedio  da agregacao dedeterminado subconjunto de despesas e identificacao da natureza basica das acoesque se aglutinam em torno das funcoes.
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: programa
+    description: Programa e o instrumento de organizacao da atuacao governamental que articula umconjunto de acoes que concorrem para a concretizacao de um objetivo comumpreestabelecido, visando a solucao de um problema ou ao atendimento dedeterminada necessidade ou demanda da sociedade.
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: acao
+    description: As acoes sao operacoes das quais resultam produtos bens ou servicos, quecontribuem para atender ao objetivo de um programa.
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: funcional_programatica
+    description: funcional programatica
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: elemento
+    description: Identificador dos objetos de gasto, tais como vencimentos e vantagens fixas, juros, diarias, material de consumo, servicos de terceiros prestados sob qualquer forma, subvencoes sociais, obras e instalacoes, equipamentos e material permanente, auxílios, amortizacao e outros que a Administracao Pública utiliza para a consecucao de seus fins.
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: dotacao_inicial
+    description: Valor do orcamento inicial das despesas
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: dotacao_atual
+    description: Orcamento inicial atualizado por alteracoes nas despesas
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: empenhado
+    description: Cria para o Estado obrigacao de pagamento pendente ou nao de implemento de condicao. Consiste na reserva de dotacao orcamentaria para um fim específico
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: liquidado
+    description: Verificacao do direito adquirido pelo credor
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: pago
+    description: Entrega de numerario ao credor por meio de chequenominativo, ordens de pagamentos ou credito em conta, e só pode ser efetuado após aregular liquidacao da despesa
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: pago_restos
+    description: Despesas orcamentarias empenhadas e nao pagas serao inscritas emRestos a Pagar e constituirao a Dívida Flutuante
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: ano
+    description: Ano da execucao orcamentaria
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
