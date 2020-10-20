@@ -1,0 +1,38 @@
+Deputados que já passaram pela Câmara.
+
+Aqui estão desde de deputados que ficaram 15 mandatos, até suplentes que 
+exerceram o cargo por poucos dias. A tabela carrega colunas como a 
+escolaridade, gênero e data de nascimento. 
+
+Atente-se a coluna id_deputado que pode ser usada para cruzar com outras
+tabelas da Câmara.
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- id_deputado
+
+Frequencia de Atualização
+-------------------------
+Dia
+
+Tratado por
+-----------
+Nome: Henrique Xavier
+Código: https://github.com/gabinete-compartilhado-acredito/BQdatasase
+Website: https://github.com/gabinete-compartilhado-acredito/BQdatasase
+Email: hsxavier at gmail.com
+
+Publicado por
+-------------
+Nome: João Carabetta
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_camara_atividade_legislativa/code
+Website: 
+Email: joao.carabetta at gmail.com
