@@ -173,6 +173,8 @@ class Storage(Base):
 
             if not blob.exists() or if_exists == "replace":
 
+                upload_args["timeout"] = upload_args.get("timeout", None)
+
                 blob.upload_from_filename(str(filepath), **upload_args)
 
             else:
