@@ -1,0 +1,76 @@
+dataset_id: br_ibge_pnad_covid # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-ibge-pnad-covid
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid
+
+# Descreva a base.
+# Ela é sobre o que?
+# Quais as principais fontes de dados?
+# Há links para FAQs e explicações?
+description: | # REQUIRED
+    A coleta da Pesquisa Nacional por Amostra de Domicílios - PNAD COVID19 teve início em 4 de maio de 2020, com entrevistas realizadas por telefone em, aproximadamente, 48 mil domicílios por semana, totalizando cerca de 193 mil domicílios por mês, em todo o Território Nacional. A amostra é fixa, ou seja, os domicílios entrevistados no primeiro mês de coleta de dados permanecerão na amostra nos meses subsequentes, até o fim da pesquisa.
+
+    O questionário se divide em duas partes, sendo uma direcionada a questões de saúde, especificamente sobre sintomas associados à síndrome gripal e outra, a questões de trabalho. Nas questões de saúde, investiga-se a ocorrência de alguns dos principais sintomas da COVID19 no período de referência da pesquisa, considerando-se todos os moradores do domicílio. Para aqueles que apresentaram algum sintoma, perguntam-se quais as providências tomadas para alivio dos sintomas; se buscaram por atendimento médico devido a esses sintomas; e o tipo de estabelecimento de saúde procurado. Nas questões de trabalho, busca-se classificar a população em idade de trabalhar nas seguintes categorias: ocupados, desocupados e pessoas fora da força de trabalho. Investiga-se, ainda, os seguintes aspectos: ocupação e atividade; afastamento do trabalho e o motivo do afastamento; exercício de trabalho remoto; busca por trabalho; motivo por não ter procurado trabalho; horas semanais efetivamente e habitualmente trabalhadas; assim como o rendimento efetivo e habitual do trabalho. Por fim, visando compor o rendimento domiciliar, pergunta-se se algum morador recebeu outros rendimentos não oriundos do trabalho, tais como: aposentadoria, BPC-LOAS, Bolsa Família, algum auxílio emergencial relacionado à COVID, seguro desemprego, aluguel e outros. Cabe ressaltar que a PNAD COVID19 é uma pesquisa com instrumento dinâmico de coleta das informações; portanto, o questionário está sujeito a alterações ao longo do período de sua aplicação.
+
+    A pesquisa prevê divulgações semanais para alguns indicadores, em nível Brasil, e divulgações mensais para um conjunto mais amplo de indicadores, por Unidades da Federação.
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+organization: instituto-brasileiro-de-geografia-e-estatistica
+
+# Qual departamento/grupo/pessoa mantém os dados originais?
+author:
+    name: <nome>
+    email: <email>
+
+# Onde encontrar os dados originais e mais informações?
+website:
+    - https://covid19.ibge.gov.br/pnad-covid/
+
+# Quais grupos caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+groups:
+    - economia
+    - saude
+    - educacao
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Caso crie etiquetas novas, as regras são:
+#   - letras minúsculas
+#   - sem acentos
+#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - COVID19
+    - coronavirus
+
+# Em quais línguas a base (ou a fonte original) está disponível?
+# Regras: minúsculo, sem acentos.
+# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
+languages:
+    - portugues
+
+# Os dados originais estão disponíveis de graça?
+free: sim
+
+# Are microdata available for download?
+microdata: sim
+
+# Existe uma API na fonte original?
+API: nao
+
+# É necessário registrar um usuário para baixar os dados originais?
+registration: nao
+
+# Como os dados originais estão disponibilizados?
+availability: online
+
+# A fonte original requer IP brasileiro para acesso?
+brazilian_IP: nao
+
+# Essa base está sob qual licença?
+# A licença MIT se aplica a bases públicas.
+# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
+license: 
+    name: MIT # REQUIRED
+    url: <url>
