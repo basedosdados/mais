@@ -39,7 +39,11 @@
       "contributions": [
         "ideas",
         "code",
-        "review"
+        "review",
+        "projectManagement",
+        "bug",
+        "maintenance",
+        "question"
       ]
     },
     {
