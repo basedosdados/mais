@@ -1,0 +1,35 @@
+A lista das comissões e outros órgãos legislativos da Câmara e Congresso.
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- id_orgao
+
+Cobertura Temporal
+------------------
+- 1999 até hoje
+
+Frequencia de Atualização
+-------------------------
+Dia
+
+Tratado por
+-----------
+Nome: Henrique Xavier
+Código: https://github.com/gabinete-compartilhado-acredito/BQdatasase
+Website: https://github.com/gabinete-compartilhado-acredito/BQdatasase
+Email: hsxavier at gmail.com
+
+Publicado por
+-------------
+Nome: João Carabetta
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_camara_atividade_legislativa/code
+Website: 
+Email: joao.carabetta at gmail.com
