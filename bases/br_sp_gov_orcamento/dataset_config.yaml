@@ -26,7 +26,7 @@ website:
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
-  - financas
+  - gov-fin-pub
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
 # Caso crie etiquetas novas, as regras são:
@@ -34,7 +34,7 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-  - gov-fin-pub
+  - financas
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.
@@ -46,7 +46,7 @@ languages:
 free: sim
 
 # Are microdata available for download?
-microdata: <sim/não>
+microdata: não
 
 # Existe uma API na fonte original?
 API: nao

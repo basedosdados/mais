@@ -28,11 +28,11 @@ published_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: |
-  Padronização do nome das colunas, remocao de textos e logos, unificação das bases
+  Padronização do nome das colunas, remoção de textos e logos, unificação das bases
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
-data_update_frequency: mês # REQUIRED
+data_update_frequency: 1 ano # REQUIRED
 
 # Nível da observação: quais colunas identificam uma linha unicamente?
 # Escolha todas as opções necessárias.
@@ -89,36 +89,36 @@ partitions: # REQUIRED
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
   - name: orgao
-    description: secretarias do governo do estado de SP
+    description: Secretarias do governo do estado de SP
     is_in_staging: True # Bool [True, False], whether the column is in the staging table
     is_partition: False # Bool [True, False], whether the column is a partition.
 
   - name: gestao
-    description: responsavel pela gestao
+    description: Responsável pela gestão
     is_in_staging: True # Bool [True, False], whether the column is in the staging table
     is_partition: False # Bool [True, False], whether the column is a partition.
 
   - name: unidade_gestora
-    description: unidade orçamentária ou administrativa investida do poder de gerir recursos orçamentários e financeiros, próprios ou sob descentralização.
+    description: Menor nível de detalhamento da classificação institucional, a qual cabe a execução orçamentária e financeira da despesa propriamente dita.
     is_in_staging: True # Bool [True, False], whether the column is in the staging table
     is_partition: False # Bool [True, False], whether the column is a partition.
 
   - name: fonte_de_recursos
-    description: origem dos valores a serem arrecadados
+    description: Origem dos valores a serem arrecadados
     is_in_staging: True # Bool [True, False], whether the column is in the staging table
     is_partition: False # Bool [True, False], whether the column is a partition.
 
   - name: receita
-    description: origem do valor arrecadado
+    description: Origem do valor arrecadado
     is_in_staging: True # Bool [True, False], whether the column is in the staging table
     is_partition: False # Bool [True, False], whether the column is a partition.
 
   - name: previsto_do_ano
-    description: valor de arrecadacao prevista para o ano
+    description: Valor de arrecadação prevista para o ano
     is_in_staging: True # Bool [True, False], whether the column is in the staging table
     is_partition: False # Bool [True, False], whether the column is a partition.
 
   - name: ano
-    description: ano de previsao
+    description: Ano de previsão
     is_in_staging: True # Bool [True, False], whether the column is in the staging table
     is_partition: False # Bool [True, False], whether the column is a partition.

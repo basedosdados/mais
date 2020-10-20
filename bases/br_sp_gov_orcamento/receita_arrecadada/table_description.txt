@@ -37,11 +37,11 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Padronização do nome das colunas, remocao de textos e logos, unificação das bases
+Padronização do nome das colunas, remoção de textos e logos, unificação das bases
 
 Frequencia de Atualização
 -------------------------
-mês
+1 ano
 
 Tratado por
 -----------

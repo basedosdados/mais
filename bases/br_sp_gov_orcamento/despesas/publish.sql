@@ -19,12 +19,13 @@ TIPOS:
 
 */
 SELECT 
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(orgao AS STRING) orgao,
 SAFE_CAST(uo AS STRING) uo,
 SAFE_CAST(unidade_gestora AS STRING) unidade_gestora,
 SAFE_CAST(fonte_de_recursos AS STRING) fonte_de_recursos,
 SAFE_CAST(funcao AS STRING) funcao,
-SAFE_CAST(sub_funcao AS STRING) sub_funcao,
+SAFE_CAST(subfuncao AS STRING) subfuncao,
 SAFE_CAST(programa AS STRING) programa,
 SAFE_CAST(acao AS STRING) acao,
 SAFE_CAST(funcional_programatica AS STRING) funcional_programatica,
@@ -34,6 +35,5 @@ SAFE_CAST(dotacao_atual AS INT64) dotacao_atual,
 SAFE_CAST(empenhado AS INT64) empenhado,
 SAFE_CAST(liquidado AS INT64) liquidado,
 SAFE_CAST(pago AS INT64) pago,
-SAFE_CAST(pago_restos AS INT64) pago_restos,
-SAFE_CAST(ano AS INT64) ano
+SAFE_CAST(pago_restos AS INT64) pago_restos
 from basedosdados-staging.br_sp_gov_orcamento_staging.despesas as t

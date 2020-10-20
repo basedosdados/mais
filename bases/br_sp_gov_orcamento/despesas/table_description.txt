@@ -1,4 +1,4 @@
-Disponibilizacao de informacoes da execucao orcamentaria e financeira dos órgaos e entidades da Administracao Direta e Indireta do Estado a partir de 2010, com detalhamento das despesas empenhadas, liquidadas e pagas, do ano e de restos a pagar, incluídas as intra-orcamentarias.
+Disponibilização de informações da execucao orcamentaria e financeira dos órgãos e entidades da Administração Direta e Indireta do Estado a partir de 2010, com detalhamento das despesas empenhadas, liquidadas e pagas, do ano e de restos a pagar, incluídas as intra-orçamentárias.
 
 
 Para saber mais acesse:
@@ -11,6 +11,7 @@ Apoia-se: https://apoia.se/basedosdados
 Nível da Observação (Colunas que identificam cada linha unicamente)
 -------------------
 - acao
+- elemento
 - ano
 
 Cobertura Temporal
@@ -34,11 +35,11 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Padronizacao do nome das colunas, remocao de textos e logos, unificacao das bases
+Padronização do nome das colunas, remoção de textos e logos, unificação das bases
 
 Frequencia de Atualização
 -------------------------
-mês
+1 ano
 
 Tratado por
 -----------

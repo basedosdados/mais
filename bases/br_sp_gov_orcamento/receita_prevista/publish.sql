@@ -18,12 +18,12 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-SELECT 
+SELECT
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(orgao AS STRING) orgao,
 SAFE_CAST(gestao AS STRING) gestao,
 SAFE_CAST(unidade_gestora AS STRING) unidade_gestora,
 SAFE_CAST(fonte_de_recursos AS STRING) fonte_de_recursos,
 SAFE_CAST(receita AS STRING) receita,
-SAFE_CAST(previsto_do_ano AS INT64) previsto_do_ano,
-SAFE_CAST(ano AS INT64) ano
+SAFE_CAST(previsto_do_ano AS INT64) previsto_do_ano
 from basedosdados-staging.br_sp_gov_orcamento_staging.receita_prevista as t

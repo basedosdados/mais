@@ -8,43 +8,43 @@ last_updated: 2020-10-19 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: | # REQUIRED
-    Disponibilização de informações da execução orçamentária e financeira dos órgãos e entidades da Administração Direta e Indireta do Estado a partir de 2010, com detalhamento das despesas empenhadas, liquidadas e pagas (do ano e de restos a pagar), incluídas as intra-orçamentárias.
+  Disponibilização de informações da execução orçamentária e financeira dos órgãos e entidades da Administração Direta e Indireta do Estado a partir de 2010, com detalhamento das despesas empenhadas, liquidadas e pagas (do ano e de restos a pagar), incluídas as intra-orçamentárias.
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: Diego Oliveira # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento/code # REQUIRED
-    website: https://www.fazenda.sp.gov.br/SigeoLei131/Paginas/FlexConsReceita.aspx
-    email: ds.oliveira404@gmail.com
+  name: Diego Oliveira # REQUIRED
+  code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento/code # REQUIRED
+  website: https://www.fazenda.sp.gov.br/SigeoLei131/Paginas/FlexConsReceita.aspx
+  email: ds.oliveira404@gmail.com
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: Diego Oliveira # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento/code # REQUIRED
-    website: github.com/d116626
-    email: ds.oliveira404@gmail.com
+  name: Diego Oliveira # REQUIRED
+  code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento/code # REQUIRED
+  website: github.com/d116626
+  email: ds.oliveira404@gmail.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: |
-    Padronização do nome das colunas, remocao de textos e logos, unificação das bases
+  Padronização do nome das colunas, remoção de textos e logos, unificação das bases
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
-data_update_frequency: mês # REQUIRED
+data_update_frequency: 1 ano # REQUIRED
 
 # Nível da observação: quais colunas identificam uma linha unicamente?
 # Escolha todas as opções necessárias.
 # Regras: minúsculo, sem acento, singular.
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
-    - orgao
-    - gestao
-    - unidade_gestora
-    - fonte_de_recursos
-    - receita
-    - ano
+  - orgao
+  - gestao
+  - unidade_gestora
+  - fonte_de_recursos
+  - receita
+  - ano
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -56,23 +56,23 @@ observation_level:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - brasil
-    - SP
+  - brasil
+  - SP
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: pre-1999, 2000, 2001, ..., 2019, 2020
 coverage_time:
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
-    
+  - 2010
+  - 2011
+  - 2012
+  - 2013
+  - 2014
+  - 2015
+  - 2016
+  - 2017
+  - 2018
+  - 2019
+
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
@@ -88,37 +88,37 @@ partitions: # REQUIRED
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
-    - name: orgao
-      description: secretarias do governo do estado de SP
-      is_in_staging: True # Bool [True, False], whether the column is in the staging table
-      is_partition: False # Bool [True, False], whether the column is a partition.
+  - name: orgao
+    description: Secretarias do governo do estado de SP
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
 
-    - name: gestao
-      description: responsavel pela gestao
-      is_in_staging: True # Bool [True, False], whether the column is in the staging table
-      is_partition: False # Bool [True, False], whether the column is a partition.
+  - name: gestao
+    description: Responsável pela gestao
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
 
-    - name: unidade_gestora
-      description: unidade orçamentária ou administrativa investida do poder de gerir recursos orçamentários e financeiros, próprios ou sob descentralização.
-      is_in_staging: True # Bool [True, False], whether the column is in the staging table
-      is_partition: False # Bool [True, False], whether the column is a partition.
+  - name: unidade_gestora
+    description: Menor nível de detalhamento da classificação institucional, a qual cabe a execução orçamentária e financeira da despesa propriamente dita.
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
 
-    - name: fonte_de_recursos
-      description: origem dos valores a serem arrecadados
-      is_in_staging: True # Bool [True, False], whether the column is in the staging table
-      is_partition: False # Bool [True, False], whether the column is a partition.
+  - name: fonte_de_recursos
+    description: Origem dos valores a serem arrecadados
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
 
-    - name: receita
-      description: origem do valor arrecadado
-      is_in_staging: True # Bool [True, False], whether the column is in the staging table
-      is_partition: False # Bool [True, False], whether the column is a partition.
+  - name: receita
+    description: Origem do valor arrecadado
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
 
-    - name: arrecadado
-      description: valor arrecadado
-      is_in_staging: True # Bool [True, False], whether the column is in the staging table
-      is_partition: False # Bool [True, False], whether the column is a partition.
+  - name: arrecadado
+    description: Valor arrecadado
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
 
-    - name: ano
-      description: ano de arrecadacao
-      is_in_staging: True # Bool [True, False], whether the column is in the staging table
-      is_partition: False # Bool [True, False], whether the column is a partition.
+  - name: ano
+    description: Ano de arrecadação
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
