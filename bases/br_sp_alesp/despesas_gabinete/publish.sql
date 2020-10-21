@@ -19,6 +19,7 @@ TIPOS:
 
 */
 SELECT 
+SAFE_CAST(35 as INT64) id_estado,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(matricula AS STRING) matricula,
