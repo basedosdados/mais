@@ -1,0 +1,235 @@
+table_id: ocorrecencias_registradas # AUTO GENERATED
+dataset_id: br_sp_ssp_seguranca # AUTO GENERATED
+
+last_updated: 2020-10-20 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: | # REQUIRED
+  Disponibilização de informações mensais das ocorrências registradas pela Secretaria de Segurança Publica de São Paulo (SSP)
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+  name: Diego Oliveira # REQUIRED
+  code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento/code # REQUIRED
+  website: github.com/d116626
+  email: ds.oliveira404@gmail.com
+
+# Quem está completando esse arquivo config?
+published_by:
+  name: Diego Oliveira # REQUIRED
+  code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_ssp_seguranca/code # REQUIRED
+  website: github.com/d116626
+  email: ds.oliveira404@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: |
+  Padronização do nome das colunas, remoção de textos e logos, unificação das bases
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+data_update_frequency: 1 ano # REQUIRED
+
+# Nível da observação: quais colunas identificam uma linha unicamente?
+# Escolha todas as opções necessárias.
+# Regras: minúsculo, sem acento, singular.
+# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level:
+  - id_municipio
+  - ano
+  - mes
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+  - brasil
+  - SP
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: pre-1999, 2000, 2001, ..., 2019, 2020
+coverage_time:
+  - 2002
+  - 2003
+  - 2004
+  - 2005
+  - 2006
+  - 2007
+  - 2008
+  - 2009
+  - 2010
+  - 2011
+  - 2012
+  - 2013
+  - 2014
+  - 2015
+  - 2016
+  - 2017
+  - 2018
+  - 2019
+  - 2020
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+  - name: id_municipio
+    description: ID Município - IBGE 7 Dígitos
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: id_estado
+    description: ID Estado - IBGE 2 Dígitos
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: ano
+    description: Ano
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: mes
+    description: Mês
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: regiao_ssp
+    description: Região definida pela SSP
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: homicidio_doloso
+    description: Homicídio doloso inclui homicídio doloso por acidente de trânsito
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: no_de_vitimas_em_homicidio_doloso
+    description: Número de vítimas em homicídio doloso inclui número de vítimas de homicídio doloso por acidente de trânsito
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: homicidio_doloso_por_acidente_de_transito
+    description: Homicídio doloso por acidente de trânsito
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: no_de_vitimas_em_homicidio_doloso_por_acidente_de_transito
+    description: Número de vítimas de homicídio doloso por acidente de trânsito
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: homicidio_culposo_por_acidente_de_transito
+    description: Homicídio culposo por acidente de trânsito
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: homicidio_culposo_outros
+    description: Outros tipos de Homicídio Culposo
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: tentativa_de_homicidio
+    description: Tentativa de homicídio
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: lesao_corporal_seguida_de_morte
+    description: Lesão corportal seguida de morte
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: lesao_corporal_dolosa
+    description: Lesão corporal dolosa
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: lesao_corporal_culposa_por_acidente_de_transito
+    description: Lesão corporal culposa por acidente de trânsito
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: lesao_corporal_culposa_outras
+    description: Outros tipos de lesão corpotal culposa
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: latrocinio
+    description: Latrocínio
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: no_de_vitimas_em_latrocinio
+    description: Número de vítimas em latrocínio
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: total_de_estupro
+    description: Soma de estupro e estupro de vulnerável
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: estupro
+    description: Estupro
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: estupro_de_vulneravel
+    description: Estupro de vulnerável
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: total_de_roubo_outros
+    description: Soma de roubo - outros, roubo de carga e roubo a banco
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: roubo_outros
+    description: Outros tipos de roubos
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: roubo_de_veiculo
+    description: Roubo de veículo
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: roubo_a_banco
+    description: Roubo a banco
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: roubo_de_carga
+    description: Roubo de carga
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: furto_outros
+    description: Outros tipos de furto
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.
+
+  - name: furto_de_veiculo
+    description: Furto de
+    is_in_staging: True # Bool [True, False], whether the column is in the staging table
+    is_partition: False # Bool [True, False], whether the column is a partition.

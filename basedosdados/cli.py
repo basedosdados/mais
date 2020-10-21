@@ -494,7 +494,7 @@ def set_config_file():
         exit()
 
 
-set_config_file()
+# set_config_file()
 
 if __name__ == "__main__":
 

@@ -17,41 +17,11 @@ analisar:
 === "CLI"
     ```bash
     pip install basedosdados
-
-    # caso não tenha, instale e configure gsutil
-    pip install gsutil && pip install gcloud
-    # siga as instrucoes que irao aparecer
-    gsutil config
-    ```
-
-    Caso não apareça o comando `gcloud` (você pode testar rodando `gloud info` na linha de comando), instale via curl:
-    
-    ```bash
-    curl https://sdk.cloud.google.com | bash
-    # reinicia shell
-    exec -l $SHELL
-    # siga as instrucoes que irao aparecer
-    gcloud init
     ```
 
 === "Python"
     ```bash
     pip install basedosdados
-
-    # caso não tenha, instale e configure gsutil
-    pip install gsutil && pip install gcloud
-    # siga as instrucoes que irao aparecer
-    gsutil config
-    ```
-
-    Caso não apareça o comando `gcloud` (você pode testar rodando `gloud info` na linha de comando), instale via curl:
-    
-    ```bash
-    curl https://sdk.cloud.google.com | bash
-    # reinicia shell
-    exec -l $SHELL
-    # siga as instrucoes que irao aparecer
-    gcloud init
     ```
 
 === "R"

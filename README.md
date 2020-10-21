@@ -1,4 +1,7 @@
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- Header -->
 <p align="center">
   <a href="https://basedosdados.github.io/mais/">
@@ -90,7 +93,8 @@ Suba o CLI localmente
 
 ```sh
 make create-env
-. .bases/bin/activate
+. .mais/bin/activate
+python setup.py develop
 ```
 
 #### Versionamento
@@ -112,3 +116,26 @@ Para testar a documentação, rode:
 ```sh
 mkdocs serve 
 ```
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://www.ricardodahis.com"><img src="https://avatars0.githubusercontent.com/u/6617207?v=4" width="100px;" alt=""/><br /><sub><b>Ricardo Dahis</b></sub></a><br /><a href="#ideas-rdahis" title="Ideas, Planning, & Feedback">🤔</a> <a href="#blog-rdahis" title="Blogposts">📝</a> <a href="https://github.com/basedosdados/mais/pulls?q=is%3Apr+reviewed-by%3Ardahis" title="Reviewed Pull Requests">👀</a> <a href="#projectManagement-rdahis" title="Project Management">📆</a> <a href="https://github.com/basedosdados/mais/issues?q=author%3Ardahis" title="Bug reports">🐛</a> <a href="#maintenance-rdahis" title="Maintenance">🚧</a> <a href="#question-rdahis" title="Answering Questions">💬</a></td>
+    <td align="center"><a href="https://fernandascovino.github.io/"><img src="https://avatars2.githubusercontent.com/u/20743819?v=4" width="100px;" alt=""/><br /><sub><b>Fernanda Scovino</b></sub></a><br /><a href="#ideas-fernandascovino" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/basedosdados/mais/commits?author=fernandascovino" title="Documentation">📖</a> <a href="https://github.com/basedosdados/mais/pulls?q=is%3Apr+reviewed-by%3Afernandascovino" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://github.com/JoaoCarabetta"><img src="https://avatars1.githubusercontent.com/u/19963732?v=4" width="100px;" alt=""/><br /><sub><b>João Carabetta</b></sub></a><br /><a href="#ideas-JoaoCarabetta" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/basedosdados/mais/commits?author=JoaoCarabetta" title="Code">💻</a> <a href="https://github.com/basedosdados/mais/pulls?q=is%3Apr+reviewed-by%3AJoaoCarabetta" title="Reviewed Pull Requests">👀</a> <a href="#projectManagement-JoaoCarabetta" title="Project Management">📆</a> <a href="https://github.com/basedosdados/mais/issues?q=author%3AJoaoCarabetta" title="Bug reports">🐛</a> <a href="#maintenance-JoaoCarabetta" title="Maintenance">🚧</a> <a href="#question-JoaoCarabetta" title="Answering Questions">💬</a></td>
+    <td align="center"><a href="https://github.com/polvoazul"><img src="https://avatars2.githubusercontent.com/u/1513181?v=4" width="100px;" alt=""/><br /><sub><b>polvoazul</b></sub></a><br /><a href="#ideas-polvoazul" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/basedosdados/mais/commits?author=polvoazul" title="Code">💻</a> <a href="https://github.com/basedosdados/mais/pulls?q=is%3Apr+reviewed-by%3Apolvoazul" title="Reviewed Pull Requests">👀</a> <a href="#infra-polvoazul" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/d116626"><img src="https://avatars2.githubusercontent.com/u/8954716?v=4" width="100px;" alt=""/><br /><sub><b>Diego Oliveira</b></sub></a><br /><a href="#ideas-d116626" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/basedosdados/mais/commits?author=d116626" title="Code">💻</a> <a href="#userTesting-d116626" title="User Testing">📓</a> <a href="https://github.com/basedosdados/mais/pulls?q=is%3Apr+reviewed-by%3Ad116626" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/basedosdados/mais/issues?q=author%3Ad116626" title="Bug reports">🐛</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
