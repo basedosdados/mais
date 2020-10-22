@@ -87,8 +87,8 @@ class Table(Base):
 
         The folder should contain:
 
-        * table_config.yaml
-        * publish.sql
+        * `table_config.yaml`
+        * `publish.sql`
 
         You can also point to a sample of the data to auto complete columns names.
 
@@ -370,7 +370,7 @@ class Table(Base):
         self.update("prod")
 
     def delete(self, mode):
-        """Deletes table.
+        """Deletes table in BigQuery.
 
         Args:
             mode (str): Table of which table to delete [prod|staging|all]

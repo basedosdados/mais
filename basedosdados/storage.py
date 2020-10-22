@@ -10,7 +10,6 @@ class Storage(Base):
     """
 
     def __init__(self, dataset_id=None, table_id=None, **kwargs):
-
         super().__init__(**kwargs)
 
         self.bucket = self.client["storage_staging"].bucket(self.bucket_name)
@@ -105,22 +104,20 @@ class Storage(Base):
         if_exists="raise",
         **upload_args,
     ):
-        """Upload file or folder to storage.
+        """Upload to storage at `<bucket_name>/<mode>/<dataset_id>/<table_id>`. You can:
 
-        The file will be saved at `<bucket_name>/<mode>/<dataset_id>/<table_id>`.
+        * Add a single **file** setting `path = <file_path>`.
 
-        You can add just a file, a bunch of files or partitioned files.
+        * Add a **folder** with multiple files setting `path =
+          <folder_path>`. *The folder should just contain the files and
+          no folders.*
 
-        To add a file, just point `path` to the filepath.
+        * Add **partitioned files** setting `path = <folder_path>`.
+          This folder must follow the hive partitioning scheme i.e.
+          `<table_id>/<key>=<value>/<key2>=<value2>/<partition>.csv`
+          (ex: `mytable/country=brasil/year=2020/mypart.csv`).
 
-        To add a bunch a files, just point `path` to the folder with the files.
-        But, the folder should just contain the files and no folders.
-
-        To add partitioned files, you have to previously have set your folders
-        following the hive partitioning scheme. The folders follow the pattern
-        `<key>=<value>/<key2>=<value2>`, ex: `country=brasil/year=2020`.
-
-        Remember that all files should follow the same schema. Otherwise, things
+        *Remember all files must follow a single schema.* Otherwise, things
         might fail in the future.
 
         There are two modes:
@@ -129,19 +126,26 @@ class Storage(Base):
         * `staging` : should contain pre-treated files ready to upload to BiqQuery
 
         Args:
-            path (str or pathlib.PosixPath): Where to find the file or folderthat you want to upload to storage
+            path (str or pathlib.PosixPath): Where to find the file or
+                folder that you want to upload to storage
+
             mode (str): Folder of which dataset to update [raw|staging]
+
             partitions (str, pathlib.PosixPath, or dict): Optional.
-                Adds data to a specific partition. Just works with single file
+                *If adding a single file*, use this to add it to a specific partition.
 
                 * str : `<key>=<value>/<key2>=<value2>`
                 * dict: `dict(key=value, key2=value2)`
+
             if_exists (str): Optional.
                 What to do if data exists
 
                 * 'raise' : Raises Conflict exception
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
+
+            upload_args ():
+                Extra arguments accepted by [`google.cloud.storage.blob.Blob.upload_from_file`](https://googleapis.dev/python/storage/latest/blobs.html?highlight=upload_from_filename#google.cloud.storage.blob.Blob.upload_from_filename)
         """
 
         self._check_mode(mode)
