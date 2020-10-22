@@ -14,6 +14,10 @@ from basedosdados.dataset import Dataset
 
 
 class Table(Base):
+    """
+    Manage tables in Google Cloud Storage and BigQuery.
+    """
+
     def __init__(self, table_id, dataset_id, **kwargs):
         super().__init__(**kwargs)
 
@@ -35,7 +39,11 @@ class Table(Base):
         return self.client[f"bigquery_{mode}"].get_table(self.table_full_name[mode])
 
     def _load_schema(self, mode="staging"):
-        """Load schema from table_config.yaml"""
+        """Load schema from table_config.yaml
+
+        Args:
+            mode (bool): Which dataset to create [prod|staging|all].
+        """
 
         self._check_mode(mode)
 
@@ -75,32 +83,29 @@ class Table(Base):
         return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
     def init(self, data_sample_path=None, if_exists="raise"):
-        """Initialize table folder at metadata_path at
-        `metadata_path/<dataset_id>/<table_id>`.
+        """Initialize table folder at metadata_path at `metadata_path/<dataset_id>/<table_id>`.
 
         The folder should contain:
-            - table_config.yaml
-            - publish.sql
+
+        * `table_config.yaml`
+        * `publish.sql`
 
         You can also point to a sample of the data to auto complete columns names.
 
-        Parameters
-        ----------
-        data_sample_path : (str, pathlib.PosixPath), optional
-            Data sample path to auto complete columns names, by default None.
-            It supports Comma Delimited CSV.
-        if_exists : str, optional
-            What to do if table folder exists, by default "raise"
-            - 'raise' : Raises FileExistsError
-            - 'replace' : Replace folder
-            - 'pass' : Do nothing
+        Args:
+            data_sample_path (str, pathlib.PosixPath): Optional.
+                Data sample path to auto complete columns names
+                It supports Comma Delimited CSV.
+            if_exists (str): Optional.
+                What to do if table folder exists
 
-        Raises
-        ------
-        FileExistsError
-            If folder exists and replace is False.
-        NotImplementedError
-            If data sample is not in supported type or format.
+                * 'raise' : Raises FileExistsError
+                * 'replace' : Replace folder
+                * 'pass' : Do nothing
+
+        Raises:
+            FileExistsError: If folder exists and replace is False.
+            NotImplementedError: If data sample is not in supported type or format.
         """
 
         if not self.dataset_folder.exists():
@@ -201,25 +206,24 @@ class Table(Base):
         Data can also be partitioned following the hive partitioning scheme
         `<key1>=<value1>/<key2>=<value2>`, for instance, `year=2012/country=BR`
 
-        TODO: Implement if_exists=raise
-        TODO: Implement if_exists=pass
+        Args:
+            path (str or pathlib.PosixPath): Where to find the file that you want to upload to create a table with
+            job_config_params (dict): Optional.
+                Job configuration params from bigquery
+            partitioned (bool): Optional.
+                Whether data is partitioned
+            if_exists (str): Optional
+                What to do if table exists
 
-        Parameters
-        ----------
-        path : str or pathlib.PosixPath
-            Where to find the file that you want to upload to create a table with
-        job_config_params : dict, optional
-            Job configuration params from bigquery, by default None
-        partitioned : bool, optional
-            Whether data is partitioned, by default False
-        if_exists : str, optional
-            What to do if table exists, by default "raise"
-            - 'raise' : Raises Conflict exception
-            - 'replace' : Replace table
-            - 'pass' : Do nothing
-        force_dataset: bool, by default True
-            Creates <dataset_id> folder and BigQuery Dataset if it doesn't
-            exists.
+                * 'raise' : Raises Conflict exception
+                * 'replace' : Replace table
+                * 'pass' : Do nothing
+            force_dataset (bool): Creates `<dataset_id>` folder and BigQuery Dataset if it doesn't exists.
+
+        Todo:
+
+            * Implement if_exists=raise
+            * Implement if_exists=pass
         """
 
         # Add data to storage
@@ -284,12 +288,11 @@ class Table(Base):
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
 
-        Parameters
-        ----------
-        mode : str, optional
-            Table of which table to update [prod|staging|all], by default "all"
-        not_found_ok : bool, optional
-            What to do if table is not found, by default True
+        Args:
+            mode (str): Optional.
+                Table of which table to update [prod|staging|all]
+            not_found_ok (bool): Optional.
+                What to do if table is not found
         """
 
         self._check_mode(mode)
@@ -338,16 +341,18 @@ class Table(Base):
         `<metadata_path>/<dataset_id>/<table_id>/table_config.sql`, including
         the partitions.
 
-        Parameters
-        ----------
-        if_exists : str, optional
-            What to do if table exists, by default "raise"
-            - 'raise' : Raises Conflict exception
-            - 'replace' : Replace table
-            - 'pass' : Do nothing
-        """
+        Args:
+            if_exists (str): Optional.
+                What to do if table exists.
 
-        # TODO: check if all required fields are filled
+                * 'raise' : Raises Conflict exception
+                * 'replace' : Replace table
+                * 'pass' : Do nothing
+
+        Todo:
+
+            * Check if all required fields are filled
+        """
 
         view = bigquery.Table(self.table_full_name["prod"])
 
@@ -365,12 +370,10 @@ class Table(Base):
         self.update("prod")
 
     def delete(self, mode):
-        """Deletes table.
+        """Deletes table in BigQuery.
 
-        Parameters
-        ----------
-        mode : str
-            Table of which table to delete [prod|staging|all]
+        Args:
+            mode (str): Table of which table to delete [prod|staging|all]
         """
 
         self._check_mode(mode)
@@ -389,19 +392,19 @@ class Table(Base):
         As long as the data has the same schema. It appends the data in the
         filepath to the existing table.
 
-        Parameters
-        ----------
-        filepath : str or pathlib.PosixPath
-            Where to find the file that you want to upload to create a table with
-        partitions : (str, pathlib.PosixPath, dict), optional
-            Hive structured partition as a string or dict, by default None
-            str : `<key>=<value>/<key2>=<value2>`
-            dict: `dict(key=value, key2=value2)`
-        if_exists : str, optional
-            What to do if data with same name exists in storage, by default "raise"
-            - 'raise' : Raises Conflict exception
-            - 'replace' : Replace table
-            - 'pass' : Do nothing
+        Args:
+            filepath (str or pathlib.PosixPath): Where to find the file that you want to upload to create a table with
+            partitions (str, pathlib.PosixPath, dict): Optional.
+                Hive structured partition as a string or dict
+
+                * str : `<key>=<value>/<key2>=<value2>`
+                * dict: `dict(key=value, key2=value2)`
+            if_exists (str): 0ptional.
+                What to do if data with same name exists in storage
+
+                * 'raise' : Raises Conflict exception
+                * 'replace' : Replace table
+                * 'pass' : Do nothing
         """
 
         Storage(self.dataset_id, self.table_id, **self.main_vars).upload(

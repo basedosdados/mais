@@ -1,6 +1,13 @@
+# OLD repo name
 .bases
 bases/pytest/*
 bases/test/
+
+# NEW repo name
+.mais
+mais/pytest/*
+mais/test/
+
 notebooks
 data
 secrets
