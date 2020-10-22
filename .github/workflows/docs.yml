@@ -14,4 +14,4 @@ jobs:
       - run: pip install -r requirements-dev.txt
       - env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
-        run: mkdocs gh-deploy --force --verbose
+        run: mkdocs gh-deploy --force
