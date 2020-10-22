@@ -54,8 +54,9 @@ class Dataset(Base):
         """Initialize dataset folder at metadata_path at `metadata_path/<dataset_id>`.
 
         The folder should contain:
-            * dataset_config.yaml
-            * README.md
+
+        * `dataset_config.yaml`
+        * `README.md`
 
         Args:
             replace (str): Optional. Whether to replace existing folder.
@@ -177,7 +178,7 @@ class Dataset(Base):
         self.publicize()
 
     def delete(self, mode="all"):
-        """Delete dataset. Toogle mode to choose which dataset to delete.
+        """Deletes dataset in BigQuery. Toogle mode to choose which dataset to delete.
 
         Args:
             mode (str): Optional. Which dataset to delete [prod|staging|all]

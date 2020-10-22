@@ -27,8 +27,9 @@ nav:
   - Acessando os dados: 
     - BigQuery: access_data_bq.md
     - Local: access_data_local.md
-  - Referência API: 
-    - Classes: reference_api.md
+  - Documentação da API: 
+    - Python: py_reference_api.md
+    - CLI: cli_reference_api.md
   - Nomenclatura: 
     - Regras de nomeação: naming_rules.md
   - Contribua! 💚:
