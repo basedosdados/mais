@@ -15,6 +15,8 @@ E também módulos para **requisição de dados**:
 - [`read_table`](#basedosdados.download.read_table), que permite ler uma
   tabela do BigQuery pelo nome e carregar os dados no ambiente do Python.
 
+!!! Info "Toda documentação do código abaixo está em inglês"
+
 ## Classes
 
 ::: basedosdados.storage
