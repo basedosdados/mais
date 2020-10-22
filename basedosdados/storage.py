@@ -98,7 +98,7 @@ class Storage(Base):
     def upload(
         self,
         path,
-        mode,
+        mode="all",
         partitions=None,
         if_exists="raise",
         **upload_args,
@@ -121,16 +121,18 @@ class Storage(Base):
         Remember that all files should follow the same schema. Otherwise, things
         might fail in the future.
 
-        There are two modes:
-            `raw` : should contain raw files from datasource
-            `staging` : should contain pre-treated files ready to upload to BiqQuery
+        There are 3 modes:
+        
+        * `raw` : should contain raw files from datasource
+        * `staging` : should contain pre-treated files ready to upload to BiqQuery
+        * `all`: if no treatment is needed, use `all`.
 
         Parameters
         ----------
         path : str or pathlib.PosixPath
             Where to find the file or folderthat you want to upload to storage
         mode : str
-            Folder of which dataset to update [raw|staging], by default "all"
+            Folder of which dataset to update [raw|staging|all], by default "all"
         partitions : (str, pathlib.PosixPath, dict), optional
             Adds data to a specific partition. Just works with single file, by default None
             str : `<key>=<value>/<key2>=<value2>`
@@ -141,8 +143,6 @@ class Storage(Base):
             - 'replace' : Replace table
             - 'pass' : Do nothing
         """
-
-        self._check_mode(mode)
 
         if (self.dataset_id is None) or (self.table_id is None):
             raise Exception("You need to pass dataset_id and table_id")
@@ -165,23 +165,32 @@ class Storage(Base):
             paths = [path]
             parts = [partitions or None]
 
-        for filepath, part in tqdm(list(zip(paths, parts)), desc="Uploading files"):
+        self._check_mode(mode)
 
-            blob_name = self._build_blob_name(filepath.name, mode, part)
+        if mode == "all":
+            mode = ["raw", "staging"]
+        else:
+            mode = [mode]
 
-            blob = self.bucket.blob(blob_name)
+        for m in mode:
 
-            if not blob.exists() or if_exists == "replace":
+            for filepath, part in tqdm(list(zip(paths, parts)), desc="Uploading files"):
 
-                upload_args["timeout"] = upload_args.get("timeout", None)
+                blob_name = self._build_blob_name(filepath.name, m, part)
 
-                blob.upload_from_filename(str(filepath), **upload_args)
+                blob = self.bucket.blob(blob_name)
 
-            else:
-                raise Exception(
-                    f"Data already exists at {self.bucket_name}/{blob_name}. "
-                    "Set if_exists to 'replace' to overwrite data"
-                )
+                if not blob.exists() or if_exists == "replace":
+
+                    upload_args["timeout"] = upload_args.get("timeout", None)
+
+                    blob.upload_from_filename(str(filepath), **upload_args)
+
+                else:
+                    raise Exception(
+                        f"Data already exists at {self.bucket_name}/{blob_name}. "
+                        "Set if_exists to 'replace' to overwrite data"
+                    )
 
     def delete_file(self, filename, mode, partitions=None, not_found_ok=False):
         """Deletes file from path `<bucket_name>/<mode>/<dataset_id>/<table_id>/<partitions>/<filename>`.
@@ -191,7 +200,7 @@ class Storage(Base):
         filename : str
             Name of the file to be deleted
         mode : str
-            Folder of which dataset to update [raw|staging], by default "all"
+            Folder of which dataset to update [raw|staging|all], by default "all"
         partitions : (str, pathlib.PosixPath, dict), optional
             Hive structured partition as a string or dict, by default None
             str : `<key>=<value>/<key2>=<value2>`
@@ -200,11 +209,20 @@ class Storage(Base):
             What to do if file not found, by default False
         """
 
-        blob = self.bucket.blob(self._build_blob_name(filename, mode, partitions))
+        self._check_mode(mode)
 
-        if blob.exists():
-            blob.delete()
-        elif not_found_ok:
-            return
+        if mode == "all":
+            mode = ["raw", "staging"]
         else:
-            blob.delete()
+            mode = [mode]
+
+        for m in mode:
+
+            blob = self.bucket.blob(self._build_blob_name(filename, m, partitions))
+
+            if blob.exists():
+                blob.delete()
+            elif not_found_ok:
+                return
+            else:
+                blob.delete()
