@@ -30,20 +30,20 @@ def download(
 ):
     """Download table or query result from basedosdados BigQuery (or other).
 
-        - Using a **query**:
+    * Using a **query**:
 
-            `download('select * from `basedosdados.br_suporte.diretorio_municipios` limit 10')`
+        `download('select * from `basedosdados.br_suporte.diretorio_municipios` limit 10')`
 
-        - Using **dataset_id & table_id**:
+    * Using **dataset_id & table_id**:
 
-            `download(dataset_id='br_suporte', table_id='diretorio_municipios')
+        `download(dataset_id='br_suporte', table_id='diretorio_municipios')`
 
-        You can also add arguments to modify save parameters:
+    You can also add arguments to modify save parameters:
 
-        `download(dataset_id='br_suporte', table_id='diretorio_municipios', index=False, sep='|')
+    `download(dataset_id='br_suporte', table_id='diretorio_municipios', index=False, sep='|')`
 
 
-    Arguments:
+    Args:
         savepath (str, pathlib.PosixPath):
             If savepath is a folder, it saves a file as `savepath / table_id.csv` or
             `savepath / query_result.csv` if table_id not available.
