@@ -7,11 +7,17 @@ metadata_path = ""
 bucket_name = ""
 
 # Where the templates to generate configs and descriptions sit
-templates_path =  "~/.basedosdados/templates"
+templates_path =  ""
 
 [gcloud-projects]
-staging = ""
-prod = ""
+
+    [gcloud-projects.staging]
+    name = ""
+    credentials_path = ""
+
+    [gcloud-projects.prod]
+    name = ""
+    credentials_path = ""
 
 # Data about you to auto-fill config
 # TODO: issue 20

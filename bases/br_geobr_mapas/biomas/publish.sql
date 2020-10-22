@@ -22,5 +22,5 @@ SELECT
 SAFE_CAST(id_bioma AS STRING) id_bioma,
 SAFE_CAST(nome_bioma AS STRING) nome_bioma,
 SAFE_CAST(year AS INT64) ano,
-ST_GEOGFROMTEXT(geometria) geometria
+SAFE.ST_GEOGFROMTEXT(geometria) geometria
 from basedosdados-staging.br_geobr_mapas_staging.biomas as t
