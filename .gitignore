@@ -1,4 +1,5 @@
 .bases
+.mais
 bases/pytest/*
 bases/test/
 notebooks
