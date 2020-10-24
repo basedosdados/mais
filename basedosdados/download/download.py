@@ -1,12 +1,12 @@
+from functools import lru_cache
+from google.cloud import bigquery
 from google.cloud import bigquery, storage
 from pathlib import Path
-import time
-import re
-from google.cloud import bigquery
-import pandas_gbq
 from pathlib import Path
+import pandas_gbq
 import pydata_google_auth
-from functools import lru_cache
+import re
+import time
 
 
 @lru_cache(256)
@@ -84,29 +84,33 @@ def download(
         else:
             savepath = savepath / ("query_result.csv")
     
-    # if table is a view or external, extracting jobs won't work 
-    if not query and (not _is_table(dataset_id, table_id, project_id)):
+    # if query is not defined (so it won't be overwritten) and if 
+    # table is a view or external or if limit is specified, 
+    # convert it to a query.
+    if not query and (not _is_table(dataset_id, table_id, project_id) or limit):
         query = f'''
         SELECT * 
           FROM {project_id}.{dataset_id}.{table_id}
         '''
-        
+
         if limit is not None:
             query += f" limit {limit}"
-
+    
+    if query:
         # sql queries produces anonymous tables, whose names 
         # can be found within `job._properties`
         client = bigquery.Client()
-
+        
         job = client.query(query)
+        
+        # views may take longer: wait for job to finish.
+        _wait_for(job)
+        
         dest_table = job._properties['configuration']['query']['destinationTable']
 
         project_id = dest_table['projectId']
         dataset_id = dest_table['datasetId']
         table_id = dest_table['tableId']
-        
-        # views may take longer: wait for job to finish.
-        _wait_for(job)
         
     _direct_download(dataset_id, table_id, savepath, project_id, compression)
 
@@ -166,8 +170,8 @@ def _direct_download(
     table_id, 
     savepath, 
     project_id='basedosdados',
-    compression='NONE',
-    extract=False):
+    compression='GZIP',
+    extract=True):
     """
     Download file to disk without the requirement of loading it in memory.
 
@@ -182,7 +186,7 @@ def _direct_download(
         savepath (:obj:`str`, :obj:`pathlib.PosixPath`): Local path in which file should be stored in disk.
         project_id (:obj:`str`, optional): In case you want to use to query another project, by default 'basedosdados'
         compression (:obj:`str`, optional): Compression type to use for exported 
-            files. Can be one of ["NONE"|"GZIP"]
+            files. Can be one of ["NONE"|"GZIP"]. Defaults to GZIP.
         extract (:obj:`bool`, optional): Whether to extract the gzip file.
             
     """
@@ -280,7 +284,7 @@ def _move_table_to_bucket(
     table_id, 
     blob_path, 
     project_id='basedosdados',
-    compression='NONE'):
+    compression='GZIP'):
     """
     Move table from BigQuery to bucket
 
