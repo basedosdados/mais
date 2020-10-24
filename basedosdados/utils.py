@@ -74,7 +74,9 @@ def metadata(dataset_id, table_id, project_id='basedosdados'):
     description = [
         (col.name, col.field_type, col.description) for col in table.schema
             ]
-        
+    # TODO: full table description
+    # check df.metadata
+
     return pd.DataFrame(description, columns=['columns', 'type','description'])
 
 def cost(query, price=0.02):
@@ -105,45 +107,58 @@ def cost(query, price=0.02):
         
     return dollar
 
-def info(dataset_id, table_id, project_id='basedosdados', pretty=True):
+def info(
+    dataset_id, 
+    table_id, 
+    project_id='basedosdados', 
+    pretty=True, 
+    extract_from_view=False):
     """
     Display metadata about the specified `table_id` 
 
     Args:
-    dataset_id (:obj:`str`): Dataset id available in project_id.
-    table_id (:obj:`str`): Table id available in project_id.dataset_id.
-    project_id (:obj:`str`, optional): In case you want to use to query 
-        another project, by default 'basedosdados'
-    pretty (:obj:`bool`, optional): Whether to return values as 
-    raw data (for calculation purposes) or pretty formatted.
-
+        dataset_id (:obj:`str`): Dataset id available in project_id.
+        table_id (:obj:`str`): Table id available in project_id.dataset_id.
+        project_id (:obj:`str`, optional): In case you want to use to query 
+            another project, by default 'basedosdados'
+        pretty (:obj:`bool`, optional): Whether to return values as 
+            raw data (for calculation purposes) or pretty formatted.
+        extract_from_view: Run a query to count number of rows and bytes used
+            in a view. Be aware that this will incurr additional cost.
     Returns: 
         pd.DataFrame: Metadata information about the table
 
     """
+
     client = bigquery.Client()
+
     table_name = f'{project_id}.{dataset_id}.{table_id}'
 
     table = client.get_table(table_name)
-
+    
+    nrows = table.num_rows
+    nbytes = table.num_bytes
+    
     # when tables are views, using table.num_rows returns 0
-    job = client.query(
-        f'SELECT COUNT(*) FROM {table_name}', 
-        location='US'
-    )
-    nrows = max(job.to_dataframe().loc[0, 'f0_'], table.num_rows)
+    if extract_from_view:
+        job = client.query(
+            f'SELECT COUNT(*) FROM {table_name}', 
+            location='US'
+        )
+        nrows = job.to_dataframe().loc[0, 'f0_']
+        nbytes = job.total_bytes_processed 
 
     # For bytes, though, if you are working with public data from bq
     # the job will not account for any byte, so I'll get the maximum 
     # between that and the table.num_bytes
-    nbytes = max(job.total_bytes_processed, table.num_bytes)
-
+    
     name = table.table_id
     dataset = table.dataset_id
     fullname = table.full_table_id
     location = table.location
     anomes_created = table.created.date()
     time_created = table.created.time()
+    description = table.description
 
     if pretty:
         nrows = f'{nrows:,}'
@@ -161,7 +176,9 @@ def info(dataset_id, table_id, project_id='basedosdados', pretty=True):
                          'date_created':[anomes_created],
                          'time_created':[time_created],
                          'full_table_name':[fullname],
-                         'table_location':[location]}, index=['value']).T
+                         'table_location':[location],
+                         'description':[description]}, index=['value']).T
+
     return data
 
 def _pretty_format(value, category='value'):
