@@ -1,12 +1,14 @@
 from functools import lru_cache
 from google.cloud import bigquery
 from google.cloud import bigquery, storage
+import os
 from pathlib import Path
 from pathlib import Path
 import pandas_gbq
 import pydata_google_auth
 import re
 import time
+
 
 
 @lru_cache(256)
@@ -30,41 +32,43 @@ def download(
     table_id=None,
     project_id="basedosdados",
     limit=None,
-    compression='NONE',
+    compression='GZIP',
     extract=False
 ):
     """Download table or query result from basedosdados BigQuery.
-
-    Download using a query:
-
-        `download('select * from `basedosdados.br_suporte.diretorio_municipios` limit 10')`
-
-    Download using dataset_id and table_id:
-
-        `download(dataset_id='br_suporte', table_id='diretorio_municipios')
 
     Args:
         savepath (str, pathlib.PosixPath): If savepath is a folder, 
             it saves a file as `savepath / table_id.csv` or
             `savepath / query_result.csv` if table_id not available.
             If savepath is a file, saves data to file.
-        query (:obj:`str`, optional): Valid SQL Standard Query. 
+        query (str, optional): Valid SQL Standard Query. 
             If query is available, dataset_id and table_id are not required.
-        dataset_id (:obj:`str`, optional): Dataset id available in the 
+        dataset_id (str, optional): Dataset id available in the 
             project_id. It should always come with table_id.
-        table_id (:obj:`str`, optional): Table id available in 
+        table_id (str, optional): Table id available in 
             project_id.dataset_id.
-        project_id (:obj:str, optional): In case you want to use 
+        project_id (str, optional): In case you want to use 
             to query another project. Defaults to 'basedosdados'
-        limit (:obj:`int`, optional): Number of rows.
-        compression (:obj:`str`, optional): Compression type to use for exported 
+        limit (int, optional): Number of rows.
+        compression (str, optional): Compression type to use for exported 
             files. Can be one of ["NONE"|"GZIP"]
-        extract (:obj:`bool`, optional): Whether to extract the gzip file.
+        extract (bool, optional): Whether to extract the gzip file.
 
-    Raises: 
-        Exception: If either table_id or dataset_id were are empty.
+    Raises:
+        Exception: If either table_id or dataset_id are empty.
 
-    Note: 
+    Examples:
+        >>> # Download using a query:
+        >>> download(savepath='sample_file.csv', 
+                     query='SELECT * FROM `basedosdados.br_suporte.diretorio_municipios` LIMIT 10')
+
+        >>> # Download using dataset_id and table_id:
+        >>> download(savepath='sample_file.csv', 
+                     dataset_id='br_suporte', 
+                     table_id='diretorio_municipios')
+                     
+    Note:
         Download will create a temporary bucket in the cloud storage, create 
         a job to extract the current table_id to the bucket as a (possibly compressed)
         blob and download it from the bucket. Then it will delete the temporary 
@@ -120,10 +124,28 @@ def read_sql(query, project_id="basedosdados"):
     """Load data from BigQuery using a query. Just a wrapper around pandas.read_gbq
 
     Args:
-        query (:obj:`str`): Valid SQL Standard Query.
+        query (str): Valid SQL Standard Query.
 
     Returns:
         pd.DataFrame: The query result.
+
+    Examples:
+        >>> my_query = '''
+        SELECT partido, 
+               COUNT(*) AS qtd_deputados
+        FROM `basedosdados.br_sp_alesp.deputados` 
+        GROUP BY partido
+        '''
+        >>> bd.read_sql(query=my_query)
+
+        |    | partido      |   qtd_deputados |
+        |---:|:-------------|------:|
+        |  0 | PSL          |    13 |
+        |  1 | PROS         |     1 |
+        |  2 | PSD          |     2 |
+        |  3 | SD           |     1 |
+        |  4 | REPUBLICANOS |     6 |
+        |  ... | ...         |     ... |
     """
 
     try:
@@ -142,11 +164,11 @@ def read_table(dataset_id, table_id, project_id="basedosdados", limit=None):
     """Load data from BigQuery using dataset_id and table_id.
 
     Args:
-        dataset_id (:obj:`str`): Dataset id available in project_id.
-        table_id (:obj:`str`): Table id available in project_id.dataset_id.
-        project_id (:obj:`str`, optional): In case you want to use to query another 
+        dataset_id (str): Dataset id available in project_id.
+        table_id (str): Table id available in project_id.dataset_id.
+        project_id (str, optional): In case you want to use to query another 
             project, defaults to 'basedosdados'
-        limit (:obj:`int`, optional): Number of rows.
+        limit (int, optional): Number of rows.
 
     Returns:
         pd.DataFrame: The query result
@@ -181,16 +203,15 @@ def _direct_download(
     download it to disk. In the end, remove the temporary bucket.
     
     Args:
-        dataset_id (:obj:`str`): Dataset id available in project_id. 
-        table_id (:obj:`str`): Table id available in project_id.dataset_id.
-        savepath (:obj:`str`, :obj:`pathlib.PosixPath`): Local path in which file should be stored in disk.
-        project_id (:obj:`str`, optional): In case you want to use to query another project, by default 'basedosdados'
-        compression (:obj:`str`, optional): Compression type to use for exported 
+        dataset_id (str): Dataset id available in project_id. 
+        table_id (str): Table id available in project_id.dataset_id.
+        savepath (str, `pathlib.PosixPath`): Local path in which file should be stored in disk.
+        project_id (str, optional): In case you want to use to query another project, by default 'basedosdados'
+        compression (str, optional): Compression type to use for exported 
             files. Can be one of ["NONE"|"GZIP"]. Defaults to GZIP.
-        extract (:obj:`bool`, optional): Whether to extract the gzip file.
+        extract (bool, optional): Whether to extract the gzip file.
             
     """
-
     time_hash = str(hash(time.time()))
     
     # Bucket names must start and end with a number or letter.
@@ -227,9 +248,9 @@ def _download_blob_from_bucket(
     Download a blob from a bucket to the path specified.
 
     Args:
-        bucket_name (:obj:`str`): Name of the bucket for the file to be stored.
-        blob_name (:obj:`str`): Name of the file to be downloaded from bucket. 
-        savepath (:obj:`str`): Local path in which file should be stored in disk.
+        bucket_name (str): Name of the bucket for the file to be stored.
+        blob_name (str): Name of the file to be downloaded from bucket. 
+        savepath (str): Local path in which file should be stored in disk.
     """
     savepath = Path(savepath)
     storage_client = storage.Client()
@@ -244,7 +265,7 @@ def _create_bucket(bucket_name):
     Create a new buket in a specific location with standard storage class
 
     Args:
-        bucket_name (:obj:`str`): Name of the bucket to be created.
+        bucket_name (str): Name of the bucket to be created.
     
     """
     storage_client = storage.Client()
@@ -263,7 +284,7 @@ def _delete_bucket(bucket_name):
     This method deletes all blobs from a bucket.
 
     Args:
-        bucket_name (:obj:`str`): Name of the bucket to be deleted.
+        bucket_name (str): Name of the bucket to be deleted.
     """
     MAX_BLOBS = 256
 
@@ -289,14 +310,14 @@ def _move_table_to_bucket(
     Move table from BigQuery to bucket
 
     Args:
-    dataset_id : (:obj:`str`): Dataset id available in project_id.
-    table_id : (:obj:`str`): Table id available in project_id.dataset_id.
-    blob_path : (:obj:`str`): Path in bucket where the table will be stored. 
+    dataset_id : (str): Dataset id available in project_id.
+    table_id : (str): Table id available in project_id.dataset_id.
+    blob_path : (str): Path in bucket where the table will be stored. 
         Called ``destination_uri`` in the documentation in the form of 
         ``gs://<bucket_name>/<file_name.csv>``
-    project_id: (:obj:`str`, optional): In case you want to use to query another 
+    project_id: (str, optional): In case you want to use to query another 
         project, defaults to 'basedosdados'
-    compression (:obj:`str`, optional): Compression type to use for exported 
+    compression (str, optional): Compression type to use for exported 
             files. Can be one of ["NONE"|"GZIP"]
 
     """
@@ -359,7 +380,7 @@ def _wait_for(job):
     """Wait for bigquery job to finish.
     
     Args:
-        job (:obj:`bigquery.job`): bigquery job object from a 
+        job (`bigquery.job`): bigquery job object from a 
         ``bigquery.Client().query()`` call.
     """
     while not job.done():
