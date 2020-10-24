@@ -1,0 +1,53 @@
+Microdados da PNAD-COVID. Checar dicionários no Github para nomes e valores de variáveis.
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- estado_abrev
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- UPA
+- numero_domicilio
+- numero_entrevista
+- posest
+- ordem
+- ano
+- mes
+
+Cobertura Temporal
+------------------
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Limpei os dados com algumas renomeações de variáveis e ordenamento para consistência.
+
+Frequencia de Atualização
+-------------------------
+mes
+
+Tratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid/code
+Website: https://www.ibge.gov.br/estatisticas/investigacoes-experimentais/estatisticas-experimentais/27946-divulgacao-semanal-pnadcovid1?t=downloads
+Email: rdahis@basedosdados.org
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org

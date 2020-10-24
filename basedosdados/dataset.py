@@ -3,12 +3,16 @@ from google.cloud import bigquery
 
 from google.api_core.exceptions import Conflict
 
-from basedosdados.base import Base
+from basedosdados.download.base import Base
 
 
 class Dataset(Base):
-    def __init__(self, dataset_id, **kwargs):
-        super().__init__(**kwargs)
+    """
+    Manage datasets in BigQuery.
+    """
+
+    def __init__(self, dataset_id, **kwArgs):
+        super().__init__(**kwArgs)
 
         self.dataset_id = dataset_id.replace("-", "_")
         self.dataset_folder = Path(self.metadata_path / self.dataset_id)
@@ -50,18 +54,15 @@ class Dataset(Base):
         """Initialize dataset folder at metadata_path at `metadata_path/<dataset_id>`.
 
         The folder should contain:
-            - dataset_config.yaml
-            - README.md
 
-        Parameters
-        ----------
-        replace : bool, optional
-            Whether to replace existing folder, by default False
+        * `dataset_config.yaml`
+        * `README.md`
 
-        Raises
-        ------
-        FileExistsError
-            If dataset folder already exists and replace is False
+        Args:
+            replace (str): Optional. Whether to replace existing folder.
+
+        Raises:
+            FileExistsError: If dataset folder already exists and replace is False
         """
 
         # Create dataset folder
@@ -91,7 +92,11 @@ class Dataset(Base):
         return self
 
     def publicize(self, mode="all"):
-        """Changes IAM configuration to turn BigQuery dataset public."""
+        """Changes IAM configuration to turn BigQuery dataset public.
+
+        Args:
+            mode (bool): Which dataset to create [prod|staging|all].
+        """
 
         for m in self._loop_modes(mode):
 
@@ -125,26 +130,23 @@ class Dataset(Base):
         """Creates BigQuery datasets given `dataset_id`.
 
         It can create two datasets:
-            - <dataset_id>         (mode = 'prod')
-            - <dataset_id>_staging (mode = 'staging')
 
-        If mode is all, it creates both.
+        * `<dataset_id>` (mode = 'prod')
+        * `<dataset_id>_staging` (mode = 'staging')
 
-        Parameters
-        ----------
-        mode : str, optional
-            Which dataset to create [prod|staging|all], by default "all"
-        if_exists : str, optional
-            What to do if dataset exists, by default "raise"
-            - 'raise' : Raises Conflic exception
-            - 'replace' : Drop all tables and replace dataset
-            - 'update' : Update dataset description
-            - 'pass' : Do nothing
+        If `mode` is all, it creates both.
 
-        Raises
-        ------
-        google.api_core.exceptions.Conflict
-            Dataset already exists and if_exists is set to 'raise'
+        Args:
+            mode (str): Optional. Which dataset to create [prod|staging|all].
+            if_exists (str): Optional. What to do if dataset exists
+
+                * raise : Raises Conflic exception
+                * replace : Drop all tables and replace dataset
+                * update : Update dataset description
+                * pass : Do nothing
+
+        Raises:
+            Warning: Dataset already exists and if_exists is set to `raise`
         """
 
         if if_exists == "replace":
@@ -176,12 +178,10 @@ class Dataset(Base):
         self.publicize()
 
     def delete(self, mode="all"):
-        """Delete dataset. Toogle mode to choose which dataset to delete.
+        """Deletes dataset in BigQuery. Toogle mode to choose which dataset to delete.
 
-        Parameters
-        ----------
-        mode : str, optional
-            Which dataset to delete [prod|staging|all], by default "all"
+        Args:
+            mode (str): Optional. Which dataset to delete [prod|staging|all]
         """
 
         for m in self._loop_modes(mode):
@@ -191,10 +191,8 @@ class Dataset(Base):
     def update(self, mode="all"):
         """Update dataset description. Toogle mode to choose which dataset to update.
 
-        Parameters
-        ----------
-        mode : str, optional
-            Which dataset to update [prod|staging|all], by default "all"
+        Args:
+            mode (str): Optional. Which dataset to update [prod|staging|all]
         """
 
         for m in self._loop_modes(mode):

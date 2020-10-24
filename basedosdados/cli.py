@@ -2,7 +2,7 @@ import click
 import os
 import time
 
-from basedosdados.base import Base
+from basedosdados.download.base import Base
 from basedosdados.dataset import Dataset
 from basedosdados.table import Table
 from basedosdados.storage import Storage
@@ -494,7 +494,7 @@ def set_config_file():
         exit()
 
 
-set_config_file()
+# set_config_file()
 
 if __name__ == "__main__":
 

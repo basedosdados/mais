@@ -1,0 +1,55 @@
+Dados de transição de cobertura do solo a nível de municipio-de_classe-para_classe-quinquênio.
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- estado_abrev
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- municipio
+- de_classe
+- para_classe
+- ano
+
+Cobertura Temporal
+------------------
+- 1990
+- 1995
+- 2000
+- 2005
+- 2010
+- 2015
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Limpei os dados para uso imediato. Isso incluiu padronizar os níveis das classes, e separar as diferentes periodicidades em arquivos separados.
+
+Frequencia de Atualização
+-------------------------
+5 anos
+
+Tratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_mapbiomas_estatisticas/code
+Email: rdahis@basedosdados.org
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_mapbiomas_estatisticas/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
