@@ -7,14 +7,23 @@ def list_tables(dataset_id, project_id='basedosdados', pattern=None):
     List tables inside a dataset_id
 
     Args:
-        dataset_id (:obj:`str`): Dataset id available in project_id. 
-        project_id (:obj:`str`, optional): In case you want to use to 
+        dataset_id (str): Dataset id available in project_id. 
+        project_id (str, optional): In case you want to use to 
             query another project, by default 'basedosdados'
-        pattern (:obj:`str`, optional): Regular expression to look 
+        pattern (str, optional): Regular expression to look 
             within `dataset_id`.
 
-    Returns: 
+    Returns:
         pd.DataFrame: List of `table_id` within the `dataset_id`
+
+    Examples:
+        >>> list_tables(dataset_id='br_ms_sim')
+
+        |    | table_id        |
+        |----|-----------------|
+        |  0 | microdados      |
+        |  1 | municipio       |
+        |  2 | municipio_causa |
     """
     client = bigquery.Client(project=project_id)
     
@@ -34,10 +43,10 @@ def list_datasets(project_id='basedosdados', pattern=None):
     List `dataset_id`'s inside a `project_id`
 
     Args:
-        pattern (:obj:`str`, optional): Regular expression to look 
+        pattern (str, optional): Regular expression to look 
             within `dataset_id`.
 
-    Returns: 
+    Returns:
         pd.DataFrame: List of `table_id` within the `dataset_id`
     """
 
@@ -59,13 +68,25 @@ def metadata(dataset_id, table_id, project_id='basedosdados'):
     Display column types and descriptions from `table_id`
     
     Args:
-        dataset_id (:obj:`str`): Dataset id available in project_id.
-        table_id (:obj:`str`): Table id available in project_id.dataset_id.
-        project_id (:obj:`str`, optional): In case you want to use to 
+        dataset_id (str): Dataset id available in project_id.
+        table_id (str): Table id available in project_id.dataset_id.
+        project_id (str, optional): In case you want to use to 
             query another project, by default 'basedosdados'
 
-    Returns: 
+    Returns:
         pd.DataFrame: Column types and descriptions
+    
+    Examples:
+        >>> metadata(dataset_id='microdados', table_id='br_ms_sim')
+
+    |    | columns          | type    | description        |
+    |---:|:-----------------|:--------|:-------------------|
+    |  0 | ano              | INTEGER | Ano                |
+    |  1 | estado_abrev     | STRING  | Estao Abreviado    |
+    |  2 | sequencial_obito | INTEGER | Sequencial do Óbito|
+    |  3 | tipo_obito       | STRING  | Tipo do Óbito      |
+    |  4 | causa_basica     | STRING  | Causa Básica       |
+    |... | ...              | ...     | ...                |
     """
     client = bigquery.Client(project=project_id)
     table_name = f'{project_id}.{dataset_id}.{table_id}'
@@ -85,8 +106,8 @@ def cost(query, price=0.02):
     Up to now, it only works with real tables (not on Views or External)
 
     Args:
-        query (:obj:`str`): Valid SQL Standard Query.
-        price (:obj:`float`, optional): Price in US dollars per GB consumed. 
+        query (str): Valid SQL Standard Query.
+        price (float, optional): Price in US dollars per GB consumed. 
 
     Returns:
         float: Cost of query in US dollars
@@ -117,15 +138,15 @@ def info(
     Display metadata about the specified `table_id` 
 
     Args:
-        dataset_id (:obj:`str`): Dataset id available in project_id.
-        table_id (:obj:`str`): Table id available in project_id.dataset_id.
-        project_id (:obj:`str`, optional): In case you want to use to query 
+        dataset_id (str): Dataset id available in project_id.
+        table_id (str): Table id available in project_id.dataset_id.
+        project_id (str, optional): In case you want to use to query 
             another project, by default 'basedosdados'
-        pretty (:obj:`bool`, optional): Whether to return values as 
+        pretty (bool, optional): Whether to return values as 
             raw data (for calculation purposes) or pretty formatted.
         extract_from_view: Run a query to count number of rows and bytes used
             in a view. Be aware that this will incurr additional cost.
-    Returns: 
+    Returns:
         pd.DataFrame: Metadata information about the table
 
     """
@@ -186,13 +207,13 @@ def _pretty_format(value, category='value'):
     Converts unfriendly formats to human readable.
 
     Args:
-        value (:obj:`int`, float): The value to be formatted.
-        category (:obj:`str`, optional): The type of value.
+        value (int, float): The value to be formatted.
+        category (str, optional): The type of value.
             Currently allowed categories are: 
             - `value` for numbers to be written as 80K, 80M, 80B
             - `bytes` for numbers to be written as 1MB, 1kB, 1GB
 
-    Returns: 
+    Returns:
         str: formatted value
     """
     if category == 'value':

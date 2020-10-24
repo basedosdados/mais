@@ -6,12 +6,25 @@ def freq(dataset_id,
          col_name,
          project_id='basedosdados',
          order_by_freq=False, 
-         ascending=True,
-         verbose=True
+         ascending=True
         ):
     """
     Return a dataframe containing the frequency table of the `col_name` 
     (which can be a list of columns) specified.
+
+    Args:
+        dataset_id (str): Dataset id available in project_id. 
+        table_id (str): Table id available in project_id.dataset_id.
+        col_name (str, list[str]): column name or list of column
+            names for which you want to compute the frequency statistics
+        project_id (str, optional): In case you want to use to 
+            query another project, by default 'basedosdados'
+        order_by_freq (bool) Whether to order results by frequency (True)
+            or by the appearence order (False). Defaults to False. 
+        ascending (bool). Whether the sorting order should be ascending
+            (True) or descending (False). Defaults to True.
+    Returns:
+        pd.DataFrame: Frequency table for selected columns.
     """
 
     client = bigquery.Client()
