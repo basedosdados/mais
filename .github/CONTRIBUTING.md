@@ -2,7 +2,7 @@
 
 > Incentivamos que outras instituições e pessoas contribuam. Só é requerido que o processo de captura e tratamento sejam públicos e documentados, e a inserção dos dados no BigQuery siga nossa metodologia.
 
-# Adicione um issue a partir do template "Novas bases"
+## Tem uma sugestão? Adicione um issue a partir do template "Novas bases"
 
 [adicionar passo a passo]
 
