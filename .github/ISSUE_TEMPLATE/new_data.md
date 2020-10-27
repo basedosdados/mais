@@ -1,5 +1,5 @@
 ---
-name: [EN] New data
+name: EN | New data
 about: Request new data to be added to the project
 title: ''
 labels: data

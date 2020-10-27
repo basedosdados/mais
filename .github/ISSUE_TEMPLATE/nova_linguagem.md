@@ -1,5 +1,5 @@
 ---
-name: [BR] Nova linguagem
+name: BR | Nova linguagem
 about: Sugira CLI para outras linguagens (Stata, R, etc)
 title: ''
 labels: 'cli'

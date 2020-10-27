@@ -1,5 +1,5 @@
 ---
-name: [BR] Bugs
+name: BR | Bugs
 about: Crie um relatório para nos ajudar a melhorar
 title: ''
 labels: bug
