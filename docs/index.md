@@ -33,8 +33,8 @@ curadoria, e transparência ao cenário de dados no Brasil.
 - **Acesso**: É possível deixar os dados públicos, i.e., qualquer
   pessoa com uma conta no Google Cloud pode fazer uma query na base,
   quando quiser.
-- **Rapidez**: Uma query muito longa não demora menos de minutos para
-  ser processada.
+- **Rapidez**: Mesmo queries muito longas demoram apenas minutos para
+  serem processadas.
 - **Escala**: O BigQuery escala magicamente para hexabytes se necessário.
 - **Facilidade**: Você pode cruzar tabelas tratadas e atualizadas num só lugar.
 - **Economia**: O custo é praticamente zero para usuários - **1
