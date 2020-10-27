@@ -1,5 +1,5 @@
 ---
-name: Novos dados
+name: [BR] Novos dados
 about: Sugira dados para serem adicionados ao projeto
 title: ''
 labels: data
