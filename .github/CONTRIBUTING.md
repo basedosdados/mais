@@ -17,7 +17,7 @@ Entre em contato conosco para colaborar: contato@basedosdados.org
 - Mantenedor@s irão revisar ao longo da semana e colocar como `priority` caso necessário
 - Mantenedor@s irão redesignar alguém para cuidar do issue caso necessário
 
-## Tem sugestão de features? Utilize o template "Novas funcionnalidades"
+## Tem sugestão de features? Utilize o template "Novas funcionalidades"
 
 #### O que acontece?
 - Mantenedor@s irão revisar ao longo da semana e colocar como `priority` caso necessário
