@@ -1,9 +1,9 @@
 ---
-name: Version request
+name: Language version request
 about: To create a new CLI request for other languages (Stata, R, etc)
 title: ''
-labels: ''
-assignees: ''
+labels: 'cli'
+assignees: JoaoCarabetta, rdahis
 
 ---
 
