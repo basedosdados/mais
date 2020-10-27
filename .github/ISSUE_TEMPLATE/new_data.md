@@ -10,8 +10,11 @@ assignees: rdahis, d116626, fernandascovino
 **Dataset description**
 
 Dataset_id: `dataset_id`
+
 Table_id (1 ou mais): `table_id`
-Dados: <link>
-Anos: XXXX-YYYY
+
+Source data: <link>
+
+Years: XXXX-YYYY
 
 **How can you contribute?**
