@@ -2,7 +2,7 @@
 name: Nova linguagem
 about: Sugira CLI para outras linguagens (Stata, R, etc)
 title: ''
-labels: ''
+labels: 'cli'
 assignees: JoaoCarabetta, rdahis
 
 ---
