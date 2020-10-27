@@ -1,5 +1,5 @@
 ---
-name: BR | Novas funcionalidades
+name: PTBR | Novas funcionalidades
 about: Sugira uma ideia para este projeto
 title: ''
 labels: enhancement
