@@ -1,7 +1,7 @@
 table_id: detalhes_votacao_secao # AUTO GENERATED
 dataset_id: br_tse_eleicoes # AUTO GENERATED
 
-last_updated: 2020-10-13 # AUTO GENERATED
+last_updated: 2020-10-26 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -175,7 +175,13 @@ columns: # REQUIRED
   
     -   
         name: votos_nulos_apu_sep
-        description: Número de Votos Nulos Apurados Separadamente
+        description: Votos Nulos Apurados Separadamente
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: votos_pendentes
+        description: Votos Pendentes
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

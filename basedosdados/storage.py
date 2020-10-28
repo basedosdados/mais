@@ -5,8 +5,11 @@ from basedosdados.base import Base
 
 
 class Storage(Base):
-    def __init__(self, dataset_id=None, table_id=None, **kwargs):
+    """
+    Manage files on Google Cloud Storage.
+    """
 
+    def __init__(self, dataset_id=None, table_id=None, **kwargs):
         super().__init__(**kwargs)
 
         self.bucket = self.client["storage_staging"].bucket(self.bucket_name)
@@ -60,21 +63,19 @@ class Storage(Base):
         """Initializes bucket and folders.
 
         Folder should be:
-            - `raw` : that contains really raw data
-            - `staging` : preprocessed data ready to upload to BigQuery
 
-        Parameters
-        ----------
-        replace : bool, optional
-            Whether to replace if bucket already exists, by default False
-        very_sure : bool, optional
-            Are you aware that everything is going to be erased if you
-            replace the bucket?, by default False
+        * `raw` : that contains really raw data
+        * `staging` : preprocessed data ready to upload to BigQuery
 
-        Raises
-        ------
-        Warning
-            very_sure argument is still False.
+        Args:
+            replace (bool): Optional.
+                Whether to replace if bucket already exists
+            very_sure (bool): Optional.
+                Are you aware that everything is going to be erased if you
+                replace the bucket?
+
+        Raises:
+            Warning: very_sure argument is still False.
         """
 
         if replace:
@@ -103,43 +104,48 @@ class Storage(Base):
         if_exists="raise",
         **upload_args,
     ):
-        """Upload file or folder to storage.
+        """Upload to storage at `<bucket_name>/<mode>/<dataset_id>/<table_id>`. You can:
 
-        The file will be saved at `<bucket_name>/<mode>/<dataset_id>/<table_id>`.
+        * Add a single **file** setting `path = <file_path>`.
 
-        You can add just a file, a bunch of files or partitioned files.
+        * Add a **folder** with multiple files setting `path =
+          <folder_path>`. *The folder should just contain the files and
+          no folders.*
 
-        To add a file, just point `path` to the filepath.
+        * Add **partitioned files** setting `path = <folder_path>`.
+          This folder must follow the hive partitioning scheme i.e.
+          `<table_id>/<key>=<value>/<key2>=<value2>/<partition>.csv`
+          (ex: `mytable/country=brasil/year=2020/mypart.csv`).
 
-        To add a bunch a files, just point `path` to the folder with the files.
-        But, the folder should just contain the files and no folders.
-
-        To add partitioned files, you have to previously have set your folders
-        following the hive partitioning scheme. The folders follow the pattern
-        `<key>=<value>/<key2>=<value2>`, ex: `country=brasil/year=2020`.
-
-        Remember that all files should follow the same schema. Otherwise, things
+        *Remember all files must follow a single schema.* Otherwise, things
         might fail in the future.
 
         There are two modes:
-            `raw` : should contain raw files from datasource
-            `staging` : should contain pre-treated files ready to upload to BiqQuery
 
-        Parameters
-        ----------
-        path : str or pathlib.PosixPath
-            Where to find the file or folderthat you want to upload to storage
-        mode : str
-            Folder of which dataset to update [raw|staging], by default "all"
-        partitions : (str, pathlib.PosixPath, dict), optional
-            Adds data to a specific partition. Just works with single file, by default None
-            str : `<key>=<value>/<key2>=<value2>`
-            dict: `dict(key=value, key2=value2)`
-        if_exists : str, optional
-            What to do if data exists, by default "raise"
-            - 'raise' : Raises Conflict exception
-            - 'replace' : Replace table
-            - 'pass' : Do nothing
+        * `raw` : should contain raw files from datasource
+        * `staging` : should contain pre-treated files ready to upload to BiqQuery
+
+        Args:
+            path (str or pathlib.PosixPath): Where to find the file or
+                folder that you want to upload to storage
+
+            mode (str): Folder of which dataset to update [raw|staging]
+
+            partitions (str, pathlib.PosixPath, or dict): Optional.
+                *If adding a single file*, use this to add it to a specific partition.
+
+                * str : `<key>=<value>/<key2>=<value2>`
+                * dict: `dict(key=value, key2=value2)`
+
+            if_exists (str): Optional.
+                What to do if data exists
+
+                * 'raise' : Raises Conflict exception
+                * 'replace' : Replace table
+                * 'pass' : Do nothing
+
+            upload_args ():
+                Extra arguments accepted by [`google.cloud.storage.blob.Blob.upload_from_file`](https://googleapis.dev/python/storage/latest/blobs.html?highlight=upload_from_filename#google.cloud.storage.blob.Blob.upload_from_filename)
         """
 
         self._check_mode(mode)
@@ -186,18 +192,16 @@ class Storage(Base):
     def delete_file(self, filename, mode, partitions=None, not_found_ok=False):
         """Deletes file from path `<bucket_name>/<mode>/<dataset_id>/<table_id>/<partitions>/<filename>`.
 
-        Parameters
-        ----------
-        filename : str
-            Name of the file to be deleted
-        mode : str
-            Folder of which dataset to update [raw|staging], by default "all"
-        partitions : (str, pathlib.PosixPath, dict), optional
-            Hive structured partition as a string or dict, by default None
-            str : `<key>=<value>/<key2>=<value2>`
-            dict: `dict(key=value, key2=value2)`
-        not_found_ok : bool, optional
-            What to do if file not found, by default False
+        Args:
+            filename (str): Name of the file to be deleted
+            mode (str): Folder of which dataset to update [raw|staging]
+            partitions (str, pathlib.PosixPath, or dict): Optional.
+                Hive structured partition as a string or dict
+
+                * str : `<key>=<value>/<key2>=<value2>`
+                * dict: `dict(key=value, key2=value2)`
+            not_found_ok (bool): Optional.
+                What to do if file not found
         """
 
         blob = self.bucket.blob(self._build_blob_name(filename, mode, partitions))

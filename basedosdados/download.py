@@ -28,47 +28,43 @@ def download(
     limit=None,
     **pandas_kwargs,
 ):
-    """Download table or query result from basedosdados BigQuery.
+    """Download table or query result from basedosdados BigQuery (or other).
 
-    Download using a query:
+    * Using a **query**:
 
         `download('select * from `basedosdados.br_suporte.diretorio_municipios` limit 10')`
 
-    Download using dataset_id and table_id:
+    * Using **dataset_id & table_id**:
 
-        `download(dataset_id='br_suporte', table_id='diretorio_municipios')
+        `download(dataset_id='br_suporte', table_id='diretorio_municipios')`
 
-    Adding arguments to modify save parameters:
+    You can also add arguments to modify save parameters:
 
-        `dowload(dataset_id='br_suporte', table_id='diretorio_municipios', index=False, sep='|')
+    `download(dataset_id='br_suporte', table_id='diretorio_municipios', index=False, sep='|')`
 
 
-    Parameters
-    ----------
-    savepath : (str, pathlib.PosixPath)
-        If savepath is a folder, it saves a file as `savepath / table_id.csv` or
-        `savepath / query_result.csv` if table_id not available.
-        If savepath is a file, saves data to file.
-    query : str, optional
-        Valid SQL Standard Query to basedosdados. If query is available,
-        dataset_id and table_id are not required.
-    dataset_id : str, optional
-        Dataset id available in basedosdados. It should always come with table_id.
-    table_id : str, optional
-        Table id available in basedosdados.dataset_id.
-        It should always come with dataset_id.
-    project_id: str, optional
-        In case you want to use to query another project, by default 'basedosdados'
-    limit: int, optional
-        Number of rows.
-    pandas_kwargs:
-        All variables accepted by pandas.to_csv
-        https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html
+    Args:
+        savepath (str, pathlib.PosixPath):
+            If savepath is a folder, it saves a file as `savepath / table_id.csv` or
+            `savepath / query_result.csv` if table_id not available.
+            If savepath is a file, saves data to file.
+        query (str): Optional.
+            Valid SQL Standard Query to basedosdados. If query is available,
+            dataset_id and table_id are not required.
+        dataset_id (str): Optional.
+            Dataset id available in basedosdados. It should always come with table_id.
+        table_id (str): Optional.
+            Table id available in basedosdados.dataset_id.
+            It should always come with dataset_id.
+        project_id (str): Optional.
+            In case you want to use to query another project.
+        limit (int): Optional
+            Number of rows.
+        pandas_kwargs ():
+            Extra arguments accepted by [pandas.to_csv](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html)
 
-    Raises
-    ------
-    Exception
-        If either table_id or dataset_id were are empty.
+    Raises:
+        Exception: If either table_id or dataset_id were are empty.
     """
 
     savepath = Path(savepath)
@@ -94,15 +90,13 @@ def download(
 def read_sql(query, project_id="basedosdados"):
     """Load data from BigQuery using a query. Just a wrapper around pandas.read_gbq
 
-    Parameters
-    ----------
-    query : sql
-        Valid SQL Standard Query to basedosdados
+    Args:
+        query (sql):
+            Valid SQL Standard Query to basedosdados
 
-    Returns
-    -------
-    pd.DataFrame
-        Query result
+    Returns:
+        pd.DataFrame:
+            Query result
     """
 
     try:
@@ -121,22 +115,20 @@ def read_sql(query, project_id="basedosdados"):
 def read_table(dataset_id, table_id, project_id="basedosdados", limit=None):
     """Load data from BigQuery using dataset_id and table_id.
 
-    Parameters
-    ----------
-    dataset_id : str, optional
-        Dataset id available in basedosdados. It should always come with table_id.
-    table_id : str, optional
-        Table id available in basedosdados.dataset_id.
-        It should always come with dataset_id.
-    project_id: str, optional
-        In case you want to use to query another project, by default 'basedosdados'
-    limit: int, optional
-        Number of rows.
+    Args:
+        dataset_id (str): Optional.
+            Dataset id available in basedosdados. It should always come with table_id.
+        table_id (str): Optional.
+            Table id available in basedosdados.dataset_id.
+            It should always come with dataset_id.
+        project_id (str): Optional.
+            In case you want to use to query another project.
+        limit (int): Optional.
+            Number of rows to read from table.
 
-    Returns
-    -------
-    pd.DataFrame
-        Query result
+    Returns:
+        pd.DataFrame:
+            Query result
     """
 
     if (dataset_id is not None) and (table_id is not None):
