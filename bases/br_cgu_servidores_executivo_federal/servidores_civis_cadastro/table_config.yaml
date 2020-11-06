@@ -168,7 +168,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: cod_atividade
+        name: id_atividade
         description: Código da atividade exercida pelo servidor.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -186,7 +186,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: cod_uorg_lotacao
+        name: id_uorg_lotacao
         description: Código da unidade organizacional (parte do órgão) onde o servidor está lotado (i.e. vinculado administrativamente).
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -198,7 +198,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: cod_org_lotacao
+        name: id_org_lotacao
         description: Código do órgão (superior à unidade organizacional) onde o servidor está lotado (i.e. vinculado administrativamente).
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -210,7 +210,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: cod_orgsup_lotacao
+        name: id_orgsup_lotacao
         description: Código do órgão superior (unidade da administração direta, e.g. ministérios) onde o servidor está lotado (i.e. vinculado administrativamente).
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -222,7 +222,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: cod_uorg_exercicio
+        name: id_uorg_exercicio
         description: Código da unidade organizacional (parte do órgão) onde o servidor está efetivamente em exercício (em caso de servidores cedidos, por ex., pode ser diferente da lotação).
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -234,7 +234,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: cod_org_exercicio
+        name: id_org_exercicio
         description: Código do órgão (superior à unidade organizacional) onde o servidor está efetivamente em exercício (em caso de servidores cedidos, por ex., pode ser diferente da lotação).
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -246,7 +246,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: cod_orgsup_exercicio
+        name: id_orgsup_exercicio
         description: Código do órgão superior (unidade da administração direta, e.g. ministérios) onde o servidor está efetivamente em exercício (em caso de servidores cedidos, por ex., pode ser diferente da lotação).
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -270,13 +270,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: inicio_afastamento
+        name: data_inicio_afastamento
         description: Data de início do afastamento do servidor, em caso de afastamento.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: termino_afastamento
+        name: data_termino_afastamento
         description: Data de término do afastamento do servidor, em caso de afastamento.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -342,7 +342,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: uf_exercicio
+        name: sigla_uf_exercicio
         description: UF de exercício do servidor.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
