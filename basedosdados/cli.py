@@ -12,7 +12,7 @@ from basedosdados import download
 
 @click.group()
 @click.option("--templates", default=None, help="Templates path")
-@click.option("--bucket_name", default=None, help="Project bucket_name name")
+@click.option("--bucket_name", default=None, help="Project bucket name")
 @click.option("--metadata_path", default=None, help="Folder to store metadata")
 @click.pass_context
 def cli(ctx, templates, bucket_name, metadata_path):
