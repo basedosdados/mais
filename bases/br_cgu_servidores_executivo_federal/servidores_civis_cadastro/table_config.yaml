@@ -8,14 +8,9 @@ last_updated: 2020-10-29 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Registro (cadastro) dos servidores públicos civis do poder executivo federal,
-    tanto da administração direta quanto indireta (incluindo autarquias; por exemplo,
-    universidades). Também inclui ocupantes de cargos comissionados. Não inclui
-    registro de servidores aposentados inativos, terceirizados, empregados de empresas
-    públicas, militares e servidores de outros poderes e esferas.
+    Registro (cadastro) dos servidores públicos civis do poder executivo federal, tanto da administração direta quanto indireta (incluindo autarquias; por exemplo, universidades). Também inclui ocupantes de cargos comissionados. Não inclui registro de servidores aposentados inativos, terceirizados, empregados de empresas públicas, militares e servidores de outros poderes e esferas.
 
-    Os registros se repetem em cada mês (um servidor ativo de fev/2015 a nov/2018 terá um
-    registro para cada mês, com os dados referentes àquele mês (cargo ocupado, etc).
+    Os registros se repetem em cada mês (um servidor ativo de fev/2015 a nov/2018 terá um registro para cada mês, com os dados referentes àquele mês (cargo ocupado, etc).
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -64,6 +59,12 @@ coverage_geo:
 # Opções: pre-1999, 2000, 2001, ..., 2019, 2020
 coverage_time:
     - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
     - 2020
 
 # Liste as colunas da tabela que representam partições.
@@ -265,7 +266,7 @@ columns: # REQUIRED
   
     -   
         name: situacao_vinculo
-        description: Situação do vínculo do servidor com o órgão de lotação e/ou de exercício. Ex: requisitado, cedido, nomeado cargo em comissão, contrato temporário. 
+        description: Situação do vínculo do servidor com o órgão de lotação e/ou de exercício. Ex requisitado, cedido, nomeado cargo em comissão, contrato temporário. 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -349,6 +350,6 @@ columns: # REQUIRED
   
     -   
         name: data
-        description: Data no formato YYYY-MM-DD (e.g. 2016-12-01) referente ao ano e mês das informações do cadastro (o dia é sempre 01). A tabela é particionada por essa coluna (restringindo a busca por essa coluna, você economiza processamento).  
+        description: Data referente ao ano e mês das informações do cadastro (o dia é sempre 01). A tabela é particionada por essa coluna (restringindo a busca por essa coluna, você economiza processamento).  
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
