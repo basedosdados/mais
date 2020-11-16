@@ -149,25 +149,25 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nota_SAEB_matematica
+        name: nota_saeb_matematica
         description: Nota SAEB - Matemática
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nota_SAEB_lingua_portuguesa
+        name: nota_saeb_lingua_portuguesa
         description: Nota SAEB - Língua Portuguesa
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nota_SAEB_media_padronizada
+        name: nota_saeb_media_padronizada
         description: Nota SAEB - Média Padronizada (N)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: IDEB
+        name: ideb
         description: IDEB (N x P)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
