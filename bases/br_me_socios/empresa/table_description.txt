@@ -10,11 +10,11 @@ Apoia-se: https://apoia.se/basedosdados
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
-- estado_abrev
+- sigla_uf
 
 Nível da Observação (Colunas que identificam cada linha unicamente)
 -------------------
-- CNPJ
+- cnpj
 
 Cobertura Temporal
 ------------------

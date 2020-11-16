@@ -18,8 +18,9 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW `basedosdados.br_me_socios.cnae_cnpj` AS
 SELECT 
-SAFE_CAST(CNPJ AS STRING) CNPJ,
-SAFE_CAST(CNAE AS STRING) CNAE,
+SAFE_CAST(CNPJ AS STRING) cnpj,
+SAFE_CAST(CNAE AS STRING) cnae,
 SAFE_CAST(primaria AS STRING) primaria
 from basedosdados-staging.br_me_socios_staging.cnae_cnpj as t

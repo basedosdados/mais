@@ -18,10 +18,11 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW `basedosdados.br_me_socios.holding` AS
 SELECT 
-SAFE_CAST(CNPJ_holding AS STRING) CNPJ_holding,
+SAFE_CAST(CNPJ_holding AS STRING) cnpj_holding,
 SAFE_CAST(razao_social_holding AS STRING) razao_social_holding,
-SAFE_CAST(CNPJ AS STRING) CNPJ,
+SAFE_CAST(CNPJ AS STRING) cnpj,
 SAFE_CAST(razao_social AS STRING) razao_social,
 SAFE_CAST(codigo_qualificacao_socia AS STRING) codigo_qualificacao_socia,
 SAFE_CAST(qualificacao_socia AS STRING) qualificacao_socia

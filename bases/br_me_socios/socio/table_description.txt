@@ -14,8 +14,8 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Nível da Observação (Colunas que identificam cada linha unicamente)
 -------------------
-- CNPJ
-- CNPJ_CPF_do_socio
+- cnpj
+- cnpj_cpf_do_socio
 
 Cobertura Temporal
 ------------------

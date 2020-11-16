@@ -32,8 +32,8 @@ data_update_frequency: trimestre
 # Regras: minúsculo, sem acento, singular.
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
-    - CNPJ
-    - CNPJ_holding
+    - cnpj
+    - cnpj_holding
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -100,7 +100,7 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: CNPJ_holding
+        name: cnpj_holding
         description: CNPJ da Holding
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -112,7 +112,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: CNPJ
+        name: cnpj
         description: Cadastro Nacional de Pessoas Jurídicas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

@@ -39,8 +39,8 @@ data_update_frequency: trimestre
 # Regras: minúsculo, sem acento, singular.
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
-    - CNPJ
-    - CNAE
+    - cnpj
+    - cnae
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -107,13 +107,13 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: CNPJ
+        name: cnpj
         description: Cadastro Nacional de Pessoas Jurídicas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: CNAE
+        name: cnae
         description: Cadastro Nacional de Atividades Econômicas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

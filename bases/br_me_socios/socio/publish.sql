@@ -18,16 +18,17 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW `basedosdados.br_me_socios.socio` AS
 SELECT 
-SAFE_CAST(CNPJ AS STRING) CNPJ,
+SAFE_CAST(CNPJ AS STRING) cnpj,
 SAFE_CAST(identificador_de_socio AS INT64) identificador_de_socio,
 SAFE_CAST(nome_socio AS STRING) nome_socio,
-SAFE_CAST(CNPJ_CPF_do_socio AS STRING) CNPJ_CPF_do_socio,
+SAFE_CAST(CNPJ_CPF_do_socio AS STRING) cnpj_cpf_do_socio,
 SAFE_CAST(codigo_qualificacao_socio AS INT64) codigo_qualificacao_socio,
-SAFE_CAST(percentual_capital_social AS NUMERIC) percentual_capital_social,
+SAFE_CAST(percentual_capital_social AS FLOAT64) percentual_capital_social,
 SAFE_CAST(data_entrada_sociedade AS DATE) data_entrada_sociedade,
 SAFE_CAST(ano_entrada_sociedade AS INT64) ano_entrada_sociedade,
-SAFE_CAST(CPF_representante_legal AS STRING) CPF_representante_legal,
+SAFE_CAST(CPF_representante_legal AS STRING) cpf_representante_legal,
 SAFE_CAST(nome_representante_legal AS STRING) nome_representante_legal,
 SAFE_CAST(codigo_qual_representante_legal AS INT64) codigo_qual_representante_legal
 from basedosdados-staging.br_me_socios_staging.socio as t

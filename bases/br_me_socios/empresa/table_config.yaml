@@ -39,7 +39,7 @@ data_update_frequency: trimestre
 # Regras: minúsculo, sem acento, singular.
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
-    - CNPJ
+    - cnpj
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -94,7 +94,7 @@ coverage_time:
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED
-    - estado_abrev
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -107,7 +107,7 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: CNPJ
+        name: cnpj
         description: Cadastro Nacional de Pessoas Jurídicas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -167,7 +167,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: CNAE_fiscal
+        name: cnae_fiscal
         description: Cadastro Nacional de Atividades Econômicas 2.0 Fiscal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -203,13 +203,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: CEP
+        name: cep
         description: Cadastro de Endereçamento Postal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_municipio_RF
+        name: id_municipio_rf
         description: ID Município - Receita Federal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -221,19 +221,19 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: DDD_telefone_1
+        name: ddd_telefone_1
         description: DDD Telefone 1
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: DDD_telefone_2
+        name: ddd_telefone_2
         description: DDD Telefone 2
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: DDD_fax
+        name: ddd_fax
         description: DDD Fax
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -275,7 +275,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: opcao_pelo_MEI
+        name: opcao_pelo_mei
         description: Opção pelo MEI
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -293,7 +293,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
 
     -   
-        name: estado_abrev
+        name: sigla_uf
         description: Estao Abreviado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
