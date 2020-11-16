@@ -8,16 +8,9 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_servid
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    Registros mensais dos servidores públicos do poder executivo federal, disponibilizados pelo
-    Portal da Transparência, mantido pela Controladoria Geral da União - CGU. Os dados são originários
-    do Sistema Integrado de Administração de Recursos Humanos (SIAPE), do Banco Central (BACEN),
-    do Ministério das Relações Exteriores (MRE) e dos Comandos Militares do Brasil (Exército, Marinha e
-    Aeronáutica).
+    Registros mensais dos servidores públicos do poder executivo federal, disponibilizados pelo Portal da Transparência, mantido pela Controladoria Geral da União - CGU. Os dados são originários do Sistema Integrado de Administração de Recursos Humanos (SIAPE), do Banco Central (BACEN), do Ministério das Relações Exteriores (MRE) e dos Comandos Militares do Brasil (Exército, Marinha e Aeronáutica).
 
-    Essas bases não incluem informações sobre: servidores de outras esferas (municipal e estadual);
-    de outros poderes (legislativo e judiciário); aposentados que não estejam na ativa; servidores
-    de empresas públicas; e terceirizados.
-    
+    Essas bases não incluem informações sobre: servidores de outras esferas (municipal e estadual); de outros poderes (legislativo e judiciário); aposentados que não estejam na ativa; servidores de empresas públicas; e terceirizados.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
