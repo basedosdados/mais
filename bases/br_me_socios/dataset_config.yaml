@@ -10,6 +10,8 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_socios
 description: | # REQUIRED
     Quadros societários e de administradores das pessoas jurídicas brasileiras.
 
+    Para detalhes de layout e dicionário de variáveis, consulte os arquivos no repositório no Github.
+
     Fonte: Receita Federal do Brasil, dados tratados por Álvaro Justen/Brasil.IO.
 
 # Qual organização disponibiliza os dados originais?

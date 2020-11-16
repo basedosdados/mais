@@ -144,7 +144,7 @@ columns: # REQUIRED
   
     -   
         name: motivo_situacao_cadastral
-        description: Motivo Situação Cadastral
+        description: Motivo Situação Cadastral. Detalhes em https://receita.economia.gov.br/orientacao/tributaria/cadastros/cadastro-nacional-de-pessoas-juridicas-cnpj/DominiosMotivoSituaoCadastral.csv.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -156,7 +156,7 @@ columns: # REQUIRED
   
     -   
         name: codigo_natureza_juridica
-        description: Código Natureza Jurídica
+        description: Código Natureza Jurídica. Detalhes em https://concla.ibge.gov.br/estrutura/natjur-estrutura/natureza-juridica-2018.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

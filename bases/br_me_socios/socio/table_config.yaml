@@ -133,7 +133,7 @@ columns: # REQUIRED
   
     -   
         name: codigo_qualificacao_socio
-        description: Código Qualificação do(a) Sócio(a)
+        description: Código Qualificação do(a) Sócio(a). Detalhes em https://github.com/turicas/socios-brasil/blob/master/qualificacao-socio.csv.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -163,7 +163,7 @@ columns: # REQUIRED
   
     -   
         name: codigo_qual_representante_legal
-        description: Código Qualificação do(a) Representante Legal
+        description: Código Qualificação do(a) Representante Legal.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
