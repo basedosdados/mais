@@ -1,0 +1,55 @@
+Registro (cadastro) dos servidores públicos civis do poder executivo federal, tanto da administração direta quanto indireta (incluindo autarquias; por exemplo, universidades). Também inclui ocupantes de cargos comissionados. Não inclui registro de servidores aposentados inativos, terceirizados, empregados de empresas públicas, militares e servidores de outros poderes e esferas.
+
+Os registros se repetem em cada mês (um servidor ativo de fev/2015 a nov/2018 terá um registro para cada mês, com os dados referentes àquele mês (cargo ocupado, etc).
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- data
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- id_servidor
+
+Cobertura Temporal
+------------------
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+A descrever no futuro.
+
+Frequencia de Atualização
+-------------------------
+mês
+
+Tratado por
+-----------
+Nome: Henrique Xavier
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_servidores_executivo_federal/code
+Email: hsxavier@gmail.com
+
+Publicado por
+-------------
+Nome: Henrique Xavier
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_servidores_executivo_federal/code
+Website: http://henriquexavier.net/
+Email: hsxavier@gmail.com

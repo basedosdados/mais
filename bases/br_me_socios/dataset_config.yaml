@@ -1,37 +1,37 @@
-dataset_id: br_cgu_servidores_executivo_federal # AUTO GENERATED
+dataset_id: br_me_socios # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-cgu-servidores-executivo-federal
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_servidores_executivo_federal
+url_ckan: https://basedosdados.org/dataset/br-me-socios
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_socios
 
 # Descreva a base.
 # Ela é sobre o que?
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    Registros mensais dos servidores públicos do poder executivo federal, disponibilizados pelo Portal da Transparência, mantido pela Controladoria Geral da União - CGU. Os dados são originários do Sistema Integrado de Administração de Recursos Humanos (SIAPE), do Banco Central (BACEN), do Ministério das Relações Exteriores (MRE) e dos Comandos Militares do Brasil (Exército, Marinha e Aeronáutica).
+    Quadros societários e de administradores das pessoas jurídicas brasileiras.
 
-    Essas bases não incluem informações sobre: servidores de outras esferas (municipal e estadual); de outros poderes (legislativo e judiciário); aposentados que não estejam na ativa; servidores de empresas públicas; e terceirizados.
+    Para detalhes de layout e dicionário de variáveis, consulte os arquivos no repositório no Github.
+
+    Fonte: Receita Federal do Brasil, dados tratados por Álvaro Justen/Brasil.IO.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: controladoria-geral-da-uniao # REQUIRED
+organization: ministerio-da-economia
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
-    name: <nome>
+    name: Receita Federal
     email: <email>
 
 # Onde encontrar os dados originais e mais informações?
 website:
-    - http://www.portaltransparencia.gov.br/download-de-dados/servidores
-    - http://www.portaltransparencia.gov.br/api-de-dados
-    - http://www.portaltransparencia.gov.br/origem-dos-dados
-    - http://www.portaltransparencia.gov.br/entenda-a-gestao-publica/servidores-publicos
+    - https://receita.economia.gov.br/orientacao/tributaria/cadastros/cadastro-nacional-de-pessoas-juridicas-cnpj/dados-publicos-cnpj
+    - https://brasil.io/dataset/socios-brasil/socios/
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
-    - gov-fin-pub
+    - economia
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -40,16 +40,9 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - forcas armadas 
-    - biografia
-    - exoneracao
-    - nomeacao
-    - governo
-    - gestao
-    - governanca
-    - executivo
-    - ministerio
-    - servidor
+    - empresa
+    - firma
+    - socio
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.
@@ -64,20 +57,20 @@ free: sim
 microdata: sim
 
 # Existe uma API na fonte original?
-API: sim
+API: nao
 
 # É necessário registrar um usuário para baixar os dados originais?
-registration: não
+registration: nao
 
 # Como os dados originais estão disponibilizados?
 availability: online
 
 # A fonte original requer IP brasileiro para acesso?
-brazilian_IP: não
+brazilian_IP: nao
 
 # Essa base está sob qual licença?
 # A licença MIT se aplica a bases públicas.
 # Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
 license: 
-    name: MIT # REQUIRED
-    url: https://opensource.org/licenses/MIT
+    name: LGPL3 # REQUIRED
+    url: https://www.gnu.org/licenses/lgpl-3.0.en.html

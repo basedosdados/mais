@@ -1,20 +1,20 @@
-dataset_id: br_cgu_servidores_executivo_federal # AUTO GENERATED
+dataset_id: br_inep_ideb # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-cgu-servidores-executivo-federal
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_servidores_executivo_federal
+url_ckan: https://basedosdados.org/dataset/br-inep-ideb
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ideb
 
 # Descreva a base.
 # Ela é sobre o que?
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    Registros mensais dos servidores públicos do poder executivo federal, disponibilizados pelo Portal da Transparência, mantido pela Controladoria Geral da União - CGU. Os dados são originários do Sistema Integrado de Administração de Recursos Humanos (SIAPE), do Banco Central (BACEN), do Ministério das Relações Exteriores (MRE) e dos Comandos Militares do Brasil (Exército, Marinha e Aeronáutica).
+    O Índice de Desenvolvimento da Educação Básica (Ideb) foi criado em 2007 e reúne, em um só indicador, os resultados de dois conceitos igualmente importantes para a qualidade da educação: o fluxo escolar e as médias de desempenho nas avaliações. O Ideb é calculado a partir dos dados sobre aprovação escolar, obtidos no Censo Escolar, e das médias de desempenho no Sistema de Avaliação da Educação Básica (Saeb).
 
-    Essas bases não incluem informações sobre: servidores de outras esferas (municipal e estadual); de outros poderes (legislativo e judiciário); aposentados que não estejam na ativa; servidores de empresas públicas; e terceirizados.
+    O Ideb agrega ao enfoque pedagógico das avaliações em larga escala a possibilidade de resultados sintéticos, facilmente assimiláveis, e que permitem traçar metas de qualidade educacional para os sistemas. O índice varia de 0 a 10. A combinação entre fluxo e aprendizagem tem o mérito de equilibrar as duas dimensões: se um sistema de ensino retiver seus alunos para obter resultados de melhor qualidade no Saeb, o fator fluxo será alterado, indicando a necessidade de melhoria do sistema. Se, ao contrário, o sistema apressar a aprovação do aluno sem qualidade, o resultado das avaliações indicará igualmente a necessidade de melhoria do sistema.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: controladoria-geral-da-uniao # REQUIRED
+organization: br-inep
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
@@ -23,15 +23,12 @@ author:
 
 # Onde encontrar os dados originais e mais informações?
 website:
-    - http://www.portaltransparencia.gov.br/download-de-dados/servidores
-    - http://www.portaltransparencia.gov.br/api-de-dados
-    - http://www.portaltransparencia.gov.br/origem-dos-dados
-    - http://www.portaltransparencia.gov.br/entenda-a-gestao-publica/servidores-publicos
+    - http://inep.gov.br/educacao-basica/ideb/resultados
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
-    - gov-fin-pub
+    - educacao
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -40,16 +37,8 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - forcas armadas 
-    - biografia
-    - exoneracao
-    - nomeacao
-    - governo
-    - gestao
-    - governanca
-    - executivo
-    - ministerio
-    - servidor
+    - exame 
+    - avaliacao
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.
@@ -64,20 +53,20 @@ free: sim
 microdata: sim
 
 # Existe uma API na fonte original?
-API: sim
+API: nao
 
 # É necessário registrar um usuário para baixar os dados originais?
-registration: não
+registration: nao
 
 # Como os dados originais estão disponibilizados?
 availability: online
 
 # A fonte original requer IP brasileiro para acesso?
-brazilian_IP: não
+brazilian_IP: nao
 
 # Essa base está sob qual licença?
 # A licença MIT se aplica a bases públicas.
 # Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
 license: 
     name: MIT # REQUIRED
-    url: https://opensource.org/licenses/MIT
+    url: <url>
