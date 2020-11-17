@@ -65,3 +65,4 @@ SELECT
     SAFE_CAST(uf_exercicio AS STRING) sigla_uf_exercicio,
     SAFE_CAST(data AS DATE) data
 FROM `gabinete-compartilhado.views_publicos.servidores_executivo_federal_civis_cadastro`
+

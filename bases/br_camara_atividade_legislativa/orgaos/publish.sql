@@ -18,6 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW basedosdados.br_camara_atividade_legislativa.orgaos AS
 SELECT 
 SAFE_CAST(id_orgao AS STRING) id_orgao,
 SAFE_CAST(sigla AS STRING) sigla,

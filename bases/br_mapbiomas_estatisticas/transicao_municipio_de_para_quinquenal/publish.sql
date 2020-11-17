@@ -18,6 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW basedosdados.br_mapbiomas_estatisticas.transicao_municipio_de_para_quinquenal AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(estado_abrev AS STRING) estado_abrev,

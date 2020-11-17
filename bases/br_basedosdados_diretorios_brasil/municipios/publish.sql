@@ -18,6 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW basedosdados.br_basedosdados_diretorios_brasil.municipios AS
 SELECT 
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(id_municipio_6 AS INT64) id_municipio_6,

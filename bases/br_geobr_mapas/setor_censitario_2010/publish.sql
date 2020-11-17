@@ -18,6 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW basedosdados.br_geobr_mapas.setor_censitario_2010 AS
 SELECT 
 SAFE_CAST(code_tract AS NUMERIC) id_setor_censitario,
 SAFE_CAST(zone AS STRING) zona,

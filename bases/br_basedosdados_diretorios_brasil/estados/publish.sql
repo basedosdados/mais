@@ -18,6 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW basedosdados.br_basedosdados_diretorios_brasil.estados AS
 SELECT 
 SAFE_CAST(id_estado AS INT64) id_estado,
 SAFE_CAST(estado_abrev AS STRING) estado_abrev,
