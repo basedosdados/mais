@@ -18,6 +18,7 @@ Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
 PS: Esta view puxa dados do projeto `gabinete-compartilhado`. Os dados não estão no storage da `basedosdados`.
 */
 
+CREATE VIEW basedosdados.br_cgu_servidores_executivo_federal.servidores_civis_cadastro AS
 SELECT 
     mes,
     ano,
