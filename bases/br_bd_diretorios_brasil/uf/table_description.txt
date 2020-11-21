@@ -1,4 +1,4 @@
-Diretório listando informações do IBGE sobre estados brasileiros.
+Diretório listando informações do IBGE sobre unidades da federação brasileiras.
 
 
 Para saber mais acesse:

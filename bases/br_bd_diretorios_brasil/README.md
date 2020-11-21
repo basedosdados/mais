@@ -1,4 +1,4 @@
-Como capturar os dados de br_basedosdados_diretorios_brasil?
+Como capturar os dados de br_bd_diretorios_brasil?
 
 Para capturar esses dados basta entrar em X e fazer Y.
 
