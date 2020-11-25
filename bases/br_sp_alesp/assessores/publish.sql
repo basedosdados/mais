@@ -18,14 +18,13 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_sp_gov_orcamento.receita_prevista AS
-SELECT
-SAFE_CAST(35 as INT64) id_estado,
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(orgao AS STRING) orgao,
-SAFE_CAST(gestao AS STRING) gestao,
-SAFE_CAST(unidade_gestora AS STRING) unidade_gestora,
-SAFE_CAST(fonte_de_recursos AS STRING) fonte_de_recursos,
-SAFE_CAST(receita AS STRING) receita,
-SAFE_CAST(previsto_do_ano AS INT64) previsto_do_ano
-from basedosdados-staging.br_sp_gov_orcamento_staging.receita_prevista as t
+SELECT 
+SAFE_CAST(matricula AS STRING) matricula,
+SAFE_CAST(nome_parlamentar AS STRING) nome_parlamentar,
+SAFE_CAST(partido AS STRING) partido,
+SAFE_CAST(servidor AS STRING) servidor,
+SAFE_CAST(cargo AS STRING) cargo,
+SAFE_CAST(lotacao AS STRING) lotacao,
+SAFE_CAST(lotacao_tipo AS STRING) lotacao_tipo,
+SAFE_CAST(regime AS STRING) regime
+from basedosdados-staging.br_sp_alesp_staging.assessores as t
