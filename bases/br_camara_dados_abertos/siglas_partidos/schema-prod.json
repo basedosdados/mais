@@ -1,0 +1,1 @@
+[{"name": "sigla_partido_antiga", "description": "Sigla Antiga do Partido", "is_in_staging": true, "is_partition": false, "type": "STRING", "mode": "NULLABLE"}, {"name": "sigla_partido_nova", "description": "Sigla Nova do Partido", "is_in_staging": true, "is_partition": false, "type": "STRING", "mode": "NULLABLE"}]

@@ -1,0 +1,56 @@
+Tabela com todas as combinações de ano_de e ano_para mapeando municípios em 2010 para anos anteriores.
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- municipio
+- ano_de
+- ano_para
+
+Cobertura Temporal
+------------------
+- 1872
+- 1900
+- 1911
+- 1920
+- 1933
+- 1940
+- 1950
+- 1960
+- 1970
+- 1980
+- 1991
+- 2000
+- 2010
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Rodei o código original do artigo e compilei todos os resultados em uma tabela única.
+
+Frequencia de Atualização
+-------------------------
+unico
+
+Tratado por
+-----------
+Nome: Philipp Ehrl
+Código: https://www.scielo.br/scielo.php?script=sci_arttext&pid=S0101-41612017000100215
+Email: philipp.ehrl@gmail.com
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_amc/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org

@@ -18,6 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW basedosdados.br_tse_filiacao_partidaria.filiacao_partidaria AS
 SELECT
 SAFE_CAST(estado_abrev AS STRING) estado_abrev,
 SAFE_CAST(id_municipio_TSE AS INT64) id_municipio_TSE,

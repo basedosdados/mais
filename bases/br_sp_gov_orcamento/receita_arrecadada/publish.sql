@@ -18,6 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW basedosdados.br_sp_gov_orcamento.receita_arrecadada AS
 SELECT
     SAFE_CAST(35 as INT64) id_estado,
     SAFE_CAST(ano AS INT64) ano,
