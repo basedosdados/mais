@@ -1,0 +1,355 @@
+table_id: servidores_militares_cadastro # AUTO GENERATED
+dataset_id: br_cgu_servidores_executivo_federal # AUTO GENERATED
+
+last_updated: 2020-10-29 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Registro (cadastro) dos servidores públicos militares do poder executivo federal, tanto da administração direta quanto indireta. Também inclui ocupantes de cargos comissionados. Não inclui registro de militares reformados (aposentados), terceirizados, empregados de empresas públicas, servidores civis e servidores de outros poderes e esferas.
+
+    Os registros se repetem em cada mês (um servidor ativo de fev/2015 a nov/2018 terá um registro para cada mês, com os dados referentes àquele mês (cargo ocupado, etc).
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Henrique Xavier  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_servidores_executivo_federal/code # REQUIRED
+    website: <onde encontrar os dados tratados>
+    email: hsxavier@gmail.com
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Henrique Xavier  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_servidores_executivo_federal/code # REQUIRED
+    website: http://henriquexavier.net/
+    email: hsxavier@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    A descrever no futuro.
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+data_update_frequency: mês # REQUIRED 
+
+# Nível da observação: quais colunas identificam uma linha unicamente?
+# Escolha todas as opções necessárias.
+# Regras: minúsculo, sem acento, singular.
+# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level:
+    - id_servidor
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: pre-1999, 2000, 2001, ..., 2019, 2020
+coverage_time:
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
+    - 2020
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED
+    - data
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+  
+    -   
+        name: mes
+        description: Mês de referência do cadastro do servidor (ao qual as informações se referem).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano
+        description: Ano de referência do cadastro do servidor (ao qual as informações se referem).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_servidor
+        description: Número de identificação interna do servidor no Portal da Transparência, que pode ser utilizado para ligar a outras tabelas do mesmo Dataset.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nome
+        description: Nome completo do servidor.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: cpf
+        description: CPF mascarado do servidor (6 dígitos do meio, e.g. ***.346.574-**)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: matricula
+        description: Matrícula do servidor mascarada (3 primeiros dígitos, e.g. 544****)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: desc_cargo
+        description: Descrição do cargo ocupado pelo servidor.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: classe_cargo
+        description: Classe do cargo ocupado pelo servidor.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ref_cargo
+        description: Referência do cargo ocupado pelo servidor.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: padrao_cargo
+        description: Padrão do cargo ocupado pelo servidor.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_cargo
+        description: Nível do cargo ocupado pelo servidor.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_funcao
+        description: Sigla da função ocupada pelo servidor.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_funcao
+        description: Nível da função ocupada pelo servidor
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: funcao
+        description: Descrição da função ocupada pelo servidor.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_atividade
+        description: Código da atividade exercida pelo servidor.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atividade
+        description: Descrição da atividade exercida pelo servidor.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: opcao_parcial
+        description: Indica se servidor optou pela remuneração do cargo efetivo, do posto ou graduação, ou do emprego, acrescida do percentual de 60% (sessenta por cento) do respectivo cargo em comissão.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_uorg_lotacao
+        description: Código da unidade organizacional (parte do órgão) onde o servidor está lotado (i.e. vinculado administrativamente).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: uorg_lotacao
+        description: Nome da unidade organizacional (parte do órgão) onde o servidor está lotado (i.e. vinculado administrativamente).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_org_lotacao
+        description: Código do órgão (superior à unidade organizacional) onde o servidor está lotado (i.e. vinculado administrativamente).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: org_lotacao
+        description: Nome do órgão (superior à unidade organizacional) onde o servidor está lotado (i.e. vinculado administrativamente).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_orgsup_lotacao
+        description: Código do órgão superior (unidade da administração direta, e.g. ministérios) onde o servidor está lotado (i.e. vinculado administrativamente).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: orgsup_lotacao
+        description: Nome do órgão superior (unidade da administração direta, e.g. ministérios) onde o servidor está lotado (i.e. vinculado administrativamente).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_uorg_exercicio
+        description: Código da unidade organizacional (parte do órgão) onde o servidor está efetivamente em exercício (em caso de servidores cedidos, por ex., pode ser diferente da lotação).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: uorg_exercicio
+        description: Nome da unidade organizacional (parte do órgão) onde o servidor está efetivamente em exercício (em caso de servidores cedidos, por ex., pode ser diferente da lotação).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_org_exercicio
+        description: Código do órgão (superior à unidade organizacional) onde o servidor está efetivamente em exercício (em caso de servidores cedidos, por ex., pode ser diferente da lotação).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: org_exercicio
+        description: Nome do órgão (superior à unidade organizacional) onde o servidor está efetivamente em exercício (em caso de servidores cedidos, por ex., pode ser diferente da lotação).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_orgsup_exercicio
+        description: Código do órgão superior (unidade da administração direta, e.g. ministérios) onde o servidor está efetivamente em exercício (em caso de servidores cedidos, por ex., pode ser diferente da lotação).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: orgsup_exercicio
+        description: Nome do órgão superior (unidade da administração direta, e.g. ministérios) onde o servidor está efetivamente em exercício (em caso de servidores cedidos, por ex., pode ser diferente da lotação).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_vinculo
+        description: 1 Função ou Cargo de Confiança; 2 Cargo Emprego; 3 Demais situações - agentes públicos; 4 Posto/Graduação.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: situacao_vinculo
+        description: Situação do vínculo do servidor com o órgão de lotação e/ou de exercício. Ex requisitado, cedido, nomeado cargo em comissão, contrato temporário. 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: data_inicio_afastamento
+        description: Data de início do afastamento do servidor, em caso de afastamento.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: data_termino_afastamento
+        description: Data de término do afastamento do servidor, em caso de afastamento.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: regime_juridico
+        description: CDT Contrato temporário; CLT Consolidação das leis do trabalho; EST Regime jurídico único; ETE Estágio empresa; MIL Estatuto dos militares; MRD Médico residente; NES Natureza especial; PMM Médico - programa mais médicos; RMI Regime militar; RMP Residência multiprofissional
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: jornada_de_trabalho
+        description: Número de horas semanais da jornada de trabalho, de 12 a 66. O código 99 se refere a dedicação exclusiva, e o código MI se refere a disponibilidade permanente.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: data_ingresso_cargo_funcao
+        description: Data de ingresso do servidor no cargo ou função.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: data_nomeacao_cargo_funcao
+        description: Data de nomeação do servidor no cargo ou função.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: data_ingresso_orgao
+        description: Data de ingresso do servidor no órgão.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: doc_ingresso_servico_publico
+        description: Documento de ingresso do servidor no serviço público.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: data_dipl_ingresso_servico_publico
+        description: Data do diploma de ingresso do servidor no serviço público.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dipl_ingresso_cargo_funcao
+        description: Diploma de ingresso do servidor no cargo ou função.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dipl_ingresso_orgao
+        description: Diploma de ingresso do servidor no órgão.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dipl_ingresso_servico_publico
+        description: Diploma de ingresso do servidor no serviço público.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf_exercicio
+        description: UF de exercício do servidor.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: data
+        description: Data referente ao ano e mês das informações do cadastro (o dia é sempre 01). A tabela é particionada por essa coluna (restringindo a busca por essa coluna, você economiza processamento).  
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
