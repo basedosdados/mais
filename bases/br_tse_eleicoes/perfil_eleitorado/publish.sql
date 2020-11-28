@@ -19,18 +19,14 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados.br_tse_eleicoes.resultados_candidato_secao AS
+CREATE VIEW basedosdados.br_tse_eleicoes.perfil_eleitorado AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio_tse AS INT64) id_municipio_tse,
 SAFE_CAST(zona AS INT64) zona,
-SAFE_CAST(secao AS INT64) secao,
-SAFE_CAST(turno AS INT64) turno,
-SAFE_CAST(numero_candidato AS INT64) numero_candidato,
-SAFE_CAST(id_candidato_bd AS INT64) id_candidato_bd,
-SAFE_CAST(cargo AS STRING) cargo,
-SAFE_CAST(sigla_partido AS STRING) sigla_partido,
-SAFE_CAST(votos AS INT64) votos
-from basedosdados-staging.br_tse_eleicoes_staging.resultados_candidato_secao as t
+SAFE_CAST(genero AS STRING) genero,
+SAFE_CAST(grupo_idade AS STRING) grupo_idade,
+SAFE_CAST(instrucao AS STRING) instrucao,
+SAFE_CAST(eleitores AS INT64) eleitores
+from basedosdados-staging.br_tse_eleicoes_staging.perfil_eleitorado as t

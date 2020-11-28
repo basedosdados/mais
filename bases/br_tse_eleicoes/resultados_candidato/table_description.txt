@@ -1,9 +1,4 @@
-Geolocalização da seção de votação.
-
-Trabalho realizado por Pindorama https://pindograma.com.br/
-
-Vários métodos foram utilizados para geolocalizar as urnas. Veja uma
-descrição da metodologia aqui: https://github.com/ipeaGIT/geobr/issues/184
+Dados de resultados eleitorais a nível de candidato.
 
 
 Para saber mais acesse:
@@ -19,13 +14,16 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Nível da Observação (Colunas que identificam cada linha unicamente)
 -------------------
-- municipio
-- zona
-- secao
+- candidato
 - ano
 
 Cobertura Temporal
 ------------------
+- 1998
+- 2000
+- 2002
+- 2004
+- 2006
 - 2008
 - 2010
 - 2012
@@ -40,7 +38,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Diversos métodos foram utilizados para geolocalizar as urnas
+Dados agregados a nível de candidato com identificador Base dos Dados.
 
 Frequencia de Atualização
 -------------------------
@@ -48,14 +46,13 @@ Frequencia de Atualização
 
 Tratado por
 -----------
-Nome: Pindograma
-Código: https://github.com/pindograma/mapa
-Website: https://pindograma.com.br/
-Email: redacao@pindograma.com.br
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
+Email: rdahis@basedosdados.org
 
 Publicado por
 -------------
-Nome: João Carabetta
+Nome: Ricardo Dahis
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
-Website: www.basedosdados.org
-Email: joao.carabetta@gmail.com
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org

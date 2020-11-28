@@ -10,8 +10,8 @@ Apoia-se: https://apoia.se/basedosdados
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
-- estado_abrev
-- partido
+- sigla_uf
+- sigla_partido
 
 Nível da Observação (Colunas que identificam cada linha unicamente)
 -------------------
