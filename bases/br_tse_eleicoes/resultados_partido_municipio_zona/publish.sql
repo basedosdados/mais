@@ -18,16 +18,17 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+
 CREATE VIEW basedosdados.br_tse_eleicoes.resultados_partido_municipio_zona AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
-SAFE_CAST(estado_abrev AS STRING) estado_abrev,
-SAFE_CAST(id_municipio_TSE AS INT64) id_municipio_TSE,
-SAFE_CAST(zona AS STRING) zona,
-SAFE_CAST(turno AS INT64) turno,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio_tse AS INT64) id_municipio_tse,
+SAFE_CAST(zona AS INT64) zona,
+SAFE_CAST(sigla_partido AS STRING) sigla_partido,
 SAFE_CAST(cargo AS STRING) cargo,
-SAFE_CAST(partido AS STRING) partido,
+SAFE_CAST(turno AS INT64) turno,
 SAFE_CAST(votos_nominais AS INT64) votos_nominais,
 SAFE_CAST(votos_nao_nominais AS INT64) votos_nao_nominais
 from basedosdados-staging.br_tse_eleicoes_staging.resultados_partido_municipio_zona as t

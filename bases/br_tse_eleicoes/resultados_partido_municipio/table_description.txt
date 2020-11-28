@@ -11,15 +11,14 @@ Apoia-se: https://apoia.se/basedosdados
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
-- estado_abrev
+- sigla_uf
 
 Nível da Observação (Colunas que identificam cada linha unicamente)
 -------------------
 - tipo_eleicao
-- estado
 - municipio
-- turno
 - partido
+- turno
 - ano
 
 Cobertura Temporal
@@ -35,6 +34,7 @@ Cobertura Temporal
 - 2014
 - 2016
 - 2018
+- 2020
 
 Cobertura Espacial
 ------------------
