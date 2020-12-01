@@ -1,23 +1,25 @@
-table_id: resultados_preliminares_2020 # AUTO GENERATED
+table_id: perfil_eleitorado # AUTO GENERATED
 dataset_id: br_tse_eleicoes # AUTO GENERATED
 
-last_updated: 2020-11-16 # AUTO GENERATED
+version: v1.0
+
+last_updated: 2020-11-24 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Resultados preliminares da eleição 2020 no Brasil a nível de candidato.
+    Dados de perfil do eleitorado a nível de zona eleitoral.
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: Marco Faganello
-    code_url: https://github.com/marcofaga/eleicoes2020
-    website: https://github.com/marcofaga/eleicoes2020
-    email: <email>
+    name: Ricardo Dahis
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code # REQUIRED
+    website: <onde encontrar os dados tratados>
+    email: rdahis@basedosdados.org
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -28,19 +30,23 @@ published_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Dados limpos para consistência com o resto da Base dos Dados.
+    <CEPESP fez X. Eu fiz K>
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
-data_update_frequency: 1 hora
+data_update_frequency: 2 anos
 
 # Nível da observação: quais colunas identificam uma linha unicamente?
 # Escolha todas as opções necessárias.
 # Regras: minúsculo, sem acento, singular.
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
-    - turno
-    - candidato
+    - municipio
+    - zona
+    - genero
+    - grupo_idade
+    - instrucao
+    - ano
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -57,13 +63,26 @@ coverage_geo:
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: pre-1999, 2000, 2001, ..., 2019, 2020
 coverage_time:
+    - 1998
+    - 2000
+    - 2002
+    - 2004
+    - 2006
+    - 2008
+    - 2010
+    - 2012
+    - 2014
+    - 2016
+    - 2018
     - 2020
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
+partitions: # REQUIRED  
+    - ano  
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -76,109 +95,49 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: id_eleicao
-        description: ID Eleição
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data
-        description: Data
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: hora
-        description: Hora
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: compilado
-        description: Tempo-Data de Compilação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: regiao
-        description: Região
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sigla_uf
-        description: Sigla Unidade da Federação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
         name: id_municipio_tse
         description: ID Município - TSE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: turno
-        description: Turno
+        name: zona
+        description: Zona Eleitoral
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: cargo
-        description: Cargo
+        name: genero
+        description: Gênero
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: apuracao
-        description: Proporção de Votos Apurados
+        name: grupo_idade
+        description: Grupo de Idade
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: numero_candidato
-        description: Número de Candidato
+        name: instrucao
+        description: Instrução
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nome_urna_candidato
-        description: Nome de Urna do Candidato
+        name: eleitores
+        description: Número de Eleitores
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: sigla_partido
-        description: Sigla do Partido
+        name: ano
+        description: Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+        is_partition: True # Bool [True, False], whether the column is a partition.
   
     -   
-        name: coligacao
-        description: Coligação
+        name: sigla_uf
+        description: Sigla Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: votos
-        description: Número de Votos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: prop_votos
-        description: Proporção de Votos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resultado
-        description: Resultado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+        is_partition: True # Bool [True, False], whether the column is a partition.

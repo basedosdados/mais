@@ -1,7 +1,7 @@
 table_id: candidatos # AUTO GENERATED
 dataset_id: br_tse_eleicoes # AUTO GENERATED
 
-last_updated: 2020-10-12 # AUTO GENERATED
+last_updated: 2020-11-23 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -76,7 +76,7 @@ coverage_time:
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED  
     - ano  
-    - estado_abrev
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -95,13 +95,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_candidato_BD
+        name: id_candidato_bd
         description: ID Candidato - Base dos Dados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: CPF
+        name: cpf
         description: CPF
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -143,7 +143,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: partido
+        name: sigla_partido
         description: Sigla do Partido
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -155,7 +155,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_municipio_TSE
+        name: id_municipio_tse
         description: ID Município - TSE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -209,8 +209,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: estado_abrev_nasc
-        description: Estado Abreviado de Nascimento
+        name: sigla_uf_nasc
+        description: Sigla Unidade da Federação de Nascimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -239,7 +239,7 @@ columns: # REQUIRED
         is_partition: True # Bool [True, False], whether the column is a partition.
   
     -   
-        name: estado_abrev
-        description: Estado Abreviado
+        name: sigla_uf
+        description: Sigla Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.

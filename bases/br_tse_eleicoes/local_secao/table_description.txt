@@ -16,19 +16,23 @@ Apoia-se: https://apoia.se/basedosdados
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
-- estado_abrev
 
 Nível da Observação (Colunas que identificam cada linha unicamente)
 -------------------
+- municipio
 - zona
 - secao
+- ano
 
 Cobertura Temporal
 ------------------
+- 2008
+- 2010
 - 2012
 - 2014
 - 2016
 - 2018
+- 2020
 
 Cobertura Espacial
 ------------------

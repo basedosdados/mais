@@ -1,32 +1,32 @@
-dataset_id: br_sp_ssp_seguranca # AUTO GENERATED
+dataset_id: br_sp_alesp # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-sp-ssp-seguranca
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_ssp_seguranca
+url_ckan: https://basedosdados.org/dataset/br-sp-alesp
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_alesp
 
 # Descreva a base.
 # Ela é sobre o que?
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    Dados estatísticos da Secretaria de Segurança Pública do Estado de São Paulo. Bases já capituradas, Produtividade Polcial e Ocorrências Registradas.
+    Dados relativo ao Poder Legislativo do Estado de São Paulo
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: Secretaria de Segurança Pública do Estado de São Paulo # REQUIRED
+organization: ALESP # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
-    name: DEPARTAMENTO DE POLÍCIA CIVIL, POLÍCIA MILITAR E SUPERINTENDÊNCIA DA POLÍCIA TÉCNICO-CIENTÍFICA
-    email: https://www.ssp.sp.gov.br/fale/Contato.aspx
+    name: Portal dos Dados Abertos da Alesp
+    email: dadosabertos@al.sp.gov.br
 
 # Onde encontrar os dados originais e mais informações?
 website:
-    - http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx
+    - https://www.al.sp.gov.br/dados-abertos/
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
-    - seguranca
+    - politica
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -35,7 +35,9 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - segurança pública
+    - despesa
+    - politica publica
+    - proposicao
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.

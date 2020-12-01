@@ -48,4 +48,4 @@ SAFE_CAST(roubo_a_banco AS INT64) roubo_a_banco,
 SAFE_CAST(roubo_de_carga AS INT64) roubo_de_carga,
 SAFE_CAST(furto_outros AS INT64) furto_outros,
 SAFE_CAST(furto_de_veiculo AS INT64) furto_de_veiculo
-from basedosdados-staging.br_sp_ssp_seguranca_staging.ocorrecencias_registradas as t
+from basedosdados-staging.br_sp_gov_ssp_staging.ocorrecencias_registradas as t

@@ -1,0 +1,44 @@
+Lista dos Deputados Estaduais do Estado de São Paulo da legislatura atual
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- matricula
+
+Cobertura Temporal
+------------------
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+- SP
+
+Tratamento
+----------
+Padronização do nome das colunas, remoção de textos e logos, unificação das bases
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+Tratado por
+-----------
+Nome: Diego Oliveira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_alesp/code
+Website: https://www.al.sp.gov.br/repositorioDados/deputados/deputados.xml
+Email: ds.oliveira404@gmail.com
+
+Publicado por
+-------------
+Nome: Diego Oliveira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_alesp/code
+Website: github.com/d116626
+Email: ds.oliveira404@gmail.com

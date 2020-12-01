@@ -38,4 +38,4 @@ SAFE_CAST(no_de_pessoas_presas_por_mandado AS INT64) no_de_pessoas_presas_por_ma
 SAFE_CAST(no_de_prisoes_efetuadas AS INT64) no_de_prisoes_efetuadas,
 SAFE_CAST(no_de_veiculos_recuperados AS INT64) no_de_veiculos_recuperados,
 SAFE_CAST(tot_de_inqueritos_policiais_instaurados AS INT64) tot_de_inqueritos_policiais_instaurados
-from basedosdados-staging.br_sp_ssp_seguranca_staging.produtividade_policial as t
+from basedosdados-staging.br_sp_gov_ssp_staging.produtividade_policial as t

@@ -20,7 +20,6 @@ TIPOS:
 */
 CREATE VIEW basedosdados.br_sp_gov_orcamento.receita_prevista AS
 SELECT
-SAFE_CAST(1234567 as INT64) id_municipio,
 SAFE_CAST(35 as INT64) id_estado,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(orgao AS STRING) orgao,

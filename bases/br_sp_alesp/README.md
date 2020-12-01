@@ -1,4 +1,4 @@
-Como capturar os dados de br_sp_ssp_seguranca?
+Como capturar os dados de br_sp_alesp?
 
 Para capturar esses dados basta entrar em X e fazer Y.
 
