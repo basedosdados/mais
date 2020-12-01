@@ -22,9 +22,10 @@ author:
 # Onde encontrar os dados originais e mais informações?
 website:
     - https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html
-        - censo_demografico_2010
-            -resultados_do_universo
-                - agregados_por_setores_censitarios
+    - censos
+    - censo_demografico_2010
+    - resultados_do_universo
+    - agregados_por_setores_censitarios
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list

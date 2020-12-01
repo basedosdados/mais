@@ -19,7 +19,7 @@ Nível da Observação (Colunas que identificam cada linha unicamente)
 
 Cobertura Temporal
 ------------------
-- 2020
+- 2010
 
 Cobertura Espacial
 ------------------
@@ -28,6 +28,7 @@ Cobertura Espacial
 Tratamento
 ----------
 Padronização do nome das colunas, remoção de textos e logos, unificação das bases
+
 Frequencia de Atualização
 -------------------------
 10 anos
@@ -36,7 +37,7 @@ Tratado por
 -----------
 Nome: 
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo2010/code
-Website: https://www.al.sp.gov.br/servidor/lista/?todos=true
+Website: github.com/d116626
 Email: ds.oliveira404@gmail.com
 
 Publicado por
