@@ -1,7 +1,9 @@
 table_id: local_secao # AUTO GENERATED
 dataset_id: br_tse_eleicoes # AUTO GENERATED
 
-last_updated: 2020-10-13 # AUTO GENERATED
+version: <vA.B> # REQUIRED
+
+last_updated: 2020-11-24 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -45,8 +47,10 @@ data_update_frequency: 2 anos # REQUIRED
 # Regras: minúsculo, sem acento, singular.
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
+    - municipio
     - zona
     - secao
+    - ano
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -63,18 +67,20 @@ coverage_geo:
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: pre-1999, 2000, 2001, ..., 2019, 2020
 coverage_time:
+    - 2008
+    - 2010
     - 2012
     - 2014
     - 2016
     - 2018
+    - 2020
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED  
-    - ano  
-    - estado_abrev
+    - ano
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -86,6 +92,12 @@ partitions: # REQUIRED
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
   
+    -   
+        name: sigla_uf
+        description: Sigla Unidade da Federação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: id_municipio
         description: ID Município - IBGE 7 Dígitos
@@ -103,61 +115,73 @@ columns: # REQUIRED
         description: Seção Eleitoral
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: melhor_urbano
         description: Melhor estimativa urbana
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: melhor_rural
         description: Melhor estimativa rural
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: tse_recente
         description: Localização do TSE em 2018 e 2020
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: tse_distribuido
         description: Localização do TSE em 2020 redistribuido para anos anteriores
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: escolas_inep
         description: Localização das escolas no INEP
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: escolas_municipais
         description: Localização das escolas em bases estaduais e municipais
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: ibge_cnefe_endereco
         description: Centróide do setor censitário do CNEFE por endereço
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: ibge_cnefe_local
         description: Centróide do setor censitário do CNEFE por local
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: google
         description: Resultado do Google Maps API na precisão ROOFTOP e RANGE_INTERPOLATED   
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: google_relaxado
         description: Resultado do Google API Places selecionados manualmente
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: google_centro_geometrico
         description:  Resultado do Google Maps API na precisão GEOMETRIC_CENTER
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+    
     -   
         name: ibge_povoados
         description: Localização de povoados rurais isolados do BC250 IBGE
@@ -166,12 +190,7 @@ columns: # REQUIRED
   
     -   
         name: ano
-        description: Ano da eleição
+        description: Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
   
-    -   
-        name: estado_abrev
-        description: Estado Abreviado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.

@@ -1,3 +1,4 @@
+CREATE VIEW `basedosdados.pytest.pytest` AS
 SELECT 
 id_munic_7,
 id_munic_6,

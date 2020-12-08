@@ -18,10 +18,12 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-SELECT
-SAFE_CAST(estado_abrev AS STRING) estado_abrev,
-SAFE_CAST(id_municipio_TSE AS INT64) id_municipio_TSE,
-SAFE_CAST(partido AS STRING) partido,
+
+CREATE VIEW basedosdados.br_tse_filiacao_partidaria.filiacao_partidaria AS
+SELECT 
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio_tse AS INT64) id_municipio_tse,
+SAFE_CAST(sigla_partido AS STRING) sigla_partido,
 SAFE_CAST(zona AS INT64) zona,
 SAFE_CAST(secao AS INT64) secao,
 SAFE_CAST(titulo_eleitoral AS STRING) titulo_eleitoral,

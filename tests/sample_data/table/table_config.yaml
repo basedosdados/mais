@@ -1,43 +1,68 @@
-table_id: pytest # AUTO GENERATED
-dataset_id: pytest # AUTO GENERATED
+table_id: municipios # AUTO GENERATED
+dataset_id: br_basedosdados_diretorios_brasil # AUTO GENERATED
 
-last_updated: <date> # AUTO GENERATED
+last_updated: 2020-10-09 # AUTO GENERATED
 
-labels: <add-labels>
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Diretório ligando diversos códigos institucionais de municípios brasileiros: IBGE, Receita Federal, TSE, BCB, regiões, comarcas, região de saúde, etc.
 
-# REQUIRED
-description: |  
-    <table-description>
-
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <institution-name> [IBGE, TSE] # REQUIRED
-    website: <where to find raw data>
-    email: <>
-    logo: <logo-url>
-    code_url: <code-url-that-generated-table> # REQUIRED
+    name: Ricardo Dahis # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code # REQUIRED
+    website: <onde encontrar os dados tratados>
+    email: rdahis@basedosdados.org
 
-# Person or institution 
+# Quem está completando esse arquivo config?
 published_by:
-    name: <institution-name> [IBGE, TSE] # REQUIRED
-    website: <where to find raw data>
-    email: <>
-    logo: <logo-url>
-    code_url: <code-url-that-generated-table> # REQUIRED
+    name: Ricardo Dahis # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code # REQUIRED
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
 
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    CEPESP fez X. Eu fiz K
+    Fiz o cruzamento e checagem dos códigos (1) manualmente e (2) checando com string matching.
 
-# REQUIRED
-partitions:  
-    - <first partition>
-    - <second partition>
-    - ...
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+data_update_frequency: recorrente # REQUIRED 
 
-# REQUIRED    
-data_update_frequency: HOURLY | DAILY | WEEKLY | ...  | ONCE  
+# Nível da observação: quais colunas identificam uma linha unicamente?
+# Escolha todas as opções necessárias.
+# Regras: minúsculo, sem acento, singular.
+# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level:
+    - municipio
 
-# REQUIRED
-license: MIT
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: pre-1999, 2000, 2001, ..., 2019, 2020
+coverage_time:
+    - 2015
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED
 
 # REQUIRED
 columns:   

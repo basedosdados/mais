@@ -4,7 +4,7 @@ As bases devem ser organizadas no BigQuery de maneira **consistente**, que
 permita uma **busca fácil e intuitiva**, e seja **escalável**.
 
 As diretrizes definidas para nomenclatura dos conjuntos (*datasets*) e
-tabelas )*tables*) estão descritas abaixo.
+tabelas (*tables*) estão descritas abaixo.
 
 !!! Info "O BigQuery permite busca por nome da tabela, conjunto ou rótulo (*label*), incluindo correspondências parciais."
 

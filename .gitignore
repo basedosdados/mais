@@ -1,5 +1,6 @@
 # OLD repo name
 .bases
+.mais
 bases/pytest/*
 bases/test/
 
@@ -15,6 +16,7 @@ secrets
 *.ipynb
 *.csv
 docs/site
+TODO
 
 tests/tmp_bases/
 # Byte-compiled / optimized / DLL files
@@ -159,3 +161,5 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 .vscode/settings.json
+
+

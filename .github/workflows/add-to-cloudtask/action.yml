@@ -1,0 +1,6 @@
+name: "Add to CloudTask"
+description: "Adiciona tabela em CloudTask para bases atualizadas"
+author: "João Carabetta"
+runs:
+  using: "docker"
+  image: "Dockerfile"

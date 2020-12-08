@@ -17,3 +17,4 @@ flake8
 mkdocstrings
 pandas_gbq
 mkdocs-click
+basedosdados
