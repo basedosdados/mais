@@ -1,7 +1,7 @@
-# Como são organizadas as bases no BigQuery?
+# Diretrizes de nomes para tabelas e conjuntos
 
 As bases devem ser organizadas no BigQuery de maneira **consistente**, que
-permita uma **busca fácil e intuitiva**, e seja **escalável**. 
+permita uma **busca fácil e intuitiva**, e seja **escalável**.
 
 As diretrizes definidas para nomenclatura dos conjuntos (*datasets*) e
 tabelas (*tables*) estão descritas abaixo.
@@ -44,8 +44,7 @@ Os componentes dos nomes são:
 
 ## Bases Desejadas
 
-[Lista de bases mapeadas](https://docs.google.com/spreadsheets/d/1t9kEsiyatmmdDCy2qjaCjLqdw-oJj33P7tY5bnkR0aw/edit#gid=0) que estão no nosso mapa.
-
+[Lista de bases mapeadas](https://docs.google.com/spreadsheets/d/1jnmmG4V6Ugh_-lhVSMIVu_EaL05y1dX9Y0YW8G8e_Wo/edit?usp=sharing) que estão no nosso mapa. Cada base a ser adicionada possui uma issue relacionada no Github - [acompanhe e contribua](https://github.com/basedosdados/mais/labels/data)!
 
 ## Temas e Identificadores
 
