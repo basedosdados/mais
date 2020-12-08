@@ -48,7 +48,7 @@ em todos os anos disponíveis**.
 
 === "CLI"
     ```bash
-    $ basedosdados download "where/to/save/file" --query '
+    basedosdados download "where/to/save/file" --query '
     SELECT 
         pib.id_municipio, 
         pop.ano,  
@@ -95,30 +95,24 @@ em todos os anos disponíveis**.
 
 === "R"
     ```R
-    if (!require("DBI")) install.packages("DBI")
     if (!require("bigrquery")) install.packages("bigrquery")
-    library(DBI)
+    library("bigrquery")
 
-    con <- dbConnect(
-    bigrquery::bigquery(),
-    project = "basedosdados",
-    dataset = "br_basedosdados_diretorios_brasil",
-    billing = "seu/projeto/para/cobranca"
-    )
-    
-    pib_per_capita = "SELECT 
+    project_id = "basedosdados"
+    pib_per_capita = """SELECT 
         pib.id_municipio ,
         pop.ano, 
         pib.PIB / pop.populacao * 1000 as pib_per_capita
     FROM `basedosdados.br_ibge_pib.municipios` as pib
     INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
     ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
-    "
+    """
 
-    dbGetQuery(con, pib_per_capita)
+    d <- bq_table_download(bq_project_query(project_id, pib_per_capita), page_size=500)
     ```
+
 === "Stata"
     ```bash
-    # Ainda não temos suporte :( 
+    # Ainda não temos suporte :(
     # Seja a primeira pessoa a contribuir (veja Issue #83 no GitHub)!
     ```
