@@ -64,7 +64,7 @@ curadoria, e transparência ao cenário de dados no Brasil.
 - **Rapidez**: Mesmo queries muito longas demoram apenas minutos para
   serem processadas.
 - **Escala**: O BigQuery escala magicamente para hexabytes se necessário.
-- **Facilidade**: Você pode cruzar tabelas tratadas e atualizadas num só lugar.
+- **Facilidade**: Você pode cruzar tabelas tratadas e atualizadas num só lugar. 
 - **Economia**: O custo é praticamente zero para usuários - **1
   TB gratuito por mês para usar como quiser**. Depois disso, são cobrados
   somente 5 dólares por TB de dados que sua query percorrer.
