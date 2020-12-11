@@ -18,9 +18,10 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW basedosdados.br_geobr_mapas.biomas AS
 SELECT 
 SAFE_CAST(id_bioma AS STRING) id_bioma,
 SAFE_CAST(nome_bioma AS STRING) nome_bioma,
 SAFE_CAST(year AS INT64) ano,
-SAFE.ST_GEOGFROMTEXT(geometria) geometria
+SAFE.ST_GEOGFROMTEXT(geometria) geometria 
 from basedosdados-staging.br_geobr_mapas_staging.biomas as t

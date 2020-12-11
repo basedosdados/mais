@@ -1,7 +1,9 @@
 table_id: filiacao_partidaria # AUTO GENERATED
 dataset_id: br_tse_filiacao_partidaria # AUTO GENERATED
 
-last_updated: 2020-10-13 # AUTO GENERATED
+version: v1.1
+
+last_updated: 2020-11-24 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -84,8 +86,8 @@ coverage_time:
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED
-    - estado_abrev
-    - partido
+    - sigla_uf
+    - sigla_partido
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -110,7 +112,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_municipio_TSE
+        name: id_municipio_tse
         description: ID Município - TSE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -176,14 +178,14 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
 
     -   
-        name: estado_abrev
-        description: Estado Abreviado
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
 
     -   
-        name: partido
-        description: Partido
+        name: sigla_partido
+        description: Sigla do Partido
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
   

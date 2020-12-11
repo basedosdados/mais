@@ -18,6 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW basedosdados.br_camara_atividade_legislativa.deputados AS
 SELECT 
 SAFE_CAST(id AS NUMERIC) id_deputado,
 SAFE_CAST(cpf AS NUMERIC) cpf,

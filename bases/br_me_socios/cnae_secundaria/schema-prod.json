@@ -1,0 +1,1 @@
+[{"name": "cnpj", "description": "Cadastro Nacional de Pessoas Jur\u00eddicas", "is_in_staging": true, "is_partition": false, "type": "STRING", "mode": "NULLABLE"}, {"name": "cnae", "description": "Cadastro Nacional de Atividades Econ\u00f4micas", "is_in_staging": true, "is_partition": false, "type": "STRING", "mode": "NULLABLE"}]

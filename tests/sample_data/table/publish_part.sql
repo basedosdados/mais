@@ -6,6 +6,7 @@ support columns.
 
 Any column defined here must exists at `table_config.yaml`.
 */
+CREATE TABLE `basedosdados.pytest.pytest_partitioned` AS
 SELECT 
 id_munic_7,
 id_munic_6,

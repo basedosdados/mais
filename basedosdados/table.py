@@ -354,18 +354,12 @@ class Table(Base):
             * Check if all required fields are filled
         """
 
-        view = bigquery.Table(self.table_full_name["prod"])
-
-        view.view_query = (self.table_folder / "publish.sql").open("r").read()
-
-        view.description = self._render_template(
-            "table/table_description.txt", self.table_config
-        )
-
         if if_exists == "replace":
             self.delete(mode="prod")
 
-        self.client["bigquery_prod"].create_table(view)
+        self.client["bigquery_prod"].query(
+            (self.table_folder / "publish.sql").open("r").read()
+        )
 
         self.update("prod")
 

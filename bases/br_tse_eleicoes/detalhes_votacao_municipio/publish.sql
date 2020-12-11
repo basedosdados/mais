@@ -18,11 +18,12 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW basedosdados.br_tse_eleicoes.detalhes_votacao_municipio AS
 SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
-SAFE_CAST(estado_abrev AS STRING) estado_abrev,
-SAFE_CAST(id_municipio_TSE AS INT64) id_municipio_TSE,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio_tse AS INT64) id_municipio_tse,
 SAFE_CAST(turno AS INT64) turno,
 SAFE_CAST(cargo AS STRING) cargo,
 SAFE_CAST(aptos AS INT64) aptos,
@@ -36,8 +37,8 @@ SAFE_CAST(votos_validos AS INT64) votos_validos,
 SAFE_CAST(votos_brancos AS INT64) votos_brancos,
 SAFE_CAST(votos_nulos AS INT64) votos_nulos,
 SAFE_CAST(votos_legenda AS INT64) votos_legenda,
-SAFE_CAST(prop_comparecimento AS NUMERIC) prop_comparecimento,
-SAFE_CAST(prop_votos_validos AS NUMERIC) prop_votos_validos,
-SAFE_CAST(prop_votos_brancos AS NUMERIC) prop_votos_brancos,
-SAFE_CAST(prop_votos_nulos AS NUMERIC) prop_votos_nulos
+SAFE_CAST(prop_comparecimento AS FLOAT64) prop_comparecimento,
+SAFE_CAST(prop_votos_validos AS FLOAT64) prop_votos_validos,
+SAFE_CAST(prop_votos_brancos AS FLOAT64) prop_votos_brancos,
+SAFE_CAST(prop_votos_nulos AS FLOAT64) prop_votos_nulos
 from basedosdados-staging.br_tse_eleicoes_staging.detalhes_votacao_municipio as t
