@@ -8,7 +8,7 @@ import datetime
 
 import google.api_core.exceptions
 
-from basedosdados.download.base import Base
+from basedosdados.base import Base
 from basedosdados.storage import Storage
 from basedosdados.dataset import Dataset
 

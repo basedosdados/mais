@@ -3,26 +3,11 @@ from google.cloud import bigquery, storage
 import os
 from pathlib import Path
 import pandas_gbq
-import pydata_google_auth
+
 import re
 import time
 
-
-from basedosdados.download.base import google_client
-
-
-@lru_cache(256)
-def credentials():
-
-    SCOPES = [
-        "https://www.googleapis.com/auth/cloud-platform",
-    ]
-
-    return pydata_google_auth.get_user_credentials(
-        SCOPES,
-        # Use the NOOP cache to avoid writing credentials to disk.
-        # credentials_cache=pydata_google_auth.cache.NOOP,
-    )
+from basedosdados.download.base import google_client, credentials
 
 
 def download(
@@ -104,7 +89,7 @@ def download(
         # sql queries produces anonymous tables, whose names
         # can be found within `job._properties`
 
-        job = google_client("bigquery").query(query)
+        job = google_client("bigquery", project_id="basedosdados").query(query)
 
         # views may take longer: wait for job to finish.
         _wait_for(job)
@@ -225,7 +210,7 @@ def _direct_download(
 
     try:
         # create temporary bucket
-        _create_bucket(tmp_bucket_name)
+        _create_bucket(tmp_bucket_name, project_id)
 
         # move table to temporary file inside temporary bucket
         _move_table_to_bucket(dataset_id, table_id, blob_path, project_id, compression)
@@ -244,7 +229,7 @@ def _direct_download(
         _delete_bucket(tmp_bucket_name)
 
 
-def _download_blob_from_bucket(bucket_name, blob_name, savepath):
+def _download_blob_from_bucket(bucket_name, blob_name, savepath, project_id):
     """
     Download a blob from a bucket to the path specified.
 
@@ -255,13 +240,13 @@ def _download_blob_from_bucket(bucket_name, blob_name, savepath):
     """
     savepath = Path(savepath)
 
-    bucket = google_client("storage").bucket(bucket_name)
+    bucket = google_client("storage", project_id=project_id).bucket(bucket_name)
     blob = bucket.blob(blob_name)
 
     blob.download_to_filename(savepath)
 
 
-def _create_bucket(bucket_name):
+def _create_bucket(bucket_name, project_id):
     """
     Create a new buket in a specific location with standard storage class
 
@@ -269,7 +254,7 @@ def _create_bucket(bucket_name):
         bucket_name (str): Name of the bucket to be created.
 
     """
-    storage_client = google_client("storage")
+    storage_client = google_client("storage", project_id=project_id)
     bucket = storage_client.bucket(bucket_name)
 
     # standard storage class are adequate for data
@@ -290,7 +275,7 @@ def _delete_bucket(bucket_name):
     """
     MAX_BLOBS = 256
 
-    storage_client = google_client("storage")
+    storage_client = google_client("storage", project_id=project_id)
     bucket = storage_client.get_bucket(bucket_name)
 
     # NOTE: force=True implementation will not delete
@@ -323,7 +308,7 @@ def _move_table_to_bucket(
             files. Can be one of ["NONE"|"GZIP"]
 
     """
-    client = google_client("bigquery")
+    client = google_client("bigquery", project_id=project_id)
     dataset_ref = bigquery.DatasetReference(project_id, dataset_id)
     table_ref = dataset_ref.table(table_id)
 

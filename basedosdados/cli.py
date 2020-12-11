@@ -7,7 +7,7 @@ from basedosdados.dataset import Dataset
 from basedosdados.table import Table
 from basedosdados.storage import Storage
 
-from basedosdados import download
+from basedosdados.download import download
 
 
 @click.group()

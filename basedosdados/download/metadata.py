@@ -18,7 +18,7 @@ def list_tables(dataset_id, project_id="basedosdados", pattern=None):
     Returns:
         pd.DataFrame: List of `table_id` within the `dataset_id`
     """
-    client = google_client("bigquery", project=project_id)
+    client = google_client("bigquery", project_id=project_id)
 
     tables_list = client.list_tables(dataset_id)
 
@@ -30,19 +30,21 @@ def list_tables(dataset_id, project_id="basedosdados", pattern=None):
     return result
 
 
-def list_datasets(project_id="basedosdados", pattern=None):
+def list_datasets(project_id="basedosdados", pattern=None, with_tables=False):
     """
     List `dataset_id`'s inside a `project_id`
 
     Args:
         pattern (:obj:`str`, optional): Regular expression to look
             within `dataset_id`.
+        with_table (:obj:`bool`, optional): Whether to return the tables
+            related to the dataset. It might take a while.
 
     Returns:
         pd.DataFrame: List of `table_id` within the `dataset_id`
     """
 
-    client = google_client("bigquery", project=project_id)
+    client = google_client("bigquery", project_id=project_id)
     datasets_list = client.list_datasets()
 
     result = pd.DataFrame(
@@ -52,6 +54,15 @@ def list_datasets(project_id="basedosdados", pattern=None):
     # filter tables using Regex
     if pattern:
         result = result.loc[result["dataset_id"].str.contains(pattern)]
+
+    # load table names
+    if with_tables:
+        result = (
+            result.groupby("dataset_id")["dataset_id"]
+            .apply(lambda x: list_tables(x.values[0]))
+            .reset_index()
+            .drop("level_1", 1)
+        )
 
     return result
 
@@ -69,7 +80,7 @@ def metadata(dataset_id, table_id, project_id="basedosdados"):
     Returns:
         pd.DataFrame: Column types and descriptions
     """
-    client = google_client("bigquery", project=project_id)
+    client = google_client("bigquery", project_id=project_id)
     table_name = f"{project_id}.{dataset_id}.{table_id}"
 
     table = client.get_table(table_name)
@@ -111,17 +122,19 @@ def cost(query, price=0.02):
 
 def info(
     dataset_id,
-    table_id,
+    table_id=None,
     project_id="basedosdados",
     pretty=True,
     extract_from_view=False,
 ):
     """
-    Display metadata about the specified `table_id`
+    Display metadata about the specified `dataset_id` and/or `table_id`.
+
+    Use just the `dataset_id` to get info about a dataset.
 
     Args:
         dataset_id (:obj:`str`): Dataset id available in project_id.
-        table_id (:obj:`str`): Table id available in project_id.dataset_id.
+        table_id (:obj:`str`, optional): Table id available in project_id.dataset_id.
         project_id (:obj:`str`, optional): In case you want to use to query
             another project, by default 'basedosdados'
         pretty (:obj:`bool`, optional): Whether to return values as
@@ -133,61 +146,90 @@ def info(
 
     """
 
-    client = google_client("bigquery")
+    client = google_client("bigquery", project_id=project_id)
 
-    table_name = f"{project_id}.{dataset_id}.{table_id}"
+    if table_id:
+        table_name = f"{project_id}.{dataset_id}.{table_id}"
 
-    table = client.get_table(table_name)
+        table = client.get_table(table_name)
 
-    nrows = table.num_rows
-    nbytes = table.num_bytes
+        nrows = table.num_rows
+        nbytes = table.num_bytes
 
-    # when tables are views, using table.num_rows returns 0
-    if extract_from_view:
-        job = client.query(f"SELECT COUNT(*) FROM {table_name}", location="US")
-        nrows = job.to_dataframe().loc[0, "f0_"]
-        nbytes = job.total_bytes_processed
+        # when tables are views, using table.num_rows returns 0
+        if extract_from_view:
+            job = client.query(f"SELECT COUNT(*) FROM {table_name}", location="US")
+            nrows = job.to_dataframe().loc[0, "f0_"]
+            nbytes = job.total_bytes_processed
 
-    # For bytes, though, if you are working with public data from bq
-    # the job will not account for any byte, so I'll get the maximum
-    # between that and the table.num_bytes
+        # For bytes, though, if you are working with public data from bq
+        # the job will not account for any byte, so I'll get the maximum
+        # between that and the table.num_bytes
 
-    name = table.table_id
-    dataset = table.dataset_id
-    fullname = table.full_table_id
-    location = table.location
-    anomes_created = table.created.date()
-    time_created = table.created.time()
-    description = table.description
+        name = table.table_id
+        dataset = table.dataset_id
+        fullname = table.full_table_id
+        location = table.location
+        anomes_created = table.created.date()
+        time_created = table.created.time()
+        description = table.description
 
-    if pretty:
-        nrows = f"{nrows:,}"
-        nbytes = _pretty_format(nbytes, "bytes")
+        if pretty:
+            nrows = f"{nrows:,}"
+            nbytes = _pretty_format(nbytes, "bytes")
+            anomes_created = (
+                str(table.created.year)
+                + "/"
+                + str(table.created.month).zfill(2)
+                + "/"
+                + str(table.created.day).zfill(2)
+            )
+            time_created = (
+                str(table.created.hour) + ":" + str(table.created.minute).zfill(2)
+            )
+
+        data = pd.DataFrame(
+            {
+                "nrows": [nrows],
+                "size": [nbytes],
+                "table_name": [name],
+                "dataset_name": [dataset],
+                "date_created": [anomes_created],
+                "time_created": [time_created],
+                "full_table_name": [fullname],
+                "table_location": [location],
+                "description": [description],
+            },
+            index=["value"],
+        ).T
+
+    else:
+
+        dataset = client.get_dataset(dataset_id)
+
         anomes_created = (
-            str(table.created.year)
+            str(dataset.created.year)
             + "/"
-            + str(table.created.month).zfill(2)
+            + str(dataset.created.month).zfill(2)
             + "/"
-            + str(table.created.day).zfill(2)
-        )
-        time_created = (
-            str(table.created.hour) + ":" + str(table.created.minute).zfill(2)
+            + str(dataset.created.day).zfill(2)
         )
 
-    data = pd.DataFrame(
-        {
-            "nrows": [nrows],
-            "size": [nbytes],
-            "table_name": [name],
-            "dataset_name": [dataset],
-            "date_created": [anomes_created],
-            "time_created": [time_created],
-            "full_table_name": [fullname],
-            "table_location": [location],
-            "description": [description],
-        },
-        index=["value"],
-    ).T
+        time_created = (
+            str(dataset.created.hour) + ":" + str(dataset.created.minute).zfill(2)
+        )
+
+        data = pd.DataFrame(
+            {
+                "dataset_name": [dataset.dataset_id],
+                "date_created": [anomes_created],
+                "time_created": [time_created],
+                "full_dataset_name": [dataset.full_dataset_id],
+                "location": [dataset.location],
+                "description": [dataset.description],
+            },
+            index=["value"],
+        ).T
 
     return data
 
@@ -230,7 +272,7 @@ def _pretty_format(value, category="value"):
 
 
 def _retrieve_information_schema(dataset_id, project_id="basedosdados"):
-    client = google_client("bigquery", project=project_id)
+    client = google_client("bigquery", project_id=project_id)
     job = client.query(
         f"SELECT * FROM `{project_id}.{dataset_id}.INFORMATION_SCHEMA.VIEWS`"
     )

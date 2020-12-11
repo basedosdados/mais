@@ -10,14 +10,27 @@ def freq(
     project_id="basedosdados",
     order_by_freq=False,
     ascending=True,
-    verbose=True,
 ):
     """
     Return a dataframe containing the frequency table of the `col_name`
     (which can be a list of columns) specified.
+
+
+    Args:
+        dataset_id (:obj:`str`): Dataset id available in project_id.
+        table_id (:obj:`str`): Table id available in project_id.dataset_id.
+        col_name (:obj:`str`, list): Column available in project_id.dataset_id.table_id.
+        project_id (:obj:`str`, optional):n case you want to use to
+            query another project. Defaults to "basedosdados".
+        order_by_freq (bool, optional): Order results by frequency.
+            Defaults to False.
+        ascending (bool, optional): Whether results should ascend. Defaults to True.
+
+    Returns:
+        [type]: [description]
     """
 
-    client = google_client("bigquery")
+    client = google_client("bigquery", project_id=project_id)
     if not (isinstance(col_name, list) or isinstance(col_name, tuple)):
         col_name = [col_name]
 
