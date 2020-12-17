@@ -1,4 +1,4 @@
-Produto Interno Bruto (PIB) municipal.
+Produto Interno Bruto (PIB) municipal a preços correntes.
 
 
 Para saber mais acesse:
@@ -31,6 +31,7 @@ Cobertura Temporal
 - 2015
 - 2016
 - 2017
+- 2018
 
 Cobertura Espacial
 ------------------
