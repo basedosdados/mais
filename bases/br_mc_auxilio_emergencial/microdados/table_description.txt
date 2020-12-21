@@ -1,0 +1,47 @@
+Microdados do auxílio emergencial de 2020 do Ministério da Cidadania a nível de indivíduo.
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- mes
+- sigla_uf
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- beneficiário
+- mês
+
+Cobertura Temporal
+------------------
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Limpeza para consistência. Mudamos o formato da variável mês. Transformamos os valores NA para vazio.
+
+Frequencia de Atualização
+-------------------------
+mês
+
+Tratado por
+-----------
+Nome: Portal da Transparência
+Website: http://www.portaltransparencia.gov.br/beneficios/auxilio-emergencial
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_mc_auxilio_emergencial/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
