@@ -32,15 +32,15 @@ foreach ano of numlist 1998(2)2018 {
 		cap import delimited using "input/detalhe_votacao_munzona/detalhe_votacao_munzona_`ano'/detalhe_votacao_munzona_`ano'_`estado'.txt", delimiter(";") varn(nonames) stringcols(_all) clear
 		cap import delimited using "input/detalhe_votacao_munzona/detalhe_votacao_munzona_`ano'/detalhe_votacao_munzona_`ano'_`estado'.csv", delimiter(";") varn(nonames) stringcols(_all) clear
 		
-		if `ano' <= 2016 {
+		if `ano' <= 2012 {
 			
 			keep v3 v4 v5 v6 v8 v10 v12 v13 v14 v15 v16 v17 v18 v19 v20 v21 v22 v23
 			
 			ren v3 ano
 			ren v4 turno
 			ren v5 tipo_eleicao
-			ren v6 estado_abrev
-			ren v8 id_municipio_TSE
+			ren v6 sigla_uf
+			ren v8 id_municipio_tse
 			ren v10 zona
 			ren v12 cargo
 			ren v13 aptos
@@ -56,7 +56,7 @@ foreach ano of numlist 1998(2)2018 {
 			ren v23 votos_legenda
 			
 		}
-		else if `ano' == 2018 {
+		else if `ano' >= 2014 {
 			
 			drop in 1
 			
@@ -65,8 +65,8 @@ foreach ano of numlist 1998(2)2018 {
 			ren v3 ano
 			ren v6 turno
 			ren v8 tipo_eleicao
-			ren v11 estado_abrev
-			ren v14 id_municipio_TSE
+			ren v11 sigla_uf
+			ren v14 id_municipio_tse
 			ren v16 zona
 			ren v18 cargo
 			ren v19 aptos
@@ -84,7 +84,7 @@ foreach ano of numlist 1998(2)2018 {
 		}
 		*
 		
-		destring ano turno id_municipio_TSE zona aptos* secoes* comparecimento abstencoes votos_*, replace force
+		destring ano turno id_municipio_tse zona aptos* secoes* comparecimento abstencoes votos_*, replace force
 		
 		foreach k of varlist zona aptos* secoes* comparecimento abstencoes votos_* {
 			
@@ -143,6 +143,10 @@ foreach ano of numlist 1998(2)2018 {
 		}
 	}
 	*
+	
+	order	ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo aptos secoes secoes_agregadas aptos_tot secoes_tot ///
+			comparecimento abstencoes votos_validos votos_brancos votos_nulos votos_legenda ///
+			prop_*
 	
 	compress
 	

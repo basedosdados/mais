@@ -1,0 +1,50 @@
+Declaração de bens de candidatos em eleições brasileiras.
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- candidato
+- item
+
+Cobertura Temporal
+------------------
+- 2006
+- 2008
+- 2010
+- 2012
+- 2014
+- 2016
+- 2018
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Frequencia de Atualização
+-------------------------
+2 anos
+
+Tratado por
+-----------
+Nome: <nome>
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
