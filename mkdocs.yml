@@ -31,7 +31,8 @@ nav:
     - Python: py_reference_api.md
     - CLI: cli_reference_api.md
   - Nomenclatura: 
-    - Regras de nomeação: naming_rules.md
+    - Conjuntos e tabelas: data_naming_rules.md
+    - Colunas: variable_naming_rules.md
   - Contribua! 💚:
     - Como contribuir: github.md
 

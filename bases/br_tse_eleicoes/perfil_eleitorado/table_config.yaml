@@ -101,6 +101,12 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
+        name: situacao_biometria
+        description: Situação da Biometria
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
         name: zona
         description: Zona Eleitoral
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
@@ -109,6 +115,12 @@ columns: # REQUIRED
     -   
         name: genero
         description: Gênero
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: estado_civil
+        description: Estado Civil
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -127,6 +139,18 @@ columns: # REQUIRED
     -   
         name: eleitores
         description: Número de Eleitores
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: eleitores_biometria
+        description: Número de Eleitores com Biometria
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: eleitores_deficiencia
+        description: Número de Eleitores com Deficiência
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
