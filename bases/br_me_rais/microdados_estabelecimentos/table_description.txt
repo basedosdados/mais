@@ -1,4 +1,4 @@
-Microdados públicos dos vínculos de emprego na RAIS.
+Microdados de estabelecimentos da RAIS.
 
 
 Para saber mais acesse:
@@ -15,7 +15,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Nível da Observação (Colunas que identificam cada linha unicamente)
 -------------------
-- vinculo
+- estabelecimento
 - ano
 
 Cobertura Temporal
@@ -62,7 +62,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Unificamos todos os anos consertando nomes de colunas, erros de valores, etc.
+Unificamos todos os anos, consertamos nomes de variáveis, e limpamos valores errados de células.
 
 Frequencia de Atualização
 -------------------------
@@ -72,7 +72,7 @@ Tratado por
 -----------
 Nome: Ricardo Dahis
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
-Email: rdahis@basedosodados.org
+Email: rdahis@basedosdados.org
 
 Publicado por
 -------------
