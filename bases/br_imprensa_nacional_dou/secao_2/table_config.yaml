@@ -1,7 +1,7 @@
 table_id: original # AUTO GENERATED
 dataset_id: br_imprensa_nacional_dou # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: <v1.0> # REQUIRED
 
 last_updated: 2020-11-27 # AUTO GENERATED
 
@@ -94,7 +94,7 @@ coverage_time:
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED
-    - particao_data_publicacao
+    - data_publicacao_particao
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -203,7 +203,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: particao_data_publicacao
+        name: data_publicacao_particao
         description: Data para a qual a matéria aparece no site da Imprensa Nacional. Os dados estão particionados por essa coluna. Com raríssimas exceções, esta data é igual à da coluna 'data_publicacao'; quando há diferenças, elas são de 1 dia.
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.

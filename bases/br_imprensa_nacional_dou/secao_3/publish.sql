@@ -39,5 +39,5 @@ SELECT
   url,
   url_certificado AS url_versao_certificada,
   capture_date AS data_captura,
-  part_data_pub AS particao_data_publicacao
+  part_data_pub AS data_publicacao_particao
 FROM `gabinete-compartilhado.views_publicos.br_imprensa_nacional_dou_3`
