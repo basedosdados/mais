@@ -1,5 +1,7 @@
 Como capturar os dados de {{ dataset_id }}?
 
-Para capturar esses dados basta entrar em X e fazer Y.
+1. Para capturar esses dados, basta verificar o link dos dados originais indicado em `dataset_config.yaml` no item `website`.
 
-Todo o código usado na captura está em `code/`
+2. Caso tenha sido utilizado algum código de captura ou tratamento, estes estarão contidos em `code/`. Se o dado publicado for em sua versão bruta, não existirá a pasta `code/`.
+
+Os dados publicados estão disponíveis em: https://basedosdados.org/dataset/{{ dataset_id | replace("_","-") }}
