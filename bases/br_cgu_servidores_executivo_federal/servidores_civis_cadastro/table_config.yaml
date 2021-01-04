@@ -1,6 +1,8 @@
 table_id: servidores_civis_cadastro # AUTO GENERATED
 dataset_id: br_cgu_servidores_executivo_federal # AUTO GENERATED
 
+version: v1.0
+
 last_updated: 2020-12-29 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
