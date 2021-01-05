@@ -5,18 +5,20 @@ import pydata_google_auth
 from functools import lru_cache
 
 
-@lru_cache(256)
-def credentials():
+def credentials(reauth=False):
 
     SCOPES = [
         "https://www.googleapis.com/auth/cloud-platform",
     ]
 
-    return pydata_google_auth.get_user_credentials(
-        SCOPES,
-        # Use the NOOP cache to avoid writing credentials to disk.
-        # credentials_cache=pydata_google_auth.cache.NOOP,
-    )
+    if reauth:
+        return pydata_google_auth.get_user_credentials(
+            SCOPES, credentials_cache=pydata_google_auth.cache.REAUTH
+        )
+    else:
+        return pydata_google_auth.get_user_credentials(
+            SCOPES,
+        )
 
 
 def download(
@@ -26,6 +28,7 @@ def download(
     table_id=None,
     project_id="basedosdados",
     limit=None,
+    reauth=False,
     **pandas_kwargs,
 ):
     """Download table or query result from basedosdados BigQuery (or other).
@@ -70,11 +73,11 @@ def download(
     savepath = Path(savepath)
 
     if (dataset_id is not None) and (table_id is not None):
-        table = read_table(dataset_id, table_id, limit=limit)
+        table = read_table(dataset_id, table_id, limit=limit, reauth=reauth)
     elif query is not None:
         if limit is not None:
             query += f" limit {limit}"
-        table = read_sql(query, project_id=project_id)
+        table = read_sql(query, project_id=project_id, reauth=reauth)
     elif query is None:
         raise Exception("Either table_id, dataset_id or query should be filled.")
 
@@ -87,7 +90,7 @@ def download(
     table.to_csv(savepath, **pandas_kwargs)
 
 
-def read_sql(query, project_id="basedosdados"):
+def read_sql(query, project_id="basedosdados", reauth=False):
     """Load data from BigQuery using a query. Just a wrapper around pandas.read_gbq
 
     Args:
@@ -101,7 +104,7 @@ def read_sql(query, project_id="basedosdados"):
 
     try:
         return pandas_gbq.read_gbq(
-            query, credentials=credentials(), project_id=project_id
+            query, credentials=credentials(reauth=reauth), project_id=project_id
         )
     except OSError:
         raise OSError(
@@ -112,7 +115,9 @@ def read_sql(query, project_id="basedosdados"):
         )
 
 
-def read_table(dataset_id, table_id, project_id="basedosdados", limit=None):
+def read_table(
+    dataset_id, table_id, project_id="basedosdados", limit=None, reauth=False
+):
     """Load data from BigQuery using dataset_id and table_id.
 
     Args:
@@ -142,4 +147,4 @@ def read_table(dataset_id, table_id, project_id="basedosdados", limit=None):
     else:
         raise Exception("Both table_id and dataset_id should be filled.")
 
-    return read_sql(query, project_id=project_id)
+    return read_sql(query, project_id=project_id, reauth=reauth)
