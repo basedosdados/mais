@@ -3,7 +3,7 @@ dataset_id: br_me_rais # AUTO GENERATED
 
 version: v1.0
 
-last_updated: 2020-01-02 # AUTO GENERATED
+last_updated: 2020-01-07 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -11,6 +11,8 @@ last_updated: 2020-01-02 # AUTO GENERATED
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
     Microdados públicos dos vínculos de emprego na RAIS.
+
+    Base desidentificada, isto é, que não inclui identificadores únicos de linha. Cada linha representa um vínculo - por isso indicamos este como nível de observação mesmo que não conste como coluna.
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.

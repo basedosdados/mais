@@ -1,5 +1,7 @@
 Microdados públicos dos vínculos de emprego na RAIS.
 
+Base desidentificada, isto é, que não inclui identificadores únicos de linha. Cada linha representa um vínculo - por isso indicamos este como nível de observação mesmo que não conste como coluna.
+
 
 Para saber mais acesse:
 Website: 
