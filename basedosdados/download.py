@@ -83,6 +83,7 @@ def download(
             dataset_id,
             table_id,
             query_project_id=query_project_id,
+            billing_project_id=billing_project_id,
             limit=limit,
             reauth=reauth,
         )
