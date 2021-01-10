@@ -35,7 +35,14 @@ Cobertura Espacial
 
 Tratamento
 ----------
-A descrever no futuro.
+- Troca o encoding de 'latin-1' para 'utf-8';
+- Substitui o separador ";" por ",";
+- Coloca o nome das colunas num formato aceito pelo BigQuery (sem espaços, sem *, etc.);
+- Retira acentos do nome das colunas;
+- Simplifica o nome de algumas colunas;
+- Coloca o nome das colunas em minúsculas;
+- Caso estejam faltando colunas de ano e mês, as inclui;
+- Remove linhas com comentários sobre os dados, que não obedecem a estrutura da tabela.
 
 Frequencia de Atualização
 -------------------------

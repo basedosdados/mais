@@ -1,0 +1,52 @@
+Despesas por função a nível de município.
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- municipio
+- ano
+
+Cobertura Temporal
+------------------
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Dados foram sistematizados para padrões Base dos Dados. Criamos uma coluna extra id_conta para separar os números identificadores da descrição da conta.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+Tratado por
+-----------
+Nome: <nome>
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_tesouro_finbra/code
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_tesouro_finbra/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org

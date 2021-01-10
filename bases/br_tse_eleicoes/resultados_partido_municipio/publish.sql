@@ -18,7 +18,6 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-
 CREATE VIEW basedosdados.br_tse_eleicoes.resultados_partido_municipio AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
