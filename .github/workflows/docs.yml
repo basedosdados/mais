@@ -12,6 +12,7 @@ jobs:
         with:
           python-version: 3.7
       - run: pip install -r requirements-dev.txt
+      - run: python setup.py develop
       - env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
         run: mkdocs gh-deploy --force
