@@ -6,7 +6,7 @@
     ```
 </div>
 
-Em apenas 2 passos você consegue obter dados estruturados para baixar e
+Em apenas 3 passos você consegue obter dados estruturados para baixar e
 analisar:
 
 1. Instalar a aplicação
