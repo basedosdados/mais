@@ -129,7 +129,7 @@ em todos os anos disponíveis**.
     library("bigrquery")
 
     billing_project_id = "<YOUR_PROJECT_ID>"
-    
+
     pib_per_capita = """SELECT 
         pib.id_municipio ,
         pop.ano, 
@@ -139,7 +139,7 @@ em todos os anos disponíveis**.
     ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
     """
 
-    d <- bq_table_download(bq_project_query(project_id, pib_per_capita), page_size=500)
+    d <- bq_table_download(bq_project_query(billing_project_id, pib_per_capita), page_size=500)
     ```
 
 === "Stata"
