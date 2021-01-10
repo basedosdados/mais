@@ -18,7 +18,9 @@ from basedosdados import download
 def cli(ctx, templates, bucket_name, metadata_path):
 
     ctx.obj = dict(
-        templates=templates, bucket_name=bucket_name, metadata_path=metadata_path,
+        templates=templates,
+        bucket_name=bucket_name,
+        metadata_path=metadata_path,
     )
 
 
@@ -32,7 +34,9 @@ def cli_dataset(ctx):
 @cli_dataset.command(name="init", help="Initialize metadata files of dataset")
 @click.argument("dataset_id")
 @click.option(
-    "--replace", is_flag=True, help="Whether to replace current metadata files",
+    "--replace",
+    is_flag=True,
+    help="Whether to replace current metadata files",
 )
 @click.pass_context
 def init_dataset(ctx, dataset_id, replace):
@@ -74,7 +78,12 @@ def create_dataset(ctx, dataset_id, mode, if_exists):
 
     Dataset(dataset_id=dataset_id, **ctx.obj).create(mode=mode, if_exists=if_exists)
 
-    click.echo(click.style(mode_text(mode, "created", dataset_id), fg="green",))
+    click.echo(
+        click.style(
+            mode_text(mode, "created", dataset_id),
+            fg="green",
+        )
+    )
 
 
 @cli_dataset.command(name="update", help="Update dataset on BigQuery")
@@ -87,7 +96,12 @@ def update_dataset(ctx, dataset_id, mode):
 
     Dataset(dataset_id=dataset_id, **ctx.obj).update(mode=mode)
 
-    click.echo(click.style(mode_text(mode, "updated", dataset_id), fg="green",))
+    click.echo(
+        click.style(
+            mode_text(mode, "updated", dataset_id),
+            fg="green",
+        )
+    )
 
 
 @cli_dataset.command(name="publicize", help="Make a dataset public")
@@ -97,7 +111,12 @@ def publicize_dataset(ctx, dataset_id):
 
     Dataset(dataset_id=dataset_id, **ctx.obj).publicize()
 
-    click.echo(click.style(f"Dataset `{dataset_id}` became public!", fg="green",))
+    click.echo(
+        click.style(
+            f"Dataset `{dataset_id}` became public!",
+            fg="green",
+        )
+    )
 
 
 @cli_dataset.command(name="delete", help="Delete dataset")
@@ -112,7 +131,12 @@ def delete_dataset(ctx, dataset_id, mode):
 
         Dataset(dataset_id=dataset_id, **ctx.obj).delete(mode=mode)
 
-    click.echo(click.style(mode_text(mode, "deleted", dataset_id), fg="green",))
+    click.echo(
+        click.style(
+            mode_text(mode, "deleted", dataset_id),
+            fg="green",
+        )
+    )
 
 
 @click.group(name="table")
@@ -163,10 +187,14 @@ def init_table(ctx, dataset_id, table_id, data_sample_path, if_exists):
     "--job_config_params", default=None, help="File to advanced load config params "
 )
 @click.option(
-    "--partitioned", is_flag=True, help="[True|False] whether folder has partitions",
+    "--partitioned",
+    is_flag=True,
+    help="[True|False] whether folder has partitions",
 )
 @click.option(
-    "--if_exists", default="raise", help="[raise|replace|pass] actions if table exists",
+    "--if_exists",
+    default="raise",
+    help="[raise|replace|pass] actions if table exists",
 )
 @click.option(
     "--force_dataset",
@@ -212,7 +240,9 @@ def create_table(
 @click.pass_context
 def update_table(ctx, dataset_id, table_id, mode):
 
-    Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).update(mode=mode,)
+    Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).update(
+        mode=mode,
+    )
 
     click.echo(
         click.style(
@@ -226,7 +256,9 @@ def update_table(ctx, dataset_id, table_id, mode):
 @click.argument("dataset_id")
 @click.argument("table_id")
 @click.option(
-    "--if_exists", default="raise", help="[raise|replace] actions if table exists",
+    "--if_exists",
+    default="raise",
+    help="[raise|replace] actions if table exists",
 )
 @click.pass_context
 def publish_table(ctx, dataset_id, table_id, if_exists):
@@ -237,7 +269,8 @@ def publish_table(ctx, dataset_id, table_id, if_exists):
 
     click.echo(
         click.style(
-            f"Table `{dataset_id}.{table_id}` was published in BigQuery", fg="green",
+            f"Table `{dataset_id}.{table_id}` was published in BigQuery",
+            fg="green",
         )
     )
 
@@ -249,7 +282,9 @@ def publish_table(ctx, dataset_id, table_id, if_exists):
 @click.pass_context
 def delete_table(ctx, dataset_id, table_id, mode):
 
-    Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).delete(mode=mode,)
+    Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).delete(
+        mode=mode,
+    )
 
 
 @cli_table.command(name="append", help="Append new data to existing table")
@@ -258,7 +293,9 @@ def delete_table(ctx, dataset_id, table_id, mode):
 @click.argument("filepath", type=click.Path(exists=True))
 @click.option("--partitions", help="Data partition as `value=key/value2=key2`")
 @click.option(
-    "--if_exists", default="raise", help="[raise|replace|pass] if file alread exists",
+    "--if_exists",
+    default="raise",
+    help="[raise|replace|pass] if file alread exists",
 )
 @click.pass_context
 def upload_table(ctx, dataset_id, table_id, filepath, partitions, if_exists):
@@ -267,7 +304,12 @@ def upload_table(ctx, dataset_id, table_id, filepath, partitions, if_exists):
         filepath=filepath, partitions=partitions, if_exists=if_exists
     )
 
-    click.echo(click.style(f"Data was added to `{dataset_id}.{table_id}`", fg="green",))
+    click.echo(
+        click.style(
+            f"Data was added to `{dataset_id}.{table_id}`",
+            fg="green",
+        )
+    )
 
 
 @click.group(name="storage")
@@ -278,7 +320,9 @@ def cli_storage():
 @cli_storage.command(name="init", help="Create bucket and initial folders")
 @click.option("--bucket_name", default="basedosdados", help="Bucket name")
 @click.option(
-    "--replace", is_flag=True, help="Whether to replace current bucket files",
+    "--replace",
+    is_flag=True,
+    help="Whether to replace current bucket files",
 )
 @click.option(
     "--very-sure/--not-sure",
@@ -294,7 +338,12 @@ def init_storage(ctx, bucket_name, replace, very_sure):
         replace=replace, very_sure=very_sure
     )
 
-    click.echo(click.style(f"Bucket `{bucket_name}` was created", fg="green",))
+    click.echo(
+        click.style(
+            f"Bucket `{bucket_name}` was created",
+            fg="green",
+        )
+    )
 
 
 @cli_storage.command(name="upload", help="Upload file to bucket")
@@ -306,7 +355,9 @@ def init_storage(ctx, bucket_name, replace, very_sure):
 )
 @click.option("--partitions", help="Data partition as `value=key/value2=key2`")
 @click.option(
-    "--if_exists", default="raise", help="[raise|replace|pass] if file alread exists",
+    "--if_exists",
+    default="raise",
+    help="[raise|replace|pass] if file alread exists",
 )
 @click.pass_context
 def upload_storage(ctx, dataset_id, table_id, filepath, mode, partitions, if_exists):
@@ -316,7 +367,12 @@ def upload_storage(ctx, dataset_id, table_id, filepath, mode, partitions, if_exi
         filepath=filepath, mode=mode, partitions=partitions, if_exists=if_exists
     )
 
-    click.echo(click.style(f"Data was added to `{blob_name}`", fg="green",))
+    click.echo(
+        click.style(
+            f"Data was added to `{blob_name}`",
+            fg="green",
+        )
+    )
 
 
 @click.group(name="config")
@@ -343,7 +399,10 @@ def init_refresh_templates(ctx):
     help="Download data. "
     "You can add extra arguments accepted by `pandas.to_csv`.\n\n"
     "Examples: --delimiter='|', --index=False",
-    context_settings=dict(ignore_unknown_options=True, allow_extra_args=True,),
+    context_settings=dict(
+        ignore_unknown_options=True,
+        allow_extra_args=True,
+    ),
 )
 @click.argument("savepath", type=click.Path(exists=False))
 @click.option(
@@ -357,13 +416,36 @@ def init_refresh_templates(ctx):
     help="Table_id, enter with dataset_id to download table ",
 )
 @click.option(
-    "--query", default=None, help="A SQL Standard query to download data from BigQuery",
+    "--query",
+    default=None,
+    help="A SQL Standard query to download data from BigQuery",
 )
 @click.option(
-    "--limit", default=None, help="Number of rows returned",
+    "--query_project_id",
+    default=None,
+    help="Which project the table lives. You can change this you want to query different projects.",
+)
+@click.option(
+    "--billing_project_id",
+    default=None,
+    help="Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard",
+)
+@click.option(
+    "--limit",
+    default=None,
+    help="Number of rows returned",
 )
 @click.pass_context
-def cli_download(ctx, dataset_id, table_id, savepath, query, limit):
+def cli_download(
+    ctx,
+    dataset_id,
+    table_id,
+    savepath,
+    query,
+    query_project_id,
+    billing_project_id,
+    limit,
+):
 
     pandas_kwargs = dict()
     for item in ctx.args:
@@ -374,11 +456,18 @@ def cli_download(ctx, dataset_id, table_id, savepath, query, limit):
         dataset_id=dataset_id,
         table_id=table_id,
         query=query,
+        query_project_id=query_project_id,
+        billing_project_id=billing_project_id,
         limit=limit,
         **pandas_kwargs,
     )
 
-    click.echo(click.style(f"Table was downloaded to `{savepath}`", fg="green",))
+    click.echo(
+        click.style(
+            f"Table was downloaded to `{savepath}`",
+            fg="green",
+        )
+    )
 
 
 cli.add_command(cli_dataset)

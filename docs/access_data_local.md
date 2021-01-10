@@ -10,6 +10,7 @@ Em apenas 2 passos você consegue obter dados estruturados para baixar e
 analisar:
 
 1. Instalar a aplicação
+2. Criar um projeto no Google Cloud
 2. Realizar sua query para explorar os dados
 
 ## Instalando a aplicação
@@ -36,6 +37,23 @@ analisar:
     # Seja a primeira pessoa a contribuir (veja Issue #83 no GitHub)!
     ```
 
+## Criando um projeto no Google Cloud
+
+Para criar um projeto no Google Cloud basta ter um email cadastrado no google e
+seguir esses passos:
+
+1. Vá para esse link https://console.cloud.google.com/projectselector2/home/dashboard
+2. Aceite o Termo de Serviços
+3. Clique em Create Project (Criar Projeto)
+4. Escolha um nome bacana para o seu projeto :)
+5. Clique em Create (Criar)
+
+Veja que seu projeto tem um nome e um Project ID. Esse Project ID é a informação
+que você vai usar nos clientes, é o que você coloca em `<YOUR_PROJECT_ID>`. 
+Veja que na imagem abaixo o `<YOUR_PROJECT_ID>` é `oraculo-do-xingu`.
+
+![](images/project_id_example.png)
+
 ## Fazendo queries
 
 Utilize todo o poder do BigQuery onde quiser. Para obter, filtrar ou
@@ -48,7 +66,9 @@ em todos os anos disponíveis**.
 
 === "CLI"
     ```bash
-    basedosdados download "where/to/save/file" --query '
+    basedosdados download "where/to/save/file" \
+    --billing_project_id <YOUR_PROJECT_ID> \
+    --query '
     SELECT 
         pib.id_municipio, 
         pop.ano,  
@@ -64,7 +84,7 @@ em todos os anos disponíveis**.
     !!! Info
         Por padrão, o BigQuery escolhido para puxar os dados é
         `basedosdados` - mas você pode utilizar também para qualquer projeto
-        seu! Basta explicitar seu `project_id`.
+        seu! Basta explicitar seu `query_project_id`.
 
 === "Python"
     ```python
@@ -80,10 +100,20 @@ em todos os anos disponíveis**.
     """
 
     # Você pode fazer o download no seu computador
-    bd.download(query=pib_per_capita, savepath="where/to/save/file")
+    bd.download(query=pib_per_capita, 
+                savepath="where/to/save/file", 
+                billing_project_id=<YOUR_PROJECT_ID>)
 
     # Ou carregar no pandas
-    df = bd.read_sql(pib_per_capita)
+    df = bd.read_sql(pib_per_capita, billing_project_id=<YOUR_PROJECT_ID>)
+
+    # Ou carregar uma tabela no pandas
+    df = bd.read_table(
+            dataset_id='br_ibge_populacao', 
+            table_id='municipios',
+            billing_project_id=<YOUR_PROJECT_ID>,
+            limit=100
+    )
     ```
 
     Caso esteja rodando a query pela 1a vez, ela vai somente configurar seu ambiente (siga as instruções que irão aparecer). Rode a query novamente para puxar os dados.
@@ -91,7 +121,7 @@ em todos os anos disponíveis**.
     !!! Info
         Por padrão, o BigQuery escolhido para puxar os dados é
         `basedosdados` - mas você pode utilizar também para qualquer projeto
-        seu! Basta explicitar seu `project_id`.
+        seu! Basta explicitar seu `query_project_id`.
 
 === "R"
     ```R
