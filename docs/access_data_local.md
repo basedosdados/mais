@@ -128,7 +128,8 @@ em todos os anos disponíveis**.
     if (!require("bigrquery")) install.packages("bigrquery")
     library("bigrquery")
 
-    project_id = "basedosdados"
+    billing_project_id = "<YOUR_PROJECT_ID>"
+    
     pib_per_capita = """SELECT 
         pib.id_municipio ,
         pop.ano, 
