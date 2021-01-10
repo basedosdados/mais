@@ -1,0 +1,70 @@
+dataset_id: br_me_rais # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-me-rais
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais
+
+# Descreva a base.
+# Ela é sobre o que?
+# Quais as principais fontes de dados?
+# Há links para FAQs e explicações?
+description: | # REQUIRED
+    Dados da versão pública da Relação Anual de Informações Sociais (RAIS).
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+organization: ministerio-da-economia
+
+# Qual departamento/grupo/pessoa mantém os dados originais?
+author:
+    name: Secretaria Especial de Previdência e Trabalho
+    email: trabalho@mte.gov.br
+
+# Onde encontrar os dados originais e mais informações?
+website:
+    - http://pdet.mte.gov.br/microdados-rais-e-caged
+
+# Quais grupos caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+groups:
+    - economia
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Caso crie etiquetas novas, as regras são:
+#   - letras minúsculas
+#   - sem acentos
+#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - trabalho
+    - emprego
+
+# Em quais línguas a base (ou a fonte original) está disponível?
+# Regras: minúsculo, sem acentos.
+# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
+languages:
+    - portugues
+
+# Os dados originais estão disponíveis de graça?
+free: sim
+
+# Are microdata available for download?
+microdata: sim
+
+# Existe uma API na fonte original?
+API: nao
+
+# É necessário registrar um usuário para baixar os dados originais?
+registration: nao
+
+# Como os dados originais estão disponibilizados?
+availability: online
+
+# A fonte original requer IP brasileiro para acesso?
+brazilian_IP: sim
+
+# Essa base está sob qual licença?
+# A licença MIT se aplica a bases públicas.
+# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
+license: 
+    name: MIT # REQUIRED
+    url: <url>
