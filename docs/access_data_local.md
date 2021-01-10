@@ -39,18 +39,21 @@ analisar:
 
 ## Criando um projeto no Google Cloud
 
-Para criar um projeto no Google Cloud basta ter um email cadastrado no google e
-seguir esses passos:
+!!! Info "Caso já tenha um projeto próprio, vá direto para a próxima etapa!"
 
-1. Vá para esse link https://console.cloud.google.com/projectselector2/home/dashboard
-2. Aceite o Termo de Serviços
-3. Clique em Create Project (Criar Projeto)
+
+Para criar um projeto no Google Cloud basta ter um email cadastrado no
+Google. É necessário ter um projeto seu, mesmo que vazio, para você fazer queries em nosso repositório público. Basta seguir o passo-a-passo:
+
+1. Acesse o link: [https://console.cloud.google.com/projectselector2/home/dashboard](https://console.cloud.google.com/projectselector2/home/dashboard)
+2. Aceite o Termo de Serviços do Google Cloud
+3. Clique em `Create Project/Criar Projeto`
 4. Escolha um nome bacana para o seu projeto :)
-5. Clique em Create (Criar)
+5. Clique em `Create/Criar`
 
-Veja que seu projeto tem um nome e um Project ID. Esse Project ID é a informação
-que você vai usar nos clientes, é o que você coloca em `<YOUR_PROJECT_ID>`. 
-Veja que na imagem abaixo o `<YOUR_PROJECT_ID>` é `oraculo-do-xingu`.
+Veja que seu projeto tem um `Nome` e um `Project ID` - este segundo é a informação
+que você irá utilizar em `<YOUR_PROJECT_ID>` para fazer queries no nosso
+repositório público.
 
 ![](images/project_id_example.png)
 
@@ -79,12 +82,7 @@ em todos os anos disponíveis**.
     LIMIT 100;'
     ```
 
-    Caso esteja rodando a query pela 1a vez, ela vai somente configurar seu ambiente (siga as instruções que irão aparecer). Rode a query novamente para puxar os dados.
-
-    !!! Info
-        Por padrão, o BigQuery escolhido para puxar os dados é
-        `basedosdados` - mas você pode utilizar também para qualquer projeto
-        seu! Basta explicitar seu `query_project_id`.
+    !!! Info "Caso esteja rodando a query pela 1ª vez será feita somente a configuração do seu ambiente Siga as instruções que irão aparecer até o final e rode a query novamente para puxar os dados :)"
 
 === "Python"
     ```python
@@ -104,10 +102,11 @@ em todos os anos disponíveis**.
                 savepath="where/to/save/file", 
                 billing_project_id=<YOUR_PROJECT_ID>)
 
-    # Ou carregar no pandas
+    # Ou carregar o resultado da query no pandas
     df = bd.read_sql(pib_per_capita, billing_project_id=<YOUR_PROJECT_ID>)
 
-    # Ou carregar uma tabela no pandas
+    # Ou carregar uma tabela inteira no pandas -- por padrão, `query_project_id` 
+    # é o basedosdados, você pode usar esse parâmetro para escolher outro projeto
     df = bd.read_table(
             dataset_id='br_ibge_populacao', 
             table_id='municipios',
@@ -116,12 +115,7 @@ em todos os anos disponíveis**.
     )
     ```
 
-    Caso esteja rodando a query pela 1a vez, ela vai somente configurar seu ambiente (siga as instruções que irão aparecer). Rode a query novamente para puxar os dados.
-
-    !!! Info
-        Por padrão, o BigQuery escolhido para puxar os dados é
-        `basedosdados` - mas você pode utilizar também para qualquer projeto
-        seu! Basta explicitar seu `query_project_id`.
+    !!! Info "Caso esteja rodando a query pela 1ª vez será feita somente a configuração do seu ambiente Siga as instruções que irão aparecer até o final e rode a query novamente para puxar os dados :)"
 
 === "R"
     ```R
