@@ -145,7 +145,8 @@ def read_sql(query, billing_project_id=None, reauth=False):
             "Now, you have two options:\n"
             "1. Add an argument to your function poiting to the billing project id.\n"
             "   Like `bd.read_table('br_ibge_pib', 'municipios', billing_project_id=<YOUR_PROJECT_ID>)`\n"
-            "2. You can set a project_id in the environment with `gcloud config set project <YOUR_PROJECT_ID>`"
+            "2. You can set a project_id in the environment by running the following command in your terminal: `gcloud config set project <YOUR_PROJECT_ID>`."
+            "   Bear in mind that you need `gcloud` installed."
         )
     except GenericGBQException as e:
         if "Reason: 403" in str(e):
