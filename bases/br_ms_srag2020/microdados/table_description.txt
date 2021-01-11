@@ -1,0 +1,46 @@
+Microdados do Banco de Dados de Síndrome Respiratória Aguda Grave - incluindo dados da COVID-19.
+
+
+Para saber mais acesse:
+Website: 
+Github: https://github.com/basedosdados/mais/
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- sigla_uf_notificacao
+
+Nível da Observação (Colunas que identificam cada linha unicamente)
+-------------------
+- caso
+
+Cobertura Temporal
+------------------
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Uniformizamos os nomes de variáveis.
+- Modificamos certos valores para consistência (e.g. sexo, fator_risco).
+
+Frequencia de Atualização
+-------------------------
+semana
+
+Tratado por
+-----------
+Nome: <nome>
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_srag2020/code
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_srag2020/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
