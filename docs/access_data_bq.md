@@ -40,9 +40,7 @@ style="color:green">*tables*</strong>
 ![](images/bq_dataset_tables_structure.png){ width=100% }
 
 
-!!! Warning
-    Caso não apareçam as tabelas nos *datasets* do projeto na primeira vez
-    que você acessar, tente atualizar a página.
+!!! Warning "Caso não apareçam as tabelas nos *datasets* do projeto na 1ª vez que você acessar, atualize a página."
 
 ## Explorando os dados
 
@@ -52,7 +50,7 @@ O BigQuery utiliza SQL como linguagem nativa. Leia mais sobre a sintaxe
 utilizada
 [aqui](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax).
 
-Rode a query abaixo no `Editor de consultas` e obtenha o cruzamento
+Rode a query abaixo no `Query Editor/Editor de consultas` e obtenha o cruzamento
 das tabelas de população e PIB do IBGE com o resultado anual desde 1991.
 
 ```sql
@@ -66,9 +64,9 @@ ON pib.id_municipio = pop.id_municipio
 ```
 
 !!! Tip "Dica"
-    Clicando no botão `🔍 Query View`, o BigQuery cria automaticamente a estrutura básica
-    da sua query em `Query Editor` - basta você completar com os campos e filtros que achar
-    necessários.
+    Clicando no botão `🔍 Consultar tabela/Query View`, o BigQuery cria
+    automaticamente a estrutura básica da sua query em `Query Editor/Editor
+    de consultas` - basta você completar com os campos e filtros que achar necessários.
 
 ### Entenda os dados
 

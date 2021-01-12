@@ -6,10 +6,11 @@
     ```
 </div>
 
-Em apenas 2 passos você consegue obter dados estruturados para baixar e
+Em apenas 3 passos você consegue obter dados estruturados para baixar e
 analisar:
 
 1. Instalar a aplicação
+2. Criar um projeto no Google Cloud
 2. Realizar sua query para explorar os dados
 
 ## Instalando a aplicação
@@ -36,6 +37,26 @@ analisar:
     # Seja a primeira pessoa a contribuir (veja Issue #83 no GitHub)!
     ```
 
+## Criando um projeto no Google Cloud
+
+!!! Info "Caso já tenha um projeto próprio, vá direto para a próxima etapa!"
+
+
+Para criar um projeto no Google Cloud basta ter um email cadastrado no
+Google. É necessário ter um projeto seu, mesmo que vazio, para você fazer queries em nosso repositório público. Basta seguir o passo-a-passo:
+
+1. Acesse o link: [https://console.cloud.google.com/projectselector2/home/dashboard](https://console.cloud.google.com/projectselector2/home/dashboard)
+2. Aceite o Termo de Serviços do Google Cloud
+3. Clique em `Create Project/Criar Projeto`
+4. Escolha um nome bacana para o seu projeto :)
+5. Clique em `Create/Criar`
+
+Veja que seu projeto tem um `Nome` e um `Project ID` - este segundo é a informação
+que você irá utilizar em `<YOUR_PROJECT_ID>` para fazer queries no nosso
+repositório público.
+
+![](images/project_id_example.png)
+
 ## Fazendo queries
 
 Utilize todo o poder do BigQuery onde quiser. Para obter, filtrar ou
@@ -48,7 +69,9 @@ em todos os anos disponíveis**.
 
 === "CLI"
     ```bash
-    basedosdados download "where/to/save/file" --query '
+    basedosdados download "where/to/save/file" \
+    --billing_project_id <YOUR_PROJECT_ID> \
+    --query '
     SELECT 
         pib.id_municipio, 
         pop.ano,  
@@ -59,12 +82,7 @@ em todos os anos disponíveis**.
     LIMIT 100;'
     ```
 
-    Caso esteja rodando a query pela 1a vez, ela vai somente configurar seu ambiente (siga as instruções que irão aparecer). Rode a query novamente para puxar os dados.
-
-    !!! Info
-        Por padrão, o BigQuery escolhido para puxar os dados é
-        `basedosdados` - mas você pode utilizar também para qualquer projeto
-        seu! Basta explicitar seu `project_id`.
+    !!! Info "Caso esteja rodando a query pela 1ª vez será feita somente a configuração do seu ambiente Siga as instruções que irão aparecer até o final e rode a query novamente para puxar os dados :)"
 
 === "Python"
     ```python
@@ -80,25 +98,31 @@ em todos os anos disponíveis**.
     """
 
     # Você pode fazer o download no seu computador
-    bd.download(query=pib_per_capita, savepath="where/to/save/file")
+    bd.download(query=pib_per_capita, 
+                savepath="where/to/save/file", 
+                billing_project_id=<YOUR_PROJECT_ID>)
 
-    # Ou carregar no pandas
-    df = bd.read_sql(pib_per_capita)
+    # Ou carregar o resultado da query no pandas
+    df = bd.read_sql(pib_per_capita, billing_project_id=<YOUR_PROJECT_ID>)
+
+    # Ou carregar uma tabela inteira no pandas -- por padrão, `query_project_id` 
+    # é o basedosdados, você pode usar esse parâmetro para escolher outro projeto
+    df = bd.read_table(
+            dataset_id='br_ibge_populacao', 
+            table_id='municipios',
+            billing_project_id=<YOUR_PROJECT_ID>,
+            limit=100
+    )
     ```
 
-    Caso esteja rodando a query pela 1a vez, ela vai somente configurar seu ambiente (siga as instruções que irão aparecer). Rode a query novamente para puxar os dados.
-
-    !!! Info
-        Por padrão, o BigQuery escolhido para puxar os dados é
-        `basedosdados` - mas você pode utilizar também para qualquer projeto
-        seu! Basta explicitar seu `project_id`.
+    !!! Info "Caso esteja rodando a query pela 1ª vez será feita somente a configuração do seu ambiente Siga as instruções que irão aparecer até o final e rode a query novamente para puxar os dados :)"
 
 === "R"
     ```R
     if (!require("bigrquery")) install.packages("bigrquery")
     library("bigrquery")
 
-    project_id = ""  # preencha com o ID do seu projeto no BigQuery
+    billing_project_id = "<YOUR_PROJECT_ID>"
 
     pib_per_capita = "SELECT 
         pib.id_municipio ,
@@ -108,7 +132,7 @@ em todos os anos disponíveis**.
     INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
     ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
 
-    d <- bq_table_download(bq_project_query(project_id, pib_per_capita), page_size=500)
+    d <- bq_table_download(bq_project_query(billing_project_id, pib_per_capita), page_size=500)
     ```
 
 === "Stata"
