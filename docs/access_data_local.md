@@ -132,7 +132,7 @@ em todos os anos disponíveis**.
     INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
     ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
 
-    d <- bq_table_download(bq_project_query(billing_project_id, pib_per_capita, page_size=500), bigint="integer64")
+    d <- bq_table_download(bq_project_query(billing_project_id, pib_per_capita), page_size=500, bigint="integer64")
     ```
 
 === "Stata"
