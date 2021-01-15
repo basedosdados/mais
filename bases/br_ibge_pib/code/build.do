@@ -35,10 +35,6 @@ keep id_municipio ano PIB VA* impostos*
 tempfile f2002_2009
 save `f2002_2009'
 
-//----------------//
-// 2010-2018
-//----------------//
-
 import excel "input/PIB dos Municípios - base de dados 2010-2018.xls", clear
 
 drop in 1
@@ -58,10 +54,6 @@ keep id_municipio ano PIB impostos* VA*
 tempfile f2010_2018
 save `f2010_2018'
 
-//----------------//
-// append
-//----------------//
-
 use `f2002_2009', clear
 append using `f2010_2018'
 
@@ -75,8 +67,7 @@ foreach k of varlist PIB impostos_liquidos VA* {
 order id_municipio ano PIB impostos_liquidos VA VA_agropecuaria VA_industria VA_servicos VA_ADESPSS
 sort  id_municipio ano
 
-tostring *, replace force
+format PIB impostos_liquidos VA* %20.0f
 
-compress
+export delimited "output/municipios.csv", replace datafmt
 
-export delimited "output/municipios.csv", replace
