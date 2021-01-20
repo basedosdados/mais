@@ -1,0 +1,80 @@
+dataset_id: br_ibge_pam # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-ibge-pam
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pam
+
+# Descreva a base.
+# Ela é sobre o que?
+# Quais as principais fontes de dados?
+# Há links para FAQs e explicações?
+description: | # REQUIRED
+    As tabelas contidas nessa base dizem respeito à Pesquisa Agrícola Municipal. Tal pesquisa disponibiliza, a nível municipal e anual,
+    dados variados sobre diversos produtos cultivados no país. Ao todo, são dados de 8 variáveis para mais de 70 produtos. Estão contidas 
+    nessa base tabelas de lavouras permanentes, isto é com áreas cultivadas por longos períodos sem muita alternância e lavouras temporárias, marcadas por
+    serem cultivadas com alta rotatividade e em curtos espaços de tempo. Os dados presentes nas tabelas dessa base são oriundas das tabelas 1612 e 1613 
+    do sistema SIDRA do IBGE.
+
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+organization: instituto brasileiro de geografia e estatística # REQUIRED
+
+# Qual departamento/grupo/pessoa mantém os dados originais?
+author:
+    name: 
+    email: 
+
+# Onde encontrar os dados originais e mais informações?
+website:
+    - https://sidra.ibge.gov.br/pesquisa/pam/tabelas
+
+# Quais grupos caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+groups:
+    - agropecuária
+    - economia
+    - meio-ambiente
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Caso crie etiquetas novas, as regras são:
+#   - letras minúsculas
+#   - sem acentos
+#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - uso da terra 
+    - soja
+    - feijão
+    - lavouras
+    - fruticultura
+
+# Em quais línguas a base (ou a fonte original) está disponível?
+# Regras: minúsculo, sem acentos.
+# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
+languages:
+    - português
+
+# Os dados originais estão disponíveis de graça?
+free: sim
+
+# Are microdata available for download?
+microdata: não
+
+# Existe uma API na fonte original?
+API: sim
+
+# É necessário registrar um usuário para baixar os dados originais?
+registration: não
+
+# Como os dados originais estão disponibilizados?
+availability: online
+
+# A fonte original requer IP brasileiro para acesso?
+brazilian_IP: não
+
+# Essa base está sob qual licença?
+# A licença MIT se aplica a bases públicas.
+# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
+license: 
+    name: MIT # REQUIRED
+    url: <url>
