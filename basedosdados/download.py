@@ -1,6 +1,7 @@
 import pandas_gbq
 from pathlib import Path
 import pydata_google_auth
+from google.cloud import bigquery
 
 from basedosdados.exceptions import BaseDosDadosException
 from pandas_gbq.gbq import GenericGBQException
@@ -20,8 +21,8 @@ def credentials(reauth=False):
         return pydata_google_auth.get_user_credentials(
             SCOPES,
         )
-
-
+        
+    
 def download(
     savepath,
     query=None,
@@ -207,3 +208,148 @@ def read_table(
         raise BaseDosDadosException("Both table_id and dataset_id should be filled.")
 
     return read_sql(query, billing_project_id=billing_project_id, reauth=reauth)
+
+
+def list_datasets(
+    project_id='basedosdados', 
+    filter_by=None, 
+    with_description=False
+):
+    
+    client = bigquery.Client(credentials=credentials(), project=project_id)
+    
+    datasets = list(client.list_datasets())
+    
+    datasets_list = pd.DataFrame([dataset.dataset_id for dataset in datasets], columns=['dataset_id'])
+    
+    
+    if filter_by:
+        
+        datasets_list = datasets_list.loc[datasets_list['dataset_id'].str.contains(filter_by)]
+    
+    if with_description:
+        
+        indexes = list(datasets_list.index)
+        
+        datasets_list['description'] = [client.get_dataset(datasets_list.at[index, 'dataset_id']).description
+                                       for index in indexes]
+    
+    #FOR THE FULL TABLE DESCRIPTION ONE CAN USE  
+    
+    return datasets_list
+
+
+def list_dataset_tables(
+    dataset_id, 
+    project_id='basedosdados',
+    filter_by=None,
+    with_description=False
+):
+    
+    client = bigquery.Client(credentials=credentials(), project=project_id)
+    
+    dataset = client.get_dataset(dataset_id)
+    
+    tables = list(client.list_tables(dataset))
+    
+    tables_list = pd.DataFrame(
+        [table.table_id for table in tables], 
+        columns=['table_id'])
+    
+    if filter_by:
+      
+        tables_list = tables_list.loc[tables_list['table_id'].str.contains(filter_by)]
+        
+    if with_description:
+        
+        indexes = list(tables_list.index)
+        
+        tables_list['description'] = [client.get_table
+                                      (f"{project_id}.{dataset_id}.{tables_list.at[index,'table_id']}"
+                                      ).description for index in indexes]
+        
+        
+    return tables_list
+
+def get_dataset_description(
+    dataset_id=None, 
+    project_id = 'basedosdados'
+):
+    client =  bigquery.Client(credentials=credentials(), project=project_id)
+    
+    dataset = client.get_dataset(dataset_id)
+    
+    print(dataset.description)
+    
+    return None
+
+def get_table_description(
+    dataset_id = None, 
+    table_id = None, 
+    project_id='basedosdados'
+):
+    client = bigquery.Client(credentials = credentials(), project = project_id)
+    
+    table = client.get_table(f'{dataset_id}.{table_id}')
+    
+    print(table.description)
+    
+    return None
+
+def get_table_columns(
+    dataset_id=None, 
+    table_id=None, 
+    project_id='basedosdados'
+):
+    client = bigquery.Client(credentials = credentials(), project = project_id)
+    
+    table_ref = client.get_table(f'{project_id}.{dataset_id}.{table_id}')
+    
+    columns = [(field.name, field.field_type, field.description) for field in table_ref.schema]
+    
+    description = pd.DataFrame(columns, columns=['name','field_type','description'])
+    
+    return description
+
+def get_table_size(
+    dataset_id, 
+    table_id, 
+    billing_project_id, 
+    project_id='basedosdados',
+    info=False
+):
+    
+    
+    base_client = bigquery.Client(credentials=credentials(), project=project_id)
+    
+    user_client = bigquery.Client(credentials=credentials(), project=billing_project_id)
+    
+    table = base_client.get_table(f'{project_id}.{dataset_id}.{table_id}')
+    
+    
+     
+    query = f"""SELECT COUNT(*) FROM {project_id}.{dataset_id}.{table_id}"""
+    
+    job = user_client.query(query, location='US')
+    
+    num_rows = job.to_dataframe().loc[0,"f0_"]
+    
+    size_mb = round(job.total_bytes_processed/1024/1024, 2)
+    
+    
+    
+    table_data = pd.DataFrame([project_id], columns = ['project_id'])
+    
+    table_data['dataset_id'] = table.dataset_id
+    
+    table_data['table_id'] = table.table_id
+    
+    table_data['created_date'] = table.created.date()
+    
+    table_data['num_rows']=num_rows 
+    
+    table_data['size_mb' ]= size_mb
+
+ 
+    return table_data
+    
