@@ -225,7 +225,8 @@ def list_datasets(
 
     Returns:
         pd.Dataframe:
-            Dataframe with the dataset_ids available which match the search criteria.
+            Dataframe with the dataset_ids (with description or not in
+            a second column) available which match the search criteria.
     """
     client = bigquery.Client(credentials=credentials(), project=query_project_id)
 
@@ -267,7 +268,8 @@ def list_dataset_tables(
 
     Returns:
         pd.DataFrame:
-            DataFrame with table_id and/or description, which matches the search criteria.
+            DataFrame with table_id (with description or not, in a
+            second column), which matches the search criteria.
     """
     client = bigquery.Client(credentials=credentials(), project=query_project_id)
 
@@ -377,8 +379,8 @@ def get_table_columns(dataset_id=None, table_id=None, query_project_id="basedosd
 def get_table_size(
     dataset_id, table_id, billing_project_id, query_project_id="basedosdados"
 ):
-    """Use a query to get the number of rows and size (in Mb) of a table query.
-    from BigQuery
+    """Use a query to get the number of rows and size (in Mb) of a table query
+    from BigQuery.
 
     Args:
         dataset_id (str): Optional.
