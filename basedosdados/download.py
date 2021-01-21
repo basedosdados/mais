@@ -218,25 +218,24 @@ def list_datasets(
     
     client = bigquery.Client(credentials=credentials(), project=project_id)
     
-    datasets = list(client.list_datasets())
+    datasets_list = list(client.list_datasets())
     
-    datasets_list = pd.DataFrame([dataset.dataset_id for dataset in datasets], columns=['dataset_id'])
+    datasets = pd.DataFrame([dataset.dataset_id for dataset in datasets_list], columns=['dataset_id'])
     
     
     if filter_by:
         
-        datasets_list = datasets_list.loc[datasets_list['dataset_id'].str.contains(filter_by)]
+        datasets = datasets.loc[datasets['dataset_id'].str.contains(filter_by)]
     
     if with_description:
         
-        indexes = list(datasets_list.index)
-        
-        datasets_list['description'] = [client.get_dataset(datasets_list.at[index, 'dataset_id']).description
-                                       for index in indexes]
+        datasets['description'] = [client.get_dataset(dataset).description
+                           for dataset in datasets['dataset_id']]
     
     #FOR THE FULL TABLE DESCRIPTION ONE CAN USE  
     
-    return datasets_list
+    return datasets
+    
 
 
 def list_dataset_tables(
@@ -250,26 +249,23 @@ def list_dataset_tables(
     
     dataset = client.get_dataset(dataset_id)
     
-    tables = list(client.list_tables(dataset))
+    tables_list = list(client.list_tables(dataset))
     
-    tables_list = pd.DataFrame(
-        [table.table_id for table in tables], 
+    tables = pd.DataFrame(
+        [table.table_id for table in tables_list], 
         columns=['table_id'])
     
     if filter_by:
       
-        tables_list = tables_list.loc[tables_list['table_id'].str.contains(filter_by)]
+        tables = tables.loc[tables['table_id'].str.contains(filter_by)]
         
     if with_description:
         
-        indexes = list(tables_list.index)
-        
-        tables_list['description'] = [client.get_table
-                                      (f"{project_id}.{dataset_id}.{tables_list.at[index,'table_id']}"
-                                      ).description for index in indexes]
-        
-        
-    return tables_list
+        tables['description'] = [client.get_table
+                                      (f"{project_id}.{dataset_id}.{table}"
+                                      ).description for table in tables['table_id']]
+                
+    return tables
 
 def get_dataset_description(
     dataset_id=None, 
@@ -315,22 +311,16 @@ def get_table_size(
     dataset_id, 
     table_id, 
     billing_project_id, 
-    project_id='basedosdados',
-    info=False
+    project_id='basedosdados'
 ):
     
     
-    base_client = bigquery.Client(credentials=credentials(), project=project_id)
-    
-    user_client = bigquery.Client(credentials=credentials(), project=billing_project_id)
-    
-    table = base_client.get_table(f'{project_id}.{dataset_id}.{table_id}')
-    
+    billing_client = bigquery.Client(credentials=credentials(), project=billing_project_id) 
     
      
     query = f"""SELECT COUNT(*) FROM {project_id}.{dataset_id}.{table_id}"""
     
-    job = user_client.query(query, location='US')
+    job = billing_client.query(query, location='US')
     
     num_rows = job.to_dataframe().loc[0,"f0_"]
     
@@ -338,18 +328,15 @@ def get_table_size(
     
     
     
-    table_data = pd.DataFrame([project_id], columns = ['project_id'])
+    table_data = pd.DataFrame(
+        [{
+        'project_id': project_id,
+        'dataset_id': dataset_id,
+        'table_id': table_id,
+        'num_rows': num_rows,
+        'size_mb': size_mb
+        }]       
+)
     
-    table_data['dataset_id'] = table.dataset_id
-    
-    table_data['table_id'] = table.table_id
-    
-    table_data['created_date'] = table.created.date()
-    
-    table_data['num_rows']=num_rows 
-    
-    table_data['size_mb' ]= size_mb
-
  
     return table_data
-    
