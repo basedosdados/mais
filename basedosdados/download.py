@@ -21,8 +21,8 @@ def credentials(reauth=False):
         return pydata_google_auth.get_user_credentials(
             SCOPES,
         )
-        
-    
+
+
 def download(
     savepath,
     query=None,
@@ -211,132 +211,212 @@ def read_table(
 
 
 def list_datasets(
-    project_id='basedosdados', 
-    filter_by=None, 
-    with_description=False
+    query_project_id="basedosdados", filter_by=None, with_description=False
 ):
-    
-    client = bigquery.Client(credentials=credentials(), project=project_id)
-    
+    """Fetch a list of the datasets available at query_project_id
+
+    Args:
+        query_project_id (str): Optional.
+            Which project the table lives. You can change this you want to query different projects.
+        filter_by (str): Optional
+            String to be matched in dataset_id
+        with_description (bool): Optional
+            If True, fetch the dataset description for each dataset
+
+    Returns:
+        pd.Dataframe:
+            Dataframe with the dataset_ids available which match the search criteria
+    """
+    client = bigquery.Client(credentials=credentials(), project=query_project_id)
+
     datasets_list = list(client.list_datasets())
-    
-    datasets = pd.DataFrame([dataset.dataset_id for dataset in datasets_list], columns=['dataset_id'])
-    
-    
+
+    datasets = pd.DataFrame(
+        [dataset.dataset_id for dataset in datasets_list], columns=["dataset_id"]
+    )
+
     if filter_by:
-        
-        datasets = datasets.loc[datasets['dataset_id'].str.contains(filter_by)]
-    
+
+        datasets = datasets.loc[datasets["dataset_id"].str.contains(filter_by)]
+
     if with_description:
-        
-        datasets['description'] = [client.get_dataset(dataset).description
-                           for dataset in datasets['dataset_id']]
-    
-    #FOR THE FULL TABLE DESCRIPTION ONE CAN USE  
-    
+
+        datasets["description"] = [
+            client.get_dataset(dataset).description
+            for dataset in datasets["dataset_id"]
+        ]
+    # YOU CAN FETCH THE FULL DESCRIPTION USING PANDAS .loc METHOD ON THE DATAFRAME RETURNED
+
     return datasets
-    
 
 
 def list_dataset_tables(
-    dataset_id, 
-    project_id='basedosdados',
-    filter_by=None,
-    with_description=False
+    dataset_id, query_project_id="basedosdados", filter_by=None, with_description=False
 ):
-    
-    client = bigquery.Client(credentials=credentials(), project=project_id)
-    
+    """[summary]
+
+    Args:
+        dataset_id (str): Optional.
+            Dataset id available in basedosdados.
+        query_project_id (str): Optional.
+            Which project the table lives. You can change this you want to query different projects.
+        filter_by (str): Optional
+            String to be matched in the table_id
+        with_description (bool): Optional
+             If True, fetch table descriptions for each table that match the search criteria
+
+    Returns:
+        pd.DataFrame:
+            DataFrame with table_id and/or description, which matches the search criteria
+    """
+    client = bigquery.Client(credentials=credentials(), project=query_project_id)
+
     dataset = client.get_dataset(dataset_id)
-    
+
     tables_list = list(client.list_tables(dataset))
-    
+
     tables = pd.DataFrame(
-        [table.table_id for table in tables_list], 
-        columns=['table_id'])
-    
+        [table.table_id for table in tables_list], columns=["table_id"]
+    )
+
     if filter_by:
-      
-        tables = tables.loc[tables['table_id'].str.contains(filter_by)]
-        
+
+        tables = tables.loc[tables["table_id"].str.contains(filter_by)]
+
     if with_description:
-        
-        tables['description'] = [client.get_table
-                                      (f"{project_id}.{dataset_id}.{table}"
-                                      ).description for table in tables['table_id']]
-                
+
+        tables["description"] = [
+            client.get_table(f"{dataset_id}.{table}").description
+            for table in tables["table_id"]
+        ]
+    # YOU CAN FETCH THE FULL DESCRIPTION USING PANDAS .loc METHOD ON THE DATAFRAME RETURNED
+
     return tables
 
-def get_dataset_description(
-    dataset_id=None, 
-    project_id = 'basedosdados'
-):
-    client =  bigquery.Client(credentials=credentials(), project=project_id)
-    
+
+def get_dataset_description(dataset_id=None, query_project_id="basedosdados"):
+    """Prints the full dataset description
+
+    Args:
+        dataset_id (str): Optional.
+            Dataset id available in basedosdados.
+        query_project_id (str): Optional.
+            Which project the table lives. You can change this you want to query different projects.
+
+    Returns:
+        None
+    """
+
+    client = bigquery.Client(credentials=credentials(), query_project=project_id)
+
     dataset = client.get_dataset(dataset_id)
-    
+
     print(dataset.description)
-    
+
     return None
+
 
 def get_table_description(
-    dataset_id = None, 
-    table_id = None, 
-    project_id='basedosdados'
+    dataset_id=None, table_id=None, query_project_id="basedosdados"
 ):
-    client = bigquery.Client(credentials = credentials(), project = project_id)
-    
-    table = client.get_table(f'{dataset_id}.{table_id}')
-    
+    """Prints the queried table description
+
+    Args:
+        dataset_id (str): Optional.
+            Dataset id available in basedosdados. It should always come with table_id.
+        table_id (str): Optional.
+            Table id available in basedosdados.dataset_id.
+            It should always come with dataset_id.
+        query_project_id (str): Optional.
+            Which project the table lives. You can change this you want to query different projects.
+
+    Returns:
+        None
+    """
+
+    client = bigquery.Client(credentials=credentials(), project=query_project_id)
+
+    table = client.get_table(f"{dataset_id}.{table_id}")
+
     print(table.description)
-    
+
     return None
 
-def get_table_columns(
-    dataset_id=None, 
-    table_id=None, 
-    project_id='basedosdados'
-):
-    client = bigquery.Client(credentials = credentials(), project = project_id)
-    
-    table_ref = client.get_table(f'{project_id}.{dataset_id}.{table_id}')
-    
-    columns = [(field.name, field.field_type, field.description) for field in table_ref.schema]
-    
-    description = pd.DataFrame(columns, columns=['name','field_type','description'])
-    
+
+def get_table_columns(dataset_id=None, table_id=None, query_project_id="basedosdados"):
+
+    """Fetch the names, types and descriptions for the columns in the queried table
+
+    Args:
+        dataset_id (str): Optional.
+            Dataset id available in basedosdados. It should always come with table_id.
+        table_id (str): Optional.
+            Table id available in basedosdados.dataset_id.
+            It should always come with dataset_id.
+        query_project_id (str): Optional.
+            Which project the table lives. You can change this you want to query different projects.
+
+    Returns:
+        pd.DataFrame:
+            DataFrame with information on the queried table columns
+    """
+
+    client = bigquery.Client(credentials=credentials(), project=query_project_id)
+
+    table_ref = client.get_table(f"{dataset_id}.{table_id}")
+
+    columns = [
+        (field.name, field.field_type, field.description) for field in table_ref.schema
+    ]
+
+    description = pd.DataFrame(columns, columns=["name", "field_type", "description"])
+
     return description
 
+
 def get_table_size(
-    dataset_id, 
-    table_id, 
-    billing_project_id, 
-    project_id='basedosdados'
+    dataset_id, table_id, billing_project_id, query_project_id="basedosdados"
 ):
-    
-    
-    billing_client = bigquery.Client(credentials=credentials(), project=billing_project_id) 
-    
-     
-    query = f"""SELECT COUNT(*) FROM {project_id}.{dataset_id}.{table_id}"""
-    
-    job = billing_client.query(query, location='US')
-    
-    num_rows = job.to_dataframe().loc[0,"f0_"]
-    
-    size_mb = round(job.total_bytes_processed/1024/1024, 2)
-    
-    
-    
+    """Use a query to get the number of rows and size (in Mb) of a table query
+    from BigQuery
+
+    Args:
+        dataset_id (str): Optional.
+            Dataset id available in basedosdados. It should always come with table_id.
+        table_id (str): Optional.
+            Table id available in basedosdados.dataset_id.
+            It should always come with dataset_id.
+        query_project_id (str): Optional.
+            Which project the table lives. You can change this you want to query different projects.
+
+    Returns:
+        pd.DataFrame:
+            Columns: project_id, dataset_id, table_id, number of rows and size in megabytes(rounded
+            to 2 decimal places) for the selected table
+    """
+
+    billing_client = bigquery.Client(
+        credentials=credentials(), project=billing_project_id
+    )
+
+    query = f"""SELECT COUNT(*) FROM {query_project_id}.{dataset_id}.{table_id}"""
+
+    job = billing_client.query(query, location="US")
+
+    num_rows = job.to_dataframe().loc[0, "f0_"]
+
+    size_mb = round(job.total_bytes_processed / 1024 / 1024, 2)
+
     table_data = pd.DataFrame(
-        [{
-        'project_id': project_id,
-        'dataset_id': dataset_id,
-        'table_id': table_id,
-        'num_rows': num_rows,
-        'size_mb': size_mb
-        }]       
-)
-    
- 
+        [
+            {
+                "project_id": project_id,
+                "dataset_id": dataset_id,
+                "table_id": table_id,
+                "num_rows": num_rows,
+                "size_mb": size_mb,
+            }
+        ]
+    )
+
     return table_data
