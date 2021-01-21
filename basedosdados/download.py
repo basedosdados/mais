@@ -392,7 +392,7 @@ def get_table_size(
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
     Returns:
         pd.DataFrame:
-            Columns: project_id, dataset_id, table_id, number of rows and size in megabytes(rounded
+            Columns: project_id, dataset_id, table_id, number of rows and size in megabytes (rounded
             to 2 decimal places) for the selected table.
     """
 
