@@ -213,19 +213,19 @@ def read_table(
 def list_datasets(
     query_project_id="basedosdados", filter_by=None, with_description=False
 ):
-    """Fetch a list of the datasets available at query_project_id
+    """Fetch the dataset_id of datasets available at query_project_id.
 
     Args:
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
         filter_by (str): Optional
-            String to be matched in dataset_id
+            String to be matched in dataset_id.
         with_description (bool): Optional
-            If True, fetch the dataset description for each dataset
+            If True, fetch the dataset description for each dataset.
 
     Returns:
         pd.Dataframe:
-            Dataframe with the dataset_ids available which match the search criteria
+            Dataframe with the dataset_ids available which match the search criteria.
     """
     client = bigquery.Client(credentials=credentials(), project=query_project_id)
 
@@ -253,7 +253,7 @@ def list_datasets(
 def list_dataset_tables(
     dataset_id, query_project_id="basedosdados", filter_by=None, with_description=False
 ):
-    """[summary]
+    """Fetch table_id for tables available at the specified dataset_id.
 
     Args:
         dataset_id (str): Optional.
@@ -261,13 +261,13 @@ def list_dataset_tables(
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
         filter_by (str): Optional
-            String to be matched in the table_id
+            String to be matched in the table_id.
         with_description (bool): Optional
-             If True, fetch table descriptions for each table that match the search criteria
+             If True, fetch table descriptions for each table that match the search criteria.
 
     Returns:
         pd.DataFrame:
-            DataFrame with table_id and/or description, which matches the search criteria
+            DataFrame with table_id and/or description, which matches the search criteria.
     """
     client = bigquery.Client(credentials=credentials(), project=query_project_id)
 
@@ -295,7 +295,7 @@ def list_dataset_tables(
 
 
 def get_dataset_description(dataset_id=None, query_project_id="basedosdados"):
-    """Prints the full dataset description
+    """Prints the specified dataset description.
 
     Args:
         dataset_id (str): Optional.
@@ -304,7 +304,7 @@ def get_dataset_description(dataset_id=None, query_project_id="basedosdados"):
             Which project the table lives. You can change this you want to query different projects.
 
     Returns:
-        None
+        None.
     """
 
     client = bigquery.Client(credentials=credentials(), query_project=project_id)
@@ -319,7 +319,7 @@ def get_dataset_description(dataset_id=None, query_project_id="basedosdados"):
 def get_table_description(
     dataset_id=None, table_id=None, query_project_id="basedosdados"
 ):
-    """Prints the queried table description
+    """Prints the specified table description.
 
     Args:
         dataset_id (str): Optional.
@@ -331,7 +331,7 @@ def get_table_description(
             Which project the table lives. You can change this you want to query different projects.
 
     Returns:
-        None
+        None.
     """
 
     client = bigquery.Client(credentials=credentials(), project=query_project_id)
@@ -345,7 +345,7 @@ def get_table_description(
 
 def get_table_columns(dataset_id=None, table_id=None, query_project_id="basedosdados"):
 
-    """Fetch the names, types and descriptions for the columns in the queried table
+    """Fetch the names, types and descriptions for the columns in the specified table.
 
     Args:
         dataset_id (str): Optional.
@@ -358,7 +358,7 @@ def get_table_columns(dataset_id=None, table_id=None, query_project_id="basedosd
 
     Returns:
         pd.DataFrame:
-            DataFrame with information on the queried table columns
+            DataFrame with information on the specified table columns.
     """
 
     client = bigquery.Client(credentials=credentials(), project=query_project_id)
@@ -377,7 +377,7 @@ def get_table_columns(dataset_id=None, table_id=None, query_project_id="basedosd
 def get_table_size(
     dataset_id, table_id, billing_project_id, query_project_id="basedosdados"
 ):
-    """Use a query to get the number of rows and size (in Mb) of a table query
+    """Use a query to get the number of rows and size (in Mb) of a table query.
     from BigQuery
 
     Args:
@@ -388,11 +388,12 @@ def get_table_size(
             It should always come with dataset_id.
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
-
+        billing_project_id (str): Optional.
+            Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
     Returns:
         pd.DataFrame:
             Columns: project_id, dataset_id, table_id, number of rows and size in megabytes(rounded
-            to 2 decimal places) for the selected table
+            to 2 decimal places) for the selected table.
     """
 
     billing_client = bigquery.Client(
