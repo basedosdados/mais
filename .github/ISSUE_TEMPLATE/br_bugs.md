@@ -3,7 +3,7 @@ name: PTBR | Bugs
 about: Crie um relatório para nos ajudar a melhorar
 title: ''
 labels: bug
-assignees: JoaoCarabetta, polvoazul
+assignees: fernandascovino
 
 ---
 
