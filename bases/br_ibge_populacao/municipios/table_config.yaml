@@ -1,7 +1,9 @@
 table_id: municipios # AUTO GENERATED
 dataset_id: br_ibge_populacao # AUTO GENERATED
 
-last_updated: 2020-10-12 # AUTO GENERATED
+version: 1.0.1
+
+last_updated: 2021-01-21 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
