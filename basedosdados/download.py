@@ -2,6 +2,7 @@ import pandas_gbq
 from pathlib import Path
 import pydata_google_auth
 from google.cloud import bigquery
+import pandas as pd
 
 from basedosdados.exceptions import BaseDosDadosException
 from pandas_gbq.gbq import GenericGBQException
@@ -211,9 +212,13 @@ def read_table(
 
 
 def list_datasets(
-    query_project_id="basedosdados", filter_by=None, with_description=False
+    query_project_id="basedosdados",
+    filter_by=None,
+    with_description=False,
+    table_format="github",
 ):
-    """Fetch the dataset_id of datasets available at query_project_id.
+    """Fetch the dataset_id of datasets available at query_project_id. Prints information on screen in markdown friendly
+    format.
 
     Args:
         query_project_id (str): Optional.
@@ -222,11 +227,11 @@ def list_datasets(
             String to be matched in dataset_id.
         with_description (bool): Optional
             If True, fetch the dataset description for each dataset.
-
+        table_format (str): Optional
+            Table format setting, passed to the tabulate method. Accepts values compatible with the tablefmt parameter
+            of tabulate (check available table formats at https://pypi.org/project/tabulate/)
     Returns:
-        pd.Dataframe:
-            Dataframe with the dataset_ids (with description or not in
-            a second column) available which match the search criteria.
+        None.
     """
     client = bigquery.Client(credentials=credentials(), project=query_project_id)
 
@@ -246,15 +251,21 @@ def list_datasets(
             client.get_dataset(dataset).description
             for dataset in datasets["dataset_id"]
         ]
-    # YOU CAN FETCH THE FULL DESCRIPTION USING PANDAS .loc METHOD ON THE DATAFRAME RETURNED
 
-    return datasets
+    print(datasets.to_markdown(tablefmt=table_format))
+
+    return None
 
 
 def list_dataset_tables(
-    dataset_id, query_project_id="basedosdados", filter_by=None, with_description=False
+    dataset_id,
+    query_project_id="basedosdados",
+    filter_by=None,
+    with_description=False,
+    table_format="github",
 ):
-    """Fetch table_id for tables available at the specified dataset_id.
+    """Fetch table_id for tables available at the specified dataset_id. Print the information on screen
+    in markdown friendly format.
 
     Args:
         dataset_id (str): Optional.
@@ -265,11 +276,11 @@ def list_dataset_tables(
             String to be matched in the table_id.
         with_description (bool): Optional
              If True, fetch table descriptions for each table that match the search criteria.
-
+        table_format (str): Optional
+            Table format setting, passed to the tabulate method. Accepts values compatible with the tablefmt parameter
+            of tabulate (check available table formats at https://pypi.org/project/tabulate/)
     Returns:
-        pd.DataFrame:
-            DataFrame with table_id (with description or not, in a
-            second column), which matches the search criteria.
+        None.
     """
     client = bigquery.Client(credentials=credentials(), project=query_project_id)
 
@@ -291,9 +302,14 @@ def list_dataset_tables(
             client.get_table(f"{dataset_id}.{table}").description
             for table in tables["table_id"]
         ]
-    # YOU CAN FETCH THE FULL DESCRIPTION USING PANDAS .loc METHOD ON THE DATAFRAME RETURNED
 
-    return tables
+    print(tables.to_markdown(tablefmt=table_format))
+
+    return None
+
+
+# Como todas as funções printam direto na tela, talvez as funções get_*_description sejam obsoletas,
+# devido à poder requisitar ao parâmetro de filtro e with_description das funções list
 
 
 def get_dataset_description(dataset_id=None, query_project_id="basedosdados"):
@@ -309,7 +325,7 @@ def get_dataset_description(dataset_id=None, query_project_id="basedosdados"):
         None.
     """
 
-    client = bigquery.Client(credentials=credentials(), query_project=project_id)
+    client = bigquery.Client(credentials=credentials(), project=query_project_id)
 
     dataset = client.get_dataset(dataset_id)
 
@@ -345,9 +361,15 @@ def get_table_description(
     return None
 
 
-def get_table_columns(dataset_id=None, table_id=None, query_project_id="basedosdados"):
+def get_table_columns(
+    dataset_id=None,
+    table_id=None,
+    query_project_id="basedosdados",
+    table_format="github",
+):
 
-    """Fetch the names, types and descriptions for the columns in the specified table.
+    """Fetch the names, types and descriptions for the columns in the specified table. Prints
+    information on screen in markdown friendly format.
 
     Args:
         dataset_id (str): Optional.
@@ -357,10 +379,11 @@ def get_table_columns(dataset_id=None, table_id=None, query_project_id="basedosd
             It should always come with dataset_id.
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
-
+        table_format (str): Optional
+            Table format setting, passed to the tabulate method. Accepts values compatible with the tablefmt parameter
+            of tabulate (check available table formats at https://pypi.org/project/tabulate/)
     Returns:
-        pd.DataFrame:
-            DataFrame with information on the specified table columns.
+        None.
     """
 
     client = bigquery.Client(credentials=credentials(), project=query_project_id)
@@ -373,14 +396,24 @@ def get_table_columns(dataset_id=None, table_id=None, query_project_id="basedosd
 
     description = pd.DataFrame(columns, columns=["name", "field_type", "description"])
 
-    return description
+    print(
+        description.to_markdown(
+            tablefmt=table_format, colalign=("left", "left", "center")
+        )
+    )
+
+    return None
 
 
 def get_table_size(
-    dataset_id, table_id, billing_project_id, query_project_id="basedosdados"
+    dataset_id,
+    table_id,
+    billing_project_id,
+    query_project_id="basedosdados",
+    table_format="github",
 ):
     """Use a query to get the number of rows and size (in Mb) of a table query
-    from BigQuery.
+    from BigQuery. Prints information on screen in markdown friendly format.
 
     Args:
         dataset_id (str): Optional.
@@ -392,10 +425,11 @@ def get_table_size(
             Which project the table lives. You can change this you want to query different projects.
         billing_project_id (str): Optional.
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
+        table_format (str): Optional
+            Table format setting, passed to the tabulate method. Accepts values compatible with the tablefmt parameter
+            of tabulate (check available table formats at https://pypi.org/project/tabulate/)
     Returns:
-        pd.DataFrame:
-            Columns: project_id, dataset_id, table_id, number of rows and size in megabytes (rounded
-            to 2 decimal places) for the selected table.
+        None
     """
 
     billing_client = bigquery.Client(
@@ -413,7 +447,7 @@ def get_table_size(
     table_data = pd.DataFrame(
         [
             {
-                "project_id": project_id,
+                "project_id": query_project_id,
                 "dataset_id": dataset_id,
                 "table_id": table_id,
                 "num_rows": num_rows,
@@ -422,4 +456,6 @@ def get_table_size(
         ]
     )
 
-    return table_data
+    print(table_data.to_markdown(tablefmt=table_format))
+
+    return None
