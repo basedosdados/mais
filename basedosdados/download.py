@@ -215,10 +215,10 @@ def list_datasets(
     query_project_id="basedosdados",
     filter_by=None,
     with_description=False,
-    table_format="github",
+    **tabulate_kwargs,
 ):
-    """Fetch the dataset_id of datasets available at query_project_id. Prints information on screen in markdown friendly
-    format.
+    """Fetch the dataset_id of datasets available at query_project_id. Prints information on
+    screen in markdown friendly format.
 
     Args:
         query_project_id (str): Optional.
@@ -227,12 +227,19 @@ def list_datasets(
             String to be matched in dataset_id.
         with_description (bool): Optional
             If True, fetch the dataset description for each dataset.
-        table_format (str): Optional
-            Table format setting, passed to the tabulate method. Accepts values compatible with the tablefmt parameter
-            of tabulate (check available table formats at https://pypi.org/project/tabulate/)
+        tabulate_kwargs (): Optional
+            Extra arguments accepted by tabulate(check available formatting options at
+             https://pypi.org/project/tabulate/). Declare as a dict.
+        Example:
+        list_datasets(
+        filter_by='sp',
+        with_description=True,
+        **{'tablefmt':'fancy_grid', 'colalign':('left','left','center')}
+        )
     Returns:
         None.
     """
+
     client = bigquery.Client(credentials=credentials(), project=query_project_id)
 
     datasets_list = list(client.list_datasets())
@@ -252,7 +259,7 @@ def list_datasets(
             for dataset in datasets["dataset_id"]
         ]
 
-    print(datasets.to_markdown(tablefmt=table_format))
+    print(datasets.to_markdown(**tabulate_kwargs))
 
     return None
 
@@ -262,10 +269,10 @@ def list_dataset_tables(
     query_project_id="basedosdados",
     filter_by=None,
     with_description=False,
-    table_format="github",
+    **tabulate_kwargs,
 ):
-    """Fetch table_id for tables available at the specified dataset_id. Print the information on screen
-    in markdown friendly format.
+    """Fetch table_id for tables available at the specified dataset_id. Prints the information
+    on screen in markdown friendly format.
 
     Args:
         dataset_id (str): Optional.
@@ -276,9 +283,16 @@ def list_dataset_tables(
             String to be matched in the table_id.
         with_description (bool): Optional
              If True, fetch table descriptions for each table that match the search criteria.
-        table_format (str): Optional
-            Table format setting, passed to the tabulate method. Accepts values compatible with the tablefmt parameter
-            of tabulate (check available table formats at https://pypi.org/project/tabulate/)
+         tabulate_kwargs (): Optional
+            Extra arguments accepted by tabulate(check available formatting options at
+             https://pypi.org/project/tabulate/). Declare as a dict.
+        Example:
+        list_dataset_tables(
+        dataset_id='br_ibge_censo2010'
+        filter_by='renda',
+        with_description=True,
+        **{'tablefmt':'fancy_grid', 'colalign':('left','left','center')}
+        )
     Returns:
         None.
     """
@@ -303,7 +317,7 @@ def list_dataset_tables(
             for table in tables["table_id"]
         ]
 
-    print(tables.to_markdown(tablefmt=table_format))
+    print(tables.to_markdown(**tabulate_kwargs))
 
     return None
 
@@ -365,7 +379,7 @@ def get_table_columns(
     dataset_id=None,
     table_id=None,
     query_project_id="basedosdados",
-    table_format="github",
+    **tabulate_kwargs,
 ):
 
     """Fetch the names, types and descriptions for the columns in the specified table. Prints
@@ -379,9 +393,15 @@ def get_table_columns(
             It should always come with dataset_id.
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
-        table_format (str): Optional
-            Table format setting, passed to the tabulate method. Accepts values compatible with the tablefmt parameter
-            of tabulate (check available table formats at https://pypi.org/project/tabulate/)
+        tabulate_kwargs (): Optional
+            Extra arguments accepted by tabulate(check available formatting options at
+             https://pypi.org/project/tabulate/). Declare as a dict.
+        Example:
+        get_table_columns(
+        dataset_id='br_ibge_censo2010',
+        table_id='pessoa_renda_setor_censitario',
+        **{'tablefmt':'fancy_grid', 'colalign':('left','left','center')}
+        )
     Returns:
         None.
     """
@@ -396,11 +416,7 @@ def get_table_columns(
 
     description = pd.DataFrame(columns, columns=["name", "field_type", "description"])
 
-    print(
-        description.to_markdown(
-            tablefmt=table_format, colalign=("left", "left", "center")
-        )
-    )
+    print(description.to_markdown(**tabulate_kwargs))
 
     return None
 
@@ -410,7 +426,7 @@ def get_table_size(
     table_id,
     billing_project_id,
     query_project_id="basedosdados",
-    table_format="github",
+    **tabulate_kwargs,
 ):
     """Use a query to get the number of rows and size (in Mb) of a table query
     from BigQuery. Prints information on screen in markdown friendly format.
@@ -425,9 +441,16 @@ def get_table_size(
             Which project the table lives. You can change this you want to query different projects.
         billing_project_id (str): Optional.
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
-        table_format (str): Optional
-            Table format setting, passed to the tabulate method. Accepts values compatible with the tablefmt parameter
-            of tabulate (check available table formats at https://pypi.org/project/tabulate/)
+         tabulate_kwargs (): Optional
+            Extra arguments accepted by tabulate(check available formatting options at
+            https://pypi.org/project/tabulate/). Declare as a dict.
+        Example:
+        get_table_size(
+        dataset_id='br_ibge_censo2010',
+        table_id='pessoa_renda_setor_censitario',
+        billing_project_id='yourprojectid'
+        **{'tablefmt':'fancy_grid', 'stralign':'center'}
+        )
     Returns:
         None
     """
@@ -456,6 +479,6 @@ def get_table_size(
         ]
     )
 
-    print(table_data.to_markdown(tablefmt=table_format))
+    print(table_data.to_markdown(**tabulate_kwargs))
 
     return None
