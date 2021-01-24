@@ -20,7 +20,7 @@ TIPOS:
 PS: Essa é uma view que busca dados do projeto `gabinete-compartilhado`. Os dados não estão 
 armazenados no storage do basedosdados.
 */
-CREATE VIEW basedosdados.br_imprensa_nacional_dou.secao_3 AS
+CREATE VIEW basedosdados-dev.br_imprensa_nacional_dou.secao_3 AS
 SELECT 
   identifica AS titulo,
   orgao,
