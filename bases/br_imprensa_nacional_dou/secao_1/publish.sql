@@ -29,7 +29,7 @@ SELECT
   resumo AS excerto,
   clean_text AS texto_principal,
   fulltext AS texto_completo,
-  assina,
+  assinatura,
   cargo,
   secao,
   edicao,

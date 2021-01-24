@@ -143,7 +143,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
     
     -   
-        name: assina
+        name: assinatura
         description: Nome de quem assina o ato. Note que algumas matérias não possuem assinatura ou a assinatura não estava identificada com a devida tag de HTML. Em caso de mais de uma pessoa assinando, os nomes aparecem separados por ' | '.
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
