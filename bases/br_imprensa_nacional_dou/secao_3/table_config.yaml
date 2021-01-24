@@ -1,7 +1,7 @@
 table_id: original # AUTO GENERATED
 dataset_id: br_imprensa_nacional_dou # AUTO GENERATED
 
-version: <v1.0> # REQUIRED
+version: v1.0 # REQUIRED
 
 last_updated: 2020-11-27 # AUTO GENERATED
 
