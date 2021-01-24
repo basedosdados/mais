@@ -10,6 +10,7 @@ Todas os dados na BD+ devem seguir o mesmo padrão de formatos e unidades de med
 - Horário (24h): HH:MM:SS
 - Datetime ([ISO-8601](https://en.wikipedia.org/wiki/ISO_8601)): YYYY-MM-DDTHH:MM:SS.sssZ
 - Valor nulo: `""` (csv), `NULL` (Python), `NA` (R), `.` ou `""` (Stata)
+- Porcentagem: entre 0-100
 
 ## Unidades de medida
 
