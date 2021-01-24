@@ -1,5 +1,21 @@
 
-
+#'
+#' Bare custom R-centric query
+#' @param table1 string containing the main table to be queried
+#' @param table2 string containing an optional table to be joined
+#'
+#'
+#'
+#'
+#'
+#' @examples
+#'
+#' query_table(
+#'   pib.id_municipio,
+#'   pib.PIB,
+#'   table1 = "basedosdados.br_ibge_pib.municipios as pib")
+#'
+#'
 
 query_table <- function(
   ...,
@@ -64,9 +80,5 @@ query_table <- function(
 
 }
 
-query_table(
-  pib.id_municipio,
-  pib.PIB,
-  table1 = "basedosdados.br_ibge_pib.municipios as pib")
 
 

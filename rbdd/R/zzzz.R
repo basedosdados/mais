@@ -1,0 +1,27 @@
+
+
+#'
+#'
+#'
+#'
+#'
+#'
+#' @imports cli
+
+
+.onLoad <- function() {
+
+  Sys.setenv(billing_project_set = FALSE)
+
+  cli::cli_h1("Base dos Dados: Facilitando o acesso a dados no Brasil")
+  cli::cli_h2("Contatos")
+  cli::cli_ul()
+  cli::cli_li("Twitter: @basedosdados")
+  cli::cli_li("Email: contato@basedosdados.org")
+  cli::cli_li("Telegram: https://t.me/joinchat/OKWc3RnClXnq2hq-8o0h_w")
+  cli::cli_li("Apoia.se: https://apoia.se/basedosdados")
+
+
+
+
+}
