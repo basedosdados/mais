@@ -20,7 +20,6 @@ TIPOS:
 PS: Essa é uma view que busca dados do projeto `gabinete-compartilhado`. Os dados não estão 
 armazenados no storage do basedosdados.
 */
-
 CREATE VIEW basedosdados.br_imprensa_nacional_dou.secao_3 AS
 SELECT 
   identifica AS titulo,
@@ -40,4 +39,4 @@ SELECT
   url_certificado AS url_versao_certificada,
   capture_date AS data_captura,
   part_data_pub AS data_publicacao_particao
-FROM `gabinete-compartilhado.views_publicos.br_imprensa_nacional_dou_3`
+FROM `gabinete-compartilhado.views_publicos.br_imprensa_nacional_dou_3` AS t

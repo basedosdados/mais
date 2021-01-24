@@ -1,9 +1,9 @@
-table_id: original # AUTO GENERATED
 dataset_id: br_imprensa_nacional_dou # AUTO GENERATED
+table_id: secao_2 # AUTO GENERATED
 
 version: v1.0 # REQUIRED
 
-last_updated: 2020-11-27 # AUTO GENERATED
+last_updated: 2021-01-24 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -88,6 +88,7 @@ coverage_geo:
 coverage_time:
     - 2019
     - 2020
+    - 2021
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -132,7 +133,7 @@ columns: # REQUIRED
   
     -   
         name: texto_principal
-        description: Texto principal da matéria, isto é: o texto completo excluídas as informações presentes em outras colunas (e.g. título, ementa, data de publicação, etc). 
+        description: Texto principal da matéria, i.e. o texto completo excluídas as informações presentes em outras colunas (e.g. título, ementa, data de publicação, etc). 
         is_in_staging: False # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
