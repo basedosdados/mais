@@ -20,21 +20,31 @@ extra:
   version: 2.0
   social:
     - icon: fontawesome/brands/twitter
-      link: https://twitter.com/basedosdados?lang=en
+      link: https://twitter.com/basedosdados
 
 nav:
   - Introdução: index.md
-  - Acessando os dados: 
+  - Acesso: 
     - BigQuery: access_data_bq.md
     - Local: access_data_local.md
-  - Documentação da API: 
+  - Colaboração: 
+    - Dados:
+      - Início: data_start.md
+      - Limpar: data_clean.md
+      - Subir: data_upload.md
+      - Revisão: data_review.md
+    - Manual de estilo:
+      - Bases e tabelas: style_naming_datasets_tables.md
+      - Colunas: style_naming_columns.md
+      - Valores: style_data.md
+  - Diversão:
+    - Início: fun_start.md
+    - Chaves externas: fun_foreign_keys.md
+  - API: 
     - Python: py_reference_api.md
     - CLI: cli_reference_api.md
-  - Nomenclatura: 
-    - Conjuntos e tabelas: data_naming_rules.md
-    - Colunas: variable_naming_rules.md
-  - Contribua! 💚:
-    - Como contribuir: github.md
+  - Apoie! 💚: 
+    - Nos apoie: support.md
 
 markdown_extensions:
   - admonition
