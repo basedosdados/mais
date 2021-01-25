@@ -33,14 +33,11 @@ nav:
       - Bases e tabelas: style_naming_datasets_tables.md
       - Colunas: style_naming_columns.md
       - Valores: style_data.md
-  - Analisar:
-    - Início: fun_start.md
-    - Chaves externas: fun_foreign_keys.md
+  - Analisar: analysis.md
   - API: 
     - Python: py_reference_api.md
     - CLI: cli_reference_api.md
-  - Apoie! 💚: 
-    - Nos apoie: support.md
+  - Apoie! 💚: support.md
 
 markdown_extensions:
   - admonition
