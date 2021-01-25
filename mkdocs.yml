@@ -33,11 +33,13 @@ nav:
       - Bases e tabelas: style_naming_datasets_tables.md
       - Colunas: style_naming_columns.md
       - Valores: style_data.md
-  - Analisar: analysis.md
+  - Analisar:
+      - Início: analysis.md
   - API: 
     - Python: py_reference_api.md
     - CLI: cli_reference_api.md
-  - Apoie! 💚: support.md
+  - Apoie! 💚:
+    - Início: support.md
 
 markdown_extensions:
   - admonition

@@ -6,20 +6,20 @@
 </p>
 
 <p align="center">
-    <em>Mecanismo de busca e <b>repositório</b> de bases de dados brasileiras e internacionais.</em>
+    <em>Trabalhando pela universalização do uso de dados no Brasil</em>
 </p>
 
 ---
 
 # Base dos Dados Mais
 
-Uma simples consulta de SQL é o suficiente para cruzamento de bases que
-você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor
-e subir clusters.
+A missão da [Base dos Dados](https://basedosdados.org/) é **universalizar o uso de dados** no Brasil. Acreditamos que a distância entre uma pessoa e uma análise deveria ser apenas uma boa ideia.
 
-Nosso repositório traz acesso, rapidez, escala, facilidade, economia, curadoria, e transparência ao cenário de dados no Brasil.
+Para realizar essa visão, nós construímos a Base dos Dados Mais (BD+): um repositório integrado de dados. Essa ferramenta traz acesso, rapidez, escala, facilidade, economia, curadoria, e transparência ao cenário de dados no Brasil.
 
 Todos os nossos dados ficam organizados e disponíveis na nuvem dentro da ferramenta da Google chamada [BigQuery](https://cloud.google.com/bigquery).
+
+Uma simples consulta de SQL é o suficiente para cruzamento de bases que você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor e subir clusters na nuvem.
 
 ### Por que o BigQuery?
 

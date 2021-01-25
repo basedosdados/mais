@@ -5,10 +5,10 @@ bases de dados de centenas de fontes e também mantê-las **consistentes
 entre si, atualizadas, e úteis**.
 
 Nossa intenção é que **qualquer pessoa possa colaborar** com seu
-conhecimento sobre dados públicos, seguindonossa metodologia e
+conhecimento sobre dados públicos, seguindo nossas metodologias e
 procedimentos de limpeza e validação dos dados.
 
-!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/T2nbPNty) para tirar dúvidas e interagir com outrxs colaboradorxs! :)"
+!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/T2nbPNty) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
 
 ## Qual o procedimento?
 
@@ -21,9 +21,9 @@ Adicionar bases novas na BD+ deve seguir nosso fluxo de trabalho:
 
 ## 1. Informe seu interesse para a gente
 
-Mantemos metadados de bases que ainda não estão no BD+ em nossa
+Mantemos metadados de bases que ainda não estão na BD+ em nossa
 [tabela de prioridade de bases](https://docs.google.com/spreadsheets/d/1jnmmG4V6Ugh_-lhVSMIVu_EaL05y1dX9Y0YW8G8e_Wo/edit?usp=sharing).
-Para subir uma base de seu interesse no BD+, adicione os seus metadados
+Para subir uma base de seu interesse na BD+, adicione os seus metadados
 acordo com as colunas da tabela.
 
 - **Inclua uma linha por tabela do conjunto de dados.**
@@ -36,10 +36,27 @@ acordo com as colunas da tabela.
 
 ## 2. Limpe e trate os dados
 
+#### Estrutura de pastas
+
+Sugerimos fortemente a seguinte estrutura local de pastas para o trabalho nos dados. Crie quatro pastas dentro da pasta raíz:
+
+- `/code`
+    - Aqui ficam todos os _scripts_ necessários à limpeza dos dados.
+- `/input`
+    - Aqui ficam todos os arquivos com dados originais, como baixados da fonte primária.
+    - Esses arquivos não devem jamais ser modificados.
+- `/output`
+    - Aqui ficam só os arquivos finais, já como serão subidos na BD+.
+- `/tmp`
+    - Essa pasta é usada para quaisquer arquivos temporários criados por _scripts_ em `/code` no processo de limpeza e tratamento.
+
+Logo, toda a estrutura de código será com atalhos _relativos_ à pasta raíz, usando as subpastas criadas.
+
 #### Captura dos dados
-De início, baixe os dados originais (idealmente forma automatizada, mas
-não obrigatório) e organize os dados numa pasta `/input` com atalho relativo à
-pasta raiz incluindo o código. - TODO: como explicar melhor aqui?
+
+De início, baixe os dados originais e os organize na pasta `/input`.
+
+Idealmente esse processo deve ser automatizado por um _script_ específico que possa ser reutilizado, mas isso não é obrigatório.
 
 #### Arquitetura dos dados
 
@@ -50,15 +67,13 @@ limpeza**. Perguntas que uma arquitetura deve responder:
 - *Qual é nível da observação de cada tabela?* O "nível da observação" é
   a menor unidade a que se refere cada linha na tabela (ex: municipio-ano, candidato,
   estabelecimento-cnae).
-- É preciso fazer algum tipo de `reshape` na tabela, de `wide` para
-  `long` ou vice-versa? - TODO: como explicar melhor aqui?
 - Será gerada alguma tabela derivada com agregações em cima dos dados originais?
 
 #### Limpeza dos dados
 
 A limpeza de dados é parte fundamental da nossa estrutura. O código deve seguir [boas práticas de
 programação](https://en.wikipedia.org/wiki/Best_coding_practices) na
-linguagem e sua preferência, e os dados devem ser tratados garantindo
+linguagem de sua preferência, e os dados devem ser tratados garantindo
 que:
 
 - As colunas seguem as [diretrizes Base dos Dados](/style_namind_columns)
@@ -73,39 +88,28 @@ Desenvolvemos um cliente `basedosdados` (disponível para linha de
 comando e Python por enquanto) para facilitar esse processo e indicar
 configurações básicas que devem ser preenchidas sobre os dados.
 
-1. Configure seu projeto no Google Cloud e um _Bucket_ no Google Storage
+1. Configure seu projeto no Google Cloud e um _bucket_ no Google Storage.
+    - Agora no seu terminal:
+        - Instale nosso cliente: `pip install basedosdados`.
+        - Rode e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Googl Cloud: `basedosdados config`.
 
-TODO: add explicação geral + revisar passo a passo com clareza.
+2. Suba e configure uma tabela no seu _bucket_.
+    - Siga o comando `basedosdados table create [DATASET_ID] [TABLE_ID]`.
+    - Preencha todos os arquivos de configuração:
+        - `README.md`: informações básicas da base de dados aparecendo no Github
+        - `dataset_config.yaml`: informações específicas da base de dados
+        - `/[TABLE_ID]/table_config.yaml`: informações específicas da tabela
+        - `/[TABLE_ID]/publish.sql`: informações da publicação da tabela (os tipos de variáveis do [BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) são `STRING`, `INT64`, `FLOAT64`, `DATE`)
 
-Agora no seu terminal:
-- Instale nosso cliente: `pip install basedosdados`
-- Rode e siga o passo a passo para configurar localmente com as
-  credenciais de seu projeto no Googl Cloud: `basedosdados config`
-
-2. Suba e configure uma tabela no seu _Bucket_
-
-- Siga o comando `basedosdados table create [DATASET_ID] [TABLE_ID]`.
-- Preencha todos os arquivos de configuração:
-    - `README.md`: informações básicas da base de dados aparecendo no Github
-    - `dataset_config.yaml`: informações específicas da base de dados
-    - `/<table_id>/table_config.yaml`: informações específicas da tabela
-    - `/<table_id>/publish.sql`: informações da publicação da tabela (os
-      tipos de variáveis do
-      [BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
-      são `STRING`, `INT64`, `FLOAT64`, `DATE`)
-
-3. Publique a versão pronta no seu _bucket_ com: `basedosdados table
-   publish`.
+3. Publique a versão pronta no seu _bucket_ com: `basedosdados table publish`.
 
 !!! Tip "Consulte nossa [API](/cli_reference_api) para mais detalhes de cada método."
 
 ## 4. Envie código e dados prontos para revisão
 
-Basta seguir o passo a passo do comando `basedosdados table release`.
-Isto irá criar um pull request no nosso Github para validarmos.
+Basta seguir o passo a passo do comando `basedosdados table release`. Isto irá criar um pull request no nosso Github para validarmos.
 
-As etapas de validação que seguimos (devem ser feitas por outra pessoa
-além de quem subiu os dados) são:
+As etapas de validação que seguimos (devem ser feitas por outra pessoa além de quem subiu os dados) são:
 
 - Testar a query sem limite de observações;
 - Revisar todos os campos dos arquivos de configuração;
