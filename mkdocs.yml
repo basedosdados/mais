@@ -24,20 +24,16 @@ extra:
 
 nav:
   - Introdução: index.md
-  - Acesso: 
+  - Como acessar: 
     - BigQuery: access_data_bq.md
     - Local: access_data_local.md
-  - Colaboração: 
-    - Dados:
-      - Início: data_start.md
-      - Limpar: data_clean.md
-      - Subir: data_upload.md
-      - Revisão: data_review.md
+  - Colaborar: 
+    - Dados: colab_data.md
     - Manual de estilo:
       - Bases e tabelas: style_naming_datasets_tables.md
       - Colunas: style_naming_columns.md
       - Valores: style_data.md
-  - Diversão:
+  - Analisar:
     - Início: fun_start.md
     - Chaves externas: fun_foreign_keys.md
   - API: 
