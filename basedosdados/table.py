@@ -171,6 +171,7 @@ class Table(Base):
                     table_id=self.table_id,
                     dataset_id=self.dataset_folder.stem,
                     project_id=self.client["bigquery_staging"].project,
+                    project_id_prod=self.client["bigquery_prod"].project,
                     columns=columns,
                     partition_columns=partition_columns,
                     now=datetime.datetime.now().strftime("%Y-%m-%d"),

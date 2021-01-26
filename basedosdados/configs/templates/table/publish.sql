@@ -18,7 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-{% set project = project_id %}
+{% set project = project_id_prod %}
 CREATE VIEW {{ project }}.{{ dataset_id }}.{{ table_id }} AS
 SELECT 
 {% for column in columns|list + partition_columns|list -%}
