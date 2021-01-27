@@ -18,9 +18,10 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+
+CREATE VIEW basedosdados.br_ibge_censo2010.entorno05_setor_censitario AS
 SELECT 
-SAFE_CAST(cod_setor AS INT64) cod_setor,
-SAFE_CAST(situacao_setor AS INT64) situacao_setor,
+SAFE_CAST(id_setor_censitario AS INT64) id_setor_censitario,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(v843 AS INT64) v843,
 SAFE_CAST(v844 AS INT64) v844,

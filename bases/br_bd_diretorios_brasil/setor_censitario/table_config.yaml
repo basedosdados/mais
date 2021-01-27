@@ -1,29 +1,27 @@
-table_id: domicilio_renda_setor_censitario # AUTO GENERATED
-dataset_id: br_ibge_censo2010 # AUTO GENERATED
+table_id: br_bd_diretorios_brasil # AUTO GENERATED
+dataset_id: setor_censitario # AUTO GENERATED
 
-last_updated: 2020-11-30 # AUTO GENERATED
+last_updated: 2021-01-27 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Informações de renda dos domicílios por setor censitário
-
+    Diretório de referência para os setores censitário. Contem o id_setor_censitario, que permite ligar informações (município, distritro, etc) com as tabelas do Censo2010
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
     nome: Diego Oliveira
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo2010/code   # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code   # REQUIRED
     website: github.com/d116626
     email: ds.oliveira404@gmail.com
 
-
 published_by:
     name: Diego Oliveira   # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo2010/code   # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code   # REQUIRED
     website: github.com/d116626
     email: ds.oliveira404@gmail.com
 
@@ -70,84 +68,67 @@ columns: # REQUIRED
       description: Sigla do Estado
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: true       # Bool [True, False], whether the column is a partition.
-
-    - name: v001
-      description: Total de domicílios particulares improvisados
+    
+    - name: id_municipio
+      description: ID Município - IBGE 7 Dígitos
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
 
-    - name: v002
-      description: Total do rendimento nominal mensal dos domicílios  particulares
+    - name: id_rm
+      description: ID da região metropolitana ou RIDE
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
 
-    - name: v003
-      description: Total do rendimento nominal mensal dos domicílios  particulares permanentes
+    - name: nome_rm
+      description: Nome da região metropolitana ou RIDE
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
 
-    - name: v004
-      description: Total do rendimento nominal mensal dos domicílios  particulares improvisados
+    - name: id_distrito
+      description: ID do distrito
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
 
-    - name: v005
-      description: Domicílios particulares com rendimento nominal  mensal domiciliar per
-        capita de até 1/8 salário  mínimo
+    - name: nome_distrito
+      description: Nome do distrito
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
 
-    - name: v006
-      description: Domicílios particulares com rendimento nominal  mensal domiciliar per
-        capita de mais de 1/8 a 1/4  salário mínimo
+    - name: id_subdistrito
+      description: ID do subdistrito
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
 
-    - name: v007
-      description: Domicílios particulares com rendimento nominal  mensal domiciliar per
-        capita de mais de 1/4 a 1/2  salário mínimo
+    - name: nome_subdistrito
+      description: Nome do subdistrito
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
 
-    - name: v008
-      description: Domicílios particulares com rendimento nominal  mensal domiciliar per
-        capita de mais de 1/2 a 1  salário mínimo
+    - name: id_bairro
+      description: ID de bairro
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
 
-    - name: v009
-      description: Domicílios particulares com rendimento nominal  mensal domiciliar per
-        capita de mais de 1 a 2  salários mínimos
+    - name: nome_bairro
+      description: Nome do bairro
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
 
-    - name: v010
-      description: Domicílios particulares com rendimento nominal  mensal domiciliar per
-        capita de mais de 2 a 3  salários mínimos
+    - name: situacao_setor
+      description: "– ID de situação do setor - Situação urbana - IDs 1, 2 e 3;
+      1 - Área urbanizada de cidade ou vila
+      2 - Área não urbanizada de cidade ou vila
+      3 - Área urbana isolada - Situação rural
+      – IDs 4, 5, 6, 7 e 8;
+      4 - Aglomerado rural de extensão urbana
+      5 - Aglomerado rural isolado, povoado
+      6 - Aglomerado rural isolado, núcleo
+      7 - Aglomerado rural isolado, outros aglomerados
+      8 - Zona rural, exclusive aglomerado rural"
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
 
-    - name: v011
-      description: Domicílios particulares com rendimento nominal  mensal domiciliar per
-        capita de mais de 3 a 5  salários mínimos
+    - name: tipo_setor
+      description: Tipo de setor censitário
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
-
-    - name: v012
-      description: Domicílios particulares com rendimento nominal  mensal domiciliar per
-        capita de mais de 5 a 10  salários mínimos
-      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
-      is_partition: false       # Bool [True, False], whether the column is a partition.
-
-    - name: v013
-      description: Domicílios particulares com rendimento nominal  mensal domiciliar per
-        capita de mais de 10 salários  mínimos
-      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
-      is_partition: false       # Bool [True, False], whether the column is a partition.
-
-    - name: v014
-      description: Domicílios particulares sem rendimento nominal  mensal domiciliar per
-        capita
-      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
-      is_partition: false       # Bool [True, False], whether the column is a partition.
-

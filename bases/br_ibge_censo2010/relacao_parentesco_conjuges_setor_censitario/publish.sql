@@ -18,9 +18,10 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+
+CREATE VIEW basedosdados.br_ibge_censo2010.relacao_parentesco_conjuges_setor_censitario AS
 SELECT 
-SAFE_CAST(cod_setor AS INT64) cod_setor,
-SAFE_CAST(situacao_setor AS INT64) situacao_setor,
+SAFE_CAST(id_setor_censitario AS INT64) id_setor_censitario,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(v001 AS INT64) v001,
 SAFE_CAST(v002 AS INT64) v002,
@@ -234,5 +235,5 @@ SAFE_CAST(v209 AS INT64) v209,
 SAFE_CAST(v210 AS INT64) v210,
 SAFE_CAST(v211 AS INT64) v211,
 SAFE_CAST(v212 AS INT64) v212,
-SAFE_CAST(v213 AS INT64) v213
+SAFE_CAST(v213 AS INT64) v213,
 from basedosdados-staging.br_ibge_censo2010_staging.relacao_parentesco_conjuges_setor_censitario as t

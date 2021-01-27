@@ -39,7 +39,7 @@ data_update_frequency: 10 anos      # REQUIRED
 # Regras: minúsculo, sem acento, singular.
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
-    - cod_setor
+    - id_setor_censitario
     - sigla_uf
 
 coverage_geo:
@@ -60,8 +60,8 @@ partitions: # REQUIRED
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
-    - name: cod_setor
-      description: Código do setor censitário
+    - name: id_setor_censitario
+      description: ID do setor censitário
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
 
@@ -69,20 +69,6 @@ columns: # REQUIRED
       description: Sigla do Estado
       is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: true       # Bool [True, False], whether the column is a partition.
-
-    - name: situacao_setor
-      description: "– Código de situação do setor - Situação urbana - Códigos 1, 2 e 3;
-      1 - Área urbanizada de cidade ou vila
-      2 - Área não urbanizada de cidade ou vila
-      3 - Área urbana isolada - Situação rural
-      – Códigos 4, 5, 6, 7 e 8;
-      4 - Aglomerado rural de extensão urbana
-      5 - Aglomerado rural isolado, povoado
-      6 - Aglomerado rural isolado, núcleo
-      7 - Aglomerado rural isolado, outros aglomerados
-      8 - Zona rural, exclusive aglomerado rural"
-      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
-      is_partition: false       # Bool [True, False], whether the column is a partition.
 
     - name: v001
       description: Pessoas de 10 anos ou mais de idade com rendimento  nominal mensal
