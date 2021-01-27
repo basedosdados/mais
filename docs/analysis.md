@@ -22,7 +22,7 @@ Podemos cruzar tabelas na BD+ fazendo _joins_ em cima de **chaves externas** (_f
 
 - Setor censitário: `id_setor_censitario`
 
-- Município: `id_municipio` (padrão), `id_municipio_6`, `id_municipio_tse`, `id_municipio_rf`, `id_municipio_bcb` (alternativos)
+- Município: `id_municipio` (padrão), `id_municipio_6`, `id_municipio_tse`, `id_municipio_rf`, `id_municipio_bcb`
 
 - Área Mínima Comparável: `id_AMC`
 
@@ -34,7 +34,7 @@ Podemos cruzar tabelas na BD+ fazendo _joins_ em cima de **chaves externas** (_f
 
 - Mesorregião: `id_mesorregiao`
 
-- Unidade da federação (UF):  `sigla_uf`, `id_uf`, (padrões), `uf` (alternativo)
+- Unidade da federação (UF):  `sigla_uf` (padrão), `id_uf`, `uf`
 
 - Região: `regiao`
 
