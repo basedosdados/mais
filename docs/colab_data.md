@@ -15,7 +15,7 @@ procedimentos de limpeza e validação dos dados.
 Adicionar bases novas na BD+ deve seguir nosso fluxo de trabalho:
 
 1. [Informe seu interesse para a gente](#1-informe-seu-interesse-para-a-gente).
-3. [Limpe e trate dados](#2-limpe-e-trate-os-dados).
+2. [Limpe e trate dados](#2-limpe-e-trate-os-dados).
 3. [Suba dados no BigQuery](#3-suba-dados-no-bigquery)
 4. [Envie código e dados prontos para revisão.](#4-envie-codigo-e-dados-prontos-para-revisao) 
 
@@ -38,25 +38,23 @@ acordo com as colunas da tabela.
 
 #### Estrutura de pastas
 
-Sugerimos fortemente a seguinte estrutura local de pastas para o trabalho nos dados. Crie quatro pastas dentro da pasta raíz:
+Sugerimos a seguinte estrutura local da pasta que você irá trabalhar:
 
 - `/code`
-    - Aqui ficam todos os _scripts_ necessários à limpeza dos dados.
+    - Pasta onde ficam todos os _scripts_ (códigos) necessários à
+      limpeza dos dados. Nessa configuração, toda a estrutura de código
+      será com atalhos _relativos_ à pasta raíz, usando as demais pastas criadas.
 - `/input`
-    - Aqui ficam todos os arquivos com dados originais, como baixados da fonte primária.
-    - Esses arquivos não devem jamais ser modificados.
+    - Pasta onde ficam todos os arquivos com dados originais, como
+      baixados da fonte primária. *Esses arquivos não devem jamais ser modificados.*
 - `/output`
-    - Aqui ficam só os arquivos finais, já como serão subidos na BD+.
+    - Pasta para arquivos finais, já no formato e conteúdo prontos para subir na BD+.
 - `/tmp`
-    - Essa pasta é usada para quaisquer arquivos temporários criados por _scripts_ em `/code` no processo de limpeza e tratamento.
-
-Logo, toda a estrutura de código será com atalhos _relativos_ à pasta raíz, usando as subpastas criadas.
+    - Pasta usada para quaisquer arquivos temporários criados pelos códigos em `/code` no processo de limpeza e tratamento.
 
 #### Captura dos dados
 
-De início, baixe os dados originais e os organize na pasta `/input`.
-
-Idealmente esse processo deve ser automatizado por um _script_ específico que possa ser reutilizado, mas isso não é obrigatório.
+De início, baixe os dados originais e os organize na pasta `/input`. Idealmente esse processo deve ser automatizado por um _script_ específico que possa ser reutilizado, mas isso não é obrigatório.
 
 #### Arquitetura dos dados
 
@@ -88,10 +86,22 @@ Desenvolvemos um cliente `basedosdados` (disponível para linha de
 comando e Python por enquanto) para facilitar esse processo e indicar
 configurações básicas que devem ser preenchidas sobre os dados.
 
-1. Configure seu projeto no Google Cloud e um _bucket_ no Google Storage.
-    - Agora no seu terminal:
-        - Instale nosso cliente: `pip install basedosdados`.
-        - Rode e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Googl Cloud: `basedosdados config`.
+1. Configure seu projeto no Google Cloud e um _bucket_ no Google
+   Storage.
+
+Para criar um projeto no Google Cloud basta ter um email cadastrado no
+Google. Basta seguir o passo-a-passo:
+
+- Acesse o [link](https://console.cloud.google.com/projectselector2/home/dashboard) e aceite o Termo de Serviços do Google Cloud
+- Clique em `Create Project/Criar Projeto` - escolha um nome bacana para
+  o seu projeto, ele terá também um `Project ID` que será utilizado
+  para configuração local.
+- Depois de criado o projeto, vá até a funcionalidade de
+  [Storage](https://console.cloud.google.com/storage) e crie uma
+  pasta, seu _bucket_, para você subir os dados.
+- Por fim, no seu terminal:
+    - Instale nosso cliente: `pip install basedosdados`.
+    - Rode `basedosdados config` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Googl Cloud.
 
 2. Suba e configure uma tabela no seu _bucket_.
     - Siga o comando `basedosdados table create [DATASET_ID] [TABLE_ID]`.
