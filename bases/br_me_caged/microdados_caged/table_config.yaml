@@ -1,0 +1,298 @@
+table_id: microdados_caged # AUTO GENERATED
+dataset_id: br_me_caged # AUTO GENERATED
+
+version: v1.0 # REQUIRED
+
+last_updated: 2021-01-27 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Microdados públicos do CAGED
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Diego Oliveira  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code # REQUIRED
+    website: ftp://ftp.mtps.gov.br/pdet/microdados/CAGED/
+    email: ds.oliveira404@gmail.com
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Diego Oliveira  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    Unificação de todos os anos e meses, padronização do nomes de colunas, erros de valores, etc.
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+data_update_frequency: 1 mes # REQUIRED 
+
+# Nível da observação: quais colunas identificam uma linha unicamente?
+# Escolha todas as opções necessárias.
+# Regras: minúsculo, sem acento, singular.
+# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level:
+    - 
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: pre-1999, 2000, 2001, ..., 2019, 2020
+coverage_time:
+    - 2007
+    - 2008
+    - 2009
+    - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - ano  
+    - mes  
+    - sigla_uf
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+    
+    -   name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+
+    -   name: mes
+        description: Mês
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+
+    -   name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: id_municipio_6
+        description: ID Município - IBGE 6 Dígitos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+    
+    -   name: sigla_uf
+        description: Sigla da Unidade da Federação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+
+    -   name: admitidos_desligados
+        description: Admissão ou Desligamento
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: cbo_2002_ocupacao
+        description: Classificação Brasileira de Ocupações, criada em 2002
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: cnae_10_classe
+        description: Classe de Atividade Econômica segundo a classificação CNAE/95, convertida a partir da Classe CNAE 20, disponível a partir de 01/2008
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: cnae_20_classe
+        description: Classe de Atividade Econômica, segundo classificação CNAE - versão 2.0
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: cnae_20_subclas
+        description: Subclasse de Atividade Econômica, segundo classificação CNAE - versão 2.0 a partir de 2006
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: faixa_empr_inicio_jan
+        description: Tamanho do estabelecimento em janeiro do ano de referência
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: grau_instrucao
+        description: Grau de instrução ou escolaridade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: qtd_hora_contrat
+        description: Quantidade de horas contratuais por semana
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: ibge_subsetor
+        description: Subsetor Econômico segundo IBGE 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: idade
+        description: Idade do trabalhador (quando acumulada representa a soma das idades)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: ind_aprendiz
+        description: Indicador de movimentação referente a contrato de aprendizagem
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: ind_portador_defic
+        description: Indicador se o empregado/servidor de portador de deficiência habilitado ou beneficiário reabilitado
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: raca_cor
+        description: Raça e Cor do Trabalhador - disponível a partir de 01/2007
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: salario_mensal
+        description: Salário mensal em moeda corrente
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: saldo_mov
+        description: Saldo de movimentação (1 para admissão e -1 para desligamento)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: sexo
+        description: Sexo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: tempo_emprego
+        description: Tempo de emprego do trabalhador (quando acumulada representa a soma dos meses)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: tipo_estab
+        description: Tipo de estabelecimento
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: tipo_defic
+        description: Tipo de deficiência/Beneficiário habilitado
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: tipo_mov_desagregado
+        description: Tipo de movimento
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: bairros_sp
+        description: Bairros do Municipio de São Paulo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: bairros_fortaleza
+        description: Bairros do município de Fortaleza
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: bairros_rj
+        description: Bairros do município do Rio de Janeiro
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: distritos_sp
+        description: Distritos do município de São Paulo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: regioes_adm_df
+        description: Regiões Administrativas do Distrito Federal
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: regiao_adm_rj
+        description: Região Adm RJ
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: regiao_adm_sp
+        description: Região Adm SP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: regiao_corede
+        description: Regiao Corede
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: regiao_corede_04
+        description: Regiao Corede 04
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: regiao_gov_sp
+        description: Regiao Gov SP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: regiao_senac_pr
+        description: Regiao Senac PR
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: regiao_senai_pr
+        description: Regiao Senai PR
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: regiao_senai_sp
+        description: Regiao Senai SP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: subregiao_senai_pr
+        description: Sub-Regiao Senai PR
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: ind_trab_parcial
+        description: Indicador de movimentação referente a contrato parcial (a partir de 052018 - devendo retroagir a partir de 11/2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   name: ind_trab_intermitente
+        description: Indicador de movimentação referente a contrato intermitente (a partir de 052018 - devendo retroagir a partir de 11/2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
