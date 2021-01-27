@@ -6,27 +6,20 @@
 </p>
 
 <p align="center">
-    <em>Mecanismo de busca e <b>repositório</b> de bases de dados brasileiras e internacionais.</em>
+    <em>Trabalhando pela universalização do uso de dados no Brasil</em>
 </p>
 
 ---
 
 # Base dos Dados Mais
 
-Uma simples consulta de SQL é o suficiente para cruzamento de bases que
-você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor
-e subir clusters.
+A missão da [Base dos Dados](https://basedosdados.org/) é **universalizar o uso de dados** no Brasil. Acreditamos que a distância entre uma pessoa e uma análise deveria ser apenas uma boa ideia.
 
-Nosso repositório traz acesso, rapidez, escala, facilidade, economia, 
-curadoria, e transparência ao cenário de dados no Brasil.
+Para realizar essa visão, nós construímos a Base dos Dados Mais (BD+): um repositório integrado de dados. Essa ferramenta traz acesso, rapidez, escala, facilidade, economia, curadoria, e transparência ao cenário de dados no Brasil.
 
-<div align="center">
-    <a align="center"
-    href="https://console.cloud.google.com/bigquery?p=basedosdados&page=project"
-    title="{{ lang.t('source.link.title')}}" class="md-button">
-        Clique para acessar o projeto no BigQuery
-    </a>
-</div>
+Todos os nossos dados ficam organizados e disponíveis na nuvem dentro da ferramenta da Google chamada [BigQuery](https://cloud.google.com/bigquery).
+
+Uma simples consulta de SQL é o suficiente para cruzamento de bases que você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor e subir clusters na nuvem.
 
 ### Por que o BigQuery?
 
@@ -41,6 +34,15 @@ curadoria, e transparência ao cenário de dados no Brasil.
   TB gratuito por mês para usar como quiser**. Depois disso, são cobrados
   somente 5 dólares por TB de dados que sua query percorrer.
 
+<div align="center">
+    <a align="center"
+    href="https://console.cloud.google.com/bigquery?p=basedosdados&page=project"
+    title="{{ lang.t('source.link.title')}}" class="md-button">
+        Clique para acessar o projeto no BigQuery
+    </a>
+</div>
+
+
 ----
 
 ## Quick Start
@@ -48,14 +50,14 @@ curadoria, e transparência ao cenário de dados no Brasil.
 <div class="row">
     <div class="column">
     <a style="width: 90%; text-align: center;"
-    href="/mais/access_data_bq"
+    href="/access_data_bq"
     title="{{ lang.t('source.link.title')}}" class="md-button">
         Acesse os dados direto pelo BigQuery 🔍
     </a>
     </div>
     <div class="column">
     <a style="width: 90%; text-align: center;"
-    href="/mais/access_data_local"
+    href="/access_data_local"
     title="{{ lang.t('source.link.title')}}" class="md-button">
         Acesse os dados pelo seu computador (CLI/API) 👩🏻‍💻
     </a>
