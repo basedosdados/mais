@@ -211,6 +211,37 @@ def read_table(
     return read_sql(query, billing_project_id=billing_project_id, reauth=reauth)
 
 
+def _get_header(text):
+    """Gets first paragraph of a text
+
+    Args:
+        text (str or None): Text to be split
+
+    Returns:
+        str: First paragraph
+    """
+
+    if isinstance(text, str):
+        return text.split("\n")[0]
+    elif text is None:
+        return ""
+
+
+def _print_output(df):
+    """Prints dataframe contents as print blocks
+
+    Args:
+        df (pd.DataFrame): table to be printed
+    """
+
+    columns = df.columns
+
+    for i, row in df.iterrows():
+        print("\n")
+        for c in columns:
+            print(f"{c}: {row[c]}")
+
+
 def list_datasets(
     query_project_id="basedosdados",
     filter_by=None,
@@ -252,14 +283,11 @@ def list_datasets(
     if with_description:
 
         datasets["description"] = [
-            client.get_dataset(dataset).description.split("\n")[0]
+            _get_header(client.get_dataset(dataset).description)
             for dataset in datasets["dataset_id"]
         ]
 
-    for i, row in datasets.iterrows():
-        print("Dataset_id:", row["dataset_id"], "\n")
-        if with_description:
-            print("Description: ", row["description"], "\n")
+    _print_output(datasets)
 
     return None
 
@@ -309,14 +337,11 @@ def list_dataset_tables(
     if with_description:
 
         tables["description"] = [
-            client.get_table(f"{dataset_id}.{table}").description.split("\n")[0]
+            _get_header(client.get_table(f"{dataset_id}.{table}").description)
             for table in tables["table_id"]
         ]
 
-    for i, row in tables.iterrows():
-        print("Table_id: ", row["table_id"], "\n")
-        if with_description:
-            print("Description: ", row["description"], "\n")
+    _print_output(tables)
 
     return None
 
@@ -406,9 +431,7 @@ def get_table_columns(
 
     description = pd.DataFrame(columns, columns=["name", "field_type", "description"])
 
-    for i, row in description.iterrows():
-        print("Field name: ", row["name"], "Field type: ", row["field_type"], "\n")
-        print("Description: ", row["description"], "\n")
+    _print_output(description)
 
     return None
 
@@ -463,11 +486,6 @@ def get_table_size(
         ]
     )
 
-    for i, row in table_data.iterrows():
-        print("Project_id: ", row["project_id"], "\n")
-        print("Dataset_id: ", row["dataset_id"], "\n")
-        print("Table_id: ", row["table_id"], "\n")
-        print("Rows: ", row["num_rows"], "\n")
-        print("Size: ", row["size_mb"], "Mb \n")
+    _print_output(table_data)
 
     return None
