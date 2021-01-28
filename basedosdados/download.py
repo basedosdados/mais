@@ -457,10 +457,15 @@ def get_table_columns(
 
 
 def get_table_size(
-    dataset_id, table_id, billing_project_id, query_project_id="basedosdados"
+    dataset_id,
+    table_id,
+    billing_project_id,
+    query_project_id="basedosdados",
 ):
     """Use a query to get the number of rows and size (in Mb) of a table query
     from BigQuery. Prints information on screen in markdown friendly format.
+
+    WARNING: this query may cost a lot depending on the table.
 
     Args:
         dataset_id (str): Optional.
