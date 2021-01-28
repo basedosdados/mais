@@ -227,6 +227,16 @@ def _get_header(text):
         return ""
 
 
+def _fix_size(s, step=80):
+
+    final = ""
+
+    for l in s.split(" "):
+        final += (l + " ") if len(final.split("\n")[-1]) < step else "\n"
+
+    return final
+
+
 def _print_output(df):
     """Prints dataframe contents as print blocks
 
@@ -235,11 +245,21 @@ def _print_output(df):
     """
 
     columns = df.columns
-
+    step = 80
+    print()
     for i, row in df.iterrows():
-        print("\n")
         for c in columns:
-            print(f"{c}: {row[c]}")
+            print(_fix_size(f"{c}: \n\t{row[c]}"))
+        print("-" * (step + 15))
+    print()
+
+    # func = lambda lista, final, step: (
+    # func(lista[1:],
+    #     (final + lista[0] + ' ')
+    #         if len(final.split('\n')[-1]) <= step
+    #         else final + '\n',
+    #      step
+    #        ) if len(lista) else final)
 
 
 def list_datasets(
