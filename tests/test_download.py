@@ -2,7 +2,14 @@ import pytest
 from pathlib import Path
 import pandas as pd
 
-from basedosdados import download, read_sql, read_table
+from basedosdados import (
+    download,
+    read_sql,
+    read_table,
+    list_datasets,
+    list_dataset_tables,
+    get_dataset_description,
+)
 from basedosdados.exceptions import BaseDosDadosException
 
 
@@ -110,3 +117,49 @@ def test_read_table():
         ),
         pd.DataFrame,
     )
+
+
+def test_list_datasets(capsys):
+
+    list_datasets()
+    out, err = capsys.readouterr()  # Capture prints
+    assert "dataset_id" in out
+
+
+def test_list_datasets_complete(capsys):
+
+    list_datasets(with_description=True, filter_by="ibge")
+    out, err = capsys.readouterr()  # Capture prints
+    assert "dataset_id" in out
+    assert "description" in out
+
+
+def test_list_datasets_all_descriptions(capsys):
+
+    list_datasets(with_description=True)
+
+
+def test_list_dataset_tables(capsys):
+
+    list_dataset_tables(dataset_id="br_ibge_censo2010")
+    out, err = capsys.readouterr()  # Capture prints
+    assert "table_id" in out
+
+
+def test_list_dataset_tables_complete(capsys):
+
+    list_dataset_tables(
+        dataset_id="br_ibge_censo2010",
+        filter_by="renda",
+        with_description=True,
+    )
+    out, err = capsys.readouterr()  # Capture prints
+    assert "table_id" in out
+    assert "description" in out
+
+
+def test_get_dataset_description(capsys):
+
+    get_dataset_description("br_ibge_censo2010")
+    out, err = capsys.readouterr()  # Capture prints
+    assert len(out) > 0
