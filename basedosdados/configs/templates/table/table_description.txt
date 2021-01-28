@@ -11,10 +11,36 @@
 
 Para saber mais acesse:
 Website: {{ url_ckan }}
-Github: https://github.com/basedosdados/mais/
+Github: {{ url_github }}
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: {{ published_by.name -}}
+{% call input(published_by.code_url ) %}
+Código: {{ published_by.code_url }}
+{%- endcall -%}
+{% call input(published_by.website ) %}
+Website: {{ published_by.website }}
+{%- endcall -%}
+{% call input(published_by.email ) %}
+Email: {{ published_by.email }}
+{%- endcall -%}
+
+Tratado por
+-----------
+Nome: {{ treated_by.name -}}
+{% call input(treated_by.code_url) %}
+Código: {{ treated_by.code_url }}
+{%- endcall -%}
+{% call input(treated_by.website) %}
+Website: {{ treated_by.website }}
+{%- endcall -%}
+{% call input(treated_by.email) %}
+Email: {{ treated_by.email }}
+{%- endcall %}
 
 {% call input(partitions) -%}
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
@@ -27,10 +53,20 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 {% endcall -%}
 
 {% call input(observation_level[0]) -%}
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Nível da Observação (i.e. a granularidade da linha)
 -------------------
 {% if (observation_level is not none) -%}
 {% for partition in observation_level -%}
+- {{ partition }}
+{% endfor -%}
+{%- endif %}
+{% endcall -%}
+
+{% call input(primary_keys[0]) -%}
+Colunas identificando linhas unicamente
+-------------------
+{% if (primary_keys is not none) -%}
+{% for partition in primary_keys -%}
 - {{ partition }}
 {% endfor -%}
 {%- endif %}
@@ -67,30 +103,5 @@ Frequencia de Atualização
 -------------------------
 {{ data_update_frequency }}{% endcall %}
 
-Tratado por
------------
-Nome: {{ treated_by.name -}}
-{% call input(treated_by.code_url) %}
-Código: {{ treated_by.code_url }}
-{%- endcall -%}
-{% call input(treated_by.website) %}
-Website: {{ treated_by.website }}
-{%- endcall -%}
-{% call input(treated_by.email) %}
-Email: {{ treated_by.email }}
-{%- endcall %}
-
-Publicado por
--------------
-Nome: {{ published_by.name -}}
-{% call input(published_by.code_url ) %}
-Código: {{ published_by.code_url }}
-{%- endcall -%}
-{% call input(published_by.website ) %}
-Website: {{ published_by.website }}
-{%- endcall -%}
-{% call input(published_by.email ) %}
-Email: {{ published_by.email }}
-{%- endcall -%}
 
 

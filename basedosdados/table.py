@@ -261,7 +261,7 @@ class Table(Base):
         external_config.schema = self._load_schema("staging")
 
         external_config.source_uris = (
-            f"gs://basedosdados/staging/{self.dataset_id}/{self.table_id}/*"
+            f"gs://{self.bucket_name}/staging/{self.dataset_id}/{self.table_id}/*"
         )
 
         if partitioned:

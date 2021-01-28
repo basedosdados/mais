@@ -1,7 +1,9 @@
 table_id: municipios # AUTO GENERATED
 dataset_id: br_ibge_pib # AUTO GENERATED
 
-last_updated: 2020-12-17 # AUTO GENERATED
+version: v1.1
+
+last_updated: 2021-01-15 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -28,7 +30,7 @@ published_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    <CEPESP fez X. Eu fiz K>
+    - Mudamos a unidade de medida para R$1.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente

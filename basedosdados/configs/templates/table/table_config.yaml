@@ -1,6 +1,9 @@
 table_id: {{ table_id }} # AUTO GENERATED
 dataset_id: {{ dataset_id }} # AUTO GENERATED
 
+url_ckan: https://basedosdados.org/dataset/{{ dataset_id | replace("_","-") }} # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/{{ dataset_id }} # AUTO GENERATED
+
 version: <vA.B> # REQUIRED
 
 last_updated: {{ now }} # AUTO GENERATED
@@ -12,15 +15,6 @@ last_updated: {{ now }} # AUTO GENERATED
 description: |  # REQUIRED
     <descrição>
 
-# Qual organização/departamento/pessoa tratou os dados?
-# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
-# Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: <nome>  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/{{ dataset_id }}/code # REQUIRED
-    website: <onde encontrar os dados tratados>
-    email: <email>
-
 # Quem está completando esse arquivo config?
 published_by:
     name: <nome [você]>  # REQUIRED
@@ -28,19 +22,37 @@ published_by:
     website: <website>
     email: <email>
 
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: <nome>
+    code_url: <onde encontrar código de tratamento>
+    website: <onde encontrar os dados tratados>
+    email: <email>
+
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
     <CEPESP fez X. Eu fiz K>
 
 # Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
 data_update_frequency: <frequência> # REQUIRED 
 
-# Nível da observação: quais colunas identificam uma linha unicamente?
+# Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
-# Regras: minúsculo, sem acento, singular.
-# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level:
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - <primeira coluna>
+    - <segunda coluna>
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
     - <primeira coluna>
     - <segunda coluna>
 
@@ -60,7 +72,7 @@ coverage_geo:
     - <admin3 - distritos/subdistritos/etc>
 
 # Qual é a cobertura temporal (em anos) da tabela?
-# Opções: pre-1999, 2000, 2001, ..., 2019, 2020
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
     - <ano 1>
     - <ano 2>
