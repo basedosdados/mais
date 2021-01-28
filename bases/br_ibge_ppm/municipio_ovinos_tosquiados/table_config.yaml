@@ -1,7 +1,7 @@
 table_id: municipio_ovinos_tosquiados # AUTO GENERATED
 dataset_id: br_ibge_ppm # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: <v1.0> # REQUIRED
 
 last_updated: 2021-01-19 # AUTO GENERATED
 
@@ -10,7 +10,7 @@ last_updated: 2021-01-19 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
- Ovinos tosquiados nos estabelecimentos agropecuários 
+ Ovinos tosquiados nos estabelecimentos agropecuários. 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -43,8 +43,7 @@ data_update_frequency: 1 ano # REQUIRED
 observation_level:
     - id_municipio
     - ano
-    - ovinos_tosquiados
-
+  
 # Qual é a cobertura espacial da tabela?
 # Regras:
 #   - minúsculo, sem acento, singular
@@ -55,7 +54,7 @@ observation_level:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-     municipios
+     brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: pre-1999, 2000, 2001, ..., 2019, 2020
@@ -139,6 +138,6 @@ columns: # REQUIRED
   
     -   
         name: ovinos_tosquiados
-        description: Ovinos tosquiados
+        description: Número de ovinos tosquiados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

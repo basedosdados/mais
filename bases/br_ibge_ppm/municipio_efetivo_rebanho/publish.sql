@@ -21,8 +21,8 @@ TIPOS:
 
 CREATE VIEW basedosdados.br_ibge_ppm.municipio_efetivo_rebanho AS
 SELECT 
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(ano AS STRING) ano,
+SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(tipo_de_rebanho AS STRING) tipo_de_rebanho,
-SAFE_CAST(quantidade_de_animais AS STRING) quantidade_de_animais
+SAFE_CAST(quantidade_de_animais AS INT64) quantidade_de_animais
 from basedosdados-dev.br_ibge_ppm_staging.municipio_efetivo_rebanho as t

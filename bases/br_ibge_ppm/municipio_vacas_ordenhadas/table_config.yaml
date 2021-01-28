@@ -1,7 +1,7 @@
 table_id: municipio_vacas_ordenhadas # AUTO GENERATED
 dataset_id: br_ibge_ppm  # AUTO GENERATED
 
-version: <vA.B> 
+version: <v1.0> 
 
 last_updated: 2021-01-19 # AUTO GENERATED
 
@@ -40,8 +40,7 @@ data_update_frequency: 1 ano
 observation_level:
     - municipio
     - ano
-    - vacas ordenhadas
-
+    
 # Qual é a cobertura espacial da tabela?
 # Regras:
 #   - minúsculo, sem acento, singular
@@ -104,8 +103,6 @@ coverage_time:
 - 2018
 - 2019
 
-
-
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
@@ -136,7 +133,7 @@ columns: # REQUIRED
   
     -   
         name: vacas_ordenhadas
-        description: Vacas Ordenhadas
+        description: Número de vacas ordenhadas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

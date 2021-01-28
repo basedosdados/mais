@@ -18,7 +18,7 @@ organization: instituto-brasileiro-de-geografia-e-estatistica
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
-    name: Instituto Brasileiro de Geografia e Estatística
+    name: Instituto Brasileiro de Geografia e Estatística -IBGE
     email: sidra@ibge.gov.br
 
 # Onde encontrar os dados originais e mais informações?
@@ -28,7 +28,7 @@ website:
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
-    - pecuaria
+    - agropecuaria
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -37,8 +37,18 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - agricola
-    - leite
+    - vacas ordenhadas
+    - desmatamento 
+    - gestao ambiental
+    - solo
+    - sustentabilidade
+    - rebanhos
+    - ovos de galinha
+    - producao aquicultura
+    - mel de abelha
+    - peixe
+    - larvas 
+    - camarao
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.

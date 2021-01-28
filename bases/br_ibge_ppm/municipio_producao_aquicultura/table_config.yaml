@@ -1,7 +1,7 @@
 table_id: municipio_producao_aquicultura # AUTO GENERATED
 dataset_id: br_ibge_ppm # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: <v1.0> # REQUIRED
 
 last_updated: 2021-01-19 # AUTO GENERATED
 
@@ -44,10 +44,7 @@ observation_level:
     - id_municipio
     - ano
     - tipo de produto
-    - producao aquicultura quilogramas
-    - valor producao mil reais
-    - valor producao percentual total geral
-
+   
 # Qual é a cobertura espacial da tabela?
 # Regras:
 #   - minúsculo, sem acento, singular
@@ -58,12 +55,11 @@ observation_level:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - municipio
+    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: pre-1999, 2000, 2001, ..., 2019, 2020
 coverage_time:
-
  - 2013
  - 2014
  - 2015
@@ -107,8 +103,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: producao_aquicultura_quilogramas
-        description: Produção em quilogramas
+        name: producao_aquicultura
+        description: Produção da aquicultura (em quilogramas)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
