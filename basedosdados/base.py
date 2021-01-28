@@ -67,27 +67,35 @@ class Base:
         )
 
     @staticmethod
-    def _input_validator(context, default=""):
+    def _input_validator(context, default="", with_lower=True):
 
         var = input(context)
 
+        to_lower = lambda x: x if with_lower else x.lower()
+
         if var:
-            return var.lower().strip()
+            return to_lower(var.strip())
         else:
-            return default.lower().strip()
+            return to_lower(default.strip())
 
     def _selection_yn(
-        self, first_question, default_yn, default_return, no_question, default_no=""
+        self,
+        first_question,
+        default_yn,
+        default_return,
+        no_question,
+        default_no="",
+        with_lower=True,
     ):
 
         while True:
 
-            res = self._input_validator(first_question, default_yn)
+            res = self._input_validator(first_question, default_yn, with_lower)
 
             if res == "y":
                 return default_return
             elif res == "n":
-                return self._input_validator(no_question, default_no)
+                return self._input_validator(no_question, default_no, with_lower)
             else:
                 print(f"{res} is not accepted as an awnser. Try y or n.\n")
 
@@ -164,7 +172,7 @@ class Base:
             )
 
             c_file["metadata_path"] = str(Path(metadata_path) / "bases")
-
+            print(c_file["metadata_path"])
             ############# STEP 2 - CREDENTIALS PATH #######################
 
             credentials_path = Path.home() / ".basedosdados/credentials"
@@ -180,6 +188,7 @@ class Base:
                     no_question=(
                         "\nWhere would you like to save it?\n" "credentials path: "
                     ),
+                    with_lower=False,
                 )
             )
 
