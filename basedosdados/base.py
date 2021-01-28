@@ -71,7 +71,7 @@ class Base:
 
         var = input(context)
 
-        to_lower = lambda x: x if with_lower else x.lower()
+        to_lower = lambda x: x.lower() if with_lower else x
 
         if var:
             return to_lower(var.strip())
@@ -169,10 +169,11 @@ class Base:
                 default_yn="y",
                 default_return=Path.cwd(),
                 no_question=("\nWhere would you like to save it?\n" "metadata path: "),
+                with_lower=False,
             )
 
             c_file["metadata_path"] = str(Path(metadata_path) / "bases")
-            print(c_file["metadata_path"])
+
             ############# STEP 2 - CREDENTIALS PATH #######################
 
             credentials_path = Path.home() / ".basedosdados/credentials"
@@ -188,7 +189,6 @@ class Base:
                     no_question=(
                         "\nWhere would you like to save it?\n" "credentials path: "
                     ),
-                    with_lower=False,
                 )
             )
 
