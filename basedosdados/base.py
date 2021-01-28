@@ -172,7 +172,7 @@ class Base:
             )
 
             c_file["metadata_path"] = str(Path(metadata_path) / "bases")
-            print(c_file["metadata_path"])
+
             ############# STEP 2 - CREDENTIALS PATH #######################
 
             credentials_path = Path.home() / ".basedosdados/credentials"
