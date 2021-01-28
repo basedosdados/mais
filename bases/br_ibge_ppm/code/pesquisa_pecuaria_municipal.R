@@ -1,32 +1,36 @@
-
+### Limpar memoria e denifir diretorio
 
 rm(list = ls())
 
-setwd("C:/Users/Crislane/documentos/basedosdados")
+setwd("~/basedosdados/tratamento/ppm/input")
 
-                    ### Pacotes ### 
+### Pacotes ### 
 
 library(readxl)
+
 library(readr)
+
 library(dplyr)
 
-                   ### Funcao ### 
+### Funcao ### 
 
-clean_bd = function(df, colms){
+bd_clean = function(df, colms_null, colms_order){
   
-  df[colms] <- NULL
+  df[colms_null] <- NULL
   
   df[df == "..."] <- NA
   df[df == "-"]   <- NA
   df[df == "X"]   <- NA
+  
+  df <- df %>%
+    select(colms_order)
   
   return(df)
 } 
 
 #------------------------------------------------------------------------------#
 
-
-### Dados de pecuaria (Cabecas) ###
+##### Dados de pecuaria (Cabecas) #####
 
 ### 94: Vacas Ordenhadas ###
 
@@ -41,20 +45,12 @@ dados94 = read.csv2(
   header = F
 )
 
-# limpar valores inconsistents e excluir colunas
 
-dados94 = clean_bd(dados94, c(3,4))
+# limpar valores inconsistentes, excluir colunas e ordenar variaveis
 
-
-# mudar ordem das colunas
-
-dados94 <- dados94 %>%
-  select(id_municipio, ano, vacas_ordenhadas)
-dados94
-
+dados94 = bd_clean(dados94, c(3,4), c(2,1,3))
 
 ### 95: Ovinos tosquiados ###  
-
 
 dados95 = read.csv2(
   "tabela95.csv", 
@@ -66,33 +62,25 @@ dados95 = read.csv2(
   header = F
 )
 
-# limpar valores inconsistents e excluir colunas
+# limpar valores inconsistentes, excluir colunas e ordenar variaveis
 
-dados95 = clean_bd(dados95, c(3,4))
-
-
-# mudar ordem das colunas
-
-dados95 <- dados95 %>%
-  select(id_municipio, ano, ovinos_tosquiados)
-dados95
+dados95 = bd_clean(dados95, c(3,4), c(2,1,3))
 
 # juntar colunas 
 
 dados_pecuaria = full_join(dados94, dados95,
                            by = c("id_municipio", "ano"))
 
-
 # exportar
 
 write.csv(dados_pecuaria,
-          file = "dados_pecuaria.csv",
+          "~/basedosdados/tratamento/pesquisa_pecuaria_municipal/output/dados_pecuaria1.csv",
           na = " ",
           row.names = F)
 
 #------------------------------------------------------------------------------#
 
-### 3939: efetivo dos rebanhos, por tipo de rebanho ###
+##### 3939: efetivo dos rebanhos, por tipo de rebanho #####
 
 dados3939 = read.csv2(
   "tabela3939.csv", 
@@ -106,28 +94,21 @@ dados3939 = read.csv2(
   header = F
 )
 
-# limpar valores inconsistents e excluir colunas
+# limpar valores inconsistentes, excluir colunas e ordenar variaveis
 
-dados3939 = clean_bd(dados3939, c(3))
-
-# mudar ordem das colunas
-
-dados3939 <- dados3939 %>%
-  select(id_municipio, ano, tipo_de_rebanho, quantidade_de_animais)
-dados3939
+dados3939 = bd_clean(dados3939, c(3), c(2,1,3,4))
 
 # exportar 
 
-
 write.csv(dados3939,
-          file = "3939_efetivo_rebanhos.csv",
+          "~/basedosdados/tratamento/pesquisa_pecuaria_municipal/output/efetivo_rebanhos.csv",
           na = " ",
           row.names = F)
 
 #------------------------------------------------------------------------------#
 
 
-### 74: Producao de origem animal, por tipo de produto ###
+##### 74: Producao de origem animal, por tipo de produto #####
 
 ## Producao origem animal ##
 
@@ -140,14 +121,12 @@ dados74 = read.csv2("tabela74_producao_origem_animal.csv",
                                   "producao"), 
                     nrows = 1537044,
                     encoding = "UTF-8",
-                    header = F
-                    
-)
+                    header = F)
 
 
-# limpar valores inconsistents e excluir colunas
+# limpar valores inconsistentes, excluir colunas e ordenar variaveis
 
-dados74 = clean_bd(dados74, c(3))
+dados74 = bd_clean(dados74, c(3), c(2,1,3,4))
 
 ## Valor da producao (percentual) 
 
@@ -163,11 +142,11 @@ dados74_vpercentual = read.csv2(
   header = F
 )
 
-# limpar valores inconsistents e excluir colunas
+# limpar valores inconsistentes, excluir colunas e ordenar variaveis
 
-dados74_vpercentual = clean_bd(dados74_vpercentual, c(3))
+dados74_vpercentual = bd_clean(dados74_vpercentual, c(3), c(2,1,3,4))
 
-## Valor da producao
+## Valor da producao 
 
 dados74_producao = read.csv2(
   "tabela74_valor_producao.csv",
@@ -181,9 +160,9 @@ dados74_producao = read.csv2(
   header = F
 )
 
-# limpar valores inconsistents e excluir colunas
+# limpar valores inconsistentes, excluir colunas e ordenar variaveis
 
-dados74_producao = clean_bd(dados74_producao, c(3))
+dados74_producao = bd_clean(dados74_producao, c(3), c(2,1,3,4))
 
 # adicionar coluna -moeda
 
@@ -226,6 +205,7 @@ dados74$valor_producao = dados74_producao$valor_producao_mil_reais
 
 # mudar ordem das colunas
 
+
 dados74 <- dados74 %>%
   select(id_municipio, ano, 
          tipo_de_produto_origem_animal, producao,
@@ -235,16 +215,14 @@ dados74
 
 # exportar 
 
-
 write.csv(dados74,
-          file = "74_producao_origem_animal.csv",
+          "~/basedosdados/tratamento/pesquisa_pecuaria_municipal/output/producao_origem_animal.csv",
           na = " ",
           row.names = F)
 
-
 #------------------------------------------------------------------------------#
 
-### 3940: Producao da aquicultura, por tipo de produto ###
+##### 3940: Producao da aquicultura, por tipo de produto  #####
 
 ## Producao aquicultura
 
@@ -257,13 +235,12 @@ dados3940 = read.csv2(
                 "excluir2", "producao_aquicultura"), 
   nrows = 644280,
   encoding = "UTF-8",
-  header = F
-)
+  header = F)
 
-# limpar valores inconsistents e excluir colunas
 
-dados3940 = clean_bd(dados3940, c(3, 5))
+# limpar valores inconsistentes, excluir colunas e ordenar variaveis
 
+dados3940 = bd_clean(dados3940, c(3,5), c(2,1,3,4))
 
 ## Valor da producao (percentual) 
 
@@ -279,9 +256,9 @@ dados3940_vpercentual = read.csv2(
   header = F
 )
 
-# limpar valores inconsistents e excluir colunas
+# limpar valores inconsistentes, excluir colunas e ordenar variaveis
 
-dados3940_vpercentual = clean_bd(dados3940_vpercentual, c(3, 5))
+dados3940_vpercentual = bd_clean(dados3940_vpercentual, c(3,5), c(2,1,3,4))
 
 ## Valor da producao  
 
@@ -297,9 +274,9 @@ dados3940_producao = read.csv2(
   header = F
 )
 
-# limpar valores inconsistents e excluir colunas
+# limpar valores inconsistentes, excluir colunas e ordenar variaveis
 
-dados3940_producao = clean_bd(dados3940_producao, c(3, 5))
+dados3940_producao = bd_clean(dados3940_producao, c(3,5), c(2,1,3,4))
 
 
 # tabelas finais 
@@ -310,18 +287,10 @@ tabela3940_final$valor_producao_mil_reais = dados3940_producao$valor_producao_mi
 
 tabela3940_final$valor_producao_percentual_total_geral = dados3940_vpercentual$valor_producao_percentual_total_geral
 
-# mudar ordem das colunas
-
-tabela3940_final <- tabela3940_final %>%
-  select(id_municipio, ano, tipo_de_produto, 
-         producao_aquicultura,valor_producao_mil_reais, 
-         valor_producao_percentual_total_geral
-  )
-tabela3940_final
 
 # exportar
 
 write.csv(tabela3940_final,
-          file = "3940_producao_da_aquicultura.csv",
+          "~/basedosdados/tratamento/pesquisa_pecuaria_municipal/output/producao_da_aquicultura.csv",
           na = " ",
           row.names = F)
