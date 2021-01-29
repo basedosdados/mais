@@ -1,10 +1,10 @@
-### Limpar memoria e denifir diretorio
+##### Limpar memoria e denifir diretorio #####
 
 rm(list = ls())
 
 setwd("~/basedosdados/tratamento/ppm/input")
 
-### Pacotes ### 
+##### Pacotes ##### 
 
 library(readxl)
 
@@ -237,7 +237,9 @@ dados74_producao = read.csv2(
 
 dados74_producao = bd_clean(dados74_producao, c(3), c(2,1,3,4))
 
-# adicionar coluna -moeda
+# adicionar coluna (moeda) 
+
+## Este procedimento pode demorar 03h30 para rodar
 
 for ( i in 1:length(dados74$moeda)) {
   if(dados74$ano[i] <= 1985) {
