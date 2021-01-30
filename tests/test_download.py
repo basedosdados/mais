@@ -1,6 +1,7 @@
 import pytest
 from pathlib import Path
 import pandas as pd
+import shutil
 
 from basedosdados import (
     download,
@@ -13,9 +14,10 @@ from basedosdados import (
 from basedosdados.exceptions import BaseDosDadosException
 
 
-TEST_PROJECT_ID = "basedosdados-test"
+TEST_PROJECT_ID = "basedosdados-dev"
 SAVEFILE = Path("tests/tmp_bases/test.csv")
 SAVEPATH = Path("tests/tmp_bases/")
+shutil.rmtree(SAVEPATH)
 
 
 def test_download_by_query():
@@ -68,7 +70,7 @@ def test_download_save_to_path():
         limit=10,
     )
 
-    assert (SAVEPATH / "query_result.csv").exists()
+    assert (SAVEPATH / "municipios.csv").exists()
 
 
 def test_download_no_query_or_table():

@@ -80,6 +80,12 @@ def download(
 
     savepath = Path(savepath)
 
+    # make sure that path exists
+    if savepath.is_dir():
+        savepath.mkdir(parents=True, exist_ok=True)
+    else:
+        savepath.parent.mkdir(parents=True, exist_ok=True)
+
     if (dataset_id is not None) and (table_id is not None):
         table = read_table(
             dataset_id,
