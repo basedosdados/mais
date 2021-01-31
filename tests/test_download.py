@@ -19,7 +19,9 @@ from basedosdados.exceptions import BaseDosDadosException
 TEST_PROJECT_ID = "basedosdados-dev"
 SAVEFILE = Path("tests/tmp_bases/test.csv")
 SAVEPATH = Path("tests/tmp_bases/")
-shutil.rmtree(SAVEPATH)
+
+if SAVEPATH.exists():
+    shutil.rmtree(SAVEPATH)
 
 
 def test_download_by_query():
