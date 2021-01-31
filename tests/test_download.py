@@ -10,6 +10,7 @@ from basedosdados import (
     list_datasets,
     list_dataset_tables,
     get_dataset_description,
+    get_table_description,
     get_table_columns,
     get_table_size,
 )
@@ -19,9 +20,7 @@ from basedosdados.exceptions import BaseDosDadosException
 TEST_PROJECT_ID = "basedosdados-dev"
 SAVEFILE = Path("tests/tmp_bases/test.csv")
 SAVEPATH = Path("tests/tmp_bases/")
-
-if SAVEPATH.exists():
-    shutil.rmtree(SAVEPATH)
+shutil.rmtree(SAVEPATH, ignore_errors=True)
 
 
 def test_download_by_query():
@@ -164,11 +163,24 @@ def test_list_dataset_tables_complete(capsys):
     out, err = capsys.readouterr()  # Capture prints
     assert "table_id" in out
     assert "description" in out
+    assert "renda" in out
+
+
+def test_list_dataset_tables_all_descriptions(capsys):
+    list_dataset_tables(dataset_id="br_ibge_censo2010", with_description=True)
+    out, err = capsys.readouterr()  # Capture prints
+    assert len(out) > 0
 
 
 def test_get_dataset_description(capsys):
 
     get_dataset_description("br_ibge_censo2010")
+    out, err = capsys.readouterr()  # Capture prints
+    assert len(out) > 0
+
+
+def test_get_table_description(capsys):
+    get_table_description("br_ibge_censo2010", "pessoa_renda_setor_censitario")
     out, err = capsys.readouterr()  # Capture prints
     assert len(out) > 0
 
@@ -180,8 +192,8 @@ def test_get_table_columns(capsys):
     )
     out, err = capsys.readouterr()  # Capture prints
     assert "name" in out
-    assert "description" in out
     assert "field_type" in out
+    assert "description" in out
 
 
 def test_get_table_size(capsys):
