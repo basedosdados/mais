@@ -21,7 +21,7 @@ author:
 
 # Onde encontrar os dados originais e mais informações?
 website:
-    - http://pdet.mte.gov.br/microdados-rais-e-caged
+    - ftp://ftp.mtps.gov.br/pdet/microdados/
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
