@@ -1,5 +1,8 @@
-Como capturar os dados de br_me_caged?
+## Captura
+ - Os dados foram baixados do [ftp](ftp://ftp.mtps.gov.br/pdet/microdados/)
 
-Para capturar esses dados basta entrar em X e fazer Y.
+## Tratamento
+ - Os dados passaram por um padronização do nome das colunas, remoção de textos, logos e colunas redundantes e unificação das bases.
 
-Todo o código usado na captura está em `code/`
+## Dicionários
+ - As tabelas de referência e dicionarios de colunas encontran-se na pasta dictionaries. Algumas colunas foram renomeadas, porem as descrições são as mesmas tanto nas tabelas de referência quanto nas tabelas do bigquery.
