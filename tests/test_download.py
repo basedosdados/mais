@@ -10,6 +10,8 @@ from basedosdados import (
     list_datasets,
     list_dataset_tables,
     get_dataset_description,
+    get_table_columns,
+    get_table_size,
 )
 from basedosdados.exceptions import BaseDosDadosException
 
@@ -139,6 +141,8 @@ def test_list_datasets_complete(capsys):
 def test_list_datasets_all_descriptions(capsys):
 
     list_datasets(with_description=True)
+    out, err = capsys.readouterr()  # Capture prints
+    assert len(out) > 0
 
 
 def test_list_dataset_tables(capsys):
@@ -165,3 +169,25 @@ def test_get_dataset_description(capsys):
     get_dataset_description("br_ibge_censo2010")
     out, err = capsys.readouterr()  # Capture prints
     assert len(out) > 0
+
+
+def test_get_table_columns(capsys):
+    get_table_columns(
+        dataset_id="br_ibge_censo2010",
+        table_id="pessoa_renda_setor_censitario",
+    )
+    out, err = capsys.readouterr()  # Capture prints
+    assert "name" in out
+    assert "description" in out
+    assert "field_type" in out
+
+
+def test_get_table_size(capsys):
+    get_table_size(
+        dataset_id="br_ibge_censo2010",
+        table_id="pessoa_renda_setor_censitario",
+        billing_project_id=TEST_PROJECT_ID,
+    )
+    out, err = capsys.readouterr()
+    assert "num_rows" in out
+    assert "size_mb" in out
