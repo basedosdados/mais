@@ -1,5 +1,5 @@
 ## Captura
- - Os dados foram baixados do [ftp](ftp://ftp.mtps.gov.br/pdet/microdados/)
+ - Os dados foram baixados do link: ftp://ftp.mtps.gov.br/pdet/microdados/
 
 ## Tratamento
  - Os dados passaram por um padronização do nome das colunas, remoção de textos, logos e colunas redundantes e unificação das bases.
