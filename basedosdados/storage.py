@@ -233,20 +233,16 @@ class Storage(Base):
             else:
                 blob.delete()
 
-    def _copy_blob(self, blob_name, destination_bucket):
+    def copy_table(self, source_bucket_name="basedosdados", mode="staging"):
 
-        source_blob = self.bucket.blob(blob_name)
-
-        copy_blob = self.bucket.copy_blob(
-            source_blob, destination_bucket=destination_bucket
+        source_table_ref = (
+            self.client["storage_staging"]
+            .bucket(f"{source_bucket_name}")
+            .list_blobs(prefix=f"{mode}/{self.dataset_id}/{self.table_id}")
         )
 
-    def copy_data(self, mode, destination_bucket):
+        with self.client["storage_staging"].batch():
 
-        source_table_ref = self.client["storage_staging"].list_blobs(
-            self.bucket, prefix=f"{mode}/{self.dataset_id}/{self.table_id}"
-        )
-
-        for blob in source_table_ref:
-            self._copy_blob(blob.name, destination_bucket)
-            print(f"{blob.name} copied sucessfully")
+            for blob in source_table_ref:
+                copy_blob = self.bucket.copy_blob(blob, destination_bucket=self.bucket)
+                print(f"{blob.name},copied sucessfully!")
