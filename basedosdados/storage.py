@@ -234,6 +234,17 @@ class Storage(Base):
                 blob.delete()
 
     def copy_table(self, source_bucket_name="basedosdados", mode="staging"):
+        """Copies table from a source bucket to your bucket, sends copy request in batches.
+        If your copy request requires more than 100 blobs, you should divide it in multiple batch
+        requests.
+
+        Args:
+            source_bucket_name (str): The bucket name from which to copy data. You can change it 
+            to copy from other external bucket. Defaults to "basedosdados".
+
+            mode (str): Optional
+            Subdivision of the bucket from which to copy. Defaults to "staging".
+        """
 
         source_table_ref = (
             self.client["storage_staging"]
