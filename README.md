@@ -72,7 +72,7 @@ curadoria, e transparência ao cenário de dados no Brasil.
 ## Contribua! 💚
 
 **Incentivamos que outras instituições e pessoas contribuam**. Veja mais
-como contribuir [aqui](https://basedosdados.github.io/mais/github/).
+como contribuir [aqui](https://basedosdados.github.io/mais/colab_data/).
 
 ## Como citar o projeto 📝
 

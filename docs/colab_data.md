@@ -8,7 +8,7 @@ Nossa intenção é que **qualquer pessoa possa colaborar** com seu
 conhecimento sobre dados públicos, seguindo nossas metodologias e
 procedimentos de limpeza e validação dos dados.
 
-!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/T2nbPNty) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
+!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/2GAuw7d8zd) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
 
 ## Qual o procedimento?
 
@@ -86,13 +86,12 @@ Desenvolvemos um cliente `basedosdados` (disponível para linha de
 comando e Python por enquanto) para facilitar esse processo e indicar
 configurações básicas que devem ser preenchidas sobre os dados.
 
-1. Configure seu projeto no Google Cloud e um _bucket_ no Google
-   Storage.
+#### Configure seu projeto no Google Cloud e um _bucket_ no Google Storage
 
 Para criar um projeto no Google Cloud basta ter um email cadastrado no
 Google. Basta seguir o passo-a-passo:
 
-- Acesse o [link](https://console.cloud.google.com/projectselector2/home/dashboard) e aceite o Termo de Serviços do Google Cloud
+- Acesse o [link](https://console.cloud.google.com/projectselector2/home/dashboard) e aceite o Termo de Serviços do Google Cloud.
 - Clique em `Create Project/Criar Projeto` - escolha um nome bacana para
   o seu projeto, ele terá também um `Project ID` que será utilizado
   para configuração local.
@@ -103,15 +102,16 @@ Google. Basta seguir o passo-a-passo:
     - Instale nosso cliente: `pip install basedosdados`.
     - Rode `basedosdados config` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Googl Cloud.
 
-2. Suba e configure uma tabela no seu _bucket_.
-    - Siga o comando `basedosdados table create [DATASET_ID] [TABLE_ID]`.
-    - Preencha todos os arquivos de configuração:
-        - `README.md`: informações básicas da base de dados aparecendo no Github
-        - `dataset_config.yaml`: informações específicas da base de dados
-        - `/[TABLE_ID]/table_config.yaml`: informações específicas da tabela
-        - `/[TABLE_ID]/publish.sql`: informações da publicação da tabela (os tipos de variáveis do [BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) são `STRING`, `INT64`, `FLOAT64`, `DATE`)
+#### Suba e configure uma tabela no seu _bucket_
 
-3. Publique a versão pronta no seu _bucket_ com: `basedosdados table publish`.
+- Siga o comando `basedosdados table create [DATASET_ID] [TABLE_ID]`.
+- Preencha todos os arquivos de configuração:
+    - `README.md`: informações básicas da base de dados aparecendo no Github
+    - `dataset_config.yaml`: informações específicas da base de dados
+    - `/[TABLE_ID]/table_config.yaml`: informações específicas da tabela
+    - `/[TABLE_ID]/publish.sql`: informações da publicação da tabela (os tipos de variáveis do [BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) são `STRING`, `INT64`, `FLOAT64`, `DATE`)
+
+#### Publique a versão pronta no seu _bucket_ com `basedosdados table publish`
 
 !!! Tip "Consulte nossa [API](/cli_reference_api) para mais detalhes de cada método."
 
