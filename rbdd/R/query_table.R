@@ -44,7 +44,7 @@ query_table <- function(
 
   columns <- rlang::ensyms(...) %>%
     purrr::map(rlang::as_string) %>%
-    reduce(paste, sep = ", ")
+    purrr::reduce(paste, sep = ", ")
 
 
   single_table_query <- glue::glue(
@@ -73,6 +73,10 @@ query_table <- function(
 
 
   query <- paste0(single_table_query, second_table_query)
+
+
+  # a função como está supõe que o usuário está autenticado no bigrquery
+  # mas ele está? como garantir isso?
 
   bigrquery::bq_table_download(
     x = bigrquery::bq_project_query("basedosdados", query),
