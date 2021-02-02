@@ -233,6 +233,34 @@ class Storage(Base):
             else:
                 blob.delete()
 
+    def delete_table(self, mode="staging", bucket_name=None):
+        """Deletes a table from storage.
+
+        Args:
+            mode (str): Optional
+                Folder of which dataset to update. Defaults to 'staging'.
+
+            bucket_name (str):
+                The bucket name from which to delete the table. If None, defaults
+                to the bucket initialized when instantiating the Storage object.
+                (You can check it with the Storage().bucket property)
+        """
+        prefix = f"{mode}/{self.dataset_id}/{self.table_id}/"
+
+        if bucket_name is not None:
+
+            table_blobs = self.bucket(f"{bucket_name}").list_blobs(prefix=prefix)
+
+        else:
+
+            table_blobs = self.bucket.list_blobs(prefix=prefix)
+
+        with self.client["storage_staging"].batch():
+
+            for blob in table_blobs:
+                self.delete_file(filename=str(blob.name).replace(prefix, ""), mode=mode)
+                print(f"{blob.name} deleted sucessfully!")
+
     def copy_table(
         self,
         source_bucket_name="basedosdados",
@@ -244,11 +272,17 @@ class Storage(Base):
         requests.
 
         Args:
-            source_bucket_name (str): The bucket name from which to copy data. You can change it
-            to copy from other external bucket.
+            source_bucket_name (str):
+                The bucket name from which to copy data. You can change it
+                to copy from other external bucket.
+
+            destination_bucket_name(str): Optional
+                The bucket name where data will be copied to. If None, defaults to the bucket
+                initialized when instantiating the Storage object (You can check it with the
+                Storage().bucket property)
 
             mode (str): Optional
-            Folder of which dataset to update. Defaults to "staging".
+                Folder of which dataset to update. Defaults to "staging".
         """
 
         source_table_ref = (
