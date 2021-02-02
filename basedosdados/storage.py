@@ -233,27 +233,41 @@ class Storage(Base):
             else:
                 blob.delete()
 
-    def copy_table(self, source_bucket_name="basedosdados", mode="staging"):
+    def copy_table(
+        self,
+        source_bucket_name="basedosdados",
+        destination_bucket_name=None,
+        mode="staging",
+    ):
         """Copies table from a source bucket to your bucket, sends copy request in batches.
-        If your copy request requires more than 100 blobs, you should divide it in multiple batch
+        If your copy request requires more than 100 blobs, you should divide it in multiple
         requests.
 
         Args:
-            source_bucket_name (str): The bucket name from which to copy data. You can change it 
-            to copy from other external bucket. Defaults to "basedosdados".
+            source_bucket_name (str): The bucket name from which to copy data. You can change it
+            to copy from other external bucket.
 
             mode (str): Optional
-            Subdivision of the bucket from which to copy. Defaults to "staging".
+            Folder of which dataset to update. Defaults to "staging".
         """
 
         source_table_ref = (
             self.client["storage_staging"]
-            .bucket(f"{source_bucket_name}")
+            .bucket(source_bucket_name)
             .list_blobs(prefix=f"{mode}/{self.dataset_id}/{self.table_id}")
         )
+
+        if destination_bucket_name is None:
+            destination_bucket = self.bucket
+        else:
+            destination_bucket = self.client["storage_staging"].bucket(
+                destination_bucket_name
+            )
 
         with self.client["storage_staging"].batch():
 
             for blob in source_table_ref:
-                copy_blob = self.bucket.copy_blob(blob, destination_bucket=self.bucket)
-                print(f"{blob.name},copied sucessfully!")
+                copy_blob = self.bucket.copy_blob(
+                    blob, destination_bucket=destination_bucket
+                )
+                print(f"{blob.name} copied sucessfully to {destination_bucket.name}")
