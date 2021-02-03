@@ -60,8 +60,8 @@ def sync_bucket(
                 destination_bucket_name=backup_bucket_name,
             )
 
-        # DELETE OLD DATA FROM PROD
-        ref.delete_table(not_found_ok=True)
+            # DELETE OLD DATA FROM PROD
+            ref.delete_table(not_found_ok=True)
 
         # COPIES DATA TO DESTINATION
         ref.copy_table(source_bucket_name=source_bucket_name)

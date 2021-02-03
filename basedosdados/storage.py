@@ -298,26 +298,20 @@ class Storage(Base):
             .list_blobs(prefix=f"{mode}/{self.dataset_id}/{self.table_id}")
         )
 
-        if len(list(source_table_ref)) == 0:
-            raise ValueError(
-                f"No objects found at the source bucket({mode}/{dataset_id}/{table_id})"
-            )
+        if destination_bucket_name is None:
+
+            destination_bucket = self.bucket
 
         else:
 
-            if destination_bucket_name is None:
-                destination_bucket = self.bucket
-            else:
-                destination_bucket = self.client["storage_staging"].bucket(
-                    destination_bucket_name
+            destination_bucket = self.client["storage_staging"].bucket(
+                destination_bucket_name
+            )
+
+        with self.client["storage_staging"].batch():
+
+            for blob in source_table_ref:
+                copy_blob = self.bucket.copy_blob(
+                    blob, destination_bucket=destination_bucket
                 )
-
-            with self.client["storage_staging"].batch():
-
-                for blob in source_table_ref:
-                    copy_blob = self.bucket.copy_blob(
-                        blob, destination_bucket=destination_bucket
-                    )
-                    print(
-                        f"{blob.name} copied sucessfully to {destination_bucket.name}"
-                    )
+                print(f"{blob.name} copied sucessfully to {destination_bucket.name}")
