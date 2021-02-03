@@ -233,17 +233,21 @@ class Storage(Base):
             else:
                 blob.delete()
 
-    def delete_table(self, mode="staging", bucket_name=None):
-        """Deletes a table from storage.
+    def delete_table(self, mode="staging", bucket_name=None, not_found_ok=False):
+        """Deletes a table from storage, sends request in batches.
+        If your request requires more than 1000 blobs, you should divide it in multiple requests.
 
         Args:
             mode (str): Optional
-                Folder of which dataset to update. Defaults to 'staging'.
+                Folder of which dataset to update.
 
             bucket_name (str):
-                The bucket name from which to delete the table. If None, defaults
-                to the bucket initialized when instantiating the Storage object.
+                The bucket name from which to delete the table. If None, defaults to the bucket initialized when instantiating the Storage object.
                 (You can check it with the Storage().bucket property)
+
+            not_found_ok (bool): Optional.
+                What to do if table not found
+
         """
         prefix = f"{mode}/{self.dataset_id}/{self.table_id}/"
 
@@ -258,7 +262,11 @@ class Storage(Base):
         with self.client["storage_staging"].batch():
 
             for blob in table_blobs:
-                self.delete_file(filename=str(blob.name).replace(prefix, ""), mode=mode)
+                self.delete_file(
+                    filename=str(blob.name).replace(prefix, ""),
+                    mode=mode,
+                    not_found_ok=not_found_ok,
+                )
                 print(f"{blob.name} deleted sucessfully!")
 
     def copy_table(
@@ -267,9 +275,8 @@ class Storage(Base):
         destination_bucket_name=None,
         mode="staging",
     ):
-        """Copies table from a source bucket to your bucket, sends copy request in batches.
-        If your copy request requires more than 100 blobs, you should divide it in multiple
-        requests.
+        """Copies table from a source bucket to your bucket, sends request in batches.
+        If your request requires more than 1000 blobs, you should divide it in multiple requests.
 
         Args:
             source_bucket_name (str):
@@ -277,8 +284,8 @@ class Storage(Base):
                 to copy from other external bucket.
 
             destination_bucket_name(str): Optional
-                The bucket name where data will be copied to. If None, defaults to the bucket
-                initialized when instantiating the Storage object (You can check it with the
+                The bucket name where data will be copied to.
+                If None, defaults to the bucket initialized when instantiating the Storage object (You can check it with the
                 Storage().bucket property)
 
             mode (str): Optional
@@ -291,17 +298,26 @@ class Storage(Base):
             .list_blobs(prefix=f"{mode}/{self.dataset_id}/{self.table_id}")
         )
 
-        if destination_bucket_name is None:
-            destination_bucket = self.bucket
-        else:
-            destination_bucket = self.client["storage_staging"].bucket(
-                destination_bucket_name
+        if len(list(source_table_ref)) == 0:
+            raise ValueError(
+                f"No objects found at the source bucket({mode}/{dataset_id}/{table_id})"
             )
 
-        with self.client["storage_staging"].batch():
+        else:
 
-            for blob in source_table_ref:
-                copy_blob = self.bucket.copy_blob(
-                    blob, destination_bucket=destination_bucket
+            if destination_bucket_name is None:
+                destination_bucket = self.bucket
+            else:
+                destination_bucket = self.client["storage_staging"].bucket(
+                    destination_bucket_name
                 )
-                print(f"{blob.name} copied sucessfully to {destination_bucket.name}")
+
+            with self.client["storage_staging"].batch():
+
+                for blob in source_table_ref:
+                    copy_blob = self.bucket.copy_blob(
+                        blob, destination_bucket=destination_bucket
+                    )
+                    print(
+                        f"{blob.name} copied sucessfully to {destination_bucket.name}"
+                    )
