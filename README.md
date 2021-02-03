@@ -80,14 +80,14 @@ O projeto está licenciado sob a [Licença Hipocrática](https://firstdonoharm.d
 
 > Carabetta, J.; Dahis, R.; Israel, F.; Scovino, F. (2020) Base dos Dados Mais: Repositório de Dados. Github - https://github.com/basedosdados/mais.
 
-## Tutorial 
-
-Temos disponível um jupyter notebook com exemplos de uso em mais/exemplos
-
 ## Idiomas
 
 Documentação está em português (quando possível), código e configurações
 estão em inglês.
+
+## Tutorial
+
+Temos disponível um jupyter notebook com exemplos de uso em `examples/`
 
 ## Desenvolvimento
 
