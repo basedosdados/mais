@@ -189,6 +189,7 @@ class Table(Base):
         partitioned=False,
         if_exists="raise",
         force_dataset=True,
+        storage_data=False,
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -220,39 +221,29 @@ class Table(Base):
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
             force_dataset (bool): Creates `<dataset_id>` folder and BigQuery Dataset if it doesn't exists.
+            storage_data (bool): Upload data to storage if it doesn't exists.
 
         Todo:
 
             * Implement if_exists=raise
             * Implement if_exists=pass
         """
+        if storage_data:
+            pass
+        else:
+            # Add data to storage
+            if isinstance(
+                path,
+                (
+                    str,
+                    PosixPath,
+                ),
+            ):
 
-        # Add data to storage
-        if isinstance(
-            path,
-            (
-                str,
-                PosixPath,
-            ),
-        ):
-
-            Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
-                path, mode="staging", if_exists="replace"
-            )
-
-            # Create Dataset if it doesn't exist
-            if force_dataset:
-
-                dataset_obj = Dataset(self.dataset_id, **self.main_vars)
-
-                try:
-                    dataset_obj.init()
-                except FileExistsError:
-                    pass
-
-                dataset_obj.create(if_exists="pass")
-
-            self.init(data_sample_path=path, if_exists="replace")
+                Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
+                    path, mode="staging", if_exists="replace"
+                )
+                self.init(data_sample_path=path, if_exists="replace")
 
         external_config = external_config = bigquery.ExternalConfig("CSV")
         external_config.options.skip_leading_rows = 1
@@ -273,6 +264,16 @@ class Table(Base):
                 dataset=self.dataset_id, table=self.table_id
             ).replace("*", "")
             external_config.hive_partitioning = hive_partitioning
+
+        # Create Dataset if it doesn't exist
+        if force_dataset:
+            dataset_obj = Dataset(self.dataset_id, **self.main_vars)
+            try:
+                dataset_obj.init()
+            except FileExistsError:
+                pass
+
+            dataset_obj.create(if_exists="pass")
 
         table = bigquery.Table(self.table_full_name["staging"])
 
@@ -298,11 +299,7 @@ class Table(Base):
 
         self._check_mode(mode)
 
-        if mode == "all":
-            mode = ["prod", "staging"]
-        else:
-            mode = [mode]
-
+        mode = ["prod", "staging"] if mode == "all" else [mode]
         for m in mode:
 
             try:
