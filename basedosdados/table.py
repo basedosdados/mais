@@ -82,7 +82,7 @@ class Table(Base):
 
         return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
-    def init(self, data_sample_path=None, if_exists="raise"):
+    def init(self, data_sample_path=None, if_exists="raise", table_config_exists=False):
         """Initialize table folder at metadata_path at `metadata_path/<dataset_id>/<table_id>`.
 
         The folder should contain:
@@ -102,7 +102,8 @@ class Table(Base):
                 * 'raise' : Raises FileExistsError
                 * 'replace' : Replace folder
                 * 'pass' : Do nothing
-
+            table_config_exists (bool): Optional
+                If true, does not overwrite the already created table_config.yaml
         Raises:
             FileExistsError: If folder exists and replace is False.
             NotImplementedError: If data sample is not in supported type or format.
@@ -162,23 +163,29 @@ class Table(Base):
 
             columns = ["column_name"]
 
-        for file in (Path(self.templates) / "table").glob("*"):
+        if table_config_exists:
 
-            if file.name in ["table_config.yaml", "publish.sql"]:
+            pass
 
-                # Load and fill template
-                template = Template(file.open("r").read()).render(
-                    table_id=self.table_id,
-                    dataset_id=self.dataset_folder.stem,
-                    project_id=self.client["bigquery_staging"].project,
-                    project_id_prod=self.client["bigquery_prod"].project,
-                    columns=columns,
-                    partition_columns=partition_columns,
-                    now=datetime.datetime.now().strftime("%Y-%m-%d"),
-                )
+        else:
 
-                # Write file
-                (self.table_folder / file.name).open("w").write(template)
+            for file in (Path(self.templates) / "table").glob("*"):
+
+                if file.name in ["table_config.yaml", "publish.sql"]:
+
+                    # Load and fill template
+                    template = Template(file.open("r").read()).render(
+                        table_id=self.table_id,
+                        dataset_id=self.dataset_folder.stem,
+                        project_id=self.client["bigquery_staging"].project,
+                        project_id_prod=self.client["bigquery_prod"].project,
+                        columns=columns,
+                        partition_columns=partition_columns,
+                        now=datetime.datetime.now().strftime("%Y-%m-%d"),
+                    )
+
+                    # Write file
+                    (self.table_folder / file.name).open("w").write(template)
 
         return self
 
@@ -189,6 +196,7 @@ class Table(Base):
         partitioned=False,
         if_exists="raise",
         force_dataset=True,
+        table_config_exists=False,
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -220,7 +228,8 @@ class Table(Base):
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
             force_dataset (bool): Creates `<dataset_id>` folder and BigQuery Dataset if it doesn't exists.
-
+             table_config_exists (bool): Optional
+                If True, does not overwrite the already created table_config.yaml
         Todo:
 
             * Implement if_exists=raise
@@ -252,7 +261,11 @@ class Table(Base):
 
                 dataset_obj.create(if_exists="pass")
 
-            self.init(data_sample_path=path, if_exists="replace")
+            self.init(
+                data_sample_path=path,
+                if_exists="replace",
+                table_config_exists=table_config_exists,
+            )
 
         external_config = external_config = bigquery.ExternalConfig("CSV")
         external_config.options.skip_leading_rows = 1
