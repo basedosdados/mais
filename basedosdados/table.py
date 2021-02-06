@@ -189,7 +189,7 @@ class Table(Base):
         partitioned=False,
         if_exists="raise",
         force_dataset=True,
-        storage_data=False,
+        force_storage_data=False,
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -221,14 +221,14 @@ class Table(Base):
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
             force_dataset (bool): Creates `<dataset_id>` folder and BigQuery Dataset if it doesn't exists.
-            storage_data (bool): Upload data to storage if it doesn't exists.
+            force_storage_data (bool): Upload data to storage if it doesn't exists.
 
         Todo:
 
             * Implement if_exists=raise
             * Implement if_exists=pass
         """
-        if storage_data:
+        if force_storage_data:
             pass
         else:
             # Add data to storage
