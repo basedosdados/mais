@@ -155,19 +155,19 @@ def check_function():
     )
 
     print(
-        "prod_json:",
+        "prod.json:",
         (Path.home() / ".basedosdados" / "credentials" / "prod.json").open("r").read(),
         "\n",
     )
 
     print(
-        "staging_json exists:",
+        "staging.json exists:",
         os.path.exists(Path.home() / ".basedosdados" / "credentials" / "staging.json"),
         "\n",
     )
 
     print(
-        "staging_json:",
+        "staging.json:",
         (Path.home() / ".basedosdados" / "credentials" / "staging.json")
         .open("r")
         .read(),
@@ -207,6 +207,8 @@ def main():
     save_toml(config_dict, "config.toml", ".basedosdados")
 
     check_function()
+
+    print([f for f in Path().home().iterdir() if f.is_dir()])
 
 
 if __name__ == "__main__":
