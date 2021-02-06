@@ -191,6 +191,10 @@ class Storage(Base):
 
                     blob.upload_from_filename(str(filepath), **upload_args)
 
+                elif if_exists == "pass":
+
+                    pass
+
                 else:
                     raise Exception(
                         f"Data already exists at {self.bucket_name}/{blob_name}. "
