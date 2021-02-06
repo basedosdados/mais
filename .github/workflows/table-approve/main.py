@@ -182,7 +182,7 @@ def main():
     print(Path.home())
 
     config_dict = {
-        "metadata_path": "XXX",
+        "metadata_path": "/github/workspace/bases",
         "templates_path": "XXX",
         "gcloud-projects": {
             "staging": {
@@ -208,17 +208,11 @@ def main():
 
     check_function()
 
-    print("\n/home folders")
-    print([f for f in Path("/github/home").iterdir() if f.is_dir()])
-
     print("\n/github folders")
     print([f for f in Path("/github").iterdir() if f.is_dir()])
 
     print("\n/workspace folders")
     print([f for f in Path("/github/workspace").iterdir() if f.is_dir()])
-
-    print("\n/bases folders")
-    print([f for f in Path("/github/workspace/bases").iterdir() if f.is_dir()])
 
 
 if __name__ == "__main__":
