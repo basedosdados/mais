@@ -1,5 +1,11 @@
-from basedosdados.storage import Storage
+import os
+from pathlib import Path
+import yaml
+import json
+
+import basedosdados as bd
 from basedosdados.base import Base
+from basedosdados.storage import Storage
 import basedosdados
 
 
@@ -65,3 +71,42 @@ def sync_bucket(
 
         # COPIES DATA TO DESTINATION
         ref.copy_table(source_bucket_name=source_bucket_name)
+
+
+def load_configs(dataset_id, table_id):
+    configs_path = Base()._load_config()
+    metadata_path = configs_path["metadata_path"]
+    table_path = f"{metadata_path}/{dataset_id}/{table_id}"
+    return yaml.load(
+        open(f"{table_path}/table_config.yaml", "r"), Loader=yaml.FullLoader
+    )
+
+
+def is_partitioned(table_config):
+    return table_config["partitions"] is not None
+
+
+def push_table_to_bq(dataset_id, table_id):
+    table_config = load_configs(dataset_id, table_id)
+
+    tb = bd.Table(dataset_id, table_id)
+
+    tb.create(
+        partitioned=is_partitioned(table_config),
+        storage_data=True,
+        if_exists="pass",
+    )
+
+    tb.publish(if_exists="replace")
+
+
+def main():
+
+    print(json.load(Path("/github/workspace/files.json").open("r")))
+    
+    print(os.environ.get("INPUT_PROJECT_ID"))
+    
+    
+
+if __name__ == "__main__":
+    main()
