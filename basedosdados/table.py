@@ -222,8 +222,9 @@ class Table(Base):
         path=None,
         job_config_params=None,
         partitioned=False,
-        if_exists="raise",
         force_dataset=True,
+        if_table_exists="raise",
+        if_storage_data_exists="raise",
         if_table_config_exists="raise",
     ):
         """Creates BigQuery table at staging dataset.
@@ -249,19 +250,30 @@ class Table(Base):
                 Job configuration params from bigquery
             partitioned (bool): Optional.
                 Whether data is partitioned
-            if_exists (str): Optional
+            if_table_exists (str): Optional
                 What to do if table exists
 
                 * 'raise' : Raises Conflict exception
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
             force_dataset (bool): Creates `<dataset_id>` folder and BigQuery Dataset if it doesn't exists.
-             table_config_exists (bool): Optional
-                If True, does not overwrite the already created table_config.yaml
+            if_table_config_exists (str): Optional.
+                 What to do if config files already exist
+
+                 * 'raise': Raises FileExistError
+                 * 'replace': Replace with blank template
+                 * 'pass'; Do nothing
+            if_storage_data_exists (str): Optional.
+                What to do if data already exists on your bucket:
+
+                * 'raise' : Raises Conflict exception
+                * 'replace' : Replace table
+                * 'pass' : Do nothing
+
         Todo:
 
-            * Implement if_exists=raise
-            * Implement if_exists=pass
+            * Implement if_table_exists=raise
+            * Implement if_table_exists=pass
         """
 
         # Add data to storage
@@ -274,7 +286,7 @@ class Table(Base):
         ):
 
             Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
-                path, mode="staging", if_exists="replace"
+                path, mode="staging", if_exists=if_storage_data_exists
             )
 
             # Create Dataset if it doesn't exist
@@ -319,13 +331,10 @@ class Table(Base):
 
         table.external_data_configuration = external_config
 
-        if if_exists == "replace":
+        if if_table_exists == "replace":
             self.delete(mode="staging")
 
         self.client["bigquery_staging"].create_table(table)
-
-        table = bigquery.Table(self.table_full_name["staging"])
-        # self.update(mode="staging")
 
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
