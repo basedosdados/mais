@@ -209,7 +209,7 @@ def main():
     check_function()
 
     print("\n/home folders")
-    print([f for f in Path("/home").iterdir() if f.is_dir()])
+    print([f for f in Path("/github/home").iterdir() if f.is_dir()])
 
     print("\n/github folders")
     print([f for f in Path("/github").iterdir() if f.is_dir()])
@@ -217,8 +217,8 @@ def main():
     print("\n/workspace folders")
     print([f for f in Path("/github/workspace").iterdir() if f.is_dir()])
 
-    print("\n/workflow folders")
-    print([f for f in Path("/github/workflow").iterdir() if f.is_dir()])
+    print("\n/bases folders")
+    print([f for f in Path("/github/workspace/bases").iterdir() if f.is_dir()])
 
 
 if __name__ == "__main__":
