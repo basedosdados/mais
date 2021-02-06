@@ -208,7 +208,11 @@ def main():
 
     check_function()
 
-    print([f for f in Path().home().iterdir() if f.is_dir()])
+    print("/ folders")
+    print([f for f in Path("/").iterdir() if f.is_dir()])
+
+    print("/github folders")
+    print([f for f in Path("/github").iterdir() if f.is_dir()])
 
 
 if __name__ == "__main__":
