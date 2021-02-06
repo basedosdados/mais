@@ -1,12 +1,49 @@
 import os
+import shutil
 from pathlib import Path
+import base64
 import yaml
 import json
+import toml
+
 
 import basedosdados as bd
 from basedosdados.base import Base
 from basedosdados.storage import Storage
 import basedosdados
+
+
+def decogind_base64(message):
+    # decoding
+    base64_bytes = message.encode("ascii")
+    message_bytes = base64.b64decode(base64_bytes)
+    return message_bytes.decode("ascii")
+
+
+def create_config_folder(config_folder):
+    ## create ~/.basedosdados
+    if os.path.exists(Path.home() / config_folder):
+        shutil.rmtree(Path.home() / config_folder, ignore_errors=True)
+
+    os.mkdir(Path.home() / config_folder)
+    os.mkdir(Path.home() / config_folder / "credentials")
+
+
+def save_json(json_obj, file_path, file_name):
+    with open(f"{file_path}/{file_name}", "w", encoding="utf-8") as f:
+        json.dump(json_obj, f, ensure_ascii=False, indent=2)
+
+
+def create_json_file(message_base64, file_name, config_folder):
+    json_obj = json.loads(decogind_base64(message_base64))
+    prod_file_path = Path.home() / config_folder / "credentials"
+    save_json(json_obj, prod_file_path, file_name)
+
+
+def save_toml(config_dict, file_name, config_folder):
+    file_path = Path.home() / config_folder
+    with open(file_path / file_name, "w") as toml_file:
+        toml.dump(config_dict, toml_file)
 
 
 def sync_bucket(
@@ -103,10 +140,32 @@ def push_table_to_bq(dataset_id, table_id):
 def main():
 
     print(json.load(Path("/github/workspace/files.json").open("r")))
-    
     print(os.environ.get("INPUT_PROJECT_ID"))
-    
-    
+    print(Path.home())
+
+    config_dict = {
+        "metadata_path": "XXX",
+        "templates_path": "XXX",
+        "gcloud-projects": {
+            "staging": {
+                "name": "XXXXX",
+                "credentials_path": "XXXXXX",
+            },
+            "prod": {
+                "name": "gabinete-sv",
+                "credentials_path": "XXXXXX",
+            },
+        },
+    }
+
+    # prod_base64 = os.environ.get("INPUT_PROD_JSON")
+    # staging_base64 = os.environ.get("INPUT_STAGING_JSON")
+
+    # create_config_folder(".basedosdados")
+    # create_json_file(prod_base64, "prod.json", ".basedosdados")
+    # create_json_file(staging_base64, "staging.json", ".basedosdados")
+    # save_toml(config_dict, "config.toml", ".basedosdados")
+
 
 if __name__ == "__main__":
     main()
