@@ -3,31 +3,18 @@ Dados de despesas em campanhas eleitorais a nível de despesa.
 
 Para saber mais acesse:
 Website: 
-Github: 
+Github: https://github.com/basedosdados/mais/
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
-
-Publicado por
--------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
-Website: www.ricardodahis
-Email: rdahis@basedosdados.orgTratado por
------------
-Nome: <nome>
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
 
-Nível da Observação (i.e. a granularidade da linha)
+Nível da Observação (Colunas que identificam cada linha unicamente)
 -------------------
 - despesa
-
-Colunas identificando linhas unicamente
--------------------
 
 Cobertura Temporal
 ------------------
@@ -46,4 +33,14 @@ Frequencia de Atualização
 -------------------------
 2 anos
 
+Tratado por
+-----------
+Nome: <nome>
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
 
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
+Website: www.ricardodahis
+Email: rdahis@basedosdados.org
