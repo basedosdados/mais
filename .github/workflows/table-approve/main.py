@@ -198,8 +198,8 @@ def main():
 
     # prod_base64 = os.environ.get("INPUT_PROD_JSON")
     # staging_base64 = os.environ.get("INPUT_STAGING_JSON")
-    prod_base64 = "cHJvZF9iYXNlNjRfdGVzdA=="
-    staging_base64 = "c3RhZ2luZ19iYXNlNjRfdGVzdA=="
+    prod_base64 = "'eyJwcm9kX2pzb25fdGVzdCI6InByb2RfanNvbl90ZXN0In0='"
+    staging_base64 = "eyJzdGFnaW5nX2pzb25fdGVzdCI6InN0YWdpbmdfanNvbl90ZXN0In0="
 
     create_config_folder(".basedosdados")
     create_json_file(prod_base64, "prod.json", ".basedosdados")
