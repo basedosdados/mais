@@ -5,7 +5,7 @@ import base64
 import yaml
 import json
 import toml
-
+import tomlkit
 
 import basedosdados as bd
 from basedosdados.base import Base
@@ -137,6 +137,44 @@ def push_table_to_bq(dataset_id, table_id):
     tb.publish(if_exists="replace")
 
 
+def check_function():
+    print(
+        "config.toml exists:",
+        os.path.exists(Path.home() / ".basedosdados" / "config.toml"),
+        "\n",
+    )
+    print(
+        tomlkit.parse((Path.home() / ".basedosdados" / "config.toml").open("r").read()),
+        "\n",
+    )
+
+    print(
+        "prod.json exists:",
+        os.path.exists(Path.home() / ".basedosdados" / "credentials" / "prod.json"),
+        "\n",
+    )
+
+    print(
+        "prod_json:",
+        (Path.home() / ".basedosdados" / "credentials" / "prod.json").open("r").read(),
+        "\n",
+    )
+
+    print(
+        "staging_json exists:",
+        os.path.exists(Path.home() / ".basedosdados" / "credentials" / "staging.json"),
+        "\n",
+    )
+
+    print(
+        "staging_json:",
+        (Path.home() / ".basedosdados" / "credentials" / "staging.json")
+        .open("r")
+        .read(),
+        "\n",
+    )
+
+
 def main():
 
     print(json.load(Path("/github/workspace/files.json").open("r")))
@@ -160,11 +198,15 @@ def main():
 
     # prod_base64 = os.environ.get("INPUT_PROD_JSON")
     # staging_base64 = os.environ.get("INPUT_STAGING_JSON")
+    prod_base64 = "cHJvZF9iYXNlNjRfdGVzdA=="
+    staging_base64 = "c3RhZ2luZ19iYXNlNjRfdGVzdA=="
 
-    # create_config_folder(".basedosdados")
-    # create_json_file(prod_base64, "prod.json", ".basedosdados")
-    # create_json_file(staging_base64, "staging.json", ".basedosdados")
-    # save_toml(config_dict, "config.toml", ".basedosdados")
+    create_config_folder(".basedosdados")
+    create_json_file(prod_base64, "prod.json", ".basedosdados")
+    create_json_file(staging_base64, "staging.json", ".basedosdados")
+    save_toml(config_dict, "config.toml", ".basedosdados")
+
+    check_function()
 
 
 if __name__ == "__main__":
