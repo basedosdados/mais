@@ -319,7 +319,7 @@ class Storage(Base):
         with self.client["storage_staging"].batch():
 
             for blob in source_table_ref:
- self.bucket.copy_blob(
+                self.bucket.copy_blob(
                     blob, destination_bucket=destination_bucket
                 )
                 print(f"{blob.name} copied sucessfully to {destination_bucket.name}")
