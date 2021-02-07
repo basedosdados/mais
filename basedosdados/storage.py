@@ -121,7 +121,7 @@ class Storage(Base):
         might fail in the future.
 
         There are 3 modes:
-        
+
         * `raw` : should contain raw files from datasource
         * `staging` : should contain pre-treated files ready to upload to BiqQuery
         * `all`: if no treatment is needed, use `all`.
@@ -191,6 +191,10 @@ class Storage(Base):
 
                     blob.upload_from_filename(str(filepath), **upload_args)
 
+                elif if_exists == "pass":
+
+                    pass
+
                 else:
                     raise Exception(
                         f"Data already exists at {self.bucket_name}/{blob_name}. "
@@ -232,3 +236,90 @@ class Storage(Base):
                 return
             else:
                 blob.delete()
+
+    def delete_table(self, mode="staging", bucket_name=None, not_found_ok=False):
+        """Deletes a table from storage, sends request in batches.
+        If your request requires more than 1000 blobs, you should divide it in multiple requests.
+
+        #TODO: auto divides into multiple requests
+
+        Args:
+            mode (str): Optional
+                Folder of which dataset to update.
+
+            bucket_name (str):
+                The bucket name from which to delete the table. If None, defaults to the bucket initialized when instantiating the Storage object.
+                (You can check it with the Storage().bucket property)
+
+            not_found_ok (bool): Optional.
+                What to do if table not found
+
+        """
+        prefix = f"{mode}/{self.dataset_id}/{self.table_id}/"
+
+        if bucket_name is not None:
+
+            table_blobs = self.bucket(f"{bucket_name}").list_blobs(prefix=prefix)
+
+        else:
+
+            table_blobs = self.bucket.list_blobs(prefix=prefix)
+
+        with self.client["storage_staging"].batch():
+
+            for blob in table_blobs:
+                self.delete_file(
+                    filename=str(blob.name).replace(prefix, ""),
+                    mode=mode,
+                    not_found_ok=not_found_ok,
+                )
+                print(f"{blob.name} deleted sucessfully!")
+
+    def copy_table(
+        self,
+        source_bucket_name="basedosdados",
+        destination_bucket_name=None,
+        mode="staging",
+    ):
+        """Copies table from a source bucket to your bucket, sends request in batches.
+        If your request requires more than 1000 blobs, you should divide it in multiple requests.
+
+        #TODO: auto divides into multiple requests
+
+        Args:
+            source_bucket_name (str):
+                The bucket name from which to copy data. You can change it
+                to copy from other external bucket.
+
+            destination_bucket_name(str): Optional
+                The bucket name where data will be copied to.
+                If None, defaults to the bucket initialized when instantiating the Storage object (You can check it with the
+                Storage().bucket property)
+
+            mode (str): Optional
+                Folder of which dataset to update. Defaults to "staging".
+        """
+
+        source_table_ref = (
+            self.client["storage_staging"]
+            .bucket(source_bucket_name)
+            .list_blobs(prefix=f"{mode}/{self.dataset_id}/{self.table_id}")
+        )
+
+        if destination_bucket_name is None:
+
+            destination_bucket = self.bucket
+
+        else:
+
+            destination_bucket = self.client["storage_staging"].bucket(
+                destination_bucket_name
+            )
+
+        with self.client["storage_staging"].batch():
+
+            for blob in source_table_ref:
+ self.bucket.copy_blob(
+                    blob, destination_bucket=destination_bucket
+                )
+                print(f"{blob.name} copied sucessfully to {destination_bucket.name}")

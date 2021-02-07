@@ -375,6 +375,55 @@ def upload_storage(ctx, dataset_id, table_id, filepath, mode, partitions, if_exi
     )
 
 
+@cli_storage.command(name="delete_table", help="Delete table from bucket")
+@click.argument("dataset_id")
+@click.argument("table_id")
+@click.option(
+    "--mode",
+    "-m",
+    required=True,
+    default="staging",
+    help="[raw|staging] where to delete the file from",
+)
+@click.option(
+    "--bucket_name",
+    default=None,
+    help="Bucket from which to delete data, you can change it to delete from a bucket other than yours",
+)
+@click.option("--not_found_ok", default=False, help="what to do if table not found")
+@click.pass_context
+def storage_delete_table(ctx, dataset_id, table_id, mode, not_found_ok, bucket_name):
+    Storage(dataset_id, table_id).delete_table(
+        mode=mode, not_found_ok=not_found_ok, bucket_name=bucket_name
+    )
+
+
+@cli_storage.command(name="copy_table", help="Copy table to your bucket")
+@click.argument("dataset_id")
+@click.argument("table_id")
+@click.option("--source_bucket_name", required=True, default="basedosdados")
+@click.option(
+    "--dst_bucket_name",
+    default=None,
+    help="Bucket where data will be copied to, defaults to your bucket",
+)
+@click.option(
+    "--mode",
+    "-m",
+    default="staging",
+    help="[raw|staging] which bucket folder to get the table",
+)
+@click.pass_context
+def storage_copy_table(
+    ctx, dataset_id, table_id, source_bucket_name, dst_bucket_name, mode
+):
+    Storage(dataset_id, table_id).copy_table(
+        source_bucket_name=source_bucket_name,
+        destination_bucket_name=dst_bucket_name,
+        mode=mode,
+    )
+
+
 @click.group(name="config")
 def cli_config():
     pass
