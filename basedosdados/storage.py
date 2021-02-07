@@ -241,6 +241,8 @@ class Storage(Base):
         """Deletes a table from storage, sends request in batches.
         If your request requires more than 1000 blobs, you should divide it in multiple requests.
 
+        #TODO: auto divides into multiple requests
+
         Args:
             mode (str): Optional
                 Folder of which dataset to update.
@@ -282,6 +284,8 @@ class Storage(Base):
         """Copies table from a source bucket to your bucket, sends request in batches.
         If your request requires more than 1000 blobs, you should divide it in multiple requests.
 
+        #TODO: auto divides into multiple requests
+
         Args:
             source_bucket_name (str):
                 The bucket name from which to copy data. You can change it
@@ -315,7 +319,7 @@ class Storage(Base):
         with self.client["storage_staging"].batch():
 
             for blob in source_table_ref:
-                copy_blob = self.bucket.copy_blob(
+ self.bucket.copy_blob(
                     blob, destination_bucket=destination_bucket
                 )
                 print(f"{blob.name} copied sucessfully to {destination_bucket.name}")
