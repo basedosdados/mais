@@ -72,7 +72,7 @@ curadoria, e transparência ao cenário de dados no Brasil.
 ## Contribua! 💚
 
 **Incentivamos que outras instituições e pessoas contribuam**. Veja mais
-como contribuir [aqui](https://basedosdados.github.io/mais/github/).
+como contribuir [aqui](https://basedosdados.github.io/mais/colab_data/).
 
 ## Como citar o projeto 📝
 
@@ -84,6 +84,10 @@ O projeto está licenciado sob a [Licença Hipocrática](https://firstdonoharm.d
 
 Documentação está em português (quando possível), código e configurações
 estão em inglês.
+
+## Tutorial
+
+Temos disponível um jupyter notebook com exemplos de uso em `examples/`
 
 ## Desenvolvimento
 
