@@ -82,7 +82,32 @@ class Table(Base):
 
         return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
-    def init(self, data_sample_path=None, if_exists="raise"):
+    def _make_template(self, columns, partition_columns):
+
+        for file in (Path(self.templates) / "table").glob("*"):
+
+            if file.name in ["table_config.yaml", "publish.sql"]:
+
+                # Load and fill template
+                template = Template(file.open("r").read()).render(
+                    table_id=self.table_id,
+                    dataset_id=self.dataset_folder.stem,
+                    project_id=self.client["bigquery_staging"].project,
+                    project_id_prod=self.client["bigquery_prod"].project,
+                    columns=columns,
+                    partition_columns=partition_columns,
+                    now=datetime.datetime.now().strftime("%Y-%m-%d"),
+                )
+
+                # Write file
+                (self.table_folder / file.name).open("w").write(template)
+
+    def init(
+        self,
+        data_sample_path=None,
+        if_folder_exists="raise",
+        if_table_config_exists="raise",
+    ):
         """Initialize table folder at metadata_path at `metadata_path/<dataset_id>/<table_id>`.
 
         The folder should contain:
@@ -96,13 +121,18 @@ class Table(Base):
             data_sample_path (str, pathlib.PosixPath): Optional.
                 Data sample path to auto complete columns names
                 It supports Comma Delimited CSV.
-            if_exists (str): Optional.
+            if_folder_exists (str): Optional.
                 What to do if table folder exists
 
                 * 'raise' : Raises FileExistsError
                 * 'replace' : Replace folder
                 * 'pass' : Do nothing
+            table_config_exists (str): Optional
+                What to do if table_config.yaml and publish.sql exists
 
+                * 'raise' : Raises FileExistsError
+                * 'replace' : Replace files with blank template
+                * 'pass' : Do nothing
         Raises:
             FileExistsError: If folder exists and replace is False.
             NotImplementedError: If data sample is not in supported type or format.
@@ -116,13 +146,13 @@ class Table(Base):
             )
 
         try:
-            self.table_folder.mkdir(exist_ok=(if_exists == "replace"))
+            self.table_folder.mkdir(exist_ok=(if_folder_exists == "replace"))
         except FileExistsError:
-            if if_exists == "raise":
+            if if_folder_exists == "raise":
                 raise FileExistsError(
                     f"Table folder already exists for {self.table_id}. "
                 )
-            elif if_exists == "pass":
+            elif if_folder_exists == "pass":
                 return self
 
         partition_columns = []
@@ -162,23 +192,28 @@ class Table(Base):
 
             columns = ["column_name"]
 
-        for file in (Path(self.templates) / "table").glob("*"):
+        if if_table_config_exists == "pass":
+            if (
+                Path(self.table_folder / "table_config.yaml").is_file()
+                and Path(self.table_folder / "publish.sql").is_file()
+            ):
+                pass
+            else:
+                raise FileExistsError(f"No config files found at {self.table_folder}")
 
-            if file.name in ["table_config.yaml", "publish.sql"]:
-
-                # Load and fill template
-                template = Template(file.open("r").read()).render(
-                    table_id=self.table_id,
-                    dataset_id=self.dataset_folder.stem,
-                    project_id=self.client["bigquery_staging"].project,
-                    project_id_prod=self.client["bigquery_prod"].project,
-                    columns=columns,
-                    partition_columns=partition_columns,
-                    now=datetime.datetime.now().strftime("%Y-%m-%d"),
-                )
-
-                # Write file
-                (self.table_folder / file.name).open("w").write(template)
+        else:
+            if if_table_config_exists == "raise":
+                if (
+                    Path(self.table_folder / "table_config.yaml").is_file()
+                    and Path(self.table_folder / "publish.sql").is_file()
+                ):
+                    raise FileExistsError(
+                        f"table_config.yaml and publish.sql already exists at {self.table_folder}"
+                    )
+                else:
+                    self._make_template(columns, partition_columns)
+            if if_table_config_exists == "replace":
+                self._make_template(columns, partition_columns)
 
         return self
 
@@ -187,8 +222,10 @@ class Table(Base):
         path=None,
         job_config_params=None,
         partitioned=False,
-        if_exists="raise",
         force_dataset=True,
+        if_table_exists="raise",
+        if_storage_data_exists="raise",
+        if_table_config_exists="raise",
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -213,18 +250,30 @@ class Table(Base):
                 Job configuration params from bigquery
             partitioned (bool): Optional.
                 Whether data is partitioned
-            if_exists (str): Optional
+            if_table_exists (str): Optional
                 What to do if table exists
 
                 * 'raise' : Raises Conflict exception
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
             force_dataset (bool): Creates `<dataset_id>` folder and BigQuery Dataset if it doesn't exists.
+            if_table_config_exists (str): Optional.
+                 What to do if config files already exist
+
+                 * 'raise': Raises FileExistError
+                 * 'replace': Replace with blank template
+                 * 'pass'; Do nothing
+            if_storage_data_exists (str): Optional.
+                What to do if data already exists on your bucket:
+
+                * 'raise' : Raises Conflict exception
+                * 'replace' : Replace table
+                * 'pass' : Do nothing
 
         Todo:
 
-            * Implement if_exists=raise
-            * Implement if_exists=pass
+            * Implement if_table_exists=raise
+            * Implement if_table_exists=pass
         """
 
         # Add data to storage
@@ -237,7 +286,7 @@ class Table(Base):
         ):
 
             Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
-                path, mode="staging", if_exists="replace"
+                path, mode="staging", if_exists=if_storage_data_exists
             )
 
             # Create Dataset if it doesn't exist
@@ -252,7 +301,11 @@ class Table(Base):
 
                 dataset_obj.create(if_exists="pass")
 
-            self.init(data_sample_path=path, if_exists="replace")
+            self.init(
+                data_sample_path=path,
+                if_folder_exists="replace",
+                if_table_config_exists=if_table_config_exists,
+            )
 
         external_config = external_config = bigquery.ExternalConfig("CSV")
         external_config.options.skip_leading_rows = 1
@@ -278,13 +331,21 @@ class Table(Base):
 
         table.external_data_configuration = external_config
 
-        if if_exists == "replace":
+        table_ref = self.client["bigquery_staging"].list_tables(
+            f"{self.dataset_id}_staging"
+        )
+
+        table_names = [table.table_id for table in table_ref]
+        if self.table_id in table_names:
+            if if_table_exists == "pass":
+                return None
+            elif if_table_exists == "raise":
+                raise FileExistsError(
+                    "Table already exists, choose replace if you want to overwrite it"
+                )
+        if if_table_exists == "replace":
             self.delete(mode="staging")
-
         self.client["bigquery_staging"].create_table(table)
-
-        table = bigquery.Table(self.table_full_name["staging"])
-        # self.update(mode="staging")
 
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
