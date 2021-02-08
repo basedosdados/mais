@@ -154,15 +154,22 @@ def cli_table():
     type=click.Path(exists=True),
 )
 @click.option(
-    "--if_exists",
+    "--if_folder_exists",
     default="raise",
     help="[raise|replace|pass] actions if table folder exists",
+)
+@click.option(
+    "--if_table_config_exists",
+    default="raise",
+    help="[raise|replace|pass] actions if table config files already exist",
 )
 @click.pass_context
 def init_table(ctx, dataset_id, table_id, data_sample_path, if_exists):
 
     t = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).init(
-        data_sample_path=data_sample_path, if_exists=if_exists
+        data_sample_path=data_sample_path,
+        if_folder_exists=if_folder_exists,
+        if_table_config_exists=if_table_config_exists,
     )
 
     click.echo(
@@ -192,7 +199,7 @@ def init_table(ctx, dataset_id, table_id, data_sample_path, if_exists):
     help="[True|False] whether folder has partitions",
 )
 @click.option(
-    "--if_exists",
+    "--if_table_exists",
     default="raise",
     help="[raise|replace|pass] actions if table exists",
 )
@@ -200,6 +207,16 @@ def init_table(ctx, dataset_id, table_id, data_sample_path, if_exists):
     "--force_dataset",
     default=True,
     help="Whether to automatically create the dataset folders and in BigQuery",
+)
+@click.option(
+    "--if_storage_data_exists",
+    default="raise",
+    help="[raise|replace|pass] actions if table data already exists at Storage",
+)
+@click.option(
+    "--if_table_config_exists",
+    default="raise",
+    help="[raise|replace|pass] actions if table config files already exist",
 )
 @click.pass_context
 def create_table(
@@ -209,16 +226,20 @@ def create_table(
     path,
     job_config_params,
     partitioned,
-    if_exists,
+    if_table_exists,
     force_dataset,
+    if_storage_data_exists,
+    if_table_config_exists,
 ):
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).create(
         path=path,
         job_config_params=job_config_params,
         partitioned=partitioned,
-        if_exists=if_exists,
+        if_table_exists=if_table_exists,
         force_dataset=force_dataset,
+        if_storage_data_exists=if_storage_data_exists,
+        if_table_config_exists=if_table_exists,
     )
 
     click.echo(

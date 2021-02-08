@@ -331,9 +331,20 @@ class Table(Base):
 
         table.external_data_configuration = external_config
 
+        table_ref = self.client["bigquery_staging"].list_tables(
+            f"{self.dataset_id}_staging"
+        )
+
+        table_names = [table.table_id for table in table_ref]
+        if self.table_id in table_names:
+            if if_table_exists == "pass":
+                return None
+            elif if_table_exists == "raise":
+                raise FileExistsError(
+                    "Table already exists, choose replace if you want to overwrite it"
+                )
         if if_table_exists == "replace":
             self.delete(mode="staging")
-
         self.client["bigquery_staging"].create_table(table)
 
     def update(self, mode="all", not_found_ok=True):
