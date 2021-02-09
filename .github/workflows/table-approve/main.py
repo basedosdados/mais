@@ -121,7 +121,9 @@ def load_configs(dataset_id, table_id):
     )
 
 
-def replace_project_id(configs_path):
+def replace_project_id(configs_path, dataset_id, table_id):
+    metadata_path = configs_path["metadata_path"]
+    table_path = f"{metadata_path}/{dataset_id}/{table_id}"
 
     bq_prod_id = configs_path["gcloud-projects"]["prod"]["name"]
     bq_staging_id = configs_path["gcloud-projects"]["staging"]["name"]
@@ -151,9 +153,9 @@ def is_partitioned(table_config):
 def push_table_to_bq(
     dataset_id,
     table_id,
-    source_bucket_name="basedosdados",
-    destination_bucket_name="basedosdados-sv",
-    backup_bucket_name="basedosdados-sv-bkp",
+    source_bucket_name="basedosdados-dev",
+    destination_bucket_name="basedosdados",
+    backup_bucket_name="basedosdados-staging",
 ):
 
     sync_bucket(
@@ -165,7 +167,7 @@ def push_table_to_bq(
     )
 
     table_config, configs_path = load_configs(dataset_id, table_id)
-    replace_project_id(configs_path)
+    replace_project_id(configs_path, dataset_id, table_id)
 
     tb = bd.Table(table_id, dataset_id)
     tb.create(
