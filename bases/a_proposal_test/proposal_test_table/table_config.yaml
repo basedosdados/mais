@@ -1,27 +1,24 @@
-# bucket_name:''
-# project_id_staging:''
-# project_id_prod:''
-table_id: {{ table_id }} # AUTO GENERATED
-dataset_id: {{ dataset_id }} # AUTO GENERATED
+table_id: proposal_test_table # AUTO GENERATED
+dataset_id: a_proposal_test # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/{{ dataset_id | replace("_","-") }} # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/{{ dataset_id }} # AUTO GENERATED
+url_ckan: https://basedosdados.org/dataset/a-proposal-test # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/a_proposal_test # AUTO GENERATED
 
 version: <vA.B> # REQUIRED
 
-last_updated: {{ now }} # AUTO GENERATED
+last_updated: 2021-02-09 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    <descrição>
+    Table for proposal tests
 
 # Quem está completando esse arquivo config?
 published_by:
     name: <nome [você]>  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/{{ dataset_id }}/code # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/a_proposal_test/code # REQUIRED
     website: <website>
     email: <email>
 
@@ -85,9 +82,6 @@ coverage_time:
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED
-{%- for column in partition_columns %}  
-    - {{ column }}
-{%- endfor %}
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -98,17 +92,9 @@ partitions: # REQUIRED
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
-{% for column in columns %}  
+  
     -   
-        name: {{ column }}
-        description: <descrição da coluna>
+        name: test_data
+        description: proposal test column
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-{% endfor -%}
-{%- for column in partition_columns %}  
-    -   
-        name: {{ column }}
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-{% endfor -%}

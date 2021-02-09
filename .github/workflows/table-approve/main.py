@@ -114,24 +114,66 @@ def load_configs(dataset_id, table_id):
     configs_path = Base()._load_config()
     metadata_path = configs_path["metadata_path"]
     table_path = f"{metadata_path}/{dataset_id}/{table_id}"
-    return yaml.load(
-        open(f"{table_path}/table_config.yaml", "r"), Loader=yaml.FullLoader
+
+    return (
+        yaml.load(open(f"{table_path}/table_config.yaml", "r"), Loader=yaml.FullLoader),
+        configs_path,
     )
+
+
+def replace_project_id(configs_path):
+
+    bq_prod_id = configs_path["gcloud-projects"]["prod"]["name"]
+    bq_staging_id = configs_path["gcloud-projects"]["staging"]["name"]
+
+    sql_file = Path(table_path + "/publish.sql").open("r").readlines()
+
+    sql_lines = [line for line in sql_file if f".{table_id}" in line]
+
+    prod_id = sql_lines[0].split("VIEW ")[1].split(".")[0]
+    staging_id = sql_lines[1].split("from ")[1].split(".")[0]
+
+    sql_final = [
+        line.replace(f"VIEW {prod_id}", f"VIEW {bq_prod_id}") for line in sql_file
+    ]
+    sql_final = [
+        line.replace(f"from {staging_id}", f"from {bq_staging_id}")
+        for line in sql_final
+    ]
+
+    Path(table_path + "/publish.sql").open("w").write("".join(sql_final))
 
 
 def is_partitioned(table_config):
     return table_config["partitions"] is not None
 
 
-def push_table_to_bq(dataset_id, table_id):
-    table_config = load_configs(dataset_id, table_id)
+def push_table_to_bq(
+    dataset_id,
+    table_id,
+    source_bucket_name="basedosdados",
+    destination_bucket_name="basedosdados-sv",
+    backup_bucket_name="basedosdados-sv-bkp",
+):
 
-    tb = bd.Table(dataset_id, table_id)
+    sync_bucket(
+        source_bucket_name,
+        dataset_id,
+        table_id,
+        destination_bucket_name,
+        backup_bucket_name,
+    )
 
+    table_config, configs_path = load_configs(dataset_id, table_id)
+    replace_project_id(configs_path)
+
+    tb = bd.Table(table_id, dataset_id)
     tb.create(
+        "",
+        if_table_exists="replace",
+        if_storage_data_exists="pass",
+        if_table_config_exists="pass",
         partitioned=is_partitioned(table_config),
-        storage_data=True,
-        if_exists="pass",
     )
 
     tb.publish(if_exists="replace")
@@ -183,15 +225,14 @@ def main():
 
     config_dict = {
         "metadata_path": "/github/workspace/bases",
-        "templates_path": "XXX",
         "gcloud-projects": {
             "staging": {
-                "name": "XXXXX",
-                "credentials_path": "XXXXXX",
+                "name": "basedosdados-staging",
+                "credentials_path": "/github/home/.basedosdados/credentials/staging.json",
             },
             "prod": {
-                "name": "gabinete-sv",
-                "credentials_path": "XXXXXX",
+                "name": "basedosdados",
+                "credentials_path": "/github/home/.basedosdados/credentials/prod.json",
             },
         },
     }
@@ -205,6 +246,19 @@ def main():
     create_json_file(prod_base64, "prod.json", ".basedosdados")
     create_json_file(staging_base64, "staging.json", ".basedosdados")
     save_toml(config_dict, "config.toml", ".basedosdados")
+
+    # dataset_id = ????
+    # table_id = ????
+
+    # push_table_to_bq(
+    #     dataset_id,
+    #     table_id,
+    #     source_bucket_name="basedosdados",
+    #     destination_bucket_name="basedosdados-sv",
+    #     backup_bucket_name="basedosdados-sv-bkp",
+    # )
+
+    "/github/workspace/files.json"
 
     check_function()
 
