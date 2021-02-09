@@ -1,3 +1,6 @@
+source_bucket_name: {{bucket_name}}
+project_id_staging: {{project_id}}
+project_id_prod: {{project_id_prod}}
 table_id: {{ table_id }} # AUTO GENERATED
 dataset_id: {{ dataset_id }} # AUTO GENERATED
 
