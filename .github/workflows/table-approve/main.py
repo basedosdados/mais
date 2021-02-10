@@ -240,7 +240,7 @@ def main():
         "bucket_name": "destination-13-01",
         "gcloud-projects": {
             "staging": {
-                "name": "basedosdados-staging,
+                "name": "basedosdados-staging",
                 "credentials_path": "/github/home/.basedosdados/credentials/staging.json",
             },
             "prod": {
