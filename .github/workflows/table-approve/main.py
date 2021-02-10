@@ -249,17 +249,16 @@ def main():
     create_json_file(staging_base64, "staging.json", ".basedosdados")
     save_toml(config_dict, "config.toml", ".basedosdados")
 
-    with json.load(Path("/github/workspace/files.json").open("r")) as changes:
-        dict_id = {}
-
-        for change_file in changes:
-            if str(change_file).contains("table_config.yaml"):
-                keys = yaml.load(open(change_file), "r", Loader=yaml.SafeLoader)
-                dict_id[keys["table_id"]] = {
-                    "dataset_id": keys["dataset_id"],
-                    "source_bucket_name": keys["source_bucket_name"],
-                }
-        print(dict_id)
+    changes = json.load(Path("/github/workspace/files.json").open("r"))
+    dict_id = {}
+    for change_file in changes:
+        if str(change_file).contains("table_config.yaml"):
+            keys = yaml.load(open(change_file), "r", Loader=yaml.SafeLoader)
+            dict_id[keys["table_id"]] = {
+                "dataset_id": keys["dataset_id"],
+                "source_bucket_name": keys["source_bucket_name"],
+            }
+    print(dict_id)
 
     # dataset_id = ????
     # table_id = ????
