@@ -1,7 +1,7 @@
 
 // program to clean string variables
 // author: Ricardo Dahis
-// last updated: 2019/05/25
+// last updated: 2021/02/10
 
 cap program drop clean_string
 program clean_string
@@ -40,16 +40,16 @@ program clean_string
 	foreach C in Á À Â Ä Ã {
 		qui replace `1' = usubinstr(`1', "`C'", "A", .)
 	}
-	foreach c in É È Ê Ë {
+	foreach C in É È Ê Ë {
 		qui replace `1' = usubinstr(`1', "`C'", "E", .)
 	}
-	foreach c in Í Ì Î Ï {
+	foreach C in Í Ì Î Ï {
 		qui replace `1' = usubinstr(`1', "`C'", "I", .)
 	}
-	foreach c in Ó Ò Ô Õ Ö {
+	foreach C in Ó Ò Ô Õ Ö {
 		qui replace `1' = usubinstr(`1', "`C'", "O", .)
 	}
-	foreach c in Ú Ù Ü {
+	foreach C in Ú Ù Ü {
 		qui replace `1' = usubinstr(`1', "`C'", "U", .)
 	}
 	*

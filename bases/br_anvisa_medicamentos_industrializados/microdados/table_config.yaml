@@ -6,7 +6,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_anvisa_med
 
 version: v1.0
 
-last_updated: 2021-02-06 # AUTO GENERATED
+last_updated: 2021-02-10 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -116,7 +116,7 @@ columns: # REQUIRED
   
     -   
         name: descricao_apresentacao
-        description: Uma Apresentação de Medicamento representa O modo como um medicamento é apresentado na embalagem.
+        description: Apresentação do Medicamento. Representa o modo como um medicamento é apresentado na embalagem.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
