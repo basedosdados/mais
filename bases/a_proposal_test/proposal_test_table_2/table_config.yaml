@@ -1,4 +1,4 @@
-source_bucket_name: basedosdados-dev
+source_bucket_name: test-13-01-bucket
 project_id_staging: test13-01
 project_id_prod: test13-01
 table_id: proposal_test_table_2 # AUTO GENERATED
