@@ -249,7 +249,7 @@ def main():
     dict_id = {}
     for change_file in changes:
         if "table_config.yaml" in change_file:
-            keys = yaml.load(open(change_file), "r", Loader=yaml.SafeLoader)
+            keys = yaml.load(open(change_file, "r"), Loader=yaml.SafeLoader)
             dict_id[keys["table_id"]] = {
                 "dataset_id": keys["dataset_id"],
                 "source_bucket_name": keys["source_bucket_name"],
