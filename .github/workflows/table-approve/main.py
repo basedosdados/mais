@@ -236,13 +236,15 @@ def main():
 
     config_dict = {
         "metadata_path": "/github/workspace/bases",
+        "templates_path": "/github/workspace/basedosdados/configs/templates",
+        "bucket_name": "destination-13-01",
         "gcloud-projects": {
             "staging": {
-                "name": "test13-01",
+                "name": "basedosdados-staging,
                 "credentials_path": "/github/home/.basedosdados/credentials/staging.json",
             },
             "prod": {
-                "name": "test13-01",
+                "name": "basedosdados",
                 "credentials_path": "/github/home/.basedosdados/credentials/prod.json",
             },
         },
@@ -304,13 +306,13 @@ aWNlYWNjb3VudC5jb20iCn0K'"""
         source_bucket_name = dict_id[table_id]["source_bucket_name"]
         dataset_id = dict_id[table_id]["dataset_id"]
         print(source_bucket_name, dataset_id)
-        push_table_to_bq(
-            dataset_id=dataset_id,
-            table_id=table_id,
-            source_bucket_name=source_bucket_name,
-            destination_bucket_name="test-13-01-bucket",
-            backup_bucket_name="test-13-01-backup",
-        )
+        # push_table_to_bq(
+        #     dataset_id=dataset_id,
+        #     table_id=table_id,
+        #     source_bucket_name=source_bucket_name,
+        #     destination_bucket_name="test-13-01-bucket",
+        #     backup_bucket_name="test-13-01-backup",
+        # )
 
     # "/github/workspace/files.json"
 
