@@ -90,6 +90,7 @@ class Table(Base):
 
                 # Load and fill template
                 template = Template(file.open("r").read()).render(
+                    bucket_name=self.bucket_name,
                     table_id=self.table_id,
                     dataset_id=self.dataset_folder.stem,
                     project_id=self.client["bigquery_staging"].project,
