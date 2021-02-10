@@ -19,11 +19,11 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.tempo_deslocamento_casa_trabalho AS
+CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.emissoes_CO2_material_particulado AS
 SELECT 
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(tempo_medio_deslocamento AS INT64) tempo_medio_deslocamento,
-SAFE_CAST(prop_deslocamento_acima_1_hora AS FLOAT64) prop_deslocamento_acima_1_hora
-from basedosdados-dev.br_mobilidados_indicadores_staging.tempo_deslocamento_casa_trabalho as t
+SAFE_CAST(emissao_co2_habitantes AS INT64) emissao_co2_habitantes,
+SAFE_CAST(emissoes_mp AS INT64) emissoes_mp
+from basedosdados-dev.br_mobilidados_indicadores_staging.emissoes_CO2_material_particulado as t

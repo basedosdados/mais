@@ -19,11 +19,10 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.tempo_deslocamento_casa_trabalho AS
+CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.tx_motorizacao AS
 SELECT 
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(tempo_medio_deslocamento AS INT64) tempo_medio_deslocamento,
-SAFE_CAST(prop_deslocamento_acima_1_hora AS FLOAT64) prop_deslocamento_acima_1_hora
-from basedosdados-dev.br_mobilidados_indicadores_staging.tempo_deslocamento_casa_trabalho as t
+SAFE_CAST(taxa_motorizacao_capitais AS INT64) taxa_motorizacao_capitais
+from basedosdados-dev.br_mobilidados_indicadores_staging.tx_motorizacao as t
