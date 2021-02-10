@@ -1,0 +1,20 @@
+Table for proposal tests
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/a-proposal-test
+Github: https://github.com/basedosdados/mais/tree/master/bases/a_proposal_test
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: <nome [você]>
+Código: https://github.com/basedosdados/mais/tree/master/bases/a_proposal_test/codeTratado por
+-----------
+Nome: <nome>
+
+
+
+
