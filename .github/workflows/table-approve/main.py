@@ -122,28 +122,24 @@ def load_configs(dataset_id, table_id):
 
 
 def replace_project_id(configs_path, dataset_id, table_id):
+
+    table_config, configs_path = load_configs(dataset_id, table_id)
+
     metadata_path = configs_path["metadata_path"]
     table_path = f"{metadata_path}/{dataset_id}/{table_id}"
+
+    user_staging_id = table_config["project_id_staging"]
+    user_prod_id = table_config["project_id_prod"]
 
     bq_prod_id = configs_path["gcloud-projects"]["prod"]["name"]
     bq_staging_id = configs_path["gcloud-projects"]["staging"]["name"]
 
-    sql_file = Path(table_path + "/publish.sql").open("r").readlines()
+    sql_file = Path(table_path + "/publish.sql").open("r").read()
 
-    sql_lines = [line for line in sql_file if f".{table_id}" in line]
+    sql_final = sql_file.replace(f"{user_prod_id}.", f"{bq_prod_id}.")
+    sql_final = sql_final.replace(f"{user_staging_id}.", f"{bq_staging_id}.")
 
-    prod_id = sql_lines[0].split("VIEW ")[1].split(".")[0]
-    staging_id = sql_lines[1].split("from ")[1].split(".")[0]
-
-    sql_final = [
-        line.replace(f"VIEW {prod_id}", f"VIEW {bq_prod_id}") for line in sql_file
-    ]
-    sql_final = [
-        line.replace(f"from {staging_id}", f"from {bq_staging_id}")
-        for line in sql_final
-    ]
-
-    Path(table_path + "/publish.sql").open("w").write("".join(sql_final))
+    Path(table_path + "/publish.sql").open("w").write(sql_final)
 
 
 def is_partitioned(table_config):
@@ -252,7 +248,7 @@ def main():
     changes = json.load(Path("/github/workspace/files.json").open("r"))
     dict_id = {}
     for change_file in changes:
-        if str(change_file).contains("table_config.yaml"):
+        if "table_config.yaml" in change_file:
             keys = yaml.load(open(change_file), "r", Loader=yaml.SafeLoader)
             dict_id[keys["table_id"]] = {
                 "dataset_id": keys["dataset_id"],

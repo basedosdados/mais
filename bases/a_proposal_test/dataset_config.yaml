@@ -8,7 +8,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/a_proposal_te
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    Dataset for proposal tests
+    <descrição>
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list

@@ -19,7 +19,7 @@ TIPOS:
 
 */
 
-CREATE VIEW gabinete-sv.a_proposal_test.proposal_test_table AS
+CREATE VIEW basedosdados.a_proposal_test.proposal_test_table AS
 SELECT 
-SAFE_CAST(test_data AS INT64) test_data
-from gabinete-sv.a_proposal_test_staging.proposal_test_table as t
+SAFE_CAST(test_data AS STRING) test_data
+from basedosdados-staging.a_proposal_test_staging.proposal_test_table as t

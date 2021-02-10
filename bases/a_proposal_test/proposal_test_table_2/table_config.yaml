@@ -1,3 +1,6 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-staging
+project_id_prod: basedosdados
 table_id: proposal_test_table # AUTO GENERATED
 dataset_id: a_proposal_test # AUTO GENERATED
 
@@ -13,7 +16,7 @@ last_updated: 2021-02-09 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Table for proposal tests hahahauhsuahsuahsuauuauaua
+    <descrição>
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -95,6 +98,6 @@ columns: # REQUIRED
   
     -   
         name: test_data
-        description: proposal test column
+        description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
