@@ -315,9 +315,11 @@ def main():
             backup_bucket_name="test-13-01-backup",
         )
 
-        print("\nData successfully synced and created in bigquery")
         print(
-            f"Dataset: {dataset_id} \nTable: {table_id} \nSource Bucket: {source_bucket_name}\n"
+            "###=============================================================================###\n"
+            "\nData successfully synced and created in bigquery",
+            f"Dataset: {dataset_id} \nTable: {table_id} \nSource Bucket: {source_bucket_name}\n",
+            "###=============================================================================###\n",
         )
 
 
