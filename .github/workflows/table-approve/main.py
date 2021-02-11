@@ -50,6 +50,22 @@ def save_toml(config_dict, file_name, config_folder):
         toml.dump(config_dict, toml_file)
 
 
+def load_configs(dataset_id, table_id):
+    ### get the config file in .basedosdados/config.toml
+    configs_path = Base()._load_config()
+    ### get the path to metadata_path, where the folder bases with metadata information
+    metadata_path = configs_path["metadata_path"]
+    ### get the path to table_config.yaml
+    table_path = f"{metadata_path}/{dataset_id}/{table_id}"
+
+    return (
+        ### load the table_config.yaml
+        yaml.load(open(f"{table_path}/table_config.yaml", "r"), Loader=yaml.FullLoader),
+        ### return the path to .basedosdados configs
+        configs_path,
+    )
+
+
 def create_config_tree(prod_base64, staging_base64, config_dict):
     ### execute the creation of .basedosdados
     create_config_folder(".basedosdados")
@@ -59,6 +75,52 @@ def create_config_tree(prod_base64, staging_base64, config_dict):
     create_json_file(staging_base64, "staging.json", ".basedosdados")
     ### create the config.toml
     save_toml(config_dict, "config.toml", ".basedosdados")
+
+
+def replace_project_id_publish_sql(configs_path, dataset_id, table_id):
+
+    ### load the paths to metadata and configs folder
+    table_config, configs_path = load_configs(dataset_id, table_id)
+    metadata_path = configs_path["metadata_path"]
+    table_path = f"{metadata_path}/{dataset_id}/{table_id}"
+
+    ### load the source project id to staging and pro data in bigquery
+    user_staging_id = table_config["project_id_staging"]
+    user_prod_id = table_config["project_id_prod"]
+
+    ### load the destination project id to staging and prod data in bigquery
+    bq_prod_id = configs_path["gcloud-projects"]["prod"]["name"]
+    bq_staging_id = configs_path["gcloud-projects"]["staging"]["name"]
+
+    ### load publish.sql file with the query for create the VIEW in production
+    sql_file = Path(table_path + "/publish.sql").open("r").read()
+
+    ### replace the project id name of the source for the production (basedosdados project)
+    sql_final = sql_file.replace(f"{user_prod_id}.", f"{bq_prod_id}.")
+    sql_final = sql_final.replace(f"{user_staging_id}.", f"{bq_staging_id}.")
+
+    ### write the replaced file
+    Path(table_path + "/publish.sql").open("w").write(sql_final)
+
+
+def pretty_print(dataset_id, table_id, source_bucket_name):
+    print(
+        "\n###============================================================###",
+        "\n###                                                            ###",
+        "\n###      Data successfully synced and created in bigquery      ###",
+        "\n###                                                            ###",
+        f"\n###      Dataset      : {dataset_id}",
+        " " * (37 - len(dataset_id)),
+        "###",
+        f"\n###      Table        : {table_id}",
+        " " * (37 - len(table_id)),
+        "###",
+        f"\n###      Source Bucket: {source_bucket_name}",
+        " " * (37 - len(source_bucket_name)),
+        "###",
+        "\n###                                                            ###",
+        "\n###============================================================###",
+    )
 
 
 def sync_bucket(
@@ -124,48 +186,6 @@ def sync_bucket(
     ref.copy_table(source_bucket_name=source_bucket_name)
 
 
-def load_configs(dataset_id, table_id):
-    ### get the config file in .basedosdados/config.toml
-    configs_path = Base()._load_config()
-    ### get the path to metadata_path, where the folder bases with metadata information
-    metadata_path = configs_path["metadata_path"]
-    ### get the path to table_config.yaml
-    table_path = f"{metadata_path}/{dataset_id}/{table_id}"
-
-    return (
-        ### load the table_config.yaml
-        yaml.load(open(f"{table_path}/table_config.yaml", "r"), Loader=yaml.FullLoader),
-        ### return the path to .basedosdados configs
-        configs_path,
-    )
-
-
-def replace_project_id_publish_sql(configs_path, dataset_id, table_id):
-
-    ### load the paths to metadata and configs folder
-    table_config, configs_path = load_configs(dataset_id, table_id)
-    metadata_path = configs_path["metadata_path"]
-    table_path = f"{metadata_path}/{dataset_id}/{table_id}"
-
-    ### load the source project id to staging and pro data in bigquery
-    user_staging_id = table_config["project_id_staging"]
-    user_prod_id = table_config["project_id_prod"]
-
-    ### load the destination project id to staging and prod data in bigquery
-    bq_prod_id = configs_path["gcloud-projects"]["prod"]["name"]
-    bq_staging_id = configs_path["gcloud-projects"]["staging"]["name"]
-
-    ### load publish.sql file with the query for create the VIEW in production
-    sql_file = Path(table_path + "/publish.sql").open("r").read()
-
-    ### replace the project id name of the source for the production (basedosdados project)
-    sql_final = sql_file.replace(f"{user_prod_id}.", f"{bq_prod_id}.")
-    sql_final = sql_final.replace(f"{user_staging_id}.", f"{bq_staging_id}.")
-
-    ### write the replaced file
-    Path(table_path + "/publish.sql").open("w").write(sql_final)
-
-
 def is_partitioned(table_config):
     ## check if the table are partitioned
     return table_config["partitions"] is not None
@@ -174,6 +194,7 @@ def is_partitioned(table_config):
 def get_table_dataset_id():
     ### load the change files in PR || diff between PR and master
     changes = json.load(Path("/github/workspace/files.json").open("r"))
+    print(changes)
     ### create a dict to save the dataset and source_bucket relate to each table_id
     dataset_table_ids = {}
     for change_file in changes:
@@ -315,23 +336,7 @@ def main():
             backup_bucket_name="test-13-01-backup",
         )
 
-    print(
-        "\n###============================================================###",
-        "\n###                                                            ###",
-        "\n###      Data successfully synced and created in bigquery      ###",
-        "\n###                                                            ###",
-        f"\n###      Dataset      : {dataset_id}",
-        " " * (37 - len(dataset_id)),
-        "###",
-        f"\n###      Table        : {table_id}",
-        " " * (37 - len(table_id)),
-        "###",
-        f"\n###      Source Bucket: {source_bucket_name}",
-        " " * (37 - len(source_bucket_name)),
-        "###",
-        "\n###                                                            ###",
-        "\n###============================================================###",
-    )
+        pretty_print(dataset_id, table_id, source_bucket_name)
 
 
 if __name__ == "__main__":
