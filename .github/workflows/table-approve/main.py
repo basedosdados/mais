@@ -180,7 +180,7 @@ def push_table_to_bq(
 
     tb = bd.Table(table_id, dataset_id)
     tb.create(
-        "",
+        path=None,
         if_table_exists="replace",
         if_storage_data_exists="pass",
         if_table_config_exists="pass",
