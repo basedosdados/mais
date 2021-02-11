@@ -1,8 +1,8 @@
 # Base: Leis do Município de Feira de Santana
 
 As leis do município de Feira de Santana são publicadas no
-site proprietário [www.leismunicipais.com.br](). O projeto
-Dados Abertos de Feira conseguiu via Lei de Acesso à Informação
+site proprietário [www.leismunicipais.com.br](https://leismunicipais.com.br/legislacao-municipal/328/leis-de-feira-de-santana/).
+O projeto Dados Abertos de Feira conseguiu via Lei de Acesso à Informação
 acesso ao arquivo de todas as leis.
 
 O arquivo de leis foi disponibilizado em arquivos HTML. Criamos
@@ -11,6 +11,17 @@ em JSON.
 
 A primeira publicação dessa base foi feita no [Kaggle](https://www.kaggle.com/anapaulagomes/leis-do-municpio-de-feira-de-santana)
 e tem todas as leis do município até o final de 2019.
+
+## Uso dos dados
+
+Como capturar os dados de `br_ba_feiradesantana`?
+
+1. Para capturar esses dados, basta verificar o link dos dados originais indicado em `dataset_config.yaml` no item `website`.
+
+2. Caso tenha sido utilizado algum código de captura ou tratamento, estes estarão contidos em `code/`.
+Se o dado publicado for em sua versão bruta, não existirá a pasta `code/`.
+
+Os dados publicados estão disponíveis em: https://basedosdados.org/dataset/br-ba-feiradesantana
 
 ## Formato
 
@@ -42,3 +53,15 @@ Consideramos o mesmo que a documentação de contribuição: o script será exec
 a partir da raiz do repositório.
 
 ## Publicação
+
+Para gerar a tabela no Big Query:
+
+```
+basedosdados table create br_ba_feiradesantana leis -p bases/br_ba_feiradesantana_leis/output/leis.csv
+```
+
+Para publicar:
+
+```
+basedosdados table publish br_ba_feiradesantana leis
+```
