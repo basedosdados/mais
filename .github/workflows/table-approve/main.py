@@ -14,36 +14,51 @@ import basedosdados
 
 
 def decogind_base64(message):
-    # decoding
+    # decoding the base64 string
     base64_bytes = message.encode("ascii")
     message_bytes = base64.b64decode(base64_bytes)
     return message_bytes.decode("ascii")
 
 
 def create_config_folder(config_folder):
-    ## create ~/.basedosdados
+    ## if ~/.basedosdados folder exists delete
     if os.path.exists(Path.home() / config_folder):
         shutil.rmtree(Path.home() / config_folder, ignore_errors=True)
-
+    ## create ~/.basedosdados folder
     os.mkdir(Path.home() / config_folder)
     os.mkdir(Path.home() / config_folder / "credentials")
 
 
 def save_json(json_obj, file_path, file_name):
+    ### function to save json file
     with open(f"{file_path}/{file_name}", "w", encoding="utf-8") as f:
         json.dump(json_obj, f, ensure_ascii=False, indent=2)
 
 
 def create_json_file(message_base64, file_name, config_folder):
+    ### decode base64 script and load as a json object
     json_obj = json.loads(decogind_base64(message_base64))
     prod_file_path = Path.home() / config_folder / "credentials"
+    ### save the json credential in the .basedosdados/credentials/
     save_json(json_obj, prod_file_path, file_name)
 
 
 def save_toml(config_dict, file_name, config_folder):
+    ### save the config.toml in .basedosdados
     file_path = Path.home() / config_folder
     with open(file_path / file_name, "w") as toml_file:
         toml.dump(config_dict, toml_file)
+
+
+def create_config_tree(prod_base64, staging_base64, config_dict):
+    ### execute the creation of .basedosdados
+    create_config_folder(".basedosdados")
+    ### create the prod.json secret
+    create_json_file(prod_base64, "prod.json", ".basedosdados")
+    ### create the staging.json secret
+    create_json_file(staging_base64, "staging.json", ".basedosdados")
+    ### create the config.toml
+    save_toml(config_dict, "config.toml", ".basedosdados")
 
 
 def sync_bucket(
@@ -72,7 +87,7 @@ def sync_bucket(
         backup_bucket_name (str):
             The bucket name for where backup data will be stored.
         mode (str): Optional.
-         Folder of which dataset to update.
+        Folder of which dataset to update.
 
     Raises:
         ValueError:
@@ -95,68 +110,83 @@ def sync_bucket(
 
         raise ValueError("No objects found on the source bucket")
 
-    else:
-        # MAKE A BACKUP OF OLD DATA
-        if len(list(destination_ref)):
-            ref.copy_table(
-                source_bucket_name=destination_bucket_name,
-                destination_bucket_name=backup_bucket_name,
-            )
+    # MAKE A BACKUP OF OLD DATA
+    if len(list(destination_ref)):
+        ref.copy_table(
+            source_bucket_name=destination_bucket_name,
+            destination_bucket_name=backup_bucket_name,
+        )
 
-            # DELETE OLD DATA FROM PROD
-            ref.delete_table(not_found_ok=True)
+        # DELETE OLD DATA FROM PROD
+        ref.delete_table(not_found_ok=True)
 
-        # COPIES DATA TO DESTINATION
-        ref.copy_table(source_bucket_name=source_bucket_name)
+    # COPIES DATA TO DESTINATION
+    ref.copy_table(source_bucket_name=source_bucket_name)
 
 
 def load_configs(dataset_id, table_id):
+    ### get the config file in .basedosdados/config.toml
     configs_path = Base()._load_config()
+    ### get the path to metadata_path, where the folder bases with metadata information
     metadata_path = configs_path["metadata_path"]
+    ### get the path to table_config.yaml
     table_path = f"{metadata_path}/{dataset_id}/{table_id}"
 
     return (
+        ### load the table_config.yaml
         yaml.load(open(f"{table_path}/table_config.yaml", "r"), Loader=yaml.FullLoader),
+        ### return the path to .basedosdados configs
         configs_path,
     )
 
 
-def replace_project_id(configs_path, dataset_id, table_id):
+def replace_project_id_publish_sql(configs_path, dataset_id, table_id):
 
+    ### load the paths to metadata and configs folder
     table_config, configs_path = load_configs(dataset_id, table_id)
-
     metadata_path = configs_path["metadata_path"]
     table_path = f"{metadata_path}/{dataset_id}/{table_id}"
 
+    ### load the source project id to staging and pro data in bigquery
     user_staging_id = table_config["project_id_staging"]
     user_prod_id = table_config["project_id_prod"]
 
+    ### load the destination project id to staging and prod data in bigquery
     bq_prod_id = configs_path["gcloud-projects"]["prod"]["name"]
     bq_staging_id = configs_path["gcloud-projects"]["staging"]["name"]
 
+    ### load publish.sql file with the query for create the VIEW in production
     sql_file = Path(table_path + "/publish.sql").open("r").read()
 
+    ### replace the project id name of the source for the production (basedosdados project)
     sql_final = sql_file.replace(f"{user_prod_id}.", f"{bq_prod_id}.")
     sql_final = sql_final.replace(f"{user_staging_id}.", f"{bq_staging_id}.")
 
+    ### write the replaced file
     Path(table_path + "/publish.sql").open("w").write(sql_final)
 
 
 def is_partitioned(table_config):
+    ## check if the table are partitioned
     return table_config["partitions"] is not None
 
 
 def get_table_dataset_id():
+    ### load the change files in PR || diff between PR and master
     changes = json.load(Path("/github/workspace/files.json").open("r"))
-    dict_id = {}
+    ### create a dict to save the dataset and source_bucket relate to each table_id
+    dataset_table_ids = {}
     for change_file in changes:
+        ### search for table_config.yaml files in PR
         if "table_config.yaml" in change_file:
-            keys = yaml.load(open(change_file, "r"), Loader=yaml.SafeLoader)
-            dict_id[keys["table_id"]] = {
-                "dataset_id": keys["dataset_id"],
-                "source_bucket_name": keys["source_bucket_name"],
+            ### load the finded table_config.yaml
+            table_config = yaml.load(open(change_file, "r"), Loader=yaml.SafeLoader)
+            ### add the dataset and source_bucket for each table_id
+            dataset_table_ids[table_config["table_id"]] = {
+                "dataset_id": table_config["dataset_id"],
+                "source_bucket_name": table_config["source_bucket_name"],
             }
-    return dict_id
+    return dataset_table_ids
 
 
 def push_table_to_bq(
@@ -167,6 +197,8 @@ def push_table_to_bq(
     backup_bucket_name="basedosdados-staging",
 ):
 
+    ### Copies proprosed data between storage buckets.
+    ### Creates a backup of old data, then delete it and copies new data into the destination bucket.
     sync_bucket(
         source_bucket_name,
         dataset_id,
@@ -175,10 +207,14 @@ def push_table_to_bq(
         backup_bucket_name,
     )
 
+    ### laod the table_config.yalm to get the metadata IDs
     table_config, configs_path = load_configs(dataset_id, table_id)
-    replace_project_id(configs_path, dataset_id, table_id)
+    ### adjust the correct project ID in publish sql
+    replace_project_id_publish_sql(configs_path, dataset_id, table_id)
 
+    ### create Table object of selected table and dataset ID
     tb = bd.Table(table_id, dataset_id)
+    ### create the staging table in bigquery
     tb.create(
         path=None,
         if_table_exists="replace",
@@ -187,53 +223,16 @@ def push_table_to_bq(
         partitioned=is_partitioned(table_config),
     )
 
+    ### publish the table in prod bigquery
     tb.publish(if_exists="replace")
 
 
-def check_function():
-    print(
-        "config.toml exists:",
-        os.path.exists(Path.home() / ".basedosdados" / "config.toml"),
-        "\n",
-    )
-    print(
-        tomlkit.parse((Path.home() / ".basedosdados" / "config.toml").open("r").read()),
-        "\n",
-    )
-
-    print(
-        "prod.json exists:",
-        os.path.exists(Path.home() / ".basedosdados" / "credentials" / "prod.json"),
-        "\n",
-    )
-
-    # print(
-    #     "prod.json:",
-    #     (Path.home() / ".basedosdados" / "credentials" / "prod.json").open("r").read(),
-    #     "\n",
-    # )
-
-    print(
-        "staging.json exists:",
-        os.path.exists(Path.home() / ".basedosdados" / "credentials" / "staging.json"),
-        "\n",
-    )
-
-    # print(
-    #     "staging.json:",
-    #     (Path.home() / ".basedosdados" / "credentials" / "staging.json")
-    #     .open("r")
-    #     .read(),
-    #     "\n",
-    # )
-
-
 def main():
-
     # print(json.load(Path("/github/workspace/files.json").open("r")))
     print(os.environ.get("INPUT_PROJECT_ID"))
     print(Path.home())
 
+    ### json with information of .basedosdados/config.toml
     config_dict = {
         "metadata_path": "/github/workspace/bases",
         "templates_path": "/github/workspace/basedosdados/configs/templates",
@@ -250,8 +249,10 @@ def main():
         },
     }
 
+    ### load the secret of prod and staging data
     # prod_base64 = os.environ.get("INPUT_PROD_JSON")
     # staging_base64 = os.environ.get("INPUT_STAGING_JSON")
+
     prod_base64 = """'ewogICJ0eXBlIjogInNlcnZpY2VfYWNjb3VudCIsCiAgInByb2plY3RfaWQiOiAidGVzdDEzLTAx
     IiwKICAicHJpdmF0ZV9rZXlfaWQiOiAiODZhOGM4MmYwMWZhNTgzOTYzNTU3MzFkZmYxMTI4NWEz
     MWQ3ZDllZSIsCiAgInByaXZhdGVfa2V5IjogIi0tLS0tQkVHSU4gUFJJVkFURSBLRVktLS0tLVxu
@@ -293,36 +294,31 @@ def main():
     ZXJ0cyIsCiAgImNsaWVudF94NTA5X2NlcnRfdXJsIjogImh0dHBzOi8vd3d3Lmdvb2dsZWFwaXMu
     Y29tL3JvYm90L3YxL21ldGFkYXRhL3g1MDkvY2Fpby04MTclNDB0ZXN0MTMtMDEuaWFtLmdzZXJ2
     aWNlYWNjb3VudC5jb20iCn0K'"""
+
     staging_base64 = prod_base64
 
-    create_config_folder(".basedosdados")
-    create_json_file(prod_base64, "prod.json", ".basedosdados")
-    create_json_file(staging_base64, "staging.json", ".basedosdados")
-    save_toml(config_dict, "config.toml", ".basedosdados")
+    ### create confif and credential folders
+    create_config_tree(prod_base64, staging_base64, config_dict)
+    ### find the dataset and tables of the PR
+    dataset_table_ids = get_table_dataset_id()
 
-    dict_id = get_table_dataset_id()
-
-    for table_id in dict_id.keys():
-        source_bucket_name = dict_id[table_id]["source_bucket_name"]
-        dataset_id = dict_id[table_id]["dataset_id"]
-        print(source_bucket_name, dataset_id)
+    ### iterate over each table in dataset of the PR
+    for table_id in dataset_table_ids.keys():
+        dataset_id = dataset_table_ids[table_id]["dataset_id"]
+        source_bucket_name = dataset_table_ids[table_id]["source_bucket_name"]
+        ### push the table to bigquery
         push_table_to_bq(
-            dataset_id=dataset_id,
-            table_id=table_id,
-            source_bucket_name=source_bucket_name,
+            dataset_id,
+            table_id,
+            source_bucket_name,
             destination_bucket_name="destination-13-01",
             backup_bucket_name="test-13-01-backup",
         )
 
-    # "/github/workspace/files.json"
-
-    check_function()
-
-    print("\n/github folders")
-    print([f for f in Path("/github").iterdir() if f.is_dir()])
-
-    print("\n/workspace folders")
-    print([f for f in Path("/github/workspace").iterdir() if f.is_dir()])
+        print("\nData successfully synced and created in bigquery")
+        print(
+            f"Dataset: {dataset_id} \nTable: {table_id} \nSource Bucket: {source_bucket_name}\n"
+        )
 
 
 if __name__ == "__main__":
