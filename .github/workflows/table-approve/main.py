@@ -230,7 +230,7 @@ def check_function():
 
 def main():
 
-    print(json.load(Path("/github/workspace/files.json").open("r")))
+    # print(json.load(Path("/github/workspace/files.json").open("r")))
     print(os.environ.get("INPUT_PROJECT_ID"))
     print(Path.home())
 
