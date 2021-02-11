@@ -207,11 +207,11 @@ def check_function():
         "\n",
     )
 
-    print(
-        "prod.json:",
-        (Path.home() / ".basedosdados" / "credentials" / "prod.json").open("r").read(),
-        "\n",
-    )
+    # print(
+    #     "prod.json:",
+    #     (Path.home() / ".basedosdados" / "credentials" / "prod.json").open("r").read(),
+    #     "\n",
+    # )
 
     print(
         "staging.json exists:",
@@ -219,13 +219,13 @@ def check_function():
         "\n",
     )
 
-    print(
-        "staging.json:",
-        (Path.home() / ".basedosdados" / "credentials" / "staging.json")
-        .open("r")
-        .read(),
-        "\n",
-    )
+    # print(
+    #     "staging.json:",
+    #     (Path.home() / ".basedosdados" / "credentials" / "staging.json")
+    #     .open("r")
+    #     .read(),
+    #     "\n",
+    # )
 
 
 def main():

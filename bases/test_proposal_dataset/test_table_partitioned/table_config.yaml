@@ -77,8 +77,11 @@ coverage_geo:
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - <ano 1>
-    - <ano 2>
+    - 2017
+    - 2018
+    - 2019
+    - 2020
+    - 2021
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
