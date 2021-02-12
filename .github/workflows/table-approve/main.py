@@ -236,8 +236,6 @@ def push_table_to_bq(
     ### create Table object of selected table and dataset ID
     tb = bd.Table(table_id, dataset_id)
     ### create the staging table in bigquery
-    print("#" * 70)
-    print(tb.metadata_path, list(tb.metadata_path.glob("*/**")))
     tb.create(
         path=None,
         if_table_exists="replace",
