@@ -193,7 +193,13 @@ def sync_bucket(
 
 def is_partitioned(table_config):
     ## check if the table are partitioned
-    return table_config["partitions"] is not None
+    print("TABLE PARTITION")
+    print(table_config["partitions"])
+    if table_config["partitions"] is None:
+        return False
+
+    elif isinstance(table_config["partitions"], list):
+        return len(table_config["partitions"]) > 0
 
 
 def get_table_dataset_id():
