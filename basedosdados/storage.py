@@ -273,7 +273,6 @@ class Storage(Base):
                     mode=mode,
                     not_found_ok=not_found_ok,
                 )
-                print(f"{blob.name} deleted sucessfully!")
 
     def copy_table(
         self,
@@ -319,7 +318,4 @@ class Storage(Base):
         with self.client["storage_staging"].batch():
 
             for blob in source_table_ref:
-                self.bucket.copy_blob(
-                    blob, destination_bucket=destination_bucket
-                )
-                print(f"{blob.name} copied sucessfully to {destination_bucket.name}")
+                self.bucket.copy_blob(blob, destination_bucket=destination_bucket)

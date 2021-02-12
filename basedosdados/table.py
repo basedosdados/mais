@@ -290,23 +290,23 @@ class Table(Base):
                 path, mode="staging", if_exists=if_storage_data_exists
             )
 
-            # Create Dataset if it doesn't exist
-            if force_dataset:
+        # Create Dataset if it doesn't exist
+        if force_dataset:
 
-                dataset_obj = Dataset(self.dataset_id, **self.main_vars)
+            dataset_obj = Dataset(self.dataset_id, **self.main_vars)
 
-                try:
-                    dataset_obj.init()
-                except FileExistsError:
-                    pass
+            try:
+                dataset_obj.init()
+            except FileExistsError:
+                pass
 
-                dataset_obj.create(if_exists="pass")
+            dataset_obj.create(if_exists="pass")
 
-            self.init(
-                data_sample_path=path,
-                if_folder_exists="replace",
-                if_table_config_exists=if_table_config_exists,
-            )
+        self.init(
+            data_sample_path=path,
+            if_folder_exists="replace",
+            if_table_config_exists=if_table_config_exists,
+        )
 
         external_config = external_config = bigquery.ExternalConfig("CSV")
         external_config.options.skip_leading_rows = 1
