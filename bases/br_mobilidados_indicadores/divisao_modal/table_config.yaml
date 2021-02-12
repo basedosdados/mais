@@ -9,7 +9,6 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidado
 
 version: <v1.0> # REQUIRED
 
-
 last_updated: 2021-02-09 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.

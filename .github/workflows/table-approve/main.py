@@ -102,7 +102,7 @@ def replace_project_id_publish_sql(configs_path, dataset_id, table_id):
     sql_file = Path(table_path + "/publish.sql").open("r").read()
 
     ### replace the project id name of the source for the production (basedosdados project)
-    sql_final = sql_file.replace(f"{user_prod_id}.", f"{bq_prod_id}.")
+    sql_final = sql_file.replace(f"{user_prod_id}.", f"{bq_prod_id}.", 1)
     sql_final = sql_final.replace(f"{user_staging_id}.", f"{bq_staging_id}.")
 
     print(sql_final)
