@@ -79,6 +79,7 @@ def create_config_tree(prod_base64, staging_base64, config_dict):
 
 def replace_project_id_publish_sql(configs_path, dataset_id, table_id):
 
+    print('REPLACE PUBLISH.SQL')
     ### load the paths to metadata and configs folder
     table_config, configs_path = load_configs(dataset_id, table_id)
     metadata_path = configs_path["metadata_path"]
@@ -87,10 +88,17 @@ def replace_project_id_publish_sql(configs_path, dataset_id, table_id):
     ### load the source project id to staging and pro data in bigquery
     user_staging_id = table_config["project_id_staging"]
     user_prod_id = table_config["project_id_prod"]
+    
+
 
     ### load the destination project id to staging and prod data in bigquery
     bq_prod_id = configs_path["gcloud-projects"]["prod"]["name"]
     bq_staging_id = configs_path["gcloud-projects"]["staging"]["name"]
+    
+    print('user_prod_id: ', user_prod_id)
+    print('user_staging_id: ', user_staging_id)
+    print('bq_prod_id: ', bq_prod_id)
+    print('bq_staging_id: ', bq_staging_id)
 
     ### load publish.sql file with the query for create the VIEW in production
     sql_file = Path(table_path + "/publish.sql").open("r").read()
@@ -98,6 +106,8 @@ def replace_project_id_publish_sql(configs_path, dataset_id, table_id):
     ### replace the project id name of the source for the production (basedosdados project)
     sql_final = sql_file.replace(f"{user_prod_id}.", f"{bq_prod_id}.")
     sql_final = sql_final.replace(f"{user_staging_id}.", f"{bq_staging_id}.")
+
+    print(sql_final)
 
     ### write the replaced file
     Path(table_path + "/publish.sql").open("w").write(sql_final)
