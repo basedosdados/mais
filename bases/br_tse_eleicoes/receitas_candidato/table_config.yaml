@@ -1,12 +1,9 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: receita_candidato # AUTO GENERATED
+table_id: receitas_candidato # AUTO GENERATED
 dataset_id: br_tse_eleicoes # AUTO GENERATED
 
 version: v1.0
 
-last_updated: 2020-12-18 # AUTO GENERATED
+last_updated: 2021-01-27 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -46,6 +43,9 @@ data_update_frequency: 2 anos
 observation_level:
     - receita
 
+primary_keys:
+    - sequencial_receita
+
 # Qual é a cobertura espacial da tabela?
 # Regras:
 #   - minúsculo, sem acento, singular
@@ -76,7 +76,7 @@ coverage_time:
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED  
+partitions: # REQUIRED
     - ano
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
@@ -198,26 +198,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: tipo_receita
-        description: Tipo da Receita
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_fonte_receita
-        description: Tipo da Fonte da Receita
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
         name: fonte_receita
         description: Fonte da Receita
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: situacao_receita
-        description: Situação da Receita
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -234,6 +216,18 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
+        name: especie_receita
+        description: Espécie da Receita
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: situacao_receita
+        description: Situação da Receita
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
         name: descricao_receita
         description: Descrição da Receita
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
@@ -241,7 +235,7 @@ columns: # REQUIRED
   
     -   
         name: valor_receita
-        description: Valor da Receita
+        description: Valor da Receita (R$)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -318,14 +312,14 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_setor_economico_doador
-        description: ID Setor Econômico do Doador - CNAE
+        name: cnae_2_doador
+        description: Classificação Nacional de Atividades Econômicas 2.0
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: setor_economico_doador
-        description: Setor Econômico do Doador - CNAE
+        name: descricao_cnae_2_doador
+        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -354,8 +348,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: setor_economico_doador_orig
-        description: Setor Econômico do Doador Originário - CNAE
+        name: descricao_cnae_2_doador_orig
+        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do Doador Originário
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -424,7 +418,7 @@ columns: # REQUIRED
         description: Entrega Conjunto
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-  
+
     -   
         name: ano
         description: Ano
