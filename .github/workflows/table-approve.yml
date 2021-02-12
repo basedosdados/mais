@@ -2,7 +2,7 @@ name: Update table when modified or added
 on:
   push:
     branches:
-    - proposal_action_scripts
+    - table-approve
 jobs:
   get_changes:
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
         uses: ./.github/workflows/table-approve
         with:
           project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
-          # prod_json: ${{ secrets.GCP_MAIN_PROD_JSON }}
-          # staging_json: ${{ secrets.GCP_MAIN_STAGING_JSON }}
+          GCP_TABLE_APPROVE_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
+          GCP_TABLE_APPROVE_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
           
 
