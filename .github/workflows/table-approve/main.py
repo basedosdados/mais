@@ -282,11 +282,10 @@ def main():
     }
 
     ### load the secret of prod and staging data
-    print(os.environ.keys())
-    prod_base64 = os.environ.get("GCP_TABLE_APPROVE_PROD")
-    staging_base64 = os.environ.get("GCP_TABLE_APPROVE_STAGING")
+    prod_base64 = os.environ.get("INPUT_GCP_TABLE_APPROVE_PROD")
+    staging_base64 = os.environ.get("INPUT_GCP_TABLE_APPROVE_STAGING")
 
-    ### create confif and credential folders
+    ### create config and credential folders
     create_config_tree(prod_base64, staging_base64, config_dict)
     ### find the dataset and tables of the PR
     dataset_table_ids = get_table_dataset_id()
