@@ -103,23 +103,28 @@ def replace_project_id_publish_sql(configs_path, dataset_id, table_id):
     Path(table_path + "/publish.sql").open("w").write(sql_final)
 
 
-def pretty_print(dataset_id, table_id, source_bucket_name):
+def pretty_log(dataset_id, table_id, source_bucket_name):
+
+    if "basedosdados" in source_bucket_name:
+        source_len = len(source_bucket_name) - 9
+    else:
+        source_len = len(source_bucket_name)
     print(
-        "\n###============================================================###",
-        "\n###                                                            ###",
-        "\n###      Data successfully synced and created in bigquery      ###",
-        "\n###                                                            ###",
-        f"\n###      Dataset      : {dataset_id}",
-        " " * (37 - len(dataset_id)),
+        "\n###================================================================================###",
+        "\n###                                                                                ###",
+        "\n###               Data successfully synced and created in bigquery                 ###",
+        "\n###                                                                                ###",
+        f"\n###               Dataset      : {dataset_id}",
+        " " * (48 - len(dataset_id)),
         "###",
-        f"\n###      Table        : {table_id}",
-        " " * (37 - len(table_id)),
+        f"\n###               Table        : {table_id}",
+        " " * (48 - len(table_id)),
         "###",
-        f"\n###      Source Bucket: {source_bucket_name}",
-        " " * (37 - len(source_bucket_name)),
+        f"\n###               Source Bucket: {source_bucket_name}",
+        " " * (48 - source_len),
         "###",
-        "\n###                                                            ###",
-        "\n###============================================================###\n",
+        "\n###                                                                                ###",
+        "\n###================================================================================###\n",
     )
 
 
@@ -235,6 +240,10 @@ def push_table_to_bq(
 
     ### create Table object of selected table and dataset ID
     tb = bd.Table(table_id, dataset_id)
+
+    ### delete table from staging and prod if exists
+    tb.delete("all")
+
     ### create the staging table in bigquery
     tb.create(
         path=None,
@@ -338,7 +347,7 @@ def main():
             backup_bucket_name="test-13-01-backup",
         )
 
-        pretty_print(dataset_id, table_id, source_bucket_name)
+        pretty_log(dataset_id, table_id, source_bucket_name)
 
 
 if __name__ == "__main__":
