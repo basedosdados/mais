@@ -246,6 +246,8 @@ def push_table_to_bq(
 
     ### publish the table in prod bigquery
     tb.publish(if_exists="replace")
+    ### updates the table description
+    tb.update("prod")
 
 
 def main():
