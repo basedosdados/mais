@@ -195,11 +195,17 @@ def is_partitioned(table_config):
     ## check if the table are partitioned
     print("TABLE PARTITION")
     print(table_config["partitions"])
-    if table_config["partitions"] is None:
+
+    partitions = table_config["partitions"]
+    if partitions is None:
         return False
 
-    elif isinstance(table_config["partitions"], list):
-        return len(table_config["partitions"]) > 0
+    elif isinstance(partitions, list):
+
+        # check if any None inside list.
+        # False if it is the case Ex: [None, 'partition']
+        # True otherwise          Ex: ['partition1', 'partition2']
+        return not any([item is None for item in partitions])
 
 
 def get_table_dataset_id():
