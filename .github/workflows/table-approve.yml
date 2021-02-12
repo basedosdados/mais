@@ -46,5 +46,8 @@ jobs:
           project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
           GCP_TABLE_APPROVE_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
           GCP_TABLE_APPROVE_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
+          destination_bucket_name: basedosdados
+          backup_bucket_name: basedosdados-backup
+
           
 

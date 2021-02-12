@@ -299,8 +299,8 @@ def main():
             dataset_id,
             table_id,
             source_bucket_name,
-            destination_bucket_name="destination-13-01",
-            backup_bucket_name="test-13-01-backup",
+            destination_bucket_name=os.environ.get("INPUT_DESTINATION_BUCKET_NAME"),
+            backup_bucket_name=os.environ.get("INPUT_BACKUP_BUCKET_NAME"),
         )
 
         pretty_log(dataset_id, table_id, source_bucket_name)
