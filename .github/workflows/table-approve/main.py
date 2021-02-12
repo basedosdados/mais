@@ -268,20 +268,21 @@ def main():
     config_dict = {
         "metadata_path": "/github/workspace/bases",
         "templates_path": "/github/workspace/basedosdados/configs/templates",
-        "bucket_name": "destination-13-01",
+        "bucket_name": "basedosdados",
         "gcloud-projects": {
             "staging": {
-                "name": "test13-01",
+                "name": "basedosdados-staging",
                 "credentials_path": "/github/home/.basedosdados/credentials/staging.json",
             },
             "prod": {
-                "name": "test13-01",
+                "name": "basedosdados",
                 "credentials_path": "/github/home/.basedosdados/credentials/prod.json",
             },
         },
     }
 
     ### load the secret of prod and staging data
+    print(os.environ.keys())
     prod_base64 = os.environ.get("GCP_TABLE_APPROVE_PROD")
     staging_base64 = os.environ.get("GCP_TABLE_APPROVE_STAGING")
 
