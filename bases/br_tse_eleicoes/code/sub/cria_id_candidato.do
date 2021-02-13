@@ -4,26 +4,17 @@
 //----------------------------------------------------------------------------//
 
 use "output/candidatos_1998.dta", clear
-append using "output/candidatos_2000.dta"
-append using "output/candidatos_2002.dta"
-append using "output/candidatos_2004.dta"
-append using "output/candidatos_2006.dta"
-append using "output/candidatos_2008.dta"
-append using "output/candidatos_2010.dta"
-append using "output/candidatos_2012.dta"
-append using "output/candidatos_2014.dta"
-append using "output/candidatos_2016.dta"
-append using "output/candidatos_2018.dta"
-append using "output/candidatos_2020.dta"
+foreach ano of numlist 2000(2)2020 {
+	append using "output/candidatos_`ano'.dta"
+}
+*
 
 //--------------------//
 // limpa entradas erradas
 //--------------------//
 
-drop if cpf == "#NULO#" | cpf == "000000000-4" | cpf == "0" | cpf == "00000000000"
+drop if cpf == "" | cpf == "#NULO#" | cpf == "000000000-4" | cpf == "0" | cpf == "00000000000" | cpf == "NR_CPF_CANDIDATO"
 drop if titulo_eleitoral == "000000000000" | titulo_eleitoral == "#NI#"
-
-compress
 
 //--------------------//
 // 1a rodada
@@ -34,7 +25,7 @@ keep nome_candidato cpf titulo_eleitoral
 duplicates drop
 
 egen id_candidato_bd = group(cpf titulo_eleitoral), missing
-la var id_candidato_bd "ID Candidato - Base dos Dados"
+la var id_candidato_bd "ID Candidato(a) - Base dos Dados"
 
 bys cpf: egen aux_id_number_cpf = max(id_candidato_bd)
 replace id_candidato_bd = aux_id_number_cpf

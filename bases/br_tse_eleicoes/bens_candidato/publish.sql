@@ -18,8 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-
-CREATE VIEW basedosdados.br_tse_eleicoes.bens_candidato AS
+CREATE VIEW basedosdados-dev.br_tse_eleicoes.bens_candidato AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
@@ -30,4 +29,4 @@ SAFE_CAST(codigo_tipo_item AS INT64) id_tipo_item,
 SAFE_CAST(tipo_item AS STRING) tipo_item,
 SAFE_CAST(descricao_item AS STRING) descricao_item,
 SAFE_CAST(valor_item AS FLOAT64) valor_item
-from basedosdados-staging.br_tse_eleicoes_staging.bens_candidato as t
+from basedosdados-dev.br_tse_eleicoes_staging.bens_candidato as t

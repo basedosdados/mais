@@ -3,18 +3,6 @@
 // build: agregacao
 //----------------------------------------------------------------------------//
 
-/*
-
-TODO:
-
-cargo: Vereador, Prefeito, Deputado Estadual, Deputado Federal, Senador, Governador, Presidente
-
-geo: Brasil, Macro, Estado, Meso, Micro, Municipio, Municipio-Zona, Votação Seção.
-
-politica: Candidato, Partido, Coaligacao, Consolidado.
-
-*/
-
 //---------------------------------//
 // resultados
 //---------------------------------//
@@ -31,20 +19,44 @@ foreach ano of numlist 1998(2)2020 {
 	
 	local subdirs : dir "output/resultados_candidato_municipio_zona/ano=`ano'/" dirs "*"
 	
-	//di "`subdirs'"
-		
 	foreach subdir in `subdirs' {
 		
 		local sigla_uf = substr("`subdir'", 10, 2)
 		!mkdir "output/resultados_candidato_municipio/ano=`ano'/sigla_uf=`sigla_uf'"
 		
-		import delimited "output/resultados_candidato_municipio_zona/ano=`ano'/sigla_uf=`sigla_uf'/resultados_candidato_municipio_zona.csv", clear varn(1) case(preserve)
+		import delimited "output/resultados_candidato_municipio_zona/ano=`ano'/sigla_uf=`sigla_uf'/resultados_candidato_municipio_zona.csv", clear varn(1) encoding("utf-8") case(preserve)
 		collapse (sum) votos, by(tipo_eleicao turno id_municipio_tse numero_candidato id_candidato_bd cargo sigla_partido resultado)
 		export delimited "output/resultados_candidato_municipio/ano=`ano'/sigla_uf=`sigla_uf'/resultados_candidato_municipio.csv", replace
 		
 	}
 }
 *
+
+//--------------//
+// partido-municipio
+//--------------//
+
+!mkdir "output/resultados_partido_municipio"
+
+foreach ano of numlist 1998(2)2020 {
+	
+	!mkdir "output/resultados_partido_municipio/ano=`ano'"
+	
+	local subdirs : dir "output/resultados_partido_municipio_zona/ano=`ano'/" dirs "*"
+	
+	foreach subdir in `subdirs' {
+		
+		local sigla_uf = substr("`subdir'", 10, 2)
+		!mkdir "output/resultados_partido_municipio/ano=`ano'/sigla_uf=`sigla_uf'"
+		
+		import delimited "output/resultados_partido_municipio_zona/ano=`ano'/sigla_uf=`sigla_uf'/resultados_partido_municipio_zona.csv", clear varn(1) encoding("utf-8") case(preserve)
+		collapse (sum) votos*, by(tipo_eleicao turno id_municipio_tse cargo sigla_partido)
+		export delimited "output/resultados_partido_municipio/ano=`ano'/sigla_uf=`sigla_uf'/resultados_partido_municipio.csv", replace
+		
+	}
+}
+*
+
 
 //--------------//
 // candidato
@@ -159,30 +171,6 @@ foreach ano of numlist 1998(2)2020 {
 }
 *
 
-//--------------//
-// partido
-//--------------//
-
-!mkdir "output/resultados_partido_municipio"
-
-foreach ano of numlist 1998(2)2020 {
-	
-	!mkdir "output/resultados_partido_municipio/ano=`ano'"
-	
-	local subdirs : dir "output/resultados_partido_municipio_zona/ano=`ano'/" dirs "*"
-	
-	foreach subdir in `subdirs' {
-		
-		local sigla_uf = substr("`subdir'", 10, 2)
-		!mkdir "output/resultados_partido_municipio/ano=`ano'/sigla_uf=`sigla_uf'"
-		
-		import delimited "output/resultados_partido_municipio_zona/ano=`ano'/sigla_uf=`sigla_uf'/resultados_partido_municipio_zona.csv", clear varn(1) case(preserve)
-		collapse (sum) votos*, by(tipo_eleicao turno id_municipio_tse cargo sigla_partido)
-		export delimited "output/resultados_partido_municipio/ano=`ano'/sigla_uf=`sigla_uf'/resultados_partido_municipio.csv", replace
-		
-	}
-}
-*
 
 //---------------------------------//
 // detalhes votacao municipio
@@ -190,7 +178,7 @@ foreach ano of numlist 1998(2)2020 {
 
 !mkdir "output/detalhes_votacao_municipio"
 
-foreach ano of numlist 1998(2)2018 {
+foreach ano of numlist 1998(2)2020 {
 	
 	!mkdir "output/detalhes_votacao_municipio/ano=`ano'"
 	

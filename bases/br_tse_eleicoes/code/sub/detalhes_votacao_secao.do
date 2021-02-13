@@ -26,7 +26,7 @@ local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
-foreach ano of numlist 1994(2)2018 {
+foreach ano of numlist 1994(2)2020 {
 	
 	foreach estado in `estados_`ano'' {
 		
@@ -57,7 +57,7 @@ foreach ano of numlist 1994(2)2018 {
 			gen votos_pendentes = .
 			
 		}
-		else if `ano' == 2018 {
+		else if `ano' >= 2018 {
 			
 			drop in 1
 			

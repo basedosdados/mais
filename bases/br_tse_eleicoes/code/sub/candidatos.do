@@ -185,7 +185,7 @@ foreach ano of numlist 1998(2)2020 {
 		else if inlist(`ano', 2006, 2008, 2012, 2014, 2016, 2018, 2020) {
 			replace data_nasc = subinstr(data_nasc, "/", "", .)
 		}
-		else if inlist(`ano', 2010) { // 2008, 
+		else if inlist(`ano', 2010) {
 			gen aux_mes = ""
 			replace aux_mes = "01" if substr(data_nasc, 4, 3) == "JAN"
 			replace aux_mes = "02" if substr(data_nasc, 4, 3) == "FEB"
@@ -214,6 +214,7 @@ foreach ano of numlist 1998(2)2020 {
 		
 		cap drop aux*
 		
+		/*
 		drop if	cargo != "1º suplente" & ///
 				cargo != "1º suplente senador" & ///
 				cargo != "2º suplente" & ///
@@ -229,7 +230,7 @@ foreach ano of numlist 1998(2)2020 {
 				cargo != "vice-governador" & ///
 				cargo != "vice-prefeito"
 		
-		drop if cpf == ""
+		*/
 		
 		duplicates drop
 		

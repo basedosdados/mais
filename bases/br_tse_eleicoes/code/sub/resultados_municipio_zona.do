@@ -44,7 +44,7 @@ keep id_municipio_tse sigla_uf
 tempfile diretorio
 save `diretorio'
 
-foreach ano of numlist 2020 { // 1998(2)
+foreach ano of numlist 1998(2)2020 {
 	
 	foreach tipo in candidato partido {
 		
@@ -119,8 +119,8 @@ foreach ano of numlist 2020 { // 1998(2)
 				}
 				*
 				
-				replace coligacao = "" if coligacao == "#NULO#"
-				replace composicao = "" if composicao == "#NE#" | composicao == "#NULO#"
+				replace coligacao = ""	if coligacao == "#NULO#"
+				replace composicao = ""	if composicao == "#NE#" | composicao == "#NULO#"
 				
 				foreach k in tipo_eleicao cargo resultado {
 					clean_string `k'
