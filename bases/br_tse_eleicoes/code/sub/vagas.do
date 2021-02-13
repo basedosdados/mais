@@ -40,8 +40,8 @@ foreach ano of numlist 1996(2)2020 {
 			
 			ren v3	ano
 			ren v4	tipo_eleicao
-			ren v5	estado_abrev
-			ren v6	id_municipio_TSE
+			ren v5	sigla_uf
+			ren v6	id_municipio_tse
 			ren v9	cargo
 			ren v10	vagas
 		
@@ -54,15 +54,15 @@ foreach ano of numlist 1996(2)2020 {
 			
 			ren v3	ano
 			ren v5	tipo_eleicao
-			ren v10	estado_abrev
-			ren v11	id_municipio_TSE
+			ren v10	sigla_uf
+			ren v11	id_municipio_tse
 			ren v14	cargo
 			ren v15	vagas
 			
 		}
 		*
 		
-		destring ano id_municipio_TSE vagas, replace force
+		destring ano id_municipio_tse vagas, replace force
 		
 		//------------------//
 		// limpa strings
@@ -74,7 +74,6 @@ foreach ano of numlist 1996(2)2020 {
 		*
 		
 		limpa_tipo_eleicao `ano'
-		replace tipo_eleicao = "eleicoes `ano'" if tipo_eleicao == "eleicao ordinaria"
 		
 		drop if mod(ano, 2) > 0
 		

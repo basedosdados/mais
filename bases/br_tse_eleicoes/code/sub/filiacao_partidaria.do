@@ -27,9 +27,9 @@ foreach estado in `estados' {
 			
 			ren v3	titulo_eleitoral
 			ren v4	nome_filiado
-			ren v5	partido
-			ren v7	estado_abrev
-			ren v8	id_municipio_TSE
+			ren v5	sigla_partido
+			ren v7	sigla_uf
+			ren v8	id_municipio_tse
 			ren v10	zona
 			ren v11	secao
 			ren v12	data_filiacao
@@ -41,7 +41,7 @@ foreach estado in `estados' {
 			ren v18	data_regularizacao
 			ren v19	motivo_cancelamento
 			
-			destring id_municipio_TSE zona secao, replace force
+			destring id_municipio_tse zona secao, replace force
 			
 			foreach k of varlist data_* {
 				
