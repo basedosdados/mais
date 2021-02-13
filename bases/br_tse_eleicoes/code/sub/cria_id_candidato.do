@@ -4,65 +4,56 @@
 //----------------------------------------------------------------------------//
 
 use "output/candidatos_1998.dta", clear
-append using "output/candidatos_2000.dta"
-append using "output/candidatos_2002.dta"
-append using "output/candidatos_2004.dta"
-append using "output/candidatos_2006.dta"
-append using "output/candidatos_2008.dta"
-append using "output/candidatos_2010.dta"
-append using "output/candidatos_2012.dta"
-append using "output/candidatos_2014.dta"
-append using "output/candidatos_2016.dta"
-append using "output/candidatos_2018.dta"
-append using "output/candidatos_2020.dta"
+foreach ano of numlist 2000(2)2020 {
+	append using "output/candidatos_`ano'.dta"
+}
+*
 
 //--------------------//
 // limpa entradas erradas
 //--------------------//
 
-drop if CPF == "#NULO#" | CPF == "000000000-4" | CPF == "0" | CPF == "00000000000"
+drop if cpf == "" | cpf == "#NULO#" | cpf == "000000000-4" | cpf == "0" | cpf == "00000000000" | cpf == "NR_CPF_CANDIDATO"
 drop if titulo_eleitoral == "000000000000" | titulo_eleitoral == "#NI#"
-
-compress
 
 //--------------------//
 // 1a rodada
-// usa CPF and titulo_eleitoral
+// usa cpf and titulo_eleitoral
 //--------------------//
 
-keep nome_candidato CPF titulo_eleitoral
+keep nome_candidato cpf titulo_eleitoral
 duplicates drop
 
-egen id_candidato_BD = group(CPF titulo_eleitoral), missing
-la var id_candidato_BD "ID Candidato - Base dos Dados"
+egen id_candidato_bd = group(cpf titulo_eleitoral), missing
+la var id_candidato_bd "ID Candidato(a) - Base dos Dados"
 
-bys CPF: egen aux_id_number_CPF = max(id_candidato_BD)
-replace id_candidato_BD = aux_id_number_CPF
+bys cpf: egen aux_id_number_cpf = max(id_candidato_bd)
+replace id_candidato_bd = aux_id_number_cpf
 
-bys titulo_eleitoral: egen aux_id_number_TE = max(id_candidato_BD)
-replace id_candidato_BD = aux_id_number_TE
+bys titulo_eleitoral: egen aux_id_number_TE = max(id_candidato_bd)
+replace id_candidato_bd = aux_id_number_TE
 
-egen aux_CPF = tag(id_candidato_BD CPF)
-bys id_candidato_BD: egen N_CPF = sum(aux_CPF)
+egen aux_cpf = tag(id_candidato_bd cpf)
+bys id_candidato_bd: egen N_cpf = sum(aux_cpf)
 
-egen aux_TE = tag(id_candidato_BD titulo_eleitoral)
-bys id_candidato_BD: egen N_TE = sum(aux_TE)
+egen aux_TE = tag(id_candidato_bd titulo_eleitoral)
+bys id_candidato_bd: egen N_TE = sum(aux_TE)
 
 drop aux*
 
 duplicates tag id_cand, gen(dup)
 
-order    id_candidato_BD N_CPF N_TE CPF titulo_eleitoral nome_candidato
-sort dup id_candidato_BD N_CPF N_TE CPF titulo_eleitoral
+order    id_candidato_bd N_cpf N_TE cpf titulo_eleitoral nome_candidato
+sort dup id_candidato_bd N_cpf N_TE cpf titulo_eleitoral
 
 preserve
-	keep if N_CPF > 1 & N_TE > 1
+	keep if N_cpf > 1 & N_TE > 1
 	save "tmp/para_2a_rodada.dta", replace
 restore
 
-keep if N_CPF == 1 | N_TE == 1
+keep if N_cpf == 1 | N_TE == 1
 
-keep id_candidato_BD CPF titulo_eleitoral nome_candidato
+keep id_candidato_bd cpf titulo_eleitoral nome_candidato
 
 save "tmp/1a_rodada.dta", replace
 
@@ -96,14 +87,16 @@ replace aux_ultima = "paula"		if aux_primeira == "nuncia" & aux_ultima == "souza
 replace aux_ultima = "silva"		if aux_primeira == "custodia" & aux_ultima == "sessim"
 replace aux_ultima = "soares"		if aux_primeira == "rosangela" & aux_ultima == "dantas"
 
-egen aux_nomes = tag(id_candidato_BD aux_primeira aux_ultima)
-bys id_candidato_BD: egen N_nomes = sum(aux_nomes)
+egen aux_nomes = tag(id_candidato_bd aux_primeira aux_ultima)
+bys id_candidato_bd: egen N_nomes = sum(aux_nomes)
 
-egen aux_id = group(id_candidato_BD aux_primeira aux_ultima)
-replace id_candidato_BD = 100000000 + aux_id	// para diferenciar de id_candidato em linhas
-format id_candidato_BD %20.0g
+egen aux_id = group(id_candidato_bd aux_primeira aux_ultima)
+replace id_candidato_bd = 100000000 + aux_id	// para diferenciar de id_candidato em linhas
+format id_candidato_bd %20.0g
 
-keep id_candidato_BD CPF titulo_eleitoral nome_candidato
+keep if N_nomes == 1	// excluindo candidatos nao-identificados unicamente
+
+keep id_candidato_bd cpf titulo_eleitoral nome_candidato
 
 save "tmp/2a_rodada.dta", replace
 
@@ -114,14 +107,22 @@ save "tmp/2a_rodada.dta", replace
 use "tmp/1a_rodada.dta", clear
 append using "tmp/2a_rodada.dta"
 
-ren  id_candidato_BD aux_id
-egen id_candidato_BD = group(aux_id)
-la var id_candidato_BD "ID Candidato - Base dos Dados"
+ren  id_candidato_bd aux_id
+egen id_candidato_bd = group(aux_id)
+la var id_candidato_bd "ID Candidato - Base dos Dados"
 
-sort  id_candidato_BD
-order id_candidato_BD CPF titulo_eleitoral nome_candidato
-keep  id_candidato_BD CPF titulo_eleitoral nome_candidato
+egen aux_cpf = tag(id_candidato_bd cpf)
+bys id_candidato_bd: egen N_cpf = sum(aux_cpf)
+
+egen aux_TE = tag(id_candidato_bd titulo_eleitoral)
+bys id_candidato_bd: egen N_TE = sum(aux_TE)
+
+drop if N_cpf > 2 | N_TE > 2	// excluindo candidatos com possibilidade de erro grande demais (>2)
+
+sort  id_candidato_bd
+order id_candidato_bd cpf titulo_eleitoral nome_candidato
+keep  id_candidato_bd cpf titulo_eleitoral nome_candidato
 
 compress
 
-save "output/id_candidato_BD.dta", replace
+save "output/id_candidato_bd.dta", replace

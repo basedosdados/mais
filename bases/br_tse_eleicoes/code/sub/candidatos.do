@@ -31,8 +31,8 @@ foreach ano of numlist 1998(2)2020 {
 		
 		di "`ano'_`estado'_candidatos"
 		
-		cap import delimited "input/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
-		cap import delimited "input/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear
+		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
+		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear
 		
 		if `ano' <= 2010 {
 			
@@ -41,17 +41,17 @@ foreach ano of numlist 1998(2)2020 {
 			ren v3 ano
 			ren v4 turno
 			ren v5 tipo_eleicao
-			ren v6 estado_abrev
-			ren v7 id_municipio_TSE
+			ren v6 sigla_uf
+			ren v7 id_municipio_tse
 			ren v10 cargo
 			ren v11 nome_candidato
 			ren v12 sequencial_candidato
 			ren v13 numero_candidato
-			ren v14 CPF
+			ren v14 cpf
 			ren v15 nome_urna_candidato
 			ren v17 situacao
 			ren v18 numero_partido
-			ren v19 partido
+			ren v19 sigla_partido
 			ren v23 composicao
 			ren v24 coligacao
 			ren v26 ocupacao
@@ -61,7 +61,7 @@ foreach ano of numlist 1998(2)2020 {
 			ren v33 instrucao
 			ren v35 estado_civil
 			ren v37 nacionalidade
-			ren v38 estado_abrev_nasc
+			ren v38 sigla_uf_nasc
 			ren v40 municipio_nasc
 			ren v43 resultado
 			
@@ -73,17 +73,17 @@ foreach ano of numlist 1998(2)2020 {
 			ren v3 ano
 			ren v4 turno
 			ren v5 tipo_eleicao
-			ren v6 estado_abrev
-			ren v7 id_municipio_TSE
+			ren v6 sigla_uf
+			ren v7 id_municipio_tse
 			ren v10 cargo
 			ren v11 nome_candidato
 			ren v12 sequencial_candidato
 			ren v13 numero_candidato
-			ren v14 CPF
+			ren v14 cpf
 			ren v15 nome_urna_candidato
 			ren v17 situacao
 			ren v18 numero_partido
-			ren v19 partido
+			ren v19 sigla_partido
 			ren v23 composicao
 			ren v24 coligacao
 			ren v26 ocupacao
@@ -93,7 +93,7 @@ foreach ano of numlist 1998(2)2020 {
 			ren v33 instrucao
 			ren v35 estado_civil
 			ren v37 nacionalidade
-			ren v38 estado_abrev_nasc
+			ren v38 sigla_uf_nasc
 			ren v40 municipio_nasc
 			ren v43 resultado
 			ren v44 email
@@ -106,22 +106,22 @@ foreach ano of numlist 1998(2)2020 {
 			ren v3 ano
 			ren v6 turno
 			ren v8 tipo_eleicao
-			ren v11 estado_abrev
-			ren v12 id_municipio_TSE
+			ren v11 sigla_uf
+			ren v12 id_municipio_tse
 			ren v15 cargo
 			ren v16 sequencial_candidato
 			ren v17 numero_candidato
 			ren v18 nome_candidato
 			ren v19 nome_urna_candidato
-			ren v21 CPF
+			ren v21 cpf
 			ren v22 email
 			ren v26 situacao
 			ren v28 numero_partido
-			ren v29 partido
+			ren v29 sigla_partido
 			ren v32 coligacao
 			ren v33 composicao
 			ren v35 nacionalidade
-			ren v36 estado_abrev_nasc
+			ren v36 sigla_uf_nasc
 			ren v38 municipio_nasc
 			ren v39 data_nasc
 			ren v41 titulo_eleitoral
@@ -137,7 +137,7 @@ foreach ano of numlist 1998(2)2020 {
 		
 		if `ano' == 2020 drop in 1
 		
-		destring ano id_municipio_TSE turno sequencial_candidato numero_candidato numero_partido, replace force
+		destring ano id_municipio_tse turno sequencial_candidato numero_candidato numero_partido, replace force
 		replace sequencial_candidato = . if sequencial_candidato == -1
 		
 		//------------------//
@@ -185,7 +185,7 @@ foreach ano of numlist 1998(2)2020 {
 		else if inlist(`ano', 2006, 2008, 2012, 2014, 2016, 2018, 2020) {
 			replace data_nasc = subinstr(data_nasc, "/", "", .)
 		}
-		else if inlist(`ano', 2010) { // 2008, 
+		else if inlist(`ano', 2010) {
 			gen aux_mes = ""
 			replace aux_mes = "01" if substr(data_nasc, 4, 3) == "JAN"
 			replace aux_mes = "02" if substr(data_nasc, 4, 3) == "FEB"
@@ -214,6 +214,7 @@ foreach ano of numlist 1998(2)2020 {
 		
 		cap drop aux*
 		
+		/*
 		drop if	cargo != "1º suplente" & ///
 				cargo != "1º suplente senador" & ///
 				cargo != "2º suplente" & ///
@@ -229,7 +230,7 @@ foreach ano of numlist 1998(2)2020 {
 				cargo != "vice-governador" & ///
 				cargo != "vice-prefeito"
 		
-		drop if CPF == ""
+		*/
 		
 		duplicates drop
 		

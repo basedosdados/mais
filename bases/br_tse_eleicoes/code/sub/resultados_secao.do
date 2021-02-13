@@ -20,17 +20,18 @@ local estados_2012	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ R
 local estados_2014	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2016	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2018	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO	
+local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 
 //------------------------//
 // loops
 //------------------------//
 
-import delimited "input/br_basedosdados_diretorios_brasil_municipios.csv", clear varn(1) case(preserve)
-keep id_municipio_TSE estado_abrev
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
+keep id_municipio_tse sigla_uf
 tempfile diretorio
 save `diretorio'
 
-foreach ano of numlist 1994(2)2018 {
+foreach ano of numlist 1994(2)2020 {
 	
 	foreach estado in `estados_`ano'' {
 		
@@ -38,13 +39,13 @@ foreach ano of numlist 1994(2)2018 {
 		
 		if `ano' == 2012 {
 			
-			import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'_1t/votacao_secao_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear //rowrange(1:100)
+			import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'_1t/votacao_secao_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
 			tempfile 1t
 			save `1t'
 			
 			cap confirm file "input/votacao_secao/votacao_secao_`ano'_`estado'_2t/votacao_secao_`ano'_`estado'_48.txt"
 			if _rc==0 {
-				import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'_2t/votacao_secao_`ano'_`estado'_48.txt", delim(";") varn(nonames) stringcols(_all) clear //rowrange(1:100)
+				import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'_2t/votacao_secao_`ano'_`estado'_48.txt", delim(";") varn(nonames) stringcols(_all) clear
 				tempfile 2t
 				save `2t'
 			}
@@ -54,8 +55,8 @@ foreach ano of numlist 1994(2)2018 {
 		}
 		else {
 			
-			cap import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'/votacao_secao_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear //rowrange(1:100)
-			cap import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'/votacao_secao_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear //rowrange(1:100)
+			cap import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'/votacao_secao_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
+			cap import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'/votacao_secao_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear
 		
 		}
 		*
@@ -67,8 +68,8 @@ foreach ano of numlist 1994(2)2018 {
 			ren v3	ano
 			ren v4	turno
 			ren v5	tipo_eleicao
-			ren v6	estado_abrev
-			ren v8	id_municipio_TSE
+			ren v6	sigla_uf
+			ren v8	id_municipio_tse
 			ren v10	zona
 			ren v11	secao
 			ren v13	cargo
@@ -85,8 +86,8 @@ foreach ano of numlist 1994(2)2018 {
 			ren v3	ano
 			ren v5	tipo_eleicao
 			ren v6	turno
-			ren v11	estado_abrev
-			ren v14	id_municipio_TSE
+			ren v11	sigla_uf
+			ren v14	id_municipio_tse
 			ren v16	zona
 			ren v17	secao
 			ren v19	cargo
@@ -96,18 +97,18 @@ foreach ano of numlist 1994(2)2018 {
 		}
 		*
 		
-		destring ano turno id_municipio_TSE zona secao numero_votavel votos, replace force
+		destring ano turno id_municipio_tse zona secao numero_votavel votos, replace force
 		
 		//------------------//
 		// limpa strings
 		//------------------//
 		
 		if "`estado'" == "BR" {
-			drop estado_abrev
-			merge m:1 id_municipio_TSE using `diretorio'
+			drop sigla_uf
+			merge m:1 id_municipio_tse using `diretorio'
 			drop if _merge == 2
 			drop _merge
-			replace estado_abrev = "ZZ" if estado_abrev == ""
+			replace sigla_uf = "ZZ" if sigla_uf == ""
 		}
 		*
 		
@@ -123,7 +124,7 @@ foreach ano of numlist 1994(2)2018 {
 		
 		//------------------------------------//
 		// separa votos candidato vs partido
-		// para seguir output original do TSE
+		// para seguir output original do tse
 		// a nivel municipio-zona
 		//------------------------------------//
 		
@@ -158,7 +159,7 @@ foreach ano of numlist 1994(2)2018 {
 			drop if length(string(numero_votavel)) == 2 & ///
 					inlist(cargo, "vereador", "deputado estadual", "deputado distrital", "deputado federal", "senador")
 			
-			collapse (sum) votos, by(ano tipo_eleicao turno estado_abrev id_municipio_TSE zona secao cargo numero_partido)
+			collapse (sum) votos, by(ano tipo_eleicao turno sigla_uf id_municipio_tse zona secao cargo numero_partido)
 			
 			ren votos votos_nominais
 			
@@ -181,7 +182,7 @@ foreach ano of numlist 1994(2)2018 {
 		
 		use `votos_nominais', clear
 		
-		merge 1:1 ano tipo_eleicao turno estado_abrev id_municipio_TSE zona secao cargo numero_partido using `votos_nao_nominais'
+		merge 1:1 ano tipo_eleicao turno sigla_uf id_municipio_tse zona secao cargo numero_partido using `votos_nao_nominais'
 		drop _merge
 		
 		replace votos_nominais = 0		if votos_nominais == .
@@ -205,7 +206,7 @@ foreach ano of numlist 1994(2)2018 {
 	}
 	*
 	
-	local vars ano tipo_eleicao estado_abrev id_municipio_TSE turno zona secao cargo numero_candidato
+	local vars ano tipo_eleicao sigla_uf id_municipio_tse turno zona secao cargo numero_candidato
 	
 	order `vars'
 	sort  `vars'
@@ -226,7 +227,7 @@ foreach ano of numlist 1994(2)2018 {
 	}
 	*
 	
-	local vars ano tipo_eleicao estado_abrev id_municipio_TSE turno zona secao cargo numero_partido
+	local vars ano tipo_eleicao sigla_uf id_municipio_tse turno zona secao cargo numero_partido
 	
 	order `vars'
 	sort  `vars'
