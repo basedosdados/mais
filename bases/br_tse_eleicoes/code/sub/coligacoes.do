@@ -44,12 +44,12 @@ foreach ano of numlist 1990 1994(2)2020 {
 			ren v3	ano
 			ren v4	turno
 			ren v5	tipo_eleicao
-			ren v6	estado_abrev
-			ren v7	id_municipio_TSE
+			ren v6	sigla_uf
+			ren v7	id_municipio_tse
 			ren v10	cargo
 			ren v11	tipo_agremiacao
 			ren v12	numero_partido
-			ren v13	partido
+			ren v13	sigla_partido
 			ren v14	nome_partido
 			ren v16	coligacao
 			ren v18	sequencial_coligacao
@@ -64,12 +64,12 @@ foreach ano of numlist 1990 1994(2)2020 {
 			ren v3	ano
 			ren v5	tipo_eleicao
 			ren v6	turno
-			ren v10	estado_abrev
-			ren v11	id_municipio_TSE
+			ren v10	sigla_uf
+			ren v11	id_municipio_tse
 			ren v14	cargo
 			ren v15	tipo_agremiacao
 			ren v16	numero_partido
-			ren v17	partido
+			ren v17	sigla_partido
 			ren v18	nome_partido
 			ren v19	sequencial_coligacao
 			ren v20	coligacao
@@ -77,7 +77,7 @@ foreach ano of numlist 1990 1994(2)2020 {
 		}
 		*
 		
-		destring ano id_municipio_TSE turno numero_partido sequencial_coligacao, replace force
+		destring ano id_municipio_tse turno numero_partido sequencial_coligacao, replace force
 		
 		replace sequencial_coligacao = . if sequencial_coligacao == -1
 		
