@@ -2,7 +2,7 @@
 
 rm(list = ls())
 
-setwd("~/basedosdados/tratamento/ppm/input")
+setwd("~/basedosdados/tratamento/pesquisa_pecuaria_municipal/input")
 
 ##### Pacotes ##### 
 
@@ -11,6 +11,8 @@ library(readxl)
 library(readr)
 
 library(dplyr)
+
+library(beepr)
 
 ### Funcao ### 
 
@@ -30,7 +32,7 @@ bd_clean = function(df, colms_null, colms_order){
 
 #------------------------------------------------------------------------------#
 
-##### Dados de pecuaria (Cabecas) #####
+##### Producao pecuaria (Cabecas) #####
 
 ### 94: Vacas Ordenhadas ###
 
@@ -42,6 +44,7 @@ dados94 = read.csv2(
                 "excluir", "excluir2", 
                 "vacas_ordenhadas"),
   nrows = 256174,
+  encoding = "UTF-8",
   header = F
 )
 
@@ -74,7 +77,7 @@ dados_pecuaria = full_join(dados94, dados95,
 # exportar
 
 write.csv(dados_pecuaria,
-          "~/basedosdados/tratamento/pesquisa_pecuaria_municipal/output/dados_pecuaria.csv",
+          "~/basedosdados/tratamento/pesquisa_pecuaria_municipal/output/producao_pecuaria.csv",
           na = " ",
           row.names = F)
 
@@ -89,8 +92,8 @@ dados3940 = read.csv2(
   sep = ";", 
   skip = 2, 
   col.names = c("ano", "id_municipio", 
-                "excluir", "tipo_de_produto", 
-                "excluir2", "producao_aquicultura"), 
+                "excluir", "tipo_produto", 
+                "excluir2", "producao"), 
   nrows = 644280,
   encoding = "UTF-8",
   header = F)
@@ -102,21 +105,18 @@ dados3940 = bd_clean(dados3940, c(3,5), c(2,1,3,4))
 
 ## Valor da producao (percentual) 
 
-dados3940_vpercentual = read.csv2(
-  "tabela3940_valor_percentual_producao.csv",
-  sep = ";", 
-  skip = 2, 
-  col.names = c("ano", "id_municipio", 
-                "excluir", "tipo_de_produto", 
-                "excluir2", "valor_producao_percentual_total_geral"), 
-  nrows = 644280,
-  encoding = "UTF-8",
-  header = F
-)
+tabela3940_prop_producao <- read_delim("tabela3940_prop_producao.csv", 
+                                       ";", escape_double = FALSE, col_names = FALSE, 
+                                       col_types = cols(X6 = col_number()), 
+                                       locale = locale(grouping_mark = "."), 
+                                       trim_ws = TRUE, skip = 2, n_max = 644280)
 
 # limpar valores inconsistentes, excluir colunas e ordenar variaveis
 
-dados3940_vpercentual = bd_clean(dados3940_vpercentual, c(3,5), c(2,1,3,4))
+tabela3940_prop_producao = bd_clean(tabela3940_prop_producao, c(3,5), c(2,1,3,4))
+
+names(tabela3940_prop_producao) = c("id_municipio", "ano", 
+                                    "tipo_produto", "prop_valor_producao")
 
 ## Valor da producao  
 
@@ -125,8 +125,8 @@ dados3940_producao = read.csv2(
   sep = ";", 
   skip = 2, 
   col.names = c("ano", "id_municipio", 
-                "excluir", "tipo_de_produto", 
-                "excluir2", "valor_producao_mil_reais"), 
+                "excluir", "tipo_produto", 
+                "excluir2", "valor_producao"), 
   nrows = 644280,
   encoding = "UTF-8",
   header = F
@@ -141,15 +141,23 @@ dados3940_producao = bd_clean(dados3940_producao, c(3,5), c(2,1,3,4))
 
 tabela3940_final = dados3940
 
-tabela3940_final$valor_producao_mil_reais = dados3940_producao$valor_producao_mil_reais
+tabela3940_final$valor_producao = dados3940_producao$valor_producao
 
-tabela3940_final$valor_producao_percentual_total_geral = dados3940_vpercentual$valor_producao_percentual_total_geral
+tabela3940_final$prop_valor_producao = tabela3940_prop_producao$prop_valor_producao
 
+# multiplicar valor da producao por 1000 
 
+tabela3940_final$valor_producao = as.numeric(tabela3940_final$valor_producao)
+tabela3940_final$valor_producao = tabela3940_final$valor_producao*1000
+
+# criar variavel 'moeda' 
+
+tabela3940_final$moeda = 'Mil Reais'
+ 
 # exportar
 
 write.csv(tabela3940_final,
-          "~/basedosdados/tratamento/pesquisa_pecuaria_municipal/output/producao_da_aquicultura.csv",
+          "~/basedosdados/tratamento/pesquisa_pecuaria_municipal/output/producao_aquicultura.csv",
           na = " ",
           row.names = F)
 
@@ -160,8 +168,8 @@ dados3939 = read.csv2(
   sep = ";", 
   skip = 3, 
   col.names = c("ano", "id_municipio", 
-                "excluir", "tipo_de_rebanho", 
-                "quantidade_de_animais"),
+                "excluir", "tipo_rebanho", 
+                "quantidade_animais"),
   encoding = "UTF-8",
   nrows = 2560820,
   header = F
@@ -190,7 +198,7 @@ dados74 = read.csv2("tabela74_producao_origem_animal.csv",
                     skip = 3, 
                     col.names = c("ano", "id_municipio", 
                                   "excluir", 
-                                  "tipo_de_produto_origem_animal", 
+                                  "tipo_produto", 
                                   "producao"), 
                     nrows = 1537044,
                     encoding = "UTF-8",
@@ -203,21 +211,18 @@ dados74 = bd_clean(dados74, c(3), c(2,1,3,4))
 
 ## Valor da producao (percentual) 
 
-dados74_vpercentual = read.csv2(
-  "tabela74_valor_percentual_producao.csv",
-  sep = ";", 
-  skip = 3, 
-  col.names = c("ano", "id_municipio", 
-                "excluir", "tipo_de_produto_origem_animal", 
-                "valor_producao_percentual_total_geral"), 
-  nrows = 1537044,
-  encoding = "UTF-8",
-  header = F
-)
+dados74_prop = read_delim("tabela74_prop_producao.csv", 
+                          ";", escape_double = FALSE, col_names = FALSE, 
+                          col_types = cols(X5 = col_number()), 
+                          locale = locale(grouping_mark = "."),
+                          trim_ws = TRUE, skip = 3, n_max = 1537044)
 
 # limpar valores inconsistentes, excluir colunas e ordenar variaveis
 
-dados74_vpercentual = bd_clean(dados74_vpercentual, c(3), c(2,1,3,4))
+dados74_prop = bd_clean(dados74_prop, c(3), c(2,1,3,4))
+
+names(dados74_prop) = c("ano", "id_municipio", "tipo_produto", "prop_valor_producao")
+
 
 ## Valor da producao 
 
@@ -272,9 +277,11 @@ for ( i in 1:length(dados74$moeda)) {
   
 }
 
+beep()
+
 # tabelas finais
 
-dados74$valor_producao_percentual_total_geral = dados74_vpercentual$valor_producao_percentual_total_geral
+dados74$prop_valor_producao = dados74_prop$prop_valor_producao
 
 dados74$valor_producao = dados74_producao$valor_producao_mil_reais
 
@@ -283,10 +290,8 @@ dados74$valor_producao = dados74_producao$valor_producao_mil_reais
 
 dados74 <- dados74 %>%
   select(id_municipio, ano, 
-         tipo_de_produto_origem_animal, producao,
-         valor_producao, valor_producao_percentual_total_geral, moeda)
-
-
+         tipo_produto, producao,
+         valor_producao, prop_valor_producao, moeda)
 
 # exportar 
 

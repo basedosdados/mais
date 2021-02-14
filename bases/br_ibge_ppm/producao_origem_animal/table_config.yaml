@@ -1,16 +1,26 @@
 table_id: producao_origem_animal # AUTO GENERATED
 dataset_id: br_ibge_ppm # AUTO GENERATED
 
-version: <v1.0> # REQUIRED
+url_ckan: https://basedosdados.org/dataset/br-ibge-ppm # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ppm # AUTO GENERATED
 
-last_updated: 2021-01-29 # AUTO GENERATED
+version: v1.0 # REQUIRED
+
+last_updated: 2021-02-14 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Produção de origem animal, por tipo de produto, valor da produção (unidades monetárias de acordo com o ano de extração) e valor percentual.  
+ Produção de origem animal, por tipo de produto, valor da produção e valor percentual.  
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Crislane A. Souza   # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ppm/code # REQUIRED
+    website: https://github.com/crislanealves
+    email: crislanealves@protonmail.com
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -21,30 +31,33 @@ treated_by:
     website: <onde encontrar os dados tratados>
     email: crislanealves@protonmail.com
 
-# Quem está completando esse arquivo config?
-published_by:
-    name: Crislane A. Souza  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ppm/code # REQUIRED
-    website: https://github.com/crislanealves
-    email: crislanealves@protonmail.com
-
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Além da unificação das variáveis "Produção de origem animal", "Valor da produção" e "Valor percentual da produção" em um só tabela, foi criada uma coluna adicional identificando a unidade monetária de acordo com os anos coletados.
-    
+    - Unificação das variáveis "Produção de origem animal", "Valor da produção" e "Valor percentual da produção" em um só tabela;
+    - Criação de uma coluna identificando a unidade monetária de acordo com os anos coletados; e,
+    - Mudança nos valores decimais de vírgula (,) para ponto (.).
+
 # Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
 data_update_frequency: 1 ano # REQUIRED 
 
-# Nível da observação: quais colunas identificam uma linha unicamente?
+# Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
-# Regras: minúsculo, sem acento, singular.
-# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level:
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+     - municipio
+     - ano
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
     - id_municipio
     - ano
-    - tipo de produto de origem animal
-
+    - tipo_produto
 # Qual é a cobertura espacial da tabela?
 # Regras:
 #   - minúsculo, sem acento, singular
@@ -56,8 +69,9 @@ observation_level:
 #   - brasil, argentina, peru, equador
 coverage_geo:
     - brasil
+
 # Qual é a cobertura temporal (em anos) da tabela?
-# Opções: pre-1999, 2000, 2001, ..., 2019, 2020
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
     - 1974
     - 1975
@@ -110,7 +124,7 @@ coverage_time:
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED
-
+-
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
@@ -123,7 +137,7 @@ columns: # REQUIRED
   
     -   
         name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
+        description:  ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -134,8 +148,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: tipo_de_produto_origem_animal
-        description: Tipo de Produto de Origem Animal
+        name: tipo_produto
+        description: Tipo de Produto
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -152,13 +166,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_producao_percentual_total_geral
-        description: Valor da Produção Percentual Total Geral
+        name: prop_valor_producao
+        description: Valor Percentual Total da Produção
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: moeda
-        description: Unidade monetária de acordo com os anos selecionados
+        description: Unidade Monetária 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

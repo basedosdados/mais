@@ -19,10 +19,10 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados.br_ibge_ppm.dados_pecuaria AS
+CREATE VIEW basedosdados-dev.br_ibge_ppm.producao_pecuaria AS
 SELECT 
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(vacas_ordenhadas AS INT64) vacas_ordenhadas,
 SAFE_CAST(ovinos_tosquiados AS INT64) ovinos_tosquiados
-from basedosdados-dev.br_ibge_ppm_staging.dados_pecuaria as t
+from basedosdados-dev.br_ibge_ppm_staging.producao_pecuaria as t
