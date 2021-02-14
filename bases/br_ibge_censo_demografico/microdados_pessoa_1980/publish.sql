@@ -1,0 +1,88 @@
+/*
+
+Query para publicar a tabela.
+
+Esse é o lugar para:
+    - modificar nomes, ordem e tipos de colunas
+    - dar join com outras tabelas
+    - criar colunas extras (e.g. logs, proporções, etc.)
+
+Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
+
+# Além disso, sinta-se à vontade para alterar alguns nomes obscuros
+# para algo um pouco mais explícito.
+
+TIPOS:
+    - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
+    - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
+    - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
+
+*/
+
+CREATE VIEW basedosdados-dev.br_ibge_censo_demografico.microdados_pessoa_1980 AS
+SELECT 
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(numero_ordem AS STRING) numero_ordem,
+SAFE_CAST(v211 AS STRING) v211,
+SAFE_CAST(v604 AS STRING) v604,
+SAFE_CAST(v598 AS STRING) v598,
+SAFE_CAST(v501 AS STRING) v501,
+SAFE_CAST(v503 AS STRING) v503,
+SAFE_CAST(v504 AS STRING) v504,
+SAFE_CAST(v505 AS STRING) v505,
+SAFE_CAST(v605 AS STRING) v605,
+SAFE_CAST(v606 AS STRING) v606,
+SAFE_CAST(v508 AS STRING) v508,
+SAFE_CAST(v509 AS STRING) v509,
+SAFE_CAST(v510 AS STRING) v510,
+SAFE_CAST(v511 AS STRING) v511,
+SAFE_CAST(v512 AS STRING) v512,
+SAFE_CAST(v513 AS STRING) v513,
+SAFE_CAST(v514 AS STRING) v514,
+SAFE_CAST(v515 AS STRING) v515,
+SAFE_CAST(v516 AS STRING) v516,
+SAFE_CAST(v517 AS STRING) v517,
+SAFE_CAST(v518 AS STRING) v518,
+SAFE_CAST(v519 AS STRING) v519,
+SAFE_CAST(v520 AS STRING) v520,
+SAFE_CAST(v521 AS STRING) v521,
+SAFE_CAST(v522 AS STRING) v522,
+SAFE_CAST(v523 AS STRING) v523,
+SAFE_CAST(v524 AS STRING) v524,
+SAFE_CAST(v525 AS STRING) v525,
+SAFE_CAST(v526 AS STRING) v526,
+SAFE_CAST(v527 AS STRING) v527,
+SAFE_CAST(v528 AS STRING) v528,
+SAFE_CAST(v529 AS STRING) v529,
+SAFE_CAST(v681 AS STRING) v681,
+SAFE_CAST(v530 AS STRING) v530,
+SAFE_CAST(v532 AS STRING) v532,
+SAFE_CAST(v533 AS STRING) v533,
+SAFE_CAST(v534 AS STRING) v534,
+SAFE_CAST(v535 AS STRING) v535,
+SAFE_CAST(v680 AS STRING) v680,
+SAFE_CAST(v607 AS STRING) v607,
+SAFE_CAST(v608 AS STRING) v608,
+SAFE_CAST(v540 AS STRING) v540,
+SAFE_CAST(v541 AS STRING) v541,
+SAFE_CAST(v682 AS STRING) v682,
+SAFE_CAST(v536 AS STRING) v536,
+SAFE_CAST(v609 AS STRING) v609,
+SAFE_CAST(v542 AS STRING) v542,
+SAFE_CAST(v544 AS STRING) v544,
+SAFE_CAST(v545 AS STRING) v545,
+SAFE_CAST(v610 AS STRING) v610,
+SAFE_CAST(v611 AS STRING) v611,
+SAFE_CAST(v612 AS STRING) v612,
+SAFE_CAST(v613 AS STRING) v613,
+SAFE_CAST(v550 AS STRING) v550,
+SAFE_CAST(v551 AS STRING) v551,
+SAFE_CAST(v552 AS STRING) v552,
+SAFE_CAST(v553 AS STRING) v553,
+SAFE_CAST(v554 AS STRING) v554,
+SAFE_CAST(v555 AS STRING) v555,
+SAFE_CAST(v556 AS STRING) v556,
+SAFE_CAST(v557 AS STRING) v557,
+SAFE_CAST(v570 AS STRING) v570,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf
+from basedosdados-dev.br_ibge_censo_demografico_staging.microdados_pessoa_1980 as t
