@@ -13,7 +13,7 @@ jobs:
 
       - name: File Changes
         run: |
-          cp $HOME/files_added.json files.json
+          cp $HOME/files.json files.json
 
       - name: Upload Changes
         uses: actions/upload-artifact@v2
