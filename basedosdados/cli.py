@@ -239,7 +239,7 @@ def create_table(
         if_table_exists=if_table_exists,
         force_dataset=force_dataset,
         if_storage_data_exists=if_storage_data_exists,
-        if_table_config_exists=if_table_exists,
+        if_table_config_exists=if_table_config_exists,
     )
 
     click.echo(
