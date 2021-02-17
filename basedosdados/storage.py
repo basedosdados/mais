@@ -160,7 +160,7 @@ class Storage(Base):
             parts = [
                 (
                     filepath.as_posix()
-                    .replace(str(path) + "/", "")
+                    .replace(path.as_posix() + "/", "")
                     .replace(str(filepath.name), "")
                 )
                 for filepath in paths
