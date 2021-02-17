@@ -176,7 +176,7 @@ class Table(Base):
 
                 partition_columns = [
                     k.split("=")[0]
-                    for k in str(data_sample_path).split("/")
+                    for k in data_sample_path.as_posix().split("/")
                     if "=" in k
                 ]
 
