@@ -84,9 +84,7 @@ class Dataset(Base):
                 )
 
                 # Write file
-                (self.dataset_folder / file.name).open("w", encoding="utf-8").write(
-                    template
-                )
+                (self.dataset_folder / file.name).open("w").write(template)
 
         # Add code folder
         (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
