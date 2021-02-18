@@ -266,7 +266,7 @@ class Base:
     def _render_template(self, template_file, kargs):
 
         return Template(
-            (self.templates / template_file).open("r", encoding="latin1").read()
+            (self.templates / template_file).open("r", encoding="latin-1").read()
         ).render(**kargs)
 
     def _check_mode(self, mode):
