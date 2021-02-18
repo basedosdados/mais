@@ -84,7 +84,7 @@ class Dataset(Base):
                 )
 
                 # Write file
-                (self.dataset_folder / file.name).open("w", encodind="utf-8").write(
+                (self.dataset_folder / file.name).open("w", encoding="utf-8").write(
                     template
                 )
 
