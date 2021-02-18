@@ -6,7 +6,7 @@ library(xlsx)
 
 setwd("C:/Users/Hevilyn/Desktop/inep_curso/")
 
-tjes_15_19 <- ead_excel("indicadores_trajetoria_educacao_superior_2014_2019.xlsx")
+tjes_15_19 <- read_excel("indicadores_trajetoria_educacao_superior_2014_2019.xlsx")
 tjes_15_19 <- tjes_15_19[-c(1:8,140704),]
 
 tjes_15_19 <- as.data.frame(tjes_15_19)
