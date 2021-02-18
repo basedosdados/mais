@@ -78,7 +78,7 @@ class Table(Base):
                         "publish.sql are the same?"
                     )
 
-        json.dump(columns, (json_path).open("w", encoding="utf-8"))
+        json.dump(columns, (json_path).open("w", encoding="latin1"))
 
         return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
@@ -101,7 +101,7 @@ class Table(Base):
                 )
 
                 # Write file
-                (self.table_folder / file.name).open("w", encoding="utf-8").write(
+                (self.table_folder / file.name).open("w", encoding="latin1").write(
                     template
                 )
 
@@ -385,7 +385,7 @@ class Table(Base):
                 / self.table_id
                 / "table_description.txt",
                 "w",
-                encoding="utf-8",
+                encoding="latin1",
             ).write(table.description)
 
             # if m == "prod":/
