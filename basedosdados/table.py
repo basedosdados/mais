@@ -101,7 +101,9 @@ class Table(Base):
                 )
 
                 # Write file
-                (self.table_folder / file.name).open("w").write(template)
+                (self.table_folder / file.name).open("w", encoding="utf-8").write(
+                    template
+                )
 
     def init(
         self,
