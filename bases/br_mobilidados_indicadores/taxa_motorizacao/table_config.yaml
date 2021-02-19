@@ -1,19 +1,22 @@
-table_id: proporcao_pessoas_proximas_pnt # AUTO GENERATED
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: taxa_motorizacao # AUTO GENERATED
 dataset_id: br_mobilidados_indicadores # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-mobilidados-indicadores # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores # AUTO GENERATED
 
-version: <v1.0> # REQUIRED
+version: v1.0 # REQUIRED
 
-last_updated: 2021-02-09 # AUTO GENERATED
+last_updated: 2021-02-17 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Dados sobre o percentual de pessoas próximas da rede de transporte de média e alta capacidade (PNT) 
+    Dados de taxa de motorização nas 26 capitais de estados brasileiros e Distrito Federal. 
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -30,11 +33,10 @@ treated_by:
     code_url: <onde encontrar código de tratamento>
     website:  https://github.com/crislanealves
     email: crislanealves@protonmail.com
-    
+
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    - Padronização do Id Município para 7 dígitos; e,
-    - Padronização de propoção (0-100).
+    Processo básico de limpeza dos dados.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -47,12 +49,12 @@ data_update_frequency: 1 ano # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
--
+    - municipio
+    - ano
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - sigla_uf
     - id_municipio
     - ano
 # Qual é a cobertura espacial da tabela?
@@ -66,11 +68,18 @@ primary_keys:
 #   - brasil, argentina, peru, equador
 coverage_geo:
     - brasil
-
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-
+    - 2001
+    - 2002
+    - 2003
+    - 2004
+    - 2005
+    - 2006
+    - 2007
+    - 2008
+    - 2009
     - 2010
     - 2011
     - 2012
@@ -80,14 +89,12 @@ coverage_time:
     - 2016
     - 2017
     - 2018
-    - 2019
-
-  # Liste as colunas da tabela que representam partições.
+# Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED
--
+    -
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
@@ -117,7 +124,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: prop_pnt
-        description: Percentual de pessoas próximas da rede de transporte de média e alta capacidade (PNT) 
+        name: taxa_motorizacao
+        description: Taxa de Motorização
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

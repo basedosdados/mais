@@ -19,10 +19,10 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.tx_motorizacao AS
+CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.proporcao_pessoas_prox_infra_cicloviaria AS
 SELECT 
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(taxa_motorizacao_capitais AS INT64) taxa_motorizacao_capitais
-from basedosdados-dev.br_mobilidados_indicadores_staging.tx_motorizacao as t
+SAFE_CAST(prop_pessoas_proximas_ciclovias AS FLOAT64) prop_pessoas_proximas_ciclovias
+from basedosdados-dev.br_mobilidados_indicadores_staging.proporcao_pessoas_prox_infra_cicloviaria as t

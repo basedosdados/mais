@@ -19,10 +19,10 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.proporcao_pessoas_proximas_pnt AS
+CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.prop_pessoas_proximas_pnt AS
 SELECT 
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(prop_pnt AS FLOAT64) prop_pnt
-from basedosdados-dev.br_mobilidados_indicadores_staging.proporcao_pessoas_proximas_pnt as t
+from basedosdados-dev.br_mobilidados_indicadores_staging.prop_pessoas_proximas_pnt as t
