@@ -265,9 +265,9 @@ class Base:
 
     def _render_template(self, template_file, kargs):
 
-        return Template(
-            (self.templates / template_file).open("r", encoding="latin-1").read()
-        ).render(**kargs)
+        return Template((self.templates / template_file).open("r").read()).render(
+            **kargs
+        )
 
     def _check_mode(self, mode):
         ACCEPTED_MODES = ["all", "staging", "prod"]

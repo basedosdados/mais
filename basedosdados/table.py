@@ -48,7 +48,6 @@ class Table(Base):
         self._check_mode(mode)
 
         json_path = self.table_folder / f"schema-{mode}.json"
-
         columns = self.table_config["columns"]
 
         if mode == "staging":
@@ -78,7 +77,7 @@ class Table(Base):
                         "publish.sql are the same?"
                     )
 
-        json.dump(columns, (json_path).open("w", encoding="latin-1"))
+        json.dump(columns, (json_path).open("w", encoding="utf-8"), ensure_ascii=False)
 
         return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
@@ -101,7 +100,7 @@ class Table(Base):
                 )
 
                 # Write file
-                (self.table_folder / file.name).open("w", encoding="latin-1").write(
+                (self.table_folder / file.name).open("w", encoding="utf-8").write(
                     template
                 )
 
@@ -385,7 +384,7 @@ class Table(Base):
                 / self.table_id
                 / "table_description.txt",
                 "w",
-                encoding="latin-1",
+                encoding="utf-8",
             ).write(table.description)
 
             # if m == "prod":/
