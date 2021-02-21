@@ -1,10 +1,13 @@
 table_id: leis # AUTO GENERATED
 dataset_id: br_ba_feiradesantana # AUTO GENERATED
+source_bucket_name: dadosabertosdefeira-basedosdados
+project_id_staging: dados-abertos-de-feira
+project_id_prod: dados-abertos-de-feira
 
 url_ckan: https://basedosdados.org/dataset/br-ba-feiradesantana # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ba_feiradesantana # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: 1.0 # REQUIRED
 
 last_updated: 2021-02-06 # AUTO GENERATED
 
@@ -46,7 +49,7 @@ data_update_frequency: unico # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - municipio
+    - lei
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.

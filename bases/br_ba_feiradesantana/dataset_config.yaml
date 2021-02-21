@@ -54,7 +54,7 @@ microdata: não
 API: não
 
 # É necessário registrar um usuário para baixar os dados originais?
-registration: não
+registration: sim
 
 # Como os dados originais estão disponibilizados?
 availability: online

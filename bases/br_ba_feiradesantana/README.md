@@ -2,8 +2,8 @@
 
 As leis do município de Feira de Santana são publicadas no
 site proprietário [www.leismunicipais.com.br](https://leismunicipais.com.br/legislacao-municipal/328/leis-de-feira-de-santana/).
-O projeto Dados Abertos de Feira conseguiu via Lei de Acesso à Informação
-acesso ao arquivo de todas as leis.
+O projeto Dados Abertos de Feira conseguiu os dados via Lei de Acesso à Informação
+através do acesso ao arquivo de todas as leis.
 
 O arquivo de leis foi disponibilizado em arquivos HTML. Criamos
 uma [CLI para transformar dados disponibilizados pelo site](https://github.com/DadosAbertosDeFeira/leis-municipais)
