@@ -26,7 +26,7 @@ get_billing_id <- function() {
 
 }
 
-#' Internal functions for project billing management
+#' Define your Project Id
 #'
 #' @description
 #'
@@ -44,6 +44,10 @@ get_billing_id <- function() {
 #'
 #'
 #' set_billing_id("my_billing_project_id")
+#' # or load from an .env file
+#' library(dotenv)
+#' load_dot_env("keys.env")
+#' set_billing_id(Sys.getenv("name of the appropriate variable here"))
 #'
 
 set_billing_id <- function(billing_project_id) {
@@ -68,6 +72,8 @@ set_billing_id <- function(billing_project_id) {
 
   Sys.setenv(billing_project_id = billing_project_id,
              billing_project_set = TRUE)
+
+  rlang::inform('Project keys set successfully')
 
 }
 

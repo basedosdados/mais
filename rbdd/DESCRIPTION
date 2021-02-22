@@ -20,4 +20,5 @@ Imports:
     glue,
     httr,
     googleAuthR,
-    cli
+    cli,
+    magrittr

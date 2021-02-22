@@ -164,3 +164,4 @@ cython_debug/
 
 
 .Rproj.user
+*.env

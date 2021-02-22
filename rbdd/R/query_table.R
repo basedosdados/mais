@@ -25,14 +25,7 @@ query_table <- function(
   keys = NULL,
   page_size = 500) {
 
-  if(rlang::is_null(table1)) {
-
-    rlang::abort(
-      glue::glue('Provide a valid `table1` argument.')
-    )
-
-  }
-
+  if(rlang::is_null(table1)) rlang::abort(glue::glue('Provide a valid `table1` argument.'))
 
   if(!rlang::is_null(table2) & rlang::is_null(join)) {
 
@@ -71,9 +64,7 @@ query_table <- function(
 
   }
 
-
   query <- paste0(single_table_query, second_table_query)
-
 
   # a função como está supõe que o usuário está autenticado no bigrquery
   # mas ele está? como garantir isso?
