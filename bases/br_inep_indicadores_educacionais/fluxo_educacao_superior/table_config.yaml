@@ -1,0 +1,286 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: fluxo_educacao_superior # AUTO GENERATED
+dataset_id: br_inep_indicadores_educacionais # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-inep-indicadores-educacionais # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais # AUTO GENERATED
+
+version: <1.0> # REQUIRED
+
+last_updated: 2021-02-22 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Indicadores de trajetória acadêmica dos alunos em cursos de graduação na educação superior brasileira, calculados a partir das informações constantes das bases de dados do Censo Superior.    
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Hevilyn Souza  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code # REQUIRED
+    website: https://github.com/Hevilyn
+    email: hevilynsouza12@hotmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Hevilyn Souza
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code 
+    website: https://github.com/Hevilyn
+    email: hevilynsouza12@hotmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    Exclusão de linhas vazias
+    Palavras sem acento e minúsculas
+    Padronização do nome das colunas
+    Colunas id_uf e id_regiao foram excluídas
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: 1 ano # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - regiao
+    - uf
+    - municipio
+    - curso
+    - ano_ingresso
+    - ano_referencia
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_ies
+    - id_municipio
+    - id_curso
+    - ano_ingresso
+    - ano_referencia
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - Brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+  
+    -   
+        name: id_ies
+        description: Código de identificação da instituição de educação superior
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nome_ies
+        description: Nome de identificação da instituição de educação superior
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_categoria_administrativa
+        description: Código da categoria Administrativa da IES no último ano de análise
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_organizacao
+        description: Código da organização acadêmica no último ano de análise.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_curso
+        description: Código de identificação do curso gerado pelo E-MEC
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nome_curso
+        description: Nome de identificação do curso gerado pelo E-MEC
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio
+        description: Código do município do local de oferta do curso gerado pelo E-MEC no último ano de análise. IBGE - 7 dígitos.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_grau_academico
+        description: Código do grau acadêmico conferido ao diplomado pelo curso no último ano de análise.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_modalidade
+        description: Código da modalidade de ensino do curso no último ano de análise
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_cine_rotulo
+        description: Código de identificação do curso conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nome_cine_rotulo
+        description: Nome de identificação do curso conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_cine_area_geral
+        description: Código da área geral conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nome_cine_area_geral
+        description: Nome da área geral conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano_ingresso
+        description: Ano de ingresso do aluno no curso.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano_referencia
+        description: Ano de referência do vínculo do ingressante.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prazo_integralizacao
+        description: Prazo mínimo de integralização de curso de graduação em número de anos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano_integralizacao
+        description: Ano previsto de integralização do aluno ao curso.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prazo_acompanhamento
+        description: Prazo máximo de integralização de curso de graduação em número de anos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano_max_acompanhamento
+        description: Ano máximo de acompanhamento da situação de vínculo do aluno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+
+    -   name: quantidade_ingressante
+        description: Número de ingressantes do curso no ano de ingresso da coorte.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: quantidade_permanencia
+        description: Número de estudantes que permaneceram no curso de graduação no ano de referência da análise
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: quantidade_concluinte
+        description: Número de estudantes que concluíram o curso de graduação no ano de referência da análise
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: quantidade_desistencia
+        description: Número de estudantes que desistiram do curso de graduação no ano de referência da análise
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: quantidade_falecido
+        description: Número de estudantes que faleceram no ano de referência da análise
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tap
+        description: Taxa de Permanência
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tca
+        description: Taxa de Conclusão Acumulada
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tda
+        description: Taxa de Desistência Acumulada
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tcan
+        description: Taxa de Conclusão Anual
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tada
+        description: Taxa de Desistência Anual
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
