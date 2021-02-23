@@ -50,7 +50,7 @@ Uma simples consulta de SQL é o suficiente para cruzamento de bases que você d
 <div class="row">
     <div class="column">
     <a style="width: 90%; text-align: center;"
-    href="/access_data_bq"
+    href="/access_data_bq/"
     title="{{ lang.t('source.link.title')}}" class="md-button">
         Acesse os dados direto pelo BigQuery 🔍
     </a>

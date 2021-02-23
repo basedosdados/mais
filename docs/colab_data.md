@@ -91,8 +91,8 @@ Os dados vão passar ao todo por 3 lugares no Google Cloud:
 
 1. Bucket (Storage): local onde serão armazenados o arquivos frios
 2. Big Query: banco de dados do Google, dividido em 2 projetos/tipos de tabela:
-  - Staging: banco para teste e tratamento final do conjunto de dados
-  - Prod: banco oficial de publicação dos dados (`basedosdados`! ou o seu mesmo caso queira reproduzir o ambiente)
+    - Staging: banco para teste e tratamento final do conjunto de dados
+    - Prod: banco oficial de publicação dos dados (`basedosdados`! ou o seu mesmo caso queira reproduzir o ambiente)
 
 
 #### Configure seu projeto no Google Cloud e um _bucket_ no Google Storage
