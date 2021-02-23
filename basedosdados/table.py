@@ -88,7 +88,7 @@ class Table(Base):
             if file.name in ["table_config.yaml", "publish.sql"]:
 
                 # Load and fill template
-                template = Template(file.open("r").read()).render(
+                template = Template(file.open("r", encoding="utf-8").read()).render(
                     bucket_name=self.bucket_name,
                     table_id=self.table_id,
                     dataset_id=self.dataset_folder.stem,
@@ -183,7 +183,7 @@ class Table(Base):
 
             if data_sample_path.suffix == ".csv":
 
-                columns = next(csv.reader(open(data_sample_path, "r")))
+                columns = next(csv.reader(open(data_sample_path, "r", encoding="utf-8")))
 
             else:
                 raise NotImplementedError(
@@ -423,7 +423,7 @@ class Table(Base):
             self.delete(mode="prod")
 
         self.client["bigquery_prod"].query(
-            (self.table_folder / "publish.sql").open("r").read()
+            (self.table_folder / "publish.sql").open("r", encoding="utf-8").read()
         )
 
         self.update("prod")
