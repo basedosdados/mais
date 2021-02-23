@@ -472,4 +472,8 @@ class Table(Base):
             **upload_args,
         )
 
-        self.create(if_exists="replace")
+        self.create(
+            if_table_exists="replace",
+            if_table_config_exists="pass",
+            if_storage_data_exists="pass",
+        )

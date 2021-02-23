@@ -46,23 +46,39 @@ def test_init(table, metadatadir):
 
     with pytest.raises(FileExistsError):
         table.init()
-        table.init(if_exists="raise")
+        table.init(if_folder_exists="raise", if_table_config_exists="replace")
 
-    table.init(if_exists="replace")
-
-    check_files(folder)
-
-    table.init(if_exists="pass")
+    table.init(if_folder_exists="replace", if_table_config_exists="replace")
 
     check_files(folder)
 
-    table.init(if_exists="replace", data_sample_path="tests/sample_data/municipios.csv")
+    table.init(if_folder_exists="replace", if_table_config_exists="pass")
+
+    check_files(folder)
+
+    table.init(if_folder_exists="pass")
+
+    check_files(folder)
+
+    table.init(
+        if_folder_exists="replace",
+        data_sample_path="tests/tmp_bases/municipios.csv",
+        if_table_config_exists="replace",
+    )
+    check_files(folder)
+
+    table.init(
+        if_folder_exists="replace",
+        data_sample_path="tests/tmp_bases/municipios.csv",
+        if_table_config_exists="pass",
+    )
 
     check_files(folder)
 
     with pytest.raises(NotImplementedError):
         table.init(
-            if_exists="replace", data_sample_path="tests/sample_data/municipios.json"
+            if_folder_exists="replace",
+            data_sample_path="tests/sample_data/municipios.json",
         )
 
 
@@ -92,22 +108,70 @@ def test_create(table, metadatadir):
     Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir).create(if_exists="pass")
 
     Storage(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir).upload(
-        "tests/sample_data/municipios.csv", mode="staging", if_exists="replace"
+        "tests/tmp_bases/municipios.csv", mode="staging", if_exists="replace"
     )
 
-    table.init(data_sample_path="tests/sample_data/municipios.csv", if_exists="replace")
+    table.init(
+        data_sample_path="tests/tmp_bases/municipios.csv",
+        if_folder_exists="replace",
+        if_table_config_exists="replace",
+    )
 
     table.delete(mode="all")
 
-    table.create()
+    table.create(if_table_config_exists="replace", if_storage_data_exists="replace")
 
     assert table_exists(table, mode="staging")
 
-    table.create(if_exists="replace")
+    table.create(
+        if_table_config_exists="pass",
+        if_storage_data_exists="pass",
+        if_table_exists="replace",
+    )
 
     assert table_exists(table, mode="staging")
 
-    table.create("tests/sample_data/municipios.csv", if_exists="replace")
+    with pytest.raises(FileExistsError):
+        table.create(if_table_exists="replace", if_storage_data_exists="pass")
+
+    with pytest.raises(FileExistsError):
+        table.create(
+            if_table_config_exists="replace",
+            if_storage_data_exists="pass",
+        )
+
+    table.create(
+        if_table_exists="replace",
+        if_storage_data_exists="pass",
+        if_table_config_exists="pass",
+    )
+
+    assert table_exists(table, mode="staging")
+
+    table.create(
+        "tests/tmp_bases/municipios.csv",
+        if_table_exists="replace",
+        if_storage_data_exists="pass",
+        if_table_config_exists="pass",
+    )
+
+    assert table_exists(table, mode="staging")
+
+    table.create(
+        "tests/tmp_bases/municipios.csv",
+        if_table_exists="replace",
+        if_storage_data_exists="replace",
+        if_table_config_exists="pass",
+    )
+
+    assert table_exists(table, mode="staging")
+
+    with pytest.raises(Exception):
+        table.create(
+            "tests/tmp_bases/municipios.csv",
+            if_table_exists="replace",
+            if_table_config_exists="replace",
+        )
 
 
 def test_create_auto_partitions(metadatadir):
@@ -119,7 +183,7 @@ def test_create_auto_partitions(metadatadir):
     )
 
     table_part.create(
-        "tests/sample_data/partitions", partitioned=True, if_exists="replace"
+        "tests/sample_data/partitions", partitioned=True, if_table_exists="replace"
     )
 
     table_part.publish()
@@ -127,20 +191,28 @@ def test_create_auto_partitions(metadatadir):
 
 def test_update(table):
 
-    table.create("tests/sample_data/municipios.csv", if_exists="replace")
+    table.create(
+        "tests/tmp_bases/municipios.csv",
+        if_table_exists="pass",
+        if_storage_data_exists="pass",
+        if_table_config_exists="pass",
+    )
 
     assert table_exists(table, "staging")
+
+    ### Como dar assert que a descrição foi atualizada?
 
     table.update(mode="all")
 
 
 def test_publish(table, metadatadir):
 
-    Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir).create(
-        if_exists="replace"
+    table.create(
+        "tests/tmp_bases/municipios.csv",
+        if_table_exists="replace",
+        if_storage_data_exists="replace",
+        if_table_config_exists="pass",
     )
-
-    table.create("tests/sample_data/municipios.csv", if_exists="replace")
 
     shutil.copy(
         "tests/sample_data/table/table_config.yaml",
@@ -157,5 +229,9 @@ def test_publish(table, metadatadir):
 
 
 def test_append(table, metadatadir):
+    shutil.copy(
+        "tests/tmp_bases/municipios.csv",
+        "tests/tmp_bases/municipios2.csv",
+    )
 
-    table.append("tests/sample_data/municipios2.csv", if_exists="replace")
+    table.append("tests/tmp_bases/municipios2.csv", if_exists="replace")
