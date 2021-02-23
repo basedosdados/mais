@@ -50,14 +50,14 @@ Uma simples consulta de SQL é o suficiente para cruzamento de bases que você d
 <div class="row">
     <div class="column">
     <a style="width: 90%; text-align: center;"
-    href="/access_data_bq/"
+    href="/mais/access_data_bq/"
     title="{{ lang.t('source.link.title')}}" class="md-button">
         Acesse os dados direto pelo BigQuery 🔍
     </a>
     </div>
     <div class="column">
     <a style="width: 90%; text-align: center;"
-    href="/access_data_local"
+    href="/mais/access_data_local/"
     title="{{ lang.t('source.link.title')}}" class="md-button">
         Acesse os dados pelo seu computador (CLI/API) 👩🏻‍💻
     </a>
