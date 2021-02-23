@@ -7,9 +7,9 @@ dataset_id: br_inep_indicadores_educacionais # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-inep-indicadores-educacionais # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais # AUTO GENERATED
 
-version: 1.0 # REQUIRED
+version: v1.0 # REQUIRED
 
-last_updated: 2021-02-22 # AUTO GENERATED
+last_updated: 2021-02-23 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -41,7 +41,6 @@ treatment_description: |
     Palavras sem acento e minúsculas.
     Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
 
-
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
 data_update_frequency: 1 ano # REQUIRED 
@@ -54,6 +53,7 @@ data_update_frequency: 1 ano # REQUIRED
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
     - municipio
+    - ano
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -74,7 +74,7 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - Brasil
+    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
@@ -383,7 +383,7 @@ columns: # REQUIRED
   
     -   
         name: had_ensino_medio_nao_seriado
-        description: édia de Horas-Aula diária - Ensino Médio Não Seriado
+        description: Média de Horas-Aula diária - Ensino Médio Não Seriado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -556,7 +556,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: taxa_aprov_nsino_fund_9_ano
+        name: taxa_aprov_ensino_fund_9_ano
         description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental 9º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -664,7 +664,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: taxa_reprov_nsino_fund_9_ano
+        name: taxa_reprov_ensino_fund_9_ano
         description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental 9º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -1193,25 +1193,25 @@ columns: # REQUIRED
   
     -   
         name: ird_baixa_regularidade
-        description: Regularidade do Corpo Docente
+        description: Regularidade do Corpo Docente - Baixa Regularidade
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: ird_media_baixa
-        description: Regularidade do Corpo Docente
+        description: Regularidade do Corpo Docente - Média a Baixa Regularidade
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: ird_media_alta
-        description: Regularidade do Corpo Docente 
+        description: Regularidade do Corpo Docente - Média a Alta Regularidade
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: ird_alta
-        description: Regularidade do Corpo Docente 
+        description: Regularidade do Corpo Docente - Alta Regularidade
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
