@@ -76,8 +76,8 @@ class Table(Base):
                         "all your column names between table_config.yaml and "
                         "publish.sql are the same?"
                     )
-
-        json.dump(columns, (json_path).open("w", encoding="utf-8"), ensure_ascii=False)
+        ## force utf-8
+        json.dump(columns, (json_path).open("w", encoding="utf-8"))
 
         return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
