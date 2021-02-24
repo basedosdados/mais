@@ -7,7 +7,7 @@ from basedosdados.dataset import Dataset
 from basedosdados.table import Table
 from basedosdados.storage import Storage
 
-from basedosdados import download
+import basedosdados as bd
 
 
 @click.group()
@@ -164,7 +164,14 @@ def cli_table():
     help="[raise|replace|pass] actions if table config files already exist",
 )
 @click.pass_context
-def init_table(ctx, dataset_id, table_id, data_sample_path, if_exists):
+def init_table(
+    ctx,
+    dataset_id,
+    table_id,
+    data_sample_path,
+    if_folder_exists,
+    if_table_config_exists,
+):
 
     t = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).init(
         data_sample_path=data_sample_path,
@@ -239,7 +246,7 @@ def create_table(
         if_table_exists=if_table_exists,
         force_dataset=force_dataset,
         if_storage_data_exists=if_storage_data_exists,
-        if_table_config_exists=if_table_exists,
+        if_table_config_exists=if_table_config_exists,
     )
 
     click.echo(
@@ -445,6 +452,129 @@ def storage_copy_table(
     )
 
 
+@click.group(name="list")
+def cli_list():
+    pass
+
+
+@cli_list.command(name="datasets", help="List datasets available at given project_id")
+@click.option(
+    "--project_id",
+    default="basedosdados",
+    help="The project which will be queried. You should have list/read permissions",
+)
+@click.option(
+    "--filter_by",
+    default=None,
+    help="Filter your search, must be a string",
+)
+@click.option(
+    "--with_description",
+    default=False,
+    help="[bool]Fetch short description for each dataset",
+)
+@click.pass_context
+def cli_list_datasets(ctx, project_id, filter_by, with_description):
+    bd.list_datasets(
+        query_project_id=project_id,
+        filter_by=filter_by,
+        with_description=with_description,
+    )
+
+
+@cli_list.command(name="dataset_tables", help="List tables available at given dataset")
+@click.argument("dataset_id")
+@click.option(
+    "--project_id",
+    default="basedosdados",
+    help="The project which will be queried. You should have list/read permissions",
+)
+@click.option(
+    "--filter_by",
+    default=None,
+    help="Filter your search, must be a string",
+)
+@click.option(
+    "--with_description",
+    default=False,
+    help="[bool]Fetch short description for each table",
+)
+@click.pass_context
+def cli_list_dataset_tables(ctx, dataset_id, project_id, filter_by, with_description):
+    bd.list_dataset_tables(
+        dataset_id=dataset_id,
+        query_project_id=project_id,
+        filter_by=filter_by,
+        with_description=with_description,
+    )
+
+
+@click.group(name="get")
+def cli_get():
+    pass
+
+
+@cli_get.command(
+    name="dataset_description", help="Get the full description for given dataset"
+)
+@click.argument("dataset_id")
+@click.option(
+    "--project_id",
+    default="basedosdados",
+    help="The project which will be queried. You should have list/read permissions",
+)
+@click.pass_context
+def cli_get_dataset_description(ctx, dataset_id, project_id):
+    bd.get_dataset_description(
+        dataset_id=dataset_id,
+        query_project_id=project_id,
+    )
+
+
+@cli_get.command(
+    name="table_description", help="Get the full description for given table"
+)
+@click.argument("dataset_id")
+@click.argument("table_id")
+@click.option(
+    "--project_id",
+    default="basedosdados",
+    help="The project which will be queried. You should have list/read permissions",
+)
+@click.pass_context
+def cli_get_table_description(ctx, dataset_id, table_id, project_id):
+    bd.get_table_description(
+        dataset_id=dataset_id,
+        table_id=table_id,
+        query_project_id=project_id,
+    )
+
+
+@cli_get.command(
+    name="table_columns",
+    help="Get fields names,types and description for columns at given table",
+)
+@click.argument("dataset_id")
+@click.argument("table_id")
+@click.option(
+    "--project_id",
+    default="basedosdados",
+    help="The project which will be queried. You should have list/read permissions",
+)
+@click.pass_context
+def cli_get_table_columns(
+    ctx,
+    dataset_id,
+    table_id,
+    project_id,
+):
+    bd.get_table_columns(
+        dataset_id=dataset_id,
+        table_id=table_id,
+        query_project_id=project_id,
+    )
+
+
 @click.group(name="config")
 def cli_config():
     pass
@@ -545,6 +675,8 @@ cli.add_command(cli_table)
 cli.add_command(cli_storage)
 cli.add_command(cli_config)
 cli.add_command(cli_download)
+cli.add_command(cli_list)
+cli.add_command(cli_get)
 
 
 def run_bash(command):
