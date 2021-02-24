@@ -1,3 +1,6 @@
+source_bucket_name: basedosdados-dev # AUTO GENERATED
+project_id_staging: basedosdados-dev # AUTO GENERATED
+project_id_prod: basedosdados-dev # AUTO GENERATED
 table_id: pytest # AUTO GENERATED
 dataset_id: pytest # AUTO GENERATED
 

@@ -206,14 +206,6 @@ def test_update(table):
 
 
 def test_publish(table, metadatadir):
-
-    table.create(
-        "tests/tmp_bases/municipios.csv",
-        if_table_exists="replace",
-        if_storage_data_exists="replace",
-        if_table_config_exists="pass",
-    )
-
     shutil.copy(
         "tests/sample_data/table/table_config.yaml",
         Path(metadatadir) / "pytest" / "pytest" / "table_config.yaml",
@@ -221,6 +213,13 @@ def test_publish(table, metadatadir):
     shutil.copy(
         "tests/sample_data/table/publish.sql",
         Path(metadatadir) / "pytest" / "pytest" / "publish.sql",
+    )
+
+    table.create(
+        "tests/tmp_bases/municipios.csv",
+        if_table_exists="replace",
+        if_storage_data_exists="replace",
+        if_table_config_exists="pass",
     )
 
     table.publish(if_exists="replace")

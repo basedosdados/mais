@@ -20,13 +20,13 @@ TIPOS:
 */
 CREATE VIEW basedosdados-dev.pytest.pytest AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(PIB AS INT64) PIB,
-SAFE_CAST(impostos_liquidos AS INT64) impostos_liquidos,
-SAFE_CAST(VA AS INT64) VA,
-SAFE_CAST(VA_agropecuaria AS INT64) VA_agropecuaria,
-SAFE_CAST(VA_industria AS INT64) VA_industria,
-SAFE_CAST(VA_servicos AS INT64) VA_servicos,
-SAFE_CAST(VA_ADESPSS AS INT64) VA_ADESPSS
+id_municipio,
+ano,
+PIB,
+impostos_liquidos,
+VA,
+VA_agropecuaria,
+VA_industria,
+VA_servicos,
+VA_ADESPSS
 from basedosdados-dev.pytest_staging.pytest as t
