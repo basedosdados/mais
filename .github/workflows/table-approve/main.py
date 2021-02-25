@@ -326,8 +326,9 @@ def main():
         dataset_id = dataset_table_ids[table_id]["dataset_id"]
         source_bucket_name = dataset_table_ids[table_id]["source_bucket_name"]
         ### push the table to bigquery
-        print("##############", dataset_id, table_id, "#####################")
+        print("##############", dataset_id, table_id, "#####################\n")
         try:
+        print("\n######### ENTERED TRY BLOCK ###################\n")
             push_table_to_bq(
                 dataset_id,
                 table_id,
@@ -335,7 +336,7 @@ def main():
                 destination_bucket_name=os.environ.get("INPUT_DESTINATION_BUCKET_NAME"),
                 backup_bucket_name=os.environ.get("INPUT_BACKUP_BUCKET_NAME"),
             )
-
+            
             pretty_log(dataset_id, table_id, source_bucket_name)
         except Exception as err:
             print(
