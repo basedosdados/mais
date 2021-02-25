@@ -326,16 +326,25 @@ def main():
         dataset_id = dataset_table_ids[table_id]["dataset_id"]
         source_bucket_name = dataset_table_ids[table_id]["source_bucket_name"]
         ### push the table to bigquery
-        push_table_to_bq(
-            dataset_id,
-            table_id,
-            source_bucket_name,
-            destination_bucket_name=os.environ.get("INPUT_DESTINATION_BUCKET_NAME"),
-            backup_bucket_name=os.environ.get("INPUT_BACKUP_BUCKET_NAME"),
-        )
+        try:"
+            push_table_to_bq(
+                dataset_id,
+                table_id,
+                source_bucket_name,
+                destination_bucket_name=os.environ.get("INPUT_DESTINATION_BUCKET_NAME"),
+                backup_bucket_name=os.environ.get("INPUT_BACKUP_BUCKET_NAME"),
+            )
 
-        pretty_log(dataset_id, table_id, source_bucket_name)
-
+            pretty_log(dataset_id, table_id, source_bucket_name)"
+        except Exception as err:
+            print(
+                "###=================================================### \n",
+                f"{dataset_id}.{table_id} \n",
+                f"Error: \n",
+                f"{err} \n",
+                "###=================================================###"
+            )
+            print()
 
 if __name__ == "__main__":
     main()
