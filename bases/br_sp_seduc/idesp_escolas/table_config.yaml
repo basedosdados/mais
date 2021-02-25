@@ -16,7 +16,7 @@ last_updated: 2021-02-17 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    ***A tabela contém valores do Indicador de Desenvolvimento Educacional de Escolas do Estado de São Paulo (IDESP). O dado está a nível do ano de ensino da escola:
+    A tabela contém valores do Indicador de Desenvolvimento Educacional de Escolas do Estado de São Paulo (IDESP). O dado está a nível do ano de ensino da escola:
     se dividindo em anos iniciais do ensino fundamental, anos finais do ensino fundamental e ensino médio. A tabela disponibiliza unicamente o valor do IDESP
     e não os dados que o compõe. Os dados são cruciais no entendimento da qualidade educacional no estado de São Paulo como um todo, nas diferentes regiões do estado,
     nas regiões metropolitanas e na própria capital. O dado pode ser facilmente cruzado com outras tabelas através do id_escola para novos insights e análises.
