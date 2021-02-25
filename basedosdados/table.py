@@ -183,7 +183,9 @@ class Table(Base):
 
             if data_sample_path.suffix == ".csv":
 
-                columns = next(csv.reader(open(data_sample_path, "r", encoding="utf-8")))
+                columns = next(
+                    csv.reader(open(data_sample_path, "r", encoding="utf-8"))
+                )
 
             else:
                 raise NotImplementedError(
@@ -201,7 +203,7 @@ class Table(Base):
             ):
                 pass
             else:
-                raise FileExistsError(f"No config files found at {self.table_folder}")
+                self._make_template
 
         else:
             if if_table_config_exists == "raise":
