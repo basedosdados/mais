@@ -243,6 +243,12 @@ def get_table_dataset_id():
                 "dataset_id": table_config["dataset_id"],
                 "source_bucket_name": table_config["source_bucket_name"],
             }
+        else:
+            print(
+                "\n###=====================================================================###\n",
+                f"{str(filepath)} does not exist on current commit",
+                "\n###=====================================================================###\n",
+            )
     return dataset_table_ids
 
 
@@ -320,7 +326,7 @@ def main():
     create_config_tree(prod_base64, staging_base64, config_dict)
     ### find the dataset and tables of the PR
     dataset_table_ids = get_table_dataset_id()
-
+    print(dataset_table_ids)
     ### iterate over each table in dataset of the PR
     for table_id in dataset_table_ids.keys():
         dataset_id = dataset_table_ids[table_id]["dataset_id"]
