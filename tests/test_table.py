@@ -206,13 +206,11 @@ def test_update(table):
 
 
 def test_publish(table, metadatadir):
+    table.delete("all")
+
     shutil.copy(
         "tests/sample_data/table/table_config.yaml",
         Path(metadatadir) / "pytest" / "pytest" / "table_config.yaml",
-    )
-    shutil.copy(
-        "tests/sample_data/table/publish.sql",
-        Path(metadatadir) / "pytest" / "pytest" / "publish.sql",
     )
 
     table.create(
@@ -220,6 +218,11 @@ def test_publish(table, metadatadir):
         if_table_exists="replace",
         if_storage_data_exists="replace",
         if_table_config_exists="pass",
+    )
+
+    shutil.copy(
+        "tests/sample_data/table/publish.sql",
+        Path(metadatadir) / "pytest" / "pytest" / "publish.sql",
     )
 
     table.publish(if_exists="replace")
