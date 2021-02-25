@@ -1,0 +1,48 @@
+A tabela contém uma compatibilização de códigos nacionais e estaduais e nomes de escolas.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-bd-diretorios-brasil
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim de Barros
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: <nome>
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- escola
+
+Colunas identificando linhas unicamente
+-------------------
+- id_escola
+- nome_escola
+- rede
+
+Cobertura Temporal
+------------------
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Juntei dados de diferentes bases para criar um diretório de compatibilização. Em maior detalhe, peguei dados de identificação de todas as escolas 
+da BigQuery da Base dos Dados e fiz um left_join com os dados tratados provenientes da Secretaria de Educação de São Paulo. O join foi feito pela
+id_escola, variável que identifica um código para cada escola a nível nacional.
+
+Frequencia de Atualização
+-------------------------
+unico
+
+
