@@ -40,6 +40,7 @@ nav:
     - CLI: cli_reference_api.md
   - Apoie! 💚:
     - Início: support.md
+  - OPEN DATA DAY 👩🏻‍💻: odd_2021.md
 
 markdown_extensions:
   - admonition
