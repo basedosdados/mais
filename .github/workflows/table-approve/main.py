@@ -326,6 +326,7 @@ def main():
         dataset_id = dataset_table_ids[table_id]["dataset_id"]
         source_bucket_name = dataset_table_ids[table_id]["source_bucket_name"]
         ### push the table to bigquery
+        print("##############", dataset_id, table_id, "#####################")
         try:
             push_table_to_bq(
                 dataset_id,
@@ -344,7 +345,6 @@ def main():
                 f"{err} \n",
                 "###=================================================###",
             )
-            print()
 
 
 if __name__ == "__main__":
