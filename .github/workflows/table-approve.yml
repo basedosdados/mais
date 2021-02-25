@@ -50,6 +50,7 @@ jobs:
           backup_bucket_name: basedosdados-backup
 
   to_cloud_tasks:
+    needs: table_approve
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
