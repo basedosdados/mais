@@ -293,6 +293,8 @@ class Table(Base):
                 path, mode="staging", if_exists=if_storage_data_exists
             )
 
+        elif if_table_config_exists == "replace":
+            raise Exception("You must give a path to your data to correctly assess your config files")
         # Create Dataset if it doesn't exist
         if force_dataset:
 
@@ -305,10 +307,6 @@ class Table(Base):
 
             dataset_obj.create(if_exists="pass")
         
-        if if_storage_data_exists=="pass" and if_table_config_exists=="replace":
-            if path = None:
-                raise Exception("You must provide a path for data to properly assess your config files")
-
         self.init(
             data_sample_path=path,
             if_folder_exists="replace",
