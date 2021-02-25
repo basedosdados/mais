@@ -22,6 +22,7 @@ jobs:
           path: files.json
   
   table_approve:
+    needs: get_changes
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
