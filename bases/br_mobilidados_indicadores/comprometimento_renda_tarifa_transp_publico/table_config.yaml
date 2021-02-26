@@ -126,7 +126,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: comprotimento_salario_minimo
+        name: comprometimento_salario_minimo
         description: Comprometimento da renda de um salário mínimo 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

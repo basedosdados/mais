@@ -1,0 +1,58 @@
+Dados de divisão modal são referentes ao percentual de viagens realizadas a pé, de bicicleta, de transporte coletivo e transporte individual.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-mobilidados-indicadores
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Crislane A. Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores/code
+Website: https://github.com/crislanealves
+Email: crislanealves@protonmail.com
+
+Tratado por
+-----------
+Nome: Crislane A. Souza
+Website: https://github.com/crislanealves
+Email: crislanealves@protonmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- municipio
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+
+Cobertura Temporal
+------------------
+- 1996
+- 1997
+- 2002
+- 2003
+- 2007
+- 2009
+- 2010
+- 2012
+- 2017
+- 2018
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- A proporção passou a ser 0-100
+
+Frequencia de Atualização
+-------------------------
+recorrente
+
+
