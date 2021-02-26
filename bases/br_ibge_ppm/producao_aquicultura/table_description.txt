@@ -1,5 +1,6 @@
- Produção da aquicultura, de acordo com a quantidade produzida em quilogramas, e valor da produção em mil reais e percentual.
- 
+Produção da aquicultura, de acordo com a quantidade produzida em quilogramas, e valor da produção em mil reais e percentual.
+
+
 Para saber mais acesse:
 Website: https://basedosdados.org/dataset/br-ibge-ppm
 Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ppm
@@ -12,35 +13,33 @@ Publicado por
 Nome: Crislane A. Souza
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ppm/code
 Website: https://github.com/crislanealves
-Email: crislanealves@protonmail.com
-
-Tratado por
+Email: crislanealves@protonmail.comTratado por
 -----------
 Nome: Crislane A. Souza
-Website: https://github.com/crislanealves
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ppm/code
 Email: crislanealves@protonmail.com
-
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-    - municipio 
-    - ano
+- municipio
+- ano
+- produto
+
 Colunas identificando linhas unicamente
 -------------------
-    - id_municipio
-    - ano
-    - tipo de produto
+- id_municipio
+- ano
+- tipo_produto
+
 Cobertura Temporal
 ------------------
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
 
 Cobertura Espacial
 ------------------
@@ -48,14 +47,13 @@ Cobertura Espacial
 
 Tratamento
 ----------
-    - Unificação das tabelas: Produção da Aquicultura, Valor da Produção e Valor percentual da produção;
-    - Criação da variável 'Moeda' para consistência;
-    - Mudança nos separadores decimais de vírgula (,) para ponto (.); e,
-    - A coluna 'Valor da Produção' foi multiplicada por 1000 para a unidade ficar em 1 real.
-    
-    
+- Unificação das tabelas: Produção da Aquicultura, Valor da Produção e Valor percentual da produção;
+- A coluna 'Valor da Produção' foi multiplicada por 1000 para a unidade ficar em 1 real; 
+- Criação da variável 'Moeda' para consistência; e,
+- Mudança nos separadores decimais de vírgula (,) para ponto (.).
 
 Frequencia de Atualização
 -------------------------
 1 ano
+
 
