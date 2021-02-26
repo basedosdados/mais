@@ -65,3 +65,23 @@ def test_delete_file(storage):
         storage.delete_file("municipios.csv", "staging")
 
     storage.delete_file("municipios.csv", "staging", not_found_ok=True)
+
+
+def test_copy_table(storage):
+
+    Storage("br_ibge_pib", "municipios").copy_table()
+
+    with pytest.raises(ValueError):
+        Storage("br_ibge_pib2", "municipios2").copy_table()
+
+    Storage("br_ibge_pib", "municipios").copy_table(
+        destination_bucket_name="basedosdados-dev",
+    )
+
+
+def test_delete_table(storage):
+
+    Storage("br_ibge_pib", "municipios").delete_table(bucket_name="basedosdados-dev")
+
+    with pytest.raises(ValueError):
+        Storage("br_ibge_pib", "municipios").delete_table()

@@ -259,7 +259,11 @@ class Storage(Base):
 
         if bucket_name is not None:
 
-            table_blobs = self.bucket(f"{bucket_name}").list_blobs(prefix=prefix)
+            table_blobs = (
+                self.client["storage_staging"]
+                .bucket(bucket_name)
+                .list_blobs(prefix=prefix)
+            )
 
         else:
 
