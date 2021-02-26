@@ -388,7 +388,7 @@ columns: # REQUIRED
   
     -   
         name: taxa_evasao_ensino_fund_7_ano
-        description: <Taxa de Evasão - Ensino Fundamental 7º Ano
+        description: Taxa de Evasão - Ensino Fundamental 7º Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
