@@ -270,7 +270,7 @@ class Base:
         )
 
     def _check_mode(self, mode):
-        ACCEPTED_MODES = ["all", "staging", "prod"]
+        ACCEPTED_MODES = ["all", "staging", "prod", "raw"]
         if mode in ACCEPTED_MODES:
             return True
         else:
