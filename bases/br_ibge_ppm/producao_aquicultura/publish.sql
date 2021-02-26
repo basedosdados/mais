@@ -21,11 +21,11 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_ibge_ppm.producao_aquicultura AS
 SELECT 
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(ano AS STRING) ano,
+SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(tipo_produto AS STRING) tipo_produto,
-SAFE_CAST(producao AS STRING) producao,
-SAFE_CAST(valor_producao AS STRING) valor_producao,
-SAFE_CAST(prop_valor_producao AS STRING) prop_valor_producao,
-SAFE_CAST(moeda AS STRING) moeda
+SAFE_CAST(producao AS INT64) producao,
+SAFE_CAST(valor_producao AS INT64) valor_producao,
+SAFE_CAST(prop_valor_producao AS FLOAT64) prop_valor_producao,
+SAFE_CAST(moeda AS INT64) moeda
 from basedosdados-dev.br_ibge_ppm_staging.producao_aquicultura as t
