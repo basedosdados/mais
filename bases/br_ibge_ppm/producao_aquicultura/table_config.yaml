@@ -9,15 +9,14 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ppm #
 
 version: v1.0 # REQUIRED
 
-last_updated: 2021-02-14 # AUTO GENERATED
+last_updated: 2021-02-26 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-
 description: |  # REQUIRED
-    Produção da aquicultura, de acordo com a quantidade produzida em quilogramas, e valor da produção em mil reais e percentual.
+   Produção da aquicultura, de acordo com a quantidade produzida em quilogramas, e valor da produção em mil reais e percentual.
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -44,7 +43,7 @@ treatment_description: |
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: 1 ano # REQUIRED 
+data_update_frequency: 1 ano  # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -55,7 +54,7 @@ data_update_frequency: 1 ano # REQUIRED
 observation_level: #REQUIRED
     - municipio
     - ano
-    - produto
+
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
@@ -74,7 +73,7 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - brasil
+   - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
