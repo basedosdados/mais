@@ -24,6 +24,6 @@ SELECT
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(calcadas AS FLOAT64) prop_calcadas,
-SAFE_CAST(rampas AS FLOAT64) prop_rampas
+SAFE_CAST(prop_calcadas AS FLOAT64) prop_calcadas,
+SAFE_CAST(prop_rampas AS FLOAT64) prop_rampas
 from basedosdados-dev.br_mobilidados_indicadores_staging.proporcao_domicilios_infra_urbana as t
