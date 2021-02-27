@@ -21,7 +21,7 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.setor_censitario AS
 SELECT
-SAFE_CAST(ano AS STRING) ano,
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(id_setor_censitario AS INT64) id_setor_censitario,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(id_rm AS INT64) id_rm,
