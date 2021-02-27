@@ -164,7 +164,14 @@ def cli_table():
     help="[raise|replace|pass] actions if table config files already exist",
 )
 @click.pass_context
-def init_table(ctx, dataset_id, table_id, data_sample_path, if_exists):
+def init_table(
+    ctx,
+    dataset_id,
+    table_id,
+    data_sample_path,
+    if_folder_exists,
+    if_table_config_exists,
+):
 
     t = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).init(
         data_sample_path=data_sample_path,
