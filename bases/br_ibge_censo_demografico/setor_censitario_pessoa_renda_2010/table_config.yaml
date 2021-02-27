@@ -1,0 +1,912 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: setor_censitario_pessoa_renda_2010 # AUTO GENERATED
+dataset_id: br_ibge_censo_demografico # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-ibge-censo-demografico # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico # AUTO GENERATED
+
+version: v1.0 # REQUIRED
+
+last_updated: 2021-02-27 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Informações sobre renda individual por setores censitários
+
+# Quem está completando esse arquivo config?
+published_by:
+    nome: Diego Oliveira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    nome: Diego Oliveira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: |
+    Padronização do nome das colunas, remoção de textos e logos, unificação das bases
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+data_update_frequency: 10 anos      # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - setor censitário
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_setor_censitario
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2010
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - sigla_uf
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+    - name: id_setor_censitario
+      description: ID do setor censitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: sigla_uf
+      description: Sigla do Estado
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: true       # Bool [True, False], whether the column is a partition.
+
+    - name: v001
+      description: Pessoas de 10 anos ou mais de idade com rendimento  nominal mensal
+        de até ½ salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v002
+      description: Pessoas de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de ½ a 1 salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v003
+      description: Pessoas de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 1 a 2 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v004
+      description: Pessoas de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 2 a 3 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v005
+      description: Pessoas de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 3 a 5 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v006
+      description: Pessoas de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 5 a 10 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v007
+      description: Pessoas de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 10 a 15 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v008
+      description: Pessoas de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 15 a 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v009
+      description: Pessoas de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v010
+      description: Pessoas de 10 anos ou mais de idade sem rendimento  nominal mensal
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v011
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade com rendimento nominal mensal de  até ½ salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v012
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de ½ a 1 salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v013
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 1 a 2 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v014
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 2 a 3 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v015
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 3 a 5 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v016
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 5 a 10 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v017
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 10 a 15 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v018
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 15 a 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v019
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v020
+      description: Pessoas de 10 anos ou mais de idade com ou sem  rendimento
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v021
+      description: Pessoas de 10 anos ou mais de idade com rendimento  positivo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v022
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v023
+      description: Homens de 10 anos ou mais de idade com rendimento  nominal mensal de
+        até ½ salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v024
+      description: Homens de 10 anos ou mais de idade com rendimento  nominal mensal de
+        mais de ½ a 1 salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v025
+      description: Homens de 10 anos ou mais de idade com rendimento  nominal mensal de
+        mais de 1 a 2 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v026
+      description: Homens de 10 anos ou mais de idade com rendimento  nominal mensal de
+        mais de 2 a 3 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v027
+      description: Homens de 10 anos ou mais de idade com rendimento  nominal mensal de
+        mais de 3 a 5 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v028
+      description: Homens de 10 anos ou mais de idade com rendimento  nominal mensal de
+        mais de 5 a 10 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v029
+      description: Homens de 10 anos ou mais de idade com rendimento  nominal mensal de
+        mais de 10 a 15 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v030
+      description: Homens de 10 anos ou mais de idade com rendimento  nominal mensal de
+        mais de 15 a 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v031
+      description: Homens de 10 anos ou mais de idade com rendimento  nominal mensal de
+        mais de 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v032
+      description: Homens de 10 anos ou mais de idade sem rendimento  nominal mensal
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v033
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade com rendimento nominal mensal de  até ½ salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v034
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade com rendimento nominal mensal de  mais de ½ a 1 salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v035
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade com rendimento nominal mensal de  mais de 1 a 2 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v036
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade com rendimento nominal mensal de  mais de 2 a 3 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v037
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade com rendimento nominal mensal de  mais de 3 a 5 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v038
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade com rendimento nominal mensal de  mais de 5 a 10 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v039
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade com rendimento nominal mensal de  mais de 10 a 15 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v040
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade com rendimento nominal mensal de  mais de 15 a 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v041
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade com rendimento nominal mensal de  mais de 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v042
+      description: Homens de 10 anos ou mais de idade com ou sem  rendimento
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v043
+      description: Homens de 10 anos ou mais de idade com rendimento  positivo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v044
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v045
+      description: Mulheres de 10 anos ou mais de idade com rendimento  nominal mensal
+        de até ½ salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v046
+      description: Mulheres de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de ½ a 1 salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v047
+      description: Mulheres de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 1 a 2 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v048
+      description: Mulheres de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 2 a 3 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v049
+      description: Mulheres de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 3 a 5 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v050
+      description: Mulheres de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 5 a 10 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v051
+      description: Mulheres de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 10 a 15 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v052
+      description: Mulheres de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 15 a 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v053
+      description: Mulheres de 10 anos ou mais de idade com rendimento  nominal mensal
+        de mais de 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v054
+      description: Mulheres de 10 anos ou mais de idade sem rendimento  nominal mensal
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v055
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade com rendimento nominal mensal de  até ½ salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v056
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de ½ a 1 salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v057
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 1 a 2 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v058
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 2 a 3 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v059
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 3 a 5 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v060
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 5 a 10 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v061
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 10 a 15 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v062
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 15 a 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v063
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade com rendimento nominal mensal de  mais de 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v064
+      description: Mulheres de 10 anos ou mais de idade com ou sem  rendimento
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v065
+      description: Mulheres de 10 anos ou mais de idade com rendimento  positivo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v066
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v067
+      description: Pessoas de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de até ½ salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v068
+      description: Pessoas de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de ½ a 1 salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v069
+      description: Pessoas de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 1 a 2 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v070
+      description: Pessoas de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 2 a 3 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v071
+      description: Pessoas de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 3 a 5 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v072
+      description: Pessoas de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 5 a 10 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v073
+      description: Pessoas de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 10 a 15 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v074
+      description: Pessoas de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 15 a 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v075
+      description: Pessoas de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v076
+      description: Pessoas de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes sem rendimento  nominal mensal
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v077
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de até ½ salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v078
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de ½ a 1 salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v079
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 1 a 2 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v080
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 2 a 3 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v081
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 3 a 5 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v082
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 5 a 10 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v083
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 10 a 15 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v084
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 15 a 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v085
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v086
+      description: Pessoas de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com ou sem  rendimento
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v087
+      description: Pessoas de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  positivo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v088
+      description: Total do rendimento nominal mensal das pessoas de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v089
+      description: Homens de 10 anos ou mais de idade moradores em  domicílios particulares
+        permanentes com rendimento  nominal mensal de até ½ salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v090
+      description: Homens de 10 anos ou mais de idade moradores em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de ½ a 1 salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v091
+      description: Homens de 10 anos ou mais de idade moradores em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 1 a 2 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v092
+      description: Homens de 10 anos ou mais de idade moradores em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 2 a 3 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v093
+      description: Homens de 10 anos ou mais de idade moradores em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 3 a 5 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v094
+      description: Homens de 10 anos ou mais de idade moradores em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 5 a 10 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v095
+      description: Homens de 10 anos ou mais de idade moradores em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 10 a 15 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v096
+      description: Homens de 10 anos ou mais de idade moradores em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 15 a 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v097
+      description: Homens de 10 anos ou mais de idade moradores em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v098
+      description: Homens de 10 anos ou mais de idade moradores em  domicílios particulares
+        permanentes sem rendimento  nominal mensal
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v099
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade moradores em domicílios  particulares permanentes com rendimento nominal
+        mensal  de até ½ salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v100
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade moradores em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de ½ a 1 salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v101
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade moradores em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 1 a 2 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v102
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade moradores em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 2 a 3 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v103
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade moradores em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 3 a 5 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v104
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade moradores em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 5 a 10 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v105
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade moradores em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 10 a 15 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v106
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade moradores em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 15 a 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v107
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade moradores em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v108
+      description: Homens de 10 anos ou mais de idade moradores em  domicílios particulares
+        permanentes com ou sem  rendimento
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v109
+      description: Homens de 10 anos ou mais de idade moradores em  domicílios particulares
+        permanentes com rendimento  positivo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v110
+      description: Total do rendimento nominal mensal dos homens de 10  anos ou mais de
+        idade moradores em domicílios  particulares permanentes
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v111
+      description: Mulheres de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de até ½ salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v112
+      description: Mulheres de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de ½ a 1 salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v113
+      description: Mulheres de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 1 a 2 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v114
+      description: Mulheres de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 2 a 3 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v115
+      description: Mulheres de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 3 a 5 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v116
+      description: Mulheres de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 5 a 10 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v117
+      description: Mulheres de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 10 a 15 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v118
+      description: Mulheres de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 15 a 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v119
+      description: Mulheres de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  nominal mensal de mais de 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v120
+      description: Mulheres de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes sem rendimento  nominal mensal
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v121
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de até ½ salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v122
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de ½ a 1 salário mínimo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v123
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 1 a 2 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v124
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 2 a 3 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v125
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 3 a 5 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v126
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 5 a 10 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v127
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 10 a 15 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v128
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 15 a 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v129
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes com rendimento nominal
+        mensal  de mais de 20 salários mínimos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v130
+      description: Mulheres de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com ou sem  rendimento
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v131
+      description: Mulheres de 10 anos ou mais de idade moradoras em  domicílios particulares
+        permanentes com rendimento  positivo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v132
+      description: Total do rendimento nominal mensal das mulheres de 10  anos ou mais
+        de idade moradoras em domicílios  particulares permanentes
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+

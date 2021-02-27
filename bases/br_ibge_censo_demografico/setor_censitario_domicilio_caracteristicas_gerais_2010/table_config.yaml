@@ -1,0 +1,1528 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: setor_censitario_domicilio_caracteristicas_gerais_2010 # AUTO GENERATED
+dataset_id: br_ibge_censo_demografico # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-ibge-censo-demografico # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico # AUTO GENERATED
+
+version: v1.0 # REQUIRED
+
+last_updated: 2021-02-27 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Informações de caracteristicas gerais por setor censitário
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Diego Oliveira   # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    nome: Diego Oliveira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: |
+    Padronização do nome das colunas, remoção de textos e logos, unificação das bases
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+data_update_frequency: 10 anos      # REQUIRED 
+
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - setor censitário
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_setor_censitario
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2010
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - sigla_uf
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+    
+    - name: id_setor_censitario
+      description: ID do setor censitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: sigla_uf
+      description: Sigla do Estado
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: true       # Bool [True, False], whether the column is a partition.
+
+    - name: v001
+      description: Domicílios particulares e domicílios coletivos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v002
+      description: Domicílios particulares permanentes
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v003
+      description: Domicílios particulares permanentes do tipo casa
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v004
+      description: Domicílios particulares permanentes do tipo casa de  vila ou em condomínio
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v005
+      description: Domicílios particulares permanentes do tipo  apartamento
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v006
+      description: Domicílios particulares permanentes próprios e  quitados
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v007
+      description: Domicílios particulares permanentes próprios em  aquisição
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v008
+      description: Domicílios particulares permanentes alugados
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v009
+      description: Domicílios particulares permanentes cedidos por  empregador
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v010
+      description: Domicílios particulares permanentes cedidos de outra  forma
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v011
+      description: Domicílios particulares permanentes em outra condição  de ocupação
+        (não são próprios, alugados, nem cedidos)
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v012
+      description: Domicílios particulares permanentes com abastecimento  de água da rede
+        geral
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v013
+      description: Domicílios particulares permanentes com abastecimento  de água de poço
+        ou nascente na propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v014
+      description: Domicílios particulares permanentes com abastecimento  de água da chuva
+        armazenada em cisterna
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v015
+      description: Domicílios particulares permanentes com outra forma de abastecimento
+        de água
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v016
+      description: Domicílios particulares permanentes com banheiro de  uso exclusivo
+        dos moradores ou sanitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v017
+      description: Domicílios particulares permanentes com banheiro de  uso exclusivo
+        dos moradores ou sanitário e esgotamento sanitário via rede geral de esgoto ou
+        pluvial
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v018
+      description: Domicílios particulares permanentes com banheiro de  uso exclusivo
+        dos moradores ou sanitário e esgotamento sanitário via fossa séptica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v019
+      description: Domicílios particulares permanentes com banheiro de  uso exclusivo
+        dos moradores ou sanitário e esgotamento sanitário via fossa rudimentar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v020
+      description: Domicílios particulares permanentes com banheiro de  uso exclusivo
+        dos moradores ou sanitário e esgotamento sanitário via vala
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v021
+      description: Domicílios particulares permanentes, com banheiro de  uso exclusivo
+        dos moradores ou sanitário e esgotamento sanitário via rio, lago ou mar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v022
+      description: Domicílios particulares permanentes com banheiro de  uso exclusivo
+        dos moradores ou sanitário e esgotamento sanitário via outro escoadouro
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v023
+      description: Domicílios particulares permanentes sem banheiro de uso  exclusivo
+        dos moradores e nem sanitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v024
+      description: Domicílios particulares permanentes com banheiro de uso  exclusivo
+        dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v025
+      description: Domicílios particulares permanentes com 1 banheiro de uso  exclusivo
+        dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v026
+      description: Domicílios particulares permanentes com 2 banheiros de uso exclusivo
+        dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v027
+      description: Domicílios particulares permanentes com 3 banheiros de uso exclusivo
+        dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v028
+      description: Domicílios particulares permanentes com 4 banheiros de uso exclusivo
+        dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v029
+      description: Domicílios particulares permanentes com 5 banheiros de uso exclusivo
+        dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v030
+      description: Não informado pelo arquivo de referecia do censo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v031
+      description: Não informado pelo arquivo de referecia do censo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v032
+      description: Não informado pelo arquivo de referecia do censo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v033
+      description: Domicílios particulares permanentes com 9 ou mais  banheiros de uso
+        exclusivo dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v034
+      description: Domicílios particulares permanentes sem banheiro de uso  exclusivo
+        dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v035
+      description: Domicílios particulares permanentes com lixo coletado
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v036
+      description: Domicílios particulares permanentes com lixo coletado por  serviço
+        de limpeza
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v037
+      description: Domicílios particulares permanentes com lixo coletado em  caçamba de
+        serviço de limpeza
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v038
+      description: Domicílios particulares permanentes com lixo queimado na  propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v039
+      description: Domicílios particulares permanentes com lixo enterrado na  propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v040
+      description: Domicílios particulares permanentes com lixo jogado em  terreno baldio
+        ou logradouro
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v041
+      description: Domicílios particulares permanentes com lixo jogado em  rio, lago ou
+        mar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v042
+      description: Domicílios particulares permanentes com outro destino do  lixo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v043
+      description: Domicílios particulares permanentes com energia elétrica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v044
+      description: Domicílios particulares permanentes com energia elétrica  de companhia
+        distribuidora
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v045
+      description: Domicílios particulares permanentes com energia elétrica  de outras
+        fontes
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v046
+      description: Domicílios particulares permanentes sem energia elétrica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v047
+      description: Domicílios particulares permanentes com energia elétrica  de companhia
+        distribuidora e com medidor de uso exclusivo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v048
+      description: Domicílios particulares permanentes com energia elétrica  de companhia
+        distribuidora e com medidor comum a mais de  um domicílio
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v049
+      description: Domicílios particulares permanentes com energia elétrica  de companhia
+        distribuidora e sem medidor
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v050
+      description: Domicílios particulares permanentes com 1 morador
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v051
+      description: Domicílios particulares permanentes com 2 moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v052
+      description: Domicílios particulares permanentes com 3 moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v053
+      description: Domicílios particulares permanentes com 4 moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v054
+      description: Domicílios particulares permanentes com 5 moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v055
+      description: Domicílios particulares permanentes com 6 moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v056
+      description: Domicílios particulares permanentes com 7 moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v057
+      description: Domicílios particulares permanentes com 8 moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v058
+      description: Domicílios particulares permanentes com 9 moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v059
+      description: Domicílios particulares permanentes com 10 ou mais  moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v060
+      description: Domicílios particulares permanentes sem morador do sexo masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v061
+      description: Domicílios particulares permanentes sem morador do sexo  feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v062
+      description: Domicílios particulares permanentes com homem responsável  e mais 1
+        morador
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v063
+      description: Domicílios particulares permanentes com homem responsável  e mais 2
+        moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v064
+      description: Domicílios particulares permanentes com homem responsável  e mais 3
+        moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v065
+      description: Domicílios particulares permanentes com homem responsável  e mais 4
+        moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v066
+      description: Domicílios particulares permanentes com homem responsável  e mais 5
+        moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v067
+      description: Domicílios particulares permanentes com homem responsável  e mais 6
+        ou mais moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v068
+      description: Domicílios particulares permanentes, com homem responsável e sem outro
+        morador
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v069
+      description: Domicílios particulares permanentes com homem responsável  e 1 morador
+        do masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v070
+      description: Domicílios particulares permanentes com homem responsável  e 2 moradores
+        do sexo masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v071
+      description: Domicílios particulares permanentes com homem responsável  e 3 moradores
+        do sexo masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v072
+      description: Domicílios particulares permanentes com homem responsável  e 4 moradores
+        do sexo masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v073
+      description: Domicílios particulares permanentes com homem responsável  e 5 moradores
+        do sexo masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v074
+      description: Domicílios particulares permanentes com homem responsável  e 6 ou mais
+        moradores do sexo masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v075
+      description: Domicílios particulares permanentes com homem responsável  e 1 morador
+        sexo feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v076
+      description: Domicílios particulares permanentes com homem responsável  e 2 moradores
+        do sexo feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v077
+      description: Domicílios particulares permanentes com homem responsável  e 3 moradores
+        do sexo feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v078
+      description: Domicílios particulares permanentes com homem responsável  e 4 moradores
+        do sexo feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v079
+      description: Domicílios particulares permanentes com homem responsável  e 5 moradores
+        do sexo feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v080
+      description: Domicílios particulares permanentes com homem responsável  e 6 ou mais
+        moradores do sexo feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v081
+      description: Domicílios particulares permanentes com mulher responsável e mais 1
+        morador
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v082
+      description: Domicílios particulares permanentes com mulher responsável e mais 2
+        moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v083
+      description: Domicílios particulares permanentes com mulher responsável e mais 3
+        moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v084
+      description: Domicílios particulares permanentes com mulher responsável e mais 4
+        moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v085
+      description: Domicílios particulares permanentes com mulher responsável e mais 5
+        moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v086
+      description: Domicílios particulares permanentes com mulher responsável e mais 6
+        ou mais moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v087
+      description: Domicílios particulares permanentes com mulher responsável e sem outro
+        morador
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v088
+      description: Domicílios particulares permanentes com mulher responsável e mais 1
+        morador do sexo masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v089
+      description: Domicílios particulares permanentes com mulher responsável e mais 2
+        moradores do sexo masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v090
+      description: Domicílios particulares permanentes com mulher responsável e mais 3
+        moradores do sexo masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v091
+      description: Domicílios particulares permanentes com mulher responsável e mais 4
+        moradores do sexo masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v092
+      description: Domicílios particulares permanentes com mulher responsável e mais 5
+        moradores do sexo masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v093
+      description: Domicílios particulares permanentes com mulher responsável e mais 6
+        ou mais moradores do sexo masculino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v094
+      description: Domicílios particulares permanentes com mulher responsável e mais 1
+        morador do sexo feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v095
+      description: Domicílios particulares permanentes com mulher responsável e mais 2
+        moradores do sexo feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v096
+      description: Domicílios particulares permanentes com mulher responsável e mais 3  moradores
+        do sexo feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v097
+      description: Domicílios particulares permanentes com mulher responsável e mais 4
+        moradores do sexo feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v098
+      description: Domicílios particulares permanentes com mulher responsável e mais 5
+        moradores do sexo feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v099
+      description: Domicílios particulares permanentes com mulher responsável e mais 6
+        ou mais moradores do sexo feminino
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v100
+      description: Domicílios particulares permanentes do tipo casa próprios  e quitados
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v101
+      description: Domicílios particulares permanentes do tipo casa próprios  e em aquisição
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v102
+      description: Domicílios particulares permanentes do tipo casa alugados
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v103
+      description: Domicílios particulares permanentes do tipo casa cedidos  por empregador
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v104
+      description: Domicílios particulares permanentes do tipo casa cedidos  de outra
+        forma
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v105
+      description: Domicílios particulares permanentes do tipo casa em outra  condição
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v106
+      description: Domicílios particulares permanentes do tipo casa com  abastecimento
+        de água da rede geral
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v107
+      description: Domicílios particulares permanentes do tipo casa com  abastecimento
+        de água de poço ou nascente na propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v108
+      description: Domicílios particulares permanentes do tipo casa com  abastecimento
+        de água da chuva armazenada em cisterna
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v109
+      description: Domicílios particulares permanentes do tipo casa com outra forma de
+        abastecimento de água
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v110
+      description: Domicílios particulares permanentes do tipo casa com  banheiro de uso
+        exclusivo dos moradores ou sanitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v111
+      description: Domicílios particulares permanentes do tipo casa com  banheiro de uso
+        exclusivo dos moradores ou sanitário e  esgotamento sanitário via rede geral de
+        esgoto ou pluvial
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v112
+      description: Domicílios particulares permanentes do tipo casa com  banheiro de uso
+        exclusivo dos moradores ou sanitário e  esgotamento sanitário via fossa séptica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v113
+      description: Domicílios particulares permanentes do tipo casa com  banheiro de uso
+        exclusivo dos moradores ou sanitário e  esgotamento sanitário via fossa rudimentar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v114
+      description: Domicílios particulares permanentes do tipo casa com  banheiro de uso
+        exclusivo dos moradores ou sanitário e  esgotamento sanitário via vala
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v115
+      description: Domicílios particulares permanentes do tipo casa com  banheiro de uso
+        exclusivo dos moradores ou sanitário e  esgotamento sanitário via rio, lago ou
+        mar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v116
+      description: Domicílios particulares permanentes do tipo casa com  banheiro de uso
+        exclusivo dos moradores ou sanitário e  esgotamento sanitário via outro escoadouro
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v117
+      description: Domicílios particulares permanentes do tipo casa sem  banheiro de uso
+        exclusivo dos moradores e nem sanitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v118
+      description: Domicílios particulares permanentes do tipo casa com  banheiro de uso
+        exclusivo dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v119
+      description: Domicílios particulares permanentes do tipo casa com 1  banheiro de
+        uso exclusivo dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v120
+      description: Domicílios particulares permanentes do tipo casa com 2  banheiros de
+        uso exclusivo dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v121
+      description: Domicílios particulares permanentes do tipo casa com 3  banheiros de
+        uso exclusivo dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v122
+      description: Domicílios particulares permanentes do tipo casa com 4 ou  mais banheiros
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v123
+      description: Domicílios particulares permanentes do tipo casa sem  banheiro de uso
+        exclusivo dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v124
+      description: Domicílios particulares permanentes do tipo casa com lixo  coletado
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v125
+      description: Domicílios particulares permanentes do tipo casa com lixo  coletado
+        por serviço de limpeza
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v126
+      description: Domicílios particulares permanentes do tipo casa com lixo  coletado
+        em caçamba de serviço de limpeza
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v127
+      description: Domicílios particulares permanentes do tipo casa com lixo  queimado
+        na propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v128
+      description: Domicílios particulares permanentes do tipo casa com lixo  enterrado
+        na propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v129
+      description: Domicílios particulares permanentes do tipo casa com lixo  jogado em
+        terreno baldio ou logradouro
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v130
+      description: Domicílios particulares permanentes do tipo casa com lixo  jogado em
+        rio, lago ou mar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v131
+      description: Domicílios particulares permanentes do tipo casa com outro destino
+        do lixo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v132
+      description: Domicílios particulares permanentes do tipo casa com  energia elétrica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v133
+      description: Domicílios particulares permanentes do tipo casa com  energia elétrica
+        de companhia distribuidora
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v134
+      description: Domicílios particulares permanentes do tipo casa com  energia elétrica
+        de outras fontes
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v135
+      description: Domicílios particulares permanentes do tipo casa sem  energia elétrica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v136
+      description: Domicílios particulares permanentes do tipo casa com  energia elétrica
+        de companhia distribuidora e com medidor  de uso exclusivo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v137
+      description: Domicílios particulares permanentes do tipo casa com  energia elétrica
+        de companhia distribuidora e com medidor  comum a mais de um domicílio
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v138
+      description: Domicílios particulares permanentes do tipo casa com  energia elétrica
+        de companhia distribuidora e sem medidor
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v139
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        próprios e quitados
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v140
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        próprios e em aquisição
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v141
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        alugados
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v142
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        cedidos por empregador
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v143
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        cedidos de outra forma
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v144
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        em outra condição
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v145
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com abastecimento de água da rede geral
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v146
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com abastecimento de água de poço ou  nascente na propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v147
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com abastecimento de água da chuva  armazenada em cisterna
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v148
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com outra forma de abastecimento de água
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v149
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com banheiro de uso exclusivo dos  moradores ou sanitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v150
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com banheiro de uso exclusivo dos  moradores ou sanitário e esgotamento sanitário
+        via rede  geral de esgoto ou pluvial
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v151
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com banheiro de uso exclusivo dos  moradores ou sanitário e esgotamento sanitário
+        via fossa  séptica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v152
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com banheiro de uso exclusivo dos  moradores ou sanitário e esgotamento sanitário
+        via fossa  rudimentar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v153
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com banheiro de uso exclusivo dos  moradores ou sanitário e esgotamento sanitário
+        via vala
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v154
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com banheiro de uso exclusivo dos  moradores ou sanitário e esgotamento sanitário
+        via rio,  lago ou mar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v155
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com banheiro de uso exclusivo dos  moradores ou sanitário e esgotamento sanitário
+        via outro  escoadouro
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v156
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        sem banheiro e nem sanitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v157
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com banheiro de uso exclusivo dos  moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v158
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com 1 banheiro de uso exclusivo dos  moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v159
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com 2 banheiros de uso exclusivo dos  moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v160
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com 3 banheiros de uso exclusivo dos  moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v161
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com 4 ou mais banheiros de uso exclusivo  dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v162
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        sem banheiro de uso exclusivo dos  moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v163
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com lixo coletado
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v164
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com lixo coletado por serviço de limpeza
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v165
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com lixo coletado em caçamba de serviço  de limpeza
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v166
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com lixo queimado na propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v167
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com lixo enterrado na propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v168
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com lixo jogado em terreno baldio ou  logradouro
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v169
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com lixo jogado em rio, lago ou mar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v170
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com outro destino do lixo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v171
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com energia elétrica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v172
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com energia elétrica de companhia  distribuidora
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v173
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com energia elétrica de outras fontes
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v174
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        sem energia elétrica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v175
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com energia elétrica de companhia  distribuidora e com medidor de uso exclusivo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v176
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com energia elétrica de companhia  distribuidora e com medidor comum a mais de
+        um domicílio
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v177
+      description: Domicílios particulares permanentes do tipo casa de vila  ou em condomínio
+        com energia elétrica de companhia  distribuidora e sem medidor
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v178
+      description: Domicílios particulares permanentes do tipo apartamento  próprios e
+        quitados
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v179
+      description: Domicílios particulares permanentes do tipo apartamento  próprios e
+        em aquisição
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v180
+      description: Domicílios particulares permanentes do tipo apartamento  alugados
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v181
+      description: Domicílios particulares permanentes do tipo apartamento  cedidos por
+        empregador
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v182
+      description: Domicílios particulares permanentes do tipo apartamento  cedidos de
+        outra forma
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v183
+      description: Domicílios particulares permanentes do tipo apartamento  outra condição
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v184
+      description: Domicílios particulares permanentes do tipo apartamento  com abastecimento
+        de água da rede geral
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v185
+      description: Domicílios particulares permanentes do tipo apartamento  com abastecimento
+        de água de poço ou nascente na  propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v186
+      description: Domicílios particulares permanentes do tipo apartamento  com abastecimento
+        de água de chuva armazenada em cisterna
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v187
+      description: Domicílios particulares permanentes do tipo apartamento  com outra
+        forma de abastecimento de água
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v188
+      description: Domicílios particulares permanentes do tipo apartamento  com banheiro
+        de uso exclusivo dos moradores ou sanitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v189
+      description: Domicílios particulares permanentes do tipo apartamento  com banheiro
+        de uso exclusivo dos moradores ou sanitário e esgotamento sanitário via rede geral
+        de esgoto ou pluvial
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v190
+      description: Domicílios particulares permanentes do tipo apartamento  com banheiro
+        de uso exclusivo dos moradores ou sanitário e esgotamento sanitário via fossa
+        séptica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v191
+      description: Domicílios particulares permanentes do tipo apartamento  com banheiro
+        de uso exclusivo dos moradores ou sanitário e esgotamento sanitário via fossa
+        rudimentar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v192
+      description: Domicílios particulares permanentes do tipo apartamento  com banheiro
+        de uso exclusivo dos moradores ou sanitário e esgotamento sanitário via vala
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v193
+      description: Domicílios particulares permanentes do tipo apartamento  com banheiro
+        de uso exclusivo dos moradores ou sanitário e esgotamento sanitário via rio, lago
+        ou mar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v194
+      description: Domicílios particulares permanentes do tipo apartamento  com banheiro
+        de uso exclusivo dos moradores ou sanitário e esgotamento sanitário via outro
+        escoadouro
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v195
+      description: Domicílios particulares permanentes do tipo apartamento  sem banheiro
+        de uso exclusivo dos moradores e nem  sanitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v196
+      description: Domicílios particulares permanentes do tipo apartamento  com banheiro
+        de uso exclusivo dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v197
+      description: Domicílios particulares permanentes do tipo apartamento  com 1 banheiro
+        de uso exclusivo dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v198
+      description: Domicílios particulares permanentes do tipo apartamento  com 2 banheiros
+        de uso exclusivo dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v199
+      description: Domicílios particulares permanentes do tipo apartamento  com 3 banheiros
+        de uso exclusivo dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v200
+      description: Domicílios particulares permanentes do tipo apartamento  com 4 ou mais
+        banheiros de uso exclusivo dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v201
+      description: Domicílios particulares permanentes do tipo apartamento  sem banheiro
+        de uso exclusivo dos moradores
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v202
+      description: Domicílios particulares permanentes do tipo apartamento  com lixo coletado
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v203
+      description: Domicílios particulares permanentes do tipo apartamento  com lixo coletado
+        por serviço de limpeza
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v204
+      description: Domicílios particulares permanentes do tipo apartamento  com lixo coletado
+        em caçamba de serviço de limpeza
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v205
+      description: Domicílios particulares permanentes do tipo apartamento  com lixo queimado
+        na propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v206
+      description: Domicílios particulares permanentes do tipo apartamento  com lixo enterrado
+        na propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v207
+      description: Domicílios particulares permanentes do tipo apartamento  com lixo jogado
+        em terreno baldio ou logradouro
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v208
+      description: Domicílios particulares permanentes do tipo apartamento  com lixo jogado
+        em rio, lago ou mar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v209
+      description: Domicílios particulares permanentes do tipo apartamento  com outro
+        destino do lixo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v210
+      description: Domicílios particulares permanentes do tipo apartamento  com energia
+        elétrica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v211
+      description: Domicílios particulares permanentes do tipo apartamento  com energia
+        elétrica de companhia distribuidora
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v212
+      description: Domicílios particulares permanentes do tipo apartamento  com energia
+        elétrica de outras fontes
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v213
+      description: Domicílios particulares permanentes do tipo apartamento  sem energia
+        elétrica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v214
+      description: Domicílios particulares permanentes do tipo apartamento  com energia
+        elétrica de companhia distribuidora e com  medidor de uso exclusivo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v215
+      description: Domicílios particulares permanentes do tipo apartamento  com energia
+        elétrica de companhia distribuidora e com  medidor comum a mais de um domicílio
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v216
+      description: Domicílios particulares permanentes do tipo apartamento  com energia
+        elétrica de companhia distribuidora e sem  medidor
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v217
+      description: Domicílios particulares permanentes com lixo coletado e  abastecimento
+        de água da rede geral
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v218
+      description: Domicílios particulares permanentes com lixo coletado e  abastecimento
+        de água de poço ou nascente na propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v219
+      description: Domicílios particulares permanentes com lixo coletado e  abastecimento
+        de água de chuva armazenada em cisterna
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v220
+      description: Domicílios particulares permanentes com lixo coletado e  outra forma
+        de abastecimento de água
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v221
+      description: Domicílios particulares permanentes com lixo coletado e  banheiro de
+        uso exclusivo dos moradores ou sanitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v222
+      description: Domicílios particulares permanentes com lixo coletado,  banheiro de
+        uso exclusivo dos moradores ou sanitário e  esgotamento sanitário via rede geral
+        de esgoto ou pluvial
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v223
+      description: Domicílios particulares permanentes com lixo coletado,  banheiro de
+        uso exclusivo dos moradores ou sanitário e  esgotamento sanitário via fossa séptica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v224
+      description: Domicílios particulares permanentes com lixo coletado,  banheiro de
+        uso exclusivo dos moradores ou sanitário e  esgotamento sanitário via fossa rudimentar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v225
+      description: Domicílios particulares permanentes com lixo coletado,  banheiro de
+        uso exclusivo dos moradores ou sanitário e  esgotamento sanitário via vala
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v226
+      description: Domicílios particulares permanentes com lixo coletado,  banheiro de
+        uso exclusivo dos moradores ou sanitário e  esgotamento sanitário via rio, lago
+        ou mar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v227
+      description: Domicílios particulares permanentes com lixo coletado,  banheiro ou
+        sanitário e esgotamento sanitário via outro  escoadouro
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v228
+      description: Domicílios particulares permanentes com lixo coletado e  sem banheiro
+        de uso exclusivo dos moradores e nem  sanitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v229
+      description: Domicílios particulares permanentes com lixo coletado e  banheiro
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v230
+      description: Domicílios particulares permanentes com outra forma de  destino do
+        lixo e abastecimento de água da rede geral
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v231
+      description: Domicílios particulares permanentes com outra forma de  destino do
+        lixo e abastecimento de água de poço ou  nascente na propriedade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v232
+      description: Domicílios particulares permanentes com outra forma de  destino do
+        lixo e abastecimento de água de chuva  armazenada em cisterna
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v233
+      description: Domicílios particulares permanentes com outra forma de  destino do
+        lixo e outra forma de abastecimento de água
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v234
+      description: Domicílios particulares permanentes com outra forma de  destino do
+        lixo e banheiro ou sanitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v235
+      description: Domicílios particulares permanentes com outra forma de  destino do
+        lixo, banheiro de uso exclusivo dos moradores  ou sanitário e esgotamento sanitário
+        via rede geral de  esgoto ou pluvial
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v236
+      description: Domicílios particulares permanentes com outra forma de  destino do
+        lixo, banheiro de uso exclusivo dos moradores  ou sanitário e esgotamento sanitário
+        via fossa séptica
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v237
+      description: Domicílios particulares permanentes com outra forma de  destino do
+        lixo, banheiro de uso exclusivo dos moradores  ou sanitário e esgotamento sanitário
+        via fossa rudimentar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v238
+      description: Domicílios particulares permanentes com outra forma de  destino do
+        lixo, banheiro de uso exclusivo dos moradores  ou sanitário e esgotamento sanitário
+        via vala
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v239
+      description: Domicílios particulares permanentes com outra forma de  destino do
+        lixo, banheiro de uso exclusivo dos moradores  ou sanitário e esgotamento sanitário
+        via rio, lago ou mar
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v240
+      description: Domicílios particulares permanentes com outra forma de  destino do
+        lixo, banheiro de uso exclusivo dos moradores  ou sanitário e esgotamento sanitário
+        via outro escoadouro
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v241
+      description: Domicílios particulares permanentes com outra forma de  destino do
+        lixo e sem banheiro de uso exclusivo dos  moradores e nem sanitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
