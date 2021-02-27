@@ -20,9 +20,9 @@ TIPOS:
 */
 
 CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.setor_censitario AS
-SELECT 
+SELECT
+SAFE_CAST(ano AS STRING) ano,
 SAFE_CAST(id_setor_censitario AS INT64) id_setor_censitario,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(id_rm AS INT64) id_rm,
 SAFE_CAST(nome_rm AS STRING) nome_rm,
@@ -32,6 +32,7 @@ SAFE_CAST(id_subdistrito AS INT64) id_subdistrito,
 SAFE_CAST(nome_subdistrito AS STRING) nome_subdistrito,
 SAFE_CAST(id_bairro AS INT64) id_bairro,
 SAFE_CAST(nome_bairro AS STRING) nome_bairro,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(situacao_setor AS INT64) situacao_setor,
 SAFE_CAST(tipo_setor AS INT64) tipo_setor
 from basedosdados-dev.br_bd_diretorios_brasil_staging.setor_censitario as t

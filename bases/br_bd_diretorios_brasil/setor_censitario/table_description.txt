@@ -22,14 +22,17 @@ Email: ds.oliveira404@gmail.com
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
+- ano
 - sigla_uf
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
+- ano
 - setor censitário
 
 Colunas identificando linhas unicamente
 -------------------
+- ano
 - id_setor_censitario
 
 Cobertura Temporal
