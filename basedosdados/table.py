@@ -424,7 +424,7 @@ class Table(Base):
 
         self.client["bigquery_prod"].query(
             (self.table_folder / "publish.sql").open("r", encoding="utf-8").read()
-        )
+        ).result()
 
         self.update("prod")
 
