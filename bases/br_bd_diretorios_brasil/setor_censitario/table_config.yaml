@@ -22,7 +22,7 @@ description: |  # REQUIRED
 # Quem está completando esse arquivo config?
 published_by:
     name: Diego Oliveira   # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code   # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo2010/code   # REQUIRED
     website: github.com/d116626
     email: ds.oliveira404@gmail.com
 
@@ -31,7 +31,7 @@ published_by:
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
     name: Diego Oliveira   # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code   # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo2010/code   # REQUIRED
     website: github.com/d116626
     email: ds.oliveira404@gmail.com
 
