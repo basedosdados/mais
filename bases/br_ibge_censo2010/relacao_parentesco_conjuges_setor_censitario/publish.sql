@@ -13,13 +13,13 @@ Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
 # para algo um pouco mais explícito.
 
 TIPOS:
-    - Para modificar tipos de colunas, basta substituir INT64 por outro tipo válido.
+    - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
 
-CREATE VIEW basedosdados.br_ibge_censo2010.relacao_parentesco_conjuges_setor_censitario AS
+CREATE VIEW basedosdados-dev.br_ibge_censo2010.relacao_parentesco_conjuges_setor_censitario AS
 SELECT 
 SAFE_CAST(id_setor_censitario AS INT64) id_setor_censitario,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
@@ -235,5 +235,5 @@ SAFE_CAST(v209 AS INT64) v209,
 SAFE_CAST(v210 AS INT64) v210,
 SAFE_CAST(v211 AS INT64) v211,
 SAFE_CAST(v212 AS INT64) v212,
-SAFE_CAST(v213 AS INT64) v213,
-from basedosdados-staging.br_ibge_censo2010_staging.relacao_parentesco_conjuges_setor_censitario as t
+SAFE_CAST(v213 AS INT64) v213
+from basedosdados-dev.br_ibge_censo2010_staging.relacao_parentesco_conjuges_setor_censitario as t

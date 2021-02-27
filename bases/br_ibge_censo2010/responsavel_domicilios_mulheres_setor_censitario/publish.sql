@@ -19,7 +19,7 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados.br_ibge_censo2010.responsavel_domicilios_mulheres_setor_censitario AS
+CREATE VIEW basedosdados-dev.br_ibge_censo2010.responsavel_domicilios_mulheres_setor_censitario AS
 SELECT 
 SAFE_CAST(id_setor_censitario AS STRING) id_setor_censitario,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
@@ -131,4 +131,4 @@ SAFE_CAST(v105 AS STRING) v105,
 SAFE_CAST(v106 AS STRING) v106,
 SAFE_CAST(v107 AS STRING) v107,
 SAFE_CAST(v108 AS STRING) v108
-from basedosdados-staging.br_ibge_censo2010_staging.responsavel_domicilios_mulheres_setor_censitario as t
+from basedosdados-dev.br_ibge_censo2010_staging.responsavel_domicilios_mulheres_setor_censitario as t
