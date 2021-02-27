@@ -1,0 +1,1032 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: setor_censitario_raca_alfabetizacao_idade_genero_2010 # AUTO GENERATED
+dataset_id: br_ibge_censo_demografico # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-ibge-censo-demografico # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico # AUTO GENERATED
+
+version: v1.0 # REQUIRED
+
+last_updated: 2021-02-27 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Informações sobre alfabetização, idade, genero e raça por setores censitários
+
+# Quem está completando esse arquivo config?
+published_by:
+    nome: Diego Oliveira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    nome: Diego Oliveira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: |
+    Padronização do nome das colunas, remoção de textos e logos, unificação das bases
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+data_update_frequency: 10 anos      # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - setor censitário
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_setor_censitario
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2010
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - sigla_uf
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+    - name: id_setor_censitario
+      description: ID do setor censitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: sigla_uf
+      description: Sigla do Estado
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: true       # Bool [True, False], whether the column is a partition.
+
+    - name: v001
+      description: Pessoas alfabetizadas de 7 a 9 anos de idade, do sexo  masculino e
+        cor ou raça - branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v002
+      description: Pessoas alfabetizadas de 7 a 9 anos de idade, do sexo  masculino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v003
+      description: Pessoas alfabetizadas de 7 a 9 anos de idade, do sexo  masculino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v004
+      description: Pessoas alfabetizadas de 7 a 9 anos de idade, do sexo  masculino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v005
+      description: Pessoas alfabetizadas de 7 a 9 anos de idade, do sexo  masculino e
+        cor ou raça – indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v006
+      description: Pessoas alfabetizadas de 10 a 14 anos de idade, do sexo masculino e
+        cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v007
+      description: Pessoas alfabetizadas de 10 a 14 anos de idade, do sexo masculino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v008
+      description: Pessoas alfabetizadas de 10 a 14 anos de idade, do sexo masculino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v009
+      description: Pessoas alfabetizadas de 10 a 14 anos de idade, do sexo masculino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v010
+      description: Pessoas alfabetizadas de 10 a 14 anos de idade, do sexo masculino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v011
+      description: Pessoas alfabetizadas de 15 a 19 anos de idade, do sexo masculino e
+        cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v012
+      description: Pessoas alfabetizadas de 15 a 19 anos de idade, do sexo masculino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v013
+      description: Pessoas alfabetizadas de 15 a 19 anos de idade, do sexo masculino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v014
+      description: Pessoas alfabetizadas de 15 a 19 anos de idade, do sexo masculino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v015
+      description: Pessoas alfabetizadas de 15 a 19 anos de idade, do sexo masculino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v016
+      description: Pessoas alfabetizadas de 15 a 17 anos de idade, do sexo masculino e
+        cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v017
+      description: Pessoas alfabetizadas de 15 a 17 anos de idade, do sexo masculino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v018
+      description: Pessoas alfabetizadas de 15 a 17 anos de idade, do sexo masculino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v019
+      description: Pessoas alfabetizadas de 15 a 17 anos de idade, do sexo masculino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v020
+      description: Pessoas alfabetizadas de 15 a 17 anos de idade, do sexo masculino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v021
+      description: Pessoas alfabetizadas de 18 ou 19 anos de idade, do  sexo masculino
+        e cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v022
+      description: Pessoas alfabetizadas de 18 ou 19 anos de idade, do  sexo masculino
+        e cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v023
+      description: Pessoas alfabetizadas de 18 ou 19 anos de idade, do sexo  masculino
+        e cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v024
+      description: Pessoas alfabetizadas de 18 ou 19 anos de idade, do sexo  masculino
+        e cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v025
+      description: Pessoas alfabetizadas de 18 ou 19 anos de idade, do sexo  masculino
+        e cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v026
+      description: Pessoas alfabetizadas de 20 a 24 anos de idade, do sexo  masculino
+        e cor ou raça - branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v027
+      description: Pessoas alfabetizadas de 20 a 24 anos de idade, do sexo  masculino
+        e cor ou raça - preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v028
+      description: Pessoas alfabetizadas de 20 a 24 anos de idade, do sexo  masculino
+        e cor ou raça - amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v029
+      description: Pessoas alfabetizadas de 20 a 24 anos de idade, do sexo  masculino
+        e cor ou raça - parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v030
+      description: Pessoas alfabetizadas de 20 a 24 anos de idade, do sexo  masculino
+        e cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v031
+      description: Pessoas alfabetizadas de 25 a 29 anos de idade, do sexo  masculino
+        e cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v032
+      description: Pessoas alfabetizadas de 25 a 29 anos de idade, do sexo  masculino
+        e cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v033
+      description: Pessoas alfabetizadas de 25 a 29 anos de idade, do sexo  masculino
+        e cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v034
+      description: Pessoas alfabetizadas de 25 a 29 anos de idade, do sexo  masculino
+        e cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v035
+      description: Pessoas alfabetizadas de 25 a 29 anos de idade, do sexo  masculino
+        e cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v036
+      description: Pessoas alfabetizadas de 30 a 34 anos de idade, do sexo  masculino
+        e cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v037
+      description: Pessoas alfabetizadas de 30 a 34 anos de idade, do sexo  masculino
+        e cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v038
+      description: Pessoas alfabetizadas de 30 a 34 anos de idade, do sexo  masculino
+        e cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v039
+      description: Pessoas alfabetizadas de 30 a 34 anos de idade, do sexo  masculino
+        e cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v040
+      description: Pessoas alfabetizadas de 30 a 34 anos de idade, do sexo  masculino
+        e cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v041
+      description: Pessoas alfabetizadas de 35 a 39 anos de idade, do sexo  masculino
+        e cor ou raça - branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v042
+      description: Pessoas alfabetizadas de 35 a 39 anos de idade, do sexo  masculino
+        e cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v043
+      description: Pessoas alfabetizadas de 35 a 39 anos de idade, do sexo  masculino
+        e cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v044
+      description: Pessoas alfabetizadas de 35 a 39 anos de idade, do sexo  masculino
+        e cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v045
+      description: Pessoas alfabetizadas de 35 a 39 anos de idade, do sexo  masculino
+        e cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v046
+      description: Pessoas alfabetizadas de 40 a 44 anos de idade, do sexo  masculino
+        e cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v047
+      description: Pessoas alfabetizadas de 40 a 44 anos de idade, do sexo  masculino
+        e cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v048
+      description: Pessoas alfabetizadas de 40 a 44 anos de idade, do sexo  masculino
+        e cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v049
+      description: Pessoas alfabetizadas de 40 a 44 anos de idade, do sexo  masculino
+        e cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v050
+      description: Pessoas alfabetizadas de 40 a 44 anos de idade, do sexo  masculino
+        e cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v051
+      description: Pessoas alfabetizadas de 45 a 49 anos de idade, do sexo  masculino
+        e cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v052
+      description: Pessoas alfabetizadas de 45 a 49 anos de idade, do sexo  masculino
+        e cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v053
+      description: Pessoas alfabetizadas de 45 a 49 anos de idade, do sexo  masculino
+        e cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v054
+      description: Pessoas alfabetizadas de 45 a 49 anos de idade, do sexo  masculino
+        e cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v055
+      description: Pessoas alfabetizadas de 45 a 49 anos de idade, do sexo  masculino
+        e cor ou raça – indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v056
+      description: Pessoas alfabetizadas de 50 a 54 anos de idade, do sexo  masculino
+        e cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v057
+      description: Pessoas alfabetizadas de 50 a 54 anos de idade, do sexo  masculino
+        e cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v058
+      description: Pessoas alfabetizadas de 50 a 54 anos de idade, do sexo  masculino
+        e cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v059
+      description: Pessoas alfabetizadas de 50 a 54 anos de idade, do sexo  masculino
+        e cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v060
+      description: Pessoas alfabetizadas de 50 a 54 anos de idade, do sexo  masculino
+        e cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v061
+      description: Pessoas alfabetizadas de 55 a 59 anos de idade, do sexo  masculino
+        e cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v062
+      description: Pessoas alfabetizadas de 55 a 59 anos de idade, do sexo  masculino
+        e cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v063
+      description: Pessoas alfabetizadas de 55 a 59 anos de idade, do sexo  masculino
+        e cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v064
+      description: Pessoas alfabetizadas de 55 a 59 anos de idade, do sexo  masculino
+        e cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v065
+      description: Pessoas alfabetizadas de 55 a 59 anos de idade, do sexo  masculino
+        e cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v066
+      description: Pessoas alfabetizadas de 60 a 69 anos de idade, do sexo  masculino
+        e cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v067
+      description: Pessoas alfabetizadas de 60 a 69 anos de idade, do sexo  masculino
+        e cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v068
+      description: Pessoas alfabetizadas de 60 a 69 anos de idade, do sexo  masculino
+        e cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v069
+      description: Pessoas alfabetizadas de 60 a 69 anos de idade, do sexo  masculino
+        e cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v070
+      description: Pessoas alfabetizadas de 60 a 69 anos de idade, do sexo  masculino
+        e cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v071
+      description: Pessoas alfabetizadas de 70 anos ou mais de idade, do  sexo masculino
+        e cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v072
+      description: Pessoas alfabetizadas de 70 anos ou mais de idade, do  sexo masculino
+        e cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v073
+      description: Pessoas alfabetizadas de 70 anos ou mais de idade, do  sexo masculino
+        e cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v074
+      description: Pessoas alfabetizadas de 70 anos ou mais de idade, do  sexo masculino
+        e cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v075
+      description: Pessoas alfabetizadas de 70 anos ou mais de idade, do  sexo masculino
+        e cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v076
+      description: Pessoas alfabetizadas de 5 ou 6 anos de idade, do sexo  feminino e
+        cor ou raça - branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v077
+      description: Pessoas alfabetizadas de 5 ou 6 anos de idade, do sexo  feminino e
+        cor ou raça - preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v078
+      description: Pessoas alfabetizadas de 5 ou 6 anos de idade, do sexo  feminino e
+        cor ou raça - amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v079
+      description: Pessoas alfabetizadas de 5 ou 6 anos de idade, do sexo  feminino e
+        cor ou raça - parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v080
+      description: Pessoas alfabetizadas de 5 ou 6 anos de idade, do sexo  feminino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v081
+      description: Pessoas alfabetizadas de 7 a 9 anos de idade, do sexo  feminino e cor
+        ou raça - branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v082
+      description: Pessoas alfabetizadas de 7 a 9 anos de idade, do sexo  feminino e cor
+        ou raça - preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v083
+      description: Pessoas alfabetizadas de 7 a 9 anos de idade, do sexo  feminino e cor
+        ou raça - amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v084
+      description: Pessoas alfabetizadas de 7 a 9 anos de idade, do sexo  feminino e cor
+        ou raça - parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v085
+      description: Pessoas alfabetizadas de 7 a 9 anos de idade, do sexo  feminino e cor
+        ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v086
+      description: Pessoas alfabetizadas de 10 a 14 anos de idade, do sexo  feminino e
+        cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v087
+      description: Pessoas alfabetizadas de 10 a 14 anos de idade, do sexo  feminino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v088
+      description: Pessoas alfabetizadas de 10 a 14 anos de idade, do sexo  feminino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v089
+      description: Pessoas alfabetizadas de 10 a 14 anos de idade, do sexo  feminino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v090
+      description: Pessoas alfabetizadas de 10 a 14 anos de idade, do sexo  feminino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v091
+      description: Pessoas de15 a 19 anos de idade, do sexo feminino e cor  ou raça –
+        branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v092
+      description: Pessoas de15 a 19 anos de idade, do sexo feminino e cor  ou raça –
+        preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v093
+      description: Pessoas alfabetizadas de15 a 19 anos de idade, do sexo  feminino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v094
+      description: Pessoas alfabetizadas de15 a 19 anos de idade, do sexo feminino e cor
+        ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v095
+      description: Pessoas alfabetizadas de15 a 19 anos de idade, do sexo feminino e cor
+        ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v096
+      description: Pessoas alfabetizadas de 15 a 17 anos de idade, do sexo  feminino e
+        cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v097
+      description: Pessoas alfabetizadas de 15 a 17 anos de idade, do sexo  feminino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v098
+      description: Pessoas alfabetizadas de 15 a 17 anos de idade, do sexo  feminino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v099
+      description: Pessoas alfabetizadas de 15 a 17 anos de idade, do sexo  feminino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v100
+      description: Pessoas alfabetizadas de 15 a 17 anos de idade, do sexo  feminino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v101
+      description: Pessoas alfabetizadas de 18 ou 19 anos de idade, do sexo  feminino
+        e cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v102
+      description: Pessoas alfabetizadas de 18 ou 19 anos de idade, do sexo  feminino
+        e cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v103
+      description: Pessoas alfabetizadas de 18 ou 19 anos de idade, do sexo  feminino
+        e cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v104
+      description: Pessoas alfabetizadas de 18 ou 19 anos de idade, do sexo  feminino
+        e cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v105
+      description: Pessoas alfabetizadas de 18 ou 19 anos de idade, do sexo  feminino
+        e cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v106
+      description: Pessoas alfabetizadas de 20 a 24 anos de idade, do sexo  feminino e
+        cor ou raça - branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v107
+      description: Pessoas alfabetizadas de 20 a 24 anos de idade, do sexo  feminino e
+        cor ou raça - preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v108
+      description: Pessoas alfabetizadas de 20 a 24 anos de idade, do sexo  feminino e
+        cor ou raça - amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v109
+      description: Pessoas alfabetizadas de 20 a 24 anos de idade, do sexo  feminino e
+        cor ou raça - parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v110
+      description: Pessoas alfabetizadas de 20 a 24 anos de idade, do sexo  feminino e
+        cor ou raça -indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v111
+      description: Pessoas alfabetizadas de 25 a 29 anos de idade, do sexo  feminino e
+        cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v112
+      description: Pessoas alfabetizadas de 25 a 29 anos de idade, do sexo  feminino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v113
+      description: Pessoas alfabetizadas de 25 a 29 anos de idade, do sexo  feminino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v114
+      description: Pessoas alfabetizadas de 25 a 29 anos de idade, do sexo  feminino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v115
+      description: Pessoas alfabetizadas de 25 a 29 anos de idade, do sexo  feminino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v116
+      description: Pessoas alfabetizadas de 30 a 34 anos de idade, do sexo  feminino e
+        cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v117
+      description: Pessoas alfabetizadas de 30 a 34 anos de idade, do sexo  feminino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v118
+      description: Pessoas alfabetizadas de 30 a 34 anos de idade, do sexo  feminino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v119
+      description: Pessoas alfabetizadas de 30 a 34 anos de idade, do sexo  feminino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v120
+      description: Pessoas alfabetizadas de 30 a 34 anos de idade, do sexo  feminino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v121
+      description: Pessoas alfabetizadas de 35 a 39 anos de idade, do sexo  feminino e
+        cor ou raça - branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v122
+      description: Pessoas alfabetizadas de 35 a 39 anos de idade, do sexo  feminino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v123
+      description: Pessoas alfabetizadas de 35 a 39 anos de idade, do sexo  feminino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v124
+      description: Pessoas alfabetizadas de 35 a 39 anos de idade, do sexo  feminino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v125
+      description: Pessoas alfabetizadas de 35 a 39 anos de idade, do sexo  feminino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v126
+      description: Pessoas alfabetizadas de 40 a 44 anos de idade, do sexo  feminino e
+        cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v127
+      description: Pessoas alfabetizadas de 40 a 44 anos de idade, do sexo  feminino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v128
+      description: Pessoas alfabetizadas de 40 a 44 anos de idade, do sexo  feminino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v129
+      description: Pessoas alfabetizadas de 40 a 44 anos de idade, do sexo  feminino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v130
+      description: Pessoas alfabetizadas de 40 a 44 anos de idade, do sexo  feminino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v131
+      description: Pessoas alfabetizadas de 45 a 49 anos de idade, do sexo  feminino e
+        cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v132
+      description: Pessoas alfabetizadas de 45 a 49 anos de idade, do sexo  feminino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v133
+      description: Pessoas alfabetizadas de 45 a 49 anos de idade, do sexo  feminino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v134
+      description: Pessoas alfabetizadas de 45 a 49 anos de idade, do sexo  feminino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v135
+      description: Pessoas alfabetizadas de 45 a 49 anos de idade, do sexo  feminino e
+        cor ou raça – indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v136
+      description: Pessoas alfabetizadas de 50 a 54 anos de idade, do sexo  feminino e
+        cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v137
+      description: Pessoas alfabetizadas de 50 a 54 anos de idade, do sexo  feminino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v138
+      description: Pessoas alfabetizadas de 50 a 54 anos de idade, do sexo  feminino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v139
+      description: Pessoas alfabetizadas de 50 a 54 anos de idade, do sexo  feminino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v140
+      description: Pessoas alfabetizadas de 50 a 54 anos de idade, do sexo  feminino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v141
+      description: Pessoas alfabetizadas de 55 a 59 anos de idade,  do sexo  feminino
+        e cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v142
+      description: Pessoas alfabetizadas de 55 a 59 anos de idade, do sexo  feminino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v143
+      description: Pessoas alfabetizadas de 55 a 59 anos de idade, do sexo  feminino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v144
+      description: Pessoas alfabetizadas de 55 a 59 anos de idade, do sexo  feminino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v145
+      description: Pessoas alfabetizadas de 55 a 59 anos de idade, do sexo  feminino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v146
+      description: Pessoas alfabetizadas de 60 a 69 anos de idade, do sexo  feminino e
+        cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v147
+      description: Pessoas alfabetizadas de 60 a 69 anos de idade, do sexo  feminino e
+        cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v148
+      description: Pessoas alfabetizadas de 60 a 69 anos de idade, do sexo  feminino e
+        cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v149
+      description: Pessoas alfabetizadas de 60 a 69 anos de idade, do sexo  feminino e
+        cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v150
+      description: Pessoas alfabetizadas de 60 a 69 anos de idade, do sexo  feminino e
+        cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v151
+      description: Pessoas alfabetizadas de 70 anos ou mais de idade, do  sexo feminino
+        e cor ou raça – branca
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v152
+      description: Pessoas alfabetizadas de 70 anos ou mais de idade, do  sexo feminino
+        e cor ou raça – preta
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v153
+      description: Pessoas alfabetizadas de 70 anos ou mais de idade, do  sexo feminino
+        e cor ou raça – amarela
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v154
+      description: Pessoas alfabetizadas de 70 anos ou mais de idade, do  sexo feminino
+        e cor ou raça – parda
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v155
+      description: Pessoas alfabetizadas de 70 anos ou mais de idade, do  sexo feminino
+        e cor ou raça - indígena
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
