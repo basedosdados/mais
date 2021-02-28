@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -27,5 +26,5 @@ SAFE_CAST(tipo_produto AS STRING) tipo_produto,
 SAFE_CAST(producao AS INT64) producao,
 SAFE_CAST(valor_producao AS INT64) valor_producao,
 SAFE_CAST(prop_valor_producao AS FLOAT64) prop_valor_producao,
-SAFE_CAST(moeda AS INT64) moeda
+SAFE_CAST(moeda AS STRING) moeda
 from basedosdados-dev.br_ibge_ppm_staging.producao_aquicultura as t
