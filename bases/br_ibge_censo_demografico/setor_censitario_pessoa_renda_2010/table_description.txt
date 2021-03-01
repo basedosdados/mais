@@ -1,0 +1,51 @@
+Informações sobre renda individual por setores censitários
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ibge-censo-demografico
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: 
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code
+Website: github.com/d116626
+Email: ds.oliveira404@gmail.comTratado por
+-----------
+Nome: 
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code
+Website: github.com/d116626
+Email: ds.oliveira404@gmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- setor censitário
+
+Colunas identificando linhas unicamente
+-------------------
+- id_setor_censitario
+
+Cobertura Temporal
+------------------
+- 2010
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Padronização do nome das colunas, remoção de textos e logos, unificação das bases
+
+Frequencia de Atualização
+-------------------------
+10 anos
+
+

@@ -23,6 +23,7 @@ Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
 - ano
+- produto
 
 Colunas identificando linhas unicamente
 -------------------
