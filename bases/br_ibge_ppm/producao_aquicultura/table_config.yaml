@@ -128,7 +128,7 @@ columns: # REQUIRED
   
     -   
         name: valor_producao
-        description: Valor da Produção (Mil Reais)
+        description: Valor da Produção
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
