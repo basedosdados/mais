@@ -19,7 +19,7 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.taxas_transicao_municipios AS
+CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.municipio_taxas_transicao AS
 SELECT 
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(localizacao AS STRING) localizacao,
@@ -90,4 +90,4 @@ SAFE_CAST(taxa_evasao_eja_ensino_medio AS FLOAT64) taxa_evasao_eja_ensino_medio,
 SAFE_CAST(taxa_evasao_eja_ensino_medio_1_ano AS FLOAT64) taxa_evasao_eja_ensino_medio_1_ano,
 SAFE_CAST(taxa_evasao_eja_ensino_medio_2_ano AS FLOAT64) taxa_evasao_eja_ensino_medio_2_ano,
 SAFE_CAST(taxa_evasao_eja_ensino_medio_3_ano AS FLOAT64) taxa_evasao_eja_ensino_medio_3_ano
-from basedosdados-dev.br_inep_indicadores_educacionais_staging.taxas_transicao_municipios as t
+from basedosdados-dev.br_inep_indicadores_educacionais_staging.municipio_taxas_transicao as t
