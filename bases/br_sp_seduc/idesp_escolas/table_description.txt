@@ -17,7 +17,7 @@ Nome: Matheus Valentim de Barros
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc/code
 Email: mavalentim.b@gmail.comTratado por
 -----------
-Nome: <nome>
+Nome: None
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
@@ -54,8 +54,8 @@ Cobertura Espacial
 
 Tratamento
 ----------
-O processo de tratamento consistiu em meras alterações de limpeza de remoção de algumas linhas do csv original cujo não tinham informações e na 
-renomeação de colunas para melhor harmonizar com outras tabelas do dataset.
+O processo de tratamento consistiu em meras alterações de limpeza de remoção de algumas linhas do csv original cujo não tinham informações, na 
+renomeação de colunas para melhor harmonizar com outras tabelas do dataset e na substituição de vírgulas por pontos no valor da nota do IDESP.
 
 Frequencia de Atualização
 -------------------------

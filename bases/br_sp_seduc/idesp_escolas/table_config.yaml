@@ -7,9 +7,9 @@ dataset_id: br_sp_seduc # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-sp-seduc # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: V1.1 # REQUIRED
 
-last_updated: 2021-02-17 # AUTO GENERATED
+last_updated: 2021-03-02 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -32,15 +32,15 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <nome>
-    code_url: <onde encontrar código de tratamento>
-    website: <onde encontrar os dados tratados>
-    email: <email>
+    name: 
+    code_url: 
+    website: 
+    email: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    O processo de tratamento consistiu em meras alterações de limpeza de remoção de algumas linhas do csv original cujo não tinham informações e na 
-    renomeação de colunas para melhor harmonizar com outras tabelas do dataset.
+    O processo de tratamento consistiu em meras alterações de limpeza de remoção de algumas linhas do csv original cujo não tinham informações, na 
+    renomeação de colunas para melhor harmonizar com outras tabelas do dataset e na substituição de vírgulas por pontos no valor da nota do IDESP.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -77,8 +77,6 @@ primary_keys:
 coverage_geo:
     - brasil
     - SP
-    
-
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
@@ -114,25 +112,25 @@ columns: # REQUIRED
   
     -   
         name: id_escola_sp
-        description: Id Escola dentro do Estado de São Paulo
+        description: ID Escola - especifica para o Estado de São Paulo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_escola
-        description: ID Escola INEP
+        description: ID Escola - INEP
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nom_diretoria
+        name: diretoria
         description: Diretoria de Ensino do Estado de São Paulo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nom_escola
-        description: Nome da escola
+        name: nome_escola
+        description: Nome da Escola
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -144,7 +142,7 @@ columns: # REQUIRED
   
     -   
         name: nivel_ensino
-        description: Nível de Ensino (Fundamental, Médio)
+        description: Nível de Ensino 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -156,6 +154,12 @@ columns: # REQUIRED
   
     -   
         name: nota_idesp
-        description: Nota de Desenvolvimento Educacional
+        description: Nota de Desenvolvimento Educacional feita pelo Estado de São Paulo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

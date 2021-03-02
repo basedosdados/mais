@@ -8,9 +8,9 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
- O datset abrange todas as tabelas disponibilizadas pela Secretaria de Educação de São Paulo. Nas tabelas, tem-se dados diversas características das escolas, desde 
- seu endereço, passando pelo índice socio-econômico da escola e pelo fluxo de alunos até o indicador de desenvolvimento da educação, separado por anos inciais e 
- finais do fundamental e por ensino médio.
+    A base abrange todas as tabelas disponibilizadas pela Secretaria de Educação de São Paulo. Nas tabelas, tem-se dados diversas características das escolas, desde 
+    seu endereço, passando pelo índice socioeconômico da escola e pelo fluxo de alunos até o indicador de desenvolvimento da educação, separado por anos inciais e 
+    finais do fundamental e por ensino médio.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
@@ -18,8 +18,8 @@ organization: secretaria de educação de são paulo # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
-    name: <nome>
-    email: <email>
+    name: 
+    email: 
 
 # Onde encontrar os dados originais e mais informações?
 website:
@@ -44,7 +44,6 @@ tags:
     - escolas
     - idesp
     - inep
-    
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.
@@ -56,7 +55,7 @@ languages:
 free: sim
 
 # Are microdata available for download?
-microdata: sim
+microdata: não
 
 # Existe uma API na fonte original?
 API: não

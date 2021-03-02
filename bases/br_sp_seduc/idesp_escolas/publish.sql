@@ -21,12 +21,14 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_sp_seduc.idesp_escolas AS
 SELECT 
-SAFE_CAST(id_escola_sp AS INT64) id_escola_sp,
-SAFE_CAST(id_inep AS INT64) id_inep,
-SAFE_CAST(diretoria AS STRING) diretoria,
-SAFE_CAST(nom_escola AS STRING) nom_escola,
-SAFE_CAST(municipio AS STRING) municipio,
-SAFE_CAST(nivel_ensino AS STRING) nivel_ensino,
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(nota_idesp AS FLOAT64) nota_idesp
+SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(municipio AS STRING) municipio,
+SAFE_CAST(diretoria AS STRING) diretoria,
+SAFE_CAST(id_escola AS INT64) id_escola,
+SAFE_CAST(id_escola_sp AS INT64) id_escola_sp,
+SAFE_CAST(nome_escola AS STRING) nome_escola,
+SAFE_CAST(nivel_ensino AS STRING) nivel_ensino,
+SAFE_CAST(nota_idesp AS FLOAT64) nota_idesp,
+
 from basedosdados-dev.br_sp_seduc_staging.idesp_escolas as t
