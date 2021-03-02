@@ -491,325 +491,325 @@ columns: # REQUIRED
   
     -   
         name: taxa_aprov_ensino_fund
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental
+        description: Taxa de Aprovação - Ensino Fundamental
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_fund_anos_iniciais
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental Anos Iniciais
+        description: Taxa de Aprovação - Ensino Fundamental Anos Iniciais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_fund_anos_finais
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental Anos Finais
+        description: Taxa de Aprovação - Ensino Fundamental Anos Finais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_fund_1_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental 1º ano
+        description: Taxa de Aprovação - Ensino Fundamental 1º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_fund_2_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental 2º ano
+        description: Taxa de Aprovação - Ensino Fundamental 2º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_fund_3_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental 3º ano
+        description: Taxa de Aprovação - Ensino Fundamental 3º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_fund_4_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental 4º ano
+        description: Taxa de Aprovação - Ensino Fundamental 4º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_fund_5_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental 5º ano
+        description: Taxa de Aprovação - Ensino Fundamental 5º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_fund_6_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental 6º ano
+        description: Taxa de Aprovação - Ensino Fundamental 6º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_fund_7_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental 7º ano
+        description: Taxa de Aprovação - Ensino Fundamental 7º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_fund_8_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental 8º ano
+        description: Taxa de Aprovação - Ensino Fundamental 8º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_fund_9_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Fundamental 9º ano
+        description: Taxa de Aprovação - Ensino Fundamental 9º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_medio
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Médio
+        description: Taxa de Aprovação - Ensino Médio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_medio_1_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Médio 1º ano
+        description: Taxa de Aprovação - Ensino Médio 1º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_medio_2_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Médio 2º ano
+        description: Taxa de Aprovação - Ensino Médio 2º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_medio_3_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Médio 3º ano
+        description: Taxa de Aprovação - Ensino Médio 3º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_medio_4_ano
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Médio 4º ano
+        description: Taxa de Aprovação - Ensino Médio 4º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprov_ensino_medio_nao_seriado
-        description: Taxas de Aprovação - Taxa de Aprovação - Ensino Médio Não Seriado
+        description: Taxa de Aprovação - Ensino Médio Não Seriado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_fund
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental
+        description: Taxa de Reprovação - Ensino Fundamental
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_fund_anos_iniciais
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental Anos Iniciais
+        description: Taxa de Reprovação - Ensino Fundamental Anos Iniciais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_fund_anos_finais
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental Anos Finais
+        description: Taxa de Reprovação - Ensino Fundamental Anos Finais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_fund_1_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental 1º ano
+        description: Taxa de Reprovação - Ensino Fundamental 1º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_fund_2_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental 2º ano
+        description: Taxa de Reprovação - Ensino Fundamental 2º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_fund_3_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental 3º ano
+        description: Taxa de Reprovação - Ensino Fundamental 3º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_fund_4_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental 4º ano
+        description: Taxa de Reprovação - Ensino Fundamental 4º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_fund_5_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental 5º ano
+        description: Taxa de Reprovação - Ensino Fundamental 5º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_fund_6_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental 6º ano
+        description: Taxa de Reprovação - Ensino Fundamental 6º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_fund_7_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental 7º ano
+        description: Taxa de Reprovação - Ensino Fundamental 7º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_fund_8_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental 8º ano
+        description: Taxa de Reprovação - Ensino Fundamental 8º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_fund_9_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Fundamental 9º ano
+        description: Taxa de Reprovação - Ensino Fundamental 9º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_medio
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Médio
+        description: Taxa de Reprovação - Ensino Médio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_medio_1_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Médio 1º ano
+        description: Taxa de Reprovação - Ensino Médio 1º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_medio_2_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Médio 2º ano
+        description: Taxa de Reprovação - Ensino Médio 2º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_medio_3_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Médio 3º ano
+        description: Taxa de Reprovação - Ensino Médio 3º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_medio_4_ano
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Médio 4º ano
+        description: Taxa de Reprovação - Ensino Médio 4º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_reprov_ensino_medio_nao_seriado
-        description: Taxas de Reprovação - Taxa de Reprovação  - Ensino Médio Não Seriado
+        description: Taxa de Reprovação - Ensino Médio Não Seriado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_fund
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Fundamental 
+        description: Taxa de Abandono - Ensino Fundamental 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_fund_anos_iniciais
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Fundamental Anos Iniciais
+        description: Taxa de Abandono - Ensino Fundamental Anos Iniciais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_fund_anos_finais
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Fundamental Anos Finais
+        description: Taxa de Abandono - Ensino Fundamental Anos Finais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_fund_1_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Fundamental 1º ano
+        description: Taxa de Abandono - Ensino Fundamental 1º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_fund_2_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Fundamental 2º ano
+        description: Taxa de Abandono - Ensino Fundamental 2º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_fund_3_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Fundamental 3º ano
+        description: Taxa de Abandono - Ensino Fundamental 3º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_fund_4_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Fundamental 4º ano
+        description: Taxa de Abandono - Ensino Fundamental 4º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_fund_5_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Fundamental 5º ano
+        description: Taxa de Abandono - Ensino Fundamental 5º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_fund_6_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Fundamental 6º ano
+        description: Taxa de Abandono - Ensino Fundamental 6º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_fund_7_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Fundamental 7º ano
+        description: Taxa de Abandono - Ensino Fundamental 7º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_fund_8_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Fundamental 8º ano
+        description: Taxa de Abandono - Ensino Fundamental 8º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_fund_9_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Fundamental 9º ano
+        description: Taxa de Abandono - Ensino Fundamental 9º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_medio
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Médio
+        description: Taxa de Abandono - Ensino Médio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_medio_1_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Médio 1º ano
+        description: Taxa de Abandono - Ensino Médio 1º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_medio_2_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Médio 2º ano
+        description: Taxa de Abandono - Ensino Médio 2º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_medio_3_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Médio 3º ano
+        description: Taxa de Abandono - Ensino Médio 3º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_medio_4_ano
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Médio 4º ano
+        description: Taxa de Abandono - Ensino Médio 4º ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aband_ensino_medio_nao_seriado
-        description: Taxas de Abandono - Taxa de Abandono  - Ensino Médio Não seriado
+        description: Taxa de Abandono - Ensino Médio Não seriado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
