@@ -8,11 +8,11 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidado
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    Dados brutos e indicadores sobre mobilidade e transportes a nível de município em 2010.
+    Reúne indicadores diversos a respeito da mobilidade urbana no Brasil, a exemplor: i) Emissão de CO2 resultantes do uso de combustível; ii) Tempo de deslocamento casa-trabalho; e, iii) Comprometimento da renda com tarifas de transporte público. Os dados estão disponíveis a nível de município e podem ser utilizados para elaboração e monitoramento de políticas públicas de mobilidade e desenvolvimento urbano.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: mobilidados
+organization: Mobilidados # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
@@ -26,7 +26,8 @@ website:
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
-    - infra-transp
+    - Infraestrutura e transporte
+    - Urbanização     
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -35,8 +36,12 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - <etiqueta 1> 
-    - <etiqueta 2>
+    - cidades 
+    - transporte
+    - acessibilidade
+    - sustentabilidade urbana
+    - poluicao
+    - desenvolvimento urbano 
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.
@@ -51,7 +56,7 @@ free: sim
 microdata: sim
 
 # Existe uma API na fonte original?
-API: nao
+API: não
 
 # É necessário registrar um usuário para baixar os dados originais?
 registration: sim
@@ -60,7 +65,7 @@ registration: sim
 availability: online
 
 # A fonte original requer IP brasileiro para acesso?
-brazilian_IP: nao
+brazilian_IP: não
 
 # Essa base está sob qual licença?
 # A licença MIT se aplica a bases públicas.

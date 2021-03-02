@@ -1,7 +1,7 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: tempo_deslocamento_casa_trabalho # AUTO GENERATED
+table_id: emissao_co2_material_particulado # AUTO GENERATED
 dataset_id: br_mobilidados_indicadores # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-mobilidados-indicadores # AUTO GENERATED
@@ -16,7 +16,8 @@ last_updated: 2021-02-17 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Dados sobre tempo médio de deslocamento casa-trabalho assim como de percentual de pessoas que gastam mais de uma hora neste deslocamento para o ano de 2010.
+    Dados de emissão de CO2 e Material Particulado por habitante resultantes do uso de combustível. 
+
 # Quem está completando esse arquivo config?
 published_by:
     name: Crislane A. Souza # REQUIRED
@@ -35,14 +36,11 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    - Criação da coluna 'Ano';
-    - Unificação das tabelas: Tempo médio de deslocamento casa-trabalho e Percentual de pessoas que gastam mais de uma hora no deslocamento casa-trabalho;
-    - Padronização do ID Município para 7 dígitos; e, 
-    - Proporção 0-100.
+    Unificação das tabelas: emissão de CO2 e Material Particulado. 
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: recorrente # REQUIRED 
+data_update_frequency: 1 ano # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -59,7 +57,7 @@ observation_level: #REQUIRED
 primary_keys:
     - id_municipio
     - ano
-    # Qual é a cobertura espacial da tabela?
+# Qual é a cobertura espacial da tabela?
 # Regras:
 #   - minúsculo, sem acento, singular
 #   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
@@ -73,13 +71,25 @@ coverage_geo:
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
+    - 2007
+    - 2008
+    - 2009
     - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED
-- 
+    -
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
@@ -109,13 +119,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: tempo_medio_deslocamento
-        description: Tempo médio de deslocamento em minutos
+        name: emissao_co2
+        description: Emissão de CO2 por habitante resultantes do uso de combustível 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: prop_deslocamento_acima_1_hora
-        description: Percentual de deslocamento acima de 1 Hora
+        name: emissao_mp
+        description: Emissão de Material Particulado por habitante resultantes do uso de combustível 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

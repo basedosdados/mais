@@ -1,4 +1,4 @@
-Dados sobre tempo médio de deslocamento casa-trabalho assim como de percentual de pessoas que gastam mais de uma hora neste deslocamento para o ano de 2010.
+Percentual de população residente em até 300 metros da infraestrutura cicloviária (ciclovias, ciclofaixas e ciclorrotas) em 2019.
 
 
 Para saber mais acesse:
@@ -35,7 +35,7 @@ Colunas identificando linhas unicamente
 
 Cobertura Temporal
 ------------------
-- 2010
+- 2019
 
 Cobertura Espacial
 ------------------
@@ -43,9 +43,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-- Criação da coluna 'Ano';
-- Unificação das tabelas: Tempo médio de deslocamento casa-trabalho e Percentual de pessoas que gastam mais de uma hora no deslocamento casa-trabalho;
-- Padronização do ID Município para 7 dígitos; e, 
+- Criação da coluna 'Ano'; e,
 - Proporção 0-100.
 
 Frequencia de Atualização

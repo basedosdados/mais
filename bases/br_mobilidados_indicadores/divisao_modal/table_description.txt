@@ -1,4 +1,4 @@
-Dados sobre tempo médio de deslocamento casa-trabalho assim como de percentual de pessoas que gastam mais de uma hora neste deslocamento para o ano de 2010.
+Dados de divisão modal são referentes ao percentual de viagens realizadas a pé, de bicicleta, de transporte coletivo e transporte individual.
 
 
 Para saber mais acesse:
@@ -13,15 +13,13 @@ Publicado por
 Nome: Crislane A. Souza
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores/code
 Website: https://github.com/crislanealves
-Email: crislanealves@protonmail.comTratado por
+Email: crislanealves@protonmail.com
+
+Tratado por
 -----------
 Nome: Crislane A. Souza
 Website: https://github.com/crislanealves
 Email: crislanealves@protonmail.com
-
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-- None
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
@@ -30,12 +28,20 @@ Nível da Observação (i.e. a granularidade da linha)
 
 Colunas identificando linhas unicamente
 -------------------
-- id_municipio
 - ano
 
 Cobertura Temporal
 ------------------
+- 1996
+- 1997
+- 2002
+- 2003
+- 2007
+- 2009
 - 2010
+- 2012
+- 2017
+- 2018
 
 Cobertura Espacial
 ------------------
@@ -43,10 +49,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-- Criação da coluna 'Ano';
-- Unificação das tabelas: Tempo médio de deslocamento casa-trabalho e Percentual de pessoas que gastam mais de uma hora no deslocamento casa-trabalho;
-- Padronização do ID Município para 7 dígitos; e, 
-- Proporção 0-100.
+- A proporção passou a ser 0-100
 
 Frequencia de Atualização
 -------------------------

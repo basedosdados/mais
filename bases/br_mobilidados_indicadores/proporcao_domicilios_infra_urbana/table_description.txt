@@ -1,4 +1,4 @@
-Dados sobre tempo médio de deslocamento casa-trabalho assim como de percentual de pessoas que gastam mais de uma hora neste deslocamento para o ano de 2010.
+Dados de percentual de domicílios que possuem calçadas e rampas para cadeirantes no seu entorno nas regiões metropolitanas: Belém, Belo Horizonte, Curitiba, Distrito Federal, Fortaleza, Porto Alegre, Recife, Rio de Janeiro, Salvador e São Paulo.
 
 
 Para saber mais acesse:
@@ -40,13 +40,12 @@ Cobertura Temporal
 Cobertura Espacial
 ------------------
 - brasil
+- PA, MG, PR, DF, CE, RS, PE, RJ, BA, SP
 
 Tratamento
 ----------
-- Criação da coluna 'Ano';
-- Unificação das tabelas: Tempo médio de deslocamento casa-trabalho e Percentual de pessoas que gastam mais de uma hora no deslocamento casa-trabalho;
-- Padronização do ID Município para 7 dígitos; e, 
-- Proporção 0-100.
+- Proporção da 0-100; e,
+- Criação da coluna "Ano".
 
 Frequencia de Atualização
 -------------------------
