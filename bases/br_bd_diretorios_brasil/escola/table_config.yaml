@@ -126,6 +126,6 @@ columns: # REQUIRED
   
     -   
         name: sigla_uf
-        description: Estado Abreviado
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

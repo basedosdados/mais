@@ -28,6 +28,7 @@ website:
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
+    - "territorio"
     - "educacao"
     - "ciencia-tec-inov"
 
@@ -38,6 +39,7 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
+    - diretorio
     - municipios
     - escolas
 
