@@ -1,4 +1,4 @@
-Indicadores educacionais do Inep a nível de município.
+Indicadores de trajetória acadêmica dos alunos em cursos de graduação na educação superior brasileira, calculados a partir das informações constantes das bases de dados do Censo Superior.    
 
 
 Para saber mais acesse:
@@ -17,31 +17,26 @@ Email: hevilynsouza12@hotmail.comTratado por
 -----------
 Nome: Hevilyn Souza
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
-Website: https://basedosdados.org/
+Website: https://github.com/Hevilyn
 Email: hevilynsouza12@hotmail.com
-
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-- ano
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
-- ano
+- curso
+- ano_ingresso
+- ano_referencia
 
 Colunas identificando linhas unicamente
 -------------------
+- id_ies
 - id_municipio
-- ano
-- rede
-- localizacao
+- id_curso
+- ano_ingresso
+- ano_referencia
 
 Cobertura Temporal
 ------------------
-- 2006
-- 2007
-- 2008
-- 2009
 - 2010
 - 2011
 - 2012
@@ -59,10 +54,10 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Padronização dos nomes das colunas.
-Exclusão das colunas Região, Nome do Município e UF.
-Palavras sem acento e minúsculas.
-Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
+Exclusão de linhas vazias
+Palavras sem acento e minúsculas
+Padronização do nome das colunas
+Colunas id_uf e id_regiao foram excluídas
 
 Frequencia de Atualização
 -------------------------

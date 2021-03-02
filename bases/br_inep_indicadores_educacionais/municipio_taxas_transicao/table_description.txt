@@ -1,4 +1,4 @@
-Indicadores educacionais do Inep a nível de município.
+Os indicadores de transição, equivalentemente denominados como indicadores de fluxo escolar, têm por objetivo informar sobre a trajetória do estudante na educação básica, que por suavez, depende da estrutura organizacional dos programas de educação formal (sistemática), ou educação escolar, normalmente operacionalizada em níveis de ensino.
 
 
 Para saber mais acesse:
@@ -17,28 +17,23 @@ Email: hevilynsouza12@hotmail.comTratado por
 -----------
 Nome: Hevilyn Souza
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
-Website: https://basedosdados.org/
+Website: https://github.com/Hevilyn
 Email: hevilynsouza12@hotmail.com
-
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-- ano
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
-- ano
 
 Colunas identificando linhas unicamente
 -------------------
 - id_municipio
-- ano
 - rede
+- ano_de
+- ano_para
 - localizacao
 
 Cobertura Temporal
 ------------------
-- 2006
 - 2007
 - 2008
 - 2009
@@ -51,7 +46,6 @@ Cobertura Temporal
 - 2016
 - 2017
 - 2018
-- 2019
 
 Cobertura Espacial
 ------------------
@@ -59,10 +53,12 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Padronização dos nomes das colunas.
-Exclusão das colunas Região, Nome do Município e UF.
-Palavras sem acento e minúsculas.
-Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
+Padronização dos nomes das colunas
+Palavras sem acento e minúsculas
+Colunas regiao,uf,nome municipio e ano foram retiradas
+Colunas ano_de e ano_para foram adicionadas
+Palavra 'publico' transformada para 'publica'
+Palavra 'particular' transformada para 'privada'
 
 Frequencia de Atualização
 -------------------------
