@@ -26,16 +26,18 @@ WHERE ano = 2019
 GROUP BY id_escola, escola, id_municipio, municipio, estado_abrev, rede'
 
 
-base_brasil <- dbGetQuery(con, query)
+base_brasil <- dbGetQuery(con, query)%>%
+  rename(sigla_uf = estado_abrev)%>%
+  select(-municipio)
 
 base_sp <- rio::import("seduc/seduc/idesp_fundamental_medio.csv")%>%
-  group_by(id_escola_sp, id_escola, nome_escola, municipio)%>%
+  group_by(id_escola_sp, id_escola, nome_escola)%>%
   summarise()
 
 diretorio<- base_brasil%>%
   left_join(base_sp, by = "id_escola")%>%
-  select(-municipio.y, -nome_escola)%>%
-  rename(municipio = municipio.x, nome_escola = escola)
+  select(- escola)%>%
+  select(id_escola, id_escola_sp, nome_escola, rede, id_municipio, sigla_uf)
   
 rio::export(diretorio, "diretorio.csv")
 

@@ -1,15 +1,15 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: escolas # AUTO GENERATED
+table_id: escola # AUTO GENERATED
 dataset_id: br_bd_diretorios_brasil # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-bd-diretorios-brasil # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: v1.1 # REQUIRED
 
-last_updated: 2021-02-25 # AUTO GENERATED
+last_updated: 2021-03-01 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -29,20 +29,21 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <nome>
-    code_url: <onde encontrar código de tratamento>
-    website: <onde encontrar os dados tratados>
-    email: <email>
+    name: 
+    code_url: 
+    website: 
+    email: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Juntei dados de diferentes bases para criar um diretório de compatibilização. Em maior detalhe, peguei dados de identificação de todas as escolas 
-    da BigQuery da Base dos Dados e fiz um left_join com os dados tratados provenientes da Secretaria de Educação de São Paulo. O join foi feito pela
-    id_escola, variável que identifica um código para cada escola a nível nacional.
+    Juntei dados de diferentes bases para criar um diretório de compatibilização. Em maior detalhe, peguei, através da BigQuery da Base dos Dados, a identificação
+    de todas as escolas, o id_escola. Para conseguir tal, acessei a base do INEP que disponibiliza IDEB a nível escolar. Com esses valores, fiz um left_join 
+    com os dados tratados provenientes da Secretaria de Educação de São Paulo. O join foi feito pela id_escola, variável que identifica um código para cada escola 
+    a nível nacional.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: unico # REQUIRED 
+data_update_frequency: 1 ano # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -58,8 +59,7 @@ observation_level: #REQUIRED
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
     - id_escola
-    - nome_escola
-    - rede
+
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -101,26 +101,14 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
+        name: id_escola_sp
+        description: ID Escola específica para o Estado de São Paulo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
         name: nome_escola
         description: Nome da Escola
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: municipio
-        description: Nome do Município
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: estado_abrev
-        description: Estado Abreviado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -131,7 +119,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_escola_sp
-        description: ID Escola específica para o Estado de São Paulo
+        name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf
+        description: Estado Abreviado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

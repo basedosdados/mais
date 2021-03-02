@@ -19,13 +19,12 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.escolas AS
+CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.escola AS
 SELECT 
 SAFE_CAST(id_escola AS INT64) id_escola,
+SAFE_CAST(id_escola_sp AS INT64) id_escola_sp,
 SAFE_CAST(nome_escola AS STRING) nome_escola,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(municipio AS STRING) municipio,
-SAFE_CAST(estado_abrev AS STRING) estado_abrev,
 SAFE_CAST(rede AS STRING) rede,
-SAFE_CAST(id_escola_sp AS INT64) id_escola_sp
-from basedosdados-dev.br_bd_diretorios_brasil_staging.escolas as t
+SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf
+from basedosdados-dev.br_bd_diretorios_brasil_staging.escola as t
