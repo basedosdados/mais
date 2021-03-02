@@ -12,11 +12,14 @@ description: | # REQUIRED
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: "instituto-brasileiro-de-geografia-e-estatistica", "ministerio-da-educacao-e-cultura-mec", "secretaria-de-educacao-de-sao-paulo" # REQUIRED
+organization: 
+    - "instituto-brasileiro-de-geografia-e-estatistica"
+    - "ministerio-da-educacao-e-cultura-mec"
+    - "secretaria-de-educacao-de-sao-paulo" # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
-author: Ricardo Dahis
-    name: 
+author:
+    name: Ricardo Dahis
     email: rdahis@basedosdados.org
 
 # Onde encontrar os dados originais e mais informações?
