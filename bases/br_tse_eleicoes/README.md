@@ -1,5 +1,3 @@
-Como capturar os dados de br_tse_eleicoes?
+Dados de eleições brasileiras disponibilizados pelo Tribunal Superior Eleitoral.
 
-Para capturar esses dados basta entrar em X e fazer Y.
-
-Todo o código usado na captura está em `code/`
+Todo o código usado na captura e tratamento está em `/code`
