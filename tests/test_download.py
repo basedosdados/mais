@@ -148,7 +148,7 @@ def test_list_datasets_all_descriptions(capsys):
 
 def test_list_dataset_tables(capsys):
 
-    list_dataset_tables(dataset_id="br_ibge_censo2010")
+    list_dataset_tables(dataset_id="br_ibge_censo_demografico")
     out, err = capsys.readouterr()  # Capture prints
     assert "table_id" in out
 
@@ -156,7 +156,7 @@ def test_list_dataset_tables(capsys):
 def test_list_dataset_tables_complete(capsys):
 
     list_dataset_tables(
-        dataset_id="br_ibge_censo2010",
+        dataset_id="br_ibge_censo_demografico",
         filter_by="renda",
         with_description=True,
     )
@@ -167,28 +167,28 @@ def test_list_dataset_tables_complete(capsys):
 
 
 def test_list_dataset_tables_all_descriptions(capsys):
-    list_dataset_tables(dataset_id="br_ibge_censo2010", with_description=True)
+    list_dataset_tables(dataset_id="br_ibge_censo_demografico", with_description=True)
     out, err = capsys.readouterr()  # Capture prints
     assert len(out) > 0
 
 
 def test_get_dataset_description(capsys):
 
-    get_dataset_description("br_ibge_censo2010")
+    get_dataset_description("br_ibge_censo_demografico")
     out, err = capsys.readouterr()  # Capture prints
     assert len(out) > 0
 
 
 def test_get_table_description(capsys):
-    get_table_description("br_ibge_censo2010", "pessoa_renda_setor_censitario")
+    get_table_description("br_ibge_censo_demografico", "setor_censitario_basico_2010")
     out, err = capsys.readouterr()  # Capture prints
     assert len(out) > 0
 
 
 def test_get_table_columns(capsys):
     get_table_columns(
-        dataset_id="br_ibge_censo2010",
-        table_id="pessoa_renda_setor_censitario",
+        dataset_id="br_ibge_censo_demografico",
+        table_id="setor_censitario_basico_2010",
     )
     out, err = capsys.readouterr()  # Capture prints
     assert "name" in out
@@ -198,8 +198,8 @@ def test_get_table_columns(capsys):
 
 def test_get_table_size(capsys):
     get_table_size(
-        dataset_id="br_ibge_censo2010",
-        table_id="pessoa_renda_setor_censitario",
+        dataset_id="br_ibge_censo_demografico",
+        table_id="setor_censitario_basico_2010",
         billing_project_id=TEST_PROJECT_ID,
     )
     out, err = capsys.readouterr()

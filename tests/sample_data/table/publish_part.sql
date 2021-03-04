@@ -1,28 +1,33 @@
 /*
-Query to publish table.
 
-This is the place to fix types, merge with other tables or create new
-support columns.
+Query para publicar a tabela.
 
-Any column defined here must exists at `table_config.yaml`.
+Esse é o lugar para:
+    - modificar nomes, ordem e tipos de colunas
+    - dar join com outras tabelas
+    - criar colunas extras (e.g. logs, proporções, etc.)
+
+Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
+
+# Além disso, sinta-se à vontade para alterar alguns nomes obscuros
+# para algo um pouco mais explícito.
+
+TIPOS:
+    - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
+    - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
+    - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
+
 */
-CREATE TABLE `basedosdados.pytest.pytest_partitioned` AS
+CREATE VIEW basedosdados-dev.pytest.pytest_partitioned AS
 SELECT 
-id_munic_7,
-id_munic_6,
-id_TSE,
-id_RF,
-id_BCB,
-municipio,
-id_comarca,
-id_regiao_saude,
-regiao_saude,
-id_estado,
-estado_abrev,
-estado,
-existia_1991,
-existia_2000,
-existia_2010,
-key1,
-key2
-from `basedosdados-staging.pytest_staging.pytest_partitioned`
+id_municipio,
+ano,
+PIB,
+impostos_liquidos,
+VA,
+VA_agropecuaria,
+VA_industria,
+VA_servicos,
+VA_ADESPSS,
+keys
+from basedosdados-dev.pytest_staging.pytest_partitioned as t

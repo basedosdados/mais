@@ -175,15 +175,41 @@ def test_create(table, metadatadir):
 
 
 def test_create_auto_partitions(metadatadir):
+    shutil.rmtree(f"{metadatadir}/partitions", ignore_errors=True)
 
     table_part = Table(
         dataset_id=DATASET_ID,
-        table_id=TABLE_ID + "_autopartitioned",
+        table_id=TABLE_ID + "_partitioned",
         metadata_path=metadatadir,
     )
 
+    table_part.delete("all")
+
+    table_part.init(if_folder_exists="replace", if_table_config_exists="replace")
+
+    Path(f"{metadatadir}/partitions").mkdir()
+
+    shutil.copy(
+        "tests/sample_data/table/table_config_part.yaml",
+        Path(f"{table_part.table_folder}/table_config.yaml"),
+    )
+    shutil.copy(
+        "tests/sample_data/table/publish_part.sql",
+        Path(f"{table_part.table_folder}/publish.sql"),
+    )
+    for n in [1, 2]:
+        Path(f"{metadatadir}/partitions/keys={n}").mkdir()
+        shutil.copy(
+            Path("tests/tmp_bases/municipios.csv"),
+            Path(f"tests/tmp_bases/partitions/keys={n}/municipios.csv"),
+        )
+
     table_part.create(
-        "tests/sample_data/partitions", partitioned=True, if_table_exists="replace"
+        "tests/tmp_bases/partitions",
+        partitioned=True,
+        if_table_exists="replace",
+        if_table_config_exists="pass",
+        if_storage_data_exists="replace",
     )
 
     table_part.publish()
