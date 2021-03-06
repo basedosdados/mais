@@ -41,8 +41,9 @@ nav:
   - Apoie! 💚:
     - Início: support.md
   - OPEN DATA DAY 👩🏻‍💻: 
-    - Início: odd_2021.md
     - DATATHON: datathon_2021.md
+    - Evento 6/mar: odd_2021.md
+    
 
 markdown_extensions:
   - admonition
