@@ -8,17 +8,10 @@
 //-------------------------------------------------//
 
 use "output/candidatos_1998.dta", clear
-append using "output/candidatos_2000.dta"
-append using "output/candidatos_2002.dta"
-append using "output/candidatos_2004.dta"
-append using "output/candidatos_2006.dta"
-append using "output/candidatos_2008.dta"
-append using "output/candidatos_2010.dta"
-append using "output/candidatos_2012.dta"
-append using "output/candidatos_2014.dta"
-append using "output/candidatos_2016.dta"
-append using "output/candidatos_2018.dta"
-append using "output/candidatos_2020.dta"
+foreach ano of numlist 2000(2)2020 {
+	append using "output/candidatos_`ano'.dta"
+}
+*
 
 drop if turno == 2
 drop turno resultado
