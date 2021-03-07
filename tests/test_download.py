@@ -29,6 +29,7 @@ def test_download_by_query():
         SAVEFILE,
         query="select * from `basedosdados.br_ibge_pib.municipios` limit 10",
         billing_project_id=TEST_PROJECT_ID,
+        index=False,
     )
 
     assert SAVEFILE.exists()
@@ -49,6 +50,7 @@ def test_download_by_table():
         table_id="municipios",
         billing_project_id=TEST_PROJECT_ID,
         limit=10,
+        index=False,
     )
 
     assert SAVEFILE.exists()
@@ -71,6 +73,7 @@ def test_download_save_to_path():
         table_id="municipios",
         billing_project_id=TEST_PROJECT_ID,
         limit=10,
+        index=False,
     )
 
     assert (SAVEPATH / "municipios.csv").exists()
