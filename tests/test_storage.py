@@ -13,7 +13,7 @@ TABLE_FILES = ["publish.sql", "table_config.yaml"]
 
 @pytest.fixture
 def metadatadir(tmpdir_factory):
-    return "tests/tmp_bases/"
+    return Path("tests") / "tmp_bases"
 
 
 @pytest.fixture
@@ -21,28 +21,26 @@ def storage(metadatadir):
     return Storage(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir)
 
 
-def test_upload(storage):
+def test_upload(storage, metadatadir):
 
     storage.delete_file("municipios.csv", "staging", not_found_ok=True)
 
-    storage.upload("tests/tmp_bases/municipios.csv", mode="staging")
+    storage.upload(metadatadir / "municipios.csv", mode="staging")
 
     with pytest.raises(Exception):
-        storage.upload("tests/tmp_bases/municipios.csv", mode="staging")
+        storage.upload(metadatadir / "municipios.csv", mode="staging")
+
+    storage.upload(metadatadir / "municipios.csv", mode="staging", if_exists="replace")
 
     storage.upload(
-        "tests/tmp_bases/municipios.csv", mode="staging", if_exists="replace"
-    )
-
-    storage.upload(
-        "tests/tmp_bases/municipios.csv",
+        metadatadir / "municipios.csv",
         mode="staging",
         if_exists="replace",
         partitions="key1=value1/key2=value2",
     )
 
     storage.upload(
-        "tests/tmp_bases/municipios.csv",
+        metadatadir / "municipios.csv",
         mode="staging",
         if_exists="replace",
         partitions={"key1": "value1", "key2": "value1"},
@@ -50,7 +48,7 @@ def test_upload(storage):
 
     with pytest.raises(Exception):
         storage.upload(
-            "tests/tmp_bases/municipios.csv",
+            metadatadir / "municipios.csv",
             mode="staging",
             if_exists="replace",
             partitions=["key1", "value1", "key2", "value1"],
