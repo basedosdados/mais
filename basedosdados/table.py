@@ -156,15 +156,10 @@ class Table(Base):
             elif if_folder_exists == "pass":
                 return self
 
-        # Raise: without a path to data sample, should not replace config files with empty template
-        if not data_sample_path:
-            if (
-                if_table_config_exists == "replace"
-                and Path(self.table_folder / "table_config.yaml").is_file()
-            ):
-                raise BaseDosDadosException(
-                    "You must provide a path to correctly create config files"
-                )
+        if not data_sample_path and if_table_config_exists != "pass":
+            raise BaseDosDadosException(
+                "You must provide a path to correctly create config files"
+            )
 
         partition_columns = []
         if isinstance(
@@ -212,13 +207,10 @@ class Table(Base):
                 pass
             # Raise if no sample to determine columns
             elif not data_sample_path:
-
                 raise BaseDosDadosException(
-                    "You must provide a path to create the config Files"
+                    "You must provide a path to correctly create config files"
                 )
-
             else:
-
                 self._make_template(columns, partition_columns)
 
         else:
@@ -238,7 +230,7 @@ class Table(Base):
                     self._make_template(columns, partition_columns)
 
             if if_table_config_exists == "replace":
-
+                # Raise: without a path to data sample, should not replace config files with empty template
                 self._make_template(columns, partition_columns)
 
         return self
@@ -313,11 +305,6 @@ class Table(Base):
             if not data:
                 raise BaseDosDadosException(
                     "You must provide a path for uploading data"
-                )
-            # Raise: Empty config files will conflict with existing data
-            elif not Path(self.table_folder / "table_config.yaml").is_file():
-                raise BaseDosDadosException(
-                    "You must provide a path to correctly create config files"
                 )
 
         # Add data to storage
