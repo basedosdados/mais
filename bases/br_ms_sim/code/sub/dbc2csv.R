@@ -18,7 +18,7 @@ dir.create("input/csv")
 
 for(file in file.names){
   
-  df.file <- read.dbc(paste("input/dbc/",file,sep=""))
-  write.csv(df.file, paste("input/csv/",substr(file,1,8),".csv",sep=""))
+  df.file <- read.dbc(paste0("input/dbc/",file))
+  write.csv(df.file, paste0("input/csv/",substr(file,1,8),".csv"))
   
 }
