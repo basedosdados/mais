@@ -315,7 +315,7 @@ class Table(Base):
                     "You must provide a path for uploading data"
                 )
             # Raise: Empty config files will conflict with existing data
-            if not Path(self.table_folder / "table_config.yaml").is_file():
+            elif not Path(self.table_folder / "table_config.yaml").is_file():
                 raise BaseDosDadosException(
                     "You must provide a path to correctly create config files"
                 )
