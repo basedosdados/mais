@@ -156,6 +156,13 @@ class Table(Base):
             elif if_folder_exists == "pass":
                 return self
 
+        # Raise: without a path to data sample, should only work if config already exists
+        if not data_sample_path:
+            if if_table_config_exists != "pass":
+                raise BaseDosDadosException(
+                    "You must provide a path to correctly create config files"
+                )
+
         partition_columns = []
         if isinstance(
             data_sample_path,
@@ -194,26 +201,41 @@ class Table(Base):
             columns = ["column_name"]
 
         if if_table_config_exists == "pass":
+            # Check if config files exists before passing
             if (
                 Path(self.table_folder / "table_config.yaml").is_file()
                 and Path(self.table_folder / "publish.sql").is_file()
             ):
                 pass
+            # Raise if no sample to determine columns
+            elif not data_sample_path:
+
+                raise BaseDosDadosException(
+                    "You must provide a path to create the config Files"
+                )
+
             else:
-                raise FileExistsError(f"No config files found at {self.table_folder}")
+
+                self._make_template(columns, partition_columns)
 
         else:
             if if_table_config_exists == "raise":
+
                 if (
                     Path(self.table_folder / "table_config.yaml").is_file()
                     and Path(self.table_folder / "publish.sql").is_file()
                 ):
+
                     raise FileExistsError(
                         f"table_config.yaml and publish.sql already exists at {self.table_folder}"
                     )
+
                 else:
+
                     self._make_template(columns, partition_columns)
+
             if if_table_config_exists == "replace":
+
                 self._make_template(columns, partition_columns)
 
         return self
@@ -277,6 +299,24 @@ class Table(Base):
             * Implement if_table_exists=pass
         """
 
+        if path is None:
+
+            # Look if table data already exists at Storage
+            data = self.client["storage_staging"].list_blobs(
+                self.bucket_name, prefix=f"staging/{self.dataset_id}/{self.table_id}"
+            )
+
+            # Raise: Cannot create table without external data
+            if not data:
+                raise BaseDosDadosException(
+                    "You must provide a path for uploading data"
+                )
+            # Raise: Empty config files will conflict with existing data
+            if not Path(self.table_folder / "table_config.yaml").is_file():
+                raise BaseDosDadosException(
+                    "You must provide a path to correctly create config files"
+                )
+
         # Add data to storage
         if isinstance(
             path,
@@ -332,20 +372,29 @@ class Table(Base):
 
         table.external_data_configuration = external_config
 
+        # Lookup if table alreay exists
         table_ref = self.client["bigquery_staging"].list_tables(
             f"{self.dataset_id}_staging"
         )
 
         table_names = [table.table_id for table in table_ref]
+
         if self.table_id in table_names:
+
             if if_table_exists == "pass":
+
                 return None
+
             elif if_table_exists == "raise":
+
                 raise FileExistsError(
                     "Table already exists, choose replace if you want to overwrite it"
                 )
+
         if if_table_exists == "replace":
+
             self.delete(mode="staging")
+
         self.client["bigquery_staging"].create_table(table)
 
     def update(self, mode="all", not_found_ok=True):
