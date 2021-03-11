@@ -18,12 +18,12 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_ms_sim.municipio_causa_idade AS
+CREATE VIEW basedosdados-dev.br_ms_sim.municipio_causa_idade AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(estado_abrev AS STRING) estado_abrev,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(causa_basica AS STRING) causa_basica,
-SAFE_CAST(idade AS NUMERIC) idade,
+SAFE_CAST(idade AS FLOAT64) idade,
 SAFE_CAST(numero_obitos AS INT64) numero_obitos
-from basedosdados-staging.br_ms_sim_staging.municipio_causa_idade as t
+from basedosdados-dev.br_ms_sim_staging.municipio_causa_idade as t

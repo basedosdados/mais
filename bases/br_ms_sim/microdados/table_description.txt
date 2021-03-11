@@ -2,22 +2,35 @@ Microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério da
 
 
 Para saber mais acesse:
-Website: 
-Github: https://github.com/basedosdados/mais/
+Website: https://basedosdados.org/dataset/br-ms-sim
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim/code
+Website: http://www2.datasus.gov.br/DATASUS/index.php?area=0901&item=1&acao=26&pad=31655
+Email: rdahis@basedosdados.org
+
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
-- estado_abrev
+- sigla_uf
 
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- estado
-- sequencial_obido
-- ano
+- obito
+
+Colunas identificando linhas unicamente
+-------------------
 
 Cobertura Temporal
 ------------------
@@ -44,6 +57,7 @@ Cobertura Temporal
 - 2016
 - 2017
 - 2018
+- 2019
 
 Cobertura Espacial
 ------------------
@@ -51,22 +65,13 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Limpei as strings, substituí valores numéricos por suas strings, corrigi os id_municipio todos para 7 dígitos entre anos, troquei a ordem de variáveis, etc.
+- Limpamos as strings.
+- Substituímos valores numéricos por suas strings.
+- Corrigimos os id_municipio todos para 7 dígitos entre anos.
+- Trocamos a ordem de variáveis, etc.
 
 Frequencia de Atualização
 -------------------------
 1 ano
 
-Tratado por
------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim/code
-Website: http://www2.datasus.gov.br/DATASUS/index.php?area=0901&item=1&acao=26&pad=31655
-Email: rdahis@basedosdados.org
 
-Publicado por
--------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim/code
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org
