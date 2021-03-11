@@ -157,9 +157,7 @@ class Table(Base):
                 return self
 
         if not data_sample_path and if_table_config_exists != "pass":
-            raise BaseDosDadosException(
-                "You must provide a path to correctly create config files"
-            )
+            raise Exception("You must provide a path to correctly create config files")
 
         partition_columns = []
         if isinstance(
@@ -207,7 +205,7 @@ class Table(Base):
                 pass
             # Raise if no sample to determine columns
             elif not data_sample_path:
-                raise BaseDosDadosException(
+                raise Exception(
                     "You must provide a path to correctly create config files"
                 )
             else:
@@ -303,9 +301,7 @@ class Table(Base):
 
             # Raise: Cannot create table without external data
             if not data:
-                raise BaseDosDadosException(
-                    "You must provide a path for uploading data"
-                )
+                raise Exception("You must provide a path for uploading data")
 
         # Add data to storage
         if isinstance(

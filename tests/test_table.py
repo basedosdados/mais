@@ -48,43 +48,49 @@ def test_init(table, metadatadir, data_path):
 
     Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir).init(replace=True)
 
-    table.init()
+    table.init(data_sample_path=data_path)
 
     folder = metadatadir / DATASET_ID / TABLE_ID
 
     check_files(folder)
 
     with pytest.raises(FileExistsError):
-        table.init()
         table.init(if_folder_exists="raise", if_table_config_exists="replace")
 
-    table.init(if_folder_exists="replace", if_table_config_exists="replace")
+    with pytest.raises(Exception):
+        table.init(if_folder_exists="replace", if_table_config_exists="replace")
+
+    table.init(if_folder_exists="pass", if_table_config_exists="replace")
 
     check_files(folder)
 
-    table.init(if_folder_exists="replace", if_table_config_exists="pass")
-
-    check_files(folder)
-
-    table.init(if_folder_exists="pass")
-
-    check_files(folder)
+    with pytest.raises(FileExistsError):
+        table.init(
+            data_sample_path=data_path,
+            if_folder_exists="replace",
+            if_table_config_exists="raise",
+        )
 
     shutil.rmtree(table.table_folder)
 
+    with pytest.raises(Exception):
+        table.init(
+            if_folder_exists="replace",
+            if_table_config_exists="raise",
+        )
+
     table.init(
-        if_folder_exists="replace",
         data_sample_path=data_path,
-        if_table_config_exists="replace",
+        if_folder_exists="replace",
+        if_table_config_exists="raise",
     )
     check_files(folder)
 
     table.init(
-        if_folder_exists="replace",
         data_sample_path=data_path,
-        if_table_config_exists="pass",
+        if_folder_exists="replace",
+        if_table_config_exists="replace",
     )
-
     check_files(folder)
 
     with pytest.raises(NotImplementedError):
@@ -111,6 +117,31 @@ def test_delete(table):
 
     assert not table_exists(table, mode="staging")
     assert not table_exists(table, mode="prod")
+
+
+def test_create_no_path(table, metadatadir, data_path, sample_data):
+
+    shutil.rmtree(metadatadir / DATASET_ID / TABLE_ID, ignore_errors=True)
+
+    Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir).create(if_exists="pass")
+
+    with pytest.raises(Exception):
+        table.create(if_storage_data_exists="replace")
+
+    Storage(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir).upload(
+        data_path, mode="staging", if_exists="replace"
+    )
+
+    with pytest.raises(Exception):
+        table.create(if_table_config_exists="replace")
+
+    table.init(data_sample_path=data_path, if_folder_exists="replace")
+
+    for file in TABLE_FILES:
+        shutil.copy(sample_data / file, table.table_folder / file)
+
+    table.create(if_storage_data_exists="pass", if_table_config_exists="pass")
+    assert table_exists(table, "staging")
 
 
 def test_create(table, metadatadir, data_path, sample_data):
@@ -230,7 +261,7 @@ def test_create_storage_data(table, metadatadir, data_path):
         )
 
 
-def test_create_auto_partitions(metadatadir):
+def test_create_auto_partitions(metadatadir, data_path, sample_data):
     shutil.rmtree(metadatadir / "partitions", ignore_errors=True)
 
     table_part = Table(
@@ -241,16 +272,20 @@ def test_create_auto_partitions(metadatadir):
 
     table_part.delete("all")
 
-    table_part.init(if_folder_exists="replace", if_table_config_exists="replace")
+    table_part.init(
+        data_sample_path=data_path,
+        if_folder_exists="replace",
+        if_table_config_exists="replace",
+    )
 
     Path(metadatadir / "partitions").mkdir()
 
     shutil.copy(
-        Path("tests") / "sample_data" / "table" / "table_config_part.yaml",
+        sample_data / "table_config_part.yaml",
         Path(table_part.table_folder / "table_config.yaml"),
     )
     shutil.copy(
-        Path("tests") / "sample_data" / "table" / "publish_part.sql",
+        sample_data / "publish_part.sql",
         table_part.table_folder / "publish.sql",
     )
     for n in [1, 2]:
@@ -267,8 +302,11 @@ def test_create_auto_partitions(metadatadir):
         if_table_config_exists="pass",
         if_storage_data_exists="replace",
     )
+    assert table_exists(table_part, "staging")
 
     table_part.publish()
+
+    assert table_exists(table_part, "prod")
 
 
 def test_update(table, metadatadir, data_path):
