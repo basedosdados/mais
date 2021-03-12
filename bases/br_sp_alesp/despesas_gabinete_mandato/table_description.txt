@@ -1,4 +1,4 @@
-Lista dos Deputados Estaduais do Estado de São Paulo da legislatura atual
+Despesas com verba de gabinete dos deputados estaduais da da legislação atual
 
 
 Para saber mais acesse:
@@ -22,24 +22,20 @@ Email: ds.oliveira404@gmail.com
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- matricula
+- Deputado
+- Fornecedor
 
 Colunas identificando linhas unicamente
 -------------------
-- -
-- m
-- a
-- t
-- r
-- i
-- c
-- u
-- l
-- a
+- ano
+- mes
+- matricula
+- fornecedor
 
 Cobertura Temporal
 ------------------
-- 2021
+- 2019
+- 2020
 
 Cobertura Espacial
 ------------------
@@ -52,6 +48,6 @@ Padronização do nome das colunas, remoção de textos e logos, unificação da
 
 Frequencia de Atualização
 -------------------------
-1 ano
+1 mes
 
 

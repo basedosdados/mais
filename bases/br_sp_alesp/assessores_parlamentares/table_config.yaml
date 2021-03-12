@@ -1,7 +1,7 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: despesas_gabinete # AUTO GENERATED
+table_id: assessores_parlamentares # AUTO GENERATED
 dataset_id: br_sp_alesp # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-sp-alesp # AUTO GENERATED
@@ -16,7 +16,7 @@ last_updated: 2021-03-12 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Despesas com verba de gabinete dos deputados estaduais da alesp
+    Lotação dos assessores parlamentares dos deputados
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -31,7 +31,7 @@ published_by:
 treated_by:
     name: Diego Oliveira # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_alesp/code # REQUIRED
-    website: github.com/d116626
+    website: https://www.al.sp.gov.br/servidor/lista/?todos=true
     email: ds.oliveira404@gmail.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
@@ -40,7 +40,7 @@ treatment_description: |
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: 1 mes # REQUIRED
+data_update_frequency: 1 ano # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -49,18 +49,13 @@ data_update_frequency: 1 mes # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - Deputado
-    - Fornecedor
-
+    - servidor
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - ano
-    - mes
-    - matricula
-    - fornecedor
+    - servidor
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -76,34 +71,15 @@ coverage_geo:
     - SP
 
 # Qual é a cobertura temporal (em anos) da tabela?
-# Opções: pre-1999, 2000, 2001, ..., 2019, 2020
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - 2002
-    - 2003
-    - 2004
-    - 2005
-    - 2006
-    - 2007
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
-    - 2020
+    - 2021
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED  
-    - ano
+partitions: # REQUIRED
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -116,49 +92,37 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: mes
-        description: Mês a que se refere a despesa do gabinete
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: matricula
-        description: Número da matrícula do Deputado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
         name: deputado
-        description: Nome do Deputado Estadual
+        description: Deputado ao qual o servidor presta serviços
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: cnpj
-        description: CNPJ ou CPF do favorecido
+        name: partido
+        description: Partido do deputado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: fornecedor
-        description: Nome do fornecedor/favorecido
+        name: servidor
+        description: Nome servidor
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: tipo
-        description: Descrição do tipo da despesa
+        name: cargo
+        description: Cargo servidor
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor
-        description: Valor da despesa
+        name: lotacao
+        description: Lotação do servidor
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: ano
-        description: Ano a que se refere a despesa do gabinete
+        name: regime
+        description: Regime de contratação do servidor
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
+        is_partition: False # Bool [True, False], whether the column is a partition.
