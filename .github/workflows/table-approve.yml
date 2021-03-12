@@ -2,7 +2,7 @@ name: Update table when modified or added
 on:
   push:
     branches:
-    - table_approve
+    - master
 jobs:
   get_changes:
     runs-on: ubuntu-latest

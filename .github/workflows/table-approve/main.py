@@ -6,6 +6,7 @@ import yaml
 import json
 import toml
 import tomlkit
+import traceback
 
 import basedosdados as bd
 from basedosdados.base import Base
@@ -187,18 +188,20 @@ def sync_bucket(
 
     # MAKE A BACKUP OF OLD DATA
     if len(list(destination_ref)):
-        print("##########################COPY BACKUP#################################")
+        print(
+            f"\n########################################### COPY BACKUP ###########################################\n"
+        )
         ref.copy_table(
             source_bucket_name=destination_bucket_name,
             destination_bucket_name=backup_bucket_name,
         )
         print(
-            "###########################DELETE OLD DATA###################################"
+            f"\n########################################## DELETE OLD DATA  ##########################################\n"
         )
         # DELETE OLD DATA FROM PROD
         ref.delete_table(not_found_ok=True)
     print(
-        "########################COPY NEW DATA###########################################"
+        f"\n########################################### COPY NEW DATA  ###########################################\n"
     )
     # COPIES DATA TO DESTINATION
     ref.copy_table(source_bucket_name=source_bucket_name)
@@ -347,11 +350,13 @@ def main():
             )
 
             pretty_log(dataset_id, table_id, source_bucket_name)
-        except Exception as err:
+        except Exception as error:
             print(
                 "\n###====================================================================================================###",
                 f"\n{dataset_id}.{table_id}",
-                f"\n{err}",
+            )
+            traceback.print_exc()
+            print(
                 "\n###====================================================================================================###\n",
             )
 
