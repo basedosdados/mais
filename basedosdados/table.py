@@ -48,7 +48,6 @@ class Table(Base):
         self._check_mode(mode)
 
         json_path = self.table_folder / f"schema-{mode}.json"
-
         columns = self.table_config["columns"]
 
         if mode == "staging":
@@ -77,8 +76,8 @@ class Table(Base):
                         "all your column names between table_config.yaml and "
                         "publish.sql are the same?"
                     )
-
-        json.dump(columns, (json_path).open("w"))
+        ## force utf-8
+        json.dump(columns, (json_path).open("w", encoding="utf-8"))
 
         return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
@@ -89,7 +88,7 @@ class Table(Base):
             if file.name in ["table_config.yaml", "publish.sql"]:
 
                 # Load and fill template
-                template = Template(file.open("r").read()).render(
+                template = Template(file.open("r", encoding="utf-8").read()).render(
                     bucket_name=self.bucket_name,
                     table_id=self.table_id,
                     dataset_id=self.dataset_folder.stem,
@@ -101,7 +100,9 @@ class Table(Base):
                 )
 
                 # Write file
-                (self.table_folder / file.name).open("w").write(template)
+                (self.table_folder / file.name).open("w", encoding="utf-8").write(
+                    template
+                )
 
     def init(
         self,
@@ -185,7 +186,7 @@ class Table(Base):
 
             if data_sample_path.suffix == ".csv":
 
-                columns = next(csv.reader(open(data_sample_path, "r")))
+                columns = next(csv.reader(open(data_sample_path, "r", encoding="utf-8")))
 
             else:
                 raise NotImplementedError(
@@ -418,6 +419,7 @@ class Table(Base):
                 / self.table_id
                 / "table_description.txt",
                 "w",
+                encoding="utf-8",
             ).write(table.description)
 
             # if m == "prod":/
@@ -456,8 +458,8 @@ class Table(Base):
             self.delete(mode="prod")
 
         self.client["bigquery_prod"].query(
-            (self.table_folder / "publish.sql").open("r").read()
-        )
+            (self.table_folder / "publish.sql").open("r", encoding="utf-8").read()
+        ).result()
 
         self.update("prod")
 

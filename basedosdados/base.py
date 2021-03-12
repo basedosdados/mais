@@ -146,7 +146,7 @@ class Base:
 
             # Load config file
             c_file = tomlkit.parse(
-                (Path(__file__).parent / "configs/config.toml").open("r").read()
+                (Path(__file__).parent / "configs/config.toml").open("r", encoding='utf-8').read()
             )
 
             input(
@@ -248,29 +248,29 @@ class Base:
 
             c_file["templates_path"] = f"{Path.home()}/.basedosdados/templates"
 
-            config_file.open("w").write(tomlkit.dumps(c_file))
+            config_file.open("w", encoding='utf-8').write(tomlkit.dumps(c_file))
 
     def _load_config(self):
 
         return tomlkit.parse(
-            (Path.home() / ".basedosdados" / "config.toml").open("r").read()
+            (Path.home() / ".basedosdados" / "config.toml").open("r", encoding='utf-8').read()
         )
 
     def _load_yaml(self, file):
 
         try:
-            return yaml.load(open(file, "r"), Loader=yaml.SafeLoader)
+            return yaml.load(open(file, "r", encoding='utf-8'), Loader=yaml.SafeLoader)
         except FileNotFoundError:
             return None
 
     def _render_template(self, template_file, kargs):
 
-        return Template((self.templates / template_file).open("r").read()).render(
+        return Template((self.templates / template_file).open("r", encoding='utf-8').read()).render(
             **kargs
         )
 
     def _check_mode(self, mode):
-        ACCEPTED_MODES = ["all", "staging", "prod"]
+        ACCEPTED_MODES = ["all", "staging", "prod", "raw"]
         if mode in ACCEPTED_MODES:
             return True
         else:

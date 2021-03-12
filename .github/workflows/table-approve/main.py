@@ -6,6 +6,7 @@ import yaml
 import json
 import toml
 import tomlkit
+import traceback
 
 import basedosdados as bd
 from basedosdados.base import Base
@@ -187,14 +188,21 @@ def sync_bucket(
 
     # MAKE A BACKUP OF OLD DATA
     if len(list(destination_ref)):
+        print(
+            f"\n########################################### COPY BACKUP ###########################################\n"
+        )
         ref.copy_table(
             source_bucket_name=destination_bucket_name,
             destination_bucket_name=backup_bucket_name,
         )
-
+        print(
+            f"\n########################################## DELETE OLD DATA  ##########################################\n"
+        )
         # DELETE OLD DATA FROM PROD
         ref.delete_table(not_found_ok=True)
-
+    print(
+        f"\n########################################### COPY NEW DATA  ###########################################\n"
+    )
     # COPIES DATA TO DESTINATION
     ref.copy_table(source_bucket_name=source_bucket_name)
 
@@ -220,18 +228,35 @@ def get_table_dataset_id():
     ### load the change files in PR || diff between PR and master
     changes = json.load(Path("/github/workspace/files.json").open("r"))
     print(changes)
-    ### create a dict to save the dataset and source_bucket relate to each table_id
+    ### create a dict to save the dataset and source_bucket related to each table_id
     dataset_table_ids = {}
+    ### create a list to save the table folder path, for each table changed in the commit
+    table_folders = []
     for change_file in changes:
-        ### search for table_config.yaml files in PR
-        if "table_config.yaml" in change_file:
-            ### load the finded table_config.yaml
-            table_config = yaml.load(open(change_file, "r"), Loader=yaml.SafeLoader)
+        ### get the directory path for a table with changes
+        file_dir = Path(change_file).parent
+        ### append the table directory if it was not already appended
+        if file_dir not in table_folders:
+            table_folders.append(file_dir)
+    ### construct the iterable for the table_config paths
+    table_config_paths = [Path(root / "table_config.yaml") for root in table_folders]
+    ### iterate through each config path
+    for filepath in table_config_paths:
+        ### check if the table_config.yaml exists in the changed folder
+        if filepath.is_file():
+            ### load the found table_config.yaml
+            table_config = yaml.load(open(filepath, "r"), Loader=yaml.SafeLoader)
             ### add the dataset and source_bucket for each table_id
             dataset_table_ids[table_config["table_id"]] = {
                 "dataset_id": table_config["dataset_id"],
                 "source_bucket_name": table_config["source_bucket_name"],
             }
+        else:
+            print(
+                "\n###==============================================================================================###",
+                f"\n{str(filepath)} does not exist on current commit",
+                "\n###==============================================================================================###\n",
+            )
     return dataset_table_ids
 
 
@@ -315,15 +340,25 @@ def main():
         dataset_id = dataset_table_ids[table_id]["dataset_id"]
         source_bucket_name = dataset_table_ids[table_id]["source_bucket_name"]
         ### push the table to bigquery
-        push_table_to_bq(
-            dataset_id,
-            table_id,
-            source_bucket_name,
-            destination_bucket_name=os.environ.get("INPUT_DESTINATION_BUCKET_NAME"),
-            backup_bucket_name=os.environ.get("INPUT_BACKUP_BUCKET_NAME"),
-        )
+        try:
+            push_table_to_bq(
+                dataset_id,
+                table_id,
+                source_bucket_name,
+                destination_bucket_name=os.environ.get("INPUT_DESTINATION_BUCKET_NAME"),
+                backup_bucket_name=os.environ.get("INPUT_BACKUP_BUCKET_NAME"),
+            )
 
-        pretty_log(dataset_id, table_id, source_bucket_name)
+            pretty_log(dataset_id, table_id, source_bucket_name)
+        except Exception as error:
+            print(
+                "\n###====================================================================================================###",
+                f"\n{dataset_id}.{table_id}",
+            )
+            traceback.print_exc()
+            print(
+                "\n###====================================================================================================###\n",
+            )
 
 
 if __name__ == "__main__":

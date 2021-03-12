@@ -40,6 +40,10 @@ nav:
     - CLI: cli_reference_api.md
   - Apoie! 💚:
     - Início: support.md
+  - OPEN DATA DAY 👩🏻‍💻: 
+    - DATATHON: datathon_2021.md
+    - Evento 6/mar: odd_2021.md
+    
 
 markdown_extensions:
   - admonition

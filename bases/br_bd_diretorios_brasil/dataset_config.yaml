@@ -12,7 +12,10 @@ description: | # REQUIRED
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: basedosdados # REQUIRED
+organization: 
+    - "instituto-brasileiro-de-geografia-e-estatistica"
+    - "ministerio-da-educacao-e-cultura-mec"
+    - "secretaria-de-educacao-de-sao-paulo" # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
@@ -21,13 +24,16 @@ author:
 
 # Onde encontrar os dados originais e mais informações?
 website:
-    - <website 1>
-    - <website 2>
+    - https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html
+    - https://dados.educacao.sp.gov.br/story/idesp
+    - http://bve.cibec.inep.gov.br/web/guest/dados
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
-    - territorio
+    - "territorio"
+    - "educacao"
+    - "ciencia-tec-inov"
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -37,19 +43,20 @@ groups:
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
     - diretorio
+    - municipios
+    - escolas
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.
 # Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
 languages:
     - portugues
-    - ingles
 
 # Os dados originais estão disponíveis de graça?
 free: sim
 
 # Are microdata available for download?
-microdata: sim
+microdata: não
 
 # Existe uma API na fonte original?
 API: não
