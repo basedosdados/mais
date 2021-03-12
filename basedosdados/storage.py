@@ -265,6 +265,7 @@ class Storage(Base):
 
             table_blobs = list(self.bucket.list_blobs(prefix=prefix))
 
+        # Divides table_blobs list for maximum batch request size
         table_blobs_chunks = [
             table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)
         ]
@@ -274,11 +275,7 @@ class Storage(Base):
             with self.client["storage_staging"].batch():
 
                 for blob in source_table:
-                    self.delete_file(
-                        filename=str(blob.name).replace(prefix, ""),
-                        mode=mode,
-                        not_found_ok=not_found_ok,
-                    )
+                    blob.delete()
 
     def copy_table(
         self,
@@ -320,6 +317,7 @@ class Storage(Base):
                 destination_bucket_name
             )
 
+        # Divides source_table_ref list for maximum batch request size
         source_table_ref_chunks = [
             source_table_ref[i : i + 999] for i in range(0, len(source_table_ref), 999)
         ]
