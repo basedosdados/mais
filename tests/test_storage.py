@@ -69,7 +69,7 @@ def test_copy_table(storage):
 
     Storage("br_ibge_pib", "municipios").copy_table()
 
-    with pytest.raises(ValueError):
+    with pytest.raises(FileNotFoundError):
         Storage("br_ibge_pib2", "municipios2").copy_table()
 
     Storage("br_ibge_pib", "municipios").copy_table(
@@ -81,5 +81,5 @@ def test_delete_table(storage):
 
     Storage("br_ibge_pib", "municipios").delete_table(bucket_name="basedosdados-dev")
 
-    with pytest.raises(ValueError):
+    with pytest.raises(FileNotFoundError):
         Storage("br_ibge_pib", "municipios").delete_table()

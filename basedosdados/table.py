@@ -186,7 +186,9 @@ class Table(Base):
 
             if data_sample_path.suffix == ".csv":
 
-                columns = next(csv.reader(open(data_sample_path, "r", encoding="utf-8")))
+                columns = next(
+                    csv.reader(open(data_sample_path, "r", encoding="utf-8"))
+                )
 
             else:
                 raise NotImplementedError(
