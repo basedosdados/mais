@@ -259,20 +259,26 @@ class Storage(Base):
 
         if bucket_name is not None:
 
-            table_blobs = self.bucket(f"{bucket_name}").list_blobs(prefix=prefix)
+            table_blobs = list(self.bucket(f"{bucket_name}").list_blobs(prefix=prefix))
 
         else:
 
-            table_blobs = self.bucket.list_blobs(prefix=prefix)
+            table_blobs = list(self.bucket.list_blobs(prefix=prefix))
 
-        with self.client["storage_staging"].batch():
+        table_blobs_chunks = [
+            table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)
+        ]
 
-            for blob in table_blobs:
-                self.delete_file(
-                    filename=str(blob.name).replace(prefix, ""),
-                    mode=mode,
-                    not_found_ok=not_found_ok,
-                )
+        for source_table in table_blobs_chunks:
+
+            with self.client["storage_staging"].batch():
+
+                for blob in source_table:
+                    self.delete_file(
+                        filename=str(blob.name).replace(prefix, ""),
+                        mode=mode,
+                        not_found_ok=not_found_ok,
+                    )
 
     def copy_table(
         self,
