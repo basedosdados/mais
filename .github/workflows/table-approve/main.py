@@ -187,14 +187,19 @@ def sync_bucket(
 
     # MAKE A BACKUP OF OLD DATA
     if len(list(destination_ref)):
+        print("##########################COPY BACKUP#################################")
         ref.copy_table(
             source_bucket_name=destination_bucket_name,
             destination_bucket_name=backup_bucket_name,
         )
-
+        print(
+            "###########################DELETE OLD DATA###################################"
+        )
         # DELETE OLD DATA FROM PROD
         ref.delete_table(not_found_ok=True)
-
+    print(
+        "########################COPY NEW DATA###########################################"
+    )
     # COPIES DATA TO DESTINATION
     ref.copy_table(source_bucket_name=source_bucket_name)
 
