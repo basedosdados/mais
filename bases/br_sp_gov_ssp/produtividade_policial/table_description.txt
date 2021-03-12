@@ -1,18 +1,40 @@
-Disponibilização de informações mensais da produtividade policial, pela Secretaria de Segurança Publica de São Paulo (SSP)
+<descrição>
 
 
 Para saber mais acesse:
-Website: 
-Github: https://github.com/basedosdados/mais/
+Website: https://basedosdados.org/dataset/br-sp-gov-ssp
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_ssp
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Publicado por
+-------------
+Nome: Diego Oliveira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_ssp/code
+Website: github.com/d116626
+Email: ds.oliveira404@gmail.comTratado por
+-----------
+Nome: Diego Oliveira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_ssp/code
+Website: github.com/d116626
+Email: ds.oliveira404@gmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+
+Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- id_municipio
 - ano
 - mes
+- municipio
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- mes
+- id_municipio
 
 Cobertura Temporal
 ------------------
@@ -35,6 +57,7 @@ Cobertura Temporal
 - 2018
 - 2019
 - 2020
+- 2021
 
 Cobertura Espacial
 ------------------
@@ -47,18 +70,6 @@ Padronização do nome das colunas, remoção de textos e logos, unificação da
 
 Frequencia de Atualização
 -------------------------
-1 ano
+1 mes
 
-Tratado por
------------
-Nome: Diego Oliveira
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_ssp/code
-Website: github.com/d116626
-Email: ds.oliveira404@gmail.com
 
-Publicado por
--------------
-Nome: Diego Oliveira
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_ssp/code
-Website: github.com/d116626
-Email: ds.oliveira404@gmail.com
