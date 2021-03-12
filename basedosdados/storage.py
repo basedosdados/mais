@@ -302,7 +302,7 @@ class Storage(Base):
         source_table_ref = (
             self.client["storage_staging"]
             .bucket(source_bucket_name)
-            .list_blobs(prefix=f"{mode}/{self.dataset_id}/{self.table_id}")
+            .list_blobs(prefix=f"{mode}/{self.dataset_id}/{self.table_id}/")
         )
 
         if destination_bucket_name is None:
