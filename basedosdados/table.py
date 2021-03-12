@@ -411,7 +411,7 @@ class Table(Base):
                 continue
 
             table.description = self._render_template(
-                "table/table_description.txt", self.table_config
+                Path("table/table_description.txt"), self.table_config
             )
 
             # save table description
