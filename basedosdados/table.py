@@ -183,7 +183,9 @@ class Table(Base):
 
             if data_sample_path.suffix == ".csv":
 
-                columns = next(csv.reader(open(data_sample_path, "r", encoding="utf-8")))
+                columns = next(
+                    csv.reader(open(data_sample_path, "r", encoding="utf-8"))
+                )
 
             else:
                 raise NotImplementedError(
@@ -374,7 +376,7 @@ class Table(Base):
                 continue
 
             table.description = self._render_template(
-                "table/table_description.txt", self.table_config
+                Path("table/table_description.txt"), self.table_config
             )
 
             # save table description
