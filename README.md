@@ -51,9 +51,70 @@ curadoria, e transparência ao cenário de dados no Brasil.
   </a>
 </p>
 
-## Instale nosso CLI
 
-[![](docs/images/bdd_install.png)](basedosdados.github.io/mais)
+## Usando em Python
+
+
+### Instale
+`pip install basedosdados`
+
+### Acesse uma tabela
+
+```python
+import basedosdados as bd
+
+df = bd.read_table('br_ibge_pib', 'municipios', billing_project_id="<YOUR-PROJECT>")
+```
+
+### Faça uma consulta
+
+```python
+import basedosdados as bd
+
+# Bens dos candidatos de Tocantins em 2020
+query = """
+SELECT *
+FROM `basedosdados.br_tse_eleicoes.bens_candidato` 
+WHERE ano = 2020
+AND sigla_uf = 'TO'
+"""
+
+df = bd.read_sql(query, billing_project_id="<YOUR-PROJECT>")
+```
+
+### Veja todos os datasets disponíveis
+
+```python
+import basedosdados as bd
+
+bd.list_datasets()
+```
+
+Para saber mais, veja os [exemplos](https://github.com/basedosdados/mais/tree/master/examples) ou a [documentação da API](https://basedosdados.github.io/mais/py_reference_api/)
+
+## Usando em R
+
+
+### Instale
+`install.packages("bigrquery")`
+
+### Faça uma consulta
+
+```r
+library("bigrquery")
+
+billing_project_id = "<YOUR_PROJECT_ID>"
+
+pib_per_capita = "SELECT 
+    pib.id_municipio ,
+    pop.ano, 
+    pib.PIB / pop.populacao * 1000 as pib_per_capita
+FROM `basedosdados.br_ibge_pib.municipios` as pib
+INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
+ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
+
+d <- bq_table_download(bq_project_query(billing_project_id, pib_per_capita), page_size=500, bigint="integer64")
+```
 
 
 ## Por que o BigQuery?
