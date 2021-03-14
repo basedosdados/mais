@@ -7,7 +7,7 @@ dataset_id: br_me_comex_stat # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-me-comex-stat # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_comex_stat # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: v1.0
 
 last_updated: 2021-03-10 # AUTO GENERATED
 
@@ -16,31 +16,31 @@ last_updated: 2021-03-10 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    <descrição>
+    Base de dados detalhada por município da empresa exportadora e Posição do Sistema Harmonizado (SH4).
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: <nome [você]>  # REQUIRED
+    name: Ricardo Dahis
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_comex_stat/code # REQUIRED
-    website: <website>
-    email: <email>
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <nome>
+    name: Ricardo Dahis
     code_url: <onde encontrar código de tratamento>
-    website: <onde encontrar os dados tratados>
-    email: <email>
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    <CEPESP fez X. Eu fiz K>
+    - Limpeza simples dos dados.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: <frequência> # REQUIRED 
+data_update_frequency: mes
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -49,15 +49,20 @@ data_update_frequency: <frequência> # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - <primeira coluna>
-    - <segunda coluna>
+    - municipio
+    - pais
+    - ano
+    - mes
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - <primeira coluna>
-    - <segunda coluna>
+    - id_sh4
+    - id_pais
+    - id_municipio
+    - ano
+    - mes
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -69,16 +74,12 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - <admin0 - pais>
-    - <admin1 - estados/regioes/etc>
-    - <admin2 - municipios/counties/etc>
-    - <admin3 - distritos/subdistritos/etc>
+    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - <ano 1>
-    - <ano 2>
+    - 1997-2021
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -100,48 +101,48 @@ columns: # REQUIRED
   
     -   
         name: id_sh4
-        description: <descrição da coluna>
+        description: ID Sistema Harmonizado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_pais
-        description: <descrição da coluna>
+        description: ID País
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: sigla_uf
-        description: <descrição da coluna>
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_municipio
-        description: <descrição da coluna>
+        description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: peso_liquido_kg
-        description: <descrição da coluna>
+        description: Peso Líquido (kg)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: valor_fob_dolar
-        description: <descrição da coluna>
+        description: Valor Livre a Bordo (dólar)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: ano
-        description: <descrição da coluna>
+        description: Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
   
     -   
         name: mes
-        description: <descrição da coluna>
+        description: Mês
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
