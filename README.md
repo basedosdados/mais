@@ -32,7 +32,7 @@
 
 ---
 
-## Base dos Dados Mais
+# Base dos Dados Mais
 
 Uma simples consulta de SQL é o suficiente para cruzamento de bases que
 você desejar. Sem precisar procurar, baixar, tratar, comprar um servidor
@@ -56,7 +56,18 @@ curadoria, e transparência ao cenário de dados no Brasil.
 
 
 ### Instale
-`pip install basedosdados`
+```bash
+pip install basedosdados
+```
+
+### Crie seu projeto no BigQuery
+
+É necessário criar um projeto para que você possa fazer as queries no
+nosso repositório. Ter um projeto é de graça e basta ter uma conta
+Google (seu gmail por exemplo). 
+
+Caso não tenha ainda um projeto, [veja aqui como criar um projeto no Google
+Cloud](https://basedosdados.github.io/mais/access_data_local/#criando-um-projeto-no-google-cloud).
 
 ### Acesse uma tabela
 
@@ -65,6 +76,8 @@ import basedosdados as bd
 
 df = bd.read_table('br_ibge_pib', 'municipios', billing_project_id="<YOUR-PROJECT>")
 ```
+
+> Caso esteja acessando da primeira vez, vão aparecer alguns passos para você autenticar seu projeto. Basta seguur os passos na tela!
 
 ### Faça uma consulta
 
@@ -82,6 +95,8 @@ AND sigla_uf = 'TO'
 df = bd.read_sql(query, billing_project_id="<YOUR-PROJECT>")
 ```
 
+> Caso esteja acessando da primeira vez, vão aparecer alguns passos para você autenticar seu projeto. Basta seguur os passos na tela!
+
 ### Veja todos os datasets disponíveis
 
 ```python
@@ -94,9 +109,10 @@ Para saber mais, veja os [exemplos](https://github.com/basedosdados/mais/tree/ma
 
 ## Usando em R
 
-
 ### Instale
-`install.packages("bigrquery")`
+```R
+install.packages("bigrquery")
+```
 
 ### Faça uma consulta
 
@@ -116,24 +132,23 @@ ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
 d <- bq_table_download(bq_project_query(billing_project_id, pib_per_capita), page_size=500, bigint="integer64")
 ```
 
+## Tutoriais
 
-## Por que o BigQuery?
+Veja exemplos de uso na pasta [`/examples`](/examples) e acesse também [nossos
+tutoriais no Youtube](https://www.youtube.com/basedosdados)
 
-- **Acesso**: É possível deixar os dados públicos, i.e., qualquer
-  pessoa com uma conta no Google Cloud pode fazer uma query na base,
-  quando quiser.
-- **Rapidez**: Mesmo queries muito longas demoram apenas minutos para
-  serem processadas.
-- **Escala**: O BigQuery escala magicamente para hexabytes se necessário.
-- **Facilidade**: Você pode cruzar tabelas tratadas e atualizadas num só lugar. 
-- **Economia**: O custo é praticamente zero para usuários - **1
-  TB gratuito por mês para usar como quiser**. Depois disso, são cobrados
-  somente 5 dólares por TB de dados que sua query percorrer.
+> 💭 Tem alguma ideia ou um exemplo seu para colaborar? Abra um issue e fale com a gente! 
 
-## Contribua! 💚
+## Contribua! 🔄
 
-**Incentivamos que outras instituições e pessoas contribuam**. Veja mais
-como contribuir [aqui](https://basedosdados.github.io/mais/colab_data/).
+**Incentivamos que outras instituições e pessoas contribuam**. [Veja mais
+como contribuir aqui](https://basedosdados.github.io/mais/colab_data/).
+
+## Apoie 💚
+
+A Base dos Dados já poupou horas da sua vida? Ou permitiu coisas antes impossíveis? Nosso trabalho é quase todo voluntário, mas temos vários custos de infraestrutura, equipe, e outros.
+
+[Nos ajude a fazer esse projeto se manter e crescer!](https://apoia.se/basedosdados)
 
 ## Como citar o projeto 📝
 
@@ -150,7 +165,7 @@ Inglês:
 Documentação está em português (quando possível), código e configurações
 estão em inglês.
 
-## Tutorial
+## Tutoriais
 
 Temos disponível um jupyter notebook com exemplos de uso em `examples/`
 
