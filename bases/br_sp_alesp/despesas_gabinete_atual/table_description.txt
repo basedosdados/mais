@@ -22,8 +22,8 @@ Email: ds.oliveira404@gmail.com
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- Deputado
-- Fornecedor
+- deputado
+- fornecedor
 
 Colunas identificando linhas unicamente
 -------------------

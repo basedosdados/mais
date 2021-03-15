@@ -798,6 +798,7 @@ def parse_comissoes_permanentes_presencas(download=True):
         "idpauta": "id_pauta",
         "idreuniao": "id_reuniao",
         "siglacomissao": "sigla_comissao",
+        "deputado": "nome_deputado",
     }
     df = df.rename(columns=rename_cols)
 
@@ -806,6 +807,8 @@ def parse_comissoes_permanentes_presencas(download=True):
         index=False,
         encoding="utf-8",
     )
+
+    return df
 
 
 def parse_proposituras(download=True):
@@ -1191,6 +1194,7 @@ def parse_comissoes_permanentes_votacoes(download=True):
         "idpauta": "id_pauta",
         "idreuniao": "id_reuniao",
         "tipovoto": "tipo_voto",
+        "deputado": "nome_deputado",
     }
     df = df.rename(columns=rename_cols)
 

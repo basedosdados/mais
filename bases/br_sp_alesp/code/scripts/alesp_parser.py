@@ -12,7 +12,7 @@ import scripts.manipulation as manipulation
 mais_path = "../../bd+/mais_projects/data/alesp"
 
 
-def parse_deputados(download=True):
+def parse_deputados(download=True):  # sourcery no-metrics
     if download:
         r = requests.get(
             "https://www.al.sp.gov.br/repositorioDados/deputados/deputados.xml"
@@ -106,14 +106,23 @@ def parse_deputados(download=True):
     deputados = pd.read_csv("../data/servidores/deputados_alesp_aux.csv")
     deputados = deputados.drop(columns=["biografia", "fax"])
     deputados["partido"] = deputados["partido"].fillna("SEM PARTIDO")
-    deputados["numero_deputados"] = deputados.groupby(by="partido").cumcount() + 1
-    numero_deputados = (
-        deputados[["partido", "numero_deputados"]].groupby(by="partido").last()
-    )
 
-    deputados = deputados.drop(columns="numero_deputados")
-    deputados = pd.merge(deputados, numero_deputados, how="outer", on="partido")
-    deputados["numero_deputados"] = deputados["numero_deputados"].astype(int)
+    deputados["aniversario"] = pd.to_datetime(
+        deputados["aniversario"], format="%d/%m", errors="coerce"
+    )
+    mask = deputados["aniversario"].notnull()
+    deputados_aniversarios = deputados[mask]
+    deputados_sem_aniversarios = deputados[np.logical_not(mask)]
+    deputados_aniversarios["aniversario"] = (
+        deputados_aniversarios["aniversario"]
+        .dt.month.astype(str)
+        .apply(lambda x: "0" + str(x) if len(x) == 1 else (str(x)))
+        + "-"
+        + deputados_aniversarios["aniversario"]
+        .dt.day.astype(str)
+        .apply(lambda x: "0" + str(x) if len(x) == 1 else (str(x)))
+    )
+    deputados = pd.concat([deputados_aniversarios, deputados_sem_aniversarios])
 
     rename = {
         #             'LUIZ FERNANDO T. FERREIRA':'LUIZ FERNANDO',
@@ -129,10 +138,11 @@ def parse_deputados(download=True):
 
     rename_cols = {
         "idDeputado": "id_deputado",
-        "nomeParlamentar": "deputado",
+        "nomeParlamentar": "nome_deputado",
         "placaVeiculo": "placa_veiculo",
         "homePage": "home_page",
         "IdSPL": "id_spl",
+        "partido": "sigla_partido",
     }
     deputados = deputados.rename(columns=rename_cols)
 
@@ -146,6 +156,7 @@ def parse_deputados(download=True):
     # )
 
     os.remove("../data/servidores/deputados_alesp_aux.csv")
+    return deputados
 
 
 def parse_servidores():
@@ -175,23 +186,28 @@ def parse_servidores():
     servidores.columns = manipulation.normalize(servidores.columns)
     mask = servidores["LOTACAO"].str.contains("GABINETE DEP.")
 
-    servidores["Deputado"] = np.where(
+    rename_cols = {
+        "Deputado": "nome_deputado",
+    }
+    servidores = servidores.rename(columns=rename_cols)
+
+    servidores["nome_deputado"] = np.where(
         mask, servidores["LOTACAO"].str.replace("GABINETE DEP.", ""), np.nan
     )
     for col in servidores.columns:
         servidores[col] = manipulation.normalize(servidores[col])
 
-    demais_servidores = servidores[servidores["Deputado"].isnull()]
+    demais_servidores = servidores[servidores["nome_deputado"].isnull()]
 
-    servidores = servidores[servidores["Deputado"].notnull()]
+    servidores = servidores[servidores["nome_deputado"].notnull()]
 
     servidores.columns = manipulation.normalize_cols(servidores.columns)
 
     ### Merge servidores e partidos
     deputados = pd.read_csv("../data/servidores/deputados_alesp.csv")
 
-    servidores = deputados[["deputado", "partido"]].merge(
-        servidores, how="outer", on="deputado"
+    servidores = deputados[["nome_deputado", "sigla_partido"]].merge(
+        servidores, how="outer", on="nome_deputado"
     )
 
     servidores.to_csv(
@@ -231,9 +247,18 @@ def parse_servidores():
     liderancas["Partido"] = (
         liderancas["Partido"].replace(rename).str.replace("PARTIDO ", "")
     )
-    liderancas.columns = liderancas.columns.str.title()
-    liderancas = liderancas.drop(["Deputado"], 1)
+    # liderancas.columns = liderancas.columns.str.title()
+    liderancas = liderancas.drop(["nome_deputado"], 1)
     liderancas.columns = manipulation.normalize_cols(liderancas.columns)
+    rename_cols = {
+        "partido": "sigla_partido",
+    }
+    liderancas = liderancas.rename(columns=rename_cols)
+
+    all_cols = liderancas.columns.tolist()
+    all_cols.remove("sigla_partido")
+    lideranca_order = ["sigla_partido"] + all_cols
+    liderancas = liderancas[lideranca_order]
 
     liderancas.to_csv(
         "../data/servidores/assessores_lideranca.csv", index=False, encoding="utf-8"
@@ -245,6 +270,7 @@ def parse_servidores():
     # )
 
     os.remove("../data/servidores/servidores_locacao_cargo.csv")
+    return servidores, liderancas
 
 
 def parse_despesas(download=True):
@@ -333,6 +359,8 @@ def parse_despesas(download=True):
     despesas_all["CNPJ"] = despesas_all["CNPJ"].astype(str).str.replace(".0", "")
     despesas_all.columns = manipulation.normalize_cols(despesas_all.columns)
     despesas_all = despesas_all.drop(["data"], 1)
+    rename_cols = {"partido": "sigla_partido", "deputado": "nome_deputado"}
+    despesas_all = despesas_all.rename(columns=rename_cols)
     despesas_all.to_csv("../data/gastos/despesas_since_2002.csv", index=False)
     # despesas_all.to_csv(f"{mais_path}/raw/gastos/despesas_since_2002.csv", index=False)
 
@@ -402,18 +430,23 @@ def parse_despesas(download=True):
     despesas_final["Data"] = pd.to_datetime(despesas_final["Data"])
 
     despesas_final = despesas_final.drop(["Data"], 1)
-    despesas_final = despesas_final.rename(columns={"Deputado": "deputado"})
+    despesas_final = despesas_final.rename(columns={"Deputado": "nome_deputado"})
     despesas_final.columns = manipulation.normalize_cols(despesas_final.columns)
     despesas_final = pd.merge(
-        despesas_final.drop(["deputado"], 1),
-        deputados[["matricula", "deputado"]],
+        despesas_final.drop(["nome_deputado"], 1),
+        deputados[["matricula", "nome_deputado"]],
         on="matricula",
     )
 
     despesas_final = despesas_final[despesas_all.columns]
-
+    rename_cols = {
+        "partido": "sigla_partido",
+    }
+    despesas_final = despesas_final.rename(columns=rename_cols)
     despesas_final.to_csv(
         "../data/gastos/despesas_gabinetes_mandato.csv", index=False, encoding="utf-8"
     )
 
     print("Despesas Mandato done!")
+
+    return despesas_all, despesas_final
