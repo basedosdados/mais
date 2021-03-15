@@ -5,6 +5,7 @@ import shutil
 from google.api_core.exceptions import NotFound
 
 from basedosdados import Dataset, Table, Storage
+from basedosdados.exceptions import BaseDosDadosException
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
@@ -57,7 +58,7 @@ def test_init(table, metadatadir, data_path):
     with pytest.raises(FileExistsError):
         table.init(if_folder_exists="raise", if_table_config_exists="replace")
 
-    with pytest.raises(Exception):
+    with pytest.raises(BaseDosDadosException):
         table.init(if_folder_exists="replace", if_table_config_exists="replace")
 
     table.init(if_folder_exists="pass", if_table_config_exists="replace")
@@ -73,7 +74,7 @@ def test_init(table, metadatadir, data_path):
 
     shutil.rmtree(table.table_folder)
 
-    with pytest.raises(Exception):
+    with pytest.raises(BaseDosDadosException):
         table.init(
             if_folder_exists="replace",
             if_table_config_exists="raise",
@@ -125,14 +126,14 @@ def test_create_no_path(table, metadatadir, data_path, sample_data):
 
     Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir).create(if_exists="pass")
 
-    with pytest.raises(Exception):
+    with pytest.raises(BaseDosDadosException):
         table.create(if_storage_data_exists="replace")
 
     Storage(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir).upload(
         data_path, mode="staging", if_exists="replace"
     )
 
-    with pytest.raises(Exception):
+    with pytest.raises(BaseDosDadosException):
         table.create(if_table_config_exists="replace")
 
     table.init(data_sample_path=data_path, if_folder_exists="replace")
