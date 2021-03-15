@@ -100,7 +100,7 @@ class Storage(Base):
         self,
         path,
         mode="all",
-        partitions=None,
+        is_partition=None,
         if_exists="raise",
         **upload_args,
     ):
@@ -132,7 +132,7 @@ class Storage(Base):
 
             mode (str): Folder of which dataset to update [raw|staging|all]
 
-            partitions (str, pathlib.PosixPath, or dict): Optional.
+            is_partition (str, pathlib.PosixPath, or dict): Optional.
                 *If adding a single file*, use this to add it to a specific partition.
 
                 * str : `<key>=<value>/<key2>=<value2>`
@@ -168,7 +168,7 @@ class Storage(Base):
 
         else:
             paths = [path]
-            parts = [partitions or None]
+            parts = [is_partition or None]
 
         self._check_mode(mode)
 
@@ -239,9 +239,6 @@ class Storage(Base):
 
     def delete_table(self, mode="staging", bucket_name=None, not_found_ok=False):
         """Deletes a table from storage, sends request in batches.
-        If your request requires more than 1000 blobs, you should divide it in multiple requests.
-
-        #TODO: auto divides into multiple requests
 
         Args:
             mode (str): Optional
@@ -284,7 +281,6 @@ class Storage(Base):
         mode="staging",
     ):
         """Copies table from a source bucket to your bucket, sends request in batches.
-        If your request requires more than 1000 blobs, you should divide it in multiple requests.
 
 
         Args:

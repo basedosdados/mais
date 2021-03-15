@@ -183,7 +183,9 @@ class Table(Base):
 
             if data_sample_path.suffix == ".csv":
 
-                columns = next(csv.reader(open(data_sample_path, "r", encoding="utf-8")))
+                columns = next(
+                    csv.reader(open(data_sample_path, "r", encoding="utf-8"))
+                )
 
             else:
                 raise NotImplementedError(
@@ -469,7 +471,7 @@ class Table(Base):
         Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
             filepath,
             mode="staging",
-            partitions=None,
+            is_partition=None,
             if_exists=if_exists,
             **upload_args,
         )
