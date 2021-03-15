@@ -210,7 +210,7 @@ class Table(Base):
             ):
                 pass
             # Raise if no sample to determine columns
-            if not data_sample_path:
+            elif not data_sample_path:
                 raise BaseDosDadosException(
                     "You must provide a path to correctly create config files"
                 )
