@@ -165,10 +165,6 @@ Inglês:
 Documentação está em português (quando possível), código e configurações
 estão em inglês.
 
-## Tutoriais
-
-Temos disponível um jupyter notebook com exemplos de uso em `examples/`
-
 ## Desenvolvimento
 
 #### CLI
