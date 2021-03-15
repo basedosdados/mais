@@ -16,7 +16,7 @@ last_updated: 2021-03-12 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    <descrição>
+    Informações mensais de produtividade policial da Secretaria de Segurança Publica de São Paulo (SSP)
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -114,16 +114,6 @@ partitions: # REQUIRED
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
-    -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-    -   
-        name: mes
-        description: Mês
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
 
     -   
         name: id_municipio
@@ -133,6 +123,11 @@ columns: # REQUIRED
     -   
         name: id_estado
         description: ID Estado - IBGE 2 Dígitos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+    -   
+        name: mes
+        description: Mês
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
     -   
@@ -218,4 +213,8 @@ columns: # REQUIRED
         description: Total de inquéritos policiais instaurados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.

@@ -115,23 +115,19 @@ partitions: # REQUIRED
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
     -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-    -   
-        name: mes
-        description: Mês
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-    -   
         name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+
     -   
         name: id_estado
         description: ID Estado - IBGE 2 Dígitos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+    -   
+        name: mes
+        description: Mês
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
     -   
@@ -176,7 +172,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
     -   
         name: lesao_corporal_seguida_de_morte
-        description: Lesão corportal seguida de morte
+        description: Lesão corporal seguida de morte
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
     -   
@@ -191,7 +187,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
     -   
         name: lesao_corporal_culposa_outras
-        description: Outros tipos de lesão corpotal culposa
+        description: Outros tipos de lesão corporal culposa
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
     -   
@@ -254,4 +250,11 @@ columns: # REQUIRED
         description: Furto de veiculo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+
 
