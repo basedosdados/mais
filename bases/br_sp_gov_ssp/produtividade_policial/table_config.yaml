@@ -192,7 +192,7 @@ columns: # REQUIRED
   
     -   
         name: numero_de_pessoas_presas_por_mandado
-        description: Número de pessoas presas por mantado
+        description: Número de pessoas presas por mandado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
