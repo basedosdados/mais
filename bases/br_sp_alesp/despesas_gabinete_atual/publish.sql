@@ -24,7 +24,7 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(matricula AS INT64) matricula,
-SAFE_CAST(deputado AS STRING) deputado,
+SAFE_CAST(nome_deputado AS STRING)nome_deputado,
 SAFE_CAST(cnpj AS STRING) cnpj,
 SAFE_CAST(fornecedor AS STRING) fornecedor,
 SAFE_CAST(tipo AS STRING) tipo,

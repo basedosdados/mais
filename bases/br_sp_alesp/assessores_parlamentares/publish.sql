@@ -21,8 +21,8 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_sp_alesp.assessores_parlamentares AS
 SELECT 
-SAFE_CAST(deputado AS STRING) deputado,
-SAFE_CAST(partido AS STRING) partido,
+SAFE_CAST(nome_deputado AS STRING) nome_deputado,
+SAFE_CAST(sigla_partido AS STRING) sigla_partido,
 SAFE_CAST(servidor AS STRING) servidor,
 SAFE_CAST(cargo AS STRING) cargo,
 SAFE_CAST(lotacao AS STRING) lotacao,

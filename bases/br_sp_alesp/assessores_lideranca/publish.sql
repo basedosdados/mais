@@ -20,10 +20,10 @@ TIPOS:
 */
 
 CREATE VIEW basedosdados-dev.br_sp_alesp.assessores_lideranca AS
-SELECT 
+SELECT
+SAFE_CAST(sigla_partido AS STRING) sigla_partido,
 SAFE_CAST(servidor AS STRING) servidor,
 SAFE_CAST(cargo AS STRING) cargo,
 SAFE_CAST(lotacao AS STRING) lotacao,
-SAFE_CAST(regime AS STRING) regime,
-SAFE_CAST(partido AS STRING) partido
+SAFE_CAST(regime AS STRING) regime
 from basedosdados-dev.br_sp_alesp_staging.assessores_lideranca as t

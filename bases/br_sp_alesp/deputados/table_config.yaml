@@ -98,19 +98,19 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: deputado
+        name: nome_deputado
         description: Nome parlamentar do deputado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: aniversario
-        description: Dia e mês do aniversário do deputado
+        description: Dia e mês do aniversário do deputado (MM-DD)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: partido
+        name: sigla_partido
         description: Partido ao qual o deputado pertence
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -160,11 +160,5 @@ columns: # REQUIRED
     -   
         name: id_spl
         description: Identificador único do deputado no sistema SPL (Sistema de Processo Legislativo)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: numero_deputados
-        description: Número de deputados do partido
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
