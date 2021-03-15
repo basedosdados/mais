@@ -33,6 +33,7 @@ def download(
     billing_project_id=None,
     limit=None,
     reauth=False,
+    index=False,
     **pandas_kwargs,
 ):
     """Download table or query result from basedosdados BigQuery (or other).
@@ -113,7 +114,7 @@ def download(
         else:
             savepath = savepath / ("query_result.csv")
 
-    table.to_csv(savepath, **pandas_kwargs)
+    table.to_csv(savepath, index=index, **pandas_kwargs)
 
 
 def read_sql(query, billing_project_id=None, reauth=False):
