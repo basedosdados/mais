@@ -11,6 +11,7 @@ import google.api_core.exceptions
 from basedosdados.base import Base
 from basedosdados.storage import Storage
 from basedosdados.dataset import Dataset
+from basedosdados.exceptions import BaseDosDadosException
 
 
 class Table(Base):
@@ -158,7 +159,9 @@ class Table(Base):
                 return self
 
         if not data_sample_path and if_table_config_exists != "pass":
-            raise Exception("You must provide a path to correctly create config files")
+            raise BaseDosDadosException(
+                "You must provide a path to correctly create config files"
+            )
 
         partition_columns = []
         if isinstance(
@@ -207,8 +210,8 @@ class Table(Base):
             ):
                 pass
             # Raise if no sample to determine columns
-            elif not data_sample_path:
-                raise Exception(
+            if not data_sample_path:
+                raise BaseDosDadosException(
                     "You must provide a path to correctly create config files"
                 )
             else:
@@ -304,7 +307,9 @@ class Table(Base):
 
             # Raise: Cannot create table without external data
             if not data:
-                raise Exception("You must provide a path for uploading data")
+                raise BaseDosDadosException(
+                    "You must provide a path for uploading data"
+                )
 
         # Add data to storage
         if isinstance(
@@ -360,15 +365,17 @@ class Table(Base):
         table = bigquery.Table(self.table_full_name["staging"])
 
         table.external_data_configuration = external_config
-
         # Lookup if table alreay exists
-        table_ref = self.client["bigquery_staging"].list_tables(
-            f"{self.dataset_id}_staging"
-        )
+        table_ref = None
+        try:
+            table_ref = self.client["bigquery_staging"].get_table(
+                self.table_full_name["staging"]
+            )
 
-        table_names = [table.table_id for table in table_ref]
+        except google.api_core.exceptions.NotFound:
+            pass
 
-        if self.table_id in table_names:
+        if isinstance(table_ref, google.cloud.bigquery.table.Table):
 
             if if_table_exists == "pass":
 
