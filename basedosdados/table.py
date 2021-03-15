@@ -217,25 +217,24 @@ class Table(Base):
             else:
                 self._make_template(columns, partition_columns)
 
-        else:
-            if if_table_config_exists == "raise":
+        elif if_table_config_exists == "raise":
 
-                # Check if config files already exist
-                if (
-                    Path(self.table_folder / "table_config.yaml").is_file()
-                    and Path(self.table_folder / "publish.sql").is_file()
-                ):
+            # Check if config files already exist
+            if (
+                Path(self.table_folder / "table_config.yaml").is_file()
+                and Path(self.table_folder / "publish.sql").is_file()
+            ):
 
-                    raise FileExistsError(
-                        f"table_config.yaml and publish.sql already exists at {self.table_folder}"
-                    )
-                # if config files don't exist, create them
-                else:
-                    self._make_template(columns, partition_columns)
-
-            if if_table_config_exists == "replace":
-                # Raise: without a path to data sample, should not replace config files with empty template
+                raise FileExistsError(
+                    f"table_config.yaml and publish.sql already exists at {self.table_folder}"
+                )
+            # if config files don't exist, create them
+            else:
                 self._make_template(columns, partition_columns)
+
+        else:
+            # Raise: without a path to data sample, should not replace config files with empty template
+            self._make_template(columns, partition_columns)
 
         return self
 
