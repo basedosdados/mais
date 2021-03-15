@@ -27,6 +27,11 @@ def table(metadatadir):
 
 
 @pytest.fixture
+def folder(metadatadir):
+    return metadatadir / DATASET_ID / TABLE_ID
+
+
+@pytest.fixture
 def data_path(metadatadir):
     return Path(metadatadir) / "municipios.csv"
 
@@ -42,7 +47,12 @@ def check_files(folder):
         assert (folder / file).exists()
 
 
-def test_init(table, metadatadir, data_path):
+def test_init(
+    table,
+    metadatadir,
+    folder,
+    data_path,
+):
 
     # remove folder
     shutil.rmtree(metadatadir / DATASET_ID / TABLE_ID, ignore_errors=True)
@@ -51,19 +61,13 @@ def test_init(table, metadatadir, data_path):
 
     table.init(data_sample_path=data_path)
 
-    folder = metadatadir / DATASET_ID / TABLE_ID
-
     check_files(folder)
+
+
+def test_init_file_exists_error(table, metadatadir, data_path):
 
     with pytest.raises(FileExistsError):
         table.init(if_folder_exists="raise", if_table_config_exists="replace")
-
-    with pytest.raises(BaseDosDadosException):
-        table.init(if_folder_exists="replace", if_table_config_exists="replace")
-
-    table.init(if_folder_exists="pass", if_table_config_exists="replace")
-
-    check_files(folder)
 
     with pytest.raises(FileExistsError):
         table.init(
@@ -72,13 +76,39 @@ def test_init(table, metadatadir, data_path):
             if_table_config_exists="raise",
         )
 
-    shutil.rmtree(table.table_folder)
+
+def test_init_not_implemented_error(table, metadatadir, data_path):
+    with pytest.raises(NotImplementedError):
+        table.init(
+            if_folder_exists="replace", data_sample_path=metadatadir / "municipios.json"
+        )
+
+
+def test_init_no_path(table, metadatadir, data_path):
+
+    with pytest.raises(BaseDosDadosException):
+        table.init(if_folder_exists="replace", if_table_config_exists="replace")
 
     with pytest.raises(BaseDosDadosException):
         table.init(
             if_folder_exists="replace",
             if_table_config_exists="raise",
         )
+
+
+def test_init_if_folder_exists_pass_if_table_config_replace(
+    table, metadatadir, folder, data_path
+):
+
+    table.init(if_folder_exists="pass", if_table_config_exists="replace")
+
+    check_files(folder)
+
+
+def test_init_if_folder_exists_replace_if_table_config_raise(
+    table, metadatadir, folder, data_path
+):
+    shutil.rmtree(table.table_folder)
 
     table.init(
         data_sample_path=data_path,
@@ -87,18 +117,18 @@ def test_init(table, metadatadir, data_path):
     )
     check_files(folder)
 
+
+def test_init_if_folder_exists_replace_if_table_config_exists_replace(
+    table, metadatadir, folder, data_path
+):
+
     table.init(
         data_sample_path=data_path,
         if_folder_exists="replace",
         if_table_config_exists="replace",
     )
-    check_files(folder)
 
-    with pytest.raises(NotImplementedError):
-        table.init(
-            if_folder_exists="replace",
-            data_sample_path=metadatadir / "municipios.json",
-        )
+    check_files(folder)
 
 
 def table_exists(table, mode):
@@ -120,7 +150,7 @@ def test_delete(table):
     assert not table_exists(table, mode="prod")
 
 
-def test_create_no_path(table, metadatadir, data_path, sample_data):
+def test_create_no_path_error(table, metadatadir, data_path, sample_data):
 
     shutil.rmtree(metadatadir / DATASET_ID / TABLE_ID, ignore_errors=True)
 
@@ -129,12 +159,15 @@ def test_create_no_path(table, metadatadir, data_path, sample_data):
     with pytest.raises(BaseDosDadosException):
         table.create(if_storage_data_exists="replace")
 
+    with pytest.raises(BaseDosDadosException):
+        table.create(if_table_config_exists="replace")
+
+
+def test_create_no_path(table, metadatadir, data_path, sample_data):
+
     Storage(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir).upload(
         data_path, mode="staging", if_exists="replace"
     )
-
-    with pytest.raises(BaseDosDadosException):
-        table.create(if_table_config_exists="replace")
 
     table.init(data_sample_path=data_path, if_folder_exists="replace")
 
@@ -145,7 +178,9 @@ def test_create_no_path(table, metadatadir, data_path, sample_data):
     assert table_exists(table, "staging")
 
 
-def test_create(table, metadatadir, data_path, sample_data):
+def test_create_storage_data_exist_table_config_exist(
+    table, metadatadir, data_path, sample_data
+):
 
     shutil.rmtree(metadatadir / DATASET_ID / TABLE_ID, ignore_errors=True)
 
@@ -173,6 +208,9 @@ def test_create(table, metadatadir, data_path, sample_data):
     )
     assert table_exists(table, "staging")
 
+
+def test_create_if_table_exist_replace(table, metadatadir, data_path, sample_data):
+
     table.create(
         if_table_exists="replace",
         if_storage_data_exists="pass",
@@ -180,6 +218,8 @@ def test_create(table, metadatadir, data_path, sample_data):
     )
     assert table_exists(table, "staging")
 
+
+def test_create_if_table_exists_pass(table, metadatadir, data_path, sample_data):
     table.create(
         if_table_exists="pass",
         if_storage_data_exists="pass",
@@ -187,6 +227,10 @@ def test_create(table, metadatadir, data_path, sample_data):
     )
     assert table_exists(table, "staging")
 
+
+def test_create_if_storage_data_replace_if_table_config_pass(
+    table, metadatadir, data_path, sample_data
+):
     table.delete("all")
 
     table.create(
@@ -196,11 +240,14 @@ def test_create(table, metadatadir, data_path, sample_data):
     )
     assert table_exists(table, "staging")
 
+
+def test_create_if_table_exists_raise(table, metadatadir, data_path):
+
     with pytest.raises(FileExistsError):
         table.create(if_storage_data_exists="pass", if_table_config_exists="pass")
 
 
-def test_create_table_config_exists(table, metadatadir, data_path, sample_data):
+def test_create_with_path(table, metadatadir, data_path, sample_data):
 
     table.delete("all")
     Storage(DATASET_ID, TABLE_ID).delete_table()
@@ -211,6 +258,10 @@ def test_create_table_config_exists(table, metadatadir, data_path, sample_data):
     )
     assert table_exists(table, mode="staging")
 
+
+def test_create_if_storage_data_pass_if_table_config_pass(
+    table, metadatadir, data_path, sample_data
+):
     for file in TABLE_FILES:
         shutil.copy(sample_data / file, table.table_folder / file)
 
@@ -222,6 +273,11 @@ def test_create_table_config_exists(table, metadatadir, data_path, sample_data):
     )
     assert table_exists(table, mode="staging")
 
+
+def test_create_if_storage_data_pass_if_table_config_replace(
+    table, metadatadir, data_path, sample_data
+):
+
     table.delete("all")
 
     table.create(
@@ -229,11 +285,13 @@ def test_create_table_config_exists(table, metadatadir, data_path, sample_data):
     )
     assert table_exists(table, mode="staging")
 
+
+def test_create_if_folder_exists_raise(table, metadatadir, data_path, sample_data):
     with pytest.raises(FileExistsError):
         table.create(data_path, if_table_exists="pass", if_storage_data_exists="pass")
 
 
-def test_create_storage_data(table, metadatadir, data_path):
+def test_create_with_upload(table, metadatadir, data_path):
 
     table.delete("all")
 
@@ -242,17 +300,17 @@ def test_create_storage_data(table, metadatadir, data_path):
     table.create(data_path, if_table_config_exists="replace")
     assert table_exists(table, mode="staging")
 
+
+def test_create_if_storage_data_replace_if_table_config_replace(
+    table, metadatadir, data_path
+):
     table.delete("all")
     table.create(
         data_path, if_storage_data_exists="replace", if_table_config_exists="replace"
     )
 
-    table.delete("all")
-    table.create(
-        data_path, if_storage_data_exists="pass", if_table_config_exists="replace"
-    )
-    assert table_exists(table, mode="staging")
 
+def test_create_if_storage_data_raise(table, metadatadir, data_path):
     with pytest.raises(Exception):
         table.create(
             data_path,
