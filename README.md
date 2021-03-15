@@ -77,7 +77,7 @@ import basedosdados as bd
 df = bd.read_table('br_ibge_pib', 'municipios', billing_project_id="<YOUR-PROJECT>")
 ```
 
-> Caso esteja acessando da primeira vez, vão aparecer alguns passos para você autenticar seu projeto. Basta seguur os passos na tela!
+> Caso esteja acessando da primeira vez, vão aparecer alguns passos para você autenticar seu projeto. Basta seguir os passos na tela!
 
 ### Faça uma consulta
 
@@ -95,7 +95,7 @@ AND sigla_uf = 'TO'
 df = bd.read_sql(query, billing_project_id="<YOUR-PROJECT>")
 ```
 
-> Caso esteja acessando da primeira vez, vão aparecer alguns passos para você autenticar seu projeto. Basta seguur os passos na tela!
+> Caso esteja acessando da primeira vez, vão aparecer alguns passos para você autenticar seu projeto. Basta seguir os passos na tela!
 
 ### Veja todos os datasets disponíveis
 
