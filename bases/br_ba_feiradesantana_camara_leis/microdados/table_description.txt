@@ -1,0 +1,47 @@
+Todas as leis do município de Feira de Santana até 2019.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ba-feiradesantana-camara-leis
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ba_feiradesantana-camara_leis
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ana Paula Gomes
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ba_feiradesantana_camara_leis/code
+Website: https://www.dadosabertosdefeira.com.br
+Email: dadosabertosdefeira@gmail.comTratado por
+-----------
+Nome: Ana Paula Gomes
+Código: https://github.com/dadosAbertosDeFeira/leis-municipais
+Website: https://www.dadosabertosdefeira.com.br
+Email: dadosabertosdefeira@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- lei
+
+Colunas identificando linhas unicamente
+-------------------
+
+Cobertura Temporal
+------------------
+
+Cobertura Espacial
+------------------
+- brasil
+- BA
+- Feira de Santana
+
+Tratamento
+----------
+Conversão de JSON para CSV.
+
+Frequencia de Atualização
+-------------------------
+único
+
+
