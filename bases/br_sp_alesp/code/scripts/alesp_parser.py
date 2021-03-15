@@ -359,7 +359,11 @@ def parse_despesas(download=True):
     despesas_all["CNPJ"] = despesas_all["CNPJ"].astype(str).str.replace(".0", "")
     despesas_all.columns = manipulation.normalize_cols(despesas_all.columns)
     despesas_all = despesas_all.drop(["data"], 1)
-    rename_cols = {"partido": "sigla_partido", "deputado": "nome_deputado"}
+    rename_cols = {
+        "partido": "sigla_partido",
+        "deputado": "nome_deputado",
+        "cnpj": "cpf_cnpj",
+    }
     despesas_all = despesas_all.rename(columns=rename_cols)
     despesas_all.to_csv("../data/gastos/despesas_since_2002.csv", index=False)
     # despesas_all.to_csv(f"{mais_path}/raw/gastos/despesas_since_2002.csv", index=False)
@@ -437,12 +441,13 @@ def parse_despesas(download=True):
         deputados[["matricula", "nome_deputado"]],
         on="matricula",
     )
-
-    despesas_final = despesas_final[despesas_all.columns]
     rename_cols = {
         "partido": "sigla_partido",
+        "cnpj": "cpf_cnpj",
     }
     despesas_final = despesas_final.rename(columns=rename_cols)
+
+    despesas_final = despesas_final[despesas_all.columns]
     despesas_final.to_csv(
         "../data/gastos/despesas_gabinetes_mandato.csv", index=False, encoding="utf-8"
     )
