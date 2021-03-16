@@ -1,0 +1,6 @@
+name: "Setup Environment"
+description: "Create config files and credentials needed to run basedosdados client"
+author: "Base dos Dados"
+runs:
+  using: "docker"
+  image: "Dockerfile"
