@@ -1,13 +1,13 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: deputados # AUTO GENERATED
+table_id: assessores_lideranca # AUTO GENERATED
 dataset_id: br_sp_alesp # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-sp-alesp # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_alesp # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: V1.0 # REQUIRED
 
 last_updated: 2021-03-12 # AUTO GENERATED
 
@@ -16,7 +16,7 @@ last_updated: 2021-03-12 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Lista dos Deputados Estaduais do Estado de São Paulo da legislatura atual
+    Lotação dos assessores parlamentares da linderança dos partidos
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -31,7 +31,7 @@ published_by:
 treated_by:
     name: Diego Oliveira # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_alesp/code # REQUIRED
-    website: github.com/d116626
+    website: https://www.al.sp.gov.br/servidor/lista/?todos=true
     email: ds.oliveira404@gmail.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
@@ -49,13 +49,13 @@ data_update_frequency: 1 ano # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - matricula
+    - servidor
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    -matricula
+    - servidor
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -92,73 +92,31 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: id_deputado
-        description: Identificador único do deputado no sistema Parlamento Web
+        name: servidor
+        description: Nome do servidor
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nome_deputado
-        description: Nome parlamentar do deputado
+        name: cargo
+        description: Cargo do servidor
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: aniversario
-        description: Dia e mês do aniversário do deputado (MM-DD)
+        name: lotacao
+        description: Lotação do servidor
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: regime
+        description: Regime de contratação do servidor
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: sigla_partido
-        description: Partido ao qual o deputado pertence
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: situacao
-        description: Situação do mandato do deputado na legislatura atual
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: email
-        description: Email
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sala
-        description: Sala do gabinete do deputado no prédio da Alesp
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: placa_veiculo
-        description: Placa do veículo oficial usado pelo deputado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: home_page
-        description: Endereço da página do deputado na internet
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: andar
-        description: Andar no qual se localiza o gabinete do deputado no prédio da Alesp
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: matricula
-        description: Número de matrícula do deputado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_spl
-        description: Identificador único do deputado no sistema SPL (Sistema de Processo Legislativo)
+        description: Partido que servidor presta serviços
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
