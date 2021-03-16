@@ -1,0 +1,76 @@
+dataset_id: br_ibge_pam # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-ibge-pam
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pam
+
+# Descreva a base.
+# Ela é sobre o que?
+# Quais as principais fontes de dados?
+# Há links para FAQs e explicações?
+description: | # REQUIRED
+    A base apresenta dados da Pesquisa Agrícola Municipal, promovida pelo IBGE. Ela contém dados sobre a produção agrícola de cada município brasileiro, desde 1974 até 2019, desagregado por cada produto. Na base há duas tabelas: uma para as lavouras temporárias, outra para lavouras consideradas permanentes, cada uma contendo informações sobre mais de 30 produtos. Cada uma das tabelas contém 8 variáveis sobre a produção agrícola, incluindo valor total da produção, área utilizada para plantio, área utilizada para colheita, entre outros. A base é relevante para melhor entender a economia rural do país em um nível de desagregação elevado, além de também ser útil para estudos sobre o uso da terra e até estudos de perspectiva histórica, considerando a extensão do período temporal que ela está disponível.
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+organization: instituto-brasileiro-de-geografia-e-estatistica # REQUIRED
+
+# Qual departamento/grupo/pessoa mantém os dados originais?
+author:
+    name: 
+    email: 
+
+# Onde encontrar os dados originais e mais informações?
+website:
+    - https://sidra.ibge.gov.br/pesquisa/pam/tabelas
+    - 
+
+# Quais grupos caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+groups:
+    - agropecuaria
+    - economia
+    - meio-ambiente
+    - territorio
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Caso crie etiquetas novas, as regras são:
+#   - letras minúsculas
+#   - sem acentos
+#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - agrotoxico
+    - arroz
+    - fruticultura
+    - soja
+
+# Em quais línguas a base (ou a fonte original) está disponível?
+# Regras: minúsculo, sem acentos.
+# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
+languages:
+    - portugues
+
+# Os dados originais estão disponíveis de graça?
+free: sim
+
+# Are microdata available for download?
+microdata: não
+
+# Existe uma API na fonte original?
+API: sim
+
+# É necessário registrar um usuário para baixar os dados originais?
+registration: não
+
+# Como os dados originais estão disponibilizados?
+availability: online
+
+# A fonte original requer IP brasileiro para acesso?
+brazilian_IP: não
+
+# Essa base está sob qual licença?
+# A licença MIT se aplica a bases públicas.
+# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
+license: 
+    name: MIT # REQUIRED
+    url: <url>
