@@ -1,34 +1,43 @@
 from collections import Counter
 import requests
+import os
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path=".env", override=True)
-
-import os
-username = os.environ.get("GHUSER")
-token = os.environ.get("GHTOKEN")
+from generate-markdown import write_markdown
 
 levels = {
-    0: {
-        'submitted': 1,
-        'reviewed': 0,
-        'merged': 0
-    },
     1: {
-        'submitted': 5,
-        'reviewed': 0,
-        'merged': 0
-    },
+        "emoji": ":hatching_chick:",
+        "permission": "Read",
+        "conditions": {
+            'submitted': 1,
+            'reviewed': 0,
+            'merged': 0
+        }},
     2: {
-        'submitted': 10,
-        'reviewed': 5,
-        'merged': 0
-    },
+        "emoji": ":baby_chick:",
+        "permission": "Triage",
+        "conditions": {
+            'submitted': 5,
+            'reviewed': 0,
+            'merged': 0
+        }},
     3: {
-        'submitted': 20,
-        'reviewed': 10,
-        'merged': 1
-    }
+        "emoji": ":chicken:",
+        "permission": "Write",
+        "conditions": {
+            'submitted': 10,
+            'reviewed': 5,
+            'merged': 0
+        }},
+    4: {
+        "emoji": ":peacock:",
+        "permission": "Maintain",
+        "conditions": {
+            'submitted': 20,
+            'reviewed': 10,
+            'merged': 1
+        }},
 }
 
 def get_pulls(username, token):
@@ -49,7 +58,7 @@ def get_pulls(username, token):
 def update_user_content(users, content, content_type, contribution_type):
     for user, value in content.items():
         if user in users.keys():
-            users[user][contribution_type]["approved_pulls"][content_type] = value
+            users[user]["contributions"][contribution_type]["approved_pulls"][content_type] = value
     return users
 
 def get_submitted(users, approved_pulls, contribution_type):
@@ -84,28 +93,31 @@ def update_contributions(users, approved_pulls, contribution_type):
 
 def get_level(scores, levels):
     max_level = None
-    if all(score != None for score in scores.values()):
-        for level, reference in levels.items():
-            if all(scores[k] >= reference[k] for k in reference.keys()):
-                max_level = level      
+    for level, values in levels.items():
+        reference = values["conditions"]
+        if all(scores[k] >= reference[k] for k in reference.keys()):
+            max_level = level      
     return max_level
     
-def get_contributors_levels(contribution_types = ["[infra]", "[dados]", "[docs]"]):
-    
-    url = "https://api.github.com/repos/basedosdados/mais/contributors"
-
-    users = {
-        user["login"]: 
-            {c_type: 
-             {"approved_pulls": {
-                    "submitted": None, 
-                    "reviewed": None, 
-                    "merged": None
-                }, 
-                "level": None}
-               for c_type in contribution_types}
+def set_contributors(contribution_types, url = "https://api.github.com/repos/basedosdados/mais/contributors"):
+    return {
+        user["login"]: {
+                "photo": user["avatar_url"],
+                "contributions": {
+                    c_type: {
+                        "approved_pulls": {
+                            "submitted": 0, 
+                            "reviewed": 0, 
+                            "merged": 0
+                        }, 
+                        "level": None
+                    }
+            for c_type in contribution_types}
+        }
         for user in requests.get(url, auth=(username,token)).json()}
-            
+    
+def get_contributors_levels(contribution_types = ["[infra]", "[dados]", "[docs]"]):
+    users = set_contributors(contribution_types)
     pulls = get_pulls(username, token)
     approved_pulls = [p for p in pulls if p["merged_at"] != None]
     
@@ -114,11 +126,16 @@ def get_contributors_levels(contribution_types = ["[infra]", "[dados]", "[docs]"
         users = update_contributions(users, approved_pulls, c_type)
         
         print(f"Calculando level de cada user...")
-        for user, contributions in users.items():
-            scores = contributions[c_type]['approved_pulls']
-            users[user][c_type]["level"] = get_level(scores, levels)
+        for user, content in users.items():
+            scores = content["contributions"][c_type]['approved_pulls']
+            users[user]["contributions"][c_type]["level"] = get_level(scores, levels)
 
     return users
 
 if name == "__main__":
+    load_dotenv(dotenv_path=".env", override=True)
+    username = os.environ.get("GHUSER")
+    token = os.environ.get("GHTOKEN")
+
     users = get_contributors_levels()
+    write_markdown(users, levels, username, token)
