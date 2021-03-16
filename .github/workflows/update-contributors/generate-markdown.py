@@ -27,9 +27,9 @@ def write_table(users, contribution_types):
         </td>
         """.replace("\n","").replace("None",""))
         
-        # makes 5 items each row, it could be better
+        # makes 3 items each row, it could be better
         i += 1
-        if i % 5 == 0:
+        if i % 3 == 0:
             if len(users) == i:
                 table += "</tr>"
             else:
