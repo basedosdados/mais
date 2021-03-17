@@ -1,0 +1,56 @@
+A tabela contém valores do IDESP agregado para o nível de ensino, aglomerando todas as escolas naquele nível do estado de São Paulo. A tabela torna-se portanto uma série histórica do indicador ao longo do período que se encontra disponível. Novamente, o IDESP é um indicador que avalia a qualidade da escola. Nesta avaliação, considera–se que uma boa escola é aquela em que a maior parte dos alunos aprende as competências e habilidades requeridas para a sua série/ano, num período de tempo ideal – o ano letivo. 
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-sp-seduc-idesp
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_idesp
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_idesp/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Email: mavalentim.b@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- nivel de ensino
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- nivel_ensino
+- ano
+
+Cobertura Temporal
+------------------
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+- SP
+
+Tratamento
+----------
+O processo de tratamento da base foi simples e consistiu basicamente em juntar todas as diferentes bases, substituir vírgulas por pontos e harmonizar as variáveis.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+
