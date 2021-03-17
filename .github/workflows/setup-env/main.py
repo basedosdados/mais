@@ -68,6 +68,8 @@ def main():
     )
     print(workspace)
 
+    subprocess.call(f"pip install -r {requirements_path}", shell=True)
+
     ### json with information of .basedosdados/config.toml
     config_dict = {
         "metadata_path": str(Path("/github") / "workspace" / "bases"),
@@ -111,7 +113,7 @@ def main():
     )
     setup_path = str(Path("/github") / "workspace" / "setup.py")
     requirements_path = str(Path("/github/workspace/requirements-dev.txt"))
-    subprocess.call(f"pip install -r {requirements_path}", shell=True)
+
     subprocess.call(f"python -m {setup_path} develop", shell=True)
     subprocess.call("pytest", shell=True)
 
