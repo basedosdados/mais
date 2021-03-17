@@ -1,0 +1,54 @@
+A tabela contém valores de fluxo escolar a nível de escolas. Para quantificar tal fluxo, tem-se variáveis a respeito do abandono, da reprovação e da aprovação para cada escola, para cada ano, desgregado por níveis de ensino. Isto é, a tabela contém tais informações para nível de anos iniciais do ensino fundamental, anos finais do ensino fundamental e anos do ensino médio.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-sp-seduc-fluxo-escolar
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_fluxo_escolar
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_fluxo_escolar/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Email: mavalentim.b@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- escola
+
+Colunas identificando linhas unicamente
+-------------------
+- id_escola_sp
+
+Cobertura Temporal
+------------------
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+- SP
+
+Tratamento
+----------
+O tratamento dos dados consistiu basicamente em juntar dados de diferentes anos, adaptando e aparando as diferenças em formato das diferentes tabelas. Outra mudança importante foi a adaptação do código da id_escola que unicamente nessa base vinha com valores "0" na frente do código, distoando das outras bases da SEDUC.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+
