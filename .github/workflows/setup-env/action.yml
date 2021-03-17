@@ -15,9 +15,9 @@ runs:
   steps:
     - run: pip install --upgrade -r ${{ github.workspace }}/requirements-dev.txt 
       shell: bash
-    - run: python  ${{ github.action_path }}/main.py
-      shell: bash
     - run: python ${{ github.workspace }}/setup.py develop
+      shell: bash
+    - run: python  ${{ github.action_path }}/main.py
       shell: bash
     - run: pytest
       shell: bash
