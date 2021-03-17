@@ -1,5 +1,15 @@
 name: "Setup Environment"
 description: "Create config files and credentials needed to run basedosdados client"
 author: "Base dos Dados"
-runs: |
-  python -m "./workflows/setup-env/main.py"
+inputs: 
+  GCP_BD_DEV_PROD:
+    description: Github secret credential
+
+  GCP_BD_DEV_STAGING: 
+    description: Github secret credential
+
+runs: 
+  using: composite
+  steps:
+    - run: |
+      python -m ${{ github.action_path }}/main.py
