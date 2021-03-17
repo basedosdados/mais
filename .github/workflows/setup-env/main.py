@@ -109,7 +109,10 @@ def main():
         Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),
         "\n",
     )
-
+    subprocess.call(
+        'pip install -r "/github/workspace/requirements-dev.txt"', shell=True
+    )
+    subprocess.call('python -m "/github/workspace/setup.py" develop', shell=True)
     subprocess.call("pytest", shell=True)
 
 
