@@ -19,9 +19,9 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.municipio AS
+CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.uf AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(localizacao AS STRING) localizacao,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(ano AS INT64) ano,
@@ -236,4 +236,4 @@ SAFE_CAST(icg_nivel_3 AS FLOAT64) icg_nivel_3,
 SAFE_CAST(icg_nivel_4 AS FLOAT64) icg_nivel_4,
 SAFE_CAST(icg_nivel_5 AS FLOAT64) icg_nivel_5,
 SAFE_CAST(icg_nivel_6 AS FLOAT64) icg_nivel_6
-from basedosdados-dev.br_inep_indicadores_educacionais_staging.municipio as t
+from basedosdados-dev.br_inep_indicadores_educacionais_staging.uf as t

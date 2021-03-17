@@ -1,4 +1,4 @@
-Indicadores educacionais do Inep a nível de município.
+Indicadores educacionais do Inep.
 
 
 Para saber mais acesse:
@@ -20,20 +20,15 @@ Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicado
 Website: https://basedosdados.org/
 Email: hevilynsouza12@hotmail.com
 
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- municipio
 - ano
 
 Colunas identificando linhas unicamente
 -------------------
-- id_municipio
-- ano
 - rede
 - localizacao
+- ano
 
 Cobertura Temporal
 ------------------
@@ -60,7 +55,6 @@ Cobertura Espacial
 Tratamento
 ----------
 Padronização dos nomes das colunas.
-Exclusão das colunas Região, Nome do Município e UF.
 Palavras sem acento e minúsculas.
 Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
 

@@ -1,23 +1,15 @@
-remove(list = ls())
-library(readxl)
-library(plyr)
-library(dplyr)
-library(magrittr)
-library(stringr)
-library(readr)
-
 ####### TABELA MEDIA DE ALUNOS POR TURMA #########
 
 #Baixando os dados
 
-setwd("C:/Users/Hevilyn/Downloads")
+atu_2020 <- read_excel("ATU_MUNICIPIOS_2020.xlsx")
+atu_2020 <- atu_2020[-c(1:8,66643:66645),]
 
 atu_2019 <- read_excel("ATU_MUNICIPIOS_2019.xlsx")
 atu_2019 <- atu_2019[-c(1:8,66690,66691,66692),] #Exclui linhas vazias
 
 atu_2018 <- read_excel("ATU_MUNICIPIOS_2018.xlsx")
 atu_2018 <- atu_2018[-c(1:8,66756,66757,66758),]
-
 
 atu_2017 <- read_excel("ATU_MUNICIPIOS_2017.xlsx")
 atu_2017 <- atu_2017[-c(1:8,66606,66607,66608),]
@@ -108,6 +100,9 @@ atu$rede <- str_replace_all(atu$rede,"particular","privada")
 
 setwd("C:/Users/user/Desktop/bases/inep/media_horas")
 
+had_2020 <- read_excel("HAD_MUNICIPIOS_2020.xlsx")
+had_2020 <- had_2020[-c(1:8,65640:65642),]
+
 had_2019 <- read_excel("HAD_MUNICIPIOS_2019.xlsx")
 had_2019 <- had_2019[-c(1:8,65696,65697,65698),]
 
@@ -194,7 +189,8 @@ had$rede <- str_replace_all(had$rede,"particular","privada")
 
 ####### TABELA TAXAS DE DISTORÇÃO IDADE SÉRIE ########
 
-setwd("C:/Users/user/Desktop/bases/inep/tdi_municipios")
+tdi_2020 <- read_excel("TDI_MUNICIPIOS_2020.xlsx")
+tdi_2020 <- tdi[-c(1:8,65637:65638),]
 
 tdi_2019 <- read_excel("TDI_MUNICIPIOS_2019.xlsx")
 tdi_2019 <- tdi_2019[-c(1:8,65657,65658),]
@@ -402,9 +398,6 @@ tdi_municipios$rede <- str_replace_all(tdi_municipios$rede,"particular","privada
 
 ######## TABELA TAXAS DE RENDIMENTO ########
 
-
-setwd("C:/Users/user/Desktop/bases/inep/taxa_rendimentos")
-
 tx_2019 <- read_excel("tx_rend_municipios_2019.xlsx")
 tx_2019 <- tx_2019[-c(1:8,65706,65707),]
 
@@ -505,8 +498,6 @@ tx_rendimentos$rede <- str_replace_all(tx_rendimentos$rede,"particular","privada
 
 ##### TABELA TAXA DE NAO RESPOSTA ######
 
-setwd("C:/Users/user/Desktop/bases/inep/tnr")
-
 tnr_2019 <- read_excel("tnr_municipios_2019.xlsx")
 tnr_2019 <- tnr_2019[-c(1:8,65706,65707,65708),]
 
@@ -562,7 +553,8 @@ tnr$rede <- str_replace_all(tnr$rede,"particular","privada")
 
 #####  TABELA PERCENTUAL DE DOCENTES COM CURSO SUPERIOR    #######
 
-setwd("C:/Users/user/Desktop/bases/inep/DSU")
+dsu_2020 <- read_excel("DSU_MUNICIPIOS_2020.xlsx")
+dsu_2020 <- dsu_2020[-c(1:9,67457:67458),]
 
 dsu_2019 <- read_excel("DSU_MUNICIPIOS_2019.xlsx")
 dsu_2019 <- dsu_2019[-c(1:9,67519,67520),]
@@ -619,8 +611,8 @@ dsu$rede <- str_replace_all(dsu$rede,"particular","privada")
 
 ##### TABELA ADEQUAÇÃO DA FORMAÇÃO DOCENTE ######
 
-
-setwd("C:/Users/user/Desktop/bases/inep/AFD")
+afd_2020 <- read_excel("AFD_MUNICIPIOS_2020.xlsx")
+afd_2020 <- afd_2020[-c(1:10,67304:67308),]
 
 afd_2019 <- read_excel("AFD_MUNICIPIOS_2019.xlsx")
 afd_2019 <- afd_2019[-c(1:10,67323,67324,67325,67326,67327),]
@@ -662,7 +654,8 @@ afd$rede <- str_replace_all(afd$rede,"particular","privada")
 
 ###### TABELA REGULARIDADE DO CORPO DOCENTE  ########
 
-setwd("C:/Users/user/Desktop/bases/inep/IRD")
+ird_2020 <- read_excel("IRD_MUNICIPIOS_2020.xlsx")
+ird_2020 <- ird_2020[-c(1:9,66975:66979),]
 
 ird_2019 <- read_excel("IRD_MUNICIPIOS_2019.xlsx")
 ird_2019 <- ird_2019[-c(1:9,66939,66940,66941,66942,66943),]
@@ -699,7 +692,8 @@ ird$rede <- str_replace_all(ird$rede,"particular","privada")
 
 ####### TABELA ESFORÇO DOCENTE ########
 
-setwd("C:/Users/user/Desktop/bases/inep/IED")
+ied_2020 <- read_excel("IED_MUNICIPIOS_2020.xlsx")
+ied_2020 <- ied_2020[-c(1:10,66396:66400),]
 
 ied_2019 <- read_excel("IED_MUNICIPIOS_2019.xlsx")
 ied_2019 <- ied_2019[-c(1:10,66422,66423,66424,66425,66426),]
@@ -739,7 +733,8 @@ ied$rede <- str_replace_all(ied$rede,"particular","privada")
 
 ###### TABELA COMPLEXIDADE DE GESTÃO DA ESCOLA ######
 
-setwd("C:/Users/user/Desktop/bases/inep/ICG")
+icg_2020 <- read_excel("ICG_MUNICIPIOS_2020.xlsx")
+icg_2020 <- icg_2020[-c(1:8,67463:67467),]
 
 icg_2019 <- read_excel("ICG_MUNICIPIOS_2019.xlsx")
 icg_2019 <- icg_2019[-c(1:8,67525,67526,67527,67528,67529),]
@@ -794,11 +789,12 @@ indicadores_08 <- full_join(indicadores_07,ied, by= c("id_municipio","ano","loca
 
 indicadores_09 <- full_join(indicadores_08,icg, by= c("id_municipio","ano","localizacao","rede"))
 
+indicadores <- indicadores_09 %>% arrange(id_municipio,localizacao,rede,ano)
 
-is.na(indicadores_09[5:215]) <- indicadores_09[5:215]=="--"
+is.na(indicadores[5:215]) <- indicadores[5:215]=="--"
 
-indicadores_09$id_municipio <- as.integer(indicadores_09$id_municipio)
-indicadores_09$ano <- as.integer(indicadores_09$ano)
+indicadores[,5:215] <- lapply(indicadores[5:215],as.numeric)
 
-write.csv2(indicadores_09,file = "br_inep_indicadores_educacionais.csv", row.names = FALSE, na = " ")
+con <- file('municipio.csv', encoding = "UTF-8")
+write.csv(indicadores, file = con, row.names = FALSE, na = " ")
 
