@@ -1,0 +1,46 @@
+A tabela contém dados que caracterizam brevemente a escola e, principalmente, dados do indicador socioeconomico da escola, o INSE. A tabela pode ser facilmente combinada com outras tabelas para se melhor entender como o indicador socioeconomico se relaciona com outros indicadores, como o indicador de desenvolvimento educacional e com outras marcas da escola, como o espaço geográfico onde ela está inserida.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-sp-seduc-inse
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_inse
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_inse/code
+Website: https://githu.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Email: mavalentim.b@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- escola
+
+Colunas identificando linhas unicamente
+-------------------
+- id_escola_sp
+
+Cobertura Temporal
+------------------
+- 2018
+
+Cobertura Espacial
+------------------
+- brasil
+- SP
+
+Tratamento
+----------
+O tratamento da base consistiu em alterar valores com vírgula para ponto e em harmonizar as variáveis com os nomes das otras bases da SEDUC.
+
+Frequencia de Atualização
+-------------------------
+unico
+
+
