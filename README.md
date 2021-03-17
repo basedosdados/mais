@@ -21,12 +21,17 @@
   <a href="https://github.com/basedosdados/mais/stargazers" target="_blank">
     <img src="https://img.shields.io/github/stars/basedosdados/mais.svg?style=social" alt="Start">
   </a>
-  <a href="https://apoia.se/basedosdados" target="_blank">
-    <img src="http://img.shields.io/badge/%E2%9D%A4%20Contribua!%EF%B8%8F%20-%20-ff69b4?style=social" alt="Contribua">
-  </a>
-  </div>
   <a href="https://twitter.com/intent/tweet?text=Baixe%20e%20faça%20queries%20em%20dados%20publicos,%20tratados%20e%20gratuitos%20com%20a%20Base%20dos%20Dados%20Mais%20🔍%20➕:%20https://basedosdados.github.io/mais/%20via%20@basedosdados" target="_blank">
     <img src="https://img.shields.io/twitter/url/https/github.com/jonsn0w/hyde.svg?style=social" alt="Tweet">
+  </a>
+  <a href="https://pypi.org/project/basedosdados/" target="_blank">
+    <img src="https://img.shields.io/pypi/dm/basedosdados" alt="PyPi">
+  </a>
+  <a href="https://discord.gg/tuaFbAPeq5" target="_blank">
+    <img src="https://img.shields.io/discord/787841210433536010" alt="Discord">
+  </a>
+  <a href="http://https://apoia.se/basedosdados" target="_blank">
+    <img src="https://img.shields.io/badge/apoie!%E2%9D%A4%EF%B8%8F-ff69b4" alt="Apoiase">
   </a>
 </p>
 
