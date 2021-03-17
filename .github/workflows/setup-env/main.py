@@ -119,7 +119,7 @@ def main():
     )
 
     # ### create config and credential folders
-    create_config_tree(prod_base64, staging_base64, config_dict)
+    create_config_tree(env_prod, env_staging, config_dict)
 
     print(
         "\n",
