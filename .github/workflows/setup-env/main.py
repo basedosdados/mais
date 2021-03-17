@@ -104,12 +104,17 @@ def main():
     # ### load the secret of prod and staging data
     prod_base64 = os.getenv("INPUT_GCP_BD_DEV_PROD")
     staging_base64 = os.getenv("INPUT_GCP_BD_DEV_STAGING")
-
+    
+    env_prod = os.getenv("DEV_PROD")
+    env_stag = os.getenv("DEV_STAG")
     print(
         "\n===============================================================",
         "types:   ",
         type(prod_base64),
         type(staging_base64),
+        "env_types:",
+        type(env_prod),
+        type(env_stag)
         "\n===============================================================\n"
     )
 
