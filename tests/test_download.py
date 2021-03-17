@@ -126,6 +126,7 @@ def test_read_table():
             dataset_id="br_ibge_pib",
             table_id="municipios",
             billing_project_id=TEST_PROJECT_ID,
+            from_file=True,
             limit=10,
         ),
         pd.DataFrame,
