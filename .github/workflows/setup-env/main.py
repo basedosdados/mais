@@ -106,7 +106,7 @@ def main():
     staging_base64 = os.getenv("INPUT_GCP_BD_DEV_STAGING")
 
     env_prod = os.getenv("DEV_PROD")
-    env_stag = os.getenv("DEV_STAG")
+    env_staging = os.getenv("DEV_STAG")
     print(
         "\n===============================================================",
         "types:   ",
