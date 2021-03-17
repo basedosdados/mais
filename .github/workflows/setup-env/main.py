@@ -1,4 +1,5 @@
 import os
+import subprocess
 import shutil
 from pathlib import Path
 import base64
@@ -108,6 +109,8 @@ def main():
         Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),
         "\n",
     )
+
+    subprocess.call(["pytest"])
 
 
 if __name__ == "__main__":
