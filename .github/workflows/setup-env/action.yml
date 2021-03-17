@@ -12,3 +12,4 @@ runs:
   using: composite
   steps:
     - run: python -m ${{ github.action_path }}/main.py
+      shell: bash
