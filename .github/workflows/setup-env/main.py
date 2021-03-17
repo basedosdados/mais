@@ -121,11 +121,11 @@ def main():
     # ### create config and credential folders
     create_config_tree(env_prod, env_staging, config_dict)
 
-    print(
-        "\n",
-        Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),
-        "\n",
-    )
+    # print(
+    #     "\n",
+    #     Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),
+    #     "\n",
+    # )
 
     # setup_path = str(Path("/github") / "workspace" / "setup.py")
 

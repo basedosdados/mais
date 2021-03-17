@@ -17,7 +17,7 @@ runs:
       shell: bash
     - run: python  ${{ github.action_path }}/main.py
       shell: bash
-    - run: python -m ${{ github.workspace }}/setup.py develop
+    - run: python ${{ github.workspace }}/setup.py develop
       shell: bash
     - run: pytest
       shell: bash
