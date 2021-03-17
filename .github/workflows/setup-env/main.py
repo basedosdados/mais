@@ -110,7 +110,7 @@ def main():
         "\n",
     )
 
-    subprocess.call(["pytest"])
+    subprocess.call("pytest", shell=True)
 
 
 if __name__ == "__main__":
