@@ -105,11 +105,15 @@ def main():
 
     print(
         "\n",
-        Path("/home/caio/.basedosdados/config.toml").open(mode="r").read(),
+        Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),
         "\n",
-        Path("/home/caio/.basedosdados/credentials/staging.json").open(mode="r").read(),
+        Path(Path.home() / ".basedosdados" / "credentials" / "staging.json")
+        .open(mode="r")
+        .read(),
         "\n",
-        Path("/home/caio/.basedosdados/credentials/prod.json").open(mode="r").read(),
+        Path(Path.home() / ".basedosdados" / "credentials" / "prod.json")
+        .open(mode="r")
+        .read(),
     )
 
 
