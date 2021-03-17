@@ -4,9 +4,13 @@ author: "Base dos Dados"
 inputs: 
   GCP_BD_DEV_PROD:
     description: Github secret credential
+    required: true
+    default: ${{ secrets.GCP_BD_DEV_PROD }}
 
   GCP_BD_DEV_STAGING: 
     description: Github secret credential
+    required: true
+    default: ${{ secrets.GCP_BD_DEV_STAGING }}
 
 runs: 
   using: composite
