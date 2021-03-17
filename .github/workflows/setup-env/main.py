@@ -68,9 +68,9 @@ def main():
     )
     print(workspace)
 
-    requirements_path = str(Path("/github/workspace/requirements-dev.txt"))
+    # requirements_path = str(Path("/github/workspace/requirements-dev.txt"))
 
-    subprocess.call(f"pip install -r {requirements_path}", shell=True)
+    # subprocess.call(f"pip install -r {requirements_path}", shell=True)
 
     ### json with information of .basedosdados/config.toml
     config_dict = {
@@ -114,10 +114,10 @@ def main():
         "\n",
     )
 
-    setup_path = str(Path("/github") / "workspace" / "setup.py")
+    # setup_path = str(Path("/github") / "workspace" / "setup.py")
 
-    subprocess.call(f"python -m {setup_path} develop", shell=True)
-    subprocess.call("pytest", shell=True)
+    # subprocess.call(f"python -m {setup_path} develop", shell=True)
+    # subprocess.call("pytest", shell=True)
 
 
 if __name__ == "__main__":
