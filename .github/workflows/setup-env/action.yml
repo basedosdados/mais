@@ -11,5 +11,5 @@ inputs:
 runs: 
   using: composite
   steps:
-    - run: python -m main.py
+    - run: python  ${{ github.action_path }}/main.py
       shell: bash
