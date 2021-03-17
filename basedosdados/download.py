@@ -101,13 +101,19 @@ def download(
             billing_project_id=billing_project_id,
             limit=limit,
             reauth=reauth,
+            from_file=from_file,
         )
 
     elif query is not None:
 
         query += f" limit {limit}" if limit is not None else ""
 
-        table = read_sql(query, billing_project_id=billing_project_id, reauth=reauth)
+        table = read_sql(
+            query,
+            billing_project_id=billing_project_id,
+            from_file=from_file,
+            reauth=reauth,
+        )
 
     elif query is None:
         raise BaseDosDadosException(
@@ -186,6 +192,7 @@ def read_table(
     query_project_id="basedosdados",
     billing_project_id=None,
     limit=None,
+    from_file=False,
     reauth=False,
 ):
     """Load data from BigQuery using dataset_id and table_id.
@@ -221,7 +228,9 @@ def read_table(
     else:
         raise BaseDosDadosException("Both table_id and dataset_id should be filled.")
 
-    return read_sql(query, billing_project_id=billing_project_id, reauth=reauth)
+    return read_sql(
+        query, billing_project_id=billing_project_id, from_file=from_file, reauth=reauth
+    )
 
 
 def _get_header(text):
