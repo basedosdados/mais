@@ -114,7 +114,7 @@ def main():
         type(staging_base64),
         "env_types:",
         type(env_prod),
-        type(env_stag),
+        type(env_staging),
         "\n===============================================================\n",
     )
 
