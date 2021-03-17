@@ -1,0 +1,57 @@
+A tabela disponibiliza dados sobre o fluxo escolar a nível de municipio. O fluxo escolar consiste em um conjunto de variáveis que indica a taxa de aprovação, reprovação e abandono para cada nível do ensino escolar: anos inicias do ensino fundamental, anos finais do ensino fundamental e anos do ensino médio.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-sp-seduc-fluxo-escolar
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_fluxo_escolar
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_fluxo_escolar/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- municipio
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
+- ano
+
+Cobertura Temporal
+------------------
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+- SP
+
+Tratamento
+----------
+O tratamento envolveu juntar csvs de todos os diferentes anos, adaptando para que houvesse perfeita harmonia entre as bases, sempre priorizando formatos mais recentes. Outra parte crucial foi a utilização do diretório de municípios do Base dos Dados para conseguir código IBGE de 7 dígitos para a base e assim facilitar possíveis junções com outras bases.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+
