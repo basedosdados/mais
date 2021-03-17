@@ -102,8 +102,16 @@ def main():
         "################################################################################################"
     )
     # ### load the secret of prod and staging data
-    prod_base64 = os.environ.get("INPUT_GCP_BD_DEV_PROD")
-    staging_base64 = os.environ.get("INPUT_GCP_BD_DEV_STAGING")
+    prod_base64 = os.getenv("INPUT_GCP_BD_DEV_PROD")
+    staging_base64 = os.getenv("INPUT_GCP_BD_DEV_STAGING")
+
+    print(
+        "\n===============================================================",
+        "types:   ",
+        type(prod_base64),
+        type(staging_base64),
+        "\n===============================================================\n"
+    )
 
     # ### create config and credential folders
     create_config_tree(prod_base64, staging_base64, config_dict)
