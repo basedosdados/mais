@@ -76,9 +76,7 @@ def main():
     ### json with information of .basedosdados/config.toml
     config_dict = {
         "metadata_path": str(Path("/github") / "workspace" / "bases"),
-        "templates_path": str(
-            Path("/github") / "workspace" / "basedosdados" / "configs" / "templates"
-        ),
+        "templates_path": str(Path.home() / ".basedosdados" / "templates"),
         "bucket_name": "basedosdados-dev",
         "gcloud-projects": {
             "staging": {
