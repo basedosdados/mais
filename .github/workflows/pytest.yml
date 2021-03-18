@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ubuntu-20.04, ubuntu-18.04]
+        os: [ubuntu-latest, windows-latest]
     env:
       DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
       DEV_STAG: ${{ secrets.GCP_BD_DEV_STAGING }}
@@ -23,7 +23,7 @@ jobs:
       with:
         python-version: '3.8.x'
     - name: Create Environment
-      uses: ./.github/workflows/setup-env/
+      uses: ./.github/workflows/setup-env-${{ runner.os }}/
       with: 
           GCP_BD_DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
           GCP_BD_DEV_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}

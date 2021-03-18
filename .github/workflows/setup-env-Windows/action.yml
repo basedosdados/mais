@@ -13,11 +13,11 @@ inputs:
 runs: 
   using: composite
   steps:
-    - run: pip install --upgrade -r ${{ github.workspace }}/requirements-dev.txt 
-      shell: bash
-    - run: python ${{ github.workspace }}/setup.py develop
-      shell: bash
-    - run: python  ${{ github.action_path }}/main.py
-      shell: bash
+    - run: pip install --upgrade -r ${{ github.workspace }}\requirements-dev.txt 
+      shell: cmd
+    - run: python ${{ github.workspace }}\setup.py develop
+      shell: cmd
+    - run: python  ${{ github.action_path }}\main.py
+      shell: cmd
     - run: pytest
-      shell: bash
+      shell: cmd
