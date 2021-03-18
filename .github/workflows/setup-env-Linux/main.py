@@ -62,13 +62,9 @@ def main():
     # print(os.environ.get("INPUT_PROJECT_ID"))
     print(Path.home())
 
-    workspace = Path(".")
-
-    print(
-        "########################  WORKSPACE   #########################################"
-    )
-    print(workspace)
-
+    print("#==========================================#")
+    print(os.getenv("RUNNER"))
+    print("#==========================================#")
     # requirements_path = str(Path("/github/workspace/requirements-dev.txt"))
 
     # subprocess.call(f"pip install -r {requirements_path}", shell=True)
