@@ -89,13 +89,9 @@ def main():
             },
         },
     }
-    print(
-        "################################################################################################"
-    )
+    print("####===================================================###")
     print(config_dict)
-    print(
-        "################################################################################################"
-    )
+    print("####===================================================###")
     # ### load the secret of prod and staging data
     env_prod = os.getenv("DEV_PROD")
     env_staging = os.getenv("DEV_STAG")
@@ -111,6 +107,7 @@ def main():
         Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),
         "\n",
     )
+    ### Assert config files have been created
     assert (Path.home() / ".basedosdados" / "config.toml").is_file()
     assert (Path.home() / ".basedosdados" / "credentials" / "prod.json").is_file()
     assert (Path.home() / ".basedosdados" / "credentials" / "staging.json").is_file()
