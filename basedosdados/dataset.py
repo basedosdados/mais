@@ -75,9 +75,9 @@ class Dataset(Base):
             )
 
         for file in (Path(self.templates) / "dataset").glob("*"):
-
+            
             if file.name in ["dataset_config.yaml", "README.md"]:
-
+        
                 # Load and fill template
                 template = self._render_template(
                     f"dataset/{file.name}", dict(dataset_id=self.dataset_id)
@@ -87,9 +87,11 @@ class Dataset(Base):
                 (self.dataset_folder / file.name).open("w", encoding="utf-8").write(
                     template
                 )
+            print(f"###{file}####")
 
         # Add code folder
         (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
+        print("######CODE######", self.dataset_folder)
 
         return self
 
