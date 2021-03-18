@@ -63,7 +63,7 @@ def main():
     print(Path.home())
 
     print("#==========================================#")
-    print(os.getenv("RUNNER"))
+    print(os.getenv("WORKSPACE"))
     print("#==========================================#")
     # requirements_path = str(Path("/github/workspace/requirements-dev.txt"))
 

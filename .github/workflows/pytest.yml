@@ -16,7 +16,7 @@ jobs:
     env:
       DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
       DEV_STAG: ${{ secrets.GCP_BD_DEV_STAGING }}
-      RUNNER: ${{runner.os}}
+      WORKSPACE: ${{ github.workspace }}
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
