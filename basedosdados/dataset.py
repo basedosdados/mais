@@ -74,6 +74,8 @@ class Dataset(Base):
                 "Set replace=True to replace current files."
             )
 
+        print(Path(self.templates))
+        
         for file in (Path(self.templates) / "dataset").glob("*"):
             
             if file.name in ["dataset_config.yaml", "README.md"]:

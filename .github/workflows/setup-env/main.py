@@ -6,6 +6,7 @@ import base64
 import json
 import toml
 import tomlkit
+from basedosdados.base import Base
 
 
 def decoding_base64(message):
@@ -120,6 +121,8 @@ def main():
 
     # ### create config and credential folders
     create_config_tree(env_prod, env_staging, config_dict)
+
+    Base()._refresh_templates()
 
     print(
         "\n",
