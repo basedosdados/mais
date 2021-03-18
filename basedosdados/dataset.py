@@ -75,11 +75,13 @@ class Dataset(Base):
             )
 
         print(Path(self.templates))
-        
+        print((Path(self.templates) / "dataset").exists())
+        print((Path(self.templates) / "dataset").glob("*"))
+
         for file in (Path(self.templates) / "dataset").glob("*"):
-            
+
             if file.name in ["dataset_config.yaml", "README.md"]:
-        
+
                 # Load and fill template
                 template = self._render_template(
                     f"dataset/{file.name}", dict(dataset_id=self.dataset_id)
