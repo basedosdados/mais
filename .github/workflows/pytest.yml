@@ -7,12 +7,9 @@ on:
       # paths: 
       # - '**.py'
 jobs:
-  build:
+  build-linux:
 
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+    runs-on: ubuntu-latest
     env:
       DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
       DEV_STAG: ${{ secrets.GCP_BD_DEV_STAGING }}
@@ -25,6 +22,25 @@ jobs:
         python-version: '3.8.x'
     - name: Create Environment
       uses: ./.github/workflows/setup-env-Linux/
+      with: 
+          GCP_BD_DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
+          GCP_BD_DEV_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
+
+  build-windows:
+
+    runs-on: windows-latest
+    env:
+      DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
+      DEV_STAG: ${{ secrets.GCP_BD_DEV_STAGING }}
+      WORKSPACE: ${{ github.workspace }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8.x'
+    - name: Create Environment
+      uses: ./.github/workflows/setup-env-Windows/
       with: 
           GCP_BD_DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
           GCP_BD_DEV_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
