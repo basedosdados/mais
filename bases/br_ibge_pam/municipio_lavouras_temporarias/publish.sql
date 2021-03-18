@@ -19,7 +19,7 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_ibge_pam.municipios_lavouras_temporarias AS
+CREATE VIEW basedosdados-dev.br_ibge_pam.municipio_lavouras_temporarias AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
@@ -34,4 +34,4 @@ SAFE_CAST(rendimento_medio AS INT64) rendimento_medio,
 SAFE_CAST(valor_producao AS INT64) valor_producao,
 SAFE_CAST(prop_valor_producao AS FLOAT64) prop_valor_producao,
 SAFE_CAST(moeda_valor_prod AS STRING) moeda_valor_prod,
-from basedosdados-dev.br_ibge_pam_staging.municipios_lavouras_temporarias as t
+from basedosdados-dev.br_ibge_pam_staging.municipio_lavouras_temporarias as t

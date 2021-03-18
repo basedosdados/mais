@@ -1,7 +1,7 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: municipios_lavouras_temporarias # AUTO GENERATED
+table_id: municipio_lavouras_permanentes # AUTO GENERATED
 dataset_id: br_ibge_pam # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-ibge-pam # AUTO GENERATED
@@ -9,40 +9,34 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pam #
 
 version: v1.4 # REQUIRED
 
-last_updated: 2021-03-15 # AUTO GENERATED
+last_updated: 2021-03-16 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    A tabela de lavouras temporárias apresenta dados de cada município brasileiro, desagregado por ano e por produto, desde 1974 até 2019. Há um conjunto de produtos que são classificados como 
-    lavouras temporárias, entre eles: alho, arroz, feijão, mandioca, melancia, melão, tomate, cana-de-açúcar. No total, tem-se diferentes dados sobre a produção de cada um de mais de
-    30 produtos. A tabela pode ser utilizada para melhor compreender a economia rural e o uso da terra a nível municipal no país. Deve-se tomar cuidado pois as variáveis em forma de
-    porcentagens assumem como total o total das lavouras temporárias, e não o total de todas as lavouras.
+    A tabela contém dados da Pesquisa Agrícola Municipal para lavouras permanentes. Tem-se 8 variáveis desagregadas para cada municiípio, para cada ano e para cada um dos mais de 35 produtos. A tabela pode ser usada para comparação com as lavouras temporárias, para melhor compreender o uso da terra em cada município e para explorar a atividade da economia agrícola de um município ou uma região.
 
 # Quem está completando esse arquivo config?
 published_by:
     name: Matheus Valentim  # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pam/code # REQUIRED
     website: https://github.com/mavalentim
-    email: mavalentim.b@gmail.com
+    email: mavalentim.b@gmail.com   
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: 
-    code_url: 
-    website: 
-    email: 
+    name: Matheus Valentim  
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pam/code 
+    website: https://github.com/mavalentim
+    email: mavalentim.b@gmail.com   
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    O processo de tratamento dos dados consiste em adquirir as bases da SIDRA, repositório online do IBGE, e unir as diferentes bases adquiridas. Como há uma restrição de tamanho
-    para buscar bases da SIDRA, a estratégia adotada foi pegar valores para uma variável por um período de aproximadamente 10 anos, conforme o sistema permitia. Os dados de todos 
-    os anos de cada uma das oito variáveis foi aglomerado por variável, e depois uma tabela única foi criada. Por fim, a tabela é exportada particionadamente para facilitar e
-    diminuir os custos de uma eventual consulta.
+    O tratamento dos dados consiste em buscar bases da SIDRA a medida que o sistema permite, pois há restrições de tamanho. Uma vez com as bases, elas foram agrupadas de 1 a 4 para os 4 grandes períodos temporais, para serem mais facilmente tratadas. As principais mudanças incluem multiplicação da variável de valor por mil, para que o valor saia da unidade de milhar, e reconfiguração das variáveis de área, dividindo-as por 100, para que sejam expressas em kilômetro quadrado ao invés de hectare. A variável sigla_uf também foi criada através do código do IBGE do município.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -167,7 +161,7 @@ columns: # REQUIRED
   
     -   
         name: prop_area_plantada
-        description: Proporção da área plantada em relação ao total da área plantada em lavouras temporárias do município
+        description: Proporção da área plantada em relação ao total da área plantada em lavouras permanentes do município
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -221,6 +215,6 @@ columns: # REQUIRED
   
     -   
         name: sigla_uf
-        description: Sigla do Estado
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
