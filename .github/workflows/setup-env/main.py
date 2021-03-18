@@ -101,25 +101,13 @@ def main():
         "################################################################################################"
     )
     # ### load the secret of prod and staging data
-    prod_base64 = os.getenv("INPUT_GCP_BD_DEV_PROD")
-    staging_base64 = os.getenv("INPUT_GCP_BD_DEV_STAGING")
-
     env_prod = os.getenv("DEV_PROD")
     env_staging = os.getenv("DEV_STAG")
-    print(
-        "\n===============================================================",
-        "types:   ",
-        type(prod_base64),
-        type(staging_base64),
-        "env_types:",
-        type(env_prod),
-        type(env_staging),
-        "\n===============================================================\n",
-    )
 
     # ### create config and credential folders
     create_config_tree(env_prod, env_staging, config_dict)
 
+    ### create templates at config path
     Base()._refresh_templates()
 
     print(
@@ -130,10 +118,6 @@ def main():
     assert (Path.home() / ".basedosdados" / "config.toml").is_file()
     assert (Path.home() / ".basedosdados" / "credentials" / "prod.json").is_file()
     assert (Path.home() / ".basedosdados" / "credentials" / "staging.json").is_file()
-    # setup_path = str(Path("/github") / "workspace" / "setup.py")
-
-    # subprocess.call(f"python -m {setup_path} develop", shell=True)
-    # subprocess.call("pytest", shell=True)
 
 
 if __name__ == "__main__":

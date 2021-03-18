@@ -74,10 +74,6 @@ class Dataset(Base):
                 "Set replace=True to replace current files."
             )
 
-        print(Path(self.templates))
-        print((Path(self.templates) / "dataset").exists())
-        print((Path(self.templates) / "dataset").glob("*"))
-
         for file in (Path(self.templates) / "dataset").glob("*"):
 
             if file.name in ["dataset_config.yaml", "README.md"]:
@@ -91,11 +87,9 @@ class Dataset(Base):
                 (self.dataset_folder / file.name).open("w", encoding="utf-8").write(
                     template
                 )
-            print(f"###{file}####")
 
         # Add code folder
         (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
-        print("######CODE######", self.dataset_folder)
 
         return self
 

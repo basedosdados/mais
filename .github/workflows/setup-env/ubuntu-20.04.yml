@@ -1,0 +1,23 @@
+name: "Setup Environment"
+description: "Create config files and credentials needed to run basedosdados client"
+author: "Base dos Dados"
+inputs: 
+  GCP_BD_DEV_PROD:
+    description: Github secret credential
+    required: true
+
+  GCP_BD_DEV_STAGING: 
+    description: Github secret credential
+    required: true
+
+runs: 
+  using: composite
+  steps:
+    - run: pip install --upgrade -r ${{ github.workspace }}/requirements-dev.txt 
+      shell: bash
+    - run: python ${{ github.workspace }}/setup.py develop
+      shell: bash
+    - run: python  ${{ github.action_path }}/main.py
+      shell: bash
+    - run: pytest
+      shell: bash
