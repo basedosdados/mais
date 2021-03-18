@@ -1,6 +1,7 @@
 import os
-import subprocess
 import shutil
+import sys
+import IPython
 from pathlib import Path
 import base64
 import json
@@ -60,6 +61,7 @@ def create_config_tree(prod_base64, staging_base64, config_dict):
 def main():
     # print(json.load(Path("/github/workspace/files.json").open("r")))
     # print(os.environ.get("INPUT_PROJECT_ID"))
+    sys.excepthook = IPython.core.ultratb.ColorTB()
     print(Path.home())
 
     workspace = Path(".")

@@ -7,6 +7,8 @@ runs:
   steps:
     - run: pip install --upgrade -r ${{ github.workspace }}\requirements-dev.txt 
       shell: cmd
+    - run: pip install --upgrade ipython
+      shell: cmd
     - run: python ${{ github.workspace }}\setup.py develop
       shell: cmd
     - run: python  ${{ github.action_path }}\main.py
