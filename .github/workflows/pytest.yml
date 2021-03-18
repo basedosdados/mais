@@ -23,7 +23,7 @@ jobs:
       with:
         python-version: '3.8.x'
     - name: Create Environment
-      uses: ./.github/workflows/setup-env/${{ matrix.os }}.yaml 
+      uses: ./.github/workflows/setup-env/${{ runner.os }}.yml 
       with: 
           GCP_BD_DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
           GCP_BD_DEV_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
