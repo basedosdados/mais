@@ -471,7 +471,7 @@ class Table(Base):
         Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
             filepath,
             mode="staging",
-            partition=None,
+            partitions=None,
             if_exists=if_exists,
             **upload_args,
         )

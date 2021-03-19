@@ -100,7 +100,7 @@ class Storage(Base):
         self,
         path,
         mode="all",
-        partition=None,
+        partitions=None,
         if_exists="raise",
         **upload_args,
     ):
@@ -132,7 +132,7 @@ class Storage(Base):
 
             mode (str): Folder of which dataset to update [raw|staging|all]
 
-            partition (str, pathlib.PosixPath, or dict): Optional.
+            partitions (str, pathlib.PosixPath, or dict): Optional.
                 *If adding a single file*, use this to add it to a specific partition.
 
                 * str : `<key>=<value>/<key2>=<value2>`
@@ -168,7 +168,7 @@ class Storage(Base):
 
         else:
             paths = [path]
-            parts = [partition or None]
+            parts = [partitions or None]
 
         self._check_mode(mode)
 
