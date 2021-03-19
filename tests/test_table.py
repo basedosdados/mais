@@ -79,11 +79,12 @@ def test_init_file_exists_error(table, metadatadir, data_path):
 
 def test_init_not_implemented_error(table, metadatadir, data_path):
     wrong_path = Path(metadatadir / "municipios.json")
-    table.init(
-        if_folder_exists="replace",
-        if_table_config_exists="replace",
-        data_sample_path=wrong_path,
-    )
+    with pytest.raises(NotImplementedError):
+        table.init(
+            if_folder_exists="replace",
+            if_table_config_exists="replace",
+            data_sample_path=wrong_path,
+        )
 
 
 def test_init_no_path(table, metadatadir, data_path):
