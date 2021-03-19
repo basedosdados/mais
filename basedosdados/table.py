@@ -140,8 +140,9 @@ class Table(Base):
             FileExistsError: If folder exists and replace is False.
             NotImplementedError: If data sample is not in supported type or format.
         """
-
+        print("FOlDER EXISTS:", self.dataset_folder.exists())
         if not self.dataset_folder.exists():
+            print("FILE_EXISTS_ERROR")
 
             raise FileExistsError(
                 f"Dataset folder {self.dataset_folder} folder does not exists. "
@@ -152,6 +153,7 @@ class Table(Base):
             self.table_folder.mkdir(exist_ok=(if_folder_exists == "replace"))
         except FileExistsError:
             if if_folder_exists == "raise":
+                print("FOLDER_EXISTS_RAISE")
                 raise FileExistsError(
                     f"Table folder already exists for {self.table_id}. "
                 )
