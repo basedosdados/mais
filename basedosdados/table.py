@@ -173,6 +173,27 @@ class Table(Base):
         ):
             # Check if partitioned and get data sample and partition columns
             data_sample_path = Path(data_sample_path)
+
+            print(
+                "#===============#\n",
+                "path: ",
+                str(data_sample_path),
+                "\n#================#\n",
+            )
+
+            print(
+                "#===============#\n",
+                "is_dir: ",
+                data_sample_path.is_dir(),
+                "\n#================#\n",
+            )
+
+            print(
+                "#================#\n",
+                "suffix: ",
+                data_sample_path.suffix,
+                "#================#\n",
+            )
             if data_sample_path.is_dir():
 
                 data_sample_path = [

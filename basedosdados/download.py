@@ -527,8 +527,6 @@ def get_table_size(
     Returns:
         None
     """
-    bigquery.Client.query = partialmethod(bigquery.Client.query, timeout=3600 * 2)
-
     billing_client = bigquery.Client(
         credentials=credentials(from_file=from_file), project=billing_project_id
     )

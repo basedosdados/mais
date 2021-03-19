@@ -186,6 +186,7 @@ class Storage(Base):
                 blob = self.bucket.blob(blob_name)
 
                 print(str(blob.exists()))
+                print(blob_name)
 
                 if not blob.exists() or if_exists == "replace":
 
