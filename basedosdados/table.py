@@ -158,8 +158,9 @@ class Table(Base):
                     f"Table folder already exists for {self.table_id}. "
                 )
             elif if_folder_exists == "pass":
+                print("FOLDER_EXISTS_PASS")
                 return self
-
+        print("NOT_PATH AND TB_CFG_NOT_PASS")
         if not data_sample_path and if_table_config_exists != "pass":
             raise BaseDosDadosException(
                 "You must provide a path to correctly create config files"
