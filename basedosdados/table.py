@@ -140,9 +140,7 @@ class Table(Base):
             FileExistsError: If folder exists and replace is False.
             NotImplementedError: If data sample is not in supported type or format.
         """
-        print("FOlDER EXISTS:", self.dataset_folder.exists())
         if not self.dataset_folder.exists():
-            print("FILE_EXISTS_ERROR")
 
             raise FileExistsError(
                 f"Dataset folder {self.dataset_folder} folder does not exists. "
@@ -153,14 +151,12 @@ class Table(Base):
             self.table_folder.mkdir(exist_ok=(if_folder_exists == "replace"))
         except FileExistsError:
             if if_folder_exists == "raise":
-                print("FOLDER_EXISTS_RAISE")
                 raise FileExistsError(
                     f"Table folder already exists for {self.table_id}. "
                 )
             elif if_folder_exists == "pass":
-                print("FOLDER_EXISTS_PASS")
                 return self
-        print("NOT_PATH AND TB_CFG_NOT_PASS")
+
         if not data_sample_path and if_table_config_exists != "pass":
             raise BaseDosDadosException(
                 "You must provide a path to correctly create config files"
@@ -171,32 +167,12 @@ class Table(Base):
             data_sample_path,
             (
                 str,
-                PosixPath,
+                Path,
             ),
         ):
             # Check if partitioned and get data sample and partition columns
             data_sample_path = Path(data_sample_path)
 
-            print(
-                "#===============#\n",
-                "path: ",
-                str(data_sample_path),
-                "\n#================#\n",
-            )
-
-            print(
-                "#===============#\n",
-                "is_dir: ",
-                data_sample_path.is_dir(),
-                "\n#================#\n",
-            )
-
-            print(
-                "#================#\n",
-                "suffix: ",
-                data_sample_path.suffix,
-                "#================#\n",
-            )
             if data_sample_path.is_dir():
 
                 data_sample_path = [

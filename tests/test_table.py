@@ -78,8 +78,7 @@ def test_init_file_exists_error(table, metadatadir, data_path):
 
 
 def test_init_not_implemented_error(table, metadatadir, data_path):
-    wrong_path = str(Path(metadatadir / "municipios.json"))
-    with pytest.raises(NotImplementedError):
+    wrong_path = Path(metadatadir / "municipios.json")
         table.init(
             if_folder_exists="replace",
             if_table_config_exists="replace",
@@ -316,6 +315,10 @@ def test_create_if_storage_data_replace_if_table_config_replace(
 
 def test_create_if_storage_data_raise(table, metadatadir, data_path):
 
+    Storage(
+        dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir
+    ).delete_table()
+
     Storage(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir).upload(
         data_path, mode="staging", if_exists="replace"
     )
@@ -395,9 +398,6 @@ def test_update(table, metadatadir, data_path):
 
 def test_publish(table, metadatadir, sample_data, data_path):
     table.delete("all")
-    Storage(
-        dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir
-    ).delete_table(not_found_ok=True)
 
     shutil.copy(
         sample_data / "publish.sql",
