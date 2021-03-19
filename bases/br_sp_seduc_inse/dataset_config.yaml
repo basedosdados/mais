@@ -8,7 +8,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_i
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    A base contém a tabela sobre o Indicador Socioeconomico das Escolas do Estado de São Paulo, o INSE. O indicador varia de 0 a 10, sendo 10 a escola com o nível socioeconômico mais baixo e 0 a escola com nível mais alto. O INSE é calculado a partir dos questionários do SARESP. Ele considera as seguintes variáveis: grau de escolaridade dos pais; posse de bens de consumo duráveis na residência; renda familiar.  varia de 0 a 10, sendo 10 a escola com o nível socioeconômico mais baixo e 0 a escola com nível mais alto.
+    A base contém a tabela sobre o Indicador Socioeconomico das Escolas do Estado de São Paulo, o INSE. O indicador varia de 0 a 10, sendo 10 a escola com o nível socioeconômico mais baixo e 0 a escola com nível mais alto. O INSE é calculado a partir dos questionários do SARESP. Ele considera as seguintes variáveis: grau de escolaridade dos pais; posse de bens de consumo duráveis na residência; renda familiar.  
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list

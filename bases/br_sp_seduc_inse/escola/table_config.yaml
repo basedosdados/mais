@@ -16,7 +16,7 @@ last_updated: 2021-03-17 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    A tabela contém dados que caracterizam brevemente a escola e, principalmente, dados do indicador socioeconomico da escola, o INSE.  O indicador varia de 0 a 10, sendo 10 a escola com o nível socioeconômico mais baixo e 0 a escola com nível mais alto. O INSE é calculado a partir dos questionários do SARESP. Ele considera as seguintes variáveis: grau de escolaridade dos pais; posse de bens de consumo duráveis na residência; renda familiar. A tabela pode ser facilmente combinada com outras tabelas para se melhor entender como o indicador socioeconomico se relaciona com outros indicadores, como o indicador de desenvolvimento educacional e com outras marcas da escola, como o espaço geográfico onde ela está inserida.
+    A tabela contém dados que caracterizam brevemente a escola e, principalmente, dados do indicador socioeconômico da escola, o INSE.  O indicador varia de 0 a 10, sendo 10 a escola com o nível socioeconômico mais baixo e 0 a escola com nível mais alto. O INSE é calculado a partir dos questionários do SARESP. Ele considera as seguintes variáveis: grau de escolaridade dos pais, posse de bens de consumo duráveis na residência e renda familiar. A tabela pode ser facilmente combinada com outras tabelas da base para se melhor entender como o indicador socioeconômico se relaciona com outros indicadores, como o indicador de desenvolvimento educacional e com outras marcas da escola, como o espaço geográfico onde ela está inserida.
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -30,13 +30,13 @@ published_by:
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
     name: Matheus Valentim
-    code_url: 
-    website: 
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_inse/code # REQUIRED
+    website: https://githu.com/mavalentim
     email: mavalentim.b@gmail.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    O tratamento da base consistiu em alterar valores com vírgula para ponto e em harmonizar as variáveis com os nomes das otras bases da SEDUC.
+    O tratamento da base consistiu em alterar valores com vírgula para ponto e em harmonizar as variáveis com os nomes das outras bases da SEDUC.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -55,7 +55,7 @@ observation_level: #REQUIRED
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - id_escola_sp
+    - id_escola
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -98,26 +98,14 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nome_escola
-        description: Nome da Escola
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
         name: diretoria
         description: Diretoria de Ensino
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: municipio
-        description: Nome do Município
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
         name: nivel_socio_economico
-        description: Indicador de Nivel Socio Economico da Escola
+        description: Indicador de Nivel Socioeconômico da Escola
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
