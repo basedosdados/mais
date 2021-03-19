@@ -316,10 +316,6 @@ def test_create_if_storage_data_replace_if_table_config_replace(
 
 def test_create_if_storage_data_raise(table, metadatadir, data_path):
 
-    Storage(
-        dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir
-    ).delete_table()
-
     Storage(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir).upload(
         data_path, mode="staging", if_exists="replace"
     )

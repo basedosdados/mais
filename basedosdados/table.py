@@ -315,7 +315,7 @@ class Table(Base):
             path,
             (
                 str,
-                PosixPath,
+                Path,
             ),
         ):
 

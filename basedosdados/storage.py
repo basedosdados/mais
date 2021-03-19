@@ -185,9 +185,6 @@ class Storage(Base):
 
                 blob = self.bucket.blob(blob_name)
 
-                print(str(blob.exists()))
-                print(blob_name)
-
                 if not blob.exists() or if_exists == "replace":
 
                     upload_args["timeout"] = upload_args.get("timeout", None)
