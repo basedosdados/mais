@@ -4,7 +4,7 @@ import pydata_google_auth
 from google.cloud import bigquery
 import pandas as pd
 from basedosdados.base import Base
-
+from functools import partialmethod
 from basedosdados.exceptions import BaseDosDadosException
 from pandas_gbq.gbq import GenericGBQException
 
@@ -527,6 +527,7 @@ def get_table_size(
     Returns:
         None
     """
+    bigquery.Client.query = partialmethod(bigquery.Client.query, timeout=3600 * 2)
 
     billing_client = bigquery.Client(
         credentials=credentials(from_file=from_file), project=billing_project_id
