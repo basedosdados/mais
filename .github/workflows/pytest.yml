@@ -2,10 +2,9 @@ name: Python package
 
 on:
   push:
-      branches: 
-      - action_tests
-      # paths: 
-      # - '**.py'
+    paths:
+      - basedosdados/**
+    
 jobs:
   build-linux:
 
