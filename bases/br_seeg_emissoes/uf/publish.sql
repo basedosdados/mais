@@ -18,13 +18,19 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+CREATE VIEW basedosdados-dev.br_seeg_emissoes.uf AS
 SELECT 
-SAFE_CAST(matricula AS STRING) matricula,
-SAFE_CAST(nome_parlamentar AS STRING) nome_parlamentar,
-SAFE_CAST(partido AS STRING) partido,
-SAFE_CAST(servidor AS STRING) servidor,
-SAFE_CAST(cargo AS STRING) cargo,
-SAFE_CAST(lotacao AS STRING) lotacao,
-SAFE_CAST(lotacao_tipo AS STRING) lotacao_tipo,
-SAFE_CAST(regime AS STRING) regime
-from basedosdados-staging.br_sp_alesp_staging.assessores as t
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(nivel_1 AS STRING) nivel_1,
+SAFE_CAST(nivel_2 AS STRING) nivel_2,
+SAFE_CAST(nivel_3 AS STRING) nivel_3,
+SAFE_CAST(nivel_4 AS STRING) nivel_4,
+SAFE_CAST(nivel_5 AS STRING) nivel_5,
+SAFE_CAST(nivel_6 AS STRING) nivel_6,
+SAFE_CAST(tipo_emissao AS STRING) tipo_emissao,
+SAFE_CAST(gas AS STRING) gas,
+SAFE_CAST(atividade_economica AS STRING) atividade_economica,
+SAFE_CAST(produto AS STRING) produto,
+SAFE_CAST(emissao AS FLOAT64) emissao
+from basedosdados-dev.br_seeg_emissoes_staging.uf as t

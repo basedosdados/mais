@@ -11,6 +11,7 @@ import google.api_core.exceptions
 from basedosdados.base import Base
 from basedosdados.storage import Storage
 from basedosdados.dataset import Dataset
+from basedosdados.exceptions import BaseDosDadosException
 
 
 class Table(Base):
@@ -139,7 +140,6 @@ class Table(Base):
             FileExistsError: If folder exists and replace is False.
             NotImplementedError: If data sample is not in supported type or format.
         """
-
         if not self.dataset_folder.exists():
 
             raise FileExistsError(
@@ -157,16 +157,22 @@ class Table(Base):
             elif if_folder_exists == "pass":
                 return self
 
+        if not data_sample_path and if_table_config_exists != "pass":
+            raise BaseDosDadosException(
+                "You must provide a path to correctly create config files"
+            )
+
         partition_columns = []
         if isinstance(
             data_sample_path,
             (
                 str,
-                PosixPath,
+                Path,
             ),
         ):
             # Check if partitioned and get data sample and partition columns
             data_sample_path = Path(data_sample_path)
+
             if data_sample_path.is_dir():
 
                 data_sample_path = [
@@ -197,27 +203,38 @@ class Table(Base):
             columns = ["column_name"]
 
         if if_table_config_exists == "pass":
+            # Check if config files exists before passing
             if (
                 Path(self.table_folder / "table_config.yaml").is_file()
                 and Path(self.table_folder / "publish.sql").is_file()
             ):
                 pass
+            # Raise if no sample to determine columns
+            elif not data_sample_path:
+                raise BaseDosDadosException(
+                    "You must provide a path to correctly create config files"
+                )
             else:
-                raise FileExistsError(f"No config files found at {self.table_folder}")
+                self._make_template(columns, partition_columns)
+
+        elif if_table_config_exists == "raise":
+
+            # Check if config files already exist
+            if (
+                Path(self.table_folder / "table_config.yaml").is_file()
+                and Path(self.table_folder / "publish.sql").is_file()
+            ):
+
+                raise FileExistsError(
+                    f"table_config.yaml and publish.sql already exists at {self.table_folder}"
+                )
+            # if config files don't exist, create them
+            else:
+                self._make_template(columns, partition_columns)
 
         else:
-            if if_table_config_exists == "raise":
-                if (
-                    Path(self.table_folder / "table_config.yaml").is_file()
-                    and Path(self.table_folder / "publish.sql").is_file()
-                ):
-                    raise FileExistsError(
-                        f"table_config.yaml and publish.sql already exists at {self.table_folder}"
-                    )
-                else:
-                    self._make_template(columns, partition_columns)
-            if if_table_config_exists == "replace":
-                self._make_template(columns, partition_columns)
+            # Raise: without a path to data sample, should not replace config files with empty template
+            self._make_template(columns, partition_columns)
 
         return self
 
@@ -280,12 +297,25 @@ class Table(Base):
             * Implement if_table_exists=pass
         """
 
+        if path is None:
+
+            # Look if table data already exists at Storage
+            data = self.client["storage_staging"].list_blobs(
+                self.bucket_name, prefix=f"staging/{self.dataset_id}/{self.table_id}"
+            )
+
+            # Raise: Cannot create table without external data
+            if not data:
+                raise BaseDosDadosException(
+                    "You must provide a path for uploading data"
+                )
+
         # Add data to storage
         if isinstance(
             path,
             (
                 str,
-                PosixPath,
+                Path,
             ),
         ):
 
@@ -334,21 +364,32 @@ class Table(Base):
         table = bigquery.Table(self.table_full_name["staging"])
 
         table.external_data_configuration = external_config
+        # Lookup if table alreay exists
+        table_ref = None
+        try:
+            table_ref = self.client["bigquery_staging"].get_table(
+                self.table_full_name["staging"]
+            )
 
-        table_ref = self.client["bigquery_staging"].list_tables(
-            f"{self.dataset_id}_staging"
-        )
+        except google.api_core.exceptions.NotFound:
+            pass
 
-        table_names = [table.table_id for table in table_ref]
-        if self.table_id in table_names:
+        if isinstance(table_ref, google.cloud.bigquery.table.Table):
+
             if if_table_exists == "pass":
+
                 return None
+
             elif if_table_exists == "raise":
+
                 raise FileExistsError(
                     "Table already exists, choose replace if you want to overwrite it"
                 )
+
         if if_table_exists == "replace":
+
             self.delete(mode="staging")
+
         self.client["bigquery_staging"].create_table(table)
 
     def update(self, mode="all", not_found_ok=True):
@@ -376,7 +417,7 @@ class Table(Base):
                 continue
 
             table.description = self._render_template(
-                "table/table_description.txt", self.table_config
+                Path("table/table_description.txt"), self.table_config
             )
 
             # save table description
@@ -476,4 +517,8 @@ class Table(Base):
             **upload_args,
         )
 
-        self.create(if_exists="replace")
+        self.create(
+            if_table_exists="replace",
+            if_table_config_exists="pass",
+            if_storage_data_exists="pass",
+        )

@@ -256,23 +256,36 @@ class Storage(Base):
 
         if bucket_name is not None:
 
-            table_blobs = list(self.bucket(f"{bucket_name}").list_blobs(prefix=prefix))
+            table_blobs = list(
+                self.client["storage_staging"]
+                .bucket(f"{bucket_name}")
+                .list_blobs(prefix=prefix)
+            )
 
         else:
 
             table_blobs = list(self.bucket.list_blobs(prefix=prefix))
 
-        # Divides table_blobs list for maximum batch request size
-        table_blobs_chunks = [
-            table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)
-        ]
+        if table_blobs == []:
+            if not_found_ok:
+                return
+            else:
+                raise FileNotFoundError(
+                    f"Could not find the requested table {self.dataset_id}.{self.table_id}"
+                )
 
-        for source_table in table_blobs_chunks:
+        else:
+            # Divides table_blobs list for maximum batch request size
+            table_blobs_chunks = [
+                table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)
+            ]
 
-            with self.client["storage_staging"].batch():
+            for source_table in table_blobs_chunks:
 
-                for blob in source_table:
-                    blob.delete()
+                with self.client["storage_staging"].batch():
+
+                    for blob in source_table:
+                        blob.delete()
 
     def copy_table(
         self,
@@ -281,7 +294,6 @@ class Storage(Base):
         mode="staging",
     ):
         """Copies table from a source bucket to your bucket, sends request in batches.
-
 
         Args:
             source_bucket_name (str):
@@ -303,24 +315,34 @@ class Storage(Base):
             .list_blobs(prefix=f"{mode}/{self.dataset_id}/{self.table_id}/")
         )
 
-        if destination_bucket_name is None:
-
-            destination_bucket = self.bucket
+        if source_table_ref == []:
+            raise FileNotFoundError(
+                f"Could not find the requested table {self.dataset_id}.{self.table_id}"
+            )
 
         else:
 
-            destination_bucket = self.client["storage_staging"].bucket(
-                destination_bucket_name
-            )
+            if destination_bucket_name is None:
 
-        # Divides source_table_ref list for maximum batch request size
-        source_table_ref_chunks = [
-            source_table_ref[i : i + 999] for i in range(0, len(source_table_ref), 999)
-        ]
+                destination_bucket = self.bucket
 
-        for source_table in source_table_ref_chunks:
+            else:
 
-            with self.client["storage_staging"].batch():
+                destination_bucket = self.client["storage_staging"].bucket(
+                    destination_bucket_name
+                )
 
-                for blob in source_table:
-                    self.bucket.copy_blob(blob, destination_bucket=destination_bucket)
+            # Divides source_table_ref list for maximum batch request size
+            source_table_ref_chunks = [
+                source_table_ref[i : i + 999]
+                for i in range(0, len(source_table_ref), 999)
+            ]
+
+            for source_table in source_table_ref_chunks:
+
+                with self.client["storage_staging"].batch():
+
+                    for blob in source_table:
+                        self.bucket.copy_blob(
+                            blob, destination_bucket=destination_bucket
+                        )

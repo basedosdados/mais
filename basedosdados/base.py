@@ -146,7 +146,9 @@ class Base:
 
             # Load config file
             c_file = tomlkit.parse(
-                (Path(__file__).parent / "configs/config.toml").open("r", encoding='utf-8').read()
+                (Path(__file__).parent / "configs" / "config.toml")
+                .open("r", encoding="utf-8")
+                .read()
             )
 
             input(
@@ -176,7 +178,7 @@ class Base:
 
             ############# STEP 2 - CREDENTIALS PATH #######################
 
-            credentials_path = Path.home() / ".basedosdados/credentials"
+            credentials_path = Path.home() / ".basedosdados" / "credentials"
             credentials_path = Path(
                 self._selection_yn(
                     first_question=(
@@ -246,28 +248,30 @@ class Base:
 
             ############# STEP 6 - SET TEMPLATES #######################
 
-            c_file["templates_path"] = f"{Path.home()}/.basedosdados/templates"
+            c_file["templates_path"] = str(Path.home() / ".basedosdados" / "templates")
 
-            config_file.open("w", encoding='utf-8').write(tomlkit.dumps(c_file))
+            config_file.open("w", encoding="utf-8").write(tomlkit.dumps(c_file))
 
     def _load_config(self):
 
         return tomlkit.parse(
-            (Path.home() / ".basedosdados" / "config.toml").open("r", encoding='utf-8').read()
+            (Path.home() / ".basedosdados" / "config.toml")
+            .open("r", encoding="utf-8")
+            .read()
         )
 
     def _load_yaml(self, file):
 
         try:
-            return yaml.load(open(file, "r", encoding='utf-8'), Loader=yaml.SafeLoader)
+            return yaml.load(open(file, "r", encoding="utf-8"), Loader=yaml.SafeLoader)
         except FileNotFoundError:
             return None
 
     def _render_template(self, template_file, kargs):
 
-        return Template((self.templates / template_file).open("r", encoding='utf-8').read()).render(
-            **kargs
-        )
+        return Template(
+            (self.templates / template_file).open("r", encoding="utf-8").read()
+        ).render(**kargs)
 
     def _check_mode(self, mode):
         ACCEPTED_MODES = ["all", "staging", "prod", "raw"]

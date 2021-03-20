@@ -12,45 +12,65 @@ diferentes aspectos da sociedade e é a partir disso que podemos começar
 a elaborar soluções e iniciativas para um desenvolvimento mais
 democrático.
 
-_Qual será a sua colaboração?_ Produza uma análise a partir dos dados
-disponíveis na BD+ sobre como podemos identificar ou combater desigualdades
-no Brasil.
+Por isso, inspirados(as) no tema do Open Data Day 2021, 
+resolvemos abrir espaço para programadores, jornalistas, 
+pesquisadores e entusiastas de dados pensarem conosco **como podemos
+identificar ou combater desigualdades no Brasil a partir de dados
+públicos**.
 
-Você pode participar sozinho ou com sua equipe! Nosso time de
-assistentes de dados estará disponível durante toda a semana para prestar suporte a você e/ou sua equipe.
+E como começar? Nós demos o ponto de partida: a partir das mais de 30
+bases públicas que disponibilizamos tratadas e integradas para uso da
+sociedade no nosso [*datalake* público
+(BD+)](https://basedosdados.org/dataset/?download_type=BD+Mais). 
+Recebemos ao todo mais de 30 inscrições de diferentes públicos,
+agradecemos a participação de todas e todos!
 
-**Inscrições abertas até 6/mar às 23:59:**
-[https://forms.gle/k1ux95S5zR6oJ5RL8](https://forms.gle/k1ux95S5zR6oJ5RL8)
+**⚠️ Nenhuma das análises tem a intenção de trazer
+evidências rigorosamente testadas 
+sobre os temas abordados, mas sim explorar e abrir possíveis caminhos para
+pensarmos os mesmos.**
 
-## Resultados
+### E os(as) vencedores(as) são...
 
-As 5 melhores análises serão premiadas com a publicação em:
+**UFRJ Analytica**
 
-- Nosso GitHub
-- Redes sociais
-- Newsletter
-- Neste site
+Equipe: Erica Ferreira, Pedro Boechat, Pedro Borges e Rafael
+Ribeiro (graduandos e analistas/cientistas de dados)
 
-### Entrega
+**Análise: De que forma diferenças no acesso a uma educação de qualidade se
+manifestam em diferentes regiões do país?**
 
-O formato de entrega deve ser em: painel (DataStudio ou outro de sua
-preferência) ou relatório; vídeo explicativo da análise de
-5 a 10 minutos com upload no Youtube; e código em repositório aberto no Github.
+Para entender melhor sobre essa e outras perguntas levantadas quanto à
+qualidade de ensino e investimento em educação, eles utilizaram ao todo
+4 bases disponibilizadas na BD+: [Atlas do Desenvolvimento Humano
+(ADH)](https://basedosdados.org/dataset/mundo-onu-adh), [Índice
+de Desenvolvimento da Educação Básica
+(Ideb)](https://basedosdados.org/dataset/br-inep-ideb), [Finanças do
+Brasil (Finbra)](https://basedosdados.org/dataset/br-tesouro-finbra) e
+nossa base de [diretórios
+brasileiros](https://basedosdados.org/dataset/br-bd-diretorios-brasil),
+que liga diferentes identificações para municípios, estados e regiões do país.
 
-**As respostas serão aceitas até dia 11/mar (quinta) às 23:59 e devem
-ser enviadar através do link:
-[https://forms.gle/4MHpJaJXnH2UB9Dd7](https://forms.gle/4MHpJaJXnH2UB9Dd7)**
+**[➡️ Confira a análise completa aqui](https://medium.com/ufrj-analytica/datathon-open-data-day-base-dos-dados-86079c93945f)**
 
-Os resultados serão divulgados no sábado, dia 13/mar, através das nossas
-redes sociais. Fique atento(a)! 👀
+**[💻 Confira o código utilizado](https://github.com/UFRJ-Analytica/odd2021)**
 
-### Sistema de pontuação
+---
 
-| | |
-| --- | ---- |
-| Criatividade (ideias e analises originais) | 20 pts
-| Dados BD+ (uso de dados do BQ) | 20 pts
-| Simplicidade (análises de fácil interpretação) | 20 pts
-| Clareza (documentação, texto, código no Github) | 20 pts
-| Impacto (temática abordada, referencias) | 20 pts
-| TOTAL | 100 pts |
+**Felipe Macedo Dias** (graduando em Economia na USP)
+
+**Análise: A inflação foi maior em municípios mais beneficiados pelo
+Auxílio Emergencial?**
+
+O auxílio emergencial foi um grande tema socioeconômico no contexto de pandemia no
+país, trazendo o debate também para sua permanência em momentos
+posteriores. Felipe buscou uma explorar essa questão incialmente
+observando as capitais: existe alguma correlação entre o
+aumento dos preços, com um maior nível de consumo, e a incidência do
+auxílio nas capitais? Para isso, se utilizou das bases de [população
+estimada do IBGE](https://basedosdados.org/dataset/br-ibge-populacao), [Produto Interno Bruto (PIB)](https://basedosdados.org/dataset/br-ibge-pib) e [dados do auxílio
+emergencial por município](https://basedosdados.org/dataset/br-mc-auxilio-emergencial).
+
+**[➡️ Confira a análise completa aqui](https://datastudio.google.com/s/lrVkgDD_URc)**
+
+**[💻 Confira o código utilizado](https://github.com/UFRJ-Analytica/odd2021)**
