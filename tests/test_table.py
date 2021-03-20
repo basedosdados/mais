@@ -78,12 +78,9 @@ def test_init_file_exists_error(table, metadatadir, data_path):
 
 
 def test_init_not_implemented_error(table, metadatadir, data_path):
-    wrong_path = Path(metadatadir / "municipios.json")
     with pytest.raises(NotImplementedError):
         table.init(
-            if_folder_exists="replace",
-            if_table_config_exists="replace",
-            data_sample_path=wrong_path,
+            if_folder_exists="replace", data_sample_path=metadatadir / "municipios.json"
         )
 
 
@@ -253,7 +250,7 @@ def test_create_if_table_exists_raise(table, metadatadir, data_path):
 def test_create_with_path(table, metadatadir, data_path, sample_data):
 
     table.delete("all")
-    Storage(DATASET_ID, TABLE_ID).delete_table(not_found_ok=True)
+    Storage(DATASET_ID, TABLE_ID).delete_table()
     shutil.rmtree(metadatadir / DATASET_ID / TABLE_ID, ignore_errors=True)
 
     table.create(
@@ -298,7 +295,7 @@ def test_create_with_upload(table, metadatadir, data_path):
 
     table.delete("all")
 
-    Storage(DATASET_ID, TABLE_ID).delete_table(not_found_ok=True)
+    Storage(DATASET_ID, TABLE_ID).delete_table()
 
     table.create(data_path, if_table_config_exists="replace")
     assert table_exists(table, mode="staging")
@@ -311,20 +308,14 @@ def test_create_if_storage_data_replace_if_table_config_replace(
     table.create(
         data_path, if_storage_data_exists="replace", if_table_config_exists="replace"
     )
-    assert table_exists(table, mode="staging")
 
 
 def test_create_if_storage_data_raise(table, metadatadir, data_path):
-
-    Storage(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir).upload(
-        data_path, mode="staging", if_exists="replace"
-    )
-
     with pytest.raises(Exception):
         table.create(
             data_path,
-            if_table_exists="replace",
-            if_table_config_exists="replace",
+            if_table_exists="pass",
+            if_table_config_exists="pass",
             if_storage_data_exists="raise",
         )
 
@@ -395,6 +386,9 @@ def test_update(table, metadatadir, data_path):
 
 def test_publish(table, metadatadir, sample_data, data_path):
     table.delete("all")
+    Storage(
+        dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir
+    ).delete_table(not_found_ok=True)
 
     shutil.copy(
         sample_data / "publish.sql",

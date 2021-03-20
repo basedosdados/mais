@@ -248,7 +248,7 @@ class Base:
 
             ############# STEP 6 - SET TEMPLATES #######################
 
-            c_file["templates_path"] = str(Path.home() / ".basedosdados" / "templates")
+            c_file["templates_path"] = Path.home() / ".basedosdados" / "templates"
 
             config_file.open("w", encoding="utf-8").write(tomlkit.dumps(c_file))
 

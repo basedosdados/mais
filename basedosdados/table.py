@@ -140,6 +140,7 @@ class Table(Base):
             FileExistsError: If folder exists and replace is False.
             NotImplementedError: If data sample is not in supported type or format.
         """
+
         if not self.dataset_folder.exists():
 
             raise FileExistsError(
@@ -167,12 +168,11 @@ class Table(Base):
             data_sample_path,
             (
                 str,
-                Path,
+                PosixPath,
             ),
         ):
             # Check if partitioned and get data sample and partition columns
             data_sample_path = Path(data_sample_path)
-
             if data_sample_path.is_dir():
 
                 data_sample_path = [
@@ -315,7 +315,7 @@ class Table(Base):
             path,
             (
                 str,
-                Path,
+                PosixPath,
             ),
         ):
 
