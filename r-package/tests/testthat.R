@@ -1,4 +1,4 @@
 library(testthat)
 library(basedosdados)
 
-test_check("basedosdados")
+test_local("basedosdados")
