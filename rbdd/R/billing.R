@@ -4,23 +4,31 @@
 #'
 #' @description
 #'
-#' As of now it appeals to global state and _should_ work, but it's technical debt.
-#' Memoisation is the way to go and shouldn't be too hard to implement.
+#' Retrieves the project's billing Id.
 #'
 #' @import rlang
-#'
+#' @export
 #'
 #'
 
 get_billing_id <- function() {
 
+  id <- Sys.getenv("billing_project_id")
+
   if(Sys.getenv("billing_project_set") == FALSE) {
 
-    return(NULL)
+    rlang::inform(
+      "No Billing Project Id set. You can set it as an enviroment variable under ´billing_project_id´ and restart the session or run basedosdados::set_billing_id.")
+    return(FALSE)
 
-  } else {
+  } else if(Sys.getenv("billing_project_set") == "env") {
 
-    return(Sys.getenv("billing_project_id"))
+    rlang::inform("Fecthing Billing Project Id from enviroment variables.")
+    return(id)
+
+  } else if(Sys.getenv("billing_project_set") == TRUE) {
+
+    return(id)
 
   }
 
@@ -44,10 +52,15 @@ get_billing_id <- function() {
 #'
 #'
 #' set_billing_id("my_billing_project_id")
+#'
 #' # or load from an .env file
+#'
 #' library(dotenv)
+#'
 #' load_dot_env("keys.env")
-#' set_billing_id(Sys.getenv("name of the appropriate variable here"))
+#' print(Sys.getenv("billing_project_id"))
+#'
+#' set_billing_id(Sys.getenv("billing_project_id"))
 #'
 
 set_billing_id <- function(billing_project_id) {
@@ -56,15 +69,11 @@ set_billing_id <- function(billing_project_id) {
 
     rlang::abort("`billing_project_id` must be a 1-length character vector.")
 
-  }
-
-  if(length(billing_project_id) > 1) {
+  } else if(length(billing_project_id) > 1) {
 
     rlang::abort("`billing_project_id` must have length 1.")
 
-  }
-
-  if(!rlang::is_vector(billing_project_id)) {
+  } else if(!rlang::is_vector(billing_project_id)) {
 
     rlang::abort("Invalid data for `billing_project_id`.")
 

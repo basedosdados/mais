@@ -1,6 +1,6 @@
 Package: basedosdados
 Title: Cliente em R para o Base dos Dados
-Version: 0.0.0.9000
+Version: 0.0.3
 Authors@R: 
     person(given = "Pedro",
            family = "Cavalcante",
@@ -22,3 +22,6 @@ Imports:
     googleAuthR,
     cli,
     magrittr
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

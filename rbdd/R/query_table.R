@@ -1,12 +1,12 @@
 
 #'
-#' Bare custom R-centric query
+#' Highly opinionated approach to querying - not exposed to end users, only internal
 #' @param table1 string containing the main table to be queried
 #' @param table2 string containing an optional table to be joined
-#'
-#'
-#'
-#'
+#' @param join a join specification. Acceptable values are `left`, `right`, `inner` and `full`.
+#' @param keys a 2-length vector containing strings with names of, respectively, `table1`'s foreign key and `table2`'s foreign key.
+#' @param page_size `bigrquery` internal.
+#' @param billing_project_id
 #'
 #' @examples
 #'
@@ -15,17 +15,22 @@
 #'   pib.PIB,
 #'   table1 = "basedosdados.br_ibge_pib.municipios as pib")
 #'
+#' @import rlang
+#' @import purrr
+#' @import glue
+#'
 #'
 
 query_table <- function(
   ...,
-  table1 = NULL,
+  table1,
   table2 = NULL,
   join = NULL,
   keys = NULL,
-  page_size = 500) {
+  page_size = 500,
+  billing_project_id = get_billing_id()) {
 
-  if(rlang::is_null(table1)) rlang::abort(glue::glue('Provide a valid `table1` argument.'))
+
 
   if(!rlang::is_null(table2) & rlang::is_null(join)) {
 
@@ -51,7 +56,6 @@ query_table <- function(
 
   if(!rlang::is_null(table2)) {
 
-
     second_table_query <- glue::glue(
       "
       {toupper(join)} ON
@@ -66,11 +70,8 @@ query_table <- function(
 
   query <- paste0(single_table_query, second_table_query)
 
-  # a função como está supõe que o usuário está autenticado no bigrquery
-  # mas ele está? como garantir isso?
-
   bigrquery::bq_table_download(
-    x = bigrquery::bq_project_query("basedosdados", query),
+    x = bigrquery::bq_project_query(billing_project_id, query),
     page_size = page_size)
 
 }

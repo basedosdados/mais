@@ -6,7 +6,19 @@
 #' @imports cli
 
 
-.onLoad <- function() {
+.onLoad <- function(libname, pkgname) {
+
+
+  if(Sys.getenv("billing_project_id") == "") {
+
+    Sys.setenv(billing_project_set = FALSE)
+
+  } else {
+
+    Sys.setenv(billing_project_set = "env")
+
+  }
+
 
   Sys.setenv(billing_project_set = FALSE)
 
