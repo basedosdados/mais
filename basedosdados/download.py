@@ -24,7 +24,7 @@ def credentials(from_file=False, reauth=False):
             return pydata_google_auth.get_user_credentials(
                 SCOPES, credentials_cache=pydata_google_auth.cache.REAUTH
             )
-        else:
+        else: 
             return pydata_google_auth.get_user_credentials(
                 SCOPES,
             )
