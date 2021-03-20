@@ -3,25 +3,31 @@ from pathlib import Path
 import pydata_google_auth
 from google.cloud import bigquery
 import pandas as pd
-
+from basedosdados.base import Base
+from functools import partialmethod
 from basedosdados.exceptions import BaseDosDadosException
 from pandas_gbq.gbq import GenericGBQException
 
 
-def credentials(reauth=False):
+def credentials(from_file=False, reauth=False):
 
     SCOPES = [
         "https://www.googleapis.com/auth/cloud-platform",
     ]
 
-    if reauth:
-        return pydata_google_auth.get_user_credentials(
-            SCOPES, credentials_cache=pydata_google_auth.cache.REAUTH
-        )
+    if from_file:
+        return Base()._load_credentials(mode="prod")
+
     else:
-        return pydata_google_auth.get_user_credentials(
-            SCOPES,
-        )
+
+        if reauth:
+            return pydata_google_auth.get_user_credentials(
+                SCOPES, credentials_cache=pydata_google_auth.cache.REAUTH
+            )
+        else:
+            return pydata_google_auth.get_user_credentials(
+                SCOPES,
+            )
 
 
 def download(
@@ -32,6 +38,7 @@ def download(
     query_project_id="basedosdados",
     billing_project_id=None,
     limit=None,
+    from_file=False,
     reauth=False,
     **pandas_kwargs,
 ):
@@ -94,13 +101,19 @@ def download(
             billing_project_id=billing_project_id,
             limit=limit,
             reauth=reauth,
+            from_file=from_file,
         )
 
     elif query is not None:
 
         query += f" limit {limit}" if limit is not None else ""
 
-        table = read_sql(query, billing_project_id=billing_project_id, reauth=reauth)
+        table = read_sql(
+            query,
+            billing_project_id=billing_project_id,
+            from_file=from_file,
+            reauth=reauth,
+        )
 
     elif query is None:
         raise BaseDosDadosException(
@@ -116,7 +129,7 @@ def download(
     table.to_csv(savepath, **pandas_kwargs)
 
 
-def read_sql(query, billing_project_id=None, reauth=False):
+def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
     """Load data from BigQuery using a query. Just a wrapper around pandas.read_gbq
 
     Args:
@@ -135,7 +148,7 @@ def read_sql(query, billing_project_id=None, reauth=False):
     try:
         return pandas_gbq.read_gbq(
             query,
-            credentials=credentials(reauth=reauth),
+            credentials=credentials(from_file=from_file, reauth=reauth),
             project_id=billing_project_id,
         )
     except (OSError, ValueError):
@@ -179,6 +192,7 @@ def read_table(
     query_project_id="basedosdados",
     billing_project_id=None,
     limit=None,
+    from_file=False,
     reauth=False,
 ):
     """Load data from BigQuery using dataset_id and table_id.
@@ -214,7 +228,9 @@ def read_table(
     else:
         raise BaseDosDadosException("Both table_id and dataset_id should be filled.")
 
-    return read_sql(query, billing_project_id=billing_project_id, reauth=reauth)
+    return read_sql(
+        query, billing_project_id=billing_project_id, from_file=from_file, reauth=reauth
+    )
 
 
 def _get_header(text):
@@ -272,6 +288,7 @@ def list_datasets(
     query_project_id="basedosdados",
     filter_by=None,
     with_description=False,
+    from_file=False,
 ):
     """Fetch the dataset_id of datasets available at query_project_id. Prints information on
     screen.
@@ -294,7 +311,9 @@ def list_datasets(
         None.
     """
 
-    client = bigquery.Client(credentials=credentials(), project=query_project_id)
+    client = bigquery.Client(
+        credentials=credentials(from_file=from_file), project=query_project_id
+    )
 
     datasets_list = list(client.list_datasets())
 
@@ -321,6 +340,7 @@ def list_datasets(
 def list_dataset_tables(
     dataset_id,
     query_project_id="basedosdados",
+    from_file=False,
     filter_by=None,
     with_description=False,
 ):
@@ -346,7 +366,9 @@ def list_dataset_tables(
     Returns:
         None.
     """
-    client = bigquery.Client(credentials=credentials(), project=query_project_id)
+    client = bigquery.Client(
+        credentials=credentials(from_file=from_file), project=query_project_id
+    )
 
     dataset = client.get_dataset(dataset_id)
 
@@ -372,7 +394,9 @@ def list_dataset_tables(
     return None
 
 
-def get_dataset_description(dataset_id=None, query_project_id="basedosdados"):
+def get_dataset_description(
+    dataset_id=None, query_project_id="basedosdados", from_file=False
+):
     """Prints the full dataset description.
 
     Args:
@@ -385,7 +409,9 @@ def get_dataset_description(dataset_id=None, query_project_id="basedosdados"):
         None.
     """
 
-    client = bigquery.Client(credentials=credentials(), project=query_project_id)
+    client = bigquery.Client(
+        credentials=credentials(from_file=from_file), project=query_project_id
+    )
 
     dataset = client.get_dataset(dataset_id)
 
@@ -395,7 +421,10 @@ def get_dataset_description(dataset_id=None, query_project_id="basedosdados"):
 
 
 def get_table_description(
-    dataset_id=None, table_id=None, query_project_id="basedosdados"
+    dataset_id=None,
+    table_id=None,
+    query_project_id="basedosdados",
+    from_file=False,
 ):
     """Prints the full table description.
 
@@ -412,7 +441,9 @@ def get_table_description(
         None.
     """
 
-    client = bigquery.Client(credentials=credentials(), project=query_project_id)
+    client = bigquery.Client(
+        credentials=credentials(from_file=from_file), project=query_project_id
+    )
 
     table = client.get_table(f"{dataset_id}.{table_id}")
 
@@ -425,6 +456,7 @@ def get_table_columns(
     dataset_id=None,
     table_id=None,
     query_project_id="basedosdados",
+    from_file=False,
 ):
 
     """Fetch the names, types and descriptions for the columns in the specified table. Prints
@@ -447,7 +479,9 @@ def get_table_columns(
         None.
     """
 
-    client = bigquery.Client(credentials=credentials(), project=query_project_id)
+    client = bigquery.Client(
+        credentials=credentials(from_file=from_file), project=query_project_id
+    )
 
     table_ref = client.get_table(f"{dataset_id}.{table_id}")
 
@@ -467,6 +501,7 @@ def get_table_size(
     table_id,
     billing_project_id,
     query_project_id="basedosdados",
+    from_file=False,
 ):
     """Use a query to get the number of rows and size (in Mb) of a table query
     from BigQuery. Prints information on screen in markdown friendly format.
@@ -492,9 +527,8 @@ def get_table_size(
     Returns:
         None
     """
-
     billing_client = bigquery.Client(
-        credentials=credentials(), project=billing_project_id
+        credentials=credentials(from_file=from_file), project=billing_project_id
     )
 
     query = f"""SELECT COUNT(*) FROM {query_project_id}.{dataset_id}.{table_id}"""

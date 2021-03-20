@@ -1,7 +1,7 @@
 wheel
-google-cloud-bigquery==1.28.0
-google-cloud-storage==1.31.2
-google-cloud-bigquery-storage==1.1.0
+google-cloud-bigquery
+google-cloud-storage
+google-cloud-bigquery-storage
 pyaml==20.4.0
 Jinja2==2.11.2
 tomlkit==0.7.0

@@ -267,9 +267,12 @@ class Storage(Base):
             table_blobs = list(self.bucket.list_blobs(prefix=prefix))
 
         if table_blobs == []:
-            raise FileNotFoundError(
-                f"Could not find the requested table {self.dataset_id}.{self.table_id}"
-            )
+            if not_found_ok:
+                return
+            else:
+                raise FileNotFoundError(
+                    f"Could not find the requested table {self.dataset_id}.{self.table_id}"
+                )
 
         else:
             # Divides table_blobs list for maximum batch request size
