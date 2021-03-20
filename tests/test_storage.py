@@ -13,12 +13,46 @@ TABLE_FILES = ["publish.sql", "table_config.yaml"]
 
 @pytest.fixture
 def metadatadir(tmpdir_factory):
-    return "tests/tmp_bases/"
+    return Path("tests") / "tmp_bases"
 
 
 @pytest.fixture
 def storage(metadatadir):
     return Storage(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir)
+
+
+def test_upload(storage, metadatadir):
+
+    storage.delete_file("municipios.csv", "staging", not_found_ok=True)
+
+    storage.upload(metadatadir / "municipios.csv", mode="staging")
+
+    with pytest.raises(Exception):
+        storage.upload(metadatadir / "municipios.csv", mode="staging")
+
+    storage.upload(metadatadir / "municipios.csv", mode="staging", if_exists="replace")
+
+    storage.upload(
+        metadatadir / "municipios.csv",
+        mode="staging",
+        if_exists="replace",
+        partitions="key1=value1/key2=value2",
+    )
+
+    storage.upload(
+        metadatadir / "municipios.csv",
+        mode="staging",
+        if_exists="replace",
+        partitions={"key1": "value1", "key2": "value1"},
+    )
+
+    with pytest.raises(Exception):
+        storage.upload(
+            metadatadir / "municipios.csv",
+            mode="staging",
+            if_exists="replace",
+            partitions=["key1", "value1", "key2", "value1"],
+        )
 
 
 def test_delete_file(storage):
@@ -31,37 +65,21 @@ def test_delete_file(storage):
     storage.delete_file("municipios.csv", "staging", not_found_ok=True)
 
 
-def test_upload(storage):
+def test_copy_table(storage):
 
-    storage.delete_file("municipios.csv", "staging", not_found_ok=True)
+    Storage("br_ibge_pib", "municipios").copy_table()
 
-    storage.upload("tests/sample_data/municipios.csv", mode="staging")
+    with pytest.raises(FileNotFoundError):
+        Storage("br_ibge_pib2", "municipios2").copy_table()
 
-    with pytest.raises(Exception):
-        storage.upload("tests/sample_data/municipios.csv", mode="staging")
-
-    storage.upload(
-        "tests/sample_data/municipios.csv", mode="staging", if_exists="replace"
+    Storage("br_ibge_pib", "municipios").copy_table(
+        destination_bucket_name="basedosdados-dev",
     )
 
-    storage.upload(
-        "tests/sample_data/municipios.csv",
-        mode="staging",
-        if_exists="replace",
-        partitions="key1=value1/key2=value2",
-    )
 
-    storage.upload(
-        "tests/sample_data/municipios.csv",
-        mode="staging",
-        if_exists="replace",
-        partitions={"key1": "value1", "key2": "value1"},
-    )
+def test_delete_table(storage):
 
-    with pytest.raises(Exception):
-        storage.upload(
-            "tests/sample_data/municipios.csv",
-            mode="staging",
-            if_exists="replace",
-            partitions=["key1", "value1", "key2", "value1"],
-        )
+    Storage("br_ibge_pib", "municipios").delete_table(bucket_name="basedosdados-dev")
+
+    with pytest.raises(FileNotFoundError):
+        Storage("br_ibge_pib", "municipios").delete_table()

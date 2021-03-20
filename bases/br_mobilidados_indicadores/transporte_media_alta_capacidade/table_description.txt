@@ -1,0 +1,49 @@
+Percentual de estações de transporte de média e alta capacidade na área de cobertura da infraestrutura cicloviária.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-mobilidados-indicadores
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Crislane A. Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores/code
+Website: https://github.com/crislanealves
+Email: crislanealves@protonmail.comTratado por
+-----------
+Nome: Crislane A. Souza
+Website: https://github.com/crislanealves
+Email: crislanealves@protonmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- municipio
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
+- ano
+
+Cobertura Temporal
+------------------
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+- BA, CE, DF, MG, PA, PE, PR, RJ, SP
+
+Tratamento
+----------
+- Criação da coluna 'Ano'.
+
+Frequencia de Atualização
+-------------------------
+recorrente
+
+
