@@ -6,7 +6,7 @@
 #'
 #' Retrieves the project's billing Id.
 #'
-#' @import rlang
+#' @importFrom rlang inform
 #' @export
 #'
 #'
@@ -18,7 +18,7 @@ get_billing_id <- function() {
   if(Sys.getenv("billing_project_set") == FALSE) {
 
     rlang::inform(
-      "No Billing Project Id set. You can set it as an enviroment variable under ´billing_project_id´ and restart the session or run basedosdados::set_billing_id.")
+      "No Billing Project Id set. You can set it as an enviroment variable under billing_project_id and restart the session or run basedosdados::set_billing_id.")
     return(FALSE)
 
   } else if(Sys.getenv("billing_project_set") == "env") {
@@ -41,7 +41,7 @@ get_billing_id <- function() {
 #' Define your project billing ids here so all your queries are authenticated and return data, not errors.
 #' If using in production or leaving code available at public repositories, `dotenv` is highly recommended.
 #'
-#' @import rlang
+#' @importFrom rlang abort is_character inform
 #'
 #' @export
 #'
@@ -50,7 +50,7 @@ get_billing_id <- function() {
 #'
 #' @examples
 #'
-#'
+#' \dontrun{
 #' set_billing_id("my_billing_project_id")
 #'
 #' # or load from an .env file
@@ -61,6 +61,8 @@ get_billing_id <- function() {
 #' print(Sys.getenv("billing_project_id"))
 #'
 #' set_billing_id(Sys.getenv("billing_project_id"))
+#'
+#' }
 #'
 
 set_billing_id <- function(billing_project_id) {

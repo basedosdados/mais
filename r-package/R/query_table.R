@@ -1,23 +1,29 @@
 
 #'
 #' Highly opinionated approach to querying - not exposed to end users, only internal
+#' @param ... comma-separated pairs of `<table_name>.<variable_name>`
 #' @param table1 string containing the main table to be queried
 #' @param table2 string containing an optional table to be joined
 #' @param join a join specification. Acceptable values are `left`, `right`, `inner` and `full`.
 #' @param keys a 2-length vector containing strings with names of, respectively, `table1`'s foreign key and `table2`'s foreign key.
 #' @param page_size `bigrquery` internal.
-#' @param billing_project_id
+#' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
 #'
 #' @examples
 #'
+#'
+#' \dontrun{
 #' query_table(
 #'   pib.id_municipio,
 #'   pib.PIB,
 #'   table1 = "basedosdados.br_ibge_pib.municipios as pib")
 #'
-#' @import rlang
-#' @import purrr
-#' @import glue
+#'   }
+#'
+#' @importFrom rlang ensyms is_null
+#' @importFrom purrr map reduce
+#' @importFrom glue glue
+#' @import bigrquery
 #'
 #'
 
@@ -29,8 +35,6 @@ query_table <- function(
   keys = NULL,
   page_size = 500,
   billing_project_id = get_billing_id()) {
-
-
 
   if(!rlang::is_null(table2) & rlang::is_null(join)) {
 

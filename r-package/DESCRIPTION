@@ -1,27 +1,32 @@
 Package: basedosdados
-Title: Cliente em R para o Base dos Dados
+Title: Base dos Dados' R client
 Version: 0.0.3
 Authors@R: 
     person(given = "Pedro",
            family = "Cavalcante",
            role = c("aut", "cre"),
            email = "pedrocolrj@gmail.com")
-Description: Cliente em R para a Base dos Dados.
+Description: A R client for Base dos Dados' API. Authenticate your project, query our tables, save data to disk and memory, all from R.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
-    bigrquery,
     purrr,
     dplyr,
     tibble,
-    glue,
     httr,
     googleAuthR,
     cli,
-    magrittr
+    magrittr,
+    readr,
+    stringr,
+    dotenv,   
+    bigrquery,
+    glue,   
+    rlang,
+    writexl
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

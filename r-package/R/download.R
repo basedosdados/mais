@@ -5,11 +5,13 @@
 #' @param query a string containing a valid SQL query.
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
 #' @param page_size `bigrquery` internal, how many rows per page should there be.
-#' @param path String with the output file name. If running an R Project relative location can be provided. Passed to `readr::write_csv`'s `file` argument.
+#' @param path String with the output file's name. If running an R Project relative location can be provided. Passed to `readr::write_csv`'s `file` argument.
 #' @return Invisibly returns the provided filename and triggers it's writing to disk as side-effect.
-#' @details Currently there's only support for UTF-8 encoding. Users needing more control over writing should use `read_sql` to get the data in memory and use custom code from there.
+#' @details Currently there's only support for UTF-8 encoding. Users needing more control over writing should use `read_sql` to get the data in memory and custom code from there.
 #' @examples
 #'
+#'
+#' \dontrun{
 #' query <- "SELECT
 #' pib.id_municipio,
 #' pop.ano,
@@ -20,13 +22,14 @@
 #' LIMIT 5 "
 #'
 #' data <- download(query, "pip_per_capita_municipios.csv")
-#'
+#' }
 #'
 #'
 #' @import bigrquery
-#' @import readr
-#' @import rlang
-#' @import dplyr
+#' @importFrom readr write_csv
+#' @importFrom rlang abort
+#' @importFrom magrittr %>%
+#' @importFrom stringr str_detect
 #' @export
 #'
 #'
@@ -71,6 +74,7 @@ download <- function(
 #'
 #' @examples
 #'
+#' \dontrun{
 #' query <- "SELECT
 #' pib.id_municipio,
 #' pop.ano,
@@ -89,9 +93,11 @@ download <- function(
 #' write_xlsx(data, "data.xlsx")
 #' write_csv(data, "data.csv")
 #'
+#'}
+#'
 #' @import bigrquery
-#' @import rlang
-#' @import magrittr
+#' @importFrom rlang abort is_character
+#' @importFrom magrittr %>%
 #' @export
 #'
 
