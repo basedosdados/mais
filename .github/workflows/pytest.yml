@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - python-package/**
+      - .github/workflows/pytest.yml
+      - .github/workflows/setup-env*
     
 jobs:
   build-linux:
