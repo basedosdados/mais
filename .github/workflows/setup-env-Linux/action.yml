@@ -5,15 +5,11 @@ author: "Base dos Dados"
 runs: 
   using: composite
   steps:
-    - run: echo "=============================******************requirements-dev.txt******************============================="
-      shell: bash
     - run: pip install --upgrade -r ${{ github.workspace }}/python-package/requirements-dev.txt 
       shell: bash
     - run: echo "=============================******************list******************============================="
       shell: bash
-    - run: ls -al ${{ github.workspace }}/python-package/
-      shell: bash
-    - run: echo "=============================******************setup.py******************============================="
+    - run: ls -al /home/runner/work/mais/mais
       shell: bash
     - run: python ${{ github.workspace }}/python-package/setup.py develop
       shell: bash
