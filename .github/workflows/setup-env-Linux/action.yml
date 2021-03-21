@@ -7,19 +7,15 @@ runs:
   steps:
     - run: echo "=============================******************requirements-dev.txt******************============================="
       shell: bash
-    - run: cd ${{ github.workspace }}
+    - run: pip install --upgrade -r ${{ github.workspace }}/python-package/requirements-dev.txt 
       shell: bash
-    - run: pip install --upgrade -r python-package/requirements-dev.txt 
+    - run: echo "=============================******************list******************============================="
       shell: bash
-    - run: echo "=============================******************list files******************============================="
-      shell: bash
-    - run: ls -al
+    - run: ls -al ${{ github.workspace }}/python-package/
       shell: bash
     - run: echo "=============================******************setup.py******************============================="
       shell: bash
-    - run: cd ${{ github.workspace }}
-      shell: bash
-    - run: python python-package/setup.py develop
+    - run: python ${{ github.workspace }}/python-package/setup.py develop
       shell: bash
     - run: basedosdados --help
       shell: bash
