@@ -36,10 +36,10 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Padronização dos nomes das colunas.
-    Exclusão das colunas Região, Nome do Município e UF.
-    Palavras sem acento e minúsculas.
-    Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
+    - Padronização dos nomes das colunas.
+    - Exclusão das colunas Região, Nome do Município e UF.
+    - Palavras sem acento e minúsculas.
+    - Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -52,8 +52,10 @@ data_update_frequency: 1 ano # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - regiao
     - ano
+    - regiao
+    - localizacao
+    - rede
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.

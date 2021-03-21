@@ -52,7 +52,9 @@ data_update_frequency: 1 ano # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - estado
+    - unidade da federacao
+    - localizacao
+    - rede
     - ano
 
 # Quais colunas identificam uma linha unicamente?
