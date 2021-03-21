@@ -209,8 +209,8 @@ def sync_bucket(
 
 def is_partitioned(table_config):
     ## check if the table are partitioned
-    print("TABLE PARTITION")
-    print(table_config["partitions"])
+    print("\n", "TABLE PARTITION")
+    print(table_config["partitions"], "\n")
 
     partitions = table_config["partitions"]
     if partitions is None:
