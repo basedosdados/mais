@@ -9,8 +9,6 @@ runs:
       shell: bash
     - run: cd ${{ github.workspace }}/python-package/ && python setup.py develop
       shell: bash
-    - run: basedosdados --help
-      shell: bash
     - run: python  ${{ github.action_path }}/main.py
       shell: bash
     - run: pytest

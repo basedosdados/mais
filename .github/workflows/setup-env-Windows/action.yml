@@ -5,9 +5,9 @@ author: "Base dos Dados"
 runs: 
   using: composite
   steps:
-    - run: pip install --upgrade -r ${{ github.workspace }}\python-package\requirements-dev.txt 
+    - run: cd ${{ github.workspace }}\python-package\ && pip install --upgrade -r requirements-dev.txt 
       shell: cmd
-    - run: python ${{ github.workspace }}\python-package\setup.py develop
+    - run: cd ${{ github.workspace }}\python-package\ && python setup.py develop
       shell: cmd
     - run: python  ${{ github.action_path }}\main.py
       shell: cmd
