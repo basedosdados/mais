@@ -5,13 +5,9 @@ author: "Base dos Dados"
 runs: 
   using: composite
   steps:
-    - run: pip install --upgrade -r ${{ github.workspace }}/python-package/requirements-dev.txt 
+    - run: cd ${{ github.workspace }}/python-package/ && pip install --upgrade -r requirements-dev.txt 
       shell: bash
-    - run: echo "=============================******************list******************============================="
-      shell: bash
-    - run: ls -al /home/runner/work/mais/mais
-      shell: bash
-    - run: python ${{ github.workspace }}/python-package/setup.py develop
+    - run: cd ${{ github.workspace }}/python-package/ && python setup.py develop
       shell: bash
     - run: basedosdados --help
       shell: bash
