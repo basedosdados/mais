@@ -51,11 +51,7 @@ data_update_frequency: unico # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - municipio
     - escola
-    - area
-    - rede
-    - localizacao
     - ano
 
 # Quais colunas identificam uma linha unicamente?
@@ -63,10 +59,6 @@ observation_level: #REQUIRED
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
     - id_escola
-    - id_municipio
-    - area
-    - rede
-    - localizacao
     - ano
 
 # Qual é a cobertura espacial da tabela?
@@ -140,13 +132,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: quantidade_alunos_inse
+        name: inse_quantidade_alunos
         description: Quantidade de Alunos com INSE calculado utilizado para o cálculo das médias por escola
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: inse_valor_absoluto
+        name: valor_inse
         description: Média do Indicador de Nível Socioeconômico dos alunos da escola
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

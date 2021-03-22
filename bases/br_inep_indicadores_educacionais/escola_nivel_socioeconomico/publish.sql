@@ -27,8 +27,8 @@ SAFE_CAST(area AS STRING) area,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(localizacao AS STRING) localizacao,
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(quantidade_alunos_inse AS INT64) quantidade_alunos_inse,
-SAFE_CAST(inse_valor_absoluto AS FLOAT64) inse_valor_absoluto,
+SAFE_CAST(inse_quantidade_alunos AS INT64) inse_quantidade_alunos,
+SAFE_CAST(valor_inse AS FLOAT64) valor_inse,
 SAFE_CAST(inse_classificacao_2014 AS STRING) inse_classificacao_2014,
 SAFE_CAST(inse_classificacao_2015 AS STRING) inse_classificacao_2015
 from basedosdados-dev.br_inep_indicadores_educacionais_staging.escola_nivel_socioeconomico as t

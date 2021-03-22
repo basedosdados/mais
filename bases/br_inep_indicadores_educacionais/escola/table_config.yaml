@@ -54,19 +54,14 @@ data_update_frequency: 1 ano # REQUIRED
 observation_level: #REQUIRED
     - escola
     - ano
-    - localizacao
-    - rede
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - id_municipio
     - id_escola
     - ano
-    - rede
-    - localizacao
-
+    
 # Qual é a cobertura espacial da tabela?
 # Regras:
 #   - minúsculo, sem acento, singular
