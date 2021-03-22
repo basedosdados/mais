@@ -1,0 +1,60 @@
+Indicador de Nível Socioeconômico por escola.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-indicadores-educacionais
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Hevilyn Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
+Website: https://github.com/Hevilyn
+Email: hevilynsouza12@hotmail.comTratado por
+-----------
+Nome: Hevilyn Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
+Website: https://basedosdados.org/
+Email: hevilynsouza12@hotmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- municipio
+- escola
+- area
+- rede
+- localizacao
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_escola
+- id_municipio
+- area
+- rede
+- localizacao
+- ano
+
+Cobertura Temporal
+------------------
+- 2014
+- 2015
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Padronização dos nomes das colunas.
+- Exclusão das colunas Região, Nome do Município ,UF, Nome da escola, Id_area, id_localizacao e id_rede.
+- Palavras sem acento e minúsculas.
+
+Frequencia de Atualização
+-------------------------
+unico
+
+
