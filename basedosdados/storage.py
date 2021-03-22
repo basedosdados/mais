@@ -201,6 +201,54 @@ class Storage(Base):
                         "Set if_exists to 'replace' to overwrite data"
                     )
 
+    def download(
+        self,
+        filename="*",
+        savepath="",
+        partitions=None,
+        mode="raw",
+        if_not_exists="raise",
+    ):
+
+        # Prefix to locate files within the bucket
+        prefix = f"{mode}/{self.dataset_id}/{self.table_id}/"
+
+        # Add specific partition to search prefix
+        if partitions:
+            prefix += self._resolve_partitions(partitions)
+
+        # if no filename is passed, list all blobs within a given table
+        if filename == "*":
+            blob_list = list(self.bucket.list_blobs(prefix=prefix))
+
+        # if filename is passed, append it to the prefix to narrow the search
+        else:
+            prefix += filename
+
+            blob_list = list(self.bucket.list_blobs(prefix=prefix))
+
+        # if there are no blobs matching the search raise FileNotFoundError or return
+        if blob_list == []:
+            if if_not_exists == "raise":
+                raise FileNotFoundError(f"Could not locate files at {prefix}")
+            else:
+                return
+
+        # download all blobs matching the search to given savepath
+        for blob in blob_list:
+
+            # parse blob.name and get the csv file name
+            csv_name = blob.name.split("/")[-1]
+
+            # build folder path replicating storage hierarchy
+            blob_folder = blob.name.replace(csv_name, "")
+
+            # replicate folder hierarchy
+            (Path(savepath) / blob_folder).mkdir(parents=True, exist_ok=True)
+
+            # download blob to savepath
+            blob.download_to_filename(filename=f"{savepath}/{blob.name}")
+
     def delete_file(self, filename, mode, partitions=None, not_found_ok=False):
         """Deletes file from path `<bucket_name>/<mode>/<dataset_id>/<table_id>/<partitions>/<filename>`.
 
