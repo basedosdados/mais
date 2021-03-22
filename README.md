@@ -116,17 +116,17 @@ Para saber mais, veja os [exemplos](https://github.com/basedosdados/mais/tree/ma
 
 ### Instale
 ```R
-install.packages("bigrquery")
+install.packages("basedosdados")
 ```
 
 ### Faça uma consulta
 
 ```r
-library("bigrquery")
+library(basedosdados)
 
-billing_project_id = "<YOUR_PROJECT_ID>"
+set_billing_id("id do seu projeto aqui") # autenticação para acesso aos dados
 
-pib_per_capita = "SELECT 
+pib_per_capita <- "SELECT 
     pib.id_municipio ,
     pop.ano, 
     pib.PIB / pop.populacao * 1000 as pib_per_capita
@@ -134,7 +134,8 @@ FROM `basedosdados.br_ibge_pib.municipios` as pib
 INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
 ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
 
-d <- bq_table_download(bq_project_query(billing_project_id, pib_per_capita), page_size=500, bigint="integer64")
+(data <- read_sql(pib_per_capita)) # leia os dados em memória
+download(pib_per_capita, "pib_per_capita.csv") # salve os dados em disco
 ```
 
 ## Tutoriais
