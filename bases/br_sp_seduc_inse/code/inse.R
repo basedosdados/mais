@@ -39,7 +39,8 @@ diretorio_com_id <- dbGetQuery(con, query)
 
 # juntando as bases
 inse <- base%>%
-  inner_join(diretorio_com_id, by = "id_escola_sp")
+  inner_join(diretorio_com_id, by = "id_escola_sp")%>%
+  select(-nome_escola, -municipio)
 
 #exportando
 
