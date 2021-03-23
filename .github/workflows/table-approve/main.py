@@ -209,8 +209,8 @@ def sync_bucket(
 
 def is_partitioned(table_config):
     ## check if the table are partitioned
-    print("TABLE PARTITION")
-    print(table_config["partitions"])
+    print("\n", "TABLE PARTITION")
+    print(table_config["partitions"], "\n")
 
     partitions = table_config["partitions"]
     if partitions is None:
@@ -312,7 +312,7 @@ def main():
     ### json with information of .basedosdados/config.toml
     config_dict = {
         "metadata_path": "/github/workspace/bases",
-        "templates_path": "/github/workspace/basedosdados/configs/templates",
+        "templates_path": "/github/workspace/python-package/basedosdados/configs/templates",
         "bucket_name": "basedosdados",
         "gcloud-projects": {
             "staging": {

@@ -5,11 +5,11 @@ author: "Base dos Dados"
 runs: 
   using: composite
   steps:
-    - run: pip install --upgrade -r ${{ github.workspace }}/requirements-dev.txt 
+    - run: cd ${{ github.workspace }}/python-package/ && pip install --upgrade -r requirements-dev.txt 
       shell: bash
-    - run: python ${{ github.workspace }}/setup.py develop
+    - run: cd ${{ github.workspace }}/python-package/ && python setup.py develop
       shell: bash
     - run: python  ${{ github.action_path }}/main.py
       shell: bash
-    - run: pytest
+    - run: cd ${{ github.workspace }}/python-package/ && pytest
       shell: bash

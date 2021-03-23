@@ -170,27 +170,6 @@ Inglês:
 Documentação está em português (quando possível), código e configurações
 estão em inglês.
 
-## Desenvolvimento
-
-#### CLI
-
-Suba o CLI localmente
-
-```sh
-make create-env
-. .mais/bin/activate
-python setup.py develop
-```
-
-#### Versionamento
-
-Publique nova versão
-
-```sh
-poetry version [patch|minor|major]
-poetry publish --build
-```
-
 #### Docs
 Atualize os docs adicionando ou editando `.md` em `docs/`.
 

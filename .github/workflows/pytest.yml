@@ -2,10 +2,11 @@ name: Python package
 
 on:
   push:
-      branches: 
-      - action_tests
-      # paths: 
-      # - '**.py'
+    paths:
+      - python-package/**
+      - .github/workflows/pytest.yml
+      - .github/workflows/setup-env*
+    
 jobs:
   build-linux:
 

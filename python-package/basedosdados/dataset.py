@@ -183,7 +183,7 @@ class Dataset(Base):
         """Deletes dataset in BigQuery. Toogle mode to choose which dataset to delete.
 
         Args:
-            mode (str): Optional. Which dataset to delete [prod|staging|all]
+            mode (str): Optional.  Which dataset to delete [prod|staging|all]
         """
 
         for m in self._loop_modes(mode):
