@@ -7,30 +7,31 @@
 // candidatos
 //-------------------------------------------------//
 
-use "output/candidatos_1998.dta", clear
-append using "output/candidatos_2000.dta"
-append using "output/candidatos_2002.dta"
-append using "output/candidatos_2004.dta"
-append using "output/candidatos_2006.dta"
-append using "output/candidatos_2008.dta"
-append using "output/candidatos_2010.dta"
-append using "output/candidatos_2012.dta"
-append using "output/candidatos_2014.dta"
-append using "output/candidatos_2016.dta"
-append using "output/candidatos_2018.dta"
-append using "output/candidatos_2020.dta"
+use "output/candidatos_1994.dta", clear
+foreach ano of numlist 1996(2)2020 {
+	append using "output/candidatos_`ano'.dta"
+}
+*
 
 drop if turno == 2
+drop if ano == .
 drop turno resultado
 
 merge m:1 cpf titulo_eleitoral nome_candidato using "output/id_candidato_bd.dta"
-keep if _merge == 3	// dropa observacoes sem id_candidato
+drop if _merge == 2 & ano >= 1998
 drop _merge
+
+gen aux_id = _n	// id auxiliar para merge
+
+tempfile candidatos
+save `candidatos'
 
 //------------//
 // limpando
 // duplicadas
 //------------//
+
+keep if id_candidato_bd != .
 
 local vars ano tipo_eleicao sigla_uf id_municipio_tse numero_candidato cargo id_candidato_bd
 duplicates tag `vars', gen(dup)
@@ -50,6 +51,17 @@ drop dup
 local vars id_candidato_bd ano tipo_eleicao
 duplicates drop `vars', force
 
+save "output/norm_candidatos.dta", replace
+
+//------------//
+// particiona
+//------------//
+
+use `candidatos'
+
+merge 1:1 aux_id using "output/norm_candidatos.dta"
+drop _merge aux_id
+
 drop coligacao composicao
 
 order tipo_eleicao ano id_candidato_bd cpf titulo_eleitoral sequencial_candidato ///
@@ -57,38 +69,31 @@ order tipo_eleicao ano id_candidato_bd cpf titulo_eleitoral sequencial_candidato
 
 compress
 
-save "output/norm_candidatos.dta", replace
-
-//------------//
-// particiona
-//------------//
+tempfile candidatos
+save `candidatos'
 
 !mkdir "output/candidatos"
 
-use "output/norm_candidatos.dta", clear
-
 levelsof ano, l(anos)
 foreach ano in `anos' {
-	levelsof sigla_uf if ano == `ano', l(estados_`ano')
-}
-*
-
-foreach ano in `anos' {
+	
+	use `candidatos' if ano == `ano', clear
 	
 	!mkdir "output/candidatos/ano=`ano'"
 	
+	levelsof sigla_uf, l(estados_`ano')
 	foreach sigla_uf in `estados_`ano'' {
 		
 		!mkdir "output/candidatos/ano=`ano'/sigla_uf=`sigla_uf'"
 		
-		use "output/norm_candidatos.dta", clear
-		keep if ano == `ano' & sigla_uf == "`sigla_uf'"
+		use `candidatos' if ano == `ano' & sigla_uf == "`sigla_uf'", clear
 		drop ano sigla_uf
 		export delimited "output/candidatos/ano=`ano'/sigla_uf=`sigla_uf'/candidatos.csv", replace
 		
 	}
 }
 *
+
 
 //-------------------------------------------------//
 // partidos

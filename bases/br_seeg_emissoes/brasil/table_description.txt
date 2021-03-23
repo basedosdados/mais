@@ -1,0 +1,56 @@
+Dados a nível de Brasil completo.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-seeg-emissoes
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_seeg_emissoes
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_seeg_emissoes/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: <nome>
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- nivel de emissao
+- tipo de emissao
+- gas
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- nivel_1
+- nivel_2
+- nivel_3
+- nivel_4
+- nivel_5
+- nivel_6
+- tipo_emissao
+- gas
+- ano
+
+Cobertura Temporal
+------------------
+- 1970-2019
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Transformamos a base do formato "wide" para formato "long" em ano.
+- Substituímos valores "NA" para valores nulos.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+

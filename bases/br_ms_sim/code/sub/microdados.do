@@ -14,11 +14,11 @@ save `municipios'
 
 foreach estado in AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO {
 	
-	foreach ano of numlist 1996(1)2018 {
+	foreach ano of numlist 1996(1)2019 {
 		
 		di "`estado' `ano'"
 		
-		import delimited using "input/dados/DO`estado'`ano'.csv", clear varn(1) stringcols(_all)
+		import delimited using "input/csv/DO`estado'`ano'.csv", clear varn(1) stringcols(_all)
 		
 		drop v1 
 		cap drop ufinform
@@ -186,8 +186,8 @@ foreach estado in AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO
 		}
 		*
 		
-		gen ano				= `ano'
-		gen estado_abrev	= "`estado'"
+		gen ano			= `ano'
+		gen sigla_uf	= "`estado'"
 		
 		tempfile DO`estado'`ano'
 		save `DO`estado'`ano''
@@ -200,7 +200,7 @@ foreach estado in AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO
 	//---------------//
 	
 	use `DO`estado'1996', clear
-	foreach ano of numlist 1997(1)2018 {
+	foreach ano of numlist 1997(1)2019 {
 		append using `DO`estado'`ano''
 	}
 	*
@@ -447,7 +447,7 @@ foreach estado in AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO
 	clear
 	
 	gen ano								= .
-	gen estado_abrev					= ""
+	gen sigla_uf						= ""
 	gen sequencial_obito				= .
 	gen tipo_obito						= ""	
 	gen causa_basica					= ""
@@ -555,15 +555,15 @@ foreach estado in AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO
 	// particiona
 	//-------------------------//
 	
-	foreach ano of numlist 1996(1)2018 {
+	foreach ano of numlist 1996(1)2019 {
 		
 		! mkdir "output/microdados/ano=`ano'"
-		! mkdir "output/microdados/ano=`ano'/estado_abrev=`estado'"
+		! mkdir "output/microdados/ano=`ano'/sigla_uf=`estado'"
 		
 		preserve
-			keep if ano == `ano' & estado_abrev == "`estado'"
-			drop ano estado_abrev
-			export delimited "output/microdados/ano=`ano'/estado_abrev=`estado'/microdados.csv", replace
+			keep if ano == `ano' & sigla_uf == "`estado'"
+			drop ano sigla_uf
+			export delimited "output/microdados/ano=`ano'/sigla_uf=`estado'/microdados.csv", replace
 		restore
 	
 	}
