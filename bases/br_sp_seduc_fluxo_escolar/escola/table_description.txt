@@ -1,4 +1,4 @@
-A tabela contém valores de fluxo escolar a nível de escolas. Para quantificar tal fluxo, tem-se variáveis a respeito do abandono, da reprovação e da aprovação para cada escola, para cada ano, desgregado por níveis de ensino. Isto é, a tabela contém tais informações para nível de anos iniciais do ensino fundamental, anos finais do ensino fundamental e anos do ensino médio.
+A tabela contém dados do fluxo escolar agregado a nível de ensino de cada escola. Para quantificar o fluxo, utiliza-se 3 variáveis para cada nível de ensino: a proporção de alunos aprovados, a proporção de alunos reprovados e a proporção de alunos que abandonaram o ano escolar.
 
 
 Para saber mais acesse:
@@ -16,15 +16,19 @@ Website: https://github.com/mavalentim
 Email: mavalentim.b@gmail.comTratado por
 -----------
 Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_fluxo_escolar/code
+Website: https://github.com/mavalentim
 Email: mavalentim.b@gmail.com
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - escola
+- ano
 
 Colunas identificando linhas unicamente
 -------------------
-- id_escola_sp
+- id_escola
+- ano
 
 Cobertura Temporal
 ------------------
@@ -37,6 +41,7 @@ Cobertura Temporal
 - 2017
 - 2018
 - 2019
+- 2020
 
 Cobertura Espacial
 ------------------
@@ -45,7 +50,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-O tratamento dos dados consistiu basicamente em juntar dados de diferentes anos, adaptando e aparando as diferenças em formato das diferentes tabelas. Outra mudança importante foi a adaptação do código da id_escola que unicamente nessa base vinha com valores "0" na frente do código, distoando das outras bases da SEDUC.
+O tratamento dos dados consistiu em principalmente adequar e juntar as diferentes bases disponibilizadas, harmonizando as diferentes variáveis entre os anos. Outro processo importante foi a inserção na base de variáveis que melhor identificassem cada observação como o código do IBGE dos municípios e o código do INEP das escolas.
 
 Frequencia de Atualização
 -------------------------

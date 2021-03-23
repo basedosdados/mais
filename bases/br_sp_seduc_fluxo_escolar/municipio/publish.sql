@@ -21,19 +21,17 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_sp_seduc_fluxo_escolar.municipio AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(rede AS STRING) rede,
+SAFE_CAST(diretoria AS STRING) diretoria,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(municipio AS STRING) municipio,
-SAFE_CAST(prop_aprovados_anos_inciais_ef AS STRING) prop_aprovados_anos_inciais_ef,
-SAFE_CAST(prop_reprovados_anos_iniciais_ef AS STRING) prop_reprovados_anos_iniciais_ef,
-SAFE_CAST(prop_abandono_anos_iniciais_ef AS STRING) prop_abandono_anos_iniciais_ef,
-SAFE_CAST(prop_aprovados_anos_finais_ef AS STRING) prop_aprovados_anos_finais_ef,
-SAFE_CAST(prop_reprovados_anos_finais_ef AS STRING) prop_reprovados_anos_finais_ef,
-SAFE_CAST(prop_abandono_anos_finais_ef AS STRING) prop_abandono_anos_finais_ef,
-SAFE_CAST(prop_aprovados_em AS STRING) prop_aprovados_em,
-SAFE_CAST(prop_reprovados_em AS STRING) prop_reprovados_em,
-SAFE_CAST(prop_abandono_em AS STRING) prop_abandono_em,
-SAFE_CAST(codigo_rede_ensino AS STRING) codigo_rede_ensino,
-SAFE_CAST(rede_ensino AS STRING) rede_ensino,
-SAFE_CAST(diretoria AS STRING) diretoria
+SAFE_CAST(prop_aprovados_anos_inciais_ef AS FLOAT64) prop_aprovados_anos_inciais_ef,
+SAFE_CAST(prop_reprovados_anos_iniciais_ef AS FLOAT64) prop_reprovados_anos_iniciais_ef,
+SAFE_CAST(prop_abandono_anos_iniciais_ef AS FLOAT64) prop_abandono_anos_iniciais_ef,
+SAFE_CAST(prop_aprovados_anos_finais_ef AS FLOAT64) prop_aprovados_anos_finais_ef,
+SAFE_CAST(prop_reprovados_anos_finais_ef AS FLOAT64) prop_reprovados_anos_finais_ef,
+SAFE_CAST(prop_abandono_anos_finais_ef AS FLOAT64) prop_abandono_anos_finais_ef,
+SAFE_CAST(prop_aprovados_em AS FLOAT64) prop_aprovados_em,
+SAFE_CAST(prop_reprovados_em AS FLOAT64) prop_reprovados_em,
+SAFE_CAST(prop_abandono_em AS FLOAT64) prop_abandono_em
 from basedosdados-dev.br_sp_seduc_fluxo_escolar_staging.municipio as t

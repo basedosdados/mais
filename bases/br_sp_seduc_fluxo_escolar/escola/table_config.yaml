@@ -7,16 +7,16 @@ dataset_id: br_sp_seduc_fluxo_escolar # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-sp-seduc-fluxo-escolar # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_fluxo_escolar # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v1.1 # REQUIRED
 
-last_updated: 2021-03-17 # AUTO GENERATED
+last_updated: 2021-03-23 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    A tabela contém valores de fluxo escolar a nível de escolas. Para quantificar tal fluxo, tem-se variáveis a respeito do abandono, da reprovação e da aprovação para cada escola, para cada ano, desgregado por níveis de ensino. Isto é, a tabela contém tais informações para nível de anos iniciais do ensino fundamental, anos finais do ensino fundamental e anos do ensino médio.
+    A tabela contém dados do fluxo escolar agregado a nível de ensino de cada escola. Para quantificar o fluxo, utiliza-se 3 variáveis para cada nível de ensino: a proporção de alunos aprovados, a proporção de alunos reprovados e a proporção de alunos que abandonaram o ano escolar.
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -30,13 +30,13 @@ published_by:
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
     name: Matheus Valentim
-    code_url: 
-    website: 
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_fluxo_escolar/code # REQUIRED
+    website: https://github.com/mavalentim
     email: mavalentim.b@gmail.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    O tratamento dos dados consistiu basicamente em juntar dados de diferentes anos, adaptando e aparando as diferenças em formato das diferentes tabelas. Outra mudança importante foi a adaptação do código da id_escola que unicamente nessa base vinha com valores "0" na frente do código, distoando das outras bases da SEDUC.
+    O tratamento dos dados consistiu em principalmente adequar e juntar as diferentes bases disponibilizadas, harmonizando as diferentes variáveis entre os anos. Outro processo importante foi a inserção na base de variáveis que melhor identificassem cada observação como o código do IBGE dos municípios e o código do INEP das escolas.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -50,12 +50,14 @@ data_update_frequency: 1 ano # REQUIRED
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
     - escola
+    - ano
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - id_escola_sp
+    - id_escola
+    - ano
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -82,6 +84,7 @@ coverage_time:
     - 2017
     - 2018
     - 2019
+    - 2020
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -107,90 +110,96 @@ columns: # REQUIRED
   
     -   
         name: diretoria
-        description: Diretoria de Ensino
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: municipio
-        description: Nome do Município
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: codigo_rede_ensino
-        description: Código da Rede de Ensino
+        description: Diretoria de ensino
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_escola_sp
-        description: ID Escola - específico para o Estado de São Paulo
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: nome_escola
-        description: Nome da Escola
+        description: ID Escola - específico para o estado de São Paulo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_aprovados_anos_inciais_ef
-        description: Proporção de aprovados nos anos iniciais do ensino fundamental
+        description: Proporção de alunos que foram aprovados nos anos iniciais do ensino fundamental
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_reprovados_anos_iniciais_ef
-        description: Proporção de reprovados no anos iniciais do ensino fundamental
+        description: Proporção de alunos que foram reprovados nos anos iniciais do ensino fundamental
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_abandono_anos_iniciais_ef
-        description: Proporção de alunos que abandonaram o ano escolar nos anos iniciais do ensino fundamental
+        description: Proporção de alunos que abandonaram o ano letivo nos anos iniciais do ensino fundamental
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_aprovados_anos_finais_ef
-        description: <descrição da coluna>
+        description: Proporção de alunos que foram aprovados nos anos finais do ensino médio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_reprovados_anos_finais_ef
-        description: Proporção de aprovados nos anos finais do ensino fundamental
+        description: Proporção de alunos que foram reprovados nos anos finais do ensino fundamental
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_abandono_anos_finais_ef
-        description: Proporção de reprovados no anos finais do ensino fundamental
+        description: Proporção de alunos que abandonaram o ano letivo nos anos finais do ensino fundamental
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_aprovados_em
-        description: Proporção de aprovados nos anos do ensino médio
+        description: Proporção de alunos que foram aprovados nos anos do ensino médio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_reprovados_em
-        description: Proporção de reprovados nos anos do ensino médio
+        description: Proporção de alunos que foram reprovados nos anos do ensino médio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: prop_abandono_em
-        description: Proporção de alunos que abandonaram o ano escolar nos anos do ensino médio
+        description: Proporção de alunos que abandonaram o ano letivo nos anos do ensino médio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: codigo_tipo_escola
-        description: Código do Tipo de Escola
+        description: Código identificador do tipo de escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_escola
+        description: ID Escola - INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: rede
+        description: Rede de ensino
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
