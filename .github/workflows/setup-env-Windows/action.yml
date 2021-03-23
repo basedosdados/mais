@@ -11,5 +11,5 @@ runs:
       shell: cmd
     - run: python  ${{ github.action_path }}\main.py
       shell: cmd
-    - run: pytest
+    - run: cd ${{ github.workspace }}\python-package\ && pytest
       shell: cmd
