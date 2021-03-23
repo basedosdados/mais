@@ -41,7 +41,6 @@ Cobertura Temporal
 - 2017
 - 2018
 - 2019
-- 2020
 
 Cobertura Espacial
 ------------------

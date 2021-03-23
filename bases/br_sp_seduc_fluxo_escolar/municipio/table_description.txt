@@ -49,7 +49,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-O tratamento envolveu juntar .csvs de todos os diferentes anos, adaptando para que houvesse perfeita harmonia entre as bases, sempre priorizando formatos mais recentes. Outra parte crucial foi a utilização do diretório de municípios do Base dos Dados para conseguir código IBGE de 7 dígitos para a base e assim facilitar possíveis junções com outras bases.
+O tratamento envolveu juntar .CSVs de todos os diferentes anos, adaptando para que houvesse perfeita harmonia entre as bases, sempre priorizando formatos mais recentes. Outra parte crucial foi a utilização do diretório de municípios do Base dos Dados para conseguir código IBGE de 7 dígitos para a base e assim facilitar possíveis junções com outras bases.
 
 Frequencia de Atualização
 -------------------------

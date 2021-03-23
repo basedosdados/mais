@@ -7,7 +7,7 @@ dataset_id: br_sp_seduc_fluxo_escolar # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-sp-seduc-fluxo-escolar # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_fluxo_escolar # AUTO GENERATED
 
-version: v1.1 # REQUIRED
+version: v1.2 # REQUIRED
 
 last_updated: 2021-03-23 # AUTO GENERATED
 
@@ -36,7 +36,7 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    O tratamento envolveu juntar .csvs de todos os diferentes anos, adaptando para que houvesse perfeita harmonia entre as bases, sempre priorizando formatos mais recentes. Outra parte crucial foi a utilização do diretório de municípios do Base dos Dados para conseguir código IBGE de 7 dígitos para a base e assim facilitar possíveis junções com outras bases.
+    O tratamento envolveu juntar .CSVs de todos os diferentes anos, adaptando para que houvesse perfeita harmonia entre as bases, sempre priorizando formatos mais recentes. Outra parte crucial foi a utilização do diretório de municípios do Base dos Dados para conseguir código IBGE de 7 dígitos para a base e assim facilitar possíveis junções com outras bases.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -163,7 +163,13 @@ columns: # REQUIRED
   
     -   
         name: diretoria
-        description: Diretoria de Ensino
+        description: Diretoria de ensino
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

@@ -22,6 +22,7 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_sp_seduc_fluxo_escolar.municipio AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(diretoria AS STRING) diretoria,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
