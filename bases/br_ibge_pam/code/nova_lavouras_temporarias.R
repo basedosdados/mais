@@ -23,7 +23,7 @@ vetor_uf <- c("RO","AC","AM","RR", "PA", "AP", "TO","MA", "PI", "CE","RN","PB","
               "ES", "RJ","SP","PR","SC","RS", "MS", "MT","GO", "DF")
 
 
-anos_milcruzeiros<- c('1974':'1985', '1990':'1992')
+anos_milcruzeiros<- c(vetor_anos[37:48], vetor_anos[30:32])
 anos_milcruzados <- c("1986":"1988")
 anos_real <-c("1994":"2019")
 
@@ -71,19 +71,14 @@ cria_estados <- function(x){
 zeradora <- function(x){
   ifelse(is.na(x), "", x)
 }
-
-
-trespontos <- function(x){
-  ifelse(x == "...", "", x)
-}
-
-traco <- function(x){
-  ifelse(x == "-", "", x)
-}
-
-# Funcao para particionar por ano e por estado 
+# Funcao para particionar por ano e por estado -----------------------------
 part_anos <- function(x, nomedabase){
   filter(nomedabase, ano == x)
+}
+
+part_estado <- function(x, y){
+  x%>%
+    filter(sigla_uf == y)
 }
 
 #APLICANDO --------------------------------
@@ -221,7 +216,7 @@ walk2(.x = possibilidades_x, .y = possibilidades_y,
 )
 
 # lendo o csv --------------------------
-junta <- temporariafinal%>%
+junta <- rio::import("bases_prontas/temporaria_versaofinal.csv")%>%
   cria_estados()
 
 # repartindo o csv por ano
@@ -234,10 +229,8 @@ alista <- map2(.x = possibilidades_x, .y = possibilidades_y,
                .f = ~ lista_por_ano[[.y]]%>%
                  filter(sigla_uf == .x)%>%
                  select(-ano, -sigla_uf, -id_uf)%>%
-                 mutate(across(everything(), as.character),
-                        across(everything(), zeradora),
-                        across(everything(), traco),
-                        across(everything(), trespontos)))
+                 mutate(across(everything(),as.character),
+                        across(everything(),zeradora)))
 
 
 #nomeando a lista
@@ -249,7 +242,7 @@ alista2 <-map(alista, as_tibble)%>%
 walk2(.y = possibilidades_y, .x = possibilidades_x, 
       ~rio::export(alista2[[glue("{.y}_{.x}")]], 
                    file = glue("bases_prontas/particionadas/municipios_lavouras_temporarias/ano={.y}/sigla_uf={.x}/municipios_lavouras_temporarias.csv",
-                               sep = ",", na = "", quote = TRUE, row.names = FALSE)
+                               quote = TRUE, row.names = FALSE)
 )
 )
 
