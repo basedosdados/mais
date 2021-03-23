@@ -9,16 +9,16 @@ program limpa_partido
 	
 	if `ano' == 2016 {
 
-		replace partido = "REPUBLICANOS"	if partido == "PRB"
-		replace partido = "MDB"				if partido == "PMDB"
-		replace partido = "PODE"			if partido == "PTN"
-		replace partido = "PL"				if partido == "PR"
-		replace partido = "CIDADANIA"		if partido == "PPS"
-		replace partido = "DC"				if partido == "PSDC"
-		replace partido = "PATRIOTA"		if partido == "PATRI"
-		replace partido = "PATRIOTA"		if partido == "PEN"
-		replace partido = "AVANTE"			if partido == "PT do B"
-		replace partido = "SOLIDARIEDADE"	if partido == "SD"
+		replace sigla_partido = "REPUBLICANOS"	if sigla_partido == "PRB"
+		replace sigla_partido = "MDB"			if sigla_partido == "PMDB"
+		replace sigla_partido = "PODE"			if sigla_partido == "PTN"
+		replace sigla_partido = "PL"			if sigla_partido == "PR"
+		replace sigla_partido = "CIDADANIA"		if sigla_partido == "PPS"
+		replace sigla_partido = "DC"			if sigla_partido == "PSDC"
+		replace sigla_partido = "PATRIOTA"		if sigla_partido == "PATRI"
+		replace sigla_partido = "PATRIOTA"		if sigla_partido == "PEN"
+		replace sigla_partido = "AVANTE"		if sigla_partido == "PT do B"
+		replace sigla_partido = "SOLIDARIEDADE"	if sigla_partido == "SD"
 	
 	}
 	*

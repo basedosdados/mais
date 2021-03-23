@@ -6,6 +6,7 @@ import yaml
 import json
 import toml
 import tomlkit
+import traceback
 
 import basedosdados as bd
 from basedosdados.base import Base
@@ -187,22 +188,29 @@ def sync_bucket(
 
     # MAKE A BACKUP OF OLD DATA
     if len(list(destination_ref)):
+        print(
+            f"\n########################################### COPY BACKUP ###########################################\n"
+        )
         ref.copy_table(
             source_bucket_name=destination_bucket_name,
             destination_bucket_name=backup_bucket_name,
         )
-
+        print(
+            f"\n########################################## DELETE OLD DATA  ##########################################\n"
+        )
         # DELETE OLD DATA FROM PROD
         ref.delete_table(not_found_ok=True)
-
+    print(
+        f"\n########################################### COPY NEW DATA  ###########################################\n"
+    )
     # COPIES DATA TO DESTINATION
     ref.copy_table(source_bucket_name=source_bucket_name)
 
 
 def is_partitioned(table_config):
     ## check if the table are partitioned
-    print("TABLE PARTITION")
-    print(table_config["partitions"])
+    print("\n", "TABLE PARTITION")
+    print(table_config["partitions"], "\n")
 
     partitions = table_config["partitions"]
     if partitions is None:
@@ -304,7 +312,7 @@ def main():
     ### json with information of .basedosdados/config.toml
     config_dict = {
         "metadata_path": "/github/workspace/bases",
-        "templates_path": "/github/workspace/basedosdados/configs/templates",
+        "templates_path": "/github/workspace/python-package/basedosdados/configs/templates",
         "bucket_name": "basedosdados",
         "gcloud-projects": {
             "staging": {
@@ -342,11 +350,13 @@ def main():
             )
 
             pretty_log(dataset_id, table_id, source_bucket_name)
-        except Exception as err:
+        except Exception as error:
             print(
                 "\n###====================================================================================================###",
                 f"\n{dataset_id}.{table_id}",
-                f"\n{err}",
+            )
+            traceback.print_exc()
+            print(
                 "\n###====================================================================================================###\n",
             )
 

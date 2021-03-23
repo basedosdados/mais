@@ -1,0 +1,15 @@
+name: "Setup Environment"
+description: "Create config files and credentials needed to run basedosdados client"
+author: "Base dos Dados"
+
+runs: 
+  using: composite
+  steps:
+    - run: cd ${{ github.workspace }}\python-package\ && pip install -r requirements-dev.txt 
+      shell: cmd
+    - run: cd ${{ github.workspace }}\python-package\ && python setup.py develop
+      shell: cmd
+    - run: python  ${{ github.action_path }}\main.py
+      shell: cmd
+    - run: cd ${{ github.workspace }}\python-package\ && pytest
+      shell: cmd

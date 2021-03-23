@@ -14,6 +14,8 @@ Os comandos disponíveis dentro de `cli` atualmente são:
   subir arquivos)
 - `table`, que permite gerenciar tabelas no BigQuery (criar,
   modificar, publicar , atualizar e deletar)
+- `list`, que permite listar datasets ou tabelas do BigQuery
+- `get`, que permite obter informações sobre datasets ou tabelas do BigQuery
 
 !!! Info "Toda documentação do código abaixo está em inglês"
 
