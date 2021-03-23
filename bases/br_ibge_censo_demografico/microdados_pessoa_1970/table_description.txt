@@ -1,0 +1,53 @@
+Microdados de pessoas para o ano 1970.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ibge-censo-demografico
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: DataZoom PUC-Rio
+Website: http://www.econ.puc-rio.br/datazoom/index.html
+Email: datazoom@econ.puc-rio.br
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- pessoa
+
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
+- id_domicilio
+- numero_familia
+- ordem
+
+Cobertura Temporal
+------------------
+- 1970
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Seguimos o pacote de limpeza do DataZoom e o dicionário do IBGE.
+
+Frequencia de Atualização
+-------------------------
+único
+
+
