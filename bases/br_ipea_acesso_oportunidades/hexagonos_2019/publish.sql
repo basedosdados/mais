@@ -1,0 +1,120 @@
+/*
+
+Query para publicar a tabela.
+
+Esse é o lugar para:
+    - modificar nomes, ordem e tipos de colunas
+    - dar join com outras tabelas
+    - criar colunas extras (e.g. logs, proporções, etc.)
+
+Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
+
+# Além disso, sinta-se à vontade para alterar alguns nomes obscuros
+# para algo um pouco mais explícito.
+
+TIPOS:
+    - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
+    - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
+    - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
+
+*/
+
+CREATE VIEW basedosdados-dev.br_ipea_acesso_oportunidades.hexagonos_2019 AS
+SELECT 
+SAFE_CAST(nome_municipio AS STRING) nome_municipio,
+SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_grid_h3 AS STRING) id_grid_h3,
+ST_GEOGFROMTEXT(geometria) geometria,
+SAFE_CAST(quantidade_pessoas AS FLOAT64) quantidade_pessoas,
+SAFE_CAST(quantidade_pessoas_brancas AS FLOAT64) quantidade_pessoas_brancas,
+SAFE_CAST(quantidade_pessoas_negras AS FLOAT64) quantidade_pessoas_negras,
+SAFE_CAST(quantidade_pessoas_indigenas AS FLOAT64) quantidade_pessoas_indigenas,
+SAFE_CAST(quantidade_pessoas_amarelas AS FLOAT64) quantidade_pessoas_amarelas,
+SAFE_CAST(renda_domiciliar_pc AS FLOAT64) renda_domiciliar_pc,
+SAFE_CAST(quintil_de_renda AS FLOAT64) quintil_de_renda,
+SAFE_CAST(decil_de_renda AS FLOAT64) decil_de_renda,
+SAFE_CAST(quantidade_estabelecimentos_ensino AS FLOAT64) quantidade_estabelecimentos_ensino,
+SAFE_CAST(quantidade_estabelecimentos_ensino_infantil AS FLOAT64) quantidade_estabelecimentos_ensino_infantil,
+SAFE_CAST(quantidade_estabelecimentos_ensino_fundamental AS FLOAT64) quantidade_estabelecimentos_ensino_fundamental,
+SAFE_CAST(quantidade_estabelecimentos_ensino_medio AS FLOAT64) quantidade_estabelecimentos_ensino_medio,
+SAFE_CAST(quantidade_estabelecimentos_saude AS FLOAT64) quantidade_estabelecimentos_saude,
+SAFE_CAST(quantidade_estabelecimentos_saude_baixa_complexidade AS FLOAT64) quantidade_estabelecimentos_saude_baixa_complexidade,
+SAFE_CAST(quantidade_estabelecimentos_saude_media_coplexidade AS FLOAT64) quantidade_estabelecimentos_saude_media_coplexidade,
+SAFE_CAST(quantidade_estabelecimentos_saude_alta_coplexidade AS FLOAT64) quantidade_estabelecimentos_saude_alta_coplexidade,
+SAFE_CAST(modo_transporte AS FLOAT64) modo_transporte,
+SAFE_CAST(se_horario_de_pico AS FLOAT64) se_horario_de_pico,
+SAFE_CAST(CMATT15 AS FLOAT64) CMATT15,
+SAFE_CAST(CMATQ15 AS FLOAT64) CMATQ15,
+SAFE_CAST(CMATD15 AS FLOAT64) CMATD15,
+SAFE_CAST(CMAST15 AS FLOAT64) CMAST15,
+SAFE_CAST(CMASB15 AS FLOAT64) CMASB15,
+SAFE_CAST(CMASM15 AS FLOAT64) CMASM15,
+SAFE_CAST(CMASA15 AS FLOAT64) CMASA15,
+SAFE_CAST(CMAET15 AS FLOAT64) CMAET15,
+SAFE_CAST(CMAEI15 AS FLOAT64) CMAEI15,
+SAFE_CAST(CMAEF15 AS FLOAT64) CMAEF15,
+SAFE_CAST(CMAEM15 AS FLOAT64) CMAEM15,
+SAFE_CAST(CMATT30 AS FLOAT64) CMATT30,
+SAFE_CAST(CMATQ30 AS FLOAT64) CMATQ30,
+SAFE_CAST(CMATD30 AS FLOAT64) CMATD30,
+SAFE_CAST(CMAST30 AS FLOAT64) CMAST30,
+SAFE_CAST(CMASB30 AS FLOAT64) CMASB30,
+SAFE_CAST(CMASM30 AS FLOAT64) CMASM30,
+SAFE_CAST(CMASA30 AS FLOAT64) CMASA30,
+SAFE_CAST(CMAET30 AS FLOAT64) CMAET30,
+SAFE_CAST(CMAEI30 AS FLOAT64) CMAEI30,
+SAFE_CAST(CMAEF30 AS FLOAT64) CMAEF30,
+SAFE_CAST(CMAEM30 AS FLOAT64) CMAEM30,
+SAFE_CAST(CMATT45 AS FLOAT64) CMATT45,
+SAFE_CAST(CMATQ45 AS FLOAT64) CMATQ45,
+SAFE_CAST(CMATD45 AS FLOAT64) CMATD45,
+SAFE_CAST(CMAST45 AS FLOAT64) CMAST45,
+SAFE_CAST(CMASB45 AS FLOAT64) CMASB45,
+SAFE_CAST(CMASM45 AS FLOAT64) CMASM45,
+SAFE_CAST(CMASA45 AS FLOAT64) CMASA45,
+SAFE_CAST(CMAET45 AS FLOAT64) CMAET45,
+SAFE_CAST(CMAEI45 AS FLOAT64) CMAEI45,
+SAFE_CAST(CMAEF45 AS FLOAT64) CMAEF45,
+SAFE_CAST(CMAEM45 AS FLOAT64) CMAEM45,
+SAFE_CAST(CMATT60 AS FLOAT64) CMATT60,
+SAFE_CAST(CMATQ60 AS FLOAT64) CMATQ60,
+SAFE_CAST(CMATD60 AS FLOAT64) CMATD60,
+SAFE_CAST(CMAST60 AS FLOAT64) CMAST60,
+SAFE_CAST(CMASB60 AS FLOAT64) CMASB60,
+SAFE_CAST(CMASM60 AS FLOAT64) CMASM60,
+SAFE_CAST(CMASA60 AS FLOAT64) CMASA60,
+SAFE_CAST(CMAET60 AS FLOAT64) CMAET60,
+SAFE_CAST(CMAEI60 AS FLOAT64) CMAEI60,
+SAFE_CAST(CMAEF60 AS FLOAT64) CMAEF60,
+SAFE_CAST(CMAEM60 AS FLOAT64) CMAEM60,
+SAFE_CAST(CMATT90 AS FLOAT64) CMATT90,
+SAFE_CAST(CMATQ90 AS FLOAT64) CMATQ90,
+SAFE_CAST(CMATD90 AS FLOAT64) CMATD90,
+SAFE_CAST(CMAST90 AS FLOAT64) CMAST90,
+SAFE_CAST(CMASB90 AS FLOAT64) CMASB90,
+SAFE_CAST(CMASM90 AS FLOAT64) CMASM90,
+SAFE_CAST(CMASA90 AS FLOAT64) CMASA90,
+SAFE_CAST(CMAET90 AS FLOAT64) CMAET90,
+SAFE_CAST(CMAEI90 AS FLOAT64) CMAEI90,
+SAFE_CAST(CMAEF90 AS FLOAT64) CMAEF90,
+SAFE_CAST(CMAEM90 AS FLOAT64) CMAEM90,
+SAFE_CAST(CMATT120 AS FLOAT64) CMATT120,
+SAFE_CAST(CMATQ120 AS FLOAT64) CMATQ120,
+SAFE_CAST(CMATD120 AS FLOAT64) CMATD120,
+SAFE_CAST(CMAST120 AS FLOAT64) CMAST120,
+SAFE_CAST(CMASB120 AS FLOAT64) CMASB120,
+SAFE_CAST(CMASM120 AS FLOAT64) CMASM120,
+SAFE_CAST(CMASA120 AS FLOAT64) CMASA120,
+SAFE_CAST(CMAET120 AS FLOAT64) CMAET120,
+SAFE_CAST(CMAEI120 AS FLOAT64) CMAEI120,
+SAFE_CAST(CMAEF120 AS FLOAT64) CMAEF120,
+SAFE_CAST(CMAEM120 AS FLOAT64) CMAEM120,
+SAFE_CAST(TMIST AS FLOAT64) TMIST,
+SAFE_CAST(TMISB AS FLOAT64) TMISB,
+SAFE_CAST(TMISM AS FLOAT64) TMISM,
+SAFE_CAST(TMISA AS FLOAT64) TMISA,
+SAFE_CAST(TMIET AS FLOAT64) TMIET,
+SAFE_CAST(TMIEI AS FLOAT64) TMIEI,
+SAFE_CAST(TMIEF AS FLOAT64) TMIEF,
+SAFE_CAST(TMIEM AS FLOAT64) TMIEM
+from basedosdados-dev.br_ipea_acesso_oportunidades_staging.hexagonos_2019 as t
