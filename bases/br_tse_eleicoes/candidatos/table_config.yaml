@@ -57,6 +57,8 @@ coverage_geo:
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: pre-1999, 2000, 2001, ..., 2019, 2020
 coverage_time:
+    - 1994
+    - 1996
     - 1998
     - 2000
     - 2002

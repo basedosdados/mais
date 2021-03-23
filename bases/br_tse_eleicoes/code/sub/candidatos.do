@@ -7,6 +7,7 @@
 // lista de estados
 //------------------------//
 
+local estados_1994	AC AL AM AP BA BR          GO MA    MS             PI             RR RS    SE SP TO
 local estados_1996	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
 local estados_1998	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2000	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
@@ -25,7 +26,7 @@ local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
-foreach ano of numlist 1998(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 
 	foreach estado in `estados_`ano'' {
 		
@@ -34,7 +35,39 @@ foreach ano of numlist 1998(2)2020 {
 		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
 		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear
 		
-		if `ano' <= 2010 {
+		if `ano' == 1994 & "`estado'" == "BR" {
+			
+			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v24 v25 v27 v28 v29 v32 v34 v36 v38 v39 v41 v44
+			
+			ren v3 ano
+			ren v4 turno
+			ren v5 tipo_eleicao
+			ren v6 sigla_uf
+			ren v7 id_municipio_tse
+			ren v10 cargo
+			ren v11 nome_candidato
+			ren v12 sequencial_candidato
+			ren v13 numero_candidato
+			ren v14 cpf
+			ren v15 nome_urna_candidato
+			ren v17 situacao
+			ren v18 numero_partido
+			ren v19 sigla_partido
+			ren v24 composicao
+			ren v25 coligacao
+			ren v27 ocupacao
+			ren v28 data_nasc
+			ren v29 titulo_eleitoral
+			ren v32 genero
+			ren v34 instrucao
+			ren v36 estado_civil
+			ren v38 nacionalidade
+			ren v39 sigla_uf_nasc
+			ren v41 municipio_nasc
+			ren v44 resultado
+			
+		}
+		else if `ano' <= 2010 & !(`ano' == 1994 & "`estado'" == "BR") {
 			
 			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
 			
@@ -144,10 +177,10 @@ foreach ano of numlist 1998(2)2020 {
 		// limpa strings
 		//------------------//
 		
-		cap replace email = ""  if email == "#NULO#"
-		replace resultado = ""  if resultado == "#NULO#" | resultado == "#NE#"
-		replace composicao = "" if composicao == "#NE#"
-		replace coligacao = ""	if coligacao == "#NE#"
+		foreach k of varlist _all {
+			cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE", "##VERIFICAR BASE 1994##")
+		}
+		*
 		
 		foreach k in tipo_eleicao cargo situacao nacionalidade genero instrucao estado_civil raca ocupacao email resultado {
 			cap clean_string `k'
@@ -163,6 +196,9 @@ foreach ano of numlist 1998(2)2020 {
 		limpa_estado_civil
 		limpa_resultado
 		
+		replace cargo = "vice-presidente" if cargo == "vice presidente"
+		replace cargo = "vice-prefeito" if cargo == "vice prefeito"
+		
 		replace genero = "" if genero == "nao divulgavel"
 		replace genero = "" if genero == "nao informado"
 		
@@ -173,11 +209,17 @@ foreach ano of numlist 1998(2)2020 {
 		cap replace raca = "" if raca == "sem informacao"
 		cap replace raca = "" if raca == "nao divulgavel"
 		
+		replace resultado = "" if inlist(resultado, "-1", "1", "4")
+		
 		//------------------//
 		// limpa data_nasc
 		//------------------//
 		
 		replace data_nasc = substr(data_nasc, 1, 4) + "1" + substr(data_nasc, 6, .) if strlen(data_nasc) == 8 & substr(data_nasc, 5, 1) == "0"
+		if `ano' == 1994 {
+			replace data_nasc = subinstr(data_nasc, "/", "", .)
+			replace data_nasc = substr(data_nasc, 1, 4) + "19" + substr(data_nasc, 5, 6)
+		}
 		if `ano' == 1996 {
 			replace data_nasc = subinstr(data_nasc, "/", "", .)
 			replace data_nasc = substr(data_nasc, 1, 4) + "19" + substr(data_nasc, 5, 6)
@@ -214,23 +256,11 @@ foreach ano of numlist 1998(2)2020 {
 		
 		cap drop aux*
 		
-		/*
-		drop if	cargo != "1º suplente" & ///
-				cargo != "1º suplente senador" & ///
-				cargo != "2º suplente" & ///
-				cargo != "2º suplente senador" & ///
-				cargo != "deputado distrital" & ///
-				cargo != "deputado estadual" & ///
-				cargo != "deputado federal" & ///
-				cargo != "presidente" & ///
-				cargo != "governador" & ///
-				cargo != "prefeito" & ///
-				cargo != "senador" & ///
-				cargo != "vereador" & ///
-				cargo != "vice-governador" & ///
-				cargo != "vice-prefeito"
+		//------------------//
+		// ajustes e salva
+		//------------------//
 		
-		*/
+		drop if tipo_eleicao == "plebiscito"
 		
 		duplicates drop
 		
