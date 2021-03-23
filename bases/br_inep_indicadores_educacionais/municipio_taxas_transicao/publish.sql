@@ -21,11 +21,11 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.municipio_taxas_transicao AS
 SELECT 
+SAFE_CAST(ano_de AS INT64) ano_de,
+SAFE_CAST(ano_para AS INT64) ano_para,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(localizacao AS STRING) localizacao,
 SAFE_CAST(rede AS STRING) rede,
-SAFE_CAST(ano_de AS INT64) ano_de,
-SAFE_CAST(ano_para AS INT64) ano_para,
 SAFE_CAST(taxa_promocao_ensino_fund AS FLOAT64) taxa_promocao_ensino_fund,
 SAFE_CAST(taxa_promocao_ensino_fund_anos_iniciais AS FLOAT64) taxa_promocao_ensino_fund_anos_iniciais,
 SAFE_CAST(taxa_promocao_ensino_fund_anos_finais AS FLOAT64) taxa_promocao_ensino_fund_anos_finais,

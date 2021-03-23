@@ -22,7 +22,6 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.uf_remuneracao_docentes AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(regiao AS STRING) regiao,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(escolaridade AS STRING) escolaridade,

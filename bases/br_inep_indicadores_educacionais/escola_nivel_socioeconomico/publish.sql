@@ -21,12 +21,12 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.escola_nivel_socioeconomico AS
 SELECT 
-SAFE_CAST(id_escola AS INT64) id_escola,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(area AS STRING) area,
-SAFE_CAST(rede AS STRING) rede,
-SAFE_CAST(localizacao AS STRING) localizacao,
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_escola AS INT64) id_escola,
+SAFE_CAST(area AS STRING) area,
+SAFE_CAST(localizacao AS STRING) localizacao,
+SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(inse_quantidade_alunos AS INT64) inse_quantidade_alunos,
 SAFE_CAST(valor_inse AS FLOAT64) valor_inse,
 SAFE_CAST(inse_classificacao_2014 AS STRING) inse_classificacao_2014,

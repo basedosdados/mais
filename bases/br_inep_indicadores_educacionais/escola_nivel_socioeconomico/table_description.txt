@@ -22,20 +22,12 @@ Email: hevilynsouza12@hotmail.com
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- municipio
 - escola
-- area
-- rede
-- localizacao
 - ano
 
 Colunas identificando linhas unicamente
 -------------------
 - id_escola
-- id_municipio
-- area
-- rede
-- localizacao
 - ano
 
 Cobertura Temporal

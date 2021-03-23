@@ -22,7 +22,9 @@ Email: hevilynsouza12@hotmail.com
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- estado
+- unidade da federacao
+- localizacao
+- rede
 - ano
 
 Colunas identificando linhas unicamente

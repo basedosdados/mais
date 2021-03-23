@@ -21,10 +21,10 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.uf AS
 SELECT 
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(localizacao AS STRING) localizacao,
 SAFE_CAST(rede AS STRING) rede,
-SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(atu_educacao_infantil AS FLOAT64) atu_educacao_infantil,
 SAFE_CAST(atu_educacao_infantil_creche AS FLOAT64) atu_educacao_infantil_creche,
 SAFE_CAST(atu_educacao_infantil_pre_escola AS FLOAT64) atu_educacao_infantil_pre_escola,

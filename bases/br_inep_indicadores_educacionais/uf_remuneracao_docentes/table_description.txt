@@ -23,13 +23,14 @@ Email: hevilynsouza12@hotmail.com
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - ano
-- estado
+- unidade da federacao
+- rede
+- escolaridade
 
 Colunas identificando linhas unicamente
 -------------------
 - ano
-- regiao
-- uf
+- sigla_uf
 - rede
 - escolaridade
 
@@ -46,9 +47,9 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Padronização dos nomes das colunas.
-Palavras sem acento e minúsculas.
-Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
+- Padronização dos nomes das colunas.
+- Palavras sem acento e minúsculas.
+- Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
 
 Frequencia de Atualização
 -------------------------
