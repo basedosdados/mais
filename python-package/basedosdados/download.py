@@ -24,7 +24,7 @@ def credentials(from_file=False, reauth=False):
             return pydata_google_auth.get_user_credentials(
                 SCOPES, credentials_cache=pydata_google_auth.cache.REAUTH
             )
-        else:
+        else: 
             return pydata_google_auth.get_user_credentials(
                 SCOPES,
             )
@@ -125,6 +125,8 @@ def download(
             savepath = savepath / (table_id + ".csv")
         else:
             savepath = savepath / ("query_result.csv")
+            
+    pandas_kwargs['index'] = pandas_kwargs.get('index', False)
 
     table.to_csv(savepath, **pandas_kwargs)
 
