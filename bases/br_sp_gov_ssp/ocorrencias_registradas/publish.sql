@@ -19,7 +19,7 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_sp_gov_ssp.ocorrecencias_registradas AS
+CREATE VIEW basedosdados-dev.br_sp_gov_ssp.ocorrencias_registradas AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
@@ -49,4 +49,4 @@ SAFE_CAST(roubo_a_banco AS INT64) roubo_a_banco,
 SAFE_CAST(roubo_de_carga AS INT64) roubo_de_carga,
 SAFE_CAST(furto_outros AS INT64) furto_outros,
 SAFE_CAST(furto_de_veiculo AS INT64) furto_de_veiculo
-from basedosdados-dev.br_sp_gov_ssp_staging.ocorrecencias_registradas as t
+from basedosdados-dev.br_sp_gov_ssp_staging.ocorrencias_registradas as t

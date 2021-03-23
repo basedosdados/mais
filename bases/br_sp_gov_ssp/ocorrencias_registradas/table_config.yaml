@@ -1,7 +1,7 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: ocorrecencias_registradas # AUTO GENERATED
+table_id: ocorrencias_registradas # AUTO GENERATED
 dataset_id: br_sp_gov_ssp # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-sp-gov-ssp # AUTO GENERATED
@@ -9,8 +9,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_ssp
 
 version: v1.0 # REQUIRED
 
-last_updated: 2021-03-12 # AUTO GENERATED
-
+last_updated: 2021-03-22 # AUTO GENERATED
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
