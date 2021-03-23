@@ -1,0 +1,101 @@
+A tabela de lavouras temporárias apresenta dados de cada município brasileiro, desagregado por ano e por produto, desde 1974 até 2019. Há um conjunto de produtos que são classificados como lavouras temporárias, entre eles: alho, arroz, feijão, mandioca, melancia, melão, tomate, cana-de-açúcar. No total, tem-se diferentes dados sobre a produção de cada um de mais de 30 produtos. A tabela pode ser utilizada para melhor compreender a economia rural e o uso da terra a nível municipal no país. Deve-se tomar cuidado pois as variáveis em forma de porcentagens assumem como total o total das lavouras temporárias, e não o total de todas as lavouras.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ibge-pam
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pam
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pam/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pam/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- municipio
+- ano
+- produto
+
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
+- ano
+- produto
+
+Cobertura Temporal
+------------------
+- 1974
+- 1975
+- 1976
+- 1977
+- 1978
+- 1979
+- 1980
+- 1981
+- 1982
+- 1983
+- 1984
+- 1985
+- 1986
+- 1987
+- 1988
+- 1989
+- 1990
+- 1991
+- 1992
+- 1993
+- 1994
+- 1995
+- 1996
+- 1997
+- 1998
+- 1999
+- 2000
+- 2001
+- 2002
+- 2003
+- 2004
+- 2005
+- 2006
+- 2007
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+O processo de tratamento dos dados consiste em adquirir as bases da SIDRA, repositório online do IBGE, e unir as diferentes bases adquiridas. Como há uma restrição de tamanho para buscar bases da SIDRA, a estratégia adotada foi pegar valores para uma variável por um período de aproximadamente 10 anos, conforme o sistema permitia. Os dados de todos os anos de cada uma das oito variáveis foram aglomerado por variável, e depois uma tabela única foi criada. Por fim, a tabela foi exportada de forma particionada para facilitar e diminuir os custos de uma eventual consulta.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+
