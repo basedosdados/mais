@@ -16,19 +16,19 @@ Website: https://github.com/mavalentim
 Email: mavalentim.b@gmail.comTratado por
 -----------
 Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_idesp/code
+Website: https://github.com/mavalentim
 Email: mavalentim.b@gmail.com
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- diretoria
-- nivel de ensino
 - ano
+- diretoria
 
 Colunas identificando linhas unicamente
 -------------------
-- diretoria
-- nivel_ensino
 - ano
+- diretoria
 
 Cobertura Temporal
 ------------------
@@ -49,7 +49,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-O tratamento consistiu em harmonizar e juntar as diferentes tabelas de diferentes anos, remodelando seu formato para que fique na granularidade de nível de ensino e substituindo vírgulas por pontos para evitar confundir os arquivos ,csv.
+O tratamento consistiu em harmonizar e juntar as diferentes tabelas de diferentes anos, remodelando seu formato para que fique na granularidade da diretoria e substituindo vírgulas por pontos para evitar confundir os arquivos .CSV.
 
 Frequencia de Atualização
 -------------------------

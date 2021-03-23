@@ -19,9 +19,11 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_sp_seduc_idesp.estado AS
+CREATE VIEW basedosdados-dev.br_sp_seduc_idesp.uf AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(nivel_ensino AS STRING) nivel_ensino,
-SAFE_CAST(nota_idesp AS FLOAT64) nota_idesp
-from basedosdados-dev.br_sp_seduc_idesp_staging.estado as t
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(nota_idesp_ef_iniciais AS FLOAT64) nota_idesp_ef_iniciais,
+SAFE_CAST(nota_idesp_ef_finais AS FLOAT64) nota_idesp_ef_finais,
+SAFE_CAST(nota_idesp_em AS FLOAT64) nota_idesp_em
+from basedosdados-dev.br_sp_seduc_idesp_staging.uf as t

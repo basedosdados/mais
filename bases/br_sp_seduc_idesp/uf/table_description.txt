@@ -1,4 +1,4 @@
-A tabela contém valores do IDESP agregado para o nível de ensino, aglomerando todas as escolas naquele nível do estado de São Paulo. A tabela torna-se portanto uma série histórica do indicador ao longo do período que se encontra disponível. Novamente, o IDESP é um indicador que avalia a qualidade da escola. Nesta avaliação, considera–se que uma boa escola é aquela em que a maior parte dos alunos aprende as competências e habilidades requeridas para a sua série/ano, num período de tempo ideal – o ano letivo. 
+A tabela contém valores do IDESP do estado de São Paulo, separado em variáveis para cada nível de ensino. A tabela torna-se portanto uma série histórica do indicador ao longo do período que se encontra disponível. Novamente, o IDESP é um indicador que avalia a qualidade da escola. Nesta avaliação, considera–se que uma boa escola é aquela em que a maior parte dos alunos aprende as competências e habilidades requeridas para a sua série/ano, num período de tempo ideal – o ano letivo. 
 
 
 Para saber mais acesse:
@@ -20,12 +20,10 @@ Email: mavalentim.b@gmail.com
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- nivel de ensino
 - ano
 
 Colunas identificando linhas unicamente
 -------------------
-- nivel_ensino
 - ano
 
 Cobertura Temporal
@@ -47,7 +45,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-O processo de tratamento da base foi simples e consistiu basicamente em juntar todas as diferentes bases, substituir vírgulas por pontos e harmonizar as variáveis.
+O processo de tratamento da base foi simples e consistiu basicamente em juntar todas as diferentes bases, substituir vírgulas por pontos e harmonizar as variáveis, criando o identificador de Unidade da Federação para facilitar contato entre bases.
 
 Frequencia de Atualização
 -------------------------

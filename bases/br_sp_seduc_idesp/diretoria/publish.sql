@@ -22,9 +22,9 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_sp_seduc_idesp.diretoria AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(codigo_diretoria AS INT64) codigo_diretoria,
 SAFE_CAST(diretoria AS STRING) diretoria,
-SAFE_CAST(nivel_ensino AS STRING) nivel_ensino,
-SAFE_CAST(nota_idesp AS FLOAT64) nota_idesp
-
+SAFE_CAST(id_diretoria AS INT64) id_diretoria,
+SAFE_CAST(nota_idesp_ef_iniciais AS FLOAT64) nota_idesp_ef_iniciais,
+SAFE_CAST(nota_idesp_ef_finais AS FLOAT64) nota_idesp_ef_finais,
+SAFE_CAST(nota_idesp_em AS FLOAT64) nota_idesp_em
 from basedosdados-dev.br_sp_seduc_idesp_staging.diretoria as t

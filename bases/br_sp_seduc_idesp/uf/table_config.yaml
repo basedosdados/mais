@@ -1,22 +1,22 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: estado # AUTO GENERATED
+table_id: uf # AUTO GENERATED
 dataset_id: br_sp_seduc_idesp # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-sp-seduc-idesp # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_idesp # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v1.2 # REQUIRED
 
-last_updated: 2021-03-17 # AUTO GENERATED
+last_updated: 2021-03-23 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    A tabela contém valores do IDESP agregado para o nível de ensino, aglomerando todas as escolas naquele nível do estado de São Paulo. A tabela torna-se portanto uma série histórica do indicador ao longo do período que se encontra disponível. Novamente, o IDESP é um indicador que avalia a qualidade da escola. Nesta avaliação, considera–se que uma boa escola é aquela em que a maior parte dos alunos aprende as competências e habilidades requeridas para a sua série/ano, num período de tempo ideal – o ano letivo. 
+    A tabela contém valores do IDESP do estado de São Paulo, separado em variáveis para cada nível de ensino. A tabela torna-se portanto uma série histórica do indicador ao longo do período que se encontra disponível. Novamente, o IDESP é um indicador que avalia a qualidade da escola. Nesta avaliação, considera–se que uma boa escola é aquela em que a maior parte dos alunos aprende as competências e habilidades requeridas para a sua série/ano, num período de tempo ideal – o ano letivo. 
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -36,7 +36,7 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    O processo de tratamento da base foi simples e consistiu basicamente em juntar todas as diferentes bases, substituir vírgulas por pontos e harmonizar as variáveis.
+    O processo de tratamento da base foi simples e consistiu basicamente em juntar todas as diferentes bases, substituir vírgulas por pontos e harmonizar as variáveis, criando o identificador de Unidade da Federação para facilitar contato entre bases.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -49,14 +49,12 @@ data_update_frequency: 1 ano # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - nivel de ensino
     - ano
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - nivel_ensino
     - ano
 
 # Qual é a cobertura espacial da tabela?
@@ -108,13 +106,25 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nivel_ensino
-        description: Nível de Ensino
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nota_idesp
-        description: Nota do IDESP
+        name: nota_idesp_ef_iniciais
+        description: Nota IDESP para anos iniciais do ensino fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nota_idesp_ef_finais
+        description: Nota IDESP para anos finais do ensino fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nota_idesp_em
+        description: Nota IDESP para anos do ensino médio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

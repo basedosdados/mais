@@ -7,9 +7,9 @@ dataset_id: br_sp_seduc_idesp # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-sp-seduc-idesp # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_idesp # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v1.2 # REQUIRED
 
-last_updated: 2021-03-17 # AUTO GENERATED
+last_updated: 2021-03-23 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -30,13 +30,13 @@ published_by:
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
     name: Matheus Valentim
-    code_url: 
-    website: 
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_idesp/code # REQUIRED
+    website: https://github.com/mavalentim
     email: mavalentim.b@gmail.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    O tratamento consistiu em harmonizar e juntar as diferentes tabelas de diferentes anos, remodelando seu formato para que fique na granularidade de nível de ensino e substituindo vírgulas por pontos para evitar confundir os arquivos ,csv.
+    O tratamento consistiu em harmonizar e juntar as diferentes tabelas de diferentes anos, remodelando seu formato para que fique na granularidade da diretoria e substituindo vírgulas por pontos para evitar confundir os arquivos .CSV.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -49,16 +49,15 @@ data_update_frequency: 1 ano # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - diretoria
-    - nivel de ensino
     - ano
+    - diretoria
+
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - diretoria
-    - nivel_ensino
     - ano
+    - diretoria
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -104,7 +103,7 @@ columns: # REQUIRED
   
     -   
         name: diretoria
-        description: Diretoria de Ensino
+        description: Diretoria de ensino
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -115,19 +114,25 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nota_idesp
-        description: Nota do IDESP
+        name: id_diretoria
+        description: ID Diretoria de ensino - específico para o estado de São Paulo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nivel_ensino
-        description: Nível de Ensino
+        name: nota_idesp_ef_iniciais
+        description: Nota IDESP para anos iniciais do ensino fundamental
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: codigo_diretoria
-        description: Código da Diretoria de Ensino
+        name: nota_idesp_ef_finais
+        description: Nota IDESP para anos finais do ensino fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nota_idesp_em
+        description: Nota IDESP para anos do ensino médio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
