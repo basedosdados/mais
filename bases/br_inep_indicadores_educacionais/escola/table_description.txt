@@ -1,4 +1,4 @@
-Indicadores educacionais do Inep a nível de município.
+Indicadores educacionais do Inep a nível escola.
 
 
 Para saber mais acesse:
@@ -22,10 +22,11 @@ Email: hevilynsouza12@hotmail.com
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
+- ano
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- municipio
+- escola
 - ano
 - localizacao
 - rede
@@ -33,13 +34,13 @@ Nível da Observação (i.e. a granularidade da linha)
 Colunas identificando linhas unicamente
 -------------------
 - id_municipio
+- id_escola
 - ano
 - rede
 - localizacao
 
 Cobertura Temporal
 ------------------
-- 2006
 - 2007
 - 2008
 - 2009
@@ -62,7 +63,7 @@ Cobertura Espacial
 Tratamento
 ----------
 - Padronização dos nomes das colunas.
-- Exclusão das colunas Região, Nome do Município e UF.
+- Exclusão das colunas Região, Nome do Município ,UF e Nome da escola.
 - Palavras sem acento e minúsculas.
 - Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
 
