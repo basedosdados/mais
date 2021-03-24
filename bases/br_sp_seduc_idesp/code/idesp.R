@@ -28,6 +28,10 @@ organizadora<- function(x){
   mutate(nota_idesp = as.character(nota_idesp))
 }
 
+criadora_de_na <- function(x){ 
+  x = ifelse(x == "", NA, x)
+              }
+
 # Aplicando em anos iniciais e anos finais do ensino fundamental
 idesp_ef<- organizadora(idesp_iniciais)%>%
         bind_rows(organizadora(idesp_finais))%>%
@@ -40,8 +44,16 @@ idesp_ef$nota_idesp <- str_replace(idesp_ef$nota_idesp, ",", ".")
 idesp_em$nota_idesp <- str_replace(idesp_em$nota_idesp, ",", ".")
 
 # Juntando ensino fundamental com ensino m?dio
-idesp_long <-idesp_ef%>%
-  bind_rows(idesp_em)
+idesp_wide<-idesp_ef%>%
+  bind_rows(idesp_em)%>%
+  mutate(nivel_ensino = case_when(nivel_ensino == "EF ANOS INICIAIS" ~ "ef_iniciais",
+                                  nivel_ensino == "EF ANOS FINAIS" ~ "ef_finais",
+                                  nivel_ensino == "ENSINO MEDIO" ~ "em"))%>%
+  pivot_wider(id_cols = c(id_escola_sp,id_escola, ano),
+              names_from = nivel_ensino,
+              values_from = nota_idesp)%>%
+  rename( nota_idesp_ef_iniciais = ef_iniciais ,
+         nota_idesp_ef_finais = ef_finais , nota_idesp_em = em)
 
 # Mergindo com o diret?rio de escolas para termos id_municipio de onde esta cada escola
 
@@ -64,8 +76,9 @@ diretorio_com_id <- dbGetQuery(con, query)
 
 # Juntando com a base local
 
-idesp_long_identificado <- idesp_long%>%
-  inner_join(diretorio_com_id, by = "id_escola")
+idesp_wide_identificado <- idesp_wide%>%
+  left_join(diretorio_com_id, by = "id_escola")%>%
+  mutate(across(everything(), .fns = criadora_de_na))
 
 # Exportando os dados
-export(idesp_long_identificado, "bases_prontas/idesp_fundamental_medio.csv")
+export(idesp_wide_identificado, "bases_prontas/idesp_fundamental_medio.csv")
