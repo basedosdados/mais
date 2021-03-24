@@ -1,0 +1,571 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: hexagonos_2019 # AUTO GENERATED
+dataset_id: br_ipea_acesso_oportunidades # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-ipea-acesso-oportunidades # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_acesso_oportunidades # AUTO GENERATED
+
+version: 1.0 # REQUIRED
+
+last_updated: 2021-03-23 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Acessiblidade estimada pelo projeto do Acesso a oportunidades do IPEA para 
+    cada célula do grid H3 na resolucão 9.
+
+    Para saber mais sobre as colunas acesse: http://repositorio.ipea.gov.br/bitstream/11058/9586/5/dicionario2019_v1.0_20200116.xlsx
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: João Carabetta  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_acesso_oportunidades/code # REQUIRED
+    email: joao.carabetta@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: João Carabetta  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_acesso_oportunidades/code # REQUIRED
+    email: joao.carabetta@gmail.com>
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: 1 ano # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - hexagono
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_grid_h3
+    - modo_transporte
+    - horario_pico
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+    - ['Fortaleza', 'Sao Paulo', 'Rio de Janeiro', 'Curitiba',
+       'Porto Alegre', 'Belo Horizonte', 'Brasilia', 'Salvador', 'Manaus',
+       'Recife', 'Goiania', 'Belem', 'Guarulhos', 'Campinas', 'Sao Luis',
+       'Sao Goncalo', 'Maceio', 'Duque de Caxias', 'Campo Grande',
+       'Natal']
+
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2019
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+  
+    -
+        name:  id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  id_grid_h3
+        description:  Identificador único do hexágono (resolucao 9)
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  geometria
+        description:  Geometria do hexágono
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  modo_transporte
+        description: Modo de transporte do indicador de acessibilidade -- tp (transporte público), bicicleta ou caminhada
+        is_in_staging:  True
+        is_partition:  False
+    -
+        name:  horario_pico
+        description:  Informação se o indicador é em hora pico ou fora-pico -- 1 (pico) ou 0 (fora pico)
+        is_in_staging:  True
+        is_partition:  
+    -
+        name:  CMATT15
+        description:  Proporção de empregos acessíveis em até 15 minutos
+        is_in_staging:  True
+        is_partition:  False
+    -
+        name:  CMATQ15
+        description:  Proporção de empregos pelo match do quintil de renda acessíveis em até 15 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATD15
+        description:  Proporção de empregos pelo match do decil de renda acessíveis em até 15 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAST15
+        description:  Proporção de estabelecimentos de saúde acessíveis em até 15 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASB15
+        description:  Proporção de estabelecimentos de sáude de baixa complexidade acessíveis em até 15 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASM15
+        description:  Proporção de estabelecimentos de sáude de media complexidade acessíveis em até 15 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASA15
+        description:  Proporção de estabelecimentos de sáude de alta complexidade acessíveis em até 15 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAET15
+        description:  Proporção de estabelecimentos de educação acessíveis em até 15 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEI15
+        description:  Proporção de estabelecimentos de educação infantil acessíveis em até 15 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEF15
+        description:  Proporção de estabelecimentos de educação fundamental acessíveis em até 15 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEM15
+        description:  Proporção de estabelecimentos de educação média acessíveis em até 15 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATT30
+        description:  Proporção de empregos acessíveis em até 30 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATQ30
+        description:  Proporção de empregos pelo match do quintil de renda acessíveis em até 30 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATD30
+        description:  Proporção de empregos pelo match do decil de renda acessíveis em até 30 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAST30
+        description:  Proporção de estabelecimentos de saúde acessíveis em até 30 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASB30
+        description:  Proporção de estabelecimentos de sáude de baixa complexidade acessíveis em até 30 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASM30
+        description:  Proporção de estabelecimentos de sáude de media complexidade acessíveis em até 30 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASA30
+        description:  Proporção de estabelecimentos de sáude de alta complexidade acessíveis em até 30 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAET30
+        description:  Proporção de estabelecimentos de educação acessíveis em até 30 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEI30
+        description:  Proporção de estabelecimentos de educação infantil acessíveis em até 30 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEF30
+        description:  Proporção de estabelecimentos de educação fundamental acessíveis em até 30 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEM30
+        description:  Proporção de estabelecimentos de educação média acessíveis em até 30 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATT45
+        description:  Proporção de empregos acessíveis em até 45 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATQ45
+        description:  Proporção de empregos pelo match do quintil de renda acessíveis em até 45 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATD45
+        description:  Proporção de empregos pelo match do decil de renda acessíveis em até 45 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAST45
+        description:  Proporção de estabelecimentos de saúde acessíveis em até 45 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASB45
+        description:  Proporção de estabelecimentos de sáude de baixa complexidade acessíveis em até 45 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASM45
+        description:  Proporção de estabelecimentos de sáude de media complexidade acessíveis em até 45 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASA45
+        description:  Proporção de estabelecimentos de sáude de alta complexidade acessíveis em até 45 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAET45
+        description:  Proporção de estabelecimentos de educação acessíveis em até 45 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEI45
+        description:  Proporção de estabelecimentos de educação infantil acessíveis em até 45 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEF45
+        description:  Proporção de estabelecimentos de educação fundamental acessíveis em até 45 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEM45
+        description:  Proporção de estabelecimentos de educação média acessíveis em até 45 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATT60
+        description:  Proporção de empregos acessíveis em até 60 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATQ60
+        description:  Proporção de empregos pelo match do quintil de renda acessíveis em até 60 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATD60
+        description:  Proporção de empregos pelo match do decil de renda acessíveis em até 60 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAST60
+        description:  Proporção de estabelecimentos de saúde acessíveis em até 60 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASB60
+        description:  Proporção de estabelecimentos de sáude de baixa complexidade acessíveis em até 60 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASM60
+        description:  Proporção de estabelecimentos de sáude de media complexidade acessíveis em até 60 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASA60
+        description:  Proporção de estabelecimentos de sáude de alta complexidade acessíveis em até 60 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAET60
+        description:  Proporção de estabelecimentos de educação acessíveis em até 60 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEI60
+        description:  Proporção de estabelecimentos de educação infantil acessíveis em até 60 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEF60
+        description:  Proporção de estabelecimentos de educação fundamental acessíveis em até 60 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEM60
+        description:  Proporção de estabelecimentos de educação média acessíveis em até 60 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATT90
+        description:  Proporção de empregos acessíveis em até 90 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATQ90
+        description:  Proporção de empregos pelo match do quintil de renda acessíveis em até 90 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATD90
+        description:  Proporção de empregos pelo match do decil de renda acessíveis em até 90 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAST90
+        description:  Proporção de estabelecimentos de saúde acessíveis em até 90 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASB90
+        description:  Proporção de estabelecimentos de sáude de baixa complexidade acessíveis em até 90 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASM90
+        description:  Proporção de estabelecimentos de sáude de media complexidade acessíveis em até 90 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASA90
+        description:  Proporção de estabelecimentos de sáude de alta complexidade acessíveis em até 90 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAET90
+        description:  Proporção de estabelecimentos de educação acessíveis em até 90 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEI90
+        description:  Proporção de estabelecimentos de educação infantil acessíveis em até 90 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEF90
+        description:  Proporção de estabelecimentos de educação fundamental acessíveis em até 90 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEM90
+        description:  Proporção de estabelecimentos de educação média acessíveis em até 90 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATT120
+        description:  Proporção de empregos acessíveis em até 120 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATQ120
+        description:  Proporção de empregos pelo match do quintil de renda acessíveis em até 120 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMATD120
+        description:  Proporção de empregos pelo match do decil de renda acessíveis em até 120 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAST120
+        description:  Proporção de estabelecimentos de saúde acessíveis em até 120 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASB120
+        description:  Proporção de estabelecimentos de sáude de baixa complexidade acessíveis em até 120 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASM120
+        description:  Proporção de estabelecimentos de sáude de media complexidade acessíveis em até 120 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMASA120
+        description:  Proporção de estabelecimentos de sáude de alta complexidade acessíveis em até 120 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAET120
+        description:  Proporção de estabelecimentos de educação acessíveis em até 120 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEI120
+        description:  Proporção de estabelecimentos de educação infantil acessíveis em até 120 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEF120
+        description:  Proporção de estabelecimentos de educação fundamental acessíveis em até 120 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  CMAEM120
+        description:  Proporção de estabelecimentos de educação média acessíveis em até 120 minutos
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  TMIST
+        description:  Indicador de tempo mínimo até estabelecimentos de saúde mais próximo
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  TMISB
+        description:  Indicador de tempo mínimo até estabelecimentos de sáude de baixa complexidade mais próximo
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  TMISM
+        description:  Indicador de tempo mínimo até estabelecimentos de sáude de media complexidade mais próximo
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  TMISA
+        description:  Indicador de tempo mínimo até estabelecimentos de sáude de alta complexidade mais próximo
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  TMIET
+        description:  Indicador de tempo mínimo até estabelecimentos de educação mais próximo
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  TMIEI
+        description:  Indicador de tempo mínimo até estabelecimentos de educação infantil mais próximo
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  TMIEF
+        description:  Indicador de tempo mínimo até estabelecimentos de educação fundamental mais próximo
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  TMIEM
+        description:  Indicador de tempo mínimo até estabelecimentos de educação média mais próximo
+        is_in_staging:  True
+        is_partition:  False
