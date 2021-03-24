@@ -51,7 +51,6 @@ data_update_frequency: 1 ano # REQUIRED
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
     - hexagono
-    - municipio
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -102,7 +101,7 @@ columns: # REQUIRED
   
     -
         name:  id_municipio
-        description:  Código 7 dígitos IBGE do município
+        description: ID Município - IBGE 7 Dígitos
         is_in_staging:  True
         is_partition:  False
 
@@ -118,6 +117,16 @@ columns: # REQUIRED
         is_in_staging:  True
         is_partition:  False
 
+    -
+        name:  modo_transporte
+        description: Modo de transporte do indicador de acessibilidade -- tp (transporte público), bicicleta ou caminhada
+        is_in_staging:  True
+        is_partition:  False
+    -
+        name:  horario_pico
+        description:  Informação se o indicador é em hora pico ou fora-pico -- 1 (pico) ou 0 (fora pico)
+        is_in_staging:  True
+        is_partition:  False
     -
         name:  CMATT15
         description:  Número de empregos acessíveis em até 15 minutos

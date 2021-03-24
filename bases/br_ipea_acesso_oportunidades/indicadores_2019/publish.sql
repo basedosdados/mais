@@ -24,6 +24,8 @@ SELECT
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(id_grid_h3 AS STRING) id_grid_h3,
 ST_GEOGFROMTEXT(geometria) geometria,
+SAFE_CAST(modo_transporte AS STRING) modo_transporte,
+SAFE_CAST(horario_pico AS INT64) horario_pico,
 SAFE_CAST(CMATT15 AS FLOAT64) CMATT15,
 SAFE_CAST(CMATQ15 AS FLOAT64) CMATQ15,
 SAFE_CAST(CMATD15 AS FLOAT64) CMATD15,

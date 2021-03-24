@@ -102,7 +102,7 @@ columns: # REQUIRED
 
     -
         name:  id_municipio
-        description:  Código 7 dígitos IBGE do município
+        description:  ID Município - IBGE 7 Dígitos
         is_in_staging:  True
         is_partition:  False
 

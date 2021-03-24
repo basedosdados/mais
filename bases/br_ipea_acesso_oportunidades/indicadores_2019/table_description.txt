@@ -25,7 +25,6 @@ Website:
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - hexagono
-- municipio
 
 Colunas identificando linhas unicamente
 -------------------
