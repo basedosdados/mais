@@ -19,10 +19,11 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.municipio AS
+CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.escola AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_escola AS INT64) id_escola,
 SAFE_CAST(localizacao AS STRING) localizacao,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(atu_educacao_infantil AS FLOAT64) atu_educacao_infantil,
@@ -202,10 +203,7 @@ SAFE_CAST(afd_eja_medio_grupo_2 AS FLOAT64) afd_eja_medio_grupo_2,
 SAFE_CAST(afd_eja_medio_grupo_3 AS FLOAT64) afd_eja_medio_grupo_3,
 SAFE_CAST(afd_eja_medio_grupo_4 AS FLOAT64) afd_eja_medio_grupo_4,
 SAFE_CAST(afd_eja_medio_grupo_5 AS FLOAT64) afd_eja_medio_grupo_5,
-SAFE_CAST(ird_baixa_regularidade AS FLOAT64) ird_baixa_regularidade,
-SAFE_CAST(ird_media_baixa AS FLOAT64) ird_media_baixa,
-SAFE_CAST(ird_media_alta AS FLOAT64) ird_media_alta,
-SAFE_CAST(ird_alta AS FLOAT64) ird_alta,
+SAFE_CAST(ird_media_regularidade_docente AS FLOAT64) ird_media_regularidade_docente,
 SAFE_CAST(ied_ensino_fund_nivel_1 AS FLOAT64) ied_ensino_fund_nivel_1,
 SAFE_CAST(ied_ensino_fund_nivel_2 AS FLOAT64) ied_ensino_fund_nivel_2,
 SAFE_CAST(ied_ensino_fund_nivel_3 AS FLOAT64) ied_ensino_fund_nivel_3,
@@ -230,10 +228,5 @@ SAFE_CAST(ied_ensino_medio_nivel_3 AS FLOAT64) ied_ensino_medio_nivel_3,
 SAFE_CAST(ied_ensino_medio_nivel_4 AS FLOAT64) ied_ensino_medio_nivel_4,
 SAFE_CAST(ied_ensino_medio_nivel_5 AS FLOAT64) ied_ensino_medio_nivel_5,
 SAFE_CAST(ied_ensino_medio_nivel_6 AS FLOAT64) ied_ensino_medio_nivel_6,
-SAFE_CAST(icg_nivel_1 AS FLOAT64) icg_nivel_1,
-SAFE_CAST(icg_nivel_2 AS FLOAT64) icg_nivel_2,
-SAFE_CAST(icg_nivel_3 AS FLOAT64) icg_nivel_3,
-SAFE_CAST(icg_nivel_4 AS FLOAT64) icg_nivel_4,
-SAFE_CAST(icg_nivel_5 AS FLOAT64) icg_nivel_5,
-SAFE_CAST(icg_nivel_6 AS FLOAT64) icg_nivel_6
-from basedosdados-dev.br_inep_indicadores_educacionais_staging.municipio as t
+SAFE_CAST(icg_nivel_complexidade_gestao_escola AS STRING) icg_nivel_complexidade_gestao_escola
+from basedosdados-dev.br_inep_indicadores_educacionais_staging.escola as t

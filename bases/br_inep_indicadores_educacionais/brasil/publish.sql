@@ -13,16 +13,15 @@ Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
 # para algo um pouco mais explícito.
 
 TIPOS:
-    - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
+    - Para modificar tipos de colunas, basta substituir STRNG por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
 
-CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.municipio AS
+CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.brasil AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(localizacao AS STRING) localizacao,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(atu_educacao_infantil AS FLOAT64) atu_educacao_infantil,
@@ -236,4 +235,4 @@ SAFE_CAST(icg_nivel_3 AS FLOAT64) icg_nivel_3,
 SAFE_CAST(icg_nivel_4 AS FLOAT64) icg_nivel_4,
 SAFE_CAST(icg_nivel_5 AS FLOAT64) icg_nivel_5,
 SAFE_CAST(icg_nivel_6 AS FLOAT64) icg_nivel_6
-from basedosdados-dev.br_inep_indicadores_educacionais_staging.municipio as t
+from basedosdados-dev.br_inep_indicadores_educacionais_staging.brasil as t

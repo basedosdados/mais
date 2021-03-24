@@ -1,13 +1,13 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: municipio # AUTO GENERATED
+table_id: regiao # AUTO GENERATED
 dataset_id: br_inep_indicadores_educacionais # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-inep-indicadores-educacionais # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais # AUTO GENERATED
 
-version: v2.0 # REQUIRED
+version: v1.0 # REQUIRED
 
 last_updated: 2021-02-23 # AUTO GENERATED
 
@@ -16,7 +16,7 @@ last_updated: 2021-02-23 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Indicadores educacionais do Inep a nível de município.
+    Indicadores educacionais do Inep.
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -52,8 +52,8 @@ data_update_frequency: 1 ano # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - municipio
     - ano
+    - regiao
     - localizacao
     - rede
 
@@ -61,10 +61,10 @@ observation_level: #REQUIRED
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - id_municipio
     - ano
-    - rede
+    - regiao
     - localizacao
+    - rede
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -101,8 +101,7 @@ coverage_time:
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED  
-    - ano
+partitions: # REQUIRED
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -115,8 +114,14 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: id_municipio
-        description: ID Município - IBGE 7 dígitos
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: regiao
+        description: Região
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -1397,9 +1402,3 @@ columns: # REQUIRED
         description: Complexidade de Gestão da Escola Nível 6
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.

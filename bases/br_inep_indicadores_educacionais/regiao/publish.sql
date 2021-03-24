@@ -19,10 +19,10 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.municipio AS
+CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.regiao AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(regiao AS STRING) regiao,
 SAFE_CAST(localizacao AS STRING) localizacao,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(atu_educacao_infantil AS FLOAT64) atu_educacao_infantil,
@@ -236,4 +236,4 @@ SAFE_CAST(icg_nivel_3 AS FLOAT64) icg_nivel_3,
 SAFE_CAST(icg_nivel_4 AS FLOAT64) icg_nivel_4,
 SAFE_CAST(icg_nivel_5 AS FLOAT64) icg_nivel_5,
 SAFE_CAST(icg_nivel_6 AS FLOAT64) icg_nivel_6
-from basedosdados-dev.br_inep_indicadores_educacionais_staging.municipio as t
+from basedosdados-dev.br_inep_indicadores_educacionais_staging.regiao as t
