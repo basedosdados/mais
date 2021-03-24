@@ -1,5 +1,4 @@
-Acessiblidade estimada pelo projeto do Acesso a oportunidades do IPEA,
-assim como informacoes sobre infraestrutura de saúde e educacão para cada
+Número estabelecimentos de saúde e educacão, renda e populacão para cada
 célula do grid H3 na resolucão 9.
 
 Para saber mais sobre as colunas acesse: http://repositorio.ipea.gov.br/bitstream/11058/9586/5/dicionario2019_v1.0_20200116.xlsx
@@ -31,8 +30,6 @@ Nível da Observação (i.e. a granularidade da linha)
 Colunas identificando linhas unicamente
 -------------------
 - id_grid_h3
-- modo_transporte
-- se_horario_de_pico
 
 Cobertura Temporal
 ------------------
@@ -45,6 +42,8 @@ Cobertura Espacial
 
 Tratamento
 ----------
+- Mudanca no nome de variáveis
+- Essa tabela é um subset da tabela original
 
 Frequencia de Atualização
 -------------------------

@@ -16,9 +16,8 @@ last_updated: 2021-03-23 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Acessiblidade estimada pelo projeto do Acesso a oportunidades do IPEA,
-    assim como informacoes sobre infraestrutura de saúde e educacão para cada
-    célula do grid H3 na resolucão 9.
+    Acessiblidade estimada pelo projeto do Acesso a oportunidades do IPEA para 
+    cada célula do grid H3 na resolucão 9.
 
     Para saber mais sobre as colunas acesse: http://repositorio.ipea.gov.br/bitstream/11058/9586/5/dicionario2019_v1.0_20200116.xlsx
 
@@ -60,7 +59,7 @@ observation_level: #REQUIRED
 primary_keys:
     - id_grid_h3
     - modo_transporte
-    - se_horario_de_pico
+    - horario_pico
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -102,12 +101,6 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -
-        name:  nome_municipio
-        description:  Nome do município
-        is_in_staging:  True
-        is_partition:  False
-
-    -
         name:  id_municipio
         description:  Código 7 dígitos IBGE do município
         is_in_staging:  True
@@ -122,114 +115,6 @@ columns: # REQUIRED
     -
         name:  geometria
         description:  Geometria do hexágono
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_pessoas
-        description:  Quantidade total de pessoas
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_pessoas_brancas
-        description:  Quantidade de pessoas de cor branca
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_pessoas_negras
-        description:  Quantidade de pessoas de cor negra
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_pessoas_indigenas
-        description:  Quantidade de pessoas de cor indígena
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_pessoas_amarelas
-        description:  Quantidade de pessoas de cor amarela
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  renda_domiciliar_pc
-        description:  Renda domiciliar per capta média -- R$ (Reais), valores de 2010
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quintil_de_renda
-        description:  Quintil de renda -- 1 (pobres), 2, 3, 4, 5 (ricos)
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  decil_de_renda
-        description:  Decil de renda -- 1 (pobres), 2, 3, 4, 5, 6, 7, 8, 9, 10 (ricos)
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_estabelecimentos_ensino
-        description:  Quantidade total de estabelecimentos de ensino
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_estabelecimentos_ensino_infantil
-        description:  Quantidade de estabelecimentos de ensino infantil
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_estabelecimentos_ensino_fundamental
-        description:  Quantidade de estabelecimentos de ensino fundamental
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_estabelecimentos_ensino_medio
-        description:  Quantidade de estabelecimentos de ensino médio
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_estabelecimentos_saude
-        description:  Quantidade total de estabelecimentos de saúde
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_estabelecimentos_saude_baixa_complexidade
-        description:  Quantidade de estabelecimentos de sáude de baixa complexidade
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_estabelecimentos_saude_media_coplexidade
-        description:  Quantidade de estabelecimentos de sáude de média  complexidade
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  quantidade_estabelecimentos_saude_alta_coplexidade
-        description:  Quantidade de estabelecimentos de sáude de alta complexidade
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  modo_transporte
-        description:  Modo de transporte do indicador de acessibilidade -- tp (transporte público), bicicleta ou caminhada
-        is_in_staging:  True
-        is_partition:  False
-
-    -
-        name:  se_horario_de_pico
-        description:  Informação se o indicador é em hora pico ou fora-pico -- 1 (pico) ou 0 (fora pico)
         is_in_staging:  True
         is_partition:  False
 

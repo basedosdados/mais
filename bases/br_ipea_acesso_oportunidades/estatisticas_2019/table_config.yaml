@@ -1,0 +1,215 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: hexagonos_2019 # AUTO GENERATED
+dataset_id: br_ipea_acesso_oportunidades # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-ipea-acesso-oportunidades # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_acesso_oportunidades # AUTO GENERATED
+
+version: 1.0 # REQUIRED
+
+last_updated: 2021-03-23 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Número estabelecimentos de saúde e educacão, renda e populacão para cada
+    célula do grid H3 na resolucão 9.
+
+    Para saber mais sobre as colunas acesse: http://repositorio.ipea.gov.br/bitstream/11058/9586/5/dicionario2019_v1.0_20200116.xlsx
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: João Carabetta  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_acesso_oportunidades/code # REQUIRED
+    email: joao.carabetta@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: João Carabetta  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_acesso_oportunidades/code # REQUIRED
+    email: joao.carabetta@gmail.com>
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    - Mudanca no nome de variáveis
+    - Essa tabela é um subset da tabela original
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: 1 ano # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - hexagono
+    - municipio
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_grid_h3
+
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+    - ['Fortaleza', 'Sao Paulo', 'Rio de Janeiro', 'Curitiba',
+       'Porto Alegre', 'Belo Horizonte', 'Brasilia', 'Salvador', 'Manaus',
+       'Recife', 'Goiania', 'Belem', 'Guarulhos', 'Campinas', 'Sao Luis',
+       'Sao Goncalo', 'Maceio', 'Duque de Caxias', 'Campo Grande',
+       'Natal']
+
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2019
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+
+    -
+        name:  id_municipio
+        description:  Código 7 dígitos IBGE do município
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  id_grid_h3
+        description:  Identificador único do hexágono (resolucao 9)
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  geometria
+        description:  Geometria do hexágono
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_pessoas
+        description:  Quantidade total de pessoas
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_pessoas_brancas
+        description:  Quantidade de pessoas de cor branca
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_pessoas_negras
+        description:  Quantidade de pessoas de cor negra
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_pessoas_indigenas
+        description:  Quantidade de pessoas de cor indígena
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_pessoas_amarelas
+        description:  Quantidade de pessoas de cor amarela
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  renda_domiciliar_pc
+        description:  Renda domiciliar per capta média -- R$ (Reais), valores de 2010
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quintil_de_renda
+        description:  Quintil de renda -- 1 (pobres), 2, 3, 4, 5 (ricos)
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  decil_de_renda
+        description:  Decil de renda -- 1 (pobres), 2, 3, 4, 5, 6, 7, 8, 9, 10 (ricos)
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_estabelecimentos_ensino
+        description:  Quantidade total de estabelecimentos de ensino
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_estabelecimentos_ensino_infantil
+        description:  Quantidade de estabelecimentos de ensino infantil
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_estabelecimentos_ensino_fundamental
+        description:  Quantidade de estabelecimentos de ensino fundamental
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_estabelecimentos_ensino_medio
+        description:  Quantidade de estabelecimentos de ensino médio
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_estabelecimentos_saude
+        description:  Quantidade total de estabelecimentos de saúde
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_estabelecimentos_saude_baixa_complexidade
+        description:  Quantidade de estabelecimentos de sáude de baixa complexidade
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_estabelecimentos_saude_media_coplexidade
+        description:  Quantidade de estabelecimentos de sáude de média  complexidade
+        is_in_staging:  True
+        is_partition:  False
+
+    -
+        name:  quantidade_estabelecimentos_saude_alta_coplexidade
+        description:  Quantidade de estabelecimentos de sáude de alta complexidade
+        is_in_staging:  True
+        is_partition:  False

@@ -19,30 +19,11 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_ipea_acesso_oportunidades.hexagonos_2019 AS
+CREATE VIEW basedosdados-dev.br_ipea_acesso_oportunidades.indicadores_2019 AS
 SELECT 
-SAFE_CAST(nome_municipio AS STRING) nome_municipio,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(id_grid_h3 AS STRING) id_grid_h3,
 ST_GEOGFROMTEXT(geometria) geometria,
-SAFE_CAST(quantidade_pessoas AS FLOAT64) quantidade_pessoas,
-SAFE_CAST(quantidade_pessoas_brancas AS FLOAT64) quantidade_pessoas_brancas,
-SAFE_CAST(quantidade_pessoas_negras AS FLOAT64) quantidade_pessoas_negras,
-SAFE_CAST(quantidade_pessoas_indigenas AS FLOAT64) quantidade_pessoas_indigenas,
-SAFE_CAST(quantidade_pessoas_amarelas AS FLOAT64) quantidade_pessoas_amarelas,
-SAFE_CAST(renda_domiciliar_pc AS FLOAT64) renda_domiciliar_pc,
-SAFE_CAST(quintil_de_renda AS FLOAT64) quintil_de_renda,
-SAFE_CAST(decil_de_renda AS FLOAT64) decil_de_renda,
-SAFE_CAST(quantidade_estabelecimentos_ensino AS FLOAT64) quantidade_estabelecimentos_ensino,
-SAFE_CAST(quantidade_estabelecimentos_ensino_infantil AS FLOAT64) quantidade_estabelecimentos_ensino_infantil,
-SAFE_CAST(quantidade_estabelecimentos_ensino_fundamental AS FLOAT64) quantidade_estabelecimentos_ensino_fundamental,
-SAFE_CAST(quantidade_estabelecimentos_ensino_medio AS FLOAT64) quantidade_estabelecimentos_ensino_medio,
-SAFE_CAST(quantidade_estabelecimentos_saude AS FLOAT64) quantidade_estabelecimentos_saude,
-SAFE_CAST(quantidade_estabelecimentos_saude_baixa_complexidade AS FLOAT64) quantidade_estabelecimentos_saude_baixa_complexidade,
-SAFE_CAST(quantidade_estabelecimentos_saude_media_coplexidade AS FLOAT64) quantidade_estabelecimentos_saude_media_coplexidade,
-SAFE_CAST(quantidade_estabelecimentos_saude_alta_coplexidade AS FLOAT64) quantidade_estabelecimentos_saude_alta_coplexidade,
-SAFE_CAST(modo_transporte AS FLOAT64) modo_transporte,
-SAFE_CAST(se_horario_de_pico AS FLOAT64) se_horario_de_pico,
 SAFE_CAST(CMATT15 AS FLOAT64) CMATT15,
 SAFE_CAST(CMATQ15 AS FLOAT64) CMATQ15,
 SAFE_CAST(CMATD15 AS FLOAT64) CMATD15,
@@ -117,4 +98,4 @@ SAFE_CAST(TMIET AS FLOAT64) TMIET,
 SAFE_CAST(TMIEI AS FLOAT64) TMIEI,
 SAFE_CAST(TMIEF AS FLOAT64) TMIEF,
 SAFE_CAST(TMIEM AS FLOAT64) TMIEM
-from basedosdados-dev.br_ipea_acesso_oportunidades_staging.hexagonos_2019 as t
+from basedosdados-dev.br_ipea_acesso_oportunidades_staging.indicadores_2019 as t
