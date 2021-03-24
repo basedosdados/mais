@@ -1,0 +1,58 @@
+A tabela contém valores do IDESP para cada ano de cada nível de ensino de cada diretoria de ensino do Estado de São Paulo. Novamente, o IDESP é um indicador que avalia a qualidade da escola. Nesta avaliação, considera–se que uma boa escola é aquela em que a maior parte dos alunos aprende as competências e habilidades requeridas para a sua série/ano, num período de tempo ideal – o ano letivo. A tabela pode ser facilmente combinada com outras tabelas tanto disponíveis na Base dos Dados, como da própria SEDUC, para que se componha um cenário mais completo da educação no estado.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-sp-seduc-idesp
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_idesp
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_idesp/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_idesp/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- ano
+- diretoria
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- diretoria
+
+Cobertura Temporal
+------------------
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+- SP
+
+Tratamento
+----------
+O tratamento consistiu em harmonizar e juntar as diferentes tabelas de diferentes anos, remodelando seu formato para que fique na granularidade da diretoria e substituindo vírgulas por pontos para evitar confundir os arquivos .CSV.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+
