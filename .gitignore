@@ -13,6 +13,7 @@ notebooks
 data
 secrets
 .ipynb*
+*.ipynb
 *.csv
 docs/site
 TODO
