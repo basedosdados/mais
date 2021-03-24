@@ -11,7 +11,7 @@ test_that("download valida nomes de arquivos sem extensão", {
   expect_error(
     download(
       "select * from basedosdados.br_ibge_populacao.municipios limit 3",
-      "arquivo")
+      file.path(tempdir(), "arquivo"))
     )
   })
 
@@ -25,9 +25,11 @@ test_that("download requer nomes de arquivos", {
 test_that("download retorna invisivelmente nomes de arquivos", {
 
   expect_invisible(
-    download("select * from basedosdados.br_ibge_populacao.municipios limit 1", "teste.csv"))
+    download(
+      "select * from basedosdados.br_ibge_populacao.municipios limit 1",
+      file.path(tempdir(), "data.csv")))
 
-  unlink("teste.csv")
+
 
 })
 

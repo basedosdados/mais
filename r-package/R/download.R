@@ -6,12 +6,18 @@
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
 #' @param page_size `bigrquery` internal, how many rows per page should there be.
 #' @param path String with the output file's name. If running an R Project relative location can be provided. Passed to `readr::write_csv`'s `file` argument.
-#' @return Invisibly returns the provided filename and triggers it's writing to disk as side-effect.
+#'
+#' @return Invisibly returns the query's output in a tibble. Intended to be used for side-effects. If you simply want to load a query's result in memory, use `read_sql`.
+#'
 #' @details Currently there's only support for UTF-8 encoding. Users needing more control over writing should use `read_sql` to get the data in memory and custom code from there.
+#'
+#'
 #' @examples
 #'
-#'
 #' \dontrun{
+#'
+#' dir <- tempdir()
+#'
 #' query <- "SELECT
 #' pib.id_municipio,
 #' pop.ano,
@@ -21,7 +27,7 @@
 #' ON pib.id_municipio = pop.id_municipio
 #' LIMIT 5 "
 #'
-#' data <- download(query, "pip_per_capita_municipios.csv")
+#' data <- download(query, file.path(dir, "pib_per_capita.csv"))
 #' }
 #'
 #'
@@ -43,7 +49,7 @@ download <- function(
 
   if(!stringr::str_detect(path, ".csv")) {
 
-    rlang::abort("Pass a valid file name to argument `path`.")
+    rlang::abort("Pass a valid file name to argument `path`, include the '.csv' suffix.")
 
   }
 
@@ -70,11 +76,14 @@ download <- function(
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
 #' @param page_size `bigrquery` internal, how many rows per page should there be.
 #'
-#' @result a tibble containing the query's result
+#' @return A tibble containing the query's output.
 #'
 #' @examples
 #'
 #' \dontrun{
+#'
+#' set_billing_id("<your id here>")
+#'
 #' query <- "SELECT
 #' pib.id_municipio,
 #' pop.ano,
@@ -86,12 +95,16 @@ download <- function(
 #'
 #' data <- read_sql(query)
 #'
-#' # in case you want to write your data on disk as a .xlsx or .csv file
+#' # in case you want to write your data on disk as a .xlsx, .csv or .Rds file.
+#'
 #' library(writexl)
 #' library(readr)
 #'
-#' write_xlsx(data, "data.xlsx")
-#' write_csv(data, "data.csv")
+#' dir <- tempdir()
+#'
+#' write_xlsx(data, file.path(dir, "data.xlsx"))
+#' write_csv(data, file.path(dir, "data.csv"))
+#' saveRDS(data, file.path(dir, "data.Rds"))
 #'
 #'}
 #'

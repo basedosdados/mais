@@ -6,6 +6,8 @@
 #'
 #' Retrieves the project's billing Id.
 #'
+#' @return a string with the project's billing id.
+#'
 #' @importFrom rlang inform
 #' @export
 #'
@@ -44,6 +46,8 @@ get_billing_id <- function() {
 #' @importFrom rlang abort is_character inform
 #'
 #' @export
+#'
+#' @return No return.
 #'
 #' @param billing_project_id a single character value containing the string. Vectors with longer lengths and non-vectors will trigger an error.
 #'

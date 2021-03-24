@@ -74,6 +74,16 @@ Google (seu gmail por exemplo).
 Caso não tenha ainda um projeto, [veja aqui como criar um projeto no Google
 Cloud](https://basedosdados.github.io/mais/access_data_local/#criando-um-projeto-no-google-cloud).
 
+Se possível, armazene suas credenciais em um arquivo `dotenv`:
+
+```sh
+
+"billing_project_id=<suas_credenciais_do_projeto>" >> .env
+
+```
+
+    
+
 ### Acesse uma tabela
 
 ```python
@@ -117,6 +127,10 @@ Para saber mais, veja os [exemplos](https://github.com/basedosdados/mais/tree/ma
 ### Instale
 ```R
 install.packages("basedosdados")
+
+# ou a versão de desenvolvimento
+
+devtools::install_github("basedosdados/mais", subdir = "r-package")
 ```
 
 ### Faça uma consulta
@@ -126,7 +140,8 @@ library(basedosdados)
 
 set_billing_id("id do seu projeto aqui") # autenticação para acesso aos dados
 
-pib_per_capita <- "SELECT 
+pib_per_capita <- " 
+SELECT 
     pib.id_municipio ,
     pop.ano, 
     pib.PIB / pop.populacao * 1000 as pib_per_capita
