@@ -33,5 +33,5 @@ SAFE_CAST(quantidade_produzida AS INT64) quantidade_produzida,
 SAFE_CAST(rendimento_medio AS INT64) rendimento_medio,
 SAFE_CAST(valor_producao AS INT64) valor_producao,
 SAFE_CAST(prop_valor_producao AS FLOAT64) prop_valor_producao,
-SAFE_CAST(moeda_valor_prod AS STRING) moeda_valor_producao,
+SAFE_CAST(moeda_valor_producao AS STRING) moeda_valor_producao,
 from basedosdados-dev.br_ibge_pam_staging.municipio_lavouras_permanentes as t

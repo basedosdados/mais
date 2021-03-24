@@ -1,7 +1,7 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: municipios_lavouras_temporarias # AUTO GENERATED
+table_id: municipio_lavouras_temporarias # AUTO GENERATED
 dataset_id: br_ibge_pam # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-ibge-pam # AUTO GENERATED
