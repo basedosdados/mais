@@ -55,9 +55,11 @@ class Table(Base):
 
             new_columns = []
             for c in columns:
-                if not c.get("is_partition"):
-                    c["type"] = "STRING"
-                    new_columns.append(c)
+                # append columns declared in table_config.yaml to schema only if is_in_staging: True
+                if c.get("is_in_staging"):
+                    if not c.get("is_partition"):
+                        c["type"] = "STRING"
+                        new_columns.append(c)
 
             del columns
             columns = new_columns
@@ -65,21 +67,42 @@ class Table(Base):
         elif mode == "prod":
             schema = self._get_table_obj(mode).schema
 
-            for c in columns:
-                for s in schema:
-                    if c["name"] == s.name:
-                        c["type"] = s.field_type
-                        c["mode"] = s.mode
-                        break
-                else:
-                    raise Exception(
-                        f"Column {c} was not found in schema. Are you sure that "
-                        "all your column names between table_config.yaml and "
-                        "publish.sql are the same?"
-                    )
-        ## force utf-8
+            # get field names for fields at schema and at table_config.yaml
+            column_names = [c["name"] for c in columns]
+            schema_names = [s.name for s in schema]
+
+            # check if there are mismatched fields
+            not_in_columns = [name for name in schema_names if name not in column_names]
+            not_in_schema = [name for name in column_names if name not in schema_names]
+
+            # raise if field is not in table_config
+            if not_in_columns:
+                raise Exception(
+                    f"Column {not_in_columns} was not found in table_config.yaml. Are you sure that "
+                    "all your column names between table_config.yaml and "
+                    "publish.sql are the same?"
+                )
+
+            # raise if field is not in schema
+            elif not_in_schema:
+                raise Exception(
+                    f"Column {not_in_schema} was not found in schema. Are you sure that "
+                    "all your column names between table_config.yaml and "
+                    "publish.sql are the same?"
+                )
+
+            else:
+                # if field is in schema, get field_type and field_mode
+                for c in columns:
+                    for s in schema:
+                        if c["name"] == s.name:
+                            c["type"] = s.field_type
+                            c["mode"] = s.mode
+                            break
+        ## force utf-8, write schema_{mode}.json
         json.dump(columns, (json_path).open("w", encoding="utf-8"))
 
+        # load new created schema
         return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
     def _make_template(self, columns, partition_columns):
