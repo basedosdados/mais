@@ -1,7 +1,7 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: hexagonos_2019 # AUTO GENERATED
+table_id: estatisticas_2019 # AUTO GENERATED
 dataset_id: br_ipea_acesso_oportunidades # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-ipea-acesso-oportunidades # AUTO GENERATED
