@@ -126,400 +126,399 @@ columns: # REQUIRED
         name:  horario_pico
         description:  Informação se o indicador é em hora pico ou fora-pico -- 1 (pico) ou 0 (fora pico)
         is_in_staging:  True
-        is_partition:  False
+        is_partition:  
     -
         name:  CMATT15
-        description:  Número de empregos acessíveis em até 15 minutos
+        description:  Proporção de empregos acessíveis em até 15 minutos
         is_in_staging:  True
         is_partition:  False
-
     -
         name:  CMATQ15
-        description:  Número de empregos pelo match do quintil de renda acessíveis em até 15 minutos
+        description:  Proporção de empregos pelo match do quintil de renda acessíveis em até 15 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATD15
-        description:  Número de empregos pelo match do decil de renda acessíveis em até 15 minutos
+        description:  Proporção de empregos pelo match do decil de renda acessíveis em até 15 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAST15
-        description:  Número de estabelecimentos de saúde acessíveis em até 15 minutos
+        description:  Proporção de estabelecimentos de saúde acessíveis em até 15 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASB15
-        description:  Número de estabelecimentos de sáude de baixa complexidade acessíveis em até 15 minutos
+        description:  Proporção de estabelecimentos de sáude de baixa complexidade acessíveis em até 15 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASM15
-        description:  Número de estabelecimentos de sáude de media complexidade acessíveis em até 15 minutos
+        description:  Proporção de estabelecimentos de sáude de media complexidade acessíveis em até 15 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASA15
-        description:  Número de estabelecimentos de sáude de alta complexidade acessíveis em até 15 minutos
+        description:  Proporção de estabelecimentos de sáude de alta complexidade acessíveis em até 15 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAET15
-        description:  Número de estabelecimentos de educação acessíveis em até 15 minutos
+        description:  Proporção de estabelecimentos de educação acessíveis em até 15 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEI15
-        description:  Número de estabelecimentos de educação infantil acessíveis em até 15 minutos
+        description:  Proporção de estabelecimentos de educação infantil acessíveis em até 15 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEF15
-        description:  Número de estabelecimentos de educação fundamental acessíveis em até 15 minutos
+        description:  Proporção de estabelecimentos de educação fundamental acessíveis em até 15 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEM15
-        description:  Número de estabelecimentos de educação média acessíveis em até 15 minutos
+        description:  Proporção de estabelecimentos de educação média acessíveis em até 15 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATT30
-        description:  Número de empregos acessíveis em até 30 minutos
+        description:  Proporção de empregos acessíveis em até 30 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATQ30
-        description:  Número de empregos pelo match do quintil de renda acessíveis em até 30 minutos
+        description:  Proporção de empregos pelo match do quintil de renda acessíveis em até 30 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATD30
-        description:  Número de empregos pelo match do decil de renda acessíveis em até 30 minutos
+        description:  Proporção de empregos pelo match do decil de renda acessíveis em até 30 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAST30
-        description:  Número de estabelecimentos de saúde acessíveis em até 30 minutos
+        description:  Proporção de estabelecimentos de saúde acessíveis em até 30 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASB30
-        description:  Número de estabelecimentos de sáude de baixa complexidade acessíveis em até 30 minutos
+        description:  Proporção de estabelecimentos de sáude de baixa complexidade acessíveis em até 30 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASM30
-        description:  Número de estabelecimentos de sáude de media complexidade acessíveis em até 30 minutos
+        description:  Proporção de estabelecimentos de sáude de media complexidade acessíveis em até 30 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASA30
-        description:  Número de estabelecimentos de sáude de alta complexidade acessíveis em até 30 minutos
+        description:  Proporção de estabelecimentos de sáude de alta complexidade acessíveis em até 30 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAET30
-        description:  Número de estabelecimentos de educação acessíveis em até 30 minutos
+        description:  Proporção de estabelecimentos de educação acessíveis em até 30 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEI30
-        description:  Número de estabelecimentos de educação infantil acessíveis em até 30 minutos
+        description:  Proporção de estabelecimentos de educação infantil acessíveis em até 30 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEF30
-        description:  Número de estabelecimentos de educação fundamental acessíveis em até 30 minutos
+        description:  Proporção de estabelecimentos de educação fundamental acessíveis em até 30 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEM30
-        description:  Número de estabelecimentos de educação média acessíveis em até 30 minutos
+        description:  Proporção de estabelecimentos de educação média acessíveis em até 30 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATT45
-        description:  Número de empregos acessíveis em até 45 minutos
+        description:  Proporção de empregos acessíveis em até 45 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATQ45
-        description:  Número de empregos pelo match do quintil de renda acessíveis em até 45 minutos
+        description:  Proporção de empregos pelo match do quintil de renda acessíveis em até 45 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATD45
-        description:  Número de empregos pelo match do decil de renda acessíveis em até 45 minutos
+        description:  Proporção de empregos pelo match do decil de renda acessíveis em até 45 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAST45
-        description:  Número de estabelecimentos de saúde acessíveis em até 45 minutos
+        description:  Proporção de estabelecimentos de saúde acessíveis em até 45 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASB45
-        description:  Número de estabelecimentos de sáude de baixa complexidade acessíveis em até 45 minutos
+        description:  Proporção de estabelecimentos de sáude de baixa complexidade acessíveis em até 45 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASM45
-        description:  Número de estabelecimentos de sáude de media complexidade acessíveis em até 45 minutos
+        description:  Proporção de estabelecimentos de sáude de media complexidade acessíveis em até 45 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASA45
-        description:  Número de estabelecimentos de sáude de alta complexidade acessíveis em até 45 minutos
+        description:  Proporção de estabelecimentos de sáude de alta complexidade acessíveis em até 45 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAET45
-        description:  Número de estabelecimentos de educação acessíveis em até 45 minutos
+        description:  Proporção de estabelecimentos de educação acessíveis em até 45 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEI45
-        description:  Número de estabelecimentos de educação infantil acessíveis em até 45 minutos
+        description:  Proporção de estabelecimentos de educação infantil acessíveis em até 45 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEF45
-        description:  Número de estabelecimentos de educação fundamental acessíveis em até 45 minutos
+        description:  Proporção de estabelecimentos de educação fundamental acessíveis em até 45 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEM45
-        description:  Número de estabelecimentos de educação média acessíveis em até 45 minutos
+        description:  Proporção de estabelecimentos de educação média acessíveis em até 45 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATT60
-        description:  Número de empregos acessíveis em até 60 minutos
+        description:  Proporção de empregos acessíveis em até 60 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATQ60
-        description:  Número de empregos pelo match do quintil de renda acessíveis em até 60 minutos
+        description:  Proporção de empregos pelo match do quintil de renda acessíveis em até 60 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATD60
-        description:  Número de empregos pelo match do decil de renda acessíveis em até 60 minutos
+        description:  Proporção de empregos pelo match do decil de renda acessíveis em até 60 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAST60
-        description:  Número de estabelecimentos de saúde acessíveis em até 60 minutos
+        description:  Proporção de estabelecimentos de saúde acessíveis em até 60 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASB60
-        description:  Número de estabelecimentos de sáude de baixa complexidade acessíveis em até 60 minutos
+        description:  Proporção de estabelecimentos de sáude de baixa complexidade acessíveis em até 60 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASM60
-        description:  Número de estabelecimentos de sáude de media complexidade acessíveis em até 60 minutos
+        description:  Proporção de estabelecimentos de sáude de media complexidade acessíveis em até 60 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASA60
-        description:  Número de estabelecimentos de sáude de alta complexidade acessíveis em até 60 minutos
+        description:  Proporção de estabelecimentos de sáude de alta complexidade acessíveis em até 60 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAET60
-        description:  Número de estabelecimentos de educação acessíveis em até 60 minutos
+        description:  Proporção de estabelecimentos de educação acessíveis em até 60 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEI60
-        description:  Número de estabelecimentos de educação infantil acessíveis em até 60 minutos
+        description:  Proporção de estabelecimentos de educação infantil acessíveis em até 60 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEF60
-        description:  Número de estabelecimentos de educação fundamental acessíveis em até 60 minutos
+        description:  Proporção de estabelecimentos de educação fundamental acessíveis em até 60 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEM60
-        description:  Número de estabelecimentos de educação média acessíveis em até 60 minutos
+        description:  Proporção de estabelecimentos de educação média acessíveis em até 60 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATT90
-        description:  Número de empregos acessíveis em até 90 minutos
+        description:  Proporção de empregos acessíveis em até 90 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATQ90
-        description:  Número de empregos pelo match do quintil de renda acessíveis em até 90 minutos
+        description:  Proporção de empregos pelo match do quintil de renda acessíveis em até 90 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATD90
-        description:  Número de empregos pelo match do decil de renda acessíveis em até 90 minutos
+        description:  Proporção de empregos pelo match do decil de renda acessíveis em até 90 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAST90
-        description:  Número de estabelecimentos de saúde acessíveis em até 90 minutos
+        description:  Proporção de estabelecimentos de saúde acessíveis em até 90 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASB90
-        description:  Número de estabelecimentos de sáude de baixa complexidade acessíveis em até 90 minutos
+        description:  Proporção de estabelecimentos de sáude de baixa complexidade acessíveis em até 90 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASM90
-        description:  Número de estabelecimentos de sáude de media complexidade acessíveis em até 90 minutos
+        description:  Proporção de estabelecimentos de sáude de media complexidade acessíveis em até 90 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASA90
-        description:  Número de estabelecimentos de sáude de alta complexidade acessíveis em até 90 minutos
+        description:  Proporção de estabelecimentos de sáude de alta complexidade acessíveis em até 90 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAET90
-        description:  Número de estabelecimentos de educação acessíveis em até 90 minutos
+        description:  Proporção de estabelecimentos de educação acessíveis em até 90 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEI90
-        description:  Número de estabelecimentos de educação infantil acessíveis em até 90 minutos
+        description:  Proporção de estabelecimentos de educação infantil acessíveis em até 90 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEF90
-        description:  Número de estabelecimentos de educação fundamental acessíveis em até 90 minutos
+        description:  Proporção de estabelecimentos de educação fundamental acessíveis em até 90 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEM90
-        description:  Número de estabelecimentos de educação média acessíveis em até 90 minutos
+        description:  Proporção de estabelecimentos de educação média acessíveis em até 90 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATT120
-        description:  Número de empregos acessíveis em até 120 minutos
+        description:  Proporção de empregos acessíveis em até 120 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATQ120
-        description:  Número de empregos pelo match do quintil de renda acessíveis em até 120 minutos
+        description:  Proporção de empregos pelo match do quintil de renda acessíveis em até 120 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMATD120
-        description:  Número de empregos pelo match do decil de renda acessíveis em até 120 minutos
+        description:  Proporção de empregos pelo match do decil de renda acessíveis em até 120 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAST120
-        description:  Número de estabelecimentos de saúde acessíveis em até 120 minutos
+        description:  Proporção de estabelecimentos de saúde acessíveis em até 120 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASB120
-        description:  Número de estabelecimentos de sáude de baixa complexidade acessíveis em até 120 minutos
+        description:  Proporção de estabelecimentos de sáude de baixa complexidade acessíveis em até 120 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASM120
-        description:  Número de estabelecimentos de sáude de media complexidade acessíveis em até 120 minutos
+        description:  Proporção de estabelecimentos de sáude de media complexidade acessíveis em até 120 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMASA120
-        description:  Número de estabelecimentos de sáude de alta complexidade acessíveis em até 120 minutos
+        description:  Proporção de estabelecimentos de sáude de alta complexidade acessíveis em até 120 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAET120
-        description:  Número de estabelecimentos de educação acessíveis em até 120 minutos
+        description:  Proporção de estabelecimentos de educação acessíveis em até 120 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEI120
-        description:  Número de estabelecimentos de educação infantil acessíveis em até 120 minutos
+        description:  Proporção de estabelecimentos de educação infantil acessíveis em até 120 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEF120
-        description:  Número de estabelecimentos de educação fundamental acessíveis em até 120 minutos
+        description:  Proporção de estabelecimentos de educação fundamental acessíveis em até 120 minutos
         is_in_staging:  True
         is_partition:  False
 
     -
         name:  CMAEM120
-        description:  Número de estabelecimentos de educação média acessíveis em até 120 minutos
+        description:  Proporção de estabelecimentos de educação média acessíveis em até 120 minutos
         is_in_staging:  True
         is_partition:  False
 
