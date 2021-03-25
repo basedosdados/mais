@@ -25,9 +25,9 @@ SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(id_domicilio AS INT64) id_domicilio,
 SAFE_CAST(numero_familia AS INT64) numero_familia,
 SAFE_CAST(ordem AS INT64) ordem,
-SAFE_CAST(v001 AS STRING) v001,
-SAFE_CAST(v002 AS STRING) v002,
-SAFE_CAST(v003 AS STRING) v003,
+SAFE_CAST(v001 AS INT64) v001,
+SAFE_CAST(v002 AS INT64) v002,
+SAFE_CAST(v003 AS INT64) v003,
 SAFE_CAST(v022 AS INT64) v022,
 SAFE_CAST(v023 AS INT64) v023,
 SAFE_CAST(v024 AS INT64) v024,
@@ -61,4 +61,4 @@ SAFE_CAST(v051 AS INT64) v051,
 SAFE_CAST(v052 AS INT64) v052,
 SAFE_CAST(v053 AS INT64) v053,
 SAFE_CAST(v054 AS INT64) v054
-from basedosdados-dev.br_ibge_censo_demografico_staging.microdados_pessoa_1970 as t
+FROM basedosdados-dev.br_ibge_censo_demografico_staging.microdados_pessoa_1970 AS t

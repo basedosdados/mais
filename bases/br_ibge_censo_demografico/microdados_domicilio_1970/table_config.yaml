@@ -9,7 +9,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo
 
 version: v1.0
 
-last_updated: 2021-03-22 # AUTO GENERATED
+last_updated: 2021-03-25 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -57,6 +57,7 @@ observation_level: #REQUIRED
 primary_keys:
     - id_municipio
     - id_domicilio
+    - numero_familia
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -166,7 +167,7 @@ columns: # REQUIRED
   
     -   
         name: v010
-        description: Aluguel ou pretação mensal (salário mínimo vigente na época - CR$36.161,60)
+        description: Aluguel ou prestação mensal (salário mínimo vigente na época - CR$36.161,60)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -214,7 +215,7 @@ columns: # REQUIRED
   
     -   
         name: v018
-        description: Possui relevisão
+        description: Possui televisão
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -238,12 +239,12 @@ columns: # REQUIRED
   
     -   
         name: v054
-        description: Peso da pessoa
+        description: Peso amostral
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: sigla_uf
-        description: Sigla da unidade da federação
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.

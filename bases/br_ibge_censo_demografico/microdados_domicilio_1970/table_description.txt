@@ -31,6 +31,7 @@ Colunas identificando linhas unicamente
 -------------------
 - id_municipio
 - id_domicilio
+- numero_familia
 
 Cobertura Temporal
 ------------------
@@ -42,7 +43,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-- Seguimos o pacote de limpeza do DataZoom.
+- Seguimos o pacote de limpeza do DataZoom e o dicionário do IBGE.
 
 Frequencia de Atualização
 -------------------------

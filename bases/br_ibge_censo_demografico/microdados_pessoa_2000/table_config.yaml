@@ -169,7 +169,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: MARCA
+        name: marca
         description: Se a própria pessoa prestou as informações
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -344,13 +344,13 @@ columns: # REQUIRED
   
     -   
         name: v0429
-        description: Freqüenta escola ou creche
+        description: Frequenta escola ou creche
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0430
-        description: Curso que freqüenta
+        description: Curso que frequenta
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -422,13 +422,13 @@ columns: # REQUIRED
   
     -   
         name: v0441
-        description: Na semana, ajudou sem remuneração, no trabalho exercido por pessoa moradora do domicílio, ou como aprendiz/estagiário
+        description: Na semana, ajudou, sem remuneração, no trabalho exercido por pessoa moradora do domicílio, ou como aprendiz/estagiário
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0442
-        description: Na semana, ajudou sem remuneração, no trabalho exercido por pessoa moradora do domicílio em atividade
+        description: Na semana, ajudou, sem remuneração, no trabalho exercido por pessoa moradora do domicílio em atividade
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -440,7 +440,7 @@ columns: # REQUIRED
   
     -   
         name: v0444
-        description: Quantos trabalhos, tinha na semana de 23 a 29 de julho de 2000
+        description: Quantos trabalhos tinha na semana de 23 a 29 de julho de 2000
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -643,19 +643,19 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: P001
+        name: p001
         description: Peso
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: ESTR
+        name: estr
         description: Estrato de imputação de renda
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: ESTRP
+        name: estrp
         description: Estrato de imputação de renda parcial
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
