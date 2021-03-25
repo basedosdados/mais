@@ -1,43 +1,46 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: microdados_domicilio_1991 # AUTO GENERATED
 dataset_id: br_ibge_censo_demografico # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-ibge-censo-demografico # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: v1.0
 
-last_updated: 2021-02-11 # AUTO GENERATED
+last_updated: 2021-03-24 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    <descrição>
+    Microdados da amostra de 25% de domicílios em 1991.
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: <nome [você]>  # REQUIRED
+    name: Ricardo Dahis
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
-    website: <website>
-    email: <email>
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <nome>
+    name: DataZoom PUC-Rio
     code_url: <onde encontrar código de tratamento>
-    website: <onde encontrar os dados tratados>
-    email: <email>
+    website: http://www.econ.puc-rio.br/datazoom/index.html
+    email: datazoom@econ.puc-rio.br
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    <CEPESP fez X. Eu fiz K>
+    - Seguimos o pacote de limpeza do DataZoom e o dicionário do IBGE.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: <frequência> # REQUIRED 
+data_update_frequency: único
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -46,15 +49,12 @@ data_update_frequency: <frequência> # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - <primeira coluna>
-    - <segunda coluna>
+    - domicilio
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - <primeira coluna>
-    - <segunda coluna>
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -66,16 +66,12 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - <admin0 - pais>
-    - <admin1 - estados/regioes/etc>
-    - <admin2 - municipios/counties/etc>
-    - <admin3 - distritos/subdistritos/etc>
+    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - <ano 1>
-    - <ano 2>
+    - 1991
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -96,258 +92,258 @@ columns: # REQUIRED
   
     -   
         name: id_municipio
-        description: <descrição da coluna>
+        description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_questionario
-        description: <descrição da coluna>
+        description: ID Questionário
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: peso_amostral
-        description: <descrição da coluna>
+        description: Peso Amostral
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0109
-        description: <descrição da coluna>
+        description: Número do Domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v1061
-        description: <descrição da coluna>
+        description: Situação do Domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v7003
-        description: <descrição da coluna>
+        description: Região Metropolitana
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0111
-        description: <descrição da coluna>
+        description: Número de Homens no Domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0112
-        description: <descrição da coluna>
+        description: Número de Mulheres no Domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0201
-        description: <descrição da coluna>
+        description: Espécie do Domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v2012
-        description: <descrição da coluna>
+        description: Rendimento Nominal Médio Mensal Domiciliar
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v2013
-        description: <descrição da coluna>
+        description: Faixas de Rendimento Nominal Médio Mensal Domiciliar
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v2014
-        description: <descrição da coluna>
+        description: Faixas de Rendimento Real Médio Mensal Domiciliar
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0202
-        description: <descrição da coluna>
+        description: Localização
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0203
-        description: <descrição da coluna>
+        description: Paredes
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0204
-        description: <descrição da coluna>
+        description: Cobertura
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0205
-        description: <descrição da coluna>
+        description: Abastecimento de Água
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0206
-        description: <descrição da coluna>
+        description: Instalação Sanitária
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0207
-        description: <descrição da coluna>
+        description: Uso da Instalação Sanitária
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0208
-        description: <descrição da coluna>
+        description: Condição de Ocupação do Domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0209
-        description: <descrição da coluna>
+        description: Aluguel Mensal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v2094
-        description: <descrição da coluna>
+        description: Faixas de Aluguel Mensal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0210
-        description: <descrição da coluna>
+        description: Combustível Usado para Cozinhar
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0211
-        description: <descrição da coluna>
+        description: Total de Cômodos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v2111
-        description: <descrição da coluna>
+        description: Densidade de Moradores por Cômodo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v2112
-        description: <descrição da coluna>
+        description: Faixas de Densidade de Moradores por Cômodo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0212
-        description: <descrição da coluna>
+        description: Cômodos Servindo de Dormitório
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v2121
-        description: <descrição da coluna>
+        description: Densidade de Moradores por Dormitório
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v2122
-        description: <descrição da coluna>
+        description: Faixas de Densidade de Moradores por Dormitório
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0213
-        description: <descrição da coluna>
+        description: Banheiros
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0214
-        description: <descrição da coluna>
+        description: Destino do Lixo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0216
-        description: <descrição da coluna>
+        description: Filtro de Água
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0217
-        description: <descrição da coluna>
+        description: Telefone
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0218
-        description: <descrição da coluna>
+        description: Automóvel Particular
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0219
-        description: <descrição da coluna>
+        description: Automóvel para Trabalho
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0220
-        description: <descrição da coluna>
+        description: Rádio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0221
-        description: <descrição da coluna>
+        description: Iluminação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0222
-        description: <descrição da coluna>
+        description: Geladeira
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0223
-        description: <descrição da coluna>
+        description: Televisão Preto e Branco
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0224
-        description: <descrição da coluna>
+        description: Televisão em Cores
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0225
-        description: <descrição da coluna>
+        description: Freezer
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0226
-        description: <descrição da coluna>
+        description: Máquina de Lavar Roupa
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0227
-        description: <descrição da coluna>
+        description: Aspirador de Pó
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: sigla_uf
-        description: <descrição da coluna>
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.

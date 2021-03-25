@@ -7,40 +7,40 @@ dataset_id: br_ibge_censo_demografico # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-ibge-censo-demografico # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: v1.0
 
-last_updated: 2021-02-13 # AUTO GENERATED
+last_updated: 2021-03-24 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    <descrição>
+    Microdados da amostra de 25% de pessoas em 2010.
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: <nome [você]>  # REQUIRED
+    name: Ricardo Dahis
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
-    website: <website>
-    email: <email>
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <nome>
+    name: DataZoom PUC-Rio
     code_url: <onde encontrar código de tratamento>
-    website: <onde encontrar os dados tratados>
-    email: <email>
+    website: http://www.econ.puc-rio.br/datazoom/index.html
+    email: datazoom@econ.puc-rio.br
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    <CEPESP fez X. Eu fiz K>
+    - Seguimos o pacote de limpeza do DataZoom e o dicionário do IBGE.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: <frequência> # REQUIRED 
+data_update_frequency: único
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -49,15 +49,12 @@ data_update_frequency: <frequência> # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - <primeira coluna>
-    - <segunda coluna>
+    - domicilio
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - <primeira coluna>
-    - <segunda coluna>
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -69,16 +66,12 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - <admin0 - pais>
-    - <admin1 - estados/regioes/etc>
-    - <admin2 - municipios/counties/etc>
-    - <admin3 - distritos/subdistritos/etc>
+    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - <ano 1>
-    - <ano 2>
+    - 2010
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -98,1465 +91,859 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: id_regiao
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
         name: id_mesorregiao
-        description: <descrição da coluna>
+        description: ID Mesorregião - IBGE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_microrregiao
-        description: <descrição da coluna>
+        description: ID Microrregião - IBGE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_regiao_metropolitana
-        description: <descrição da coluna>
+        description: ID Região Metropolitana - IBGE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_municipio
-        description: <descrição da coluna>
+        description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: area_ponderacao
-        description: <descrição da coluna>
+        description: Área de ponderação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: situacao_setor
-        description: <descrição da coluna>
+        description: Situação do setor censitário
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: situacao_domicilio
-        description: <descrição da coluna>
+        description: Situação do domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: controle
-        description: <descrição da coluna>
+        description: Controle
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: numero_ordem
-        description: <descrição da coluna>
+        description: Número de ordem
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: peso_amostral
-        description: <descrição da coluna>
+        description: Peso amostral
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0502
-        description: <descrição da coluna>
+        description: Relação de parentesco ou de convivência com a pessoa responsável pelo domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0601
-        description: <descrição da coluna>
+        description: Sexo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6033
-        description: <descrição da coluna>
+        description: Variável auxiliar da idade calculada (anos e meses)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6036
-        description: <descrição da coluna>
+        description: Idade calculada em anos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6037
-        description: <descrição da coluna>
+        description: Idade calculada em meses - menores de 1 ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6040
-        description: <descrição da coluna>
+        description: Indicadora da forma de declaração da idade
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0606
-        description: <descrição da coluna>
+        description: Cor ou raça
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0613
-        description: <descrição da coluna>
+        description: Registro de nascimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0614
-        description: <descrição da coluna>
+        description: Dificuldade permanente de enxergar
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0615
-        description: <descrição da coluna>
+        description: Dificuldade permanente de ouvir
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0616
-        description: <descrição da coluna>
+        description: Dificuldade permanente de caminhar ou subir degraus
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0617
-        description: <descrição da coluna>
+        description: Deficiência mental/intelectual permanente
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0618
-        description: <descrição da coluna>
+        description: Nasceu neste município
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0619
-        description: <descrição da coluna>
+        description: Nasceu nesta Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0620
-        description: <descrição da coluna>
+        description: Nacionalidade
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0621
-        description: <descrição da coluna>
+        description: Ano que fixou residência no Brasil
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0622
-        description: <descrição da coluna>
+        description: Unidade da Federação ou país estrangeiro de nascimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6222
-        description: <descrição da coluna>
+        description: Unidade da Federação de nascimento – Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6224
-        description: <descrição da coluna>
+        description: País estrangeiro de nascimento – Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0623
-        description: <descrição da coluna>
+        description: Tempo de moradia na UF
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0624
-        description: <descrição da coluna>
+        description: Tempo de moradia no município
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0625
-        description: <descrição da coluna>
+        description: Unidade da Federação e município ou País estrangeiro de moradia antes de  mudar-se para este município
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6252
-        description: <descrição da coluna>
+        description: UF de residência anterior - Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6254
-        description: <descrição da coluna>
+        description: Município de residência anterior - Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6256
-        description: <descrição da coluna>
+        description: País estrangeiro de residência anterior - Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0626
-        description: <descrição da coluna>
+        description: Residência em 31 de julho de 2005
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6262
-        description: <descrição da coluna>
+        description: UF de residência em 31 de julho de 2005 - Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6264
-        description: <descrição da coluna>
+        description: Município de residência em 31 de julho de 2005 - Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6266
-        description: <descrição da coluna>
+        description: País estrangeiro de residência em 31 de julho de 2005 - Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0627
-        description: <descrição da coluna>
+        description: Sabe ler e escrever
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0628
-        description: <descrição da coluna>
+        description: Frequenta escola ou creche
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0629
-        description: <descrição da coluna>
+        description: Curso que frequenta
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0630
-        description: <descrição da coluna>
+        description: Série/ano que frequenta
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0631
-        description: <descrição da coluna>
+        description: Série que frequenta
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0632
-        description: <descrição da coluna>
+        description: Conclusão de outro curso superior de graduação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0633
-        description: <descrição da coluna>
+        description: Curso mais elevado que frequentou
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0634
-        description: <descrição da coluna>
+        description: Conclusão deste curso
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0635
-        description: <descrição da coluna>
+        description: Espécie do curso mais elevado concluído
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6400
-        description: <descrição da coluna>
+        description: Nível de instrução
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6352
-        description: <descrição da coluna>
+        description: Curso Superior de Graduação – Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6354
-        description: <descrição da coluna>
+        description: Curso de Mestrado – Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6356
-        description: <descrição da coluna>
+        description: Curso de Doutorado – Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0636
-        description: <descrição da coluna>
+        description: Município e Unidade da Federação ou país estrangeiro que frequentava escola ou creche
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6362
-        description: <descrição da coluna>
+        description: Unidade da Federação que frequentava escola ou creche – Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6364
-        description: <descrição da coluna>
+        description: Município que frequentava escola ou creche – Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6366
-        description: <descrição da coluna>
+        description: País estrangeiro que frequentava escola ou creche – Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0637
-        description: <descrição da coluna>
+        description: Vive em companhia de cônjuge ou companheiro(a)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0638
-        description: <descrição da coluna>
+        description: Número de ordem do cônjuge ou companheiro(a)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0639
-        description: <descrição da coluna>
+        description: Natureza da união
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0640
-        description: <descrição da coluna>
+        description: Estado civil
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0641
-        description: <descrição da coluna>
+        description: Trabalhou ganhando em dinheiro, produtos, mercadorias ou benefícios
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0642
-        description: <descrição da coluna>
+        description: Tinha trabalho remunerado do qual estava temporariamente afastado(a)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0643
-        description: <descrição da coluna>
+        description: Ajudou sem qualquer pagamento no trabalho remunerado de morador do domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0644
-        description: <descrição da coluna>
+        description: Trabalhou na plantação, criação de animais ou pesca, somente para alimentação dos moradores do domicílio (Inclusive caça e extração vegetal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0645
-        description: <descrição da coluna>
+        description: Quantos trabalhos tinha
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6461
-        description: <descrição da coluna>
+        description: Ocupação – Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6471
-        description: <descrição da coluna>
+        description: Atividade - Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0648
-        description: <descrição da coluna>
+        description: Nesse trabalho era
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0649
-        description: <descrição da coluna>
+        description: Quantas pessoas empregava nesse trabalho
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0650
-        description: <descrição da coluna>
+        description: Era contribuinte de Instituto de Previdência Oficial em algum trabalho que tinha na semana de 25 a 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0651
-        description: <descrição da coluna>
+        description: No trabalho principal, qual era o rendimento bruto (ou retirada) mensal que ganhava habitualmente em julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6511
-        description: <descrição da coluna>
+        description: Valor do rendimento bruto (ou retirada) mensal no trabalho principal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6513
-        description: <descrição da coluna>
+        description: Rendimento no trabalho principal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6514
-        description: <descrição da coluna>
+        description: Rendimento no trabalho principal em número de salários mínimos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0652
-        description: <descrição da coluna>
+        description: Nos demais trabalhos, qual era o rendimento bruto (ou a retirada) mensal que ganhava habitualmente em julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6521
-        description: <descrição da coluna>
+        description: Valor do rendimento bruto (ou retirada) mensal nos demais trabalhos (em reais) 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6524
-        description: <descrição da coluna>
+        description: Rendimento nos demais trabalhos em número de salários mínimos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6525
-        description: <descrição da coluna>
+        description: Rendimento em todos os trabalhos, em reais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6526
-        description: <descrição da coluna>
+        description: Rendimentos em todos os trabalhos em números de salários mínimos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6527
-        description: <descrição da coluna>
+        description: Rendimento mensal total em julho de 2010, em reais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6528
-        description: <descrição da coluna>
+        description: Rendimento mensal total em julho de 2010, em salários mínimos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6529
-        description: <descrição da coluna>
+        description: Rendimento domiciliar (domicílio particular) em julho de 2010, em reais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6530
-        description: <descrição da coluna>
+        description: Rendimento domiciliar (domicílio particular) em julho de 2010, em número de salários mínimos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6531
-        description: <descrição da coluna>
+        description: Rendimento domiciliar (domicílio particular) per capita em julho de 2010, em reais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6532
-        description: <descrição da coluna>
+        description: Rendimento domiciliar (domicílio particular) per capita em julho de 2010, em número de salários mínimos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0653
-        description: <descrição da coluna>
+        description: No trabalho principal, quantas horas trabalhava habitualmente por semana
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0654
-        description: <descrição da coluna>
+        description: No período de 02 a 31 de julho de 2010, tomou alguma providência, de fato, para conseguir trabalho
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0655
-        description: <descrição da coluna>
+        description: Se tivesse conseguido trabalho, estaria disponível para assumi-lo na semana de 25 a 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0656
-        description: <descrição da coluna>
+        description: Em julho de 2010, tinha rendimento mensal habitual de aposentadoria ou pensão de instituto de previdência oficial (federal, estadual ou municipal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0657
-        description: <descrição da coluna>
+        description: Em julho de 2010, tinha rendimento mensal habitual de Programa Social Bolsa Família ou Programa de Erradicação do Trabalho Infantil – PETI
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0658
-        description: <descrição da coluna>
+        description: Em julho de 2010 tinha rendimento mensal habitual de outros programas sociais ou de transferências
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0659
-        description: <descrição da coluna>
+        description: Em julho de 2010, tinha rendimento mensal habitual de outras fontes (juros de poupança, aplicações financeiras, aluguel, pensão ou aposentadoria de previdência privada, etc.)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6591
-        description: <descrição da coluna>
+        description: Em julho de 2010, qual foi o valor total deste(s) rendimento(s)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0660
-        description: <descrição da coluna>
+        description: Em que município e Unidade da Federação ou país estrangeiro trabalha
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6602
-        description: <descrição da coluna>
+        description: Em que Unidade da Federação trabalhava – Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6604
-        description: <descrição da coluna>
+        description: Em que município trabalhava – Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6606
-        description: <descrição da coluna>
+        description: Em que país estrangeiro trabalhava – Código
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0661
-        description: <descrição da coluna>
+        description: Retorna do trabalho para casa diariamente
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0662
-        description: <descrição da coluna>
+        description: Qual o tempo habitual gasto de deslocamento de sua casa até o trabalho
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0663
-        description: <descrição da coluna>
+        description: Quantos filhos e filhas nascidos vivos teve até 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6631
-        description: <descrição da coluna>
+        description: Quantos filhos nascidos vivos até 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6632
-        description: <descrição da coluna>
+        description: Quantas filhas nascidas vivas teve até 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6633
-        description: <descrição da coluna>
+        description: Total de filhos nascidos vivos que teve até 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0664
-        description: <descrição da coluna>
+        description: Dos filhos e filhas que teve, quantos estavam vivos em 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6641
-        description: <descrição da coluna>
+        description: Dos filhos que teve, quantos estavam vivos em 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6642
-        description: <descrição da coluna>
+        description: Das filhas que teve, quantas estavam vivas em 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6643
-        description: <descrição da coluna>
+        description: Total de filhos que teve e que estavam vivos em 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0665
-        description: <descrição da coluna>
+        description: Qual o sexo do último filho tido nascido vivo até 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6660
-        description: <descrição da coluna>
+        description: Idade do(a) último(a) filho(a) tido(a) nascido(a) vivo(a) até 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6664
-        description: <descrição da coluna>
+        description: Existência de filho(a) tido(a) nascido(a) vivo(a) no período de referência de 12 meses anteriores a 31/07/2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0667
-        description: <descrição da coluna>
+        description: Este(a) filho(a) estava vivo(a) em 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0668
-        description: <descrição da coluna>
+        description: Qual foi o mês e o ano que este(a) filho(a) faleceu
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6681
-        description: <descrição da coluna>
+        description: Qual foi o mês que este(a) filho(a) faleceu
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6682
-        description: <descrição da coluna>
+        description: Qual foi o ano que este(a) filho(a) faleceu
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0669
-        description: <descrição da coluna>
+        description: Quantos filhos e filhas nascidos mortos teve até 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6691
-        description: <descrição da coluna>
+        description: Quantos filhos nascidos mortos até 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6692
-        description: <descrição da coluna>
+        description: Quantas filhas nascidas mortas até 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6693
-        description: <descrição da coluna>
+        description: Quantos filhos e filhas nascidos mortos teve até 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6800
-        description: <descrição da coluna>
+        description: Total de filhos tidos nascidos vivos e nascidos mortos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0670
-        description: <descrição da coluna>
+        description: Assinale quem prestou as informações desta pessoa
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0671
-        description: <descrição da coluna>
+        description: Número de ordem do informante (outro morador)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6900
-        description: <descrição da coluna>
+        description: Condição de atividade na semana de 25 a 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6910
-        description: <descrição da coluna>
+        description: Condição de ocupação na semana de 25 a 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6920
-        description: <descrição da coluna>
+        description: Situação de ocupação na semana de 25 a 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6930
-        description: <descrição da coluna>
+        description: Posição na ocupação e categoria do emprego no trabalho principal da semana de 25 a 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6940
-        description: <descrição da coluna>
+        description: Subgrupo e categoria do emprego no trabalho principal da semana de 25 a 31 de julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6121
-        description: <descrição da coluna>
+        description: Descrição não encontrada
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0604
-        description: <descrição da coluna>
+        description: Tem mãe viva
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v0605
-        description: <descrição da coluna>
+        description: Número de ordem da mãe da pessoa
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v5020
-        description: <descrição da coluna>
+        description: Número da Família
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v5060
-        description: <descrição da coluna>
+        description: Número de Pessoas na Família
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v5070
-        description: <descrição da coluna>
+        description: Rendimento familiar per capita em julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v5080
-        description: <descrição da coluna>
+        description: Rendimento familiar per capita em nº de salários mínimos em julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6462
-        description: <descrição da coluna>
+        description: Ocupação – Código da Classificação Brasileira de Ocupações Domiciliar - CBO-Domiciliar
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v6472
-        description: <descrição da coluna>
+        description: Atividade - Código da Classificação Nacional de Atividades Econômicas Domiciliar - CNAE-Domiciliar
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v5110
-        description: <descrição da coluna>
+        description: Descrição não encontrada
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v5120
-        description: <descrição da coluna>
+        description: Descrição não encontrada
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v5030
-        description: <descrição da coluna>
+        description: Tipo de unidade doméstica
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v5040
-        description: <descrição da coluna>
+        description: Indicadora de família
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v5090
-        description: <descrição da coluna>
+        description: Tipo de composição familiar das famílias únicas e conviventes principais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v5100
-        description: <descrição da coluna>
+        description: Tipo de composição familiar das famílias conviventes secundárias
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: v5130
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0502
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0601
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6033
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0606
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0613
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0614
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0615
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0616
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0617
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0618
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0619
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0620
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0621
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0622
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6222
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6224
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0623
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0624
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0625
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6252
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6254
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6256
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0626
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6262
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6264
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6266
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0627
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0628
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0629
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0630
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0631
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0632
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0633
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0634
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0635
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6352
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6354
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6356
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0636
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6362
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6364
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6366
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0637
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0638
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0639
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0640
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0641
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0642
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0643
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0644
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0645
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6461
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6471
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0648
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0649
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0650
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0651
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6511
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0652
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6521
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0653
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0654
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0655
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0656
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0657
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0658
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0659
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6591
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0660
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6602
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6604
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6606
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0661
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0662
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0663
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6631
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6632
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6633
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0664
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6641
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6642
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6643
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0665
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6660
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0667
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0668
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6681
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6682
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0669
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6691
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6692
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6693
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0670
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0671
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6800
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6121
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0604
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m0605
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6462
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: m6472
-        description: <descrição da coluna>
+        description: Ordem lógica na família
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: sigla_uf
-        description: <descrição da coluna>
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
