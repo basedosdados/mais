@@ -4,4 +4,6 @@ Como capturar os dados de br_ibge_censo_demografico?
 
 2. Caso tenha sido utilizado algum código de captura ou tratamento, estes estarão contidos em `code/`. Se o dado publicado for em sua versão bruta, não existirá a pasta `code/`.
 
-Os dados publicados estão disponíveis em: https://basedosdados.org/dataset/br-ibge-censo-demografico
+Os dados publicados estão disponíveis em: https://basedosdados.org/dataset/br-ibge-censo-demografico.
+
+Os arquivos auxiliares aos dados (e.g. dicionários, instrumentos de coleta) estão disponíveis [aqui](https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_censo_demografico.zip).

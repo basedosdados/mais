@@ -8,27 +8,29 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    <descrição>
+    Dados do Censo Demográfico do Instituto Brasileiro de Geografia e Estatística (IBGE).
+
+    Os arquivos auxiliares aos dados (e.g. dicionários, instrumentos de coleta) estão disponíveis em https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_censo_demografico.zip.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: <organização> # REQUIRED
+organization: instituto-brasileiro-de-geografia-e-estatistica # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
     name: <nome>
-    email: <email>
+    email: ibge@ibge.gov.br
 
 # Onde encontrar os dados originais e mais informações?
 website:
-    - <website 1>
-    - <website 2>
+    - https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
-    - <grupo 1>
-    - <grupo 2>
+    - populacao
+    - economia
+    - educacao
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -37,33 +39,31 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - <etiqueta 1> 
-    - <etiqueta 2>
+    - demografia
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.
 # Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
 languages:
-    - <língua 1>
-    - <língua 2>
+    - portugues
 
 # Os dados originais estão disponíveis de graça?
-free: <sim/não>
+free: sim
 
 # Are microdata available for download?
-microdata: <sim/não>
+microdata: sim
 
 # Existe uma API na fonte original?
-API: <sim/não>
+API: nao
 
 # É necessário registrar um usuário para baixar os dados originais?
-registration: <sim/não>
+registration: nao
 
 # Como os dados originais estão disponibilizados?
-availability: <online/físico>
+availability: online
 
 # A fonte original requer IP brasileiro para acesso?
-brazilian_IP: <sim/não>
+brazilian_IP: não
 
 # Essa base está sob qual licença?
 # A licença MIT se aplica a bases públicas.

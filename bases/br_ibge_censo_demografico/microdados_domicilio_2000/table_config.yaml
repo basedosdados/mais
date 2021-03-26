@@ -16,7 +16,9 @@ last_updated: 2021-03-24 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Microdados da amostra de 25% de domicílios em 2000.
+    Microdados da amostra de 10% de domicílios em 2000.
+
+    Os arquivos auxiliares aos dados (e.g. dicionários, instrumentos de coleta) estão disponíveis em https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_censo_demografico.zip.
 
 # Quem está completando esse arquivo config?
 published_by:

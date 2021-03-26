@@ -1,5 +1,7 @@
 Microdados da amostra de 25% de domicílios em 1980.
 
+Os arquivos auxiliares aos dados (e.g. dicionários, instrumentos de coleta) estão disponíveis em https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_censo_demografico.zip.
+
 
 Para saber mais acesse:
 Website: https://basedosdados.org/dataset/br-ibge-censo-demografico

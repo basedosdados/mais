@@ -18,6 +18,8 @@ last_updated: 2021-03-25 # AUTO GENERATED
 description: |  # REQUIRED
     Microdados de domicílios para o ano 1970.
 
+    Os arquivos auxiliares aos dados (e.g. dicionários, instrumentos de coleta) estão disponíveis em https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_censo_demografico.zip.
+
 # Quem está completando esse arquivo config?
 published_by:
     name: Ricardo Dahis
