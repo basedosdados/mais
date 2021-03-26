@@ -20,6 +20,7 @@ TIPOS:
 */
 CREATE VIEW basedosdados-dev.br_ibge_censo_demografico.microdados_domicilio_2000 AS
 SELECT 
+SAFE_CAST(id_regiao AS INT64) id_regiao,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_mesorregiao AS INT64) id_mesorregiao,
 SAFE_CAST(id_microrregiao AS INT64) id_microrregiao,
