@@ -1,7 +1,6 @@
 from jinja2 import Template
 from pathlib import Path, PosixPath
 import json
-import csv
 from copy import deepcopy
 from google.cloud import bigquery
 import datetime
@@ -12,6 +11,7 @@ from basedosdados.base import Base
 from basedosdados.storage import Storage
 from basedosdados.dataset import Dataset
 from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.datatypes import Datatype
 
 
 class Table(Base):
@@ -128,32 +128,6 @@ class Table(Base):
                     template
                 )
 
-    def _load_ext_config(self, mode="staging", partitioned=False):
-
-        table_config = self.table_config
-
-        external_config = external_config = bigquery.ExternalConfig("CSV")
-        external_config.options.skip_leading_rows = 1
-        external_config.options.allow_quoted_newlines = True
-        external_config.options.allow_jagged_rows = True
-        external_config.autodetect = False
-        external_config.schema = self._load_schema(mode)
-
-        external_config.source_uris = (
-            f"gs://{self.bucket_name}/staging/{self.dataset_id}/{self.table_id}/*"
-        )
-
-        if partitioned:
-
-            hive_partitioning = bigquery.external_config.HivePartitioningOptions()
-            hive_partitioning.mode = "AUTO"
-            hive_partitioning.source_uri_prefix = self.uri.format(
-                dataset=self.dataset_id, table=self.table_id
-            ).replace("*", "")
-            external_config.hive_partitioning = hive_partitioning
-
-        return external_config
-
     def init(
         self,
         data_sample_path=None,
@@ -236,16 +210,7 @@ class Table(Base):
                     if "=" in k
                 ]
 
-            if data_sample_path.suffix == ".csv":
-
-                columns = next(
-                    csv.reader(open(data_sample_path, "r", encoding="utf-8"))
-                )
-
-            else:
-                raise NotImplementedError(
-                    "Data sample just supports comma separated csv files"
-                )
+            columns = Datatype(self, "csv").header(data_sample_path)
 
         else:
 
@@ -392,9 +357,9 @@ class Table(Base):
 
         table = bigquery.Table(self.table_full_name["staging"])
 
-        table.external_data_configuration = self._load_ext_config(
-            "staging", partitioned
-        )
+        table.external_data_configuration = Datatype(
+            self, "csv", "staging", partitioned
+        ).external_config
 
         # Lookup if table alreay exists
         table_ref = None
