@@ -78,12 +78,13 @@ def test_init_file_exists_error(table, metadatadir, data_path):
 
 
 def test_init_not_implemented_error(table, metadatadir, data_path):
-    wrong_path = Path(metadatadir / "municipios.json")
+
     with pytest.raises(NotImplementedError):
         table.init(
             if_folder_exists="replace",
             if_table_config_exists="replace",
-            data_sample_path=wrong_path,
+            data_sample_path=data_path,
+            source_format="json",
         )
 
 
@@ -220,6 +221,17 @@ def test_create_if_table_exist_replace(table, metadatadir, data_path, sample_dat
         if_table_config_exists="pass",
     )
     assert table_exists(table, "staging")
+
+
+def table_create_not_implemented_source_format(table):
+
+    with pytest.raises(NotImplementedError):
+        table.create(
+            if_table_exists="replace",
+            if_storage_data_exists="pass",
+            if_table_config_exists="pass",
+            source_format="json",
+        )
 
 
 def test_create_if_table_exists_pass(table, metadatadir, data_path, sample_data):

@@ -133,6 +133,7 @@ class Table(Base):
         data_sample_path=None,
         if_folder_exists="raise",
         if_table_config_exists="raise",
+        source_format="csv",
     ):
         """Initialize table folder at metadata_path at `metadata_path/<dataset_id>/<table_id>`.
 
@@ -159,6 +160,10 @@ class Table(Base):
                 * 'raise' : Raises FileExistsError
                 * 'replace' : Replace files with blank template
                 * 'pass' : Do nothing
+            source_format (str): Optional
+                Data source format. Only 'csv' is supported. Defaults to 'csv'.
+
+
         Raises:
             FileExistsError: If folder exists and replace is False.
             NotImplementedError: If data sample is not in supported type or format.
@@ -210,7 +215,7 @@ class Table(Base):
                     if "=" in k
                 ]
 
-            columns = Datatype(self, "csv").header(data_sample_path)
+            columns = Datatype(self, source_format).header(data_sample_path)
 
         else:
 
@@ -261,6 +266,7 @@ class Table(Base):
         if_table_exists="raise",
         if_storage_data_exists="raise",
         if_table_config_exists="raise",
+        source_format="csv",
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -304,11 +310,8 @@ class Table(Base):
                 * 'raise' : Raises Conflict exception
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
-
-        Todo:
-
-            * Implement if_table_exists=raise
-            * Implement if_table_exists=pass
+            source_format (str): Optional
+                Data source format. Only 'csv' is supported. Defaults to 'csv'.
         """
 
         if path is None:
@@ -358,7 +361,7 @@ class Table(Base):
         table = bigquery.Table(self.table_full_name["staging"])
 
         table.external_data_configuration = Datatype(
-            self, "csv", "staging", partitioned
+            self, source_format, "staging", partitioned
         ).external_config
 
         # Lookup if table alreay exists
