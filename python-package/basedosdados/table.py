@@ -86,7 +86,7 @@ class Table(Base):
             # raise if field is not in schema
             elif not_in_schema:
                 raise Exception(
-                    f"Column {not_in_schema} was not found in schema. Are you sure that "
+                    f"Column {not_in_schema} was not found in publish.sql. Are you sure that "
                     "all your column names between table_config.yaml and "
                     "publish.sql are the same?"
                 )
