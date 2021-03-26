@@ -18,8 +18,8 @@ from basedosdados.exceptions import BaseDosDadosException
 
 
 TEST_PROJECT_ID = "basedosdados-dev"
-SAVEFILE = Path("tests") / "tmp_bases" / "test.csv"
-SAVEPATH = Path("tests") / "tmp_bases"
+SAVEFILE = Path("python-package") / "tests" / "tmp_bases" / "test.csv"
+SAVEPATH = Path("python-package") / "tests" / "tmp_bases"
 shutil.rmtree(SAVEPATH, ignore_errors=True)
 
 

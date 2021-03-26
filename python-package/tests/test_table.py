@@ -15,7 +15,7 @@ TABLE_FILES = ["publish.sql", "table_config.yaml"]
 
 @pytest.fixture
 def metadatadir(tmpdir_factory):
-    return Path("tests") / "tmp_bases"
+    return Path("python-package") / "tests" / "tmp_bases"
 
 
 @pytest.fixture
@@ -38,7 +38,7 @@ def data_path(metadatadir):
 
 @pytest.fixture
 def sample_data(metadatadir):
-    return Path("tests") / "sample_data" / "table"
+    return Path("python-package") / "tests" / "sample_data" / "table"
 
 
 def check_files(folder):
@@ -387,6 +387,38 @@ def test_create_auto_partitions(metadatadir, data_path, sample_data):
     table_part.publish()
 
     assert table_exists(table_part, "prod")
+
+
+def test_update_raises(metadatadir, sample_data, capsys):
+
+    table_part = Table(
+        dataset_id=DATASET_ID,
+        table_id=TABLE_ID + "_partitioned",
+        metadata_path=metadatadir,
+    )
+
+    shutil.copy(
+        sample_data / "table_config_part_wrong.yaml",
+        metadatadir / DATASET_ID / "pytest_partitioned" / "table_config.yaml",
+    )
+
+    with pytest.raises(Exception):
+        table_part.update("all")
+        out, err = capsys.readouterr()
+        assert "publish.sql" in out
+
+    shutil.copy(
+        sample_data / "publish_part.sql",
+        table_part.table_folder / "publish.sql",
+    )
+    shutil.copy(
+        sample_data / "table_config.yaml",
+        Path(table_part.table_folder / "table_config.yaml"),
+    )
+
+    with pytest.raises(Exception):
+        table.update("all")
+        assert "table_config.yaml" in out
 
 
 def test_update(table, metadatadir, data_path):

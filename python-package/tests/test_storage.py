@@ -13,7 +13,7 @@ TABLE_FILES = ["publish.sql", "table_config.yaml"]
 
 @pytest.fixture
 def metadatadir(tmpdir_factory):
-    return Path("tests") / "tmp_bases"
+    return Path("python-package") / "tests" / "tmp_bases"
 
 
 @pytest.fixture
