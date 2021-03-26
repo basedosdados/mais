@@ -1,0 +1,773 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: setor_censitario_idade_total_2010 # AUTO GENERATED
+dataset_id: br_ibge_censo_demografico # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-ibge-censo-demografico # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico # AUTO GENERATED
+
+version: v1,0 # REQUIRED
+
+last_updated: 2021-02-27 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Informações gerais sbre idade por setor censitário
+
+# Quem está completando esse arquivo config?
+published_by:
+    nome: Diego Oliveira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    nome: Diego Oliveira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: |
+    Padronização do nome das colunas, remoção de textos e logos, unificação das bases
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+data_update_frequency: 10 anos      # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - setor censitário
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_setor_censitario
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2010
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - sigla_uf
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+    - name: id_setor_censitario
+      description: ID do setor censitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: sigla_uf
+      description: Sigla do Estado
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: true       # Bool [True, False], whether the column is a partition.
+
+    - name: v001
+      description: Pessoas residentes em domicílios particulares e  domicílios coletivos
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v002
+      description: Pessoas residentes em domicílios particulares  permanentes
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v003
+      description: Responsáveis pelos domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v004
+      description: Cônjuges ou companheiros(as) (de sexo diferente e do  mesmo sexo da
+        pessoa responsável) em domicílios  particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v005
+      description: Filhos(as) do responsável e do cônjuge em domicílios  particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v006
+      description: Filhos(as) somente do responsável em domicílios  particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v007
+      description: Enteados(as) em domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v008
+      description: Genros ou noras em domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v009
+      description: Pais, mães, padrastos ou madrastas em domicílios  particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v010
+      description: Sogros (as) em domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v011
+      description: Netos(as) em domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v012
+      description: Bisnetos(as) em domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v013
+      description: Irmãos ou irmãs em domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v014
+      description: Avôs ou avós em domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v015
+      description: Outros parentes em domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v016
+      description: Agregados(as) em domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v017
+      description: Conviventes em domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v018
+      description: Pensionistas em domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v019
+      description: Empregados(as) domésticos(as) em domicílios  particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v020
+      description: Parentes de empregados(as) domésticos(as) em domicílios particulares
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v021
+      description: Individuais em domicílio coletivo
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v022
+      description: Pessoas com menos de 1 ano de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v023
+      description: Pessoas com menos de 1 mês de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v024
+      description: Pessoas com 1 mês de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v025
+      description: Pessoas com 2 meses de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v026
+      description: Pessoas com 3 meses de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v027
+      description: Pessoas com 4 meses de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v028
+      description: Pessoas com 5 meses de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v029
+      description: Pessoas com 6 meses de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v030
+      description: Pessoas com 7 meses de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v031
+      description: Pessoas com 8 meses de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v032
+      description: Pessoas com 9 meses de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v033
+      description: Pessoas com 10 meses de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v034
+      description: Pessoas com 11 meses de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v035
+      description: Pessoas de 1 ano de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v036
+      description: Pessoas com 2 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v037
+      description: Pessoas com 3 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v038
+      description: Pessoas com 4 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v039
+      description: Pessoas com 5 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v040
+      description: Pessoas com 6 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v041
+      description: Pessoas com 7 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v042
+      description: Pessoas com 8 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v043
+      description: Pessoas com 9 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v044
+      description: Pessoas com 10 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v045
+      description: Pessoas com 11 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v046
+      description: Pessoas com 12 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v047
+      description: Pessoas com 13 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v048
+      description: Pessoas com 14 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v049
+      description: Pessoas com 15 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v050
+      description: Pessoas com 16 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v051
+      description: Pessoas com 17 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v052
+      description: Pessoas com 18 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v053
+      description: Pessoas com 19 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v054
+      description: Pessoas com 20 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v055
+      description: Pessoas com 21 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v056
+      description: Pessoas com 22 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v057
+      description: Pessoas com 23 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v058
+      description: Pessoas com 24 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v059
+      description: Pessoas com 25 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v060
+      description: Pessoas com 26 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v061
+      description: Pessoas com 27 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v062
+      description: Pessoas com 28 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v063
+      description: Pessoas com 29 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v064
+      description: Pessoas com 30 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v065
+      description: Pessoas com 31 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v066
+      description: Pessoas com 32 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v067
+      description: Pessoas com 33 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v068
+      description: Pessoas com 34 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v069
+      description: Pessoas com 35 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v070
+      description: Pessoas com 36 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v071
+      description: Pessoas com 37 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v072
+      description: Pessoas com 38 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v073
+      description: Pessoas com 39 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v074
+      description: Pessoas com 40 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v075
+      description: Pessoas com 41 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v076
+      description: Pessoas com 42 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v077
+      description: Pessoas com 43 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v078
+      description: Pessoas com 44 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v079
+      description: Pessoas com 45 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v080
+      description: Pessoas com 46 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v081
+      description: Pessoas com 47 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v082
+      description: Pessoas com 48 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v083
+      description: Pessoas com 49 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v084
+      description: Pessoas com 50 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v085
+      description: Pessoas com 51 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v086
+      description: Pessoas com 52 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v087
+      description: Pessoas com 53 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v088
+      description: Pessoas com 54 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v089
+      description: Pessoas com 55 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v090
+      description: Pessoas com 56 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v091
+      description: Pessoas com 57 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v092
+      description: Pessoas com 58 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v093
+      description: Pessoas com 59 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v094
+      description: Pessoas com 60 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v095
+      description: Pessoas com 61 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v096
+      description: Pessoas com 62 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v097
+      description: Pessoas com 63 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v098
+      description: Pessoas com 64 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v099
+      description: Pessoas com 65 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v100
+      description: Pessoas com 66 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v101
+      description: Pessoas com 67 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v102
+      description: Pessoas com 68 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v103
+      description: Pessoas com 69 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v104
+      description: Pessoas com 70 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v105
+      description: Pessoas com 71 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v106
+      description: Pessoas com 72 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v107
+      description: Pessoas com 73 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v108
+      description: Pessoas com 74 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v109
+      description: Pessoas com 75 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v110
+      description: Pessoas com 76 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v111
+      description: Pessoas com 77 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v112
+      description: Pessoas com 78 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v113
+      description: Pessoas com 79 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v114
+      description: Pessoas com 80 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v115
+      description: Pessoas com 81 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v116
+      description: Pessoas com 82 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v117
+      description: Pessoas com 83 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v118
+      description: Pessoas com 84 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v119
+      description: Pessoas com 85 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v120
+      description: Pessoas com 86 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v121
+      description: Pessoas com 87 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v122
+      description: Pessoas com 88 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v123
+      description: Pessoas com 89 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v124
+      description: Pessoas com 90 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v125
+      description: Pessoas com 91 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v126
+      description: Pessoas com 92 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v127
+      description: Pessoas com 93 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v128
+      description: Pessoas com 94 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v129
+      description: Pessoas com 95 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v130
+      description: Pessoas com 96 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v131
+      description: Pessoas com 97 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v132
+      description: Pessoas com 98 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v133
+      description: Pessoas com 99 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v134
+      description: Pessoas com 100 anos ou mais de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+

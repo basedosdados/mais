@@ -1,0 +1,1370 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: setor_censitario_relacao_parentesco_filhos_enteados_2010 # AUTO GENERATED
+dataset_id: br_ibge_censo_demografico # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-ibge-censo-demografico # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico # AUTO GENERATED
+
+version: v1.0 # REQUIRED
+
+last_updated: 2021-02-27 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Informações sobre as relacões de parentesco para filhos enteados por setor censitário
+
+# Quem está completando esse arquivo config?
+published_by:
+    nome: Diego Oliveira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    nome: Diego Oliveira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: |
+    Padronização do nome das colunas, remoção de textos e logos, unificação das bases
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+data_update_frequency: 10 anos      # REQUIRED  
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - setor censitário
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_setor_censitario
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2010
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - sigla_uf
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+    - name: id_setor_censitario
+      description: ID do setor censitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: sigla_uf
+      description: Sigla do Estado
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: true       # Bool [True, False], whether the column is a partition.
+
+    - name: v001
+      description: Filhos somente do responsável com menos de 1 ano de  idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v002
+      description: Filhos somente do responsável com 1 ano de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v003
+      description: Filhos somente do responsável com 2 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v004
+      description: Filhos somente do responsável com 3 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v005
+      description: Filhos somente do responsável com 4 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v006
+      description: Filhos somente do responsável com 5 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v007
+      description: Filhos somente do responsável com 6 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v008
+      description: Filhos somente do responsável com 7 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v009
+      description: Filhos somente do responsável com 8 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v010
+      description: Filhos somente do responsável com 9 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v011
+      description: Filhos somente do responsável com 10 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v012
+      description: Filhos somente do responsável com 11 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v013
+      description: Filhos somente do responsável com 12 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v014
+      description: Filhos somente do responsável com 13 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v015
+      description: Filhos somente do responsável com 14 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v016
+      description: Filhos somente do responsável com 15 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v017
+      description: Filhos somente do responsável com 16 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v018
+      description: Filhos somente do responsável com 17 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v019
+      description: Filhos somente do responsável com 18 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v020
+      description: Filhos somente do responsável com 19 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v021
+      description: Filhos somente do responsável com 20 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v022
+      description: Filhos somente do responsável com 21 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v023
+      description: Filhos somente do responsável com 22 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v024
+      description: Filhos somente do responsável com 23 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v025
+      description: Filhos somente do responsável com 24 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v026
+      description: Filhos somente do responsável com 25 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v027
+      description: Filhos somente do responsável com 26 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v028
+      description: Filhos somente do responsável com 27 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v029
+      description: Filhos somente do responsável com 28 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v030
+      description: Filhos somente do responsável com 29 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v031
+      description: Filhos somente do responsável com 30 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v032
+      description: Filhos somente do responsável com 31 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v033
+      description: Filhos somente do responsável com 32 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v034
+      description: Filhos somente do responsável com 33 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v035
+      description: Filhos somente do responsável com 34 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v036
+      description: Filhos somente do responsável com 35 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v037
+      description: Filhos somente do responsável com 36 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v038
+      description: Filhos somente do responsável com 37 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v039
+      description: Filhos somente do responsável com 38 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v040
+      description: Filhos somente do responsável com 39 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v041
+      description: Filhos somente do responsável com 40 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v042
+      description: Filhos somente do responsável com 41 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v043
+      description: Filhos somente do responsável com 42 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v044
+      description: Filhos somente do responsável com 43 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v045
+      description: Filhos somente do responsável com 44 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v046
+      description: Filhos somente do responsável com 45 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v047
+      description: Filhos somente do responsável com 46 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v048
+      description: Filhos somente do responsável com 47 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v049
+      description: Filhos somente do responsável com 48 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v050
+      description: Filhos somente do responsável com 49 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v051
+      description: Filhos somente do responsável com 50 anos ou mais de  idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v052
+      description: Enteados com menos de 1 ano de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v053
+      description: Enteados com 1 ano de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v054
+      description: Enteados com 2 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v055
+      description: Enteados com 3 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v056
+      description: Enteados com 4 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v057
+      description: Enteados com 5 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v058
+      description: Enteados com 6 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v059
+      description: Enteados com 7 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v060
+      description: Enteados com 8 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v061
+      description: Enteados com 9 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v062
+      description: Enteados com 10 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v063
+      description: Enteados com 11 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v064
+      description: Enteados com 12 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v065
+      description: Enteados com 13 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v066
+      description: Enteados com 14 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v067
+      description: Enteados com 15 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v068
+      description: Enteados com 16 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v069
+      description: Enteados com 17 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v070
+      description: Enteados com 18 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v071
+      description: Enteados com 19 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v072
+      description: Enteados com 20 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v073
+      description: Enteados com 21 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v074
+      description: Enteados com 22 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v075
+      description: Enteados com 23 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v076
+      description: Enteados com 24 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v077
+      description: Enteados com 25 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v078
+      description: Enteados com 26 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v079
+      description: Enteados com 27 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v080
+      description: Enteados com 28 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v081
+      description: Enteados com 29 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v082
+      description: Enteados com 30 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v083
+      description: Enteados com 31 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v084
+      description: Enteados com 32 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v085
+      description: Enteados com 33 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v086
+      description: Enteados com 34 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v087
+      description: Enteados com 35 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v088
+      description: Enteados com 36 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v089
+      description: Enteados com 37 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v090
+      description: Enteados com 38 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v091
+      description: Enteados com 39 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v092
+      description: Enteados com 40 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v093
+      description: Enteados com 41 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v094
+      description: Enteados com 42 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v095
+      description: Enteados com 43 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v096
+      description: Enteados com 44 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v097
+      description: Enteados com 45 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v098
+      description: Enteados com 46 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v099
+      description: Enteados com 47 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v100
+      description: Enteados com 48 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v101
+      description: Enteados com 49 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v102
+      description: Enteados com 50 ou mais anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v103
+      description: Filhas do responsável e do cônjuge com menos de 1 ano de  idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v104
+      description: Filhas do responsável e do cônjuge com 1 ano de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v105
+      description: Filhas do responsável e do cônjuge com 2 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v106
+      description: Filhas do responsável e do cônjuge com 3 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v107
+      description: Filhas do responsável e do cônjuge com 4 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v108
+      description: Filhas do responsável e do cônjuge com 5 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v109
+      description: Filhas do responsável e do cônjuge com 6 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v110
+      description: Filhas do responsável e do cônjuge com 7 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v111
+      description: Filhas do responsável e do cônjuge com 8 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v112
+      description: Filhas do responsável e do cônjuge com 9 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v113
+      description: Filhas do responsável e do cônjuge com 10 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v114
+      description: Não informado pelo arquivo de referência do censo2010
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v115
+      description: Filhas do responsável e do cônjuge com 12 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v116
+      description: Filhas do responsável e do cônjuge com 13 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v117
+      description: Filhas do responsável e do cônjuge com 14 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v118
+      description: Filhas do responsável e do cônjuge com 15 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v119
+      description: Filhas do responsável e do cônjuge com 16 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v120
+      description: Filhas do responsável e do cônjuge com 17 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v121
+      description: Filhas do responsável e do cônjuge com 18 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v122
+      description: Filhas do responsável e do cônjuge com 19 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v123
+      description: Filhas do responsável e do cônjuge com 20 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v124
+      description: Filhas do responsável e do cônjuge com 21 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v125
+      description: Filhas do responsável e do cônjuge com 22 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v126
+      description: Filhas do responsável e do cônjuge com 23 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v127
+      description: Filhas do responsável e do cônjuge com 24 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v128
+      description: Filhas do responsável e do cônjuge com 25 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v129
+      description: Filhas do responsável e do cônjuge com 26 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v130
+      description: Filhas do responsável e do cônjuge com 27 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v131
+      description: Filhas do responsável e do cônjuge com 28 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v132
+      description: Filhas do responsável e do cônjuge com 29 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v133
+      description: Filhas do responsável e do cônjuge com 30 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v134
+      description: Filhas do responsável e do cônjuge com 31 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v135
+      description: Filhas do responsável e do cônjuge com 32 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v136
+      description: Filhas do responsável e do cônjuge com 33 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v137
+      description: Filhas do responsável e do cônjuge com 34 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v138
+      description: Filhas do responsável e do cônjuge com 35 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v139
+      description: Filhas do responsável e do cônjuge com 36 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v140
+      description: Filhas do responsável e do cônjuge com 37 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v141
+      description: Filhas do responsável e do cônjuge com 38 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v142
+      description: Filhas do responsável e do cônjuge com 39 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v143
+      description: Filhas do responsável e do cônjuge com 40 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v144
+      description: Filhas do responsável e do cônjuge com 41 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v145
+      description: Filhas do responsável e do cônjuge com 42 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v146
+      description: Filhas do responsável e do cônjuge com 43 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v147
+      description: Filhas do responsável e do cônjuge com 44 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v148
+      description: Filhas do responsável e do cônjuge com 45 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v149
+      description: Filhas do responsável e do cônjuge com 46 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v150
+      description: Filhas do responsável e do cônjuge com 47 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v151
+      description: Filhas do responsável e do cônjuge com 48 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v152
+      description: Filhas do responsável e do cônjuge com 49 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v153
+      description: Filhas do responsável e do cônjuge com 50 anos ou mais de  idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v154
+      description: Filhas somente do responsável com menos de 1 ano de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v155
+      description: Filhas somente do responsável com 1 ano de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v156
+      description: Filhas somente do responsável com 2 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v157
+      description: Filhas somente do responsável com 3 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v158
+      description: Filhas somente do responsável com 4 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v159
+      description: Filhas somente do responsável com 5 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v160
+      description: Filhas somente do responsável com 6 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v161
+      description: Filhas somente do responsável com 7 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v162
+      description: Filhas somente do responsável com 8 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v163
+      description: Filhas somente do responsável com 9 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v164
+      description: Filhas somente do responsável com 10 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v165
+      description: Filhas somente do responsável com 11 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v166
+      description: Filhas somente do responsável com 12 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v167
+      description: Filhas somente do responsável com 13 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v168
+      description: Filhas somente do responsável com 14 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v169
+      description: Filhas somente do responsável com 15 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v170
+      description: Filhas somente do responsável com 16 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v171
+      description: Filhas somente do responsável com 17 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v172
+      description: Filhas somente do responsável com 18 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v173
+      description: Filhas somente do responsável com 19 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v174
+      description: Filhas somente do responsável com 20 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v175
+      description: Filhas somente do responsável com 21 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v176
+      description: Filhas somente do responsável com 22 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v177
+      description: Filhas somente do responsável com 23 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v178
+      description: Filhas somente do responsável com 24 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v179
+      description: Filhas somente do responsável com 25 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v180
+      description: Filhas somente do responsável com 26 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v181
+      description: Filhas somente do responsável com 27 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v182
+      description: Filhas somente do responsável com 28 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v183
+      description: Filhas somente do responsável com 29 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v184
+      description: Filhas somente do responsável com 30 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v185
+      description: Filhas somente do responsável com 31 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v186
+      description: Filhas somente do responsável com 32 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v187
+      description: Filhas somente do responsável com 33 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v188
+      description: Filhas somente do responsável com 34 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v189
+      description: Filhas somente do responsável com 35 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v190
+      description: Filhas somente do responsável com 36 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v191
+      description: Filhas somente do responsável com 37 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v192
+      description: Filhas somente do responsável com 38 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v193
+      description: Filhas somente do responsável com 39 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v194
+      description: Filhas somente do responsável com 40 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v195
+      description: Filhas somente do responsável com 41 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v196
+      description: Filhas somente do responsável com 42 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v197
+      description: Filhas somente do responsável com 43 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v198
+      description: Filhas somente do responsável com 44 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v199
+      description: Filhas somente do responsável com 45 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v200
+      description: Filhas somente do responsável com 46 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v201
+      description: Filhas somente do responsável com 47 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v202
+      description: Filhas somente do responsável com 48 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v203
+      description: Filhas somente do responsável com 49 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v204
+      description: Filhas somente do responsável com 50 anos ou mais de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v205
+      description: Enteadas com menos de 1 ano de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v206
+      description: Enteadas com 1 ano de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v207
+      description: Enteadas com 2 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v208
+      description: Enteadas com 3 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v209
+      description: Enteadas com 4 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v210
+      description: Enteadas com 5 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v211
+      description: Enteadas com 6 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v212
+      description: Enteadas com 7 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v213
+      description: Enteadas com 8 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v214
+      description: Enteadas com 9 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v215
+      description: Enteadas com 10 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v216
+      description: Enteadas com 11 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v217
+      description: Enteadas com 12 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v218
+      description: Enteadas com 13 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v219
+      description: Enteadas com 14 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v220
+      description: Enteadas com 15 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v221
+      description: Enteadas com 16 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v222
+      description: Enteadas com 17 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v223
+      description: Enteadas com 18 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v224
+      description: Enteadas com 19 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v225
+      description: Enteadas com 20 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v226
+      description: Enteadas com 21 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v227
+      description: Enteadas com 22 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v228
+      description: Enteadas com 23 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v229
+      description: Enteadas com 24 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v230
+      description: Enteadas com 25 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v231
+      description: Enteadas com 26 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v232
+      description: Enteadas com 27 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v233
+      description: Enteadas com 28 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v234
+      description: Enteadas com 29 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v235
+      description: Enteadas com 30 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v236
+      description: Enteadas com 31 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v237
+      description: Enteadas com 32 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v238
+      description: Enteadas com 33 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v239
+      description: Enteadas com 34 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v240
+      description: Enteadas com 35 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v241
+      description: Enteadas com 36 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v242
+      description: Enteadas com 37 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v243
+      description: Enteadas com 38 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v244
+      description: Enteadas com 39 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v245
+      description: Enteadas com 40 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v246
+      description: Enteadas com 41 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v247
+      description: Enteadas com 42 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v248
+      description: Enteadas com 43 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v249
+      description: Enteadas com 44 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v250
+      description: Enteadas com 45 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v251
+      description: Enteadas com 46 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v252
+      description: Enteadas com 47 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v253
+      description: Enteadas com 48 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v254
+      description: Enteadas com 49 anos de idade
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.

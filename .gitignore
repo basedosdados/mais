@@ -13,7 +13,6 @@ notebooks
 data
 secrets
 .ipynb*
-*.ipynb
 *.csv
 docs/site
 TODO
@@ -162,4 +161,9 @@ dmypy.json
 cython_debug/
 .vscode/settings.json
 
+# Examples
+!examples/*.ipynb
 
+
+.Rproj.user
+*.env

@@ -1,18 +1,24 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: microdados # AUTO GENERATED
-dataset_id: br_ms_sim # AUTO GENERATED
+dataset_id: br_ms_sim # AUTO GENERATED 
 
-last_updated: 2020-10-21 # AUTO GENERATED
+url_ckan: https://basedosdados.org/dataset/br-ms-sim # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim # AUTO GENERATED
+
+version: v1.1
+
+last_updated: 2021-03-10 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
-# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
-# como usar os dados.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de 
+# como usar os dados. 
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
     Microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério da Saúde.
 
-# Qual organização/departamento/pessoa tratou os dados?
-# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
-# Se essa pessoa é você, preencha abaixo com suas informações.
+# Quem está completando esse arquivo config?
 treated_by:
     name: Ricardo Dahis
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim/code # REQUIRED
@@ -28,20 +34,28 @@ published_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Limpei as strings, substituí valores numéricos por suas strings, corrigi os id_municipio todos para 7 dígitos entre anos, troquei a ordem de variáveis, etc.
+    - Limpamos as strings.
+    - Substituímos valores numéricos por suas strings.
+    - Corrigimos os id_municipio todos para 7 dígitos entre anos.
+    - Trocamos a ordem de variáveis, etc.
 
 # Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
 data_update_frequency: 1 ano
 
-# Nível da observação: quais colunas identificam uma linha unicamente?
+# Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
-# Regras: minúsculo, sem acento, singular.
-# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level:
-    - estado
-    - sequencial_obido
-    - ano
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - obito
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -81,6 +95,7 @@ coverage_time:
     - 2016
     - 2017
     - 2018
+    - 2019
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -88,7 +103,7 @@ coverage_time:
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED
     - ano
-    - estado_abrev
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -689,7 +704,7 @@ columns: # REQUIRED
         is_partition: True # Bool [True, False], whether the column is a partition.
         
     -   
-        name: estado_abrev
-        description: Estao Abreviado
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.

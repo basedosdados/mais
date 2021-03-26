@@ -38,19 +38,20 @@ acordo com as colunas da tabela.
 
 #### Estrutura de pastas
 
-Sugerimos a seguinte estrutura local da pasta que você irá trabalhar:
+Sugerimos a seguinte estrutura local da pasta que você irá trabalhar num determinado conjunto de dados:
 
-- `/code`
-    - Pasta onde ficam todos os _scripts_ (códigos) necessários à
-      limpeza dos dados. Nessa configuração, toda a estrutura de código
-      será com atalhos _relativos_ à pasta raíz, usando as demais pastas criadas.
-- `/input`
-    - Pasta onde ficam todos os arquivos com dados originais, como
-      baixados da fonte primária. *Esses arquivos não devem jamais ser modificados.*
-- `/output`
-    - Pasta para arquivos finais, já no formato e conteúdo prontos para subir na BD+.
-- `/tmp`
-    - Pasta usada para quaisquer arquivos temporários criados pelos códigos em `/code` no processo de limpeza e tratamento.
+- `nome_conjunto` (um conjunto pode ter mais de uma tabela aqui)
+  - `/code`
+      - Pasta onde ficam todos os _scripts_ (códigos) necessários à
+        limpeza dos dados. Nessa configuração, toda a estrutura de código
+        será com atalhos _relativos_ à pasta raíz, usando as demais pastas criadas.
+  - `/input`
+      - Pasta onde ficam todos os arquivos com dados originais, como
+        baixados da fonte primária. *Esses arquivos não devem jamais ser modificados.*
+  - `/output`
+      - Pasta para arquivos finais, já no formato e conteúdo prontos para subir na BD+.
+  - `/tmp`
+      - Pasta usada para quaisquer arquivos temporários criados pelos códigos em `/code` no processo de limpeza e tratamento.
 
 #### Captura dos dados
 
@@ -86,6 +87,14 @@ Desenvolvemos um cliente `basedosdados` (disponível para linha de
 comando e Python por enquanto) para facilitar esse processo e indicar
 configurações básicas que devem ser preenchidas sobre os dados.
 
+Os dados vão passar ao todo por 3 lugares no Google Cloud:
+
+1. Bucket (Storage): local onde serão armazenados o arquivos frios
+2. Big Query: banco de dados do Google, dividido em 2 projetos/tipos de tabela:
+    - Staging: banco para teste e tratamento final do conjunto de dados
+    - Prod: banco oficial de publicação dos dados (`basedosdados`! ou o seu mesmo caso queira reproduzir o ambiente)
+
+
 #### Configure seu projeto no Google Cloud e um _bucket_ no Google Storage
 
 Para criar um projeto no Google Cloud basta ter um email cadastrado no
@@ -109,11 +118,13 @@ Google. Basta seguir o passo-a-passo:
     - `README.md`: informações básicas da base de dados aparecendo no Github
     - `dataset_config.yaml`: informações específicas da base de dados
     - `/[TABLE_ID]/table_config.yaml`: informações específicas da tabela
-    - `/[TABLE_ID]/publish.sql`: informações da publicação da tabela (os tipos de variáveis do [BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) são `STRING`, `INT64`, `FLOAT64`, `DATE`)
+    - `/[TABLE_ID]/publish.sql`: informações da publicação da tabela, como os tipos de variáveis do [BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) (`STRING`, `INT64`, `FLOAT64`, `DATE`), e use também este espaço para escrever tratamentos finais na tabela `staging` em SQL para publicacao
+    
+Consulte também nossa [API](/cli_reference_api) para mais detalhes de cada método.
 
 #### Publique a versão pronta no seu _bucket_ com `basedosdados table publish`
 
-!!! Tip "Consulte nossa [API](/cli_reference_api) para mais detalhes de cada método."
+Após rodar o `publish`, vá no BigQuery e verifique se os dados subiram rodando `SELECT * FROM [PROJECT_ID].[DATASET_ID].[TABLE_ID]`.
 
 ## 4. Envie código e dados prontos para revisão
 

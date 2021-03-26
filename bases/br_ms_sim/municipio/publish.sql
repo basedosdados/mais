@@ -18,10 +18,10 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_ms_sim.municipio AS
+CREATE VIEW basedosdados-dev.br_ms_sim.municipio AS
 SELECT 
-SAFE_CAST(estado_abrev AS STRING) estado_abrev,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(numero_obitos AS INT64) numero_obitos
-from basedosdados-staging.br_ms_sim_staging.municipio as t
+from basedosdados-dev.br_ms_sim_staging.municipio as t

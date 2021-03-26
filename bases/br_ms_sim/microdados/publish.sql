@@ -18,10 +18,10 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_ms_sim.microdados AS
-SELECT 
+CREATE VIEW basedosdados-dev.br_ms_sim.microdados AS
+SELECT
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(estado_abrev AS STRING) estado_abrev,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(sequencial_obito AS INT64) sequencial_obito,
 SAFE_CAST(tipo_obito AS STRING) tipo_obito,
 SAFE_CAST(causa_basica AS STRING) causa_basica,
@@ -119,4 +119,4 @@ SAFE_CAST(tipo_nivel_investigador AS STRING) tipo_nivel_investigador,
 SAFE_CAST(numero_dias_inf AS INT64) numero_dias_inf,
 SAFE_CAST(fontes_inf AS STRING) fontes_inf,
 SAFE_CAST(alt_causa AS STRING) alt_causa
-from basedosdados-staging.br_ms_sim_staging.microdados as t
+from basedosdados-dev.br_ms_sim_staging.microdados as t

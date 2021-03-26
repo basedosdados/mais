@@ -1,0 +1,93 @@
+/*
+
+Query para publicar a tabela.
+
+Esse é o lugar para:
+    - modificar nomes, ordem e tipos de colunas
+    - dar join com outras tabelas
+    - criar colunas extras (e.g. logs, proporções, etc.)
+
+Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
+
+# Além disso, sinta-se à vontade para alterar alguns nomes obscuros
+# para algo um pouco mais explícito.
+
+TIPOS:
+    - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
+    - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
+    - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
+
+*/
+
+CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.municipio_taxas_transicao AS
+SELECT 
+SAFE_CAST(ano_de AS INT64) ano_de,
+SAFE_CAST(ano_para AS INT64) ano_para,
+SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(localizacao AS STRING) localizacao,
+SAFE_CAST(rede AS STRING) rede,
+SAFE_CAST(taxa_promocao_ensino_fund AS FLOAT64) taxa_promocao_ensino_fund,
+SAFE_CAST(taxa_promocao_ensino_fund_anos_iniciais AS FLOAT64) taxa_promocao_ensino_fund_anos_iniciais,
+SAFE_CAST(taxa_promocao_ensino_fund_anos_finais AS FLOAT64) taxa_promocao_ensino_fund_anos_finais,
+SAFE_CAST(taxa_promocao_ensino_fund_1_ano AS FLOAT64) taxa_promocao_ensino_fund_1_ano,
+SAFE_CAST(taxa_promocao_ensino_fund_2_ano AS FLOAT64) taxa_promocao_ensino_fund_2_ano,
+SAFE_CAST(taxa_promocao_ensino_fund_3_ano AS FLOAT64) taxa_promocao_ensino_fund_3_ano,
+SAFE_CAST(taxa_promocao_ensino_fund_4_ano AS FLOAT64) taxa_promocao_ensino_fund_4_ano,
+SAFE_CAST(taxa_promocao_ensino_fund_5_ano AS FLOAT64) taxa_promocao_ensino_fund_5_ano,
+SAFE_CAST(taxa_promocao_ensino_fund_6_ano AS FLOAT64) taxa_promocao_ensino_fund_6_ano,
+SAFE_CAST(taxa_promocao_ensino_fund_7_ano AS FLOAT64) taxa_promocao_ensino_fund_7_ano,
+SAFE_CAST(taxa_promocao_ensino_fund_8_ano AS FLOAT64) taxa_promocao_ensino_fund_8_ano,
+SAFE_CAST(taxa_promocao_ensino_fund_9_ano AS FLOAT64) taxa_promocao_ensino_fund_9_ano,
+SAFE_CAST(taxa_promocao_ensino_medio AS FLOAT64) taxa_promocao_ensino_medio,
+SAFE_CAST(taxa_promocao_ensino_medio_1_ano AS FLOAT64) taxa_promocao_ensino_medio_1_ano,
+SAFE_CAST(taxa_promocao_ensino_medio_2_ano AS FLOAT64) taxa_promocao_ensino_medio_2_ano,
+SAFE_CAST(taxa_promocao_ensino_medio_3_ano AS FLOAT64) taxa_promocao_ensino_medio_3_ano,
+SAFE_CAST(taxa_repetencia_ensino_fund AS FLOAT64) taxa_repetencia_ensino_fund,
+SAFE_CAST(taxa_repetencia_ensino_fund_anos_iniciais AS FLOAT64) taxa_repetencia_ensino_fund_anos_iniciais,
+SAFE_CAST(taxa_repetencia_ensino_fund_anos_finais AS FLOAT64) taxa_repetencia_ensino_fund_anos_finais,
+SAFE_CAST(taxa_repetencia_ensino_fund_1_ano AS FLOAT64) taxa_repetencia_ensino_fund_1_ano,
+SAFE_CAST(taxa_repetencia_ensino_fund_2_ano AS FLOAT64) taxa_repetencia_ensino_fund_2_ano,
+SAFE_CAST(taxa_repetencia_ensino_fund_3_ano AS FLOAT64) taxa_repetencia_ensino_fund_3_ano,
+SAFE_CAST(taxa_repetencia_ensino_fund_4_ano AS FLOAT64) taxa_repetencia_ensino_fund_4_ano,
+SAFE_CAST(taxa_repetencia_ensino_fund_5_ano AS FLOAT64) taxa_repetencia_ensino_fund_5_ano,
+SAFE_CAST(taxa_repetencia_ensino_fund_6_ano AS FLOAT64) taxa_repetencia_ensino_fund_6_ano,
+SAFE_CAST(taxa_repetencia_ensino_fund_7_ano AS FLOAT64) taxa_repetencia_ensino_fund_7_ano,
+SAFE_CAST(taxa_repetencia_ensino_fund_8_ano AS FLOAT64) taxa_repetencia_ensino_fund_8_ano,
+SAFE_CAST(taxa_repetencia_ensino_fund_9_ano AS FLOAT64) taxa_repetencia_ensino_fund_9_ano,
+SAFE_CAST(taxa_repetencia_ensino_medio AS FLOAT64) taxa_repetencia_ensino_medio,
+SAFE_CAST(taxa_repetencia_ensino_medio_1_ano AS FLOAT64) taxa_repetencia_ensino_medio_1_ano,
+SAFE_CAST(taxa_repetencia_ensino_medio_2_ano AS FLOAT64) taxa_repetencia_ensino_medio_2_ano,
+SAFE_CAST(taxa_repetencia_ensino_medio_3_ano AS FLOAT64) taxa_repetencia_ensino_medio_3_ano,
+SAFE_CAST(taxa_evasao_ensino_fund AS FLOAT64) taxa_evasao_ensino_fund,
+SAFE_CAST(taxa_evasao_ensino_fund_anos_iniciais AS FLOAT64) taxa_evasao_ensino_fund_anos_iniciais,
+SAFE_CAST(taxa_evasao_ensino_fund_anos_finais AS FLOAT64) taxa_evasao_ensino_fund_anos_finais,
+SAFE_CAST(taxa_evasao_ensino_fund_1_ano AS FLOAT64) taxa_evasao_ensino_fund_1_ano,
+SAFE_CAST(taxa_evasao_ensino_fund_2_ano AS FLOAT64) taxa_evasao_ensino_fund_2_ano,
+SAFE_CAST(taxa_evasao_ensino_fund_3_ano AS FLOAT64) taxa_evasao_ensino_fund_3_ano,
+SAFE_CAST(taxa_evasao_ensino_fund_4_ano AS FLOAT64) taxa_evasao_ensino_fund_4_ano,
+SAFE_CAST(taxa_evasao_ensino_fund_5_ano AS FLOAT64) taxa_evasao_ensino_fund_5_ano,
+SAFE_CAST(taxa_evasao_ensino_fund_6_ano AS FLOAT64) taxa_evasao_ensino_fund_6_ano,
+SAFE_CAST(taxa_evasao_ensino_fund_7_ano AS FLOAT64) taxa_evasao_ensino_fund_7_ano,
+SAFE_CAST(taxa_evasao_ensino_fund_8_ano AS FLOAT64) taxa_evasao_ensino_fund_8_ano,
+SAFE_CAST(taxa_evasao_ensino_fund_9_ano AS FLOAT64) taxa_evasao_ensino_fund_9_ano,
+SAFE_CAST(taxa_evasao_ensino_medio AS FLOAT64) taxa_evasao_ensino_medio,
+SAFE_CAST(taxa_evasao_ensino_medio_1_ano AS FLOAT64) taxa_evasao_ensino_medio_1_ano,
+SAFE_CAST(taxa_evasao_ensino_medio_2_ano AS FLOAT64) taxa_evasao_ensino_medio_2_ano,
+SAFE_CAST(taxa_evasao_ensino_medio_3_ano AS FLOAT64) taxa_evasao_ensino_medio_3_ano,
+SAFE_CAST(taxa_migracao_eja_ensino_fund AS FLOAT64) taxa_migracao_eja_ensino_fund,
+SAFE_CAST(taxa_migracao_eja_ensino_fund_anos_iniciais AS FLOAT64) taxa_migracao_eja_ensino_fund_anos_iniciais,
+SAFE_CAST(taxa_migracao_eja_ensino_fund_anos_finais AS FLOAT64) taxa_migracao_eja_ensino_fund_anos_finais,
+SAFE_CAST(taxa_migracao_eja_ensino_fund_1_ano AS FLOAT64) taxa_migracao_eja_ensino_fund_1_ano,
+SAFE_CAST(taxa_migracao_eja_ensino_fund_2_ano AS FLOAT64) taxa_migracao_eja_ensino_fund_2_ano,
+SAFE_CAST(taxa_migracao_eja_ensino_fund_3_ano AS FLOAT64) taxa_migracao_eja_ensino_fund_3_ano,
+SAFE_CAST(taxa_migracao_eja_ensino_fund_4_ano AS FLOAT64) taxa_migracao_eja_ensino_fund_4_ano,
+SAFE_CAST(taxa_migracao_eja_ensino_fund_5_ano AS FLOAT64) taxa_migracao_eja_ensino_fund_5_ano,
+SAFE_CAST(taxa_migracao_eja_ensino_fund_6_ano AS FLOAT64) taxa_migracao_eja_ensino_fund_6_ano,
+SAFE_CAST(taxa_migracao_eja_ensino_fund_7_ano AS FLOAT64) taxa_migracao_eja_ensino_fund_7_ano,
+SAFE_CAST(taxa_migracao_eja_ensino_fund_8_ano AS FLOAT64) taxa_migracao_eja_ensino_fund_8_ano,
+SAFE_CAST(taxa_migracao_eja_ensino_fund_9_ano AS FLOAT64) taxa_migracao_eja_ensino_fund_9_ano,
+SAFE_CAST(taxa_migracao_eja_ensino_medio AS FLOAT64) taxa_migracao_eja_ensino_medio,
+SAFE_CAST(taxa_migracao_eja_ensino_medio_1_ano AS FLOAT64) taxa_migracao_eja_ensino_medio_1_ano,
+SAFE_CAST(taxa_migracao_eja_ensino_medio_2_ano AS FLOAT64) taxa_migracao_eja_ensino_medio_2_ano,
+SAFE_CAST(taxa_migracao_eja_ensino_medio_3_ano AS FLOAT64) taxa_migracao_eja_ensino_medio_3_ano
+from basedosdados-dev.br_inep_indicadores_educacionais_staging.municipio_taxas_transicao as t

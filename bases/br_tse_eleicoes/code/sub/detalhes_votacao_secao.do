@@ -26,7 +26,7 @@ local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
-foreach ano of numlist 1994(2)2018 {
+foreach ano of numlist 1994(2)2020 {
 	
 	foreach estado in `estados_`ano'' {
 		
@@ -40,8 +40,8 @@ foreach ano of numlist 1994(2)2018 {
 			ren v3 ano
 			ren v4 turno
 			ren v5 tipo_eleicao
-			ren v6 estado_abrev
-			ren v8 id_municipio_TSE
+			ren v6 sigla_uf
+			ren v8 id_municipio_tse
 			ren v10 zona
 			ren v11 secao
 			ren v13 cargo
@@ -54,8 +54,10 @@ foreach ano of numlist 1994(2)2018 {
 			ren v20 votos_coligacao
 			ren v21 votos_nulos_apu_sep
 			
+			gen votos_pendentes = .
+			
 		}
-		else if `ano' == 2018 {
+		else if `ano' >= 2018 {
 			
 			drop in 1
 			
@@ -64,8 +66,8 @@ foreach ano of numlist 1994(2)2018 {
 			ren v3 ano
 			ren v5 tipo_eleicao
 			ren v6 turno
-			ren v11 estado_abrev
-			ren v14 id_municipio_TSE
+			ren v11 sigla_uf
+			ren v14 id_municipio_tse
 			ren v16 zona
 			ren v17 secao
 			ren v19 cargo
@@ -78,10 +80,12 @@ foreach ano of numlist 1994(2)2018 {
 			ren v26 votos_coligacao
 			ren v27 votos_pendentes
 			
+			gen votos_nulos_apu_sep = .
+			
 		}
 		*
 		
-		destring ano turno id_municipio_TSE zona secao aptos* comparecimento abstencoes votos_*, replace force
+		destring ano turno id_municipio_tse zona secao aptos* comparecimento abstencoes votos_*, replace force
 		
 		foreach k of varlist zona secao aptos* comparecimento abstencoes votos_* {
 			
@@ -141,6 +145,9 @@ foreach ano of numlist 1994(2)2018 {
 		}
 	}
 	*
+	
+	order	ano turno tipo_eleicao sigla_uf id_municipio_tse zona secao cargo aptos comparecimento abstencoes ///
+			votos_nominais votos_brancos votos_nulos votos_coligacao votos_nulos_apu_sep votos_pendentes
 	
 	compress
 	

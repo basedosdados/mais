@@ -3,11 +3,11 @@
 // build: agregacao
 //----------------------------------------------------------------------------//
 
-foreach ano of numlist 1996(1)2018 {
+foreach ano of numlist 1996(1)2019 {
 	
-	foreach estado_abrev in AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO {
+	foreach sigla_uf in AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO {
 		
-		import delimited "output/microdados/ano=`ano'/estado_abrev=`estado_abrev'/microdados.csv", clear varn(1)
+		import delimited "output/microdados/ano=`ano'/sigla_uf=`sigla_uf'/microdados.csv", clear varn(1)
 		
 		// resolve problema Stata de precisao de floats (ex. 0.519999999)
 		gen aux_idade = string(idade, "%4.2f")
@@ -26,7 +26,7 @@ foreach ano of numlist 1996(1)2018 {
 		
 		! mkdir "output/municipio_causa_idade_genero_raca"
 		! mkdir "output/municipio_causa_idade_genero_raca/ano=`ano'"
-		! mkdir "output/municipio_causa_idade_genero_raca/ano=`ano'/estado_abrev=`estado_abrev'"
+		! mkdir "output/municipio_causa_idade_genero_raca/ano=`ano'/sigla_uf=`sigla_uf'"
 		
 		preserve
 			
@@ -38,7 +38,7 @@ foreach ano of numlist 1996(1)2018 {
 			
 			order id_municipio causa_basica idade genero raca_cor
 			
-			export delimited "output/municipio_causa_idade_genero_raca/ano=`ano'/estado_abrev=`estado_abrev'/municipio_causa_idade_genero_raca.csv", replace
+			export delimited "output/municipio_causa_idade_genero_raca/ano=`ano'/sigla_uf=`sigla_uf'/municipio_causa_idade_genero_raca.csv", replace datafmt
 			
 		restore
 		
@@ -48,7 +48,7 @@ foreach ano of numlist 1996(1)2018 {
 		
 		! mkdir "output/municipio_causa_idade"
 		! mkdir "output/municipio_causa_idade/ano=`ano'"
-		! mkdir "output/municipio_causa_idade/ano=`ano'/estado_abrev=`estado_abrev'"
+		! mkdir "output/municipio_causa_idade/ano=`ano'/sigla_uf=`sigla_uf'"
 		
 		preserve
 			
@@ -60,7 +60,7 @@ foreach ano of numlist 1996(1)2018 {
 			
 			order id_municipio causa_basica idade
 			
-			export delimited "output/municipio_causa_idade/ano=`ano'/estado_abrev=`estado_abrev'/municipio_causa_idade.csv", replace
+			export delimited "output/municipio_causa_idade/ano=`ano'/sigla_uf=`sigla_uf'/municipio_causa_idade.csv", replace datafmt
 			
 		restore
 		
@@ -70,7 +70,7 @@ foreach ano of numlist 1996(1)2018 {
 		
 		! mkdir "output/municipio_causa"
 		! mkdir "output/municipio_causa/ano=`ano'"
-		! mkdir "output/municipio_causa/ano=`ano'/estado_abrev=`estado_abrev'"
+		! mkdir "output/municipio_causa/ano=`ano'/sigla_uf=`sigla_uf'"
 		
 		preserve
 			
@@ -81,7 +81,7 @@ foreach ano of numlist 1996(1)2018 {
 			
 			order id_municipio causa_basica
 			
-			export delimited "output/municipio_causa/ano=`ano'/estado_abrev=`estado_abrev'/municipio_causa.csv", replace
+			export delimited "output/municipio_causa/ano=`ano'/sigla_uf=`sigla_uf'/municipio_causa.csv", replace
 			
 		restore
 		
@@ -91,7 +91,7 @@ foreach ano of numlist 1996(1)2018 {
 		
 		! mkdir "output/municipio"
 		! mkdir "output/municipio/ano=`ano'"
-		! mkdir "output/municipio/ano=`ano'/estado_abrev=`estado_abrev'"
+		! mkdir "output/municipio/ano=`ano'/sigla_uf=`sigla_uf'"
 		
 		preserve
 			
@@ -102,7 +102,7 @@ foreach ano of numlist 1996(1)2018 {
 			
 			order id_municipio
 			
-			export delimited "output/municipio/ano=`ano'/estado_abrev=`estado_abrev'/municipio.csv", replace
+			export delimited "output/municipio/ano=`ano'/sigla_uf=`sigla_uf'/municipio.csv", replace datafmt
 			
 		restore
 		

@@ -1,0 +1,81 @@
+Esta tabela contém todo o conteúdo textual da seção 3 (contratos, editais, licitações,
+etc.) do Diário Oficial da União. No momento, a data mais antiga presente na tabela é
+do dia 12 de abril de 2019.
+
+O Diário Oficial da União é tipicamente publicado uma vez por dia (edições ordinárias)
+de madrugada (perto das 4h da manhã), mas pode atrasar bastante (tipicamente, até às
+11h da manhã). Entretanto, esses horários não são rígidos e podem variar, e as seções
+(ou partes das seções) podem ser publicadas em horários diferentes. Além disso, é
+possível (e comum) que sejam publicadas edições extras (tipicamente uma ou duas)
+ao longo do dia. Por esse motivo, esta tabela é atualizada uma vez por dia com as
+matérias do dia anterior (ou seja, essas são as matérias mais recentes).
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-imprensa-nacional-dou
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_imprensa_nacional_dou
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Henrique Xavier
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_imprensa_nacional_dou/code
+Website: http://henriquexavier.net/
+Email: hsxavier@gmail.comTratado por
+-----------
+Nome: Henrique Xavier
+Código: https://github.com/gabinete-compartilhado-acredito/DOUTOR
+Website: http://henriquexavier.net/
+Email: hsxavier@gmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- data_publicacao_particao
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- publicacao
+
+Colunas identificando linhas unicamente
+-------------------
+- url
+
+Cobertura Temporal
+------------------
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+O código de extração dos dados chamado DOUTOR armazena os dados no formato JSON,
+sendo um arquivo por matéria do DOU. Cada JSON contém uma lista de dicionários
+com algumas chaves específicas como 'capture_date' e 'api_url'. As demais chaves de
+cada dicionário são 'key' e 'value'. As keys são tags de HTML presentes na matéria,
+e as values são os conteúdos. Ou seja: a maior parte das informações de cada matéria
+são armazenadas no formato 'key-value-pairs'. Em caso de tags que se repetem (como
+títulos, eventualmente), o conteúdo de todas elas é agregado numa única string, com
+o separador ' | '.
+
+Através de SQL, os 'key-value-pairs' mais relevantes são selecionados como colunas
+para serem apresentadas na tabela (campos como 'titulo', 'orgao', 'secao', etc).
+As datas são colocadas no formato de data.
+
+Uma das colunas mais importantes é a 'texto_completo', que contém todo o conteúdo
+textual da página HTML da matéria, inclusive rodapés, links, título e nome do órgão.
+A partir dessa coluna, são geradas duas novas (originalmente não identificadas com
+tags de HTML, como acontece com a ementa, o título e o órgão, por exemplo): a
+'texto_principal' e a 'excerto'. Estas são seleções de trechos do 'texto_completo'
+feitas com SQL.
+
+Frequencia de Atualização
+-------------------------
+dia
+
+

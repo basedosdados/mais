@@ -1,0 +1,119 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: setor_censitario_registro_civil_2010 # AUTO GENERATED
+dataset_id: br_ibge_censo_demografico # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-ibge-censo-demografico # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico # AUTO GENERATED
+
+version: v1.0 # REQUIRED
+
+last_updated: 2021-02-27 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Informações sobre registro de nascimento da populacão por setor censitário
+
+# Quem está completando esse arquivo config?
+published_by:
+    nome: Diego Oliveira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    nome: Diego Oliveira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico/code # REQUIRED
+    website: github.com/d116626
+    email: ds.oliveira404@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: |
+    Padronização do nome das colunas, remoção de textos e logos, unificação das bases
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+data_update_frequency: 10 anos      # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - setor censitário
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_setor_censitario
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2010
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - sigla_uf
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+    - name: id_setor_censitario
+      description: ID do setor censitário
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: sigla_uf
+      description: Sigla do Estado
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: true       # Bool [True, False], whether the column is a partition.
+
+    - name: v001
+      description: Total de pessoas de até 10 anos de idade que tinham  registro de nascimento
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v002
+      description: Total de pessoas de até 10 anos de idade que não tinham  registro de
+        nascimento
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+
+    - name: v003
+      description: Total de pessoas de até 10 anos de idade que não sabiam  se tinham
+        registro de nascimento (inclusive sem  declaração)
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
+      is_partition: false       # Bool [True, False], whether the column is a partition.
+

@@ -1,0 +1,58 @@
+Microdados de vendas de medicamentos industrializados sujeitos à escrituração no SNGPC - Sistema Nacional de Gerenciamento de Produtos Controlados.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-anvisa-medicamentos-industrializados
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_anvisa_medicamentos_industrializados
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anvisa_medicamentos_industrializados/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- mes
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- transacao
+
+Colunas identificando linhas unicamente
+-------------------
+
+Cobertura Temporal
+------------------
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Padronização de strings.
+- Substituição da variável municipio por id_municipio.
+- Agregação de regiões do Distrito Federal para Brasília.
+
+Frequencia de Atualização
+-------------------------
+mes
+
+

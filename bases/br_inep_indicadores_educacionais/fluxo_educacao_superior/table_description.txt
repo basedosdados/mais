@@ -1,0 +1,66 @@
+Indicadores de trajetória acadêmica dos alunos em cursos de graduação na educação superior brasileira, calculados a partir das informações constantes das bases de dados do Censo Superior.    
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-indicadores-educacionais
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Hevilyn Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
+Website: https://github.com/Hevilyn
+Email: hevilynsouza12@hotmail.comTratado por
+-----------
+Nome: Hevilyn Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
+Website: https://github.com/Hevilyn
+Email: hevilynsouza12@hotmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- municipio
+- curso
+- ano_ingresso
+- ano_referencia
+
+Colunas identificando linhas unicamente
+-------------------
+- id_ies
+- id_municipio
+- id_curso
+- ano_ingresso
+- ano_referencia
+
+Cobertura Temporal
+------------------
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Exclusão de linhas vazias
+Palavras sem acento e minúsculas
+Padronização do nome das colunas
+Colunas id_uf e id_regiao foram excluídas
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+

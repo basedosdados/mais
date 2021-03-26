@@ -1,0 +1,55 @@
+Remuneração média dos docentes em exercício na educação básica por escolaridade
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-indicadores-educacionais
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Hevilyn Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
+Website: https://github.com/Hevilyn
+Email: hevilynsouza12@hotmail.comTratado por
+-----------
+Nome: Hevilyn Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
+Website: https://basedosdados.org/
+Email: hevilynsouza12@hotmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- ano
+- pais
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- rede
+- escolaridade
+
+Cobertura Temporal
+------------------
+- 2014
+- 2015
+- 2016
+- 2017
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Padronização dos nomes das colunas.
+Palavras sem acento e minúsculas.
+Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+
