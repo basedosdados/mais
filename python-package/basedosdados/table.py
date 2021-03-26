@@ -128,6 +128,7 @@ class Table(Base):
                     template
                 )
 
+
     def init(
         self,
         data_sample_path=None,
