@@ -1,0 +1,65 @@
+A tabela contém dados que caracterizam as turmas de cada escola brasileira. Entre os dados podemos encontrar as disciplinas feitas pela turma, o horário de começo das aulas, o número de alunos da turma e o nível de ensino no qual se encontra a turma. Há também vários outros aspectos mais específicos, como se a turma passa por atividades complementares, em quais dias da semana ela é ativa e se a turma conta com medidas de inclusão como aulas em libras e em braille.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-censo-escolar
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- turma
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_turma
+- ano
+
+Cobertura Temporal
+------------------
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+O processo de limpeza da base incluiu a junção e a compatibilização entre vários anos distintos, harmonizando as variáveis e seus valores. Outra parte crucial foi a criação de variáveis para melhor compatibilização da tabela com outras tabelas deste dataset e do próprio catálogo da Base dos Dados.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+
