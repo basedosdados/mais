@@ -129,32 +129,6 @@ class Table(Base):
                     template
                 )
 
-    def _load_ext_config(self, mode="staging", partitioned=False):
-
-        table_config = self.table_config
-
-        external_config = external_config = bigquery.ExternalConfig("CSV")
-        external_config.options.skip_leading_rows = 1
-        external_config.options.allow_quoted_newlines = True
-        external_config.options.allow_jagged_rows = True
-        external_config.autodetect = False
-        external_config.schema = self._load_schema(mode)
-
-        external_config.source_uris = (
-            f"gs://{self.bucket_name}/staging/{self.dataset_id}/{self.table_id}/*"
-        )
-
-        if partitioned:
-
-            hive_partitioning = bigquery.external_config.HivePartitioningOptions()
-            hive_partitioning.mode = "AUTO"
-            hive_partitioning.source_uri_prefix = self.uri.format(
-                dataset=self.dataset_id, table=self.table_id
-            ).replace("*", "")
-            external_config.hive_partitioning = hive_partitioning
-
-        return external_config
-
     def init(
         self,
         data_sample_path=None,
@@ -459,24 +433,12 @@ class Table(Base):
                 encoding="utf-8",
             ).write(table.description)
 
-            # if m == "prod":/
             if m == "prod":
                 table.schema = self._load_schema(m)
 
                 self.client[f"bigquery_{m}"].update_table(
                     table, fields=["description", "schema"]
                 )
-
-            # elif m == "staging":
-
-            #     table.schema = self._load_schema(m)
-
-            #     table.external_data_configuration = self._load_ext_config(m)
-
-            #     self.client[f"bigquery_{m}"].update_table(
-            #         table,
-            #         fields=["description", "schema", "external_data_configuration"],
-            #     )
 
     def publish(self, if_exists="raise"):
         """Creates BigQuery table at production dataset.
