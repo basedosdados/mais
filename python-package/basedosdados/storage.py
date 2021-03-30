@@ -210,6 +210,40 @@ class Storage(Base):
         if_not_exists="raise",
     ):
 
+        """Download files from Google Storage from path "<mode>/<dataset_id>/<table_id>/<partitions>/<filename>" and replicate folder hierarchy
+        on save,
+
+        Args:
+            filename (str): Optional
+                Specify which file to download from path "<mode>/<dataset_id>/<table_id>/<partitions>/<filename>". If "*" is passed, downloads
+                all files within the folder specified. Defaults to "*"
+
+            savepath (str):
+                Where you want to save the downloaded data on your computer. Must be a path do a directory.
+
+            partitions (str, dict): Optional
+                If downloading a specific file, use this to further specify the path from which to download.
+
+                * str : `<key>=<value>/<key2>=<value2>`
+                * dict: `dict(key=value, key2=value2)`
+
+
+            mode (str): Optional
+                Folder of which dataset to update.[raw/staging]
+
+            if_not_exists (str): Optional.
+                What to do if no files found to download.
+
+                * 'raise' : Raises FileNotFoundError.
+                * 'pass' : Do nothing and exit the function
+
+
+
+        Raises:
+            FileNotFoundError: If the given path "<mode>/<dataset_id>/<table_id>/<partitions>/<filename>" could not be found or
+            there are no files to download.
+        """
+
         # Prefix to locate files within the bucket
         prefix = f"{mode}/{self.dataset_id}/{self.table_id}/"
 
