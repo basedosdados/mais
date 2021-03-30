@@ -7,6 +7,7 @@ from basedosdados import Storage
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
+SAVEPATH = Path("tests") / "tmp_bases"
 
 TABLE_FILES = ["publish.sql", "table_config.yaml"]
 
@@ -53,6 +54,71 @@ def test_upload(storage, metadatadir):
             if_exists="replace",
             partitions=["key1", "value1", "key2", "value1"],
         )
+
+
+def test_download_not_found(storage):
+
+    with pytest.raises(FileNotFoundError):
+        storage.download(filename="not_found", savepath=SAVEPATH)
+
+    with pytest.raises(FileNotFoundError):
+        storage.download(savepath=SAVEPATH)
+
+
+def test_download_filename(storage):
+
+    storage.download(filename="municipios.csv", savepath=SAVEPATH, mode="staging")
+
+    assert (
+        Path(SAVEPATH) / "staging" / DATASET_ID / TABLE_ID / "municipios.csv"
+    ).is_file()
+
+
+def test_download_partitions(storage):
+
+    storage.download(
+        savepath=SAVEPATH,
+        mode="staging",
+        partitions="key1=value1/key2=value1/",
+    )
+
+    assert (
+        Path(SAVEPATH)
+        / "staging"
+        / DATASET_ID
+        / TABLE_ID
+        / "key1=value1"
+        / "key2=value1"
+        / "municipios.csv"
+    ).is_file()
+
+    storage.download(
+        savepath=SAVEPATH,
+        mode="staging",
+        partitions={"key1": "value1", "key2": "value2"},
+    )
+
+    assert (
+        Path(SAVEPATH)
+        / "staging"
+        / DATASET_ID
+        / TABLE_ID
+        / "key1=value1"
+        / "key2=value2"
+        / "municipios.csv"
+    ).is_file()
+
+
+def test_download_default(storage):
+    storage.download(savepath=SAVEPATH, mode="staging")
+
+    assert (
+        Path(SAVEPATH) / "staging" / DATASET_ID / TABLE_ID / "municipios.csv"
+    ).is_file()
+
+    assert (
+        Path(SAVEPATH) / "staging" / DATASET_ID / TABLE_ID / "municipios2.csv"
+    ).is_file()
 
 
 def test_delete_file(storage):
