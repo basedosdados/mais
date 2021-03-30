@@ -377,7 +377,6 @@ def test_create_auto_partitions(metadatadir, data_path, sample_data):
 
     table_part.create(
         metadatadir / "partitions",
-        partitioned=True,
         if_table_exists="replace",
         if_table_config_exists="pass",
         if_storage_data_exists="replace",

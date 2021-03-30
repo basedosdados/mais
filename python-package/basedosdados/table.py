@@ -40,6 +40,19 @@ class Table(Base):
     def _get_table_obj(self, mode):
         return self.client[f"bigquery_{mode}"].get_table(self.table_full_name[mode])
 
+    def _is_partitioned(self):
+        ## check if the table are partitioned
+        partitions = self.table_config["partitions"]
+
+        if partitions is None:
+            return False
+
+        elif isinstance(partitions, list):
+            # check if any None inside list.
+            # False if it is the case Ex: [None, 'partition']
+            # True otherwise          Ex: ['partition1', 'partition2']
+            return not any([item is None for item in partitions])
+
     def _load_schema(self, mode="staging"):
         """Load schema from table_config.yaml
 
@@ -288,7 +301,6 @@ class Table(Base):
         self,
         path=None,
         job_config_params=None,
-        partitioned=False,
         force_dataset=True,
         if_table_exists="raise",
         if_storage_data_exists="raise",
@@ -388,7 +400,7 @@ class Table(Base):
         table = bigquery.Table(self.table_full_name["staging"])
 
         table.external_data_configuration = Datatype(
-            self, source_format, "staging", partitioned
+            self, source_format, "staging", partitioned=self._is_partitioned()
         ).external_config
 
         # Lookup if table alreay exists
