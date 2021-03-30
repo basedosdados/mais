@@ -247,6 +247,7 @@ class Storage(Base):
         Raises:
             FileNotFoundError: If the given path "<mode>/<dataset_id>/<table_id>/<partitions>/<filename>" could not be found or
             there are no files to download.
+
         """
 
         # Prefix to locate files within the bucket
