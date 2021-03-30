@@ -1,4 +1,9 @@
-Como capturar os dados de br_me_comex_stat?
+
+# Arquivos auxiliares
+
+Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
+
+# Como capturar os dados de br_me_comex_stat?
 
 1. Para capturar esses dados, basta verificar o link dos dados originais indicado em `dataset_config.yaml` no item `website`.
 

@@ -16,7 +16,9 @@ last_updated: 2021-03-10 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Base de dados detalhada por município da empresa importadora e Posição do Sistema Harmonizado (SH4):
+    Base de dados detalhada por município da empresa importadora e Posição do Sistema Harmonizado (SH4).
+
+    Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
 
 # Quem está completando esse arquivo config?
 published_by:

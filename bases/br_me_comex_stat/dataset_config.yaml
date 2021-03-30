@@ -10,6 +10,8 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_comex_s
 description: | # REQUIRED
     Os arquivos a seguir apresentam todos os dados utilizados para construção da balança comercial brasileira, bem como a fonte de dados do sistema Comex Stat, detalhados por NCM ou por Municípios do exportador/importador (e SH4).
 
+    Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
+
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 organization: br-me
@@ -17,7 +19,7 @@ organization: br-me
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
     name: Secretaria Especial de Comércio Exterior e Assuntos Internacionais
-    email: <email>
+    email: secex.audiencia@economia.gov.br
 
 # Onde encontrar os dados originais e mais informações?
 website:
