@@ -2,6 +2,8 @@ import pandas_gbq
 from pathlib import Path
 import pydata_google_auth
 from google.cloud import bigquery
+from google.cloud import bigquery_storage_v1
+from functools import partialmethod
 import pandas as pd
 from basedosdados.base import Base
 from functools import partialmethod
@@ -24,7 +26,7 @@ def credentials(from_file=False, reauth=False):
             return pydata_google_auth.get_user_credentials(
                 SCOPES, credentials_cache=pydata_google_auth.cache.REAUTH
             )
-        else: 
+        else:
             return pydata_google_auth.get_user_credentials(
                 SCOPES,
             )
@@ -125,8 +127,8 @@ def download(
             savepath = savepath / (table_id + ".csv")
         else:
             savepath = savepath / ("query_result.csv")
-            
-    pandas_kwargs['index'] = pandas_kwargs.get('index', False)
+
+    pandas_kwargs["index"] = pandas_kwargs.get("index", False)
 
     table.to_csv(savepath, **pandas_kwargs)
 
@@ -148,6 +150,13 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
     """
 
     try:
+
+        # Set a two hours timeout
+        bigquery_storage_v1.client.BigQueryReadClient.read_rows = partialmethod(
+            bigquery_storage_v1.client.BigQueryReadClient.read_rows,
+            timeout=3600 * 2,
+        )
+
         return pandas_gbq.read_gbq(
             query,
             credentials=credentials(from_file=from_file, reauth=reauth),
