@@ -201,11 +201,6 @@ def init_table(
     "--job_config_params", default=None, help="File to advanced load config params "
 )
 @click.option(
-    "--partitioned",
-    is_flag=True,
-    help="[True|False] whether folder has partitions",
-)
-@click.option(
     "--if_table_exists",
     default="raise",
     help="[raise|replace|pass] actions if table exists",
@@ -232,7 +227,6 @@ def create_table(
     table_id,
     path,
     job_config_params,
-    partitioned,
     if_table_exists,
     force_dataset,
     if_storage_data_exists,
@@ -242,7 +236,6 @@ def create_table(
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).create(
         path=path,
         job_config_params=job_config_params,
-        partitioned=partitioned,
         if_table_exists=if_table_exists,
         force_dataset=force_dataset,
         if_storage_data_exists=if_storage_data_exists,
@@ -403,6 +396,41 @@ def upload_storage(ctx, dataset_id, table_id, filepath, mode, partitions, if_exi
     )
 
 
+@cli_storage.command(name="download", help="Download file from bucket")
+@click.argument("dataset_id")
+@click.argument("table_id")
+@click.argument("savepath", type=click.Path(exists=True))
+@click.option(
+    "--filename",
+    "-f",
+    default="*",
+    help="filename to download single file. If * downloads all files from bucket folder",
+)
+@click.option(
+    "--mode", "-m", default="raw", help="[raw|staging] where to download data from"
+)
+@click.option("--partitions", help="Data partition as `value=key/value2=key2`")
+@click.option(
+    "--if_not_exists",
+    default="raise",
+    help="[raise|pass] if file file not found at bucket folder",
+)
+@click.pass_context
+def download_storage(
+    ctx, dataset_id, table_id, filename, savepath, partitions, mode, if_not_exists
+):
+    Storage(dataset_id, table_id, **ctx.obj).download(
+        filename, savepath, partitions, mode, if_not_exists
+    )
+
+    click.echo(
+        click.style(
+            f"Data was downloaded to `{savepath}`",
+            fg="green",
+        )
+    )
+
+
 @cli_storage.command(name="delete_table", help="Delete table from bucket")
 @click.argument("dataset_id")
 @click.argument("table_id")
@@ -421,8 +449,14 @@ def upload_storage(ctx, dataset_id, table_id, filepath, mode, partitions, if_exi
 @click.option("--not_found_ok", default=False, help="what to do if table not found")
 @click.pass_context
 def storage_delete_table(ctx, dataset_id, table_id, mode, not_found_ok, bucket_name):
-    Storage(dataset_id, table_id).delete_table(
+    Storage(dataset_id, table_id, **ctx.obj).delete_table(
         mode=mode, not_found_ok=not_found_ok, bucket_name=bucket_name
+    )
+    click.echo(
+        click.style(
+            f"Data was deleted from bucket `{bucket_name}`",
+            fg="green",
+        )
     )
 
 
@@ -445,7 +479,7 @@ def storage_delete_table(ctx, dataset_id, table_id, mode, not_found_ok, bucket_n
 def storage_copy_table(
     ctx, dataset_id, table_id, source_bucket_name, dst_bucket_name, mode
 ):
-    Storage(dataset_id, table_id).copy_table(
+    Storage(dataset_id, table_id, **ctx.obj).copy_table(
         source_bucket_name=source_bucket_name,
         destination_bucket_name=dst_bucket_name,
         mode=mode,

@@ -210,19 +210,24 @@ class Storage(Base):
         if_not_exists="raise",
     ):
 
-        """Download files from Google Storage from path "<mode>/<dataset_id>/<table_id>/<partitions>/<filename>" and replicate folder hierarchy
+        """Download files from Google Storage from path `mode`/`dataset_id`/`table_id`/`partitions`/`filename` and replicate folder hierarchy
         on save,
+
+        There are 2 modes:
+        * `raw`: download file from raw mode
+        * `staging`: download file from staging mode
+
+        You can also use the `partitions` argument to choose files from a partition
 
         Args:
             filename (str): Optional
-                Specify which file to download from path "<mode>/<dataset_id>/<table_id>/<partitions>/<filename>". If "*" is passed, downloads
-                all files within the folder specified. Defaults to "*"
+                Specify which file to download. If "*" , downloads all files within the bucket folder. Defaults to "*".
 
             savepath (str):
-                Where you want to save the downloaded data on your computer. Must be a path do a directory.
+                Where you want to save the data on your computer. Must be a path to a directory.
 
             partitions (str, dict): Optional
-                If downloading a specific file, use this to further specify the path from which to download.
+                If downloading a single file, use this to specify the partition path from which to download.
 
                 * str : `<key>=<value>/<key2>=<value2>`
                 * dict: `dict(key=value, key2=value2)`
@@ -232,7 +237,7 @@ class Storage(Base):
                 Folder of which dataset to update.[raw/staging]
 
             if_not_exists (str): Optional.
-                What to do if no files found to download.
+                What to do if data not found.
 
                 * 'raise' : Raises FileNotFoundError.
                 * 'pass' : Do nothing and exit the function
@@ -242,6 +247,7 @@ class Storage(Base):
         Raises:
             FileNotFoundError: If the given path "<mode>/<dataset_id>/<table_id>/<partitions>/<filename>" could not be found or
             there are no files to download.
+
         """
 
         # Prefix to locate files within the bucket
