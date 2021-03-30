@@ -78,12 +78,13 @@ def test_init_file_exists_error(table, metadatadir, data_path):
 
 
 def test_init_not_implemented_error(table, metadatadir, data_path):
-    wrong_path = Path(metadatadir / "municipios.json")
+
     with pytest.raises(NotImplementedError):
         table.init(
             if_folder_exists="replace",
             if_table_config_exists="replace",
-            data_sample_path=wrong_path,
+            data_sample_path=data_path,
+            source_format="json",
         )
 
 
@@ -220,6 +221,17 @@ def test_create_if_table_exist_replace(table, metadatadir, data_path, sample_dat
         if_table_config_exists="pass",
     )
     assert table_exists(table, "staging")
+
+
+def table_create_not_implemented_source_format(table):
+
+    with pytest.raises(NotImplementedError):
+        table.create(
+            if_table_exists="replace",
+            if_storage_data_exists="pass",
+            if_table_config_exists="pass",
+            source_format="json",
+        )
 
 
 def test_create_if_table_exists_pass(table, metadatadir, data_path, sample_data):
@@ -365,7 +377,6 @@ def test_create_auto_partitions(metadatadir, data_path, sample_data):
 
     table_part.create(
         metadatadir / "partitions",
-        partitioned=True,
         if_table_exists="replace",
         if_table_config_exists="pass",
         if_storage_data_exists="replace",
@@ -375,6 +386,38 @@ def test_create_auto_partitions(metadatadir, data_path, sample_data):
     table_part.publish()
 
     assert table_exists(table_part, "prod")
+
+
+def test_update_raises(metadatadir, sample_data, capsys):
+
+    table_part = Table(
+        dataset_id=DATASET_ID,
+        table_id=TABLE_ID + "_partitioned",
+        metadata_path=metadatadir,
+    )
+
+    shutil.copy(
+        sample_data / "table_config_part_wrong.yaml",
+        metadatadir / DATASET_ID / "pytest_partitioned" / "table_config.yaml",
+    )
+
+    with pytest.raises(Exception):
+        table_part.update("all")
+        out, err = capsys.readouterr()
+        assert "publish.sql" in out
+
+    shutil.copy(
+        sample_data / "publish_part.sql",
+        table_part.table_folder / "publish.sql",
+    )
+    shutil.copy(
+        sample_data / "table_config.yaml",
+        Path(table_part.table_folder / "table_config.yaml"),
+    )
+
+    with pytest.raises(Exception):
+        table.update("all")
+        assert "table_config.yaml" in out
 
 
 def test_update(table, metadatadir, data_path):

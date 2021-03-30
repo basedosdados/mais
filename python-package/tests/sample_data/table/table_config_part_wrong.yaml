@@ -158,6 +158,12 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
+        name: Wrong_column_name
+        description: wrong columns description
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
         name: keys
         description: partition key
         is_in_staging: True # Bool [True, False], whether the column is in the staging table

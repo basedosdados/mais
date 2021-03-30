@@ -11,6 +11,7 @@ import google.api_core.exceptions
 from basedosdados.base import Base
 from basedosdados.storage import Storage
 from basedosdados.dataset import Dataset
+from basedosdados.datatypes import Datatype
 from basedosdados.exceptions import BaseDosDadosException
 
 
@@ -39,6 +40,19 @@ class Table(Base):
     def _get_table_obj(self, mode):
         return self.client[f"bigquery_{mode}"].get_table(self.table_full_name[mode])
 
+    def _is_partitioned(self):
+        ## check if the table are partitioned
+        partitions = self.table_config["partitions"]
+
+        if partitions is None:
+            return False
+
+        elif isinstance(partitions, list):
+            # check if any None inside list.
+            # False if it is the case Ex: [None, 'partition']
+            # True otherwise          Ex: ['partition1', 'partition2']
+            return not any([item is None for item in partitions])
+
     def _load_schema(self, mode="staging"):
         """Load schema from table_config.yaml
 
@@ -55,9 +69,11 @@ class Table(Base):
 
             new_columns = []
             for c in columns:
-                if not c.get("is_partition"):
-                    c["type"] = "STRING"
-                    new_columns.append(c)
+                # append columns declared in table_config.yaml to schema only if is_in_staging: True
+                if c.get("is_in_staging"):
+                    if not c.get("is_partition"):
+                        c["type"] = "STRING"
+                        new_columns.append(c)
 
             del columns
             columns = new_columns
@@ -65,21 +81,42 @@ class Table(Base):
         elif mode == "prod":
             schema = self._get_table_obj(mode).schema
 
-            for c in columns:
-                for s in schema:
-                    if c["name"] == s.name:
-                        c["type"] = s.field_type
-                        c["mode"] = s.mode
-                        break
-                else:
-                    raise Exception(
-                        f"Column {c} was not found in schema. Are you sure that "
-                        "all your column names between table_config.yaml and "
-                        "publish.sql are the same?"
-                    )
-        ## force utf-8
+            # get field names for fields at schema and at table_config.yaml
+            column_names = [c["name"] for c in columns]
+            schema_names = [s.name for s in schema]
+
+            # check if there are mismatched fields
+            not_in_columns = [name for name in schema_names if name not in column_names]
+            not_in_schema = [name for name in column_names if name not in schema_names]
+
+            # raise if field is not in table_config
+            if not_in_columns:
+                raise Exception(
+                    f"Column {not_in_columns} was not found in table_config.yaml. Are you sure that "
+                    "all your column names between table_config.yaml and "
+                    "publish.sql are the same?"
+                )
+
+            # raise if field is not in schema
+            elif not_in_schema:
+                raise Exception(
+                    f"Column {not_in_schema} was not found in schema. Are you sure that "
+                    "all your column names between table_config.yaml and "
+                    "publish.sql are the same?"
+                )
+
+            else:
+                # if field is in schema, get field_type and field_mode
+                for c in columns:
+                    for s in schema:
+                        if c["name"] == s.name:
+                            c["type"] = s.field_type
+                            c["mode"] = s.mode
+                            break
+        ## force utf-8, write schema_{mode}.json
         json.dump(columns, (json_path).open("w", encoding="utf-8"))
 
+        # load new created schema
         return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
     def _make_template(self, columns, partition_columns):
@@ -110,6 +147,7 @@ class Table(Base):
         data_sample_path=None,
         if_folder_exists="raise",
         if_table_config_exists="raise",
+        source_format="csv",
     ):
         """Initialize table folder at metadata_path at `metadata_path/<dataset_id>/<table_id>`.
 
@@ -136,6 +174,10 @@ class Table(Base):
                 * 'raise' : Raises FileExistsError
                 * 'replace' : Replace files with blank template
                 * 'pass' : Do nothing
+            source_format (str): Optional
+                Data source format. Only 'csv' is supported. Defaults to 'csv'.
+
+
         Raises:
             FileExistsError: If folder exists and replace is False.
             NotImplementedError: If data sample is not in supported type or format.
@@ -187,16 +229,7 @@ class Table(Base):
                     if "=" in k
                 ]
 
-            if data_sample_path.suffix == ".csv":
-
-                columns = next(
-                    csv.reader(open(data_sample_path, "r", encoding="utf-8"))
-                )
-
-            else:
-                raise NotImplementedError(
-                    "Data sample just supports comma separated csv files"
-                )
+            columns = Datatype(self, source_format).header(data_sample_path)
 
         else:
 
@@ -242,11 +275,11 @@ class Table(Base):
         self,
         path=None,
         job_config_params=None,
-        partitioned=False,
         force_dataset=True,
         if_table_exists="raise",
         if_storage_data_exists="raise",
         if_table_config_exists="raise",
+        source_format="csv",
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -279,7 +312,7 @@ class Table(Base):
                 * 'pass' : Do nothing
             force_dataset (bool): Creates `<dataset_id>` folder and BigQuery Dataset if it doesn't exists.
             if_table_config_exists (str): Optional.
-                 What to do if config files already exist
+                What to do if config files already exist
 
                  * 'raise': Raises FileExistError
                  * 'replace': Replace with blank template
@@ -290,11 +323,8 @@ class Table(Base):
                 * 'raise' : Raises Conflict exception
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
-
-        Todo:
-
-            * Implement if_table_exists=raise
-            * Implement if_table_exists=pass
+            source_format (str): Optional
+                Data source format. Only 'csv' is supported. Defaults to 'csv'.
         """
 
         if path is None:
@@ -341,29 +371,12 @@ class Table(Base):
             if_table_config_exists=if_table_config_exists,
         )
 
-        external_config = external_config = bigquery.ExternalConfig("CSV")
-        external_config.options.skip_leading_rows = 1
-        external_config.options.allow_quoted_newlines = True
-        external_config.options.allow_jagged_rows = True
-        external_config.autodetect = False
-        external_config.schema = self._load_schema("staging")
-
-        external_config.source_uris = (
-            f"gs://{self.bucket_name}/staging/{self.dataset_id}/{self.table_id}/*"
-        )
-
-        if partitioned:
-
-            hive_partitioning = bigquery.external_config.HivePartitioningOptions()
-            hive_partitioning.mode = "AUTO"
-            hive_partitioning.source_uri_prefix = self.uri.format(
-                dataset=self.dataset_id, table=self.table_id
-            ).replace("*", "")
-            external_config.hive_partitioning = hive_partitioning
-
         table = bigquery.Table(self.table_full_name["staging"])
 
-        table.external_data_configuration = external_config
+        table.external_data_configuration = Datatype(
+            self, source_format, "staging", partitioned=self._is_partitioned()
+        ).external_config
+
         # Lookup if table alreay exists
         table_ref = None
         try:
@@ -416,6 +429,8 @@ class Table(Base):
             except google.api_core.exceptions.NotFound:
                 continue
 
+            # if m == "staging":
+
             table.description = self._render_template(
                 Path("table/table_description.txt"), self.table_config
             )
@@ -430,12 +445,12 @@ class Table(Base):
                 encoding="utf-8",
             ).write(table.description)
 
-            # if m == "prod":/
-            table.schema = self._load_schema(m)
+            if m == "prod":
+                table.schema = self._load_schema(m)
 
-            self.client[f"bigquery_{m}"].update_table(
-                table, fields=["description", "schema"]
-            )
+                self.client[f"bigquery_{m}"].update_table(
+                    table, fields=["description", "schema"]
+                )
 
     def publish(self, if_exists="raise"):
         """Creates BigQuery table at production dataset.
