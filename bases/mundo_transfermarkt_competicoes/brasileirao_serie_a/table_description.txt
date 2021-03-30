@@ -1,4 +1,10 @@
-Dados do campeonato brasileiro desde 2003. As informações vão ficando mais completas ao longo dos anos.
+Dados do campeonato brasileiro desde 2003.
+
+Dados de 2003-03-29 até 2006-12-03 possuem somente as seguintes informações: data, horario, rodada, estadio, time_man, time_vis, gols_man, gols_vis. O motivo é que o site não disponibilizou outras informações.
+
+A partir de 2007-05-03, informações mais completas foram disponibilizadas, contudo com algumas excessões.
+    - tecnico_man e tecnico_vis possuem alguns valores vazios devido a mudança de padrão. Geralmente técnicos possuem id = 0, contudo quando o técnico é um ex-jogador, ele possuí um id específico. Em consequência da inconsistência no padrão do id dos técnicos, linhas em que esse erro ocorre as colunas valor_equipe_titular_man, valor_equipe_titular_vis, idade_media_titular_man, idade_media_titular_vis, também são afetadas e resultando em vazio;
+    - Na data de 2016-12-11, rodada 38, a partida entre Chapecoense e Atlético-MG não ocorreu em decorrência do desastre que atingiu a equipe do Chapecoense na época, resultando assim em W.O. duplo;
 
 Fonte: https://www.transfermarkt.com/campeonato-brasileiro-serie-a/startseite/wettbewerb/BRA1
 
@@ -13,11 +19,11 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/mundo_transfermarkt_competicoes/code
 Website: www.ricardodahis.com
 Email: rdahis@basedosdados.orgTratado por
 -----------
 Nome: Eduardo Bartholomay
+Código: https://github.com/basedosdados/mais/tree/master/bases/mundo_transfermarkt_competicoes/code
 Website: https://edubarth.github.io/
 Email: elbartholomay@gmail.com
 
