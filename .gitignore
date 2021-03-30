@@ -13,7 +13,6 @@ notebooks
 data
 secrets
 .ipynb*
-*.ipynb
 *.csv
 docs/site
 TODO
@@ -166,3 +165,5 @@ cython_debug/
 !examples/*.ipynb
 
 
+.Rproj.user
+*.env

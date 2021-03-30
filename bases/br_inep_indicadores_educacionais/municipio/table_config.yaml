@@ -7,7 +7,7 @@ dataset_id: br_inep_indicadores_educacionais # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-inep-indicadores-educacionais # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v2.0 # REQUIRED
 
 last_updated: 2021-02-23 # AUTO GENERATED
 
@@ -36,10 +36,10 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Padronização dos nomes das colunas.
-    Exclusão das colunas Região, Nome do Município e UF.
-    Palavras sem acento e minúsculas.
-    Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
+    - Padronização dos nomes das colunas.
+    - Exclusão das colunas Região, Nome do Município e UF.
+    - Palavras sem acento e minúsculas.
+    - Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -54,6 +54,8 @@ data_update_frequency: 1 ano # REQUIRED
 observation_level: #REQUIRED
     - municipio
     - ano
+    - localizacao
+    - rede
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -93,6 +95,7 @@ coverage_time:
     - 2017
     - 2018
     - 2019
+    - 2020
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -149,7 +152,7 @@ columns: # REQUIRED
   
     -   
         name: atu_ensino_fund
-        description: Média de Alunos por Turma - Ensino Fundamental
+        description: Média de Alunos por Turma - Ensino Fundamental (Turmas Unificadas inclusas no cálculo do indicador a partir de 2017)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -220,8 +223,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: atu_ensino_fund_turmas_unif
-        description: Média de Alunos por Turma - Ensino Fundamental - Turmas Unificadas
+        name: atu_ensino_fund_turmas_unif_multi_fluxo
+        description: Média de Alunos por Turma - Ensino Fundamental - Turmas Unificadas, Multi, Multietapa e Correção de fluxo (Turmas unificadas foram retiradas do cálculo a partir de 2017)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -982,7 +985,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: afd_educacao_infaltil_grupo_1
+        name: afd_educacao_infantil_grupo_1
         description: Adequação da Formação Docente - Educação Infantil Grupo 1
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
