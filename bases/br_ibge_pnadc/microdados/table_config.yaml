@@ -20,6 +20,8 @@ description: |  # REQUIRED
 
     Arquivos auxiliares, como dicionários e detalhes dos dados, estão disponíveis em https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_pnadc.zip.
 
+    Tutorial sobre processamento dos microdados com o pacote "PNADcIBGE" no R em: https://rpubs.com/BragaDouglas/335574.
+    
 # Quem está completando esse arquivo config?
 published_by:
     name: Ricardo Dahis

@@ -14,6 +14,8 @@ description: | # REQUIRED
 
     Arquivos auxiliares, como dicionários e detalhes dos dados, estão disponíveis em https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_pnadc.zip.
 
+    Tutorial sobre processamento dos microdados com o pacote "PNADcIBGE" no R em: https://rpubs.com/BragaDouglas/335574.
+
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 organization: br-ibge
