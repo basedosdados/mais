@@ -1,0 +1,59 @@
+Microdados da PNAD Contínua.
+
+Arquivos auxiliares, como dicionários e detalhes dos dados, estão disponíveis em https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_pnadc.zip.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ibge-pnadc
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnadc
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnadc/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: <nome>
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- trimestre
+- sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- pessoa
+
+Colunas identificando linhas unicamente
+-------------------
+
+Cobertura Temporal
+------------------
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Tratamento e compatibilização feitos pelo pacote "PNADcIBGE" no R (disponibilizado pelo IBGE).
+
+Frequencia de Atualização
+-------------------------
+trimestre
+
+
