@@ -16,7 +16,9 @@ last_updated: 2021-04-01 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Microdados públicos de ajuste do CAGED de 2007 a 2019.
+    Microdados públicos de ajuste do CAGED
+    Dicionario de dados: https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_caged.zip
+
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -49,8 +51,7 @@ data_update_frequency: 1 mes # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED | AINDA N SEI
-    - <primeira coluna>
-    - <segunda coluna>
+    - movimentação
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -221,13 +222,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: cbo_94
+        name: cbo_1994
         description: Classificação Brasileira de Ocupações, criada em 1994
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: cnae_10
+        name: cnae_1
         description: Classe de Atividade Econômica segundo a classificação CNAE/95, convertida a partir da Classe CNAE 20, disponível a partir de 01/2008
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -239,7 +240,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: cnae_20_subclasse
+        name: cnae_2_subclasse
         description: Subclasse de Atividade Econômica, segundo classificação CNAE - versão 2.0 a partir de 2006
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -263,7 +264,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: raca
+        name: raca_cor
         description: Raça e Cor do Trabalhador - disponível a partir de 01/2007
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

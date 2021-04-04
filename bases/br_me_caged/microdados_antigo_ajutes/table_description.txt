@@ -1,4 +1,5 @@
-Microdados públicos de ajuste do CAGED de 2007 a 2019.
+Microdados públicos de ajuste do CAGED
+Dicionario de dados: https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_caged.zip
 
 
 Para saber mais acesse:
@@ -24,6 +25,10 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 - ano
 - mes
 - sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- movimentação
 
 Cobertura Temporal
 ------------------

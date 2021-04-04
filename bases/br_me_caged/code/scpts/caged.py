@@ -55,7 +55,8 @@ def download_data(download_link, download_path, filename):
 
 def download_caged_normal(download_link, download_path_year, ano, mes):
     """
-    download dos arquivos do caged para os anos 2007 a 2019. Tambem vale para arquivos de ajustes entre 2010 e 2019
+    download dos arquivos do caged para os anos 2007 a 2019.
+    Tambem vale para arquivos de ajustes entre 2010 e 2019
     """
     download_path_month = download_path_year + f"/{int(mes)}/"
     ## cria pastas
@@ -124,9 +125,11 @@ def download_caged_file(download_link, ano=None, mes=None, raw_path=None):
 
 
 def caged_antigo_download():
+    ## define caminhos
     raw_path = "../data/caged/raw/caged_antigo"
     clean_path = "../data/caged/clean/caged_antigo"
 
+    # seleciona anos e meses a serem baixados
     anos = [i for i in range(2007, 2020)]
     meses = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
 
@@ -139,9 +142,11 @@ def caged_antigo_download():
 
 
 def caged_antigo_ajustes_download():
+    ## define caminhos
     raw_path = "../data/caged/raw/caged_antigo_ajustes"
     clean_path = "../data/caged/clean/caged_antigo_ajustes"
 
+    # seleciona anos e meses a serem baixados
     anos = [i for i in range(2010, 2020)]
     meses = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
 
@@ -167,13 +172,17 @@ def caged_antigo_ajustes_2002a2009_download():
 
 
 def caged_antigo_ajustes_2002a2009_extract_organize(folders, force_remove_csv=False):
+    """
+    Os anos de 2002 a 2009 nao possuem arquivos para cada mes.
+    Essa funcão extrai o arquivo .7z e cria o .csv na mesma
+    estrutura de ano/mes
+    """
     folders = [
         folder
         for folder in folders
         for ano in ["2007", "2008", "2009"]
         if ano in folder
     ]
-    # all_cols = pd.DataFrame()
     for folder in folders:
         ano = folder.split("/")[-2]
         filename_7z = get_file_names_and_clean_residues(folder, force_remove_csv)
@@ -199,13 +208,6 @@ def caged_antigo_ajustes_2002a2009_extract_organize(folders, force_remove_csv=Fa
                 index=False,
                 encoding="utf-8",
             )
-
-
-#####======================= NOVO CAGED DWONLOAD =======================#####
-
-
-def download_caged_novo(ano, mes, raw_path):
-    print("kkk")
 
 
 #####======================= MANIPULA ARQUIVOS =======================#####
@@ -300,62 +302,61 @@ def caged_antigo_padronize_and_partitioned(
 ):
     # all_cols = pd.DataFrame()
     for folder in folders:
+
         ano = folder.split("/")[-3]
         mes = folder.split("/")[-2]
 
         filename_7z = get_file_names_and_clean_residues(folder, force_remove_csv)
 
+        if "ajustes" in clean_save_path:
+            mode = "ajustes"
+            save_name = "caged_antigo_ajustes"
+        else:
+            mode = "padrao"
+            save_name = "caged_antigo"
         ## verifica se o arquivo ja foi tratado
         if (
             os.path.exists(f"{clean_save_path}/ano={ano}/mes={mes}")
             and len(os.listdir(f"{clean_save_path}/ano={ano}/mes={mes}")) == 27
         ):
-            print(f"{ano}-{mes} | já tratado\n")
+            print(f"{ano}-{mes} | já tratado  | arquivo {mode}\n")
         else:
             ## extrai o arquivo zipado, cria um novo arquivo .csv e deleta o arquivo extraido (.txt)
-            if "ajustes" not in clean_save_path and int(ano) >= 2010:
+            if mode == "padrao" or (int(ano)) > 2009:
                 extract_file(folder, filename_7z, save_rows=None)
 
-            print(f"{ano}-{mes} | extraido")
+            print(f"{ano}-{mes} | extraido    | arquivo {mode}")
 
             ## le o arquivo
             filename = [file for file in os.listdir(folder) if ".csv" in file][0][:-4]
             df = pd.read_csv(f"{folder}{filename}.csv")
 
-            ### padronizacao dos dados
-            if "ajustes" in clean_save_path:
+            ## padronizacao dos dados | caso seja o Path de ajustes chama funcao de padronizacao de ajustes
+            if mode == "ajustes":
                 df = padroniza_caged_antigo_ajustes(df, municipios)
-                mode = "ajustes"
-                save_name = "caged_antigo_ajustes"
             else:
                 df = padroniza_caged_antigo(df, municipios)
-                mode = "padrao"
-                save_name = "caged_antigo"
 
-            print(
-                f"{ano}-{mes} | padronizado",
-                "|",
-                mode,
-            )
+                print(f"{ano}-{mes} | padronizado | arquivo {mode}")
 
             save_partitioned_file(df, clean_save_path, ano, mes, file_name=save_name)
 
-            ##remove arquivo csv do raw files
+            # remove arquivo csv do raw files
             if force_remove_csv:
                 os.remove(f"{folder}{filename}.csv")
 
-            print(f"{ano}-{mes} | finalizado\n")
+            print(f"{ano}-{mes} | finalizado  | arquivo {mode}\n")
 
-            # # checa nome de todas as colunas
-            # dd = pd.DataFrame(df.columns.tolist(), columns=["cols"])
-            # dd = dd.transpose().reset_index(drop=True)
-            # cols = dd.columns.tolist()
-            # dd["ano"] = ano
-            # dd["mes"] = mes
+        # # checa nome de todas as colunas
+        # dd = pd.DataFrame(df.columns.tolist(), columns=["cols"])
+        # dd = dd.transpose().reset_index(drop=True)
+        # cols = dd.columns.tolist()
+        # dd["ano"] = ano
+        # dd["mes"] = mes
 
-            # dd = dd[["ano", "mes"] + cols]
+        # dd = dd[["ano", "mes"] + cols]
 
-            # all_cols = pd.concat([all_cols, dd])
+        # all_cols = pd.concat([all_cols, dd])
 
 
 #####======================= PADRONIZA CAGED FUNCOES =======================#####
@@ -450,17 +451,64 @@ def padroniza_caged_antigo_ajustes(df, municipios):
         "ind_trab_parcial",
         "ind_trab_intermitente",
     ]
+    df = df[hard_coded_cols]
+    # df.columns = hard_coded_cols
 
-    df.columns = hard_coded_cols
-
+    #### remove typos e define tipos
     df = clean_caged(df, municipios)
     df = df.drop(["ano_movimentacao"], 1)
 
+    organize_cols = [
+        "competencia_movimentacao",
+        "sigla_uf",
+        "id_municipio",
+        "id_municipio_6",
+        "admitidos_desligados",
+        "tipo_estab",
+        "tipo_mov_desagregado",
+        "faixa_empr_inicio_jan",
+        "tempo_emprego",
+        "qtd_hora_contrat",
+        "salario_mensal",
+        "saldo_mov",
+        "ind_aprendiz",
+        "ind_trab_intermitente",
+        "ind_trab_parcial",
+        "ind_portador_defic",
+        "tipo_defic",
+        "cbo_94_ocupacao",
+        "cnae_10_classe",
+        "cbo_2002_ocupacao",
+        "cnae_20_subclas",
+        "grau_instrucao",
+        "idade",
+        "sexo",
+        "raca_cor",
+        "ibge_subsetor",
+        "bairros_sp",
+        "bairros_fortaleza",
+        "bairros_rj",
+        "distritos_sp",
+        "regioes_adm_df",
+        "regiao_adm_rj",
+        "regiao_adm_sp",
+        "regiao_corede",
+        "regiao_corede_04",
+        "regiao_gov_sp",
+        "regiao_senac_pr",
+        "regiao_senai_pr",
+        "regiao_senai_sp",
+        "subregiao_senai_pr",
+        "regiao_metro_mte",
+    ]
+
+    df = df[organize_cols]
+
     columns_rename = {
         "cbo_2002_ocupacao": "cbo_2002",
-        "cbo_94_ocupacao": "cbo_94",
-        "cnae_10_classe": "cnae_10",
-        "cnae_20_subclas": "cnae_20_subclasse",
+        "cbo_94_ocupacao": "cbo_1994",
+        "cnae_10_classe": "cnae_1",
+        "cnae_20_subclas": "cnae_2_subclasse",
         "faixa_empr_inicio_jan": "faixa_emprego_inicio_janeiro",
         "qtd_hora_contrat": "quantidade_horas_contratadas",
         "ibge_subsetor": "subsetor_ibge",
@@ -475,57 +523,11 @@ def padroniza_caged_antigo_ajustes(df, municipios):
         "regiao_adm_sp": "regiao_administrativas_sp",
         "ind_trab_parcial": "indicador_trabalho_parcial",
         "ind_trab_intermitente": "indicador_trabalho_intermitente",
-        "raca_cor": "raca",
         "regiao_metro_mte": "regiao_metropolitana_mte",
     }
 
     df = df.rename(columns=columns_rename)
 
-    organize_cols = [
-        "competencia_movimentacao",
-        "sigla_uf",
-        "id_municipio",
-        "id_municipio_6",
-        "admitidos_desligados",
-        "tipo_estabelecimento",
-        "tipo_movimentacao_desagregado",
-        "faixa_emprego_inicio_janeiro",
-        "tempo_emprego",
-        "quantidade_horas_contratadas",
-        "salario_mensal",
-        "saldo_movimentacao",
-        "indicador_aprendiz",
-        "indicador_trabalho_intermitente",
-        "indicador_trabalho_parcial",
-        "indicador_portador_deficiencia",
-        "tipo_deficiencia",
-        "cbo_94",
-        "cnae_10",
-        "cbo_2002",
-        "cnae_20_subclasse",
-        "grau_instrucao",
-        "idade",
-        "sexo",
-        "raca",
-        "subsetor_ibge",
-        "bairros_sp",
-        "bairros_fortaleza",
-        "bairros_rj",
-        "distritos_sp",
-        "regiao_administrativas_df",
-        "regiao_administrativas_rj",
-        "regiao_administrativas_sp",
-        "regiao_corede",
-        "regiao_corede_04",
-        "regiao_gov_sp",
-        "regiao_senac_pr",
-        "regiao_senai_pr",
-        "regiao_senai_sp",
-        "subregiao_senai_pr",
-        "regiao_metropolitana_mte",
-    ]
-
-    df = df[organize_cols]
     return df
 
 
@@ -536,6 +538,19 @@ def padroniza_caged_antigo(df, municipios):
     create_cols = [col for col in check_cols if col not in df.columns.tolist()]
     for col in create_cols:
         df[col] = np.nan
+
+    ## renomeia colunas para alguns casos typo nos arquivos originais
+    rename_typo_columns = {
+        "competaancia_declarada": "competencia_declarada",
+        "municapio": "municipio",
+        "cbo_2002_ocupaaao": "cbo_2002_ocupacao",
+        "faixa_empr_inacio_jan": "faixa_empr_inicio_jan",
+        "grau_instruaao": "grau_instrucao",
+        "raaa_cor": "raca_cor",
+        "regiaes_adm_df": "regioes_adm_df",
+    }
+
+    df = df.rename(columns=rename_typo_columns)
 
     hard_coded_cols = [
         "admitidos_desligados",
@@ -582,16 +597,61 @@ def padroniza_caged_antigo(df, municipios):
         "ind_trab_intermitente",
     ]
 
-    df.columns = hard_coded_cols
+    df = df[hard_coded_cols]
+    # df.columns = hard_coded_cols
 
+    #### remove typos e define tipos
     df = clean_caged(df, municipios)
     df = df.drop(["ano_declarado"], 1)
 
+    organize_cols = [
+        "sigla_uf",
+        "id_municipio",
+        "id_municipio_6",
+        "admitidos_desligados",
+        "tipo_estab",
+        "tipo_mov_desagregado",
+        "faixa_empr_inicio_jan",
+        "tempo_emprego",
+        "qtd_hora_contrat",
+        "salario_mensal",
+        "saldo_mov",
+        "ind_aprendiz",
+        "ind_trab_intermitente",
+        "ind_trab_parcial",
+        "ind_portador_defic",
+        "tipo_defic",
+        "cnae_10_classe",
+        "cbo_2002_ocupacao",
+        "cnae_20_classe",
+        "cnae_20_subclas",
+        "grau_instrucao",
+        "idade",
+        "sexo",
+        "raca_cor",
+        "ibge_subsetor",
+        "bairros_sp",
+        "bairros_fortaleza",
+        "bairros_rj",
+        "distritos_sp",
+        "regioes_adm_df",
+        "regiao_adm_rj",
+        "regiao_adm_sp",
+        "regiao_corede",
+        "regiao_corede_04",
+        "regiao_gov_sp",
+        "regiao_senac_pr",
+        "regiao_senai_pr",
+        "regiao_senai_sp",
+        "subregiao_senai_pr",
+    ]
+    df = df[organize_cols]
+
     columns_rename = {
         "cbo_2002_ocupacao": "cbo_2002",
-        "cnae_10_classe": "cnae_10",
-        "cnae_20_classe": "cnae_20",
-        "cnae_20_subclas": "cnae_20_subclasse",
+        "cnae_10_classe": "cnae_1",
+        "cnae_20_classe": "cnae_2",
+        "cnae_20_subclas": "cnae_2_subclasse",
         "faixa_empr_inicio_jan": "faixa_emprego_inicio_janeiro",
         "qtd_hora_contrat": "quantidade_horas_contratadas",
         "ibge_subsetor": "subsetor_ibge",
@@ -606,54 +666,9 @@ def padroniza_caged_antigo(df, municipios):
         "regiao_adm_sp": "regiao_administrativas_sp",
         "ind_trab_parcial": "indicador_trabalho_parcial",
         "ind_trab_intermitente": "indicador_trabalho_intermitente",
-        "raca_cor": "raca",
     }
 
     df = df.rename(columns=columns_rename)
-
-    organize_cols = [
-        "sigla_uf",
-        "id_municipio",
-        "id_municipio_6",
-        "admitidos_desligados",
-        "tipo_estabelecimento",
-        "tipo_movimentacao_desagregado",
-        "faixa_emprego_inicio_janeiro",
-        "tempo_emprego",
-        "quantidade_horas_contratadas",
-        "salario_mensal",
-        "saldo_movimentacao",
-        "indicador_aprendiz",
-        "indicador_trabalho_intermitente",
-        "indicador_trabalho_parcial",
-        "indicador_portador_deficiencia",
-        "tipo_deficiencia",
-        "cnae_10",
-        "cbo_2002",
-        "cnae_20",
-        "cnae_20_subclasse",
-        "grau_instrucao",
-        "idade",
-        "sexo",
-        "raca",
-        "subsetor_ibge",
-        "bairros_sp",
-        "bairros_fortaleza",
-        "bairros_rj",
-        "distritos_sp",
-        "regiao_administrativas_df",
-        "regiao_administrativas_rj",
-        "regiao_administrativas_sp",
-        "regiao_corede",
-        "regiao_corede_04",
-        "regiao_gov_sp",
-        "regiao_senac_pr",
-        "regiao_senai_pr",
-        "regiao_senai_sp",
-        "subregiao_senai_pr",
-    ]
-
-    df = df[organize_cols]
 
     return df
 
