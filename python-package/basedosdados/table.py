@@ -51,7 +51,7 @@ class Table(Base):
             # check if any None inside list.
             # False if it is the case Ex: [None, 'partition']
             # True otherwise          Ex: ['partition1', 'partition2']
-            return not any([item is None for item in partitions])
+            return all(item is not None for item in partitions)
 
     def _load_schema(self, mode="staging"):
         """Load schema from table_config.yaml
@@ -70,10 +70,9 @@ class Table(Base):
             new_columns = []
             for c in columns:
                 # append columns declared in table_config.yaml to schema only if is_in_staging: True
-                if c.get("is_in_staging"):
-                    if not c.get("is_partition"):
-                        c["type"] = "STRING"
-                        new_columns.append(c)
+                if c.get("is_in_staging") and not c.get("is_partition"):
+                    c["type"] = "STRING"
+                    new_columns.append(c)
 
             del columns
             columns = new_columns
@@ -92,17 +91,27 @@ class Table(Base):
             # raise if field is not in table_config
             if not_in_columns:
                 raise Exception(
-                    f"Column {not_in_columns} was not found in table_config.yaml. Are you sure that "
-                    "all your column names between table_config.yaml and "
-                    "publish.sql are the same?"
+                    "Column {error_columns} was not found in table_config.yalm. Are you sure that "
+                    "all your column names between table_config.yaml, publish.sql and "
+                    "{project_id}.{dataset_id}.{table_id} are the same?".format(
+                        error_columns=not_in_columns,
+                        project_id=self.table_config["project_id_prod"],
+                        dataset_id=self.table_config["dataset_id"],
+                        table_id=self.table_config["table_id"],
+                    )
                 )
 
             # raise if field is not in schema
             elif not_in_schema:
                 raise Exception(
-                    f"Column {not_in_schema} was not found in schema. Are you sure that "
-                    "all your column names between table_config.yaml and "
-                    "publish.sql are the same?"
+                    "Column {error_columns} was not found in publish.sql. Are you sure that "
+                    "all your column names between table_config.yaml, publish.sql and "
+                    "{project_id}.{dataset_id}.{table_id} are the same?".format(
+                        error_columns=not_in_schema,
+                        project_id=self.table_config["project_id_prod"],
+                        dataset_id=self.table_config["dataset_id"],
+                        table_id=self.table_config["table_id"],
+                    )
                 )
 
             else:
@@ -417,11 +426,7 @@ class Table(Base):
 
         self._check_mode(mode)
 
-        if mode == "all":
-            mode = ["prod", "staging"]
-        else:
-            mode = [mode]
-
+        mode = ["prod", "staging"] if mode == "all" else [mode]
         for m in mode:
 
             try:
