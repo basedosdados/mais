@@ -1,0 +1,36 @@
+name: Python package
+
+on:
+  push:
+    paths:
+      - bases/**.yaml
+    
+jobs:
+
+  get_changes:
+    runs-on: ubuntu-latest
+    steps:
+
+      - id: file_changes
+        uses: trilom/file-changes-action@v1.2.4
+
+      - name: File Changes
+        run: |
+          cp $HOME/files.json files.json
+
+      - name: Upload Changes
+        uses: actions/upload-artifact@v2
+        with:
+          name: push-changes
+          path: files.json
+
+  checks:
+
+    runs-on: ubuntu-latest
+    env:
+      DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
+      DEV_STAG: ${{ secrets.GCP_BD_DEV_STAGING }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: metadata_checks
+      uses: ./.github/workflows/metadata_checks/

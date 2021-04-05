@@ -1,0 +1,11 @@
+name: "Metadata Checks"
+description: "Check if metadata files comply to basedosdados standards"
+author: "Base dos Dados"
+
+runs: 
+  using: composite
+  steps:
+    - run: cd ${{ github.workspace }}/python-package/ && pip install -U yaml pathlib google.cloud.bigquery json basedosdados
+      shell: bash
+    - run: python  ${{ github.action_path }}/main.py
+      shell: bash
