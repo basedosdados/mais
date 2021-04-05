@@ -91,7 +91,7 @@ class Table(Base):
             # raise if field is not in table_config
             if not_in_columns:
                 raise Exception(
-                    "Column {error_columns} was not found in table_config.yalm. Are you sure that "
+                    "Column {error_columns} was not found in table_config.yaml. Are you sure that "
                     "all your column names between table_config.yaml, publish.sql and "
                     "{project_id}.{dataset_id}.{table_id} are the same?".format(
                         error_columns=not_in_columns,
