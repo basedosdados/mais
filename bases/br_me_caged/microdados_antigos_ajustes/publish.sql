@@ -19,7 +19,7 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_me_caged.microdados_antigos_ajutes AS
+CREATE VIEW basedosdados-dev.br_me_caged.microdados_antigos_ajustes AS
 SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
