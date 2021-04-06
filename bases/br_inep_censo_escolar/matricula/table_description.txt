@@ -1,0 +1,57 @@
+A tabela disponibiliza dados sobre cada aluno matriculado em uma escola nacional. Dentre as mais de 60 variáveis, tem-se dados para identificação e caracterização dos alunos, dados para indicação da locomoção usada pelos alunos até a escola, dados para caracterização das turmas que os alunos frequentam, entre outros.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-censo-escolar
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- aluno
+
+Colunas identificando linhas unicamente
+-------------------
+- id_matricula
+
+Cobertura Temporal
+------------------
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+O tratamento dos dados consistiu em harmonizar as variáveis de diferentes anos, optando pelas variáveis que apareciam mais consistentemente entre todos os anos. Outros processos importantes foram a adequação da variável tp_dependencia que passa a se chamar rede e ter valores em string e a adequeação da variável que identifica uf, que passa a se chamar sigla_uf e apresentar a string da UF, ambas as mudanças com intuito de melhor harmonizar a tabela com outras tabelas do próprio censo, e, principalmente, com outras tabelas da Base dos Dados.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+
