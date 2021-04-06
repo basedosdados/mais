@@ -64,4 +64,4 @@ SAFE_CAST(regiao_senai_pr AS INT64) regiao_senai_pr,
 SAFE_CAST(regiao_senai_sp AS INT64) regiao_senai_sp,
 SAFE_CAST(subregiao_senai_pr AS INT64) subregiao_senai_pr,
 SAFE_CAST(regiao_metropolitana_mte AS INT64) regiao_metropolitana_mte
-from basedosdados-dev.br_me_caged_staging.microdados_antigos_ajutes as t
+from basedosdados-dev.br_me_caged_staging.microdados_antigos_ajustes as t
