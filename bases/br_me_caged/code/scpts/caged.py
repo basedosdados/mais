@@ -190,7 +190,7 @@ def caged_antigo_ajustes_2002a2009_extract_organize(folders, force_remove_csv=Fa
         print(f"{ano} | extraido")
 
         filename = [file for file in os.listdir(folder) if ".csv" in file][0][:-4]
-        df = pd.read_csv(f"{folder}{filename}.csv")
+        df = pd.read_csv(f"{folder}{filename}.csv", dtype="str")
 
         df["ano"] = df["competencia_declarada"].apply(lambda x: str(x)[:4])
         df["mes"] = df["competencia_declarada"].apply(lambda x: str(x)[4:])
@@ -229,6 +229,7 @@ def extract_file(path_month, filename, save_rows=10):
                 sep=";",
                 encoding="latin-1",
                 nrows=save_rows,
+                dtype="str",
             )
         except:
             ## caso de erro de bad lines por conter um ; extra no arquivo txt
@@ -246,6 +247,7 @@ def extract_file(path_month, filename, save_rows=10):
                 sep=";",
                 encoding="latin-1",
                 nrows=save_rows,
+                dtype="str",
             )
 
         df.columns = manipulation.normalize_cols(df.columns)
@@ -306,14 +308,18 @@ def caged_antigo_padronize_and_partitioned(
         ano = folder.split("/")[-3]
         mes = folder.split("/")[-2]
 
-        filename_7z = get_file_names_and_clean_residues(folder, force_remove_csv)
-
         if "ajustes" in clean_save_path:
             mode = "ajustes"
             save_name = "caged_antigo_ajustes"
         else:
             mode = "padrao"
             save_name = "caged_antigo"
+
+        if mode == "padrao" or (int(ano)) > 2009:
+            filename_7z = get_file_names_and_clean_residues(folder, force_remove_csv)
+        else:
+            filename_7z = get_file_names_and_clean_residues(folder, False)
+
         ## verifica se o arquivo ja foi tratado
         if (
             os.path.exists(f"{clean_save_path}/ano={ano}/mes={mes}")
@@ -329,7 +335,10 @@ def caged_antigo_padronize_and_partitioned(
 
             ## le o arquivo
             filename = [file for file in os.listdir(folder) if ".csv" in file][0][:-4]
-            df = pd.read_csv(f"{folder}{filename}.csv")
+            df = pd.read_csv(
+                f"{folder}{filename}.csv",
+                dtype="str",
+            )
 
             ## padronizacao dos dados | caso seja o Path de ajustes chama funcao de padronizacao de ajustes
             if mode == "ajustes":
@@ -337,12 +346,12 @@ def caged_antigo_padronize_and_partitioned(
             else:
                 df = padroniza_caged_antigo(df, municipios)
 
-                print(f"{ano}-{mes} | padronizado | arquivo {mode}")
+            print(f"{ano}-{mes} | padronizado | arquivo {mode}")
 
             save_partitioned_file(df, clean_save_path, ano, mes, file_name=save_name)
 
             # remove arquivo csv do raw files
-            if force_remove_csv:
+            if mode == "padrao" or (int(ano)) > 2009:
                 os.remove(f"{folder}{filename}.csv")
 
             print(f"{ano}-{mes} | finalizado  | arquivo {mode}\n")

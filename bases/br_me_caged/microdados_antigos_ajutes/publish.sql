@@ -19,7 +19,7 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_me_caged.microdados_antigo_ajutes AS
+CREATE VIEW basedosdados-dev.br_me_caged.microdados_antigos_ajutes AS
 SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
@@ -64,4 +64,4 @@ SAFE_CAST(regiao_senai_pr AS INT64) regiao_senai_pr,
 SAFE_CAST(regiao_senai_sp AS INT64) regiao_senai_sp,
 SAFE_CAST(subregiao_senai_pr AS INT64) subregiao_senai_pr,
 SAFE_CAST(regiao_metropolitana_mte AS INT64) regiao_metropolitana_mte
-from basedosdados-dev.br_me_caged_staging.microdados_antigo_ajutes as t
+from basedosdados-dev.br_me_caged_staging.microdados_antigos_ajutes as t
