@@ -7,6 +7,7 @@
 // lista de estados
 //------------------------//
 
+local estados_1994	AC AL AM AP BA          GO MA    MS                         RO RR RS SC SE SP TO
 local estados_1996	AC AL AM AP BA CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
 local estados_1998	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2000	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
@@ -25,7 +26,7 @@ local estados_2020	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN R
 // loops
 //------------------------//
 
-foreach ano of numlist 1996(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
 	foreach estado in `estados_`ano'' {
 		

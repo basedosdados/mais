@@ -166,9 +166,8 @@ save `candidatos_mod2_presid'
 
 !mkdir "output/resultados_candidato_municipio_zona"
 !mkdir "output/resultados_partido_municipio_zona"
-!mkdir "output/resultados_candidato"
 
-foreach ano of numlist 1998(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
 	//---------------------//
 	// candidato-municipio-zona
@@ -284,29 +283,6 @@ foreach ano of numlist 1998(2)2020 {
 	}
 	*
 	
-	//---------------------//
-	// candidato
-	//---------------------//
-	
-	//------------//
-	// particiona
-	//------------//
-	
-	!mkdir "output/resultados_candidato/ano=`ano'"
-	
-	use `resultados_candidato_munzona', clear
-	
-	replace sigla_uf = ""			if cargo == "presidente"
-	replace id_municipio_tse = .	if mod(ano, 4) == 2
-	//drop if id_candidato_bd == .
-	drop if resultado == "2º turno"
-	
-	collapse (sum) votos, by(tipo_eleicao sigla_uf id_municipio_tse turno numero_candidato id_candidato_bd cargo sigla_partido resultado)
-	
-	sort id_candidato_bd
-	
-	export delimited "output/resultados_candidato/ano=`ano'/resultados_candidato.csv", replace
-	
 }
 *
 
@@ -341,7 +317,7 @@ save `candidatos_mod2_presid'
 !mkdir "output/resultados_candidato_secao"
 !mkdir "output/resultados_partido_secao"
 
-foreach ano of numlist 1998(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
 	//---------------------//
 	// candidato
@@ -466,7 +442,7 @@ foreach ano of numlist 1998(2)2020 {
 
 !mkdir "output/perfil_eleitorado"
 
-foreach ano of numlist 1996(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
 	!mkdir "output/perfil_eleitorado/ano=`ano'"
 	
@@ -520,7 +496,7 @@ foreach ano of numlist 2016(2)2020 {
 
 !mkdir "output/detalhes_votacao_municipio_zona"
 
-foreach ano of numlist 1998(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
 	!mkdir "output/detalhes_votacao_municipio_zona/ano=`ano'"
 	
@@ -572,8 +548,8 @@ foreach ano of numlist 1994(2)2020 {
 // vagas
 //-------------------------------------------------//
 
-use "output/vagas_1996.dta", clear
-foreach ano of numlist 1998(2)2020 {
+use "output/vagas_1994.dta", clear
+foreach ano of numlist 1996(2)2020 {
 	append using "output/vagas_`ano'.dta"
 }
 save "output/norm_vagas.dta", replace

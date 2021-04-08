@@ -7,7 +7,7 @@
 // loops
 //------------------------//
 
-foreach ano of numlist 1996(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
 	cap import delimited "input/perfil_eleitorado/perfil_eleitorado_`ano'/perfil_eleitorado_`ano'.txt", delim(";") stringcols(_all) varn(nonames) clear
 	cap import delimited "input/perfil_eleitorado/perfil_eleitorado_`ano'/perfil_eleitorado_`ano'.csv", delim(";") stringcols(_all) varn(nonames) clear

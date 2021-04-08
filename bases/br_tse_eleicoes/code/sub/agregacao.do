@@ -13,7 +13,7 @@
 
 !mkdir "output/resultados_candidato_municipio"
 
-foreach ano of numlist 1998(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
 	!mkdir "output/resultados_candidato_municipio/ano=`ano'"
 	
@@ -38,7 +38,7 @@ foreach ano of numlist 1998(2)2020 {
 
 !mkdir "output/resultados_partido_municipio"
 
-foreach ano of numlist 1998(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
 	!mkdir "output/resultados_partido_municipio/ano=`ano'"
 	
@@ -56,7 +56,6 @@ foreach ano of numlist 1998(2)2020 {
 	}
 }
 *
-
 
 //--------------//
 // candidato
@@ -86,15 +85,11 @@ keep id_candidato_bd ano tipo_eleicao cargo numero_candidato
 tempfile candidatos_mod2_presid
 save `candidatos_mod2_presid'
 
-!mkdir "output/resultados_candidato_municipio_zona"
-!mkdir "output/resultados_partido_municipio_zona"
 !mkdir "output/resultados_candidato"
 
-foreach ano of numlist 1998(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
-	//---------------------//
-	// candidato-municipio-zona
-	//---------------------//
+	!mkdir "output/resultados_candidato/ano=`ano'"
 	
 	use "output/resultados_candidato_municipio_zona_`ano'.dta", clear
 	
@@ -138,39 +133,17 @@ foreach ano of numlist 1998(2)2020 {
 	}
 	*
 	
-	drop nome_candidato nome_urna_candidato sequencial_candidato coligacao composicao
-	
-	local vars tipo_eleicao ano turno sigla_uf id_municipio_tse zona numero_candidato id_candidato_bd cargo sigla_partido votos resultado
-	
-	order `vars'
-	sort  `vars'
-	
-	tempfile resultados_candidato
-	save `resultados_candidato'
-	
-	//------------//
-	// agrega e 
-	// particiona
-	//------------//
-	
-	!mkdir "output/resultados_candidato/ano=`ano'"
-	
-	use `resultados_candidato', clear
-	
 	replace sigla_uf = ""			if cargo == "presidente"
 	replace id_municipio_tse = .	if mod(ano, 4) == 2
-	drop if id_candidato_bd == .
-	drop if resultado == "2º turno"
 	
-	collapse (sum) votos, by(tipo_eleicao sigla_uf id_municipio_tse turno numero_candidato id_candidato_bd cargo sigla_partido resultado)
+	collapse (sum) votos, by(tipo_eleicao turno sigla_uf id_municipio_tse numero_candidato id_candidato_bd cargo sigla_partido resultado)
 	
-	sort id_candidato_bd
+	order tipo_eleicao turno sigla_uf id_municipio_tse numero_candidato id_candidato_bd cargo sigla_partido resultado votos
 	
 	export delimited "output/resultados_candidato/ano=`ano'/resultados_candidato.csv", replace
 	
 }
 *
-
 
 //---------------------------------//
 // detalhes votacao municipio
@@ -178,7 +151,7 @@ foreach ano of numlist 1998(2)2020 {
 
 !mkdir "output/detalhes_votacao_municipio"
 
-foreach ano of numlist 1998(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
 	!mkdir "output/detalhes_votacao_municipio/ano=`ano'"
 	
