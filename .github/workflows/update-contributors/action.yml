@@ -7,5 +7,5 @@ runs:
   steps:
     - run: pip install -U emoji PyGithub
       shell: bash
-    - run: python ${{ github.action_path }}/generate-markdown.py && python ${{ github.action_path }}/update-collaborators.py
+    - run: python ${{ github.action_path }}/generate_markdown.py && python ${{ github.action_path }}/update-collaborators.py
       shell: bash
