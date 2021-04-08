@@ -7,5 +7,5 @@ runs:
   steps:
     - run: pip install -U emoji PyGithub python-dotenv
       shell: bash
-    - run: python ${{ github.action_path }}/generate_markdown.py && python ${{ github.action_path }}/update-collaborators.py
+    - run: python ${{ github.action_path }}/generate_markdown.py && python ${{ github.action_path }}/main.py
       shell: bash

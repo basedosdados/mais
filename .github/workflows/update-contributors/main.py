@@ -2,8 +2,7 @@ from collections import Counter
 import requests
 import os
 from dotenv import load_dotenv
-
-import generate_markdown
+from generate_markdown import write_markdown
 
 levels = {
     1: {
@@ -136,7 +135,7 @@ def get_contributors_levels(contribution_types=["[infra]", "[dados]", "[docs]"])
     return users
 
 
-if name == "__main__":
+if __name__ == "__main__":
     load_dotenv(dotenv_path=".env", override=True)
     username = os.environ.get("GHUSER")
     token = os.environ.get("GHTOKEN")
