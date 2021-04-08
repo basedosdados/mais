@@ -5,7 +5,7 @@ author: "Base dos Dados"
 runs: 
   using: composite
   steps:
-    - run: pip install -U dotenv emoji github
+    - run: pip install -U emoji github
       shell: bash
     - run: python ${{ github.action_path }}/generate-markdown.py && python ${{ github.action_path }}/update-collaborators.py
       shell: bash
