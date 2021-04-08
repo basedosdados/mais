@@ -1,0 +1,11 @@
+name: "Update Contributors"
+description: "Update perimission levels based on contribution"
+author: "Base dos Dados"
+
+runs: 
+  using: composite
+  steps:
+    - run: pip install -U collections requests dotenv emoji github re
+      shell: bash
+    - run: python ${{ github.action_path }}/generate-markdown.py &&  python ${{ github.action_path }}/update-collaborators.py
+      shell: bash
