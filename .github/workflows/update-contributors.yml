@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [submitted]
   pull_request_review:
-    tyoes: [submitted]
+    types: [submitted]
   push:
     branches:
         - master
@@ -13,9 +13,6 @@ jobs:
   update-levels:
 
     runs-on: ubuntu-latest
-    env:
-      DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
-      DEV_STAG: ${{ secrets.GCP_BD_DEV_STAGING }}
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
