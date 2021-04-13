@@ -20,7 +20,7 @@ Os arquivos auxiliares aos microdados (e.g. dicionários, instrumentos de coleta
  - Os dados passaram por um padronização do nome das colunas, remoção de textos e logos, unificação des bases. Foram removidas colunas redundates e criado uma estrutura que liga o **id_setor_censitario** a uma tabela de referência `basedosdados.br_bd_diretorios_brasil.setor_censitario`. 
 
 ## Dicionários
- - As colunas com nomes, v001, v002, etc foram extraidas do pdf que se encontra na pasta dictionaries.
+ - As colunas com nomes, v001, v002, etc foram extraidas do pdf que se encontra na pasta dictionaries ou baixadas [aqui](https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_censo_demografico_setores_censitarios.zip).
 
 ## Código
  - O código de tratamento se encontra na pasta `code`  

@@ -7,7 +7,8 @@
 // listas de estados
 //------------------------//
 
-local estados_1996	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
+local estados_1994	AC AL AM AP BA             GO MA    MS             PI             RR RS SC SE SP TO BR_AC BR_AL BR_AM BR_AP BR_BA BR_GO BR_MA BR_MS BR_PI BR_RR BR_RS BR_SC BR_SE BR_SP BR_TO
+local estados_1996	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB    PI       RN    RR       SE SP TO
 local estados_1998	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2000	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2002	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
@@ -25,7 +26,7 @@ local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
-foreach ano of numlist 1998(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
 	foreach estado in `estados_`ano'' {
 		
@@ -126,8 +127,8 @@ foreach ano of numlist 1998(2)2020 {
 		
 		compress
 		
-		tempfile detalhes_municipio_zona_`ano'_`estado'
-		save `detalhes_municipio_zona_`ano'_`estado''
+		tempfile detalhes_`ano'_`estado'
+		save `detalhes_`ano'_`estado''
 		
 	}
 	*
@@ -136,10 +137,10 @@ foreach ano of numlist 1998(2)2020 {
 	// append
 	//------------------//
 	
-	use `detalhes_municipio_zona_`ano'_AC', clear
+	use `detalhes_`ano'_AC', clear
 	foreach estado in `estados_`ano'' {
 		if "`estado'" != "AC" {
-			append using `detalhes_municipio_zona_`ano'_`estado''
+			append using `detalhes_`ano'_`estado''
 		}
 	}
 	*

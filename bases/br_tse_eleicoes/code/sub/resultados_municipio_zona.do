@@ -7,6 +7,7 @@
 // listas de estados
 //------------------------//
 
+local estados_1994_candidato	AC AL AM AP BA BR          GO MA    MS             PI             RR RS SC SE SP TO
 local estados_1996_candidato	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
 local estados_1998_candidato	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2000_candidato	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
@@ -21,6 +22,7 @@ local estados_2016_candidato	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE 
 local estados_2018_candidato	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO	
 local estados_2020_candidato	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO	
 
+local estados_1994_partido		AC AL AM AP BA             GO MA    MS             PI             RR RS SC SE SP TO
 local estados_1996_partido		AC AL AM AP BA    CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
 local estados_1998_partido		AC AL AM AP BA    CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
 local estados_2000_partido		AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
@@ -44,7 +46,7 @@ keep id_municipio_tse sigla_uf
 tempfile diretorio
 save `diretorio'
 
-foreach ano of numlist 1998(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
 	foreach tipo in candidato partido {
 		
@@ -112,15 +114,20 @@ foreach ano of numlist 1998(2)2020 {
 				//------------------//
 				
 				if "`estado'" == "BR" {
-					drop sigla_uf
+					ren sigla_uf sigla_uf_orig
 					merge m:1 id_municipio_tse using `diretorio'
 					drop if _merge == 2
 					drop _merge
+					replace sigla_uf_orig = sigla_uf if sigla_uf_orig == "BR"
+					drop sigla_uf
+					ren sigla_uf_orig sigla_uf
 				}
 				*
 				
-				replace coligacao = ""	if coligacao == "#NULO#"
-				replace composicao = ""	if composicao == "#NE#" | composicao == "#NULO#"
+				foreach k of varlist _all {
+					cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE", "##VERIFICAR BASE 1994##")
+				}
+				*
 				
 				foreach k in tipo_eleicao cargo resultado {
 					clean_string `k'
@@ -151,6 +158,25 @@ foreach ano of numlist 1998(2)2020 {
 			}
 			*
 			
+			//-------------------------//
+			// conserta problema de
+			// resultado nulo para UFs=VT,ZZ
+			//-------------------------//
+			
+			preserve
+				
+				keep if cargo == "presidente"
+				
+				bys numero_candidato turno (resultado): replace resultado = resultado[_N] if cargo == "presidente"	
+				
+				tempfile presid
+				save `presid'
+				
+			restore
+			
+			drop if cargo == "presidente"
+			append using `presid'
+			
 			drop if ano == 2009 | ano == 2011
 			
 			compress
@@ -161,7 +187,7 @@ foreach ano of numlist 1998(2)2020 {
 		*
 		
 		if "`tipo'" == "partido" {
-	
+			
 			foreach estado in `estados_`ano'_partido' {
 				
 				di "`ano'_`estado'_partido"
@@ -216,15 +242,20 @@ foreach ano of numlist 1998(2)2020 {
 				//------------------//
 				
 				if "`estado'" == "BR" {
-					drop sigla_uf
+					ren sigla_uf sigla_uf_orig
 					merge m:1 id_municipio_tse using `diretorio'
 					drop if _merge == 2
 					drop _merge
+					replace sigla_uf_orig = sigla_uf if sigla_uf_orig == "BR"
+					drop sigla_uf
+					ren sigla_uf_orig sigla_uf
 				}
 				*
 				
-				replace coligacao = "" if coligacao == "#NULO#"
-				replace composicao = "" if composicao == "#NE#" | composicao == "#NULO#"
+				foreach k of varlist _all {
+					cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE", "##VERIFICAR BASE 1994##")
+				}
+				*
 				
 				foreach k in tipo_eleicao cargo {
 					clean_string `k'
