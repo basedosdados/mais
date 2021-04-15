@@ -2,7 +2,7 @@ name: Update contributors
 
 on:
   pull_request:
-    types: [submitted]
+    types: [closed]
   pull_request_review:
     types: [submitted]
   push:
