@@ -27,6 +27,10 @@ levels = {
     },
 }
 
+# load_dotenv(dotenv_path=".env", override=True)
+username = os.environ.get("GHUSER")
+token = os.environ.get("GHTOKEN")
+
 
 def get_pulls(username, token):
     print("Obtendo pulls...")
@@ -136,9 +140,5 @@ def get_contributors_levels(contribution_types=["[infra]", "[dados]", "[docs]"])
 
 
 if __name__ == "__main__":
-    load_dotenv(dotenv_path=".env", override=True)
-    username = os.environ.get("GHUSER")
-    token = os.environ.get("GHTOKEN")
-
     users = get_contributors_levels()
     write_markdown(users, levels, username, token)
