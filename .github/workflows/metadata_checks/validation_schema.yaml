@@ -1,13 +1,19 @@
-  name:
-    type: string
-    required: True
-    check_with: [lowercase, nospaces, abbreviation]
-  description:
-      type: string
-      required: True
-      empty: False
-      check_with: standard_columns
-  is_in_staging:
-    type: boolean
-  is_partition:
-    type: boolean
+columns:
+  type: list
+  schema:
+    type: dict
+    schema:
+      name:
+        type: string
+        required: True
+        empty: False
+        check_with: [lowercase, nospaces, abbreviation]
+      description:
+          type: string
+          required: True
+          empty: False
+          check_with: standard_columns
+      is_in_staging:
+        type: boolean
+      is_partition:
+        type: boolean

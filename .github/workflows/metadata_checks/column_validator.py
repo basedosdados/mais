@@ -21,7 +21,8 @@ for std in bd_standards:
         "r",
     ) as f:
         BD_STD_COLUMNS += yaml.load(f, Loader=yaml.SafeLoader)["columns"]
-
+BD_STD_COLUMNS_BY_NAME = {column["name"]: column for column in BD_STD_COLUMNS}
+# assert len(BD_STD_COLUMNS_BY_NAME) == len(BD_STD_COLUMNS), "duplicated columns defined as standard columns"
 ### Custom extensions to Cerberus Validator class
 class MyValidator(Validator):
     ### Checks must be prefixed with _check_with for using it within the check_with schema keyword
@@ -86,24 +87,20 @@ class MyValidator(Validator):
             )
 
     def _check_with_standard_columns(self, field, value):
-        doc = self.root_document
-        for st_col in BD_STD_COLUMNS:
-            if doc["name"] == st_col["name"]:
-                if value != st_col["description"]:
-                    self._error(
-                        field, "Standard column does not have standard description"
-                    )
+        std_col = BD_STD_COLUMNS_BY_NAME.get(self.document["name"])
+        if std_col and value != std_col["description"]:
+            self._error(field, "Standard column does not have standard description")
 
 
 def validate_columns(path_to_yaml):
     schema = yaml.load(open("validation_schema.yaml", "r"), Loader=yaml.SafeLoader)
     config = yaml.load(open(Path(path_to_yaml), "r"), Loader=yaml.SafeLoader)
     columns = config["columns"]
-    v = MyValidator(document=config, schema=schema)
-    for column in columns:
-        if not v.validate(column):
-            print(column)
-            print(v.errors)
+    v = MyValidator(schema=schema)
+
+    if not v.validate({"columns": columns}):
+        # print(columns)
+        print(v.errors["columns"])
 
 
 if __name__ == "__main__":
