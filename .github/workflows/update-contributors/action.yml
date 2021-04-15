@@ -4,11 +4,11 @@ author: "Base dos Dados"
 
 runs: 
   using: composite
+  env: 
+    GHUSER: ${{ secrets.GHUSER }}
+    GHTOKEN: ${{ secrets.GHTOKEN }}
   steps:
     - run: pip install -U emoji PyGithub python-dotenv
       shell: bash
     - run: python ${{ github.action_path }}/main.py
       shell: bash
-      env: 
-        GHUSER: ${{ secrets.GHUSER }}
-        GHTOKEN: ${{ secrets.GHTOKEN }}
