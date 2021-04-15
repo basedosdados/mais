@@ -21,3 +21,6 @@ jobs:
         python-version: '3.8.x'
     - name: Update Contributors
       uses: ./.github/workflows/update-contributors
+      env: 
+        GHUSER: ${{ secrets.GHUSER }}
+        GHTOKEN: ${{ secrets.GHTOKEN }}
