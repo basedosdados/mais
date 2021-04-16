@@ -91,6 +91,9 @@ def write_markdown(
     repo = g.get_repo("basedosdados/mais")
     file = repo.get_contents("CONTRIBUTORS.md", ref="issue76")
 
+    print(file.sha)
+    print(text)
+
     repo.update_file(
         path="CONTRIBUTORS.md",
         message="update contributors content",
