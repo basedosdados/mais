@@ -321,7 +321,7 @@ def delete_table(ctx, dataset_id, table_id, mode):
 @click.pass_context
 def upload_table(ctx, dataset_id, table_id, filepath, partitions, if_exists):
 
-    blob_name = Table(dataset_id, table_id, **ctx.obj).append(
+    blob_name = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).append(
         filepath=filepath, partitions=partitions, if_exists=if_exists
     )
 
