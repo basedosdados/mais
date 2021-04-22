@@ -7,7 +7,7 @@ from functools import partialmethod
 import pandas as pd
 from basedosdados.upload.base import Base
 from functools import partialmethod
-from basedosdados.validdation.exceptions import BaseDosDadosException
+from basedosdados.validation.exceptions import BaseDosDadosException
 from pandas_gbq.gbq import GenericGBQException
 
 
