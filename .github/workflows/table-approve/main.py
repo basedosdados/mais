@@ -11,6 +11,7 @@ import traceback
 import basedosdados as bd
 from basedosdados.base import Base
 from basedosdados.storage import Storage
+from basedosdados.dataset import Dataset
 import basedosdados
 
 
@@ -297,11 +298,12 @@ def push_table_to_bq(
         if_table_config_exists="pass",
         partitioned=is_partitioned(table_config),
     )
-
     ### publish the table in prod bigquery
     tb.publish(if_exists="replace")
     ### updates the table description
     tb.update("prod")
+    ### updates the dataset description
+    Dataset(dataset_id).update("prod")
 
 
 def main():
