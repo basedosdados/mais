@@ -3,7 +3,7 @@ library(dotenv)
 
 load_dot_env('keys.env') # esperando um arquivo com esse nome na pasta tests/testthat/
 
-set_billing_id(Sys.getenv('project_id'))
+set_billing_id(Sys.getenv("billing_project_id"))
 
 
 test_that("download valida nomes de arquivos sem extensão", {
@@ -28,7 +28,6 @@ test_that("download retorna invisivelmente nomes de arquivos", {
     download(
       "select * from basedosdados.br_ibge_populacao.municipios limit 1",
       file.path(tempdir(), "data.csv")))
-
 
 
 })

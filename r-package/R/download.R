@@ -62,7 +62,9 @@ download <- function(
   bigrquery::bq_project_query(
       billing_project_id,
       query = query) %>%
-    bigrquery::bq_table_download(page_size = page_size, bigint = "integer64") %>%
+    bigrquery::bq_table_download(
+      page_size = page_size,
+      bigint = "integer64") %>%
     readr::write_csv(file = path)
 
   invisible(path)
@@ -120,14 +122,24 @@ read_sql <- function(
   billing_project_id = get_billing_id(),
   page_size = 1000) {
 
-  if(billing_project_id == FALSE) rlang::abort("You haven't set a Project Billing Id. Use the function `set_billing_id` to do so.")
+  if(billing_project_id == FALSE) {
 
-  if(!rlang::is_character(query)) rlang::abort("`query` argument must contain valid SQL text")
+    rlang::abort("You haven't set a Project Billing Id. Use the function `set_billing_id` to do so.")
+
+  }
+
+  if(!rlang::is_character(query)) {
+
+    rlang::abort("`query` argument must contain valid SQL text")
+
+  }
 
   bigrquery::bq_project_query(
       billing_project_id,
       query = query) %>%
-    bigrquery::bq_table_download(page_size = page_size, bigint = "integer64")
+    bigrquery::bq_table_download(
+      page_size = page_size,
+      bigint = "integer64")
 
 }
 
