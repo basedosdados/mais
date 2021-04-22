@@ -5,7 +5,7 @@ import shutil
 from google.api_core.exceptions import NotFound
 
 from basedosdados import Dataset, Table, Storage
-from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.validation.exceptions import BaseDosDadosException
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
