@@ -6,6 +6,8 @@
 #'
 #' Retrieves the project's billing Id.
 #'
+#' @return a string with the project's billing id.
+#'
 #' @importFrom rlang inform
 #' @export
 #'
@@ -15,18 +17,21 @@ get_billing_id <- function() {
 
   id <- Sys.getenv("billing_project_id")
 
-  if(Sys.getenv("billing_project_set") == FALSE) {
+  is_set <- Sys.getenv("billing_project_set")
 
-    rlang::inform(
-      "No Billing Project Id set. You can set it as an enviroment variable under billing_project_id and restart the session or run basedosdados::set_billing_id.")
+  if(is_set == FALSE) {
+
+    rlang::inform("No Billing Project Id set. You can set it as an enviroment variable under billing_project_id and restart the session or run basedosdados::set_billing_id.")
+
     return(FALSE)
 
-  } else if(Sys.getenv("billing_project_set") == "env") {
+  } else if (is_set == "user_has_set") {
 
-    rlang::inform("Fecthing Billing Project Id from enviroment variables.")
+    rlang::inform("Fecthing Billing Project Id from enviroment variables defined by user.")
+
     return(id)
 
-  } else if(Sys.getenv("billing_project_set") == TRUE) {
+  } else if(is_set) {
 
     return(id)
 
@@ -41,9 +46,11 @@ get_billing_id <- function() {
 #' Define your project billing ids here so all your queries are authenticated and return data, not errors.
 #' If using in production or leaving code available at public repositories, `dotenv` is highly recommended.
 #'
-#' @importFrom rlang abort is_character inform
+#' @importFrom rlang abort is_string inform
 #'
 #' @export
+#'
+#' @return No return.
 #'
 #' @param billing_project_id a single character value containing the string. Vectors with longer lengths and non-vectors will trigger an error.
 #'
@@ -67,7 +74,7 @@ get_billing_id <- function() {
 
 set_billing_id <- function(billing_project_id) {
 
-  if(!rlang::is_character(billing_project_id)) {
+  if(!rlang::is_string(billing_project_id)) {
 
     rlang::abort("`billing_project_id` must be a 1-length character vector.")
 
@@ -77,7 +84,7 @@ set_billing_id <- function(billing_project_id) {
 
   } else if(!rlang::is_vector(billing_project_id)) {
 
-    rlang::abort("Invalid data for `billing_project_id`.")
+    rlang::abort("Pass a string to `billing_project_id`.")
 
   }
 

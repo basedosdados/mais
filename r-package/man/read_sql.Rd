@@ -13,12 +13,18 @@ read_sql(query, billing_project_id = get_billing_id(), page_size = 1000)
 
 \item{page_size}{\code{bigrquery} internal, how many rows per page should there be.}
 }
+\value{
+A tibble containing the query's output.
+}
 \description{
 Query out datalake and get results in a tibble
 }
 \examples{
 
 \dontrun{
+
+set_billing_id("<your id here>")
+
 query <- "SELECT
 pib.id_municipio,
 pop.ano,
@@ -30,12 +36,16 @@ LIMIT 5 "
 
 data <- read_sql(query)
 
-# in case you want to write your data on disk as a .xlsx or .csv file
+# in case you want to write your data on disk as a .xlsx, .csv or .Rds file.
+
 library(writexl)
 library(readr)
 
-write_xlsx(data, "data.xlsx")
-write_csv(data, "data.csv")
+dir <- tempdir()
+
+write_xlsx(data, file.path(dir, "data.xlsx"))
+write_csv(data, file.path(dir, "data.csv"))
+saveRDS(data, file.path(dir, "data.Rds"))
 
 }
 
