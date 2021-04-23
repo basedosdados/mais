@@ -9,6 +9,9 @@
 # @param page_size `bigrquery` internal.
 # @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
 #
+#
+# @details Currently this is prototype and it won't be available to end users for a while.
+#
 # @examples
 #
 #
@@ -77,7 +80,9 @@ query_table <- function(
   query <- paste0(single_table_query, second_table_query)
 
   bigrquery::bq_table_download(
-    x = bigrquery::bq_project_query(billing_project_id, query),
+    x = bigrquery::bq_project_query(
+      billing_project_id,
+      query),
     page_size = page_size)
 
 }

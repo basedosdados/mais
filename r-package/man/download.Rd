@@ -22,7 +22,7 @@ Invisibly returns the query's output in a tibble. Intended to be used for side-e
 Write the results of a query locally to a comma-separated file.
 }
 \details{
-Currently there's only support for UTF-8 encoding. Users needing more control over writing should use \code{read_sql} to get the data in memory and custom code from there.
+Currently there's only support for UTF-8 encoding. Users requiring more control over writing should use \code{read_sql} to get the data in memory and custom code from there.
 }
 \examples{
 
