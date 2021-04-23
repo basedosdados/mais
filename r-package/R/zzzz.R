@@ -19,9 +19,6 @@
 
   }
 
-
-  Sys.setenv(billing_project_set = FALSE)
-
   cli::cli_h1("Base dos Dados: Facilitando o acesso a dados no Brasil")
   cli::cli_h2("Contatos")
   cli::cli_ul()
