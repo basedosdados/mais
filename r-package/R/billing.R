@@ -25,9 +25,9 @@ get_billing_id <- function() {
       "No Billing Project Id set. You can set it as an enviroment variable under billing_project_id and restart the session or run basedosdados::set_billing_id.")
     return(FALSE)
 
-  } else if (is_set == "env") {
+  } else if (is_set == "user_has_set") {
 
-    rlang::inform("Fecthing Billing Project Id from enviroment variables.")
+    rlang::inform("Fecthing Billing Project Id from enviroment variables defined by user.")
     return(id)
 
   } else if(is_set) {

@@ -15,7 +15,7 @@
 
   } else {
 
-    Sys.setenv(billing_project_set = "env")
+    Sys.setenv(billing_project_set = "user_has_set")
 
   }
 
