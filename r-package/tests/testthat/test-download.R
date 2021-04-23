@@ -27,7 +27,8 @@ test_that("download retorna invisivelmente nomes de arquivos", {
   expect_invisible(
     download(
       "select * from basedosdados.br_ibge_populacao.municipios limit 1",
-      file.path(tempdir(), "data.csv")))
+      file.path(tempdir(), "data.csv"))
+    )
 
 
 })
@@ -64,10 +65,6 @@ test_that("read_sql retorna o número esperado de linhas", {
 
 
 test_that("read_sql falha se não receber uma query apropriada", {
-
-  load_dot_env('keys.env')
-
-  set_billing_id(Sys.getenv('project_id'))
 
   expect_error(read_sql(1232314))
 
