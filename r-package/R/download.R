@@ -9,7 +9,7 @@
 #'
 #' @return Invisibly returns the query's output in a tibble. Intended to be used for side-effects. If you simply want to load a query's result in memory, use `read_sql`.
 #'
-#' @details Currently there's only support for UTF-8 encoding. Users needing more control over writing should use `read_sql` to get the data in memory and custom code from there.
+#' @details Currently there's only support for UTF-8 encoding. Users requiring more control over writing should use `read_sql` to get the data in memory and custom code from there.
 #'
 #'
 #' @examples

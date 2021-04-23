@@ -17,18 +17,20 @@ get_billing_id <- function() {
 
   id <- Sys.getenv("billing_project_id")
 
-  if(Sys.getenv("billing_project_set") == FALSE) {
+  is_set <- Sys.getenv("billing_project_set")
+
+  if(is_set == FALSE) {
 
     rlang::inform(
       "No Billing Project Id set. You can set it as an enviroment variable under billing_project_id and restart the session or run basedosdados::set_billing_id.")
     return(FALSE)
 
-  } else if(Sys.getenv("billing_project_set") == "env") {
+  } else if (is_set == "env") {
 
     rlang::inform("Fecthing Billing Project Id from enviroment variables.")
     return(id)
 
-  } else if(Sys.getenv("billing_project_set") == TRUE) {
+  } else if(is_set) {
 
     return(id)
 
