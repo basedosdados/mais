@@ -22,7 +22,6 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_sp_seduc_idesp.escola AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(id_escola AS INT64) id_escola,
 SAFE_CAST(id_escola_sp AS INT64) id_escola_sp,

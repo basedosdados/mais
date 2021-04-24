@@ -78,7 +78,8 @@ diretorio_com_id <- dbGetQuery(con, query)
 
 idesp_wide_identificado <- idesp_wide%>%
   left_join(diretorio_com_id, by = "id_escola")%>%
-  mutate(across(everything(), .fns = criadora_de_na))
+  select(ano, id_municipio, id_escola, id_escola_sp, nota_idesp_ef_iniciais,
+         nota_idesp_ef_finais, nota_idesp_em)
 
 # Exportando os dados
 export(idesp_wide_identificado, "bases_prontas/idesp_fundamental_medio.csv")
