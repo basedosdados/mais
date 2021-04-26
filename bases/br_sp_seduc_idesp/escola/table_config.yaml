@@ -7,7 +7,7 @@ dataset_id: br_sp_seduc_idesp # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-sp-seduc-idesp # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_idesp # AUTO GENERATED
 
-version: v1.3 # REQUIRED
+version: v1.4 # REQUIRED
 
 last_updated: 2021-04-26 # AUTO GENERATED
 
