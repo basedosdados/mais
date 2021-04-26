@@ -109,12 +109,13 @@ diretorio_com_id_alt <- diretorio_com_id%>%
 
 basefinal_comid <- basefinal%>%
   mutate(sigla_uf = "SP",
-         chave = str_c(sigla_uf,municipio))%>%
-  inner_join(diretorio_com_id_alt, by = 'chave')%>%
-  select(-chave, -sigla_uf)
+         chave = str_c(sigla_uf,municipio),
+         rede = case_when(rede_ensino == "ESTADUAL" ~ "estadual"),)%>%
+  left_join(diretorio_com_id_alt, by = 'chave')%>%
+  select(-chave, -municipio, -rede_ensino, -codigo_rede_ensino)
 
 
 # exportando a base
 
-export(basefinal_comid, "bases_prontas/fluxoescolarmun.csv", na = "")
+export(basefinal_comid, "bases_prontas/fluxoescolarmun.csv", na = "", quote = TRUE)
 
