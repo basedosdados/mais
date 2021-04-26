@@ -5,9 +5,9 @@ from google.cloud import bigquery
 from google.cloud import bigquery_storage_v1
 from functools import partialmethod
 import pandas as pd
-from basedosdados.base import Base
+from basedosdados.upload.base import Base
 from functools import partialmethod
-from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.validation.exceptions import BaseDosDadosException
 from pandas_gbq.gbq import GenericGBQException
 
 

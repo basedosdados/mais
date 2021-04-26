@@ -7,7 +7,7 @@ import shutil
 import tomlkit
 import warnings
 
-from functools import lru_cache 
+from functools import lru_cache
 
 warnings.filterwarnings("ignore")
 
@@ -176,7 +176,7 @@ class Base:
 
             c_file["metadata_path"] = str(Path(metadata_path) / "bases")
 
-            ############# STEP 2 - CREDENTIALS PATH #######################
+            ############# STEP 2 - CREDENTIALS PATH ######################
 
             credentials_path = Path.home() / ".basedosdados" / "credentials"
             credentials_path = Path(
@@ -287,6 +287,6 @@ class Base:
     def _refresh_templates(self):
         shutil.rmtree((self.config_path / "templates"), ignore_errors=True)
         shutil.copytree(
-            (Path(__file__).parent / "configs" / "templates"),
+            (Path(__file__).resolve().parents[1] / "configs" / "templates"),
             (self.config_path / "templates"),
         )
