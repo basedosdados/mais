@@ -67,10 +67,7 @@ con <- dbConnect(
 )
 
 # Executando a query
-query <- 'SELECT id_escola, id_municipio, rede
-FROM `basedosdados.br_inep_ideb.escola`
-WHERE ano = 2019
-GROUP BY id_escola, id_municipio, rede'
+query <- 'SELECT id_escola, id_municipio FROM `basedosdados.br_bd_diretorios_brasil.escola`'
 
 diretorio_com_id <- dbGetQuery(con, query)
 
@@ -79,7 +76,9 @@ diretorio_com_id <- dbGetQuery(con, query)
 idesp_wide_identificado <- idesp_wide%>%
   left_join(diretorio_com_id, by = "id_escola")%>%
   select(ano, id_municipio, id_escola, id_escola_sp, nota_idesp_ef_iniciais,
-         nota_idesp_ef_finais, nota_idesp_em)
+         nota_idesp_ef_finais, nota_idesp_em)%>%
+  distinct(.keep_all = TRUE)%>%
+  arrange(ano)
 
 # Exportando os dados
-export(idesp_wide_identificado, "bases_prontas/idesp_fundamental_medio.csv")
+export(idesp_wide_identificado, "bases_prontas/idesp_escola.csv")

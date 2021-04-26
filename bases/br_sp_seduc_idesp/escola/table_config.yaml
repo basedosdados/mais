@@ -7,9 +7,9 @@ dataset_id: br_sp_seduc_idesp # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-sp-seduc-idesp # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_seduc_idesp # AUTO GENERATED
 
-version: v1.2 # REQUIRED
+version: v1.4 # REQUIRED
 
-last_updated: 2021-03-23 # AUTO GENERATED
+last_updated: 2021-04-26 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -102,8 +102,14 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: id_escola_sp
-        description: ID Escola - específico para o Estado de São Paulo
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -114,8 +120,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: ano
-        description: Ano
+        name: id_escola_sp
+        description: ID Escola - específico para o Estado de São Paulo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -134,11 +140,5 @@ columns: # REQUIRED
     -   
         name: nota_idesp_em
         description: Nota IDESP para anos do ensino médio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
