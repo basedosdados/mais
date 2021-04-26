@@ -128,6 +128,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+*.env
 .env
 .venv
 env/
@@ -164,6 +165,6 @@ cython_debug/
 # Examples
 !examples/*.ipynb
 
-
+# R
+.Rhistory
 .Rproj.user
-*.env
