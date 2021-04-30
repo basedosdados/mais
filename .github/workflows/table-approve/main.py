@@ -207,21 +207,21 @@ def sync_bucket(
     ref.copy_table(source_bucket_name=source_bucket_name)
 
 
-def is_partitioned(table_config):
-    ## check if the table are partitioned
-    print("\n", "TABLE PARTITION")
-    print(table_config["partitions"], "\n")
+# def is_partitioned(table_config):
+#     ## check if the table are partitioned
+#     print("\n", "TABLE PARTITION")
+#     print(table_config["partitions"], "\n")
 
-    partitions = table_config["partitions"]
-    if partitions is None:
-        return False
+#     partitions = table_config["partitions"]
+#     if partitions is None:
+#         return False
 
-    elif isinstance(partitions, list):
+#     elif isinstance(partitions, list):
 
-        # check if any None inside list.
-        # False if it is the case Ex: [None, 'partition']
-        # True otherwise          Ex: ['partition1', 'partition2']
-        return not any([item is None for item in partitions])
+#         # check if any None inside list.
+#         # False if it is the case Ex: [None, 'partition']
+#         # True otherwise          Ex: ['partition1', 'partition2']
+#         return not any([item is None for item in partitions])
 
 
 def get_table_dataset_id():
@@ -295,7 +295,7 @@ def push_table_to_bq(
         if_table_exists="replace",
         if_storage_data_exists="pass",
         if_table_config_exists="pass",
-        partitioned=is_partitioned(table_config),
+#         partitioned=is_partitioned(table_config),
     )
     ### publish the table in prod bigquery
     tb.publish(if_exists="replace")
