@@ -1,7 +1,7 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: setor_censitario_registro_civil_2010 # AUTO GENERATED
+table_id: setor_censitario_registro_civil_2010 # AUTO GENERATED 
 dataset_id: br_ibge_censo_demografico # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-ibge-censo-demografico # AUTO GENERATED
