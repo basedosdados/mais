@@ -12,9 +12,7 @@ import basedosdados
 import basedosdados as bd
 from basedosdados import Storage
 from basedosdados import Dataset
-from basedosdados.base import Base
-##future change
-#from basedosdados.upload.base import Base
+from basedosdados.upload.base import Base
 
 def decogind_base64(message):
     # decoding the base64 string
