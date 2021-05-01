@@ -8,11 +8,11 @@ import datetime
 
 import google.api_core.exceptions
 
-from basedosdados.base import Base
-from basedosdados.storage import Storage
-from basedosdados.dataset import Dataset
-from basedosdados.datatypes import Datatype
-from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.upload.base import Base
+from basedosdados.upload.storage import Storage
+from basedosdados.upload.dataset import Dataset
+from basedosdados.upload.datatypes import Datatype
+from basedosdados.validation.exceptions import BaseDosDadosException
 
 
 class Table(Base):

@@ -1,7 +1,7 @@
 from pathlib import Path
 from tqdm import tqdm
 
-from basedosdados.base import Base
+from basedosdados.upload.base import Base
 
 
 class Storage(Base):

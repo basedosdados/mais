@@ -9,6 +9,9 @@ set_billing_id(billing_project_id)
 \arguments{
 \item{billing_project_id}{a single character value containing the string. Vectors with longer lengths and non-vectors will trigger an error.}
 }
+\value{
+No return.
+}
 \description{
 Define your project billing ids here so all your queries are authenticated and return data, not errors.
 If using in production or leaving code available at public repositories, \code{dotenv} is highly recommended.
