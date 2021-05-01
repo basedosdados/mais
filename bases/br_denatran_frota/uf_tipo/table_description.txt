@@ -32,6 +32,7 @@ Colunas identificando linhas unicamente
 
 Cobertura Temporal
 ------------------
+- 2003
 - 2004
 - 2005
 - 2006

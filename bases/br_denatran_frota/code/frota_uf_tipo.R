@@ -6,6 +6,7 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 library(magrittr)
+library(purrr)
 library(readr)
 library(stringdist)
 
@@ -18,8 +19,8 @@ PATH_DOWNLOAD_REG <- paste0(getwd(), "/input/frota_regiao_tipo")
 
 PREFIX_FROTA_REG <- "frota_regiao_tipo"
 
-# Download da frota por regiao de 2014 a 2014
-2009:2014 %>% purrr::walk(
+# Download da frota por regiao de 2003 a 2012
+2003:2012 %>% purrr::walk(
   ~download_frota_old(
     key = "regiao", 
     prefix = PREFIX_FROTA_REG,
@@ -65,48 +66,19 @@ PREFIX_FROTA_REG <- "frota_regiao_tipo"
 
 list.files(PATH_DOWNLOAD_REG, full.names = T) %>% 
   purrr::map(
-    ~read_xl(.x, type = "grandes reg") %>% 
+    ~read_xl(.x, type = "grandes reg|uf") %>% 
     dplyr::rename("uf" = 1) %>% 
     dplyr::mutate(
       uf = stringr::str_trim(uf)
     ) %>% 
-    dplyr::filter(
-      uf %in% c(
-        "Acre",
-        "Amapá",
-        "Amazonas",
-        "Pará",
-        "Rondônia",
-        "Roraima",
-        "Tocantins",
-        "Alagoas",
-        "Bahia",
-        "Ceará",
-        "Maranhão",
-        "Paraíba",
-        "Pernambuco",
-        "Piauí",
-        "Rio Grande do Norte",
-        "Sergipe",
-        "Espírito Santo",
-        "Minas Gerais",
-        "Rio de Janeiro",
-        "São Paulo",
-        "Paraná",
-        "Rio Grande do Sul",
-        "Santa Catarina",
-        "Distrito Federal",
-        "Goiás",
-        "Mato Grosso",
-        "Mato Grosso do Sul"
-      )
-    ) %>% 
+    dplyr::filter(uf %in% names(siglas_uf) | uf %in% unname(siglas_uf)) %>% 
     dplyr::select(uf, data, automovel:utilitario) %>% 
     dplyr::rowwise() %>% 
     dplyr::mutate(
       dplyr::across(!c(uf, data), as.numeric),
+      uf = get_uf_name(uf),
       total = rowSums(across(automovel:utilitario)),
-      id_uf = ufs$uf_id[ufs$nome_uf == uf]
+      id_uf = ufs$id_uf[ufs$nome_uf == uf]
     ) %>% 
     dplyr::relocate(id_uf, .after = uf)
   ) -> frota_regiao
@@ -115,7 +87,6 @@ list.files(PATH_DOWNLOAD_REG, full.names = T) %>%
 frota_regiao %>% purrr::map_lgl(~ncol(.x) == 25 & nrow(.x) == 27) %>% all(T)
 
 frota_regiao %>% 
-  tibble::tibble() %>% 
-  tidyr::unnest() %>% 
+  purrr::map_dfr(~tidyr::unnest(.)) %>% 
   readr::write_csv(file = "output/uf_tipo.csv") %T>%
   readr::write_rds(file = "output/uf_tipo.rds")

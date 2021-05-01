@@ -4,6 +4,8 @@ library(xlsx) # <Require java>
 library(readxl)
 library(dplyr)
 library(tidyr)
+library(magrittr)
+library(purrr)
 library(readr)
 library(stringr)
 library(stringdist)
@@ -17,7 +19,7 @@ PATH_DOWNLOAD_MUN <- paste0(getwd(), "/input/frota_municipio_tipo")
 PREFIX_FROTA_MUN <- "frota_mun_tipo"
 
 # Download da frota de 2004 a 2012 por municipio
-2004:2012 %>% purrr::walk(
+2003:2012 %>% purrr::walk(
   ~download_frota_old(
     key = "municipio",
     prefix = PREFIX_FROTA_MUN,
@@ -38,7 +40,7 @@ PREFIX_FROTA_MUN <- "frota_mun_tipo"
   )
 )
 
-list.files(PATH_DOWNLOAD_MUN, full.names = T)[1] %>% 
+list.files(PATH_DOWNLOAD_MUN, full.names = T) %>% 
   purrr::map(
     ~read_xl(.x, type = "uf") %>%
     dplyr::select(!total) %>% 
@@ -49,7 +51,7 @@ list.files(PATH_DOWNLOAD_MUN, full.names = T)[1] %>%
       ibge_info = list(get_ibge_info(uf_original, municipio_original))
     ) %>% 
     tidyr::unnest_wider(col = "ibge_info") %>% 
-    dplyr::relocate(c(data, uf_id, uf, municipio_id, municipio), .after = municipio_original)
+    dplyr::relocate(c(data, id_uf, uf, id_municipio, municipio), .after = municipio_original)
   ) -> frota_municipios
 
 
@@ -58,17 +60,19 @@ frota_municipios %>% purrr::map_lgl(~ncol(.x) == 28) %>% all(T)
 
 # Unnest a lista de tibbles, padroniza as colunas, soma e salva como csv e rds
 frota_municipios %>% 
-  tibble::tibble() %>% 
-  tidyr::unnest() %>% 
-  dplyr::rename(chassiplataforma = chassiplatafaforma) %>% 
+  purrr::map_dfr(~tidyr::unnest(.)) %>% 
   dplyr::rowwise() %>% 
   dplyr::mutate(
-    chassiplataforma = tidyr::replace_na(chassiplataforma, chassiplataf),
-    tratoresteira = tidyr::replace_na(tratoresteira, tratorestei)
+    chassiplataforma = na.omit(
+      dplyr::c_across(dplyr::any_of(c("chassiplataforma", "chassiplatafaforma", "chassiplataf")))
+    )[1],
+    tratoresteira = na.omit(
+      dplyr::c_across(dplyr::any_of(c("tratoresteira", "tratorestei")))
+    )[1]
   ) %>% 
-  dplyr::select(!c(chassiplataf, tratorestei)) %>% 
+  dplyr::select(-dplyr::any_of(c("chassiplatafaforma", "chassiplataf", "tratorestei"))) %>% 
   dplyr::mutate(
-    total = rowSums(across(automovel:utilitario))
+    total = rowSums(dplyr::across(automovel:utilitario))
   ) %>% 
   readr::write_rds(file = "output/municipio_tipo.rds") %T>%
   readr::write_csv(file = "output/municipio_tipo.csv")

@@ -10,7 +10,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_denatran_f
 
 version: v1.0 # REQUIRED
 
-last_updated: 2021-04-28 # AUTO GENERATED
+last_updated: 2021-04-30 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -76,6 +76,7 @@ coverage_geo:
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
+    - 2003
     - 2004
     - 2005
     - 2006

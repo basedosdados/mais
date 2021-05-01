@@ -19,6 +19,10 @@ find_sheet <- function(x, date) {
       regex(paste0("\\d{2}(?=\\d{4}$)", "|", month_name), ignore_case = T) 
     )
 
+    if (length(query_sheet) == 0) {
+      return(sheet_names[[1]])
+    }
+
     if (length(query_sheet) > 1) {
       # Exceções
       if (date == "01-04-2010") {
@@ -130,7 +134,7 @@ ufs <- ibge_ids %>%
     dplyr::summarise() %>% 
     dplyr::ungroup() %>% 
     dplyr::mutate(uf = as.numeric(uf)) %>% 
-    dplyr::rename(uf_id = uf)
+    dplyr::rename(id_uf = uf)
 
 municipios <- ibge_ids %>% 
   dplyr::group_by(
@@ -147,9 +151,9 @@ municipios <- ibge_ids %>%
   ) %>% 
   dplyr::ungroup() %>% 
   dplyr::rename(
-    uf_id = uf,
+    id_uf = uf,
     uf = nome_uf,
-    municipio_id = codigo_municipio_completo,
+    id_municipio = codigo_municipio_completo,
     municipio = nome_municipio
   )
 
@@ -194,17 +198,22 @@ get_ibge_info <- function(uf, name, tolerance = 0.60) {
 
   if (length(result[[1]]) == 0 || result$dist < tolerance) {
     return(list(
-      uf_id = NA,
+      id_uf = NA,
       uf = NA,
-      municipio_id = NA,
+      id_municipio = NA,
       municipio = NA
     ))
   }
   
   list(
-    uf_id = result$uf_id, 
+    id_uf = result$id_uf, 
     uf = result$uf, 
-    municipio_id = result$municipio_id, 
+    id_municipio = result$id_municipio, 
     municipio = result$municipio
   )
+}
+
+get_uf_name <- function(x) {
+  if (nchar(x) != 2) return(x)
+  unname(siglas_uf[x])
 }
