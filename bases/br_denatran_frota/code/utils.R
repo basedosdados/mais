@@ -82,7 +82,7 @@ read_old_xls <- function(x, date) {
     start_row <- start_row + 1
   }
   xlsx::read.xlsx2(x, sheetName = sheet_name, startRow = start_row) %>% 
-    tibble::as_tibble(result)
+    tibble::as_tibble()
 }
 
 read_xl <- function(x, type) {
