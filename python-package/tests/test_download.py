@@ -14,7 +14,7 @@ from basedosdados import (
     get_table_columns,
     get_table_size,
 )
-from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.validation.exceptions import BaseDosDadosException
 
 
 TEST_PROJECT_ID = "basedosdados-dev"

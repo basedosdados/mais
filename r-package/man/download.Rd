@@ -16,18 +16,20 @@ download(query, path, billing_project_id = get_billing_id(), page_size = 1000)
 \item{page_size}{\code{bigrquery} internal, how many rows per page should there be.}
 }
 \value{
-Invisibly returns the provided filename and triggers it's writing to disk as side-effect.
+Invisibly returns the query's output in a tibble. Intended to be used for side-effects. If you simply want to load a query's result in memory, use \code{read_sql}.
 }
 \description{
 Write the results of a query locally to a comma-separated file.
 }
 \details{
-Currently there's only support for UTF-8 encoding. Users needing more control over writing should use \code{read_sql} to get the data in memory and custom code from there.
+Currently there's only support for UTF-8 encoding. Users requiring more control over writing should use \code{read_sql} to get the data in memory and custom code from there.
 }
 \examples{
 
-
 \dontrun{
+
+dir <- tempdir()
+
 query <- "SELECT
 pib.id_municipio,
 pop.ano,
@@ -37,7 +39,7 @@ JOIN `basedosdados.br_ibge_populacao.municipios` as pop
 ON pib.id_municipio = pop.id_municipio
 LIMIT 5 "
 
-data <- download(query, "pip_per_capita_municipios.csv")
+data <- download(query, file.path(dir, "pib_per_capita.csv"))
 }
 
 

@@ -6,6 +6,9 @@
 \usage{
 get_billing_id()
 }
+\value{
+a string with the project's billing id.
+}
 \description{
 Retrieves the project's billing Id.
 }
