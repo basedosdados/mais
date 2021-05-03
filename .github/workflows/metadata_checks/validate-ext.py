@@ -53,7 +53,7 @@ def validate_metadata(path_to_yaml):
             return
 
     if error_dict:
-        print(error_dict)
+        print(type(error_dict), error_dict)
 
 
 if __name__ == "__main__":
