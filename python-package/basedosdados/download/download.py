@@ -317,9 +317,6 @@ def list_datasets(
         filter_by='sp',
         with_description=True,
         )
-
-    Returns:
-        None.
     """
 
     client = bigquery.Client(
@@ -374,8 +371,6 @@ def list_dataset_tables(
         filter_by='renda',
         with_description=True,
         )
-    Returns:
-        None.
     """
     client = bigquery.Client(
         credentials=credentials(from_file=from_file), project=query_project_id
@@ -415,9 +410,6 @@ def get_dataset_description(
             Dataset id available in basedosdados.
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
-
-    Returns:
-        None.
     """
 
     client = bigquery.Client(
@@ -447,9 +439,6 @@ def get_table_description(
             It should always come with dataset_id.
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
-
-    Returns:
-        None.
     """
 
     client = bigquery.Client(
@@ -486,8 +475,6 @@ def get_table_columns(
         dataset_id='br_ibge_censo2010',
         table_id='pessoa_renda_setor_censitario'
         )
-    Returns:
-        None.
     """
 
     client = bigquery.Client(
@@ -535,8 +522,6 @@ def get_table_size(
         table_id='pessoa_renda_setor_censitario',
         billing_project_id='yourprojectid'
         )
-    Returns:
-        None
     """
     billing_client = bigquery.Client(
         credentials=credentials(from_file=from_file), project=billing_project_id

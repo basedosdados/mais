@@ -242,12 +242,8 @@ class Storage(Base):
                 * 'raise' : Raises FileNotFoundError.
                 * 'pass' : Do nothing and exit the function
 
-
-
         Raises:
-            FileNotFoundError: If the given path "<mode>/<dataset_id>/<table_id>/<partitions>/<filename>" could not be found or
-            there are no files to download.
-
+            FileNotFoundError: If the given path `<mode>/<dataset_id>/<table_id>/<partitions>/<filename>` could not be found or there are no files to download.
         """
 
         # Prefix to locate files within the bucket
@@ -388,7 +384,7 @@ class Storage(Base):
                 The bucket name from which to copy data. You can change it
                 to copy from other external bucket.
 
-            destination_bucket_name(str): Optional
+            destination_bucket_name (str): Optional
                 The bucket name where data will be copied to.
                 If None, defaults to the bucket initialized when instantiating the Storage object (You can check it with the
                 Storage().bucket property)

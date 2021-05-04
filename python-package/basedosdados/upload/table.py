@@ -177,7 +177,7 @@ class Table(Base):
                 * 'raise' : Raises FileExistsError
                 * 'replace' : Replace folder
                 * 'pass' : Do nothing
-            table_config_exists (str): Optional
+            if_table_config_exists (str): Optional
                 What to do if table_config.yaml and publish.sql exists
 
                 * 'raise' : Raises FileExistsError
@@ -302,17 +302,18 @@ class Table(Base):
         and builds the table.
 
         It currently supports the types:
-            - Comma Delimited CSV
+
+        - Comma Delimited CSV
 
         Data can also be partitioned following the hive partitioning scheme
-        `<key1>=<value1>/<key2>=<value2>`, for instance, `year=2012/country=BR`
+        `<key1>=<value1>/<key2>=<value2>` - for instance,
+        `year=2012/country=BR`. The partition is automatcally detected
+        by searching for `partitions` on the `table_config.yaml`.
 
         Args:
             path (str or pathlib.PosixPath): Where to find the file that you want to upload to create a table with
             job_config_params (dict): Optional.
                 Job configuration params from bigquery
-            partitioned (bool): Optional.
-                Whether data is partitioned
             if_table_exists (str): Optional
                 What to do if table exists
 

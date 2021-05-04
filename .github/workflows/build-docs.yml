@@ -1,8 +1,9 @@
-name: docs
+name: build-docs
 on:
   push:
-    branches:
-      - master
+    paths:
+      - python-package/**
+      - docs
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -11,8 +12,8 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.7
-      - run: cd ${{ github.workspace }}/python-package/ && pip install -r requirements-dev.txt 
-      - run: cd ${{ github.workspace }}/python-package/ && python setup.py develop
+      - run: pip install -r ${{ github.workspace }}/python-package/requirements-dev.txt 
+      - run: python ${{ github.workspace }}/python-package/setup.py develop
       - env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
-        run: mkdocs gh-deploy --force
+        run: mkdocs build

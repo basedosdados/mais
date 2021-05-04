@@ -36,8 +36,9 @@ nav:
   - Analisar:
       - Início: analysis.md
   - API: 
-    - Python: py_reference_api.md
-    - CLI: cli_reference_api.md
+    - Python: reference_api_py.md
+    - R: reference_api_r.md
+    - CLI: reference_api_cli.md
   - Apoie! 💚:
     - Início: support.md
   - DATATHON 👩🏻‍💻: 
@@ -76,8 +77,9 @@ plugins:
           setup_commands:
             - import sys
             - sys.path.append("docs")
+            - sys.path.append("python-package")
       watch:
-        - basedosdados
+        - python-package/basedosdados
 
 extra_css:
 - css/termynal.css

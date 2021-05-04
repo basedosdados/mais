@@ -1,25 +1,20 @@
-# Python API
+# Python
 
-Esta API é composta de módulos para **requisição de dados**: :
+Esta API é composta por funções com 2 tipos de funcionalidade:
 
-- [`download`](#basedosdados.download.download), que permite baixar
-  tabelas do BigQuery em CSV  direto na sua máquina.
-- [`read_sql`](#basedosdados.download.read_sql), que permite fazer uma
-  query SQL e carregar os dados no ambiente do Python.
-- [`read_table`](#basedosdados.download.read_table), que permite ler uma
-  tabela do BigQuery pelo nome e carregar os dados no ambiente do Python.
+- Módulos para **requisição de dados**: para aquele(as) que desejam
+  somente consultar os dados e metadados do nosso projeto (ou qualquer outro
+  projeto no Google Cloud).
 
-E também de classes para **gerenciamento de dados** no Google Cloud:
-  
-- [`Storage`](#basedosdados.storage.Storage), que permite manusear arquivos no Storage
-- [`Dataset`](#basedosdados.dataset.Dataset), que permite manusear *datasets* no BigQuery
-- [`Table`](#basedosdados.table.Table), que permite manusear *tables*
+- Classes para **gerenciamento de dados** no Google Cloud: para
+  aqueles(as) que desejam subir dados no nosso projeto (ou qualquer outro
+  projeto no Google Cloud, seguindo a nossa metodologia e infraestrutura).
 
 !!! Info "Toda documentação do código abaixo está em inglês"
 
-## Módulos
+## Módulos (Requisição de dados)
 
-::: basedosdados.download
+::: basedosdados.download.download
     handler: python
     rendering:
             show_root_heading: no
@@ -29,20 +24,9 @@ E também de classes para **gerenciamento de dados** no Google Cloud:
       docstring_options:
         replace_admonitions: no
 
-## Classes
+## Classes (Gerenciamento de dados)
 
-::: basedosdados.storage
-    handler: python
-    rendering:
-            show_root_heading: no
-            heading_level: 3
-    selection:
-      docstring_style: google  # this is the default
-      docstring_options:
-        replace_admonitions: no
-
----
-::: basedosdados.dataset
+::: basedosdados.upload.storage
     handler: python
     rendering:
             show_root_heading: no
@@ -53,7 +37,18 @@ E também de classes para **gerenciamento de dados** no Google Cloud:
         replace_admonitions: no
 
 ---
-::: basedosdados.table
+::: basedosdados.upload.dataset
+    handler: python
+    rendering:
+            show_root_heading: no
+            heading_level: 3
+    selection:
+      docstring_style: google  # this is the default
+      docstring_options:
+        replace_admonitions: no
+
+---
+::: basedosdados.upload.table
     handler: python
     rendering:
             show_root_heading: no
