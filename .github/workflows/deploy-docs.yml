@@ -12,7 +12,7 @@ jobs:
         with:
           python-version: 3.7
       - run: pip install -r ${{ github.workspace }}/python-package/requirements-dev.txt 
-      - run: python setup.py ${{ github.workspace }}/python-package/develop
+      - run: python ${{ github.workspace }}/python-package/setup.py develop
       - env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
         run: mkdocs gh-deploy --force
