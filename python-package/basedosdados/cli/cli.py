@@ -2,10 +2,10 @@ import click
 import os
 import time
 
-from basedosdados.base import Base
-from basedosdados.dataset import Dataset
-from basedosdados.table import Table
-from basedosdados.storage import Storage
+from basedosdados.upload.base import Base
+from basedosdados.upload.dataset import Dataset
+from basedosdados.upload.table import Table
+from basedosdados.upload.storage import Storage
 
 import basedosdados as bd
 
