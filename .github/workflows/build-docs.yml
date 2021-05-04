@@ -4,6 +4,7 @@ on:
     paths:
       - python-package/**
       - docs
+      - .github/workflows/**
 jobs:
   deploy:
     runs-on: ubuntu-latest
