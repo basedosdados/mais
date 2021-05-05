@@ -60,3 +60,4 @@ partition_table <- function(.data, path, ...) {
   invisible()
 
 }
+
