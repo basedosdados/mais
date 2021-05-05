@@ -5,7 +5,6 @@ load_dot_env('keys.env') # esperando um arquivo com esse nome na pasta tests/tes
 
 set_billing_id(Sys.getenv("billing_project_id"))
 
-
 test_that("download valida nomes de arquivos sem extensão", {
 
   expect_error(
