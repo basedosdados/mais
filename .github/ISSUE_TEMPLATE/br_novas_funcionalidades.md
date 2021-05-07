@@ -1,6 +1,6 @@
 ---
 name: PTBR | Novas funcionalidades
-about: Sugira uma ideia para nosso projeto
+about: Sugira uma ideia para nosso projeto, ou uma API para novas linguagens (Stata, ...)
 title: '[infra] <>'
 labels: enhancement
 assignees: JoaoCarabetta,  d116626
