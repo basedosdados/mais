@@ -1,10 +1,9 @@
 ---
 name: PTBR | Novas funcionalidades
-about: Sugira uma ideia para este projeto
-title: ''
+about: Sugira uma ideia para nosso projeto
+title: '[infra] <>'
 labels: enhancement
-assignees: JoaoCarabetta, rdahis
-
+assignees: JoaoCarabetta,  d116626
 ---
 
 **Sua solicitação de recurso está relacionada a um problema? Por favor descreva.**
