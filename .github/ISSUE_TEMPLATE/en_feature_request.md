@@ -1,9 +1,9 @@
 ---
 name: EN | Feature request
-about: Suggest an idea for this project
-title: ''
+about: Suggest an idea for this project, or a API for a new language (Stata, ...)
+title: '[infra] '
 labels: enhancement
-assignees: JoaoCarabetta, rdahis
+assignees: JoaoCarabetta, d116626
 
 ---
 
