@@ -1,9 +1,9 @@
 ---
 name: EN | Bug report
-about: Create a report to help us improve
-title: ''
+about: Found an error in our package?
+title: '[infra] <Error - indicate the language (e.g. Python, R)>'
 labels: bug
-assignees: polvoazul, JoaoCarabetta
+assignees: JoaoCarabetta, d116626
 
 ---
 
