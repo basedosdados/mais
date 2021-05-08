@@ -1,0 +1,1 @@
+[{"name": "ano", "description": "Ano", "is_in_staging": true, "is_partition": false, "type": "INTEGER", "mode": "NULLABLE"}, {"name": "bissexto", "description": "Ano Bissexto", "is_in_staging": true, "is_partition": false, "type": "INTEGER", "mode": "NULLABLE"}]
