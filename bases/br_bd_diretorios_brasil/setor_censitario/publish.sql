@@ -18,21 +18,20 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-
 CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.setor_censitario AS
 SELECT
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(id_setor_censitario AS INT64) id_setor_censitario,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(id_rm AS INT64) id_rm,
+SAFE_CAST(id_setor_censitario AS STRING) id_setor_censitario,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(id_rm AS STRING) id_rm,
 SAFE_CAST(nome_rm AS STRING) nome_rm,
-SAFE_CAST(id_distrito AS INT64) id_distrito,
+SAFE_CAST(id_distrito AS STRING) id_distrito,
 SAFE_CAST(nome_distrito AS STRING) nome_distrito,
-SAFE_CAST(id_subdistrito AS INT64) id_subdistrito,
+SAFE_CAST(id_subdistrito AS STRING) id_subdistrito,
 SAFE_CAST(nome_subdistrito AS STRING) nome_subdistrito,
-SAFE_CAST(id_bairro AS INT64) id_bairro,
+SAFE_CAST(id_bairro AS STRING) id_bairro,
 SAFE_CAST(nome_bairro AS STRING) nome_bairro,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(situacao_setor AS INT64) situacao_setor,
-SAFE_CAST(tipo_setor AS INT64) tipo_setor
-from basedosdados-dev.br_bd_diretorios_brasil_staging.setor_censitario as t
+SAFE_CAST(situacao_setor AS STRING) situacao_setor,
+SAFE_CAST(tipo_setor AS STRING) tipo_setor
+FROM basedosdados-dev.br_bd_diretorios_brasil_staging.setor_censitario AS t

@@ -18,11 +18,11 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados-dev.br_ibge_cnae_2.perfil_ocupacional AS
+CREATE VIEW basedosdados-dev.br_ibge_cbo_2002.perfil_ocupacional AS
 SELECT 
 SAFE_CAST(cbo_2002 AS STRING) cbo_2002,
 SAFE_CAST(grande_area AS STRING) grande_area,
 SAFE_CAST(descricao_grande_area AS STRING) descricao_grande_area,
 SAFE_CAST(atividade AS STRING) atividade,
 SAFE_CAST(descricao_atividade AS STRING) descricao_atividade
-FROM basedosdados-dev.br_ibge_cnae_2_staging.perfil_ocupacional AS t
+FROM basedosdados-dev.br_ibge_cbo_2002_staging.perfil_ocupacional AS t
