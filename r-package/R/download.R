@@ -60,8 +60,8 @@ download <- function(
   }
 
   bigrquery::bq_project_query(
-      billing_project_id,
-      query = query) %>%
+    billing_project_id,
+    query = query) %>%
     bigrquery::bq_table_download(
       page_size = page_size,
       bigint = "integer64") %>%
@@ -76,7 +76,7 @@ download <- function(
 #'
 #' @param query a string containing a valid SQL query.
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
-#' @param page_size `bigrquery` internal, how many rows per page should there be.
+#' @param page_size `bigrquery` internal, how many rows per page should there be. Defaults to 10000, consider increasing if running into performance issues or big queries.
 #'
 #' @return A tibble containing the query's output.
 #'
@@ -120,7 +120,7 @@ download <- function(
 read_sql <- function(
   query,
   billing_project_id = get_billing_id(),
-  page_size = 1000) {
+  page_size = 10000) {
 
   if(billing_project_id == FALSE) {
 
@@ -135,12 +135,28 @@ read_sql <- function(
   }
 
   bigrquery::bq_project_query(
-      billing_project_id,
-      query = query) %>%
+    billing_project_id,
+    query = query) %>%
     bigrquery::bq_table_download(
       page_size = page_size,
       bigint = "integer64")
 
 }
+
+
+#' Read a table by id
+#'
+#'
+#'
+#'
+#' @param
+#'
+#'
+#'
+#'
+#'
+#'
+
+read_table <- function() {}
 
 
