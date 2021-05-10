@@ -18,12 +18,10 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.escola AS
+CREATE VIEW basedosdados-dev.br_bd_diretorios_data_tempo.tempo AS
 SELECT 
-SAFE_CAST(id_escola AS STRING) id_escola,
-SAFE_CAST(id_escola_sp AS STRING) id_escola_sp,
-SAFE_CAST(nome_escola AS STRING) nome_escola,
-SAFE_CAST(rede AS STRING) rede,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf
-FROM basedosdados-dev.br_bd_diretorios_brasil_staging.escola AS t
+SAFE_CAST(tempo AS TIME) tempo,
+SAFE_CAST(hora AS INT64) hora,
+SAFE_CAST(minuto AS INT64) minuto,
+SAFE_CAST(segundo AS INT64) segundo
+FROM basedosdados-dev.br_bd_diretorios_data_tempo_staging.tempo AS t

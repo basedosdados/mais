@@ -18,12 +18,11 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.escola AS
-SELECT 
-SAFE_CAST(id_escola AS STRING) id_escola,
-SAFE_CAST(id_escola_sp AS STRING) id_escola_sp,
-SAFE_CAST(nome_escola AS STRING) nome_escola,
-SAFE_CAST(rede AS STRING) rede,
+CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.distrito AS
+SELECT
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(id_distrito AS STRING) id_distrito,
+SAFE_CAST(distrito AS STRING) distrito,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf
-FROM basedosdados-dev.br_bd_diretorios_brasil_staging.escola AS t
+FROM basedosdados-dev.br_bd_diretorios_brasil_staging.distrito AS t
