@@ -168,3 +168,7 @@ cython_debug/
 # R
 .Rhistory
 .Rproj.user
+
+# Datasets
+!bases/br_bd_diretorios_data_tempo/data
+
