@@ -16,7 +16,7 @@ last_updated: 2021-05-09 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Diretório da Classificação Brasileira de Ocupações 1994.
+    Diretório da Classificação Brasileira de Ocupações (CBO) 2002.
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -90,13 +90,13 @@ columns: # REQUIRED
   
     -   
         name: cbo_2002
-        description: Classificação Brasileira de Ocupações 2002
+        description: Classificação Brasileira de Ocupações (CBO) 2002
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: descricao
-        description: Descrição da CBO2002
+        description: Descrição da CBO 2002
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
