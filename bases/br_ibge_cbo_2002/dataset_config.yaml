@@ -1,4 +1,4 @@
-dataset_id: br_ibge_cnae_2 # AUTO GENERATED
+dataset_id: br_ibge_cbo_2002 # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-ibge-cbo-2002
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_cbo_2002
