@@ -31,11 +31,12 @@
 #' }
 #'
 #'
-#' @import bigrquery
+#' @importFrom bigrquery bq_project_query bq_table_download
 #' @importFrom readr write_csv
 #' @importFrom rlang abort
 #' @importFrom magrittr %>%
 #' @importFrom stringr str_detect
+#' @importFrom fs is_file
 #' @export
 #'
 #'
@@ -47,9 +48,9 @@ download <- function(
   billing_project_id = get_billing_id(),
   page_size = 1000) {
 
-  if(!stringr::str_detect(path, ".csv")) {
+  if(!stringr::str_detect(path, ".csv") | !fs::is_file(path)) {
 
-    rlang::abort("Pass a valid file name to argument `path`, include the '.csv' suffix.")
+    rlang::abort("Pass a valid file path to argument `path`, make sure to include the '.csv' suffix.")
 
   }
 
@@ -72,7 +73,7 @@ download <- function(
 }
 
 
-#' Query out datalake and get results in a tibble
+#' Query our datalake and get results in a tibble
 #'
 #' @param query a string containing a valid SQL query.
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
@@ -152,13 +153,16 @@ read_sql <- function(
 #' @param table a table name
 #' @param page_size a page_size parameter
 #'
-#'
+#' @return The table's content in a tibble
 #'
 #'
 #'
 #'
 
-read_table <- function(table, page_size = 10000) {
+read_table <- function(table, page_size = 10000, billing_id = ) {
+
+
+
 
   bigrquery::as_bq_table(table) %>%
     bigrquery::bq_table_download(
@@ -168,5 +172,53 @@ read_table <- function(table, page_size = 10000) {
 
 
 }
+
+
+#'
+#' @param
+#'
+#'
+#' @return
+#'
+#'
+#' @importFrom
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+
+dictionary <- function(dict, billing_ig = get_billing_id()) {
+
+
+  # TODO: adicionar uma validação do nome do dicionário
+  # se não estiver entre os válidos, retornar uma exceção com rlang::abort()
+  # TODO: documentar a função
+
+  bigrquery::bq_project_query(
+    billing_project_id,
+    query =
+      glue::glue(
+        "
+        SELECT *
+
+        FROM basedosdados.br_bd_diretorios_brasil.diretorio.{dict}
+        ")) %>%
+    bigrquery::bq_table_download(
+      page_size = 10000,
+      bigint = "integer64")
+
+
+
+
+
+}
+
+
 
 

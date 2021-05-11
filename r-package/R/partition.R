@@ -2,8 +2,10 @@
 
 #' Slice a big data frame into smaller csv files by grouping variables
 #'
+#' @description `partition_table` populates a folder
+#'
 #' @param .data a tibble.
-#' @param path directory where to write the csv files. Must exist before function call.
+#' @param dir directory where to write the csv files. Must exist before function call.
 #' @param ... comma-separated variables used to define groupings.
 #'
 #' @return invisibly returns all written files' addresses.
@@ -30,11 +32,11 @@
 #' @importFrom magrittr %>%
 #'
 
-partition_table <- function(.data, path, ...) {
+partition_table <- function(.data, dir, ...) {
 
-  if(!fs::is_dir(path)) {
+  if(!fs::is_dir(dir)) {
 
-    rlang::abort("Argument `path` must be a directory")
+    rlang::abort("Argument `dir` must be a directory")
 
   }
 
@@ -50,14 +52,14 @@ partition_table <- function(.data, path, ...) {
 
       readr::write_csv(
         x = .x,
-        file = file.path(path, .y))
+        file = file.path(dir, .y))
 
     }
   )
 
   purrr::map_chr(
     data_names,
-    ~ glue::glue("{path}/{.x}.csv")) %>%
+    ~ glue::glue("{dir}/{.x}.csv")) %>%
   invisible()
 
 }

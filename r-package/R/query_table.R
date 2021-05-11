@@ -32,7 +32,7 @@
 # @return
 #
 
-query_table <- function(
+rquery <- function(
   ...,
   table1,
   table2 = NULL,
