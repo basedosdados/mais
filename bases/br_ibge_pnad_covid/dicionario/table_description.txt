@@ -1,4 +1,4 @@
-Microdados da PNAD-COVID.
+Dicionário da base br-ibge-pnad-covid.
 
 
 Para saber mais acesse:
@@ -15,41 +15,28 @@ Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_cov
 Website: www.ricardodahis.com
 Email: rdahis@basedosdados.orgTratado por
 -----------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid/code
-Website: https://www.ibge.gov.br/estatisticas/investigacoes-experimentais/estatisticas-experimentais/27946-divulgacao-semanal-pnadcovid1?t=downloads
-Email: rdahis@basedosdados.org
-
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-- sigla_uf
+Nome: <nome>
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- pessoa
+- chave
 
 Colunas identificando linhas unicamente
 -------------------
-- upa
-- v1008
-- v1016
-- posest
-- a001
-- ano
-- mes
-- semana
+- id_tabela
+- nome_coluna
+- chave
+- cobertura_temporal
 
 Cobertura Temporal
 ------------------
-- 2020
 
 Cobertura Espacial
 ------------------
-- brasil
 
 Tratamento
 ----------
-Limpei os dados com algumas renomeações de variáveis e ordenamento para consistência.
+- Coletamos os dicionários do IBGE e formatamos com o padrão da Base dos Dados.
 
 Frequencia de Atualização
 -------------------------

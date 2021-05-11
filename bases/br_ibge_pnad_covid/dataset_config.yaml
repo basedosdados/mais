@@ -16,7 +16,7 @@ description: | # REQUIRED
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: instituto-brasileiro-de-geografia-e-estatistica
+organization: br-ibge
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
@@ -26,6 +26,7 @@ author:
 # Onde encontrar os dados originais e mais informações?
 website:
     - https://covid19.ibge.gov.br/pnad-covid/
+    - https://www.ibge.gov.br/estatisticas/investigacoes-experimentais/estatisticas-experimentais/27946-divulgacao-semanal-pnadcovid1
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
