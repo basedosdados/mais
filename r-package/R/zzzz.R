@@ -21,25 +21,28 @@
 
   cli::cli_h1("Base dos Dados: Universalizando o acesso a dados no Brasil")
 
-  cli::cli_h2("")
-  cli::cli_ul()
-  cli::cli_li("Site oficial: https://basedosdados.org/")
-  cli::cli_li("Documentação: https://basedosdados.github.io/mais/")
+
+  cli::cli_li(
+    c(
+      "Site oficial: https://basedosdados.org/",
+      "Documentação: https://basedosdados.github.io/mais/"))
   cli::cli_end()
 
 
   cli::cli_h2("Contatos")
   cli::cli_ul()
 
-  cli::cli_li("Discord: discord.gg/tuaFbAPeq5")
-  cli::cli_li("Twitter: @basedosdados")
-  cli::cli_li("Email: contato@basedosdados.org")
-  cli::cli_li("Telegram: t.me/joinchat/OKWc3RnClXnq2hq-8o0h_w")
-  cli::cli_li("Github: github.com/basedosdados")
-  cli::cli_li("LinkedIn: linkedin.com/company/base-dos-dados")
-  cli::cli_li("Newsletter: https://basedosdados.hubspotpagebuilder.com/assine-a-newsletter-da-base-dos-dados")
-  cli::cli_li("WhatsApp: https://chat.whatsapp.com/HXWgdFc1RmwCoblly5KPBZ")
-  cli::cli_li("YouTube: https://www.youtube.com/c/BasedosDados")
+  cli::cli_li(
+    c(
+      "Discord: discord.gg/tuaFbAPeq5",
+      "Twitter: @basedosdados",
+      "Email: contato@basedosdados.org",
+      "Telegram: t.me/joinchat/OKWc3RnClXnq2hq-8o0h_w",
+      "Github: github.com/basedosdados",
+      "LinkedIn: linkedin.com/company/base-dos-dados",
+      "Newsletter: https://basedosdados.hubspotpagebuilder.com/assine-a-newsletter-da-base-dos-dados",
+      "WhatsApp: https://chat.whatsapp.com/HXWgdFc1RmwCoblly5KPBZ",
+      "YouTube: https://www.youtube.com/c/BasedosDados"))
   cli::cli_end()
 
   cli::cli_h3(

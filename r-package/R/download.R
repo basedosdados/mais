@@ -144,12 +144,13 @@ read_sql <- function(
 }
 
 
-#' Read a table by id
+#' Read a table by name
 #'
 #'
 #'
 #'
-#' @param
+#' @param table a table name
+#' @param page_size a page_size parameter
 #'
 #'
 #'
@@ -157,6 +158,15 @@ read_sql <- function(
 #'
 #'
 
-read_table <- function() {}
+read_table <- function(table, page_size = 10000) {
+
+  bigrquery::as_bq_table(table) %>%
+    bigrquery::bq_table_download(
+      page_size = page_size,
+      bigint = "integer64")
+
+
+
+}
 
 

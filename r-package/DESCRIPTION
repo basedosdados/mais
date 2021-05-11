@@ -21,11 +21,12 @@ Imports:
     magrittr,
     readr,
     stringr,
-    dotenv,   
+    dotenv,
     bigrquery,
-    glue,   
+    glue,
     rlang,
-    writexl
+    writexl,
+    typed
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
