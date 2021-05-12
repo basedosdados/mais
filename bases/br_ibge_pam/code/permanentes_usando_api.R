@@ -79,7 +79,7 @@ unida_uf <- c("11_RO", "12_AC","13_AM","14_RR","15_PA","16_AP","17_TO","21_MA","
               "24_RN", "25_PB", "26_PE","27_AL","28_SE","29_BA","31_MG","32_ES","33_RJ","35_SP",
               "41_PR","42_SC","43_RS","50_MS", "51_MT","52_GO","53_DF")
 
-anos <- 1987:2003
+anos <- 1974:2019
 
 lista_anos <- expand_grid(anos,unida_uf)%>%pull(anos)%>%as.character
 lista_ufs <- expand_grid(anos,unida_uf)%>%pull(unida_uf)
