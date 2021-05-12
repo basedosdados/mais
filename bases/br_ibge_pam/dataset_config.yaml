@@ -8,7 +8,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pam
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    A base apresenta dados da Pesquisa Agrícola Municipal, promovida pelo IBGE. Ela contém dados sobre a produção agrícola de cada município brasileiro, desde 1974 até 2019, desagregado por cada produto. Na base há duas tabelas: uma para as lavouras temporárias, outra para lavouras consideradas permanentes, cada uma contendo informações sobre mais de 30 produtos. Cada uma das tabelas contém 8 variáveis sobre a produção agrícola, incluindo valor total da produção, área utilizada para plantio, área utilizada para colheita, entre outros. A base é relevante para melhor entender a economia rural do país em um nível de desagregação elevado, além de também ser útil para estudos sobre o uso da terra e até estudos de perspectiva histórica, considerando a extensão do período temporal que ela está disponível.
+    A base contém dados sobre a Pesquisa Agrícola Municipal. Ela possui dados a nível de cada produto cultivado em cada município desde 1974 até 2019. Os dados vêm da SIDRA, do IBGE e estão organizados em duas tabelas: uma para lavouras temporárias outra para permanentes. Os dados podem ser usados em diversas aplicações: desde estudos sobre economia agrícola até uso da terra a nível municipal.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
@@ -16,21 +16,20 @@ organization: instituto-brasileiro-de-geografia-e-estatistica # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
-    name: 
-    email: 
+    name: <nome>
+    email: <email>
 
 # Onde encontrar os dados originais e mais informações?
 website:
     - https://sidra.ibge.gov.br/pesquisa/pam/tabelas
-
+    - https://sidra.ibge.gov.br/Tabela/1612
+    - https://sidra.ibge.gov.br/Tabela/1613
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
     - agropecuaria
-    - economia
     - meio-ambiente
-    - territorio
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -39,10 +38,13 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - agrotoxico
-    - arroz
+    - uso da terra
     - fruticultura
+    - feijao
     - soja
+    - arroz
+    - produtividade agricola
+    - agua
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.

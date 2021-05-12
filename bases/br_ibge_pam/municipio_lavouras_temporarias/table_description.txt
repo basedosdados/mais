@@ -27,14 +27,14 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- municipio
 - ano
+- municipio
 - produto
 
 Colunas identificando linhas unicamente
 -------------------
-- id_municipio
 - ano
+- id_municipio
 - produto
 
 Cobertura Temporal
@@ -92,7 +92,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-O processo de tratamento dos dados consiste em adquirir as bases da SIDRA, repositório online do IBGE, e unir as diferentes bases adquiridas. Como há uma restrição de tamanho para buscar bases da SIDRA, a estratégia adotada foi pegar valores para uma variável por um período de aproximadamente 10 anos, conforme o sistema permitia. Os dados de todos os anos de cada uma das oito variáveis foram aglomerado por variável, e depois uma tabela única foi criada. Por fim, a tabela foi exportada de forma particionada para facilitar e diminuir os custos de uma eventual consulta.
+O tratamento dos dados consiste em buscar bases da SIDRA pela API sidraR a medida que o sistema permite, pois há restrições de tamanho. Os nomes das variáveis foram alterados, e algumas foram excluídas. A variável valor de produção teve seu valor alterado da seguinte forma: todas as moedas foram convertidas para sua correspondencia em reais, mas mantidas nominais, não ajustadas pela inflação.
 
 Frequencia de Atualização
 -------------------------
