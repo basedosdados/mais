@@ -4,7 +4,7 @@
 \alias{set_billing_id}
 \title{Define your Project Id}
 \usage{
-set_billing_id(billing_project_id)
+set_billing_id(billing_project_id = NULL)
 }
 \arguments{
 \item{billing_project_id}{a single character value containing the string. Vectors with longer lengths and non-vectors will trigger an error.}
