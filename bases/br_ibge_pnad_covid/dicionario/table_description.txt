@@ -1,0 +1,45 @@
+Dicionário da base br-ibge-pnad-covid.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ibge-pnad-covid
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: <nome>
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- chave
+
+Colunas identificando linhas unicamente
+-------------------
+- id_tabela
+- nome_coluna
+- chave
+- cobertura_temporal
+
+Cobertura Temporal
+------------------
+
+Cobertura Espacial
+------------------
+
+Tratamento
+----------
+- Coletamos os dicionários do IBGE e formatamos com o padrão da Base dos Dados.
+
+Frequencia de Atualização
+-------------------------
+mes
+
+

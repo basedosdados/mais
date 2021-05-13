@@ -1,9 +1,9 @@
 ---
 name: PTBR | Novos dados
 about: Sugira dados para serem adicionados ao projeto
-title: 'Base: <add nome, ex: Censo Escolar INEP>'
+title: '[dados] <add nome, ex: Censo Escolar INEP>'
 labels: data
-assignees:
+assignees: rdahis
 
 ---
 

@@ -1,7 +1,15 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: municipio # AUTO GENERATED
 dataset_id: br_bd_diretorios_brasil # AUTO GENERATED
 
-last_updated: 2020-11-21 # AUTO GENERATED
+url_ckan: https://basedosdados.org/dataset/br-bd-diretorios-brasil # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil # AUTO GENERATED
+
+version: 1.1.1
+
+last_updated: 2021-05-07 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -9,6 +17,13 @@ last_updated: 2020-11-21 # AUTO GENERATED
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
     Diretório ligando diversos códigos institucionais de municípios brasileiros: IBGE, Receita Federal, TSE, BCB, regiões, comarcas, região de saúde, etc.
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Ricardo Dahis # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code # REQUIRED
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -19,27 +34,28 @@ treated_by:
     website: <onde encontrar os dados tratados>
     email: rdahis@basedosdados.org
 
-# Quem está completando esse arquivo config?
-published_by:
-    name: Ricardo Dahis # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code # REQUIRED
-    website: www.ricardodahis.com
-    email: rdahis@basedosdados.org
-
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Fiz o cruzamento e checagem dos códigos (1) manualmente e (2) checando com string matching.
+    Fizemos o cruzamento e checagem dos códigos (1) manualmente e (2) checando com string matching.
 
 # Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
-data_update_frequency: recorrente # REQUIRED 
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: recorrente
 
-# Nível da observação: quais colunas identificam uma linha unicamente?
+# Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
-# Regras: minúsculo, sem acento, singular.
-# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level:
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
     - municipio
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_municipio
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -54,9 +70,8 @@ coverage_geo:
     - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
-# Opções: pre-1999, 2000, 2001, ..., 2019, 2020
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - 2015
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -88,31 +103,31 @@ columns: # REQUIRED
   
     -   
         name: id_municipio_tse
-        description: ID Município - TSE
+        description: ID Município - Tribunal Superior Eleitoral (TSE)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_municipio_rf
-        description: ID Município - Receita Federal
+        description: ID Município - Receita Federal (RF)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_municipio_bcb
-        description: ID Município - Banco Central do Brasil
+        description: ID Município - Banco Central do Brasil (BCB)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: municipio
-        description: Nome Município
+        description: Nome do Município
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: capital_uf
-        description: Capital da Unidade da Federação
+        description: Município é a Capital da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -185,13 +200,12 @@ columns: # REQUIRED
     -   
         name: id_uf
         description: ID Unidade da Federação - IBGE
-        description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: sigla_uf
-        description: Sigla Unidade da Federação
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -204,23 +218,5 @@ columns: # REQUIRED
     -   
         name: regiao
         description: Região
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: existia_1991
-        description: Existia em 1991
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: existia_2000
-        description: Existia em 2000
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: existia_2010
-        description: Existia em 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
