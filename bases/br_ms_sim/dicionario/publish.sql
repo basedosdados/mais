@@ -18,14 +18,11 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados-dev.br_ms_sim.municipio_causa_idade_genero_raca AS
+CREATE VIEW basedosdados-dev.br_ms_sim.dicionario AS
 SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(causa_basica AS STRING) causa_basica,
-SAFE_CAST(idade AS FLOAT64) idade,
-SAFE_CAST(genero AS STRING) genero,
-SAFE_CAST(raca_cor AS STRING) raca_cor,
-SAFE_CAST(numero_obitos AS INT64) numero_obitos
-from basedosdados-dev.br_ms_sim_staging.municipio_causa_idade_genero_raca as t
+SAFE_CAST(id_tabela AS STRING) id_tabela,
+SAFE_CAST(coluna AS STRING) coluna,
+SAFE_CAST(chave AS STRING) chave,
+SAFE_CAST(cobertura_temporal AS STRING) cobertura_temporal,
+SAFE_CAST(valor AS STRING) valor
+FROM basedosdados-dev.br_ms_sim_staging.dicionario AS t

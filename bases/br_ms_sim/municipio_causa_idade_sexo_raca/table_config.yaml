@@ -1,13 +1,13 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: municipio_causa_idade # AUTO GENERATED
+table_id: municipio_causa_idade_sexo_raca # AUTO GENERATED
 dataset_id: br_ms_sim # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-ms-sim # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim # AUTO GENERATED
 
-version: v1.2
+version: <vA.B> # REQUIRED
 
 last_updated: 2021-05-12 # AUTO GENERATED
 
@@ -16,7 +16,7 @@ last_updated: 2021-05-12 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Número de óbitos agregados dos microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério da Saúde ao nível município-causa-idade-ano.
+    Número de óbitos agregados dos microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério da Saúde ao nível município-causa-idade-sexo-raca-ano.
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -36,8 +36,8 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    - Agregamos o número de óbitos dos microdados por município-causa-idade-ano.
-    - Arredondamos idades <1 ano para 0.
+    - Agregamos o número de óbitos dos microdados por município-causa-idade-sexo-raca-ano.
+    - Arrendondamos idades entre 0 e 0.99999 ano para 0.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -51,18 +51,23 @@ data_update_frequency: 1 ano
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
     - municipio
-    - CID10
+    - causa CID10
     - idade
+    - sexo
+    - raca
     - ano
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - municipio
+    - id_municipio
     - causa_basica
     - idade
+    - sexo
+    - raca_cor
     - ano
+    - óbito
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -121,7 +126,7 @@ partitions: # REQUIRED
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
-
+  
     -   
         name: id_municipio
         description: ID Município - IBGE 7 Dígitos
@@ -137,6 +142,18 @@ columns: # REQUIRED
     -   
         name: idade
         description: Idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sexo
+        description: Sexo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: raca_cor
+        description: Raça ou Cor
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
