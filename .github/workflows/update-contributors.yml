@@ -1,8 +1,9 @@
 name: Update contributors
 
 on:
-  pull_request:
-    types: [closed]
+  - schedule:
+    # “At 00:00 on Sunday.” - check: https://crontab.guru/#0_0_*_*_0
+    - cron:  '0 0 * * 0'
 
 jobs:
   update-levels:
