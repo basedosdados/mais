@@ -14,6 +14,7 @@ from basedosdados import Storage
 from basedosdados import Dataset
 from basedosdados.upload.base import Base
 
+
 def decogind_base64(message):
     # decoding the base64 string
     base64_bytes = message.encode("ascii")
@@ -207,23 +208,6 @@ def sync_bucket(
     ref.copy_table(source_bucket_name=source_bucket_name)
 
 
-# def is_partitioned(table_config):
-#     ## check if the table are partitioned
-#     print("\n", "TABLE PARTITION")
-#     print(table_config["partitions"], "\n")
-
-#     partitions = table_config["partitions"]
-#     if partitions is None:
-#         return False
-
-#     elif isinstance(partitions, list):
-
-#         # check if any None inside list.
-#         # False if it is the case Ex: [None, 'partition']
-#         # True otherwise          Ex: ['partition1', 'partition2']
-#         return not any([item is None for item in partitions])
-
-
 def get_table_dataset_id():
     ### load the change files in PR || diff between PR and master
     changes = json.load(Path("/github/workspace/files.json").open("r"))
@@ -295,7 +279,6 @@ def push_table_to_bq(
         if_table_exists="replace",
         if_storage_data_exists="pass",
         if_table_config_exists="pass",
-#         partitioned=is_partitioned(table_config),
     )
     ### publish the table in prod bigquery
     tb.publish(if_exists="replace")
@@ -335,8 +318,8 @@ def main():
     create_config_tree(prod_base64, staging_base64, config_dict)
     ### find the dataset and tables of the PR
     dataset_table_ids = get_table_dataset_id()
-    
-    print(f'Tables found: {dataset_table_ids}')
+
+    print(f"Tables found: {dataset_table_ids}")
     ### iterate over each table in dataset of the PR
     for table_id in dataset_table_ids.keys():
         dataset_id = dataset_table_ids[table_id]["dataset_id"]
