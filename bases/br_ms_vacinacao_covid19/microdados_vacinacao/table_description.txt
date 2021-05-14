@@ -18,6 +18,10 @@ Email: rdahis@basedosdados.orgTratado por
 Nome: Ricardo Dahis
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19/code
 
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- sigla_uf
+
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - vacinação
