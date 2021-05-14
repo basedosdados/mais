@@ -89,7 +89,7 @@ def write_markdown(
     g = Github(username, token)
 
     repo = g.get_repo("basedosdados/mais")
-    file = repo.get_contents("CONTRIBUTORS.md", ref="issue76")
+    file = repo.get_contents("CONTRIBUTORS.md", ref="master")
 
     print(file.sha)
     print(text)
@@ -99,5 +99,5 @@ def write_markdown(
         message="update contributors content",
         content=text,
         sha=file.sha,
-        branch="issue76",
+        branch="master",
     )

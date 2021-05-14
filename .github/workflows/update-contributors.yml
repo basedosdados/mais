@@ -3,11 +3,7 @@ name: Update contributors
 on:
   pull_request:
     types: [closed]
-  pull_request_review:
-    types: [submitted]
-  push:
-    branches:
-        - issue76
+
 jobs:
   update-levels:
     runs-on: ubuntu-latest
