@@ -2,19 +2,33 @@ Diretório ligando diversos códigos institucionais de municípios brasileiros: 
 
 
 Para saber mais acesse:
-Website: 
-Github: https://github.com/basedosdados/mais/
+Website: https://basedosdados.org/dataset/br-bd-diretorios-brasil
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code
+Email: rdahis@basedosdados.org
+
+Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
 
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
+
 Cobertura Temporal
 ------------------
-- 2015
 
 Cobertura Espacial
 ------------------
@@ -22,21 +36,10 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Fiz o cruzamento e checagem dos códigos (1) manualmente e (2) checando com string matching.
+Fizemos o cruzamento e checagem dos códigos (1) manualmente e (2) checando com string matching.
 
 Frequencia de Atualização
 -------------------------
 recorrente
 
-Tratado por
------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code
-Email: rdahis@basedosdados.org
 
-Publicado por
--------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org

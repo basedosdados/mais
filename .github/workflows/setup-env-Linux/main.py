@@ -6,6 +6,7 @@ import json
 import toml
 import tomlkit
 import basedosdados as bd
+from basedosdados.upload.base import Base
 
 
 def decoding_base64(message):
@@ -99,7 +100,7 @@ def main():
     create_config_tree(env_prod, env_staging, config_dict)
 
     ### create templates at config path
-    bd.base.Base()._refresh_templates()
+    Base()._refresh_templates()
 
     print(
         "\n",
