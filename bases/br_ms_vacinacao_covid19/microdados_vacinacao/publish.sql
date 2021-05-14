@@ -19,7 +19,8 @@ TIPOS:
 
 */
 CREATE VIEW basedosdados-dev.br_ms_vacinacao_covid19.microdados_vacinacao AS
-SELECT 
+SELECT
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_documento AS STRING) id_documento,
 SAFE_CAST(id_paciente AS STRING) id_paciente,
 SAFE_CAST(id_estabelecimento AS STRING) id_estabelecimento,
