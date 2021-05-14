@@ -1,9 +1,9 @@
 ---
 name: PTBR | Bugs
-about: Crie um relatório para nos ajudar a melhorar
-title: ''
+about: Encontrou algum erro usando nosso pacote?
+title: '[infra] <Resumo do erro - indique a lingaguem usada (ex: Python, R)>'
 labels: bug
-assignees: fernandascovino
+assignees: JoaoCarabetta, d116626
 
 ---
 

@@ -1,14 +1,29 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: microdados # AUTO GENERATED
 dataset_id: br_ibge_pnad_covid # AUTO GENERATED
 
-last_updated: 2020-10-19 # AUTO GENERATED
+url_ckan: https://basedosdados.org/dataset/br-ibge-pnad-covid # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid # AUTO GENERATED
+
+version: v1.1
+
+last_updated: 2021-05-07 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Microdados da PNAD-COVID. Checar dicionários no Github para nomes e valores de variáveis.
+    Microdados da PNAD-COVID.
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Ricardo Dahis
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid/code # REQUIRED
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -19,33 +34,35 @@ treated_by:
     website: https://www.ibge.gov.br/estatisticas/investigacoes-experimentais/estatisticas-experimentais/27946-divulgacao-semanal-pnadcovid1?t=downloads
     email: rdahis@basedosdados.org
 
-# Quem está completando esse arquivo config?
-published_by:
-    name: Ricardo Dahis
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid/code # REQUIRED
-    website: www.ricardodahis.com
-    email: rdahis@basedosdados.org
-
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
     Limpei os dados com algumas renomeações de variáveis e ordenamento para consistência.
 
 # Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
 data_update_frequency: mes
 
-# Nível da observação: quais colunas identificam uma linha unicamente?
+# Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
-# Regras: minúsculo, sem acento, singular.
-# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level:
-    - UPA
-    - numero_domicilio
-    - numero_entrevista
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - pessoa
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - upa
+    - v1008
+    - v1016
     - posest
-    - ordem
+    - a001
     - ano
     - mes
+    - semana
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -60,7 +77,7 @@ coverage_geo:
     - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
-# Opções: pre-1999, 2000, 2001, ..., 2019, 2020
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
     - 2020
 
@@ -68,8 +85,8 @@ coverage_time:
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
-    - estado_abrev
+partitions: # REQUIRED  
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -101,7 +118,7 @@ columns: # REQUIRED
   
     -   
         name: capital
-        description: Capital do Estado (0/1)
+        description: Capital do Estado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -118,55 +135,49 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: UPA
+        name: upa
         description: Unidade Primária de Amostragem
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: numero_domicilio
+        name: v1008
         description: Número do Domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: numero_entrevista
-        description: Número da Entrevista
+        name: v1016
+        description: Número da Entrevista no Domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: ordem
-        description: Ordem da Entrevista
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: situacao
+        name: v1022
         description: Situação do Domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: tipo_area
+        name: v1023
         description: Tipo de Área
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: projecao_pop
+        name: v1030
         description: Projeção da população do mês (referência dia 15 do mês de referência da coleta)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: peso_pre_estrat
+        name: v1031
         description: Peso mensal com correção de não entrevista sem pós estratificação pela projeção de população
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: peso_pos_estrat
+        name: v1032
         description: Peso mensal com correção de não entrevista com pós estratificação pela projeção de população
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -178,775 +189,799 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: A001A
+        name: a001
+        description: Ordem da Entrevista
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: a001a
         description: Condição no Domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: A001B1
+        name: a001b1
         description: Dia de Nascimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: A001B2
+        name: a001b2
         description: Mês de Nascimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: A001B3
+        name: a001b3
         description: Ano de Nascimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: A002
+        name: a002
         description: Idade
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: A003
+        name: a003
         description: Sexo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: A004
-        description: Cor ou Raça
+        name: a004
+        description: Raça ou Cor
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: A005
+        name: a005
         description: Escolaridade
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: A006
+        name: a006
         description: Frequenta escola
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: A007
-        description: <descrição da coluna>
+        name: a006a
+        description: A escola / faculdade que frequenta é pública ou privada?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: A008
-        description: <descrição da coluna>
+        name: a006b
+        description: Você está tendo aulas presenciais?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: A009
-        description: <descrição da coluna>
+        name: a007
+        description: Na semana passada, _____ foram disponibilizadas atividades escolares para realizar em casa?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0011
-        description: <descrição da coluna>
+        name: a007a
+        description: Por que não realizou as atividades disponibilizadas na semana passada?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0012
-        description: <descrição da coluna>
+        name: a008
+        description: Na semana passada, em quantos dias _____ dedicou-se às atividades escolares?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0013
-        description: <descrição da coluna>
+        name: a009
+        description: Na semana passada, quanto tempo por dia ____ gastou fazendo as atividades escolares?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0014
-        description: <descrição da coluna>
+        name: b0011
+        description: Na semana passada teve febre?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0015
-        description: <descrição da coluna>
+        name: b0012
+        description: Na semana passada teve tosse?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0016
-        description: <descrição da coluna>
+        name: b0013
+        description: Na semana passada teve dor de garganta?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0017
-        description: <descrição da coluna>
+        name: b0014
+        description: Na semana passada teve dificuldade para respirar?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0018
-        description: <descrição da coluna>
+        name: b0015
+        description: Na semana passada teve dor de cabeça?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0019
-        description: <descrição da coluna>
+        name: b0016
+        description: Na semana passada teve dor no peito?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B00110
-        description: <descrição da coluna>
+        name: b0017
+        description: Na semana passada teve nausea?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B00111
-        description: <descrição da coluna>
+        name: b0018
+        description: Na semana passada teve nariz entupido ou escorrendo?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B00112
-        description: <descrição da coluna>
+        name: b0019
+        description: Na semana passada teve fadiga?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B00113
-        description: <descrição da coluna>
+        name: b00110
+        description: Na semana passada teve dor nos olhos?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B002
-        description: <descrição da coluna>
+        name: b00111
+        description: Na semana passada teve perda de cheiro ou sabor?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0031
-        description: <descrição da coluna>
+        name: b00112
+        description: Na semana passada teve dor muscular?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0032
-        description: <descrição da coluna>
+        name: b00113
+        description: Na semana passada teve diarreia?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0033
-        description: <descrição da coluna>
+        name: b002
+        description: Por causa disso, foi a algum estabelecimento de saude?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0034
-        description: <descrição da coluna>
+        name: b0031
+        description: Providência tomada para recuperar dos sintomas foi ficar em casa
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0035
-        description: <descrição da coluna>
+        name: b0032
+        description: Providência tomada para recuperar dos sintomas foi ligar para algum profissional de saúde
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0036
-        description: <descrição da coluna>
+        name: b0033
+        description: Providência tomada  para recuperar dos sintomas foi comprar e/ou tomar  remédio por conta própria
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0037
-        description: <descrição da coluna>
+        name: b0034
+        description: Providência tomada para recuperar dos sintomas foi comprar e/ou tomar remédio por orientação médica
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0041
-        description: <descrição da coluna>
+        name: b0035
+        description: Providência tomada para recuperar dos sintomas foi receber visita de algum profissional de saúde do SUS (equipe de saúde da família, agente comunitário, etc.)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0042
-        description: <descrição da coluna>
+        name: b0036
+        description: Providência tomada para recuperar dos sintomas foi receber visita de profissional de saúde particular 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0043
-        description: <descrição da coluna>
+        name: b0037
+        description: Providência tomada para recuperar dos sintomas foi outra
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0044
-        description: <descrição da coluna>
+        name: b0041
+        description: Local que buscou atendimento foi posto de saúde/Unidade básica de saúde /Equipe de Saúde da Família (médico, enfermeiro, técnico de enfermagem ou agente comunitário de saúde)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0045
-        description: <descrição da coluna>
+        name: b0042
+        description: Local que buscou atendimento foi pronto socorro do SUS/UPA
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0046
-        description: <descrição da coluna>
+        name: b0043
+        description: Local que buscou atendimento foi hospital do SUS
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B005
-        description: <descrição da coluna>
+        name: b0044
+        description: Local que buscou atendimento foi ambulatório ou consultório privado ou ligado às forças armadas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B006
-        description: <descrição da coluna>
+        name: b0045
+        description: Local que buscou atendimento foi pronto socorro privado ou ligado às forças armadas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B007
-        description: <descrição da coluna>
+        name: b0046
+        description: Local que buscou atendimento foi hospital privado ou ligado às forças armadas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B008
-        description: <descrição da coluna>
+        name: b005
+        description: Ao procurar o hospital, teve que ficar internado por um dia ou mais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B009A
-        description: <descrição da coluna>
+        name: b006
+        description: Durante a internação, foi sedado, entubado e colocado em respiração artificial com ventilador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B009B
-        description: <descrição da coluna>
+        name: b007
+        description: Tem algum plano de saúde médico, seja particular, de empresa ou de órgão público
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B009C
-        description: <descrição da coluna>
+        name: b008
+        description: O(A) Sr(a) fez algum teste para saber se estava infectado(a) pelo coronavírus? 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B009D
-        description: <descrição da coluna>
+        name: b009a
+        description: Fez o exame coletado com cotonete na boca e/ou nariz (SWAB)? 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B009E
-        description: <descrição da coluna>
+        name: b009b
+        description: Qual o resultado?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B009F
-        description: <descrição da coluna>
+        name: b009c
+        description: Fez o exame de coleta de sangue através de furo no dedo?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0101
-        description: <descrição da coluna>
+        name: b009d
+        description: Qual o resultado?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0102
-        description: <descrição da coluna>
+        name: b009e
+        description: Fez o exame de coleta de sangue através da veia da braço?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0103
-        description: <descrição da coluna>
+        name: b009f
+        description: Qual o resultado?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0104
-        description: <descrição da coluna>
+        name: b0101
+        description: Algum médico já lhe deu o diagnóstico de diabetes?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0105
-        description: <descrição da coluna>
+        name: b0102
+        description: Algum médico já lhe deu o diagnóstico de hipertensão?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B0106
-        description: <descrição da coluna>
+        name: b0103
+        description: Algum médico já lhe deu o diagnóstico de asma/bronquite/enfisema/doenças respiratória crônica ou doença de pulmão?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: B011
-        description: <descrição da coluna>
+        name: b0104
+        description: Algum médico já lhe deu o diagnóstico de doenças do coração (infarto, angina, insuficiência cardiáca, arritima)?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C001
-        description: <descrição da coluna>
+        name: b0105
+        description: Algum médico já lhe deu o diagnóstico de depressão?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C002
-        description: <descrição da coluna>
+        name: b0106
+        description: Algum médico já lhe deu o diagnóstico de câncer?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C003
-        description: <descrição da coluna>
+        name: b011
+        description: Na semana passada, devido à pandemia do Coronavírus, em que medida o(a) Sr(a) restringiu o contato com as pessoas? 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C004
-        description: <descrição da coluna>
+        name: c001
+        description: Na semana passada, por pelo menos uma hora, trabalhou ou fez algum bico?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C005
-        description: <descrição da coluna>
+        name: c002
+        description: Na semana passada, estava temporariamente afastado de algum trabalho?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C0051
-        description: <descrição da coluna>
+        name: c003
+        description: Qual o principal motivo deste afastamento temporário?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C0052
-        description: <descrição da coluna>
+        name: c004
+        description: Continuou a ser remunerado (mesmo que parcialmente) por esse trabalho
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C0053
-        description: <descrição da coluna>
+        name: c005
+        description: Há quanto tempo está afastado desse trabalho?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C006
-        description: <descrição da coluna>
+        name: c0051
+        description: tempo que estava afastado (De 1 mês a menos de 1 ano)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C007
-        description: <descrição da coluna>
+        name: c0052
+        description: tempo que estava afastado (De 1 ano a menos de 2 anos)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C007A
-        description: <descrição da coluna>
+        name: c0053
+        description: tempo que estava afastado (de 02 anos a 98 anos)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C007B
-        description: <descrição da coluna>
+        name: c006
+        description: Tem mais de um trabalho
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C007C
-        description: <descrição da coluna>
+        name: c007
+        description: No trabalho (único ou principal) que tinha nessa semana, era
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C007D
-        description: <descrição da coluna>
+        name: c007a
+        description: Esse trabalho era na área
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C007E
-        description: <descrição da coluna>
+        name: c007b
+        description: Tem carteria de trabalho assinada ou é funcionário público estatutário?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C007E1
-        description: <descrição da coluna>
+        name: c007c
+        description: Que tipo de trabalho, cargo ou função você realiza no seu trabalho (único ou principal)?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C007E2
-        description: <descrição da coluna>
+        name: c007d
+        description: Qual é a principal atividade do local ou empresa em que você trabalha?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C007F
-        description: <descrição da coluna>
+        name: c007e
+        description: Na semana passada, quantos empregados trabalhavam nesse negócio/empresa que ... tinha ?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C008
-        description: <descrição da coluna>
+        name: c007e1
+        description: 1 a 5 empregados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C009
-        description: <descrição da coluna>
+        name: c007e2
+        description: 6 a 10 empregados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C009A
-        description: <descrição da coluna>
+        name: c007f
+        description: No trabalho (único ou principal) que tinha nesa semana, o(a) Sr(a) estava com o contrato de trabalho suspenso?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C010
-        description: <descrição da coluna>
+        name: c008
+        description: Quantas horas, por semana, normalmente trabalhava?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C0101
-        description: <descrição da coluna>
+        name: c009
+        description: Quantas horas, na semana passada, de fato trabalhou?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C01011
-        description: <descrição da coluna>
+        name: c009a
+        description: Na semana passada, o(a) Sr(a) gostaria de ter trabalhado mais horas do que as de fato trabalhadas?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C01012
-        description: <descrição da coluna>
+        name: c010
+        description: Quanto recebia (ou retirava) normalmente em todos os seus trabalhos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C0102
-        description: <descrição da coluna>
+        name: c0101
+        description: Recebia/retirava normalmente em dinheiro
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C01021
-        description: <descrição da coluna>
+        name: c01011
+        description: Número da faixa do rendimento/retirada em dinheiro
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C01022
-        description: <descrição da coluna>
+        name: c01012
+        description: Valor em dinheiro
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C0103
-        description: <descrição da coluna>
+        name: c0102
+        description: Recebia normalmente em produtos e mercadorias
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C0104
-        description: <descrição da coluna>
+        name: c01021
+        description: Número da faixa do rendimento/retirada em produtos e mercadorias
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C011A
-        description: <descrição da coluna>
+        name: c01022
+        description: Valor em produtos e mercadorias
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C011A1
-        description: <descrição da coluna>
+        name: c0103
+        description: Recebia normalmente somente em benefícios
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C011A11
-        description: <descrição da coluna>
+        name: c0104
+        description: Era não remunerado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C011A12
-        description: <descrição da coluna>
+        name: c011a
+        description: Quanto recebia (ou retirava) normalmente em todos os seus trabalhos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C011A2
-        description: <descrição da coluna>
+        name: c011a1
+        description: Recebia/retirava normalmente em dinheiro
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C011A21
-        description: <descrição da coluna>
+        name: c011a11
+        description: Número da faixa do rendimento/retirada em dinheiro
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C011A22
-        description: <descrição da coluna>
+        name: c011a12
+        description: Valor em dinheiro
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C012
-        description: <descrição da coluna>
+        name: c011a2
+        description: Recebia normalmente em produtos e mercadorias
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C013
-        description: <descrição da coluna>
+        name: c011a21
+        description: Número da faixa do rendimento/retirada em produtos e mercadorias
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C014
-        description: <descrição da coluna>
+        name: c011a22
+        description: Valor em produtos e mercadorias
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C015
-        description: <descrição da coluna>
+        name: c012
+        description: Na maior parte do tempo, na semana passada, esse trabalho (único ou principal) foi exercido no mesmo local em que costuma trabalhar?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C016
-        description: <descrição da coluna>
+        name: c013
+        description: Na semana passada, o(a) Sr(a) estava em trabalho remoto (home office ou teletrabalho)?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: C017A
-        description: <descrição da coluna>
+        name: c014
+        description: O(A) Sr(a) contribui para o INSS?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0011
-        description: <descrição da coluna>
+        name: c015
+        description: Na semana passada ___ tomou alguma providência efetiva para conseguir trabalho?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0013
-        description: <descrição da coluna>
+        name: c016
+        description: Qual o principal motivo de não ter procurado trabalho na semana passada?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0021
-        description: <descrição da coluna>
+        name: c017a
+        description: Embora você não tenha procurado trabalho, gostaria de ter trabalhado na semana passada?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0023
-        description: <descrição da coluna>
+        name: d0011
+        description: Rendimento recebido de aposentadoria e pensão por todos os moradores
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0031
-        description: <descrição da coluna>
+        name: d0013
+        description: Somatório dos valores recebidos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0033
-        description: <descrição da coluna>
+        name: d0021
+        description: Rendimento de pensão alimentícia, doação ou mesada em dinheiro de pessoa que não morava no domicílio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0041
-        description: <descrição da coluna>
+        name: d0023
+        description: Somatório dos valores recebidos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0043
-        description: <descrição da coluna>
+        name: d0031
+        description: Rendimentos de Programa Bolsa Família
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0051
-        description: <descrição da coluna>
+        name: d0033
+        description: Somatório dos valores recebidos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0053
-        description: <descrição da coluna>
+        name: d0041
+        description: No mês de ... (mês de referência), ... recebeu rendimentos de Benefício Assistencial de Prestação Continuada – BPC-LOAS?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0061
-        description: <descrição da coluna>
+        name: d0043
+        description: Somatório dos valores recebidos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0063
-        description: <descrição da coluna>
+        name: d0051
+        description: Auxilios emergenciais relacionados ao coronavirus
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0071
-        description: <descrição da coluna>
+        name: d0053
+        description: Somatório dos valores recebidos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: D0073
-        description: <descrição da coluna>
+        name: d0061
+        description: Seguro desemprego
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: E001
-        description: <descrição da coluna>
+        name: d0063
+        description: Somatório dos valores recebidos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: E0021
-        description: <descrição da coluna>
+        name: d0071
+        description: Outros rendimentos, como aluguel, arrendamento, pervidencia privada, bolsa de estudos, rendimentos de aplicação financeira etc.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: E0022
-        description: <descrição da coluna>
+        name: d0073
+        description: Somatório dos valores recebidos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: E0023
-        description: <descrição da coluna>
+        name: e001
+        description: Durante o período da pandemia alguém deste domicílio solicitou algum empréstimo?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: E0024
-        description: <descrição da coluna>
+        name: e0021
+        description: Este empréstimo foi adquirido com banco ou financeira
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: F001
-        description: <descrição da coluna>
+        name: e0022
+        description: Este empréstimo foi adquirido com parente ou amigo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: F0021
-        description: <descrição da coluna>
+        name: e0023
+        description: Este empréstimo foi adquirido com empregados ou patrão
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: F0022
-        description: <descrição da coluna>
+        name: e0024
+        description: Este empréstimo foi adquirido com outro local ou pessoa
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: F006
-        description: <descrição da coluna>
+        name: f001
+        description: Este domicílio é
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: F0061
-        description: <descrição da coluna>
+        name: f0021
+        description: Qual foi o valor mensal do aluguel pago, ou que deveria ter sido pago, no mês de referência?
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: F002A1
-        description: <descrição da coluna>
+        name: f0022
+        description: Número da faixa do aluguel pago
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: F002A2
-        description: <descrição da coluna>
+        name: f002a1
+        description: No seu domicílio há os seguintes itens básicos de limepeza e proteção - sabão ou detergente
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: F002A3
-        description: <descrição da coluna>
+        name: f002a2
+        description: No seu domicílio há os seguintes itens básicos de limepeza e proteção - álcool 70% ou superior (gel ou líquido)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: F002A4
-        description: <descrição da coluna>
+        name: f002a3
+        description: No seu domicílio há os seguintes itens básicos de limepeza e proteção - máscaras
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: F002A5
-        description: <descrição da coluna>
+        name: f002a4
+        description: No seu domicílio há os seguintes itens básicos de limepeza e proteção - luvas descartáveis
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: estado_abrev
-        description: Estao Abreviado
+        name: f002a5
+        description: No seu domicílio há os seguintes itens básicos de limepeza e proteção - água sanitária ou desinfetante
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: f0061
+        description: Quem respondeu ao questionário?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: f006
+        description: Número de ordem do morador que prestou as informações
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.

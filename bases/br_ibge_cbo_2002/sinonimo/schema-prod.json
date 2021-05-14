@@ -1,0 +1,1 @@
+[{"name": "cbo_2002", "description": "Classifica\u00e7\u00e3o Brasileira de Ocupa\u00e7\u00f5es (CBO) 2002", "is_in_staging": true, "is_partition": false, "type": "STRING", "mode": "NULLABLE"}, {"name": "sinonimo", "description": "Sin\u00f4nimo da Descri\u00e7\u00e3o", "is_in_staging": true, "is_partition": false, "type": "STRING", "mode": "NULLABLE"}]

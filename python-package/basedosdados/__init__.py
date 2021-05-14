@@ -1,3 +1,8 @@
+import sys
+import os
+
+sys.path.append(os.getcwd() + "/python-package")
+
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.table import Table

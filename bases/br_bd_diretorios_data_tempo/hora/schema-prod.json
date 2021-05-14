@@ -1,0 +1,1 @@
+[{"name": "hora", "description": "Hora", "is_in_staging": true, "is_partition": false, "type": "INTEGER", "mode": "NULLABLE"}]

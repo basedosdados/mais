@@ -1,9 +1,9 @@
 ---
 name: EN | New data
 about: Request new data to be added to the project
-title: 'Data: <add name>'
+title: '[data] <add name, ex: US Census Data>'
 labels: data
-assignees:
+assignees: rdahis
 
 ---
 
