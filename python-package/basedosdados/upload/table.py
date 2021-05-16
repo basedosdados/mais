@@ -6,7 +6,7 @@ from copy import deepcopy
 from google.cloud import bigquery
 import datetime
 
-import ruamel_yaml
+import ruamel.yaml
 import requests
 from io import StringIO
 import pandas as pd
@@ -166,7 +166,7 @@ class Table(Base):
         Args:
             columns_config_url (str): google sheets URL.
         """
-        ruamel = ruamel_yaml.YAML()
+        ruamel = ruamel.yaml.YAML()
         ruamel.preserve_quotes = True
         with open(self.table_folder / "table_config.yaml") as fp:
             config_yaml = ruamel.load(fp)
