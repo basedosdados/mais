@@ -169,8 +169,9 @@ class Table(Base):
         ruamel = ryaml.YAML()
         ruamel.preserve_quotes = True
         ruamel.indent(mapping=4, sequence=6, offset=4)
-        with open(self.table_folder / "table_config.yaml") as fp:
-            table_config_yaml = ruamel.load(fp)
+        table_config_yaml = ruamel.load(
+            (self.table_folder / "table_config.yaml").open()
+        )
 
         df = self._sheet_to_df(columns_config_url)
         columns_parameters = zip(df["coluna"].tolist(), df["descricao"].tolist())
