@@ -18,11 +18,12 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+
 CREATE VIEW basedosdados-dev.br_ms_vacinacao_covid19.microdados_estabelecimento AS
 SELECT 
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(id_estabelecimento AS STRING) id_estabelecimento,
 SAFE_CAST(razao_social AS STRING) razao_social,
-SAFE_CAST(nome_fantasia AS STRING) nome_fantasia
-FROM basedosdados-dev.br_ms_vacinacao_covid19_staging.microdados_estabelecimento AS t
+SAFE_CAST(nome_fantasia AS STRING) nome_fantasia,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf
+from basedosdados-dev.br_ms_vacinacao_covid19_staging.microdados_estabelecimento as t

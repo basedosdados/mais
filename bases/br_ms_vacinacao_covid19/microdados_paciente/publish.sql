@@ -18,16 +18,17 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+
 CREATE VIEW basedosdados-dev.br_ms_vacinacao_covid19.microdados_paciente AS
 SELECT 
 SAFE_CAST(id_paciente AS STRING) id_paciente,
-SAFE_CAST(idade AS INT64) idade,
-SAFE_CAST(data_nascimento AS DATE) data_nascimento,
+SAFE_CAST(idade AS STRING) idade,
+SAFE_CAST(data_nascimento AS STRING) data_nascimento,
 SAFE_CAST(sexo AS STRING) sexo,
 SAFE_CAST(raca_cor AS STRING) raca_cor,
 SAFE_CAST(id_municipio_endereco AS STRING) id_municipio_endereco,
 SAFE_CAST(pais_endereco AS STRING) pais_endereco,
-SAFE_CAST(sigla_uf_endereco AS STRING) sigla_uf_endereco,
 SAFE_CAST(cep_endereco AS STRING) cep_endereco,
-SAFE_CAST(nacionalidade AS STRING) nacionalidade
+SAFE_CAST(nacionalidade AS STRING) nacionalidade,
+SAFE_CAST(sigla_uf_endereco AS STRING) sigla_uf_endereco
 from basedosdados-dev.br_ms_vacinacao_covid19_staging.microdados_paciente as t
