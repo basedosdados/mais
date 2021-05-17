@@ -7,7 +7,7 @@ dataset_id: br_ms_vacinacao_covid19 # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-ms-vacinacao-covid19 # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19 # AUTO GENERATED
 
-version: v1.0
+version: v1.0.1
 
 last_updated: 2021-05-17 # AUTO GENERATED
 
