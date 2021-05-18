@@ -3,7 +3,8 @@ name: Python package
 on:
   push:
     paths:
-    - bases/**
+    - bases/**/**.yaml
+    - bases/**/**.sql
 
 jobs:
   get_changes:
