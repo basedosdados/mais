@@ -8,7 +8,7 @@ on:
     - bases/**
 
 jobs:
-  get-changes:
+  get_changes:
     runs-on: ubuntu-latest
     steps:
 
