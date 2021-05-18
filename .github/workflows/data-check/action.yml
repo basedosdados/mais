@@ -1,0 +1,6 @@
+name: "Data Check"
+description: "Checks data quality"
+author: "Base dos Dados"
+runs:
+  using: "docker"
+  image: "Dockerfile"
