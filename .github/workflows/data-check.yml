@@ -2,8 +2,6 @@ name: Python package
 
 on:
   push:
-    branches:
-    - check-data
     paths:
     - bases/**
 
