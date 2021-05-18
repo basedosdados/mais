@@ -1,0 +1,43 @@
+---
+
+- name: Check if {{ table_id }} table exists
+  error: {{ table_id }} does not exist 
+  query: |
+    SELECT "{{ table_id }}" NOT IN (
+        SELECT `table_name`
+        FROM `basedosdados-dev.{{ dataset_id }}.INFORMATION_SCHEMA.TABLES`
+    ) AS failure
+
+- name: Check if select query in {{ table_id }} works
+  error: {{ table_id }} select query not working
+  query: |
+    SELECT NOT EXISTS (
+        SELECT * 
+        FROM `basedosdados-dev.{{ dataset_id }}.{{ table_id }}`
+    ) as failure
+
+{% for column in columns %}
+{% if column.is_in_staging %}
+- name: Check if {{ column.name }} column is null
+  error: {{column.name}} column is null
+  query: |
+    SELECT NOT EXISTS (
+        SELECT `{{ column.name }}`
+        FROM `basedosdados-dev.{{ dataset_id }}.{{ table_id }}`
+        WHERE `{{ column.name }}` IS NOT NULL
+        LIMIT 1
+    ) AS failure
+{% endif %}
+{% endfor %}
+
+{% for primary_key in primary_keys %}
+- name: Check if {{ primary_key }} has unique values
+  error: {{ primary_key }} has duplicated values
+  query: |
+    SELECT EXISTS (
+        SELECT `{{ primary_key }}`, COUNT(*)
+        FROM `basedosdados-dev.{{ dataset_id }}.{{ table_id }}`
+        GROUP BY `{{ primary_key }}`
+        HAVING COUNT(*) > 1
+    ) as failure
+{% endfor %}
