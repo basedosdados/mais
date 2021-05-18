@@ -2,18 +2,18 @@ source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
 table_id: microdados # AUTO GENERATED
-dataset_id: br_ms_sim # AUTO GENERATED 
+dataset_id: br_ms_sim # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-ms-sim # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim # AUTO GENERATED
 
-version: v1.1
+version: v1.2
 
-last_updated: 2021-03-10 # AUTO GENERATED
+last_updated: 2021-05-12 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
-# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de 
-# como usar os dados. 
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
     Microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério da Saúde.
@@ -34,10 +34,10 @@ published_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    - Limpamos as strings.
-    - Substituímos valores numéricos por suas strings.
+    - Limpamos os dados para consistência.
     - Corrigimos os id_municipio todos para 7 dígitos entre anos.
-    - Trocamos a ordem de variáveis, etc.
+    - Trocamos a ordem de variáveis.
+    - Criamos um dicionário completo.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -101,8 +101,8 @@ coverage_time:
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
-    - ano
+partitions: # REQUIRED  
+    - ano  
     - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
@@ -129,7 +129,7 @@ columns: # REQUIRED
   
     -   
         name: causa_basica
-        description: Causa Básica
+        description: Causa Básica (CID-10)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -152,7 +152,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: data_nasc
+        name: data_nascimento
         description: Data de Nascimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -164,8 +164,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: genero
-        description: Gênero
+        name: sexo
+        description: Sexo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -194,31 +194,31 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: codigo_bairro_resid
+        name: codigo_bairro_residencia
         description: Código do Bairro de Residência
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_municipio_resid
+        name: id_municipio_residencia
         description: ID Município de Residência - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: local_ocor
+        name: local_ocorrencia
         description: Local de Ocorrência
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: codigo_bairro_ocor
+        name: codigo_bairro_ocorrencia
         description: Código do Bairro de Ocorrência
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_municipio_ocor
+        name: id_municipio_ocorrencia
         description: ID Município de Ocorrência - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -242,13 +242,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: qtde_filhos_vivos
+        name: quantidade_filhos_vivos
         description: Quantidade de Filhos Vivos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: qtde_filhos_mortos
+        name: quantidade_filhos_mortos
         description: Quantidade de Filhos Mortos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -285,7 +285,7 @@ columns: # REQUIRED
   
     -   
         name: peso
-        description: Peso (gramas)
+        description: Peso (g)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -374,7 +374,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_estab
+        name: codigo_estabelecimento
         description: Código do Estabelecimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -382,12 +382,6 @@ columns: # REQUIRED
     -   
         name: atestante
         description: Indica se o médico que assina atendeu o paciente
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_assinatura
-        description: Tipo da Assinatura
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -440,26 +434,20 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: tipo_obito_ocor
+        name: tipo_obito_ocorrencia
         description: Tipo de Ocorrência do Óbito
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: tipo_morte_ocor
+        name: tipo_morte_ocorrencia
         description: Tipo de Ocorrência da Morte
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: numero_DN
-        description: Número da Declaração de Nascido Vivo
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_cadastro_inf
-        description: Data do Cadastro Inf
+        name: data_cadastro_informacao
+        description: Data do Cadastro da Informação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -470,7 +458,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_municipio_SVO_IML
+        name: id_municipio_svo_iml
         description: ID Município SVO ou IML - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -482,8 +470,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: data_recoriga
-        description: Data de Recebimento Original A
+        name: data_recebimento_original_a
+        description: Data de Recebimento do Original A
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -494,38 +482,14 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: status_DO_epidem
+        name: status_do_epidem
         description: Status de DO Epidemiológica
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: status_DO_nova
+        name: status_do_nova
         description: Status de DO Nova
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio_cartorio
-        description: ID Município Cartório - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: codigo_cartorio
-        description: Código do Cartório
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: numero_registro_cartorio
-        description: Número de Registro do Cartório
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_registro_cartorio
-        description: Data de Registro do Cartório
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -572,12 +536,6 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: exp_diferenca_data
-        description: Exp. Diferença de Datas
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
         name: diferenca_data
         description: Diferença Entre a Data de Óbito e Data do Recebimento Original da DO
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
@@ -608,13 +566,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: descricao_estab
+        name: descricao_estabelecimento
         description: Descrição do Estabelecimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: CRM
+        name: crm
         description: Número no Conselho Regional de Medicina (CRM)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -644,7 +602,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: versao_SCB
+        name: versao_scb
         description: Versão do Seletor de Causa Básica
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -680,14 +638,14 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: numero_dias_inf
-        description: Número de Dias Inf.
+        name: numero_dias_informacao
+        description: Número de Dias Informação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: fontes_inf
-        description: Fontes Inf.
+        name: fontes_informacao
+        description: Fontes Informação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -696,13 +654,13 @@ columns: # REQUIRED
         description: Alt. Causa
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-
+  
     -   
         name: ano
         description: Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
-        
+  
     -   
         name: sigla_uf
         description: Sigla da Unidade da Federação
