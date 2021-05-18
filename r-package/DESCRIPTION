@@ -19,7 +19,7 @@ Imports:
     googleAuthR,
     cli,
     magrittr,
-    readr,
+    readr (>= 1.4.0),
     stringr,
     dotenv,
     bigrquery,
