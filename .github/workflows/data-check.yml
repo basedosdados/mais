@@ -2,11 +2,9 @@ name: Python package
 
 on:
   push:
-    branches:
-      - check-data
-    # paths:
-    #   - bases/**.yaml
-    #   - bases/**.sql
+    paths:
+      - bases/**
+
 jobs:
   get-changes:
     runs-on: ubuntu-latest
