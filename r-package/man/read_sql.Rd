@@ -2,22 +2,22 @@
 % Please edit documentation in R/download.R
 \name{read_sql}
 \alias{read_sql}
-\title{Query out datalake and get results in a tibble}
+\title{Query our datalake and get results in a tibble}
 \usage{
-read_sql(query, billing_project_id = get_billing_id(), page_size = 1000)
+read_sql(query, billing_project_id = get_billing_id(), page_size = 10000)
 }
 \arguments{
 \item{query}{a string containing a valid SQL query.}
 
 \item{billing_project_id}{a string containing your billing project id. If you've run \code{set_billing_id} then feel free to leave this empty.}
 
-\item{page_size}{\code{bigrquery} internal, how many rows per page should there be.}
+\item{page_size}{\code{bigrquery} internal, how many rows per page should there be. Defaults to 10000, consider increasing if running into performance issues or big queries.}
 }
 \value{
 A tibble containing the query's output.
 }
 \description{
-Query out datalake and get results in a tibble
+Query our datalake and get results in a tibble
 }
 \examples{
 

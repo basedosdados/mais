@@ -36,7 +36,7 @@
 #' @importFrom rlang abort
 #' @importFrom magrittr %>%
 #' @importFrom stringr str_detect
-#' @importFrom fs is_file
+#' @importFrom fs is_file dir_exists
 #' @export
 #'
 #'
@@ -54,6 +54,12 @@ download <- function(
 
   }
 
+  if(!fs::dir_exists(path)) {
+
+    rlang::abort("Pass an existing directory to the `path` argument.")
+
+  }
+
   if(!rlang::is_character(query)) {
 
     rlang::abort("`query` argument must be a string.")
@@ -65,7 +71,7 @@ download <- function(
     query = query) %>%
     bigrquery::bq_table_download(
       page_size = page_size,
-      bigint = "integer64") %>%
+      bigint = "integer") %>%
     readr::write_csv(file = path)
 
   invisible(path)
@@ -140,7 +146,7 @@ read_sql <- function(
     query = query) %>%
     bigrquery::bq_table_download(
       page_size = page_size,
-      bigint = "integer64")
+      bigint = "integer")
 
 }
 
@@ -159,7 +165,7 @@ read_sql <- function(
 #'
 #'
 
-read_table <- function(table, page_size = 10000, billing_id = ) {
+read_table <- function(table, page_size = 10000, billing_id = get_billing_id()) {
 
 
 
@@ -167,7 +173,7 @@ read_table <- function(table, page_size = 10000, billing_id = ) {
   bigrquery::as_bq_table(table) %>%
     bigrquery::bq_table_download(
       page_size = page_size,
-      bigint = "integer64")
+      bigint = "integer")
 
 
 
@@ -193,7 +199,7 @@ read_table <- function(table, page_size = 10000, billing_id = ) {
 #'
 #'
 
-dictionary <- function(dict, billing_ig = get_billing_id()) {
+dictionary <- function(dict, billing_id = get_billing_id()) {
 
 
   # TODO: adicionar uma validação do nome do dicionário
@@ -211,7 +217,7 @@ dictionary <- function(dict, billing_ig = get_billing_id()) {
         ")) %>%
     bigrquery::bq_table_download(
       page_size = 10000,
-      bigint = "integer64")
+      bigint = "integer")
 
 
 
