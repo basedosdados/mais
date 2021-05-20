@@ -177,7 +177,7 @@ class Table(Base):
         ruamel.preserve_quotes = True
         ruamel.indent(mapping=4, sequence=6, offset=4)
         table_config_yaml = ruamel.load(
-            (self.table_folder / "table_config.yaml").open()
+            (self.table_folder / "table_config.yaml").open(encoding="utf-8")
         )
         if (
             "edit#gid=" not in columns_config_url
