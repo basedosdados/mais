@@ -172,7 +172,11 @@ class Table(Base):
         table_config_yaml = ruamel.load(
             (self.table_folder / "table_config.yaml").open()
         )
-
+        if "edit#gid=" not in columns_config_url:
+            raise Exception(
+                "The Google sheet url not in correct format."
+                "The url must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>"
+            )
         df = self._sheet_to_df(columns_config_url)
         columns_parameters = zip(df["coluna"].tolist(), df["descricao"].tolist())
         for name, description in columns_parameters:

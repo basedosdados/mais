@@ -163,6 +163,11 @@ def cli_table():
     default="raise",
     help="[raise|replace|pass] actions if table config files already exist",
 )
+@click.option(
+    "--columns_config_url",
+    default=None,
+    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>",
+)
 @click.pass_context
 def init_table(
     ctx,
@@ -171,12 +176,14 @@ def init_table(
     data_sample_path,
     if_folder_exists,
     if_table_config_exists,
+    columns_config_url,
 ):
 
     t = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).init(
         data_sample_path=data_sample_path,
         if_folder_exists=if_folder_exists,
         if_table_config_exists=if_table_config_exists,
+        columns_config_url=columns_config_url,
     )
 
     click.echo(
@@ -220,6 +227,11 @@ def init_table(
     default="raise",
     help="[raise|replace|pass] actions if table config files already exist",
 )
+@click.option(
+    "--columns_config_url",
+    default=None,
+    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>",
+)
 @click.pass_context
 def create_table(
     ctx,
@@ -231,6 +243,7 @@ def create_table(
     force_dataset,
     if_storage_data_exists,
     if_table_config_exists,
+    columns_config_url,
 ):
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).create(
@@ -240,6 +253,7 @@ def create_table(
         force_dataset=force_dataset,
         if_storage_data_exists=if_storage_data_exists,
         if_table_config_exists=if_table_config_exists,
+        columns_config_url=columns_config_url,
     )
 
     click.echo(
@@ -268,6 +282,31 @@ def update_table(ctx, dataset_id, table_id, mode):
     click.echo(
         click.style(
             f"All tables `{dataset_id}*.{table_id}` were updated in BigQuery",
+            fg="green",
+        )
+    )
+
+
+@cli_table.command(
+    name="update_columns", help="Update columns descriptions in tables_config.yaml "
+)
+@click.argument("dataset_id")
+@click.argument("table_id")
+@click.option(
+    "--columns_config_url",
+    default=None,
+    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>",
+)
+@click.pass_context
+def update_columns(ctx, dataset_id, table_id, columns_config_url):
+
+    Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).update_columns(
+        columns_config_url=columns_config_url,
+    )
+
+    click.echo(
+        click.style(
+            f"All columns descriptions `{dataset_id}*.{table_id}` were updated in table_config.yaml",
             fg="green",
         )
     )
