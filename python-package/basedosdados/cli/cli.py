@@ -166,7 +166,7 @@ def cli_table():
 @click.option(
     "--columns_config_url",
     default=None,
-    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>",
+    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. The sheet must contain the column name: 'coluna' and column description: 'descricao'.",
 )
 @click.pass_context
 def init_table(
@@ -230,7 +230,7 @@ def init_table(
 @click.option(
     "--columns_config_url",
     default=None,
-    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>",
+    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. The sheet must contain the column name: 'coluna' and column description: 'descricao'.",
 )
 @click.pass_context
 def create_table(
@@ -295,7 +295,7 @@ def update_table(ctx, dataset_id, table_id, mode):
 @click.option(
     "--columns_config_url",
     default=None,
-    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>",
+    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. The sheet must contain the column name: 'coluna' and column description: 'descricao'.",
 )
 @click.pass_context
 def update_columns(ctx, dataset_id, table_id, columns_config_url):

@@ -162,9 +162,11 @@ class Table(Base):
 
     def update_columns(self, columns_config_url):
         """Fills descriptions of tables automatically using a public google sheets URL.
-        The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>
+        The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
+        The sheet must contain the column name: "coluna" and column description: "descricao"
         Args:
             columns_config_url (str): google sheets URL.
+
         """
         ruamel = ryaml.YAML()
         ruamel.preserve_quotes = True
@@ -172,12 +174,29 @@ class Table(Base):
         table_config_yaml = ruamel.load(
             (self.table_folder / "table_config.yaml").open()
         )
-        if "edit#gid=" not in columns_config_url:
+        if (
+            "edit#gid=" not in columns_config_url
+            or "https://docs.google.com/spreadsheets/d/" not in columns_config_url
+            or not columns_config_url.split("=")[1].isdigit()
+        ):
             raise Exception(
                 "The Google sheet url not in correct format."
                 "The url must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>"
             )
+
         df = self._sheet_to_df(columns_config_url)
+
+        if "coluna" not in df.columns.tolist():
+            raise Exception(
+                "Column 'coluna' not found in Google the google sheet. "
+                "The sheet must contain the column name: 'coluna' and column description: 'descricao'"
+            )
+        elif "descricao" not in df.columns.tolist():
+            raise Exception(
+                "Column 'descricao' not found in Google the google sheet. "
+                "The sheet must contain the column name: 'coluna' and column description: 'descricao'"
+            )
+
         columns_parameters = zip(df["coluna"].tolist(), df["descricao"].tolist())
         for name, description in columns_parameters:
             for col in table_config_yaml["columns"]:
@@ -222,7 +241,8 @@ class Table(Base):
                 Data source format. Only 'csv' is supported. Defaults to 'csv'.
 
             columns_config_url (str): google sheets URL.
-
+                The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
+                The sheet must contain the column name: "coluna" and column description: "descricao"
 
         Raises:
             FileExistsError: If folder exists and replace is False.
@@ -378,6 +398,9 @@ class Table(Base):
                 Data source format. Only 'csv' is supported. Defaults to 'csv'.
 
             columns_config_url (str): google sheets URL.
+                The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
+                The sheet must contain the column name: "coluna" and column description: "descricao"
+
         """
 
         if path is None:
