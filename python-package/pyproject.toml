@@ -16,7 +16,7 @@ repository = "https://github.com/base-dos-dados/bases"
 version = "1.4.5"
 
 [tool.poetry.scripts]
-basedosdados = 'basedosdados.cli:cli'
+basedosdados = 'basedosdados.cli.cli:cli'
 
 [tool.poetry.dependencies]
 Jinja2 = "2.11.2"

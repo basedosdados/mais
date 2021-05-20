@@ -1,4 +1,4 @@
-Número de óbitos agregados dos microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério da Saúde ao nível município-causa-idade-genero-raca-ano.
+Número de óbitos agregados dos microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério da Saúde ao nível município-causa-idade-sexo-raca-ano.
 
 
 Para saber mais acesse:
@@ -30,7 +30,7 @@ Nível da Observação (i.e. a granularidade da linha)
 - municipio
 - causa CID10
 - idade
-- genero
+- sexo
 - raca
 - ano
 
@@ -39,9 +39,10 @@ Colunas identificando linhas unicamente
 - id_municipio
 - causa_basica
 - idade
-- genero
+- sexo
 - raca_cor
 - ano
+- óbito
 
 Cobertura Temporal
 ------------------
@@ -76,7 +77,8 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Agreguei o número de óbitos dos microdados por município-causa-idade-genero-raca-ano.
+- Agregamos o número de óbitos dos microdados por município-causa-idade-sexo-raca-ano.
+- Arrendondamos idades entre 0 e 0.99999 ano para 0.
 
 Frequencia de Atualização
 -------------------------

@@ -7,9 +7,9 @@ dataset_id: br_ms_vacinacao_covid19 # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-ms-vacinacao-covid19 # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19 # AUTO GENERATED
 
-version: v1.0
+version: v1.0.1
 
-last_updated: 2021-05-13 # AUTO GENERATED
+last_updated: 2021-05-19   # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -35,7 +35,7 @@ treated_by:
     email: <email>
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
+treatment_description: |
     - Normalizamos a tabela original.
 
 # Com qual frequência a base é atualizada?
@@ -90,63 +90,43 @@ partitions: # REQUIRED
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
-  
-    -   
-        name: id_paciente
-        description: ID Paciente
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: idade
-        description: Idade (ano)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_nascimento
-        description: Data de nascimento
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sexo
-        description: Sexo
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: raca_cor
-        description: Raça ou cor
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio_endereco
-        description: ID Município do Endereço - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: pais_endereco
-        description: País do Endereço
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cep_endereco
-        description: CEP do Endereço (5 dígitos para anonimizado e 7 dígitos para identificado)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: nacionalidade
-        description: Nacionalidade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sigla_uf_endereco
-        description: Sigla da Unidade da Federação do Endereço
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
+    - name: id_paciente
+      description: ID Paciente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: idade
+      description: Idade (ano)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: data_nascimento
+      description: Data de nascimento
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: sexo
+      description: Sexo
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: raca_cor
+      description: Raça ou cor
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_municipio_endereco
+      description: ID Município do Endereço - IBGE 7 Dígitos
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: pais_endereco
+      description: País do Endereço
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: cep_endereco
+      description: CEP do Endereço (5 dígitos para anonimizado e 7 dígitos para identificado)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: nacionalidade
+      description: Nacionalidade
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: sigla_uf_endereco
+      description: Sigla da Unidade da Federação do Endereço
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: true   # Bool [True, False], whether the column is a partition.

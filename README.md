@@ -147,12 +147,11 @@ ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
 download(pib_per_capita, "pib_per_capita.csv") # salve os dados em disco
 ```
 
-# Tutoriais
-> 💭 Tem alguma ideia ou um exemplo seu para colaborar? Abra um issue e fale com a gente! 
+# Exemplos
 
-- Veja exemplos de uso na pasta [`/examples`](/examples)
-- Acesse nossos workshops no [Youtube](https://www.youtube.com/basedosdados)
-- Leia os tutoriais publicados no nosso [blog](http://dev.to/basedosdados)
+Acesse os códigos de análises produzidas em Workshops, Artigos,
+Tutoriais e Redes Sociais todas no nosso repositório de
+[analises](http://github.com/basedosdados/analises)
 
 # Contribua! 🔄
 
