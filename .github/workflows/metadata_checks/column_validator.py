@@ -1,3 +1,4 @@
+from pydantic.class_validators import root_validator
 import yaml
 import sys
 from pathlib import Path
@@ -5,6 +6,8 @@ from google.cloud import bigquery
 import basedosdados as bd
 import json
 from cerberus import Validator
+from pydantic import BaseModel, ValidationError, validator
+from typing import List
 
 bd_standards = ["municipio", "escola", "setor_censitario", "uf"]
 BD_STD_COLUMNS = []
@@ -22,6 +25,70 @@ for std in bd_standards:
     ) as f:
         BD_STD_COLUMNS += yaml.load(f, Loader=yaml.SafeLoader)["columns"]
 BD_STD_COLUMNS_BY_NAME = {column["name"]: column for column in BD_STD_COLUMNS}
+
+INV_FIELD = []
+
+
+class Column_Model(BaseModel):
+    name: str
+    description: str
+    is_in_staging: bool
+    is_partition: bool
+
+    @validator("name")
+    def name_is_lower(cls, value, values):
+        if not value.islower():
+            INV_FIELD.append({"name": value})
+            raise ValueError("should be all lower case")
+        return value
+
+    @validator("name")
+    def no_spaces(cls, value, values):
+        if " " in value:
+            INV_FIELD.append({"name": value})
+            raise ValueError("should not have spaces")
+        return value
+
+    @validator("description")
+    def validate_std_description(cls, value, values):
+        if INV_FIELD:
+            values.update(INV_FIELD[-1])
+            INV_FIELD.clear()
+        is_std_col = BD_STD_COLUMNS_BY_NAME.get(values["name"])
+        if is_std_col and value != is_std_col["description"]:
+            raise ValueError("Standard column does not have standard descritpion")
+
+
+class Columns(BaseModel):
+    columns: List[Column_Model]
+
+
+def validate_columns(yaml_path):
+    with open(Path(yaml_path), "r") as f:
+        config = yaml.load(f, Loader=yaml.SafeLoader)
+    print(type(config["columns"]))
+    columns = config["columns"]
+    # columns = [
+    #     {
+    #         "name": "id_municipio",
+    #         "description": "id do municipio",
+    #         "is_in_staging": True,
+    #         "is_partition": False,
+    #     },
+    #     {
+    #         "name": "col1",
+    #         "description": "col1 description",
+    #         "is_in_staging": True,
+    #         "is_partition": False,
+    #     },
+    # ]
+
+    try:
+        Columns(columns=columns)
+    except ValidationError as e:
+        print("Error: ", e)
+
+
 # assert len(BD_STD_COLUMNS_BY_NAME) == len(BD_STD_COLUMNS), "duplicated columns defined as standard columns"
 ### Custom extensions to Cerberus Validator class
 class MyValidator(Validator):
@@ -92,9 +159,16 @@ class MyValidator(Validator):
             self._error(field, "Standard column does not have standard description")
 
 
-def validate_columns(path_to_yaml):
+def validate_columns_from_str(path_to_yaml):
     schema = yaml.load(open("validation_schema.yaml", "r"), Loader=yaml.SafeLoader)
     config = yaml.load(open(Path(path_to_yaml), "r"), Loader=yaml.SafeLoader)
+    config["columns"] = yaml.dump(
+        config["columns"],
+        line_break=False,
+        sort_keys=False,
+        default_flow_style=False,
+        allow_unicode=True,
+    )
     columns = config["columns"]
     v = MyValidator(schema=schema)
 
@@ -104,4 +178,4 @@ def validate_columns(path_to_yaml):
 
 
 if __name__ == "__main__":
-    validate_columns(path_to_yaml=sys.argv[1])
+    validate_columns(yaml_path=sys.argv[1])

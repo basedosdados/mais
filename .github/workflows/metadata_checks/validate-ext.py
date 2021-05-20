@@ -32,12 +32,22 @@ NoDatesSafeLoader.remove_implicit_resolver("tag:yaml.org,2002:timestamp")
 def validate_metadata(path_to_yaml):
     with open(path_to_yaml) as f:
         table_config = yaml.load(f, Loader=NoDatesSafeLoader)
+
+    dataset_id = table_config["dataset_id"]
     table_config["resource_type"] = "bdm_table"
     table_config["name"] = table_config["table_id"]
     table_config["spatial_coverage"] = table_config["coverage_geo"]
     table_config["temporal_coverage"] = "2021"
     table_config["update_frequency"] = "one_year"
     table_config["observation_level"] = ["municipality"]
+    # stream = yaml.dump(
+    #     table_config["columns"],
+    #     line_break=False,
+    #     sort_keys=False,
+    #     default_flow_style=False,
+    #     allow_unicode=True,
+    # )
+    # table_config["columns"] = stream
     error_dict = {}
     try:
         response = basedosdados.action.package_validate(
@@ -47,8 +57,8 @@ def validate_metadata(path_to_yaml):
             title="hahaha",
         )
     except ckanapi.errors.ValidationError as e:
-        if e.error_dict["resources"]:
-            error_dict[table_config["table_id"]] = e.error_dict["resources"]
+        if e.error_dict:
+            error_dict[table_config["table_id"]] = e.error_dict
         else:
             return
 
