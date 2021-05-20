@@ -162,24 +162,24 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
             credentials=credentials(from_file=from_file, reauth=reauth),
             project_id=billing_project_id,
         )
-    except (OSError, ValueError):
-        raise BaseDosDadosException(
-            "\nWe are not sure which Google Cloud project should be billed.\n"
-            "First, you should make sure that you have a Google Cloud project.\n"
-            "If you don't have one, set one up following these steps: \n"
-            "\t1. Go to this link https://console.cloud.google.com/projectselector2/home/dashboard\n"
-            "\t2. Agree with Terms of Service if asked\n"
-            "\t3. Click in Create Project\n"
-            "\t4. Put a cool name in your project\n"
-            "\t5. Hit create\n"
-            ""
-            "Copy the Project ID, (notice that it is not the Project Name)\n"
-            "Now, you have two options:\n"
-            "1. Add an argument to your function poiting to the billing project id.\n"
-            "   Like `bd.read_table('br_ibge_pib', 'municipios', billing_project_id=<YOUR_PROJECT_ID>)`\n"
-            "2. You can set a project_id in the environment by running the following command in your terminal: `gcloud config set project <YOUR_PROJECT_ID>`."
-            "   Bear in mind that you need `gcloud` installed."
+    except (OSError, ValueError) as e:
+        msg = ( "\nWe are not sure which Google Cloud project should be billed.\n"
+                "First, you should make sure that you have a Google Cloud project.\n"
+                "If you don't have one, set one up following these steps: \n"
+                "\t1. Go to this link https://console.cloud.google.com/projectselector2/home/dashboard\n"
+                "\t2. Agree with Terms of Service if asked\n"
+                "\t3. Click in Create Project\n"
+                "\t4. Put a cool name in your project\n"
+                "\t5. Hit create\n"
+                "\n"
+                "Copy the Project ID, (notice that it is not the Project Name)\n"
+                "Now, you have two options:\n"
+                "1. Add an argument to your function poiting to the billing project id.\n"
+                "   Like `bd.read_table('br_ibge_pib', 'municipios', billing_project_id=<YOUR_PROJECT_ID>)`\n"
+                "2. You can set a project_id in the environment by running the following command in your terminal: `gcloud config set project <YOUR_PROJECT_ID>`.\n"
+                "   Bear in mind that you need `gcloud` installed."
         )
+        raise BaseDosDadosException(msg) from e
     except GenericGBQException as e:
         if "Reason: 403" in str(e):
             raise BaseDosDadosException(
@@ -193,8 +193,7 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
                 "6. Rerun this command with the flag `reauth=True`. \n"
                 "   Like `read_table('br_ibge_pib', 'municipios', reauth=True)`"
             )
-        else:
-            raise e
+        raise
 
 
 def read_table(
