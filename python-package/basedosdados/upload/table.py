@@ -158,7 +158,12 @@ class Table(Base):
 
     def _sheet_to_df(self, columns_config_url):
         url = columns_config_url.replace("edit#gid=", "export?format=csv&gid=")
-        return pd.read_csv(StringIO(requests.get(url).content.decode("utf-8")))
+        try:
+            return pd.read_csv(StringIO(requests.get(url).content.decode("utf-8")))
+        except:
+            raise Exception(
+                "Check if your google sheet Share are: Anyone on the internet with this link can view"
+            )
 
     def update_columns(self, columns_config_url):
         """Fills descriptions of tables automatically using a public google sheets URL.
