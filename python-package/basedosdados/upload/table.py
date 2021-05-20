@@ -7,8 +7,6 @@ from google.cloud import bigquery
 import datetime
 
 import ruamel.yaml as ryaml
-import requests
-from io import StringIO
 import pandas as pd
 
 import google.api_core.exceptions
@@ -157,9 +155,11 @@ class Table(Base):
                 )
 
     def _sheet_to_df(self, columns_config_url):
+
         url = columns_config_url.replace("edit#gid=", "export?format=csv&gid=")
+        print(url)
         try:
-            return pd.read_csv(StringIO(requests.get(url).content.decode("utf-8")))
+            return pd.read_csv(url)
         except:
             raise Exception(
                 "Check if your google sheet Share are: Anyone on the internet with this link can view"
