@@ -162,7 +162,7 @@ class Table(Base):
             return pd.read_csv(StringIO(requests.get(url).content.decode("utf-8")))
         except:
             raise Exception(
-                "Check if your google sheet Share are: Anyone on the internet with this link can view."
+                "Check if your google sheet Share are: Anyone on the internet with this link can view"
             )
 
     def update_columns(self, columns_config_url):
