@@ -157,7 +157,6 @@ class Table(Base):
     def _sheet_to_df(self, columns_config_url):
 
         url = columns_config_url.replace("edit#gid=", "export?format=csv&gid=")
-        print(url)
         try:
             return pd.read_csv(url)
         except:
@@ -176,8 +175,11 @@ class Table(Base):
         ruamel = ryaml.YAML()
         ruamel.preserve_quotes = True
         ruamel.indent(mapping=4, sequence=6, offset=4)
+        ruamel.allow_unicode = True
+        ruamel.encoding = "utf-8"
+        ruamel.default_flow_style = True
         table_config_yaml = ruamel.load(
-            (self.table_folder / "table_config.yaml").open(encoding="utf-8")
+            (self.table_folder / "table_config.yaml").open()
         )
         if (
             "edit#gid=" not in columns_config_url
