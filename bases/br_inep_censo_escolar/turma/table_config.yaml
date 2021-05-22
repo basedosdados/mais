@@ -7,9 +7,9 @@ dataset_id: br_inep_censo_escolar # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-inep-censo-escolar # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v1.1 # REQUIRED
 
-last_updated: 2021-03-29 # AUTO GENERATED
+last_updated: 2021-04-15 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -112,44 +112,68 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: taxa_hora_inicial
+        name: hora_inicial
         description: Hora inicial
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: taxa_minuto_inicial
+        name: minuto_inicial
         description: Minuto inicial 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dia_semana_domingo
+        description: A turma funciona de domingo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dia_semana_segunda
+        description: A turma funciona de segunda-feira
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dia_semana_terca
+        description: A turma funciona de terça-feira
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dia_semana_quarta
+        description: A turma funciona de quarta-feira
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dia_semana_quinta
+        description: A turma funciona de quinta-feira
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dia_semana_sexta
+        description: A turma funciona de sexta-feira
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dia_semana_sabado
+        description: A turma funciona de sábado
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: numero_dias_atividade
+        description: Número de dias da semana onde são realizadas atividades da turma
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: numero_duracao_turma
         description: Duração do funcionamento da turma, em minutos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: quantidade_matriculas
-        description: Número de matrículas na turma
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_etapa_ensino
-        description: Nível de ensino da turma (e.g. Ensino Fundamental, Ensino Médio)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_curso_educ_profissional
-        description: Código do curso da educação profissional técnica
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_turma
-        description: Tipo de atendimento da turma (e.g. Unidade prisional, Classe hospitalar)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -190,8 +214,260 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: numero_dias_atividade
-        description: Número de dias da semana onde são realizadas atividades da turma
+        name: etapa_ensino
+        description: Nível de ensino da turma (e.g. Ensino Fundamental, Ensino Médio)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_curso_educ_profissional
+        description: Código do curso da educação profissional técnica
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: quantidade_matriculas
+        description: Número de matrículas na turma
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_lingua_portuguesa
+        description: Turma tem a disciplina língua portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_educacao_fisica
+        description: Turma tem a disciplina educação física
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_artes
+        description: Turma tem a disciplina artes
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_lingua_ingles
+        description: Turma tem a disciplina inglês
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_lingua_espanhol
+        description: Turma tem a disciplina espanhol
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_lingua_frances
+        description: Turma tem a disciplina francês
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_lingua_outra
+        description: Turma tem disciplina sobre outras línguas estrangeiras 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_libras
+        description: Turma tem a disciplina LIBRAS
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_lingua_indigena
+        description: Turma tem disciplina sobre línguas indígenas
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_matematica
+        description: Turma tem a disciplina matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_ciencias
+        description: Turma tem a disciplina ciências
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_fisica
+        description: Turma tem a disciplina física
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_quimica
+        description: Turma tem a disciplina química
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_biologia
+        description: Turma tem a disciplina biologia
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_historia
+        description: Turma tem a disciplina história
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_geografia
+        description: Turma tem a disciplina geografia
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_sociologia
+        description: Turma tem a disciplina sociologia
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_filosofia
+        description: Turma tem a disciplina filosofia
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_estudos_sociais
+        description: Turma tem a disciplina estudos sociais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_informatica_comp
+        description: Turma tem a disciplina informática ou computação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_ensino_religioso
+        description: Turma tem a disciplina ensino religioso
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_profissionalizante
+        description: Turma tem disciplinas profissionalizantes
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_pedagogicas
+        description: Turma tem a disciplina "disciplinas pedagógicas"
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: disciplina_outras
+        description: Turma tem outras disciplinas que não se encaixam nas categorias anteriores
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_escola
+        description: ID Escola - INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio
+        description: ID Municipio - IBGE 7 Dígitos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: rede
+        description: Rede Escolar
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_localizacao
+        description: Tipo de localização da escola (e.g. Zona Urbana, Zona Rural)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_categoria_escola_privada
+        description: Tipo de escola privada. Valor 1 = Particular; valor 2 = Comunitária; valor 3 = Confessional; 4 = Filantrópica
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: conveniada_poder_publico
+        description: A escola é conveniada com poder público
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_convenio_poder_publico
+        description: Tipo de convenio com o poder publico. Valor 1 = convêncio municipal; valor 2 = convênio estadual; valor 3 = convênio estadual e municipal.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mantenedora_privada_emp
+        description: A mantenedora da escola privada é uma empresa ou grupo empresarial
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mantenedora_privada_ong
+        description: A mantenedora da escola privada é uma ONG
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mantenedora_privada_sind
+        description: A mantenedora da escola privada é um sindicato ou associação cooperativa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mantenedora_privada_sist_s
+        description: A mantenedora da escola privada é o sistema S (SENAI, SESI, SESC, entre outros)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mantenedora_privada_s_fins
+        description: A mantenedora da escola privada é uma entidade sem fins lucrativos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_regulamentacao
+        description: Regulamentação/Autorização no conselho ou órgão municipal, estadual ou federal de educação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_localizacao_diferenciada
+        description: Localização diferenciada da escola. Valor 1 = área de assentamento, 2 = terra indígena, 3 = área remanescente de quilombos, 4=unidade de uso sustentável, 5 = unidade de uso sustentável em terra indígena, 6 = unidade de uso sustentável em área remanescente de quilombos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: educacao_indigena
+        description: A escola é uma escola indígena
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_turma
+        description: Tipo de atendimento da turma (e.g. Unidade prisional, Classe hospitalar)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -262,132 +538,6 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: disciplina_quimica
-        description: Turma tem a disciplina química
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_fisica
-        description: Turma tem a disciplina física
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_matematica
-        description: Turma tem a disciplina matemática
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_biologia
-        description: Turma tem a disciplina biologia
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_ciencias
-        description: Turma tem a disciplina ciências
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_lingua_portuguesa
-        description: Turma tem a disciplina língua portuguesa
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_lingua_ingles
-        description: Turma tem a disciplina inglês
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_lingua_espanhol
-        description: Turma tem a disciplina espanhol
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_lingua_frances
-        description: Turma tem a disciplina francês
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_lingua_outra
-        description: Turma tem disciplina sobre outras línguas estrangeiras 
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_lingua_indigena
-        description: Turma tem disciplina sobre línguas indígenas
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_artes
-        description: Turma tem a disciplina artes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_educacao_fisica
-        description: Turma tem a disciplina educação física
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_historia
-        description: Turma tem a disciplina história
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_geografia
-        description: Turma tem a disciplina geografia
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_filosofia
-        description: Turma tem a disciplina filosofia
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_ensino_religioso
-        description: Turma tem a disciplina ensino religioso
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_estudos_sociais
-        description: Turma tem a disciplina estudos sociais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_sociologia
-        description: Turma tem a disciplina sociologia
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_informatica_computacao
-        description: Turma tem a disciplina informática ou computação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_profissionalizante
-        description: Turma tem disciplinas profissionalizantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
         name: disciplina_atendimento_especiais
         description: Turma tem disciplinas voltadas ao atendimento às necessidades educacionais específicas de alunos público-alvo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
@@ -396,156 +546,6 @@ columns: # REQUIRED
     -   
         name: disciplina_diver_socio_cultural
         description: Turma tem disciplinas voltadas à diversidade sociocultural
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_libras
-        description: Turma tem a disciplina LIBRAS
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_pedagogicas
-        description: Turma tem a disciplina "disciplinas pedagógicas"
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina_outras
-        description: Turma tem outras disciplinas que não se encaixam nas categorias anteriores
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_escola
-        description: ID Escola - INEP
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio
-        description: ID Municipio - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_localizacao
-        description: Tipo de localização da escola (e.g. Zona Urbana, Zona Rural)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: rede
-        description: Rede Escolar
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_categoria_escola_privada
-        description: Tipo de escola privada. Valor 1 = Particular; valor 2 = Comunitária; valor 3 = Confessional; 4 = Filantrópica
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: conveniada_poder_publico
-        description: A escola é conveniada com poder público
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_convenio_poder_publico
-        description: Tipo de convenio com o poder publico. Valor 1 = convêncio municipal; valor 2 = convênio estadual; valor 3 = convênio estadual e municipal.
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: mantenedora_escola_privada_emp
-        description: A mantenedora da escola privada é uma empresa ou grupo empresarial
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: mantenedora_escola_privada_ong
-        description: A mantenedora da escola privada é uma ONG
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: mantenedora_escola_privada_sind
-        description: A mantenedora da escola privada é um sindicato ou associação cooperativa
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: mantenedora_escola_privada_sist_s
-        description: A mantenedora da escola privada é o sistema S (SENAI, SESI, SESC, entre outros)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: mantenedora_escola_privada_s_fins
-        description: A mantenedora da escola privada é uma entidade sem fins lucrativos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_regulamentacao
-        description: Regulamentação/Autorização no conselho ou órgão municipal, estadual ou federal de educação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_localizacao_diferenciada
-        description: Localização diferenciada da escola. Valor 1 = área de assentamento, 2 = terra indígena, 3 = área remanescente de quilombos, 4=unidade de uso sustentável, 5 = unidade de uso sustentável em terra indígena, 6 = unidade de uso sustentável em área remanescente de quilombos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: educacao_indigena
-        description: A escola é uma escola indígena
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dia_semana_domingo
-        description: A turma funciona de domingo
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dia_semana_segunda
-        description: A turma funciona de segunda-feira
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dia_semana_terca
-        description: A turma funciona de terça-feira
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dia_semana_quarta
-        description: A turma funciona de quarta-feira
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dia_semana_quinta
-        description: A turma funciona de quinta-feira
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dia_semana_sexta
-        description: A turma funciona de sexta-feira
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dia_semana_sabado
-        description: A turma funciona de sábado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

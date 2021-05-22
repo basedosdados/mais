@@ -8,7 +8,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    A base contém tabelas do Censo Escolar realizado anualmente pelo INEP. Os dados disponibilizados dizem respeito a escolas, turmas, docentes e matrículas de todas as instituições de ensino nacionais. As tabelas respeitam o próprio agrupamento do censo, existindo uma para cada granularidade da observação. Elas são facilmente intercomunicáveis a medida que todas tem identificadores da escola, da turma e do município. 
+    A base contém tabelas dos microdados do censo escolar, desde 2009 até 2020. O recorte de anos pega o período de 12 anos mais recentes do censo, onde a pesquisa que o orienta tem o mesmo formato e estrutura. A base contém tabelas sobre escolas, matriculas, docentes e turmas, permitindo um vasto acesso a dados da educação brasileira por óticas distintas e em níveis de agregação diversos. Todas podem facilmente ser combinadas entre si através do identificador de cada escola ou pelo código do município. 
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
@@ -16,8 +16,8 @@ organization: inep # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
-    name: <nome>
-    email: <email>
+    name: 
+    email: 
 
 # Onde encontrar os dados originais e mais informações?
 website:
@@ -27,6 +27,9 @@ website:
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
     - educacao
+    - economia
+    - ciencia-tec-inov
+    - cultura-arte
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -36,9 +39,9 @@ groups:
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
     - escolas
-    - avaliacao de politicas educacionais
-    - infraestrutura escolar
-    - alunos
+    - indicadores educacionais
+    - desigualdade
+    - indicadores socioeconomicos
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.

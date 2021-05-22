@@ -1,4 +1,4 @@
-A tabela contém dados que caracterizam as turmas de cada escola brasileira. Entre os dados podemos encontrar as disciplinas feitas pela turma, o horário de começo das aulas, o número de alunos da turma e o nível de ensino no qual se encontra a turma. Há também vários outros aspectos mais específicos, como se a turma passa por atividades complementares, em quais dias da semana ela é ativa e se a turma conta com medidas de inclusão como aulas em libras e em braille.
+A tabela contém dados de cada professor de cada ano das escolas nacionais. A tabela identifica desde características pessoais dos profissionais, as disciplinas que eles ensinam, as suas formações e a qual escola e qual turma pertencem. Pode ser facilmente combinada com as outras tabelas do censo ou com outras tabelas do tema educação.
 
 
 Para saber mais acesse:
@@ -27,12 +27,12 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- turma
+- docente
 - ano
 
 Colunas identificando linhas unicamente
 -------------------
-- id_turma
+- id_docente
 - ano
 
 Cobertura Temporal
@@ -56,7 +56,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-O processo de limpeza da base incluiu a junção e a compatibilização entre vários anos distintos, harmonizando as variáveis e seus valores. Outra parte crucial foi a criação de variáveis para melhor compatibilização da tabela com outras tabelas deste dataset e do próprio catálogo da Base dos Dados.
+O tratamento inclui harmonizar todos os anos, mudar nome de variáveis e selecionar as variáveis que aparecem pelo menos 8 nos 12 anos de Censo.
 
 Frequencia de Atualização
 -------------------------
