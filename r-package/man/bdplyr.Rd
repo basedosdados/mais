@@ -7,9 +7,9 @@
 bdplyr(table, billing_project_id = basedosdados::get_billing_id())
 }
 \arguments{
-\item{billing_project_id}{billing_id.}
+\item{table}{Caminho no formato basedosdados.\<dataset\>.\<tabela\>}
 
-\item{tabela}{Caminho no formato basedosdados.\<dataset\>.\<tabela\>}
+\item{billing_project_id}{billing_id.}
 }
 \value{
 Tabela em formato manipulável
