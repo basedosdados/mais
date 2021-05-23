@@ -13,29 +13,31 @@
 #' operations with [dplyr::mutate()], joins with [dplyr::left_join()] and
 #' other vebs from `{dplyr}` package.
 #'
-#' The data will be automacically be downloaded from Google BigQuery in the
-#' background as it if necessary, but will not be loaded into your virtual
-#' memory nor recorded on disk unless expressly requuested.
+#' The data will be automatically be downloaded from Google BigQuery in the
+#' background as it if necessary, but wille not be loaded into your virtual
+#' memory nor recorded on disk unless expressly requested.
 #'
-#' For this, the functions such as [bd_collect()] ou [bd_write()] should be
+#' For this, the functions such as [bd_collect()] or [bd_write()] should be
 #' used. To load the data handled locally in your virtual memory, use
 #' [bd_collect()]. To save the result in disk use the broader function
-#' [bd_write()] or its derivates [bd_write_csv()] or [bd_write_rds()] to save,
-#' respectively in `.csv` or `.rds` format.
+#' [bd_write()] or its derivatives [bd_write_csv()] or [bd_write_rds()] to
+#' save, respectively in `.csv` or `.rds` format.
 #'
 #'
-#' @param table String in the format "basedosdados.(dataset_name)*.*(specific_table_name)".
+#' @param table String in the format `basedosdados`.`(dataset_name)`.`(specific_table_name)`.
 #' It´s advisable to chack the Base dos Dados datalake for the correct names.
 #'
 #' @param billing_project_id a string containing your billing project id.
 #' If you've run [set_billing_id()] then feel free to leave this empty.
 #'
 #' @return A `lazy tibble`, which can be handled (almost) as if were a local
-#' database. Affter satisfactorily handled, the result must be loaded into
+#' database. After satisfactorily handled, the result must be loaded into
 #' memory using [bd_collect()] or written to disk using [bd_write()] or its
-#' derivates.
+#' derivatives.
 #'
-#' @seealso bd_collect
+#' @seealso [bd_collect()], [bd_write()], [bd_write_rds()], [bd_write_rds()],
+#' [bigrquery::src_bigquery]
+#'
 #' @export
 #'
 #' @examples
@@ -163,7 +165,7 @@ bdplyr <- function(
 #' the {dplyr}´s verbs and thus use it in local memory completely.
 #'
 #' Alternatively, you can also save to disk directly using [bd_write()]
-#' function or its derivates: [bd_write_csv()] or [bd_write_rds()].
+#' function or its derivatives: [bd_write_csv()] or [bd_write_rds()].
 #'
 #' @param .lazy_tbl A variable that contains a database that was previously
 #' connected through the [bdplyr()] function. Tipically, it will be called
@@ -209,7 +211,7 @@ bdplyr <- function(
 #'
 #' }
 bd_collect <- function(.lazy_tbl,
-                       billing_project_id = basedosdados::get_billing_id()) {
+                billing_project_id = basedosdados::get_billing_id()) {
 
   # checar se o billing foi informado
 
@@ -250,8 +252,8 @@ bd_collect <- function(.lazy_tbl,
 #' @description
 #'
 #' Writes a remote table to disk that was called via {bdplyr}.
-#' It will collect the data and write to disk in the chosen format. Y
-#' ou will only need this function if you have not yet collected the data
+#' It will collect the data and write to disk in the chosen format.
+#' You will only need this function if you have not yet collected the data
 #' using the [bd_collect()].
 #'
 #' The comprehensive function [bd_write()] takes as a parameter `.write_fn`,
@@ -259,7 +261,8 @@ bd_collect <- function(.lazy_tbl,
 #' writing a tibble to disk.
 #'
 #' As helpers, the [bd_write_rds()] and [bd_write_csv()] functions make it
-#' easier to write in these formats, more common in everyday life.
+#' easier to write in these formats, more common in everyday life, calling
+#' writing functions from `{readr}` package.
 #'
 #' @param .lazy_tbl A variable that contains a database that was previously
 #' connected through the [bdplyr()] function. Tipically, it will be called
@@ -273,12 +276,14 @@ bd_collect <- function(.lazy_tbl,
 #' The desired folders must already exist and the file should normally end with
 #' the corresponding extension.
 #'
-#' @param overwrite For derivates function only. FALSE by default.
+#' @param overwrite For derivatives function only. FALSE by default.
 #' Indicates whether the local file should be overwritten if it already exists.
 #' Use with care.
 #'
 #' @param compress For [bd_write_rds()] only. Compression method to use: "none"
-#' (default), "gz" ,"bz", or "xz". See also: [readr::write_rds()].
+#' (default), "gz" ,"bz", or "xz", in ascending order of compression.
+#' Remember that the higher the compression, the smaller the file size on disk,
+#' ut also the longer the time to load the data. See also: [readr::write_rds()].
 #'
 #' @param ... Other parameters passed to the `.write_fn` function.
 #'
@@ -316,7 +321,7 @@ bd_collect <- function(.lazy_tbl,
 #'                       "data-raw/ssp_subset.xlsx"
 #')
 #'
-#'# using the derivates functions
+#'# using the derivatives functions
 #'# to csv
 #'basedosdados::bd_write_csv(.lazy_tbl = my_subset,
 #'                           "data-raw/ssp_subset2.csv"
@@ -333,7 +338,7 @@ bd_collect <- function(.lazy_tbl,
 #'                            compress = "gz"
 #' )
 #'
-#' # tor rds - with hard compression
+#' # to rds - with HARD compression
 #' basedosdados::bd_write_rds(.lazy_tbl = my_subset,
 #'                            "data-raw/ssp_subset3.rds",
 #'                            compress = "xz"
@@ -354,7 +359,8 @@ bd_collect <- function(.lazy_tbl,
 #' )
 #' }
 
-bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(),
+bd_write <- function(.lazy_tbl,
+                     .write_fn = ? typed::Function(),
                      path,
                      ...) {
 
@@ -438,8 +444,7 @@ bd_write_rds <- function(.lazy_tbl,
   #
   if (file.exists(path)) {
     rlang::inform(glue::glue(
-      "The file was successfully saved ({file.info(path)$size} B)"
-    ))
+      "The file was successfully saved ({file.info(path)$size} B)"))
     invisible(path)
   } else {
     rlang::abort("Failed to save the file.")
@@ -449,7 +454,10 @@ bd_write_rds <- function(.lazy_tbl,
 
 #' @rdname bd_write
 #' @export
-bd_write_csv <- function(.lazy_tbl, path, overwrite = FALSE, ...) {
+bd_write_csv <- function(.lazy_tbl,
+                         path,
+                         overwrite = FALSE,
+                         ...) {
 
   # checar se file é válido
   if (stringr::str_detect(path, pattern = "(\\.csv)$") == FALSE) {
@@ -473,8 +481,7 @@ bd_write_csv <- function(.lazy_tbl, path, overwrite = FALSE, ...) {
   # verificar se a gravação ocorreu corretamente e avisar
   if (file.exists(path)) {
     rlang::inform(glue::glue(
-      "The file was successfully saved ({file.info(path)$size} B)"
-    ))
+      "The file was successfully saved ({file.info(path)$size} B)"))
     invisible(path)
   } else {
     rlang::abort("Failed to save the file.")

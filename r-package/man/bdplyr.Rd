@@ -7,7 +7,7 @@
 bdplyr(table, billing_project_id = basedosdados::get_billing_id())
 }
 \arguments{
-\item{table}{String in the format "basedosdados.(dataset_name)\emph{.}(specific_table_name)".
+\item{table}{String in the format \code{basedosdados}.\code{(dataset_name)}.\code{(specific_table_name)}.
 It´s advisable to chack the Base dos Dados datalake for the correct names.}
 
 \item{billing_project_id}{a string containing your billing project id.
@@ -15,9 +15,9 @@ If you've run \code{\link[=set_billing_id]{set_billing_id()}} then feel free to 
 }
 \value{
 A \verb{lazy tibble}, which can be handled (almost) as if were a local
-database. Affter satisfactorily handled, the result must be loaded into
+database. After satisfactorily handled, the result must be loaded into
 memory using \code{\link[=bd_collect]{bd_collect()}} or written to disk using \code{\link[=bd_write]{bd_write()}} or its
-derivates.
+derivatives.
 }
 \description{
 Allow you to explore and perform operation with Base dos Dados' datasets
@@ -31,15 +31,15 @@ column selection with \code{\link[dplyr:select]{dplyr::select()}}, filter rows w
 operations with \code{\link[dplyr:mutate]{dplyr::mutate()}}, joins with \code{\link[dplyr:mutate-joins]{dplyr::left_join()}} and
 other vebs from \code{{dplyr}} package.
 
-The data will be automacically be downloaded from Google BigQuery in the
-background as it if necessary, but will not be loaded into your virtual
-memory nor recorded on disk unless expressly requuested.
+The data will be automatically be downloaded from Google BigQuery in the
+background as it if necessary, but wille not be loaded into your virtual
+memory nor recorded on disk unless expressly requested.
 
-For this, the functions such as \code{\link[=bd_collect]{bd_collect()}} ou \code{\link[=bd_write]{bd_write()}} should be
+For this, the functions such as \code{\link[=bd_collect]{bd_collect()}} or \code{\link[=bd_write]{bd_write()}} should be
 used. To load the data handled locally in your virtual memory, use
 \code{\link[=bd_collect]{bd_collect()}}. To save the result in disk use the broader function
-\code{\link[=bd_write]{bd_write()}} or its derivates \code{\link[=bd_write_csv]{bd_write_csv()}} or \code{\link[=bd_write_rds]{bd_write_rds()}} to save,
-respectively in \code{.csv} or \code{.rds} format.
+\code{\link[=bd_write]{bd_write()}} or its derivatives \code{\link[=bd_write_csv]{bd_write_csv()}} or \code{\link[=bd_write_rds]{bd_write_rds()}} to
+save, respectively in \code{.csv} or \code{.rds} format.
 }
 \examples{
 
@@ -93,5 +93,6 @@ base_final \%>\%
 }
 }
 \seealso{
-bd_collect
+\code{\link[=bd_collect]{bd_collect()}}, \code{\link[=bd_write]{bd_write()}}, \code{\link[=bd_write_rds]{bd_write_rds()}}, \code{\link[=bd_write_rds]{bd_write_rds()}},
+\link[bigrquery:src_bigquery]{bigrquery::src_bigquery}
 }

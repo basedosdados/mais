@@ -27,20 +27,22 @@ the corresponding extension.}
 
 \item{...}{Other parameters passed to the \code{.write_fn} function.}
 
-\item{overwrite}{For derivates function only. FALSE by default.
+\item{overwrite}{For derivatives function only. FALSE by default.
 Indicates whether the local file should be overwritten if it already exists.
 Use with care.}
 
 \item{compress}{For \code{\link[=bd_write_rds]{bd_write_rds()}} only. Compression method to use: "none"
-(default), "gz" ,"bz", or "xz". See also: \code{\link[readr:read_rds]{readr::write_rds()}}.}
+(default), "gz" ,"bz", or "xz", in ascending order of compression.
+Remember that the higher the compression, the smaller the file size on disk,
+ut also the longer the time to load the data. See also: \code{\link[readr:read_rds]{readr::write_rds()}}.}
 }
 \value{
 String containing the path to the created file.
 }
 \description{
 Writes a remote table to disk that was called via {bdplyr}.
-It will collect the data and write to disk in the chosen format. Y
-ou will only need this function if you have not yet collected the data
+It will collect the data and write to disk in the chosen format.
+You will only need this function if you have not yet collected the data
 using the \code{\link[=bd_collect]{bd_collect()}}.
 
 The comprehensive function \code{\link[=bd_write]{bd_write()}} takes as a parameter \code{.write_fn},
@@ -48,7 +50,8 @@ which will be the name of some function (without parentheses) capable of
 writing a tibble to disk.
 
 As helpers, the \code{\link[=bd_write_rds]{bd_write_rds()}} and \code{\link[=bd_write_csv]{bd_write_csv()}} functions make it
-easier to write in these formats, more common in everyday life.
+easier to write in these formats, more common in everyday life, calling
+writing functions from \code{{readr}} package.
 }
 \examples{
 \dontrun{
@@ -80,7 +83,7 @@ basedosdados::bd_write(.lazy_tbl = my_subset,
                       "data-raw/ssp_subset.xlsx"
 )
 
-# using the derivates functions
+# using the derivatives functions
 # to csv
 basedosdados::bd_write_csv(.lazy_tbl = my_subset,
                           "data-raw/ssp_subset2.csv"
@@ -97,7 +100,7 @@ basedosdados::bd_write_rds(.lazy_tbl = my_subset,
                            compress = "gz"
 )
 
-# tor rds - with hard compression
+# to rds - with HARD compression
 basedosdados::bd_write_rds(.lazy_tbl = my_subset,
                            "data-raw/ssp_subset3.rds",
                            compress = "xz"

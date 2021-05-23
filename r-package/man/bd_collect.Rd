@@ -23,7 +23,7 @@ allows you to collect the result of the manipulations carried out with
 the {dplyr}´s verbs and thus use it in local memory completely.
 
 Alternatively, you can also save to disk directly using \code{\link[=bd_write]{bd_write()}}
-function or its derivates: \code{\link[=bd_write_csv]{bd_write_csv()}} or \code{\link[=bd_write_rds]{bd_write_rds()}}.
+function or its derivatives: \code{\link[=bd_write_csv]{bd_write_csv()}} or \code{\link[=bd_write_rds]{bd_write_rds()}}.
 }
 \examples{
 \dontrun{
