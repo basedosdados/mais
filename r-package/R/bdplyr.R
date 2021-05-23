@@ -1,7 +1,7 @@
 #' Compatibilidade com {dplyr}
 #'
 #' @description
-#' # TODO: colocar em inglês as docs
+#'
 #' Realiza conexão com o Google BigQuery via {DBI} e torna a base
 #' compatível com as operações básicas do {dplyr} tais como glimpse(),
 #' filter(), select(), mutate(), _join(), etc.
@@ -11,7 +11,7 @@
 #'
 #' Ver também: https://rdrr.io/cran/bigrquery/man/src_bigquery.html
 #'
-#' @param tabela Caminho no formato basedosdados.<dataset>.<tabela>
+#' @param tabela Caminho no formato basedosdados.\<dataset\>.\<tabela\>
 #' @param billing_project_id billing_id.
 #'
 #' @return Tabela em formato manipulável
@@ -65,6 +65,14 @@
 #'
 #'}
 
+#TODO: colocar em inglês as docs
+#TODO: usar bigrquery::bq_has_token() para checar se atenticou no Google
+#TODO: tentar autenticar em silêncio com bigrquery::bq_auth(email = <email>)
+# conferir: https://github.com/r-dbi/bigrquery/blob/main/R/bq-auth.R
+
+
+# bdplyr ------------------------------------------------------------------
+
 bdplyr <- function(
   table,
   billing_project_id = basedosdados::get_billing_id()) {
@@ -73,18 +81,17 @@ bdplyr <- function(
 
   if(billing_project_id == FALSE) {
 
-    rlang::abort("O billing_id não foi informado.")
+    rlang::abort("You haven't set a Project Billing Id. Use the function `set_billing_id` to do so.")
 
   }
 
   # criar o nome que o BQ vai entender
-  # TODO: checagem se o nome é válido
 
   tabela_completa <- glue::glue("basedosdados.{table}")
 
   # checa se a tabela é reconhecida pelo google
 
-  if(!bigrquery::bq_table_exists(tabela_completa)) {
+  if(bigrquery::bq_table_exists(tabela_completa) == FALSE) {
 
     rlang::abort(glue::glue("A tabela {table} não foi localizada"))
 
@@ -92,7 +99,7 @@ bdplyr <- function(
 
   # cria a conexão
 
-  con <- DBI::dbConnect(
+    con <- DBI::dbConnect(
     drv = bigrquery::bigquery(),
     project = "basedosdados",
     billing = billing_project_id)
@@ -102,15 +109,16 @@ bdplyr <- function(
 
   # testa se funcionou
   if (dplyr::is.tbl(conexao_retorno) == TRUE) {
-    message(paste("A tabela", tabela, "foi conectada com sucesso."))
+    message(glue::glue("A tabela {table} foi conectada com sucesso."))
     return (conexao_retorno)
 
   } else {
-    message(paste0("Erro ao tentar conectar a tabela", tabela))
-    return (FALSE)
-
+    message(glue::glue("Erro ao tentar conectar a tabela {table}"))
   }
 }
+
+
+# bdcollect ---------------------------------------------------------------
 
 # criar uma funçao interna que aplica collect()
 
@@ -119,14 +127,48 @@ bdplyr <- function(
  # o usuário pode gerar um lazy tbl, usar código típico de R para gerar uma query
  # e usar bd_collect() para coletar os resultados
 
-bd_collect <- function(.lazy_tbl) {
+#' @rdname bdplyr()
+#' @export
 
-  # TODO verificar se o argumento `.lazy_tbl` é coletável
+bd_collect <- function(.lazy_tbl,
+                       billing_project_id = basedosdados::get_billing_id()) {
+
+  # checar se o billing foi informado
+
+  if(billing_project_id == FALSE) {
+
+    rlang::abort("You haven't set a Project Billing Id. Use the function `set_billing_id` to do so.")
+
+  }
+
+  # checar se o argumento .lazy_tbl é coletável
+
+  if(dplyr::is.tbl(.lazy_tbl) == FALSE) {
+
+    rlang::abort("Não foi possível coletar {.lazy_tbl}")
+  }
+
+  # coletar
+  collected_table <- dplyr::collect(.lazy_tbl)
+
+  # checar se teve êxito
+  if (tibble::is_tibble(collected_table) == FALSE) {
+
+    rlang::warn("Parece não ter retornado uma tibble.")
+
+  }
+
   # retornar os resultados
+  message(glue::glue("Base coletada em uma tibble {nrow(collected_table)} x {ncol(collected_table)}"))
+  return(collected_table)
 
 }
 
 
+# bd_write ----------------------------------------------------------------
+
+#' @rdname bdplyr()
+#' @export
 
 bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(), ...) {
 
@@ -150,3 +192,17 @@ bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(), ...) {
 }
 
 
+# bd_write_rds e bd_write_csv ---------------------------------------------
+
+bd_write_rds <- function(.lazy_tbl, file, ...) {
+
+  # chamar bd_write com readr
+
+}
+
+
+bd_write_csv <- function(.lazy_tbl, file, ...) {
+
+ # chamar bd_write com write_csv
+
+}

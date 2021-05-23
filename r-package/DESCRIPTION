@@ -26,7 +26,8 @@ Imports:
     glue,
     rlang,
     writexl,
-    fs
+    fs,
+    DBI
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
