@@ -8,21 +8,14 @@
 \usage{
 bd_write(.lazy_tbl, .write_fn = `?`(typed::Function()), ...)
 
-bd_write_rds(
-  .lazy_tbl,
-  path,
-  overwrite = FALSE,
-  compress = FALSE,
-  version = 2,
-  ...
-)
+bd_write_rds(.lazy_tbl, path, overwrite = FALSE, compress = FALSE, ...)
 
 bd_write_csv(.lazy_tbl, path, overwrite = FALSE, ...)
 }
 \arguments{
 \item{.lazy_tbl}{Uma variável que foi coletada anteriormente por meio da
-função \code{bdplyr()}. Recomenda-se o uso após realizadas as operações desejadas
-com os verbos da família \code{{dplyr}}.}
+função \code{\link[=bdplyr]{bdplyr()}}. Recomenda-se o uso após realizadas as operações desejadas
+com os verbos do pacote \code{{dplyr}}.}
 
 \item{.write_fn}{A função de escrita desejada sem os ()}
 
@@ -31,6 +24,14 @@ com os verbos da família \code{{dplyr}}.}
 \item{path}{String contendo o endereço para o arquivo a ser criado. As
 pastas desejadas já devem existir e o arquivo deve terminar com a extensão
 correspondente.}
+
+\item{overwrite}{Por padrão FALSE. Indica se o arquivo local deve ser
+sobrescrito caso já existe. Use com cuidado.}
+
+\item{compress}{For \code{\link[=bd_write_rds]{bd_write_rds()}} only. A logical specifying whether
+saving to a named file is to use "gzip" compression, or one of "gzip",
+"bzip2" or "xz" to indicate the type of compression to be used. See also:
+\code{\link[=saveRDS]{saveRDS()}}.}
 }
 \value{
 String com o endereço do arquivo salvo.

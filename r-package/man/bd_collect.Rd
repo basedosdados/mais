@@ -8,22 +8,22 @@ bd_collect(.lazy_tbl, billing_project_id = basedosdados::get_billing_id())
 }
 \arguments{
 \item{.lazy_tbl}{Uma variável que foi coletada anteriormente por meio da
-função \code{bdplyr()}. Recomenda-se o uso após realizadas as operações desejadas
-com os verbos da família \code{{dplyr}}}
+função \code{\link[=bdplyr]{bdplyr()}}. Recomenda-se o uso após realizadas as operações desejadas
+com os verbos do pacote \code{{dplyr}}.}
 
 \item{billing_project_id}{Por padrão, tentará resgatar seu project billing
-id por meio da função \code{get_billing_id()}.}
+id por meio da função \code{\link[=get_billing_id]{get_billing_id()}}.}
 }
 \value{
 A tibble.
 }
 \description{
-Após \code{bdplyr()} ser utilizada para criar a conexão remota, essa função
+Após \code{\link[=bdplyr]{bdplyr()}} ser utilizada para criar a conexão remota, essa função
 permite coletar o resultado das manipulações realizadas com os verbos do
 pacote \code{{dplyr}} e assim utilizá-lo na memória por completo.
 
 Você também pode salvar em disco diretamente através da função
-\code{bd_write} ou de suas derivadas: \code{bd_write_rds()} ou \code{bd_write_csv()}.
+\code{\link[=bd_write]{bd_write()}} ou de suas derivadas: \code{\link[=bd_write_rds]{bd_write_rds()}} ou \code{\link[=bd_write_csv]{bd_write_csv()}}.
 }
 \examples{
 \dontrun{

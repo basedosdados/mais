@@ -2,31 +2,39 @@
 #'
 #' @description
 #'
-#' A função `bdplyr` permite a criação de variáveis `lazy` que serão conectadas
-#' diretamente às tabelas desejadas da Base dos Dados no Google Big Query e
-#' poderão ser manuseadas com os verbos do dplyr como tradicionalmente feito
-#' com bases locais.
+#' Permite explorar e realizar operações com as tabelas do
+#' Base dos Dados sem o uso de linguagem SQL. A função `bdplyr()` cria
+#' variáveis `lazy` que serão conectadas diretamente às tabelas desejadas da
+#' Base dos Dados no Google Big Query e poderão ser manuseadas com os verbos
+#' do [dplyr::dplyr-package] como tradicionalmente feito
+#' com bases locais. Veja também: [bigrquery::src_bigquery]
 #'
-#' Portanto, é possível dispensar a utilização de códigos SQL e realizar, p. ex.,
-#'  seleção de colunas com `dplyr::select()`, filtrar linhas com
-#'  `dplyr::filter()`, operações com  `dplyr::mutate()` e joins com
-#'  `dplyr::left_join()` e outros verbos do pacote `{dply}`.
+#' Portanto, é possível (sem usar SQL) realizar, p. ex.,
+#' seleção de colunas com [dplyr::select()], filtrar linhas com
+#' [dplyr::filter()], operações com  [dplyr::mutate()] e joins com
+#' [dplyr::left_join()] e outros verbos do pacote `{dply}`.
 #'
 #' Os dados serão automaticamente baixados do Google BigQuery à medida em que
 #' se fizerem necessários, mas não serão carregados na memória virtual e nem
 #' gravados em disco a menos que expressamente solicitados.
 #'
-#' Para isso, devem ser usadas as funções `bdcollect()` para carregar na
-#' memória ou, para salvar em disco, `bd_write()` ou suas derivadas
-#' `bd_write_csv` e `bd_write_rds`
+#' Para isso, devem ser usadas as funções [bd_collect()] para carregar na
+#' memória ou, para salvar em disco, [bd_write()] ou suas derivadas
+#' [bd_write_csv()] e [bd_write_rds()]
 #'
 #'
 #' @param table String no formato "(nome_do_dataset).(nome_da_tabela)". É
 #' aconselhável checar na Base dos Dados o nome correto com atenção.
-#' @param billing_project_id Por padrão, tentará resgatar seu project billing
-#' id por meio da função `get_billing_id()`.
 #'
-#' @return Uma conexão no formato tbl_lazy
+#' @param billing_project_id Por padrão, tentará resgatar seu project billing
+#' id por meio da função [get_billing_id()].
+#'
+#' @return Uma `lazy tibble`, que poderá ser manuseada como se fosse uma
+#' base de dados local. Após satisfatoriamente manuseada, o resultado deverá
+#' ser carregado na memória através da função [bd_collect()] ou salvo em disco
+#' por meio de alguma da função [bd_write()] ou suas derivadas.
+#'
+#' @seealso bd_collect
 #' @export
 #'
 #' @examples
@@ -146,20 +154,20 @@ bdplyr <- function(
 #'
 #' @description
 #'
-#' Após `bdplyr()` ser utilizada para criar a conexão remota, essa função
+#' Após [bdplyr()] ser utilizada para criar a conexão remota, essa função
 #' permite coletar o resultado das manipulações realizadas com os verbos do
 #' pacote `{dplyr}` e assim utilizá-lo na memória por completo.
 #'
 #' Você também pode salvar em disco diretamente através da função
-#' `bd_write` ou de suas derivadas: `bd_write_rds()` ou `bd_write_csv()`.
+#' [bd_write()] ou de suas derivadas: [bd_write_rds()] ou [bd_write_csv()].
 #'
 #'
 #' @param .lazy_tbl Uma variável que foi coletada anteriormente por meio da
-#' função `bdplyr()`. Recomenda-se o uso após realizadas as operações desejadas
-#' com os verbos da família `{dplyr}`
+#' função [bdplyr()]. Recomenda-se o uso após realizadas as operações desejadas
+#' com os verbos do pacote `{dplyr}`.
 #'
 #' @param billing_project_id Por padrão, tentará resgatar seu project billing
-#' id por meio da função `get_billing_id()`.
+#' id por meio da função [get_billing_id()].
 #'
 #' @return A tibble.
 #' @export
@@ -215,13 +223,23 @@ bd_collect <- function(.lazy_tbl,
 #' bla blabl bla.
 #'
 #' @param .lazy_tbl Uma variável que foi coletada anteriormente por meio da
-#' função `bdplyr()`. Recomenda-se o uso após realizadas as operações desejadas
-#' com os verbos da família `{dplyr}`.
+#' função [bdplyr()]. Recomenda-se o uso após realizadas as operações desejadas
+#' com os verbos do pacote `{dplyr}`.
 #
 #' @param .write_fn A função de escrita desejada sem os ()
+#'
 #' @param path String contendo o endereço para o arquivo a ser criado. As
 #' pastas desejadas já devem existir e o arquivo deve terminar com a extensão
 #' correspondente.
+#'
+#' @param overwrite Por padrão FALSE. Indica se o arquivo local deve ser
+#' sobrescrito caso já existe. Use com cuidado.
+#'
+#' @param compress For [bd_write_rds()] only. A logical specifying whether
+#' saving to a named file is to use "gzip" compression, or one of "gzip",
+#' "bzip2" or "xz" to indicate the type of compression to be used. See also:
+#' [saveRDS()].
+#'
 #' @param ... Outros parâmetros que possam ser desejados.
 #'
 #' @return String com o endereço do arquivo salvo.
@@ -280,8 +298,8 @@ bd_write_rds <- function(.lazy_tbl,
                          path,
                          overwrite = FALSE,
                          compress = FALSE,
-                         version = 2,
                          ...) {
+
   # checar se file é válido
   if (stringr::str_detect(path, pattern = "(\\.rds)$") == FALSE) {
     rlang::abort("Pass a valid file name to argument `path`, include the '.rds' suffix.")
