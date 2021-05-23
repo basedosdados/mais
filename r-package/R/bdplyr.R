@@ -143,11 +143,11 @@ bdplyr <- function(
 
   # testa se funcionou
   if (is_tbl_lazy(tibble_connection) == TRUE) {
-    message(glue::glue("The table {tabela_full_name} was successfully connected."))
+    rlang::inform(glue::glue("The table {tabela_full_name} was successfully connected."))
     return (tibble_connection)
 
   } else {
-    message(glue::glue("Error when trying to connect the table {tabela_full_name}"))
+    rlang::inform(glue::glue("Error when trying to connect the table {tabela_full_name}"))
   }
 }
 
@@ -237,7 +237,7 @@ bd_collect <- function(.lazy_tbl,
   }
 
   # retornar os resultados
-  message(glue::glue("Base successfully collected on a {nrow(collected_table)}-row, {ncol(collected_table)}-column tibble."))
+  rlang::inform(glue::glue("Base successfully collected on a {nrow(collected_table)}-row, {ncol(collected_table)}-column tibble."))
   return(collected_table)
 
 }
@@ -375,7 +375,7 @@ bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(),
   # verificar se a gravação ocorreu corretamente e avisar
 
   if (file.exists(path)) {
-    message(glue::glue(
+    rlang::inform(glue::glue(
       "The file was successfully saved ({file.info(path)$size} B)"
     ))
     return(path)
