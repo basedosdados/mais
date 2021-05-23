@@ -28,6 +28,33 @@ function or its derivates: \code{\link[=bd_write_csv]{bd_write_csv()}} or \code{
 \examples{
 \dontrun{
 
+# setup billing
+ basedosdados::set_billing_id("billing-project-id")
+
+ # select a cool database at Base dos Dados
+bd_table <- basedosdados::bdplyr(
+  "basedosdados.br_sp_gov_ssp.ocorrencias_registradas")
+
+# quick look
+bd_table \%>\%
+  dplyr::glimpse()
+
+ # filter, select and group the remote data
+bd_ssp <-  bd_table \%>\%
+  dplyr::filter(ano >= 2019) \%>\%
+  dplyr::select(ano, mes, homicidio_doloso) \%>\%
+  dplyr::group_by(ano, mes)
+
+ # make some plots
+library(ggplot2)
+
+bbd_ssp \%>\%
+ # collect the data to continue the analisis
+ basedosdados::bd_collect() \%>\%
+  dplyr::summarise(homicidios_sum = sum(homicidio_doloso,
+                                         na.rm = TRUE)) \%>\%
+  ggplot(aes(x = mes, y = homicidios_sum, fill = ano)) +
+  geom_col(position = "dodge")
 
 
 }

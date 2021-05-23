@@ -8,7 +8,7 @@
 \usage{
 bd_write(.lazy_tbl, .write_fn = `?`(typed::Function()), path, ...)
 
-bd_write_rds(.lazy_tbl, path, overwrite = FALSE, compress = FALSE, ...)
+bd_write_rds(.lazy_tbl, path, overwrite = FALSE, compress = "none", ...)
 
 bd_write_csv(.lazy_tbl, path, overwrite = FALSE, ...)
 }
@@ -18,23 +18,21 @@ connected through the \code{\link[=bdplyr]{bdplyr()}} function. Tipically, it wi
 after performing the desired operations with the \code{{dplyr}} verbs.}
 
 \item{.write_fn}{A function capable of writing the result of a tibble to
-disk. Do not use () afther the function's name. For example: \link[writexl:write_xlsx]{writexl::write_xlsx},
-\link[arrow:write_feather]{arrow::write_feather}, \link[readr:write_delim]{readr::write_tsv}, etc.
+disk. Do not use () afther the function's name. For example:
+\link[writexl:write_xlsx]{writexl::write_xlsx}, \link[arrow:write_feather]{arrow::write_feather}, \link[jsonlite:read_json]{jsonlite::write_json}, etc.}
 
-#' @param path String containing the path for the file to be created.
-The desired folders must already exist and the file should normallt end with
+\item{path}{String containing the path for the file to be created.
+The desired folders must already exist and the file should normally end with
 the corresponding extension.}
 
 \item{...}{Other parameters passed to the \code{.write_fn} function.}
 
 \item{overwrite}{For derivates function only. FALSE by default.
-Indicates whether the local file should be
-overwritten if it already exists. Use with care.}
+Indicates whether the local file should be overwritten if it already exists.
+Use with care.}
 
-\item{compress}{For \code{\link[=bd_write_rds]{bd_write_rds()}} only. A logical specifying whether
-saving to a named file is to use "gzip" compression, or one of "gzip",
-"bzip2" or "xz" to indicate the type of compression to be used. See also:
-\code{\link[=saveRDS]{saveRDS()}}.}
+\item{compress}{For \code{\link[=bd_write_rds]{bd_write_rds()}} only. Compression method to use: "none"
+(default), "gz" ,"bz", or "xz". See also: \code{\link[readr:read_rds]{readr::write_rds()}}.}
 }
 \value{
 String containing the path to the created file.
@@ -43,7 +41,7 @@ String containing the path to the created file.
 Writes a remote table to disk that was called via {bdplyr}.
 It will collect the data and write to disk in the chosen format. Y
 ou will only need this function if you have not yet collected the data
-using the \code{\link[=bd_collect ]{bd_collect ()}}.
+using the \code{\link[=bd_collect]{bd_collect()}}.
 
 The comprehensive function \code{\link[=bd_write]{bd_write()}} takes as a parameter \code{.write_fn},
 which will be the name of some function (without parentheses) capable of
@@ -88,17 +86,35 @@ basedosdados::bd_write_csv(.lazy_tbl = my_subset,
                           "data-raw/ssp_subset2.csv"
 )
 
-# to rds
+#' # to rds
 basedosdados::bd_write_rds(.lazy_tbl = my_subset,
-                          "data-raw/ssp_subset.rds"
+                           "data-raw/ssp_subset.rds"
 )
 
 # to rds - with compression
-::bd_write_rds(.lazy_tbl = my_subset,
-                          "data-raw/ssp_subset2.rds",
-                          compress = TRUE, overwrite = TRUE
+basedosdados::bd_write_rds(.lazy_tbl = my_subset,
+                           "data-raw/ssp_subset2.rds",
+                           compress = "gz"
 )
 
+# tor rds - with hard compression
+basedosdados::bd_write_rds(.lazy_tbl = my_subset,
+                           "data-raw/ssp_subset3.rds",
+                           compress = "xz"
+)
 
+## using other write functions
+
+# json
+basedosdados::bd_write(.lazy_tbl = my_subset,
+                       .write_fn = jsonlite::write_json,
+                       "data-raw/ssp_subset.json"
+)
+
+# feather
+basedosdados::bd_write(.lazy_tbl = my_subset,
+                       .write_fn = arrow::write_feather,
+                       "data-raw/ssp_subset.feather"
+)
 }
 }

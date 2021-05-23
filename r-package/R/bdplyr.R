@@ -147,7 +147,7 @@ bdplyr <- function(
     return (tibble_connection)
 
   } else {
-    rlang::inform(glue::glue("Error when trying to connect the table {tabela_full_name}"))
+    rlang::abort(glue::glue("Error when trying to connect the table {tabela_full_name}"))
   }
 }
 
@@ -232,7 +232,7 @@ bd_collect <- function(.lazy_tbl,
   # checar se teve êxito
   if (inherits(collected_table, "tbl_df") == FALSE) {
 
-    rlang::warn("It seems to have been a failure to collect the tibble.")
+    rlang::abort("It seems to have been a failure to collect the tibble.")
 
   }
 
@@ -259,28 +259,26 @@ bd_collect <- function(.lazy_tbl,
 #' writing a tibble to disk.
 #'
 #' As helpers, the [bd_write_rds()] and [bd_write_csv()] functions make it
-#'  easier to write in these formats, more common in everyday life.
+#' easier to write in these formats, more common in everyday life.
 #'
 #' @param .lazy_tbl A variable that contains a database that was previously
 #' connected through the [bdplyr()] function. Tipically, it will be called
 #' after performing the desired operations with the `{dplyr}` verbs.
 #'
 #' @param .write_fn A function capable of writing the result of a tibble to
-#' disk. Do not use () afther the function's name. For example: [writexl::write_xlsx],
-#' [arrow::write_feather], [readr::write_tsv], etc.
+#' disk. Do not use () afther the function's name. For example:
+#' [writexl::write_xlsx], [arrow::write_feather], [jsonlite::write_json], etc.
 #'
-#'#' @param path String containing the path for the file to be created.
-#'The desired folders must already exist and the file should normallt end with
-#'the corresponding extension.
+#' @param path String containing the path for the file to be created.
+#' The desired folders must already exist and the file should normally end with
+#' the corresponding extension.
 #'
 #' @param overwrite For derivates function only. FALSE by default.
-#' Indicates whether the local file should be
-#' overwritten if it already exists. Use with care.
+#' Indicates whether the local file should be overwritten if it already exists.
+#' Use with care.
 #'
-#' @param compress For [bd_write_rds()] only. A logical specifying whether
-#' saving to a named file is to use "gzip" compression, or one of "gzip",
-#' "bzip2" or "xz" to indicate the type of compression to be used. See also:
-#' [saveRDS()].
+#' @param compress For [bd_write_rds()] only. Compression method to use: "none"
+#' (default), "gz" ,"bz", or "xz". See also: [readr::write_rds()].
 #'
 #' @param ... Other parameters passed to the `.write_fn` function.
 #'
@@ -324,18 +322,36 @@ bd_collect <- function(.lazy_tbl,
 #'                           "data-raw/ssp_subset2.csv"
 #')
 #'
-#'# to rds
-#'basedosdados::bd_write_rds(.lazy_tbl = my_subset,
-#'                           "data-raw/ssp_subset.rds"
-#')
+#' #' # to rds
+#' basedosdados::bd_write_rds(.lazy_tbl = my_subset,
+#'                            "data-raw/ssp_subset.rds"
+#' )
 #'
-#'# to rds - with compression
-#'::bd_write_rds(.lazy_tbl = my_subset,
-#'                           "data-raw/ssp_subset2.rds",
-#'                           compress = TRUE, overwrite = TRUE
-#')
+#' # to rds - with compression
+#' basedosdados::bd_write_rds(.lazy_tbl = my_subset,
+#'                            "data-raw/ssp_subset2.rds",
+#'                            compress = "gz"
+#' )
 #'
+#' # tor rds - with hard compression
+#' basedosdados::bd_write_rds(.lazy_tbl = my_subset,
+#'                            "data-raw/ssp_subset3.rds",
+#'                            compress = "xz"
+#' )
 #'
+#' ## using other write functions
+#'
+#' # json
+#' basedosdados::bd_write(.lazy_tbl = my_subset,
+#'                        .write_fn = jsonlite::write_json,
+#'                        "data-raw/ssp_subset.json"
+#' )
+#'
+#' # feather
+#' basedosdados::bd_write(.lazy_tbl = my_subset,
+#'                        .write_fn = arrow::write_feather,
+#'                        "data-raw/ssp_subset.feather"
+#' )
 #' }
 
 bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(),
@@ -361,11 +377,9 @@ bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(),
   }
 
   # coletar
-  # collected_table <- dplyr::collect(.lazy_tbl)
-  collected_table <- bd_collect(.lazy_tbl)
-# Duvida: eu poderia simplesmente chamar a bd_collect aqui?
+   collected_table <- bd_collect(.lazy_tbl)
 
-   # escrever os resultados
+  # escrever os resultados
   # esboço de como a escrita poderia ser parametrizada
   # dúvidas com evaluation provavelmente serão sanadas aqui: https://adv-r.hadley.nz/evaluation.html#evaluation
 
@@ -378,7 +392,7 @@ bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(),
     rlang::inform(glue::glue(
       "The file was successfully saved ({file.info(path)$size} B)"
     ))
-    return(path)
+    invisible(path)
   } else {
     rlang::abort("Failed to save the file.")
   }
@@ -393,7 +407,7 @@ bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(),
 bd_write_rds <- function(.lazy_tbl,
                          path,
                          overwrite = FALSE,
-                         compress = FALSE,
+                         compress = "none",
                          ...) {
 
   # checar se file é válido
@@ -406,29 +420,30 @@ bd_write_rds <- function(.lazy_tbl,
     rlang::abort("The file already exists. Use overwrite = TRUE if you want to overwrite it.")
   }
 
+  # coletar
+  collected_table <- bd_collect(.lazy_tbl)
+
+
   # chamar bd_write com saveRDS
   # estou copiando os parâmetros que readr::write_rds usa
   # a ideia é não precisar de outra dependência... se isso não for um problema
   # bora usar readr::write_rds mesmo
-  bd_write(
-    .lazy_tbl = .lazy_tbl,
-    .write_fn = saveRDS,
-    path = path,
-    version = 2,
-    compress = compress,
-    ...
-  )
+
+  readr::write_rds(x = collected_table,
+                   file = path,
+                   compress = compress,
+                   ...)
 
   # # verificar se a gravação ocorreu corretamente e avisar
   #
-  # if (file.exists(path)) {
-  #   message(glue::glue(
-  #     "The file was successfully saved ({file.info(path)$size} B)"
-  #   ))
-  #   return(path)
-  # } else {
-  #   rlang::abort("Failed to save the file.")
-  # }
+  if (file.exists(path)) {
+    rlang::inform(glue::glue(
+      "The file was successfully saved ({file.info(path)$size} B)"
+    ))
+    invisible(path)
+  } else {
+    rlang::abort("Failed to save the file.")
+  }
 
 }
 
@@ -446,23 +461,24 @@ bd_write_csv <- function(.lazy_tbl, path, overwrite = FALSE, ...) {
     rlang::abort("The file already exists. Use overwrite = TRUE if you want to overwrite it.")
   }
 
-  # chamar bd_write com write.csv
-  bd_write(
-    .lazy_tbl = .lazy_tbl,
-    .write_fn = write.csv,
-    path = path,
-    ...
-  )
+  # coletar
+  collected_table <- bd_collect(.lazy_tbl)
+
+
+  # chamar readr::write_csv
+  readr::write_csv(x = collected_table,
+                   file = path,
+                   ...)
 
   # verificar se a gravação ocorreu corretamente e avisar
-  # if (file.exists(path)) {
-  #   message(glue::glue(
-  #     "The file was successfully saved ({file.info(path)$size} B)"
-  #   ))
-  #   return(path)
-  # } else {
-  #   rlang::abort("Failed to save the file.")
-  # }
+  if (file.exists(path)) {
+    rlang::inform(glue::glue(
+      "The file was successfully saved ({file.info(path)$size} B)"
+    ))
+    invisible(path)
+  } else {
+    rlang::abort("Failed to save the file.")
+  }
 
 
 }
