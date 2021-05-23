@@ -70,22 +70,6 @@
 #TODO: tentar autenticar em silêncio com bigrquery::bq_auth(email = <email>)
 # conferir: https://github.com/r-dbi/bigrquery/blob/main/R/bq-auth.R
 
-
-# is_tbl_lazy -------------------------------------------------------------
-# internal function to check is a valid connection to use
-
-is_tbl_lazy <- function(tibble_connection) {
-  rlang::inherits_any(
-    x = tibble_connection,
-    class =  c("tbl_BigQueryConnection",
-               "tbl_dbi",
-               "tbl_sql",
-               "tbl_lazy")
-  )
-
-}
-
-
 # bdplyr ------------------------------------------------------------------
 
 bdplyr <- function(
@@ -263,5 +247,19 @@ bd_write_rds <- function(.lazy_tbl,
 bd_write_csv <- function(.lazy_tbl, file, ...) {
 
  # chamar bd_write com write_csv
+
+}
+
+# is_tbl_lazy -------------------------------------------------------------
+# internal function to check is a valid connection to use
+
+is_tbl_lazy <- function(tibble_connection) {
+  rlang::inherits_any(
+    x = tibble_connection,
+    class =  c("tbl_BigQueryConnection",
+               "tbl_dbi",
+               "tbl_sql",
+               "tbl_lazy")
+  )
 
 }
