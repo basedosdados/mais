@@ -1,45 +1,57 @@
-#' Compatibilidade com {dplyr}
+#' Compatibility with {dplyr} verbs sem o uso de SQL
 #'
 #' @description
 #'
-#' Realiza conexão com o Google BigQuery via {DBI} e torna a base
-#' compatível com as operações básicas do {dplyr} tais como glimpse(),
-#' filter(), select(), mutate(), _join(), etc.
+#' A função `bdplyr` permite a criação de variáveis `lazy` que serão conectadas
+#' diretamente às tabelas desejadas da Base dos Dados no Google Big Query e
+#' poderão ser manuseadas com os verbos do dplyr como tradicionalmente feito
+#' com bases locais.
 #'
-#' Após realizar as operações, usar dplyr::collect() para finalizar a
-#' requisição.
+#' Portanto, é possível dispensar a utilização de códigos SQL e realizar, p. ex.,
+#'  seleção de colunas com `dplyr::select()`, filtrar linhas com
+#'  `dplyr::filter()`, operações com  `dplyr::mutate()` e joins com
+#'  `dplyr::left_join()` e outros verbos do pacote `{dply}`.
 #'
-#' Ver também: https://rdrr.io/cran/bigrquery/man/src_bigquery.html
+#' Os dados serão automaticamente baixados do Google BigQuery à medida em que
+#' se fizerem necessários, mas não serão carregados na memória virtual e nem
+#' gravados em disco a menos que expressamente solicitados.
 #'
-#' @param table Caminho no formato basedosdados.\<dataset\>.\<tabela\>
-#' @param billing_project_id billing_id.
+#' Para isso, devem ser usadas as funções `bdcollect()` para carregar na
+#' memória ou, para salvar em disco, `bd_write()` ou suas derivadas
+#' `bd_write_csv` e `bd_write_rds`
 #'
-#' @return Tabela em formato manipulável
+#'
+#' @param table String no formato "(nome_do_dataset).(nome_da_tabela)". É
+#' aconselhável checar na Base dos Dados o nome correto com atenção.
+#' @param billing_project_id Por padrão, tentará resgatar seu project billing
+#' id por meio da função `get_billing_id()`.
+#'
+#' @return Uma conexão no formato tbl_lazy
 #' @export
 #'
 #' @examples
 #'
 #' \dontrun{
 #'
-#' # definir billing
-#' basedosdados::set_billing_id("nimble-root-312115")
+#' # set project billing id
+#' basedosdados::set_billing_id("avalidprojectbillingid")
 #'
-#' # carregar a base que quero
+#' # connects to the remote table I want
 #' base_sim <- bdplyr("br_ms_sim.municipio_causa_idade")
 #'
-#' # carregar outra base
+#' # connects to another remote table
 #' municipios <- bdplyr("br_bd_diretorios_brasil.municipio")
 #'
-#' # explorar
+#' # explore data
 #' base_sim %>%
 #'   dplyr::glimpse()
 #'
-#'
+#' # use normal `{dplyr}` operations
 #' municipios %>%
 #'   dplyr::select(dplyr::everything()) %>%
 #'   head()
 #'
-#' # filtrar
+#' # filter
 #' base_sim_acre <- base_sim %>%
 #'  dplyr::mutate(ano = as.numeric(ano)) %>%
 #'   dplyr::filter(sigla_uf == "AC", ano >= 2018)
@@ -54,14 +66,17 @@
 #'   dplyr::left_join(municipios_acre,
 #'                    by = "id_municipio")
 #'
-#' # testar se deu certo
+#' # tests whether the result is satisfactory
 #' base_junta
 #'
-#' # coletar reusltado
+#' # collect the result
 #' base_final <- base_junta %>%
-#'   dplyr::collect()
+#'   basedosdados::bd_collect()
 #'
-#' base_final
+#' # alternatively, write in disk the result
+#'
+#' base_final %>%
+#'   basedosdados::bd_write_rds(path = "data-raw/data.rds")
 #'
 #'}
 
@@ -69,6 +84,7 @@
 #TODO: usar bigrquery::bq_has_token() para checar se atenticou no Google
 #TODO: tentar autenticar em silêncio com bigrquery::bq_auth(email = <email>)
 # conferir: https://github.com/r-dbi/bigrquery/blob/main/R/bq-auth.R
+#TODO: usar uma vignette pra explicar a compatibilidade
 
 # bdplyr ------------------------------------------------------------------
 
@@ -76,7 +92,7 @@ bdplyr <- function(
   table,
   billing_project_id = basedosdados::get_billing_id()) {
 
-  # checar se o billing foi informado
+  # checa se o billing id foi informado
 
   if(billing_project_id == FALSE) {
 
@@ -86,13 +102,13 @@ bdplyr <- function(
 
   # criar o nome que o BQ vai entender
 
-  tabela_completa <- glue::glue("basedosdados.{table}")
+  tabela_full_name <- glue::glue("basedosdados.{table}")
 
   # checa se a tabela é reconhecida pelo google
 
-  if(bigrquery::bq_table_exists(tabela_completa) == FALSE) {
+  if(bigrquery::bq_table_exists(tabela_full_name) == FALSE) {
 
-    rlang::abort(glue::glue("A tabela {table} não foi localizada"))
+    rlang::abort(glue::glue("The table {table} doesn´t have a valid name or was not found at basedosdados."))
 
   }
 
@@ -104,32 +120,56 @@ bdplyr <- function(
     billing = billing_project_id)
 
   # chama o dplyr e guarda em um objeto
-  tibble_connection <- dplyr::tbl(con, tabela_completa)
+  tibble_connection <- dplyr::tbl(con, tabela_full_name)
 
 
   # testa se funcionou
   if (is_tbl_lazy(tibble_connection) == TRUE) {
-    message(glue::glue("A tabela {table} foi conectada com sucesso."))
+    message(glue::glue("The table {table} was successfully connected."))
     return (tibble_connection)
 
   } else {
-    message(glue::glue("Erro ao tentar conectar a tabela {table}"))
+    message(glue::glue("Error when trying to connect the table {table}"))
   }
 }
 
 
 # bdcollect ---------------------------------------------------------------
 
-# criar uma funçao interna que aplica collect()
 
  # TODO documentar as duas juntamente na mesma página
  # nos exemplos mostrar como elas se combinam
  # o usuário pode gerar um lazy tbl, usar código típico de R para gerar uma query
  # e usar bd_collect() para coletar os resultados
 
-#' @rdname bdplyr()
+#' Coleta os resultados de uma base remota para uso local
+#'
+#' @description
+#'
+#' Após `bdplyr()` ser utilizada para criar a conexão remota, essa função
+#' permite coletar o resultado das manipulações realizadas com os verbos do
+#' pacote `{dplyr}` e assim utilizá-lo na memória por completo.
+#'
+#' Você também pode salvar em disco diretamente através da função
+#' `bd_write` ou de suas derivadas: `bd_write_rds()` ou `bd_write_csv()`.
+#'
+#'
+#' @param .lazy_tbl Uma variável que foi coletada anteriormente por meio da
+#' função `bdplyr()`. Recomenda-se o uso após realizadas as operações desejadas
+#' com os verbos da família `{dplyr}`
+#'
+#' @param billing_project_id Por padrão, tentará resgatar seu project billing
+#' id por meio da função `get_billing_id()`.
+#'
+#' @return A tibble.
 #' @export
-
+#'
+#' @examples
+#' \dontrun{
+#'
+#'
+#'
+#' }
 bd_collect <- function(.lazy_tbl,
                        billing_project_id = basedosdados::get_billing_id()) {
 
@@ -145,7 +185,7 @@ bd_collect <- function(.lazy_tbl,
 
   if(is_tbl_lazy(.lazy_tbl) == FALSE) {
 
-    rlang::abort("Não foi possível coletar")
+    rlang::abort("The table could not be collected.")
   }
 
   # coletar
@@ -154,12 +194,12 @@ bd_collect <- function(.lazy_tbl,
   # checar se teve êxito
   if (inherits(collected_table, "tbl_df") == FALSE) {
 
-    rlang::warn("Parece não ter retornado uma tibble.")
+    rlang::warn("It seems to have been a failure to collect the tibble.")
 
   }
 
   # retornar os resultados
-  message(glue::glue("Base coletada em uma tibble {nrow(collected_table)} x {ncol(collected_table)}"))
+  message(glue::glue("Base successfully collected on a {nrow(collected_table)}-row, {ncol(collected_table)}-column tibble."))
   return(collected_table)
 
 }
@@ -167,14 +207,41 @@ bd_collect <- function(.lazy_tbl,
 
 # bd_write ----------------------------------------------------------------
 
-#' @rdname bdplyr()
+#' Salva em disco o resultado de operações com bases remotas
+#'
+#' @description
+#'
+#' bla bla bla bla bla;
+#' bla blabl bla.
+#'
+#' @param .lazy_tbl Uma variável que foi coletada anteriormente por meio da
+#' função `bdplyr()`. Recomenda-se o uso após realizadas as operações desejadas
+#' com os verbos da família `{dplyr}`.
+#
+#' @param .write_fn A função de escrita desejada sem os ()
+#' @param path String contendo o endereço para o arquivo a ser criado. As
+#' pastas desejadas já devem existir e o arquivo deve terminar com a extensão
+#' correspondente.
+#' @param ... Outros parâmetros que possam ser desejados.
+#'
+#' @return String com o endereço do arquivo salvo.
 #' @export
+#'
+#' @name bd_write
+#' @examples
+#' \dontrun{
+#'
+#' # exemplo com csv e rds na normal e depois na helper
+#'
+#' # pensar em exemplo json
+#'
+#'
+#' }
 
 bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(), ...) {
 
-  #' @param .write_fn é uma função de escrita
-  #'
-  #' tipagem com o typed se possível: https://github.com/moodymudskipper/typed
+
+  # tipagem com o typed se possível: https://github.com/moodymudskipper/typed
 
   # checa se é coletável
   if (is_tbl_lazy(.lazy_tbl) == FALSE) {
@@ -182,12 +249,12 @@ bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(), ...) {
     # se não for coletável mas for tbl, indicar que a função é desnecessária
     if (tibble::is_tibble(.lazy_tbl)) {
       rlang::abort(
-        "A tabela não parece precisar ser coletada. Salve utilizando as funções tradicionais de escrita."
+        "The table does not seem to need to be collected. Save using traditional writing functions like `write.csv´."
       )
 
       # se não for tibble, é erro mesmo
     } else {
-      rlang::abort("Não foi possível coletar .lazy_tbl")
+      rlang::abort("It was not possible to collect the remote table.")
     }
   }
 
@@ -207,9 +274,8 @@ bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(), ...) {
 
 # bd_write_rds e bd_write_csv ---------------------------------------------
 
-#' @rdname bdplyr()
+#' @rdname bd_write
 #' @export
-
 bd_write_rds <- function(.lazy_tbl,
                          path,
                          overwrite = FALSE,
@@ -243,19 +309,17 @@ bd_write_rds <- function(.lazy_tbl,
 
   if (file.exists(path)) {
     message(glue::glue(
-      "O arquivo foi salvo corretamente com {file.info(path)$size} B"
+      "The file was successfully saved ({file.info(path)$size} B)"
     ))
     return(path)
   } else {
-    rlang::abort("Erro ao salvar o arquivo")
+    rlang::abort("Failed to save the file.")
   }
 
 }
 
-#' @rdname bdplyr()
+#' @rdname bd_write
 #' @export
-
-
 bd_write_csv <- function(.lazy_tbl, path, overwrite = FALSE, ...) {
 
   # checar se file é válido
@@ -279,18 +343,18 @@ bd_write_csv <- function(.lazy_tbl, path, overwrite = FALSE, ...) {
   # verificar se a gravação ocorreu corretamente e avisar
   if (file.exists(path)) {
     message(glue::glue(
-      "O arquivo foi salvo corretamente com {file.info(path)$size} B"
+      "The file was successfully saved ({file.info(path)$size} B)"
     ))
     return(path)
   } else {
-    rlang::abort("Erro ao salvar o arquivo")
+    rlang::abort("Failed to save the file.")
   }
 
 
 }
 
 # is_tbl_lazy -------------------------------------------------------------
-# internal function to check is a valid connection to use
+# internal function to check if is a valid connection to use
 
 is_tbl_lazy <- function(tibble_connection) {
   rlang::inherits_any(

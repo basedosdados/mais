@@ -2,51 +2,62 @@
 % Please edit documentation in R/bdplyr.R
 \name{bdplyr}
 \alias{bdplyr}
-\title{Compatibilidade com {dplyr}}
+\title{Compatibility with {dplyr} verbs sem o uso de SQL}
 \usage{
 bdplyr(table, billing_project_id = basedosdados::get_billing_id())
 }
 \arguments{
-\item{table}{Caminho no formato basedosdados.\<dataset\>.\<tabela\>}
+\item{table}{String no formato "(nome_do_dataset).(nome_da_tabela)". É
+aconselhável checar na Base dos Dados o nome correto com atenção.}
 
-\item{billing_project_id}{billing_id.}
+\item{billing_project_id}{Por padrão, tentará resgatar seu project billing
+id por meio da função \code{get_billing_id()}.}
 }
 \value{
-Tabela em formato manipulável
+Uma conexão no formato tbl_lazy
 }
 \description{
-Realiza conexão com o Google BigQuery via {DBI} e torna a base
-compatível com as operações básicas do {dplyr} tais como glimpse(),
-filter(), select(), mutate(), _join(), etc.
+A função \code{bdplyr} permite a criação de variáveis \code{lazy} que serão conectadas
+diretamente às tabelas desejadas da Base dos Dados no Google Big Query e
+poderão ser manuseadas com os verbos do dplyr como tradicionalmente feito
+com bases locais.
 
-Após realizar as operações, usar dplyr::collect() para finalizar a
-requisição.
+Portanto, é possível dispensar a utilização de códigos SQL e realizar, p. ex.,
+seleção de colunas com \code{dplyr::select()}, filtrar linhas com
+\code{dplyr::filter()}, operações com  \code{dplyr::mutate()} e joins com
+\code{dplyr::left_join()} e outros verbos do pacote \code{{dply}}.
 
-Ver também: https://rdrr.io/cran/bigrquery/man/src_bigquery.html
+Os dados serão automaticamente baixados do Google BigQuery à medida em que
+se fizerem necessários, mas não serão carregados na memória virtual e nem
+gravados em disco a menos que expressamente solicitados.
+
+Para isso, devem ser usadas as funções \code{bdcollect()} para carregar na
+memória ou, para salvar em disco, \code{bd_write()} ou suas derivadas
+\code{bd_write_csv} e \code{bd_write_rds}
 }
 \examples{
 
 \dontrun{
 
-# definir billing
-basedosdados::set_billing_id("nimble-root-312115")
+# set project billing id
+basedosdados::set_billing_id("avalidprojectbillingid")
 
-# carregar a base que quero
+# connects to the remote table I want
 base_sim <- bdplyr("br_ms_sim.municipio_causa_idade")
 
-# carregar outra base
+# connects to another remote table
 municipios <- bdplyr("br_bd_diretorios_brasil.municipio")
 
-# explorar
+# explore data
 base_sim \%>\%
   dplyr::glimpse()
 
-
+# use normal `{dplyr}` operations
 municipios \%>\%
   dplyr::select(dplyr::everything()) \%>\%
   head()
 
-# filtrar
+# filter
 base_sim_acre <- base_sim \%>\%
  dplyr::mutate(ano = as.numeric(ano)) \%>\%
   dplyr::filter(sigla_uf == "AC", ano >= 2018)
@@ -61,14 +72,17 @@ base_junta <- base_sim_acre \%>\%
   dplyr::left_join(municipios_acre,
                    by = "id_municipio")
 
-# testar se deu certo
+# tests whether the result is satisfactory
 base_junta
 
-# coletar reusltado
+# collect the result
 base_final <- base_junta \%>\%
-  dplyr::collect()
+  basedosdados::bd_collect()
 
-base_final
+# alternatively, write in disk the result
+
+base_final \%>\%
+  basedosdados::bd_write_rds(path = "data-raw/data.rds")
 
 }
 }
