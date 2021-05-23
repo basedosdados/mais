@@ -71,6 +71,21 @@
 # conferir: https://github.com/r-dbi/bigrquery/blob/main/R/bq-auth.R
 
 
+# is_tbl_lazy -------------------------------------------------------------
+# internal function to check is a valid connection to use
+
+is_tbl_lazy <- function(tibble_connection) {
+  rlang::inherits_any(
+    x = tibble_connection,
+    class =  c("tbl_BigQueryConnection",
+               "tbl_dbi",
+               "tbl_sql",
+               "tbl_lazy")
+  )
+
+}
+
+
 # bdplyr ------------------------------------------------------------------
 
 bdplyr <- function(
@@ -105,12 +120,13 @@ bdplyr <- function(
     billing = billing_project_id)
 
   # chama o dplyr e guarda em um objeto
-  conexao_retorno <- dplyr::tbl(con, tabela_completa)
+  tibble_connection <- dplyr::tbl(con, tabela_completa)
+
 
   # testa se funcionou
-  if (dplyr::is.tbl(conexao_retorno) == TRUE) {
+  if (is_tbl_lazy(tibble_connection) == TRUE) {
     message(glue::glue("A tabela {table} foi conectada com sucesso."))
-    return (conexao_retorno)
+    return (tibble_connection)
 
   } else {
     message(glue::glue("Erro ao tentar conectar a tabela {table}"))
@@ -143,16 +159,16 @@ bd_collect <- function(.lazy_tbl,
 
   # checar se o argumento .lazy_tbl é coletável
 
-  if(dplyr::is.tbl(.lazy_tbl) == FALSE) {
+  if(is_tbl_lazy(.lazy_tbl) == FALSE) {
 
-    rlang::abort("Não foi possível coletar {.lazy_tbl}")
+    rlang::abort("Não foi possível coletar")
   }
 
   # coletar
   collected_table <- dplyr::collect(.lazy_tbl)
 
   # checar se teve êxito
-  if (tibble::is_tibble(collected_table) == FALSE) {
+  if (inherits(collected_table, "tbl_df") == FALSE) {
 
     rlang::warn("Parece não ter retornado uma tibble.")
 
@@ -176,17 +192,30 @@ bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(), ...) {
   #'
   #' tipagem com o typed se possível: https://github.com/moodymudskipper/typed
 
+  # checa se é coletável
+  if (is_tbl_lazy(.lazy_tbl) == FALSE) {
 
-  # TODO verificar se o argumento `.lazy_tbl` é coletável
-  # escrever os resultados
+    # se não for coletável mas for tbl, indicar que a função é desnecessária
+    if (tibble::is_tibble(.lazy_tbl)) {
+      rlang::abort(
+        "A tabela não parece precisar ser coletada. Salve utilizando as funções tradicionais de escrita."
+      )
 
+      # se não for tibble, é erro mesmo
+    } else {
+      rlang::abort("Não foi possível coletar .lazy_tbl")
+    }
+  }
+
+  # coletar
+  # collected_table <- dplyr::collect(.lazy_tbl)
+  collected_table <- bd_collect(.lazy_tbl)
+# Duvida: eu poderia simplesmente chamar a bd_collect aqui?
+
+   # escrever os resultados
   # esboço de como a escrita poderia ser parametrizada
-
   # dúvidas com evaluation provavelmente serão sanadas aqui: https://adv-r.hadley.nz/evaluation.html#evaluation
-
-  data <- # resultado da coleção da query
-
-  rlang::call2(.write_fn, data, ...) %>%
+  rlang::call2(.write_fn, collected_table, ...) %>%
     rlang::eval_bare()
 
 }
@@ -194,11 +223,41 @@ bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(), ...) {
 
 # bd_write_rds e bd_write_csv ---------------------------------------------
 
-bd_write_rds <- function(.lazy_tbl, file, ...) {
 
-  # chamar bd_write com readr
+bd_write_rds <- function(.lazy_tbl,
+                         path,
+                         compress = FALSE,
+                         version = 2,
+                         ...) {
+  # checar se file é válido
+  if (stringr::str_detect(path, pattern = "(\\.rds)$") == FALSE) {
+    rlang::abort("Pass a valid file name to argument `path`, include the '.rds' suffix.")
+  }
+
+  # chamar bd_write com saveRDS
+  # estou copiando os parâmetros que readr::write_rds usa
+  bd_write(
+    .lazy_tbl = .lazy_tbl,
+    .write_fn = saveRDS,
+    file = path,
+    version = 2,
+    compress = compress,
+    ...
+  )
+
+  # verificar se a gravação ocorreu corretamente e avisar
+
+  if (file.exists(path)) {
+    message(glue::glue(
+      "O arquivo foi salvo corretamente com {file.info(path)$size} B"
+    ))
+    return(path)
+  } else {
+    rlang::abort("Erro ao salvar o arquivo")
+  }
 
 }
+
 
 
 bd_write_csv <- function(.lazy_tbl, file, ...) {
