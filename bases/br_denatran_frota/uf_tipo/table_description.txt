@@ -22,13 +22,14 @@ Email: pdesacastro@gmail.com
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- estado
+- unidade da federação
 - mes
 
 Colunas identificando linhas unicamente
 -------------------
-- uf
-- id_uf
+- ano
+- mes
+- sigla_uf
 
 Cobertura Temporal
 ------------------
@@ -54,11 +55,10 @@ Cobertura Temporal
 Cobertura Espacial
 ------------------
 - brasil
-- estados
 
 Tratamento
 ----------
-Padronização dos nomes das colunas. Remoção das linhas do total dos estados. Nova coluna com ID da Unidade da Federação
+Padronização dos nomes das colunas. Remoção das linhas do total dos estados.
 
 Frequencia de Atualização
 -------------------------

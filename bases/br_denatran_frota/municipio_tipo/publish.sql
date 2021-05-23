@@ -21,13 +21,11 @@ TIPOS:
 
 CREATE VIEW basedosdados-312117.br_denatran_frota.municipio_tipo AS
 SELECT 
-SAFE_CAST(uf_original AS STRING) uf_original,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(municipio_original AS STRING) municipio_original,
-SAFE_CAST(data AS STRING) data,
-SAFE_CAST(id_uf AS INT64) id_uf,
-SAFE_CAST(uf AS STRING) uf,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(municipio AS STRING) municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(ano as INT64) ano,
+SAFE_CAST(mes as INT64) mes,
 SAFE_CAST(automovel AS INT64) automovel,
 SAFE_CAST(bonde AS INT64) bonde,
 SAFE_CAST(caminhao AS INT64) caminhao,

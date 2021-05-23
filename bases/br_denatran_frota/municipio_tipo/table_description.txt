@@ -28,6 +28,8 @@ Nível da Observação (i.e. a granularidade da linha)
 Colunas identificando linhas unicamente
 -------------------
 - id_municipio
+- ano
+- mes
 
 Cobertura Temporal
 ------------------
@@ -53,12 +55,10 @@ Cobertura Temporal
 Cobertura Espacial
 ------------------
 - brasil
-- estados
-- municipios
 
 Tratamento
 ----------
-Padronização das colunas. Novas colunas, id_uf, id_municipio e município.
+Padronização das colunas. Nova coluna, id_municipio.
 
 Frequencia de Atualização
 -------------------------

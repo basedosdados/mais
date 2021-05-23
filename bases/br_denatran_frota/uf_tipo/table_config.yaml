@@ -8,9 +8,9 @@ dataset_id: br_denatran_frota # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-denatran-frota # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_denatran_frota # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v1.1 # REQUIRED
 
-last_updated: 2021-04-30 # AUTO GENERATED
+last_updated: 2021-05-23 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -37,7 +37,7 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Padronização dos nomes das colunas. Remoção das linhas do total dos estados. Nova coluna com ID da Unidade da Federação
+    Padronização dos nomes das colunas. Remoção das linhas do total dos estados.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -46,23 +46,24 @@ data_update_frequency: mes # REQUIRED
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
 # Regras:
-#   - minúsculo, sem acento, singular.
+    #   - minúsculo, sem acento, singular.
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - estado
+    - unidade da federação
     - mes
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - uf
-    - id_uf
+    - ano
+    - mes
+    - sigla_uf
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
-#   - minúsculo, sem acento, singular
+    #   - minúsculo, sem acento, singular
 #   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
 # Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
 #   - brasil
@@ -71,7 +72,6 @@ primary_keys:
 #   - brasil, argentina, peru, equador
 coverage_geo:
     - brasil
-    - estados
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
@@ -112,20 +112,20 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: uf
-        description: Nome da Unidade da Federação
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_uf
-        description: ID da Unidade da Federação
+        name: ano
+        description: Ano 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: data
-        description: Data no formato YYYY-MM
+        name: mes
+        description: Mês 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -259,4 +259,4 @@ columns: # REQUIRED
         name: total
         description: Total
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+        is_partition: False # Bool [True, False], whether the column is a partitio

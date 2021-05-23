@@ -7,9 +7,9 @@ dataset_id: br_denatran_frota # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-denatran-frota # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_denatran_frota # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v1.1 # REQUIRED
 
-last_updated: 2021-04-30 # AUTO GENERATED
+last_updated: 2021-05-23 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -36,7 +36,7 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Padronização das colunas. Novas colunas, id_uf, id_municipio e município.
+    Padronização das colunas. Nova coluna, id_municipio.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -57,6 +57,8 @@ observation_level: #REQUIRED
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
     - id_municipio
+    - ano
+    - mes
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -69,8 +71,6 @@ primary_keys:
 #   - brasil, argentina, peru, equador
 coverage_geo:
     - brasil
-    - estados
-    - municipios
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
@@ -111,7 +111,7 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: uf_original
+        name: sigla_uf
         description: Sigla da Unidade da Federação original da base
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -123,32 +123,20 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: data
-        description: Data no format YYYY-MM
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_uf
-        description: ID da Unidade da Federação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: uf
-        description: Nome da Unidade da Federação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
         name: id_municipio
-        description: ID do município
+        description: ID do Município
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: municipio
-        description: Nome do município
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mes
+        description: Mês
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

@@ -89,16 +89,7 @@ read_xl <- function(x, type) {
   date <- stringr::str_match(x, "\\d{1,2}-\\d{4}") %>% 
     paste0("01-", .) %>% 
     lubridate::dmy()
-
-  date_formated <- paste0(
-    lubridate::year(date),
-    "-",
-    ifelse(lubridate::month(date) < 10, 
-      paste0("0", lubridate::month(date)),
-      lubridate::month(date)
-    )
-  )
-
+  
   read <- function(pl) {
     tryCatch(
       readxl::read_excel(pl, sheet = find_sheet(pl, date)),
@@ -111,7 +102,10 @@ read_xl <- function(x, type) {
     janitor::clean_names() %>% 
     dplyr::rename_with(.fn = function(x) stringr::str_replace(x, pattern = "_|\\.|-", replacement = "")) %>% 
     dplyr::select(!starts_with("na")) %>% 
-    dplyr::mutate(data = date_formated)
+    dplyr::mutate(
+			ano = lubridate::year(date),
+			mes = lubridate::month(date)
+		)
 }
 
 # Tabela com os id dos estados e municipios
@@ -189,31 +183,30 @@ siglas_uf <- c(
 
 get_ibge_info <- function(uf, name, tolerance = 0.60) {
   state <- siglas_uf[uf]
-  result <- municipios %>% 
-    dplyr::filter(uf == state) %>% 
-    dplyr::mutate(dist = stringdist::stringsim(name_upper, name)) %>% 
-    dplyr::arrange(dplyr::desc(dist)) %>% 
-    dplyr::slice(1L) %>% 
+  result <- municipios %>%
+    dplyr::filter(uf == state) %>%
+    dplyr::mutate(dist = stringdist::stringsim(name_upper, name)) %>%
+    dplyr::arrange(dplyr::desc(dist)) %>%
+    dplyr::slice(1L) %>%
     as.list()
 
   if (length(result[[1]]) == 0 || result$dist < tolerance) {
     return(list(
-      id_uf = NA,
-      uf = NA,
-      id_municipio = NA,
-      municipio = NA
+      id_municipio = NA
     ))
   }
-  
+
   list(
-    id_uf = result$id_uf, 
-    uf = result$uf, 
-    id_municipio = result$id_municipio, 
-    municipio = result$municipio
+    id_municipio = result$id_municipio
   )
 }
 
 get_uf_name <- function(x) {
   if (nchar(x) != 2) return(x)
   unname(siglas_uf[x])
+}
+
+get_sigla_uf <- function(uf_name) {
+  purrr::keep(siglas_uf, ~.x == uf_name) %>%
+		names()
 }

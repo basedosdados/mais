@@ -21,9 +21,9 @@ TIPOS:
 
 CREATE VIEW basedosdados-312117.br_denatran_frota.uf_tipo AS
 SELECT 
-SAFE_CAST(uf AS STRING) uf,
-SAFE_CAST(id_uf AS INT64) id_uf,
-SAFE_CAST(data AS STRING) data,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(automovel AS INT64) automovel,
 SAFE_CAST(bonde AS INT64) bonde,
 SAFE_CAST(caminhao AS INT64) caminhao,
