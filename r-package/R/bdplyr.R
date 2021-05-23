@@ -9,7 +9,7 @@
 #' as traditionally done as local bases. See also: [bigrquery::src_bigquery].
 #'
 #' Therefore, it is possible (without using `SQL`) to perform, for example,
-#' column selection with [dplyr::select()], filter rows with [dplyr::filteR()],
+#' column selection with [dplyr::select()], filter rows with [dplyr::filter()],
 #' operations with [dplyr::mutate()], joins with [dplyr::left_join()] and
 #' other vebs from `{dplyr}` package.
 #'
@@ -17,14 +17,14 @@
 #' background as it if necessary, but will not be loaded into your virtual
 #' memory nor recorded on disk unless expressly requuested.
 #'
-#' For this, the functions such as [bd_collect()] ou [bd_wirte()] should be
+#' For this, the functions such as [bd_collect()] ou [bd_write()] should be
 #' used. To load the data handled locally in your virtual memory, use
 #' [bd_collect()]. To save the result in disk use the broader function
 #' [bd_write()] or its derivates [bd_write_csv()] or [bd_write_rds()] to save,
 #' respectively in `.csv` or `.rds` format.
 #'
 #'
-#' @param table String in the format "(dataset_name)*.*(specific_table_name)".
+#' @param table String in the format "basedosdados.(dataset_name)*.*(specific_table_name)".
 #' It´s advisable to chack the Base dos Dados datalake for the correct names.
 #'
 #' @param billing_project_id a string containing your billing project id.
@@ -110,14 +110,23 @@ bdplyr <- function(
   }
 
   # criar o nome que o BQ vai entender
+  # aceitar tambem o formato já com "basedosdados.[....]" pq é assim
+  # que tá no site
+  if (stringr::str_detect(table, pattern = "^basedosdados\\.") == TRUE) {
 
-  tabela_full_name <- glue::glue("basedosdados.{table}")
+    tabela_full_name <- table
+
+  } else {
+
+    tabela_full_name <- glue::glue("basedosdados.{table}")
+  }
+
 
   # checa se a tabela é reconhecida pelo google
 
   if(bigrquery::bq_table_exists(tabela_full_name) == FALSE) {
 
-    rlang::abort(glue::glue("The table {table} doesn´t have a valid name or was not found at basedosdados."))
+    rlang::abort(glue::glue("The table {tabela_full_name} doesn´t have a valid name or was not found at basedosdados."))
 
   }
 
@@ -134,11 +143,11 @@ bdplyr <- function(
 
   # testa se funcionou
   if (is_tbl_lazy(tibble_connection) == TRUE) {
-    message(glue::glue("The table {table} was successfully connected."))
+    message(glue::glue("The table {tabela_full_name} was successfully connected."))
     return (tibble_connection)
 
   } else {
-    message(glue::glue("Error when trying to connect the table {table}"))
+    message(glue::glue("Error when trying to connect the table {tabela_full_name}"))
   }
 }
 
@@ -209,48 +218,51 @@ bd_collect <- function(.lazy_tbl,
 
 # bd_write ----------------------------------------------------------------
 
-#' Salva em disco o resultado de operações com bases remotas
+#' Writes the result of operations with [bdplyr()] to disk
 #'
 #' @description
 #'
-#' bla bla bla bla bla;
-#' bla blabl bla.
 #'
-#' @param .lazy_tbl Uma variável que foi coletada anteriormente por meio da
-#' função [bdplyr()]. Recomenda-se o uso após realizadas as operações desejadas
-#' com os verbos do pacote `{dplyr}`.
-#
-#' @param .write_fn A função de escrita desejada sem os ()
 #'
-#' @param path String contendo o endereço para o arquivo a ser criado. As
-#' pastas desejadas já devem existir e o arquivo deve terminar com a extensão
-#' correspondente.
+#' @param .lazy_tbl A variable that contains a database that was previously
+#' connected through the [bdplyr()] function. Tipically, it will be called
+#' after performing the desired operations with the `{dplyr}` verbs.
 #'
-#' @param overwrite Por padrão FALSE. Indica se o arquivo local deve ser
-#' sobrescrito caso já existe. Use com cuidado.
+#' @param .write_fn A function capable of writing the result of a tibble to
+#' disk. For example: [writexl::write_xlsx()], [arrow::write_feather()],
+#' [readr::write_tsv()], etc.
+#'
+#'#' @param path String containing the path for the file to be created.
+#'The desired folders must already exist and the file should normallt end with
+#'the corresponding extension.
+#'
+#' @param overwrite FALSE by default. Indicates whether the local file should be
+#' overwritten if it already exists. Use with care.
 #'
 #' @param compress For [bd_write_rds()] only. A logical specifying whether
 #' saving to a named file is to use "gzip" compression, or one of "gzip",
 #' "bzip2" or "xz" to indicate the type of compression to be used. See also:
 #' [saveRDS()].
 #'
-#' @param ... Outros parâmetros que possam ser desejados.
+#' @param ... Other parameters passed to the `.write_fn` function.
 #'
-#' @return String com o endereço do arquivo salvo.
+#' @return String containing the path to the created file.
 #' @export
 #'
 #' @name bd_write
 #' @examples
 #' \dontrun{
 #'
-#' # exemplo com csv e rds na normal e depois na helper
+#'  cool_db <- basedosdados::
 #'
 #' # pensar em exemplo json
 #'
 #'
 #' }
 
-bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(), ...) {
+bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(),
+                     path,
+                     ...) {
 
 
   # tipagem com o typed se possível: https://github.com/moodymudskipper/typed
@@ -278,8 +290,20 @@ bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(), ...) {
    # escrever os resultados
   # esboço de como a escrita poderia ser parametrizada
   # dúvidas com evaluation provavelmente serão sanadas aqui: https://adv-r.hadley.nz/evaluation.html#evaluation
-  rlang::call2(.write_fn, collected_table, ...) %>%
+
+  rlang::call2(.write_fn, collected_table, path, ...) %>%
     rlang::eval_bare()
+
+  # verificar se a gravação ocorreu corretamente e avisar
+
+  if (file.exists(path)) {
+    message(glue::glue(
+      "The file was successfully saved ({file.info(path)$size} B)"
+    ))
+    return(path)
+  } else {
+    rlang::abort("Failed to save the file.")
+  }
 
 }
 

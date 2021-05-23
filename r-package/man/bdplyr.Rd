@@ -2,43 +2,44 @@
 % Please edit documentation in R/bdplyr.R
 \name{bdplyr}
 \alias{bdplyr}
-\title{Compatibility with {dplyr} verbs sem o uso de SQL}
+\title{Compatibility with {dplyr} verbs without using SQL language}
 \usage{
 bdplyr(table, billing_project_id = basedosdados::get_billing_id())
 }
 \arguments{
-\item{table}{String no formato "(nome_do_dataset).(nome_da_tabela)". É
-aconselhável checar na Base dos Dados o nome correto com atenção.}
+\item{table}{String in the format "basedosdados.(dataset_name)\emph{.}(specific_table_name)".
+It´s advisable to chack the Base dos Dados datalake for the correct names.}
 
-\item{billing_project_id}{Por padrão, tentará resgatar seu project billing
-id por meio da função \code{\link[=get_billing_id]{get_billing_id()}}.}
+\item{billing_project_id}{a string containing your billing project id.
+If you've run \code{\link[=set_billing_id]{set_billing_id()}} then feel free to leave this empty.}
 }
 \value{
-Uma \verb{lazy tibble}, que poderá ser manuseada como se fosse uma
-base de dados local. Após satisfatoriamente manuseada, o resultado deverá
-ser carregado na memória através da função \code{\link[=bd_collect]{bd_collect()}} ou salvo em disco
-por meio de alguma da função \code{\link[=bd_write]{bd_write()}} ou suas derivadas.
+A \verb{lazy tibble}, which can be handled (almost) as if were a local
+database. Affter satisfactorily handled, the result must be loaded into
+memory using \code{\link[=bd_collect]{bd_collect()}} or written to disk using \code{\link[=bd_write]{bd_write()}} or its
+derivates.
 }
 \description{
-Permite explorar e realizar operações com as tabelas do
-Base dos Dados sem o uso de linguagem SQL. A função \code{bdplyr()} cria
-variáveis \code{lazy} que serão conectadas diretamente às tabelas desejadas da
-Base dos Dados no Google Big Query e poderão ser manuseadas com os verbos
-do \link[dplyr:dplyr-package]{dplyr::dplyr-package} como tradicionalmente feito
-com bases locais. Veja também: \link[bigrquery:src_bigquery]{bigrquery::src_bigquery}
+Allow you to explore and perform operation with Base dos Dados' datasets
+without using SQL language. The \code{\link[=bdplyr]{bdplyr()}} function creates \code{lazy} variables
+that will be connected directly to the desired table from Base dos Dados at
+Google BigQuery and can be handled with the \link[dplyr:dplyr-package]{dplyr::dplyr-package}´s verbs
+as traditionally done as local bases. See also: \link[bigrquery:src_bigquery]{bigrquery::src_bigquery}.
 
-Portanto, é possível (sem usar SQL) realizar, p. ex.,
-seleção de colunas com \code{\link[dplyr:select]{dplyr::select()}}, filtrar linhas com
-\code{\link[dplyr:filter]{dplyr::filter()}}, operações com  \code{\link[dplyr:mutate]{dplyr::mutate()}} e joins com
-\code{\link[dplyr:mutate-joins]{dplyr::left_join()}} e outros verbos do pacote \code{{dply}}.
+Therefore, it is possible (without using \code{SQL}) to perform, for example,
+column selection with \code{\link[dplyr:select]{dplyr::select()}}, filter rows with \code{\link[dplyr:filter]{dplyr::filter()}},
+operations with \code{\link[dplyr:mutate]{dplyr::mutate()}}, joins with \code{\link[dplyr:mutate-joins]{dplyr::left_join()}} and
+other vebs from \code{{dplyr}} package.
 
-Os dados serão automaticamente baixados do Google BigQuery à medida em que
-se fizerem necessários, mas não serão carregados na memória virtual e nem
-gravados em disco a menos que expressamente solicitados.
+The data will be automacically be downloaded from Google BigQuery in the
+background as it if necessary, but will not be loaded into your virtual
+memory nor recorded on disk unless expressly requuested.
 
-Para isso, devem ser usadas as funções \code{\link[=bd_collect]{bd_collect()}} para carregar na
-memória ou, para salvar em disco, \code{\link[=bd_write]{bd_write()}} ou suas derivadas
-\code{\link[=bd_write_csv]{bd_write_csv()}} e \code{\link[=bd_write_rds]{bd_write_rds()}}
+For this, the functions such as \code{\link[=bd_collect]{bd_collect()}} ou \code{\link[=bd_write]{bd_write()}} should be
+used. To load the data handled locally in your virtual memory, use
+\code{\link[=bd_collect]{bd_collect()}}. To save the result in disk use the broader function
+\code{\link[=bd_write]{bd_write()}} or its derivates \code{\link[=bd_write_csv]{bd_write_csv()}} or \code{\link[=bd_write_rds]{bd_write_rds()}} to save,
+respectively in \code{.csv} or \code{.rds} format.
 }
 \examples{
 

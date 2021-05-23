@@ -2,28 +2,28 @@
 % Please edit documentation in R/bdplyr.R
 \name{bd_collect}
 \alias{bd_collect}
-\title{Coleta os resultados de uma base remota para uso local}
+\title{Collects the results of a remote base called via \code{bdplyr()}}
 \usage{
 bd_collect(.lazy_tbl, billing_project_id = basedosdados::get_billing_id())
 }
 \arguments{
-\item{.lazy_tbl}{Uma variável que foi coletada anteriormente por meio da
-função \code{\link[=bdplyr]{bdplyr()}}. Recomenda-se o uso após realizadas as operações desejadas
-com os verbos do pacote \code{{dplyr}}.}
+\item{.lazy_tbl}{A variable that contains a database that was previously
+connected through the \code{\link[=bdplyr]{bdplyr()}} function. Tipically, it will be called
+after performing the desired operations with the \code{{dplyr}} verbs.}
 
-\item{billing_project_id}{Por padrão, tentará resgatar seu project billing
-id por meio da função \code{\link[=get_billing_id]{get_billing_id()}}.}
+\item{billing_project_id}{a string containing your billing project id.
+If you've run \code{\link[=set_billing_id]{set_billing_id()}} then feel free to leave this empty.}
 }
 \value{
 A tibble.
 }
 \description{
-Após \code{\link[=bdplyr]{bdplyr()}} ser utilizada para criar a conexão remota, essa função
-permite coletar o resultado das manipulações realizadas com os verbos do
-pacote \code{{dplyr}} e assim utilizá-lo na memória por completo.
+After \code{\link[=bdplyr]{bdplyr()}} is used to create the remote connection, this function
+allows you to collect the result of the manipulations carried out with
+the {dplyr}´s verbs and thus use it in local memory completely.
 
-Você também pode salvar em disco diretamente através da função
-\code{\link[=bd_write]{bd_write()}} ou de suas derivadas: \code{\link[=bd_write_rds]{bd_write_rds()}} ou \code{\link[=bd_write_csv]{bd_write_csv()}}.
+Alternatively, you can also save to disk directly using \code{\link[=bd_write]{bd_write()}}
+function or its derivates: \code{\link[=bd_write_csv]{bd_write_csv()}} or \code{\link[=bd_write_rds]{bd_write_rds()}}.
 }
 \examples{
 \dontrun{

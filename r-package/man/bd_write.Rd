@@ -4,29 +4,31 @@
 \alias{bd_write}
 \alias{bd_write_rds}
 \alias{bd_write_csv}
-\title{Salva em disco o resultado de operações com bases remotas}
+\title{Writes the result of operations with \code{\link[=bdplyr]{bdplyr()}} to disk}
 \usage{
-bd_write(.lazy_tbl, .write_fn = `?`(typed::Function()), ...)
+bd_write(.lazy_tbl, .write_fn = `?`(typed::Function()), path, ...)
 
 bd_write_rds(.lazy_tbl, path, overwrite = FALSE, compress = FALSE, ...)
 
 bd_write_csv(.lazy_tbl, path, overwrite = FALSE, ...)
 }
 \arguments{
-\item{.lazy_tbl}{Uma variável que foi coletada anteriormente por meio da
-função \code{\link[=bdplyr]{bdplyr()}}. Recomenda-se o uso após realizadas as operações desejadas
-com os verbos do pacote \code{{dplyr}}.}
+\item{.lazy_tbl}{A variable that contains a database that was previously
+connected through the \code{\link[=bdplyr]{bdplyr()}} function. Tipically, it will be called
+after performing the desired operations with the \code{{dplyr}} verbs.}
 
-\item{.write_fn}{A função de escrita desejada sem os ()}
+\item{.write_fn}{A function capable of writing the result of a tibble to
+disk. For example: \code{\link[writexl:write_xlsx]{writexl::write_xlsx()}}, \code{\link[arrow:write_feather]{arrow::write_feather()}},
+\code{\link[readr:write_delim]{readr::write_tsv()}}, etc.
 
-\item{...}{Outros parâmetros que possam ser desejados.}
+#' @param path String containing the path for the file to be created.
+The desired folders must already exist and the file should normallt end with
+the corresponding extension.}
 
-\item{path}{String contendo o endereço para o arquivo a ser criado. As
-pastas desejadas já devem existir e o arquivo deve terminar com a extensão
-correspondente.}
+\item{...}{Other parameters passed to the \code{.write_fn} function.}
 
-\item{overwrite}{Por padrão FALSE. Indica se o arquivo local deve ser
-sobrescrito caso já existe. Use com cuidado.}
+\item{overwrite}{FALSE by default. Indicates whether the local file should be
+overwritten if it already exists. Use with care.}
 
 \item{compress}{For \code{\link[=bd_write_rds]{bd_write_rds()}} only. A logical specifying whether
 saving to a named file is to use "gzip" compression, or one of "gzip",
@@ -34,16 +36,15 @@ saving to a named file is to use "gzip" compression, or one of "gzip",
 \code{\link[=saveRDS]{saveRDS()}}.}
 }
 \value{
-String com o endereço do arquivo salvo.
+String containing the path to the created file.
 }
 \description{
-bla bla bla bla bla;
-bla blabl bla.
+
 }
 \examples{
 \dontrun{
 
-# exemplo com csv e rds na normal e depois na helper
+ cool_db <- basedosdados::
 
 # pensar em exemplo json
 
