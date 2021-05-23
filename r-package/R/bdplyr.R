@@ -97,10 +97,19 @@ bdplyr <- function(
     project = "basedosdados",
     billing = billing_project_id)
 
-  # chama o dplyr e retorna
+  # chama o dplyr e guarda em um objeto
+  conexao_retorno <- dplyr::tbl(con, tabela_completa)
 
-  dplyr::tbl(con, tabela_completa)
+  # testa se funcionou
+  if (dplyr::is.tbl(conexao_retorno) == TRUE) {
+    message(paste("A tabela", tabela, "foi conectada com sucesso."))
+    return (conexao_retorno)
 
+  } else {
+    message(paste0("Erro ao tentar conectar a tabela", tabela))
+    return (FALSE)
+
+  }
 }
 
 # criar uma funçao interna que aplica collect()
