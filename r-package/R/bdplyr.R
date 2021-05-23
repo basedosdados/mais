@@ -1,38 +1,39 @@
-#' Compatibility with {dplyr} verbs sem o uso de SQL
+#' Compatibility with {dplyr} verbs without using SQL language
 #'
 #' @description
 #'
-#' Permite explorar e realizar operações com as tabelas do
-#' Base dos Dados sem o uso de linguagem SQL. A função `bdplyr()` cria
-#' variáveis `lazy` que serão conectadas diretamente às tabelas desejadas da
-#' Base dos Dados no Google Big Query e poderão ser manuseadas com os verbos
-#' do [dplyr::dplyr-package] como tradicionalmente feito
-#' com bases locais. Veja também: [bigrquery::src_bigquery]
+#' Allow you to explore and perform operation with Base dos Dados' datasets
+#' without using SQL language. The [bdplyr()] function creates `lazy` variables
+#' that will be connected directly to the desired table from Base dos Dados at
+#' Google BigQuery and can be handled with the [dplyr::dplyr-package]´s verbs
+#' as traditionally done as local bases. See also: [bigrquery::src_bigquery].
 #'
-#' Portanto, é possível (sem usar SQL) realizar, p. ex.,
-#' seleção de colunas com [dplyr::select()], filtrar linhas com
-#' [dplyr::filter()], operações com  [dplyr::mutate()] e joins com
-#' [dplyr::left_join()] e outros verbos do pacote `{dply}`.
+#' Therefore, it is possible (without using `SQL`) to perform, for example,
+#' column selection with [dplyr::select()], filter rows with [dplyr::filteR()],
+#' operations with [dplyr::mutate()], joins with [dplyr::left_join()] and
+#' other vebs from `{dplyr}` package.
 #'
-#' Os dados serão automaticamente baixados do Google BigQuery à medida em que
-#' se fizerem necessários, mas não serão carregados na memória virtual e nem
-#' gravados em disco a menos que expressamente solicitados.
+#' The data will be automacically be downloaded from Google BigQuery in the
+#' background as it if necessary, but will not be loaded into your virtual
+#' memory nor recorded on disk unless expressly requuested.
 #'
-#' Para isso, devem ser usadas as funções [bd_collect()] para carregar na
-#' memória ou, para salvar em disco, [bd_write()] ou suas derivadas
-#' [bd_write_csv()] e [bd_write_rds()]
+#' For this, the functions such as [bd_collect()] ou [bd_wirte()] should be
+#' used. To load the data handled locally in your virtual memory, use
+#' [bd_collect()]. To save the result in disk use the broader function
+#' [bd_write()] or its derivates [bd_write_csv()] or [bd_write_rds()] to save,
+#' respectively in `.csv` or `.rds` format.
 #'
 #'
-#' @param table String no formato "(nome_do_dataset).(nome_da_tabela)". É
-#' aconselhável checar na Base dos Dados o nome correto com atenção.
+#' @param table String in the format "(dataset_name)*.*(specific_table_name)".
+#' It´s advisable to chack the Base dos Dados datalake for the correct names.
 #'
-#' @param billing_project_id Por padrão, tentará resgatar seu project billing
-#' id por meio da função [get_billing_id()].
+#' @param billing_project_id a string containing your billing project id.
+#' If you've run [set_billing_id()] then feel free to leave this empty.
 #'
-#' @return Uma `lazy tibble`, que poderá ser manuseada como se fosse uma
-#' base de dados local. Após satisfatoriamente manuseada, o resultado deverá
-#' ser carregado na memória através da função [bd_collect()] ou salvo em disco
-#' por meio de alguma da função [bd_write()] ou suas derivadas.
+#' @return A `lazy tibble`, which can be handled (almost) as if were a local
+#' database. Affter satisfactorily handled, the result must be loaded into
+#' memory using [bd_collect()] or written to disk using [bd_write()] or its
+#' derivates.
 #'
 #' @seealso bd_collect
 #' @export
@@ -144,30 +145,23 @@ bdplyr <- function(
 
 # bdcollect ---------------------------------------------------------------
 
-
- # TODO documentar as duas juntamente na mesma página
- # nos exemplos mostrar como elas se combinam
- # o usuário pode gerar um lazy tbl, usar código típico de R para gerar uma query
- # e usar bd_collect() para coletar os resultados
-
-#' Coleta os resultados de uma base remota para uso local
+#' Collects the results of a remote base called via `bdplyr()`
 #'
 #' @description
 #'
-#' Após [bdplyr()] ser utilizada para criar a conexão remota, essa função
-#' permite coletar o resultado das manipulações realizadas com os verbos do
-#' pacote `{dplyr}` e assim utilizá-lo na memória por completo.
+#' After [bdplyr()] is used to create the remote connection, this function
+#' allows you to collect the result of the manipulations carried out with
+#' the {dplyr}´s verbs and thus use it in local memory completely.
 #'
-#' Você também pode salvar em disco diretamente através da função
-#' [bd_write()] ou de suas derivadas: [bd_write_rds()] ou [bd_write_csv()].
+#' Alternatively, you can also save to disk directly using [bd_write()]
+#' function or its derivates: [bd_write_csv()] or [bd_write_rds()].
 #'
+#' @param .lazy_tbl A variable that contains a database that was previously
+#' connected through the [bdplyr()] function. Tipically, it will be called
+#' after performing the desired operations with the `{dplyr}` verbs.
 #'
-#' @param .lazy_tbl Uma variável que foi coletada anteriormente por meio da
-#' função [bdplyr()]. Recomenda-se o uso após realizadas as operações desejadas
-#' com os verbos do pacote `{dplyr}`.
-#'
-#' @param billing_project_id Por padrão, tentará resgatar seu project billing
-#' id por meio da função [get_billing_id()].
+#' @param billing_project_id a string containing your billing project id.
+#' If you've run [set_billing_id()] then feel free to leave this empty.
 #'
 #' @return A tibble.
 #' @export
