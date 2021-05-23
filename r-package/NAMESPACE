@@ -2,6 +2,8 @@
 
 export(bd_collect)
 export(bd_write)
+export(bd_write_csv)
+export(bd_write_rds)
 export(bdplyr)
 export(download)
 export(get_billing_id)
