@@ -18,8 +18,8 @@ connected through the \code{\link[=bdplyr]{bdplyr()}} function. Tipically, it wi
 after performing the desired operations with the \code{{dplyr}} verbs.}
 
 \item{.write_fn}{A function capable of writing the result of a tibble to
-disk. For example: \code{\link[writexl:write_xlsx]{writexl::write_xlsx()}}, \code{\link[arrow:write_feather]{arrow::write_feather()}},
-\code{\link[readr:write_delim]{readr::write_tsv()}}, etc.
+disk. Do not use () afther the function's name. For example: \link[writexl:write_xlsx]{writexl::write_xlsx},
+\link[arrow:write_feather]{arrow::write_feather}, \link[readr:write_delim]{readr::write_tsv}, etc.
 
 #' @param path String containing the path for the file to be created.
 The desired folders must already exist and the file should normallt end with
@@ -27,7 +27,8 @@ the corresponding extension.}
 
 \item{...}{Other parameters passed to the \code{.write_fn} function.}
 
-\item{overwrite}{FALSE by default. Indicates whether the local file should be
+\item{overwrite}{For derivates function only. FALSE by default.
+Indicates whether the local file should be
 overwritten if it already exists. Use with care.}
 
 \item{compress}{For \code{\link[=bd_write_rds]{bd_write_rds()}} only. A logical specifying whether
@@ -39,14 +40,64 @@ saving to a named file is to use "gzip" compression, or one of "gzip",
 String containing the path to the created file.
 }
 \description{
+Writes a remote table to disk that was called via {bdplyr}.
+It will collect the data and write to disk in the chosen format. Y
+ou will only need this function if you have not yet collected the data
+using the \code{\link[=bd_collect ]{bd_collect ()}}.
 
+The comprehensive function \code{\link[=bd_write]{bd_write()}} takes as a parameter \code{.write_fn},
+which will be the name of some function (without parentheses) capable of
+writing a tibble to disk.
+
+As helpers, the \code{\link[=bd_write_rds]{bd_write_rds()}} and \code{\link[=bd_write_csv]{bd_write_csv()}} functions make it
+easier to write in these formats, more common in everyday life.
 }
 \examples{
 \dontrun{
 
  cool_db <- basedosdados::
 
-# pensar em exemplo json
+# setup billing
+basedosdados::set_billing_id("MY-BILLING-ID")
+
+# connect with a Base dos Dados db
+
+cool_db_ssp <- basedosdados::bdplyr(
+ "basedosdados.br_sp_gov_ssp.ocorrencias_registradas")
+
+# subset the data
+my_subset <- cool_db_ssp \%>\%
+ dplyr::filter(ano == 2021, mes == 04)
+
+# write it in csv - generic function
+
+basedosdados::bd_write(.lazy_tbl = my_subset,
+                      .write_fn = write.csv,
+                      "data-raw/ssp_subset.csv"
+)
+
+# write in .xlsx
+basedosdados::bd_write(.lazy_tbl = my_subset,
+                      .write_fn = writexl::write_xlsx,
+                      "data-raw/ssp_subset.xlsx"
+)
+
+# using the derivates functions
+# to csv
+basedosdados::bd_write_csv(.lazy_tbl = my_subset,
+                          "data-raw/ssp_subset2.csv"
+)
+
+# to rds
+basedosdados::bd_write_rds(.lazy_tbl = my_subset,
+                          "data-raw/ssp_subset.rds"
+)
+
+# to rds - with compression
+::bd_write_rds(.lazy_tbl = my_subset,
+                          "data-raw/ssp_subset2.rds",
+                          compress = TRUE, overwrite = TRUE
+)
 
 
 }

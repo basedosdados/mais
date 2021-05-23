@@ -89,7 +89,6 @@
 #'
 #'}
 
-#TODO: colocar em inglês as docs
 #TODO: usar bigrquery::bq_has_token() para checar se atenticou no Google
 #TODO: tentar autenticar em silêncio com bigrquery::bq_auth(email = <email>)
 # conferir: https://github.com/r-dbi/bigrquery/blob/main/R/bq-auth.R
@@ -110,8 +109,9 @@ bdplyr <- function(
   }
 
   # criar o nome que o BQ vai entender
-  # aceitar tambem o formato já com "basedosdados.[....]" pq é assim
+  # aceitar tambem o formato ja com "basedosdados.[....]" pq e assim
   # que tá no site
+  #TODO: avaliar se colocamos o parametro project livre
   if (stringr::str_detect(table, pattern = "^basedosdados\\.") == TRUE) {
 
     tabela_full_name <- table
@@ -178,6 +178,33 @@ bdplyr <- function(
 #' @examples
 #' \dontrun{
 #'
+#' # setup billing
+#'  basedosdados::set_billing_id("billing-project-id")
+#'
+#'  # select a cool database at Base dos Dados
+#' bd_table <- basedosdados::bdplyr(
+#'   "basedosdados.br_sp_gov_ssp.ocorrencias_registradas")
+#'
+#' # quick look
+#' bd_table %>%
+#'   dplyr::glimpse()
+#'
+#'  # filter, select and group the remote data
+#' bd_ssp <-  bd_table %>%
+#'   dplyr::filter(ano >= 2019) %>%
+#'   dplyr::select(ano, mes, homicidio_doloso) %>%
+#'   dplyr::group_by(ano, mes)
+#'
+#'  # make some plots
+#' library(ggplot2)
+#'
+#' bbd_ssp %>%
+#'  # collect the data to continue the analisis
+#'  basedosdados::bd_collect() %>%
+#'   dplyr::summarise(homicidios_sum = sum(homicidio_doloso,
+#'                                          na.rm = TRUE)) %>%
+#'   ggplot(aes(x = mes, y = homicidios_sum, fill = ano)) +
+#'   geom_col(position = "dodge")
 #'
 #'
 #' }
@@ -222,21 +249,32 @@ bd_collect <- function(.lazy_tbl,
 #'
 #' @description
 #'
+#' Writes a remote table to disk that was called via {bdplyr}.
+#' It will collect the data and write to disk in the chosen format. Y
+#' ou will only need this function if you have not yet collected the data
+#' using the [bd_collect()].
 #'
+#' The comprehensive function [bd_write()] takes as a parameter `.write_fn`,
+#' which will be the name of some function (without parentheses) capable of
+#' writing a tibble to disk.
+#'
+#' As helpers, the [bd_write_rds()] and [bd_write_csv()] functions make it
+#'  easier to write in these formats, more common in everyday life.
 #'
 #' @param .lazy_tbl A variable that contains a database that was previously
 #' connected through the [bdplyr()] function. Tipically, it will be called
 #' after performing the desired operations with the `{dplyr}` verbs.
 #'
 #' @param .write_fn A function capable of writing the result of a tibble to
-#' disk. For example: [writexl::write_xlsx()], [arrow::write_feather()],
-#' [readr::write_tsv()], etc.
+#' disk. Do not use () afther the function's name. For example: [writexl::write_xlsx],
+#' [arrow::write_feather], [readr::write_tsv], etc.
 #'
 #'#' @param path String containing the path for the file to be created.
 #'The desired folders must already exist and the file should normallt end with
 #'the corresponding extension.
 #'
-#' @param overwrite FALSE by default. Indicates whether the local file should be
+#' @param overwrite For derivates function only. FALSE by default.
+#' Indicates whether the local file should be
 #' overwritten if it already exists. Use with care.
 #'
 #' @param compress For [bd_write_rds()] only. A logical specifying whether
@@ -255,7 +293,47 @@ bd_collect <- function(.lazy_tbl,
 #'
 #'  cool_db <- basedosdados::
 #'
-#' # pensar em exemplo json
+#' # setup billing
+#'basedosdados::set_billing_id("MY-BILLING-ID")
+#'
+#'# connect with a Base dos Dados db
+#'
+#'cool_db_ssp <- basedosdados::bdplyr(
+#'  "basedosdados.br_sp_gov_ssp.ocorrencias_registradas")
+#'
+#'# subset the data
+#'my_subset <- cool_db_ssp %>%
+#'  dplyr::filter(ano == 2021, mes == 04)
+#'
+#'# write it in csv - generic function
+#'
+#'basedosdados::bd_write(.lazy_tbl = my_subset,
+#'                       .write_fn = write.csv,
+#'                       "data-raw/ssp_subset.csv"
+#')
+#'
+#'# write in .xlsx
+#'basedosdados::bd_write(.lazy_tbl = my_subset,
+#'                       .write_fn = writexl::write_xlsx,
+#'                       "data-raw/ssp_subset.xlsx"
+#')
+#'
+#'# using the derivates functions
+#'# to csv
+#'basedosdados::bd_write_csv(.lazy_tbl = my_subset,
+#'                           "data-raw/ssp_subset2.csv"
+#')
+#'
+#'# to rds
+#'basedosdados::bd_write_rds(.lazy_tbl = my_subset,
+#'                           "data-raw/ssp_subset.rds"
+#')
+#'
+#'# to rds - with compression
+#'::bd_write_rds(.lazy_tbl = my_subset,
+#'                           "data-raw/ssp_subset2.rds",
+#'                           compress = TRUE, overwrite = TRUE
+#')
 #'
 #'
 #' }
@@ -335,22 +413,22 @@ bd_write_rds <- function(.lazy_tbl,
   bd_write(
     .lazy_tbl = .lazy_tbl,
     .write_fn = saveRDS,
-    file = path,
+    path = path,
     version = 2,
     compress = compress,
     ...
   )
 
-  # verificar se a gravação ocorreu corretamente e avisar
-
-  if (file.exists(path)) {
-    message(glue::glue(
-      "The file was successfully saved ({file.info(path)$size} B)"
-    ))
-    return(path)
-  } else {
-    rlang::abort("Failed to save the file.")
-  }
+  # # verificar se a gravação ocorreu corretamente e avisar
+  #
+  # if (file.exists(path)) {
+  #   message(glue::glue(
+  #     "The file was successfully saved ({file.info(path)$size} B)"
+  #   ))
+  #   return(path)
+  # } else {
+  #   rlang::abort("Failed to save the file.")
+  # }
 
 }
 
@@ -372,19 +450,19 @@ bd_write_csv <- function(.lazy_tbl, path, overwrite = FALSE, ...) {
   bd_write(
     .lazy_tbl = .lazy_tbl,
     .write_fn = write.csv,
-    file = path,
+    path = path,
     ...
   )
 
   # verificar se a gravação ocorreu corretamente e avisar
-  if (file.exists(path)) {
-    message(glue::glue(
-      "The file was successfully saved ({file.info(path)$size} B)"
-    ))
-    return(path)
-  } else {
-    rlang::abort("Failed to save the file.")
-  }
+  # if (file.exists(path)) {
+  #   message(glue::glue(
+  #     "The file was successfully saved ({file.info(path)$size} B)"
+  #   ))
+  #   return(path)
+  # } else {
+  #   rlang::abort("Failed to save the file.")
+  # }
 
 
 }
