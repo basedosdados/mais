@@ -11,7 +11,7 @@
 #'
 #' Ver também: https://rdrr.io/cran/bigrquery/man/src_bigquery.html
 #'
-#' @param tabela Caminho no formato basedosdados.\<dataset\>.\<tabela\>
+#' @param table Caminho no formato basedosdados.\<dataset\>.\<tabela\>
 #' @param billing_project_id billing_id.
 #'
 #' @return Tabela em formato manipulável
@@ -207,9 +207,12 @@ bd_write <- function(.lazy_tbl, .write_fn = ? typed::Function(), ...) {
 
 # bd_write_rds e bd_write_csv ---------------------------------------------
 
+#' @rdname bdplyr()
+#' @export
 
 bd_write_rds <- function(.lazy_tbl,
                          path,
+                         overwrite = FALSE,
                          compress = FALSE,
                          version = 2,
                          ...) {
@@ -218,8 +221,15 @@ bd_write_rds <- function(.lazy_tbl,
     rlang::abort("Pass a valid file name to argument `path`, include the '.rds' suffix.")
   }
 
+  # checar se arquivo já existe e se overwrite = TRUE
+  if (file.exists(path) & overwrite == FALSE) {
+    rlang::abort("The file already exists. Use overwrite = TRUE if you want to overwrite it.")
+  }
+
   # chamar bd_write com saveRDS
   # estou copiando os parâmetros que readr::write_rds usa
+  # a ideia é não precisar de outra dependência... se isso não for um problema
+  # bora usar readr::write_rds mesmo
   bd_write(
     .lazy_tbl = .lazy_tbl,
     .write_fn = saveRDS,
@@ -242,11 +252,40 @@ bd_write_rds <- function(.lazy_tbl,
 
 }
 
+#' @rdname bdplyr()
+#' @export
 
 
-bd_write_csv <- function(.lazy_tbl, file, ...) {
+bd_write_csv <- function(.lazy_tbl, path, overwrite = FALSE, ...) {
 
- # chamar bd_write com write_csv
+  # checar se file é válido
+  if (stringr::str_detect(path, pattern = "(\\.csv)$") == FALSE) {
+    rlang::abort("Pass a valid file name to argument `path`, include the '.csv' suffix.")
+  }
+
+  # checar se arquivo já existe e se overwrite = TRUE
+  if (file.exists(path) & overwrite == FALSE) {
+    rlang::abort("The file already exists. Use overwrite = TRUE if you want to overwrite it.")
+  }
+
+  # chamar bd_write com write.csv
+  bd_write(
+    .lazy_tbl = .lazy_tbl,
+    .write_fn = write.csv,
+    file = path,
+    ...
+  )
+
+  # verificar se a gravação ocorreu corretamente e avisar
+  if (file.exists(path)) {
+    message(glue::glue(
+      "O arquivo foi salvo corretamente com {file.info(path)$size} B"
+    ))
+    return(path)
+  } else {
+    rlang::abort("Erro ao salvar o arquivo")
+  }
+
 
 }
 
