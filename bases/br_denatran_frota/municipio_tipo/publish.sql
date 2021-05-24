@@ -22,17 +22,15 @@ TIPOS:
 CREATE VIEW basedosdados-312117.br_denatran_frota.municipio_tipo AS
 SELECT 
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(municipio_original AS STRING) municipio_original,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(ano as INT64) ano,
-SAFE_CAST(mes as INT64) mes,
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(automovel AS INT64) automovel,
 SAFE_CAST(bonde AS INT64) bonde,
 SAFE_CAST(caminhao AS INT64) caminhao,
 SAFE_CAST(caminhaotrator AS INT64) caminhaotrator,
 SAFE_CAST(caminhonete AS INT64) caminhonete,
 SAFE_CAST(camioneta AS INT64) camioneta,
-SAFE_CAST(chassiplataforma AS INT64) chassiplataforma,
 SAFE_CAST(ciclomotor AS INT64) ciclomotor,
 SAFE_CAST(microonibus AS INT64) microonibus,
 SAFE_CAST(motocicleta AS INT64) motocicleta,
@@ -47,5 +45,6 @@ SAFE_CAST(tratoresteira AS INT64) tratoresteira,
 SAFE_CAST(tratorrodas AS INT64) tratorrodas,
 SAFE_CAST(triciclo AS INT64) triciclo,
 SAFE_CAST(utilitario AS INT64) utilitario,
+SAFE_CAST(chassiplataforma AS INT64) chassiplataforma,
 SAFE_CAST(total AS INT64) total
 from basedosdados-312117.br_denatran_frota_staging.municipio_tipo as t

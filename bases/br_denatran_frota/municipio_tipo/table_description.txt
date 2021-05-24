@@ -58,7 +58,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Padronização das colunas. Nova coluna, id_municipio.
+Padronização das colunas. Nova coluna, id_municipio. Remoção das linhas "MUNICIPIO NAO INFORMADO".
 
 Frequencia de Atualização
 -------------------------

@@ -114,5 +114,7 @@ df_municipios %>%
         TRUE ~ id_municipio
      )
   ) %>%
+  dplyr::filter(!is.na(id_municipio)) %>%
+  dplyr::select(!municipio_original) %>%
   readr::write_rds(file = "output/municipio_tipo.rds") %T>%
   readr::write_csv(file = "output/municipio_tipo.csv")
