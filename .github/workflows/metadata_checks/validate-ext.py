@@ -2,6 +2,7 @@ from ckanapi import RemoteCKAN
 from ckanapi import errors
 import ckanapi
 import os
+from tomlkit.api import table
 import yaml
 import sys
 
@@ -35,11 +36,10 @@ def validate_metadata(path_to_yaml):
 
     dataset_id = table_config["dataset_id"]
     table_config["resource_type"] = "bdm_table"
-    table_config["name"] = table_config["table_id"]
-    table_config["spatial_coverage"] = table_config["coverage_geo"]
-    table_config["temporal_coverage"] = "2021"
-    table_config["update_frequency"] = "one_year"
-    table_config["observation_level"] = ["municipality"]
+    table_config["name"] = table_config.pop("table_id")
+    table_config["spatial_coverage"] = table_config.pop("coverage_geo")
+    table_config["temporal_coverage"] = str(table_config.pop("coverage_time"))
+    table_config["update_frequency"] = table_config.pop("data_update_frequency")
     # stream = yaml.dump(
     #     table_config["columns"],
     #     line_break=False,
@@ -52,18 +52,19 @@ def validate_metadata(path_to_yaml):
     try:
         response = basedosdados.action.package_validate(
             resources=[table_config],
-            dataset_id="123",
-            name="validate_test",
+            owner_org="BD+",
+            private=False,
+            name=dataset_id,
             title="hahaha",
         )
     except ckanapi.errors.ValidationError as e:
         if e.error_dict:
-            error_dict[table_config["table_id"]] = e.error_dict
+            error_dict[table_config["name"]] = e.error_dict
         else:
             return
 
     if error_dict:
-        print(type(error_dict), error_dict)
+        print(error_dict)
 
 
 if __name__ == "__main__":

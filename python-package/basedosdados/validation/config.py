@@ -44,7 +44,7 @@ class Config(Table):
         table_config["resource_type"] = "bdm_table"
         table_config["name"] = table_config.pop("table_id")
         table_config["spatial_coverage"] = table_config.pop("coverage_geo")
-        table_config["temporal_coverage"] = table_config.pop("coverage_time")
+        table_config["temporal_coverage"] = str(table_config.pop("coverage_time"))
         table_config["update_frequency"] = table_config.pop("data_update_frequency")
         self.yaml = table_config
 
@@ -52,18 +52,18 @@ class Config(Table):
         error_dict = {}
         try:
             response = basedosdados.action.package_validate(
-                resources=self.yaml,
-                dataset_id=self.yaml["dataset_id"],
-                name=self.yaml["table_id"],
+                resources=[self.yaml],
+                private=False,
+                name=self.yaml["dataset_id"],
                 title="Validate",
             )
         except ckanapi.errors.ValidationError as e:
-            if e.error_dict["resources"]:
-                error_dict[self.yaml["name"]] = e.error_dict["resources"]
+            if e.error_dict:
+                error_dict[self.yaml["name"]] = e.error_dict
             else:
-                print("Valid!")
-                return
-            if error_dict:
-                raise BaseDosDadosException(
-                    f"table_config.yaml is invalid. \nValidation Errors: {error_dict}"
-                )
+                return True
+
+        if error_dict:
+            raise BaseDosDadosException(
+                f"{self.path} has validation errors: {error_dict}"
+            )
