@@ -111,10 +111,9 @@ bdplyr <- function(
   }
 
   # criar o nome que o BQ vai entender
-  # aceitar tambem o formato ja com "basedosdados.[....]" pq e assim
-  # que tá no site
   #TODO: avaliar se colocamos o parametro project livre
-  if (stringr::str_detect(table, pattern = "^basedosdados\\.") == TRUE) {
+
+    if (stringr::str_detect(table, pattern = "^basedosdados\\.") == TRUE) {
 
     tabela_full_name <- table
 
@@ -145,11 +144,11 @@ bdplyr <- function(
 
   # testa se funcionou
   if (is_tbl_lazy(tibble_connection) == TRUE) {
-    rlang::inform(glue::glue("The table {tabela_full_name} was successfully connected."))
+    rlang::inform(glue::glue("The table `{tabela_full_name}` was successfully connected."))
     return (tibble_connection)
 
   } else {
-    rlang::abort(glue::glue("Error when trying to connect the table {tabela_full_name}"))
+    rlang::abort(glue::glue("Error when trying to connect the table `{tabela_full_name}`"))
   }
 }
 
@@ -230,6 +229,8 @@ bd_collect <- function(.lazy_tbl,
 
   # coletar
   collected_table <- dplyr::collect(.lazy_tbl)
+  #TODO: usar dplyr::select(dplyr::everything()) antes de realizar o collect
+  #TODO: checar se tem nenhuma/poucas linhase emitir warn
 
   # checar se teve êxito
   if (inherits(collected_table, "tbl_df") == FALSE) {
