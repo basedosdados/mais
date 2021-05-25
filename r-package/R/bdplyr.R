@@ -228,19 +228,38 @@ bd_collect <- function(.lazy_tbl,
   }
 
   # coletar
-  collected_table <- dplyr::collect(.lazy_tbl)
   #TODO: usar dplyr::select(dplyr::everything()) antes de realizar o collect
-  #TODO: checar se tem nenhuma/poucas linhase emitir warn
+  # força que ele carregue as colunas antes de puxar
+  # não deveria ter problema fazer isso pois em tese a pessoa já fez um
+  # subset antes de mandar pr cá
+  # isso resolve vir uma tabela vazia se tento coletar de cara
+  collected_table <- .lazy_tbl %>%
+    dplyr::select(dplyr::everything()) %>%
+                  dplyr::collect()
 
-  # checar se teve êxito
+   # checar se teve êxito
   if (inherits(collected_table, "tbl_df") == FALSE) {
 
     rlang::abort("It seems to have been a failure to collect the tibble.")
 
   }
 
+  #TODO: checar se tem nenhuma/poucas linhase emitir warn
+  nrow_collected_table <- nrow(collected_table)
+  ncol_collected_table <- ncol(collected_table)
+
+  if (nrow_collected_table <= 0 | ncol_collected_table <= 0) {
+    rlang::abort("The collection returned a table with no rows or no cols.")
+  }
+
+  if (nrow_collected_table < 5) {
+    rlang::warn(
+      glue::glue("The collection returned a small table with only {nrow_collected_table} rows.
+     There may have been an error in processing."))
+  }
+
   # retornar os resultados
-  rlang::inform(glue::glue("Base successfully collected on a {nrow(collected_table)}-row, {ncol(collected_table)}-column tibble."))
+  rlang::inform(glue::glue("Base successfully collected on a {nrow_collected_table}-row, {ncol_collected_table}-column tibble."))
   return(collected_table)
 
 }
