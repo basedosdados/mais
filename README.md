@@ -26,7 +26,7 @@
   <a href="https://discord.gg/huKWpsVYx4" target="_blank">
     <img src="https://img.shields.io/discord/787841210433536010" alt="Discord">
   </a>
-  <a href="http://https://apoia.se/basedosdados" target="_blank">
+  <a href="https://apoia.se/basedosdados" target="_blank">
     <img src="https://img.shields.io/badge/apoie!%E2%9D%A4%EF%B8%8F-ff69b4" alt="Apoiase">
   </a>
 </p>
