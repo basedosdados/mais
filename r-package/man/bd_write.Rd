@@ -19,7 +19,8 @@ after performing the desired operations with the \code{{dplyr}} verbs.}
 
 \item{.write_fn}{A function capable of writing the result of a tibble to
 disk. Do not use () afther the function's name. For example:
-\link[writexl:write_xlsx]{writexl::write_xlsx}, \link[arrow:write_feather]{arrow::write_feather}, \link[jsonlite:read_json]{jsonlite::write_json}, etc.}
+\link[writexl:write_xlsx]{writexl::write_xlsx}, \link[jsonlite:read_json]{jsonlite::write_json}, \link[foreign:write.dta]{foreign::write.dta},
+\link[arrow:write_feather]{arrow::write_feather}, etc.}
 
 \item{path}{String containing the path for the file to be created.
 The desired folders must already exist and the file should normally end with
@@ -112,6 +113,12 @@ basedosdados::bd_write_rds(.lazy_tbl = my_subset,
 basedosdados::bd_write(.lazy_tbl = my_subset,
                        .write_fn = jsonlite::write_json,
                        "data-raw/ssp_subset.json"
+)
+
+# dta
+basedosdados::bd_write(.lazy_tbl = my_subset,
+                       .write_fn = foreign::write.dta,
+                       "data-raw/ssp_subset.dta")
 )
 
 # feather

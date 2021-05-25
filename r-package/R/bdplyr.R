@@ -290,7 +290,8 @@ bd_collect <- function(.lazy_tbl,
 #'
 #' @param .write_fn A function capable of writing the result of a tibble to
 #' disk. Do not use () afther the function's name. For example:
-#' [writexl::write_xlsx], [arrow::write_feather], [jsonlite::write_json], etc.
+#' [writexl::write_xlsx], [jsonlite::write_json], [foreign::write.dta],
+#' [arrow::write_feather], etc.
 #'
 #' @param path String containing the path for the file to be created.
 #' The desired folders must already exist and the file should normally end with
@@ -370,6 +371,12 @@ bd_collect <- function(.lazy_tbl,
 #' basedosdados::bd_write(.lazy_tbl = my_subset,
 #'                        .write_fn = jsonlite::write_json,
 #'                        "data-raw/ssp_subset.json"
+#' )
+#'
+#' # dta
+#' basedosdados::bd_write(.lazy_tbl = my_subset,
+#'                        .write_fn = foreign::write.dta,
+#'                        "data-raw/ssp_subset.dta")
 #' )
 #'
 #' # feather
