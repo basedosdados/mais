@@ -97,8 +97,6 @@ build_dom <- function(metadata) {
       )
     },
     description[2:length(description)] %>%
-      stringr::str_split("\\n") %>%
-      purrr::flatten() %>%
       purrr::map(function(i)
         if (nchar(i) == 0) {
           htmltools::br()
@@ -116,7 +114,7 @@ build_dom <- function(metadata) {
     return(invisible(NULL))
   }
   
-  browser = getOption("browser")
+  browser <- getOption("browser")
   
   if (!rlang::is_atomic(browser) || browser == "") {
     rlang::abort("Set the browser path `options(browser = '/path/to/browser')`")
