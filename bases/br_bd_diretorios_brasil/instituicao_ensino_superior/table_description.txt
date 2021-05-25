@@ -1,0 +1,37 @@
+A tabela contém múltiplas colunas que identificam e caracterizam instituições de ensino superior brasileiras. Variáveis como seu código, seu nome, o município onde se encontra, seu vínculo administrativo e a situação de seu funcionamento estão presentes.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-bd-diretorios-brasil
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
+Email: mavalentim.b@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- brasil
+
+Colunas identificando linhas unicamente
+-------------------
+- id_ies
+
+Tratamento
+----------
+Mudança de nome das variáveis
+
+Frequencia de Atualização
+-------------------------
+unico
+
+
