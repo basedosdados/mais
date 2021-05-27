@@ -18,7 +18,7 @@ from basedosdados import Dataset
 from basedosdados.upload.base import Base
 
 
-def decoding_base64(message):
+def decogind_base64(message):
     # decoding the base64 string
     base64_bytes = message.encode("ascii")
     message_bytes = base64.b64decode(base64_bytes)
@@ -145,8 +145,8 @@ def setup():
     }
 
     ### load the secret of prod and staging data
-    prod_base64 = os.getenv("GCP_BD_DEV_PROD")
-    staging_base64 = os.getenv("GCP_BD_DEV_STAGING")
+    prod_base64 = os.environ.get("INPUT_GCP_TABLE_APPROVE_PROD")
+    staging_base64 = os.environ.get("INPUT_GCP_TABLE_APPROVE_STAGING")
 
     ### create config and credential folders
     create_config_tree(prod_base64, staging_base64, config_dict)
