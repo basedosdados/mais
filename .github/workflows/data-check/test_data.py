@@ -15,16 +15,15 @@ import bd_credential
 # generate tests for different configs.
 # -------------------------------------
 
-# TODO: Adicionar try/catchs para erros de yamls mal configurados
+# TODO: Adicionar try/excepts para erros de yamls mal configurados
 
 bd_credential.setup()
 
-with Path("github/workspace/files.json").open("r") as changesfile:
-    changedfiles = json.load(changesfile)
-    changed_files = filter(lambda x: x.name == "table_config.yaml", changed_files)
-    changed_files = filter(lambda x: Path(x).is_file(), changed_files)
+with Path("github/workspace/files.json").open("r") as changed_files:
+    changed_files = json.load(changed_files)
     changed_files = map(lambda x: Path(x), changed_files)
-    changed_files = list(changed_files)
+    changed_files = filter(lambda x: x.is_file(), changed_files)
+    changed_files = filter(lambda x: x.name == "table_config.yaml", changed_files)
 
 # DEBUG START
 # changed_files = [Path("C:/Users/Vinicius/Documents/mais/bases/br_bd_diretorios_brasil/municipio/table_config.yaml")]

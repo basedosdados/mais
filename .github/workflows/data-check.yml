@@ -1,4 +1,4 @@
-name: Python package
+name: data-check
 
 on:
   push:
@@ -31,8 +31,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # https://github.com/google-github-actions/setup-gcloud/blob/master/setup-gcloud/README.md
-      - uses: google-github-actions/setup-gcloud@master
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
         with:
           version: '290.0.1'
           project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
