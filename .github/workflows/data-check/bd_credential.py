@@ -8,7 +8,6 @@ import toml
 import tomlkit
 import traceback
 
-
 from pathlib import Path
 from jinja2 import Template
 
@@ -19,7 +18,7 @@ from basedosdados import Dataset
 from basedosdados.upload.base import Base
 
 
-def decogind_base64(message):
+def decoding_base64(message):
     # decoding the base64 string
     base64_bytes = message.encode("ascii")
     message_bytes = base64.b64decode(base64_bytes)
@@ -43,7 +42,7 @@ def save_json(json_obj, file_path, file_name):
 
 def create_json_file(message_base64, file_name, config_folder):
     ### decode base64 script and load as a json object
-    json_obj = json.loads(decogind_base64(message_base64))
+    json_obj = json.loads(decoding_base64(message_base64))
     prod_file_path = Path.home() / config_folder / "credentials"
     ### save the json credential in the .basedosdados/credentials/
     save_json(json_obj, prod_file_path, file_name)
@@ -144,66 +143,13 @@ def get_table_dataset_id():
     return dataset_table_ids
 
 
-def get_configs(
-    filepath=Path("github/workspace/files.json"), configname=Path("table_config.yaml")
-):
-    if not filepath.exists():
-        return []
+def setup():
+    # print(os.environ.get("INPUT_PROJECT_ID"))
+    # print(Path.home())
 
-    with open(filepath, "r") as file:
-        filepaths = json.load(file)
-        return filter(lambda x: x.name == configname, filepaths)
-
-
-def get_checks(configpath: Path, checkspath: Path = Path("./checks.yaml")):
-    with open(configpath, "r") as file:
-        config = yaml.safe_load(file)
-
-    with open(checkspath, "r") as file:
-        checks = file.read()
-        checks = Template(checks)
-        checks = checks.render(**config)
-        checks = yaml.safe_load(checks)
-        return checks
-
-
-########============== DATA CHECKS ==============########
-def check_table(checks):
-    has_error = False
-
-    for check in checks:
-        try:
-            result = bd.read_sql(check["query"], billing_project_id="basedosdados42")
-            if result.failure.values:
-                print(f"ERROR: {check['error']}")
-                has_error = True
-        except Exception as error:
-            print(f"ERROR: {error}")
-            has_error = True
-
-    return has_error
-
-
-def check_data():
-    has_error = False
-
-    configpaths = sys.argv[1:]
-    configpaths.extend(get_configs())
-
-    for configpath in configpaths:
-        checks = get_checks(configpath)
-        has_error |= check_table(checks)
-
-    if has_error:
-        raise Exception("Unexpected Data")
-
-
-if __name__ == "__main__":
-    # check_data()
-
-    # print(json.load(Path("/github/workspace/files.json").open("r")))
-    print(os.environ.get("INPUT_PROJECT_ID"))
-    print(Path.home())
+    ### load the secret of prod and staging data
+    prod_base64 = os.environ.get("INPUT_GCP_TABLE_APPROVE_PROD")
+    staging_base64 = os.environ.get("INPUT_GCP_TABLE_APPROVE_STAGING")
 
     ### json with information of .basedosdados/config.toml
     config_dict = {
@@ -222,18 +168,17 @@ if __name__ == "__main__":
         },
     }
 
-    ### load the secret of prod and staging data
-    prod_base64 = os.environ.get("INPUT_GCP_TABLE_APPROVE_PROD")
-    staging_base64 = os.environ.get("INPUT_GCP_TABLE_APPROVE_STAGING")
-
     ### create config and credential folders
     create_config_tree(prod_base64, staging_base64, config_dict)
-    ### find the dataset and tables of the PR
-    dataset_table_ids = get_table_dataset_id()
 
-    print(f"Tables found: {dataset_table_ids}")
-    ### iterate over each table in dataset of the PR
-    for table_id in dataset_table_ids.keys():
-        dataset_id = dataset_table_ids[table_id]["dataset_id"]
-        source_bucket_name = dataset_table_ids[table_id]["source_bucket_name"]
-        pretty_log(dataset_id, table_id, source_bucket_name)
+    # ### find the dataset and tables of the PR
+    # dataset_table_ids = get_table_dataset_id()
+
+    # print(f"Tables found: {dataset_table_ids}")
+    # ### iterate over each table in dataset of the PR
+    # for table_id in dataset_table_ids.keys():
+    #     dataset_id = dataset_table_ids[table_id]["dataset_id"]
+    #     source_bucket_name = dataset_table_ids[table_id]["source_bucket_name"]
+    #     pretty_log(dataset_id, table_id, source_bucket_name)
+    
+    # return dataset_table_ids
