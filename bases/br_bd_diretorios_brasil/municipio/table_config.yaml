@@ -18,7 +18,7 @@ last_updated: 2021-05-07 # AUTO GENERATED
 description: |  # REQUIRED
     Diretório ligando diversos códigos institucionais de municípios brasileiros: IBGE, Receita Federal, TSE, BCB, regiões, comarcas, região de saúde, etc.
 
-# Quem está completando esse arquivo config?
+# Quem está completando esse arquivo config? 
 published_by:
     name: Ricardo Dahis # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code # REQUIRED

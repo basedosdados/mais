@@ -41,7 +41,7 @@ import bd_credential
 
 
 dataset_table_ids = bd_credential.setup()
-print("========dataset_table_ids=========")
+print("++++++++++++++dataset_table_ids++++++++++++++")
 print(dataset_table_ids)
 
 checks = Path("/app/checks.yaml").open("r").read()
@@ -49,8 +49,14 @@ checks = Template(checks)
 configs = [
     dataset_table_ids[table_id]["table_config"] for table_id in dataset_table_ids.keys()
 ]
+
+print("++++++++++++++CONFIGS1++++++++++++++")
+print(configs)
+
+
 configs = [yaml.safe_load(checks.render(**config)) for config in configs]
 
+print("++++++++++++++CONFIGS2++++++++++++++")
 print(configs)
 
 
