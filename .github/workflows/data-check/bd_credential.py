@@ -124,44 +124,27 @@ def setup():
     # print(Path.home())
 
     ### load the secret of prod and staging data
-    prod_base64 = os.environ.get("DEV_PROD")
-    staging_base64 = os.environ.get("DEV_STAG")
+    prod_base64 = os.environ.get("INPUT_GCP_PROD")
+    staging_base64 = os.environ.get("INPUT_GCP_STAGING")
 
     ### json with information of .basedosdados/config.toml
     config_dict = {
-        "metadata_path": str(Path("/github") / "workspace" / "bases"),
-        "templates_path": str(Path.home() / ".basedosdados" / "templates"),
-        "bucket_name": "basedosdados-dev",
+        "metadata_path": "/github/workspace/bases",
+        "templates_path": "/github/workspace/python-package/basedosdados/configs/templates",
+        "bucket_name": "basedosdados",
         "gcloud-projects": {
             "staging": {
-                "name": "basedosdados-dev",
-                "credentials_path": str(
-                    Path.home() / ".basedosdados" / "credentials" / "staging.json"
-                ),
+                "name": "basedosdados-staging",
+                "credentials_path": "/github/home/.basedosdados/credentials/staging.json",
             },
             "prod": {
-                "name": "basedosdados-dev",
-                "credentials_path": str(
-                    Path.home() / ".basedosdados" / "credentials" / "prod.json"
-                ),
+                "name": "basedosdados",
+                "credentials_path": "/github/home/.basedosdados/credentials/prod.json",
             },
         },
     }
 
     ### create config and credential folders
     create_config_tree(prod_base64, staging_base64, config_dict)
-
-    ### create templates at config path
-    Base()._refresh_templates()
-
-    print(
-        "\n",
-        Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),
-        "\n",
-    )
-    ### Assert config files have been created
-    assert (Path.home() / ".basedosdados" / "config.toml").is_file()
-    assert (Path.home() / ".basedosdados" / "credentials" / "prod.json").is_file()
-    assert (Path.home() / ".basedosdados" / "credentials" / "staging.json").is_file()
 
     return get_table_dataset_id()
