@@ -134,6 +134,7 @@ def get_table_dataset_id():
                 "dataset_id": table_config["dataset_id"],
                 "source_bucket_name": table_config["source_bucket_name"],
                 "table_config_path": filepath,
+                "table_config": table_config,
             }
         else:
             print(
@@ -141,7 +142,7 @@ def get_table_dataset_id():
                 f"\n{str(filepath)} does not exist on current commit",
                 "\n###==============================================================================================###\n",
             )
-    return dataset_table_ids, changes
+    return dataset_table_ids
 
 
 def setup():

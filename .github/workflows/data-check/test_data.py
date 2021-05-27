@@ -16,33 +16,45 @@ import bd_credential
 # -------------------------------------
 
 # TODO: Adicionar try/excepts para erros de yamls mal configurados
+# bd_credential.setup()
+
+# with Path("github/workspace/files.json").open("r") as changed_files:
+#     changed_files = json.load(changed_files)
+#     changed_files = map(lambda x: Path(x), changed_files)
+#     changed_files = filter(lambda x: x.is_file(), changed_files)
+#     changed_files = filter(lambda x: x.name == "table_config.yaml", changed_files)
+
+# # DEBUG START
+# # changed_files = [Path("C:/Users/Vinicius/Documents/mais/bases/br_bd_diretorios_brasil/municipio/table_config.yaml")]
+# # DEBUG END
+
+# with Path("./checks.yaml").open("r") as checkfile:
+#     configs = []
+#     checks = checkfile.read()
+#     checks = Template(checks)
+#     for changed_file in changed_files:
+#         with changed_file.open("r") as configfile:
+#             config = yaml.safe_load(configfile)
+#             config = checks.render(**config)
+#             config = yaml.safe_load(config)
+#             configs.append(config)
+
 
 dataset_table_ids = bd_credential.setup()
 print("========dataset_table_ids=========")
 print(dataset_table_ids)
 
-with Path("github/workspace/files.json").open("r") as changed_files:
-    changed_files = json.load(changed_files)
-    changed_files = map(lambda x: Path(x), changed_files)
-    changed_files = filter(lambda x: x.is_file(), changed_files)
-    changed_files = filter(lambda x: x.name == "table_config.yaml", changed_files)
-
-# DEBUG START
-# changed_files = [Path("C:/Users/Vinicius/Documents/mais/bases/br_bd_diretorios_brasil/municipio/table_config.yaml")]
-# DEBUG END
-
 with Path("./checks.yaml").open("r") as checkfile:
     configs = []
     checks = checkfile.read()
     checks = Template(checks)
-    for changed_file in changed_files:
-        with changed_file.open("r") as configfile:
-            config = yaml.safe_load(configfile)
-            config = checks.render(**config)
-            config = yaml.safe_load(config)
-            configs.append(config)
-        print("============CONFIGS=============")
-        print(changed_file, configs)
+    configs = [
+        dataset_table_ids[table_id]["table_config"]
+        for table_id in dataset_table_ids.keys()
+    ]
+    configs = [yaml.safe_load(checks.render(**config)) for config in configs]
+
+print(configs)
 
 
 def pytest_generate_tests(metafunc):
