@@ -1,3 +1,5 @@
+from json import dump
+from basedosdados.upload.base import Base
 from ckanapi import RemoteCKAN
 from ckanapi import errors
 from basedosdados.validation.exceptions import BaseDosDadosException
@@ -34,17 +36,17 @@ class Metadata(Table):
 
         super().__init__(dataset_id, table_id, **kwargs)
 
-        self.path = Path(self.table_folder / "table_config.yaml")
+        self.table_metadata_path = Path(self.table_folder) / "table_config.yaml"
+        self.dataset_metadata_path = Path(self.dataset_folder) / "dataset_config.yaml"
 
-        with open(self.path, "r") as f:
+        with open(self.table_config, "r") as f:
             table_config = yaml.load(f, Loader=NoDatesSafeLoader)
 
-        table_config["resource_type"] = "bdm_table"
-        table_config["name"] = table_config.pop("table_id")
-        table_config["spatial_coverage"] = table_config.pop("coverage_geo")
-        table_config["temporal_coverage"] = str(table_config.pop("coverage_time"))
-        table_config["update_frequency"] = table_config.pop("data_update_frequency")
-        self.yaml = table_config
+        with open(self.dataset_config, "r") as d:
+            dataset_config = yaml.load(d, Loader=NoDatesSafeLoader)
+
+        self.table_config = table_config
+        self.dataset_config = dataset_config
 
     def _get_resource(self):
         """Get resource by trying to match CKAN package name with given dataset_id and resource name with given table_id
@@ -58,22 +60,61 @@ class Metadata(Table):
         try:
             pkg_dict = RemoteCKAN(
                 CKAN_URL, user_agent="", apikey=None
-            ).action.package_show(id=self.yaml["dataset_id"])
+            ).action.package_show(id=self.dataset_id)
         except Exception as e:
             raise e
-        resource = [
-            r for r in pkg_dict["resources"] if r["name"] == self.yaml["table_id"]
-        ][0]
+        resource = [r for r in pkg_dict["resources"] if r["name"] == self.table_id][0]
         return resource
 
-    def _check_last_modified(self):
+    def _check_resource_last_modified(self):
         resource = self._get_resource()
-        if resource["last_modified"] != self.yaml["last_updated"]:
+        if resource["metadata_modified"] != self.table_config["last_updated"]:
             raise BaseDosDadosException(
-                f"You're trying to update the table {self.yaml['dataset_id']}.{self.yaml['table_id']} but are not using the latest metadata version, download it first, then retry updating"
+                f"You're trying to update the table {self.dataset_id}.{self.table_id} but are not using the latest metadata version, download it first, then retry updating"
             )
 
-    def generate_metadata_file(self, path=None):
+    def _check_package_last_modified(self):
+        pkg_dict = RemoteCKAN(CKAN_URL, user_agent="", apikey=None).action.package_show(
+            id=self.dataset_id
+        )
+        if pkg_dict["last_modified"] != self.dataset_config["last_updated"]:
+            raise BaseDosDadosException(
+                f"You're trying to update the dataset {self.dataset_id} but are not using the latest metadata version, download it first, then retry updating"
+            )
+
+    def generate_package_metadata(self, path=None):
+        """Generate package metadata file based on the current version saved to CKAN database
+
+        Args:
+            path (str, pathlib.Path): Optional
+                Path to save downloaded files. If None is given, saves to the metadata_path/dataset_id/dataset_config.yaml
+                as defined in your config.toml file.
+                Defaults to None.
+        """
+
+        if not path:
+            dump_path = self.dataset_metadata_path
+        else:
+            dump_path = Path(path)
+            if dump_path.is_file():
+                dump_path = dump_path.parent / "dataset_config.yaml"
+
+        pkg_dict = RemoteCKAN(CKAN_URL, user_agent="", apikey=None).action.package_show(
+            id=self.dataset_id
+        )
+        pkg_dict.pop("resources")
+
+        with open(dump_path, "w") as f:
+            stream = yaml.dump(
+                pkg_dict,
+                line_break=False,
+                sort_keys=False,
+                default_flow_style=False,
+                allow_unicode=True,
+            )
+            f.write(stream)
+
+    def generate_resource_metadata(self, path=None):
         """Generates metadata file from last version uploaded to CKAN
 
         Args:
@@ -82,9 +123,18 @@ class Metadata(Table):
                 as defined in your config.toml file.
                 Defaults to None.
         """
+        file = Path(path)
+
         resource = self._get_resource()
-        table_config = Path(path) / "table_config.yaml" or self.path
-        with open(table_config, "w") as f:
+        if not path:
+            dump_path = self.table_metadata_path
+        else:
+            dump_path = Path(path)
+            if dump_path.is_file():
+                dump_path = dump_path.parent / "table_config.yaml"
+        # Optionally select which keys will be dumped to generated metadata file
+        # yaml_keys = [k for k in resource.keys()]
+        with open(dump_path, "w") as f:
             stream = yaml.dump(
                 resource,
                 line_break=False,
@@ -94,25 +144,25 @@ class Metadata(Table):
             )
             f.write(stream)
 
-    def validate(self):
+    def validate_table(self):
         error_dict = {}
-        self._check_last_modified()
+        self._check_resource_last_modified()
         try:
             response = RemoteCKAN(
                 CKAN_URL, user_agent="", apikey=None
             ).action.package_validate(
-                resources=[self.yaml],
+                resources=[self.table_config],
                 private=False,
-                name=self.yaml["dataset_id"],
+                name=self.dataset_id,
                 title="Validate",
             )
         except ckanapi.errors.ValidationError as e:
             if e.error_dict:
-                error_dict[self.yaml["name"]] = e.error_dict
+                error_dict[self.table_config["name"]] = e.error_dict
             else:
                 return True
 
         if error_dict:
             raise BaseDosDadosException(
-                f"{self.path} has validation errors: {error_dict}"
+                f"{self.table_metadata_path} has validation errors: {error_dict}"
             )
