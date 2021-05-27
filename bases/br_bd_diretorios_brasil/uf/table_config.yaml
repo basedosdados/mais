@@ -15,12 +15,12 @@ last_updated: 2021-05-02 # AUTO GENERATED
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de 
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED 
+description: |  # REQUIRED
     Diretório listando informações do IBGE sobre unidades da federação brasileiras.
 
-# Quem está completando esse arquivo config? 
+# Quem está completando esse arquivo config?
 published_by:
-    name: Ricardo Dahis # REQUIRED
+    name: Ricardo Dahis # REQUIRED 
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code # REQUIRED
     website: www.ricardodahis.com
     email: rdahis@basedosdados.org

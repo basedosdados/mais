@@ -83,17 +83,25 @@ def pytest_generate_tests(metafunc):
 
 
 def test_table_exists(configs):
-    result = bd.read_sql(configs["test_table_exists"]["query"])
+    result = bd.read_sql(
+        query=configs["test_table_exists"]["query"], billing_project_id="basedosdados"
+    )
     assert result.failure.values == False
 
 
 def test_select_all_works(configs):
-    result = bd.read_sql(configs["test_select_all_works"]["query"])
+    result = bd.read_sql(
+        query=configs["test_select_all_works"]["query"],
+        billing_project_id="basedosdados",
+    )
     assert result.failure.values == False
 
 
 def test_table_has_no_null_column(configs):
-    result = bd.read_sql(configs["test_table_has_no_null_column"]["query"])
+    result = bd.read_sql(
+        query=configs["test_table_has_no_null_column"]["query"],
+        billing_project_id="basedosdados",
+    )
     assert result.null_percent.max() < 1
 
 
