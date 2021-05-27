@@ -1,5 +1,3 @@
-# ---
-
 test_table_exists:
   name: Check if {{ table_id }} table exists
   query: |

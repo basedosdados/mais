@@ -46,21 +46,23 @@ print(dataset_table_ids)
 checks = Template(Path("/app/checks.yaml").open("r", encoding="utf-8").read())
 
 configs = [
-    checks.render(
-        project_id_staging=dataset_table_ids[table_id]["table_config"][
-            "project_id_staging"
-        ],
-        dataset_id=dataset_table_ids[table_id]["table_config"]["dataset_id"],
-        table_id=table_id,
+    yaml.safe_load(
+        checks.render(
+            project_id_staging=dataset_table_ids[table_id]["table_config"][
+                "project_id_staging"
+            ],
+            dataset_id=dataset_table_ids[table_id]["table_config"]["dataset_id"],
+            table_id=table_id,
+        )
     )
     for table_id in dataset_table_ids.keys()
 ]
 
 print("\n\n\n++++++++++++++CONFIGS++++++++++++++")
-print(configs)
-
-
-# configs = [yaml.safe_load(checks.render(**config)) for config in configs]
+for config in configs:
+    print(configs["test_table_exists"])
+    print(configs["test_select_all_works"])
+    print(configs["test_table_has_no_null_column"])
 
 
 def pytest_generate_tests(metafunc):
@@ -94,7 +96,8 @@ def test_table_has_no_null_column(configs):
     assert result.null_percent.max() < 1
 
 
-def test_primary_key_has_unique_values(configs):
-    check = configs["test_primary_key_has_unique_values"]
-    result = bd.read_sql(check["query"])
-    assert result.to_numpy().all()
+### TODO | Ativar depois de testar a query
+# def test_primary_key_has_unique_values(configs):
+#     check = configs["test_primary_key_has_unique_values"]
+#     result = bd.read_sql(check["query"])
+#     assert result.to_numpy().all()
