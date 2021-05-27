@@ -219,4 +219,4 @@ columns: # REQUIRED
         name: regiao
         description: Região
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+        is_partition: False # Bool [True, False], whether the column is a
