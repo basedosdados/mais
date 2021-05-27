@@ -7,7 +7,7 @@ dataset_id: br_inep_censo_escolar # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-inep-censo-escolar # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v1.1 # REQUIRED
 
 last_updated: 2021-04-05 # AUTO GENERATED
 
@@ -153,19 +153,19 @@ columns: # REQUIRED
   
     -   
         name: sexo
-        description: Sexo. Valor 1 - sexo masculino; valor 2 - sexo feminino
+        description: Sexo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: raca_cor
-        description: Cor/raça. Valor 0 indica não declarada; valor 1 - Branca; valor 2 - Preta; valor 3 - Parda; valor 4 - Amarela; valor 5 - Indígena
+        description: Cor/raça
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: nacionalidade
-        description: Nacionalidade. Valor 1 - Brasileira; valor 2 - Brasileira nascida no exterior ou naturalizado; valor 3 - nacionalidade estrangeira
+        description: Nacionalidade
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -201,13 +201,13 @@ columns: # REQUIRED
   
     -   
         name: zona_residencial
-        description: Zona da residência. Valor 1 indica zona urbana; valor 2 indica zona rural
+        description: Zona da residência
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: outro_local_aula
-        description:  Recebe escolarização em um espaço diferente da escola. Valor 1 -"em hospital"; valor 2 - "em domicílio"; valor 3 - "não recebe"
+        description:  Recebe escolarização em um espaço diferente da escola
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -435,13 +435,13 @@ columns: # REQUIRED
   
     -   
         name: ingresso_federais
-        description: Forma de ingresso do aluno (apenas alunos de escolas federais das Etapas). Valor 1 - Sem processo seletivo; 2 - Sorteio; 3 - Transferência; 4 - Exame de seleção sem reserva de vaga; 5 - Exame de seleção, vaga reservada para alunos da rede pública de ensino; 6 - Exame de seleção, vaga reservada para alunos da rede pública de ensino, com baixa renda e autodeclarado preto, pardo ou indígena; 7 - Exame de seleção, vaga reservada para outros programas de ação afirmativa ; 8 - Outra forma de ingresso ; 9 - Exame de seleção, vaga reservada para alunos da rede pública de ensino, com baixa renda 
+        description: Forma de ingresso do aluno (apenas alunos de escolas federais das Etapas)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: etapa_ensino
-        description: Etapa/nível de ensino da matrícula. Conferir a tabela auxiliar de etapa de ensino na BigQuery.
+        description: Etapa/nível de ensino da matrícula
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -459,13 +459,13 @@ columns: # REQUIRED
   
     -   
         name: unificada
-        description: Turma unificada, multieapa, multi ou correção de fluxo. Valor 0 - Não. Valor 1 - Unificada. Valor 2 - Multietapa. Valor 3 - Multi. Valor 4 - Correção de fluxo. Valor 5 - Mista (concomitante e subsequente)
+        description: Turma unificada, multieapa, multi ou correção de fluxo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: tipo_turma
-        description: Tipo de atendimento da turma. Valor 0 - Não se aplica. Valor 1 - Classe hospitalar. Valor 2 - Unidade de Atendimento Socioeducativo. Valor 3 - Unidade Prisional. Valor 4 - Atividade Complementar. Valor 5 - Atendimento Educacional Especializado (AEE)
+        description: Tipo de atendimento da turma
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

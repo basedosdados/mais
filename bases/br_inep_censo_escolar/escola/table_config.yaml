@@ -7,7 +7,7 @@ dataset_id: br_inep_censo_escolar # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-inep-censo-escolar # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v1.1 # REQUIRED
 
 last_updated: 2021-03-26 # AUTO GENERATED
 
@@ -157,7 +157,7 @@ columns: # REQUIRED
   
     -   
         name: tipo_categoria_escola_privada
-        description: Tipo de escola privada. Valor 1 = Particular; valor 2 = Comunitária; valor 3 = Confessional; 4 = Filantrópica
+        description: Tipo de escola privada
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -169,7 +169,7 @@ columns: # REQUIRED
   
     -   
         name: tipo_convenio_poder_publico
-        description: Tipo de convenio com o poder publico. Valor 1 = convêncio municipal; valor 2 = convênio estadual; valor 3 = convênio estadual e municipal. 
+        description: Tipo de convenio com o poder publico 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -205,12 +205,12 @@ columns: # REQUIRED
   
     -   
         name: tipo_regulamentacao
-        description: A escola tem regulamentação ou autorização de algum conselho municipal ou federal. Valor 0  = Não; valor 1 = Sim; valor 2 = Em tramitação
+        description: A escola tem regulamentação ou autorização de algum conselho municipal ou federal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: tipo_ocupacao_predio_escolar
+        name: local_func_predio_escolar
         description: O local de funcionamento da escola é um prédio escolar
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -228,7 +228,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: predio_compartilhado
+        name: local_func_predio_compartilhado
         description: O local de funcionamento da escola é um prédio compartilhado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -733,13 +733,13 @@ columns: # REQUIRED
   
     -   
         name: tipo_atendimento_educacional_especial
-        description: A escola fornece AEE, Atendimento Educacional Especial. Valor 0 = não oferece, valor 1 = não exclusivamente, valor 2 = exclusivamente
+        description: A escola fornece AEE, Atendimento Educacional Especial
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: tipo_atividade_complementar
-        description: A escola promove atividades complementares. Valor 0 = não oferece, valor 1 = oferece não exclusivamente, valor 2 = oferece exclusivamente
+        description: A escola promove atividades complementares
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -895,7 +895,7 @@ columns: # REQUIRED
   
     -   
         name: tipo_localizacao_diferenciada
-        description: Localização diferenciada da escola. Valor 1 = área de assentamento, 2 = terra indígena, 3 = área remanescente de quilombos, 4=unidade de uso sustentável, 5 = unidade de uso sustentável em terra indígena, 6 = unidade de uso sustentável em área remanescente de quilombos
+        description: Localização diferenciada da escola
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

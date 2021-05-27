@@ -105,7 +105,7 @@ partitions: # REQUIRED
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
     - name: id_docente
-      description: Código do Docente - INEP
+      description: ID Docente - INEP
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: mes_nascimento_docente
@@ -132,7 +132,7 @@ columns: # REQUIRED
       description: Sexo
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: cor_raca
+    - name: raca_cor
       description: Cor/raça
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
@@ -149,7 +149,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: id_municipio_nascimento
-      description: Código IBGE 7 dígitos do Município de nascimento
+      description: Código IBGE - 7 dígitos do Município de nascimento
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: id_uf_endereco
@@ -157,7 +157,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: id_municipio_endereco
-      description: Código IBGE 7 dígitos do Município de residência
+      description: Código IBGE - 7 dígitos do Município de residência
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: zona_residencial
@@ -228,7 +228,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: formacao_pedagogica_comp_1
-      description: Formação/complementação pedagógica - área de conhecimento/Componentes
+      description: Possui formação/complementação pedagógica - área de conhecimento/Componentes
           curriculares
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
@@ -265,7 +265,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: formacao_pedagogica_comp_2
-      description: Formação/complementação pedagógica - área de conhecimento/Componentes
+      description: Possui formação/complementação pedagógica - área de conhecimento/Componentes
           curriculares
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
@@ -302,7 +302,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: formacao_pedagogica_comp_3
-      description: Formação/complementação pedagógica - Área de conhecimento/Componentes
+      description: Possui formação/complementação pedagógica - Área de conhecimento/Componentes
           curriculares
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
@@ -413,7 +413,7 @@ columns: # REQUIRED
           cursos técnicos profissionais
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: disciplina_atend_especiais
+    - name: disciplina_atendimento_especiais
       description: Áreas do conhecimento/Componentes curriculares - Atendimentos Especiais
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
@@ -434,19 +434,19 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: especializacao
-      description: Pós-Graduação - Especialização
+      description: Possui Pós-Graduação - Especialização
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: mestrado
-      description: Pós-Graduação - Mestrado
+      description: Possui Pós-Graduação - Mestrado
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: doutorado
-      description: Pós-Graduação - Doutorado
+      description: Possui Pós-Graduação - Doutorado
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: pos_nenhum
-      description: Pós-Graduação - Nenhum
+      description: Não possui Pós-Graduação 
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: formacao_especif_creche
@@ -537,11 +537,11 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: id_turma
-      description: Código nico da Turma
+      description: ID Turma - INEP
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: tipo_turma
-      description: <descrição da coluna>
+      description: Tipo de atendimento da turma (e.g. Classe hospitalar, Unidade prisional)
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: mediacao_didatico_pedago
@@ -578,30 +578,30 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: id_escola
-      description: Código da Escola
+      description: ID Escola - INEP
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: id_municipio
-      description: Código do Município IBGE 7 dígitos da escola
+      description: ID Município - IBGE 7 dígitos 
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: rede
-      description: Dependência Administrativa (Escola)
+      description: Rede Escolar
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: localizacao
+    - name: tipo_localizacao
       description: Localização (Escola)
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: categoria_escola_privada
+    - name: tipo_categoria_escola_privada
       description: Categoria da escola privada
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: conveniada_pp
+    - name: conveniada_poder_publico
       description: Conveniada com o poder público (Escola)
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: convenio_poder_publico
+    - name: tipo_convenio_poder_publico
       description: Dependência do convênio com o poder público
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
@@ -628,12 +628,12 @@ columns: # REQUIRED
       description: Mantenedora da escola privada - Instituições sem fins lucrativos
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: regulamentacao
+    - name: tipo_regulamentacao
       description: Regulamentação/Autorização no conselho ou órgão municipal, estadual
           ou federal de educação
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: localizacao_diferenciada
+    - name: tipo_localizacao_diferenciada
       description: Localização diferenciada da escola
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
@@ -642,7 +642,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: ano
-      description: Ano do Censo
+      description: Ano
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: true   # Bool [True, False], whether the column is a partition.
     - name: sigla_uf

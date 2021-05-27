@@ -178,37 +178,37 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_tipo_atividade_1
+        name: tipo_atividade_1
         description: Código do tipo de atividade complementar 1
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_tipo_atividade_2
+        name: tipo_atividade_2
         description: Código do tipo de atividade complementar 2
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_tipo_atividade_3
+        name: tipo_atividade_3
         description: Código do tipo de atividade complementar 3
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_tipo_atividade_4
+        name: tipo_atividade_4
         description: Código do tipo de atividade complementar 4
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_tipo_atividade_5
+        name: tipo_atividade_5
         description: Código do tipo de atividade complementar 5
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_tipo_atividade_6
+        name: tipo_atividade_6
         description: Código do tipo de atividade complementar 6
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -220,7 +220,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_curso_educ_profissional
+        name: id_curso_educacao_profissional
         description: Código do curso da educação profissional técnica
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -401,7 +401,7 @@ columns: # REQUIRED
   
     -   
         name: tipo_categoria_escola_privada
-        description: Tipo de escola privada. Valor 1 = Particular; valor 2 = Comunitária; valor 3 = Confessional; 4 = Filantrópica
+        description: Tipo de escola privada
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -413,7 +413,7 @@ columns: # REQUIRED
   
     -   
         name: tipo_convenio_poder_publico
-        description: Tipo de convenio com o poder publico. Valor 1 = convêncio municipal; valor 2 = convênio estadual; valor 3 = convênio estadual e municipal.
+        description: Tipo de convenio com o poder publico
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -455,7 +455,7 @@ columns: # REQUIRED
   
     -   
         name: tipo_localizacao_diferenciada
-        description: Localização diferenciada da escola. Valor 1 = área de assentamento, 2 = terra indígena, 3 = área remanescente de quilombos, 4=unidade de uso sustentável, 5 = unidade de uso sustentável em terra indígena, 6 = unidade de uso sustentável em área remanescente de quilombos
+        description: Localização diferenciada da escola
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
