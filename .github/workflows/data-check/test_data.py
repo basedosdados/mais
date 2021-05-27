@@ -60,9 +60,14 @@ configs = [
 
 print("\n\n\n++++++++++++++CONFIGS++++++++++++++")
 for config in configs:
-    print(configs["test_table_exists"])
-    print(configs["test_select_all_works"])
-    print(configs["test_table_has_no_null_column"])
+    print("\n\n", configs["test_table_exists"])
+    print("\n\n", configs["test_select_all_works"])
+    print(
+        "\n\n",
+        configs[
+            "test_table_has_no_null_column" "\n\n",
+        ],
+    )
 
 
 def pytest_generate_tests(metafunc):
