@@ -47,8 +47,10 @@ checks = Template(Path("/app/checks.yaml").open("r", encoding="utf-8").read())
 
 configs = [
     checks.render(
-        project_id_staging=dataset_table_ids[table_id]["project_id_staging"],
-        dataset_id=dataset_table_ids[table_id]["dataset_id"],
+        project_id_staging=dataset_table_ids[table_id]["table_config"][
+            "project_id_staging"
+        ],
+        dataset_id=dataset_table_ids[table_id]["table_config"]["dataset_id"],
         table_id=table_id,
     )
     for table_id in dataset_table_ids.keys()
