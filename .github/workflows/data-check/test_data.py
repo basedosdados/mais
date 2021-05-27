@@ -17,7 +17,9 @@ import bd_credential
 
 # TODO: Adicionar try/excepts para erros de yamls mal configurados
 
-bd_credential.setup()
+dataset_table_ids = bd_credential.setup()
+print("========dataset_table_ids=========")
+print(dataset_table_ids)
 
 with Path("github/workspace/files.json").open("r") as changed_files:
     changed_files = json.load(changed_files)
@@ -39,33 +41,41 @@ with Path("./checks.yaml").open("r") as checkfile:
             config = checks.render(**config)
             config = yaml.safe_load(config)
             configs.append(config)
+        print("============CONFIGS=============")
+        print(changed_file, configs)
+
 
 def pytest_generate_tests(metafunc):
     metafunc.parametrize("configs", configs)
 
+
 # -------------------------------------
 # 2.Executes at Test Time
 # -------------------------------------
-# Each test is 
+# Each test is
 # executed once
 # for each table
 # -------------------------------------
+
 
 def test_table_exists(configs):
     check = configs["test_table_exists"]
     result = bd.read_sql(check["query"])
     assert result.failure.values == False
 
+
 def test_select_all_works(configs):
     check = configs["test_select_all_works"]
     result = bd.read_sql(check["query"])
     assert result.failure.values == False
 
+
 def test_table_has_no_null_column(configs):
     check = configs["test_table_has_no_null_column"]
     result = bd.read_sql(check["query"])
     assert result.null_percent.max() < 1
-    
+
+
 def test_primary_key_has_unique_values(configs):
     check = configs["test_primary_key_has_unique_values"]
     result = bd.read_sql(check["query"])
