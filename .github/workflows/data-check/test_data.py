@@ -42,7 +42,6 @@ import bd_credential
 
 dataset_table_ids = bd_credential.setup()
 print("++++++++++++++dataset_table_ids++++++++++++++")
-print(dataset_table_ids)
 checks = Template(Path("/app/checks.yaml").open("r", encoding="utf-8").read())
 
 configs = [
@@ -60,11 +59,11 @@ configs = [
 
 print("\n\n\n++++++++++++++CONFIGS++++++++++++++")
 for config in configs:
-    print("\n\n", configs["test_table_exists"])
-    print("\n\n", configs["test_select_all_works"])
+    print("\n\n", config["test_table_exists"])
+    print("\n\n", config["test_select_all_works"])
     print(
         "\n\n",
-        configs[
+        config[
             "test_table_has_no_null_column" "\n\n",
         ],
     )
