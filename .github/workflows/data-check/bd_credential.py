@@ -82,35 +82,9 @@ def create_config_tree(prod_base64, staging_base64, config_dict):
     save_toml(config_dict, "config.toml", ".basedosdados")
 
 
-def pretty_log(dataset_id, table_id, source_bucket_name):
-
-    if "basedosdados" in source_bucket_name:
-        source_len = len(source_bucket_name) - 9
-    else:
-        source_len = len(source_bucket_name)
-    print(
-        "\n###================================================================================###",
-        "\n###                                                                                ###",
-        "\n###               Data successfully synced and created in bigquery                 ###",
-        "\n###                                                                                ###",
-        f"\n###               Dataset      : {dataset_id}",
-        " " * (48 - len(dataset_id)),
-        "###",
-        f"\n###               Table        : {table_id}",
-        " " * (48 - len(table_id)),
-        "###",
-        f"\n###               Source Bucket: {source_bucket_name}",
-        " " * (48 - source_len),
-        "###",
-        "\n###                                                                                ###",
-        "\n###================================================================================###\n",
-    )
-
-
 def get_table_dataset_id():
     ### load the change files in PR || diff between PR and master
     changes = json.load(Path("/github/workspace/files.json").open("r"))
-    print(changes)
     ### create a dict to save the dataset and source_bucket related to each table_id
     dataset_table_ids = {}
     ### create a list to save the table folder path, for each table changed in the commit
