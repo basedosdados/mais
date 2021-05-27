@@ -45,17 +45,16 @@ print("++++++++++++++dataset_table_ids++++++++++++++")
 print(dataset_table_ids)
 checks = Template(Path("/app/checks.yaml").open("r", encoding="utf-8").read())
 
-configs = []
-for table_id in dataset_table_ids.keys():
-    configs.appen(
-        checks.render(
-            project_id_staging=dataset_table_ids["table_id"]["project_id_staging"],
-            dataset_id=dataset_table_ids["table_id"]["dataset_id"],
-            table_id=table_id,
-        )
+configs = [
+    checks.render(
+        project_id_staging=dataset_table_ids["table_id"]["project_id_staging"],
+        dataset_id=dataset_table_ids["table_id"]["dataset_id"],
+        table_id=table_id,
     )
+    for table_id in dataset_table_ids.keys()
+]
 
-print("++++++++++++++CONFIGS++++++++++++++")
+print("\n\n\n++++++++++++++CONFIGS++++++++++++++")
 print(configs)
 
 
