@@ -1,21 +1,21 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: uf # AUTO GENERATED  
-dataset_id: br_bd_diretorios_brasil # AUTO GENERATED    
+table_id: uf # AUTO GENERATED
+dataset_id: br_bd_diretorios_brasil # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-bd-diretorios-brasil # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil # AUTO GENERATED
 
-version: v1.1  
+version: v1.1
 
-last_updated: 2021-05-02 # AUTO GENERATED 
+last_updated: 2021-05-02 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de 
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
+description: |  # REQUIRED 
     Diretório listando informações do IBGE sobre unidades da federação brasileiras.
 
 # Quem está completando esse arquivo config? 

@@ -41,7 +41,6 @@ import bd_credential
 
 
 dataset_table_ids = bd_credential.setup()
-print("++++++++++++++dataset_table_ids++++++++++++++")
 checks = Template(Path("/app/checks.yaml").open("r", encoding="utf-8").read())
 
 configs = [
@@ -57,15 +56,16 @@ configs = [
     for table_id in dataset_table_ids.keys()
 ]
 
-print("\n\n\n++++++++++++++CONFIGS++++++++++++++")
+print("\n\n++++++++++++++++++++++++++++LOG_CONFIGS++++++++++++++++++++++++++++")
 for config in configs:
-    print("\n\n", config["test_table_exists"])
-    print("\n\n", config["test_select_all_works"])
     print(
+        "\n test_table_exists",
+        config["test_table_exists"]["query"],
+        "\n test_select_all_works",
+        config["test_select_all_works"]["query"],
+        "\n test_table_has_no_null_column",
+        config["test_table_has_no_null_column"]["query"],
         "\n\n",
-        config[
-            "test_table_has_no_null_column" "\n\n",
-        ],
     )
 
 
@@ -83,20 +83,17 @@ def pytest_generate_tests(metafunc):
 
 
 def test_table_exists(configs):
-    check = configs["test_table_exists"]
-    result = bd.read_sql(check["query"])
+    result = bd.read_sql(configs["test_table_exists"]["query"])
     assert result.failure.values == False
 
 
 def test_select_all_works(configs):
-    check = configs["test_select_all_works"]
-    result = bd.read_sql(check["query"])
+    result = bd.read_sql(configs["test_select_all_works"]["query"])
     assert result.failure.values == False
 
 
 def test_table_has_no_null_column(configs):
-    check = configs["test_table_has_no_null_column"]
-    result = bd.read_sql(check["query"])
+    result = bd.read_sql(configs["test_table_has_no_null_column"]["query"])
     assert result.null_percent.max() < 1
 
 
