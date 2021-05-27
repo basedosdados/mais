@@ -20,7 +20,7 @@ description: |  # REQUIRED
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: Ricardo Dahis # REQUIRED 
+    name: Ricardo Dahis # REQUIRED  
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code # REQUIRED
     website: www.ricardodahis.com
     email: rdahis@basedosdados.org
