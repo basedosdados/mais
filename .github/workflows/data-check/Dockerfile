@@ -5,4 +5,4 @@ RUN pip install basedosdados==1.5.2 pytest toml
 COPY test_data.py /app/
 COPY bd_credential.py /app/
 COPY checks.yaml /app/
-CMD ['pytest',"/app/test_data.py"]
+CMD ["pytest","/app/test_data.py"]
