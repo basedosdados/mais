@@ -84,7 +84,7 @@ def create_config_tree(prod_base64, staging_base64, config_dict):
 
 def get_table_dataset_id():
     ### load the change files in PR || diff between PR and master
-    changes = json.load(Path("/github/workspace/files.json").open("r"))
+    changes = json.load(Path("/github/files.json").open("r"))
     ### create a dict to save the dataset and source_bucket related to each table_id
     dataset_table_ids = {}
     ### create a list to save the table folder path, for each table changed in the commit
