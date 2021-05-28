@@ -39,7 +39,22 @@ import bd_credential
 #             config = yaml.safe_load(config)
 #             configs.append(config)
 
-print("\n\n++++++++++++++++++++++++++++LOG_IDS++++++++++++++++++++++++++++")
+
+# print("\n\n++++++++++++++++++++++++++++LOG_CONFIGS++++++++++++++++++++++++++++")
+# for config in configs:
+#     print(
+#         "\n test_table_exists\n",
+#         config["test_table_exists"]["query"],
+#         "\n test_select_all_works\n",
+#         config["test_select_all_works"]["query"],
+#         "\n test_table_has_no_null_column\n",
+#         config["test_table_has_no_null_column"]["query"],
+#         "\n\n",
+#     )
+
+# print("\n\n++++++++++++++++++++++++++++LOG_IDS++++++++++++++++++++++++++++")
+
+
 dataset_table_ids = bd_credential.setup()
 checks = Template(
     Path("/home/runner/work/mais/mais/.github/workflows/data-check/checks.yaml")
@@ -60,18 +75,6 @@ configs = [
     for table_id in dataset_table_ids.keys()
 ]
 
-print("\n\n++++++++++++++++++++++++++++LOG_CONFIGS++++++++++++++++++++++++++++")
-for config in configs:
-    print(
-        "\n test_table_exists\n",
-        config["test_table_exists"]["query"],
-        "\n test_select_all_works\n",
-        config["test_select_all_works"]["query"],
-        "\n test_table_has_no_null_column\n",
-        config["test_table_has_no_null_column"]["query"],
-        "\n\n",
-    )
-
 
 def pytest_generate_tests(metafunc):
     metafunc.parametrize("configs", configs)
@@ -87,7 +90,7 @@ def pytest_generate_tests(metafunc):
 
 
 def test_table_exists(configs):
-    query = configs["test_table_exists"]["query"].replace("\n", "")
+    query = configs["test_table_exists"]["query"].replace("\n", " ")
     result = bd.read_sql(
         query=query,
         billing_project_id="basedosdados-dev",
@@ -97,7 +100,7 @@ def test_table_exists(configs):
 
 
 def test_select_all_works(configs):
-    query = configs["test_select_all_works"]["query"].replace("\n", "")
+    query = configs["test_select_all_works"]["query"].replace("\n", " ")
     result = bd.read_sql(
         query=query,
         billing_project_id="basedosdados-dev",
@@ -107,7 +110,7 @@ def test_select_all_works(configs):
 
 
 def test_table_has_no_null_column(configs):
-    query = configs["test_table_has_no_null_column"]["query"].replace("\n", "")
+    query = configs["test_table_has_no_null_column"]["query"].replace("\n", " ")
     result = bd.read_sql(
         query=query,
         billing_project_id="basedosdados-dev",
