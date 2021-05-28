@@ -27,25 +27,19 @@ jobs:
   data-check:
     needs: get_changes
     runs-on: ubuntu-latest
+    env:
+      GCP_BD_DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
+      GCP_BD_DEV_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      # - name: Set up Cloud SDK
-      #   uses: google-github-actions/setup-gcloud@master
-      #   with:
-      #     version: '290.0.1'
-      #     project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
-      #     service_account_key: ${{ secrets.GCP_SA_KEY_TASK_CALLER }}
-      #     export_default_credentials: true
-
       - name: Download changes
         uses: actions/download-artifact@v2
         with:
           name: push-changes
-
-      - name: Data Check
-        uses: ./.github/workflows/data-check
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          GCP_BD_DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
-          GCP_BD_DEV_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
+          python-version: '3.8.x'
+      - name: Create Environment
+        uses: ./.github/workflows/data-check/

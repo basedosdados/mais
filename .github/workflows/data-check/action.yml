@@ -1,6 +1,18 @@
+# name: "Data Check"
+# description: "Checks data quality"
+# author: "Base dos Dados"
+# runs:
+#   using: "docker"
+#   image: "Dockerfile"
+
+
 name: "Data Check"
 description: "Checks data quality"
 author: "Base dos Dados"
 runs:
-  using: "docker"
-  image: "Dockerfile"
+  using: composite
+  steps:
+    - run: pip install basedosdados==1.5.2 pytest toml
+      shell: bash
+    - run: cd ${{ github.workspace }}/python-package/ && pytest test_data.py
+      shell: bash

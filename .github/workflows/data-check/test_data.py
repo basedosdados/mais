@@ -39,7 +39,7 @@ import bd_credential
 #             config = yaml.safe_load(config)
 #             configs.append(config)
 
-
+print("\n\n++++++++++++++++++++++++++++LOG_IDS++++++++++++++++++++++++++++")
 dataset_table_ids = bd_credential.setup()
 checks = Template(Path("/app/checks.yaml").open("r", encoding="utf-8").read())
 
