@@ -120,7 +120,7 @@ Google. Basta seguir o passo-a-passo:
     - `/[TABLE_ID]/table_config.yaml`: informações específicas da tabela
     - `/[TABLE_ID]/publish.sql`: informações da publicação da tabela, como os tipos de variáveis do [BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) (`STRING`, `INT64`, `FLOAT64`, `DATE`), e use também este espaço para escrever tratamentos finais na tabela `staging` em SQL para publicacao
     
-Consulte também nossa [API](/mais/cli_reference_api) para mais detalhes de cada método.
+Consulte também nossa [API](/mais/reference_api_cli) para mais detalhes de cada método.
 
 #### Publique a versão pronta no seu _bucket_ com `basedosdados table publish`
 
