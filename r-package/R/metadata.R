@@ -246,6 +246,10 @@ render_dom <- function(body) {
       header {
         text-align: center;
       }
+      h2 + code {
+        display: inline-block;
+        margin-bottom: 1em;
+      }
       .item_column {
         margin: 10px 0;
       }
@@ -265,6 +269,7 @@ render_dom <- function(body) {
   }
   htmltools::tags$html(
     htmltools::tags$head(
+      htmltools::tags$meta(name = "viewport", content = "width=device-width,initial-scale=1"),
       htmltools::tags$title("Base dos Dados"),
       htmltools::tags$style(css)
     ),
