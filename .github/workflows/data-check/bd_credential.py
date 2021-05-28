@@ -161,13 +161,6 @@ def setup():
         "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ BASE $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     )
     print(
-        Path(Path.home() / ".basedosdados" / "credentials" / "prod.json")
-        .open(mode="r")
-        .read()
-    )
-    print("\n", Base().config_path)
-    print("\n", bd.__file__)
-    print(
         "\n",
         Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),
         "\n",

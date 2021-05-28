@@ -71,17 +71,6 @@ for config in configs:
         config["test_table_has_no_null_column"]["query"],
         "\n\n",
     )
-from basedosdados.upload.base import Base
-
-print("\n\n++++++++++++++++++++++++++++TEST_BDM++++++++++++++++++++++++++++")
-print(Base().config_path)
-print(bd.__file__)
-print(
-    bd.read_sql(
-        query="""SELECT * FROM `basedosdados-dev.br_bd_diretorios_brasil.municipio` LIMIT 10""",
-        billing_project_id="basedosdados-dev",
-    )
-)
 
 
 def pytest_generate_tests(metafunc):
@@ -99,19 +88,31 @@ def pytest_generate_tests(metafunc):
 
 def test_table_exists(configs):
     query = configs["test_table_exists"]["query"].replace("\n", "")
-    result = bd.read_sql(query=query, billing_project_id="basedosdados-dev")
+    result = bd.read_sql(
+        query=query,
+        billing_project_id="basedosdados-dev",
+        from_file=True,
+    )
     assert result.failure.values == False
 
 
 def test_select_all_works(configs):
     query = configs["test_select_all_works"]["query"].replace("\n", "")
-    result = bd.read_sql(query=query, billing_project_id="basedosdados-dev")
+    result = bd.read_sql(
+        query=query,
+        billing_project_id="basedosdados-dev",
+        from_file=True,
+    )
     assert result.failure.values == False
 
 
 def test_table_has_no_null_column(configs):
     query = configs["test_table_has_no_null_column"]["query"].replace("\n", "")
-    result = bd.read_sql(query=query, billing_project_id="basedosdados-dev")
+    result = bd.read_sql(
+        query=query,
+        billing_project_id="basedosdados-dev",
+        from_file=True,
+    )
     assert result.null_percent.max() < 1
 
 
