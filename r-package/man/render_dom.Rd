@@ -7,7 +7,7 @@
 render_dom(body)
 }
 \arguments{
-\item{body, }{a html tree}
+\item{body, }{a string, html tree}
 }
 \value{
 \code{NULL}
