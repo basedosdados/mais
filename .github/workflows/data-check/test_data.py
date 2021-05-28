@@ -16,45 +16,6 @@ import bd_credential
 # -------------------------------------
 
 # TODO: Adicionar try/excepts para erros de yamls mal configurados
-# bd_credential.setup()
-
-# with Path("github/workspace/files.json").open("r") as changed_files:
-#     changed_files = json.load(changed_files)
-#     changed_files = map(lambda x: Path(x), changed_files)
-#     changed_files = filter(lambda x: x.is_file(), changed_files)
-#     changed_files = filter(lambda x: x.name == "table_config.yaml", changed_files)
-
-# # DEBUG START
-# # changed_files = [Path("C:/Users/Vinicius/Documents/mais/bases/br_bd_diretorios_brasil/municipio/table_config.yaml")]
-# # DEBUG END
-
-# with Path("./checks.yaml").open("r") as checkfile:
-#     configs = []
-#     checks = checkfile.read()
-#     checks = Template(checks)
-#     for changed_file in changed_files:
-#         with changed_file.open("r") as configfile:
-#             config = yaml.safe_load(configfile)
-#             config = checks.render(**config)
-#             config = yaml.safe_load(config)
-#             configs.append(config)
-
-
-# print("\n\n++++++++++++++++++++++++++++LOG_CONFIGS++++++++++++++++++++++++++++")
-# for config in configs:
-#     print(
-#         "\n test_table_exists\n",
-#         config["test_table_exists"]["query"],
-#         "\n test_select_all_works\n",
-#         config["test_select_all_works"]["query"],
-#         "\n test_table_has_no_null_column\n",
-#         config["test_table_has_no_null_column"]["query"],
-#         "\n\n",
-#     )
-
-# print("\n\n++++++++++++++++++++++++++++LOG_IDS++++++++++++++++++++++++++++")
-
-
 dataset_table_ids = bd_credential.setup()
 checks = Template(
     Path("/home/runner/work/mais/mais/.github/workflows/data-check/checks.yaml")

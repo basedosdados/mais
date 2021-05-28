@@ -123,9 +123,6 @@ def get_table_dataset_id():
 
 
 def setup():
-    # print(os.environ.get("INPUT_PROJECT_ID"))
-    # print(Path.home())
-
     ### json with information of .basedosdados/config.toml
     config_dict = {
         "metadata_path": "/home/runner/work/mais/mais/bases",
