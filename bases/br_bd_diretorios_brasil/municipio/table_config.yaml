@@ -45,7 +45,7 @@ data_update_frequency: recorrente
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
 # Regras:
-#   - minúsculo, sem acento, singular. 
+#   - minúsculo, sem acento, singular.
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
