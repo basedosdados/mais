@@ -102,7 +102,6 @@ def get_table_dataset_id():
     ]
     ### iterate through each config path
     for filepath in table_config_paths:
-        print(filepath)
         ### check if the table_config.yaml exists in the changed folder
         if filepath.is_file():
             ### load the found table_config.yaml
@@ -120,8 +119,6 @@ def get_table_dataset_id():
                 f"\n{str(filepath)} does not exist on current commit",
                 "\n###==============================================================================================###\n",
             )
-    print(dataset_table_ids)
-
     return dataset_table_ids
 
 
@@ -159,8 +156,12 @@ def setup():
 
     ### create templates at config path
     Base()._refresh_templates()
-    print(Base().config_path)
-    print(bd.__file__)
+
+    print(
+        "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ BASE $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    )
+    print("\n", Base().config_path)
+    print("\n", bd.__file__)
     print(
         "\n",
         Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),
