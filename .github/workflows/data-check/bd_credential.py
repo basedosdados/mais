@@ -159,7 +159,8 @@ def setup():
 
     ### create templates at config path
     Base()._refresh_templates()
-
+    print(Base().config_path)
+    print(bd.__file__)
     print(
         "\n",
         Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),

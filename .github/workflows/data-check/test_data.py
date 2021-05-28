@@ -63,11 +63,11 @@ configs = [
 print("\n\n++++++++++++++++++++++++++++LOG_CONFIGS++++++++++++++++++++++++++++")
 for config in configs:
     print(
-        "\n test_table_exists",
+        "\n test_table_exists\n",
         config["test_table_exists"]["query"],
-        "\n test_select_all_works",
+        "\n test_select_all_works\n",
         config["test_select_all_works"]["query"],
-        "\n test_table_has_no_null_column",
+        "\n test_table_has_no_null_column\n",
         config["test_table_has_no_null_column"]["query"],
         "\n\n",
     )
