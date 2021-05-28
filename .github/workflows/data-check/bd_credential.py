@@ -84,7 +84,6 @@ def create_config_tree(prod_base64, staging_base64, config_dict):
 
 def get_table_dataset_id():
     ### load the change files in PR || diff between PR and master
-    print(Path.home())
     changes = json.load(Path("/home/runner/work/mais/mais/files.json").open("r"))
     ### create a dict to save the dataset and source_bucket related to each table_id
     dataset_table_ids = {}
@@ -103,6 +102,7 @@ def get_table_dataset_id():
     ]
     ### iterate through each config path
     for filepath in table_config_paths:
+        print(filepath)
         ### check if the table_config.yaml exists in the changed folder
         if filepath.is_file():
             ### load the found table_config.yaml
@@ -120,6 +120,8 @@ def get_table_dataset_id():
                 f"\n{str(filepath)} does not exist on current commit",
                 "\n###==============================================================================================###\n",
             )
+    print(dataset_table_ids)
+
     return dataset_table_ids
 
 
@@ -129,7 +131,7 @@ def setup():
 
     ### json with information of .basedosdados/config.toml
     config_dict = {
-        "metadata_path": str(Path("/github") / "workspace" / "bases"),
+        "metadata_path": "/home/runner/work/mais/mais/bases",
         "templates_path": str(Path.home() / ".basedosdados" / "templates"),
         "bucket_name": "basedosdados-dev",
         "gcloud-projects": {

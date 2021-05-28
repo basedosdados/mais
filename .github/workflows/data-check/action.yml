@@ -14,36 +14,5 @@ runs:
   steps:
     - run: pip install basedosdados==1.5.2 pytest toml
       shell: bash
-
-    - run: echo /
-      shell: bash
-    - run: ls /
-      shell: bash
-
-    - run: echo /home/
-      shell: bash
-    - run: ls /home/
-      shell: bash
-
-    - run: echo /home/runner/
-      shell: bash
-    - run: ls /home/runner/
-      shell: bash
-
-    - run: echo /home/runner/work
-      shell: bash
-    - run: ls /home/runner/work/
-      shell: bash
-
-    - run: echo /home/runner/work/mais/
-      shell: bash
-    - run: ls /home/runner/work/mais/
-      shell: bash
-
-    - run: echo /home/runner/work/mais/mais/
-      shell: bash
-    - run: ls /home/runner/work/mais/mais/
-      shell: bash
-
     - run: cd ${{ github.workspace }}/.github/workflows/data-check/ && pytest test_data.py
       shell: bash
