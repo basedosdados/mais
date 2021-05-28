@@ -14,5 +14,5 @@ runs:
   steps:
     - run: pip install basedosdados==1.5.2 pytest toml
       shell: bash
-    - run: cd ${{ github.workspace }}/python-package/ && pytest test_data.py
+    - run: cd ${{ github.workspace }}/.github/workflows/data-check/ && pytest test_data.py
       shell: bash
