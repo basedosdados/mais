@@ -155,6 +155,21 @@ Tutoriais e Redes Sociais todas no nosso repositório de
 
 # Contribua! 🔄
 
+Você pode contribuir de várias maneiras:
+- Subindo novos conjuntos de dados
+- Melhorando a documentação
+- Criando tutoriais e workshops
+- Melhorando nossa API em Python
+- Melhorando nossa API em R
+- Criando checagens automáticas de qualidade de dados e metadados (em Python)
+- Melhorando nosso o UX do nosso site (React, CSS, HTML)
+- Contribuindo com nossa comunicação e mídias
+- Reportando bugs
+- Ajudando na captação de recursos
+- Nos chamando para aprensetações, simpósios e conferências
+
+### Não sabe por onde começar? Entre no nosso [Discord](https://discord.gg/jE2EvqZTyD) e se apresente no canal #quero-contribuir
+
 **Incentivamos que outras instituições e pessoas contribuam**. [Veja mais
 como contribuir aqui](https://basedosdados.github.io/mais/colab_data/).
 
