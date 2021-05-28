@@ -160,6 +160,11 @@ def setup():
     print(
         "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ BASE $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     )
+    print(
+        Path(Path.home() / ".basedosdados" / "credentials" / "prod.json")
+        .open(mode="r")
+        .read()
+    )
     print("\n", Base().config_path)
     print("\n", bd.__file__)
     print(
