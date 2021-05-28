@@ -71,8 +71,11 @@ for config in configs:
         config["test_table_has_no_null_column"]["query"],
         "\n\n",
     )
+from basedosdados.upload.base import Base
 
 print("\n\n++++++++++++++++++++++++++++TEST_BDM++++++++++++++++++++++++++++")
+print(Base().config_path)
+print(bd.__file__)
 print(
     bd.read_sql(
         query="""SELECT * FROM `basedosdados-dev.br_bd_diretorios_brasil.municipio` LIMIT 10""",
