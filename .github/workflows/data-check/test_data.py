@@ -41,7 +41,11 @@ import bd_credential
 
 print("\n\n++++++++++++++++++++++++++++LOG_IDS++++++++++++++++++++++++++++")
 dataset_table_ids = bd_credential.setup()
-checks = Template(Path("/app/checks.yaml").open("r", encoding="utf-8").read())
+checks = Template(
+    Path("/home/runner/work/mais/mais/.github/workflows/data-check/checks.yaml")
+    .open("r", encoding="utf-8")
+    .read()
+)
 
 configs = [
     yaml.safe_load(
