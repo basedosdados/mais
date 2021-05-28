@@ -98,7 +98,7 @@ def get_table_dataset_id():
             table_folders.append(file_dir)
     ### construct the iterable for the table_config paths
     table_config_paths = [
-        Path(f"/home/runner/work/mais/mais/{root}" / "table_config.yaml")
+        Path(f"/home/runner/work/mais/mais/{root}/table_config.yaml")
         for root in table_folders
     ]
     ### iterate through each config path
