@@ -40,24 +40,33 @@ PREFIX_FROTA_MUN <- "frota_mun_tipo"
   )
 )
 
+2021 %>% purrr::walk(
+  ~download_frota(
+    key = "Frota por Munic", 
+    prefix = PREFIX_FROTA_MUN,
+    month = 1:3,
+    year = .x,
+    tempdir = PATH_TEMP,
+    dir = PATH_DOWNLOAD_MUN
+  )
+)
+
 list.files(PATH_DOWNLOAD_MUN, full.names = T) %>%
   purrr::map(
     ~read_xl(.x, type = "uf") %>%
-    dplyr::select(!total) %>%
-    dplyr::rename(sigla_uf = uf, municipio_original = municipio) %>%
-    dplyr::filter(sigla_uf %in% names(siglas_uf)) %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(
-      dplyr::across(!c(sigla_uf, municipio_original), as.numeric),
-      ibge_info = list(get_ibge_info(sigla_uf, municipio_original))
-    ) %>%
-    tidyr::unnest_wider(col = "ibge_info") %>%
-    dplyr::relocate(c(id_municipio, ano, mes), .after = municipio_original)
+      dplyr::select(!total) %>%
+      dplyr::rename(sigla_uf = uf, municipio_original = municipio) %>%
+      dplyr::filter(sigla_uf %in% names(siglas_uf)) %>%
+      dplyr::mutate(
+        dplyr::across(!c(sigla_uf, municipio_original), as.numeric),
+        id_municipio = purrr::map2_chr(sigla_uf, municipio_original, ~get_ibge_info(.x, .y))
+      ) %>%
+      dplyr::relocate(c(id_municipio, ano, mes), .after = municipio_original)
   ) -> frota_municipios
 
 
 # Cada tibble deve ter 28 colunas
-frota_municipios %>% purrr::map_lgl(~ncol(.x) == 28) %>% all(T)
+frota_municipios %>% purrr::map_lgl(~ncol(.x) == 26) %>% all(T)
 
 # Unnest a lista de tibbles, padroniza as colunas, soma e salva como csv e rds
 frota_municipios %>%
@@ -112,9 +121,17 @@ df_municipios %>%
         municipio_original == "VILA ALTA" & sigla_uf == "PR" ~ "4128625",
         municipio_original == "VILA NOVA DO MAMORE" & sigla_uf == "RO" ~ "1100338",
         TRUE ~ id_municipio
-     )
-  ) %>%
+      )
+  ) -> frota_municipios_dist
+
+
+frota_municipios_dist %>% 
+  filter(is.na(id_municipio)) %>%
+  group_by(municipio_original, sigla_uf) %>%
+  summarise()
+
+frota_municipios_dist %>% 
   dplyr::filter(!is.na(id_municipio)) %>%
-  dplyr::select(!municipio_original) %>%
+  dplyr::select(!municipio_original) %>% 
   readr::write_rds(file = "output/municipio_tipo.rds") %T>%
   readr::write_csv(file = "output/municipio_tipo.csv")

@@ -191,14 +191,9 @@ get_ibge_info <- function(uf, name, tolerance = 0.60) {
     as.list()
 
   if (length(result[[1]]) == 0 || result$dist < tolerance) {
-    return(list(
-      id_municipio = NA
-    ))
+    return(NA)
   }
-
-  list(
-    id_municipio = result$id_municipio
-  )
+  as.character(result$id_municipio)
 }
 
 get_uf_name <- function(x) {
