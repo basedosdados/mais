@@ -20,7 +20,7 @@ TIPOS:
 */
 
 CREATE VIEW basedosdados-dev.br_inep_censo_escolar.escola AS
-SELECT 
+SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
@@ -40,10 +40,10 @@ SAFE_CAST(mantenedora_escola_privada_sind AS INT64) mantenedora_escola_privada_s
 SAFE_CAST(mantenedora_escola_privada_sist_s AS INT64) mantenedora_escola_privada_sist_s,
 SAFE_CAST(mantenedora_escola_privada_s_fins AS INT64) mantenedora_escola_privada_s_fins,
 SAFE_CAST(tipo_regulamentacao AS STRING) tipo_regulamentacao,
-SAFE_CAST(tipo_ocupacao_predio_escolar AS INT64) local_func_predio_escolar,
+SAFE_CAST(local_func_predio_escolar AS INT64) local_func_predio_escolar,
 SAFE_CAST(local_func_salas_empresa AS INT64) local_func_salas_empresa,
 SAFE_CAST(local_func_socioeducativo AS INT64) local_func_socioeducativo,
-SAFE_CAST(predio_compartilhado AS INT64) local_func_predio_compartilhado,
+SAFE_CAST(local_func_predio_compartilhado AS INT64) local_func_predio_compartilhado,
 SAFE_CAST(local_func_unid_prisional AS INT64) local_func_unid_prisional,
 SAFE_CAST(local_func_templo_igreja AS INT64) local_func_templo_igreja,
 SAFE_CAST(local_func_casa_professor AS INT64) local_func_casa_professor,
@@ -159,6 +159,5 @@ SAFE_CAST(material_esp_nao_utiliza AS INT64) material_esp_nao_utiliza,
 SAFE_CAST(material_esp_quilombola AS INT64) material_esp_quilombola,
 SAFE_CAST(material_ped_indigena AS INT64) material_ped_indigena,
 SAFE_CAST(educacao_indigena AS INT64) educacao_indigena,
-SAFE_CAST(id_lingua_indigena AS STRING) id_lingua_indigena,
-
+SAFE_CAST(id_lingua_indigena AS STRING) id_lingua_indigena
 from basedosdados-dev.br_inep_censo_escolar_staging.escola as t
