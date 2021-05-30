@@ -3,16 +3,16 @@
 #' @param table_id, a character, table id
 #' @param query_project_id, a character, which project the table lives. You can change this you want to query different projects. Default is \code{"basedosdados"}
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
-#' @examples 
-#' \dotrun{
-#' get_table_metadata("br_denatran_frota", "municipio_tipo")
+#' @examples
+#' \dontrun{
+#' get_table_metadata("br_ibge_pib", "municipios")
 #' }
 #' @importFrom bigrquery bq_table_exists bq_table_meta
 #' @importFrom rlang abort
 #' @importFrom glue glue
 #' @importFrom htmltools div h2 code h4 span
 #' @importFrom purrr map
-#' @return \code{NULL}
+#' @return \code{invisible(NULL)}
 #' @export
 
 get_table_metadata <- function(dataset_id,
@@ -56,16 +56,17 @@ get_table_metadata <- function(dataset_id,
 #' @param dataset_id, a character, dataset id
 #' @param query_project_id, a character, which project the table lives. You can change this you want to query different projects. Default is \code{"basedosdados"}
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
-#' @examples 
-#' \dotrun{
-#' get_dataset_metadata("br_ibge_pib")
-#' }
 #' @importFrom rlang abort
 #' @importFrom bigrquery bq_dataset_exists bq_dataset_meta
 #' @importFrom glue glue
 #' @importFrom htmltools div h2 code p
-#' @return \code{NULL}
+#' @examples
+#' \dontrun{
+#' get_dataset_metadata("br_ibge_pib")
+#' }
+#' @return \code{invisible(NULL)}
 #' @export
+
 get_dataset_metadata <- function(dataset_id,
                                 query_project_id = "basedosdados",
                                 billing_project_id = get_billing_id()
@@ -97,12 +98,20 @@ get_dataset_metadata <- function(dataset_id,
 #' @param filter_by, optional character to be matched in dataset_id. Default is \code{NULL}
 #' @param with_description, optional, if \code{TRUE}, fetch short dataset description for each dataset. Defalut is \code{FALSE}
 #' @param page_size, Number of items per page. Default is \code{100}.
+#' @param ..., other parameters for passing in the bigrquery
 #' @importFrom bigrquery bq_project_datasets bq_dataset_meta
 #' @importFrom purrr map keep
 #' @importFrom stringr str_detect
 #' @importFrom rlang is_null is_character
 #' @importFrom glue glue
 #' @importFrom htmltools div h2 h4 p
+#' @examples
+#' \dontrun{
+#' list_datasets()
+#' }
+#' @return \code{invisible(NULL)}
+#' @export
+
 list_datasets <- function(query_project_id = "basedosdados",
                           filter_by = NULL,
                           with_description = FALSE,
@@ -153,12 +162,19 @@ list_datasets <- function(query_project_id = "basedosdados",
 #' @param filter_by, optional character to be matched in dataset_id. Default is \code{NULL}
 #' @param with_description, optional, if \code{TRUE}, fetch short dataset description for each dataset. Defalut is \code{FALSE}
 #' @param page_size, Number of items per page. Default is \code{50}.
+#' @param ..., other parameters for passing in the bigrquery
 #' @importFrom bigrquery bq_dataset_tables bq_table_meta
 #' @importFrom glue glue
 #' @importFrom purrr keep map
 #' @importFrom rlang abort
 #' @importFrom htmltools div h2 h4 p
+#' @examples
+#' \dontrun{
+#' list_dataset_tables("br_ibge_pib")
+#' }
+#' @return \code{invisible(NULL)}
 #' @export
+
 list_dataset_tables <- function(dataset_id,
                                 query_project_id = "basedosdados",
                                 filter_by = NULL,
@@ -208,9 +224,9 @@ list_dataset_tables <- function(dataset_id,
 #' @param body, a string, html tree
 #' @importFrom rstudioapi isAvailable getThemeInfo viewer
 #' @importFrom rlang is_atomic abort
-#' @import htmltools
+#' @importFrom htmltools tags save_html
 #' @importFrom fs file_temp
-#' @return \code{NULL}
+#' @return \code{invisible(NULL)}
 
 render_dom <- function(body) {
   
@@ -300,6 +316,8 @@ render_dom <- function(body) {
 
 #' @title Get first line of description
 #' @param description, a character
+#' @importFrom stringr str_split
+#' @importFrom purrr pluck
 #' @return \code{character}
 get_header <- function(description) {
   description %>% stringr::str_split("\\n") %>% purrr::pluck(1, 1)
@@ -307,6 +325,7 @@ get_header <- function(description) {
 
 #' @title Get body of description
 #' @param description, a character
+#' @importFrom stringr str_split
 #' @return list of character
 get_body <- function(description) {
   description %>% stringr::str_split("\\n") %>% unlist() %>% .[2:length(.)]

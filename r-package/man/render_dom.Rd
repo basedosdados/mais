@@ -10,7 +10,7 @@ render_dom(body)
 \item{body, }{a string, html tree}
 }
 \value{
-\code{NULL}
+\code{invisible(NULL)}
 }
 \description{
 Build HTML DOM

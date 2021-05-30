@@ -18,13 +18,13 @@ get_dataset_metadata(
 \item{billing_project_id}{a string containing your billing project id. If you've run \code{set_billing_id} then feel free to leave this empty.}
 }
 \value{
-\code{NULL}
+\code{invisible(NULL)}
 }
 \description{
 Get Metadata Dataset
 }
 \examples{
-\dotrun{
+\dontrun{
 get_dataset_metadata("br_ibge_pib")
 }
 }

@@ -21,13 +21,13 @@ get_table_metadata(
 \item{billing_project_id}{a string containing your billing project id. If you've run \code{set_billing_id} then feel free to leave this empty.}
 }
 \value{
-\code{NULL}
+\code{invisible(NULL)}
 }
 \description{
 Get Metadata Table
 }
 \examples{
-\dotrun{
-get_table_metadata("br_denatran_frota", "municipio_tipo")
+\dontrun{
+get_table_metadata("br_ibge_pib", "municipios")
 }
 }

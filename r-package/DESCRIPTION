@@ -26,7 +26,9 @@ Imports:
     glue,
     rlang,
     writexl,
-    fs
+    fs,
+    rstudioapi (>= 0.13),
+    htmltools (>= 0.5.1.1)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

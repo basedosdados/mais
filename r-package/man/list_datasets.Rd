@@ -20,7 +20,17 @@ list_datasets(
 \item{with_description, }{optional, if \code{TRUE}, fetch short dataset description for each dataset. Defalut is \code{FALSE}}
 
 \item{page_size, }{Number of items per page. Default is \code{100}.}
+
+\item{..., }{other parameters for passing in the bigrquery}
+}
+\value{
+\code{invisible(NULL)}
 }
 \description{
 List Datasets
+}
+\examples{
+\dontrun{
+list_datasets()
+}
 }
