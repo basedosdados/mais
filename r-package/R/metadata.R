@@ -33,8 +33,8 @@ get_table_metadata <- function(dataset_id,
   
   bigrquery::bq_table_meta(table_name) %>% 
     {htmltools::div(
-      htmltools::h2(get_header(.$description)),
       htmltools::code(.$id),
+      htmltools::p(get_header(.$description)),
       htmltools::div(
         htmltools::h4("Columns:"),
         .$schema$fields %>% 
@@ -85,8 +85,8 @@ get_dataset_metadata <- function(dataset_id,
   
   bigrquery::bq_dataset_meta(dataset_name) %>% 
     {htmltools::div(
-      htmltools::h2(get_header(.$description)),
       htmltools::code(.$id),
+      htmltools::p(get_header(.$description)),
       get_body(.$description) %>% 
         purrr::map(~htmltools::p(.x))
     )} %>% 
@@ -261,6 +261,7 @@ render_dom <- function(body) {
       }
       header {
         text-align: center;
+        margin-bottom: 10px;
       }
       h2 + code {
         display: inline-block;
