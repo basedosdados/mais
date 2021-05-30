@@ -1,0 +1,65 @@
+A tabela contém dados de cada professor de cada ano das escolas nacionais. A tabela identifica desde características pessoais dos profissionais, as disciplinas que eles ensinam, as suas formações e a qual escola e qual turma pertencem. Pode ser facilmente combinada com as outras tabelas do censo ou com outras tabelas do tema educação.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-censo-escolar
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- docente
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_docente
+- ano
+
+Cobertura Temporal
+------------------
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+O tratamento inclui harmonizar todos os anos, mudar nome de variáveis e selecionar as variáveis que aparecem pelo menos 8 nos 12 anos de Censo.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+

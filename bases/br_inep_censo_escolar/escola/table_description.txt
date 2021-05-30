@@ -1,0 +1,67 @@
+A tabela contém dados do censo escolar ao nível de cada escola. Os dados são organizados em mais de 140 variáveis que traçam um perfil completo da escola, caracterizando desde a infraestrutura física disponível, a equipe pedagógica, a infraestrutura pedagógica, marcas do período letivo como seu começo e fim, além de vários identificadores de cada escola.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-censo-escolar
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- escola
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_escola
+- ano
+
+Cobertura Temporal
+------------------
+- 2007
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+O tratamento consistiu em, principalmente, corretamente harmonizar os diferentes anos da tabela: tanto nomeando as variáveis de maneira compatível quanto verificando se as variáveis significavam de fato a mesma coisa. O outro processo relevante suficiente para ser mencionado é o particionamento da base em estados e anos.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+
