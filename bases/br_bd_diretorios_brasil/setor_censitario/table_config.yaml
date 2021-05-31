@@ -1,4 +1,4 @@
-source_bucket_name: basedosdados-dev
+source_bucket_name: basedosdados-dev 
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
 table_id: setor_censitario # AUTO GENERATED
