@@ -48,7 +48,7 @@ def pytest_generate_tests(metafunc):
 # executed once
 # for each table
 # -------------------------------------
-def fetch_data(data_ckeck):
+def fetch_data(data_ckeck, configs):
     query = configs[data_ckeck]["query"].replace("\n", " ")
     return bd.read_sql(
         query=query,
@@ -58,19 +58,19 @@ def fetch_data(data_ckeck):
 
 
 def test_table_exists(configs):
-    result = fetch_data("test_table_exists")
+    result = fetch_data("test_table_exists", configs)
 
     assert result.failure.values == False
 
 
 def test_select_all_works(configs):
-    result = fetch_data("test_select_all_works")
+    result = fetch_data("test_select_all_works", configs)
 
     assert result.failure.values == False
 
 
 def test_table_has_no_null_column(configs):
-    result = fetch_data("test_table_has_no_null_column")
+    result = fetch_data("test_table_has_no_null_column", configs)
 
     assert result.null_percent.max() < 1
 
