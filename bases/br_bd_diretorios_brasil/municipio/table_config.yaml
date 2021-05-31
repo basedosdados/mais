@@ -1,7 +1,7 @@
 source_bucket_name: basedosdados-dev 
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev  
-table_id: municipio # AUTO GENERATED  
+table_id: municipio # AUTO GENERATED   
 dataset_id: br_bd_diretorios_brasil # AUTO GENERATED  
 
 url_ckan: https://basedosdados.org/dataset/br-bd-diretorios-brasil # AUTO GENERATED

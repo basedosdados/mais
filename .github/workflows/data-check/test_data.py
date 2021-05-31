@@ -27,7 +27,7 @@ configs = [
     yaml.safe_load(
         checks.render(
             project_id_staging=dataset_table_ids[table_id]["table_config"][
-                "project_id_staging"
+                "project_id_prod"
             ],
             dataset_id=dataset_table_ids[table_id]["table_config"]["dataset_id"],
             table_id=table_id,
@@ -48,40 +48,35 @@ def pytest_generate_tests(metafunc):
 # executed once
 # for each table
 # -------------------------------------
-
-
-def test_table_exists(configs):
-    query = configs["test_table_exists"]["query"].replace("\n", " ")
-    result = bd.read_sql(
+def fetch_data(data_ckeck):
+    query = configs[data_ckeck]["query"].replace("\n", " ")
+    return bd.read_sql(
         query=query,
         billing_project_id="basedosdados-dev",
         from_file=True,
     )
+
+
+def test_table_exists(configs):
+    result = fetch_data("test_table_exists")
+
     assert result.failure.values == False
 
 
 def test_select_all_works(configs):
-    query = configs["test_select_all_works"]["query"].replace("\n", " ")
-    result = bd.read_sql(
-        query=query,
-        billing_project_id="basedosdados-dev",
-        from_file=True,
-    )
+    result = fetch_data("test_select_all_works")
+
     assert result.failure.values == False
 
 
 def test_table_has_no_null_column(configs):
-    query = configs["test_table_has_no_null_column"]["query"].replace("\n", " ")
-    result = bd.read_sql(
-        query=query,
-        billing_project_id="basedosdados-dev",
-        from_file=True,
-    )
+    result = fetch_data("test_table_has_no_null_column")
+
     assert result.null_percent.max() < 1
 
 
-### TODO | Ativar depois de testar a query
+# ### TODO | Ativar depois de testar a query
 # def test_primary_key_has_unique_values(configs):
 #     check = configs["test_primary_key_has_unique_values"]
-#     result = bd.read_sql(check["query"])
+#     result = fetch_data("test_primary_key_has_unique_values")
 #     assert result.to_numpy().all()
