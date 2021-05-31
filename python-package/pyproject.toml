@@ -13,7 +13,7 @@ packages = [
 ]
 readme = "README.md"
 repository = "https://github.com/base-dos-dados/bases"
-version = "1.5.3a1"
+version = "1.5.3"
 
 [tool.poetry.scripts]
 basedosdados = 'basedosdados.cli.cli:cli'
@@ -30,7 +30,7 @@ python = "^3.6"
 tomlkit = "0.7.0"
 tqdm = "4.50.2"
 pandas= "1.2.4"
-'ruamel.yaml' ="0.17.4" 
+'ruamel.yaml'= "0.17.4" 
 
 [tool.poetry.dev-dependencies]
 Jinja2 = "2.11.2"
@@ -47,6 +47,7 @@ tomlkit = "0.7.0"
 tqdm = "4.50.2"
 pandas= "1.2.4"
 'ruamel.yaml' ="0.17.4" 
+
 
 [tool.black]
 # Use the more relaxed max line length permitted in PEP8.

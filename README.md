@@ -23,10 +23,10 @@
 <!--   <a href="https://pypi.org/project/basedosdados/" target="_blank">
     <img src="https://img.shields.io/pypi/dm/basedosdados" alt="PyPi">
   </a> -->
-  <a href="https://discord.com/invite/ZKCcKf8BTB" target="_blank">
+  <a href="https://discord.gg/huKWpsVYx4" target="_blank">
     <img src="https://img.shields.io/discord/787841210433536010" alt="Discord">
   </a>
-  <a href="http://https://apoia.se/basedosdados" target="_blank">
+  <a href="https://apoia.se/basedosdados" target="_blank">
     <img src="https://img.shields.io/badge/apoie!%E2%9D%A4%EF%B8%8F-ff69b4" alt="Apoiase">
   </a>
 </p>
@@ -35,7 +35,7 @@
 
 | ***R*** | ***Python*** |
 |-----|-----|
-| [![CRAN/METACRAN Version](https://www.r-pkg.org/badges/version/basedosdados)](https://CRAN.R-project.org/package=basedosdados) <br />  [![CRAN/METACRAN Total downloads](http://cranlogs.r-pkg.org/badges/grand-total/basedosdados?color=blue)](https://CRAN.R-project.org/package=basedosdados) <br />  [![CRAN/METACRAN downloads per month](http://cranlogs.r-pkg.org/badges/basedosdados)](https://CRAN.R-project.org/package=basedosdados) <br />  ![Lifecycle: stable](https://img.shields.io/github/issues/basedosdados/mais/R) | [![PyPI version](https://badge.fury.io/py/basedosdados.svg)](https://badge.fury.io/py/basedosdados) <br />  [![Downloads](https://pepy.tech/badge/basedosdados)](https://pepy.tech/project/basedosdados) <br />  [![Downloads](https://pepy.tech/badge/basedosdados/month)](https://pepy.tech/project/basedosdados/month)  <br /> ![Lifecycle: stable](https://img.shields.io/github/issues/basedosdados/mais/Python) |
+| [![CRAN/METACRAN Version](https://www.r-pkg.org/badges/version/basedosdados)](https://CRAN.R-project.org/package=basedosdados) <br />  [![CRAN/METACRAN Total downloads](http://cranlogs.r-pkg.org/badges/grand-total/basedosdados?color=blue)](https://CRAN.R-project.org/package=basedosdados) <br />  [![CRAN/METACRAN downloads per month](http://cranlogs.r-pkg.org/badges/basedosdados)](https://CRAN.R-project.org/package=basedosdados) <br />  ![Lifecycle: stable](https://img.shields.io/github/issues/basedosdados/mais/R) | [![PyPI version](https://badge.fury.io/py/basedosdados.svg)](https://badge.fury.io/py/basedosdados) <br />   ![PyPI - Downloads](https://img.shields.io/pypi/dm/basedosdados?color=blue)  <br /> ![Lifecycle: stable](https://img.shields.io/github/issues/basedosdados/mais/Python) |
 
 # O que fazemos?
 
@@ -154,6 +154,21 @@ Tutoriais e Redes Sociais todas no nosso repositório de
 [analises](http://github.com/basedosdados/analises)
 
 # Contribua! 🔄
+
+Você pode contribuir de várias maneiras:
+- Subindo novos conjuntos de dados
+- Melhorando a documentação
+- Criando tutoriais e workshops
+- Melhorando nossa API em Python
+- Melhorando nossa API em R
+- Criando checagens automáticas de qualidade de dados e metadados (em Python)
+- Melhorando nosso o UX do nosso site (React, CSS, HTML)
+- Contribuindo com nossa comunicação e mídias
+- Reportando bugs
+- Ajudando na captação de recursos
+- Nos chamando para aprensetações, simpósios e conferências
+
+### Não sabe por onde começar? Entre no nosso [Discord](https://discord.gg/jE2EvqZTyD) e se apresente no canal #quero-contribuir
 
 **Incentivamos que outras instituições e pessoas contribuam**. [Veja mais
 como contribuir aqui](https://basedosdados.github.io/mais/colab_data/).

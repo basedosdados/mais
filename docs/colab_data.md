@@ -30,7 +30,7 @@ acordo com as colunas da tabela.
 - **Preencha os campos cuidadosamente**. Além dos dados gerais sobre a
   tabela, adicione as classificações de `Facilidade` e `Importância` e o
   campo de `Prioridade` será gerado automaticamente.
-- Por fim, **crie um issue no Github com o [template "Novos dados"](https://github.com/basedosdados/mais/issues/new?assignees=&labels=data&template=br_novos_dados.md&title=Base%3A+%3Cadd+nome%2C+ex%3A+Censo+Escolar+INEP%3E)**
+- Por fim, **crie um issue no Github com o [template "Novos dados"](https://github.com/basedosdados/mais/issues/new?assignees=rdahis&labels=data&template=br_novos_dados.md&title=%5Bdados%5D+%3Cadd+nome%2C+ex%3A+Censo+Escolar+INEP%3E)**
 
 !!! Info "Caso sua base já esteja listada, basta marcar seu usuário do Github na coluna `Pessoa responsável`."
 
@@ -75,8 +75,8 @@ programação](https://en.wikipedia.org/wiki/Best_coding_practices) na
 linguagem de sua preferência, e os dados devem ser tratados garantindo
 que:
 
-- As colunas seguem as [diretrizes Base dos Dados](/style_namind_columns)
-- Os valores seguem as [diretrizes Base dos Dados](/style_data)
+- As colunas seguem as [diretrizes Base dos Dados](/mais/style_naming_columns)
+- Os valores seguem as [diretrizes Base dos Dados](/mais/style_data)
 
 !!! Tip "Sugerimos as linguagens [Python](https://www.python.org/), [R](https://www.r-project.org/), ou [Stata](https://www.stata.com/)."
 
@@ -120,7 +120,7 @@ Google. Basta seguir o passo-a-passo:
     - `/[TABLE_ID]/table_config.yaml`: informações específicas da tabela
     - `/[TABLE_ID]/publish.sql`: informações da publicação da tabela, como os tipos de variáveis do [BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) (`STRING`, `INT64`, `FLOAT64`, `DATE`), e use também este espaço para escrever tratamentos finais na tabela `staging` em SQL para publicacao
     
-Consulte também nossa [API](/cli_reference_api) para mais detalhes de cada método.
+Consulte também nossa [API](/mais/reference_api_cli) para mais detalhes de cada método.
 
 #### Publique a versão pronta no seu _bucket_ com `basedosdados table publish`
 
