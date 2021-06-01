@@ -24,13 +24,15 @@
 #' save, respectively in `.csv` or `.rds` format.
 #'
 #'
-#' @param table String in the format `basedosdados`.`(dataset_name)`.`(specific_table_name)`.
-#' It´s advisable to chack the Base dos Dados datalake for the correct names.
+#' @param table String in the format `(project)`.`(dataset_name)`.`(table_name)`
+#' or `(dataset_name)`.`(table_name)`, considering that the default `project` param
+#' is `basedosdados`.
 #'
 #' @param billing_project_id a string containing your billing project id.
 #' If you've run [set_billing_id()] then feel free to leave this empty.
 #'
-#' @param project By default `basedosdados`. The project name at GoogleBigQuery.
+#' @param project The project name at GoogleBigQuery. By default `basedosdados`.
+#' You do not need to inform this if project is uset on `table` parameter.
 #'
 #' @return A `lazy tibble`, which can be handled (almost) as if were a local
 #' database. After satisfactorily handled, the result must be loaded into
@@ -94,7 +96,7 @@
 #'}
 
 #TODO: usar bigrquery::bq_has_token() para checar se atenticou no Google
-#TODO: tentar autenticar em silêncio com bigrquery::bq_auth(email = <email>)
+#TODO: tentar autenticar em silencio com bigrquery::bq_auth(email = <email>)
 # conferir: https://github.com/r-dbi/bigrquery/blob/main/R/bq-auth.R
 #TODO: usar uma vignette pra explicar a compatibilidade
 
@@ -105,7 +107,7 @@ bdplyr <- function(
   billing_project_id = basedosdados::get_billing_id(),
   project = "basedosdados") {
 
-  # checa se o billing id foi informado
+  # checking billing id
 
   if(billing_project_id == FALSE) {
 
@@ -113,17 +115,17 @@ bdplyr <- function(
 
   }
 
-  # criar o nome que o BQ vai entender
-  # se tem 3 pontos, supõe que o project já foi informado em table
-  # se tem 2, junta project com table
-  # se tem 1 ou mais de 3 é erro
+  # checking table and project param
+  # if table has 2 dots consider that project is already informed
+  # if it has 1 dots, glue project and table param
+  # otherwise is a invalid table name
 
   how_many_dots <- stringr::str_count(string = table,
                                       pattern = "\\.")
 
-  if (how_many_dots <= 1 | how_many_dots > 3) {
+  if (how_many_dots < 1 | how_many_dots > 2) {
 
-    rlang::abort("`table` is invalid. Please use the pattern: `<project_name>.<dataset_name>.<table_name>` OR `<dataset_name>.<table_name>´ if the parameter `project´ is used.")
+    rlang::abort("`table` is invalid. Please use the pattern: `<project_name>.<dataset_name>.<table_name>` OR `<dataset_name>.<table_name>´ if the parameter `project´ is informed.")
   }
 
   # checks if is a valid project string
@@ -134,19 +136,19 @@ bdplyr <- function(
 
   }
 
-  if (how_many_dots == 2) {
+  if (how_many_dots == 1) {
 
     table_full_name <- glue::glue("{project}.{table}")
 
   }
 
-  if (how_many_dots == 1 )
+  if (how_many_dots == 2 ) {
 
     table_full_name <- table
   }
 
 
-  # checa se a tabela é reconhecida pelo google
+  # checks if is a valid table at Google Big Query
 
   if(bigrquery::bq_table_exists(table_full_name) == FALSE) {
 
@@ -154,31 +156,32 @@ bdplyr <- function(
 
   }
 
-  # cria a conexão
+  # creates the connection
 
-    con <- DBI::dbConnect(
-    drv = bigrquery::bigquery(),
-    project = "basedosdados",
-    billing = billing_project_id)
+con <- DBI::dbConnect(drv = bigrquery::bigquery(),
+                      project = project,
+                      billing = billing_project_id)
 
-  # chama o dplyr e guarda em um objeto
+  # calls the connection through dplyr and keeps it in a objects
   tibble_connection <- dplyr::tbl(con, table_full_name)
 
 
-  # testa se funcionou
+  # checks if the connection was successfully
   if (is_tbl_lazy(tibble_connection) == TRUE) {
-    rlang::inform(glue::glue("Successfully connected to table  `{tablea_full_name}`."))
+    rlang::inform(glue::glue("Successfully connected to table  `{table_full_name}`."))
     return (tibble_connection)
 
   } else {
-    rlang::abort(glue::glue("Error when trying to connect the table `{table_full_name}`"))
+
+    rlang::abort(glue::glue("It was not possible to connect to the remote table `{table_full_name}`"))
   }
+
 }
 
 
 # bdcollect ---------------------------------------------------------------
 
-#' Collects the results of a remote base called via `bdplyr()`
+#' Collects the results of a remote table called via `bdplyr()`
 #'
 #' @description
 #'
@@ -235,7 +238,7 @@ bdplyr <- function(
 bd_collect <- function(.lazy_tbl,
                 billing_project_id = basedosdados::get_billing_id()) {
 
-  # checar se o billing foi informado
+  # check if billing_is is valid
 
   if(billing_project_id == FALSE) {
 
@@ -243,36 +246,32 @@ bd_collect <- function(.lazy_tbl,
 
   }
 
-  # checar se o argumento .lazy_tbl é coletável
+  # checks if .lazy_tbl is able to be collected
 
   if(is_tbl_lazy(.lazy_tbl) == FALSE) {
 
-    rlang::abort("The table could not be collected.")
+    rlang::abort("Error collecting results.")
   }
 
-  # coletar
-  #TODO: usar dplyr::select(dplyr::everything()) antes de realizar o collect
-  # força que ele carregue as colunas antes de puxar
-  # não deveria ter problema fazer isso pois em tese a pessoa já fez um
-  # subset antes de mandar pr cá
-  # isso resolve vir uma tabela vazia se tento coletar de cara
+  # collect from the remote table
+  # uses a previous select everything to avoid return empty
   collected_table <- .lazy_tbl %>%
     dplyr::select(dplyr::everything()) %>%
                   dplyr::collect()
 
-   # checar se teve êxito
+   # checks if is a tibble
   if (inherits(collected_table, "tbl_df") == FALSE) {
 
     rlang::abort("It seems to have been a failure to collect the tibble.")
 
   }
 
-  #TODO: checar se tem nenhuma/poucas linhase emitir warn
+  # checks if is a empty table and warn user if it is
   nrow_collected_table <- nrow(collected_table)
   ncol_collected_table <- ncol(collected_table)
 
   if (nrow_collected_table <= 0 | ncol_collected_table <= 0) {
-    rlang::abort("The collection returned a table with no rows or no cols.")
+    rlang::warn("The collection returned a table with no rows or no cols. Consider revising the request or forcing column selection with dplyr::select(dplyr::everything()).")
   }
 
   if (nrow_collected_table < 5) {
@@ -281,7 +280,7 @@ bd_collect <- function(.lazy_tbl,
      There may have been an error in processing."))
   }
 
-  # retornar os resultados
+  # deliver the results
   rlang::inform(glue::glue("Base successfully collected on a {nrow_collected_table}-row, {ncol_collected_table}-column tibble."))
   return(collected_table)
 
@@ -414,35 +413,30 @@ bd_write <- function(.lazy_tbl,
                      path,
                      ...) {
 
-
-  # tipagem com o typed se possível: https://github.com/moodymudskipper/typed
-
-  # checa se é coletável
+   #  checks if .lazy_tbl is able to be collected
   if (is_tbl_lazy(.lazy_tbl) == FALSE) {
 
-    # se não for coletável mas for tbl, indicar que a função é desnecessária
+    # if is it not able to collect but is a tibble anyway warns that is not
+    # necessary to use this function
     if (tibble::is_tibble(.lazy_tbl)) {
       rlang::abort(
         "The table does not seem to need to be collected. Save using traditional writing functions like `write.csv´."
       )
 
-      # se não for tibble, é erro mesmo
+      # if is not a tibble actually is a mistake and we should abort
     } else {
       rlang::abort("It was not possible to collect the remote table.")
     }
   }
 
-  # coletar
+  # collect the results
    collected_table <- bd_collect(.lazy_tbl)
 
-  # escrever os resultados
-  # esboço de como a escrita poderia ser parametrizada
-  # dúvidas com evaluation provavelmente serão sanadas aqui: https://adv-r.hadley.nz/evaluation.html#evaluation
-
-  rlang::call2(.write_fn, collected_table, path, ...) %>%
+  # write the results using the indicated function
+    rlang::call2(.write_fn, collected_table, path, ...) %>%
     rlang::eval_bare()
 
-  # verificar se a gravação ocorreu corretamente e avisar
+  # checks if the writing process was successfully
 
   if (file.exists(path)) {
     rlang::inform(glue::glue(
@@ -466,32 +460,29 @@ bd_write_rds <- function(.lazy_tbl,
                          compress = "none",
                          ...) {
 
-  # checar se file é válido
+  # check if is a valid path name
   if (stringr::str_detect(path, pattern = "(\\.rds)$") == FALSE) {
     rlang::abort("Pass a valid file name to argument `path`, include the '.rds' suffix.")
   }
 
-  # checar se arquivo já existe e se overwrite = TRUE
+  # check if the path already exists
+  # in this case, check if overwrite = TRUE
   if (file.exists(path) & overwrite == FALSE) {
     rlang::abort("The file already exists. Use overwrite = TRUE if you want to overwrite it.")
   }
 
-  # coletar
+  # collect the remote results
   collected_table <- bd_collect(.lazy_tbl)
 
 
-  # chamar bd_write com saveRDS
-  # estou copiando os parâmetros que readr::write_rds usa
-  # a ideia é não precisar de outra dependência... se isso não for um problema
-  # bora usar readr::write_rds mesmo
+  # write the .rds file using {readr}
 
   readr::write_rds(x = collected_table,
                    file = path,
                    compress = compress,
                    ...)
 
-  # # verificar se a gravação ocorreu corretamente e avisar
-  #
+  # checks if the writing process was successfully
   if (file.exists(path)) {
     rlang::inform(glue::glue(
       "The file was successfully saved ({file.info(path)$size} B)"))
@@ -509,26 +500,28 @@ bd_write_csv <- function(.lazy_tbl,
                          overwrite = FALSE,
                          ...) {
 
-  # checar se file é válido
+  # check if is a valid path name
   if (stringr::str_detect(path, pattern = "(\\.csv)$") == FALSE) {
     rlang::abort("Pass a valid file name to argument `path`, include the '.csv' suffix.")
   }
 
-  # checar se arquivo já existe e se overwrite = TRUE
+  # check if the path already exists
+  # in this case, check if overwrite = TRUE
+
   if (file.exists(path) & overwrite == FALSE) {
     rlang::abort("The file already exists. Use overwrite = TRUE if you want to overwrite it.")
   }
 
-  # coletar
+  # collec the remote results
   collected_table <- bd_collect(.lazy_tbl)
 
 
-  # chamar readr::write_csv
+  # calls the write function
   readr::write_csv(x = collected_table,
                    file = path,
                    ...)
 
-  # verificar se a gravação ocorreu corretamente e avisar
+  # checks if the writing process was successfully
   if (file.exists(path)) {
     rlang::inform(glue::glue(
       "The file was successfully saved ({file.info(path)$size} B)"))
@@ -541,7 +534,7 @@ bd_write_csv <- function(.lazy_tbl,
 }
 
 # is_tbl_lazy -------------------------------------------------------------
-# internal function to check if is a valid connection to use
+# internal function to check if is a valid connection to be used
 
 is_tbl_lazy <- function(tibble_connection) {
   rlang::inherits_any(

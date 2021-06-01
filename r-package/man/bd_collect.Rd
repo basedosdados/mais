@@ -2,7 +2,7 @@
 % Please edit documentation in R/bdplyr.R
 \name{bd_collect}
 \alias{bd_collect}
-\title{Collects the results of a remote base called via \code{bdplyr()}}
+\title{Collects the results of a remote table called via \code{bdplyr()}}
 \usage{
 bd_collect(.lazy_tbl, billing_project_id = basedosdados::get_billing_id())
 }
