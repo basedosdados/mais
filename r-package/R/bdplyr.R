@@ -30,6 +30,8 @@
 #' @param billing_project_id a string containing your billing project id.
 #' If you've run [set_billing_id()] then feel free to leave this empty.
 #'
+#' @param project By default `basedosdados`. The project name at GoogleBigQuery.
+#'
 #' @return A `lazy tibble`, which can be handled (almost) as if were a local
 #' database. After satisfactorily handled, the result must be loaded into
 #' memory using [bd_collect()] or written to disk using [bd_write()] or its
@@ -100,7 +102,8 @@
 
 bdplyr <- function(
   table,
-  billing_project_id = basedosdados::get_billing_id()) {
+  billing_project_id = basedosdados::get_billing_id(),
+  project = "basedosdados") {
 
   # checa se o billing id foi informado
 
@@ -111,23 +114,43 @@ bdplyr <- function(
   }
 
   # criar o nome que o BQ vai entender
-  #TODO: avaliar se colocamos o parametro project livre
+  # se tem 3 pontos, supõe que o project já foi informado em table
+  # se tem 2, junta project com table
+  # se tem 1 ou mais de 3 é erro
 
-    if (stringr::str_detect(table, pattern = "^basedosdados\\.") == TRUE) {
+  how_many_dots <- stringr::str_count(string = table,
+                                      pattern = "\\.")
 
-    tabela_full_name <- table
+  if (how_many_dots <= 1 | how_many_dots > 3) {
 
-  } else {
+    rlang::abort("`table` is invalid. Please use the pattern: `<project_name>.<dataset_name>.<table_name>` OR `<dataset_name>.<table_name>´ if the parameter `project´ is used.")
+  }
 
-    tabela_full_name <- glue::glue("basedosdados.{table}")
+  # checks if is a valid project string
+
+  if (!rlang::is_string(project)) {
+
+    rlang::abort("`project` must be a string.")
+
+  }
+
+  if (how_many_dots == 2) {
+
+    table_full_name <- glue::glue("{project}.{table}")
+
+  }
+
+  if (how_many_dots == 1 )
+
+    table_full_name <- table
   }
 
 
   # checa se a tabela é reconhecida pelo google
 
-  if(bigrquery::bq_table_exists(tabela_full_name) == FALSE) {
+  if(bigrquery::bq_table_exists(table_full_name) == FALSE) {
 
-    rlang::abort(glue::glue("The table {tabela_full_name} doesn´t have a valid name or was not found at basedosdados."))
+    rlang::abort(glue::glue("The table {table_full_name} doesn´t have a valid name or was not found at basedosdados."))
 
   }
 
@@ -139,16 +162,16 @@ bdplyr <- function(
     billing = billing_project_id)
 
   # chama o dplyr e guarda em um objeto
-  tibble_connection <- dplyr::tbl(con, tabela_full_name)
+  tibble_connection <- dplyr::tbl(con, table_full_name)
 
 
   # testa se funcionou
   if (is_tbl_lazy(tibble_connection) == TRUE) {
-    rlang::inform(glue::glue("The table `{tabela_full_name}` was successfully connected."))
+    rlang::inform(glue::glue("Successfully connected to table  `{tablea_full_name}`."))
     return (tibble_connection)
 
   } else {
-    rlang::abort(glue::glue("Error when trying to connect the table `{tabela_full_name}`"))
+    rlang::abort(glue::glue("Error when trying to connect the table `{table_full_name}`"))
   }
 }
 
