@@ -6,7 +6,7 @@
 \alias{bd_write_csv}
 \title{Writes the result of operations with \code{\link[=bdplyr]{bdplyr()}} to disk}
 \usage{
-bd_write(.lazy_tbl, .write_fn = `?`(typed::Function()), path, ...)
+bd_write(.lazy_tbl, .write_fn, path, overwrite = FALSE, ...)
 
 bd_write_rds(.lazy_tbl, path, overwrite = FALSE, compress = "none", ...)
 
@@ -26,11 +26,10 @@ disk. Do not use () afther the function's name. For example:
 The desired folders must already exist and the file should normally end with
 the corresponding extension.}
 
-\item{...}{Other parameters passed to the \code{.write_fn} function.}
+\item{overwrite}{FALSE by default. Indicates whether the local file should
+be overwritten if it already exists. Use with care.}
 
-\item{overwrite}{For derivatives function only. FALSE by default.
-Indicates whether the local file should be overwritten if it already exists.
-Use with care.}
+\item{...}{Other parameters passed to the \code{.write_fn} function.}
 
 \item{compress}{For \code{\link[=bd_write_rds]{bd_write_rds()}} only. Compression method to use: "none"
 (default), "gz" ,"bz", or "xz", in ascending order of compression.

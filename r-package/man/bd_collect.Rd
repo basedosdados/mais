@@ -48,7 +48,7 @@ bd_ssp <-  bd_table \%>\%
  # make some plots
 library(ggplot2)
 
-bbd_ssp \%>\%
+bd_ssp \%>\%
  # collect the data to continue the analisis
  basedosdados::bd_collect() \%>\%
   dplyr::summarise(homicidios_sum = sum(homicidio_doloso,

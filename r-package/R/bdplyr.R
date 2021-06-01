@@ -225,7 +225,7 @@ con <- DBI::dbConnect(drv = bigrquery::bigquery(),
 #'  # make some plots
 #' library(ggplot2)
 #'
-#' bbd_ssp %>%
+#' bd_ssp %>%
 #'  # collect the data to continue the analisis
 #'  basedosdados::bd_collect() %>%
 #'   dplyr::summarise(homicidios_sum = sum(homicidio_doloso,
@@ -250,7 +250,7 @@ bd_collect <- function(.lazy_tbl,
 
   if(is_tbl_lazy(.lazy_tbl) == FALSE) {
 
-    rlang::abort("Error collecting results.")
+    rlang::abort("`.lazy_tbl´ should be a lazy tibble.")
   }
 
   # collect from the remote table
@@ -262,7 +262,7 @@ bd_collect <- function(.lazy_tbl,
    # checks if is a tibble
   if (inherits(collected_table, "tbl_df") == FALSE) {
 
-    rlang::abort("It seems to have been a failure to collect the tibble.")
+    rlang::abort("Error collecting results.")
 
   }
 
@@ -272,10 +272,8 @@ bd_collect <- function(.lazy_tbl,
 
   if (nrow_collected_table <= 0 | ncol_collected_table <= 0) {
     rlang::warn("The collection returned a table with no rows or no cols. Consider revising the request or forcing column selection with dplyr::select(dplyr::everything()).")
-  }
-
-  if (nrow_collected_table < 5) {
-    rlang::warn(
+  } else if (nrow_collected_table < 5) {
+    rlang::inform(
       glue::glue("The collection returned a small table with only {nrow_collected_table} rows.
      There may have been an error in processing."))
   }
@@ -319,9 +317,8 @@ bd_collect <- function(.lazy_tbl,
 #' The desired folders must already exist and the file should normally end with
 #' the corresponding extension.
 #'
-#' @param overwrite For derivatives function only. FALSE by default.
-#' Indicates whether the local file should be overwritten if it already exists.
-#' Use with care.
+#' @param overwrite FALSE by default. Indicates whether the local file should
+#' be overwritten if it already exists. Use with care.
 #'
 #' @param compress For [bd_write_rds()] only. Compression method to use: "none"
 #' (default), "gz" ,"bz", or "xz", in ascending order of compression.
@@ -409,9 +406,32 @@ bd_collect <- function(.lazy_tbl,
 #' }
 
 bd_write <- function(.lazy_tbl,
-                     .write_fn = ? typed::Function(),
+                    # .write_fn = ? typed::Function(),
+                     .write_fn,
                      path,
+                    overwrite = FALSE,
                      ...) {
+
+  # checks if any param is missing
+  if (missing(.write_fn) | missing(.lazy_tbl) | missing(path)) {
+    rlang::abort("Params `.lazy_tbl´, `.write_fn´ and `path´ must be informed.")
+  }
+
+  # checks if .write_fn is a valid function
+  if (!rlang::is_function(.write_fn)) {
+    rlang::abort("`.write_fn´ must be a function. Remember not using ()")
+  }
+
+  # check if is a valid path name
+  if (!rlang::is_string(path)) {
+    rlang::abort("`path` must be a string.")
+  }
+
+  # check if the path already exists
+  # in this case, check if overwrite = TRUE
+  if (file.exists(path) & overwrite == FALSE) {
+    rlang::abort("The file already exists. Use overwrite = TRUE if you want to overwrite it.")
+  }
 
    #  checks if .lazy_tbl is able to be collected
   if (is_tbl_lazy(.lazy_tbl) == FALSE) {
@@ -460,6 +480,10 @@ bd_write_rds <- function(.lazy_tbl,
                          compress = "none",
                          ...) {
 
+  if (missing(.lazy_tbl) | missing(path)) {
+    rlang::abort("Params `.lazy_tbl´, and `path´ must be informed.")
+  }
+
   # check if is a valid path name
   if (stringr::str_detect(path, pattern = "(\\.rds)$") == FALSE) {
     rlang::abort("Pass a valid file name to argument `path`, include the '.rds' suffix.")
@@ -499,6 +523,10 @@ bd_write_csv <- function(.lazy_tbl,
                          path,
                          overwrite = FALSE,
                          ...) {
+
+  if (missing(.lazy_tbl) | missing(path)) {
+    rlang::abort("Params `.lazy_tbl´, and `path´ must be informed.")
+  }
 
   # check if is a valid path name
   if (stringr::str_detect(path, pattern = "(\\.csv)$") == FALSE) {
