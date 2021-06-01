@@ -1,18 +1,18 @@
-source_bucket_name: basedosdados-dev 
+source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev  
-table_id: municipio # AUTO GENERATED 
-dataset_id: br_bd_diretorios_brasil # AUTO GENERATED  
+project_id_prod: basedosdados-dev
+table_id: municipio # AUTO GENERATED
+dataset_id: br_bd_diretorios_brasil # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-bd-diretorios-brasil # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil # AUTO GENERATED
 
-version: 1.1.1 
+version: 1.1.1
 
 last_updated: 2021-05-07 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
-# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de 
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
@@ -20,7 +20,7 @@ description: |  # REQUIRED
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: Ricardo Dahis # REQUIRED 
+    name: Ricardo Dahis # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code # REQUIRED
     website: www.ricardodahis.com
     email: rdahis@basedosdados.org

@@ -12,7 +12,7 @@ version: v1.1
 last_updated: 2021-05-02 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
-# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de 
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
@@ -20,7 +20,7 @@ description: |  # REQUIRED
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: Ricardo Dahis # REQUIRED  
+    name: Ricardo Dahis # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code # REQUIRED
     website: www.ricardodahis.com
     email: rdahis@basedosdados.org
@@ -38,7 +38,7 @@ treated_by:
 treatment_description: | 
     Coletei os valores de tabelas originais do IBGE.
 
-# Com qual frequência a base é atualizada? 
+# Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
 data_update_frequency: recorrente
 
