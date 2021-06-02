@@ -31,10 +31,10 @@ test_that(desc = "bdplyr - guardiões", {
   # table em formato errado - > 2 pontos
   expect_error(bdplyr(table = "tabela.com.muitos.pontos"), "`table` is invalid.")
 
-  # project não é string
-  expect_error(bdplyr(table = "tabela.valida", project = 00000), "`project` must be a string.")
-  expect_error(bdplyr(table = "tabela.valida", project = mtcars), "`project` must be a string.")
-  expect_error(bdplyr(table = "tabela.valida", project = NA), "`project` must be a string.")
+  # query_project_id não é string
+  expect_error(bdplyr(table = "tabela.valida", query_project_id = 00000), "`query_project_id` must be a string.")
+  expect_error(bdplyr(table = "tabela.valida", query_project_id = mtcars), "`query_project_id` must be a string.")
+  expect_error(bdplyr(table = "tabela.valida", query_project_id = NA), "`query_project_id` must be a string.")
 
   # tabela inválida no bigquery
   expect_error(bdplyr("tabelaquenao.existe"), "was not found at basedosdados")
@@ -63,14 +63,14 @@ test_that("bdplyr deu certo", {
   expect_s3_class(bdplyr("basedosdados.br_ms_sim.municipio_causa_idade"),
                   class = "tbl_lazy")
 
-  # deu certo sem definir project
+  # deu certo sem definir query_project_id
   expect_s3_class(bdplyr("br_ms_sim.municipio_causa_idade",
-                         project = "basedosdados"),
+                         query_project_id = "basedosdados"),
                   class = "tbl_lazy")
 
   # deu certo definindo project diferente de basedosdados
   expect_s3_class(bdplyr("baseball.games_post_wide",
-                         project = "bigquery-public-data"),
+                         query_project_id = "bigquery-public-data"),
                   class = "tbl_lazy")
 })
 

@@ -25,14 +25,15 @@
 #'
 #'
 #' @param table String in the format `(project)`.`(dataset_name)`.`(table_name)`
-#' or `(dataset_name)`.`(table_name)`, considering that the default `project` param
-#' is `basedosdados`.
+#' or `(dataset_name)`.`(table_name)`, considering that the default
+#' `query_project_id` param is `basedosdados`.
 #'
 #' @param billing_project_id a string containing your billing project id.
 #' If you've run [set_billing_id()] then feel free to leave this empty.
 #'
-#' @param project The project name at GoogleBigQuery. By default `basedosdados`.
-#' You do not need to inform this if project is uset on `table` parameter.
+#' @param query_project_id The project name at GoogleBigQuery. By default
+#' `basedosdados`. You do not need to inform this if project is uset
+#' on `table` parameter.
 #'
 #' @return A `lazy tibble`, which can be handled (almost) as if were a local
 #' database. After satisfactorily handled, the result must be loaded into
@@ -105,7 +106,7 @@
 bdplyr <- function(
   table,
   billing_project_id = basedosdados::get_billing_id(),
-  project = "basedosdados") {
+  query_project_id = "basedosdados") {
 
   # checking billing id
 
@@ -115,7 +116,7 @@ bdplyr <- function(
 
   }
 
-  # checking table and project param
+  # checking table and query_project_id param
   # if table has 2 dots consider that project is already informed
   # if it has 1 dots, glue project and table param
   # otherwise is a invalid table name
@@ -125,20 +126,20 @@ bdplyr <- function(
 
   if (how_many_dots < 1 | how_many_dots > 2) {
 
-    rlang::abort("`table` is invalid. Please use the pattern: `<project_name>.<dataset_name>.<table_name>` OR `<dataset_name>.<table_name>´ if the parameter `project´ is informed.")
+    rlang::abort("`table` is invalid. Please use the pattern: `<project_name>.<dataset_name>.<table_name>` OR `<dataset_name>.<table_name>´ if the parameter `query_project_id´ is informed.")
   }
 
-  # checks if is a valid project string
+  # checks if is a valid query_project_id string
 
-  if (!rlang::is_string(project)) {
+  if (!rlang::is_string(query_project_id)) {
 
-    rlang::abort("`project` must be a string.")
+    rlang::abort("`query_project_id` must be a string.")
 
   }
 
   if (how_many_dots == 1) {
 
-    table_full_name <- glue::glue("{project}.{table}")
+    table_full_name <- glue::glue("{query_project_id}.{table}")
 
   }
 
@@ -159,7 +160,7 @@ bdplyr <- function(
   # creates the connection
 
 con <- DBI::dbConnect(drv = bigrquery::bigquery(),
-                      project = project,
+                      project = query_project_id,
                       billing = billing_project_id)
 
   # calls the connection through dplyr and keeps it in a objects
