@@ -21,9 +21,9 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.curso_superior AS
 SELECT 
-SAFE_CAST(id_area AS STRING) id_area,
-SAFE_CAST(nome_area AS STRING) nome_area,
 SAFE_CAST(id_curso AS STRING) id_curso,
 SAFE_CAST(nome_curso AS STRING) nome_curso,
+SAFE_CAST(id_area AS STRING) id_area,
+SAFE_CAST(nome_area AS STRING) nome_area,
 SAFE_CAST(grau_academico AS STRING) grau_academico
 from basedosdados-dev.br_bd_diretorios_brasil_staging.curso_superior as t

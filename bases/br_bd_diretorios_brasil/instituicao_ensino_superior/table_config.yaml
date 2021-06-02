@@ -7,20 +7,20 @@ dataset_id: br_bd_diretorios_brasil # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-bd-diretorios-brasil # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v1.2 # REQUIRED
 
-last_updated: 2021-05-26 # AUTO GENERATED
+last_updated: 2021-06-02 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    A tabela contém dados de instituições de ensino superior no Brasil, desde seu código do INEP até o município onde está localizada e sua situação de funcionamento.
+    A tabela contém dados de cada instituição de ensino superior do país. Tem-se desde o nome e seu código até o sua dependência com o setor público.
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: Matheus Valentim  # REQUIRED
+    name: Matheus Valentim # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code # REQUIRED
     website: https://github.com/mavalentim
     email: mavalentim.b@gmail.com
@@ -29,14 +29,14 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: Matheus Valentim  # REQUIRED
+    name: Matheus Valentim # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code # REQUIRED
     website: https://github.com/mavalentim
     email: mavalentim.b@gmail.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    -Limpeza de linhas desnecessárias e mudança de nome de colunas
+    -Renomeação de colunas e adequação de linhas desnecessárias
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -92,13 +92,13 @@ columns: # REQUIRED
   
     -   
         name: id_ies
-        description: ID Instituição de Ensino Superior - INEP
+        description: ID da Instituição de Ensino Superior
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: nome_ies
-        description: Nome da Instituição de Ensino Superior
+        description: Nome da Instituição de Ensino Superior 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -109,26 +109,20 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_rede_ies
-        description: ID Rede da Instituição de Ensino Superior - INEP
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: rede_ies
+        name: rede
         description: Rede da Instituição de Ensino Superior
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: tipo_instituicao
-        description: Tipo de Instituição de Ensino Superior (e.g. Publica, Privada)
+        description: Tipo da Instituição de Ensino Superior (e.g. Pública, Privada)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: situacao_funcionamento
-        description: Situação de funcionamento da Instituição de Ensino Superior (e.g. Ativa, Inativa)
+        description: Situação de Funcionamento (e.g. Ativa, Inativa)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

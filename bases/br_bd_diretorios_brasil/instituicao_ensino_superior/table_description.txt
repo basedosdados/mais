@@ -1,4 +1,4 @@
-A tabela contém dados de instituições de ensino superior no Brasil, desde seu código do INEP até o município onde está localizada e sua situação de funcionamento.
+A tabela contém dados de cada instituição de ensino superior do país. Tem-se desde o nome e seu código até o sua dependência com o setor público.
 
 
 Para saber mais acesse:
@@ -38,7 +38,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
--Limpeza de linhas desnecessárias e mudança de nome de colunas
+-Renomeação de colunas e adequação de linhas desnecessárias
 
 Frequencia de Atualização
 -------------------------

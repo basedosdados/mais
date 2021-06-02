@@ -24,8 +24,7 @@ SELECT
 SAFE_CAST(id_ies AS STRING) id_ies,
 SAFE_CAST(nome_ies AS STRING) nome_ies,
 SAFE_CAST(tipo_instituicao AS STRING) tipo_instituicao,
-SAFE_CAST(id_rede_ies AS STRING) id_rede_ies,
-SAFE_CAST(rede_ies AS STRING) rede_ies,
+SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(situacao_funcionamento AS STRING) situacao_funcionamento,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf
