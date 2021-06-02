@@ -24,9 +24,9 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(indice AS FLOAT64) indice,
-SAFE_CAST(var_mes AS FLOAT64) var_mes,
-SAFE_CAST(var_tres_meses AS FLOAT64) var_tres_meses,
-SAFE_CAST(var_semestral AS FLOAT64) var_semestral,
-SAFE_CAST(var_anual AS FLOAT64) var_anual,
-SAFE_CAST(var_doze_meses AS FLOAT64) var_doze_meses
+SAFE_CAST(variacao_mes AS FLOAT64) variacao_mes,
+SAFE_CAST(variacao_tres_meses AS FLOAT64) variacao_tres_meses,
+SAFE_CAST(variacao_semestral AS FLOAT64) variacao_semestral,
+SAFE_CAST(variacao_anual AS FLOAT64) variacao_anual,
+SAFE_CAST(variacao_doze_meses AS FLOAT64) variacao_doze_meses
 from basedosdados-312117.br_ibge_inflacao_staging.ipca15 as t

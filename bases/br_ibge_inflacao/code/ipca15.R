@@ -33,11 +33,11 @@ df %>%
     ano = ...1, 
     mes = ...2, 
     indice = ...3, 
-    var_mes = `NO MÊS`,
-    var_tres_meses = `3 MESES`,
-    var_semestral = SEMESTRAL,
-    var_anual = `NO ANO`,
-    var_doze_meses = `12 MESES`
+    variacao_mes = `NO MÊS`,
+    variacao_tres_meses = `3 MESES`,
+    variacao_semestral = SEMESTRAL,
+    variacao_anual = `NO ANO`,
+    variacao_doze_meses = `12 MESES`
   ) %>% 
   dplyr::filter(mes %in% names(months_br)) %>% 
   tidyr::fill(ano) %>% 
