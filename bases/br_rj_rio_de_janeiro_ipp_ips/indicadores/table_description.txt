@@ -1,0 +1,51 @@
+Indicadores do Índice de Progresso Social (IPS)
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-rj-rio-de-janeiro-ipp-ips
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_rj_rio_de_janeiro_ipp_ips
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Pedro Castro
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_rj_rio_de_janeiro_ipp_ips/code
+Website: https://github.com/aspeddro
+Email: pdesacastro@gmail.comTratado por
+-----------
+Nome: Pedro Castro
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_rj_rio_de_janeiro_ipp_ips/code
+Website: https://github.com/aspeddro
+Email: pdesacastro@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- regiao administrativa
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- regiao_administrativa
+- ano
+
+Cobertura Temporal
+------------------
+- 2016
+- 2018
+- 2020
+
+Cobertura Espacial
+------------------
+- distritos
+
+Tratamento
+----------
+Ajuste nos nomes das regiões administrativas. Adição da coluna ano. Renomeação das colunas.
+
+Frequencia de Atualização
+-------------------------
+2 anos
+
+
