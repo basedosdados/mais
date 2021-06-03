@@ -1,0 +1,47 @@
+A tabela contém dados de cada país como seu nome, código OCDE e sua nacionalidade
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-bd-diretorios-brasil
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- pais
+
+Colunas identificando linhas unicamente
+-------------------
+- id_pais
+
+Cobertura Temporal
+------------------
+- unico
+
+Cobertura Espacial
+------------------
+- mundo
+
+Tratamento
+----------
+-Limpeza de linhas e renomeação
+
+Frequencia de Atualização
+-------------------------
+unico
+
+
