@@ -4,7 +4,7 @@ author: "Base dos Dados"
 runs:
   using: composite
   steps:
-    - run: pip install basedosdados==1.5.2 pytest toml
+    - run: pip install basedosdados==1.5.2 pyarrow pytest toml
       shell: bash
     - run: pytest ${{ github.action_path }} > ${{ github.workspace }}/out
       shell: bash
