@@ -21,8 +21,8 @@ TIPOS:
 
 CREATE VIEW basedosdados-312117.br_rj_rio_de_janeiro_ipp_ips.dimensoes_componentes AS
 SELECT 
-SAFE_CAST(regiao_administrativa AS STRING) regiao_administrativa,
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(regiao_administrativa AS STRING) regiao_administrativa,
 SAFE_CAST(ips_geral AS FLOAT64) ips_geral,
 SAFE_CAST(necessidades_humanas_basicas_nota_dimensao AS FLOAT64) necessidades_humanas_basicas_nota_dimensao,
 SAFE_CAST(nutricao_e_cuidados_medicos_basicos AS FLOAT64) nutricao_e_cuidados_medicos_basicos,

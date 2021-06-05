@@ -21,8 +21,8 @@ TIPOS:
 
 CREATE VIEW basedosdados-312117.br_rj_rio_de_janeiro_ipp_ips.indicadores AS
 SELECT 
-SAFE_CAST(regiao_administrativa AS STRING) regiao_administrativa,
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(regiao_administrativa AS STRING) regiao_administrativa,
 SAFE_CAST(mortalidade_na_infancia AS FLOAT64) mortalidade_na_infancia,
 SAFE_CAST(baixo_peso_ao_nascer AS FLOAT64) baixo_peso_ao_nascer,
 SAFE_CAST(mortalidade_materna AS FLOAT64) mortalidade_materna,

@@ -25,7 +25,7 @@ readxl::excel_sheets("input/ips.xlsx") %>%
         ano = stringr::str_extract(.x, "\\d{4}") %>% as.numeric()
       ) %>% 
       tidyr::drop_na() %>% 
-      dplyr::relocate(ano, .after = regiao_administrativa)
+      dplyr::relocate(ano, .before = regiao_administrativa)
   ) %>% 
   purrr::map_df(~tidyr::unnest(.x)) %>% 
   readr::write_csv(file = "output/indicadores.csv")
@@ -53,7 +53,7 @@ readxl::excel_sheets("input/ips.xlsx") %>%
         ano = stringr::str_extract(.x, "\\d{4}") %>% as.numeric()
       ) %>% 
       tidyr::drop_na() %>% 
-      dplyr::relocate(ano, .after = regiao_administrativa)
+      dplyr::relocate(ano, .before = regiao_administrativa)
   ) %>% 
   purrr::map_df(~tidyr::unnest(.x)) %>% 
   readr::write_csv(file = "output/dimensoes_componentes.csv")
