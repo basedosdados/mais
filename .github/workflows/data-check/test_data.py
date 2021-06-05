@@ -78,7 +78,7 @@ def test_select_all_works(configs):
 
 def test_table_has_no_null_column(configs):
     result = fetch_data("test_table_has_no_null_column", configs)
-    assert result.null_percent.max() < 1
+    assert result.empty or result.null_percent.max() < 1
 
 
 # TODO: Ativar depois de testar a query
