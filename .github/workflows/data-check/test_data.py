@@ -56,7 +56,7 @@ def fetch_data(data_check, configs):
 
     print(query)  # print query with error
 
-    data = bd_read_sql(
+    data = bd.read_sql(
         query=query.replace("\n", " "),
         billing_project_id="basedosdados-dev",
         from_file=True,
