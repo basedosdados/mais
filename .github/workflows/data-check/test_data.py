@@ -1,8 +1,9 @@
 import json
-import yaml
-import basedosdados as bd
-
 from pathlib import Path
+
+import basedosdados as bd
+import pandas as pd
+import yaml
 from jinja2 import Template
 
 import bd_credential
@@ -15,8 +16,8 @@ import bd_credential
 # generate tests for different configs.
 # -------------------------------------
 
-# TODO: Adicionar try/excepts para erros de yamls mal configurados
 dataset_table_ids = bd_credential.setup()
+
 checks = Template(
     Path("/home/runner/work/mais/mais/.github/workflows/data-check/checks.yaml")
     .open("r", encoding="utf-8")
@@ -44,38 +45,43 @@ def pytest_generate_tests(metafunc):
 # -------------------------------------
 # 2.Executes at Test Time
 # -------------------------------------
-# Each test is
-# executed once
-# for each table
+# Each test is executed
+# once for each table
 # -------------------------------------
-def fetch_data(data_ckeck, configs):
-    query = configs[data_ckeck]["query"].replace("\n", " ")
-    return bd.read_sql(
-        query=query,
+
+
+def fetch_data(data_check, configs):
+    assert data_check in configs
+    query = configs[data_check]["query"]
+
+    print(query)  # print query with error
+
+    data = bd_read_sql(
+        query=query.replace("\n", " "),
         billing_project_id="basedosdados-dev",
         from_file=True,
     )
 
+    assert isinstance(data, pd.DataFrame)
+    return data
+
 
 def test_table_exists(configs):
     result = fetch_data("test_table_exists", configs)
-
     assert result.failure.values == False
 
 
 def test_select_all_works(configs):
     result = fetch_data("test_select_all_works", configs)
-
     assert result.failure.values == False
 
 
 def test_table_has_no_null_column(configs):
     result = fetch_data("test_table_has_no_null_column", configs)
-
     assert result.null_percent.max() < 1
 
 
-# ### TODO | Ativar depois de testar a query
+# TODO: Ativar depois de testar a query
 # def test_primary_key_has_unique_values(configs):
 #     check = configs["test_primary_key_has_unique_values"]
 #     result = fetch_data("test_primary_key_has_unique_values")
