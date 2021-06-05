@@ -170,5 +170,5 @@ columns: # REQUIRED
 
     - name: tipo_setor
       description: Tipo de setor censitário
-      is_in_staging: true       #  [True, False], whether the column is in the staging table
+      is_in_staging: true       # Bool [True, False], whether the column is in the staging table
       is_partition: false       # Bool [True, False], whether the column is a partition.
