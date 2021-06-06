@@ -1,0 +1,32 @@
+name: check-links
+
+on:
+  schedule:
+    - cron: "00 00 01 * *"
+  workflow_dispatch:
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8.x'
+      - name: Check Links with Lychee
+        id: lychee
+        uses: ./.github/workflows/check-links
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Parse Report to Markdown
+        if: ${{ failure() }}
+        run: python to_markdown.py
+      - name: Create Issue From File
+        if: ${{ failure() }}
+        uses: peter-evans/create-issue-from-file@v2
+        with:
+          title: Broken Links Report
+          content-filepath: ./lychee/report.md
+          labels: report, automated issue
