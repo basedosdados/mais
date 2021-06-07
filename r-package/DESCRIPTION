@@ -19,13 +19,18 @@ Imports:
     googleAuthR,
     cli,
     magrittr,
-    readr,
+    readr (>= 1.4.0),
     stringr,
     dotenv,   
     bigrquery,
     glue,   
     rlang,
-    writexl
+    writexl,
+    fs,
+    DBI,
+    dbplyr
 Suggests: 
+    rmarkdown,
+    knitr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

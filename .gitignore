@@ -9,6 +9,10 @@ bases/test/
 mais/pytest/*
 mais/test/
 
+bases/*/input/
+bases/*/tmp/
+bases/*/output/
+
 notebooks
 data
 secrets

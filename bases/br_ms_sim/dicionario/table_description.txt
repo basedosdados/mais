@@ -1,0 +1,45 @@
+Dicionário para a base do Sistema de Informações de Mortalidade (SIM).
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ms-sim
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: <nome>
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- chave
+
+Colunas identificando linhas unicamente
+-------------------
+- id_tabela
+- coluna
+- chave
+- cobertura_temporal
+
+Cobertura Temporal
+------------------
+
+Cobertura Espacial
+------------------
+
+Tratamento
+----------
+Coletei informações de dicionários de diversas fontes do DataSUS e na internet.
+
+Frequencia de Atualização
+-------------------------
+único
+
+
