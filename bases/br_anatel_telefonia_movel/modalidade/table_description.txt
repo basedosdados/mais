@@ -1,0 +1,20 @@
+     Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) de 2005 a 2018 para total de acessos referentes a DDD
+e a modalidade, isto é, se pré-pago ou pós-pago.
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-anatel-telefonia-movel
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/codeTratado por
+-----------
+Nome: Lucas Nascimento Moreira
+
+
+
+
