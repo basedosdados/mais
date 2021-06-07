@@ -29,6 +29,7 @@ nav:
     - Local: access_data_local.md
   - Colaborar: 
     - Dados: colab_data.md
+    - Testes de Dados: colab_checks.md
     - Manual de estilo:
       - Bases e tabelas: style_naming_datasets_tables.md
       - Colunas: style_naming_columns.md
