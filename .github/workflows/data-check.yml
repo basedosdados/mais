@@ -1,9 +1,9 @@
 name: data-check
 
 on:
-  # push:
-  #   branches:
-  #     - check-data
+  push:
+    branches:
+      - check-data
   pull_request:
     types:
       - labeled
