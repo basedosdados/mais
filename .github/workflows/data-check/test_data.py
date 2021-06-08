@@ -67,16 +67,19 @@ def fetch_data(data_check, configs):
 
 
 def test_table_exists(configs):
+    print(configs["test_table_exists"]["dataset_table_id"])
     result = fetch_data("test_table_exists", configs)
     assert result.failure.values == False
 
 
 def test_select_all_works(configs):
+    print(configs["test_table_exists"]["dataset_table_id"])
     result = fetch_data("test_select_all_works", configs)
     assert result.failure.values == False
 
 
 def test_table_has_no_null_column(configs):
+    print(configs["test_table_exists"]["dataset_table_id"])
     result = fetch_data("test_table_has_no_null_column", configs)
     assert result.empty or result.null_percent.max() < 1
 
