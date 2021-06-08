@@ -18,9 +18,8 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_ibge_populacao.municipios AS
+CREATE VIEW basedosdados-dev.br_ibge_populacao.brasil AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(populacao AS INT64) populacao
-from basedosdados-staging.br_ibge_populacao_staging.municipios as t
+FROM basedosdados-dev.br_ibge_populacao_staging.brasil as t
