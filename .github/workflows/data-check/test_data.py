@@ -54,7 +54,7 @@ def fetch_data(data_check, configs):
     assert data_check in configs
     query = configs[data_check]["query"]
 
-    print(query)  # print query with error
+    # print(query)  # print query with error
 
     data = bd.read_sql(
         query=query.replace("\n", " "),
