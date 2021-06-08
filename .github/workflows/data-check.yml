@@ -1,8 +1,9 @@
 name: data-check
 
 on:
-  issue_comment:
-    types: [created]
+  # push:
+  #   branches:
+  #     - check-data
   pull_request:
     types:
       - labeled
