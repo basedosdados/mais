@@ -23,11 +23,11 @@ CREATE VIEW input-dados.br_anatel_telefonia_movel.tecnologia AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(empresa AS STRING) empresa,
-SAFE_CAST(cnpj AS STRING) cnpj,
-SAFE_CAST(porte_empresa AS STRING) porte_empresa,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(ddd AS INT64) ddd,
+SAFE_CAST(cnpj AS INT64) cnpj,
+SAFE_CAST(empresa AS STRING) empresa,
+SAFE_CAST(porte_empresa AS STRING) porte_empresa,
 SAFE_CAST(tecnologia AS STRING) tecnologia,
 SAFE_CAST(sinal AS STRING) sinal,
 SAFE_CAST(acessos AS INT64) acessos

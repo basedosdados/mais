@@ -21,11 +21,11 @@ TIPOS:
 
 CREATE VIEW input-dados.br_anatel_telefonia_movel.ddd AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
-SAFE_CAST(mes AS STRING) mes,
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(ddd AS STRING) ddd,
+SAFE_CAST(ddd AS INT64) ddd,
 SAFE_CAST(tecnologia AS STRING) tecnologia,
 SAFE_CAST(sinal AS STRING) sinal,
-SAFE_CAST(acessos AS STRING) acessos
+SAFE_CAST(acessos AS INT64) acessos
 from input-dados.br_anatel_telefonia_movel_staging.ddd as t

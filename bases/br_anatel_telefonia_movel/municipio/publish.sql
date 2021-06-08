@@ -21,18 +21,18 @@ TIPOS:
 
 CREATE VIEW input-dados.br_anatel_telefonia_movel.municipio AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
-SAFE_CAST(mes AS STRING) mes,
-SAFE_CAST(empresa AS STRING) empresa,
-SAFE_CAST(cnpj AS STRING) cnpj,
-SAFE_CAST(porte_empresa AS STRING) porte_empresa,
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(ddd AS STRING) ddd,
-SAFE_CAST(modalidade AS STRING) modalidade,
+SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(ddd AS INT64) ddd,
+SAFE_CAST(cnpj AS INT64) cnpj,
+SAFE_CAST(empresa AS STRING) empresa,
+SAFE_CAST(porte_empresa AS STRING) porte_empresa,
 SAFE_CAST(tecnologia AS STRING) tecnologia,
 SAFE_CAST(sinal AS STRING) sinal,
+SAFE_CAST(modalidade AS STRING) modalidade,
 SAFE_CAST(pessoa AS STRING) pessoa,
 SAFE_CAST(produto AS STRING) produto,
-SAFE_CAST(acessos AS STRING) acessos
+SAFE_CAST(acessos AS INT64) acessos
 from input-dados.br_anatel_telefonia_movel_staging.municipio as t

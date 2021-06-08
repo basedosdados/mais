@@ -7,22 +7,21 @@ dataset_id: br_anatel_telefonia_movel # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-anatel-telefonia-movel # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: v1.0 # REQUIRED
 
-last_updated: 2021-05-28 # AUTO GENERATED
+last_updated: 2021-06-08 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) de 2009 a 2018 para total de acessos referentes a DDD
-e a tecnologia de conexão.
-
+    Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) de 2009 a 2018 para total de acessos referentes a DDD e a tecnologia de conexão.
+    
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: Lucas Nascimento Moreira  # REQUIRED
+    name: Lucas Nascimento Moreira # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code # REQUIRED
     website: <website>
     email: lucas.nasc.m@gmail.com
@@ -31,7 +30,7 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: Lucas Nascimento Moreira  # REQUIRED
+    name: Lucas Nascimento Moreira # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code # REQUIRED
     website: <website>
     email: lucas.nasc.m@gmail.com
@@ -74,9 +73,7 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - pais
-    - estados
-    - ddd
+    Brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
@@ -119,25 +116,7 @@ columns: # REQUIRED
   
     -   
         name: mes
-        description: Mês do Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: empresa
-        description: Nome da companhia ofertante do serviço
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cnpj
-        description: Cadastro Nacional de Pessoa Jurídica
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: porte_empresa
-        description: Qualificação do tamanho da companhia
+        description: Mês
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -148,8 +127,26 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-  	name: ddd
+        name: ddd
         description: Código de Discagem Direta a Distância
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: cnpj
+        description: Cadastro Nacional de Pessoa Jurídica
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: empresa
+        description: Cadastro Nacional de Pessoa Jurídica
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: porte_empresa
+        description: Qualificação do tamanho da companhia
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
