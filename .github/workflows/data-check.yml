@@ -14,8 +14,8 @@ on:
 
 jobs:
   get_changes:
-    if: ${{ github.event.comment.body == '!data-check' }}
     runs-on: ubuntu-latest
+    if: ${{ github.event.comment.body == '!data-check' }}
     steps:
       - name: Create Changes
         id: file_changes
@@ -29,7 +29,6 @@ jobs:
           path: files.json
 
   data-check:
-    if: ${{ github.event.comment.body == '!data-check' }}
     needs: get_changes
     runs-on: ubuntu-latest
     env:
