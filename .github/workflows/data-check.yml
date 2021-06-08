@@ -10,7 +10,7 @@ on:
 jobs:
   get_changes:
     runs-on: ubuntu-latest
-    if: github.event.label.name == 'data-check-trigger'
+    # if: github.event.label.name == 'data-check-trigger'
     steps:
       - name: Create Changes
         id: file_changes
