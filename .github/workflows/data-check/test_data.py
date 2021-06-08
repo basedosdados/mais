@@ -62,10 +62,11 @@ def fetch_data(data_check, configs):
 
 def pytest_generate_tests(metafunc):
     idlist = [
-        "{}.{}.{}".format(
-            dataset_table_ids[table_id]["table_config"]["project_id_prod"],
-            dataset_table_ids[table_id]["table_config"]["dataset_id"],
-            table_id,
+        ".".join(
+            [
+                dataset_table_ids[table_id]["table_config"]["dataset_id"],
+                table_id,
+            ]
         )
         for table_id in dataset_table_ids.keys()
     ]
@@ -80,7 +81,7 @@ def test_table_exists(configs):
 
 def test_select_all_works(configs):
     result = fetch_data("test_select_all_works", configs)
-    assert result.failure.values == True
+    assert result.failure.values == False
 
 
 def test_table_has_no_null_column(configs):
