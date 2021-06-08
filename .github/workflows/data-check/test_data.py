@@ -75,7 +75,7 @@ def test_table_exists(configs):
 def test_select_all_works(configs):
     print(configs["test_table_exists"]["dataset_table_id"])
     result = fetch_data("test_select_all_works", configs)
-    assert result.failure.values == False
+    assert result.failure.values == True
 
 
 def test_table_has_no_null_column(configs):
