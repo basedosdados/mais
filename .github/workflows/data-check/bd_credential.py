@@ -113,12 +113,12 @@ def get_table_dataset_id():
                 "table_config_path": filepath,
                 "table_config": table_config,
             }
-        # else:
-        #     print(
-        #         "\n###==============================================================================================###",
-        #         f"\n{str(filepath)} does not exist on current commit",
-        #         "\n###==============================================================================================###\n",
-        #     )
+        else:
+            print(
+                "\n###==============================================================================================###",
+                f"\n{str(filepath)} does not exist on current commit",
+                "\n###==============================================================================================###\n",
+            )
     return dataset_table_ids
 
 
@@ -154,14 +154,14 @@ def setup():
     ### create templates at config path
     Base()._refresh_templates()
 
-    # print(
-    #     "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ BASE $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    # )
-    # print(
-    #     "\n",
-    #     Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),
-    #     "\n",
-    # )
+    print(
+        "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ BASE $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    )
+    print(
+        "\n",
+        Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),
+        "\n",
+    )
     ### Assert config files have been created
     assert (Path.home() / ".basedosdados" / "config.toml").is_file()
     assert (Path.home() / ".basedosdados" / "credentials" / "prod.json").is_file()

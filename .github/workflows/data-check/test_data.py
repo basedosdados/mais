@@ -37,11 +37,6 @@ configs = [
     for table_id in dataset_table_ids.keys()
 ]
 
-
-def pytest_generate_tests(metafunc):
-    metafunc.parametrize("configs", configs)
-
-
 # -------------------------------------
 # 2.Executes at Test Time
 # -------------------------------------
@@ -53,8 +48,7 @@ def pytest_generate_tests(metafunc):
 def fetch_data(data_check, configs):
     assert data_check in configs
     query = configs[data_check]["query"]
-
-    print("\n", configs[data_check]["dataset_table_id"])
+    print(query)
 
     data = bd.read_sql(
         query=query.replace("\n", " "),
@@ -63,32 +57,35 @@ def fetch_data(data_check, configs):
     )
 
     assert isinstance(data, pd.DataFrame)
-
     return data
+
+
+def pytest_generate_tests(metafunc):
+    idlist = [
+        "{}.{}.{}".format(
+            dataset_table_ids[table_id]["table_config"]["project_id_prod"],
+            dataset_table_ids[table_id]["table_config"]["dataset_id"],
+            table_id,
+        )
+        for table_id in dataset_table_ids.keys()
+    ]
+
+    metafunc.parametrize("configs", configs, ids=idlist)
 
 
 def test_table_exists(configs):
     result = fetch_data("test_table_exists", configs)
-    test = result.failure.values == False
-    if not test:
-        print(configs["test_table_exists"]["query"])
-    assert test
+    assert result.failure.values == False
 
 
 def test_select_all_works(configs):
     result = fetch_data("test_select_all_works", configs)
-    test = result.failure.values == True
-    if not test:
-        print(configs["test_select_all_works"]["query"])
-    assert test
+    assert result.failure.values == True
 
 
 def test_table_has_no_null_column(configs):
     result = fetch_data("test_table_has_no_null_column", configs)
-    test = result.empty or result.null_percent.max() < 1
-    if not test:
-        print(configs["test_select_all_works"]["query"])
-    assert test
+    assert result.empty or result.null_percent.max() < 1
 
 
 # TODO: Ativar depois de testar a query

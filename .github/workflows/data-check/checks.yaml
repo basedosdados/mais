@@ -1,6 +1,6 @@
+
 test_table_exists:
   name: Check if {{ table_id }} table exists
-  dataset_table_id: "{{ dataset_id }}.{{ table_id }}"
   query: |
     SELECT "{{ table_id }}" NOT IN (
         SELECT `table_name`
@@ -9,7 +9,6 @@ test_table_exists:
 
 test_select_all_works:
   name: Check if select query in {{ table_id }} works
-  dataset_table_id: "{{ dataset_id }}.{{ table_id }}"
   query: |
     SELECT NOT EXISTS (
         SELECT * 
@@ -18,7 +17,6 @@ test_select_all_works:
 
 test_table_has_no_null_column:
   name: Check if columns are null
-  dataset_table_id: "{{ dataset_id }}.{{ table_id }}"
   query: |
     WITH
         n_nulls AS (
