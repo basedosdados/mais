@@ -69,17 +69,17 @@ def fetch_data(data_check, configs):
 
 def test_table_exists(configs):
     result = fetch_data("test_table_exists", configs)
-    test = result.failure.values == False
+    test = result.failure.values == True
     if not test:
-        print("\n", configs["test_table_exists"]["query"])
+        print(configs["test_table_exists"]["query"])
     assert test
 
 
 def test_select_all_works(configs):
     result = fetch_data("test_select_all_works", configs)
-    test = result.failure.values == True
+    test = result.failure.values == False
     if not test:
-        print("\n", configs["test_select_all_works"]["query"])
+        print(configs["test_select_all_works"]["query"])
     assert test
 
 
@@ -87,7 +87,7 @@ def test_table_has_no_null_column(configs):
     result = fetch_data("test_table_has_no_null_column", configs)
     test = result.empty or result.null_percent.max() < 1
     if not test:
-        print("\n", configs["test_select_all_works"]["query"])
+        print(configs["test_select_all_works"]["query"])
     assert test
 
 
