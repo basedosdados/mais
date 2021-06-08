@@ -1,17 +1,20 @@
 name: data-check
 
 on:
-  push:
-    paths:
-    - bases/**/**.yaml
-    - bases/**/**.sql
-  pull_request:
-    paths:
-    - bases/**/**.yaml
-    - bases/**/**.yaml
+  issue_comment:
+    types: [created, edited]
+  # push:
+  #   paths:
+  #   - bases/**/**.yaml
+  #   - bases/**/**.sql
+  # pull_request:
+  #   paths:
+  #   - bases/**/**.yaml
+  #   - bases/**/**.yaml
 
 jobs:
   get_changes:
+    if: contains(github.event.comment.body == '!data-check')
     runs-on: ubuntu-latest
     steps:
       - name: Create Changes
@@ -26,6 +29,7 @@ jobs:
           path: files.json
 
   data-check:
+    if: contains(github.event.comment.body == '!data-check')
     needs: get_changes
     runs-on: ubuntu-latest
     env:
