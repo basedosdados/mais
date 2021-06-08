@@ -54,7 +54,7 @@ def fetch_data(data_check, configs):
     assert data_check in configs
     query = configs[data_check]["query"]
 
-    # print(query)  # print query with error
+    print("\n", configs[data_check]["dataset_table_id"], "\n")
 
     data = bd.read_sql(
         query=query.replace("\n", " "),
@@ -63,25 +63,32 @@ def fetch_data(data_check, configs):
     )
 
     assert isinstance(data, pd.DataFrame)
+
     return data
 
 
 def test_table_exists(configs):
-    print(configs["test_table_exists"]["dataset_table_id"])
     result = fetch_data("test_table_exists", configs)
-    assert result.failure.values == False
+    test = result.failure.values == False
+    if test:
+        print("\n", configs["test_table_exists"]["query"], "\n")
+    assert test
 
 
 def test_select_all_works(configs):
-    print(configs["test_table_exists"]["dataset_table_id"])
     result = fetch_data("test_select_all_works", configs)
-    assert result.failure.values == True
+    test = result.failure.values == True
+    if test:
+        print("\n", configs["test_select_all_works"]["query"], "\n")
+    assert test
 
 
 def test_table_has_no_null_column(configs):
-    print(configs["test_table_exists"]["dataset_table_id"])
     result = fetch_data("test_table_has_no_null_column", configs)
-    assert result.empty or result.null_percent.max() < 1
+    test = result.empty or result.null_percent.max() < 1
+    if test:
+        print("\n", configs["test_select_all_works"]["query"], "\n")
+    assert test
 
 
 # TODO: Ativar depois de testar a query
