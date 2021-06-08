@@ -1,11 +1,11 @@
 name: data-check
 
 on:
-  # issue_comment:
-  #   types: [created, edited]
-  push:
-    branches:
-      - 'check-data'
+  issue_comment:
+    types: [created]
+  # push:
+  #   branches:
+  #     - 'check-data'
   # push:
   #   paths:
   #   - bases/**/**.yaml
@@ -18,7 +18,8 @@ on:
 jobs:
   get_changes:
     runs-on: ubuntu-latest
-    # if: ${{  == '!data-check' }}
+    # if: ${{ github.event.comment.body == '!data-check'}}
+    if: contains(github.event.comment.body, '!data-check')
     steps:
       - name: Create Changes
         id: file_changes
@@ -37,7 +38,6 @@ jobs:
     env:
       GCP_BD_DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
       GCP_BD_DEV_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
-      TEST_COMMENT: ${{ github.event.comment.body }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2

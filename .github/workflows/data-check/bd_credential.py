@@ -145,9 +145,6 @@ def setup():
     }
 
     ### load the secret of prod and staging data
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    print(os.getenv("TEST_COMMENT"))
-
     prod_base64 = os.getenv("GCP_BD_DEV_PROD")
     staging_base64 = os.getenv("GCP_BD_DEV_STAGING")
 
