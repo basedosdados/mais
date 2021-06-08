@@ -29,10 +29,10 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <nome>
-    code_url: <onde encontrar código de tratamento>
+    name: Lucas Nascimento Moreira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
     website: <onde encontrar os dados tratados>
-    email: <email>
+    email: lucas.nasc.m@gmail.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
