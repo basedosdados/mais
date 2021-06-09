@@ -41,7 +41,7 @@ jobs:
         run: echo "Data Check Report:\n---\n\n" > report.md
       - name: Test data and fill report
         uses: ./.github/workflows/data-check/
-      - name: Get comment body
+      - name: Finalize report
         if: ${{ always() }}
         id: get-comment-body
         run: |
