@@ -2,15 +2,31 @@ Dados de população municipal do IBGE. Os dados vem de estimativas de populaç�
 
 
 Para saber mais acesse:
-Website: 
-Github: https://github.com/basedosdados/mais/
+Website: https://basedosdados.org/dataset/br-ibge-populacao
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_populacao
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_populacao/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_populacao/code
+Email: rdahis@basedosdados.org
+
+Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
 - ano
 
 Cobertura Temporal
@@ -44,10 +60,11 @@ Cobertura Temporal
 - 2017
 - 2018
 - 2019
+- 2020
 
 Cobertura Espacial
 ------------------
-- brasil
+- Brasil
 
 Tratamento
 ----------
@@ -57,15 +74,4 @@ Frequencia de Atualização
 -------------------------
 1 ano
 
-Tratado por
------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_populacao/code
-Email: rdahis@basedosdados.org
 
-Publicado por
--------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_populacao/code
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org
