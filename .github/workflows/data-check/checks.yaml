@@ -35,12 +35,12 @@ test_table_has_no_null_column:
     SELECT col_name, nulls_count / total_count null_percent
     FROM n_nulls, n_total
 
-### TODO | Ativar depois de testar a query
-# test_primary_key_has_unique_values:
-#   name: Check if primary key has unique values
-#   query: |
-#     SELECT
-#       {% for primary_key in primary_keys %}
-#       CASE WHEN COUNT(DISTINCT({{ primary_key }})) / COUNT(*) = 1 THEN 'True' ELSE 'False' END {{ primary_key }},
-#       {% endfor %}
-#     FROM `{{ project_id_staging }}.{{ dataset_id }}.{{ table_id }}` t
+test_primary_key_has_unique_values:
+  id: {{ dataset_id }}/{{ table_id }}/3
+  name: Check if primary key has unique values
+  query: |
+    SELECT
+      {% for primary_key in primary_keys %}
+      CASE WHEN COUNT(DISTINCT({{ primary_key }})) / COUNT(*) = 1 THEN 'True' ELSE 'False' END {{ primary_key }},
+      {% endfor %}
+    FROM `{{ project_id_staging }}.{{ dataset_id }}.{{ table_id }}` t

@@ -95,15 +95,23 @@ def pytest_sessionfinish(session, exitstatus):
     with Path("./report.json").open("r") as file:
         data = json.load(file)
         data = sorted(data, key=lambda x: x["id"])
-
+        n = [datum["id"].split("/")[-1] for datum in data]
+        n = max([int(ni) for ni in n])
+   
     with Path("./report.md").open("w") as file:
         file.write("Data Check Report\n---\n\n")
+
         for datum in data:
-            file.write("✔️ " if datum["passed"] else "❌ ")
-            file.write(f"{datum['name']}  \n")
-            file.write(f"```sql  \n")
-            file.write(f"{datum['query']}")
-            file.write(f"```  \n\n")
+            if datum["passed"]:
+                file.write(f"✔️ {datum['name']}  \n\n\n")
+            else:
+                file.write(f"❌ {datum['name']}  \n")
+                file.write(f"```sql  \n")
+                file.write(f"{datum['query']}")
+                file.write(f"```  \n\n")
+            
+            if int(datum["id"].split("/")[-1]) == n:
+                file.write("---\n")
 
 
 # -------------------------------------
