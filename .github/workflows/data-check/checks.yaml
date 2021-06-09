@@ -10,7 +10,7 @@ test_table_exists:
 
 test_select_all_works:
   id: {{ dataset_id }}/{{ table_id }}/1
-  name: Check if select all  works
+  name: Check if any column is completely null
   query: |
     SELECT NOT EXISTS (
         SELECT * 
