@@ -20,7 +20,7 @@ TIPOS:
 */
 CREATE VIEW basedosdados-dev.br_ibge_populacao.municipio AS
 SELECT 
-SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(populacao AS INT64) populacao
 from basedosdados-dev.br_ibge_populacao_staging.municipio as t
