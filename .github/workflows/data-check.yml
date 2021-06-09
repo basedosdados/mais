@@ -38,7 +38,7 @@ jobs:
         with:
           python-version: '3.8.x'
       - name: Initialize report
-        run: echo -e "Data Check Report:\n---\n\n" > report.md
+        run: echo -e "Data Check Report\n---\n\n" > report.md
       - name: Test data and fill report
         uses: ./.github/workflows/data-check/
       - name: Finalize report
