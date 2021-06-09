@@ -5,10 +5,9 @@
 # once for all tables
 # -------------------------------------
 
-import pytest
 import basedosdados as bd
 import pandas as pd
-
+import pytest
 
 # -------------------------------------
 # Fetch data from Big Query

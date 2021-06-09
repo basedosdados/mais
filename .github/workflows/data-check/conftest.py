@@ -17,6 +17,10 @@ import bd_credential
 # -------------------------------------
 # Get required tables
 # -------------------------------------
+# TODO: Split this section
+# and move data checks to the Python API?
+# -------------------------------------
+
 
 dataset_table_ids = bd_credential.setup()
 
@@ -38,6 +42,16 @@ configs = [
     )
     for table_id in dataset_table_ids.keys()
 ]
+
+
+# -------------------------------------
+# Initialize report file
+# -------------------------------------
+
+
+def pytest_sessionstart(session):
+    with Path("./report.md").open("w") as file:
+        file.write("Data Check Report\n---\n\n")
 
 
 # -------------------------------------
@@ -68,3 +82,9 @@ def pytest_runtest_makereport(item, call):
             file.write(f"```sql  \n")
             file.write(f"{config['query']}")
             file.write(f"```  \n\n")
+
+
+# -------------------------------------
+# Reference
+# https://docs.pytest.org/en/6.2.x/example/simple.html#post-process-test-reports-failures
+# -------------------------------------
