@@ -1,18 +1,70 @@
+
 # Colaborando com dados na BD+
 
-Para criar um repositório integrado de dados públicos precisamos subir
-bases de dados de centenas de fontes e também mantê-las **consistentes
-entre si, atualizadas, e úteis**.
+Para criar um repositório integrado de dados públicos precisamos subir bases de dados de centenas de fontes e também mantê-las **consistentes entre si, atualizadas, e úteis**.
 
-Nossa intenção é que **qualquer pessoa possa colaborar** com seu
-conhecimento sobre dados públicos, seguindo nossas metodologias e
-procedimentos de limpeza e validação dos dados.
+Nossa intenção é que **qualquer pessoa possa colaborar** com seu conhecimento sobre dados públicos, seguindo nossas metodologias e procedimentos de limpeza e validação dos dados.
 
 !!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/2GAuw7d8zd) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
 
 ## Qual o procedimento?
 
 Adicionar bases novas na BD+ deve seguir nosso fluxo de trabalho:
+
+informar interesse
+
+preencher arquitetura (uma arquitetura por tabela)
+  pegar nosso template
+  confirmar com equipe da BD que faz sentido
+
+escrever código
+  captura de dados
+  limpeza de dados
+  criar tabela dicionário se necessário
+
+subir dados no BigQuery
+  preencher arquivos de configuração (automaticamente)
+
+envie código e dados prontos para revisão
+
+
+
+Quer testar se entendeu tudo? Tenta replicar do zero nosso exemplo de base.
+  Pasta com dados:
+  br_me_rais
+    code (em Python ou R)
+      download
+      clean
+    raw
+    output
+      <table_id>
+    extra
+      architecture
+        <table_id>
+      auxiliary_files
+      dicionario
+  Pasta com configs prontos
+
+Passos de código
+1. Instalar e configurar o CLI.
+  `pip install basedosdados`
+2. Dar um fork no repositório no Github.
+3. Clonar seu fork localmente e abrir uma nova branch.
+4. Criar a tabela no BigQuery
+  `basedosdados table create br_me_rais microdados --path br_me_rais/output/<table_id>`
+5. Preencher os configs
+6. Publicar tabela no BigQuery
+  `basedosdados table publish br_me_rais microdados`
+7. Abrir PR no `mais` original.
+
+
+Temos um nível alto de exigência. Para garantir que colaboradores pegaram tudo, nós organizamos um exemplo do produto final.
+Para garantir que você entendeu tudo, 
+tente replicar do zero o processo de limpeza 
+
+
+
+
 
 1. [Informe seu interesse para a gente](#1-informe-seu-interesse-para-a-gente).
 2. [Limpe e trate dados](#2-limpe-e-trate-os-dados).

@@ -28,6 +28,7 @@ nav:
     - BigQuery: access_data_bq.md
     - Local: access_data_local.md
   - Colaborar: 
+    - Infraestrutura: colab_infrastructure.md
     - Dados: colab_data.md
     - Manual de estilo:
       - Bases e tabelas: style_naming_datasets_tables.md
