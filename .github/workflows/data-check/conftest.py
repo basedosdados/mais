@@ -96,6 +96,8 @@ def pytest_sessionfinish(session, exitstatus):
         file.write("Data Check Report\n---\n\n")
 
         for datum in data:
+            if int(datum["id"].split("/")[-1]) == 0:
+                file.write(f" Table `{datum['id'][:-2]}`  \n\n")
             if datum["passed"]:
                 file.write(f"✔️ {datum['name']}  \n\n")
             else:

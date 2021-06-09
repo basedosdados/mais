@@ -1,7 +1,7 @@
 
 test_table_exists:
   id: {{ dataset_id }}/{{ table_id }}/0
-  name: Check if `{{ dataset_id}}/{{ table_id }}` table exists
+  name: Check if table exists
   query: |
     SELECT "{{ table_id }}" NOT IN (
         SELECT `table_name`
@@ -10,7 +10,7 @@ test_table_exists:
 
 test_select_all_works:
   id: {{ dataset_id }}/{{ table_id }}/1
-  name: Check if select query in `{{ dataset_id}}/{{ table_id }}` works
+  name: Check if select all  works
   query: |
     SELECT NOT EXISTS (
         SELECT * 
@@ -19,7 +19,7 @@ test_select_all_works:
 
 test_table_has_no_null_column:
   id: {{ dataset_id }}/{{ table_id }}/2
-  name: Check if `{{ dataset_id}}/{{ table_id }}` columns are null
+  name: Check if columns are complete null
   query: |
     WITH
         n_nulls AS (
@@ -37,7 +37,7 @@ test_table_has_no_null_column:
 
 test_primary_key_has_unique_values:
   id: {{ dataset_id }}/{{ table_id }}/3
-  name: Check if `{{ dataset_id}}/{{ table_id }}` primary key has unique values
+  name: Check if primary key has unique values
   {% if primary_keys is defined and primary_keys is not none %}
   query: |
     SELECT
