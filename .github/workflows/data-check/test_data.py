@@ -40,7 +40,6 @@ def fetch_data(check, configs):
 
 def test_table_exists(configs):
     result = fetch_data("test_table_exists", configs)
-    assert False
     assert result.failure.values == False
 
 
