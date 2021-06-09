@@ -6,6 +6,7 @@
 # generate tests for different configs
 # -------------------------------------
 
+import json
 from pathlib import Path
 
 import pytest
@@ -15,10 +16,10 @@ from jinja2 import Template
 import bd_credential
 
 # -------------------------------------
-# Get required tables
+# Initialize fixtures
 # -------------------------------------
 # TODO: Split this section
-# and move data checks to the Python API?
+# and move data checks to the Python API
 # -------------------------------------
 
 
@@ -45,13 +46,13 @@ configs = [
 
 
 # -------------------------------------
-# Initialize report file
+# Initialize json report
 # -------------------------------------
 
 
 def pytest_sessionstart(session):
-    with Path("./report.md").open("w") as file:
-        file.write("Data Check Report\n---\n\n")
+    with Path("./report.json").open("w") as file:
+        file.write("[]")
 
 
 # -------------------------------------
@@ -64,7 +65,7 @@ def pytest_generate_tests(metafunc):
 
 
 # -------------------------------------
-# Write a markdown report
+# Write a json report
 # -------------------------------------
 
 
@@ -73,14 +74,35 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     res = outcome.get_result()
 
-    if res.when == "call" and res.failed:
-        with Path("./report.md").open("a") as file:
+    if res.when == "call":
+        with Path("./report.json").open("r+") as file:
             config = item.funcargs["configs"]
             config = config[item.originalname]
+            config["passed"] = False if res.failed else True
 
-            file.write(f"❌ {config['error']}  \n")
+            data = json.load(file)
+            data.append(config)
+            file.seek(0)
+            json.dump(data, file)
+
+
+# -------------------------------------
+# Write a markdown report
+# -------------------------------------
+
+
+def pytest_sessionfinish(session, exitstatus):
+    with Path("./report.json").open("r") as file:
+        data = json.load(file)
+        data = sorted(data, key=lambda x: x["id"])
+
+    with Path("./report.md").open("w") as file:
+        file.write("Data Check Report\n---\n\n")
+        for datum in data:
+            file.write("✔️ " if datum["passed"] else "❌ ")
+            file.write(f"{datum['name']}  \n")
             file.write(f"```sql  \n")
-            file.write(f"{config['query']}")
+            file.write(f"{datum['query']}")
             file.write(f"```  \n\n")
 
 
