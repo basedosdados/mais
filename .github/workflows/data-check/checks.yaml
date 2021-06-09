@@ -1,6 +1,6 @@
 
 test_table_exists:
-  name: Check if {{ table_id }} table exists
+  error: Check if `{{ dataset_id}}/{{ table_id }}` table exists failed
   query: |
     SELECT "{{ table_id }}" NOT IN (
         SELECT `table_name`
@@ -8,7 +8,7 @@ test_table_exists:
     ) AS failure
 
 test_select_all_works:
-  name: Check if select query in {{ table_id }} works
+  error: Check if select query in `{{ dataset_id}}/{{ table_id }}` works failed
   query: |
     SELECT NOT EXISTS (
         SELECT * 
@@ -16,7 +16,7 @@ test_select_all_works:
     ) AS failure
 
 test_table_has_no_null_column:
-  name: Check if columns are null
+  error: Check if `{{ dataset_id}}/{{ table_id }}` columns are null failed
   query: |
     WITH
         n_nulls AS (

@@ -6,5 +6,5 @@ runs:
   steps:
     - run: pip install basedosdados==1.5.2 pyarrow pytest toml
       shell: bash
-    - run: pytest -v ${{ github.action_path }} > ${{ github.workspace }}/out
+    - run: pytest -v ${{ github.action_path }}
       shell: bash

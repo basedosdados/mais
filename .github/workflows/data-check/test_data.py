@@ -1,54 +1,26 @@
-import json
-from pathlib import Path
-
-import basedosdados as bd
-import pandas as pd
-import yaml
-from jinja2 import Template
-
-import bd_credential
-
 # -------------------------------------
-# 1.Executes at Collection Time
-# -------------------------------------
-# Gets jinja templates and fills them
-# with data from table_config.yaml, then
-# generate tests for different configs.
-# -------------------------------------
-
-dataset_table_ids = bd_credential.setup()
-
-checks = Template(
-    Path("/home/runner/work/mais/mais/.github/workflows/data-check/checks.yaml")
-    .open("r", encoding="utf-8")
-    .read()
-)
-
-configs = [
-    yaml.safe_load(
-        checks.render(
-            project_id_staging=dataset_table_ids[table_id]["table_config"][
-                "project_id_prod"
-            ],
-            dataset_id=dataset_table_ids[table_id]["table_config"]["dataset_id"],
-            table_id=table_id,
-        )
-    )
-    for table_id in dataset_table_ids.keys()
-]
-
-# -------------------------------------
-# 2.Executes at Test Time
+# Execute at Test Time
 # -------------------------------------
 # Each test is executed
-# once for each table
+# once for all tables
+# -------------------------------------
+
+import pytest
+import basedosdados as bd
+import pandas as pd
+
+
+# -------------------------------------
+# Fetch data from Big Query
 # -------------------------------------
 
 
 def fetch_data(data_check, configs):
     assert data_check in configs
     query = configs[data_check]["query"]
-    print(query)
+
+    print(f"Check: {data_check}")
+    print(f"Query: \n{query}\n\n")
 
     data = bd.read_sql(
         query=query.replace("\n", " "),
@@ -60,18 +32,10 @@ def fetch_data(data_check, configs):
     return data
 
 
-def pytest_generate_tests(metafunc):
-    idlist = [
-        ".".join(
-            [
-                dataset_table_ids[table_id]["table_config"]["dataset_id"],
-                table_id,
-            ]
-        )
-        for table_id in dataset_table_ids.keys()
-    ]
-
-    metafunc.parametrize("configs", configs, ids=idlist)
+# -------------------------------------
+# Test Suite
+# Please write your tests below
+# -------------------------------------
 
 
 def test_table_exists(configs):

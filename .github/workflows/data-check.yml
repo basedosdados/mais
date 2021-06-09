@@ -37,20 +37,15 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.8.x'
-      - name: Test data
+      - name: Initialize report
+        run: echo "Data Check Report:\n---\n\n" > report.md
+      - name: Test data and fill report
         uses: ./.github/workflows/data-check/
-      - name: Visualize test results
-        if: ${{ always() }}
-        run: cat out
       - name: Get comment body
         if: ${{ always() }}
         id: get-comment-body
         run: |
-          echo "Data Check Report:" > out.md
-          echo '```' >> out.md
-          cat out >> out.md
-          echo '```' >> out.md
-          body=$(cat out.md)
+          body=$(cat report.md)
           body="${body//'%'/'%25'}"
           body="${body//$'\n'/'%0A'}"
           body="${body//$'\r'/'%0D'}" 
