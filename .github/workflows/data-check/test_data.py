@@ -54,5 +54,5 @@ def test_table_has_no_null_column(configs):
 
 def test_primary_key_has_unique_values(configs):
     check = configs["test_primary_key_has_unique_values"]
-    result = fetch_data("test_primary_key_has_unique_values")
+    result = fetch_data("test_primary_key_has_unique_values", configs)
     assert result.to_numpy().all()
