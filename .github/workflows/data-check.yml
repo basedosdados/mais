@@ -48,7 +48,7 @@ jobs:
         if: ${{ always() }}
         id: get-comment-body
         run: |
-          echo -e "\n\n[Action Output](${{ env.GITHUB_WORKFLOW_URL }})"
+          echo -e "\n\n[Action Output](${{ env.GITHUB_WORKFLOW_URL }})" >> report.md
           body=$(cat report.md)
           body="${body//'%'/'%25'}"
           body="${body//$'\n'/'%0A'}"
