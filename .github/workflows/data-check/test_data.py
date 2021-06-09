@@ -14,12 +14,13 @@ import pytest
 # -------------------------------------
 
 
-def fetch_data(data_check, configs):
-    assert data_check in configs
-    query = configs[data_check]["query"]
+def fetch_data(check, configs):
+    assert check in configs
+    assert "query" in configs[check]
+    query = configs[check]["query"]
 
-    print(f"Check: {data_check}")
-    print(f"Query: \n{query}\n\n")
+    print(f"Check: {check}")
+    print(f"Query: \n{query}")
 
     data = bd.read_sql(
         query=query.replace("\n", " "),
@@ -39,7 +40,8 @@ def fetch_data(data_check, configs):
 
 def test_table_exists(configs):
     result = fetch_data("test_table_exists", configs)
-    assert False and result.failure.values == False
+    assert False
+    assert result.failure.values == False
 
 
 def test_select_all_works(configs):
@@ -53,6 +55,7 @@ def test_table_has_no_null_column(configs):
 
 
 def test_primary_key_has_unique_values(configs):
-    check = configs["test_primary_key_has_unique_values"]
-    result = fetch_data("test_primary_key_has_unique_values", configs)
-    assert result.to_numpy().all()
+    name = "test_primary_key_has_unique_values"
+    if name in configs and "query" in configs[name]:
+        result = fetch_data(name, configs)
+        assert result.to_numpy().all()

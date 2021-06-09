@@ -6,6 +6,7 @@
 # generate tests for different configs
 # -------------------------------------
 
+
 import json
 from pathlib import Path
 
@@ -16,41 +17,34 @@ from jinja2 import Template
 import bd_credential
 
 # -------------------------------------
-# Initialize fixtures
+# Initialize fixtures and json report
 # -------------------------------------
 # TODO: Split this section
 # and move data checks to the Python API
 # -------------------------------------
 
 
-dataset_table_ids = bd_credential.setup()
-
-checks = Template(
-    Path("/home/runner/work/mais/mais/.github/workflows/data-check/checks.yaml")
-    .open("r", encoding="utf-8")
-    .read()
-)
-
-configs = [
-    yaml.safe_load(
-        checks.render(
-            project_id_staging=dataset_table_ids[table_id]["table_config"][
-                "project_id_prod"
-            ],
-            dataset_id=dataset_table_ids[table_id]["table_config"]["dataset_id"],
-            table_id=table_id,
-        )
-    )
-    for table_id in dataset_table_ids.keys()
-]
-
-
-# -------------------------------------
-# Initialize json report
-# -------------------------------------
-
-
 def pytest_sessionstart(session):
+    global _configs
+
+    # set filepaths for checks and configs
+    checkpath = "./.github/workflows/data-check/checks.yaml"
+    configpaths = bd_credential.setup()
+
+    # load checks with jinja2 placeholders
+    with Path(checkpath).open("r", encoding="utf-8") as file:
+        checks = Template(file.read())
+
+    # load checks with configs from table_config.yaml
+    _configs = []
+    for cpath in configpaths:
+        with Path(cpath).open("r") as file:
+            config = yaml.safe_load(file)
+            config = checks.render(**config)
+            config = yaml.safe_load(config)
+            _configs.append(config)
+
+    # create empty json report
     with Path("./report.json").open("w") as file:
         file.write("[]")
 
@@ -61,7 +55,7 @@ def pytest_sessionstart(session):
 
 
 def pytest_generate_tests(metafunc):
-    metafunc.parametrize("configs", configs)
+    metafunc.parametrize("configs", _configs)
 
 
 # -------------------------------------
@@ -97,21 +91,21 @@ def pytest_sessionfinish(session, exitstatus):
         data = sorted(data, key=lambda x: x["id"])
         n = [datum["id"].split("/")[-1] for datum in data]
         n = max([int(ni) for ni in n])
-   
+
     with Path("./report.md").open("w") as file:
         file.write("Data Check Report\n---\n\n")
 
         for datum in data:
             if datum["passed"]:
-                file.write(f"✔️ {datum['name']}  \n\n\n")
+                file.write(f"✔️ {datum['name']}  \n\n")
             else:
-                file.write(f"❌ {datum['name']}  \n")
+                file.write(f"❌ {datum['name']}  \n\n")
                 file.write(f"```sql  \n")
                 file.write(f"{datum['query']}")
                 file.write(f"```  \n\n")
-            
+
             if int(datum["id"].split("/")[-1]) == n:
-                file.write("---\n")
+                file.write("---\n\n")
 
 
 # -------------------------------------

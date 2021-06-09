@@ -38,9 +38,11 @@ test_table_has_no_null_column:
 test_primary_key_has_unique_values:
   id: {{ dataset_id }}/{{ table_id }}/3
   name: Check if primary key has unique values
+  {% if primary_keys is defined and primary_keys is not none %}
   query: |
     SELECT
       {% for primary_key in primary_keys %}
       CASE WHEN COUNT(DISTINCT({{ primary_key }})) / COUNT(*) = 1 THEN 'True' ELSE 'False' END {{ primary_key }},
       {% endfor %}
     FROM `{{ project_id_staging }}.{{ dataset_id }}.{{ table_id }}` t
+  {% endif %}

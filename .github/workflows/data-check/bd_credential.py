@@ -83,8 +83,8 @@ def create_config_tree(prod_base64, staging_base64, config_dict):
 def get_table_dataset_id():
     ### load the change files in PR || diff between PR and master
     changes = json.load(Path("/home/runner/work/mais/mais/files.json").open("r"))
-    ### create a dict to save the dataset and source_bucket related to each table_id
-    dataset_table_ids = {}
+    ### create a list to save the dataset and source_bucket related to each table_id
+    dataset_table_ids = []
     ### create a list to save the table folder path, for each table changed in the commit
     table_folders = []
     for change_file in changes:
@@ -102,15 +102,7 @@ def get_table_dataset_id():
     for filepath in table_config_paths:
         ### check if the table_config.yaml exists in the changed folder
         if filepath.is_file():
-            ### load the found table_config.yaml
-            table_config = yaml.load(open(filepath, "r"), Loader=yaml.SafeLoader)
-            ### add the dataset and source_bucket for each table_id
-            dataset_table_ids[table_config["table_id"]] = {
-                "dataset_id": table_config["dataset_id"],
-                "source_bucket_name": table_config["source_bucket_name"],
-                "table_config_path": filepath,
-                "table_config": table_config,
-            }
+            dataset_table_ids.append(filepath)
         else:
             print(
                 "\n###==============================================================================================###",
