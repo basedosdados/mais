@@ -5,3 +5,4 @@ runs:
   steps:
     - name: Run pytest
       run: pytest -v ${{ github.action_path }}
+      shell: bash
