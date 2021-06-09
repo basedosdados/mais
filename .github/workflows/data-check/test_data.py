@@ -39,16 +39,19 @@ def fetch_data(data_check, configs):
 
 def test_table_exists(configs):
     result = fetch_data("test_table_exists", configs)
+    assert False
     assert result.failure.values == False
 
 
 def test_select_all_works(configs):
     result = fetch_data("test_select_all_works", configs)
+    assert False
     assert result.failure.values == False
 
 
 def test_table_has_no_null_column(configs):
     result = fetch_data("test_table_has_no_null_column", configs)
+    assert False
     assert result.empty or result.null_percent.max() < 1
 
 
