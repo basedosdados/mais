@@ -28,16 +28,16 @@ def pytest_sessionstart(session):
     global _configs
 
     # set filepaths for checks and configs
-    checkpath = "./.github/workflows/data-check/checks.yaml"
-    configpaths = bd_credential.setup()
+    check_path = "./.github/workflows/data-check/checks.yaml"
+    config_paths = bd_credential.setup()
 
     # load checks with jinja2 placeholders
-    with Path(checkpath).open("r", encoding="utf-8") as file:
+    with Path(check_path).open("r", encoding="utf-8") as file:
         checks = Template(file.read())
 
     # load checks with configs from table_config.yaml
     _configs = []
-    for cpath in configpaths:
+    for cpath in config_paths:
         with Path(cpath).open("r") as file:
             config = yaml.safe_load(file)
             config = checks.render(**config)
@@ -72,7 +72,7 @@ def pytest_runtest_makereport(item, call):
         with Path("./report.json").open("r+") as file:
             config = item.funcargs["configs"]
             config = config[item.originalname]
-            config["passed"] = False if res.failed else True
+            config["passed"] = not res.failed
 
             data = json.load(file)
             data.append(config)
@@ -90,7 +90,7 @@ def pytest_sessionfinish(session, exitstatus):
         data = json.load(file)
         data = sorted(data, key=lambda x: x["id"])
         n = [datum["id"].split("/")[-1] for datum in data]
-        n = max([int(ni) for ni in n])
+        n = max(int(ni) for ni in n)
 
     with Path("./report.md").open("w") as file:
         file.write("Data Check Report\n---\n\n")
