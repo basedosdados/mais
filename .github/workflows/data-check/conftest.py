@@ -60,7 +60,6 @@ def pytest_runtest_makereport(item, call):
     res = outcome.get_result()
 
     if res.when == "call" and res.failed:
-        mode = "a" if Path("./report.md").exists() else "w"
         with Path("./report.md").open("a") as file:
             config = item.funcargs["configs"]
             config = config[item.originalname]
