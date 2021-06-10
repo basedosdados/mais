@@ -17,9 +17,9 @@ exit_code=$?
 
 # return if the action should continue 
 if [ exit_code = 0 ]; then
-    echo ::set-output name=continue::1
-else
     echo ::set-output name=continue::0
+else
+    echo ::set-output name=continue::1
 fi
 
 # Reference
