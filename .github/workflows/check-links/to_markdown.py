@@ -16,7 +16,7 @@ def to_markdown(jsonpath: str, mdpath: str):
             file.write("\n")
 
 if __name__ == "__main__":
-    to_markdown("lychee/report.json", "lychee/report.md")
+    to_markdown("./lychee/report.json", "./lychee/report.md")
 
 # Reference
 # Lychee Action

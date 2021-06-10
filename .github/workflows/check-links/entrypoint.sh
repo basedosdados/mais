@@ -1,9 +1,8 @@
 #!/bin/bash -l
 set -euxo pipefail
 
-pwd ### DEBUG
-
-echo $@ ### DEBUG
+# initialize report.json
+echo > lychee/report.json
 
 # check links with lychee
 lychee \
@@ -15,8 +14,12 @@ lychee \
 # capture lychee exit code
 exit_code=$?
 
-# return lychee exit code
-echo ::set-output name=exit_code::$exit_code
+# return if the action should continue 
+if [ exit_code = 0 ]; then
+    echo ::set-output name=continue::1
+else
+    echo ::set-output name=continue::0
+fi
 
 # Reference
 # Lychee Action

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  linkChecker:
+  link-checker:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,11 +20,11 @@ jobs:
         uses: ./.github/workflows/check-links
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Parse Report to Markdown
-        if: ${{ failure() }}
-        run: python to_markdown.py
+      - name: Parse report to markdown
+        if: ${{ steps.lychee.outputs.continue == 1 }}
+        run: python ./.github/workflows/check-links/to_markdown.py
       - name: Create Issue From File
-        if: ${{ failure() }}
+        if: ${{ steps.lychee.outputs.continue == 1 }}
         uses: peter-evans/create-issue-from-file@v2
         with:
           title: Broken Links Report
