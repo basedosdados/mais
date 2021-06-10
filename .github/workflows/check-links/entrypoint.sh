@@ -2,7 +2,8 @@
 set -euxo pipefail
 
 # initialize report.json
-echo > lychee/report.json
+mkdir ./lychee
+echo > ./lychee/report.json
 
 # check links with lychee
 lychee \
