@@ -25,12 +25,14 @@ Nível da Observação (i.e. a granularidade da linha)
 - tabela
 - coluna
 - chave
+- cobertura temporal
 
 Colunas identificando linhas unicamente
 -------------------
 - id_tabela
 - coluna
 - chave
+- cobertura_temporal
 
 Cobertura Temporal
 ------------------
@@ -53,7 +55,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
--Consulta básica de arquivos de dicionário disponibilizados por fontes oficiais.
+- Consulta básica de arquivos de dicionário disponibilizados por fontes oficiais.
 
 Frequencia de Atualização
 -------------------------
