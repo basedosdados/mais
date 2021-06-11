@@ -7,9 +7,9 @@ dataset_id: br_rj_rio_de_janeiro_ipp_ips # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-rj-rio-de-janeiro-ipp-ips # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_rj_rio_de_janeiro_ipp_ips # AUTO GENERATED
 
-version: v1.1 # REQUIRED
+version: v1.2 # REQUIRED
 
-last_updated: 2021-06-05 # AUTO GENERATED
+last_updated: 2021-06-11 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -36,7 +36,10 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Ajuste nos nomes das regiões administrativas. Adição da coluna ano. Renomeação das colunas.
+    - Ajuste nos nomes das regiões administrativas
+    - Arredondamento para dois dígitos
+    - Adição da coluna ano
+    - Renomeação das colunas
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -69,7 +72,9 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - distritos
+    - brasil
+    - RJ
+    - Rio de Janeiro
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
@@ -120,13 +125,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nutricao_e_cuidados_medicos_basicos
+        name: nutricao_cuidados_medicos_basicos
         description: Nutrição e cuidados médicos básicos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: agua_e_saneamento
+        name: agua_saneamento
         description: Água e saneamento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -150,25 +155,25 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: acesso_ao_conhecimento_basico
+        name: acesso_conhecimento_basico
         description: Acesso ao conhecimento básico
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: acesso_a_informacao
+        name: acesso_informacao
         description: Acesso à informação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: saude_e_bem_estar
+        name: saude_bem_estar
         description: Saúde e bem-estar
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: qualidade_do_meio_ambiente
+        name: qualidade_meio_ambiente
         description: Qualidade do meio ambiente
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -192,13 +197,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: tolerancia_e_inclusao
+        name: tolerancia_inclusao
         description: Tolerância e inclusão
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: acesso_a_educacao_superior
+        name: acesso_educacao_superior
         description: Acesso á educação superior
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

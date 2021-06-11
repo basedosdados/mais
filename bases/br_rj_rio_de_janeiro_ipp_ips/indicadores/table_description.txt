@@ -38,7 +38,9 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- distritos
+- brasil
+- RJ
+- Rio de Janeiro
 
 Tratamento
 ----------

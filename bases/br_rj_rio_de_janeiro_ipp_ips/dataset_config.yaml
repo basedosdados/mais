@@ -12,7 +12,7 @@ description: | # REQUIRED
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: Data Rio # REQUIRED
+organization: br_rj_rio_de_janeiro_ipp # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
