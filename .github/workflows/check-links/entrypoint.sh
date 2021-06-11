@@ -2,25 +2,21 @@
 set -euxo pipefail
 
 # initialize report.json
-mkdir ./lychee
-echo > ./lychee/report.json
+mkdir -p lychee
+rm -f lychee/report.json
+echo > lychee/report.json
 
 # check links with lychee
+# and capture its status code
 lychee \
 --base-url https://basedosdados.github.io/mais/ \
 --output lychee/report.json \
 --format json \
-*.md **/*.md
+--no-progress \
+*.md **/*.md && continue=0 || continue=1
 
-# capture lychee exit code
-exit_code=$?
-
-# return if the action should continue 
-if [ $exit_code = 0 ]; then
-    echo ::set-output name=continue::0
-else
-    echo ::set-output name=continue::1
-fi
+# return if the action should continue
+echo ::set-output name=continue::$continue
 
 # Reference
 # Lychee Action
