@@ -30,10 +30,7 @@ nav:
   - Colaborar: 
     - Infraestrutura: colab_infrastructure.md
     - Dados: colab_data.md
-    - Manual de estilo:
-      - Bases e tabelas: style_naming_datasets_tables.md
-      - Colunas: style_naming_columns.md
-      - Valores: style_data.md
+    - Manual de estilo: style_data.md
   - Analisar:
       - Início: analysis.md
   - API: 
