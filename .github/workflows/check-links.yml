@@ -21,6 +21,9 @@ jobs:
         uses: ./.github/workflows/check-links
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: DEBUG
+        run: pwd && ls
+        shell: bash
       - name: Parse report to markdown
         if: ${{ steps.lychee.outputs.continue == 1 }}
         run: python ./.github/workflows/check-links/to_markdown.py
