@@ -1,7 +1,7 @@
 
 # Colaborando com infraestrutura na BD+
 
-Você pode contribuir para nossa infraestrutura do várias formas:
+Você pode contribuir para nossa infraestrutura de várias formas:
 
 * Subindo novos conjuntos de dados
 * Melhorando a documentação

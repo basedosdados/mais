@@ -3,7 +3,7 @@
 
 Nessa seção listamos todos os padrões e diretrizes de estilo que usamos na Base dos Dados. Eles nos ajudam a manter alta a qualidade dos dados que publicamos.
 
-As bases devem ser organizadas no BigQuery de maneira consistente, que permita uma busca fácil e intuitiva, e que seja escalável.
+As bases devem ser organizadas no BigQuery de maneira consistente, que permita uma busca fácil e intuitiva e que seja escalável.
 
 As diretrizes definidas para nomenclatura das bases (*datasets*) e tabelas (*tables*) estão descritas abaixo.
 
@@ -26,12 +26,12 @@ Os componentes dos `organization_id` são:
 ??? Tip "Não sabe como nomear a organização?"
     Sugerimos que vá no site da mesma e veja como ela se autodenomina (ex: DETRAN-RJ seria `br-rj-detran`)
 
-Nomear tabelas é algo menos estruturado, e por isso requer bom senso. Mas temos algumas regras:
+Nomear tabelas é algo menos estruturado e, por isso, requer bom senso. Mas temos algumas regras:
 
 - Se houver tabelas para diferentes entidades, incluir a entidade no começo do nome. Exemplo: `municipio_valor`, `uf_valor`.
 - Não incluir a unidade temporal no nome. Exemplo: nomear `municipio`, e não `municipio_ano`.
 - Deixar nomes no singular. Exemplo: `escola`, e não `escolas`.
-- Nomear de `microdados` as tabelas mais desagregadas. Em geral essas tem dados a nível de pessoa, ou transação.
+- Nomear de `microdados` as tabelas mais desagregadas. Em geral essas tem dados a nível de pessoa ou transação.
 
 ##### Exemplos de dataset_id.table_id
 
@@ -50,7 +50,7 @@ Nomes de variáveis devem respeitar algumas regras:
 
 - Usar ao máximo nomes já presentes no repositório. Exemplos: `ano`, `mes`, `id_municipio`, `sigla_uf`, `idade`, `cargo`, `resultado`, `votos`, `receita`, `despesa`, `preco`, etc.
 - Respeitar padrões das tabelas de diretórios.
-- Ser o mais intuitivo, claro, e extenso possível.
+- Ser o mais intuitivo, claro e extenso possível.
 - Ter todas letras minúsculas (inclusive siglas), sem acentos, conectados por `_`.
 - Não incluir conectores como `de`, `da`, `dos`, `e`, `a`, `em`, etc.
 - Só ter o prefixo `id_` quando a variável representar chaves primárias de entidades (que eventualmente teriam uma tabela de diretório).
@@ -104,7 +104,7 @@ A regra é manter variáveis com suas unidades de medida originais, com a exceç
 
 Catalogamos unidades de medida em formato padrão na tabela de arquitetura. Exemplos: `m`, `km/h`, `BRL`.
 
-#### Quais variáveis manter, quais adicionar, e quais remover
+#### Quais variáveis manter, quais adicionar e quais remover
 
 Mantemos nossas tabelas parcialmente [normalizadas](https://www.guru99.com/database-normalization.html), e temos regras para quais variáveis incluirmos em produção. Elas são:
 

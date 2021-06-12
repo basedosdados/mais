@@ -3,9 +3,11 @@
 
 Nosso objetivo na Base dos Dados Mais (BD+) é criar um repositório de dados **universal** e de **alta qualidade**.
 
-* **Universal**: Ser universal significa, em princípio, incluir todas as bases de dados do Brasil e do mundo. Pouco ambicioso né :-). Por isso, criamos uma infraestrutura para facilitar a subida de dados por qualquer pessoa ou instituição (do nosso time de dados ou colaboradores externos).
+* **Universal**: Isso significa, em princípio, incluir todas as bases de dados do Brasil e do mundo. Pouco ambicioso né :-).
 
-* **Alta qualidade**: Ter alta qualidade significa manter todos nossos dados estruturados, limpos, bem documentados, consistentes entre si, e atualizados. Isso já é um desafio em projetos pequenos, e é ainda mais _em escala_. Por isso, desenvolvemos e seguimos uma série de padrões e procedimentos de controle de qualidade.
+* **Alta qualidade**: Ter alta qualidade significa manter todos nossos dados estruturados, limpos, bem documentados, consistentes entre si e atualizados.
+
+Isso já é um desafio em projetos pequenos, e é ainda mais _em escala_. Por isso, desenvolvemos e seguimos uma série de padrões e procedimentos de controle de qualidade, e criamos uma infraestrutura para facilitar a subida de dados por qualquer pessoa ou instituição (do nosso time de dados ou colaboradores externos).
 
 # Colaborando com Dados
 
@@ -21,23 +23,22 @@ Ao longo da explicação, vamos sempre seguir um exemplo já pronto com dados da
 2. [Baixar nossa pasta _template_ para dados](#2-baixar-nossa-pasta-template-para-dados).
 3. [Preencher as tabelas de arquitetura](#3-preencher-as-tabelas-de-arquitetura).
 4. [Escrever código de captura e limpeza de dados](#4-escrever-codigo-de-captura-e-limpeza-de-dados).
-5. [Se necessário, organizar arquivos auxiliares](#5-se-necessario-organizar-arquivos-auxiliares).
-6. [Se necessário, criar tabela dicionário](#6-se-necessario-criar-tabela-dicionario).
-7. [Subir arquiteturas, dados, e arquivos auxiliares no Google Cloud](#7-subir-arquiteturas-dados-e-arquivos-auxiliares-no-google-cloud).
+5. [Organizar arquivos auxiliares, se necessário](#5-organizar-arquivos-auxiliares-se-necessario).
+6. [Criar tabela dicionário, se necessário](#6-criar-tabela-dicionario-se-necessario).
+7. [Subir arquiteturas, dados e arquivos auxiliares no Google Cloud](#7-subir-arquiteturas-dados-e-arquivos-auxiliares-no-google-cloud).
 8. [Enviar tudo para revisão](#8-enviar-tudo-para-revisao).
 
 ## 1. Informe seu interesse para a gente
 
-Mantemos metadados de bases que ainda não estão na BD+ em nossa
-[tabela de prioridade de bases](https://docs.google.com/spreadsheets/d/1jnmmG4V6Ugh_-lhVSMIVu_EaL05y1dX9Y0YW8G8e_Wo/edit?usp=sharing).
-Para subir uma base de seu interesse na BD+, adicione os seus metadados de
-acordo com as colunas da tabela.
+Mantemos metadados de bases que ainda não estão na BD+ em nossa [tabela de prioridade de bases](https://docs.google.com/spreadsheets/d/1jnmmG4V6Ugh_-lhVSMIVu_EaL05y1dX9Y0YW8G8e_Wo/edit?usp=sharing). Para subir uma base de seu interesse na BD+, adicione os seus metadados de acordo com as colunas da tabela.
 
 - **Inclua uma linha por tabela do conjunto de dados.**
 - **Preencha os campos cuidadosamente**. Além dos dados gerais sobre a tabela, adicione as classificações de `Facilidade` e `Importância` e o campo de `Prioridade` será gerado automaticamente.
 - Por fim, **crie um issue no Github com o [template "Novos dados"](https://github.com/basedosdados/mais/issues/new?assignees=rdahis&labels=data&template=br_novos_dados.md&title=%5Bdados%5D+%3Cadd+nome%2C+ex%3A+Censo+Escolar+INEP%3E)**
 
 !!! Info "Caso sua base já esteja listada, basta marcar seu usuário do Github na coluna `Pessoa responsável`."
+
+!!! Info "Fique à vontade para conversar com a gente e tirar dúvidas direto no nosso servidor no [Discord](https://discord.gg/2GAuw7d8zd)."
 
 ## 2. Baixar nossa pasta _template_ para dados
 
@@ -78,9 +79,9 @@ Perguntas que uma arquitetura deve responder:
 - *Qual é nível da observação de cada tabela?* O "nível da observação" é
   a menor unidade a que se refere cada linha na tabela (ex: municipio-ano, candidato,
   estabelecimento-cnae).
-- Será gerada alguma tabela derivada com agregações em cima dos dados originais?
+- *Será gerada alguma tabela derivada com agregações em cima dos dados originais?*
 
-No exemplo da RAIS, [aqui](https://drive.google.com/drive/folders/1OtsucP_KhiUEJI6F6k_cagvXfwZCFZF2?usp=sharing) estão as tabelas de arquitetura já preenchidas. Sempre seguindo nosso [manual de estilo](/mais/style_data), nós renomeamos, definimos o tipo, preenchemos descrições, indicamos se há dicionário ou diretório, preenchemos campos (e.g. cobertura temporal e unidade de medida), e fizemos a compatibilização entre anos para todas as variáveis (colunas).
+No exemplo da RAIS, [aqui](https://drive.google.com/drive/folders/1OtsucP_KhiUEJI6F6k_cagvXfwZCFZF2?usp=sharing) estão as tabelas de arquitetura já preenchidas. Sempre seguindo nosso [manual de estilo](/mais/style_data), nós renomeamos, definimos o tipo, preenchemos descrições, indicamos se há dicionário ou diretório, preenchemos campos (e.g. cobertura temporal e unidade de medida) e fizemos a compatibilização entre anos para todas as variáveis (colunas).
 
 A compatibilização entre anos, caso necessária, é feita criando novas colunas à direita chamadas `nome_original_YYYY`, em ordem temporal descendente (2021, 2020, 2019, ...). Nessas colunas incluímos _todas_ as variáveis de cada ano. Para as que forem eventualmente excluídas da versão em produção, deixamos seu nome como `(deletado)` e não preenchemos nenhum metadado.
 
@@ -110,7 +111,7 @@ Tudo nesse passo deve seguir nosso [manual de estilo](/mais/style_data) e as [me
 
 É comum bases de dados serem distribuídas com arquivos auxiliares. Esses podem incluir notas técnicas, descrições de coleta e amostragem, etc. Para ajudar usuários da Base dos Dados terem mais contexto e entenderem melhor os dados, organize todos esses arquivos auxiliares em `/extra/auxiliary_files`.
 
-Fique a vontade para estruturar sub-pastas como quiser lá dentro. O que importa é que fique claro o que são esses arquivos.
+Fique à vontade para estruturar sub-pastas como quiser lá dentro. O que importa é que fique claro o que são esses arquivos.
 
 ## 6. Se necessário, criar tabela dicionário
 
@@ -119,7 +120,7 @@ Fique a vontade para estruturar sub-pastas como quiser lá dentro. O que importa
 Descrevemos nossas várias diretrizes para dicionários no nosso [manual de estilo](/mais/style_data). Por exemplo:
 
 - Cada base inclui somente um dicionário (que cobre uma ou mais tabelas).
-- Para cada tabela, coluna, e cobertura temporal, cada chave mapeia unicamente um valor.
+- Para cada tabela, coluna e cobertura temporal, cada chave mapeia unicamente um valor.
 - Chaves não podem ter valores nulos.
 - Dicionários devem cobrir todas as chaves disponíveis nas tabelas originais.
 - Chaves não possuem zeros à esquerda. Exemplo: `01` deveria ser `1`.
@@ -127,7 +128,7 @@ Descrevemos nossas várias diretrizes para dicionários no nosso [manual de esti
 
 No exemplo da RAIS nós criamos um dicionário completo [aqui](https://docs.google.com/spreadsheets/d/12Wwp48ZJVux26rCotx43lzdWmVL54JinsNnLIV3jnyM/edit?usp=sharing).
 
-## 7. Subir arquiteturas, dados, e arquivos auxiliares no Google Cloud
+## 7. Subir arquiteturas, dados e arquivos auxiliares no Google Cloud
 
 Tudo pronto! Agora só falta subir as coisas para o Google Cloud e depois enviar para revisão.
 
@@ -148,7 +149,7 @@ Para criar um projeto no Google Cloud basta ter um email cadastrado no Google. S
 - Clique em `Create Project/Criar Projeto` - escolha um nome bacana para o seu projeto, ele terá também um `Project ID` que será utilizado para configuração local.
 - Depois de criado o projeto, vá até a funcionalidade de [Storage](https://console.cloud.google.com/storage) e crie uma pasta, seu _bucket_, para você subir os dados.
 
-#### Configure o CLI localmente, clone nosso repositório, e abra uma nova _branch_
+#### Configure o CLI localmente, clone nosso repositório e abra uma nova _branch_
 
 No seu terminal:
 
