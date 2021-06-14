@@ -7,7 +7,7 @@ As bases devem ser organizadas no BigQuery de maneira consistente, que permita u
 
 As diretrizes definidas para nomenclatura das bases (*datasets*) e tabelas (*tables*) estão descritas abaixo.
 
-#### Nomeação de bases e tabelas
+### Nomeação de bases e tabelas
 
 Nomeamos bases no formato <organization_id\>_<descrição\>, onde `organization_id` segue o padrão abaixo
 
@@ -33,7 +33,7 @@ Nomear tabelas é algo menos estruturado e, por isso, requer bom senso. Mas temo
 - Deixar nomes no singular. Exemplo: `escola`, e não `escolas`.
 - Nomear de `microdados` as tabelas mais desagregadas. Em geral essas tem dados a nível de pessoa ou transação.
 
-##### Exemplos de dataset_id.table_id
+#### Exemplos de dataset_id.table_id
 
 |           |                                           |                                                     |
 |-----------|-------------------------------------------|-----------------------------------------------------|
@@ -44,7 +44,7 @@ Nomear tabelas é algo menos estruturado e, por isso, requer bom senso. Mas temo
 | Estadual  | `br_sp_see_docentes.carga_horaria`        | Carga horária anonimizado de docentes ativos da rede estadual de ensino de SP. |
 | Municipal | `br_rj_riodejaneiro_cmrj_legislativo.votacoes` | Dados de votação da Câmara Municipal do Rio de Janeiro (RJ). |
 
-#### Nomeação de variáveis
+### Nomeação de variáveis
 
 Nomes de variáveis devem respeitar algumas regras:
 
@@ -72,14 +72,14 @@ Nomes de variáveis devem respeitar algumas regras:
 - Lista de **sufixos comuns**
     - `_pc` (per capita)
 
-#### Ordenamento de variáveis
+### Ordenamento de variáveis
 
 A ordem de variáveis em tabelas é padronizada para manter uma consistência no repositório. Nossas regras são:
 
 - Chaves primárias à esquerda, em ordem descendente de abrangência. Exemplo de ordem: `ano`, `sigla_uf`, `id_municipio`, `id_escola`, `nota_ideb`.    
 - Agrupar e ordenar variáveis por importância ou temas.
 
-#### Tipos de variáveis
+### Tipos de variáveis
 
 Nós utilizamos algumas das opções de [tipos do BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types): `STRING`, `INT64`, `FLOAT64`, `DATE`, `TIME`, `GEOGRAPHY`.
 
@@ -98,13 +98,13 @@ Quando escolher:
 - `GEOGRAPHY`:
     - Variáveis de geografia.
 
-#### Unidades de medida
+### Unidades de medida
 
 A regra é manter variáveis com suas unidades de medida originais, com a exceção de variáveis financeiras onde convertermos moedas antigas para as atuais (e.g. Cruzeiro para Real).
 
 Catalogamos unidades de medida em formato padrão na tabela de arquitetura. Exemplos: `m`, `km/h`, `BRL`.
 
-#### Quais variáveis manter, quais adicionar e quais remover
+### Quais variáveis manter, quais adicionar e quais remover
 
 Mantemos nossas tabelas parcialmente [normalizadas](https://www.guru99.com/database-normalization.html), e temos regras para quais variáveis incluirmos em produção. Elas são:
 
@@ -113,29 +113,31 @@ Mantemos nossas tabelas parcialmente [normalizadas](https://www.guru99.com/datab
 - Adicionar chaves primárias principais para cada entidade já existente. Exemplo: adicionar `id_municipio` a tabelas que só incluem `id_municipio_tse`.
 - Manter todas as chaves primárias que já vem com a tabela, mas (1) adicionar chaves relevantes (e.g. `sigla_uf`, `id_municipio`) e (2) retirar chaves irrelevantes (e.g. `regiao`).
 
-#### Limpando STRINGs
+### Limpando STRINGs
 
 - Variáveis categóricas: inicial maiúscula e resto minúsculo, com acentos.
 - STRINGs não-estruturadas: manter igual aos dados originais.
 
-#### Formato de tabelas
+### Formato de tabelas
 
 Tabelas devem, na medida do possível, estar no formato `long`, ao invés de `wide`.
 
-#### Número de bases por _pull request_
+### Número de bases por _pull request_
 
 Pull requests no Github devem incluir no máximo uma base. Ou seja, podem envolver uma ou mais tabela intra-base.
 
-#### Dicionários
+### Dicionários
 
 - Cada base inclui somente um dicionário (que cobre uma ou mais tabelas).
 - Para cada tabela, coluna, e cobertura temporal, cada chave mapeia unicamente um valor.
 - Chaves não podem ter valores nulos.
 - Dicionários devem cobrir todas as chaves disponíveis nas tabelas originais.
-- Chaves não possuem zeros à esquerda. Exemplo: `01` deveria ser `1`.
+- Chaves só podem possuir zeros à esquerda quando o número de dígitos da variável tiver significado. Quando a variável for `enum` padrão, nós excluimos os zeros à esquerda.
+    - Exemplo: mantemos o zero à esquerda da variável `br_bd_diretorios_brasil.cbo_2002:cbo_2002`, que tem seis dígitos, pois o primeiro dígito `0` significa a categoria ser do `grande grupo = Membros das forças armadas, policiais e bombeiros militares`.
+    - Para outros casos, como por exemplo `br_inep_censo_escolar.turma:etapa_ensino`, nós excluimos os zeros à esquerda. Ou seja, mudamos `01` para `1`.
 - Valores são padronizados: sem espaços extras, inicial maiúscula e resto minúsculo, etc.
 
-#### Formatos de valores
+### Formatos de valores
 
 - Decimal: formato americano, i.e. sempre `.` (ponto) ao invés de `,` (vírgula).
 - Data: `YYYY-MM-DD`
@@ -144,7 +146,7 @@ Pull requests no Github devem incluir no máximo uma base. Ou seja, podem envolv
 - Valor nulo: `""` (csv), `NULL` (Python), `NA` (R), `.` ou `""` (Stata)
 - Porcentagem: entre 0-100
 
-#### Unidades de medida
+### Unidades de medida
 
 Variáveis devem ter sempre unidades de medida com base 1. Ou seja, ter `BRL` ao invés de `1000 BRL`, ou `pessoa` ao invés de `1000 pessoas`.
 
