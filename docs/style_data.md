@@ -1,23 +1,20 @@
 
-# Manual de estilo e diretrizes
+# Manual de estilo e diretrizes de dados
 
-Nessa seção listamos todos os padrões e diretrizes de estilo que usamos na Base dos Dados. Eles nos ajudam a manter os dados e metadados que publicamos com qualidade alta.
+Nessa seção listamos todos os padrões do nosso manual de estilo e diretrizes de dados que usamos na Base dos Dados. Eles nos ajudam a manter os dados e metadados que publicamos com qualidade alta.
 
-As diretrizes definidas para nomenclatura das bases (*datasets*) e tabelas (*tables*) estão descritas abaixo.
-
-Resumo:
+**Resumo**:
 - [Nomeação de bases e tabelas](#nomeacao-de-bases-e-tabelas)
+- [Formatos de tabelas](#formatos-de-tabelas)
 - [Nomeação de variáveis](#nomeacao-de-variaveis)
 - [Ordenamento de variáveis](#ordenamento-de-variaveis)
 - [Tipos de variáveis](#tipos-de-variaveis)
 - [Unidades de medida](#unidades-de-medida)
 - [Quais variáveis manter, quais adicionar e quais remover](#quais-variaveis-manter-quais-adicionar-e-quais-remover)
 - [Limpando STRINGs](#limpando-strings)
-- [Formatos de tabelas](#formatos-de-tabelas)
 - [Número de bases por _pull request_](#numero-de-bases-por-pull-request)
 - [Dicionários](#dicionarios)
 - [Formatos de valores](#formatos-de-valores)
-- [Unidades de medida](#unidades-de-medida)
 
 ---
 
@@ -61,6 +58,10 @@ Nomear tabelas é algo menos estruturado e, por isso, requer bom senso. Mas temo
 | Federal   | `br_ibge_pnadc.microdados`                | Microdados da Pesquisa Nacional por Amostra de Domicílios Contínua (PNAD-C) produzidos pelo IBGE. |
 | Estadual  | `br_sp_see_docentes.carga_horaria`        | Carga horária anonimizado de docentes ativos da rede estadual de ensino de SP. |
 | Municipal | `br_rj_riodejaneiro_cmrj_legislativo.votacoes` | Dados de votação da Câmara Municipal do Rio de Janeiro (RJ). |
+
+### Formato de tabelas
+
+Tabelas devem, na medida do possível, estar no formato `long`, ao invés de `wide`.
 
 ### Nomeação de variáveis
 
@@ -111,6 +112,8 @@ A regra é manter variáveis com suas unidades de medida originais, com a exceç
 
 Catalogamos unidades de medida em formato padrão na tabela de arquitetura. Exemplos: `m`, `km/h`, `BRL`.
 
+Variáveis devem ter sempre unidades de medida com base 1. Ou seja, ter `BRL` ao invés de `1000 BRL`, ou `pessoa` ao invés de `1000 pessoas`. Essa informação, como outros metadados de colunas, são registradas na tabela de arquitetura da tabela.
+
 ### Quais variáveis manter, quais adicionar e quais remover
 
 Mantemos nossas tabelas parcialmente [normalizadas](https://www.guru99.com/database-normalization.html), e temos regras para quais variáveis incluirmos em produção. Elas são:
@@ -124,10 +127,6 @@ Mantemos nossas tabelas parcialmente [normalizadas](https://www.guru99.com/datab
 
 - Variáveis categóricas: inicial maiúscula e resto minúsculo, com acentos.
 - STRINGs não-estruturadas: manter igual aos dados originais.
-
-### Formato de tabelas
-
-Tabelas devem, na medida do possível, estar no formato `long`, ao invés de `wide`.
 
 ### Número de bases por _pull request_
 
@@ -152,10 +151,6 @@ Pull requests no Github devem incluir no máximo uma base. Ou seja, podem envolv
 - Datetime ([ISO-8601](https://en.wikipedia.org/wiki/ISO_8601)): `YYYY-MM-DDTHH:MM:SS.sssZ`
 - Valor nulo: `""` (csv), `NULL` (Python), `NA` (R), `.` ou `""` (Stata)
 - Porcentagem: entre 0-100
-
-### Unidades de medida
-
-Variáveis devem ter sempre unidades de medida com base 1. Ou seja, ter `BRL` ao invés de `1000 BRL`, ou `pessoa` ao invés de `1000 pessoas`. Essa informação, como outros metadados de colunas, são registradas na tabela de arquitetura da tabela.
 
 ## **Pensou em melhorias para os padrões definidos?**
 
