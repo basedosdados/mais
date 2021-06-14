@@ -4,16 +4,16 @@
 Nessa seção listamos todos os padrões do nosso manual de estilo e diretrizes de dados que usamos na Base dos Dados. Eles nos ajudam a manter os dados e metadados que publicamos com qualidade alta.
 
 **Resumo**:
-- [Nomeação de bases e tabelas](#nomeacao-de-bases-e-tabelas)
+- [Nomeação de bases e tabelas](#nomeação-de-bases-e-tabelas)
 - [Formatos de tabelas](#formatos-de-tabelas)
-- [Nomeação de variáveis](#nomeacao-de-variaveis)
-- [Ordenamento de variáveis](#ordenamento-de-variaveis)
-- [Tipos de variáveis](#tipos-de-variaveis)
+- [Nomeação de variáveis](#nomeação-de-variáveis)
+- [Ordenamento de variáveis](#ordenamento-de-variáveis)
+- [Tipos de variáveis](#tipos-de-variáveis)
 - [Unidades de medida](#unidades-de-medida)
-- [Quais variáveis manter, quais adicionar e quais remover](#quais-variaveis-manter-quais-adicionar-e-quais-remover)
+- [Quais variáveis manter, quais adicionar e quais remover](#quais-variáveis-manter-quais-adicionar-e-quais-remover)
 - [Limpando STRINGs](#limpando-strings)
-- [Número de bases por _pull request_](#numero-de-bases-por-pull-request)
-- [Dicionários](#dicionarios)
+- [Número de bases por _pull request_](#número-de-bases-por-pull-request)
+- [Dicionários](#dicionários)
 - [Formatos de valores](#formatos-de-valores)
 
 ---
@@ -59,7 +59,7 @@ Nomear tabelas é algo menos estruturado e, por isso, requer bom senso. Mas temo
 | Estadual  | `br_sp_see_docentes.carga_horaria`        | Carga horária anonimizado de docentes ativos da rede estadual de ensino de SP. |
 | Municipal | `br_rj_riodejaneiro_cmrj_legislativo.votacoes` | Dados de votação da Câmara Municipal do Rio de Janeiro (RJ). |
 
-### Formato de tabelas
+### Formatos de tabelas
 
 Tabelas devem, na medida do possível, estar no formato `long`, ao invés de `wide`.
 
