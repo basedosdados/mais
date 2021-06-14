@@ -1,13 +1,29 @@
 
 # Manual de estilo e diretrizes
 
-Nessa seção listamos todos os padrões e diretrizes de estilo que usamos na Base dos Dados. Eles nos ajudam a manter alta a qualidade dos dados que publicamos.
-
-As bases devem ser organizadas no BigQuery de maneira consistente, que permita uma busca fácil e intuitiva e que seja escalável.
+Nessa seção listamos todos os padrões e diretrizes de estilo que usamos na Base dos Dados. Eles nos ajudam a manter os dados e metadados que publicamos com qualidade alta.
 
 As diretrizes definidas para nomenclatura das bases (*datasets*) e tabelas (*tables*) estão descritas abaixo.
 
+Resumo:
+- [Nomeação de bases e tabelas](#nomeacao-de-bases-e-tabelas)
+- [Nomeação de variáveis](#nomeacao-de-variaveis)
+- [Ordenamento de variáveis](#ordenamento-de-variaveis)
+- [Tipos de variáveis](#tipos-de-variaveis)
+- [Unidades de medida](#unidades-de-medida)
+- [Quais variáveis manter, quais adicionar e quais remover](#quais-variaveis-manter-quais-adicionar-e-quais-remover)
+- [Limpando STRINGs](#limpando-strings)
+- [Formatos de tabelas](#formatos-de-tabelas)
+- [Número de bases por _pull request_](#numero-de-bases-por-pull-request)
+- [Dicionários](#dicionarios)
+- [Formatos de valores](#formatos-de-valores)
+- [Unidades de medida](#unidades-de-medida)
+
+---
+
 ### Nomeação de bases e tabelas
+
+#### Bases
 
 Nomeamos bases no formato <organization_id\>_<descrição\>, onde `organization_id` segue o padrão abaixo
 
@@ -26,6 +42,8 @@ Os componentes dos `organization_id` são:
 ??? Tip "Não sabe como nomear a organização?"
     Sugerimos que vá no site da mesma e veja como ela se autodenomina (ex: DETRAN-RJ seria `br-rj-detran`)
 
+#### Tabelas
+
 Nomear tabelas é algo menos estruturado e, por isso, requer bom senso. Mas temos algumas regras:
 
 - Se houver tabelas para diferentes entidades, incluir a entidade no começo do nome. Exemplo: `municipio_valor`, `uf_valor`.
@@ -33,7 +51,7 @@ Nomear tabelas é algo menos estruturado e, por isso, requer bom senso. Mas temo
 - Deixar nomes no singular. Exemplo: `escola`, e não `escolas`.
 - Nomear de `microdados` as tabelas mais desagregadas. Em geral essas tem dados a nível de pessoa ou transação.
 
-#### Exemplos de dataset_id.table_id
+#### Exemplos de `dataset_id.table_id`
 
 |           |                                           |                                                     |
 |-----------|-------------------------------------------|-----------------------------------------------------|
@@ -57,18 +75,7 @@ Nomes de variáveis devem respeitar algumas regras:
     - Exemplos que tem: `id_municipio`, `id_uf`, `id_escola`, `id_pessoa`.
     - Exemplos que não tem: `rede`, `localizacao`.
 - Lista de **prefixos comuns**
-    - `nome_`
-    - `data_`
-    - `numero_`
-    - `quantidade_`
-    - `prop_`: variáveis de porcentagem 0-100%
-    - `taxa_`
-    - `razao_`
-    - `indice_`
-    - `indicador_`
-    - `tipo_`
-    - `sigla_`
-    - `sequencial_`
+    - `nome_`, `data_`, `numero_`, `quantidade_`, `prop_` (variáveis de porcentagem 0-100%), `taxa_`, `razao_`,  `indice_`, `indicador_`, `tipo_`, `sigla_`, `sequencial_`.
 - Lista de **sufixos comuns**
     - `_pc` (per capita)
 
@@ -133,7 +140,7 @@ Pull requests no Github devem incluir no máximo uma base. Ou seja, podem envolv
 - Chaves não podem ter valores nulos.
 - Dicionários devem cobrir todas as chaves disponíveis nas tabelas originais.
 - Chaves só podem possuir zeros à esquerda quando o número de dígitos da variável tiver significado. Quando a variável for `enum` padrão, nós excluimos os zeros à esquerda.
-    - Exemplo: mantemos o zero à esquerda da variável `br_bd_diretorios_brasil.cbo_2002:cbo_2002`, que tem seis dígitos, pois o primeiro dígito `0` significa a categoria ser do `grande grupo = Membros das forças armadas, policiais e bombeiros militares`.
+    - Exemplo: mantemos o zero à esquerda da variável `br_bd_diretorios_brasil.cbo_2002:cbo_2002`, que tem seis dígitos, pois o primeiro dígito `0` significa a categoria ser do `grande grupo = "Membros das forças armadas, policiais e bombeiros militares"`.
     - Para outros casos, como por exemplo `br_inep_censo_escolar.turma:etapa_ensino`, nós excluimos os zeros à esquerda. Ou seja, mudamos `01` para `1`.
 - Valores são padronizados: sem espaços extras, inicial maiúscula e resto minúsculo, etc.
 
@@ -142,14 +149,14 @@ Pull requests no Github devem incluir no máximo uma base. Ou seja, podem envolv
 - Decimal: formato americano, i.e. sempre `.` (ponto) ao invés de `,` (vírgula).
 - Data: `YYYY-MM-DD`
 - Horário (24h): `HH:MM:SS`
-- Datetime ([ISO-8601](https://en.wikipedia.org/wiki/ISO_8601)): YYYY-MM-DDTHH:MM:SS.sssZ
+- Datetime ([ISO-8601](https://en.wikipedia.org/wiki/ISO_8601)): `YYYY-MM-DDTHH:MM:SS.sssZ`
 - Valor nulo: `""` (csv), `NULL` (Python), `NA` (R), `.` ou `""` (Stata)
 - Porcentagem: entre 0-100
 
 ### Unidades de medida
 
-Variáveis devem ter sempre unidades de medida com base 1. Ou seja, ter `BRL` ao invés de `1000 BRL`, ou `pessoa` ao invés de `1000 pessoas`.
+Variáveis devem ter sempre unidades de medida com base 1. Ou seja, ter `BRL` ao invés de `1000 BRL`, ou `pessoa` ao invés de `1000 pessoas`. Essa informação, como outros metadados de colunas, são registradas na tabela de arquitetura da tabela.
 
 ## **Pensou em melhorias para os padrões definidos?**
 
-Abra um [issue no nosso Github](https://github.com/basedosdados/mais/labels/docs) ou mande uma mensagem para conversarmos :)
+Abra um [issue no nosso Github](https://github.com/basedosdados/mais/labels/docs) ou mande uma mensagem no [Discord](https://discord.gg/2GAuw7d8zd) para conversarmos :)
