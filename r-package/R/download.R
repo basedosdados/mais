@@ -3,9 +3,11 @@
 #' Write the results of a query locally to a comma-separated file.
 #'
 #' @param query a string containing a valid SQL query.
+#' @param table defaults to `NULL`. If a table name is provided then it'll be concatenated with "basedosdados." and the whole table will be returned.
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
 #' @param page_size `bigrquery` internal, how many rows per page should there be.
 #' @param path String with the output file's name. If running an R Project relative location can be provided. Passed to `readr::write_csv`'s `file` argument.
+#' @param .na how should missing values be written in the resulting file? Value passed to `na` argument of `readr::write_csv`. Defaults to a whitespace.
 #'
 #' @return Invisibly returns the query's output in a tibble. Intended to be used for side-effects. If you simply want to load a query's result in memory, use `read_sql`.
 #'
@@ -18,14 +20,10 @@
 #'
 #' dir <- tempdir()
 #'
-#' query <- "SELECT
-#' pib.id_municipio,
-#' pop.ano,
-#' pib.PIB / pop.populacao * 1000 as pib_per_capita
-#' FROM `basedosdados.br_ibge_pib.municipios` as pib
-#' JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-#' ON pib.id_municipio = pop.id_municipio
-#' LIMIT 5 "
+#' query <- "SELECT *
+#' FROM basedosdados.br_tse_eleicoes.bens_candidato
+#' WHERE ano = 2020
+#' AND sigla_uf = \'TO\'"
 #'
 #' data <- download(query, file.path(dir, "pib_per_capita.csv"))
 #' }
@@ -43,10 +41,12 @@
 
 
 download <- function(
-  query,
+  query = NULL,
+  table = NULL,
   path,
   billing_project_id = get_billing_id(),
-  page_size = 1000) {
+  page_size = 100000,
+  .na = " ") {
 
   if(!stringr::str_detect(path, ".csv") | !fs::is_file(path)) {
 
@@ -66,13 +66,34 @@ download <- function(
 
   }
 
+  if(rlang::is_null(table) & rlang::is_null(query)) { # none was supplied
+
+    rlang::abort("No value was passed to `table` and `query`.")
+
+  } else if (!rlang::is_null(table) == !rlang::is_null(query)) { # both were supplied
+
+    rlang::abort("Both `table` and `query` arguments were supplied values. Choose one.")
+
+  }
+
+  if(!rlang::is_null(table) & rlang::is_null(query)) {
+
+    query <- glue::glue("SELECT * FROM basedosdados.{table}")
+
+    msg <- glue::glue("`{table}` was passed to argument `table`. The following query will be executed: {query}")
+    rlang::inform(msg)
+
+  }
+
   bigrquery::bq_project_query(
     billing_project_id,
     query = query) %>%
     bigrquery::bq_table_download(
       page_size = page_size,
-      bigint = "integer") %>%
-    readr::write_csv(file = path)
+      bigint = "integer64") %>%
+    readr::write_csv(
+      file = path,
+      na = .na)
 
   invisible(path)
 
@@ -81,7 +102,10 @@ download <- function(
 
 #' Query our datalake and get results in a tibble
 #'
+#' `read_sql` is given either a fully-written SQL query through the `query` argument or a valid table name through the `table` argument.
+#'
 #' @param query a string containing a valid SQL query.
+#' @param table defaults to `NULL`. If a table name is provided then it'll be concatenated with "basedosdados." and the whole table will be returned.
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
 #' @param page_size `bigrquery` internal, how many rows per page should there be. Defaults to 10000, consider increasing if running into performance issues or big queries.
 #'
@@ -104,6 +128,11 @@ download <- function(
 #'
 #' data <- read_sql(query)
 #'
+#' # or use a table name directly
+#'
+#' data <- read_sql(table = "br_ibge_pib.municipios")
+#' data <- read_sql(table = "br_ibge_populacao.municipios")
+#'
 #' # in case you want to write your data on disk as a .xlsx, .csv or .Rds file.
 #'
 #' library(writexl)
@@ -125,9 +154,10 @@ download <- function(
 
 
 read_sql <- function(
-  query,
+  query = NULL,
+  table = NULL,
   billing_project_id = get_billing_id(),
-  page_size = 10000) {
+  page_size = 100000) {
 
   if(billing_project_id == FALSE) {
 
@@ -135,9 +165,28 @@ read_sql <- function(
 
   }
 
-  if(!rlang::is_character(query)) {
+  if(!rlang::is_character(query) & !rlang::is_null(query)) {
 
-    rlang::abort("`query` argument must contain valid SQL text")
+    rlang::abort("`query` argument must contain valid SQL text.")
+
+  }
+
+  if(rlang::is_null(table) & rlang::is_null(query)) { # none was supplied
+
+    rlang::abort("No value was passed to `table` and `query`.")
+
+    } else if (!rlang::is_null(table) == !rlang::is_null(query)) { # both were supplied
+
+    rlang::abort("Both `table` and `query` arguments were supplied values. Choose one.")
+
+  }
+
+  if(!rlang::is_null(table) & rlang::is_null(query)) {
+
+    query <- glue::glue("SELECT * FROM basedosdados.{table}")
+
+    msg <- glue::glue("`{table}` was passed to argument `table`. The following query will be executed: {query}")
+    rlang::inform(msg)
 
   }
 
@@ -146,84 +195,10 @@ read_sql <- function(
     query = query) %>%
     bigrquery::bq_table_download(
       page_size = page_size,
-      bigint = "integer")
+      bigint = "integer64")
 
 }
 
-
-#' Read a table by name
-#'
-#'
-#'
-#'
-#' @param table a table name
-#' @param page_size a page_size parameter
-#'
-#' @return The table's content in a tibble
-#'
-#'
-#'
-#'
-
-read_table <- function(table, page_size = 10000, billing_id = get_billing_id()) {
-
-
-
-
-  bigrquery::as_bq_table(table) %>%
-    bigrquery::bq_table_download(
-      page_size = page_size,
-      bigint = "integer")
-
-
-
-}
-
-
-#'
-#' @param
-#'
-#'
-#' @return
-#'
-#'
-#' @importFrom
-#'
-#'
-#'
-#'
-#'
-#'
-#'
-#'
-#'
-#'
-
-dictionary <- function(dict, billing_id = get_billing_id()) {
-
-
-  # TODO: adicionar uma validação do nome do dicionário
-  # se não estiver entre os válidos, retornar uma exceção com rlang::abort()
-  # TODO: documentar a função
-
-  bigrquery::bq_project_query(
-    billing_project_id,
-    query =
-      glue::glue(
-        "
-        SELECT *
-
-        FROM basedosdados.br_bd_diretorios_brasil.diretorio.{dict}
-        ")) %>%
-    bigrquery::bq_table_download(
-      page_size = 10000,
-      bigint = "integer")
-
-
-
-
-
-}
 
 
 

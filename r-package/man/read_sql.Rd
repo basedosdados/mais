@@ -4,10 +4,17 @@
 \alias{read_sql}
 \title{Query our datalake and get results in a tibble}
 \usage{
-read_sql(query, billing_project_id = get_billing_id(), page_size = 10000)
+read_sql(
+  query = NULL,
+  table = NULL,
+  billing_project_id = get_billing_id(),
+  page_size = 1e+05
+)
 }
 \arguments{
 \item{query}{a string containing a valid SQL query.}
+
+\item{table}{defaults to \code{NULL}. If a table name is provided then it'll be concatenated with "basedosdados." and the whole table will be returned.}
 
 \item{billing_project_id}{a string containing your billing project id. If you've run \code{set_billing_id} then feel free to leave this empty.}
 
@@ -17,7 +24,7 @@ read_sql(query, billing_project_id = get_billing_id(), page_size = 10000)
 A tibble containing the query's output.
 }
 \description{
-Query our datalake and get results in a tibble
+\code{read_sql} is given either a fully-written SQL query through the \code{query} argument or a valid table name through the \code{table} argument.
 }
 \examples{
 
@@ -35,6 +42,11 @@ ON pib.id_municipio = pop.id_municipio
 LIMIT 5 "
 
 data <- read_sql(query)
+
+# or use a table name directly
+
+data <- read_sql(table = "br_ibge_pib.municipios")
+data <- read_sql(table = "br_ibge_populacao.municipios")
 
 # in case you want to write your data on disk as a .xlsx, .csv or .Rds file.
 

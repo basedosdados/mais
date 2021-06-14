@@ -1,9 +1,9 @@
 
 library(dotenv)
 
-load_dot_env('keys.env') # esperando um arquivo com esse nome na pasta tests/testthat/
+set_billing_id("basedd-cava")
 
-set_billing_id(Sys.getenv("billing_project_id"))
+ex_query <- "select * from `basedosdados.br_ibge_pib.municipios` LIMIT 5"
 
 
 test_that("download valida nomes de arquivos sem extensão", {
@@ -22,53 +22,36 @@ test_that("download requer nomes de arquivos", {
     download("select * from basedosdados.br_ibge_populacao.municipios limit 3"))
   })
 
-test_that("download retorna invisivelmente nomes de arquivos", {
-
-  expect_invisible(
-    download(
-      "select * from basedosdados.br_ibge_populacao.municipios limit 1",
-      file.path(tempdir(), "data.csv"))
-    )
-
-
-})
-
 test_that("read_sql retorna um tibble", {
 
-  query <- "SELECT
-  pib.id_municipio,
-  pop.ano,
-  pib.PIB / pop.populacao * 1000 as pib_per_capita
-  FROM `basedosdados.br_ibge_pib.municipios` as pib
-  JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-  ON pib.id_municipio = pop.id_municipio
-  LIMIT 5 "
+  expect_s3_class(read_sql(ex_query), "tbl_df")
 
-  expect_s3_class(read_sql(query), "tbl_df")
+  expect_s3_class(read_sql(table = "br_ibge_pib.municipios"), "tbl_df")
+
+  expect_s3_class(read_sql(table = "br_denatran_frota.uf_tipo"), "tbl_df")
 
 })
 
-test_that("read_sql retorna o número esperado de linhas", {
+test_that("read_sql passa a query com limite corretamente", {
 
-  query <- "SELECT
-  pib.id_municipio,
-  pop.ano,
-  pib.PIB / pop.populacao * 1000 as pib_per_capita
-  FROM `basedosdados.br_ibge_pib.municipios` as pib
-  JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-  ON pib.id_municipio = pop.id_municipio
-  LIMIT 5 "
-
-  expect_equal(nrow(read_sql(query)), 5)
+  expect_equal(
+    nrow(
+      read_sql(
+        query = ex_query)),
+    5)
 
 })
-
 
 test_that("read_sql falha se não receber uma query apropriada", {
 
   expect_error(read_sql(1232314))
+  expect_error(read_sql(TRUE))
+  expect_error(read_sql(query = NA))
+  expect_error(read_sql())
 
 })
+
+
 
 # test_that("", {
 #

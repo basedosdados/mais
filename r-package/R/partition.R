@@ -1,6 +1,7 @@
 
 
 #' Slice a big data frame into smaller csv files by grouping variables
+#' Still in development
 #'
 #' @description `partition_table` populates a folder
 #'
@@ -57,10 +58,7 @@ partition_table <- function(.data, dir, ...) {
     }
   )
 
-  purrr::map_chr(
-    data_names,
-    ~ glue::glue("{dir}/{.x}.csv")) %>%
-  invisible()
+  invisible(fs::dir_ls(dir))
 
 }
 

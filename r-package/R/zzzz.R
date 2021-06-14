@@ -25,12 +25,11 @@
   cli::cli_li(
     c(
       "Site oficial: https://basedosdados.org/",
-      "Documentação: https://basedosdados.github.io/mais/"))
+      "Docs: https://basedosdados.github.io/mais/"))
   cli::cli_end()
 
 
   cli::cli_h2("Contatos")
-  cli::cli_ul()
 
   cli::cli_li(
     c(
@@ -46,8 +45,10 @@
   cli::cli_end()
 
   cli::cli_h3(
-    "A Base dos Dados é um projeto open-source e todo gratuito para usuários. Para nos mantermos e crescermos precisamos do seu apoio. Quanto vale as horas do seu trabalho que poupamos?
+    "Somos um projeto open-source e gratuito. Para nos mantermos e crescermos precisamos do seu apoio. Quanto valem as horas do seu trabalho que poupamos?
 
-    Nos apoie em https://apoia.se/basedosdados.")
+    Nos apoie em https://apoia.se/basedosdados.
+
+    ")
 
 }

@@ -2,7 +2,8 @@
 % Please edit documentation in R/partition.R
 \name{partition_table}
 \alias{partition_table}
-\title{Slice a big data frame into smaller csv files by grouping variables}
+\title{Slice a big data frame into smaller csv files by grouping variables
+Still in development}
 \usage{
 partition_table(.data, dir, ...)
 }
