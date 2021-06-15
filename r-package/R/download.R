@@ -48,15 +48,9 @@ download <- function(
   page_size = 100000,
   .na = " ") {
 
-  if(!stringr::str_detect(path, ".csv") | !fs::is_file(path)) {
+  if(!stringr::str_detect(path, ".csv")) {
 
     rlang::abort("Pass a valid file path to argument `path`, make sure to include the '.csv' suffix.")
-
-  }
-
-  if(!fs::dir_exists(path)) {
-
-    rlang::abort("Pass an existing directory to the `path` argument.")
 
   }
 

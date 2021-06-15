@@ -5,12 +5,25 @@ set_billing_id("basedd-cava")
 
 ex_query <- "select * from `basedosdados.br_ibge_pib.municipios` LIMIT 5"
 
+test_that("download escreve arquivos", {
+
+  path <- file.path(tempdir(), "arquivo.csv")
+
+    download(
+      "select * from basedosdados.br_ibge_populacao.municipio limit 3",
+      path = path)
+
+  path %>%
+    fs::is_file() %>%
+    expect_true()
+
+})
 
 test_that("download valida nomes de arquivos sem extensão", {
 
   expect_error(
     download(
-      "select * from basedosdados.br_ibge_populacao.municipios limit 3",
+      "select * from basedosdados.br_ibge_populacao.municipio limit 3",
       file.path(tempdir(), "arquivo"))
     )
   })
@@ -19,7 +32,7 @@ test_that("download valida nomes de arquivos sem extensão", {
 test_that("download requer nomes de arquivos", {
 
   expect_error(
-    download("select * from basedosdados.br_ibge_populacao.municipios limit 3"))
+    download("select * from basedosdados.br_ibge_populacao.municipio limit 3"))
   })
 
 test_that("read_sql retorna um tibble", {
