@@ -18,9 +18,12 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_ibge_populacao.municipios AS
+
+CREATE VIEW basedosdados-dev.br_inep_censo_escolar.dicionario AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(populacao AS INT64) populacao
-from basedosdados-staging.br_ibge_populacao_staging.municipios as t
+SAFE_CAST(id_tabela AS STRING) id_tabela,
+SAFE_CAST(coluna AS STRING) coluna,
+SAFE_CAST(chave AS STRING) chave,
+SAFE_CAST(cobertura_temporal AS STRING) cobertura_temporal,
+SAFE_CAST(valor AS STRING) valor
+from basedosdados-dev.br_inep_censo_escolar_staging.dicionario as t
