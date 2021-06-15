@@ -1,7 +1,7 @@
 import json
 
 def to_markdown(jsonpath, mdpath):
-    root = "https://github.com/basedosdados/mais/blob/master"
+    root = "https://github.com/basedosdados/mais/blob/master/"
 
     with open(jsonpath, "r") as file:
         data = json.load(file)

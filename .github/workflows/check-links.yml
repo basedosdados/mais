@@ -30,3 +30,4 @@ jobs:
           title: Broken Links Report
           content-filepath: ./lychee/report.md
           labels: report, automated issue
+          assignees: fernandascovino
