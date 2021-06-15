@@ -36,7 +36,8 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Fizemos o cruzamento e checagem dos códigos (1) manualmente e (2) checando com string matching.
+- Fizemos o cruzamento e checagem dos códigos (1) manualmente e (2) checando com string matching.
+- Dados de comarcas fornecidos pelo Ipea.
 
 Frequencia de Atualização
 -------------------------

@@ -1,0 +1,651 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: docente # AUTO GENERATED
+dataset_id: br_inep_censo_escolar # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-inep-censo-escolar # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar # AUTO GENERATED
+
+version: v1.0 # REQUIRED
+
+last_updated: 2021-05-17 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    A tabela contém dados de cada professor de cada ano das escolas nacionais. A tabela identifica desde características pessoais dos profissionais, as disciplinas que eles ensinam, as suas formações e a qual escola e qual turma pertencem. Pode ser facilmente combinada com as outras tabelas do censo ou com outras tabelas do tema educação.
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Matheus Valentim  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code # REQUIRED
+    website: https://github.com/mavalentim
+    email: mavalentim.b@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Matheus Valentim
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code # REQUIRED
+    website: https://github.com/mavalentim
+    email: mavalentim.b@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: |
+    O tratamento inclui harmonizar todos os anos, mudar nome de variáveis e selecionar as variáveis que aparecem pelo menos 8 nos 12 anos de Censo.
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: 1 ano # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - docente
+    - ano
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_docente
+    - ano
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2009
+    - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
+    - 2020
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - ano
+    - sigla_uf
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+    - name: id_docente
+      description: ID Docente - INEP
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: mes_nascimento_docente
+      description: Data de nascimento - mês
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ano_nascimento_docente
+      description: Data de nascimento - ano
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: dia_nascimento_docente
+      description: Data de nascimento - dia
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: idade
+      description: Idade calculada pelo ano de nascimento do docente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: idade_referencia
+      description: Idade do docente no mês de referência do Censo Escolar (31 de maio)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: sexo
+      description: Sexo
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: raca_cor
+      description: Cor/raça
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: nacionalidade
+      description: Nacionalidade
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_pais_origem
+      description: Código do País de origem
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_uf_nascimento
+      description: Código da UF de nascimento
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_municipio_nascimento
+      description: Código IBGE - 7 dígitos do Município de nascimento
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_uf_endereco
+      description: Código da UF de residência
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_municipio_endereco
+      description: Código IBGE - 7 dígitos do Município de residência
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: zona_residencial
+      description: Localização/Zona de Residência
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: necessidade_especial
+      description: Profissional Escolar com deficiência transtorno do espectro autista
+          ou altas habilidades/superdotção
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: cegueira
+      description: Profissional Escolar com deficiência transtorno do espectro autista
+          ou altas habilidades/superdotação - Cegueira
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: baixa_visao
+      description: Profissional Escolar com deficiência transtorno do espectro autista
+          ou altas habilidades/superdotação - Baixa Visão
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: surdez
+      description: Profissional Escolar com deficiência - Surdez
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: deficiencia_auditiva
+      description: Profissional Escolar com deficiência transtorno do espectro autista
+          ou altas habilidades/superdotção - Deficiência Auditiva
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: surdocegueira
+      description: Profissional Escolar com deficiência transtorno do espectro autista
+          ou altas habilidades/superdotação - Surdocegueira
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: deficiencia_fisica
+      description: Profissional Escolar com deficiência - Deficiência Física
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: deficiencia_intelectual
+      description: Profissional Escolar com deficiência transtorno do espectro autista
+          ou altas habilidades/superdotação - Deficiência Intelectual
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: deficiencia_multipla
+      description: Profissional Escolar com deficiência transtorno do espectro autista
+          ou altas habilidades/superdotação - Deficiência Múltipla
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: escolaridade
+      description: Maior nível de Escolaridade concluída
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: situacao_curso_1
+      description: Situação do curso superior 1
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_area_curso_1
+      description: Código da área do curso superior 1
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_curso_1
+      description: Código do curso 1 da escolaridade superior
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: licenciatura_1
+      description: Possui Licenciatura no curso 1
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_pedagogica_comp_1
+      description: Possui formação/complementação pedagógica - área de conhecimento/Componentes
+          curriculares
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ano_inicio_curso_superior_1
+      description: Ano de início do curso superior 1
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ano_conclusao_curso_superior_1
+      description: Ano de conclusão do curso superior 1
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: tipo_ies_1
+      description: Tipo de instituição do curso superior 1
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_ies_1
+      description: Código da Instituição do curso 1
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: situacao_curso_2
+      description: Situação do curso superior 2
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_area_curso_2
+      description: Código da Área do curso superior 2
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_curso_2
+      description: Código do curso 2 da escolaridade superior
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: licenciatura_2
+      description: Possui Licenciatura no curso superior 2
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_pedagogica_comp_2
+      description: Possui formação/complementação pedagógica - área de conhecimento/Componentes
+          curriculares
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ano_inicio_curso_superior_2
+      description: Ano de início do curso superior 2
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ano_conclusao_curso_superior_2
+      description: Ano de conclusão do curso superior 2
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: tipo_ies_2
+      description: Tipo de instituição do curso superior 2
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_ies_2
+      description: Código da Instituição do curso superior 2
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: situacao_curso_3
+      description: Situação do curso superior 3
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_area_curso_3
+      description: Código da Área do curso superior 3
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_curso_3
+      description: Código do curso 3 da escolaridade superior
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: licenciatura_3
+      description: Possui Licenciatura no curso superior 3
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_pedagogica_comp_3
+      description: Possui formação/complementação pedagógica - Área de conhecimento/Componentes
+          curriculares
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ano_inicio_curso_superior_3
+      description: Ano de início do curso superior 3
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ano_conclusao_curso_superior_3
+      description: Ano de conclusão do curso superior 3
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: tipo_ies_3
+      description: Tipo de instituição do curso superior 3
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_ies_3
+      description: Código da Instituição do curso superior 3
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_quimica
+      description: Áreas do conhecimento/Componentes curriculares - Química
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_fisica
+      description: Áreas do conhecimento/Componentes curriculares - Física
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_matematica
+      description: Áreas do conhecimento/Componentes curriculares - Matemática
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_biologia
+      description: Áreas do conhecimento/Componentes curriculares - Biologia
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_ciencias
+      description: Áreas do conhecimento/Componentes curriculares - Ciências
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_lingua_portuguesa
+      description: Áreas do conhecimento/Componentes curriculares - Língua/ Literatura
+          Portuguesa
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_lingua_ingles
+      description: Áreas do conhecimento/Componentes curriculares - Língua/ Literatura
+          estrangeira - Inglês
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_lingua_espanhol
+      description: Áreas do conhecimento/Componentes curriculares - Língua/ Literatura
+          estrangeira - Espanhol
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_lingua_frances
+      description: Áreas do conhecimento/Componentes curriculares - Língua/ Literatura
+          estrangeira - Françês
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_lingua_outra
+      description: Áreas do conhecimento/Componentes curriculares - Língua/ Literatura
+          estrangeira - Outra
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_lingua_indigena
+      description: Áreas do conhecimento/Componentes curriculares - Língua Indígena
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_artes
+      description: Áreas do conhecimento/Componentes curriculares - Artes (Educação
+          Artística, Teatro, Dança, Música, Artes Plásticas e outras)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_educacao_fisica
+      description: Áreas do conhecimento/Componentes curriculares - Educação Física
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_historia
+      description: Áreas do conhecimento/Componentes curriculares - História
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_geografia
+      description: Áreas do conhecimento/Componentes curriculares - Geografia
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_filosofia
+      description: Áreas do conhecimento/Componentes curriculares - Filosofia
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_ensino_religioso
+      description: Áreas do conhecimento/Componentes curriculares - Ensino Religioso
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_estudos_sociais
+      description: Áreas do conhecimento/Componentes curriculares - Estudos Sociais
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_sociologia
+      description: Áreas do conhecimento/Componentes curriculares - Sociologia
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_informatica_comp
+      description: Áreas do conhecimento/Componentes curriculares - Informática / Computação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_profissionalizante
+      description: Áreas do conhecimento/Componentes curriculares - Disciplinas dos
+          cursos técnicos profissionais
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_atendimento_especiais
+      description: Áreas do conhecimento/Componentes curriculares - Atendimentos Especiais
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_diver_socio_cultural
+      description: Áreas do conhecimento/Componentes curriculares - Diversidade Sócio-Cultural
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_libras
+      description: Áreas do conhecimento/Componentes curriculares - Libras
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_pedagogicas
+      description: Áreas do conhecimento/Componentes curriculares - Disciplinas pedagógicas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina_outras
+      description: Áreas do conhecimento/Componentes curriculares - Outras disciplinas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: especializacao
+      description: Possui Pós-Graduação - Especialização
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: mestrado
+      description: Possui Pós-Graduação - Mestrado
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: doutorado
+      description: Possui Pós-Graduação - Doutorado
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: pos_nenhum
+      description: Não possui Pós-Graduação 
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_creche
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Específico
+          para creche (0 a 3 anos)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_pre_escola
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Específico
+          para pré-escola (4 e 5 anos)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_anos_iniciais
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Específico
+          para anos iniciais do ensino fundamental
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_anos_finais
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Específico
+          para anos finais do ensino fundamental
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_ens_medio
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Específico
+          para ensino médio
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_eja
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Específico
+          para educação de jovens e adultos
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_ed_especial
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Específico
+          para educação especial
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_ed_indigena
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Específico
+          para educação indígena
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_campo
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Educação
+          do Campo
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_ambiental
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Educação
+          Ambiental
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_dir_humanos
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Educação
+          em direitos humanos
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_div_sexual
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Gênero
+          e Diversidade Sexual
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_dir_adolesc
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Direitos
+          de criança e adolescente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_afro
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Educação
+          para as relações etnicorracias e história e cultura afro-brasileira e africana
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_outros
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Outros
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: formacao_especif_nenhum
+      description: Outros cursos - Formação Continuada com no mínimo 80 horas - Nenhum
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: tipo_docente
+      description: Função que exerce na escola
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: tipo_contratacao
+      description: Situação Funcional/Regime de contratação/Tipo de Vínculo (Apenas
+          para docente de escola pública)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_turma
+      description: ID Turma - INEP
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: tipo_turma
+      description: Tipo de atendimento da turma (e.g. Classe hospitalar, Unidade prisional)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: mediacao_didatico_pedago
+      description: Tipo de mediação didático-pedagógica
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: especial_exclusiva
+      description: Docente de turma exclusiva de alunos com deficiência, transtorno
+          global do desenvolvimento ou altas habilidades/superdotação (Classes Especiais)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: regular
+      description: Modo, maneira ou metodologia de ensino correspondente às turmas
+          com etapas de escolarizaçãoo consecutivas, Creche ao Ensino Médio. 
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: eja
+      description: Modo, maneira ou metodologia de ensino correspondente às turmas
+          destinadas a pessoas que não cursaram o ensino fundamental e/ou médio em
+          idade própria. 
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: profissionalizante
+      description: Modo profissionalizante de ensino correspondente às turmas de
+          cursos de formação inicial e continuada ou de qualificação profissional
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: etapa_ensino
+      description: Etapa de ensino da turma
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_curso_educ_profissional
+      description: Curso da Educação Profissional Técnica
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_escola
+      description: ID Escola - INEP
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_municipio
+      description: ID Município - IBGE 7 dígitos 
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: rede
+      description: Rede Escolar
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: tipo_localizacao
+      description: Localização (Escola)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: tipo_categoria_escola_privada
+      description: Categoria da escola privada
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: conveniada_poder_publico
+      description: Conveniada com o poder público (Escola)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: tipo_convenio_poder_publico
+      description: Dependência do convênio com o poder público
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: mant_escola_privada_emp
+      description: Mantenedora da escola privada - Empresa, grupo empresarial do setor
+          privado ou pessoa física
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: mant_escola_privada_ong
+      description: Mantenedora da escola privada - Organização não governamental (ONG)
+          - internacional ou nacional.
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: mant_escola_privada_sind
+      description: Mantenedora da escola privada - Sindicatos de trabalhadores ou
+          patronais, associações e cooperativas.
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: mant_escola_privada_sist_s
+      description: Mantenedora da escola privada - Sistema S (Sesi, Senai, Sesc, Outros)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: mant_escola_privada_s_fins
+      description: Mantenedora da escola privada - Instituições sem fins lucrativos
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: tipo_regulamentacao
+      description: Regulamentação/Autorização no conselho ou órgão municipal, estadual
+          ou federal de educação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: tipo_localizacao_diferenciada
+      description: Localização diferenciada da escola
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: educacao_indigena
+      description: Escola Indígena
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ano
+      description: Ano
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: true   # Bool [True, False], whether the column is a partition.
+    - name: sigla_uf
+      description: Sigla da Unidade da Federação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: true   # Bool [True, False], whether the column is a partition.

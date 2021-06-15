@@ -28,12 +28,9 @@ nav:
     - BigQuery: access_data_bq.md
     - Local: access_data_local.md
   - Colaborar: 
+    - Infraestrutura: colab_infrastructure.md
     - Dados: colab_data.md
-    - Testes de Dados: colab_checks.md
-    - Manual de estilo:
-      - Bases e tabelas: style_naming_datasets_tables.md
-      - Colunas: style_naming_columns.md
-      - Valores: style_data.md
+    - Manual de estilo: style_data.md
   - Analisar:
       - Início: analysis.md
   - API: 

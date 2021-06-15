@@ -1,0 +1,500 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: matricula # AUTO GENERATED
+dataset_id: br_inep_censo_escolar # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-inep-censo-escolar # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar # AUTO GENERATED
+
+version: v1.1 # REQUIRED
+
+last_updated: 2021-04-05 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    A tabela disponibiliza dados sobre cada aluno matriculado em uma escola nacional. Dentre as mais de 60 variáveis, tem-se dados para identificação e caracterização dos alunos, dados para indicação da locomoção usada pelos alunos até a escola, dados para caracterização das turmas que os alunos frequentam, entre outros.
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Matheus Valentim  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code # REQUIRED
+    website: https://github.com/mavalentim
+    email: mavalentim.b@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Matheus Valentim
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code # REQUIRED
+    website: https://github.com/mavalentim
+    email: mavalentim.b@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    O tratamento dos dados consistiu em harmonizar as variáveis de diferentes anos, optando pelas variáveis que apareciam mais consistentemente entre todos os anos. Outros processos importantes foram a adequação da variável tp_dependencia que passa a se chamar rede e ter valores em string e a adequeação da variável que identifica uf, que passa a se chamar sigla_uf e apresentar a string da UF, ambas as mudanças com intuito de melhor harmonizar a tabela com outras tabelas do próprio censo, e, principalmente, com outras tabelas da Base dos Dados.
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: 1 ano # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - aluno
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_matricula
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
+    - 2020
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - ano  
+    - sigla_uf
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+  
+    -   
+        name: id_matricula
+        description: Código único da matrícula
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_pessoa_fisica
+        description: Código do aluno - ID Inep
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dia_nascimento
+        description: Dia do nascimento do aluno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mes_nascimento
+        description: Mês do nascimento do aluno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano_nascimento
+        description: Ano do nascimento do aluno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: idade_referencia
+        description: Idade do aluno pelo mês unificado de referência do Censo Escolar (31 de Maio)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: idade
+        description: Idade calculada pelo ano de nascimento do aluno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: duracao_ativ_comp_mesma_rede
+        description: Tempo de permanência (em minutos) na turma de Atividade Complementar na mesma rede da turma de escolarização
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: duracao_ativ_comp_outras_redes
+        description: Tempo de permanência (em minutos) na turma de Atividade Complementar em outras redes
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sexo
+        description: Sexo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: raca_cor
+        description: Cor/raça
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nacionalidade
+        description: Nacionalidade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_pais_origem
+        description: Código do país de origem
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_uf_nascimento
+        description: Código da UF de nascimento
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio_nascimento
+        description: Código IBGE - 7 Dígitos do município de nascimento 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_uf_endereco
+        description: Código da UF de residência
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio_endereco
+        description: Código IBGE - 7 Dígitos do município de residência 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: zona_residencial
+        description: Zona da residência
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: outro_local_aula
+        description:  Recebe escolarização em um espaço diferente da escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transporte_publico
+        description: Transporte escolar público
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: responsavel_transporte
+        description: Poder público responsável pelo transporte escolar
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transporte_vans_kombi
+        description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Vans/VW Kombi)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transporte_micro_onibus
+        description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Micro-ônibus)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transporte_onibus
+        description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Ônibus)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transporte_bicicleta
+        description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Bicicleta)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transporte_tr_animal
+        description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Tração Animal)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transporte_outro_veiculo
+        description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Outro tipo de veículo rodoviário)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transporte_embarcacao_ate5
+        description: Tipo de veículo utilizado no transporte escolar Aquaviário/Embarcação (Capacidade de até 5 alunos)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transporte_embarcacao_5a15
+        description: Tipo de veículo utilizado no transporte escolar Aquaviário/Embarcação (Capacidade de 5 a 15 alunos)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transporte_embarcacao_15a35
+        description: Tipo de veículo utilizado no transporte escolar Aquaviário/Embarcação (Capacidade de 15 a 35 alunos)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transporte_embarcacao_35
+        description: Tipo de veículo utilizado no transporte escolar Aquaviário/Embarcação (Capacidade acima de 35 alunos)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transporte_trem_metro
+        description: Tipo de veículo utilizado no transporte escolar Ferroviário (Trem/Metrô)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: necessidade_especial
+        description: Aluno com deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: cegueira
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (cegueira)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: baixa_visao
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (baixa visão)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: surdez
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (surdez)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: deficiencia_auditiva
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (deficiência auditiva)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: surdocegueira
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (surdocegueira)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: deficiencia_fisica
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (deficiência física)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: deficiencia_intelectual
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (deficiência intelectual)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: deficiencia_multipla
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (deficiência múltipla)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: autismo
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (Autismo infantil)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sindrome_asperger
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (Síndrome de Asperger)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sindrome_rett
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (Síndrome de Rett)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: transtorno_di
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (Transtorno Desintegrativo da Infância)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: superdotacao
+        description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (altas habilidades/ superdotação)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: recurso_ledor
+        description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Auxílio Ledor
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: recurso_transcricao
+        description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Auxílio-Transcrição
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: recurso_interprete
+        description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Guia-Intérprete
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: recurso_libras
+        description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Intérprete de Libras
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: recurso_labial
+        description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Leitura Labial
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: recurso_braille
+        description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Prova em Braille
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: recurso_ampliada_16
+        description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Prova Ampliada (Fonte tamanho 16)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: recurso_ampliada_20
+        description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Prova Ampliada (Fonte tamanho 20)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: recurso_ampliada_24
+        description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Prova Ampliada (Fonte tamanho 24)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: recurso_nenhum
+        description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Nenhum
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ingresso_federais
+        description: Forma de ingresso do aluno (apenas alunos de escolas federais das Etapas)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: etapa_ensino
+        description: Etapa/nível de ensino da matrícula
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_turma
+        description: Código único da turma
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_curso_educ_profissional
+        description: Curso da educação profissional técnica
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: unificada
+        description: Turma unificada, multieapa, multi ou correção de fluxo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_turma
+        description: Tipo de atendimento da turma
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_escola
+        description: ID Escola - INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio
+        description: ID Município - Código IBGE 7 Dígitos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: rede
+        description: Rede escolar (e.g. federal, municipal, privada)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.

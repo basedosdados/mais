@@ -1,6 +1,6 @@
 Package: basedosdados
 Title: 'Base Dos Dados' R Client
-Version: 0.1.0
+Version: 0.0.5
 Authors@R: 
     person(given = "Pedro",
            family = "Cavalcante",
@@ -19,14 +19,18 @@ Imports:
     googleAuthR,
     cli,
     magrittr,
-    readr,
+    readr (>= 1.4.0),
     stringr,
-    dotenv,
+    dotenv,   
     bigrquery,
-    glue,
+    glue,   
     rlang,
     writexl,
-    fs
+    fs,
+    DBI,
+    dbplyr
 Suggests: 
+    rmarkdown,
+    knitr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

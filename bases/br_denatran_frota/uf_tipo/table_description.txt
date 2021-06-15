@@ -1,0 +1,67 @@
+Frota veículos por estado e tipo
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-denatran-frota
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_denatran_frota
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Pedro Castro
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_denatran_frota/code
+Website: https://github.com/pedrocastroo
+Email: pdesacastro@gmail.comTratado por
+-----------
+Nome: Pedro Castro
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_denatran_frota/code
+Website: https://basedosdados.org/
+Email: pdesacastro@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- unidade da federação
+- mes
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- mes
+- sigla_uf
+
+Cobertura Temporal
+------------------
+- 2003
+- 2004
+- 2005
+- 2006
+- 2007
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Padronização dos nomes das colunas. Remoção das linhas do total dos estados.
+
+Frequencia de Atualização
+-------------------------
+mes
+
