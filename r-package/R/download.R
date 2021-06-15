@@ -18,14 +18,18 @@
 #'
 #' \dontrun{
 #'
-#' dir <- tempdir()
+#' path <- file.path(tempdir(), "pib_per_capita.csv")
 #'
-#' query <- "SELECT *
+#' bare_query <- "SELECT *
 #' FROM basedosdados.br_tse_eleicoes.bens_candidato
 #' WHERE ano = 2020
 #' AND sigla_uf = \'TO\'"
 #'
-#' data <- download(query, file.path(dir, "pib_per_capita.csv"))
+#' download(query = bare_query, path = path)
+#'
+#' # or download the entire table
+#' download(table = "br_tse_eleicoes.bens_candidato", path = path)
+#'
 #' }
 #'
 #'
@@ -51,12 +55,6 @@ download <- function(
   if(!stringr::str_detect(path, ".csv")) {
 
     rlang::abort("Pass a valid file path to argument `path`, make sure to include the '.csv' suffix.")
-
-  }
-
-  if(!rlang::is_character(query)) {
-
-    rlang::abort("`query` argument must be a string.")
 
   }
 
@@ -167,7 +165,7 @@ read_sql <- function(
 
   if(rlang::is_null(table) & rlang::is_null(query)) { # none was supplied
 
-    rlang::abort("No value was passed to `table` and `query`.")
+    rlang::abort("A value must be passed either to argument `table` or `query`.")
 
     } else if (!rlang::is_null(table) == !rlang::is_null(query)) { # both were supplied
 

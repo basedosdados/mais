@@ -17,6 +17,17 @@ test_that("download escreve arquivos", {
     fs::is_file() %>%
     expect_true()
 
+  path2 <- file.path(tempdir(), "arquivo2.csv")
+
+  download(
+    table = "br_ibge_populacao.municipio",
+    path = path,
+    .na = "999999999999")
+
+  path %>%
+    fs::is_file() %>%
+    expect_true()
+
 })
 
 test_that("download valida nomes de arquivos sem extensão", {
