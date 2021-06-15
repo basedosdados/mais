@@ -12,9 +12,10 @@ Nessa seção listamos todos os padrões do nosso manual de estilo e diretrizes 
 - [Unidades de medida](#unidades-de-medida)
 - [Quais variáveis manter, quais adicionar e quais remover](#quais-variáveis-manter-quais-adicionar-e-quais-remover)
 - [Limpando STRINGs](#limpando-strings)
+- [Formatos de valores](#formatos-de-valores)
 - [Número de bases por _pull request_](#número-de-bases-por-pull-request)
 - [Dicionários](#dicionários)
-- [Formatos de valores](#formatos-de-valores)
+- [Diretórios](#diretórios)
 
 ---
 
@@ -75,8 +76,8 @@ Nomes de variáveis devem respeitar algumas regras:
 - Só ter o prefixo `id_` quando a variável representar chaves primárias de entidades (que eventualmente teriam uma tabela de diretório).
     - Exemplos que tem: `id_municipio`, `id_uf`, `id_escola`, `id_pessoa`.
     - Exemplos que não tem: `rede`, `localizacao`.
-- Lista de **prefixos comuns**
-    - `nome_`, `data_`, `numero_`, `quantidade_`, `prop_` (variáveis de porcentagem 0-100%), `taxa_`, `razao_`,  `indice_`, `indicador_`, `tipo_`, `sigla_`, `sequencial_`.
+- Lista de **prefixos permitidos**
+    - `nome_`, `data_`, `numero_`, `quantidade_`, `proporcao_` (variáveis de porcentagem 0-100%), `taxa_`, `razao_`,  `indice_`, `indicador_`, `tipo_`, `sigla_`, `sequencial_`.
 - Lista de **sufixos comuns**
     - `_pc` (per capita)
 
@@ -128,6 +129,15 @@ Mantemos nossas tabelas parcialmente [normalizadas](https://www.guru99.com/datab
 - Variáveis categóricas: inicial maiúscula e resto minúsculo, com acentos.
 - STRINGs não-estruturadas: manter igual aos dados originais.
 
+### Formatos de valores
+
+- Decimal: formato americano, i.e. sempre `.` (ponto) ao invés de `,` (vírgula).
+- Data: `YYYY-MM-DD`
+- Horário (24h): `HH:MM:SS`
+- Datetime ([ISO-8601](https://en.wikipedia.org/wiki/ISO_8601)): `YYYY-MM-DDTHH:MM:SS.sssZ`
+- Valor nulo: `""` (csv), `NULL` (Python), `NA` (R), `.` ou `""` (Stata)
+- Proporção/porcentagem: entre 0-100
+
 ### Número de bases por _pull request_
 
 Pull requests no Github devem incluir no máximo uma base. Ou seja, podem envolver uma ou mais tabela intra-base.
@@ -143,14 +153,12 @@ Pull requests no Github devem incluir no máximo uma base. Ou seja, podem envolv
     - Para outros casos, como por exemplo `br_inep_censo_escolar.turma:etapa_ensino`, nós excluimos os zeros à esquerda. Ou seja, mudamos `01` para `1`.
 - Valores são padronizados: sem espaços extras, inicial maiúscula e resto minúsculo, etc.
 
-### Formatos de valores
+### Diretórios
 
-- Decimal: formato americano, i.e. sempre `.` (ponto) ao invés de `,` (vírgula).
-- Data: `YYYY-MM-DD`
-- Horário (24h): `HH:MM:SS`
-- Datetime ([ISO-8601](https://en.wikipedia.org/wiki/ISO_8601)): `YYYY-MM-DDTHH:MM:SS.sssZ`
-- Valor nulo: `""` (csv), `NULL` (Python), `NA` (R), `.` ou `""` (Stata)
-- Porcentagem: entre 0-100
+Diretórios são as pedras fundamentais da estrutura do nosso repositório. Nossas regras para gerenciar diretórios são:
+- Diretórios representam _entidades_ do repositório que tenham chaves primárias (e.g. `uf`, `município`, `escola`) e unidades de data-tempo (e.g. `data`, `tempo`, `dia`, `mes`, `ano`).
+- Cada tabela de diretório tem ao menos uma chave primária com valores únicos e sem nulos. Exemplos: `municipio:id_municipio`, `uf:sigla_uf`.
+- Nomes de variáveis com prefixo `id_` são reservadas para chaves primárias de entidades.
 
 ## **Pensou em melhorias para os padrões definidos?**
 
