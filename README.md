@@ -161,7 +161,7 @@ Você pode contribuir de várias maneiras:
 - Criando tutoriais e workshops
 - Melhorando nossa API em Python
 - Melhorando nossa API em R
-- Criando checagens automáticas de qualidade de dados e metadados (em Python)
+- Criando checagens automáticas de qualidade de [dados](https://basedosdados.github.io/mais/colab_checks/) e metadados (em Python)
 - Melhorando nosso o UX do nosso site (React, CSS, HTML)
 - Contribuindo com nossa comunicação e mídias
 - Reportando bugs
