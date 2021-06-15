@@ -1,7 +1,7 @@
 
 # Dados na BD+
 
-Nosso objetivo na Base dos Dados Mais (BD+) é criar um repositório de dados **universal** e de **alta qualidade**.
+Nosso objetivo na Base dos Dados Mais (BD+) é criar um repositório de dados **universal** e de **alta qualidade**:
 
 * **Universal**: Isso significa, em princípio, incluir todas as bases de dados do Brasil e do mundo. Pouco ambicioso né :-).
 

@@ -4,6 +4,7 @@
 Nessa seção listamos todos os padrões do nosso manual de estilo e diretrizes de dados que usamos na Base dos Dados. Eles nos ajudam a manter os dados e metadados que publicamos com qualidade alta.
 
 **Resumo**:
+
 - [Nomeação de bases e tabelas](#nomeação-de-bases-e-tabelas)
 - [Formatos de tabelas](#formatos-de-tabelas)
 - [Nomeação de variáveis](#nomeação-de-variáveis)
@@ -93,6 +94,7 @@ A ordem de variáveis em tabelas é padronizada para manter uma consistência no
 Nós utilizamos algumas das opções de [tipos do BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types): `STRING`, `INT64`, `FLOAT64`, `DATE`, `TIME`, `GEOGRAPHY`.
 
 Quando escolher:
+
 - `STRING`:
     - Variáveis de texto
     - Chaves de variáveis categóricas com dicionário ou diretório
@@ -156,6 +158,7 @@ Pull requests no Github devem incluir no máximo uma base. Ou seja, podem envolv
 ### Diretórios
 
 Diretórios são as pedras fundamentais da estrutura do nosso repositório. Nossas regras para gerenciar diretórios são:
+
 - Diretórios representam _entidades_ do repositório que tenham chaves primárias (e.g. `uf`, `município`, `escola`) e unidades de data-tempo (e.g. `data`, `tempo`, `dia`, `mes`, `ano`).
 - Cada tabela de diretório tem ao menos uma chave primária com valores únicos e sem nulos. Exemplos: `municipio:id_municipio`, `uf:sigla_uf`.
 - Nomes de variáveis com prefixo `id_` são reservadas para chaves primárias de entidades.
