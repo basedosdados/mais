@@ -4,7 +4,7 @@ project_id_prod: basedosdados-dev
 table_id: despesas_candidato # AUTO GENERATED
 dataset_id: br_tse_eleicoes # AUTO GENERATED
 
-version: v1.0
+version: v1.1
 
 last_updated: 2021-02-14 # AUTO GENERATED
 
