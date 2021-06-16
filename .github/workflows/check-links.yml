@@ -27,7 +27,7 @@ jobs:
         if: ${{ steps.lychee.outputs.continue == 1 }}
         uses: peter-evans/create-issue-from-file@v2
         with:
-          title: [docs] Corrigir links quebrados
+          title: "[docs] Corrigir links quebrados"
           content-filepath: ./lychee/report.md
           labels: report, automated issue
           assignees: fernandascovino
