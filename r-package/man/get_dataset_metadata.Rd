@@ -11,11 +11,11 @@ get_dataset_metadata(
 )
 }
 \arguments{
-\item{dataset_id, }{a character, dataset id}
+\item{dataset_id}{dataset id available in \code{query_project_id}}
 
-\item{query_project_id, }{a character, which project the table lives. You can change this you want to query different projects. Default is \code{"basedosdados"}}
+\item{query_project_id}{which project the table lives. You can change this you want to query different projects. Default is \code{"basedosdados"}}
 
-\item{billing_project_id}{a string containing your billing project id. If you've run \code{set_billing_id} then feel free to leave this empty.}
+\item{billing_project_id}{your billing project id. If you've run \code{set_billing_id} then feel free to leave this empty.}
 }
 \value{
 \code{invisible(NULL)}

@@ -8,7 +8,7 @@ list_datasets(
   query_project_id = "basedosdados",
   filter_by = NULL,
   with_description = FALSE,
-  page_size = 100,
+  page_size = 99999,
   ...
 )
 }
@@ -19,7 +19,7 @@ list_datasets(
 
 \item{with_description, }{optional, if \code{TRUE}, fetch short dataset description for each dataset. Defalut is \code{FALSE}}
 
-\item{page_size, }{Number of items per page. Default is \code{100}.}
+\item{page_size, }{Number of items per page. Default is \code{99999}.}
 
 \item{..., }{other parameters for passing in the bigrquery}
 }

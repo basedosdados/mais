@@ -1,8 +1,8 @@
 #' @title Get Metadata Table
-#' @param dataset_id, a character, dataset id
-#' @param table_id, a character, table id
-#' @param query_project_id, a character, which project the table lives. You can change this you want to query different projects. Default is \code{"basedosdados"}
-#' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
+#' @param dataset_id dataset id available in `query_project_id`
+#' @param table_id table id available in `dataset_id`
+#' @param query_project_id which project the table lives. You can change this you want to query different projects. Default is \code{"basedosdados"}
+#' @param billing_project_id your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
 #' @examples
 #' \dontrun{
 #' get_table_metadata("br_ibge_pib", "municipios")
@@ -16,10 +16,10 @@
 #' @export
 
 get_table_metadata <- function(dataset_id,
-                              table_id,
-                              query_project_id = "basedosdados",
-                              billing_project_id = get_billing_id()
-                              ) {
+                               table_id,
+                               query_project_id = "basedosdados",
+                               billing_project_id = get_billing_id()
+                               ) {
   
   if (billing_project_id == FALSE) {
     rlang::abort("You haven't set a Project Billing Id. Use the function `set_billing_id` to do so.")
@@ -53,9 +53,9 @@ get_table_metadata <- function(dataset_id,
 }
 
 #' @title Get Metadata Dataset
-#' @param dataset_id, a character, dataset id
-#' @param query_project_id, a character, which project the table lives. You can change this you want to query different projects. Default is \code{"basedosdados"}
-#' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
+#' @param dataset_id dataset id available in `query_project_id`
+#' @param query_project_id which project the table lives. You can change this you want to query different projects. Default is \code{"basedosdados"}
+#' @param billing_project_id your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
 #' @importFrom rlang abort
 #' @importFrom bigrquery bq_dataset_exists bq_dataset_meta
 #' @importFrom glue glue
@@ -68,9 +68,9 @@ get_table_metadata <- function(dataset_id,
 #' @export
 
 get_dataset_metadata <- function(dataset_id,
-                                query_project_id = "basedosdados",
-                                billing_project_id = get_billing_id()
-                                ) {
+                                 query_project_id = "basedosdados",
+                                 billing_project_id = get_billing_id()
+                                 ) {
   
   if (billing_project_id == FALSE) {
     rlang::abort("You haven't set a Project Billing Id. Use the function `set_billing_id` to do so.")
@@ -97,7 +97,7 @@ get_dataset_metadata <- function(dataset_id,
 #' @param query_project_id, Which project the table lives. You can change this you want to query different projects. Default is \code{"basedosdados"}
 #' @param filter_by, optional character to be matched in dataset_id. Default is \code{NULL}
 #' @param with_description, optional, if \code{TRUE}, fetch short dataset description for each dataset. Defalut is \code{FALSE}
-#' @param page_size, Number of items per page. Default is \code{100}.
+#' @param page_size, Number of items per page. Default is \code{99999}.
 #' @param ..., other parameters for passing in the bigrquery
 #' @importFrom bigrquery bq_project_datasets bq_dataset_meta
 #' @importFrom purrr map keep
@@ -115,7 +115,7 @@ get_dataset_metadata <- function(dataset_id,
 list_datasets <- function(query_project_id = "basedosdados",
                           filter_by = NULL,
                           with_description = FALSE,
-                          page_size = 100,
+                          page_size = 99999,
                           ...) {
   
   datasets <- bigrquery::bq_project_datasets(
@@ -157,11 +157,11 @@ list_datasets <- function(query_project_id = "basedosdados",
 
 
 #' @title List Dataset Tables
-#' @param dataset_id, a character, dataset id
+#' @param dataset_id dataset id available in `query_project_id`
 #' @param query_project_id, which project the table lives. You can change this you want to query different projects. Default is \code{"basedosdados"}
 #' @param filter_by, optional character to be matched in dataset_id. Default is \code{NULL}
 #' @param with_description, optional, if \code{TRUE}, fetch short dataset description for each dataset. Defalut is \code{FALSE}
-#' @param page_size, Number of items per page. Default is \code{50}.
+#' @param page_size, Number of items per page. Default is \code{99999}.
 #' @param ..., other parameters for passing in the bigrquery
 #' @importFrom bigrquery bq_dataset_tables bq_table_meta
 #' @importFrom glue glue
@@ -179,7 +179,7 @@ list_dataset_tables <- function(dataset_id,
                                 query_project_id = "basedosdados",
                                 filter_by = NULL,
                                 with_description = FALSE,
-                                page_size = 50,
+                                page_size = 99999,
                                 ...) {
 
   tables <- bigrquery::bq_dataset_tables(
@@ -221,7 +221,9 @@ list_dataset_tables <- function(dataset_id,
 
 
 #' @title Build HTML DOM
-#' @param body, a string, html tree
+#' @description Create an html document, save it in the session folder `tempdir()`
+#' and open in the viewer
+#' @param body html tree
 #' @importFrom rstudioapi isAvailable getThemeInfo viewer
 #' @importFrom rlang is_atomic abort
 #' @importFrom htmltools tags save_html
@@ -230,8 +232,10 @@ list_dataset_tables <- function(dataset_id,
 
 render_dom <- function(body) {
   
+  # Check if rstudio is runnning
   rstudio_api_available <- rstudioapi::isAvailable()
   
+  # Get rstudio theme colors to customize html
   theme_info <- if (rstudio_api_available) {
     get_theme_info <- rstudioapi::getThemeInfo()
     c("background" = get_theme_info$background, "foreground" = get_theme_info$foreground)
@@ -239,6 +243,7 @@ render_dom <- function(body) {
     c("background" = "#fff", "foreground" = "#000")
   }
   
+  # Create inline stylesheet (css)
   css <- sprintf("
       :root {
         --bg-color: %s;
@@ -274,16 +279,17 @@ render_dom <- function(body) {
     theme_info["background"], theme_info["foreground"]
   )
   
-  header <- function() {
-    htmltools::tags$header(
-      htmltools::h1("Base dos Dados: Universalizando o acesso a dados no Brasil"),
-      htmltools::a(
-        href = "https://basedosdados.org/",
-        target = "_blank",
-        "basedosdados.org"
-      )
-    )
-  }
+  # Create html document, append elements
+  # <html>
+  #   <head>
+  #     <meta>
+  #     <title>Base dos Dados</title>
+  #   </head>
+  # <body>
+  #   <header><h1></h1></header>
+  #   body `param`
+  # </body>
+  # <html>
   htmltools::tags$html(
     htmltools::tags$head(
       htmltools::tags$meta(name = "viewport", content = "width=device-width,initial-scale=1"),
@@ -291,7 +297,14 @@ render_dom <- function(body) {
       htmltools::tags$style(css)
     ),
     htmltools::tags$body(
-      header(),
+      htmltools::tags$header(
+        htmltools::h1("Base dos Dados: Universalizando o acesso a dados no Brasil"),
+        htmltools::a(
+          href = "https://basedosdados.org/",
+          target = "_blank",
+          "basedosdados.org"
+        )
+      ),
       body 
     )
   ) -> dom
@@ -300,6 +313,7 @@ render_dom <- function(body) {
   htmltools::save_html(dom, file = temp_file)
   
   if (rstudio_api_available) {
+    # open viewer on rstudio
     rstudioapi::viewer(temp_file)
     return(invisible(NULL))
   }

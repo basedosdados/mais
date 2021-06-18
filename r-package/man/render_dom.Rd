@@ -7,11 +7,12 @@
 render_dom(body)
 }
 \arguments{
-\item{body, }{a string, html tree}
+\item{body}{html tree}
 }
 \value{
 \code{invisible(NULL)}
 }
 \description{
-Build HTML DOM
+Create an html document, save it in the session folder \code{tempdir()}
+and open in the viewer
 }

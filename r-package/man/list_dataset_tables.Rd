@@ -9,12 +9,12 @@ list_dataset_tables(
   query_project_id = "basedosdados",
   filter_by = NULL,
   with_description = FALSE,
-  page_size = 50,
+  page_size = 99999,
   ...
 )
 }
 \arguments{
-\item{dataset_id, }{a character, dataset id}
+\item{dataset_id}{dataset id available in \code{query_project_id}}
 
 \item{query_project_id, }{which project the table lives. You can change this you want to query different projects. Default is \code{"basedosdados"}}
 
@@ -22,7 +22,7 @@ list_dataset_tables(
 
 \item{with_description, }{optional, if \code{TRUE}, fetch short dataset description for each dataset. Defalut is \code{FALSE}}
 
-\item{page_size, }{Number of items per page. Default is \code{50}.}
+\item{page_size, }{Number of items per page. Default is \code{99999}.}
 
 \item{..., }{other parameters for passing in the bigrquery}
 }
