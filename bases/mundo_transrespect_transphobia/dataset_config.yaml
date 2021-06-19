@@ -8,7 +8,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/mundo_transre
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    O dataset contem tabelas a diferentes niveis de agregacao que retratam casos de homicidio de pessoas trans. Os dados vem da iniciativa Transrespect
+    O dataset contem tabelas a diferentes niveis de agregação que retratam casos de homicidio de pessoas trans. Os dados vem da iniciativa Transrespect x Transphobia, que contabilizam assassinatos de pessoas trans no mundo inteiro. As tabelas estão disponibilizadas em um arquivo pdf, publicado anualmente e que nos permite acesso a 3 níveis de agregação de mortes de transsexuais: país onde ocorreu, local onde ocorreu e meio/causa da morte. Todas essas facetas vem sendo registrados desde 2008.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list

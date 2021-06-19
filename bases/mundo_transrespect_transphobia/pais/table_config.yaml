@@ -114,6 +114,6 @@ columns: # REQUIRED
   
     -   
         name: homicidios
-        description: Número de homicídios de pessoas trans
+        description: Homicídios totais de pessoas trans
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

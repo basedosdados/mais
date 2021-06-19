@@ -1,4 +1,4 @@
-<descrição>
+A tabela contém dados de onde os assassinatos notificados ao redor do mundo de pessoas trans ocorreram, a cada ano. Ela utiliza os dados da Transrespect x Transphobia: Trans Murder Monitoring, iniciativa de monitoramento de morte de transsexuais internacional. A tabela contabiliza mortes de transsexuais do mundo inteiro.
 
 
 Para saber mais acesse:
@@ -10,11 +10,50 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: <nome [você]>
-Código: https://github.com/basedosdados/mais/tree/master/bases/mundo_transrespect_transphobia/codeTratado por
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/mundo_transrespect_transphobia/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
 -----------
-Nome: <nome>
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/mundo_transrespect_transphobia/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
 
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- local de ocorrência do homicídio
+- ano
 
+Colunas identificando linhas unicamente
+-------------------
+- local
+- ano
+
+Cobertura Temporal
+------------------
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+
+Cobertura Espacial
+------------------
+- mundo
+
+Tratamento
+----------
+Tratamento consistiu em ler o arquivo pdf anual da organização, pivotar a tabela para a direção tidy e organizar as colunas.
+
+Frequencia de Atualização
+-------------------------
+1 ano
 
 

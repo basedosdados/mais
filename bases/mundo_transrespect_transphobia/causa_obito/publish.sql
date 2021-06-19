@@ -21,7 +21,7 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.mundo_transrespect_transphobia.causa_obito AS
 SELECT 
-SAFE_CAST(causa_obito AS STRING) causa_obito,
 SAFE_CAST(ano AS STRING) ano,
-SAFE_CAST(homicidios AS STRING) homicidios
+SAFE_CAST(causa_obito AS STRING) causa_obito,
+SAFE_CAST(homicidios AS INT64) homicidios
 from basedosdados-dev.mundo_transrespect_transphobia_staging.causa_obito as t

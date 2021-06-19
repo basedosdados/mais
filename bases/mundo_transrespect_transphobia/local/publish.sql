@@ -21,7 +21,7 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.mundo_transrespect_transphobia.local AS
 SELECT 
-SAFE_CAST(local AS STRING) local,
 SAFE_CAST(ano AS STRING) ano,
-SAFE_CAST(homicidios AS STRING) homicidios
+SAFE_CAST(local AS STRING) local,
+SAFE_CAST(homicidios AS INT64) homicidios
 from basedosdados-dev.mundo_transrespect_transphobia_staging.local as t
