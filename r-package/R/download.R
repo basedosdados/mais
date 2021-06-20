@@ -97,7 +97,6 @@ download <- function(
 #' `read_sql` is given either a fully-written SQL query through the `query` argument or a valid table name through the `table` argument.
 #'
 #' @param query a string containing a valid SQL query.
-#' @param table defaults to `NULL`. If a table name is provided then it'll be concatenated with "basedosdados." and the whole table will be returned.
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
 #' @param page_size `bigrquery` internal, how many rows per page should there be. Defaults to 10000, consider increasing if running into performance issues or big queries.
 #'
@@ -120,11 +119,6 @@ download <- function(
 #'
 #' data <- read_sql(query)
 #'
-#' # or use a table name directly
-#'
-#' data <- read_sql(table = "br_ibge_pib.municipios")
-#' data <- read_sql(table = "br_ibge_populacao.municipios")
-#'
 #' # in case you want to write your data on disk as a .xlsx, .csv or .Rds file.
 #'
 #' library(writexl)
@@ -146,8 +140,7 @@ download <- function(
 
 
 read_sql <- function(
-  query = NULL,
-  table = NULL,
+  query,
   billing_project_id = get_billing_id(),
   page_size = 100000) {
 
@@ -157,28 +150,9 @@ read_sql <- function(
 
   }
 
-  if(!rlang::is_character(query) & !rlang::is_null(query)) {
+  if(!rlang::is_string(query)) {
 
-    rlang::abort("`query` argument must contain valid SQL text.")
-
-  }
-
-  if(rlang::is_null(table) & rlang::is_null(query)) { # none was supplied
-
-    rlang::abort("A value must be passed either to argument `table` or `query`.")
-
-    } else if (!rlang::is_null(table) == !rlang::is_null(query)) { # both were supplied
-
-    rlang::abort("Both `table` and `query` arguments were supplied values. Choose one.")
-
-  }
-
-  if(!rlang::is_null(table) & rlang::is_null(query)) {
-
-    query <- glue::glue("SELECT * FROM basedosdados.{table}")
-
-    msg <- glue::glue("`{table}` was passed to argument `table`. The following query will be executed: {query}")
-    rlang::inform(msg)
+    rlang::abort("`query` argument must be a string.")
 
   }
 
@@ -192,6 +166,56 @@ read_sql <- function(
 }
 
 
+#'
+#' Query a table by its name, without SQL code
+#'
+#' `read_sql` takes in SQL code and runs the query for you. `read_table("table")` will return the entire table or an error in case it doesn't exist.
+#'
+#' @param table defaults to `NULL`. If a table name is provided then it'll be concatenated with "basedosdados." and the whole table will be returned.
+#' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
+#' @param page_size `bigrquery` internal, how many rows per page should there be. Defaults to 10000, consider increasing if running into performance issues or big queries.
+#'
+#'
+#' @examples
+#'
+#' \dontrun{
+#'
+#' # instead of a SQL query use a table name directly
+#'
+#' data <- read_sql(table = "br_ibge_pib.municipios")
+#' data <- read_sql(table = "br_ibge_populacao.municipios")
+#'
+#' }
+#'
+#' @importFrom rlang abort is_string
+#' @importFrom glue glue
+#' @importFrom bigrquery as_bq_table bq_table_download
+#'
 
+
+
+read_table <- function(
+  table,
+  billing_project_id = get_billing_id(),
+  page_size = 100000) {
+
+  if(billing_project_id == FALSE) {
+
+    rlang::abort("You haven't set a Project Billing Id. Use the function `set_billing_id` to do so.")
+
+  }
+
+  if(!rlang::is_string(table)) {
+
+    rlang::abort("`query` argument must be a string.")
+
+  }
+
+  bigrquery::bq_table_download(
+    x = bigrquery::as_bq_table(glue::glue("basedosdados.{table}")),
+    page_size = page_size,
+    bigint = "integer64")
+
+}
 
 

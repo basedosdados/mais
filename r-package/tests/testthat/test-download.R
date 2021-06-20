@@ -1,11 +1,13 @@
 
-library(dotenv)
+set_billing_id(readline("Insira um billing project id: "))
 
-set_billing_id("basedd-cava")
+ex_query <- function(n) {
 
-ex_query <- "select * from `basedosdados.br_ibge_pib.municipios` LIMIT 5"
+  glue::glue("select * from `basedosdados.br_ibge_pib.municipios` LIMIT {n}")
 
-test_that("download escreve arquivos", {
+}
+
+test_that("download escreve arquivos recebendo uma query ou nome de tabela", {
 
   path <- file.path(tempdir(), "arquivo.csv")
 
@@ -22,9 +24,58 @@ test_that("download escreve arquivos", {
   download(
     table = "br_ibge_populacao.municipio",
     path = path,
+    page_size = 123432,
     .na = "999999999999")
 
   path %>%
+    fs::is_file() %>%
+    expect_true()
+
+})
+
+test_that("download permite escolher o conteúdo de NAs", {
+
+  path3 <- file.path(tempdir(), "arquivo3.csv")
+
+  download(
+    "select * from basedosdados.br_ibge_populacao.municipio limit 3",
+    path = path3,
+    .na = "999999")
+
+  path3 %>%
+    fs::is_file() %>%
+    expect_true()
+
+  download(
+    "select * from basedosdados.br_ibge_populacao.municipio limit 3",
+    path = path3,
+    .na = "AUSENTE")
+
+  path3 %>%
+    fs::is_file() %>%
+    expect_true()
+
+  download(
+    "select * from basedosdados.br_ibge_populacao.municipio limit 3",
+    path = path3,
+    .na = " -- ")
+
+  path3 %>%
+    fs::is_file() %>%
+    expect_true()
+
+})
+
+test_that("download permite escolher tamanho de página", {
+
+  path4 <- file.path(tempdir(), "arquivo4.csv")
+
+  download(
+    "select * from basedosdados.br_ibge_populacao.municipio limit 3",
+    path = path4,
+    page_size = 123432)
+
+  path4 %>%
     fs::is_file() %>%
     expect_true()
 
@@ -35,55 +86,42 @@ test_that("download valida nomes de arquivos sem extensão", {
   expect_error(
     download(
       "select * from basedosdados.br_ibge_populacao.municipio limit 3",
-      file.path(tempdir(), "arquivo"))
-    )
+      file.path(tempdir(), "arquivo")))
+
   })
 
 
-test_that("download requer nomes de arquivos", {
+test_that("read_sql e read_table retornam um tibble com as propriedades esperadas", {
 
-  expect_error(
-    download("select * from basedosdados.br_ibge_populacao.municipio limit 3"))
-  })
+  expect_s3_class(read_sql(ex_query(1)), "tbl_df")
 
-test_that("read_sql retorna um tibble", {
+  expect_equal(nrow(read_sql(ex_query(5))), 5)
 
-  expect_s3_class(read_sql(ex_query), "tbl_df")
+  expect_s3_class(read_sql(ex_query(1000)), "tbl_df")
 
-  expect_s3_class(read_sql(table = "br_ibge_pib.municipios"), "tbl_df")
+  expect_s3_class(read_table(table = "br_ibge_pib.municipios"), "tbl_df")
 
-  expect_s3_class(read_sql(table = "br_denatran_frota.uf_tipo"), "tbl_df")
+  expect_s3_class(read_table(table = "br_denatran_frota.uf_tipo"), "tbl_df")
 
 })
 
-test_that("read_sql passa a query com limite corretamente", {
+test_that("read_sql e read_table falham com input inapropriado", {
 
-  expect_equal(
-    nrow(
-      read_sql(
-        query = ex_query)),
-    5)
+  expect_error(read_table(table = 123))
+  expect_error(read_table(table = TRUE))
+  expect_error(read_table(table = "sodfungosd"))
+  expect_error(read_table(table = letters))
+  expect_error(read_table())
+
+  expect_error(read_table(table = 123))
+  expect_error(read_table(table = TRUE))
+  expect_error(read_table(table = "sodfungosd"))
+  expect_error(read_table(table = letters))
+  expect_error(read_table())
+
+
 
 })
-
-test_that("read_sql falha se não receber uma query apropriada", {
-
-  expect_error(read_sql(1232314))
-  expect_error(read_sql(TRUE))
-  expect_error(read_sql(query = NA))
-  expect_error(read_sql())
-
-})
-
-
-
-# test_that("", {
-#
-#   load_dot_env('keys.env')
-#
-#   set_billing_id(Sys.getenv('project_id'))
-#
-# })
 
 
 
