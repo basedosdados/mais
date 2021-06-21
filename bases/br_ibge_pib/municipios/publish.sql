@@ -20,7 +20,7 @@ TIPOS:
 */
 CREATE VIEW basedosdados.br_ibge_pib.municipios AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(PIB AS INT64) PIB,
 SAFE_CAST(impostos_liquidos AS INT64) impostos_liquidos,
