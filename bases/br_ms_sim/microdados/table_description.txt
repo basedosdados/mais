@@ -65,10 +65,10 @@ Cobertura Espacial
 
 Tratamento
 ----------
-- Limpamos as strings.
-- Substituímos valores numéricos por suas strings.
+- Limpamos os dados para consistência.
 - Corrigimos os id_municipio todos para 7 dígitos entre anos.
-- Trocamos a ordem de variáveis, etc.
+- Trocamos a ordem de variáveis.
+- Criamos um dicionário completo.
 
 Frequencia de Atualização
 -------------------------

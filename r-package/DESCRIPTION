@@ -28,5 +28,7 @@ Imports:
     writexl (>= 1.4.0),
     fs (>= 1.5.0)
 Suggests: 
+    rmarkdown,
+    knitr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

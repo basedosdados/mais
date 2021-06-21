@@ -1,5 +1,4 @@
-name: Python package
-
+name: python-ci
 on:
   push:
     paths:

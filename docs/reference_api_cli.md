@@ -10,6 +10,6 @@ Os comandos disponíveis dentro de `cli` atualmente são:
 !!! Info "Toda documentação do código abaixo está em inglês"
 
 ::: mkdocs-click
-    :module: python-package.basedosdados.cli.cli
+    :module: basedosdados.cli.cli
     :command: cli
     :depth: 1

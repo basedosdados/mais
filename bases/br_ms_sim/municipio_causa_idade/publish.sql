@@ -20,10 +20,10 @@ TIPOS:
 */
 CREATE VIEW basedosdados-dev.br_ms_sim.municipio_causa_idade AS
 SELECT 
-SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(ano AS STRING) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(causa_basica AS STRING) causa_basica,
-SAFE_CAST(idade AS FLOAT64) idade,
+SAFE_CAST(idade AS INT64) idade,
 SAFE_CAST(numero_obitos AS INT64) numero_obitos
-from basedosdados-dev.br_ms_sim_staging.municipio_causa_idade as t
+FROM basedosdados-dev.br_ms_sim_staging.municipio_causa_idade AS t

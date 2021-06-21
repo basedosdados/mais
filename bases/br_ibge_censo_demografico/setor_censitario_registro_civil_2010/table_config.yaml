@@ -7,7 +7,7 @@ dataset_id: br_ibge_censo_demografico # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-ibge-censo-demografico # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v1.1 # REQUIRED
 
 last_updated: 2021-02-27 # AUTO GENERATED
 

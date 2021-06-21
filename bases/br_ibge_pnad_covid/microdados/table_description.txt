@@ -1,26 +1,43 @@
-Microdados da PNAD-COVID. Checar dicionários no Github para nomes e valores de variáveis.
+Microdados da PNAD-COVID.
 
 
 Para saber mais acesse:
-Website: 
-Github: https://github.com/basedosdados/mais/
+Website: https://basedosdados.org/dataset/br-ibge-pnad-covid
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid/code
+Website: https://www.ibge.gov.br/estatisticas/investigacoes-experimentais/estatisticas-experimentais/27946-divulgacao-semanal-pnadcovid1?t=downloads
+Email: rdahis@basedosdados.org
+
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
-- estado_abrev
+- sigla_uf
 
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- UPA
-- numero_domicilio
-- numero_entrevista
+- pessoa
+
+Colunas identificando linhas unicamente
+-------------------
+- upa
+- v1008
+- v1016
 - posest
-- ordem
+- a001
 - ano
 - mes
+- semana
 
 Cobertura Temporal
 ------------------
@@ -38,16 +55,4 @@ Frequencia de Atualização
 -------------------------
 mes
 
-Tratado por
------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid/code
-Website: https://www.ibge.gov.br/estatisticas/investigacoes-experimentais/estatisticas-experimentais/27946-divulgacao-semanal-pnadcovid1?t=downloads
-Email: rdahis@basedosdados.org
 
-Publicado por
--------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnad_covid/code
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org

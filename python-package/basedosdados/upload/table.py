@@ -6,6 +6,11 @@ from copy import deepcopy
 from google.cloud import bigquery
 import datetime
 
+import ruamel.yaml as ryaml
+import requests
+from io import StringIO
+import pandas as pd
+
 import google.api_core.exceptions
 
 from basedosdados.upload.base import Base
@@ -151,12 +156,66 @@ class Table(Base):
                     template
                 )
 
+    def _sheet_to_df(self, columns_config_url):
+        url = columns_config_url.replace("edit#gid=", "export?format=csv&gid=")
+        try:
+            return pd.read_csv(StringIO(requests.get(url).content.decode("utf-8")))
+        except:
+            raise Exception(
+                "Check if your google sheet Share are: Anyone on the internet with this link can view"
+            )
+
+    def update_columns(self, columns_config_url):
+        """Fills descriptions of tables automatically using a public google sheets URL.
+        The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
+        The sheet must contain the column name: "coluna" and column description: "descricao"
+        Args:
+            columns_config_url (str): google sheets URL.
+
+        """
+        ruamel = ryaml.YAML()
+        ruamel.preserve_quotes = True
+        ruamel.indent(mapping=4, sequence=6, offset=4)
+        table_config_yaml = ruamel.load(
+            (self.table_folder / "table_config.yaml").open()
+        )
+        if (
+            "edit#gid=" not in columns_config_url
+            or "https://docs.google.com/spreadsheets/d/" not in columns_config_url
+            or not columns_config_url.split("=")[1].isdigit()
+        ):
+            raise Exception(
+                "The Google sheet url not in correct format."
+                "The url must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>"
+            )
+
+        df = self._sheet_to_df(columns_config_url)
+
+        if "coluna" not in df.columns.tolist():
+            raise Exception(
+                "Column 'coluna' not found in Google the google sheet. "
+                "The sheet must contain the column name: 'coluna' and column description: 'descricao'"
+            )
+        elif "descricao" not in df.columns.tolist():
+            raise Exception(
+                "Column 'descricao' not found in Google the google sheet. "
+                "The sheet must contain the column name: 'coluna' and column description: 'descricao'"
+            )
+
+        columns_parameters = zip(df["coluna"].tolist(), df["descricao"].tolist())
+        for name, description in columns_parameters:
+            for col in table_config_yaml["columns"]:
+                if col["name"] == name:
+                    col["description"] = description
+        ruamel.dump(table_config_yaml, stream=self.table_folder / "table_config.yaml")
+
     def init(
         self,
         data_sample_path=None,
         if_folder_exists="raise",
         if_table_config_exists="raise",
         source_format="csv",
+        columns_config_url=None,
     ):
         """Initialize table folder at metadata_path at `metadata_path/<dataset_id>/<table_id>`.
 
@@ -186,6 +245,9 @@ class Table(Base):
             source_format (str): Optional
                 Data source format. Only 'csv' is supported. Defaults to 'csv'.
 
+            columns_config_url (str): google sheets URL.
+                The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
+                The sheet must contain the column name: "coluna" and column description: "descricao"
 
         Raises:
             FileExistsError: If folder exists and replace is False.
@@ -278,6 +340,9 @@ class Table(Base):
             # Raise: without a path to data sample, should not replace config files with empty template
             self._make_template(columns, partition_columns)
 
+        if columns_config_url is not None:
+            self.update_columns(columns_config_url)
+
         return self
 
     def create(
@@ -289,6 +354,7 @@ class Table(Base):
         if_storage_data_exists="raise",
         if_table_config_exists="raise",
         source_format="csv",
+        columns_config_url=None,
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -335,6 +401,11 @@ class Table(Base):
                 * 'pass' : Do nothing
             source_format (str): Optional
                 Data source format. Only 'csv' is supported. Defaults to 'csv'.
+
+            columns_config_url (str): google sheets URL.
+                The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
+                The sheet must contain the column name: "coluna" and column description: "descricao"
+
         """
 
         if path is None:
@@ -379,6 +450,7 @@ class Table(Base):
             data_sample_path=path,
             if_folder_exists="replace",
             if_table_config_exists=if_table_config_exists,
+            columns_config_url=columns_config_url,
         )
 
         table = bigquery.Table(self.table_full_name["staging"])
