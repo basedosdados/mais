@@ -1,0 +1,60 @@
+Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) agrupados pelo código de DDD formando a série histórica de 2009 a 2021. A Anatel disponibiliza um arquivo .zip com diferentes arquivos do tipo CSV. Os microdados de 2005 a 2018 são divididos em dois arquivos: 'modalidade' (pré ou pós pago) e 'tecnologia' (entre outras especificações mais técnicas, a geraçaõ de sinal 1G, 2G, 3G, 4G, etc.). A partir de 2019 o menor nível de desagregação dos dados passa a ser municipal e os arquivos .csv são divididos em semestres. Além do código de Discagem Direta a Distância, os dados são agrupados por mês, ano, tecnologia e sinal mostrando a evolução da conectivididade no Brasil nesse período.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-anatel-telefonia-movel
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
+Email: lucas.nasc.m@gmail.comTratado por
+-----------
+Nome: <nome>
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- ddd
+- tecnologia
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- mes
+- ddd
+- tecnologia
+- sinal
+
+Cobertura Temporal
+------------------
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- Brasil
+
+Tratamento
+----------
+Após o download das bases e a renomeação das colunas, a base de dados referente a tecnologia (2009-2018) foi concatenada com a base de dados mais recente (2019-2021) com observações agrupadas ao nível de DDD, tecnologia e sinal. O novo resultado do total de acessos agora corresponde o número de contratos estabelecidos para dado mês/ano, ao nível de DDD sob as especificações de tecnologia e sinal. Todas as demais colunas e observações são excluídas mantendo-se apenas uma única observação que representa tais características.
+
+Frequencia de Atualização
+-------------------------
+mes
+
+
