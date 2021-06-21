@@ -5,7 +5,7 @@ Todo esse esforço tem uma recompensa: criamos um **banco de dados** integrado c
 
 Nessa seção descrevemos coisas que podem ser úteis aos usuários de diversos públicos.
 
-!!! Tip "**Tem ideias de análises, gráficos, ou reportagens para escrever em cima do nosso repositório?** Fique a vontade pra começar! Só não esqueça de [citar o projeto](/#como-citar-o-projeto) ;)"
+!!! Tip "**Tem ideias de análises, gráficos, ou reportagens para escrever em cima do nosso repositório?** Fique a vontade pra começar! Só não esqueça de [citar o projeto](../#como-citar-o-projeto) ;)"
 
 ---
 

@@ -114,7 +114,7 @@ import basedosdados as bd
 bd.list_datasets()
 ```
 
-Para saber mais, veja os [exemplos](https://github.com/basedosdados/mais/tree/master/examples) ou a [documentação da API](https://basedosdados.github.io/mais/py_reference_api/)
+Para saber mais, veja os [exemplos](https://github.com/basedosdados/mais/tree/master/examples) ou a [documentação da API](https://basedosdados.github.io/mais/reference_api_py/)
 
 # Usando em R
 

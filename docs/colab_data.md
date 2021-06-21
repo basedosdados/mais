@@ -105,7 +105,7 @@ Cada tabela limpa para produção pode ser salva como um arquivo `.csv` único o
 
 Nós já criamos funções úteis para limpeza nas nossas APIs de Python e R. Por exemplo, com o pacote `basedosdados` você pode ler tabelas muito grandes, particionar tabelas automaticamente, gerar certas variáveis comuns (e.g. `sigla_uf` a partir de `id_uf`), etc.
 
-Tudo nesse passo deve seguir nosso [manual de estilo](/mais/style_data) e as [melhores práticas de programação]((https://en.wikipedia.org/wiki/Best_coding_practices)).
+Tudo nesse passo deve seguir nosso [manual de estilo](/mais/style_data) e as [melhores práticas de programação](https://en.wikipedia.org/wiki/Best_coding_practices).
 
 ## 5. Se necessário, organizar arquivos auxiliares
 
