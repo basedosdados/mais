@@ -7,7 +7,7 @@ dataset_id: eu_fra_lgbt # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/eu-fra-lgbt # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/eu_fra_lgbt # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: v1.0 # REQUIRED
 
 last_updated: 2021-06-11 # AUTO GENERATED
 
@@ -16,31 +16,32 @@ last_updated: 2021-06-11 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    <descrição>
+    A tabela contém dados da pesquisa europeia a comunidade LGBT, com recorte para o cotidiano da população LGBT e como esses se diferem em cada país
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: <nome [você]>  # REQUIRED
+    name: Matheus Valentim  # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/eu_fra_lgbt/code # REQUIRED
-    website: <website>
-    email: <email>
+    website: https://github.com/mavalentim
+    email: mavalentim.b@gmail.com
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <nome>
-    code_url: <onde encontrar código de tratamento>
-    website: <onde encontrar os dados tratados>
-    email: <email>
+    name: Matheus Valentim  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/eu_fra_lgbt/code # REQUIRED
+    website: https://github.com/mavalentim
+    email: mavalentim.b@gmail.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    <CEPESP fez X. Eu fiz K>
+    O tratamento da base consistiu em alternar nome e ordem de colunas
+
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: <frequência> # REQUIRED 
+data_update_frequency: unico # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -49,15 +50,19 @@ data_update_frequency: <frequência> # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - <primeira coluna>
-    - <segunda coluna>
+    - pais
+    - grupo LGBT
+    - pergunta
+    - resposta
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - <primeira coluna>
-    - <segunda coluna>
+    - pais_ingles
+    - grupo
+    - pergunta
+    - resposta
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -69,16 +74,12 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - <admin0 - pais>
-    - <admin1 - estados/regioes/etc>
-    - <admin2 - municipios/counties/etc>
-    - <admin3 - distritos/subdistritos/etc>
+    - europa
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - <ano 1>
-    - <ano 2>
+    - 2012
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -97,37 +98,37 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: id_pais
-        description: <descrição da coluna>
+        name: pais_ingles
+        description: Nome do país em inglês
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: grupo
-        description: <descrição da coluna>
+        description: Grupo LGBT
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_pergunta
-        description: <descrição da coluna>
+        description: ID da pergunta da entrevista
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: pergunta
-        description: <descrição da coluna>
+        description: Pergunta da entrevista
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: resposta
-        description: <descrição da coluna>
+        description: Resposta à pergunta da entrevista
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: porcentagem
-        description: <descrição da coluna>
+        description: Porcentagem de pessoas que responderam com tal resposta
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

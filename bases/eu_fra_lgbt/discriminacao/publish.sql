@@ -21,10 +21,10 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.eu_fra_lgbt.discriminacao AS
 SELECT 
-SAFE_CAST(id_pais AS STRING) id_pais,
+SAFE_CAST(id_pais AS STRING) pais_ingles,
 SAFE_CAST(grupo AS STRING) grupo,
 SAFE_CAST(id_pergunta AS STRING) id_pergunta,
 SAFE_CAST(pergunta AS STRING) pergunta,
 SAFE_CAST(resposta AS STRING) resposta,
-SAFE_CAST(porcentagem AS STRING) porcentagem
+SAFE_CAST(porcentagem AS FLOAT64) porcentagem
 from basedosdados-dev.eu_fra_lgbt_staging.discriminacao as t

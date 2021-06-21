@@ -1,4 +1,4 @@
-<descrição>
+A tabela contém dados da pesquisa europeia a comunidade LGBT, com recorte para a discriminação sofrida pela comunidade LGBT e os impactos da lgbtfobia na vida da comunidade.
 
 
 Para saber mais acesse:
@@ -10,11 +10,44 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: <nome [você]>
-Código: https://github.com/basedosdados/mais/tree/master/bases/eu_fra_lgbt/codeTratado por
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/eu_fra_lgbt/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
 -----------
-Nome: <nome>
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/eu_fra_lgbt/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
 
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- pais
+- grupo LGBT
+- pergunta
+- resposta
 
+Colunas identificando linhas unicamente
+-------------------
+- pais_ingles
+- grupo
+- pergunta
+- resposta
+
+Cobertura Temporal
+------------------
+- 2012
+
+Cobertura Espacial
+------------------
+- europa
+
+Tratamento
+----------
+O tratamento da base consistiu em alternar nome e ordem de colunas
+
+Frequencia de Atualização
+-------------------------
+unico
 
 
