@@ -8,7 +8,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_tel
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    Dados da Anatel referente a dados móveis, também conhecido como Serviço Móvel Pessoal (SMP). A Anatel disponibiliza um arquivo .zip com diferentes arquivos do tipo CSV. Os microdados de 2005 a 2018 são divididos em dois arquivos: 'modalidade' (pré ou pós pago) e 'tecnologia' (entre outras especificações mais técnicas, a geraçaõ de sinal 1G, 2G, 3G, 4G ou M2M). A partir de 2019 o menor nível de desagregação dos dados passa a ser municipal e os arquivos .csv são divididos em semestres. 
+    Dados da Anatel referente a dados móveis, também conhecido como Serviço Móvel Pessoal (SMP). A Anatel disponibiliza um arquivo .zip com diferentes arquivos do tipo CSV. Os microdados de 2005 a 2018 são divididos em dois arquivos: 'modalidade' (pré ou pós pago) e 'tecnologia' (entre outras especificações mais técnicas, a geraçaõ de sinal 1G, 2G, 3G, 4G ou M2M). A partir de 2019 o menor nível de desagregação dos dados passa a ser municipal e os arquivos .csv são divididos em semestres.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
