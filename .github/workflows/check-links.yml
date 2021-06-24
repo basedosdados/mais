@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  link-checker:
+  check-links:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,19 +15,20 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.8.x'
-      - name: Check Links with Lychee
-        id: lychee
-        uses: ./.github/workflows/check-links
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Parse report to markdown
-        if: ${{ steps.lychee.outputs.continue == 1 }}
-        run: sudo python ./.github/workflows/check-links/to_markdown.py
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install wheel scrapy
+      - name: Search for broken links and fill report
+        uses: ./.github/workflows/check-links/
+      - name: Continue if report exists
+        id: report
+        run: test -f ./report.md && echo ::set-output name=continue::1 || echo ::set-output name=continue::0
       - name: Create Issue From File
-        if: ${{ steps.lychee.outputs.continue == 1 }}
+        if: ${{ steps.report.outputs.continue == 1 }}
         uses: peter-evans/create-issue-from-file@v2
         with:
-          title: "[docs] Corrigir links quebrados"
-          content-filepath: ./lychee/report.md
+          title: "[docs] corrigir links quebrados"
+          content-filepath: ./report.md
           labels: report, automated issue
           assignees: fernandascovino
