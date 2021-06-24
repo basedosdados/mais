@@ -73,7 +73,7 @@ ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
 O BigQuery possui já um mecanismo de busca que permite buscar por nomes
 de *datasets* (conjuntos), *tables* (tabelas) ou *labels* (grupos).
 Construímos regras de nomeação simples e práticas para facilitar sua
-busca - veja mais [na seção de Nomenclatura](../data_naming_rules/).
+busca - veja mais [na seção de Nomenclatura](../style_data/).
 
 #### Metadados
 

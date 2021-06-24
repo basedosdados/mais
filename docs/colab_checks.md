@@ -66,7 +66,7 @@ Não se assuste caso não conheça algo da sintaxe acima, podemos lhe ajudar dur
 o processo. Note que os valores entre chaves são variáveis contidas em arquivos
 `table_config.yaml`, que contém metadados das tabelas. Logo a escrita de consulta
 é limitada pelos metadados existentes. Recomendamos consultar estes arquivos
-no diretório das [bases](https://github.com/basedosdados/mais/tree/check-data/bases).
+no diretório das [bases](https://github.com/basedosdados/mais/tree/master/bases).
 
 <!----------------------------------------------------------------------------->
 
