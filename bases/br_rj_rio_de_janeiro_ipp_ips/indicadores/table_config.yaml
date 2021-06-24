@@ -1,0 +1,328 @@
+source_bucket_name: basedosdadosdev
+project_id_staging: basedosdados-312117
+project_id_prod: basedosdados-312117
+table_id: indicadores # AUTO GENERATED
+dataset_id: br_rj_rio_de_janeiro_ipp_ips # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-rj-rio-de-janeiro-ipp-ips # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_rj_rio_de_janeiro_ipp_ips # AUTO GENERATED
+
+version: v1.2 # REQUIRED
+
+last_updated: 2021-06-10 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Indicadores do Índice de Progresso Social (IPS)
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Pedro Castro  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_rj_rio_de_janeiro_ipp_ips/code # REQUIRED
+    website: https://github.com/aspeddro
+    email: pdesacastro@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Pedro Castro
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_rj_rio_de_janeiro_ipp_ips/code
+    website: https://github.com/aspeddro
+    email: pdesacastro@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    - Ajuste nos nomes das regiões administrativas
+    - Arredondamento para dois dígitos
+    - Adição da coluna ano
+    - Renomeação das colunas
+    
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: 2 anos # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - regiao administrativa
+    - ano
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - regiao_administrativa
+    - ano
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+    - RJ
+    - Rio de Janeiro
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2016
+    - 2018
+    - 2020
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: regiao_administrativa
+        description: Região Administrativa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mortalidade_infancia
+        description: Óbitos de crianças de 0 a 5 anos por 1.000 nascidos vivos. O número de óbitos foi obtido por meio do Sistema de Informações sobre Mortalidade do Sistema de Informações em Saúde da Secretaria Municipal de Saúde do Município do Rio de Janeiro (SMS-RJ). O número de nascidos vivos foi obtido por meio do Sistema de Informação de Nascidos Vivos, da mesma base de dados da SMS-RJ.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_baixo_peso_nascer
+        description: Proporção de nascidos vivos que, na primeira pesagem (preferencialmente, durante a primeira hora de vida), tinham peso inferior a 2.500 quilogramas. O número de nascimentos abaixo do peso e o total de nascidos vivos foram obtidos pelo Sistema de Informação de Nascidos Vivos do Sistema de informação em Saúde da SMS-RJ.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mortalidade_materna
+        description: Óbitos de mulheres ocorridos até 42 dias após o término da gravidez, atribuídos a causas ligadas a gravidez, parto, e puerpério, em relação ao total de nascidos vivos. O número de óbitos de mulheres por essas causas foi obtido pelo Sistema de Informações sobre Mortalidade do Sistema de Informações em Saúde da SMS-RJ. O número de nascidos vivos foi obtido pelo Sistema de Informação de Nascidos Vivos, da mesma base de dados da SMS-RJ.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_internacoes_infantis_crise_respiratoria_aguda
+        description: Taxa de internações de crianças por infecção respiratória aguda (pneumonias, sinusites, faringoamigdalites e resfriados comuns). O número de internações foi  em 2016 fornecido pela Secretaria Municipal de Saúde do Rio; e em 2018, foi calculado pela Rio como Vamos, com base na mesma fonte. O número de crianças, para 2016,  foi obtido pelo Censo Demográfico 2010.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_acesso_agua_canalizada
+        description: Proporção de domicílios cuja forma de abastecimento de água é a rede geral de distribuição. A forma de abastecimento de água e o número total de domicílios foram obtidos dos resultados do Censo Demográfico de 2010 – Questionário Básico.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_acesso_esgotamento_sanitario
+        description: Proporção de domicílios cujo esgoto do banheiro ou sanitário é lançado na rede geral de esgoto ou pluvial. O local de lançamento do esgoto e o número total de domicílios foram obtidos dos resultados do Censo Demográfico 2010 – Questionário Básico.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_acesso_banheiro
+        description: Proporção de domicílios com pelo menos um banheiro. O número de banheiros por domicílio, assim como número total de domicílios, foram obtidos dos resultados do Censo Demográfico 2010 – Questionário Básico.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_populacao_vivendo_favelas_nao_urbanizadas
+        description: Proporção da população total da RA vivendo em favelas não urbanizadas. Os dados sobre a população total das regiões e o número de habitantes das favelas vêm do Censo Demográfico 2010. A informação sobre quais favelas foram urbanizadas vem do Sistema de Assentamentos de Baixa Renda (SABREN) do Instituto Pereira Passos.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_acesso_energia_eletrica
+        description: Proporção de domicílios nos quais há energia elétrica de companhia distribuidora. A existência de energia elétrica formal e o número total de domicílios foram obtidos dos resultados do Censo Demográfico 2010 – Questionário Básico.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_adensamento_habitacional_excessivo
+        description: Proporção de domicílios com mais de três moradores por dormitório. O número de domicílios nessas condições foi obtido por meio dos resultados do Censo Demográfico 2010 – Questionário da Amostra, por Área de Ponderação, e depois reorganizado por RA.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_homicidios
+        description: Número de óbitos por homicídio, latrocínio e lesão corporal seguida de morte por 100.000 habitantes. Número de óbitos foi obtido por meio dos boletins de divulgação mensal do Instituto de Segurança Pública do Estado do Rio de Janeiro (ISP), enquanto o número de habitantes foi obtido dos resultados do Censo Demográfico 2010.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_roubos_rua
+        description: Taxas de ocorrências de roubo a transeunte, roubo de aparelho celular e roubo em coletivo por 1.000 habitantes. Número de ocorrências foi obtido por meio dos boletins de divulgação mensal do ISP, enquanto o número de habitantes foi obtido dos resultados do Censo Demográfico 2010.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_alfabetizacao
+        description: Proporção de crianças alfabetizadas até o terceiro ano do Ensino Fundamental em escolas públicas. Crianças alfabetizadas são as que têm nota acima do nível 2 na Avaliação Nacional de Alfabetização (ANA) do Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP), em relação ao número total de crianças da rede pública de ensino do Município do Rio de Janeiro que participaram da ANA.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: qualidade_ensino_fundamental_anos_iniciais
+        description: Nota média no Índice de Desenvolvimento da Educação Básica (IDEB) do INEP para os anos iniciais. A nota por RA foi agregada pela média das escolas  públicas e ponderada pelo número de alunos.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: qualidade_ensino_fundamental_anos_finais
+        description: Nota média no IDEB para os anos finais. A nota por RA agregada pela média das escolas públicas e ponderada pelo número de alunos de cada escola.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_abandono_escolar_ensino_medio
+        description: Proporção dos alunos do Ensino Médio em instituições públicas de ensino na cidade do Rio de Janeiro que abandonaram a escola. O número de alunos que abandonaram a escola e o número total de alunos foram obtidos por meio do Censo da Educação Básica do INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_acesso_telefone_celular_fixo
+        description: Proporção de domicílios com telefone celular ou fixo. O Número de domicílios que têm telefone, celular ou fixo, e o número total de domicílios foram obtidos dos resultados do Censo Demográfico 2010 – Questionário da Amostra, por Área de Ponderação, e depois reorganizados por RA.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_acesso_internet
+        description: Proporção de domicílios com acesso à internet. Número de domicílios com microcomputador com acesso à internet, e o número total de domicílios foram obtidos dos resultados do Censo Demográfico 2010 – Questionário da Amostra, por Área de Ponderação, e depois reorganizados por RA.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_mortalidade_doencas_cronicas
+        description: Taxa de mortalidade por doenças crônicas não transmissíveis antes dos 70 anos por 100.000 habitantes. O número de mortes foi obtido por meio do Sistema de Informações sobre Mortalidade do Sistema de Informações em Saúde da SMS-RJ, enquanto o número de habitantes com menos de 70 anos foi obtido nos resultados do Censo Demográfico 2010.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_incidencia_dengue
+        description: Taxa de incidência de dengue por 100.000 habitantes. O número de casos notificados de dengue foi obtido no Sistema Nacional de Agravos Notificáveis do Sistema de Informações em Saúde da SMS-RJ, enquanto o número de habitantes foi obtido dos resultados do Censo Demográfico 2010.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_mortalidade_tuberculose_hiv
+        description: Taxa de mortalidade por tuberculose ou causas associadas ao HIV por 100.000 habitantes. O número de óbitos por tuberculose ou causas associadas ao HIV foi obtido por meio do Sistema de Informações sobre Mortalidade do Sistema de Informações em Saúde da SMS-RJ, enquanto o número de habitantes foi obtido dos resultados do Censo Demográfico 2010.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_coleta_seletiva_lixo
+        description: Proporção do lixo potencialmente reciclável recolhido pela Coleta Seletiva Domiciliar. Os dados de potencial reciclado e resíduo sólido coletado foram fornecidos para a elaboração do IPS pela Companhia Municipal de Limpeza Urbana (COMLURB).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: degradacao_areas_verdes
+        description: Diferença entre o tamanho da área coberta por vegetação arbóreo-arbustiva e gramíneo-lenhosa no ano de referência do IPS e o da área de mesmo tipo em 2013. O tamanho das áreas cobertas por vegetação no período foi calculado com base no Mapa de Uso do Solo do Instituto Pereira Passos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_mobilidade_urbana
+        description: Proporção da população que vive em um raio de 1 km de uma estação de acesso a um meio de transporte de massa (metrô, trem, BRT e VLT). O índice foi calculado pelo Instituto de Políticas de Transporte e Desenvolvimento (ITDP) com base nas estimativas populacionais do Censo Demográfico de 2010 e da geolocalização das estações dos meios de transporte de massa do Instituto Pereira Passos.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_homicidios_acao_policial
+        description: Taxa de homicídios por intervenção policial por 100.000 habitantes. O número de óbitos foi obtido por meio dos boletins de divulgação mensal do Instituto de Segurança Pública do Estado do Rio de Janeiro (ISP), enquanto o número de habitantes foi obtido nos resultados do Censo Demográfico 2010.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tempo_medio_deslocamento
+        description: Tempo médio, em minutos, gasto no deslocamento entre residência e atividade principal. A estimativa foi feita com base nos dados do Plano Diretor de Transporte Urbano (PDTU) de 2012 do governo do estado do Rio de Janeiro.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_participacao_politica
+        description: Taxa de participação nas últimas eleições federais e municipais com dados disponíveis. O número de votantes, por zona eleitoral, nas duas eleições e o número de eleitores aptos para votar foram fornecidos pelo Tribunal Superior Eleitoral (TSE).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_gravidez_adolescencia
+        description: Proporção de nascidos vivos com mães de até 19 anos. O número total de nascidos vivos e o número de nascidos vivos com mãe de até 19 anos foram obtidos por meio do Sistema de Informação de Nascidos Vivos do Sistema de informação em Saúde da SMS-RJ.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: trabalho_infantil
+        description: Crianças ou adolescentes exercendo atividades laborais por 100.000 habitantes. Os dados foram obtidos por meio do Cadastro Único para programas sociais do governo federal, geolocalizado para o cálculo do IPS pela Secretaria Municipal do Desenvolvimento Social do município do Rio de Janeiro (SMDS). O número de habitantes foi obtido dos resultados do Censo Demográfico 2010.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: indice_acesso_cultura
+        description: Índice calculado pelo IPP para a produção do IPS. O índice considera o número de equipamentos culturais municipais, o número de ações e eventos culturais da prefeitura, além da capacidade das salas privadas de cinema, todos em relação à população da Região Administrativa. As informações foram fornecidas pela Secretaria Municipal de Cultura do município do Rio de Janeiro.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_violencia_contra_mulher
+        description: Taxas de crimes de violência física e sexual contra mulheres por 100.000 habitantes. O número de ocorrências de crimes de violência física (homicídio doloso, tentativa de homicídio e lesão corporal dolosa) e violência sexual (estupro e tentativa de estupro) contra mulheres foi obtido por meio de dados trabalhados a partir da publicação Dossiê Mulher do ISP, enquanto o número de habitantes foi obtido dos resultados do Censo Demográfico 2010.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_homicidios_jovens_negros
+        description: Taxa de homicídios de jovens (até 26 anos) pretos e pardos por 100.000 habitantes. O número de óbitos de jovens negros foi calculado para a construção do IPS pelo ISP, enquanto o número de habitantes foi obtido nos resultados do Censo Demográfico 2010.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_vulnerabilidade_familiar
+        description: Proporção de domicílios com mulher com ensino fundamental incompleto como responsável e filho(s) menor(es) de 10 anos ou economicamente inativo(s). O número de domicílios com essas características e número total de domicílios foram obtidos dos resultados do Censo Demográfico 2010 – Questionário da Amostra, por Área de Ponderação, e depois reorganizados por RA.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_pessoas_ensino_superior
+        description: Proporção da população de 25 anos ou mais que completou Ensino Superior. Os dados de escolaridade e tamanho da população de 25 anos ou mais foram obtidos dos resultados do Censo Demográfico 2010 – Questionário da Amostra, por Área de Ponderação, e depois reorganizados por RA.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_negros_indigenas_ensino_superior
+        description: Proporção da população que se autoidentifica como preta, parda ou indígena com idade igual ou superior a 25 anos que completou o Ensino Superior. Os dados de escolaridade desse grupo populacional e seu tamanho foram obtidos dos resultados do Censo Demográfico 2010 – Questionário da Amostra, por Área de Ponderação, e depois reorganizados por RA.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_frequencia_ensino_superior
+        description: Proporção da população com idade entre 18 e 24 anos que frequenta ou concluiu o Ensino Superior. Os dados de escolaridade desse grupo populacional e seu tamanho foram obtidos dos resultados do Censo Demográfico 2010 – Questionário da Amostra, por Área de Ponderação, e depois reorganizados por RA.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.

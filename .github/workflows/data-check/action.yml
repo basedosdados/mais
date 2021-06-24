@@ -1,0 +1,8 @@
+name: "Data Check"
+description: "Checks data quality"
+author: "Base dos Dados"
+runs:
+  using: composite
+  steps:
+    - run: pytest -v ${{ github.action_path }}
+      shell: bash

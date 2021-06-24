@@ -1,0 +1,6 @@
+name: "Check Links"
+description: "Check BD+ docs for broken links"
+author: "Base dos Dados"
+runs:
+  using: "docker"
+  image: "Dockerfile"
