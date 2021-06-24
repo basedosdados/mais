@@ -16,7 +16,7 @@ last_updated: 2021-06-08 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) agrupados pelo código de DDD formando a série histórica de 2009 a 2021. A Anatel disponibiliza um arquivo .zip com diferentes arquivos do tipo CSV. Os microdados de 2005 a 2018 são divididos em dois arquivos: 'modalidade' (pré ou pós pago) e 'tecnologia' (entre outras especificações mais técnicas, a geraçaõ de sinal 1G, 2G, 3G, 4G, etc.). A partir de 2019 o menor nível de desagregação dos dados passa a ser municipal e os arquivos .csv são divididos em semestres. Além do código de Discagem Direta a Distância, os dados são agrupados por mês, ano, tecnologia e sinal mostrando a evolução da conectivididade no Brasil nesse período.
+    Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) agrupados pelo código de DDD formando a série histórica de 2009 a 2021. Além do código de Discagem Direta a Distância como identificador, os dados são agrupados por mês, ano, tecnologia e sinal mostrando a evolução da conectivididade no Brasil nesse período.
 
 # Quem está completando esse arquivo config?
 published_by:
