@@ -1,0 +1,57 @@
+A tabela contém valores para assassinatos LGBTQIA+ no Brasil, extraídos dos relatórios anuais do Grupo Gay da Bahia, agregados pelo grupo LGBT ao qual a vítima pertencia. Os grupos não são necessariamente excludentes, por isso a proporção do total não necessariamente soma 100.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ggb-relatorio-lgbtqi
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ggb_relatorio_lgbtqi
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ggb_relatorio_lgbtqi/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ggb_relatorio_lgbtqi/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- grupo lgbtqia
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- grupo
+- ano
+
+Cobertura Temporal
+------------------
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+O tratamento consistiu em ler o pdf do relatório com a biblioteca tabulizer para anos mais recentes e coleta manual para anos anteriores.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+
