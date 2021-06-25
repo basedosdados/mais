@@ -1,0 +1,1 @@
+[{"name": "ano", "description": "Ano", "is_in_staging": true, "is_partition": false, "type": "STRING", "mode": "NULLABLE"}, {"name": "homicidios", "description": "Homic\u00eddios totais de LGBTQIA+", "is_in_staging": true, "is_partition": false, "type": "INTEGER", "mode": "NULLABLE"}]
