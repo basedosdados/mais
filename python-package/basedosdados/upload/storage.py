@@ -198,7 +198,10 @@ class Storage(Base):
                 else:
                     raise Exception(
                         f"Data already exists at {self.bucket_name}/{blob_name}. "
-                        "Set if_exists to 'replace' to overwrite data"
+                        "If you are using Storage.upload then set if_exists to "
+                        "'replace' to overwrite data \n"
+                        "If you are using Table.create then set if_storage_data_exists "
+                        "to 'reaplace' to overwrite data."
                     )
 
     def download(
