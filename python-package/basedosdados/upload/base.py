@@ -152,7 +152,7 @@ class Base:
             )
 
             input(
-                "\n\nApparently, dfdfthat is the first time that you are using "
+                "\n\nApparently, that is the first time that you are using "
                 "basedosdados :)\n"
                 "Before you go, we need to setup your workspace.\n"
                 "It will not take long, I promise!\n"
