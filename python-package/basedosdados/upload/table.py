@@ -25,7 +25,7 @@ class Table(Base):
     Manage tables in Google Cloud Storage and BigQuery.
     """
 
-    def __init__(self, table_id, dataset_id, **kwargs):
+    def __init__(self, dataset_id, table_id, **kwargs):
         super().__init__(**kwargs)
 
         self.table_id = table_id.replace("-", "_")
