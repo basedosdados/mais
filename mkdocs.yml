@@ -29,10 +29,9 @@ nav:
     - Local: access_data_local.md
   - Colaborar: 
     - Dados: colab_data.md
-    - Manual de estilo:
-      - Bases e tabelas: style_naming_datasets_tables.md
-      - Colunas: style_naming_columns.md
-      - Valores: style_data.md
+    - Testes de Dados: colab_checks.md
+    - Infraestrutura: colab_infrastructure.md
+    - Manual de estilo: style_data.md
   - Analisar:
       - Início: analysis.md
   - API: 

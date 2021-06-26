@@ -1,4 +1,4 @@
-name: Update table when modified or added
+name: table-approve
 on:
   push:
     branches:

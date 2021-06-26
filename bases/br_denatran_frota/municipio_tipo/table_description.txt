@@ -51,6 +51,7 @@ Cobertura Temporal
 - 2018
 - 2019
 - 2020
+- 2021
 
 Cobertura Espacial
 ------------------
@@ -63,5 +64,4 @@ Padronização das colunas. Nova coluna, id_municipio. Remoção das linhas "MUN
 Frequencia de Atualização
 -------------------------
 mes
-
 

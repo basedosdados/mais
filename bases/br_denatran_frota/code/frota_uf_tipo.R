@@ -64,18 +64,29 @@ PREFIX_FROTA_REG <- "frota_regiao_tipo"
   dir = PATH_DOWNLOAD_REG
 ))
 
+
+2021 %>% purrr::walk(~download_frota(
+  key = "Frota por UF e Tipo",
+  prefix = PREFIX_FROTA_REG,
+  month = 1:12,
+  year = .x,
+  tempdir = PATH_TEMP,
+  dir = PATH_DOWNLOAD_REG
+))
+
 list.files(PATH_DOWNLOAD_REG, full.names = T) %>%
   purrr::map(
     ~read_xl(.x, type = "grandes reg|uf") %>%
-    dplyr::rename("sigla_uf" = 1) %>%
-    dplyr::filter(sigla_uf %in%  unname(siglas_uf)) %>%
-    dplyr::select(sigla_uf, ano, mes, automovel:utilitario) %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(
-      dplyr::across(!c(sigla_uf), as.numeric),
-      sigla_uf = sigla_uf %>% stringr::str_trim() %>% get_sigla_uf(),
-      total = rowSums(across(automovel:utilitario))
-    ) -> frota_regiao
+      dplyr::rename("sigla_uf" = 1) %>%
+      dplyr::filter(sigla_uf %in%  unname(siglas_uf)) %>%
+      dplyr::select(sigla_uf, ano, mes, automovel:utilitario) %>%
+      dplyr::rowwise() %>%
+      dplyr::mutate(
+        dplyr::across(!c(sigla_uf), as.numeric),
+        sigla_uf = sigla_uf %>% stringr::str_trim() %>% get_sigla_uf(),
+        total = rowSums(across(automovel:utilitario))
+      )
+  ) -> frota_regiao
 
 # Cada tibble deve ter 25 colunas e 27 linhas
 frota_regiao %>% purrr::map_lgl(~ncol(.x) == 25 & nrow(.x) == 27) %>% all(T)

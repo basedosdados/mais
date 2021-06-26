@@ -57,10 +57,10 @@ das tabelas de população e PIB do IBGE com o resultado anual desde 1991.
 SELECT 
     pib.id_municipio,
     pop.ano, 
-    pib.PIB / pop.populacao * 1000 as pib_per_capita
-FROM `basedosdados.br_ibge_pib.municipios` as pib
-JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-ON pib.id_municipio = pop.id_municipio
+    pib.PIB / pop.populacao * 1000 AS pib_per_capita
+FROM `basedosdados.br_ibge_pib.municipios` AS pib
+JOIN `basedosdados.br_ibge_populacao.municipios` AS pop
+ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
 ```
 
 !!! Tip "Dica"
@@ -73,7 +73,7 @@ ON pib.id_municipio = pop.id_municipio
 O BigQuery possui já um mecanismo de busca que permite buscar por nomes
 de *datasets* (conjuntos), *tables* (tabelas) ou *labels* (grupos).
 Construímos regras de nomeação simples e práticas para facilitar sua
-busca - veja mais [na seção de Nomenclatura](../data_naming_rules/).
+busca - veja mais [na seção de Nomenclatura](../style_data/).
 
 #### Metadados
 
