@@ -152,7 +152,7 @@ class Base:
             )
 
             input(
-                "\n\nApparently, that is the first time that you are using "
+                "\n\nApparently, dfdfthat is the first time that you are using "
                 "basedosdados :)\n"
                 "Before you go, we need to setup your workspace.\n"
                 "It will not take long, I promise!\n"
@@ -212,7 +212,7 @@ class Base:
             )
             c_file["gcloud-projects"]["staging"]["name"] = project_staging
 
-            ############# STEP 5 - PROD CREDS. #######################
+            ############# STEP 4 - PROD CREDS. #######################
 
             project_prod = self._selection_yn(
                 first_question=(
@@ -227,8 +227,14 @@ class Base:
                 ),
                 default_no="basedosdados",
             )
-
-            self._check_credentials(project_prod, "prod", credentials_path)
+            # skip credentials with project staging is the same
+            if project_prod == project_staging:
+                shutil.copy(
+                    (credentials_path / "staging.json"),
+                    (credentials_path / "prod.json"),
+                )
+            else:
+                self._check_credentials(project_prod, "prod", credentials_path)
 
             c_file["gcloud-projects"]["prod"]["credentials_path"] = str(
                 credentials_path / "prod.json"
