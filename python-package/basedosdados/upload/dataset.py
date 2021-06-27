@@ -11,8 +11,8 @@ class Dataset(Base):
     Manage datasets in BigQuery.
     """
 
-    def __init__(self, dataset_id, **kwArgs):
-        super().__init__(**kwArgs)
+    def __init__(self, dataset_id, **kwargs):
+        super().__init__(**kwargs)
 
         self.dataset_id = dataset_id.replace("-", "_")
         self.dataset_folder = Path(self.metadata_path / self.dataset_id)
@@ -76,7 +76,7 @@ class Dataset(Base):
 
         for file in (Path(self.templates) / "dataset").glob("*"):
 
-            if file.name in ["dataset_config.yaml", "README.md"]:
+            if file.name in ["README.md"]:
 
                 # Load and fill template
                 template = self._render_template(
@@ -87,6 +87,7 @@ class Dataset(Base):
                 (self.dataset_folder / file.name).open("w", encoding="utf-8").write(
                     template
                 )
+        
 
         # Add code folder
         (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
@@ -142,7 +143,7 @@ class Dataset(Base):
             mode (str): Optional. Which dataset to create [prod|staging|all].
             if_exists (str): Optional. What to do if dataset exists
 
-                * raise : Raises Conflic exception
+                * raise : Raises Conflict exception
                 * replace : Drop all tables and replace dataset
                 * update : Update dataset description
                 * pass : Do nothing
