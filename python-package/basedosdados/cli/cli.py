@@ -6,6 +6,7 @@ from basedosdados.upload.base import Base
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.table import Table
 from basedosdados.upload.storage import Storage
+from basedosdados.upload.metadata import Metadata
 
 import basedosdados as bd
 
@@ -648,6 +649,31 @@ def cli_get_table_columns(
     )
 
 
+@click.group(name="metadata")
+def cli_metadata():
+    pass
+
+
+@cli_metadata.command(name="create", help="Creates new metadata config file")
+@click.argument("dataset_id")
+@click.argument("table_id", required=False)
+@click.option(
+    "--if_exists",
+    default="raise",
+    help="[raise|replace|pass] if metadata config file alread exists",
+)
+@click.pass_context
+def cli_create_metadata(ctx, dataset_id, table_id, if_exists):
+
+    m = Metadata(dataset_id, table_id, **ctx.obj).create(if_exists=if_exists)
+    click.echo(
+        click.style(
+            f"Metadata file was created at `{m.obj_path}`",
+            fg="green",
+        )
+    )
+
+
 @click.group(name="config")
 def cli_config():
     pass
@@ -755,47 +781,8 @@ cli.add_command(cli_config)
 cli.add_command(cli_download)
 cli.add_command(cli_list)
 cli.add_command(cli_get)
+cli.add_command(cli_metadata)
 
-
-def run_bash(command):
-    stream = os.popen(command)
-
-
-def set_config_file():
-
-    if not os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"):
-
-        project_id = input(
-            "\nWe need to finish setting up your basic enviorinment!\n"
-            "What is your project id? You should easily find it here: "
-            "https://console.developers.google.com/cloud-resource-manager?pli=1\n"
-            "Make sure to copy the ID!\n"
-            "project_id: "
-        )
-
-        os.popen("gcloud iam service-accounts create basedosdados-cli")
-        time.sleep(3)
-
-        os.popen(
-            f"""gcloud projects add-iam-policy-binding {project_id} --member "serviceAccount:basedosdados-cli@{project_id}.iam.gserviceaccount.com" --role "roles/owner"
-            """
-        )
-        time.sleep(3)
-
-        os.popen(
-            f"""gcloud iam service-accounts keys create ~/.basedosdados/iam.json --iam-account basedosdados-cli@{project_id}.iam.gserviceaccount.com"""
-        )
-        time.sleep(3)
-
-        print(
-            "\nRun this command and rerun the application:\n"
-            "export GOOGLE_APPLICATION_CREDENTIALS=~/.basedosdados/iam.json"
-        )
-
-        exit()
-
-
-# set_config_file()
 
 if __name__ == "__main__":
 
