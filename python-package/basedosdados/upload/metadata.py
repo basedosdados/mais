@@ -5,6 +5,7 @@ import ast
 from pathlib import Path
 from copy import deepcopy
 from functools import lru_cache
+from collections import defaultdict
 
 import requests
 import ruamel.yaml as ryaml
@@ -31,6 +32,7 @@ class Metadata(Base):
 
     @property
     def obj_path(self):
+
         if self.table_id is None:
             return self.metadata_path / self.dataset_id / "dataset_config.yaml"
         else:
@@ -43,12 +45,14 @@ class Metadata(Base):
 
     @property
     def local_config(self):
-
-        return ryaml.safe_load(open(self.obj_path, "r").read())
+        if self.obj_path.exists():
+            return ryaml.safe_load(open(self.obj_path, "r").read())
+        else:
+            return {}
 
     @property
     @lru_cache(256)
-    def ckan_config(self):
+    def ckan_config(self) -> dict:
 
         # TODO: This will not be needed after migration
         pkg_list = requests.get(CKAN_URL + "/api/3/action/package_list").json()[
@@ -60,10 +64,7 @@ class Metadata(Base):
         elif self.dataset_id.replace("_", "-") in pkg_list:
             dataset_id = self.dataset_id.replace("_", "-")
         else:
-            raise BaseDosDadosException(
-                f"dataset_id '{self.dataset_id}' was not found in CKAN"
-            )
-        # ENDS HERE
+            return defaultdict(lambda: dict())
 
         dataset_config = requests.get(
             CKAN_URL + f"/api/3/action/package_show?id={dataset_id}"
@@ -81,19 +82,21 @@ class Metadata(Base):
     @lru_cache(256)
     def metadata_schema(self):
         # TODO: Get it from ckan endpoint
-        return ast.literal_eval(open("table_schema.txt", "r").read())["properties"]
+        if self.table_id is None:
+            return ast.literal_eval(open("dataset_schema.txt", "r").read())
+        else:
+            return ast.literal_eval(open("table_schema.txt", "r").read())
 
     def is_updated(self):
 
-        if self.local_config["metadata_modified"] is None:
+        if self.local_config.get("metadata_modified") is None:
             return False
         else:
-            return (
-                self.ckan_config["metadata_modified"]
-                == self.local_config["metadata_modified"]
+            return self.ckan_config.get("metadata_modified") == self.local_config.get(
+                "metadata_modified"
             )
 
-    def create(self):
+    def create(self, if_exists="raise"):
         """Create metadata file based on the current version saved to
         CKAN database
 
@@ -102,10 +105,23 @@ class Metadata(Base):
                 Path to save downloaded files. If None is given, saves to the
                 standard metadata_path as defined in your config.toml file.
                 Defaults to None.
+            if_exists (str): Optional. What to do if config exists
+                * raise : Raises Conflict exception
+                * replace : Replaces config file with most recent
+                * pass : Do nothing
         """
 
-        yaml_obj = builds_yaml_object(self.metadata_schema, self.ckan_config)
-        ryaml.YAML().dump(yaml_obj, open(self.obj_path, "w"))
+        if self.obj_path.exists() and if_exists == "raise":
+            raise FileExistsError(
+                f"{self.obj_path} already exists. Set the arg `if_exists`"
+                " to `replace` to replace it."
+            )
+        elif if_exists != "pass":
+            yaml_obj = builds_yaml_object(self.metadata_schema, self.ckan_config)
+            self.obj_path.parent.mkdir(parents=True, exist_ok=True)
+            ryaml.YAML().dump(yaml_obj, open(self.obj_path, "w"))
+
+        return self
 
     def validate(self):
         """Validate table_config.yaml file. The yaml file should be located at
@@ -166,37 +182,51 @@ def builds_yaml_object(schema, data=dict()):
 
     yaml_obj = ryaml.CommentedMap()
 
+    properties, definitions = schema["properties"], schema["definitions"]
+
     # Drops all properties without yaml_order
-    key_list = list(schema.keys())
+    key_list = list(properties.keys())
     for k in key_list:
-        if schema[k].get("yaml_order") is None:
-            del schema[k]
+        if properties[k].get("yaml_order") is None:
+            del properties[k]
 
     # Recursivelly adds properties to yaml to maintain order
-    def _add_property(yaml_obj, schema, goal=None):
+    def _add_property(yaml_obj, properties, goal=None):
 
-        for k in schema.keys():
+        for k in properties.keys():
 
             # Base case (goal is None) has to look for id_before == None
             # Otherwise just looks for key
-            if ((goal is None) & (schema[k]["yaml_order"]["id_before"] == goal)) | (
+            if ((goal is None) & (properties[k]["yaml_order"]["id_before"] == goal)) | (
                 k == goal
             ):
 
-                yaml_obj[k] = handle_data(k, schema, data)
+                if "allOf" in properties[k]:
+
+                    yaml_obj[k] = ryaml.CommentedMap()
+                    # Parsing 'allOf': [{'$ref': '#/definitions/PublishedBy'}]
+                    # To get PublishedBy
+                    d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
+                    for dk, dv in definitions[d]["properties"].items():
+                        yaml_obj[k][dk] = handle_data(
+                            dk, definitions[d]["properties"], data[dk]
+                        )
+
+                else:
+                    yaml_obj[k] = handle_data(k, properties, data)
 
                 # Adds comments
                 yaml_obj.yaml_set_comment_before_after_key(
-                    k, before=comment_treatment(schema[k])
+                    k, before=comment_treatment(properties[k])
                 )
                 break
 
         # Returns ruaml object when property doesn't point to any other property
-        id_after = schema[k]["yaml_order"]["id_after"]
+        id_after = properties[k]["yaml_order"]["id_after"]
         if id_after is None:
             return yaml_obj
         else:
-            schema.pop(k)
-            return _add_property(yaml_obj, schema, id_after)
+            properties.pop(k)
+            return _add_property(yaml_obj, properties, id_after)
 
-    return _add_property(yaml_obj, schema)
+    return _add_property(yaml_obj, properties)
