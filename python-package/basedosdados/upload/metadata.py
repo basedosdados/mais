@@ -1,9 +1,13 @@
-from pathlib import Path
 import os
 import json
+import sys
+import ast
+from pathlib import Path
+from copy import deepcopy
+from functools import lru_cache
+
 import requests
-import yaml
-from yaml.loader import Loader
+import ruamel.yaml as ryaml
 
 from google.api_core.exceptions import NotFound
 
@@ -13,47 +17,40 @@ from ckanapi import errors
 
 from basedosdados.upload.base import Base
 from basedosdados.validation.exceptions import BaseDosDadosException
-from basedosdados.upload.table import Table
 
 # CKAN_URL = os.environ.get("CKAN_URL", "http://localhost:5000")
 CKAN_URL = "http://basedosdados.org"
 
 
-class NoDatesSafeLoader(yaml.SafeLoader):
-    @classmethod
-    def remove_implicit_resolver(cls, tag_to_remove):
-        """
-        We want to load datetimes as strings, not dates, because we
-        go on to serialise as json which doesn't have the advanced types
-        of yaml, and leads to incompatibilities down the track.
-        """
-        if not "yaml_implicit_resolvers" in cls.__dict__:
-            cls.yaml_implicit_resolvers = cls.yaml_implicit_resolvers.copy()
-        for first_letter, mappings in cls.yaml_implicit_resolvers.items():
-            cls.yaml_implicit_resolvers[first_letter] = [
-                (tag, regexp) for tag, regexp in mappings if tag != tag_to_remove
-            ]
+class Metadata(Base):
+    def __init__(self, dataset_id, table_id=None, **kwargs):
+        super().__init__(**kwargs)
 
+        self.dataset_id = dataset_id
+        self.table_id = table_id
 
-NoDatesSafeLoader.remove_implicit_resolver("tag:yaml.org,2002:timestamp")
+    @property
+    def obj_path(self):
+        if self.table_id is None:
+            return self.metadata_path / self.dataset_id / "dataset_config.yaml"
+        else:
+            return (
+                self.metadata_path
+                / self.dataset_id
+                / self.table_id
+                / "table_config.yaml"
+            )
 
+    @property
+    def local_config(self):
 
-class Metadata(Table):
-    def __init__(self, dataset_id, table_id, **kwargs):
+        return ryaml.safe_load(open(self.obj_path, "r").read())
 
-        super().__init__(dataset_id, table_id, **kwargs)
+    @property
+    @lru_cache(256)
+    def ckan_config(self):
 
-        self.metadata_path = dict(
-            table=Path(self.table_folder / "table_config.yaml"),
-            dataset=Path(self.dataset_folder / "dataset_config.yaml"),
-        )
-        self.dataset_config = yaml.load(
-            open(self.metadata_path["dataset"], "r", encoding="utf-8"),
-            Loader=yaml.SafeLoader,
-        )
-
-    def _get_package(self):
-
+        # TODO: This will not be needed after migration
         pkg_list = requests.get(CKAN_URL + "/api/3/action/package_list").json()[
             "result"
         ]
@@ -66,91 +63,51 @@ class Metadata(Table):
             raise BaseDosDadosException(
                 f"dataset_id '{self.dataset_id}' was not found in CKAN"
             )
+        # ENDS HERE
 
-        return requests.get(
+        dataset_config = requests.get(
             CKAN_URL + f"/api/3/action/package_show?id={dataset_id}"
         ).json()["result"]
 
-    def _get_resource(self):
-        """Get resource by trying to match CKAN package name with given
-        dataset_id and resource name with given table_id
+        if self.table_id is not None:
+            return [
+                r for r in dataset_config["resources"] if r["name"] == self.table_id
+            ][0]
 
-        Raises:
-            e: [description]
-        Returns:
-            dict: the resource dict as it is saved on the CKAN database.
-        """
-        pkg_dict = self._get_package()
-        resource = [r for r in pkg_dict["resources"] if r["name"] == self.table_id][0]
-        return resource
+        else:
+            return dataset_config
 
-    def _check_resource_last_modified(self):
-        resource = self._get_resource()
-        if resource["metadata_modified"] != self.table_config["last_updated"]:
-            raise BaseDosDadosException(
-                f"You're trying to update the table {self.dataset_id}.{self.table_id}"
-                "but are not using the latest metadata version, download it first,"
-                "then retry updating"
+    @property
+    @lru_cache(256)
+    def metadata_schema(self):
+        # TODO: Get it from ckan endpoint
+        return ast.literal_eval(open("table_schema.txt", "r").read())["properties"]
+
+    def is_updated(self):
+
+        if self.local_config["metadata_modified"] is None:
+            return False
+        else:
+            return (
+                self.ckan_config["metadata_modified"]
+                == self.local_config["metadata_modified"]
             )
 
-    def _check_package_last_modified(self):
-        pkg_dict = RemoteCKAN(CKAN_URL, user_agent="", apikey=None).action.package_show(
-            id=self.dataset_id
-        )
-        if pkg_dict["last_modified"] != self.dataset_config["last_updated"]:
-            raise BaseDosDadosException(
-                f"You're trying to update the dataset {self.dataset_id} but are"
-                "not using the latest metadata version, download it first, then retry updating"
-            )
-
-    def generate_metadata(self, obj, metadata_path=None):
-        """Generate  metadata file based on the current version saved to
+    def create(self):
+        """Create metadata file based on the current version saved to
         CKAN database
 
         Args:
-            obj (str):
-                Either dataset or table
             path (str, pathlib.Path): Optional
                 Path to save downloaded files. If None is given, saves to the
                 standard metadata_path as defined in your config.toml file.
                 Defaults to None.
         """
 
-        if obj == "table":
-            content = self._get_resource()
-        elif obj == "dataset":
-            content = self._get_package()
-            content.pop("resources")
-        else:
-            ValueError("obj expects dataset or table but got {obj}")
+        yaml_obj = builds_yaml_object(self.metadata_schema, self.ckan_config)
+        ryaml.YAML().dump(yaml_obj, open(self.obj_path, "w"))
 
-        if metadata_path is None:
-            metadata_path = self.metadata_path[obj]
-        elif Path(metadata_path).name == f"{obj}_config.yaml":
-            metadata_path = Path(metadata_path)
-        else:
-            metadata_path = Path(metadata_path) / f"{obj}_config.yaml"
-
-        print(
-            yaml.dump(
-                content,
-                line_break=False,
-                sort_keys=False,
-                default_flow_style=False,
-                allow_unicode=True,
-            )
-        )
-        # open(dump_path, "w").write(
-        #     yaml.dump(
-        #         pkg_dict,
-        #         line_break=False,
-        #         sort_keys=False,
-        #         default_flow_style=False,
-        #         allow_unicode=True,
-        #     )
-        # )
-
-    def validate_table(self):
+    def validate(self):
         """Validate table_config.yaml file. The yaml file should be located at
         metadata_path/dataset_id/table_id/, as defined in your config.toml
 
@@ -179,3 +136,67 @@ class Metadata(Table):
             raise BaseDosDadosException(
                 f"{self.table_metadata_path} has validation errors: {error_dict}"
             )
+
+
+def comment_treatment(c):
+
+    return "\n" + "\n".join(c.get("description", [""]))
+
+
+def handle_data(k, schema, data, local_default=None):
+
+    # If no data is found for that key, uses pydantic default, else uses
+    # local default
+    selected = data.get(k, schema[k].get("default", local_default))
+
+    # In some cases like `tags`, `groups`, `organization`
+    # the API default is to return a dict or list[dict] with all info.
+    # But, we just use `name` to build the yaml
+    _selected = deepcopy(selected)
+    if not isinstance(_selected, list):
+        _selected = [_selected]
+    if isinstance(_selected[0], dict):
+        if _selected[0].get("id") is not None:
+            return [s.get("name") for s in _selected]
+
+    return selected
+
+
+def builds_yaml_object(schema, data=dict()):
+
+    yaml_obj = ryaml.CommentedMap()
+
+    # Drops all properties without yaml_order
+    key_list = list(schema.keys())
+    for k in key_list:
+        if schema[k].get("yaml_order") is None:
+            del schema[k]
+
+    # Recursivelly adds properties to yaml to maintain order
+    def _add_property(yaml_obj, schema, goal=None):
+
+        for k in schema.keys():
+
+            # Base case (goal is None) has to look for id_before == None
+            # Otherwise just looks for key
+            if ((goal is None) & (schema[k]["yaml_order"]["id_before"] == goal)) | (
+                k == goal
+            ):
+
+                yaml_obj[k] = handle_data(k, schema, data)
+
+                # Adds comments
+                yaml_obj.yaml_set_comment_before_after_key(
+                    k, before=comment_treatment(schema[k])
+                )
+                break
+
+        # Returns ruaml object when property doesn't point to any other property
+        id_after = schema[k]["yaml_order"]["id_after"]
+        if id_after is None:
+            return yaml_obj
+        else:
+            schema.pop(k)
+            return _add_property(yaml_obj, schema, id_after)
+
+    return _add_property(yaml_obj, schema)
