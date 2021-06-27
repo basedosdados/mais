@@ -39,18 +39,22 @@ class Datatype:
     @property
     def external_config(self):
 
-        if self.source_format != "csv":
+        if self.source_format == "csv":
+
+            _external_config = bigquery.ExternalConfig("CSV")
+            _external_config.options.skip_leading_rows = 1
+            _external_config.options.allow_quoted_newlines = True
+            _external_config.options.allow_jagged_rows = True
+            _external_config.autodetect = False
+            _external_config.schema = self.table_obj._load_schema(self.mode)
+
+        # You can add new formats here
+
+        else:
 
             raise NotImplementedError(
                 "Base dos Dados just supports comma separated csv files"
             )
-
-        _external_config = bigquery.ExternalConfig("CSV")
-        _external_config.options.skip_leading_rows = 1
-        _external_config.options.allow_quoted_newlines = True
-        _external_config.options.allow_jagged_rows = True
-        _external_config.autodetect = False
-        _external_config.schema = self.table_obj._load_schema(self.mode)
 
         _external_config.source_uris = f"gs://{self.table_obj.bucket_name}/staging/{self.table_obj.dataset_id}/{self.table_obj.table_id}/*"
 
