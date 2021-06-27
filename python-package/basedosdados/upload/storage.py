@@ -2,6 +2,7 @@ from pathlib import Path
 from tqdm import tqdm
 
 from basedosdados.upload.base import Base
+from basedosdados.validation.exceptions import BaseDosDadosException
 
 
 class Storage(Base):
@@ -187,13 +188,17 @@ class Storage(Base):
 
                     blob.upload_from_filename(str(filepath), **upload_args)
 
-                elif if_exists != "pass":
-                    raise Exception(
+                elif if_exists == "pass":
+
+                    pass
+
+                else:
+                    raise BasedosDadosException(
                         f"Data already exists at {self.bucket_name}/{blob_name}. "
                         "If you are using Storage.upload then set if_exists to "
                         "'replace' to overwrite data \n"
                         "If you are using Table.create then set if_storage_data_exists "
-                        "to 'reaplace' to overwrite data."
+                        "to 'replace' to overwrite data."
                     )
 
     def download(
