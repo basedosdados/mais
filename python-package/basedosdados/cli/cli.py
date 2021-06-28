@@ -653,11 +653,16 @@ def cli_config():
     pass
 
 
-@cli_config.command(name="overwrite_cli_config", help="Overwrite current configuration")
+@cli_config.command(name="init", help="Initialize configuration")
+@click.option(
+    "--overwrite",
+    default=False,
+    help="Wheteher to overwrite current config",
+)
 @click.pass_context
-def init_overwrite_cli_config(ctx):
+def init(ctx, overwrite):
 
-    Base(overwrite_cli_config=True, **ctx.obj)
+    Base(overwrite_cli_config=overwrite, **ctx.obj)
 
 
 @cli_config.command(name="refresh_template", help="Overwrite current templates")
