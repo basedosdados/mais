@@ -57,4 +57,4 @@ def test_primary_key_has_unique_values(configs):
     name = "test_primary_key_has_unique_values"
     if name in configs and "query" in configs[name]:
         result = fetch_data(name, configs)
-        assert result.to_numpy().all()
+        assert result.unique_percentage.values == 1
