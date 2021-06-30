@@ -42,11 +42,10 @@
 Tratamos, padronizamos e disponibilizamos bases de dados públicas de
 várias fontes como PNAD, RAIS, Censo e DataSUS. A Base dos Dados Mais
 (BD+) é um datalake público no Google BigQuery e uma consulta escrita em
-SQL é o suficiente para começar a sua análise. \
+SQL é o suficiente para começar a sua análise. Temos bibliotecas em [Python](#usando-em-python) e [R](#usando-em-r) para facilitar o acesso
+ao datalake e estamos sempre adicionando novas bases. 
 
-Temos bibliotecas em [Python](#usando-em-python) e [R](#usando-em-r) para facilitar o acesso
-ao datalake e estamos sempre adicionando novas bases de dados. O projeto
-faz parte da Base dos Dados, uma organização sem fins lucrativos com a
+O projeto faz parte da [Base dos Dados](http://basedosdados.org), uma organização sem fins lucrativos com a
 missão e universalizar o acesso a dados de qualidade para todes. Veja
 mais [quem contribui e como você também pode contribuir](#contribua-).
 
