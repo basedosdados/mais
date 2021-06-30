@@ -1,5 +1,13 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: municipio_de_para # AUTO GENERATED
 dataset_id: br_ibge_amc # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-inep-saeb # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb # AUTO GENERATED
+
+version: v2.0 # REQUIRED
 
 last_updated: 2020-10-27 # AUTO GENERATED
 
@@ -10,6 +18,15 @@ last_updated: 2020-10-27 # AUTO GENERATED
 description: |  # REQUIRED
     Tabela com todas as combinações de ano_de e ano_para mapeando municípios em 2010 para anos anteriores.
 
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Ricardo Dahis
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_amc/code # REQUIRED
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
+
+
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
@@ -18,13 +35,6 @@ treated_by:
     code_url: https://www.scielo.br/scielo.php?script=sci_arttext&pid=S0101-41612017000100215
     website: <onde encontrar os dados tratados>
     email: philipp.ehrl@gmail.com
-
-# Quem está completando esse arquivo config?
-published_by:
-    name: Ricardo Dahis
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_amc/code # REQUIRED
-    website: www.ricardodahis.com
-    email: rdahis@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
@@ -40,6 +50,14 @@ data_update_frequency: unico
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
     - municipio
+    - ano_de
+    - ano_para
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_municipio
     - ano_de
     - ano_para
 
