@@ -39,46 +39,28 @@
 
 # O que fazemos?
 
-Organizamos, tratamos e disponibilizamos bases de dados públicas difíceis de se manusear e disponibilizamos as mesmas no nosso mecanismo de busca e num *datalake* público de forma fácil e simples para que a única preocupação de quem as utiliza seja qual pergunta fazer aos dados. Uma simples consulta de SQL é o suficiente para cruzamento das bases que você desejar - sem nunca mais precisar procurar, baixar, tratar, comprar um servidor e subir clusters na nuvem.
+Tratamos, padronizamos e disponibilizamos bases de dados públicas de
+várias fontes como PNAD, RAIS, Censo e DataSUS. A Base dos Dados Mais
+(BD+) é um datalake público no Google BigQuery e uma consulta escrita em
+SQL é o suficiente para começar a consultar. Temos bibliotecas em
+[Python](#usando-em-python) e [R](#usando-em-r) para facilitar o acesso
+ao datalake e estamos sempre adicionando novas bases de dados.
 
-**Nosso repositório traz acesso, rapidez, escala, facilidade, economia, curadoria, e transparência ao cenário de dados no Brasil.**
+## [Acesse o projeto no BigQuery ↗️](https://console.cloud.google.com/bigquery?p=basedosdados&page=project)
 
-<p align="center" display="inline-block">
-  <a href="https://console.cloud.google.com/bigquery?p=basedosdados&page=project" target="_blank">
-    <img src="docs/images/bq_button.png" alt="" width="300" display="inline-block" margin="200">
-  </a>
-  <a href="https://basedosdados.github.io/mais" target="_blank" display="inline-block" margin="200">
-    <img src="docs/images/docs_button.png" alt="Start" width="300">
-  </a>
-</p>
+## [Leia a documentação 📖](https://basedosdados.github.io/mais)
 
+## [Confira exemplos e tutoriais 📊](#exemplos-e-tutoriais)
 
 # Usando em Python
 
 
-### Instale
+## Instale
 ```bash
 pip install basedosdados
 ```
 
-### Crie seu projeto no BigQuery
-
-É necessário criar um projeto para que você possa fazer as queries no
-nosso repositório. Ter um projeto é de graça e basta ter uma conta
-Google (seu gmail por exemplo). 
-
-Caso não tenha ainda um projeto, [veja aqui como criar um projeto no Google
-Cloud](https://basedosdados.github.io/mais/access_data_local/#criando-um-projeto-no-google-cloud).
-
-Se possível, armazene suas credenciais em um arquivo `dotenv`:
-
-```sh
-
-"billing_project_id=<suas_credenciais_do_projeto>" >> .env
-
-```
-
-### Acesse uma tabela
+## Acesse uma tabela
 
 ```python
 import basedosdados as bd
@@ -87,8 +69,13 @@ df = bd.read_table('br_ibge_pib', 'municipios', billing_project_id="<YOUR-PROJEC
 ```
 
 > Caso esteja acessando da primeira vez, vão aparecer alguns passos na tela para autenticar seu projeto - basta segui-los!
+>
+> É necessário criar um projeto para que você possa fazer as queries no nosso repositório. Ter um projeto é de graça e basta ter uma conta Google (seu gmail por exemplo). [Veja aqui como criar um projeto no Google Cloud](https://basedosdados.github.io/mais/access_data_local/#criando-um-projeto-no-google-cloud).
+> 
+> Se possível, armazene suas credenciais em um arquivo `dotenv`: `"billing_project_id=<suas_credenciais_do_projeto>" >> .env`
 
-### Faça uma consulta
+
+## Faça uma consulta
 
 ```python
 import basedosdados as bd
@@ -106,7 +93,7 @@ df = bd.read_sql(query, billing_project_id="<YOUR-PROJECT>")
 
 > Caso esteja acessando da primeira vez, vão aparecer alguns passos na tela para autenticar seu projeto - basta segui-los!
 
-### Veja todos os datasets disponíveis
+## Veja todos os datasets disponíveis
 
 ```python
 import basedosdados as bd
@@ -118,7 +105,7 @@ Para saber mais, veja os [exemplos](https://github.com/basedosdados/analises/tre
 
 # Usando em R
 
-### Instale
+## Instale
 ```R
 install.packages("basedosdados")
 
@@ -127,7 +114,7 @@ install.packages("basedosdados")
 devtools::install_github("basedosdados/mais", subdir = "r-package")
 ```
 
-### Faça uma consulta
+## Faça uma consulta
 
 ```r
 library(basedosdados)
@@ -147,11 +134,20 @@ ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
 download(pib_per_capita, "pib_per_capita.csv") # salve os dados em disco
 ```
 
-# Exemplos
+> Caso esteja acessando da primeira vez, vão aparecer alguns passos na tela para autenticar seu projeto - basta segui-los!
+>
+> É necessário criar um projeto para que você possa fazer as queries no nosso repositório. Ter um projeto é de graça e basta ter uma conta Google (seu gmail por exemplo). [Veja aqui como criar um projeto no Google Cloud](https://basedosdados.github.io/mais/access_data_local/#criando-um-projeto-no-google-cloud).
+> 
+> Se possível, armazene suas credenciais em um arquivo `dotenv`: `"billing_project_id=<suas_credenciais_do_projeto>" >> .env`
+
+# Exemplos e tutoriais
 
 Acesse os códigos de análises produzidas em Workshops, Artigos,
 Tutoriais e Redes Sociais todas no nosso repositório de
-[analises](http://github.com/basedosdados/analises)
+[analises](http://github.com/basedosdados/analises).
+
+Você pode conferir também tutoriais de como utilizar nossa plataforma no
+[Youtube](https://www.youtube.com/c/BasedosDados) e no [blog](http://dev.to/basedosdados).
 
 # Contribua! 🔄
 
@@ -168,14 +164,12 @@ Você pode contribuir de várias maneiras:
 - Ajudando na captação de recursos
 - Nos chamando para aprensetações, simpósios e conferências
 
-### Não sabe por onde começar? Entre no nosso [Discord](https://discord.gg/jE2EvqZTyD) e se apresente no canal #quero-contribuir
-
 **Incentivamos que outras instituições e pessoas contribuam**. [Veja mais
-como contribuir aqui](https://basedosdados.github.io/mais/colab_data/).
+como contribuir](https://basedosdados.github.io/mais/colab_data/) e
+[descubra quem contribui com nosso
+código!](https://github.com/basedosdados/mais/blob/master/CONTRIBUTORS.md)
 
-### [Descubra quem contribui com nosso código!](https://github.com/basedosdados/mais/blob/master/CONTRIBUTORS.md)
-
-# Apoie 💚
+## Apoie 💚
 
 A Base dos Dados já poupou horas da sua vida? Ou permitiu coisas antes impossíveis? Nosso trabalho é quase todo voluntário, mas temos vários custos de infraestrutura, equipe, e outros.
 
