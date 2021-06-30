@@ -3,15 +3,31 @@ Dados de quantidade de pessoas nascidas até 31 de julho de 2010 por município-
 
 Para saber mais acesse:
 Website: 
-Github: https://github.com/basedosdados/mais/
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_nomes_brasil/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_nomes_brasil/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+
+Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
 - nome
+
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
 
 Cobertura Temporal
 ------------------
@@ -29,14 +45,4 @@ Frequencia de Atualização
 -------------------------
 10 anos
 
-Tratado por
------------
-Nome: <nome>
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_nomes_brasil/code
 
-Publicado por
--------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_nomes_brasil/code
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org
