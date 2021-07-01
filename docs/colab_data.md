@@ -154,7 +154,7 @@ Para criar um projeto no Google Cloud basta ter um email cadastrado no Google. S
 No seu terminal:
 
 - Instale nosso cliente: `pip install basedosdados`.
-- Rode `basedosdados config` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
+- Rode `basedosdados config init` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
 - Clone um _fork_ do nosso [repositório](https://github.com/basedosdados/mais) localmente.
 - Dê um `cd` para a pasta local do repositório e abra uma nova branch com `git checkout -b [BRANCH_ID]`.
 

@@ -26,11 +26,7 @@ class Dataset(Base):
 
     def _loop_modes(self, mode="all"):
 
-        if mode == "all":
-            mode = ["prod", "staging"]
-        else:
-            mode = [mode]
-
+        mode = ["prod", "staging"] if mode == "all" else [mode]
         dataset_tag = lambda m: f"_{m}" if m == "staging" else ""
 
         return (

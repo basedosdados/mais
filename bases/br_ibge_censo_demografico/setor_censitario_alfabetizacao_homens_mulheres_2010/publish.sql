@@ -21,7 +21,7 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_ibge_censo_demografico.setor_censitario_alfabetizacao_homens_mulheres_2010 AS
 SELECT 
-SAFE_CAST(id_setor_censitario AS INT64) id_setor_censitario,
+SAFE_CAST(id_setor_censitario AS STRING) id_setor_censitario,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(v086 AS INT64) v086,
 SAFE_CAST(v087 AS INT64) v087,
