@@ -26,6 +26,8 @@ Nível da Observação (i.e. a granularidade da linha)
 
 Colunas identificando linhas unicamente
 -------------------
+- ano
+- mes
 - id_municipio
 - cnpj
 - tecnologia

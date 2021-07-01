@@ -20,11 +20,14 @@ Email: lucas.nasc.m@gmail.com
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- municipio
 - escola
 
 Colunas identificando linhas unicamente
 -------------------
+- ano
+- mes
+- dia
+- id_municipio
 - id_escola
 
 Cobertura Temporal
