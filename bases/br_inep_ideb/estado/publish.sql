@@ -18,13 +18,13 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW `basedosdados.br_inep_ideb.estado` AS
+CREATE VIEW `basedosdados-dev.br_inep_ideb.estado` AS
 SELECT 
-SAFE_CAST(estado_abrev AS STRING) estado_abrev,
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(estado_abrev AS STRING) sigla_uf,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(ensino AS STRING) ensino,
 SAFE_CAST(anos_escolares AS STRING) anos_escolares,
-SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(taxa_aprovacao AS FLOAT64) taxa_aprovacao,
 SAFE_CAST(indicador_rendimento AS FLOAT64) indicador_rendimento,
 SAFE_CAST(nota_SAEB_matematica AS FLOAT64) nota_saeb_matematica,
@@ -32,4 +32,4 @@ SAFE_CAST(nota_SAEB_lingua_portuguesa AS FLOAT64) nota_saeb_lingua_portuguesa,
 SAFE_CAST(nota_SAEB_media_padronizada AS FLOAT64) nota_saeb_media_padronizada,
 SAFE_CAST(IDEB AS FLOAT64) ideb,
 SAFE_CAST(projecao AS FLOAT64) projecao
-from basedosdados-staging.br_inep_ideb_staging.estado as t
+from basedosdados-dev.br_inep_ideb_staging.estado as t

@@ -1,5 +1,13 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: municipio # AUTO GENERATED
 dataset_id: br_inep_ideb # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-inep-ideb # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ideb # AUTO GENERATED
+
+version: v1.0 # REQUIRED
 
 last_updated: 2020-11-01 # AUTO GENERATED
 
@@ -39,10 +47,20 @@ data_update_frequency: 2 anos
 # Regras: minúsculo, sem acento, singular.
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
+    - municipio
+    - rede
+    - ensino
+    - ano
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
     - id_municipio
     - rede
     - ensino
     - ano
+
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -91,14 +109,14 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: municipio
+        name: nome_municipio
         description: Nome do Município
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: estado_abrev
-        description: Estado Abreviado
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
