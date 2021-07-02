@@ -76,7 +76,7 @@ em todos os anos disponíveis**.
         pib.PIB / pop.populacao * 1000 as pib_per_capita 
     FROM `basedosdados.br_ibge_pib.municipios` as pib 
     INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop 
-    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
+    ON pib.id_municipio = CAST(pop.id_municipio AS INTEGER) AND pib.ano = pop.ano
     LIMIT 100;'
     ```
 
@@ -92,7 +92,7 @@ em todos os anos disponíveis**.
         pib.PIB / pop.populacao * 1000 as pib_per_capita
     FROM `basedosdados.br_ibge_pib.municipios` as pib
     INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
+    ON pib.id_municipio = CAST(pop.id_municipio AS INTEGER) AND pib.ano = pop.ano
     """
 
     # Você pode fazer o download no seu computador
@@ -128,7 +128,7 @@ em todos os anos disponíveis**.
         pib.PIB / pop.populacao * 1000 as pib_per_capita
         FROM `basedosdados.br_ibge_pib.municipios` as pib
         JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-        ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
+        ON pib.id_municipio = CAST(pop.id_municipio AS INTEGER) AND pib.ano = pop.ano"
 
     # Você pode fazer o download no seu computador
     dir <- tempdir()
