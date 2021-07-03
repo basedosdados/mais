@@ -300,10 +300,8 @@ class Base:
 
     def _load_config(self):
 
-        from_env: str = getenv(
-            constants.env_config, "")
-        if from_env != "":
-            config = json.loads(self._decode_env(from_env))
+        if getenv(constants.env_config):
+            config = json.loads(self._decode_env(constants.env_config))
             return tomlkit.parse(config)
         else:
             return tomlkit.parse(
