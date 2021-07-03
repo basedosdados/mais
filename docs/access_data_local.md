@@ -75,7 +75,7 @@ em todos os anos disponíveis**.
         pop.ano,  
         pib.PIB / pop.populacao * 1000 as pib_per_capita 
     FROM `basedosdados.br_ibge_pib.municipios` as pib 
-    INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop 
+    INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop 
     ON pib.id_municipio = CAST(pop.id_municipio AS INTEGER) AND pib.ano = pop.ano
     LIMIT 100;'
     ```
@@ -91,7 +91,7 @@ em todos os anos disponíveis**.
         pop.ano, 
         pib.PIB / pop.populacao * 1000 as pib_per_capita
     FROM `basedosdados.br_ibge_pib.municipios` as pib
-    INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
+    INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop
     ON pib.id_municipio = CAST(pop.id_municipio AS INTEGER) AND pib.ano = pop.ano
     """
 
@@ -127,7 +127,7 @@ em todos os anos disponíveis**.
         pop.ano,
         pib.PIB / pop.populacao * 1000 as pib_per_capita
         FROM `basedosdados.br_ibge_pib.municipios` as pib
-        JOIN `basedosdados.br_ibge_populacao.municipios` as pop
+        JOIN `basedosdados.br_ibge_populacao.municipio` as pop
         ON pib.id_municipio = CAST(pop.id_municipio AS INTEGER) AND pib.ano = pop.ano"
 
     # Você pode fazer o download no seu computador
