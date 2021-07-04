@@ -301,8 +301,7 @@ class Base:
     def _load_config(self):
 
         if getenv(constants.env_config):
-            config = json.loads(self._decode_env(constants.env_config))
-            return tomlkit.parse(config)
+            return tomlkit.parse(self._decode_env(constants.env_config))
         else:
             return tomlkit.parse(
                 (Path.home() / ".basedosdados" / "config.toml")
