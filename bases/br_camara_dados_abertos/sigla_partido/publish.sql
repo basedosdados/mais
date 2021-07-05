@@ -18,8 +18,9 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW `basedosdados.br_camara_dados_abertos.siglas_partidos` AS
+
+CREATE VIEW basedosdados-dev.br_camara_dados_abertos.sigla_partido AS
 SELECT 
 SAFE_CAST(sigla_antiga AS STRING) sigla_partido_antiga,
 SAFE_CAST(sigla_nova AS STRING) sigla_partido_nova
-from basedosdados-staging.br_camara_dados_abertos_staging.siglas_partidos as t
+from basedosdados-dev.br_camara_dados_abertos_staging.sigla_partido as t
