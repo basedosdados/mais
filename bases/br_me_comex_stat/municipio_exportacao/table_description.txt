@@ -1,5 +1,7 @@
 Base de dados detalhada por município da empresa exportadora e Posição do Sistema Harmonizado (SH4).
 
+Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
+
 
 Para saber mais acesse:
 Website: https://basedosdados.org/dataset/br-me-comex-stat
