@@ -18,15 +18,16 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_ibge_pib.municipios AS
+
+CREATE VIEW basedosdados-dev.br_ibge_pib.municipio AS
 SELECT 
-SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(PIB AS INT64) PIB,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(PIB AS INT64) pib,
 SAFE_CAST(impostos_liquidos AS INT64) impostos_liquidos,
-SAFE_CAST(VA AS INT64) VA,
-SAFE_CAST(VA_agropecuaria AS INT64) VA_agropecuaria,
-SAFE_CAST(VA_industria AS INT64) VA_industria,
-SAFE_CAST(VA_servicos AS INT64) VA_servicos,
-SAFE_CAST(VA_ADESPSS AS INT64) VA_ADESPSS
-from basedosdados-staging.br_ibge_pib_staging.municipios as t
+SAFE_CAST(VA AS INT64) va,
+SAFE_CAST(VA_agropecuaria AS INT64) va_agropecuaria,
+SAFE_CAST(VA_industria AS INT64) va_industria,
+SAFE_CAST(VA_servicos AS INT64) va_servicos,
+SAFE_CAST(VA_ADESPSS AS INT64) va_adespss
+from basedosdados-dev.br_ibge_pib_staging.municipio as t
