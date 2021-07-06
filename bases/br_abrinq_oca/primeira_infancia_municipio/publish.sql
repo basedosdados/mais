@@ -19,12 +19,12 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados.br_abrinq_oca.primeira_infancia_municipios AS
+CREATE VIEW basedosdados-dev.br_abrinq_oca.primeira_infancia_municipio AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(taxa_bruta_mat_pre_escola AS FLOAT64) taxa_bruta_mat_pre_escola,
 SAFE_CAST(abs_bruta_mat_pre_escola AS INT64) abs_bruta_mat_pre_escola,
 SAFE_CAST(taxa_liquida_mat_pre_escola AS FLOAT64) taxa_liquida_mat_pre_escola,
 SAFE_CAST(abs_liquida_mat_pre_escola AS INT64) abs_liquida_mat_pre_escola
-from basedosdados-staging.br_abrinq_oca_staging.primeira_infancia_municipios as t
+from basedosdados-dev.br_abrinq_oca_staging.primeira_infancia_municipio as t
