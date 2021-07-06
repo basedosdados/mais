@@ -22,7 +22,7 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.tempo_deslocamento_casa_trabalho AS
 SELECT 
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(tempo_medio_deslocamento AS INT64) tempo_medio_deslocamento,
 SAFE_CAST(prop_deslocamento_acima_1_hora AS FLOAT64) prop_deslocamento_acima_1_hora

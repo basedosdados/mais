@@ -19,6 +19,10 @@ Nome: Crislane A. Souza
 Website: https://github.com/crislanealves
 Email: crislanealves@protonmail.com
 
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- None
+
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
@@ -58,7 +62,7 @@ Cobertura Espacial
 Tratamento
 ----------
 - Excluir linhas duplicadas; e,
-- Padronização da coluna 'ID Municipio' para 7 dígitos.
+- Padronização da coluna 'Id Municipio' para 7 dígitos.
 
 Frequencia de Atualização
 -------------------------
