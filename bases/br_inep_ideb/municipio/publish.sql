@@ -22,7 +22,6 @@ CREATE VIEW `basedosdados-dev.br_inep_ideb.municipio` AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(municipio AS STRING) nome_municipio,
 SAFE_CAST(estado_abrev AS STRING) sigla_uf,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(ensino AS STRING) ensino,
