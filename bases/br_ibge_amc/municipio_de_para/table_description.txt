@@ -2,8 +2,8 @@ Tabela com todas as combinações de ano_de e ano_para mapeando municípios em 2
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-inep-saeb
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb
+Website: https://basedosdados.org/dataset/br-ibge-amc
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_amc
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
