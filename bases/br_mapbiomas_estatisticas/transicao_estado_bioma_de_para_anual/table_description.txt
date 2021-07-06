@@ -28,8 +28,7 @@ Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - estado
 - bioma
-- de_classe
-- para_classe
+- classe
 - ano
 
 Colunas identificando linhas unicamente

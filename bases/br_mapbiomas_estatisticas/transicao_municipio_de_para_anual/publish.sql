@@ -23,7 +23,7 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(estado_abrev AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(de_id_classe AS INT64) de_id_classe,
+SAFE_CAST(de_id_classe AS STRING) de_id_classe,
 SAFE_CAST(de_nivel_0 AS STRING) de_nivel_0,
 SAFE_CAST(de_nivel_1 AS STRING) de_nivel_1,
 SAFE_CAST(de_nivel_2 AS STRING) de_nivel_2,
@@ -35,5 +35,5 @@ SAFE_CAST(para_nivel_1 AS STRING) para_nivel_1,
 SAFE_CAST(para_nivel_2 AS STRING) para_nivel_2,
 SAFE_CAST(para_nivel_3 AS STRING) para_nivel_3,
 SAFE_CAST(para_nivel_4 AS STRING) para_nivel_4,
-SAFE_CAST(area AS NUMERIC) area
+SAFE_CAST(area AS FLOAT64) area
 from basedosdados-dev.br_mapbiomas_estatisticas_staging.transicao_municipio_de_para_anual as t

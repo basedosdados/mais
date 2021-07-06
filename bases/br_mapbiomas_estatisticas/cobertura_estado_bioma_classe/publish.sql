@@ -23,7 +23,7 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(estado_abrev AS STRING) sigla_uf,
 SAFE_CAST(bioma AS STRING) bioma,
-SAFE_CAST(id_classe AS INT64) id_classe,
+SAFE_CAST(id_classe AS STRING) id_classe,
 SAFE_CAST(tipo_dado AS STRING) tipo_dado,
 SAFE_CAST(nivel_0 AS STRING) nivel_0,
 SAFE_CAST(nivel_1 AS STRING) nivel_1,
