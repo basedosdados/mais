@@ -56,7 +56,7 @@ observation_level: #REQUIRED
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - municipio
+    - id_municipio
     - ano
 
 # Qual é a cobertura espacial da tabela?
