@@ -21,8 +21,8 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_ana_atlas_esgotos.municipio AS
 SELECT 
-SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(populacao_urbana_2013 AS INT64) populacao_urbana_2013,
 SAFE_CAST(populacao_urbana_2035 AS INT64) populacao_urbana_2035,
 SAFE_CAST(prestador_servico_esgoto AS STRING) prestador_servico_esgoto,
