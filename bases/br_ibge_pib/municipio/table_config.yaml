@@ -134,31 +134,31 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: VA
+        name: va
         description: Valor adicionado bruto a preços correntes total
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: VA_agropecuaria
+        name: va_agropecuaria
         description: Valor adicionado bruto a preços correntes da agropecuária
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: VA_industria
+        name: va_industria
         description: Valor adicionado bruto a preços correntes da indústria
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: VA_servicos
+        name: va_servicos
         description: Valor adicionado bruto a preços correntes dos serviços, exclusive administração, defesa, educação e saúde públicas e seguridade social
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: VA_ADESPSS
+        name: va_adespss
         description: Valor adicionado bruto a preços correntes da administração, defesa, educação e saúde públicas e seguridade social
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
