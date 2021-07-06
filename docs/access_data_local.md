@@ -73,10 +73,10 @@ em todos os anos disponíveis**.
     SELECT 
         pib.id_municipio, 
         pop.ano,  
-        pib.PIB / pop.populacao * 1000 as pib_per_capita 
+        pib.PIB / pop.populacao as pib_per_capita 
     FROM `basedosdados.br_ibge_pib.municipio` as pib 
-    INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop 
-    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
+        INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop 
+        ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
     LIMIT 100;'
     ```
 
@@ -89,10 +89,10 @@ em todos os anos disponíveis**.
     pib_per_capita = """SELECT 
         pib.id_municipio ,
         pop.ano, 
-        pib.PIB / pop.populacao * 1000 as pib_per_capita
+        pib.PIB / pop.populacao as pib_per_capita
     FROM `basedosdados.br_ibge_pib.municipio` as pib
-    INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop
-    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
+        INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop
+        ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
     """
 
     # Você pode fazer o download no seu computador
@@ -125,10 +125,10 @@ em todos os anos disponíveis**.
     query <- "SELECT
         pib.id_municipio,
         pop.ano,
-        pib.PIB / pop.populacao * 1000 as pib_per_capita
+        pib.PIB / pop.populacao as pib_per_capita
         FROM `basedosdados.br_ibge_pib.municipio` as pib
-        JOIN `basedosdados.br_ibge_populacao.municipio` as pop
-        ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
+            JOIN `basedosdados.br_ibge_populacao.municipio` as pop
+            ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
 
     # Você pode fazer o download no seu computador
     dir <- tempdir()

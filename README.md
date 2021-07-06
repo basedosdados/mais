@@ -128,7 +128,7 @@ pib_per_capita <- "
 SELECT 
     pib.id_municipio ,
     pop.ano, 
-    pib.PIB / pop.populacao * 1000 as pib_per_capita
+    pib.PIB / pop.populacao as pib_per_capita
 FROM `basedosdados.br_ibge_pib.municipio` as pib
   INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop
   ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"

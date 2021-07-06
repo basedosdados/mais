@@ -57,10 +57,10 @@ das tabelas de população e PIB do IBGE com o resultado anual desde 2002.
 SELECT 
     pib.id_municipio,
     pop.ano, 
-    pib.PIB / pop.populacao * 1000 AS pib_per_capita
+    pib.PIB / pop.populacao AS pib_per_capita
 FROM `basedosdados.br_ibge_pib.municipio` AS pib
-JOIN `basedosdados.br_ibge_populacao.municipio` AS pop
-ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
+    JOIN `basedosdados.br_ibge_populacao.municipio` AS pop
+    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
 ```
 
 !!! Tip "Dica"
