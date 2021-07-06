@@ -19,10 +19,10 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados.br_ana_atlas_esgotos.municipios AS
+CREATE VIEW basedosdados-dev.br_ana_atlas_esgotos.municipio AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(populacao_urbana_2013 AS INT64) populacao_urbana_2013,
 SAFE_CAST(populacao_urbana_2035 AS INT64) populacao_urbana_2035,
 SAFE_CAST(prestador_servico_esgoto AS STRING) prestador_servico_esgoto,
@@ -61,4 +61,4 @@ SAFE_CAST(necessidade_remocao_dbo AS STRING) necessidade_remocao_dbo,
 SAFE_CAST(tipologia_solucao AS STRING) tipologia_solucao,
 SAFE_CAST(atencao_fosforo AS STRING) atencao_fosforo,
 SAFE_CAST(atencao_nitrogenio AS STRING) atencao_nitrogenio
-from basedosdados-staging.br_ana_atlas_esgotos_staging.municipios as t
+from basedosdados-dev.br_ana_atlas_esgotos_staging.municipio as t
