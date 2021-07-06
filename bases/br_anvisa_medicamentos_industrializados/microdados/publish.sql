@@ -22,8 +22,8 @@ CREATE VIEW basedosdados-dev.br_anvisa_medicamentos_industrializados.microdados 
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(principio_ativo AS STRING) principio_ativo,
 SAFE_CAST(descricao_apresentacao AS STRING) descricao_apresentacao,
 SAFE_CAST(qtde_vendida AS INT64) quantidade_vendida,
