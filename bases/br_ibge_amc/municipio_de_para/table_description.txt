@@ -2,15 +2,32 @@ Tabela com todas as combinações de ano_de e ano_para mapeando municípios em 2
 
 
 Para saber mais acesse:
-Website: 
-Github: https://github.com/basedosdados/mais/
+Website: https://basedosdados.org/dataset/br-inep-saeb
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_amc/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Philipp Ehrl
+Código: https://www.scielo.br/scielo.php?script=sci_arttext&pid=S0101-41612017000100215
+Email: philipp.ehrl@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
+- ano_de
+- ano_para
+
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
 - ano_de
 - ano_para
 
@@ -42,15 +59,4 @@ Frequencia de Atualização
 -------------------------
 unico
 
-Tratado por
------------
-Nome: Philipp Ehrl
-Código: https://www.scielo.br/scielo.php?script=sci_arttext&pid=S0101-41612017000100215
-Email: philipp.ehrl@gmail.com
 
-Publicado por
--------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_amc/code
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org
