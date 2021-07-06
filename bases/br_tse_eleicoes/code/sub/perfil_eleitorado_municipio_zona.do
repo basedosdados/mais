@@ -3,6 +3,11 @@
 // build: perfil eleitorado
 //----------------------------------------------------------------------------//
 
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
+keep id_municipio id_municipio_tse
+tempfile diretorio
+save `diretorio'
+
 //------------------------//
 // loops
 //------------------------//
@@ -70,14 +75,19 @@ foreach ano of numlist 1994(2)2020 {
 	cap limpa_instrucao
 	cap limpa_estado_civil
 	
+	merge m:1 id_municipio_tse using `diretorio'
+	drop if _merge == 2
+	drop _merge
+	order id_municipio, b(id_municipio_tse)
+				
 	replace ano = 2014 if ano == 201407
 	
-	order ano sigla_uf id_municipio_tse situacao_biometria zona genero estado_civil grupo_idade instrucao ///
+	order ano sigla_uf id_municipio id_municipio_tse situacao_biometria zona genero estado_civil grupo_idade instrucao ///
 		eleitores eleitores_biometria eleitores_deficiencia
 	
 	compress
 	
-	save "output/perfil_eleitorado_`ano'.dta", replace
+	save "output/perfil_eleitorado_municipio_zona_`ano'.dta", replace
 
 }
 *

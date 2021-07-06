@@ -4,9 +4,12 @@ project_id_prod: basedosdados-dev
 table_id: receitas_candidato # AUTO GENERATED
 dataset_id: br_tse_eleicoes # AUTO GENERATED
 
-version: v1.0
+url_ckan: https://basedosdados.org/dataset/br-tse-eleicoes # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes # AUTO GENERATED
 
-last_updated: 2021-02-14 # AUTO GENERATED
+version: v1.1
+
+last_updated: 2021-07-06 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -14,6 +17,13 @@ last_updated: 2021-02-14 # AUTO GENERATED
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
     Dados de financiamento de campanha de receita para candidatos.
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Ricardo Dahis
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code # REQUIRED
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -24,30 +34,27 @@ treated_by:
     website: <onde encontrar os dados tratados>
     email: rdahis@basedosdados.org
 
-# Quem está completando esse arquivo config?
-published_by:
-    name: Ricardo Dahis
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code # REQUIRED
-    website: www.ricardodahis.com
-    email: rdahis@basedosdados.org
-
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
     Tornamos a base consistente entre anos com alguma mudança de nomes de variáveis em relação ao original do TSE.
 
 # Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
 data_update_frequency: 2 anos
 
-# Nível da observação: quais colunas identificam uma linha unicamente?
+# Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
-# Regras: minúsculo, sem acento, singular.
-# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level:
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
     - receita
 
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - sequencial_receita
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -79,8 +86,9 @@ coverage_time:
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
-    - ano
+partitions: # REQUIRED  
+    - ano  
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -93,26 +101,26 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: tipo_eleicao
-        description: Tipo da Eleição
+        name: turno
+        description: Turno
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: sigla_uf
-        description: Sigla Unidade da Federação
+        name: tipo_eleicao
+        description: Tipo da eleição
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_municipio_tse
         description: ID Município - TSE
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: turno
-        description: Turno
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -124,61 +132,61 @@ columns: # REQUIRED
   
     -   
         name: sequencial_candidato
-        description: Sequencial do Candidato
+        description: Sequencial do candidato
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: numero_candidato
-        description: Número do Candidato
+        description: Número do candidato
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: cpf_candidato
-        description: CPF do Candidato
+        description: CPF do candidato
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: cnpj_candidato
-        description: CNPJ do Candidato
+        description: CNPJ do candidato
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: titulo_eleitor_candidato
-        description: Título de Eleitor do Candidato
+        description: Título de eleitor do candidato
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: nome_candidato
-        description: Nome do Candidato
+        description: Nome do candidato
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: cpf_vice_suplente
-        description: CPF do Vice ou Suplente
+        description: CPF do vice ou suplente
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: numero_partido
-        description: Número do Partido
+        description: Número do partido
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: nome_partido
-        description: Nome do Partido
+        description: Nome do partido
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: sigla_partido
-        description: Sigla do Partido
+        description: Sigla do partido
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -190,240 +198,246 @@ columns: # REQUIRED
   
     -   
         name: sequencial_receita
-        description: Sequencial da Receita
+        description: Sequencial da receita
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: data_receita
-        description: Data da Receita
+        description: Data da receita
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: fonte_receita
-        description: Fonte da Receita
+        description: Fonte da receita
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: origem_receita
-        description: Origem da Receita
+        description: Origem da receita
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: natureza_receita
-        description: Natureza da Receita
+        description: Natureza da receita
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: especie_receita
-        description: Espécie da Receita
+        description: Espécie da receita
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: situacao_receita
-        description: Situação da Receita
+        description: Situação da receita
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: descricao_receita
-        description: Descrição da Receita
+        description: Descrição da receita
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: valor_receita
-        description: Valor da Receita (R$)
+        description: Valor da receita
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: sequencial_candidato_doador
-        description: Sequencial do Candidato Doador
+        description: Sequencial do candidato doador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: cpf_cnpj_doador
-        description: CPF ou CNPJ do Doador
+        description: CPF ou CNPJ do doador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: sigla_uf_doador
-        description: Sigla da Unidade da Federação do Doador
+        description: Sigla da unidade da federação do doador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_municipio_tse_doador
-        description: ID Município do Doador - TSE
+        description: ID Município do doador - TSE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: nome_doador
-        description: Nome do Doador
+        description: Nome do doador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: nome_doador_rf
-        description: Nome do Doador - Receita Federal
+        description: Nome do doador - Receita Federal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: cargo_candidato_doador
-        description: Cargo do Candidato Doador
+        description: Cargo do candidato doador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: numero_partido_doador
-        description: Número do Partido do Doador
+        description: Número do partido do doador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: sigla_partido_doador
-        description: Sigla do Partido do Doador
+        description: Sigla do partido do doador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: nome_partido_doador
-        description: Nome do Partido do Doador
+        description: Nome do partido do doador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: esfera_partidaria_doador
-        description: Esfera Partidária do Doador
+        description: Esfera partidária do doador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: numero_candidato_doador
-        description: Número do Candidato Doador
+        description: Número do candidato doador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: cnae_2_doador
-        description: Classificação Nacional de Atividades Econômicas 2.0
+        description: Classificação Nacional de Atividades Econômicas 2.0 do doador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: descricao_cnae_2_doador
-        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0
+        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: cpf_cnpj_doador_orig
-        description: CPF ou CNPJ do Doador Originário
+        description: CPF ou CNPJ do doador originário
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: nome_doador_orig
-        description: Nome do Doador Originário
+        description: Nome do doador originário
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: nome_doador_orig_rf
-        description: Nome do Doador Originário - Receita Federal
+        description: Nome do doador originário - Receita Federal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: tipo_doador_orig
-        description: Tipo do Doador Originário
+        description: Tipo do doador originário
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: descricao_cnae_2_doador_orig
-        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do Doador Originário
+        description: Descrição da Classificação Nacional de Atividades Econômicas 2.0 do doador originário
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: nome_administrador
-        description: Nome do Administrador
+        description: Nome do administrador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: cpf_administrador
-        description: CPF do Administrador
+        description: CPF do administrador
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: numero_recibo_eleitoral
-        description: Número do Recibo Eleitoral
+        description: Número do recibo eleitoral
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: numero_documento
-        description: Número do Documento
+        description: Número do documento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: numero_recibo_doacao
-        description: Número do Recibo de Doação
+        description: Número do recibo da doação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: numero_documento_doacao
-        description: Número do Documento de Doação
+        description: Número do documento da doação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: tipo_prestacao_contas
-        description: Tipo de Prestação de Contas
+        description: Tipo de prestação de contas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: data_prestacao_contas
-        description: Data da Prestação de Contas
+        description: Data de prestação de contas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: sequencial_prestador_contas
-        description: Sequencial do Prestador de Contas
+        description: Sequencial do prestador de contas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: cnpj_prestador_contas
-        description: CPF do Prestador de Contas
+        description: CNPJ do prestador de contas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: entrega_conjunto
-        description: Entrega Conjunto
+        description: Entrega em conjunto
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-
+  
     -   
         name: ano
         description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf
+        description: Sigla da unidade da federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.

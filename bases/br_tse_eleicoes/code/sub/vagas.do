@@ -26,6 +26,11 @@ local estados_2020	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN R
 // loops
 //------------------------//
 
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8")
+keep id_municipio id_municipio_tse
+tempfile diretorio
+save `diretorio'
+
 foreach ano of numlist 1994(2)2020 {
 	
 	foreach estado in `estados_`ano'' {
@@ -77,6 +82,11 @@ foreach ano of numlist 1994(2)2020 {
 		limpa_tipo_eleicao `ano'
 		
 		drop if mod(ano, 2) > 0
+		
+		merge m:1 id_municipio_tse using `diretorio'
+		drop if _merge == 2
+		drop _merge
+		order id_municipio, b(id_municipio_tse)
 		
 		duplicates drop
 		

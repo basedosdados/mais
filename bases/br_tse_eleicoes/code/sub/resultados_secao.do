@@ -9,13 +9,13 @@
 
 local estados_1994	AC AL AM AP BA BR          GO MA                   PI          RO    RS SC SE SP TO
 local estados_1996	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
-local estados_1998	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2000	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP
-local estados_2002	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_1998	AC AL AM AP BA    CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
+local estados_2000	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP   
+local estados_2002	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
 local estados_2004	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2006	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2006	AC AL AM AP BA    CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
 local estados_2008	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2010	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2010	AC AL AM AP BA    CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO VT ZZ
 local estados_2012	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2014	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2016	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
@@ -27,9 +27,14 @@ local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ R
 //------------------------//
 
 import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
-keep id_municipio_tse sigla_uf
+keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
+
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
+keep id_municipio_tse sigla_uf
+tempfile diretorio_ufs
+save `diretorio_ufs'
 
 foreach ano of numlist 1994(2)2020 {
 	
@@ -105,7 +110,7 @@ foreach ano of numlist 1994(2)2020 {
 		
 		if "`estado'" == "BR" {
 			drop sigla_uf
-			merge m:1 id_municipio_tse using `diretorio'
+			merge m:1 id_municipio_tse using `diretorio_ufs'
 			drop if _merge == 2
 			drop _merge
 			replace sigla_uf = "ZZ" if sigla_uf == ""
@@ -118,6 +123,11 @@ foreach ano of numlist 1994(2)2020 {
 		*
 		
 		limpa_tipo_eleicao `ano'
+		
+		merge m:1 id_municipio_tse using `diretorio'
+		drop if _merge == 2
+		drop _merge
+		order id_municipio, b(id_municipio_tse)
 		
 		tempfile resultados_secao_`estado'_`ano'
 		save `resultados_secao_`estado'_`ano''
@@ -139,7 +149,7 @@ foreach ano of numlist 1994(2)2020 {
 		drop if length(string(numero_votavel)) == 2 & ///
 				inlist(cargo, "vereador", "deputado estadual", "deputado distrital", "deputado federal", "senador")
 		
-		ren numero_votavel numero_candidato
+		ren numero_votavel numero
 		
 		tempfile resultados_cand_secao_`estado'_`ano'
 		save `resultados_cand_secao_`estado'_`ano''
@@ -154,12 +164,12 @@ foreach ano of numlist 1994(2)2020 {
 		
 		preserve
 			
-			gen numero_partido = real(substr(string(numero_votavel), 1, 2))
+			gen numero = real(substr(string(numero_votavel), 1, 2))
 			
 			drop if length(string(numero_votavel)) == 2 & ///
 					inlist(cargo, "vereador", "deputado estadual", "deputado distrital", "deputado federal", "senador")
 			
-			collapse (sum) votos, by(ano tipo_eleicao turno sigla_uf id_municipio_tse zona secao cargo numero_partido)
+			collapse (sum) votos, by(ano tipo_eleicao turno sigla_uf id_municipio id_municipio_tse zona secao cargo numero)
 			
 			ren votos votos_nominais
 			
@@ -172,7 +182,7 @@ foreach ano of numlist 1994(2)2020 {
 			keep if length(string(numero_votavel)) == 2 & ///
 					inlist(cargo, "vereador", "deputado estadual", "deputado distrital", "deputado federal", "senador")
 			
-			ren numero_votavel	numero_partido
+			ren numero_votavel	numero
 			ren votos			votos_nao_nominais
 			
 			tempfile votos_nao_nominais
@@ -182,7 +192,7 @@ foreach ano of numlist 1994(2)2020 {
 		
 		use `votos_nominais', clear
 		
-		merge 1:1 ano tipo_eleicao turno sigla_uf id_municipio_tse zona secao cargo numero_partido using `votos_nao_nominais'
+		merge 1:1 ano tipo_eleicao turno sigla_uf id_municipio_tse zona secao cargo numero using `votos_nao_nominais'
 		drop _merge
 		
 		replace votos_nominais = 0		if votos_nominais == .
@@ -206,7 +216,7 @@ foreach ano of numlist 1994(2)2020 {
 	}
 	*
 	
-	local vars ano tipo_eleicao sigla_uf id_municipio_tse turno zona secao cargo numero_candidato
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo numero
 	
 	order `vars'
 	sort  `vars'
@@ -227,7 +237,7 @@ foreach ano of numlist 1994(2)2020 {
 	}
 	*
 	
-	local vars ano tipo_eleicao sigla_uf id_municipio_tse turno zona secao cargo numero_partido
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo numero
 	
 	order `vars'
 	sort  `vars'
