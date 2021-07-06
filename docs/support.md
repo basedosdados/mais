@@ -16,7 +16,5 @@ Nos ajude a fazer esse projeto se manter e crescer!
 
 ## Ajude a manter nosso código 👩🏻‍💻
 
-Precisamos de ajuda para manter e melhorar nossos clientes Python, R,
-entre outros. Acesse nossos [issues](https://github.com/basedosdados/mais/issues) 
-ou abra um novo para começar a desenvolver :)
+Precisamos de ajuda para manter e melhorar nossos clientes Python, R, entre outros. Acesse nossos [issues](https://github.com/basedosdados/mais/issues) ou abra um novo para começar a desenvolver :)
 
