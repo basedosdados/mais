@@ -18,18 +18,19 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_tse_eleicoes.coligacoes AS
+CREATE VIEW basedosdados-dev.br_tse_eleicoes.partidos AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(turno AS INT64) turno,
 SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio_tse AS INT64) id_municipio_tse,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(id_municipio_tse AS STRING) id_municipio_tse,
 SAFE_CAST(cargo AS STRING) cargo,
-SAFE_CAST(turno AS INT64) turno,
-SAFE_CAST(numero_partido AS INT64) numero_partido,
-SAFE_CAST(sigla_partido AS STRING) sigla_partido,
-SAFE_CAST(nome_partido AS STRING) nome_partido,
 SAFE_CAST(tipo_agremiacao AS STRING) tipo_agremiacao,
-SAFE_CAST(sequencial_coligacao AS INT64) sequencial_coligacao,
+SAFE_CAST(numero AS STRING) numero,
+SAFE_CAST(sigla AS STRING) sigla,
+SAFE_CAST(nome AS STRING) nome,
+SAFE_CAST(sequencial_coligacao AS STRING) sequencial_coligacao,
 SAFE_CAST(coligacao AS STRING) coligacao
-from basedosdados-staging.br_tse_eleicoes_staging.coligacoes as t
+FROM basedosdados-dev.br_tse_eleicoes_staging.partidos AS t

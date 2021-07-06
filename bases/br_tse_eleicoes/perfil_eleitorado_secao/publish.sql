@@ -18,19 +18,21 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-
-CREATE VIEW basedosdados.br_tse_eleicoes.perfil_eleitorado AS
+CREATE VIEW basedosdados-dev.br_tse_eleicoes.perfil_eleitorado_secao AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio_tse AS INT64) id_municipio_tse,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(id_municipio_tse AS STRING) id_municipio_tse,
 SAFE_CAST(situacao_biometria AS STRING) situacao_biometria,
 SAFE_CAST(zona AS INT64) zona,
+SAFE_CAST(secao AS INT64) secao,
 SAFE_CAST(genero AS STRING) genero,
 SAFE_CAST(estado_civil AS STRING) estado_civil,
 SAFE_CAST(grupo_idade AS STRING) grupo_idade,
 SAFE_CAST(instrucao AS STRING) instrucao,
 SAFE_CAST(eleitores AS INT64) eleitores,
 SAFE_CAST(eleitores_biometria AS INT64) eleitores_biometria,
-SAFE_CAST(eleitores_deficiencia AS INT64) eleitores_deficiencia
-from basedosdados-staging.br_tse_eleicoes_staging.perfil_eleitorado as t
+SAFE_CAST(eleitores_deficiencia AS INT64) eleitores_deficiencia,
+SAFE_CAST(eleitores_inclusao_nome_social AS INT64) eleitores_inclusao_nome_social
+FROM basedosdados-dev.br_tse_eleicoes_staging.perfil_eleitorado_secao AS t
