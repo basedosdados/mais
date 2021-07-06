@@ -52,6 +52,7 @@ observation_level:
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
     - id_municipio
+    - nome
 
 
 # Qual é a cobertura espacial da tabela?
