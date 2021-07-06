@@ -63,8 +63,7 @@ observation_level: #REQUIRED
 primary_keys:
     - turno
     - tipo_eleicao
-    - sigla_uf
-    - id_municipio_tse
+    - id_municipio
     - zona
     - secao
     - numero_candidato

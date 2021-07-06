@@ -59,7 +59,7 @@ observation_level: #REQUIRED
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
     - tipo_eleicao
-    - municipio
+    - id_municipio
     - cargo
     - ano
 

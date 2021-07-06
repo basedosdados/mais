@@ -35,9 +35,9 @@ Colunas identificando linhas unicamente
 - turno
 - tipo_eleicao
 - sigla_uf
-- id_municipio_tse
-- cargo
+- id_municipio
 - numero_candidato
+- ano
 
 Cobertura Temporal
 ------------------

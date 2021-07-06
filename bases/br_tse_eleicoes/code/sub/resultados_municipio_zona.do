@@ -59,8 +59,10 @@ foreach ano of numlist 1994(2)2020 {
 			
 			foreach estado in `estados_`ano'_candidato' {
 				
-				cap import delimited "input/votacao_candidato_munzona/votacao_candidato_munzona_`ano'/votacao_candidato_munzona_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
-				cap import delimited "input/votacao_candidato_munzona/votacao_candidato_munzona_`ano'/votacao_candidato_munzona_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear
+				cap import delimited "input/votacao_candidato_munzona/votacao_candidato_munzona_`ano'/votacao_candidato_munzona_`ano'_`estado'.txt", ///
+					delim(";") varn(nonames) stringcols(_all) clear
+				cap import delimited "input/votacao_candidato_munzona/votacao_candidato_munzona_`ano'/votacao_candidato_munzona_`ano'_`estado'.csv", ///
+					delim(";") varn(nonames) stringcols(_all) clear
 				
 				if `ano' <= 2012 {
 					
@@ -72,10 +74,10 @@ foreach ano of numlist 1994(2)2020 {
 					ren v6	sigla_uf
 					ren v8	id_municipio_tse
 					ren v10	zona
-					ren v12	numero
-					ren v13	sequencial
-					ren v14	nome
-					ren v15	nome_urna
+					ren v12	numero_candidato
+					ren v13	sequencial_candidato
+					ren v14	nome_candidato
+					ren v15	nome_urna_candidato
 					ren v16	cargo
 					ren v22	resultado
 					ren v24	sigla_partido
@@ -96,10 +98,10 @@ foreach ano of numlist 1994(2)2020 {
 					ren v11 sigla_uf
 					ren v14 id_municipio_tse
 					ren v16 zona
-					ren v19 sequencial
-					ren v20 numero
-					ren v21 nome
-					ren v22 nome_urna
+					ren v19 sequencial_candidato
+					ren v20 numero_candidato
+					ren v21 nome_candidato
+					ren v22 nome_urna_candidato
 					ren v18 cargo
 					ren v36 resultado
 					ren v30 sigla_partido
@@ -110,9 +112,9 @@ foreach ano of numlist 1994(2)2020 {
 				}
 				*
 				
-				destring ano turno id_municipio_tse zona numero sequencial votos, replace force
+				destring ano turno id_municipio_tse zona numero_candidato sequencial_candidato votos, replace force
 				
-				replace sequencial = . if sequencial == -1
+				replace sequencial_candidato = . if sequencial_candidato == -1
 				
 				//------------------//
 				// limpa strings
@@ -141,7 +143,7 @@ foreach ano of numlist 1994(2)2020 {
 				foreach k in tipo_eleicao cargo resultado {
 					clean_string `k'
 				}
-				foreach k in nome nome_urna {
+				foreach k in nome_candidato nome_urna_candidato {
 					replace `k' = ustrtitle(`k')
 				}
 				*
@@ -181,7 +183,7 @@ foreach ano of numlist 1994(2)2020 {
 				
 				keep if cargo == "presidente"
 				
-				bys numero turno (resultado): replace resultado = resultado[_N] if cargo == "presidente"	
+				bys numero_candidato turno (resultado): replace resultado = resultado[_N] if cargo == "presidente"	
 				
 				tempfile presid
 				save `presid'
@@ -222,7 +224,7 @@ foreach ano of numlist 1994(2)2020 {
 					ren v12	cargo
 					ren v14	coligacao
 					ren v15	composicao
-					ren v16	sigla
+					ren v16	sigla_partido
 					ren v19	votos_nominais
 					ren v20	votos_nao_nominais
 					
@@ -242,7 +244,7 @@ foreach ano of numlist 1994(2)2020 {
 					ren v18	cargo
 					ren v24	coligacao
 					ren v25	composicao
-					ren v21	sigla
+					ren v21	sigla_partido
 					ren v27	votos_nominais
 					ren v28	votos_nao_nominais
 					
@@ -276,7 +278,7 @@ foreach ano of numlist 1994(2)2020 {
 				}
 				
 				limpa_tipo_eleicao `ano'
-				limpa_partido `ano' sigla
+				limpa_partido `ano' sigla_partido
 				
 				merge m:1 id_municipio_tse using `diretorio'
 				drop if _merge == 2

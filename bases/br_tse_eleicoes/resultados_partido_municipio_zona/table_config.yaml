@@ -53,6 +53,7 @@ observation_level: #REQUIRED
     - tipo de eleição
     - municipio
     - zona
+    - cargo
     - partido
     - ano
 
@@ -64,6 +65,7 @@ primary_keys:
     - tipo_eleicao
     - id_municipio
     - zona
+    - cargo
     - sigla_partido
     - ano
 

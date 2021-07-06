@@ -149,7 +149,7 @@ foreach ano of numlist 1994(2)2020 {
 		drop if length(string(numero_votavel)) == 2 & ///
 				inlist(cargo, "vereador", "deputado estadual", "deputado distrital", "deputado federal", "senador")
 		
-		ren numero_votavel numero
+		ren numero_votavel numero_candidato
 		
 		tempfile resultados_cand_secao_`estado'_`ano'
 		save `resultados_cand_secao_`estado'_`ano''
@@ -164,12 +164,12 @@ foreach ano of numlist 1994(2)2020 {
 		
 		preserve
 			
-			gen numero = real(substr(string(numero_votavel), 1, 2))
+			gen numero_partido = real(substr(string(numero_votavel), 1, 2))
 			
 			drop if length(string(numero_votavel)) == 2 & ///
 					inlist(cargo, "vereador", "deputado estadual", "deputado distrital", "deputado federal", "senador")
 			
-			collapse (sum) votos, by(ano tipo_eleicao turno sigla_uf id_municipio id_municipio_tse zona secao cargo numero)
+			collapse (sum) votos, by(ano tipo_eleicao turno sigla_uf id_municipio id_municipio_tse zona secao cargo numero_partido)
 			
 			ren votos votos_nominais
 			
@@ -182,7 +182,7 @@ foreach ano of numlist 1994(2)2020 {
 			keep if length(string(numero_votavel)) == 2 & ///
 					inlist(cargo, "vereador", "deputado estadual", "deputado distrital", "deputado federal", "senador")
 			
-			ren numero_votavel	numero
+			ren numero_votavel	numero_partido
 			ren votos			votos_nao_nominais
 			
 			tempfile votos_nao_nominais
@@ -192,7 +192,7 @@ foreach ano of numlist 1994(2)2020 {
 		
 		use `votos_nominais', clear
 		
-		merge 1:1 ano tipo_eleicao turno sigla_uf id_municipio_tse zona secao cargo numero using `votos_nao_nominais'
+		merge 1:1 ano tipo_eleicao turno sigla_uf id_municipio_tse zona secao cargo numero_partido using `votos_nao_nominais'
 		drop _merge
 		
 		replace votos_nominais = 0		if votos_nominais == .
@@ -216,7 +216,7 @@ foreach ano of numlist 1994(2)2020 {
 	}
 	*
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo numero
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo numero_candidato
 	
 	order `vars'
 	sort  `vars'
@@ -237,7 +237,7 @@ foreach ano of numlist 1994(2)2020 {
 	}
 	*
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo numero
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo numero_partido
 	
 	order `vars'
 	sort  `vars'

@@ -62,9 +62,9 @@ observation_level: #REQUIRED
 primary_keys:
     - turno
     - tipo_eleicao
-    - municipio
+    - id_municipio
     - zona
-    - candidato
+    - numero_candidato
     - ano
 
 # Qual é a cobertura espacial da tabela?
