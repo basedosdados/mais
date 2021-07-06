@@ -21,9 +21,9 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.emissao_co2_material_particulado AS
 SELECT 
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(emissao_co2 AS INT64) emissao_co2,
 SAFE_CAST(emissao_mp AS INT64) emissao_mp
 from basedosdados-dev.br_mobilidados_indicadores_staging.emissao_co2_material_particulado as t

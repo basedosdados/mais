@@ -13,9 +13,7 @@ Publicado por
 Nome: Crislane A. Souza
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores/code
 Website: https://github.com/crislanealves
-Email: crislanealves@protonmail.com
-
-Tratado por
+Email: crislanealves@protonmail.comTratado por
 -----------
 Nome: Crislane A. Souza
 Website: https://github.com/crislanealves
@@ -23,11 +21,12 @@ Email: crislanealves@protonmail.com
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- municipio
+- uf
 - ano
 
 Colunas identificando linhas unicamente
 -------------------
+- sigla_uf
 - ano
 
 Cobertura Temporal

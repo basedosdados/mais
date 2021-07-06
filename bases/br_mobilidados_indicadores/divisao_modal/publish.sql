@@ -21,7 +21,7 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.divisao_modal AS
 SELECT 
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(divisao_modal AS INT64) divisao_modal
 from basedosdados-dev.br_mobilidados_indicadores_staging.divisao_modal as t
