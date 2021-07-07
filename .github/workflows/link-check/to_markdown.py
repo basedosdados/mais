@@ -1,4 +1,3 @@
-import argparse
 import csv
 
 
@@ -27,17 +26,4 @@ def gen_report(csvpath, mdpath):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Generate markdown report for a broken links search"
-    )
-
-    parser.add_argument(
-        "--csvpath", default="./report.csv", type=str, help="csv input filepath"
-    )
-    parser.add_argument(
-        "--mdpath", default="./report.md", type=str, help="markdown output filepath"
-    )
-
-    args = parser.parse_args()
-
-    gen_report(args.csvpath, args.mdpath)
+    gen_report("./report.csv", "./report.md")
