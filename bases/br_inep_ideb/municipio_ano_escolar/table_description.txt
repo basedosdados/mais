@@ -30,6 +30,7 @@ Colunas identificando linhas unicamente
 -------------------
 - id_municipio
 - rede
+- ensino
 - ano_escolar
 - ano
 

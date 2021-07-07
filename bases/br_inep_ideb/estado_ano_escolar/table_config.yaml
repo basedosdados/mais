@@ -60,6 +60,7 @@ observation_level:
 primary_keys:
     - sigla_uf
     - rede
+    - ensino
     - ano_escolar
     - ano
 

@@ -29,6 +29,7 @@ Colunas identificando linhas unicamente
 -------------------
 - id_escola
 - ano_escolar
+- ano
 
 Cobertura Temporal
 ------------------

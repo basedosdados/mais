@@ -27,6 +27,7 @@ Nível da Observação (i.e. a granularidade da linha)
 Colunas identificando linhas unicamente
 -------------------
 - id_escola
+- anos_escolares
 - ano
 
 Cobertura Temporal

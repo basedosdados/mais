@@ -59,6 +59,7 @@ primary_keys:
     - regiao
     - rede
     - ensino
+    - anos_escolares
     - ano
 
 

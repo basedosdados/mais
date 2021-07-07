@@ -58,6 +58,7 @@ observation_level:
 primary_keys:
     - regiao
     - rede
+    - ensino
     - ano_escolar
     - ano
 

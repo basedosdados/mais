@@ -59,6 +59,7 @@ primary_keys:
     - id_municipio
     - rede
     - ensino
+    - anos_escolares
     - ano
 
 

@@ -58,6 +58,7 @@ observation_level:
 primary_keys:
     - id_escola
     - ano_escolar
+    - ano
 
 
 # Qual é a cobertura espacial da tabela?

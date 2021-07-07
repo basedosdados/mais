@@ -59,6 +59,7 @@ primary_keys:
     - sigla_uf
     - rede
     - ensino
+    - anos_escolares
     - ano
 
 
