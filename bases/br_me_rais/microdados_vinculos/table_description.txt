@@ -1,21 +1,30 @@
-Microdados públicos dos vínculos de emprego na RAIS.
-
-Base desidentificada, isto é, que não inclui identificadores únicos de linha. Cada linha representa um vínculo - por isso indicamos este como nível de observação mesmo que não conste como coluna.
+Microdados públicos dos vínculos de emprego na RAIS. Base desidentificada, isto é, que não inclui identificadores únicos de linha. Cada linha representa um vínculo - por isso indicamos este como nível de observação mesmo que não conste como coluna.
 
 
 Para saber mais acesse:
-Website: 
-Github: https://github.com/basedosdados/mais/
+Website: https://basedosdados.org/dataset/br_me_rais
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
+Email: rdahis@basedosodados.org
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
 - sigla_uf
 
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - vinculo
 - ano
@@ -70,15 +79,4 @@ Frequencia de Atualização
 -------------------------
 1 ano
 
-Tratado por
------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
-Email: rdahis@basedosodados.org
 
-Publicado por
--------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org
