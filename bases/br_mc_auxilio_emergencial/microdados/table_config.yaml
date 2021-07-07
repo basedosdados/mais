@@ -49,9 +49,11 @@ observation_level:
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
     - mes
+    - id_municipio
     - nis_beneficiario
     - cpf_beneficiario
     - nome_beneficiario
+    - parcela
 
 
 # Qual é a cobertura espacial da tabela?
