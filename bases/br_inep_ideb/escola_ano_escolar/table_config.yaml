@@ -57,6 +57,8 @@ observation_level:
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
     - id_escola
+    - rede
+    - ensino
     - ano_escolar
     - ano
 
