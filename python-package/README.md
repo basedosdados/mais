@@ -15,7 +15,7 @@ python setup.py develop
 1. Abra uma branch com o nome issue-<X>
 2. Faça as modificações necessárias
 3. Suba o Pull Request apontando para a branch `python-next-minor` ou `python-next-patch`. 
-  Sendo, minor e patch referentes ao bump da versão: v1.5.7 --> v<major>.<minor>.<patch>.
+  Sendo, minor e patch referentes ao bump da versão: v1.5.7 --> v\<major>.\<minor>.\<patch>.
 4. O nome do PR deve seguir o padrão
   `[infra] <titulo explicativo>`
 
