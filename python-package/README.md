@@ -2,9 +2,7 @@
 
 ## Desenvolvimento
 
-#### CLI
-
-Suba o CLI localmente
+#### Suba localmente
 
 ```sh
 make create-env
