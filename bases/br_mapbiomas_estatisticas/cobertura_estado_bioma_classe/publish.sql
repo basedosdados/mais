@@ -30,5 +30,5 @@ SAFE_CAST(nivel_1 AS STRING) nivel_1,
 SAFE_CAST(nivel_2 AS STRING) nivel_2,
 SAFE_CAST(nivel_3 AS STRING) nivel_3,
 SAFE_CAST(nivel_4 AS STRING) nivel_4,
-SAFE_CAST(area AS NUMERIC) area
+SAFE_CAST(area AS FLOAT64) area
 from basedosdados-dev.br_mapbiomas_estatisticas_staging.cobertura_estado_bioma_classe as t
