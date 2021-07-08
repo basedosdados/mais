@@ -358,18 +358,21 @@ def list_datasets(
 def list_dataset_tables(
     dataset_id,
     query_project_id="basedosdados",
+    output_type="print",
     from_file=False,
     filter_by=None,
     with_description=False,
 ):
     """Fetch table_id for tables available at the specified dataset_id. Prints the information
-    on screen.
+    on screen or returns it as a list.
 
     Args:
         dataset_id (str): Optional.
             Dataset id available in basedosdados.
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
+        output_type (str): Optional.
+            If set to "print", information is printed to the screen. If set to "list", a list object is returned. 
         filter_by (str): Optional
             String to be matched in the table_id.
         with_description (bool): Optional
@@ -405,7 +408,16 @@ def list_dataset_tables(
             for table in tables["table_id"]
         ]
 
-    _print_output(tables)
+    if output_type == "print":
+        _print_output(tables)
+
+    elif output_type == "list":
+        return tables["table_id"].to_list()
+
+    else:
+        raise BaseDosDadosException(
+            "You must set the output_type to either \"print\" or \"list\"."
+        )
 
     return None
 
