@@ -24,5 +24,5 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(taxa_motorizacao AS INT64) taxa_motorizacao
+SAFE_CAST(taxa_motorizacao AS FLOAT64) taxa_motorizacao
 from basedosdados-dev.br_mobilidados_indicadores_staging.taxa_motorizacao as t
