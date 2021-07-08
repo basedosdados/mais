@@ -33,8 +33,8 @@ Nível da Observação (i.e. a granularidade da linha)
 Colunas identificando linhas unicamente
 -------------------
 - municipio
-- de_classe
-- para_classe
+- de_id_classe
+- para_id_classe
 - ano
 
 Cobertura Temporal

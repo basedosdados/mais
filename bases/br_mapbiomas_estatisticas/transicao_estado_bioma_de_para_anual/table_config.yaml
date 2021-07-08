@@ -58,8 +58,8 @@ observation_level:
 primary_keys:
     - sigla_uf
     - bioma
-    - de_classe
-    - para_classe
+    - de_id_classe
+    - para_id_classe
     - ano
 
 

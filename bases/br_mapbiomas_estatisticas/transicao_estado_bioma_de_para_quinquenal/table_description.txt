@@ -35,8 +35,8 @@ Colunas identificando linhas unicamente
 -------------------
 - sigla_uf
 - bioma
-- de_classe
-- para_classe
+- de_id_classe
+- para_id_classe
 - ano
 
 Cobertura Temporal
