@@ -15,7 +15,8 @@ TABLE_FILES = ["publish.sql", "table_config.yaml"]
 
 @pytest.fixture
 def metadatadir(tmpdir_factory):
-    return Path("tests") / "tmp_bases"
+    (Path(__file__).parent / "tmp_bases").mkdir(exist_ok=True)
+    return Path(__file__).parent / "tmp_bases"
 
 
 @pytest.fixture
@@ -33,12 +34,12 @@ def folder(metadatadir):
 
 @pytest.fixture
 def data_path(metadatadir):
-    return Path(metadatadir) / "municipios.csv"
+    return Path(__file__).parent / "tmp_bases" / "municipio.csv"
 
 
 @pytest.fixture
 def sample_data(metadatadir):
-    return Path("tests") / "sample_data" / "table"
+    return Path(__file__).parent / "sample_data" / "table"
 
 
 def check_files(folder):
@@ -371,8 +372,8 @@ def test_create_auto_partitions(metadatadir, data_path, sample_data):
     for n in [1, 2]:
         Path(metadatadir / "partitions" / f"keys={n}").mkdir()
         shutil.copy(
-            metadatadir / "municipios.csv",
-            metadatadir / "partitions" / f"keys={n}" / "municipios.csv",
+            metadatadir / "municipio.csv",
+            metadatadir / "partitions" / f"keys={n}" / "municipio.csv",
         )
 
     table_part.create(
@@ -463,8 +464,8 @@ def test_publish(table, metadatadir, sample_data, data_path):
 
 def test_append(table, metadatadir):
     shutil.copy(
-        metadatadir / "municipios.csv",
-        metadatadir / "municipios2.csv",
+        metadatadir / "municipio.csv",
+        metadatadir / "municipio2.csv",
     )
 
-    table.append((metadatadir / "municipios2.csv"), if_exists="replace")
+    table.append((metadatadir / "municipio2.csv"), if_exists="replace")
