@@ -18,11 +18,11 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_mc_auxilio_emergencial.microdados AS
+CREATE VIEW basedosdados-dev.br_mc_auxilio_emergencial.microdados AS
 SELECT
 SAFE_CAST(mes AS STRING) mes,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(nis_beneficiario AS STRING) nis_beneficiario,
 SAFE_CAST(cpf_beneficiario AS STRING) cpf_beneficiario,
 SAFE_CAST(nome_beneficiario AS STRING) nome_beneficiario,
@@ -33,4 +33,4 @@ SAFE_CAST(enquadramento AS STRING) enquadramento,
 SAFE_CAST(parcela AS STRING) parcela,
 SAFE_CAST(observacao AS STRING) observacao,
 SAFE_CAST(valor_beneficio AS FLOAT64) valor_beneficio
-from basedosdados-staging.br_mc_auxilio_emergencial_staging.microdados as t
+from basedosdados-dev.br_mc_auxilio_emergencial_staging.microdados as t
