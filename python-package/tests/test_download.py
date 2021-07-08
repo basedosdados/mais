@@ -18,8 +18,8 @@ from basedosdados.validation.exceptions import BaseDosDadosException
 
 
 TEST_PROJECT_ID = "basedosdados-dev"
-SAVEFILE = Path("tests") / "tmp_bases" / "test.csv"
-SAVEPATH = Path("tests") / "tmp_bases"
+SAVEFILE = Path(__file__).parent / "tmp_bases" / "test.csv"
+SAVEPATH = Path(__file__).parent / "tmp_bases"
 shutil.rmtree(SAVEPATH, ignore_errors=True)
 
 
@@ -27,7 +27,7 @@ def test_download_by_query():
 
     download(
         SAVEFILE,
-        query="select * from `basedosdados.br_ibge_pib.municipios` limit 10",
+        query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
         billing_project_id=TEST_PROJECT_ID,
         index=False,
         from_file=True,
@@ -39,7 +39,7 @@ def test_download_by_query():
     with pytest.raises(BaseDosDadosException):
         download(
             SAVEFILE,
-            query="select * from `basedosdados.br_ibge_pib.municipios` limit 10",
+            query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
         )
 
 
@@ -48,7 +48,7 @@ def test_download_by_table():
     download(
         SAVEFILE,
         dataset_id="br_ibge_pib",
-        table_id="municipios",
+        table_id="municipio",
         billing_project_id=TEST_PROJECT_ID,
         limit=10,
         from_file=True,
@@ -62,7 +62,7 @@ def test_download_by_table():
         download(
             SAVEFILE,
             dataset_id="br_ibge_pib",
-            table_id="municipios",
+            table_id="municipio",
             limit=10,
         )
 
@@ -72,14 +72,14 @@ def test_download_save_to_path():
     download(
         SAVEPATH,
         dataset_id="br_ibge_pib",
-        table_id="municipios",
+        table_id="municipio",
         billing_project_id=TEST_PROJECT_ID,
         from_file=True,
         limit=10,
         index=False,
     )
 
-    assert (SAVEPATH / "municipios.csv").exists()
+    assert (SAVEPATH / "municipio.csv").exists()
 
 
 def test_download_no_query_or_table():
@@ -96,7 +96,7 @@ def test_download_pandas_kwargs():
     download(
         SAVEFILE,
         dataset_id="br_ibge_pib",
-        table_id="municipios",
+        table_id="municipio",
         billing_project_id=TEST_PROJECT_ID,
         from_file=True,
         limit=10,
@@ -111,7 +111,7 @@ def test_read_sql():
 
     assert isinstance(
         read_sql(
-            query="select * from `basedosdados.br_ibge_pib.municipios` limit 10",
+            query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
             billing_project_id=TEST_PROJECT_ID,
             from_file=True,
         ),
@@ -124,7 +124,7 @@ def test_read_table():
     assert isinstance(
         read_table(
             dataset_id="br_ibge_pib",
-            table_id="municipios",
+            table_id="municipio",
             billing_project_id=TEST_PROJECT_ID,
             from_file=True,
             limit=10,
