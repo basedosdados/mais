@@ -22,7 +22,7 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.municipio AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(localizacao AS STRING) localizacao,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(atu_educacao_infantil AS FLOAT64) atu_educacao_infantil,
