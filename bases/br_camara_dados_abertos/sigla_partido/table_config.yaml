@@ -7,7 +7,7 @@ dataset_id: br_camara_dados_abertos # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-camara-dados-abertos # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_camara_dados_abertos # AUTO GENERATED
 
-version: v2.0 # REQUIRED
+version: v2.1 # REQUIRED
 
 last_updated: 2021-06-30 # AUTO GENERATED
 
