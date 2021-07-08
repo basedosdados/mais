@@ -1,0 +1,74 @@
+Microdados de pensionistas.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-me-pensionistas
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_me_pensionistas
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_pensionistas/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: <nome>
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- mes
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- pensao
+
+Colunas identificando linhas unicamente
+-------------------
+
+Cobertura Temporal
+------------------
+- 1994
+- 1995
+- 1996
+- 1997
+- 1998
+- 1999
+- 2000
+- 2001
+- 2003
+- 2004
+- 2005
+- 2006
+- 2007
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Transformamos valores de CPF e datas de "00000000" para vazio.
+
+Frequencia de Atualização
+-------------------------
+mes
+
+

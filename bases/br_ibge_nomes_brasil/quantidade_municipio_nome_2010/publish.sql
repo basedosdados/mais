@@ -18,9 +18,9 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_ibge_nomes_brasil.quantidade_municipio_nome_2010 AS
+CREATE VIEW basedosdados-dev.br_ibge_nomes_brasil.quantidade_municipio_nome_2010 AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(nome AS STRING) nome,
-SAFE_CAST(qtde_nascimentos_ate_2010 AS INT64) qtde_nascimentos_ate_2010
-from basedosdados-staging.br_ibge_nomes_brasil_staging.quantidade_municipio_nome_2010 as t
+SAFE_CAST(qtde_nascimentos_ate_2010 AS INT64) quantidade_nascimentos_ate_2010
+from basedosdados-dev.br_ibge_nomes_brasil_staging.quantidade_municipio_nome_2010 as t

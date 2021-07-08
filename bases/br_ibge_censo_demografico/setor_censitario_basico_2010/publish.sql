@@ -21,7 +21,7 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_ibge_censo_demografico.setor_censitario_basico_2010 AS
 SELECT 
-SAFE_CAST(id_setor_censitario AS INT64) id_setor_censitario,
+SAFE_CAST(id_setor_censitario AS STRING) id_setor_censitario,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(v001 AS FLOAT64) v001,
 SAFE_CAST(v002 AS FLOAT64) v002,

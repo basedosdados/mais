@@ -3,7 +3,7 @@ name: update-contributors
 on:
   schedule:
     # “At 00:00 on Sunday.” - check: https://crontab.guru/#0_0_*_*_0
-    - cron:  '30 11 * * MON'
+    - cron:  '00 19 * * THU'
 
 jobs:
   update-levels:
