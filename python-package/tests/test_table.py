@@ -29,7 +29,7 @@ def table(metadatadir):
 
 @pytest.fixture
 def folder(metadatadir):
-    return metadatadir / DATASET_ID / TABLE_ID
+    return Path(__file__).parent / "tmp_bases" / DATASET_ID / TABLE_ID
 
 
 @pytest.fixture
