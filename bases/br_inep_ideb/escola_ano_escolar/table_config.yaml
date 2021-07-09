@@ -48,6 +48,8 @@ data_update_frequency: 2 anos
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
     - id_escola
+    - rede
+    - ensino
     - ano_escolar
     - ano
 

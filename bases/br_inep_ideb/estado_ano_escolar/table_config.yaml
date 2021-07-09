@@ -51,6 +51,7 @@ data_update_frequency: 2 anos
 observation_level:
     - estado
     - rede
+    - ensino
     - ano_escolar
     - ano
 

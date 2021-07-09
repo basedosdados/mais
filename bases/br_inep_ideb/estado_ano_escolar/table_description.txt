@@ -23,6 +23,7 @@ Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - estado
 - rede
+- ensino
 - ano_escolar
 - ano
 
@@ -30,6 +31,7 @@ Colunas identificando linhas unicamente
 -------------------
 - sigla_uf
 - rede
+- ensino
 - ano_escolar
 - ano
 

@@ -27,6 +27,8 @@ Nível da Observação (i.e. a granularidade da linha)
 Colunas identificando linhas unicamente
 -------------------
 - id_escola
+- rede
+- ensino
 - anos_escolares
 - ano
 
