@@ -51,7 +51,7 @@ observation_level:
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - municipio
+    - id_municipio
     - de_id_classe
     - para_id_classe
     - ano

@@ -32,7 +32,7 @@ Nível da Observação (i.e. a granularidade da linha)
 
 Colunas identificando linhas unicamente
 -------------------
-- municipio
+- id_municipio
 - de_id_classe
 - para_id_classe
 - ano
