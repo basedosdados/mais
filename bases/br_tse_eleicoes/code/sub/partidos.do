@@ -1,6 +1,6 @@
 
 //----------------------------------------------------------------------------//
-// build: coligacoes
+// build: partidos
 //----------------------------------------------------------------------------//
 
 //------------------------//
@@ -27,13 +27,19 @@ local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
+keep id_municipio id_municipio_tse
+tempfile diretorio
+save `diretorio'
+
 foreach ano of numlist 1990 1994(2)2020 {
 
 	foreach estado in `estados_`ano'' {
 		
-		cap import delimited "input/consulta_coligacao/consulta_legendas_`ano'/CONSULTA_LEGENDA_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
-		cap import delimited "input/consulta_coligacao/consulta_legendas_`ano'/consulta_legendas_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
-		cap import delimited "input/consulta_coligacao/consulta_legendas_`ano'/consulta_legendas_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear
+		cap import delimited "input/consulta_coligacao/CONSULTA_LEGENDA_`ano'/CONSULTA_LEGENDA_`ano'_`estado'.txt",     delim(";") varn(nonames) stringcols(_all) clear
+		cap import delimited "input/consulta_coligacao/consulta_legendas_`ano'/CONSULTA_LEGENDA_`ano'_`estado'.txt",    delim(";") varn(nonames) stringcols(_all) clear
+		cap import delimited "input/consulta_coligacao/consulta_legendas_`ano'/consulta_legendas_`ano'_`estado'.txt",   delim(";") varn(nonames) stringcols(_all) clear
+		cap import delimited "input/consulta_coligacao/consulta_legendas_`ano'/consulta_legendas_`ano'_`estado'.csv",   delim(";") varn(nonames) stringcols(_all) clear
 		cap import delimited "input/consulta_coligacao/consulta_coligacao_`ano'/consulta_coligacao_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
 		cap import delimited "input/consulta_coligacao/consulta_coligacao_`ano'/consulta_coligacao_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear
 		
@@ -48,9 +54,9 @@ foreach ano of numlist 1990 1994(2)2020 {
 			ren v7	id_municipio_tse
 			ren v10	cargo
 			ren v11	tipo_agremiacao
-			ren v12	numero_partido
-			ren v13	sigla_partido
-			ren v14	nome_partido
+			ren v12	numero //_partido
+			ren v13	sigla //_partido
+			ren v14	nome //_partido
 			ren v16	coligacao
 			ren v18	sequencial_coligacao
 			
@@ -68,18 +74,23 @@ foreach ano of numlist 1990 1994(2)2020 {
 			ren v11	id_municipio_tse
 			ren v14	cargo
 			ren v15	tipo_agremiacao
-			ren v16	numero_partido
-			ren v17	sigla_partido
-			ren v18	nome_partido
+			ren v16	numero
+			ren v17	sigla
+			ren v18	nome
 			ren v19	sequencial_coligacao
 			ren v20	coligacao
 			
 		}
 		*
 		
-		destring ano id_municipio_tse turno numero_partido sequencial_coligacao, replace force
+		destring ano turno id_municipio_tse numero sequencial_coligacao, replace force
 		
-		replace sequencial_coligacao = . if sequencial_coligacao == -1
+		replace sequencial_coligacao = . if inlist(sequencial_coligacao, -3, -1)
+		
+		merge m:1 id_municipio_tse using `diretorio'
+		drop if _merge == 2
+		drop _merge
+		order id_municipio, b(id_municipio_tse)
 		
 		//------------------//
 		// limpa strings
@@ -90,16 +101,18 @@ foreach ano of numlist 1990 1994(2)2020 {
 		foreach k in tipo_eleicao cargo tipo_agremiacao {
 			cap clean_string `k'
 		}
-		foreach k in nome_partido coligacao {
+		foreach k in nome coligacao {
 			cap replace `k' = ustrtitle(`k')
 		}
 		*
 		
 		limpa_tipo_eleicao `ano'
-		limpa_partido `ano'
+		limpa_partido `ano' sigla
 		
-		tempfile coligacoes_`estado'_`ano'
-		save `coligacoes_`estado'_`ano''
+		order ano turno tipo_eleicao
+		
+		tempfile partidos_`estado'_`ano'
+		save `partidos_`estado'_`ano''
 		
 	}
 	*
@@ -108,17 +121,17 @@ foreach ano of numlist 1990 1994(2)2020 {
 	// append
 	//------------------//
 	
-	use `coligacoes_AC_`ano'', clear
+	use `partidos_AC_`ano'', clear
 	foreach estado in `estados_`ano'' {
 		if "`estado'" != "AC" {
-			append using `coligacoes_`estado'_`ano''
+			append using `partidos_`estado'_`ano''
 		}
 	}
 	*
 	
 	compress
 	
-	save "output/coligacoes_`ano'.dta", replace
+	save "output/partidos_`ano'.dta", replace
 	
 }
 *
