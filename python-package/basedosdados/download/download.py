@@ -295,16 +295,19 @@ def _print_output(df):
 
 def list_datasets(
     query_project_id="basedosdados",
+    output_type="print",
     filter_by=None,
     with_description=False,
     from_file=False,
 ):
     """Fetch the dataset_id of datasets available at query_project_id. Prints information on
-    screen.
+    screen or returns it as a list..
 
     Args:
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
+        output_type (str): Optional.
+            If set to "print", information is printed to the screen. If set to "list", a list object is returned.     
         filter_by (str): Optional
             String to be matched in dataset_id.
         with_description (bool): Optional
@@ -338,7 +341,16 @@ def list_datasets(
             for dataset in datasets["dataset_id"]
         ]
 
-    _print_output(datasets)
+    if output_type == "print":
+        _print_output(datasets)
+
+    elif output_type == "list":
+        return datasets["dataset_id"].to_list()
+
+    else:
+        raise BaseDosDadosException(
+            "You must set the output_type to either \"print\" or \"list\"."
+        )
 
     return None
 
