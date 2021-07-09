@@ -21,11 +21,11 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.instituicao_ensino_superior AS
 SELECT 
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(id_ies AS STRING) id_ies,
 SAFE_CAST(nome_ies AS STRING) nome_ies,
 SAFE_CAST(tipo_instituicao AS STRING) tipo_instituicao,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(situacao_funcionamento AS STRING) situacao_funcionamento,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf
 from basedosdados-dev.br_bd_diretorios_brasil_staging.instituicao_ensino_superior as t
