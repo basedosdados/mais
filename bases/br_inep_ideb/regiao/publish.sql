@@ -18,7 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW `basedosdados.br_inep_ideb.regiao` AS
+CREATE VIEW `basedosdados-dev.br_inep_ideb.regiao` AS
 SELECT 
 SAFE_CAST(regiao AS STRING) regiao,
 SAFE_CAST(rede AS STRING) rede,
@@ -32,4 +32,4 @@ SAFE_CAST(nota_SAEB_lingua_portuguesa AS FLOAT64) nota_saeb_lingua_portuguesa,
 SAFE_CAST(nota_SAEB_media_padronizada AS FLOAT64) nota_saeb_media_padronizada,
 SAFE_CAST(IDEB AS FLOAT64) ideb,
 SAFE_CAST(projecao AS FLOAT64) projecao
-from basedosdados-staging.br_inep_ideb_staging.regiao as t
+from basedosdados-dev.br_inep_ideb_staging.regiao as t

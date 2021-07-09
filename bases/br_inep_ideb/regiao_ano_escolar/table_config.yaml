@@ -1,5 +1,13 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: regiao_ano_escolar # AUTO GENERATED
 dataset_id: br_inep_ideb # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-inep-ideb # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ideb # AUTO GENERATED
+
+version: v1.0 # REQUIRED
 
 last_updated: 2020-11-01 # AUTO GENERATED
 
@@ -41,6 +49,16 @@ data_update_frequency: 2 anos
 observation_level:
     - regiao
     - rede
+    - ano_escolar
+    - ano
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - regiao
+    - rede
+    - ensino
     - ano_escolar
     - ano
 

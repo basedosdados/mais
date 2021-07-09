@@ -1,5 +1,13 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: estado_ano_escolar # AUTO GENERATED
 dataset_id: br_inep_ideb # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-inep-ideb # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ideb # AUTO GENERATED
+
+version: v1.0 # REQUIRED
 
 last_updated: 2020-11-01 # AUTO GENERATED
 
@@ -34,15 +42,29 @@ treatment_description: |
 # Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
 data_update_frequency: 2 anos
 
-# Nível da observação: quais colunas identificam uma linha unicamente?
+# Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
-# Regras: minúsculo, sem acento, singular.
-# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
-    - estado_abrev
+    - estado
     - rede
+    - ensino
     - ano_escolar
     - ano
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - sigla_uf
+    - rede
+    - ensino
+    - ano_escolar
+    - ano
+
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -85,8 +107,8 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: estado_abrev
-        description: Estado Abreviado
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
