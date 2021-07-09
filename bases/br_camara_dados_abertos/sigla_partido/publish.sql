@@ -21,6 +21,6 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_camara_dados_abertos.sigla_partido AS
 SELECT 
-SAFE_CAST(sigla_antiga AS STRING) sigla_partido_antiga,
-SAFE_CAST(sigla_nova AS STRING) sigla_partido_nova
+SAFE_CAST(sigla_partido_antiga AS STRING) sigla_partido_antiga,
+SAFE_CAST(sigla_partido_nova AS STRING) sigla_partido_nova
 from basedosdados-dev.br_camara_dados_abertos_staging.sigla_partido as t
