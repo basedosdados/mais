@@ -8,7 +8,6 @@ from basedosdados import Storage
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
 SAVEPATH = Path(__file__).parent / "tmp_bases"
-
 TABLE_FILES = ["publish.sql", "table_config.yaml"]
 
 
