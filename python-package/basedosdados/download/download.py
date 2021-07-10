@@ -293,6 +293,32 @@ def _print_output(df):
     #        ) if len(lista) else final)
 
 
+def _handle_output(output_type, df, id_col):
+    """Handles datasets and tables listing outputs based on user's choice.
+    Either prints it to the screen or returns it as a `list` object.
+
+    Args:
+        output_type (str): output type, either "print"  or "list"
+        df (pd.DataFrame): table containing datasets metadata
+        id_col (str): name of column with id's data
+    """
+
+
+
+    if output_type == "print":
+        _print_output(df)
+
+    elif output_type == "list":
+        return df[id_col].to_list()
+
+    else:
+        raise BaseDosDadosException(
+            "You must set the output_type to either \"print\" or \"list\"."
+        )
+    
+    return None
+
+
 def list_datasets(
     query_project_id="basedosdados",
     output_type="print",
@@ -341,18 +367,11 @@ def list_datasets(
             for dataset in datasets["dataset_id"]
         ]
 
-    if output_type == "print":
-        _print_output(datasets)
-
-    elif output_type == "list":
-        return datasets["dataset_id"].to_list()
-
-    else:
-        raise BaseDosDadosException(
-            "You must set the output_type to either \"print\" or \"list\"."
-        )
-
-    return None
+    return _handle_output(
+        output_type=output_type,
+        df=datasets,
+        id_col="dataset_id"
+    )
 
 
 def list_dataset_tables(
@@ -408,18 +427,11 @@ def list_dataset_tables(
             for table in tables["table_id"]
         ]
 
-    if output_type == "print":
-        _print_output(tables)
-
-    elif output_type == "list":
-        return tables["table_id"].to_list()
-
-    else:
-        raise BaseDosDadosException(
-            "You must set the output_type to either \"print\" or \"list\"."
-        )
-
-    return None
+    return _handle_output(
+        output_type=output_type,
+        df=tables,
+        id_col="table_id"
+    )
 
 
 def get_dataset_description(
