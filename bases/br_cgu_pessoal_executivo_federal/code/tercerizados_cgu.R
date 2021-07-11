@@ -1,3 +1,14 @@
+#### Limpa Memomoria #### 
+rm(list = ls())
+
+### Definir diretorio ####
+setwd("~/basedosdados/tratamento/5_br_cgu_terceirizados/input")
+
+#### Pacotes ####
+library(tidyverse)
+
+#### Dados ####
+
 #### 2010 - 2018 ####
 df2010_18 <- read_delim("cgu_2010_18.csv", ";", escape_double = FALSE, trim_ws = TRUE)
 
@@ -28,17 +39,17 @@ df_final = Reduce(rbind, list(df2010_18, df2019_01, df2019_05, df2019_09, df2020
 df_final10_21 = df_final %>% 
   select(-Mes_Carga) %>% 
   rename(id_terceirizado = id_terc, sigla_orgao_superior_unidade_gestora = sg_orgao_sup_tabela_ug, 
-         codigo_unidade_gestora = cd_ug_gestora, unidade_gestora = nm_ug_tabela_ug, sigla_unidade_gestora_terceirizado = sg_ug_gestora, 
+         codigo_unidade_gestora = cd_ug_gestora, unidade_gestora = nm_ug_tabela_ug, sigla_unidade_gestora = sg_ug_gestora, 
          contrato_empresa = nr_contrato, cnpj_empresa = nr_cnpj, razao_social_empresa = nm_razao_social, 
-         cpf_terceirizado = nr_cpf, nome_terceirizado = nm_terceirizado, categoria_profissional = nm_categoria_profissional, 
-         nivel_escolaridade = nm_escolaridade, quantidade_horas_trabalhadas_semanais = nr_jornada, unidade_trabalho_terceirizado = nm_unidade_prestacao, 
-         valor_terceirizado_mensal = vl_mensal_salario, custo_terceirizado_mensal = vl_mensal_custo, mes = Num_Mes_Carga, ano = Ano_Carga, sigla_orgao_trabalho_terceirizado = sg_orgao, 
-         nome_orgao_trabalho_terceirizado = nm_orgao, codigo_siafi_trabalho_terceirizado = cd_orgao_siafi, codigo_siape_trabalho_terceirizado  = cd_orgao_siape) %>% 
+         cpf = nr_cpf, nome = nm_terceirizado, categoria_profissional = nm_categoria_profissional, 
+         nivel_escolaridade = nm_escolaridade, quantidade_horas_trabalhadas_semanais = nr_jornada, unidade_trabalho = nm_unidade_prestacao, 
+         valor_mensal = vl_mensal_salario, custo_mensal = vl_mensal_custo, mes = Num_Mes_Carga, ano = Ano_Carga, sigla_orgao_trabalho = sg_orgao, 
+         nome_orgao_trabalho = nm_orgao, codigo_siafi_trabalho = cd_orgao_siafi, codigo_siape_trabalho  = cd_orgao_siape) %>% 
   select(ano, mes, id_terceirizado, sigla_orgao_superior_unidade_gestora, codigo_unidade_gestora, unidade_gestora, 
-         sigla_unidade_gestora_terceirizado, contrato_empresa, cnpj_empresa, razao_social_empresa, cpf_terceirizado, 
-         nome_terceirizado, categoria_profissional, nivel_escolaridade, quantidade_horas_trabalhadas_semanais, 
-         unidade_trabalho_terceirizado, valor_terceirizado_mensal, custo_terceirizado_mensal, sigla_orgao_trabalho_terceirizado, 
-         nome_orgao_trabalho_terceirizado, codigo_siafi_trabalho_terceirizado, codigo_siape_trabalho_terceirizado) 
+         sigla_unidade_gestora, contrato_empresa, cnpj_empresa, razao_social_empresa, cpf, 
+         nome, categoria_profissional, nivel_escolaridade, quantidade_horas_trabalhadas_semanais, 
+         unidade_trabalho, valor_mensal, custo_mensal, sigla_orgao_trabalho, 
+         nome_orgao_trabalho, codigo_siafi_trabalho, codigo_siape_trabalho) 
 
 # exportar 
 write.csv(df_final10_21,

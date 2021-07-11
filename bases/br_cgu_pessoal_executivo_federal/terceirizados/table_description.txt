@@ -1,4 +1,4 @@
-Terceirizados contratados pelo governo para prestação de serviços gerais de 2010 até janeiro de 2021.
+Terceirizados contratados pelo governo para prestação de serviços gerais.
 
 
 Para saber mais acesse:
@@ -11,14 +11,26 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Crislane A. Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_cgu/code
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_pessoal_executivo_federal/code
 Website: https://github.com/crislanealves
 Email: crislanealves@protonmail.comTratado por
 -----------
 Nome: Crislane A. Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_cgu/code
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_pessoal_executivo_federal/code
 Website: https://github.com/crislanealves
 Email: crislanealves@protonmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- ano
+- mes
+- id terceirizado
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- mes
+- id_terceirizado
 
 Cobertura Temporal
 ------------------
@@ -43,6 +55,8 @@ Tratamento
 ----------
 - Exclusão, renomeação e reordenação de colunas. 
 
-
+Frequencia de Atualização
+-------------------------
+trimestral
 
 
