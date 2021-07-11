@@ -9,18 +9,18 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi
 
 version: v1.0 # REQUIRED
 
-last_updated: 2021-07-07 # AUTO GENERATED
+last_updated: 2021-07-10 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Tabela de receita orçamentária a nível de município.
+     Tabela de receita orçamentária a nível de município
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: Crislane A. Souza  # REQUIRED
+    name:  Crislane A. Souza   # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi/code # REQUIRED
     website: https://github.com/crislanealves
     email: crislanealves@protonmail.com
@@ -29,15 +29,15 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: Crislane A. Souza 
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi/code 
+    name: Crislane A. Souza
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi/code
     website: https://github.com/crislanealves
     email: crislanealves@protonmail.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
     - Criação da coluna 'id_municipio' para os anos de 1989-2012
-    - Criação da coluna 'id_conta_normizalido' para compatibilizar todos os anos que não tem 'id_conta'
+    - Criação da coluna 'id_conta_normizalido' para compatibilizar todos os anos que não tem 'portaria'
     - Criação da coluna 'id_conta_bd' para compatilizar toda série temporal 
     - Append nas tabelas dos anos 1989-2012 para a arquitetura 2013-2020    
     - Compatibilização de moedas
@@ -55,13 +55,15 @@ data_update_frequency: 1 ano # REQUIRED
 observation_level: #REQUIRED
     - municipio
     - ano
+    - conta
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - id_municipio
-    - ano
+    - id_municipo
+    - conta
+    - id_conta_bd
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -78,6 +80,7 @@ coverage_geo:
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
+
     - 1989
     - 1990
     - 1991
@@ -116,7 +119,8 @@ coverage_time:
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED  
-    - ano
+    - ano  
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -147,14 +151,20 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_conta
-        description: ID da Conta
+        name: portaria
+        description: Portaria
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: id_conta_normalizado
-        description: ID da Conta normalizado 
+        description: ID Conta normalizado 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_conta_bd
+        description: ID Conta - Base dos Dados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -166,18 +176,24 @@ columns: # REQUIRED
   
     -   
         name: formula_conta
-        description: Formula da Conta
+        description: Fórmula da Conta
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_conta_bd
-        description: ID da Conta - Base dos Dados
+        name: conta_bd
+        description: Conta - Base dos Dados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: ano
         description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf
+        description: Sigla da Unidade da Federação 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.

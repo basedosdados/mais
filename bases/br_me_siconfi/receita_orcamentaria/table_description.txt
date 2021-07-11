@@ -1,4 +1,4 @@
-Tabela de receita orçamentária a nível de município.
+Tabela de receita orçamentária a nível de município
 
 
 Para saber mais acesse:
@@ -23,16 +23,19 @@ Email: crislanealves@protonmail.com
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
+- sigla_uf
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
 - ano
+- conta
 
 Colunas identificando linhas unicamente
 -------------------
-- id_municipio
-- ano
+- id_municipo
+- conta
+- id_conta_bd
 
 Cobertura Temporal
 ------------------
@@ -76,7 +79,7 @@ Cobertura Espacial
 Tratamento
 ----------
 - Criação da coluna 'id_municipio' para os anos de 1989-2012
-- Criação da coluna 'id_conta_normizalido' para compatibilizar todos os anos que não tem 'id_conta'
+- Criação da coluna 'id_conta_normizalido' para compatibilizar todos os anos que não tem 'portaria'
 - Criação da coluna 'id_conta_bd' para compatilizar toda série temporal 
 - Append nas tabelas dos anos 1989-2012 para a arquitetura 2013-2020    
 - Compatibilização de moedas

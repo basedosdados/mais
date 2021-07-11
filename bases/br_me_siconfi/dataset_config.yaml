@@ -12,7 +12,7 @@ description: | # REQUIRED
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: tesouro-nacional # REQUIRED
+organization: br_me # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
@@ -21,14 +21,14 @@ author:
 
 # Onde encontrar os dados originais e mais informações?
 website:
-    - https://siconfi.tesouro.gov.br/siconfi/pages/public/consulta_finbra/finbra_list.jsf
-    - https://www.tesourotransparente.gov.br/publicacoes/finbra-dados-contabeis-dos-municipios-1989-a-2012/1989/26
+   - https://siconfi.tesouro.gov.br/siconfi/pages/public/consulta_finbra/finbra_list.jsf
+   - https://www.tesourotransparente.gov.br/publicacoes/finbra-dados-contabeis-dos-municipios-1989-a-2012/1989/26
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
-    - gov-fin-pub
-    - economia
+     - gov-fin-pub
+     - economia
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -63,7 +63,7 @@ registration: não
 availability: online
 
 # A fonte original requer IP brasileiro para acesso?
-brazilian_IP: não
+brazilian_IP: sim
 
 # Essa base está sob qual licença?
 # A licença MIT se aplica a bases públicas.
