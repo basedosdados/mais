@@ -42,9 +42,9 @@ class Base:
 
     def _load_credentials(self, mode: str):
 
-        if getenv(f"{constants.env_credentials_prefix}{mode.upper()}"):
+        if getenv(f"{constants.env_credentials_prefix.value}{mode.upper()}"):
             info = json.loads(self._decode_env(
-                f"{constants.env_credentials_prefix}{mode.upper()}"))
+                f"{constants.env_credentials_prefix.value}{mode.upper()}"))
             return service_account.Credentials.from_service_account_info(
                 info, scopes=[
                     "https://www.googleapis.com/auth/cloud-platform"]
@@ -162,19 +162,20 @@ class Base:
         # If environments are set but no files exist
         if (
             (not config_file.exists()) and
-            (getenv(constants.env_config)) and
-            (getenv(constants.env_credentials_prod)) and
-            (getenv(constants.env_credentials_staging))
+            (getenv(constants.env_config.value)) and
+            (getenv(constants.env_credentials_prod.value)) and
+            (getenv(constants.env_credentials_staging.value))
         ):
             # Create basedosdados files from envs
             with open(config_file, "w") as f:
-                f.write(self._decode_env(constants.env_config))
+                f.write(self._decode_env(constants.env_config.value))
                 f.close()
             with open(credentials_folder / "prod.json", "w") as f:
-                f.write(self._decode_env(constants.env_credentials_prod))
+                f.write(self._decode_env(constants.env_credentials_prod.value))
                 f.close()
             with open(credentials_folder / "staging.json", "w") as f:
-                f.write(self._decode_env(constants.env_credentials_staging))
+                f.write(self._decode_env(
+                    constants.env_credentials_staging.value))
                 f.close()
 
         if (not config_file.exists()) or (force):
@@ -300,8 +301,8 @@ class Base:
 
     def _load_config(self):
 
-        if getenv(constants.env_config):
-            return tomlkit.parse(self._decode_env(constants.env_config))
+        if getenv(constants.env_config.value):
+            return tomlkit.parse(self._decode_env(constants.env_config.value))
         else:
             return tomlkit.parse(
                 (Path.home() / ".basedosdados" / "config.toml")
