@@ -1,5 +1,13 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: socio # AUTO GENERATED
 dataset_id: br_me_socios # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-me-socios # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_socios # AUTO GENERATED
+
+version: v1.0 # REQUIRED
 
 last_updated: 2020-10-23 # AUTO GENERATED
 
@@ -41,6 +49,14 @@ data_update_frequency: trimestre
 observation_level:
     - cnpj
     - cnpj_cpf_do_socio
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - cnpj
+    - cnpj_cpf_do_socio
+
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
