@@ -24,7 +24,7 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(ddd AS INT64) ddd,
+SAFE_CAST(ddd AS STRING) ddd,
 SAFE_CAST(tecnologia AS STRING) tecnologia,
 SAFE_CAST(sinal AS STRING) sinal,
 SAFE_CAST(acessos AS INT64) acessos

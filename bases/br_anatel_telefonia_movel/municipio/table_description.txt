@@ -1,4 +1,4 @@
-Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) a partir de 2019, pós reformulação da coleta e divulgação de dados por parte da Anatel, que apresentam o município como menor nível de desagregação dos dados.
+Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) a partir de 2019, após reformulação da coleta e divulgação de dados por parte da Anatel, que apresentam o município como menor nível de desagregação dos dados.
 
 
 Para saber mais acesse:
@@ -25,8 +25,17 @@ Nível da Observação (i.e. a granularidade da linha)
 
 Colunas identificando linhas unicamente
 -------------------
+- ano
+- mes
+- sigla_uf
 - id_municipio
+- ddd
+- cnpj
 - tecnologia
+- sinal
+- modalidade
+- pessoa
+- produto
 
 Cobertura Temporal
 ------------------
@@ -40,7 +49,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Após o download da base, alterou-se os nomes das variáveis para compatibilização com a BD+
+Download das bases e a renomeação das colunas segundo padrão da BD+
 
 Frequencia de Atualização
 -------------------------

@@ -60,6 +60,7 @@ observation_level: #REQUIRED
 primary_keys:
     - ano
     - mes
+    - sigla_uf
     - id_municipio
     - cnpj
     - tecnologia

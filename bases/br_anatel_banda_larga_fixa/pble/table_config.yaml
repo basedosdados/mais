@@ -64,6 +64,8 @@ primary_keys:
     - dia
     - id_municipio
     - id_escola
+    - tecnologia
+    - conexao
 
 # Qual é a cobertura espacial da tabela?
 # Regras:

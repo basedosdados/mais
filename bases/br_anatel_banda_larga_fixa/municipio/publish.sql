@@ -24,7 +24,7 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(tecnologia AS STRING) tecnologia,
 SAFE_CAST(transmissao AS STRING) transmissao,
 SAFE_CAST(velocidade AS STRING) velocidade,
