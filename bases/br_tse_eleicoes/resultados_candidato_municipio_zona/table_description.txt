@@ -37,9 +37,9 @@ Colunas identificando linhas unicamente
 -------------------
 - turno
 - tipo_eleicao
-- municipio
+- id_municipio
 - zona
-- candidato
+- numero_candidato
 - ano
 
 Cobertura Temporal

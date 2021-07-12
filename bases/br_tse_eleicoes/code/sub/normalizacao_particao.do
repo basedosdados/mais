@@ -144,6 +144,7 @@ foreach ano of numlist 1990 1994(2)2020 {
 // resultados municipio-zona
 //-------------------------------------------------//
 
+
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 0
@@ -178,6 +179,8 @@ foreach ano of numlist 1994(2)2020 {
 	//---------------------//
 	
 	use "output/resultados_candidato_municipio_zona_`ano'.dta", clear
+	
+	ren numero_candidato numero
 	
 	if mod(`ano', 4) == 0 {
 		
@@ -219,9 +222,11 @@ foreach ano of numlist 1994(2)2020 {
 	}
 	*
 	
-	drop nome nome_urna sequencial coligacao composicao
+	ren numero numero_candidato
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo sigla_partido numero id_candidato_bd votos resultado
+	drop nome_candidato nome_urna_candidato sequencial_candidato coligacao composicao
+	
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo sigla_partido numero_candidato id_candidato_bd votos resultado
 	
 	order `vars'
 	sort  `vars'
@@ -258,7 +263,7 @@ foreach ano of numlist 1994(2)2020 {
 	
 	drop coligacao composicao
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo sigla
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo sigla_partido
 	
 	order `vars'
 	sort  `vars'
@@ -321,13 +326,15 @@ save `candidatos_mod2_presid'
 !mkdir "output/resultados_candidato_secao"
 !mkdir "output/resultados_partido_secao"
 
-foreach ano of numlist 2018 2020 { // 1994(2)2020 {
+foreach ano of numlist 1994(2)2020 {
 	
 	//---------------------//
 	// candidato
 	//---------------------//
 	
 	use "output/resultados_candidato_secao_`ano'.dta", clear
+	
+	ren numero_candidato numero
 	
 	if mod(`ano', 4) == 0 {
 		
@@ -369,7 +376,9 @@ foreach ano of numlist 2018 2020 { // 1994(2)2020 {
 	}
 	*
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo sigla_partido numero id_candidato_bd votos
+	ren numero numero_candidato
+	
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo sigla_partido numero_candidato id_candidato_bd votos
 	
 	order `vars'
 	sort  `vars'
@@ -403,13 +412,16 @@ foreach ano of numlist 2018 2020 { // 1994(2)2020 {
 	
 	use "output/resultados_partido_secao_`ano'.dta", clear
 	
+	ren numero_partido numero
+	
 	merge m:1 ano numero using "output/norm_partidos.dta"
 	drop if _merge == 2
 	drop _merge
 	
 	drop numero
+	ren sigla sigla_partido
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio_tse zona secao cargo sigla
+	local vars ano turno tipo_eleicao sigla_uf id_municipio_tse zona secao cargo sigla_partido
 	
 	order `vars'
 	sort  `vars'
@@ -668,11 +680,15 @@ foreach ano of numlist 2006(2)2020 {
 	
 	use "output/bens_candidato_`ano'.dta", clear
 	
+	ren sequencial_candidato sequencial
+	
 	merge m:1 ano tipo_eleicao sigla_uf sequencial using `candidatos'
 	drop if _merge == 2
 	drop _merge
 	
-	order ano tipo_eleicao sigla_uf sequencial id_candidato_bd id_tipo_item tipo_item descricao_item valor_item
+	ren sequencial sequencial_candidato
+	
+	order ano tipo_eleicao sigla_uf sequencial_candidato id_candidato_bd id_tipo_item tipo_item descricao_item valor_item
 	
 	tempfile bens
 	save `bens'

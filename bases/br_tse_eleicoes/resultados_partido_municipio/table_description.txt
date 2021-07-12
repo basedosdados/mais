@@ -29,6 +29,7 @@ Nível da Observação (i.e. a granularidade da linha)
 - turno
 - tipo de eleição
 - municipio
+- cargo
 - partido
 - ano
 
@@ -37,6 +38,7 @@ Colunas identificando linhas unicamente
 - turno
 - tipo_eleicao
 - id_municipio
+- cargo
 - sigla_partido
 - ano
 
