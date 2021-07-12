@@ -29,7 +29,7 @@ SAFE_CAST(id_municipio_tse AS STRING) id_municipio_tse,
 SAFE_CAST(zona AS INT64) zona,
 SAFE_CAST(secao AS INT64) secao,
 SAFE_CAST(cargo AS STRING) cargo,
-SAFE_CAST(sigla AS STRING) sigla_partido,
+SAFE_CAST(sigla_partido AS STRING) sigla_partido,
 SAFE_CAST(votos_nominais AS INT64) votos_nominais,
 SAFE_CAST(votos_nao_nominais AS INT64) votos_nao_nominais
 FROM basedosdados-dev.br_tse_eleicoes_staging.resultados_partido_secao AS t

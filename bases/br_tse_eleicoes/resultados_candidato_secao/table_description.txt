@@ -38,8 +38,7 @@ Colunas identificando linhas unicamente
 -------------------
 - turno
 - tipo_eleicao
-- sigla_uf
-- id_municipio_tse
+- id_municipio
 - zona
 - secao
 - numero_candidato
