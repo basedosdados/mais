@@ -293,38 +293,12 @@ def _print_output(df):
     #        ) if len(lista) else final)
 
 
-def _handle_output(output_type, df, id_col):
-    """Handles datasets and tables listing outputs based on user's choice.
-    Either prints it to the screen or returns it as a `list` object.
-
-    Args:
-        output_type (str): output type, either "print"  or "list"
-        df (pd.DataFrame): table containing datasets metadata
-        id_col (str): name of column with id's data
-    """
-
-
-
-    if output_type == "print":
-        _print_output(df)
-
-    elif output_type == "list":
-        return df[id_col].to_list()
-
-    else:
-        raise BaseDosDadosException(
-            "You must set the output_type to either \"print\" or \"list\"."
-        )
-    
-    return None
-
-
 def list_datasets(
     query_project_id="basedosdados",
-    output_type="print",
     filter_by=None,
     with_description=False,
     from_file=False,
+    verbose=True
 ):
     """Fetch the dataset_id of datasets available at query_project_id. Prints information on
     screen or returns it as a list..
@@ -367,20 +341,19 @@ def list_datasets(
             for dataset in datasets["dataset_id"]
         ]
 
-    return _handle_output(
-        output_type=output_type,
-        df=datasets,
-        id_col="dataset_id"
-    )
+    if verbose:
+        _print_output(datasets)
+    
+    return datasets["dataset_id"].to_list()
 
 
 def list_dataset_tables(
     dataset_id,
     query_project_id="basedosdados",
-    output_type="print",
     from_file=False,
     filter_by=None,
     with_description=False,
+    verbose=True,
 ):
     """Fetch table_id for tables available at the specified dataset_id. Prints the information
     on screen or returns it as a list.
@@ -426,12 +399,11 @@ def list_dataset_tables(
             _get_header(client.get_table(f"{dataset_id}.{table}").description)
             for table in tables["table_id"]
         ]
+    
+    if verbose:
+        _print_output(tables)
 
-    return _handle_output(
-        output_type=output_type,
-        df=tables,
-        id_col="table_id"
-    )
+    return tables["table_id"].to_list()
 
 
 def get_dataset_description(

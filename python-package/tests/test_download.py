@@ -157,7 +157,7 @@ def test_list_datasets_all_descriptions(capsys):
 
 def test_list_datasets_list_output():
 
-    list_output = list_datasets(output_type="list", from_file=True)
+    list_output = list_datasets(from_file=True, verbose=False)
     assert type(list_output) == list
     assert len(list_output) > 0
 
@@ -195,8 +195,8 @@ def test_list_dataset_tables_list_output():
 
     list_output = list_dataset_tables(
         dataset_id="br_ibge_censo_demografico",
-        output_type="list",
-        from_file=True
+        from_file=True,
+        verbose=False
     )
     assert type(list_output) == list
     assert len(list_output) > 0
