@@ -293,6 +293,29 @@ def _print_output(df):
     #        ) if len(lista) else final)
 
 
+def _handle_output(verbose, df, id_col):
+    """Handles datasets and tables listing outputs based on user's choice.
+    Either prints it to the screen or returns it as a `list` object.
+    Args:
+        verbose (bool): amount of verbosity
+        df (pd.DataFrame): table containing datasets metadata
+        id_col (str): name of column with id's data
+    """
+
+    if verbose:
+        _print_output(df)
+
+    elif verbose == False:
+        return df[id_col].to_list()
+
+    else:
+        raise BaseDosDadosException(
+            "You must set the `verbose` argument to either True or False."
+        )
+
+    return None
+
+
 def list_datasets(
     query_project_id="basedosdados",
     filter_by=None,
@@ -301,17 +324,18 @@ def list_datasets(
     verbose=True
 ):
     """Fetch the dataset_id of datasets available at query_project_id. Prints information on
-    screen or returns it as a list..
+    screen or returns it as a list.
 
     Args:
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
-        output_type (str): Optional.
-            If set to "print", information is printed to the screen. If set to "list", a list object is returned.     
         filter_by (str): Optional
             String to be matched in dataset_id.
         with_description (bool): Optional
             If True, fetch short dataset description for each dataset.
+        verbose (bool): Optional.
+            If set to True, information is printed to the screen. If set to False, a list object is returned.
+
 
     Example:
         list_datasets(
@@ -341,10 +365,11 @@ def list_datasets(
             for dataset in datasets["dataset_id"]
         ]
 
-    if verbose:
-        _print_output(datasets)
-    
-    return datasets["dataset_id"].to_list()
+    return _handle_output(
+        verbose=verbose,
+        df=datasets,
+        id_col="dataset_id"
+    )
 
 
 def list_dataset_tables(
@@ -363,12 +388,12 @@ def list_dataset_tables(
             Dataset id available in basedosdados.
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
-        output_type (str): Optional.
-            If set to "print", information is printed to the screen. If set to "list", a list object is returned.
         filter_by (str): Optional
             String to be matched in the table_id.
         with_description (bool): Optional
              If True, fetch short table descriptions for each table that match the search criteria.
+        verbose (bool): Optional.
+            If set to True, information is printed to the screen. If set to False, a list object is returned.
 
     Example:
         list_dataset_tables(
@@ -400,10 +425,11 @@ def list_dataset_tables(
             for table in tables["table_id"]
         ]
     
-    if verbose:
-        _print_output(tables)
-
-    return tables["table_id"].to_list()
+    return _handle_output(
+        verbose=verbose,
+        df=tables,
+        id_col="table_id"
+    )
 
 
 def get_dataset_description(
