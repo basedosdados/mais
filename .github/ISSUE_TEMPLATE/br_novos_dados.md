@@ -9,14 +9,16 @@ assignees: rdahis
 
 **Descrição do dataset**
 
-Já está na [tabela de prioridades](https://docs.google.com/spreadsheets/d/1jnmmG4V6Ugh_-lhVSMIVu_EaL05y1dX9Y0YW8G8e_Wo/edit?usp=sharing)? <Sim/Não>
+1. A base já está na [tabela de prioridades](https://docs.google.com/spreadsheets/d/1jnmmG4V6Ugh_-lhVSMIVu_EaL05y1dX9Y0YW8G8e_Wo/edit?usp=sharing)? <Sim/Não>
 
-Dataset_id: `dataset_id`
+<!-- Para (2) e (3): veja como nomeamos nossos conjuntos e tabelas aqui https://basedosdados.github.io/mais/style_data/#nomea%C3%A7%C3%A3o-de-bases-e-tabelas -->
 
-Table_id (1 ou mais): `table_id`
+2. Qual o nome do conjunto? `dataset_id`
 
-Fonte de dados: <link>
+3. Qual o nome da(s) tabela(s)? `table_id`
 
-Anos: de XXXX até YYYY
+4. Fonte de dados: <link>
+
+5. Cobertura temporal: de XXXX até YYYY
 
 **Como você pode contribuir?**
