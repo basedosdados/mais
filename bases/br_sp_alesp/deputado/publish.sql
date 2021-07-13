@@ -19,10 +19,10 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_sp_alesp.deputados AS
+CREATE VIEW basedosdados-dev.br_sp_alesp.deputado AS
 SELECT 
-SAFE_CAST(matricula AS INT64) matricula,
-SAFE_CAST(id_deputado AS INT64) id_deputado,
+SAFE_CAST(matricula AS STRING) matricula,
+SAFE_CAST(id_deputado AS STRING) id_deputado,
 SAFE_CAST(nome_deputado AS STRING) nome_deputado,
 SAFE_CAST(aniversario AS STRING) aniversario,
 SAFE_CAST(sigla_partido AS STRING) sigla_partido,
@@ -33,4 +33,4 @@ SAFE_CAST(placa_veiculo AS STRING) placa_veiculo,
 SAFE_CAST(home_page AS STRING) home_page,
 SAFE_CAST(andar AS STRING) andar,
 SAFE_CAST(id_spl AS STRING) id_spl
-from basedosdados-dev.br_sp_alesp_staging.deputados as t
+from basedosdados-dev.br_sp_alesp_staging.deputado as t

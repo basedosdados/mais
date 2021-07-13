@@ -26,16 +26,7 @@ Nível da Observação (i.e. a granularidade da linha)
 
 Colunas identificando linhas unicamente
 -------------------
-- -
-- m
-- a
-- t
-- r
-- i
-- c
-- u
-- l
-- a
+- matricula
 
 Cobertura Temporal
 ------------------
@@ -44,7 +35,7 @@ Cobertura Temporal
 Cobertura Espacial
 ------------------
 - brasil
-- SP
+- sp
 
 Tratamento
 ----------
