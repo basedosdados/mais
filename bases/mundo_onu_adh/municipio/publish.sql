@@ -18,9 +18,10 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW `basedosdados.mundo_onu_adh.municipios` AS
-SELECT
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+
+CREATE VIEW basedosdados-dev.mundo_onu_adh.municipio AS
+SELECT 
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(expectativa_vida AS FLOAT64) expectativa_vida,
 SAFE_CAST(fecundidade_total AS FLOAT64) fecundidade_total,
@@ -250,4 +251,4 @@ SAFE_CAST(idhm AS FLOAT64) idhm,
 SAFE_CAST(idhm_e AS FLOAT64) idhm_e,
 SAFE_CAST(idhm_l AS FLOAT64) idhm_l,
 SAFE_CAST(idhm_r AS FLOAT64) idhm_r
-from basedosdados-staging.mundo_onu_adh_staging.municipios as t
+from basedosdados-dev.mundo_onu_adh_staging.municipio as t

@@ -1,4 +1,4 @@
-Dados do Atlas do Desenvolvimento Humano (ADH) a nível do Brasil.
+Dados do Atlas do Desenvolvimento Humano (ADH) a nível de UF-ano.
 
 
 Para saber mais acesse:
@@ -20,10 +20,12 @@ Email: rdahis@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
+- unidade da federação
 - ano
 
 Colunas identificando linhas unicamente
 -------------------
+- id_uf
 - ano
 
 Cobertura Temporal
@@ -42,6 +44,6 @@ Limpei e renomeei uma série de variáveis.
 
 Frequencia de Atualização
 -------------------------
-único
+unico
 
 
