@@ -23,8 +23,8 @@ CREATE VIEW basedosdados-dev.br_sp_gov_ssp.ocorrencias_registradas AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(id_estado AS INT64) id_estado,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(id_estado AS STRING) id_estado,
 SAFE_CAST(regiao_ssp AS STRING) regiao_ssp,
 SAFE_CAST(homicidio_doloso AS INT64) homicidio_doloso,
 SAFE_CAST(numero_de_vitimas_em_homicidio_doloso AS INT64) numero_de_vitimas_em_homicidio_doloso,
