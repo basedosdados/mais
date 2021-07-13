@@ -23,7 +23,7 @@ SELECT
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(id_domicilio AS STRING) id_domicilio,
-SAFE_CAST(numero_familia AS STRING) numero_familia,
+SAFE_CAST(numero_familia AS INT64) numero_familia,
 SAFE_CAST(v001 AS INT64) v001,
 SAFE_CAST(v002 AS INT64) v002,
 SAFE_CAST(v003 AS INT64) v003,
