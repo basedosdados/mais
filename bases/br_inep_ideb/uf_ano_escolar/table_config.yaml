@@ -1,31 +1,22 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: estado # AUTO GENERATED
+table_id: uf_ano_escolar # AUTO GENERATED
 dataset_id: br_inep_ideb # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-inep-ideb # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ideb # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v1.0
 
-last_updated: 2020-11-01 # AUTO GENERATED
+last_updated: 2021-07-13 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Dados do Ideb agregados para o Brasil a nível de estado-rede-ensino-ano.
-
-# Qual organização/departamento/pessoa tratou os dados?
-# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
-# Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: Ricardo Dahis
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ideb/code # REQUIRED
-    website: <onde encontrar os dados tratados>
-    email: rdahis@basedosdados.org
+    Dados do Ideb agregados para o Brasil a nível de UF-rede-ano_escolar-ano.
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -35,6 +26,15 @@ published_by:
     email: rdahis@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Ricardo Dahis
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ideb/code # REQUIRED
+    website: <onde encontrar os dados tratados>
+    email: rdahis@basedosdados.org
+
 treatment_description: | 
     Dados foram organizados e separados para consistência.
 
@@ -42,14 +42,17 @@ treatment_description: |
 # Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
 data_update_frequency: 2 anos
 
-# Nível da observação: quais colunas identificam uma linha unicamente?
+# Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
-# Regras: minúsculo, sem acento, singular.
-# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
-    - estado
+    - unidade da federação
     - rede
     - ensino
+    - ano_escolar
     - ano
 
 # Quais colunas identificam uma linha unicamente?
@@ -59,9 +62,8 @@ primary_keys:
     - sigla_uf
     - rede
     - ensino
-    - anos_escolares
+    - ano_escolar
     - ano
-
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -104,6 +106,12 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
         name: sigla_uf
         description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
@@ -122,55 +130,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: anos_escolares
-        description: Anos Escolares
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ano
-        description: Ano
+        name: ano_escolar
+        description: Ano Escolar
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: taxa_aprovacao
         description: Taxa de Aprovação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: indicador_rendimento
-        description: Indicador de Rendimento (P)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: nota_saeb_matematica
-        description: Nota SAEB - Matemática
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: nota_saeb_lingua_portuguesa
-        description: Nota SAEB - Língua Portuguesa
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: nota_saeb_media_padronizada
-        description: Nota SAEB - Média Padronizada (N)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ideb
-        description: IDEB (N x P)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: projecao
-        description: Projeção
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

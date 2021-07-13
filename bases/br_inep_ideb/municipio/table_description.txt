@@ -24,6 +24,7 @@ Nível da Observação (i.e. a granularidade da linha)
 - municipio
 - rede
 - ensino
+- anos escolares
 - ano
 
 Colunas identificando linhas unicamente

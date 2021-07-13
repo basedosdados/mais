@@ -23,6 +23,7 @@ Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - regiao
 - rede
+- ensino
 - ano_escolar
 - ano
 

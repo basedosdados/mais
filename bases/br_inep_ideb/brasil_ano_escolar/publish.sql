@@ -25,4 +25,4 @@ SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(ensino AS STRING) ensino,
 SAFE_CAST(ano_escolar AS STRING) ano_escolar,
 SAFE_CAST(taxa_aprovacao AS FLOAT64) taxa_aprovacao
-from basedosdados-dev.br_inep_ideb_staging.brasil_ano_escolar as t
+FROM basedosdados-dev.br_inep_ideb_staging.brasil_ano_escolar AS t

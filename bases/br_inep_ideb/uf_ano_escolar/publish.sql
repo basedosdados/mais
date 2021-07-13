@@ -18,12 +18,12 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW `basedosdados-dev.br_inep_ideb.estado_ano_escolar` AS
+CREATE VIEW basedosdados-dev.br_inep_ideb.uf_ano_escolar AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(estado_abrev AS STRING) sigla_uf,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(ensino AS STRING) ensino,
-SAFE_CAST(ano_escolar AS STRING) ano_escolar,
+SAFE_CAST(ano_escolar AS INT64) ano_escolar,
 SAFE_CAST(taxa_aprovacao AS FLOAT64) taxa_aprovacao
-from basedosdados-dev.br_inep_ideb_staging.estado_ano_escolar as t
+FROM basedosdados-dev.br_inep_ideb_staging.uf_ano_escolar AS t

@@ -9,7 +9,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ideb 
 
 version: v1.0 # REQUIRED
 
-last_updated: 2020-11-01 # AUTO GENERATED
+last_updated: 2021-07-13 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -47,7 +47,10 @@ data_update_frequency: 2 anos
 # Regras: minúsculo, sem acento, singular.
 # Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level:
-    - id_escola
+    - escola
+    - rede
+    - tipo de ensino
+    - anos escolares
     - ano
 
 # Quais colunas identificam uma linha unicamente?
@@ -102,8 +105,14 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: id_escola
-        description: ID Escola
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -114,8 +123,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: sigla_uf
-        description: Sigla da Unidade da Federação
+        name: id_escola
+        description: ID Escola
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -134,12 +143,6 @@ columns: # REQUIRED
     -   
         name: anos_escolares
         description: Anos Escolares
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ano
-        description: Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
