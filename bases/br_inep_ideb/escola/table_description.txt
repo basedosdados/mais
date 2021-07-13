@@ -21,7 +21,10 @@ Email: rdahis@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- id_escola
+- escola
+- rede
+- tipo de ensino
+- anos escolares
 - ano
 
 Colunas identificando linhas unicamente

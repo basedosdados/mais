@@ -9,7 +9,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ideb 
 
 version: v1.0 # REQUIRED
 
-last_updated: 2020-11-01 # AUTO GENERATED
+last_updated: 2021-07-13 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -49,6 +49,7 @@ data_update_frequency: 2 anos
 observation_level:
     - regiao
     - rede
+    - ensino
     - ano_escolar
     - ano
 
@@ -103,6 +104,12 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
         name: regiao
         description: Região
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
@@ -123,12 +130,6 @@ columns: # REQUIRED
     -   
         name: ano_escolar
         description: Ano Escolar
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ano
-        description: Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

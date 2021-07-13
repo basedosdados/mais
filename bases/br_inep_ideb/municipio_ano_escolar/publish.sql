@@ -21,8 +21,8 @@ TIPOS:
 CREATE VIEW `basedosdados-dev.br_inep_ideb.municipio_ano_escolar` AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(estado_abrev AS STRING) sigla_uf,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(ensino AS STRING) ensino,
 SAFE_CAST(ano_escolar AS INT64) ano_escolar,

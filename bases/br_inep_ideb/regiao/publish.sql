@@ -20,16 +20,16 @@ TIPOS:
 */
 CREATE VIEW `basedosdados-dev.br_inep_ideb.regiao` AS
 SELECT 
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(regiao AS STRING) regiao,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(ensino AS STRING) ensino,
 SAFE_CAST(anos_escolares AS STRING) anos_escolares,
-SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(taxa_aprovacao AS FLOAT64) taxa_aprovacao,
 SAFE_CAST(indicador_rendimento AS FLOAT64) indicador_rendimento,
-SAFE_CAST(nota_SAEB_matematica AS FLOAT64) nota_saeb_matematica,
-SAFE_CAST(nota_SAEB_lingua_portuguesa AS FLOAT64) nota_saeb_lingua_portuguesa,
-SAFE_CAST(nota_SAEB_media_padronizada AS FLOAT64) nota_saeb_media_padronizada,
-SAFE_CAST(IDEB AS FLOAT64) ideb,
+SAFE_CAST(nota_saeb_matematica AS FLOAT64) nota_saeb_matematica,
+SAFE_CAST(nota_saeb_lingua_portuguesa AS FLOAT64) nota_saeb_lingua_portuguesa,
+SAFE_CAST(nota_saeb_media_padronizada AS FLOAT64) nota_saeb_media_padronizada,
+SAFE_CAST(ideb AS FLOAT64) ideb,
 SAFE_CAST(projecao AS FLOAT64) projecao
-from basedosdados-dev.br_inep_ideb_staging.regiao as t
+FROM basedosdados-dev.br_inep_ideb_staging.regiao AS t

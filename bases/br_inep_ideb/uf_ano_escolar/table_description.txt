@@ -1,4 +1,4 @@
-Dados do Ideb agregados para o Brasil a nível de estado-rede-ensino-ano.
+Dados do Ideb agregados para o Brasil a nível de UF-rede-ano_escolar-ano.
 
 
 Para saber mais acesse:
@@ -21,9 +21,10 @@ Email: rdahis@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- estado
+- unidade da federação
 - rede
 - ensino
+- ano_escolar
 - ano
 
 Colunas identificando linhas unicamente
@@ -31,6 +32,7 @@ Colunas identificando linhas unicamente
 - sigla_uf
 - rede
 - ensino
+- ano_escolar
 - ano
 
 Cobertura Temporal
