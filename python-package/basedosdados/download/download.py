@@ -495,7 +495,7 @@ def get_table_columns(
 def get_table_size(
     dataset_id,
     table_id,
-    billing_project_id,
+    billing_project_id=None,
     query_project_id="basedosdados",
     from_file=False,
 ):
@@ -516,35 +516,73 @@ def get_table_size(
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
     Example:
         get_table_size(
-        dataset_id='br_ibge_censo2010',
-        table_id='pessoa_renda_setor_censitario',
-        billing_project_id='yourprojectid'
+            dataset_id='br_ibge_censo2010',
+            table_id='pessoa_renda_setor_censitario',
+            billing_project_id='yourprojectid'
         )
     """
-    billing_client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=billing_project_id
-    )
+    try:
+        billing_client = bigquery.Client(
+            credentials=credentials(from_file=from_file), project=billing_project_id
+        )
 
-    query = f"""SELECT COUNT(*) FROM {query_project_id}.{dataset_id}.{table_id}"""
+        query = f"""SELECT COUNT(*) FROM {query_project_id}.{dataset_id}.{table_id}"""
 
-    job = billing_client.query(query, location="US")
+        job = billing_client.query(query, location="US")
 
-    num_rows = job.to_dataframe().loc[0, "f0_"]
+        num_rows = job.to_dataframe().loc[0, "f0_"]
 
-    size_mb = round(job.total_bytes_processed / 1024 / 1024, 2)
+        size_mb = round(job.total_bytes_processed / 1024 / 1024, 2)
 
-    table_data = pd.DataFrame(
-        [
-            {
-                "project_id": query_project_id,
-                "dataset_id": dataset_id,
-                "table_id": table_id,
-                "num_rows": num_rows,
-                "size_mb": size_mb,
-            }
-        ]
-    )
+        table_data = pd.DataFrame(
+            [
+                {
+                    "project_id": query_project_id,
+                    "dataset_id": dataset_id,
+                    "table_id": table_id,
+                    "num_rows": num_rows,
+                    "size_mb": size_mb,
+                }
+            ]
+        )
 
-    _print_output(table_data)
+        _print_output(table_data)
+    
+    except (OSError, ValueError) as e:
+        msg = (
+            "\nWe are not sure which Google Cloud project should be billed.\n"
+            "First, you should make sure that you have a Google Cloud project.\n"
+            "If you don't have one, set one up following these steps: \n"
+            "\t1. Go to this link https://console.cloud.google.com/projectselector2/home/dashboard\n"
+            "\t2. Agree with Terms of Service if asked\n"
+            "\t3. Click in Create Project\n"
+            "\t4. Put a cool name in your project\n"
+            "\t5. Hit create\n"
+            "\n"
+            "Copy the Project ID, (notice that it is not the Project Name)\n"
+            "Now, you have two options:\n"
+            "1. Add an argument to your function poiting to the billing project id.\n"
+            "   Like `bd.read_table('br_ibge_pib', 'municipios', billing_project_id=<YOUR_PROJECT_ID>)`\n"
+            "2. You can set a project_id in the environment by running the following command in your terminal: `gcloud config set project <YOUR_PROJECT_ID>`.\n"
+            "   Bear in mind that you need `gcloud` installed."
+        )
+        raise BaseDosDadosException(msg) from e
+
+    except GenericGBQException as e:
+        if "Reason: 403" in str(e):
+            raise BaseDosDadosException(
+                "\nYou still don't have a Google Cloud Project.\n"
+                "Set one up following these steps: \n"
+                "1. Go to this link https://console.cloud.google.com/projectselector2/home/dashboard\n"
+                "2. Agree with Terms of Service if asked\n"
+                "3. Click in Create Project\n"
+                "4. Put a cool name in your project\n"
+                "5. Hit create\n"
+                "6. Rerun this command with the flag `reauth=True`. \n"
+                "   Like `read_table('br_ibge_pib', 'municipios', reauth=True)`"
+            )
+        raise
+    except Exception as e:
+        raise
 
     return None
