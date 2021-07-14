@@ -278,7 +278,8 @@ def test_get_table_size_verbose_false():
         dataset_id="br_ibge_censo_demografico",
         table_id="setor_censitario_basico_2010",
         billing_project_id=TEST_PROJECT_ID,
-        from_file=True
+        from_file=True,
+        verbose=False
     )
     assert type(out) == list
     assert len(out) > 0
