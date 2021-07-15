@@ -32,7 +32,8 @@ class Base:
 
         self.templates = Path(templates or self.config["templates_path"])
         self.metadata_path = Path(
-            metadata_path or self.config["metadata_path"])
+            metadata_path or self.config["metadata_path"]
+        )
         self.bucket_name = bucket_name or self.config["bucket_name"]
         self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
 
@@ -42,9 +43,9 @@ class Base:
 
     def _load_credentials(self, mode: str):
 
-        if getenv(f"{constants.env_credentials_prefix.value}{mode.upper()}"):
+        if getenv(f"{constants.ENV_CREDENTIALS_PREFIX.value}{mode.upper()}"):
             info = json.loads(self._decode_env(
-                f"{constants.env_credentials_prefix.value}{mode.upper()}"))
+                f"{constants.ENV_CREDENTIALS_PREFIX.value}{mode.upper()}"))
             return service_account.Credentials.from_service_account_info(
                 info, scopes=[
                     "https://www.googleapis.com/auth/cloud-platform"]
@@ -162,28 +163,29 @@ class Base:
         # If environments are set but no files exist
         if (
             (not config_file.exists()) and
-            (getenv(constants.env_config.value)) and
-            (getenv(constants.env_credentials_prod.value)) and
-            (getenv(constants.env_credentials_staging.value))
+            (getenv(constants.ENV_CONFIG.value)) and
+            (getenv(constants.ENV_CREDENTIALS_PROD.value)) and
+            (getenv(constants.ENV_CREDENTIALS_STAGING.value))
         ):
             # Create basedosdados files from envs
             with open(config_file, "w") as f:
-                f.write(self._decode_env(constants.env_config.value))
+                f.write(self._decode_env(constants.ENV_CONFIG.value))
                 f.close()
             with open(credentials_folder / "prod.json", "w") as f:
-                f.write(self._decode_env(constants.env_credentials_prod.value))
+                f.write(self._decode_env(constants.ENV_CREDENTIALS_PROD.value))
                 f.close()
             with open(credentials_folder / "staging.json", "w") as f:
                 f.write(self._decode_env(
-                    constants.env_credentials_staging.value))
+                    constants.ENV_CREDENTIALS_STAGING.value))
                 f.close()
 
         if (not config_file.exists()) or (force):
 
             # Load config file
             c_file = tomlkit.parse(
-                (Path(__file__).resolve(
-                ).parents[1] / "configs" / "config.toml")
+                (Path(__file__)
+                    .resolve()
+                    .parents[1] / "configs" / "config.toml")
                 .open("r", encoding="utf-8")
                 .read()
             )
@@ -208,7 +210,8 @@ class Base:
                 default_yn="y",
                 default_return=Path.cwd(),
                 no_question=(
-                    "\nWhere would you like to save it?\n" "metadata path: "),
+                    "\nWhere would you like to save it?\n" "metadata path: "
+                ),
                 with_lower=False,
             )
 
@@ -244,7 +247,8 @@ class Base:
             )
 
             self._check_credentials(
-                project_staging, "staging", credentials_path)
+                project_staging, "staging", credentials_path
+            )
 
             c_file["gcloud-projects"]["staging"]["credentials_path"] = str(
                 credentials_path / "staging.json"
@@ -294,15 +298,17 @@ class Base:
             ############# STEP 6 - SET TEMPLATES #######################
 
             c_file["templates_path"] = str(
-                Path.home() / ".basedosdados" / "templates")
+                Path.home() / ".basedosdados" / "templates"
+            )
 
             config_file.open(
-                "w", encoding="utf-8").write(tomlkit.dumps(c_file))
+                "w", encoding="utf-8").write(tomlkit.dumps(c_file)
+            )
 
     def _load_config(self):
 
-        if getenv(constants.env_config.value):
-            return tomlkit.parse(self._decode_env(constants.env_config.value))
+        if getenv(constants.ENV_CONFIG.value):
+            return tomlkit.parse(self._decode_env(constants.ENV_CONFIG.value))
         else:
             return tomlkit.parse(
                 (Path.home() / ".basedosdados" / "config.toml")

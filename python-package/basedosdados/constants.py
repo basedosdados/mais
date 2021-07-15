@@ -5,8 +5,8 @@ __all__ = [
 from enum import Enum
 
 
-class constants (Enum):
-    env_config: str = "BASEDOSDADOS_CONFIG"
-    env_credentials_prefix: str = "BASEDOSDADOS_CREDENTIALS_"
-    env_credentials_prod: str = "BASEDOSDADOS_CREDENTIALS_PROD"
-    env_credentials_staging: str = "BASEDOSDADOS_CREDENTIALS_STAGING"
+class constants(Enum):
+    ENV_CONFIG: str = "BASEDOSDADOS_CONFIG"
+    ENV_CREDENTIALS_PREFIX: str = "BASEDOSDADOS_CREDENTIALS_"
+    ENV_CREDENTIALS_PROD: str = "BASEDOSDADOS_CREDENTIALS_PROD"
+    ENV_CREDENTIALS_STAGING: str = "BASEDOSDADOS_CREDENTIALS_STAGING"
