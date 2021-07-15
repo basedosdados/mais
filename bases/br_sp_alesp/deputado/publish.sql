@@ -23,7 +23,7 @@ CREATE VIEW basedosdados-dev.br_sp_alesp.deputado AS
 SELECT 
 SAFE_CAST(matricula AS STRING) matricula,
 SAFE_CAST(id_deputado AS STRING) id_deputado,
-SAFE_CAST(nome_deputado AS STRING) nome_deputado,
+SAFE_CAST(nome_deputado AS STRING) nome,
 SAFE_CAST(aniversario AS STRING) aniversario,
 SAFE_CAST(sigla_partido AS STRING) sigla_partido,
 SAFE_CAST(situacao AS STRING) situacao,

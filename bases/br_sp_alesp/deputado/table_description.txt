@@ -35,7 +35,7 @@ Cobertura Temporal
 Cobertura Espacial
 ------------------
 - brasil
-- sp
+- SP
 
 Tratamento
 ----------

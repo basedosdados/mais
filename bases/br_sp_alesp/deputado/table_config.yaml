@@ -7,7 +7,7 @@ dataset_id: br_sp_alesp # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-sp-alesp # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_alesp # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: v1.0 # REQUIRED
 
 last_updated: 2021-07-13 # AUTO GENERATED
 
@@ -68,7 +68,7 @@ primary_keys:
 #   - brasil, argentina, peru, equador
 coverage_geo:
     - brasil
-    - sp
+    - SP
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
@@ -98,7 +98,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nome_deputado
+        name: nome
         description: Nome parlamentar do deputado
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
