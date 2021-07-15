@@ -155,6 +155,12 @@ No seu terminal:
 
 - Instale nosso cliente: `pip install basedosdados`.
 - Rode `basedosdados config init` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
+> Caso seu ambiente de produção não permita o uso interativo do nosso cliente ou apresente alguma outra dificuldade relativa a esse modo de configuração, você pode configurar o `basedosdados` a partir de variáveis de ambiente da seguinte forma:
+>```
+> export BASEDOSDADOS_CONFIG=$(cat ~/.basedosdados/config.toml | base64)
+> export BASEDOSDADOS_CREDENTIALS_PROD=$(cat ~/.basedosdados/credentials/prod.json | base64)
+> export BASEDOSDADOS_CREDENTIALS_STAGING=$(cat ~/.basedosdados/credentials/staging.json | base64)
+>```
 - Clone um _fork_ do nosso [repositório](https://github.com/basedosdados/mais) localmente.
 - Dê um `cd` para a pasta local do repositório e abra uma nova branch com `git checkout -b [BRANCH_ID]`.
 
