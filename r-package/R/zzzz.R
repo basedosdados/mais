@@ -27,7 +27,7 @@
   cli::cli_li("Telegram: t.me/joinchat/OKWc3RnClXnq2hq-8o0h_w")
   cli::cli_li("Apoia.se: apoia.se/basedosdados")
   cli::cli_li("Github: github.com/basedosdados")
-  cli::cli_li("Discord: discord.gg/tuaFbAPeq5")
+  cli::cli_li("Discord: discord.gg/huKWpsVYx4")
   cli::cli_li("LinkedIn: linkedin.com/company/base-dos-dados")
   cli::cli_li("Newsletter: tinyletter.com/basedosdados")
 
