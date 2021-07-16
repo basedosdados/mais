@@ -1,8 +1,12 @@
 name: python-ci-v2
+
 on:
-  pull_request:
-  workflow_dispatch:
-    
+  push:
+    paths:
+      - python-package/**
+      - .github/workflows/python-ci.yml
+      - .github/workflows/setup-env*
+
 jobs:
   build-linux:
     runs-on: ubuntu-latest
