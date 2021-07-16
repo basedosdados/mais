@@ -15,7 +15,7 @@ Quer subir dados na BD+ e nos ajudar a construir esse repositório? Maravilha! V
 
 Ao longo da explicação, vamos sempre seguir um exemplo já pronto com dados da [RAIS](https://basedosdados.org/dataset/br-me-rais).
 
-!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/2GAuw7d8zd) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
+!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/QBMEarnxND) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
 
 ## Qual o procedimento?
 
