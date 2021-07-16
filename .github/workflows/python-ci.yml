@@ -28,9 +28,12 @@ jobs:
       run: |
         cd python-package
         python setup.py develop
-      shell: bash 
+      shell: bash
     - name: Setup environment
-      uses: ./.github/workflows/setup-env-linux/
+      run: |
+        cd .github/workflows/setup-env
+        python main.py
+      shell: bash
     - name: Test and assess coverage
       run: |
         cd python-package
@@ -64,7 +67,10 @@ jobs:
         python setup.py develop
       shell: cmd
     - name: Setup environment
-      uses: ./.github/workflows/setup-env-windows/
+      run: |
+        cd .github\workflows\setup-env
+        python main.py
+      shell: cmd
     - name: Test and assess coverage
       run: |
         cd python-package

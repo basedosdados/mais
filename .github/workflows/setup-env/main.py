@@ -62,13 +62,9 @@ def main():
     # print(os.environ.get("INPUT_PROJECT_ID"))
     print(Path.home())
 
-    workspace = Path(".")
-
-    print(
-        "########################  WORKSPACE   #########################################"
-    )
-    print(workspace)
-
+    print("#==========================================#")
+    print("#===============WORKSPACE==================#")
+    print("#==========================================#")
     # requirements_path = str(Path("/github/workspace/requirements-dev.txt"))
 
     # subprocess.call(f"pip install -r {requirements_path}", shell=True)
@@ -93,7 +89,6 @@ def main():
             },
         },
     }
-
     print("####===================================================###")
     print(config_dict)
     print("####===================================================###")
@@ -112,6 +107,7 @@ def main():
         Path(Path.home() / ".basedosdados" / "config.toml").open(mode="r").read(),
         "\n",
     )
+    ### Assert config files have been created
     assert (Path.home() / ".basedosdados" / "config.toml").is_file()
     assert (Path.home() / ".basedosdados" / "credentials" / "prod.json").is_file()
     assert (Path.home() / ".basedosdados" / "credentials" / "staging.json").is_file()
