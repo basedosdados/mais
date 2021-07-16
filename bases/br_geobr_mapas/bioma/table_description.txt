@@ -1,4 +1,9 @@
-Setores censitarios do Censo Brasileiro de 2010
+Polígonos de todos o biomas presentes no território brasileiro e área costeira.
+
+Os dados de 2019 estão na estala 1:250.000. Os dados de 2004 estão na escala
+1:5.000.000.
+
+Dados originais do IBGE. Saiba mais em https://www.ibge.gov.br/apps/biomas/
 
 
 Para saber mais acesse:
@@ -15,26 +20,27 @@ Código: https://github.com/basedosdados/mais/tree/master/bases/br_geobr_mapas/c
 Website: https://basedosdados.org
 Email: joao.carabetta@gmail.comTratado por
 -----------
-Nome: geobr
-Código: https://github.com/ipeaGIT/geobr
-Website: https://github.com/ipeaGIT/geobr
-Email: 
+Nome: João Carabetta
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_geobr_mapas/code
+Website: https://basedosdados.org
+Email: joao.carabetta@gmail.com
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
-- sigla_uf
+- year
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- setor censitario
+- bioma
 
 Colunas identificando linhas unicamente
 -------------------
-- id_setor_censitario
+- id_bioma
 
 Cobertura Temporal
 ------------------
-- 2010
+- 2004
+- 2019
 
 Cobertura Espacial
 ------------------
