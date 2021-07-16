@@ -4,12 +4,12 @@ project_id_prod: basedosdados-dev
 table_id: microdados_estabelecimentos # AUTO GENERATED
 dataset_id: br_me_rais # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br_me_rais # AUTO GENERATED
+url_ckan: https://basedosdados.org/dataset/br-me-rais # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais # AUTO GENERATED
 
 version: v1.1 # REQUIRED
 
-last_updated: 2021-06-11 # AUTO GENERATED
+last_updated: 2021-07-16 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -29,7 +29,7 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: Ricardo Dahis # REQUIRED
+    name: Ricardo Dahis 
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code # REQUIRED
     website: <onde encontrar os dados tratados>
     email: rdahis@basedosdados.org

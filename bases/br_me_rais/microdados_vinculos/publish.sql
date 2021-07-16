@@ -18,8 +18,9 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+
 CREATE VIEW basedosdados-dev.br_me_rais.microdados_vinculos AS
-SELECT 
+SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
@@ -39,9 +40,9 @@ SAFE_CAST(faixa_horas_contratadas AS INT64) faixa_horas_contratadas,
 SAFE_CAST(qtde_horas_contratadas AS INT64) qtde_horas_contratadas,
 SAFE_CAST(id_municipio_6_trabalho AS INT64) id_municipio_6_trabalho,
 SAFE_CAST(qtde_dias_afastamento AS INT64) qtde_dias_afastamento,
-SAFE_CAST(indicador_cei_vinculado AS STRING) indicador_cei_vinculado,
-SAFE_CAST(indicador_trabalho_parcial AS STRING) indicador_trabalho_parcial,
-SAFE_CAST(indicador_trabalho_intermitente AS STRING) indicador_trabalho_intermitente,
+SAFE_CAST(indicador_cei_vinculado AS INT64) indicador_cei_vinculado,
+SAFE_CAST(indicador_trabalho_parcial AS INT64) indicador_trabalho_parcial,
+SAFE_CAST(indicador_trabalho_intermitente AS INT64) indicador_trabalho_intermitente,
 SAFE_CAST(faixa_remun_media_sm AS INT64) faixa_remun_media_sm,
 SAFE_CAST(valor_remun_media_sm AS FLOAT64) valor_remun_media_sm,
 SAFE_CAST(valor_remun_media_nominal AS FLOAT64) valor_remun_media_nominal,
@@ -73,15 +74,15 @@ SAFE_CAST(idade AS INT64) idade,
 SAFE_CAST(grau_instrucao_1985_2005 AS INT64) grau_instrucao_1985_2005,
 SAFE_CAST(grau_instrucao_apos_2005 AS INT64) grau_instrucao_apos_2005,
 SAFE_CAST(nacionalidade AS STRING) nacionalidade,
-SAFE_CAST(sexo_trabalhador AS STRING) sexo,
+SAFE_CAST(sexo_trabalhador AS STRING) sexo_trabalhador,
 SAFE_CAST(raca_cor AS STRING) raca_cor,
-SAFE_CAST(indicador_portador_deficiencia AS STRING) indicador_portador_deficiencia,
+SAFE_CAST(indicador_portador_deficiencia AS INT64) indicador_portador_deficiencia,
 SAFE_CAST(tipo_deficiencia AS STRING) tipo_deficiencia,
 SAFE_CAST(ano_chegada_brasil AS INT64) ano_chegada_brasil,
 SAFE_CAST(tamanho_estabelecimento AS STRING) tamanho_estabelecimento,
 SAFE_CAST(tipo_estabelecimento AS STRING) tipo_estabelecimento,
 SAFE_CAST(natureza_juridica AS STRING) natureza_juridica,
-SAFE_CAST(indicador_simples AS STRING) indicador_simples,
+SAFE_CAST(indicador_simples AS INT64) indicador_simples,
 SAFE_CAST(bairros_sp AS STRING) bairros_sp,
 SAFE_CAST(distritos_sp AS STRING) distritos_sp,
 SAFE_CAST(bairros_fortaleza AS STRING) bairros_fortaleza,

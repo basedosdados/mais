@@ -18,6 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
+
 CREATE VIEW basedosdados-dev.br_me_rais.microdados_estabelecimentos AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
@@ -31,11 +32,11 @@ SAFE_CAST(natureza_estabelecimento AS STRING) natureza_estabelecimento,
 SAFE_CAST(natureza_juridica AS STRING) natureza_juridica,
 SAFE_CAST(tamanho_estabelecimento AS STRING) tamanho_estabelecimento,
 SAFE_CAST(tipo_estabelecimento AS STRING) tipo_estabelecimento,
-SAFE_CAST(indicador_cei_vinculado AS STRING) indicador_cei_vinculado,
-SAFE_CAST(indicador_pat AS STRING) indicador_pat,
-SAFE_CAST(indicador_simples AS STRING) indicador_simples,
-SAFE_CAST(indicador_rais_negativa AS STRING) indicador_rais_negativa,
-SAFE_CAST(indicador_atividade_ano AS STRING) indicador_atividade_ano,
+SAFE_CAST(indicador_cei_vinculado AS INT64) indicador_cei_vinculado,
+SAFE_CAST(indicador_pat AS INT64) indicador_pat,
+SAFE_CAST(indicador_simples AS INT64) indicador_simples,
+SAFE_CAST(indicador_rais_negativa AS INT64) indicador_rais_negativa,
+SAFE_CAST(indicador_atividade_ano AS INT64) indicador_atividade_ano,
 SAFE_CAST(cnae_1 AS STRING) cnae_1,
 SAFE_CAST(cnae_2 AS STRING) cnae_2,
 SAFE_CAST(cnae_2_subclasse AS STRING) cnae_2_subclasse,

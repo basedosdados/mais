@@ -2,7 +2,7 @@ Microdados públicos dos vínculos de emprego na RAIS. Base desidentificada, ist
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br_me_rais
+Website: https://basedosdados.org/dataset/br-me-rais
 Github: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais
 
 Ajude a manter o projeto :)
