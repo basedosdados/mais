@@ -13,5 +13,7 @@ runs:
       shell: bash
     - run: python  ${{ github.action_path }}/main.py
       shell: bash
+    - run: cd ${{ github.workspace }}/python-package/ && coverage run --source=basedosdados -m pytest tests/
+      shell: bash
     - run: cd ${{ github.workspace }}/python-package/ && coveralls debug --service=github
       shell: bash
