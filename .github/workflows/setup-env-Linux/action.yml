@@ -7,9 +7,13 @@ runs:
   steps:
     - run: cd ${{ github.workspace }}/python-package/ && pip install -r requirements-dev.txt 
       shell: bash
+    - run: pip install coveralls
+      shell: bash
     - run: cd ${{ github.workspace }}/python-package/ && python setup.py develop
       shell: bash
     - run: python  ${{ github.action_path }}/main.py
       shell: bash
     - run: cd ${{ github.workspace }}/python-package/ && pytest
+      shell: bash
+    - run: cd ${{ github.workspace }}/python-package/ && coveralls
       shell: bash

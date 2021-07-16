@@ -1,10 +1,12 @@
-name: python-ci
+name: python-ci-v2
 on:
   push:
     paths:
       - python-package/**
       - .github/workflows/pytest.yml
       - .github/workflows/setup-env*
+  pull_request:
+  workflow_dispatch:
     
 jobs:
   build-linux:
@@ -13,6 +15,7 @@ jobs:
     env:
       DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
       DEV_STAG: ${{ secrets.GCP_BD_DEV_STAGING }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
