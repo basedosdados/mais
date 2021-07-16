@@ -1,4 +1,4 @@
-name: python-ci-v2
+name: python-ci
 
 on:
   push:
