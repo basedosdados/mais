@@ -39,14 +39,18 @@ Currently there's only support for UTF-8 encoding. Users requiring more control 
 
 \dontrun{
 
-dir <- tempdir()
+path <- file.path(tempdir(), "pib_per_capita.csv")
 
-query <- "SELECT *
+bare_query <- "SELECT *
 FROM basedosdados.br_tse_eleicoes.bens_candidato
 WHERE ano = 2020
 AND sigla_uf = \'TO\'"
 
-data <- download(query, file.path(dir, "pib_per_capita.csv"))
+download(query = bare_query, path = path)
+
+# or download the entire table
+download(table = "br_tse_eleicoes.bens_candidato", path = path)
+
 }
 
 

@@ -7,19 +7,18 @@
 bdplyr(
   table,
   billing_project_id = basedosdados::get_billing_id(),
-  project = "basedosdados"
+  query_project_id = "basedosdados"
 )
 }
 \arguments{
-\item{table}{String in the format \code{(project)}.\code{(dataset_name)}.\code{(table_name)}
-or \code{(dataset_name)}.\code{(table_name)}, considering that the default \code{project} param
-is \code{basedosdados}.}
+\item{table}{String in the format \code{(dataset_name)}.\code{(table_name)}. You can optionally input a project before the dataset name.}
 
 \item{billing_project_id}{a string containing your billing project id.
 If you've run \code{\link[=set_billing_id]{set_billing_id()}} then feel free to leave this empty.}
 
-\item{project}{The project name at GoogleBigQuery. By default \code{basedosdados}.
-You do not need to inform this if project is uset on \code{table} parameter.}
+\item{query_project_id}{The project name at GoogleBigQuery. By default
+\code{basedosdados}. You do not need to inform this if project is uset
+on \code{table} parameter.}
 }
 \value{
 A \verb{lazy tibble}, which can be handled (almost) as if were a local

@@ -1,9 +1,9 @@
 
-
+#' What happens when the package is loaded
 #' @description `.onLoad` is automatically run when the user runs `library(basedosdados)` for the first time in the session.
 #'
 #'
-#' @imports cli
+#' @import cli
 
 
 .onLoad <- function(libname, pkgname) {
@@ -19,12 +19,12 @@
 
   }
 
-  cli::cli_h1("Base dos Dados: Universalizando o acesso a dados no Brasil")
+  cli::cli_h1("Base dos Dados")
 
 
   cli::cli_li(
     c(
-      "Site oficial: https://basedosdados.org/",
+      "Websitel: https://basedosdados.org/",
       "Docs: https://basedosdados.github.io/mais/"))
   cli::cli_end()
 
@@ -50,5 +50,8 @@
     Nos apoie em https://apoia.se/basedosdados.
 
     ")
+
+  cli::cli_h3(
+    "Está usando o pacote para produzir um trabalho acadêmico? Para nos citar basta rodar citation('basedosdados').")
 
 }

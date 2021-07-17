@@ -1,9 +1,9 @@
 
 set_billing_id(readline("Insira um billing project id: "))
 
-ex_query <- function(n) {
+ex_query <- function(n = 5) {
 
-  glue::glue("select * from `basedosdados.br_ibge_pib.municipios` LIMIT {n}")
+  glue::glue("select * from `basedosdados.br_ibge_pib.municipio` LIMIT {n}")
 
 }
 
@@ -12,7 +12,7 @@ test_that("download escreve arquivos recebendo uma query ou nome de tabela", {
   path <- file.path(tempdir(), "arquivo.csv")
 
     download(
-      "select * from basedosdados.br_ibge_populacao.municipio limit 3",
+      ex_query(),
       path = path)
 
   path %>%
@@ -38,7 +38,7 @@ test_that("download permite escolher o conteúdo de NAs", {
   path3 <- file.path(tempdir(), "arquivo3.csv")
 
   download(
-    "select * from basedosdados.br_ibge_populacao.municipio limit 3",
+    ex_query(),
     path = path3,
     .na = "999999")
 
@@ -47,7 +47,7 @@ test_that("download permite escolher o conteúdo de NAs", {
     expect_true()
 
   download(
-    "select * from basedosdados.br_ibge_populacao.municipio limit 3",
+    ex_query(),
     path = path3,
     .na = "AUSENTE")
 
@@ -56,7 +56,7 @@ test_that("download permite escolher o conteúdo de NAs", {
     expect_true()
 
   download(
-    "select * from basedosdados.br_ibge_populacao.municipio limit 3",
+    ex_query(),
     path = path3,
     .na = " -- ")
 
@@ -71,7 +71,7 @@ test_that("download permite escolher tamanho de página", {
   path4 <- file.path(tempdir(), "arquivo4.csv")
 
   download(
-    "select * from basedosdados.br_ibge_populacao.municipio limit 3",
+    ex_query(),
     path = path4,
     page_size = 123432)
 
@@ -85,7 +85,7 @@ test_that("download valida nomes de arquivos sem extensão", {
 
   expect_error(
     download(
-      "select * from basedosdados.br_ibge_populacao.municipio limit 3",
+      ex_query(),
       file.path(tempdir(), "arquivo")))
 
   })
@@ -99,7 +99,7 @@ test_that("read_sql e read_table retornam um tibble com as propriedades esperada
 
   expect_s3_class(read_sql(ex_query(1000)), "tbl_df")
 
-  expect_s3_class(read_table(table = "br_ibge_pib.municipios"), "tbl_df")
+  expect_s3_class(read_table(table = "br_ibge_pib.municipio"), "tbl_df")
 
   expect_s3_class(read_table(table = "br_denatran_frota.uf_tipo"), "tbl_df")
 

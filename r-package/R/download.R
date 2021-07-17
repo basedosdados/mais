@@ -190,6 +190,7 @@ read_sql <- function(
 #' @importFrom rlang abort is_string
 #' @importFrom glue glue
 #' @importFrom bigrquery as_bq_table bq_table_download
+#' @export
 #'
 
 
