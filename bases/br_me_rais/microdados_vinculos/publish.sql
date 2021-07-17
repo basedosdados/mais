@@ -18,7 +18,6 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-
 CREATE VIEW basedosdados-dev.br_me_rais.microdados_vinculos AS
 SELECT
 SAFE_CAST(ano AS INT64) ano,
@@ -88,4 +87,4 @@ SAFE_CAST(distritos_sp AS STRING) distritos_sp,
 SAFE_CAST(bairros_fortaleza AS STRING) bairros_fortaleza,
 SAFE_CAST(bairros_rj AS STRING) bairros_rj,
 SAFE_CAST(regioes_administrativas_df AS STRING) regioes_administrativas_df
-from basedosdados-staging.br_me_rais_staging.microdados_vinculos as t
+FROM basedosdados-staging.br_me_rais_staging.microdados_vinculos AS t

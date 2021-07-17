@@ -29,6 +29,9 @@ Nível da Observação (i.e. a granularidade da linha)
 - vinculo
 - ano
 
+Colunas identificando linhas unicamente
+-------------------
+
 Cobertura Temporal
 ------------------
 - 1985
