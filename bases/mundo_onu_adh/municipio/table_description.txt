@@ -1,4 +1,4 @@
-Dados do Atlas do Desenvolvimento Humano (ADH) a nível do Brasil.
+Dados do Atlas do Desenvolvimento Humano (ADH) a nível de município-ano.
 
 
 Para saber mais acesse:
@@ -20,10 +20,12 @@ Email: rdahis@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
+- municipio
 - ano
 
 Colunas identificando linhas unicamente
 -------------------
+- id_municipio
 - ano
 
 Cobertura Temporal

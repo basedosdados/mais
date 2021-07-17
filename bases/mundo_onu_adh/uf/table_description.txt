@@ -1,4 +1,4 @@
-Dados do Atlas do Desenvolvimento Humano (ADH) a nível do Brasil.
+Dados do Atlas do Desenvolvimento Humano (ADH) a nível de UF-ano.
 
 
 Para saber mais acesse:
@@ -12,6 +12,7 @@ Publicado por
 -------------
 Nome: Ricardo Dahis
 Código: https://github.com/basedosdados/mais/tree/master/bases/mundo_onu_adh/code
+Website: www.ricardodahis.com
 Email: rdahis@basedosdados.orgTratado por
 -----------
 Nome: Ricardo Dahis
@@ -20,10 +21,12 @@ Email: rdahis@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
+- unidade da federação
 - ano
 
 Colunas identificando linhas unicamente
 -------------------
+- sigla_uf
 - ano
 
 Cobertura Temporal
