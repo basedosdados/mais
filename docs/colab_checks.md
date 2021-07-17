@@ -19,11 +19,13 @@ qualidade dos dados em SQL, como as seguintes:
 
 Incluir testes de dados deve seguir o fluxo de trabalho:
 
-1. [Informe seu interesse](#1-informe-seu-interesse)
-2. [Escreva sua consulta](#2-escreva-sua-consulta)
-3. [Submeta sua consulta](#3-submeta-sua-consulta)
+- [Colaborando com testes na BD+](#colaborando-com-testes-na-bd)
+  - [Qual o procedimento?](#qual-o-procedimento)
+  - [1. Informe seu interesse](#1-informe-seu-interesse)
+  - [2. Escreva sua consulta](#2-escreva-sua-consulta)
+  - [3. Submeta sua consulta](#3-submeta-sua-consulta)
 
-!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/2GAuw7d8zd) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
+!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
 
 <!----------------------------------------------------------------------------->
 
