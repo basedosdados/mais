@@ -15,7 +15,7 @@ Quer subir dados na BD+ e nos ajudar a construir esse repositório? Maravilha! V
 
 Ao longo da explicação, vamos sempre seguir um exemplo já pronto com dados da [RAIS](https://basedosdados.org/dataset/br-me-rais).
 
-!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/2GAuw7d8zd) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
+!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
 
 ## Qual o procedimento?
 
@@ -38,7 +38,7 @@ Mantemos metadados de bases que ainda não estão na BD+ em nossa [tabela de pri
 
 !!! Info "Caso sua base já esteja listada, basta marcar seu usuário do Github na coluna `Pessoa responsável`."
 
-!!! Info "Fique à vontade para conversar com a gente e tirar dúvidas direto no nosso servidor no [Discord](https://discord.gg/2GAuw7d8zd)."
+!!! Info "Fique à vontade para conversar com a gente e tirar dúvidas direto no nosso servidor no [Discord](https://discord.gg/huKWpsVYx4)."
 
 ## 2. Baixar nossa pasta _template_ para dados
 
@@ -105,7 +105,7 @@ Cada tabela limpa para produção pode ser salva como um arquivo `.csv` único o
 
 Nós já criamos funções úteis para limpeza nas nossas APIs de Python e R. Por exemplo, com o pacote `basedosdados` você pode ler tabelas muito grandes, particionar tabelas automaticamente, gerar certas variáveis comuns (e.g. `sigla_uf` a partir de `id_uf`), etc.
 
-Tudo nesse passo deve seguir nosso [manual de estilo](/mais/style_data) e as [melhores práticas de programação]((https://en.wikipedia.org/wiki/Best_coding_practices)).
+Tudo nesse passo deve seguir nosso [manual de estilo](/mais/style_data) e as [melhores práticas de programação](https://en.wikipedia.org/wiki/Best_coding_practices).
 
 ## 5. Se necessário, organizar arquivos auxiliares
 
@@ -154,7 +154,7 @@ Para criar um projeto no Google Cloud basta ter um email cadastrado no Google. S
 No seu terminal:
 
 - Instale nosso cliente: `pip install basedosdados`.
-- Rode `basedosdados config` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
+- Rode `basedosdados config init` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
 - Clone um _fork_ do nosso [repositório](https://github.com/basedosdados/mais) localmente.
 - Dê um `cd` para a pasta local do repositório e abra uma nova branch com `git checkout -b [BRANCH_ID]`.
 

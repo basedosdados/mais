@@ -73,10 +73,10 @@ em todos os anos disponíveis**.
     SELECT 
         pib.id_municipio, 
         pop.ano,  
-        pib.PIB / pop.populacao * 1000 as pib_per_capita 
-    FROM `basedosdados.br_ibge_pib.municipios` as pib 
-    INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop 
-    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
+        pib.PIB / pop.populacao as pib_per_capita 
+    FROM `basedosdados.br_ibge_pib.municipio` as pib 
+        INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop 
+        ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
     LIMIT 100;'
     ```
 
@@ -89,10 +89,10 @@ em todos os anos disponíveis**.
     pib_per_capita = """SELECT 
         pib.id_municipio ,
         pop.ano, 
-        pib.PIB / pop.populacao * 1000 as pib_per_capita
-    FROM `basedosdados.br_ibge_pib.municipios` as pib
-    INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
+        pib.PIB / pop.populacao as pib_per_capita
+    FROM `basedosdados.br_ibge_pib.municipio` as pib
+        INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop
+        ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
     """
 
     # Você pode fazer o download no seu computador
@@ -107,7 +107,7 @@ em todos os anos disponíveis**.
     # é o basedosdados, você pode usar esse parâmetro para escolher outro projeto
     df = bd.read_table(
             dataset_id='br_ibge_populacao', 
-            table_id='municipios',
+            table_id='municipio',
             billing_project_id=<YOUR_PROJECT_ID>,
             limit=100
     )
@@ -125,10 +125,10 @@ em todos os anos disponíveis**.
     query <- "SELECT
         pib.id_municipio,
         pop.ano,
-        pib.PIB / pop.populacao * 1000 as pib_per_capita
-        FROM `basedosdados.br_ibge_pib.municipios` as pib
-        JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-        ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
+        pib.PIB / pop.populacao as pib_per_capita
+        FROM `basedosdados.br_ibge_pib.municipio` as pib
+            JOIN `basedosdados.br_ibge_populacao.municipio` as pop
+            ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
 
     # Você pode fazer o download no seu computador
     dir <- tempdir()

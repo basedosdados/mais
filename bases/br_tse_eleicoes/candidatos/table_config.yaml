@@ -1,7 +1,15 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: candidatos # AUTO GENERATED
 dataset_id: br_tse_eleicoes # AUTO GENERATED
 
-last_updated: 2020-11-23 # AUTO GENERATED
+url_ckan: https://basedosdados.org/dataset/br-tse-eleicoes # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes # AUTO GENERATED
+
+version: v1.1
+
+last_updated: 2021-07-02 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -9,6 +17,13 @@ last_updated: 2020-11-23 # AUTO GENERATED
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
     Dados de candidatos em eleições brasileiras.
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Ricardo Dahis
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code # REQUIRED
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -19,28 +34,29 @@ treated_by:
     website: <onde encontrar os dados tratados>
     email: rdahis@basedosdados.org
 
-# Quem está completando esse arquivo config?
-published_by:
-    name: Ricardo Dahis
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code # REQUIRED
-    website: www.ricardodahis.com
-    email: rdahis@basedosdados.org
-
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Limpei os dados para consistência, adicionei variáveis como ID Candidato da Base dos Dados e idade.
+    - Limpei os dados para consistência
+    - Adicionei variáveis como ID Candidato da Base dos Dados e idade.
 
 # Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mês | 1 ano | 2 anos | 5 anos | 10 anos | único | recorrente
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
 data_update_frequency: 2 anos
 
-# Nível da observação: quais colunas identificam uma linha unicamente?
+# Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
-# Regras: minúsculo, sem acento, singular.
-# Opções (exemplos): pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level:
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
     - candidato
     - ano
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -97,6 +113,18 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
+        name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio_tse
+        description: ID Município - TSE
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
         name: id_candidato_bd
         description: ID Candidato - Base dos Dados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
@@ -110,43 +138,43 @@ columns: # REQUIRED
   
     -   
         name: titulo_eleitoral
-        description: Título Eleitoral
+        description: Título eleitoral
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: sequencial_candidato
-        description: Sequencial do Candidato - TSE
+        name: sequencial
+        description: Sequencial
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: numero_candidato
-        description: Número do(a) Candidato(a)
+        name: numero
+        description: Número
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nome_candidato
-        description: Nome do(a) Candidato(a)
+        name: nome
+        description: Nome
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nome_urna_candidato
-        description: Nome de Urna do(a) Candidato(a)
+        name: nome_urna
+        description: Nome de urna
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: numero_partido
-        description: Número do Partido
+        description: Número do partido
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: sigla_partido
-        description: Sigla do Partido
+        description: Sigla do partido
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -157,14 +185,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_municipio_tse
-        description: ID Município - TSE
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
         name: situacao
-        description: Situação da Candidatura
+        description: Situação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -175,8 +197,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: data_nasc
-        description: Data de Nascimento
+        name: data_nascimento
+        description: Data de nascimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -200,7 +222,7 @@ columns: # REQUIRED
   
     -   
         name: estado_civil
-        description: Estado Civil
+        description: Estado civil
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -211,14 +233,14 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: sigla_uf_nasc
-        description: Sigla Unidade da Federação de Nascimento
+        name: sigla_uf_nascimento
+        description: Sigla da unidade da federação de nascimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: municipio_nasc
-        description: Município de Nascimento
+        name: municipio_nascimento
+        description: Município de nascimento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -230,7 +252,7 @@ columns: # REQUIRED
   
     -   
         name: raca
-        description: Raça
+        description: Raça ou cor
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -242,6 +264,6 @@ columns: # REQUIRED
   
     -   
         name: sigla_uf
-        description: Sigla Unidade da Federação
+        description: Sigla da unidade da federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.

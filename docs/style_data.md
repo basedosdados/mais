@@ -165,4 +165,4 @@ Diretórios são as pedras fundamentais da estrutura do nosso repositório. Noss
 
 ## **Pensou em melhorias para os padrões definidos?**
 
-Abra um [issue no nosso Github](https://github.com/basedosdados/mais/labels/docs) ou mande uma mensagem no [Discord](https://discord.gg/2GAuw7d8zd) para conversarmos :)
+Abra um [issue no nosso Github](https://github.com/basedosdados/mais/labels/docs) ou mande uma mensagem no [Discord](https://discord.gg/huKWpsVYx4) para conversarmos :)

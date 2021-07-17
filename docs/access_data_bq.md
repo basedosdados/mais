@@ -51,16 +51,16 @@ utilizada
 [aqui](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax).
 
 Rode a query abaixo no `Query Editor/Editor de consultas` e obtenha o cruzamento
-das tabelas de população e PIB do IBGE com o resultado anual desde 1991.
+das tabelas de população e PIB do IBGE com o resultado anual desde 2002.
 
 ```sql
 SELECT 
     pib.id_municipio,
     pop.ano, 
-    pib.PIB / pop.populacao * 1000 AS pib_per_capita
-FROM `basedosdados.br_ibge_pib.municipios` AS pib
-JOIN `basedosdados.br_ibge_populacao.municipios` AS pop
-ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
+    pib.PIB / pop.populacao AS pib_per_capita
+FROM `basedosdados.br_ibge_pib.municipio` AS pib
+    JOIN `basedosdados.br_ibge_populacao.municipio` AS pop
+    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
 ```
 
 !!! Tip "Dica"
@@ -73,7 +73,7 @@ ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
 O BigQuery possui já um mecanismo de busca que permite buscar por nomes
 de *datasets* (conjuntos), *tables* (tabelas) ou *labels* (grupos).
 Construímos regras de nomeação simples e práticas para facilitar sua
-busca - veja mais [na seção de Nomenclatura](../data_naming_rules/).
+busca - veja mais [na seção de Nomenclatura](../style_data/).
 
 #### Metadados
 

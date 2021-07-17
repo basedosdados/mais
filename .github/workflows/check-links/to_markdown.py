@@ -1,23 +1,43 @@
-import json
+import argparse
+import csv
 
-def to_markdown(jsonpath, mdpath):
-    root = "https://github.com/basedosdados/mais/blob/master/"
 
-    with open(jsonpath, "r") as file:
-        data = json.load(file)
+def gen_report(csvpath, mdpath):
+    with open(csvpath, "r") as file:
+        reader = csv.DictReader(file)
+        links = [row for row in reader]
+        links = sorted(links, key=lambda x: x["referer"])
+
+    if not links:
+        return None
 
     with open(mdpath, "w") as file:
-        file.write(f"Broken Links \[{data['failures']}E\]  \n")
-        file.write("---  \n\n")
-        for page, errors in data["fail_map"].items():
-            file.write(f"**[{page}]({root}{page})**  \n")
-            for error in errors:
-                file.write(f"- {error['status']}  \n")
-            file.write("\n")
+        file.write(f"Broken Links\n")
+        file.write(f"---")
+
+        referer = ""
+        for link in links:
+            if link["referer"] != referer:
+                referer = link["referer"]
+                domain = referer.split("//")[1]
+                file.write(f"\n\n**[{domain}]({referer})**  \n")
+            file.write(
+                f"- Failed: HTTP Status {link['status']} at [{link['link_text']}]({link['url']})  \n"
+            )
+
 
 if __name__ == "__main__":
-    to_markdown("lychee/report.json", "lychee/report.md")
+    parser = argparse.ArgumentParser(
+        description="Generate markdown report for a broken links search"
+    )
 
-# Reference
-# Lychee Action
-# https://github.com/lycheeverse/lychee-action
+    parser.add_argument(
+        "--csvpath", default="./report.csv", type=str, help="csv input filepath"
+    )
+    parser.add_argument(
+        "--mdpath", default="./report.md", type=str, help="markdown output filepath"
+    )
+
+    args = parser.parse_args()
+
+    gen_report(args.csvpath, args.mdpath)

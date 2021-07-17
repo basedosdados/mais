@@ -19,9 +19,9 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados.br_mc_indicadores.transferencias_municipio AS
+CREATE VIEW basedosdados-dev.br_mc_indicadores.transferencias_municipio AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(familias_beneficiarias_pbf AS INT64) familias_beneficiarias_pbf,
@@ -29,4 +29,4 @@ SAFE_CAST(pessoas_beneficiarias_pbf AS INT64) pessoas_beneficiarias_pbf,
 SAFE_CAST(valor_pago_pbf AS FLOAT64) valor_pago_pbf,
 SAFE_CAST(familias_cadastradas_cu AS INT64) familias_cadastradas_cu,
 SAFE_CAST(pessoas_cadastradas_cu AS INT64) pessoas_cadastradas_cu
-from basedosdados-staging.br_mc_indicadores_staging.transferencias_municipio as t
+from basedosdados-dev.br_mc_indicadores_staging.transferencias_municipio as t

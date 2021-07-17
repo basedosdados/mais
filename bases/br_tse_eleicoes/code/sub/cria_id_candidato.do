@@ -21,7 +21,7 @@ drop if titulo_eleitoral == "000000000000" | titulo_eleitoral == "#NI#"
 // usa cpf and titulo_eleitoral
 //--------------------//
 
-keep nome_candidato cpf titulo_eleitoral
+keep nome cpf titulo_eleitoral
 duplicates drop
 
 egen id_candidato_bd = group(cpf titulo_eleitoral), missing
@@ -43,7 +43,7 @@ drop aux*
 
 duplicates tag id_cand, gen(dup)
 
-order    id_candidato_bd N_cpf N_TE cpf titulo_eleitoral nome_candidato
+order    id_candidato_bd N_cpf N_TE cpf titulo_eleitoral nome
 sort dup id_candidato_bd N_cpf N_TE cpf titulo_eleitoral
 
 preserve
@@ -53,7 +53,7 @@ restore
 
 keep if N_cpf == 1 | N_TE == 1
 
-keep id_candidato_bd cpf titulo_eleitoral nome_candidato
+keep id_candidato_bd cpf titulo_eleitoral nome
 
 save "tmp/1a_rodada.dta", replace
 
@@ -64,11 +64,11 @@ save "tmp/1a_rodada.dta", replace
 
 use "tmp/para_2a_rodada.dta", clear
 
-gen nome_candidato_limpo = nome_candidato
-clean_string nome_candidato_limpo
+gen nome_limpo = nome
+clean_string nome_limpo
 
-gen aux_primeira = word(nome_candidato_limpo, 1)
-gen aux_ultima = word(nome_candidato_limpo, -1)
+gen aux_primeira = word(nome_limpo, 1)
+gen aux_ultima = word(nome_limpo, -1)
 
 // consertando strings erradas identificadas no olho
 replace aux_primeira = "elves"		if aux_primeira == "elvis" & aux_ultima == "leite"
@@ -96,7 +96,7 @@ format id_candidato_bd %20.0g
 
 keep if N_nomes == 1	// excluindo candidatos nao-identificados unicamente
 
-keep id_candidato_bd cpf titulo_eleitoral nome_candidato
+keep id_candidato_bd cpf titulo_eleitoral nome
 
 save "tmp/2a_rodada.dta", replace
 
@@ -120,8 +120,8 @@ bys id_candidato_bd: egen N_TE = sum(aux_TE)
 drop if N_cpf > 2 | N_TE > 2	// excluindo candidatos com possibilidade de erro grande demais (>2)
 
 sort  id_candidato_bd
-order id_candidato_bd cpf titulo_eleitoral nome_candidato
-keep  id_candidato_bd cpf titulo_eleitoral nome_candidato
+order id_candidato_bd cpf titulo_eleitoral nome
+keep  id_candidato_bd cpf titulo_eleitoral nome
 
 compress
 

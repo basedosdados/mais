@@ -1,0 +1,48 @@
+Diretório de siglas de partidos ao longo do tempo.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-camara-dados-abertos
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_camara_dados_abertos
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_camara_dados_abertos/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_camara_dados_abertos/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- sigla_partido_antiga
+- sigla_partido_nova
+
+Colunas identificando linhas unicamente
+-------------------
+- sigla_partido_antiga
+- sigla_partido_nova
+
+Cobertura Temporal
+------------------
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Limpeza para consistência
+
+Frequencia de Atualização
+-------------------------
+unico
+
+

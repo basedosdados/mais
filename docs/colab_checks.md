@@ -19,11 +19,13 @@ qualidade dos dados em SQL, como as seguintes:
 
 Incluir testes de dados deve seguir o fluxo de trabalho:
 
-1. [Informe seu interesse](#1-informe-seu-interesse)
-2. [Escreva sua consulta](#2-escreva-sua-consulta)
-3. [Submeta sua consulta](#3-submeta-sua-consulta)
+- [Colaborando com testes na BD+](#colaborando-com-testes-na-bd)
+  - [Qual o procedimento?](#qual-o-procedimento)
+  - [1. Informe seu interesse](#1-informe-seu-interesse)
+  - [2. Escreva sua consulta](#2-escreva-sua-consulta)
+  - [3. Submeta sua consulta](#3-submeta-sua-consulta)
 
-!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/2GAuw7d8zd) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
+!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
 
 <!----------------------------------------------------------------------------->
 
@@ -66,7 +68,7 @@ Não se assuste caso não conheça algo da sintaxe acima, podemos lhe ajudar dur
 o processo. Note que os valores entre chaves são variáveis contidas em arquivos
 `table_config.yaml`, que contém metadados das tabelas. Logo a escrita de consulta
 é limitada pelos metadados existentes. Recomendamos consultar estes arquivos
-no diretório das [bases](https://github.com/basedosdados/mais/tree/check-data/bases).
+no diretório das [bases](https://github.com/basedosdados/mais/tree/master/bases).
 
 <!----------------------------------------------------------------------------->
 

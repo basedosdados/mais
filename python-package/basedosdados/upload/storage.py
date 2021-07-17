@@ -20,7 +20,7 @@ class Storage(Base):
 
         if isinstance(partitions, dict):
 
-            return "/".join([f"{k}={v}" for k, v in partitions.items()]) + "/"
+            return "/".join(f"{k}={v}" for k, v in partitions.items()) + "/"
 
         elif isinstance(partitions, str):
 
@@ -172,11 +172,7 @@ class Storage(Base):
 
         self._check_mode(mode)
 
-        if mode == "all":
-            mode = ["raw", "staging"]
-        else:
-            mode = [mode]
-
+        mode = ["raw", "staging"] if mode == "all" else [mode]
         for m in mode:
 
             for filepath, part in tqdm(list(zip(paths, parts)), desc="Uploading files"):
@@ -191,11 +187,7 @@ class Storage(Base):
 
                     blob.upload_from_filename(str(filepath), **upload_args)
 
-                elif if_exists == "pass":
-
-                    pass
-
-                else:
+                elif if_exists != "pass":
                     raise Exception(
                         f"Data already exists at {self.bucket_name}/{blob_name}. "
                         "Set if_exists to 'replace' to overwrite data"
@@ -254,14 +246,10 @@ class Storage(Base):
             prefix += self._resolve_partitions(partitions)
 
         # if no filename is passed, list all blobs within a given table
-        if filename == "*":
-            blob_list = list(self.bucket.list_blobs(prefix=prefix))
-
-        # if filename is passed, append it to the prefix to narrow the search
-        else:
+        if filename != "*":
             prefix += filename
 
-            blob_list = list(self.bucket.list_blobs(prefix=prefix))
+        blob_list = list(self.bucket.list_blobs(prefix=prefix))
 
         # if there are no blobs matching the search raise FileNotFoundError or return
         if blob_list == []:
@@ -305,21 +293,15 @@ class Storage(Base):
 
         self._check_mode(mode)
 
-        if mode == "all":
-            mode = ["raw", "staging"]
-        else:
-            mode = [mode]
-
+        mode = ["raw", "staging"] if mode == "all" else [mode]
         for m in mode:
 
             blob = self.bucket.blob(self._build_blob_name(filename, m, partitions))
 
-            if blob.exists():
+            if blob.exists() or not blob.exists() and not not_found_ok:
                 blob.delete()
-            elif not_found_ok:
-                return
             else:
-                blob.delete()
+                return
 
     def delete_table(self, mode="staging", bucket_name=None, not_found_ok=False):
         """Deletes a table from storage, sends request in batches.
@@ -404,29 +386,24 @@ class Storage(Base):
                 f"Could not find the requested table {self.dataset_id}.{self.table_id}"
             )
 
+        if destination_bucket_name is None:
+
+            destination_bucket = self.bucket
+
         else:
 
-            if destination_bucket_name is None:
+            destination_bucket = self.client["storage_staging"].bucket(
+                destination_bucket_name
+            )
 
-                destination_bucket = self.bucket
+        # Divides source_table_ref list for maximum batch request size
+        source_table_ref_chunks = [
+            source_table_ref[i : i + 999] for i in range(0, len(source_table_ref), 999)
+        ]
 
-            else:
+        for source_table in source_table_ref_chunks:
 
-                destination_bucket = self.client["storage_staging"].bucket(
-                    destination_bucket_name
-                )
+            with self.client["storage_staging"].batch():
 
-            # Divides source_table_ref list for maximum batch request size
-            source_table_ref_chunks = [
-                source_table_ref[i : i + 999]
-                for i in range(0, len(source_table_ref), 999)
-            ]
-
-            for source_table in source_table_ref_chunks:
-
-                with self.client["storage_staging"].batch():
-
-                    for blob in source_table:
-                        self.bucket.copy_blob(
-                            blob, destination_bucket=destination_bucket
-                        )
+                for blob in source_table:
+                    self.bucket.copy_blob(blob, destination_bucket=destination_bucket)

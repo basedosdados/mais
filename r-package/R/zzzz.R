@@ -21,13 +21,11 @@
 
   cli::cli_h1("Base dos Dados")
 
-
   cli::cli_li(
     c(
       "Websitel: https://basedosdados.org/",
       "Docs: https://basedosdados.github.io/mais/"))
   cli::cli_end()
-
 
   cli::cli_h2("Contatos")
 

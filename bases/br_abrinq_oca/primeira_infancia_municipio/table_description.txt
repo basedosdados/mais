@@ -1,0 +1,58 @@
+Dados de primeira infância a nível de município.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-abrinq-oca
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_abrinq_oca
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_abrinq_oca/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_abrinq_oca/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- municipio
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
+- ano
+
+Cobertura Temporal
+------------------
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Limpeza para consistência
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+
