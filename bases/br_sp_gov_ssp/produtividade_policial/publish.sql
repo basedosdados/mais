@@ -23,8 +23,7 @@ CREATE VIEW basedosdados-dev.br_sp_gov_ssp.produtividade_policial AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(id_estado AS INT64) id_estado,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(regiao_ssp AS STRING) regiao_ssp,
 SAFE_CAST(ocorrencias_de_porte_de_entorpecentes AS INT64) ocorrencias_de_porte_de_entorpecentes,
 SAFE_CAST(ocorrencias_de_trafico_de_entorpecentes AS INT64) ocorrencias_de_trafico_de_entorpecentes,
