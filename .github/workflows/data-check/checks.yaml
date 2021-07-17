@@ -3,19 +3,19 @@ test_table_exists:
   id: {{ dataset_id }}/{{ table_id }}/0
   name: Check if table exists
   query: |
-    SELECT "{{ table_id }}" NOT IN (
+    SELECT "{{ table_id }}" IN (
         SELECT `table_name`
-        FROM `{{ project_id_staging }}.{{ dataset_id }}.INFORMATION_SCHEMA.TABLES`
-    ) AS failure
+        FROM `{{ project_id }}.{{ dataset_id }}.INFORMATION_SCHEMA.TABLES`
+    ) AS sucess
 
 test_select_all_works:
   id: {{ dataset_id }}/{{ table_id }}/1
   name: Check if select all  works
   query: |
-    SELECT NOT EXISTS (
+    SELECT EXISTS (
         SELECT * 
-        FROM `{{ project_id_staging }}.{{ dataset_id }}.{{ table_id }}`
-    ) AS failure
+        FROM `{{ project_id }}.{{ dataset_id }}.{{ table_id }}`
+    ) AS sucess
 
 test_table_has_no_null_column:
   id: {{ dataset_id }}/{{ table_id }}/2
@@ -24,13 +24,13 @@ test_table_has_no_null_column:
     WITH
         n_nulls AS (
             SELECT col_name, COUNT(1) nulls_count
-            FROM `{{ project_id_staging }}.{{ dataset_id }}.{{ table_id }}` t,
+            FROM `{{ project_id }}.{{ dataset_id }}.{{ table_id }}` t,
             UNNEST(REGEXP_EXTRACT_ALL(TO_JSON_STRING(t), r'"(\w+)":null')) col_name
             GROUP BY col_name
         ),
         n_total AS (
             SELECT COUNT(*) total_count
-            FROM `{{ project_id_staging }}.{{ dataset_id }}.{{ table_id }}` t
+            FROM `{{ project_id }}.{{ dataset_id }}.{{ table_id }}` t
         )
     SELECT col_name, nulls_count / total_count null_percent
     FROM n_nulls, n_total
@@ -44,5 +44,5 @@ test_primary_key_has_unique_values:
       COUNT(
         DISTINCT CONCAT({{ primary_keys|join(", \"&\", ") }})
       ) / COUNT(*) unique_percentage 
-    FROM `{{ project_id_staging }}.{{ dataset_id }}.{{ table_id }}` t
+    FROM `{{ project_id }}.{{ dataset_id }}.{{ table_id }}` t
   {% endif %}

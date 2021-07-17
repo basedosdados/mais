@@ -5,31 +5,34 @@
 # once for all tables
 # -------------------------------------
 
+import json
+from pathlib import Path
+
 import basedosdados as bd
 import pandas as pd
-import pytest
 
 # -------------------------------------
-# Fetch data from Big Query
+# Auxiliar functions
 # -------------------------------------
 
 
-def fetch_data(check, configs):
-    assert check in configs
-    assert "query" in configs[check]
-    query = configs[check]["query"]
-
-    print(f"Check: {check}")
-    print(f"Query: \n{query}")
-
-    data = bd.read_sql(
-        query=query.replace("\n", " "),
-        billing_project_id="basedosdados-dev",
-        from_file=True,
+def fetch_data(configs, check):
+    """Fetch data from Big Query with basedosdados package"""
+    return bd.read_sql(
+        query=configs[check]["query"].replace("\n", " "),
+        billing_project_id="basedosdados-dev",  # change this value for local debugging
+        from_file=True,  # comment this line for local debugging
     )
 
-    assert isinstance(data, pd.DataFrame)
-    return data
+
+def store_log(configs, check):
+    """Store each test configuration on report.json"""
+    with Path("./report.json").open("r+") as file:
+        config = configs[check]
+        data = json.load(file)
+        data.append(config)
+        file.seek(0)
+        json.dump(data, file)
 
 
 # -------------------------------------
@@ -39,22 +42,48 @@ def fetch_data(check, configs):
 
 
 def test_table_exists(configs):
-    result = fetch_data("test_table_exists", configs)
-    assert result.failure.values == False
+    name = "test_table_exists"
+    result = fetch_data(configs, name)
+
+    store_log(configs, name)
+
+    assert result.sucess.values == True
 
 
 def test_select_all_works(configs):
-    result = fetch_data("test_select_all_works", configs)
-    assert result.failure.values == False
+    name = "test_select_all_works"
+    result = fetch_data(configs, name)
+
+    store_log(configs, name)
+
+    assert result.sucess.values == True
 
 
 def test_table_has_no_null_column(configs):
-    result = fetch_data("test_table_has_no_null_column", configs)
-    assert result.empty or result.null_percent.max() < 1
+    name = "test_table_has_no_null_column"
+    result = fetch_data(configs, name)
+
+    if not result.empty:
+        vars = result[result.null_percent == 1]
+        vars = vars.col_name.values.ravel()
+        vars = "\n".join([f"- {v}  " for v in vars])
+        configs[name]["name"] += f"\n{vars}"
+
+    store_log(configs, name)
+
+    assert result.empty or (result.null_percent.max() < 1)
 
 
 def test_primary_key_has_unique_values(configs):
     name = "test_primary_key_has_unique_values"
-    if name in configs and "query" in configs[name]:
-        result = fetch_data(name, configs)
-        assert result.unique_percentage.values == 1
+
+    if "query" in configs[name]:
+        result = fetch_data(configs, name)
+        result = result.unique_percentage.values[0]
+    else:
+        result = 1
+
+    configs[name]["name"] += f" ({100.0 * result:.2f})"
+    store_log(configs, name)
+
+    assert result == 1
