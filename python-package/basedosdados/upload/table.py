@@ -164,11 +164,18 @@ class Table(Base):
             raise Exception(
                 "Check if your google sheet Share are: Anyone on the internet with this link can view"
             )
-    def table_exists(self,mode):
+    
+    def table_exists(self, mode):
+        """Check if table exists in BigQuery.
+
+        Args:
+            mode (str): Which dataset to check [prod|staging|all].
+        """
         try:
             ref = self._get_table_obj(mode=mode)
         except google.api_core.exceptions.NotFound:
             ref = None
+
         if ref:
             return True
         else:
@@ -616,7 +623,7 @@ class Table(Base):
               Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
                 filepath,
                 mode="staging",
-                partitions=None,
+                partitions=partitions,
                 if_exists=if_exists,
                 **upload_args,
             )
