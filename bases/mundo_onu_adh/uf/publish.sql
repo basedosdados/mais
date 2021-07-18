@@ -21,7 +21,6 @@ TIPOS:
 CREATE VIEW basedosdados-dev.mundo_onu_adh.uf AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(id_uf AS STRING) id_uf,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(expectativa_vida AS FLOAT64) expectativa_vida,
 SAFE_CAST(fecundidade_total AS FLOAT64) fecundidade_total,

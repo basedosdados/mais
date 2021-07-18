@@ -95,14 +95,14 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
+        name: ano
+        description: Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: ano
-        description: Ano
+        name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
