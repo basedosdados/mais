@@ -468,4 +468,4 @@ def test_append(table, metadatadir):
         metadatadir / "municipio2.csv",
     )
 
-    table.append((metadatadir / "municipio2.csv"), if_exists="replace")
+    table.append((metadatadir / "municipio2.csv"))
