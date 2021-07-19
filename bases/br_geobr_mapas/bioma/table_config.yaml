@@ -55,12 +55,14 @@ data_update_frequency: unico # REQUIRED
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
     - bioma
+    - ano
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
     - id_bioma
+    - ano
 
 # Qual é a cobertura espacial da tabela?
 # Regras:

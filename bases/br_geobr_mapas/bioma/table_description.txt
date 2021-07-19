@@ -32,10 +32,12 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - bioma
+- ano
 
 Colunas identificando linhas unicamente
 -------------------
 - id_bioma
+- ano
 
 Cobertura Temporal
 ------------------
