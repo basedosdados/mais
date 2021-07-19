@@ -20,7 +20,6 @@ TIPOS:
 */
 CREATE VIEW basedosdados-dev.br_sp_gov_orcamento.despesas AS
 SELECT 
-SAFE_CAST(35 as STRING) id_estado,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(orgao AS STRING) orgao,
 SAFE_CAST(uo AS STRING) uo,
@@ -38,4 +37,4 @@ SAFE_CAST(empenhado AS INT64) empenhado,
 SAFE_CAST(liquidado AS INT64) liquidado,
 SAFE_CAST(pago AS INT64) pago,
 SAFE_CAST(pago_restos AS INT64) pago_restos
-from basedosdados-dev.br_sp_gov_orcamento_staging.despesas as t
+from basedosdados-dev.br_sp_gov_orcamento_staging.despesas AS t

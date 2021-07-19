@@ -27,4 +27,4 @@ SAFE_CAST(unidade_gestora AS STRING) unidade_gestora,
 SAFE_CAST(fonte_de_recursos AS STRING) fonte_de_recursos,
 SAFE_CAST(receita AS STRING) receita,
 SAFE_CAST(previsto_do_ano AS FLOAT64) previsto_do_ano
-from basedosdados-dev.br_sp_gov_orcamento_staging.receita_prevista as t
+from basedosdados-dev.br_sp_gov_orcamento_staging.receita_prevista AS t
