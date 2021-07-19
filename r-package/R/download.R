@@ -182,8 +182,8 @@ read_sql <- function(
 #'
 #' # instead of a SQL query use a table name directly
 #'
-#' data <- read_sql(table = "br_ibge_pib.municipios")
-#' data <- read_sql(table = "br_ibge_populacao.municipios")
+#' data <- read_table(table = "br_ibge_pib.municipios")
+#' data <- read_table(table = "br_ibge_populacao.municipios")
 #'
 #' }
 #'
