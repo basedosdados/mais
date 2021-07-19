@@ -27,7 +27,6 @@ Colunas identificando linhas unicamente
 -------------------
 - ano
 - mes
-- sigla_uf
 - ddd
 - cnpj
 - tecnologia
@@ -60,7 +59,9 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Download das bases e a renomeação das colunas segundo padrão da BD+
+Download das bases e a renomeação das colunas segundo padrão da BD+;
+Agrupamento dos dados de observações duplicadas;
+Compatibilização da base para identificação única das observações;
 
 Frequencia de Atualização
 -------------------------

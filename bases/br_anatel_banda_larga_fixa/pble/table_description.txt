@@ -29,6 +29,8 @@ Colunas identificando linhas unicamente
 - dia
 - id_municipio
 - id_escola
+- tecnologia
+- conexao
 
 Cobertura Temporal
 ------------------

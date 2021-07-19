@@ -37,7 +37,9 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Download das bases e a renomeação das colunas segundo padrão da BD+
+    Download das bases e a renomeação das colunas segundo padrão da BD+;
+    Agrupamento dos dados de observações duplicadas;
+    Compatibilização da base para identificação única das observações;
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -59,7 +61,6 @@ observation_level: #REQUIRED
 primary_keys:
     - ano
     - mes
-    - sigla_uf
     - ddd
     - cnpj
     - tecnologia
