@@ -26,7 +26,8 @@ Imports:
     glue (>= 1.4.2),
     rlang (>= 0.4.0),
     writexl (>= 1.4.0),
-    fs (>= 1.5.0)
+    fs (>= 1.5.0),
+    dbplyr (>= 2.1.1)
 Suggests: 
     rmarkdown,
     knitr,
