@@ -18,11 +18,11 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-
 CREATE VIEW basedosdados-dev.br_sp_gov_ssp.produtividade_policial AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
+SAFE_CAST(id_estado AS STRING) id_estado,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(regiao_ssp AS STRING) regiao_ssp,
 SAFE_CAST(ocorrencias_de_porte_de_entorpecentes AS INT64) ocorrencias_de_porte_de_entorpecentes,
@@ -38,4 +38,4 @@ SAFE_CAST(numero_de_pessoas_presas_por_mandado AS INT64) numero_de_pessoas_presa
 SAFE_CAST(numero_de_prisoes_efetuadas AS INT64) numero_de_prisoes_efetuadas,
 SAFE_CAST(numero_de_veiculos_recuperados AS INT64) numero_de_veiculos_recuperados,
 SAFE_CAST(total_de_inqueritos_policiais_instaurados AS INT64) total_de_inqueritos_policiais_instaurados
-from basedosdados-dev.br_sp_gov_ssp_staging.produtividade_policial as t
+FROM basedosdados-dev.br_sp_gov_ssp_staging.produtividade_policial AS t
