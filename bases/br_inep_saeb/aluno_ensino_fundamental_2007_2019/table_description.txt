@@ -1,0 +1,26 @@
+<descrição>
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-saeb
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: <nome [você]>
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/codeTratado por
+-----------
+Nome: <nome>
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+- serie
+
+
+
+

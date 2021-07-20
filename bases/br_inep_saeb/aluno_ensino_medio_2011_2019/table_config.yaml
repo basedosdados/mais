@@ -243,25 +243,25 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: taxa_resposta_bloco_1_lp
+        name: resposta_bloco_1_lp
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: taxa_resposta_bloco_2_lp
+        name: resposta_bloco_2_lp
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: taxa_resposta_bloco_1_mt
+        name: resposta_bloco_1_mt
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: taxa_resposta_bloco_2_mt
+        name: resposta_bloco_2_mt
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
