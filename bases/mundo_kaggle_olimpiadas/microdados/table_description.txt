@@ -1,4 +1,4 @@
-<descrição>
+Microdados dos atletas e delegações presentes nas edições dos Jogos Olímpicos a partir de 1896. 
 
 
 Para saber mais acesse:
@@ -24,7 +24,6 @@ Nível da Observação (i.e. a granularidade da linha)
 - edicao
 - id_atleta
 - evento
-- medalha
 
 Colunas identificando linhas unicamente
 -------------------
@@ -77,11 +76,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Download da base e padronização seguindo diretrizes da BD+;
-Junção da base de paises em relação às delegações na base original;
-Ordenação do dataframe;
-Exclusão de observações duplicadas;
-
+['Download da base e padronização seguindo diretrizes da BD+;', 'Junção da base de paises em relação às delegações na base original;', 'Ordenação do dataframe;', 'Exclusão de observações duplicadas;']
 Frequencia de Atualização
 -------------------------
 unico

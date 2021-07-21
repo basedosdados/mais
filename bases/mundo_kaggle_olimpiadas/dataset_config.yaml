@@ -12,7 +12,7 @@ description: | # REQUIRED
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: Kaggle # REQUIRED
+organization: mundo_kaggle # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
@@ -35,8 +35,8 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - esporte
     - olimpiadas
+    - atleta
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.

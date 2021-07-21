@@ -16,7 +16,7 @@ last_updated: 2021-07-20 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    <descrição>
+    Microdados dos atletas e delegações presentes nas edições dos Jogos Olímpicos a partir de 1896. 
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -35,11 +35,11 @@ treated_by:
     email: lucas.nasc.m@gmail.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    Download da base e padronização seguindo diretrizes da BD+;
-    Junção da base de paises em relação às delegações na base original;
-    Ordenação do dataframe;
-    Exclusão de observações duplicadas;
+treatment_description: 
+    - Download da base e padronização seguindo diretrizes da BD+;
+    - Junção da base de paises em relação às delegações na base original;
+    - Ordenação do dataframe;
+    - Exclusão de observações duplicadas;
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -56,7 +56,6 @@ observation_level: #REQUIRED
     - edicao
     - id_atleta
     - evento
-    - medalha
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -154,8 +153,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: pais_ingles
-        description: Nome do país em inglês
+        name: pais
+        description: Nome do país
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
