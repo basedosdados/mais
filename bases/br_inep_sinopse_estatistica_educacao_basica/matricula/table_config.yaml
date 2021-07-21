@@ -109,109 +109,109 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_infantil
+        name: mat_ei
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_infantil_creche
+        name: mat_ei_creche
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_infantil_pre_escola
+        name: mat_ei_pre_escola
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_ensino_fund
+        name: mat_ef
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_ensino_fund_anos_iniciais
+        name: mat_ef_anos_iniciais
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_ensino_fund_anos_finais
+        name: mat_ef_anos_finais
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_ensino_medio
+        name: mat_em
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_ensino_medio_propedeutico
+        name: mat_em_propedeutico
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_ensino_medio_normal
+        name: mat_em_normal
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_ensino_medio_integrado
+        name: mat_em_integrado
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_prof
+        name: mat_ep
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_prof_tem
+        name: mat_ep_tem
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_prof_tem_aem
+        name: mat_ep_tem_aem
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_prof_tem_ctc
+        name: mat_ep_tem_ctc
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_prof_tem_cts
+        name: mat_ep_tem_cts
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_prof_fic
+        name: mat_ep_fic
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_prof_fic_cfc
+        name: mat_ep_fic_cfc
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_prof_fic_eja
+        name: mat_ep_fic_eja
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -223,31 +223,31 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_eja_ensino_fund
+        name: mat_eja_ef
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_eja_ensino_medio
+        name: mat_eja_em
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_especial
+        name: mat_ee
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_especial_cc
+        name: mat_ee_cc
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: mat_educacao_especial_ce
+        name: mat_ee_ce
         description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
