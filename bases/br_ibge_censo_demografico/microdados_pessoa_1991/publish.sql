@@ -21,8 +21,8 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_ibge_censo_demografico.microdados_pessoa_1991 AS
 SELECT 
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(id_questionario AS INT64) id_questionario,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(id_questionario AS STRING) id_questionario,
 SAFE_CAST(numero_ordem AS INT64) numero_ordem,
 SAFE_CAST(v0301 AS INT64) v0301,
 SAFE_CAST(v0302 AS INT64) v0302,
