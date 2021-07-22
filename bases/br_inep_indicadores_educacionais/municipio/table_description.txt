@@ -22,6 +22,7 @@ Email: hevilynsouza12@hotmail.com
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
+- ano
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
