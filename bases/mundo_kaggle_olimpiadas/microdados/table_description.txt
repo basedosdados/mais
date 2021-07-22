@@ -1,0 +1,84 @@
+Microdados dos atletas e delegações presentes nas edições dos Jogos Olímpicos a partir de 1896. 
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/mundo-kaggle-olimpiadas
+Github: https://github.com/basedosdados/mais/tree/master/bases/mundo_kaggle_olimpiadas
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/mundo_kaggle_olimpiadas/code
+Email: lucas.nasc.m@gmail.comTratado por
+-----------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/mundo_kaggle_olimpiadas/code
+Email: lucas.nasc.m@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- ano
+- edicao
+- id_atleta
+- evento
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- edicao
+- id_atleta
+- evento
+
+Cobertura Temporal
+------------------
+- 1896
+- 1900
+- 1904
+- 1906
+- 1908
+- 1912
+- 1920
+- 1924
+- 1928
+- 1932
+- 1936
+- 1948
+- 1952
+- 1956
+- 1960
+- 1964
+- 1968
+- 1972
+- 1976
+- 1980
+- 1984
+- 1988
+- 1992
+- 1994
+- 1996
+- 1998
+- 2000
+- 2002
+- 2004
+- 2006
+- 2008
+- 2010
+- 2012
+- 2014
+- 2016
+
+Cobertura Espacial
+------------------
+- mundo
+
+Tratamento
+----------
+['Download da base e padronização seguindo diretrizes da BD+;', 'Junção da base de paises em relação às delegações na base original;', 'Ordenação do dataframe;', 'Exclusão de observações duplicadas;']
+Frequencia de Atualização
+-------------------------
+unico
+
+
