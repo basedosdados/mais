@@ -7,7 +7,7 @@ dataset_id: br_inep_sinopse_estatistica_educacao_basica # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-inep-sinopse-estatistica-educacao-basica # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_sinopse_estatistica_educacao_basica # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: v1.0 # REQUIRED
 
 last_updated: 2021-07-16 # AUTO GENERATED
 
@@ -20,27 +20,27 @@ description: |  # REQUIRED
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: <nome [você]>  # REQUIRED
+    name: Hevilyn Souza # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_sinopse_estatistica_educacao_basica/code # REQUIRED
     website: <website>
-    email: <email>
+    email: hevilynsouza@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <nome>
-    code_url: <onde encontrar código de tratamento>
-    website: <onde encontrar os dados tratados>
-    email: <email>
+    name: Ricardo Dahis
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pib/code # REQUIRED
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    <CEPESP fez X. Eu fiz K>
+    Limpeza para consistência.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: <frequência> # REQUIRED 
+data_update_frequency: 1 ano # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -49,15 +49,15 @@ data_update_frequency: <frequência> # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - <primeira coluna>
-    - <segunda coluna>
+    - municipio
+    - ano
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - <primeira coluna>
-    - <segunda coluna>
+    - id_municipio
+    - ano
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -69,16 +69,24 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - <admin0 - pais>
-    - <admin1 - estados/regioes/etc>
-    - <admin2 - municipios/counties/etc>
-    - <admin3 - distritos/subdistritos/etc>
+    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - <ano 1>
-    - <ano 2>
+    - 2007
+    - 2008
+    - 2009
+    - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -98,156 +106,156 @@ columns: # REQUIRED
   
     -   
         name: id_municipio
-        description: <descrição da coluna>
+        description: ID Municipio - IBGE 7 dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: ano
-        description: <descrição da coluna>
+        description: Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ei
-        description: <descrição da coluna>
+        description: Matrícula educação infantil
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ei_creche
-        description: <descrição da coluna>
+        description: Matrícula educação infantil - creche
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ei_pre_escola
-        description: <descrição da coluna>
+        description: Matrícula educação infantil - pré escola
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ef
-        description: <descrição da coluna>
+        description: Matrícula ensino fundamental
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ef_anos_iniciais
-        description: <descrição da coluna>
+        description: Matrícula ensino fundamental - anos iniciais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ef_anos_finais
-        description: <descrição da coluna>
+        description: Matrícula ensino fundamental - anos finais
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_em
-        description: <descrição da coluna>
+        description: Matrícula ensino médio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_em_propedeutico
-        description: <descrição da coluna>
+        description: Matrícula ensino médio propedeutico
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_em_normal
-        description: <descrição da coluna>
+        description: Matrícula ensino médio normal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_em_integrado
-        description: <descrição da coluna>
+        description: Matrícula ensino médio integrado 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ep
-        description: <descrição da coluna>
+        description: Matrícula educação profissional
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ep_tem
-        description: <descrição da coluna>
+        description:  <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ep_tem_aem
-        description: <descrição da coluna>
+        description: Matrícula educação profissional - curso técnico integrado ensino médio 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ep_tem_ctc
-        description: <descrição da coluna>
+        description: Matrícula educação profissional - curso técnico concomitante
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ep_tem_cts
-        description: <descrição da coluna>
+        description: Matrícula educação profissional - curso técnico subsequente
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ep_fic
-        description: <descrição da coluna>
+        description: Matrícula educação profissional - curso FIC
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ep_fic_cfc
-        description: <descrição da coluna>
+        description: Matrícula educação profissional - curso FIC concomitante
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ep_fic_eja
-        description: <descrição da coluna>
+        description: Matrícula educação profissional - curso FIC integrado a EJA
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_eja
-        description: <descrição da coluna>
+        description: Matrícula Educação Jovens Adultos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_eja_ef
-        description: <descrição da coluna>
+        description: Matrícula Educação Jovens Adultos - ensino fundamental
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_eja_em
-        description: <descrição da coluna>
+        description: Matrícula Educação Jovens Adultos - ensino médio
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ee
-        description: <descrição da coluna>
+        description: Matrícula ensino especial
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ee_cc
-        description: <descrição da coluna>
+        description: Matrícula ensino especial classes comuns
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: mat_ee_ce
-        description: <descrição da coluna>
+        description: Matrícula ensino especial classes executivas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
