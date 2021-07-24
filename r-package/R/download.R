@@ -174,6 +174,7 @@ read_sql <- function(
 #' @param table defaults to `NULL`. If a table name is provided then it'll be concatenated with "basedosdados." and the whole table will be returned.
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
 #' @param page_size `bigrquery` internal, how many rows per page should there be. Defaults to 10000, consider increasing if running into performance issues or big queries.
+#' @param project which project should be consulted. Defaults to "basedosdados", but can be used to query custom versions of the datalake.
 #'
 #'
 #' @examples
@@ -190,7 +191,6 @@ read_sql <- function(
 #' @importFrom rlang abort is_string
 #' @importFrom glue glue
 #' @importFrom bigrquery as_bq_table bq_table_download
-#' @export
 #'
 
 
@@ -198,7 +198,8 @@ read_sql <- function(
 read_table <- function(
   table,
   billing_project_id = get_billing_id(),
-  page_size = 100000) {
+  page_size = 100000,
+  project = "basedosdados") {
 
   if(billing_project_id == FALSE) {
 
@@ -210,12 +211,20 @@ read_table <- function(
 
     rlang::abort("`query` argument must be a string.")
 
+  } else {
+
+    stringr::str_split(table, "\\.") %>%
+      purrr::pluck(1) %>%
+      purrr::set_names(c("dataset", "table")) ->
+      target
+
   }
 
   bigrquery::bq_table_download(
-    x = bigrquery::as_bq_table(glue::glue("basedosdados.{table}")),
+    glue::glue("{project}.{purrr::pluck(target, 'dataset')}.{purrr::pluck(target, 'table')}"),
     page_size = page_size,
-    bigint = "integer64")
+    bigint = "integer64",
+    max_results = Inf)
 
 }
 

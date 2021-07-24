@@ -23,7 +23,7 @@
 
   cli::cli_li(
     c(
-      "Websitel: https://basedosdados.org/",
+      "Website: https://basedosdados.org/",
       "Docs: https://basedosdados.github.io/mais/"))
   cli::cli_end()
 
