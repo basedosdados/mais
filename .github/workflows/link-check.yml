@@ -3,7 +3,6 @@ name: link-check
 on:
   schedule:
     - cron: "0 0 * * 1"
-  pull_request:
 
 jobs:
   link-check:
