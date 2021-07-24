@@ -7,6 +7,13 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
 
+def encode_credential(credential):
+    credential = json.dumps(credential)
+    credential = credential.encode("utf-8")
+    credential = base64.b64encode(credential)
+    return credential
+
+
 def decode_credential(credential):
     credential = base64.b64decode(credential)
     credential = credential.decode("utf-8")
