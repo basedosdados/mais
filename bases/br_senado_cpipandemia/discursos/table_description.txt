@@ -30,6 +30,9 @@ Nível da Observação (i.e. a granularidade da linha)
 
 Colunas identificando linhas unicamente
 -------------------
+- sequencial_sessao
+- nome_discursante
+- horario_inicio_discurso
 
 Cobertura Temporal
 ------------------
