@@ -1,0 +1,59 @@
+Tabela contendo todos os discursos proferidos na Comissão Parlamentar de
+Inquérito da Pandemia da COVID-19 no Brasil, instalada no Senado Federal em
+27/04/2021.
+Constam da base todas as falas registradas e transcritas pela equipe do Senado,
+bem como informações sobre duração das falas e informações sobre a pessoa
+discursante.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-senado-cpipandemia
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_senado_cpipandemia
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Rodrigo Dornelles
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_senado_cpipandemia/code
+Email: rodornelles@gmail.comTratado por
+-----------
+Nome: Rodrigo Dornelles
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_senado_cpipandemia/code
+Website: https://github.com/basedosdados/mais/tree/master/bases/br_senado_cpipandemia/output
+Email: rodornelles@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- fala proferida em alguma sessao da CPI da Pandemia
+
+Colunas identificando linhas unicamente
+-------------------
+
+Cobertura Temporal
+------------------
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Foram extraídas as sessões da CPI da Pandemia via API do Senado Federal
+- Para cada sessão, foram raspadas as respectivas notas taquigráficas
+- Foi montado uma base de dados preliminar reunindo todos os discursos proferidos,
+bem como seu horário de início e final.
+- Também havia os dados de partido político, UF do partido e bloco parlamentar a
+que pertencia a pessoa que discusrsava, caso fosse parlamentar.
+- Esses dados foram limpos de forma a gerar uma tabela tidy. Foram acrescentadas
+informações como gênero (usando o pacote genderBR) e extraídas informações como
+Além de informações como se falava fora do microfone, por videoconferência,
+no exercício da presidência, etc.
+
+Frequencia de Atualização
+-------------------------
+dia
+
+
