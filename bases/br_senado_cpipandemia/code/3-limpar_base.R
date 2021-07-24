@@ -168,8 +168,11 @@ base_limpa <- base_limpa %>%
     bloco_parlamentar
   ) %>%
   dplyr::mutate(
-    sequencial_sessao = as.integer(sequencial_sessao),
-    duracao_discurso = as.integer(duracao_discurso),
+    duracao_discurso = lubridate::time_length(duracao_discurso),
+    dplyr::across(
+      dplyr::starts_with("horario_"),
+      hms::as_hms
+    ),
     dplyr::across(
       .cols = dplyr::starts_with("sinalizacao"),
       .fns = dplyr::if_else,
@@ -183,10 +186,11 @@ base_limpa <- base_limpa %>%
 
 usethis::use_directory("output/discursos")
 
-readr::with_edition(1,
-                    readr::write_csv(
-                      base_limpa,
-                      file = "output/discursos/discursos.csv")
-                    )
+readr::with_edition(
+  1,
+  readr::write_csv(
+    base_limpa,
+    file = "output/discursos/discursos.csv")
+  )
 
 

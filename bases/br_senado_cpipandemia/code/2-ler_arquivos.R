@@ -148,7 +148,7 @@ limpar_discursos_sessao <- function(arquivo) {
       horario_inicio = lubridate::dmy_hm(paste(data, horario)),
       horario_fim = dplyr::lead(horario),
       horario_fim = lubridate::dmy_hm(paste(data, horario_fim)),
-      horario_duracao =  horario_fim - horario_inicio,
+      horario_duracao =  lubridate::interval(horario_inicio, horario_fim),
       data_sessao = lubridate::dmy(data)
     ) %>%
     dplyr::select(numero_sessao, falante, texto, data_sessao, horario_inicio,
