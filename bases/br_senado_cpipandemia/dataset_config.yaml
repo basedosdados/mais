@@ -16,7 +16,7 @@ description: | # REQUIRED
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: senado-federal # REQUIRED
+organization: br-senado # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:

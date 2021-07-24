@@ -69,6 +69,9 @@ observation_level: #REQUIRED
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
+    - sequencial_sessao
+    - nome_discursante
+    - horario_inicio_discurso
 
 
 # Qual é a cobertura espacial da tabela?
