@@ -55,15 +55,6 @@ test_that("download permite escolher o conteúdo de NAs", {
     fs::is_file() %>%
     expect_true()
 
-  download(
-    ex_query(),
-    path = path3,
-    .na = " -- ")
-
-  path3 %>%
-    fs::is_file() %>%
-    expect_true()
-
 })
 
 test_that("download permite escolher tamanho de página", {
@@ -114,8 +105,6 @@ test_that("read_sql e read_table falham com input inapropriado", {
   expect_error(read_sql(query = "sodfungosd"))
   expect_error(read_sql(query = letters))
   expect_error(read_sql())
-
-
 
 })
 

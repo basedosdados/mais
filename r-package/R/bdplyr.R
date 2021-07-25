@@ -62,7 +62,6 @@
 #'
 #' # use normal `{dplyr}` operations
 #' municipios %>%
-#'   dplyr::select(dplyr::everything()) %>%
 #'   head()
 #'
 #' # filter
@@ -151,7 +150,7 @@ bdplyr <- function(
 
   if(bigrquery::bq_table_exists(table_full_name) == FALSE) {
 
-    rlang::abort(glue::glue("The table {table_full_name} doesn´t have a valid name or was not found at basedosdados."))
+    rlang::abort(glue::glue("The table {table_full_name} doesn´t have a valid name or was not found at {query_project_id}."))
 
   }
 
@@ -167,6 +166,11 @@ con <- DBI::dbConnect(drv = bigrquery::bigquery(),
 
   # checks if the connection was successfully
   if (is_tbl_lazy(tibble_connection) == TRUE) {
+
+    # prevent returning an empty table
+    tibble_connection <- tibble_connection %>%
+      dplyr::select(dplyr::everything())
+
     rlang::inform(glue::glue("Successfully connected to table  `{table_full_name}`."))
     return (tibble_connection)
 
@@ -197,6 +201,9 @@ con <- DBI::dbConnect(drv = bigrquery::bigquery(),
 #'
 #' @param billing_project_id a string containing your billing project id.
 #' If you've run [set_billing_id()] then feel free to leave this empty.
+#'
+#' @param show_query If TRUE will show the SQL query calling [dplyr::show_query()].
+#' Is useful for diagnosing performance problems.
 #'
 #' @return A tibble.
 #' @export
@@ -234,7 +241,10 @@ con <- DBI::dbConnect(drv = bigrquery::bigquery(),
 #'
 #'
 #' }
-bd_collect <- function(.lazy_tbl, billing_project_id = basedosdados::get_billing_id()) {
+
+bd_collect <- function(.lazy_tbl,
+                       billing_project_id = basedosdados::get_billing_id(),
+                       show_query = FALSE) {
 
   # check if billing_is is valid
 
@@ -251,13 +261,23 @@ bd_collect <- function(.lazy_tbl, billing_project_id = basedosdados::get_billing
     rlang::abort("`.lazy_tbl´ should be a lazy tibble.")
   }
 
+  # show que generated query - useful for debugging
+
+  if (show_query == TRUE) {
+
+    rlang::inform(glue::glue("The following query will be executed:"))
+
+    dplyr::show_query(.lazy_tbl)
+
+  }
+
   # collect from the remote table
   # uses a previous select everything to avoid return empty
   collected_table <- .lazy_tbl %>%
     dplyr::select(dplyr::everything()) %>%
-                  dplyr::collect()
+    dplyr::collect()
 
-   # checks if is a tibble
+  # checks if is a tibble
   if (inherits(collected_table, "tbl_df") == FALSE) {
 
     rlang::abort("Error collecting results.")
@@ -269,7 +289,7 @@ bd_collect <- function(.lazy_tbl, billing_project_id = basedosdados::get_billing
   ncol_collected_table <- ncol(collected_table)
 
   if (nrow_collected_table <= 0 | ncol_collected_table <= 0) {
-    rlang::warn("The collection returned a table with no rows or no cols. Consider revising the request or forcing column selection with dplyr::select(dplyr::everything()).")
+    rlang::warn("The collection returned a table with no rows or no cols. Consider revising the request.")
   } else if (nrow_collected_table < 5) {
     rlang::inform(
       glue::glue("The collection returned a small table with only {nrow_collected_table} rows.
@@ -281,7 +301,6 @@ bd_collect <- function(.lazy_tbl, billing_project_id = basedosdados::get_billing
   return(collected_table)
 
 }
-
 
 # bd_write ----------------------------------------------------------------
 
@@ -467,13 +486,15 @@ bd_write <- function(.lazy_tbl,
 
   if (file.exists(path)) {
 
-    msg <- glue::glue("The file was successfully saved ({file.info(path)$size} B)")
+    file_size <-  scales::number_bytes(file.info(path)$size, units = "si")
+
+    msg <- glue::glue("The file was successfully saved ({file_size})")
 
     rlang::inform(msg)
 
     invisible(path)
 
-    } else {
+  } else {
 
     rlang::abort("Failed to save the file.")
 
@@ -520,8 +541,13 @@ bd_write_rds <- function(.lazy_tbl,
 
   # checks if the writing process was successfully
   if (file.exists(path)) {
-    rlang::inform(glue::glue(
-      "The file was successfully saved ({file.info(path)$size} B)"))
+
+    file_size <-  scales::number_bytes(file.info(path)$size, units = "si")
+
+    msg <- glue::glue("The file was successfully saved ({file_size})")
+
+    rlang::inform(msg)
+
     invisible(path)
   } else {
     rlang::abort("Failed to save the file.")
@@ -563,8 +589,13 @@ bd_write_csv <- function(.lazy_tbl,
 
   # checks if the writing process was successfully
   if (file.exists(path)) {
-    rlang::inform(glue::glue(
-      "The file was successfully saved ({file.info(path)$size} B)"))
+
+    file_size <-  scales::number_bytes(file.info(path)$size, units = "si")
+
+    msg <- glue::glue("The file was successfully saved ({file_size})")
+
+    rlang::inform(msg)
+
     invisible(path)
   } else {
     rlang::abort("Failed to save the file.")
