@@ -24,9 +24,7 @@
 #' save, respectively in `.csv` or `.rds` format.
 #'
 #'
-#' @param table String in the format `(project)`.`(dataset_name)`.`(table_name)`
-#' or `(dataset_name)`.`(table_name)`, considering that the default
-#' `query_project_id` param is `basedosdados`.
+#' @param table String in the format `(dataset_name)`.`(table_name)`. You can optionally input a project before the dataset name.
 #'
 #' @param billing_project_id a string containing your billing project id.
 #' If you've run [set_billing_id()] then feel free to leave this empty.
@@ -236,8 +234,7 @@ con <- DBI::dbConnect(drv = bigrquery::bigquery(),
 #'
 #'
 #' }
-bd_collect <- function(.lazy_tbl,
-                billing_project_id = basedosdados::get_billing_id()) {
+bd_collect <- function(.lazy_tbl, billing_project_id = basedosdados::get_billing_id()) {
 
   # check if billing_is is valid
 
@@ -305,12 +302,10 @@ bd_collect <- function(.lazy_tbl,
 #' easier to write in these formats, more common in everyday life, calling
 #' writing functions from `{readr}` package.
 #'
-#' @param .lazy_tbl A variable that contains a database that was previously
-#' connected through the [bdplyr()] function. Tipically, it will be called
-#' after performing the desired operations with the `{dplyr}` verbs.
+#' @param .lazy_tbl A lazy tibble, tipically the output of [bdplyr()].
 #'
-#' @param .write_fn A function capable of writing the result of a tibble to
-#' disk. Do not use () afther the function's name. For example:
+#' @param .write_fn A function for writing the result of a tibble to
+#' disk. Do not use () afther the function's name, the function *object* should be passed. Some functions the user might consider are:
 #' [writexl::write_xlsx], [jsonlite::write_json], [foreign::write.dta],
 #' [arrow::write_feather], etc.
 #'
@@ -326,7 +321,7 @@ bd_collect <- function(.lazy_tbl,
 #' Remember that the higher the compression, the smaller the file size on disk,
 #' ut also the longer the time to load the data. See also: [readr::write_rds()].
 #'
-#' @param ... Other parameters passed to the `.write_fn` function.
+#' @param ... Parameters passed to the `.write_fn` function.
 #'
 #' @return String containing the path to the created file.
 #' @export
@@ -415,23 +410,31 @@ bd_write <- function(.lazy_tbl,
 
   # checks if any param is missing
   if (missing(.write_fn) | missing(.lazy_tbl) | missing(path)) {
+
     rlang::abort("Params `.lazy_tbl´, `.write_fn´ and `path´ must be informed.")
+
   }
 
   # checks if .write_fn is a valid function
   if (!rlang::is_function(.write_fn)) {
-    rlang::abort("`.write_fn´ must be a function. Remember not using ()")
+
+      rlang::abort("`.write_fn´ must be a function. Remember not using ()")
+
   }
 
   # check if is a valid path name
   if (!rlang::is_string(path)) {
+
     rlang::abort("`path` must be a string.")
+
   }
 
   # check if the path already exists
   # in this case, check if overwrite = TRUE
   if (file.exists(path) & overwrite == FALSE) {
+
     rlang::abort("The file already exists. Use overwrite = TRUE if you want to overwrite it.")
+
   }
 
    #  checks if .lazy_tbl is able to be collected
@@ -440,14 +443,17 @@ bd_write <- function(.lazy_tbl,
     # if is it not able to collect but is a tibble anyway warns that is not
     # necessary to use this function
     if (tibble::is_tibble(.lazy_tbl)) {
-      rlang::abort(
-        "The table does not seem to need to be collected. Save using traditional writing functions like `write.csv´."
-      )
+
+      rlang::abort("The table does not seem to need to be collected. Save using traditional writing functions like `write.csv´.")
 
       # if is not a tibble actually is a mistake and we should abort
-    } else {
+
+      } else {
+
       rlang::abort("It was not possible to collect the remote table.")
+
     }
+
   }
 
   # collect the results
@@ -460,12 +466,17 @@ bd_write <- function(.lazy_tbl,
   # checks if the writing process was successfully
 
   if (file.exists(path)) {
-    rlang::inform(glue::glue(
-      "The file was successfully saved ({file.info(path)$size} B)"
-    ))
+
+    msg <- glue::glue("The file was successfully saved ({file.info(path)$size} B)")
+
+    rlang::inform(msg)
+
     invisible(path)
-  } else {
+
+    } else {
+
     rlang::abort("Failed to save the file.")
+
   }
 
 }
