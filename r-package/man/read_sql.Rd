@@ -29,8 +29,8 @@ query <- "SELECT
 pib.id_municipio,
 pop.ano,
 pib.PIB / pop.populacao * 1000 as pib_per_capita
-FROM `basedosdados.br_ibge_pib.municipios` as pib
-JOIN `basedosdados.br_ibge_populacao.municipios` as pop
+FROM `basedosdados.br_ibge_pib.municipio` as pib
+JOIN `basedosdados.br_ibge_populacao.municipio` as pop
 ON pib.id_municipio = pop.id_municipio
 LIMIT 5 "
 

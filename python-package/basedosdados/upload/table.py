@@ -164,6 +164,22 @@ class Table(Base):
             raise Exception(
                 "Check if your google sheet Share are: Anyone on the internet with this link can view"
             )
+    
+    def table_exists(self, mode):
+        """Check if table exists in BigQuery.
+
+        Args:
+            mode (str): Which dataset to check [prod|staging|all].
+        """
+        try:
+            ref = self._get_table_obj(mode=mode)
+        except google.api_core.exceptions.NotFound:
+            ref = None
+
+        if ref:
+            return True
+        else:
+            return False
 
     def update_columns(self, columns_config_url):
         """Fills descriptions of tables automatically using a public google sheets URL.
@@ -581,7 +597,7 @@ class Table(Base):
                 self.table_full_name[mode], not_found_ok=True
             )
 
-    def append(self, filepath, partitions=None, if_exists="raise", **upload_args):
+    def append(self, filepath, partitions=None, if_exists="replace", **upload_args):
         """Appends new data to existing BigQuery table.
 
         As long as the data has the same schema. It appends the data in the
@@ -601,17 +617,13 @@ class Table(Base):
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
         """
-
-        Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
-            filepath,
-            mode="staging",
-            partitions=None,
-            if_exists=if_exists,
-            **upload_args,
-        )
-
-        self.create(
-            if_table_exists="replace",
-            if_table_config_exists="pass",
-            if_storage_data_exists="pass",
-        )
+        if not self.table_exists("staging"):
+            raise BaseDosDadosException("You cannot append to a table that does not exist")
+        else:
+              Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
+                filepath,
+                mode="staging",
+                partitions=partitions,
+                if_exists=if_exists,
+                **upload_args,
+            )

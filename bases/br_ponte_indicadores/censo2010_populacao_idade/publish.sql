@@ -19,11 +19,11 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados.br_ponte_indicadores.censo2010_populacao_idade AS
+CREATE VIEW basedosdados-dev.br_ponte_indicadores.censo2010_populacao_idade AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(ordem AS INT64) ordem,
 SAFE_CAST(grupo_idade AS STRING) grupo_idade,
 SAFE_CAST(populacao_homens AS INT64) populacao_homens,
 SAFE_CAST(populacao_mulheres AS INT64) populacao_mulheres
-from basedosdados-staging.br_ponte_indicadores_staging.censo2010_populacao_idade as t
+from basedosdados-dev.br_ponte_indicadores_staging.censo2010_populacao_idade as t

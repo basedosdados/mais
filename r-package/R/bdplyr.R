@@ -241,6 +241,7 @@ con <- DBI::dbConnect(drv = bigrquery::bigquery(),
 #'
 #'
 #' }
+
 bd_collect <- function(.lazy_tbl,
                        billing_project_id = basedosdados::get_billing_id(),
                        show_query = FALSE) {
@@ -493,7 +494,7 @@ bd_write <- function(.lazy_tbl,
 
     invisible(path)
 
-    } else {
+  } else {
 
     rlang::abort("Failed to save the file.")
 

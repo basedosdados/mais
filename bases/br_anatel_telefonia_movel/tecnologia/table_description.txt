@@ -1,0 +1,70 @@
+Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) de 2009 a 2018 para total de acessos referentes a DDD e a tecnologia de conexão.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-anatel-telefonia-movel
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
+Email: lucas.nasc.m@gmail.comTratado por
+-----------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
+Email: lucas.nasc.m@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- ddd
+- tecnologia
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- mes
+- ddd
+- cnpj
+- tecnologia
+- sinal
+
+Cobertura Temporal
+------------------
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- B
+- r
+- a
+- s
+- i
+- l
+
+Tratamento
+----------
+Download das bases e a renomeação das colunas segundo padrão da BD+;
+Agrupamento dos dados de observações duplicadas;
+Compatibilização da base para identificação única das observações;
+
+Frequencia de Atualização
+-------------------------
+mes
+
+

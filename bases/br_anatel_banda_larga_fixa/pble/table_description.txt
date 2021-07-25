@@ -1,0 +1,68 @@
+Dados da implementação de internet banda larga nas escolas através do Programa Banda Larga nas Escolas (PBLE, Decreto 6.424/2008)
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-anatel-banda-larga-fixa
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa/code
+Email: lucas.nasc.m@gmail.comTratado por
+-----------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa/code
+Email: lucas.nasc.m@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- escola
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- mes
+- dia
+- id_municipio
+- id_escola
+- tecnologia
+- conexao
+
+Cobertura Temporal
+------------------
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- Brasil
+
+Tratamento
+----------
+Download da base em https://dados.gov.br/dataset/pble;
+Padronização das variáveis sob as diretrizes da BD+;
+Ajuste do formato data e id_escola;
+Inclusão de id_municipio;
+Organização das variáveis.
+
+Frequencia de Atualização
+-------------------------
+trimestral
+
+

@@ -112,8 +112,8 @@ download <- function(
 #' pib.id_municipio,
 #' pop.ano,
 #' pib.PIB / pop.populacao * 1000 as pib_per_capita
-#' FROM `basedosdados.br_ibge_pib.municipios` as pib
-#' JOIN `basedosdados.br_ibge_populacao.municipios` as pop
+#' FROM `basedosdados.br_ibge_pib.municipio` as pib
+#' JOIN `basedosdados.br_ibge_populacao.municipio` as pop
 #' ON pib.id_municipio = pop.id_municipio
 #' LIMIT 5 "
 #'
@@ -174,6 +174,7 @@ read_sql <- function(
 #' @param table defaults to `NULL`. If a table name is provided then it'll be concatenated with "basedosdados." and the whole table will be returned.
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
 #' @param page_size `bigrquery` internal, how many rows per page should there be. Defaults to 10000, consider increasing if running into performance issues or big queries.
+#' @param project which project should be consulted. Defaults to "basedosdados", but can be used to query custom versions of the datalake.
 #'
 #'
 #' @examples
@@ -182,41 +183,47 @@ read_sql <- function(
 #'
 #' # instead of a SQL query use a table name directly
 #'
-#' data <- read_table(table = "br_ibge_pib.municipios")
-#' data <- read_table(table = "br_ibge_populacao.municipios")
+#' data <- read_table(table = "br_ibge_pib.municipio")
+#' data <- read_table(table = "br_ibge_populacao.municipio")
 #'
 #' }
 #'
 #' @importFrom rlang abort is_string
 #' @importFrom glue glue
 #' @importFrom bigrquery as_bq_table bq_table_download
-#' @export
-#'
 
+# read_table <- function(
+#   table,
+#   billing_project_id = get_billing_id(),
+#   page_size = 100000,
+#   project = "basedosdados") {
+#
+#   if(billing_project_id == FALSE) {
+#
+#     rlang::abort("You haven't set a Project Billing Id. Use the function `set_billing_id` to do so.")
+#
+#   }
+#
+#   if(!rlang::is_string(table)) {
+#
+#     rlang::abort("`query` argument must be a string.")
+#
+#   } else {
+#
+#     stringr::str_split(table, "\\.") %>%
+#       purrr::pluck(1) %>%
+#       purrr::set_names(c("dataset", "table")) ->
+#       target
+#
+#   }
+#
+#   bigrquery::bq_table_download(
+#     glue::glue("{project}.{purrr::pluck(target, 'dataset')}.{purrr::pluck(target, 'table')}"),
+#     page_size = page_size,
+#     bigint = "integer64",
+#     max_results = Inf)
+#
+# }
 
-
-read_table <- function(
-  table,
-  billing_project_id = get_billing_id(),
-  page_size = 100000) {
-
-  if(billing_project_id == FALSE) {
-
-    rlang::abort("You haven't set a Project Billing Id. Use the function `set_billing_id` to do so.")
-
-  }
-
-  if(!rlang::is_string(table)) {
-
-    rlang::abort("`query` argument must be a string.")
-
-  }
-
-  bigrquery::bq_table_download(
-    x = bigrquery::as_bq_table(glue::glue("basedosdados.{table}")),
-    page_size = page_size,
-    bigint = "integer64")
-
-}
 
 

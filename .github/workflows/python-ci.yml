@@ -1,0 +1,83 @@
+name: python-ci
+
+on:
+  push:
+    paths:
+      - python-package/**
+      - .github/workflows/python-ci.yml
+      - .github/workflows/setup-env*
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    env:
+      DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
+      DEV_STAG: ${{ secrets.GCP_BD_DEV_STAGING }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      COVERALLS_FLAG_NAME: linux
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8.x'
+    - name: Install dependencies
+      run: |
+        cd python-package
+        pip install -r requirements-dev.txt
+        pip install coveralls
+      shell: bash
+    - name: Install package
+      run: |
+        cd python-package
+        python setup.py develop
+      shell: bash
+    - name: Setup environment
+      run: |
+        cd .github/workflows/setup-env
+        python main.py
+      shell: bash
+    - name: Test and assess coverage
+      run: |
+        cd python-package
+        coverage run --source=basedosdados -m pytest tests
+        coveralls --service=github
+      shell: bash
+
+  build-windows:
+    runs-on: windows-latest
+    env:
+      DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
+      DEV_STAG: ${{ secrets.GCP_BD_DEV_STAGING }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      COVERALLS_FLAG_NAME: windows
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8.x'
+    - name: Install dependencies
+      run: |
+        cd python-package
+        pip install -r requirements-dev.txt
+        pip install coveralls
+      shell: cmd
+    - name: Install package
+      run: |
+        cd python-package
+        python setup.py develop
+      shell: cmd
+    - name: Setup environment
+      run: |
+        cd .github\workflows\setup-env
+        python main.py
+      shell: cmd
+    - name: Test and assess coverage
+      run: |
+        cd python-package
+        coverage run --source=basedosdados -m pytest tests
+        coveralls --service=github
+      shell: cmd

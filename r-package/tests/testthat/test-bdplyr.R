@@ -23,16 +23,15 @@ test_that("bd_colllect works", {
   example_data %>%
     dplyr::group_by(sigla_partido, genero) %>%
     dplyr::summarise(contagem = n()) %>%
-    basedosdados::bd_collect() %>%
-    testthat::expect_s3_class("tbl_df")
+    basedosdados::bd_collect() ->
+    summarise_test_data
+
+  testthat::expect_s3_class(summarise_test_data, "tbl_df")
+  testthat::expect_gt(nrow(summarise_test_data), 0)
 
 })
 
-# deu certo
-test_that("bd_write funcionando a escrita adequadamente", {
-
-  # TODO: gerar um dataframe com nomes e funcoes de escrita, walk2() para escrever
-  # e depois purrr::every(endereços, purrr::compose())
+test_that("bd_write works", {
 
   (bd_write_test_params <- tibble::tibble(
     extension = c("csv", "xlsx", "json", "dta"),
@@ -55,7 +54,7 @@ test_that("bd_write funcionando a escrita adequadamente", {
 
 })
 
-# deu certo
+
 test_that("bd_write_csv works", {
 
   tempfile_csv <- file.path(tempdir(), "bd_write_csv.csv")
@@ -69,9 +68,7 @@ test_that("bd_write_csv works", {
 
 })
 
-
-# deu certo
-test_that("bd_write_rds works normally and with compression", {
+test_that("bd_write_rds", {
 
   tempfile1 <- file.path(tempdir(), "first_bdplyr_test.rds")
 
@@ -87,7 +84,8 @@ test_that("bd_write_rds works normally and with compression", {
   example_data %>%
     basedosdados::bd_write_rds(
       tempfile2,
-      compress = 'gz')
+      compress = 'gz',
+      overwrite = TRUE)
 
   tempfile2 %>%
     fs::file_exists() %>%
@@ -98,7 +96,8 @@ test_that("bd_write_rds works normally and with compression", {
   example_data %>%
     basedosdados::bd_write_rds(
       tempfile3,
-      compress = 'xz')
+      compress = 'xz',
+      overwrite = TRUE)
 
   tempfile3 %>%
     fs::file_exists() %>%
