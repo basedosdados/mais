@@ -1,3 +1,4 @@
+from google.api_core.exceptions import NotFound
 from google.cloud.bigquery import dataset
 import pandas_gbq
 from pathlib import Path
@@ -149,7 +150,6 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
     """
 
     try:
-
         # Set a two hours timeout
         bigquery_storage_v1.client.BigQueryReadClient.read_rows = partialmethod(
             bigquery_storage_v1.client.BigQueryReadClient.read_rows,
@@ -161,6 +161,23 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
             credentials=credentials(from_file=from_file, reauth=reauth),
             project_id=billing_project_id,
         )
+
+    except GenericGBQException as e:
+        if "Reason: 403" in str(e):
+            msg = (
+                "\nYou still don't have a Google Cloud Project.\n"
+                "Set one up following these steps: \n"
+                "1. Go to this link https://console.cloud.google.com/projectselector2/home/dashboard\n"
+                "2. Agree with Terms of Service if asked\n"
+                "3. Click in Create Project\n"
+                "4. Put a cool name in your project\n"
+                "5. Hit create\n"
+                "6. Rerun this command with the flag `reauth=True`. \n"
+                "   Like `read_table('br_ibge_pib', 'municipios', reauth=True)`"
+            )
+            raise BaseDosDadosException(msg) from e
+        raise
+
     except (OSError, ValueError) as e:
         msg = (
             "\nWe are not sure which Google Cloud project should be billed.\n"
@@ -180,20 +197,6 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
             "   Bear in mind that you need `gcloud` installed."
         )
         raise BaseDosDadosException(msg) from e
-    except GenericGBQException as e:
-        if "Reason: 403" in str(e):
-            raise BaseDosDadosException(
-                "\nYou still don't have a Google Cloud Project.\n"
-                "Set one up following these steps: \n"
-                "1. Go to this link https://console.cloud.google.com/projectselector2/home/dashboard\n"
-                "2. Agree with Terms of Service if asked\n"
-                "3. Click in Create Project\n"
-                "4. Put a cool name in your project\n"
-                "5. Hit create\n"
-                "6. Rerun this command with the flag `reauth=True`. \n"
-                "   Like `read_table('br_ibge_pib', 'municipios', reauth=True)`"
-            )
-        raise
 
 
 def read_table(
