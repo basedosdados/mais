@@ -1,32 +1,38 @@
-dataset_id: br_inep_sinopse_estatistica_educacao_basica # AUTO GENERATED
+dataset_id: br_senado_cpipandemia # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-inep-sinopse-estatistica-educacao-basica
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_sinopse_estatistica_educacao_basica
+url_ckan: https://basedosdados.org/dataset/br-senado-cpipandemia
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_senado_cpipandemia
 
 # Descreva a base.
 # Ela é sobre o que?
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    As Sinopses Estatísticas da Educação Básica, até 2006, apresentam dados referentes a estabelecimento, matrícula, função docente, movimento e rendimento escolar, para as diferentes modalidades de ensino brasileiras: Ensino Regular (Educação Infantil e Ensino Fundamental e Médio), Educação Especial e Educação de Jovens e Adultos. Os dados estão distribuídos de acordo com as regiões brasileiras e suas respectivas unidades da federação.
+    Base de dados contendo informações sobre a Comissão Parlamentar de Inquérito
+    (CPI) da Pandemia da COVID-19 no Brasil, instalada no Senado Federal em abril
+    de 2021.
+    Constam no momento os discursos proferidos em suas sessões e que foram transcritos
+    pelo Senado oficialmente.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: INEP # REQUIRED
+organization: br-senado # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
-    name: <nome>
-    email: <email>
+    name: Serviço de Dados Abertos do Senado Federal
+    email:
 
 # Onde encontrar os dados originais e mais informações?
 website:
-    - http://inep.gov.br/sinopses-estatisticas-da-educacao-basica
+    - https://legis.senado.leg.br/comissoes/comissao?codcol=2441
+    - https://rfdornelles.shinyapps.io/cpipandemia/
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
-    - educacao
+    - politica
+    - historia
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -35,13 +41,34 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - educacao
-    - escola
-    - ensino fundamental
-    - ensino medio
-    - educacao infantil
-
-
+    - analise de texto
+    - arquivo
+    - cidadania
+    - congresso
+    - COVID-19
+    - dados Abertos
+    - discurso
+    - genocidio
+    - governo
+    - instituicoes
+    - legislativo
+    - legislatura
+    - lei
+    - linguistica
+    - ministerio
+    - mortalidade
+    - pandemia
+    - parlamento
+    - partido
+    - politica publica
+    - presidencia
+    - prova
+    - proposicao
+    - relacoes de genero
+    - sentenca
+    - testemunho
+    - transparencia
+    - virus
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.
 # Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
@@ -52,7 +79,7 @@ languages:
 free: sim
 
 # Are microdata available for download?
-microdata: sim
+microdata: não
 
 # Existe uma API na fonte original?
 API: sim
@@ -69,6 +96,6 @@ brazilian_IP: não
 # Essa base está sob qual licença?
 # A licença MIT se aplica a bases públicas.
 # Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
-license: 
+license:
     name: MIT # REQUIRED
-    url: <url>
+    url:

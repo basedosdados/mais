@@ -1,0 +1,234 @@
+source_bucket_name: bd-sisdepen
+project_id_staging: rfdornelles-bq
+project_id_prod: rfdornelles-bq
+table_id: discursos # AUTO GENERATED
+dataset_id: br_senado_cpipandemia # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-senado-cpipandemia # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_senado_cpipandemia # AUTO GENERATED
+
+version: 1.0 # REQUIRED
+
+last_updated: 2021-07-23 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Tabela contendo todos os discursos proferidos na Comissão Parlamentar de
+    Inquérito da Pandemia da COVID-19 no Brasil, instalada no Senado Federal em
+    27/04/2021.
+    Constam da base todas as falas registradas e transcritas pela equipe do Senado,
+    bem como informações sobre duração das falas e informações sobre a pessoa
+    discursante.
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Rodrigo Dornelles  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_senado_cpipandemia/code # REQUIRED
+    website:
+    email: rodornelles@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Rodrigo Dornelles
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_senado_cpipandemia/code
+    website: https://github.com/basedosdados/mais/tree/master/bases/br_senado_cpipandemia/output
+    email: rodornelles@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: |
+    - Foram extraídas as sessões da CPI da Pandemia via API do Senado Federal
+    - Para cada sessão, foram raspadas as respectivas notas taquigráficas
+    - Foi montado uma base de dados preliminar reunindo todos os discursos proferidos,
+    bem como seu horário de início e final.
+    - Também havia os dados de partido político, UF do partido e bloco parlamentar a
+    que pertencia a pessoa que discusrsava, caso fosse parlamentar.
+    - Esses dados foram limpos de forma a gerar uma tabela tidy. Foram acrescentadas
+    informações como gênero (usando o pacote genderBR) e extraídas informações como
+    Além de informações como se falava fora do microfone, por videoconferência,
+    no exercício da presidência, etc.
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: dia # REQUIRED
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - fala proferida em alguma sessao da CPI da Pandemia
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - sequencial_sessao
+    - nome_discursante
+    - horario_inicio_discurso
+
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2021
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+
+    -
+        name: sequencial_sessao
+        description: Número sequencial da sessão realizada pela CPI da Pandemia.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: data_sessao
+        description: Data da sessão
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: texto_discurso
+        description: Inteiro teor do discurso ou fala proferidos por alguém, seja Senador/a, depoente, etc.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: nome_discursante
+        description: Nome da pessoa que proferiu o discurso ou fala
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: genero_discursante
+        description: Gênero da pessoa que proferiu  o discurso ou fala
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: categoria_discursante
+        description: Categoria em que a pessoa que falou se enquadra no momento da fala
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: horario_inicio_discurso
+        description: Data e horário em que a fala foi iniciada.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: horario_fim_discurso
+        description: Data e horário em que a fala foi finalizada ou interrompida.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: duracao_discurso
+        description: A duração em segundos da fala.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: sigla_partido
+        description: Sigla do partido da pessoa que falou (caso seja Senador/a)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: sigla_uf_partido
+        description: Sigla da UF do partido da pessoa que falou (caso seja Senador/a)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: bloco_parlamentar
+        description: Bloco parlamentar a que a pessoa que falou pertence (caso seja Senador/a).
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: sinalizacao_pela_ordem
+        description: Se a fala foi feita com sinalização de que a pessoa estava falando objetivo de solicitar informações sobre o andamento dos trabalhos da sessão, fazer reclamação quanto à observância do regimento e apontar falha ou equívoco em relação à proposição da pauta.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: sinalizacao_questao_ordem
+        description: Se a fala foi feita com sinalização de foi realizada enquanto Senador/a formulava questão de ordem à Presidência da Sessão.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: sinalizacao_fora_microfone
+        description: Se a fala foi feita com sinalização que que foi realizada fora do microfone.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: sinalizacao_responder_questao_ordem
+        description: Se a fala foi feita com sinalização de que se tratava de resposta à questão de ordem.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: sinalizacao_por_videoconferencia
+        description: Se a fala foi sinalizada como realziada por videoconferência.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: sinalizacao_para_interpelar
+        description: Se a fala foi feita com sinalização de que fora feita para interpelar.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: sinalizacao_para_expor
+        description: Se a fala foi feita com sinalização de que fora feita para realizar uma exposição.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: sinalizacao_para_depor
+        description: Se a fala foi feita com sinalização de que foi feita para depor.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -
+        name: sinalizacao_como_presidente
+        description: Se a fala foi feita com sinalização de que a pessoa que falava estava no exercício da presidência da sessão.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
