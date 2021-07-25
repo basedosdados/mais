@@ -21,8 +21,10 @@ TIPOS:
 
 CREATE VIEW projetos-bd.br_inmet_bdmep.microdados AS
 SELECT 
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(data AS DATE) data,
 SAFE_CAST(hora AS TIME) hora,
+SAFE_CAST(id_estacao AS STRING) id_estacao,
 SAFE_CAST(precipitacao_total AS FLOAT64) precipitacao_total,
 SAFE_CAST(pressao_atm_hora AS FLOAT64) pressao_atm_hora,
 SAFE_CAST(pressao_atm_max AS FLOAT64) pressao_atm_max,
@@ -39,7 +41,5 @@ SAFE_CAST(umid_rel_min AS FLOAT64) umid_rel_min,
 SAFE_CAST(umid_rel_hora AS FLOAT64) umid_rel_hora,
 SAFE_CAST(vento_direcao AS FLOAT64) vento_direcao,
 SAFE_CAST(vento_rajada_max AS FLOAT64) vento_rajada_max,
-SAFE_CAST(vento_velocidade AS FLOAT64) vento_velocidade,
-SAFE_CAST(id_estacao AS STRING) id_estacao,
-SAFE_CAST(ano AS STRING) ano
+SAFE_CAST(vento_velocidade AS FLOAT64) vento_velocidade
 from projetos-bd.br_inmet_bdmep_staging.microdados as t
