@@ -1,4 +1,4 @@
-source_bucket_name: bd-sisdepen
+source_bucket_name: rfdornelles
 project_id_staging: rfdornelles-bq
 project_id_prod: rfdornelles-bq
 table_id: discursos # AUTO GENERATED
