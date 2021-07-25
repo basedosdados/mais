@@ -18,7 +18,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW `basedosdados.mundo_onu_adh.brasil` AS
+CREATE VIEW `basedosdados-dev.mundo_onu_adh.brasil` AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(expectativa_vida AS FLOAT64) expectativa_vida,
@@ -249,4 +249,4 @@ SAFE_CAST(idhm AS FLOAT64) idhm,
 SAFE_CAST(idhm_e AS FLOAT64) idhm_e,
 SAFE_CAST(idhm_l AS FLOAT64) idhm_l,
 SAFE_CAST(idhm_r AS FLOAT64) idhm_r
-from basedosdados-staging.mundo_onu_adh_staging.brasil as t
+from basedosdados-dev.mundo_onu_adh_staging.brasil as t

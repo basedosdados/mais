@@ -18,9 +18,9 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-
 CREATE VIEW basedosdados-dev.br_ms_vacinacao_covid19.microdados AS
 SELECT 
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_documento AS STRING) id_documento,
 SAFE_CAST(id_paciente AS STRING) id_paciente,
 SAFE_CAST(idade_paciente AS INT64) idade_paciente,
@@ -41,9 +41,8 @@ SAFE_CAST(lote_vacina AS STRING) lote_vacina,
 SAFE_CAST(nome_fabricante_vacina AS STRING) nome_fabricante_vacina,
 SAFE_CAST(referencia_fabricante_vacina AS STRING) referencia_fabricante_vacina,
 SAFE_CAST(data_aplicacao_vacina AS DATE) data_aplicacao_vacina,
-SAFE_CAST(dose_vacina AS INT64) dose_vacina,
+SAFE_CAST(dose_vacina AS STRING) dose_vacina,
 SAFE_CAST(codigo_vacina AS STRING) codigo_vacina,
 SAFE_CAST(data_importacao_rnds AS DATE) data_importacao_rnds,
-SAFE_CAST(sistema_origem AS STRING) sistema_origem,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf
+SAFE_CAST(sistema_origem AS STRING) sistema_origem
 from basedosdados-dev.br_ms_vacinacao_covid19_staging.microdados as t

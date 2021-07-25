@@ -18,13 +18,12 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-
 CREATE VIEW basedosdados-dev.br_sp_gov_ssp.ocorrencias_registradas AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(id_estado AS INT64) id_estado,
+SAFE_CAST(id_estado AS STRING) id_estado,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(regiao_ssp AS STRING) regiao_ssp,
 SAFE_CAST(homicidio_doloso AS INT64) homicidio_doloso,
 SAFE_CAST(numero_de_vitimas_em_homicidio_doloso AS INT64) numero_de_vitimas_em_homicidio_doloso,
@@ -49,4 +48,4 @@ SAFE_CAST(roubo_a_banco AS INT64) roubo_a_banco,
 SAFE_CAST(roubo_de_carga AS INT64) roubo_de_carga,
 SAFE_CAST(furto_outros AS INT64) furto_outros,
 SAFE_CAST(furto_de_veiculo AS INT64) furto_de_veiculo
-from basedosdados-dev.br_sp_gov_ssp_staging.ocorrencias_registradas as t
+FROM basedosdados-dev.br_sp_gov_ssp_staging.ocorrencias_registradas AS t

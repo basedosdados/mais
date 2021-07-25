@@ -19,9 +19,9 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados.br_ponte_indicadores.censo2010_populacao_raca AS
+CREATE VIEW basedosdados-dev.br_ponte_indicadores.censo2010_populacao_raca AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(cor_raca AS STRING) cor_raca,
 SAFE_CAST(populacao AS INT64) populacao
-from basedosdados-staging.br_ponte_indicadores_staging.censo2010_populacao_raca as t
+from basedosdados-dev.br_ponte_indicadores_staging.censo2010_populacao_raca as t

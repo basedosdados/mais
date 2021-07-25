@@ -18,19 +18,19 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_geobr_mapas.setor_censitario_2010 AS
+CREATE VIEW basedosdados-dev.br_geobr_mapas.setor_censitario_2010 AS
 SELECT 
-SAFE_CAST(code_tract AS NUMERIC) id_setor_censitario,
-SAFE_CAST(zone AS STRING) zona,
-SAFE_CAST(id_estado AS NUMERIC) id_estado,
-SAFE_CAST(estado_abrev AS STRING) estado_abrev,
-SAFE_CAST(code_muni AS NUMERIC) id_municipio,
-SAFE_CAST(name_muni AS STRING) nome_municipio,
-SAFE_CAST(code_district AS NUMERIC) id_distrito,
-SAFE_CAST(name_district AS STRING) nome_distrito,
-SAFE_CAST(code_subdistrict AS NUMERIC) id_subdistrito,
-SAFE_CAST(name_subdistrict AS STRING) nome_subdistrito,
-SAFE_CAST(code_neighborhood AS NUMERIC) id_vizinhanca,
-SAFE_CAST(name_neighborhood AS STRING) nome_vizinhanca,
-SAFE.ST_GEOGFROMTEXT(geometry) geometria
-from basedosdados-staging.br_geobr_mapas_staging.setor_censitario_2010 as t
+SAFE_CAST(id_uf AS STRING) id_uf,
+SAFE_CAST(estado_abrev AS STRING) sigla_uf,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(nome_municipio AS STRING) nome_municipio,
+SAFE_CAST(id_distrito AS STRING) id_distrito,
+SAFE_CAST(nome_distrito AS STRING) nome_distrito,
+SAFE_CAST(id_subdistrito AS STRING) id_subdistrito,
+SAFE_CAST(nome_subdistrito AS STRING) nome_subdistrito,
+SAFE_CAST(id_vizinhanca AS STRING) id_vizinhanca,
+SAFE_CAST(nome_vizinhanca AS STRING) nome_vizinhanca,
+SAFE_CAST(id_setor_censitario AS STRING) id_setor_censitario,
+SAFE_CAST(zona AS STRING) zona,
+SAFE.ST_GEOGFROMTEXT(geometria) geometria
+from basedosdados-dev.br_geobr_mapas_staging.setor_censitario_2010 as t

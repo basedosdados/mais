@@ -1,0 +1,62 @@
+Terceirizados contratados pelo governo para prestação de serviços gerais.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-cgu-pessoal-executivo-federal
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_pessoal_executivo_federal
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Crislane A. Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_pessoal_executivo_federal/code
+Website: https://github.com/crislanealves
+Email: crislanealves@protonmail.comTratado por
+-----------
+Nome: Crislane A. Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_pessoal_executivo_federal/code
+Website: https://github.com/crislanealves
+Email: crislanealves@protonmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- ano
+- mes
+- id terceirizado
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- mes
+- id_terceirizado
+
+Cobertura Temporal
+------------------
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Exclusão, renomeação e reordenação de colunas. 
+
+Frequencia de Atualização
+-------------------------
+trimestral
+
+

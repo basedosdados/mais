@@ -1,0 +1,66 @@
+Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) agrupados pelo código de DDD formando a série histórica de 2009 a 2021. Dos arquivos disponíveis no arquivo .zip, utiliza-se a planilha com especificação de sinal (1G, 2G, 3G e 4G) e tecnologia para o período inicial de 2009 a 2018. Após reformulação na coleta de dados - a partir de 2019 inclui-se dados a nível municipal - os microdados são agrupados ao nível do código de Discagem Direta a Distância a fim de poder se acompanhar a evolução da tecnologia e conectividade no Brasil. O resultado trata-se do total de acessos/contratos por ano, mês, DDD e as especificações de tecnologia e sinal.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-anatel-telefonia-movel
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
+Email: lucas.nasc.m@gmail.comTratado por
+-----------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
+Email: lucas.nasc.m@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- ddd
+- tecnologia
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- mes
+- sigla_uf
+- ddd
+- tecnologia
+- sinal
+
+Cobertura Temporal
+------------------
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- Brasil
+
+Tratamento
+----------
+Download das bases e a renomeação das colunas segundo padrão da BD+;
+Limpeza de variáveis exclusivas dos arquivos originais para unificação de períodos diferentes de coleta;
+Exclusão de observações do tipo NaN da variável 'ddd';
+Agrupamento e concatenação da base a nível do DDD para o período de 2009 a 2021;
+
+Frequencia de Atualização
+-------------------------
+mes
+
+

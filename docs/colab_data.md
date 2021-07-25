@@ -15,7 +15,7 @@ Quer subir dados na BD+ e nos ajudar a construir esse repositório? Maravilha! V
 
 Ao longo da explicação, vamos sempre seguir um exemplo já pronto com dados da [RAIS](https://basedosdados.org/dataset/br-me-rais).
 
-!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/2GAuw7d8zd) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
+!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
 
 ## Qual o procedimento?
 
@@ -38,7 +38,7 @@ Mantemos metadados de bases que ainda não estão na BD+ em nossa [tabela de pri
 
 !!! Info "Caso sua base já esteja listada, basta marcar seu usuário do Github na coluna `Pessoa responsável`."
 
-!!! Info "Fique à vontade para conversar com a gente e tirar dúvidas direto no nosso servidor no [Discord](https://discord.gg/2GAuw7d8zd)."
+!!! Info "Fique à vontade para conversar com a gente e tirar dúvidas direto no nosso servidor no [Discord](https://discord.gg/huKWpsVYx4)."
 
 ## 2. Baixar nossa pasta _template_ para dados
 
@@ -155,6 +155,12 @@ No seu terminal:
 
 - Instale nosso cliente: `pip install basedosdados`.
 - Rode `basedosdados config init` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
+> Caso seu ambiente de produção não permita o uso interativo do nosso cliente ou apresente alguma outra dificuldade relativa a esse modo de configuração, você pode configurar o `basedosdados` a partir de variáveis de ambiente da seguinte forma:
+>```
+> export BASEDOSDADOS_CONFIG=$(cat ~/.basedosdados/config.toml | base64)
+> export BASEDOSDADOS_CREDENTIALS_PROD=$(cat ~/.basedosdados/credentials/prod.json | base64)
+> export BASEDOSDADOS_CREDENTIALS_STAGING=$(cat ~/.basedosdados/credentials/staging.json | base64)
+>```
 - Clone um _fork_ do nosso [repositório](https://github.com/basedosdados/mais) localmente.
 - Dê um `cd` para a pasta local do repositório e abra uma nova branch com `git checkout -b [BRANCH_ID]`.
 
@@ -165,19 +171,21 @@ Todas as adições e modificações serão feitas nessa _branch_.
 Aqui são dois passos: primeiro publicamos uma base e depois publicamos tabelas.
 
 - Publique uma base.
-    - Rode o comando `basedosdados dataset create [DATASET_ID] --raw_path '/[DATASET_ID]/input' --auxiliary_files_path '/[DATASET_ID]/extra/auxiliary_files'`.
+    - Rode o comando `basedosdados dataset create [DATASET_ID]`.
     - Preencha os arquivos de configuração da base:
         - `README.md`: informações básicas da base de dados aparecendo no Github.
         - `dataset_config.yaml`: informações específicas da base de dados.
     - Rode o comando `basedosdados dataset update [DATASET_ID]` para atualizar a base com as configurações preenchidas.
 - Publique uma tabela (ou várias!) dentro da base
-    - Rode o comando `basedosdados table create [DATASET_ID] [TABLE_ID] --data_path '/[DATASET_ID]/output/[TABLE_ID]' --architecture_path '/[DATASET_ID]/extra/architecture/[TABLE_ID]'`.
+    - Rode o comando `basedosdados table create [DATASET_ID] [TABLE_ID] --path '/[DATASET_ID]/output/[TABLE_ID]'`.
     - Preencha os arquivos de configuração da tabela:
         - `/[TABLE_ID]/table_config.yaml`: informações específicas da tabela.
         - `/[TABLE_ID]/publish.sql`: aqui você pode fazer tratamentos finais na tabela `staging` em SQL para publicação. Exemplo: modificar a query para dar um JOIN em outra tabela da BD+ e selecionar variáveis.
     - Rode o comando `basedosdados table publish [DATASET_ID] [TABLE_ID]` para publicar a tabela em produção.
 
 Consulte também nossa [API](/mais/reference_api_cli) para mais detalhes de cada método.
+
+!!! Tip "Temos um [issue aberto no Github](https://github.com/basedosdados/mais/issues/496) para criar funcionalidades de upload de arquiteturas, arquivos originais e arquivos auxiliares. Você pode colaborar com a Base dos Dados resolvendo ele!"
 
 É sempre bom abrir o console do BigQuery e rodar algumas _queries_ para testar se foi tudo publicado corretamente. Estamos desenvolvendo testes automáticos para facilitar esse processo no futuro.
 
