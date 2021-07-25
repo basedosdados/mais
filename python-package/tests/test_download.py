@@ -60,6 +60,8 @@ def test_download_invalid_billing_project_id():
             SAVEFILE,
             query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
             billing_project_id="inexistent_project_id",
+            index=False,
+            from_file=True
         )
     
     with pytest.raises(GenericGBQException, match=pattern):
@@ -68,7 +70,9 @@ def test_download_invalid_billing_project_id():
             dataset_id="br_ibge_pib",
             table_id="municipio",
             limit=10,
-            billing_project_id="inexistent_project_id"
+            billing_project_id="inexistent_project_id",
+            index=False,
+            from_file=True
         )
 
 
@@ -129,6 +133,20 @@ def test_download_by_query_inexistent_table():
         )
     
     assert "Reason: 404 Not found: Table" in str(excinfo.value)
+
+
+def test_download_by_query_syntax_error():
+
+        with pytest.raises(GenericGBQException) as excinfo:
+            download(
+                SAVEFILE,
+                query="invalid_statement * from `basedosdados.br_ibge_pib.municipio` limit 10",
+                billing_project_id=TEST_PROJECT_ID,
+                index=False,
+                from_file=True
+            )
+        
+        assert "Reason: 400 Syntax error" in str(excinfo.value)
 
 
 def test_download_by_table():
