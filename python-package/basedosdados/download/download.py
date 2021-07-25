@@ -1,4 +1,3 @@
-from google.api_core.exceptions import NotFound
 from google.cloud.bigquery import dataset
 import pandas_gbq
 from pathlib import Path

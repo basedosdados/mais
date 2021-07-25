@@ -76,10 +76,6 @@ def test_download_invalid_billing_project_id():
         )
 
 
-def test_download_access_denied():
-    pass
-
-
 def test_download_by_query():
 
     download(
