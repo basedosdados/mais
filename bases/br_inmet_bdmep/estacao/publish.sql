@@ -19,13 +19,13 @@ TIPOS:
 
 */
 
-CREATE VIEW projetos-bd.br_inmet_bdmep.estacoes AS
+CREATE VIEW projetos-bd.br_inmet_bdmep.estacao AS
 SELECT 
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(id_estacao AS STRING) id_estacao,
 SAFE_CAST(estacao AS STRING) estacao,
+SAFE_CAST(data_fundacao AS DATE) data_fundacao,
 SAFE_CAST(latitude AS FLOAT64) latitude,
 SAFE_CAST(longitude AS FLOAT64) longitude,
-SAFE_CAST(altitude AS FLOAT64) altitude,
-SAFE_CAST(data_fundacao AS DATE) data_fundacao,
-SAFE_CAST(id_municipio AS STRING) id_municipio
-from projetos-bd.br_inmet_bdmep_staging.estacoes as t
+SAFE_CAST(altitude AS FLOAT64) altitude
+from projetos-bd.br_inmet_bdmep_staging.estacao as t

@@ -1,7 +1,7 @@
 source_bucket_name: bd-inmet
 project_id_staging: projetos-bd
 project_id_prod: projetos-bd
-table_id: estacoes # AUTO GENERATED
+table_id: estacao # AUTO GENERATED
 dataset_id: br_inmet_bdmep # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-inmet-bdmep # AUTO GENERATED
@@ -9,7 +9,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdme
 
 version: 1.0 # REQUIRED
 
-last_updated: 2021-07-23 # AUTO GENERATED
+last_updated: 2021-07-25 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -122,7 +122,7 @@ columns: # REQUIRED
   
     -   
         name: estacao
-        description: Nome da estação
+        description: Nome da estação meteorológica
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

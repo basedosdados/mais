@@ -1,3 +1,4 @@
+O BDMEP abriga dados meteorológicos diários em forma digital, de séries históricas das várias estações meteorológicas convencionais da rede de estações do INMET com milhões de informações, referentes às medições diárias, de acordo com as normas técnicas internacionais da Organização Meteorológica Mundial
 
 
 Para saber mais acesse:
@@ -64,7 +65,9 @@ Cobertura Espacial
 
 Tratamento
 ----------
-O BDMEP abriga dados meteorológicos diários em forma digital, de séries históricas das várias estações meteorológicas convencionais da rede de estações do INMET com milhões de informações, referentes às medições diárias, de acordo com as normas técnicas internacionais da Organização Meteorológica Mundial.
+- Fazer download de todas as bases diretamente do site do INMET
+- Extrair informações de todas as estações 
+- Concatenar as informações em uma tabela única
 
 Frequencia de Atualização
 -------------------------
