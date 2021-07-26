@@ -1,3 +1,4 @@
+from os import read
 import pytest
 from pathlib import Path
 import pandas as pd
@@ -24,58 +25,6 @@ SAVEPATH = Path(__file__).parent / "tmp_bases"
 shutil.rmtree(SAVEPATH, ignore_errors=True)
 
 
-def test_download_no_billing_project_id():
-
-    with pytest.raises(BaseDosDadosException) as excinfo:
-        download(
-            SAVEFILE,
-            query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
-        )
-  
-    assert (
-        "We are not sure which Google Cloud project should be billed." \
-        in str(excinfo.value)
-    )
-
-    with pytest.raises(BaseDosDadosException) as excinfo:
-        download(
-            SAVEFILE,
-            dataset_id="br_ibge_pib",
-            table_id="municipio",
-            limit=10,
-        )
-    
-    assert (
-        "We are not sure which Google Cloud project should be billed." \
-        in str(excinfo.value)
-    )
-
-
-def test_download_invalid_billing_project_id():
-    
-    pattern = r"Reason: 400 POST .* Invalid project ID"
-    
-    with pytest.raises(GenericGBQException, match=pattern):
-        download(
-            SAVEFILE,
-            query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
-            billing_project_id="inexistent_project_id",
-            index=False,
-            from_file=True
-        )
-    
-    with pytest.raises(GenericGBQException, match=pattern):
-        download(
-            SAVEFILE,
-            dataset_id="br_ibge_pib",
-            table_id="municipio",
-            limit=10,
-            billing_project_id="inexistent_project_id",
-            index=False,
-            from_file=True
-        )
-
-
 def test_download_by_query():
 
     download(
@@ -87,62 +36,6 @@ def test_download_by_query():
     )
 
     assert SAVEFILE.exists()
-
-
-def test_download_by_query_inexistent_project():
-
-    with pytest.raises(GenericGBQException) as excinfo:
-        download(
-            SAVEFILE,
-            query="select * from `inexistent.br_ibge_inexistent.municipio` limit 10",
-            billing_project_id=TEST_PROJECT_ID,
-            index=False,
-            from_file=True
-        )
-    
-    assert "Reason: 400 The project inexistent" in str(excinfo.value)
-
-
-def test_download_by_query_inexistent_dataset():
-
-    with pytest.raises(GenericGBQException) as excinfo:
-        download(
-            SAVEFILE,
-            query="select * from `basedosdados.br_ibge_inexistent.municipio` limit 10",
-            billing_project_id=TEST_PROJECT_ID,
-            index=False,
-            from_file=True
-        )
-    
-    assert "Reason: 404 Not found: Dataset" in str(excinfo.value)
-
-
-def test_download_by_query_inexistent_table():
-
-    with pytest.raises(GenericGBQException) as excinfo:
-        download(
-            SAVEFILE,
-            query="select * from `basedosdados.br_ibge_pib.inexistent` limit 10",
-            billing_project_id=TEST_PROJECT_ID,
-            index=False,
-            from_file=True
-        )
-    
-    assert "Reason: 404 Not found: Table" in str(excinfo.value)
-
-
-def test_download_by_query_syntax_error():
-
-        with pytest.raises(GenericGBQException) as excinfo:
-            download(
-                SAVEFILE,
-                query="invalid_statement * from `basedosdados.br_ibge_pib.municipio` limit 10",
-                billing_project_id=TEST_PROJECT_ID,
-                index=False,
-                from_file=True
-            )
-        
-        assert "Reason: 400 Syntax error" in str(excinfo.value)
 
 
 def test_download_by_table():
@@ -158,38 +51,6 @@ def test_download_by_table():
     )
 
     assert SAVEFILE.exists()
-
-
-def test_download_by_table_inexistent_dataset():
-    
-    with pytest.raises(GenericGBQException) as excinfo:
-        download(
-            SAVEFILE,
-            dataset_id="inexistent",
-            table_id="municipio",
-            billing_project_id=TEST_PROJECT_ID,
-            limit=10,
-            from_file=True,
-            index=False,
-        )
-    
-    assert "Reason: 404 Not found: Dataset" in str(excinfo.value)
-
-
-def test_download_by_table_inexistent_table():
-    
-    with pytest.raises(GenericGBQException) as excinfo:
-        download(
-            SAVEFILE,
-            dataset_id="br_ibge_pib",
-            table_id="inexistent",
-            billing_project_id=TEST_PROJECT_ID,
-            limit=10,
-            from_file=True,
-            index=False,
-        )
-    
-    assert "Reason: 404 Not found: Table" in str(excinfo.value)
 
 
 def test_download_save_to_path():
@@ -242,6 +103,79 @@ def test_read_sql():
         ),
         pd.DataFrame,
     )
+
+
+def test_read_sql_no_billing_project_id():
+
+    with pytest.raises(BaseDosDadosException) as excinfo:
+        read_sql(
+            query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
+        )
+  
+    assert (
+        "We are not sure which Google Cloud project should be billed." \
+        in str(excinfo.value)
+    )
+
+
+def test_read_sql_invalid_billing_project_id():
+    
+    pattern = r"Reason: 400 POST .* Invalid project ID"
+    
+    with pytest.raises(GenericGBQException, match=pattern):
+        read_sql(
+            query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
+            billing_project_id="inexistent_project_id",
+            from_file=True,
+        )
+
+
+def test_read_sql_inexistent_project():
+
+    with pytest.raises(GenericGBQException) as excinfo:
+        read_sql(
+            query="select * from `inexistent.br_ibge_pib.municipio` limit 10",
+            billing_project_id=TEST_PROJECT_ID,
+            from_file=True
+        )
+    
+    assert "Reason: 400 The project inexistent" in str(excinfo.value)
+
+
+def test_read_sql_inexistent_dataset():
+
+    with pytest.raises(GenericGBQException) as excinfo:
+        read_sql(
+            query="select * from `basedosdados.br_ibge_inexistent.municipio` limit 10",
+            billing_project_id=TEST_PROJECT_ID,
+            from_file=True
+        )
+    
+    assert "Reason: 404 Not found: Dataset" in str(excinfo.value)
+
+
+def test_read_sql_inexistent_table():
+
+    with pytest.raises(GenericGBQException) as excinfo:
+        read_sql(
+            query="select * from `basedosdados.br_ibge_pib.inexistent` limit 10",
+            billing_project_id=TEST_PROJECT_ID,
+            from_file=True
+        )
+    
+    assert "Reason: 404 Not found: Table" in str(excinfo.value)
+
+
+def test_read_sql_syntax_error():
+
+        with pytest.raises(GenericGBQException) as excinfo:
+            read_sql(
+                query="invalid_statement * from `basedosdados.br_ibge_pib.municipio` limit 10",
+                billing_project_id=TEST_PROJECT_ID,
+                from_file=True
+            )
+        
+        assert "Reason: 400 Syntax error" in str(excinfo.value)
 
 
 def test_read_table():
