@@ -3,7 +3,7 @@
 ## Funções novas
 
 * `bdplyr` e `bd_collect` para manipular bases apenas com código de R, removendo SQL do caminho. Por trás dos panos o pacote [`dbplyr`](https://dbplyr.tidyverse.org/) está fazendo as traduções de R em SQL.
-* `bd_write`, `bd_write_rds` e `bd_write_csv` podem ser usadas no lugar de `bd_collect` para armazenar o resultado no disco, em um arquivo com formato desejado. `bd_write` é uma função de alta ordem e aceita funções de escrita para variados formatos, com suporte para customizar seus argumento via `...`.
+* `bd_write`, `bd_write_rds` e `bd_write_csv` podem ser usadas no lugar de `bd_collect` para armazenar o resultado no disco, em um arquivo com formato desejado. `bd_write` é uma função de alta ordem e aceita funções de escrita para variados formatos, com suporte para customizar seus argumentos via `...`.
 
 ## Mudanças
 
