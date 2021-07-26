@@ -22,5 +22,5 @@ CREATE VIEW basedosdados-dev.br_ibge_nomes_brasil.quantidade_municipio_nome_2010
 SELECT 
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(nome AS STRING) nome,
-SAFE_CAST(qtde_nascimentos_ate_2010 AS INT64) quantidade_nascimentos_ate_2010
+SAFE_CAST(quantidade_nascimentos_ate_2010 AS INT64) quantidade_nascimentos_ate_2010
 from basedosdados-dev.br_ibge_nomes_brasil_staging.quantidade_municipio_nome_2010 as t
