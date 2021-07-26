@@ -11,11 +11,10 @@ import json
 import os
 from pathlib import Path
 
+import bd_credential
 import pytest
 import yaml
 from jinja2 import Template
-
-import bd_credential
 
 # -------------------------------------
 # Execute once at session start
@@ -37,6 +36,19 @@ def omit_hints(data):
     return data
 
 
+def get_table_configs():
+    """Load table_config.yaml files"""
+    files = open("files.json", "r").read()
+    files = json.load(files)
+
+    folders = [Path(file).parent for file in files]
+
+    files = [folder / "table_config.yaml" for folder in folders]
+    files = [file for file in files if file.exists()]
+
+    return files
+
+
 def pytest_sessionstart(session):
     """Initialize session, loading table configs"""
     global _configs
@@ -44,7 +56,7 @@ def pytest_sessionstart(session):
     # set filepaths for checks and configs
     check_path = "./.github/workflows/data-check/checks.yaml"  # change this line to "checks.yaml" for local debugging
     config_paths = (
-        bd_credential.setup()
+        get_table_configs()
     )  # replace this line with a list of table_config.yaml paths for local debugging
 
     # load checks with jinja2 placeholders
