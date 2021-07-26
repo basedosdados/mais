@@ -227,6 +227,6 @@ SAFE_CAST(ied_em_nivel_2 AS FLOAT64) ied_em_nivel_2,
 SAFE_CAST(ied_em_nivel_3 AS FLOAT64) ied_em_nivel_3,
 SAFE_CAST(ied_em_nivel_4 AS FLOAT64) ied_em_nivel_4,
 SAFE_CAST(ied_em_nivel_5 AS FLOAT64) ied_em_nivel_5,
-SAFE_CAST(ied_em_nivel_6 AS FLOAT64) ied_em_nivel_6
+SAFE_CAST(ied_em_nivel_6 AS FLOAT64) ied_em_nivel_6,
 SAFE_CAST(icg_nivel_complexidade_gestao_escola AS STRING) icg_nivel_complexidade_gestao_escola
 from basedosdados-dev.br_inep_indicadores_educacionais_staging.escola as t
