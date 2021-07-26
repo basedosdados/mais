@@ -166,6 +166,7 @@ Você pode contribuir de várias maneiras:
 - Reportando bugs
 - Ajudando na captação de recursos
 - Nos chamando para aprensetações, simpósios e conferências
+- Corrigindo [links quebrados](https://docs.google.com/spreadsheets/d/1vcrf2JGiJfu5_NuiB358mkHZh1sPSyeXOLVHKQMFSMc/edit#gid=1075131026) no site
 
 **Incentivamos que outras instituições e pessoas contribuam**. [Veja mais
 como contribuir](https://basedosdados.github.io/mais/colab_data/) e
