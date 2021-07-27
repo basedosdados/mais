@@ -7,7 +7,7 @@
 
 
 <p align="center">
-    <em>Mecanismo de busca e <b>repositório</b> de bases de dados brasileiras e internacionais.</em>
+    <em>Universalizando o acesso a dados de qualidade no Brasil.</em>
 </p>
 
 <p align="center">
