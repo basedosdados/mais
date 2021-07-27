@@ -183,7 +183,7 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
             )
             raise BaseDosDadosException(msg) from e
         
-        elif re.match("Reason: 400 POST .* Invalid project ID", str(e)):
+        elif re.match("Reason: 400 POST .* [Pp]roject[ ]*I[Dd]", str(e)):
             msg = (
                 "\nYou are using an invalid `billing_project_id`.\nMake sure "
                 "you set it to the Project ID available in your Google Cloud"
@@ -206,8 +206,12 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
         )
         raise BaseDosDadosException(msg) from e
 
-    except ValueError as e:
-        if "Could not determine project ID" in str(e):
+    except (OSError, ValueError) as e:
+        exc_from_no_billing_id = (
+            "Could not determine project ID" in str(e) or \
+            "reading from stdin while output is captured" in str(e)
+        )
+        if exc_from_no_billing_id:
             msg = (
                 "\nWe are not sure which Google Cloud project should be billed.\n"
                 "First, you should make sure that you have a Google Cloud project.\n"
