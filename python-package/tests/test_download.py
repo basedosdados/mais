@@ -120,9 +120,9 @@ def test_read_sql_no_billing_project_id():
 
 def test_read_sql_invalid_billing_project_id():
     
-    pattern = r"Reason: 400 POST .* Invalid project ID"
+    pattern = r"You are using an invalid `billing_project_id`"
     
-    with pytest.raises(GenericGBQException, match=pattern):
+    with pytest.raises(BaseDosDadosException, match=pattern):
         read_sql(
             query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
             billing_project_id="inexistent_project_id",
@@ -134,12 +134,12 @@ def test_read_sql_inexistent_project():
 
     with pytest.raises(GenericGBQException) as excinfo:
         read_sql(
-            query="select * from `inexistent.br_ibge_pib.municipio` limit 10",
+            query="select * from `asedosdados.br_ibge_pib.municipio` limit 10",
             billing_project_id=TEST_PROJECT_ID,
             from_file=True
         )
     
-    assert "Reason: 400 The project inexistent" in str(excinfo.value)
+    assert "Reason: 404 Not found: Project" in str(excinfo.value)
 
 
 def test_read_sql_inexistent_dataset():
