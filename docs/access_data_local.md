@@ -26,11 +26,9 @@ analisar:
     ```
 
 === "R"
-    Ainda não temos suporte oficial para R, mas recomendamos o pacote [bigrquery](https://bigrquery.r-dbi.org/).
-    ```bash
-    install.packages("bigrquery")
+    ```R
+    install.packages("basedosdados")
     ```
-    Seja a primeira pessoa a contribuir (veja Issue #82 no GitHub)!
 === "Stata"
     ```bash
     # Ainda não temos suporte :( 
@@ -75,10 +73,10 @@ em todos os anos disponíveis**.
     SELECT 
         pib.id_municipio, 
         pop.ano,  
-        pib.PIB / pop.populacao * 1000 as pib_per_capita 
-    FROM `basedosdados.br_ibge_pib.municipios` as pib 
-    INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop 
-    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
+        pib.PIB / pop.populacao as pib_per_capita 
+    FROM `basedosdados.br_ibge_pib.municipio` as pib 
+        INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop 
+        ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
     LIMIT 100;'
     ```
 
@@ -91,10 +89,10 @@ em todos os anos disponíveis**.
     pib_per_capita = """SELECT 
         pib.id_municipio ,
         pop.ano, 
-        pib.PIB / pop.populacao * 1000 as pib_per_capita
-    FROM `basedosdados.br_ibge_pib.municipios` as pib
-    INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
+        pib.PIB / pop.populacao as pib_per_capita
+    FROM `basedosdados.br_ibge_pib.municipio` as pib
+        INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop
+        ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
     """
 
     # Você pode fazer o download no seu computador
@@ -109,7 +107,7 @@ em todos os anos disponíveis**.
     # é o basedosdados, você pode usar esse parâmetro para escolher outro projeto
     df = bd.read_table(
             dataset_id='br_ibge_populacao', 
-            table_id='municipios',
+            table_id='municipio',
             billing_project_id=<YOUR_PROJECT_ID>,
             limit=100
     )
@@ -119,20 +117,25 @@ em todos os anos disponíveis**.
 
 === "R"
     ```R
-    if (!require("bigrquery")) install.packages("bigrquery")
-    library("bigrquery")
+    if (!require("basedosdados")) install.packages("basedosdados")
+    library("basedosdados")
 
-    billing_project_id = "<YOUR_PROJECT_ID>"
+    set_billing_id("<YOUR_PROJECT_ID>")
 
-    pib_per_capita = "SELECT 
-        pib.id_municipio ,
-        pop.ano, 
-        pib.PIB / pop.populacao * 1000 as pib_per_capita
-    FROM `basedosdados.br_ibge_pib.municipios` as pib
-    INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
+    query <- "SELECT
+        pib.id_municipio,
+        pop.ano,
+        pib.PIB / pop.populacao as pib_per_capita
+        FROM `basedosdados.br_ibge_pib.municipio` as pib
+            JOIN `basedosdados.br_ibge_populacao.municipio` as pop
+            ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
 
-    d <- bq_table_download(bq_project_query(billing_project_id, pib_per_capita), page_size=500, bigint="integer64")
+    # Você pode fazer o download no seu computador
+    dir <- tempdir()
+    data <- download(query, file.path(dir, "pib_per_capita.csv"))
+
+    # Ou carregar o resultado da query no seu ambiente de análise
+    data <- read_sql(query)
     ```
 
 === "Stata"

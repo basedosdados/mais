@@ -28,6 +28,8 @@ Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
 - ano
+- localizacao
+- rede
 
 Colunas identificando linhas unicamente
 -------------------
@@ -52,6 +54,7 @@ Cobertura Temporal
 - 2017
 - 2018
 - 2019
+- 2020
 
 Cobertura Espacial
 ------------------
@@ -59,10 +62,10 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Padronização dos nomes das colunas.
-Exclusão das colunas Região, Nome do Município e UF.
-Palavras sem acento e minúsculas.
-Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
+- Padronização dos nomes das colunas.
+- Exclusão das colunas Região, Nome do Município e UF.
+- Palavras sem acento e minúsculas.
+- Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
 
 Frequencia de Atualização
 -------------------------

@@ -1,0 +1,1404 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: regiao # AUTO GENERATED
+dataset_id: br_inep_indicadores_educacionais # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-inep-indicadores-educacionais # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais # AUTO GENERATED
+
+version: v1.0 # REQUIRED
+
+last_updated: 2021-02-23 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Indicadores educacionais do Inep.
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Hevilyn Souza  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code # REQUIRED
+    website: https://github.com/Hevilyn
+    email: hevilynsouza12@hotmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Hevilyn Souza
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
+    website: https://basedosdados.org/
+    email: hevilynsouza12@hotmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    - Padronização dos nomes das colunas.
+    - Exclusão das colunas Região, Nome do Município e UF.
+    - Palavras sem acento e minúsculas.
+    - Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: 1 ano # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - ano
+    - regiao
+    - localizacao
+    - rede
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - ano
+    - regiao
+    - localizacao
+    - rede
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2006
+    - 2007
+    - 2008
+    - 2009
+    - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
+    - 2020
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+  
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: regiao
+        description: Região
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: localizacao
+        description: Localização
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: rede
+        description: Rede Escolar
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ei
+        description: Média de Alunos por Turma - Educação Infantil
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ei_creche
+        description: Média de Alunos por Turma - Educação Infantil - Creche
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ei_pre_escola
+        description: Média de Alunos por Turma - Educação Infantil - Pré escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef
+        description: Média de Alunos por Turma - Ensino Fundamental (Turmas Unificadas inclusas no cálculo do indicador a partir de 2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef_anos_iniciais
+        description: Média de Alunos por Turma - Ensino Fundamental Anos Iniciais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef_anos_finais
+        description: Média de Alunos por Turma - Ensino Fundamental Anos Finais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef_1_ano
+        description: Média de Alunos por Turma - Ensino Fundamental 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef_2_ano
+        description: Média de Alunos por Turma - Ensino Fundamental 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef_3_ano
+        description: Média de Alunos por Turma - Ensino Fundamental 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef_4_ano
+        description: Média de Alunos por Turma - Ensino Fundamental 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef_5_ano
+        description: Média de Alunos por Turma - Ensino Fundamental 5º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef_6_ano
+        description: Média de Alunos por Turma - Ensino Fundamental 6º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef_7_ano
+        description: Média de Alunos por Turma - Ensino Fundamental 7º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef_8_ano
+        description: Média de Alunos por Turma - Ensino Fundamental 8º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef_9_ano
+        description: Média de Alunos por Turma - Ensino Fundamental 9º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_ef_turmas_unif_multi_fluxo
+        description: Média de Alunos por Turma - Ensino Fundamental - Turmas Unificadas, Multi, Multietapa e Correção de fluxo (Turmas unificadas foram retiradas do cálculo a partir de 2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_em
+        description: Média de Alunos por Turma - Ensino Médio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_em_1_ano
+        description: Média de Alunos por Turma - Ensino Médio 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_em_2_ano
+        description: Média de Alunos por Turma - Ensino Médio 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_em_3_ano
+        description: Média de Alunos por Turma - Ensino Médio 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_em_4_ano
+        description: Média de Alunos por Turma - Ensino Médio 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: atu_em_nao_seriado
+        description: Média de Alunos por Turma - Ensino Médio Não Seriado
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ei
+        description: Média de Horas-Aula diária - Educação Infantil
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ei_creche
+        description: Média de Horas-Aula diária - Educação Infantil Creche
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ei_pre_escola
+        description: Média de Horas-Aula diária - Educação Infantil Pré-escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ef
+        description: Média de Horas-Aula diária - Ensino Fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ef_anos_iniciais
+        description: Média de Horas-Aula diária - Ensino Fundamental Anos Iniciais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ef_anos_finais
+        description: Média de Horas-Aula diária - Ensino Fundamental Anos Finais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ef_1_ano
+        description: Média de Horas-Aula diária - Ensino Fundamental 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ef_2_ano
+        description: Média de Horas-Aula diária - Ensino Fundamental 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ef_3_ano
+        description: Média de Horas-Aula diária - Ensino Fundamental 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ef_4_ano
+        description: Média de Horas-Aula diária - Ensino Fundamental 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ef_5_ano
+        description: Média de Horas-Aula diária - Ensino Fundamental 5º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ef_6_ano
+        description: Média de Horas-Aula diária - Ensino Fundamental 6º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ef_7_ano
+        description: Média de Horas-Aula diária - Ensino Fundamental 7º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ef_8_ano
+        description: Média de Horas-Aula diária - Ensino Fundamental 8º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_ef_9_ano
+        description: Média de Horas-Aula diária - Ensino Fundamental 9º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_em
+        description: Média de Horas-Aula diária - Ensino Médio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_em_1_ano
+        description: Média de Horas-Aula diária - Ensino Médio 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_em_2_ano
+        description: Média de Horas-Aula diária - Ensino Médio 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_em_3_ano
+        description: Média de Horas-Aula diária - Ensino Médio 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+
+    -    
+        name: had_em_4_ano
+        description: Média de Horas-Aula diária - Ensino Médio 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: had_em_nao_seriado
+        description: Média de Horas-Aula diária - Ensino Médio Não Seriado
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_ef
+        description: Taxa de distorção idade-série - Ensino Fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_ef_anos_iniciais
+        description: Taxa de distorção idade-série - Ensino Fundamental Anos Iniciais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_ef_anos_finais
+        description: Taxa de distorção idade-série - Ensino Fundamental Anos Finais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_ef_1_ano
+        description: Taxa de distorção idade-série - Ensino Fundamental 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_ef_2_ano
+        description: Taxa de distorção idade-série - Ensino Fundamental 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_ef_3_ano
+        description: Taxa de distorção idade-série - Ensino Fundamental 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_ef_4_ano
+        description: Taxa de distorção idade-série - Ensino Fundamental 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_ef_5_ano
+        description: Taxa de distorção idade-série - Ensino Fundamental 5º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_ef_6_ano
+        description: Taxa de distorção idade-série - Ensino Fundamental 6º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_ef_7_ano
+        description: Taxa de distorção idade-série - Ensino Fundamental 7º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_ef_8_ano
+        description: Taxa de distorção idade-série - Ensino Fundamental 8º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_ef_9_ano
+        description: Taxa de distorção idade-série - Ensino Fundamental 9º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_em
+        description: Taxa de distorção idade-série - Ensino Médio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_em_1_ano
+        description: Taxa de distorção idade-série - Ensino Médio 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_em_2_ano
+        description: Taxa de distorção idade-série - Ensino Médio 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_em_3_ano
+        description: Taxa de distorção idade-série - Ensino Médio 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tdi_em_4_ano
+        description: Taxa de distorção idade-série - Ensino Médio 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_ef
+        description: Taxa de Aprovação - Ensino Fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_ef_anos_iniciais
+        description: Taxa de Aprovação - Ensino Fundamental Anos Iniciais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_ef_anos_finais
+        description: Taxa de Aprovação - Ensino Fundamental Anos Finais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_ef_1_ano
+        description: Taxa de Aprovação - Ensino Fundamental 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_ef_2_ano
+        description: Taxa de Aprovação - Ensino Fundamental 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_ef_3_ano
+        description: Taxa de Aprovação - Ensino Fundamental 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_ef_4_ano
+        description: Taxa de Aprovação - Ensino Fundamental 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_ef_5_ano
+        description: Taxa de Aprovação - Ensino Fundamental 5º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_ef_6_ano
+        description: Taxa de Aprovação - Ensino Fundamental 6º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_ef_7_ano
+        description: Taxa de Aprovação - Ensino Fundamental 7º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_ef_8_ano
+        description: Taxa de Aprovação - Ensino Fundamental 8º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_ef_9_ano
+        description: Taxa de Aprovação - Ensino Fundamental 9º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_em
+        description: Taxa de Aprovação - Ensino Médio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_em_1_ano
+        description: Taxa de Aprovação - Ensino Médio 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_em_2_ano
+        description: Taxa de Aprovação - Ensino Médio 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_em_3_ano
+        description: Taxa de Aprovação - Ensino Médio 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_em_4_ano
+        description: Taxa de Aprovação - Ensino Médio 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_aprovacao_em_nao_seriado
+        description: Taxa de Aprovação - Ensino Médio Não Seriado
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_ef
+        description: Taxa de Reprovação - Ensino Fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_ef_anos_iniciais
+        description: Taxa de Reprovação - Ensino Fundamental Anos Iniciais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_ef_anos_finais
+        description: Taxa de Reprovação - Ensino Fundamental Anos Finais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_ef_1_ano
+        description: Taxa de Reprovação - Ensino Fundamental 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_ef_2_ano
+        description: Taxa de Reprovação - Ensino Fundamental 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_ef_3_ano
+        description: Taxa de Reprovação - Ensino Fundamental 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_ef_4_ano
+        description: Taxa de Reprovação - Ensino Fundamental 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_ef_5_ano
+        description: Taxa de Reprovação - Ensino Fundamental 5º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_ef_6_ano
+        description: Taxa de Reprovação - Ensino Fundamental 6º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_ef_7_ano
+        description: Taxa de Reprovação - Ensino Fundamental 7º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_ef_8_ano
+        description: Taxa de Reprovação - Ensino Fundamental 8º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_ef_9_ano
+        description: Taxa de Reprovação - Ensino Fundamental 9º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_em
+        description: Taxa de Reprovação - Ensino Médio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_em_1_ano
+        description: Taxa de Reprovação - Ensino Médio 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_em_2_ano
+        description: Taxa de Reprovação - Ensino Médio 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_em_3_ano
+        description: Taxa de Reprovação - Ensino Médio 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_em_4_ano
+        description: Taxa de Reprovação - Ensino Médio 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_reprovacao_em_nao_seriado
+        description: Taxa de Reprovação - Ensino Médio Não Seriado
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_ef
+        description: Taxa de Abandono - Ensino Fundamental 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_ef_anos_iniciais
+        description: Taxa de Abandono - Ensino Fundamental Anos Iniciais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_ef_anos_finais
+        description: Taxa de Abandono - Ensino Fundamental Anos Finais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_ef_1_ano
+        description: Taxa de Abandono - Ensino Fundamental 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_ef_2_ano
+        description: Taxa de Abandono - Ensino Fundamental 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_ef_3_ano
+        description: Taxa de Abandono - Ensino Fundamental 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_ef_4_ano
+        description: Taxa de Abandono - Ensino Fundamental 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_ef_5_ano
+        description: Taxa de Abandono - Ensino Fundamental 5º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_ef_6_ano
+        description: Taxa de Abandono - Ensino Fundamental 6º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_ef_7_ano
+        description: Taxa de Abandono - Ensino Fundamental 7º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_ef_8_ano
+        description: Taxa de Abandono - Ensino Fundamental 8º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_ef_9_ano
+        description: Taxa de Abandono - Ensino Fundamental 9º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_em
+        description: Taxa de Abandono - Ensino Médio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_em_1_ano
+        description: Taxa de Abandono - Ensino Médio 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_em_2_ano
+        description: Taxa de Abandono - Ensino Médio 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_em_3_ano
+        description: Taxa de Abandono - Ensino Médio 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_em_4_ano
+        description: Taxa de Abandono - Ensino Médio 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_abandono_em_nao_seriado
+        description: Taxa de Abandono - Ensino Médio Não seriado
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_ef
+        description: Taxa de Não Resposta - Ensino Fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_ef_anos_iniciais
+        description: Taxa de Não Resposta - Ensino Fundamental Anos Iniciais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_ef_anos_finais
+        description: Taxa de Não Resposta - Ensino Fundamental Anos Finais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_ef_1_ano
+        description: Taxa de Não Resposta - Ensino Fundamental 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_ef_2_ano
+        description: Taxa de Não Resposta - Ensino Fundamental 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_ef_3_ano
+        description: Taxa de Não Resposta - Ensino Fundamental 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_ef_4_ano
+        description: Taxa de Não Resposta - Ensino Fundamental 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_ef_5_ano
+        description: Taxa de Não Resposta - Ensino Fundamental 5º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_ef_6_ano
+        description: Taxa de Não Resposta - Ensino Fundamental 6º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_ef_7_ano
+        description: Taxa de Não Resposta - Ensino Fundamental 7º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_ef_8_ano
+        description: Taxa de Não Resposta - Ensino Fundamental 8º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_ef_9_ano
+        description: Taxa de Não Resposta - Ensino Fundamental 9º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_em
+        description: Taxa de Não Resposta - Ensino Médio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_em_1_ano
+        description: Taxa de Não Resposta - Ensino Médio 1º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_em_2_ano
+        description: Taxa de Não Resposta - Ensino Médio 2º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_em_3_ano
+        description: Taxa de Não Resposta - Ensino Médio 3º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_em_4_ano
+        description: Taxa de Não Resposta - Ensino Médio 4º ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tnr_em_nao_seriado
+        description: Taxa de Não Resposta - Ensino Médio Não Seriado
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dsu_ei
+        description: Percentual de Docentes com Curso Superior - Educação Infantil
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dsu_ei_creche
+        description: Percentual de Docentes com Curso Superior - Educação Infantil Creche
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dsu_ei_pre_escola
+        description: Percentual de Docentes com Curso Superior - Educação Infantil Pré-escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dsu_ef
+        description: Percentual de Docentes com Curso Superior - Ensino Fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dsu_ef_anos_iniciais
+        description: Percentual de Docentes com Curso Superior - Ensino Fundamental Anos Iniciais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dsu_ef_anos_finais
+        description: Percentual de Docentes com Curso Superior - Ensino Fundamental Anos Finais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dsu_em
+        description: Percentual de Docentes com Curso Superior - Ensino Médio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dsu_ep
+        description: Percentual de Docentes com Curso Superior - Educação Profissional
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dsu_eja
+        description: Percentual de Docentes com Curso Superior - Educação Jovens Adultos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: dsu_ee
+        description: Percentual de Docentes com Curso Superior - Educação Especial
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ei_grupo_1
+        description: Adequação da Formação Docente - Educação Infantil Grupo 1
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ei_grupo_2
+        description: Adequação da Formação Docente - Educação Infantil Grupo 2
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ei_grupo_3
+        description: Adequação da Formação Docente - Educação Infantil Grupo 3
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ei_grupo_4
+        description: Adequação da Formação Docente - Educação Infantil Grupo 4
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ei_grupo_5
+        description: Adequação da Formação Docente - Educação Infantil Grupo 5
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_grupo_1
+        description: Adequação da Formação Docente - Ensino Fundamental Grupo 1
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_grupo_2
+        description: Adequação da Formação Docente - Ensino Fundamental Grupo 2 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_grupo_3
+        description: Adequação da Formação Docente - Ensino Fundamental Grupo 3
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_grupo_4
+        description: Adequação da Formação Docente - Ensino Fundamental Grupo 4
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_grupo_5
+        description: Adequação da Formação Docente - Ensino Fundamental Grupo 5
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_anos_iniciais_grupo_1
+        description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais Grupo 1
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_anos_iniciais_grupo_2
+        description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais Grupo 2
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_anos_iniciais_grupo_3
+        description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais Grupo 3
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_anos_iniciais_grupo_4
+        description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais Grupo 4
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_anos_iniciais_grupo_5
+        description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais Grupo 5
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_anos_finais_grupo_1
+        description: Adequação da Formação Docente - Ensino Fundamental Anos Finais Grupo 1
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_anos_finais_grupo_2
+        description: Adequação da Formação Docente - Ensino Fundamental Anos Finais Grupo 2
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_anos_finais_grupo_3
+        description: Adequação da Formação Docente - Ensino Fundamental Anos Finais Grupo 3
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_anos_finais_grupo_4
+        description: Adequação da Formação Docente - Ensino Fundamental Anos Finais Grupo 4
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_ef_anos_finais_grupo_5
+        description: Adequação da Formação Docente - Ensino Fundamental Anos Finais Grupo 5
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_em_grupo_1
+        description: Adequação da Formação Docente - Ensino Médio Grupo 1
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_em_grupo_2
+        description: Adequação da Formação Docente - Ensino Médio Grupo 2
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_em_grupo_3
+        description: Adequação da Formação Docente - Ensino Médio Grupo 3
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_em_grupo_4
+        description: Adequação da Formação Docente - Ensino Médio Grupo 4
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_em_grupo_5
+        description: Adequação da Formação Docente - Ensino Médio Grupo 5
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_eja_fundamental_grupo_1
+        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Fundamental Grupo 1
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_eja_fundamental_grupo_2
+        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Fundamental Grupo 2
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_eja_fundamental_grupo_3
+        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Fundamental Grupo 3
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_eja_fundamental_grupo_4
+        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Fundamental Grupo 4
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_eja_fundamental_grupo_5
+        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Fundamental Grupo 5
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_eja_medio_grupo_1
+        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Médio Grupo 1
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_eja_medio_grupo_2
+        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Médio Grupo 2
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_eja_medio_grupo_3
+        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Médio Grupo 3
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_eja_medio_grupo_4
+        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Médio Grupo 4
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: afd_eja_medio_grupo_5
+        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Médio Grupo 5
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ird_baixa_regularidade
+        description: Regularidade do Corpo Docente - Baixa Regularidade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ird_media_baixa
+        description: Regularidade do Corpo Docente - Média a Baixa Regularidade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ird_media_alta
+        description: Regularidade do Corpo Docente - Média a Alta Regularidade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ird_alta
+        description: Regularidade do Corpo Docente - Alta Regularidade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_nivel_1
+        description: Esforço Docente - Ensino Fundamental Nível 1
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_nivel_2
+        description: Esforço Docente - Ensino Fundamental Nível 2
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_nivel_3
+        description: Esforço Docente - Ensino Fundamental Nível 3
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_nivel_4
+        description: Esforço Docente - Ensino Fundamental Nível 4
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_nivel_5
+        description: Esforço Docente - Ensino Fundamental Nível 5
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_nivel_6
+        description: Esforço Docente - Ensino Fundamental Nível 6
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_anos_iniciais_nivel_1
+        description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 1
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_anos_iniciais_nivel_2
+        description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 2
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_anos_iniciais_nivel_3
+        description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 3
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_anos_iniciais_nivel_4
+        description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 4
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_anos_iniciais_nivel_5
+        description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 5
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_anos_iniciais_nivel_6
+        description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 6
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_anos_finais_nivel_1
+        description: Esforço Docente - Ensino Fundamental Anos Finais Nível 1
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_anos_finais_nivel_2
+        description: Esforço Docente - Ensino Fundamental Anos Finais Nível 2
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_anos_finais_nivel_3
+        description: Esforço Docente - Ensino Fundamental Anos Finais Nível 3
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_anos_finais_nivel_4
+        description: Esforço Docente - Ensino Fundamental Anos Finais Nível 4
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_anos_finais_nivel_5
+        description: Esforço Docente - Ensino Fundamental Anos Finais Nível 5
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_ef_anos_finais_nivel_6
+        description: Esforço Docente - Ensino Fundamental Anos Finais Nível 6
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_em_nivel_1
+        description: Esforço Docente - Ensino Médio Nível 1
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_em_nivel_2
+        description: Esforço Docente - Ensino Médio Nível 2
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_em_nivel_3
+        description: Esforço Docente - Ensino Médio Nível 3
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_em_nivel_4
+        description: Esforço Docente - Ensino Médio Nível 4
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_em_nivel_5
+        description: Esforço Docente - Ensino Médio Nível 5
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ied_em_nivel_6
+        description: Esforço Docente - Ensino Médio Nível 6
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: icg_nivel_1
+        description: Complexidade de Gestão da Escola Nível 1
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: icg_nivel_2
+        description: Complexidade de Gestão da Escola Nível 2
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: icg_nivel_3
+        description: Complexidade de Gestão da Escola Nível 3
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: icg_nivel_4
+        description: Complexidade de Gestão da Escola Nível 4
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: icg_nivel_5
+        description: Complexidade de Gestão da Escola Nível 5
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: icg_nivel_6
+        description: Complexidade de Gestão da Escola Nível 6
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.

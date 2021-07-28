@@ -1,0 +1,50 @@
+Dados do Atlas do Desenvolvimento Humano (ADH) a nível de UF-ano.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/mundo-onu-adh
+Github: https://github.com/basedosdados/mais/tree/master/bases/mundo_onu_adh
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/mundo_onu_adh/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/mundo_onu_adh/code
+Email: rdahis@basedosdados.org
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- unidade da federação
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- sigla_uf
+- ano
+
+Cobertura Temporal
+------------------
+- 1991
+- 2000
+- 2010
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Limpei e renomeei uma série de variáveis.
+
+Frequencia de Atualização
+-------------------------
+único
+
+

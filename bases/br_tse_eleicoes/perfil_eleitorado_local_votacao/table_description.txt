@@ -2,23 +2,43 @@ Perfil eleitorado a nível de local de votação.
 
 
 Para saber mais acesse:
-Website: 
-Github: https://github.com/basedosdados/mais/
+Website: https://basedosdados.org/dataset/br-tse-eleicoes
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
+Email: rdahis@basedosdados.org
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
 - sigla_uf
 
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
 - zona
 - secao
 - local de votacao
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
+- zona
+- secao
+- numero
+- ano
 
 Cobertura Temporal
 ------------------
@@ -32,20 +52,10 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Limpeza para consistência.
+Limpezas padrão para consistência.
 
 Frequencia de Atualização
 -------------------------
 2 anos
 
-Tratado por
------------
-Nome: <nome>
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
 
-Publicado por
--------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org

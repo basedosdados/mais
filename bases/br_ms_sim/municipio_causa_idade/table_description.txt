@@ -28,7 +28,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
-- causa CID10
+- CID10
 - idade
 - ano
 
@@ -69,10 +69,6 @@ Cobertura Temporal
 Cobertura Espacial
 ------------------
 - brasil
-
-Tratamento
-----------
-Agreguei o número de óbitos dos microdados por município-causa-idade-ano.
 
 Frequencia de Atualização
 -------------------------

@@ -7,7 +7,7 @@ dataset_id: br_ibge_censo_demografico # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-ibge-censo-demografico # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_demografico # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: v1.1 # REQUIRED
 
 last_updated: 2021-02-27 # AUTO GENERATED
 
@@ -45,7 +45,7 @@ data_update_frequency: 10 anos      # REQUIRED
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
 # Regras:
-#   - minúsculo, sem acento, singular.
+#   - minúsculo, sem acento, singular. 
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED

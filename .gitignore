@@ -9,11 +9,14 @@ bases/test/
 mais/pytest/*
 mais/test/
 
+bases/*/input/
+bases/*/tmp/
+bases/*/output/
+
 notebooks
 data
 secrets
 .ipynb*
-*.ipynb
 *.csv
 docs/site
 TODO
@@ -129,6 +132,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+*.env
 .env
 .venv
 env/
@@ -165,6 +169,9 @@ cython_debug/
 # Examples
 !examples/*.ipynb
 
+# R
+r-package/.Rhistory
 
+# Datasets
+!bases/br_bd_diretorios_data_tempo/data
 .Rproj.user
-*.env

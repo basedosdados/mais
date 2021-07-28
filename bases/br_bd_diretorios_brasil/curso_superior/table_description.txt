@@ -1,0 +1,47 @@
+A tabela contém dados de cursos do ensino superior no Brasil, desde seu código do INEP até a área onde o curso se insere
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-bd-diretorios-brasil
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- curso de ensino superior
+
+Colunas identificando linhas unicamente
+-------------------
+- id_curso
+
+Cobertura Temporal
+------------------
+- unico
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+-Limpeza de linhas desnecessárias e mudança de nome de colunas
+
+Frequencia de Atualização
+-------------------------
+unico
+
+

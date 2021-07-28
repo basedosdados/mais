@@ -1,0 +1,10 @@
+name: "Check Links"
+description: "Check BD+ docs for broken links"
+author: "Base dos Dados"
+runs:
+  using: composite
+  steps:
+    - run: scrapy runspider -o report.csv ${{ github.action_path }}/crawler.py
+      shell: bash
+    - run: python ${{ github.action_path }}/to_markdown.py
+      shell: bash

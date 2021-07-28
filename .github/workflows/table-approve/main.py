@@ -8,10 +8,11 @@ import toml
 import tomlkit
 import traceback
 
-import basedosdados as bd
-from basedosdados.base import Base
-from basedosdados.storage import Storage
 import basedosdados
+import basedosdados as bd
+from basedosdados import Storage
+from basedosdados import Dataset
+from basedosdados.upload.base import Base
 
 
 def decogind_base64(message):
@@ -207,23 +208,6 @@ def sync_bucket(
     ref.copy_table(source_bucket_name=source_bucket_name)
 
 
-def is_partitioned(table_config):
-    ## check if the table are partitioned
-    print("TABLE PARTITION")
-    print(table_config["partitions"])
-
-    partitions = table_config["partitions"]
-    if partitions is None:
-        return False
-
-    elif isinstance(partitions, list):
-
-        # check if any None inside list.
-        # False if it is the case Ex: [None, 'partition']
-        # True otherwise          Ex: ['partition1', 'partition2']
-        return not any([item is None for item in partitions])
-
-
 def get_table_dataset_id():
     ### load the change files in PR || diff between PR and master
     changes = json.load(Path("/github/workspace/files.json").open("r"))
@@ -295,13 +279,13 @@ def push_table_to_bq(
         if_table_exists="replace",
         if_storage_data_exists="pass",
         if_table_config_exists="pass",
-        partitioned=is_partitioned(table_config),
     )
-
     ### publish the table in prod bigquery
     tb.publish(if_exists="replace")
     ### updates the table description
     tb.update("prod")
+    ### updates the dataset description
+    Dataset(dataset_id).update("prod")
 
 
 def main():
@@ -312,7 +296,7 @@ def main():
     ### json with information of .basedosdados/config.toml
     config_dict = {
         "metadata_path": "/github/workspace/bases",
-        "templates_path": "/github/workspace/basedosdados/configs/templates",
+        "templates_path": "/github/workspace/python-package/basedosdados/configs/templates",
         "bucket_name": "basedosdados",
         "gcloud-projects": {
             "staging": {
@@ -335,6 +319,7 @@ def main():
     ### find the dataset and tables of the PR
     dataset_table_ids = get_table_dataset_id()
 
+    print(f"Tables found: {dataset_table_ids}")
     ### iterate over each table in dataset of the PR
     for table_id in dataset_table_ids.keys():
         dataset_id = dataset_table_ids[table_id]["dataset_id"]

@@ -4,10 +4,13 @@
 \alias{set_billing_id}
 \title{Define your Project Id}
 \usage{
-set_billing_id(billing_project_id)
+set_billing_id(billing_project_id = NULL)
 }
 \arguments{
 \item{billing_project_id}{a single character value containing the string. Vectors with longer lengths and non-vectors will trigger an error.}
+}
+\value{
+No return.
 }
 \description{
 Define your project billing ids here so all your queries are authenticated and return data, not errors.

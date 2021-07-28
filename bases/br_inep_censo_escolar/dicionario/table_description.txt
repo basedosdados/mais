@@ -1,0 +1,64 @@
+Dicionário para as variáveis que assumem multilplos valores de STRING nas tabelas do censo escolar. Todas as tabelas tem o mesmo dicionário, há uma variável justamente para identificar a tabela a qual a variável pertence.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-censo-escolar
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.comTratado por
+-----------
+Nome: Matheus Valentim
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code
+Website: https://github.com/mavalentim
+Email: mavalentim.b@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- tabela
+- coluna
+- chave
+- cobertura temporal
+
+Colunas identificando linhas unicamente
+-------------------
+- id_tabela
+- coluna
+- chave
+- cobertura_temporal
+
+Cobertura Temporal
+------------------
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Consulta básica de arquivos de dicionário disponibilizados por fontes oficiais.
+
+Frequencia de Atualização
+-------------------------
+unico
+
+

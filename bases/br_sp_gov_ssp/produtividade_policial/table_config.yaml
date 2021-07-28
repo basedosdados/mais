@@ -9,7 +9,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_ssp
 
 version: v1.0 # REQUIRED
 
-last_updated: 2021-03-12 # AUTO GENERATED
+last_updated: 2021-03-22 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -40,7 +40,7 @@ treatment_description: |
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: 1 mes # REQUIRED 
+data_update_frequency: 1 mes # REQUIRED  
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -118,11 +118,6 @@ columns: # REQUIRED
     -   
         name: id_municipio
         description: ID Município - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-    -   
-        name: id_estado
-        description: ID Estado - IBGE 2 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
     -   

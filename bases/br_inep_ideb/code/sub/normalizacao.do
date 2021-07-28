@@ -3,11 +3,11 @@
 // ano escolar
 //----------------------------------------------------------------------------//
 
-foreach k in escola municipio estado regiao brasil {
+foreach k in escola municipio uf regiao brasil {
 
-	if "`k'" == "escola"	local vars id_escola escola id_municipio municipio estado_abrev
-	if "`k'" == "municipio"	local vars id_municipio municipio estado_abrev
-	if "`k'" == "estado"	local vars estado_abrev
+	if "`k'" == "escola"	local vars        sigla_uf id_municipio id_escola
+	if "`k'" == "municipio"	local vars        sigla_uf id_municipio
+	if "`k'" == "uf"		local vars        sigla_uf
 	if "`k'" == "regiao"	local vars regiao
 	if "`k'" == "brasil"	local vars 
 	
@@ -91,8 +91,8 @@ foreach k in escola municipio estado regiao brasil {
 	
 	drop if ano == 2021	// dropa observacoes que estavam so para projecao
 	
-	order `vars' rede ensino ano_escolar ano
-	sort  `vars' rede ensino ano_escolar ano
+	order ano `vars' rede ensino ano_escolar
+	sort  ano `vars' rede ensino ano_escolar
 	
 	compress
 	
@@ -105,11 +105,11 @@ foreach k in escola municipio estado regiao brasil {
 // medias
 //----------------------------------------------------------------------------//
 
-foreach k in escola municipio estado regiao brasil {
+foreach k in escola municipio uf regiao brasil {
 	
-	if "`k'" == "escola"	local vars id_escola escola id_municipio municipio estado_abrev
-	if "`k'" == "municipio"	local vars id_municipio municipio estado_abrev
-	if "`k'" == "estado"	local vars estado_abrev
+	if "`k'" == "escola"	local vars        sigla_uf id_municipio id_escola
+	if "`k'" == "municipio"	local vars        sigla_uf id_municipio
+	if "`k'" == "uf"		local vars        sigla_uf
 	if "`k'" == "regiao"	local vars regiao
 	if "`k'" == "brasil"	local vars 
 	
@@ -165,7 +165,7 @@ foreach k in escola municipio estado regiao brasil {
 	append using `finais'
 	append using `EM'
 	
-	foreach v of varlist taxa_aprovacao IDEB projecao {
+	foreach v of varlist taxa_aprovacao ideb projecao {
 		
 		tostring `v', replace force
 		replace `v' = substr(`v', 1, 5)
@@ -177,7 +177,7 @@ foreach k in escola municipio estado regiao brasil {
 	}
 	*
 	
-	foreach v of varlist nota_SAEB_matematica nota_SAEB_lingua_portuguesa {
+	foreach v of varlist nota_saeb_matematica nota_saeb_lingua_portuguesa {
 		
 		tostring `v', replace force
 		replace `v' = substr(`v', 1, 6)
@@ -189,8 +189,8 @@ foreach k in escola municipio estado regiao brasil {
 	}
 	*
 	
-	order `vars' rede ensino ensino anos_escolares ano
-	sort  `vars' rede ensino ensino anos_escolares ano
+	order ano `vars' rede ensino ensino anos_escolares
+	sort  ano `vars' rede ensino ensino anos_escolares
 	
 	compress
 	

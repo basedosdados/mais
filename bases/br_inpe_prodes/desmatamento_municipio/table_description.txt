@@ -1,0 +1,67 @@
+Dados de desmatamento municipal do PRODES.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inpe-prodes
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inpe_prodes
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inpe_prodes/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inpe_prodes/code
+Email: rdahis@basedosdados.org
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- municipio
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
+- ano
+
+Cobertura Temporal
+------------------
+- 2000
+- 2001
+- 2002
+- 2003
+- 2004
+- 2005
+- 2006
+- 2007
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Coletei os dados e limpei para consistência.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+

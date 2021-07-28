@@ -1,0 +1,87 @@
+Número de óbitos agregados dos microdados do Sistema de Informações sobre Mortalidade (SIM) do Ministério da Saúde ao nível município-causa-idade-sexo-raca-ano.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ms-sim
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sim/code
+Website: http://www2.datasus.gov.br/DATASUS/index.php?area=0901&item=1&acao=26&pad=31655
+Email: rdahis@basedosdados.org
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- municipio
+- causa CID10
+- idade
+- sexo
+- raca
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
+- causa_basica
+- idade
+- sexo
+- raca_cor
+- ano
+- óbito
+
+Cobertura Temporal
+------------------
+- 1996
+- 1997
+- 1998
+- 1999
+- 2000
+- 2001
+- 2002
+- 2003
+- 2004
+- 2005
+- 2006
+- 2007
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Agregamos o número de óbitos dos microdados por município-causa-idade-sexo-raca-ano.
+- Arrendondamos idades entre 0 e 0.99999 ano para 0.
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+

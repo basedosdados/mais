@@ -8,8 +8,10 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    Dados do Censo Demográfico do Instituto Brasileiro de Geografia e Estatística (IBGE)
+    Dados do Censo Demográfico do Instituto Brasileiro de Geografia e Estatística (IBGE).
 
+    Os arquivos auxiliares aos dados (e.g. dicionários, instrumentos de coleta) dos microdados estão disponíveis em https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_censo_demografico.zip.
+    Os arquivos auxiliares das tabelas de Setores Censitários estão disponíveis em https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_censo_demografico_setores_censitarios.zip
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 organization: instituto-brasileiro-de-geografia-e-estatistica # REQUIRED

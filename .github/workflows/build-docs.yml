@@ -1,0 +1,19 @@
+name: build-docs
+on:
+  push:
+    paths:
+      - python-package/**
+      - docs
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - run: pip install -r ${{ github.workspace }}/python-package/requirements-dev.txt 
+      - run: python ${{ github.workspace }}/python-package/setup.py develop
+      - env:
+          GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
+        run: mkdocs build

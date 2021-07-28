@@ -1,32 +1,35 @@
 Package: basedosdados
-Title: Base dos Dados' R client
-Version: 0.0.3
+Title: 'Base Dos Dados' R Client
+Version: 0.1.0
 Authors@R: 
     person(given = "Pedro",
            family = "Cavalcante",
            role = c("aut", "cre"),
            email = "pedrocolrj@gmail.com")
-Description: A R client for Base dos Dados' API. Authenticate your project, query our tables, save data to disk and memory, all from R.
+Description: An R interface to the 'Base dos Dados' API <https:basedosdados.github.io/mais/py_reference_api/>). Authenticate your project, query our tables, save data to disk and memory, all from R.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
-    purrr,
-    dplyr,
-    tibble,
-    httr,
-    googleAuthR,
-    cli,
-    magrittr,
-    readr,
-    stringr,
-    dotenv,   
-    bigrquery,
-    glue,   
-    rlang,
-    writexl
+    purrr (>= 0.3.4),
+    dplyr (>= 1.0.6),
+    tibble (>= 3.1.1),
+    httr (>= 1.4.2),
+    googleAuthR (>= 1.4.0),
+    cli (>= 2.5.0),
+    magrittr (>= 2.0.1),
+    readr (>= 1.4.0),
+    stringr (>= 1.4.0),
+    dotenv (>= 1.0.2),
+    bigrquery (>= 1.3.2),
+    glue (>= 1.4.2),
+    rlang (>= 0.4.0),
+    writexl (>= 1.4.0),
+    fs (>= 1.5.0),
+    dbplyr (>= 2.1.1)
 Suggests: 
+    rmarkdown,
+    knitr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

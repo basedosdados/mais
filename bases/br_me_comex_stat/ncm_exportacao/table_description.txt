@@ -1,0 +1,67 @@
+Base de dados detalhada de exportação por NCM.
+
+Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-me-comex-stat
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_me_comex_stat
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_comex_stat/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- mes
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- categoria NCM
+- tipo de unidade
+- pais
+- unidade da federação
+- via de transporte
+- urf
+- ano
+- mes
+
+Colunas identificando linhas unicamente
+-------------------
+- id_ncm
+- id_unidade
+- id_pais
+- sigla_uf_ncm
+- id_via
+- id_urf
+- ano
+- mes
+
+Cobertura Temporal
+------------------
+- 1997-2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Limpeza simples dos dados.
+
+Frequencia de Atualização
+-------------------------
+mes
+
+

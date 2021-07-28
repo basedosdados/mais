@@ -1,0 +1,21 @@
+name: update-contributors
+
+on:
+  schedule:
+    # “At 00:00 on Sunday.” - check: https://crontab.guru/#0_0_*_*_0
+    - cron:  '00 19 * * THU'
+
+jobs:
+  update-levels:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8.x'
+    - name: Update Contributors
+      uses: ./.github/workflows/update-contributors
+      env: 
+        GHUSER: ${{ secrets.GHUSER }}
+        GHTOKEN: ${{ secrets.GHTOKEN }}

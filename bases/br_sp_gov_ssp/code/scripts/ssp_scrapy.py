@@ -64,7 +64,11 @@ def padronize_atividade(df):
         "total_de_inqueritos_policiais_instaurados",
     ]
 
-    return df[cols]
+    df = df[cols]
+    for col in df.columns:
+        df[col] = df[col].astype(str).str.replace(".", "").str.replace(",", ".")
+
+    return df
 
 
 def padronize_ocorrencias(df):
@@ -110,8 +114,11 @@ def padronize_ocorrencias(df):
         "furto_outros",
         "furto_de_veiculo",
     ]
+    df = df[cols]
+    for col in df.columns:
+        df[col] = df[col].astype(str).str.replace(".", "").str.replace(",", ".")
 
-    return df[cols]
+    return df
 
 
 def padronize_data(df, file):
@@ -240,9 +247,9 @@ def get_config(response, year, regiao, municipipo, delegacia, page):
 
 def get_years():
     ## years to scrapy
-    return [str(i) for i in range(2002, 2021)]
-    # current_year = datetime.datetime.now().strftime("%Y")
-    # return [current_year]
+    # return [str(i) for i in range(2002, 2021)]
+    current_year = datetime.datetime.now().strftime("%Y")
+    return [current_year]
 
 
 def delete_years(file, years):
@@ -300,7 +307,7 @@ class SSP_OcorrenciaSpider(scrapy.Spider):
     site_url = "http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx"
     # allowed_domains = ['www.fazenda.sp.gov.br/RepasseConsulta/Consulta/repasse.aspx']
     start_urls = [site_url]
-    file_name = "ssp_ocorrecencias_registradas"
+    file_name = "ssp_ocorrencias_registradas"
 
     def parse(self, response):
         ## get the years to scrapy

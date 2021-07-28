@@ -1,0 +1,34 @@
+name: check-links
+
+on:
+  schedule:
+    - cron: "00 00 01 * *"
+  workflow_dispatch:
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install wheel scrapy
+      - name: Search for broken links and fill report
+        uses: ./.github/workflows/check-links/
+      - name: Continue if report exists
+        id: report
+        run: test -f ./report.md && echo ::set-output name=continue::1 || echo ::set-output name=continue::0
+      - name: Create Issue From File
+        if: ${{ steps.report.outputs.continue == 1 }}
+        uses: peter-evans/create-issue-from-file@v2
+        with:
+          title: "[docs] corrigir links quebrados"
+          content-filepath: ./report.md
+          labels: report, automated issue
+          assignees: fernandascovino

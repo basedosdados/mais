@@ -7,7 +7,8 @@
 // listas de estados
 //------------------------//
 
-local estados_1996	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
+local estados_1994	AC AL AM AP BA             GO MA    MS             PI             RR RS SC SE SP TO BR_AC BR_AL BR_AM BR_AP BR_BA BR_GO BR_MA BR_MS BR_PI BR_RR BR_RS BR_SC BR_SE BR_SP BR_TO
+local estados_1996	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB    PI       RN    RR       SE SP TO
 local estados_1998	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2000	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2002	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
@@ -25,7 +26,12 @@ local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
-foreach ano of numlist 1998(2)2020 {
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8") //stringcols(_all)
+keep id_municipio id_municipio_tse
+tempfile municipio
+save `municipio'
+
+foreach ano of numlist 1994(2)2020 {
 	
 	foreach estado in `estados_`ano'' {
 		
@@ -46,8 +52,8 @@ foreach ano of numlist 1998(2)2020 {
 			ren v13 aptos
 			ren v14 secoes
 			ren v15 secoes_agregadas
-			ren v16 aptos_tot
-			ren v17 secoes_tot
+			ren v16 aptos_totalizadas
+			ren v17 secoes_totalizadas
 			ren v18 comparecimento
 			ren v19 abstencoes
 			ren v20 votos_validos
@@ -72,8 +78,8 @@ foreach ano of numlist 1998(2)2020 {
 			ren v19 aptos
 			ren v20 secoes
 			ren v21 secoes_agregadas
-			ren v22 aptos_tot
-			ren v23 secoes_tot
+			ren v22 aptos_totalizadas
+			ren v23 secoes_totalizadas
 			ren v24 comparecimento
 			ren v25 abstencoes
 			ren v27 votos_validos
@@ -108,17 +114,22 @@ foreach ano of numlist 1998(2)2020 {
 		// variaveis
 		//------------------//
 		
-		gen prop_comparecimento = 100 * comparecimento / aptos
-		la var prop_comparecimento "% Comparecimento"
+		merge m:1 id_municipio_tse using `municipio'
+		drop if _merge == 2
+		drop _merge
+		order id_municipio, b(id_municipio_tse)
 		
-		gen prop_votos_validos = 100 * votos_validos / comparecimento
-		la var prop_votos_validos "% Votos Válidos"
+		gen proporcao_comparecimento = 100 * comparecimento / aptos
+		la var proporcao_comparecimento "% Comparecimento"
 		
-		gen prop_votos_brancos = 100 * votos_brancos / comparecimento
-		la var prop_votos_brancos "% Votos Brancos"
+		gen proporcao_votos_validos = 100 * votos_validos / comparecimento
+		la var proporcao_votos_validos "% Votos Válidos"
 		
-		gen prop_votos_nulos = 100 * votos_nulos / comparecimento
-		la var prop_votos_nulos "% Votos Nulos"
+		gen proporcao_votos_brancos = 100 * votos_brancos / comparecimento
+		la var proporcao_votos_brancos "% Votos Brancos"
+		
+		gen proporcao_votos_nulos = 100 * votos_nulos / comparecimento
+		la var proporcao_votos_nulos "% Votos Nulos"
 		
 		drop if mod(ano, 2) > 0
 		
@@ -126,8 +137,8 @@ foreach ano of numlist 1998(2)2020 {
 		
 		compress
 		
-		tempfile detalhes_municipio_zona_`ano'_`estado'
-		save `detalhes_municipio_zona_`ano'_`estado''
+		tempfile detalhes_`ano'_`estado'
+		save `detalhes_`ano'_`estado''
 		
 	}
 	*
@@ -136,17 +147,17 @@ foreach ano of numlist 1998(2)2020 {
 	// append
 	//------------------//
 	
-	use `detalhes_municipio_zona_`ano'_AC', clear
+	use `detalhes_`ano'_AC', clear
 	foreach estado in `estados_`ano'' {
 		if "`estado'" != "AC" {
-			append using `detalhes_municipio_zona_`ano'_`estado''
+			append using `detalhes_`ano'_`estado''
 		}
 	}
 	*
 	
-	order	ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo aptos secoes secoes_agregadas aptos_tot secoes_tot ///
+	order	ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo aptos secoes secoes_agregadas aptos_tot secoes_tot ///
 			comparecimento abstencoes votos_validos votos_brancos votos_nulos votos_legenda ///
-			prop_*
+			proporcao_*
 	
 	compress
 	

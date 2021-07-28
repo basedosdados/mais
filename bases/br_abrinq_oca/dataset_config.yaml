@@ -36,15 +36,16 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - <etiqueta 1> 
-    - <etiqueta 2>
+    - educacao
+    - saude
+    - crianca
+    - adolescente
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.
 # Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
 languages:
     - portugues
-    - <língua 2>
 
 # Os dados originais estão disponíveis de graça?
 free: sim
