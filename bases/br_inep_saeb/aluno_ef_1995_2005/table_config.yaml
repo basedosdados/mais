@@ -35,7 +35,7 @@ treated_by:
     email: <email>
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
+treatment_description: |
     <CEPESP fez X. Eu fiz K>
 
 # Com qual frequência a base é atualizada?
@@ -96,897 +96,618 @@ partitions: # REQUIRED
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
-  
-    -   
-        name: mascara
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: serie
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: disciplina
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: turma
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_aluno
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: estrato
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: rede
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: localizacao
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sigla_uf
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: peso_aluno_turma
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: peso_aluno_disciplina
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: peso_turma
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: peso_escola
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: caderno
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: bloco_1
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: bloco_2
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: bloco_3
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q001
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q002
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q003
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q004
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q005
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q006
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q007
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q008
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q009
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q010
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q011
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q012
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_1_q013
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q001
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q002
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q003
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q004
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q005
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q006
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q007
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q008
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q009
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q010
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q011
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q012
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_2_q013
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q001
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q002
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q003
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q004
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q005
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q006
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q007
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q008
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q009
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q010
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q011
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q012
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resposta_bloco_3_q013
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: gabarito_bloco_1
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: gabarito_bloco_2
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: gabarito_bloco_3
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: proficiencia_250
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: proficiencia_saeb
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q001
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q002
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q003
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q004
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q005
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q006
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q007
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q008
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q009
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q010
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q011
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q012
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q013
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q014
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q015
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q016
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q017
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q018
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q019
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q020
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q021
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q022
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q023
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q024
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q025
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q026
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q027
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q028
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q029
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q030
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q031
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q032
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q033
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q034
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q035
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q036
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q037
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q038
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q039
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q040
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q041
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q042
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q043
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q044
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q045
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q046
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q047
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q048
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q049
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q050
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q051
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q052
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q053
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q054
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q055
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q056
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q057
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q058
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q059
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q060
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q061
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q062
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q063
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q064
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q065
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q066
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q067
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q068
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q069
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q070
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q071
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q072
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q073
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q074
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q075
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q076
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q077
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q078
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q079
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q080
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q081
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q082
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q083
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q084
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q085
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q086
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_resposta_q087
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ano
-        description: <descrição da coluna>
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
+    - name: mascara
+      description: Máscara
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: serie
+      description: Série escolar
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina
+      description: Disciplina
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: turma
+      description: Código da turma
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_aluno
+      description: Código do aluno
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: estrato
+      description: Estrato da amostragem
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: rede
+      description: Rede escolar
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: localizacao
+      description: Localização
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: sigla_uf
+      description: Sigla da Unidade da Federação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: peso_aluno_turma
+      description: Peso do aluno na turma
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: peso_aluno_disciplina
+      description: Peso do aluno por disciplina
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: peso_turma
+      description: Peso da turma
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: peso_escola
+      description: Peso da escola
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: caderno
+      description: Caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: bloco_1
+      description: Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: bloco_2
+      description: Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: bloco_3
+      description: Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q001
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q002
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q003
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q004
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q005
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q006
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q007
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q008
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q009
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q010
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q011
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q012
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q013
+      description: Respostas do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q001
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q002
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q003
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q004
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q005
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q006
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q007
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q008
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q009
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q010
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q011
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q012
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q013
+      description: Respostas do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q001
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q002
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q003
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q004
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q005
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q006
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q007
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q008
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q009
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q010
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q011
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q012
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q013
+      description: Respostas do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: gabarito_bloco_1
+      description: Gabarito do bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: gabarito_bloco_2
+      description: Gabarito do bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: gabarito_bloco_3
+      description: Gabarito do bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: proficiencia_250
+      description: Proficiência na escala 250:50
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: proficiencia_saeb
+      description: Proficiência na escala saeb
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q001
+      description: Sexo
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q002
+      description: Como você se considera?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q003
+      description: Qual é o mês do seu aniversário?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q004
+      description: Qual é o ano do seu nascimento?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q005
+      description: Você ainda vai fazer aniversário ate o final deste ano?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q006
+      description: Qual a sua idade?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q007
+      description: Você trabalha?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q008
+      description: Na sua casa tem televisão em cores?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q009
+      description: Na sua casa tem radio?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q010
+      description: Na sua casa tem videocassete?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q011
+      description: Dentro de sua casa tem banheiro?/Quantos banheiros há onde você
+          mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q012
+      description: Na sua casa tem quartos para dormir?/Quantos quartos há onde você
+          mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q013
+      description: Na sua casa tem geladeira?/Quantos geladeiras há onde você mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q014
+      description: Na sua casa tem geladeira com freezer (geladeira Duplex)?/Quantos
+          freezers há onde você mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q015
+      description: Na sua casa tem freezer separado da geladeira?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q016
+      description: Na sua casa tem maquina de lavar roupa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q017
+      description: Na sua casa tem aspirador de pó?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q018
+      description: Na sua casa alguém tem carro?/Quantos carros há onde você mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q019
+      description: Na sua casa tem computador com internet?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q020
+      description: Na sua casa tem computador sem internet?/Quantos computadores há
+          onde você mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q021
+      description: Além dos livros escolares, quantos livros há em sua casa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q022
+      description: Onde você mora existe eletricidade?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q023
+      description: Onde você mora chega água pela torneira?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q024
+      description: Em sua casa trabalha alguma empregada domestica? Quantas?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q025
+      description: Quantas pessoas moram com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q026
+      description: Você mora com sua mãe?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q027
+      description: Ate que serie sua mãe estudou?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q028
+      description: Sua mãe sabe ler e escrever?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q029
+      description: Você vê sua mãe lendo?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q030
+      description: Você mora com seu pai?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q031
+      description: Ate que serie seu pai estudou?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q032
+      description: Seu pai sabe ler e escrever?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q033
+      description: Você vê seu pai lendo?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q034
+      description: Quem é a pessoa que acompanha mais de perto sua vida escolar?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q035
+      description: Até que série a pessoa INDICADA ACIMA estudou?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q036
+      description: Você lê revistas em quadrinhos?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q037
+      description: Você lê outras revistas?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q038
+      description: Você vê livros de historias infantis?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q039
+      description: Você lê livros de literatura, como romance, poesia, etc?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q040
+      description: Você lê jornais?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q041
+      description: Na sua casa tem enciclopédia?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q042
+      description: Na sua casa tem atlas?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q043
+      description: Na sua casa tem dicionário?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q044
+      description: Na sua casa tem calculadora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q045
+      description: Seus pais ou responsáveis almoçam ou jantam com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q046
+      description: Seus pais ou responsáveis ouvem musica com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q047
+      description: Seus pais ou responsáveis conversam sobre livros com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q048
+      description: Seus pais ou responsáveis conversam sobre filmes com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q049
+      description: Seus pais ou responsáveis conversam sobre programas de TV com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q050
+      description: Seus pais ou responsáveis conversam com seus amigos?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q051
+      description: Com que freqüência seus pais ou responsáveis conversam com seus
+          amigos/ colegas de escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q052
+      description: Com que freqüência seus pais ou responsáveis conversam com o Diretor
+          da sua escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q053
+      description: Com que freqüência seus pais ou responsáveis conversam com seus
+          professores?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q054
+      description: Seus pais ou responsáveis conversam sobre o que acontece na escola
+          com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q055
+      description: Seus pais ou responsáveis ajudam você a fazer a lição de casa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q056
+      description: Seus pais ou responsáveis cobram se você fez a lição de casa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q057
+      description: Seus pais ou responsáveis falam para você não faltar a escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q058
+      description: Seus pais ou responsáveis falam para você tirar boas notas?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q059
+      description: Seus pais ou responsáveis vão a reunião de pais na escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q060
+      description: Quando você começou a estudar?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q061
+      description: Você já foi reprovado?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q062
+      description: Você gosta de estudar matemática?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q063
+      description: Em matemática como você se compara com os seus colegas de turma?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q064
+      description: Você faz a lição de casa de matemática?/Quanto tempo você gasta
+          pra fazer as lições?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q065
+      description: O professor corrige a lição de casa de matemática?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q066
+      description: Voce gosta de língua portuguesa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q067
+      description: Em língua portuguesa, como você se compara em relação aos seus
+          colegas de turma?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q068
+      description: Você faz a lição de casa de língua portuguesa?/Quanto tempo você
+          gasta?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q069
+      description: O professor corrige a lição de casa de língua portuguesa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q070
+      description: Desde e a 1ª serie, quantas vezes você já mudou de escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q071
+      description: Desde a 5ª série, quantas vezes você já mudou de escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q072
+      description: Em que tipo de escola você já estudou?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q073
+      description: Os alunos fazem barulho e desordem na sua sala de aula?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q074
+      description: Os alunos prestam atenção no que o professor diz na sua sala de
+          aula?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q075
+      description: Os alunos fazem o que o professor pede na sua sala de aula?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q076
+      description: Na sua turma os professores têm que esperar muito para que os alunos
+          fiquem quietos?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q077
+      description: Você tem muitos amigos na sua sala de aula?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q078
+      description: Seu professor de Matemática dá importância ao que você diz?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q079
+      description: Seu professor de matemática elogia ou dá parabéns quando você tira
+          boas notas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q080
+      description: Seu professor de Matemática dá uma força para você estudar mais
+          quando não tira notas boas?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q081
+      description: Quando você precisa de ajuda, o professor de Matemática está sempre
+          pronto para lhe atender?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q082
+      description: Seu professor de Língua Portuguesa da importância ao que você diz?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q083
+      description: Seu professor de Língua Portuguesa elogia ou dá parabéns quando
+          você tira boas notas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q084
+      description: Seu professor dá uma força para você estudar mais quando NÃO tira
+          notas boas?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q085
+      description: Quando você precisa de ajuda, o professor de Língua Portuguesa
+          está sempre pronto para lhe atender?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q086
+      description: Quando você falta às aulas, sua família é avisada?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: taxa_resposta_q087
+      description: 'Quando terminar a 8ª série, você pretende:'
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ano
+      description: Ano
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: true   # Bool [True, False], whether the column is a partition.
