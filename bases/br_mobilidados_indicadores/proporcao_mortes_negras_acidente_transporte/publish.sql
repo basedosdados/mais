@@ -22,6 +22,8 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.proporcao_mortes_negras_acidente_transporte AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(indicador AS STRING) indicador,
 SAFE_CAST(prop_mortes_negras_acidente_transporte AS FLOAT64) prop_mortes_negras_acidente_transporte
 from basedosdados-dev.br_mobilidados_indicadores_staging.proporcao_mortes_negras_acidente_transporte as t
