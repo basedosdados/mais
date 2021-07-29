@@ -6,7 +6,6 @@ on:
       - labeled
     paths:
       - 'bases/**'
-      - '!.github/**'
 
 jobs:
   get-changes:
