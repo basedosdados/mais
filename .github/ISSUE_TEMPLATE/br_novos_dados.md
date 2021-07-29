@@ -1,9 +1,9 @@
 ---
 name: PTBR | Novos dados
-about: Sugira dados para serem adicionados ao projeto
-title: '[dados] <add nome, ex: Censo Escolar INEP>'
+about: Novos dados para serem adicionados à BD+
+title: '[dados] <dataset_id>'
 labels: data
-assignees: rdahis
+assignees: 
 
 ---
 
@@ -17,8 +17,18 @@ assignees: rdahis
 
 3. Qual o nome da(s) tabela(s)? `table_id`
 
-4. Fonte de dados: <link>
+4. Fonte original dos dados: <link>
 
-5. Cobertura temporal: de XXXX até YYYY
+5. Cobertura espacial: país/sigla_uf
 
-**Como você pode contribuir?**
+6. Cobertura temporal: de XXXX a YYYY
+
+**Tarefas** (seguindo os passos [aqui](https://basedosdados.github.io/mais/colab_data/))
+
+- [ ] Baixar a pasta template
+- [ ] Preencher as tabelas de arquitetura
+- [ ] Escrever código de captura e limpeza de dados.
+- [ ] Organizar arquivos auxiliares, se necessário.
+- [ ] Criar tabela dicionário, se necessário.
+- [ ] Subir arquiteturas, dados e arquivos auxiliares no Google Cloud.
+- [ ] Enviar tudo para revisão.
