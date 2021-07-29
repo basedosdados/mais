@@ -23,7 +23,7 @@ assignees:
 
 6. Cobertura temporal: de XXXX a YYYY
 
-**Tarefas** (seguindo os passos [aqui](https://basedosdados.github.io/mais/colab_data/))
+**Tarefas** (seguindo os passos da documentação [aqui](https://basedosdados.github.io/mais/colab_data/))
 
 - [ ] Baixar a pasta template
 - [ ] Preencher as tabelas de arquitetura
