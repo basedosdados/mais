@@ -7,9 +7,9 @@ assignees:
 
 ---
 
-**Descrição do dataset**
+**Metadados da base**
 
-1. A base já está na [tabela de prioridades](https://docs.google.com/spreadsheets/d/1jnmmG4V6Ugh_-lhVSMIVu_EaL05y1dX9Y0YW8G8e_Wo/edit?usp=sharing)? <Sim/Não>
+1. Descrição: <descrição da base e suas tabelas>
 
 <!-- Para (2) e (3): veja como nomeamos nossos conjuntos e tabelas aqui https://basedosdados.github.io/mais/style_data/#nomea%C3%A7%C3%A3o-de-bases-e-tabelas -->
 
@@ -19,7 +19,7 @@ assignees:
 
 4. Fonte original dos dados: <link>
 
-5. Cobertura espacial: país/sigla_uf
+5. Cobertura espacial: <país/sigla_uf>
 
 6. Cobertura temporal: de XXXX a YYYY
 
