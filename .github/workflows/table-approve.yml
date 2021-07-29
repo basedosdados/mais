@@ -30,7 +30,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: push-changes
-      - name: Set up GCloud
+      - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@master
         with:
           version: '290.0.1'
@@ -47,18 +47,24 @@ jobs:
           pip install basedosdados==1.5.2 toml
       - name: Set up basedosdados environment
         run: |
-          cd .github/workflows/setup-env
-          python setup-env.py
-        shell: bash
-      - name: Table approve
-        run: python .github/workflows/table-approve/table_approve.py
+          cd .github/workflows/env-setup
+          python env_setup.py
         shell: bash
         env:
-          project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
-          GCP_TABLE_APPROVE_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
-          GCP_TABLE_APPROVE_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
-          destination_bucket_name: basedosdados
-          backup_bucket_name: basedosdados-backup
+          BUCKET_NAME: basedosdados
+          PROJECT_NAME_PROD: basedosdados
+          PROJECT_NAME_STAGING: basedosdados-staging
+          GCP_BD_DEV_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
+          GCP_BD_DEV_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
+      - name: Table approve
+        run: |
+          cd .github/workflows/table-approve
+          python table_approve.py
+        shell: bash
+        env:
+          PROJECT_ID: ${{ secrets.GCP_MAIN_PROJECT_ID }}
+          BUCKET_NAME_BACKUP: basedosdados-backup
+          BUCKET_NAME_DESTINATION: basedosdados
 
   gcloud-tasks-add:
     needs: table-approve
@@ -77,24 +83,21 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: push-changes
-      - name: Add to gcloud task
-        run: python .github/workflows/table-approve/gcloud_tasks_add.py
+      - name: Add to gcloud tasks
+        run: |
+          cd .github/workflows/table-approve
+          python gcloud_tasks_add.py
         shell: bash
         env:
-          project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
-          location: ${{ secrets.GCP_LOCATION }}
-          queue: ${{ secrets.GCP_ONECLICK_QUEUE }}
-          taskurl: ${{ secrets.GCP_ONECLICK_URL }}
-          service_account: ${{ secrets.GCP_ONECLICK_EMAIL }}
+          PROJECT_ID: ${{ secrets.GCP_MAIN_PROJECT_ID }}
+          QUEUE: ${{ secrets.GCP_ONECLICK_QUEUE }}
+          LOCATION: ${{ secrets.GCP_LOCATION }}
+          TASKURL: ${{ secrets.GCP_ONECLICK_URL }}
+          SERVICE_ACCOUNT: ${{ secrets.GCP_ONECLICK_EMAIL }}
 
   data-check:
     needs: gcloud-tasks-add
     runs-on: ubuntu-latest
-    env:
-      BQ_ENVIRONMENT: basedosdados
-      GCP_BD_DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
-      GCP_BD_DEV_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
-      GITHUB_WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -112,12 +115,17 @@ jobs:
           pip install basedosdados==1.5.2 pyarrow pytest toml
       - name: Set up basedosdados environment
         run: |
-          cd .github/workflows/setup-env
-          python setup-env.py
+          cd .github/workflows/env-setup
+          python env_setup.py
         shell: bash
+        env:
+          GCP_BD_DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
+          GCP_BD_DEV_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
       - name: Test data and fill report
         run: pytest -v .github/workflows/data-check
         shell: bash
+        env:
+          BQ_ENVIRONMENT: basedosdados
       - name: Upload report artifact
         uses: actions/upload-artifact@v2
         with:

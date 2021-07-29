@@ -11,7 +11,7 @@ on:
 jobs:
   get-changes:
     runs-on: ubuntu-latest
-    if: github.event.label.name == 'data-check'
+    if: github.event.label.name == 'data-check-trigger'
     steps:
       - name: Check file changes
         id: file_changes
@@ -27,13 +27,11 @@ jobs:
   data-check:
     needs: get-changes
     runs-on: ubuntu-latest
-    env:
-      GCP_BD_DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
-      GCP_BD_DEV_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
-      GITHUB_WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Download changes
         uses: actions/download-artifact@v2
         with:
@@ -48,9 +46,12 @@ jobs:
           pip install basedosdados==1.5.2 pyarrow pytest toml
       - name: Set up basedosdados environment
         run: |
-          cd .github/workflows/setup-env
-          python setup-env.py
+          cd .github/workflows/env-setup
+          python env_setup.py
         shell: bash
+        env:
+          GCP_BD_DEV_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
+          GCP_BD_DEV_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
       - name: Test data and fill report
         run: pytest -v .github/workflows/data-check
         shell: bash
@@ -64,6 +65,9 @@ jobs:
           body="${body//$'\n'/'%0A'}"
           body="${body//$'\r'/'%0D'}" 
           echo ::set-output name=body::"$body"
+        shell: bash
+        env:
+          GITHUB_WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
       - name: Create comment
         if: ${{ always() && github.event_name == 'pull_request' }}
         uses: peter-evans/create-or-update-comment@v1

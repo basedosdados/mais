@@ -35,8 +35,8 @@ jobs:
       shell: bash
     - name: Set up basedosdados environment
       run: |
-        cd .github/workflows/setup-env
-        python setup-env.py
+        cd .github/workflows/env-setup
+        python env_setup.py
       shell: bash
     - name: Test and assess coverage
       run: |
@@ -72,8 +72,8 @@ jobs:
       shell: cmd
     - name: Set up basedosdados environment
       run: |
-        cd .github\workflows\setup-env
-        python setup-env.py
+        cd .github\workflows\env-setup
+        python env_setup.py
       shell: cmd
     - name: Test and assess coverage
       run: |

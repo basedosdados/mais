@@ -1,8 +1,9 @@
+import base64
+import json
 import os
 import shutil
 from pathlib import Path
-import base64
-import json
+
 import toml
 from basedosdados.upload.base import Base
 
@@ -55,28 +56,26 @@ def create_config_tree(prod_base64, staging_base64, config_dict):
     save_toml(config_dict, "config.toml", ".basedosdados")
 
 
-def setup():
+def env_setup():
+    # standard github actions home is /github/home
     # json with information of .basedosdados/config.toml
     config_dict = {
-        "metadata_path": str(Path("/github") / "workspace" / "bases"),
-        "templates_path": str(Path.home() / ".basedosdados" / "templates"),
-        "bucket_name": "basedosdados-dev",
+        "metadata_path": "/github/workspace/bases",
+        "templates_path": Path.home() / ".basedosdados/templates",
+        "bucket_name": os.getenv("BUCKET_NAME", "basedosdados-dev"),
         "gcloud-projects": {
-            "staging": {
-                "name": "basedosdados-dev",
-                "credentials_path": str(
-                    Path.home() / ".basedosdados" / "credentials" / "staging.json"
-                ),
-            },
             "prod": {
-                "name": "basedosdados-dev",
-                "credentials_path": str(
-                    Path.home() / ".basedosdados" / "credentials" / "prod.json"
-                ),
+                "name": os.getenv("PROJECT_NAME_PROD", "basedosdados-dev"),
+                "credentials_path": Path.home() / ".basedosdados/credentials/prod.json",
+            },
+            "staging": {
+                "name": os.getenv("PROJECT_NAME_STAGING", "basedosdados-dev"),
+                "credentials_path": Path.home()
+                / ".basedosdados/credentials/staging.json",
             },
         },
     }
-    
+
     # load the secret of prod and staging data
     GCP_BD_DEV_PROD = os.getenv("GCP_BD_DEV_PROD")
     GCP_BD_DEV_STAGING = os.getenv("GCP_BD_DEV_STAGING")
@@ -94,4 +93,4 @@ def setup():
 
 
 if __name__ == "__main__":
-    setup()
+    env_setup()
