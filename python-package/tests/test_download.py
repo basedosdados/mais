@@ -16,7 +16,10 @@ from basedosdados import (
     get_table_columns,
     get_table_size,
 )
-from basedosdados.validation.exceptions import BaseDosDadosException
+from basedosdados.exceptions import (
+    BaseDosDadosException, BaseDosDadosNoBillingProjectIDException,
+    BaseDosDadosInvalidProjectIDException
+)
 
 
 TEST_PROJECT_ID = "basedosdados-dev"
@@ -107,7 +110,7 @@ def test_read_sql():
 
 def test_read_sql_no_billing_project_id():
 
-    with pytest.raises(BaseDosDadosException) as excinfo:
+    with pytest.raises(BaseDosDadosNoBillingProjectIDException) as excinfo:
         read_sql(
             query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
         )
@@ -122,7 +125,7 @@ def test_read_sql_invalid_billing_project_id():
     
     pattern = r"You are using an invalid `billing_project_id`"
     
-    with pytest.raises(BaseDosDadosException, match=pattern):
+    with pytest.raises(BaseDosDadosInvalidProjectIDException, match=pattern):
         read_sql(
             query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
             billing_project_id="inexistent_project_id",

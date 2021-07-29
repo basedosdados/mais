@@ -17,7 +17,7 @@ from basedosdados.upload.base import Base
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
-from basedosdados.validation.exceptions import BaseDosDadosException
+from basedosdados.exceptions import BaseDosDadosException
 
 
 class Table(Base):
