@@ -24,5 +24,6 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(indicador AS STRING) indicador,
 SAFE_CAST(prop_tma AS FLOAT64) prop_tma
 from basedosdados-dev.br_mobilidados_indicadores_staging.transporte_media_alta_capacidade as t
