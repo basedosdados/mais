@@ -18,9 +18,9 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_sp_gov_orcamento.despesas AS
+
+CREATE VIEW basedosdados-dev.br_sp_gov_orcamento.despesa AS
 SELECT 
-SAFE_CAST(35 as INT64) id_estado,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(orgao AS STRING) orgao,
 SAFE_CAST(uo AS STRING) uo,
@@ -38,4 +38,4 @@ SAFE_CAST(empenhado AS INT64) empenhado,
 SAFE_CAST(liquidado AS INT64) liquidado,
 SAFE_CAST(pago AS INT64) pago,
 SAFE_CAST(pago_restos AS INT64) pago_restos
-from basedosdados-staging.br_sp_gov_orcamento_staging.despesas as t
+from basedosdados-dev.br_sp_gov_orcamento_staging.despesa as t
