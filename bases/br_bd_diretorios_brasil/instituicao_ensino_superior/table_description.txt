@@ -42,6 +42,6 @@ Tratamento
 
 Frequencia de Atualização
 -------------------------
-unico
+recorrente
 
 

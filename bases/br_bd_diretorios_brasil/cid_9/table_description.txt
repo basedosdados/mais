@@ -1,6 +1,4 @@
-Diretório da Classificação Internacional de Doenças (CID) 10.
-
-Original em http://www.datasus.gov.br/cid10/V2008/cid10.htm.
+Diretório da Classificação Internacional de Doenças (CID) 9.
 
 
 Para saber mais acesse:
@@ -21,21 +19,17 @@ Nome: <nome>
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- CID10
+- CID-9
 
 Colunas identificando linhas unicamente
 -------------------
-- subcategoria
+- categoria
 
 Cobertura Temporal
 ------------------
 
 Cobertura Espacial
 ------------------
-
-Tratamento
-----------
-Unificamos em uma planilha todas as subcategorias, categorias, e capítulos.
 
 Frequencia de Atualização
 -------------------------

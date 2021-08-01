@@ -22,6 +22,6 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.pais AS
 SELECT 
 SAFE_CAST(id_pais AS STRING) id_pais,
-SAFE_CAST(nome_pais AS STRING) nome_pais,
+SAFE_CAST(nome AS STRING) nome,
 SAFE_CAST(nacionalidade AS STRING) nacionalidade
-from basedosdados-dev.br_bd_diretorios_brasil_staging.pais as t
+FROM basedosdados-dev.br_bd_diretorios_brasil_staging.pais AS t
