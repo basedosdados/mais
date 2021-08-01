@@ -18,8 +18,14 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.cid9 AS
+CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.cid_10 AS
 SELECT 
+SAFE_CAST(subcategoria AS STRING) subcategoria,
+SAFE_CAST(descricao_subcategoria AS STRING) descricao_subcategoria,
 SAFE_CAST(categoria AS STRING) categoria,
-SAFE_CAST(descricao AS STRING) descricao
-FROM basedosdados-dev.br_bd_diretorios_brasil_staging.cid9 AS t
+SAFE_CAST(descricao_categoria AS STRING) descricao_categoria,
+SAFE_CAST(capitulo AS STRING) capitulo,
+SAFE_CAST(descricao_capitulo AS STRING) descricao_capitulo,
+SAFE_CAST(causa_violencia AS INT64) causa_violencia,
+SAFE_CAST(causa_overdose AS INT64) causa_overdose
+FROM basedosdados-dev.br_bd_diretorios_brasil_staging.cid_10 AS t
