@@ -128,4 +128,4 @@ columns: # REQUIRED
         name: populacao
         description: População
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a .
+        is_partition: False # Bool [True, False], whether the column is a partition.
