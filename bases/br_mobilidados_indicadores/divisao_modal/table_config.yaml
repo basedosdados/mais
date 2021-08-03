@@ -7,7 +7,7 @@ dataset_id: br_mobilidados_indicadores # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-mobilidados-indicadores # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores # AUTO GENERATED
 
-version: <1.1> # REQUIRED
+version: <v1.1> # REQUIRED
 
 last_updated: 2021-07-28 # AUTO GENERATED
 
@@ -51,6 +51,7 @@ data_update_frequency: recorrente # REQUIRED
 observation_level: #REQUIRED
     - uf
     - ano
+    - coluna
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -59,6 +60,7 @@ primary_keys:
 
     - sigla_uf
     - ano
+    - coluna
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
