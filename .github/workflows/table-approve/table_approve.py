@@ -131,7 +131,11 @@ def get_table_dataset_id():
     # load the change files in PR || diff between PR and master
     changes = Path("files.json").open("r")
     changes = json.load(changes)
-    print('CAMINHO NO TABLE APPROVE', Path.home())
+    
+    
+    for path, subdirs, files in os.walk('.github'):
+        for name in files:
+            print(os.path.join(path, name))
     # create a dict to save the dataset and source_bucket related to each table_id
     dataset_table_ids = {}
 
