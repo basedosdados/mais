@@ -6,15 +6,11 @@ on:
       - python-package/**
       - .github/workflows/python-ci.yml
       - .github/workflows/setup-env*
+  pull_request:    
 
 jobs:
   build-linux:
     runs-on: ubuntu-latest
-    env:
-      DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
-      DEV_STAG: ${{ secrets.GCP_BD_DEV_STAGING }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      COVERALLS_FLAG_NAME: linux
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
@@ -33,10 +29,14 @@ jobs:
         cd python-package
         python setup.py develop
       shell: bash
-    - name: Set up basedosdados environment
-      run: |
-        cd .github/workflows/env-setup
-        python env_setup.py
+    - name: Set up base dos dados environment
+      run: python .github/workflows/env-setup/env_setup.py
+      env:
+        BUCKET_NAME: basedosdados-dev
+        PROJECT_NAME_PROD: basedosdados-dev
+        PROJECT_NAME_STAGING: basedosdados-dev
+        GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
+        GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
       shell: bash
     - name: Test and assess coverage
       run: |
@@ -44,14 +44,12 @@ jobs:
         coverage run --source=basedosdados -m pytest tests
         coveralls --service=github
       shell: bash
+      env:
+        COVERALLS_FLAG_NAME: linux
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-windows:
     runs-on: windows-latest
-    env:
-      DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
-      DEV_STAG: ${{ secrets.GCP_BD_DEV_STAGING }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      COVERALLS_FLAG_NAME: windows
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
@@ -70,14 +68,21 @@ jobs:
         cd python-package
         python setup.py develop
       shell: cmd
-    - name: Set up basedosdados environment
-      run: |
-        cd .github\workflows\env-setup
-        python env_setup.py
+    - name: Set up base dos dados environment
+      run: python .github\workflows\env-setup\env_setup.py
       shell: cmd
+      env:
+        BUCKET_NAME: basedosdados-dev
+        PROJECT_NAME_PROD: basedosdados-dev
+        PROJECT_NAME_STAGING: basedosdados-dev
+        GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
+        GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
     - name: Test and assess coverage
       run: |
         cd python-package
         coverage run --source=basedosdados -m pytest tests
         coveralls --service=github
       shell: cmd
+      env:
+        COVERALLS_FLAG_NAME: windows
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -54,8 +54,8 @@ jobs:
           BUCKET_NAME: basedosdados
           PROJECT_NAME_PROD: basedosdados
           PROJECT_NAME_STAGING: basedosdados-staging
-          GCP_BD_DEV_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
-          GCP_BD_DEV_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
+          GCP_BD_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
+          GCP_BD_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
       - name: Table approve
         run: python .github/workflows/table-approve/table_approve.py
         shell: bash
@@ -125,8 +125,11 @@ jobs:
           python env_setup.py
         shell: bash
         env:
-          GCP_BD_DEV_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
-          GCP_BD_DEV_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
+          BUCKET_NAME: basedosdados
+          PROJECT_NAME_PROD: basedosdados
+          PROJECT_NAME_STAGING: basedosdados-staging
+          GCP_BD_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
+          GCP_BD_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
       - name: Test data and fill report
         run: pytest -v .github/workflows/data-check
         shell: bash
