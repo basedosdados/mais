@@ -30,7 +30,7 @@ def load_configs(dataset_id, table_id):
 
     return (
         # load the table_config.yaml
-        yaml.load(open(f"{table_path}/table_config.yaml", "r"), Loader=yaml.FullLoader),
+        yaml.load(open(f"/home/runner/work/mais/mais/{table_path}/table_config.yaml", "r"), Loader=yaml.FullLoader),
         # return the path to .basedosdados configs
         configs_path,
     )
