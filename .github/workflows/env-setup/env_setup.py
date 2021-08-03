@@ -61,7 +61,7 @@ def env_setup():
     # standard github actions home is /github/home
     # json with information of .basedosdados/config.toml
     config_dict = {
-        "metadata_path": "/home/runner/work/mais/mais/",
+        "metadata_path": "/home/runner/work/mais/mais/bases",
         "templates_path": str(Path.home() / ".basedosdados/templates"),
         "bucket_name": os.getenv("BUCKET_NAME", "basedosdados-dev"),
         "gcloud-projects": {

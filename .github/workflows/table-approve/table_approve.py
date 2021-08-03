@@ -174,13 +174,13 @@ def push_table_to_bq(
     backup_bucket_name="basedosdados-staging",
 ):
     
-    for path, subdirs, files in os.walk("/home/runner/work/mais/mais/"):
-        for name in files:
-            print(os.path.join(path, name))
     for path, subdirs, files in os.walk("/github"):
         for name in files:
             print(os.path.join(path, name))
     for path, subdirs, files in os.walk(".github"):
+        for name in files:
+            print(os.path.join(path, name))
+    for path, subdirs, files in os.walk("bases"):
         for name in files:
             print(os.path.join(path, name))
     for path, subdirs, files in os.walk("/home/runner/.basedosdados"):
