@@ -98,6 +98,9 @@ def sync_bucket(
             If there are no files corresponding to the given dataset_id and table_id on the source bucket
     """
 
+    print(f"PWD -> {Path.home()}")
+    print(f"FILES -> {Path.home().glob('*')}")
+
     ref = Storage(dataset_id=dataset_id, table_id=table_id)
 
     prefix = f"{mode}/{dataset_id}/{table_id}/"

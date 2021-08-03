@@ -11,7 +11,6 @@ import json
 import os
 from pathlib import Path
 
-import bd_credential
 import pytest
 import yaml
 from jinja2 import Template
