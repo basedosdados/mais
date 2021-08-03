@@ -129,7 +129,7 @@ def sync_bucket(
 
 def get_table_dataset_id():
     # load the change files in PR || diff between PR and master
-    changes = Path("/github/workspace/files.json").open("r")
+    changes = Path("/home/runner/work/mais/mais/files.json").open("r")
     changes = json.load(changes)
 
     # create a dict to save the dataset and source_bucket related to each table_id
