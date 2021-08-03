@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'bases/**'
+  pull_request:
 
 jobs:
   get-changes:
