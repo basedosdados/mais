@@ -162,10 +162,6 @@ def get_table_dataset_id():
                 "dataset_id": table_config["dataset_id"],
                 "source_bucket_name": table_config["source_bucket_name"],
             }
-        else:
-            tprint()
-            tprint(f"\n{str(filepath)} does not exist on current commit")
-            tprint()
 
     return dataset_table_ids
 
