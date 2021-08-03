@@ -7,7 +7,7 @@ dataset_id: br_mobilidados_indicadores # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-mobilidados-indicadores # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores # AUTO GENERATED
 
-version: <1.1> # REQUIRED
+version: <v1.1> # REQUIRED
 
 last_updated: 2021-07-29 # AUTO GENERATED
 
@@ -60,6 +60,7 @@ observation_level: #REQUIRED
 primary_keys:
     - id_municipio
     - indicador
+    - ano
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
