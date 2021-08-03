@@ -131,14 +131,7 @@ def get_table_dataset_id():
     # load the change files in PR || diff between PR and master
     changes = Path("files.json").open("r")
     changes = json.load(changes)
-    
-    
-    for path, subdirs, files in os.walk('.github'):
-        for name in files:
-            print(os.path.join(path, name))
-    for path, subdirs, files in os.walk('/home'):
-        for name in files:
-            print(os.path.join(path, name))
+
     # create a dict to save the dataset and source_bucket related to each table_id
     dataset_table_ids = {}
 
@@ -180,6 +173,17 @@ def push_table_to_bq(
     destination_bucket_name="basedosdados",
     backup_bucket_name="basedosdados-staging",
 ):
+
+    for path, subdirs, files in os.walk(".github"):
+        for name in files:
+            print(os.path.join(path, name))
+    for path, subdirs, files in os.walk("/home/.basedosdados"):
+        for name in files:
+            print(os.path.join(path, name))
+
+    assert (Path.home() / ".basedosdados" / "config.toml").is_file()
+    assert (Path.home() / ".basedosdados" / "credentials" / "prod.json").is_file()
+    assert (Path.home() / ".basedosdados" / "credentials" / "staging.json").is_file()
 
     # copy proprosed data between storage buckets
     # create a backup of old data, then delete it and copies new data into the destination bucket
