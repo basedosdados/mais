@@ -173,26 +173,6 @@ def push_table_to_bq(
     destination_bucket_name="basedosdados",
     backup_bucket_name="basedosdados-staging",
 ):
-    
-    for path, subdirs, files in os.walk("/github"):
-        for name in files:
-            print(os.path.join(path, name))
-    for path, subdirs, files in os.walk(".github"):
-        for name in files:
-            print(os.path.join(path, name))
-    for path, subdirs, files in os.walk("bases"):
-        for name in files:
-            print(os.path.join(path, name))
-    for path, subdirs, files in os.walk("/home/runner/.basedosdados"):
-        for name in files:
-            print(os.path.join(path, name))
-
-            
-            
-    assert (Path.home() / ".basedosdados" / "config.toml").is_file()
-    assert (Path.home() / ".basedosdados" / "credentials" / "prod.json").is_file()
-    assert (Path.home() / ".basedosdados" / "credentials" / "staging.json").is_file()
-
     # copy proprosed data between storage buckets
     # create a backup of old data, then delete it and copies new data into the destination bucket
     sync_bucket(
