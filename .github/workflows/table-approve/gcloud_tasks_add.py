@@ -55,7 +55,7 @@ def add_to_queue(
 def gcloud_tasks_add():
     client = tasks_v2.CloudTasksClient()
 
-    files = Path("/github/workspace/files.json").open("r")
+    files = Path("/home/runner/work/mais/mais/files.json").open("r")
     files = json.load(files)
 
     for f in files:
