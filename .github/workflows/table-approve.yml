@@ -59,14 +59,6 @@ jobs:
           PROJECT_NAME_STAGING: basedosdados-staging
           GCP_BD_DEV_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
           GCP_BD_DEV_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
-      - name: DEBUG!!!!
-        run: | 
-          pwd
-          echo ----
-          ls
-          echo ----
-          ls /github/workspace
-        shell: bash
       - name: Table approve
         run: |
           cd .github/workflows/table-approve
