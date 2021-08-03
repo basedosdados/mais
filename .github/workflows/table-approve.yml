@@ -57,6 +57,11 @@ jobs:
           PROJECT_NAME_STAGING: basedosdados-staging
           GCP_BD_DEV_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
           GCP_BD_DEV_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
+      - name: DEBUG
+        run: |
+          pwd
+          ls
+        shell: bash
       - name: Table approve
         run: python .github/workflows/table-approve/table_approve.py
         shell: bash
@@ -82,7 +87,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install google
+          pip install google-cloud-tasks
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@master
         with:

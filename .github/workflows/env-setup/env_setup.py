@@ -43,6 +43,7 @@ def save_toml(config_dict, file_name, config_folder):
     file_path = Path.home() / config_folder
     with open(file_path / file_name, "w") as toml_file:
         toml.dump(config_dict, toml_file)
+    print(f"HOME QUE FOI SALVO O CREDENTIALS: {Path.home()}")
 
 
 def create_config_tree(prod_base64, staging_base64, config_dict):
