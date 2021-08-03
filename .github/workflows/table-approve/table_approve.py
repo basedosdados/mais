@@ -256,22 +256,22 @@ def table_approve():
         dataset_id = dataset_table_ids[table_id]["dataset_id"]
         source_bucket_name = dataset_table_ids[table_id]["source_bucket_name"]
 
-        # try:
-        # push the table to bigquery
-        tprint(f"STARTING TABLE APPROVE ON {dataset_id}.{table_id}")
-        push_table_to_bq(
-            dataset_id,
-            table_id,
-            source_bucket_name,
-            destination_bucket_name=os.environ.get("BUCKET_NAME_DESTINATION"),
-            backup_bucket_name=os.environ.get("BUCKET_NAME_BACKUP"),
-        )
-        pretty_log(dataset_id, table_id, source_bucket_name)
-        # except Exception as error:
-        #     tprint()
-        #     tprint(f"ERROR ON {dataset_id}.{table_id}")
-        #     traceback.print_exc()
-        #     tprint()
+        try:
+            # push the table to bigquery
+            tprint(f"STARTING TABLE APPROVE ON {dataset_id}.{table_id}")
+            push_table_to_bq(
+                dataset_id,
+                table_id,
+                source_bucket_name,
+                destination_bucket_name=os.environ.get("BUCKET_NAME_DESTINATION"),
+                backup_bucket_name=os.environ.get("BUCKET_NAME_BACKUP"),
+            )
+            pretty_log(dataset_id, table_id, source_bucket_name)
+        except Exception as error:
+            tprint()
+            tprint(f"ERROR ON {dataset_id}.{table_id}")
+            traceback.print_exc()
+            tprint()
 
 
 if __name__ == "__main__":

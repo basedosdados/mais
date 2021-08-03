@@ -62,17 +62,20 @@ def env_setup():
     # json with information of .basedosdados/config.toml
     config_dict = {
         "metadata_path": "/github/workspace/bases",
-        "templates_path": Path.home() / ".basedosdados/templates",
+        "templates_path": str(Path.home() / ".basedosdados/templates"),
         "bucket_name": os.getenv("BUCKET_NAME", "basedosdados-dev"),
         "gcloud-projects": {
             "prod": {
                 "name": os.getenv("PROJECT_NAME_PROD", "basedosdados-dev"),
-                "credentials_path": Path.home() / ".basedosdados/credentials/prod.json",
+                "credentials_path": str(
+                    Path.home() / ".basedosdados/credentials/prod.json"
+                ),
             },
             "staging": {
                 "name": os.getenv("PROJECT_NAME_STAGING", "basedosdados-dev"),
-                "credentials_path": Path.home()
-                / ".basedosdados/credentials/staging.json",
+                "credentials_path": str(
+                    Path.home() / ".basedosdados/credentials/staging.json"
+                ),
             },
         },
     }
