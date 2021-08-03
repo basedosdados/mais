@@ -1,0 +1,51 @@
+name: link-check
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    env:
+      SPREADSHEET_URL: "https://docs.google.com/spreadsheets/d/"
+      SPREADSHEET_ID: "1vcrf2JGiJfu5_NuiB358mkHZh1sPSyeXOLVHKQMFSMc"
+      RANGE_NAME: "DocsBrokenLinks!A1:Z1000"
+      GDOCS_SERVICE_ACCOUNT: ${{ secrets.GDOCS_SERVICE_ACCOUNT }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install wheel scrapy google-auth google-api-python-client
+      - name: Search for broken links
+        run: |
+          cd .github/workflows/link-check
+          scrapy runspider -o report.csv crawler.py
+        shell: bash
+      - name: Send report to gsheets
+        run: |
+          cd .github/workflows/link-check
+          python to_sheets.py
+        shell: bash
+      - name: Create markdown report
+        id: report
+        run: |
+          cd .github/workflows/link-check
+          python to_markdown.py
+          test -f ./report.md && echo ::set-output name=continue::1 || echo ::set-output name=continue::0
+          test -f ./report.md && echo "\n---\n[GSheets](${{ env.SPREADSHEET_URL }}${{ env.SPREADSHEET_ID }})" >> ./report.md || echo "Report not found"
+        shell: bash
+      - name: Create issue from fle
+        if: ${{ steps.report.outputs.continue == 1 }}
+        uses: peter-evans/create-issue-from-file@v2
+        with:
+          title: "[docs] corrigir links quebrados"
+          content-filepath: .github/workflows/link-check/report.md
+          labels: automated issue, good first issue
+          assignees: fernandascovino

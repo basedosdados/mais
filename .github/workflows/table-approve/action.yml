@@ -1,6 +1,0 @@
-name: "Table Approve"
-description: "Approves table to production"
-author: "Base dos Dados"
-runs:
-  using: "docker"
-  image: "Dockerfile"

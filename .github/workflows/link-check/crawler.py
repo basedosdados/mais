@@ -38,9 +38,3 @@ class LinkSpider(CrawlSpider):
             )
             yield item
         yield None
-
-
-# References
-# https://gist.github.com/mdamien/7b71ef06f49de1189fb75f8fed91ae82
-# https://matthewhoelter.com/2018/11/27/finding-broken-links-on-website.html
-# https://dev.to/pjcalvo/broken-links-checker-with-python-and-scrapy-webcrawler-1gom
