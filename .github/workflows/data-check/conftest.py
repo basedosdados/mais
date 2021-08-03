@@ -37,7 +37,7 @@ def omit_hints(data):
 
 def get_table_configs():
     """Load table_config.yaml files"""
-    files = open("files.json", "r").read()
+    files = open("files.json", "r")
     files = json.load(files)
 
     folders = [Path(file).parent for file in files]

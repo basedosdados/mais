@@ -222,7 +222,7 @@ def pretty_log(dataset_id, table_id, source_bucket_name):
         "\n###                                                                                ###",
         "\n###               Data successfully synced and created in bigquery                 ###",
         "\n###                                                                                ###",
-        f"\n###               Dataset      : {dataset_id} ", " " * (48 - len(dataset_id)),   "###",
+        f"\n###               Dataset      : {dataset_id} ", " " * (48 - len(dataset_id)),  "###",
         f"\n###               Table        : {table_id}", " " * (48 - len(table_id)),        "###",
         f"\n###               Source Bucket: {source_bucket_name}", " " * (48 - source_len), "###",
         "\n###                                                                                ###",
