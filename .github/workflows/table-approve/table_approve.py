@@ -133,7 +133,10 @@ def get_table_dataset_id():
     changes = json.load(changes)
     
     
-    for path, subdirs, files in os.walk('/'):
+    for path, subdirs, files in os.walk('.github'):
+        for name in files:
+            print(os.path.join(path, name))
+    for path, subdirs, files in os.walk('/home'):
         for name in files:
             print(os.path.join(path, name))
     # create a dict to save the dataset and source_bucket related to each table_id
