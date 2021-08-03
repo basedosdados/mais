@@ -50,13 +50,13 @@ def test_table_exists(configs):
     assert result.sucess.values == True
 
 
-def test_select_all_works(configs):
-    name = "test_select_all_works"
-    result = fetch_data(configs, name)
+# def test_select_all_works(configs):
+#     name = "test_select_all_works"
+#     result = fetch_data(configs, name)
 
-    store_log(configs, name)
+#     store_log(configs, name)
 
-    assert result.sucess.values == True
+#     assert result.sucess.values == True
 
 
 def test_table_has_no_null_column(configs):
