@@ -98,9 +98,6 @@ def sync_bucket(
             If there are no files corresponding to the given dataset_id and table_id on the source bucket
     """
 
-    print(f"PWD -> {Path.home()}")
-    print(f"FILES -> {Path.home().glob('*')}")
-
     ref = Storage(dataset_id=dataset_id, table_id=table_id)
 
     prefix = f"{mode}/{dataset_id}/{table_id}/"
@@ -180,7 +177,7 @@ def push_table_to_bq(
     for path, subdirs, files in os.walk(".github"):
         for name in files:
             print(os.path.join(path, name))
-    for path, subdirs, files in os.walk("/home/.basedosdados"):
+    for path, subdirs, files in os.walk("/home/runner/.basedosdados"):
         for name in files:
             print(os.path.join(path, name))
 
@@ -203,7 +200,6 @@ def push_table_to_bq(
 
     # adjust the correct project ID in publish sql
     replace_project_id_publish_sql(configs_path, dataset_id, table_id)
-
     # create table object of selected table and dataset ID
     tb = bd.Table(table_id, dataset_id)
 
