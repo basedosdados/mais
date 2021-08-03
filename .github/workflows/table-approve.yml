@@ -60,9 +60,7 @@ jobs:
           GCP_BD_DEV_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
           GCP_BD_DEV_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
       - name: Table approve
-        run: |
-          pwd
-          python .github/workflows/table-approve/table_approve.py
+        run: python .github/workflows/table-approve/table_approve.py
         shell: bash
         env:
           PROJECT_ID: ${{ secrets.GCP_MAIN_PROJECT_ID }}

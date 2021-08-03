@@ -14,7 +14,7 @@ def tprint(title=""):
     if not len(title):
         print("#" * 80)
     else:
-        size = 40 - int(len(title) / 2)
+        size = 38 - int(len(title) / 2)
         print("\n", "#" * size, title, "#" * size)
 
 
