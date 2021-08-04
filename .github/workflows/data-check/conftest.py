@@ -58,10 +58,14 @@ def pytest_sessionstart(session):
         get_table_configs()
     )  # replace this line with a list of table_config.yaml paths for local debugging
 
+    # exit if has no fixtures
+    if not config_paths:
+        pytest.exit('No fixtures found', 0)
+
     # load checks with jinja2 placeholders
     # and replace {{ project_id }} by the appropriate environment
     with Path(check_path).open("r", encoding="utf-8") as file:
-        env = os.environ.get("BQ_ENVIRONMENT", "basedosdados-dev")
+        env = os.environ.get("BQ_ENVIRONMENT")
         text = file.read().replace("{{ project_id }}", env)
         checks = Template(text)
 

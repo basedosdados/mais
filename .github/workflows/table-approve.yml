@@ -129,8 +129,8 @@ jobs:
           BUCKET_NAME: basedosdados
           PROJECT_NAME_PROD: basedosdados
           PROJECT_NAME_STAGING: basedosdados-staging
-          GCP_BD_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
-          GCP_BD_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
+          GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
+          GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
       - name: Test data and fill report
         run: pytest -v .github/workflows/data-check
         shell: bash
