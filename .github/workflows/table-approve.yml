@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - 'bases/**'
+  pull_request:
 
 jobs:
   get-changes:
