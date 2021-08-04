@@ -1,0 +1,24 @@
+<descrição>
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-me-cno
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: <nome [você]>
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno/codeTratado por
+-----------
+Nome: <nome>
+
+Tratamento
+----------
+- 
+
+
+
+
