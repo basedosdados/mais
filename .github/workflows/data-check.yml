@@ -4,8 +4,6 @@ on:
   pull_request_target:
     types:
       - labeled
-    paths:
-      - 'bases/**'
 
 jobs:
   get-changes:
