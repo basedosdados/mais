@@ -4,9 +4,8 @@ on:
   push:
     paths:
       - python-package/**
-      - .github/workflows/python-ci.yml
       - .github/workflows/setup-env*
-  pull_request:    
+      - .github/workflows/python-ci.yml
 
 jobs:
   build-linux:
