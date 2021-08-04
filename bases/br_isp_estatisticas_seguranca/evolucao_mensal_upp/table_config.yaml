@@ -193,7 +193,7 @@ columns: # REQUIRED
   
     -   
         name: roubo_residencia
-        description: Roubo a residuência
+        description: Roubo a residência
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -211,7 +211,7 @@ columns: # REQUIRED
   
     -   
         name: roubo_transeunte
-        description: Roubo a traseunte
+        description: Roubo a transeunte
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

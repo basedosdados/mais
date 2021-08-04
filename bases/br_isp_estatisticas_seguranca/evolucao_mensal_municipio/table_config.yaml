@@ -36,7 +36,7 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    Renomeei nomes de variáveis para consistência.
+    Renomeei variáveis para consistência.
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -205,7 +205,7 @@ columns: # REQUIRED
   
     -   
         name: roubo_transeunte
-        description: Roubo a traseunte
+        description: Roubo a transeunte
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -247,7 +247,7 @@ columns: # REQUIRED
   
     -   
         name: roubo_residencia
-        description: Roubo a residuência
+        description: Roubo a residência
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

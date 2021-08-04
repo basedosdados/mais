@@ -48,7 +48,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Renomeei nomes de variáveis para consistência.
+Renomeei variáveis para consistência.
 
 Frequencia de Atualização
 -------------------------
