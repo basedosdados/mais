@@ -61,16 +61,16 @@ def env_setup():
     config_dict = {
         "metadata_path": "/home/runner/work/mais/mais/bases",
         "templates_path": str(Path.home() / ".basedosdados/templates"),
-        "bucket_name": os.getenv("BUCKET_NAME", "basedosdados-dev"),
+        "bucket_name": os.getenv("BUCKET_NAME"),
         "gcloud-projects": {
             "prod": {
-                "name": os.getenv("PROJECT_NAME_PROD", "basedosdados-dev"),
+                "name": os.getenv("PROJECT_NAME_PROD"),
                 "credentials_path": str(
                     Path.home() / ".basedosdados/credentials/prod.json"
                 ),
             },
             "staging": {
-                "name": os.getenv("PROJECT_NAME_STAGING", "basedosdados-dev"),
+                "name": os.getenv("PROJECT_NAME_STAGING"),
                 "credentials_path": str(
                     Path.home() / ".basedosdados/credentials/staging.json"
                 ),
@@ -79,11 +79,11 @@ def env_setup():
     }
 
     # load the secret of prod and staging data
-    GCP_BD_DEV_PROD = os.getenv("GCP_BD_DEV_PROD")
-    GCP_BD_DEV_STAGING = os.getenv("GCP_BD_DEV_STAGING")
+    GCP_BD_PROD = os.getenv("GCP_BD_PROD")
+    GCP_BD_STAGING = os.getenv("GCP_BD_STAGING")
 
     # create config and credential folders
-    create_config_tree(GCP_BD_DEV_PROD, GCP_BD_DEV_STAGING, config_dict)
+    create_config_tree(GCP_BD_PROD, GCP_BD_STAGING, config_dict)
 
     # create templates at config path
     Base()._refresh_templates()

@@ -49,11 +49,16 @@ jobs:
           python env_setup.py
         shell: bash
         env:
-          GCP_BD_DEV_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
-          GCP_BD_DEV_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
+          BUCKET_NAME: basedosdados-dev
+          PROJECT_NAME_PROD: basedosdados-dev
+          PROJECT_NAME_STAGING: basedosdados-dev
+          GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
+          GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
       - name: Test data and fill report
         run: pytest -v .github/workflows/data-check
         shell: bash
+        env:
+          BQ_ENVIRONMENT: basedosdados-dev
       - name: Format report
         if: ${{ always() }}
         id: get-comment-body
