@@ -17,7 +17,7 @@ from ckanapi import RemoteCKAN
 from ckanapi import errors
 
 from basedosdados.upload.base import Base
-from basedosdados.validation.exceptions import BaseDosDadosException
+from basedosdados.exceptions import BaseDosDadosException
 
 # CKAN_URL = os.environ.get("CKAN_URL", "http://localhost:5000")
 CKAN_URL = "http://basedosdados.org"
