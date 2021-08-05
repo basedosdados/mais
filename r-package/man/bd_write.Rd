@@ -13,12 +13,10 @@ bd_write_rds(.lazy_tbl, path, overwrite = FALSE, compress = "none", ...)
 bd_write_csv(.lazy_tbl, path, overwrite = FALSE, ...)
 }
 \arguments{
-\item{.lazy_tbl}{A variable that contains a database that was previously
-connected through the \code{\link[=bdplyr]{bdplyr()}} function. Tipically, it will be called
-after performing the desired operations with the \code{{dplyr}} verbs.}
+\item{.lazy_tbl}{A lazy tibble, tipically the output of \code{\link[=bdplyr]{bdplyr()}}.}
 
-\item{.write_fn}{A function capable of writing the result of a tibble to
-disk. Do not use () afther the function's name. For example:
+\item{.write_fn}{A function for writing the result of a tibble to
+disk. Do not use () afther the function's name, the function \emph{object} should be passed. Some functions the user might consider are:
 \link[writexl:write_xlsx]{writexl::write_xlsx}, \link[jsonlite:read_json]{jsonlite::write_json}, \link[foreign:write.dta]{foreign::write.dta},
 \link[arrow:write_feather]{arrow::write_feather}, etc.}
 
@@ -29,7 +27,7 @@ the corresponding extension.}
 \item{overwrite}{FALSE by default. Indicates whether the local file should
 be overwritten if it already exists. Use with care.}
 
-\item{...}{Other parameters passed to the \code{.write_fn} function.}
+\item{...}{Parameters passed to the \code{.write_fn} function.}
 
 \item{compress}{For \code{\link[=bd_write_rds]{bd_write_rds()}} only. Compression method to use: "none"
 (default), "gz" ,"bz", or "xz", in ascending order of compression.

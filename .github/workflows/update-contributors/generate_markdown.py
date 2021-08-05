@@ -1,5 +1,6 @@
-import emoji
 import re
+
+import emoji
 from github import Github
 
 

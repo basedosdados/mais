@@ -21,12 +21,12 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_ibge_censo_demografico.microdados_pessoa_2000 AS
 SELECT 
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_mesorregiao AS INT64) id_mesorregiao,
-SAFE_CAST(id_microrregiao AS INT64) id_microrregiao,
-SAFE_CAST(id_regiao_metropolitana AS INT64) id_regiao_metropolitana,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(id_distrito AS INT64) id_distrito,
-SAFE_CAST(id_subdistrito AS INT64) id_subdistrito,
+SAFE_CAST(id_mesorregiao AS STRING) id_mesorregiao,
+SAFE_CAST(id_microrregiao AS STRING) id_microrregiao,
+SAFE_CAST(id_regiao_metropolitana AS STRING) id_regiao_metropolitana,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(id_distrito AS STRING) id_distrito,
+SAFE_CAST(id_subdistrito AS STRING) id_subdistrito,
 SAFE_CAST(controle AS INT64) controle,
 SAFE_CAST(serie AS INT64) serie,
 SAFE_CAST(area_ponderacao AS INT64) area_ponderacao,

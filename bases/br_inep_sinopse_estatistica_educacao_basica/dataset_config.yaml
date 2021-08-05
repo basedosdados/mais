@@ -8,11 +8,11 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_sinop
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    <descrição>
+    As Sinopses Estatísticas da Educação Básica, até 2006, apresentam dados referentes a estabelecimento, matrícula, função docente, movimento e rendimento escolar, para as diferentes modalidades de ensino brasileiras: Ensino Regular (Educação Infantil e Ensino Fundamental e Médio), Educação Especial e Educação de Jovens e Adultos. Os dados estão distribuídos de acordo com as regiões brasileiras e suas respectivas unidades da federação.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: <organização> # REQUIRED
+organization: INEP # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
@@ -21,14 +21,12 @@ author:
 
 # Onde encontrar os dados originais e mais informações?
 website:
-    - <website 1>
-    - <website 2>
+    - http://inep.gov.br/sinopses-estatisticas-da-educacao-basica
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
-    - <grupo 1>
-    - <grupo 2>
+    - educacao
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -37,33 +35,36 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - <etiqueta 1> 
-    - <etiqueta 2>
+    - educacao
+    - escola
+    - ensino fundamental
+    - ensino medio
+    - educacao infantil
+
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.
 # Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
 languages:
-    - <língua 1>
-    - <língua 2>
+    - portugues
 
 # Os dados originais estão disponíveis de graça?
-free: <sim/não>
+free: sim
 
 # Are microdata available for download?
-microdata: <sim/não>
+microdata: sim
 
 # Existe uma API na fonte original?
-API: <sim/não>
+API: sim
 
 # É necessário registrar um usuário para baixar os dados originais?
-registration: <sim/não>
+registration: não
 
 # Como os dados originais estão disponibilizados?
-availability: <online/físico>
+availability: online
 
 # A fonte original requer IP brasileiro para acesso?
-brazilian_IP: <sim/não>
+brazilian_IP: não
 
 # Essa base está sob qual licença?
 # A licença MIT se aplica a bases públicas.

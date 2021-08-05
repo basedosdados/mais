@@ -22,8 +22,8 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_ibge_censo_demografico.microdados_domicilio_1980 AS
 SELECT 
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(id_distrito AS INT64) id_distrito,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(id_distrito AS STRING) id_distrito,
 SAFE_CAST(v201 AS INT64) v201,
 SAFE_CAST(v202 AS INT64) v202,
 SAFE_CAST(v203 AS INT64) v203,

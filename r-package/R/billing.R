@@ -72,19 +72,19 @@ get_billing_id <- function() {
 #' }
 #'
 
-set_billing_id <- function(billing_project_id) {
+set_billing_id <- function(billing_project_id = NULL) {
 
-  if(!rlang::is_string(billing_project_id)) {
+  if(rlang::is_null(billing_project_id)) {
 
-    rlang::abort("`billing_project_id` must be a 1-length character vector.")
+    billing_project_id <- readline("Please insert your billing project id: ")
+
+  }  else if (!rlang::is_string(billing_project_id)) {
+
+    rlang::abort("`billing_project_id` must be a string.")
 
   } else if(length(billing_project_id) > 1) {
 
     rlang::abort("`billing_project_id` must have length 1.")
-
-  } else if(!rlang::is_vector(billing_project_id)) {
-
-    rlang::abort("Pass a string to `billing_project_id`.")
 
   }
 
@@ -94,4 +94,5 @@ set_billing_id <- function(billing_project_id) {
   rlang::inform('Project keys set successfully')
 
 }
+
 
