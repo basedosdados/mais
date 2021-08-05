@@ -7,7 +7,7 @@ dataset_id: br_me_cno # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-me-cno # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: v1.0 # REQUIRED
 
 last_updated: 2021-08-04 # AUTO GENERATED
 
@@ -16,31 +16,36 @@ last_updated: 2021-08-04 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    <descrição>
+     O cadastro nacional de obras (CNO) é uma base de dados de registros de obras de contrução civil administrado pela Receita Federal. A obra deverá ser registrada no prazo de até 30 dias do início das atividades. 
+     Devem ser registradas todas as obras de construção civil, com algumas exceções, como reformas de pequeno valor. São informados os responsáveis pela obra, área total e datas referentes às atividades da construção.      
+     O CNO foi criado em 2018 para substituir o Cadastro Específico do INSS de obras (CEI). As obras cadastradas no CEI estão sendo migradas para o CNO e possuem a mesma inscrição anterior.
+        
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: <nome [você]>  # REQUIRED
+    name: Gustavo Aires Tiago  # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno/code # REQUIRED
-    website: <website>
-    email: <email>
+    website: https://github.com/gustavoairestiago
+    email: gustavo.tiago@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <nome>
-    code_url: <onde encontrar código de tratamento>
-    website: <onde encontrar os dados tratados>
-    email: <email>
+    name: Gustavo Aires Tiago
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno/code
+    website: https://basedosdados.org/dataset/br-me-cno
+    email: gustavo.tiago@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: |
-    <CEPESP fez X. Eu fiz K>
+    - Alteração de nome das variáeis
+    - Alteração de tipo de variável (int de identificadores para string)
+    - Exclusão de dois valores no campo 'data_fim' por inconsistência  
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: <frequência> # REQUIRED 
+data_update_frequency: mes # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -49,16 +54,13 @@ data_update_frequency: <frequência> # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - <primeira coluna>
-    - <segunda coluna>
-
+    - dia 
+    
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - <primeira coluna>
-    - <segunda coluna>
-
+    
 # Qual é a cobertura espacial da tabela?
 # Regras:
 #   - minúsculo, sem acento, singular
@@ -69,16 +71,15 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - <admin0 - pais>
-    - <admin1 - estados/regioes/etc>
-    - <admin2 - municipios/counties/etc>
-    - <admin3 - distritos/subdistritos/etc>
+    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - <ano 1>
-    - <ano 2>
+    - 2018
+    - 2019
+    - 2020
+    - 2021
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -100,15 +101,15 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: data_inicio
-      description: Data de início do vínculo (formato AAAA-MM-DD)
+      description: Data de início do vínculo 
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: data_fim
-      description: Data de fim do vínculo (formato AAAA-MM-DD)
+      description: Data de fim do vínculo 
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: data_registro
-      description: Data de registro (formato AAAA-MM-DD)
+      description: Data de registro 
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: qualificacao_responsavel
@@ -116,6 +117,6 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: ni_responsavel
-      description: "NI do responsável pela obra\n(Se for CPF o campo virá em branco)"
+      description: NI do responsável pela obra (Se for CPF o campo virá em branco)
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
