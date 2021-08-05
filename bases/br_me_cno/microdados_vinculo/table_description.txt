@@ -25,15 +25,10 @@ Email: gustavo.tiago@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- pais
-- estado
-- municipio
-- cep
 - dia
 
 Colunas identificando linhas unicamente
 -------------------
-- id_cno
 
 Cobertura Temporal
 ------------------
@@ -50,9 +45,7 @@ Tratamento
 ----------
 - Alteração de nome das variáeis
 - Alteração de tipo de variável (int de identificadores para string)
-- Exclusão das variáveis 'Nome do País' e 'Nome do municipio'
-- Exclusão de 0 à esquerda nas variáveis
-- Inculsão da variável id_municipio
+- Exclusão de dois valores no campo 'data_fim' por inconsistência  
 
 Frequencia de Atualização
 -------------------------
