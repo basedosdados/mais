@@ -44,6 +44,7 @@ def save_toml(config_dict, file_name, config_folder):
     with open(file_path / file_name, "w") as toml_file:
         toml.dump(config_dict, toml_file)
 
+
 def create_config_tree(prod_base64, staging_base64, config_dict):
     # execute the creation of .basedosdados
     create_config_folder(".basedosdados")
