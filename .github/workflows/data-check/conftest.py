@@ -60,7 +60,7 @@ def pytest_sessionstart(session):
 
     # exit if has no fixtures
     if not config_paths:
-        pytest.exit('No fixtures found', 0)
+        pytest.exit("No fixtures found", 0)
 
     # load checks with jinja2 placeholders
     # and replace {{ project_id }} by the appropriate environment
