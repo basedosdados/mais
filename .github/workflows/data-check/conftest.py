@@ -86,7 +86,7 @@ def pytest_sessionstart(session):
 
     # create empty json report
     with open("./report.json", "w") as file:
-        file.write("[]")
+        file.write("{}")
 
 
 # -------------------------------------
@@ -131,6 +131,7 @@ def pytest_sessionfinish(session, exitstatus):
     """Report overall test status in markdown"""
     with open("./report.json", "r") as file:
         data = json.load(file)
+        data = [v for _, v in data.items()]
         data = sorted(data, key=lambda x: x["id"])
         n = [datum["id"].split("/")[-1] for datum in data]
         n = max(int(ni) for ni in n)
