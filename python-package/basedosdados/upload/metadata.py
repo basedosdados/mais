@@ -156,7 +156,7 @@ class Metadata(Base):
 
 def comment_treatment(c):
 
-    return "\n" + "\n".join(c.get("description", [""]))
+    return "\n" + "".join(c.get("description", [""]))
 
 
 def handle_data(k, schema, data, local_default=None):
