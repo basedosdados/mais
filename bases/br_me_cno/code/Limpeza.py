@@ -14,7 +14,7 @@ cnae = pd.read_csv('./input/cno_cnaes.csv',encoding='latin',
 
 vinc = pd.read_csv('./input/cno_vinculos.csv',encoding='latin', 
                    skipinitialspace=True,
-                   na_values='',index_col=None).convert_dtypes()
+                   na_values=('','9999-01-31','3021-05-01'),index_col=None).convert_dtypes()
 
 #formatar variáveis
 
@@ -48,7 +48,8 @@ cno['Data de registro'] = cno['Data de registro'].dt.date
 cno['Data da situação'] = cno['Data da situação'].dt.date
 #----
 cnae = cnae.astype({'CNO':'string',
-                  'CNAE':'string'})
+                  'CNAE':'string',
+                  'Data de registro':'datetime64'})
 
 cnae['Data de registro'] = pd.to_datetime(cnae['Data de registro'],
                                         format="%Y/%m/%d").dt.date
@@ -59,11 +60,10 @@ vinc = vinc.astype({'CNO':'string',
                   'NI do responsável':'string'})
 
 vinc['Data de início'] = pd.to_datetime(vinc['Data de início'],
-                                        format="%Y/%m/%d").dt.date
+                                        format="%Y/%m/%d")
 vinc['Data de registro'] = pd.to_datetime(vinc['Data de registro'],
-                                          format="%Y/%m/%d").dt.date 
-
-#vinc['Data de fim'] = pd.to_datetime(vinc['Data de fim'], format="%Y/%m/%d")    
+                                         format="%Y/%m/%d")
+vinc['Data de fim'] = pd.to_datetime(vinc['Data de fim'], format="%Y/%m/%d")    
 
 #Renomear colunas
 cno.rename(columns={'Código do Pais':'id_pais',
@@ -113,6 +113,10 @@ id_rf = pd.read_csv('./tmp/id_mun_rf.csv').astype({
 cno['id_municipio_rf'] = cno['id_municipio_rf'].str.lstrip('0')
 
 cno = cno.join(id_rf[['id_municipio','id_tom']].set_index('id_tom'), on='id_municipio_rf')
+
+#Retirar zero a direita
+
+vinc['ni_responsavel'] = vinc['ni_responsavel'].str.rstrip('.0')
 
 #Organizar colunas
 cno = cno[['id_pais',

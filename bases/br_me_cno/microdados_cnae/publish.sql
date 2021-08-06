@@ -23,5 +23,5 @@ CREATE VIEW basedosdados-dev.br_me_cno.microdados_cnae AS
 SELECT 
 SAFE_CAST(id_cno AS STRING) id_cno,
 SAFE_CAST(cnae_2 AS STRING) cnae_2,
-SAFE_CAST(data_registro AS STRING) data_registro
+SAFE_CAST(data_registro AS DATE) data_registro
 from basedosdados-dev.br_me_cno_staging.microdados_cnae as t

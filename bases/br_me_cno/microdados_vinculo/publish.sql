@@ -22,9 +22,9 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_me_cno.microdados_vinculo AS
 SELECT 
 SAFE_CAST(id_cno AS STRING) id_cno,
-SAFE_CAST(data_inicio AS STRING) data_inicio,
-SAFE_CAST(data_fim AS STRING) data_fim,
-SAFE_CAST(data_registro AS STRING) data_registro,
+SAFE_CAST(data_inicio AS DATE) data_inicio,
+SAFE_CAST(data_fim AS DATE) data_fim,
+SAFE_CAST(data_registro AS DATE) data_registro,
 SAFE_CAST(qualificacao_responsavel AS STRING) qualificacao_responsavel,
 SAFE_CAST(ni_responsavel AS STRING) ni_responsavel
 from basedosdados-dev.br_me_cno_staging.microdados_vinculo as t

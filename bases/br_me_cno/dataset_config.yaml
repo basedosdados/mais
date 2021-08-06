@@ -53,16 +53,16 @@ free: sim
 microdata: sim
 
 # Existe uma API na fonte original?
-API: não
+API: nao
 
 # É necessário registrar um usuário para baixar os dados originais?
-registration: não
+registration: nao
 
 # Como os dados originais estão disponibilizados?
 availability: online
 
 # A fonte original requer IP brasileiro para acesso?
-brazilian_IP: não
+brazilian_IP: nao
 
 # Essa base está sob qual licença?
 # A licença MIT se aplica a bases públicas.
