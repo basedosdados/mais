@@ -72,7 +72,7 @@ class Dataset(Base):
 
         for file in (Path(self.templates) / "dataset").glob("*"):
 
-            if file.name in ["README.md"]:
+            if file.name in ["dataset_config.yaml", "README.md"]:
 
                 # Load and fill template
                 template = self._render_template(
