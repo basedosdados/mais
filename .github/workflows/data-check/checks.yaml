@@ -8,14 +8,14 @@ test_table_exists:
         FROM `{{ project_id }}.{{ dataset_id }}.INFORMATION_SCHEMA.TABLES`
     ) AS sucess
 
-test_select_all_works:
-  id: {{ dataset_id }}/{{ table_id }}/1
-  name: Check if select all  works
-  query: |
-    SELECT EXISTS (
-        SELECT * 
-        FROM `{{ project_id }}.{{ dataset_id }}.{{ table_id }}`
-    ) AS sucess
+# test_select_all_works:
+#   id: {{ dataset_id }}/{{ table_id }}/1
+#   name: Check if select all  works
+#   query: |
+#     SELECT EXISTS (
+#         SELECT * 
+#         FROM `{{ project_id }}.{{ dataset_id }}.{{ table_id }}`
+#     ) AS sucess
 
 test_table_has_no_null_column:
   id: {{ dataset_id }}/{{ table_id }}/2
