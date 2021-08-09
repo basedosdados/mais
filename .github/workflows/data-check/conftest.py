@@ -37,8 +37,8 @@ def omit_hints(data):
 
 def get_table_configs():
     """Load table_config.yaml files"""
-    files = open("files.json", "r")
-    files = json.load(files)
+    with open("files.json", "r") as file:
+        files = json.load(file)
 
     folders = [Path(file).parent for file in files]
 
@@ -60,11 +60,11 @@ def pytest_sessionstart(session):
 
     # exit if has no fixtures
     if not config_paths:
-        pytest.exit('No fixtures found', 0)
+        pytest.exit("No fixtures found", 0)
 
     # load checks with jinja2 placeholders
     # and replace {{ project_id }} by the appropriate environment
-    with Path(check_path).open("r", encoding="utf-8") as file:
+    with open(check_path, "r", encoding="utf-8") as file:
         env = os.environ.get("BQ_ENVIRONMENT")
         text = file.read().replace("{{ project_id }}", env)
         checks = Template(text)
@@ -72,7 +72,7 @@ def pytest_sessionstart(session):
     # load checks with configs from table_config.yaml
     _configs = []
     for cpath in config_paths:
-        with Path(cpath).open("r") as file:
+        with open(cpath, "r") as file:
             # load configs, a.k.a. table_config.yaml
             config = yaml.safe_load(file)
             config = omit_hints(config)
@@ -85,8 +85,8 @@ def pytest_sessionstart(session):
             _configs.append(config)
 
     # create empty json report
-    with Path("./report.json").open("w") as file:
-        file.write("[]")
+    with open("./report.json", "w") as file:
+        file.write("{}")
 
 
 # -------------------------------------
@@ -111,11 +111,15 @@ def pytest_runtest_makereport(item, call):
     res = outcome.get_result()
 
     if res.when == "call":
-        with Path("./report.json").open("r+") as file:
-            config = json.load(file)
-            config[-1]["passed"] = not res.failed
-            file.seek(0)
-            json.dump(config, file)
+        with open("./report.json", "r") as file:
+            config_id = item.funcargs["configs"]
+            config_id = config_id[item.originalname]
+            config_id = config_id["id"]
+
+            data = json.load(file)
+            data[config_id]["passed"] = not res.failed
+        with open("./report.json", "w") as file:
+            json.dump(data, file)
 
 
 # -------------------------------------
@@ -125,13 +129,14 @@ def pytest_runtest_makereport(item, call):
 
 def pytest_sessionfinish(session, exitstatus):
     """Report overall test status in markdown"""
-    with Path("./report.json").open("r") as file:
+    with open("./report.json", "r") as file:
         data = json.load(file)
+        data = [v for _, v in data.items()]
         data = sorted(data, key=lambda x: x["id"])
         n = [datum["id"].split("/")[-1] for datum in data]
         n = max(int(ni) for ni in n)
 
-    with Path("./report.md").open("w") as file:
+    with open("./report.md", "w") as file:
         file.write("Data Check Report\n---\n\n")
 
         for datum in data:
