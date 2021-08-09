@@ -6,15 +6,24 @@ cno = pd.read_csv('./input/cno.csv',encoding='latin',
                   skipinitialspace=True,na_values='',index_col=None,
                   dtype={'CEP':str,
                          'Código do Pais':str,
-                         'Código do municipio':str})
+                         'Código do municipio':str,
+                         'NI do responsável':str,
+                         'CEP': str,
+                         'CNO':str,
+                         'CNO vinculado':str})
 
 cnae = pd.read_csv('./input/cno_cnaes.csv',encoding='latin', 
                    skipinitialspace=True,
-                   na_values='',index_col=None)
+                   na_values='',index_col=None,
+                   dtype={'CNO': str,
+                  'CNAE':str})
 
 vinc = pd.read_csv('./input/cno_vinculos.csv',encoding='latin', 
                    skipinitialspace=True,
-                   na_values=('','9999-01-31','3021-05-01'),index_col=None).convert_dtypes()
+                   na_values=('','9999-01-31','3021-05-01'),index_col=None,
+                   dtype={'CNO': str,
+                  'Qualificação do contribuinte':str,
+                  'NI do responsável': str})
 
 #formatar variáveis
 
@@ -114,9 +123,6 @@ cno['id_municipio_rf'] = cno['id_municipio_rf'].str.lstrip('0')
 
 cno = cno.join(id_rf[['id_municipio','id_tom']].set_index('id_tom'), on='id_municipio_rf')
 
-#Retirar zero a direita
-
-vinc['ni_responsavel'] = vinc['ni_responsavel'].str.rstrip('.0')
 
 #Organizar colunas
 cno = cno[['id_pais',
