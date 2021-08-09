@@ -8,17 +8,17 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-     O cadastro nacional de obras (CNO) é uma base de dados de registros de obras de contrução civil administrado pela Receita Federal. A obra deverá ser registrada no prazo de até 30 dias do início das atividades. 
+     O cadastro nacional de obras (CNO) é uma base de dados de registro de obras de construção civil administrado pela Receita Federal. A obra deverá ser registrada no prazo de até 30 dias do início das atividades. 
      Devem ser registradas todas as obras de construção civil, com algumas exceções, como reformas de pequeno valor. São informados os responsáveis pela obra, área total e datas referentes às atividades da construção.      
-     O CNO foi criado em 2018 para substituir o Cadastro Específico do INSS de obras (CEI). As obras cadastradas no CEI estão sendo migradas para o CNO e possuem a mesma inscrição anterior.
+     O CNO foi criado em 2018 para substituir o Cadastro Específico do INSS de obras (CEI). As obras cadastradas no CEI estão sendo migradas para o CNO e possuem a mesma inscrição anterior. 
     
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: Receita Federal do Brasil - Ministério da Economia # REQUIRED
+organization: Ministério da Economia # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
-    name: 
+    name: Receita Federal do Brasil 
     email: 
 
 # Onde encontrar os dados originais e mais informações?

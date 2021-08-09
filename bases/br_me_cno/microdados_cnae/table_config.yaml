@@ -16,9 +16,8 @@ last_updated: 2021-08-05 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-     O cadastro nacional de obras (CNO) é uma base de dados de registros de obras de contrução civil administrado pela Receita Federal. A obra deverá ser registrada no prazo de até 30 dias do início das atividades. 
-     Devem ser registradas todas as obras de construção civil, com algumas exceções, como reformas de pequeno valor. São informados os responsáveis pela obra, área total e datas referentes às atividades da construção.      
-     O CNO foi criado em 2018 para substituir o Cadastro Específico do INSS de obras (CEI). As obras cadastradas no CEI estão sendo migradas para o CNO e possuem a mesma inscrição anterior.
+     A tabela faz parte do cadastro nacional de obras (CNO), uma base de dados de registros de obras de construção civil administrado pela Receita Federal. 
+     A tabela vincula a obra registrada no CNO à atividade da empresa classificada pelo Cadastro de Atividades Econômicas (CNAE), nos casos em que o responsável seja uma pessoa jurídica.
  
 
 # Quem está completando esse arquivo config?
@@ -39,7 +38,7 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: |
-    - Alteração de nome das variáeis
+    - Alteração de nome das variáveis
     - Alteração de tipo de variável (int de identificadores para string)
 
 # Com qual frequência a base é atualizada?
