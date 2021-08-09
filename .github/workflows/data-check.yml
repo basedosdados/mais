@@ -6,7 +6,28 @@ on:
       - labeled
 
 jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Check if workflow files were modified
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            workflows:
+              - '.github/**'
+      - name: Exit if workflow files were modified and it's a fork
+        if: |
+          steps.changes.outputs.workflows == 'true' &&
+          github.event.pull_request.head.repo.full_name != github.repository
+        run: exit 1
+
   get-changes:
+    needs: guard
     runs-on: ubuntu-latest
     if: github.event.label.name == 'data-check-trigger'
     steps:
@@ -71,7 +92,7 @@ jobs:
         env:
           GITHUB_WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
       - name: Create comment
-        if: ${{ always() && github.event_name == 'pull_request' }}
+        if: ${{ always() && github.event_name == 'pull_request_target' }}
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ github.event.pull_request.number }}
