@@ -23,7 +23,8 @@ Email: gustavo.tiago@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- dia
+- obra
+- cnae_2
 
 Colunas identificando linhas unicamente
 -------------------
