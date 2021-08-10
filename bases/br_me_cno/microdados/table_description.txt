@@ -24,11 +24,8 @@ Email: gustavo.tiago@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- pais
-- estado
-- municipio
-- cep
-- dia
+- obra
+
 
 Colunas identificando linhas unicamente
 -------------------
