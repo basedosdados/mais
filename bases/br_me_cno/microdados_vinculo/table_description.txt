@@ -24,7 +24,7 @@ Email: gustavo.tiago@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- dia
+- vinculo
 
 Colunas identificando linhas unicamente
 -------------------
