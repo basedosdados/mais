@@ -26,7 +26,6 @@ Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - obra
 
-
 Colunas identificando linhas unicamente
 -------------------
 - id_cno
