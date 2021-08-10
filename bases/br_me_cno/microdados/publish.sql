@@ -44,5 +44,5 @@ SAFE_CAST(qualificacao_responsavel AS STRING) qualificacao_responsavel,
 SAFE_CAST(nome_responsavel AS STRING) nome_responsavel,
 SAFE_CAST(nome_empresarial AS STRING) nome_empresarial,
 SAFE_CAST(unidade_medida AS STRING) unidade_medida,
-SAFE_CAST(area AS STRING) area
+SAFE_CAST(area AS FLOAT64) area
 from basedosdados-dev.br_me_cno_staging.microdados as t
