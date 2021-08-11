@@ -22,15 +22,15 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_inep_saeb.aluno_ef_1995_2005 AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(mascara AS STRING) mascara,
+SAFE_CAST(id_aluno AS STRING) id_aluno,
 SAFE_CAST(serie AS STRING) serie,
 SAFE_CAST(disciplina AS STRING) disciplina,
 SAFE_CAST(turma AS STRING) turma,
-SAFE_CAST(id_aluno AS STRING) id_aluno,
 SAFE_CAST(estrato AS STRING) estrato,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(localizacao AS STRING) localizacao,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(peso_aluno_turma AS FLOAT64) peso_aluno_turma,
 SAFE_CAST(peso_aluno_disciplina AS FLOAT64) peso_aluno_disciplina,
 SAFE_CAST(peso_turma AS FLOAT64) peso_turma,

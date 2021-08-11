@@ -1,0 +1,67 @@
+Informações das respostas ao questionário, à prova do SAEB e das proficiências dos alunos da 3ª/4ª série do EM
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-saeb
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Hevilyn Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
+Email: hevilynsouza12@hotmail.comTratado por
+-----------
+Nome: Hevilyn Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
+Email: hevilynsouza12@hotmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- aluno
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- id_municipio
+- id_escola
+- rede
+- localizacao
+- turma
+- turno
+- serie
+- id_aluno
+
+Cobertura Temporal
+------------------
+- 2011
+- 2013
+- 2015
+- 2017
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Renomeei variáveis
+- Exclui colunar região e área
+- Algumas variáveis mudam entre os anos, por isso foi feita uma compatiblização entre os dados que pode ser verificada na tabela arquitetura.
+- A variável rede tem como dicionário: 1=federal 2=estadual 3=municipal 4=privada
+- As respostas dos alunos aos questionários não foram padronizadas, estão de acordo com os dados originais.
+
+Frequencia de Atualização
+-------------------------
+2 anos
+
+
