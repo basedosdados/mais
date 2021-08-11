@@ -7,7 +7,7 @@ dataset_id: br_me_siconfi # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-me-siconfi # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi # AUTO GENERATED
 
-version: <v1.0> # REQUIRED
+version: v1.0 # REQUIRED
 
 last_updated: 2021-07-28 # AUTO GENERATED
 
@@ -38,7 +38,7 @@ treated_by:
 treatment_description: | 
 
     - Criação da coluna 'id_municipio' para os anos de 1989-2012
-    - Criação da coluna 'id_conta_normizalido' para compatibilizar todos os anos que não tem 'portaria'
+    - Criação da coluna 'id_conta_normalizado' para compatibilizar todos os anos que não tem 'portaria'
     - Criação da coluna 'id_conta_bd' para compatilizar toda série temporal 
     - Append nas tabelas dos anos 1989-2012 para a arquitetura 2013-2020    
     - Compatibilização de moedas
@@ -147,7 +147,7 @@ columns: # REQUIRED
   
     -   
         name: id_conta_normalizado
-        description: ID Conta normalizado 
+        description: ID Conta Normalizado - Base dos Dados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

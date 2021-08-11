@@ -23,7 +23,7 @@ published_by:
     name:  Crislane A. Souza   # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi/code # REQUIRED
     website: https://github.com/crislanealves
-    email: crislanealves@protonmail.com
+    email: crislanealves@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -32,12 +32,12 @@ treated_by:
     name: Crislane A. Souza
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi/code
     website: https://github.com/crislanealves
-    email: crislanealves@protonmail.com
+    email: crislanealves@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
     - Criação da coluna 'id_municipio' para os anos de 1989-2012
-    - Criação da coluna 'id_conta_normizalido' para compatibilizar todos os anos que não tem 'portaria'
+    - Criação da coluna 'id_conta_normalizado' para compatibilizar todos os anos que não tem 'portaria'
     - Criação da coluna 'id_conta_bd' para compatilizar toda série temporal 
     - Append nas tabelas dos anos 1989-2012 para a arquitetura 2013-2020    
     - Compatibilização de moedas
@@ -80,7 +80,6 @@ coverage_geo:
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-
     - 1989
     - 1990
     - 1991
@@ -158,7 +157,7 @@ columns: # REQUIRED
   
     -   
         name: id_conta_normalizado
-        description: ID Conta normalizado 
+        description: ID Conta Normalizado - Base dos Dados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
