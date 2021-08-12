@@ -82,10 +82,14 @@ class Metadata(Base):
     @lru_cache(256)
     def metadata_schema(self):
         # TODO: Get it from ckan endpoint
+
+        dataset_schema = json.load(open('dataset_schema_.json', 'r'))['result']
+        table_schema = json.load(open('table_schema_.json', 'r'))['result']
+
         if self.table_id is None:
-            return ast.literal_eval(open("dataset_schema.txt", "r").read())
+            return dataset_schema
         else:
-            return ast.literal_eval(open("table_schema.txt", "r").read())
+            return table_schema
 
     def is_updated(self):
 
@@ -207,10 +211,11 @@ def builds_yaml_object(schema, data=dict()):
                     # Parsing 'allOf': [{'$ref': '#/definitions/PublishedBy'}]
                     # To get PublishedBy
                     d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
-                    for dk, dv in definitions[d]["properties"].items():
-                        yaml_obj[k][dk] = handle_data(
-                            dk, definitions[d]["properties"], data[dk]
-                        )
+                    if "properties" in definitions[d].keys():
+                        for dk, dv in definitions[d]["properties"].items():
+                            yaml_obj[k][dk] = handle_data(
+                                dk, definitions[d]["properties"], data[dk]
+                            )
 
                 else:
                     yaml_obj[k] = handle_data(k, properties, data)
@@ -225,6 +230,12 @@ def builds_yaml_object(schema, data=dict()):
         id_after = properties[k]["yaml_order"]["id_after"]
         if id_after is None:
             return yaml_obj
+        elif id_after not in properties.keys():
+            raise BaseDosDadosException(
+                f"Inconsistent YAML ordering: {id_after} is pointed to by {k}" 
+                f" but doesn't have itself a `yaml_order` field in the JSON S"
+                f"chema."
+                )
         else:
             properties.pop(k)
             return _add_property(yaml_obj, properties, id_after)
