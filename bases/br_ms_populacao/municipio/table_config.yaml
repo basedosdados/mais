@@ -57,6 +57,8 @@ data_update_frequency: unico # REQUIRED
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
     - id_municipio
+    - sexo
+    - grupo_idade
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
