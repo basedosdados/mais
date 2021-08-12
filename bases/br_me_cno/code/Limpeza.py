@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 #importar tabela
 cno = pd.read_csv('./input/cno.csv',encoding='latin', 
@@ -12,6 +11,15 @@ cno = pd.read_csv('./input/cno.csv',encoding='latin',
                          'CNO':str,
                          'CNO vinculado':str})
 
+
+dic = pd.read_csv('./extra/dicionario.csv',encoding='utf-8',
+                  index_col=None,
+                  dtype={'id_tabela':str,
+                         'nome_coluna':str,
+                         'chave':str,
+                         'cobertura_temporal':str,
+                         'valor': str})
+
 cnae = pd.read_csv('./input/cno_cnaes.csv',encoding='latin', 
                    skipinitialspace=True,
                    na_values='',index_col=None,
@@ -22,7 +30,6 @@ vinc = pd.read_csv('./input/cno_vinculos.csv',encoding='latin',
                    skipinitialspace=True,
                    na_values=('','9999-01-31','3021-05-01'),index_col=None,
                    dtype={'CNO': str,
-                  'Qualificação do contribuinte':str,
                   'NI do responsável': str})
 
 #formatar variáveis
@@ -154,6 +161,7 @@ cno = cno[['id_pais',
 cno.to_csv('./output/microdados.csv',index=False, encoding='utf-8', na_rep='')
 cnae.to_csv('./output/microdados_cnae.csv',index=False, encoding='utf-8', na_rep='')
 vinc.to_csv('./output/microdados_vinculo.csv',index=False, encoding='utf-8', na_rep='')
+dic.to_csv('./extra/dicionario.csv',index=False, encoding='utf-8', na_rep='')
 
 
 
