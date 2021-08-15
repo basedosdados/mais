@@ -16,7 +16,7 @@ last_updated: 2021-08-12 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Estimativas anuais de população para os municípios, desagregadas por sexo e grupos de idade, para o período de 2000 a 2020.
+    Estimativas anuais de população para os municípios, desagregadas por sexo e grupos de idade.
 
 # Quem está completando esse arquivo config?
 published_by:
