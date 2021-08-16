@@ -1,6 +1,7 @@
-from collections import Counter
-import requests
 import os
+from collections import Counter
+
+import requests
 from dotenv import load_dotenv
 from generate_markdown import write_markdown
 

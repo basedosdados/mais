@@ -37,6 +37,9 @@ Colunas identificando linhas unicamente
 - turma
 - turno
 - serie
+========
+
+
 
 Cobertura Temporal
 ------------------

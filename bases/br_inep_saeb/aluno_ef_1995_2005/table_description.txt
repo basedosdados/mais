@@ -1,3 +1,4 @@
+
 Informações das respostas ao questionário, à prova do SAEB e das proficiências dos alunos da 5º e 9º ano do Ensino Fundamental.
 
 
@@ -10,6 +11,7 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
+
 Nome: Hevilyn Souza
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
 Email: hevilynsouza12@hotmail.comTratado por
@@ -17,6 +19,7 @@ Email: hevilynsouza12@hotmail.comTratado por
 Nome: Hevilyn Souza
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
 Email: hevilynsouza12@hotmail.com
+
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
@@ -60,5 +63,4 @@ Tratamento
 Frequencia de Atualização
 -------------------------
 2 anos
-
 

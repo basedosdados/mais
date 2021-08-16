@@ -2,13 +2,32 @@ Disponibilização de informações da execução orçamentária e financeira do
 
 
 Para saber mais acesse:
-Website: 
-Github: https://github.com/basedosdados/mais/
+Website: https://basedosdados.org/dataset/br-sp-gov-orcamento
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Publicado por
+-------------
+Nome: <nome [você]>
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento/codeTratado por
+-----------
+Nome: Diego Oliveira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento/code
+Website: https://www.fazenda.sp.gov.br/SigeoLei131/Paginas/FlexConsReceita.aspx
+Email: ds.oliveira404@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- orgao
+- gestao
+- unidade_gestora
+- fonte_de_recursos
+- receita
+- ano
+
+Colunas identificando linhas unicamente
 -------------------
 - orgao
 - gestao
@@ -43,14 +62,4 @@ Frequencia de Atualização
 -------------------------
 1 ano
 
-Tratado por
------------
-Nome: Diego Oliveira
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento/code
-Website: https://www.fazenda.sp.gov.br/SigeoLei131/Paginas/FlexConsReceita.aspx
-Email: ds.oliveira404@gmail.com
 
-Publicado por
--------------
-Nome: <nome [você]>
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento/code

@@ -18,9 +18,8 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-CREATE VIEW basedosdados.br_sp_gov_orcamento.receita_arrecadada AS
+CREATE VIEW basedosdados-dev.br_sp_gov_orcamento.receita_arrecadada AS
 SELECT
-    SAFE_CAST(35 as INT64) id_estado,
     SAFE_CAST(ano AS INT64) ano,
     SAFE_CAST(orgao AS STRING) orgao,
     SAFE_CAST(gestao AS STRING) gestao,
@@ -28,4 +27,4 @@ SELECT
     SAFE_CAST(fonte_de_recursos AS STRING) fonte_de_recursos,
     SAFE_CAST(receita AS STRING) receita,
     SAFE_CAST(arrecadado AS INT64) arrecadado
-from basedosdados-staging.br_sp_gov_orcamento_staging.receita_arrecadada as t
+from basedosdados-dev.br_sp_gov_orcamento_staging.receita_arrecadada AS t
