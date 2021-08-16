@@ -1,0 +1,56 @@
+Microdados do SAEB a nível escola. Questionários com informações sobre a escola, que estão relacionadas ao ambiente físico, infraestrutura, recursos, entre outros aspectos, preenchidos pelo aplicador.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-saeb
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Hevilyn Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
+Website: https://github.com/Hevilyn
+Email: hevilynsouza12@hotmail.comTratado por
+-----------
+Nome: Hevilyn Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
+Website: https://basedosdados.org/
+Email: hevilynsouza12@hotmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- estado
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_mascara
+- ano
+
+Cobertura Temporal
+------------------
+- 1995
+- 1997
+- 1999
+- 2001
+- 2003
+- 2005
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Compatibilização dos dados entre os anos. Os dados de algumas variáveis não estão disponíveis para todos os anos. Para melhor compreensão da base, consultar a tabela de compatibilização disponível.
+- Padronização de nomes de colunas.
+- Palavras sem acento e minúsculas.
+
+Frequencia de Atualização
+-------------------------
+2 anos
+
+

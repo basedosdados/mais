@@ -1,0 +1,1560 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: escola_1995_2005 # AUTO GENERATED
+dataset_id: br_inep_saeb # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-inep-saeb # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb # AUTO GENERATED
+
+version: v2.0 # REQUIRED
+
+last_updated: 2021-08-16 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+         Microdados do SAEB a nível escola. Questionários com informações sobre a escola, que estão relacionadas ao ambiente físico, infraestrutura, recursos, entre outros aspectos, preenchidos pelo aplicador.
+
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Hevilyn Souza  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code # REQUIRED
+    website: https://github.com/Hevilyn
+    email: hevilynsouza12@hotmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Hevilyn Souza
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
+    website: https://basedosdados.org/
+    email: hevilynsouza12@hotmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    - Compatibilização dos dados entre os anos. Os dados de algumas variáveis não estão disponíveis para todos os anos. Para melhor compreensão da base, consultar a tabela de compatibilização disponível.
+    - Padronização de nomes de colunas.
+    - Palavras sem acento e minúsculas.
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: 2 anos # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - estado
+    - ano
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_mascara
+    - ano
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 1995
+    - 1997
+    - 1999
+    - 2001
+    - 2003
+    - 2005
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+  
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_mascara
+        description: Número gerado como código de acesso aos estabelecimentos de ensino básico.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: rede
+        description: Rede escolar
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: localizacao
+        description: localizacao
+        description: Localização
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: serie
+        description: Série escolar
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: peso
+        description: Peso da escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q001
+        description: Estado de conservação do telhado
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q002
+        description: Estado de conservação das paredes
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q003
+        description: Estado de conservação do piso
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q004
+        description: Estado de conservação das portas
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q005
+        description: Estado de conservação das janelas
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q006
+        description: Como se encontra o estado de consercação das portas e janelas da escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q007
+        description: Estado de conservação dos banheiros
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q008
+        description: Estado de conservação da cozinha
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q009
+        description: Estado de conservação das instalações hidraúlicas
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q010
+        description: Estado de conservação das instalações elétricas
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q011
+        description: As salas de aula são iluminadas?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q012
+        description: As salas de aula são arejadas?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q013
+        description: Limpeza da entrada do prédio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q014
+        description: Limpeza das paredes externas
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q015
+        description: Limpeza das portas
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q016
+        description: Limpeza das janelas
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q017
+        description: Como pode ser classificada a limpeza das portas e janelas?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q018
+        description: Limpeza do pátio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q019
+        description: Limpeza dos corredores
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q020
+        description: Limpeza das salas de aula
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q021
+        description: Limpeza dos banheiros
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q022
+        description: Limpeza da cozinha
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q023
+        description: Existem muros, grades ou cercas em condições de garantir segurança?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q024
+        description: Existe controle de entrada e saída de alunos?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q025
+        description: Existe controle de entrada de pessoas estranhas na escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q026
+        description: Os portões permanecem trancados durante o funcionamento da escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q027
+        description: Existe algum tipo de vigilância para o período diurno?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q028
+        description: Existe algum tipo de vigilância para o período noturno?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q029
+        description: Existe algum tipo de vigilância para os finais de semana e feriados?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q030
+        description: Há algum tipo de policiamento para inibir furtos, etc?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q031
+        description: Há algum tipo de policiamento para inibir tráfico, etc dentro da escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q032
+        description: Há algum tipo de policiamento para inibir tráfico, etc nas imediações da escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q033
+        description: A escola tem algum sistema de proteção contra incêndio?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q034
+        description: As sala onde são guardados os equipamentos mais caros têm dispositivos de segurança?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q035
+        description: A escola apresenta sinais de depredação?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q036
+        description: Existe uma boa iluminação do lado de fora da escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q037
+        description: A escola adota medidas de segurança para os alunos nas imediações da escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q038
+        description: Hápolicial ou vigia de forma permanente na escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q039
+        description: A escola é servida por transporte público fácil em todos os turnos?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q040
+        description: Total de computadores na escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q041
+        description: Computadores para uso dos alunos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q042
+        description: Computadores com acesso à Internet para uso dos alunos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q043
+        description: Computadores para uso dos professores
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q044
+        description: Computadores com acesso à Internet para uso dos professores
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q045
+        description: Computadores exclusivamente para uso administrativo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q046
+        description: Conservação da televisão
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q047
+        description: Conservação da antena parabólica
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q048
+        description: Conservação do videocassete
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q049
+        description: Conservação da máquina fotocopiadora (xerox)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q050
+        description: Conservação do mimeógrafo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q051
+        description: Conservação do projetor de slides
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q052
+        description: Conservação do retroprojetor
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q053
+        description: Conservação da máqina de datilografia
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q054
+        description: Conservação da impressora
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q055
+        description: Conservação do aparelho de som
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q056
+        description: Pichação de muros ou paredes internas da escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q057
+        description: Pichação de muros ou paredes externas da escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q058
+        description: Depredação de banheiros
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q059
+        description: Depredação de dependências internas da escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q060
+        description: Depredação de dependências externas da escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q061
+        description: Qual o percentual de alunos que utiliza a biblioteca durante o mês?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q062
+        description: Existe uma pessoa responsável pela biblioteca?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q063
+        description: Os professores realizam trabalhos na biblioteca, fazendo uso de materiais disponíveis?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q064
+        description: Os alunos levam livros para casa?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q065
+        description: Os professores levam livros para casa?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q066
+        description: Membros da comunidade levam livros para casa?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q067
+        description: Conservação dos livros de estudo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q068
+        description: Conservação dos livros de literatura
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q069
+        description: Conservação das revistas de informação geral
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q070
+        description: Conservação dos jornais
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q071
+        description: Conservação de revistas em quadrinhos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q072
+        description: Como avalia esta escola, considerando as infra-estrutura e condições gerais?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q073
+        description: Com avalia esta escola, considerando as dependências externas?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q074
+        description: Nas salas de aula, o volume dos ruídos externos prejudica a concentraçao do alunos?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q075
+        description: A escola oferece serviços médicos?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q076
+        description: A escola oferece serviços odontológicos?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q077
+        description: A escola oferece serviços de alimentação?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q078
+        description: A escola oferece serviços de transporte?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q079
+        description: Como voce analisa as instalações quanto a ventilação?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q080
+        description: Como voce analisa as instalações quanto a iluminação?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q081
+        description: Como voce analisa as instalações quanto aos ruídos?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q082
+        description: Como voce analisa as instalações quanto aos aspectos da área externa(pátio, jardins)?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q083
+        description: Qual a condição de funcionamento da biblioteca?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q084
+        description: Qual a condição de funcionamento do laboratório de ciências?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q085
+        description: Qual a condição de funcionamento do laboratório de informática?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q086
+        description: Qual a condição de funcionamento do auditório?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q087
+        description: Qual a condição de funcionamento da quadra de esportes ou ginásio?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q088
+        description: Qual a condição de funcionamento da sala de professores?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q089
+        description: Caso a escola possua biblioteca, há livros de boa qualidade para utilizaçao didatica e pedagógica?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q090
+        description: Qual o estado de conservação do quadro negro da escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q091
+        description: Qual o estado de conservação das carteiras da escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q092
+        description: Qual o estado de conservação das mesas da escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q093
+        description: Qual o estado de conservação do computador da escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q094
+        description: Os banheiros, em sua maioria, estao funcionando?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q095
+        description: Existe algum banheiro interditado?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q096
+        description: Atividades culturais e recreativas em espaços fora da escola sao um serviço oferecido pela escola?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q097
+        description: Como voce analisa as instalações quanto ao espaço para recreaçao infantil?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q098
+        description: Qual a condição de funcionamento dos vestiários?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q099
+        description: Qual a condição de funcionamento das salas de aula?
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q100
+        description: Indique as condições de uso e funcionamento do equipamento de educação fisica
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q101
+        description: Analise as instalações quanto a relaçao numero de carteiras X numero de alunos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q102
+        description: Analise as instalações quanto a relação espaço físico X número de alunos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q103
+        description: Carga horária semanal para 2ª série do 2ºGrau em Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q104
+        description: Carga horária semanal para 2ª série do 2ºGrau em Matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q105
+        description: Carga horária semanal para 3ª série do 2ºGrau em Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q106
+        description: Carga horária semanal para 3ª série do 2ºGrau em Matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q107
+        description: Carga horária semanal para 4ª série em Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q108
+        description: Carga horária semanal para 4ª série em Matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q109
+        description: Carga horária semanal para 8ª série em Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q110
+        description: Carga horária semanal para 8ª série em Matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q111
+        description: Número de alunos matriculados em 30/04/94 na 1ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q112
+        description: Número de alunos admitidos após 30/04/94 na 1ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q113
+        description: Número de alunos aprovados em 1994 na 1ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q114
+        description: Número de alunos reprovados em 1994 na 1ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q115
+        description: Número de alunos afastados por abandono em 1994 na 1ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q116
+        description: Número de alunos transferidos em 1994 na 1ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q117
+        description: Número de alunos matriculados em 30/04/95 na 1ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q118
+        description: Número de alunos matriculados em 30/04/95 na 1ª série do 1º Grau e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q119
+        description: Número de alunos repetentes em 1995 na 1ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q120
+        description: Número de alunos matriculados em 30/04/94 na 2ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q121
+        description: Número de alunos admitidos após 30/04/94 na 2ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q122
+        description: Número de alunos aprovados em 1994 na 2ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q123
+        description: Número de alunos reprovados em 1994 na 2ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q124
+        description: Número de alunos afastados por abandono em 1994 na 2ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q125
+        description: Número de alunos transferidos em 1994 na 2ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q126
+        description: Número de alunos matriculados em 30/04/95 na 2ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q127
+        description: Número de alunos matriculados em 30/04/95 na 2ª série do 1º Grau e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q128
+        description: Número de alunos repetentes em 1995 na 2ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q129
+        description: Número de alunos matriculados em 30/04/94 na 3ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q130
+        description: Número de alunos admitidos após 30/04/94 na 3ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q131
+        description: Número de alunos aprovados em 1994 na 3ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q132
+        description: Número de alunos reprovados em 1994 na 3ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q133
+        description: Número de alunos afastados por abandono em 1994 na 3ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q134
+        description: Número de alunos transferidos em 1994 na 3ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q135
+        description: Número de alunos matriculados em 30/04/95 na 3ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q136
+        description: Número de alunos matriculados em 30/04/95 na 3ª série do 1º Grau e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q137
+        description: Número de alunos repetentes em 1995 na 3ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q138
+        description: Número de alunos matriculados em 30/04/94 na 4ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q139
+        description: Número de alunos admitidos após 30/04/94 na 4ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q140
+        description: Número de alunos aprovados em 1994 na 4ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q141
+        description: Número de alunos reprovados em 1994 na 4ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q142
+        description: Número de alunos afastados por abandono em 1994 na 4ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q143
+        description: Número de alunos transferidos em 1994 na 4ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q144
+        description: Número de alunos matriculados em 30/04/95 na 4ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q145
+        description: Número de alunos matriculados em 30/04/95 na 4ª série do 1º Grau e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q146
+        description: Número de alunos repetentes em 1995 na 4ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q147
+        description: Número de alunos matriculados em 30/04/94 na 5ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q148
+        description: Número de alunos admitidos após 30/04/94 na 5ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q149
+        description: Número de alunos aprovados em 1994 na 5ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q150
+        description: Número de alunos reprovados em 1994 na 5ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q151
+        description: Número de alunos afastados por abandono em 1994 na 5ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q152
+        description: Número de alunos transferidos em 1994 na 5ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q153
+        description: Número de alunos matriculados em 30/04/95 na 5ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q154
+        description: Número de alunos matriculados em 30/04/95 na 5ª série do 1º Grau e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q155
+        description: Número de alunos repetentes em 1995 na 5ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q156
+        description: Número de alunos matriculados em 30/04/94 na 6ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q157
+        description: Número de alunos admitidos após 30/04/94 na 6ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q158
+        description: Número de alunos aprovados em 1994 na 6ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q159
+        description: Número de alunos reprovados em 1994 na 6ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q160
+        description: Número de alunos afastados por abandono em 1994 na 6ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q161
+        description: Número de alunos transferidos em 1994 na 6ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q162
+        description: Número de alunos matriculados em 30/04/95 na 6ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q163
+        description: Número de alunos matriculados em 30/04/95 na 6ª série do 1º Grau e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q164
+        description: Número de alunos repetentes em 1995 na 6ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q165
+        description: Número de alunos matriculados em 30/04/94 na 7ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q166
+        description: Número de alunos admitidos após 30/04/94 na 7ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q167
+        description: Número de alunos aprovados em 1994 na 7ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q168
+        description: Número de alunos reprovados em 1994 na 7ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q169
+        description: Número de alunos afastados por abandono em 1994 na 7ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q170
+        description: Número de alunos transferidos em 1994 na 7ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q171
+        description: Número de alunos matriculados em 30/04/95 na 7ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q172
+        description: Número de alunos matriculados em 30/04/95 na 7ª série do 1º Grau e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q173
+        description: Número de alunos repetentes em 1995 na 7ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q174
+        description: Número de alunos matriculados em 30/04/94 na 8ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q175
+        description: Número de alunos admitidos após 30/04/94 na 8ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q176
+        description: Número de alunos aprovados em 1994 na 8ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q177
+        description: Número de alunos reprovados em 1994 na 8ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q178
+        description: Número de alunos afastados por abandono em 1994 na 8ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q179
+        description: Número de alunos transferidos em 1994 na 8ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q180
+        description: Número de alunos matriculados em 30/04/95 na 8ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q181
+        description: Número de alunos matriculados em 30/04/95 na 8ª série do 1º Grau e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q182
+        description: Número de alunos repetentes em 1995 na 8ª série do 1º Grau
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q183
+        description: Número de alunos matriculados em 30/04/94 na 1ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q184
+        description: Número de alunos admitidos após 30/04/94 na 1ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q185
+        description: Número de alunos aprovados em 1994 na 1ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q186
+        description: Número de alunos reprovados em 1994 na 1ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q187
+        description: Número de alunos afastados por abandono em 1994 na 1ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q188
+        description: Número de alunos transferidos em 1994 na 1ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q189
+        description: Número de alunos matriculados em 30/04/95 na 1ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q190
+        description: Número de alunos matriculados em 30/04/95 na 1ª série do 2º Grau do turno diurno e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q191
+        description: Número de alunos repetentes em 1995 na 1ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q192
+        description: Número de alunos matriculados em 30/04/94 na 1ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q193
+        description: Número de alunos admitidos após 30/04/94 na 1ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q194
+        description: Número de alunos aprovados em 1994 na 1ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q195
+        description: Número de alunos reprovados em 1994 na 1ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q196
+        description: Número de alunos afastados por abandono em 1994 na 1ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q197
+        description: Número de alunos transferidos em 1994 na 1ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q198
+        description: Número de alunos matriculados em 30/04/95 na 1ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q199
+        description: Número de alunos matriculados em 30/04/95 na 1ª série do 2º Grau do turno noturno e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q200
+        description: Número de alunos repetentes em 1995 na 1ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q201
+        description: Número de alunos matriculados em 30/04/94 na 2ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q202
+        description: Número de alunos admitidos após 30/04/94 na 2ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q203
+        description: Número de alunos aprovados em 1994 na 2ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q204
+        description: Número de alunos reprovados em 1994 na 2ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q205
+        description: Número de alunos afastados por abandono em 1994 na 2ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q206
+        description: Número de alunos transferidos em 1994 na 2ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q207
+        description: Número de alunos matriculados em 30/04/95 na 2ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q208
+        description: Número de alunos matriculados em 30/04/95 na 2ª série do 2º Grau do turno diurno e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q209
+        description: Número de alunos repetentes em 1995 na 2ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q210
+        description: Número de alunos matriculados em 30/04/94 na 2ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q211
+        description: Número de alunos admitidos após 30/04/94 na 2ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q212
+        description: Número de alunos aprovados em 1994 na 2ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q213
+        description: Número de alunos reprovados em 1994 na 2ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q214
+        description: Número de alunos afastados por abandono em 1994 na 2ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q215
+        description: Número de alunos transferidos em 1994 na 2ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q216
+        description: Número de alunos matriculados em 30/04/95 na 2ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q217
+        description: Número de alunos matriculados em 30/04/95 na 2ª série do 2º Grau do turno noturno e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q218
+        description: Número de alunos repetentes em 1995 na 2ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q219
+        description: Número de alunos matriculados em 30/04/94 na 3ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q220
+        description: Número de alunos admitidos após 30/04/94 na 3ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q221
+        description: Número de alunos aprovados em 1994 na 3ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q222
+        description: Número de alunos reprovados em 1994 na 3ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q223
+        description: Número de alunos afastados por abandono em 1994 na 3ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q224
+        description: Número de alunos transferidos em 1994 na 3ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q225
+        description: Número de alunos matriculados em 30/04/95 na 3ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q226
+        description: Número de alunos matriculados em 30/04/95 na 3ª série do 2º Grau do turno diurno e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q227
+        description: Número de alunos repetentes em 1995 na 3ª série do 2º Grau do turno diurno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q228
+        description: Número de alunos matriculados em 30/04/94 na 3ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q229
+        description: Número de alunos admitidos após 30/04/94 na 3ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q230
+        description: Número de alunos aprovados em 1994 na 3ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q231
+        description: Número de alunos reprovados em 1994 na 3ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q232
+        description: Número de alunos afastados por abandono em 1994 na 3ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q233
+        description: Número de alunos transferidos em 1994 na 3ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q234
+        description: Número de alunos matriculados em 30/04/95 na 3ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q235
+        description: Número de alunos matriculados em 30/04/95 na 3ª série do 2º Grau do turno noturno e que nao estavam matriculados na escola em 1994
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q236
+        description: Número de alunos repetentes em 1995 na 3ª série do 2º Grau do turno noturno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
