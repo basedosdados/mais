@@ -17,6 +17,7 @@ from basedosdados.upload.base import Base
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
+from basedosdados.upload.metadata import Metadata
 from basedosdados.exceptions import BaseDosDadosException
 
 
@@ -135,9 +136,12 @@ class Table(Base):
 
     def _make_template(self, columns, partition_columns):
 
+        # create table_config.yaml with metadata
+        Metadata(self.dataset_id, self.table_id).create(if_exists='replace')
+
         for file in (Path(self.templates) / "table").glob("*"):
 
-            if file.name in ["table_config.yaml", "publish.sql"]:
+            if file.name in ["publish.sql"]:
 
                 # Load and fill template
                 template = Template(file.open("r", encoding="utf-8").read()).render(

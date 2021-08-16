@@ -4,6 +4,7 @@ from google.cloud import bigquery
 from google.api_core.exceptions import Conflict
 
 from basedosdados.upload.base import Base
+from basedosdados.upload.metadata import Metadata
 
 
 class Dataset(Base):
@@ -70,9 +71,13 @@ class Dataset(Base):
                 "Set replace=True to replace current files."
             )
 
+        # create dataset_config.yaml with metadata
+        print('IIIIIIIIIII')
+        Metadata(self.dataset_id).create(if_exists='replace')
+
         for file in (Path(self.templates) / "dataset").glob("*"):
 
-            if file.name in ["dataset_config.yaml", "README.md"]:
+            if file.name in ["README.md"]:
 
                 # Load and fill template
                 template = self._render_template(
