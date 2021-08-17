@@ -20,7 +20,8 @@ from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
 
 # CKAN_URL = os.environ.get("CKAN_URL", "http://localhost:5000")
-CKAN_URL = "http://basedosdados.org"
+CKAN_URL = "http://0.0.0.0:5000"
+CKAN_URL_STAGING = "http://staging.basedosdados.org"
 
 
 class Metadata(Base):
@@ -55,7 +56,7 @@ class Metadata(Base):
     def ckan_config(self) -> dict:
 
         # TODO: This will not be needed after migration
-        pkg_list = requests.get(CKAN_URL + "/api/3/action/package_list").json()[
+        pkg_list = requests.get(CKAN_URL_STAGING + "/api/3/action/package_list").json()[
             "result"
         ]
 
@@ -67,8 +68,16 @@ class Metadata(Base):
             return defaultdict(lambda: dict())
 
         dataset_config = requests.get(
-            CKAN_URL + f"/api/3/action/package_show?id={dataset_id}"
+            CKAN_URL_STAGING + f"/api/3/action/package_show?id={dataset_id}"
         ).json()["result"]
+
+        # unpack extras
+        dataset_args = [
+            d for d in dataset_config["extras"] if d["key"] == "dataset_args"
+        ]
+        if dataset_args:
+            dataset_args = ast.literal_eval(dataset_args[0]["value"])
+            dataset_config.update(dataset_args)
 
         if self.table_id is not None:
             return [
@@ -83,8 +92,12 @@ class Metadata(Base):
     def metadata_schema(self):
         # TODO: Get it from ckan endpoint
 
-        dataset_schema = json.load(open('dataset_schema_.json', 'r'))['result']
-        table_schema = json.load(open('table_schema_.json', 'r'))['result']
+        dataset_schema = requests.get(
+            CKAN_URL + "/api/3/action/bd_dataset_schema"
+        ).json()["result"]
+        table_schema = requests.get(
+            CKAN_URL + "/api/3/action/bd_bdm_table_schema"
+        ).json()["result"]
 
         if self.table_id is None:
             return dataset_schema
@@ -100,7 +113,7 @@ class Metadata(Base):
                 "metadata_modified"
             )
 
-    def create(self, if_exists="raise"):
+    def create(self, if_exists="raise", columns=None, partition_columns=None):
         """Create metadata file based on the current version saved to
         CKAN database
 
@@ -167,7 +180,10 @@ def handle_data(k, schema, data, local_default=None):
 
     # If no data is found for that key, uses pydantic default, else uses
     # local default
-    selected = data.get(k, schema[k].get("default", local_default))
+
+    selected = data.get(k)
+    if not selected:
+        selected = schema[k].get("description", local_default)
 
     # In some cases like `tags`, `groups`, `organization`
     # the API default is to return a dict or list[dict] with all info.
@@ -205,7 +221,7 @@ def builds_yaml_object(schema, data=dict()):
                 k == goal
             ):
 
-                if "allOf" in properties[k]:
+                if "allOf" in properties[k] and (data.get(k) is not None):
 
                     yaml_obj[k] = ryaml.CommentedMap()
                     # Parsing 'allOf': [{'$ref': '#/definitions/PublishedBy'}]
@@ -214,7 +230,7 @@ def builds_yaml_object(schema, data=dict()):
                     if "properties" in definitions[d].keys():
                         for dk, dv in definitions[d]["properties"].items():
                             yaml_obj[k][dk] = handle_data(
-                                dk, definitions[d]["properties"], data[dk]
+                                dk, definitions[d]["properties"], data.get(k)
                             )
 
                 else:
@@ -232,10 +248,10 @@ def builds_yaml_object(schema, data=dict()):
             return yaml_obj
         elif id_after not in properties.keys():
             raise BaseDosDadosException(
-                f"Inconsistent YAML ordering: {id_after} is pointed to by {k}" 
+                f"Inconsistent YAML ordering: {id_after} is pointed to by {k}"
                 f" but doesn't have itself a `yaml_order` field in the JSON S"
                 f"chema."
-                )
+            )
         else:
             properties.pop(k)
             return _add_property(yaml_obj, properties, id_after)
