@@ -662,10 +662,35 @@ def cli_metadata():
     default="raise",
     help="[raise|replace|pass] if metadata config file alread exists",
 )
+@click.option(
+    "--columns",
+    default=[],
+    help="Data columns. Example: --columns=col1,col2",
+    callback=lambda _, __, x: x.split(",") if x else [],
+)
+@click.option(
+    "--partition_columns",
+    default=[],
+    help="Columns that partition the data. Example: --partition_columns=col1,col2",
+    callback=lambda _, __, x: x.split(",") if x else [],
+)
+@click.option(
+    "--force_columns",
+    default=False,
+    help="Overwrite columns with local columns.",
+)
 @click.pass_context
-def cli_create_metadata(ctx, dataset_id, table_id, if_exists):
+def cli_create_metadata(
+    ctx, dataset_id, table_id, if_exists, columns, partition_columns, force_columns
+):
 
-    m = Metadata(dataset_id, table_id, **ctx.obj).create(if_exists=if_exists)
+    m = Metadata(dataset_id, table_id, **ctx.obj).create(
+        if_exists=if_exists,
+        columns=columns,
+        partition_columns=partition_columns,
+        force_columns=force_columns,
+    )
+
     click.echo(
         click.style(
             f"Metadata file was created at `{m.obj_path}`",

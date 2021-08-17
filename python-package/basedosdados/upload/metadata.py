@@ -76,7 +76,7 @@ class Metadata(Base):
             d for d in dataset_config["extras"] if d["key"] == "dataset_args"
         ]
         if dataset_args:
-            dataset_args = ast.literal_eval(dataset_args[0]["value"])
+            dataset_args = dataset_args[0]["value"]
             dataset_config.update(dataset_args)
 
         if self.table_id is not None:
@@ -86,6 +86,18 @@ class Metadata(Base):
 
         else:
             return dataset_config
+
+    @property
+    @lru_cache(256)
+    def columns_schema(self) -> dict:
+        """Returns a dictionary with the schema of the columns.
+
+        Returns:
+        """
+
+        return requests.get(CKAN_URL + "/api/3/action/bd_bdm_columns_schema").json()[
+            "result"
+        ]
 
     @property
     @lru_cache(256)
@@ -113,7 +125,9 @@ class Metadata(Base):
                 "metadata_modified"
             )
 
-    def create(self, if_exists="raise", columns=None, partition_columns=None):
+    def create(
+        self, if_exists="raise", columns=[], partition_columns=[], force_columns=False
+    ):
         """Create metadata file based on the current version saved to
         CKAN database
 
@@ -134,9 +148,22 @@ class Metadata(Base):
                 " to `replace` to replace it."
             )
         elif if_exists != "pass":
-            yaml_obj = builds_yaml_object(self.metadata_schema, self.ckan_config)
+
+            data = self.ckan_config
+
+            # adds local columns if 1. columns is empty and 2. force_columns is True
+            if (not data.get("columns")) or force_columns == True:
+                data["columns"] = [{"name": c} for c in columns]
+
+            yaml_obj = builds_yaml_object(
+                self.metadata_schema, data, columns_schema=self.columns_schema
+            )
             self.obj_path.parent.mkdir(parents=True, exist_ok=True)
-            ryaml.YAML().dump(yaml_obj, open(self.obj_path, "w"))
+
+            ruamel = ryaml.YAML()
+            ruamel.preserve_quotes = True
+            ruamel.indent(mapping=4, sequence=6, offset=4)
+            ruamel.dump(yaml_obj, open(self.obj_path, "w"))
 
         return self
 
@@ -171,11 +198,6 @@ class Metadata(Base):
             )
 
 
-def comment_treatment(c):
-
-    return "\n" + "".join(c.get("description", [""]))
-
-
 def handle_data(k, schema, data, local_default=None):
 
     # If no data is found for that key, uses pydantic default, else uses
@@ -183,7 +205,7 @@ def handle_data(k, schema, data, local_default=None):
 
     selected = data.get(k)
     if not selected:
-        selected = schema[k].get("description", local_default)
+        selected = schema[k].get("user_input_hint", local_default)
 
     # In some cases like `tags`, `groups`, `organization`
     # the API default is to return a dict or list[dict] with all info.
@@ -198,8 +220,26 @@ def handle_data(k, schema, data, local_default=None):
     return selected
 
 
-def builds_yaml_object(schema, data=dict()):
+def handle_complex_fields(yaml_obj, k, properties, definitions, data):
+    yaml_obj[k] = ryaml.CommentedMap()
+    # Parsing 'allOf': [{'$ref': '#/definitions/PublishedBy'}]
+    # To get PublishedBy
+    d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
+    if "properties" in definitions[d].keys():
+        for dk, dv in definitions[d]["properties"].items():
+            yaml_obj[k][dk] = handle_data(dk, definitions[d]["properties"], data.get(k))
 
+    return yaml_obj
+
+
+def builds_yaml_object(schema, data=dict(), columns_schema=dict()):
+    def comment_treatment(c):
+        if COLUMNS:
+            return None
+        else:
+            return "\n" + "".join(c.get("description", [""]))
+
+    COLUMNS = False
     yaml_obj = ryaml.CommentedMap()
 
     properties, definitions = schema["properties"], schema["definitions"]
@@ -223,15 +263,9 @@ def builds_yaml_object(schema, data=dict()):
 
                 if "allOf" in properties[k] and (data.get(k) is not None):
 
-                    yaml_obj[k] = ryaml.CommentedMap()
-                    # Parsing 'allOf': [{'$ref': '#/definitions/PublishedBy'}]
-                    # To get PublishedBy
-                    d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
-                    if "properties" in definitions[d].keys():
-                        for dk, dv in definitions[d]["properties"].items():
-                            yaml_obj[k][dk] = handle_data(
-                                dk, definitions[d]["properties"], data.get(k)
-                            )
+                    yaml_obj = handle_complex_fields(
+                        yaml_obj, k, properties, definitions, data
+                    )
 
                 else:
                     yaml_obj[k] = handle_data(k, properties, data)
@@ -256,4 +290,18 @@ def builds_yaml_object(schema, data=dict()):
             properties.pop(k)
             return _add_property(yaml_obj, properties, id_after)
 
-    return _add_property(yaml_obj, properties)
+    yaml_obj = _add_property(yaml_obj, properties)
+
+    if data.get("columns"):
+        COLUMNS = True
+        properties, definitions = (
+            columns_schema["properties"],
+            columns_schema["definitions"],
+        )
+
+        yaml_obj["columns"] = []
+        for data in data.get("columns"):
+            prop = deepcopy(properties)
+            yaml_obj["columns"].append(_add_property(ryaml.CommentedMap(), prop))
+
+    return yaml_obj

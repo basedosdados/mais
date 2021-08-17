@@ -137,7 +137,9 @@ class Table(Base):
     def _make_template(self, columns, partition_columns):
 
         # create table_config.yaml with metadata
-        Metadata(self.dataset_id, self.table_id).create(if_exists='replace')
+        Metadata(self.dataset_id, self.table_id).create(
+            if_exists="replace", columns=columns, partition_columns=partition_columns
+        )
 
         for file in (Path(self.templates) / "table").glob("*"):
 
@@ -168,7 +170,7 @@ class Table(Base):
             raise Exception(
                 "Check if your google sheet Share are: Anyone on the internet with this link can view"
             )
-    
+
     def table_exists(self, mode):
         """Check if table exists in BigQuery.
 
@@ -622,9 +624,11 @@ class Table(Base):
                 * 'pass' : Do nothing
         """
         if not self.table_exists("staging"):
-            raise BaseDosDadosException("You cannot append to a table that does not exist")
+            raise BaseDosDadosException(
+                "You cannot append to a table that does not exist"
+            )
         else:
-              Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
+            Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
                 filepath,
                 mode="staging",
                 partitions=partitions,
