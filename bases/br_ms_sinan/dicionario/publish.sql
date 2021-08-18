@@ -24,7 +24,7 @@ SELECT
 SAFE_CAST(coluna AS STRING) coluna,
 SAFE_CAST(tipo AS STRING) tipo,
 SAFE_CAST(descricao AS STRING) descricao,
-SAFE_CAST(chaves AS STRING) chaves,
+SAFE_CAST(chaves AS INT64) chaves,
 SAFE_CAST(valores AS STRING) valores,
 SAFE_CAST(dataset AS STRING) dataset
 from basedosdados-dev.br_ms_sinan_staging.dicionario as t
