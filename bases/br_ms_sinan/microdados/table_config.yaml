@@ -1,0 +1,592 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: microdados # AUTO GENERATED
+dataset_id: br_ms_sinan # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-ms-sinan # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinan # AUTO GENERATED
+
+version: v1.0 # REQUIRED
+
+last_updated: 2021-08-09 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Microdados da planilha de Violência Interpessoal/Autoprovocada do SINAN,  cujo  objetivo  é  captar  informações  sobre  o  perfil  dos  atendimentos  por  violências  doméstica,  sexual  e/ou  outras  violências  (autoprovocadas  e  interpessoais) em unidades de saúde, caracterizando o perfil das pessoas que sofreram  violências,  o  tipo,  o  local,  o  perfil  do  provável  autor  (a)  de  agressão, dentre outros.
+
+# Quem está completando esse arquivo config?
+published_by:
+
+    name: Filipe Cavalcanti   # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinan/code # REQUIRED
+    website: https://github.com/filipemsc
+    email: f.matheus.cavalcanti@gmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Filipe Cavalcanti 
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinan/code
+    website: https://github.com/filipemsc
+    email: f.matheus.cavalcanti@gmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: |
+    - Baixar todos os anos 
+    - Renomear e selecionar variáveis
+    - Renomear factors
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: 1 ano # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - notificacao
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+    - municipios
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+
+    - 2009
+    - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
+    
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - ano
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+    - name: data_notificacao
+      description: Data de preenchimento da ficha de notificação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_categoria_cid10
+      description: Código do agravo notificado segundo CID-10 (Centro Colaborador
+          da OMS para a Classificação de Doenças em Português)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_subcategoria_cid10
+      description: 'Código da circunstância da lesão segundo CID-10 CAPITULO XX (VO1
+          a Y98) '
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: tipo_notificacao
+      description: Identifica o tipo da notificação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_uf_notificacao
+      description: ID da unidade Federativa onde está localizada a unidade de saúde
+          (ou outra fonte notificadora) que realizou a notificação.
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_municipio_notificacao
+      description: ID do município onde está localizada a unidade de saúde (ou outra
+          fonte notificadora) que realizou a notificação.
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_municipio_6_notificacao
+      description: ID do município de 6 dígitos onde está localizada a unidade de
+          saúde (ou outra fonte notificadora) que realizou a notificação.
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_unidade_notificacao
+      description: Código da unidade de saúde da área de abrangência da unidade notificadora
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_regional_saude_notificacao
+      description: Regional de saúde onde está localizado o município da unidade de
+          saúde ou outra fonte notificadora
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: data_ocorrencia
+      description: Data da ocorrência da violência
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_uf_ocorrencia
+      description: Sigla da Unidade da Federação de ocorrência do evento por ocasião
+          da notificação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_municipio_ocorrencia
+      description: ID do município de ocorrência do evento notificado
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_municipio_6_ocorrencia
+      description: ID do município de 6 dígitos de ocorrência do evento notificado
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: hora_ocorrencia
+      description: Hora da ocorrência
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: local_ocorrencia
+      description: Informar o local de ocorrência do evento notificado
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: outro_local_ocorrencia
+      description: Especificar outro local de ocorrência
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: outras_vezes_ocorrencia
+      description: Informar se a violência é de repetição
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_uf_residencia
+      description: Sigla da Unidade Federada de residência do paciente por ocasião
+          da notificação. A sigla é uma variável que está associado ao código na tabela
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_municipio_6_residencia
+      description: ID do município de 6 dígitos de residência do caso notificado.
+          O nome está associado ao código na tabela de municípios
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_municipio_residencia
+      description: ID do município de residência do caso notificado. O nome está associado
+          ao código na tabela de municípios
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_regional_saude_residencia
+      description: Regional de saúde onde está localizado o município de residência
+          do paciente por ocasião da notificação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: idade_paciente
+      description: Idade do paciente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: sexo_paciente
+      description: Sexo do paciente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: gestante_paciente
+      description: Identifica o estágio da gestação da paciente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: raca_paciente
+      description: Raça do paciente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: escolaridade_paciente
+      description: Escolaridade do paciente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ocupacao_paciente
+      description: Ocupação do paciente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: situacao_conjugal_paciente
+      description: Situação conjugal do paciente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: orientacao_sexual_paciente
+      description: Orientação sexual do paciente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: identidade_genero_paciente
+      description: Identidade de gênero do paciente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: motivacao_violencia
+      description: Informar se violência tem relação com caractéristicas da vitima
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: violencia_relacionada_trabalho
+      description: Informar se ocorreu violência relacionada ao trabalho
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: emitiu_cat
+      description: Informar se foi emitida a CAT, caso a violência seja relacionada
+          ao trabalho
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: deficiencia_transtorno_paciente
+      description: Se o paciente possui algum tipo de deficiência/ transtorno
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: deficiencia_fisica_paciente
+      description: Se o paciente possui algum tipo de deficiência física
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: deficiencia_mental_paciente
+      description: Se o paciente possui algum tipo de deficiência mental
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: deficiencia_visual_paciente
+      description: Se o paciente possui algum tipo de deficiência visual
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: deficiencia_auditiva_paciente
+      description: Se o paciente possui algum tipo de deficiência auditiva
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: transtorno_mental_paciente
+      description: Se o paciente possui algum tipo de transtorno mental
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: transtorno_comportamental_paciente
+      description: Se o paciente possui algum tipo de transtorno de comportamento
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: outras_deficiencias_paciente
+      description: Se o paciente possui algum tipo de outras deficiências/síndromes
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: quais_outras_deficiencias_paciente
+      description: Especificar qual o tipo de outras deficiências/síndromes
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: lesao_autoprovocada
+      description: Informar se a lesão foi autoprovocada
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ocorreu_violencia_fisica
+      description: Informar se ocorreu violência física
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ocorreu_violencia_psicologica
+      description: Informar se ocorreu violência psicológica/moral
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ocorreu_tortura
+      description: Informar se ocorreu tortura
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ocorreu_violencia_sexual
+      description: Informar se ocorreu violência sexual
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ocorreu_trafico_ser_humano
+      description: Informar se ocorreu tráfico de seres humanos
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ocorreu_violencia_financeira
+      description: Informar se ocorreu violência financeira/econômica
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ocorreu_negligencia_abandono
+      description: Informar se ocorreu negligencia/abandono
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ocorreu_trabalho_infantil
+      description: Informar se ocorreu trabalho infantil
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ocorreu_intervencao_legal
+      description: Informar se ocorreu intervenção legal
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ocorreu_outra_violencia
+      description: Informar se ocorreu outro tipo de violência
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ocorreu_qual_outra
+      description: Especificar que outro tipo de violência ocorreu
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: meio_forca
+      description: Informar se o meio de agressão foi através de força corporal
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: meio_enforcamento
+      description: Informar se o meio de agressão foi através de enforcamento
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: meio_objeto_contundente
+      description: Informar se o meio de agressão foi através de objeto contundente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: meio_objeto_perfurante
+      description: Informar se o meio de agressão foi através de objeto perfurante
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: meio_objeto_quente
+      description: Informar se o foi através de subst/obj quente meio de agressão
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: meio_envenenamento
+      description: Informar se o meio de agressão foi através de envenenamento
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: meio_arma_fogo
+      description: Informar se o meio de agressão foi através de arma de fogo
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: meio_ameaca
+      description: Informar se o meio de agressão foi através de ameaça
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: meio_outros
+      description: Informar se o meio de agressão foi através de outro
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: meio_qual_outro
+      description: Especificar qual outro meio de agressão sofreu
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: houve_assedio
+      description: Informar se ocorreu assedio sexual
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: houve_estupro
+      description: Informar se ocorreu estupro
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: houve_pornografia_infantil
+      description: Informar se ocorreu pornografia infantil
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: houve_exploracao_sexual
+      description: Informar se ocorreu exploração sexual
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: houve_outra_violencia_sexual
+      description: Informar se ocorreu outro tipo de violência sexual
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: houve_qual_outra_violencia_sexual
+      description: Especificar qual outro tipo de violência sexual
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: profilaxia_dst
+      description: Informar se ocorreu profilaxia DST
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: profilaxia_hiv
+      description: Informar se ocorreu profilaxia HIV
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: profilaxia_hepatite_b
+      description: Informar se ocorreu profilaxia hepatite B
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: coleta_sangue
+      description: Informar se ocorreu coleta de sangue
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: coleta_semen
+      description: Informar se ocorreu coleta de sêmen
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: coleta_secrecao_vaginal
+      description: Informar se ocorreu coleta de secreção vaginal
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: profilaxia_contraceptivo
+      description: Informar se ocorreu contracepção de emergencia
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: aborto
+      description: Informar se ocorreu aborto previsto em lei
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: numero_envolvidos_violencia
+      description: Informar o número de envolvidos na violência
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_pai
+      description: Informar se o provável autor da agressão era o pai
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_mae
+      description: Informar se o provável autor da agressão era a mãe
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_padrasto
+      description: Informar se o provável autor da agressão era o padrasto
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_madrasta
+      description: Informar se o provável autor da agressão era a madrasta
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_conjugue
+      description: Informar se o provável autor da agressão era o cônjuge
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_ex_conjugue
+      description: Informar se o provável autor da agressão era o ex-cônjuge
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_namorado_a
+      description: Informar se o provável autor da agressão era o ex-cônjuge
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_ex_namorado_a
+      description: Informar se o provável autor da agressão era o ex-namorado(a)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_filho_a
+      description: Informar se o (a) provável autor (a) da agressão eram filho ou
+          filha
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_desconhecido
+      description: Informar se o provável autor da agressão era desconhecido
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_irmao
+      description: Informar se o provável autor da agressão era irmão ou irmã
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_conhecido
+      description: Informar se o provável autor da agressão eram amigo(s)/conhecido(s)
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_cuidador
+      description: Informar se o provável autor da agressão era o cuidador
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_patrao_chefe
+      description: Informar se o provável autor da agressão era o patrão/chefe
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_institucional
+      description: Informar se o provável autor da agressão era pessoa com relação
+          institucional
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_policial
+      description: Informar se o provável autor da agressão era policial/agente da
+          lei
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_propria_pessoa
+      description: Informar se o provável autor da agressão era a própria pessoa
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_outros
+      description: Informar se o provável autor da agressão tinha outro tipo de relação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_relacao_outros
+      description: Especificar outro tipo de relação com a pessoa atendida
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_sexo
+      description: 'Sexo do provável autor da violência '
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: autor_usou_alcool
+      description: Informar se o provável autor da agressão tinha suspeita de uso
+          de alcool
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_saude
+      description: Informar se houve encaminhamento no setor da rede da saúde
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_assistencia_social
+      description: Informar se houve encaminhamento no setor da rede Assistencia Social
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_educacao
+      description: Informar se houve encaminhamento no setor da rede Educação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_atendimento_mulher
+      description: Informar se houve encaminhamento no setor da rede atendimento à
+          mulher
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_conselho_tutelar
+      description: Informar se houve encaminhamento para o Conselho Tutelar
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_conselho_idoso
+      description: Informar se houve encaminhamento para o Conselho do Idoso
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_delegacia_idoso
+      description: Informar se houve encaminhamento para delegacia de atendimento
+          ao idoso
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_direitos_humanos
+      description: Informar se houve encaminhamento para centro de referência dos
+          direitos Humanos
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_mpu
+      description: Informar se houve encaminhamento para Ministério Público
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_delegacia_crianca
+      description: Informar se houve encaminhamento para Delegacia Especializada de
+          Proteção à Criança e Adolescente
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_delegacia_mulher
+      description: Informar se houve encaminhamento para Delegacia de atendimento
+          à mulher
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_delegacia
+      description: Informar se houve encaminhamento para outras delegacias
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_justica_infancia_juventude
+      description: Informar se houve encaminhamento para justiça da infência e da
+          juventude
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: encaminhamento_defensoria_publica
+      description: Informar se houve encaminhamento para defensoria pública
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: data_encerramento
+      description: Data de encerramento do caso
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ano
+      description: Ano
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: true   # Bool [True, False], whether the column is a partition.

@@ -1,0 +1,63 @@
+Microdados da planilha de Violência Interpessoal/Autoprovocada do SINAN,  cujo  objetivo  é  captar  informações  sobre  o  perfil  dos  atendimentos  por  violências  doméstica,  sexual  e/ou  outras  violências  (autoprovocadas  e  interpessoais) em unidades de saúde, caracterizando o perfil das pessoas que sofreram  violências,  o  tipo,  o  local,  o  perfil  do  provável  autor  (a)  de  agressão, dentre outros.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ms-sinan
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinan
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Filipe Cavalcanti
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinan/code
+Website: https://github.com/filipemsc
+Email: f.matheus.cavalcanti@gmail.comTratado por
+-----------
+Nome: Filipe Cavalcanti
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinan/code
+Website: https://github.com/filipemsc
+Email: f.matheus.cavalcanti@gmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- notificacao
+
+Colunas identificando linhas unicamente
+-------------------
+
+Cobertura Temporal
+------------------
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+- municipios
+
+Tratamento
+----------
+- Baixar todos os anos 
+- Renomear e selecionar variáveis
+- Renomear factors
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+

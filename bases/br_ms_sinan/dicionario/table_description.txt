@@ -1,0 +1,46 @@
+Dicionário Sinan 
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ms-sinan
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinan
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Filipe Cavalcanti
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinan/code
+Website: https://github.com/filipemsc
+Email: f.matheus.cavalcanti@gmail.comTratado por
+-----------
+Nome: Filipe Cavalcanti
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinan/code
+Website: https://github.com/filipemsc
+Email: f.matheus.cavalcanti@gmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- dataset
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- notificacao
+
+Colunas identificando linhas unicamente
+-------------------
+
+Cobertura Espacial
+------------------
+
+Tratamento
+----------
+- Organização de colunas
+   
+
+Frequencia de Atualização
+-------------------------
+unico
+
+
