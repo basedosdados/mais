@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - master
-    pull_request:
+  pull_request:
+    branches:
       - fix/whitelist
 jobs:
   get-changes:
@@ -130,7 +131,7 @@ jobs:
           GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
           GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
       - name: Test data and fill report
-        run: pytest -v .github/workflows/data-check --skiplist .github/DATA_CHECK_SKIP.csv
+        run: pytest -v .github/workflows/data-check --skipfile .github/DATA_CHECK_SKIP.csv
         shell: bash
         env:
           BQ_ENVIRONMENT: basedosdados
