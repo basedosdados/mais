@@ -5,8 +5,7 @@ on:
     branches:
       - master
   pull_request:
-    branches:
-      - fix/whitelist
+
 jobs:
   get-changes:
     runs-on: ubuntu-latest
