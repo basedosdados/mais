@@ -90,10 +90,6 @@ def pytest_sessionstart(session):
         get_table_configs()
     )  # replace this line with a list of table_config.yaml paths for local debugging
 
-    print(config_paths)
-    import sys
-    sys.exit()
-
     # exit if has no fixtures
     if not config_paths:
         pytest.exit("No fixtures found", 0)
@@ -102,6 +98,10 @@ def pytest_sessionstart(session):
     if _options.skipfile:
         skipfile = Path(_options.skipfile)
         config_paths = filter_table_configs(config_paths, skipfile)
+    
+    print(config_paths)
+    import sys
+    sys.exit()
 
     # load checks with jinja2 placeholders
     # and replace {{ project_id }} by the appropriate environment
