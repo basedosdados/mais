@@ -79,7 +79,6 @@ def pytest_configure(config):
     _options = config.option
 
 
-
 def pytest_sessionstart(session):
     """Initialize session, loading table configs"""
     global _configs
@@ -98,10 +97,6 @@ def pytest_sessionstart(session):
     if _options.skipfile:
         skipfile = Path(_options.skipfile)
         config_paths = filter_table_configs(config_paths, skipfile)
-    
-    print(config_paths)
-    import sys
-    sys.exit()
 
     # load checks with jinja2 placeholders
     # and replace {{ project_id }} by the appropriate environment
