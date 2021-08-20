@@ -31,7 +31,7 @@ class Table(Base):
         self.table_id = table_id.replace("-", "_")
         self.dataset_id = dataset_id.replace("-", "_")
         self.dataset_folder = Path(self.metadata_path / self.dataset_id)
-        self.table_folder = self.dataset_folder / table_id
+        self.table_folder = self.dataset_folder / self.table_id
         self.table_full_name = dict(
             prod=f"{self.client['bigquery_prod'].project}.{self.dataset_id}.{self.table_id}",
             staging=f"{self.client['bigquery_staging'].project}.{self.dataset_id}_staging.{self.table_id}",
@@ -164,7 +164,7 @@ class Table(Base):
             raise Exception(
                 "Check if your google sheet Share are: Anyone on the internet with this link can view"
             )
-    
+
     def table_exists(self, mode):
         """Check if table exists in BigQuery.
 
@@ -618,9 +618,11 @@ class Table(Base):
                 * 'pass' : Do nothing
         """
         if not self.table_exists("staging"):
-            raise BaseDosDadosException("You cannot append to a table that does not exist")
+            raise BaseDosDadosException(
+                "You cannot append to a table that does not exist"
+            )
         else:
-              Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
+            Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
                 filepath,
                 mode="staging",
                 partitions=partitions,
