@@ -84,19 +84,19 @@ def pytest_sessionstart(session):
     global _configs
 
     # set filepaths for checks and configs
-    check_path = "./.github/workflows/data-check/checks.yaml"  # change this line to "checks.yaml" for local debugging
-    config_paths = (
-        get_table_configs()
-    )  # replace this line with a list of table_config.yaml paths for local debugging
-
-    # exit if has no fixtures
-    if not config_paths:
-        pytest.exit("No fixtures found", 0)
+    # change this line to "checks.yaml" for local debugging
+    check_path = "./.github/workflows/data-check/checks.yaml"
+    # replace this line with a list of table_config.yaml paths for local debugging
+    config_paths = get_table_configs()
 
     # filter datasets if skipfile is activated
     if _options.skipfile:
         skipfile = Path(_options.skipfile)
         config_paths = filter_table_configs(config_paths, skipfile)
+
+    # exit if it has no fixtures
+    if not config_paths:
+        pytest.exit("No fixtures found", 0)
 
     # load checks with jinja2 placeholders
     # and replace {{ project_id }} by the appropriate environment
