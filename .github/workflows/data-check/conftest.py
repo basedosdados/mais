@@ -77,6 +77,11 @@ def pytest_addoption(parser):
 def pytest_configure(config):
     global _options
     _options = config.option
+    print(">" * 60)
+    print(_options.skipfile)
+    import sys
+    sys.exit()
+
 
 
 def pytest_sessionstart(session):
@@ -88,6 +93,8 @@ def pytest_sessionstart(session):
     config_paths = (
         get_table_configs()
     )  # replace this line with a list of table_config.yaml paths for local debugging
+
+    print(config_paths)
 
     # exit if has no fixtures
     if not config_paths:

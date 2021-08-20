@@ -57,6 +57,9 @@ def fetch_data(config):
 # Please write your tests below
 # -------------------------------------
 
+def test_error(configs):
+    assert False
+
 
 def test_table_exists(configs):
     config = configs["test_table_exists"]

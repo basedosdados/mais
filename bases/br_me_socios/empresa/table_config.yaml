@@ -2,7 +2,7 @@ source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
 table_id: empresa # AUTO GENERATED
-dataset_id: br_me_socios # AUTO GENERATED 
+dataset_id: br_me_socios # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-me-socios # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_socios # AUTO GENERATED
