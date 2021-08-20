@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    pull_request:
+      - fix/whitelist
 jobs:
   get-changes:
     runs-on: ubuntu-latest
