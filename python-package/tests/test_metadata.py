@@ -3,6 +3,7 @@ from pathlib import Path
 
 from basedosdados import Metadata
 
+
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
 
@@ -19,24 +20,37 @@ def metadatadir(tmpdir_factory):
 
 
 @pytest.fixture
-def metadata(metadatadir, request):
-    marker = request.node.get_closest_marker("create_mode")
-    if marker.args[0] == "dataset_id":
-        return Metadata(dataset_id=DATASET_ID, metadata_path=metadatadir)
-    elif marker.args[0] == "table_id":
-        return Metadata(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir)
-    return None
+def dataset_metadata(metadatadir):
+    return Metadata(
+        dataset_id=DATASET_ID,
+        metadata_path=metadatadir
+    )
+    
+
+@pytest.fixture
+def table_metadata(metadatadir):
+    return Metadata(
+        dataset_id=DATASET_ID,
+        table_id=TABLE_ID,
+        metadata_path=metadatadir
+    )
 
 
-@pytest.mark.create_mode("dataset_id")
-def test_create_with_dataset_id(metadata, metadatadir):
-    metadata.create()
-    folder = Path(metadatadir) / DATASET_ID
-    assert (folder / METADATA_FILES['dataset']).exists()
+@pytest.fixture
+def dataset_metadata_path(metadatadir):
+    return Path(metadatadir) / DATASET_ID
 
 
-@pytest.mark.create_mode("table_id")
-def test_create_with_dataset_and_table_id(metadata, metadatadir):
-    metadata.create()
-    folder = Path(metadatadir) / DATASET_ID / TABLE_ID
-    assert (folder / METADATA_FILES['table']).exists()
+@pytest.fixture
+def table_metadata_path(metadatadir):
+    return Path(metadatadir) / DATASET_ID / TABLE_ID
+
+
+def test_create_with_dataset_id(dataset_metadata, dataset_metadata_path):
+    dataset_metadata.create()
+    assert (dataset_metadata_path / METADATA_FILES['dataset']).exists()
+
+
+def test_create_with_dataset_and_table_id(table_metadata, table_metadata_path):
+    table_metadata.create()
+    assert (table_metadata_path / METADATA_FILES['table']).exists()
