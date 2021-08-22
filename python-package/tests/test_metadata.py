@@ -108,3 +108,23 @@ def test_create_partition_columns():
 
 def test_create_force_columns():
     pass
+
+
+def test_is_updated_is_true():
+    pass
+
+
+def test_is_updated_is_false():
+    pass
+
+
+def test_validate_is_succesful():
+    pass
+
+
+def test_validate_raise_error():
+    pass
+
+
+def test_publish():
+    pass
