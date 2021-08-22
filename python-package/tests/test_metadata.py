@@ -1,5 +1,7 @@
 import pytest
+
 from pathlib import Path
+import shutil
 
 from basedosdados import Metadata
 
@@ -46,11 +48,13 @@ def table_metadata_path(metadatadir):
     return Path(metadatadir) / DATASET_ID / TABLE_ID
 
 
-def test_create_with_dataset_id(dataset_metadata, dataset_metadata_path):
+def test_create_from_dataset_id(dataset_metadata, dataset_metadata_path):
+    shutil.rmtree(dataset_metadata_path, ignore_errors=True)
     dataset_metadata.create()
     assert (dataset_metadata_path / METADATA_FILES['dataset']).exists()
 
 
-def test_create_with_dataset_and_table_id(table_metadata, table_metadata_path):
+def test_create_from_dataset_and_table_id(table_metadata, table_metadata_path):
+    shutil.rmtree(table_metadata_path, ignore_errors=True)
     table_metadata.create()
     assert (table_metadata_path / METADATA_FILES['table']).exists()
