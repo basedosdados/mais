@@ -132,14 +132,17 @@ class Metadata(Base):
         CKAN database
 
         Args:
-            path (str, pathlib.Path): Optional
-                Path to save downloaded files. If None is given, saves to the
-                standard metadata_path as defined in your config.toml file.
-                Defaults to None.
             if_exists (str): Optional. What to do if config exists
                 * raise : Raises Conflict exception
                 * replace : Replaces config file with most recent
                 * pass : Do nothing
+            columns (list): Optional.
+                A `list` with the table columns' names.
+            partition_columns(list): Optional.
+                A `list` with the name of the table columns that partition the data.
+            force_columns (bool): Optional.
+                If set to `True`, overwrite CKAN's columns with the ones provided.
+                If set to `False`, keep CKAN's columns instead of the ones provided.
         """
 
         if self.obj_path.exists() and if_exists == "raise":
