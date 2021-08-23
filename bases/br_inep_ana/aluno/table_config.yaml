@@ -1,0 +1,571 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: aluno # AUTO GENERATED
+dataset_id: br_inep_ana # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-inep-ana # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ana # AUTO GENERATED
+
+version: 1.0 # REQUIRED
+
+last_updated: 2021-08-20 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    A Avaliação Nacional de Alfabetização é um dos instrumentos do Sistema de Avaliação da Educação Básica e analisa os níveis de alfabetização e letramento em língua portuguesa e matemática.
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Lucas Nascimento Moreira  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ana/code # REQUIRED
+    website: <website>
+    email: lucas.moreira@basedosdados.org
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Lucas Nascimento Moreira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ana/code
+    website: <onde encontrar os dados tratados>
+    email: lucas.moreira@basedosdados.org
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    - Download da base
+    - Renomeação das variáveis
+    - Compatibilização entre anos
+    - Ordenação do dataframe
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: 2 anos # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - id_aluno
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - ano
+    - id_aluno
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2014
+    - 2016
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - ano
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+  
+    -   
+        name: id_regiao
+        description: Região
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_uf
+        description: ID da Unidade Federativa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio
+        description: ID Município IBGE - 7 Dígitos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_area
+        description: Área
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: rede
+        description: Rede Escolar
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_escola
+        description: ID Escola - INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_localizacao
+        description: Localização da escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_turma
+        description: Código da turma
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: turno
+        description: Turno
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: serie
+        description: Série
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_aluno
+        description: Código do aluno na ANA
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: situacao_censo
+        description: Indicador de Consistência com o Censo Escolar do ano da avaliação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: preenchimento_prova_lp
+        description: Indicador de preenchimento da prova de Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: preenchimento_prova_mt
+        description: Indicador de preenchimento da prova de Matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: presenca_prova_lp
+        description: Indicador de presença da prova de Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: presenca_prova_mt
+        description: Indicador de presença da prova de Matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_presenca_prova_lp
+        description: Tipo da situação de presença na aplicação dos testes de Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: tipo_presenca_prova_mt
+        description: Tipo da situação de presença na aplicação do teste de Matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sala_separada_lp
+        description: Indicador de atendimento em sala exclusiva para candidatos com necessidades especiais que realizaram testes de Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sala_separada_mt
+        description: Indicador de atendimento em sala exclusiva para candidatos com necessidades especiais que realizaram testes de Matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_auxilio_leitura
+        description: Recurso de auxílio para leitura disponibilizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_auxilio_transcricao
+        description: Recurso de auxílio para transcrição disponibilizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_interprete_libras
+        description: Recurso Intérprete de libras disponiblizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_guia_interprete
+        description: Recurso Guia Intérprete (para surdocegueira) disponibilizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_aparelho_cd
+        description: Recurso de aparelho de CD disponibilizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_aparelho_dvd
+        description: Recurso de aparelho de DVD disponibilizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_computador
+        description: Recurso de computador disponibilizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_maquina_escrever
+        description: Recurso de máquina de escrever (perkins) disponibilizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_monitor_tv
+        description: Recurso de monitor/televisão disponibilizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_puncao
+        description: Recurso de punção disponibilizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_reglete
+        description: Recurso reglete disponibilizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_sorabam
+        description: Recurso Sorabam disponibilizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_software_tela
+        description: Recurso software de tela disponibilizado pela escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_escola_nenhuma
+        description: Nenhuma solicitação de recurso
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_inep_auxilio_leitura
+        description: Recurso de auxílio para leitura disponibilizado pelo INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_inep_auxilio_transcricao
+        description: Recurso de auxílio para transcrição disponibilizado pelo INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_inep_interprete_libras
+        description: Recurso de Intérprete de libras disponibilizado pelo INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_inep_leitor_labial
+        description: Recurso de leitor labial disponinilizado pelo INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_inep_guia_interprete
+        description: Recurso de Guia Intérprete disponibilizado pelo INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_inep_aplicador_extra
+        description: Recurso de aplicador extra disponibilizado pelo INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_inep_prova_adaptada
+        description: Recurso de prova adaptada para surdos disponibilizado pelo INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_inep_prova_ampliada
+        description: Recurso de ampliação da prova (fonte 18) disponibilizado pelo INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_inep_prova_superampliada
+        description: Recurso de ampliação da prova (fonte 24) disponibilizado pelo INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_inep_prova_braile
+        description: Recurso de prova em braile disponibilizada pelo INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: solicitacao_inep_nenhuma
+        description: Nenhum solicitação de recurso para o INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: caderno_lp
+        description: Código do caderno de provas do teste de língua portuguesa (leitura e escrita)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: caderno_lp_leitura
+        description: Código do caderno de provas do teste de língua portuguesa (leitura)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: caderno_lp_escrita
+        description: Código do caderno de provas do teste de língua portuguesa (escrita)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: caderno_mt
+        description: Código do caderno de provas do teste de matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: respostas_lp
+        description: Respostas do alun ao teste de língua portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: respostas_mt
+        description: Respostas do aluno ao teste de matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: conceito_questao_1
+        description: Conceito da questão 1 relacionado a escrita de palavras
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: conceito_questao_2
+        description: Conceito da questão 2 relacionado a escrita de palavras
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: conceito_questao_3_ortografia
+        description: Conceito da questão 3 relacionado a produção textual (ortografia)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: conceito_questao_3_coesao
+        description: Conceito da questão 3 relacionado a produção textual (coesão)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: conceito_questao_3_segmentacao
+        description: Conceito da questão 3 relacionado a produção textual (segmentação)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: conceito_questao_3_pontuacao
+        description: Conceito da questão 3 relacionado a produção textual (pontuação)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: conceito_questao_3_progressao_tematica
+        description: Conceito da questão 3 relacionado a produção textual (temática)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: conceito_questao_3_elementos_narrativa
+        description: Conceito da questão 3 relacionado a produção textual (elementos da narrativa)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: peso_aluno_lp
+        description: Peso do aluno em língua portuguesa (leitura e escrita)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: peso_aluno_lp_leitura
+        description: Peso do aluno em língua portuguesa (leitura)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_lp_leitura
+        description: Posicionamento do aluno na escala de proficiência em Leitura em Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: proficiencia_lp_leitura
+        description: Proficiência do aluno em Leitura em Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: erro_padrao_lp_leitura
+        description: Erro padrão da proficiência em Leitura
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: proficiencia_leitura_ana
+        description: Proficiência em Leitura transformada na escala única da ANA
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: erro_padrao_leitura_ana
+        description: Erro padrão da proficiência em Leitura na escala única da ANA
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: peso_aluno_lp_escrita
+        description: Peso do Aluno em Língua Portuguesa (Escrita)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_lp_escrita
+        description: Posicionamento do aluno na escala de proficiência em Escrita em Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: proficiencia_lp_escrita
+        description: Proficiência do aluno em Escrita em Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: erro_padrao_lp_escrita
+        description: Erro padrão da proficiência em Escrita
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: proficiencia_escrita_ana
+        description: Proficiência em Escrita transformada na escala única da ANA
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: erro_padrao_escrita_ana
+        description: Erro padrão da proficiência em Escrita na escala única da ANA
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: peso_aluno_mt
+        description: Peso do Aluno em Matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_mt
+        description: Posicionamento do aluno na escala de proficiência em Escrita em Língua Portuguesa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: proficiencia_mt
+        description: Proficiência do aluno em Matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: erro_padrao_mt
+        description: Erro padrão da proficiência em Matemática
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: proficiencia_mt_ana
+        description: Proficiência em Matemática transformada na escala única da ANA
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: erro_padrao_mt_ana
+        description: Erro padrão da proficiência em Matemática na escala única da ANA
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.

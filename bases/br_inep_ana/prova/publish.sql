@@ -1,0 +1,33 @@
+/*
+
+Query para publicar a tabela.
+
+Esse é o lugar para:
+    - modificar nomes, ordem e tipos de colunas
+    - dar join com outras tabelas
+    - criar colunas extras (e.g. logs, proporções, etc.)
+
+Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
+
+# Além disso, sinta-se à vontade para alterar alguns nomes obscuros
+# para algo um pouco mais explícito.
+
+TIPOS:
+    - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
+    - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
+    - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
+
+*/
+
+CREATE VIEW basedosdados-dev.br_inep_ana.prova AS
+SELECT 
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(serie AS STRING) serie,
+SAFE_CAST(tipo_prova AS STRING) tipo_prova,
+SAFE_CAST(disciplina AS STRING) disciplina,
+SAFE_CAST(id_bloco AS STRING) id_bloco,
+SAFE_CAST(id_posicao AS STRING) id_posicao,
+SAFE_CAST(id_item AS STRING) id_item,
+SAFE_CAST(id_descritor AS STRING) id_descritor,
+SAFE_CAST(gabarito AS STRING) gabarito
+from basedosdados-dev.br_inep_ana_staging.prova as t
