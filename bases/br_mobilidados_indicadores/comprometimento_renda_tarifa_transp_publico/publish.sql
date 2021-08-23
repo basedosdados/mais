@@ -21,10 +21,10 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.comprometimento_renda_tarifa_transp_publico AS
 SELECT 
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(tarifas AS INT64) tarifas,
-SAFE_CAST(comprometimento_salario_minimo AS INT64) comprometimento_salario_minimo,
-SAFE_CAST(comprometimento_renda_domesticas_negras AS INT64) comprometimento_renda_domesticas_negras
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(tarifas AS FLOAT64) tarifas,
+SAFE_CAST(comprotimento_salario_minimo AS FLOAT64) comprometimento_salario_minimo,
+SAFE_CAST(comprometimento_renda_domesticas_negras AS FLOAT64) comprometimento_renda_domesticas_negras
 from basedosdados-dev.br_mobilidados_indicadores_staging.comprometimento_renda_tarifa_transp_publico as t

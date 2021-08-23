@@ -17,7 +17,6 @@ notebooks
 data
 secrets
 .ipynb*
-*.csv
 docs/site
 TODO
 

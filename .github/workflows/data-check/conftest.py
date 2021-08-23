@@ -7,6 +7,7 @@
 # -------------------------------------
 
 
+import csv
 import json
 import os
 from pathlib import Path
@@ -23,8 +24,10 @@ from jinja2 import Template
 def omit_hints(data):
     """Set values encapsulated with <> to None in a dict"""
     if isinstance(data, str):
-        hidden = f"{data[0]}{data[-1]}" != "<>"
-        return data if hidden else None
+        if len(data) >= 2:
+            hidden = f"{data[0]}{data[-1]}" != "<>"
+            return data.strip() if hidden else None
+        return data.strip()
     elif isinstance(data, list):
         lst = list(filter(omit_hints, data))
         return lst if lst else None
@@ -48,17 +51,50 @@ def get_table_configs():
     return files
 
 
+def filter_table_configs(config_paths: list[Path], skipfile: Path) -> list[Path]:
+    """Filter table_config.yaml files not in DATA_CHECK_SKIP.csv"""
+    with open(skipfile, "r") as file:
+        reader = csv.reader(file)
+        datasets = [row[0] for row in reader if len(row) > 0]
+
+    is_banned = lambda x: x.parent.parent.name not in datasets
+
+    config_paths = filter(is_banned, config_paths)
+    config_paths = list(config_paths)
+
+    return config_paths
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--skipfile",
+        action="store",
+        default="",
+        help="csv filepath with datasets to ignore",
+    )
+
+
+def pytest_configure(config):
+    global _options
+    _options = config.option
+
+
 def pytest_sessionstart(session):
     """Initialize session, loading table configs"""
     global _configs
 
     # set filepaths for checks and configs
-    check_path = "./.github/workflows/data-check/checks.yaml"  # change this line to "checks.yaml" for local debugging
-    config_paths = (
-        get_table_configs()
-    )  # replace this line with a list of table_config.yaml paths for local debugging
+    # change this line to "checks.yaml" for local debugging
+    check_path = "./.github/workflows/data-check/checks.yaml"
+    # replace this line with a list of table_config.yaml paths for local debugging
+    config_paths = get_table_configs()
 
-    # exit if has no fixtures
+    # filter datasets if skipfile is activated
+    if _options.skipfile:
+        skipfile = Path(_options.skipfile)
+        config_paths = filter_table_configs(config_paths, skipfile)
+
+    # exit if it has no fixtures
     if not config_paths:
         pytest.exit("No fixtures found", 0)
 
@@ -156,5 +192,5 @@ def pytest_sessionfinish(session, exitstatus):
 
 # -------------------------------------
 # Reference
-# https://docs.pytest.org/en/6.2.x/example/simple.html#post-process-test-reports-failures
+# https://docs.pytest.org/en/6.2.x/contents.html
 # -------------------------------------
