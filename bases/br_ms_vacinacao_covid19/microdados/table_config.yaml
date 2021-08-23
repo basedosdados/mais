@@ -5,11 +5,11 @@ table_id: microdados # AUTO GENERATED
 dataset_id: br_ms_vacinacao_covid19 # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-ms-vacinacao-covid19 # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19 # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19 # AUTO GENERATED 
 
 version: v1.0 # REQUIRED
 
-last_updated: '2021-07-28' # AUTO GENERATED
+last_updated: '2021-08-18' # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de

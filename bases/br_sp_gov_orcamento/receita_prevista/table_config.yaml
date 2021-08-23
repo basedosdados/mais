@@ -1,5 +1,13 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: receita_prevista # AUTO GENERATED
 dataset_id: br_sp_gov_orcamento # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-sp-gov-orcamento # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_orcamento # AUTO GENERATED
+
+version: v1.0 # REQUIRED
 
 last_updated: 2020-12-05 # AUTO GENERATED
 
@@ -47,6 +55,17 @@ observation_level:
     - receita
     - ano
 
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - orgao
+    - gestao
+    - unidade_gestora
+    - fonte_de_recursos
+    - receita
+    - ano
+    
 # Qual é a cobertura espacial da tabela?
 # Regras:
 #   - minúsculo, sem acento, singular

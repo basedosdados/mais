@@ -1,0 +1,38 @@
+Diretório da Classificação Internacional de Doenças (CID) 9.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-bd-diretorios-brasil
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: <nome>
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- CID-9
+
+Colunas identificando linhas unicamente
+-------------------
+- categoria
+
+Cobertura Temporal
+------------------
+
+Cobertura Espacial
+------------------
+
+Frequencia de Atualização
+-------------------------
+único
+
+

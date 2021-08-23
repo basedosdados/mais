@@ -9,7 +9,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretor
 
 version: v1.2 # REQUIRED
 
-last_updated: 2021-06-02 # AUTO GENERATED
+last_updated: 2021-08-01 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -40,7 +40,7 @@ treatment_description: |
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: unico # REQUIRED 
+data_update_frequency: recorrente # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -97,14 +97,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: nome_ies
+        name: nome
         description: Nome da Instituição de Ensino Superior 
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -123,6 +117,12 @@ columns: # REQUIRED
     -   
         name: situacao_funcionamento
         description: Situação de Funcionamento (e.g. Ativa, Inativa)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

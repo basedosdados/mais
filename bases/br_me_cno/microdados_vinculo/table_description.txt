@@ -1,0 +1,56 @@
+A tabela faz parte do cadastro nacional de obras (CNO), uma base de dados de registros de obras de construção civil administrado pela Receita Federal. 
+A tabela vincula a obra cadastrada no CNO aos registros de vínculo (data de início e fim)
+   
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-me-cno
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gustavo Aires Tiago
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno/code
+Website: https://github.com/gustavoairestiago
+Email: gustavo.tiago@basedosdados.orgTratado por
+-----------
+Nome: Gustavo Aires Tiago
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno/code
+Website: https://basedosdados.org/dataset/br-me-cno
+Email: gustavo.tiago@basedosdados.org
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- vinculo
+
+Colunas identificando linhas unicamente
+-------------------
+- id_cno
+- data_inicio
+- ni_responsavel
+
+Cobertura Temporal
+------------------
+- 2018
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Alteração de nome das variáveis
+- Alteração de tipo de variável (int de identificadores para string)
+- Exclusão de dois valores no campo 'data_fim' por inconsistência  
+
+Frequencia de Atualização
+-------------------------
+mes
+
+
