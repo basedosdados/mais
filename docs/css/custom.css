@@ -1,3 +1,13 @@
+:root {
+  --md-primary-fg-color:        #2B8C4D;
+  --md-code-bg-color:           #fafafa;
+  --md-text-font-family: Ubuntu;
+  /* --md-typeset-a-color:         #2B8C4D; */
+  /* --md-primary-fg-color--light: #7EC876;
+  --md-primary-fg-color--dark:  #7EC876; */
+}
+
+
 .column {
     float: left;
     width: 50%;
