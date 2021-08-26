@@ -1,21 +1,7 @@
 cff-version: 1.1.0
 message: "If you use this software, please cite it as below."
 authors:
-  - family-names: Carabetta
-    given-names: João
-  - family-names: Dahis
-    given-names: Ricardo  
-    orcid: https://orcid.org/0000-0003-2346-0889
-    website: https://www.ricardodahis.com
-    affiliation: PUC-Rio
-  - family-names: Israel
-    given-names: Fred
-  - family-names: Oliveira
-    given-names: Diego
-  - family-names: Scovino
-    given-names: Fernanda
-title: "Data Basis: Universalizing Access to High Quality Data in Brazil"
+  - family-names: Base dos Dados
 url: "https://basedosdados.org"
 year-original: 2019
-year: 2020
-version: 1.5.5
+year: 2021
