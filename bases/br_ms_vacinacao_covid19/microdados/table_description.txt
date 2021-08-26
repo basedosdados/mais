@@ -43,7 +43,8 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Extraímos dados do site original.
+-Extraímos dados do site original.
+-Alteramos os caracteres 'ª' e 'º' da coluna dose_vacina por 'a' e 'o'
 
 Frequencia de Atualização
 -------------------------
