@@ -41,7 +41,7 @@ Cobertura Espacial
 Tratamento
 ----------
 - Normalizamos a tabela original.
-- Alteramos os caracteres 'ª' e 'º' da coluna dose_vacina por 'a' e 'o'
+- Alteramos os caracteres 'ª' e 'º' da coluna dose_vacina por 'a' e 'o'.
 
 Frequencia de Atualização
 -------------------------
