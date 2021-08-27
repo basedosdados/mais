@@ -1,5 +1,5 @@
 
-# Infraestrutura na BD+
+# Infraestrutura na BD+ - TODO: REVER TUDO AQUI!
 
 ![](images/bd_infra_diagram.png)
 
@@ -10,7 +10,7 @@ em Python e R (canto inferior direito); e pelo website (canto superior esquerdo)
 Atualmente é possível colaborar em todas as frentes, com destaque ao 
 desenvolvimento dos pesos e contrapesos e atualização do site. 
 
-# Colaborando com a Infra
+# Colaborando com a Infra - TODO: DETALHAR 1 PARAGRAFO PARA CADA TIPO DE COLABORAÇÃO
 
 Você pode contribuir para nossa infraestrutura de várias formas:
 

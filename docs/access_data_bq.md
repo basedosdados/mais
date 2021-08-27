@@ -1,14 +1,44 @@
-# Como usar via BigQuery
 
-Ao clicar no botão você será redirecionado para logar na sua conta ou criar uma antes de acessar o projeto.
+# BigQuery
+
+
+
+## Antes de começar: Crie o seu projeto no Google Cloud
+
+Para criar um projeto no Google Cloud basta ter um email cadastrado no
+Google. É necessário ter um projeto seu, mesmo que vazio, para você
+fazer queries em nosso *datalake* público.
+
+1. **[Acesse o Google Cloud](https://console.cloud.google.com/projectselector2/home/dashboard)**.
+   Caso for a sua primeira vez, aceite o Termo de Serviços.
+3. **Clique em `Create Project/Criar Projeto`**. Escolha um nome bacana para o projeto.
+5. **Clique em `Create/Criar`**
+
+??? Info "Por que eu preciso criar um projeto no Google Cloud?"
+    A Google fornece 1 TB gratuito por mês de uso do BigQuery para cada
+    projeto que você possui. Um projeto é necessário para ativar os
+    serviços do Google Cloud, incluindo a permissão de uso do BigQuery.
+    Pense no projeto como a "conta" na qual a Google vai contabilizar o
+    quanto de processamento você já utilizou. **Não é necessário adicionar
+    nenhum cartão ou forma de pagamento.**
+
+    - Rapidez: Mesmo queries muito longas demoram apenas minutos para serem processadas.
+
+    - Escala: O BigQuery escala magicamente para hexabytes se necessário.
+
+    - Facilidade: Você pode cruzar tabelas tratadas e atualizadas num só lugar.
+
+    - Economia: O BigQuery permite que a consulta seja diretamente do usuário. Porém, são fornecidos **1 TB gratuito por mês gratuitos para quaisquer consultas de dados**. Ou seja, o custo é praticamente zero para a maioria dos usuários. Depois disso, são cobrados somente 5 dólares por TB de dados que sua query percorrer.
+    
+## Acessando o projeto da `basedosdados`
+
+O botão abaixo via te direcionar ao nosso projeto no Google BigQuery:
 
 <a
 href="https://console.cloud.google.com/bigquery?p=basedosdados&page=project"
 title="{{ lang.t('source.link.title')}}" class="md-button"
-style="background-color: var(--md-primary-fg-color);color:
-var(--md-primary-bg-color);"
 hover="background-color: var(--md-primary-fg-color--dark)">
-    Clique para acessar o projeto no BigQuery
+    Acessar a BD no BigQuery
 </a>
 
 Na sua tela deverá aparecer o projeto fixado no menu lateral esquerdo,
@@ -16,69 +46,59 @@ como na imagem abaixo.
 
 ![](images/bq_access_project.png){ width=100% }
 
-## Criando uma conta no BigQuery
+Dentro do projeto existem dois níveis de organização dos dados,
+<strong>*datasets*</strong> (conjuntos de dados) e
+<strong>*tables*</strong> (tabelas), nos quais:
 
-É preciso, basicamente, ter uma conta Google para acessar o BigQuery. O
-site deve solicitar que você crie um projeto qualquer no seu BigQuery
-antes de acessar os nossos dados - não se preocupe, não é pago! 
-
-<i>O BigQuery inicia automaticamente no modo Sandbox, que permite você
-utilizar seus recursos sem adicionar um modo de pagamento. Leia mais sobre o
-Sandbox [aqui](https://cloud.google.com/bigquery/docs/sandbox).</i>
-
-## Acessando o projeto
-
-Dentro do projeto existem dois níveis de organização, <strong
-style="color:red">*datasets*</strong> (conjuntos de dados) e <strong
-style="color:green">*tables*</strong>
-(tabelas), nos quais:
-
-- Todas as *tables* estão organizadas em *datasets*
-- Cada *table* pertence a um único *dataset*
+- **Todas as tabelas estão organizadas dentro de cojuntos de dados**, que
+  representaam sua organização/tema (ex: o conjunto
+  `br_ibge_populacao` contém uma tabela `municipio` com a série
+  históricac de população a
+  nível municipal)
+- **Cada tabela pertence a um único conjunto de dados** (ex: a tabela
+  `municipio` em `br_ibge_populacao` é diferente de `municipio` em `br_bd_diretorios`)
     
 
 ![](images/bq_dataset_tables_structure.png){ width=100% }
 
+!!! Warning "Caso não apareçam as tabelas nos *datasets* do projeto na
+1ª vez que você acessar, atualize a página."
 
-!!! Warning "Caso não apareçam as tabelas nos *datasets* do projeto na 1ª vez que você acessar, atualize a página."
+### Como navegar pelo BigQuery
 
-## Explorando os dados
+Para entender melhor sobre a interface do BigQuery e como explorar os
+dados, preparamos um texto completo no blog com um exemplo de busca dos
+dados da RAIS (Ministério da Economia).
+https://dev.to/basedosdados/bigquery-101-45pk]
 
-### Exemplo: Qual a evolução do PIB per capita de todos os municípios? 📈
+### Explorando os dados
 
-O BigQuery utiliza SQL como linguagem nativa. Leia mais sobre a sintaxe
-utilizada
-[aqui](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax).
-
-Rode a query abaixo no `Query Editor/Editor de consultas` e obtenha o cruzamento
-das tabelas de população e PIB do IBGE com o resultado anual desde 2002.
+Um exemplo simples para começar a explorar o *datalake* é puxar
+[informações cadastrais de
+municípios](https://basedosdados.org/dataset/br-bd-diretorios-brasil/resource/9046b938-b361-4c3c-a5e7-a549dfc48f2b)
+direto na nossa base de diretórios brasileiros. Para isso, basta abrir o
+Editor de Consultas do BigQuery (fica no e escreve nossa quer em SQL.
 
 ```sql
-SELECT 
-    pib.id_municipio,
-    pop.ano, 
-    pib.PIB / pop.populacao AS pib_per_capita
-FROM `basedosdados.br_ibge_pib.municipio` AS pib
-    JOIN `basedosdados.br_ibge_populacao.municipio` AS pop
-    ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano
+SELECT * FROM `basedosdados.br_bd_diretorios_brasil.municipio`
 ```
 
 !!! Tip "Dica"
     Clicando no botão `🔍 Consultar tabela/Query View`, o BigQuery cria
     automaticamente a estrutura básica da sua query em `Query Editor/Editor
-    de consultas` - basta você completar com os campos e filtros que achar necessários.
+    de consultas` - basta você completar com os campos e filtros que
+    achar necessários.
+    
+## Próximos passos
 
 ### Entenda os dados
 
 O BigQuery possui já um mecanismo de busca que permite buscar por nomes
 de *datasets* (conjuntos), *tables* (tabelas) ou *labels* (grupos).
 Construímos regras de nomeação simples e práticas para facilitar sua
-busca - veja mais [na seção de Nomenclatura](../style_data/).
+busca - veja mais [na seção de Nomenclatura](/style_data).
 
-#### Metadados
+### Tutoriais
 
-Clicando num *dataset* ou *table* você já consegue ver toda a estrutura
-e descrição das colunas, e pode acessar também os detalhes de tratamento e publicação,
-para entender melhor os dados.
-
-![](images/bq_schema_details.png){ width=100% }
+- [Como funcionam os nomes de conjuntos e tabelas]()
+- [Como cruzar tabelas de diferentes organizações](/tutorial_cross_table)

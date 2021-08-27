@@ -1,4 +1,4 @@
-site_name: Pacotes Base dos Dados
+site_name: Documentação
 
 theme:
   name: material
@@ -50,32 +50,36 @@ extra:
 
 nav:
   - Home: # Comece aqui: # index.md
-    - Comece aqui: index.md
-    # - Instalação:
+    - Início: index.md
+    - Primeiros passos: 
+      - Como acessar o datalake: tutorial_init.md
+      - Acssando via BigQuery: access_data_bq.md
+      - Acessando via pacotes: access_data_packages.md
+    - Explore:
+      - Buscar por tabelas, conjuntos e temas: index.md # TODO
+      - Como cruzar tabelas de diferentes organizações: tutorial_cross_table.md
+      - Como usar os diretórios brasileiros (catálogos de referencia): index.md # TODO
+    - Integações:
+      - Como conectar ao Metabase: index.md # TODO
+      - Como conectar ao PowerBI: index.md # TODO
     - Python:
+      - Instalação: access_data_packages.md
       - Manual de referência: py_reference_api.md
       - Exemplos: py_examples.md
     - R:
+      - Instalação: access_data_packages.md
       - Manual de referência: r_reference_api.md
       - Exemplos: r_examples.md
     - CLI:
+      - Instalação: access_data_packages.md
       - Manual de referência: cli_reference_api.md
       - Exemplos: cli_examples.md
-  # - Como acessar: 
-  #   - BigQuery: access_data_bq.md
-  #   - Local: access_data_local.md
-  # - Colaborar: 
-  #   - Dados: colab_data.md
-  #   - Testes de Dados: colab_checks.md
-  #   - Infraestrutura: colab_infrastructure.md
-  #   - Manual de estilo: style_data.md
-  # - Analisar:
-  #     - Início: analysis.md
-  # - Apoie! 💚:
-  #   - Início: support.md
-  # - DATATHON 👩🏻‍💻: 
-  #   - 1ª edição (mar/2021): datathon_2021.md
-  #   - ODD (mar/2021): odd_2021.md
+    - Nossa metodologia:
+      - Manual de estilo e diretrizes de dados: style_data.md
+    - Contribua:
+      - Colaborando com dados: colab_data.md
+      - Colaborando com pacotes: colab_infrastructure.md
+      - Como citar a Base dos Dados: index.md # TODO
 
 markdown_extensions:
   - admonition
