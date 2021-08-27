@@ -27,7 +27,7 @@ jobs:
       - name: Check code format
         run: black --check python-package
       - name: Check lint
-        run: pylint --ignore migration,vendor python-package
+        run: pylint --exit-zero python-package
 
   build-linux:
     runs-on: ubuntu-latest
