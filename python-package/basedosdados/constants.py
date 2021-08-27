@@ -1,6 +1,4 @@
-__all__ = [
-    'constants'
-]
+__all__ = ["constants"]
 
 from enum import Enum
 
