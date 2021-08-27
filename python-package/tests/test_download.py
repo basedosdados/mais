@@ -1,26 +1,26 @@
-from os import read
-import pytest
-from pathlib import Path
-import pandas as pd
-from pandas_gbq.gbq import GenericGBQException
 import shutil
+from os import read
+from pathlib import Path
 
+import pandas as pd
+import pytest
 from basedosdados import (
     download,
+    get_dataset_description,
+    get_table_columns,
+    get_table_description,
+    get_table_size,
+    list_dataset_tables,
+    list_datasets,
     read_sql,
     read_table,
-    list_datasets,
-    list_dataset_tables,
-    get_dataset_description,
-    get_table_description,
-    get_table_columns,
-    get_table_size,
 )
 from basedosdados.exceptions import (
-    BaseDosDadosException, BaseDosDadosNoBillingProjectIDException,
-    BaseDosDadosInvalidProjectIDException
+    BaseDosDadosException,
+    BaseDosDadosInvalidProjectIDException,
+    BaseDosDadosNoBillingProjectIDException,
 )
-
+from pandas_gbq.gbq import GenericGBQException
 
 TEST_PROJECT_ID = "basedosdados-dev"
 SAVEFILE = Path(__file__).parent / "tmp_bases" / "test.csv"
@@ -114,17 +114,16 @@ def test_read_sql_no_billing_project_id():
         read_sql(
             query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
         )
-  
-    assert (
-        "We are not sure which Google Cloud project should be billed." \
-        in str(excinfo.value)
+
+    assert "We are not sure which Google Cloud project should be billed." in str(
+        excinfo.value
     )
 
 
 def test_read_sql_invalid_billing_project_id():
-    
+
     pattern = r"You are using an invalid `billing_project_id`"
-    
+
     with pytest.raises(BaseDosDadosInvalidProjectIDException, match=pattern):
         read_sql(
             query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
@@ -139,9 +138,9 @@ def test_read_sql_inexistent_project():
         read_sql(
             query="select * from `asedosdados.br_ibge_pib.municipio` limit 10",
             billing_project_id=TEST_PROJECT_ID,
-            from_file=True
+            from_file=True,
         )
-    
+
     assert "Reason: 404 Not found: Project" in str(excinfo.value)
 
 
@@ -151,9 +150,9 @@ def test_read_sql_inexistent_dataset():
         read_sql(
             query="select * from `basedosdados.br_ibge_inexistent.municipio` limit 10",
             billing_project_id=TEST_PROJECT_ID,
-            from_file=True
+            from_file=True,
         )
-    
+
     assert "Reason: 404 Not found: Dataset" in str(excinfo.value)
 
 
@@ -163,22 +162,22 @@ def test_read_sql_inexistent_table():
         read_sql(
             query="select * from `basedosdados.br_ibge_pib.inexistent` limit 10",
             billing_project_id=TEST_PROJECT_ID,
-            from_file=True
+            from_file=True,
         )
-    
+
     assert "Reason: 404 Not found: Table" in str(excinfo.value)
 
 
 def test_read_sql_syntax_error():
 
-        with pytest.raises(GenericGBQException) as excinfo:
-            read_sql(
-                query="invalid_statement * from `basedosdados.br_ibge_pib.municipio` limit 10",
-                billing_project_id=TEST_PROJECT_ID,
-                from_file=True
-            )
-        
-        assert "Reason: 400 Syntax error" in str(excinfo.value)
+    with pytest.raises(GenericGBQException) as excinfo:
+        read_sql(
+            query="invalid_statement * from `basedosdados.br_ibge_pib.municipio` limit 10",
+            billing_project_id=TEST_PROJECT_ID,
+            from_file=True,
+        )
+
+    assert "Reason: 400 Syntax error" in str(excinfo.value)
 
 
 def test_read_table():
@@ -256,9 +255,7 @@ def test_list_dataset_tables_all_descriptions(capsys):
 def test_list_dataset_tables_verbose_false():
 
     out = list_dataset_tables(
-        dataset_id="br_ibge_censo_demografico",
-        from_file=True,
-        verbose=False
+        dataset_id="br_ibge_censo_demografico", from_file=True, verbose=False
     )
     assert type(out) == list
     assert len(out) > 0
@@ -273,9 +270,7 @@ def test_get_dataset_description(capsys):
 
 def test_get_dataset_description_verbose_false():
     out = get_dataset_description(
-        "br_ibge_censo_demografico",
-        from_file=True,
-        verbose=False
+        "br_ibge_censo_demografico", from_file=True, verbose=False
     )
     assert type(out) == str
     assert len(out) > 0
@@ -294,7 +289,7 @@ def test_get_table_description_verbose_false():
         dataset_id="br_ibge_censo_demografico",
         table_id="setor_censitario_basico_2010",
         from_file=True,
-        verbose=False
+        verbose=False,
     )
     assert type(out) == str
     assert len(out) > 0
@@ -317,7 +312,7 @@ def test_get_table_columns_verbose_false():
         dataset_id="br_ibge_censo_demografico",
         table_id="setor_censitario_basico_2010",
         from_file=True,
-        verbose=False
+        verbose=False,
     )
     assert type(out) == list
     assert len(out) > 0
@@ -341,7 +336,7 @@ def test_get_table_size_verbose_false():
         table_id="setor_censitario_basico_2010",
         billing_project_id=TEST_PROJECT_ID,
         from_file=True,
-        verbose=False
+        verbose=False,
     )
     assert type(out) == list
     assert len(out) > 0
