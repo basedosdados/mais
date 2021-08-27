@@ -6,8 +6,29 @@ on:
       - python-package/**
       - .github/workflows/setup-env*
       - .github/workflows/python-ci.yml
+  workflow_dispatch:
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install isort black pylint
+      - name: Check library sort
+        run: isort --check-only python-package
+      - name: Check code format
+        run: black --check python-package
+      - name: Check lint
+        run: pylint --ignore migration,vendor python-package
+
   build-linux:
     runs-on: ubuntu-latest
     steps:
