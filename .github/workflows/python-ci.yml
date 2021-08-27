@@ -23,7 +23,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install isort black pylint
       - name: Check library sort
-        run: isort --check-only python-package
+        run: isort --check-only --profile black python-package
       - name: Check code format
         run: black --check python-package
       - name: Check lint
