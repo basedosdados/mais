@@ -1,4 +1,5 @@
 import pytest
+import ruamel.yaml as ryaml
 
 from pathlib import Path
 import shutil
@@ -46,6 +47,36 @@ def dataset_metadata_path(metadatadir):
 @pytest.fixture
 def table_metadata_path(metadatadir):
     return Path(metadatadir) / DATASET_ID / TABLE_ID
+
+
+@pytest.fixture
+def out_of_date_metadata_obj(metadatadir):
+    out_of_date_metadata = Metadata(
+        dataset_id="br_me_rais",
+        metadata_path=metadatadir
+    )
+    out_of_date_metadata.create(if_exists="replace")
+    
+    out_of_date_config = out_of_date_metadata.local_config
+    out_of_date_config['metadata_modified'] = 'data_antiga'
+    ryaml.dump(out_of_date_config, open(out_of_date_metadata.obj_path, "w"))
+    
+    return out_of_date_metadata
+
+
+@pytest.fixture
+def updated_metadata_obj(metadatadir):
+    updated_metadata = Metadata(
+        dataset_id="br_me_rais",
+        metadata_path=metadatadir
+    )
+    updated_metadata.create(if_exists="replace")
+    
+    updated_config = updated_metadata.local_config
+    updated_config['metadata_modified'] = updated_metadata.ckan_config['metadata_modified']
+    ryaml.dump(updated_config, open(updated_metadata.obj_path, "w"))
+
+    return updated_metadata
 
 
 def test_create_from_dataset_id(dataset_metadata, dataset_metadata_path):
@@ -110,12 +141,12 @@ def test_create_force_columns():
     pass
 
 
-def test_is_updated_is_true():
-    pass
+def test_is_updated_is_true(updated_metadata_obj):
+    assert updated_metadata_obj.is_updated() == True
 
 
-def test_is_updated_is_false():
-    pass
+def test_is_updated_is_false(out_of_date_metadata_obj):
+    assert out_of_date_metadata_obj.is_updated() == False
 
 
 def test_validate_is_succesful():
