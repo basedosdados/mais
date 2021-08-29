@@ -58,7 +58,7 @@ def out_of_date_metadata_obj(metadatadir):
     out_of_date_metadata.create(if_exists="replace")
     
     out_of_date_config = out_of_date_metadata.local_config
-    out_of_date_config['metadata_modified'] = 'data_antiga'
+    out_of_date_config['metadata_modified'] = 'old_date'
     ryaml.dump(out_of_date_config, open(out_of_date_metadata.obj_path, "w"))
     
     return out_of_date_metadata
@@ -129,7 +129,7 @@ def test_create_if_exists_pass(
 
 def test_create_columns(table_metadata, table_metadata_path):
     shutil.rmtree(table_metadata_path, ignore_errors=True)
-    table_metadata.create(columns=["coluna1", "coluna2"])
+    table_metadata.create(columns=["column1", "column2"])
     assert(table_metadata_path / METADATA_FILES['table']).exists()
     
 
@@ -149,12 +149,60 @@ def test_is_updated_is_false(out_of_date_metadata_obj):
     assert out_of_date_metadata_obj.is_updated() == False
 
 
-def test_validate_is_succesful():
-    pass
+@pytest.fixture
+def validate_dataset(metadatadir):
+    dataset_metadata = Metadata(dataset_id="br_ibge_pib", metadata_path=metadatadir)
+    dataset_metadata.create(if_exists="replace")
+    return dataset_metadata
 
 
-def test_validate_raise_error():
-    pass
+@pytest.fixture
+def validate_table(metadatadir):
+    table_metadata = Metadata(dataset_id="br_ibge_pib", table_id="municipio", metadata_path=metadatadir)
+    table_metadata.create(if_exists="replace")
+    return table_metadata
+
+
+def test_validate_is_succesful(validate_dataset, validate_table):
+    assert validate_dataset.validate() == True
+    assert validate_table.validate() == True
+
+
+@pytest.fixture
+def invalid_dataset_metadata(metadatadir):
+    invalid_dataset_metadata = Metadata(
+        dataset_id="br_ibge_pib",
+        metadata_path=metadatadir
+    )
+    invalid_dataset_metadata.create(if_exists="replace")
+    
+    invalid_config = invalid_dataset_metadata.local_config
+    invalid_config['metadata_modified'] = "not_a_valid_date"
+    ryaml.dump(invalid_config, open(invalid_dataset_metadata.obj_path, "w"))
+
+    return invalid_dataset_metadata
+
+
+@pytest.fixture
+def invalid_table_metadata(metdatadir):
+    invalid_dataset_metadata = Metadata(
+        dataset_id="br_ibge_pib",
+        table_id="municipio",
+        metadata_path=metadatadir
+    )
+    invalid_dataset_metadata.create(if_exists="replace")
+    
+    invalid_config = invalid_dataset_metadata.local_config
+    invalid_config['metadata_modified'] = "not_a_valid_date"
+    ryaml.dump(invalid_config, open(invalid_dataset_metadata.obj_path, "w"))
+
+    return invalid_dataset_metadata
+
+
+@pytest.mark.skip(reason="requires `metadata_modified` field in the config files")
+def test_validate_is_not_succesful(invalid_dataset_metadata, invalid_table_metadata):
+    assert invalid_dataset_metadata.validate() == False
+    assert invalid_table_metadata.validate() == False
 
 
 def test_publish():
