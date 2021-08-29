@@ -102,7 +102,10 @@ class Metadata(Base):
     @property
     @lru_cache(256)
     def metadata_schema(self):
-        # TODO: Get it from ckan endpoint
+        """Get metadata schema from CKAN API endpoint.
+
+        Returns:
+        """
 
         dataset_schema = requests.get(
             CKAN_URL + "/api/3/action/bd_dataset_schema"
@@ -171,33 +174,34 @@ class Metadata(Base):
         return self
 
     def validate(self):
-        """Validate table_config.yaml file. The yaml file should be located at
-        metadata_path/dataset_id/table_id/, as defined in your config.toml
+        """Validate dataset_config.yaml or table_config.yaml files. 
+        The yaml file should be located at metadata_path/dataset_id[/table_id/],
+        as defined in your config.toml
 
         Raises:
             BaseDosDadosException: when the file has validation errors.
 
         """
         error_dict = {}
-        self._check_resource_last_modified()
-        try:
-            response = RemoteCKAN(
-                CKAN_URL, user_agent="", apikey=None
-            ).action.package_validate(
-                resources=[self.table_config],
-                private=False,
-                name=self.dataset_id,
-                title="Validate",
-            )
-        except ckanapi.errors.ValidationError as e:
-            if e.error_dict:
-                error_dict[self.table_config["name"]] = e.error_dict
-            else:
-                return True
+
+        data_dict = build_validate_dict(
+            self.dataset_id, self.table_id, self.metadata_path
+        )
+        
+        bdm_ckan = RemoteCKAN(
+            CKAN_URL, user_agent="", apikey=None
+        )
+
+        response = bdm_ckan.action.package_validate(**data_dict)
+
+        if response['errors'] != []:
+            error_dict[self.ckan_config["name"]] = response['errors']
+        else:
+            return True
 
         if error_dict:
             raise BaseDosDadosException(
-                f"{self.table_metadata_path} has validation errors: {error_dict}"
+                f"{self.obj_path} has validation errors: {error_dict}"
             )
 
 
@@ -308,3 +312,77 @@ def builds_yaml_object(schema, data=dict(), columns_schema=dict()):
             yaml_obj["columns"].append(_add_property(ryaml.CommentedMap(), prop))
 
     return yaml_obj
+
+
+def get_bdm_ckan_metadata(dataset_id, table_id=None):
+
+    endpoint_url = (
+        f"{CKAN_URL_STAGING}/api/3/action/bd_bdm_dataset_show?dataset_id="
+        f"{dataset_id}"
+    )
+    bdm_ckan_dataset_metadata = requests.get(endpoint_url).json()["result"]
+
+    if table_id:
+        endpoint_url = (
+            f"{CKAN_URL_STAGING}/api/3/action/bd_bdm_table_show?dataset_i"
+            f"d={dataset_id}&table_id={table_id}"
+        )
+        bdm_ckan_table_metadata = requests.get(endpoint_url).json()["result"]
+
+    else: 
+        bdm_ckan_table_metadata = None
+    
+    return bdm_ckan_dataset_metadata, bdm_ckan_table_metadata
+
+
+def build_validate_dict(dataset_id, table_id=None, metadata_path=None):
+    """
+    Helper function to structure local config files data for validation.
+
+    Args:
+        dataset_id (str):
+            The dataset_id that corresponds to the data subject to validation.
+    
+    Returns:
+        dict
+    """
+
+
+    bdm_ckan_dataset_metadata, bdm_ckan_table_metadata = get_bdm_ckan_metadata(dataset_id, table_id)    
+    dataset_metadata = Metadata(
+        dataset_id=dataset_id, metadata_path=metadata_path
+    )
+
+    if table_id:
+        table_metadata = Metadata(
+            dataset_id=dataset_id,
+            table_id=table_id,
+            metadata_path=metadata_path
+        )
+
+        data = {
+            "name": bdm_ckan_dataset_metadata["name"],
+            "type": bdm_ckan_dataset_metadata["type"],
+            "title": bdm_ckan_dataset_metadata["title"],
+            "private": bdm_ckan_dataset_metadata["private"],
+            "owner_org": bdm_ckan_dataset_metadata["owner_org"],
+            "resources": [
+                {
+                    "name": bdm_ckan_table_metadata["name"],
+                    "resource_type": bdm_ckan_table_metadata["resource_type"],
+                    "table_id": table_metadata.local_config["table_id"]
+                }
+            ]
+        }
+
+    else:
+        data = {
+            "name": dataset_metadata.local_config["dataset_id"].replace("_", "-"),
+            "type": bdm_ckan_dataset_metadata["type"],
+            "title": dataset_metadata.local_config["title"],
+            "private": bdm_ckan_dataset_metadata["private"],
+            "owner_org": bdm_ckan_dataset_metadata["owner_org"],
+            "resources": bdm_ckan_dataset_metadata["resources"]
+        }
+    
+    return data
