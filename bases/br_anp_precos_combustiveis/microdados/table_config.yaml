@@ -60,7 +60,6 @@ observation_level: #REQUIRED
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
     - data_coleta
-    - id_municipio
     - cnpj_revenda
     - produto
 
