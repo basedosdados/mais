@@ -24,7 +24,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- id_escola
+- escola
 
 Colunas identificando linhas unicamente
 -------------------

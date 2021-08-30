@@ -25,9 +25,9 @@ SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(serie AS STRING) serie,
 SAFE_CAST(tipo_prova AS STRING) tipo_prova,
 SAFE_CAST(disciplina AS STRING) disciplina,
-SAFE_CAST(id_bloco AS STRING) bloco,
-SAFE_CAST(id_posicao AS STRING) posicao,
-SAFE_CAST(id_item AS STRING) item,
-SAFE_CAST(id_descritor AS STRING) descritor,
+SAFE_CAST(bloco AS STRING) bloco,
+SAFE_CAST(posicao AS STRING) posicao,
+SAFE_CAST(item AS STRING) item,
+SAFE_CAST(descritor AS STRING) descritor,
 SAFE_CAST(gabarito AS STRING) gabarito
 from basedosdados-dev.br_inep_ana_staging.prova as t

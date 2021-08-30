@@ -24,19 +24,17 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- tipo_prova
-- id_bloco
-- id_posicao
-- gabarito
+- questao
+- caderno
 
 Colunas identificando linhas unicamente
 -------------------
 - ano
 - tipo_prova
-- id_bloco
-- id_posicao
-- id_item
-- id_descritor
+- bloco
+- posicao
+- item
+- descritor
 
 Cobertura Temporal
 ------------------
