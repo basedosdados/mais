@@ -1,8 +1,3 @@
-import os
-import json
-import sys
-import ast
-from pathlib import Path
 from copy import deepcopy
 from functools import lru_cache
 from collections import defaultdict
@@ -12,9 +7,7 @@ import ruamel.yaml as ryaml
 
 from google.api_core.exceptions import NotFound
 
-import ckanapi
 from ckanapi import RemoteCKAN
-from ckanapi import errors
 
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
@@ -86,6 +79,15 @@ class Metadata(Base):
 
         else:
             return dataset_config
+    
+    @property
+    @lru_cache(256)
+    def ckan_data_dict(self) -> dict:
+        return build_validate_dict(
+            self.dataset_id,
+            self.table_id,
+            self.metadata_path
+        )
 
     @property
     @lru_cache(256)
@@ -183,16 +185,14 @@ class Metadata(Base):
 
         """
         error_dict = {}
-
-        data_dict = build_validate_dict(
-            self.dataset_id, self.table_id, self.metadata_path
-        )
         
         bdm_ckan = RemoteCKAN(
             CKAN_URL, user_agent="", apikey=None
         )
 
-        response = bdm_ckan.action.package_validate(**data_dict)
+        response = bdm_ckan.action.package_validate(
+            **self.ckan_data_dict
+        )
 
         if response['errors']:
             error_dict[self.ckan_config["name"]] = response['errors']
@@ -201,6 +201,28 @@ class Metadata(Base):
             )
         
         return True
+    
+    def publish(self):
+        """Publish local metadata modifications.
+        """
+
+        bdm_ckan = RemoteCKAN(
+            CKAN_URL, user_agent="", apikey=None
+        )
+
+        try:
+            self.validate()
+            bdm_ckan.call_action(
+                action="package_patch",
+                data_dict=self.ckan_data_dict
+            )
+        except BaseDosDadosException as e:
+            msg=(
+                f"Could not publish metadata due to a validation error. Pleas"
+                f"e see the traceback below to get information on how to corr"
+                f"ect it.\n\n{repr(e)}"
+            )
+            raise BaseDosDadosException(msg)
 
 
 def handle_data(k, schema, data, local_default=None):
