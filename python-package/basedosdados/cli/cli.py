@@ -9,6 +9,7 @@ from basedosdados.upload.storage import Storage
 from basedosdados.upload.metadata import Metadata
 
 import basedosdados as bd
+from basedosdados.exceptions import BaseDosDadosException
 
 
 @click.group()
@@ -715,6 +716,33 @@ def cli_is_updated_metadata(
             "Local metadata is out of date. Please run `basedosdados metadata"
             " create` with the flag `if_exists=replace` to get the updated da"
             "ta."
+        )
+        color = "red"
+
+    click.echo(
+        click.style(
+            msg,
+            fg=color
+        )
+    )
+
+
+@cli_metadata.command(name="validate", help="Validate user's local metadata")
+@click.argument("dataset_id")
+@click.argument("table_id", required=False)
+@click.pass_context
+def cli_is_updated_metadata(
+    ctx, dataset_id, table_id
+):
+    m = Metadata(dataset_id, table_id, **ctx.obj)
+
+    try:
+        m.validate()
+        msg, color = "Local metadata is valid.", "green"
+    except BaseDosDadosException as e:
+        msg = (
+            f"Local metadata is invalid. Please check the traceback below for"
+            f" more information on how to fix it:\n\n{repr(e)}"
         )
         color = "red"
 
