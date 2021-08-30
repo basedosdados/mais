@@ -5,6 +5,7 @@ from pathlib import Path
 import shutil
 
 from basedosdados import Metadata
+from basedosdados.exceptions import BaseDosDadosException
 
 
 DATASET_ID = "pytest"
@@ -184,7 +185,7 @@ def invalid_dataset_metadata(metadatadir):
 
 
 @pytest.fixture
-def invalid_table_metadata(metdatadir):
+def invalid_table_metadata(metadatadir):
     invalid_dataset_metadata = Metadata(
         dataset_id="br_ibge_pib",
         table_id="municipio",
@@ -193,17 +194,21 @@ def invalid_table_metadata(metdatadir):
     invalid_dataset_metadata.create(if_exists="replace")
     
     invalid_config = invalid_dataset_metadata.local_config
-    invalid_config['metadata_modified'] = "not_a_valid_date"
+    invalid_config['table_id'] = None
     ryaml.dump(invalid_config, open(invalid_dataset_metadata.obj_path, "w"))
 
     return invalid_dataset_metadata
 
 
-@pytest.mark.skip(reason="requires `metadata_modified` field in the config files")
+@pytest.mark.xfail(
+    reason="requires `metadata_modified` field in dataset_config.yaml"
+)
 def test_validate_is_not_succesful(invalid_dataset_metadata, invalid_table_metadata):
-    assert invalid_dataset_metadata.validate() == False
-    assert invalid_table_metadata.validate() == False
+    with pytest.raises(BaseDosDadosException):
+        invalid_table_metadata.validate()
 
+    with pytest.raises(BaseDosDadosException):
+        invalid_dataset_metadata.validate()
 
 def test_publish():
     pass

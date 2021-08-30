@@ -194,15 +194,13 @@ class Metadata(Base):
 
         response = bdm_ckan.action.package_validate(**data_dict)
 
-        if response['errors'] != []:
+        if response['errors']:
             error_dict[self.ckan_config["name"]] = response['errors']
-        else:
-            return True
-
-        if error_dict:
             raise BaseDosDadosException(
                 f"{self.obj_path} has validation errors: {error_dict}"
             )
+        
+        return True
 
 
 def handle_data(k, schema, data, local_default=None):
@@ -347,11 +345,7 @@ def build_validate_dict(dataset_id, table_id=None, metadata_path=None):
         dict
     """
 
-
     bdm_ckan_dataset_metadata, bdm_ckan_table_metadata = get_bdm_ckan_metadata(dataset_id, table_id)    
-    dataset_metadata = Metadata(
-        dataset_id=dataset_id, metadata_path=metadata_path
-    )
 
     if table_id:
         table_metadata = Metadata(
@@ -368,21 +362,37 @@ def build_validate_dict(dataset_id, table_id=None, metadata_path=None):
             "owner_org": bdm_ckan_dataset_metadata["owner_org"],
             "resources": [
                 {
-                    "name": bdm_ckan_table_metadata["name"],
+                    "description": table_metadata.local_config["description"],
+                    "name": table_metadata.local_config["table_id"],
                     "resource_type": bdm_ckan_table_metadata["resource_type"],
-                    "table_id": table_metadata.local_config["table_id"]
+                    "version": table_metadata.local_config["version"],
+                    "table_id": table_metadata.local_config["table_id"],
+                    "spatial_coverage": table_metadata.local_config["spatial_coverage"]
                 }
             ]
         }
 
     else:
+        dataset_metadata = Metadata(
+            dataset_id=dataset_id, metadata_path=metadata_path
+        )
+
         data = {
             "name": dataset_metadata.local_config["dataset_id"].replace("_", "-"),
             "type": bdm_ckan_dataset_metadata["type"],
             "title": dataset_metadata.local_config["title"],
             "private": bdm_ckan_dataset_metadata["private"],
             "owner_org": bdm_ckan_dataset_metadata["owner_org"],
-            "resources": bdm_ckan_dataset_metadata["resources"]
+            "resources": bdm_ckan_dataset_metadata["resources"],
+            "groups": [
+                {"name": group} for group in dataset_metadata.local_config["groups"]
+            ],
+            "organization": [
+                {"name": org} for org in dataset_metadata.local_config["organization"]
+            ],
+            "tags": [
+                {"name": tag} for tag in dataset_metadata.local_config["tags"]
+            ],
         }
     
     return data
