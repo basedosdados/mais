@@ -51,10 +51,7 @@ data_update_frequency: 2 anos # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - tipo_prova
-    - id_bloco
-    - id_posicao
-    - gabarito
+    - questão
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -62,10 +59,10 @@ observation_level: #REQUIRED
 primary_keys:
     - ano
     - tipo_prova
-    - id_bloco
-    - id_posicao
-    - id_item
-    - id_descritor
+    - bloco
+    - posicao
+    - item
+    - descritor
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -121,25 +118,25 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_bloco
+        name: bloco
         description: Identificador do bloco
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_posicao
+        name: posicao
         description: Identificador da posição do item no bloco
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_item
+        name: item
         description: Identificador do item
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_descritor
+        name: descritor
         description: Identificador do descritor do item
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
