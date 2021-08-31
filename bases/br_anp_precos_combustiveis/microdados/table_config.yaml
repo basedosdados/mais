@@ -183,13 +183,13 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_compra
+        name: preco_compra
         description: Preço de venda da distribuidora para o posto revendedor de combustível
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_venda
+        name: preco_venda
         description: Preço de venda ao consumidor final praticado pelo revendedor na data da coleta
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
