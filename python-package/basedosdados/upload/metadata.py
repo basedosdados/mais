@@ -160,8 +160,10 @@ class Metadata(Base):
             data = self.ckan_config
 
             # adds local columns if 1. columns is empty and 2. force_columns is True
-            if (not data.get("columns")) or force_columns == True:
+
+            if ((not data.get("columns")) or force_columns == True) and self.table_id is not None:
                 data["columns"] = [{"name": c} for c in columns]
+                print(f"{data=}")
 
             yaml_obj = builds_yaml_object(
                 self.metadata_schema, data, columns_schema=self.columns_schema
@@ -401,8 +403,9 @@ def build_validate_dict(dataset_id, table_id=None, metadata_path=None):
 
         data = {
             "name": dataset_metadata.local_config["dataset_id"].replace("_", "-"),
-            "type": bdm_ckan_dataset_metadata["type"],
             "title": dataset_metadata.local_config["title"],
+            "type": bdm_ckan_dataset_metadata["type"],
+            "metadata_modified": dataset_metadata.local_config["metadata_modified"],
             "private": bdm_ckan_dataset_metadata["private"],
             "owner_org": bdm_ckan_dataset_metadata["owner_org"],
             "resources": bdm_ckan_dataset_metadata["resources"],
@@ -415,6 +418,7 @@ def build_validate_dict(dataset_id, table_id=None, metadata_path=None):
             "tags": [
                 {"name": tag} for tag in dataset_metadata.local_config["tags"]
             ],
+            "dataset_id": dataset_metadata.local_config["dataset_id"]
         }
     
     return data
