@@ -47,6 +47,7 @@ def get_table_configs():
 
     files = [folder / "table_config.yaml" for folder in folders]
     files = [file for file in files if file.exists()]
+    files = list(set(files))
 
     return files
 
