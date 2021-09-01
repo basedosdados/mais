@@ -91,11 +91,17 @@ def test_create_if_exists_pass(
     table_metadata_path
     ):
 
+    # make sure new file is created
     dataset_metadata.create(if_exists="replace")
     assert (dataset_metadata_path / METADATA_FILES['dataset']).exists()
+    
+    # make sure no Exception is raised on `if_exists="pass"`
+    dataset_metadata.create(if_exists="pass")
 
+    # same procedure for `Table`
     table_metadata.create(if_exists="replace")
-    assert (table_metadata_path / METADATA_FILES['table']).exists()    
+    assert (table_metadata_path / METADATA_FILES['table']).exists()
+    table_metadata.create(if_exists="pass")
 
 
 def test_create_columns(table_metadata, table_metadata_path):
