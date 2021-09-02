@@ -102,8 +102,9 @@ def pytest_sessionstart(session):
     # load checks with jinja2 placeholders
     # and replace {{ project_id }} by the appropriate environment
     with open(check_path, "r", encoding="utf-8") as file:
-        env = os.environ.get("BQ_ENVIRONMENT")
-        text = file.read().replace("{{ project_id }}", env)
+        # load corrent project variable name from github actions environment
+        env = os.environ.get('BQ_ENVIRONMENT', 'project_id_staging')
+        text = file.read().replace("{{ project_id }}", f"{{ {env} }}")
         checks = Template(text)
 
     # load checks with configs from table_config.yaml

@@ -131,7 +131,7 @@ jobs:
         run: pytest -v .github/workflows/data-check --skipfile .github/DATA_CHECK_SKIP.csv
         shell: bash
         env:
-          BQ_ENVIRONMENT: basedosdados
+          BQ_ENVIRONMENT: project_id_prod
       - name: Upload report artifact
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
