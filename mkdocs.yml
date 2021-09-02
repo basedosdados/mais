@@ -18,12 +18,16 @@ theme:
         icon: material/toggle-switch
         name: Switch to light mode
   language: pt
-  # logo: https://avatars3.githubusercontent.com/u/71097635?s=400&u=59375d7ae320f43b2bb6accc8ef6dd79837c88f5&v=4
-  favicon: images/bdmais_logo_pacotes.png
-  logo: images/bdmais_logo_pacotes.png
+  font:
+    text: Lato
+  # favicon: images/bd_logo.png
+  # logo: images/bd_logo.png
   features:
-    # - header.autohide
-    - navigation.tabs
+    - header.autohide
+    - navigation.sections
+    - navigation.top
+    - toc.integrate
+    # - navigation.tabs
 
 repo_url: https://github.com/basedosdados/mais
 repo_name: basedosdados/mais
@@ -49,37 +53,12 @@ extra:
     property: !ENV GOOGLE_ANALYTICS_KEY
 
 nav:
-  - Home: # Comece aqui: # index.md
+  - Home:
     - Início: index.md
-    - Primeiros passos: 
-      - Como acessar o datalake: tutorial_init.md
-      - Acssando via BigQuery: access_data_bq.md
-      - Acessando via pacotes: access_data_packages.md
-    - Explore:
-      - Buscar por tabelas, conjuntos e temas: index.md # TODO
-      - Como cruzar tabelas de diferentes organizações: tutorial_cross_table.md
-      - Como usar os diretórios brasileiros (catálogos de referencia): index.md # TODO
-    - Integações:
-      - Como conectar ao Metabase: index.md # TODO
-      - Como conectar ao PowerBI: index.md # TODO
-    - Python:
-      - Instalação: access_data_packages.md
-      - Manual de referência: py_reference_api.md
-      - Exemplos: py_examples.md
-    - R:
-      - Instalação: access_data_packages.md
-      - Manual de referência: r_reference_api.md
-      - Exemplos: r_examples.md
-    - CLI:
-      - Instalação: access_data_packages.md
-      - Manual de referência: cli_reference_api.md
-      - Exemplos: cli_examples.md
-    - Nossa metodologia:
-      - Manual de estilo e diretrizes de dados: style_data.md
-    - Contribua:
-      - Colaborando com dados: colab_data.md
-      - Colaborando com pacotes: colab_infrastructure.md
-      - Como citar a Base dos Dados: index.md # TODO
+    - BigQuery: access_data_bq.md
+    - Pacotes: access_data_packages.md
+    - Contribua: colab.md
+    #   - Como citar a Base dos Dados: index.md # TODO
 
 markdown_extensions:
   - admonition
@@ -98,6 +77,7 @@ extra_javascript:
 
 plugins:
   - search
+  - mkdocs-video
   - mkdocstrings:
       handlers:
         python:

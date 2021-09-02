@@ -1,19 +1,15 @@
 
 # Pacotes
 
-Os pacotes da Base dos Dados permitem o acesso aos dados do nosso
-*datalake* público direto do seu terminal ou ambiente de
-desenvolvimento. Atualmente, o pacote está disponível para Python, R e
-CLI (linha de comando).
+Nesta página você encontra:
 
-Quer seguir na sua linguagem favorita? Veja com configurar seu ambiente
-nas linguagens:
+- [Primeiros passos](#primeiros-passos)
+- [Tutoriais](#tutoriais)
+- [Manuais de referência](#manuais-de-referencia)
 
-- Python
-- R
-- CLI (terminal)
+## Primeiros passos
 
-## Antes de começar: Crie o seu projeto no Google Cloud
+### Antes de começar: Crie o seu projeto no Google Cloud
 
 Para criar um projeto no Google Cloud basta ter um email cadastrado no
 Google. É necessário ter um projeto seu, mesmo que vazio, para você
@@ -30,17 +26,9 @@ fazer queries em nosso *datalake* público.
     serviços do Google Cloud, incluindo a permissão de uso do BigQuery.
     Pense no projeto como a "conta" na qual a Google vai contabilizar o
     quanto de processamento você já utilizou. **Não é necessário adicionar
-    nenhum cartão ou forma de pagamento.**
+    nenhum cartão ou forma de pagamento - O BigQuery inicia automaticamente no modo Sandbox, que permite você utilizar seus recursos sem adicionar um modo de pagamento. [Leia mais aqui](https://cloud.google.com/bigquery/docs/sandbox/?hl=pt).**
 
-    - Rapidez: Mesmo queries muito longas demoram apenas minutos para serem processadas.
-
-    - Escala: O BigQuery escala magicamente para hexabytes se necessário.
-
-    - Facilidade: Você pode cruzar tabelas tratadas e atualizadas num só lugar.
-
-    - Economia: O BigQuery permite que a consulta seja diretamente do usuário. Porém, são fornecidos **1 TB gratuito por mês gratuitos para quaisquer consultas de dados**. Ou seja, o custo é praticamente zero para a maioria dos usuários. Depois disso, são cobrados somente 5 dólares por TB de dados que sua query percorrer.
-
-## Instalando o pacote
+### Instalando o pacote
 
 Para instalação do pacote em Python e linha de comando, você pode usar o
 `pip` direto do seu terminal. Em R, basta instalar diretamente no
@@ -63,7 +51,7 @@ RStudio ou editor de sua preferência.
     ```
 
 
-## Configurando o pacote
+### Configurando o pacote
 
 Uma vez com seu projeto, você precisa configurar o pacote para usar o ID
 desse projeto nas consultas ao *datalake*. Para isso, você deve usar o
@@ -83,7 +71,7 @@ projeto é criado.
     *Não é necessário configurar o projeto de antemão. Assim que você
     roda a 1ª consulta, o pacote irá indicar os passos para configuração.*
 
-## Rodando um exemplo
+### Faça sua primeira consulta!
 
 Um exemplo simples para começar a explorar o *datalake* é puxar
 [informações cadastrais de
@@ -118,16 +106,38 @@ função `download`, baixando os dados direto para nossa máquina.
     ```
     *Para entender mais sobre a função `download`, leia o [manual de referência](/reference_api_cli).*
     
-## Próximos passos
+## Tutoriais
 
-### Entenda os dados
+### Como usar os pacotes
 
-O BigQuery possui já um mecanismo de busca que permite buscar por nomes
-de *datasets* (conjuntos), *tables* (tabelas) ou *labels* (grupos).
-Construímos regras de nomeação simples e práticas para facilitar sua
-busca - veja mais [na seção de Nomenclatura](/style_data).
+Preparamos tutoriais apresentando as principais funções de cada pacote
+para você começar a usá-los.
 
-### Tutoriais
+=== "R"
+    Blog:
 
-- [Como funcionam os nomes de conjuntos e tabelas]()
-- [Como cruzar tabelas de diferentes organizações](/tutorial_cross_table)
+    - [Introdução ao pacote R](https://dev.to/basedosdados/como-usar-a-biblioteca-basedosdados-no-r-capitulo-1-46kb)
+    - [Explorando o Censo Escolar](https://dev.to/basedosdados/explorando-o-censo-escolar-com-a-base-dos-dados-1a89)
+    - [Análise: O Brasil nas Olimpíadas](https://dev.to/basedosdados/o-brasil-nas-olimpiadas-2g6n)
+
+    Vídeos:
+
+    - [Workshop: Aprenda a acessar dados públicos em R](https://www.youtube.com/watch?v=M9ayiseIjvI&t=250s)
+    
+    
+=== "Python"
+    Blog:
+
+    - [Introdução ao pacote Python](https://dev.to/basedosdados/base-dos-dados-python-101-44lc)
+    - [Introdução ao pacote Python (cont.)](https://dev.to/basedosdados/base-dos-dados-python-102-50k0)
+    
+    Vídeos:
+
+    - [Workshop: Aplicações em Python](https://www.youtube.com/watch?v=wI2xEioDPgM)
+    
+
+## Manuais de referência
+
+- [Funções em :material-language-r: R](/reference_api_r)
+- [Funções em :material-language-python: Python](/reference_api_py)
+- [Funções em :octicons-terminal-16: CLI](/reference_api_cli)
