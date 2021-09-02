@@ -104,7 +104,7 @@ def pytest_sessionstart(session):
     with open(check_path, "r", encoding="utf-8") as file:
         # load corrent project variable name from github actions environment
         env = os.environ.get('BQ_ENVIRONMENT', 'project_id_staging')
-        text = file.read().replace("{{ project_id }}", f"{{ {env} }}")
+        text = file.read().replace("{{ project_id }}", f"{{{{ {env} }}}}")
         checks = Template(text)
 
     # load checks with configs from table_config.yaml
