@@ -145,6 +145,8 @@ para você começar a usá-los.
 
 ## Manuais de referência
 
-- [Funções em :material-language-r: R](/reference_api_r)
-- [Funções em :material-language-python: Python](/reference_api_py)
-- [Funções em :octicons-terminal-16: CLI](/reference_api_cli)
+#### [:material-language-r: R](/reference_api_r)
+
+#### [:material-language-python: Python](/reference_api_py)
+
+#### [:octicons-terminal-16: CLI](/reference_api_cli)
