@@ -67,15 +67,6 @@ def test_table_exists(configs):
     assert result.sucess.values == True
 
 
-# def test_select_all_works(configs):
-#     config = configs["test_select_all_works"]
-#     result = fetch_data(config)
-#
-#     store_log(config)
-#
-#     assert result.sucess.values == True
-
-
 def test_table_has_no_null_column(configs):
     config = configs["test_table_has_no_null_column"]
     result = fetch_data(config)
