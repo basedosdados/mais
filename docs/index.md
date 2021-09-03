@@ -30,8 +30,8 @@ hover="background-color: var(--md-primary-fg-color--dark)">
 
 ### No seu computador: Pacotes
 
-O pacote da Base dos Dados permitem o acesso ao *datalake* público
-direto do seu computador ou ambiente de desenvolvimento. Atualmente disponível em:
+Os pacotes da Base dos Dados permitem o acesso ao *datalake* público
+direto do seu computador ou ambiente de desenvolvimento. Atualmente disponíveis em:
 
 - **:material-language-python: Python**
 - **:material-language-r: R**

@@ -1,7 +1,17 @@
 
 # BigQuery
 
-Nesta página você encontra:
+O BigQuery é o um serviço de banco de dados em nuvem da
+Google. Você faz consultas ao banco em SQL direto do navegador com:
+
+- **Rapidez**: Mesmo queries muito longas demoram apenas minutos para serem processadas.
+
+- **Escala**: O BigQuery escala magicamente para hexabytes se necessário.
+
+- **Economia**: Todo usuário possui *1 TB gratuito por mês para consulta
+  aos dados*.
+
+Pronto(a) para começar? Nesta página você encontra:
 
 - [Primeiros passos](#primeiros-passos)
 - [Tutoriais](#tutoriais)

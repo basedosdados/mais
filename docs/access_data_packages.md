@@ -1,7 +1,14 @@
 
 # Pacotes
 
-Nesta página você encontra:
+Os pacotes da Base dos Dados permitem o acesso ao *datalake* público
+direto do seu computador ou ambiente de desenvolvimento. Atualmente disponíveis em:
+
+- **:material-language-python: Python**
+- **:material-language-r: R**
+- **:octicons-terminal-16: CLI (terminal)**
+
+Pronto(a) para começar? Nesta página você encontra:
 
 - [Primeiros passos](#primeiros-passos)
 - [Tutoriais](#tutoriais)
