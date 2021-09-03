@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - python-package/**
-      - .github/workflows/setup-env*
+      - .github/workflows/env-setup*
       - .github/workflows/python-ci.yml
   workflow_dispatch:
 
@@ -32,10 +32,11 @@ jobs:
           black --check python-package
       - name: Check lint
         run: |
-          pylint --exit-zero .github
+          pylint --exit-zero .github/**/*.py
           pylint --exit-zero python-package
 
   build-linux:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
     - name: Check out repository
@@ -75,6 +76,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-windows:
+    needs: lint
     runs-on: windows-latest
     steps:
     - name: Check out repository
