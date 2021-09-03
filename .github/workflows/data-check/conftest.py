@@ -105,7 +105,9 @@ def pytest_sessionstart(session):
     with open(check_path, "r", encoding="utf-8") as file:
         skeleton = file.read()
         if os.environ.get("IS_PROD_ENV", False):
-            skeleton = skeleton.replace("{{ project_id_staging }}", "{{ project_id_prod }}")
+            skeleton = skeleton.replace("{{ project_id }}", "basedosdados")
+        else:
+            skeleton = skeleton.replace("{{ project_id }}", "{{ project_id_prod }}")
         checks = Template(skeleton)
 
     # load checks with configs from table_config.yaml

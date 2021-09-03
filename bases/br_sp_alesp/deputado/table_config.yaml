@@ -1,7 +1,7 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: deputado # AUTO GENERATED 
+table_id: deputado # AUTO GENERATED
 dataset_id: br_sp_alesp # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-sp-alesp # AUTO GENERATED
