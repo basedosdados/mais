@@ -24,12 +24,11 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- nome_estabelecimento
+- preço
 
 Colunas identificando linhas unicamente
 -------------------
 - data_coleta
-- id_municipio
 - cnpj_revenda
 - produto
 
