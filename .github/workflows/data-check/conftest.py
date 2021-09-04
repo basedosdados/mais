@@ -100,11 +100,15 @@ def pytest_sessionstart(session):
         pytest.exit("No fixtures found", 0)
 
     # load checks with jinja2 placeholders
-    # and replace {{ project_id }} by the appropriate environment
+    # and replace the project variable by the 
+    # production environment if it's table approve action
     with open(check_path, "r", encoding="utf-8") as file:
-        env = os.environ.get("BQ_ENVIRONMENT")
-        text = file.read().replace("{{ project_id }}", env)
-        checks = Template(text)
+        skeleton = file.read()
+        if os.environ.get("IS_PROD_ENV", False):
+            skeleton = skeleton.replace("{{ project_id }}", "basedosdados")
+        else:
+            skeleton = skeleton.replace("{{ project_id }}", "{{ project_id_prod }}")
+        checks = Template(skeleton)
 
     # load checks with configs from table_config.yaml
     _configs = []
