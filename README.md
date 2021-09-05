@@ -206,7 +206,7 @@ código!](https://github.com/basedosdados/mais/blob/master/CONTRIBUTORS.md)
 
 A Base dos Dados já poupou horas da sua vida? Permitiu coisas antes impossíveis? Nosso trabalho é quase todo voluntário, mas temos vários custos de infraestrutura, equipe, e outros.
 
-[Nos ajude a fazer esse projeto se manter e crescer!](https://apoia.se/basedosdados)
+Nos ajude a fazer esse projeto se manter e crescer! Todo mês no nosso [financiamento coletivo](https://apoia.se/basedosdados) ou via PIX na chave 42494318000116.
 
 # Como citar o projeto 📝
 
