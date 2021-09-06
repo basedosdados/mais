@@ -53,6 +53,7 @@ observation_level: #REQUIRED
     - estado
     - ano
     - mes
+    - tipo de consumo
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -61,6 +62,7 @@ primary_keys:
     - sigla_uf
     - ano
     - mes
+    - tipo_consumo
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
