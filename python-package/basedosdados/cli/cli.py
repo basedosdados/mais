@@ -10,6 +10,7 @@ from basedosdados.upload.metadata import Metadata
 
 import basedosdados as bd
 from basedosdados.exceptions import BaseDosDadosException
+from ckanapi import CKANAPIError
 
 
 @click.group()
@@ -731,7 +732,7 @@ def cli_is_updated_metadata(
 @click.argument("dataset_id")
 @click.argument("table_id", required=False)
 @click.pass_context
-def cli_is_updated_metadata(
+def cli_validate_metadata(
     ctx, dataset_id, table_id
 ):
     m = Metadata(dataset_id, table_id, **ctx.obj)
@@ -743,6 +744,34 @@ def cli_is_updated_metadata(
         msg = (
             f"Local metadata is invalid. Please check the traceback below for"
             f" more information on how to fix it:\n\n{repr(e)}"
+        )
+        color = "red"
+
+    click.echo(
+        click.style(
+            msg,
+            fg=color
+        )
+    )
+
+
+@cli_metadata.command(name="publish", help="Publish user's local metadata")
+@click.argument("dataset_id")
+@click.argument("table_id", required=False)
+@click.pass_context
+def cli_publish_metadata(
+    ctx, dataset_id, table_id
+):
+    m = Metadata(dataset_id, table_id, **ctx.obj)
+
+    try:
+        m.publish()
+        msg, color = "Local metadata has been published.", "green"
+    except (CKANAPIError, BaseDosDadosException) as e:
+        msg = (
+            f"Local metadata couldn't be published due to an error. Pleas"
+            f"e check the traceback below for more information on how to "
+            f"fix it:\n\n{repr(e)}"
         )
         color = "red"
 
