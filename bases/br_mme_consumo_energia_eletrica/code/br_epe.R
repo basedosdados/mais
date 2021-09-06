@@ -78,12 +78,12 @@ lista_cols = c(ano = 'V1',
                  `Distrito Federal` = 'V29') 
 
 #### Tratar 
-df1 = cleanup("input/dados.xls", 10) %>% mutate(tipo_consumo = "Consumo Total") 
-df2 = cleanup("input/dados.xls", 11) %>% mutate(tipo_consumo = "Consumo Cativo")
-df3 = cleanup("input/dados.xls", 12) %>% mutate(tipo_consumo = "Consumo Residencial")
-df4 = cleanup("input/dados.xls", 13) %>% mutate(tipo_consumo = "Consumo Industrial")
-df5 = cleanup("input/dados.xls", 14) %>% mutate(tipo_consumo = "Consumo Comercial")
-df6 = cleanup("input/dados.xls", 15) %>% mutate(tipo_consumo = "Consumo Outros")
+df1 = cleanup("input/dados.xls", 10) %>% mutate(tipo_consumo = "Total") 
+df2 = cleanup("input/dados.xls", 11) %>% mutate(tipo_consumo = "Cativo")
+df3 = cleanup("input/dados.xls", 12) %>% mutate(tipo_consumo = "Residencial")
+df4 = cleanup("input/dados.xls", 13) %>% mutate(tipo_consumo = "Industrial")
+df5 = cleanup("input/dados.xls", 14) %>% mutate(tipo_consumo = "Comercial")
+df6 = cleanup("input/dados.xls", 15) %>% mutate(tipo_consumo = "Outros")
 
 #### Finalizar  
 df7 = list(df1, df2, df3, df4, df5, df6) 

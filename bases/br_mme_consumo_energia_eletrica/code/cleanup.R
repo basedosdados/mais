@@ -1,6 +1,6 @@
 cleanup  <- function(path, sheet){
   readxl::read_excel(path = path, 
-                     skip = 2, 
+                     range = "A3:HC34", 
                      sheet = sheet) %>% 
     slice(-linhas) %>% 
     t() %>% 
