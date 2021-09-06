@@ -79,16 +79,90 @@ class Metadata(Base):
 
         else:
             return dataset_config
-    
+
+    @property
+    @lru_cache(256)
+    def ckan_raw_metadata(self):
+
+        endpoint_url = (
+            f"{CKAN_URL_STAGING}/api/3/action/bd_bdm_dataset_show?dataset_id="
+            f"{self.dataset_id}"
+        )
+        bdm_ckan_dataset_metadata = requests.get(endpoint_url).json()["result"]
+
+        if self.table_id:
+            endpoint_url = (
+                f"{CKAN_URL_STAGING}/api/3/action/bd_bdm_table_show?dataset_i"
+                f"d={self.dataset_id}&table_id={self.table_id}"
+            )
+            bdm_ckan_table_metadata = requests.get(endpoint_url).json()["result"]
+
+        else: 
+            bdm_ckan_table_metadata = None
+
+        return bdm_ckan_dataset_metadata, bdm_ckan_table_metadata
+
     @property
     @lru_cache(256)
     def ckan_data_dict(self) -> dict:
-        return build_validate_dict(
-            self.dataset_id,
-            self.table_id,
-            self.metadata_path
-        )
+        """
+        Helper function to structure local config files data for validation.
 
+        Args:
+            dataset_id (str):
+                The dataset_id that corresponds to the data subject to validation.
+
+        Returns:
+            dict
+        """
+
+        bdm_ckan_dataset_metadata, bdm_ckan_table_metadata = self.ckan_raw_metadata    
+
+        if self.table_id:
+
+            data = {
+                "name": bdm_ckan_dataset_metadata["name"],
+                "type": bdm_ckan_dataset_metadata["type"],
+                "title": bdm_ckan_dataset_metadata["title"],
+                "private": bdm_ckan_dataset_metadata["private"],
+                "owner_org": bdm_ckan_dataset_metadata["owner_org"],
+                "resources": [
+                    {
+                        "description": self.local_config["description"],
+                        "name": self.local_config["table_id"],
+                        "resource_type": bdm_ckan_table_metadata["resource_type"],
+                        "version": self.local_config["version"],
+                        "table_id": self.local_config["table_id"],
+                        "spatial_coverage": self.local_config["spatial_coverage"],
+                        "metadata_modified": self.local_config["metadata_modified"]
+                    }
+                ]
+            }
+
+        else:
+
+            data = {
+                "name": self.local_config["dataset_id"].replace("_", "-"),
+                "title": self.local_config["title"],
+                "type": bdm_ckan_dataset_metadata["type"],
+                "metadata_modified": self.local_config["metadata_modified"],
+                "private": bdm_ckan_dataset_metadata["private"],
+                "owner_org": bdm_ckan_dataset_metadata["owner_org"],
+                "resources": bdm_ckan_dataset_metadata["resources"],
+                "groups": [
+                    {"name": group} for group in self.local_config["groups"]
+                ],
+                "organization": [
+                    {"name": org} for org in self.local_config["organization"]
+                ],
+                "tags": [
+                    {"name": tag} for tag in self.local_config["tags"]
+                ],
+                "dataset_id": self.local_config["dataset_id"]
+            }
+
+        return data
+    
     @property
     @lru_cache(256)
     def columns_schema(self) -> dict:
@@ -161,9 +235,10 @@ class Metadata(Base):
 
             # adds local columns if 1. columns is empty and 2. force_columns is True
 
-            if ((not data.get("columns")) or force_columns == True) and self.table_id is not None:
+            if ((not data.get("columns")) \
+                or force_columns == True) \
+                and self.table_id is not None:
                 data["columns"] = [{"name": c} for c in columns]
-                print(f"{data=}")
 
             yaml_obj = builds_yaml_object(
                 self.metadata_schema, data, columns_schema=self.columns_schema
@@ -334,91 +409,3 @@ def builds_yaml_object(schema, data=dict(), columns_schema=dict()):
             yaml_obj["columns"].append(_add_property(ryaml.CommentedMap(), prop))
 
     return yaml_obj
-
-
-def get_bdm_ckan_metadata(dataset_id, table_id=None):
-
-    endpoint_url = (
-        f"{CKAN_URL_STAGING}/api/3/action/bd_bdm_dataset_show?dataset_id="
-        f"{dataset_id}"
-    )
-    bdm_ckan_dataset_metadata = requests.get(endpoint_url).json()["result"]
-
-    if table_id:
-        endpoint_url = (
-            f"{CKAN_URL_STAGING}/api/3/action/bd_bdm_table_show?dataset_i"
-            f"d={dataset_id}&table_id={table_id}"
-        )
-        bdm_ckan_table_metadata = requests.get(endpoint_url).json()["result"]
-
-    else: 
-        bdm_ckan_table_metadata = None
-    
-    return bdm_ckan_dataset_metadata, bdm_ckan_table_metadata
-
-
-def build_validate_dict(dataset_id, table_id=None, metadata_path=None):
-    """
-    Helper function to structure local config files data for validation.
-
-    Args:
-        dataset_id (str):
-            The dataset_id that corresponds to the data subject to validation.
-    
-    Returns:
-        dict
-    """
-
-    bdm_ckan_dataset_metadata, bdm_ckan_table_metadata = get_bdm_ckan_metadata(dataset_id, table_id)    
-
-    if table_id:
-        table_metadata = Metadata(
-            dataset_id=dataset_id,
-            table_id=table_id,
-            metadata_path=metadata_path
-        )
-
-        data = {
-            "name": bdm_ckan_dataset_metadata["name"],
-            "type": bdm_ckan_dataset_metadata["type"],
-            "title": bdm_ckan_dataset_metadata["title"],
-            "private": bdm_ckan_dataset_metadata["private"],
-            "owner_org": bdm_ckan_dataset_metadata["owner_org"],
-            "resources": [
-                {
-                    "description": table_metadata.local_config["description"],
-                    "name": table_metadata.local_config["table_id"],
-                    "resource_type": bdm_ckan_table_metadata["resource_type"],
-                    "version": table_metadata.local_config["version"],
-                    "table_id": table_metadata.local_config["table_id"],
-                    "spatial_coverage": table_metadata.local_config["spatial_coverage"]
-                }
-            ]
-        }
-
-    else:
-        dataset_metadata = Metadata(
-            dataset_id=dataset_id, metadata_path=metadata_path
-        )
-
-        data = {
-            "name": dataset_metadata.local_config["dataset_id"].replace("_", "-"),
-            "title": dataset_metadata.local_config["title"],
-            "type": bdm_ckan_dataset_metadata["type"],
-            "metadata_modified": dataset_metadata.local_config["metadata_modified"],
-            "private": bdm_ckan_dataset_metadata["private"],
-            "owner_org": bdm_ckan_dataset_metadata["owner_org"],
-            "resources": bdm_ckan_dataset_metadata["resources"],
-            "groups": [
-                {"name": group} for group in dataset_metadata.local_config["groups"]
-            ],
-            "organization": [
-                {"name": org} for org in dataset_metadata.local_config["organization"]
-            ],
-            "tags": [
-                {"name": tag} for tag in dataset_metadata.local_config["tags"]
-            ],
-            "dataset_id": dataset_metadata.local_config["dataset_id"]
-        }
-    
-    return data
