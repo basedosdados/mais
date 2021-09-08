@@ -59,12 +59,10 @@ Cobertura Temporal
 Cobertura Espacial
 ------------------
 - brasil
-- estado
-- município
 
 Tratamento
 ----------
-- Padrinização de colunas
+- Padronização de colunas
 - Exclusão de caracter '0'
 - Inclusão de identificadores de id_municipio
 - Transformação de datas
