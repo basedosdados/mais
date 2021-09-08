@@ -1,5 +1,4 @@
-Tabela de dicionário das variáveis de microdados e microdados_vinculo da base do Cadastro nacional de obras (br_me_cno)
-
+Tabela de dicionário das variáveis de estabelecimento do Cadastro Nacional de Estabelecimentos de Saúde(CNES)
 
 Para saber mais acesse:
 Website: https://basedosdados.org/dataset/br-ms-cnes
@@ -22,9 +21,7 @@ Email: gustavo.tiago@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- tabela
 - chave
-- coluna da tabela
 
 Colunas identificando linhas unicamente
 -------------------

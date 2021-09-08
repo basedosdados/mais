@@ -514,8 +514,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: indicador_instalacao_centro_obstetrico
-      description: Indica a existência de INSTALAÇÃO FÍSICA de ATENDIMENTO HOSPITALAR-
-          CENTRO OBSTÉTRICO para este CNES
+      description: Indica a existência de INSTALAÇÃO FÍSICA de ATENDIMENTO HOSPITALAR-CENTRO OBSTÉTRICO para este CNES
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: quantidade_leito_repouso_pediatrico_urgencia
