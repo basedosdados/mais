@@ -16,7 +16,7 @@ last_updated: 2021-09-08 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Tabela de dicionário das variáveis de microdados e microdados_vinculo da base do Cadastro nacional de obras (br_me_cno)
+    Tabela de dicionário das variáveis de estabelecimento do Cadastro Nacional de Estabelecimentos de Saúde(CNES)
 
 # Quem está completando esse arquivo config?
 published_by:
