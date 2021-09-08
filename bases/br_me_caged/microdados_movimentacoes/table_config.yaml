@@ -122,6 +122,10 @@ columns: # REQUIRED
       description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0 Subclasse
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: cnae_2_secao
+      description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0 Seção
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: cbo_2002
       description: Classificação Brasileira de Ocupações (CBO) 2002
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
@@ -197,4 +201,3 @@ columns: # REQUIRED
       description: Fonte da movimentação
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-

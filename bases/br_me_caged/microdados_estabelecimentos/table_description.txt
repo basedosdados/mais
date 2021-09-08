@@ -23,6 +23,10 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 - mes
 - sigla_uf
 
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- estabelecimento
+
 Cobertura Temporal
 ------------------
 - 2020
