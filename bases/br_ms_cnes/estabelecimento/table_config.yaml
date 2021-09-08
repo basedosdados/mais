@@ -36,7 +36,7 @@ treated_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: |
-    - Padrinização de colunas
+    - Padronização de colunas
     - Exclusão de caracter '0'
     - Inclusão de identificadores de id_municipio
     - Transformação de datas
@@ -74,8 +74,6 @@ primary_keys:
 #   - brasil, argentina, peru, equador
 coverage_geo:
     - brasil
-    - estado
-    - município
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
@@ -116,11 +114,11 @@ partitions: # REQUIRED
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
     - name: ano
-      description: ano de competência da informação
+      description: ano 
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: true   # Bool [True, False], whether the column is a partition.
     - name: mes
-      description: mês de competência da informação
+      description: mês
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: true   # Bool [True, False], whether the column is a partition.
     - name: sigla_uf
@@ -152,7 +150,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: distrito_administrativo
-      description: Inicialmente chamado Distrito Administrativo, atualmente Código do Módulo Assistencial conforme tabela local, em conformidade com o Plano Diretor de Regionalização do Estado/Município.
+      description: Código do Módulo Assistencial
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: cep
@@ -192,7 +190,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: retencao_tributos
-      description: 'Código de retenção de tributos. '
+      description: Código de retenção de tributos
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: atividade_ensino_pesquisa
@@ -240,7 +238,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: data_contrato_municipal
-      description: Ano e Mês de publicação do contrato /convênio MUNICIPAL
+      description: Ano e Mês de publicação do contrato/convênio MUNICIPAL
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: contrato_estado_sus
@@ -256,7 +254,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: data_expedicao_alvara
-      description: Ano e Mês de da expedição do alvará
+      description: Ano e Mês de expedição do alvará
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: orgao_expedidor
@@ -308,8 +306,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: atencao_amb
-      description: Indica a existência de Nível de Atenção AMBULATORIAL, de gestão
-          Municipal/Estadual, para este CNES
+      description: Indica a existência de Nível de Atenção AMBULATORIAL, de gestão Municipal/Estadual, para este CNES
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: gestao_estadual
@@ -798,8 +795,7 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: atendimento_amb_plano_saude_privado
-      description: Atendimento prestado ATENDIMENTO AMBULATORIAL/Convenio PLANO de
-          SAUDE PRIVADO
+      description: Atendimento prestado ATENDIMENTO AMBULATORIAL/Convenio PLANO de SAUDE PRIVADO
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: atendimento_sadt_sus
@@ -883,23 +879,19 @@ columns: # REQUIRED
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: atendimento_vigilancia_plano_seguro_proprio
-      description: Atendimento prestado VIGILANCIA EM SAUDE/Convenio PLANO-SEGURO
-          PROPRIO
+      description: Atendimento prestado VIGILANCIA EM SAUDE/Convenio PLANO-SEGURO PROPRIO
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: atendimento_vigilancia_plano_seguro_terceiro
-      description: Atendimento prestado VIGILANCIA EM SAUDE/Convenio PLANO-SEGURO
-          TERCEIRO
+      description: Atendimento prestado VIGILANCIA EM SAUDE/Convenio PLANO-SEGURO TERCEIRO
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: atendimento_vigilancia_plano_saude_publico
-      description: Atendimento prestado VIGILANCIA EM SAUDE/Convenio PLANO de SAUDE
-          PUBLICO
+      description: Atendimento prestado VIGILANCIA EM SAUDE/Convenio PLANO de SAUDE PUBLICO
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: atendimento_vigilancia_plano_saude_privado
-      description: Atendimento prestado VIGILANCIA EM SAUDE/Convenio PLANO de SAUDE
-          PRIVADO
+      description: Atendimento prestado VIGILANCIA EM SAUDE/Convenio PLANO de SAUDE PRIVADO
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: atendimento_regulacao_sus
