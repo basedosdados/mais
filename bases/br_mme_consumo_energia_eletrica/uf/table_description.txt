@@ -1,4 +1,4 @@
-Consumo de energia elétrica em nível nacional e segmentado pelas classes residencial, industrial, comercial e outros (rural, serviço público e iluminação pública). 
+Consumo de energia elétrica em nível nacional e segmentado pelas classes residencial, industrial, comercial e outros (rural, serviço público e iluminação pública).
 
 
 Para saber mais acesse:
@@ -22,15 +22,14 @@ Email: crislanealves@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- estado
-- ano
-- mes
+- consumo
 
 Colunas identificando linhas unicamente
 -------------------
 - sigla_uf
 - ano
 - mes
+- tipo_consumo
 
 Cobertura Temporal
 ------------------
@@ -61,6 +60,7 @@ Tratamento
 ----------
 - Criação das colunas "ano" e "Tipo de Consumo".
 - Muda formato de wide para long.
+- Une tabelas consumo e número de consumidores 
 
 Frequencia de Atualização
 -------------------------

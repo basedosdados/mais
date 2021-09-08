@@ -25,5 +25,6 @@ SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(tipo_consumo AS STRING) tipo_consumo,
-SAFE_CAST(consumo AS FLOAT64) consumo
+SAFE_CAST(consumo AS FLOAT64) consumo,
+SAFE_CAST(numero_consumidores AS INT64) numero_consumidores
 from basedosdados-dev.br_mme_consumo_energia_eletrica_staging.uf as t

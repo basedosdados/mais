@@ -2,14 +2,13 @@
 library(tidyverse)
 library(readxl)
 library(basedosdados)
-source("cleanup.R")
+library(Rcpp)
+library(dplyr)
+source("cleanup1.R")
+source("cleanup2.R")
+setwd("~/basedosdados/tratamento/4_br_epe/input")
 
-
-basedosdados::set_billing_id("mahallla")
-
-uf = basedosdados::read_sql("SELECT sigla as sigla_uf, nome as uf 
-                            FROM `basedosdados.br_bd_diretorios_brasil.uf`")
-
+uf = readxl::read_excel("uf.xlsx")
 
 linhas = c(1, 4, 32)
 
@@ -78,16 +77,27 @@ lista_cols = c(ano = 'V1',
                  `Distrito Federal` = 'V29') 
 
 #### Tratar 
-df1 = cleanup("input/dados.xls", 10) %>% mutate(tipo_consumo = "Total") 
-df2 = cleanup("input/dados.xls", 11) %>% mutate(tipo_consumo = "Cativo")
-df3 = cleanup("input/dados.xls", 12) %>% mutate(tipo_consumo = "Residencial")
-df4 = cleanup("input/dados.xls", 13) %>% mutate(tipo_consumo = "Industrial")
-df5 = cleanup("input/dados.xls", 14) %>% mutate(tipo_consumo = "Comercial")
-df6 = cleanup("input/dados.xls", 15) %>% mutate(tipo_consumo = "Outros")
+df1 = cleanup1("dados.xls", 10) %>% mutate(tipo_consumo = "Total") 
+df2 = cleanup1("dados.xls", 11) %>% mutate(tipo_consumo = "Cativo")
+df3 = cleanup1("dados.xls", 12) %>% mutate(tipo_consumo = "Residencial")
+df4 = cleanup1("dados.xls", 13) %>% mutate(tipo_consumo = "Industrial")
+df5 = cleanup1("dados.xls", 14) %>% mutate(tipo_consumo = "Comercial")
+df6 = cleanup1("dados.xls", 15) %>% mutate(tipo_consumo = "Outros")
+df7 = cleanup2("dados.xls", 16) %>% mutate(tipo_consumo = "Residencial")
+df8 = cleanup2("dados.xls", 17) %>% mutate(tipo_consumo = "Industrial")
+df9 = cleanup2("dados.xls", 18) %>% mutate(tipo_consumo = "Comercial")
+df10 = cleanup2("dados.xls", 19) %>% mutate(tipo_consumo = "Outros")
 
 #### Finalizar  
-df7 = list(df1, df2, df3, df4, df5, df6) 
-df_total = Reduce(rbind, df7)
+df_consumo = list(df1, df2, df3, df4, df5, df6)
+df_consumidores = list(df7, df8, df9, df10)
+df_consumo1 = Reduce(rbind, df_consumo)
+df_consumidores1 = Reduce(rbind, df_consumidores)
 
-write.csv(df_total, "output/consumo_energia.csv",  na = " ", 
+df_total = left_join(df_consumo1, df_consumidores1, 
+                     by = c("ano", "mes", "sigla_uf", "tipo_consumo"))
+
+write.csv(df_total, "~/basedosdados/tratamento/4_br_epe/output/consumo_energia.csv",  na = " ", 
           row.names = F, fileEncoding = "UTF-8")
+
+
