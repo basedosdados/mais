@@ -19,14 +19,15 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_ibge_inflacao.ipca15 AS
+CREATE VIEW basedosdados-dev.br_inep_ana.prova AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(indice AS FLOAT64) indice,
-SAFE_CAST(variacao_mes AS FLOAT64) variacao_mes,
-SAFE_CAST(variacao_tres_meses AS FLOAT64) variacao_tres_meses,
-SAFE_CAST(variacao_semestral AS FLOAT64) variacao_semestral,
-SAFE_CAST(variacao_anual AS FLOAT64) variacao_anual,
-SAFE_CAST(variacao_doze_meses AS FLOAT64) variacao_doze_meses
-from basedosdados-dev.br_ibge_inflacao_staging.ipca15 as t
+SAFE_CAST(serie AS STRING) serie,
+SAFE_CAST(tipo_prova AS STRING) tipo_prova,
+SAFE_CAST(disciplina AS STRING) disciplina,
+SAFE_CAST(bloco AS STRING) bloco,
+SAFE_CAST(posicao AS STRING) posicao,
+SAFE_CAST(item AS STRING) item,
+SAFE_CAST(descritor AS STRING) descritor,
+SAFE_CAST(gabarito AS STRING) gabarito
+from basedosdados-dev.br_inep_ana_staging.prova as t

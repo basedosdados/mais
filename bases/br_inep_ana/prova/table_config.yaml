@@ -1,48 +1,47 @@
-source_bucket_name: bases-bd
-project_id_staging: projetos-bd
-project_id_prod: projetos-bd
-table_id: estacao # AUTO GENERATED
-dataset_id: br_inmet_bdmep # AUTO GENERATED
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: prova # AUTO GENERATED
+dataset_id: br_inep_ana # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-inmet-bdmep # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdmep # AUTO GENERATED
+url_ckan: https://basedosdados.org/dataset/br-inep-ana # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ana # AUTO GENERATED
 
 version: 1.0 # REQUIRED
 
-last_updated: 2021-08-31 # AUTO GENERATED
+last_updated: 2021-08-30 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    O BDMEP abriga dados meteorológicos diários em forma digital, de séries históricas das várias estações meteorológicas convencionais da rede de estações do INMET com milhões de informações, referentes às medições diárias, de acordo com as normas técnicas internacionais da Organização Meteorológica Mundial.
+    A Avaliação Nacional de Alfabetização é um dos instrumentos do Sistema de Avaliação da Educação Básica e analisa os níveis de alfabetização e letramento em língua portuguesa e matemática.
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: Filipe Cavalcanti  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdmep/code # REQUIRED
-    website: https://github.com/filipemsc
-    email: f.matheus.cavalcanti@gmail.com
+    name: Lucas Nascimento Moreira  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ana/code # REQUIRED
+    website: <website>
+    email: lucas.moreira@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: Filipe Cavalcanti 
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdmep/code
-    website: https://github.com/filipemsc
-    email: f.matheus.cavalcanti@gmail.com
+    name: Lucas Nascimento Moreira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ana/code
+    website: <onde encontrar os dados tratados>
+    email: lucas.moreira@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    - Fazer download de todas as bases diretamente do site do INMET
-    - Extrair informações de todas as estações 
-    - Manter somente as informações mais recentes de cada estação
+    - Download dos microdados
+    - Padronização do nome das variáveis
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: recorrente # REQUIRED 
+data_update_frequency: 2 anos # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -51,13 +50,19 @@ data_update_frequency: recorrente # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - estação meteorológica
+    - questao
+    - caderno
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - id_estacao
+    - ano
+    - tipo_prova
+    - bloco
+    - posicao
+    - item
+    - descritor
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -70,39 +75,19 @@ primary_keys:
 #   - brasil, argentina, peru, equador
 coverage_geo:
     - brasil
-    
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - 2000
-    - 2001
-    - 2002
-    - 2003
-    - 2004
-    - 2005
-    - 2006
-    - 2007
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    - 2012
-    - 2013
     - 2014
-    - 2015
-    - 2016 
-    - 2017
-    - 2018 
-    - 2019
-    - 2020
-    - 2021
+    - 2016
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
+partitions: # REQUIRED  
+    - ano
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -113,46 +98,57 @@ partitions: # REQUIRED
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
-
+  
     -   
-        name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-
-    -   
-        name: id_estacao
-        description: ID da estação meteorológica
+        name: serie
+        description: Série
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: estacao
-        description: Nome da estação meteorológica
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-
-    -   
-        name: data_fundacao
-        description: Data de fundação da estação meterológica
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.        
-  
-    -   
-        name: latitude
-        description: Latitude da estação meteorológica
+        name: tipo_prova
+        description: Descrição dos tipos de provas aplicadas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: longitude
-        description: Longitude da estação meteorológica
+        name: disciplina
+        description: Disciplina do item
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: altitude
-        description: Altitude da estação meteorológica
+        name: bloco
+        description: Identificador do bloco
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
+    -   
+        name: posicao
+        description: Identificador da posição do item no bloco
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: item
+        description: Identificador do item
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: descritor
+        description: Identificador do descritor do item
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: gabarito
+        description: Gabarito do item
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.

@@ -33,6 +33,6 @@ SAFE_CAST(bandeira_revenda AS STRING) bandeira_revenda,
 SAFE_CAST(data_coleta AS DATE) data_coleta,
 SAFE_CAST(produto AS STRING) produto,
 SAFE_CAST(unidade_medida AS STRING) unidade_medida,
-SAFE_CAST(valor_compra AS FLOAT64) valor_compra,
-SAFE_CAST(valor_venda AS FLOAT64) valor_venda
+SAFE_CAST(preco_compra AS FLOAT64) preco_compra,
+SAFE_CAST(preco_venda AS FLOAT64) preco_venda
 from basedosdados-dev.br_anp_precos_combustiveis_staging.microdados as t

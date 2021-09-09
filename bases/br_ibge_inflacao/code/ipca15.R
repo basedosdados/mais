@@ -8,10 +8,10 @@ utils::download.file(
   destfile = "input/ipca15serie.zip"
 )
 
-utils::unzip("input/ipca15serie.zip", exdir = "input/")
+utils::unzip("input/ipca15serie.zip", exdir = "input")
 
-list.files("input/", pattern = ".xls", full.names = TRUE) %>% 
-  readxl::read_excel(., skip = 7) -> df
+df = list.files("input/", pattern = ".xls", full.names = TRUE) %>% 
+  readxl::read_excel(., skip = 7)
 
 months_br <- c(
   "JAN" = 1, 
@@ -33,7 +33,7 @@ df %>%
     ano = ...1, 
     mes = ...2, 
     indice = ...3, 
-    variacao_mes = `NO MÃŠS`,
+    variacao_mes = `NO MÊS`,
     variacao_tres_meses = `3 MESES`,
     variacao_semestral = SEMESTRAL,
     variacao_anual = `NO ANO`,

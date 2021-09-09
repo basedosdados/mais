@@ -19,14 +19,11 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_ibge_inflacao.ipca15 AS
+CREATE VIEW basedosdados-dev.br_inep_ana.dicionario AS
 SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(indice AS FLOAT64) indice,
-SAFE_CAST(variacao_mes AS FLOAT64) variacao_mes,
-SAFE_CAST(variacao_tres_meses AS FLOAT64) variacao_tres_meses,
-SAFE_CAST(variacao_semestral AS FLOAT64) variacao_semestral,
-SAFE_CAST(variacao_anual AS FLOAT64) variacao_anual,
-SAFE_CAST(variacao_doze_meses AS FLOAT64) variacao_doze_meses
-from basedosdados-dev.br_ibge_inflacao_staging.ipca15 as t
+SAFE_CAST(id_tabela AS STRING) id_tabela,
+SAFE_CAST(coluna AS STRING) coluna,
+SAFE_CAST(chave AS STRING) chave,
+SAFE_CAST(cobertura_temporal AS STRING) cobertura_temporal,
+SAFE_CAST(valor AS STRING) valor
+from basedosdados-dev.br_inep_ana_staging.dicionario as t

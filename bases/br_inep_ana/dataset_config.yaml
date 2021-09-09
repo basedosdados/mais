@@ -1,18 +1,18 @@
-dataset_id: br_ibge_inflacao # AUTO GENERATED
+dataset_id: br_inep_ana # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-ibge-inflacao
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao
+url_ckan: https://basedosdados.org/dataset/br-inep-ana
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ana
 
 # Descreva a base.
 # Ela é sobre o que?
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-     Índice Nacional de Preços ao Consumidor
+    A Avaliação Nacional de Alfabetização é um dos instrumentos do Sistema de Avaliação da Educação Básica e analisa os níveis de alfabetização e letramento em língua portuguesa e matemática.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: br-ibge # REQUIRED
+organization: instituto-nacional-de-estudos-e-pesquisas-educacionais-inep # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
@@ -21,13 +21,12 @@ author:
 
 # Onde encontrar os dados originais e mais informações?
 website:
-    - https://www.ibge.gov.br/estatisticas/economicas/precos-e-custos/9260-indice-nacional-de-precos-ao-consumidor-amplo-15.html?=&t=downloads
-    
+    - https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/ana
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
-    - economia
+    - educacao
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -36,8 +35,12 @@ groups:
 #   - sem acentos
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - inflacao
-    - preco
+    - alfabetizacao
+    - aluno
+    - escola
+    - prova
+    - ensino fundamental
+    - avaliacao
 
 # Em quais línguas a base (ou a fonte original) está disponível?
 # Regras: minúsculo, sem acentos.
@@ -49,7 +52,7 @@ languages:
 free: sim
 
 # Are microdata available for download?
-microdata: não
+microdata: sim
 
 # Existe uma API na fonte original?
 API: não
