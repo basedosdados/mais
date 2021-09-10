@@ -141,7 +141,7 @@ columns: # REQUIRED
       description: Código da região de saúde NOAS
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: microregiao_saude
+    - name: microrregiao_saude
       description: Código da micro-região de saúde NOAS
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
@@ -237,7 +237,7 @@ columns: # REQUIRED
       description: Número do contrato/convênio MUNICIPAL do vínculo com o SUS
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: data_contrato_municipal
+    - name: data_publicacao_contrato_municipal
       description: Ano e Mês de publicação do contrato/convênio MUNICIPAL
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
@@ -269,16 +269,24 @@ columns: # REQUIRED
       description: Classificação da avaliação do estabelecimento segundo o Manual de Acreditação Hospitalar do MS
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: data_acreditacao
-      description: Ano e Mês da Acreditação
+    - name: data_acreditacao_ano
+      description: Ano da Acreditação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: data_acreditacao_mes
+      description: Mês da Acreditação
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: avaliacao_pnass
       description: Indica se o estabelecimento foi avaliado segundo o Programa Nacional de Serviços de Saúde - PNASS
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: data_avaliacao_pnass
-      description: Ano e Mês da Avaliação PNASS
+    - name: data_avaliacao_pnass_ano
+      description: Ano da Avaliação PNASS
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: data_avaliacao_pnass_mes
+      description: Mês da Avaliação PNASS
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: gestao_basica_amb_estadual
@@ -921,12 +929,20 @@ columns: # REQUIRED
       description: Indica a existência de algum atendimento prestado para este CNES
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: data_atualizacao
-      description: Ano e Mês de competência da atualização da informação pelo estabelecimento
+    - name: data_atualizacao_ano
+      description: Ano de competência da atualização da informação pelo estabelecimento
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: data_competencia
-      description: Ano e Mês de competência da informação
+    - name: data_atualizacao_mes
+      description: Mês de competência da atualização da informação pelo estabelecimento
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: data_competencia_ano
+      description: Ano de competência da informação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: data_competencia_mes
+      description: Mês de competência da informação
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: natureza_juridica
