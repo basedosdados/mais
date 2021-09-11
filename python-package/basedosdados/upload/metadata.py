@@ -7,7 +7,7 @@ import requests
 import ruamel.yaml as ryaml
 
 from ckanapi import RemoteCKAN
-from ckanapi.errors import ValidationError
+from ckanapi.errors import ValidationError, NotAuthorized
 
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
@@ -299,23 +299,36 @@ class Metadata(Base):
                 data_dict = self.ckan_data_dict.copy()
                 data_dict = data_dict["resources"][0]
 
-                bdm_ckan.call_action(
+                response = bdm_ckan.call_action(
                     action="resource_patch",
                     data_dict=data_dict
                 )
 
+                return response                
+
             else:
                 self.validate()
-                bdm_ckan.call_action(
+                response = bdm_ckan.call_action(
                     action="package_patch",
                     data_dict=self.ckan_data_dict
                 )
+
+                return response
 
         except (BaseDosDadosException, ValidationError) as e:
             msg=(
                 f"Could not publish metadata due to a validation error. Pleas"
                 f"e see the traceback below to get information on how to corr"
                 f"ect it.\n\n{repr(e)}"
+            )
+            raise BaseDosDadosException(msg)
+        
+        except NotAuthorized as e:
+            msg=(
+                f"Could not publish metadata due to an authorization error. P"
+                f"lease check if you set the `CKAN_API_KEY` environment varia"
+                f"ble correctly. You must be an authorized user to publish mo"
+                f"difications to a dataset or table."
             )
             raise BaseDosDadosException(msg)
 
