@@ -157,22 +157,22 @@ def test_is_updated_is_false(out_of_date_metadata_obj):
 
 
 @pytest.fixture
-def validate_dataset(metadatadir):
+def valid_metadata_dataset(metadatadir):
     dataset_metadata = Metadata(dataset_id="br_ibge_pib", metadata_path=metadatadir)
     dataset_metadata.create(if_exists="replace")
     return dataset_metadata
 
 
 @pytest.fixture
-def validate_table(metadatadir):
+def valid_metadata_table(metadatadir):
     table_metadata = Metadata(dataset_id="br_ibge_pib", table_id="municipio", metadata_path=metadatadir)
     table_metadata.create(if_exists="replace")
     return table_metadata
 
 
-def test_validate_is_succesful(validate_dataset, validate_table):
-    assert validate_dataset.validate() == True
-    assert validate_table.validate() == True
+def test_validate_is_succesful(valid_metadata_dataset, valid_metadata_table):
+    assert valid_metadata_dataset.validate() == True
+    assert valid_metadata_table.validate() == True
 
 
 @pytest.fixture
@@ -214,9 +214,14 @@ def test_validate_is_not_succesful(invalid_dataset_metadata, invalid_table_metad
         invalid_dataset_metadata.validate()
 
 
-def test_publish_is_successful():
-    pass
+def test_publish_is_successful(valid_metadata_dataset, valid_metadata_table):
+    assert isinstance(valid_metadata_dataset.publish(), dict)
+    assert isinstance(valid_metadata_table.publish(), dict)
 
 
-def test_publish_is_not_successful():
-    pass
+def test_publish_is_not_successful(invalid_dataset_metadata, invalid_table_metadata):
+    with pytest.raises(BaseDosDadosException):
+        invalid_dataset_metadata.publish()
+    
+    with pytest.raises(BaseDosDadosException):
+        invalid_table_metadata.publish()
