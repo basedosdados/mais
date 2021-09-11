@@ -214,5 +214,9 @@ def test_validate_is_not_succesful(invalid_dataset_metadata, invalid_table_metad
         invalid_dataset_metadata.validate()
 
 
-def test_publish():
+def test_publish_is_successful():
+    pass
+
+
+def test_publish_is_not_successful():
     pass

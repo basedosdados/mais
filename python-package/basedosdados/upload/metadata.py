@@ -1,18 +1,19 @@
 from copy import deepcopy
 from functools import lru_cache
 from collections import defaultdict
+import os
 
 import requests
 import ruamel.yaml as ryaml
 
-from google.api_core.exceptions import NotFound
-
 from ckanapi import RemoteCKAN
+from ckanapi.errors import ValidationError
 
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
 
 # CKAN_URL = os.environ.get("CKAN_URL", "http://localhost:5000")
+CKAN_API_KEY = os.environ.get("CKAN_API_KEY")
 CKAN_URL = "http://0.0.0.0:5000"
 CKAN_URL_STAGING = "http://staging.basedosdados.org"
 
@@ -103,7 +104,6 @@ class Metadata(Base):
         return bdm_ckan_dataset_metadata, bdm_ckan_table_metadata
 
     @property
-    @lru_cache(256)
     def ckan_data_dict(self) -> dict:
         """
         Helper function to structure local config files data for validation.
@@ -121,6 +121,7 @@ class Metadata(Base):
         if self.table_id:
 
             data = {
+                "id": bdm_ckan_dataset_metadata["id"],
                 "name": bdm_ckan_dataset_metadata["name"],
                 "type": bdm_ckan_dataset_metadata["type"],
                 "title": bdm_ckan_dataset_metadata["title"],
@@ -128,6 +129,7 @@ class Metadata(Base):
                 "owner_org": bdm_ckan_dataset_metadata["owner_org"],
                 "resources": [
                     {
+                        "id": bdm_ckan_table_metadata["id"],
                         "description": self.local_config["description"],
                         "name": self.local_config["table_id"],
                         "resource_type": bdm_ckan_table_metadata["resource_type"],
@@ -142,6 +144,7 @@ class Metadata(Base):
         else:
 
             data = {
+                "id": bdm_ckan_dataset_metadata["id"],
                 "name": self.local_config["dataset_id"].replace("_", "-"),
                 "title": self.local_config["title"],
                 "type": bdm_ckan_dataset_metadata["type"],
@@ -267,7 +270,7 @@ class Metadata(Base):
             CKAN_URL, user_agent="", apikey=None
         )
 
-        response = bdm_ckan.action.package_validate(
+        response = bdm_ckan.action.bd_dataset_validate(
             **self.ckan_data_dict
         )
 
@@ -284,16 +287,31 @@ class Metadata(Base):
         """
 
         bdm_ckan = RemoteCKAN(
-            CKAN_URL, user_agent="", apikey=None
+            CKAN_URL,
+            user_agent="",
+            apikey=CKAN_API_KEY
         )
 
         try:
-            self.validate()
-            bdm_ckan.call_action(
-                action="package_patch",
-                data_dict=self.ckan_data_dict
-            )
-        except BaseDosDadosException as e:
+            if self.table_id:
+                self.validate()
+
+                data_dict = self.ckan_data_dict.copy()
+                data_dict = data_dict["resources"][0]
+
+                bdm_ckan.call_action(
+                    action="resource_patch",
+                    data_dict=data_dict
+                )
+
+            else:
+                self.validate()
+                bdm_ckan.call_action(
+                    action="package_patch",
+                    data_dict=self.ckan_data_dict
+                )
+
+        except (BaseDosDadosException, ValidationError) as e:
             msg=(
                 f"Could not publish metadata due to a validation error. Pleas"
                 f"e see the traceback below to get information on how to corr"
