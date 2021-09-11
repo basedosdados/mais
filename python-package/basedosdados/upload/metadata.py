@@ -257,12 +257,16 @@ class Metadata(Base):
 
     def validate(self):
         """Validate dataset_config.yaml or table_config.yaml files. 
-        The yaml file should be located at metadata_path/dataset_id[/table_id/],
-        as defined in your config.toml
+        The yaml file should be located at metadata_path/dataset_id[/table_id/
+        ], as defined in your config.toml
+
+        Returns:
+            bool:
+                True if the metadata is valid. False if it is invalid.
 
         Raises:
-            BaseDosDadosException: when the file has validation errors.
-
+            BaseDosDadosException:
+                when the file has validation errors.
         """
         error_dict = {}
         
@@ -283,7 +287,20 @@ class Metadata(Base):
         return True
     
     def publish(self):
-        """Publish local metadata modifications.
+        """Publish local metadata modifications. `Metadata.validate` is used 
+        to make sure no local invalid metadata is published to CKAN. The env
+        ironment variable `CKAN_API_KEY` must be set for this method to work
+        .
+
+        Returns:
+            dict:
+                In case of success, a `dict` with the modified data is retur
+                ned.
+
+        Raises:
+            BaseDosDadosException:
+                In case of CKAN's ValidationError or NotAuthorized exception
+                s.
         """
 
         bdm_ckan = RemoteCKAN(
