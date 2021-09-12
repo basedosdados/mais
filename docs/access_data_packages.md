@@ -94,7 +94,7 @@ função `download`, baixando os dados direto para nossa máquina.
     data <- download(query, file.path(dir, "municipio.csv"))
     ```
 
-    *Para entender mais sobre a função `download`, leia o [manual de referência](/reference_api_r).*
+    *Para entender mais sobre a função `download`, leia o [manual de referência](/mais/reference_api_r).*
     
 === "Python"
     ```python
@@ -103,7 +103,7 @@ função `download`, baixando os dados direto para nossa máquina.
     dataset_id="br-bd-diretorios-brasil", table_id="municipio")
     ```
 
-    *Para entender mais sobre a função `download`, leia o [manual de referência](/reference_api_py).*
+    *Para entender mais sobre a função `download`, leia o [manual de referência](/mais/reference_api_py).*
 
 === "CLI"
     ```bash
@@ -111,7 +111,7 @@ função `download`, baixando os dados direto para nossa máquina.
     --billing_project_id <YOUR_PROJECT_ID> \
     --query 'SELECT * FROM `basedosdados.br_bd_diretorios_brasil.municipio`'
     ```
-    *Para entender mais sobre a função `download`, leia o [manual de referência](/reference_api_cli).*
+    *Para entender mais sobre a função `download`, leia o [manual de referência](/mais/reference_api_cli).*
     
 ## Tutoriais
 
@@ -145,8 +145,8 @@ para você começar a usá-los.
 
 ## Manuais de referência
 
-#### [:material-language-r: R](/reference_api_r)
+#### [:material-language-r: R](/mais/reference_api_r)
 
-#### [:material-language-python: Python](/reference_api_py)
+#### [:material-language-python: Python](/mais/reference_api_py)
 
-#### [:octicons-terminal-16: CLI](/reference_api_cli)
+#### [:octicons-terminal-16: CLI](/mais/reference_api_cli)

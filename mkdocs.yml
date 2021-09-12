@@ -1,6 +1,7 @@
 site_name: Documentação
 
 theme:
+  custom_dir: docs/overrides
   name: material
   icon:
     repo: fontawesome/brands/github
@@ -20,8 +21,8 @@ theme:
   language: pt
   font:
     text: Lato
-  # favicon: images/bd_logo.png
-  # logo: images/bd_logo.png
+  favicon: images/bd_minilogo.png
+  logo: images/bd_minilogo.png
   features:
     - header.autohide
     - navigation.sections
@@ -54,7 +55,7 @@ extra:
 
 nav:
   - Home:
-    - Início: index.md
+    - Aprenda sobre a BD: index.md
     - BigQuery: access_data_bq.md
     - Pacotes: access_data_packages.md
     - Contribua: colab.md

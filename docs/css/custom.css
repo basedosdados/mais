@@ -9,6 +9,15 @@
   --md-primary-fg-color--dark:  #7EC876;
 }
 
+.md-announce {
+  background-color: #3AA1EB;
+}
+
+.md-announce .md-typeset a {
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
 .md-typeset img {
   height: auto;
   max-width: 80%;
@@ -23,7 +32,7 @@
   font-weight: bold;
 }
 
-.md-typeset h2 {
+/* .md-typeset h2 {
   color: #252A32;
   font-weight: bold;
 }
@@ -31,7 +40,7 @@
 .md-typeset h3 {
   color: #6E6E6E;
   font-weight: bold;
-}
+} */
 
 .md-footer {
   background-color: #34A15A;
