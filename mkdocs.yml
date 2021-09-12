@@ -77,7 +77,6 @@ extra_javascript:
 
 plugins:
   - search
-  - mkdocs-video
   - mkdocstrings:
       handlers:
         python:
