@@ -98,14 +98,14 @@ Para entender mais sobre a interface do BigQuery e como explorar os
 dados, preparamos um texto completo no blog com um exemplo de busca dos
 dados da [RAIS - Ministério da Economia](https://dev.to/basedosdados/bigquery-101-45pk).
 
-Cansado da leitura? Temos também um [vídeo completo no nosso Youtube](https://www.youtube.com/watch?v=nGM2OwTUY_M&t=1285s).
+*Cansado(a) da leitura? Temos também um [vídeo completo no nosso Youtube](https://www.youtube.com/watch?v=nGM2OwTUY_M&t=1285s).*
 
 ### Entenda os dados
 
 O BigQuery possui um mecanismo de busca que permite buscar por nomes
 de *datasets* (conjuntos), *tables* (tabelas) ou *labels* (grupos).
 Construímos regras de nomeação simples e práticas para facilitar sua
-busca - [veja mais](/style_data).
+busca - [veja mais](/mais/style_data).
 
 ### Conectando com o PowerBI
 

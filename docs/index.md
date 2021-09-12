@@ -1,17 +1,34 @@
-# Aprenda sobre nosso *datalake*
+# Aprenda sobre a BD
 
-A missão da Base dos Dados é **universalizar o uso de dados de qualidade
-no Brasil**. Acreditamos que a distância entre qualquer pessoa e uma
-análise deveria ser apenas uma boa ideia. Para isso,
-construímos a Base dos Dados Mais (BD+): um **banco de dados integrado**,
-contendo as principais bases públicas de diferentes organizações prontas para análise.
+A missão da Base dos Dados é universalizar o uso de dados de qualidade
+no Brasil. Para isso, criamos uma ferramenta que te permite **acessar
+recursos importantes de diversos conjuntos de dados públicos**, como:
 
-## Como acessar os dados
+- **Tabelas tratadas BD+**: Tabelas completas, já tratadas e prontas
+  para análise, disponíveis no nosso datalake público.
+  
+- **Links externos**: Links com informações úteis para explorar mais
+  sobre o conjunto de dados, como a fonte original e outros.
 
-### Na nuvem: BigQuery
+!!! Info "Temos um time de Dados e voluntários(as) de todo o Brasil que ajudam a limpar e manter as tabelas tratadas BD+. [Saiba como fazer parte](/mais/colab)"
+
+## Acessando tabelas tratadas BD+
+
+No nosso site você encontra a lista de todas as tabelas tratadas de
+cada conjunto de dados. Aprensentamos também informações importantes de todas
+as tabelas, como a lista de colunas, cobertura temporal, periodicidade, entre
+outras informações. Você pode consultar os dados das tabelas via:
+
+### Download
+
+Você pode baixar o arquivo CSV completo da tabela direto no site. Este
+tipo de Consulta não está disponível para arquivos grandes.
+
+### BigQuery (SQL)
 
 O BigQuery é o um serviço de banco de dados em nuvem da
-Google. Direto do navegador, o usuário pode fazer consultas ao banco em SQL com:
+Google. Direto do navegador, você pode fazer consultas às tabelas
+tratadas com:
 
 - Rapidez: Mesmo queries muito longas demoram apenas minutos para serem processadas.
 
@@ -24,11 +41,11 @@ Google. Direto do navegador, o usuário pode fazer consultas ao banco em SQL com
 href="access_data_bq"
 title="{{ lang.t('source.link.title')}}" class="md-button"
 hover="background-color: var(--md-primary-fg-color--dark)">
-    Saiba mais
+    Aprenda
     :material-arrow-right:
 </a>
 
-### No seu computador: Pacotes
+### Pacotes
 
 Os pacotes da Base dos Dados permitem o acesso ao *datalake* público
 direto do seu computador ou ambiente de desenvolvimento. Atualmente disponíveis em:
@@ -41,7 +58,7 @@ direto do seu computador ou ambiente de desenvolvimento. Atualmente disponíveis
 href="access_data_packages"
 title="{{ lang.t('source.link.title')}}" class="md-button"
 hover="background-color: var(--md-primary-fg-color--dark)">
-    Saiba mais
+    Aprenda
     :material-arrow-right:
 </a>
 
