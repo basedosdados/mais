@@ -51,7 +51,7 @@ extra:
 
   analytics:
     provider: google
-    property: !ENV GOOGLE_ANALYTICS_KEY
+    # property: !ENV GOOGLE_ANALYTICS_KEY
 
 nav:
   - Home:

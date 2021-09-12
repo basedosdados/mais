@@ -1,22 +1,22 @@
-source_bucket_name: basedosdadosdev
-project_id_staging: basedosdados-312117
-project_id_prod: basedosdados-312117
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: ipca15 # AUTO GENERATED
 dataset_id: br_ibge_inflacao # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-ibge-inflacao # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao # AUTO GENERATED
 
-version: v1.1 # REQUIRED
+version: v1.2 # REQUIRED
 
-last_updated: 2021-06-01 # AUTO GENERATED
+last_updated: 2021-09-01 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Inflação - Índice Nacional de Preços ao Consumidor Amplo 15 - IPCA-15
+    Inflação - Índice Nacional de Preços ao Consumidor Amplo 15 (IPCA-15)
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -29,14 +29,15 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: Pedro Castro
+    name: Pedro Castro 
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao/code
-    website: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao/code
+    website:  https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao/code
     email: pdesacastro@gmail.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    - Renomeação das colunas
+     - Renomeação das colunas
+     - Limpeza para consistência 
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -49,12 +50,14 @@ data_update_frequency: mes # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
+    - ano
     - mes
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
+    - ano
     - mes
 
 # Qual é a cobertura espacial da tabela?

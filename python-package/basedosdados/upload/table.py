@@ -1,23 +1,21 @@
-from jinja2 import Template
-from pathlib import Path, PosixPath
-import json
 import csv
-from copy import deepcopy
-from google.cloud import bigquery
 import datetime
-
-import ruamel.yaml as ryaml
-import requests
+import json
+from copy import deepcopy
 from io import StringIO
-import pandas as pd
+from pathlib import Path, PosixPath
 
 import google.api_core.exceptions
-
+import pandas as pd
+import requests
+import ruamel.yaml as ryaml
+from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.base import Base
-from basedosdados.upload.storage import Storage
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
-from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.upload.storage import Storage
+from google.cloud import bigquery
+from jinja2 import Template
 
 
 class Table(Base):
@@ -164,7 +162,7 @@ class Table(Base):
             raise Exception(
                 "Check if your google sheet Share are: Anyone on the internet with this link can view"
             )
-    
+
     def table_exists(self, mode):
         """Check if table exists in BigQuery.
 
@@ -618,9 +616,11 @@ class Table(Base):
                 * 'pass' : Do nothing
         """
         if not self.table_exists("staging"):
-            raise BaseDosDadosException("You cannot append to a table that does not exist")
+            raise BaseDosDadosException(
+                "You cannot append to a table that does not exist"
+            )
         else:
-              Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
+            Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
                 filepath,
                 mode="staging",
                 partitions=partitions,

@@ -1,17 +1,17 @@
+import base64
+import json
+import shutil
+import warnings
+from functools import lru_cache
+from os import getenv
+from pathlib import Path
+
+import tomlkit
+import yaml
+from basedosdados import constants
 from google.cloud import bigquery, storage
 from google.oauth2 import service_account
-import yaml
 from jinja2 import Template
-from pathlib import Path
-import shutil
-import tomlkit
-import warnings
-import json
-import base64
-from os import getenv
-from basedosdados import constants
-
-from functools import lru_cache
 
 warnings.filterwarnings("ignore")
 
@@ -31,24 +31,24 @@ class Base:
         self.config = self._load_config()
 
         self.templates = Path(templates or self.config["templates_path"])
-        self.metadata_path = Path(
-            metadata_path or self.config["metadata_path"]
-        )
+        self.metadata_path = Path(metadata_path or self.config["metadata_path"])
         self.bucket_name = bucket_name or self.config["bucket_name"]
         self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
 
     @staticmethod
     def _decode_env(env: str) -> str:
-        return base64.b64decode(getenv(env).encode('utf-8')).decode('utf-8')
+        return base64.b64decode(getenv(env).encode("utf-8")).decode("utf-8")
 
     def _load_credentials(self, mode: str):
 
         if getenv(f"{constants.ENV_CREDENTIALS_PREFIX.value}{mode.upper()}"):
-            info = json.loads(self._decode_env(
-                f"{constants.ENV_CREDENTIALS_PREFIX.value}{mode.upper()}"))
+            info = json.loads(
+                self._decode_env(
+                    f"{constants.ENV_CREDENTIALS_PREFIX.value}{mode.upper()}"
+                )
+            )
             return service_account.Credentials.from_service_account_info(
-                info, scopes=[
-                    "https://www.googleapis.com/auth/cloud-platform"]
+                info, scopes=["https://www.googleapis.com/auth/cloud-platform"]
             )
         else:
             return service_account.Credentials.from_service_account_file(
@@ -89,7 +89,8 @@ class Base:
 
         var = input(context)
 
-        def to_lower(x): return x.lower() if with_lower else x
+        def to_lower(x):
+            return x.lower() if with_lower else x
 
         if var:
             return to_lower(var.strip())
@@ -162,10 +163,10 @@ class Base:
 
         # If environments are set but no files exist
         if (
-            (not config_file.exists()) and
-            (getenv(constants.ENV_CONFIG.value)) and
-            (getenv(constants.ENV_CREDENTIALS_PROD.value)) and
-            (getenv(constants.ENV_CREDENTIALS_STAGING.value))
+            (not config_file.exists())
+            and (getenv(constants.ENV_CONFIG.value))
+            and (getenv(constants.ENV_CREDENTIALS_PROD.value))
+            and (getenv(constants.ENV_CREDENTIALS_STAGING.value))
         ):
             # Create basedosdados files from envs
             with open(config_file, "w") as f:
@@ -175,17 +176,14 @@ class Base:
                 f.write(self._decode_env(constants.ENV_CREDENTIALS_PROD.value))
                 f.close()
             with open(credentials_folder / "staging.json", "w") as f:
-                f.write(self._decode_env(
-                    constants.ENV_CREDENTIALS_STAGING.value))
+                f.write(self._decode_env(constants.ENV_CREDENTIALS_STAGING.value))
                 f.close()
 
         if (not config_file.exists()) or (force):
 
             # Load config file
             c_file = tomlkit.parse(
-                (Path(__file__)
-                    .resolve()
-                    .parents[1] / "configs" / "config.toml")
+                (Path(__file__).resolve().parents[1] / "configs" / "config.toml")
                 .open("r", encoding="utf-8")
                 .read()
             )
@@ -209,9 +207,7 @@ class Base:
                 ),
                 default_yn="y",
                 default_return=Path.cwd(),
-                no_question=(
-                    "\nWhere would you like to save it?\n" "metadata path: "
-                ),
+                no_question=("\nWhere would you like to save it?\n" "metadata path: "),
                 with_lower=False,
             )
 
@@ -246,9 +242,7 @@ class Base:
                 "basedosdados-staging",
             )
 
-            self._check_credentials(
-                project_staging, "staging", credentials_path
-            )
+            self._check_credentials(project_staging, "staging", credentials_path)
 
             c_file["gcloud-projects"]["staging"]["credentials_path"] = str(
                 credentials_path / "staging.json"
@@ -297,13 +291,9 @@ class Base:
 
             ############# STEP 6 - SET TEMPLATES #######################
 
-            c_file["templates_path"] = str(
-                Path.home() / ".basedosdados" / "templates"
-            )
+            c_file["templates_path"] = str(Path.home() / ".basedosdados" / "templates")
 
-            config_file.open(
-                "w", encoding="utf-8").write(tomlkit.dumps(c_file)
-            )
+            config_file.open("w", encoding="utf-8").write(tomlkit.dumps(c_file))
 
     def _load_config(self):
 
