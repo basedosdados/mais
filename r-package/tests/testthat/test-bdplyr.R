@@ -97,7 +97,12 @@ test_that("bd_write_rds", {
 
 })
 
+test_that("Testando se o ... funciona", {
 
+
+
+
+})
 
 
 

@@ -29,7 +29,8 @@ Imports:
     fs (>= 1.5.0),
     dbplyr (>= 2.1.1),
     scales (>= 1.1.1),
-    DBI (>= 1.1.1)
+    DBI (>= 1.1.1),
+    typed (>= 0.0.1)
 Suggests: 
     rmarkdown,
     knitr,
