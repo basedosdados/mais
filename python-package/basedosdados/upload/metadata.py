@@ -244,7 +244,10 @@ class Metadata(Base):
                 data["columns"] = [{"name": c} for c in columns]
 
             yaml_obj = builds_yaml_object(
-                self.metadata_schema, data, columns_schema=self.columns_schema
+                self.metadata_schema,
+                data,
+                columns_schema=self.columns_schema,
+                partition_columns=partition_columns
             )
             self.obj_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -384,7 +387,13 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
     return yaml_obj
 
 
-def builds_yaml_object(schema, data=dict(), columns_schema=dict()):
+def builds_yaml_object(
+    schema,
+    data=dict(),
+    columns_schema=dict(),
+    partition_columns=list()
+    ):
+
     def comment_treatment(c):
         if COLUMNS:
             return None
@@ -455,5 +464,21 @@ def builds_yaml_object(schema, data=dict(), columns_schema=dict()):
         for data in data.get("columns"):
             prop = deepcopy(properties)
             yaml_obj["columns"].append(_add_property(ryaml.CommentedMap(), prop))
+        
+    # in case of new dataset/table or local overwriting
+    partitions_writer_condition = (
+        partition_columns != ['[]'] and
+        partition_columns is not None
+    )
+
+    if partitions_writer_condition == True:
+        yaml_obj["partitions"] = ""
+
+        for local_column in partition_columns:
+            for remote_column in yaml_obj["columns"]:
+                if remote_column["name"] == local_column:
+                    remote_column["is_partition"] = True
+            
+        yaml_obj["partitions"] = ", ".join(partition_columns)
 
     return yaml_obj
