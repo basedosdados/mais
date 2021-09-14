@@ -767,7 +767,7 @@ def cli_publish_metadata(
     try:
         m.publish()
         msg, color = "Local metadata has been published.", "green"
-    except (CKANAPIError, BaseDosDadosException) as e:
+    except (CKANAPIError, BaseDosDadosException, AssertionError) as e:
         msg = (
             f"Local metadata couldn't be published due to an error. Pleas"
             f"e check the traceback below for more information on how to "

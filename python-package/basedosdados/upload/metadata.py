@@ -313,9 +313,15 @@ class Metadata(Base):
         )
 
         try:
-            if self.table_id:
-                self.validate()
+            self.validate()
+            assert self.is_updated(), (
+                f"Could not publish metadata due to out of date config file. "
+                f"Please run `basedosdados metadata create {self.dataset_id} "
+                f"{self.table_id}` to get the most recently updated metadata "
+                f"and apply your changes to it."
+            )
 
+            if self.table_id:
                 data_dict = self.ckan_data_dict.copy()
                 data_dict = data_dict["resources"][0]
 
@@ -327,7 +333,6 @@ class Metadata(Base):
                 return response                
 
             else:
-                self.validate()
                 response = bdm_ckan.call_action(
                     action="package_patch",
                     data_dict=self.ckan_data_dict
