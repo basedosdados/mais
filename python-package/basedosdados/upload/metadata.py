@@ -145,7 +145,7 @@ class Metadata(Base):
 
             data = {
                 "id": bdm_ckan_dataset_metadata["id"],
-                "name": self.local_config["dataset_id"].replace("_", "-"),
+                "name": bdm_ckan_dataset_metadata["name"],
                 "title": self.local_config["title"],
                 "type": bdm_ckan_dataset_metadata["type"],
                 "metadata_modified": self.local_config["metadata_modified"],
@@ -160,8 +160,7 @@ class Metadata(Base):
                 ],
                 "tags": [
                     {"name": tag} for tag in self.local_config["tags"]
-                ],
-                "dataset_id": self.local_config["dataset_id"]
+                ]
             }
 
         return data
