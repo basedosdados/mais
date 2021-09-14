@@ -5,11 +5,6 @@ on:
       - python-package/**
       - .github/workflows/env-setup*
       - .github/workflows/python-ci.yml
-  pull_request:
-    paths:
-      - python-package/**
-      - .github/workflows/env-setup*
-      - .github/workflows/python-ci.yml
   workflow_dispatch:
 jobs:
   lint:
@@ -72,15 +67,13 @@ jobs:
       run: echo ::set-output name=name::"$(echo ${${{ github.ref }}#refs/heads/})"
       shell: bash
     - name: Test
-      if: github.event_name == 'pull_request'
+      if: steps.get-branch-name.outputs.name != 'master'
       run: |
         cd python-package
         python -m pytest tests
       shell: bash
     - name: Test and assess coverage
-      if: |
-        github.event_name == 'push' &&
-        steps.get-branch-name.outputs.name == 'master'
+      if: steps.get-branch-name.outputs.name == 'master'
       run: |
         cd python-package
         coverage run --source=basedosdados -m pytest tests
@@ -124,15 +117,13 @@ jobs:
       run: echo ::set-output name=name::"$(echo ${${{ github.ref }}#refs/heads/})"
       shell: bash
     - name: Test
-      if: github.event_name == 'pull_request'
+      if: steps.get-branch-name.outputs.name != 'master'
       run: |
         cd python-package
         python -m pytest tests
       shell: bash
     - name: Test and assess coverage
-      if: |
-        github.event_name == 'push' &&
-        steps.get-branch-name.outputs.name == 'master'
+      if: steps.get-branch-name.outputs.name == 'master'
       run: |
         cd python-package
         coverage run --source=basedosdados -m pytest tests
