@@ -12,10 +12,8 @@ from ckanapi.errors import ValidationError, NotAuthorized
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
 
-# CKAN_URL = os.environ.get("CKAN_URL", "http://localhost:5000")
 CKAN_API_KEY = os.environ.get("CKAN_API_KEY")
-CKAN_URL = "http://0.0.0.0:5000"
-CKAN_URL_STAGING = "http://staging.basedosdados.org"
+CKAN_URL = os.environ.get("CKAN_URL", "http://0.0.0.0:5000")
 
 
 class Metadata(Base):
@@ -49,8 +47,7 @@ class Metadata(Base):
     @lru_cache(256)
     def ckan_config(self) -> dict:
 
-        # TODO: This will not be needed after migration
-        pkg_list = requests.get(CKAN_URL_STAGING + "/api/3/action/package_list").json()[
+        pkg_list = requests.get(CKAN_URL + "/api/3/action/package_list").json()[
             "result"
         ]
 
@@ -62,17 +59,18 @@ class Metadata(Base):
             return defaultdict(lambda: dict())
 
         dataset_config = requests.get(
-            CKAN_URL_STAGING + f"/api/3/action/package_show?id={dataset_id}"
+            CKAN_URL + f"/api/3/action/package_show?id={dataset_id}"
         ).json()["result"]
 
         # unpack extras
         dataset_args = [
             d for d in dataset_config["extras"] if d["key"] == "dataset_args"
         ]
+
         if dataset_args:
             dataset_args = dataset_args[0]["value"]
             dataset_config.update(dataset_args)
-
+        
         if self.table_id is not None:
             return [
                 r for r in dataset_config["resources"] if r["name"] == self.table_id
@@ -86,14 +84,14 @@ class Metadata(Base):
     def ckan_raw_metadata(self):
 
         endpoint_url = (
-            f"{CKAN_URL_STAGING}/api/3/action/bd_bdm_dataset_show?dataset_id="
+            f"{CKAN_URL}/api/3/action/bd_bdm_dataset_show?dataset_id="
             f"{self.dataset_id}"
         )
         bdm_ckan_dataset_metadata = requests.get(endpoint_url).json()["result"]
 
         if self.table_id:
             endpoint_url = (
-                f"{CKAN_URL_STAGING}/api/3/action/bd_bdm_table_show?dataset_i"
+                f"{CKAN_URL}/api/3/action/bd_bdm_table_show?dataset_i"
                 f"d={self.dataset_id}&table_id={self.table_id}"
             )
             bdm_ckan_table_metadata = requests.get(endpoint_url).json()["result"]
