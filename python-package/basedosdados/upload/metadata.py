@@ -473,6 +473,7 @@ def builds_yaml_object(
     # in case of new dataset/table or local overwriting
     partitions_writer_condition = (
         partition_columns != ['[]'] and
+        partition_columns != [] and
         partition_columns is not None
     )
 
