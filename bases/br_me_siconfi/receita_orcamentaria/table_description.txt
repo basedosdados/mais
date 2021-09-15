@@ -80,6 +80,7 @@ Tratamento
 ----------
 - Criação da coluna 'id_municipio' padrão 7 dígitos IGBE para os anos de 1989-2012
 - Criação da coluna 'id_conta_normalizado' para compatibilizar todos os anos que não tem 'portaria'
+ - Criação da coluna 'id_conta_formalizado' 
 - Criação da coluna 'id_conta_bd' para compatilizar toda série temporal 
 - Append nas tabelas dos anos 1989-2012 para a arquitetura 2013-2020    
 - Compatibilização de moedas

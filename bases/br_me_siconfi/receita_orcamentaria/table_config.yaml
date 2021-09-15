@@ -7,9 +7,9 @@ dataset_id: br_me_siconfi # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-me-siconfi # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi # AUTO GENERATED
 
-version: 1.0 # REQUIRED
+version: v1.0 # REQUIRED
 
-last_updated: 2021-08-26 # AUTO GENERATED
+last_updated: 2021-09-15 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -38,6 +38,7 @@ treated_by:
 treatment_description: | 
     - Criação da coluna 'id_municipio' padrão 7 dígitos IGBE para os anos de 1989-2012
     - Criação da coluna 'id_conta_normalizado' para compatibilizar todos os anos que não tem 'portaria'
+     - Criação da coluna 'id_conta_formalizado' 
     - Criação da coluna 'id_conta_bd' para compatilizar toda série temporal 
     - Append nas tabelas dos anos 1989-2012 para a arquitetura 2013-2020    
     - Compatibilização de moedas
@@ -150,6 +151,12 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
+        name: id_conta_formalizado_bd
+        description: ID Conta Formalizado - Base dos Dados
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
         name: id_conta_bd
         description: ID Conta - Base dos Dados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
@@ -157,7 +164,7 @@ columns: # REQUIRED
   
     -   
         name: conta_original
-        description: Conta
+        description:  Conta
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -168,8 +175,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: estagio
-        description: Estágio
+        name: estagio_bd
+        description: Estágio - Base dos Dados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
