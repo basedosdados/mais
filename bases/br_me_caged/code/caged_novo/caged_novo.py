@@ -1,17 +1,14 @@
-import time
-from datetime import datetime
 import os
-from ftplib import FTP
-
-import unidecode
 import re
-import pandas as pd
-import numpy as np
+import unidecode
+from ftplib import FTP
+from datetime import datetime
 
-import shutil
-from contextlib import closing
-import basedosdados as bd
 import py7zr
+import shutil
+import numpy as np
+import pandas as pd
+import basedosdados as bd
 
 today = datetime.strftime(datetime.today(), "%Y-%m-%d")
 
@@ -154,7 +151,7 @@ def get_download_links():
 
 
 ## get the blobs from basedosdados storage and filter what needs to be downloaded
-def get_blobs(tipo, download_dict, bucket_name="basedosdados"):
+def get_filtered_download_dict(tipo, download_dict, bucket_name="basedosdados"):
     def get_year_month(b):
         ano = b.split("ano=")[1].split("/")[0]
         mes = b.split("mes=")[1].split("/")[0]
@@ -424,7 +421,7 @@ if __name__ == "__main__":
 
     for tipo in list(download_dict.keys()):
 
-        download_opt = get_blobs(
+        download_opt = get_filtered_download_dict(
             tipo=tipo, download_dict=download_dict, bucket_name="basedosdados-dev"
         )
 
