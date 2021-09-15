@@ -134,33 +134,19 @@ class Table(Base):
         # load new created schema
         return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
-    def _make_template(self, columns, partition_columns):
+    def _make_template(
+        self,
+        columns,
+        partition_columns,
+        if_table_config_exists
+        ):
 
         # create table_config.yaml with metadata
         Metadata(self.dataset_id, self.table_id).create(
-            if_exists="replace", columns=columns, partition_columns=partition_columns
+            if_exists=if_table_config_exists,
+            columns=columns,
+            partition_columns=partition_columns
         )
-
-        for file in (Path(self.templates) / "table").glob("*"):
-
-            if file.name in ["publish.sql"]:
-
-                # Load and fill template
-                template = Template(file.open("r", encoding="utf-8").read()).render(
-                    bucket_name=self.bucket_name,
-                    table_id=self.table_id,
-                    dataset_id=self.dataset_folder.stem,
-                    project_id=self.client["bigquery_staging"].project,
-                    project_id_prod=self.client["bigquery_prod"].project,
-                    columns=columns,
-                    partition_columns=partition_columns,
-                    now=datetime.datetime.now().strftime("%Y-%m-%d"),
-                )
-
-                # Write file
-                (self.table_folder / file.name).open("w", encoding="utf-8").write(
-                    template
-                )
 
     def _sheet_to_df(self, columns_config_url):
         url = columns_config_url.replace("edit#gid=", "export?format=csv&gid=")
@@ -341,7 +327,7 @@ class Table(Base):
                     "You must provide a path to correctly create config files"
                 )
             else:
-                self._make_template(columns, partition_columns)
+                self._make_template(columns, partition_columns, if_table_config_exists)
 
         elif if_table_config_exists == "raise":
 
@@ -356,11 +342,11 @@ class Table(Base):
                 )
             # if config files don't exist, create them
             else:
-                self._make_template(columns, partition_columns)
+                self._make_template(columns, partition_columns, if_table_config_exists)
 
         else:
             # Raise: without a path to data sample, should not replace config files with empty template
-            self._make_template(columns, partition_columns)
+            self._make_template(columns, partition_columns, if_table_config_exists)
 
         if columns_config_url is not None:
             self.update_columns(columns_config_url)

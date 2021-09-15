@@ -41,9 +41,6 @@ class Dataset(Base):
     def _setup_dataset_object(self, dataset_id):
 
         dataset = bigquery.Dataset(dataset_id)
-        dataset.description = self._render_template(
-            Path("dataset/dataset_description.txt"), self.dataset_config
-        )
 
         return dataset
 
@@ -73,20 +70,6 @@ class Dataset(Base):
 
         # create dataset_config.yaml with metadata
         Metadata(self.dataset_id).create(if_exists="replace")
-
-        for file in (Path(self.templates) / "dataset").glob("*"):
-
-            if file.name in ["README.md"]:
-
-                # Load and fill template
-                template = self._render_template(
-                    f"dataset/{file.name}", dict(dataset_id=self.dataset_id)
-                )
-
-                # Write file
-                (self.dataset_folder / file.name).open("w", encoding="utf-8").write(
-                    template
-                )
 
         # Add code folder
         (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)

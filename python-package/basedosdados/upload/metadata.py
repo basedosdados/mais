@@ -241,6 +241,8 @@ class Metadata(Base):
                 data["columns"] = [{"name": c} for c in columns]
 
             yaml_obj = builds_yaml_object(
+                self.dataset_id,
+                self.table_id,
                 self.metadata_schema,
                 data,
                 columns_schema=self.columns_schema,
@@ -368,9 +370,13 @@ def handle_data(k, schema, data, local_default=None):
     # the API default is to return a dict or list[dict] with all info.
     # But, we just use `name` to build the yaml
     _selected = deepcopy(selected)
+
+    if _selected == []:
+        return _selected
+
     if not isinstance(_selected, list):
         _selected = [_selected]
-    if isinstance(_selected[0], dict):
+    elif isinstance(_selected[0], dict):
         if _selected[0].get("id") is not None:
             return [s.get("name") for s in _selected]
 
@@ -390,6 +396,8 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
 
 
 def builds_yaml_object(
+    dataset_id,
+    table_id,
     schema,
     data=dict(),
     columns_schema=dict(),
@@ -483,5 +491,9 @@ def builds_yaml_object(
                     remote_column["is_partition"] = True
             
         yaml_obj["partitions"] = ", ".join(partition_columns)
+    
+    yaml_obj["dataset_id"] = dataset_id
+    if table_id:
+        yaml_obj["table_id"] = table_id
 
     return yaml_obj
