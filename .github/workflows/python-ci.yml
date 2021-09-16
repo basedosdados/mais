@@ -40,17 +40,11 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install isort black pylint
       - name: Check library sort
-        run: |
-          python -m isort --check-only --profile black .github
-          python -m isort --check-only --profile black python-package
+        run: python -m isort --check-only --profile black .github python-package
       - name: Check code format
-        run: |
-          python -m black --check .github
-          python -m black --check python-package
+        run: python -m black --check .github python-package
       - name: Check lint
-        run: |
-          python -m pylint --exit-zero .github/**/*.py
-          python -m pylint --exit-zero python-package
+        run: python -m pylint --exit-zero .github/**/*.py python-package
   build-linux:
     needs: lint
     runs-on: ubuntu-latest
