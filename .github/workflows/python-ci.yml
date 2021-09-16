@@ -12,7 +12,7 @@ jobs:
   guard:
     runs-on: ubuntu-latest
     outputs:
-      skip: ${{ steps.changes.outputs.python }}
+      continue: ${{ steps.changes.outputs.python }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -26,7 +26,7 @@ jobs:
               - 'python-package/**'
   lint:
     needs: guard
-    if: ${{ needs.guard.outputs.skip != 'true' }}
+    if: needs.guard.outputs.continue == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
