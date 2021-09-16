@@ -1,13 +1,32 @@
 name: python-ci
 on:
   push:
+    branches:
+      - master
+  pull_request:
     paths:
+      - .github/**
       - python-package/**
-      - .github/workflows/env-setup*
-      - .github/workflows/python-ci.yml
   workflow_dispatch:
 jobs:
+  guard:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.changes.outputs.python }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Check if there are changes
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            python:
+              - '.github/**'
+              - 'python-package/**'
   lint:
+    needs: guard
+    if: ${{ needs.guard.outputs.skip != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -62,18 +81,14 @@ jobs:
         GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
         GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
       shell: bash
-    - name: Extract branch name
-      id: get-branch-name
-      run: echo ::set-output name=branch-name::"$(echo ${GITHUB_REF#refs/heads/})"
-      shell: bash
     - name: Test
-      if: steps.get-branch-name.outputs.branch-name != 'master'
+      if: github.event_name == 'pull_request'
       run: |
         cd python-package
         python -m pytest tests
       shell: bash
     - name: Test and assess coverage
-      if: steps.get-branch-name.outputs.branch-name == 'master'
+      if: github.event_name == 'push'
       run: |
         cd python-package
         coverage run --source=basedosdados -m pytest tests
@@ -112,18 +127,14 @@ jobs:
         PROJECT_NAME_STAGING: basedosdados-dev
         GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
         GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
-    - name: Extract branch name
-      id: get-branch-name
-      run: echo ::set-output name=branch-name::"$(echo ${GITHUB_REF#refs/heads/})"
-      shell: bash
     - name: Test
-      if: steps.get-branch-name.outputs.branch-name != 'master'
+      if: github.event_name == 'pull_request'
       run: |
         cd python-package
         python -m pytest tests
       shell: bash
     - name: Test and assess coverage
-      if: steps.get-branch-name.outputs.branch-name == 'master'
+      if: github.event_name == 'push'
       run: |
         cd python-package
         coverage run --source=basedosdados -m pytest tests
