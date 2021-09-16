@@ -3,6 +3,11 @@
 // build: perfil eleitorado - local votacao
 //----------------------------------------------------------------------------//
 
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
+keep id_municipio id_municipio_tse
+tempfile diretorio
+save `diretorio'
+
 //------------------------//
 // loops
 //------------------------//
@@ -24,16 +29,16 @@ foreach ano of numlist 2016(2)2020 {
 	ren v9	zona
 	ren v10	secao
 	ren v12	tipo_secao_agregada
-	ren v13	numero_local_votacao
-	ren v14	local_votacao
-	ren v16	tipo_local_votacao
+	ren v13	numero
+	ren v14	nome
+	ren v16	tipo
 	ren v17	endereco
 	ren v18	bairro
 	ren v19	cep
 	ren v20	telefone
 	ren v21	latitude
 	ren v22	longitude
-	ren v24	situacao_local_votacao
+	ren v24	situacao
 	ren v26	situacao_zona
 	ren v28	situacao_secao
 	ren v30	situacao_localidade
@@ -50,14 +55,21 @@ foreach ano of numlist 2016(2)2020 {
 	replace longitude = ""	if longitude == "-1"
 	
 	clean_string tipo_secao_agregada
-	clean_string tipo_local_votacao
-	clean_string situacao_local_votacao
+	clean_string tipo
+	clean_string situacao
 	clean_string situacao_zona
 	clean_string situacao_secao
 	clean_string situacao_localidade
 	
-	destring ano turno id_municipio_tse zona secao numero_local_votacao latitude longitude ///
+	destring ano turno id_municipio_tse zona secao numero latitude longitude ///
 		quantidade_eleitores quantidade_eleitores_eleicao, replace
+	
+	merge m:1 id_municipio_tse using `diretorio'
+	drop if _merge == 2
+	drop _merge
+	order id_municipio, b(id_municipio_tse)
+	
+	order ano data_eleicao turno sigla_uf id_municipio id_municipio_tse zona secao
 	
 	tempfile perfil`ano'
 	save `perfil`ano''

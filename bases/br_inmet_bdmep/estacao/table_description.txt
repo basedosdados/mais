@@ -1,0 +1,70 @@
+O BDMEP abriga dados meteorológicos diários em forma digital, de séries históricas das várias estações meteorológicas convencionais da rede de estações do INMET com milhões de informações, referentes às medições diárias, de acordo com as normas técnicas internacionais da Organização Meteorológica Mundial.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inmet-bdmep
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdmep
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Filipe Cavalcanti
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdmep/code
+Website: https://github.com/filipemsc
+Email: f.matheus.cavalcanti@gmail.comTratado por
+-----------
+Nome: Filipe Cavalcanti
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdmep/code
+Website: https://github.com/filipemsc
+Email: f.matheus.cavalcanti@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- estação meteorológica
+
+Colunas identificando linhas unicamente
+-------------------
+- id_estacao
+
+Cobertura Temporal
+------------------
+- 2000
+- 2001
+- 2002
+- 2003
+- 2004
+- 2005
+- 2006
+- 2007
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Fazer download de todas as bases diretamente do site do INMET
+- Extrair informações de todas as estações 
+- Manter somente as informações mais recentes de cada estação
+
+Frequencia de Atualização
+-------------------------
+recorrente
+
+

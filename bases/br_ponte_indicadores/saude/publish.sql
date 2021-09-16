@@ -19,9 +19,9 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados.br_ponte_indicadores.saude AS
+CREATE VIEW basedosdados-dev.br_ponte_indicadores.saude AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(tx_hosp_sens AS FLOAT64) tx_hosp_sens,
 SAFE_CAST(x_acs AS FLOAT64) x_acs,
@@ -29,4 +29,4 @@ SAFE_CAST(cov_esf AS FLOAT64) cov_esf,
 SAFE_CAST(medicos AS FLOAT64) medicos,
 SAFE_CAST(medicos_div_pop AS FLOAT64) medicos_div_pop,
 SAFE_CAST(medicos_mil_pop AS FLOAT64) medicos_mil_pop
-from basedosdados-staging.br_ponte_indicadores_staging.saude as t
+from basedosdados-dev.br_ponte_indicadores_staging.saude as t

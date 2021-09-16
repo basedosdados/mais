@@ -21,7 +21,7 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_ipea_acesso_oportunidades.indicadores_2019 AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(id_grid_h3 AS STRING) id_grid_h3,
 ST_GEOGFROMTEXT(geometria) geometria,
 SAFE_CAST(modo_transporte AS STRING) modo_transporte,

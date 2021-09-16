@@ -19,9 +19,9 @@ TIPOS:
 
 */
 CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.uf AS
-SELECT 
+SELECT
 SAFE_CAST(id_uf AS STRING) id_uf,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(uf AS STRING) uf,
+SAFE_CAST(sigla AS STRING) sigla,
+SAFE_CAST(nome AS STRING) nome,
 SAFE_CAST(regiao AS STRING) regiao
 FROM basedosdados-dev.br_bd_diretorios_brasil_staging.uf AS t

@@ -1,0 +1,1475 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: municipio # AUTO GENERATED
+dataset_id: mundo_onu_adh # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/mundo-onu-adh # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/mundo_onu_adh # AUTO GENERATED
+
+version: v1.0 # REQUIRED
+
+last_updated: 2021-07-13 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Dados do Atlas do Desenvolvimento Humano (ADH) a nível de município-ano.
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Ricardo Dahis
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/mundo_onu_adh/code # REQUIRED
+    website: <onde encontrar os dados tratados>
+    email: rdahis@basedosdados.org
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Ricardo Dahis
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/mundo_onu_adh/code # REQUIRED
+    website: <onde encontrar os dados tratados>
+    email: rdahis@basedosdados.org
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    Limpei e renomeei uma série de variáveis.
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: único # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - municipio
+    - ano
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_municipio
+    - ano
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 1991
+    - 2000
+    - 2010
+    
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+  
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio
+        description: ID Município - IBGE 7 Dígitos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: expectativa_vida
+        description: Expectativa de Vida
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: fecundidade_total
+        description: Fecundidade Total
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mortalidade_1
+        description: Mortalidade Infantil Até 1 Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mortalidade_5
+        description: Mortalidade Infantil Até 5 Anos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: razao_dependencia
+        description: Percentual da população de menos de 15 anos e da população de 65 anos e mais em relação à população de 15 a 64 anos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prob_sobrevivencia_40
+        description: Probabilidade de sobrevivência até 40 anos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prob_sobrevivencia_60
+        description: Probabilidade de sobrevivência até 60 anos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_envelhecimento
+        description: Taxa de envelhecimento
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: expectativa_anos_estudo
+        description: Expectativa de anos de estudo aos 18 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_analfabetismo_11_a_14
+        description: Taxa de analfabetismo da população de 11 a 14 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_analfabetismo_15_a_17
+        description: Taxa de analfabetismo da população de 15 a 17 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_analfabetismo_15_mais
+        description: Taxa de analfabetismo da população de 15 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_analfabetismo_18_a_24
+        description: Taxa de analfabetismo da população de 18 a 24 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_analfabetismo_18_mais
+        description: Taxa de analfabetismo da população de 18 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_analfabetismo_25_a_29
+        description: Taxa de analfabetismo da população de 25 a 29 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_analfabetismo_25_mais
+        description: Taxa de analfabetismo da população de 25 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atraso_0_basico
+        description: Percentual da população de 6 a 17 anos de idade frequentando o ensino básico que não tem atraso idade-série.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atraso_0_fundamental
+        description: Percentual da população de 6 a 14 anos de idade frequentando o ensino fundamental que não tem atraso idade-série.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atraso_0_medio
+        description: Percentual da população de 15 a 17 anos de idade frequentando o ensino médio que não tem atraso idade-série.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atraso_1_basico
+        description: Percentual da população de 6 a 17 anos de idade frequentando o ensino básico que tem 1 ano de atraso idade-série.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atraso_1_fundamental
+        description: Percentual da população de 6 a 14 anos de idade frequentando o ensino fundamental que tem 1 ano de atraso idade-série.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atraso_1_medio
+        description: Percentual da população de 15 a 17 anos de idade frequentando o ensino médio que tem 1 ano de atraso idade-série.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atraso_2_basico
+        description: Percentual da população de 6 a 17 anos de idade frequentando o ensino básico que tem 2 anos ou mais de atraso idade-série.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atraso_2_fundamental
+        description: Percentual da população de 6 a 14 anos de idade frequentando o ensino fundamental que tem 2 anos ou mais de atraso idade-série.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atraso_2_medio
+        description: Percentual da população de 15 a 17 anos de idade frequentando o ensino médio que tem  2 anos de atraso idade-série.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_bruta_basico
+        description: Taxa de frequência bruta ao ensino básico
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_bruta_fundamental
+        description: Taxa de frequência bruta ao ensino fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_bruta_medio
+        description: Taxa de frequência bruta ao ensino médio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_bruta_pre
+        description: Taxa de frequência bruta à pré-escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_bruta_superior
+        description: Taxa de frequência bruta ao ensino superior
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_liquida_basico
+        description: Taxa de frequência líquida ao ensino básico
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_liquida_fundamental
+        description: Taxa de frequência líquida ao ensino fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_liquida_medio
+        description: Taxa de frequência líquida ao ensino médio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_liquida_pre
+        description: Taxa de frequência líquida à pré-escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_liquida_superior
+        description: Taxa de frequência líquida ao ensino superior
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_0_3
+        description: Taxa de atendimento escolar da população de 0 a 3 anos de idade 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_11_14
+        description: Taxa de atendimento escolar da população de 11 a 14 anos de idade 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_15_17
+        description: Taxa de atendimento escolar da população de 15 a 17 anos de idade 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_18_24
+        description: Taxa de atendimento escolar da população de 18 a 24 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_25_29
+        description: Taxa de atendimento escolar da população de 25 a 29 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_4_5
+        description: Taxa de atendimento escolar da população de 4 a 5 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_4_6
+        description: Percentual da população de 4 a 6 anos de idade frequentando a escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_5_6
+        description: Percentual da população de 5 a 6 anos de idade frequentando a escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_6
+        description: Taxa de atendimento escolar da população de 6 anos de idade 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_6_14
+        description: Taxa de atendimento escolar da população de 6 a 14 anos de idade 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_6_17
+        description: Taxa de atendimento escolar da população de 6 a 17 anos de idade 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_fundamental_15_17
+        description: Percentual da população de 15 a 17 anos de idade frequentando o ensino fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_fundamental_18_24
+        description: Percentual da população de 18 a 24 anos de idade frequentando o ensino fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_fundamental_4_5
+        description: Percentual da população de 4 a 5 anos de idade frequentando o ensino fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_medio_18_24
+        description: Percentual da população de 18 a 24 anos de idade frequentando o ensino médio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_medio_6_14
+        description: Percentual da população de 6 a 14 anos de idade frequentando o ensino médio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_freq_superior_15_17
+        description: Percentual da população de 15 a 17 anos de idade frequentando o ensino superior
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_fundamental_11_13
+        description: Percentual da população de 11 a 13 anos de idade frequentando os anos  finais do fundamental ou que já concluiu o fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_fundamental_12_14
+        description: Percentual da população de 12 a 14 anos de idade frequentando os anos  finais do fundamental ou que já concluiu o fundamental
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_fundamental_15_17
+        description: Percentual da população de 15 a 17 anos com fundamental completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_fundamental_16_18
+        description: Percentual da população de 16 a 18 anos de idade com o ensino fundamental completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_fundamental_18_24
+        description: Percentual da população de 18 a 24 anos com fundamental completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_fundamental_18_mais
+        description: Percentual da população de 18 anos ou mais com fundamental completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_fundamental_25_mais
+        description: Percentual da população de 25 anos ou mais com fundamental completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_medio_18_20
+        description: Percentual da população de 18 a 20 anos de idade com o ensino médio completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_medio_18_24
+        description: Percentual da população de 18 a 24 anos com ensino médio completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_medio_18_mais
+        description: Percentual da população de 18 anos ou mais com ensino médio completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_medio_19_21
+        description: Percentual da população de 19 a 21 anos de idade com o ensino médio completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_medio_25_mais
+        description: Percentual da população de 25 anos ou mais com ensino médio incompleto
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_superior_25_mais
+        description: Percentual da população de 25 anos ou mais com superior completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_max_quintil_1
+        description: Renda domiciliar per capita máxima do quinto mais pobre
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_max_quintil_2
+        description: Renda domiciliar per capita máxima do 2º quinto mais pobre
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_max_quintil_3
+        description: Renda domiciliar per capita máxima do 3º quinto mais pobre
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_max_quintil_4
+        description: Renda domiciliar per capita máxima do 4º quinto mais pobre
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_max_decil_9
+        description: Renda domiciliar per capita mínima do décimo mais rico
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: indice_gini
+        description: Índice de Gini
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_pobreza_extrema
+        description: Proporção de extremamente pobres
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_pobreza_extrema_criancas
+        description: Proporção de crianças extremamente pobres
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_pobreza
+        description: Proporção de pobres
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_pobreza_criancas
+        description: Proporção de crianças pobres
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_vulner_pobreza
+        description: Proporção de vulneráveis à pobreza
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_vulner_pobreza_criancas
+        description: Proporção de crianças vulneráveis à pobreza
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_renda_10_ricos
+        description: Percentual da renda total apropriada pelos 10% da população com maior renda domiciliar per capita
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_renda_20_pobres
+        description: Percentual da renda total apropriada pelos 20% da população com menor renda domiciliar per capita
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_renda_20_ricos
+        description: Percentual da renda total apropriada pelos 20% da população com maior renda domiciliar per capita
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_renda_40_pobres
+        description: Percentual da renda total apropriada pelos 40% da população com menor renda domiciliar per capita
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_renda_60_pobres
+        description: Percentual da renda total apropriada pelos 60% da população com menor renda domiciliar per capita
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_renda_80_pobres
+        description: Percentual da renda total apropriada pelos 80% da população com menor renda domiciliar per capita
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_renda_trabalho
+        description: Percentual da renda proveniente de rendimentos do trabalho
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: razao_10_ricos_40_pobres
+        description: Razão 10% mais ricos / 40% mais pobres
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: razao_20_ricos_40_pobres
+        description: Razão 20% mais ricos / 40% mais pobres
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc
+        description: Renda per capita média
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_quintil_1
+        description: Renda domiciliar per capita média do quinto mais pobre
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_decil_10
+        description: Renda domiciliar per capita média do décimo mais rico
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_quintil_2
+        description: Renda domiciliar per capita  média do 2º quinto mais pobre
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_quintil_3
+        description: Renda domiciliar per capita  média do 3º quinto mais pobre
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_quintil_4
+        description: Renda domiciliar per capita  média do 4º quinto mais pobre
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_quintil_5
+        description: Renda domiciliar per capita média do quinto mais rico
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_exc_renda_nula
+        description: Renda domiciliar per capita média, exceto renda nula
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_pobreza_extrema
+        description: Renda domiciliar per capita média dos extremamente pobres
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_pobreza
+        description: Renda domiciliar per capita média dos pobres
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_pc_vulner_pobreza
+        description: Renda domiciliar per capita média dos vulneraveis à pobreza
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: indice_theil
+        description: Índice de Theil - L
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_trabalhadores_conta_proria
+        description: Percentual de ocupados de 18 anos ou mais que são trabalhadores por conta própria.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_empregadores
+        description: Percentual de ocupados de 18 anos ou mais que são empregadores
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_agropecuaria
+        description: Percentual dos ocupados no setor agropecuário
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_comercio
+        description: Percentual dos ocupados no setor comércio
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_construcao
+        description: Percentual dos ocupados no setor de construção 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_extracao
+        description: Percentual dos ocupados no setor extrativo mineral
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_formalizacao
+        description: Grau de formalização do trabalho das pessoas ocupadas
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_fundamental
+        description: Percentual dos ocupados com fundamental completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_medio
+        description: Percentual dos ocupados com médio completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_servicos
+        description: Percentual dos ocupados no setor serviços
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_siup
+        description: Percentual dos ocupados nos setores de serviços industriais de utilidade pública
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_superior
+        description: Percentual dos ocupados com superior completo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_transformacao
+        description: Percentual dos ocupados na indústria de transformação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_renda_0
+        description: Percentual dos ocupados sem rendimento
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_renda_1_sm
+        description: Percentual dos ocupados com rendimento de até 1 salário mínimo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_renda_2_sm
+        description: Percentual dos ocupados com rendimento de até 2 salários mínimos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_renda_3_sm
+        description: Percentual dos ocupados com rendimento de até 3 salários mínimo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: prop_ocupados_renda_5_sm
+        description: Percentual dos ocupados com rendimento de até 5 salários mínimo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: renda_media_ocupados
+        description: Rendimento médio dos ocupados
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atividade
+        description: Taxa de atividade das pessoas de 10 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atividade_10_14
+        description: Taxa de atividade das pessoas de 10 a  14 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atividade_15_17
+        description: Taxa de atividade das pessoas de 15 a  17 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atividade_18_24
+        description: Taxa de atividade das pessoas de 18 a 24 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atividade_18_mais
+        description: Taxa de atividade das pessoas de 18 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_atividade_25_29
+        description: Taxa de atividade das pessoas de 25 a 29 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_desocupacao
+        description: Taxa de desocupação da população de 10 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_desocupacao_10_14
+        description: Taxa de desocupação da população de 10 a 14 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_desocupacao_15_17
+        description: Taxa de desocupação da população de 15 a 17 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_desocupacao_18_24
+        description: Taxa de desocupação da população de 18 a 24 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_desocupacao_18_mais
+        description: Taxa de desocupação da população de 18 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_desocupacao_25_29
+        description: Taxa de desocupação da população de 25 a 29 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: indice_treil_trabalho
+        description: Índice de Theil-L dos rendimentos do trabalho
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_ocupados_carteira
+        description: Percentual de ocupados de 18 anos ou mais que são empregados com carteira 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_ocupados_setor_publico
+        description: Percentual de ocupados de 18 anos ou mais que são trabalhadores do setor público.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_ocupados_sem_carteira
+        description: Percentual de ocupados de 18 anos ou mais que são empregados sem carteira 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_agua_encanada
+        description: Percentual da população que vive em domicílios com água encanada
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_banheiro_agua_encanada
+        description: Percentual da população que vive em domicílios com banheiro e água encanada
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_densidade_2_mais
+        description: Percentual da população que vive em domicílios com densidade superior a 2 pessoas por dormitório
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_coleta_lixo
+        description: Percentual da população que vive em domicílios urbanos com serviço de coleta de lixo
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_energia_eletrica
+        description: Percentual da população que vive em domicílios com energia elétrica
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_agua_esgoto_inadequados
+        description: Percentual de pessoas em domicílios com abastecimento de água e esgotamento sanitário inadequados
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_paredes_inadequados
+        description: Percentual de pessoas em domicílios com paredes que não sejam de alvenaria ou madeira aparelhada
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_criancas_dom_sem_fund
+        description: Percentual de crianças que vivem em domicílios em que nenhum dos moradores tem o ensino fundamental completo.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_criancas_fora_escola_4_5
+        description: Percentual de crianças de 4 a 5 anos que não frequenta a escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_criancas_fora_escola_6_14
+        description: Percentual de crianças de 6 a 14 anos que não frequenta a escola
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_dom_sem_fund
+        description: Percentual pessoas que vivem em domicílios em que nenhum morador tem o ensino fundamental completo.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_dom_vulner_sem_fund
+        description: Percentual de pessoas em domicílios vulneráveis à pobreza e em que ninguém tem fundamental completo.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_sem_fund_informal
+        description: Percentual de pessoas de 18 anos ou mais sem fundamental completo e em ocupação informal
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_mulheres_com_filho_10_14
+        description: Percentual de mulheres de 10 a 14 anos de idade que tiveram filhos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_mulheres_com_filho_15_17
+        description: Percentual de mulheres de 15 a 17 anos de idade que tiveram filhos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_mulheres_chefe_filho_15m
+        description: Percentual de mães chefes de família, sem fundamental completo e com pelo menos um filho menor de 15 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_nest_ntrab_vulner_15_24
+        description: Percentual de pessoas de 15 a 24 anos que não estudam nem trabalham e são vulneráveis à pobreza.
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_vulner_desloc_1_hora
+        description: Percentual de pessoas em domicílios vulneráveis à pobreza e que gastam mais de uma hora até o trabalho
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_dom_vulner_dep_idoso
+        description: Percentual de pessoas em domicílios vulneráveis à pobreza e dependentes de idosos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_sem_energia_eletrica
+        description: Percentual de pessoas em domicílios sem energia elétrica
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_0_4
+        description: População masculina de 0 a 4 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_10_14
+        description: População masculina de 10 a 14 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_15_19
+        description: População masculina de 15 a 19 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_20_24
+        description: População masculina de 20 a 24 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_25_29
+        description: População masculina de 25 a 29 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_30_34
+        description: População masculina de 30 a 34 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_35_39
+        description: População masculina de 35 a 39 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_40_44
+        description: População masculina de 40 a 44 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_45_49
+        description: População masculina de 45 a 49 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_50_54
+        description: População masculina de 50 a 54 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_55_59
+        description: População masculina de 55 a 59 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_5_9
+        description: População masculina de 5 a 9 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_60_64
+        description: População masculina de 60 a 64 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_65_69
+        description: População masculina de 65 a 69 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_70_74
+        description: População masculina de 70 a 74 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_75_79
+        description: População masculina de 75 a 79 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens
+        description: População residente masculina
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_homens_80_mais
+        description: População masculina com 80 anos e mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_0_4
+        description: População feminina de 0 a 4 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_10_14
+        description: População feminina de 10 a 14 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_15_19
+        description: População feminina de 15 a 19 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_20_24
+        description: População feminina de 20 a 24 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_25_29
+        description: População feminina de 25 a 29 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_30_34
+        description: População feminina de 30 a 34 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_35_39
+        description: População feminina de 35 a 39 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_40_44
+        description: População feminina de 40 a 44 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_45_49
+        description: População feminina de 45 a 49 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_50_54
+        description: População feminina de 50 a 54 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_55_59
+        description: População feminina de 55 a 59 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_5_9
+        description: População feminina de 5 a 9 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_60_64
+        description: População feminina de 60 a 64 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_65_69
+        description: População feminina de 65 a 69 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_70_74
+        description: População feminina de 70 a 74 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_75_79
+        description: População feminina de 75 a 79 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres_80_mais
+        description: População feminina com 80 anos e mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_mulheres
+        description: População residente feminina
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_1_menos
+        description: População de até 1 ano de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_11_14
+        description: População de 11 a 14 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_11_13
+        description: População de 11 a 13 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_12_14
+        description: População de 12 a 14 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_1_3
+        description: População de 1 a 3 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_15_mais
+        description: População de 15 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_15_17
+        description: População de 15 a 17 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_15_24
+        description: População de 15 a 24 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_16_18
+        description: População de 16 a 18 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_18_mais
+        description: População de 18 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_18_20
+        description: População de 18 a 20 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_18_24
+        description: População de 18 a 24 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_19_21
+        description: População de 19 a 21 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_25_mais
+        description: População de 25 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_4
+        description: População de 4 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_5
+        description: População de 5 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_6
+        description: População de 6 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_6_10
+        description: População de 6 a 10 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_6_17
+        description: População de 6 a 17 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_65_mais
+        description: População de 65 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao
+        description: População
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_urbana
+        description: População urbana
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_rural
+        description: População rural
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_dom_pp
+        description: População total que reside em domicílios particulares permanentes
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: populacao_dom_pp_exc_renda_nula
+        description: População total que reside em domicílios particulares permanentes, exceto os com renda nula
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: pea
+        description: População economicamente ativa de 10 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: pea_10_14
+        description: População economicamente ativa de 10 a 14 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: pea_15_17
+        description: População economicamente ativa de 15 a 17 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: pea_18_mais
+        description: População economicamente ativa de 18 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: pia
+        description: População de 10 anos ou mais de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: pia_10_14
+        description: População de 10  a 14 anos de idade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: pia_15_17
+        description: População em idade ativa 15 a 17 anos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: pia_18_mais
+        description: População de 18 anos ou mais em idade ativa
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: indice_escolaridade
+        description: Subíndice de escolaridade fundamental da população adulta - IDHM Educação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: indice_frequencia_escolar
+        description: Subíndice de frequência escolar da população jovem - IDHM Educação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: idhm
+        description: Índice de Desenvolvimento Humano Municipal
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: idhm_e
+        description: Índice de Desenvolvimento Humano Municipal - Dimensão Educação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: idhm_l
+        description: Índice de Desenvolvimento Humano Municipal  - Dimensão Longevidade
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: idhm_r
+        description: Índice de Desenvolvimento Humano Municipal - Dimensão Renda
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.

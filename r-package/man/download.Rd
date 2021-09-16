@@ -4,16 +4,27 @@
 \alias{download}
 \title{Write the results of a query locally to a comma-separated file.}
 \usage{
-download(query, path, billing_project_id = get_billing_id(), page_size = 1000)
+download(
+  query = NULL,
+  table = NULL,
+  path,
+  billing_project_id = get_billing_id(),
+  page_size = 1e+05,
+  .na = " "
+)
 }
 \arguments{
 \item{query}{a string containing a valid SQL query.}
+
+\item{table}{defaults to \code{NULL}. If a table name is provided then it'll be concatenated with "basedosdados." and the whole table will be returned.}
 
 \item{path}{String with the output file's name. If running an R Project relative location can be provided. Passed to \code{readr::write_csv}'s \code{file} argument.}
 
 \item{billing_project_id}{a string containing your billing project id. If you've run \code{set_billing_id} then feel free to leave this empty.}
 
 \item{page_size}{\code{bigrquery} internal, how many rows per page should there be.}
+
+\item{.na}{how should missing values be written in the resulting file? Value passed to \code{na} argument of \code{readr::write_csv}. Defaults to a whitespace.}
 }
 \value{
 Invisibly returns the query's output in a tibble. Intended to be used for side-effects. If you simply want to load a query's result in memory, use \code{read_sql}.
@@ -28,18 +39,18 @@ Currently there's only support for UTF-8 encoding. Users requiring more control 
 
 \dontrun{
 
-dir <- tempdir()
+path <- file.path(tempdir(), "pib_per_capita.csv")
 
-query <- "SELECT
-pib.id_municipio,
-pop.ano,
-pib.PIB / pop.populacao * 1000 as pib_per_capita
-FROM `basedosdados.br_ibge_pib.municipios` as pib
-JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-ON pib.id_municipio = pop.id_municipio
-LIMIT 5 "
+bare_query <- "SELECT *
+FROM basedosdados.br_tse_eleicoes.bens_candidato
+WHERE ano = 2020
+AND sigla_uf = \'TO\'"
 
-data <- download(query, file.path(dir, "pib_per_capita.csv"))
+download(query = bare_query, path = path)
+
+# or download the entire table
+download(table = "br_tse_eleicoes.bens_candidato", path = path)
+
 }
 
 

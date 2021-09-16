@@ -1,0 +1,44 @@
+Dicionário para a base da Avaliação Nacional de Alfabetização (ANA).
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-ana
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ana
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ana/code
+Email: lucas.moreira@basedosdados.orgTratado por
+-----------
+Nome: <nome>
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- chave
+
+Colunas identificando linhas unicamente
+-------------------
+- id_tabela
+- coluna
+- chave
+- cobertura_temporal
+
+Cobertura Temporal
+------------------
+
+Cobertura Espacial
+------------------
+
+Tratamento
+----------
+Coletei informações de dicionários dos microdados disponibilizados pelo INEP
+
+Frequencia de Atualização
+-------------------------
+unico
+
+

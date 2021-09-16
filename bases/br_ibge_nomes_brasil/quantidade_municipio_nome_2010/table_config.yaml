@@ -1,5 +1,10 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: quantidade_municipio_nome_2010 # AUTO GENERATED
 dataset_id: br_ibge_nomes_brasil # AUTO GENERATED
+
+version: v2.0 # REQUIRED
 
 last_updated: 2020-10-21 # AUTO GENERATED
 
@@ -10,17 +15,17 @@ last_updated: 2020-10-21 # AUTO GENERATED
 description: |  # REQUIRED
     Dados de quantidade de pessoas nascidas até 31 de julho de 2010 por município-nome.
 
+# Quem está completando esse arquivo config?
+published_by:
+    name: Ricardo Dahis
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_nomes_brasil/code # REQUIRED
+    website: www.ricardodahis.com
+    email: rdahis@basedosdados.org
+
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <nome>  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_nomes_brasil/code # REQUIRED
-    website: <onde encontrar os dados tratados>
-    email: <email>
-
-# Quem está completando esse arquivo config?
-published_by:
     name: Ricardo Dahis
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_nomes_brasil/code # REQUIRED
     website: www.ricardodahis.com
@@ -41,6 +46,14 @@ data_update_frequency: 10 anos
 observation_level:
     - municipio
     - nome
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_municipio
+    - nome
+
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -88,7 +101,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: qtde_nascimentos_ate_2010
+        name: quantidade_nascimentos_ate_2010
         description: Quantidade de Nascimentos Até 31 de Julho de 2010
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

@@ -1,5 +1,13 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
 table_id: cobertura_estado_bioma_classe # AUTO GENERATED
 dataset_id: br_mapbiomas_estatisticas # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-mapbiomas-estatisticas # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_map_biomas_estatisticas # AUTO GENERATED
+
+version: v1.0 # REQUIRED
 
 last_updated: 2020-10-19 # AUTO GENERATED
 
@@ -42,6 +50,15 @@ observation_level:
     - estado
     - bioma
     - classe
+    - ano
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - sigla_uf
+    - bioma
+    - id_classe
     - ano
 
 # Qual é a cobertura espacial da tabela?
@@ -113,8 +130,8 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: estado_abrev
-        description: Estado Abreviado
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

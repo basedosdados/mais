@@ -21,8 +21,8 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_ibge_ppm.producao_origem_animal AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(tipo_produto AS STRING) tipo_produto,
 SAFE_CAST(producao AS INT64) producao,
 SAFE_CAST(valor_producao AS INT64) valor_producao,

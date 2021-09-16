@@ -23,7 +23,7 @@ CREATE VIEW basedosdados-dev.br_sp_alesp.despesas_gabinete AS
 SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(matricula AS INT64) matricula,
+SAFE_CAST(matricula AS STRING) matricula,
 SAFE_CAST(nome_deputado AS STRING) nome_deputado,
 SAFE_CAST(cpf_cnpj AS STRING) cpf_cnpj,
 SAFE_CAST(fornecedor AS STRING) fornecedor,

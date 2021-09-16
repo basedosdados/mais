@@ -28,16 +28,11 @@ Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - escola
 - ano
-- localizacao
-- rede
 
 Colunas identificando linhas unicamente
 -------------------
-- id_municipio
 - id_escola
 - ano
-- rede
-- localizacao
 
 Cobertura Temporal
 ------------------

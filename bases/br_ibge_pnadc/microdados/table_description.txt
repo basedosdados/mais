@@ -2,6 +2,8 @@ Microdados da PNAD Contínua.
 
 Arquivos auxiliares, como dicionários e detalhes dos dados, estão disponíveis em https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_pnadc.zip.
 
+Tutorial sobre processamento dos microdados com o pacote "PNADcIBGE" no R em: https://rpubs.com/BragaDouglas/335574.
+
 
 Para saber mais acesse:
 Website: https://basedosdados.org/dataset/br-ibge-pnadc

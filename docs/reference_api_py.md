@@ -1,3 +1,4 @@
+
 # Python
 
 Esta API é composta por funções com 2 tipos de funcionalidade:

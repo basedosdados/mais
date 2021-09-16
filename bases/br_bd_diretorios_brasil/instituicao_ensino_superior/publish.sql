@@ -18,11 +18,10 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 
 */
-
 CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.instituicao_ensino_superior AS
 SELECT 
 SAFE_CAST(id_ies AS STRING) id_ies,
-SAFE_CAST(nome_ies AS STRING) nome_ies,
+SAFE_CAST(nome AS STRING) nome,
 SAFE_CAST(tipo_instituicao AS STRING) tipo_instituicao,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(situacao_funcionamento AS STRING) situacao_funcionamento,
