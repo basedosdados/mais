@@ -407,7 +407,11 @@ SELECT
 FROM `basedosdados.br_bd_diretorios_brasil.municipio` 
 """
 
-municipios = bd.read_sql(query, billing_project_id="basedosdados-dev")
+municipios = bd.read_sql(
+    query,
+    billing_project_id="basedosdados-dev",
+    from_file=True,
+)
 print("\n")
 
 if __name__ == "__main__":

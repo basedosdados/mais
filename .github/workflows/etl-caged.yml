@@ -36,6 +36,8 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install basedosdados toml
+      - name: Install etl dependencies
+        run: |          
           cd bases/br_me_caged/code/caged_novo/
           pip install -r requirements_caged_novo.txt   
       - name: Set up gcloud
@@ -52,12 +54,8 @@ jobs:
           BUCKET_NAME: basedosdados
           PROJECT_NAME_PROD: basedosdados
           PROJECT_NAME_STAGING: basedosdados-staging
-          GCP_BD_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
-          GCP_BD_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
+          GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
+          GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
       - name: Run ETL-CAGED
         run: python bases/br_me_caged/code/caged_novo/caged_novo.py
         shell: bash
-        env:
-          PROJECT_ID: ${{ secrets.GCP_MAIN_PROJECT_ID }}
-          BUCKET_NAME_BACKUP: basedosdados-backup
-          BUCKET_NAME_DESTINATION: basedosdados
