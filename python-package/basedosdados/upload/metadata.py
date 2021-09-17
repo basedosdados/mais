@@ -5,6 +5,7 @@ import os
 
 import requests
 import ruamel.yaml as ryaml
+from ruamel.yaml.compat import ordereddict
 
 from ckanapi import RemoteCKAN
 from ckanapi.errors import ValidationError, NotAuthorized
@@ -437,6 +438,9 @@ def builds_yaml_object(
                     yaml_obj = handle_complex_fields(
                         yaml_obj, k, properties, definitions, data
                     )
+
+                    if yaml_obj[k] == ordereddict():
+                        yaml_obj[k] = handle_data(k, properties, data)
 
                 else:
                     yaml_obj[k] = handle_data(k, properties, data)
