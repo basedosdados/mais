@@ -49,6 +49,8 @@ month_name_dict = {
 
 
 def get_ftp(url_path):
+    # source = ("1.33.213.199", 0)
+    # discover how to use a proxy to acess the ftp --> source_address
     ftp = FTP("ftp.mtps.gov.br")
     ftp.login()
     ftp.encoding = "latin1"
@@ -396,7 +398,7 @@ def upload_to_bd(tipo, filepath):
 ################################################################
 # GET MUNICIPIOS FROM BD
 ################################################################
-print("Getting municipios from bd")
+print("====== ", today, " ======")
 query = """
 SELECT 
     sigla_uf,
