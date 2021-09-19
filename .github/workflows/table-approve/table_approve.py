@@ -217,7 +217,7 @@ def push_table_to_bq(
     """
     df = bd.read_sql(query, billing_project_id="basedosdados-dev", from_file=True)
     df.to_csv("header.csv", index=False, encoding="utf=8")
-    st = bd.Storage(dataset_id=dataset_id, table_id=dataset_id)
+    st = bd.Storage(dataset_id=dataset_id, table_id=table_id)
     st.upload("header.csv", mode="header", if_exists="replace")
 
 
