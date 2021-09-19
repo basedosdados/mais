@@ -211,6 +211,15 @@ def push_table_to_bq(
     # updates the dataset description
     Dataset(dataset_id).update("prod")
 
+    ### save table header in storage
+    query = f"""
+    SELECT * FROM `basedosdados.{dataset_id}.{table_id}` LIMIT 5
+    """
+    df = bd.read_sql(query, billing_project_id="basedosdados-dev", from_file=True)
+    df.to_csv("header.csv", index=False, encoding="utf=8")
+    st = bd.Storage(dataset_id=dataset_id, table_id=dataset_id)
+    st.upload("header.csv", mode="header")
+
 
 def pretty_log(dataset_id, table_id, source_bucket_name):
     source_len = len(source_bucket_name)
