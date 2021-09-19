@@ -190,11 +190,10 @@ class Table(Base):
         )
 
     def _make_template(self, columns, partition_columns, if_table_config_exists):
-
         # create table_config.yaml with metadata
         Metadata(self.dataset_id, self.table_id).create(
             if_exists=if_table_config_exists,
-            columns=columns,
+            columns=partition_columns + columns,
             partition_columns=partition_columns,
         )
 
@@ -262,11 +261,14 @@ class Table(Base):
                 "The sheet must contain the column name: 'coluna' and column description: 'descricao'"
             )
 
-        columns_parameters = zip(df["coluna"].tolist(), df["descricao"].tolist())
-        for name, description in columns_parameters:
+        columns_parameters = zip(
+            df["coluna"].tolist(), df["descricao"].tolist(), df["tipo"].tolist()
+        )
+        for name, description, tipo in columns_parameters:
             for col in table_config_yaml["columns"]:
                 if col["name"] == name:
                     col["description"] = description
+                    col["bigquery_type"] = tipo
         ruamel.dump(table_config_yaml, stream=self.table_folder / "table_config.yaml")
 
     def init(

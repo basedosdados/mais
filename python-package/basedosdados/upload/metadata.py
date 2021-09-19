@@ -71,7 +71,7 @@ class Metadata(Base):
         if dataset_args:
             dataset_args = dataset_args[0]["value"]
             dataset_config.update(dataset_args)
-        
+
         if self.table_id is not None:
             return [
                 r for r in dataset_config["resources"] if r["name"] == self.table_id
@@ -97,7 +97,7 @@ class Metadata(Base):
             )
             bdm_ckan_table_metadata = requests.get(endpoint_url).json()["result"]
 
-        else: 
+        else:
             bdm_ckan_table_metadata = None
 
         return bdm_ckan_dataset_metadata, bdm_ckan_table_metadata
@@ -115,7 +115,7 @@ class Metadata(Base):
             dict
         """
 
-        bdm_ckan_dataset_metadata, bdm_ckan_table_metadata = self.ckan_raw_metadata    
+        bdm_ckan_dataset_metadata, bdm_ckan_table_metadata = self.ckan_raw_metadata
 
         if self.table_id:
 
@@ -135,9 +135,9 @@ class Metadata(Base):
                         "version": self.local_config["version"],
                         "table_id": self.local_config["table_id"],
                         "spatial_coverage": self.local_config["spatial_coverage"],
-                        "metadata_modified": self.local_config["metadata_modified"]
+                        "metadata_modified": self.local_config["metadata_modified"],
                     }
-                ]
+                ],
             }
 
         else:
@@ -151,19 +151,15 @@ class Metadata(Base):
                 "private": bdm_ckan_dataset_metadata["private"],
                 "owner_org": bdm_ckan_dataset_metadata["owner_org"],
                 "resources": bdm_ckan_dataset_metadata["resources"],
-                "groups": [
-                    {"name": group} for group in self.local_config["groups"]
-                ],
+                "groups": [{"name": group} for group in self.local_config["groups"]],
                 "organization": [
                     {"name": org} for org in self.local_config["organization"]
                 ],
-                "tags": [
-                    {"name": tag} for tag in self.local_config["tags"]
-                ]
+                "tags": [{"name": tag} for tag in self.local_config["tags"]],
             }
 
         return data
-    
+
     @property
     @lru_cache(256)
     def columns_schema(self) -> dict:
@@ -236,9 +232,9 @@ class Metadata(Base):
 
             # adds local columns if 1. columns is empty and 2. force_columns is True
 
-            if ((not data.get("columns")) \
-                or force_columns == True) \
-                and self.table_id is not None:
+            if (
+                (not data.get("columns")) or force_columns == True
+            ) and self.table_id is not None:
                 data["columns"] = [{"name": c} for c in columns]
 
             yaml_obj = builds_yaml_object(
@@ -247,7 +243,7 @@ class Metadata(Base):
                 self.metadata_schema,
                 data,
                 columns_schema=self.columns_schema,
-                partition_columns=partition_columns
+                partition_columns=partition_columns,
             )
             self.obj_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -259,7 +255,7 @@ class Metadata(Base):
         return self
 
     def validate(self):
-        """Validate dataset_config.yaml or table_config.yaml files. 
+        """Validate dataset_config.yaml or table_config.yaml files.
         The yaml file should be located at metadata_path/dataset_id[/table_id/
         ], as defined in your config.toml
 
@@ -272,25 +268,21 @@ class Metadata(Base):
                 when the file has validation errors.
         """
         error_dict = {}
-        
-        bdm_ckan = RemoteCKAN(
-            CKAN_URL, user_agent="", apikey=None
-        )
 
-        response = bdm_ckan.action.bd_dataset_validate(
-            **self.ckan_data_dict
-        )
+        bdm_ckan = RemoteCKAN(CKAN_URL, user_agent="", apikey=None)
 
-        if response['errors']:
-            error_dict[self.ckan_config["name"]] = response['errors']
+        response = bdm_ckan.action.bd_dataset_validate(**self.ckan_data_dict)
+
+        if response["errors"]:
+            error_dict[self.ckan_config["name"]] = response["errors"]
             raise BaseDosDadosException(
                 f"{self.obj_path} has validation errors: {error_dict}"
             )
-        
+
         return True
-    
+
     def publish(self):
-        """Publish local metadata modifications. `Metadata.validate` is used 
+        """Publish local metadata modifications. `Metadata.validate` is used
         to make sure no local invalid metadata is published to CKAN. The env
         ironment variable `CKAN_API_KEY` must be set for this method to work
         .
@@ -306,11 +298,7 @@ class Metadata(Base):
                 s.
         """
 
-        bdm_ckan = RemoteCKAN(
-            CKAN_URL,
-            user_agent="",
-            apikey=CKAN_API_KEY
-        )
+        bdm_ckan = RemoteCKAN(CKAN_URL, user_agent="", apikey=CKAN_API_KEY)
 
         try:
             self.validate()
@@ -326,30 +314,28 @@ class Metadata(Base):
                 data_dict = data_dict["resources"][0]
 
                 response = bdm_ckan.call_action(
-                    action="resource_patch",
-                    data_dict=data_dict
+                    action="resource_patch", data_dict=data_dict
                 )
 
-                return response                
+                return response
 
             else:
                 response = bdm_ckan.call_action(
-                    action="package_patch",
-                    data_dict=self.ckan_data_dict
+                    action="package_patch", data_dict=self.ckan_data_dict
                 )
 
                 return response
 
         except (BaseDosDadosException, ValidationError) as e:
-            msg=(
+            msg = (
                 f"Could not publish metadata due to a validation error. Pleas"
                 f"e see the traceback below to get information on how to corr"
                 f"ect it.\n\n{repr(e)}"
             )
             raise BaseDosDadosException(msg)
-        
+
         except NotAuthorized as e:
-            msg=(
+            msg = (
                 f"Could not publish metadata due to an authorization error. P"
                 f"lease check if you set the `CKAN_API_KEY` environment varia"
                 f"ble correctly. You must be an authorized user to publish mo"
@@ -402,9 +388,8 @@ def builds_yaml_object(
     schema,
     data=dict(),
     columns_schema=dict(),
-    partition_columns=list()
-    ):
-
+    partition_columns=list(),
+):
     def comment_treatment(c):
         if COLUMNS:
             return None
@@ -478,24 +463,22 @@ def builds_yaml_object(
         for data in data.get("columns"):
             prop = deepcopy(properties)
             yaml_obj["columns"].append(_add_property(ryaml.CommentedMap(), prop))
-        
+
     # in case of new dataset/table or local overwriting
     partitions_writer_condition = (
-        partition_columns != ['[]'] and
-        partition_columns != [] and
-        partition_columns is not None
+        partition_columns != ["[]"]
+        and partition_columns != []
+        and partition_columns is not None
     )
 
     if partitions_writer_condition == True:
-        yaml_obj["partitions"] = ""
-
         for local_column in partition_columns:
             for remote_column in yaml_obj["columns"]:
                 if remote_column["name"] == local_column:
                     remote_column["is_partition"] = True
-            
-        yaml_obj["partitions"] = ", ".join(partition_columns)
-    
+
+        yaml_obj["partitions"] = partition_columns
+
     yaml_obj["dataset_id"] = dataset_id
     if table_id:
         yaml_obj["table_id"] = table_id

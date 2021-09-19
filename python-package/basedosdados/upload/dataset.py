@@ -33,7 +33,7 @@ class Dataset(Base):
         return (
             {
                 "client": self.client[f"bigquery_{m}"],
-                "id": f"{self.client[f'bigquery_{m}'].project}.{self.dataset_config['dataset_id']}{dataset_tag(m)}",
+                "id": f"{self.client[f'bigquery_{m}'].project}.{self.dataset_id}{dataset_tag(m)}",
             }
             for m in mode
         )
