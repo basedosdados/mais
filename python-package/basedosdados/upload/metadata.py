@@ -472,12 +472,13 @@ def builds_yaml_object(
     )
 
     if partitions_writer_condition == True:
+        yaml_obj["partitions"] = ""
         for local_column in partition_columns:
             for remote_column in yaml_obj["columns"]:
                 if remote_column["name"] == local_column:
                     remote_column["is_partition"] = True
 
-        yaml_obj["partitions"] = partition_columns
+        yaml_obj["partitions"] = ", ".join(partition_columns)
 
     yaml_obj["dataset_id"] = dataset_id
     if table_id:
