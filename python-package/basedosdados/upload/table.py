@@ -134,19 +134,71 @@ class Table(Base):
         # load new created schema
         return self.client[f"bigquery_{mode}"].schema_from_json(str(json_path))
 
-    def _make_template(
-        self,
-        columns,
-        partition_columns,
-        if_table_config_exists
-        ):
+    def _make_publish_sql(self):
+        """Create publish.sql with columns and bigquery_type"""
+
+        ### publish.sql header and instructions
+        publish_txt = """
+        /*
+        Query para publicar a tabela.
+
+        Esse é o lugar para:
+            - modificar nomes, ordem e tipos de colunas
+            - dar join com outras tabelas
+            - criar colunas extras (e.g. logs, proporções, etc.)
+
+        Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
+
+        # Além disso, sinta-se à vontade para alterar alguns nomes obscuros
+        # para algo um pouco mais explícito.
+
+        TIPOS:
+            - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
+            - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
+            - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
+        */
+
+        """
+
+        # add create table statement
+        project_id_prod = self.client["bigquery_prod"].project
+        publish_txt += f"CREATE VIEW {project_id_prod}.{self.dataset_id}.{self.table_id} AS\nSELECT \n"
+
+        # sort columns by is_partition, partitions_columns come first
+        columns = sorted(
+            self.table_config["columns"], key=lambda k: k["is_partition"], reverse=True
+        )
+
+        # add columns in publish.sql
+        for col in columns:
+            name = col["name"]
+            bigquery_type = (
+                "STRING" if col["bigquery_type"] is None else col["bigquery_type"]
+            )
+
+            publish_txt += f"SAFE_CAST({name} AS {bigquery_type}) {name}\n"
+
+        # add from statement
+        project_id_staging = self.client["bigquery_staging"].project
+        publish_txt += (
+            f"from {project_id_staging}.{self.dataset_id}_staging.{self.table_id} as t"
+        )
+
+        # save publish.sql in table_folder
+        (self.table_folder / "publish.sql").open("w", encoding="utf-8").write(
+            publish_txt
+        )
+
+    def _make_template(self, columns, partition_columns, if_table_config_exists):
 
         # create table_config.yaml with metadata
         Metadata(self.dataset_id, self.table_id).create(
             if_exists=if_table_config_exists,
             columns=columns,
-            partition_columns=partition_columns
+            partition_columns=partition_columns,
         )
+
+        self._make_publish_sql()
 
     def _sheet_to_df(self, columns_config_url):
         url = columns_config_url.replace("edit#gid=", "export?format=csv&gid=")
