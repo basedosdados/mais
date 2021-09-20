@@ -165,6 +165,14 @@ class Metadata(Base):
                     "state": self.local_config["organization"]["state"]
                 },
                 "tags": [{"name": tag} for tag in self.local_config["tags"]],
+                "extras":[
+                    {
+                        "key": "dataset_args",
+                        "value": {
+                            "dataset_id": self.local_config["dataset_id"],
+                        }
+                    }
+                ] 
             }
 
         return data
