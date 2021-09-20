@@ -386,7 +386,7 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
     d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
     if "properties" in definitions[d].keys():
         for dk, dv in definitions[d]["properties"].items():
-            yaml_obj[k][dk] = handle_data(dk, definitions[d]["properties"], data.get(k))
+            yaml_obj[k][dk] = handle_data(dk, definitions[d]["properties"], data)
 
     return yaml_obj
 
@@ -427,7 +427,7 @@ def builds_yaml_object(
                 k == goal
             ):
 
-                if "allOf" in properties[k] and (data.get(k) is not None):
+                if "allOf" in properties[k]:
 
                     yaml_obj = handle_complex_fields(
                         yaml_obj, k, properties, definitions, data
