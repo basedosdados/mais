@@ -152,9 +152,18 @@ class Metadata(Base):
                 "owner_org": bdm_ckan_dataset_metadata["owner_org"],
                 "resources": bdm_ckan_dataset_metadata["resources"],
                 "groups": [{"name": group} for group in self.local_config["groups"]],
-                "organization": [
-                    {"name": org} for org in self.local_config["organization"]
-                ],
+                "organization": {
+                    "id": self.local_config["organization"]["id"],
+                    "name": self.local_config["organization"]["name"],
+                    "title": self.local_config["organization"]["title"],
+                    "type": self.local_config["organization"]["type"],
+                    "description": self.local_config["organization"]["description"],
+                    "image_url": self.local_config["organization"]["image_url"],
+                    "created": self.local_config["organization"]["created"],
+                    "is_organization": self.local_config["organization"]["is_organization"],
+                    "approval_status": self.local_config["organization"]["approval_status"],
+                    "state": self.local_config["organization"]["state"]
+                },
                 "tags": [{"name": tag} for tag in self.local_config["tags"]],
             }
 
