@@ -277,6 +277,7 @@ class Table(Base):
                     col["description"] = description
                     col["bigquery_type"] = tipo
         ruamel.dump(table_config_yaml, stream=self.table_folder / "table_config.yaml")
+        self._make_publish_sql()
 
     def init(
         self,
