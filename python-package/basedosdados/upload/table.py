@@ -49,8 +49,8 @@ class Table(Base):
         return self.client[f"bigquery_{mode}"].get_table(self.table_full_name[mode])
 
     def _is_partitioned(self):
-        ## check if the table are partitioned
-        partitions = self.table_config["partitions"]
+        ## check if the table are partitioned, need the split because of a change in the type of partitions in pydantic
+        partitions = self.table_config["partitions"].split(",")
 
         if partitions is None:
             return False
