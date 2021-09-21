@@ -13,25 +13,19 @@ from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
 
 
-def get_ckan_config():
-    config = Base()._load_config()
-    ckan_config = config.get("ckan", {}).get("api_key")
-    ckan_url = config.get("ckan", {}).get("url")
-
-    if ckan_url is None or ckan_url == "":
-        ckan_url = "https://staging.basedosdados.org"
-
-    return ckan_config, ckan_url
-
-CKAN_API_KEY, CKAN_URL = get_ckan_config()
-
-
 class Metadata(Base):
     def __init__(self, dataset_id, table_id=None, **kwargs):
         super().__init__(**kwargs)
 
         self.dataset_id = dataset_id
         self.table_id = table_id
+
+        self.CKAN_URL = (
+            "https://staging.basedosdados.org"
+            if self.config["ckan"]["url"] is None or self.config["ckan"]["url"] == ""
+            else self.config["ckan"]["url"]
+        )
+        self.CKAN_API_KEY = self.config["ckan"]["api_key"]
 
     @property
     def obj_path(self):
@@ -57,7 +51,7 @@ class Metadata(Base):
     @lru_cache(256)
     def ckan_config(self) -> dict:
 
-        pkg_list = requests.get(CKAN_URL + "/api/3/action/package_list").json()[
+        pkg_list = requests.get(self.CKAN_URL + "/api/3/action/package_list").json()[
             "result"
         ]
 
@@ -69,7 +63,7 @@ class Metadata(Base):
             return defaultdict(lambda: dict())
 
         dataset_config = requests.get(
-            CKAN_URL + f"/api/3/action/package_show?id={dataset_id}"
+            self.CKAN_URL + f"/api/3/action/package_show?id={dataset_id}"
         ).json()["result"]
 
         # unpack extras
@@ -94,14 +88,14 @@ class Metadata(Base):
     def ckan_raw_metadata(self):
 
         endpoint_url = (
-            f"{CKAN_URL}/api/3/action/bd_bdm_dataset_show?dataset_id="
+            f"{self.CKAN_URL}/api/3/action/bd_bdm_dataset_show?dataset_id="
             f"{self.dataset_id}"
         )
         bdm_ckan_dataset_metadata = requests.get(endpoint_url).json()["result"]
 
         if self.table_id:
             endpoint_url = (
-                f"{CKAN_URL}/api/3/action/bd_bdm_table_show?dataset_i"
+                f"{self.CKAN_URL}/api/3/action/bd_bdm_table_show?dataset_i"
                 f"d={self.dataset_id}&table_id={self.table_id}"
             )
             bdm_ckan_table_metadata = requests.get(endpoint_url).json()["result"]
@@ -169,19 +163,23 @@ class Metadata(Base):
                     "description": self.local_config["organization"]["description"],
                     "image_url": self.local_config["organization"]["image_url"],
                     "created": self.local_config["organization"]["created"],
-                    "is_organization": self.local_config["organization"]["is_organization"],
-                    "approval_status": self.local_config["organization"]["approval_status"],
-                    "state": self.local_config["organization"]["state"]
+                    "is_organization": self.local_config["organization"][
+                        "is_organization"
+                    ],
+                    "approval_status": self.local_config["organization"][
+                        "approval_status"
+                    ],
+                    "state": self.local_config["organization"]["state"],
                 },
                 "tags": [{"name": tag} for tag in self.local_config["tags"]],
-                "extras":[
+                "extras": [
                     {
                         "key": "dataset_args",
                         "value": {
                             "dataset_id": self.local_config["dataset_id"],
-                        }
+                        },
                     }
-                ] 
+                ],
             }
 
         return data
@@ -194,9 +192,9 @@ class Metadata(Base):
         Returns:
         """
 
-        return requests.get(CKAN_URL + "/api/3/action/bd_bdm_columns_schema").json()[
-            "result"
-        ]
+        return requests.get(
+            self.CKAN_URL + "/api/3/action/bd_bdm_columns_schema"
+        ).json()["result"]
 
     @property
     @lru_cache(256)
@@ -207,10 +205,10 @@ class Metadata(Base):
         """
 
         dataset_schema = requests.get(
-            CKAN_URL + "/api/3/action/bd_dataset_schema"
+            self.CKAN_URL + "/api/3/action/bd_dataset_schema"
         ).json()["result"]
         table_schema = requests.get(
-            CKAN_URL + "/api/3/action/bd_bdm_table_schema"
+            self.CKAN_URL + "/api/3/action/bd_bdm_table_schema"
         ).json()["result"]
 
         if self.table_id is None:
@@ -222,11 +220,13 @@ class Metadata(Base):
 
         if self.table_id:
             exists_in_ckan = requests.get(
-                CKAN_URL + f"/api/3/action/bd_bdm_table_show?dataset_id={self.dataset_id}&table_id={self.table_id}"
+                self.CKAN_URL
+                + f"/api/3/action/bd_bdm_table_show?dataset_id={self.dataset_id}&table_id={self.table_id}"
             ).json()["success"]
         else:
             exists_in_ckan = requests.get(
-                CKAN_URL + f"/api/3/action/bd_bdm_dataset_show?dataset_id={self.dataset_id}"
+                self.CKAN_URL
+                + f"/api/3/action/bd_bdm_dataset_show?dataset_id={self.dataset_id}"
             ).json()["success"]
 
         if self.local_config.get("metadata_modified") is None and exists_in_ckan:
@@ -306,7 +306,7 @@ class Metadata(Base):
         """
         error_dict = {}
 
-        bdm_ckan = RemoteCKAN(CKAN_URL, user_agent="", apikey=None)
+        bdm_ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=None)
 
         response = bdm_ckan.action.bd_dataset_validate(**self.ckan_data_dict)
 
@@ -335,15 +335,15 @@ class Metadata(Base):
                 s.
         """
 
-        if CKAN_API_KEY is None or CKAN_API_KEY == "":
+        if self.CKAN_API_KEY is None or self.CKAN_API_KEY == "":
             raise BaseDosDadosException(
                 "You can't use `Metadata.publish` without setting an `api_key"
                 "` in your ~/.basedosdados/config.toml. Please set it like th"
-                "is: \n\n```\n[ckan]\nurl=\"<CKAN_URL>\"\napi_key=\"<API_KEY>"
-                "\"\n```"
+                'is: \n\n```\n[ckan]\nurl="<CKAN_URL>"\napi_key="<API_KEY>'
+                '"\n```'
             )
 
-        bdm_ckan = RemoteCKAN(CKAN_URL, user_agent="", apikey=CKAN_API_KEY)
+        bdm_ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=self.CKAN_API_KEY)
 
         try:
             self.validate()
