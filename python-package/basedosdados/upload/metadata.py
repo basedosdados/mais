@@ -424,7 +424,7 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
     d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
     if "properties" in definitions[d].keys():
         for dk, dv in definitions[d]["properties"].items():
-            yaml_obj[k][dk] = handle_data(dk, definitions[d]["properties"], data)
+            yaml_obj[k][dk] = handle_data(dk, definitions[d]["properties"], data.get(k, {}))
 
     return yaml_obj
 
