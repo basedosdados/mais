@@ -212,8 +212,19 @@ class Metadata(Base):
 
     def is_updated(self):
 
-        if self.local_config.get("metadata_modified") is None:
+        if self.table_id:
+            exists_in_ckan = requests.get(
+                CKAN_URL + f"/api/3/action/bd_bdm_table_show?dataset_id={self.dataset_id}&table_id={self.table_id}"
+            ).json()["success"]
+        else:
+            exists_in_ckan = requests.get(
+                CKAN_URL + f"/api/3/action/bd_bdm_dataset_show?dataset_id={self.dataset_id}"
+            ).json()["success"]
+
+        if self.local_config.get("metadata_modified") is None and exists_in_ckan:
             return False
+        elif self.local_config.get("metadata_modified") is None and not exists_in_ckan:
+            return True
         else:
             return self.ckan_config.get("metadata_modified") == self.local_config.get(
                 "metadata_modified"
