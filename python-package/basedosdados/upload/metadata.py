@@ -320,9 +320,9 @@ class Metadata(Base):
 
     def publish(self):
         """Publish local metadata modifications. `Metadata.validate` is used
-        to make sure no local invalid metadata is published to CKAN. The env
-        ironment variable `CKAN_API_KEY` must be set for this method to work
-        .
+        to make sure no local invalid metadata is published to CKAN. The `co
+        nfig.toml` `api_key` variable must be set at the `[ckan]` section fo
+        r this method to work.
 
         Returns:
             dict:
@@ -334,6 +334,14 @@ class Metadata(Base):
                 In case of CKAN's ValidationError or NotAuthorized exception
                 s.
         """
+
+        if CKAN_API_KEY is None or CKAN_API_KEY == "":
+            raise BaseDosDadosException(
+                "You can't use `Metadata.publish` without setting an `api_key"
+                "` in your ~/.basedosdados/config.toml. Please set it like th"
+                "is: \n\n```\n[ckan]\nurl=\"<CKAN_URL>\"\napi_key=\"<API_KEY>"
+                "\"\n```"
+            )
 
         bdm_ckan = RemoteCKAN(CKAN_URL, user_agent="", apikey=CKAN_API_KEY)
 
@@ -374,9 +382,10 @@ class Metadata(Base):
         except NotAuthorized as e:
             msg = (
                 f"Could not publish metadata due to an authorization error. P"
-                f"lease check if you set the `CKAN_API_KEY` environment varia"
-                f"ble correctly. You must be an authorized user to publish mo"
-                f"difications to a dataset or table."
+                f"lease check if you set the `api_key` at the `[ckan]` sectio"
+                f"n of your ~/.basedosdados/config.toml correctly. You must b"
+                f"e an authorized user to publish modifications to a dataset "
+                f"or table's metadata."
             )
             raise BaseDosDadosException(msg)
 
