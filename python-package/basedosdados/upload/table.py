@@ -5,6 +5,8 @@ import csv
 from copy import deepcopy
 from google.cloud import bigquery
 import datetime
+import textwrap
+import inspect
 
 import ruamel.yaml as ryaml
 import requests
@@ -47,8 +49,8 @@ class Table(Base):
         return self.client[f"bigquery_{mode}"].get_table(self.table_full_name[mode])
 
     def _is_partitioned(self):
-        ## check if the table are partitioned
-        partitions = self.table_config["partitions"]
+        ## check if the table are partitioned, need the split because of a change in the type of partitions in pydantic
+        partitions = self.table_config["partitions"].split(",")
 
         if partitions is None:
             return False
@@ -157,12 +159,15 @@ class Table(Base):
             - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
             - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
         */
-
         """
+
+        # remove triple quotes extra space
+        publish_txt = inspect.cleandoc(publish_txt)
+        publish_txt = textwrap.dedent(publish_txt)
 
         # add create table statement
         project_id_prod = self.client["bigquery_prod"].project
-        publish_txt += f"CREATE VIEW {project_id_prod}.{self.dataset_id}.{self.table_id} AS\nSELECT \n"
+        publish_txt += f"\n\nCREATE VIEW {project_id_prod}.{self.dataset_id}.{self.table_id} AS\nSELECT \n"
 
         # sort columns by is_partition, partitions_columns come first
         columns = sorted(
@@ -176,7 +181,9 @@ class Table(Base):
                 "STRING" if col["bigquery_type"] is None else col["bigquery_type"]
             )
 
-            publish_txt += f"SAFE_CAST({name} AS {bigquery_type}) {name}\n"
+            publish_txt += f"SAFE_CAST({name} AS {bigquery_type}) {name},\n"
+        ## remove last comma
+        publish_txt = publish_txt[:-2] + "\n"
 
         # add from statement
         project_id_staging = self.client["bigquery_staging"].project
@@ -225,7 +232,8 @@ class Table(Base):
             return False
 
     def update_columns(self, columns_config_url):
-        """Fills descriptions of tables automatically using a public google sheets URL.
+        """Fills descriptions and bigquery_type of tables automatically using a public google sheets URL. Also,
+        regenerate publish.sql from description and bigquery_type.
         The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
         The sheet must contain the column name: "coluna" and column description: "descricao"
         Args:
@@ -270,6 +278,7 @@ class Table(Base):
                     col["description"] = description
                     col["bigquery_type"] = tipo
         ruamel.dump(table_config_yaml, stream=self.table_folder / "table_config.yaml")
+        self._make_publish_sql()
 
     def init(
         self,
