@@ -20,12 +20,13 @@ class Metadata(Base):
         self.dataset_id = dataset_id
         self.table_id = table_id
 
+        self.CKAN_CONFIG = self.config.get("ckan", {})
         self.CKAN_URL = (
             "https://staging.basedosdados.org"
-            if self.config["ckan"]["url"] is None or self.config["ckan"]["url"] == ""
-            else self.config["ckan"]["url"]
+            if self.CKAN_CONFIG.get("url") is None or self.CKAN_CONFIG.get("url") == ""
+            else self.CKAN_CONFIG.get("url")
         )
-        self.CKAN_API_KEY = self.config["ckan"]["api_key"]
+        self.CKAN_API_KEY = self.config.get("ckan", {}).get("api_key")
 
     @property
     def obj_path(self):
