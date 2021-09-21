@@ -232,7 +232,8 @@ class Table(Base):
             return False
 
     def update_columns(self, columns_config_url):
-        """Fills descriptions of tables automatically using a public google sheets URL.
+        """Fills descriptions and bigquery_type of tables automatically using a public google sheets URL. Also,
+        regenerate publish.sql from description and bigquery_type.
         The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
         The sheet must contain the column name: "coluna" and column description: "descricao"
         Args:
