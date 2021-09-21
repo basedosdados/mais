@@ -12,9 +12,18 @@ from ckanapi.errors import ValidationError, NotAuthorized
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
 
-CONFIG = Base()._load_config()
-CKAN_API_KEY = CONFIG.get("ckan").get("ckan_api_key")
-CKAN_URL = CONFIG.get("ckan").get("ckan_url", "https://staging.basedosdados.org")
+
+def get_ckan_config():
+    config = Base()._load_config()
+    ckan_config = config.get("ckan", {}).get("api_key")
+    ckan_url = config.get("ckan", {}).get("url")
+
+    if ckan_url is None or ckan_url == "":
+        ckan_url = "https://staging.basedosdados.org"
+
+    return ckan_config, ckan_url
+
+CKAN_API_KEY, CKAN_URL = get_ckan_config()
 
 
 class Metadata(Base):
