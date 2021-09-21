@@ -595,7 +595,14 @@ class Table(Base):
                 self.table_full_name[mode], not_found_ok=True
             )
 
-    def append(self, filepath, partitions=None, if_exists="replace", chunk_size=None, **upload_args):
+    def append(
+        self,
+        filepath,
+        partitions=None,
+        if_exists="replace",
+        chunk_size=None,
+        **upload_args,
+    ):
         """Appends new data to existing BigQuery table.
 
         As long as the data has the same schema. It appends the data in the
