@@ -13,8 +13,9 @@ from ckanapi.errors import ValidationError, NotAuthorized
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
 
+
 CKAN_API_KEY = os.environ.get("CKAN_API_KEY")
-CKAN_URL = os.environ.get("CKAN_URL", "http://0.0.0.0:5000")
+CKAN_URL = os.environ.get("CKAN_URL", "https://staging.basedosdados.org")
 
 
 class Metadata(Base):
