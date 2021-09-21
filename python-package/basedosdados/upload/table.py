@@ -595,7 +595,7 @@ class Table(Base):
                 self.table_full_name[mode], not_found_ok=True
             )
 
-    def append(self, filepath, partitions=None, if_exists="replace", **upload_args):
+    def append(self, filepath, partitions=None, if_exists="replace", chunk_size=None, **upload_args):
         """Appends new data to existing BigQuery table.
 
         As long as the data has the same schema. It appends the data in the
@@ -614,6 +614,10 @@ class Table(Base):
                 * 'raise' : Raises Conflict exception
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
+
+            chunk_size (int): Optional.
+                Tells GCS Blob object the size of the chunks to use when
+                uploading. If not set, chunk size won't be set.
         """
         if not self.table_exists("staging"):
             raise BaseDosDadosException(
@@ -625,5 +629,6 @@ class Table(Base):
                 mode="staging",
                 partitions=partitions,
                 if_exists=if_exists,
+                chunk_size=chunk_size,
                 **upload_args,
             )
