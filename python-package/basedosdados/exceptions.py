@@ -4,6 +4,7 @@ class BaseDosDadosException(Exception):
 
 class BaseDosDadosAccessDeniedException(BaseDosDadosException):
     """Exception raised if the user provides a wrong GCP project ID."""
+
     def __init__(self):
         self.message = (
             "\nAre you sure you are using the right `billing_project_id`?"
@@ -26,6 +27,7 @@ class BaseDosDadosAccessDeniedException(BaseDosDadosException):
 
 class BaseDosDadosInvalidProjectIDException(BaseDosDadosException):
     """Exception raised if the user provides an invalid GCP project ID."""
+
     def __init__(self):
         self.message = (
             "\nYou are using an invalid `billing_project_id`.\nMake sure "
@@ -37,6 +39,7 @@ class BaseDosDadosInvalidProjectIDException(BaseDosDadosException):
 
 class BaseDosDadosNoBillingProjectIDException(BaseDosDadosException):
     """Exception raised if the user provides no GCP billing project ID."""
+
     def __init__(self):
         self.message = (
             "\nWe are not sure which Google Cloud project should be billed.\n"
@@ -61,6 +64,7 @@ class BaseDosDadosNoBillingProjectIDException(BaseDosDadosException):
 class BaseDosDadosAuthorizationException(BaseDosDadosException):
     """Exception raised if the user doesn't complete the authorization
     process correctly."""
+
     def __init__(self):
         self.message = (
             "\nAre you sure you did the authorization process correctly?\n"

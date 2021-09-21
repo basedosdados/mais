@@ -1,23 +1,21 @@
-from jinja2 import Template
-from pathlib import Path, PosixPath
-import json
 import csv
-from copy import deepcopy
-from google.cloud import bigquery
 import datetime
-
-import ruamel.yaml as ryaml
-import requests
+import json
+from copy import deepcopy
 from io import StringIO
-import pandas as pd
+from pathlib import Path, PosixPath
 
 import google.api_core.exceptions
-
+import pandas as pd
+import requests
+import ruamel.yaml as ryaml
+from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.base import Base
-from basedosdados.upload.storage import Storage
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
-from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.upload.storage import Storage
+from google.cloud import bigquery
+from jinja2 import Template
 
 
 class Table(Base):
