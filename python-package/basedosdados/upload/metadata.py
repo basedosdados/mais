@@ -1,7 +1,6 @@
 from copy import deepcopy
 from functools import lru_cache
 from collections import defaultdict
-import os
 
 import requests
 import ruamel.yaml as ryaml
@@ -13,9 +12,9 @@ from ckanapi.errors import ValidationError, NotAuthorized
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
 
-
-CKAN_API_KEY = os.environ.get("CKAN_API_KEY")
-CKAN_URL = os.environ.get("CKAN_URL", "https://staging.basedosdados.org")
+CONFIG = Base()._load_config()
+CKAN_API_KEY = CONFIG.get("ckan").get("ckan_api_key")
+CKAN_URL = CONFIG.get("ckan").get("ckan_url", "https://staging.basedosdados.org")
 
 
 class Metadata(Base):
