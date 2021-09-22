@@ -13,7 +13,7 @@ packages = [
 ]
 readme = "README.md"
 repository = "https://github.com/base-dos-dados/bases"
-version = "1.6.0-alpha.0"
+version = "1.6.0-alpha.4"
 
 [tool.poetry.scripts]
 basedosdados = 'basedosdados.cli.cli:cli'
@@ -30,7 +30,9 @@ python = ">=3.7.1"
 tomlkit = "0.7.0"
 tqdm = "4.50.2"
 pandas= "1.2.4"
+ckanapi = "4.6"
 'ruamel.yaml'= "0.17.10"
+
 
 [tool.poetry.dev-dependencies]
 Jinja2 = "2.11.2"
@@ -46,6 +48,7 @@ pytest = "6.0.2"
 tomlkit = "0.7.0"
 tqdm = "4.50.2"
 pandas= "1.2.4"
+ckanapi = "4.6"
 'ruamel.yaml'= "0.17.10"
 
 [tool.black]
