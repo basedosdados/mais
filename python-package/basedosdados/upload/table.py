@@ -98,7 +98,7 @@ class Table(Base):
 
             # raise if field is not in table_config
             if not_in_columns:
-                raise Exception(
+                raise BaseDosDadosException(
                     "Column {error_columns} was not found in table_config.yaml. Are you sure that "
                     "all your column names between table_config.yaml, publish.sql and "
                     "{project_id}.{dataset_id}.{table_id} are the same?".format(
@@ -111,7 +111,7 @@ class Table(Base):
 
             # raise if field is not in schema
             elif not_in_schema:
-                raise Exception(
+                raise BaseDosDadosException(
                     "Column {error_columns} was not found in publish.sql. Are you sure that "
                     "all your column names between table_config.yaml, publish.sql and "
                     "{project_id}.{dataset_id}.{table_id} are the same?".format(
@@ -188,7 +188,7 @@ class Table(Base):
         # add from statement
         project_id_staging = self.client["bigquery_staging"].project
         publish_txt += (
-            f"from {project_id_staging}.{self.dataset_id}_staging.{self.table_id} as t"
+            f"FROM {project_id_staging}.{self.dataset_id}_staging.{self.table_id} AS t"
         )
 
         # save publish.sql in table_folder
@@ -211,9 +211,137 @@ class Table(Base):
         try:
             return pd.read_csv(StringIO(requests.get(url).content.decode("utf-8")))
         except:
-            raise Exception(
+            raise BaseDosDadosException(
                 "Check if your google sheet Share are: Anyone on the internet with this link can view"
             )
+
+    def update_columns(self, columns_config_url):  # sourcery no-metrics
+        """Fills columns in table_config.yaml automatically using a public google sheets URL. Also regenerate publish.sql
+        and autofill type using bigquery_type.
+        The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
+        The sheet must contain the columns:
+            - columna: column name
+            - descricao: column description
+            - tipo: column bigquery type
+            - unidade_medida: column mesurement unit
+            - dicionario: column related dictionary
+            - nome_diretorio: column related directory in the format <dataset_id>.<table_id>:<column_name>
+        Args:
+            columns_config_url (str): google sheets URL.
+        """
+        ruamel = ryaml.YAML()
+        ruamel.preserve_quotes = True
+        ruamel.indent(mapping=4, sequence=6, offset=4)
+        table_config_yaml = ruamel.load(
+            (self.table_folder / "table_config.yaml").open()
+        )
+        if (
+            "edit#gid=" not in columns_config_url
+            or "https://docs.google.com/spreadsheets/d/" not in columns_config_url
+            or not columns_config_url.split("=")[1].isdigit()
+        ):
+            raise BaseDosDadosException(
+                "The Google sheet url not in correct format."
+                "The url must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>"
+            )
+
+        df = self._sheet_to_df(columns_config_url)
+        df = df.fillna("NULL")
+
+        if "coluna" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'coluna' not found in Google the google sheet. "
+                "The sheet must contain the column name: 'coluna'"
+            )
+        elif "descricao" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'descricao' not found in Google the google sheet. "
+                "The sheet must contain the column description: 'descricao'"
+            )
+        elif "tipo" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'tipo' not found in Google the google sheet. "
+                "The sheet must contain the column type: 'tipo'"
+            )
+        elif "unidade_medida" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'unidade_medida' not found in Google the google sheet. "
+                "The sheet must contain the column measurement unit: 'unidade_medida'"
+            )
+        elif "dicionario" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'dicionario' not found in Google the google sheet. "
+                "The sheet must contain the column dictionary: 'dicionario'"
+            )
+        elif "nome_diretorio" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'nome_diretorio' not found in Google the google sheet. "
+                "The sheet must contain the column dictionary name: 'nome_diretorio'"
+            )
+
+        columns_parameters = zip(
+            df["coluna"].tolist(),
+            df["descricao"].tolist(),
+            df["tipo"].tolist(),
+            df["unidade_medida"].tolist(),
+            df["dicionario"].tolist(),
+            df["nome_diretorio"].tolist(),
+        )
+
+        for (
+            name,
+            description,
+            tipo,
+            unidade_medida,
+            dicionario,
+            nome_diretorio,
+        ) in columns_parameters:
+            for col in table_config_yaml["columns"]:
+                if col["name"] == name:
+
+                    col["description"] = (
+                        col["description"] if description == "NULL" else description
+                    )
+
+                    col["bigquery_type"] = (
+                        col["bigquery_type"] if tipo == "NULL" else tipo
+                    )
+
+                    col["measurement_unit"] = (
+                        col["measurement_unit"]
+                        if unidade_medida == "NULL"
+                        else unidade_medida
+                    )
+
+                    col["covered_by_dictionary"] = (
+                        "no" if dicionario == "NULL" else "yes"
+                    )
+
+                    dataset = nome_diretorio.split(".")[0]
+                    col["directory_column"]["dataset_id"] = (
+                        col["directory_column"]["dataset_id"]
+                        if dataset == "NULL"
+                        else dataset
+                    )
+
+                    table = nome_diretorio.split(".")[-1].split(":")[0]
+                    col["directory_column"]["table_id"] = (
+                        col["directory_column"]["table_id"]
+                        if table == "NULL"
+                        else table
+                    )
+
+                    column = nome_diretorio.split(".")[-1].split(":")[-1]
+                    col["directory_column"]["column_name"] = (
+                        col["directory_column"]["column_name"]
+                        if column == "NULL"
+                        else column
+                    )
+
+        ruamel.dump(table_config_yaml, stream=self.table_folder / "table_config.yaml")
+
+        # regenerate publish.sql
+        self._make_publish_sql()
 
     def table_exists(self, mode):
         """Check if table exists in BigQuery.
@@ -230,55 +358,6 @@ class Table(Base):
             return True
         else:
             return False
-
-    def update_columns(self, columns_config_url):
-        """Fills descriptions and bigquery_type of tables automatically using a public google sheets URL. Also,
-        regenerate publish.sql from description and bigquery_type.
-        The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
-        The sheet must contain the column name: "coluna" and column description: "descricao"
-        Args:
-            columns_config_url (str): google sheets URL.
-
-        """
-        ruamel = ryaml.YAML()
-        ruamel.preserve_quotes = True
-        ruamel.indent(mapping=4, sequence=6, offset=4)
-        table_config_yaml = ruamel.load(
-            (self.table_folder / "table_config.yaml").open()
-        )
-        if (
-            "edit#gid=" not in columns_config_url
-            or "https://docs.google.com/spreadsheets/d/" not in columns_config_url
-            or not columns_config_url.split("=")[1].isdigit()
-        ):
-            raise Exception(
-                "The Google sheet url not in correct format."
-                "The url must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>"
-            )
-
-        df = self._sheet_to_df(columns_config_url)
-
-        if "coluna" not in df.columns.tolist():
-            raise Exception(
-                "Column 'coluna' not found in Google the google sheet. "
-                "The sheet must contain the column name: 'coluna' and column description: 'descricao'"
-            )
-        elif "descricao" not in df.columns.tolist():
-            raise Exception(
-                "Column 'descricao' not found in Google the google sheet. "
-                "The sheet must contain the column name: 'coluna' and column description: 'descricao'"
-            )
-
-        columns_parameters = zip(
-            df["coluna"].tolist(), df["descricao"].tolist(), df["tipo"].tolist()
-        )
-        for name, description, tipo in columns_parameters:
-            for col in table_config_yaml["columns"]:
-                if col["name"] == name:
-                    col["description"] = description
-                    col["bigquery_type"] = tipo
-        ruamel.dump(table_config_yaml, stream=self.table_folder / "table_config.yaml")
-        self._make_publish_sql()
 
     def init(
         self,

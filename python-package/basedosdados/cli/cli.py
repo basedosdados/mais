@@ -233,7 +233,7 @@ def init_table(
 @click.option(
     "--columns_config_url",
     default=None,
-    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. The sheet must contain the column name: 'coluna' and column description: 'descricao'.",
+    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>",
 )
 @click.pass_context
 def create_table(
@@ -291,14 +291,22 @@ def update_table(ctx, dataset_id, table_id, mode):
 
 
 @cli_table.command(
-    name="update_columns", help="Update columns descriptions in tables_config.yaml "
+    name="update_columns", help="Update columns fields in tables_config.yaml "
 )
 @click.argument("dataset_id")
 @click.argument("table_id")
 @click.option(
     "--columns_config_url",
     default=None,
-    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. The sheet must contain the column name: 'coluna' and column description: 'descricao'.",
+    help="""\nGoogle sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. 
+\nThe sheet must contain the columns:\n
+    - columna: column name\n
+    - descricao: column description\n
+    - tipo: column bigquery type\n
+    - unidade_medida: column mesurement unit\n
+    - dicionario: column related dictionary\n
+    - nome_diretorio: column related directory in the format <dataset_id>.<table_id>:<column_name>
+""",
 )
 @click.pass_context
 def update_columns(ctx, dataset_id, table_id, columns_config_url):
@@ -309,7 +317,7 @@ def update_columns(ctx, dataset_id, table_id, columns_config_url):
 
     click.echo(
         click.style(
-            f"All columns descriptions `{dataset_id}*.{table_id}` were updated in table_config.yaml",
+            f"All columns `{dataset_id}.{table_id}` were updated in table_config.yaml",
             fg="green",
         )
     )
@@ -701,13 +709,13 @@ def cli_create_metadata(
     )
 
 
-@cli_metadata.command(name="is_updated", help="Check if user's local metadata is updated")
+@cli_metadata.command(
+    name="is_updated", help="Check if user's local metadata is updated"
+)
 @click.argument("dataset_id")
 @click.argument("table_id", required=False)
 @click.pass_context
-def cli_is_updated_metadata(
-    ctx, dataset_id, table_id
-):
+def cli_is_updated_metadata(ctx, dataset_id, table_id):
     m = Metadata(dataset_id, table_id, **ctx.obj)
 
     if m.is_updated():
@@ -720,21 +728,14 @@ def cli_is_updated_metadata(
         )
         color = "red"
 
-    click.echo(
-        click.style(
-            msg,
-            fg=color
-        )
-    )
+    click.echo(click.style(msg, fg=color))
 
 
 @cli_metadata.command(name="validate", help="Validate user's local metadata")
 @click.argument("dataset_id")
 @click.argument("table_id", required=False)
 @click.pass_context
-def cli_validate_metadata(
-    ctx, dataset_id, table_id
-):
+def cli_validate_metadata(ctx, dataset_id, table_id):
     m = Metadata(dataset_id, table_id, **ctx.obj)
 
     try:
@@ -747,21 +748,14 @@ def cli_validate_metadata(
         )
         color = "red"
 
-    click.echo(
-        click.style(
-            msg,
-            fg=color
-        )
-    )
+    click.echo(click.style(msg, fg=color))
 
 
 @cli_metadata.command(name="publish", help="Publish user's local metadata")
 @click.argument("dataset_id")
 @click.argument("table_id", required=False)
 @click.pass_context
-def cli_publish_metadata(
-    ctx, dataset_id, table_id
-):
+def cli_publish_metadata(ctx, dataset_id, table_id):
     m = Metadata(dataset_id, table_id, **ctx.obj)
 
     try:
@@ -775,12 +769,7 @@ def cli_publish_metadata(
         )
         color = "red"
 
-    click.echo(
-        click.style(
-            msg,
-            fg=color
-        )
-    )
+    click.echo(click.style(msg, fg=color))
 
 
 @click.group(name="config")
