@@ -1,5 +1,5 @@
 [tool.poetry]
-authors = ["Joao Carabetta <joao.carabetta@gmail.com>", "Ricardo Dahis"]
+authors = ["Joao Carabetta <joao.carabetta@gmail.com>", "Ricardo Dahis","Diego Oliveira"]
 classifiers = [
   "Topic :: Software Development :: Build Tools",
   "Topic :: Software Development :: Libraries :: Python Modules",
@@ -13,7 +13,7 @@ packages = [
 ]
 readme = "README.md"
 repository = "https://github.com/base-dos-dados/bases"
-version = "1.6.0-alpha.5"
+version = "1.6.0-alpha.6"
 
 [tool.poetry.scripts]
 basedosdados = 'basedosdados.cli.cli:cli'
