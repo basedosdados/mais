@@ -5,7 +5,7 @@
 #' Allow you to explore and perform operation with Base dos Dados' datasets
 #' without using SQL language. The [bdplyr()] function creates `lazy` variables
 #' that will be connected directly to the desired table from Base dos Dados at
-#' Google BigQuery and can be handled with the [dplyr::dplyr-package]´s verbs
+#' Google BigQuery and can be handled with the [dplyr::dplyr-package]'s verbs
 #' as traditionally done as local bases. See also: [bigrquery::src_bigquery].
 #'
 #' Therefore, it is possible (without using `SQL`) to perform, for example,
@@ -42,6 +42,8 @@
 #' [bigrquery::src_bigquery]
 #'
 #' @export
+#' 
+#' @importFrom DBI dbConnect
 #'
 #' @examples
 #'
@@ -123,7 +125,7 @@ bdplyr <- function(
 
   if (how_many_dots < 1 | how_many_dots > 2) {
 
-    rlang::abort("`table` is invalid. Please use the pattern: `<project_name>.<dataset_name>.<table_name>` OR `<dataset_name>.<table_name>´ if the parameter `query_project_id´ is informed.")
+    rlang::abort("`table` is invalid. Please use the pattern: `<project_name>.<dataset_name>.<table_name>` OR `<dataset_name>.<table_name>' if the parameter `query_project_id' is informed.")
   }
 
   # checks if is a valid query_project_id string
@@ -150,15 +152,16 @@ bdplyr <- function(
 
   if(bigrquery::bq_table_exists(table_full_name) == FALSE) {
 
-    rlang::abort(glue::glue("The table {table_full_name} doesn´t have a valid name or was not found at {query_project_id}."))
+    rlang::abort(glue::glue("The table {table_full_name} doesn't have a valid name or was not found at {query_project_id}."))
 
   }
 
   # creates the connection
 
-con <- DBI::dbConnect(drv = bigrquery::bigquery(),
-                      project = query_project_id,
-                      billing = billing_project_id)
+  con <- DBI::dbConnect(
+    drv = bigrquery::bigquery(),
+    project = query_project_id,
+    billing = billing_project_id)
 
   # calls the connection through dplyr and keeps it in a objects
   tibble_connection <- dplyr::tbl(con, table_full_name)
@@ -171,7 +174,7 @@ con <- DBI::dbConnect(drv = bigrquery::bigquery(),
     tibble_connection <- tibble_connection %>%
       dplyr::select(dplyr::everything())
 
-    rlang::inform(glue::glue("Successfully connected to table  `{table_full_name}`."))
+    rlang::inform(glue::glue("Successfully connected to table `{table_full_name}`."))
     return (tibble_connection)
 
   } else {
@@ -190,7 +193,7 @@ con <- DBI::dbConnect(drv = bigrquery::bigquery(),
 #'
 #' After [bdplyr()] is used to create the remote connection, this function
 #' allows you to collect the result of the manipulations carried out with
-#' the {dplyr}´s verbs and thus use it in local memory completely.
+#' the {dplyr}'s verbs and thus use it in local memory completely.
 #'
 #' Alternatively, you can also save to disk directly using [bd_write()]
 #' function or its derivatives: [bd_write_csv()] or [bd_write_rds()].
@@ -258,7 +261,7 @@ bd_collect <- function(.lazy_tbl,
 
   if(is_tbl_lazy(.lazy_tbl) == FALSE) {
 
-    rlang::abort("`.lazy_tbl´ should be a lazy tibble.")
+    rlang::abort("`.lazy_tbl' should be a lazy tibble.")
   }
 
   # show que generated query - useful for debugging
@@ -282,18 +285,6 @@ bd_collect <- function(.lazy_tbl,
 
     rlang::abort("Error collecting results.")
 
-  }
-
-  # checks if is a empty table and warn user if it is
-  nrow_collected_table <- nrow(collected_table)
-  ncol_collected_table <- ncol(collected_table)
-
-  if (nrow_collected_table <= 0 | ncol_collected_table <= 0) {
-    rlang::warn("The collection returned a table with no rows or no cols. Consider revising the request.")
-  } else if (nrow_collected_table < 5) {
-    rlang::inform(
-      glue::glue("The collection returned a small table with only {nrow_collected_table} rows.
-     There may have been an error in processing."))
   }
 
   # deliver the results
@@ -344,6 +335,8 @@ bd_collect <- function(.lazy_tbl,
 #'
 #' @return String containing the path to the created file.
 #' @export
+#' 
+#' @importFrom scales number_bytes
 #'
 #' @name bd_write
 #' @examples
@@ -430,14 +423,14 @@ bd_write <- function(.lazy_tbl,
   # checks if any param is missing
   if (missing(.write_fn) | missing(.lazy_tbl) | missing(path)) {
 
-    rlang::abort("Params `.lazy_tbl´, `.write_fn´ and `path´ must be informed.")
+    rlang::abort("Params `.lazy_tbl', `.write_fn' and `path' must be informed.")
 
   }
 
   # checks if .write_fn is a valid function
   if (!rlang::is_function(.write_fn)) {
 
-      rlang::abort("`.write_fn´ must be a function. Remember not using ()")
+      rlang::abort("`.write_fn' must be a function. Remember not using ()")
 
   }
 
@@ -463,7 +456,7 @@ bd_write <- function(.lazy_tbl,
     # necessary to use this function
     if (tibble::is_tibble(.lazy_tbl)) {
 
-      rlang::abort("The table does not seem to need to be collected. Save using traditional writing functions like `write.csv´.")
+      rlang::abort("The table does not seem to need to be collected. Save using traditional writing functions like `write.csv'.")
 
       # if is not a tibble actually is a mistake and we should abort
 
@@ -514,7 +507,7 @@ bd_write_rds <- function(.lazy_tbl,
                          ...) {
 
   if (missing(.lazy_tbl) | missing(path)) {
-    rlang::abort("Params `.lazy_tbl´, and `path´ must be informed.")
+    rlang::abort("Params `.lazy_tbl', and `path' must be informed.")
   }
 
   # check if is a valid path name
@@ -563,7 +556,7 @@ bd_write_csv <- function(.lazy_tbl,
                          ...) {
 
   if (missing(.lazy_tbl) | missing(path)) {
-    rlang::abort("Params `.lazy_tbl´, and `path´ must be informed.")
+    rlang::abort("Params `.lazy_tbl', and `path' must be informed.")
   }
 
   # check if is a valid path name
