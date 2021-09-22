@@ -56,7 +56,6 @@ Cobertura Temporal
 Cobertura Espacial
 ------------------
 - brasil
-- estação meteorológica
 
 Tratamento
 ----------

@@ -42,6 +42,8 @@
 #' [bigrquery::src_bigquery]
 #'
 #' @export
+#' 
+#' @importFrom DBI dbConnect
 #'
 #' @importFrom DBI dbConnect
 #'
@@ -338,6 +340,8 @@ bd_collect <- function(.lazy_tbl,
 #'
 #' @return String containing the path to the created file.
 #' @export
+#' 
+#' @importFrom scales number_bytes
 #'
 #' @importFrom scales number_bytes
 #'

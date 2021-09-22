@@ -1,4 +1,4 @@
-Inflação - Índice Nacional de Preços ao Consumidor Amplo 15 - IPCA-15
+Inflação - Índice Nacional de Preços ao Consumidor Amplo 15 (IPCA-15)
 
 
 Para saber mais acesse:
@@ -12,11 +12,13 @@ Publicado por
 -------------
 Nome: Pedro Castro
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao/code
+Website: https://github.com/aspeddro
 Email: pdesacastro@gmail.comTratado por
 -----------
 Nome: Pedro Castro
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao/code
 Website: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao/code
+Email: pdesacastro@gmail.com
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
@@ -64,6 +66,7 @@ Cobertura Espacial
 Tratamento
 ----------
 - Renomeação das colunas
+- Limpeza para consistência 
 
 Frequencia de Atualização
 -------------------------
