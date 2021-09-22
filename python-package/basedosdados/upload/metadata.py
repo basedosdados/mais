@@ -44,7 +44,7 @@ class Metadata(Base):
     @property
     def local_config(self):
         if self.obj_path.exists():
-            return ryaml.safe_load(open(self.obj_path, "r").read())
+            return ryaml.safe_load(open(self.obj_path, "r", encoding="utf-8").read())
         else:
             return {}
 
@@ -288,7 +288,7 @@ class Metadata(Base):
             ruamel = ryaml.YAML()
             ruamel.preserve_quotes = True
             ruamel.indent(mapping=4, sequence=6, offset=4)
-            ruamel.dump(yaml_obj, open(self.obj_path, "w"))
+            ruamel.dump(yaml_obj, open(self.obj_path, "w", encoding="utf-8"))
 
         return self
 
@@ -424,7 +424,9 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
     d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
     if "properties" in definitions[d].keys():
         for dk, dv in definitions[d]["properties"].items():
-            yaml_obj[k][dk] = handle_data(dk, definitions[d]["properties"], data.get(k, {}))
+            yaml_obj[k][dk] = handle_data(
+                dk, definitions[d]["properties"], data.get(k, {})
+            )
 
     return yaml_obj
 
