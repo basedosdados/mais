@@ -15,5 +15,11 @@
 
 
 # 0.2.0
-* 
+
+## Funções novas
+* `dataset_search` agora permite busca de bases por palavras-chave
+* `get_table_colums` devolve o esquema de uma tabela
+
+## Mudanças
 * Incrementamos o valor padrão de `page_size`, onde quer que apareça, para 100000. A performance da maioria das queries deve aumentar substancialmente.
+* `bd_collect`, `bd_write`, `bd_write_rds` e `bd_write_csv` agora aceitam o argumento `page_size`
