@@ -338,7 +338,10 @@ class Table(Base):
                         else column
                     )
 
-        ruamel.dump(table_config_yaml, stream=self.table_folder / "table_config.yaml")
+        ruamel.dump(
+            table_config_yaml,
+            open(self.table_folder / "table_config.yaml", "w", encoding="utf-8"),
+        )
 
         # regenerate publish.sql
         self._make_publish_sql()
