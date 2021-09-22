@@ -42,7 +42,7 @@
 #' [bigrquery::src_bigquery]
 #'
 #' @export
-#' 
+#'
 #' @importFrom DBI dbConnect
 #'
 #' @examples
@@ -208,6 +208,8 @@ bdplyr <- function(
 #' @param show_query If TRUE will show the SQL query calling [dplyr::show_query()].
 #' Is useful for diagnosing performance problems.
 #'
+#' @param page_size defaults to 100000.
+#'
 #' @return A tibble.
 #' @export
 #'
@@ -247,7 +249,8 @@ bdplyr <- function(
 
 bd_collect <- function(.lazy_tbl,
                        billing_project_id = basedosdados::get_billing_id(),
-                       show_query = FALSE) {
+                       show_query = FALSE,
+                       page_size = 100000) {
 
   # check if billing_is is valid
 
@@ -278,7 +281,7 @@ bd_collect <- function(.lazy_tbl,
   # uses a previous select everything to avoid return empty
   collected_table <- .lazy_tbl %>%
     dplyr::select(dplyr::everything()) %>%
-    dplyr::collect()
+    dplyr::collect(page_size = page_size)
 
   # checks if is a tibble
   if (inherits(collected_table, "tbl_df") == FALSE) {
@@ -287,8 +290,6 @@ bd_collect <- function(.lazy_tbl,
 
   }
 
-  # deliver the results
-  rlang::inform(glue::glue("Base successfully collected on a {nrow_collected_table}-row, {ncol_collected_table}-column tibble."))
   return(collected_table)
 
 }
@@ -333,9 +334,11 @@ bd_collect <- function(.lazy_tbl,
 #'
 #' @param ... Parameters passed to the `.write_fn` function.
 #'
+#' @param page_size passed to `bd_collect`, defaults to 100000.
+#'
 #' @return String containing the path to the created file.
 #' @export
-#' 
+#'
 #' @importFrom scales number_bytes
 #'
 #' @name bd_write
@@ -413,12 +416,13 @@ bd_collect <- function(.lazy_tbl,
 #' )
 #' }
 
-bd_write <- function(.lazy_tbl,
-                    # .write_fn = ? typed::Function(),
-                     .write_fn,
-                     path,
-                    overwrite = FALSE,
-                     ...) {
+bd_write <- function(
+  .lazy_tbl,
+  .write_fn = ? Function(),
+  path = ? Character(length = 1),
+  overwrite = FALSE ? Logical(),
+  page_size = 100000,
+  ...) {
 
   # checks if any param is missing
   if (missing(.write_fn) | missing(.lazy_tbl) | missing(path)) {
@@ -469,7 +473,7 @@ bd_write <- function(.lazy_tbl,
   }
 
   # collect the results
-   collected_table <- bd_collect(.lazy_tbl)
+   collected_table <- bd_collect(.lazy_tbl, page_size = page_size)
 
   # write the results using the indicated function
     rlang::call2(.write_fn, collected_table, path, ...) %>%
@@ -500,11 +504,13 @@ bd_write <- function(.lazy_tbl,
 
 #' @rdname bd_write
 #' @export
-bd_write_rds <- function(.lazy_tbl,
-                         path,
-                         overwrite = FALSE,
-                         compress = "none",
-                         ...) {
+bd_write_rds <- function(
+  .lazy_tbl,
+  path,
+  overwrite = FALSE,
+  compress = "none",
+  page_size = 100000,
+  ...) {
 
   if (missing(.lazy_tbl) | missing(path)) {
     rlang::abort("Params `.lazy_tbl', and `path' must be informed.")
@@ -550,10 +556,12 @@ bd_write_rds <- function(.lazy_tbl,
 
 #' @rdname bd_write
 #' @export
-bd_write_csv <- function(.lazy_tbl,
-                         path,
-                         overwrite = FALSE,
-                         ...) {
+bd_write_csv <- function(
+  .lazy_tbl,
+  path,
+  overwrite = FALSE,
+  page_size = 100000,
+  ...) {
 
   if (missing(.lazy_tbl) | missing(path)) {
     rlang::abort("Params `.lazy_tbl', and `path' must be informed.")

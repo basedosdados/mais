@@ -9,6 +9,8 @@ ex_query <- function(n = 5) {
 
 test_that("download escreve arquivos recebendo uma query ou nome de tabela", {
 
+  testthat::skip_on_cran()
+
   path <- file.path(tempdir(), "arquivo.csv")
 
     download(
@@ -35,6 +37,8 @@ test_that("download escreve arquivos recebendo uma query ou nome de tabela", {
 
 test_that("download permite escolher o conteúdo de NAs", {
 
+  testthat::skip_on_cran()
+
   path3 <- file.path(tempdir(), "arquivo3.csv")
 
   download(
@@ -59,6 +63,8 @@ test_that("download permite escolher o conteúdo de NAs", {
 
 test_that("download permite escolher tamanho de página", {
 
+  testthat::skip_on_cran()
+
   path4 <- file.path(tempdir(), "arquivo4.csv")
 
   download(
@@ -74,6 +80,8 @@ test_that("download permite escolher tamanho de página", {
 
 test_that("download valida nomes de arquivos sem extensão", {
 
+  testthat::skip_on_cran()
+
   expect_error(
     download(
       ex_query(),
@@ -83,6 +91,8 @@ test_that("download valida nomes de arquivos sem extensão", {
 
 
 test_that("read_sql e read_table retornam um tibble com as propriedades esperadas", {
+
+  testthat::skip_on_cran()
 
   testthat::expect_s3_class(read_sql(ex_query(1)), "tbl_df")
 
@@ -99,6 +109,8 @@ test_that("read_sql e read_table retornam um tibble com as propriedades esperada
 })
 
 test_that("read_sql e read_table falham com input inapropriado", {
+
+  testthat::skip_on_cran()
 
   expect_error(read_sql(query = 123))
   expect_error(read_sql(query = TRUE))

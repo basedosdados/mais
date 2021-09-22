@@ -7,7 +7,8 @@
 bd_collect(
   .lazy_tbl,
   billing_project_id = basedosdados::get_billing_id(),
-  show_query = FALSE
+  show_query = FALSE,
+  page_size = 1e+05
 )
 }
 \arguments{
@@ -20,6 +21,8 @@ If you've run \code{\link[=set_billing_id]{set_billing_id()}} then feel free to 
 
 \item{show_query}{If TRUE will show the SQL query calling \code{\link[dplyr:explain]{dplyr::show_query()}}.
 Is useful for diagnosing performance problems.}
+
+\item{page_size}{defaults to 100000.}
 }
 \value{
 A tibble.

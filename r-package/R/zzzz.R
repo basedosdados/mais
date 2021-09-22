@@ -1,5 +1,6 @@
 .onLoad <- function(libname, pkgname) {
 
+  require(typed)
 
   if(Sys.getenv("billing_project_id") == "") {
 
