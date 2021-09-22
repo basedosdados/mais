@@ -125,18 +125,6 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_candidato_bd
-        description: ID Candidato - Base dos Dados
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sequencial_candidato
-        description: Sequencial do candidato
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
         name: numero_candidato
         description: Número do candidato
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
@@ -157,6 +145,18 @@ columns: # REQUIRED
     -   
         name: titulo_eleitor_candidato
         description: Título de eleitor do candidato
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sequencial_candidato
+        description: Sequencial do candidato
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_candidato_bd
+        description: ID Candidato - Base dos Dados
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
