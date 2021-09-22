@@ -220,7 +220,7 @@ class Table(Base):
         publish.sql and autofill type using bigquery_type.
         The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
         The sheet must contain the columns:
-            - columna: column name
+            - nome: column name
             - descricao: column description
             - tipo: column bigquery type
             - unidade_medida: column mesurement unit
@@ -248,10 +248,10 @@ class Table(Base):
         df = self._sheet_to_df(columns_config_url)
         df = df.fillna("NULL")
 
-        if "coluna" not in df.columns.tolist():
+        if "nome" not in df.columns.tolist():
             raise BaseDosDadosException(
-                "Column 'coluna' not found in Google the google sheet. "
-                "The sheet must contain the column name: 'coluna'"
+                "Column 'nome' not found in Google the google sheet. "
+                "The sheet must contain the column name: 'nome'"
             )
         elif "descricao" not in df.columns.tolist():
             raise BaseDosDadosException(
@@ -280,7 +280,7 @@ class Table(Base):
             )
 
         columns_parameters = zip(
-            df["coluna"].tolist(),
+            df["nome"].tolist(),
             df["descricao"].tolist(),
             df["tipo"].tolist(),
             df["unidade_medida"].tolist(),

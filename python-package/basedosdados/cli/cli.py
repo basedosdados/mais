@@ -300,7 +300,7 @@ def update_table(ctx, dataset_id, table_id, mode):
     default=None,
     help="""\nGoogle sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. 
 \nThe sheet must contain the columns:\n
-    - columna: column name\n
+    - nome: column name\n
     - descricao: column description\n
     - tipo: column bigquery type\n
     - unidade_medida: column mesurement unit\n
@@ -317,7 +317,7 @@ def update_columns(ctx, dataset_id, table_id, columns_config_url):
 
     click.echo(
         click.style(
-            f"All columns `{dataset_id}.{table_id}` were updated in table_config.yaml",
+            f"Columns from `{dataset_id}.{table_id}` were updated in table_config.yaml",
             fg="green",
         )
     )
