@@ -70,7 +70,7 @@ dataset_search <-
 #'
 #'
 #' @param table_id a table name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `deputado`
-#' @param table_id a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `br_sp_alesp`
+#' @param dataset_id a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `br_sp_alesp`
 #'
 #'
 #' @export
