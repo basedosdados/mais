@@ -216,8 +216,8 @@ class Table(Base):
             )
 
     def update_columns(self, columns_config_url):  # sourcery no-metrics
-        """Fills columns in table_config.yaml automatically using a public google sheets URL. Also regenerate publish.sql
-        and autofill type using bigquery_type.
+        """Fills columns in table_config.yaml automatically using a public google sheets URL. Also regenerate
+        publish.sql and autofill type using bigquery_type.
         The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
         The sheet must contain the columns:
             - columna: column name
