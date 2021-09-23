@@ -27,7 +27,6 @@ temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 update_frequency: one_year
-    - anual
 
 # Entidade representada por cada linha.
 entity: notificacao
