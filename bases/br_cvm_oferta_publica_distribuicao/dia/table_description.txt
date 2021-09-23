@@ -25,7 +25,13 @@ Nível da Observação (i.e. a granularidade da linha)
 
 Colunas identificando linhas unicamente
 -------------------
+- numero_processo
 - numero_registro_oferta
+- tipo_ativo
+- emissao
+- serie
+- nome_lider
+- classe_ativo
 
 Cobertura Temporal
 ------------------
