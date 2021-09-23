@@ -18,6 +18,7 @@ description:
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
     - seguranca
+    - saude
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
