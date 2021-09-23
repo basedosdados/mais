@@ -57,6 +57,7 @@ observation_level: #REQUIRED
 primary_keys:
     - numero_processo
     - numero_registro_oferta
+    - tipo_ativo
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
