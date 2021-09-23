@@ -26,7 +26,7 @@ temporal_coverage:
     - 2019
 
 # A unidade temporal com qual a tabela é atualizada.
-update_frequency:
+update_frequency: one_year
     - anual
 
 # Entidade representada por cada linha.
