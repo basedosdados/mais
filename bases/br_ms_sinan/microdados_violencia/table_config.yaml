@@ -9,7 +9,7 @@ table_id: microdados_violencia
 description: Microdados da planilha de Violência Interpessoal/Autoprovocada do SINAN, cujo objetivo é captar informações sobre o perfil dos atendimentos por violências doméstica, sexual e/ou outras violências (autoprovocadas e interpessoais) em unidades de saúde, caracterizando o perfil das pessoas que sofreram violências, o tipo, o local, o perfil do provável autor (a) de agressão, dentre outros.
 
 # A máxima unidade espacial que a tabela cobre.
-spatial_coverage: brasil
+spatial_coverage: bra
 
 # Anos cobertos pela tabela.
 temporal_coverage:
