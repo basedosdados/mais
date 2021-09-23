@@ -58,6 +58,10 @@ primary_keys:
     - numero_processo
     - numero_registro_oferta
     - tipo_ativo
+    - emissao
+    - serie
+    - nome_lider
+    - classe_ativo
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -127,13 +131,13 @@ columns: # REQUIRED
   
     -   
         name: numero_processo
-        description: Número de processo
+        description: Número do processo administrativo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: numero_registro_oferta
-        description: Número do registro da oferta
+        description: Número de registro da oferta
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -145,13 +149,13 @@ columns: # REQUIRED
   
     -   
         name: tipo_componente_oferta_mista
-        description: Tipo do componente de oferta mista
+        description: Tipo do componente de uma oferta mista
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: tipo_ativo
-        description: Tipo do ativo
+        description: Tipo do ativo (valor mobiliário)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -199,25 +203,25 @@ columns: # REQUIRED
   
     -   
         name: rito_oferta
-        description: Rito da oferta
+        description: Rito seguido para a realização da oferta
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: modalidade_registro_oferta
-        description: Modalidade de registro da oferta
+        description: Modalidade de registro da oferta. Aplicável a ofertas registradas.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: modalidade_dispensa_oferta
-        description: Modalidade de dispensa da oferta
+        description: Modalidade de dispensa da oferta. Aplicável a ofertas dispensadas de registro.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: data_abertura_processo
-        description: Data de abertura do processo
+        description: Data de abertura do processo administrativo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -265,13 +269,13 @@ columns: # REQUIRED
   
     -   
         name: especie_ativo
-        description: Espécie do ativo
+        description: Espécie do ativo (valor mobiliário) objeto da oferta
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: forma_ativo
-        description: Forma do ativo
+        description: Forma do ativo (valor mobiliário) objeto da oferta.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -319,19 +323,19 @@ columns: # REQUIRED
   
     -   
         name: oferta_inicial
-        description: Oferta inicial
+        description: Oferta inicial (IPO)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: oferta_incentivo_fiscal
-        description: Oferta com incentivo fiscal
+        description: Indica se a oferta é elegível ao incentivo previsto na Lei nº 12.431/11.
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
         name: oferta_regime_fiduciario
-        description: Oferta em regime fiduciário
+        description: Indica se os créditos que lastream a emissão dos ativos (valores mobiliários) objeto da oferta contam com regime fiduciário
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
