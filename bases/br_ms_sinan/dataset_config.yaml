@@ -1,0 +1,42 @@
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list=
+organization:
+    - ministerio-da-saude
+
+dataset_id: br_ms_sinan
+
+title:
+    - Sistema de Agravos de Notificação (SINAN)
+
+# exemplo: descrição e anotações úteis sobre os dados.
+description:
+    - O Sistema de Informação de Agravos de Notificação (Sinan) tem como objetivo coletar, transmitir e disseminar dados gerados rotineiramente pelo Sistema de Vigilância Epidemiológica das três esferas de governo, por intermédio de uma rede informatizada, para apoiar o processo de investigação e dar subsídios à análise das informações de vigilância epidemiológica das doenças de notificação compulsória.
+
+
+# Quais grupos caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+groups:
+    - seguranca
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - violencia
+    - violencia domestica
+    - homofobia
+    - transfobia
+    - aborto
+    - agressao
+
+ckan_url:
+    - https://basedosdados.org/dataset/br_ms_sinan
+
+github_url:
+    - https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinan
+
+metadata_modified: 2021-09-22
