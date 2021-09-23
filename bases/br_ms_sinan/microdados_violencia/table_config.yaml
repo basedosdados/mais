@@ -135,7 +135,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: ano
       has_sensitive_data: no
       is_in_staging: true
       is_partition: true
