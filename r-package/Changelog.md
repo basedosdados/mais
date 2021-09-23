@@ -13,6 +13,10 @@
 * A mensagem de carregamento agora contém mais informações.
 * A cobertura e assertividade dos testes aumentou bastante desde a última versão, o feedback dos usuários foi importante para isso.
 
+## Bugs
+
+* Subimos a versão mínima do `readr` para `1.4.0`, resolvendo o problema de escrita com `download` que alguns usuários tinham.
+* E também do `bigrquery` para `1.3.2`, resolvendo um problema de queries de grande volumes corrompidas.
 
 # 0.2.0
 
@@ -23,3 +27,6 @@
 ## Mudanças
 * Incrementamos o valor padrão de `page_size`, onde quer que apareça, para 100000. A performance da maioria das queries deve aumentar substancialmente.
 * `bd_collect`, `bd_write`, `bd_write_rds` e `bd_write_csv` agora aceitam o argumento `page_size`
+
+## Bugs
+* Incrementamos a versão mínima do `Rcpp` para `1.0.7`, resolvendo a [ausência de `Rcpp_previous_remove()`](https://stackoverflow.com/questions/68416435/rcpp-package-doesnt-include-rcpp-precious-remove)
