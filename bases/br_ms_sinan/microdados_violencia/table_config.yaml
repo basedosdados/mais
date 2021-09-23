@@ -129,7 +129,7 @@ columns:
     - name: ano
       bigquery_type: INT64
       description: Ano da notificação
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -142,7 +142,7 @@ columns:
     - name: data_notificacao
       bigquery_type: DATE
       description: Data de preenchimento da ficha de notificação
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -155,12 +155,12 @@ columns:
     - name: id_categoria_cid10
       bigquery_type: STRING
       description: Código do agravo notificado segundo CID-10
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: yes
       directory_column:
           dataset_id: basedosdados
           table_id: cid_10
-          column_name: cid_10
+          column_name: categoria
       measurement_unit:
       has_sensitive_data:
       is_in_staging: true
@@ -168,12 +168,12 @@ columns:
     - name: id_subcategoria_cid10
       bigquery_type: STRING
       description: Código da circunstância da lesão segundo CID-10
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: yes
       directory_column:
           dataset_id: basedosdados
           table_id: cid_10
-          column_name: cid_10
+          column_name: subcategoria
       measurement_unit:
       has_sensitive_data:
       is_in_staging: true
@@ -181,7 +181,7 @@ columns:
     - name: tipo_notificacao
       bigquery_type: STRING
       description: Identifica o tipo da notificação
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -195,7 +195,7 @@ columns:
       bigquery_type: STRING
       description: ID da unidade Federativa onde está localizada a unidade de saúde
           (ou outra fonte notificadora) que realizou a notificação
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -209,7 +209,7 @@ columns:
       bigquery_type: STRING
       description: ID do município onde está localizada a unidade de saúde (ou outra
           fonte notificadora) que realizou a notificação
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -223,11 +223,11 @@ columns:
       bigquery_type: STRING
       description: ID do município de 6 dígitos onde está localizada a unidade de
           saúde (ou outra fonte notificadora) que realizou a notificação
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
-          table_id: id_municipio
+          table_id: municipio
           column_name: id_municipio_6
       measurement_unit:
       has_sensitive_data:
@@ -236,7 +236,7 @@ columns:
     - name: id_unidade_notificacao
       bigquery_type: STRING
       description: Código da unidade de saúde da área de abrangência da unidade notificadora
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -263,7 +263,7 @@ columns:
     - name: data_ocorrencia
       bigquery_type: DATE
       description: Data da ocorrência da violência
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -277,7 +277,7 @@ columns:
       bigquery_type: STRIG
       description: ID da Unidade da Federação de ocorrência do evento por ocasião
           da notificação
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -290,7 +290,7 @@ columns:
     - name: id_municipio_ocorrencia
       bigquery_type: STRING
       description: ID do município de ocorrência do evento notificado
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -303,7 +303,7 @@ columns:
     - name: id_municipio_6_ocorrencia
       bigquery_type: STRING
       description: ID do município de 6 dígitos de ocorrência do evento notificado
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -316,7 +316,7 @@ columns:
     - name: hora_ocorrencia
       bigquery_type: TIME
       description: Hora da ocorrência
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -329,7 +329,7 @@ columns:
     - name: local_ocorrencia
       bigquery_type: INT64
       description: Informar o local de ocorrência do evento notificado
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -342,7 +342,7 @@ columns:
     - name: outro_local_ocorrencia
       bigquery_type: STRING
       description: Especificar outro local de ocorrência
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -355,7 +355,7 @@ columns:
     - name: outras_vezes_ocorrencia
       bigquery_type: INT64
       description: Informar se a violência é de repetição
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -369,7 +369,7 @@ columns:
       bigquery_type: STRING
       description: ID da Unidade Federada de residência do paciente por ocasião da
           notificação
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -382,7 +382,7 @@ columns:
     - name: id_municipio_residencia
       bigquery_type: STRING
       description: ID do município de residência do caso notificado
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -395,7 +395,7 @@ columns:
     - name: id_municipio_6_residencia
       bigquery_type: STRING
       description: ID do município de 6 dígitos de residência do caso notificado
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -409,7 +409,7 @@ columns:
       bigquery_type: STRING
       description: Regional de saúde onde está localizado o município de residência
           do paciente por ocasião da notificação
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -422,7 +422,7 @@ columns:
     - name: idade_paciente
       bigquery_type: INT64
       description: Idade do paciente
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -435,7 +435,7 @@ columns:
     - name: sexo_paciente
       bigquery_type: INT64
       description: Sexo do paciente
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -448,7 +448,7 @@ columns:
     - name: gestante_paciente
       bigquery_type: INT64
       description: Identifica o estágio da gestação da paciente
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -461,7 +461,7 @@ columns:
     - name: raca_paciente
       bigquery_type: INT64
       description: Raça do paciente
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -474,7 +474,7 @@ columns:
     - name: escolaridade_paciente
       bigquery_type: INT64
       description: Escolaridade do paciente
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -487,7 +487,7 @@ columns:
     - name: ocupacao_paciente
       bigquery_type: INT64
       description: Ocupação do paciente
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -500,7 +500,7 @@ columns:
     - name: estado_civil_paciente
       bigquery_type: INT64
       description: Situação conjugal do paciente
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -513,7 +513,7 @@ columns:
     - name: orientacao_sexual_paciente
       bigquery_type: INT64
       description: Orientação sexual do paciente
-      temporal_coverage: 2014-2019
+      temporal_coverage: 2014(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -526,7 +526,7 @@ columns:
     - name: identidade_genero_paciente
       bigquery_type: INT64
       description: Identidade de gênero do paciente
-      temporal_coverage: 2014-2019
+      temporal_coverage: 2014(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -539,7 +539,7 @@ columns:
     - name: motivacao_violencia
       bigquery_type: INT64
       description: Informar se violência tem relação com caractéristicas da vitima
-      temporal_coverage: 2014-2019
+      temporal_coverage: 2014(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -552,7 +552,7 @@ columns:
     - name: violencia_relacionada_trabalho
       bigquery_type: INT64
       description: Informar se ocorreu violência relacionada ao trabalho
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -566,7 +566,7 @@ columns:
       bigquery_type: INT64
       description: Informar se foi emitida a CAT, caso a violência seja relacionada
           ao trabalho
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -579,7 +579,7 @@ columns:
     - name: deficiencia_transtorno_paciente
       bigquery_type: INT64
       description: Se o paciente possui algum tipo de deficiência/transtorno
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -592,7 +592,7 @@ columns:
     - name: deficiencia_fisica_paciente
       bigquery_type: INT64
       description: Se o paciente possui algum tipo de deficiência física
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -605,7 +605,7 @@ columns:
     - name: deficiencia_mental_paciente
       bigquery_type: INT64
       description: Se o paciente possui algum tipo de deficiência mental
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -618,7 +618,7 @@ columns:
     - name: deficiencia_visual_paciente
       bigquery_type: INT64
       description: Se o paciente possui algum tipo de deficiência visual
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -631,7 +631,7 @@ columns:
     - name: deficiencia_auditiva_paciente
       bigquery_type: INT64
       description: Se o paciente possui algum tipo de deficiência auditiva
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -644,7 +644,7 @@ columns:
     - name: transtorno_mental_paciente
       bigquery_type: INT64
       description: Se o paciente possui algum tipo de transtorno mental
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -657,7 +657,7 @@ columns:
     - name: transtorno_comportamental_paciente
       bigquery_type: INT64
       description: Se o paciente possui algum tipo de transtorno de comportamento
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -670,7 +670,7 @@ columns:
     - name: outras_deficiencias_paciente
       bigquery_type: INT64
       description: Se o paciente possui algum tipo de outras deficiências/síndromes
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -683,7 +683,7 @@ columns:
     - name: quais_outras_deficiencias_paciente
       bigquery_type: STRING
       description: Especificar qual o tipo de outras deficiências/síndromes
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -696,7 +696,7 @@ columns:
     - name: lesao_autoprovocada
       bigquery_type: INT64
       description: Informar se a lesão foi autoprovocada
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -709,7 +709,7 @@ columns:
     - name: ocorreu_violencia_fisica
       bigquery_type: INT64
       description: Informar se ocorreu violência física
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -722,7 +722,7 @@ columns:
     - name: ocorreu_violencia_psicologica
       bigquery_type: INT64
       description: Informar se ocorreu violência psicológica/moral
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -735,7 +735,7 @@ columns:
     - name: ocorreu_tortura
       bigquery_type: INT64
       description: Informar se ocorreu tortura
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -748,7 +748,7 @@ columns:
     - name: ocorreu_violencia_sexual
       bigquery_type: INT64
       description: Informar se ocorreu violência sexual
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -761,7 +761,7 @@ columns:
     - name: ocorreu_trafico_ser_humano
       bigquery_type: INT64
       description: Informar se ocorreu tráfico de seres humanos
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -774,7 +774,7 @@ columns:
     - name: ocorreu_violencia_financeira
       bigquery_type: INT64
       description: Informar se ocorreu violência financeira/econômica
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -787,7 +787,7 @@ columns:
     - name: ocorreu_negligencia_abandono
       bigquery_type: INT64
       description: Informar se ocorreu negligência/abandono
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -800,7 +800,7 @@ columns:
     - name: ocorreu_trabalho_infantil
       bigquery_type: INT64
       description: Informar se ocorreu trabalho infantil
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -813,7 +813,7 @@ columns:
     - name: ocorreu_intervencao_legal
       bigquery_type: INT64
       description: Informar se ocorreu intervenção legal
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -826,7 +826,7 @@ columns:
     - name: ocorreu_outra_violencia
       bigquery_type: INT64
       description: Informar se ocorreu outro tipo de violência
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -839,7 +839,7 @@ columns:
     - name: ocorreu_qual_outra
       bigquery_type: STRING
       description: Especificar que outro tipo de violência ocorreu
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -852,7 +852,7 @@ columns:
     - name: meio_forca
       bigquery_type: INT64
       description: Informar se o meio de agressão foi através de força corporal
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -865,7 +865,7 @@ columns:
     - name: meio_enforcamento
       bigquery_type: INT64
       description: Informar se o meio de agressão foi através de enforcamento
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -878,7 +878,7 @@ columns:
     - name: meio_objeto_contundente
       bigquery_type: INT64
       description: Informar se o meio de agressão foi através de objeto contundente
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -891,7 +891,7 @@ columns:
     - name: meio_objeto_perfurante
       bigquery_type: INT64
       description: Informar se o meio de agressão foi através de objeto perfurante
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -905,7 +905,7 @@ columns:
       bigquery_type: INT64
       description: Informar se o meio de agressão foi através de substância ou objeto
           quente
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -918,7 +918,7 @@ columns:
     - name: meio_envenenamento
       bigquery_type: INT64
       description: Informar se o meio de agressão foi através de envenenamento
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -931,7 +931,7 @@ columns:
     - name: meio_arma_fogo
       bigquery_type: INT64
       description: Informar se o meio de agressão foi através de arma de fogo
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -944,7 +944,7 @@ columns:
     - name: meio_ameaca
       bigquery_type: INT64
       description: Informar se o meio de agressão foi através de ameaça
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -957,7 +957,7 @@ columns:
     - name: meio_outros
       bigquery_type: INT64
       description: Informar se o meio de agressão foi através de outro
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -970,7 +970,7 @@ columns:
     - name: meio_qual_outro
       bigquery_type: STRING
       description: Especificar qual outro meio de agressão sofreu
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -983,7 +983,7 @@ columns:
     - name: houve_assedio
       bigquery_type: INT64
       description: Informar se ocorreu assédio sexual
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -996,7 +996,7 @@ columns:
     - name: houve_estupro
       bigquery_type: INT64
       description: Informar se ocorreu estupro
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1009,7 +1009,7 @@ columns:
     - name: houve_pornografia_infantil
       bigquery_type: INT64
       description: Informar se ocorreu pornografia infantil
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1022,7 +1022,7 @@ columns:
     - name: houve_exploracao_sexual
       bigquery_type: INT64
       description: Informar se ocorreu exploração sexual
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1035,7 +1035,7 @@ columns:
     - name: houve_outra_violencia_sexual
       bigquery_type: INT64
       description: Informar se ocorreu outro tipo de violência sexual
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1048,7 +1048,7 @@ columns:
     - name: houve_qual_outra_violencia_sexual
       bigquery_type: STRING
       description: Especificar qual outro tipo de violência sexual
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1061,7 +1061,7 @@ columns:
     - name: profilaxia_dst
       bigquery_type: INT64
       description: Informar se ocorreu profilaxia DST
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1074,7 +1074,7 @@ columns:
     - name: profilaxia_hiv
       bigquery_type: INT64
       description: Informar se ocorreu profilaxia HIV
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1087,7 +1087,7 @@ columns:
     - name: profilaxia_hepatite_b
       bigquery_type: INT64
       description: Informar se ocorreu profilaxia hepatite B
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1100,7 +1100,7 @@ columns:
     - name: coleta_sangue
       bigquery_type: INT64
       description: Informar se ocorreu coleta de sangue
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1113,7 +1113,7 @@ columns:
     - name: coleta_semen
       bigquery_type: INT64
       description: Informar se ocorreu coleta de sêmen
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1126,7 +1126,7 @@ columns:
     - name: coleta_secrecao_vaginal
       bigquery_type: INT64
       description: Informar se ocorreu coleta de secreção vaginal
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1139,7 +1139,7 @@ columns:
     - name: profilaxia_contraceptivo
       bigquery_type: INT64
       description: Informar se ocorreu contracepção de emergencia
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1152,7 +1152,7 @@ columns:
     - name: aborto
       bigquery_type: INT64
       description: Informar se ocorreu aborto previsto em lei
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1165,7 +1165,7 @@ columns:
     - name: numero_envolvidos_violencia
       bigquery_type: INT64
       description: Informar o número de envolvidos na violência
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1178,7 +1178,7 @@ columns:
     - name: autor_pai
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era o pai
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1191,7 +1191,7 @@ columns:
     - name: autor_mae
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era a mãe
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1204,7 +1204,7 @@ columns:
     - name: autor_padrasto
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era o padrasto
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1217,7 +1217,7 @@ columns:
     - name: autor_madrasta
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era a madrasta
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1230,7 +1230,7 @@ columns:
     - name: autor_conjugue
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era o cônjuge
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1243,7 +1243,7 @@ columns:
     - name: autor_ex_conjugue
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era o ex-cônjuge
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1256,7 +1256,7 @@ columns:
     - name: autor_namorado_a
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era o namorado(a)
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1269,7 +1269,7 @@ columns:
     - name: autor_ex_namorado_a
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era o ex-namorado(a)
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1283,7 +1283,7 @@ columns:
       bigquery_type: INT64
       description: Informar se o (a) provável autor(a) da agressão era filho ou
           filha
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1296,7 +1296,7 @@ columns:
     - name: autor_desconhecido
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era desconhecido
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1309,7 +1309,7 @@ columns:
     - name: autor_irmao
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era irmão ou irmã
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1322,7 +1322,7 @@ columns:
     - name: autor_conhecido
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era amigo/conhecido
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1335,7 +1335,7 @@ columns:
     - name: autor_cuidador
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era o cuidador
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1348,7 +1348,7 @@ columns:
     - name: autor_patrao_chefe
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era o patrão/chefe
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1362,7 +1362,7 @@ columns:
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era pessoa com relação
           institucional
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1376,7 +1376,7 @@ columns:
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era policial/agente da
           lei
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1389,7 +1389,7 @@ columns:
     - name: autor_propria_pessoa
       bigquery_type: INT64
       description: Informar se o provável autor da agressão era a própria pessoa
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1402,7 +1402,7 @@ columns:
     - name: autor_outros
       bigquery_type: INT64
       description: Informar se o provável autor da agressão tinha outro tipo de relação
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1415,7 +1415,7 @@ columns:
     - name: autor_relacao_outros
       bigquery_type: STRING
       description: Especificar outro tipo de relação com a pessoa atendida
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1428,7 +1428,7 @@ columns:
     - name: autor_sexo
       bigquery_type: INT64
       description: Sexo do provável autor da violência
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1442,7 +1442,7 @@ columns:
       bigquery_type: INT64
       description: Informar se o provável autor da agressão tinha suspeita de uso
           de álcool
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1455,7 +1455,7 @@ columns:
     - name: encaminhamento_saude
       bigquery_type: INT64
       description: Informar se houve encaminhamento no setor da rede da saúde
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1468,7 +1468,7 @@ columns:
     - name: encaminhamento_assistencia_social
       bigquery_type: INT64
       description: Informar se houve encaminhamento no setor da rede assistência social
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1481,7 +1481,7 @@ columns:
     - name: encaminhamento_educacao
       bigquery_type: INT64
       description: Informar se houve encaminhamento no setor da rede educação
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1495,7 +1495,7 @@ columns:
       bigquery_type: INT64
       description: Informar se houve encaminhamento no setor da rede de atendimento à
           mulher
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1508,7 +1508,7 @@ columns:
     - name: encaminhamento_conselho_tutelar
       bigquery_type: INT64
       description: Informar se houve encaminhamento para o Conselho Tutelar
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1521,7 +1521,7 @@ columns:
     - name: encaminhamento_conselho_idoso
       bigquery_type: INT64
       description: Informar se houve encaminhamento para o Conselho do Idoso
-      temporal_coverage: 2014-2019
+      temporal_coverage: 2014(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1535,7 +1535,7 @@ columns:
       bigquery_type: INT64
       description: Informar se houve encaminhamento para delegacia de atendimento
           ao idoso
-      temporal_coverage: 2014-2019
+      temporal_coverage: 2014(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1549,7 +1549,7 @@ columns:
       bigquery_type: INT64
       description: Informar se houve encaminhamento para centro de referência dos
           Direitos Humanos
-      temporal_coverage: 2014-2019
+      temporal_coverage: 2014(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1562,7 +1562,7 @@ columns:
     - name: encaminhamento_mpu
       bigquery_type: INT64
       description: Informar se houve encaminhamento para Ministério Público
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1576,7 +1576,7 @@ columns:
       bigquery_type: INT64
       description: Informar se houve encaminhamento para Delegacia Especializada de
           Proteção à Criança e Adolescente
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1590,7 +1590,7 @@ columns:
       bigquery_type: INT64
       description: Informar se houve encaminhamento para Delegacia de atendimento
           à mulher
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1603,7 +1603,7 @@ columns:
     - name: encaminhamento_delegacia
       bigquery_type: INT64
       description: Informar se houve encaminhamento para outras delegacias
-      temporal_coverage: 2014-2019
+      temporal_coverage: 2014(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1617,7 +1617,7 @@ columns:
       bigquery_type: INT64
       description: Informar se houve encaminhamento para justiça da infância e da
           juventude
-      temporal_coverage: 2014-2019
+      temporal_coverage: 2014(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1630,7 +1630,7 @@ columns:
     - name: encaminhamento_defensoria_publica
       bigquery_type: INT64
       description: Informar se houve encaminhamento para defensoria pública
-      temporal_coverage: 2014-2019
+      temporal_coverage: 2014(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1643,7 +1643,7 @@ columns:
     - name: data_encerramento
       bigquery_type: DATE
       description: Data de encerramento do caso
-      temporal_coverage: 2009-2019
+      temporal_coverage: 2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
