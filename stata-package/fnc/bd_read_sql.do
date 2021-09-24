@@ -2,7 +2,7 @@
 cap program drop bd_read_sql
 program define bd_read_sql, rclass
     
-    version 16.1
+    version 16.0
     syntax, path(string) query(string) billing_project_id(string)
     
     python: import basedosdados as bd

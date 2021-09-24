@@ -2,7 +2,7 @@
 cap program drop bd_get_table_columns
 program define bd_get_table_columns, rclass
     
-    version 16.1
+    version 16.0
     syntax, dataset_id(string) table_id(string)
     
     python: import basedosdados as bd

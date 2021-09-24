@@ -2,7 +2,7 @@
 cap program drop bd_read_table
 program define bd_read_table, rclass
     
-    version 16.1
+    version 16.0
     syntax, path(string) dataset_id(string) table_id(string) billing_project_id(string)
     
     python: import basedosdados as bd
