@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 16.0  23set2021}{...}
+{* *! version 16.1  23set2021}{...}
 {vieweralsosee "" "--"}{...}
 {p2colset 1 15 17 2}{...}
 {p2col:{bf:[D] bd_read_sql} {hline 2}}bd_read_sql datasets{p_end}
@@ -38,8 +38,7 @@ already exist and the file should normally end with the corresponding extension 
 {title:Description}
 
 {pstd}
-{cmd:bd_read_sql} download table or query result from basedosdados {it:BigQuery}
-
+{cmd:bd_read_sql} Load data from {it:BigQuery} using a query. Just a wrapper around pandas.read_gbq.
 {pstd}
 Stata also has other commands for manipulating basedosdados's data; see
 {manhelp bd_get_table_description D}, {manhelp bd_list_dataset_tables D}, {manhelp bd_list_datasets D}, 

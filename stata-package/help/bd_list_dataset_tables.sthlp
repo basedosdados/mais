@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 16.0  23set2021}{...}
+{* *! version 16.1  23set2021}{...}
 {vieweralsosee "" "--"}{...}
 {p2colset 1 15 17 2}{...}
 {p2col:{bf:[D] bd_list_dataset_tables} {hline 2}}bd_list_dataset_tables datasets{p_end}
@@ -35,7 +35,7 @@
 {title:Description}
 
 {pstd}
-{cmd:bd_list_dataset_tables} download table or query result from basedosdados {it:BigQuery}
+{cmd:bd_list_dataset_tables} Fetch table_id for tables available at the specified dataset_id. Prints the information on screen or returns it as a list.
 
 {pstd}
 Stata also has other commands for manipulating basedosdados's data; see
