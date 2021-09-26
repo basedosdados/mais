@@ -57,10 +57,25 @@ observation_level: #REQUIRED
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
     - cns
-    - id_cnes
+    - id_estabelecimento_cnes
     - cbo_2002
     - ano
     - mes
+    - sigla_uf
+    - nome
+    - codigo_vinculo
+    - vinculo_contratado_sus
+    - vinculo_autonomo_sus
+    - vinculo_outros
+    - atende_sus
+    - atende_nao_sus
+    - carga_horaria_outros
+    - carga_horaria_hospitalar
+    - carga_horaria_ambulatorial
+    - estabelecimento_terceiro
+    - codigo_conselho
+    - codigo_registro_conselho
+    - id_municipio_residencia
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -131,14 +146,14 @@ columns: # REQUIRED
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: True # Bool [True, False], whether the column is a partition.
     -   
-        name: id_cnes
+        name: id_estabelecimento_cnes
         description: ID CNES - Número nacional do estabelecimento de saúde em que trabalha o profissional
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: id_municipio_6_residencia
-        description: ID Município da residência do profissional - IBGE 6 Dígitos
+        name: id_municipio_residencia
+        description: ID Município da residência do profissional - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
