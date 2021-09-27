@@ -178,6 +178,9 @@ class Metadata(Base):
                         "key": "dataset_args",
                         "value": {
                             "dataset_id": self.local_config["dataset_id"],
+                            "description": self.local_config["description"],
+                            "ckan_url": self.local_config["ckan_url"],
+                            "github_url": self.local_config["github_url"],
                         },
                     }
                 ],
