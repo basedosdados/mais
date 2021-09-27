@@ -32,26 +32,6 @@ Nível da Observação (i.e. a granularidade da linha)
 
 Colunas identificando linhas unicamente
 -------------------
-- cns
-- id_estabelecimento_cnes
-- cbo_2002
-- ano
-- mes
-- sigla_uf
-- nome
-- codigo_vinculo
-- vinculo_contratado_sus
-- vinculo_autonomo_sus
-- vinculo_outros
-- atende_sus
-- atende_nao_sus
-- carga_horaria_outros
-- carga_horaria_hospitalar
-- carga_horaria_ambulatorial
-- estabelecimento_terceiro
-- codigo_conselho
-- codigo_registro_conselho
-- id_municipio_residencia
 
 Cobertura Temporal
 ------------------
