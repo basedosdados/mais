@@ -22,7 +22,7 @@ testthat::test_that("Basic dataset search", {
 
 })
 
-testthat::test_that("Different searches yeild different results", {
+testthat::test_that("Different searches yield different results", {
 
   dataset_search("educação") %>%
     waldo::compare(dataset_search("educação")) %>%
