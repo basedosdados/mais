@@ -176,7 +176,7 @@ class Metadata(Base):
                 "owner_org": bdm_ckan_dataset_metadata.get("owner_org"),
                 "resources": bdm_ckan_dataset_metadata.get("resources"),
                 "groups": [{"name": group} for group in self.local_config.get("groups", [])],
-                "organization": self.local_config.get("organization"),
+                "organization": {"name": self.local_config.get("organization")[0]},
                 "tags": [{"name": tag} for tag in self.local_config.get("tags", [])],
                 "extras": [
                     {
@@ -413,8 +413,10 @@ def handle_data(k, schema, data, local_default=None):
 
     if not isinstance(_selected, list):
         _selected = [_selected]
-    elif isinstance(_selected[0], dict):
+    
+    if isinstance(_selected[0], dict):
         if _selected[0].get("id") is not None:
+            if k == "organization": print(f"{_selected[0].get('id') is not None}")
             return [s.get("name") for s in _selected]
 
     return selected
