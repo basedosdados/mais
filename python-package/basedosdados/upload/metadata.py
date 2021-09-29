@@ -143,7 +143,7 @@ class Metadata(Base):
                         "temporal_coverage": self.local_config.get("temporal_coverage"),
                         "update_frequency": self.local_config.get("update_frequency"),
                         "entity": self.local_config.get("entity"),
-                        "time_unit": self.local_config.get("time_unit"), # verificar se precisa
+                        "time_unit": self.local_config.get("time_unit"),
                         "identifying_columns": self.local_config.get("identifying_columns"),
                         "last_updated": self.local_config.get("last_updated"),
                         "published_by": self.local_config.get("published_by"),
@@ -400,12 +400,8 @@ class Metadata(Base):
 
 def handle_data(k, schema, data, local_default=None):
 
-    # If no data is found for that key, uses pydantic default, else uses
-    # local default
-
-    selected = data.get(k)
-    if not selected:
-        selected = schema[k].get("user_input_hint", local_default)
+    # If no data is found for that key, uses local default
+    selected = data.get(k, local_default)
 
     # In some cases like `tags`, `groups`, `organization`
     # the API default is to return a dict or list[dict] with all info.
