@@ -92,14 +92,14 @@ class Metadata(Base):
             f"{self.CKAN_URL}/api/3/action/bd_bdm_dataset_show?dataset_id="
             f"{self.dataset_id}"
         )
-        bdm_ckan_dataset_metadata = requests.get(endpoint_url).json()["result"]
+        bdm_ckan_dataset_metadata = requests.get(endpoint_url).json().get("result", {})
 
         if self.table_id:
             endpoint_url = (
                 f"{self.CKAN_URL}/api/3/action/bd_bdm_table_show?dataset_i"
                 f"d={self.dataset_id}&table_id={self.table_id}"
             )
-            bdm_ckan_table_metadata = requests.get(endpoint_url).json()["result"]
+            bdm_ckan_table_metadata = requests.get(endpoint_url).json().get("result", {})
 
         else:
             bdm_ckan_table_metadata = None
@@ -124,63 +124,82 @@ class Metadata(Base):
         if self.table_id:
 
             data = {
-                "id": bdm_ckan_dataset_metadata["id"],
-                "name": bdm_ckan_dataset_metadata["name"],
-                "type": bdm_ckan_dataset_metadata["type"],
-                "title": bdm_ckan_dataset_metadata["title"],
-                "private": bdm_ckan_dataset_metadata["private"],
-                "owner_org": bdm_ckan_dataset_metadata["owner_org"],
+                "id": bdm_ckan_dataset_metadata.get("id"),
+                "name": bdm_ckan_dataset_metadata.get("name"),
+                "type": bdm_ckan_dataset_metadata.get("type"),
+                "title": bdm_ckan_dataset_metadata.get("title"),
+                "private": bdm_ckan_dataset_metadata.get("private"),
+                "owner_org": bdm_ckan_dataset_metadata.get("owner_org"),
                 "resources": [
                     {
-                        "id": bdm_ckan_table_metadata["id"],
-                        "description": self.local_config["description"],
-                        "name": self.local_config["table_id"],
-                        "resource_type": bdm_ckan_table_metadata["resource_type"],
-                        "version": self.local_config["version"],
-                        "table_id": self.local_config["table_id"],
-                        "spatial_coverage": self.local_config["spatial_coverage"],
-                        "metadata_modified": self.local_config["metadata_modified"],
+                        "id": bdm_ckan_table_metadata.get("id"),
+                        "description": self.local_config.get("description"),
+                        "name": self.local_config.get("table_id"),
+                        "resource_type": bdm_ckan_table_metadata.get("resource_type"),
+                        "version": self.local_config.get("version"),
+                        "dataset_id": self.local_config.get("dataset_id"),
+                        "table_id": self.local_config.get("table_id"),
+                        "spatial_coverage": self.local_config.get("spatial_coverage"),
+                        "temporal_coverage": self.local_config.get("temporal_coverage"),
+                        "update_frequency": self.local_config.get("update_frequency"),
+                        "entity": self.local_config.get("entity"),
+                        "time_unit": self.local_config.get("time_unit"), # verificar se precisa
+                        "identifying_columns": self.local_config.get("identifying_columns"),
+                        "last_updated": self.local_config.get("last_updated"),
+                        "published_by": self.local_config.get("published_by"),
+                        "data_cleaned_by": self.local_config.get("data_cleaned_by"),
+                        "data_cleaning_description": self.local_config.get("data_cleaning_description"),
+                        "raw_files_url": self.local_config.get("raw_files_url"),
+                        "auxiliary_files_url": self.local_config.get("auxiliary_files_url"),
+                        "architecture_url": self.local_config.get("architecture_url"),
+                        "covered_by_dictionary": self.local_config.get("covered_by_dictionary"),
+                        "source_bucket_name": self.local_config.get("source_bucket_name"),
+                        "project_id_prod": self.local_config.get("project_id_prod"),
+                        "project_id_staging": self.local_config.get("project_id_staging"),
+                        "partitions": self.local_config.get("partitions"),
+                        "bdm_file_size": self.local_config.get("bdm_file_size"),
+                        "columns": self.local_config.get("columns"),
+                        "metadata_modified": self.local_config.get("metadata_modified"),
                     }
                 ],
             }
 
         else:
-
+            
             data = {
-                "id": bdm_ckan_dataset_metadata["id"],
-                "name": bdm_ckan_dataset_metadata["name"],
-                "title": self.local_config["title"],
-                "type": bdm_ckan_dataset_metadata["type"],
-                "metadata_modified": self.local_config["metadata_modified"],
-                "private": bdm_ckan_dataset_metadata["private"],
-                "owner_org": bdm_ckan_dataset_metadata["owner_org"],
-                "resources": bdm_ckan_dataset_metadata["resources"],
-                "groups": [{"name": group} for group in self.local_config["groups"]],
+                "id": bdm_ckan_dataset_metadata.get("id"),
+                "name": bdm_ckan_dataset_metadata.get("name"),
+                "title": self.local_config.get("title"),
+                "type": bdm_ckan_dataset_metadata.get("type"),
+                "metadata_modified": self.local_config.get("metadata_modified"),
+                "private": bdm_ckan_dataset_metadata.get("private"),
+                "owner_org": bdm_ckan_dataset_metadata.get("owner_org"),
+                "resources": bdm_ckan_dataset_metadata.get("resources"),
+                "groups": [{"name": group} for group in self.local_config.get("groups", [])],
                 "organization": {
-                    "id": self.local_config["organization"]["id"],
-                    "name": self.local_config["organization"]["name"],
-                    "title": self.local_config["organization"]["title"],
-                    "type": self.local_config["organization"]["type"],
-                    "description": self.local_config["organization"]["description"],
-                    "image_url": self.local_config["organization"]["image_url"],
-                    "created": self.local_config["organization"]["created"],
-                    "is_organization": self.local_config["organization"][
+                    "id": self.local_config.get("organization", {}).get("id"),
+                    "name": self.local_config.get("organization", {}).get("name"),
+                    "title": self.local_config.get("organization", {}).get("title"),
+                    "type": self.local_config.get("organization", {}).get("type"),
+                    "description": self.local_config.get("organization", {}).get("description"),
+                    "image_url": self.local_config.get("organization", {}).get("image_url"),
+                    "created": self.local_config.get("organization", {}).get("created"),
+                    "is_organization": self.local_config.get("organization", {}).get(
                         "is_organization"
-                    ],
-                    "approval_status": self.local_config["organization"][
+                    ),
+                    "approval_status": self.local_config.get("organization", {}).get(
                         "approval_status"
-                    ],
-                    "state": self.local_config["organization"]["state"],
+                    ),
+                    "state": self.local_config.get("organization", {}).get("state"),
                 },
-                "tags": [{"name": tag} for tag in self.local_config["tags"]],
+                "tags": [{"name": tag} for tag in self.local_config.get("tags", [])],
                 "extras": [
                     {
                         "key": "dataset_args",
                         "value": {
-                            "dataset_id": self.local_config["dataset_id"],
-                            "description": self.local_config["description"],
-                            "ckan_url": self.local_config["ckan_url"],
-                            "github_url": self.local_config["github_url"],
+                            "description": self.local_config.get("description"),
+                            "ckan_url": self.local_config.get("ckan_url"),
+                            "github_url": self.local_config.get("github_url"),
                         },
                     }
                 ],
