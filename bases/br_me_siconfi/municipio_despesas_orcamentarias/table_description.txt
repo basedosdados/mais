@@ -1,4 +1,4 @@
-Despesas por função a nível de município.
+Tabela de despesas orçamentárias a nível de município.
 
 
 Para saber mais acesse:
@@ -17,6 +17,7 @@ Email: crislanealves@basedosdados.orgTratado por
 -----------
 Nome: Crislane A. Souza
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi/code
+Website: https://github.com/crislanealves
 Email: crislanealves@basedosdados.org
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
@@ -38,8 +39,21 @@ Colunas identificando linhas unicamente
 
 Cobertura Temporal
 ------------------
+- 1989
+- 1990
+- 1991
+- 1992
+- 1993
+- 1994
+- 1995
 - 1996
 - 1997
+- 1998
+- 1999
+- 2000
+- 2001
+- 2002
+- 2003
 - 2004
 - 2005
 - 2006
@@ -67,7 +81,8 @@ Tratamento
 - Criação da coluna 'id_municipio' para os anos de 1989-2012
 - Criação da coluna 'id_conta_normalizado' para compatibilizar todos os anos que não tem 'portaria'
 - Criação da coluna 'id_conta_bd' para compatilizar toda série temporal 
-- Append nas tabelas dos anos 1996-2012 para a arquitetura 2013-2020    
+- Append nas tabelas dos anos 1989-2012 para a arquitetura 2013-2020    
+- Compatibilização de moedas
 
 Frequencia de Atualização
 -------------------------

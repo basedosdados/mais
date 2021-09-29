@@ -19,19 +19,15 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_me_siconfi.receita_orcamentaria AS
+CREATE VIEW basedosdados-dev.br_me_siconfi.municipio_despesas_orcamentarias AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(formula_conta AS STRING) formula_conta,
-SAFE_CAST(codigo AS STRING) codigo,
-SAFE_CAST(portaria AS STRING) portaria,
-SAFE_CAST(id_conta_normalizado_bd AS STRING) id_conta_normalizado_bd,
-SAFE_CAST(id_conta_formalizado_bd AS STRING) id_conta_formalizado_bd,
-SAFE_CAST(id_conta_bd AS STRING) id_conta_bd,
-SAFE_CAST(conta_original AS STRING) conta_original,
-SAFE_CAST(conta_bd AS STRING) conta_bd,
 SAFE_CAST(estagio_bd AS STRING) estagio_bd,
-SAFE_CAST(valor AS STRING) valor
-from basedosdados-dev.br_me_siconfi_staging.receita_orcamentaria as t
+SAFE_CAST(portaria AS STRING) portaria,
+SAFE_CAST(conta AS STRING) conta,
+SAFE_CAST(id_conta_bd AS STRING) id_conta_bd,
+SAFE_CAST(conta_bd AS STRING) conta_bd,
+SAFE_CAST(valor AS FLOAT64) valor
+FROM basedosdados-dev.br_me_siconfi_staging.municipio_despesas_orcamentarias AS t
