@@ -1,7 +1,7 @@
 table_id: microdados # AUTO GENERATED
 dataset_id: br_mc_auxilio_emergencial # AUTO GENERATED
 
-version: v1.0
+version: v2.0
 
 last_updated: 2020-12-20 # AUTO GENERATED
 
@@ -72,6 +72,7 @@ coverage_geo:
 # Opções: pre-1999, 2000, 2001, ..., 2019, 2020
 coverage_time:
     - 2020
+    - 2021
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
