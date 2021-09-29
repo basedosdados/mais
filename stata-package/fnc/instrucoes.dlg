@@ -1,0 +1,21 @@
+
+
+VERSION 16.0
+
+POSITION . . 450 180
+
+DIALOG main, label("Atenção - Siga as instruções abaixo ") tabtitle("Main")
+BEGIN
+  TEXT     tx_gen      10  10   290  .,	label("")
+  TEXT     ed_gen      10  +20  120  .,	error("n")
+  TEXT     tx_exp      10  +25  390  .,	label("")
+  TEXTBOX tx_note 10 10 450 180, label("Siga as intruções abaixo:                                                                                                                       1) Baixe o python no seu computador.                                                                                 2) Depois de  baixado, digite 'Prompt' no buscar do seu windows e abra.                      3) Uma janela preta aparecerá. Digite 'pip install basedosdados' e enter. Depois digite 'basedosdados auth' e enter.                                                                                        4) Copie o link que aparecerá e cole na aba do navegador. Clique em 'Permitir'.                                                                                                                                         5) Copie o código disponibilizado. Volte para o Prompt, cole e dê enter. Rode o comando aqui no Stata novamente.                                        ") 
+
+END
+
+OK ok1,      label("OK")
+CANCEL can1, label("Cancel")
+SUBMIT sub1, label("Submit")
+HELP hlp1,   view("help generate")
+RESET res1
+COPY copy1
