@@ -1,4 +1,4 @@
-Tabela de dicionário das variáveis de estabelecimento do Cadastro Nacional de Estabelecimentos de Saúde(CNES)
+Tabela que define as informações sobre profissionais de saúde de cada estabelecimento de saúde bem como a carga horaria e a função que exerce.
 
 
 Para saber mais acesse:
@@ -11,24 +11,27 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Gustavo Aires Tiago
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno/code
-Website: https://github.com/gustavoairestiago
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_cnes/code
+Website: https://basedosdados.org/dataset/br-ms-cnes
 Email: gustavo.tiago@basedosdados.orgTratado por
 -----------
 Nome: Gustavo Aires Tiago
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno/code
-Website: https://basedosdados.org/dataset/br-me-cno
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_cnes/code
+Website: https://basedosdados.org/dataset/br-ms-cnes
 Email: gustavo.tiago@basedosdados.org
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- mes
+- sigla_uf
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- chave
+- profissional
 
 Colunas identificando linhas unicamente
 -------------------
-- id_tabela
-- nome_coluna
-- chave
 
 Cobertura Temporal
 ------------------
@@ -52,9 +55,12 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
+- brasil
 
 Tratamento
 ----------
+- Padronização de colunas
+- Normalização da tabela com base nas informações já contidas na tabela estabelecimento
 
 Frequencia de Atualização
 -------------------------
