@@ -53,13 +53,13 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- Brasil
+- brasil
 
 Tratamento
 ----------
-Download das bases e a renomeação das colunas segundo padrão da BD+;
-Agrupamento dos dados de observações duplicadas;
-Compatibilização da base para identificação única das observações;
+- Download das bases e a renomeação das colunas segundo padrão da BD+;
+- Agrupamento dos dados de observações duplicadas;
+- Compatibilização da base para identificação única das observações;
 
 Frequencia de Atualização
 -------------------------
