@@ -99,7 +99,7 @@ def existent_metadata(metadatadir):
     table_metadata_obj = Metadata(
         dataset_id="br_me_rais",
         table_id="microdados_vinculos",
-        metadata_path=metadatadir
+        metadata_path=metadatadir,
     )
     return table_metadata_obj
 
@@ -109,9 +109,11 @@ def existent_metadata_path(metadatadir):
     return Path(metadatadir) / "br_me_rais" / "microdados_vinculos"
 
 
-def test_create_partition_columns_from_existent_table(existent_metadata, existent_metadata_path):
+def test_create_partition_columns_from_existent_table(
+    existent_metadata, existent_metadata_path
+):
     shutil.rmtree(existent_metadata_path, ignore_errors=True)
-    
+
     existent_metadata.create()
     assert existent_metadata_path.exists()
 
@@ -119,12 +121,14 @@ def test_create_partition_columns_from_existent_table(existent_metadata, existen
     assert metadata_dict.get("partitions") == "ano, sigla_uf"
 
 
-def test_create_partition_columns_from_user_input(existent_metadata, existent_metadata_path):
+def test_create_partition_columns_from_user_input(
+    existent_metadata, existent_metadata_path
+):
     shutil.rmtree(existent_metadata_path, ignore_errors=True)
 
     existent_metadata.create(partition_columns=["id_municipio"])
     assert existent_metadata_path.exists()
-    
+
     metadata_dict = existent_metadata.local_config
     assert metadata_dict.get("partitions") == "id_municipio"
 
@@ -146,7 +150,7 @@ def test_create_force_columns_is_false(existent_metadata, existent_metadata_path
 
     table_metadata_dict = existent_metadata.local_config
     assert table_metadata_dict["columns"][0]["name"] != "column1"
-    assert table_metadata_dict["columns"][1]["name"] != "column2"    
+    assert table_metadata_dict["columns"][1]["name"] != "column2"
 
 
 @pytest.fixture

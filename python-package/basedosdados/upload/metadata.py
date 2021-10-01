@@ -22,7 +22,7 @@ class Metadata(Base):
         self.table_id = table_id
         self.dataset_id = dataset_id
 
-        url = "http://localhost:5000"  # "https://basedosdados.org"
+        url = "https://basedosdados.org"
         self.CKAN_API_KEY = self.config.get("ckan", {}).get("api_key")
         self.CKAN_URL = self.config.get("ckan", {}).get("url", "") or url
 
@@ -465,8 +465,7 @@ def build_yaml_object(
 
     # Drop all properties without yaml_order
     properties = {
-        key: value for key, value in properties.items()
-        if value.get("yaml_order")
+        key: value for key, value in properties.items() if value.get("yaml_order")
     }
 
     # Add properties
@@ -474,7 +473,7 @@ def build_yaml_object(
         ryaml.CommentedMap(),
         properties,
         definitions,
-        metadata
+        metadata,
     )
 
     # Add columns
@@ -486,7 +485,7 @@ def build_yaml_object(
                 columns_schema["properties"],
                 columns_schema["definitions"],
                 metadatum,
-                has_column=True
+                has_column=True,
             )
             yaml["columns"].append(properties)
 

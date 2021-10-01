@@ -11,9 +11,11 @@ import pandas as pd
 from basedosdados.upload.base import Base
 from functools import partialmethod
 from basedosdados.exceptions import (
-    BaseDosDadosException, BaseDosDadosAccessDeniedException,
-    BaseDosDadosAuthorizationException, BaseDosDadosInvalidProjectIDException,
-    BaseDosDadosNoBillingProjectIDException
+    BaseDosDadosException,
+    BaseDosDadosAccessDeniedException,
+    BaseDosDadosAuthorizationException,
+    BaseDosDadosInvalidProjectIDException,
+    BaseDosDadosNoBillingProjectIDException,
 )
 from pandas_gbq.gbq import GenericGBQException
 
@@ -170,7 +172,7 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
     except GenericGBQException as e:
         if "Reason: 403" in str(e):
             raise BaseDosDadosAccessDeniedException
-        
+
         elif re.match("Reason: 400 POST .* [Pp]roject[ ]*I[Dd]", str(e)):
             raise BaseDosDadosInvalidProjectIDException
 
@@ -180,11 +182,9 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
         raise BaseDosDadosAuthorizationException
 
     except (OSError, ValueError) as e:
-        exc_from_no_billing_id = (
-            "Could not determine project ID" in str(e) or \
-            "reading from stdin while output is captured" in str(e)
-        )
-        if exc_from_no_billing_id:
+        no_billing_id = "Could not determine project ID" in str(e)
+        no_billing_id |= "reading from stdin while output is captured" in str(e)
+        if no_billing_id:
             raise BaseDosDadosNoBillingProjectIDException
         raise
 
@@ -298,9 +298,8 @@ def _handle_output(verbose, output_type, df, col_name=None):
     """
 
     df_is_dataframe = type(df) == pd.DataFrame
-    df_is_bq_dataset_or_table = (
-        (type(df) == bigquery.Dataset) or (type(df) == bigquery.Table)
-    )
+    df_is_bq_dataset_or_table = type(df) == bigquery.Table
+    df_is_bq_dataset_or_table |= type(df) == bigquery.Dataset
 
     if verbose == True and df_is_dataframe:
         _print_output(df)
@@ -316,12 +315,11 @@ def _handle_output(verbose, output_type, df, col_name=None):
         elif output_type == "records":
             return df.to_dict("records")
         else:
-            raise ValueError("`output_type` argument must be set to \"list\", \"str\" or \"records\".")
+            msg = '`output_type` argument must be set to "list", "str" or "records".'
+            raise ValueError(msg)
 
     else:
-        raise TypeError(
-            "`verbose` argument must be of `bool` type."
-        )
+        raise TypeError("`verbose` argument must be of `bool` type.")
 
     return None
 
@@ -331,7 +329,7 @@ def list_datasets(
     filter_by=None,
     with_description=False,
     from_file=False,
-    verbose=True
+    verbose=True,
 ):
     """Fetch the dataset_id of datasets available at query_project_id. Prints information on
     screen or returns it as a list.
@@ -379,7 +377,7 @@ def list_datasets(
         verbose=verbose,
         output_type="list",
         df=datasets,
-        col_name="dataset_id"
+        col_name="dataset_id",
     )
 
 
@@ -435,12 +433,12 @@ def list_dataset_tables(
             _get_header(client.get_table(f"{dataset_id}.{table}").description)
             for table in tables["table_id"]
         ]
-    
+
     return _handle_output(
         verbose=verbose,
         output_type="list",
         df=tables,
-        col_name="table_id"
+        col_name="table_id",
     )
 
 
@@ -448,7 +446,7 @@ def get_dataset_description(
     dataset_id=None,
     query_project_id="basedosdados",
     from_file=False,
-    verbose=True
+    verbose=True,
 ):
     """Prints the full dataset description.
 
@@ -467,11 +465,7 @@ def get_dataset_description(
 
     dataset = client.get_dataset(dataset_id)
 
-    return _handle_output(
-        verbose=verbose,
-        output_type="str",
-        df=dataset
-    )
+    return _handle_output(verbose=verbose, output_type="str", df=dataset)
 
 
 def get_table_description(
@@ -479,7 +473,7 @@ def get_table_description(
     table_id=None,
     query_project_id="basedosdados",
     from_file=False,
-    verbose=True
+    verbose=True,
 ):
     """Prints the full table description.
 
@@ -501,11 +495,7 @@ def get_table_description(
 
     table = client.get_table(f"{dataset_id}.{table_id}")
 
-    return _handle_output(
-        verbose=verbose,
-        output_type="str",
-        df=table
-    )
+    return _handle_output(verbose=verbose, output_type="str", df=table)
 
 
 def get_table_columns(
@@ -513,7 +503,7 @@ def get_table_columns(
     table_id=None,
     query_project_id="basedosdados",
     from_file=False,
-    verbose=True
+    verbose=True,
 ):
 
     """Fetch the names, types and descriptions for the columns in the specified table. Prints
@@ -548,11 +538,7 @@ def get_table_columns(
 
     description = pd.DataFrame(columns, columns=["name", "field_type", "description"])
 
-    return _handle_output(
-        verbose=verbose,
-        output_type="records",
-        df=description
-    )
+    return _handle_output(verbose=verbose, output_type="records", df=description)
 
 
 def get_table_size(
@@ -561,7 +547,7 @@ def get_table_size(
     billing_project_id,
     query_project_id="basedosdados",
     from_file=False,
-    verbose=True
+    verbose=True,
 ):
     """Use a query to get the number of rows and size (in Mb) of a table query
     from BigQuery. Prints information on screen in markdown friendly format.
@@ -611,8 +597,4 @@ def get_table_size(
         ]
     )
 
-    return _handle_output(
-        verbose=verbose,
-        output_type="records",
-        df=table_data
-    )
+    return _handle_output(verbose=verbose, output_type="records", df=table_data)

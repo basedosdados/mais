@@ -17,7 +17,7 @@ from ckanapi import CKANAPIError
 @click.option("--templates", default=None, help="Templates path")
 @click.option("--bucket_name", default=None, help="Project bucket name")
 @click.option("--metadata_path", default=None, help="Folder to store metadata")
-@click.version_option(package_name='basedosdados')
+@click.version_option(package_name="basedosdados")
 @click.pass_context
 def cli(ctx, templates, bucket_name, metadata_path):
 
