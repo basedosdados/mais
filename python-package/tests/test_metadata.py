@@ -97,20 +97,36 @@ def test_create_columns(table_metadata, table_metadata_path):
 @pytest.fixture
 def existent_metadata(metadatadir):
     table_metadata_obj = Metadata(
-        dataset_id="br_me_caged",
-        table_id="microdados_antigos",
+        dataset_id="br_me_rais",
+        table_id="microdados_vinculos",
         metadata_path=metadatadir
     )
     return table_metadata_obj
 
 
-def test_create_partition_columns():
-    pass
-
-
 @pytest.fixture
-def existent_metadata_path(metadatadir, existent_metadata):
-    return Path(metadatadir) / "br_me_caged" / "microdados_antigos"
+def existent_metadata_path(metadatadir):
+    return Path(metadatadir) / "br_me_rais" / "microdados_vinculos"
+
+
+def test_create_partition_columns_from_existent_table(existent_metadata, existent_metadata_path):
+    shutil.rmtree(existent_metadata_path, ignore_errors=True)
+    
+    existent_metadata.create()
+    assert existent_metadata_path.exists()
+
+    metadata_dict = existent_metadata.local_config
+    assert metadata_dict.get("partitions") == "ano, sigla_uf"
+
+
+def test_create_partition_columns_from_user_input(existent_metadata, existent_metadata_path):
+    shutil.rmtree(existent_metadata_path, ignore_errors=True)
+
+    existent_metadata.create(partition_columns=["id_municipio"])
+    assert existent_metadata_path.exists()
+    
+    metadata_dict = existent_metadata.local_config
+    assert metadata_dict.get("partitions") == "id_municipio"
 
 
 def test_create_force_columns_is_true(existent_metadata, existent_metadata_path):
@@ -135,7 +151,7 @@ def test_create_force_columns_is_false(existent_metadata, existent_metadata_path
 
 @pytest.fixture
 def out_of_date_metadata_obj(metadatadir):
-    out_of_date_metadata = Metadata(dataset_id="br_me_rais", metadata_path=metadatadir)
+    out_of_date_metadata = Metadata(dataset_id="br_me_caged", metadata_path=metadatadir)
     out_of_date_metadata.create(if_exists="replace")
 
     out_of_date_config = out_of_date_metadata.local_config
@@ -149,7 +165,7 @@ def out_of_date_metadata_obj(metadatadir):
 
 @pytest.fixture
 def updated_metadata_obj(metadatadir):
-    updated_metadata = Metadata(dataset_id="br_me_rais", metadata_path=metadatadir)
+    updated_metadata = Metadata(dataset_id="br_me_caged", metadata_path=metadatadir)
     updated_metadata.create(if_exists="replace")
 
     updated_config = updated_metadata.local_config
