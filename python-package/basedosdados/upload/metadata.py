@@ -388,10 +388,10 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
 
 
 def add_yaml_property(
-    yaml_obj: CommentedMap,
-    properties: dict,
-    definitions: dict,
-    metadata: dict,
+    yaml: CommentedMap,
+    properties: dict = {},
+    definitions: dict = {},
+    metadata: dict = {},
     goal=None,
     has_column=False,
 ):
@@ -405,32 +405,32 @@ def add_yaml_property(
 
         if goalWasReached:
             if "allOf" in property:
-                yaml_obj = handle_complex_fields(
-                    yaml_obj,
+                yaml = handle_complex_fields(
+                    yaml,
                     key,
                     properties,
                     definitions,
                     metadata,
                 )
 
-                if yaml_obj[key] == ordereddict():
-                    yaml_obj[key] = handle_data(key, properties, metadata)
+                if yaml[key] == ordereddict():
+                    yaml[key] = handle_data(key, properties, metadata)
             else:
-                yaml_obj[key] = handle_data(key, properties, metadata)
+                yaml[key] = handle_data(key, properties, metadata)
 
             # Add comments
             comment = None
             if not has_column:
                 description = properties[key].get("description", [])
                 comment = "\n" + "".join(description)
-            yaml_obj.yaml_set_comment_before_after_key(key, before=comment)
+            yaml.yaml_set_comment_before_after_key(key, before=comment)
             break
 
     # Return a ruaml object when property doesn't point to any other property
     id_after = properties[key]["yaml_order"]["id_after"]
 
     if id_after is None:
-        return yaml_obj
+        return yaml
     elif id_after not in properties.keys():
         raise BaseDosDadosException(
             f"Inconsistent YAML ordering: {id_after} is pointed to by {key}"
@@ -438,13 +438,15 @@ def add_yaml_property(
             f"chema."
         )
     else:
-        properties.pop(key)
+        updated_props = deepcopy(properties)
+        updated_props.pop(key)
         return add_yaml_property(
-            yaml_obj,
-            properties,
+            yaml,
+            updated_props,
             definitions,
             metadata,
             goal=id_after,
+            has_column=has_column,
         )
 
 
@@ -458,62 +460,48 @@ def build_yaml_object(
 ):
     """Build a dataset_config.yaml or table_config.yaml"""
 
-    has_column = False
-    yaml_obj = ryaml.CommentedMap()
-
     properties: dict = schema["properties"]
     definitions: dict = schema["definitions"]
 
     # Drop all properties without yaml_order
     properties = {
-        key: value for key, value in properties.items() if value.get("yaml_order")
+        key: value for key, value in properties.items()
+        if value.get("yaml_order")
     }
 
     # Add properties
-    yaml_obj = add_yaml_property(
-        yaml_obj,
+    yaml = add_yaml_property(
+        ryaml.CommentedMap(),
         properties,
         definitions,
-        metadata,
-        has_column=has_column,
+        metadata
     )
 
     # Add columns
     if metadata.get("columns"):
-        has_column = True
-        properties = columns_schema["properties"]
-        definitions = columns_schema["definitions"]
-
-        yaml_obj["columns"] = []
-        for _ in metadata.get("columns"):
-            columns = deepcopy(properties)
-            columns = add_yaml_property(
+        yaml["columns"] = []
+        for metadatum in metadata.get("columns"):
+            properties = add_yaml_property(
                 ryaml.CommentedMap(),
-                properties,
-                definitions,
-                metadata,
+                columns_schema["properties"],
+                columns_schema["definitions"],
+                metadatum,
+                has_column=True
             )
-            yaml_obj["columns"].append(columns)
+            yaml["columns"].append(properties)
 
     # Add partitions
-    partitions_writer_condition = (
-        partition_columns != ["[]"]
-        and partition_columns != []
-        and partition_columns is not None
-    )
-
-    if partitions_writer_condition:
-        yaml_obj["partitions"] = ""
+    if partition_columns and partition_columns != ["[]"]:
+        yaml["partitions"] = ""
         for local_column in partition_columns:
-            for remote_column in yaml_obj["columns"]:
+            for remote_column in yaml["columns"]:
                 if remote_column["name"] == local_column:
                     remote_column["is_partition"] = True
-
-        yaml_obj["partitions"] = ", ".join(partition_columns)
+        yaml["partitions"] = ", ".join(partition_columns)
 
     # Add dataset_id and table_id
-    yaml_obj["dataset_id"] = dataset_id
+    yaml["dataset_id"] = dataset_id
     if table_id:
-        yaml_obj["table_id"] = table_id
+        yaml["table_id"] = table_id
 
-    return yaml_obj
+    return yaml
