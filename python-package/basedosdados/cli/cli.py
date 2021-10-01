@@ -703,7 +703,7 @@ def cli_create_metadata(
 
     click.echo(
         click.style(
-            f"Metadata file was created at `{m.obj_path}`",
+            f"Metadata file was created at `{m.filepath}`",
             fg="green",
         )
     )

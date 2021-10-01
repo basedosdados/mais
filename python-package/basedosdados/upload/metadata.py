@@ -7,12 +7,12 @@ from typing import List
 
 import requests
 import ruamel.yaml as ryaml
-from ckanapi import RemoteCKAN
-from ckanapi.errors import NotAuthorized, ValidationError
-from ruamel.yaml.compat import ordereddict
-
 from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.base import Base
+from ckanapi import RemoteCKAN
+from ckanapi.errors import NotAuthorized, ValidationError
+from ruamel.yaml.comments import CommentedMap
+from ruamel.yaml.compat import ordereddict
 
 
 class Metadata(Base):
@@ -27,27 +27,35 @@ class Metadata(Base):
         self.CKAN_URL = self.config.get("ckan", {}).get("url", "") or url
 
     @property
-    def metadata_path(self) -> str:
+    def filepath(self) -> str:
         """Build the dataset or table filepath"""
 
         filename = "dataset_config.yaml"
         if self.table_id:
-            filename = self.table_id / "table_config.yaml"
+            filename = f"{self.table_id}/table_config.yaml"
         return self.metadata_path / self.dataset_id / filename
 
     @property
     def local_metadata(self) -> dict:
         """Load dataset or table local metadata"""
 
-        if self.metadata_path.exists():
-            with open(self.metadata_path, "r", encoding="utf-8") as file:
+        if self.filepath.exists():
+            with open(self.filepath, "r", encoding="utf-8") as file:
                 return ryaml.safe_load(file.read())
         return {}
 
     @property
     @lru_cache(256)
-    def ckan_metadata(self) -> List[dict, dict]:
+    def ckan_metadata(self) -> dict:
         """Load dataset or table metadata from Base dos Dados CKAN"""
+
+        ckan_dataset, ckan_table = self.ckan_metadata_extended
+        return ckan_table or ckan_dataset
+
+    @property
+    @lru_cache(256)
+    def ckan_metadata_extended(self) -> dict:
+        """Load dataset and table metadata from Base dos Dados CKAN"""
 
         dataset_id = self.dataset_id.replace("_", "-")
         url = f"{self.CKAN_URL}/api/3/action/package_show?id={dataset_id}"
@@ -62,7 +70,6 @@ class Metadata(Base):
             for resource in dataset["resources"]:
                 if resource["name"] == self.table_id:
                     return dataset, resource
-            return dataset, {}
 
         return dataset, {}
 
@@ -70,7 +77,7 @@ class Metadata(Base):
     def ckan_data_dict(self) -> dict:
         """Helper function that structures local metadata for validation"""
 
-        ckan_dataset, ckan_table = self.ckan_metadata
+        ckan_dataset, ckan_table = self.ckan_metadata_extended
 
         metadata = {
             "id": ckan_dataset.get("id"),
@@ -147,14 +154,14 @@ class Metadata(Base):
     def metadata_schema(self) -> dict:
         """Get metadata schema from CKAN API endpoint"""
 
+        if self.table_id:
+            table_url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_schema"
+            table_schema = requests.get(table_url).json().get("result")
+
+            return table_schema
+
         dataset_url = f"{self.CKAN_URL}/api/3/action/bd_dataset_schema"
         dataset_schema = requests.get(dataset_url).json().get("result")
-
-        table_url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_schema"
-        table_schema = requests.get(table_url).json().get("result")
-
-        if self.table_id:
-            return table_schema
 
         return dataset_schema
 
@@ -179,10 +186,10 @@ class Metadata(Base):
 
     def create(
         self,
-        if_exists="raise",
-        columns=[],
-        partition_columns=[],
-        force_columns=False,
+        if_exists: str = "raise",
+        columns: list = [],
+        partition_columns: list = [],
+        force_columns: bool = False,
     ) -> Metadata:
         """Create metadata file based on the current version saved to CKAN database
 
@@ -200,44 +207,46 @@ class Metadata(Base):
                 If set to `False`, keep CKAN's columns instead of the ones provided.
         """
 
-        if self.metadata_path.exists() and if_exists == "raise":
+        if self.filepath.exists() and if_exists == "raise":
             raise FileExistsError(
-                f"{self.metadata_path} already exists."
+                f"{self.filepath} already exists."
                 + " Set the arg `if_exists` to `replace` to replace it."
             )
         elif if_exists != "pass":
-            data = self.ckan_metadata
+            ckan_metadata = self.ckan_metadata
 
-            # Adds local columns if
+            # Add local columns if
             # 1. columns is empty and
             # 2. force_columns is True
 
             # TODO: Is this sufficient to add columns?
-            if self.table_id and (force_columns or not data.get("columns")):
-                data["columns"] = [{"name": c} for c in columns]
+            if self.table_id and (force_columns or not ckan_metadata.get("columns")):
+                ckan_metadata["columns"] = [{"name": c} for c in columns]
 
             yaml_obj = build_yaml_object(
                 self.dataset_id,
                 self.table_id,
                 self.metadata_schema,
-                data,
+                ckan_metadata,
                 columns_schema=self.columns_schema,
                 partition_columns=partition_columns,
             )
 
-            self.metadata_path.parent.mkdir(parents=True, exist_ok=True)
+            self.filepath.parent.mkdir(parents=True, exist_ok=True)
 
-            ruamel = ryaml.YAML()
-            ruamel.preserve_quotes = True
-            ruamel.indent(mapping=4, sequence=6, offset=4)
-            ruamel.dump(yaml_obj, open(self.metadata_path, "w", encoding="utf-8"))
+            with open(self.filepath, "w", encoding="utf-8") as file:
+                ruamel = ryaml.YAML()
+                ruamel.preserve_quotes = True
+                ruamel.indent(mapping=4, sequence=6, offset=4)
+                ruamel.dump(yaml_obj, file)
 
         return self
 
     def validate(self) -> bool:
         """Validate dataset_config.yaml or table_config.yaml files.
-        The yaml file should be located at metadata_path/dataset_id[/table_id/
-        ], as defined in your config.toml
+        The yaml file should be located at
+        metadata_path/dataset_id[/table_id/],
+        as defined in your config.toml
 
         Returns:
             bool:
@@ -253,7 +262,7 @@ class Metadata(Base):
 
         if response.get("errors"):
             error = {self.ckan_data_dict.get("name"): response["errors"]}
-            message = f"{self.metadata_path} has validation errors: {error}"
+            message = f"{self.filepath} has validation errors: {error}"
             raise BaseDosDadosException(message)
 
         return True
@@ -282,7 +291,7 @@ class Metadata(Base):
                 '\n\n```\n[ckan]\nurl="<CKAN_URL>"\napi_key="<API_KEY>"\n```'
             )
 
-        bdm_ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=self.CKAN_API_KEY)
+        ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=self.CKAN_API_KEY)
 
         try:
             self.validate()
@@ -298,34 +307,39 @@ class Metadata(Base):
                 data_dict = self.ckan_data_dict.copy()
                 data_dict = data_dict["resources"][0]
 
-                return bdm_ckan.call_action(
+                return ckan.call_action(
                     action="resource_patch",
                     data_dict=data_dict,
                 )
 
             else:
-                return bdm_ckan.call_action(
+                return ckan.call_action(
                     action="package_patch",
                     data_dict=self.ckan_data_dict,
                 )
 
         except (BaseDosDadosException, ValidationError) as e:
-            msg = (
+            message = (
                 f"Could not publish metadata due to a validation error. Pleas"
                 f"e see the traceback below to get information on how to corr"
                 f"ect it.\n\n{repr(e)}"
             )
-            raise BaseDosDadosException(msg)
+            raise BaseDosDadosException(message)
 
         except NotAuthorized as e:
-            msg = (
+            message = (
                 f"Could not publish metadata due to an authorization error. P"
                 f"lease check if you set the `api_key` at the `[ckan]` sectio"
                 f"n of your ~/.basedosdados/config.toml correctly. You must b"
                 f"e an authorized user to publish modifications to a dataset "
                 f"or table's metadata."
             )
-            raise BaseDosDadosException(msg)
+            raise BaseDosDadosException(message)
+
+
+###############################################################################
+# Helper Functions
+###############################################################################
 
 
 def handle_data(k, schema, data, local_default=None):
@@ -365,99 +379,130 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
     if "properties" in definitions[d].keys():
         for dk, dv in definitions[d]["properties"].items():
             yaml_obj[k][dk] = handle_data(
-                dk, definitions[d]["properties"], data.get(k, {})
+                dk,
+                definitions[d]["properties"],
+                data.get(k, {}),
             )
 
     return yaml_obj
 
 
-def build_yaml_object(
-    dataset_id,
-    table_id,
-    schema,
-    data=dict(),
-    columns_schema=dict(),
-    partition_columns=list(),
+def add_yaml_property(
+    yaml_obj: CommentedMap,
+    properties: dict,
+    definitions: dict,
+    metadata: dict,
+    goal=None,
+    has_column=False,
 ):
-    def comment_treatment(c):
-        return None if COLUMNS else "\n" + "".join(c.get("description", [""]))
+    """Recursivelly adds properties to yaml to maintain order"""
 
-    COLUMNS = False
-    yaml_obj = ryaml.CommentedMap()
+    # Looks for the key
+    # If goal is none has to look for id_before == None
+    for key, property in properties.items():
+        goalWasReached = key == goal
+        goalWasReached |= property["yaml_order"]["id_before"] == None
 
-    properties, definitions = schema["properties"], schema["definitions"]
-
-    # Drops all properties without yaml_order
-    key_list = list(properties.keys())
-    for k in key_list:
-        if properties[k].get("yaml_order") is None:
-            del properties[k]
-
-    # Recursivelly adds properties to yaml to maintain order
-    def _add_property(yaml_obj, properties, goal=None):
-
-        for k in properties.keys():
-
-            # Base case (goal is None) has to look for id_before == None
-            # Otherwise just looks for key
-            if ((goal is None) & (properties[k]["yaml_order"]["id_before"] == goal)) | (
-                k == goal
-            ):
-
-                if "allOf" in properties[k]:
-
-                    yaml_obj = handle_complex_fields(
-                        yaml_obj, k, properties, definitions, data
-                    )
-
-                    if yaml_obj[k] == ordereddict():
-                        yaml_obj[k] = handle_data(k, properties, data)
-
-                else:
-                    yaml_obj[k] = handle_data(k, properties, data)
-
-                # Adds comments
-                yaml_obj.yaml_set_comment_before_after_key(
-                    k, before=comment_treatment(properties[k])
+        if goalWasReached:
+            if "allOf" in property:
+                yaml_obj = handle_complex_fields(
+                    yaml_obj,
+                    key,
+                    properties,
+                    definitions,
+                    metadata,
                 )
-                break
 
-        # Returns ruaml object when property doesn't point to any other property
-        id_after = properties[k]["yaml_order"]["id_after"]
-        if id_after is None:
-            return yaml_obj
-        elif id_after not in properties.keys():
-            raise BaseDosDadosException(
-                f"Inconsistent YAML ordering: {id_after} is pointed to by {k}"
-                f" but doesn't have itself a `yaml_order` field in the JSON S"
-                f"chema."
-            )
-        else:
-            properties.pop(k)
-            return _add_property(yaml_obj, properties, id_after)
+                if yaml_obj[key] == ordereddict():
+                    yaml_obj[key] = handle_data(key, properties, metadata)
+            else:
+                yaml_obj[key] = handle_data(key, properties, metadata)
 
-    yaml_obj = _add_property(yaml_obj, properties)
+            # Add comments
+            comment = None
+            if not has_column:
+                description = properties[key].get("description", [])
+                comment = "\n" + "".join(description)
+            yaml_obj.yaml_set_comment_before_after_key(key, before=comment)
+            break
 
-    if data.get("columns"):
-        COLUMNS = True
-        properties, definitions = (
-            columns_schema["properties"],
-            columns_schema["definitions"],
+    # Return a ruaml object when property doesn't point to any other property
+    id_after = properties[key]["yaml_order"]["id_after"]
+
+    if id_after is None:
+        return yaml_obj
+    elif id_after not in properties.keys():
+        raise BaseDosDadosException(
+            f"Inconsistent YAML ordering: {id_after} is pointed to by {key}"
+            f" but doesn't have itself a `yaml_order` field in the JSON S"
+            f"chema."
+        )
+    else:
+        properties.pop(key)
+        return add_yaml_property(
+            yaml_obj,
+            properties,
+            definitions,
+            metadata,
+            goal=id_after,
         )
 
-        yaml_obj["columns"] = []
-        for data in data.get("columns"):
-            prop = deepcopy(properties)
-            yaml_obj["columns"].append(_add_property(ryaml.CommentedMap(), prop))
 
-    # in case of new dataset/table or local overwriting
+def build_yaml_object(
+    dataset_id: str,
+    table_id: str,
+    schema: dict,
+    metadata: dict = dict(),
+    columns_schema: dict = dict(),
+    partition_columns: list = list(),
+):
+    """Build a dataset_config.yaml or table_config.yaml"""
+
+    has_column = False
+    yaml_obj = ryaml.CommentedMap()
+
+    properties: dict = schema["properties"]
+    definitions: dict = schema["definitions"]
+
+    # Drop all properties without yaml_order
+    properties = {
+        key: value for key, value in properties.items() if value.get("yaml_order")
+    }
+
+    # Add properties
+    yaml_obj = add_yaml_property(
+        yaml_obj,
+        properties,
+        definitions,
+        metadata,
+        has_column=has_column,
+    )
+
+    # Add columns
+    if metadata.get("columns"):
+        has_column = True
+        properties = columns_schema["properties"]
+        definitions = columns_schema["definitions"]
+
+        yaml_obj["columns"] = []
+        for _ in metadata.get("columns"):
+            columns = deepcopy(properties)
+            columns = add_yaml_property(
+                ryaml.CommentedMap(),
+                properties,
+                definitions,
+                metadata,
+            )
+            yaml_obj["columns"].append(columns)
+
+    # Add partitions
     partitions_writer_condition = (
         partition_columns != ["[]"]
         and partition_columns != []
         and partition_columns is not None
     )
 
-    if partitions_writer_condition == True:
+    if partitions_writer_condition:
         yaml_obj["partitions"] = ""
         for local_column in partition_columns:
             for remote_column in yaml_obj["columns"]:
@@ -466,6 +511,7 @@ def build_yaml_object(
 
         yaml_obj["partitions"] = ", ".join(partition_columns)
 
+    # Add dataset_id and table_id
     yaml_obj["dataset_id"] = dataset_id
     if table_id:
         yaml_obj["table_id"] = table_id
