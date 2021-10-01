@@ -94,12 +94,8 @@ def test_create_columns(table_metadata, table_metadata_path):
     assert (table_metadata_path / METADATA_FILES["table"]).exists()
 
 
-def test_create_partition_columns():
-    pass
-
-
 @pytest.fixture
-def force_columns_metadata(metadatadir):
+def existent_metadata(metadatadir):
     table_metadata_obj = Metadata(
         dataset_id="br_me_caged",
         table_id="microdados_antigos",
@@ -108,30 +104,33 @@ def force_columns_metadata(metadatadir):
     return table_metadata_obj
 
 
+def test_create_partition_columns():
+    pass
+
+
 @pytest.fixture
-def force_columns_metadata_path(metadatadir, force_columns_metadata):
+def existent_metadata_path(metadatadir, existent_metadata):
     return Path(metadatadir) / "br_me_caged" / "microdados_antigos"
 
 
+def test_create_force_columns_is_true(existent_metadata, existent_metadata_path):
+    shutil.rmtree(existent_metadata_path, ignore_errors=True)
+    existent_metadata.create(columns=["column1", "column2"], force_columns=True)
+    assert (existent_metadata_path / METADATA_FILES["table"]).exists()
 
-def test_create_force_columns_is_true(force_columns_metadata, force_columns_metadata_path):
-    shutil.rmtree(force_columns_metadata_path, ignore_errors=True)
-    force_columns_metadata.create(columns=["column1", "column2"], force_columns=True)
-    assert (force_columns_metadata_path / METADATA_FILES["table"]).exists()
-
-    table_metadata = force_columns_metadata.local_config
-    assert table_metadata["columns"][0]["name"] == "column1"
-    assert table_metadata["columns"][1]["name"] == "column2"
+    table_metadata_dict = existent_metadata.local_config
+    assert table_metadata_dict["columns"][0]["name"] == "column1"
+    assert table_metadata_dict["columns"][1]["name"] == "column2"
 
 
-def test_create_force_columns_is_false(force_columns_metadata, force_columns_metadata_path):
-    shutil.rmtree(force_columns_metadata_path, ignore_errors=True)
-    force_columns_metadata.create(columns=["column1", "column2"], force_columns=False)
-    assert (force_columns_metadata_path / METADATA_FILES["table"]).exists()
+def test_create_force_columns_is_false(existent_metadata, existent_metadata_path):
+    shutil.rmtree(existent_metadata_path, ignore_errors=True)
+    existent_metadata.create(columns=["column1", "column2"], force_columns=False)
+    assert (existent_metadata_path / METADATA_FILES["table"]).exists()
 
-    table_metadata = force_columns_metadata.local_config
-    assert table_metadata["columns"][0]["name"] != "column1"
-    assert table_metadata["columns"][1]["name"] != "column2"    
+    table_metadata_dict = existent_metadata.local_config
+    assert table_metadata_dict["columns"][0]["name"] != "column1"
+    assert table_metadata_dict["columns"][1]["name"] != "column2"    
 
 
 @pytest.fixture
