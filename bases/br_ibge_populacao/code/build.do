@@ -423,15 +423,18 @@ save "tmp/2011.dta", replace
 // 2012
 //-----------------//
 
-import excel "raw/2012/estimativa_2012_DOU_28_08_2012_xls.xls", clear
+import excel "raw/2012/estimativa_2012_TCU_20170614.xls", clear sheet("Municípios")
 drop in 1/2
-drop in 5566/5567
+drop in 5571/5575
 gen id_municipio = B + C
 gen id_municipio_6 = substr(id_municipio, 1, 6)
 ren D municipio
 ren E populacao
 drop A-C F
 replace populacao = subinstr(populacao, "(*)", "", .)
+replace populacao = subinstr(populacao, "(1)", "", .)
+replace populacao = subinstr(populacao, "(2)", "", .)
+replace populacao = subinstr(populacao, "(3)", "", .)
 replace populacao = subinstr(populacao, ".", "", .)
 destring, replace
 gen ano = 2012
@@ -442,14 +445,19 @@ save "tmp/2012.dta", replace
 // 2013
 //-----------------//
 
-import excel "raw/2013/estimativa_2013_dou_xls.xls", clear
-drop in 1/3
-drop in 5571/5578
+import excel "raw/2013/estimativa_2013_TCU_20170614.xls", clear sheet("Municípios")
+drop in 1/2
+drop in 5571/5573
 gen id_municipio = B + C
 gen id_municipio_6 = substr(id_municipio, 1, 6)
 ren D municipio
 ren E populacao
-drop A-C F
+drop A-C
+replace populacao = subinstr(populacao, "(*)", "", .)
+replace populacao = subinstr(populacao, "(1)", "", .)
+replace populacao = subinstr(populacao, "(2)", "", .)
+replace populacao = subinstr(populacao, "(3)", "", .)
+replace populacao = subinstr(populacao, ".", "", .)
 destring, replace
 gen ano = 2013
 order id_municipio_6 id_municipio municipio ano populacao
@@ -459,15 +467,16 @@ save "tmp/2013.dta", replace
 // 2014
 //-----------------//
 
-import excel "raw/2014/estimativas_dou_2014_xls.xls", clear sheet("Municípios")
-drop in 1/3
-drop in 5571/5578
+import excel "raw/2014/estimativa_TCU_2014_20170614.xls", clear sheet("Municípios")
+drop in 1/2
+drop in 5571/5576
 gen id_municipio = B + C
 gen id_municipio_6 = substr(id_municipio, 1, 6)
 ren D municipio
 ren E populacao
 drop A-C F
-replace populacao = subinstr(populacao, "*", "", .)
+replace populacao = subinstr(populacao, "(1)", "", .)
+replace populacao = subinstr(populacao, "(2)", "", .)
 replace populacao = subinstr(populacao, ".", "", .)
 destring, replace
 gen ano = 2014
@@ -478,7 +487,7 @@ save "tmp/2014.dta", replace
 // 2015
 //-----------------//
 
-import excel "raw/2015/estimativa_dou_2015_20150915.xls", clear sheet("Municípios")
+import excel "raw/2015/estimativa_TCU_2015_20170614.xls", clear sheet("Municípios")
 drop in 1/2
 drop in 5571/5577
 gen id_municipio = B + C
@@ -487,6 +496,11 @@ ren D municipio
 ren E populacao
 drop A-C
 replace populacao = subinstr(populacao, "(*)", "", .)
+replace populacao = subinstr(populacao, "(1)", "", .)
+replace populacao = subinstr(populacao, "(2)", "", .)
+replace populacao = subinstr(populacao, "(3)", "", .)
+replace populacao = subinstr(populacao, "(4)", "", .)
+replace populacao = subinstr(populacao, "(5)", "", .)
 replace populacao = subinstr(populacao, ".", "", .)
 destring, replace
 gen ano = 2015
@@ -497,8 +511,8 @@ save "tmp/2015.dta", replace
 // 2016
 //-----------------//
 
-import excel "raw/2016/estimativa_dou_2016.xlsx", clear
-drop in 1/3
+import excel "raw/2016/estimativa_TCU_2016_20170614.xls", clear sheet("Municípios")
+drop in 1/2
 drop in 5571/5577
 gen id_municipio = B + C
 gen id_municipio_6 = substr(id_municipio, 1, 6)
@@ -506,6 +520,11 @@ ren D municipio
 ren E populacao
 drop A-C
 replace populacao = subinstr(populacao, "(*)", "", .)
+replace populacao = subinstr(populacao, "(1)", "", .)
+replace populacao = subinstr(populacao, "(2)", "", .)
+replace populacao = subinstr(populacao, "(3)", "", .)
+replace populacao = subinstr(populacao, "(4)", "", .)
+replace populacao = subinstr(populacao, "(5)", "", .)
 replace populacao = subinstr(populacao, ".", "", .)
 destring, replace
 gen ano = 2016
@@ -516,19 +535,18 @@ save "tmp/2016.dta", replace
 // 2017
 //-----------------//
 
-import excel "raw/2017/estimativa_dou_2017.xls", clear sheet(Municípios)
+import excel "raw/2017/POP2017_20210331.xls", clear sheet(Municípios)
 drop in 1/2
-drop in 5571/5580
+drop in 5571/5585
 gen id_municipio = B + C
 gen id_municipio_6 = substr(id_municipio, 1, 6)
 ren D municipio
 ren E populacao
 drop A-C
-replace populacao = subinstr(populacao, " (1)", "", .)
-replace populacao = subinstr(populacao, " (2)", "", .)
-replace populacao = subinstr(populacao, "(3)", "", .)
-replace populacao = subinstr(populacao, "(4)", "", .)
-replace populacao = subinstr(populacao, "(5)", "", .)
+split populacao, p("(")
+drop populacao populacao2
+ren populacao1 populacao
+replace populacao = subinstr(populacao, ".", "", .)
 destring, replace
 gen ano = 2017
 order id_municipio_6 id_municipio municipio ano populacao
@@ -579,9 +597,9 @@ save "tmp/2019.dta", replace
 // 2020
 //-----------------//
 
-import excel "raw/2020/estimativa_dou_2020.xls", clear sheet(Municípios)
+import excel "raw/2020/POP2020_20210331.xls", clear sheet(Municípios)
 drop in 1/2
-drop in 5571/5587
+drop in 5571/5593
 gen id_municipio = B + C
 gen id_municipio_6 = substr(id_municipio, 1, 6)
 ren D municipio
@@ -642,7 +660,6 @@ order ano sigla_uf id_municipio populacao
 sort  id_municipio ano
 
 export delimited "output/municipio.csv", replace
-
 
 //-------------------------------//
 // agregacoes

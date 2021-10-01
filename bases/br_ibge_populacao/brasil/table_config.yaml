@@ -7,7 +7,7 @@ dataset_id: br_ibge_populacao # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-ibge-populacao # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_populacao # AUTO GENERATED
 
-version: v1.0
+version: v1.1
 
 last_updated: 2021-09-27 # AUTO GENERATED
 
@@ -16,7 +16,7 @@ last_updated: 2021-09-27 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Dados de população do Brasil do IBGE. Os dados vem de estimativas de população feitas pelo IBGE, exceto em anos de Censo ou contagem.
+    Dados de população do Brasil do IBGE. Os dados vem de estimativas de população feitas pelo IBGE (versão TCU sempre que disponível), exceto em anos de Censo ou contagem.
 
 # Quem está completando esse arquivo config?
 published_by:
