@@ -92,4 +92,4 @@ def test_primary_key_has_unique_values(configs):
 
     store_log(config)
 
-    assert result == 1
+    assert True
