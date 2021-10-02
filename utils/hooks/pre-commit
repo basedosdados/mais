@@ -4,28 +4,19 @@ echo ------------------------------------------------------
 echo Sort
 echo ------------------------------------------------------
 
-python -m isort --profile black .github
-python -m isort --profile black python-package
+python -m isort --profile black .github python-package
 
 echo ------------------------------------------------------
 echo Format
 echo ------------------------------------------------------
 
-python -m black .github
-python -m black python-package
+python -m black .github python-package
 
 echo ------------------------------------------------------
 echo Lint
 echo ------------------------------------------------------
 
-python -m pylint --exit-zero .github
-python -m pylint --exit-zero python-package
-
-# echo ------------------------------------------------------
-# echo Test
-# echo ------------------------------------------------------
-
-# python -m pytest python-package
+python -m pylint --exit-zero .github/**/*.py python-package
 
 echo ------------------------------------------------------
 echo Commit

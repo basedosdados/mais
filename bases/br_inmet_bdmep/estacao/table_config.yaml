@@ -9,7 +9,8 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdme
 
 version: 1.0 # REQUIRED
 
-last_updated: 2021-08-31 # AUTO GENERATED
+last_updated: 2021-09-14 # AUTO GENERATED
+
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de

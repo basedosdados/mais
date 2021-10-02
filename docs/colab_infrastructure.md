@@ -3,7 +3,7 @@
 
 Nossa infraestrutura é composta de 3 frentes principais: 
 
-- [**Sistema de ingestão de dados**](sistema-de-ingestao-de-dados): desde o upload até a
+- [**Sistema de ingestão de dados**](#sistema-de-ingestao-de-dados): desde o upload até a
   disponibilização em produção;
 - [**Pacotes de acesso**](#pacotes-de-acesso)
 - [**Website**](#website): Front-end, Back-end e APIs.
@@ -42,7 +42,7 @@ mais.
 
 - [Explore os issues do pacote Python](https://github.com/basedosdados/mais/labels/python)
 - [Explore os issues do pacote R](https://github.com/basedosdados/mais/labels/R)
-- [Ajude a desenvolver o pacote em Stata](https://github.com/basedosdados/mais/pull/754s)
+- [Ajude a desenvolver o pacote em Stata](https://github.com/basedosdados/mais/pull/754)
 
 ## Website
 

@@ -1,5 +1,6 @@
 Tabela de dicionário das variáveis de estabelecimento do Cadastro Nacional de Estabelecimentos de Saúde(CNES)
 
+
 Para saber mais acesse:
 Website: https://basedosdados.org/dataset/br-ms-cnes
 Github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_cnes

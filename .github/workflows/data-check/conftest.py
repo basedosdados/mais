@@ -100,7 +100,7 @@ def pytest_sessionstart(session):
         pytest.exit("No fixtures found", 0)
 
     # load checks with jinja2 placeholders
-    # and replace the project variable by the 
+    # and replace the project variable by the
     # production environment if it's table approve action
     with open(check_path, "r", encoding="utf-8") as file:
         skeleton = file.read()

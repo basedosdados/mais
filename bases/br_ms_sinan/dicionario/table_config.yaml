@@ -1,0 +1,180 @@
+
+dataset_id: br_ms_sinan
+
+table_id: dicionario
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description:
+    Dicionário do SINAN
+
+# A máxima unidade espacial que a tabela cobre.
+spatial_coverage:
+
+# Anos cobertos pela tabela.
+temporal_coverage:
+
+# A unidade temporal com qual a tabela é atualizada.
+update_frequency:
+
+# Entidade representada por cada linha.
+entity:
+
+# A unidade temporal representada por cada linha.
+time_unit:
+
+# O conjunto mínimo de colunas identificando cada linha unicamente.
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+identifying_columns:
+    - id_tabela
+    - coluna
+    - valor
+
+last_updated:
+    metadata:
+        - 2021-09-22
+    data:
+        - 2021-09-22
+    release:
+        - 2021-09-22
+
+version:
+    - 1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name:
+        - Filipe Cavalcati
+    email:
+        - f.matheus.cavalcanti@gmail.com
+    github_user:
+        - filipemsc
+    website:
+        - https://github.com/filipemsc
+    ckan_user:
+        -
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name:
+        - Filipe Cavalcanti
+    email:
+        - f.matheus.cavalcanti@gmail.com
+    github_user:
+        - filipemsc
+    ckan_user:
+        - 
+    website:
+        - https://github.com/filipemsc
+    code_url:
+        
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+covered_by_dictionary:
+
+source_bucket_name: bases-bd
+
+project_id_prod: projetos-bd
+
+project_id_staging: projetos-bd
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: id_tabela
+
+bdm_file_size:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: id_tabela
+      bigquery_type:
+      description: Id da Tabela no SINAN
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id: 
+          column_name:
+      measurement_unit: 
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: true
+    - name: coluna
+      bigquery_type:
+      description: Nome da variável
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: 
+          table_id: 
+          column_name:
+      measurement_unit: 
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: chave
+      bigquery_type:
+      description: Valor que a variável assume
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: 
+          table_id: 
+          column_name: 
+      measurement_unit: 
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: cobertura_temporal
+      bigquery_type:
+      description: Cobertura temporal da variável
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: 
+          table_id: 
+          column_name: 
+      measurement_unit: 
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: valor
+      bigquery_type:
+      description: Significado da variável para aquela dada chave
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: 
+          table_id: 
+          column_name: 
+      measurement_unit: 
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+
+metadata_modified: 2021-09-22
