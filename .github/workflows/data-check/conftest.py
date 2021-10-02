@@ -86,9 +86,9 @@ def pytest_sessionstart(session):
 
     # set filepaths for checks and configs
     # change this line to "checks.yaml" for local debugging
-    check_path = "checks.yaml"
+    check_path = "./.github/workflows/data-check/checks.yaml"
     # replace this line with a list of table_config.yaml paths for local debugging
-    config_paths = ["/home/vncsna/Base/data-check/bases/br_ibge_pib/municipio/table_config.yaml"] #get_table_configs()
+    config_paths = get_table_configs()
 
     # filter datasets if skipfile is activated
     if _options.skipfile:
