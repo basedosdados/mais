@@ -23,9 +23,10 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(estagio_bd AS STRING) estagio_bd,
+SAFE_CAST(estagio AS STRING) estagio,
 SAFE_CAST(portaria AS STRING) portaria,
 SAFE_CAST(conta AS STRING) conta,
+SAFE_CAST(estagio_bd AS STRING) estagio_bd,
 SAFE_CAST(id_conta_bd AS STRING) id_conta_bd,
 SAFE_CAST(conta_bd AS STRING) conta_bd,
 SAFE_CAST(valor AS FLOAT64) valor
