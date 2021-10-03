@@ -3,8 +3,6 @@ message: "If you use this software, please cite it as below."
 authors:
   - family-names: "Base dos Dados"
 url: "https://basedosdados.org"
-references:
-- year-original: 2019
-- year: 2021
 license: MIT
+license-url: https://github.com/basedosdados/mais/blob/master/LICENSE
 repository-code: https://github.com/basedosdados/mais
