@@ -8,7 +8,7 @@
 
 #-------------------------------------------
 
-# Variavel do diretorio de trabalho, previsa ser modificado conforme o sistema
+# Variavel do diretorio de trabalho, previsa ser modificado conforme o S.O
 #-------------------------------------------
 
 setwd ("~/br_bcb_estban/input")
