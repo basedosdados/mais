@@ -400,10 +400,10 @@ def add_yaml_property(
     # Looks for the key
     # If goal is none has to look for id_before == None
     for key, property in properties.items():
-        goalWasReached = key == goal
-        goalWasReached |= property["yaml_order"]["id_before"] == None
+        goal_was_reached = key == goal
+        goal_was_reached |= property["yaml_order"]["id_before"] == None
 
-        if goalWasReached:
+        if goal_was_reached:
             if "allOf" in property:
                 yaml = handle_complex_fields(
                     yaml,
@@ -489,7 +489,7 @@ def build_yaml_object(
             )
             yaml["columns"].append(properties)
 
-    # Add partitions
+    # Add partitions in case of new dataset/talbe or local overwriting
     if partition_columns and partition_columns != ["[]"]:
         yaml["partitions"] = ""
         for local_column in partition_columns:
@@ -497,6 +497,10 @@ def build_yaml_object(
                 if remote_column["name"] == local_column:
                     remote_column["is_partition"] = True
         yaml["partitions"] = ", ".join(partition_columns)
+    
+    # Nullify `partitions` field in case of other-than-None empty values
+    if yaml.get("partitions") == "":
+        yaml["partitions"] = None
 
     # Add dataset_id and table_id
     yaml["dataset_id"] = dataset_id
