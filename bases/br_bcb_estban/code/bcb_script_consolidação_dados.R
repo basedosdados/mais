@@ -1,4 +1,4 @@
-# Pacote necessario para download dos arquivos
+# Pacote necessario para leitura e escrita dos arquivos .csv
 #-------------------------------------------
 
 install.packages("readr")
