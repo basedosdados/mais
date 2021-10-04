@@ -3,7 +3,6 @@
 # Pacote necessario para download dos arquivos
 #-------------------------------------------
 
- 
   install.packages("rvest")
   require(rvest)
 
