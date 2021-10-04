@@ -80,7 +80,7 @@ class Metadata(Base):
 
         metadata = {
             "id": ckan_dataset.get("id"),
-            "name": ckan_dataset.get("name") or "",
+            "name": ckan_dataset.get("name") or self.dataset_id.replace("_", "-"),
             "type": ckan_dataset.get("type") or "dataset",
             "title": self.local_metadata.get("title"),
             "private": ckan_dataset.get("private") or False,
@@ -136,6 +136,7 @@ class Metadata(Base):
                     "bdm_file_size": self.local_metadata.get("bdm_file_size"),
                     "columns": self.local_metadata.get("columns"),
                     "metadata_modified": self.local_metadata.get("metadata_modified"),
+                    "package_id": ckan_dataset.get("id"),
                 }
             ]
 
@@ -166,8 +167,10 @@ class Metadata(Base):
 
         return dataset_schema
 
-    def is_updated(self) -> bool:
-        """Check if a dataset or table is updated"""
+    def exists_in_ckan(self) -> bool:
+        """Check if Metadata object refers to an existing CKAN package or reso
+        urce.
+        """
 
         if self.table_id:
             url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_show?"
@@ -177,9 +180,14 @@ class Metadata(Base):
             url = f"{self.CKAN_URL}/api/3/action/bd_bdm_dataset_show?"
             url += f"dataset_id={self.dataset_id}"
             exists_in_ckan = requests.get(url).json().get("success")
+        
+        return exists_in_ckan
+
+    def is_updated(self) -> bool:
+        """Check if a dataset or table is updated"""
 
         if not self.local_metadata.get("metadata_modified"):
-            return True if not exists_in_ckan else False
+            return True if not self.exists_in_ckan() else False
         else:
             ckan_modified = self.ckan_metadata.get("metadata_modified")
             local_modified = self.local_metadata.get("metadata_modified")
@@ -312,19 +320,22 @@ class Metadata(Base):
                 f"and apply your changes to it."
             )
 
+            data_dict = self.ckan_data_dict.copy()
+            
             if self.table_id:
-                data_dict = self.ckan_data_dict.copy()
                 data_dict = data_dict["resources"][0]
 
                 return ckan.call_action(
-                    action="resource_patch",
+                    action="resource_patch" if self.exists_in_ckan() else "resource_create",
                     data_dict=data_dict,
                 )
 
             else:
+                data_dict["resources"] = []
+
                 return ckan.call_action(
-                    action="package_patch",
-                    data_dict=self.ckan_data_dict,
+                    action="package_patch" if self.exists_in_ckan() else "package_create",
+                    data_dict=data_dict
                 )
 
         except (BaseDosDadosException, ValidationError) as e:
