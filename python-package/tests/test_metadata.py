@@ -275,17 +275,18 @@ def test_validate_is_not_succesful(
 
 
 # TODO: Mock ckan server to activate this test
-# def test_publish_is_successful(
-#     valid_metadata_dataset: Metadata,
-#     valid_metadata_table: Metadata,
-# ):
-#     assert isinstance(valid_metadata_dataset.publish(), dict)
-#     assert isinstance(valid_metadata_table.publish(), dict)
+@pytest.mark.skip(reason="This test requires a mocked CKAN server.")
+def test_publish_is_successful(
+    valid_metadata_dataset: Metadata,
+    valid_metadata_table: Metadata,
+):
+    assert isinstance(valid_metadata_dataset.publish(), dict)
+    assert isinstance(valid_metadata_table.publish(), dict)
 
 
 def test_publish_is_not_successful(invalid_dataset_metadata, invalid_table_metadata):
-    with pytest.raises(BaseDosDadosException):
+    with pytest.raises(AssertionError, match="Could not publish"):
         invalid_dataset_metadata.publish()
 
-    with pytest.raises(BaseDosDadosException):
+    with pytest.raises(BaseDosDadosException, match="Could not publish"):
         invalid_table_metadata.publish()

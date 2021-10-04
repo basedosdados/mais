@@ -361,8 +361,6 @@ def handle_data(k, schema, data, local_default=None):
 
     if isinstance(_selected[0], dict):
         if _selected[0].get("id") is not None:
-            if k == "organization":
-                print(f"{_selected[0].get('id') is not None}")
             return [s.get("name") for s in _selected]
 
     return selected
