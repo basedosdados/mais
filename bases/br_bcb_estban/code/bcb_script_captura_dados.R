@@ -38,9 +38,6 @@ for (i in bcb_extrc_str_mun){
 
 #-------------------------------------------
 
-
-
-
 # Laço para download dos arquivos .ZIP municipio e agencia
 #-------------------------------------------
 
