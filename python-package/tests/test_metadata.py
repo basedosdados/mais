@@ -306,6 +306,7 @@ def test_publish_is_successful(
     assert isinstance(valid_metadata_table.publish(), dict)
 
 
+@pytest.mark.skip(reason="This test requires a mocked CKAN server.")
 def test_publish_is_not_successful(invalid_dataset_metadata, invalid_table_metadata):
     with pytest.raises(AssertionError, match="Could not publish"):
         invalid_dataset_metadata.publish()

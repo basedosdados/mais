@@ -692,7 +692,7 @@ def cli_metadata():
 )
 @click.option(
     "--table_only",
-    default=False,
+    default=True,
     help=(
         "Force the creation of `table_config.yaml` file only if `dataset_conf"
         "ig.yaml` doesn't exist."

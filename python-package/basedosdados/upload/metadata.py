@@ -1,10 +1,7 @@
 from __future__ import annotations
 
-from collections import defaultdict
 from copy import deepcopy
 from functools import lru_cache
-from typing import List
-from pathlib import Path
 
 import requests
 import ruamel.yaml as ryaml
@@ -84,18 +81,20 @@ class Metadata(Base):
         metadata = {
             "id": ckan_dataset.get("id"),
             "name": ckan_dataset.get("name") or "",
-            "type": ckan_dataset.get("type") or "ckan_dataset",
+            "type": ckan_dataset.get("type") or "dataset",
             "title": self.local_metadata.get("title"),
-            "private": ckan_dataset.get("private") or "false",
+            "private": ckan_dataset.get("private") or False,
             "owner_org": ckan_dataset.get("owner_org")
             or "3626e93d-165f-42b8-bde1-2e0972079694",
-            "resources": ckan_dataset.get("resources", []) or [],
+            "resources": ckan_dataset.get("resources", []) \
+                or [{"resource_type": "external_link", "name": ""}],
             "groups": [
                 {"name": group} for group in self.local_metadata.get("groups", []) or []
             ],
             "tags": [
                 {"name": tag} for tag in self.local_metadata.get("tags", []) or []
             ],
+            "organization": {"name": self.local_metadata.get("organization")},
         }
 
         if self.table_id:
@@ -104,7 +103,7 @@ class Metadata(Base):
                     "id": ckan_table.get("id"),
                     "description": self.local_metadata.get("description"),
                     "name": self.local_metadata.get("table_id"),
-                    "resource_type": ckan_table.get("resource_type"),
+                    "resource_type": ckan_table.get("resource_type") or "bdm_table",
                     "version": self.local_metadata.get("version"),
                     "dataset_id": self.local_metadata.get("dataset_id"),
                     "table_id": self.local_metadata.get("table_id"),
@@ -192,7 +191,7 @@ class Metadata(Base):
         columns: list = [],
         partition_columns: list = [],
         force_columns: bool = False,
-        table_only: bool = False,
+        table_only: bool = True,
     ) -> Metadata:
         """Create metadata file based on the current version saved to CKAN database
 
@@ -248,7 +247,7 @@ class Metadata(Base):
                 Metadata(
                     self.dataset_id,
                     **self.kwargs
-                    ).create()
+                    ).create(if_exists=if_exists)
 
         return self
 
