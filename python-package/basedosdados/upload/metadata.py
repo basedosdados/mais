@@ -4,6 +4,7 @@ from collections import defaultdict
 from copy import deepcopy
 from functools import lru_cache
 from typing import List
+from pathlib import Path
 
 import requests
 import ruamel.yaml as ryaml
@@ -18,6 +19,7 @@ from ruamel.yaml.compat import ordereddict
 class Metadata(Base):
     def __init__(self, dataset_id, table_id=None, **kwargs):
         super().__init__(**kwargs)
+        self.kwargs = kwargs
 
         self.table_id = table_id
         self.dataset_id = dataset_id
@@ -190,6 +192,7 @@ class Metadata(Base):
         columns: list = [],
         partition_columns: list = [],
         force_columns: bool = False,
+        table_only: bool = False,
     ) -> Metadata:
         """Create metadata file based on the current version saved to CKAN database
 
@@ -239,6 +242,13 @@ class Metadata(Base):
                 ruamel.preserve_quotes = True
                 ruamel.indent(mapping=4, sequence=6, offset=4)
                 ruamel.dump(yaml_obj, file)
+            
+            dataset_config_exists = (self.metadata_path / 'dataset_config.yaml').exists()
+            if self.table_id and not table_only and not dataset_config_exists:
+                Metadata(
+                    self.dataset_id,
+                    **self.kwargs
+                    ).create()
 
         return self
 

@@ -690,9 +690,24 @@ def cli_metadata():
     default=False,
     help="Overwrite columns with local columns.",
 )
+@click.option(
+    "--table_only",
+    default=False,
+    help=(
+        "Force the creation of `table_config.yaml` file only if `dataset_conf"
+        "ig.yaml` doesn't exist."
+    )
+)
 @click.pass_context
 def cli_create_metadata(
-    ctx, dataset_id, table_id, if_exists, columns, partition_columns, force_columns
+    ctx,
+    dataset_id,
+    table_id,
+    if_exists,
+    columns,
+    partition_columns,
+    force_columns,
+    table_only,
 ):
 
     m = Metadata(dataset_id, table_id, **ctx.obj).create(
@@ -700,6 +715,7 @@ def cli_create_metadata(
         columns=columns,
         partition_columns=partition_columns,
         force_columns=force_columns,
+        table_only=table_only,
     )
 
     click.echo(
