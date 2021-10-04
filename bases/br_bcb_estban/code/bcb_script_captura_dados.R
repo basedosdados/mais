@@ -25,7 +25,7 @@ bcb_extrc_str_mun <- substr(bcb_wrapper, start = 34, stop = 51)
 
 #-------------------------------------------
 
-# Laço para download dos arquivos .ZIP municipio e agencia
+# Laço para download dos arquivos .ZIP municipio
 #-------------------------------------------
 
 for (i in bcb_extrc_str_mun){
@@ -71,5 +71,6 @@ for (i in lf_cs){
 
 #Remoção dos arquivos .zip
 #------------------------------------------- 
+
 file.remove(lf_cs)
 #------------------------------------------- 
