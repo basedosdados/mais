@@ -3,7 +3,7 @@ name: table-approve
 on:
   push:
     # branches:
-    #   - master
+    #   - master 
 jobs:
   get-changes:
     runs-on: ubuntu-latest
