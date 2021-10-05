@@ -59,7 +59,7 @@ observation_level: #REQUIRED
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
     - id_tabela
-    - coluna
+    - nome_coluna
     - chave
     - cobertura_temporal
 
