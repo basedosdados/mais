@@ -1,7 +1,7 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: municipio # AUTO GENERATED
+table_id: municipio
 dataset_id: br_anatel_telefonia_movel # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-anatel-telefonia-movel # AUTO GENERATED
