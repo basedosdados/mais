@@ -33,7 +33,12 @@ test_primary_key_has_unique_values:
     {% if primary_keys is defined and primary_keys is not none -%}
     SELECT 
       COUNT(
-        DISTINCT CONCAT({{ "IFNULL(" + primary_keys|join(", \" \"), \"&\", IFNULL(") + ", \" \")" }})
+        DISTINCT CONCAT(
+          {% for primary_key in primary_keys -%}
+            IFNULL(SAFE_CAST({{ primary_key }} AS STRING), " "), "&",
+          {% endfor -%}
+          "EOF"
+        )
       ) / COUNT(*) unique_percentage 
     FROM `{{ project_id }}.{{ dataset_id }}.{{ table_id }}` t
     {% endif %}
