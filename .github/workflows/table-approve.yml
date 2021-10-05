@@ -2,8 +2,8 @@ name: table-approve
 
 on:
   push:
-    # branches:
-    #   - master 
+    branches:
+      - master
 jobs:
   get-changes:
     runs-on: ubuntu-latest
