@@ -2,6 +2,8 @@ name: etl-caged
 
 on:
   push:
+    branches:
+      - "feat/br_me_caged"
 
 jobs:
   get-changes:
