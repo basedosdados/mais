@@ -8,7 +8,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_infla
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    Índice Nacional de Preços ao Consumidor
+     Índice Nacional de Preços ao Consumidor
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
@@ -22,6 +22,7 @@ author:
 # Onde encontrar os dados originais e mais informações?
 website:
     - https://www.ibge.gov.br/estatisticas/economicas/precos-e-custos/9260-indice-nacional-de-precos-ao-consumidor-amplo-15.html?=&t=downloads
+    
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list

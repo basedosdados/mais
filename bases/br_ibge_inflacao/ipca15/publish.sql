@@ -19,7 +19,7 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-312117.br_ibge_inflacao.ipca15 AS
+CREATE VIEW basedosdados-dev.br_ibge_inflacao.ipca15 AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
@@ -29,4 +29,4 @@ SAFE_CAST(variacao_tres_meses AS FLOAT64) variacao_tres_meses,
 SAFE_CAST(variacao_semestral AS FLOAT64) variacao_semestral,
 SAFE_CAST(variacao_anual AS FLOAT64) variacao_anual,
 SAFE_CAST(variacao_doze_meses AS FLOAT64) variacao_doze_meses
-from basedosdados-312117.br_ibge_inflacao_staging.ipca15 as t
+from basedosdados-dev.br_ibge_inflacao_staging.ipca15 as t
