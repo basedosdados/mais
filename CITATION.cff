@@ -1,7 +1,9 @@
 cff-version: 1.1.0
 message: "If you use this software, please cite it as below."
+title: "Base dos Dados Mais"
 authors:
-  - family-names: Base dos Dados
+  - name: "Base dos Dados"
 url: "https://basedosdados.org"
-year-original: 2019
-year: 2021
+license: MIT
+license-url: "https://github.com/basedosdados/mais/blob/master/LICENSE"
+repository-code: https://github.com/basedosdados/mais

@@ -208,15 +208,14 @@ A Base dos Dados já poupou horas da sua vida? Permitiu coisas antes impossívei
 
 Nos ajude a fazer esse projeto se manter e crescer! Todo mês no nosso [financiamento coletivo](https://apoia.se/basedosdados) ou via PIX na chave 42494318000116.
 
-# Como citar o projeto 📝
+# Como usar e citar o projeto 📝
 
-O projeto está licenciado sob a [Licença Hipocrática](https://firstdonoharm.dev/version/2/1/license.html). Sempre que usar os dados cite a fonte como:
+O projeto (software) está sob licenca MIT - logo, pode ser utilizado e modificado sem restrições desde que sejam remetidos os direitos autorais originais - veja o texto de referência [aqui](LICENSE). 
 
-Português:
-> Carabetta, João; Dahis, Ricardo; Israel, Fred; Scovino, Fernanda (2020) Base dos Dados: Repositório de Dados Abertos em https://basedosdados.org.
+Caso queira citar o projeto numa publicação, artigo ou na web, utilize o modelo no menu ao lado conforme a imagem.
 
-Inglês:
-> Carabetta, João; Dahis, Ricardo; Israel, Fred; Scovino, Fernanda (2020) Data Basis: Open Data Repository at https://basedosdados.org.
+![image](https://user-images.githubusercontent.com/20743819/135773540-785e1e84-9d20-4f2d-9aea-512ffe65eb67.png)
+
 
 # Idiomas
 
