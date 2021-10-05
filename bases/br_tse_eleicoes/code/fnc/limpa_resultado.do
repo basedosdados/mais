@@ -1,7 +1,4 @@
 
-// author: Ricardo Dahis
-// last updated: 2020/10/10
-
 cap program drop limpa_resultado
 program limpa_resultado
 	
@@ -11,5 +8,7 @@ program limpa_resultado
 	replace resultado = "renuncia/falecimento/cassacao"	if resultado == "renuncia/falecimento/cassacao antes da eleicao"
 	replace resultado = "renuncia/falecimento/cassacao"	if resultado == "renuncia;falecimento;cassacao antes da eleicao"
 	replace resultado = "renuncia/falecimento/cassacao"	if resultado == "renuncia;falecimento;cassacao apos a eleicao"
+	
+	replace resultado = "2º turno"						if resultado == "2o turno"
 	
 end
