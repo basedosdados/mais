@@ -183,12 +183,12 @@ def pytest_sessionfinish(session, exitstatus):
         for datum in data:
             if int(datum["id"].split("/")[-1]) == 0:
                 file.write(f" Table `{datum['id'][:-2]}`  \n\n")
-            
+
             if datum["passed"]:
                 file.write(f"✔️ {datum['name']}  \n\n")
             else:
                 file.write(f"❌ {datum['name']}  \n\n")
-            
+
             file.write(f"```sql  \n")
             file.write(f"{datum['query']}")
             file.write(f"```  \n\n")
