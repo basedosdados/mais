@@ -222,17 +222,8 @@ def get_trigger_and_download_opt(download_opt, tipo):
 
 
 ################################################################
-# DOWNLOAD/UPLOAD FILES
+# DOWNLOAD FILES
 ################################################################
-def upload_to_raw(tipo, save_raw_path):
-    if tipo == "estabelecimentos":
-        st = bd.Storage(
-            table_id="microdados_estabelecimentos", dataset_id="br_me_caged"
-        )
-    else:
-        st = bd.Storage(table_id="microdados_movimentacoes", dataset_id="br_me_caged")
-
-    st.upload(path=save_raw_path, mode="raw", if_exists="replace")
 
 
 def download_data(save_path, download_url):
@@ -393,6 +384,17 @@ def rename_add_orginaze_columns(file_path, file_name, tipo, municipios):
 ################################################################
 # UPLOAD TO BD
 ################################################################
+
+
+def upload_to_raw(tipo, save_raw_path):
+    if tipo == "estabelecimentos":
+        st = bd.Storage(
+            table_id="microdados_estabelecimentos", dataset_id="br_me_caged"
+        )
+    else:
+        st = bd.Storage(table_id="microdados_movimentacoes", dataset_id="br_me_caged")
+
+    st.upload(path=save_raw_path, mode="raw", if_exists="replace")
 
 
 def upload_to_bd(tipo, filepath):
