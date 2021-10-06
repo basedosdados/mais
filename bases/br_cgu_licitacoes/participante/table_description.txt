@@ -32,6 +32,9 @@ Nível da Observação (i.e. a granularidade da linha)
 
 Colunas identificando linhas unicamente
 -------------------
+- id_licitacao
+- id_ug
+- id_item
 - cnpj
 - ano
 - mes

@@ -123,12 +123,6 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: modalidade_compra_to_dict
-        description: Modalidade da compra
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
         name: numero_processo
         description: Número do processo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table

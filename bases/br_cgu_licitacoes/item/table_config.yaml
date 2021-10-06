@@ -53,7 +53,6 @@ observation_level: #REQUIRED
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - id_licitacao
     - id_item
 
 # Qual é a cobertura espacial da tabela?
@@ -119,12 +118,6 @@ columns: # REQUIRED
   
     -   
         name: modalidade_compra
-        description: Modalidade da compra
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: modalidade_compra_to_dict
         description: Modalidade da compra
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
