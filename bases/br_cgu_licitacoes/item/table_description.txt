@@ -1,0 +1,62 @@
+Dados de itens comprados em licitações federais.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-cgu-licitacoes
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_licitacoes
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_licitacoes/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_cgu_licitacoes/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- mes
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- item
+
+Colunas identificando linhas unicamente
+-------------------
+- id_licitacao
+- id_item
+
+Cobertura Temporal
+------------------
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Renomeação de colunas.
+- Mudança de formato de variáveis de data.
+
+Frequencia de Atualização
+-------------------------
+mes
+
+
