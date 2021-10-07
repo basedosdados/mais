@@ -27,14 +27,16 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
-- ano
+- estagio
 - conta
+- ano
 
 Colunas identificando linhas unicamente
 -------------------
-- id_municipo
-- conta
+- id_municipio
+- estagio_bd
 - id_conta_bd
+- ano
 
 Cobertura Temporal
 ------------------

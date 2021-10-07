@@ -38,7 +38,7 @@ treated_by:
 treatment_description: | 
     - Criação da coluna 'id_municipio' padrão 7 dígitos IGBE para os anos de 1989-2012
     - Criação da coluna 'id_conta_normalizado' para compatibilizar todos os anos que não tem 'portaria'
-     - Criação da coluna 'id_conta_formalizado' 
+    - Criação da coluna 'id_conta_formalizado' 
     - Criação da coluna 'id_conta_bd' para compatilizar toda série temporal 
     - Append nas tabelas dos anos 1989-2012 para a arquitetura 2013-2020    
     - Compatibilização de moedas
@@ -55,16 +55,18 @@ data_update_frequency: 1 ano
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
     - municipio
-    - ano
+    - estagio
     - conta
+    - ano
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - id_municipo
-    - ano
+    - id_municipio
+    - estagio_bd
     - id_conta_bd
+    - ano
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -133,6 +135,18 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+        
+    -   
         name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
@@ -180,14 +194,3 @@ columns: # REQUIRED
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
-    -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sigla_uf
-        description: Sigla da Unidade da Federação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
