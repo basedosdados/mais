@@ -1,14 +1,22 @@
-import pandas_gbq
+import re
+from functools import partialmethod
 from pathlib import Path
-import pydata_google_auth
-from google.cloud import bigquery
-from google.cloud import bigquery_storage_v1
-from functools import partialmethod
+
 import pandas as pd
+import pandas_gbq
+import pydata_google_auth
+from basedosdados.exceptions import (
+    BaseDosDadosAccessDeniedException,
+    BaseDosDadosAuthorizationException,
+    BaseDosDadosException,
+    BaseDosDadosInvalidProjectIDException,
+    BaseDosDadosNoBillingProjectIDException,
+)
 from basedosdados.upload.base import Base
-from functools import partialmethod
-from basedosdados.validation.exceptions import BaseDosDadosException
+from google.cloud import bigquery, bigquery_storage_v1
+from google.cloud.bigquery import dataset
 from pandas_gbq.gbq import GenericGBQException
+from pydata_google_auth.exceptions import PyDataCredentialsError
 
 
 def credentials(from_file=False, reauth=False):
@@ -148,7 +156,6 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
     """
 
     try:
-
         # Set a two hours timeout
         bigquery_storage_v1.client.BigQueryReadClient.read_rows = partialmethod(
             bigquery_storage_v1.client.BigQueryReadClient.read_rows,
@@ -160,38 +167,25 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
             credentials=credentials(from_file=from_file, reauth=reauth),
             project_id=billing_project_id,
         )
-    except (OSError, ValueError) as e:
-        msg = (
-            "\nWe are not sure which Google Cloud project should be billed.\n"
-            "First, you should make sure that you have a Google Cloud project.\n"
-            "If you don't have one, set one up following these steps: \n"
-            "\t1. Go to this link https://console.cloud.google.com/projectselector2/home/dashboard\n"
-            "\t2. Agree with Terms of Service if asked\n"
-            "\t3. Click in Create Project\n"
-            "\t4. Put a cool name in your project\n"
-            "\t5. Hit create\n"
-            "\n"
-            "Copy the Project ID, (notice that it is not the Project Name)\n"
-            "Now, you have two options:\n"
-            "1. Add an argument to your function poiting to the billing project id.\n"
-            "   Like `bd.read_table('br_ibge_pib', 'municipios', billing_project_id=<YOUR_PROJECT_ID>)`\n"
-            "2. You can set a project_id in the environment by running the following command in your terminal: `gcloud config set project <YOUR_PROJECT_ID>`.\n"
-            "   Bear in mind that you need `gcloud` installed."
-        )
-        raise BaseDosDadosException(msg) from e
+
     except GenericGBQException as e:
         if "Reason: 403" in str(e):
-            raise BaseDosDadosException(
-                "\nYou still don't have a Google Cloud Project.\n"
-                "Set one up following these steps: \n"
-                "1. Go to this link https://console.cloud.google.com/projectselector2/home/dashboard\n"
-                "2. Agree with Terms of Service if asked\n"
-                "3. Click in Create Project\n"
-                "4. Put a cool name in your project\n"
-                "5. Hit create\n"
-                "6. Rerun this command with the flag `reauth=True`. \n"
-                "   Like `read_table('br_ibge_pib', 'municipios', reauth=True)`"
-            )
+            raise BaseDosDadosAccessDeniedException
+
+        elif re.match("Reason: 400 POST .* [Pp]roject[ ]*I[Dd]", str(e)):
+            raise BaseDosDadosInvalidProjectIDException
+
+        raise
+
+    except PyDataCredentialsError as e:
+        raise BaseDosDadosAuthorizationException
+
+    except (OSError, ValueError) as e:
+        exc_from_no_billing_id = "Could not determine project ID" in str(
+            e
+        ) or "reading from stdin while output is captured" in str(e)
+        if exc_from_no_billing_id:
+            raise BaseDosDadosNoBillingProjectIDException
         raise
 
 
@@ -293,14 +287,54 @@ def _print_output(df):
     #        ) if len(lista) else final)
 
 
+def _handle_output(verbose, output_type, df, col_name=None):
+    """Handles datasets and tables listing outputs based on user's choice.
+    Either prints it to the screen or returns it as a `list` object.
+    Args:
+        verbose (bool): amount of verbosity
+        output_type (str): type of output
+        df (pd.DataFrame, bigquery.Dataset or bigquery.Table): table containing datasets metadata
+        col_name (str): name of column with id's data
+    """
+
+    df_is_dataframe = type(df) == pd.DataFrame
+    df_is_bq_dataset_or_table = (type(df) == bigquery.Dataset) or (
+        type(df) == bigquery.Table
+    )
+
+    if verbose == True and df_is_dataframe:
+        _print_output(df)
+
+    elif verbose == True and df_is_bq_dataset_or_table:
+        print(df.description)
+
+    elif verbose == False:
+        if output_type == "list":
+            return df[col_name].to_list()
+        elif output_type == "str":
+            return df.description
+        elif output_type == "records":
+            return df.to_dict("records")
+        else:
+            raise ValueError(
+                '`output_type` argument must be set to "list", "str" or "records".'
+            )
+
+    else:
+        raise TypeError("`verbose` argument must be of `bool` type.")
+
+    return None
+
+
 def list_datasets(
     query_project_id="basedosdados",
     filter_by=None,
     with_description=False,
     from_file=False,
+    verbose=True,
 ):
     """Fetch the dataset_id of datasets available at query_project_id. Prints information on
-    screen.
+    screen or returns it as a list.
 
     Args:
         query_project_id (str): Optional.
@@ -309,6 +343,9 @@ def list_datasets(
             String to be matched in dataset_id.
         with_description (bool): Optional
             If True, fetch short dataset description for each dataset.
+        verbose (bool): Optional.
+            If set to True, information is printed to the screen. If set to False, a list object is returned.
+
 
     Example:
         list_datasets(
@@ -338,9 +375,9 @@ def list_datasets(
             for dataset in datasets["dataset_id"]
         ]
 
-    _print_output(datasets)
-
-    return None
+    return _handle_output(
+        verbose=verbose, output_type="list", df=datasets, col_name="dataset_id"
+    )
 
 
 def list_dataset_tables(
@@ -349,9 +386,10 @@ def list_dataset_tables(
     from_file=False,
     filter_by=None,
     with_description=False,
+    verbose=True,
 ):
     """Fetch table_id for tables available at the specified dataset_id. Prints the information
-    on screen.
+    on screen or returns it as a list.
 
     Args:
         dataset_id (str): Optional.
@@ -362,6 +400,8 @@ def list_dataset_tables(
             String to be matched in the table_id.
         with_description (bool): Optional
              If True, fetch short table descriptions for each table that match the search criteria.
+        verbose (bool): Optional.
+            If set to True, information is printed to the screen. If set to False, a list object is returned.
 
     Example:
         list_dataset_tables(
@@ -393,13 +433,13 @@ def list_dataset_tables(
             for table in tables["table_id"]
         ]
 
-    _print_output(tables)
-
-    return None
+    return _handle_output(
+        verbose=verbose, output_type="list", df=tables, col_name="table_id"
+    )
 
 
 def get_dataset_description(
-    dataset_id=None, query_project_id="basedosdados", from_file=False
+    dataset_id=None, query_project_id="basedosdados", from_file=False, verbose=True
 ):
     """Prints the full dataset description.
 
@@ -408,6 +448,8 @@ def get_dataset_description(
             Dataset id available in basedosdados.
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
+        verbose (bool): Optional.
+            If set to True, information is printed to the screen. If set to False, data is returned as a `str`.
     """
 
     client = bigquery.Client(
@@ -416,9 +458,7 @@ def get_dataset_description(
 
     dataset = client.get_dataset(dataset_id)
 
-    print(dataset.description)
-
-    return None
+    return _handle_output(verbose=verbose, output_type="str", df=dataset)
 
 
 def get_table_description(
@@ -426,6 +466,7 @@ def get_table_description(
     table_id=None,
     query_project_id="basedosdados",
     from_file=False,
+    verbose=True,
 ):
     """Prints the full table description.
 
@@ -437,6 +478,8 @@ def get_table_description(
             It should always come with dataset_id.
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
+        verbose (bool): Optional.
+            If set to True, information is printed to the screen. If set to False, data is returned as a `str`.
     """
 
     client = bigquery.Client(
@@ -445,9 +488,7 @@ def get_table_description(
 
     table = client.get_table(f"{dataset_id}.{table_id}")
 
-    print(table.description)
-
-    return None
+    return _handle_output(verbose=verbose, output_type="str", df=table)
 
 
 def get_table_columns(
@@ -455,6 +496,7 @@ def get_table_columns(
     table_id=None,
     query_project_id="basedosdados",
     from_file=False,
+    verbose=True,
 ):
 
     """Fetch the names, types and descriptions for the columns in the specified table. Prints
@@ -468,6 +510,8 @@ def get_table_columns(
             It should always come with dataset_id.
         query_project_id (str): Optional.
             Which project the table lives. You can change this you want to query different projects.
+        verbose (bool): Optional.
+            If set to True, information is printed to the screen. If set to False, data is returned as a `list` of `dict`s.
     Example:
         get_table_columns(
         dataset_id='br_ibge_censo2010',
@@ -487,9 +531,7 @@ def get_table_columns(
 
     description = pd.DataFrame(columns, columns=["name", "field_type", "description"])
 
-    _print_output(description)
-
-    return None
+    return _handle_output(verbose=verbose, output_type="records", df=description)
 
 
 def get_table_size(
@@ -498,6 +540,7 @@ def get_table_size(
     billing_project_id,
     query_project_id="basedosdados",
     from_file=False,
+    verbose=True,
 ):
     """Use a query to get the number of rows and size (in Mb) of a table query
     from BigQuery. Prints information on screen in markdown friendly format.
@@ -514,6 +557,8 @@ def get_table_size(
             Which project the table lives. You can change this you want to query different projects.
         billing_project_id (str): Optional.
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
+        verbose (bool): Optional.
+            If set to True, information is printed to the screen. If set to False, data is returned as a `list` of `dict`s.
     Example:
         get_table_size(
         dataset_id='br_ibge_censo2010',
@@ -545,6 +590,4 @@ def get_table_size(
         ]
     )
 
-    _print_output(table_data)
-
-    return None
+    return _handle_output(verbose=verbose, output_type="records", df=table_data)

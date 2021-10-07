@@ -7,7 +7,7 @@
 
 
 <p align="center">
-    <em>Mecanismo de busca e <b>repositório</b> de bases de dados brasileiras e internacionais.</em>
+    <em>Universalizando o acesso a dados de qualidade no Brasil.</em>
 </p>
 
 <p align="center">
@@ -35,15 +35,16 @@
 
 | ***R*** | ***Python*** |
 |-----|-----|
-| [![CRAN/METACRAN Version](https://www.r-pkg.org/badges/version/basedosdados)](https://CRAN.R-project.org/package=basedosdados) <br />  [![CRAN/METACRAN Total downloads](http://cranlogs.r-pkg.org/badges/grand-total/basedosdados?color=blue)](https://CRAN.R-project.org/package=basedosdados) <br />  [![CRAN/METACRAN downloads per month](http://cranlogs.r-pkg.org/badges/basedosdados)](https://CRAN.R-project.org/package=basedosdados) <br />  ![Lifecycle: stable](https://img.shields.io/github/issues/basedosdados/mais/R) | [![PyPI version](https://badge.fury.io/py/basedosdados.svg)](https://badge.fury.io/py/basedosdados) <br />   ![PyPI - Downloads](https://img.shields.io/pypi/dm/basedosdados?color=blue)  <br /> ![Lifecycle: stable](https://img.shields.io/github/issues/basedosdados/mais/Python) |
+| [![CRAN/METACRAN Version](https://www.r-pkg.org/badges/version/basedosdados)](https://CRAN.R-project.org/package=basedosdados) <br/>  [![CRAN/METACRAN Total downloads](http://cranlogs.r-pkg.org/badges/grand-total/basedosdados?color=blue)](https://CRAN.R-project.org/package=basedosdados) <br/>  [![CRAN/METACRAN downloads per month](http://cranlogs.r-pkg.org/badges/basedosdados)](https://CRAN.R-project.org/package=basedosdados) <br/>  ![Lifecycle: stable](https://img.shields.io/github/issues/basedosdados/mais/R) | [![PyPI version](https://badge.fury.io/py/basedosdados.svg)](https://badge.fury.io/py/basedosdados) <br/> ![PyPI - Downloads](https://img.shields.io/pypi/dm/basedosdados?color=blue) <br/> [![Coverage Status](https://coveralls.io/repos/github/basedosdados/mais/badge.svg?branch=master)](https://coveralls.io/github/basedosdados/mais?branch=master)  <br/> ![Lifecycle: stable](https://img.shields.io/github/issues/basedosdados/mais/Python) |
 
 # O que fazemos?
 
 Tratamos, padronizamos e disponibilizamos bases de dados públicas de
 várias fontes como PNAD, RAIS, Censo e DataSUS. A Base dos Dados Mais
 (BD+) é um datalake público no Google BigQuery e uma consulta escrita em
-SQL é o suficiente para começar a sua análise. Temos bibliotecas em [Python](#usando-em-python) e [R](#usando-em-r) para facilitar o acesso
-ao datalake e estamos sempre adicionando novas bases. 
+SQL é o suficiente para começar a sua análise. 
+
+O datalake com bases padronizadas permite cruzamento de dados oficiais de alta qualidade, que manualmente pode demorar dezenas de horas, com algumas poucas linhas de SQL. Temos bibliotecas em [Python](#usando-em-python) e [R](#usando-em-r) para facilitar o acesso e estamos sempre adicionando novas bases. 
 
 O projeto faz parte da [Base dos Dados](http://basedosdados.org), uma organização sem fins lucrativos com a
 missão e universalizar o acesso a dados de qualidade para todes. Veja
@@ -68,7 +69,7 @@ pip install basedosdados
 ```python
 import basedosdados as bd
 
-df = bd.read_table('br_ibge_pib', 'municipios', billing_project_id="<YOUR-PROJECT>")
+df = bd.read_table('br_ibge_pib', 'municipio', billing_project_id="<YOUR-PROJECT>")
 ```
 
 > Caso esteja acessando da primeira vez, vão aparecer alguns passos na tela para autenticar seu projeto - basta segui-los!
@@ -108,7 +109,8 @@ Para saber mais, veja os [exemplos](https://github.com/basedosdados/analises/tre
 
 # Usando em R
 
-## Instale
+## Instalação
+
 ```R
 install.packages("basedosdados")
 
@@ -116,8 +118,9 @@ install.packages("basedosdados")
 
 devtools::install_github("basedosdados/mais", subdir = "r-package")
 ```
+## Consultas
 
-## Faça uma consulta
+`read_sql` executa queries no banco e as devolve em dataframes (sempre na classe `tibble`), `download` escreve o resultado da query em um arquivo `.csv` no disco.
 
 ```r
 library(basedosdados)
@@ -128,20 +131,46 @@ pib_per_capita <- "
 SELECT 
     pib.id_municipio ,
     pop.ano, 
-    pib.PIB / pop.populacao * 1000 as pib_per_capita
-FROM `basedosdados.br_ibge_pib.municipios` as pib
-INNER JOIN `basedosdados.br_ibge_populacao.municipios` as pop
-ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
+    pib.PIB / pop.populacao as pib_per_capita
+FROM `basedosdados.br_ibge_pib.municipio` as pib
+  INNER JOIN `basedosdados.br_ibge_populacao.municipio` as pop
+  ON pib.id_municipio = pop.id_municipio AND pib.ano = pop.ano"
 
 (data <- read_sql(pib_per_capita)) # leia os dados em memória
 download(pib_per_capita, "pib_per_capita.csv") # salve os dados em disco
 ```
 
-> Caso esteja acessando da primeira vez, vão aparecer alguns passos na tela para autenticar seu projeto - basta segui-los!
->
+Ou use o nosso backend para o `dplyr` e faça queries com código, sem SQL. 
+
+```r
+  query <- basedosdados::bdplyr("br_inep_ideb.municipio") %>% 
+    dplyr::select(ano, id_municipio, sigla_uf, ideb) %>% 
+    dplyr::filter(sigla_uf == "AC", ano < 2021) %>% 
+    dplyr::group_by(ano) %>% 
+    dplyr::summarise(ideb_medio = mean(ideb, na.rm = TRUE)) 
+
+  basedosdados::bd_collect(query) # retorne como um tibble
+  basedosdados::bd_write_csv(query, "ideb_medio.csv") 
+  basedosdados::bd_write_rds(query, "ideb_medio.rds") 
+```
+
+`bd_write` é uma extensão para formatos customizados. 
+
+```r
+  basedosdados::bd_write(query, .write_fn = writexl::write_xlsx, "ideb_medio.xlsx")
+  basedosdados::bd_write(query, .write_fn = jsonlite::write_json, "ideb_medio.json")
+  basedosdados::bd_write(query, .write_fn = haven::write_dta, "ideb_medio.dta")
+```
+
+O argumento `.write_fn` espera uma função que receba como argumento um tibble e um endereço de escrita, compatível com a interface convencional da língua para escrever arquivos em disco. A princípio, _toda_ função `write_*` disponível no CRAN deve funcionar. 
+
+Caso encontre algum problema no pacote e queira ajudar, basta documentar o problema em um [exemplo mínimo reprodutível](https://pt.stackoverflow.com/questions/264168/quais-as-principais-fun%C3%A7%C3%B5es-para-se-criar-um-exemplo-m%C3%ADnimo-reproduz%C3%ADvel-em-r) e abrir uma issue. 
+
+## Atenção
+
+> Caso esteja acessando da primeira vez, vão aparecer alguns passos na tela para autenticar seu projeto com sua conta google e possivelmente na [Tidyverse API](https://www.tidyverse.org/google_privacy_policy/) - basta segui-los! As credenciais ficam armazenadas no computador então usuários com mais de uma máquina talvez precisem autenticar mais de uma vez.
 > É necessário criar um projeto para que você possa fazer as queries no nosso repositório. Ter um projeto é de graça e basta ter uma conta Google (seu gmail por exemplo). [Veja aqui como criar um projeto no Google Cloud](https://basedosdados.github.io/mais/access_data_local/#criando-um-projeto-no-google-cloud).
-> 
-> Se possível, armazene suas credenciais em um arquivo `dotenv`: `"billing_project_id=<suas_credenciais_do_projeto>" >> .env`
+> Se possível, armazene suas credenciais em um arquivo `dotenv`, em bash o comando é `"billing_project_id=<suas_credenciais_do_projeto>" >> .env`. [Veja aqui como criar um arquivo dotenv](https://towardsdatascience.com/using-dotenv-to-hide-sensitive-information-in-r-8b878fa72020).
 
 # Exemplos e tutoriais
 
@@ -166,6 +195,7 @@ Você pode contribuir de várias maneiras:
 - Reportando bugs
 - Ajudando na captação de recursos
 - Nos chamando para aprensetações, simpósios e conferências
+- Corrigindo [links quebrados](https://docs.google.com/spreadsheets/d/1vcrf2JGiJfu5_NuiB358mkHZh1sPSyeXOLVHKQMFSMc/edit#gid=1075131026) no site
 
 **Incentivamos que outras instituições e pessoas contribuam**. [Veja mais
 como contribuir](https://basedosdados.github.io/mais/colab_data/) e
@@ -174,19 +204,18 @@ código!](https://github.com/basedosdados/mais/blob/master/CONTRIBUTORS.md)
 
 ## Apoie 💚
 
-A Base dos Dados já poupou horas da sua vida? Ou permitiu coisas antes impossíveis? Nosso trabalho é quase todo voluntário, mas temos vários custos de infraestrutura, equipe, e outros.
+A Base dos Dados já poupou horas da sua vida? Permitiu coisas antes impossíveis? Nosso trabalho é quase todo voluntário, mas temos vários custos de infraestrutura, equipe, e outros.
 
-[Nos ajude a fazer esse projeto se manter e crescer!](https://apoia.se/basedosdados)
+Nos ajude a fazer esse projeto se manter e crescer! Todo mês no nosso [financiamento coletivo](https://apoia.se/basedosdados) ou via PIX na chave 42494318000116.
 
-# Como citar o projeto 📝
+# Como usar e citar o projeto 📝
 
-O projeto está licenciado sob a [Licença Hipocrática](https://firstdonoharm.dev/version/2/1/license.html). Sempre que usar os dados cite a fonte como:
+O projeto (software) está sob licenca MIT - logo, pode ser utilizado e modificado sem restrições desde que sejam remetidos os direitos autorais originais - veja o texto de referência [aqui](LICENSE). 
 
-Português:
-> Carabetta, João; Dahis, Ricardo; Israel, Fred; Scovino, Fernanda (2020) Base dos Dados: Repositório de Dados Abertos em https://basedosdados.org.
+Caso queira citar o projeto numa publicação, artigo ou na web, utilize o modelo no menu ao lado conforme a imagem.
 
-Inglês:
-> Carabetta, João; Dahis, Ricardo; Israel, Fred; Scovino, Fernanda (2020) Data Basis: Open Data Repository at https://basedosdados.org.
+![image](https://user-images.githubusercontent.com/20743819/135773540-785e1e84-9d20-4f2d-9aea-512ffe65eb67.png)
+
 
 # Idiomas
 

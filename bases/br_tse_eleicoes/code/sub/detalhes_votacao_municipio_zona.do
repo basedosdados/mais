@@ -26,6 +26,11 @@ local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8") //stringcols(_all)
+keep id_municipio id_municipio_tse
+tempfile municipio
+save `municipio'
+
 foreach ano of numlist 1994(2)2020 {
 	
 	foreach estado in `estados_`ano'' {
@@ -47,8 +52,8 @@ foreach ano of numlist 1994(2)2020 {
 			ren v13 aptos
 			ren v14 secoes
 			ren v15 secoes_agregadas
-			ren v16 aptos_tot
-			ren v17 secoes_tot
+			ren v16 aptos_totalizadas
+			ren v17 secoes_totalizadas
 			ren v18 comparecimento
 			ren v19 abstencoes
 			ren v20 votos_validos
@@ -73,8 +78,8 @@ foreach ano of numlist 1994(2)2020 {
 			ren v19 aptos
 			ren v20 secoes
 			ren v21 secoes_agregadas
-			ren v22 aptos_tot
-			ren v23 secoes_tot
+			ren v22 aptos_totalizadas
+			ren v23 secoes_totalizadas
 			ren v24 comparecimento
 			ren v25 abstencoes
 			ren v27 votos_validos
@@ -109,17 +114,22 @@ foreach ano of numlist 1994(2)2020 {
 		// variaveis
 		//------------------//
 		
-		gen prop_comparecimento = 100 * comparecimento / aptos
-		la var prop_comparecimento "% Comparecimento"
+		merge m:1 id_municipio_tse using `municipio'
+		drop if _merge == 2
+		drop _merge
+		order id_municipio, b(id_municipio_tse)
 		
-		gen prop_votos_validos = 100 * votos_validos / comparecimento
-		la var prop_votos_validos "% Votos Válidos"
+		gen proporcao_comparecimento = 100 * comparecimento / aptos
+		la var proporcao_comparecimento "% Comparecimento"
 		
-		gen prop_votos_brancos = 100 * votos_brancos / comparecimento
-		la var prop_votos_brancos "% Votos Brancos"
+		gen proporcao_votos_validos = 100 * votos_validos / comparecimento
+		la var proporcao_votos_validos "% Votos Válidos"
 		
-		gen prop_votos_nulos = 100 * votos_nulos / comparecimento
-		la var prop_votos_nulos "% Votos Nulos"
+		gen proporcao_votos_brancos = 100 * votos_brancos / comparecimento
+		la var proporcao_votos_brancos "% Votos Brancos"
+		
+		gen proporcao_votos_nulos = 100 * votos_nulos / comparecimento
+		la var proporcao_votos_nulos "% Votos Nulos"
 		
 		drop if mod(ano, 2) > 0
 		
@@ -145,9 +155,9 @@ foreach ano of numlist 1994(2)2020 {
 	}
 	*
 	
-	order	ano turno tipo_eleicao sigla_uf id_municipio_tse zona cargo aptos secoes secoes_agregadas aptos_tot secoes_tot ///
+	order	ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo aptos secoes secoes_agregadas aptos_tot secoes_tot ///
 			comparecimento abstencoes votos_validos votos_brancos votos_nulos votos_legenda ///
-			prop_*
+			proporcao_*
 	
 	compress
 	

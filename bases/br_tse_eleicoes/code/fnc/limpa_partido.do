@@ -1,26 +1,45 @@
 
-// author: Ricardo Dahis
-// last updated: 2020/10/11
-
 cap program drop limpa_partido
 program limpa_partido
 	
 	local ano = `1'
+	local var   `2'
 	
-	if `ano' == 2016 {
-
-		replace sigla_partido = "REPUBLICANOS"	if sigla_partido == "PRB"
-		replace sigla_partido = "MDB"			if sigla_partido == "PMDB"
-		replace sigla_partido = "PODE"			if sigla_partido == "PTN"
-		replace sigla_partido = "PL"			if sigla_partido == "PR"
-		replace sigla_partido = "CIDADANIA"		if sigla_partido == "PPS"
-		replace sigla_partido = "DC"			if sigla_partido == "PSDC"
-		replace sigla_partido = "PATRIOTA"		if sigla_partido == "PATRI"
-		replace sigla_partido = "PATRIOTA"		if sigla_partido == "PEN"
-		replace sigla_partido = "AVANTE"		if sigla_partido == "PT do B"
-		replace sigla_partido = "SOLIDARIEDADE"	if sigla_partido == "SD"
+	if `ano' == 2014 {
+		
+		replace `var' = "PODE"			if `var' == "PTN"
+		replace `var' = "PODE"			if `var' == "Pode"
+		replace `var' = "PATRIOTA"		if `var' == "PEN"
+		replace `var' = "AVANTE"		if `var' == "PT do B"
 	
 	}
+	
+	if `ano' == 2016 {
+		
+		replace `var' = "REPUBLICANOS"	if `var' == "PRB"
+		replace `var' = "MDB"			if `var' == "PMDB"
+		replace `var' = "PODE"			if `var' == "PTN"
+		replace `var' = "PODE"			if `var' == "Pode"
+		replace `var' = "PL"			if `var' == "PR"
+		replace `var' = "CIDADANIA"		if `var' == "PPS"
+		replace `var' = "DC"			if `var' == "PSDC"
+		replace `var' = "PATRIOTA"		if `var' == "PEN"
+		replace `var' = "AVANTE"		if `var' == "PT do B"
+		
+	}
+	
+	if `ano' == 2018 {
+		
+		replace `var' = "REPUBLICANOS"	if `var' == "PRB"
+		replace `var' = "CIDADANIA"		if `var' == "PPS"
+		replace `var' = "PL"			if `var' == "PR"
+		
+	}
 	*
+	
+	replace `var' = "PATRIOTA"			if `var' == "PATRI"
+	replace `var' = "SOLIDARIEDADE"		if `var' == "SD"
+	replace `var' = "PC do B"			if `var' == "PC DO B"
+	replace `var' = "PT do B"			if `var' == "PT DO B"
 	
 end

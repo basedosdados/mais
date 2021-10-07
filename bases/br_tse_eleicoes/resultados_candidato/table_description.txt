@@ -25,21 +25,24 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- candidato
 - turno
+- tipo de eleição
+- candidato
 - ano
 
 Colunas identificando linhas unicamente
 -------------------
-- tipo_eleicao
 - turno
+- tipo_eleicao
 - sigla_uf
-- id_municipio_tse
-- cargo
+- id_municipio
 - numero_candidato
+- ano
 
 Cobertura Temporal
 ------------------
+- 1994
+- 1996
 - 1998
 - 2000
 - 2002

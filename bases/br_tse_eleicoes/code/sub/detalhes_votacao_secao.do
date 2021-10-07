@@ -26,6 +26,11 @@ local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ R
 // loops
 //------------------------//
 
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8") //stringcols(_all)
+keep id_municipio id_municipio_tse
+tempfile municipio
+save `municipio'
+
 foreach ano of numlist 1994(2)2020 {
 	
 	foreach estado in `estados_`ano'' {
@@ -109,20 +114,25 @@ foreach ano of numlist 1994(2)2020 {
 		// variaveis
 		//------------------//
 		
-		gen prop_comparecimento = 100 * comparecimento / aptos
-		la var prop_comparecimento "% Comparecimento"
+		merge m:1 id_municipio_tse using `municipio'
+		drop if _merge == 2
+		drop _merge
+		order id_municipio, b(id_municipio_tse)
 		
-		gen prop_votos_nominais = 100 * votos_nominais / comparecimento
-		la var prop_votos_nominais "% Votos Nominais"
+		gen proporcao_comparecimento = 100 * comparecimento / aptos
+		la var proporcao_comparecimento "% Comparecimento"
 		
-		gen prop_votos_coligacao = 100 * votos_coligacao / comparecimento
-		la var prop_votos_coligacao "% Votos em Coligação"
+		gen proporcao_votos_nominais = 100 * votos_nominais / comparecimento
+		la var proporcao_votos_nominais "% Votos Nominais"
 		
-		gen prop_votos_brancos = 100 * votos_brancos / comparecimento
-		la var prop_votos_brancos "% Votos Brancos"
+		gen proporcao_votos_coligacao = 100 * votos_coligacao / comparecimento
+		la var proporcao_votos_coligacao "% Votos em Coligação"
 		
-		gen prop_votos_nulos = 100 * votos_nulos / comparecimento
-		la var prop_votos_nulos "% Votos Nulos"
+		gen proporcao_votos_brancos = 100 * votos_brancos / comparecimento
+		la var proporcao_votos_brancos "% Votos Brancos"
+		
+		gen proporcao_votos_nulos = 100 * votos_nulos / comparecimento
+		la var proporcao_votos_nulos "% Votos Nulos"
 		
 		drop if mod(ano, 2) > 0
 		
@@ -146,7 +156,7 @@ foreach ano of numlist 1994(2)2020 {
 	}
 	*
 	
-	order	ano turno tipo_eleicao sigla_uf id_municipio_tse zona secao cargo aptos comparecimento abstencoes ///
+	order	ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo aptos comparecimento abstencoes ///
 			votos_nominais votos_brancos votos_nulos votos_coligacao votos_nulos_apu_sep votos_pendentes
 	
 	compress

@@ -2,17 +2,34 @@ Cadastro de sócios nos dados da Receita Federal.
 
 
 Para saber mais acesse:
-Website: 
-Github: https://github.com/basedosdados/mais/
+Website: https://basedosdados.org/dataset/br-me-socios
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_me_socios
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_socios/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Receita Federal do Brasil, dados tratados por Álvaro Justen/Brasil.IO.
+Código: https://github.com/turicas/socios-brasil
+Website: https://data.brasil.io/dataset/socios-brasil/_meta/list.html
+Email: contato@brasil.io
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano_entrada_sociedade
 
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- cnpj
+- cnpj_cpf_do_socio
+
+Colunas identificando linhas unicamente
 -------------------
 - cnpj
 - cnpj_cpf_do_socio
@@ -64,16 +81,4 @@ Frequencia de Atualização
 -------------------------
 trimestre
 
-Tratado por
------------
-Nome: Receita Federal do Brasil, dados tratados por Álvaro Justen/Brasil.IO.
-Código: https://github.com/turicas/socios-brasil
-Website: https://data.brasil.io/dataset/socios-brasil/_meta/list.html
-Email: contato@brasil.io
 
-Publicado por
--------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_socios/code
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org

@@ -1,0 +1,1657 @@
+dataset_id: br_ms_sinan
+
+table_id: microdados_violencia
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Microdados da planilha de Violência Interpessoal/Autoprovocada do SINAN, cujo objetivo é captar informações sobre o perfil dos atendimentos por violências doméstica, sexual e/ou outras violências (autoprovocadas e interpessoais) em unidades de saúde, caracterizando o perfil das pessoas que sofreram violências, o tipo, o local, o perfil do provável autor (a) de agressão, dentre outros.
+
+# A máxima unidade espacial que a tabela cobre.
+spatial_coverage: bra
+
+# Anos cobertos pela tabela.
+temporal_coverage:
+    - 2009
+    - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
+
+# A unidade temporal com qual a tabela é atualizada.
+update_frequency: one_year
+
+# Entidade representada por cada linha.
+entity: notificacao
+
+# A unidade temporal representada por cada linha.
+time_unit:
+
+# O conjunto mínimo de colunas identificando cada linha unicamente.
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+identifying_columns:
+
+last_updated:
+    metadata:
+        - 2021-09-22
+    data:
+        - 2021-09-22
+    release:
+        - 2021-01-01
+
+version:
+    - 1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name:
+        - Filipe Cavalcanti
+    email:
+        - f.matheus.cavalcanti@gmail.com
+    github_user:
+        - filipemsc
+    website:
+        - github.com/filipemsc
+    ckan_user:
+        - 
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name:
+        - Filipe Cavalcanti
+    email:
+        - f.matheus.cavalcanti@gmail.com
+    github_user:
+        - filipemsc
+    ckan_user:
+        - 
+    website:
+        - github.com/filipemsc
+    code_url:
+        - https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinan/code
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description:
+    - Renomear todas as variáveis para que sejam informativas quanto ao seu conteúdo, seguindo padrões de estilo 
+    - Atribuir valor nulo para todas as observações codificadas como "Ignorado", uma vez que estas tem mesmo significado
+    - Adicionar códigos de município de 7 dígitos
+    - Transformar variáveis com fatores que incluem zeros à esquerda para que contenham zeros à direita, exemplo - 01 vira 10 (uma vez que softwares estatísticos excluem zeros à equerda)
+    - Tranformar variável de idade_vitima para que sua unidade de medida seja padronizada em anos
+    - Transformar todas as variáveis de texto em caixa baixa, para que sigam um padrão
+    - Excluir variáveis nulas ou descontinuadas
+    - Transformar os formatos das variáveis para que estejam de acordo com esperado
+    - Reordenar as variávies
+
+# Url dos dados originais no GCP Storage.
+raw_files_url: bases-bd/aux/sinan/input
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url: bases-bd/aux/sinan/aux_files
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url: https://docs.google.com/spreadsheets/d/1_1X1Oqka91mXBK6C7QLAKx8A-2_I-EFaJ5K2Ul_55w0/edit#gid=0
+
+covered_by_dictionary: yes
+
+source_bucket_name: bases-bd
+
+project_id_prod: projetos-bd
+
+project_id_staging: projetos-bd
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: ano
+
+bdm_file_size:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type: INT64
+      description: Ano da notificação
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ano
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: true
+    - name: data_notificacao
+      bigquery_type: DATE
+      description: Data de preenchimento da ficha de notificação
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: No
+      is_in_staging: true
+      is_partition: false
+    - name: id_categoria_cid10
+      bigquery_type: STRING
+      description: Código do agravo notificado segundo CID-10
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: basedosdados
+          table_id: cid_10
+          column_name: categoria
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: id_subcategoria_cid10
+      bigquery_type: STRING
+      description: Código da circunstância da lesão segundo CID-10
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: basedosdados
+          table_id: cid_10
+          column_name: subcategoria
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_notificacao
+      bigquery_type: STRING
+      description: Identifica o tipo da notificação
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: id_uf_notificacao
+      bigquery_type: STRING
+      description: ID da unidade Federativa onde está localizada a unidade de saúde
+          (ou outra fonte notificadora) que realizou a notificação
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: id_uf
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_notificacao
+      bigquery_type: STRING
+      description: ID do município onde está localizada a unidade de saúde (ou outra
+          fonte notificadora) que realizou a notificação
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_6_notificacao
+      bigquery_type: STRING
+      description: ID do município de 6 dígitos onde está localizada a unidade de
+          saúde (ou outra fonte notificadora) que realizou a notificação
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_6
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: id_unidade_notificacao
+      bigquery_type: STRING
+      description: Código da unidade de saúde da área de abrangência da unidade notificadora
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: id_regional_saude_notificacao
+      bigquery_type: STRING
+      description: Regional de saúde onde está localizado o município da unidade de
+          saúde ou outra fonte notificadora
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: data_ocorrencia
+      bigquery_type: DATE
+      description: Data da ocorrência da violência
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: id_uf_ocorrencia
+      bigquery_type: STRIG
+      description: ID da Unidade da Federação de ocorrência do evento por ocasião
+          da notificação
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: id_uf
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_ocorrencia
+      bigquery_type: STRING
+      description: ID do município de ocorrência do evento notificado
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_6_ocorrencia
+      bigquery_type: STRING
+      description: ID do município de 6 dígitos de ocorrência do evento notificado
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_6
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: hora_ocorrencia
+      bigquery_type: TIME
+      description: Hora da ocorrência
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: local_ocorrencia
+      bigquery_type: INT64
+      description: Informar o local de ocorrência do evento notificado
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: outro_local_ocorrencia
+      bigquery_type: STRING
+      description: Especificar outro local de ocorrência
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: outras_vezes_ocorrencia
+      bigquery_type: INT64
+      description: Informar se a violência é de repetição
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: id_uf_residencia
+      bigquery_type: STRING
+      description: ID da Unidade Federada de residência do paciente por ocasião da
+          notificação
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: id_uf
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_residencia
+      bigquery_type: STRING
+      description: ID do município de residência do caso notificado
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_6_residencia
+      bigquery_type: STRING
+      description: ID do município de 6 dígitos de residência do caso notificado
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_6
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: id_regional_saude_residencia
+      bigquery_type: STRING
+      description: Regional de saúde onde está localizado o município de residência
+          do paciente por ocasião da notificação
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: idade_paciente
+      bigquery_type: INT64
+      description: Idade do paciente
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ano
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: sexo_paciente
+      bigquery_type: INT64
+      description: Sexo do paciente
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: gestante_paciente
+      bigquery_type: INT64
+      description: Identifica o estágio da gestação da paciente
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: raca_paciente
+      bigquery_type: INT64
+      description: Raça do paciente
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: escolaridade_paciente
+      bigquery_type: INT64
+      description: Escolaridade do paciente
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: ocupacao_paciente
+      bigquery_type: INT64
+      description: Ocupação do paciente
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: estado_civil_paciente
+      bigquery_type: INT64
+      description: Situação conjugal do paciente
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: orientacao_sexual_paciente
+      bigquery_type: INT64
+      description: Orientação sexual do paciente
+      temporal_coverage: 2014(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: identidade_genero_paciente
+      bigquery_type: INT64
+      description: Identidade de gênero do paciente
+      temporal_coverage: 2014(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: motivacao_violencia
+      bigquery_type: INT64
+      description: Informar se violência tem relação com caractéristicas da vitima
+      temporal_coverage: 2014(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: violencia_relacionada_trabalho
+      bigquery_type: INT64
+      description: Informar se ocorreu violência relacionada ao trabalho
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: emitiu_cat
+      bigquery_type: INT64
+      description: Informar se foi emitida a CAT, caso a violência seja relacionada
+          ao trabalho
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: deficiencia_transtorno_paciente
+      bigquery_type: INT64
+      description: Se o paciente possui algum tipo de deficiência/transtorno
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: deficiencia_fisica_paciente
+      bigquery_type: INT64
+      description: Se o paciente possui algum tipo de deficiência física
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: deficiencia_mental_paciente
+      bigquery_type: INT64
+      description: Se o paciente possui algum tipo de deficiência mental
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: deficiencia_visual_paciente
+      bigquery_type: INT64
+      description: Se o paciente possui algum tipo de deficiência visual
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: deficiencia_auditiva_paciente
+      bigquery_type: INT64
+      description: Se o paciente possui algum tipo de deficiência auditiva
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: transtorno_mental_paciente
+      bigquery_type: INT64
+      description: Se o paciente possui algum tipo de transtorno mental
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: transtorno_comportamental_paciente
+      bigquery_type: INT64
+      description: Se o paciente possui algum tipo de transtorno de comportamento
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: outras_deficiencias_paciente
+      bigquery_type: INT64
+      description: Se o paciente possui algum tipo de outras deficiências/síndromes
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: quais_outras_deficiencias_paciente
+      bigquery_type: STRING
+      description: Especificar qual o tipo de outras deficiências/síndromes
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: lesao_autoprovocada
+      bigquery_type: INT64
+      description: Informar se a lesão foi autoprovocada
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ocorreu_violencia_fisica
+      bigquery_type: INT64
+      description: Informar se ocorreu violência física
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ocorreu_violencia_psicologica
+      bigquery_type: INT64
+      description: Informar se ocorreu violência psicológica/moral
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ocorreu_tortura
+      bigquery_type: INT64
+      description: Informar se ocorreu tortura
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ocorreu_violencia_sexual
+      bigquery_type: INT64
+      description: Informar se ocorreu violência sexual
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ocorreu_trafico_ser_humano
+      bigquery_type: INT64
+      description: Informar se ocorreu tráfico de seres humanos
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ocorreu_violencia_financeira
+      bigquery_type: INT64
+      description: Informar se ocorreu violência financeira/econômica
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ocorreu_negligencia_abandono
+      bigquery_type: INT64
+      description: Informar se ocorreu negligência/abandono
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ocorreu_trabalho_infantil
+      bigquery_type: INT64
+      description: Informar se ocorreu trabalho infantil
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ocorreu_intervencao_legal
+      bigquery_type: INT64
+      description: Informar se ocorreu intervenção legal
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ocorreu_outra_violencia
+      bigquery_type: INT64
+      description: Informar se ocorreu outro tipo de violência
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ocorreu_qual_outra
+      bigquery_type: STRING
+      description: Especificar que outro tipo de violência ocorreu
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: meio_forca
+      bigquery_type: INT64
+      description: Informar se o meio de agressão foi através de força corporal
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: meio_enforcamento
+      bigquery_type: INT64
+      description: Informar se o meio de agressão foi através de enforcamento
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: meio_objeto_contundente
+      bigquery_type: INT64
+      description: Informar se o meio de agressão foi através de objeto contundente
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: meio_objeto_perfurante
+      bigquery_type: INT64
+      description: Informar se o meio de agressão foi através de objeto perfurante
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: meio_objeto_quente
+      bigquery_type: INT64
+      description: Informar se o meio de agressão foi através de substância ou objeto
+          quente
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: meio_envenenamento
+      bigquery_type: INT64
+      description: Informar se o meio de agressão foi através de envenenamento
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: meio_arma_fogo
+      bigquery_type: INT64
+      description: Informar se o meio de agressão foi através de arma de fogo
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: meio_ameaca
+      bigquery_type: INT64
+      description: Informar se o meio de agressão foi através de ameaça
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: meio_outros
+      bigquery_type: INT64
+      description: Informar se o meio de agressão foi através de outro
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: meio_qual_outro
+      bigquery_type: STRING
+      description: Especificar qual outro meio de agressão sofreu
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: houve_assedio
+      bigquery_type: INT64
+      description: Informar se ocorreu assédio sexual
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: houve_estupro
+      bigquery_type: INT64
+      description: Informar se ocorreu estupro
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: houve_pornografia_infantil
+      bigquery_type: INT64
+      description: Informar se ocorreu pornografia infantil
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: houve_exploracao_sexual
+      bigquery_type: INT64
+      description: Informar se ocorreu exploração sexual
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: houve_outra_violencia_sexual
+      bigquery_type: INT64
+      description: Informar se ocorreu outro tipo de violência sexual
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: houve_qual_outra_violencia_sexual
+      bigquery_type: STRING
+      description: Especificar qual outro tipo de violência sexual
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: profilaxia_dst
+      bigquery_type: INT64
+      description: Informar se ocorreu profilaxia DST
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: profilaxia_hiv
+      bigquery_type: INT64
+      description: Informar se ocorreu profilaxia HIV
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: profilaxia_hepatite_b
+      bigquery_type: INT64
+      description: Informar se ocorreu profilaxia hepatite B
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: coleta_sangue
+      bigquery_type: INT64
+      description: Informar se ocorreu coleta de sangue
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: coleta_semen
+      bigquery_type: INT64
+      description: Informar se ocorreu coleta de sêmen
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: coleta_secrecao_vaginal
+      bigquery_type: INT64
+      description: Informar se ocorreu coleta de secreção vaginal
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: profilaxia_contraceptivo
+      bigquery_type: INT64
+      description: Informar se ocorreu contracepção de emergencia
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: aborto
+      bigquery_type: INT64
+      description: Informar se ocorreu aborto previsto em lei
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_envolvidos_violencia
+      bigquery_type: INT64
+      description: Informar o número de envolvidos na violência
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_pai
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era o pai
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_mae
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era a mãe
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_padrasto
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era o padrasto
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_madrasta
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era a madrasta
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_conjugue
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era o cônjuge
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_ex_conjugue
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era o ex-cônjuge
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_namorado_a
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era o namorado(a)
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_ex_namorado_a
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era o ex-namorado(a)
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_filho_a
+      bigquery_type: INT64
+      description: Informar se o (a) provável autor(a) da agressão era filho ou
+          filha
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_desconhecido
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era desconhecido
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_irmao
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era irmão ou irmã
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_conhecido
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era amigo/conhecido
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_cuidador
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era o cuidador
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_patrao_chefe
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era o patrão/chefe
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_institucional
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era pessoa com relação
+          institucional
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_policial
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era policial/agente da
+          lei
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_propria_pessoa
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão era a própria pessoa
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_outros
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão tinha outro tipo de relação
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_relacao_outros
+      bigquery_type: STRING
+      description: Especificar outro tipo de relação com a pessoa atendida
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_sexo
+      bigquery_type: INT64
+      description: Sexo do provável autor da violência
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: autor_usou_alcool
+      bigquery_type: INT64
+      description: Informar se o provável autor da agressão tinha suspeita de uso
+          de álcool
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_saude
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento no setor da rede da saúde
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_assistencia_social
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento no setor da rede assistência social
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_educacao
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento no setor da rede educação
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_atendimento_mulher
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento no setor da rede de atendimento à
+          mulher
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_conselho_tutelar
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento para o Conselho Tutelar
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_conselho_idoso
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento para o Conselho do Idoso
+      temporal_coverage: 2014(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_delegacia_idoso
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento para delegacia de atendimento
+          ao idoso
+      temporal_coverage: 2014(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_direitos_humanos
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento para centro de referência dos
+          Direitos Humanos
+      temporal_coverage: 2014(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_mpu
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento para Ministério Público
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_delegacia_crianca
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento para Delegacia Especializada de
+          Proteção à Criança e Adolescente
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_delegacia_mulher
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento para Delegacia de atendimento
+          à mulher
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_delegacia
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento para outras delegacias
+      temporal_coverage: 2014(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_justica_infancia_juventude
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento para justiça da infância e da
+          juventude
+      temporal_coverage: 2014(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: encaminhamento_defensoria_publica
+      bigquery_type: INT64
+      description: Informar se houve encaminhamento para defensoria pública
+      temporal_coverage: 2014(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: data_encerramento
+      bigquery_type: DATE
+      description: Data de encerramento do caso
+      temporal_coverage: 2009(1)2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+
+metadata_modified: 2021-09-23

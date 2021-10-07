@@ -9,7 +9,7 @@
 
 local estados_1994_candidato	AC AL AM AP BA BR          GO MA    MS             PI             RR RS SC SE SP TO
 local estados_1996_candidato	AC AL AM AP BA    CE    ES GO MA MG MS    PA PB PE PI       RN    RR RS    SE SP TO
-local estados_1998_candidato	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_1998_candidato	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    //ZZ dados faltando no original do TSE. está afetando o somatório de votos para presidente
 local estados_2000_candidato	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2002_candidato	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO    ZZ
 local estados_2004_candidato	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
@@ -42,9 +42,14 @@ local estados_2020_partido		AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE P
 //------------------------//
 
 import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
-keep id_municipio_tse sigla_uf
+keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
+
+import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) case(preserve)
+keep id_municipio_tse sigla_uf
+tempfile diretorio_ufs
+save `diretorio_ufs'
 
 foreach ano of numlist 1994(2)2020 {
 	
@@ -54,8 +59,10 @@ foreach ano of numlist 1994(2)2020 {
 			
 			foreach estado in `estados_`ano'_candidato' {
 				
-				cap import delimited "input/votacao_candidato_munzona/votacao_candidato_munzona_`ano'/votacao_candidato_munzona_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear //rowrange(1:100)
-				cap import delimited "input/votacao_candidato_munzona/votacao_candidato_munzona_`ano'/votacao_candidato_munzona_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear //rowrange(1:100)
+				cap import delimited "input/votacao_candidato_munzona/votacao_candidato_munzona_`ano'/votacao_candidato_munzona_`ano'_`estado'.txt", ///
+					delim(";") varn(nonames) stringcols(_all) clear
+				cap import delimited "input/votacao_candidato_munzona/votacao_candidato_munzona_`ano'/votacao_candidato_munzona_`ano'_`estado'.csv", ///
+					delim(";") varn(nonames) stringcols(_all) clear
 				
 				if `ano' <= 2012 {
 					
@@ -113,9 +120,13 @@ foreach ano of numlist 1994(2)2020 {
 				// limpa strings
 				//------------------//
 				
+				drop if turno == 2 & cargo == "PRESIDENTE" & "`estado'" != "BR" & `ano' == 2002
+					// consertando problema que dados para presidente no 2o turno vem dobrados entre arquivos de UFs e BR em 2002.
+				drop if cargo == "PRESIDENTE" & "`estado'" != "BR" & (`ano' == 2006 | `ano' == 2010)
+				
 				if "`estado'" == "BR" {
 					ren sigla_uf sigla_uf_orig
-					merge m:1 id_municipio_tse using `diretorio'
+					merge m:1 id_municipio_tse using `diretorio_ufs'
 					drop if _merge == 2
 					drop _merge
 					replace sigla_uf_orig = sigla_uf if sigla_uf_orig == "BR"
@@ -137,9 +148,14 @@ foreach ano of numlist 1994(2)2020 {
 				}
 				*
 				
-				limpa_tipo_eleicao `ano'
-				limpa_partido `ano'
+				limpa_tipo_eleicao	`ano'
+				limpa_partido		`ano' sigla_partido
 				limpa_resultado
+				
+				merge m:1 id_municipio_tse using `diretorio'
+				drop if _merge == 2
+				drop _merge
+				order id_municipio, b(id_municipio_tse)
 				
 				tempfile resultados_cand_`estado'_`ano'
 				save `resultados_cand_`estado'_`ano''
@@ -177,7 +193,13 @@ foreach ano of numlist 1994(2)2020 {
 			drop if cargo == "presidente"
 			append using `presid'
 			
-			drop if ano == 2009 | ano == 2011
+			//-------------------------//
+			// salva
+			//-------------------------//
+			
+			drop if ano == 2009 | ano == 2011 // erros já vistos nos dados
+			
+			order votos, a(resultado)
 			
 			compress
 			
@@ -192,8 +214,10 @@ foreach ano of numlist 1994(2)2020 {
 				
 				di "`ano'_`estado'_partido"
 				
-				cap import delimited "input/votacao_partido_munzona/votacao_partido_munzona_`ano'/votacao_partido_munzona_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear //rowrange(1:100)
-				cap import delimited "input/votacao_partido_munzona/votacao_partido_munzona_`ano'/votacao_partido_munzona_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear //rowrange(1:100)
+				cap import delimited "input/votacao_partido_munzona/votacao_partido_munzona_`ano'/votacao_partido_munzona_`ano'_`estado'.txt", ///
+					delim(";") varn(nonames) stringcols(_all) clear
+				cap import delimited "input/votacao_partido_munzona/votacao_partido_munzona_`ano'/votacao_partido_munzona_`ano'_`estado'.csv", ///
+					delim(";") varn(nonames) stringcols(_all) clear
 				
 				if `ano' <= 2012 {
 					
@@ -243,7 +267,7 @@ foreach ano of numlist 1994(2)2020 {
 				
 				if "`estado'" == "BR" {
 					ren sigla_uf sigla_uf_orig
-					merge m:1 id_municipio_tse using `diretorio'
+					merge m:1 id_municipio_tse using `diretorio_ufs'
 					drop if _merge == 2
 					drop _merge
 					replace sigla_uf_orig = sigla_uf if sigla_uf_orig == "BR"
@@ -262,7 +286,12 @@ foreach ano of numlist 1994(2)2020 {
 				}
 				
 				limpa_tipo_eleicao `ano'
-				limpa_partido `ano'
+				limpa_partido `ano' sigla_partido
+				
+				merge m:1 id_municipio_tse using `diretorio'
+				drop if _merge == 2
+				drop _merge
+				order id_municipio, b(id_municipio_tse)
 				
 				duplicates drop
 				

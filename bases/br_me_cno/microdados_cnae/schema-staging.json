@@ -1,0 +1,1 @@
+[{"name": "id_cno", "description": "N\u00famero do CNO", "is_in_staging": true, "is_partition": false, "type": "STRING"}, {"name": "cnae_2", "description": "N\u00famero do CNAE", "is_in_staging": true, "is_partition": false, "type": "STRING"}, {"name": "data_registro", "description": "Data de registro", "is_in_staging": true, "is_partition": false, "type": "STRING"}]

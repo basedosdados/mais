@@ -8,11 +8,13 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_popul
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    Dados de população do IBGE.
+    Dados de população brasileira do IBGE. Reune informações de Censos, contagens e estimativas.
+    
+    Para estimativas, coletamos os dados do TCU sempre que possível, já que estes não estão sujeitos a decisões judiciais que afetam os números.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: instituto-brasileiro-de-geografia-e-estatistica
+organization: br-ibge
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:

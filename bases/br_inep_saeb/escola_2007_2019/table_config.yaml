@@ -1,0 +1,1496 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: escola_2007_2019 # AUTO GENERATED
+dataset_id: br_inep_saeb # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-inep-saeb # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb # AUTO GENERATED
+
+version: v4.0 # REQUIRED
+
+last_updated: 2021-08-16 # AUTO GENERATED
+
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Microdados do SAEB a nível escola. Além dos instrumentos de medida de desempenho, há questionários com informações sobre a escola, que estão relacionadas ao ambiente físico, infraestrutura, recursos, entre outros aspectos, preenchidos pelo aplicador.
+
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Hevilyn Souza  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code # REQUIRED
+    website: https://github.com/Hevilyn
+    email: hevilynsouza12@hotmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Hevilyn Souza
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
+    website: https://basedosdados.org/
+    email: hevilynsouza12@hotmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    - Compatibilização dos dados entre os anos 2007 até 2019. Os dados de algumas variáveis não estão disponíveis para todos os anos. Para melhor compreensão da base, consultar a tabela de compatibilização disponível.
+    - Padronização de nomes de colunas.
+    - Palavras sem acento e minúsculas.
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: 2 anos # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - escola
+    - ano
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_escola
+    - ano
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 2007
+    - 2009
+    - 2011
+    - 2013
+    - 2015
+    - 2017
+    - 2019
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - ano
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+  
+    -   
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_municipio
+        description: ID Município - IBGE 7 dígitos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: id_escola
+        description: ID Escola - INEP
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: rede
+        description: Rede escolar
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: localizacao
+        description: Localização
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: formacao_docente_ef_anos_iniciais
+        description: Indicador de Adequação da Formação Docente para os anos iniciais do Ensino Fundamental. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: formacao_docente_ef_anos_finais
+        description: Indicador de Adequação da Formação Docente para os anos finais do Ensino Fundamental. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: formacao_docente_ensino_medio
+        description: Indicador de Adequação da Formação Docente para o Ensino Médio. (2017-2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_socio_economico
+        description: Indicador de Nível Socioeconômico (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: numero_matriculados_censo_5_ef
+        description: Número de alunos matriculados no 5º ano no Censo. (2011(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: numero_presentes_5_ef
+        description: Número de alunos presentes na aplicação do 5º ano. (2007(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_participacao_5_ef
+        description: Razão entre o total de alunos presentes no SAEB 5º ano e o total de alunos cadastrados no Censo Escolar que são público alvo do SAEB. (2011(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_0_lp5
+        description: Nível 0 Língua Portuguesa 5º ano (2015(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ate_nivel_1_lp5
+        description: Até Nível 1 Língua Portuguesa 5º ano (2013)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_1_lp5
+        description: Nível 1 Língua Portuguesa 5º ano (2015(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_2_lp5
+        description: Nível 2 Língua Portuguesa 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_3_lp5
+        description:  Nível 3 Língua Portuguesa 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_4_lp5
+        description:  Nível 4 Língua Portuguesa 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_5_lp5
+        description:  Nível 5 Língua Portuguesa 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_6_lp5
+        description:  Nível 6 Língua Portuguesa 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_7_lp5
+        description:  Nível 7 Língua Portuguesa 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_8_lp5
+        description:  Nível 8 Língua Portuguesa 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_9_lp5
+        description:  Nível 9 Língua Portuguesa 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_0_mt5
+        description: Nível 0 Matemática 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_1_mt5
+        description: Nível 1 Matemática 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_2_mt5
+        description: Nível 2 Matemática 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_3_mt5
+        description: Nível 3 Matemática 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_4_mt5
+        description: Nível 4 Matemática 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_5_mt5
+        description: Nível 5 Matemática 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_6_mt5
+        description: Nível 6 Matemática 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_7_mt5
+        description: Nível 7 Matemática 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_8_mt5
+        description: Nível 8 Matemática 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_9_mt5
+        description: Nível 9 Matemática 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_10_mt5
+        description: Nível 10 Matemática 5º ano (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: media_5_ef_lp
+        description: Média em Língua Portuguesa 5º ano (2007(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: media_5_ef_mt
+        description: Média em Matemática 5º ano (2007(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: numero_matriculados_censo_9_ef
+        description: Número de alunos matriculados no 9º ano no censo. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: numero_presentes_9_ef
+        description: Número de alunos presentes na aplicação do 9º ano. (2007(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_participacao_9_ef
+        description: Razão entre o total de alunos presentes no SAEB 9º ano e o total de alunos cadastrados no Censo Escolar que são público alvo do SAEB.(2011(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_0_lp9
+        description: Nível 0 Língua Portuguesa 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_1_lp9
+        description: Nível 1 Língua Portuguesa 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_2_lp9
+        description: Nível 2 Língua Portuguesa 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_3_lp9
+        description: Nível 3 Língua Portuguesa 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_4_lp9
+        description: Nível 4 Língua Portuguesa 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_5_lp9
+        description: Nível 5 Língua Portuguesa 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_6_lp9
+        description: Nível 6 Língua Portuguesa 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_7_lp9
+        description: Nível 7 Língua Portuguesa 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_8_lp9
+        description: Nível 8 Língua Portuguesa 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_0_mt9
+        description: Nível 0 Matemática 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_1_mt9
+        description: Nível 1 Matemática 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_2_mt9
+        description: Nível 2 Matemática 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_3_mt9
+        description: Nível 3 Matemática 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_4_mt9
+        description: Nível 4 Matemática 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_5_mt9
+        description: Nível 5 Matemática 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_6_mt9
+        description: Nível 6 Matemática 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_7_mt9
+        description: Nível 7 Matemática 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_8_mt9
+        description: Nível 8 Matemática 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_9_mt9
+        description: Nível 9 Matemática 9º ano. (2013(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: media_9_ef_lp
+        description: Média em Língua Portuguesa  9º ano. (2007(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: media_9_ef_mt
+        description: Média em Matemática  9º ano. (2007(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: numero_matriculados_censo_emt
+        description: Número de alunos matriculados na 3ª/4ª série do Ensino Médio Tradicional no Censo. (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: numero_presentes_emt
+        description: Número de alunos presentes na aplicação do Ensino Médio Tradicional. (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_participacao_emt
+        description: Razão entre o total de alunos presentes no SAEB e o total de alunos cadastrados no Censo Escolar, no Ensino Médio Tradicional, que são público alvo do SAEB. (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_0_lp_emt
+        description: Nível 0 Lingua Portuguesa - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_1_lp_emt
+        description: Nível 1 Lingua Portuguesa - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_2_lp_emt
+        description: Nível 2 Lingua Portuguesa - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_3_lp_emt
+        description: Nível 3 Lingua Portuguesa - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_4_lp_emt
+        description: Nível 4 Lingua Portuguesa - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_5_lp_emt
+        description: Nível 5 Lingua Portuguesa - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_6_lp_emt
+        description: Nível 6 Lingua Portuguesa - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_7_lp_emt
+        description: Nível 7 Lingua Portuguesa - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_8_lp_emt
+        description: Nível 8 Lingua Portuguesa - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_0_mt_emt
+        description: Nível 0 Matemática - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_1_mt_emt
+        description: Nível 1 Matemática - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_2_mt_emt
+        description: Nível 2 Matemática - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_3_mt_emt
+        description: Nível 3 Matemática - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_4_mt_emt
+        description: Nível 4 Matemática - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_5_mt_emt
+        description: Nível 5 Matemática - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_6_mt_emt
+        description: Nível 6 Matemática - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_7_mt_emt
+        description: Nível 7 Matemática - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_8_mt_emt
+        description: Nível 8 Matemática - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_9_mt_emt
+        description: Nível 9 Matemática - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_10_mt_emt
+        description: Nível 10 Matemática - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: media_lp_emt
+        description: Média em Língua Portuguesa - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: media_mt_emt
+        description: Média em Matemática - Ensino Médio Tradicional (2017(2)2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: numero_matriculados_censo_emi
+        description: Número de alunos matriculados na 3ª/4ª série do Ensino Médio Integrado no Censo. (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: numero_presentes_emi
+        description: Número de alunos presentes na aplicação do Ensino Médio Integrado. (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_participacao_emi
+        description: Razão entre o total de alunos presentes no SAEB e o total de alunos cadastrados no Censo Escolar, no Ensino Médio Integrado, que são público alvo do SAEB. (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_0_lp_emi
+        description: Nível 0 Língua Portuguesa - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_1_lp_emi
+        description: Nível 1 Língua Portuguesa - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_2_lp_emi
+        description: Nível 2 Língua Portuguesa - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_3_lp_emi
+        description: Nível 3 Língua Portuguesa - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_4_lp_emi
+        description: Nível 4 Língua Portuguesa - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_5_lp_emi
+        description: Nível 5 Língua Portuguesa - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_6_lp_emi
+        description: Nível 6 Língua Portuguesa - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_7_lp_emi
+        description: Nível 7 Língua Portuguesa - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_8_lp_emi
+        description: Nível 8 Língua Portuguesa - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_0_mt_emi
+        description: Nível 0 Matemática - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_1_mt_emi
+        description: Nível 1 Matemática - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_2_mt_emi
+        description: Nível 2 Matemática - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_3_mt_emi
+        description: Nível 3 Matemática - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_4_mt_emi
+        description: Nível 4 Matemática - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_5_mt_emi
+        description: Nível 5 Matemática - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_6_mt_emi
+        description: Nível 6 Matemática - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_7_mt_emi
+        description: Nível 7 Matemática - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_8_mt_emi
+        description: Nível 8 Matemática - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_9_mt_emi
+        description: Nível 9 Matemática - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_10_mt_emi
+        description: Nível 10 Matemática - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: media_lp_emi
+        description: Média em Língua Portuguesa - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: media_mt_emi
+        description: Média em Matemática - Ensino Médio Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: numero_matriculados_censo_em
+        description: Número de alunos matriculados na 3ª/4ª série do Ensino Médio Tradicional ou Integrado no Censo 2019 (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: numero_presentes_em
+        description: Número de alunos presentes na aplicação do Ensino Médio Tradicional ou Integrado. (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_participacao_em
+        description: Razão entre o total de alunos presentes no SAEB e o total de alunos cadastrados no Censo Escolar, no Ensino Médio Tradicional ou Integrado, que são público alvo do SAEB (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_0_lp_em
+        description: Nível 0 Língua Portuguesa - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_1_lp_em
+        description: Nível 1 Língua Portuguesa - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_2_lp_em
+        description: Nível 2 Língua Portuguesa - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_3_lp_em
+        description: Nível 3 Língua Portuguesa - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_4_lp_em
+        description: Nível 4 Língua Portuguesa - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_5_lp_em
+        description: Nível 5 Língua Portuguesa - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_6_lp_em
+        description: Nível 6 Língua Portuguesa - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_7_lp_em
+        description: Nível 7 Língua Portuguesa - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_8_lp_em
+        description: Nível 8 Língua Portuguesa - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_0_mt_em
+        description: Nível 0 Matemática - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_1_mt_em
+        description: Nível 1 Matemática - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_2_mt_em
+        description: Nível 2 Matemática - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_3_mt_em
+        description: Nível 3 Matemática - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_4_mt_em
+        description: Nível 4 Matemática - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_5_mt_em
+        description: Nível 5 Matemática - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_6_mt_em
+        description: Nível 6 Matemática - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_7_mt_em
+        description: Nível 7 Matemática - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_8_mt_em
+        description: Nível 8 Matemática - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_9_mt_em
+        description: Nível 9 Matemática - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: nivel_10_mt_em
+        description: Nível 10 Matemática - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: media_lp_em
+        description: Média em Língua Portuguesa - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: media_mt_em
+        description: Média em Matemática - Ensino Médio Tradicional ou Integrado (2019)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: preenchimento_questionario
+        description: Indicador de preenchimento do questionário (2011(2)2019) 
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q001
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Telhado (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q002
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Paredes (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q003
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Piso (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q004
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Entrada do prédio (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q005
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Pátio (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q006
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Corredores (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q007
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Salas de aula (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q008
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Portas (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q009
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Janelas (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q010
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Banheiros (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q011
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Cozinha (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q012
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Instalações Hidráulicas (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q013
+        description: Avalie o estado de conservação dos itens e equipamentos do prédio - Instalações Elétricas (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q014
+        description: Avalie a quantidade de salas de aula que atendem aos seguintes critérios:São iluminadas de forma adequada. (Observe se a iluminação natural ou artificial garante boa claridade no interior das salas) (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q015
+        description: Avalie a quantidade de salas de aula que atendem aos seguintes critérios:São arejadas de forma adequada. (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q016
+        description: Avalie o estado de conservação dos equipamentos abaixo discriminados e classifique-o como bom, regular ou ruim - Paredes externas (2007)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q017
+        description: Avalie o estado de conservação dos equipamentos abaixo discriminados e classifique-o como bom, regular ou ruim - Portas (2007)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q018
+        description: Avalie o estado de conservação dos equipamentos abaixo discriminados e classifique-o como bom, regular ou ruim - Janelas (2007)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q019
+        description: Avalie o estado de conservação dos equipamentos abaixo discriminados e classifique-o como bom, regular ou ruim - Banheiros (2007)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q020
+        description: Avalie o estado de conservação dos equipamentos abaixo discriminados e classifique-o como bom, regular ou ruim - Cozinha (2007)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q021
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Controle de entrada e saída de alunos. (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q022
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Controle de entrada de pessoas estranhas na escola. (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q023
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Vigilância para o período diurno. (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q024
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Vigilância para o período noturno. (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q025
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Vigilância para os finais de semana e feriados. (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q026
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Esquema de policiamento para inibição de furtos, roubos e outras formas de violência. (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q027
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Esquema de policiamento para inibição de tráfico de tóxicos/drogas dentro da escola.(2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q028
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Esquema de policiamento para inibição de tráfico de tóxicos/drogas nas imediações da escola. (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q029
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Sistema de proteção contra incêndio (alarme de fumaça e temperatura, extintores contra incêndio dentro do prazo de validade, mangueiras, e etc). (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q030
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Iluminação do lado de fora da escola. (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q031
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Há muros, grades ou cercas em condições de garantir a segurança dos alunos? (Caso existam buracos ou aberturas que permitam o acesso de estranhos, responder NÃO).(2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q032
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Os equipamentos mais caros (computadores, projetores, televisão, vídeo etc.) são guardados em salas seguras ou possuem mecanismos de proteção (cadeados, grades, travas, trancas etc.). (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q033
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:Os portões que dão acesso à parte externa permanecem trancados durante o horário de funcionamento da escola. (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q034
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:A escola adota alguma medida de segurança para proteger os alunos nas suas imediações. (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q035
+        description: Avalie os seguintes aspectos em relação à segurança da escola e dos alunos:A escola apresenta sinais de depredação (vidros, portas e janelas quebradas, lâmpadas estouradas etc.).(2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q036
+        description: Avalie o estado de conservação dos itens abaixo e classifique-os como bom, regular, ruim ou inexistente - Computador (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q037
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Computadores para uso dos alunos. (2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q038
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Acesso à internet para uso dos alunos. (2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q039
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Computadores para uso dos professores.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q040
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Acesso à internet para uso dos professores.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q041
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Computadores exclusivamente para o uso administrativo..(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q042
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Fitas de vídeo ou dvd (educativas)...(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q043
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Fitas de vídeo ou dvd (lazer).(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q044
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Máquina copiadora.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q045
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Impressora.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q046
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Retroprojetor.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q047
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Projetor de slides.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q048
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Videocassete ou aparelho de dvd.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q049
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Televisão.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q050
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Mimeógrafo.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q051
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Câmera fotográfica.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q052
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Antena parabólica.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q053
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Internet com conexão Banda Larga.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q054
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Linha telefônica.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q055
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Aparelho de fax.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q056
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Aparelho de som.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q057
+        description: Avalie o estado de conservação dos itens abaixo e classifique-os como bom, regular, ruim ou inexistente - Máquina de datilografia.(2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q058
+        description: Indique a existência e as condições de uso dos seguintes espaços da escola:Biblioteca.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q059
+        description: Indique a existência e as condições de uso dos seguintes espaços da escola:Sala de leitura.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q060
+        description: Indique a existência e as condições de uso dos seguintes espaços da escola:Quadra de esportes.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q061
+        description: Indique se nesta escola existem ou não os recursos apontados e quais são suas condiçoes de uso. Laboratório. (2011)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q062
+        description: Indique a existência e as condições de uso dos seguintes espaços da escola:Laboratório de informática. (2013(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q063
+        description: Indique a existência e as condições de uso dos seguintes espaços da escola:Laboratório de Ciências. (2013(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q064
+        description: Indique a existência e as condições de uso dos seguintes espaços da escola:Auditório.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q065
+        description: Indique a existência e as condições de uso dos seguintes espaços da escola:Sala para atividades de música.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q066
+        description: Indique a existência e as condições de uso dos seguintes espaços da escola:Sala para atividades de artes pláticas.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q067
+        description: Em relação à biblioteca ou sala de leitura:Possui acervo diversificado que desperte o interesse dos alunos.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q068
+        description: Em relação à biblioteca ou sala de leitura:Possui brinquedoteca.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q069
+        description: Em relação à biblioteca ou sala de leitura:Possui espaço para estudos coletivos.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q070
+        description: Em relação à biblioteca ou sala de leitura:Os livros podem ser manuseados e emprestados.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q071
+        description: Em relação à biblioteca ou sala de leitura:A comunidade pode  utilzar o espaço e os livros.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q072
+        description: Em relação à biblioteca ou sala de leitura:O espaço é arejado e bem iluminado.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q073
+        description: Em relação à biblioteca ou sala de leitura:Existe uma pessoa responsável pelo atendimento na biblioteca ou na sala de leitura.(2011(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q074
+        description: Os seguintes usuários da biblioteca (ou sala de leitura) levam livros para casa:Os alunos (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q075
+        description: Os seguintes usuários da biblioteca (ou sala de leitura) levam livros para casa:Os professores (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q076
+        description: Os seguintes usuários da biblioteca (ou sala de leitura) levam livros para casa:Os membros da comunidade (2007(2)2017)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q077
+        description: Informe a quantidade de computadores existenta na escola em cada um dos casos listados:Total de computadores na escola. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q078
+        description: Informe a quantidade de computadores existenta na escola em cada um dos casos listados:Computadores para uso exclusivo dos alunos (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q079
+        description: Informe a quantidade de computadores existenta na escola em cada um dos casos listados:Computadores com acesso à internet para uso exclusivo dos alunos. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q080
+        description: Informe a quantidade de computadores existenta na escola em cada um dos casos listados:Computadores para uso dos professores. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q081
+        description: Informe a quantidade de computadores existenta na escola em cada um dos casos listados:Computadores com acesso à internet para uso dos professores. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q082
+        description: Informe a quantidade de computadores existenta na escola em cada um dos casos listados:Computadores exclusivamente para uso administrativo. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q083
+        description: Avalie os seguintes aspectos, marcando sim ou não:Pichação de muros ou paredes das dependências internas da escola. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q084
+        description: Avalie os seguintes aspectos, marcando sim ou não:Pichação de muros ou paredes das dependências externas da escola. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q085
+        description: Avalie os seguintes aspectos, marcando sim ou não:Depredação de banheiros. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q086
+        description: Avalie os seguintes aspectos, marcando sim ou não:Depredação de dependências internas da escola. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q087
+        description: Avalie os seguintes aspectos, marcando sim ou não:Depredação de dependências externas da escola. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q088
+        description: Qual o percentual de alunos que utilizam a biblioteca no mês? A) ATÉ 25% B) DE 26% ATÉ 50% C) DE 51% ATÉ 75% D) MAIS DE 75% E) NÃO HÁ BIBLIOTECA. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q089
+        description: Os professores realizam trabalhos na biblioteca, fazendo uso dos materiais disponíveis?. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q090
+        description: Avalie o estado de conservação dos livros em bom, regular, ruim ou inexistente:Livros de estudo. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q091
+        description: Avalie o estado de conservação dos livros em bom, regular, ruim ou inexistente:Livros de literatura. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q092
+        description: Avalie o estado de conservação dos livros em bom, regular, ruim ou inexistente:Revistas de informação geral. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q093
+        description: Avalie o estado de conservação dos livros em bom, regular, ruim ou inexistente:Jornais. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q094
+        description: Avalie o estado de conservação dos livros em bom, regular, ruim ou inexistente:Revista em quadrinhos. (2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: taxa_resposta_q095
+        description: Como você avala esta escola?(2007(2)2009)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.

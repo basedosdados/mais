@@ -1,0 +1,46 @@
+Dicionário para a base do Sistema de Informações de Nascidos Vivos (SINASC)
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ms-sinasc
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinasc
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinasc/code
+Email: lucas.moreira@basedosdados.orgTratado por
+-----------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinasc/code
+Email: lucas.moreira@basedosdados.org
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- chave
+
+Colunas identificando linhas unicamente
+-------------------
+- id_tabela
+- coluna
+- chave
+- cobertura_temporal
+
+Cobertura Temporal
+------------------
+
+Cobertura Espacial
+------------------
+
+Tratamento
+----------
+Coletei informações de dicionários de diversas fontes do DataSUS e na internet.
+
+Frequencia de Atualização
+-------------------------
+unico
+
+

@@ -3,24 +3,44 @@ Microdados do auxílio emergencial de 2020 do Ministério da Cidadania a nível 
 
 Para saber mais acesse:
 Website: 
-Github: https://github.com/basedosdados/mais/
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_mc_auxilio_emergencial/code
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.orgTratado por
+-----------
+Nome: Portal da Transparência
+Website: http://www.portaltransparencia.gov.br/beneficios/auxilio-emergencial
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - mes
 - sigla_uf
 
-Nível da Observação (Colunas que identificam cada linha unicamente)
+Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - beneficiário
-- mês
+- mes
+
+Colunas identificando linhas unicamente
+-------------------
+- mes
+- id_municipio
+- nis_beneficiario
+- cpf_beneficiario
+- nome_beneficiario
+- parcela
 
 Cobertura Temporal
 ------------------
 - 2020
+- 2021
 
 Cobertura Espacial
 ------------------
@@ -34,14 +54,4 @@ Frequencia de Atualização
 -------------------------
 mês
 
-Tratado por
------------
-Nome: Portal da Transparência
-Website: http://www.portaltransparencia.gov.br/beneficios/auxilio-emergencial
 
-Publicado por
--------------
-Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_mc_auxilio_emergencial/code
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org

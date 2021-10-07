@@ -1,0 +1,59 @@
+Dados de telefonia móvel (também conhecido como Serviço Móvel Pessoal) a partir de 2019, após reformulação da coleta e divulgação de dados por parte da Anatel, que apresentam o município como menor nível de desagregação dos dados.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-anatel-telefonia-movel
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
+Email: lucas.nasc.m@gmail.comTratado por
+-----------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
+Email: lucas.nasc.m@gmail.com
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- municipio
+- tecnologia
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- mes
+- id_municipio
+- ddd
+- cnpj
+- tecnologia
+- sinal
+- modalidade
+- pessoa
+- produto
+
+Cobertura Temporal
+------------------
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Download das bases e a renomeação das colunas segundo padrão da BD+;
+- Agrupamento dos dados de observações duplicadas;
+- Compatibilização da base para identificação única das observações;
+
+Frequencia de Atualização
+-------------------------
+mes
+
+

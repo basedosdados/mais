@@ -22,7 +22,7 @@ CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.distrito AS
 SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(id_distrito AS STRING) id_distrito,
-SAFE_CAST(distrito AS STRING) distrito,
+SAFE_CAST(nome AS STRING) nome,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf
 FROM basedosdados-dev.br_bd_diretorios_brasil_staging.distrito AS t

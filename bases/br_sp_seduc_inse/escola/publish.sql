@@ -21,10 +21,10 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_sp_seduc_inse.escola AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(rede AS STRING) rede,
 SAFE_CAST(diretoria AS STRING) diretoria,
-SAFE_CAST(id_escola AS INT64) id_escola,
-SAFE_CAST(id_escola_sp AS INT64) id_escola_sp,
+SAFE_CAST(id_escola AS STRING) id_escola,
+SAFE_CAST(id_escola_sp AS STRING) id_escola_sp,
 SAFE_CAST(nivel_socio_economico AS FLOAT64) nivel_socio_economico
 from basedosdados-dev.br_sp_seduc_inse_staging.escola as t
