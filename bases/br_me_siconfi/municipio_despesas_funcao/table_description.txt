@@ -1,0 +1,76 @@
+Despesas por função a nível de município.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-me-siconfi
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Crislane A. Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi/code
+Website: https://github.com/crislanealves
+Email: crislanealves@basedosdados.orgTratado por
+-----------
+Nome: Crislane A. Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi/code
+Email: crislanealves@basedosdados.org
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- municipio
+- estagio
+- conta
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_municipio
+- estagio_bd
+- id_conta_bd
+- ano
+
+Cobertura Temporal
+------------------
+- 2004
+- 2005
+- 2006
+- 2007
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Criação da coluna 'id_municipio' para os anos de 1989-2012
+- Criação da coluna 'id_conta_normalizado' para compatibilizar todos os anos que não tem 'portaria'
+- Criação da coluna 'id_conta_bd' para compatilizar toda série temporal 
+- Append nas tabelas dos anos 1996-2012 para a arquitetura 2013-2020    
+
+Frequencia de Atualização
+-------------------------
+1 ano
+
+
