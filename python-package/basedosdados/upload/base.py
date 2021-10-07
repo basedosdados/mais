@@ -320,7 +320,7 @@ class Base:
         ).render(**kargs)
 
     def _check_mode(self, mode):
-        ACCEPTED_MODES = ["all", "staging", "prod", "raw", "header", "auxiliary_files"]
+        ACCEPTED_MODES = ["all", "staging", "prod", "raw", "header", "auxiliary_files", "architecture"]
         if mode in ACCEPTED_MODES:
             return True
         else:
