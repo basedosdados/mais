@@ -7,7 +7,7 @@ dataset_id: br_me_caged # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-me-caged # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged # AUTO GENERATED
 
-version: 1.0 # REQUIRED
+version: 1.1 # REQUIRED
 
 last_updated: 2021-10-09 # AUTO GENERATED
 
