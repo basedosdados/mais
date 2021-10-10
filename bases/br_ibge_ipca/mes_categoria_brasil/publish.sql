@@ -27,8 +27,8 @@ SAFE_CAST(id_pais AS STRING) id_pais,
 SAFE_CAST(id_categoria AS STRING) id_categoria,
 SAFE_CAST(id_categoria_bd AS STRING) id_categoria_bd,
 SAFE_CAST(categoria AS STRING) categoria,
-SAFE_CAST(peso_mensal AS STRING) peso_mensal,
-SAFE_CAST(variacao_mensal AS STRING) variacao_mensal,
-SAFE_CAST(variacao_anual AS STRING) variacao_anual,
-SAFE_CAST(variacao_doze_meses AS STRING) variacao_doze_meses
+SAFE_CAST(peso_mensal AS FLOAT64) peso_mensal,
+SAFE_CAST(variacao_mensal AS FLOAT64) variacao_mensal,
+SAFE_CAST(variacao_anual AS FLOAT64) variacao_anual,
+SAFE_CAST(variacao_doze_meses AS FLOAT64) variacao_doze_meses
 from basedosdados-dev.br_ibge_ipca_staging.mes_categoria_brasil as t

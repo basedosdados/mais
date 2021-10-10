@@ -23,10 +23,10 @@ CREATE VIEW basedosdados-dev.br_ibge_ipca.mes AS
 SELECT 
 SAFE_CAST(ano AS STRING) ano,
 SAFE_CAST(mes AS STRING) mes,
-SAFE_CAST(indice AS STRING) indice,
-SAFE_CAST(variacao_mensal AS STRING) variacao_mensal,
-SAFE_CAST(variacao_tres_meses AS STRING) variacao_tres_meses,
-SAFE_CAST(variacao_semestral AS STRING) variacao_semestral,
-SAFE_CAST(variacao_anual AS STRING) variacao_anual,
-SAFE_CAST(variacao_doze_meses AS STRING) variacao_doze_meses
+SAFE_CAST(indice AS FLOAT64) indice,
+SAFE_CAST(variacao_mensal AS FLOAT64) variacao_mensal,
+SAFE_CAST(variacao_tres_meses AS FLOAT64) variacao_tres_meses,
+SAFE_CAST(variacao_semestral AS FLOAT64) variacao_semestral,
+SAFE_CAST(variacao_anual AS FLOAT64) variacao_anual,
+SAFE_CAST(variacao_doze_meses AS FLOAT64) variacao_doze_meses
 from basedosdados-dev.br_ibge_ipca_staging.mes as t
