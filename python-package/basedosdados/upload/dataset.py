@@ -14,6 +14,7 @@ class Dataset(Base):
 
     def __init__(self, dataset_id, **kwargs):
         super().__init__(**kwargs)
+        self.kwargs = kwargs
 
         self.dataset_id = dataset_id.replace("-", "_")
         self.dataset_folder = Path(self.metadata_path / self.dataset_id)
@@ -43,6 +44,22 @@ class Dataset(Base):
         dataset = bigquery.Dataset(dataset_id)
 
         return dataset
+    
+    def _write_readme_file(self):
+        
+        readme_content = (
+            f"Como capturar os dados de {self.dataset_id}?\n\nPara cap"
+            f"turar esses dados, basta verificar o link dos dados orig"
+            f"inais indicado em dataset_config.yaml no item website.\n"
+            f"\nCaso tenha sido utilizado algum código de captura ou t"
+            f"ratamento, estes estarão contidos em code/. Se o dado pu"
+            f"blicado for em sua versão bruta, não existirá a pasta co"
+            f"de/.\n\nOs dados publicados estão disponíveis em: https:"
+            f"//basedosdados.org/dataset/{self.dataset_id.replace('_','-')}"
+        )
+
+        with open(Path(self.metadata_path / self.dataset_id / 'README.md'), "w") as readmefile:
+            readmefile.write(readme_content)
 
     def init(self, replace=False):
         """Initialize dataset folder at metadata_path at `metadata_path/<dataset_id>`.
@@ -69,7 +86,10 @@ class Dataset(Base):
             )
 
         # create dataset_config.yaml with metadata
-        Metadata(self.dataset_id).create(if_exists="replace")
+        Metadata(self.dataset_id, **self.kwargs).create(if_exists="replace")
+
+        # create README.md file
+        self._write_readme_file()
 
         # Add code folder
         (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
