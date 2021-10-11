@@ -1,0 +1,50 @@
+Tabela com as variações da inflação e peso dos produtos e serviços na cesta de inflação do IBGE
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-ibge-ipca
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gustavo Aires Tiago
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao/code
+Email: gustavo.tiago@basedosdados.orgTratado por
+-----------
+Nome: Gustavo Aires Tiago
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao/code
+Email: gustavo.tiago@basedosdados.org
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- mes
+- pais
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- mes
+- id_categoria_bd
+
+Cobertura Temporal
+------------------
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Separação em coluna de Ano e Mês
+- Parametrização da coluna id_categoria identificadora de produtos ou serviços para uma estrutura de árvore hierárquica em id_categoria_bd
+
+Frequencia de Atualização
+-------------------------
+mes
+
+
