@@ -51,7 +51,7 @@ data_update_frequency: mes # REQUIRED
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
     - mes
-    - município
+    - municipio
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -72,12 +72,12 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - Rio Branco(AC)
-    - São Luís(MA)
-    - Aracaju(SE)
-    - Campo Grande(MS)
-    - Goiânia(GO)
-    - Brasília(DF)
+    - rio branco(ac)
+    - sao luis(ma)
+    - aracaju(se)
+    - campo grande(ms)
+    - goiania(go)
+    - brasilia(df)
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...

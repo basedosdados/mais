@@ -1,7 +1,7 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: mes # AUTO GENERATED
+table_id: mes_brasil # AUTO GENERATED
 dataset_id: br_ibge_ipca # AUTO GENERATED
 
 url_ckan: https://basedosdados.org/dataset/br-ibge-inflacao # AUTO GENERATED
@@ -50,8 +50,8 @@ data_update_frequency: mes # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - ano
     - mes
+    - pais
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -160,8 +160,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: variacao_tres_meses
-        description: Variação percentual três meses
+        name: variacao_trimestral
+        description: Variação percentual trimestral
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

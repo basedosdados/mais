@@ -51,7 +51,7 @@ data_update_frequency: mes # REQUIRED
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
     - mes
-    - país
+    - pais
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -59,7 +59,6 @@ observation_level: #REQUIRED
 primary_keys:
     - ano
     - mes
-    - id_pais
     - id_categoria_bd
 
 # Qual é a cobertura espacial da tabela?
@@ -72,12 +71,7 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - Rio Branco(AC)
-    - São Luís(MA)
-    - Aracaju(SE)
-    - Campo Grande(MS)
-    - Goiânia(GO)
-    - Brasília(DF)
+    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
@@ -106,10 +100,6 @@ columns: # REQUIRED
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: mes
       description: Mês
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: id_pais
-      description: ID País - OCDE
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: id_categoria

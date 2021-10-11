@@ -21,7 +21,7 @@ Email: gustavo.tiago@basedosdados.org
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - mes
-- região metropolitana
+- regiao metropolitana
 
 Colunas identificando linhas unicamente
 -------------------
@@ -37,16 +37,16 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- Belém (PA)
-- Fortaleza (CE)
-- Recife (PE)
-- Salvador (BA)
-- Belo Horizonte (MG)
-- Grande Vitória (ES)
-- Rio de Janeiro (RJ)
-- São Paulo (SP)
-- Curitiba (PR)
-- Porto Alegre (RS)
+- belem (pa)
+- fortaleza (ce)
+- recife (pe)
+- salvador (ba)
+- belo horizonte (mg)
+- grande vitoria (es)
+- rio de janeiro (rj)
+- sao paulo (sp)
+- curitiba (pr)
+- porto alegre (rs)
 
 Tratamento
 ----------

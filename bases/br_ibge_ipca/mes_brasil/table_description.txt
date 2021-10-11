@@ -20,8 +20,8 @@ Email: gustavo.tiago@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- ano
 - mes
+- pais
 
 Colunas identificando linhas unicamente
 -------------------

@@ -21,7 +21,7 @@ Email: gustavo.tiago@basedosdados.org
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - mes
-- município
+- municipio
 
 Colunas identificando linhas unicamente
 -------------------
@@ -37,12 +37,12 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- Rio Branco(AC)
-- São Luís(MA)
-- Aracaju(SE)
-- Campo Grande(MS)
-- Goiânia(GO)
-- Brasília(DF)
+- rio branco(ac)
+- sao luis(ma)
+- aracaju(se)
+- campo grande(ms)
+- goiania(go)
+- brasilia(df)
 
 Tratamento
 ----------

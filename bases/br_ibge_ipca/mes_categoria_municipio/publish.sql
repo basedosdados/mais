@@ -21,8 +21,8 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_ibge_ipca.mes_categoria_municipio AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
-SAFE_CAST(mes AS STRING) mes,
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(id_categoria AS STRING) id_categoria,
 SAFE_CAST(id_categoria_bd AS STRING) id_categoria_bd,
