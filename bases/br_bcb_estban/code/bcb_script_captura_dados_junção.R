@@ -1,9 +1,11 @@
 # Script para captura do estban
 
-# Pacote necessario para download dos arquivos
+# Pacote necessario para download dos arquivos e junção
 #-------------------------------------------
 
+  install.packages("readr")
   install.packages("rvest")
+  require(readr)
   require(rvest)
 
 #-------------------------------------------
@@ -49,28 +51,49 @@ for (i in bcb_extrc_str_agen_mun){
   
 }
 
+# Variaveis para auxilio de extração das informações .csv
 #-------------------------------------------
 
-# Variavel para extrair os arquivos .csv
+lf_zcs_mun <- list.files(path = "." , pattern = "ESTBAN.ZIP")
+lf_zcs_ag <- list.files(path = "." , pattern = "ESTBAN_AG.ZIP")
+lf_zi_all <- list.files(path = "." , pattern = "*.ZIP")
+
 #-------------------------------------------
 
-lf_cs <- list.files(path = "." , pattern = ".ZIP" )
+#-------------------------------------------
 
-#------------------------------------------
+# Laço para copias de celulas do .csv municipio para o novo data frame
 
-# Laço para extração dos arquivos .csv  
-#------------------------------------------
+#-------------------------------------------
+
+for (i in lf_zcs_mun){
   
-for (i in lf_cs){
-  
-  unzip(zipfile = i , exdir = "." )
+  rad_mun_cs <- read_csv(i, skip = 2)
+  write_csv(rad_mun_cs, append = TRUE, file = "dat_cons_mun.csv")
   
 }
+
+
+#-------------------------------------------
+
+
+# Laço para copias de celulas do .csv municipio e agencia para o novo data frame
+
+#-------------------------------------------
+
+for (i in lf_zcs_ag){
   
-#------------------------------------------- 
+  rad_mun_cs <- read_csv(i, skip = 2)
+  write_csv(rad_mun_cs, append = TRUE , file = "dat_cons_ag.csv")
+  
+}
+
+
+#-------------------------------------------
 
 #Remoção dos arquivos .zip
 #------------------------------------------- 
 
-file.remove(lf_cs)
+file.remove(lf_zi_all)
+
 #-------------------------------------------
