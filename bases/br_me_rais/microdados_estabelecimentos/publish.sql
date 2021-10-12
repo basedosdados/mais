@@ -23,10 +23,9 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(id_municipio_6 AS STRING) id_municipio_6,
-SAFE_CAST(qtde_vinculos_ativos AS INT64) qtde_vinculos_ativos,
-SAFE_CAST(qtde_vinculos_clt AS INT64) qtde_vinculos_clt,
-SAFE_CAST(qtde_vinculos_estatutarios AS INT64) qtde_vinculos_estatutarios,
+SAFE_CAST(quantidade_vinculos_ativos AS INT64) quantidade_vinculos_ativos,
+SAFE_CAST(quantidade_vinculos_clt AS INT64) quantidade_vinculos_clt,
+SAFE_CAST(quantidade_vinculos_estatutarios AS INT64) quantidade_vinculos_estatutarios,
 SAFE_CAST(natureza_estabelecimento AS STRING) natureza_estabelecimento,
 SAFE_CAST(natureza_juridica AS STRING) natureza_juridica,
 SAFE_CAST(tamanho_estabelecimento AS STRING) tamanho_estabelecimento,
@@ -47,4 +46,4 @@ SAFE_CAST(distritos_sp AS STRING) distritos_sp,
 SAFE_CAST(bairros_fortaleza AS STRING) bairros_fortaleza,
 SAFE_CAST(bairros_rj AS STRING) bairros_rj,
 SAFE_CAST(regioes_administrativas_df AS STRING) regioes_administrativas_df
-FROM basedosdados-staging.br_me_rais_staging.microdados_estabelecimentos AS t
+FROM basedosdados-dev.br_me_rais_staging.microdados_estabelecimentos AS t

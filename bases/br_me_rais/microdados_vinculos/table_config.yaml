@@ -9,7 +9,7 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais # 
 
 version: v1.1 # REQUIRED
 
-last_updated: 2021-07-16 # AUTO GENERATED
+last_updated: 2021-10-12 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -115,6 +115,7 @@ coverage_time:
 partitions: # REQUIRED
     - ano
     - sigla_uf
+    - id_municipio
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -127,16 +128,22 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: True # Bool [True, False], whether the column is a partition.
+
+    -   
         name: id_municipio
         description: ID Município - IBGE 7 Dígitos
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio_6
-        description: ID Município - IBGE 6 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+        is_partition: True # Bool [True, False], whether the column is a partition.
   
     -   
         name: tipo_vinculo
@@ -211,7 +218,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: qtde_horas_contratadas
+        name: quantidade_horas_contratadas
         description: Quantidade de Horas Contratadas
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -223,7 +230,7 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: qtde_dias_afastamento
+        name: quantidade_dias_afastamento
         description: Quantidade de Dias sob Afastamento
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -247,103 +254,103 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: faixa_remun_media_sm
+        name: faixa_remuneracao_media_sm
         description: Faixa Remuneração Média (Salários Mínimos)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_media_sm
+        name: valor_remuneracao_media_sm
         description: Valor da Remuneração Média (Salários Mínimos)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_media_nominal
+        name: valor_remuneracao_media_nominal
         description: Valor da Remuneração Média (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: faixa_remun_dezembro_sm
+        name: faixa_remuneracao_dezembro_sm
         description: Faixa Remuneração em Dezembro (Salários Mínimos)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_dezembro_sm
+        name: valor_remuneracao_dezembro_sm
         description: Valor da Remuneração em Dezembro (Salários Mínimos)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_janeiro_nominal
+        name: valor_remuneracao_janeiro_nominal
         description: Valor da Remuneração em Janeiro (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_fevereiro_nominal
+        name: valor_remuneracao_fevereiro_nominal
         description: Valor da Remuneração em Fevereiro (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_marco_nominal
+        name: valor_remuneracao_marco_nominal
         description: Valor da Remuneração em Março (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_abril_nominal
+        name: valor_remuneracao_abril_nominal
         description: Valor da Remuneração em Abril (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_maio_nominal
+        name: valor_remuneracao_maio_nominal
         description: Valor da Remuneração em Maio (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_junho_nominal
+        name: valor_remuneracao_junho_nominal
         description: Valor da Remuneração em Junho (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_julho_nominal
+        name: valor_remuneracao_julho_nominal
         description: Valor da Remuneração em Julho (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_agosto_nominal
+        name: valor_remuneracao_agosto_nominal
         description: Valor da Remuneração em Agosto (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_setembro_nominal
+        name: valor_remuneracao_setembro_nominal
         description: Valor da Remuneração em Setembro (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_outubro_nominal
+        name: valor_remuneracao_outubro_nominal
         description: Valor da Remuneração em Outubro (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_novembro_nominal
+        name: valor_remuneracao_novembro_nominal
         description: Valor da Remuneração em Novembro (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: valor_remun_dezembro_nominal
+        name: valor_remuneracao_dezembro_nominal
         description: Valor da Remuneração em Dezembro (Nominal)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
@@ -433,8 +440,8 @@ columns: # REQUIRED
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: sexo_trabalhador
-        description: Sexo do Trabalhador
+        name: sexo
+        description: Sexo
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -515,16 +522,4 @@ columns: # REQUIRED
         description: Regiões Administrativas no Distrito Federal
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-
-    -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sigla_uf
-        description: Sigla da Unidade da Federação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
 
