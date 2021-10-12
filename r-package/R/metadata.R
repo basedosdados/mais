@@ -36,7 +36,7 @@ bd_request <- function(
 #'
 
 
-dataset_search <-
+search <-
   Data.frame() ? function(
   search_term = NULL ? Character(length = 1, null_ok = TRUE),
   temporal_coverage = NULL ? Character(length = 1, null_ok = TRUE)) {
@@ -52,18 +52,42 @@ dataset_search <-
     purrr::pluck("result") ->
     search
 
+    # TODO: dataset_id, nomes das tabelas
+
   tibble::tibble(
-    name = purrr::map_chr(
+    dataset_id = purrr::map_chr(
       .x = search$datasets,
       .f = ~ purrr::pluck(.x, "name")),
-    id = purrr::map_chr(
+    url = purrr::map_chr(
       .x = search$datasets,
-      .f = ~ purrr::pluck(.x, "id")),
+      .f = ~ glue::glue("https://basedosdados.org/dataset/{purrr::pluck(.x, 'id')}")),
+    title = purrr::map_chr(
+      .x = search$datasets,
+      .f = ~ purrr::pluck(.x, "title")),
     notes = purrr::map_chr(
       .x = search$datasets,
       .f = ~ purrr::pluck(.x, "notes")))
 
-}
+  }
+
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+
+list_dataset_tables <-
+  Data.frame() ? function(
+    dataset_id = ? Character(length = 1)) {
+
+
+
+
+
+
+  }
 
 
 #' Describe a table
