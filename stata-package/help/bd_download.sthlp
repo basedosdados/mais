@@ -15,8 +15,8 @@
 
 
 {marker parameters}{...}
-{title:Parameters}
-
+{title:Options}
+{synoptline}
 {phang}
 {opth path(newfile)}: string containing the path for the file to be created. The desired folders must
 already exist and the file should end with the `.csv` extension {p_end}
@@ -38,9 +38,12 @@ already exist and the file should end with the `.csv` extension {p_end}
 {pstd}
 {cmd:bd_download} download tables from the Base dos Dados Mais (BD+) data lake on {it:BigQuery}.
 
-{pstd} To use {cmd:bd_download} you must have Stata version 16+ and the Python {it:`basedosdados`} package installed and configured. If not, run {it:`pip install basedosdados`} and configure following the instructions and our documentation (https://basedosdados.github.io/mais/).
+{pstd} To use {cmd:bd_download} you must have Stata version 16+ and the Python {it:`basedosdados`} package installed and configured. If not, 
+run {it:`pip install basedosdados`} and configure following the instructions at {browse "https://basedosdados.github.io/mais/":https://basedosdados.github.io/mais/}.
 
-{pstd} Base dos Dados (BD) is a nonprofit with the mission to make access to high-quality data universal. You can support the project at https://apoia.se/basedosdados. We also welcome collaboration and suggestions, so feel free to open issues on our Github page (https://github.com/basedosdados/) or get in touch via Discord (https://discord.gg/Hfgq8BZts4).
+{pstd} Base dos Dados (BD) is a nonprofit with the mission to make access to high-quality data universal. You can support the project at {browse "https://apoia.se/basedosdados":https://apoia.se/basedosdados}. We also welcome collaboration and 
+suggestions, so feel free to open issues on our Github page {browse "https://github.com/basedosdados/": https://github.com/basedosdados/} or get in touch 
+via Discord {browse "https://discord.gg/Hfgq8BZts4": https://discord.gg/Hfgq8BZts4}.
 
 {pstd}
 Stata also has other commands for manipulating basedosdados's data; see
@@ -53,10 +56,11 @@ Stata also has other commands for manipulating basedosdados's data; see
 
   {hline}
 
-  {cmd: bd_download, path("~/Downloads/table.csv") dataset_id("br_bd_diretorios_brasil") table_id("municipio") billing_project_id("projeto-teste-302617")}
+  {cmd:. bd_download, path("~/Downloads/table.csv") dataset_id("br_bd_diretorios_brasil") table_id("municipio") billing_project_id("projeto-teste-302617")}
 
   {hline}
 
 {title: Author}
 
-{pstd} Base dos Dados, at https://basedosdados.org/. Email: contato@basedosdados.org.
+{phang2} Base dos Dados at {browse "https://basedosdados.org/":https://basedosdados.org/}. Email: contato@basedosdados.org.
+{p_end}

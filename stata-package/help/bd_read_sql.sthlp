@@ -1,71 +1,62 @@
 {smcl}
-{* *! version 16.1  23set2021}{...}
+{* *! version 16.0  23set2021}{...}
 {vieweralsosee "" "--"}{...}
-{p2colset 1 15 17 2}{...}
-{p2col:{bf:[D] bd_read_sql} {hline 2}}bd_read_sql datasets{p_end}
-{p2col:}({mansection D bd_read_sql:View complete PDF manual entry}){p_end}
-{p2colreset}{...}
+{marker title}{...}
+{title:Title}
 
+{phang}
+{bf:bd_read_sql {hline 2}} Load data from {it:BigQuery} using dataset_id and table_id. {p_end}
 
 {marker syntax}{...}
 {title:Syntax}
 
-{p 8 15 2}
-{cmdab:bd_read_s:ql} {cmd:using} {it:{help filename}}
-[{it:{help filename}} {cmd:...}]
-[{cmd:,} {it:options}]
+{phang}
+{cmdab:bd_read_s:ql}{cmd:,} {opth p:ath(newfile)} {opth que:ry(SQL)} {opth b:illing_project_id(project_id)} {p_end}
 
-{pstd} to use {cmd:bd_read_sql} you must have Stata version 16+ and Python {it:`basedosdados`} package installed and configured. If not, run {it:`pip install basedosdados`} and configure following the instructions.
 
-{synoptset 15}{...}
-{synopthdr}
+{marker parameters}{...}
+{title:Options}
 {synoptline}
-{synopt :{opth pa:th(newfile)}} string containing the path for the file to be created. The desired folders must
-already exist and the file should normally end with the corresponding extension {p_end}
-{synopt :{opth que:ry(SQL)}} valid SQL Standard Query to basedosdados. If query is available, dataset_id and table_id are not required.{p_end}
-{synopt :{opth billing_p:roject_id(projectid)}} a string containing your billing project id. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard{p_end}
-{synoptline}
-{p2colreset}{...}
-
-{marker menu}{...}
-{title:Menu}
+{phang}
+{opth path(newfile)}: string containing the path for the file to be created. The desired folders must
+already exist and the file should end with the `.csv` extension {p_end}
 
 {phang}
-{bf:Data > ? > ?}
+{opth query(SQL)}: valid SQL Standard Query to basedosdados. If query is available, dataset_id and table_id are not required.{p_end}
 
+{phang}
+{opth billing_project_id(project_id)}: string containing your billing project id. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard{p_end}
+
+{synoptline}
 
 {marker description}{...}
 {title:Description}
 
 {pstd}
-{cmd:bd_read_sql} Load data from {it:BigQuery} using a query. Just a wrapper around pandas.read_gbq.
+
+{pstd} To use {cmd:bd_read_sql} you must have Stata version 16+ and the Python {it:`basedosdados`} package installed and configured. If not, 
+run {it:`pip install basedosdados`} and configure following the instructions at {browse "https://basedosdados.github.io/mais/":https://basedosdados.github.io/mais/}.
+
+{pstd} Base dos Dados (BD) is a nonprofit with the mission to make access to high-quality data universal. You can support the project at {browse "https://apoia.se/basedosdados":https://apoia.se/basedosdados}. We also welcome collaboration and 
+suggestions, so feel free to open issues on our Github page {browse "https://github.com/basedosdados/": https://github.com/basedosdados/} or get in touch 
+via Discord {browse "https://discord.gg/Hfgq8BZts4": https://discord.gg/Hfgq8BZts4}.
+
 {pstd}
 Stata also has other commands for manipulating basedosdados's data; see
-{manhelp bd_get_table_description D}, {manhelp bd_list_dataset_tables D}, {manhelp bd_list_datasets D}, 
-{manhelp bd_read_table D} or {manhelp bd_get_table_columns D}.
-
-
-{marker options}{...}
-{title:Options}
-
-{phang}
-{opth path(newfile)} descrição mais detalhada{p_end}
-
-{phang}
-{opth query(SQL)} descrição mais detalhada
-
-{phang}
-{opth billing_project_id(project)} descrição mais detalhada
+{manhelp bd_get_table_description B}, {manhelp bd_list_dataset_tables B}, {manhelp bd_list_datasets B}, 
+{manhelp bd_read_table B}, {manhelp bd_download B} or {manhelp bd_get_table_columns B}.
 
 
 {marker examples}{...}
 {title:Examples}
 
-    {hline}
-    Setup
+  {hline}
 
-{pmore}{cmd:. bd_read_sql, path("~/Downloads/test.csv") query("SELECT * FROM basedosdados.br_bd_diretorios_brasil.municipio") billing_project_id("projeto-teste-302617")}{p_end}
-    {hline}
+  {cmd:. bd_read_sql, path("~/Downloads/test.csv") query("SELECT * FROM basedosdados.br_bd_diretorios_brasil.municipio") billing_project_id("projeto-teste-302617")}
 
-{title: Autor}
-{pstd} Autor. Year. Title. Local: https://basedosdados.org/
+  {hline}
+
+{title: Author}
+
+{phang2} Base dos Dados at {browse "https://basedosdados.org/":https://basedosdados.org/}. Email: contato@basedosdados.org.
+{p_end}
