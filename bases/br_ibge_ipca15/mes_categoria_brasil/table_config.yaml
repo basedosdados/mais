@@ -1,11 +1,11 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: mes_categoria_municipio # AUTO GENERATED
-dataset_id: br_ibge_ipca # AUTO GENERATED
+table_id: mes_categoria_brasil # AUTO GENERATED
+dataset_id: br_ibge_ipca15 # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-ibge-ipca # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca # AUTO GENERATED
+url_ckan: https://basedosdados.org/dataset/br-ibge-ipca15 # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca15 # AUTO GENERATED
 
 version: v1.0 # REQUIRED
 
@@ -16,11 +16,12 @@ last_updated: 2021-10-14 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Tabela com as variações da inflação (IPCA) e peso dos produtos e serviços na cesta de inflação do IBGE para municípios selecionados onde a pesquisa é realizada (a partir de janeiro/2020)
+    Tabela com as variações da inflação (IPCA15) e peso dos produtos e serviços na cesta de inflação do IBGE (a partir de fevereiro/2020)
+
 # Quem está completando esse arquivo config?
 published_by:
     name: Gustavo Aires Tiago # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca15/code # REQUIRED
     website: <website>
     email: gustavo.tiago@basedosdados.org
 
@@ -29,7 +30,7 @@ published_by:
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
     name: Gustavo Aires Tiago
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca15/code
     website: <onde encontrar os dados tratados>
     email: gustavo.tiago@basedosdados.org
 
@@ -50,7 +51,7 @@ data_update_frequency: mes # REQUIRED
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
     - mes
-    - municipio
+    - pais
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -58,7 +59,6 @@ observation_level: #REQUIRED
 primary_keys:
     - ano
     - mes
-    - id_municipio
     - id_categoria_bd
 
 # Qual é a cobertura espacial da tabela?
@@ -71,12 +71,7 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - rio branco(ac)
-    - sao luis(ma)
-    - aracaju(se)
-    - campo grande(ms)
-    - goiania(go)
-    - brasilia(df)
+    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
@@ -105,10 +100,6 @@ columns: # REQUIRED
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: mes
       description: Mês
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: id_municipio
-      description: ID do Município IBGE - 7 Dígitos
       is_in_staging: true   # Bool [True, False], whether the column is in the staging table
       is_partition: false   # Bool [True, False], whether the column is a partition.
     - name: id_categoria

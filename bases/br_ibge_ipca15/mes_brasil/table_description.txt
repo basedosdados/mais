@@ -1,9 +1,9 @@
-Inflação - Índice Nacional de Preços ao Consumidor Amplo - IPCA
+Inflação - Índice Nacional de Preços ao Consumidor Amplo 15 - IPCA15 - Índice Geral para Brasil (a partir de maio/2000)
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-ibge-ipca
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca
+Website: https://basedosdados.org/dataset/br-ibge-ipca15
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca15
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,11 +11,11 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Gustavo Aires Tiago
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca15/code
 Email: gustavo.tiago@basedosdados.orgTratado por
 -----------
 Nome: Gustavo Aires Tiago
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca15/code
 Email: gustavo.tiago@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
@@ -30,27 +30,6 @@ Colunas identificando linhas unicamente
 
 Cobertura Temporal
 ------------------
-- 1979
-- 1980
-- 1981
-- 1982
-- 1983
-- 1984
-- 1985
-- 1986
-- 1987
-- 1988
-- 1989
-- 1990
-- 1991
-- 1992
-- 1993
-- 1994
-- 1995
-- 1996
-- 1997
-- 1998
-- 1999
 - 2000
 - 2001
 - 2002

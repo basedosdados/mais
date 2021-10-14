@@ -1,11 +1,11 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: mes_categoria_municipio # AUTO GENERATED
-dataset_id: br_ibge_ipca # AUTO GENERATED
+table_id: mes_brasil # AUTO GENERATED
+dataset_id: br_ibge_inpc # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-ibge-ipca # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca # AUTO GENERATED
+url_ckan: https://basedosdados.org/dataset/br-ibge-inpc # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inpc # AUTO GENERATED
 
 version: v1.0 # REQUIRED
 
@@ -16,7 +16,8 @@ last_updated: 2021-10-14 # AUTO GENERATED
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Tabela com as variações da inflação (IPCA) e peso dos produtos e serviços na cesta de inflação do IBGE para municípios selecionados onde a pesquisa é realizada (a partir de janeiro/2020)
+    Inflação - Índice Nacional de Preços ao Consumidor - INPC
+
 # Quem está completando esse arquivo config?
 published_by:
     name: Gustavo Aires Tiago # REQUIRED
@@ -34,9 +35,9 @@ treated_by:
     email: gustavo.tiago@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: |
-    - Separação em coluna de Ano e Mês
-    - Parametrização da coluna id_categoria identificadora de produtos ou serviços para uma estrutura de árvore hierárquica em id_categoria_bd
+treatment_description: | 
+    - Descompactação do arquivo
+    - Renomeação das colunas
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
@@ -50,7 +51,7 @@ data_update_frequency: mes # REQUIRED
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
     - mes
-    - municipio
+    - pais
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -58,8 +59,6 @@ observation_level: #REQUIRED
 primary_keys:
     - ano
     - mes
-    - id_municipio
-    - id_categoria_bd
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -71,16 +70,52 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - rio branco(ac)
-    - sao luis(ma)
-    - aracaju(se)
-    - campo grande(ms)
-    - goiania(go)
-    - brasilia(df)
+    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
+    - 1979
+    - 1980
+    - 1981
+    - 1982
+    - 1983
+    - 1984
+    - 1985
+    - 1986
+    - 1987
+    - 1988
+    - 1989
+    - 1990
+    - 1991
+    - 1992
+    - 1993
+    - 1994
+    - 1995
+    - 1996
+    - 1997
+    - 1998
+    - 1999
+    - 2000
+    - 2001
+    - 2002
+    - 2003
+    - 2004
+    - 2005
+    - 2006
+    - 2007
+    - 2008
+    - 2009
+    - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
     - 2020
     - 2021
 
@@ -99,43 +134,51 @@ partitions: # REQUIRED
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
-    - name: ano
-      description: Ano
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: mes
-      description: Mês
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: id_municipio
-      description: ID do Município IBGE - 7 Dígitos
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: id_categoria
-      description: Código identificador grupo
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: id_categoria_bd
-      description: Código identificador grupo - Base dos dados - Baseado em id_categoria para criação de estrutura hierárquica
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: categoria
-      description: Descrição da categoria
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: peso_mensal
-      description: Peso percentual mensal do item
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: variacao_mensal
-      description: Variação percentual mensal
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: variacao_anual
-      description: Variação percentual acumulada no ano
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: variacao_doze_meses
-      description: Variação percentual acumulada em doze meses
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mes
+        description: Mês
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: indice
+        description: Número índice (dez 1993 = 100)
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: variacao_mensal
+        description: Variação percentual mensal
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: variacao_trimestral
+        description: Variação percentual trimestral
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: variacao_semestral
+        description: Variação percentual semestral
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: variacao_anual
+        description: Variação percentual anual
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: variacao_doze_meses
+        description: Variação percentual doze meses
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
