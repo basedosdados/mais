@@ -42,8 +42,12 @@ class Dataset(Base):
     def _setup_dataset_object(self, dataset_id):
 
         dataset = bigquery.Dataset(dataset_id)
+        dataset.description = self._build_dataset_description()
 
         return dataset
+    
+    def _setup_dataset_metadata_object(self):
+        return Metadata(self.dataset_id, **self.kwargs)
     
     def _write_readme_file(self):
         
@@ -58,8 +62,33 @@ class Dataset(Base):
             f"//basedosdados.org/dataset/{self.dataset_id.replace('_','-')}"
         )
 
-        with open(Path(self.metadata_path / self.dataset_id / 'README.md'), "w") as readmefile:
+        readme_path = Path(
+            self.metadata_path / self.dataset_id / 'README.md'
+        )
+
+        with open(readme_path, "w") as readmefile:
             readmefile.write(readme_content)
+    
+    def _build_dataset_description(self):
+        
+        metadata = self._setup_dataset_metadata_object().local_metadata
+        description = (
+            f"""{metadata.get('description')}
+
+            Para saber mais acesse:
+            Website: {metadata.get('url_ckan')}
+            Github: https://github.com/basedosdados/mais/
+
+            Ajude a manter o projeto :)
+            Apoia-se: https://apoia.se/basedosdados
+
+            Instituição (Quem mantém os dados oficiais?)
+            -----------
+            Nome: {metadata.get('organization')}
+            """
+        )
+        
+        return description
 
     def init(self, replace=False):
         """Initialize dataset folder at metadata_path at `metadata_path/<dataset_id>`.
