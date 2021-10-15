@@ -29,6 +29,7 @@ Website: {{ published_by.website }}
 Email: {{ published_by.email }}
 {%- endcall -%}
 
+{% if data_cleaned_by is defined %}
 Tratado por
 -----------
 Nome: {{ data_cleaned_by.name -}}
@@ -41,6 +42,8 @@ Website: {{ data_cleaned_by.website }}
 {% call input(data_cleaned_by.email) %}
 Email: {{ data_cleaned_by.email }}
 {%- endcall %}
+{% endif %}
+
 
 {% call input(partitions) -%}
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
@@ -52,6 +55,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 {%- endif %}
 {% endcall -%}
 
+{% if identifying_columns is defined %}
 {% call input(identifying_columns[0]) -%}
 Colunas identificando linhas unicamente
 -------------------
@@ -61,7 +65,9 @@ Colunas identificando linhas unicamente
 {% endfor -%}
 {%- endif %}
 {% endcall -%}
+{% endif %}
 
+{% if temporal_coverage is defined %}
 {% call input(temporal_coverage[0]) -%}
 Cobertura Temporal
 ------------------
@@ -71,7 +77,9 @@ Cobertura Temporal
 {% endfor -%}
 {%- endif %}
 {% endcall -%}
+{% endif %}
 
+{% if spatial_coverage is defined %}
 {% call input(spatial_coverage[0]) -%}
 Cobertura Espacial
 ------------------
@@ -81,14 +89,19 @@ Cobertura Espacial
 {% endfor -%}
 {%- endif %}
 {% endcall -%}
+{% endif %}
 
+{% if data_cleaning_description is defined %}
 {% call input(data_cleaning_description) -%}
 Tratamento
 ----------
 {{ data_cleaning_description }}
 {% endcall %}
+{% endif %}
 
+{% if update_frequency is defined %}
 {%- call input(update_frequency) -%}
 Frequencia de Atualização
 -------------------------
 {{ update_frequency }}{% endcall %}
+{% endif %}

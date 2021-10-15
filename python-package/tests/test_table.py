@@ -29,18 +29,18 @@ def table(metadatadir):
 
 @pytest.fixture
 def folder(metadatadir):
-    return Path(__file__).parent / "tmp_bases" / DATASET_ID / TABLE_ID
-
-
-@pytest.fixture
-def data_path(metadatadir):
-    return Path(__file__).parent / "tmp_bases" / "municipio.csv"
+    return metadatadir / DATASET_ID / TABLE_ID
 
 
 @pytest.fixture
 def sample_data(metadatadir):
-    return Path(__file__).parent / "sample_data" / "table"
+    return metadatadir.parent / "sample_data" / "table"
 
+
+@pytest.fixture
+def data_path(sample_data):
+    return sample_data / "municipio.csv"
+    
 
 def check_files(folder):
 
@@ -372,7 +372,7 @@ def test_create_auto_partitions(metadatadir, data_path, sample_data):
     for n in [1, 2]:
         Path(metadatadir / "partitions" / f"keys={n}").mkdir()
         shutil.copy(
-            metadatadir / "municipio.csv",
+            data_path,
             metadatadir / "partitions" / f"keys={n}" / "municipio.csv",
         )
 
@@ -462,9 +462,9 @@ def test_publish(table, metadatadir, sample_data, data_path):
     assert table_exists(table, "prod")
 
 
-def test_append(table, metadatadir):
+def test_append(table, metadatadir, data_path):
     shutil.copy(
-        metadatadir / "municipio.csv",
+        data_path,
         metadatadir / "municipio2.csv",
     )
 

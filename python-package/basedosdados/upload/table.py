@@ -30,6 +30,7 @@ class Table(Base):
 
     def __init__(self, dataset_id, table_id, **kwargs):
         super().__init__(**kwargs)
+        self.kwargs = kwargs
 
         self.table_id = table_id.replace("-", "_")
         self.dataset_id = dataset_id.replace("-", "_")
@@ -50,7 +51,9 @@ class Table(Base):
 
     def _is_partitioned(self):
         ## check if the table are partitioned, need the split because of a change in the type of partitions in pydantic
-        partitions = self.table_config["partitions"].split(",")
+        partitions = self.table_config["partitions"]
+        if partitions:
+            partitions = partitions.split(",")
 
         if partitions is None:
             return False
@@ -170,9 +173,12 @@ class Table(Base):
         publish_txt += f"\n\nCREATE VIEW {project_id_prod}.{self.dataset_id}.{self.table_id} AS\nSELECT \n"
 
         # sort columns by is_partition, partitions_columns come first
-        columns = sorted(
-            self.table_config["columns"], key=lambda k: k["is_partition"], reverse=True
-        )
+        if self._is_partitioned():
+            columns = sorted(
+                self.table_config["columns"], key=lambda k: k["is_partition"], reverse=True
+            )
+        else:
+            columns = self.table_config["columns"]
 
         # add columns in publish.sql
         for col in columns:
@@ -198,7 +204,7 @@ class Table(Base):
 
     def _make_template(self, columns, partition_columns, if_table_config_exists):
         # create table_config.yaml with metadata
-        Metadata(self.dataset_id, self.table_id).create(
+        Metadata(self.dataset_id, self.table_id, **self.kwargs).create(
             if_exists=if_table_config_exists,
             columns=partition_columns + columns,
             partition_columns=partition_columns,
