@@ -1,0 +1,72 @@
+dataset_id: br_fipe_fipezap # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-fipe-fipezap
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_fipe_fipezap
+
+# Descreva a base.
+# Ela é sobre o que?
+# Quais as principais fontes de dados?
+# Há links para FAQs e explicações?
+description: | # REQUIRED
+    O Índice FipeZap de Preços de Imóveis Anunciados acompanha, mensalmente, os preços de venda e locação de imóveis no Brasil, partindo exclusivamente dos anúncios de venda ou locação de imóveis prontos cadastrados no site Zap. Sob a responsabilidade da FIPE, a metodologia adotada para o cálculo do Índice FipeZap é a estratificação. Define-se, para cada cidade, células de ponderação (imóvel residencial ou comercial) para as quais a cada mês serão calculados os respectivos preços de referência (preços medianos), que serão depois compiladas em uma média para aquela cidade [pré-selecionada]naquele mês. Restringe-se aos preços das vendas dos imóveis residenciais no Brasil anunciados no portal ZAP Nota: Para fins de classificação, considera-se apenas as informações de fornecimento obrigatório: tipo de transação (locação ou venda), tipo de imóvel (apartamento, casa, terreno, comercial, entre outros), UF, cidade, bairro, distrito, número de dormitórios, valor total (R$), área útil (m²), preço por metro quadrado (R$/m²), latitude e longitude
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+organization: fipe # REQUIRED
+
+# Qual departamento/grupo/pessoa mantém os dados originais?
+author:
+    name: Fundação Instituto de Pesquisas Econômicas
+    email: <email>
+
+# Onde encontrar os dados originais e mais informações?
+website:
+    - https://www.fipe.org.br/pt-br/indices/fipezap/
+
+# Quais grupos caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+groups:
+    - economia
+    - territorio
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Caso crie etiquetas novas, as regras são:
+#   - letras minúsculas
+#   - sem acentos
+#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - imoveis
+    - preco
+    - urbanizacao
+
+# Em quais línguas a base (ou a fonte original) está disponível?
+# Regras: minúsculo, sem acentos.
+# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
+languages:
+    - portugues
+
+# Os dados originais estão disponíveis de graça?
+free: sim
+
+# Are microdata available for download?
+microdata: sim
+
+# Existe uma API na fonte original?
+API: nao
+
+# É necessário registrar um usuário para baixar os dados originais?
+registration: nao
+
+# Como os dados originais estão disponibilizados?
+availability: online
+
+# A fonte original requer IP brasileiro para acesso?
+brazilian_IP: nao
+
+# Essa base está sob qual licença?
+# A licença MIT se aplica a bases públicas.
+# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
+license: 
+    name: MIT # REQUIRED
+    url: <url>
