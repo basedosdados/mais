@@ -138,7 +138,7 @@ columns: # REQUIRED
   
     -   
         name: admitidos_desligados
-        description: Admissão ou Desligamento (1 para admissão e 2 para desligamento)
+        description: Admissão ou Desligamento (01 para admissão e 02 para desligamento)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
@@ -252,7 +252,7 @@ columns: # REQUIRED
   
     -   
         name: sexo
-        description: Sexo
+        description: Sexo (01 - Homem, 02 - Mulher e -1 - Não Identificado)
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
