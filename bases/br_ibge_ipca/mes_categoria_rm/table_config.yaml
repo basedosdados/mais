@@ -9,19 +9,19 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca 
 
 version: v1.0 # REQUIRED
 
-last_updated: 2021-10-08 # AUTO GENERATED
+last_updated: 2021-10-14 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Tabela com as variações da inflação e peso dos produtos e serviços na cesta de inflação do IBGE para regiões metropolitanas selecionados onde a pesquisa é realizada 
+    Tabela com as variações da inflação (IPCA) e peso dos produtos e serviços na cesta de inflação do IBGE para regiões metropolitanas selecionados onde a pesquisa é realizada (a partir de janeiro/2020)
 
 # Quem está completando esse arquivo config?
 published_by:
     name: Gustavo Aires Tiago # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao/code # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code # REQUIRED
     website: <website>
     email: gustavo.tiago@basedosdados.org
 
@@ -30,7 +30,7 @@ published_by:
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
     name: Gustavo Aires Tiago
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao/code
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
     website: <onde encontrar os dados tratados>
     email: gustavo.tiago@basedosdados.org
 

@@ -1,21 +1,17 @@
-dataset_id: br_ibge_ipca # AUTO GENERATED
+dataset_id: br_ibge_ipca15 # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-ibge-ipca
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca
+url_ckan: https://basedosdados.org/dataset/br-ibge-ipca15
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca15
 
 # Descreva a base.
 # Ela é sobre o que?
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    Índice Nacional de Preços ao Consumidor Amplo - IPCA é produzido pelo IBGE desde dezembro de 1979. O IPCA é utilizado como indicador oficial do País desde 1985 para corrigir salários, aluguéis, taxa de câmbio, poupança, entre outros
-    São divulgados os índices gerais, por grupos de produtos, subgrupos, item e subitens, para as regiões pesquisadas, além do agregado Brasil.
-    A população objetivo do IPCA é representada pelas famílias residentes em áreas urbanas com rendimento familiar monetário compreendido entre 1 e 40 salários mínimos mensais, quaisquer que sejam as fontes de rendimento.
-    A partir da POF 2017-2018 foram analisadas as distribuições dos rendimentos familiares disponíveis destinados ao consumo, derivadas desta POF, sendo mantidos os critérios adotados para a delimitação das populações-alvo dos índices. O primeiro deles refere-se à cobertura populacional que segue sendo em torno de 90% do total das famílias com quaisquer fontes de rendimentos no caso do IPCA. O segundo critério diz respeito à estabilidade das estruturas de consumo, que requer a exclusão das famílias com rendimentos inferiores a um salário mínimo, além daquelas com rendimentos considerados excessivamente altos.
+    Índice Nacional de Preços ao Consumidor Amplo 15 - IPCA-15 tem por objetivo medir a inflação de um conjunto de produtos e serviços comercializados no varejo, referentes ao consumo pessoal das famílias, cujo rendimento varia entre 1 e 40 salários mínimos, qualquer que seja a fonte de rendimentos. Esta faixa de renda foi criada com o objetivo de garantir uma cobertura de 90 % das famílias pertencentes as áreas urbanas de cobertura do SNIPC, qualquer que seja a fonte dos rendimentos.
     
     Fonte: Metadados da Pesquisa (IBGE)
-    https://metadados.ibge.gov.br/consulta/estatisticos/operacoes-estatisticas/IA
-
+    https://metadados.ibge.gov.br/consulta/estatisticos/operacoes-estatisticas/IQ
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 organization: IBGE # REQUIRED
@@ -27,7 +23,7 @@ author:
 
 # Onde encontrar os dados originais e mais informações?
 website:
-    - https://sidra.ibge.gov.br/pesquisa/snipc/ipca/tabelas
+    - https://sidra.ibge.gov.br/pesquisa/snipc/ipca15/tabelas
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
