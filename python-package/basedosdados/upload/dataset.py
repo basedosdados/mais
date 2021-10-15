@@ -42,7 +42,9 @@ class Dataset(Base):
     def _setup_dataset_object(self, dataset_id):
 
         dataset = bigquery.Dataset(dataset_id)
-        dataset.description = self._build_dataset_description()
+        dataset.description = self._render_template(
+            Path("dataset/dataset_description.txt"), self.dataset_config
+        )
 
         return dataset
     
