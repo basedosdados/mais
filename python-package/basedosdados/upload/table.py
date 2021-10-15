@@ -30,7 +30,6 @@ class Table(Base):
 
     def __init__(self, dataset_id, table_id, **kwargs):
         super().__init__(**kwargs)
-        self.kwargs = kwargs
 
         self.table_id = table_id.replace("-", "_")
         self.dataset_id = dataset_id.replace("-", "_")
@@ -41,6 +40,7 @@ class Table(Base):
             staging=f"{self.client['bigquery_staging'].project}.{self.dataset_id}_staging.{self.table_id}",
         )
         self.table_full_name.update(dict(all=deepcopy(self.table_full_name)))
+        self.metadata = Metadata(self.dataset_id, self.table_id, **kwargs)
 
     @property
     def table_config(self):
@@ -204,7 +204,7 @@ class Table(Base):
 
     def _make_template(self, columns, partition_columns, if_table_config_exists):
         # create table_config.yaml with metadata
-        Metadata(self.dataset_id, self.table_id, **self.kwargs).create(
+        self.metadata.create(
             if_exists=if_table_config_exists,
             columns=partition_columns + columns,
             partition_columns=partition_columns,

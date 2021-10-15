@@ -14,10 +14,10 @@ class Dataset(Base):
 
     def __init__(self, dataset_id, **kwargs):
         super().__init__(**kwargs)
-        self.kwargs = kwargs
 
         self.dataset_id = dataset_id.replace("-", "_")
         self.dataset_folder = Path(self.metadata_path / self.dataset_id)
+        self.metadata = Metadata(self.dataset_id, **kwargs)
 
     @property
     def dataset_config(self):
@@ -48,9 +48,6 @@ class Dataset(Base):
 
         return dataset
     
-    def _setup_dataset_metadata_object(self):
-        return Metadata(self.dataset_id, **self.kwargs)
-    
     def _write_readme_file(self):
         
         readme_content = (
@@ -73,7 +70,7 @@ class Dataset(Base):
     
     def _build_dataset_description(self):
         
-        metadata = self._setup_dataset_metadata_object().local_metadata
+        metadata = self.metadata.local_metadata
         description = (
             f"""{metadata.get('description')}
 
@@ -117,7 +114,7 @@ class Dataset(Base):
             )
 
         # create dataset_config.yaml with metadata
-        Metadata(self.dataset_id, **self.kwargs).create(if_exists="replace")
+        self.metadata.create(if_exists="replace")
 
         # create README.md file
         self._write_readme_file()
