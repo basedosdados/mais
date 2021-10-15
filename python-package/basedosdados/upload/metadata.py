@@ -236,6 +236,7 @@ class Metadata(Base):
             yaml_obj = build_yaml_object(
                 self.dataset_id,
                 self.table_id,
+                self.config,
                 self.metadata_schema,
                 ckan_metadata,
                 columns_schema=self.columns_schema,
@@ -471,6 +472,7 @@ def add_yaml_property(
 def build_yaml_object(
     dataset_id: str,
     table_id: str,
+    config: dict,
     schema: dict,
     metadata: dict = dict(),
     columns_schema: dict = dict(),
@@ -524,5 +526,10 @@ def build_yaml_object(
     yaml["dataset_id"] = dataset_id
     if table_id:
         yaml["table_id"] = table_id
+
+        # Add gcloud config variables
+        yaml["source_bucket_name"] = str(config.get("bucket_name"))
+        yaml["project_id_prod"] = str(config.get("gcloud-projects", {}).get("prod", {}).get("name"))
+        yaml["project_id_staging"] = str(config.get("gcloud-projects", {}).get("staging", {}).get("name"))
 
     return yaml
