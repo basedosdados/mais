@@ -95,6 +95,16 @@ class Metadata(Base):
                 {"name": tag} for tag in self.local_metadata.get("tags", []) or []
             ],
             "organization": {"name": self.local_metadata.get("organization")},
+            "extras": [
+                {
+                    "key": "dataset_args",
+                    "value": {
+                        "description": self.local_metadata.get("description"),
+                        "ckan_url": self.local_metadata.get("ckan_url"),
+                        "github_url": self.local_metadata.get("github_url"),
+                    }
+                }
+            ]
         }
 
         if self.table_id:
