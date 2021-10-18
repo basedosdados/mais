@@ -1,7 +1,4 @@
 from pathlib import Path
-from google.cloud import bigquery
-
-from google.api_core.exceptions import Conflict
 
 from basedosdados.upload.base import Base
 from basedosdados.upload.metadata import Metadata

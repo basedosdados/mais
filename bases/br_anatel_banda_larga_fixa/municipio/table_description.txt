@@ -21,17 +21,12 @@ Email: lucas.nasc.m@gmail.com
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
-- tecnologia
-- velocidade
 
 Colunas identificando linhas unicamente
 -------------------
 - ano
 - mes
 - id_municipio
-- tecnologia
-- transmissao
-- velocidade
 
 Cobertura Temporal
 ------------------
@@ -53,13 +48,13 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- Brasil
+- brasil
 
 Tratamento
 ----------
-Download da base em https://informacoes.anatel.gov.br/paineis/acessos/banda-larga-fixa;
-Alteração do nome das variáveis para compatibilização com a BD+;
-Agrupamento dos dados ao nível do município, mas mantendo características de conectividade (tecnologia, transmissao e velocidade)
+- Download da base em https://informacoes.anatel.gov.br/paineis/acessos/banda-larga-fixa;
+- Alteração do nome das variáveis para compatibilização com a BD+;
+- Agrupamento dos dados ao nível do município, mas mantendo características de conectividade (tecnologia, transmissao e velocidade)
 
 Frequencia de Atualização
 -------------------------

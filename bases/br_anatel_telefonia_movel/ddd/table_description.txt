@@ -50,14 +50,14 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- Brasil
+- brasil
 
 Tratamento
 ----------
-Download das bases e a renomeação das colunas segundo padrão da BD+;
-Limpeza de variáveis exclusivas dos arquivos originais para unificação de períodos diferentes de coleta;
-Exclusão de observações do tipo NaN da variável 'ddd';
-Agrupamento e concatenação da base a nível do DDD para o período de 2009 a 2021;
+- Download das bases e a renomeação das colunas segundo padrão da BD+;
+- Limpeza de variáveis exclusivas dos arquivos originais para unificação de períodos diferentes de coleta;
+- Exclusão de observações do tipo NaN da variável 'ddd';
+- Agrupamento e concatenação da base a nível do DDD para o período de 2009 a 2021;
 
 Frequencia de Atualização
 -------------------------

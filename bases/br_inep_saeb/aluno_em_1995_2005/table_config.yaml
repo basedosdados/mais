@@ -1,0 +1,742 @@
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: aluno_em_1995_2005 # AUTO GENERATED
+dataset_id: br_inep_saeb # AUTO GENERATED
+
+url_ckan: https://basedosdados.org/dataset/br-inep-saeb # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb # AUTO GENERATED
+
+version: v2.0 # REQUIRED
+
+last_updated: 2021-08-16 # AUTO GENERATED
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
+description: |  # REQUIRED
+    Informações das respostas ao questionário, à prova do SAEB e das proficiências dos alunos da 3ª/4ª série do EM.
+
+# Quem está completando esse arquivo config?
+published_by:
+    name: Hevilyn Souza  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code # REQUIRED
+    website: <website>
+    email: hevilynsouza12@hotmail.com
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+treated_by:
+    name: Hevilyn Souza  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code # REQUIRED
+    website: <website>
+    email: hevilynsouza12@hotmail.com
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+treatment_description: | 
+    - Renomeei variáveis
+    - Algumas variáveis mudam entre os anos, por isso foi feita uma compatiblização entre os dados que pode ser verificada na tabela arquitetura.
+    - As respostas dos alunos aos questionários não foram padronizadas, estão de acordo com os dados originais.
+    - As variáveis 'rede' e 'localizacao' também estão no formato original dos dados.
+
+# Com qual frequência a base é atualizada?
+# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
+data_update_frequency: 2 anos # REQUIRED 
+
+# Nível da observação (qual é a granularidade de cada linha na tabela)
+# Escolha todas as opções necessárias.
+# Regras:
+#   - minúsculo, sem acento, singular.
+#   - em portugues (ou seja, não use os nomes de colunas abaixo)
+# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
+observation_level: #REQUIRED
+    - aluno
+    - ano
+
+# Quais colunas identificam uma linha unicamente?
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+primary_keys:
+    - id_aluno
+    - ano
+    - serie
+    - disciplina
+    - turma
+    - rede
+    - localizacao
+
+
+# Qual é a cobertura espacial da tabela?
+# Regras:
+#   - minúsculo, sem acento, singular
+#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
+# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
+#   - brasil
+#   - SP, GO
+# Exemplo 2: tabela que cubra países inteiros na América Latina
+#   - brasil, argentina, peru, equador
+coverage_geo:
+    - brasil
+
+# Qual é a cobertura temporal (em anos) da tabela?
+# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
+coverage_time:
+    - 1995
+    - 1997
+    - 1999
+    - 2001
+    - 2003
+    - 2005
+    
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: # REQUIRED  
+    - ano
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns: # REQUIRED
+    - name: mascara
+      description: Máscara
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: serie
+      description: Série escolar
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: disciplina
+      description: Disciplina
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: turma
+      description: Código da turma
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: id_aluno
+      description: Código do aluno
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: estrato
+      description: Estrato da amostragem
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: rede
+      description: Rede escolar
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: localizacao
+      description: Localização
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: sigla_uf
+      description: Sigla da Unidade da Federação
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: peso_aluno_turma
+      description: Peso do aluno na turma
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: peso_aluno_disciplina
+      description: Peso do aluno por disciplina
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: peso_turma
+      description: Peso da turma
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: peso_escola
+      description: Peso da escola
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: caderno
+      description: Caderno
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: bloco_1
+      description: Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: bloco_2
+      description: Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: bloco_3
+      description: Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q001
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q002
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q003
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q004
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q005
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q006
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q007
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q008
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q009
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q010
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q011
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q012
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_1_q013
+      description: Respostas do aluno no Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q001
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q002
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q003
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q004
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q005
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q006
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q007
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q008
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q009
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q010
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q011
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q012
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_2_q013
+      description: Respostas do aluno no Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q001
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q002
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q003
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q004
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q005
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q006
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q007
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q008
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q009
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q010
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q011
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q012
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_bloco_3_q013
+      description: Respostas do aluno no Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: gabarito_bloco_1
+      description: Gabarito do Bloco 1 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: gabarito_bloco_2
+      description: Gabarito do Bloco 2 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: gabarito_bloco_3
+      description: Gabarito do Bloco 3 do caderno de provas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: proficiencia
+      description: Proficiência na escala 250 ; 50
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: proficiencia_saeb
+      description: Proficiência na escala Saeb
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q001
+      description: Sexo
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q002
+      description: Como você se considera?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q003
+      description: Qual e o mês do seu aniversário?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q004
+      description: Qual é o ano do seu nascimento?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q005
+      description: Na sua casa tem televisão em cores? / Quantas TVS a cores há onde
+          você mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q006
+      description: Na sua casa tem radio? Quantos rádios há onde você mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q007
+      description: Na sua casa tem automóvel/ carro?/ Quantos automóveis há onde você
+          mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q008
+      description: Na sua casa tem videocassete?/ Quantos videocassetes há onde você
+          mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q009
+      description: Na sua casa tem geladeira?/ Quantas geladeiras há onde você mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q010
+      description: Na sua casa tem máquina de lavar roupa?/ Quantas máquinas de lavar
+          roupa há onde você mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q011
+      description: Na sua casa tem aspirador de pó?/ Quantos aspiradores de pó há
+          onde você mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q012
+      description: Dentro de sua casa tem banheiro? / Quantos banheiros há onde você
+          mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q013
+      description: Na sua casa tem quartos para dormir? / Quantos quartos há onde
+          você mora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q014
+      description: Na sua casa tem freezer junto a geladeira(GELADEIRA DUPLEX)?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q015
+      description: Na sua casa tem freezer separado da geladeira?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q016
+      description: Na sua casa tem computador com internet?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q017
+      description: Na sua casa tem computador sem internet?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q018
+      description: Além dos livros escolares, quantos livros há em sua casa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q019
+      description: Onde você mora existe eletricidade?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q020
+      description: Onde você mora chega água pela torneira?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q021
+      description: Na sua casa trabalha alguma empregada domestica? Quantas?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q022
+      description: Quantas pessoas moram com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q023
+      description: Você mora com sua mãe?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q024
+      description: Até que série sua mãe estudou?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q025
+      description: Você vê sua mãe lendo?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q026
+      description: Você mora com seu pai?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q027
+      description: Até que série seu pai estudou?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q028
+      description: Você vê seu pai lendo?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q029
+      description: Quem é a pessoa que acompanha mais de perto sua vida escolar?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q030
+      description: Até que série a pessoa indicada acima estudou?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q031
+      description: Você lê revistas em quadrinhos?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q032
+      description: Você lê livros de literatura, como romance, poesia, etc?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q033
+      description: Você lê jornais?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q034
+      description: Você lê revistas de informação geral (Veja, IstoÉ, Época)?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q035
+      description: Na sua casa tem enciclopédia?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q036
+      description: Na sua casa tem atlas?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q037
+      description: Na sua casa tem dicionário?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q038
+      description: Na sua casa tem calculadora?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q039
+      description: Com que freqüência seus pais ou responsáveis almoçam ou jantam
+          com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q040
+      description: Com que freqüência seus pais ou responsáveis ouvem musica com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q041
+      description: Com que freqüência seus pais ou responsáveis conversam sobre livros
+          com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q042
+      description: Com que freqüência seus pais ou responsáveis conversam sobre filmes
+          com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q043
+      description: Com que freqüência seus pais ou responsáveis conversam sobre programas
+          de TV com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q044
+      description: Com que freqüência seus pais ou responsáveis conversam com seus
+          amigos/ colegas de escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q045
+      description: Com que freqüência seus pais ou responsáveis conversam com outros
+          amigos seus?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q046
+      description: Com que freqüência seus pais ou responsáveis conversam com o Diretor
+          da sua escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q047
+      description: Com que freqüência seus pais ou responsáveis conversam com seus
+          professores?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q048
+      description: Com que freqüência seus pais ou responsáveis conversam sobre o
+          que acontece na escola com você?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q049
+      description: Com que freqüência seus pais ou responsáveis ajudam você a fazer
+          a lição de casa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q050
+      description: Com que freqüência seus pais ou responsáveis cobram se você fez
+          a lição de casa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q051
+      description: Com que freqüência seus pais ou responsáveis falam para você não
+          faltar à escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q052
+      description: Com que freqüência seus pais ou responsáveis falam para você tirar
+          boas notas?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q053
+      description: Com que freqüência seus pais ou responsáveis vão à reunião de pais
+          na escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q054
+      description: Quando você começou a estudar?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q055
+      description: Você já foi reprovado(a)?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q056
+      description: Você gosta de estudar matemática?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q057
+      description: Você faz a lição de casa de matemática?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q058
+      description: Seu professor de Matemática corrige a lição de casa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q059
+      description: Seu professor de Matemática dá importância ao que você diz?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q060
+      description: Seu professor de matemática elogia ou dá parabéns quando você tira
+          boas notas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q061
+      description: Seu professor de Matemática dá uma força para você estudar mais
+          quando não tira notas boas?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q062
+      description: Quando você precisa de ajuda, o professor de Matemática está sempre
+          pronto para lhe atender?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q063
+      description: '*Você gosta de estudar língua portuguesa?'
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q064
+      description: Você faz a lição de casa de língua portuguesa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q065
+      description: Seu professor de língua portuguesa corrige a lição de casa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q066
+      description: Seu professor de língua portuguesa dá importância ao que você diz?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q067
+      description: Seu professor de língua portuguesa elogia ou dá parabéns quando
+          você tira boas notas
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q068
+      description: Seu professor de língua portuguesa dá uma força para você estudar
+          mais quando não tira notas boas?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q069
+      description: Quando você precisa de ajuda, o professor de língua portuguesa
+          está sempre pronto para lhe atender?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q070
+      description: Desde a 5ª série, quantas vezes você já mudou de escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q071
+      description: Em que tipo de escola você já estudou?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q072
+      description: Na sua turma os alunos fazem barulho e desordem?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q073
+      description: Na sua turma os alunos prestam atenção no que os professores dizem?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q074
+      description: Na sua turma os alunos fazem o que os professores pedem?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q075
+      description: Na sua turma os professores têm que esperar muito para que os alunos
+          fiquem quietos?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q076
+      description: Você tem muitos amigos na sua sala de aula?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q077
+      description: Quando você falta às aulas, sua família é avisada?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q078
+      description: Você trabalha?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q079
+      description: Você concluiu o ensino fundamental (antigo 1º grau) no supletivo?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q080
+      description: Você lê ou faz consulta na biblioteca da escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q081
+      description: Você lê ou faz consulta em biblioteca fora da escola?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q082
+      description: Você costuma ir ao teatro?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q083
+      description: Você costuma ir ao cinema?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q084
+      description: Você costuma ir a shows de música?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q085
+      description: Você costuma ir a exposições?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q086
+      description: Em dia de aula, quanto tempo você gasta vendo TV?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q087
+      description: Em dia de aula, quanto tempo você gasta estudando ou fazendo lições
+          de casa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q088
+      description: Em dia de aula, quanto tempo você gasta fazendo trabalhos domésticos
+          em casa?
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: resposta_q089
+      description: 'Quando terminar o Ensino Médio, você pretende:'
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: false   # Bool [True, False], whether the column is a partition.
+    - name: ano
+      description: Ano
+      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
+      is_partition: true   # Bool [True, False], whether the column is a partition.

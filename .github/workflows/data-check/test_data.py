@@ -6,10 +6,8 @@
 # -------------------------------------
 
 import json
-from pathlib import Path
 
 import basedosdados as bd
-import pandas as pd
 import pytest
 
 # -------------------------------------
@@ -19,30 +17,22 @@ import pytest
 
 def store_log(config):
     """Store each test log on report.json"""
-    with Path("./report.json").open("r+") as file:
+    with open("./report.json", "r") as file:
         data = json.load(file)
-        data.append(config)
-        file.seek(0)
+        data[config["id"]] = config
+    with open("./report.json", "w") as file:
         json.dump(data, file)
 
 
 def store_skip(config):
     """Store each test error on report.json"""
-    with Path("./report.json").open("r+") as file:
-        data = json.load(file)
-        data.append(config)
-        file.seek(0)
-        json.dump(data, file)
+    store_log(config)
     pytest.skip()
 
 
 def store_error(config):
     """Store each test error on report.json"""
-    with Path("./report.json").open("r+") as file:
-        data = json.load(file)
-        data.append(config)
-        file.seek(0)
-        json.dump(data, file)
+    store_log(config)
     pytest.fail()
 
 
@@ -74,16 +64,7 @@ def test_table_exists(configs):
 
     store_log(config)
 
-    assert result.sucess.values == True
-
-
-# def test_select_all_works(configs):
-#     name = "test_select_all_works"
-#     result = fetch_data(configs, name)
-#
-#     store_log(configs, name)
-#
-#     assert result.sucess.values == True
+    assert result.success.values == True
 
 
 def test_table_has_no_null_column(configs):
@@ -93,8 +74,9 @@ def test_table_has_no_null_column(configs):
     if not result.empty:
         vars = result[result.null_percent == 1]
         vars = vars.col_name.values.ravel()
-        vars = ", ".join([f"- {v}  " for v in vars])
-        config["name"] += f"\n{vars}"
+        vars = ", ".join(vars)
+        if vars:
+            config["name"] += f"\n- {vars}"
 
     store_log(config)
 
@@ -110,4 +92,4 @@ def test_primary_key_has_unique_values(configs):
 
     store_log(config)
 
-    assert result == 1
+    assert True

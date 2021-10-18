@@ -1,14 +1,12 @@
-import click
 import os
 import time
 
+import basedosdados as bd
+import click
 from basedosdados.upload.base import Base
 from basedosdados.upload.dataset import Dataset
-from basedosdados.upload.table import Table
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.metadata import Metadata
-
-import basedosdados as bd
 from basedosdados.exceptions import BaseDosDadosException
 from ckanapi import CKANAPIError
 
@@ -784,6 +782,16 @@ def init(ctx, overwrite):
     Base(overwrite_cli_config=overwrite, **ctx.obj)
 
 
+@click.command(
+    name="auth",
+    help="Authorize download",
+)
+def auth():
+    from basedosdados.download.download import credentials
+
+    return credentials(reauth=True)
+
+
 @cli_config.command(name="refresh_template", help="Overwrite current templates")
 @click.pass_context
 def init_refresh_templates(ctx):
@@ -878,5 +886,4 @@ cli.add_command(cli_metadata)
 
 
 if __name__ == "__main__":
-
     cli()

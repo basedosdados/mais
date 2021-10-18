@@ -19,14 +19,12 @@ TIPOS:
 
 */
 
-CREATE VIEW input-dados.br_anatel_banda_larga_fixa.municipio AS
+CREATE VIEW basedosdados-dev.br_anatel_banda_larga_fixa.municipio AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(tecnologia AS STRING) tecnologia,
-SAFE_CAST(transmissao AS STRING) transmissao,
-SAFE_CAST(velocidade AS STRING) velocidade,
-SAFE_CAST(acessos AS INT64) acessos
-from input-dados.br_anatel_banda_larga_fixa_staging.municipio as t
+SAFE_CAST(acessos AS INT64) acessos,
+SAFE_CAST(densidade AS FLOAT64) densidade
+from basedosdados-dev.br_anatel_banda_larga_fixa_staging.municipio as t
