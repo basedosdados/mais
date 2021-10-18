@@ -47,9 +47,9 @@ class Dataset(Base):
         )
 
         return dataset
-
+    
     def _write_readme_file(self):
-
+        
         readme_content = (
             f"Como capturar os dados de {self.dataset_id}?\n\nPara cap"
             f"turar esses dados, basta verificar o link dos dados orig"
@@ -61,15 +61,18 @@ class Dataset(Base):
             f"//basedosdados.org/dataset/{self.dataset_id.replace('_','-')}"
         )
 
-        readme_path = Path(self.metadata_path / self.dataset_id / "README.md")
+        readme_path = Path(
+            self.metadata_path / self.dataset_id / 'README.md'
+        )
 
         with open(readme_path, "w") as readmefile:
             readmefile.write(readme_content)
-
+    
     def _build_dataset_description(self):
-
+        
         metadata = self.metadata.local_metadata
-        description = f"""{metadata.get('description')}
+        description = (
+            f"""{metadata.get('description')}
 
             Para saber mais acesse:
             Website: {metadata.get('url_ckan')}
@@ -82,7 +85,8 @@ class Dataset(Base):
             -----------
             Nome: {metadata.get('organization')}
             """
-
+        )
+        
         return description
 
     def init(self, replace=False):

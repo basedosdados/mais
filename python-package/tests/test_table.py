@@ -40,7 +40,7 @@ def sample_data(metadatadir):
 @pytest.fixture
 def data_path(sample_data):
     return sample_data / "municipio.csv"
-
+    
 
 def check_files(folder):
 
