@@ -1,5 +1,4 @@
 from pathlib import Path
-from tqdm import tqdm
 
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
@@ -103,6 +102,7 @@ class Storage(Base):
         mode="all",
         partitions=None,
         if_exists="raise",
+        chunk_size=None,
         **upload_args,
     ):
         """Upload to storage at `<bucket_name>/<mode>/<dataset_id>/<table_id>`. You can:
@@ -146,6 +146,10 @@ class Storage(Base):
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
 
+            chunk_size (int): Optional.
+                Tells GCS Blob object the size of the chunks to use when
+                uploading. If not set, chunk size won't be set.
+
             upload_args ():
                 Extra arguments accepted by [`google.cloud.storage.blob.Blob.upload_from_file`](https://googleapis.dev/python/storage/latest/blobs.html?highlight=upload_from_filename#google.cloud.storage.blob.Blob.upload_from_filename)
         """
@@ -185,6 +189,9 @@ class Storage(Base):
                 if not blob.exists() or if_exists == "replace":
 
                     upload_args["timeout"] = upload_args.get("timeout", None)
+
+                    if chunk_size is not None:
+                        blob.chunk_size = chunk_size
 
                     blob.upload_from_filename(str(filepath), **upload_args)
 

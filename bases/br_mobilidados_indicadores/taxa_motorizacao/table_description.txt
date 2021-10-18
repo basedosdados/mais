@@ -1,4 +1,4 @@
-Taxa de motorização nas 26 capitais de estados brasileiros e Distrito Federal. 
+Dados de taxa de motorização nas 26 capitais de estados brasileiros e Distrito Federal. 
 
 
 Para saber mais acesse:
@@ -16,9 +16,12 @@ Website: https://github.com/crislanealves
 Email: crislanealves@protonmail.comTratado por
 -----------
 Nome: Crislane A. Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores/code
 Website: https://github.com/crislanealves
 Email: crislanealves@protonmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- None
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
