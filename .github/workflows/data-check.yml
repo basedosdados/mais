@@ -8,7 +8,7 @@ on:
 jobs:
   get-changes:
     runs-on: ubuntu-latest
-    if: github.event.label.name == 'data-check-trigger'
+    if: github.event.label.name == 'data-check'
     steps:
       - name: Check file changes
         id: file_changes
