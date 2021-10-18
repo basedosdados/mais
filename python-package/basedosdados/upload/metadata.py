@@ -24,10 +24,9 @@ class Metadata(Base):
         self.dataset_path = self.metadata_path / self.dataset_id.replace("-", "_")
         self.dataset_path.mkdir(parents=True, exist_ok=True)
 
-        url = "http://localhost:5000" # TODO: Replace with "https://basedosdados.org"
+        url = "http://localhost:5000"  # TODO: Replace with "https://basedosdados.org"
         self.CKAN_API_KEY = self.config.get("ckan", {}).get("api_key")
         self.CKAN_URL = self.config.get("ckan", {}).get("url", "") or url
-
 
     @property
     def local_metadata(self) -> dict:
@@ -48,15 +47,14 @@ class Metadata(Base):
                     metadata["resources"].push(yaml)
 
             return metadata
-        
-        return {}
 
+        return {}
 
     @property
     @lru_cache(256)
     def remote_metadata(self) -> dict:
         """CKAN dataset with tables metadata"""
-        
+
         url = f"{self.CKAN_URL}/api/3/action/package_show?id={self.dataset_id}"
         response = requests.get(url).json()
         dataset = response.get("result")
@@ -65,7 +63,6 @@ class Metadata(Base):
             return {}
 
         return dataset
-        
 
     @property
     def updated_metadata(self) -> dict:
@@ -88,7 +85,7 @@ class Metadata(Base):
 
         updated["owner_org"] = self.owner_org
         updated["organization"] = self.organization
-        
+
         updated["tags"] = choose("tags", [])
         updated["groups"] = choose("groups", [])
         for prop in ["tags", "groups"]:
@@ -109,9 +106,9 @@ class Metadata(Base):
 
             i = ids.index(resl.get("id"))
             res = updated["resources"][i]
-            
+
             choose = lambda x, y=None: resl.get(x) or res.get(x) or y
-            
+
             res["description"] = choose("description")
             res["name"] = choose("name")
             res["resource_type"] = choose("resource_type", "bdm_table")
@@ -145,23 +142,21 @@ class Metadata(Base):
 
         return updated
 
-
     @property
     @lru_cache(256)
     def owner_org(self) -> str:
         """Organization UUID"""
-        
+
         if name := self.local_metadata.get("organization"):
             url = f"{self.CKAN_URL}/api/3/action/organization_show?id={name}"
             response = requests.get(url).json()
-        
+
             if not response.get("success"):
                 raise BaseDosDadosException("Organization not found")
-        
-            return response.get("result", {}).get("id")
-        
-        return self.remote_metadata.get("owner_org") or ""
 
+            return response.get("result", {}).get("id")
+
+        return self.remote_metadata.get("owner_org") or ""
 
     @property
     @lru_cache(256)
@@ -173,14 +168,12 @@ class Metadata(Base):
 
         return local_org or remote_org or ""
 
-
     @property
     @lru_cache(256)
     def dataset_schema(self) -> dict:
         """Get metadata schema from CKAN API endpoint"""
         url = f"{self.CKAN_URL}/api/3/action/bd_dataset_schema"
         return requests.get(url).json().get("result")
-
 
     @property
     @lru_cache(256)
@@ -189,14 +182,12 @@ class Metadata(Base):
         url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_schema"
         return requests.get(url).json().get("result")
 
-
     @property
     @lru_cache(256)
     def columns_schema(self) -> dict:
         """Returns a dictionary with the schema of the columns"""
         url = f"{self.CKAN_URL}/api/3/action/bd_bdm_columns_schema"
         return requests.get(url).json().get("result")
-
 
     def create(
         self,
@@ -221,7 +212,7 @@ class Metadata(Base):
                 If set to `True`, overwrite CKAN's columns with the ones provided.
                 If set to `False`, keep CKAN's columns instead of the ones provided.
         """
-        
+
         metadata = self.updated_metadata
 
         if self.table_id:
@@ -230,8 +221,8 @@ class Metadata(Base):
                 idx = names.index(self.table_id)
                 resource = metadata["resources"][idx]
             except:
-                resource = { "table_id": self.table_id }
-            
+                resource = {"table_id": self.table_id}
+
             self.create_metadatum(
                 {"table_id": self.table_id},
                 if_exists=if_exists,
@@ -260,7 +251,6 @@ class Metadata(Base):
 
         return self
 
-
     def create_metadatum(
         self,
         metadata: dict,
@@ -269,21 +259,23 @@ class Metadata(Base):
         partition_columns: list = [],
         force_columns: bool = False,
     ):
-        
+
         if not "table_id" in metadata:
             metadata_schema = self.dataset_schema
             filepath = self.dataset_path / "dataset_config.yaml"
         else:
             metadata_schema = self.table_schema
             filepath = self.dataset_path / metadata["table_id"] / "table_config.yaml"
-        
+
         if filepath.exists() and if_exists == "raise":
             raise FileExistsError(
                 f"{filepath} already exists."
                 + " Set the arg `if_exists` to `replace` to replace it."
             )
         elif if_exists != "pass":
-            if "table_id" in metadata and (force_columns or not metadata.get("columns")):
+            if "table_id" in metadata and (
+                force_columns or not metadata.get("columns")
+            ):
                 metadata["columns"] = [{"name": c} for c in columns]
 
             yaml_obj = build_yaml_object(
@@ -297,15 +289,14 @@ class Metadata(Base):
             )
 
             filepath.parent.mkdir(parents=True, exist_ok=True)
-            
+
             with open(filepath, "w", encoding="utf-8") as file:
                 ruamel = ryaml.YAML()
                 ruamel.preserve_quotes = True
                 ruamel.indent(mapping=4, sequence=6, offset=4)
-                ruamel.dump(yaml_obj, file)            
+                ruamel.dump(yaml_obj, file)
 
         return self
-
 
     def validate(self) -> bool:
         """Validate dataset_config.yaml or table_config.yaml files.
@@ -321,7 +312,7 @@ class Metadata(Base):
             BaseDosDadosException:
                 when the file has validation errors.
         """
-       
+
         # Validate Metadata Version
 
         message = (
@@ -349,7 +340,6 @@ class Metadata(Base):
             raise BaseDosDadosException(message)
 
         return True
-
 
     def publish(self) -> dict:
         """Publish local metadata modifications.
@@ -384,7 +374,7 @@ class Metadata(Base):
 
             if "id" not in metadata:
                 return ckan.action.package_create(**metadata)
-            
+
             return ckan.action.package_update(**metadata)
 
         except (BaseDosDadosException, ValidationError) as e:
@@ -563,7 +553,7 @@ def build_yaml_object(
                 if remote_column["name"] == local_column:
                     remote_column["is_partition"] = True
         yaml["partitions"] = ", ".join(partition_columns)
-    
+
     # Nullify `partitions` field in case of other-than-None empty values
     if yaml.get("partitions") == "":
         yaml["partitions"] = None
@@ -572,10 +562,14 @@ def build_yaml_object(
     yaml["dataset_id"] = dataset_id
     if table_id:
         yaml["table_id"] = table_id
-        
+
         # Add gcloud config variables
         yaml["source_bucket_name"] = str(config.get("bucket_name"))
-        yaml["project_id_prod"] = str(config.get("gcloud-projects", {}).get("prod", {}).get("name"))
-        yaml["project_id_staging"] = str(config.get("gcloud-projects", {}).get("staging", {}).get("name"))
+        yaml["project_id_prod"] = str(
+            config.get("gcloud-projects", {}).get("prod", {}).get("name")
+        )
+        yaml["project_id_staging"] = str(
+            config.get("gcloud-projects", {}).get("staging", {}).get("name")
+        )
 
     return yaml
