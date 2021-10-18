@@ -23,7 +23,7 @@ published_by:
     name: Lucas Nascimento Moreira # REQUIRED
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_fipe_fipezap/code # REQUIRED
     website: <website>
-    email: lucas.nasc.m@gmail.com
+    email: lucas.moreira@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -32,12 +32,13 @@ treated_by:
     name: Lucas Nascimento Moreira
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_fipe_ipc/code
     website: <website>
-    email: lucas.nasc.m@gmail.com
+    email: lucas.moreira@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
     - Coleta dos dados a partir da API ipeadatapy;
     - Exclusão e renomeação de variáveis segundo diretrizes da BD;
+    - Inclusão da variável id_municipio;
     - Junção dos dataframes
 
 # Com qual frequência a base é atualizada?
@@ -51,6 +52,8 @@ data_update_frequency: mes # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
+    - ano
+    - mes
     - municipio
 
 # Quais colunas identificam uma linha unicamente?

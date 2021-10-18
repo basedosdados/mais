@@ -8,11 +8,11 @@ url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_salar
 # Quais as principais fontes de dados?
 # Há links para FAQs e explicações?
 description: | # REQUIRED
-    Base com os valores do salário mínimo desde a sua instituição em julho de 1940. O Insituto de Pesquisa Econômica Aplicada oferece o valor vigente, corrigido pela inflação e o valor equivalente em dólar convertido pela taxa de poder de paridade de compra.
+    Base com os valores do salário mínimo desde a sua instituição em julho de 1940. O Instituto de Pesquisa Econômica Aplicada oferece o valor vigente, corrigido pela inflação e o valor equivalente em dólar convertido pela taxa de poder de paridade de compra.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: ipea # REQUIRED
+organization: br-ipea # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
@@ -37,7 +37,6 @@ groups:
 #   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
     - salario minimo
-    - minimo
     - poder de paridade de compra
 
 # Em quais línguas a base (ou a fonte original) está disponível?

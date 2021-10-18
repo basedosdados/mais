@@ -12,11 +12,11 @@ Publicado por
 -------------
 Nome: Lucas Nascimento Moreira
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_fipe_fipezap/code
-Email: lucas.nasc.m@gmail.comTratado por
+Email: lucas.moreira@basedosdados.orgTratado por
 -----------
 Nome: Lucas Nascimento Moreira
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_fipe_ipc/code
-Email: lucas.nasc.m@gmail.com
+Email: lucas.moreira@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------

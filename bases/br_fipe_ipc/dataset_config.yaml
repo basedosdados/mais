@@ -12,7 +12,7 @@ description: | # REQUIRED
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: fipe # REQUIRED
+organization: br-fipe # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
@@ -37,7 +37,6 @@ groups:
 tags:
     - inflacao 
     - preco
-    - sao paulo
     - custo de vida
 
 # Em quais línguas a base (ou a fonte original) está disponível?

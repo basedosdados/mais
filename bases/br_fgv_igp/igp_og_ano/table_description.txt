@@ -28,7 +28,6 @@ Colunas identificando linhas unicamente
 
 Cobertura Temporal
 ------------------
-- 1969
 - 1970
 - 1971
 - 1972

@@ -1,4 +1,4 @@
-Variação mensal e quadrissemanal entre os preços restrita à região metropolitana de São Paulo. O sistema de cálculo sempre abrange um período total de 08 semanas e as variações são obtidas fazendo-se a divisão dos preços médios das 04 semanas de referência pelos preços médios das 04 semanas anteriores (base). Desta forma, para se obter uma série sequencial de índices quadrissemanais, considera-se sempre 08 semanas incluindo-se no cálculo as informações sobre os preços coletados na última semana e, automaticamente, eliminando-se da operação os dados referentes à semana mais antiga.
+Variação mensal e quadrissemanal entre os preços por categorias de produto restrita à região metropolitana de São Paulo. O sistema de cálculo sempre abrange um período total de 08 semanas e as variações são obtidas fazendo-se a divisão dos preços médios das 04 semanas de referência pelos preços médios das 04 semanas anteriores (base). Desta forma, para se obter uma série sequencial de índices quadrissemanais, considera-se sempre 08 semanas incluindo-se no cálculo as informações sobre os preços coletados na última semana e, automaticamente, eliminando-se da operação os dados referentes à semana mais antiga.
 
 
 Para saber mais acesse:
@@ -27,64 +27,10 @@ Colunas identificando linhas unicamente
 -------------------
 - ano
 - mes
+- categoria
 
 Cobertura Temporal
 ------------------
-- 1939
-- 1940
-- 1941
-- 1942
-- 1943
-- 1944
-- 1945
-- 1946
-- 1947
-- 1948
-- 1949
-- 1950
-- 1951
-- 1952
-- 1953
-- 1954
-- 1955
-- 1956
-- 1957
-- 1958
-- 1959
-- 1960
-- 1961
-- 1962
-- 1963
-- 1964
-- 1965
-- 1966
-- 1967
-- 1968
-- 1969
-- 1970
-- 1971
-- 1972
-- 1973
-- 1974
-- 1975
-- 1976
-- 1977
-- 1978
-- 1979
-- 1980
-- 1981
-- 1982
-- 1983
-- 1984
-- 1985
-- 1986
-- 1987
-- 1988
-- 1989
-- 1990
-- 1991
-- 1992
-- 1993
 - 1994
 - 1995
 - 1996

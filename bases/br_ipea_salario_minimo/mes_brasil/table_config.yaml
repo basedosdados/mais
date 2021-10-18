@@ -1,48 +1,46 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: igp_m_ano # AUTO GENERATED
-dataset_id: br_fgv_igp # AUTO GENERATED
+table_id: mes_brasil # AUTO GENERATED
+dataset_id: br_ipea_salario_minimo # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-fgv-igp # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_fgv_igp # AUTO GENERATED
+url_ckan: https://basedosdados.org/dataset/br-ipea-salario-minimo # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_salario_minimo # AUTO GENERATED
 
-version: v1.0 # REQUIRED
+version: <vA.B> # REQUIRED
 
-last_updated: 2021-10-15 # AUTO GENERATED
+last_updated: 2021-10-18 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    O Índice Geral de Preços do Mercado (IGP-M) é um indicador do movimento de preços que cobre todo o processo produtivo, desde preços de matérias-primas agrícolas e industriais, passando pelos preços de produtos intermediários até os de bens e serviços finais. É composto pela média ponderada do Índice de Preços ao Produtor Amplo do Mercado (IPA-M) (60%), do Índice de Preços ao Consumidor do Mercado (IPC-M) (30%) e do Índice Nacional de Custo da Construção do Mercado (INCC-M) (10%). Para efeito de coleta de preços, o IGP-M mede a evolução de preços no período compreendido entre os dias 21 do mês anterior e o dia 20 do mês de referência.
+    <descrição>
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: Lucas Nascimento Moreira # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_fgv_igp/code # REQUIRED
+    name: <nome [você]>  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_salario_minimo/code # REQUIRED
     website: <website>
-    email: lucas.moreira@basedosdados.org
+    email: <email>
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: Lucas Nascimento Moreira
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_fgv_igp/code
+    name: <nome>
+    code_url: <onde encontrar código de tratamento>
     website: <onde encontrar os dados tratados>
-    email: lucas.moreira@basedosdados.org
+    email: <email>
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    - Coleta dos dados a partir da API ipeadatapy;
-    - Exclusão e renomeação de variáveis segundo diretrizes da BD;
-    - Junção dos dataframes
+    <CEPESP fez X. Eu fiz K>
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: ano # REQUIRED 
+data_update_frequency: <frequência> # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -51,13 +49,15 @@ data_update_frequency: ano # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - ano
+    - <primeira coluna>
+    - <segunda coluna>
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - ano
+    - <primeira coluna>
+    - <segunda coluna>
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -69,43 +69,16 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - brasil
+    - <admin0 - pais>
+    - <admin1 - estados/regioes/etc>
+    - <admin2 - municipios/counties/etc>
+    - <admin3 - distritos/subdistritos/etc>
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - 1990
-    - 1991
-    - 1992
-    - 1993
-    - 1994
-    - 1995
-    - 1996
-    - 1997
-    - 1998
-    - 1999
-    - 2000
-    - 2001
-    - 2002
-    - 2003
-    - 2004
-    - 2005
-    - 2006
-    - 2007
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
-    - 2020
-    - 2021
+    - <ano 1>
+    - <ano 2>
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -125,12 +98,30 @@ columns: # REQUIRED
   
     -   
         name: ano
-        description: Ano
+        description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: variacao_anual
-        description: Variação percentual anual
+        name: mes
+        description: <descrição da coluna>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: salario_minimo_real
+        description: <descrição da coluna>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: salario_minimo_vigente
+        description: <descrição da coluna>
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: salario_minimo_dolar
+        description: <descrição da coluna>
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

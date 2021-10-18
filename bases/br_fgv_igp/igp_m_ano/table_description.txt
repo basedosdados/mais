@@ -25,11 +25,9 @@ Nível da Observação (i.e. a granularidade da linha)
 Colunas identificando linhas unicamente
 -------------------
 - ano
-- mes
 
 Cobertura Temporal
 ------------------
-- 1989
 - 1990
 - 1991
 - 1992
