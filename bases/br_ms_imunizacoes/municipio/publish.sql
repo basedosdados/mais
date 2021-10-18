@@ -24,7 +24,7 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(doses_total AS FLOAT64) doses_total,
+SAFE_CAST(doses_total AS INT64) doses_total,
 SAFE_CAST(cobertura_total AS FLOAT64) cobertura_total,
 SAFE_CAST(doses_bcg AS INT64) doses_bcg,
 SAFE_CAST(cobertura_bcg AS FLOAT64) cobertura_bcg,
