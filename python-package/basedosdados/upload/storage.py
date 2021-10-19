@@ -321,7 +321,7 @@ class Storage(Base):
         """Deletes a table from storage, sends request in batches.
 
         Args:
-            mode (str): Folder of which dataset to update [raw|staging|header|auxiliary_files|architecture|all]
+            mode (str): Folder of which dataset to update [raw|staging|header|auxiliary_files|architecture]
                 Folder of which dataset to update. Defaults to "staging".
 
             bucket_name (str):
