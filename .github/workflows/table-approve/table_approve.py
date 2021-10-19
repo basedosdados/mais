@@ -90,8 +90,8 @@ def sync_bucket(
             (check it with the Storage.bucket proprerty)
         backup_bucket_name (str):
             The bucket name for where backup data will be stored.
-        mode (str): Optional.
-        Folder of which dataset to update.
+        mode (str): Optional
+            Folder of which dataset to update.[raw|staging|header|auxiliary_files|architecture]
 
     Raises:
         ValueError:
@@ -171,17 +171,27 @@ def push_table_to_bq(
     table_id,
     source_bucket_name="basedosdados-dev",
     destination_bucket_name="basedosdados",
-    backup_bucket_name="basedosdados-staging",
+    backup_bucket_name="basedosdados-backup",
 ):
     # copy proprosed data between storage buckets
     # create a backup of old data, then delete it and copies new data into the destination bucket
-    sync_bucket(
-        source_bucket_name,
-        dataset_id,
-        table_id,
-        destination_bucket_name,
-        backup_bucket_name,
-    )
+    modes = ["raw", "staging", "header", "auxiliary_files", "architecture"]
+
+    for mode in modes:
+        try:
+            sync_bucket(
+                source_bucket_name,
+                dataset_id,
+                table_id,
+                destination_bucket_name,
+                backup_bucket_name,
+                mode,
+            )
+        except Exception as error:
+            tprint()
+            tprint(f"ERROR ON {mode}.{dataset_id}.{table_id}")
+            traceback.print_exc()
+            tprint()
 
     # load the table_config.yaml to get the metadata IDs
     table_config, configs_path = load_configs(dataset_id, table_id)
@@ -213,7 +223,7 @@ def push_table_to_bq(
 
     ### save table header in storage
     query = f"""
-    SELECT * FROM `basedosdados.{dataset_id}.{table_id}` LIMIT 5
+    SELECT * FROM `basedosdados.{dataset_id}.{table_id}` LIMIT 20
     """
     df = bd.read_sql(query, billing_project_id="basedosdados-dev", from_file=True)
     df.to_csv("header.csv", index=False, encoding="utf=8")
