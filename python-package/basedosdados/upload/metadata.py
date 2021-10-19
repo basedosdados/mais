@@ -12,19 +12,28 @@ from ckanapi.errors import NotAuthorized, ValidationError
 from ruamel.yaml.comments import CommentedMap
 from ruamel.yaml.compat import ordereddict
 
+from pathlib import Path
+
 
 class Metadata(Base):
     def __init__(self, dataset_id: str, table_id: str = None, **kwargs):
         super().__init__(**kwargs)
         self.kwargs = kwargs
 
+        self.dataset_id = dataset_id
         self.table_id = table_id or ""
-        self.dataset_id = dataset_id.replace("_", "-")
 
-        self.dataset_path = self.metadata_path / self.dataset_id.replace("-", "_")
-        self.dataset_path.mkdir(parents=True, exist_ok=True)
+        self.dataset_path = self.metadata_path / dataset_id / "dataset_config.yaml"
+        self.dataset_path.parent.mkdir(parents=True, exist_ok=True)
 
-        url = "http://localhost:5000"  # TODO: Replace with "https://basedosdados.org"
+        self.table_path = Path("")
+        if table_id:
+            self.table_path = self.metadata_path / dataset_id
+            self.table_path = self.table_path / table_id
+            self.table_path = self.table_path / "table_config.yaml"
+            self.table_path.parent.mkdir(parents=True, exist_ok=True)
+
+        url = "https://basedosdados.org"
         self.CKAN_API_KEY = self.config.get("ckan", {}).get("api_key")
         self.CKAN_URL = self.config.get("ckan", {}).get("url", "") or url
 
@@ -32,23 +41,22 @@ class Metadata(Base):
     def local_metadata(self) -> dict:
         """Load dataset with tables metadata"""
 
-        dataset = self.dataset_path / "dataset_config.yaml"
-
-        if dataset.exists():
-            with open(dataset, "r", encoding="utf-8") as file:
-                metadata = ryaml.safe_load(file.read())
+        metadata = {}
+        if self.dataset_path.exists():
+            with open(self.dataset_path, "r", encoding="utf-8") as file:
+                yaml = ryaml.YAML(typ="safe", pure=True)
+                metadata = yaml.load(file.read())
                 metadata["resources"] = []
-
             metadata["notes"] = metadata["description"]
 
-            for table in self.dataset_path.glob("*table_config.yaml"):
-                with open(table, "r", encoding="utf-8") as file:
-                    yaml = ryaml.safe_load(file.read())
-                    metadata["resources"].push(yaml)
+        metadata["resources"] = []
+        for table in self.dataset_path.parent.glob("**/*table_config.yaml"):
+            with open(table, "r", encoding="utf-8") as file:
+                yaml = ryaml.YAML(typ="safe", pure=True)
+                metadatum = yaml.load(file.read())
+                metadata["resources"].append(metadatum)
 
-            return metadata
-
-        return {}
+        return metadata
 
     @property
     @lru_cache(256)
@@ -94,19 +102,30 @@ class Metadata(Base):
             elif len(updated[prop]) and type(updated[prop][0]) is dict:
                 updated[prop] = [{"name": p.get("name")} for p in updated[prop]]
 
+        if not "resources" in updated:
+            updated["resources"] = []
+
         # Table Properties
         # Priorities: Local > CKAN > Metadata
 
-        ids = [t.get("id") for t in updated.get("resources", [])]
+        ids = [t.get("table_id") for t in updated.get("resources", [])]
 
-        for _, resl in local.get("resources", []):
-            if "id" not in resl:
-                updated["resources"].push(resl)
+        if self.table_id not in ids:
+            resource = {"table_id": self.table_id}
+            updated["resources"].append(resource)
+
+        for resl in local.get("resources", []):
+            table_id = resl.get("table_id")
+
+            if not table_id:
                 continue
 
-            i = ids.index(resl.get("id"))
-            res = updated["resources"][i]
+            if table_id not in ids:
+                updated["resources"].append(resl)
+                continue
 
+            i = ids.index(table_id)
+            res = updated["resources"][i]
             choose = lambda x, y=None: resl.get(x) or res.get(x) or y
 
             res["description"] = choose("description")
@@ -195,7 +214,6 @@ class Metadata(Base):
         columns: list = [],
         partition_columns: list = [],
         force_columns: bool = False,
-        table_only: bool = False,
     ) -> Metadata:
         """Create metadata file based on the current version saved to CKAN database
 
@@ -215,30 +233,33 @@ class Metadata(Base):
 
         metadata = self.updated_metadata
 
+        # Dataset create is mandatory
+        self.create_metadatum(
+            metadata,
+            if_exists=if_exists,
+            columns=columns,
+            partition_columns=partition_columns,
+            force_columns=force_columns,
+        )
+
+        # Table create with one table
         if self.table_id:
             try:
-                names = [r.get("name") for r in metadata.get("resources", [])]
-                idx = names.index(self.table_id)
+                ids = [r.get("table_id") for r in metadata.get("resources", [])]
+                idx = ids.index(self.table_id)
                 resource = metadata["resources"][idx]
             except:
                 resource = {"table_id": self.table_id}
 
             self.create_metadatum(
-                {"table_id": self.table_id},
+                resource,
                 if_exists=if_exists,
                 columns=columns,
                 partition_columns=partition_columns,
                 force_columns=force_columns,
             )
+        # Table create for multiple tables
         else:
-            self.create_metadatum(
-                metadata,
-                if_exists=if_exists,
-                columns=columns,
-                partition_columns=partition_columns,
-                force_columns=force_columns,
-            )
-
             for resource in metadata.get("resources", []):
                 if resource.get("resource_type") == "bdm_table":
                     self.create_metadatum(
@@ -262,10 +283,11 @@ class Metadata(Base):
 
         if not "table_id" in metadata:
             metadata_schema = self.dataset_schema
-            filepath = self.dataset_path / "dataset_config.yaml"
+            filepath = self.dataset_path
         else:
             metadata_schema = self.table_schema
-            filepath = self.dataset_path / metadata["table_id"] / "table_config.yaml"
+            filepath = self.dataset_path.parent / metadata["table_id"]
+            filepath = filepath / "table_config.yaml"
 
         if filepath.exists() and if_exists == "raise":
             raise FileExistsError(
@@ -336,6 +358,7 @@ class Metadata(Base):
 
         if response.get("errors"):
             error = {self.updated_metadata.get("name"): response["errors"]}
+            print(error)
             message = f"{self.dataset_id} has validation errors: {error}"
             raise BaseDosDadosException(message)
 

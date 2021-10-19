@@ -2,6 +2,7 @@ from pathlib import Path
 
 from basedosdados.upload.base import Base
 from basedosdados.upload.metadata import Metadata
+from google.cloud import bigquery
 
 
 class Dataset(Base):
