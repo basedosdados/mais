@@ -385,7 +385,7 @@ class Storage(Base):
                 If None, defaults to the bucket initialized when instantiating the Storage object (You can check it with the
                 Storage().bucket property)
 
-            mode (str): Folder of which dataset to update [raw|staging|header|auxiliary_files|architecture|all]
+            mode (str): Folder of which dataset to update [raw|staging|header|auxiliary_files|architecture]
                 Folder of which dataset to update. Defaults to "staging".
         """
 
