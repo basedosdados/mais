@@ -160,7 +160,7 @@ columns: # REQUIRED
   
     -   
         name: bandeira_revenda
-        description: Noma da Bandeira da revenda
+        description: Nome da Bandeira da revenda
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
