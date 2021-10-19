@@ -359,7 +359,6 @@ class Metadata(Base):
 
         if response.get("errors"):
             error = {self.updated_metadata.get("name"): response["errors"]}
-            print(self.updated_metadata.get("resources")[3])
             print(error)
             message = f"{self.dataset_id} has validation errors: {error}"
             raise BaseDosDadosException(message)
