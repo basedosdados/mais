@@ -664,6 +664,16 @@ def init(ctx, overwrite):
     Base(overwrite_cli_config=overwrite, **ctx.obj)
 
 
+@click.command(
+    name="auth",
+    help="Authorize download",
+)
+def auth():
+    from basedosdados.download.download import credentials
+
+    return credentials(reauth=True)
+
+
 @cli_config.command(name="refresh_template", help="Overwrite current templates")
 @click.pass_context
 def init_refresh_templates(ctx):
@@ -754,6 +764,7 @@ cli.add_command(cli_config)
 cli.add_command(cli_download)
 cli.add_command(cli_list)
 cli.add_command(cli_get)
+cli.add_command(auth)
 
 
 def run_bash(command):
