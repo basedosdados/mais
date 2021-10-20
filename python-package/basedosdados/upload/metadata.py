@@ -86,8 +86,8 @@ class Metadata(Base):
             "private": ckan_dataset.get("private") or False,
             "owner_org": ckan_dataset.get("owner_org")
             or "3626e93d-165f-42b8-bde1-2e0972079694",
-            "resources": ckan_dataset.get("resources", []) \
-                or [{"resource_type": "external_link", "name": ""}],
+            "resources": ckan_dataset.get("resources", [])
+            or [{"resource_type": "external_link", "name": ""}],
             "groups": [
                 {"name": group} for group in self.local_metadata.get("groups", []) or []
             ],
@@ -102,9 +102,9 @@ class Metadata(Base):
                         "description": self.local_metadata.get("description"),
                         "ckan_url": self.local_metadata.get("ckan_url"),
                         "github_url": self.local_metadata.get("github_url"),
-                    }
+                    },
                 }
-            ]
+            ],
         }
 
         if self.table_id:
@@ -190,7 +190,7 @@ class Metadata(Base):
             url = f"{self.CKAN_URL}/api/3/action/bd_bdm_dataset_show?"
             url += f"dataset_id={self.dataset_id}"
             exists_in_ckan = requests.get(url).json().get("success")
-        
+
         return exists_in_ckan
 
     def is_updated(self) -> bool:
@@ -260,13 +260,12 @@ class Metadata(Base):
                 ruamel.preserve_quotes = True
                 ruamel.indent(mapping=4, sequence=6, offset=4)
                 ruamel.dump(yaml_obj, file)
-            
-            dataset_config_exists = (self.metadata_path / 'dataset_config.yaml').exists()
+
+            dataset_config_exists = (
+                self.metadata_path / "dataset_config.yaml"
+            ).exists()
             if self.table_id and not table_only and not dataset_config_exists:
-                Metadata(
-                    self.dataset_id,
-                    **self.kwargs
-                    ).create(if_exists=if_exists)
+                Metadata(self.dataset_id, **self.kwargs).create(if_exists=if_exists)
 
         return self
 
@@ -332,12 +331,14 @@ class Metadata(Base):
             )
 
             data_dict = self.ckan_data_dict.copy()
-            
+
             if self.table_id:
                 data_dict = data_dict["resources"][0]
 
                 return ckan.call_action(
-                    action="resource_patch" if self.exists_in_ckan() else "resource_create",
+                    action="resource_patch"
+                    if self.exists_in_ckan()
+                    else "resource_create",
                     data_dict=data_dict,
                 )
 
@@ -345,8 +346,10 @@ class Metadata(Base):
                 data_dict["resources"] = []
 
                 return ckan.call_action(
-                    action="package_patch" if self.exists_in_ckan() else "package_create",
-                    data_dict=data_dict
+                    action="package_patch"
+                    if self.exists_in_ckan()
+                    else "package_create",
+                    data_dict=data_dict,
                 )
 
         except (BaseDosDadosException, ValidationError) as e:
@@ -527,7 +530,7 @@ def build_yaml_object(
                 if remote_column["name"] == local_column:
                     remote_column["is_partition"] = True
         yaml["partitions"] = ", ".join(partition_columns)
-    
+
     # Nullify `partitions` field in case of other-than-None empty values
     if yaml.get("partitions") == "":
         yaml["partitions"] = None
@@ -539,7 +542,11 @@ def build_yaml_object(
 
         # Add gcloud config variables
         yaml["source_bucket_name"] = str(config.get("bucket_name"))
-        yaml["project_id_prod"] = str(config.get("gcloud-projects", {}).get("prod", {}).get("name"))
-        yaml["project_id_staging"] = str(config.get("gcloud-projects", {}).get("staging", {}).get("name"))
+        yaml["project_id_prod"] = str(
+            config.get("gcloud-projects", {}).get("prod", {}).get("name")
+        )
+        yaml["project_id_staging"] = str(
+            config.get("gcloud-projects", {}).get("staging", {}).get("name")
+        )
 
     return yaml

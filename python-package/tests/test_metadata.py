@@ -161,10 +161,10 @@ def test_create_force_columns_is_false(
 
 def test_create_table_only_is_true(
     table_metadata, dataset_metadata_path, table_metadata_path
-    ):
+):
     shutil.rmtree(dataset_metadata_path, ignore_errors=True)
     shutil.rmtree(table_metadata_path, ignore_errors=True)
-    
+
     table_metadata.create(table_only=True)
     assert (table_metadata_path / METADATA_FILES["table"]).exists()
     assert not (dataset_metadata_path / METADATA_FILES["dataset"]).exists()
@@ -172,10 +172,10 @@ def test_create_table_only_is_true(
 
 def test_create_table_only_is_false(
     table_metadata, dataset_metadata_path, table_metadata_path
-    ):
+):
     shutil.rmtree(dataset_metadata_path, ignore_errors=True)
     shutil.rmtree(table_metadata_path, ignore_errors=True)
-    
+
     table_metadata.create(table_only=False)
     assert (table_metadata_path / METADATA_FILES["table"]).exists()
     assert (dataset_metadata_path / METADATA_FILES["dataset"]).exists()
