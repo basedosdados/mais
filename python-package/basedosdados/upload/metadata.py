@@ -2,17 +2,17 @@ from __future__ import annotations
 
 from copy import deepcopy
 from functools import lru_cache
+from pathlib import Path
 
 import requests
 import ruamel.yaml as ryaml
-from basedosdados.exceptions import BaseDosDadosException
-from basedosdados.upload.base import Base
 from ckanapi import RemoteCKAN
 from ckanapi.errors import NotAuthorized, ValidationError
 from ruamel.yaml.comments import CommentedMap
 from ruamel.yaml.compat import ordereddict
 
-from pathlib import Path
+from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.upload.base import Base
 
 
 class Metadata(Base):
@@ -62,7 +62,7 @@ class Metadata(Base):
     @lru_cache(256)
     def remote_metadata(self) -> dict:
         """CKAN dataset with tables metadata"""
-        
+
         name = self.dataset_id.replace("_", "-")
         url = f"{self.CKAN_URL}/api/3/action/package_show?id={name}"
         response = requests.get(url).json()
@@ -74,6 +74,7 @@ class Metadata(Base):
         return dataset
 
     @property
+    @lru_cache(256)
     def updated_metadata(self) -> dict:
         """Helper function that structures local metadata for validation"""
 
@@ -87,7 +88,8 @@ class Metadata(Base):
 
         updated["id"] = choose("id")
         updated["title"] = choose("title")
-        updated["name"] = choose("dataset_id")
+        updated["name"] = choose("name")
+        updated["dataset_id"] = choose("")
         updated["type"] = choose("type", "dataset")
         updated["notes"] = choose("notes")
         updated["description"] = updated["notes"]
@@ -103,6 +105,9 @@ class Metadata(Base):
             elif len(updated[prop]) and type(updated[prop][0]) is dict:
                 updated[prop] = [{"name": p.get("name")} for p in updated[prop]]
 
+        if "extras" in updated:
+            del updated["extras"]
+
         if not "resources" in updated:
             updated["resources"] = []
 
@@ -111,7 +116,7 @@ class Metadata(Base):
 
         ids = [t.get("table_id") for t in updated.get("resources", [])]
 
-        if self.table_id not in ids:
+        if self.table_id and self.table_id not in ids:
             resource = {"table_id": self.table_id}
             updated["resources"].append(resource)
 
@@ -250,6 +255,7 @@ class Metadata(Base):
                 idx = ids.index(self.table_id)
                 resource = metadata["resources"][idx]
             except:
+                # TODO: ACESSANDO ERRADO AQUI
                 resource = {"table_id": self.table_id}
 
             self.create_metadatum(
@@ -259,6 +265,7 @@ class Metadata(Base):
                 partition_columns=partition_columns,
                 force_columns=force_columns,
             )
+
         # Table create for multiple tables
         else:
             for resource in metadata.get("resources", []):
@@ -359,7 +366,6 @@ class Metadata(Base):
 
         if response.get("errors"):
             error = {self.updated_metadata.get("name"): response["errors"]}
-            print(error)
             message = f"{self.dataset_id} has validation errors: {error}"
             raise BaseDosDadosException(message)
 

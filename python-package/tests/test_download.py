@@ -4,23 +4,15 @@ from pathlib import Path
 
 import pandas as pd
 import pytest
-from basedosdados import (
-    download,
-    get_dataset_description,
-    get_table_columns,
-    get_table_description,
-    get_table_size,
-    list_dataset_tables,
-    list_datasets,
-    read_sql,
-    read_table,
-)
-from basedosdados.exceptions import (
-    BaseDosDadosException,
-    BaseDosDadosInvalidProjectIDException,
-    BaseDosDadosNoBillingProjectIDException,
-)
 from pandas_gbq.gbq import GenericGBQException
+
+from basedosdados import (download, get_dataset_description, get_table_columns,
+                          get_table_description, get_table_size,
+                          list_dataset_tables, list_datasets, read_sql,
+                          read_table)
+from basedosdados.exceptions import (BaseDosDadosException,
+                                     BaseDosDadosInvalidProjectIDException,
+                                     BaseDosDadosNoBillingProjectIDException)
 
 TEST_PROJECT_ID = "basedosdados-dev"
 SAVEFILE = Path(__file__).parent / "tmp_bases" / "test.csv"

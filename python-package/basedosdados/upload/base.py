@@ -8,10 +8,11 @@ from pathlib import Path
 
 import tomlkit
 import yaml
-from basedosdados import constants
 from google.cloud import bigquery, storage
 from google.oauth2 import service_account
 from jinja2 import Template
+
+from basedosdados import constants
 
 warnings.filterwarnings("ignore")
 

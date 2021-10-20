@@ -5,18 +5,17 @@ from pathlib import Path
 import pandas as pd
 import pandas_gbq
 import pydata_google_auth
-from basedosdados.exceptions import (
-    BaseDosDadosAccessDeniedException,
-    BaseDosDadosAuthorizationException,
-    BaseDosDadosException,
-    BaseDosDadosInvalidProjectIDException,
-    BaseDosDadosNoBillingProjectIDException,
-)
-from basedosdados.upload.base import Base
 from google.cloud import bigquery, bigquery_storage_v1
 from google.cloud.bigquery import dataset
 from pandas_gbq.gbq import GenericGBQException
 from pydata_google_auth.exceptions import PyDataCredentialsError
+
+from basedosdados.exceptions import (BaseDosDadosAccessDeniedException,
+                                     BaseDosDadosAuthorizationException,
+                                     BaseDosDadosException,
+                                     BaseDosDadosInvalidProjectIDException,
+                                     BaseDosDadosNoBillingProjectIDException)
+from basedosdados.upload.base import Base
 
 
 def credentials(from_file=False, reauth=False):

@@ -3,9 +3,9 @@ from pathlib import Path
 
 import pytest
 import ruamel.yaml as ryaml
+
 from basedosdados import Metadata
 from basedosdados.exceptions import BaseDosDadosException
-
 
 ###########################################################
 # Fixtures
@@ -45,7 +45,6 @@ def valid_dataset(metadatadir: Path):
         metadata_path=metadatadir,
     )
     dataset.create(if_exists="replace")
-    # dataset.CKAN_API_KEY = "valid-key"
     return dataset
 
 
@@ -57,7 +56,6 @@ def valid_table(metadatadir: Path):
         metadata_path=metadatadir,
     )
     table.create(if_exists="replace")
-    # metadata.CKAN_API_KEY = "valid-key"
     return table
 
 
@@ -89,7 +87,7 @@ def invalid_table(metadatadir):
     table.create(if_exists="replace")
 
     config = table.local_metadata
-    config["table_id"] = None
+    config["metadata_modified"] = "not_a_valid_date"
 
     with open(table.table_path, "w", encoding="utf-8") as file:
         yaml = ryaml.YAML(typ="unsafe", pure=True)
@@ -179,7 +177,6 @@ def test_create_partition_columns_from_existent_table(real_table: Metadata):
     assert real_table.dataset_path.exists()
 
     table_ = real_table.local_metadata["resources"][0]
-    print(table_)
     assert table_.get("partitions") == "ano, sigla_uf"
 
 
@@ -213,7 +210,10 @@ def test_validate_is_succesful(
     valid_dataset: Metadata,
     valid_table: Metadata,
 ):
-    assert valid_dataset.validate()
+    # assert valid_dataset.validate()
+    from pprint import pprint
+
+    pprint(valid_table.updated_metadata)
     assert valid_table.validate()
 
 
@@ -221,7 +221,7 @@ def test_validate_is_not_succesful(
     invalid_dataset: Metadata,
     invalid_table: Metadata,
 ):
-    with pytest.raises(AssertionError):
+    with pytest.raises(BaseDosDadosException):
         invalid_table.validate()
 
     # TODO: Change fields modified by this tool

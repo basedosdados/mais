@@ -1,14 +1,15 @@
 import os
 import time
 
-import basedosdados as bd
 import click
+from ckanapi import CKANAPIError
+
+import basedosdados as bd
 from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.base import Base
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.metadata import Metadata
 from basedosdados.upload.storage import Storage
-from ckanapi import CKANAPIError
 
 
 @click.group()

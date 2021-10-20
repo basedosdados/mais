@@ -2,10 +2,11 @@ import shutil
 from pathlib import Path
 
 import pytest
-from basedosdados import Dataset, Storage, Table
-from basedosdados.exceptions import BaseDosDadosException
 from google.api_core.exceptions import NotFound
 from google.cloud import bigquery
+
+from basedosdados import Dataset, Storage, Table
+from basedosdados.exceptions import BaseDosDadosException
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
