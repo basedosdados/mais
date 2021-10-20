@@ -7,9 +7,9 @@ dataset_id: br_anp_precos_combustiveis # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-anp-precos-combustiveis # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_anp_precos_combustiveis # AUTO GENERATED
 
-version: 1.0 # REQUIRED
+version: v1.0 # REQUIRED
 
-last_updated: 2021-08-27 # AUTO GENERATED
+last_updated: 2021-10-18 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -160,7 +160,7 @@ columns: # REQUIRED
   
     -   
         name: bandeira_revenda
-        description: Noma da Bandeira da revenda
+        description: Nome da Bandeira da revenda
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
