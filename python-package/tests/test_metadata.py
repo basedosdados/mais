@@ -3,7 +3,6 @@ from pathlib import Path
 
 import pytest
 import ruamel.yaml as ryaml
-
 from basedosdados import Metadata
 from basedosdados.exceptions import BaseDosDadosException
 

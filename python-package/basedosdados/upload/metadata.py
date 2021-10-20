@@ -6,13 +6,12 @@ from pathlib import Path
 
 import requests
 import ruamel.yaml as ryaml
+from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.upload.base import Base
 from ckanapi import RemoteCKAN
 from ckanapi.errors import NotAuthorized, ValidationError
 from ruamel.yaml.comments import CommentedMap
 from ruamel.yaml.compat import ordereddict
-
-from basedosdados.exceptions import BaseDosDadosException
-from basedosdados.upload.base import Base
 
 
 class Metadata(Base):

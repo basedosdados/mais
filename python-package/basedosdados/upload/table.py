@@ -11,15 +11,14 @@ import google.api_core.exceptions
 import pandas as pd
 import requests
 import ruamel.yaml as ryaml
-from google.api_core.exceptions import Conflict
-from google.cloud import bigquery
-
 from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.base import Base
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
 from basedosdados.upload.metadata import Metadata
 from basedosdados.upload.storage import Storage
+from google.api_core.exceptions import Conflict
+from google.cloud import bigquery
 
 
 class Table(Base):

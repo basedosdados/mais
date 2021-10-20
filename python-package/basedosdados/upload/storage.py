@@ -1,9 +1,8 @@
 from pathlib import Path
 
-from tqdm import tqdm
-
 from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.base import Base
+from tqdm import tqdm
 
 
 class Storage(Base):
