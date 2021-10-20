@@ -226,7 +226,7 @@ def push_table_to_bq(
     SELECT * FROM `basedosdados.{dataset_id}.{table_id}` LIMIT 20
     """
     df = bd.read_sql(query, billing_project_id="basedosdados", from_file=True)
-    df.to_csv("header.csv", index=False, encoding="utf=8")
+    df.to_csv("header.csv", index=False, encoding="utf-8")
     st = bd.Storage(dataset_id=dataset_id, table_id=table_id)
     st.upload("header.csv", mode="header", if_exists="replace")
 
