@@ -159,13 +159,18 @@ def sync_bucket(
         ref.copy_table(
             source_bucket_name=destination_bucket_name,
             destination_bucket_name=backup_bucket_name,
+            mode=mode,
         )
 
         tprint(f"{mode.upper()}: DELETE OLD DATA")
-        ref.delete_table(not_found_ok=True)
+        ref.delete_table(not_found_ok=True, mode=mode)
 
     tprint(f"{mode.upper()}: TRANSFER NEW DATA")
-    ref.copy_table(source_bucket_name=source_bucket_name)
+    ref.copy_table(
+        source_bucket_name=source_bucket_name,
+        destination_bucket_name=destination_bucket_name,
+        mode=mode,
+    )
 
 
 def save_header_files(dataset_id, table_id):
