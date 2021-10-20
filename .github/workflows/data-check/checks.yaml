@@ -6,7 +6,7 @@ test_table_exists:
     SELECT "{{ table_id }}" IN (
         SELECT `table_name`
         FROM `{{ project_id }}.{{ dataset_id }}.INFORMATION_SCHEMA.TABLES`
-    ) AS sucess
+    ) AS success
 
 test_table_has_no_null_column:
   id: {{ dataset_id }}/{{ table_id }}/2
@@ -33,7 +33,12 @@ test_primary_key_has_unique_values:
     {% if primary_keys is defined and primary_keys is not none -%}
     SELECT 
       COUNT(
-        DISTINCT CONCAT({{ primary_keys|join(", \"&\", ") }})
+        DISTINCT CONCAT(
+          {% for primary_key in primary_keys -%}
+            IFNULL(SAFE_CAST({{ primary_key }} AS STRING), " "), "&",
+          {% endfor -%}
+          "EOF"
+        )
       ) / COUNT(*) unique_percentage 
     FROM `{{ project_id }}.{{ dataset_id }}.{{ table_id }}` t
     {% endif %}

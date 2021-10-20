@@ -1,11 +1,3 @@
-# Orientações gerais ------------------------------------------------------
-
-# Testaria todos os guardiões esperando um erro para cada exceção definida nas
-# funções.
-# Também adicionaria uma expectativa de erro para cada exceção definida no corpo
-# da função.
-# Sem definir billing_id --------------------------------------------------
-
 set_billing_id(readline("Insira um billing project id: "))
 
 require(magrittr)
@@ -50,7 +42,6 @@ test_that("bd_write works", {
           path = .x) %>%
         fs::file_exists() %>%
         testthat::expect_true())
-
 
 })
 

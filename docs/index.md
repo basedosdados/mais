@@ -48,11 +48,14 @@ hover="background-color: var(--md-primary-fg-color--dark)">
 ### Pacotes
 
 Os pacotes da Base dos Dados permitem o acesso ao *datalake* público
-direto do seu computador ou ambiente de desenvolvimento. Atualmente disponíveis em:
+direto do seu computador ou ambiente de desenvolvimento. Outra forma
+de acessar os recursos da BD é diretamente pelos endpoints, conforme
+documentado em [BD Open API](https://basedosdados.org/openapi).
+Os pacotes atualmente disponíveis são:
 
+- **:octicons-terminal-16: CLI (Terminal)**
 - **:material-language-python: Python**
 - **:material-language-r: R**
-- **:octicons-terminal-16: CLI (terminal)**
 
 <a
 href="access_data_packages"
