@@ -21,6 +21,6 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.subatividade_ibge AS
 SELECT 
-SAFE_CAST(subatividade_ibge AS STRING) subatividade_ibge,
-SAFE_CAST(subatividade AS STRING) subatividade
+SAFE_CAST(id_subatividade AS STRING) id_subatividade,
+SAFE_CAST(descricao AS STRING) descricao
 from basedosdados-dev.br_bd_diretorios_brasil_staging.subatividade_ibge as t

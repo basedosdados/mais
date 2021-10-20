@@ -34,14 +34,15 @@ treated_by:
     website: <website>
     email: lucas.moreira@basedosdados.org
 
+
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    - Coleta a partir dos dicionários da RAIS;
-    - Renomeação das variáveis
+    - Coleta dos dados a partir dos dicionários da RAIS;
+    - Renomeação e padronização
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: único # REQUIRED 
+data_update_frequency: unico # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -56,7 +57,7 @@ observation_level: #REQUIRED
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - subatividade_ibge
+    - id_subatividade
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -68,21 +69,10 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - 1985
-    - 1986
-    - 1987
-    - 1988
-    - 1989
-    - 1990
-    - 1991
-    - 1992
-    - 1993
-    - 1994
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -101,13 +91,13 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: subatividade_ibge
-        description: Código da subatividade segundo IBGE - 4 Dígitos
+        name: id_subatividade
+        description: ID da subatividade econômica
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: subatividade
-        description: Descrição da subatividade
+        name: descricao
+        description: Descrição da subatividade econômica
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

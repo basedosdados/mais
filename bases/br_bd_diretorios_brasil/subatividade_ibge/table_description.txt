@@ -24,32 +24,21 @@ Nível da Observação (i.e. a granularidade da linha)
 
 Colunas identificando linhas unicamente
 -------------------
-- subatividade_ibge
+- id_subatividade
 
 Cobertura Temporal
 ------------------
-- 1985
-- 1986
-- 1987
-- 1988
-- 1989
-- 1990
-- 1991
-- 1992
-- 1993
-- 1994
 
 Cobertura Espacial
 ------------------
-- brasil
 
 Tratamento
 ----------
-- Coleta a partir dos dicionários da RAIS;
-- Renomeação das variáveis
+- Coleta dos dados a partir dos dicionários da RAIS;
+- Renomeação e padronização
 
 Frequencia de Atualização
 -------------------------
-único
+unico
 
 
