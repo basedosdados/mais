@@ -171,7 +171,8 @@ class Metadata(Base):
     def owner_org(self) -> str:
         """Organization UUID"""
 
-        if name := self.local_metadata.get("organization"):
+        name = self.local_metadata.get("organization")
+        if name:
             url = f"{self.CKAN_URL}/api/3/action/organization_show?id={name}"
             response = requests.get(url).json()
 
