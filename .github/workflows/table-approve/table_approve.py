@@ -65,6 +65,45 @@ def replace_project_id_publish_sql(configs_path, dataset_id, table_id):
     Path(table_path + "/publish.sql").open("w").write(sql_final)
 
 
+def get_table_dataset_id():
+    # load the change files in PR || diff between PR and master
+    changes = Path("files.json").open("r")
+    changes = json.load(changes)
+
+    # create a dict to save the dataset and source_bucket related to each table_id
+    dataset_table_ids = {}
+
+    # create a list to save the table folder path, for each table changed in the commit
+    table_folders = []
+    for change_file in changes:
+        # get the directory path for a table with changes
+        file_dir = Path(change_file).parent
+
+        # append the table directory if it was not already appended
+        if file_dir not in table_folders:
+            table_folders.append(file_dir)
+
+    # construct the iterable for the table_config paths
+    table_config_paths = [Path(root / "table_config.yaml") for root in table_folders]
+
+    # iterate through each config path
+    for filepath in table_config_paths:
+
+        # check if the table_config.yaml exists in the changed folder
+        if filepath.is_file():
+
+            # load the found table_config.yaml
+            table_config = yaml.load(open(filepath, "r"), Loader=yaml.SafeLoader)
+
+            # add the dataset and source_bucket for each table_id
+            dataset_table_ids[table_config["table_id"]] = {
+                "dataset_id": table_config["dataset_id"],
+                "source_bucket_name": table_config["source_bucket_name"],
+            }
+
+    return dataset_table_ids
+
+
 def sync_bucket(
     source_bucket_name,
     dataset_id,
@@ -111,59 +150,33 @@ def sync_bucket(
     destination_ref = ref.bucket.list_blobs(prefix=prefix)
 
     if len(list(source_ref)) == 0:
-        raise ValueError("No objects found on the source bucket")
+        raise ValueError(
+            f"No objects found on the source bucket {source_bucket_name}.{prefix}"
+        )
 
     if len(list(destination_ref)):
-        tprint("BACKUP OLD DATA")
+        tprint(f"{mode.upper()}: BACKUP OLD DATA")
         ref.copy_table(
             source_bucket_name=destination_bucket_name,
             destination_bucket_name=backup_bucket_name,
         )
 
-        tprint("DELETE OLD DATA")
+        tprint(f"{mode.upper()}: DELETE OLD DATA")
         ref.delete_table(not_found_ok=True)
 
-    tprint("TRANSFER NEW DATA")
+    tprint(f"{mode.upper()}: TRANSFER NEW DATA")
     ref.copy_table(source_bucket_name=source_bucket_name)
 
 
-def get_table_dataset_id():
-    # load the change files in PR || diff between PR and master
-    changes = Path("files.json").open("r")
-    changes = json.load(changes)
-
-    # create a dict to save the dataset and source_bucket related to each table_id
-    dataset_table_ids = {}
-
-    # create a list to save the table folder path, for each table changed in the commit
-    table_folders = []
-    for change_file in changes:
-        # get the directory path for a table with changes
-        file_dir = Path(change_file).parent
-
-        # append the table directory if it was not already appended
-        if file_dir not in table_folders:
-            table_folders.append(file_dir)
-
-    # construct the iterable for the table_config paths
-    table_config_paths = [Path(root / "table_config.yaml") for root in table_folders]
-
-    # iterate through each config path
-    for filepath in table_config_paths:
-
-        # check if the table_config.yaml exists in the changed folder
-        if filepath.is_file():
-
-            # load the found table_config.yaml
-            table_config = yaml.load(open(filepath, "r"), Loader=yaml.SafeLoader)
-
-            # add the dataset and source_bucket for each table_id
-            dataset_table_ids[table_config["table_id"]] = {
-                "dataset_id": table_config["dataset_id"],
-                "source_bucket_name": table_config["source_bucket_name"],
-            }
-
-    return dataset_table_ids
+def save_header_files(dataset_id, table_id):
+    ### save table header in storage
+    query = f"""
+    SELECT * FROM `basedosdados.{dataset_id}.{table_id}` LIMIT 20
+    """
+    df = bd.read_sql(query, billing_project_id="basedosdados", from_file=True)
+    df.to_csv("header.csv", index=False, encoding="utf-8")
+    st = bd.Storage(dataset_id=dataset_id, table_id=table_id)
+    st.upload("header.csv", mode="header", if_exists="replace")
 
 
 def push_table_to_bq(
@@ -222,13 +235,7 @@ def push_table_to_bq(
     Dataset(dataset_id).update("prod")
 
     ### save table header in storage
-    query = f"""
-    SELECT * FROM `basedosdados.{dataset_id}.{table_id}` LIMIT 20
-    """
-    df = bd.read_sql(query, billing_project_id="basedosdados", from_file=True)
-    df.to_csv("header.csv", index=False, encoding="utf-8")
-    st = bd.Storage(dataset_id=dataset_id, table_id=table_id)
-    st.upload("header.csv", mode="header", if_exists="replace")
+    save_header_files(dataset_id, table_id)
 
 
 def pretty_log(dataset_id, table_id, source_bucket_name):
