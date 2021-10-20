@@ -1,7 +1,9 @@
 import csv
 import datetime
 import inspect
+import json
 import textwrap
+from copy import deepcopy
 from io import StringIO
 from pathlib import Path, PosixPath
 
@@ -14,6 +16,9 @@ from basedosdados.upload.base import Base
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
 from basedosdados.upload.metadata import Metadata
+from basedosdados.upload.storage import Storage
+from google.api_core.exceptions import Conflict
+from google.cloud import bigquery
 
 
 class Table(Base):
