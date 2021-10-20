@@ -3,8 +3,8 @@ name: table-approve
 on:
   push:
     branches:
-      - master
-      # - feat/save_table_header
+      # - master
+      - feat/save_table_header
 jobs:
   get-changes:
     runs-on: ubuntu-latest
