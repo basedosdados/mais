@@ -12,10 +12,8 @@ Nessa seção listamos todos os padrões do nosso manual de estilo e diretrizes 
 - [Tipos de variáveis](#tipos-de-variaveis)
 - [Unidades de medida](#unidades-de-medida)
 - [Quais variáveis manter, quais adicionar e quais remover](#quais-variáveis-manter-quais-adicionar-e-quais-remover)
-- [Cobertura temporal](#cobertura-temporal)
 - [Limpando STRINGs](#limpando-strings)
 - [Formatos de valores](#formatos-de-valores)
-- [Particionamento de tabelas](#particionamento-de-tabelas)
 - [Número de bases por _pull request_](#número-de-bases-por-pull-request)
 - [Dicionários](#dicionarios)
 - [Diretórios](#diretorios)
@@ -83,9 +81,6 @@ Nomes de variáveis devem respeitar algumas regras:
 - Só ter o prefixo `id_` quando a variável representar chaves primárias de entidades (que eventualmente teriam uma tabela de diretório).
     - Exemplos que tem: `id_municipio`, `id_uf`, `id_escola`, `id_pessoa`.
     - Exemplos que não tem: `rede`, `localizacao`.
-- Só ter sufixos de entidade quando a entidade da coluna for diferente da entidade da tabela.
-    - Exemplos que tem: numa tabela com entidade `pessoa`, uma coluna sobre PIB municipal se chamaria `pib_municipio`.
-    - Exemplos que não tem: numa tabela com entidade `pessoa`, características da pessoa se chamariam `nome`, `idade`, `sexo`, etc.
 - Lista de **prefixos permitidos**
     - `nome_`, `data_`, `numero_`, `quantidade_`, `proporcao_` (variáveis de porcentagem 0-100%), `taxa_`, `razao_`,  `indice_`, `indicador_`, `tipo_`, `sigla_`, `sequencial_`.
 - Lista de **sufixos comuns**
@@ -135,21 +130,6 @@ Mantemos nossas tabelas parcialmente [normalizadas](https://www.guru99.com/datab
 - Adicionar chaves primárias principais para cada entidade já existente. Exemplo: adicionar `id_municipio` a tabelas que só incluem `id_municipio_tse`.
 - Manter todas as chaves primárias que já vem com a tabela, mas (1) adicionar chaves relevantes (e.g. `sigla_uf`, `id_municipio`) e (2) retirar chaves irrelevantes (e.g. `regiao`).
 
-### Cobertura temporal
-
-Preencher a coluna `cobertura_temporal` na tabela de arquitetura e dicionário segue o seguinte padrão.
-
-- Formato: `data_inicial(unidade_temporal)data_final`
-    - `data_inicial` e `data_final` estão na correspondente unidade temporal.
-        - Exemplo: tabela com unidade `ano` tem cobertura `2005(1)2018`.
-        - Exemplo: tabela com unidade `mes` tem cobertura `2005-08(1)2018-12`.
-        - Exemplo: tabela com unidade `dia` tem cobertura `2005-08-01(1)2018-12-31`.
-- Exceção: deixar `data_inicial` ou `data_final` vazios quando essas forem iguais às da tabela de dados.
-    - Suponha que a cobertura da tabela de dados seja `2005(1)2018`.
-        - Se uma coluna aparece só em 2012 e existe até 2018, preenchemos sua cobertura como `2012(1)`.
-        - Se uma coluna desaparece em 2013, preenchemos sua cobertura como `(1)2013`.
-        - Se uma coluna existe na mesma cobertura temporal da tabela, preenchemos sua cobertura como `(1)`.
-
 ### Limpando STRINGs
 
 - Variáveis categóricas: inicial maiúscula e resto minúsculo, com acentos.
@@ -163,14 +143,6 @@ Preencher a coluna `cobertura_temporal` na tabela de arquitetura e dicionário s
 - Datetime ([ISO-8601](https://en.wikipedia.org/wiki/ISO_8601)): `YYYY-MM-DDTHH:MM:SS.sssZ`
 - Valor nulo: `""` (csv), `NULL` (Python), `NA` (R), `.` ou `""` (Stata)
 - Proporção/porcentagem: entre 0-100
-
-### Particionamento de tabelas
-
-Uma tabela particionada é uma tabela especial dividida em segmentos, chamados de partições, que facilitam o gerenciamento e a consulta de seus dados. Ao dividir uma grande tabela em partições menores, você pode melhorar o desempenho da consulta e pode controlar os custos reduzindo o número de bytes lidos por uma consulta. Por isso, sempre recomendamos que tabelas grandes sejam particionadas. Leia mais a respeito na [documentação da Google Cloud](https://cloud.google.com/bigquery/docs/partitioned-tables).
-
-Note que ao particionar uma tabela é preciso excluir a coluna correspondente. Exemplo: é preciso excluir a coluna `ano` ao particionar por `ano`.
-
-Colunas comuns para usar como partição: `ano`, `mes`, `sigla_uf`, `id_municipio`.
 
 ### Número de bases por _pull request_
 

@@ -718,10 +718,32 @@ def cli_create_metadata(
 
     click.echo(
         click.style(
-            f"Metadata file was created",
+            f"Metadata file was created at `{m.filepath}`",
             fg="green",
         )
     )
+
+
+@cli_metadata.command(
+    name="is_updated", help="Check if user's local metadata is updated"
+)
+@click.argument("dataset_id")
+@click.argument("table_id", required=False)
+@click.pass_context
+def cli_is_updated_metadata(ctx, dataset_id, table_id):
+    m = Metadata(dataset_id, table_id, **ctx.obj)
+
+    if m.is_updated():
+        msg, color = "Local metadata is updated.", "green"
+    else:
+        msg = (
+            "Local metadata is out of date. Please run `basedosdados metadata"
+            " create` with the flag `if_exists=replace` to get the updated da"
+            "ta."
+        )
+        color = "red"
+
+    click.echo(click.style(msg, fg=color))
 
 
 @cli_metadata.command(name="validate", help="Validate user's local metadata")
