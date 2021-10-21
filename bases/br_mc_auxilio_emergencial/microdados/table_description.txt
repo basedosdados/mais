@@ -31,16 +31,13 @@ Nível da Observação (i.e. a granularidade da linha)
 Colunas identificando linhas unicamente
 -------------------
 - mes
-- id_municipio
 - nis_beneficiario
 - cpf_beneficiario
 - nome_beneficiario
-- parcela
 
 Cobertura Temporal
 ------------------
 - 2020
-- 2021
 
 Cobertura Espacial
 ------------------

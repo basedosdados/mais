@@ -54,7 +54,7 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- brasil
+- Brasil
 
 Tratamento
 ----------

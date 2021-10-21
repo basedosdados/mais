@@ -30,7 +30,7 @@ derivatives.
 Allow you to explore and perform operation with Base dos Dados' datasets
 without using SQL language. The \code{\link[=bdplyr]{bdplyr()}} function creates \code{lazy} variables
 that will be connected directly to the desired table from Base dos Dados at
-Google BigQuery and can be handled with the \link[dplyr:dplyr-package]{dplyr::dplyr-package}'s verbs
+Google BigQuery and can be handled with the \link[dplyr:dplyr-package]{dplyr::dplyr-package}´s verbs
 as traditionally done as local bases. See also: \link[bigrquery:src_bigquery]{bigrquery::src_bigquery}.
 
 Therefore, it is possible (without using \code{SQL}) to perform, for example,
@@ -67,6 +67,7 @@ base_sim \%>\%
 
 # use normal `{dplyr}` operations
 municipios \%>\%
+  dplyr::select(dplyr::everything()) \%>\%
   head()
 
 # filter

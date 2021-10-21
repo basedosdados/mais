@@ -1,3 +1,11 @@
+
+#' What happens when the package is loaded
+#' @description `.onLoad` is automatically run when the user runs `library(basedosdados)` for the first time in the session.
+#'
+#'
+#' @import cli
+
+
 .onLoad <- function(libname, pkgname) {
 
 
@@ -42,6 +50,6 @@
     ")
 
   cli::cli_h3(
-    "Usando o pacote para produzir um trabalho? Para nos citar basta rodar citation('basedosdados').")
+    "Está usando o pacote para produzir um trabalho acadêmico? Para nos citar basta rodar citation('basedosdados').")
 
 }

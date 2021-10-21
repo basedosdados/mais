@@ -1,5 +1,5 @@
 
-# Colaborando com dados na BD+
+# Dados na BD+
 
 Nosso objetivo na Base dos Dados Mais (BD+) é criar um repositório de dados **universal** e de **alta qualidade**:
 
@@ -9,10 +9,11 @@ Nosso objetivo na Base dos Dados Mais (BD+) é criar um repositório de dados **
 
 Isso já é um desafio em projetos pequenos, e é ainda mais _em escala_. Por isso, desenvolvemos e seguimos uma série de padrões e procedimentos de controle de qualidade, e criamos uma infraestrutura para facilitar a subida de dados por qualquer pessoa ou instituição (do nosso time de dados ou colaboradores externos).
 
-**Quer subir dados na BD+ e nos ajudar a construir esse repositório?**
-Maravilha! Vamos seguir com os passos abaixo. Ao longo da explicação
-vamos seguir um exemplo já pronto com dados da
-[RAIS](https://basedosdados.org/dataset/br-me-rais).
+# Colaborando com Dados
+
+Quer subir dados na BD+ e nos ajudar a construir esse repositório? Maravilha! Vamos seguir com os passos abaixo.
+
+Ao longo da explicação, vamos sempre seguir um exemplo já pronto com dados da [RAIS](https://basedosdados.org/dataset/br-me-rais).
 
 !!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
 
@@ -27,7 +28,7 @@ vamos seguir um exemplo já pronto com dados da
 7. [Subir arquiteturas, dados e arquivos auxiliares no Google Cloud](#7-subir-arquiteturas-dados-e-arquivos-auxiliares-no-google-cloud).
 8. [Enviar tudo para revisão](#8-enviar-tudo-para-revisao).
 
-## 1. Informe seu interesse para a gente - TODO: MELHORAR!
+## 1. Informe seu interesse para a gente
 
 Mantemos metadados de bases que ainda não estão na BD+ em nossa [tabela de prioridade de bases](https://docs.google.com/spreadsheets/d/1jnmmG4V6Ugh_-lhVSMIVu_EaL05y1dX9Y0YW8G8e_Wo/edit?usp=sharing). Para subir uma base de seu interesse na BD+, adicione os seus metadados de acordo com as colunas da tabela.
 

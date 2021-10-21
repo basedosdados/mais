@@ -1,17 +1,17 @@
-import base64
-import json
-import shutil
-import warnings
-from functools import lru_cache
-from os import getenv
-from pathlib import Path
-
-import tomlkit
-import yaml
-from basedosdados import constants
 from google.cloud import bigquery, storage
 from google.oauth2 import service_account
+import yaml
 from jinja2 import Template
+from pathlib import Path
+import shutil
+import tomlkit
+import warnings
+import json
+import base64
+from os import getenv
+from basedosdados import constants
+
+from functools import lru_cache
 
 warnings.filterwarnings("ignore")
 
@@ -171,10 +171,13 @@ class Base:
             # Create basedosdados files from envs
             with open(config_file, "w", encoding="utf-8") as f:
                 f.write(self._decode_env(constants.ENV_CONFIG.value))
+                f.close()
             with open(credentials_folder / "prod.json", "w", encoding="utf-8") as f:
                 f.write(self._decode_env(constants.ENV_CREDENTIALS_PROD.value))
+                f.close()
             with open(credentials_folder / "staging.json", "w", encoding="utf-8") as f:
                 f.write(self._decode_env(constants.ENV_CREDENTIALS_STAGING.value))
+                f.close()
 
         if (not config_file.exists()) or (force):
 

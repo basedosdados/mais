@@ -1,10 +1,15 @@
-import re
-from functools import partialmethod
-from pathlib import Path
-
-import pandas as pd
+from google.cloud.bigquery import dataset
 import pandas_gbq
+from pathlib import Path
 import pydata_google_auth
+from pydata_google_auth.exceptions import PyDataCredentialsError
+from google.cloud import bigquery
+from google.cloud import bigquery_storage_v1
+from functools import partialmethod
+import re
+import pandas as pd
+from basedosdados.upload.base import Base
+from functools import partialmethod
 from basedosdados.exceptions import (
     BaseDosDadosException,
     BaseDosDadosAccessDeniedException,
@@ -12,11 +17,7 @@ from basedosdados.exceptions import (
     BaseDosDadosInvalidProjectIDException,
     BaseDosDadosNoBillingProjectIDException,
 )
-from basedosdados.upload.base import Base
-from google.cloud import bigquery, bigquery_storage_v1
-from google.cloud.bigquery import dataset
 from pandas_gbq.gbq import GenericGBQException
-from pydata_google_auth.exceptions import PyDataCredentialsError
 
 
 def credentials(from_file=False, reauth=False):

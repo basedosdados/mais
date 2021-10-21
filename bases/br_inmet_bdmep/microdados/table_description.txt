@@ -61,7 +61,7 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- brasil
+- estação meteorológica
 
 Tratamento
 ----------
@@ -71,6 +71,6 @@ Tratamento
 
 Frequencia de Atualização
 -------------------------
-incerto
+recorrente
 
 
