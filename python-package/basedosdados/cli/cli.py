@@ -694,7 +694,7 @@ def cli_metadata():
     help=(
         "Force the creation of `table_config.yaml` file only if `dataset_conf"
         "ig.yaml` doesn't exist."
-    ),
+    )
 )
 @click.pass_context
 def cli_create_metadata(

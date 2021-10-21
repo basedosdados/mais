@@ -168,9 +168,7 @@ class Table(Base):
         # sort columns by is_partition, partitions_columns come first
         if self._is_partitioned():
             columns = sorted(
-                self.table_config["columns"],
-                key=lambda k: k["is_partition"],
-                reverse=True,
+                self.table_config["columns"], key=lambda k: k["is_partition"], reverse=True
             )
         else:
             columns = self.table_config["columns"]
