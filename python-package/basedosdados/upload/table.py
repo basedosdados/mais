@@ -1,7 +1,10 @@
 import csv
 import datetime
-import inspect
 import textwrap
+import inspect
+
+import ruamel.yaml as ryaml
+import requests
 from io import StringIO
 from pathlib import Path, PosixPath
 
@@ -14,6 +17,7 @@ from basedosdados.upload.base import Base
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
 from basedosdados.upload.metadata import Metadata
+from basedosdados.exceptions import BaseDosDadosException
 
 
 class Table(Base):

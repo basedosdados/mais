@@ -6,9 +6,9 @@ import pandas as pd
 import pandas_gbq
 import pydata_google_auth
 from basedosdados.exceptions import (
+    BaseDosDadosException,
     BaseDosDadosAccessDeniedException,
     BaseDosDadosAuthorizationException,
-    BaseDosDadosException,
     BaseDosDadosInvalidProjectIDException,
     BaseDosDadosNoBillingProjectIDException,
 )

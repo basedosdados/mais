@@ -1,10 +1,12 @@
-import shutil
-from pathlib import Path
-
 import pytest
 import ruamel.yaml as ryaml
+
+from pathlib import Path
+import shutil
+
 from basedosdados import Metadata
 from basedosdados.exceptions import BaseDosDadosException
+
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"

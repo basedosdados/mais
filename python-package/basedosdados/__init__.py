@@ -2,9 +2,15 @@ import os
 import sys
 
 from basedosdados.constants import constants
+import sys
+import os
 
 sys.path.append(os.getcwd() + "/python-package")
 
+from basedosdados.upload.dataset import Dataset
+from basedosdados.upload.storage import Storage
+from basedosdados.upload.table import Table
+from basedosdados.upload.metadata import Metadata
 from basedosdados.download.download import (
     download,
     get_dataset_description,
@@ -17,7 +23,6 @@ from basedosdados.download.download import (
     read_table,
 )
 from basedosdados.upload.dataset import Dataset
-from basedosdados.upload.metadata import Metadata
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.table import Table
 

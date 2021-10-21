@@ -3,11 +3,11 @@ import time
 
 import basedosdados as bd
 import click
-from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.base import Base
 from basedosdados.upload.dataset import Dataset
-from basedosdados.upload.metadata import Metadata
 from basedosdados.upload.storage import Storage
+from basedosdados.upload.metadata import Metadata
+from basedosdados.exceptions import BaseDosDadosException
 from ckanapi import CKANAPIError
 
 

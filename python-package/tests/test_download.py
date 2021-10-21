@@ -17,8 +17,8 @@ from basedosdados import (
 )
 from basedosdados.exceptions import (
     BaseDosDadosException,
-    BaseDosDadosInvalidProjectIDException,
     BaseDosDadosNoBillingProjectIDException,
+    BaseDosDadosInvalidProjectIDException,
 )
 from pandas_gbq.gbq import GenericGBQException
 
