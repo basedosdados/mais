@@ -14,12 +14,21 @@ from ruamel.yaml.compat import ordereddict
 
 
 class Metadata(Base):
+    """
+    Manage metadata in CKAN backend.
+    """
+
     def __init__(self, dataset_id, table_id=None, **kwargs):
         super().__init__(**kwargs)
-        self.kwargs = kwargs
 
         self.table_id = table_id
         self.dataset_id = dataset_id
+
+        if self.table_id:
+            self.dataset_metadata_obj = Metadata(
+                self.dataset_id,
+                **kwargs
+            )
 
         url = "https://basedosdados.org"
         self.CKAN_API_KEY = self.config.get("ckan", {}).get("api_key")
@@ -71,6 +80,37 @@ class Metadata(Base):
                     return dataset, resource
 
         return dataset, {}
+    
+    @property
+    def owner_org(self):
+        """
+        Build `owner_org` field for each use case: table, dataset, new
+        or existing.
+        """
+
+        # in case `self` refers to a CKAN table's metadata
+        if self.table_id and self.exists_in_ckan():
+            return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
+        
+        # in case `self` refers to a new table's metadata
+        elif self.table_id and not self.exists_in_ckan():
+            if self.dataset_metadata_obj.exists_in_ckan():
+                return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
+            else:
+                # mock `owner_org` for validation
+                return "3626e93d-165f-42b8-bde1-2e0972079694"
+
+        # for datasets, `owner_org` must come from the YAML file
+        organization_id = "".join(self.local_metadata.get("organization") or [])
+        url = f"{self.CKAN_URL}/api/3/action/organization_show?id={organization_id}"
+        response = requests.get(url).json()
+
+        if not response.get("success"):
+            raise BaseDosDadosException("Organization not found")
+        
+        owner_org = response.get("result", {}).get("id")
+
+        return owner_org
 
     @property
     def ckan_data_dict(self) -> dict:
@@ -84,8 +124,7 @@ class Metadata(Base):
             "type": ckan_dataset.get("type") or "dataset",
             "title": self.local_metadata.get("title"),
             "private": ckan_dataset.get("private") or False,
-            "owner_org": ckan_dataset.get("owner_org")
-            or "3626e93d-165f-42b8-bde1-2e0972079694",
+            "owner_org": self.owner_org,
             "resources": ckan_dataset.get("resources", []) \
                 or [{"resource_type": "external_link", "name": ""}],
             "groups": [
@@ -261,12 +300,11 @@ class Metadata(Base):
                 ruamel.indent(mapping=4, sequence=6, offset=4)
                 ruamel.dump(yaml_obj, file)
             
+            # if `dataset_config.yaml` doesn't exist but user wants to create
+            # it alongside `table_config.yaml`
             dataset_config_exists = (self.metadata_path / 'dataset_config.yaml').exists()
             if self.table_id and not table_only and not dataset_config_exists:
-                Metadata(
-                    self.dataset_id,
-                    **self.kwargs
-                    ).create(if_exists=if_exists)
+                self.dataset_metadata_obj.create(if_exists=if_exists)
 
         return self
 
@@ -398,7 +436,7 @@ def handle_data(k, schema, data, local_default=None):
 
 
 def handle_complex_fields(yaml_obj, k, properties, definitions, data):
-    """"""
+    """Parse complex fields and send each part of them to `handle_data`."""
 
     yaml_obj[k] = ryaml.CommentedMap()
 

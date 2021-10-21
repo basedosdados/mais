@@ -67,27 +67,6 @@ class Dataset(Base):
 
         with open(readme_path, "w") as readmefile:
             readmefile.write(readme_content)
-    
-    def _build_dataset_description(self):
-        
-        metadata = self.metadata.local_metadata
-        description = (
-            f"""{metadata.get('description')}
-
-            Para saber mais acesse:
-            Website: {metadata.get('url_ckan')}
-            Github: https://github.com/basedosdados/mais/
-
-            Ajude a manter o projeto :)
-            Apoia-se: https://apoia.se/basedosdados
-
-            Instituição (Quem mantém os dados oficiais?)
-            -----------
-            Nome: {metadata.get('organization')}
-            """
-        )
-        
-        return description
 
     def init(self, replace=False):
         """Initialize dataset folder at metadata_path at `metadata_path/<dataset_id>`.
