@@ -219,6 +219,10 @@ class Metadata(Base):
     def exists_in_ckan(self) -> bool:
         """Check if Metadata object refers to an existing CKAN package or reso
         urce.
+
+        Returns:
+            bool: The existence condition of the metadata in CKAN. `True` if i
+            t exists, `False` otherwise.
         """
 
         if self.table_id:
@@ -233,7 +237,13 @@ class Metadata(Base):
         return exists_in_ckan
 
     def is_updated(self) -> bool:
-        """Check if a dataset or table is updated"""
+        """Check if a dataset or table is updated
+        
+        Returns:
+            bool: The update condition of local metadata. `True` if it corresp
+            onds to the most recent version of the given table or dataset's me
+            tadata in CKAN, `False` otherwise.
+        """
 
         if not self.local_metadata.get("metadata_modified"):
             return True if not self.exists_in_ckan() else False
@@ -260,10 +270,25 @@ class Metadata(Base):
             columns (list): Optional.
                 A `list` with the table columns' names.
             partition_columns(list): Optional.
-                A `list` with the name of the table columns that partition the data.
+                A `list` with the name of the table columns that partition the
+                 data.
             force_columns (bool): Optional.
-                If set to `True`, overwrite CKAN's columns with the ones provided.
-                If set to `False`, keep CKAN's columns instead of the ones provided.
+                If set to `True`, overwrite CKAN's columns with the ones provi
+                ded.
+                If set to `False`, keep CKAN's columns instead of the ones pro
+                vided.
+            table_only (bool): Optional. If set to `True`, only `table_config.
+                yaml` is created, even if there is no `dataset_config.yaml` fo
+                r the correspondent dataset metadata. If set to `False`, both 
+                files are created if `dataset_config.yaml` doesn't exist yet. 
+                Defaults to `True`.
+
+        Returns:
+            Metadata: An instance of the `Metadata` class.
+        
+        Raises:
+            FileExistsError: If the correspodent YAML configuration file alrea
+            dy exists and `if_exists` is set to `"raise"`.
         """
 
         if self.filepath.exists() and if_exists == "raise":
@@ -412,7 +437,18 @@ class Metadata(Base):
 
 
 def handle_data(k, schema, data, local_default=None):
-    """"""
+    """Parse API's response data so that it is used in the YAML configuration 
+    files.
+    
+    Args:
+        k (str): a key of the CKAN API's response metadata dictionary.
+        data (dict): a dictionary of metadata generated from the API.
+        local_default (Any): the default value of the given key in ca
+            se its value is set to `None` in CKAN.
+
+    Returns:
+        list: a list of metadata values
+    """
 
     # If no data is found for that key, uses local default
     selected = data.get(k, local_default)
@@ -436,7 +472,21 @@ def handle_data(k, schema, data, local_default=None):
 
 
 def handle_complex_fields(yaml_obj, k, properties, definitions, data):
-    """Parse complex fields and send each part of them to `handle_data`."""
+    """Parse complex fields and send each part of them to `handle_data`.
+    
+    Args:
+        yaml_obj (ruamel.yaml.CommentedMap): A YAML object with complex fields
+            .
+        k (str): The name of the key of the complex field.
+        properties (dict): A dictionary that contains the description of the c
+            omplex field.
+        definitions (dict): A dictionary with the schemas of the each component
+            of the complex field.
+        data (dict): A dictionary with the metadata of the complex field.
+
+    Returns:
+        CommentedMap: A YAML object augmented with the complex field.
+    """
 
     yaml_obj[k] = ryaml.CommentedMap()
 
@@ -462,7 +512,18 @@ def add_yaml_property(
     goal=None,
     has_column=False,
 ):
-    """Recursivelly adds properties to yaml to maintain order"""
+    """Recursivelly adds properties to yaml to maintain order.
+    
+    Args:
+        yaml (CommentedMap): A YAML object with complex fields.
+        properties (dict): A dictionary that contains the description of the c
+            omplex field.
+        definitions (dict): A dictionary with the schemas of each complex fiel
+            d.
+        metadata (dict): A dictionary with the metadata to fill the YAML.
+        goal (str): The next key to be added to the YAML.
+        has_column (bool): If the goal is a column, no comments are written.
+    """
 
     # Looks for the key
     # If goal is none has to look for id_before == None
@@ -526,7 +587,22 @@ def build_yaml_object(
     columns_schema: dict = dict(),
     partition_columns: list = list(),
 ):
-    """Build a dataset_config.yaml or table_config.yaml"""
+    """Build a dataset_config.yaml or table_config.yaml
+    
+    Args:
+        dataset_id (str): The dataset id.
+        table_id (str): The table id.
+        config (dict): A dict with the `basedosdados` client configurations.
+        schema (dict): A dict with the JSON Schema of the dataset or table.
+        metadata (dict): A dict with the metadata of the dataset or table.
+        columns_schema (dict): A dict with the JSON Schema of the columns of
+            the table.
+        partition_columns (list): A list with the partition columns of the
+            table.
+    
+    Returns:
+        CommentedMap: A YAML object with the dataset or table metadata.
+    """
 
     properties: dict = schema["properties"]
     definitions: dict = schema["definitions"]
