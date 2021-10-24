@@ -28,7 +28,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - estabelecimento
-- mês
+- mes
 
 Colunas identificando linhas unicamente
 -------------------
