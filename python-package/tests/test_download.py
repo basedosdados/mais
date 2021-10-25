@@ -149,7 +149,7 @@ def test_read_sql_inexistent_dataset():
 
     with pytest.raises(GenericGBQException) as excinfo:
         read_sql(
-            query="select * from `basedosdados.br_ibge_inexistent.municipio` limit 10",
+            query="select * from `basedosdados-dev.br_ibge_inexistent.municipio` limit 10",
             billing_project_id=TEST_PROJECT_ID,
             from_file=True,
         )
