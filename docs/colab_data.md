@@ -1,5 +1,5 @@
 
-# Colaborando com dados na BD+
+# Dados na BD+
 
 Nosso objetivo na Base dos Dados Mais (BD+) é criar um repositório de dados **universal** e de **alta qualidade**:
 
@@ -9,10 +9,11 @@ Nosso objetivo na Base dos Dados Mais (BD+) é criar um repositório de dados **
 
 Isso já é um desafio em projetos pequenos, e é ainda mais _em escala_. Por isso, desenvolvemos e seguimos uma série de padrões e procedimentos de controle de qualidade, e criamos uma infraestrutura para facilitar a subida de dados por qualquer pessoa ou instituição (do nosso time de dados ou colaboradores externos).
 
-**Quer subir dados na BD+ e nos ajudar a construir esse repositório?**
-Maravilha! Vamos seguir com os passos abaixo. Ao longo da explicação
-vamos seguir um exemplo já pronto com dados da
-[RAIS](https://basedosdados.org/dataset/br-me-rais).
+# Colaborando com Dados
+
+Quer subir dados na BD+ e nos ajudar a construir esse repositório? Maravilha! Vamos seguir com os passos abaixo.
+
+Ao longo da explicação, vamos sempre seguir um exemplo já pronto com dados da [RAIS](https://basedosdados.org/dataset/br-me-rais).
 
 !!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
 
@@ -125,7 +126,7 @@ No exemplo da RAIS nós criamos um dicionário completo [aqui](https://docs.goog
 
 ## 7. Subir arquiteturas, dados e arquivos auxiliares no Google Cloud
 
-Tudo pronto! Agora só falta subir as coisas para o Google Cloud e depois enviar para revisão.
+Tudo pronto! Agora só falta subir as coisas para o Google Cloud, para o CKAN e depois enviar para revisão.
 
 Desenvolvemos um cliente `basedosdados` (disponível para linha de comando e Python por enquanto) para facilitar esse processo e indicar configurações básicas que devem ser preenchidas sobre os dados.
 
@@ -184,7 +185,27 @@ Consulte também nossa [API](/mais/reference_api_cli) para mais detalhes de cada
 
 É sempre bom abrir o console do BigQuery e rodar algumas _queries_ para testar se foi tudo publicado corretamente. Estamos desenvolvendo testes automáticos para facilitar esse processo no futuro.
 
-## 8. Enviar tudo para revisão
+## 8. Validar e publicar metadados no website `basedosdados.org`
+
+Para publicar os metadados preenchidos nos arquivos `dataset_config,yaml` e `table_config.yaml`, o processo é simples.
+
+Em primeiro lugar, é preciso colocar suas credenciais do CKAN no arquivo `~/.basedosdados/config.toml`, criado ao rodar o comando de configuração do cliente `basedosdados` descrito na [seção 7](#7-subir-arquiteturas-dados-e-arquivos-auxiliares-no-google-cloud). Para isso, basta preencher os campos `api_key` e `url` da seção `[ckan]` do arquivo.
+
+Em seguida, é preferencial validar os metadados a partir da API do website. Para validar metadados de bases, isso é feito através do comando `basedosdados metadata validate [DATASET_ID]`. Para validar metadados de tableas, basta rodar `basedosdados metadata validate [DATASET_ID] [TABLE_ID]`.
+
+Por fim, para publicar esses metadados já preenchidos e validados, basta rodar `basedosdados metadata publish [DATASET_ID]` para bases e/ou `basedosdados metadata publish [DATASET_ID] [TABLE_ID]` para tabelas.
+
+#### Atualizando metadados de bases ou tabelas já existentes
+
+Através do módulo `metadata` é possível também trabalhar com bases e tabelas já existentes no CKAN. Elas podem ser atualizadas a partir do procedimento que descrevemos a seguir.
+
+Primeiro, rodamos `basedosdados metadata create [DATASET_ID]` para trazer os metadados disponíveis do CKAN na forma do `dataset_config.yaml`, que, dessa vez, virá já preenchido. Fazemos o mesmo para gerar o `table_config.yaml` das tabelas que quisermos atualizar: `basedosdados metadata create [DATASET_ID] [TABLE_ID]`. Em seguida, preenchemos os novos valores dos metadados.
+
+Ao terminar o processo, para ter certeza que estamos trabalhando em cima de metadados atualizados, podemos rodar o seguinte comando: `basedosdados is_updated [DATASET_ID]` e/ou `basedosdados is_updated [DATASET_ID] [TABLE_ID]`.
+
+Por fim, basta rodar, mais uma vez, o `basedosdados metadata validate [DATASET_ID]` e/ou o `basedosdados metadata validate [DATASET_ID] [TABLE_ID]` e, em seguida, `basedosdados metadata publish [DATASET_ID]` e/ou `basedosdados metadata publish [DATASET_ID] [TABLE_ID]`.
+
+## 9. Enviar tudo para revisão
 
 Ufa, é isso! Agora só resta enviar tudo para revisão no [repositório](https://github.com/basedosdados/mais) da Base dos Dados.
 

@@ -23,4 +23,4 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(populacao AS INT64) populacao
-FROM basedosdados-dev.br_ibge_populacao_staging.uf AS t
+FROM basedosdados-dev.br_ibge_populacao_staging.uf as t

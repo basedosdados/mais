@@ -4,11 +4,7 @@
 \alias{bd_collect}
 \title{Collects the results of a remote table called via \code{bdplyr()}}
 \usage{
-bd_collect(
-  .lazy_tbl,
-  billing_project_id = basedosdados::get_billing_id(),
-  show_query = FALSE
-)
+bd_collect(.lazy_tbl, billing_project_id = basedosdados::get_billing_id())
 }
 \arguments{
 \item{.lazy_tbl}{A variable that contains a database that was previously
@@ -17,9 +13,6 @@ after performing the desired operations with the \code{{dplyr}} verbs.}
 
 \item{billing_project_id}{a string containing your billing project id.
 If you've run \code{\link[=set_billing_id]{set_billing_id()}} then feel free to leave this empty.}
-
-\item{show_query}{If TRUE will show the SQL query calling \code{\link[dplyr:explain]{dplyr::show_query()}}.
-Is useful for diagnosing performance problems.}
 }
 \value{
 A tibble.
@@ -27,7 +20,7 @@ A tibble.
 \description{
 After \code{\link[=bdplyr]{bdplyr()}} is used to create the remote connection, this function
 allows you to collect the result of the manipulations carried out with
-the {dplyr}'s verbs and thus use it in local memory completely.
+the {dplyr}´s verbs and thus use it in local memory completely.
 
 Alternatively, you can also save to disk directly using \code{\link[=bd_write]{bd_write()}}
 function or its derivatives: \code{\link[=bd_write_csv]{bd_write_csv()}} or \code{\link[=bd_write_rds]{bd_write_rds()}}.

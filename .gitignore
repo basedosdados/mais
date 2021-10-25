@@ -17,6 +17,7 @@ notebooks
 data
 secrets
 .ipynb*
+*.csv
 docs/site
 TODO
 
@@ -174,3 +175,6 @@ r-package/.Rhistory
 # Datasets
 !bases/br_bd_diretorios_data_tempo/data
 .Rproj.user
+
+# sample data for pytest
+!python-package/tests/sample_data/table/municipio.csv

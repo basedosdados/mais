@@ -19,7 +19,7 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_anatel_banda_larga_fixa.microdados AS
+CREATE VIEW input-dados.br_anatel_banda_larga_fixa.microdados AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
@@ -32,4 +32,4 @@ SAFE_CAST(tecnologia AS STRING) tecnologia,
 SAFE_CAST(transmissao AS STRING) transmissao,
 SAFE_CAST(velocidade AS STRING) velocidade,
 SAFE_CAST(acessos AS INT64) acessos
-FROM basedosdados-dev.br_anatel_banda_larga_fixa_staging.microdados AS t
+from input-dados.br_anatel_banda_larga_fixa_staging.microdados as t

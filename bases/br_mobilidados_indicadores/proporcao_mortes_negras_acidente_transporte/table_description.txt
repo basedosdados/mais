@@ -13,24 +13,21 @@ Publicado por
 Nome: Crislane A. Souza
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores/code
 Website: https://github.com/crislanealves
-Email: crislanealves@basedosdados.orgTratado por
+Email: crislanealves@protonmail.comTratado por
 -----------
 Nome: Crislane A. Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores/code
 Website: https://github.com/crislanealves
-Email: crislanealves@basedosdados.org
+Email: crislanealves@protonmail.com
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
 - ano
-- indicador
 
 Colunas identificando linhas unicamente
 -------------------
 - id_municipio
 - ano
-- indicador
 
 Cobertura Temporal
 ------------------
@@ -60,9 +57,8 @@ Cobertura Espacial
 
 Tratamento
 ----------
-- Transforma do formato wide para long.
-- Adicionar a coluna ano. 
-- Padroniza id_municipio de 6 para 7 dígitos.
+- Excluir linhas duplicadas; e,
+- Padronização da coluna 'ID Municipio' para 7 dígitos.
 
 Frequencia de Atualização
 -------------------------

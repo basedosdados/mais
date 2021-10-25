@@ -1,4 +1,4 @@
-Percentual de população residente em até 300 metros da infraestrutura cicloviária (ciclovias, ciclofaixas e ciclorrotas).
+Percentual de população residente em até 300 metros da infraestrutura cicloviária (ciclovias, ciclofaixas e ciclorrotas) em 2019.
 
 
 Para saber mais acesse:
@@ -13,28 +13,29 @@ Publicado por
 Nome: Crislane A. Souza
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores/code
 Website: https://github.com/crislanealves
-Email: crislanealves@basedosdados.orgTratado por
+Email: crislanealves@protonmail.comTratado por
 -----------
 Nome: Crislane A. Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores/code
 Website: https://github.com/crislanealves
-Email: crislanealves@basedosdados.org
+Email: crislanealves@protonmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- None
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
 - municipio
 - ano
-- indicador
 
 Colunas identificando linhas unicamente
 -------------------
 - id_municipio
-- indicador
+- ano
 
 Cobertura Temporal
 ------------------
 - 2019
-- 2021
 
 Cobertura Espacial
 ------------------
@@ -42,8 +43,8 @@ Cobertura Espacial
 
 Tratamento
 ----------
-- Proporção 0-100; e,
-- Altero o formato de wide para long.
+- Criação da coluna 'Ano'; e,
+- Proporção 0-100.
 
 Frequencia de Atualização
 -------------------------

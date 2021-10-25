@@ -7,7 +7,6 @@
 # -------------------------------------
 
 
-import csv
 import json
 import os
 from pathlib import Path
@@ -24,10 +23,8 @@ from jinja2 import Template
 def omit_hints(data):
     """Set values encapsulated with <> to None in a dict"""
     if isinstance(data, str):
-        if len(data) >= 2:
-            hidden = f"{data[0]}{data[-1]}" != "<>"
-            return data.strip() if hidden else None
-        return data.strip()
+        hidden = f"{data[0]}{data[-1]}" != "<>"
+        return data if hidden else None
     elif isinstance(data, list):
         lst = list(filter(omit_hints, data))
         return lst if lst else None
@@ -40,44 +37,15 @@ def omit_hints(data):
 
 def get_table_configs():
     """Load table_config.yaml files"""
-    with open("files.json", "r") as file:
-        files = json.load(file)
+    files = open("files.json", "r")
+    files = json.load(files)
 
     folders = [Path(file).parent for file in files]
 
     files = [folder / "table_config.yaml" for folder in folders]
     files = [file for file in files if file.exists()]
-    files = list(set(files))
 
     return files
-
-
-def filter_table_configs(config_paths: list[Path], skipfile: Path) -> list[Path]:
-    """Filter table_config.yaml files not in DATA_CHECK_SKIP.csv"""
-    with open(skipfile, "r") as file:
-        reader = csv.reader(file)
-        datasets = [row[0] for row in reader if len(row) > 0]
-
-    is_banned = lambda x: x.parent.parent.name not in datasets
-
-    config_paths = filter(is_banned, config_paths)
-    config_paths = list(config_paths)
-
-    return config_paths
-
-
-def pytest_addoption(parser):
-    parser.addoption(
-        "--skipfile",
-        action="store",
-        default="",
-        help="csv filepath with datasets to ignore",
-    )
-
-
-def pytest_configure(config):
-    global _options
-    _options = config.option
 
 
 def pytest_sessionstart(session):
@@ -85,35 +53,26 @@ def pytest_sessionstart(session):
     global _configs
 
     # set filepaths for checks and configs
-    # change this line to "checks.yaml" for local debugging
-    check_path = "./.github/workflows/data-check/checks.yaml"
-    # replace this line with a list of table_config.yaml paths for local debugging
-    config_paths = get_table_configs()
+    check_path = "./.github/workflows/data-check/checks.yaml"  # change this line to "checks.yaml" for local debugging
+    config_paths = (
+        get_table_configs()
+    )  # replace this line with a list of table_config.yaml paths for local debugging
 
-    # filter datasets if skipfile is activated
-    if _options.skipfile:
-        skipfile = Path(_options.skipfile)
-        config_paths = filter_table_configs(config_paths, skipfile)
-
-    # exit if it has no fixtures
+    # exit if has no fixtures
     if not config_paths:
         pytest.exit("No fixtures found", 0)
 
     # load checks with jinja2 placeholders
-    # and replace the project variable by the
-    # production environment if it's table approve action
-    with open(check_path, "r", encoding="utf-8") as file:
-        skeleton = file.read()
-        if os.environ.get("IS_PROD_ENV", False):
-            skeleton = skeleton.replace("{{ project_id }}", "basedosdados")
-        else:
-            skeleton = skeleton.replace("{{ project_id }}", "{{ project_id_prod }}")
-        checks = Template(skeleton)
+    # and replace {{ project_id }} by the appropriate environment
+    with Path(check_path).open("r", encoding="utf-8") as file:
+        env = os.environ.get("BQ_ENVIRONMENT")
+        text = file.read().replace("{{ project_id }}", env)
+        checks = Template(text)
 
     # load checks with configs from table_config.yaml
     _configs = []
     for cpath in config_paths:
-        with open(cpath, "r") as file:
+        with Path(cpath).open("r") as file:
             # load configs, a.k.a. table_config.yaml
             config = yaml.safe_load(file)
             config = omit_hints(config)
@@ -126,8 +85,8 @@ def pytest_sessionstart(session):
             _configs.append(config)
 
     # create empty json report
-    with open("./report.json", "w") as file:
-        file.write("{}")
+    with Path("./report.json").open("w") as file:
+        file.write("[]")
 
 
 # -------------------------------------
@@ -152,15 +111,11 @@ def pytest_runtest_makereport(item, call):
     res = outcome.get_result()
 
     if res.when == "call":
-        with open("./report.json", "r") as file:
-            config_id = item.funcargs["configs"]
-            config_id = config_id[item.originalname]
-            config_id = config_id["id"]
-
-            data = json.load(file)
-            data[config_id]["passed"] = not res.failed
-        with open("./report.json", "w") as file:
-            json.dump(data, file)
+        with Path("./report.json").open("r+") as file:
+            config = json.load(file)
+            config[-1]["passed"] = not res.failed
+            file.seek(0)
+            json.dump(config, file)
 
 
 # -------------------------------------
@@ -170,28 +125,25 @@ def pytest_runtest_makereport(item, call):
 
 def pytest_sessionfinish(session, exitstatus):
     """Report overall test status in markdown"""
-    with open("./report.json", "r") as file:
+    with Path("./report.json").open("r") as file:
         data = json.load(file)
-        data = [v for _, v in data.items()]
         data = sorted(data, key=lambda x: x["id"])
         n = [datum["id"].split("/")[-1] for datum in data]
         n = max(int(ni) for ni in n)
 
-    with open("./report.md", "w") as file:
+    with Path("./report.md").open("w") as file:
         file.write("Data Check Report\n---\n\n")
 
         for datum in data:
             if int(datum["id"].split("/")[-1]) == 0:
                 file.write(f" Table `{datum['id'][:-2]}`  \n\n")
-
             if datum["passed"]:
                 file.write(f"✔️ {datum['name']}  \n\n")
             else:
                 file.write(f"❌ {datum['name']}  \n\n")
-
-            file.write(f"```sql  \n")
-            file.write(f"{datum['query']}")
-            file.write(f"```  \n\n")
+                file.write(f"```sql  \n")
+                file.write(f"{datum['query']}")
+                file.write(f"```  \n\n")
 
             if int(datum["id"].split("/")[-1]) == n:
                 file.write("---\n\n")
@@ -199,5 +151,5 @@ def pytest_sessionfinish(session, exitstatus):
 
 # -------------------------------------
 # Reference
-# https://docs.pytest.org/en/6.2.x/contents.html
+# https://docs.pytest.org/en/6.2.x/example/simple.html#post-process-test-reports-failures
 # -------------------------------------

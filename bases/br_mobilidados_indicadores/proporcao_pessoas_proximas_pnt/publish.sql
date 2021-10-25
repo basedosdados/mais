@@ -21,9 +21,8 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_mobilidados_indicadores.proporcao_pessoas_proximas_pnt AS
 SELECT 
-SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(indicador AS STRING) indicador,
+SAFE_CAST(id_municipio AS INT64) id_municipio,
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(prop_pessoas_proximas_pnt AS FLOAT64) prop_pessoas_proximas_pnt
 from basedosdados-dev.br_mobilidados_indicadores_staging.proporcao_pessoas_proximas_pnt as t

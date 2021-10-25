@@ -13,12 +13,6 @@ foreach ano of numlist 1996(2)2020 {
 }
 *
 
-/* analisando se há perda de informação ao deletar linhas com turno==2. Resposta: não.
-bys ano tipo_eleicao sigla_uf id_municipio_tse numero cargo: egen aux = max(turno)
-keep if aux == 2 & ano == 2020
-drop turno resultado
-duplicates drop */
-
 drop if turno == 2
 drop if ano == .
 drop turno resultado
@@ -150,6 +144,7 @@ foreach ano of numlist 1990 1994(2)2020 {
 // resultados municipio-zona
 //-------------------------------------------------//
 
+
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 0
@@ -229,9 +224,9 @@ foreach ano of numlist 1994(2)2020 {
 	
 	ren numero numero_candidato
 	
-	drop nome_candidato nome_urna_candidato coligacao composicao
+	drop nome_candidato nome_urna_candidato sequencial_candidato coligacao composicao
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado votos
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo sigla_partido numero_candidato id_candidato_bd votos resultado
 	
 	order `vars'
 	sort  `vars'
@@ -307,7 +302,7 @@ foreach ano of numlist 1994(2)2020 {
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 0
-keep id_candidato_bd ano tipo_eleicao sigla_uf id_municipio_tse cargo sequencial numero sigla_partido
+keep id_candidato_bd ano tipo_eleicao sigla_uf id_municipio_tse cargo numero sigla_partido
 
 tempfile candidatos_mod0
 save `candidatos_mod0'
@@ -315,7 +310,7 @@ save `candidatos_mod0'
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 2 & cargo != "presidente"
-keep id_candidato_bd ano tipo_eleicao sigla_uf cargo sequencial numero sigla_partido
+keep id_candidato_bd ano tipo_eleicao sigla_uf cargo numero sigla_partido
 
 tempfile candidatos_mod2_estadual
 save `candidatos_mod2_estadual'
@@ -323,7 +318,7 @@ save `candidatos_mod2_estadual'
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 2 & cargo == "presidente"
-keep id_candidato_bd ano tipo_eleicao cargo sequencial numero sigla_partido
+keep id_candidato_bd ano tipo_eleicao cargo numero sigla_partido
 
 tempfile candidatos_mod2_presid
 save `candidatos_mod2_presid'
@@ -381,10 +376,9 @@ foreach ano of numlist 1994(2)2020 {
 	}
 	*
 	
-	ren sequencial	sequencial_candidato
-	ren numero		numero_candidato
+	ren numero numero_candidato
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo sigla_partido numero_candidato sequencial_candidato id_candidato_bd votos
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo sigla_partido numero_candidato id_candidato_bd votos
 	
 	order `vars'
 	sort  `vars'
@@ -633,31 +627,32 @@ foreach ano in `anos' {
 //-------------------------------------------------//
 
 !mkdir "output/filiacao_partidaria"
-!mkdir "output/filiacao_partidaria/microdados"
 
-local ufs AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RO RR RS SC SE SP TO ZZ
-foreach uf in `ufs' {
+use "output/filiacao_partidaria.dta", clear
+
+levelsof sigla_uf, l(estados)
+foreach estado in `estados' {
+	levelsof sigla_partido if sigla_uf == "`estado'", l(partidos_`estado')
+}
+*
+
+foreach estado in `estados' {
 	
-	!mkdir "output/filiacao_partidaria/microdados/sigla_uf=`uf'"
+	!mkdir "output/filiacao_partidaria/sigla_uf=`estado'"
 	
-	use "output/filiacao_partidaria.dta" if sigla_uf == "`uf'", clear
-	
-	levelsof sigla_partido, l(partidos)
-	foreach partido in `partidos' {
+	foreach partido in `partidos_`estado'' {
 		
-		!mkdir "output/filiacao_partidaria/microdados/sigla_uf=`uf'/sigla_partido=`partido'"
+		!mkdir "output/filiacao_partidaria/sigla_uf=`estado'/sigla_partido=`partido'"
 		
-		preserve
-			
-			keep if sigla_partido == "`partido'"
-			drop sigla_uf sigla_partido
-			export delimited "output/filiacao_partidaria/microdados/sigla_uf=`uf'/sigla_partido=`partido'/microdados.csv", replace
-			
-		restore
-	
+		use "output/filiacao_partidaria.dta", clear
+		keep if sigla_uf == "`estado'" & sigla_partido == "`partido'"
+		drop sigla_uf sigla_partido
+		export delimited "output/filiacao_partidaria/sigla_uf=`estado'/sigla_partido=`partido'/filiacao_partidaria.csv", replace
+		
 	}
 }
 *
+
 
 //-------------------------------------------------//
 // bens - candidato
@@ -821,7 +816,7 @@ foreach ano of numlist 2002(2)2020 {
 	ren numero numero_candidato
 	
 	order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
-		numero_candidato cpf_candidato cnpj_candidato titulo_eleitor_candidato sequencial_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido nome_partido sigla_partido cargo ///
+		id_candidato_bd sequencial_candidato numero_candidato cpf_candidato cnpj_candidato titulo_eleitor_candidato nome_candidato cpf_vice_suplente numero_partido nome_partido sigla_partido cargo ///
 		sequencial_receita data_receita fonte_receita origem_receita natureza_receita especie_receita situacao_receita descricao_receita valor_receita ///
 		sequencial_candidato_doador cpf_cnpj_doador sigla_uf_doador id_municipio_tse_doador nome_doador nome_doador_rf cargo_candidato_doador numero_partido_doador sigla_partido_doador nome_partido_doador esfera_partidaria_doador numero_candidato_doador cnae_2_doador descricao_cnae_2_doador ///
 		cpf_cnpj_doador_orig nome_doador_orig nome_doador_orig_rf tipo_doador_orig descricao_cnae_2_doador_orig ///
@@ -959,7 +954,7 @@ foreach ano of numlist 2016 2020 { // 2002(2)2020 {
 	ren numero numero_candidato
 	
 	order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
-		numero_candidato cpf_candidato sequencial_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
+		id_candidato_bd sequencial_candidato numero_candidato cpf_candidato nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
 		sequencial_despesa data_despesa tipo_despesa descricao_despesa origem_despesa valor_despesa ///
 		tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas ///
 		tipo_documento numero_documento ///

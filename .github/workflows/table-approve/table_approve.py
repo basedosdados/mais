@@ -65,68 +65,6 @@ def replace_project_id_publish_sql(configs_path, dataset_id, table_id):
     Path(table_path + "/publish.sql").open("w").write(sql_final)
 
 
-def sync_bucket(
-    source_bucket_name,
-    dataset_id,
-    table_id,
-    destination_bucket_name,
-    backup_bucket_name,
-    mode="staging",
-):
-    """Copies proprosed data between storage buckets.
-    Creates a backup of old data, then delete it and copies new data into the destination bucket.
-
-    Args:
-        source_bucket_name (str):
-            The bucket name from which to copy data.
-        dataset_id (str):
-            Dataset id available in basedosdados. It should always come with table_id.
-        table_id (str):
-            Table id available in basedosdados.dataset_id.
-            It should always come with dataset_id.
-        destination_bucket_name (str):
-            The bucket name which data will be copied to.
-            If None, defaults to the bucket initialized when instantianting Storage object
-            (check it with the Storage.bucket proprerty)
-        backup_bucket_name (str):
-            The bucket name for where backup data will be stored.
-        mode (str): Optional.
-        Folder of which dataset to update.
-
-    Raises:
-        ValueError:
-            If there are no files corresponding to the given dataset_id and table_id on the source bucket
-    """
-
-    ref = Storage(dataset_id=dataset_id, table_id=table_id)
-
-    prefix = f"{mode}/{dataset_id}/{table_id}/"
-
-    source_ref = (
-        ref.client["storage_staging"]
-        .bucket(source_bucket_name)
-        .list_blobs(prefix=prefix)
-    )
-
-    destination_ref = ref.bucket.list_blobs(prefix=prefix)
-
-    if len(list(source_ref)) == 0:
-        raise ValueError("No objects found on the source bucket")
-
-    if len(list(destination_ref)):
-        tprint("BACKUP OLD DATA")
-        ref.copy_table(
-            source_bucket_name=destination_bucket_name,
-            destination_bucket_name=backup_bucket_name,
-        )
-
-        tprint("DELETE OLD DATA")
-        ref.delete_table(not_found_ok=True)
-
-    tprint("TRANSFER NEW DATA")
-    ref.copy_table(source_bucket_name=source_bucket_name)
-
-
 def get_table_dataset_id():
     # load the change files in PR || diff between PR and master
     changes = Path("files.json").open("r")
@@ -166,22 +104,112 @@ def get_table_dataset_id():
     return dataset_table_ids
 
 
+def sync_bucket(
+    source_bucket_name,
+    dataset_id,
+    table_id,
+    destination_bucket_name,
+    backup_bucket_name,
+    mode="staging",
+):
+    """Copies proprosed data between storage buckets.
+    Creates a backup of old data, then delete it and copies new data into the destination bucket.
+
+    Args:
+        source_bucket_name (str):
+            The bucket name from which to copy data.
+        dataset_id (str):
+            Dataset id available in basedosdados. It should always come with table_id.
+        table_id (str):
+            Table id available in basedosdados.dataset_id.
+            It should always come with dataset_id.
+        destination_bucket_name (str):
+            The bucket name which data will be copied to.
+            If None, defaults to the bucket initialized when instantianting Storage object
+            (check it with the Storage.bucket proprerty)
+        backup_bucket_name (str):
+            The bucket name for where backup data will be stored.
+        mode (str): Optional
+            Folder of which dataset to update.[raw|staging|header|auxiliary_files|architecture]
+
+    Raises:
+        ValueError:
+            If there are no files corresponding to the given dataset_id and table_id on the source bucket
+    """
+
+    ref = Storage(dataset_id=dataset_id, table_id=table_id)
+
+    prefix = f"{mode}/{dataset_id}/{table_id}/"
+
+    source_ref = (
+        ref.client["storage_staging"]
+        .bucket(source_bucket_name)
+        .list_blobs(prefix=prefix)
+    )
+
+    destination_ref = ref.bucket.list_blobs(prefix=prefix)
+
+    if len(list(source_ref)) == 0:
+        raise ValueError(
+            f"No objects found on the source bucket {source_bucket_name}.{prefix}"
+        )
+
+    if len(list(destination_ref)):
+        tprint(f"{mode.upper()}: BACKUP OLD DATA")
+        ref.copy_table(
+            source_bucket_name=destination_bucket_name,
+            destination_bucket_name=backup_bucket_name,
+            mode=mode,
+        )
+
+        tprint(f"{mode.upper()}: DELETE OLD DATA")
+        ref.delete_table(not_found_ok=True, mode=mode)
+
+    tprint(f"{mode.upper()}: TRANSFER NEW DATA")
+    ref.copy_table(
+        source_bucket_name=source_bucket_name,
+        destination_bucket_name=destination_bucket_name,
+        mode=mode,
+    )
+
+
+def save_header_files(dataset_id, table_id):
+    ### save table header in storage
+    query = f"""
+    SELECT * FROM `basedosdados.{dataset_id}.{table_id}` LIMIT 20
+    """
+    df = bd.read_sql(query, billing_project_id="basedosdados", from_file=True)
+    df.to_csv("header.csv", index=False, encoding="utf-8")
+    st = bd.Storage(dataset_id=dataset_id, table_id=table_id)
+    st.upload("header.csv", mode="header", if_exists="replace")
+
+
 def push_table_to_bq(
     dataset_id,
     table_id,
     source_bucket_name="basedosdados-dev",
     destination_bucket_name="basedosdados",
-    backup_bucket_name="basedosdados-staging",
+    backup_bucket_name="basedosdados-backup",
 ):
     # copy proprosed data between storage buckets
     # create a backup of old data, then delete it and copies new data into the destination bucket
-    sync_bucket(
-        source_bucket_name,
-        dataset_id,
-        table_id,
-        destination_bucket_name,
-        backup_bucket_name,
-    )
+    modes = ["raw", "staging", "header", "auxiliary_files", "architecture"]
+
+    for mode in modes:
+        try:
+            sync_bucket(
+                source_bucket_name,
+                dataset_id,
+                table_id,
+                destination_bucket_name,
+                backup_bucket_name,
+                mode,
+            )
+        except Exception as error:
+            tprint()
+            tprint(f"ERROR ON {mode}.{dataset_id}.{table_id}")
+            traceback.print_exc()
+            tprint()
 
     # load the table_config.yaml to get the metadata IDs
     table_config, configs_path = load_configs(dataset_id, table_id)
@@ -210,6 +238,9 @@ def push_table_to_bq(
 
     # updates the dataset description
     Dataset(dataset_id).update("prod")
+
+    ### save table header in storage
+    save_header_files(dataset_id, table_id)
 
 
 def pretty_log(dataset_id, table_id, source_bucket_name):
