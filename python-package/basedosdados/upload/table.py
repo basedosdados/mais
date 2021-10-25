@@ -60,7 +60,7 @@ class Table(Base):
         """Load schema from table_config.yaml
 
         Args:
-            mode (bool): Which dataset to create [prod|staging|all].
+            mode (bool): Which dataset to create [prod|staging].
         """
 
         self._check_mode(mode)
@@ -167,8 +167,9 @@ class Table(Base):
         """Check if table exists in BigQuery.
 
         Args:
-            mode (str): Which dataset to check [prod|staging|all].
+            mode (str): Which dataset to check [prod|staging].
         """
+
         try:
             ref = self._get_table_obj(mode=mode)
         except google.api_core.exceptions.NotFound:
@@ -582,7 +583,7 @@ class Table(Base):
         """Deletes table in BigQuery.
 
         Args:
-            mode (str): Table of which table to delete [prod|staging|all]
+            mode (str): Table of which table to delete [prod|staging]
         """
 
         self._check_mode(mode)
