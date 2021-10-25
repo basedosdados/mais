@@ -121,17 +121,20 @@ class Storage(Base):
         *Remember all files must follow a single schema.* Otherwise, things
         might fail in the future.
 
-        There are 3 modes:
+        There are 6 modes:
 
         * `raw` : should contain raw files from datasource
         * `staging` : should contain pre-treated files ready to upload to BiqQuery
+        * `header`: should contain the header of the tables
+        * `auxiliary_files`: should contain auxiliary files from eache table
+        * `architecture`: should contain the architecture sheet of the tables
         * `all`: if no treatment is needed, use `all`.
 
         Args:
             path (str or pathlib.PosixPath): Where to find the file or
                 folder that you want to upload to storage
 
-            mode (str): Folder of which dataset to update [raw|staging|all]
+            mode (str): Folder of which dataset to update [raw|staging|header|auxiliary_files|architecture|all]
 
             partitions (str, pathlib.PosixPath, or dict): Optional.
                 *If adding a single file*, use this to add it to a specific partition.
@@ -173,7 +176,11 @@ class Storage(Base):
 
         self._check_mode(mode)
 
-        mode = ["raw", "staging"] if mode == "all" else [mode]
+        mode = (
+            ["raw", "staging", "header", "auxiliary_files", "architecture"]
+            if mode == "all"
+            else [mode]
+        )
         for m in mode:
 
             for filepath, part in tqdm(list(zip(paths, parts)), desc="Uploading files"):
@@ -213,9 +220,12 @@ class Storage(Base):
         """Download files from Google Storage from path `mode`/`dataset_id`/`table_id`/`partitions`/`filename` and replicate folder hierarchy
         on save,
 
-        There are 2 modes:
-        * `raw`: download file from raw mode
-        * `staging`: download file from staging mode
+        There are 5 modes:
+        * `raw` : should contain raw files from datasource
+        * `staging` : should contain pre-treated files ready to upload to BiqQuery
+        * `header`: should contain the header of the tables
+        * `auxiliary_files`: should contain auxiliary files from eache table
+        * `architecture`: should contain the architecture sheet of the tables
 
         You can also use the `partitions` argument to choose files from a partition
 
@@ -234,7 +244,7 @@ class Storage(Base):
 
 
             mode (str): Optional
-                Folder of which dataset to update.[raw/staging]
+                Folder of which dataset to update.[raw|staging|header|auxiliary_files|architecture]
 
             if_not_exists (str): Optional.
                 What to do if data not found.
@@ -287,7 +297,7 @@ class Storage(Base):
         Args:
             filename (str): Name of the file to be deleted
 
-            mode (str): Folder of which dataset to update [raw|staging|all]
+            mode (str): Folder of which dataset to update [raw|staging|header|auxiliary_files|architecture|all]
 
             partitions (str, pathlib.PosixPath, or dict): Optional.
                 Hive structured partition as a string or dict
@@ -301,7 +311,11 @@ class Storage(Base):
 
         self._check_mode(mode)
 
-        mode = ["raw", "staging"] if mode == "all" else [mode]
+        mode = (
+            ["raw", "staging", "header", "auxiliary_files", "architecture"]
+            if mode == "all"
+            else [mode]
+        )
         for m in mode:
 
             blob = self.bucket.blob(self._build_blob_name(filename, m, partitions))
@@ -315,8 +329,8 @@ class Storage(Base):
         """Deletes a table from storage, sends request in batches.
 
         Args:
-            mode (str): Optional
-                Folder of which dataset to update.
+            mode (str): Folder of which dataset to update [raw|staging|header|auxiliary_files|architecture]
+                Folder of which dataset to update. Defaults to "staging".
 
             bucket_name (str):
                 The bucket name from which to delete the table. If None, defaults to the bucket initialized when instantiating the Storage object.
@@ -379,7 +393,7 @@ class Storage(Base):
                 If None, defaults to the bucket initialized when instantiating the Storage object (You can check it with the
                 Storage().bucket property)
 
-            mode (str): Optional
+            mode (str): Folder of which dataset to update [raw|staging|header|auxiliary_files|architecture]
                 Folder of which dataset to update. Defaults to "staging".
         """
 

@@ -49,6 +49,7 @@ def download(
     limit=None,
     from_file=False,
     reauth=False,
+    use_bqstorage_api=False,
     **pandas_kwargs,
 ):
     """Download table or query result from basedosdados BigQuery (or other).
@@ -85,8 +86,14 @@ def download(
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
         limit (int): Optional
             Number of rows.
+        from_file (boolean): Optional.
+            Uses the credentials from file, located in `~/.basedosdados/credentials/
         reauth (boolean): Optional.
             Re-authorize Google Cloud Project in case you need to change user or reset configurations.
+        use_bqstorage_api (boolean): Optional.
+            Use the BigQuery Storage API to download query results quickly, but at an increased cost(https://cloud.google.com/bigquery/docs/reference/storage/).
+            To use this API, first enable it in the Cloud Console(https://console.cloud.google.com/apis/library/bigquerystorage.googleapis.com).
+            You must also have the bigquery.readsessions.create permission on the project you are billing queries to.
         pandas_kwargs ():
             Extra arguments accepted by [pandas.to_csv](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html)
 
@@ -111,6 +118,7 @@ def download(
             limit=limit,
             reauth=reauth,
             from_file=from_file,
+            use_bqstorage_api=use_bqstorage_api,
         )
 
     elif query is not None:
@@ -122,6 +130,7 @@ def download(
             billing_project_id=billing_project_id,
             from_file=from_file,
             reauth=reauth,
+            use_bqstorage_api=use_bqstorage_api,
         )
 
     else:
@@ -140,7 +149,13 @@ def download(
     table.to_csv(savepath, **pandas_kwargs)
 
 
-def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
+def read_sql(
+    query,
+    billing_project_id=None,
+    from_file=False,
+    reauth=False,
+    use_bqstorage_api=False,
+):
     """Load data from BigQuery using a query. Just a wrapper around pandas.read_gbq
 
     Args:
@@ -148,8 +163,14 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
             Valid SQL Standard Query to basedosdados
         billing_project_id (str): Optional.
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
+        from_file (boolean): Optional.
+            Uses the credentials from file, located in `~/.basedosdados/credentials/
         reauth (boolean): Optional.
             Re-authorize Google Cloud Project in case you need to change user or reset configurations.
+        use_bqstorage_api (boolean): Optional.
+            Use the BigQuery Storage API to download query results quickly, but at an increased cost(https://cloud.google.com/bigquery/docs/reference/storage/).
+            To use this API, first enable it in the Cloud Console(https://console.cloud.google.com/apis/library/bigquerystorage.googleapis.com).
+            You must also have the bigquery.readsessions.create permission on the project you are billing queries to.
 
     Returns:
         pd.DataFrame:
@@ -167,6 +188,7 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
             query,
             credentials=credentials(from_file=from_file, reauth=reauth),
             project_id=billing_project_id,
+            use_bqstorage_api=use_bqstorage_api,
         )
 
     except GenericGBQException as e:
@@ -197,6 +219,7 @@ def read_table(
     limit=None,
     from_file=False,
     reauth=False,
+    use_bqstorage_api=False,
 ):
     """Load data from BigQuery using dataset_id and table_id.
 
@@ -210,10 +233,17 @@ def read_table(
             Which project the table lives. You can change this you want to query different projects.
         billing_project_id (str): Optional.
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
-        reauth (boolean): Optional.
-            Re-authorize Google Cloud Project in case you need to change user or reset configurations.
         limit (int): Optional.
             Number of rows to read from table.
+        from_file (boolean): Optional.
+            Uses the credentials from file, located in `~/.basedosdados/credentials/
+        reauth (boolean): Optional.
+            Re-authorize Google Cloud Project in case you need to change user or reset configurations.
+        use_bqstorage_api (boolean): Optional.
+            Use the BigQuery Storage API to download query results quickly, but at an increased cost(https://cloud.google.com/bigquery/docs/reference/storage/).
+            To use this API, first enable it in the Cloud Console(https://console.cloud.google.com/apis/library/bigquerystorage.googleapis.com).
+            You must also have the bigquery.readsessions.create permission on the project you are billing queries to.
+
 
     Returns:
         pd.DataFrame:
@@ -232,7 +262,11 @@ def read_table(
         raise BaseDosDadosException("Both table_id and dataset_id should be filled.")
 
     return read_sql(
-        query, billing_project_id=billing_project_id, from_file=from_file, reauth=reauth
+        query,
+        billing_project_id=billing_project_id,
+        from_file=from_file,
+        reauth=reauth,
+        use_bqstorage_api=use_bqstorage_api,
     )
 
 

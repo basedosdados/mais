@@ -68,7 +68,7 @@ class Table(Base):
         """Load schema from table_config.yaml
 
         Args:
-            mode (bool): Which dataset to create [prod|staging|all].
+            mode (bool): Which dataset to create [prod|staging].
         """
 
         self._check_mode(mode)
@@ -221,9 +221,28 @@ class Table(Base):
                 "Check if your google sheet Share are: Anyone on the internet with this link can view"
             )
 
-    def update_columns(self, columns_config_url):  # sourcery no-metrics
-        """Fills columns in table_config.yaml automatically using a public google sheets URL. Also regenerate
+    def table_exists(self, mode):
+        """Check if table exists in BigQuery.
+
+        Args:
+            mode (str): Which dataset to check [prod|staging].
+        """
+
+        try:
+            ref = self._get_table_obj(mode=mode)
+        except google.api_core.exceptions.NotFound:
+            ref = None
+
+        if ref:
+            return True
+        else:
+            return False
+
+    def update_columns(self, columns_config_url):
+        """
+        Fills columns in table_config.yaml automatically using a public google sheets URL. Also regenerate
         publish.sql and autofill type using bigquery_type.
+
         The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
         The sheet must contain the columns:
             - nome: column name
@@ -232,6 +251,7 @@ class Table(Base):
             - unidade_medida: column mesurement unit
             - dicionario: column related dictionary
             - nome_diretorio: column related directory in the format <dataset_id>.<table_id>:<column_name>
+        
         Args:
             columns_config_url (str): google sheets URL.
         """
@@ -727,7 +747,7 @@ class Table(Base):
         """Deletes table in BigQuery.
 
         Args:
-            mode (str): Table of which table to delete [prod|staging|all]
+            mode (str): Table of which table to delete [prod|staging]
         """
 
         self._check_mode(mode)

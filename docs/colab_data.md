@@ -30,13 +30,9 @@ Ao longo da explicação, vamos sempre seguir um exemplo já pronto com dados da
 
 ## 1. Informe seu interesse para a gente
 
-Mantemos metadados de bases que ainda não estão na BD+ em nossa [tabela de prioridade de bases](https://docs.google.com/spreadsheets/d/1jnmmG4V6Ugh_-lhVSMIVu_EaL05y1dX9Y0YW8G8e_Wo/edit?usp=sharing). Para subir uma base de seu interesse na BD+, adicione os seus metadados de acordo com as colunas da tabela.
+Mantemos a lista de bases que ainda não estão na BD+ no nosso [Github](https://github.com/basedosdados/mais/issues?q=is%3Aopen+is%3Aissue+label%3Adata+label%3Aenhancement). Para começar a subir uma base do seu interesse, basta abrir um [novo issue](https://github.com/basedosdados/mais/issues/new?assignees=&labels=data&template=br_novos_dados.md&title=%5Bdados%5D+%3Cdataset_id%3E) de dados e preencher as informações indicadas por lá.
 
-- **Inclua uma linha por tabela do conjunto de dados.**
-- **Preencha os campos cuidadosamente**. Além dos dados gerais sobre a tabela, adicione as classificações de `Facilidade` e `Importância` e o campo de `Prioridade` será gerado automaticamente.
-- Por fim, **crie um issue no Github com o [template "Novos dados"](https://github.com/basedosdados/mais/issues/new?assignees=rdahis&labels=data&template=br_novos_dados.md&title=%5Bdados%5D+%3Cadd+nome%2C+ex%3A+Censo+Escolar+INEP%3E)**
-
-!!! Info "Caso sua base já esteja listada, basta marcar seu usuário do Github na coluna `Pessoa responsável`."
+!!! Info "Caso sua base já esteja listada, basta marcar seu usuário do Github como `assignee`."
 
 !!! Info "Fique à vontade para conversar com a gente e tirar dúvidas direto no nosso servidor no [Discord](https://discord.gg/huKWpsVYx4)."
 
@@ -83,7 +79,7 @@ Perguntas que uma arquitetura deve responder:
 
 No exemplo da RAIS, [aqui](https://drive.google.com/drive/folders/1OtsucP_KhiUEJI6F6k_cagvXfwZCFZF2?usp=sharing) estão as tabelas de arquitetura já preenchidas. Sempre seguindo nosso [manual de estilo](/mais/style_data), nós renomeamos, definimos o tipo, preenchemos descrições, indicamos se há dicionário ou diretório, preenchemos campos (e.g. cobertura temporal e unidade de medida) e fizemos a compatibilização entre anos para todas as variáveis (colunas).
 
-A compatibilização entre anos, caso necessária, é feita criando novas colunas à direita chamadas `nome_original_YYYY`, em ordem temporal descendente (2021, 2020, 2019, ...). Nessas colunas incluímos _todas_ as variáveis de cada ano. Para as que forem eventualmente excluídas da versão em produção, deixamos seu nome como `(deletado)` e não preenchemos nenhum metadado.
+A compatibilização entre anos, caso necessária, é feita criando novas colunas à direita chamadas `nome_original_YYYY`, em ordem temporal descendente (e.g. 2022, 2021, 2020, ...). Nessas colunas incluímos _todas_ as variáveis de cada ano. Para as que forem eventualmente excluídas da versão em produção, deixamos seu nome como `(deletado)` e não preenchemos nenhum metadado.
 
 !!! Tip "Quando terminar de preencher as tabelas de arquitetura, entre em contato com a equipe da Base dos Dados ou nossa comunidade para validar tudo. É importante ter certeza que está fazendo sentido _antes_ de começar a escrever código."
 
