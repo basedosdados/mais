@@ -19,7 +19,7 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_anatel_telefonia_movel.modalidade AS
+CREATE VIEW input-dados.br_anatel_telefonia_movel.modalidade AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
@@ -30,4 +30,4 @@ SAFE_CAST(empresa AS STRING) empresa,
 SAFE_CAST(porte_empresa AS STRING) porte_empresa,
 SAFE_CAST(modalidade AS STRING) modalidade,
 SAFE_CAST(acessos AS INT64) acessos
-FROM basedosdados-dev.br_anatel_telefonia_movel_staging.modalidade AS t
+from input-dados.br_anatel_telefonia_movel_staging.modalidade as t

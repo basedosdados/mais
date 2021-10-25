@@ -7,16 +7,16 @@ dataset_id: br_ibge_populacao # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-ibge-populacao # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_populacao # AUTO GENERATED
 
-version: v1.1
+version: v1.0
 
-last_updated: 2021-09-27 # AUTO GENERATED
+last_updated: 2021-06-08 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Dados de população de UFs do IBGE. Os dados vem de estimativas de população feitas pelo IBGE (versão TCU sempre que disponível), exceto em anos de Censo ou contagem.
+    Dados de população de UFs do IBGE. Os dados vem de estimativas de população feitas pelo IBGE, exceto em anos de Censo ou contagem.
 
 # Quem está completando esse arquivo config?
 published_by:
@@ -103,7 +103,6 @@ coverage_time:
     - 2018
     - 2019
     - 2020
-    - 2021
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -122,14 +121,14 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: ano
-        description: Ano
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
     -   
-        name: sigla_uf
-        description: Sigla da Unidade da Federação
+        name: ano
+        description: Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   

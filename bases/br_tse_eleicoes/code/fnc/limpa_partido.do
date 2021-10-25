@@ -1,4 +1,7 @@
 
+// author: Ricardo Dahis
+// last updated: 2021-06-25
+
 cap program drop limpa_partido
 program limpa_partido
 	
@@ -15,7 +18,7 @@ program limpa_partido
 	}
 	
 	if `ano' == 2016 {
-		
+
 		replace `var' = "REPUBLICANOS"	if `var' == "PRB"
 		replace `var' = "MDB"			if `var' == "PMDB"
 		replace `var' = "PODE"			if `var' == "PTN"
@@ -25,7 +28,7 @@ program limpa_partido
 		replace `var' = "DC"			if `var' == "PSDC"
 		replace `var' = "PATRIOTA"		if `var' == "PEN"
 		replace `var' = "AVANTE"		if `var' == "PT do B"
-		
+	
 	}
 	
 	if `ano' == 2018 {
@@ -39,7 +42,5 @@ program limpa_partido
 	
 	replace `var' = "PATRIOTA"			if `var' == "PATRI"
 	replace `var' = "SOLIDARIEDADE"		if `var' == "SD"
-	replace `var' = "PC do B"			if `var' == "PC DO B"
-	replace `var' = "PT do B"			if `var' == "PT DO B"
 	
 end

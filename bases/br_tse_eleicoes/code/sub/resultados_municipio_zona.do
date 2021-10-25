@@ -148,8 +148,8 @@ foreach ano of numlist 1994(2)2020 {
 				}
 				*
 				
-				limpa_tipo_eleicao	`ano'
-				limpa_partido		`ano' sigla_partido
+				limpa_tipo_eleicao `ano'
+				limpa_partido `ano' sigla_partido
 				limpa_resultado
 				
 				merge m:1 id_municipio_tse using `diretorio'
@@ -193,13 +193,7 @@ foreach ano of numlist 1994(2)2020 {
 			drop if cargo == "presidente"
 			append using `presid'
 			
-			//-------------------------//
-			// salva
-			//-------------------------//
-			
 			drop if ano == 2009 | ano == 2011 // erros já vistos nos dados
-			
-			order votos, a(resultado)
 			
 			compress
 			
@@ -214,10 +208,8 @@ foreach ano of numlist 1994(2)2020 {
 				
 				di "`ano'_`estado'_partido"
 				
-				cap import delimited "input/votacao_partido_munzona/votacao_partido_munzona_`ano'/votacao_partido_munzona_`ano'_`estado'.txt", ///
-					delim(";") varn(nonames) stringcols(_all) clear
-				cap import delimited "input/votacao_partido_munzona/votacao_partido_munzona_`ano'/votacao_partido_munzona_`ano'_`estado'.csv", ///
-					delim(";") varn(nonames) stringcols(_all) clear
+				cap import delimited "input/votacao_partido_munzona/votacao_partido_munzona_`ano'/votacao_partido_munzona_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
+				cap import delimited "input/votacao_partido_munzona/votacao_partido_munzona_`ano'/votacao_partido_munzona_`ano'_`estado'.csv", delim(";") varn(nonames) stringcols(_all) clear
 				
 				if `ano' <= 2012 {
 					

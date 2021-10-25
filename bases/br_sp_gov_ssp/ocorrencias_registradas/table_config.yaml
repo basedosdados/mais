@@ -7,9 +7,9 @@ dataset_id: br_sp_gov_ssp # AUTO GENERATED
 url_ckan: https://basedosdados.org/dataset/br-sp-gov-ssp # AUTO GENERATED
 url_github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_gov_ssp # AUTO GENERATED
 
-version: v1.1 # REQUIRED
+version: v1.0 # REQUIRED
 
-last_updated: 2021-10-07 # AUTO GENERATED
+last_updated: 2021-03-22 # AUTO GENERATED
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.

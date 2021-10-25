@@ -7,9 +7,9 @@ Nessa seção listamos todos os padrões do nosso manual de estilo e diretrizes 
 
 - [Nomeação de bases e tabelas](#nomeação-de-bases-e-tabelas)
 - [Formatos de tabelas](#formatos-de-tabelas)
-- [Nomeação de variáveis](#nomeacao-de-variaveis)
+- [Nomeação de variáveis](#nomeação-de-variáveis)
 - [Ordenamento de variáveis](#ordenamento-de-variáveis)
-- [Tipos de variáveis](#tipos-de-variaveis)
+- [Tipos de variáveis](#tipos-de-variáveis)
 - [Unidades de medida](#unidades-de-medida)
 - [Quais variáveis manter, quais adicionar e quais remover](#quais-variáveis-manter-quais-adicionar-e-quais-remover)
 - [Cobertura temporal](#cobertura-temporal)
@@ -17,18 +17,16 @@ Nessa seção listamos todos os padrões do nosso manual de estilo e diretrizes 
 - [Formatos de valores](#formatos-de-valores)
 - [Particionamento de tabelas](#particionamento-de-tabelas)
 - [Número de bases por _pull request_](#número-de-bases-por-pull-request)
-- [Dicionários](#dicionarios)
-- [Diretórios](#diretorios)
+- [Dicionários](#dicionários)
+- [Diretórios](#diretórios)
 
 ---
 
 ### Nomeação de bases e tabelas
 
-#### Conjuntos de dados (`dataset_id`)
+#### Bases
 
-Nomeamos conjuntos no formato `<organization_id\>_<descrição\>`, onde
-`organization_id` segue por padrão a **abrangência geográfica da
-organização** que publica o conjunto:
+Nomeamos bases no formato <organization_id\>_<descrição\>, onde `organization_id` segue o padrão abaixo
 
 |           | organization_id                         | 
 |-----------|----------------------------------------------|
@@ -37,14 +35,12 @@ organização** que publica o conjunto:
 | Estadual  | <sigla_pais\>\_<sigla_uf\>\_<organizacao\>             |
 | Municipal | <sigla_pais\>\_<sigla_uf\>\_<cidade\>\_<organizacao\>   |
 
-* `sigla_pais` e `sigla_uf` são sempre 2 letras minúsculas;
-* `organizacao` é o nome ou sigla (de preferência) da organização que
-  publicou os dados orginais (ex: `ibge`, `tse`, `inep`).
-* `descricao` é uma breve descrição do conjunto de dados, que pode ser
+Os componentes dos `organization_id` são:
 
-Por exemplo, o conjunto de dados do PIB do IBGE tem como `dataset_id`: `br_ibge_pib`
+- `mundo/sigla_pais/sigla_uf/cidade`: Abrangência da organização - e não os dados (ex: IBGE tem abrangência `br`)
+- `organização`: Nome ou sigla (de preferência) da organização que publicou os dados orginais (ex: `ibge`, `tse`, `inep`).
 
-!!! Tip "Não sabe como nomear a organização?"
+??? Tip "Não sabe como nomear a organização?"
     Sugerimos que vá no site da mesma e veja como ela se autodenomina (ex: DETRAN-RJ seria `br-rj-detran`)
 
 #### Tabelas

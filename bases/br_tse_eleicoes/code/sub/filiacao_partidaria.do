@@ -55,6 +55,9 @@ foreach partido in `partidos' {
 		}
 		*
 		
+		//foreach k in situacao_registro tipo_registro motivo_cancelamento {
+		//	cap clean_string `k'
+		//}
 		foreach k in nome {
 			cap replace `k' = ustrtitle(`k')
 		}

@@ -6,28 +6,7 @@ on:
       - labeled
 
 jobs:
-  guard:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Check if workflow files were modified
-        uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            workflows:
-              - '.github/**'
-      - name: Exit if workflow files were modified and it's a fork
-        if: |
-          steps.changes.outputs.workflows == 'true' &&
-          github.event.pull_request.head.repo.full_name != github.repository
-        run: exit 1
-
   get-changes:
-    needs: guard
     runs-on: ubuntu-latest
     if: github.event.label.name == 'data-check-trigger'
     steps:
@@ -76,6 +55,8 @@ jobs:
       - name: Test data and fill report
         run: pytest -v .github/workflows/data-check
         shell: bash
+        env:
+          BQ_ENVIRONMENT: basedosdados-dev
       - name: Format report
         if: ${{ always() }}
         id: get-comment-body

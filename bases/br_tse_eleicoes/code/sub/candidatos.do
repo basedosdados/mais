@@ -36,10 +36,8 @@ foreach ano of numlist 1994(2)2020 {
 	foreach estado in `estados_`ano'' {
 		
 		di "`ano'_`estado'_candidatos"
-		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.txt", ///
-			delim(";") varn(nonames) stripquotes(yes) bindquotes(nobind) stringcols(_all) clear
-		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.csv", ///
-			delim(";") varn(nonames) stripquotes(yes) bindquotes(nobind) stringcols(_all) clear
+		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.txt", delim(";") varn(nonames) stripquotes(yes) bindquotes(nobind) stringcols(_all) clear
+		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.csv", delim(";") varn(nonames) stripquotes(yes) bindquotes(nobind) stringcols(_all) clear
 		
 		if `ano' == 1994 & "`estado'" == "BR" {
 			
@@ -891,8 +889,8 @@ foreach ano of numlist 1994(2)2020 {
 		}
 		*
 		
-		limpa_tipo_eleicao	`ano'
-		limpa_partido		`ano' sigla_partido
+		limpa_tipo_eleicao `ano'
+		limpa_partido `ano' sigla_partido
 		limpa_instrucao
 		limpa_estado_civil
 		limpa_resultado

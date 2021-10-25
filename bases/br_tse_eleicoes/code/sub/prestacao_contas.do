@@ -10,6 +10,8 @@ foreach ano of numlist 2006(2)2020 {
 	
 	foreach estado in `estados' {
 		
+		local ano 2014
+		local estado AC
 		cap import delimited "input/bem_candidato/bem_candidato_`ano'/bem_candidato_`ano'_`estado'.txt", clear delim(";") varnames(nonames) stringc(_all)
 		cap import delimited "input/bem_candidato/bem_candidato_`ano'/bem_candidato_`ano'_`estado'.csv", clear delim(";") varnames(nonames) stringc(_all)
 		
@@ -152,7 +154,7 @@ foreach ano of numlist 2002(2)2020 {
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
-		destring sequencial_candidato numero_candidato, replace force
+		destring numero_candidato, replace force
 		
 	}
 	if `ano' == 2004 {
@@ -261,7 +263,7 @@ foreach ano of numlist 2002(2)2020 {
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
-		destring sequencial_candidato numero_candidato, replace force
+		destring numero_candidato, replace force
 		
 	}
 	if `ano' == 2008 {
@@ -320,7 +322,7 @@ foreach ano of numlist 2002(2)2020 {
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
-		destring sequencial_candidato numero_candidato id_municipio_tse*, replace force
+		destring numero_candidato id_municipio_tse*, replace force
 		
 	}
 	if `ano' == 2010 {
@@ -396,7 +398,7 @@ foreach ano of numlist 2002(2)2020 {
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
-		destring sequencial_candidato numero_candidato, replace force
+		destring numero_candidato, replace force
 		
 	}
 	if `ano' == 2012 {
@@ -473,7 +475,7 @@ foreach ano of numlist 2002(2)2020 {
 		
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
-		destring sequencial_candidato numero_candidato id_municipio_tse*, replace force
+		destring numero_candidato id_municipio_tse*, replace force
 		
 	}
 	if `ano' == 2014 {
@@ -624,75 +626,11 @@ foreach ano of numlist 2002(2)2020 {
 		
 		limpa_tipo_eleicao `ano'
 		
-		destring sequencial_candidato numero_candidato* numero_partido*, replace force
+		destring numero_candidato* numero_partido*, replace force
 		
 	}
 	if `ano' == 2016 {
 		
-		//---------------//
-		// completo
-		//---------------//
-		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-		
-		foreach estado in `estados' {
-			
-			import delimited "input/prestacao_contas/prestacao_contas_2016/receitas_candidatos_2016_`estado'.txt", ///
-				clear varnames(nonames) delim(";") stringc(_all)
-			
-			drop in 1
-			drop v1 v3 v8
-			
-			ren v2	tipo_eleicao
-			ren v4	cnpj_prestador_contas
-			ren v5	sequencial_candidato
-			ren v6	sigla_uf
-			ren v7	id_municipio_tse
-			ren v9	sigla_partido
-			ren v10	numero_candidato
-			ren v11	cargo
-			ren v12	nome_candidato
-			ren v13	cpf_candidato
-			ren v14 cpf_vice_suplente
-			ren v15	numero_recibo_eleitoral
-			ren v16	numero_documento
-			ren v17	cpf_cnpj_doador
-			ren v18	nome_doador
-			ren v19	nome_doador_rf
-			ren v20	ue_doador
-			ren v21	numero_partido_doador
-			ren v22	numero_candidato_doador
-			ren v23	cnae_2_doador
-			ren v24	descricao_cnae_2_doador
-			ren v25	data_receita
-			ren v26	valor_receita
-			ren v27	origem_receita
-			ren v28	fonte_receita
-			ren v29	natureza_receita
-			ren v30	descricao_receita
-			ren v31	cpf_cnpj_doador_orig
-			ren v32	nome_doador_orig
-			ren v33	tipo_doador_orig
-			ren v34	descricao_cnae_2_doador_orig
-			ren v35	nome_doador_orig_rf
-			
-			replace data_receita = substr(data_receita, 1, 10)
-			
-			tempfile f_`estado'
-			save `f_`estado''
-		
-		}
-		*
-		
-		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
-			}
-		}
-		*
-		
-		/*
 		//---------------//
 		// final
 		//---------------//
@@ -813,7 +751,6 @@ foreach ano of numlist 2002(2)2020 {
 		
 		use `final'
 		append using `suplementar'
-		*/
 		
 		gen sigla_uf_doador = ue_doador if length(ue_doador) == 2
 		gen id_municipio_tse_doador = ue_doador if length(ue_doador) > 2
@@ -847,7 +784,7 @@ foreach ano of numlist 2002(2)2020 {
 		
 		limpa_tipo_eleicao `ano'
 		
-		destring sequencial_candidato numero_candidato* numero_partido* id_municipio_tse*, replace force
+		destring numero_candidato* numero_partido* id_municipio_tse*, replace force
 		
 	}
 	if `ano' == 2018 {
@@ -856,7 +793,7 @@ foreach ano of numlist 2002(2)2020 {
 		// candidato
 		//-------------------//
 		
-		local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
@@ -931,7 +868,7 @@ foreach ano of numlist 2002(2)2020 {
 		}
 		*
 		
-		foreach k of varlist cpf_vice_suplente origem_receita natureza_receita descricao_receita *_doador* *_doacao {
+		foreach k of varlist cpf_vice_suplente numero_documento origem_receita natureza_receita descricao_receita *_doador* *_doacao {
 			replace `k' = "" if inlist(`k', "#NULO#", "#NULO", "-1")
 		}
 		*
@@ -955,7 +892,7 @@ foreach ano of numlist 2002(2)2020 {
 		
 		limpa_tipo_eleicao `ano'
 		
-		destring sequencial_candidato numero_candidato* numero_partido* id_municipio_tse*, replace force
+		destring numero_candidato* numero_partido* id_municipio_tse*, replace force
 		
 	}
 	if `ano' == 2020 {
@@ -1036,7 +973,7 @@ foreach ano of numlist 2002(2)2020 {
 		}
 		*
 		
-		foreach k of varlist cpf_vice_suplente origem_receita natureza_receita descricao_receita *_doador* *_doacao {
+		foreach k of varlist cpf_vice_suplente numero_documento origem_receita natureza_receita descricao_receita *_doador* *_doacao {
 			replace `k' = "" if inlist(`k', "#NULO#", "#NULO", "-1")
 		}
 		*
@@ -1060,7 +997,7 @@ foreach ano of numlist 2002(2)2020 {
 		
 		limpa_tipo_eleicao `ano'
 		
-		destring sequencial_candidato numero_candidato* numero_partido* id_municipio_tse*, replace force
+		destring numero_candidato* numero_partido* id_municipio_tse*, replace force
 		
 	}
 	*
@@ -1095,57 +1032,6 @@ foreach ano of numlist 2016 2020 {
 
 	if `ano' == 2016 {
 		
-		//---------------//
-		// final
-		//---------------//
-		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-		
-		foreach estado in `estados' {
-			
-			import delimited "input/prestacao_contas/prestacao_contas_`ano'/despesas_candidatos_`ano'_`estado'.txt", ///
-				clear varnames(nonames) delim(";") stringc(_all)
-			
-			drop in 1
-			drop v1 v3 v8
-			
-			ren v2	tipo_eleicao
-			ren v4	cnpj_prestador_contas
-			ren v5	sequencial_candidato
-			ren v6	sigla_uf
-			ren v7	id_municipio_tse
-			ren v9	sigla_partido
-			ren v10	numero_candidato
-			ren v11	cargo
-			ren v12	nome_candidato
-			ren v13	cpf_candidato
-			ren v14	cpf_vice_suplente
-			ren v15	tipo_documento
-			ren v16	numero_documento
-			ren v17	cpf_cnpj_fornecedor
-			ren v18	nome_fornecedor
-			ren v19	nome_fornecedor_rf
-			ren v20	cnae_2_fornecedor
-			ren v21	descricao_cnae_2_fornecedor
-			ren v22	data_despesa
-			ren v23	valor_despesa
-			ren v24	tipo_despesa
-			ren v25	descricao_despesa
-			
-			tempfile f_`estado'
-			save `f_`estado''
-			
-		}
-		
-		use `f_AC', clear
-		foreach estado in `estados' {
-			if "`estado'" != "AC" {
-				qui append using `f_`estado''
-			}
-		}
-		*
-		
-		/*
 		//---------------//
 		// final
 		//---------------//
@@ -1241,7 +1127,6 @@ foreach ano of numlist 2016 2020 {
 		
 		use `final'
 		append using `suplementar'
-		*/
 		
 		foreach k in sigla_uf {
 			replace `k' = "" if `k' == "BR"
@@ -1273,7 +1158,7 @@ foreach ano of numlist 2016 2020 {
 		
 		limpa_tipo_eleicao `ano'
 		
-		destring sequencial_candidato numero_candidato* id_municipio_tse*, replace force
+		destring numero_candidato* id_municipio_tse*, replace force
 		
 		gen turno = .
 		
@@ -1383,7 +1268,7 @@ foreach ano of numlist 2016 2020 {
 		
 		limpa_tipo_eleicao `ano'
 		
-		destring turno sequencial_candidato numero_candidato* numero_partido* id_municipio_tse*, replace force
+		destring turno numero_candidato* numero_partido* id_municipio_tse*, replace force
 		
 	}
 	*

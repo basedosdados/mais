@@ -46,6 +46,7 @@ def padronize_atividade(df):
     )
     cols = [
         "id_municipio",
+        "id_estado",
         "mes",
         "regiao_ssp",
         "ocorrencias_de_porte_de_entorpecentes",
@@ -86,6 +87,7 @@ def padronize_ocorrencias(df):
     )
     cols = [
         "id_municipio",
+        "id_estado",
         "mes",
         "regiao_ssp",
         "homicidio_doloso",
@@ -140,6 +142,7 @@ def padronize_data(df, file):
     ## padronize columns name
     df.columns = normalize_cols(df.columns)
     df["mes"] = df["mes"].map(mes_dict)
+    df["id_estado"] = 35
 
     ## renmae columns and sort in correct order
     if file == "ssp_atividade_policial":
@@ -247,8 +250,6 @@ def get_years():
     # return [str(i) for i in range(2002, 2021)]
     current_year = datetime.datetime.now().strftime("%Y")
     return [current_year]
-    # use the line bellow to scrapy all years
-    # return [str(i) for i in range(2002, int(current_year) + 1)]
 
 
 def delete_years(file, years):
@@ -269,8 +270,6 @@ class SSP_AtividadeSpider(scrapy.Spider):
     def parse(self, response):
         ## get the years to scrapy
         years = get_years()
-        print("SSP_AtividadeSpider", years)
-
         ## delete previously years file
         delete_years(self.file_name, years)
 
@@ -313,7 +312,6 @@ class SSP_OcorrenciaSpider(scrapy.Spider):
     def parse(self, response):
         ## get the years to scrapy
         years = get_years()
-        print("SSP_OcorrenciaSpider", years)
         ## delete previously years file
         delete_years(self.file_name, years)
 
