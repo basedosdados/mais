@@ -70,7 +70,7 @@ def mode_text(mode, verb, obj_id):
 @cli_dataset.command(name="create", help="Create dataset on BigQuery")
 @click.argument("dataset_id")
 @click.option(
-    "--mode", "-m", default="all", help="What datasets to create [all|staging|prod]"
+    "--mode", "-m", default="all", help="What datasets to create [prod|staging|all]"
 )
 @click.option(
     "--if_exists",
@@ -93,7 +93,7 @@ def create_dataset(ctx, dataset_id, mode, if_exists):
 @cli_dataset.command(name="update", help="Update dataset on BigQuery")
 @click.argument("dataset_id")
 @click.option(
-    "--mode", "-m", default="all", help="What datasets to create [all|staging|prod]"
+    "--mode", "-m", default="all", help="What datasets to create [prod|staging|all]"
 )
 @click.pass_context
 def update_dataset(ctx, dataset_id, mode):
@@ -126,7 +126,7 @@ def publicize_dataset(ctx, dataset_id):
 @cli_dataset.command(name="delete", help="Delete dataset")
 @click.argument("dataset_id")
 @click.option(
-    "--mode", "-m", default="all", help="What datasets to create [all|staging|prod]"
+    "--mode", "-m", default="all", help="What datasets to create [prod|staging|all]"
 )
 @click.pass_context
 def delete_dataset(ctx, dataset_id, mode):
@@ -274,7 +274,7 @@ def create_table(
 @click.option(
     "--mode",
     default="all",
-    help="Choose a table from a dataset to update [all|staging|prod]",
+    help="Choose a table from a dataset to update [prod|staging|all]",
 )
 @click.pass_context
 def update_table(ctx, dataset_id, table_id, mode):
@@ -350,7 +350,7 @@ def publish_table(ctx, dataset_id, table_id, if_exists):
 @cli_table.command(name="delete", help="Delete BigQuery table")
 @click.argument("dataset_id")
 @click.argument("table_id")
-@click.option("--mode", help="Which table to delete [all|prod|staging]", required=True)
+@click.option("--mode", help="Which table to delete [prod|staging]", required=True)
 @click.pass_context
 def delete_table(ctx, dataset_id, table_id, mode):
 
@@ -423,7 +423,10 @@ def init_storage(ctx, bucket_name, replace, very_sure):
 @click.argument("table_id")
 @click.argument("filepath", type=click.Path(exists=True))
 @click.option(
-    "--mode", "-m", required=True, help="[raw|staging] where to save the file"
+    "--mode",
+    "-m",
+    required=True,
+    help="Where to save the file [raw|staging|header|auxiliary_files|architecture|all]",
 )
 @click.option("--partitions", help="Data partition as `value=key/value2=key2`")
 @click.option(
@@ -458,7 +461,10 @@ def upload_storage(ctx, dataset_id, table_id, filepath, mode, partitions, if_exi
     help="filename to download single file. If * downloads all files from bucket folder",
 )
 @click.option(
-    "--mode", "-m", default="raw", help="[raw|staging] where to download data from"
+    "--mode",
+    "-m",
+    default="raw",
+    help="Where to download data from [raw|staging|header|auxiliary_files|architecture]",
 )
 @click.option("--partitions", help="Data partition as `value=key/value2=key2`")
 @click.option(
@@ -490,7 +496,7 @@ def download_storage(
     "-m",
     required=True,
     default="staging",
-    help="[raw|staging] where to delete the file from",
+    help="Where to delete the file from [raw|staging|header|auxiliary_files|architecture]",
 )
 @click.option(
     "--bucket_name",
@@ -524,7 +530,7 @@ def storage_delete_table(ctx, dataset_id, table_id, mode, not_found_ok, bucket_n
     "--mode",
     "-m",
     default="staging",
-    help="[raw|staging] which bucket folder to get the table",
+    help="which bucket folder to get the table [raw|staging|header|auxiliary_files|architecture]",
 )
 @click.pass_context
 def storage_copy_table(
@@ -696,7 +702,7 @@ def cli_metadata():
     help=(
         "Force the creation of `table_config.yaml` file only if `dataset_conf"
         "ig.yaml` doesn't exist."
-    )
+    ),
 )
 @click.pass_context
 def cli_create_metadata(
