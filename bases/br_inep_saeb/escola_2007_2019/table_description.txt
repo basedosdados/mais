@@ -1,0 +1,61 @@
+Microdados do SAEB a nível escola. Além dos instrumentos de medida de desempenho, há questionários com informações sobre a escola, que estão relacionadas ao ambiente físico, infraestrutura, recursos, entre outros aspectos, preenchidos pelo aplicador.
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-inep-saeb
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Hevilyn Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
+Website: https://github.com/Hevilyn
+Email: hevilynsouza12@hotmail.comTratado por
+-----------
+Nome: Hevilyn Souza
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
+Website: https://basedosdados.org/
+Email: hevilynsouza12@hotmail.com
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- escola
+- ano
+
+Colunas identificando linhas unicamente
+-------------------
+- id_escola
+- ano
+
+Cobertura Temporal
+------------------
+- 2007
+- 2009
+- 2011
+- 2013
+- 2015
+- 2017
+- 2019
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Compatibilização dos dados entre os anos 2007 até 2019. Os dados de algumas variáveis não estão disponíveis para todos os anos. Para melhor compreensão da base, consultar a tabela de compatibilização disponível.
+- Padronização de nomes de colunas.
+- Palavras sem acento e minúsculas.
+
+Frequencia de Atualização
+-------------------------
+2 anos
+
+

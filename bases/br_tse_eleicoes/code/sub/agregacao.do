@@ -27,7 +27,7 @@ foreach ano of numlist 1994(2)2020 {
 		import delimited "output/resultados_candidato_municipio_zona/ano=`ano'/sigla_uf=`sigla_uf'/resultados_candidato_municipio_zona.csv", ///
 			clear varn(1) encoding("utf-8") case(preserve)
 		
-		collapse (sum) votos, by(turno tipo_eleicao id_municipio id_municipio_tse cargo sigla_partido numero_candidato id_candidato_bd resultado)
+		collapse (sum) votos, by(turno tipo_eleicao id_municipio id_municipio_tse cargo sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado)
 		
 		export delimited "output/resultados_candidato_municipio/ano=`ano'/sigla_uf=`sigla_uf'/resultados_candidato_municipio.csv", replace
 		
@@ -151,9 +151,9 @@ foreach ano of numlist 1994(2)2020 {
 	replace id_municipio = .		if mod(ano, 4) == 2
 	replace id_municipio_tse = .	if mod(ano, 4) == 2
 	
-	collapse (sum) votos, by(turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo sigla_partido numero_candidato id_candidato_bd resultado)
+	collapse (sum) votos, by(turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo sigla_partido sequencial_candidato numero_candidato id_candidato_bd resultado)
 	
-	order turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo sigla_partido numero_candidato id_candidato_bd resultado votos
+	order turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado votos
 	
 	export delimited "output/resultados_candidato/ano=`ano'/resultados_candidato.csv", replace
 	

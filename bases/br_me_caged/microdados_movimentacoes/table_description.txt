@@ -1,0 +1,47 @@
+Microdados públicos do CAGED
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-me-caged
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Diego
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code
+Website: ftp://ftp.mtps.gov.br/pdet/microdados/CAGED/Tratado por
+-----------
+Nome: Diego
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- mes
+- sigla_uf
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- movimentação
+
+Cobertura Temporal
+------------------
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+Unificação de todos os anos e meses, padronização do nomes de colunas, erros de valores, etc.
+
+Frequencia de Atualização
+-------------------------
+1 mes
+
+
