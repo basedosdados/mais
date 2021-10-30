@@ -22,7 +22,7 @@ CREATE VIEW basedosdados-dev.br_geobr_mapas.setor_censitario_2010 AS
 SELECT 
 SAFE_CAST(id_uf AS STRING) id_uf,
 SAFE_CAST(estado_abrev AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST( SAFE_CAST( SAFE_CAST(id_municipio AS FLOAT64) AS INT64) AS STRING) id_municipio,
 SAFE_CAST(nome_municipio AS STRING) nome_municipio,
 SAFE_CAST(id_distrito AS STRING) id_distrito,
 SAFE_CAST(nome_distrito AS STRING) nome_distrito,
