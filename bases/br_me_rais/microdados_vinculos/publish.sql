@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -16,15 +15,14 @@ TIPOS:
     - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-
 */
 CREATE VIEW basedosdados-dev.br_me_rais.microdados_vinculos AS
-SELECT
+SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(tipo_vinculo AS STRING) tipo_vinculo,
-SAFE_CAST(vinculo_ativo_3112 AS STRING) vinculo_ativo_3112,
+SAFE_CAST(vinculo_ativo_3112 AS INT64) vinculo_ativo_3112,
 SAFE_CAST(tipo_admissao AS STRING) tipo_admissao,
 SAFE_CAST(mes_admissao AS INT64) mes_admissao,
 SAFE_CAST(mes_desligamento AS INT64) mes_desligamento,
@@ -34,17 +32,17 @@ SAFE_CAST(causa_desligamento_2 AS STRING) causa_desligamento_2,
 SAFE_CAST(causa_desligamento_3 AS STRING) causa_desligamento_3,
 SAFE_CAST(faixa_tempo_emprego AS STRING) faixa_tempo_emprego,
 SAFE_CAST(tempo_emprego AS FLOAT64) tempo_emprego,
-SAFE_CAST(faixa_horas_contratadas AS INT64) faixa_horas_contratadas,
+SAFE_CAST(faixa_horas_contratadas AS STRING) faixa_horas_contratadas,
 SAFE_CAST(quantidade_horas_contratadas AS INT64) quantidade_horas_contratadas,
-SAFE_CAST(id_municipio_6_trabalho AS INT64) id_municipio_6_trabalho,
+SAFE_CAST(id_municipio_6_trabalho AS STRING) id_municipio_6_trabalho,
 SAFE_CAST(quantidade_dias_afastamento AS INT64) quantidade_dias_afastamento,
-SAFE_CAST(indicador_cei_vinculado AS INT64) indicador_cei_vinculado,
-SAFE_CAST(indicador_trabalho_parcial AS INT64) indicador_trabalho_parcial,
-SAFE_CAST(indicador_trabalho_intermitente AS INT64) indicador_trabalho_intermitente,
-SAFE_CAST(faixa_remuneracao_media_sm AS INT64) faixa_remuneracao_media_sm,
+SAFE_CAST(indicador_cei_vinculado AS STRING) indicador_cei_vinculado,
+SAFE_CAST(indicador_trabalho_parcial AS STRING) indicador_trabalho_parcial,
+SAFE_CAST(indicador_trabalho_intermitente AS STRING) indicador_trabalho_intermitente,
+SAFE_CAST(faixa_remuneracao_media_sm AS STRING) faixa_remuneracao_media_sm,
 SAFE_CAST(valor_remuneracao_media_sm AS FLOAT64) valor_remuneracao_media_sm,
 SAFE_CAST(valor_remuneracao_media_nominal AS FLOAT64) valor_remuneracao_media_nominal,
-SAFE_CAST(faixa_remuneracao_dezembro_sm AS INT64) faixa_remuneracao_dezembro_sm,
+SAFE_CAST(faixa_remuneracao_dezembro_sm AS STRING) faixa_remuneracao_dezembro_sm,
 SAFE_CAST(valor_remuneracao_dezembro_sm AS FLOAT64) valor_remuneracao_dezembro_sm,
 SAFE_CAST(valor_remuneracao_janeiro_nominal AS FLOAT64) valor_remuneracao_janeiro_nominal,
 SAFE_CAST(valor_remuneracao_fevereiro_nominal AS FLOAT64) valor_remuneracao_fevereiro_nominal,
@@ -67,10 +65,10 @@ SAFE_CAST(cbo_2002 AS STRING) cbo_2002,
 SAFE_CAST(cnae_1 AS STRING) cnae_1,
 SAFE_CAST(cnae_2 AS STRING) cnae_2,
 SAFE_CAST(cnae_2_subclasse AS STRING) cnae_2_subclasse,
-SAFE_CAST(faixa_etaria AS INT64) faixa_etaria,
+SAFE_CAST(faixa_etaria AS STRING) faixa_etaria,
 SAFE_CAST(idade AS INT64) idade,
-SAFE_CAST(grau_instrucao_1985_2005 AS INT64) grau_instrucao_1985_2005,
-SAFE_CAST(grau_instrucao_apos_2005 AS INT64) grau_instrucao_apos_2005,
+SAFE_CAST(grau_instrucao_1985_2005 AS STRING) grau_instrucao_1985_2005,
+SAFE_CAST(grau_instrucao_apos_2005 AS STRING) grau_instrucao_apos_2005,
 SAFE_CAST(nacionalidade AS STRING) nacionalidade,
 SAFE_CAST(sexo AS STRING) sexo,
 SAFE_CAST(raca_cor AS STRING) raca_cor,
