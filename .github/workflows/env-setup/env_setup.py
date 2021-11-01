@@ -59,6 +59,7 @@ def create_config_tree(prod_base64, staging_base64, config_dict):
 def env_setup():
     # standard github actions home is /github/home
     # json with information of .basedosdados/config.toml
+    base64.b64decode(b).decode("utf-8")
     config_dict = {
         "metadata_path": "/home/runner/work/mais/mais/bases",
         "templates_path": str(Path.home() / ".basedosdados/templates"),
@@ -76,6 +77,10 @@ def env_setup():
                     Path.home() / ".basedosdados/credentials/staging.json"
                 ),
             },
+        },
+        "ckan": {
+            "url": os.getenv("CKAN_URL"),
+            "api_key": decoding_base64(os.getenv("CKAN_API_KEY")),
         },
     }
 
