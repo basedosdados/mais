@@ -3,8 +3,7 @@ name: table-approve
 on:
   push:
     branches:
-      # - master
-      - feat/save_table_header
+      - master
 jobs:
   get-changes:
     runs-on: ubuntu-latest
@@ -37,7 +36,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install basedosdados==1.5.9a1 toml
+          pip install basedosdados==1.5.2 toml
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -129,10 +128,10 @@ jobs:
           GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
           GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
       - name: Test data and fill report
-        run: pytest -v .github/workflows/data-check
+        run: pytest -v .github/workflows/data-check --skipfile .github/DATA_CHECK_SKIP.csv
         shell: bash
         env:
-          BQ_ENVIRONMENT: basedosdados
+          IS_PROD_ENV: True
       - name: Upload report artifact
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
