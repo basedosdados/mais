@@ -25,10 +25,7 @@ class Metadata(Base):
         self.dataset_id = dataset_id
 
         if self.table_id:
-            self.dataset_metadata_obj = Metadata(
-                self.dataset_id,
-                **kwargs
-            )
+            self.dataset_metadata_obj = Metadata(self.dataset_id, **kwargs)
 
         url = "https://basedosdados.org"
         self.CKAN_API_KEY = self.config.get("ckan", {}).get("api_key")
@@ -80,7 +77,7 @@ class Metadata(Base):
                     return dataset, resource
 
         return dataset, {}
-    
+
     @property
     def owner_org(self):
         """
@@ -91,7 +88,7 @@ class Metadata(Base):
         # in case `self` refers to a CKAN table's metadata
         if self.table_id and self.exists_in_ckan():
             return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
-        
+
         # in case `self` refers to a new table's metadata
         elif self.table_id and not self.exists_in_ckan():
             if self.dataset_metadata_obj.exists_in_ckan():
@@ -107,7 +104,7 @@ class Metadata(Base):
 
         if not response.get("success"):
             raise BaseDosDadosException("Organization not found")
-        
+
         owner_org = response.get("result", {}).get("id")
 
         return owner_org
@@ -125,8 +122,8 @@ class Metadata(Base):
             "title": self.local_metadata.get("title"),
             "private": ckan_dataset.get("private") or False,
             "owner_org": self.owner_org,
-            "resources": ckan_dataset.get("resources", []) \
-                or [{"resource_type": "external_link", "name": ""}],
+            "resources": ckan_dataset.get("resources", [])
+            or [{"resource_type": "external_link", "name": ""}],
             "groups": [
                 {"name": group} for group in self.local_metadata.get("groups", []) or []
             ],
@@ -141,9 +138,9 @@ class Metadata(Base):
                         "description": self.local_metadata.get("description"),
                         "ckan_url": self.local_metadata.get("ckan_url"),
                         "github_url": self.local_metadata.get("github_url"),
-                    }
+                    },
                 }
-            ]
+            ],
         }
 
         if self.table_id:
@@ -233,12 +230,12 @@ class Metadata(Base):
             url = f"{self.CKAN_URL}/api/3/action/bd_bdm_dataset_show?"
             url += f"dataset_id={self.dataset_id}"
             exists_in_ckan = requests.get(url).json().get("success")
-        
+
         return exists_in_ckan
 
     def is_updated(self) -> bool:
         """Check if a dataset or table is updated
-        
+
         Returns:
             bool: The update condition of local metadata. `True` if it corresp
             onds to the most recent version of the given table or dataset's me
@@ -279,13 +276,13 @@ class Metadata(Base):
                 vided.
             table_only (bool): Optional. If set to `True`, only `table_config.
                 yaml` is created, even if there is no `dataset_config.yaml` fo
-                r the correspondent dataset metadata. If set to `False`, both 
-                files are created if `dataset_config.yaml` doesn't exist yet. 
+                r the correspondent dataset metadata. If set to `False`, both
+                files are created if `dataset_config.yaml` doesn't exist yet.
                 Defaults to `True`.
 
         Returns:
             Metadata: An instance of the `Metadata` class.
-        
+
         Raises:
             FileExistsError: If the correspodent YAML configuration file alrea
             dy exists and `if_exists` is set to `"raise"`.
@@ -324,10 +321,12 @@ class Metadata(Base):
                 ruamel.preserve_quotes = True
                 ruamel.indent(mapping=4, sequence=6, offset=4)
                 ruamel.dump(yaml_obj, file)
-            
+
             # if `dataset_config.yaml` doesn't exist but user wants to create
             # it alongside `table_config.yaml`
-            dataset_config_exists = (self.metadata_path / 'dataset_config.yaml').exists()
+            dataset_config_exists = (
+                self.metadata_path / "dataset_config.yaml"
+            ).exists()
             if self.table_id and not table_only and not dataset_config_exists:
                 self.dataset_metadata_obj.create(if_exists=if_exists)
 
@@ -395,12 +394,14 @@ class Metadata(Base):
             )
 
             data_dict = self.ckan_data_dict.copy()
-            
+
             if self.table_id:
                 data_dict = data_dict["resources"][0]
 
                 return ckan.call_action(
-                    action="resource_patch" if self.exists_in_ckan() else "resource_create",
+                    action="resource_patch"
+                    if self.exists_in_ckan()
+                    else "resource_create",
                     data_dict=data_dict,
                 )
 
@@ -408,8 +409,10 @@ class Metadata(Base):
                 data_dict["resources"] = []
 
                 return ckan.call_action(
-                    action="package_patch" if self.exists_in_ckan() else "package_create",
-                    data_dict=data_dict
+                    action="package_patch"
+                    if self.exists_in_ckan()
+                    else "package_create",
+                    data_dict=data_dict,
                 )
 
         except (BaseDosDadosException, ValidationError) as e:
@@ -437,9 +440,9 @@ class Metadata(Base):
 
 
 def handle_data(k, schema, data, local_default=None):
-    """Parse API's response data so that it is used in the YAML configuration 
+    """Parse API's response data so that it is used in the YAML configuration
     files.
-    
+
     Args:
         k (str): a key of the CKAN API's response metadata dictionary.
         data (dict): a dictionary of metadata generated from the API.
@@ -473,7 +476,7 @@ def handle_data(k, schema, data, local_default=None):
 
 def handle_complex_fields(yaml_obj, k, properties, definitions, data):
     """Parse complex fields and send each part of them to `handle_data`.
-    
+
     Args:
         yaml_obj (ruamel.yaml.CommentedMap): A YAML object with complex fields
             .
@@ -513,7 +516,7 @@ def add_yaml_property(
     has_column=False,
 ):
     """Recursivelly adds properties to yaml to maintain order.
-    
+
     Args:
         yaml (CommentedMap): A YAML object with complex fields.
         properties (dict): A dictionary that contains the description of the c
@@ -588,7 +591,7 @@ def build_yaml_object(
     partition_columns: list = list(),
 ):
     """Build a dataset_config.yaml or table_config.yaml
-    
+
     Args:
         dataset_id (str): The dataset id.
         table_id (str): The table id.
@@ -599,7 +602,7 @@ def build_yaml_object(
             the table.
         partition_columns (list): A list with the partition columns of the
             table.
-    
+
     Returns:
         CommentedMap: A YAML object with the dataset or table metadata.
     """
@@ -641,7 +644,7 @@ def build_yaml_object(
                 if remote_column["name"] == local_column:
                     remote_column["is_partition"] = True
         yaml["partitions"] = ", ".join(partition_columns)
-    
+
     # Nullify `partitions` field in case of other-than-None empty values
     if yaml.get("partitions") == "":
         yaml["partitions"] = None
@@ -653,7 +656,11 @@ def build_yaml_object(
 
         # Add gcloud config variables
         yaml["source_bucket_name"] = str(config.get("bucket_name"))
-        yaml["project_id_prod"] = str(config.get("gcloud-projects", {}).get("prod", {}).get("name"))
-        yaml["project_id_staging"] = str(config.get("gcloud-projects", {}).get("staging", {}).get("name"))
+        yaml["project_id_prod"] = str(
+            config.get("gcloud-projects", {}).get("prod", {}).get("name")
+        )
+        yaml["project_id_staging"] = str(
+            config.get("gcloud-projects", {}).get("staging", {}).get("name")
+        )
 
     return yaml

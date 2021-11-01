@@ -77,11 +77,12 @@ class Table(Base):
         columns = self.table_config["columns"]
 
         if mode == "staging":
-
             new_columns = []
             for c in columns:
+                # case is_in_staging are None then must be True
+                is_in_staging = c.get("is_in_staging") is None
                 # append columns declared in table_config.yaml to schema only if is_in_staging: True
-                if c.get("is_in_staging") and not c.get("is_partition"):
+                if is_in_staging and not c.get("is_partition"):
                     c["type"] = "STRING"
                     new_columns.append(c)
 
@@ -173,9 +174,12 @@ class Table(Base):
         publish_txt += f"\n\nCREATE VIEW {project_id_prod}.{self.dataset_id}.{self.table_id} AS\nSELECT \n"
 
         # sort columns by is_partition, partitions_columns come first
+
         if self._is_partitioned():
             columns = sorted(
-                self.table_config["columns"], key=lambda k: k["is_partition"], reverse=True
+                self.table_config["columns"],
+                key=lambda k: (k["is_partition"] is not None, k["is_partition"]),
+                reverse=True,
             )
         else:
             columns = self.table_config["columns"]
@@ -251,7 +255,7 @@ class Table(Base):
             - unidade_medida: column mesurement unit
             - dicionario: column related dictionary
             - nome_diretorio: column related directory in the format <dataset_id>.<table_id>:<column_name>
-        
+
         Args:
             columns_config_url (str): google sheets URL.
         """
