@@ -394,8 +394,9 @@ class Metadata(Base):
             )
 
             data_dict = self.ckan_data_dict.copy()
-
-            if self.table_id:
+            # check if package already exists using the metadata_modified field
+            is_new = self.ckan_data_dict.get("metadata_modified") is not None
+            if self.table_id and is_new:
                 data_dict = data_dict["resources"][0]
 
                 return ckan.call_action(
