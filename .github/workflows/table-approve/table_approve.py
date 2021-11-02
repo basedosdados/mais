@@ -199,12 +199,12 @@ def push_table_to_bq(
     for mode in modes:
         try:
             sync_bucket(
-                source_bucket_name,
-                dataset_id,
-                table_id,
-                destination_bucket_name,
-                backup_bucket_name,
-                mode,
+                source_bucket_name=source_bucket_name,
+                dataset_id=dataset_id,
+                table_id=table_id,
+                destination_bucket_name=destination_bucket_name,
+                backup_bucket_name=backup_bucket_name,
+                mode=mode,
             )
         except Exception as error:
             tprint()
@@ -219,7 +219,7 @@ def push_table_to_bq(
     # adjust the correct project ID in publish sql
     replace_project_id_publish_sql(configs_path, dataset_id, table_id)
     # create table object of selected table and dataset ID
-    tb = bd.Table(table_id, dataset_id)
+    tb = bd.Table(dataset_id=dataset_id, table_id=table_id)
 
     # delete table from staging and prod if exists
     tb.delete("all")
@@ -279,39 +279,29 @@ def table_approve():
         dataset_id = dataset_table_ids[table_id]["dataset_id"]
         source_bucket_name = dataset_table_ids[table_id]["source_bucket_name"]
 
-        # push the table to bigquery
-        tprint(f"STARTING TABLE APPROVE ON {dataset_id}.{table_id}")
-        push_table_to_bq(
-            dataset_id,
-            table_id,
-            source_bucket_name,
-            destination_bucket_name=os.environ.get("BUCKET_NAME_DESTINATION"),
-            backup_bucket_name=os.environ.get("BUCKET_NAME_BACKUP"),
-        )
+        try:
+            # push the table to bigquery
+            tprint(f"STARTING TABLE APPROVE ON {dataset_id}.{table_id}")
+            push_table_to_bq(
+                dataset_id=dataset_id,
+                table_id=table_id,
+                source_bucket_name=source_bucket_name,
+                destination_bucket_name=os.environ.get("BUCKET_NAME_DESTINATION"),
+                backup_bucket_name=os.environ.get("BUCKET_NAME_BACKUP"),
+            )
+            pretty_log(dataset_id, table_id, source_bucket_name)
+
+        except Exception as error:
+            tprint()
+            tprint(f"DATA ERROR ON {dataset_id}.{table_id}")
+            traceback.print_exc()
+            tprint()
 
         # try:
-        #     # push the table to bigquery
-        #     tprint(f"STARTING TABLE APPROVE ON {dataset_id}.{table_id}")
-        #     push_table_to_bq(
-        #         dataset_id,
-        #         table_id,
-        #         source_bucket_name,
-        #         destination_bucket_name=os.environ.get("BUCKET_NAME_DESTINATION"),
-        #         backup_bucket_name=os.environ.get("BUCKET_NAME_BACKUP"),
-        #     )
-        #     pretty_log(dataset_id, table_id, source_bucket_name)
-
-        # except Exception as error:
-        #     tprint()
-        #     tprint(f"DATA ERROR ON {dataset_id}.{table_id}")
-        #     traceback.print_exc()
-        #     tprint()
-
-        # try:
-        #     md = Metadata(dataset_id=dataset_id, table_id=table_id)
-        #     if md.validate():
-        #         tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}\n")
-        #         md.publish()
+        md = Metadata(dataset_id=dataset_id, table_id=table_id)
+        # if md.validate():
+        # tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}\n")
+        md.publish()
         # except Exception as error:
         #     tprint()
         #     tprint(f"METADATA ERROR ON {dataset_id}.{table_id}")
