@@ -214,8 +214,6 @@ def push_table_to_bq(
 
     # load the table_config.yaml to get the metadata IDs
     table_config, configs_path = load_configs(dataset_id, table_id)
-    print(f"!!!!!!!!!!!!!!!! TABLE CONFIG !!!!!!!!!!!!!!! : {dataset_id}.{table_id}")
-    print(table_config)
     # adjust the correct project ID in publish sql
     replace_project_id_publish_sql(configs_path, dataset_id, table_id)
     # create table object of selected table and dataset ID
@@ -297,16 +295,18 @@ def table_approve():
             traceback.print_exc()
             tprint()
 
-        # try:
-        md = Metadata(dataset_id=dataset_id, table_id=table_id)
-        # if md.validate():
-        # tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}\n")
-        md.publish()
-        # except Exception as error:
-        #     tprint()
-        #     tprint(f"METADATA ERROR ON {dataset_id}.{table_id}")
-        #     traceback.print_exc()
-        #     tprint()
+        try:
+            md = Metadata(dataset_id=dataset_id, table_id=table_id)
+            if md.validate():
+                tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}\n")
+                md.publish()
+        except Exception as error:
+            tprint()
+            tprint(f"METADATA ERROR ON {dataset_id}.{table_id}")
+            print(error)
+            print("\n")
+            traceback.print_exc()
+            tprint()
 
 
 if __name__ == "__main__":

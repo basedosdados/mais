@@ -7,7 +7,7 @@ table_id: test_table
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: test table-approve     
+description: test dataset
 
 # A máxima unidade espacial que a tabela cobre.
 spatial_coverage:
@@ -155,4 +155,4 @@ columns:
       is_in_staging:
       is_partition:
 
-metadata_modified: '2021-11-02T00:42:51.364937'
+metadata_modified: '2021-11-02T00:58:02.713310'
