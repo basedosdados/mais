@@ -117,7 +117,7 @@ columns:
       is_partition: true
     - name: sigla_uf
       bigquery_type:
-      description:
+      description: testenado testando table-approve
       temporal_coverage:
       covered_by_dictionary:
       directory_column:

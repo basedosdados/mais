@@ -297,7 +297,7 @@ def table_approve():
 
         try:
             md = Metadata(dataset_id=dataset_id, table_id=table_id)
-            md.validate():
+            md.validate()
             tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}\n")
             md.publish()
             tprint(f"SUCESS PUBLISHED {dataset_id}.{table_id}\n")
