@@ -286,15 +286,22 @@ def table_approve():
                 destination_bucket_name=os.environ.get("BUCKET_NAME_DESTINATION"),
                 backup_bucket_name=os.environ.get("BUCKET_NAME_BACKUP"),
             )
+            pretty_log(dataset_id, table_id, source_bucket_name)
 
+        except Exception as error:
+            tprint()
+            tprint(f"DATA ERROR ON {dataset_id}.{table_id}")
+            traceback.print_exc()
+            tprint()
+
+        try:
             md = Metadata(dataset_id=dataset_id, table_id=table_id)
             if md.validate():
                 tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}\n")
                 md.publish()
-            pretty_log(dataset_id, table_id, source_bucket_name)
         except Exception as error:
             tprint()
-            tprint(f"ERROR ON {dataset_id}.{table_id}")
+            tprint(f"METADATA ERROR ON {dataset_id}.{table_id}")
             traceback.print_exc()
             tprint()
 
