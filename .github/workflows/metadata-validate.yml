@@ -1,9 +1,9 @@
 name: metadata-validate
 
 on:
-  push:
-    push:
-      - *
+  pull_request:
+    paths:
+      - bases/**
 jobs:
   get-changes:
     runs-on: ubuntu-latest
