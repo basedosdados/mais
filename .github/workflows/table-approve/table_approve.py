@@ -8,6 +8,7 @@ import basedosdados as bd
 import yaml
 from basedosdados import Dataset, Storage
 from basedosdados.upload.base import Base
+from basedosdados.upload.metadata import Metadata
 
 
 def tprint(title=""):
@@ -285,6 +286,11 @@ def table_approve():
                 destination_bucket_name=os.environ.get("BUCKET_NAME_DESTINATION"),
                 backup_bucket_name=os.environ.get("BUCKET_NAME_BACKUP"),
             )
+
+            md = Metadata(dataset_id=dataset_id, table_id=table_id)
+            if md.validate():
+                tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}\n")
+                md.publish()
             pretty_log(dataset_id, table_id, source_bucket_name)
         except Exception as error:
             tprint()

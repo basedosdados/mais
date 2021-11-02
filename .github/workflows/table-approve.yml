@@ -3,7 +3,8 @@ name: table-approve
 on:
   push:
     branches:
-      - master
+      # - master
+      - python-1.6.0
 jobs:
   get-changes:
     runs-on: ubuntu-latest
