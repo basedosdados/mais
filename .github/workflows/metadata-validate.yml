@@ -1,4 +1,4 @@
-name: table-approve
+name: metadata-validate
 
 on:
   push:
