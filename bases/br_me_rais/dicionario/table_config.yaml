@@ -1,85 +1,91 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: dicionario # AUTO GENERATED
-dataset_id: br_me_rais # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-me-rais # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais # AUTO GENERATED
+dataset_id: br_me_rais
 
-version: v1.0 # REQUIRED
-
-last_updated: 2021-10-31 # AUTO GENERATED
+table_id: dicionario
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    Dicionário para a base da Relação Anual de Informações Sociaos (RAIS).
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Dicionário dos dados da Relação Anual de Informações Sociais (RAIS)
 
-# Quem está completando esse arquivo config?
+# A máxima unidade espacial que a tabela cobre.
+spatial_coverage:
+    continent:
+        - south_america
+    country:
+        - bra
+
+# Anos cobertos pela tabela.
+temporal_coverage:
+
+# A unidade temporal com qual a tabela é atualizada.
+update_frequency: unique
+
+# Entidade representada por cada linha.
+entity:
+
+# A unidade temporal representada por cada linha.
+time_unit: unique
+
+# O conjunto mínimo de colunas identificando cada linha unicamente.
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+identifying_columns: []
+
+last_updated:
+    metadata:
+    data:
+    release:
+
+version: v1.0
+
+# Quem está preenchendo esses metadados?
 published_by:
-    name: Lucas Nascimento Moreira  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code # REQUIRED
-    website: <website>
-    email: lucas.moreira@basedosdados.org
+    name: Ricardo Dahis
+    email: rdahis@basedosdados.org
+    github_user: rdahis
+    ckan_user: rdahis
+    website: ricardodahis.com
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: Lucas Nascimento Moreira
+data_cleaned_by:
+    name: Ricardo Dahis
+    email: rdahis@basedosdados.org
+    github_user: rdahis
+    ckan_user: rdahis
+    website: ricardodahis.com
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
-    website: <website>
-    email: lucas.moreira@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    Coleta de informações dos dicionários para estabelecimento e vínculo divulgados pelo Ministério da Economia
+data_cleaning_description: Coleta de dados de diferentes dados do Ministério da Economia
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: unico # REQUIRED 
+# Url dos dados originais no GCP Storage.
+raw_files_url:
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - chave
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
 
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-    - id_tabela
-    - coluna
-    - chave
-    - cobertura_temporal
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
+covered_by_dictionary: no
 
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
+partitions:
+
+bdm_file_size:
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -89,34 +95,71 @@ partitions: # REQUIRED
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: id_tabela
-        description: ID Tabela
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: nome_coluna
-        description: Nome da coluna
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: chave
-        description: Chave
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cobertura_temporal
-        description: Cobertura temporal
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: valor
-        description: Valor
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+columns:
+    - name: id_tabela
+      bigquery_type: string
+      description: ID da tabela
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: True
+      is_partition: False
+    - name: nome_coluna
+      bigquery_type: string
+      description: Nome da coluna
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: True
+      is_partition: False
+    - name: chave
+      bigquery_type: string
+      description: Chave
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: True
+      is_partition: False
+    - name: cobertura_temporal
+      bigquery_type: string
+      description: Cobertura temporal
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: True
+      is_partition: False
+    - name: valor
+      bigquery_type: string
+      description: Valor
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: True
+      is_partition: False
+
+metadata_modified: '2021-11-02T14:24:45.313240'

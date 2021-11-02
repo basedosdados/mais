@@ -1,46 +1,54 @@
-Dicionário para a base da Relação Anual de Informações Sociaos (RAIS).
-
+Dicionário dos dados da Relação Anual de Informações Sociais (RAIS)
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-me-rais
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Lucas Nascimento Moreira
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
-Email: lucas.moreira@basedosdados.orgTratado por
+Nome: Ricardo Dahis
+Código: 
+Website: ricardodahis.com
+Email: rdahis@basedosdados.org
+Tratado por
 -----------
-Nome: Lucas Nascimento Moreira
+Nome: Ricardo Dahis
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
-Email: lucas.moreira@basedosdados.org
+Website: ricardodahis.com
+Email: rdahis@basedosdados.org
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- chave
+
+
 
 Colunas identificando linhas unicamente
 -------------------
-- id_tabela
-- coluna
-- chave
-- cobertura_temporal
+
+
+
 
 Cobertura Temporal
 ------------------
 
+
+
+
 Cobertura Espacial
 ------------------
+- continent
+- country
+
+
+
 
 Tratamento
 ----------
-Coleta de informações dos dicionários para estabelecimento e vínculo divulgados pelo Ministério da Economia
+Coleta de dados de diferentes dados do Ministério da Economia
+
+
 
 Frequencia de Atualização
 -------------------------
-unico
-
-
+unique
