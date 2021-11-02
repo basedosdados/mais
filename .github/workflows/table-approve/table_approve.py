@@ -232,7 +232,9 @@ def push_table_to_bq(
     )
 
     # publish the table in prod bigquery
+    print("!!!!!!!!!!!!!!!!! PUBLISH !!!!!!!!!!!!!!!!!!!")
     tb.publish(if_exists="replace")
+    print("!!!!!!!!!!!!!!!!! FINISH PUBLISH !!!!!!!!!!!!!!!!!!!")
 
     # updates the table description
     tb.update("prod")

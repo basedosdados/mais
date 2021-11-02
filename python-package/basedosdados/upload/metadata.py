@@ -394,9 +394,14 @@ class Metadata(Base):
             )
 
             data_dict = self.ckan_data_dict.copy()
+
             # check if package already exists using the metadata_modified field
-            is_new = self.ckan_data_dict.get("metadata_modified") is not None
-            if self.table_id and is_new:
+            is_new = (
+                self.ckan_data_dict.get("resources")[0].get("metadata_modified") is None
+            )
+
+            if self.table_id and not is_new:
+
                 data_dict = data_dict["resources"][0]
 
                 return ckan.call_action(
@@ -425,13 +430,8 @@ class Metadata(Base):
             raise BaseDosDadosException(message)
 
         except NotAuthorized as e:
-            message = (
-                f"Could not publish metadata due to an authorization error. P"
-                f"lease check if you set the `api_key` at the `[ckan]` sectio"
-                f"n of your ~/.basedosdados/config.toml correctly. You must b"
-                f"e an authorized user to publish modifications to a dataset "
-                f"or table's metadata."
-            )
+            message = "Could not publish metadata due to an authorization error. Please check if you set the `api_key` at the `[ckan]` section of your ~/.basedosdados/config.toml correctly. You must be an authorized user to publish modifications to a dataset or table's metadata."
+
             raise BaseDosDadosException(message)
 
 
