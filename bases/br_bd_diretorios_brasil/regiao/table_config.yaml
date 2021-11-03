@@ -55,7 +55,7 @@ observation_level: #REQUIRED
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - sigla_regiao
+    - sigla
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -91,7 +91,7 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: sigla_regiao
+        name: sigla
         description: Sigla da Grande Região Brasileira
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

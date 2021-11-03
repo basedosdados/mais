@@ -21,6 +21,6 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.regiao AS
 SELECT 
-SAFE_CAST(sigla_regiao AS STRING) sigla_regiao,
+SAFE_CAST(sigla AS STRING) sigla,
 SAFE_CAST(nome AS STRING) nome
 from basedosdados-dev.br_bd_diretorios_brasil_staging.regiao as t
