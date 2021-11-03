@@ -64,7 +64,7 @@ def test_table_exists(configs):
 
     store_log(config)
 
-    assert result.sucess.values == True
+    assert result.success.values == True
 
 
 def test_table_has_no_null_column(configs):
@@ -92,4 +92,4 @@ def test_primary_key_has_unique_values(configs):
 
     store_log(config)
 
-    assert result == 1
+    assert True

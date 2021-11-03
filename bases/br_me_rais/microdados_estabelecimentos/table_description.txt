@@ -2,8 +2,8 @@ Microdados de estabelecimentos da RAIS.
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-me-rais
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,26 +11,30 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
+Código: 
 Website: www.ricardodahis.com
-Email: rdahis@basedosdados.orgTratado por
+Email: rdahis@basedosdados.org
+Tratado por
 -----------
 Nome: Ricardo Dahis
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
+Website: www.ricardodahis.com
 Email: rdahis@basedosdados.org
+
+
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
-- sigla_uf
+-  sigla_uf
+-  id_municipio
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- estabelecimento
-- ano
 
 Colunas identificando linhas unicamente
 -------------------
+
+
+
 
 Cobertura Temporal
 ------------------
@@ -70,16 +74,27 @@ Cobertura Temporal
 - 2018
 - 2019
 
+
+
+
 Cobertura Espacial
 ------------------
-- brasil
+- b
+- r
+- a
+
+
+
 
 Tratamento
 ----------
-Unificamos todos os anos, consertamos nomes de variáveis, e limpamos valores errados de células.
+- Unificamos todos os anos.
+ - Padronizamos nomes de variáveis.
+ - Limpamos valores errados de células.
+ - Renomeamos municípios nulos para 'NA'.
+
+
 
 Frequencia de Atualização
 -------------------------
-1 ano
-
-
+one_year
