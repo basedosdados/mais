@@ -281,6 +281,7 @@ def table_approve():
         dataset_id = dataset_table_ids[table_id]["dataset_id"]
         source_bucket_name = dataset_table_ids[table_id]["source_bucket_name"]
 
+        # criate a bigquery table in prod
         try:
             # push the table to bigquery
             tprint(f"STARTING TABLE APPROVE ON {dataset_id}.{table_id}")
@@ -299,6 +300,7 @@ def table_approve():
             traceback.print_exc()
             tprint()
 
+        # pubish Metadata in prod
         try:
             md = Metadata(dataset_id=dataset_id, table_id=table_id)
             md.validate()

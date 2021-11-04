@@ -293,7 +293,7 @@ class Storage(Base):
                 return
 
         # download all blobs matching the search to given savepath
-        for blob in tqdm(blob_list, desc="Download Blobs"):
+        for blob in tqdm(blob_list, desc="Download Blob"):
 
             # parse blob.name and get the csv file name
             csv_name = blob.name.split("/")[-1]
@@ -391,7 +391,7 @@ class Storage(Base):
             # define retry policy for google cloud storage exceptions
             my_retry_policy = Retry(predicate=_is_retryable)
 
-            for source_table in tqdm(table_blobs_chunks, desc="Delete Table"):
+            for source_table in tqdm(table_blobs_chunks, desc="Delete Table Chunk"):
 
                 with self.client["storage_staging"].batch():
 
@@ -454,12 +454,12 @@ class Storage(Base):
             required_kwargs=["data"],
         )
 
-        for source_table in tqdm(source_table_ref_chunks, desc="Copy Table"):
+        for source_table in tqdm(source_table_ref_chunks, desc="Copy Table Chunk"):
             with self.client["storage_staging"].batch():
 
                 for blob in source_table:
                     self.bucket.copy_blob(
                         blob,
                         destination_bucket=destination_bucket,
-                        retry=my_retry_policy,
+                        retry=my_cond_policy,
                     )
