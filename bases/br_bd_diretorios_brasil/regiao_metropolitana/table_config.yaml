@@ -104,7 +104,7 @@ columns: # REQUIRED
   
     -   
         name: id_regiao_metropolitana
-        description: Código identificador IBGE da região metropolitana
+        description: ID Região Metropolitana - IBGE
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
   
