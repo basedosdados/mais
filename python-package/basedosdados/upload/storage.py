@@ -6,6 +6,9 @@ from basedosdados.exceptions import BaseDosDadosException
 
 from google.api_core import exceptions
 from google.api_core.retry import Retry
+from google.cloud.storage.retry import ConditionalRetryPolicy
+from google.cloud.storage.retry import DEFAULT_RETRY
+
 
 # google retryble exceptions
 _MY_RETRIABLE_TYPES = [
@@ -447,15 +450,19 @@ class Storage(Base):
 
         # define retry policy for google cloud storage exceptions
         my_retry_policy = Retry(predicate=_is_retryable)
+        my_cond_policy = ConditionalRetryPolicy(
+            my_retry_policy,
+            conditional_predicate=DEFAULT_RETRY.with_deadline(60),
+            required_kwargs=["query_params"],
+        )
+        # return source_table_ref_chunks
+        for source_table in tqdm(source_table_ref_chunks, desc="Copy Table"):
 
-        return source_table_ref_chunks
-        # for source_table in tqdm(source_table_ref_chunks, desc="Copy Table"):
+            with self.client["storage_staging"].batch():
 
-        #     with self.client["storage_staging"].batch():
-
-        #         for blob in source_table:
-        #             self.bucket.copy_blob(
-        #                 blob,
-        #                 destination_bucket=destination_bucket,
-        #                 retry=my_retry_policy,
-        #             )
+                for blob in source_table:
+                    self.bucket.copy_blob(
+                        blob,
+                        destination_bucket=destination_bucket,
+                        retry=my_cond_policy,
+                    )
