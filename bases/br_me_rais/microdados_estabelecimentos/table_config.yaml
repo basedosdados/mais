@@ -7,7 +7,7 @@ table_id: microdados_estabelecimentos
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: "Microdados de estabelecimentos da RAIS.\n"     
+description: "Microdados de estabelecimentos da RAIS.\n"        
 
 # A máxima unidade espacial que a tabela cobre.
 spatial_coverage: bra
@@ -494,4 +494,4 @@ columns:
       is_in_staging: true
       is_partition: true
 
-metadata_modified: '2021-08-17T04:01:35.643295'
+metadata_modified: '2021-11-04T00:56:30.899282'
