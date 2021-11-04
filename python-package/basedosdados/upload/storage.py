@@ -277,7 +277,7 @@ class Storage(Base):
                 return
 
         # download all blobs matching the search to given savepath
-        for blob in blob_list:
+        for blob in tqdm(blob_list, desc="Download Blobs"):
 
             # parse blob.name and get the csv file name
             csv_name = blob.name.split("/")[-1]
@@ -368,7 +368,7 @@ class Storage(Base):
                 table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)
             ]
 
-            for source_table in table_blobs_chunks:
+            for source_table in tqdm(table_blobs_chunks, desc="Delete Table"):
 
                 with self.client["storage_staging"].batch():
 
@@ -423,7 +423,7 @@ class Storage(Base):
             source_table_ref[i : i + 999] for i in range(0, len(source_table_ref), 999)
         ]
 
-        for source_table in source_table_ref_chunks:
+        for source_table in tqdm(source_table_ref_chunks, desc="Copy Table"):
 
             with self.client["storage_staging"].batch():
 
