@@ -80,7 +80,9 @@ class Table(Base):
             new_columns = []
             for c in columns:
                 # case is_in_staging are None then must be True
-                is_in_staging = c.get("is_in_staging") is None
+                is_in_staging = (
+                    True if c.get("is_in_staging") is None else c["is_in_staging"]
+                )
                 # append columns declared in table_config.yaml to schema only if is_in_staging: True
                 if is_in_staging and not c.get("is_partition"):
                     c["type"] = "STRING"
