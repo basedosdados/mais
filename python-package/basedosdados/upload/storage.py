@@ -8,7 +8,7 @@ from google.api_core import exceptions
 from google.api_core.retry import Retry
 from google.cloud.storage.retry import ConditionalRetryPolicy, is_etag_in_data
 
-# google retryble exceptions
+# google retryble exceptions. References: https://googleapis.dev/python/storage/latest/retry_timeout.html#module-google.cloud.storage.retry
 _MY_RETRIABLE_TYPES = [
     exceptions.TooManyRequests,  # 429
     exceptions.InternalServerError,  # 500
@@ -333,14 +333,13 @@ class Storage(Base):
             else [mode]
         )
         # define retry policy for google cloud storage exceptions
-        my_retry_policy = Retry(predicate=_is_retryable)
 
         for m in mode:
 
             blob = self.bucket.blob(self._build_blob_name(filename, m, partitions))
 
             if blob.exists() or not blob.exists() and not not_found_ok:
-                blob.delete(retry=my_retry_policy)
+                blob.delete(retry=Retry(predicate=_is_retryable))
             else:
                 return
 
@@ -388,15 +387,12 @@ class Storage(Base):
                 table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)
             ]
 
-            # define retry policy for google cloud storage exceptions
-            my_retry_policy = Retry(predicate=_is_retryable)
-
             for source_table in tqdm(table_blobs_chunks, desc="Delete Table Chunk"):
 
                 with self.client["storage_staging"].batch():
 
                     for blob in source_table:
-                        blob.delete(retry=my_retry_policy)
+                        blob.delete(retry=Retry(predicate=_is_retryable))
 
     def copy_table(
         self,
@@ -446,20 +442,12 @@ class Storage(Base):
             source_table_ref[i : i + 999] for i in range(0, len(source_table_ref), 999)
         ]
 
-        # define retry policy for google cloud storage exceptions
-        my_retry_policy = Retry(predicate=_is_retryable)
-        my_cond_policy = ConditionalRetryPolicy(
-            my_retry_policy,
-            conditional_predicate=is_etag_in_data,
-            required_kwargs=["data"],
-        )
-
         for source_table in tqdm(source_table_ref_chunks, desc="Copy Table Chunk"):
             with self.client["storage_staging"].batch():
-
                 for blob in source_table:
                     self.bucket.copy_blob(
                         blob,
                         destination_bucket=destination_bucket,
-                        retry=my_cond_policy,
+                        retry=Retry(predicate=_is_retryable),
+                        timeout=(60, 180),
                     )
