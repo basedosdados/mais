@@ -448,13 +448,14 @@ class Storage(Base):
         # define retry policy for google cloud storage exceptions
         my_retry_policy = Retry(predicate=_is_retryable)
 
-        for source_table in tqdm(source_table_ref_chunks, desc="Copy Table"):
+        return source_table_ref_chunks
+        # for source_table in tqdm(source_table_ref_chunks, desc="Copy Table"):
 
-            with self.client["storage_staging"].batch():
+        #     with self.client["storage_staging"].batch():
 
-                for blob in source_table:
-                    self.bucket.copy_blob(
-                        blob,
-                        destination_bucket=destination_bucket,
-                        retry=my_retry_policy,
-                    )
+        #         for blob in source_table:
+        #             self.bucket.copy_blob(
+        #                 blob,
+        #                 destination_bucket=destination_bucket,
+        #                 retry=my_retry_policy,
+        #             )
