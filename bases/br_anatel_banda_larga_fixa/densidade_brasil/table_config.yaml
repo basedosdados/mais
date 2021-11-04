@@ -1,46 +1,47 @@
 source_bucket_name: basedosdados-dev
 project_id_staging: basedosdados-dev
 project_id_prod: basedosdados-dev
-table_id: microdados_estabelecimento # AUTO GENERATED
-dataset_id: br_ms_vacinacao_covid19 # AUTO GENERATED
+table_id: densidade_brasil # AUTO GENERATED
+dataset_id: br_anatel_banda_larga_fixa # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-ms-vacinacao-covid19 # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19 # AUTO GENERATED
+url_ckan: https://basedosdados.org/dataset/br-anatel-banda-larga-fixa # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa # AUTO GENERATED
 
-version: v1.0
+version: v1.0 # REQUIRED
 
-last_updated: '2021-11-02' # AUTO GENERATED
+last_updated: 2021-10-24 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    Microdados normalizados de estabelecimentos.
+    Total de acessos e densidade por domicílio da Banda Larga Fixa no Brasil por mês e ano desde março de 2007
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: Ricardo Dahis
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19/code # REQUIRED
-    website: www.ricardodahis.com
-    email: rdahis@basedosdados.org
+    name: Lucas Nascimento Moreira  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa/code # REQUIRED
+    website: <website>
+    email: lucas.moreira@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: Ricardo Dahis
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19/code # REQUIRED
-    website: <onde encontrar os dados tratados>
-    email: <email>
+    name: Lucas Nascimento Moreira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa/code
+    website: <website>
+    email: lucas.moreira@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: |
-    - Normalizamos a tabela original.
+treatment_description: | 
+    - Agrupamento do total de acessos a nível nacional;
+    - Merge com a base de densidade 
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: dia
+data_update_frequency: mes # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -49,13 +50,15 @@ data_update_frequency: dia
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - estabelecimento
+    - ano
+    - mes
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - id_estabelecimento
+    - ano
+    - mes
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -72,14 +75,27 @@ coverage_geo:
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
+    - 2007
+    - 2008
+    - 2009
+    - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
+    - 2020
     - 2021
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED  
-    - sigla_uf
+partitions: # REQUIRED
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -90,23 +106,27 @@ partitions: # REQUIRED
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
-    - name: id_municipio
-      description: ID Município - IBGE 7 Dígitos
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: id_estabelecimento
-      description: ID Estabelecimento - CNES
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: razao_social
-      description: Razão Social
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: nome_fantasia
-      description: Nome Fantasia
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: false   # Bool [True, False], whether the column is a partition.
-    - name: sigla_uf
-      description: Sigla da Unidade da Federação
-      is_in_staging: true   # Bool [True, False], whether the column is in the staging table
-      is_partition: true   # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: ano
+        description: Ano
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: mes
+        description: Mês
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: acessos
+        description: Total de acessos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: densidade
+        description: Densidade de acessos por 100 domicílios
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.

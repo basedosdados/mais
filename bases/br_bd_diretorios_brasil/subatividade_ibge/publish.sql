@@ -19,8 +19,8 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.regiao AS
+CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.subatividade_ibge AS
 SELECT 
-SAFE_CAST(sigla AS STRING) sigla,
-SAFE_CAST(nome AS STRING) nome
-from basedosdados-dev.br_bd_diretorios_brasil_staging.regiao as t
+SAFE_CAST(id_subatividade AS STRING) id_subatividade,
+SAFE_CAST(descricao AS STRING) descricao
+from basedosdados-dev.br_bd_diretorios_brasil_staging.subatividade_ibge as t

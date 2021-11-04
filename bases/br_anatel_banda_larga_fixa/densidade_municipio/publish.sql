@@ -19,8 +19,12 @@ TIPOS:
 
 */
 
-CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.regiao AS
+CREATE VIEW basedosdados-dev.br_anatel_banda_larga_fixa.densidade_municipio AS
 SELECT 
-SAFE_CAST(sigla AS STRING) sigla,
-SAFE_CAST(nome AS STRING) nome
-from basedosdados-dev.br_bd_diretorios_brasil_staging.regiao as t
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(mes AS INT64) mes,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(acessos AS INT64) acessos,
+SAFE_CAST(densidade AS FLOAT64) densidade
+from basedosdados-dev.br_anatel_banda_larga_fixa_staging.densidade_municipio as t

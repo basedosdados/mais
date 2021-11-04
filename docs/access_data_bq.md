@@ -65,6 +65,8 @@ Dentro do projeto existem dois níveis de organização dos dados,
   nível municipal)
 - **Cada tabela pertence a um único conjunto de dados** (ex: a tabela
   `municipio` em `br_ibge_populacao` é diferente de `municipio` em `br_bd_diretorios`)
+  
+!!! Tip "[Veja aqui o guia do Google de como funciona a interface do BigQuery](https://cloud.google.com/bigquery/docs/bigquery-web-ui)."
 
 ![](images/bq_dataset_tables_structure.png){ width=100% }
 
@@ -120,5 +122,4 @@ colocamos algumas recomendações usadas pela nossa equipe tanto no
 aprendizado quanto no dia-a-dia:
 
 - [Lista de funções em SQL da W3](https://www.w3schools.com/sql/default.Asp)
-- [Curso SQL na DataCamp](https://www.datacamp.com/courses/introduction-to-sql)
 - [Curso SQL na Codeacademy](https://www.codecademy.com/learn/learn-sql)

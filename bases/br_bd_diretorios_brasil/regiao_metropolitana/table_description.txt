@@ -1,4 +1,4 @@
-A tabela contém nome e sigla das grandes regiões brasileiras
+A tabela contém os códigos identificadores e nomes de Região Metropolitana (RM), Aglomeração Urbana (AGLO) e Região Integrada de Desenvolvimento (RIDE) do Brasil reunidas pelo IBGE
 
 
 Para saber mais acesse:
@@ -22,11 +22,11 @@ Email: gustavo.tiago@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)
 -------------------
-- regiao
+- regiao metropolitana
 
 Colunas identificando linhas unicamente
 -------------------
-- sigla
+- id_regiao_metropolitana
 
 Cobertura Temporal
 ------------------
