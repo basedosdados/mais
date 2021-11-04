@@ -388,11 +388,17 @@ class Storage(Base):
             ]
 
             for source_table in tqdm(table_blobs_chunks, desc="Delete Table Chunk"):
-
-                with self.client["storage_staging"].batch():
-
-                    for blob in source_table:
-                        blob.delete(retry=Retry(predicate=_is_retryable))
+                counter = 0
+                while counter < 3:
+                    try:
+                        with self.client["storage_staging"].batch():
+                            for blob in source_table:
+                                blob.delete(retry=Retry(predicate=_is_retryable))
+                    except Exception as e:
+                        counter += 1
+                        print(f"{e}")
+                        print(f"Retrying {counter} copy operation in 3 seconds...")
+                        time.sleep(3)
 
     def copy_table(
         self,

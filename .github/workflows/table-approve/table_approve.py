@@ -157,15 +157,15 @@ def sync_bucket(
 
     if len(list(destination_ref)):
 
-        # tprint(f"{mode.upper()}: DELETE BACKUP DATA")
-        # ref.delete_table(not_found_ok=True, mode=mode, bucket_name=backup_bucket_name)
+        #     # tprint(f"{mode.upper()}: DELETE BACKUP DATA")
+        #     # ref.delete_table(not_found_ok=True, mode=mode, bucket_name=backup_bucket_name)
 
-        tprint(f"{mode.upper()}: BACKUP OLD DATA")
-        ref.copy_table(
-            source_bucket_name=destination_bucket_name,
-            destination_bucket_name=backup_bucket_name,
-            mode=mode,
-        )
+        #     tprint(f"{mode.upper()}: BACKUP OLD DATA")
+        #     ref.copy_table(
+        #         source_bucket_name=destination_bucket_name,
+        #         destination_bucket_name=backup_bucket_name,
+        #         mode=mode,
+        #     )
 
         tprint(f"{mode.upper()}: DELETE OLD DATA")
         ref.delete_table(
