@@ -10,12 +10,14 @@ table_id: microdados_vinculos
 description: "Microdados públicos dos vínculos de emprego na RAIS. Base desidentificada,\
     \ isto é, que não inclui identificadores únicos de linha. Cada linha representa\
     \ um vínculo - por isso indicamos este como nível de observação mesmo que não\
-    \ conste como coluna.\n"  
+    \ conste como coluna.\n"
 
 # A máxima unidade espacial que a tabela cobre.
-spatial_coverage:
+spatial_coverage: bra
 
 # Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplo: 1995(1)2019.
 temporal_coverage:
     - 1985
     - 1986
@@ -54,16 +56,20 @@ temporal_coverage:
     - 2019
 
 # A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: one_year
 
 # Entidade representada por cada linha.
-entity:
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+entity: []
 
 # A unidade temporal representada por cada linha.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 time_unit:
 
 # O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Preencha com os nomes de colunas.
+# Exemplos: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 identifying_columns:
 
@@ -72,32 +78,32 @@ last_updated:
     data:
     release:
 
-version: ''
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
-    github_user: rdahis
-    ckan_user: rdahis
+    github_user:
     website: www.ricardodahis.com
+    ckan_user:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
     name: Ricardo Dahis
-    email: rdahis@basedosdados.org
-    github_user: rdahis
-    ckan_user: rdahis
-    website: www.ricardodahis.com
-    code_url:
+    email: rdahis@basedosodados.org
+    github_user:
+    ckan_user:
+    website:
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "- Unificamos todos os anos.\n
-    - Padronizamos nomes de variáveis.\n
-    - Limpamos valores errados de células.\n
-    - Renomeamos municípios nulos para 'NA'."
+data_cleaning_description: "Unificamos todos os anos consertando nomes de colunas,\
+    \ erros de valores, etc.\n"
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -108,6 +114,8 @@ auxiliary_files_url:
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
 
+# A tabela tem colunas que precisam de dicionário?
+# Opções: yes, no.
 covered_by_dictionary:
 
 source_bucket_name: basedosdados-dev
@@ -120,7 +128,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: ano, sigla_uf, id_municipio
+partitions: ano, sigla_uf
 
 bdm_file_size:
 
@@ -133,60 +141,47 @@ bdm_file_size:
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: ano
-      bigquery_type: int64
-      description: Ano
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: ano
-          column_name: ano
-      measurement_unit: year
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: true
-    - name: sigla_uf
-      bigquery_type: string
-      description: Sigla da Unidade da Federação
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: uf
-          column_name: sigla_uf
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: true
     - name: id_municipio
-      bigquery_type: string
+      bigquery_type:
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: municipio
-          column_name: id_municipio
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: true
-    - name: tipo_vinculo
-      bigquery_type: string
-      description: Tipo do Vínculo
-      temporal_coverage:
-      covered_by_dictionary: yes
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_6
+      bigquery_type:
+      description: ID Município - IBGE 6 Dígitos
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_vinculo
+      bigquery_type:
+      description: Tipo do Vínculo
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: vinculo_ativo_3112
-      bigquery_type: int64
+      bigquery_type:
       description: Vínculo Ativo no dia 31/12
       temporal_coverage:
       covered_by_dictionary:
@@ -195,11 +190,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: tipo_admissao
-      bigquery_type: string
+      bigquery_type:
       description: Tipo da Admissão
       temporal_coverage:
       covered_by_dictionary:
@@ -208,37 +203,37 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: mes_admissao
-      bigquery_type: int64
+      bigquery_type:
       description: Mês de Admissão
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: mes
-          column_name: mes
-      measurement_unit: month
-      has_sensitive_data: no
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: mes_desligamento
-      bigquery_type: int64
+      bigquery_type:
       description: Mês de Desligamento
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: mes
-          column_name: mes
-      measurement_unit: month
-      has_sensitive_data: no
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: motivo_desligamento
-      bigquery_type: string
+      bigquery_type:
       description: Motivo do Desligamento
       temporal_coverage:
       covered_by_dictionary:
@@ -247,11 +242,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: causa_desligamento_1
-      bigquery_type: string
+      bigquery_type:
       description: Causa 1 do Desligamento
       temporal_coverage:
       covered_by_dictionary:
@@ -260,11 +255,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: causa_desligamento_2
-      bigquery_type: string
+      bigquery_type:
       description: Causa 2 do Desligamento
       temporal_coverage:
       covered_by_dictionary:
@@ -273,11 +268,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: causa_desligamento_3
-      bigquery_type: string
+      bigquery_type:
       description: Causa 3 do Desligamento
       temporal_coverage:
       covered_by_dictionary:
@@ -286,11 +281,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: faixa_tempo_emprego
-      bigquery_type: string
+      bigquery_type:
       description: Faixa Tempo Emprego
       temporal_coverage:
       covered_by_dictionary:
@@ -299,11 +294,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: tempo_emprego
-      bigquery_type: float64
+      bigquery_type:
       description: Tempo Emprego
       temporal_coverage:
       covered_by_dictionary:
@@ -312,11 +307,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: faixa_horas_contratadas
-      bigquery_type: string
+      bigquery_type:
       description: Faixa Horas Contratadas
       temporal_coverage:
       covered_by_dictionary:
@@ -325,11 +320,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: quantidade_horas_contratadas
-      bigquery_type: int64
+    - name: qtde_horas_contratadas
+      bigquery_type:
       description: Quantidade de Horas Contratadas
       temporal_coverage:
       covered_by_dictionary:
@@ -338,24 +333,24 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: id_municipio_6_trabalho
-      bigquery_type: string
+      bigquery_type:
       description: ID Município de Trabalho - IBGE 6 Dígitos
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: municipio
-          column_name: id_municipio_6
+          dataset_id:
+          table_id:
+          column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: quantidade_dias_afastamento
-      bigquery_type: int64
+    - name: qtde_dias_afastamento
+      bigquery_type:
       description: Quantidade de Dias sob Afastamento
       temporal_coverage:
       covered_by_dictionary:
@@ -364,11 +359,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: indicador_cei_vinculado
-      bigquery_type: int64
+      bigquery_type:
       description: Indicador CEI Vinculado
       temporal_coverage:
       covered_by_dictionary:
@@ -377,11 +372,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: indicador_trabalho_parcial
-      bigquery_type: int64
+      bigquery_type:
       description: Indicador Trabalho Parcial
       temporal_coverage:
       covered_by_dictionary:
@@ -390,11 +385,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: indicador_trabalho_intermitente
-      bigquery_type: int64
+      bigquery_type:
       description: Indicador Trabalho Intermitente
       temporal_coverage:
       covered_by_dictionary:
@@ -403,11 +398,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: faixa_remuneracao_media_sm
-      bigquery_type: string
+    - name: faixa_remun_media_sm
+      bigquery_type:
       description: Faixa Remuneração Média (Salários Mínimos)
       temporal_coverage:
       covered_by_dictionary:
@@ -416,11 +411,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_media_sm
-      bigquery_type: float64
+    - name: valor_remun_media_sm
+      bigquery_type:
       description: Valor da Remuneração Média (Salários Mínimos)
       temporal_coverage:
       covered_by_dictionary:
@@ -429,11 +424,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_media_nominal
-      bigquery_type: float64
+    - name: valor_remun_media_nominal
+      bigquery_type:
       description: Valor da Remuneração Média (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -442,11 +437,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: faixa_remuneracao_dezembro_sm
-      bigquery_type: string
+    - name: faixa_remun_dezembro_sm
+      bigquery_type:
       description: Faixa Remuneração em Dezembro (Salários Mínimos)
       temporal_coverage:
       covered_by_dictionary:
@@ -455,11 +450,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_dezembro_sm
-      bigquery_type: float64
+    - name: valor_remun_dezembro_sm
+      bigquery_type:
       description: Valor da Remuneração em Dezembro (Salários Mínimos)
       temporal_coverage:
       covered_by_dictionary:
@@ -468,11 +463,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_janeiro_nominal
-      bigquery_type: float64
+    - name: valor_remun_janeiro_nominal
+      bigquery_type:
       description: Valor da Remuneração em Janeiro (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -481,11 +476,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_fevereiro_nominal
-      bigquery_type: float64
+    - name: valor_remun_fevereiro_nominal
+      bigquery_type:
       description: Valor da Remuneração em Fevereiro (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -494,11 +489,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_marco_nominal
-      bigquery_type: float64
+    - name: valor_remun_marco_nominal
+      bigquery_type:
       description: Valor da Remuneração em Março (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -507,11 +502,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_abril_nominal
-      bigquery_type: float64
+    - name: valor_remun_abril_nominal
+      bigquery_type:
       description: Valor da Remuneração em Abril (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -520,11 +515,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_maio_nominal
-      bigquery_type: float64
+    - name: valor_remun_maio_nominal
+      bigquery_type:
       description: Valor da Remuneração em Maio (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -533,11 +528,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_junho_nominal
-      bigquery_type: float64
+    - name: valor_remun_junho_nominal
+      bigquery_type:
       description: Valor da Remuneração em Junho (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -546,11 +541,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_julho_nominal
-      bigquery_type: float64
+    - name: valor_remun_julho_nominal
+      bigquery_type:
       description: Valor da Remuneração em Julho (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -559,11 +554,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_agosto_nominal
-      bigquery_type: float64
+    - name: valor_remun_agosto_nominal
+      bigquery_type:
       description: Valor da Remuneração em Agosto (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -572,11 +567,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_setembro_nominal
-      bigquery_type: float64
+    - name: valor_remun_setembro_nominal
+      bigquery_type:
       description: Valor da Remuneração em Setembro (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -585,11 +580,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_outubro_nominal
-      bigquery_type: float64
+    - name: valor_remun_outubro_nominal
+      bigquery_type:
       description: Valor da Remuneração em Outubro (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -598,11 +593,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_novembro_nominal
-      bigquery_type: float64
+    - name: valor_remun_novembro_nominal
+      bigquery_type:
       description: Valor da Remuneração em Novembro (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -611,11 +606,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_dezembro_nominal
-      bigquery_type: float64
+    - name: valor_remun_dezembro_nominal
+      bigquery_type:
       description: Valor da Remuneração em Dezembro (Nominal)
       temporal_coverage:
       covered_by_dictionary:
@@ -624,11 +619,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: tipo_salario
-      bigquery_type: string
+      bigquery_type:
       description: Tipo do Salário
       temporal_coverage:
       covered_by_dictionary:
@@ -637,11 +632,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: valor_salario_contratual
-      bigquery_type: float64
+      bigquery_type:
       description: Valor Contratual do Salário
       temporal_coverage:
       covered_by_dictionary:
@@ -650,11 +645,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: subatividade_ibge
-      bigquery_type: string
+      bigquery_type:
       description: Subatividade - IBGE
       temporal_coverage:
       covered_by_dictionary:
@@ -663,11 +658,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: subsetor_ibge
-      bigquery_type: string
+      bigquery_type:
       description: Subsetor - IBGE
       temporal_coverage:
       covered_by_dictionary:
@@ -676,11 +671,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: cbo_1994
-      bigquery_type: string
+      bigquery_type:
       description: Classificação Brasileira de Ocupações (CBO) 1994
       temporal_coverage:
       covered_by_dictionary:
@@ -689,11 +684,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: cbo_2002
-      bigquery_type: string
+      bigquery_type:
       description: Classificação Brasileira de Ocupações (CBO) 2002
       temporal_coverage:
       covered_by_dictionary:
@@ -702,11 +697,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: cnae_1
-      bigquery_type: string
+      bigquery_type:
       description: Classificação Nacional de Atividades Econômicas (CNAE) 1.0
       temporal_coverage:
       covered_by_dictionary:
@@ -715,11 +710,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: cnae_2
-      bigquery_type: string
+      bigquery_type:
       description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0
       temporal_coverage:
       covered_by_dictionary:
@@ -728,11 +723,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: cnae_2_subclasse
-      bigquery_type: string
+      bigquery_type:
       description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0 Subclasse
       temporal_coverage:
       covered_by_dictionary:
@@ -741,11 +736,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: faixa_etaria
-      bigquery_type: string
+      bigquery_type:
       description: Faixa Etária
       temporal_coverage:
       covered_by_dictionary:
@@ -754,11 +749,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: idade
-      bigquery_type: int64
+      bigquery_type:
       description: Idade
       temporal_coverage:
       covered_by_dictionary:
@@ -767,11 +762,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: grau_instrucao_1985_2005
-      bigquery_type: string
+      bigquery_type:
       description: Grau de Instrução 1985-2005
       temporal_coverage:
       covered_by_dictionary:
@@ -780,11 +775,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: grau_instrucao_apos_2005
-      bigquery_type: string
+      bigquery_type:
       description: Grau de Instrução Após 2005
       temporal_coverage:
       covered_by_dictionary:
@@ -793,11 +788,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: nacionalidade
-      bigquery_type: string
+      bigquery_type:
       description: Nacionalidade
       temporal_coverage:
       covered_by_dictionary:
@@ -806,12 +801,12 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: sexo
-      bigquery_type: string
-      description: Sexo
+    - name: sexo_trabalhador
+      bigquery_type:
+      description: Sexo do Trabalhador
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -819,11 +814,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: raca_cor
-      bigquery_type: string
+      bigquery_type:
       description: Raça ou Cor
       temporal_coverage:
       covered_by_dictionary:
@@ -832,11 +827,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: indicador_portador_deficiencia
-      bigquery_type: int64
+      bigquery_type:
       description: Indicador de Portador de Deficiência
       temporal_coverage:
       covered_by_dictionary:
@@ -845,11 +840,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: tipo_deficiencia
-      bigquery_type: string
+      bigquery_type:
       description: Tipo da Deficiência
       temporal_coverage:
       covered_by_dictionary:
@@ -858,11 +853,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: ano_chegada_brasil
-      bigquery_type: int64
+      bigquery_type:
       description: Ano de Chegada no Brasil
       temporal_coverage:
       covered_by_dictionary:
@@ -871,11 +866,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: tamanho_estabelecimento
-      bigquery_type: string
+      bigquery_type:
       description: Tamanho do Estabelecimento
       temporal_coverage:
       covered_by_dictionary:
@@ -884,11 +879,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: tipo_estabelecimento
-      bigquery_type: string
+      bigquery_type:
       description: Tipo do Estabelecimento
       temporal_coverage:
       covered_by_dictionary:
@@ -897,11 +892,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: natureza_juridica
-      bigquery_type: string
+      bigquery_type:
       description: Natureza Jurídica
       temporal_coverage:
       covered_by_dictionary:
@@ -910,11 +905,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: indicador_simples
-      bigquery_type: int64
+      bigquery_type:
       description: Indicador do Simples
       temporal_coverage:
       covered_by_dictionary:
@@ -923,11 +918,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: bairros_sp
-      bigquery_type: string
+      bigquery_type:
       description: Bairros em São Paulo
       temporal_coverage:
       covered_by_dictionary:
@@ -936,11 +931,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: distritos_sp
-      bigquery_type: string
+      bigquery_type:
       description: Distritos em São Paulo
       temporal_coverage:
       covered_by_dictionary:
@@ -949,11 +944,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: bairros_fortaleza
-      bigquery_type: string
+      bigquery_type:
       description: Bairros em Fortaleza
       temporal_coverage:
       covered_by_dictionary:
@@ -962,11 +957,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: bairros_rj
-      bigquery_type: string
+      bigquery_type:
       description: Bairros no Rio de Janeiro
       temporal_coverage:
       covered_by_dictionary:
@@ -975,11 +970,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
     - name: regioes_administrativas_df
-      bigquery_type: string
+      bigquery_type:
       description: Regiões Administrativas no Distrito Federal
       temporal_coverage:
       covered_by_dictionary:
@@ -988,8 +983,34 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data:
       is_in_staging: true
       is_partition: false
+    - name: ano
+      bigquery_type:
+      description: Ano
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: true
+    - name: sigla_uf
+      bigquery_type:
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: true
 
-metadata_modified: '2021-11-02T14:24:45.321768'
+metadata_modified: '2021-08-17T04:01:35.643136'
