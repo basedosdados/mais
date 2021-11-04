@@ -32,11 +32,11 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9.x'
+          python-version: "3.9.x"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install basedosdados==1.6.0.b6 toml
+          pip install basedosdados==1.6.0.b7 toml
       - name: Set up base dos dados environment
         run: python .github/workflows/env-setup/env_setup.py
         shell: bash
@@ -55,4 +55,3 @@ jobs:
           PROJECT_ID: ${{ secrets.GCP_MAIN_PROJECT_ID }}
           BUCKET_NAME_BACKUP: basedosdados-backup
           BUCKET_NAME_DESTINATION: basedosdados
-

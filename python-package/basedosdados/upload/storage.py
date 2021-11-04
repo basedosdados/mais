@@ -4,6 +4,21 @@ from tqdm import tqdm
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
 
+from google.api_core import exceptions
+from google.api_core.retry import Retry
+
+# google retryble exceptions
+_MY_RETRIABLE_TYPES = [
+    exceptions.TooManyRequests,  # 429
+    exceptions.InternalServerError,  # 500
+    exceptions.BadGateway,  # 502
+    exceptions.ServiceUnavailable,  # 503
+]
+
+
+def _is_retryable(exc):
+    return isinstance(exc, _MY_RETRIABLE_TYPES)
+
 
 class Storage(Base):
     """
@@ -316,12 +331,15 @@ class Storage(Base):
             if mode == "all"
             else [mode]
         )
+        # define retry policy for google cloud storage exceptions
+        my_retry_policy = Retry(predicate=_is_retryable)
+
         for m in mode:
 
             blob = self.bucket.blob(self._build_blob_name(filename, m, partitions))
 
             if blob.exists() or not blob.exists() and not not_found_ok:
-                blob.delete()
+                blob.delete(retry=my_retry_policy)
             else:
                 return
 
@@ -340,6 +358,7 @@ class Storage(Base):
                 What to do if table not found
 
         """
+
         prefix = f"{mode}/{self.dataset_id}/{self.table_id}/"
 
         if bucket_name is not None:
@@ -368,12 +387,15 @@ class Storage(Base):
                 table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)
             ]
 
+            # define retry policy for google cloud storage exceptions
+            my_retry_policy = Retry(predicate=_is_retryable)
+
             for source_table in tqdm(table_blobs_chunks, desc="Delete Table"):
 
                 with self.client["storage_staging"].batch():
 
                     for blob in source_table:
-                        blob.delete()
+                        blob.delete(retry=my_retry_policy)
 
     def copy_table(
         self,
@@ -423,9 +445,16 @@ class Storage(Base):
             source_table_ref[i : i + 999] for i in range(0, len(source_table_ref), 999)
         ]
 
+        # define retry policy for google cloud storage exceptions
+        my_retry_policy = Retry(predicate=_is_retryable)
+
         for source_table in tqdm(source_table_ref_chunks, desc="Copy Table"):
 
             with self.client["storage_staging"].batch():
 
                 for blob in source_table:
-                    self.bucket.copy_blob(blob, destination_bucket=destination_bucket)
+                    self.bucket.copy_blob(
+                        blob,
+                        destination_bucket=destination_bucket,
+                        retry=my_retry_policy,
+                    )

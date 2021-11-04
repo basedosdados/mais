@@ -33,15 +33,15 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9.x'
+          python-version: "3.9.x"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install basedosdados==1.6.0.b6 toml
+          pip install basedosdados==1.6.0.b7 toml
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@master
         with:
-          version: '290.0.1'
+          version: "290.0.1"
           project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY_TASK_CALLER }}
           export_default_credentials: true
@@ -78,7 +78,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9.x'
+          python-version: "3.9.x"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -86,7 +86,7 @@ jobs:
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@master
         with:
-          version: '290.0.1'
+          version: "290.0.1"
           project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY_TASK_CALLER }}
           export_default_credentials: true
@@ -115,11 +115,11 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9.x'
+          python-version: "3.9.x"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install basedosdados==1.6.0.b6 pyarrow pytest toml
+          pip install basedosdados==1.6.0.b7 pyarrow pytest toml
       - name: Set up basedosdados environment
         run: |
           cd .github/workflows/env-setup
@@ -145,6 +145,5 @@ jobs:
           name: data-check-report
           path: report.md
           retention-days: 7
-
 # Reference
 # https://github.com/google-github-actions/setup-gcloud/blob/master/setup-gcloud/README.md
