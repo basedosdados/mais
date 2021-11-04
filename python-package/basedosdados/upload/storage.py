@@ -398,13 +398,13 @@ class Storage(Base):
                         with self.client["storage_staging"].batch():
                             for blob in source_table:
                                 blob.delete(retry=Retry(predicate=_is_retryable))
+                        break
                     except Exception as e:
-                        print(f"{e}")
                         traceback.print_exc()
                         print(
-                            f"Chunk {i} | Attempt {counter}: copy operation in 10 seconds..."
+                            f"Chunk {i} | Attempt {counter}: delete operation starts again in 6 seconds..."
                         )
-                        time.sleep(10)
+                        time.sleep(6)
                         counter += 1
 
     def copy_table(
@@ -467,13 +467,14 @@ class Storage(Base):
                                 blob,
                                 destination_bucket=destination_bucket,
                                 retry=Retry(predicate=_is_retryable),
-                                timeout=(60, 180),
                             )
+                    break
                 except Exception as e:
                     print(f"{e}")
                     traceback.print_exc()
                     print(
-                        f"Chunk {i} | Attempt {counter}: copy operation in 10 seconds..."
+                        f"Chunk {i} | Attempt {counter}: copy operation starts again in 6 seconds..."
                     )
-                    time.sleep(10)
                     counter += 1
+                    time.sleep(6)
+                    continue
