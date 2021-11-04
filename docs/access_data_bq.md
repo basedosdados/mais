@@ -120,5 +120,4 @@ colocamos algumas recomendações usadas pela nossa equipe tanto no
 aprendizado quanto no dia-a-dia:
 
 - [Lista de funções em SQL da W3](https://www.w3schools.com/sql/default.Asp)
-- [Curso SQL na DataCamp](https://www.datacamp.com/courses/introduction-to-sql)
 - [Curso SQL na Codeacademy](https://www.codecademy.com/learn/learn-sql)
