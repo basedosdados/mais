@@ -1,6 +1,8 @@
+import enum
 from pathlib import Path
 from tqdm import tqdm
 import time
+import traceback
 
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
@@ -387,18 +389,23 @@ class Storage(Base):
                 table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)
             ]
 
-            for source_table in tqdm(table_blobs_chunks, desc="Delete Table Chunk"):
+            for i, source_table in enumerate(
+                tqdm(table_blobs_chunks, desc="Delete Table Chunk")
+            ):
                 counter = 0
-                while counter < 3:
+                while counter < 100:
                     try:
                         with self.client["storage_staging"].batch():
                             for blob in source_table:
                                 blob.delete(retry=Retry(predicate=_is_retryable))
                     except Exception as e:
-                        counter += 1
                         print(f"{e}")
-                        print(f"Retrying {counter} copy operation in 3 seconds...")
-                        time.sleep(3)
+                        traceback.print_exc()
+                        print(
+                            f"Chunk {i} | Attempt {counter}: copy operation in 10 seconds..."
+                        )
+                        time.sleep(10)
+                        counter += 1
 
     def copy_table(
         self,
@@ -448,9 +455,11 @@ class Storage(Base):
             source_table_ref[i : i + 999] for i in range(0, len(source_table_ref), 999)
         ]
 
-        for source_table in tqdm(source_table_ref_chunks, desc="Copy Table Chunk"):
+        for i, source_table in enumerate(
+            tqdm(source_table_ref_chunks, desc="Copy Table Chunk")
+        ):
             counter = 0
-            while counter < 3:
+            while counter < 100:
                 try:
                     with self.client["storage_staging"].batch():
                         for blob in source_table:
@@ -461,7 +470,10 @@ class Storage(Base):
                                 timeout=(60, 180),
                             )
                 except Exception as e:
-                    counter += 1
                     print(f"{e}")
-                    print(f"Retrying {counter} copy operation in 3 seconds...")
-                    time.sleep(3)
+                    traceback.print_exc()
+                    print(
+                        f"Chunk {i} | Attempt {counter}: copy operation in 10 seconds..."
+                    )
+                    time.sleep(10)
+                    counter += 1
