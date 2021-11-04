@@ -1,12 +1,12 @@
 from pathlib import Path
 from tqdm import tqdm
+import time
 
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
 
 from google.api_core import exceptions
 from google.api_core.retry import Retry
-from google.cloud.storage.retry import ConditionalRetryPolicy, is_etag_in_data
 
 # google retryble exceptions. References: https://googleapis.dev/python/storage/latest/retry_timeout.html#module-google.cloud.storage.retry
 _MY_RETRIABLE_TYPES = [
@@ -443,11 +443,19 @@ class Storage(Base):
         ]
 
         for source_table in tqdm(source_table_ref_chunks, desc="Copy Table Chunk"):
-            with self.client["storage_staging"].batch():
-                for blob in source_table:
-                    self.bucket.copy_blob(
-                        blob,
-                        destination_bucket=destination_bucket,
-                        retry=Retry(predicate=_is_retryable),
-                        timeout=(60, 180),
-                    )
+            counter = 0
+            while counter < 3:
+                try:
+                    with self.client["storage_staging"].batch():
+                        for blob in source_table:
+                            self.bucket.copy_blob(
+                                blob,
+                                destination_bucket=destination_bucket,
+                                retry=Retry(predicate=_is_retryable),
+                                timeout=(60, 180),
+                            )
+                except Exception as e:
+                    counter += 1
+                    print(f"{e}")
+                    print(f"Retrying {counter} copy operation in 3 seconds...")
+                    time.sleep(3)
