@@ -14,10 +14,10 @@ from basedosdados.upload.metadata import Metadata
 
 def tprint(title=""):
     if not len(title):
-        print("\n\n", "#" * 80, "\n")
+        print("\n", "#" * 80, "\n")
     else:
         size = 38 - int(len(title) / 2)
-        print("\n\n\n", "#" * size, title, "#" * size, "\n")
+        print("\n\n\n\n", "#" * size, title, "#" * size, "\n")
 
 
 def load_configs(dataset_id, table_id):
@@ -220,9 +220,11 @@ def push_table_to_bq(
                 backup_bucket_name=backup_bucket_name,
                 mode=mode,
             )
+            tprint()
         except Exception as error:
             tprint(f"DATA ERROR ON {mode}.{dataset_id}.{table_id}")
             traceback.print_exc(file=sys.stderr)
+            tprint()
 
     # load the table_config.yaml to get the metadata IDs
     table_config, configs_path = load_configs(dataset_id, table_id)
