@@ -403,10 +403,9 @@ class Storage(Base):
                         break
                     except Exception as e:
                         print(
-                            f"Chunk {i} | Attempt {counter}: delete operation starts again in 6 seconds...",
-                            flush=True,
+                            f"Delete Table Chunk {i} | Attempt {counter}: delete operation starts again in 5 seconds...",
                         )
-                        time.sleep(6)
+                        time.sleep(5)
                         counter += 1
                         traceback.print_exc(file=sys.stderr)
 
@@ -474,9 +473,8 @@ class Storage(Base):
                     break
                 except Exception as e:
                     print(
-                        f"Chunk {i} | Attempt {counter}: copy operation starts again in 6 seconds...",
-                        flush=True,
+                        f"Copy Table Chunk {i} | Attempt {counter}: copy operation starts again in 5 seconds...",
                     )
                     counter += 1
-                    time.sleep(6)
+                    time.sleep(5)
                     traceback.print_exc(file=sys.stderr)
