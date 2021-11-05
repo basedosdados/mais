@@ -14,10 +14,10 @@ from basedosdados.upload.metadata import Metadata
 
 def tprint(title=""):
     if not len(title):
-        print("#" * 80)
+        print("#" * 80, "\n")
     else:
         size = 38 - int(len(title) / 2)
-        print("\n", "#" * size, title, "#" * size)
+        print("\n", "#" * size, title, "#" * size, "\n")
 
 
 def load_configs(dataset_id, table_id):
@@ -221,10 +221,8 @@ def push_table_to_bq(
                 mode=mode,
             )
         except Exception as error:
-            tprint()
-            tprint(f"ERROR ON {mode}.{dataset_id}.{table_id}")
+            tprint(f"DATA ERROR ON {mode}.{dataset_id}.{table_id}")
             traceback.print_exc(file=sys.stderr)
-            tprint()
 
     # load the table_config.yaml to get the metadata IDs
     table_config, configs_path = load_configs(dataset_id, table_id)
@@ -267,7 +265,7 @@ def pretty_log(dataset_id, table_id, source_bucket_name):
         "\n###                                                                                ###",
         "\n###               Data successfully synced and created in bigquery                 ###",
         "\n###                                                                                ###",
-        f"\n###               Dataset      : {dataset_id} ", " " * (48 - len(dataset_id)), "###",
+        f"\n###               Dataset      : {dataset_id} ", " " * (47 - len(dataset_id)),   "###",
         f"\n###               Table        : {table_id}", " " * (48 - len(table_id)),        "###",
         f"\n###               Source Bucket: {source_bucket_name}", " " * (48 - source_len), "###",
         "\n###                                                                                ###",
@@ -283,7 +281,7 @@ def table_approve():
     # print dataset tables info
     tprint("TABLES FOUND")
     pprint(dataset_table_ids)
-
+    tprint()
     # iterate over each table in dataset of the PR
     for table_id in dataset_table_ids.keys():
         dataset_id = dataset_table_ids[table_id]["dataset_id"]
@@ -301,26 +299,23 @@ def table_approve():
                 backup_bucket_name=os.environ.get("BUCKET_NAME_BACKUP"),
             )
             pretty_log(dataset_id, table_id, source_bucket_name)
-
-        except Exception as error:
             tprint()
+        except Exception as error:
             tprint(f"DATA ERROR ON {dataset_id}.{table_id}")
             traceback.print_exc(file=sys.stderr)
             tprint()
-
         # pubish Metadata in prod
         try:
             md = Metadata(dataset_id=dataset_id, table_id=table_id)
             md.validate()
-            tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}\n")
+            tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}")
             md.publish()
-            tprint(f"SUCESS PUBLISHED {dataset_id}.{table_id}\n")
-
+            tprint(f"SUCESS PUBLISHED {dataset_id}.{table_id}")
+            tprint()
         except Exception as error:
-            tprint()
             tprint(f"METADATA ERROR ON {dataset_id}.{table_id}")
-            tprint()
             traceback.print_exc(file=sys.stderr)
+            tprint()
 
 
 if __name__ == "__main__":
