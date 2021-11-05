@@ -1,7 +1,7 @@
 name: metadata-validate
 
 on:
-  pull_request:
+  push:
     paths:
       - 'bases/**'
 jobs:
