@@ -16,6 +16,7 @@ _MY_RETRIABLE_TYPES = [
     exceptions.InternalServerError,  # 500
     exceptions.BadGateway,  # 502
     exceptions.ServiceUnavailable,  # 503
+    exceptions.from_http_response,
 ]
 
 
@@ -400,12 +401,14 @@ class Storage(Base):
                                 blob.delete(retry=Retry(predicate=_is_retryable))
                         break
                     except Exception as e:
-                        traceback.print_exc()
+                        print(f"{e}\n")
                         print(
                             f"Chunk {i} | Attempt {counter}: delete operation starts again in 6 seconds..."
                         )
                         time.sleep(6)
                         counter += 1
+
+                        # traceback.print_exc()
 
     def copy_table(
         self,
@@ -470,11 +473,10 @@ class Storage(Base):
                             )
                     break
                 except Exception as e:
-                    print(f"{e}")
-                    traceback.print_exc()
+                    print(f"{e}\n")
                     print(
                         f"Chunk {i} | Attempt {counter}: copy operation starts again in 6 seconds..."
                     )
                     counter += 1
                     time.sleep(6)
-                    continue
+                    # traceback.print_exc()
