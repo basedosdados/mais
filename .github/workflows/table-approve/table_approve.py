@@ -17,6 +17,7 @@ def tprint(title=""):
         print(
             "\n",
             "#" * 80,
+            "\n",
         )
     else:
         size = 38 - int(len(title) / 2)
