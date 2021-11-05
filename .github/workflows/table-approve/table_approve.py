@@ -3,6 +3,7 @@ import os
 import traceback
 from pathlib import Path
 from pprint import pprint
+import sys
 
 import basedosdados as bd
 import yaml
@@ -155,22 +156,22 @@ def sync_bucket(
             f"No objects found on the source bucket {source_bucket_name}.{prefix}"
         )
 
-    # if len(list(destination_ref)):
+    if len(list(destination_ref)):
 
-    #     # tprint(f"{mode.upper()}: DELETE BACKUP DATA")
-    #     # ref.delete_table(not_found_ok=True, mode=mode, bucket_name=backup_bucket_name)
+        # tprint(f"{mode.upper()}: DELETE BACKUP DATA")
+        # ref.delete_table(not_found_ok=True, mode=mode, bucket_name=backup_bucket_name)
 
-    #     tprint(f"{mode.upper()}: BACKUP OLD DATA")
-    #     ref.copy_table(
-    #         source_bucket_name=destination_bucket_name,
-    #         destination_bucket_name=backup_bucket_name,
-    #         mode=mode,
-    #     )
+        tprint(f"{mode.upper()}: BACKUP OLD DATA")
+        ref.copy_table(
+            source_bucket_name=destination_bucket_name,
+            destination_bucket_name=backup_bucket_name,
+            mode=mode,
+        )
 
-    #     tprint(f"{mode.upper()}: DELETE OLD DATA")
-    #     ref.delete_table(
-    #         not_found_ok=True, mode=mode, bucket_name=destination_bucket_name
-    #     )
+        tprint(f"{mode.upper()}: DELETE OLD DATA")
+        ref.delete_table(
+            not_found_ok=True, mode=mode, bucket_name=destination_bucket_name
+        )
 
     tprint(f"{mode.upper()}: TRANSFER NEW DATA")
     ref.copy_table(
@@ -215,7 +216,7 @@ def push_table_to_bq(
         except Exception as error:
             tprint()
             tprint(f"ERROR ON {mode}.{dataset_id}.{table_id}")
-            traceback.print_exc()
+            traceback.print_exc(file=sys.stderr)
             tprint()
 
     # load the table_config.yaml to get the metadata IDs
@@ -297,7 +298,7 @@ def table_approve():
         except Exception as error:
             tprint()
             tprint(f"DATA ERROR ON {dataset_id}.{table_id}")
-            traceback.print_exc()
+            traceback.print_exc(file=sys.stderr)
             tprint()
 
         # pubish Metadata in prod
@@ -311,10 +312,8 @@ def table_approve():
         except Exception as error:
             tprint()
             tprint(f"METADATA ERROR ON {dataset_id}.{table_id}")
-            print(error)
-            print("\n")
-            traceback.print_exc()
             tprint()
+            traceback.print_exc(file=sys.stderr)
 
 
 if __name__ == "__main__":

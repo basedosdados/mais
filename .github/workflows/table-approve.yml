@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install basedosdados==1.6.0b17 toml
+          pip install basedosdados==1.6.0b18 toml
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -58,7 +58,7 @@ jobs:
           CKAN_API_KEY: ${{ secrets.CKAN_STAGING }}
 
       - name: Table approve
-        run: python .github/workflows/table-approve/table_approve.py
+        run: python -u .github/workflows/table-approve/table_approve.py
         shell: bash
         env:
           PROJECT_ID: ${{ secrets.GCP_MAIN_PROJECT_ID }}
@@ -119,7 +119,7 @@ jobs:
   #     - name: Install dependencies
   #       run: |
   #         python -m pip install --upgrade pip
-  #         pip install basedosdados==1.6.0b17 pyarrow pytest toml
+  #         pip install basedosdados==1.6.0b18 pyarrow pytest toml
   #     - name: Set up basedosdados environment
   #       run: |
   #         cd .github/workflows/env-setup

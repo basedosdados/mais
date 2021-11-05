@@ -13,10 +13,10 @@ from basedosdados.upload.metadata import Metadata
 
 def tprint(title=""):
     if not len(title):
-        print("#" * 80)
+        print("#" * 80, flush=True)
     else:
         size = 38 - int(len(title) / 2)
-        print("\n", "#" * size, title, "#" * size)
+        print("\n", "#" * size, title, "#" * size, flush=True)
 
 
 def load_configs(dataset_id, table_id):

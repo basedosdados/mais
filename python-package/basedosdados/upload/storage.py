@@ -3,6 +3,7 @@ from pathlib import Path
 from tqdm import tqdm
 import time
 import traceback
+import sys
 
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
@@ -401,14 +402,13 @@ class Storage(Base):
                                 blob.delete(retry=Retry(predicate=_is_retryable))
                         break
                     except Exception as e:
-                        print(f"{e}\n")
                         print(
-                            f"Chunk {i} | Attempt {counter}: delete operation starts again in 6 seconds..."
+                            f"Chunk {i} | Attempt {counter}: delete operation starts again in 6 seconds...",
+                            flush=True,
                         )
                         time.sleep(6)
                         counter += 1
-
-                        # traceback.print_exc()
+                        traceback.print_exc(file=sys.stderr)
 
     def copy_table(
         self,
@@ -473,10 +473,10 @@ class Storage(Base):
                             )
                     break
                 except Exception as e:
-                    print(f"{e}\n")
                     print(
-                        f"Chunk {i} | Attempt {counter}: copy operation starts again in 6 seconds..."
+                        f"Chunk {i} | Attempt {counter}: copy operation starts again in 6 seconds...",
+                        flush=True,
                     )
                     counter += 1
                     time.sleep(6)
-                    # traceback.print_exc()
+                    traceback.print_exc(file=sys.stderr)
