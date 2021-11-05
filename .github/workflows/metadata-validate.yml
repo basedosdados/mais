@@ -3,7 +3,7 @@ name: metadata-validate
 on:
   pull_request:
     paths:
-      - bases/**
+      - 'bases/**'
 jobs:
   get-changes:
     runs-on: ubuntu-latest
