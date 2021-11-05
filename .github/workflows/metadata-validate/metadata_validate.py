@@ -13,10 +13,10 @@ from basedosdados.upload.metadata import Metadata
 
 def tprint(title=""):
     if not len(title):
-        print("#" * 80)
+        print("#" * 80, "\n")
     else:
         size = 38 - int(len(title) / 2)
-        print("\n", "#" * size, title, "#" * size)
+        print("\n", "#" * size, title, "#" * size, "\n")
 
 
 def load_configs(dataset_id, table_id):
@@ -83,6 +83,7 @@ def metadata_validate():
     # print dataset tables info
     tprint("TABLES FOUND")
     pprint(dataset_table_ids)
+    print("\n")
 
     # iterate over each table in dataset of the PR
     for table_id in dataset_table_ids.keys():
@@ -93,11 +94,11 @@ def metadata_validate():
             # push the table to bigquery
             md = Metadata(dataset_id=dataset_id, table_id=table_id)
 
-            if md.validate():
-                tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}\n")
+            md.validate()
+            tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}")
+            tprint()
 
         except Exception as error:
-            tprint()
             tprint(f"ERROR ON {dataset_id}.{table_id}")
             traceback.print_exc()
             tprint()
