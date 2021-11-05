@@ -208,7 +208,7 @@ def push_table_to_bq(
 ):
     # copy proprosed data between storage buckets
     # create a backup of old data, then delete it and copies new data into the destination bucket
-    modes = ["raw", "staging", "header", "auxiliary_files", "architecture"]
+    modes = ["staging", "raw", "auxiliary_files", "architecture", "header"]
 
     for mode in modes:
         try:
