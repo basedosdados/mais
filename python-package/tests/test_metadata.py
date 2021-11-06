@@ -255,7 +255,7 @@ def invalid_dataset_metadata(metadatadir):
     invalid_dataset_metadata.create(if_exists="replace")
 
     invalid_config = invalid_dataset_metadata.local_metadata
-    invalid_config["metadata_modified"] = "not_a_valid_date"
+    invalid_config["title"] = {"this_title": "is_not_valid"}
 
     print(invalid_dataset_metadata.filepath)
 
@@ -290,10 +290,13 @@ def test_validate_is_not_succesful(
     with pytest.raises(BaseDosDadosException):
         invalid_table_metadata.validate()
 
-    # TODO: Change fields modified by this tool
-    # or else there is no way that this can be tested
-    # with pytest.raises(BaseDosDadosException):
-    #     invalid_dataset_metadata.validate()
+    with pytest.raises(BaseDosDadosException):
+        invalid_dataset_metadata.validate()
+
+
+def test_validate_organization_not_found():
+    pass
+
 
 
 # TODO: Mock ckan server to activate this test
