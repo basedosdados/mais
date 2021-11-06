@@ -294,12 +294,29 @@ def test_validate_is_not_succesful(
         invalid_dataset_metadata.validate()
 
 
-def test_validate_organization_not_found():
-    pass
+@pytest.fixture
+def invalid_organization_dataset(metadatadir):
+    invalid_organization_dataset = Metadata(
+        dataset_id="br_ibge_pib",
+        metadata_path=metadatadir,
+    )
+    invalid_organization_dataset.create(if_exists="replace")
+
+    invalid_config = invalid_organization_dataset.local_metadata
+    invalid_config["organization"] = "not-a-valid-organization"
+
+    with open(invalid_organization_dataset.filepath, "w", encoding="utf-8") as file:
+        ryaml.dump(invalid_config, file)
+
+    return invalid_organization_dataset
 
 
+def test_validate_organization_not_found(invalid_organization_dataset):
+    with pytest.raises(BaseDosDadosException, match="Organization not found"):
+        invalid_organization_dataset.validate()
 
-# TODO: Mock ckan server to activate this test
+
+# TODO: Mock ckan server to activate publish tests
 @pytest.mark.skip(reason="This test requires a mocked CKAN server.")
 def test_publish_is_successful(
     valid_metadata_dataset: Metadata,
