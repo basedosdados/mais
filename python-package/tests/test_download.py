@@ -180,6 +180,15 @@ def test_read_sql_syntax_error():
     assert "Reason: 400 Syntax error" in str(excinfo.value)
 
 
+def test_read_sql_out_of_bound_date():
+
+    read_sql(
+        query="select DATE('1000-01-01')",
+        billing_project_id=TEST_PROJECT_ID,
+        from_file=True,
+    )
+
+
 def test_read_table():
 
     assert isinstance(
