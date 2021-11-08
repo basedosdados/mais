@@ -3,11 +3,10 @@ on:
   push:
     branches:
       - master
-  push:
     paths:
       - .github/**
       - python-package/**
-  workflow_dispatch:
+
 jobs:
   guard:
     runs-on: ubuntu-latest
