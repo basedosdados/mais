@@ -58,6 +58,8 @@ jobs:
           PROJECT_NAME_STAGING: basedosdados-staging
           GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
           GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
+          CKAN_URL: "https://staging.basedosdados.org"
+          CKAN_API_KEY: ${{ secrets.CKAN_STAGING }}
       - name: Run ETL-CAGED
         run: python bases/br_me_caged/code/caged_novo/caged_novo.py
         shell: bash

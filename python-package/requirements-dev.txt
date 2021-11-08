@@ -21,3 +21,4 @@ mkdocs-click
 ruamel.yaml
 requests
 pandas
+ckanapi

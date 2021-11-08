@@ -77,6 +77,10 @@ def env_setup():
                 ),
             },
         },
+        "ckan": {
+            "url": os.getenv("CKAN_URL"),
+            "api_key": decoding_base64(os.getenv("CKAN_API_KEY")).replace("\n", ""),
+        },
     }
 
     # load the secret of prod and staging data
