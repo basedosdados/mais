@@ -11,13 +11,8 @@ from basedosdados.upload.base import Base
 def decoding_base64(message):
     # decoding the base64 string
     base64_bytes = message.encode("ascii")
-    try:
-        message_bytes = base64.b64decode(base64_bytes)
-        message_original = message_bytes.decode("ascii")
-    except:
-        message_original = ""
-
-    return message_original
+    message_bytes = base64.b64decode(base64_bytes)
+    return message_bytes.decode("ascii")
 
 
 def create_config_folder(config_folder):
