@@ -62,17 +62,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install basedosdados==1.6.0b19 pyarrow pytest toml
-      - name: Set up basedosdados environment
-        run: |
-          cd .github/workflows/env-setup
-          python env_setup.py
+      - name: Set up base dos dados environment
+        run: python .github/workflows/env-setup/env_setup.py
         shell: bash
         env:
-          BUCKET_NAME: basedosdados-dev
-          PROJECT_NAME_PROD: basedosdados-dev
-          PROJECT_NAME_STAGING: basedosdados-dev
-          GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
-          GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
+          BUCKET_NAME: basedosdados
+          PROJECT_NAME_PROD: basedosdados
+          PROJECT_NAME_STAGING: basedosdados-staging
+          GCP_BD_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
+          GCP_BD_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
           CKAN_URL: "https://staging.basedosdados.org"
           CKAN_API_KEY: ${{ secrets.CKAN_STAGING }}
       - name: Test data and fill report
