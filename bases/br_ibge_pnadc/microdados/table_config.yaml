@@ -1,80 +1,23 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: microdados # AUTO GENERATED
-dataset_id: br_ibge_pnadc # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-ibge-pnadc # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnadc # AUTO GENERATED
+dataset_id: br_ibge_pnadc
 
-version: v1.0
-
-last_updated: 2021-03-31 # AUTO GENERATED
+table_id: microdados
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    Microdados da PNAD Contínua.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: "Microdados da PNAD Contínua.\n\nArquivos auxiliares, como dicionários\
+    \ e detalhes dos dados, estão disponíveis em https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_pnadc.zip.\n\
+    \nTutorial sobre processamento dos microdados com o pacote \"PNADcIBGE\" no R\
+    \ em: https://rpubs.com/BragaDouglas/335574.\n"
 
-    Arquivos auxiliares, como dicionários e detalhes dos dados, estão disponíveis em https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_pnadc.zip.
+# A máxima unidade espacial que a tabela cobre.
+spatial_coverage: 
+  - bra
 
-    Tutorial sobre processamento dos microdados com o pacote "PNADcIBGE" no R em: https://rpubs.com/BragaDouglas/335574.
-    
-# Quem está completando esse arquivo config?
-published_by:
-    name: Ricardo Dahis
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnadc/code # REQUIRED
-    website: www.ricardodahis.com
-    email: rdahis@basedosdados.org
-
-# Qual organização/departamento/pessoa tratou os dados?
-# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
-# Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: <nome>
-    code_url: <onde encontrar código de tratamento>
-    website: <onde encontrar os dados tratados>
-    email: <email>
-
-# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    - Tratamento e compatibilização feitos pelo pacote "PNADcIBGE" no R (disponibilizado pelo IBGE).
-
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: trimestre
-
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - pessoa
-
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - brasil
-
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
+# Anos cobertos pela tabela.
+temporal_coverage:
     - 2012
     - 2013
     - 2014
@@ -84,15 +27,77 @@ coverage_time:
     - 2018
     - 2019
     - 2020
+    - 2021
+
+# A unidade temporal com qual a tabela é atualizada.
+update_frequency: quarter
+
+# Entidade representada por cada linha.
+entity:
+    - person
+
+# A unidade temporal representada por cada linha.
+time_unit:
+
+# O conjunto mínimo de colunas identificando cada linha unicamente.
+# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+identifying_columns:
+
+last_updated:
+    metadata:
+    data:
+    release:
+
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Ricardo Dahis
+    email: rdahis@basedosdados.org
+    github_user:
+    website: www.ricardodahis.com
+    ckan_user:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name:
+    email:
+    github_user:
+    ckan_user:
+    website:
+    code_url:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: "- Tratamento e compatibilização feitos pelo pacote \"\
+    PNADcIBGE\" no R (disponibilizado pelo IBGE).\n"
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+covered_by_dictionary:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED  
-    - ano  
-    - trimestre  
-    - sigla_uf
+partitions: ano, trimestre, sigla_uf
+
+bdm_file_size:
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -102,1324 +107,3006 @@ partitions: # REQUIRED
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: id_uf
-        description: ID Unidade da Federação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: capital
-        description: Município da Capital
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: rm_ride
-        description: Região Metropolitana e Região Administrativa Integrada
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_upa
-        description: ID Unidade Primária de Amostragem (UPA)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_estrato
-        description: ID Estrato (As 2 primeiras posições representam o código da Unidade da Federação)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v1008
-        description: Número de seleção do domicílio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v1014
-        description: Painel
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v1016
-        description: Número da entrevista no domicílio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v1022
-        description: Situação do domicílio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v1023
-        description: Tipo de área
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v1027
-        description: Peso do domicílio e das pessoas (Peso trimestral com correção de não entrevista sem pós estratificação pela projeção de população)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v1028
-        description: Peso do domicílio e das pessoas (Peso trimestral com correção de não entrevista com pós estratificação pela projeção de população)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v1029
-        description: Projeção da população
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: posest
-        description: Domínios de projeção (As 2 primeiras posições representam o código da Unidade da Federação e a última, o tipo de área. UF(2) + V1023(1))
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v2001
-        description: Número de pessoas no domicílio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v2003
-        description: Número de ordem
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v2005
-        description: Condição no domicílio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v2007
-        description: Sexo
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v2008
-        description: Dia de nascimento
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v20081
-        description: Mês de nascimento
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v20082
-        description: Ano de nascimento
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v2009
-        description: Idade do morador na data de referência
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v2010
-        description: Cor ou raça
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3001
-        description: ... sabe ler e escrever?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3002
-        description: ... frequenta escola?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3002a
-        description: A escola que ... frequenta é de
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3003
-        description: Qual é o curso que ... frequenta?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3003a
-        description: Qual é o curso que ... frequenta?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3004
-        description: A duração deste curso que ... frequenta é de
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3005
-        description: Este curso que ... frequenta é seriado?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3005a
-        description: Esse curso que .... frequenta é organizado em
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3006
-        description: Qual é o ano/série/semestre que ... frequenta?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3006a
-        description: Qual é a etapa do ensino fundamental que ... frequenta?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3007
-        description: ... já concluiu algum outro curso de graduação?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3008
-        description: Anteriormente ... frequentou escola?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3009
-        description: Qual foi o curso mais elevado que ... frequentou anteriormente?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3009a
-        description: Qual foi o curso mais elevado que ... frequentou anteriormente?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3010
-        description: A duração deste curso que ... frequentou anteriormente era de
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3011
-        description: Este curso que ... frequentou anteriormente era seriado?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3011a
-        description: Esse curso que .... frequentou era organizado em
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3012
-        description: ... Concluiu com aprovação, pelo menos a primeira série deste curso que frequentou anteriormente?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3013
-        description: Qual foi o último ano/série/semestre que ... concluiu com aprovação, neste curso que frequentou anteriormente?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3013a
-        description: Qual foi a etapa de ensino fundamental que ... frequentou?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3013b
-        description: ... Concluiu os anos iniciais deste curso que frequentou anteriormente?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v3014
-        description: ... Concluiu este curso que frequentou anteriormente?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4001
-        description: Na semana de ... a ... (semana de referência), ... trabalhou ou estagiou, durante pelo menos 1 hora, em alguma atividade remunerada em dinheiro?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4002
-        description: Na semana de ... a ... (semana de referência), ... trabalhou ou estagiou, durante pelo menos 1 hora, em alguma atividade remunerada em produtos, mercadorias, moradia, alimentação, etc.?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4003
-        description: Na semana de ... a ... (semana de referência), ... fez algum bico ou trabalhou em alguma atividade ocasional remunerada durante pelo menos 1 hora?  
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4004
-        description: Na semana de ... a ... (semana de referência), ... ajudou durante pelo menos 1 hora, sem receber pagamento, no trabalho remunerado de algum morador do domicílio ou de parente?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4005
-        description: Na semana de ... a ... (semana de referência), ... tinha algum trabalho remunerado do qual estava temporariamente afastado?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4006
-        description: Na semana de ... a .... (semana de referência), por que motivo ... estava afastado desse trabalho?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4006a
-        description: Na semana de ... a .... (semana de referência), por que motivo ... estava afastado desse trabalho?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4007
-        description: Durante o tempo de afastamento, ... continuou a receber ao menos uma parte do pagamento?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4008
-        description: Em .../.../...(último dia da semana de referência), fazia quanto tempo que ... estava afastado desse trabalho?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40081
-        description: Tempo que estava afastado (De 1 mês a menos de 1 ano) 
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40082
-        description: Tempo que estava afastado (De 1 ano a menos de 2 anos)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40083
-        description: Tempo que estava afastado (de 02 anos a 98 anos)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4009
-        description: Quantos trabalhos ... tinha na semana de ... a ... (semana de referência?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4010
-        description: Código da ocupação (cargo ou função)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4012
-        description: Nesse trabalho, ... era
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40121
-        description: Trabalhador não remunerado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4013
-        description: Código da principal atividade desse negócio/empresa
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40132
-        description: Qual a seção da atividade?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40132a
-        description: Qual a seção da atividade?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4014
-        description: Esse trabalho era na área
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4015
-        description: Na semana de ... a ... (semana de referência), ... teve ajuda, nesse trabalho, de pelo menos um trabalhador não remunerado que era membro do domicílio ou parente?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40151
-        description: Quantos trabalhadores não remunerados?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v401511
-        description: 1 a 5 trabalhadores não remunerados
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v401512
-        description: 6 a 10 trabalhadores não remunerados
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4016
-        description: Na semana de ... a ... (semana de referência), quantos empregados trabalhavam nesse negócio/empresa que ... tinha?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40161
-        description: 1 a 5 empregados
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40162
-        description: 6 a 10 empregados
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40163
-        description: 11 a 50 empregados
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4017
-        description: Na semana de ... a ... (semana de  referência), ... tinha pelo menos um sócio que trabalhava nesse negócio/empresa?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40171
-        description: Quantos?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v401711
-        description: 1 a 5 sócios
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4018
-        description: Na semana de ... a ... (semana de referência), contando com ... , quantas pessoas trabalhavam nesse negócio/empresa?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40181
-        description: 1 a 5 pessoas
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40182
-        description: 6 a 10 pessoas
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40183
-        description: 11 a 50 pessoas
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4019
-        description: Esse negócio/empresa era registrado no Cadastro Nacional da Pessoa Jurídica - CNPJ?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4020
-        description: Em que tipo de local funcionava esse negócio/empresa?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4021
-        description: ... exercia normalmente o trabalho em estabelecimento desse negócio/empresa?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4022
-        description: Então onde ... exercia normalmente esse trabalho?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4024
-        description: No período de ... a ... (período de referência de 30 dias) ... prestava serviço doméstico em mais de um domicílio?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4025
-        description: Nesse trabalho, ... era contratado(a) como empregado temporário?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4026
-        description: Na semana de ... a ... (semana de referência), ... era contratado(a) somente por pessoa responsável pelo negócio/empresa em que trabalhava?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4027
-        description: Na semana de ... a ... (semana de referência) era contratado(a) somente por intermediário (empresa empreiteira, empreiteiro, "gato", etc.)?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4028
-        description: Nesse trabalho, ... era servidor público estatutário (federal, estadual ou municipal)?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4029
-        description: Nesse trabalho, ... tinha carteira de trabalho assinada?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4032
-        description: Era contribuinte de instituto de previdência por esse trabalho?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4033
-        description: Qual era o rendimento bruto mensal que ... recebia/fazia normalmente nesse trabalho? (variável auxiliar)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40331
-        description: Recebia/fazia normalmente nesse trabalho rendimento/retirada em dinheiro?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v403311
-        description: Número da faixa do rendimento/retirada em dinheiro
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v403312
-        description: Qual era o rendimento bruto/retirada mensal que ... recebia/fazia normalmente nesse trabalho? (valor em dinheiro)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40332
-        description: Recebia/fazia normalmente nesse trabalho rendimento/retirada em produtos e mercadorias?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v403321
-        description: Número da faixa do rendimento/retirada em produtos e mercadorias
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v403322
-        description: Qual era o rendimento bruto/retirada mensal que ... recebia/fazia normalmente nesse trabalho ? (valor estimado dos produtos ou mercadorias)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40333
-        description: Recebia/fazia normalmente nesse trabalho rendimento/retirada somente em benefícios?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v403331
-        description: Tipo de rendimento/retirada em benefícios que recebia/fazia nesse trabalho
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4034
-        description: Qual foi o rendimento bruto que ... recebeu/fez nesse trabalho, no mês de referência? (variável auxiliar)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40341
-        description: Recebeu/fez nesse trabalho rendimento/retirada em dinheiro no mês de referência
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v403411
-        description: Número da faixa do rendimento/retirada em dinheiro
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v403412
-        description: Qual foi o rendimento bruto/retirada que ... recebeu/fez nesse trabalho, no mês de referência? (valor em dinheiro)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40342
-        description: Recebeu/fez nesse trabalho no mês de referencia, rendimento/retirada em produtos e mercadorias
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v403421
-        description: Número da faixa do rendimento/retirada em produtos e mercadorias
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v403422
-        description: Qual foi o rendimento bruto/retirada que ... recebeu/fez nesse trabalho, no mês de referência? (valor estimado dos produtos ou mercadorias)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4039
-        description: Quantas horas ... trabalhava normalmente, por semana, nesse trabalho principal?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4039c
-        description: Quantas horas ... trabalhou efetivamente na semana de referência nesse trabalho pincipal?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4040
-        description: Até o dia ... (último dia da semana de referência) fazia quanto tempo que ... estava nesse trabalho?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40401
-        description: Fazia quanto tempo que estava nesse trabalho (de 1 mês a menos de 1 ano)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40402
-        description: Fazia quanto tempo que estava nesse trabalho (de 1 ano a menos de 2 anos)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40403
-        description: Fazia quanto tempo estava nesse trabalho (2 anos ou mais)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4041
-        description: Código da ocupação (cargo ou função)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4043
-        description: Nesse trabalho secundário, ... era
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40431
-        description: Trabalhador familiar não remunerado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4044
-        description: Código da principal atividade desse negócio/empresa
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4045
-        description: Esse trabalho era na área
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4046
-        description: Esse negócio/empresa era registrado no Cadastro Nacional da Pessoa Jurídica - CNPJ?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4047
-        description: Nesse trabalho secundário era funcionário público estatutário (federal, estadual ou municipal)?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4048
-        description: Nesse trabalho secundário tinha carteira de trabalho assinada?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4049
-        description: Era contribuinte de instituto de previdência por esse trabalho secundário?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4050
-        description: Qual era o rendimento bruto mensal que ... recebia/fazia normalmente nesse trabalho secundário? (variável auxiliar)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40501
-        description: Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada em dinheiro
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405011
-        description: Número da faixa do rendimento/retirada em dinheiro
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405012
-        description: Valor em dinheiro do rendimento mensal que recebia normalmente nesse trabalho secundário
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40502
-        description: Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada em produtos e mercadorias
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405021
-        description: Número da faixa do rendimento/retirada em produtos e mercadorias
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405022
-        description: Valor estimado dos produtos e mercadorias que recebia normalmente nesse trabalho secundário
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40503
-        description: Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada somente em benefícios
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405031
-        description: Tipo de rendimento/retirada em benefícios que recebia/fazia nesse trabalho secundário
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4051
-        description: Qual foi o rendimento bruto que ... recebeu/fez nesse trabalho secundário, no mês de referência? (variável auxiliar)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40511
-        description: Recebeu/fez nesse trabalho secundário rendimento/retirada em dinheiro no mês de referência
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405111
-        description: Número da faixa do rendimento/retirada em dinheiro
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405112
-        description: Valor em dinheiro do rendimento mensal que recebeu nesse trabalho secundário no mês de referência
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40512
-        description: Recebeu/fez nesse trabalho secundário no mês de referencia, rendimento/retirada em produtos e mercadorias
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405121
-        description: Número da faixa do rendimento/retirada em produtos e mercadorias
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405122
-        description: Valor estimado dos produtos e mercadorias que recebia recebeu nesse trabalho secundário no mês de referência
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4056
-        description: Quantas horas ... trabalhava normalmente, por semana, nesse trabalho secundário?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4056c
-        description: Quantas horas ... trabalhou efetivamente na semana de referência nesse trabalho secundário?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4057
-        description: Era contribuinte de instituto de previdência por esse(s) outro(s) trabalho(s)?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4058
-        description: Qual era o rendimento bruto mensal que ... recebia/fazia  normalmente nesse(s) outro(s) trabalho(s)? (variável auxiliar)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40581
-        description: Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada em dinheiro
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405811
-        description: Número da faixa do rendimento/retirada em dinheiro
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405812
-        description: Valor em dinheiro do rendimento mensal que recebia normalmente nesse(s) outro(s) trabalho(s)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40582
-        description: Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada em produtos e mercadorias
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405821
-        description: Número da faixa do rendimento/retirada em produtos e mercadorias
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405822
-        description: Valor estimado do produtos e mercadorias que recebia normalmente nesse(s) outro(s) trabalho(s)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40583
-        description: Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada somente em benefícios
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405831
-        description: Tipo de rendimento/retirada em benefícios que recebia/fazia nesse(s) outro(s) trabalho(s)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40584
-        description: Não remunerado nesse(s) outro(s) trabalho(s)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4059
-        description: Qual foi o rendimento bruto que ... recebeu/fez nesse(s) outro(s) trabalho(s), no mês de referência? (variável auxiliar)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40591
-        description: Recebeu/fez nesse(s) outro(s) trabalho(s) rendimento/retirada em dinheiro no mês de referência
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405911
-        description: Número da faixa do rendimento/retirada em dinheiro
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405912
-        description: Valor em dinheiro do rendimento mensal que recebeu nesse(s) outro(s) trabalho(s) no mês de referência
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40592
-        description: Recebeu/fez nesse(s) outro(s) trabalhos no mês de referencia, rendimento/retirada em produtos e mercadorias
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405921
-        description: Número da faixa do rendimento/retirada em produtos e mercadorias
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v405922
-        description: Valor estimado do produtos e mercadorias que recebia normalmente nesse(s) outro(s) trabalho(s) no mês de referência
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4062
-        description: Quantas horas ... trabalhava normalmente, por semana, nesse(s) outro(s) trabalho(s)?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4062c
-        description: Quantas horas ... trabalhou efetivamente na semana de referência nesses outros trabalhos?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4063
-        description: ... gostaria de trabalhar mais horas do que as ... (soma das horas declaradas nas variáveis VD4031, VD4032, VD4033) horas que efetivamente trabalhou no(s) trabalho(s) que tinha na semana de referência?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4063a
-        description: ... gostaria de trabalhar mais horas do que as ... (soma das horas declaradas nos quesitos 39, 56 e 62) horas que normalmente trabalhava no(s) trabalho(s) que tinha na semana de referência?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4064
-        description: No mês de referência, ... estaria disponível para trabalhar mais do que as (soma das horas declaradas nas variáveis VD4031, VD4032, VD4033) horas que efetivamente trabalhou no(s) trabalho(s) que tinha na semana de referência?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4064a
-        description: No mês de referência, ... estaria disponível para trabalhar mais do que as (soma das horas declaradas nos quesitos 39, 56 e 62) horas que normalmente trabalhava no(s) trabalho(s) que tinha na semana de referência?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4071
-        description: No período de ... a ... (período de referência de 30 dias), ... Tomou alguma providência para conseguir trabalho, seja um emprego ou um negócio próprio?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4072
-        description: No período de ... a ... (período de referência de 30 dias), qual foi a principal providência que ... tomou para conseguir trabalho?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4072a
-        description: No período de ... a ... (período de referência de 30 dias), qual foi a principal providência que ... tomou para conseguir trabalho?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4073
-        description: Embora não tenha tomado providência para conseguir trabalho, gostaria de ter trabalhado na semana de ... a ... (semana de referência)?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4074
-        description: Qual foi o principal motivo de ... não ter tomado providência para conseguir trabalho no período de ... a ... (período de referência de 30 dias)?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4074a
-        description: Qual foi o principal motivo de ... não ter tomado providência para conseguir trabalho no período de ... a ... (período de referência de 30 dias)?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4075a
-        description: Quanto tempo depois de ... (último dia da semana de referência) irá começar esse trabalho que conseguiu?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4075a1
-        description: Número de meses para começar o trabalho que conseguiu
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4076
-        description: Até o dia ... (último dia da semana de referência), fazia quanto tempo que ... estava sem qualquer trabalho e tentando conseguir trabalho?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40761
-        description: fazia quanto tempo que vinha procurando trabalho (de 1 mês a menos de 1 ano)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40762
-        description: fazia quanto tempo que vinha procurando trabalho (de 1 ano a menos de 2 anos)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v40763
-        description: fazia quanto tempo vinha procurando trabalho (2 anos ou mais)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4077
-        description: Se tivesse conseguido um trabalho, ... poderia ter começado a trabalhar na semana de ... a ... (semana de referência)? 
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4078
-        description: Qual foi o principal motivo para ... não querer(poder começar a) trabalhar na semana de  ... a ... (semana de referência)?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4078a
-        description: Qual foi o principal motivo para ... não querer(poder começar a) trabalhar na semana de ... a ... (semana de referência)?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: v4082
-        description: No período de captação de 358 dias, ... trabalhou por pelo menos 1 hora?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd2002
-        description: Condição no domicílio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd2003
-        description: Número de componentes do domicílio (exclusive as pessoas cuja condição no domicílio era pensionista, empregado doméstico ou parente do empregado doméstico)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd2004
-        description: Espécie da unidade doméstica
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd3004
-        description: Nível de instrução mais elevado alcançado (pessoas de 5 anos ou mais de idade) padronizado para o Ensino fundamental - SISTEMA DE 9 ANOS
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd3005
-        description: Anos de estudo (pessoas de 5 anos ou mais de idade) padronizado para o Ensino fundamental - SISTEMA DE 9 ANOS
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd3006
-        description: Grupos de anos de estudo (pessoas de 5 anos ou mais de idade) padronizado para o Ensino fundamental - SISTEMA DE 9 ANOS
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4001
-        description: Condição em relação à força de trabalho na semana de referência para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4002
-        description: Condição de ocupação na semana de referência para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4003
-        description: Força de trabalho potencial para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4004
-        description: Subocupação por insuficiência de horas efetivamente trabalhadas em todos os trabalhos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4004a
-        description: Subocupação por insuficiência de horas habitualmente trabalhadas em todos os trabalhos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4005
-        description: Pessoas desalentadas na semana de referência
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4007
-        description: Posição na ocupação no trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4008
-        description: Posição na ocupação no trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade (com subcategorias de empregados)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4009
-        description: Posição na ocupação e categoria do emprego do trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4010
-        description: Grupamentos de atividade principal do empreendimento do trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4011
-        description: Grupamentos ocupacionais do trabalho principal da semana de referência para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4012
-        description: Contribuição para instituto de previdência em qualquer trabalho da semana de referência para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4013
-        description: Faixa das horas habitualmente trabalhadas por semana em todos os trabalhos para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4014
-        description: Faixa das horas efetivamente trabalhadas na semana de referência em todos os trabalhos para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4015
-        description: Tipo de remuneração habitualmente recebida no trabalho principal para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4016
-        description: Rendimento mensal habitual do trabalho principal para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias no trabalho principal)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4017
-        description: Rendimento mensal efetivo do trabalho principal para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias no trabalho principal)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4018
-        description: Tipo de remuneração habitualmente recebida em todos os trabalhos para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4019
-        description: Rendimento mensal habitual de todos os trabalhos para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias em qualquer trabalho)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4020
-        description: Rendimento mensal efetivo de todos os trabalhos para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias em qualquer trabalho)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4023
-        description: Motivo pelo qual não procurou trabalho ou não gostaria de ter trabalhado ou não estava disponível para iniciar um trabalho
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4030
-        description: Motivo pelo qual não procurou trabalho ou não gostaria de ter trabalhado ou não estava disponível para iniciar um trabalho
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4031
-        description: Horas habitualmente trabalhadas por semana em todos os trabalhos para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4032
-        description: Horas efetivamente trabalhadas na semana de referência no trabalho principal para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4033
-        description: Horas efetivamente trabalhadas na semana de referência no trabalho secundário para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4034
-        description: Horas efetivamente trabalhadas na semana de referência nos outros trabalhos para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4035
-        description: Horas efetivamente trabalhadas na semana de referência em todos os trabalhos para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4036
-        description: Faixa das horas habitualmente trabalhadas por semana no trabalho principal para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vd4037
-        description: Faixa das horas efetivamente trabalhadas na semana de referência no trabalho principal para pessoas de 14 anos ou mais de idade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: habitual
-        description: Habitual (campo derivado)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: efetivo
-        description: Efetivo (campo derivado)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: trimestre
-        description: Trimestre
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sigla_uf
-        description: Sigla da Unidade da Federação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
+columns:
+    - name: id_uf
+      bigquery_type:
+      description: ID Unidade da Federação
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: capital
+      bigquery_type:
+      description: Município da Capital
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: rm_ride
+      bigquery_type:
+      description: Região Metropolitana e Região Administrativa Integrada
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: id_upa
+      bigquery_type:
+      description: ID Unidade Primária de Amostragem (UPA)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: id_estrato
+      bigquery_type:
+      description: ID Estrato (As 2 primeiras posições representam o código da Unidade
+          da Federação)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v1008
+      bigquery_type:
+      description: Número de seleção do domicílio
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v1014
+      bigquery_type:
+      description: Painel
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v1016
+      bigquery_type:
+      description: Número da entrevista no domicílio
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v1022
+      bigquery_type:
+      description: Situação do domicílio
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v1023
+      bigquery_type:
+      description: Tipo de área
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v1027
+      bigquery_type:
+      description: Peso do domicílio e das pessoas (Peso trimestral com correção de
+          não entrevista sem pós estratificação pela projeção de população)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v1028
+      bigquery_type:
+      description: Peso do domicílio e das pessoas (Peso trimestral com correção de
+          não entrevista com pós estratificação pela projeção de população)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v1029
+      bigquery_type:
+      description: Projeção da população
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: posest
+      bigquery_type:
+      description: Domínios de projeção (As 2 primeiras posições representam o código
+          da Unidade da Federação e a última, o tipo de área. UF(2) + V1023(1))
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v2001
+      bigquery_type:
+      description: Número de pessoas no domicílio
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v2003
+      bigquery_type:
+      description: Número de ordem
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v2005
+      bigquery_type:
+      description: Condição no domicílio
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v2007
+      bigquery_type:
+      description: Sexo
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v2008
+      bigquery_type:
+      description: Dia de nascimento
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v20081
+      bigquery_type:
+      description: Mês de nascimento
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v20082
+      bigquery_type:
+      description: Ano de nascimento
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v2009
+      bigquery_type:
+      description: Idade do morador na data de referência
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v2010
+      bigquery_type:
+      description: Cor ou raça
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3001
+      bigquery_type:
+      description: '... sabe ler e escrever?'
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3002
+      bigquery_type:
+      description: '... frequenta escola?'
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3002a
+      bigquery_type:
+      description: A escola que ... frequenta é de
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3003
+      bigquery_type:
+      description: Qual é o curso que ... frequenta?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3003a
+      bigquery_type:
+      description: Qual é o curso que ... frequenta?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3004
+      bigquery_type:
+      description: A duração deste curso que ... frequenta é de
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3005
+      bigquery_type:
+      description: Este curso que ... frequenta é seriado?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3005a
+      bigquery_type:
+      description: Esse curso que .... frequenta é organizado em
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3006
+      bigquery_type:
+      description: Qual é o ano/série/semestre que ... frequenta?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3006a
+      bigquery_type:
+      description: Qual é a etapa do ensino fundamental que ... frequenta?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3007
+      bigquery_type:
+      description: '... já concluiu algum outro curso de graduação?'
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3008
+      bigquery_type:
+      description: Anteriormente ... frequentou escola?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3009
+      bigquery_type:
+      description: Qual foi o curso mais elevado que ... frequentou anteriormente?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3009a
+      bigquery_type:
+      description: Qual foi o curso mais elevado que ... frequentou anteriormente?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3010
+      bigquery_type:
+      description: A duração deste curso que ... frequentou anteriormente era de
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3011
+      bigquery_type:
+      description: Este curso que ... frequentou anteriormente era seriado?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3011a
+      bigquery_type:
+      description: Esse curso que .... frequentou era organizado em
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3012
+      bigquery_type:
+      description: '... Concluiu com aprovação, pelo menos a primeira série deste
+          curso que frequentou anteriormente?'
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3013
+      bigquery_type:
+      description: Qual foi o último ano/série/semestre que ... concluiu com aprovação,
+          neste curso que frequentou anteriormente?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3013a
+      bigquery_type:
+      description: Qual foi a etapa de ensino fundamental que ... frequentou?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3013b
+      bigquery_type:
+      description: '... Concluiu os anos iniciais deste curso que frequentou anteriormente?'
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v3014
+      bigquery_type:
+      description: '... Concluiu este curso que frequentou anteriormente?'
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4001
+      bigquery_type:
+      description: Na semana de ... a ... (semana de referência), ... trabalhou ou
+          estagiou, durante pelo menos 1 hora, em alguma atividade remunerada em dinheiro?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4002
+      bigquery_type:
+      description: Na semana de ... a ... (semana de referência), ... trabalhou ou
+          estagiou, durante pelo menos 1 hora, em alguma atividade remunerada em produtos,
+          mercadorias, moradia, alimentação, etc.?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4003
+      bigquery_type:
+      description: Na semana de ... a ... (semana de referência), ... fez algum bico
+          ou trabalhou em alguma atividade ocasional remunerada durante pelo menos
+          1 hora?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4004
+      bigquery_type:
+      description: Na semana de ... a ... (semana de referência), ... ajudou durante
+          pelo menos 1 hora, sem receber pagamento, no trabalho remunerado de algum
+          morador do domicílio ou de parente?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4005
+      bigquery_type:
+      description: Na semana de ... a ... (semana de referência), ... tinha algum
+          trabalho remunerado do qual estava temporariamente afastado?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4006
+      bigquery_type:
+      description: Na semana de ... a .... (semana de referência), por que motivo
+          ... estava afastado desse trabalho?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4006a
+      bigquery_type:
+      description: Na semana de ... a .... (semana de referência), por que motivo
+          ... estava afastado desse trabalho?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4007
+      bigquery_type:
+      description: Durante o tempo de afastamento, ... continuou a receber ao menos
+          uma parte do pagamento?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4008
+      bigquery_type:
+      description: Em .../.../...(último dia da semana de referência), fazia quanto
+          tempo que ... estava afastado desse trabalho?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40081
+      bigquery_type:
+      description: Tempo que estava afastado (De 1 mês a menos de 1 ano)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40082
+      bigquery_type:
+      description: Tempo que estava afastado (De 1 ano a menos de 2 anos)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40083
+      bigquery_type:
+      description: Tempo que estava afastado (de 02 anos a 98 anos)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4009
+      bigquery_type:
+      description: Quantos trabalhos ... tinha na semana de ... a ... (semana de referência?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4010
+      bigquery_type:
+      description: Código da ocupação (cargo ou função)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4012
+      bigquery_type:
+      description: Nesse trabalho, ... era
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40121
+      bigquery_type:
+      description: Trabalhador não remunerado
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4013
+      bigquery_type:
+      description: Código da principal atividade desse negócio/empresa
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40132
+      bigquery_type:
+      description: Qual a seção da atividade?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40132a
+      bigquery_type:
+      description: Qual a seção da atividade?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4014
+      bigquery_type:
+      description: Esse trabalho era na área
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4015
+      bigquery_type:
+      description: Na semana de ... a ... (semana de referência), ... teve ajuda,
+          nesse trabalho, de pelo menos um trabalhador não remunerado que era membro
+          do domicílio ou parente?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40151
+      bigquery_type:
+      description: Quantos trabalhadores não remunerados?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v401511
+      bigquery_type:
+      description: 1 a 5 trabalhadores não remunerados
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v401512
+      bigquery_type:
+      description: 6 a 10 trabalhadores não remunerados
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4016
+      bigquery_type:
+      description: Na semana de ... a ... (semana de referência), quantos empregados
+          trabalhavam nesse negócio/empresa que ... tinha?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40161
+      bigquery_type:
+      description: 1 a 5 empregados
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40162
+      bigquery_type:
+      description: 6 a 10 empregados
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40163
+      bigquery_type:
+      description: 11 a 50 empregados
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4017
+      bigquery_type:
+      description: Na semana de ... a ... (semana de  referência), ... tinha pelo
+          menos um sócio que trabalhava nesse negócio/empresa?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40171
+      bigquery_type:
+      description: Quantos?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v401711
+      bigquery_type:
+      description: 1 a 5 sócios
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4018
+      bigquery_type:
+      description: Na semana de ... a ... (semana de referência), contando com ...
+          , quantas pessoas trabalhavam nesse negócio/empresa?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40181
+      bigquery_type:
+      description: 1 a 5 pessoas
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40182
+      bigquery_type:
+      description: 6 a 10 pessoas
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40183
+      bigquery_type:
+      description: 11 a 50 pessoas
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4019
+      bigquery_type:
+      description: Esse negócio/empresa era registrado no Cadastro Nacional da Pessoa
+          Jurídica - CNPJ?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4020
+      bigquery_type:
+      description: Em que tipo de local funcionava esse negócio/empresa?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4021
+      bigquery_type:
+      description: '... exercia normalmente o trabalho em estabelecimento desse negócio/empresa?'
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4022
+      bigquery_type:
+      description: Então onde ... exercia normalmente esse trabalho?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4024
+      bigquery_type:
+      description: No período de ... a ... (período de referência de 30 dias) ...
+          prestava serviço doméstico em mais de um domicílio?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4025
+      bigquery_type:
+      description: Nesse trabalho, ... era contratado(a) como empregado temporário?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4026
+      bigquery_type:
+      description: Na semana de ... a ... (semana de referência), ... era contratado(a)
+          somente por pessoa responsável pelo negócio/empresa em que trabalhava?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4027
+      bigquery_type:
+      description: Na semana de ... a ... (semana de referência) era contratado(a)
+          somente por intermediário (empresa empreiteira, empreiteiro, "gato", etc.)?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4028
+      bigquery_type:
+      description: Nesse trabalho, ... era servidor público estatutário (federal,
+          estadual ou municipal)?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4029
+      bigquery_type:
+      description: Nesse trabalho, ... tinha carteira de trabalho assinada?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4032
+      bigquery_type:
+      description: Era contribuinte de instituto de previdência por esse trabalho?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4033
+      bigquery_type:
+      description: Qual era o rendimento bruto mensal que ... recebia/fazia normalmente
+          nesse trabalho? (variável auxiliar)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40331
+      bigquery_type:
+      description: Recebia/fazia normalmente nesse trabalho rendimento/retirada em
+          dinheiro?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v403311
+      bigquery_type:
+      description: Número da faixa do rendimento/retirada em dinheiro
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v403312
+      bigquery_type:
+      description: Qual era o rendimento bruto/retirada mensal que ... recebia/fazia
+          normalmente nesse trabalho? (valor em dinheiro)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40332
+      bigquery_type:
+      description: Recebia/fazia normalmente nesse trabalho rendimento/retirada em
+          produtos e mercadorias?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v403321
+      bigquery_type:
+      description: Número da faixa do rendimento/retirada em produtos e mercadorias
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v403322
+      bigquery_type:
+      description: Qual era o rendimento bruto/retirada mensal que ... recebia/fazia
+          normalmente nesse trabalho ? (valor estimado dos produtos ou mercadorias)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40333
+      bigquery_type:
+      description: Recebia/fazia normalmente nesse trabalho rendimento/retirada somente
+          em benefícios?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v403331
+      bigquery_type:
+      description: Tipo de rendimento/retirada em benefícios que recebia/fazia nesse
+          trabalho
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4034
+      bigquery_type:
+      description: Qual foi o rendimento bruto que ... recebeu/fez nesse trabalho,
+          no mês de referência? (variável auxiliar)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40341
+      bigquery_type:
+      description: Recebeu/fez nesse trabalho rendimento/retirada em dinheiro no mês
+          de referência
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v403411
+      bigquery_type:
+      description: Número da faixa do rendimento/retirada em dinheiro
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v403412
+      bigquery_type:
+      description: Qual foi o rendimento bruto/retirada que ... recebeu/fez nesse
+          trabalho, no mês de referência? (valor em dinheiro)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40342
+      bigquery_type:
+      description: Recebeu/fez nesse trabalho no mês de referencia, rendimento/retirada
+          em produtos e mercadorias
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v403421
+      bigquery_type:
+      description: Número da faixa do rendimento/retirada em produtos e mercadorias
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v403422
+      bigquery_type:
+      description: Qual foi o rendimento bruto/retirada que ... recebeu/fez nesse
+          trabalho, no mês de referência? (valor estimado dos produtos ou mercadorias)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4039
+      bigquery_type:
+      description: Quantas horas ... trabalhava normalmente, por semana, nesse trabalho
+          principal?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4039c
+      bigquery_type:
+      description: Quantas horas ... trabalhou efetivamente na semana de referência
+          nesse trabalho pincipal?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4040
+      bigquery_type:
+      description: Até o dia ... (último dia da semana de referência) fazia quanto
+          tempo que ... estava nesse trabalho?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40401
+      bigquery_type:
+      description: Fazia quanto tempo que estava nesse trabalho (de 1 mês a menos
+          de 1 ano)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40402
+      bigquery_type:
+      description: Fazia quanto tempo que estava nesse trabalho (de 1 ano a menos
+          de 2 anos)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40403
+      bigquery_type:
+      description: Fazia quanto tempo estava nesse trabalho (2 anos ou mais)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4041
+      bigquery_type:
+      description: Código da ocupação (cargo ou função)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4043
+      bigquery_type:
+      description: Nesse trabalho secundário, ... era
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40431
+      bigquery_type:
+      description: Trabalhador familiar não remunerado
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4044
+      bigquery_type:
+      description: Código da principal atividade desse negócio/empresa
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4045
+      bigquery_type:
+      description: Esse trabalho era na área
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4046
+      bigquery_type:
+      description: Esse negócio/empresa era registrado no Cadastro Nacional da Pessoa
+          Jurídica - CNPJ?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4047
+      bigquery_type:
+      description: Nesse trabalho secundário era funcionário público estatutário (federal,
+          estadual ou municipal)?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4048
+      bigquery_type:
+      description: Nesse trabalho secundário tinha carteira de trabalho assinada?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4049
+      bigquery_type:
+      description: Era contribuinte de instituto de previdência por esse trabalho
+          secundário?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4050
+      bigquery_type:
+      description: Qual era o rendimento bruto mensal que ... recebia/fazia normalmente
+          nesse trabalho secundário? (variável auxiliar)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40501
+      bigquery_type:
+      description: Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada
+          em dinheiro
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405011
+      bigquery_type:
+      description: Número da faixa do rendimento/retirada em dinheiro
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405012
+      bigquery_type:
+      description: Valor em dinheiro do rendimento mensal que recebia normalmente
+          nesse trabalho secundário
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40502
+      bigquery_type:
+      description: Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada
+          em produtos e mercadorias
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405021
+      bigquery_type:
+      description: Número da faixa do rendimento/retirada em produtos e mercadorias
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405022
+      bigquery_type:
+      description: Valor estimado dos produtos e mercadorias que recebia normalmente
+          nesse trabalho secundário
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40503
+      bigquery_type:
+      description: Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada
+          somente em benefícios
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405031
+      bigquery_type:
+      description: Tipo de rendimento/retirada em benefícios que recebia/fazia nesse
+          trabalho secundário
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4051
+      bigquery_type:
+      description: Qual foi o rendimento bruto que ... recebeu/fez nesse trabalho
+          secundário, no mês de referência? (variável auxiliar)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40511
+      bigquery_type:
+      description: Recebeu/fez nesse trabalho secundário rendimento/retirada em dinheiro
+          no mês de referência
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405111
+      bigquery_type:
+      description: Número da faixa do rendimento/retirada em dinheiro
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405112
+      bigquery_type:
+      description: Valor em dinheiro do rendimento mensal que recebeu nesse trabalho
+          secundário no mês de referência
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40512
+      bigquery_type:
+      description: Recebeu/fez nesse trabalho secundário no mês de referencia, rendimento/retirada
+          em produtos e mercadorias
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405121
+      bigquery_type:
+      description: Número da faixa do rendimento/retirada em produtos e mercadorias
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405122
+      bigquery_type:
+      description: Valor estimado dos produtos e mercadorias que recebia recebeu nesse
+          trabalho secundário no mês de referência
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4056
+      bigquery_type:
+      description: Quantas horas ... trabalhava normalmente, por semana, nesse trabalho
+          secundário?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4056c
+      bigquery_type:
+      description: Quantas horas ... trabalhou efetivamente na semana de referência
+          nesse trabalho secundário?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4057
+      bigquery_type:
+      description: Era contribuinte de instituto de previdência por esse(s) outro(s)
+          trabalho(s)?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4058
+      bigquery_type:
+      description: Qual era o rendimento bruto mensal que ... recebia/fazia  normalmente
+          nesse(s) outro(s) trabalho(s)? (variável auxiliar)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40581
+      bigquery_type:
+      description: Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada
+          em dinheiro
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405811
+      bigquery_type:
+      description: Número da faixa do rendimento/retirada em dinheiro
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405812
+      bigquery_type:
+      description: Valor em dinheiro do rendimento mensal que recebia normalmente
+          nesse(s) outro(s) trabalho(s)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40582
+      bigquery_type:
+      description: Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada
+          em produtos e mercadorias
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405821
+      bigquery_type:
+      description: Número da faixa do rendimento/retirada em produtos e mercadorias
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405822
+      bigquery_type:
+      description: Valor estimado do produtos e mercadorias que recebia normalmente
+          nesse(s) outro(s) trabalho(s)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40583
+      bigquery_type:
+      description: Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada
+          somente em benefícios
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405831
+      bigquery_type:
+      description: Tipo de rendimento/retirada em benefícios que recebia/fazia nesse(s)
+          outro(s) trabalho(s)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40584
+      bigquery_type:
+      description: Não remunerado nesse(s) outro(s) trabalho(s)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4059
+      bigquery_type:
+      description: Qual foi o rendimento bruto que ... recebeu/fez nesse(s) outro(s)
+          trabalho(s), no mês de referência? (variável auxiliar)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40591
+      bigquery_type:
+      description: Recebeu/fez nesse(s) outro(s) trabalho(s) rendimento/retirada em
+          dinheiro no mês de referência
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405911
+      bigquery_type:
+      description: Número da faixa do rendimento/retirada em dinheiro
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405912
+      bigquery_type:
+      description: Valor em dinheiro do rendimento mensal que recebeu nesse(s) outro(s)
+          trabalho(s) no mês de referência
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40592
+      bigquery_type:
+      description: Recebeu/fez nesse(s) outro(s) trabalhos no mês de referencia, rendimento/retirada
+          em produtos e mercadorias
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405921
+      bigquery_type:
+      description: Número da faixa do rendimento/retirada em produtos e mercadorias
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v405922
+      bigquery_type:
+      description: Valor estimado do produtos e mercadorias que recebia normalmente
+          nesse(s) outro(s) trabalho(s) no mês de referência
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4062
+      bigquery_type:
+      description: Quantas horas ... trabalhava normalmente, por semana, nesse(s)
+          outro(s) trabalho(s)?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4062c
+      bigquery_type:
+      description: Quantas horas ... trabalhou efetivamente na semana de referência
+          nesses outros trabalhos?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4063
+      bigquery_type:
+      description: '... gostaria de trabalhar mais horas do que as ... (soma das horas
+          declaradas nas variáveis VD4031, VD4032, VD4033) horas que efetivamente
+          trabalhou no(s) trabalho(s) que tinha na semana de referência?'
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4063a
+      bigquery_type:
+      description: '... gostaria de trabalhar mais horas do que as ... (soma das horas
+          declaradas nos quesitos 39, 56 e 62) horas que normalmente trabalhava no(s)
+          trabalho(s) que tinha na semana de referência?'
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4064
+      bigquery_type:
+      description: No mês de referência, ... estaria disponível para trabalhar mais
+          do que as (soma das horas declaradas nas variáveis VD4031, VD4032, VD4033)
+          horas que efetivamente trabalhou no(s) trabalho(s) que tinha na semana de
+          referência?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4064a
+      bigquery_type:
+      description: No mês de referência, ... estaria disponível para trabalhar mais
+          do que as (soma das horas declaradas nos quesitos 39, 56 e 62) horas que
+          normalmente trabalhava no(s) trabalho(s) que tinha na semana de referência?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4071
+      bigquery_type:
+      description: No período de ... a ... (período de referência de 30 dias), ...
+          Tomou alguma providência para conseguir trabalho, seja um emprego ou um
+          negócio próprio?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4072
+      bigquery_type:
+      description: No período de ... a ... (período de referência de 30 dias), qual
+          foi a principal providência que ... tomou para conseguir trabalho?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4072a
+      bigquery_type:
+      description: No período de ... a ... (período de referência de 30 dias), qual
+          foi a principal providência que ... tomou para conseguir trabalho?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4073
+      bigquery_type:
+      description: Embora não tenha tomado providência para conseguir trabalho, gostaria
+          de ter trabalhado na semana de ... a ... (semana de referência)?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4074
+      bigquery_type:
+      description: Qual foi o principal motivo de ... não ter tomado providência para
+          conseguir trabalho no período de ... a ... (período de referência de 30
+          dias)?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4074a
+      bigquery_type:
+      description: Qual foi o principal motivo de ... não ter tomado providência para
+          conseguir trabalho no período de ... a ... (período de referência de 30
+          dias)?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4075a
+      bigquery_type:
+      description: Quanto tempo depois de ... (último dia da semana de referência)
+          irá começar esse trabalho que conseguiu?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4075a1
+      bigquery_type:
+      description: Número de meses para começar o trabalho que conseguiu
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4076
+      bigquery_type:
+      description: Até o dia ... (último dia da semana de referência), fazia quanto
+          tempo que ... estava sem qualquer trabalho e tentando conseguir trabalho?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40761
+      bigquery_type:
+      description: fazia quanto tempo que vinha procurando trabalho (de 1 mês a menos
+          de 1 ano)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40762
+      bigquery_type:
+      description: fazia quanto tempo que vinha procurando trabalho (de 1 ano a menos
+          de 2 anos)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v40763
+      bigquery_type:
+      description: fazia quanto tempo vinha procurando trabalho (2 anos ou mais)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4077
+      bigquery_type:
+      description: Se tivesse conseguido um trabalho, ... poderia ter começado a trabalhar
+          na semana de ... a ... (semana de referência)?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4078
+      bigquery_type:
+      description: Qual foi o principal motivo para ... não querer(poder começar a)
+          trabalhar na semana de  ... a ... (semana de referência)?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4078a
+      bigquery_type:
+      description: Qual foi o principal motivo para ... não querer(poder começar a)
+          trabalhar na semana de ... a ... (semana de referência)?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: v4082
+      bigquery_type:
+      description: No período de captação de 358 dias, ... trabalhou por pelo menos
+          1 hora?
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd2002
+      bigquery_type:
+      description: Condição no domicílio
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd2003
+      bigquery_type:
+      description: Número de componentes do domicílio (exclusive as pessoas cuja condição
+          no domicílio era pensionista, empregado doméstico ou parente do empregado
+          doméstico)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd2004
+      bigquery_type:
+      description: Espécie da unidade doméstica
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd3004
+      bigquery_type:
+      description: Nível de instrução mais elevado alcançado (pessoas de 5 anos ou
+          mais de idade) padronizado para o Ensino fundamental - SISTEMA DE 9 ANOS
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd3005
+      bigquery_type:
+      description: Anos de estudo (pessoas de 5 anos ou mais de idade) padronizado
+          para o Ensino fundamental - SISTEMA DE 9 ANOS
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd3006
+      bigquery_type:
+      description: Grupos de anos de estudo (pessoas de 5 anos ou mais de idade) padronizado
+          para o Ensino fundamental - SISTEMA DE 9 ANOS
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4001
+      bigquery_type:
+      description: Condição em relação à força de trabalho na semana de referência
+          para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4002
+      bigquery_type:
+      description: Condição de ocupação na semana de referência para pessoas de 14
+          anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4003
+      bigquery_type:
+      description: Força de trabalho potencial para pessoas de 14 anos ou mais de
+          idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4004
+      bigquery_type:
+      description: Subocupação por insuficiência de horas efetivamente trabalhadas
+          em todos os trabalhos
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4004a
+      bigquery_type:
+      description: Subocupação por insuficiência de horas habitualmente trabalhadas
+          em todos os trabalhos
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4005
+      bigquery_type:
+      description: Pessoas desalentadas na semana de referência
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4007
+      bigquery_type:
+      description: Posição na ocupação no trabalho principal da semana de referência
+          para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4008
+      bigquery_type:
+      description: Posição na ocupação no trabalho principal da semana de referência
+          para pessoas de 14 anos ou mais de idade (com subcategorias de empregados)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4009
+      bigquery_type:
+      description: Posição na ocupação e categoria do emprego do trabalho principal
+          da semana de referência para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4010
+      bigquery_type:
+      description: Grupamentos de atividade principal do empreendimento do trabalho
+          principal da semana de referência para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4011
+      bigquery_type:
+      description: Grupamentos ocupacionais do trabalho principal da semana de referência
+          para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4012
+      bigquery_type:
+      description: Contribuição para instituto de previdência em qualquer trabalho
+          da semana de referência para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4013
+      bigquery_type:
+      description: Faixa das horas habitualmente trabalhadas por semana em todos os
+          trabalhos para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4014
+      bigquery_type:
+      description: Faixa das horas efetivamente trabalhadas na semana de referência
+          em todos os trabalhos para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4015
+      bigquery_type:
+      description: Tipo de remuneração habitualmente recebida no trabalho principal
+          para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4016
+      bigquery_type:
+      description: Rendimento mensal habitual do trabalho principal para pessoas de
+          14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro,
+          produtos ou mercadorias no trabalho principal)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4017
+      bigquery_type:
+      description: Rendimento mensal efetivo do trabalho principal para pessoas de
+          14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro,
+          produtos ou mercadorias no trabalho principal)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4018
+      bigquery_type:
+      description: Tipo de remuneração habitualmente recebida em todos os trabalhos
+          para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4019
+      bigquery_type:
+      description: Rendimento mensal habitual de todos os trabalhos para pessoas de
+          14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro,
+          produtos ou mercadorias em qualquer trabalho)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4020
+      bigquery_type:
+      description: Rendimento mensal efetivo de todos os trabalhos para pessoas de
+          14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro,
+          produtos ou mercadorias em qualquer trabalho)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4023
+      bigquery_type:
+      description: Motivo pelo qual não procurou trabalho ou não gostaria de ter trabalhado
+          ou não estava disponível para iniciar um trabalho
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4030
+      bigquery_type:
+      description: Motivo pelo qual não procurou trabalho ou não gostaria de ter trabalhado
+          ou não estava disponível para iniciar um trabalho
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4031
+      bigquery_type:
+      description: Horas habitualmente trabalhadas por semana em todos os trabalhos
+          para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4032
+      bigquery_type:
+      description: Horas efetivamente trabalhadas na semana de referência no trabalho
+          principal para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4033
+      bigquery_type:
+      description: Horas efetivamente trabalhadas na semana de referência no trabalho
+          secundário para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4034
+      bigquery_type:
+      description: Horas efetivamente trabalhadas na semana de referência nos outros
+          trabalhos para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4035
+      bigquery_type:
+      description: Horas efetivamente trabalhadas na semana de referência em todos
+          os trabalhos para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4036
+      bigquery_type:
+      description: Faixa das horas habitualmente trabalhadas por semana no trabalho
+          principal para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: vd4037
+      bigquery_type:
+      description: Faixa das horas efetivamente trabalhadas na semana de referência
+          no trabalho principal para pessoas de 14 anos ou mais de idade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: habitual
+      bigquery_type:
+      description: Habitual (campo derivado)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: efetivo
+      bigquery_type:
+      description: Efetivo (campo derivado)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ano
+      bigquery_type:
+      description: Ano
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: true
+    - name: trimestre
+      bigquery_type:
+      description: Trimestre
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: true
+    - name: sigla_uf
+      bigquery_type:
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: true
+
+metadata_modified: '2021-09-12T23:21:06.219671'

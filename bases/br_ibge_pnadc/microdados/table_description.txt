@@ -6,8 +6,8 @@ Tutorial sobre processamento dos microdados com o pacote "PNADcIBGE" no R em: ht
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-ibge-pnadc
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnadc
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -15,24 +15,27 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnadc/code
+Código: 
 Website: www.ricardodahis.com
-Email: rdahis@basedosdados.orgTratado por
+Email: rdahis@basedosdados.org
+Tratado por
 -----------
-Nome: <nome>
+Nome: None
+
+
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
-- trimestre
-- sigla_uf
+-  trimestre
+-  sigla_uf
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- pessoa
 
 Colunas identificando linhas unicamente
 -------------------
+
+
+
 
 Cobertura Temporal
 ------------------
@@ -45,17 +48,25 @@ Cobertura Temporal
 - 2018
 - 2019
 - 2020
+- 2021
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- bra
+
+
+
 
 Tratamento
 ----------
 - Tratamento e compatibilização feitos pelo pacote "PNADcIBGE" no R (disponibilizado pelo IBGE).
 
+
+
+
 Frequencia de Atualização
 -------------------------
-trimestre
-
-
+quarter

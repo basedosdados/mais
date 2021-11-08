@@ -1,14 +1,7 @@
-
-# Captura e tratamento
-
 Como capturar os dados de br_ibge_pnadc?
 
-1. Para capturar esses dados, basta verificar o link dos dados originais indicado em `dataset_config.yaml` no item `website`.
+Para capturar esses dados, basta verificar o link dos dados originais indicado em dataset_config.yaml no item website.
 
-2. Caso tenha sido utilizado algum c√≥digo de captura ou tratamento, estes estar√£o contidos em `code/`. Se o dado publicado for em sua vers√£o bruta, n√£o existir√° a pasta `code/`.
+Caso tenha sido utilizado algum cÛdigo de captura ou tratamento, estes estar„o contidos em code/. Se o dado publicado for em sua vers„o bruta, n„o existir· a pasta code/.
 
-# Dados e arquivos auxiliares
-
-Os dados publicados est√£o dispon√≠veis em: https://basedosdados.org/dataset/br-ibge-pnadc
-
-Os arquivos auxiliares, como dicion√°rios e detalhes dos dados, est√£o dispon√≠veis em: https://storage.googleapis.com/basedosdados/auxiliary_files/br_ibge_pnadc.zip.
+Os dados publicados est„o disponÌveis em: https://basedosdados.org/dataset/br-ibge-pnadc
