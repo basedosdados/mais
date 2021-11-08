@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - master
+      - python-1.6.0
     paths:
       - .github/**
       - python-package/**
+    
 
 jobs:
   guard:
