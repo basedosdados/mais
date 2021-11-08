@@ -21,7 +21,7 @@ basedosdados = 'basedosdados.cli.cli:cli'
 [tool.poetry.dependencies]
 Jinja2 = "2.11.2"
 click = "8.0.3"
-google-cloud-bigquery = "1.28.0"
+google-cloud-bigquery = "2.30.1"
 google-cloud-bigquery-storage = "1.1.0"
 google-cloud-storage = "1.42.3"
 pandas-gbq = "0.13.2"
@@ -32,7 +32,7 @@ tqdm = "4.50.2"
 pandas= "1.2.4"
 ckanapi = "4.6"
 'ruamel.yaml'= "0.17.10"
-
+pyarrow = "6.0.0"
 
 [tool.poetry.dev-dependencies]
 Jinja2 = "2.11.2"
