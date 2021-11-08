@@ -1,28 +1,24 @@
 Consumo de energia elétrica em nível nacional e segmentado pelas classes residencial, industrial, comercial e outros (rural, serviço público e iluminação pública).
 
-
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-mme-consumo-energia-eletrica
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_mme_consumo_energia_eletrica
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Crislane A. Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_mme_consumo_energia_eletrica/code
-Website: https://github.com/crislanealves
-Email: crislanealves@basedosdados.orgTratado por
+Nome: Crislane Alves
+Código: 
+Email: crislanealves@basedosdados.org
+Tratado por
 -----------
-Nome: Crislane A. Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_mme_consumo_energia_eletrica/code
-Website: https://github.com/basedosdados/mais/tree/master/bases/br_mme_consumo_energia_eletrica
+Nome: Crislane Alves
 Email: crislanealves@basedosdados.org
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- consumo
+
+
 
 Colunas identificando linhas unicamente
 -------------------
@@ -30,6 +26,9 @@ Colunas identificando linhas unicamente
 - ano
 - mes
 - tipo_consumo
+
+
+
 
 Cobertura Temporal
 ------------------
@@ -52,18 +51,21 @@ Cobertura Temporal
 - 2020
 - 2021
 
+
+
+
 Cobertura Espacial
 ------------------
-- brasil
+
+
+
 
 Tratamento
 ----------
-- Criação das colunas "ano" e "Tipo de Consumo".
-- Muda formato de wide para long.
-- Une tabelas consumo e número de consumidores 
+Criação das colunas 'ano e 'Tipo de Consumo', muda formato de wide para long e une tabelas consumo e número de consumidores
+
+
 
 Frequencia de Atualização
 -------------------------
-mes
-
-
+month

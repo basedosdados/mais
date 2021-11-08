@@ -1,27 +1,14 @@
-dataset_id: br_mme_consumo_energia_eletrica # AUTO GENERATED
-
-url_ckan: https://basedosdados.org/dataset/br-mme-consumo-energia-eletrica
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_mme_consumo_energia_eletrica
-
-# Descreva a base.
-# Ela é sobre o que?
-# Quais as principais fontes de dados?
-# Há links para FAQs e explicações?
-description: | # REQUIRED
-     Dados mensais do consumo de energia elétrica na rede (MWh) em nível nacional e separado por classes. 
 
 # Qual organização disponibiliza os dados originais?
-# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: ministerio-de-minas-e-energia # REQUIRED
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list=
+organization: ministerio-de-minas-e-energia
 
-# Qual departamento/grupo/pessoa mantém os dados originais?
-author:
-    name: Empresa de Pesquisa Energética - EPE
-    email: comunicacao@epe.gov.br
+dataset_id: br_mme_consumo_energia_eletrica
 
-# Onde encontrar os dados originais e mais informações?
-website:
-    - https://www.epe.gov.br/pt/publicacoes-dados-abertos/publicacoes/Consumo-mensal-de-energia-eletrica-por-classe-regioes-e-subsistemas    
+title: Energia Elétrica
+
+# exemplo: descrição e anotações úteis sobre os dados.
+description: Dados mensais do consumo de energia elétrica na rede (MWh) em nível nacional e separado por classes. 
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
@@ -33,9 +20,9 @@ groups:
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
 # Caso crie etiquetas novas, as regras são:
-#   - letras minúsculas
-#   - sem acentos
-#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+#    - letras minúsculas
+#    - sem acentos
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
     - consumo 
     - eletricidade
@@ -43,33 +30,8 @@ tags:
     - megawatts
     - iluminacao publica
 
-# Em quais línguas a base (ou a fonte original) está disponível?
-# Regras: minúsculo, sem acentos.
-# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
-languages:
-    - portugues
+ckan_url:
 
-# Os dados originais estão disponíveis de graça?
-free: sim
+github_url:
 
-# Are microdata available for download?
-microdata: não
-
-# Existe uma API na fonte original?
-API: não
-
-# É necessário registrar um usuário para baixar os dados originais?
-registration: não
-
-# Como os dados originais estão disponibilizados?
-availability: online
-
-# A fonte original requer IP brasileiro para acesso?
-brazilian_IP: não
-
-# Essa base está sob qual licença?
-# A licença MIT se aplica a bases públicas.
-# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
-license: 
-    name: MIT # REQUIRED
-    url: <url>
+metadata_modified:
