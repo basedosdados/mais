@@ -777,12 +777,33 @@ def cli_validate_metadata(ctx, dataset_id, table_id):
 @cli_metadata.command(name="publish", help="Publish user's local metadata")
 @click.argument("dataset_id")
 @click.argument("table_id", required=False)
+@click.option(
+    "--all",
+    default=False,
+    help=(
+        "Force the publishment of metadata specified in both `dataset_config."
+        "yaml` and `table_config.yaml` at once."
+    ),
+)
+@click.option(
+    "--if_exists",
+    default="raise",
+    help=(
+        "Define what to do in case metadata already exists in CKAN."
+    )
+)
 @click.pass_context
-def cli_publish_metadata(ctx, dataset_id, table_id):
+def cli_publish_metadata(
+    ctx,
+    dataset_id,
+    table_id,
+    all,
+    if_exists,
+    ):
     m = Metadata(dataset_id, table_id, **ctx.obj)
 
     try:
-        m.publish()
+        m.publish(all=all, if_exists=if_exists)
         msg, color = "Local metadata has been published.", "green"
     except (CKANAPIError, BaseDosDadosException, AssertionError) as e:
         msg = (

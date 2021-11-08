@@ -317,6 +317,39 @@ def test_validate_organization_not_found(invalid_organization_dataset):
 
 
 # TODO: Mock ckan server to activate publish tests
+@pytest.fixture
+def pytest_dataset(metadatadir):
+    shutil.rmtree(metadatadir, ignore_errors=True)
+    pytest_dataset = Metadata(
+        dataset_id="pytest",
+        metadata_path=metadatadir
+    )
+    pytest_dataset.create(if_exists="replace")
+    
+    # fill dataset metadata for it to be publishable
+    pytest_dataset_metadata = pytest_dataset.local_metadata
+    pytest_dataset_metadata["organization"] = "acaps" # set valid organization
+    
+    # materialize metadata file
+    ryaml.dump(
+        pytest_dataset_metadata,
+        open(pytest_dataset.filepath, "w", encoding="utf-8")
+    )
+
+    return pytest_dataset
+
+
+@pytest.fixture
+def pytest_table(metadatadir):
+    shutil.rmtree(metadatadir, ignore_errors=True)
+    pytest_table = Metadata(
+        dataset_id="pytest",
+        table_id="pytest"
+    )
+    pytest_table.create(if_exists="replace")
+    return pytest_table
+
+
 @pytest.mark.skip(reason="This test requires a mocked CKAN server.")
 def test_publish_is_successful(
     valid_metadata_dataset: Metadata,
@@ -327,9 +360,44 @@ def test_publish_is_successful(
 
 
 @pytest.mark.skip(reason="This test requires a mocked CKAN server.")
-def test_publish_is_not_successful(invalid_dataset_metadata, invalid_table_metadata):
+def test_publish_is_not_successful(
+    invalid_dataset_metadata: Metadata,
+    invalid_table_metadata: Metadata,
+):
     with pytest.raises(AssertionError, match="Could not publish"):
         invalid_dataset_metadata.publish()
 
     with pytest.raises(BaseDosDadosException, match="Could not publish"):
         invalid_table_metadata.publish()
+
+
+@pytest.mark.skip(
+    reason="This test requires a mocked CKAN server and a delete endpoint."
+)
+def test_publish_all_is_true(
+    pytest_dataset: Metadata,
+    pytest_table: Metadata,
+):
+    res = pytest_table.publish(all=True)
+    assert isinstance(res, dict)
+    assert res != {}
+    assert pytest_dataset.exists_in_ckan()
+
+
+@pytest.mark.skip(reason="This test requires a mocked CKAN server.")
+def test_publish_if_exists_raise(valid_metadata_dataset: Metadata):
+    with pytest.raises(BaseDosDadosException, match="already exists in CKAN"):
+        valid_metadata_dataset.publish(if_exists="raise")
+
+
+@pytest.mark.skip(reason="This test requires a mocked CKAN server.")
+def test_publish_if_exists_replace(valid_metadata_dataset: Metadata):
+    res = valid_metadata_dataset.publish(if_exists="replace")
+    assert isinstance(res, dict)
+    assert res != {}
+
+
+@pytest.mark.skip(reason="This test requires a mocked CKAN server.")
+def test_publish_if_exists_pass(valid_metadata_dataset: Metadata):
+    assert isinstance(valid_metadata_dataset.publish(if_exists="pass"), dict)
+    assert valid_metadata_dataset.publish(if_exists="pass") == {}

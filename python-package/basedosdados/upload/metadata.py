@@ -357,11 +357,25 @@ class Metadata(Base):
 
         return True
 
-    def publish(self) -> dict:
+    def publish(
+        self,
+        all: bool = False,
+        if_exists: str = "raise"
+        ) -> dict:
         """Publish local metadata modifications.
         `Metadata.validate` is used to make sure no local invalid metadata is
         published to CKAN. The `config.toml` `api_key` variable must be set
         at the `[ckan]` section for this method to work.
+
+        Args:
+            all (bool): Optional. If set to `True`, both `dataset_config.yaml`
+                and `table_config.yaml` are published for the given dataset_id
+                and table_id.
+            if_exists (str): Optional. What to do if config exists
+                * raise : Raises BaseDosDadosException if metadata already exi
+                sts in CKAN
+                * replace : Overwrite metadata in CKAN if it exists
+                * pass : Do nothing
 
         Returns:
             dict:
@@ -374,12 +388,23 @@ class Metadata(Base):
                 NotAuthorized exceptions.
         """
 
+        # alert user if they don't have an api_key set up yet
         if not self.CKAN_API_KEY:
             raise BaseDosDadosException(
                 "You can't use `Metadata.publish` without setting an `api_key`"
                 "in your ~/.basedosdados/config.toml. Please set it like this:"
                 '\n\n```\n[ckan]\nurl="<CKAN_URL>"\napi_key="<API_KEY>"\n```'
             )
+        
+        # check if metadata exists in CKAN and handle if_exists options
+        if self.exists_in_ckan():
+            if if_exists == "raise":
+                raise BaseDosDadosException(
+                    f"{self.dataset_id or self.table_id} already exists in CKAN."
+                    f" Set the arg `if_exists` to `replace` to replace it."
+                )
+            elif if_exists == "pass":
+                return {}
 
         ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=self.CKAN_API_KEY)
 
@@ -396,6 +421,10 @@ class Metadata(Base):
             data_dict = self.ckan_data_dict.copy()
 
             if self.table_id:
+                
+                # publish dataset metadata first if user wants to publish both
+                if all:
+                    self.dataset_metadata_obj.publish(if_exists=if_exists)
 
                 data_dict = data_dict["resources"][0]
 
@@ -405,6 +434,7 @@ class Metadata(Base):
                     else "resource_create",
                     data_dict=data_dict,
                 )
+
 
             else:
                 data_dict["resources"] = []
