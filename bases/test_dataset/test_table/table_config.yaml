@@ -34,6 +34,8 @@ time_unit:
 # Exemplos: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 identifying_columns:
+    - ano
+    - sigla_uf
 
 last_updated:
     metadata:
