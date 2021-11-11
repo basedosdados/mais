@@ -109,7 +109,7 @@ bdm_file_size:
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: id_uf
-      bigquery_type:
+      bigquery_type: string
       description: ID Unidade da Federação
       temporal_coverage:
       covered_by_dictionary:
@@ -122,7 +122,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: capital
-      bigquery_type:
+      bigquery_type: string
       description: Município da Capital
       temporal_coverage:
       covered_by_dictionary:
@@ -135,7 +135,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: rm_ride
-      bigquery_type:
+      bigquery_type: string
       description: Região Metropolitana e Região Administrativa Integrada
       temporal_coverage:
       covered_by_dictionary:
@@ -148,7 +148,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: id_upa
-      bigquery_type:
+      bigquery_type: string
       description: ID Unidade Primária de Amostragem (UPA)
       temporal_coverage:
       covered_by_dictionary:
@@ -161,7 +161,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: id_estrato
-      bigquery_type:
+      bigquery_type: string
       description: ID Estrato (As 2 primeiras posições representam o código da Unidade
           da Federação)
       temporal_coverage:
@@ -175,7 +175,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v1008
-      bigquery_type:
+      bigquery_type: int64
       description: Número de seleção do domicílio
       temporal_coverage:
       covered_by_dictionary:
@@ -188,7 +188,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v1014
-      bigquery_type:
+      bigquery_type: int64
       description: Painel
       temporal_coverage:
       covered_by_dictionary:
@@ -201,7 +201,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v1016
-      bigquery_type:
+      bigquery_type: int64
       description: Número da entrevista no domicílio
       temporal_coverage:
       covered_by_dictionary:
@@ -214,7 +214,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v1022
-      bigquery_type:
+      bigquery_type: int64
       description: Situação do domicílio
       temporal_coverage:
       covered_by_dictionary:
@@ -227,7 +227,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v1023
-      bigquery_type:
+      bigquery_type: int64
       description: Tipo de área
       temporal_coverage:
       covered_by_dictionary:
@@ -240,7 +240,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v1027
-      bigquery_type:
+      bigquery_type: int64
       description: Peso do domicílio e das pessoas (Peso trimestral com correção de
           não entrevista sem pós estratificação pela projeção de população)
       temporal_coverage:
@@ -254,7 +254,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v1028
-      bigquery_type:
+      bigquery_type: int64
       description: Peso do domicílio e das pessoas (Peso trimestral com correção de
           não entrevista com pós estratificação pela projeção de população)
       temporal_coverage:
@@ -268,7 +268,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v1029
-      bigquery_type:
+      bigquery_type: int64
       description: Projeção da população
       temporal_coverage:
       covered_by_dictionary:
@@ -281,7 +281,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: posest
-      bigquery_type:
+      bigquery_type: int64
       description: Domínios de projeção (As 2 primeiras posições representam o código
           da Unidade da Federação e a última, o tipo de área. UF(2) + V1023(1))
       temporal_coverage:
@@ -295,7 +295,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v2001
-      bigquery_type:
+      bigquery_type: int64
       description: Número de pessoas no domicílio
       temporal_coverage:
       covered_by_dictionary:
@@ -308,7 +308,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v2003
-      bigquery_type:
+      bigquery_type: int64
       description: Número de ordem
       temporal_coverage:
       covered_by_dictionary:
@@ -321,7 +321,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v2005
-      bigquery_type:
+      bigquery_type: int64
       description: Condição no domicílio
       temporal_coverage:
       covered_by_dictionary:
@@ -334,7 +334,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v2007
-      bigquery_type:
+      bigquery_type: int64
       description: Sexo
       temporal_coverage:
       covered_by_dictionary:
@@ -347,7 +347,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v2008
-      bigquery_type:
+      bigquery_type: int64
       description: Dia de nascimento
       temporal_coverage:
       covered_by_dictionary:
@@ -360,7 +360,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v20081
-      bigquery_type:
+      bigquery_type: int64
       description: Mês de nascimento
       temporal_coverage:
       covered_by_dictionary:
@@ -373,7 +373,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v20082
-      bigquery_type:
+      bigquery_type: int64
       description: Ano de nascimento
       temporal_coverage:
       covered_by_dictionary:
@@ -386,7 +386,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v2009
-      bigquery_type:
+      bigquery_type: int64
       description: Idade do morador na data de referência
       temporal_coverage:
       covered_by_dictionary:
@@ -399,7 +399,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v2010
-      bigquery_type:
+      bigquery_type: int64
       description: Cor ou raça
       temporal_coverage:
       covered_by_dictionary:
@@ -412,7 +412,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3001
-      bigquery_type:
+      bigquery_type: int64
       description: '... sabe ler e escrever?'
       temporal_coverage:
       covered_by_dictionary:
@@ -425,7 +425,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3002
-      bigquery_type:
+      bigquery_type: int64
       description: '... frequenta escola?'
       temporal_coverage:
       covered_by_dictionary:
@@ -438,7 +438,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3002a
-      bigquery_type:
+      bigquery_type: int64
       description: A escola que ... frequenta é de
       temporal_coverage:
       covered_by_dictionary:
@@ -451,7 +451,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3003
-      bigquery_type:
+      bigquery_type: int64
       description: Qual é o curso que ... frequenta?
       temporal_coverage:
       covered_by_dictionary:
@@ -464,7 +464,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3003a
-      bigquery_type:
+      bigquery_type: int64
       description: Qual é o curso que ... frequenta?
       temporal_coverage:
       covered_by_dictionary:
@@ -477,7 +477,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3004
-      bigquery_type:
+      bigquery_type: int64
       description: A duração deste curso que ... frequenta é de
       temporal_coverage:
       covered_by_dictionary:
@@ -490,7 +490,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3005
-      bigquery_type:
+      bigquery_type: int64
       description: Este curso que ... frequenta é seriado?
       temporal_coverage:
       covered_by_dictionary:
@@ -503,7 +503,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3005a
-      bigquery_type:
+      bigquery_type: int64
       description: Esse curso que .... frequenta é organizado em
       temporal_coverage:
       covered_by_dictionary:
@@ -516,7 +516,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3006
-      bigquery_type:
+      bigquery_type: int64
       description: Qual é o ano/série/semestre que ... frequenta?
       temporal_coverage:
       covered_by_dictionary:
@@ -529,7 +529,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3006a
-      bigquery_type:
+      bigquery_type: int64
       description: Qual é a etapa do ensino fundamental que ... frequenta?
       temporal_coverage:
       covered_by_dictionary:
@@ -542,7 +542,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3007
-      bigquery_type:
+      bigquery_type: int64
       description: '... já concluiu algum outro curso de graduação?'
       temporal_coverage:
       covered_by_dictionary:
@@ -555,7 +555,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3008
-      bigquery_type:
+      bigquery_type: int64
       description: Anteriormente ... frequentou escola?
       temporal_coverage:
       covered_by_dictionary:
@@ -568,7 +568,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3009
-      bigquery_type:
+      bigquery_type: int64
       description: Qual foi o curso mais elevado que ... frequentou anteriormente?
       temporal_coverage:
       covered_by_dictionary:
@@ -581,7 +581,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3009a
-      bigquery_type:
+      bigquery_type: int64
       description: Qual foi o curso mais elevado que ... frequentou anteriormente?
       temporal_coverage:
       covered_by_dictionary:
@@ -594,7 +594,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3010
-      bigquery_type:
+      bigquery_type: int64
       description: A duração deste curso que ... frequentou anteriormente era de
       temporal_coverage:
       covered_by_dictionary:
@@ -607,7 +607,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3011
-      bigquery_type:
+      bigquery_type: int64
       description: Este curso que ... frequentou anteriormente era seriado?
       temporal_coverage:
       covered_by_dictionary:
@@ -620,7 +620,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3011a
-      bigquery_type:
+      bigquery_type: int64
       description: Esse curso que .... frequentou era organizado em
       temporal_coverage:
       covered_by_dictionary:
@@ -633,7 +633,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3012
-      bigquery_type:
+      bigquery_type: int64
       description: '... Concluiu com aprovação, pelo menos a primeira série deste
           curso que frequentou anteriormente?'
       temporal_coverage:
@@ -647,7 +647,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3013
-      bigquery_type:
+      bigquery_type: int64
       description: Qual foi o último ano/série/semestre que ... concluiu com aprovação,
           neste curso que frequentou anteriormente?
       temporal_coverage:
@@ -661,7 +661,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3013a
-      bigquery_type:
+      bigquery_type: int64
       description: Qual foi a etapa de ensino fundamental que ... frequentou?
       temporal_coverage:
       covered_by_dictionary:
@@ -674,7 +674,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3013b
-      bigquery_type:
+      bigquery_type: int64
       description: '... Concluiu os anos iniciais deste curso que frequentou anteriormente?'
       temporal_coverage:
       covered_by_dictionary:
@@ -687,7 +687,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v3014
-      bigquery_type:
+      bigquery_type: int64
       description: '... Concluiu este curso que frequentou anteriormente?'
       temporal_coverage:
       covered_by_dictionary:
@@ -700,7 +700,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4001
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a ... (semana de referência), ... trabalhou ou
           estagiou, durante pelo menos 1 hora, em alguma atividade remunerada em dinheiro?
       temporal_coverage:
@@ -714,7 +714,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4002
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a ... (semana de referência), ... trabalhou ou
           estagiou, durante pelo menos 1 hora, em alguma atividade remunerada em produtos,
           mercadorias, moradia, alimentação, etc.?
@@ -729,7 +729,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4003
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a ... (semana de referência), ... fez algum bico
           ou trabalhou em alguma atividade ocasional remunerada durante pelo menos
           1 hora?
@@ -744,7 +744,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4004
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a ... (semana de referência), ... ajudou durante
           pelo menos 1 hora, sem receber pagamento, no trabalho remunerado de algum
           morador do domicílio ou de parente?
@@ -759,7 +759,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4005
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a ... (semana de referência), ... tinha algum
           trabalho remunerado do qual estava temporariamente afastado?
       temporal_coverage:
@@ -773,7 +773,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4006
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a .... (semana de referência), por que motivo
           ... estava afastado desse trabalho?
       temporal_coverage:
@@ -787,7 +787,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4006a
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a .... (semana de referência), por que motivo
           ... estava afastado desse trabalho?
       temporal_coverage:
@@ -801,7 +801,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4007
-      bigquery_type:
+      bigquery_type: int64
       description: Durante o tempo de afastamento, ... continuou a receber ao menos
           uma parte do pagamento?
       temporal_coverage:
@@ -815,7 +815,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4008
-      bigquery_type:
+      bigquery_type: int64
       description: Em .../.../...(último dia da semana de referência), fazia quanto
           tempo que ... estava afastado desse trabalho?
       temporal_coverage:
@@ -829,7 +829,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40081
-      bigquery_type:
+      bigquery_type: int64
       description: Tempo que estava afastado (De 1 mês a menos de 1 ano)
       temporal_coverage:
       covered_by_dictionary:
@@ -842,7 +842,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40082
-      bigquery_type:
+      bigquery_type: int64
       description: Tempo que estava afastado (De 1 ano a menos de 2 anos)
       temporal_coverage:
       covered_by_dictionary:
@@ -855,7 +855,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40083
-      bigquery_type:
+      bigquery_type: int64
       description: Tempo que estava afastado (de 02 anos a 98 anos)
       temporal_coverage:
       covered_by_dictionary:
@@ -868,7 +868,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4009
-      bigquery_type:
+      bigquery_type: int64
       description: Quantos trabalhos ... tinha na semana de ... a ... (semana de referência?
       temporal_coverage:
       covered_by_dictionary:
@@ -881,7 +881,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4010
-      bigquery_type:
+      bigquery_type: string
       description: Código da ocupação (cargo ou função)
       temporal_coverage:
       covered_by_dictionary:
@@ -894,7 +894,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4012
-      bigquery_type:
+      bigquery_type: int64
       description: Nesse trabalho, ... era
       temporal_coverage:
       covered_by_dictionary:
@@ -907,7 +907,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40121
-      bigquery_type:
+      bigquery_type: int64
       description: Trabalhador não remunerado
       temporal_coverage:
       covered_by_dictionary:
@@ -920,7 +920,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4013
-      bigquery_type:
+      bigquery_type: string
       description: Código da principal atividade desse negócio/empresa
       temporal_coverage:
       covered_by_dictionary:
@@ -933,7 +933,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40132
-      bigquery_type:
+      bigquery_type: int64
       description: Qual a seção da atividade?
       temporal_coverage:
       covered_by_dictionary:
@@ -946,7 +946,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40132a
-      bigquery_type:
+      bigquery_type: int64
       description: Qual a seção da atividade?
       temporal_coverage:
       covered_by_dictionary:
@@ -959,7 +959,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4014
-      bigquery_type:
+      bigquery_type: int64
       description: Esse trabalho era na área
       temporal_coverage:
       covered_by_dictionary:
@@ -972,7 +972,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4015
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a ... (semana de referência), ... teve ajuda,
           nesse trabalho, de pelo menos um trabalhador não remunerado que era membro
           do domicílio ou parente?
@@ -987,7 +987,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40151
-      bigquery_type:
+      bigquery_type: int64
       description: Quantos trabalhadores não remunerados?
       temporal_coverage:
       covered_by_dictionary:
@@ -1000,7 +1000,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v401511
-      bigquery_type:
+      bigquery_type: int64
       description: 1 a 5 trabalhadores não remunerados
       temporal_coverage:
       covered_by_dictionary:
@@ -1013,7 +1013,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v401512
-      bigquery_type:
+      bigquery_type: int64
       description: 6 a 10 trabalhadores não remunerados
       temporal_coverage:
       covered_by_dictionary:
@@ -1026,7 +1026,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4016
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a ... (semana de referência), quantos empregados
           trabalhavam nesse negócio/empresa que ... tinha?
       temporal_coverage:
@@ -1040,7 +1040,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40161
-      bigquery_type:
+      bigquery_type: int64
       description: 1 a 5 empregados
       temporal_coverage:
       covered_by_dictionary:
@@ -1053,7 +1053,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40162
-      bigquery_type:
+      bigquery_type: int64
       description: 6 a 10 empregados
       temporal_coverage:
       covered_by_dictionary:
@@ -1066,7 +1066,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40163
-      bigquery_type:
+      bigquery_type: int64
       description: 11 a 50 empregados
       temporal_coverage:
       covered_by_dictionary:
@@ -1079,7 +1079,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4017
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a ... (semana de  referência), ... tinha pelo
           menos um sócio que trabalhava nesse negócio/empresa?
       temporal_coverage:
@@ -1093,7 +1093,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40171
-      bigquery_type:
+      bigquery_type: int64
       description: Quantos?
       temporal_coverage:
       covered_by_dictionary:
@@ -1106,7 +1106,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v401711
-      bigquery_type:
+      bigquery_type: int64
       description: 1 a 5 sócios
       temporal_coverage:
       covered_by_dictionary:
@@ -1119,7 +1119,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4018
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a ... (semana de referência), contando com ...
           , quantas pessoas trabalhavam nesse negócio/empresa?
       temporal_coverage:
@@ -1133,7 +1133,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40181
-      bigquery_type:
+      bigquery_type: int64
       description: 1 a 5 pessoas
       temporal_coverage:
       covered_by_dictionary:
@@ -1146,7 +1146,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40182
-      bigquery_type:
+      bigquery_type: int64
       description: 6 a 10 pessoas
       temporal_coverage:
       covered_by_dictionary:
@@ -1159,7 +1159,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40183
-      bigquery_type:
+      bigquery_type: int64
       description: 11 a 50 pessoas
       temporal_coverage:
       covered_by_dictionary:
@@ -1172,7 +1172,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4019
-      bigquery_type:
+      bigquery_type: int64
       description: Esse negócio/empresa era registrado no Cadastro Nacional da Pessoa
           Jurídica - CNPJ?
       temporal_coverage:
@@ -1186,7 +1186,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4020
-      bigquery_type:
+      bigquery_type: int64
       description: Em que tipo de local funcionava esse negócio/empresa?
       temporal_coverage:
       covered_by_dictionary:
@@ -1199,7 +1199,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4021
-      bigquery_type:
+      bigquery_type: int64
       description: '... exercia normalmente o trabalho em estabelecimento desse negócio/empresa?'
       temporal_coverage:
       covered_by_dictionary:
@@ -1212,7 +1212,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4022
-      bigquery_type:
+      bigquery_type: int64
       description: Então onde ... exercia normalmente esse trabalho?
       temporal_coverage:
       covered_by_dictionary:
@@ -1225,7 +1225,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4024
-      bigquery_type:
+      bigquery_type: int64
       description: No período de ... a ... (período de referência de 30 dias) ...
           prestava serviço doméstico em mais de um domicílio?
       temporal_coverage:
@@ -1239,7 +1239,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4025
-      bigquery_type:
+      bigquery_type: int64
       description: Nesse trabalho, ... era contratado(a) como empregado temporário?
       temporal_coverage:
       covered_by_dictionary:
@@ -1252,7 +1252,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4026
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a ... (semana de referência), ... era contratado(a)
           somente por pessoa responsável pelo negócio/empresa em que trabalhava?
       temporal_coverage:
@@ -1266,7 +1266,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4027
-      bigquery_type:
+      bigquery_type: int64
       description: Na semana de ... a ... (semana de referência) era contratado(a)
           somente por intermediário (empresa empreiteira, empreiteiro, "gato", etc.)?
       temporal_coverage:
@@ -1280,7 +1280,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4028
-      bigquery_type:
+      bigquery_type: int64
       description: Nesse trabalho, ... era servidor público estatutário (federal,
           estadual ou municipal)?
       temporal_coverage:
@@ -1294,7 +1294,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4029
-      bigquery_type:
+      bigquery_type: int64
       description: Nesse trabalho, ... tinha carteira de trabalho assinada?
       temporal_coverage:
       covered_by_dictionary:
@@ -1307,7 +1307,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4032
-      bigquery_type:
+      bigquery_type: int64
       description: Era contribuinte de instituto de previdência por esse trabalho?
       temporal_coverage:
       covered_by_dictionary:
@@ -1320,7 +1320,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4033
-      bigquery_type:
+      bigquery_type: float64
       description: Qual era o rendimento bruto mensal que ... recebia/fazia normalmente
           nesse trabalho? (variável auxiliar)
       temporal_coverage:
@@ -1334,7 +1334,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40331
-      bigquery_type:
+      bigquery_type: int64
       description: Recebia/fazia normalmente nesse trabalho rendimento/retirada em
           dinheiro?
       temporal_coverage:
@@ -1348,7 +1348,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v403311
-      bigquery_type:
+      bigquery_type: int64
       description: Número da faixa do rendimento/retirada em dinheiro
       temporal_coverage:
       covered_by_dictionary:
@@ -1361,7 +1361,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v403312
-      bigquery_type:
+      bigquery_type: float64
       description: Qual era o rendimento bruto/retirada mensal que ... recebia/fazia
           normalmente nesse trabalho? (valor em dinheiro)
       temporal_coverage:
@@ -1375,7 +1375,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40332
-      bigquery_type:
+      bigquery_type: int64
       description: Recebia/fazia normalmente nesse trabalho rendimento/retirada em
           produtos e mercadorias?
       temporal_coverage:
@@ -1389,7 +1389,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v403321
-      bigquery_type:
+      bigquery_type: int64
       description: Número da faixa do rendimento/retirada em produtos e mercadorias
       temporal_coverage:
       covered_by_dictionary:
@@ -1402,7 +1402,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v403322
-      bigquery_type:
+      bigquery_type: int64
       description: Qual era o rendimento bruto/retirada mensal que ... recebia/fazia
           normalmente nesse trabalho ? (valor estimado dos produtos ou mercadorias)
       temporal_coverage:
@@ -1416,7 +1416,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40333
-      bigquery_type:
+      bigquery_type: int64
       description: Recebia/fazia normalmente nesse trabalho rendimento/retirada somente
           em benefícios?
       temporal_coverage:
@@ -1430,7 +1430,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v403331
-      bigquery_type:
+      bigquery_type: int64
       description: Tipo de rendimento/retirada em benefícios que recebia/fazia nesse
           trabalho
       temporal_coverage:
@@ -1444,7 +1444,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4034
-      bigquery_type:
+      bigquery_type: float64
       description: Qual foi o rendimento bruto que ... recebeu/fez nesse trabalho,
           no mês de referência? (variável auxiliar)
       temporal_coverage:
@@ -1458,7 +1458,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40341
-      bigquery_type:
+      bigquery_type: int64
       description: Recebeu/fez nesse trabalho rendimento/retirada em dinheiro no mês
           de referência
       temporal_coverage:
@@ -1472,7 +1472,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v403411
-      bigquery_type:
+      bigquery_type: int64
       description: Número da faixa do rendimento/retirada em dinheiro
       temporal_coverage:
       covered_by_dictionary:
@@ -1485,7 +1485,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v403412
-      bigquery_type:
+      bigquery_type: float64
       description: Qual foi o rendimento bruto/retirada que ... recebeu/fez nesse
           trabalho, no mês de referência? (valor em dinheiro)
       temporal_coverage:
@@ -1499,7 +1499,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40342
-      bigquery_type:
+      bigquery_type: int64
       description: Recebeu/fez nesse trabalho no mês de referencia, rendimento/retirada
           em produtos e mercadorias
       temporal_coverage:
@@ -1513,7 +1513,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v403421
-      bigquery_type:
+      bigquery_type: int64
       description: Número da faixa do rendimento/retirada em produtos e mercadorias
       temporal_coverage:
       covered_by_dictionary:
@@ -1526,7 +1526,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v403422
-      bigquery_type:
+      bigquery_type: int64
       description: Qual foi o rendimento bruto/retirada que ... recebeu/fez nesse
           trabalho, no mês de referência? (valor estimado dos produtos ou mercadorias)
       temporal_coverage:
@@ -1540,7 +1540,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4039
-      bigquery_type:
+      bigquery_type: int64
       description: Quantas horas ... trabalhava normalmente, por semana, nesse trabalho
           principal?
       temporal_coverage:
@@ -1554,7 +1554,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4039c
-      bigquery_type:
+      bigquery_type: int64
       description: Quantas horas ... trabalhou efetivamente na semana de referência
           nesse trabalho pincipal?
       temporal_coverage:
@@ -1568,7 +1568,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4040
-      bigquery_type:
+      bigquery_type: int64
       description: Até o dia ... (último dia da semana de referência) fazia quanto
           tempo que ... estava nesse trabalho?
       temporal_coverage:
@@ -1582,7 +1582,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40401
-      bigquery_type:
+      bigquery_type: int64
       description: Fazia quanto tempo que estava nesse trabalho (de 1 mês a menos
           de 1 ano)
       temporal_coverage:
@@ -1596,7 +1596,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40402
-      bigquery_type:
+      bigquery_type: int64
       description: Fazia quanto tempo que estava nesse trabalho (de 1 ano a menos
           de 2 anos)
       temporal_coverage:
@@ -1610,7 +1610,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40403
-      bigquery_type:
+      bigquery_type: int64
       description: Fazia quanto tempo estava nesse trabalho (2 anos ou mais)
       temporal_coverage:
       covered_by_dictionary:
@@ -1623,7 +1623,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4041
-      bigquery_type:
+      bigquery_type: string
       description: Código da ocupação (cargo ou função)
       temporal_coverage:
       covered_by_dictionary:
@@ -1636,7 +1636,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4043
-      bigquery_type:
+      bigquery_type: int64
       description: Nesse trabalho secundário, ... era
       temporal_coverage:
       covered_by_dictionary:
@@ -1649,7 +1649,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40431
-      bigquery_type:
+      bigquery_type: int64
       description: Trabalhador familiar não remunerado
       temporal_coverage:
       covered_by_dictionary:
@@ -1662,7 +1662,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4044
-      bigquery_type:
+      bigquery_type: string
       description: Código da principal atividade desse negócio/empresa
       temporal_coverage:
       covered_by_dictionary:
@@ -1675,7 +1675,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4045
-      bigquery_type:
+      bigquery_type: int64
       description: Esse trabalho era na área
       temporal_coverage:
       covered_by_dictionary:
@@ -1688,7 +1688,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4046
-      bigquery_type:
+      bigquery_type: int64
       description: Esse negócio/empresa era registrado no Cadastro Nacional da Pessoa
           Jurídica - CNPJ?
       temporal_coverage:
@@ -1702,7 +1702,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4047
-      bigquery_type:
+      bigquery_type: int64
       description: Nesse trabalho secundário era funcionário público estatutário (federal,
           estadual ou municipal)?
       temporal_coverage:
@@ -1716,7 +1716,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4048
-      bigquery_type:
+      bigquery_type: int64
       description: Nesse trabalho secundário tinha carteira de trabalho assinada?
       temporal_coverage:
       covered_by_dictionary:
@@ -1729,7 +1729,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4049
-      bigquery_type:
+      bigquery_type: int64
       description: Era contribuinte de instituto de previdência por esse trabalho
           secundário?
       temporal_coverage:
@@ -1743,7 +1743,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4050
-      bigquery_type:
+      bigquery_type: float64
       description: Qual era o rendimento bruto mensal que ... recebia/fazia normalmente
           nesse trabalho secundário? (variável auxiliar)
       temporal_coverage:
@@ -1757,7 +1757,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40501
-      bigquery_type:
+      bigquery_type: int64
       description: Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada
           em dinheiro
       temporal_coverage:
@@ -1771,7 +1771,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405011
-      bigquery_type:
+      bigquery_type: int64
       description: Número da faixa do rendimento/retirada em dinheiro
       temporal_coverage:
       covered_by_dictionary:
@@ -1784,7 +1784,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405012
-      bigquery_type:
+      bigquery_type: float64
       description: Valor em dinheiro do rendimento mensal que recebia normalmente
           nesse trabalho secundário
       temporal_coverage:
@@ -1798,7 +1798,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40502
-      bigquery_type:
+      bigquery_type: int64
       description: Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada
           em produtos e mercadorias
       temporal_coverage:
@@ -1812,7 +1812,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405021
-      bigquery_type:
+      bigquery_type: int64
       description: Número da faixa do rendimento/retirada em produtos e mercadorias
       temporal_coverage:
       covered_by_dictionary:
@@ -1825,7 +1825,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405022
-      bigquery_type:
+      bigquery_type: int64
       description: Valor estimado dos produtos e mercadorias que recebia normalmente
           nesse trabalho secundário
       temporal_coverage:
@@ -1839,7 +1839,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40503
-      bigquery_type:
+      bigquery_type: int64
       description: Recebia/fazia normalmente nesse trabalho secundário rendimento/retirada
           somente em benefícios
       temporal_coverage:
@@ -1853,7 +1853,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405031
-      bigquery_type:
+      bigquery_type: int64
       description: Tipo de rendimento/retirada em benefícios que recebia/fazia nesse
           trabalho secundário
       temporal_coverage:
@@ -1867,7 +1867,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4051
-      bigquery_type:
+      bigquery_type: float64
       description: Qual foi o rendimento bruto que ... recebeu/fez nesse trabalho
           secundário, no mês de referência? (variável auxiliar)
       temporal_coverage:
@@ -1881,7 +1881,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40511
-      bigquery_type:
+      bigquery_type: int64
       description: Recebeu/fez nesse trabalho secundário rendimento/retirada em dinheiro
           no mês de referência
       temporal_coverage:
@@ -1895,7 +1895,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405111
-      bigquery_type:
+      bigquery_type: int64
       description: Número da faixa do rendimento/retirada em dinheiro
       temporal_coverage:
       covered_by_dictionary:
@@ -1908,7 +1908,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405112
-      bigquery_type:
+      bigquery_type: float64
       description: Valor em dinheiro do rendimento mensal que recebeu nesse trabalho
           secundário no mês de referência
       temporal_coverage:
@@ -1922,7 +1922,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40512
-      bigquery_type:
+      bigquery_type: int64
       description: Recebeu/fez nesse trabalho secundário no mês de referencia, rendimento/retirada
           em produtos e mercadorias
       temporal_coverage:
@@ -1936,7 +1936,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405121
-      bigquery_type:
+      bigquery_type: int64
       description: Número da faixa do rendimento/retirada em produtos e mercadorias
       temporal_coverage:
       covered_by_dictionary:
@@ -1949,7 +1949,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405122
-      bigquery_type:
+      bigquery_type: int64
       description: Valor estimado dos produtos e mercadorias que recebia recebeu nesse
           trabalho secundário no mês de referência
       temporal_coverage:
@@ -1963,7 +1963,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4056
-      bigquery_type:
+      bigquery_type: int64
       description: Quantas horas ... trabalhava normalmente, por semana, nesse trabalho
           secundário?
       temporal_coverage:
@@ -1977,7 +1977,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4056c
-      bigquery_type:
+      bigquery_type: int64
       description: Quantas horas ... trabalhou efetivamente na semana de referência
           nesse trabalho secundário?
       temporal_coverage:
@@ -1991,7 +1991,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4057
-      bigquery_type:
+      bigquery_type: int64
       description: Era contribuinte de instituto de previdência por esse(s) outro(s)
           trabalho(s)?
       temporal_coverage:
@@ -2005,7 +2005,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4058
-      bigquery_type:
+      bigquery_type: float64
       description: Qual era o rendimento bruto mensal que ... recebia/fazia  normalmente
           nesse(s) outro(s) trabalho(s)? (variável auxiliar)
       temporal_coverage:
@@ -2019,7 +2019,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40581
-      bigquery_type:
+      bigquery_type: int64
       description: Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada
           em dinheiro
       temporal_coverage:
@@ -2033,7 +2033,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405811
-      bigquery_type:
+      bigquery_type: int64
       description: Número da faixa do rendimento/retirada em dinheiro
       temporal_coverage:
       covered_by_dictionary:
@@ -2046,7 +2046,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405812
-      bigquery_type:
+      bigquery_type: float64
       description: Valor em dinheiro do rendimento mensal que recebia normalmente
           nesse(s) outro(s) trabalho(s)
       temporal_coverage:
@@ -2060,7 +2060,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40582
-      bigquery_type:
+      bigquery_type: int64
       description: Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada
           em produtos e mercadorias
       temporal_coverage:
@@ -2074,7 +2074,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405821
-      bigquery_type:
+      bigquery_type: int64
       description: Número da faixa do rendimento/retirada em produtos e mercadorias
       temporal_coverage:
       covered_by_dictionary:
@@ -2087,7 +2087,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405822
-      bigquery_type:
+      bigquery_type: int64
       description: Valor estimado do produtos e mercadorias que recebia normalmente
           nesse(s) outro(s) trabalho(s)
       temporal_coverage:
@@ -2101,7 +2101,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40583
-      bigquery_type:
+      bigquery_type: int64
       description: Recebia/fazia normalmente nesse(s) outro(s) trabalho(s) rendimento/retirada
           somente em benefícios
       temporal_coverage:
@@ -2115,7 +2115,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405831
-      bigquery_type:
+      bigquery_type: int64
       description: Tipo de rendimento/retirada em benefícios que recebia/fazia nesse(s)
           outro(s) trabalho(s)
       temporal_coverage:
@@ -2129,7 +2129,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40584
-      bigquery_type:
+      bigquery_type: int64
       description: Não remunerado nesse(s) outro(s) trabalho(s)
       temporal_coverage:
       covered_by_dictionary:
@@ -2142,7 +2142,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4059
-      bigquery_type:
+      bigquery_type: float64
       description: Qual foi o rendimento bruto que ... recebeu/fez nesse(s) outro(s)
           trabalho(s), no mês de referência? (variável auxiliar)
       temporal_coverage:
@@ -2156,7 +2156,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40591
-      bigquery_type:
+      bigquery_type: int64
       description: Recebeu/fez nesse(s) outro(s) trabalho(s) rendimento/retirada em
           dinheiro no mês de referência
       temporal_coverage:
@@ -2170,7 +2170,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405911
-      bigquery_type:
+      bigquery_type: int64
       description: Número da faixa do rendimento/retirada em dinheiro
       temporal_coverage:
       covered_by_dictionary:
@@ -2183,7 +2183,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405912
-      bigquery_type:
+      bigquery_type: float64
       description: Valor em dinheiro do rendimento mensal que recebeu nesse(s) outro(s)
           trabalho(s) no mês de referência
       temporal_coverage:
@@ -2197,7 +2197,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40592
-      bigquery_type:
+      bigquery_type: int64
       description: Recebeu/fez nesse(s) outro(s) trabalhos no mês de referencia, rendimento/retirada
           em produtos e mercadorias
       temporal_coverage:
@@ -2211,7 +2211,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405921
-      bigquery_type:
+      bigquery_type: int64
       description: Número da faixa do rendimento/retirada em produtos e mercadorias
       temporal_coverage:
       covered_by_dictionary:
@@ -2224,7 +2224,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v405922
-      bigquery_type:
+      bigquery_type: int64
       description: Valor estimado do produtos e mercadorias que recebia normalmente
           nesse(s) outro(s) trabalho(s) no mês de referência
       temporal_coverage:
@@ -2238,7 +2238,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4062
-      bigquery_type:
+      bigquery_type: int64
       description: Quantas horas ... trabalhava normalmente, por semana, nesse(s)
           outro(s) trabalho(s)?
       temporal_coverage:
@@ -2252,7 +2252,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4062c
-      bigquery_type:
+      bigquery_type: int64
       description: Quantas horas ... trabalhou efetivamente na semana de referência
           nesses outros trabalhos?
       temporal_coverage:
@@ -2266,7 +2266,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4063
-      bigquery_type:
+      bigquery_type: int64
       description: '... gostaria de trabalhar mais horas do que as ... (soma das horas
           declaradas nas variáveis VD4031, VD4032, VD4033) horas que efetivamente
           trabalhou no(s) trabalho(s) que tinha na semana de referência?'
@@ -2281,7 +2281,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4063a
-      bigquery_type:
+      bigquery_type: int64
       description: '... gostaria de trabalhar mais horas do que as ... (soma das horas
           declaradas nos quesitos 39, 56 e 62) horas que normalmente trabalhava no(s)
           trabalho(s) que tinha na semana de referência?'
@@ -2296,7 +2296,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4064
-      bigquery_type:
+      bigquery_type: int64
       description: No mês de referência, ... estaria disponível para trabalhar mais
           do que as (soma das horas declaradas nas variáveis VD4031, VD4032, VD4033)
           horas que efetivamente trabalhou no(s) trabalho(s) que tinha na semana de
@@ -2312,7 +2312,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4064a
-      bigquery_type:
+      bigquery_type: int64
       description: No mês de referência, ... estaria disponível para trabalhar mais
           do que as (soma das horas declaradas nos quesitos 39, 56 e 62) horas que
           normalmente trabalhava no(s) trabalho(s) que tinha na semana de referência?
@@ -2327,7 +2327,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4071
-      bigquery_type:
+      bigquery_type: int64
       description: No período de ... a ... (período de referência de 30 dias), ...
           Tomou alguma providência para conseguir trabalho, seja um emprego ou um
           negócio próprio?
@@ -2342,7 +2342,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4072
-      bigquery_type:
+      bigquery_type: int64
       description: No período de ... a ... (período de referência de 30 dias), qual
           foi a principal providência que ... tomou para conseguir trabalho?
       temporal_coverage:
@@ -2356,7 +2356,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4072a
-      bigquery_type:
+      bigquery_type: int64
       description: No período de ... a ... (período de referência de 30 dias), qual
           foi a principal providência que ... tomou para conseguir trabalho?
       temporal_coverage:
@@ -2370,7 +2370,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4073
-      bigquery_type:
+      bigquery_type: int64
       description: Embora não tenha tomado providência para conseguir trabalho, gostaria
           de ter trabalhado na semana de ... a ... (semana de referência)?
       temporal_coverage:
@@ -2384,7 +2384,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4074
-      bigquery_type:
+      bigquery_type: int64
       description: Qual foi o principal motivo de ... não ter tomado providência para
           conseguir trabalho no período de ... a ... (período de referência de 30
           dias)?
@@ -2399,7 +2399,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4074a
-      bigquery_type:
+      bigquery_type: int64
       description: Qual foi o principal motivo de ... não ter tomado providência para
           conseguir trabalho no período de ... a ... (período de referência de 30
           dias)?
@@ -2414,7 +2414,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4075a
-      bigquery_type:
+      bigquery_type: int64
       description: Quanto tempo depois de ... (último dia da semana de referência)
           irá começar esse trabalho que conseguiu?
       temporal_coverage:
@@ -2428,7 +2428,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4075a1
-      bigquery_type:
+      bigquery_type: int64
       description: Número de meses para começar o trabalho que conseguiu
       temporal_coverage:
       covered_by_dictionary:
@@ -2441,7 +2441,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4076
-      bigquery_type:
+      bigquery_type: int64
       description: Até o dia ... (último dia da semana de referência), fazia quanto
           tempo que ... estava sem qualquer trabalho e tentando conseguir trabalho?
       temporal_coverage:
@@ -2455,7 +2455,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40761
-      bigquery_type:
+      bigquery_type: int64
       description: fazia quanto tempo que vinha procurando trabalho (de 1 mês a menos
           de 1 ano)
       temporal_coverage:
@@ -2469,7 +2469,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40762
-      bigquery_type:
+      bigquery_type: int64
       description: fazia quanto tempo que vinha procurando trabalho (de 1 ano a menos
           de 2 anos)
       temporal_coverage:
@@ -2483,7 +2483,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v40763
-      bigquery_type:
+      bigquery_type: int64
       description: fazia quanto tempo vinha procurando trabalho (2 anos ou mais)
       temporal_coverage:
       covered_by_dictionary:
@@ -2496,7 +2496,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4077
-      bigquery_type:
+      bigquery_type: int64
       description: Se tivesse conseguido um trabalho, ... poderia ter começado a trabalhar
           na semana de ... a ... (semana de referência)?
       temporal_coverage:
@@ -2510,7 +2510,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4078
-      bigquery_type:
+      bigquery_type: int64
       description: Qual foi o principal motivo para ... não querer(poder começar a)
           trabalhar na semana de  ... a ... (semana de referência)?
       temporal_coverage:
@@ -2524,7 +2524,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4078a
-      bigquery_type:
+      bigquery_type: int64
       description: Qual foi o principal motivo para ... não querer(poder começar a)
           trabalhar na semana de ... a ... (semana de referência)?
       temporal_coverage:
@@ -2538,7 +2538,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: v4082
-      bigquery_type:
+      bigquery_type: int64
       description: No período de captação de 358 dias, ... trabalhou por pelo menos
           1 hora?
       temporal_coverage:
@@ -2552,7 +2552,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd2002
-      bigquery_type:
+      bigquery_type: int64
       description: Condição no domicílio
       temporal_coverage:
       covered_by_dictionary:
@@ -2565,7 +2565,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd2003
-      bigquery_type:
+      bigquery_type: int64
       description: Número de componentes do domicílio (exclusive as pessoas cuja condição
           no domicílio era pensionista, empregado doméstico ou parente do empregado
           doméstico)
@@ -2580,7 +2580,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd2004
-      bigquery_type:
+      bigquery_type: int64
       description: Espécie da unidade doméstica
       temporal_coverage:
       covered_by_dictionary:
@@ -2593,7 +2593,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd3004
-      bigquery_type:
+      bigquery_type: int64
       description: Nível de instrução mais elevado alcançado (pessoas de 5 anos ou
           mais de idade) padronizado para o Ensino fundamental - SISTEMA DE 9 ANOS
       temporal_coverage:
@@ -2607,7 +2607,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd3005
-      bigquery_type:
+      bigquery_type: int64
       description: Anos de estudo (pessoas de 5 anos ou mais de idade) padronizado
           para o Ensino fundamental - SISTEMA DE 9 ANOS
       temporal_coverage:
@@ -2621,7 +2621,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd3006
-      bigquery_type:
+      bigquery_type: int64
       description: Grupos de anos de estudo (pessoas de 5 anos ou mais de idade) padronizado
           para o Ensino fundamental - SISTEMA DE 9 ANOS
       temporal_coverage:
@@ -2635,7 +2635,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4001
-      bigquery_type:
+      bigquery_type: int64
       description: Condição em relação à força de trabalho na semana de referência
           para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2649,7 +2649,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4002
-      bigquery_type:
+      bigquery_type: int64
       description: Condição de ocupação na semana de referência para pessoas de 14
           anos ou mais de idade
       temporal_coverage:
@@ -2663,7 +2663,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4003
-      bigquery_type:
+      bigquery_type: int64
       description: Força de trabalho potencial para pessoas de 14 anos ou mais de
           idade
       temporal_coverage:
@@ -2677,7 +2677,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4004
-      bigquery_type:
+      bigquery_type: int64
       description: Subocupação por insuficiência de horas efetivamente trabalhadas
           em todos os trabalhos
       temporal_coverage:
@@ -2691,7 +2691,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4004a
-      bigquery_type:
+      bigquery_type: int64
       description: Subocupação por insuficiência de horas habitualmente trabalhadas
           em todos os trabalhos
       temporal_coverage:
@@ -2705,7 +2705,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4005
-      bigquery_type:
+      bigquery_type: int64
       description: Pessoas desalentadas na semana de referência
       temporal_coverage:
       covered_by_dictionary:
@@ -2718,7 +2718,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4007
-      bigquery_type:
+      bigquery_type: int64
       description: Posição na ocupação no trabalho principal da semana de referência
           para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2732,7 +2732,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4008
-      bigquery_type:
+      bigquery_type: int64
       description: Posição na ocupação no trabalho principal da semana de referência
           para pessoas de 14 anos ou mais de idade (com subcategorias de empregados)
       temporal_coverage:
@@ -2746,7 +2746,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4009
-      bigquery_type:
+      bigquery_type: int64
       description: Posição na ocupação e categoria do emprego do trabalho principal
           da semana de referência para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2760,7 +2760,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4010
-      bigquery_type:
+      bigquery_type: int64
       description: Grupamentos de atividade principal do empreendimento do trabalho
           principal da semana de referência para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2774,7 +2774,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4011
-      bigquery_type:
+      bigquery_type: int64
       description: Grupamentos ocupacionais do trabalho principal da semana de referência
           para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2788,7 +2788,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4012
-      bigquery_type:
+      bigquery_type: int64
       description: Contribuição para instituto de previdência em qualquer trabalho
           da semana de referência para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2802,7 +2802,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4013
-      bigquery_type:
+      bigquery_type: int64
       description: Faixa das horas habitualmente trabalhadas por semana em todos os
           trabalhos para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2816,7 +2816,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4014
-      bigquery_type:
+      bigquery_type: int64
       description: Faixa das horas efetivamente trabalhadas na semana de referência
           em todos os trabalhos para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2830,7 +2830,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4015
-      bigquery_type:
+      bigquery_type: int64
       description: Tipo de remuneração habitualmente recebida no trabalho principal
           para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2844,7 +2844,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4016
-      bigquery_type:
+      bigquery_type: int64
       description: Rendimento mensal habitual do trabalho principal para pessoas de
           14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro,
           produtos ou mercadorias no trabalho principal)
@@ -2859,7 +2859,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4017
-      bigquery_type:
+      bigquery_type: int64
       description: Rendimento mensal efetivo do trabalho principal para pessoas de
           14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro,
           produtos ou mercadorias no trabalho principal)
@@ -2874,7 +2874,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4018
-      bigquery_type:
+      bigquery_type: int64
       description: Tipo de remuneração habitualmente recebida em todos os trabalhos
           para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2888,7 +2888,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4019
-      bigquery_type:
+      bigquery_type: int64
       description: Rendimento mensal habitual de todos os trabalhos para pessoas de
           14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro,
           produtos ou mercadorias em qualquer trabalho)
@@ -2903,7 +2903,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4020
-      bigquery_type:
+      bigquery_type: int64
       description: Rendimento mensal efetivo de todos os trabalhos para pessoas de
           14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro,
           produtos ou mercadorias em qualquer trabalho)
@@ -2918,7 +2918,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4023
-      bigquery_type:
+      bigquery_type: int64
       description: Motivo pelo qual não procurou trabalho ou não gostaria de ter trabalhado
           ou não estava disponível para iniciar um trabalho
       temporal_coverage:
@@ -2932,7 +2932,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4030
-      bigquery_type:
+      bigquery_type: int64
       description: Motivo pelo qual não procurou trabalho ou não gostaria de ter trabalhado
           ou não estava disponível para iniciar um trabalho
       temporal_coverage:
@@ -2946,7 +2946,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4031
-      bigquery_type:
+      bigquery_type: int64
       description: Horas habitualmente trabalhadas por semana em todos os trabalhos
           para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2960,7 +2960,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4032
-      bigquery_type:
+      bigquery_type: int64
       description: Horas efetivamente trabalhadas na semana de referência no trabalho
           principal para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2974,7 +2974,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4033
-      bigquery_type:
+      bigquery_type: int64
       description: Horas efetivamente trabalhadas na semana de referência no trabalho
           secundário para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -2988,7 +2988,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4034
-      bigquery_type:
+      bigquery_type: int64
       description: Horas efetivamente trabalhadas na semana de referência nos outros
           trabalhos para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -3002,7 +3002,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4035
-      bigquery_type:
+      bigquery_type: int64
       description: Horas efetivamente trabalhadas na semana de referência em todos
           os trabalhos para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -3016,7 +3016,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4036
-      bigquery_type:
+      bigquery_type: int64
       description: Faixa das horas habitualmente trabalhadas por semana no trabalho
           principal para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -3030,7 +3030,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: vd4037
-      bigquery_type:
+      bigquery_type: int64
       description: Faixa das horas efetivamente trabalhadas na semana de referência
           no trabalho principal para pessoas de 14 anos ou mais de idade
       temporal_coverage:
@@ -3044,7 +3044,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: habitual
-      bigquery_type:
+      bigquery_type: float64
       description: Habitual (campo derivado)
       temporal_coverage:
       covered_by_dictionary:
@@ -3057,7 +3057,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: efetivo
-      bigquery_type:
+      bigquery_type: float64
       description: Efetivo (campo derivado)
       temporal_coverage:
       covered_by_dictionary:
@@ -3070,7 +3070,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: ano
-      bigquery_type:
+      bigquery_type: int64
       description: Ano
       temporal_coverage:
       covered_by_dictionary:
@@ -3083,7 +3083,7 @@ columns:
       is_in_staging: true
       is_partition: true
     - name: trimestre
-      bigquery_type:
+      bigquery_type: int64
       description: Trimestre
       temporal_coverage:
       covered_by_dictionary:
@@ -3096,7 +3096,7 @@ columns:
       is_in_staging: true
       is_partition: true
     - name: sigla_uf
-      bigquery_type:
+      bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
       covered_by_dictionary:
