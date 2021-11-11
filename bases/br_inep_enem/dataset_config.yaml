@@ -1,0 +1,29 @@
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list=
+organization: inep
+
+dataset_id: br_inep_enem
+
+title: Exame Nacional do Ensino Médio
+
+# exemplo: descrição e anotações úteis sobre os dados.
+description:
+
+# Quais grupos caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+groups: educacao
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags: ensino medio, vestibular
+
+ckan_url:
+
+github_url:
+
+metadata_modified:
