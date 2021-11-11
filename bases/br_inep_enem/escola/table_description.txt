@@ -1,4 +1,4 @@
-None
+Microdados do Exame Nacional do Ensino Médio por escola
 
 Para saber mais acesse:
 Website: 
@@ -9,34 +9,61 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: None
+Nome: Lucas Moreira
 Código: 
+Email: lucas.moreira@basedosdados.org
 Tratado por
 -----------
-Nome: None
+Nome: Lucas Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_enem/code
+Email: lucas.moreira@basedosdados.org
 
 
 
 
 Colunas identificando linhas unicamente
 -------------------
+- ano
+- id_escola
 
 
 
 
 Cobertura Temporal
 ------------------
+- 2005
+- 2006
+- 2007
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
 
 
 
 
 Cobertura Espacial
 ------------------
+- b
+- r
+- a
 
 
 
 
+Tratamento
+----------
+Download dos microdados do INEP 
+ Padronização das variáveis 
+ Formação de dicionário para 'nivel_socioeconomico' e porte_escola' 
+ Ordenação das variáveis
 
 
 
-
+Frequencia de Atualização
+-------------------------
+unique
