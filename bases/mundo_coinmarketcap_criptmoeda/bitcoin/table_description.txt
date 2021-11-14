@@ -1,0 +1,69 @@
+Série histórica com dados diários preços de mercado do bitcoin
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Nobre Barbosa
+Código: 
+Email: lucasbnobre18@gmail.com
+Tratado por
+-----------
+Nome: Lucas Nobre Barbosa
+Código: https://github.com/basedosdados/mais/tree/master/bases/mundo_coinmarketcap_criptmoeda/code
+Email: lucasbnobre18@gmail.com
+
+
+
+
+Colunas identificando linhas unicamente
+-------------------
+- d
+- a
+- t
+- a
+
+
+
+
+Cobertura Temporal
+------------------
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+
+
+
+Cobertura Espacial
+------------------
+- a
+- l
+- l
+
+
+
+
+Tratamento
+----------
+Scrapping do site 
+ Organização das colunas e renomeação delas 
+ Divisão das colunas de data e hora 
+ Conversão pra .csv
+
+
+
+Frequencia de Atualização
+-------------------------
+day

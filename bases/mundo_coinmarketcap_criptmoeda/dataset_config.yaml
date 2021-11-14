@@ -1,0 +1,29 @@
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list=
+organization: coinmarketcap
+
+dataset_id: mundo_coinmarketcap_criptmoeda
+
+title: Preço de criptmoedas
+
+# exemplo: descrição e anotações úteis sobre os dados.
+description: Série histórica de preços de criptmoedas
+
+# Quais grupos caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+groups: economia
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags: criptmoedas, dinheiro, transação, bolsa de valores
+
+ckan_url:
+
+github_url:
+
+metadata_modified:
