@@ -188,13 +188,13 @@ Consulte também nossa [API](/mais/reference_api_cli) para mais detalhes de cada
 
 ## 8. Validar e publicar metadados
 
-Para publicar os metadados preenchidos nos arquivos `dataset_config,yaml` e `table_config.yaml`, o processo é simples.
+Para publicar os metadados preenchidos nos arquivos `dataset_config.yaml` e `table_config.yaml`, o processo é simples.
 
 Em primeiro lugar, é preciso colocar suas credenciais do CKAN no arquivo `~/.basedosdados/config.toml`, criado ao rodar o comando de configuração do cliente `basedosdados` descrito na [seção 7](#7-subir-arquiteturas-dados-e-arquivos-auxiliares-no-google-cloud). Para isso, basta preencher os campos `api_key` e `url` da seção `[ckan]` do arquivo.
 
 Em seguida, é preferencial validar os metadados a partir da API do website. Para validar metadados de bases, isso é feito através do comando `basedosdados metadata validate [DATASET_ID]`. Para validar metadados de tabelas, basta rodar `basedosdados metadata validate [DATASET_ID] [TABLE_ID]`.
 
-Por fim, para publicar esses metadados já preenchidos e validados, basta rodar `basedosdados metadata publish [DATASET_ID]` para bases e/ou `basedosdados metadata publish [DATASET_ID] [TABLE_ID]` para tabelas.
+Por fim, para publicar esses metadados já preenchidos e validados, basta rodar `basedosdados metadata publish [DATASET_ID]` para bases e/ou `basedosdados metadata publish [DATASET_ID] [TABLE_ID]` para tabelas. Caso prefira publicar mudanças de um dataset e uma tabela de uma vez só, basta usar o comando da seguinte forma: `basedosdados metadata publish [DATASET_ID] [TABLE_ID] --all=True`.
 
 #### Atualizando metadados de bases ou tabelas já existentes
 
