@@ -2,8 +2,8 @@ name: data-check
 
 on:
   push:
-    branches:
-      - python-1.6.0
+    types:
+      - labeled
 jobs:
   guard:
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
   get-changes:
     needs: guard
     runs-on: ubuntu-latest
-    # if: github.event.label.name == 'data-check-trigger'
+    if: github.event.label.name == 'data-check-trigger'
     steps:
       - name: Check file changes
         id: file_changes
