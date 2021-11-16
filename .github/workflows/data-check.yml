@@ -29,7 +29,7 @@ jobs:
   #       run: exit 1
 
   get-changes:
-    needs: guard
+    # needs: guard
     runs-on: ubuntu-latest
     if: github.event.label.name == 'data-check-trigger'
     steps:
