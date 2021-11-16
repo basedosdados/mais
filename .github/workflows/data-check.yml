@@ -2,29 +2,31 @@ name: data-check
 
 on:
   push:
-    types:
-      - labeled
+    branches:
+      # - labeled
+      - python-1.6.0
+
 
 jobs:
-  guard:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Check if workflow files were modified
-        uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            workflows:
-              - '.github/**'
-      - name: Exit if workflow files were modified and it's a fork
-        if: |
-          steps.changes.outputs.workflows == 'true' &&
-          github.event.pull_request.head.repo.full_name != github.repository
-        run: exit 1
+  # guard:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check out repository
+  #       uses: actions/checkout@v2
+  #       with:
+  #         ref: ${{ github.event.pull_request.head.sha }}
+  #     - name: Check if workflow files were modified
+  #       uses: dorny/paths-filter@v2
+  #       id: changes
+  #       with:
+  #         filters: |
+  #           workflows:
+  #             - '.github/**'
+  #     - name: Exit if workflow files were modified and it's a fork
+  #       if: |
+  #         steps.changes.outputs.workflows == 'true' &&
+  #         github.event.pull_request.head.repo.full_name != github.repository
+  #       run: exit 1
 
   get-changes:
     needs: guard
@@ -48,8 +50,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+        # with:
+        #   ref: ${{ github.event.pull_request.head.sha }}
       - name: Download changes
         uses: actions/download-artifact@v2
         with:
@@ -63,7 +65,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install basedosdados==1.6.0b19 pyarrow pytest toml
       - name: Set up base dos dados environment
-        run: python .github/workflows/env-setup/env_setup.py
+        run: python -u .github/workflows/env-setup/env_setup.py
         shell: bash
         env:
           BUCKET_NAME: basedosdados
