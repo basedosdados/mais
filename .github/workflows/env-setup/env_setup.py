@@ -62,8 +62,8 @@ def env_setup():
 
     print("\n")
     print("DEBUG:\n")
-    print(f"{os.getenv('CKAN_API_KEY')=}")
-    print(f"{os.getenv('CKAN_URL')=}")
+    print(f"{os.environ.get('CKAN_API_KEY')=}")
+    print(f"{os.environ.get('CKAN_URL')=}")
 
     config_dict = {
         "metadata_path": "/home/runner/work/mais/mais/bases",
@@ -85,7 +85,7 @@ def env_setup():
         },
         "ckan": {
             "url": os.getenv("CKAN_URL"),
-            "api_key": decoding_base64(os.getenv("CKAN_API_KEY")).replace("\n", ""),
+            "api_key": decoding_base64(os.environ.get("CKAN_API_KEY")).replace("\n", ""),
         },
     }
 
