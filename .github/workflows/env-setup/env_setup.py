@@ -10,6 +10,11 @@ from basedosdados.upload.base import Base
 
 def decoding_base64(message):
     # decoding the base64 string
+
+    print("\n")
+    print("DEBUG:\n")
+    print(f"{message=}")
+
     base64_bytes = message.encode("ascii")
     message_bytes = base64.b64decode(base64_bytes)
     return message_bytes.decode("ascii")
@@ -59,6 +64,11 @@ def create_config_tree(prod_base64, staging_base64, config_dict):
 def env_setup():
     # standard github actions home is /github/home
     # json with information of .basedosdados/config.toml
+
+    print("\n")
+    print("DEBUG:\n")
+    print(f"{os.getenv('CKAN_API_KEY')=}")
+
     config_dict = {
         "metadata_path": "/home/runner/work/mais/mais/bases",
         "templates_path": str(Path.home() / ".basedosdados/templates"),
