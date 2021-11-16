@@ -72,7 +72,7 @@ jobs:
           GCP_BD_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
           GCP_BD_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
           CKAN_URL: "https://staging.basedosdados.org"
-          CKAN_API_KEY: ${{ secrets.CKAN_STAGING }}
+          CKAN_API_KEY: dGVzdGUK
       - name: Test data and fill report
         run: pytest -v .github/workflows/data-check
         shell: bash
