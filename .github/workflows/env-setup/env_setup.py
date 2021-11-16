@@ -60,11 +60,6 @@ def env_setup():
     # standard github actions home is /github/home
     # json with information of .basedosdados/config.toml
 
-    print("\n")
-    print("DEBUG:\n")
-    print(f"{os.getenv('CKAN_API_KEY')=}")
-    print(f"{os.getenv('CKAN_URL')=}")
-
     config_dict = {
         "metadata_path": "/home/runner/work/mais/mais/bases",
         "templates_path": str(Path.home() / ".basedosdados/templates"),
