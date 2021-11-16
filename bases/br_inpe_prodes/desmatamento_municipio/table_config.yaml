@@ -94,6 +94,7 @@ coverage_time:
     - 2017
     - 2018
     - 2019
+    - 2020
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
