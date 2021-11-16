@@ -63,9 +63,7 @@ def env_setup():
     print("\n")
     print("DEBUG:\n")
     print(f"{os.getenv('CKAN_API_KEY')=}")
-    print(f"{os.getenvb('CKAN_API_KEY')=}")
     print(f"{os.getenv('CKAN_URL')=}")
-    print(f"{os.getenvb('CKAN_URL')=}")
 
     config_dict = {
         "metadata_path": "/home/runner/work/mais/mais/bases",
