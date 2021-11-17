@@ -30,7 +30,8 @@ temporal_coverage:
 update_frequency: unique
 
 # Entidade representada por cada linha.
-entity: school
+entity:
+    - school
 
 # A unidade temporal representada por cada linha.
 time_unit: unique
@@ -38,7 +39,7 @@ time_unit: unique
 # O conjunto mínimo de colunas identificando cada linha unicamente.
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns: 
+identifying_columns:
     - ano
     - id_escola
 
@@ -69,10 +70,9 @@ data_cleaned_by:
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_enem/code
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "Download dos microdados do INEP \n
-                            Padronização das variáveis \n
-                            Formação de dicionário para 'nivel_socioeconomico' e porte_escola' \n
-                            Ordenação das variáveis"
+data_cleaning_description: "Download dos microdados do INEP \n Padronização das variáveis\
+    \ \n Formação de dicionário para 'nivel_socioeconomico' e porte_escola' \n Ordenação\
+    \ das variáveis"
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -124,12 +124,12 @@ columns:
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
-      temporal_coverage: 
+      temporal_coverage:
       covered_by_dictionary: yes
       directory_column:
           dataset_id: br_bd_diretorios_brasil
-          table_id: uf 
-          column_name: sigla 
+          table_id: uf
+          column_name: sigla
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
@@ -139,7 +139,7 @@ columns:
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
       covered_by_dictionary: yes
-      directory_column: 
+      directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
           column_name: id_municipio
@@ -164,7 +164,7 @@ columns:
       bigquery_type: string
       description: Rede Escolar
       temporal_coverage:
-      covered_by_dictionary: 
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -186,7 +186,7 @@ columns:
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: nivel_socio_economico
+    - name: nivel_socioeconomico
       bigquery_type: string
       description: Nível socioecônomico da escola baseado no INSE
       temporal_coverage:
@@ -227,7 +227,8 @@ columns:
       is_partition: false
     - name: alunos_matriculados
       bigquery_type: int64
-      description: Número de alunos matriculados no Censo Escolar na 3ª e 4ª do Ensino Médio.
+      description: Número de alunos matriculados no Censo Escolar na 3ª e 4ª do Ensino
+          Médio.
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -240,7 +241,8 @@ columns:
       is_partition: false
     - name: participantes_enem
       bigquery_type: int64
-      description: Número de participantes do Enem que cumprem os requisitos de participação no cálculo da média.
+      description: Número de participantes do Enem que cumprem os requisitos de participação
+          no cálculo da média.
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -253,7 +255,8 @@ columns:
       is_partition: false
     - name: participantes_enem_necessidade_especial
       bigquery_type: int64
-      description: Número de participantes do Enem que cumprem os requisitos de participação no cálculo da média e possui necessidade especial.
+      description: Número de participantes do Enem que cumprem os requisitos de participação
+          no cálculo da média e possui necessidade especial.
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -344,7 +347,8 @@ columns:
       is_partition: false
     - name: media_total
       bigquery_type: float64
-      description: Média Total (Redação e Prova Objetiva) Ensino Médio Regular corrigida pelo número de participantes
+      description: Média Total (Redação e Prova Objetiva) Ensino Médio Regular corrigida
+          pelo número de participantes
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -357,7 +361,8 @@ columns:
       is_partition: false
     - name: taxa_participacao
       bigquery_type: float64
-      description: Número total de participantes no ENEM da escola dividido pelo número de matriculados nos anos finais do Ensino Médio da escola
+      description: Número total de participantes no ENEM da escola dividido pelo número
+          de matriculados nos anos finais do Ensino Médio da escola
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -421,4 +426,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified:
+metadata_modified: '2021-11-16T21:00:31.624406'
