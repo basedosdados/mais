@@ -5,35 +5,29 @@ on:
     types:
       - labeled
 jobs:
-  # guard:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check out repository
-  #       uses: actions/checkout@v2
-  #       with:
-  #         ref: ${{ github.event.pull_request.head.sha }}
-  #     - name: Check if workflow files were modified
-  #       uses: dorny/paths-filter@v2
-  #       id: changes
-  #       with:
-  #         filters: |
-  #           workflows:
-  #             - '.github/**'
-  #     - name: Exit if workflow files were modified and it's a fork
-  #       if: |
-  #         steps.changes.outputs.workflows == 'true' &&
-  #         github.event.pull_request.head.repo.full_name != github.repository
-  #       run: exit 1
-  test-cache:
+  guard:
     runs-on: ubuntu-latest
     steps:
-      - name: test cache
-        shell: bash 
-        run: echo 'bla'
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Check if workflow files were modified
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            workflows:
+              - '.github/**'
+      - name: Exit if workflow files were modified and it's a fork
+        if: |
+          steps.changes.outputs.workflows == 'true' &&
+          github.event.pull_request.head.repo.full_name != github.repository
+        run: exit 1
   get-changes:
-    needs: test-cache
+    needs: guard
     runs-on: ubuntu-latest
-    # if: github.event.label.name == 'data-check-trigger'
+    if: github.event.label.name == 'data-check-trigger'
     steps:
       - name: Check file changes
         id: file_changes
@@ -52,8 +46,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-        # with:
-        #   ref: ${{ github.event.pull_request.head.sha }}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Download changes
         uses: actions/download-artifact@v2
         with:
@@ -75,8 +69,8 @@ jobs:
           GCP_BD_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
           GCP_BD_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
           CKAN_URL: "https://staging.basedosdados.org"
-          CKAN_API_KEY: 'dGVzdGUK'
-        run: CKAN_URL=$CKAN_URL CKAN_API_KEY=$CKAN_API_KEY python -u .github/workflows/env-setup/env_setup.py
+          CKAN_API_KEY: ${{ secrets.CKAN_STAGING }}
+        run: python .github/workflows/env-setup/env_setup.py
       - name: Test data and fill report
         run: pytest -v .github/workflows/data-check
         shell: bash
