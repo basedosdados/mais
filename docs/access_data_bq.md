@@ -18,9 +18,15 @@ como na imagem abaixo.
 
 ## Criando uma conta no BigQuery
 
-É preciso, basicamente, ter uma conta Google para acessar o BigQuery. O
-site deve solicitar que você crie um projeto qualquer no seu BigQuery
-antes de acessar os nossos dados - não se preocupe, não é pago! 
+- **Todas as tabelas estão organizadas dentro de cojuntos de dados**, que
+  representaam sua organização/tema (ex: o conjunto
+  `br_ibge_populacao` contém uma tabela `municipio` com a série
+  históricac de população a
+  nível municipal)
+- **Cada tabela pertence a um único conjunto de dados** (ex: a tabela
+  `municipio` em `br_ibge_populacao` é diferente de `municipio` em `br_bd_diretorios`)
+  
+!!! Tip "[Veja aqui o guia do Google de como funciona a interface do BigQuery](https://cloud.google.com/bigquery/docs/bigquery-web-ui)."
 
 <i>O BigQuery inicia automaticamente no modo Sandbox, que permite você
 utilizar seus recursos sem adicionar um modo de pagamento. Leia mais sobre o
@@ -81,4 +87,5 @@ Clicando num *dataset* ou *table* você já consegue ver toda a estrutura
 e descrição das colunas, e pode acessar também os detalhes de tratamento e publicação,
 para entender melhor os dados.
 
-![](images/bq_schema_details.png){ width=100% }
+- [Lista de funções em SQL da W3](https://www.w3schools.com/sql/default.Asp)
+- [Curso SQL na Codeacademy](https://www.codecademy.com/learn/learn-sql)
