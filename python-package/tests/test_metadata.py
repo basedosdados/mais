@@ -3,6 +3,8 @@ import ruamel.yaml as ryaml
 
 from pathlib import Path
 import shutil
+import random
+import string
 
 from basedosdados import Metadata
 from basedosdados.exceptions import BaseDosDadosException
@@ -350,7 +352,8 @@ def pytest_table(metadatadir):
     return pytest_table
 
 
-@pytest.mark.skip(reason="This test requires a mocked CKAN server.")
+@pytest.mark.skip(
+    reason="This test requires a mocked CKAN server and a test dataset/table.")
 def test_publish_is_successful(
     valid_metadata_dataset: Metadata,
     valid_metadata_table: Metadata,
@@ -390,7 +393,9 @@ def test_publish_if_exists_raise(valid_metadata_dataset: Metadata):
         valid_metadata_dataset.publish(if_exists="raise")
 
 
-@pytest.mark.skip(reason="This test requires a mocked CKAN server.")
+@pytest.mark.skip(
+    reason="This test requires a mocked CKAN server and a test dataset."
+)
 def test_publish_if_exists_replace(valid_metadata_dataset: Metadata):
     res = valid_metadata_dataset.publish(if_exists="replace")
     assert isinstance(res, dict)
@@ -401,3 +406,34 @@ def test_publish_if_exists_replace(valid_metadata_dataset: Metadata):
 def test_publish_if_exists_pass(valid_metadata_dataset: Metadata):
     assert isinstance(valid_metadata_dataset.publish(if_exists="pass"), dict)
     assert valid_metadata_dataset.publish(if_exists="pass") == {}
+
+
+@pytest.mark.skip(reason="This test requires a mocked CKAN server.")
+def test_publish_update_locally_is_true(
+    pytest_dataset: Metadata
+):
+    date_before = pytest_dataset.local_metadata.get('metadata_modified')
+
+    # update local metadata
+    new_metadata = pytest_dataset.local_metadata.copy()
+
+    # generate random strings with 3 characters
+    random_string = "".join(random.choice(string.ascii_uppercase) for _ in range(3))
+
+    # update metadata tags with random_string
+    new_metadata["tags"] = [random_string]
+    ryaml.dump(
+        new_metadata, open(new_metadata.filepath, "w", encoding="utf-8")
+    )
+
+    # publish changes
+    pytest_dataset.publish(update_locally=True)
+    
+    # get new tags from local metadata
+    new_tags = pytest_dataset.local_metadata.get('tags')
+
+    # get new `metadata_modified` value from local config file
+    date_after = pytest_dataset.local_metadata.get('metadata_modified')
+
+    assert new_tags == [random_string], "Tags were not updated locally"
+    assert date_after > date_before, "Date after should be greater than date before"

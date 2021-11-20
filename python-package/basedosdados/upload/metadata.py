@@ -50,7 +50,6 @@ class Metadata(Base):
         return {}
 
     @property
-    @lru_cache(256)
     def ckan_metadata(self) -> dict:
         """Load dataset or table metadata from Base dos Dados CKAN"""
 
@@ -58,7 +57,6 @@ class Metadata(Base):
         return ckan_table or ckan_dataset
 
     @property
-    @lru_cache(256)
     def ckan_metadata_extended(self) -> dict:
         """Load dataset and table metadata from Base dos Dados CKAN"""
 
@@ -225,12 +223,13 @@ class Metadata(Base):
         if self.table_id:
             url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_show?"
             url += f"dataset_id={self.dataset_id}&table_id={self.table_id}"
-            exists_in_ckan = requests.get(url).json().get("success")
         else:
-            url = f"{self.CKAN_URL}/api/3/action/bd_bdm_dataset_show?"
-            url += f"dataset_id={self.dataset_id}"
-            exists_in_ckan = requests.get(url).json().get("success")
+            id = self.dataset_id.replace("_", "-")
+            # TODO: use `bd_bdm_dataset_show` when it's available for empty packages
+            url = f"{self.CKAN_URL}/api/3/action/package_show?id={id}"
 
+        exists_in_ckan = requests.get(url).json().get("success")
+        
         return exists_in_ckan
 
     def is_updated(self) -> bool:
@@ -360,7 +359,8 @@ class Metadata(Base):
     def publish(
         self,
         all: bool = False,
-        if_exists: str = "raise"
+        if_exists: str = "raise",
+        update_locally: bool = False,
         ) -> dict:
         """Publish local metadata modifications.
         `Metadata.validate` is used to make sure no local invalid metadata is
@@ -376,6 +376,8 @@ class Metadata(Base):
                 sts in CKAN
                 * replace : Overwrite metadata in CKAN if it exists
                 * pass : Do nothing
+            update_locally (bool): Optional. If set to `True`, update the local
+                metadata with the one published to CKAN.
 
         Returns:
             dict:
@@ -414,8 +416,8 @@ class Metadata(Base):
             assert self.is_updated(), (
                 f"Could not publish metadata due to out of date config file. "
                 f"Please run `basedosdados metadata create {self.dataset_id} "
-                f"{self.table_id}` to get the most recently updated metadata "
-                f"and apply your changes to it."
+                f"{self.table_id or ''}` to get the most recently updated met"
+                f"adata and apply your changes to it."
             )
 
             data_dict = self.ckan_data_dict.copy()
@@ -428,23 +430,28 @@ class Metadata(Base):
 
                 data_dict = data_dict["resources"][0]
 
-                return ckan.call_action(
+                published = ckan.call_action(
                     action="resource_patch"
                     if self.exists_in_ckan()
                     else "resource_create",
                     data_dict=data_dict,
                 )
 
-
             else:
                 data_dict["resources"] = []
 
-                return ckan.call_action(
+                published = ckan.call_action(
                     action="package_patch"
                     if self.exists_in_ckan()
                     else "package_create",
                     data_dict=data_dict,
                 )
+
+            # recreate local metadata YAML file with the published data
+            if published and update_locally:
+                self.create(if_exists="replace")
+            
+            return published
 
         except (BaseDosDadosException, ValidationError) as e:
             message = (
@@ -455,8 +462,13 @@ class Metadata(Base):
             raise BaseDosDadosException(message)
 
         except NotAuthorized as e:
-            message = "Could not publish metadata due to an authorization error. Please check if you set the `api_key` at the `[ckan]` section of your ~/.basedosdados/config.toml correctly. You must be an authorized user to publish modifications to a dataset or table's metadata."
-
+            message = (
+                "Could not publish metadata due to an authorization error. Pl"
+                "ease check if you set the `api_key` at the `[ckan]` section "
+                "of your ~/.basedosdados/config.toml correctly. You must be a"
+                "n authorized user to publish modifications to a dataset or t"
+                "able's metadata."
+            )
             raise BaseDosDadosException(message)
 
 
