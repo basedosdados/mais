@@ -792,6 +792,13 @@ def cli_validate_metadata(ctx, dataset_id, table_id):
         "Define what to do in case metadata already exists in CKAN."
     )
 )
+@click.option(
+    "--update_locally",
+    default=False,
+    help=(
+        "Update local metadata with the new CKAN metadata on publish."
+    )
+)
 @click.pass_context
 def cli_publish_metadata(
     ctx,
@@ -799,11 +806,12 @@ def cli_publish_metadata(
     table_id,
     all,
     if_exists,
+    update_locally,
     ):
     m = Metadata(dataset_id, table_id, **ctx.obj)
 
     try:
-        m.publish(all=all, if_exists=if_exists)
+        m.publish(all=all, if_exists=if_exists, update_locally=update_locally)
         msg, color = "Local metadata has been published.", "green"
     except (CKANAPIError, BaseDosDadosException, AssertionError) as e:
         msg = (
