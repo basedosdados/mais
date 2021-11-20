@@ -127,7 +127,7 @@ No exemplo da RAIS nós criamos um dicionário completo [aqui](https://docs.goog
 
 ## 7. Subir arquiteturas, dados e arquivos auxiliares no Google Cloud
 
-Tudo pronto! Agora só falta subir as coisas para o Google Cloud, para o CKAN e depois enviar para revisão.
+Tudo pronto! Agora só falta subir as coisas para o Google Cloud e depois enviar para revisão.
 
 Desenvolvemos um cliente `basedosdados` (disponível para linha de comando e Python por enquanto) para facilitar esse processo e indicar configurações básicas que devem ser preenchidas sobre os dados.
 
