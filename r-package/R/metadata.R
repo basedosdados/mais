@@ -19,45 +19,47 @@ bd_request <- function(
 #'
 #'
 #' @name dataset_search
-#' @param search_term customize searches based on a given keyword
-#' @param temporal_coverage customize search by temporal coverage
+#' @param search_term keyword for search
 #'
 #' @return
 #'
 #' @importFrom purrr map_chr pluck
 #' @importFrom httr content
+#' @importFrom stringr str_replace_all
 #'
 #' @export
 #' @examples
 #'
 #' dataset_search("agua")
-#'  dataset_search("educação")
+#' dataset_search("educação")
 #'
 #'
 
 
-search <-
-  Data.frame() ? function(
-  search_term = NULL ? Character(length = 1, null_ok = TRUE),
-  temporal_coverage = NULL ? Character(length = 1, null_ok = TRUE)) {
+dataset_search <-
+  typed::Data.frame() ? function(
+  search_term = NULL ? Character(length = 1, null_ok = TRUE)) {
 
   bd_request(
     endpoint = "dataset_search",
     query = list(
       resource_type = "bdm_table",
       q = search_term,
-      temporal_coverage = temporal_coverage,
       page_size = 100)) %>%
     httr::content() %>%
     purrr::pluck("result") ->
     search
 
-    # TODO: dataset_id, nomes das tabelas
-
   tibble::tibble(
-    dataset_id = purrr::map_chr(
+    dataset_name = purrr::map_chr(
       .x = search$datasets,
       .f = ~ purrr::pluck(.x, "name")),
+    dataset_tables = purrr::map_chr(
+      .x = stringr::str_replace_all(dataset_name, "-", "_"),
+      .f = basedosdados::list_dataset_tables),
+    id = purrr::map_chr(
+      .x = search$datasets,
+      .f = ~ purrr::pluck(.x, "id")),
     url = purrr::map_chr(
       .x = search$datasets,
       .f = ~ glue::glue("https://basedosdados.org/dataset/{purrr::pluck(.x, 'id')}")),
@@ -70,22 +72,37 @@ search <-
 
   }
 
-#'
-#'
-#'
-#'
-#'
-#'
-#'
+#' @title List all tables in a dataset
+#' @param dataset_id an unique id for a dataset, such as `br_sp_alesp`.
+#' @export
+#' @importFrom purrr pluck map_chr discard
 
 list_dataset_tables <-
-  Data.frame() ? function(
-    dataset_id = ? Character(length = 1)) {
+  function(dataset_id) {
 
+    bd_request(
+      endpoint = "bdm_dataset_show",
+      query = list(
+        dataset_id = dataset_id)) %>%
+      httr::content() %>%
+      purrr::pluck("result") %>%
+      purrr::pluck("resources") %>%
+      purrr::map_chr(~ purrr::pluck(.x, "name")) %>%
+      # remove recursos de Baixar e Visualizar
+      purrr::discard(~ .x %in% c("Baixar", "Visualizar")) ->
+    results
 
+    if(length(results) > 1) {
 
+      results %>%
+        purrr::reduce(paste, sep = ", ") %>%
+        return()
 
+    } else {
 
+      return(results)
+
+    }
 
   }
 

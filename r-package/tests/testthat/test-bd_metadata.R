@@ -11,7 +11,7 @@ test_that("bd_request works", {
 
 testthat::test_that("Basic dataset search", {
 
-  result <- search("agua")
+  result <- dataset_search("agua")
 
   testthat::expect_gt(nrow(result), 0)
 
@@ -24,23 +24,33 @@ testthat::test_that("Basic dataset search", {
 
 testthat::test_that("Different searches yield different results", {
 
-  search("educação") %>%
-    waldo::compare(search("educação")) %>%
+  dataset_search("educação") %>%
+    waldo::compare(dataset_search("educação")) %>%
     length() %>%
     testthat::expect_equal(0)
 
-  search("educação") %>%
-    waldo::compare(search("água")) %>%
+  dataset_search("educação") %>%
+    waldo::compare(dataset_search("água")) %>%
     length() %>%
     testthat::expect_gt(0)
 
 })
 
-testthat::test_that("Basic table column description", {
+testthat::test_that("Basic table column description works", {
 
   result <- get_table_columns("br_sp_alesp", "deputado")
 
   testthat::expect_equal(nrow(result), 12)
+
+})
+
+testthat::test_that("List tables of a dataset works", {
+
+  result <- list_dataset_tables("br_sp_alesp")
+
+  result %>%
+    rlang::is_string() %>%
+    testthat::expect_true()
 
 })
 
