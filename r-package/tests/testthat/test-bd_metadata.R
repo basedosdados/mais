@@ -15,8 +15,9 @@ testthat::test_that("Basic dataset search", {
 
   testthat::expect_gt(nrow(result), 0)
 
+  # busca por água encontra o ana-atlas?
   result %>%
-    dplyr::pull(name) %>%
+    dplyr::pull(dataset_name) %>%
     purrr::some(stringr::str_detect, pattern = "ana-atlas") %>%
     testthat::expect_true()
 
