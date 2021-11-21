@@ -23,7 +23,6 @@ If you've run \code{\link[=set_billing_id]{set_billing_id()}} then feel free to 
 Is useful for diagnosing performance problems.}
 
 \item{page_size}{defaults to 100000.}
-
 }
 \value{
 A tibble.

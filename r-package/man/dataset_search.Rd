@@ -4,9 +4,7 @@
 \alias{dataset_search}
 \title{Search for a dataset}
 \arguments{
-\item{search_term}{customize searches based on a given keyword}
-
-\item{temporal_coverage}{customize search by temporal coverage}
+\item{search_term}{keyword for search}
 }
 \value{
 
@@ -17,7 +15,7 @@ Search for a dataset
 \examples{
 
 dataset_search("agua")
- dataset_search("educaÃ§Ã£o")
+dataset_search("educação")
 
 
 }
