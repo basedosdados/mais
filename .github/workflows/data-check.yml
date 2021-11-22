@@ -63,13 +63,13 @@ jobs:
       - name: Set up base dos dados environment
         shell: bash
         env:     
-          BUCKET_NAME: basedosdados-dev 
-          PROJECT_NAME_PROD: basedosdados-dev
-          PROJECT_NAME_STAGING: basedosdados-dev
+          BUCKET_NAME: basedosdados
+          PROJECT_NAME_PROD: basedosdados
+          PROJECT_NAME_STAGING: basedosdados-staging
           GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
           GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
-          CKAN_URL: "https://staging.basedosdados.org"
-          CKAN_API_KEY: ${{ secrets.CKAN_STAGING }}
+          CKAN_URL: "https://basedosdados.org"
+          CKAN_API_KEY: ${{ secrets.CKAN_PROD }}
         run: python .github/workflows/env-setup/env_setup.py
       - name: Test data and fill report
         run: pytest -v .github/workflows/data-check
