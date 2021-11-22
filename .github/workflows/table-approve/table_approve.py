@@ -315,7 +315,7 @@ def table_approve():
             md = Metadata(dataset_id=dataset_id, table_id=table_id)
             md.validate()
             tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}")
-            md.publish()
+            md.publish(if_exists="replace")
             tprint(f"SUCESS PUBLISHED {dataset_id}.{table_id}")
             tprint()
         except Exception as error:

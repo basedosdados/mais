@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      # - python-1.6.0
 jobs:
   get-changes:
     runs-on: ubuntu-latest
@@ -53,9 +52,8 @@ jobs:
           PROJECT_NAME_STAGING: basedosdados-staging
           GCP_BD_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
           GCP_BD_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
-          CKAN_URL: "https://staging.basedosdados.org"
-          CKAN_API_KEY: ${{ secrets.CKAN_STAGING }}
-
+          CKAN_URL: "https://basedosdados.org"
+          CKAN_API_KEY: ${{ secrets.CKAN_PROD }}
       - name: Table approve
         run: python -u .github/workflows/table-approve/table_approve.py
         shell: bash

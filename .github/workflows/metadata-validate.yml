@@ -46,8 +46,8 @@ jobs:
           PROJECT_NAME_STAGING: basedosdados-staging
           GCP_BD_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
           GCP_BD_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
-          CKAN_URL: "https://staging.basedosdados.org"
-          CKAN_API_KEY: ${{ secrets.CKAN_STAGING }}
+          CKAN_URL: "https://basedosdados.org"
+          CKAN_API_KEY: ${{ secrets.CKAN_PROD }}
       - name: Metadata validate
         run: python -u .github/workflows/metadata-validate/metadata_validate.py
         shell: bash
