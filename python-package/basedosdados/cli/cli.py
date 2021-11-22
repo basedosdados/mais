@@ -1,18 +1,23 @@
+import click
 import os
 import time
 
-import basedosdados as bd
-import click
 from basedosdados.upload.base import Base
 from basedosdados.upload.dataset import Dataset
-from basedosdados.upload.storage import Storage
 from basedosdados.upload.table import Table
+from basedosdados.upload.storage import Storage
+from basedosdados.upload.metadata import Metadata
+
+import basedosdados as bd
+from basedosdados.exceptions import BaseDosDadosException
+from ckanapi import CKANAPIError
 
 
 @click.group()
 @click.option("--templates", default=None, help="Templates path")
 @click.option("--bucket_name", default=None, help="Project bucket name")
 @click.option("--metadata_path", default=None, help="Folder to store metadata")
+@click.version_option(package_name="basedosdados")
 @click.pass_context
 def cli(ctx, templates, bucket_name, metadata_path):
 
@@ -65,7 +70,7 @@ def mode_text(mode, verb, obj_id):
 @cli_dataset.command(name="create", help="Create dataset on BigQuery")
 @click.argument("dataset_id")
 @click.option(
-    "--mode", "-m", default="all", help="What datasets to create [all|staging|prod]"
+    "--mode", "-m", default="all", help="What datasets to create [prod|staging|all]"
 )
 @click.option(
     "--if_exists",
@@ -88,7 +93,7 @@ def create_dataset(ctx, dataset_id, mode, if_exists):
 @cli_dataset.command(name="update", help="Update dataset on BigQuery")
 @click.argument("dataset_id")
 @click.option(
-    "--mode", "-m", default="all", help="What datasets to create [all|staging|prod]"
+    "--mode", "-m", default="all", help="What datasets to create [prod|staging|all]"
 )
 @click.pass_context
 def update_dataset(ctx, dataset_id, mode):
@@ -121,7 +126,7 @@ def publicize_dataset(ctx, dataset_id):
 @cli_dataset.command(name="delete", help="Delete dataset")
 @click.argument("dataset_id")
 @click.option(
-    "--mode", "-m", default="all", help="What datasets to create [all|staging|prod]"
+    "--mode", "-m", default="all", help="What datasets to create [prod|staging|all]"
 )
 @click.pass_context
 def delete_dataset(ctx, dataset_id, mode):
@@ -229,7 +234,7 @@ def init_table(
 @click.option(
     "--columns_config_url",
     default=None,
-    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. The sheet must contain the column name: 'coluna' and column description: 'descricao'.",
+    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>",
 )
 @click.pass_context
 def create_table(
@@ -269,7 +274,7 @@ def create_table(
 @click.option(
     "--mode",
     default="all",
-    help="Choose a table from a dataset to update [all|staging|prod]",
+    help="Choose a table from a dataset to update [prod|staging|all]",
 )
 @click.pass_context
 def update_table(ctx, dataset_id, table_id, mode):
@@ -287,14 +292,22 @@ def update_table(ctx, dataset_id, table_id, mode):
 
 
 @cli_table.command(
-    name="update_columns", help="Update columns descriptions in tables_config.yaml "
+    name="update_columns", help="Update columns fields in tables_config.yaml "
 )
 @click.argument("dataset_id")
 @click.argument("table_id")
 @click.option(
     "--columns_config_url",
     default=None,
-    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. The sheet must contain the column name: 'coluna' and column description: 'descricao'.",
+    help="""\nGoogle sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. 
+\nThe sheet must contain the columns:\n
+    - nome: column name\n
+    - descricao: column description\n
+    - tipo: column bigquery type\n
+    - unidade_medida: column mesurement unit\n
+    - dicionario: column related dictionary\n
+    - nome_diretorio: column related directory in the format <dataset_id>.<table_id>:<column_name>
+""",
 )
 @click.pass_context
 def update_columns(ctx, dataset_id, table_id, columns_config_url):
@@ -305,7 +318,7 @@ def update_columns(ctx, dataset_id, table_id, columns_config_url):
 
     click.echo(
         click.style(
-            f"All columns descriptions `{dataset_id}*.{table_id}` were updated in table_config.yaml",
+            f"Columns from `{dataset_id}.{table_id}` were updated in table_config.yaml",
             fg="green",
         )
     )
@@ -337,7 +350,7 @@ def publish_table(ctx, dataset_id, table_id, if_exists):
 @cli_table.command(name="delete", help="Delete BigQuery table")
 @click.argument("dataset_id")
 @click.argument("table_id")
-@click.option("--mode", help="Which table to delete [all|prod|staging]", required=True)
+@click.option("--mode", help="Which table to delete [prod|staging]", required=True)
 @click.pass_context
 def delete_table(ctx, dataset_id, table_id, mode):
 
@@ -410,7 +423,10 @@ def init_storage(ctx, bucket_name, replace, very_sure):
 @click.argument("table_id")
 @click.argument("filepath", type=click.Path(exists=True))
 @click.option(
-    "--mode", "-m", required=True, help="[raw|staging] where to save the file"
+    "--mode",
+    "-m",
+    required=True,
+    help="Where to save the file [raw|staging|header|auxiliary_files|architecture|all]",
 )
 @click.option("--partitions", help="Data partition as `value=key/value2=key2`")
 @click.option(
@@ -445,7 +461,10 @@ def upload_storage(ctx, dataset_id, table_id, filepath, mode, partitions, if_exi
     help="filename to download single file. If * downloads all files from bucket folder",
 )
 @click.option(
-    "--mode", "-m", default="raw", help="[raw|staging] where to download data from"
+    "--mode",
+    "-m",
+    default="raw",
+    help="Where to download data from [raw|staging|header|auxiliary_files|architecture]",
 )
 @click.option("--partitions", help="Data partition as `value=key/value2=key2`")
 @click.option(
@@ -477,7 +496,7 @@ def download_storage(
     "-m",
     required=True,
     default="staging",
-    help="[raw|staging] where to delete the file from",
+    help="Where to delete the file from [raw|staging|header|auxiliary_files|architecture]",
 )
 @click.option(
     "--bucket_name",
@@ -511,7 +530,7 @@ def storage_delete_table(ctx, dataset_id, table_id, mode, not_found_ok, bucket_n
     "--mode",
     "-m",
     default="staging",
-    help="[raw|staging] which bucket folder to get the table",
+    help="which bucket folder to get the table [raw|staging|header|auxiliary_files|architecture]",
 )
 @click.pass_context
 def storage_copy_table(
@@ -647,6 +666,164 @@ def cli_get_table_columns(
     )
 
 
+@click.group(name="metadata")
+def cli_metadata():
+    pass
+
+
+@cli_metadata.command(name="create", help="Creates new metadata config file")
+@click.argument("dataset_id")
+@click.argument("table_id", required=False)
+@click.option(
+    "--if_exists",
+    default="raise",
+    help="[raise|replace|pass] if metadata config file alread exists",
+)
+@click.option(
+    "--columns",
+    default=[],
+    help="Data columns. Example: --columns=col1,col2",
+    callback=lambda _, __, x: x.split(",") if x else [],
+)
+@click.option(
+    "--partition_columns",
+    default=[],
+    help="Columns that partition the data. Example: --partition_columns=col1,col2",
+    callback=lambda _, __, x: x.split(",") if x else [],
+)
+@click.option(
+    "--force_columns",
+    default=False,
+    help="Overwrite columns with local columns.",
+)
+@click.option(
+    "--table_only",
+    default=True,
+    help=(
+        "Force the creation of `table_config.yaml` file only if `dataset_conf"
+        "ig.yaml` doesn't exist."
+    ),
+)
+@click.pass_context
+def cli_create_metadata(
+    ctx,
+    dataset_id,
+    table_id,
+    if_exists,
+    columns,
+    partition_columns,
+    force_columns,
+    table_only,
+):
+
+    m = Metadata(dataset_id, table_id, **ctx.obj).create(
+        if_exists=if_exists,
+        columns=columns,
+        partition_columns=partition_columns,
+        force_columns=force_columns,
+        table_only=table_only,
+    )
+
+    click.echo(
+        click.style(
+            f"Metadata file was created at `{m.filepath}`",
+            fg="green",
+        )
+    )
+
+
+@cli_metadata.command(
+    name="is_updated", help="Check if user's local metadata is updated"
+)
+@click.argument("dataset_id")
+@click.argument("table_id", required=False)
+@click.pass_context
+def cli_is_updated_metadata(ctx, dataset_id, table_id):
+    m = Metadata(dataset_id, table_id, **ctx.obj)
+
+    if m.is_updated():
+        msg, color = "Local metadata is updated.", "green"
+    else:
+        msg = (
+            "Local metadata is out of date. Please run `basedosdados metadata"
+            " create` with the flag `if_exists=replace` to get the updated da"
+            "ta."
+        )
+        color = "red"
+
+    click.echo(click.style(msg, fg=color))
+
+
+@cli_metadata.command(name="validate", help="Validate user's local metadata")
+@click.argument("dataset_id")
+@click.argument("table_id", required=False)
+@click.pass_context
+def cli_validate_metadata(ctx, dataset_id, table_id):
+    m = Metadata(dataset_id, table_id, **ctx.obj)
+
+    try:
+        m.validate()
+        msg, color = "Local metadata is valid.", "green"
+    except BaseDosDadosException as e:
+        msg = (
+            f"Local metadata is invalid. Please check the traceback below for"
+            f" more information on how to fix it:\n\n{repr(e)}"
+        )
+        color = "red"
+
+    click.echo(click.style(msg, fg=color))
+
+
+@cli_metadata.command(name="publish", help="Publish user's local metadata")
+@click.argument("dataset_id")
+@click.argument("table_id", required=False)
+@click.option(
+    "--all",
+    default=False,
+    help=(
+        "Force the publishment of metadata specified in both `dataset_config."
+        "yaml` and `table_config.yaml` at once."
+    ),
+)
+@click.option(
+    "--if_exists",
+    default="raise",
+    help=(
+        "Define what to do in case metadata already exists in CKAN."
+    )
+)
+@click.option(
+    "--update_locally",
+    default=False,
+    help=(
+        "Update local metadata with the new CKAN metadata on publish."
+    )
+)
+@click.pass_context
+def cli_publish_metadata(
+    ctx,
+    dataset_id,
+    table_id,
+    all,
+    if_exists,
+    update_locally,
+    ):
+    m = Metadata(dataset_id, table_id, **ctx.obj)
+
+    try:
+        m.publish(all=all, if_exists=if_exists, update_locally=update_locally)
+        msg, color = "Local metadata has been published.", "green"
+    except (CKANAPIError, BaseDosDadosException, AssertionError) as e:
+        msg = (
+            f"Local metadata couldn't be published due to an error. Pleas"
+            f"e check the traceback below for more information on how to "
+            f"fix it:\n\n{repr(e)}"
+        )
+        color = "red"
+
+    click.echo(click.style(msg, fg=color))
+
+
 @click.group(name="config")
 def cli_config():
     pass
@@ -754,47 +931,8 @@ cli.add_command(cli_config)
 cli.add_command(cli_download)
 cli.add_command(cli_list)
 cli.add_command(cli_get)
+cli.add_command(cli_metadata)
 
-
-def run_bash(command):
-    stream = os.popen(command)
-
-
-def set_config_file():
-
-    if not os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"):
-
-        project_id = input(
-            "\nWe need to finish setting up your basic enviorinment!\n"
-            "What is your project id? You should easily find it here: "
-            "https://console.developers.google.com/cloud-resource-manager?pli=1\n"
-            "Make sure to copy the ID!\n"
-            "project_id: "
-        )
-
-        os.popen("gcloud iam service-accounts create basedosdados-cli")
-        time.sleep(3)
-
-        os.popen(
-            f"""gcloud projects add-iam-policy-binding {project_id} --member "serviceAccount:basedosdados-cli@{project_id}.iam.gserviceaccount.com" --role "roles/owner"
-            """
-        )
-        time.sleep(3)
-
-        os.popen(
-            f"""gcloud iam service-accounts keys create ~/.basedosdados/iam.json --iam-account basedosdados-cli@{project_id}.iam.gserviceaccount.com"""
-        )
-        time.sleep(3)
-
-        print(
-            "\nRun this command and rerun the application:\n"
-            "export GOOGLE_APPLICATION_CREDENTIALS=~/.basedosdados/iam.json"
-        )
-
-        exit()
-
-
-# set_config_file()
 
 if __name__ == "__main__":
 

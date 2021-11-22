@@ -1,26 +1,27 @@
-import shutil
 from os import read
-from pathlib import Path
-
-import pandas as pd
 import pytest
+from pathlib import Path
+import pandas as pd
+from pandas_gbq.gbq import GenericGBQException
+import shutil
+
 from basedosdados import (
     download,
-    get_dataset_description,
-    get_table_columns,
-    get_table_description,
-    get_table_size,
-    list_dataset_tables,
-    list_datasets,
     read_sql,
     read_table,
+    list_datasets,
+    list_dataset_tables,
+    get_dataset_description,
+    get_table_description,
+    get_table_columns,
+    get_table_size,
 )
 from basedosdados.exceptions import (
     BaseDosDadosException,
-    BaseDosDadosInvalidProjectIDException,
     BaseDosDadosNoBillingProjectIDException,
+    BaseDosDadosInvalidProjectIDException,
 )
-from pandas_gbq.gbq import GenericGBQException
+
 
 TEST_PROJECT_ID = "basedosdados-dev"
 SAVEFILE = Path(__file__).parent / "tmp_bases" / "test.csv"
@@ -148,7 +149,7 @@ def test_read_sql_inexistent_dataset():
 
     with pytest.raises(GenericGBQException) as excinfo:
         read_sql(
-            query="select * from `basedosdados.br_ibge_inexistent.municipio` limit 10",
+            query="select * from `basedosdados-dev.br_ibge_inexistent.municipio` limit 10",
             billing_project_id=TEST_PROJECT_ID,
             from_file=True,
         )
@@ -178,6 +179,15 @@ def test_read_sql_syntax_error():
         )
 
     assert "Reason: 400 Syntax error" in str(excinfo.value)
+
+
+def test_read_sql_out_of_bound_date():
+
+    read_sql(
+        query="select DATE('1000-01-01')",
+        billing_project_id=TEST_PROJECT_ID,
+        from_file=True,
+    )
 
 
 def test_read_table():
