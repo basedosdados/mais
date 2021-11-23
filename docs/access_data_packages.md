@@ -81,7 +81,7 @@ projeto é criado.
 ### Faça sua primeira consulta!
 
 Um exemplo simples para começar a explorar o *datalake* é puxar informações cadastrais de
-municípios direto na nossa base de [Diretórios Brasileiros (tabela `municipio`)]((https://basedosdados.org/dataset/br-bd-diretorios-brasil)). Para isso, vamos usar a
+municípios direto na nossa base de [Diretórios Brasileiros (tabela `municipio`)](https://basedosdados.org/dataset/br-bd-diretorios-brasil). Para isso, vamos usar a
 função `download`, baixando os dados direto para nossa máquina.
 
 === "R"
