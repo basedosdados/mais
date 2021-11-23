@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - fix-table-approve-metadata-publish-2
 jobs:
   get-changes:
     runs-on: ubuntu-latest
