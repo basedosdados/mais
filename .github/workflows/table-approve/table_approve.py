@@ -315,6 +315,14 @@ def table_approve():
             md = Metadata(dataset_id=dataset_id, table_id=table_id)
             md.validate()
             tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}")
+            
+            if not md.dataset_metadata_obj.exists_in_ckan():
+                # validate and create dataset metadata in ckan first
+                md.dataset_metadata_obj.validate()
+                tprint(f"SUCESS VALIDATE {dataset_id}")
+                md.dataset_metadata_obj.publish()
+                tprint(f"SUCESS PUBLISH {dataset_id}")
+
             md.publish(if_exists="replace")
             tprint(f"SUCESS PUBLISHED {dataset_id}.{table_id}")
             tprint()
