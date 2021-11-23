@@ -12,6 +12,7 @@ pytest
 ipykernel
 jupyter
 poetry
+importlib_metadata>3.10
 mkdocs
 mkdocs-material
 flake8
