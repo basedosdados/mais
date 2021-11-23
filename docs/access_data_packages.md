@@ -80,10 +80,8 @@ projeto é criado.
 
 ### Faça sua primeira consulta!
 
-Um exemplo simples para começar a explorar o *datalake* é puxar
-[informações cadastrais de
-municípios](https://basedosdados.org/dataset/br-bd-diretorios-brasil/resource/9046b938-b361-4c3c-a5e7-a549dfc48f2b)
-direto na nossa base de diretórios brasileiros. Para isso, vamos usar a
+Um exemplo simples para começar a explorar o *datalake* é puxar informações cadastrais de
+municípios direto na nossa base de [Diretórios Brasileiros (tabela `municipio`)](https://basedosdados.org/dataset/br-bd-diretorios-brasil). Para isso, vamos usar a
 função `download`, baixando os dados direto para nossa máquina.
 
 === "R"
