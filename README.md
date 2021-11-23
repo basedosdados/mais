@@ -17,8 +17,8 @@
   <a href="https://github.com/basedosdados/mais/stargazers" target="_blank">
     <img src="https://img.shields.io/github/stars/basedosdados/mais.svg?style=social" alt="Start">
   </a>
-  <a href="https://twitter.com/intent/tweet?text=Baixe%20e%20faça%20queries%20em%20dados%20publicos,%20tratados%20e%20gratuitos%20com%20a%20Base%20dos%20Dados%20Mais%20🔍%20➕:%20https://basedosdados.github.io/mais/%20via%20@basedosdados" target="_blank">
-    <img src="https://img.shields.io/twitter/url/https/github.com/jonsn0w/hyde.svg?style=social" alt="Tweet">
+  <a href="https://twitter.com/basedosdados" target="_blank">
+    <img src="https://img.shields.io/twitter/follow/basedosdados?style=social" alt="Tweet">
   </a>
 <!--   <a href="https://pypi.org/project/basedosdados/" target="_blank">
     <img src="https://img.shields.io/pypi/dm/basedosdados" alt="PyPi">
@@ -33,9 +33,11 @@
 
 **Versões atuais do pacote:**
 
-| ***R*** | ***Python*** |
-|-----|-----|
-| [![CRAN/METACRAN Version](https://www.r-pkg.org/badges/version/basedosdados)](https://CRAN.R-project.org/package=basedosdados) <br/>  [![CRAN/METACRAN Total downloads](http://cranlogs.r-pkg.org/badges/grand-total/basedosdados?color=blue)](https://CRAN.R-project.org/package=basedosdados) <br/>  [![CRAN/METACRAN downloads per month](http://cranlogs.r-pkg.org/badges/basedosdados)](https://CRAN.R-project.org/package=basedosdados) <br/>  ![Lifecycle: stable](https://img.shields.io/github/issues/basedosdados/mais/R) | [![PyPI version](https://badge.fury.io/py/basedosdados.svg)](https://badge.fury.io/py/basedosdados) <br/> ![PyPI - Downloads](https://img.shields.io/pypi/dm/basedosdados?color=blue) <br/> [![Coverage Status](https://coveralls.io/repos/github/basedosdados/mais/badge.svg?branch=master)](https://coveralls.io/github/basedosdados/mais?branch=master)  <br/> ![Lifecycle: stable](https://img.shields.io/github/issues/basedosdados/mais/Python) |
+| ***R*** | ***Python*** | **Stata**
+|-----|-----|-----|
+| <a href="https://CRAN.R-project.org/package=basedosdados" target="_blank"><img src="https://www.r-pkg.org/badges/version/basedosdados"></a> | <a href="https://pypi.org/project/basedosdados" target="_blank"><img src="https://badge.fury.io/py/basedosdados.svg"></a> | <a href="https://github.com/basedosdados/mais/pull/754" target="_blank"><img src="https://img.shields.io/badge/development-0.1.0-yellow"></a>
+| <a href="https://CRAN.R-project.org/package=basedosdados" target="_blank"><img src="http://cranlogs.r-pkg.org/badges/basedosdados"></a> | <a href="https://pypi.org/project/basedosdados" target="_blank"><img src="https://img.shields.io/pypi/dm/basedosdados?color=blue"></a> |
+| <a href="https://github.com/basedosdados/mais/labels/R" target="_blank"><img src="https://img.shields.io/github/issues/basedosdados/mais/R"></a> | <a href="https://github.com/basedosdados/mais/labels/python" target="_blank"><img src="https://img.shields.io/github/issues/basedosdados/mais/Python"></a> |
 
 # O que fazemos?
 
