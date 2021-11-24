@@ -154,7 +154,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: peso_liquido_kg
-      bigquery_type:
+      bigquery_type: 
       description: Peso Líquido (kg)
       temporal_coverage:
       covered_by_dictionary:
