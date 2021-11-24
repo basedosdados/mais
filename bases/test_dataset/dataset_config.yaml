@@ -3,7 +3,7 @@
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 # Exemplos: br-ibge, br-tse, br-rj-gov
 organization:
-    - basedosdados
+    - acaps
 
 dataset_id: test_dataset
 

@@ -7,7 +7,7 @@ table_id: test_table
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: table-approve passou por aqui v1.0 -> teste com retries 
+description: table-approve passou por aqui v1.0 -> teste com retries  
 
 # A máxima unidade espacial que a tabela cobre.
 spatial_coverage:
