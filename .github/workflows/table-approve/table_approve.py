@@ -4,6 +4,7 @@ import traceback
 from pathlib import Path
 from pprint import pprint
 import sys
+import time
 
 import basedosdados as bd
 import yaml
@@ -312,17 +313,33 @@ def table_approve():
             tprint()
         # pubish Metadata in prod
         try:
+            # check if correspondent dataset metadata already exists in CKAN 
+            if not md.dataset_metadata_obj.exists_in_ckan():
+                # validate dataset metadata
+                md.dataset_metadata_obj.validate()
+                tprint(f"SUCESS VALIDATE {dataset_id}")
+                
+                # publish dataset metadata to CKAN
+                md.dataset_metadata_obj.publish()
+                
+                # run multiple tries to get published dataset metadata from
+                # ckan till it is published: dataset metadata must be
+                # accessible for table metadata to be published too
+                tprint(f"WAITING FOR {dataset_id} METADATA PUBLISHMENT...")
+                MAX_RETRIES = 80
+                retry_count = 0
+                while not md.dataset_metadata_obj.exists_in_ckan():
+                    time.sleep(15)
+                    retry_count += 1
+                    if retry_count >= MAX_RETRIES: break
+                
+                tprint(f"SUCESS PUBLISH {dataset_id}")
+
+            # create table metadata object and validate table metadata
             md = Metadata(dataset_id=dataset_id, table_id=table_id)
             md.validate()
             tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}")
-            
-            if not md.dataset_metadata_obj.exists_in_ckan():
-                # validate and create dataset metadata in ckan first
-                md.dataset_metadata_obj.validate()
-                tprint(f"SUCESS VALIDATE {dataset_id}")
-                md.dataset_metadata_obj.publish()
-                tprint(f"SUCESS PUBLISH {dataset_id}")
-
+            # publish table metadata to CKAN
             md.publish(if_exists="replace")
             tprint(f"SUCESS PUBLISHED {dataset_id}.{table_id}")
             tprint()
