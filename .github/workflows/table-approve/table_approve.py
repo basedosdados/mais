@@ -313,6 +313,9 @@ def table_approve():
             tprint()
         # pubish Metadata in prod
         try:
+            # create table metadata object
+            md = Metadata(dataset_id=dataset_id, table_id=table_id)
+            
             # check if correspondent dataset metadata already exists in CKAN 
             if not md.dataset_metadata_obj.exists_in_ckan():
                 # validate dataset metadata
@@ -333,10 +336,12 @@ def table_approve():
                     retry_count += 1
                     if retry_count >= MAX_RETRIES: break
                 
-                tprint(f"SUCESS PUBLISH {dataset_id}")
+                if md.dataset_metadata_obj.exists_in_ckan():
+                    tprint(f"SUCESS PUBLISH {dataset_id}")
+                else:
+                    tprint(f"ERROR PUBLISH {dataset_id}")
 
-            # create table metadata object and validate table metadata
-            md = Metadata(dataset_id=dataset_id, table_id=table_id)
+            # validate table metadata
             md.validate()
             tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}")
             # publish table metadata to CKAN
