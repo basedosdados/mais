@@ -81,16 +81,11 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          # selection:
-          #   selection_opt: true
           rendering:
             rendering_opt: "value"
           setup_commands:
             - import sys
-            - sys.path.append("docs")
-            - sys.path.append("python-package")
-      watch:
-        - python-package/basedosdados
+            - sys.path.insert(0, "python-package")
 
 extra_css:
 - css/termynal.css

@@ -143,8 +143,8 @@ para você começar a usá-los.
 
 ## Manuais de referência
 
-#### [:material-language-r: R](/mais/reference_api_r)
+#### [:material-language-r: R](/reference_api_r)
 
-#### [:material-language-python: Python](/mais/reference_api_py)
+#### [:material-language-python: Python](/reference_api_py)
 
-#### [:octicons-terminal-16: CLI](/mais/reference_api_cli)
+#### [:octicons-terminal-16: CLI](/reference_api_cli)
