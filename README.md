@@ -205,7 +205,7 @@ python -m venv .mais # cria ambiente virtual (só rodar da primeira vez)
 . .mais/bin/activate # ativa ambiente virtual
 pip install --upgrade  -r python-package/requirements-dev.txt # instala dependências
 python python-package/setup.py develop # instala pacote local
-mkdocs serve # cria documentacao local em:
+mkdocs serve # cria documentacao em: http://localhost:8000/
 ```
 
 Atualize os docs adicionando ou editando os arquivos `.md` em `docs/`.
