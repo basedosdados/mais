@@ -12,11 +12,12 @@ pytest
 ipykernel
 jupyter
 poetry
+importlib_metadata>3.10
+flake8
+pandas_gbq
 mkdocs
 mkdocs-material
-flake8
 mkdocstrings
-pandas_gbq
 mkdocs-click
 ruamel.yaml
 requests
