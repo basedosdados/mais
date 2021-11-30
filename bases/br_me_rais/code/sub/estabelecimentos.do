@@ -44,10 +44,10 @@ foreach ano of numlist 1985(1)2019 {
 	if `ano' == 1985 | (`ano' >= 1989 & `ano' <= 1990) {
 
 		ren v1	bairros_sp
-		ren v2	qtde_vinculos_ativos
+		ren v2	quantidade_vinculos_ativos
 		ren v3	id_municipio_6
-		ren v4	tamanho_estabelecimento
-		ren v5	tipo_estabelecimento
+		ren v4	tamanho
+		ren v5	tipo
 		ren v6	sigla_uf
 		ren v7	subsetor_ibge
 		ren v8	subatividade_ibge
@@ -56,11 +56,11 @@ foreach ano of numlist 1985(1)2019 {
 	if (`ano' >= 1986 & `ano' <= 1988) | (`ano' >= 1991 & `ano' <= 1992) {
 		
 		ren v1	bairros_sp
-		ren v2	qtde_vinculos_ativos
+		ren v2	quantidade_vinculos_ativos
 		ren v3	distritos_sp
 		ren v4	id_municipio_6
-		ren v5	tamanho_estabelecimento
-		ren v6	tipo_estabelecimento
+		ren v5	tamanho
+		ren v6	tipo
 		ren v7	sigla_uf
 		ren v8	subsetor_ibge
 		ren v9	subatividade_ibge
@@ -68,10 +68,10 @@ foreach ano of numlist 1985(1)2019 {
 	}
 	if `ano' == 1993 {
 		
-		ren v1	qtde_vinculos_ativos
+		ren v1	quantidade_vinculos_ativos
 		ren v2	id_municipio_6
-		ren v3	tamanho_estabelecimento
-		ren v4	tipo_estabelecimento
+		ren v3	tamanho
+		ren v4	tipo
 		ren v5	sigla_uf
 		ren v6	subsetor_ibge
 		ren v7	subatividade_ibge
@@ -82,11 +82,11 @@ foreach ano of numlist 1985(1)2019 {
 		ren v1	bairros_sp
 		ren v2	cnae_1
 		ren v3	distritos_sp
-		ren v4	qtde_vinculos_ativos
+		ren v4	quantidade_vinculos_ativos
 		ren v5	id_municipio_6
-		ren v6	natureza_estabelecimento
-		ren v7	tamanho_estabelecimento
-		ren v8	tipo_estabelecimento
+		ren v6	natureza
+		ren v7	tamanho
+		ren v8	tipo
 		ren v9	sigla_uf
 		ren v10	subsetor_ibge
 		ren v11	subatividade_ibge
@@ -97,12 +97,12 @@ foreach ano of numlist 1985(1)2019 {
 		ren v1	bairros_sp
 		ren v2	cnae_1
 		ren v3	distritos_sp
-		ren v4	qtde_vinculos_ativos
+		ren v4	quantidade_vinculos_ativos
 		ren v5	indicador_rais_negativa
 		ren v6	id_municipio_6
 		ren v7	natureza_juridica
-		ren v8	tamanho_estabelecimento
-		ren v9	tipo_estabelecimento
+		ren v8	tamanho
+		ren v9	tipo
 		ren v10	sigla_uf
 		ren v11	subsetor_ibge
 		
@@ -114,13 +114,13 @@ foreach ano of numlist 1985(1)2019 {
 		ren v3	bairros_rj
 		ren v4	cnae_1
 		ren v5	distritos_sp
-		ren v6	qtde_vinculos_ativos
+		ren v6	quantidade_vinculos_ativos
 		ren v7	indicador_rais_negativa
 		ren v8	id_municipio_6
 		ren v9	natureza_juridica
 		ren v10	regioes_administrativas_df
-		ren v11	tamanho_estabelecimento
-		ren v12	tipo_estabelecimento
+		ren v11	tamanho
+		ren v12	tipo
 		ren v13	sigla_uf
 		ren v14	subsetor_ibge
 		
@@ -130,13 +130,13 @@ foreach ano of numlist 1985(1)2019 {
 		ren v1	bairros_fortaleza
 		ren v2	bairros_rj
 		ren v3	cnae_1
-		ren v4	qtde_vinculos_ativos
+		ren v4	quantidade_vinculos_ativos
 		ren v5	indicador_rais_negativa
 		ren v6	id_municipio_6
 		ren v7	natureza_juridica
 		ren v8	regioes_administrativas_df
-		ren v9	tamanho_estabelecimento
-		ren v10	tipo_estabelecimento
+		ren v9	tamanho
+		ren v10	tipo
 		ren v11	sigla_uf
 		ren v12	subsetor_ibge
 		
@@ -148,13 +148,13 @@ foreach ano of numlist 1985(1)2019 {
 		ren v3	bairros_rj
 		ren v4	cnae_1
 		ren v5	distritos_sp
-		ren v6	qtde_vinculos_ativos
+		ren v6	quantidade_vinculos_ativos
 		ren v7	indicador_rais_negativa
 		ren v8	id_municipio_6
 		ren v9	natureza_juridica
 		ren v10	regioes_administrativas_df
-		ren v11	tamanho_estabelecimento
-		ren v12	tipo_estabelecimento
+		ren v11	tamanho
+		ren v12	tipo
 		ren v13	sigla_uf
 		ren v14	subsetor_ibge
 		
@@ -166,7 +166,7 @@ foreach ano of numlist 1985(1)2019 {
 		ren v3	bairros_rj
 		ren v4	cnae_1
 		ren v5	distritos_sp
-		ren v6	qtde_vinculos_ativos
+		ren v6	quantidade_vinculos_ativos
 		ren v7	indicador_cei_vinculado
 		ren v8	indicador_pat
 		ren v9	indicador_rais_negativa
@@ -174,8 +174,8 @@ foreach ano of numlist 1985(1)2019 {
 		ren v11	id_municipio_6
 		ren v12	natureza_juridica
 		ren v13	regioes_administrativas_df
-		ren v14	tamanho_estabelecimento
-		ren v15	tipo_estabelecimento
+		ren v14	tamanho
+		ren v15	tipo
 		ren v16	sigla_uf
 		ren v17	subsetor_ibge
 		
@@ -187,18 +187,18 @@ foreach ano of numlist 1985(1)2019 {
 		ren v3	bairros_rj
 		ren v4	cnae_1
 		ren v5	distritos_sp
-		ren v6	qtde_vinculos_clt
-		ren v7	qtde_vinculos_ativos
-		ren v8	qtde_vinculos_estatutarios
+		ren v6	quantidade_vinculos_clt
+		ren v7	quantidade_vinculos_ativos
+		ren v8	quantidade_vinculos_estatutarios
 		ren v9	indicador_cei_vinculado
 		ren v10	indicador_pat
 		ren v11	indicador_rais_negativa
 		ren v12	indicador_simples
 		ren v13	id_municipio_6
 		ren v14	natureza_juridica
-		ren v15	tamanho_estabelecimento
+		ren v15	tamanho
 		ren v16	regioes_administrativas_df
-		ren v17	tipo_estabelecimento
+		ren v17	tipo
 		ren v18	sigla_uf
 		ren v19	subsetor_ibge
 		
@@ -212,9 +212,9 @@ foreach ano of numlist 1985(1)2019 {
 		ren v3	bairros_rj
 		ren v4	cnae_1
 		ren v5	distritos_sp
-		ren v6	qtde_vinculos_clt
-		ren v7	qtde_vinculos_ativos
-		ren v8	qtde_vinculos_estatutarios
+		ren v6	quantidade_vinculos_clt
+		ren v7	quantidade_vinculos_ativos
+		ren v8	quantidade_vinculos_estatutarios
 		ren v9	indicador_cei_vinculado
 		ren v10	indicador_pat
 		ren v11	indicador_rais_negativa
@@ -222,8 +222,8 @@ foreach ano of numlist 1985(1)2019 {
 		ren v13	id_municipio_6
 		ren v14	natureza_juridica
 		ren v15	regioes_administrativas_df
-		ren v16	tamanho_estabelecimento
-		ren v18	tipo_estabelecimento
+		ren v16	tamanho
+		ren v18	tipo
 		
 	}
 	if `ano' == 2005 {
@@ -235,9 +235,9 @@ foreach ano of numlist 1985(1)2019 {
 		ren v3	bairros_rj
 		ren v4	cnae_1
 		ren v5	distritos_sp
-		ren v6	qtde_vinculos_clt
-		ren v7	qtde_vinculos_ativos
-		ren v8	qtde_vinculos_estatutarios
+		ren v6	quantidade_vinculos_clt
+		ren v7	quantidade_vinculos_ativos
+		ren v8	quantidade_vinculos_estatutarios
 		ren v9	indicador_atividade_ano
 		ren v10	indicador_cei_vinculado
 		ren v11	indicador_pat
@@ -246,8 +246,8 @@ foreach ano of numlist 1985(1)2019 {
 		ren v14	id_municipio_6
 		ren v15	natureza_juridica
 		ren v16	regioes_administrativas_df
-		ren v17	tamanho_estabelecimento
-		ren v19	tipo_estabelecimento
+		ren v17	tamanho
+		ren v19	tipo
 		
 	}
 	if `ano' >= 2006 & `ano' <= 2013 {
@@ -261,9 +261,9 @@ foreach ano of numlist 1985(1)2019 {
 		ren v4	cnae_2
 		ren v5	cnae_1
 		ren v6	distritos_sp
-		ren v7	qtde_vinculos_clt
-		ren v8	qtde_vinculos_ativos
-		ren v9	qtde_vinculos_estatutarios
+		ren v7	quantidade_vinculos_clt
+		ren v8	quantidade_vinculos_ativos
+		ren v9	quantidade_vinculos_estatutarios
 		ren v10	indicador_atividade_ano
 		ren v11	indicador_cei_vinculado
 		ren v12	indicador_pat
@@ -273,8 +273,8 @@ foreach ano of numlist 1985(1)2019 {
 		ren v16	natureza_juridica
 		ren v17	regioes_administrativas_df
 		ren v18	cnae_2_subclasse
-		ren v19	tamanho_estabelecimento
-		ren v21	tipo_estabelecimento
+		ren v19	tamanho
+		ren v21	tipo
 		
 	}
 	if `ano' >= 2014 & `ano' <= 2019 {
@@ -287,9 +287,9 @@ foreach ano of numlist 1985(1)2019 {
 		ren v4	cnae_2
 		ren v5	cnae_1
 		ren v6	distritos_sp
-		ren v7	qtde_vinculos_clt
-		ren v8	qtde_vinculos_ativos
-		ren v9	qtde_vinculos_estatutarios
+		ren v7	quantidade_vinculos_clt
+		ren v8	quantidade_vinculos_ativos
+		ren v9	quantidade_vinculos_estatutarios
 		ren v10	indicador_atividade_ano
 		ren v11	indicador_cei_vinculado
 		ren v12	indicador_pat
@@ -299,10 +299,10 @@ foreach ano of numlist 1985(1)2019 {
 		ren v16	natureza_juridica
 		ren v17	regioes_administrativas_df
 		ren v18	cnae_2_subclasse
-		ren v19	tamanho_estabelecimento
-		ren v21	tipo_estabelecimento
+		ren v19	tamanho
+		ren v21	tipo
 		ren v23	subsetor_ibge
-		ren v24	cep_estabelecimento
+		ren v24	cep
 		
 	}
 	*
@@ -313,10 +313,10 @@ foreach ano of numlist 1985(1)2019 {
 	
 	merge m:1 id_municipio_6 using `dir_munic'
 	drop if _merge == 2
-	drop _merge
+	drop _merge id_municipio_6
 	
 	cap drop sigla_uf
-	gen id_uf = substr(id_municipio_6, 1, 2)
+	gen id_uf = substr(id_municipio, 1, 2)
 	merge m:1 id_uf using `dir_uf'
 	drop if _merge == 2
 	drop _merge id_uf
@@ -335,12 +335,12 @@ foreach ano of numlist 1985(1)2019 {
 	}
 	*
 	
-	local vars	sigla_uf id_municipio id_municipio_6 ///
-				qtde_vinculos_ativos qtde_vinculos_clt qtde_vinculos_estatutarios ///
-				natureza_estabelecimento natureza_juridica tamanho_estabelecimento tipo_estabelecimento ///
+	local vars	sigla_uf id_municipio ///
+				quantidade_vinculos_ativos quantidade_vinculos_clt quantidade_vinculos_estatutarios ///
+				natureza natureza_juridica tamanho tipo ///
 				indicador_cei_vinculado indicador_pat indicador_simples indicador_rais_negativa indicador_atividade_ano ///
 				cnae_1 cnae_2 cnae_2_subclasse subsetor_ibge subatividade_ibge ///
-				cep_estabelecimento bairros_sp distritos_sp bairros_fortaleza bairros_rj regioes_administrativas_df
+				cep bairros_sp distritos_sp bairros_fortaleza bairros_rj regioes_administrativas_df
 	
 	foreach var in `vars' {
 		cap confirm variable `var'
@@ -359,18 +359,16 @@ foreach ano of numlist 1985(1)2019 {
 	*
 	
 	foreach k of varlist bairros_* distritos_sp regioes_administrativas_df ///
-		id_municipio_6 ///
 		cnae_2 cnae_2_subclasse subsetor_ibge subatividade_ibge {
 		replace `k' = "" if inlist(`k', "0000", "00000", "000000", "0000000", "0000-1", "000-1") | ///
 							inlist(`k', "998", "999", "00", "-1")
 	}
 	*
 	
-	replace tipo_estabelecimento = "CNPJ"	if inlist(tipo_estabelecimento, "Cnpj", "01", "1")
-	replace tipo_estabelecimento = "CEI"	if inlist(tipo_estabelecimento, "Cei", "03", "3")
-	replace tipo_estabelecimento = ""		if inlist(tipo_estabelecimento, "-1")
+	replace tipo = "1"	if inlist(tipo, "Cnpj", "01", "1")
+	replace tipo = "3"	if inlist(tipo, "Cei", "03", "3")
 	
-	destring id_municipio id_municipio_6 qtde_* tamanho_estabelecimento indicador_*, replace
+	destring id_municipio quantidade_* tamanho indicador_*, replace
 	
 	order `vars'
 	

@@ -79,8 +79,8 @@ published_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
     github_user: rdahis
-    ckan_user: rdahis
     website: www.ricardodahis.com
+    ckan_user: rdahis
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -94,10 +94,9 @@ data_cleaned_by:
     code_url:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "- Unificamos todos os anos.\n
-    - Padronizamos nomes de variáveis.\n
-    - Limpamos valores errados de células.\n
-    - Renomeamos municípios nulos para 'NA'."
+data_cleaning_description: "- Unificamos todos os anos.\n - Padronizamos nomes de\
+    \ variáveis.\n - Limpamos valores errados de células.\n - Renomeamos municípios\
+    \ nulos para 'NA'."
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -120,7 +119,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: ano, sigla_uf, id_municipio
+partitions: ano, sigla_uf
 
 bdm_file_size:
 
@@ -171,7 +170,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: true
+      is_partition: false
     - name: tipo_vinculo
       bigquery_type: string
       description: Tipo do Vínculo
@@ -992,4 +991,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2021-11-02T14:24:45.321768'
+metadata_modified: '2021-11-17T12:33:50.358448'
