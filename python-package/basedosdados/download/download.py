@@ -1,22 +1,23 @@
-import re
-from functools import partialmethod
-from pathlib import Path
-
-import pandas as pd
+from google.cloud.bigquery import dataset
 import pandas_gbq
+from pathlib import Path
 import pydata_google_auth
+from pydata_google_auth.exceptions import PyDataCredentialsError
+from google.cloud import bigquery
+from google.cloud import bigquery_storage_v1
+from functools import partialmethod
+import re
+import pandas as pd
+from basedosdados.upload.base import Base
+from functools import partialmethod
 from basedosdados.exceptions import (
+    BaseDosDadosException,
     BaseDosDadosAccessDeniedException,
     BaseDosDadosAuthorizationException,
-    BaseDosDadosException,
     BaseDosDadosInvalidProjectIDException,
     BaseDosDadosNoBillingProjectIDException,
 )
-from basedosdados.upload.base import Base
-from google.cloud import bigquery, bigquery_storage_v1
-from google.cloud.bigquery import dataset
 from pandas_gbq.gbq import GenericGBQException
-from pydata_google_auth.exceptions import PyDataCredentialsError
 
 
 def credentials(from_file=False, reauth=False):
@@ -48,6 +49,7 @@ def download(
     limit=None,
     from_file=False,
     reauth=False,
+    use_bqstorage_api=False,
     **pandas_kwargs,
 ):
     """Download table or query result from basedosdados BigQuery (or other).
@@ -84,8 +86,14 @@ def download(
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
         limit (int): Optional
             Number of rows.
+        from_file (boolean): Optional.
+            Uses the credentials from file, located in `~/.basedosdados/credentials/
         reauth (boolean): Optional.
             Re-authorize Google Cloud Project in case you need to change user or reset configurations.
+        use_bqstorage_api (boolean): Optional.
+            Use the BigQuery Storage API to download query results quickly, but at an increased cost(https://cloud.google.com/bigquery/docs/reference/storage/).
+            To use this API, first enable it in the Cloud Console(https://console.cloud.google.com/apis/library/bigquerystorage.googleapis.com).
+            You must also have the bigquery.readsessions.create permission on the project you are billing queries to.
         pandas_kwargs ():
             Extra arguments accepted by [pandas.to_csv](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html)
 
@@ -110,6 +118,7 @@ def download(
             limit=limit,
             reauth=reauth,
             from_file=from_file,
+            use_bqstorage_api=use_bqstorage_api,
         )
 
     elif query is not None:
@@ -121,6 +130,7 @@ def download(
             billing_project_id=billing_project_id,
             from_file=from_file,
             reauth=reauth,
+            use_bqstorage_api=use_bqstorage_api,
         )
 
     else:
@@ -139,7 +149,13 @@ def download(
     table.to_csv(savepath, **pandas_kwargs)
 
 
-def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
+def read_sql(
+    query,
+    billing_project_id=None,
+    from_file=False,
+    reauth=False,
+    use_bqstorage_api=False,
+):
     """Load data from BigQuery using a query. Just a wrapper around pandas.read_gbq
 
     Args:
@@ -147,8 +163,14 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
             Valid SQL Standard Query to basedosdados
         billing_project_id (str): Optional.
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
+        from_file (boolean): Optional.
+            Uses the credentials from file, located in `~/.basedosdados/credentials/
         reauth (boolean): Optional.
             Re-authorize Google Cloud Project in case you need to change user or reset configurations.
+        use_bqstorage_api (boolean): Optional.
+            Use the BigQuery Storage API to download query results quickly, but at an increased cost(https://cloud.google.com/bigquery/docs/reference/storage/).
+            To use this API, first enable it in the Cloud Console(https://console.cloud.google.com/apis/library/bigquerystorage.googleapis.com).
+            You must also have the bigquery.readsessions.create permission on the project you are billing queries to.
 
     Returns:
         pd.DataFrame:
@@ -166,6 +188,7 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
             query,
             credentials=credentials(from_file=from_file, reauth=reauth),
             project_id=billing_project_id,
+            use_bqstorage_api=use_bqstorage_api,
         )
 
     except GenericGBQException as e:
@@ -181,10 +204,9 @@ def read_sql(query, billing_project_id=None, from_file=False, reauth=False):
         raise BaseDosDadosAuthorizationException
 
     except (OSError, ValueError) as e:
-        exc_from_no_billing_id = "Could not determine project ID" in str(
-            e
-        ) or "reading from stdin while output is captured" in str(e)
-        if exc_from_no_billing_id:
+        no_billing_id = "Could not determine project ID" in str(e)
+        no_billing_id |= "reading from stdin while output is captured" in str(e)
+        if no_billing_id:
             raise BaseDosDadosNoBillingProjectIDException
         raise
 
@@ -197,6 +219,7 @@ def read_table(
     limit=None,
     from_file=False,
     reauth=False,
+    use_bqstorage_api=False,
 ):
     """Load data from BigQuery using dataset_id and table_id.
 
@@ -210,10 +233,17 @@ def read_table(
             Which project the table lives. You can change this you want to query different projects.
         billing_project_id (str): Optional.
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
-        reauth (boolean): Optional.
-            Re-authorize Google Cloud Project in case you need to change user or reset configurations.
         limit (int): Optional.
             Number of rows to read from table.
+        from_file (boolean): Optional.
+            Uses the credentials from file, located in `~/.basedosdados/credentials/
+        reauth (boolean): Optional.
+            Re-authorize Google Cloud Project in case you need to change user or reset configurations.
+        use_bqstorage_api (boolean): Optional.
+            Use the BigQuery Storage API to download query results quickly, but at an increased cost(https://cloud.google.com/bigquery/docs/reference/storage/).
+            To use this API, first enable it in the Cloud Console(https://console.cloud.google.com/apis/library/bigquerystorage.googleapis.com).
+            You must also have the bigquery.readsessions.create permission on the project you are billing queries to.
+
 
     Returns:
         pd.DataFrame:
@@ -232,7 +262,11 @@ def read_table(
         raise BaseDosDadosException("Both table_id and dataset_id should be filled.")
 
     return read_sql(
-        query, billing_project_id=billing_project_id, from_file=from_file, reauth=reauth
+        query,
+        billing_project_id=billing_project_id,
+        from_file=from_file,
+        reauth=reauth,
+        use_bqstorage_api=use_bqstorage_api,
     )
 
 
@@ -298,9 +332,8 @@ def _handle_output(verbose, output_type, df, col_name=None):
     """
 
     df_is_dataframe = type(df) == pd.DataFrame
-    df_is_bq_dataset_or_table = (type(df) == bigquery.Dataset) or (
-        type(df) == bigquery.Table
-    )
+    df_is_bq_dataset_or_table = type(df) == bigquery.Table
+    df_is_bq_dataset_or_table |= type(df) == bigquery.Dataset
 
     if verbose == True and df_is_dataframe:
         _print_output(df)
@@ -316,9 +349,8 @@ def _handle_output(verbose, output_type, df, col_name=None):
         elif output_type == "records":
             return df.to_dict("records")
         else:
-            raise ValueError(
-                '`output_type` argument must be set to "list", "str" or "records".'
-            )
+            msg = '`output_type` argument must be set to "list", "str" or "records".'
+            raise ValueError(msg)
 
     else:
         raise TypeError("`verbose` argument must be of `bool` type.")
@@ -376,7 +408,10 @@ def list_datasets(
         ]
 
     return _handle_output(
-        verbose=verbose, output_type="list", df=datasets, col_name="dataset_id"
+        verbose=verbose,
+        output_type="list",
+        df=datasets,
+        col_name="dataset_id",
     )
 
 
@@ -434,12 +469,18 @@ def list_dataset_tables(
         ]
 
     return _handle_output(
-        verbose=verbose, output_type="list", df=tables, col_name="table_id"
+        verbose=verbose,
+        output_type="list",
+        df=tables,
+        col_name="table_id",
     )
 
 
 def get_dataset_description(
-    dataset_id=None, query_project_id="basedosdados", from_file=False, verbose=True
+    dataset_id=None,
+    query_project_id="basedosdados",
+    from_file=False,
+    verbose=True,
 ):
     """Prints the full dataset description.
 

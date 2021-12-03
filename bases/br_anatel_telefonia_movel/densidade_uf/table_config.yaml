@@ -1,46 +1,47 @@
-source_bucket_name: {{bucket_name}}
-project_id_staging: {{project_id}}
-project_id_prod: {{project_id_prod}}
-table_id: {{ table_id }} # AUTO GENERATED
-dataset_id: {{ dataset_id }} # AUTO GENERATED
+source_bucket_name: basedosdados-dev
+project_id_staging: basedosdados-dev
+project_id_prod: basedosdados-dev
+table_id: densidade_uf # AUTO GENERATED
+dataset_id: br_anatel_telefonia_movel # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/{{ dataset_id | replace("_","-") }} # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/{{ dataset_id }} # AUTO GENERATED
+url_ckan: https://basedosdados.org/dataset/br-anatel-telefonia-movel # AUTO GENERATED
+url_github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel # AUTO GENERATED
 
-version: <vA.B> # REQUIRED
+version: v1.0 # REQUIRED
 
-last_updated: {{ now }} # AUTO GENERATED
+last_updated: 2021-10-24 # AUTO GENERATED
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
 description: |  # REQUIRED
-    <descrição>
+    Total de acessos e densidade por pessoa da telefonia móvel nos estados por mês e ano desde fevereiro de 2009
 
 # Quem está completando esse arquivo config?
 published_by:
-    name: <nome [você]>  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/{{ dataset_id }}/code # REQUIRED
+    name: Lucas Nascimento Moreira  # REQUIRED
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code # REQUIRED
     website: <website>
-    email: <email>
+    email: lucas.moreira@basedosdados.org
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 treated_by:
-    name: <nome>
-    code_url: <onde encontrar código de tratamento>
-    website: <onde encontrar os dados tratados>
-    email: <email>
+    name: Lucas Nascimento Moreira
+    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
+    website: <website>
+    email: lucas.moreira@basedosdados.org
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 treatment_description: | 
-    <CEPESP fez X. Eu fiz K>
+    - Agrupamento do total de acessos a nível estadual;
+    - Merge com a base de densidade 
 
 # Com qual frequência a base é atualizada?
 # Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: <frequência> # REQUIRED 
+data_update_frequency: mes # REQUIRED 
 
 # Nível da observação (qual é a granularidade de cada linha na tabela)
 # Escolha todas as opções necessárias.
@@ -49,15 +50,17 @@ data_update_frequency: <frequência> # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - <primeira coluna>
-    - <segunda coluna>
+    - ano
+    - mes
+    - uf
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 primary_keys:
-    - <primeira coluna>
-    - <segunda coluna>
+    - ano
+    - mes
+    - sigla_uf
 
 # Qual é a cobertura espacial da tabela?
 # Regras:
@@ -69,25 +72,30 @@ primary_keys:
 # Exemplo 2: tabela que cubra países inteiros na América Latina
 #   - brasil, argentina, peru, equador
 coverage_geo:
-    - <admin0 - pais>
-    - <admin1 - estados/regioes/etc>
-    - <admin2 - municipios/counties/etc>
-    - <admin3 - distritos/subdistritos/etc>
+    - brasil
 
 # Qual é a cobertura temporal (em anos) da tabela?
 # Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
 coverage_time:
-    - <ano 1>
-    - <ano 2>
+    - 2009
+    - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
+    - 2020
+    - 2021
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions: # REQUIRED
-{%- for column in partition_columns %}  
-    - {{ column }}
-{%- endfor %}
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -98,17 +106,33 @@ partitions: # REQUIRED
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns: # REQUIRED
-{% for column in columns %}  
+  
     -   
-        name: {{ column }}
-        description: <descrição da coluna>
+        name: ano
+        description: Ano
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.
-{% endfor -%}
-{%- for column in partition_columns %}  
+  
     -   
-        name: {{ column }}
-        description: <descrição da coluna>
+        name: mes
+        description: Mês
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-{% endfor -%}
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: sigla_uf
+        description: Sigla da Unidade da Federação
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: acessos
+        description: Total de acessos
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.
+  
+    -   
+        name: densidade
+        description: Densidade de acessos por 100 pessoas
+        is_in_staging: True # Bool [True, False], whether the column is in the staging table
+        is_partition: False # Bool [True, False], whether the column is a partition.

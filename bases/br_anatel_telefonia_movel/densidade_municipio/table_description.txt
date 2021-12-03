@@ -1,0 +1,52 @@
+Total de acessos e densidade por pessoa da telefonia móvel nos municípios por mês e ano desde janeiro de 2019
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-anatel-telefonia-movel
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
+Email: lucas.moreira@basedosdados.orgTratado por
+-----------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
+Email: lucas.moreira@basedosdados.org
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- ano
+- mes
+- municipio
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- mes
+- id_municipio
+
+Cobertura Temporal
+------------------
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Agrupamento do total de acessos a nível municipal;
+- Merge com a base de densidade 
+
+Frequencia de Atualização
+-------------------------
+mes
+
+
