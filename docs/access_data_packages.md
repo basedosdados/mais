@@ -80,10 +80,8 @@ projeto é criado.
 
 ### Faça sua primeira consulta!
 
-Um exemplo simples para começar a explorar o *datalake* é puxar
-[informações cadastrais de
-municípios](https://basedosdados.org/dataset/br-bd-diretorios-brasil/resource/9046b938-b361-4c3c-a5e7-a549dfc48f2b)
-direto na nossa base de diretórios brasileiros. Para isso, vamos usar a
+Um exemplo simples para começar a explorar o *datalake* é puxar informações cadastrais de
+municípios direto na nossa base de [Diretórios Brasileiros (tabela `municipio`)](https://basedosdados.org/dataset/br-bd-diretorios-brasil). Para isso, vamos usar a
 função `download`, baixando os dados direto para nossa máquina.
 
 === "R"
@@ -145,8 +143,8 @@ para você começar a usá-los.
 
 ## Manuais de referência
 
-#### [:material-language-r: R](/mais/reference_api_r)
+#### [:material-language-r: R](/reference_api_r)
 
-#### [:material-language-python: Python](/mais/reference_api_py)
+#### [:material-language-python: Python](/reference_api_py)
 
-#### [:octicons-terminal-16: CLI](/mais/reference_api_cli)
+#### [:octicons-terminal-16: CLI](/reference_api_cli)

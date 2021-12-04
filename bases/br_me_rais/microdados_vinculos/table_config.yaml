@@ -1,4 +1,3 @@
-
 dataset_id: br_me_rais
 
 table_id: microdados_vinculos
@@ -10,7 +9,7 @@ table_id: microdados_vinculos
 description: "Microdados públicos dos vínculos de emprego na RAIS. Base desidentificada,\
     \ isto é, que não inclui identificadores únicos de linha. Cada linha representa\
     \ um vínculo - por isso indicamos este como nível de observação mesmo que não\
-    \ conste como coluna.\n"
+    \ conste como coluna.\n" 
 
 # A máxima unidade espacial que a tabela cobre.
 spatial_coverage:
