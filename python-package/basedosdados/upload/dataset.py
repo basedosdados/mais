@@ -1,8 +1,10 @@
 from pathlib import Path
+from google.cloud import bigquery
+
+from google.api_core.exceptions import Conflict
 
 from basedosdados.upload.base import Base
-from google.api_core.exceptions import Conflict
-from google.cloud import bigquery
+from basedosdados.upload.metadata import Metadata
 
 
 class Dataset(Base):
@@ -10,11 +12,12 @@ class Dataset(Base):
     Manage datasets in BigQuery.
     """
 
-    def __init__(self, dataset_id, **kwArgs):
-        super().__init__(**kwArgs)
+    def __init__(self, dataset_id, **kwargs):
+        super().__init__(**kwargs)
 
         self.dataset_id = dataset_id.replace("-", "_")
         self.dataset_folder = Path(self.metadata_path / self.dataset_id)
+        self.metadata = Metadata(self.dataset_id, **kwargs)
 
     @property
     def dataset_config(self):
@@ -31,7 +34,7 @@ class Dataset(Base):
         return (
             {
                 "client": self.client[f"bigquery_{m}"],
-                "id": f"{self.client[f'bigquery_{m}'].project}.{self.dataset_config['dataset_id']}{dataset_tag(m)}",
+                "id": f"{self.client[f'bigquery_{m}'].project}.{self.dataset_id}{dataset_tag(m)}",
             }
             for m in mode
         )
@@ -44,6 +47,26 @@ class Dataset(Base):
         )
 
         return dataset
+    
+    def _write_readme_file(self):
+        
+        readme_content = (
+            f"Como capturar os dados de {self.dataset_id}?\n\nPara cap"
+            f"turar esses dados, basta verificar o link dos dados orig"
+            f"inais indicado em dataset_config.yaml no item website.\n"
+            f"\nCaso tenha sido utilizado algum código de captura ou t"
+            f"ratamento, estes estarão contidos em code/. Se o dado pu"
+            f"blicado for em sua versão bruta, não existirá a pasta co"
+            f"de/.\n\nOs dados publicados estão disponíveis em: https:"
+            f"//basedosdados.org/dataset/{self.dataset_id.replace('_','-')}"
+        )
+
+        readme_path = Path(
+            self.metadata_path / self.dataset_id / 'README.md'
+        )
+
+        with open(readme_path, "w") as readmefile:
+            readmefile.write(readme_content)
 
     def init(self, replace=False):
         """Initialize dataset folder at metadata_path at `metadata_path/<dataset_id>`.
@@ -69,19 +92,11 @@ class Dataset(Base):
                 "Set replace=True to replace current files."
             )
 
-        for file in (Path(self.templates) / "dataset").glob("*"):
+        # create dataset_config.yaml with metadata
+        self.metadata.create(if_exists="replace")
 
-            if file.name in ["dataset_config.yaml", "README.md"]:
-
-                # Load and fill template
-                template = self._render_template(
-                    f"dataset/{file.name}", dict(dataset_id=self.dataset_id)
-                )
-
-                # Write file
-                (self.dataset_folder / file.name).open("w", encoding="utf-8").write(
-                    template
-                )
+        # create README.md file
+        self._write_readme_file()
 
         # Add code folder
         (self.dataset_folder / "code").mkdir(exist_ok=replace, parents=True)
@@ -137,7 +152,7 @@ class Dataset(Base):
             mode (str): Optional. Which dataset to create [prod|staging|all].
             if_exists (str): Optional. What to do if dataset exists
 
-                * raise : Raises Conflic exception
+                * raise : Raises Conflict exception
                 * replace : Drop all tables and replace dataset
                 * update : Update dataset description
                 * pass : Do nothing
