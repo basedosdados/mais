@@ -3,7 +3,7 @@
 // build: microdados - estabelecimentos
 //----------------------------------------------------------------------------//
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8")
+import delimited "input/municipio.csv", clear varn(1) encoding("utf-8")
 
 keep id_municipio id_municipio_6
 tostring id_municipio id_municipio_6, replace force
@@ -11,7 +11,7 @@ tostring id_municipio id_municipio_6, replace force
 tempfile dir_munic
 save `dir_munic'
 
-import delimited "input/br_bd_diretorios_brasil_municipio.csv", clear varn(1) encoding("utf-8")
+import delimited "input/municipio.csv", clear varn(1) encoding("utf-8")
 
 keep id_uf sigla_uf
 duplicates drop
@@ -365,8 +365,9 @@ foreach ano of numlist 1985(1)2019 {
 	}
 	*
 	
-	replace tipo = "1"	if inlist(tipo, "Cnpj", "01", "1")
-	replace tipo = "3"	if inlist(tipo, "Cei", "03", "3")
+	replace tipo = "1" if inlist(tipo, "CNPJ", "Cnpj", "01", "1")
+	replace tipo = "2" if inlist(tipo, "CAEPF", "Caepf")
+	replace tipo = "3" if inlist(tipo, "CEI", "Cei", "CEI/CNO", "Cei/Cno", "03", "3")
 	
 	destring id_municipio quantidade_* tamanho indicador_*, replace
 	
