@@ -323,10 +323,10 @@ def table_approve():
                 tprint(f"SUCESS VALIDATE {dataset_id}")
                 
                 # publish dataset metadata to CKAN
-                md.dataset_metadata_obj.publish()
+                md.dataset_metadata_obj.publish(update_locally=True)
                 
-                # run multiple tries to get published dataset metadata from
-                # ckan till it is published: dataset metadata must be
+                # run multiple tries of getting published dataset metadata 
+                # from ckan till it is published: dataset metadata must be
                 # accessible for table metadata to be published too
                 tprint(f"WAITING FOR {dataset_id} METADATA PUBLISHMENT...")
                 MAX_RETRIES = 80
@@ -345,7 +345,7 @@ def table_approve():
             md.validate()
             tprint(f"SUCESS VALIDATE {dataset_id}.{table_id}")
             # publish table metadata to CKAN
-            md.publish(if_exists="replace")
+            md.publish(if_exists="replace", update_locally=True)
             tprint(f"SUCESS PUBLISHED {dataset_id}.{table_id}")
             tprint()
         except Exception as error:
