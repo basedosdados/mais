@@ -4,8 +4,8 @@ Os arquivos auxiliares com todos os dicionários e valores de variáveis se enco
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-me-comex-stat
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_me_comex_stat
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -13,29 +13,22 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_comex_stat/code
+Código: 
 Website: www.ricardodahis.com
-Email: rdahis@basedosdados.orgTratado por
+Email: rdahis@basedosdados.org
+Tratado por
 -----------
 Nome: Ricardo Dahis
 Website: www.ricardodahis.com
 Email: rdahis@basedosdados.org
 
+
+
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
-- mes
+-  mes
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- categoria NCM
-- tipo de unidade
-- pais
-- unidade da federação
-- via de transporte
-- urf
-- ano
-- mes
 
 Colunas identificando linhas unicamente
 -------------------
@@ -48,20 +41,31 @@ Colunas identificando linhas unicamente
 - ano
 - mes
 
+
+
+
 Cobertura Temporal
 ------------------
-- 1997-2021
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- b
+- r
+- a
+
+
+
 
 Tratamento
 ----------
 - Limpeza simples dos dados.
 
+
+
+
 Frequencia de Atualização
 -------------------------
-mes
-
-
+month

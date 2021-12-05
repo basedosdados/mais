@@ -17,9 +17,8 @@ Email: rdahis@basedosdados.org
 Tratado por
 -----------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
 Website: www.ricardodahis.com
-Email: rdahis@basedosodados.org
+Email: rdahis@basedosdados.org
 
 
 
@@ -27,7 +26,6 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
 -  sigla_uf
--  id_municipio
 
 
 Colunas identificando linhas unicamente
@@ -79,9 +77,6 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- b
-- r
-- a
 
 
 

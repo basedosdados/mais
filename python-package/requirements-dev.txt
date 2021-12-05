@@ -1,5 +1,6 @@
 wheel
-google-cloud-bigquery
+pyarrow==6.0.0
+google-cloud-bigquery==2.30.1
 google-cloud-storage
 google-cloud-bigquery-storage
 pyaml==20.4.0
@@ -11,12 +12,14 @@ pytest
 ipykernel
 jupyter
 poetry
+importlib_metadata>3.10
+flake8
+pandas_gbq
 mkdocs
 mkdocs-material
-flake8
 mkdocstrings
-pandas_gbq
 mkdocs-click
 ruamel.yaml
 requests
 pandas
+ckanapi

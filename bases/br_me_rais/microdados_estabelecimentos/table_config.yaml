@@ -1,4 +1,3 @@
-
 dataset_id: br_me_rais
 
 table_id: microdados_estabelecimentos
@@ -7,12 +6,14 @@ table_id: microdados_estabelecimentos
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: "Microdados de estabelecimentos da RAIS.\n"
+description: "Microdados de estabelecimentos da RAIS." 
 
 # A máxima unidade espacial que a tabela cobre.
 spatial_coverage: bra
 
 # Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplo: 1995(1)2019.
 temporal_coverage:
     - 1985
     - 1986
@@ -51,16 +52,20 @@ temporal_coverage:
     - 2019
 
 # A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: one_year
 
 # Entidade representada por cada linha.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 entity: []
 
 # A unidade temporal representada por cada linha.
-time_unit:
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+time_unit: one_year
 
 # O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Preencha com os nomes de colunas.
+# Exemplos: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 identifying_columns:
 
@@ -69,6 +74,8 @@ last_updated:
     data:
     release:
 
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
 version: v1.1
 
 # Quem está preenchendo esses metadados?
@@ -91,10 +98,8 @@ data_cleaned_by:
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "- Unificamos todos os anos.\n
-    - Padronizamos nomes de variáveis.\n
-    - Limpamos valores errados de células.\n
-    - Renomeamos municípios nulos para 'NA'."
+data_cleaning_description: "- Unificamos todos os anos.\n - Padronizamos nomes de\
+    \ variáveis.\n - Limpamos valores errados de células."
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -105,6 +110,8 @@ auxiliary_files_url:
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
 
+# A tabela tem colunas que precisam de dicionário?
+# Opções: yes, no.
 covered_by_dictionary: yes
 
 source_bucket_name: basedosdados-dev
@@ -117,7 +124,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: ano, sigla_uf, id_municipio
+partitions: ano, sigla_uf
 
 bdm_file_size:
 
@@ -168,7 +175,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: true
+      is_partition: false
     - name: quantidade_vinculos_ativos
       bigquery_type: int64
       description: Estoque de vínculos ativos em 31/12 (quando acumulada representa
@@ -211,9 +218,9 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: natureza_estabelecimento
+    - name: natureza
       bigquery_type: string
-      description: Natureza do Estabelecimento
+      description: Natureza
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -226,7 +233,7 @@ columns:
       is_partition: false
     - name: natureza_juridica
       bigquery_type: string
-      description: Natureza Jurídica (CONCLA/2002)
+      description: Natureza jurídica (CONCLA/2002)
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -237,9 +244,9 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: tamanho_estabelecimento
+    - name: tamanho
       bigquery_type: string
-      description: Tamanho do estabelecimento - empregados ativos em 31/12.
+      description: Tamanho - empregados ativos em 31/12.
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -250,9 +257,9 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: tipo_estabelecimento
+    - name: tipo
       bigquery_type: string
-      description: Tipo do Estabelecimento
+      description: Tipo
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -363,7 +370,7 @@ columns:
       directory_column:
           dataset_id:
           table_id:
-          column_name: 
+          column_name:
       measurement_unit:
       has_sensitive_data:
       is_in_staging: true
@@ -394,7 +401,7 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: cep_estabelecimento
+    - name: cep
       bigquery_type: string
       description: Código de Endereçamento Postal
       temporal_coverage:
@@ -473,4 +480,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2021-11-02T14:24:45.313240'
+metadata_modified: '2021-11-17T12:33:50.358664'

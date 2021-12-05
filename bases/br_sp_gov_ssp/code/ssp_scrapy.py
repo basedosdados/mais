@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+import typing
 import scrapy
 import json
 import pandas as pd
@@ -8,6 +8,20 @@ import csv
 import os
 import datetime
 import shutil
+
+from pathlib import Path
+
+FILE_PAH = str(Path(__file__).parent)
+
+
+def get_years():
+    ## years to scrapy
+
+    current_year = datetime.datetime.now().strftime("%Y")
+    return [current_year]
+
+    # use the line bellow to scrapy all years
+    # return [str(i) for i in range(2002, int(current_year) + 1)]
 
 
 def normalize_cols(df):
@@ -120,7 +134,7 @@ def padronize_ocorrencias(df):
 
 
 def padronize_data(df, file):
-    ibge_code = pd.read_csv("../dados/utils/ssp_codigo_ibge.csv")
+    ibge_code = pd.read_csv(FILE_PAH + "/dados/utils/ssp_codigo_ibge.csv")
     mes_dict = {
         "Jan": 1,
         "Fev": 2,
@@ -152,13 +166,16 @@ def padronize_data(df, file):
 
 def append_to_csv(df, file, ano):
     ## define file_name and path
-    file_pre = "../dados/model_data/" + file + "_MODELO.csv"
-    file_pre_final = "../dados/model_data/" + file + "_MODELO_FINAL.csv"
-    save_file = f"../dados/{file}/ano={ano}/{file}.csv"
+    file_pre = FILE_PAH + "/dados/model_data/" + file + "_MODELO.csv"
+    file_pre_final = FILE_PAH + "/dados/model_data/" + file + "_MODELO_FINAL.csv"
+    save_file = FILE_PAH + f"/dados/{file}/ano={ano}/{file}.csv"
+
+    if not os.path.exists(FILE_PAH + f"/dados/{file}"):
+        os.mkdir(FILE_PAH + f"/dados/{file}")
 
     ## create file for the first loop
     if not os.path.exists(save_file):
-        os.mkdir(f"../dados/{file}/ano={ano}")
+        os.mkdir(FILE_PAH + f"/dados/{file}/ano={ano}")
         df_modelo_final = pd.read_csv(file_pre_final, encoding="utf-8")
         df_modelo_final.to_csv(save_file, index=False, header=True, encoding="utf-8")
 
@@ -242,19 +259,10 @@ def get_config(response, year, regiao, municipipo, delegacia, page):
     return EVENTVALIDATION, VIEWSTATE, VIEWSTATEGENERATOR, data, header
 
 
-def get_years():
-    ## years to scrapy
-    # return [str(i) for i in range(2002, 2021)]
-    current_year = datetime.datetime.now().strftime("%Y")
-    return [current_year]
-    # use the line bellow to scrapy all years
-    # return [str(i) for i in range(2002, int(current_year) + 1)]
-
-
 def delete_years(file, years):
     ## delete file of respective year
     for ano in years:
-        save_file = f"../dados/{file}/ano={ano}/"
+        save_file = f"dados/{file}/ano={ano}/"
         if os.path.exists(save_file):
             shutil.rmtree(save_file)
 
