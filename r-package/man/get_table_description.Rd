@@ -9,6 +9,11 @@ get_table_description(
   table_id = `?`(Character(1))
 )
 }
+\arguments{
+\item{dataset_id}{a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is \code{br_sp_alesp}}
+
+\item{table_id}{a table name e.g. if addressing table "br_sp_alesp.deputado" then table_id is \code{deputado}}
+}
 \description{
 Describe a table within a dataset
 }

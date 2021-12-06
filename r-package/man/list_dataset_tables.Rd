@@ -7,7 +7,7 @@
 list_dataset_tables(dataset_id)
 }
 \arguments{
-\item{dataset_id}{an unique id for a dataset, such as \code{br_sp_alesp}.}
+\item{dataset_id}{a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is \code{br_sp_alesp}}
 }
 \description{
 List all tables in a dataset

@@ -7,7 +7,7 @@
 get_dataset_description(dataset_id = `?`(Character(1)))
 }
 \arguments{
-\item{dataset_id}{the dataset's name}
+\item{dataset_id}{a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is \code{br_sp_alesp}}
 }
 \description{
 Describe a dataset

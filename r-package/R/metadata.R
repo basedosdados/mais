@@ -56,7 +56,7 @@ dataset_search <-
   }
 
 #' @title List all tables in a dataset
-#' @param dataset_id an unique id for a dataset, such as `br_sp_alesp`.
+#' @param dataset_id a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `br_sp_alesp`
 #' @export
 #' @importFrom purrr pluck map_chr discard
 
@@ -127,7 +127,7 @@ get_table_columns <-
 
 
 #' @title Describe a dataset
-#' @param dataset_id the dataset's name
+#' @param dataset_id a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `br_sp_alesp`
 #'
 #' @export
 #' @examples
@@ -160,8 +160,8 @@ get_dataset_description <- function(dataset_id = ? Character(1)) {
 
 #' @title Describe a table within a dataset
 #'
-#' @param dataset_id
-#' @param table_id
+#' @param dataset_id a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `br_sp_alesp`
+#' @param table_id a table name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `deputado`
 #' @export
 #' @examples
 #'
