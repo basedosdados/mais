@@ -1,20 +1,3 @@
-# Internal function to abstact away HTTP requests.
-
-bd_request <- function(
-  endpoint = ? Character(length = 1),
-  query = list() ? List()) {
-
-  base_url <- "https://basedosdados.org/api/3/action/bd_"
-  target_endpoint <- paste0(base_url, endpoint)
-
-  httr::GET(
-    target_endpoint,
-    encode = 'json',
-    query = query)
-
-}
-
-
 #' Search for a dataset
 #'
 #'
@@ -107,11 +90,10 @@ list_dataset_tables <-
   }
 
 
-#' Describe a table
-#'
-#'
-#' @param table_id a table name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `deputado`
+
+#' @title List all columns in a table
 #' @param dataset_id a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `br_sp_alesp`
+#' @param table_id a table name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `deputado`
 #'
 #'
 #' @export
@@ -141,8 +123,72 @@ get_table_columns <-
     purrr::map(tibble::as_tibble) %>%
     purrr::reduce(dplyr::bind_rows)
 
+  }
+
+
+#' @title Describe a dataset
+#' @param dataset_id the dataset's name
+#'
+#' @export
+#' @examples
+#'
+#' get_dataset_description("br_sp_alesp")
+#'
+#'
+
+get_dataset_description <- function(dataset_id = ? Character(1)) {
+
+  bd_request(
+    endpoint = "bdm_dataset_show",
+    query = list(
+      dataset_id = dataset_id)) %>%
+    httr::content() %>%
+    purrr::pluck("result") ->
+    result
+
+  tibble::tibble(
+    id = result$id,
+    name = result$name,
+    title = result$title,
+    tables = result$name %>%
+      stringr::str_replace_all("-", "_") %>%
+      list_dataset_tables(),
+    notes = result$notes,
+    state = result$state)
+
 }
 
+#' @title Describe a table within a dataset
+#'
+#' @param dataset_id
+#' @param table_id
+#' @export
+#' @examples
+#'
+#' get_table_description("br_sp_alesp", "assessores")
+#'
 
+get_table_description <- function(
+  dataset_id = ? Character(1),
+  table_id = ? Character(1)) {
 
+  bd_request(
+    endpoint = "bdm_table_show",
+    query = list(
+      dataset_id = dataset_id,
+      table_id = table_id)) %>%
+    httr::content() %>%
+    purrr::pluck("result") ->
+    result
 
+  tibble::tibble(
+    dataset_id = dataset_id,
+    table_id = table_id,
+    description = result$description,
+    columns = result %>%
+      purrr::pluck("columns") %>%
+      purrr::map(tibble::as_tibble) %>%
+      purrr::reduce(dplyr::bind_rows) %>%
+      list())
+
+}

@@ -39,7 +39,7 @@ testthat::test_that("Different searches yield different results", {
 
 testthat::test_that("Basic table column description works", {
 
-  result <- get_table_columns("br_sp_alesp", "deputado")
+  result <- basedosdados::get_table_columns("br_sp_alesp", "deputado")
 
   testthat::expect_equal(nrow(result), 12)
 
@@ -52,6 +52,31 @@ testthat::test_that("List tables of a dataset works", {
   result %>%
     rlang::is_string() %>%
     testthat::expect_true()
+
+})
+
+testthat::test_that("Dataset description works", {
+
+  description <- get_dataset_description("br_sp_alesp")
+
+  testthat::expect_s3_class(description, "tbl")
+
+  description %>%
+    nrow() %>%
+    testthat::expect_gt(0)
+
+
+})
+
+testthat::test_that("Table description works", {
+
+  description <- get_table_description("br_sp_alesp", "deputado")
+
+  testthat::expect_s3_class(description, "tbl")
+
+  description %>%
+    nrow() %>%
+    testthat::expect_gt(0)
 
 })
 
