@@ -5,8 +5,8 @@
 \title{Describe a table within a dataset}
 \usage{
 get_table_description(
-  dataset_id = `?`(Character(1)),
-  table_id = `?`(Character(1))
+  dataset_id = `?`(typed::Character(1)),
+  table_id = `?`(typed::Character(1))
 )
 }
 \arguments{
@@ -22,6 +22,6 @@ Describe a table within a dataset
 }
 \examples{
 
-get_table_description("br_sp_alesp", "assessores")
+get_table_description("br_sp_alesp", "deputado")
 
 }

@@ -26,7 +26,6 @@ test_that("download escreve arquivos recebendo uma query ou nome de tabela", {
   download(
     table = "br_ibge_populacao.municipio",
     path = path,
-    page_size = 123432,
     .na = "999999999999")
 
   path %>%
@@ -69,8 +68,7 @@ test_that("download permite escolher tamanho de página", {
 
   download(
     ex_query(),
-    path = path4,
-    page_size = 123432)
+    path = path4)
 
   path4 %>%
     fs::is_file() %>%

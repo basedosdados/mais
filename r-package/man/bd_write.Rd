@@ -8,23 +8,20 @@
 \usage{
 bd_write(
   .lazy_tbl,
-  .write_fn = `?`(Function()),
-  path = `?`(Character(length = 1)),
-  overwrite = `?`(FALSE, Logical()),
-  page_size = 1e+05,
+  .write_fn = `?`(typed::Function()),
+  path = `?`(typed::Character(length = 1)),
+  overwrite = `?`(FALSE, typed::Logical(1)),
   ...
 )
 
-bd_write_rds(
+bd_write_rds(.lazy_tbl, path, overwrite = FALSE, compress = "none", ...)
+
+bd_write_csv(
   .lazy_tbl,
-  path,
-  overwrite = FALSE,
-  compress = "none",
-  page_size = 1e+05,
+  path = `?`(typed::Character(1)),
+  overwrite = `?`(FALSE, typed::Logical(1)),
   ...
 )
-
-bd_write_csv(.lazy_tbl, path, overwrite = FALSE, page_size = 1e+05, ...)
 }
 \arguments{
 \item{.lazy_tbl}{A lazy tibble, tipically the output of \code{\link[=bdplyr]{bdplyr()}}.}
@@ -40,8 +37,6 @@ the corresponding extension.}
 
 \item{overwrite}{FALSE by default. Indicates whether the local file should
 be overwritten if it already exists. Use with care.}
-
-\item{page_size}{passed to \code{bd_collect}, defaults to 100000.}
 
 \item{...}{Parameters passed to the \code{.write_fn} function.}
 

@@ -419,9 +419,9 @@ bd_collect <- function(
 
 bd_write <- function(
   .lazy_tbl,
-  .write_fn = ? Function(),
-  path = ? Character(length = 1),
-  overwrite = FALSE ? Logical(1),
+  .write_fn = ? typed::Function(),
+  path = ? typed::Character(length = 1),
+  overwrite = FALSE ? typed::Logical(1),
   ...) {
 
   # check if the path already exists

@@ -38,7 +38,7 @@ dataset_search <-
       .f = ~ purrr::pluck(.x, "name") %>%
         stringr::str_replace_all("-", "_")),
     dataset_tables = purrr::map(
-      .x = dataset_name,
+      .x = .data$dataset_name,
       .f = basedosdados::list_dataset_tables),
     url = purrr::map_chr(
       .x = search$datasets,
@@ -109,8 +109,8 @@ list_dataset_tables <-
 
 get_table_columns <-
   typed::Data.frame() ? function(
-  dataset_id = ? Character(length = 1),
-  table_id = ? Character(length = 1)) {
+  dataset_id = ? typed::Character(length = 1),
+  table_id = ? typed::Character(length = 1)) {
 
   bd_request(
     endpoint = "bdm_table_show",
@@ -122,7 +122,7 @@ get_table_columns <-
     purrr::pluck("columns") %>%
     purrr::map(tibble::as_tibble) %>%
     purrr::reduce(dplyr::bind_rows) %>%
-    dplyr::select(-is_in_staging)
+    dplyr::select(- .data$is_in_staging)
 
   }
 
@@ -138,7 +138,7 @@ get_table_columns <-
 #' @return A tibble describing the specified dataset
 #'
 
-get_dataset_description <- function(dataset_id = ? Character(1)) {
+get_dataset_description <- function(dataset_id = ? typed::Character(1)) {
 
   bd_request(
     endpoint = "bdm_dataset_show",
@@ -163,14 +163,14 @@ get_dataset_description <- function(dataset_id = ? Character(1)) {
 #' @export
 #' @examples
 #'
-#' get_table_description("br_sp_alesp", "assessores")
+#' get_table_description("br_sp_alesp", "deputado")
 #'
 #' @return A tibble describing the specified table
 #'
 
 get_table_description <- function(
-  dataset_id = ? Character(1),
-  table_id = ? Character(1)) {
+  dataset_id = ? typed::Character(1),
+  table_id = ? typed::Character(1)) {
 
   bd_request(
     endpoint = "bdm_table_show",
