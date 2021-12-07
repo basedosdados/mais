@@ -20,8 +20,7 @@
 
 
 dataset_search <-
-  typed::Data.frame() ? function(
-  search_term = NULL ? Character(length = 1, null_ok = TRUE)) {
+  typed::Data.frame() ? function(search_term) {
 
   bd_request(
     endpoint = "dataset_search",
@@ -36,13 +35,11 @@ dataset_search <-
   tibble::tibble(
     dataset_name = purrr::map_chr(
       .x = search$datasets,
-      .f = ~ purrr::pluck(.x, "name")),
-    dataset_tables = purrr::map_chr(
-      .x = stringr::str_replace_all(dataset_name, "-", "_"),
+      .f = ~ purrr::pluck(.x, "name") %>%
+        stringr::str_replace_all("-", "_")),
+    dataset_tables = purrr::map(
+      .x = dataset_name,
       .f = basedosdados::list_dataset_tables),
-    id = purrr::map_chr(
-      .x = search$datasets,
-      .f = ~ purrr::pluck(.x, "id")),
     url = purrr::map_chr(
       .x = search$datasets,
       .f = ~ glue::glue("https://basedosdados.org/dataset/{purrr::pluck(.x, 'id')}")),
@@ -68,24 +65,24 @@ list_dataset_tables <-
       query = list(
         dataset_id = dataset_id)) %>%
       httr::content() %>%
-      purrr::pluck("result") %>%
-      purrr::pluck("resources") %>%
-      purrr::map_chr(~ purrr::pluck(.x, "name")) %>%
-      # remove recursos de Baixar e Visualizar
-      purrr::discard(~ .x %in% c("Baixar", "Visualizar")) ->
+      purrr::pluck("result") ->
     results
 
-    if(length(results) > 1) {
+    fetch_function <- purrr::possibly(
+      .f = function(resource) {
 
-      results %>%
-        purrr::reduce(paste, sep = ", ") %>%
-        return()
+        tibble::tibble(
+          name = ifelse(rlang::is_null(resource$name), NA_character_, resource$name),
+          description = ifelse(rlang::is_null(resource$description), NA_character_, resource$description))
 
-    } else {
+        },
+      otherwise = "Error")
 
-      return(results)
-
-    }
+    results %>%
+      purrr::pluck("resources") %>%
+      purrr::keep(~ .x$resource_type == "bdm_table") %>%
+      purrr::map(fetch_function) %>%
+      purrr::reduce(dplyr::bind_rows)
 
   }
 
@@ -121,7 +118,8 @@ get_table_columns <-
     purrr::pluck("result") %>%
     purrr::pluck("columns") %>%
     purrr::map(tibble::as_tibble) %>%
-    purrr::reduce(dplyr::bind_rows)
+    purrr::reduce(dplyr::bind_rows) %>%
+    dplyr::select(-is_in_staging)
 
   }
 
@@ -147,14 +145,10 @@ get_dataset_description <- function(dataset_id = ? Character(1)) {
     result
 
   tibble::tibble(
-    id = result$id,
     name = result$name,
     title = result$title,
-    tables = result$name %>%
-      stringr::str_replace_all("-", "_") %>%
-      list_dataset_tables(),
-    notes = result$notes,
-    state = result$state)
+    tables = list(list_dataset_tables(dataset_id)),
+    notes = result$notes)
 
 }
 

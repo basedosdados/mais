@@ -18,7 +18,7 @@ testthat::test_that("Basic dataset search", {
   # busca por água encontra o ana-atlas?
   result %>%
     dplyr::pull(dataset_name) %>%
-    purrr::some(stringr::str_detect, pattern = "ana-atlas") %>%
+    purrr::some(stringr::str_detect, pattern = "ana_atlas") %>%
     testthat::expect_true()
 
 })
@@ -50,7 +50,7 @@ testthat::test_that("List tables of a dataset works", {
   result <- list_dataset_tables("br_sp_alesp")
 
   result %>%
-    rlang::is_string() %>%
+    tibble::is_tibble() %>%
     testthat::expect_true()
 
 })
