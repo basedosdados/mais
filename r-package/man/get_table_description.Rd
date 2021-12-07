@@ -14,6 +14,9 @@ get_table_description(
 
 \item{table_id}{a table name e.g. if addressing table "br_sp_alesp.deputado" then table_id is \code{deputado}}
 }
+\value{
+A tibble describing the specified table
+}
 \description{
 Describe a table within a dataset
 }

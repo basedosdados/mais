@@ -9,6 +9,9 @@ list_dataset_tables(dataset_id)
 \arguments{
 \item{dataset_id}{a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is \code{br_sp_alesp}}
 }
+\value{
+A tibble listing all tables in a given dataset
+}
 \description{
 List all tables in a dataset
 }

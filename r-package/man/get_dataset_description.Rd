@@ -9,12 +9,14 @@ get_dataset_description(dataset_id = `?`(Character(1)))
 \arguments{
 \item{dataset_id}{a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is \code{br_sp_alesp}}
 }
+\value{
+A tibble describing the specified dataset
+}
 \description{
 Describe a dataset
 }
 \examples{
 
 get_dataset_description("br_sp_alesp")
-
 
 }

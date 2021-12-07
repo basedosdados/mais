@@ -7,7 +7,7 @@
 \item{search_term}{keyword for search}
 }
 \value{
-
+A tibble with search results
 }
 \description{
 Search for a dataset

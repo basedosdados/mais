@@ -42,7 +42,7 @@
 #' [bigrquery::src_bigquery]
 #'
 #' @export
-#' 
+#'
 #' @importFrom DBI dbConnect
 #'
 #' @importFrom DBI dbConnect
@@ -210,8 +210,6 @@ bdplyr <- function(
 #' @param show_query If TRUE will show the SQL query calling [dplyr::show_query()].
 #' Is useful for diagnosing performance problems.
 #'
-#' @param page_size defaults to 100000.
-#'
 #' @return A tibble.
 #' @export
 #'
@@ -249,10 +247,10 @@ bdplyr <- function(
 #'
 #' }
 
-bd_collect <- function(.lazy_tbl,
-                       billing_project_id = basedosdados::get_billing_id(),
-                       show_query = FALSE,
-                       page_size = 100000) {
+bd_collect <- function(
+  .lazy_tbl,
+  billing_project_id = basedosdados::get_billing_id(),
+  show_query = FALSE) {
 
   # check if billing_is is valid
 
@@ -271,7 +269,7 @@ bd_collect <- function(.lazy_tbl,
 
   # show que generated query - useful for debugging
 
-  if (show_query == TRUE) {
+  if (show_query) {
 
     rlang::inform(glue::glue("The following query will be executed:"))
 
@@ -283,7 +281,7 @@ bd_collect <- function(.lazy_tbl,
   # uses a previous select everything to avoid return empty
   collected_table <- .lazy_tbl %>%
     dplyr::select(dplyr::everything()) %>%
-    dplyr::collect(page_size = page_size)
+    dplyr::collect()
 
   # checks if is a tibble
   if (inherits(collected_table, "tbl_df") == FALSE) {
@@ -336,11 +334,10 @@ bd_collect <- function(.lazy_tbl,
 #'
 #' @param ... Parameters passed to the `.write_fn` function.
 #'
-#' @param page_size passed to `bd_collect`, defaults to 100000.
 #'
 #' @return String containing the path to the created file.
 #' @export
-#' 
+#'
 #' @importFrom scales number_bytes
 #'
 #' @importFrom scales number_bytes
@@ -424,36 +421,16 @@ bd_write <- function(
   .lazy_tbl,
   .write_fn = ? Function(),
   path = ? Character(length = 1),
-  overwrite = FALSE ? Logical(),
-  page_size = 100000,
+  overwrite = FALSE ? Logical(1),
   ...) {
-
-  # checks if any param is missing
-  if (missing(.write_fn) | missing(.lazy_tbl) | missing(path)) {
-
-    rlang::abort("Params `.lazy_tbl', `.write_fn' and `path' must be informed.")
-
-  }
-
-  # checks if .write_fn is a valid function
-  if (!rlang::is_function(.write_fn)) {
-
-      rlang::abort("`.write_fn' must be a function. Remember not using ()")
-
-  }
-
-  # check if is a valid path name
-  if (!rlang::is_string(path)) {
-
-    rlang::abort("`path` must be a string.")
-
-  }
 
   # check if the path already exists
   # in this case, check if overwrite = TRUE
-  if (file.exists(path) & overwrite == FALSE) {
+  if (fs::file_exists(path) & overwrite == FALSE) {
 
-    rlang::abort("The file already exists. Use overwrite = TRUE if you want to overwrite it.")
+    "{path} already exists. Set the `overwrite` argument to TRUE if you want to overwrite it." %>%
+      glue::glue() %>%
+      rlang::abort()
 
   }
 
@@ -477,15 +454,15 @@ bd_write <- function(
   }
 
   # collect the results
-   collected_table <- bd_collect(.lazy_tbl, page_size = page_size)
+   collected_table <- bd_collect(.lazy_tbl)
 
   # write the results using the indicated function
     rlang::call2(.write_fn, collected_table, path, ...) %>%
     rlang::eval_bare()
 
-  # checks if the writing process was successfully
+  # checks if the writing process was successfull
 
-  if (file.exists(path)) {
+  if (fs::file_exists(path)) {
 
     file_size <-  scales::number_bytes(file.info(path)$size, units = "si")
 
@@ -513,12 +490,7 @@ bd_write_rds <- function(
   path,
   overwrite = FALSE,
   compress = "none",
-  page_size = 100000,
   ...) {
-
-  if (missing(.lazy_tbl) | missing(path)) {
-    rlang::abort("Params `.lazy_tbl', and `path' must be informed.")
-  }
 
   # check if is a valid path name
   if (stringr::str_detect(path, pattern = "(\\.rds)$") == FALSE) {
@@ -562,38 +534,28 @@ bd_write_rds <- function(
 #' @export
 bd_write_csv <- function(
   .lazy_tbl,
-  path,
-  overwrite = FALSE,
-  page_size = 100000,
+  path = ? typed::Character(1),
+  overwrite = FALSE ? typed::Logical(1),
   ...) {
-
-  if (missing(.lazy_tbl) | missing(path)) {
-    rlang::abort("Params `.lazy_tbl', and `path' must be informed.")
-  }
-
-  # check if is a valid path name
-  if (stringr::str_detect(path, pattern = "(\\.csv)$") == FALSE) {
-    rlang::abort("Pass a valid file name to argument `path`, include the '.csv' suffix.")
-  }
 
   # check if the path already exists
   # in this case, check if overwrite = TRUE
 
-  if (file.exists(path) & overwrite == FALSE) {
+  if (fs::file_exists(path) & overwrite == FALSE) {
     rlang::abort("The file already exists. Use overwrite = TRUE if you want to overwrite it.")
   }
 
   # collec the remote results
   collected_table <- bd_collect(.lazy_tbl)
 
-
   # calls the write function
-  readr::write_csv(x = collected_table,
-                   file = path,
-                   ...)
+  readr::write_csv(
+    x = collected_table,
+    file = path,
+    ...)
 
   # checks if the writing process was successfully
-  if (file.exists(path)) {
+  if (fs::file_exists(path)) {
 
     file_size <-  scales::number_bytes(file.info(path)$size, units = "si")
 

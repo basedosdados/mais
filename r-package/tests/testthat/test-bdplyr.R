@@ -17,7 +17,7 @@ test_that("bd_colllect works", {
   example_data %>%
     dplyr::group_by(sigla_partido) %>%
     dplyr::summarise(contagem = n()) %>%
-    basedosdados::bd_collect(page_size = 300000) ->
+    basedosdados::bd_collect() ->
     summarise_test_data
 
   testthat::expect_s3_class(summarise_test_data, "tbl_df")
@@ -43,8 +43,7 @@ test_that("bd_write works", {
           .lazy_tbl = example_data,
           .write_fn = .y,
           overwrite = TRUE,
-          path = .x,
-          page_size = 300000) %>%
+          path = .x) %>%
         fs::file_exists() %>%
         testthat::expect_true())
 
@@ -60,8 +59,7 @@ test_that("bd_write_csv works", {
   example_data %>%
     basedosdados::bd_write_csv(
       tempfile_csv,
-      overwrite = TRUE,
-      page_size = 300000)
+      overwrite = TRUE)
 
   tempfile_csv %>%
     fs::file_exists() %>%
@@ -114,11 +112,11 @@ testthat::test_that("page_size does not corrupt results", {
   testthat::skip_on_cran()
 
   example_data %>%
-    basedosdados::bd_collect(page_size = 150000) ->
+    basedosdados::bd_collect() ->
     page150
 
   example_data %>%
-    basedosdados::bd_collect(page_size = 50000) ->
+    basedosdados::bd_collect() ->
     page50
 
   waldo::compare(page150, page50) %>%
@@ -140,18 +138,27 @@ test_that("bd_write handles ...", {
       overwrite = TRUE,
       delim = " - ")
 
-  temp_dotdotdot_data <- readr::read_delim(temp_dotdotdot, delim = " - ")
+  temp_dotdotdot_data <- readr::read_delim(
+    temp_dotdotdot,
+    delim = " - ",
+    col_types = readr::cols(
+      ano = readr::col_integer(),
+      cpf = readr::col_character(),
+      titulo_eleitoral = readr::col_character(),
+      sigla_partido = readr::col_character(),
+      numero = readr::col_character(),
+      nome = readr::col_character(),
+      genero = readr::col_character()))
 
-  testthat::expect_equal(
-    nrow(bd_collect(example_data)),
-    nrow(temp_dotdotdot_data))
+  # these two tibbles should differ only in class
+  # temp_dotdotdot_data has a spec_tbl_df class because of its col specification
+  # and an attribute called "spec" describing it
+  # only these two differences should be detected
 
-  testthat::expect_equal(
-    ncol(bd_collect(example_data)),
-    ncol(temp_dotdotdot_data))
+  waldo::compare(
+    bd_collect(example_data),
+    temp_dotdotdot_data) %>%
+    length() %>%
+    testthat::expect_equal(2)
 
 })
-
-
-
-
