@@ -2,8 +2,8 @@ Microdados normalizados de estabelecimentos.
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-ms-vacinacao-covid19
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,39 +11,52 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19/code
+Código: 
 Website: www.ricardodahis.com
-Email: rdahis@basedosdados.orgTratado por
+Email: rdahis@basedosdados.org
+Tratado por
 -----------
 Nome: Ricardo Dahis
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19/code
+
+
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - sigla_uf
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- estabelecimento
 
 Colunas identificando linhas unicamente
 -------------------
 - id_estabelecimento
 
+
+
+
 Cobertura Temporal
 ------------------
+- 2020
 - 2021
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- b
+- r
+- a
+
+
+
 
 Tratamento
 ----------
 - Normalizamos a tabela original.
 
+
+
+
 Frequencia de Atualização
 -------------------------
-dia
-
-
+day
