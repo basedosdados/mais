@@ -2,8 +2,8 @@ Microdados paralelos ao dado original, incluindo pacientes, vacinação e estabe
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-ms-vacinacao-covid19
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,42 +11,54 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Matheus Valentim
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19/code
+Código: 
 Website: https://github.com/mavalentim
-Email: mavalentim.b@gmail.comTratado por
+Email: mavalentim.b@gmail.com
+Tratado por
 -----------
 Nome: Matheus Valentim
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19/code
 Website: https://github.com/mavalentim
 Email: mavalentim.b@gmail.com
 
+
+
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - sigla_uf
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- Documento da vacinação
 
 Colunas identificando linhas unicamente
 -------------------
 - id_documento
+
+
+
 
 Cobertura Temporal
 ------------------
 - 2020
 - 2021
 
+
+
+
 Cobertura Espacial
 ------------------
-- brasil
+- b
+- r
+- a
+
+
+
 
 Tratamento
 ----------
 Extraímos dados do site original.
 
+
+
+
 Frequencia de Atualização
 -------------------------
-dia
-
-
+day
