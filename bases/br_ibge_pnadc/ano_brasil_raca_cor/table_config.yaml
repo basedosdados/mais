@@ -44,7 +44,7 @@ time_unit: one_year
 identifying_columns:
     - ano
     - sexo
-    - raca_cor
+    - cor_raca
 
 last_updated:
     metadata:

@@ -45,7 +45,7 @@ identifying_columns:
     - ano
     - id_regiao
     - sexo
-    - raca_cor
+    - cor_raca
 
 last_updated:
     metadata:
