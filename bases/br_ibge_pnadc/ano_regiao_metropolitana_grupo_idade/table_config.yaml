@@ -1,7 +1,7 @@
 
 dataset_id: br_ibge_pnadc
 
-table_id: ano_regiao_metropolitana_raca_cor
+table_id: ano_regiao_metropolitana_grupo_idade
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
