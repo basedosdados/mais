@@ -4,6 +4,7 @@ from pathlib import Path
 import pandas as pd
 from pandas_gbq.gbq import GenericGBQException
 import shutil
+from basedosdados.download.download import search
 
 from basedosdados import (
     download,
@@ -350,3 +351,20 @@ def test_get_table_size_verbose_false():
     )
     assert type(out) == list
     assert len(out) > 0
+
+def test_search():
+    out = search(
+        query='agua', 
+        order_by='score'
+    )
+    #check if function returns pd.DataFrame
+    assert isinstance(out, pd.DataFrame)
+    #check if there is duplicate tables in the result
+    assert out.id.nunique()==out.shape[0]
+    #check input error
+    with pytest.raises(ValueError):
+        search(
+        query='agua', 
+        order_by='name'
+    )
+        
