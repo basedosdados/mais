@@ -47,9 +47,9 @@ class Dataset(Base):
         )
 
         return dataset
-    
+
     def _write_readme_file(self):
-        
+
         readme_content = (
             f"Como capturar os dados de {self.dataset_id}?\n\nPara cap"
             f"turar esses dados, basta verificar o link dos dados orig"
@@ -61,9 +61,7 @@ class Dataset(Base):
             f"//basedosdados.org/dataset/{self.dataset_id.replace('_','-')}"
         )
 
-        readme_path = Path(
-            self.metadata_path / self.dataset_id / 'README.md'
-        )
+        readme_path = Path(self.metadata_path / self.dataset_id / "README.md")
 
         with open(readme_path, "w") as readmefile:
             readmefile.write(readme_content)
@@ -109,6 +107,10 @@ class Dataset(Base):
         Args:
             mode (bool): Which dataset to create [prod|staging|all].
         """
+
+        ### add a layer of control, if make_pulbic = True then stays the same as now.
+        ### else if make_public = False then not git allUsers acess.
+        ## default should be make_pulbic = True?
 
         for m in self._loop_modes(mode):
 
