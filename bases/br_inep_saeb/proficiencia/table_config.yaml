@@ -211,7 +211,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: serie
-      bigquery_type: string
+      bigquery_type: int64
       description: Série/Ano escolar
       temporal_coverage:
       covered_by_dictionary:
