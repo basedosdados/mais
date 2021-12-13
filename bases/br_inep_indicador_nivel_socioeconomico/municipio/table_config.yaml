@@ -37,6 +37,8 @@ time_unit: year
 identifying_columns:
     - ano 
     - id_municipio
+    - rede
+    - tipo_localizacao
 
 last_updated:
     metadata:

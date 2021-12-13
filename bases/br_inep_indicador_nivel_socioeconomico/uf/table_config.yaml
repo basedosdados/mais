@@ -37,6 +37,9 @@ time_unit: year
 identifying_columns:
     - ano
     - sigla_uf
+    - area
+    - rede
+    - tipo_localizacao
 
 last_updated:
     metadata:
