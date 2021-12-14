@@ -23,6 +23,10 @@ Email: lucas.moreira@basedosdados.org
 
 Colunas identificando linhas unicamente
 -------------------
+- table_id
+- coluna
+- chave
+- cobertura_temporal
 
 
 
