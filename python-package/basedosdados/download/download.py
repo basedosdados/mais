@@ -649,44 +649,40 @@ def search(query, order_by):
             a table. Each column is a field identifying the table. 
     """
 
-    #validate base url
+    # validate order_by input
+    if order_by not in ["score", "popular", "recent"]:
+        raise ValueError(
+            f'order_by must be score, popular or recent. Received "{order_by}"'
+        )
+
     base_url = "https://basedosdados.org/api/3/action/bd_dataset_search"
-    response = requests.get(base_url)
-    status_code = response.status_code
-    if status_code!=200:
-        raise ValueError(f"The API endpoint doesn't look to be available. Please, check if any change has occurred at url {base_url}")
-    
-    #validate order_by input
-    if order_by not in ['score', 'popular','recent']:
-        raise ValueError(f"order_by must be score, popular or recent. Received \"{order_by}\"")
-    
     url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q={query}&order_by={order_by}&resource_type=bdm_table"
     response = requests.get(url)
+    status_code = response.status_code
+
+    # validate url
+    if status_code != 200:
+        raise ValueError(
+            f"The API endpoint doesn't look to be available. Please, check if any change has occurred at url {base_url}"
+        )
+
     json_response = response.json()
 
     dataset_dfs = []
-    n_datasets = len(json_response['result']['datasets'])
-    #first loop identify the number of the tables in each datasets
-    for i in range(n_datasets):             
+    # first loop identify the number of the tables in each datasets
+    for dataset in json_response["result"]["datasets"]:
         tables_dfs = []
-        n_tables = len(json_response['result']['datasets'][i]['resources'])
-        #second loop extracts tables' information for each dataset 
-        for j in range(n_tables):
-            table_dict = json_response['result']['datasets'][i]['resources'][j]
-            data_table = pd.DataFrame({k:str(table_dict[k]) for k in list(table_dict.keys())}, index=[0])
+        n_tables = len(dataset["resources"])
+        # second loop extracts tables' information for each dataset
+        for table in dataset["resources"]:
+            data_table = pd.DataFrame(
+                {k: str(table[k]) for k in list(table.keys())}, index=[0]
+            )
             tables_dfs.append(data_table)
-        #append tables' dataframes for each dataset
+        # append tables' dataframes for each dataset
         data_ds = tables_dfs[0].append(tables_dfs[1:]).reset_index(drop=True)
         dataset_dfs.append(data_ds)
-    #append datasets' dataframes
+    # append datasets' dataframes
     df = dataset_dfs[0].append(dataset_dfs[1:]).reset_index(drop=True)
 
     return df
-        
-
-
-
-
-
-
-    
