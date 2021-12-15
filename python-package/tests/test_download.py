@@ -4,6 +4,7 @@ from pathlib import Path
 import pandas as pd
 from pandas_gbq.gbq import GenericGBQException
 import shutil
+from basedosdados.download.download import search
 
 from basedosdados import (
     download,
@@ -36,7 +37,7 @@ def test_search_query_type():
 def test_search_query_status():
     result = search("agua","popular")
     assert result["status"] == True
-
+"""
 def test_download_by_query():
 
     download(
@@ -358,3 +359,4 @@ def test_get_table_size_verbose_false():
     )
     assert type(out) == list
     assert len(out) > 0
+"""
