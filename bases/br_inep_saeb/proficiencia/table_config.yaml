@@ -94,7 +94,7 @@ architecture_url:
 
 # A tabela tem colunas que precisam de dicionário?
 # Opções: yes, no.
-covered_by_dictionary:
+covered_by_dictionary: yes
 
 source_bucket_name: basedosdados-dev
 
@@ -123,7 +123,7 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-      covered_by_dictionary: yes
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
@@ -136,7 +136,7 @@ columns:
       bigquery_type: string
       description: ID Região
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: yes
       directory_column: 
           dataset_id: 
           table_id: 
@@ -149,7 +149,7 @@ columns:
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-      covered_by_dictionary: yes
+      covered_by_dictionary: no
       directory_column: 
           dataset_id: br_bd_diretorios_brasil
           table_id: uf
@@ -162,7 +162,7 @@ columns:
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-      covered_by_dictionary: yes
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
@@ -175,7 +175,7 @@ columns:
       bigquery_type: string
       description: ID Escola - INEP
       temporal_coverage:
-      covered_by_dictionary: yes
+      covered_by_dictionary: no 
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: escola
@@ -188,7 +188,7 @@ columns:
       bigquery_type: string
       description: Rede Escolar
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: yes
       directory_column: 
           dataset_id:
           table_id:
@@ -201,7 +201,7 @@ columns:
       bigquery_type: string
       description: Localização 
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -214,7 +214,7 @@ columns:
       bigquery_type: int64
       description: Série/Ano escolar
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: yes 
       directory_column:
           dataset_id:
           table_id:
@@ -227,7 +227,7 @@ columns:
       bigquery_type: string
       description: Turno
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -240,7 +240,7 @@ columns:
       bigquery_type: string
       description: Disciplina
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -279,7 +279,7 @@ columns:
       bigquery_type: string
       description: Sexo
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: yes 
       directory_column:
           dataset_id:
           table_id:
@@ -292,7 +292,7 @@ columns:
       bigquery_type: string
       description: Raça/Cor
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: yes 
       directory_column:
           dataset_id:
           table_id:
@@ -318,7 +318,7 @@ columns:
       bigquery_type: int64
       description: Amostra
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no 
       directory_column:
           dataset_id:
           table_id:
@@ -331,7 +331,7 @@ columns:
       bigquery_type: float64
       description: Peso do aluno
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no 
       directory_column:
           dataset_id:
           table_id:
@@ -344,7 +344,7 @@ columns:
       bigquery_type: float64
       description: Proficiência do aluno calculada na escala única do SAEB, com média = 0 e desvio = 1 na população de referência
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no 
       directory_column:
           dataset_id:
           table_id:
@@ -357,7 +357,7 @@ columns:
       bigquery_type: float64
       description: Erro padrão da proficiência
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no 
       directory_column:
           dataset_id:
           table_id:
@@ -370,7 +370,7 @@ columns:
       bigquery_type: float64
       description: Proficiência do aluno transformada na escala única do SAEB, com média = 250, desvio = 50
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no 
       directory_column:
           dataset_id:
           table_id:
@@ -383,7 +383,7 @@ columns:
       bigquery_type: float64
       description: Erro padrão da proficiência transformada
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
