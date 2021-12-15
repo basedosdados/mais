@@ -1,0 +1,52 @@
+Dicionário da tabela de proficiência do SAEB para os anos de 1995 a 2019
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Lucas Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
+Email: lucas.moreira@basedosdados.org
+
+
+
+
+Colunas identificando linhas unicamente
+-------------------
+- table_id
+- coluna
+- chave
+- cobertura_temporal
+
+
+
+
+Cobertura Temporal
+------------------
+
+
+
+
+Cobertura Espacial
+------------------
+
+
+
+
+Tratamento
+----------
+Compatibizaliação de todos os dicionários da série temporal do SAEB
+
+
+
+
