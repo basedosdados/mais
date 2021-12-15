@@ -148,6 +148,39 @@ def download(
 
     table.to_csv(savepath, **pandas_kwargs)
 
+def search(query, order_by):
+    """This function works as a wrapper to the `bd_dataset_search` website API
+        enpoint.
+
+        Args:
+            query (str):
+                String to search in datasets and tables' metadata.
+            order_by (str): score|popular|recent
+                Field by which the results will be ordered.
+
+        If request to get url fails, the funtion returns a dictionary where status == False and the dataFrame is empty
+
+        If request doesnt fail, the function returns a dictionary composed of the status == True and data in a dataFrame format
+
+        Returns:
+            pd.DataFrame:
+                Response from the API presented as a pandas DataFrame. Each row is
+                a table. Each column is a field identifying the table.
+        """
+    #Making a request in the API
+    url = 'https://basedosdados.org/api/3/action/bd_dataset_search?q={0}&order_by={1}'.format(query,order_by)
+    #Creating empty dictionary
+    search_response= {'status':False,'data':pd.DataFrame()}
+    #Testing request
+    try:
+        r = requests.get(url)
+        response = r.json()
+    except(error):
+        return search_response
+    #Defining status and data inside search_response
+    search_response["data"]= pd.DataFrame(response["result"]["datasets"])
+    search_response["status"] = response["success"]
+    return search_response
 
 def read_sql(
     query,
