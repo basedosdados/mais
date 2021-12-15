@@ -25,7 +25,7 @@ Colunas identificando linhas unicamente
 - ano
 - id_regiao_metropolitana
 - sexo
-- grupo_idade
+- raca_cor
 
 
 

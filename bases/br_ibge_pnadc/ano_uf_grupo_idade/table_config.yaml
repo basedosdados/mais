@@ -126,7 +126,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: id_uf
       bigquery_type: string
       description: ID Unidade da Federação - IBGE
@@ -139,7 +139,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: sexo
       bigquery_type: string
       description: Sexo
@@ -152,7 +152,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: grupo_idade
       bigquery_type: string
       description: Grupos de Idade
@@ -165,10 +165,10 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: populacao
       bigquery_type: int64
-      description: População (Mil pessoas)
+      description: População 
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -178,5 +178,5 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
 metadata_modified: '2021-09-12T23:21:06.211459'

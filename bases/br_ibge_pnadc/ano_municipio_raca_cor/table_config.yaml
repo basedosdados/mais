@@ -46,7 +46,7 @@ identifying_columns:
     - ano
     - id_municipio
     - sexo
-    - cor_raca
+    - raca_cor
 
 last_updated:
     metadata:
@@ -127,7 +127,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: id_municipio
       bigquery_type: string
       description:  ID Município - IBGE 7 Dígitos
@@ -140,7 +140,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: sexo
       bigquery_type: string
       description: Sexo
@@ -153,10 +153,10 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
-    - name: cor_raca
+      is_partition: false
+    - name: raca_cor
       bigquery_type: string
-      description: Cor ou Raça
+      description: Raça ou Cor
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -166,10 +166,10 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: populacao
       bigquery_type: int64
-      description: População (Mil pessoas)
+      description: População
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -179,6 +179,6 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
 
 metadata_modified: '2021-09-12T23:21:06.211459'

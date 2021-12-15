@@ -1,7 +1,7 @@
 
 dataset_id: br_ibge_pnadc
 
-table_id: ano_regiao_metropolitana_grupo_idade
+table_id: ano_regiao_metropolitana_raca_cor
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -126,7 +126,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: id_regiao_metropolitana
       bigquery_type: string
       description: ID Região Metropolitana - IBGE
@@ -139,7 +139,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: sexo
       bigquery_type: string
       description: Sexo
@@ -152,7 +152,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: grupo_idade
       bigquery_type: string
       description: Grupos de Idade
@@ -165,10 +165,10 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: populacao
       bigquery_type: int64
-      description: População (Mil pessoas)
+      description: População 
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -178,6 +178,6 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
 
 metadata_modified: '2021-09-12T23:21:06.211459'

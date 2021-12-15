@@ -22,6 +22,6 @@ SELECT
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(id_regiao AS STRING) id_regiao,
 SAFE_CAST(sexo AS STRING) sexo,
-SAFE_CAST(cor_raca AS STRING) cor_raca,
+SAFE_CAST(raca_cor AS STRING) raca_cor,
 SAFE_CAST(populacao AS INT64) populacao
 FROM basedosdados-dev.br_ibge_pnadc_staging.ano_regiao_raca_cor AS t

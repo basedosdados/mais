@@ -21,6 +21,6 @@ CREATE VIEW basedosdados-dev.br_ibge_pnadc.ano_brasil_raca_cor AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sexo AS STRING) sexo,
-SAFE_CAST(cor_raca AS STRING) cor_raca,
+SAFE_CAST(raca_cor AS STRING) raca_cor,
 SAFE_CAST(populacao AS INT64) populacao
 FROM basedosdados-dev.br_ibge_pnadc_staging.ano_brasil_raca_cor AS t
