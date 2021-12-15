@@ -120,7 +120,7 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-      covered_by_dictionary: yes
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
@@ -133,7 +133,7 @@ columns:
       bigquery_type: string
       description: Região
       temporal_coverage:
-      covered_by_dictionary: yes
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: regiao
@@ -146,7 +146,7 @@ columns:
       bigquery_type: string
       description: Localização da escola
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -159,7 +159,7 @@ columns:
       bigquery_type: string
       description: Rede Escolar
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no 
       directory_column:
           dataset_id:
           table_id:
@@ -172,7 +172,7 @@ columns:
       bigquery_type: string
       description: Modalidade de Ensino
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no 
       directory_column:
           dataset_id:
           table_id:
@@ -182,10 +182,10 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: grupo
-      bigquery_type: int64
-      description: Categoria da formação docente em relação à disciplina que leciona onde (1) docentes com formação superior de licenciatura com complementação pedagógica na mesma área da disciplina que leciona; (2) docentes com formação superior de bacharelado sem complementação pedagógica na mesma área da disciplina que leciona; (3) docentes com formação superior com complementação pedagógica em área diferente da qual leciona; (4) docentes com formação superior não considerada nas categorias anteriores e (5) docentes sem formação superior
+      bigquery_type: string
+      description: Categoria da formação docente em relação à disciplina que leciona
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -198,7 +198,7 @@ columns:
       bigquery_type: float64
       description: Percentual de docentes por modalidade e grupo
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:

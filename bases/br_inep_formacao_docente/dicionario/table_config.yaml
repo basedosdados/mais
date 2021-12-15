@@ -1,52 +1,43 @@
 
 dataset_id: br_inep_formacao_docente
 
-table_id: brasil
+table_id: dicionario
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: O Indicador classifica o docente segundo a adequação de sua formação inicial a cada disciplina que leciona na educação básica, levando-se em conta as normatizações legais nacionais vigentes. A tabela apresenta o percentual de docência na respectiva unidade da agregação classificadas em cada uma das categorias do indicador.
+description: Dicionário da dados de Adequação da Formação Docente (AFD)
 
 # A máxima unidade espacial que a tabela cobre.
-spatial_coverage: bra
+spatial_coverage:
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplo: 1995(1)2019.
 temporal_coverage:
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
-    - 2020
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: one_year
+update_frequency:
 
 # Entidade representada por cada linha.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity: country
+entity:
 
 # A unidade temporal representada por cada linha.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit: year
+time_unit:
 
 # O conjunto mínimo de colunas identificando cada linha unicamente.
 # Preencha com os nomes de colunas.
 # Exemplos: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 identifying_columns:
-    - ano
-    - tipo_localizacao
-    - rede
-    - modalidade
-    - grupo
+     - id_tabela
+     - coluna
+     - chave
+     - cobertura_temporal
 
 last_updated:
     metadata:
@@ -77,7 +68,7 @@ data_cleaned_by:
     code_url:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Reshape da base e adequação aos padrões da BD
+data_cleaning_description: Criação do dicionário a partir de notas técnicas do INEP
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -90,7 +81,7 @@ architecture_url:
 
 # A tabela tem colunas que precisam de dicionário?
 # Opções: yes, no.
-covered_by_dictionary: no
+covered_by_dictionary:
 
 source_bucket_name: basedosdados-dev
 
@@ -102,7 +93,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: ano
+partitions:
 
 bdm_file_size:
 
@@ -115,50 +106,24 @@ bdm_file_size:
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: ano
-      bigquery_type: int64
-      description: Ano
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: ano
-          column_name: ano 
-      measurement_unit: year
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: true
-    - name: tipo_localizacao
+    - name: id_tabela
       bigquery_type: string
-      description: Localização da escola
+      description: ID Tabela
       temporal_coverage:
-      covered_by_dictionary: no 
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: rede
+      is_in_staging: true 
+      is_partition: false 
+    - name: coluna
       bigquery_type: string
-      description: Rede Escolar
+      description: Coluna
       temporal_coverage:
-      covered_by_dictionary: no 
-      directory_column: 
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: modalidade
-      bigquery_type: string
-      description: Modalidade de Ensino
-      temporal_coverage:
-      covered_by_dictionary: no 
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -167,11 +132,11 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: grupo
+    - name: chave
       bigquery_type: string
-      description: Categoria da formação docente em relação à disciplina que leciona
+      description: Chave
       temporal_coverage:
-      covered_by_dictionary: yes
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -180,11 +145,24 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: percentual
-      bigquery_type: float64
-      description: Percentual de docentes por modalidade e grupo
+    - name: cobertura_temporal
+      bigquery_type: string
+      description: Cobertura Temporal
       temporal_coverage:
-      covered_by_dictionary: no 
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: valor
+      bigquery_type: string
+      description: Valor
+      temporal_coverage:
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
