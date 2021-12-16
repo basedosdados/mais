@@ -4,8 +4,10 @@ from pathlib import Path
 import pandas as pd
 from pandas_gbq.gbq import GenericGBQException
 import shutil
+from pydata_google_auth.exceptions import PyDataCredentialsError
 
 from basedosdados import (
+    reauth,
     download,
     read_sql,
     read_table,
@@ -18,8 +20,8 @@ from basedosdados.exceptions import (
 
 
 TEST_PROJECT_ID = "basedosdados-dev"
-SAVEFILE = Path(__file__).parent / "tmp_bases" / "test.csv"
-SAVEPATH = Path(__file__).parent / "tmp_bases"
+SAVEFILE = Path(__file__).parent.parent / "tmp_bases" / "test.csv"
+SAVEPATH = Path(__file__).parent.parent / "tmp_bases"
 shutil.rmtree(SAVEPATH, ignore_errors=True)
 
 
@@ -29,7 +31,6 @@ def test_download_by_query():
         SAVEFILE,
         query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
         billing_project_id=TEST_PROJECT_ID,
-        index=False,
         from_file=True,
     )
 
@@ -45,7 +46,6 @@ def test_download_by_table():
         billing_project_id=TEST_PROJECT_ID,
         limit=10,
         from_file=True,
-        index=False,
     )
 
     assert SAVEFILE.exists()
@@ -60,10 +60,21 @@ def test_download_save_to_path():
         billing_project_id=TEST_PROJECT_ID,
         from_file=True,
         limit=10,
-        index=False,
     )
 
     assert (SAVEPATH / "municipio.csv").exists()
+
+
+def test_download_query_save_to_path():
+
+    download(
+        SAVEPATH,
+        query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
+        billing_project_id=TEST_PROJECT_ID,
+        from_file=True,
+    )
+
+    assert (SAVEPATH / "query_result.csv").exists()
 
 
 def test_download_no_query_or_table():
@@ -73,22 +84,6 @@ def test_download_no_query_or_table():
             SAVEFILE,
             limit=10,
         )
-
-
-def test_download_pandas_kwargs():
-
-    download(
-        SAVEFILE,
-        dataset_id="br_ibge_pib",
-        table_id="municipio",
-        billing_project_id=TEST_PROJECT_ID,
-        from_file=True,
-        limit=10,
-        sep="|",
-        index=False,
-    )
-
-    assert SAVEFILE.exists()
 
 
 def test_read_sql():
@@ -196,3 +191,12 @@ def test_read_table():
         ),
         pd.DataFrame,
     )
+
+
+def test_reauth(monkeypatch):
+
+    with pytest.raises(PyDataCredentialsError):
+
+        monkeypatch.setattr("builtins.input", lambda _: "Error")
+
+        reauth()

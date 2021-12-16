@@ -13,11 +13,6 @@ from basedosdados import (
     get_table_columns,
     get_table_size,
 )
-from basedosdados.exceptions import (
-    BaseDosDadosException,
-    BaseDosDadosNoBillingProjectIDException,
-    BaseDosDadosInvalidProjectIDException,
-)
 
 
 TEST_PROJECT_ID = "basedosdados-dev"
