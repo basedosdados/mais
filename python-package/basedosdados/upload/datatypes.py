@@ -1,6 +1,5 @@
-import csv
-
 from google.cloud import bigquery
+import csv
 
 
 class Datatype:

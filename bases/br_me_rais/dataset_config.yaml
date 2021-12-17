@@ -1,30 +1,48 @@
 
 # Qual organização disponibiliza os dados originais?
-# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list=
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
 organization:
     - ministerio-da-economia
 
 dataset_id: br_me_rais
 
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
 title: Relação Anual de Informações Sociais (RAIS)
 
-# exemplo: descrição e anotações úteis sobre os dados.
-description: "A Relação Anual de Informações Sociais (RAIS) é um relatório de informações socioeconômicas solicitado pela Secretaria de Trabalho do Ministério da Economia brasileiro às pessoas jurídicas e outros empregadores anualmente. Foi instituída pelo Decreto nº 76.900, de 23 de dezembro de 1975."
+# Descrição e anotações úteis sobre os dados.
+description:
 
-# Quais grupos caracterizam a base?
+# Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
-groups: ['economia']
+# Importante: preencher com a chave, e não o valor.
+groups:
+    - economia
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
 # Caso crie etiquetas novas, as regras são:
 #    - letras minúsculas
 #    - sem acentos
+#    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
-tags: ['trabalho', 'emprego']
+tags:
+    - emprego
+    - empresa
+    - firma
+    - salario
+    - trabalho
 
+# Url completa do CKAN já contendo o dataset-id
+# Exemplo: https://basedosdados.org/dataset/<dataset-id>
 ckan_url:
 
-github_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais
+# Url completa do Github já contendo o dataset_id
+# Exemplo: https://github.com/basedosdados/mais/tree/master/bases/<dataset_id>
+github_url:
 
-metadata_modified: '2021-11-02T13:51:23.788554'
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2021-09-04T01:12:14.020711'
