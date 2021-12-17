@@ -120,10 +120,10 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: mes
       bigquery_type: int64
       description: Mes
@@ -133,10 +133,10 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: mes
           column_name: mes
-      measurement_unit:
+      measurement_unit: month
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_categoria
       bigquery_type: string
       description: Código identificador grupo
@@ -146,10 +146,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: 
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_categoria_bd
       bigquery_type: string
       description: Código identificador grupo - Base dos dados - Baseado em id_categoria
@@ -160,10 +160,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: 
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: categoria
       bigquery_type: string
       description: Descrição da categoria
@@ -173,10 +173,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: 
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso_mensal
       bigquery_type: float64
       description: Peso percentual mensal do item
@@ -186,10 +186,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: 
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_mensal
       bigquery_type: float64
       description: Variação percentual mensal
@@ -199,10 +199,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_anual
       bigquery_type: float64
       description: Variação percentual acumulada no ano
@@ -212,10 +212,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_doze_meses
       bigquery_type: float64
       description: Variação percentual acumulada em doze meses
@@ -225,9 +225,9 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
 metadata_modified: '2021-10-25T20:52:12.771517'

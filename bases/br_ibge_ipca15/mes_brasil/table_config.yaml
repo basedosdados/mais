@@ -139,10 +139,10 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: mes
       bigquery_type: int64
       description: Mês
@@ -152,10 +152,10 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: mes
           column_name: mes
-      measurement_unit:
+      measurement_unit: month
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: indice
       bigquery_type: float64
       description: Número índice (dez 1993 = 100)
@@ -168,7 +168,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_mensal
       bigquery_type: float64
       description: Variação percentual mensal
@@ -178,10 +178,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_trimestral
       bigquery_type: float64
       description: Variação percentual trimestral
@@ -191,10 +191,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_semestral
       bigquery_type: float64
       description: Variação percentual semestral
@@ -204,10 +204,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_anual
       bigquery_type: float64
       description: Variação percentual anual
@@ -217,10 +217,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_doze_meses
       bigquery_type: float64
       description: Variação percentual doze meses
@@ -230,9 +230,9 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
 metadata_modified: '2021-10-21T17:14:01.704876'
