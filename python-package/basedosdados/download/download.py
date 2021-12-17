@@ -103,7 +103,6 @@ def download(
     if query:
         # sql queries produces anonymous tables, whose names
         # can be found within `job._properties`
-        print(client["bigquery"].project)
         job = client["bigquery"].query(query)
 
         # views may take longer: wait for job to finish.
