@@ -139,7 +139,7 @@ columns:
       directory_column:
           dataset_id: br_bd_diretorios_mundo
           table_id: pais
-          column_name: 
+          column_name: sigla_pais_iso3
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
