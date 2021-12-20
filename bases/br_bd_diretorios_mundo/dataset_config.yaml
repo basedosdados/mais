@@ -1,0 +1,47 @@
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization: br-bd
+
+dataset_id: br_bd_diretorios_mundo
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Diretórios Mundiais
+
+# Descrição e anotações úteis sobre os dados.
+description: Conjunto de diretórios mundiais compilados pela Base dos Dados para cruzar informações de diferentes instituições.
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+    - "territorio"
+    - "educacao"
+    - "ciencia-tec-inov"
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - continentes
+    - paises
+    - instituicoes internacionais
+
+# Url completa do CKAN já contendo o dataset-id
+# Exemplo: https://basedosdados.org/dataset/<dataset-id>
+ckan_url: https://basedosdados.org/dataset/br-bd-diretorios-mundo
+
+# Url completa do Github já contendo o dataset_id
+# Exemplo: https://github.com/basedosdados/mais/tree/master/bases/<dataset_id>
+github_url: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_mundo
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified:
