@@ -17,9 +17,9 @@ description: Conjunto de diretórios mundiais compilados pela Base dos Dados par
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
 groups:
-    - "territorio"
-    - "educacao"
-    - "ciencia-tec-inov"
+    - territorio
+    - educacao
+    - ciencia-tec-inov
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -30,9 +30,6 @@ groups:
 #    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - continentes
-    - paises
-    - instituicoes internacionais
 
 # Url completa do CKAN já contendo o dataset-id
 # Exemplo: https://basedosdados.org/dataset/<dataset-id>
