@@ -2,7 +2,7 @@
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 # Exemplos: br-ibge, br-tse, br-rj-gov
-organization: banco-mundial
+organization: mundo-bm
 
 dataset_id: mundo_bm_learning_poverty
 
