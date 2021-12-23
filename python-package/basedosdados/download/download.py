@@ -324,7 +324,6 @@ def _download_blob_from_bucket(client, bucket_name, savepath):
     bucket = client["storage"].bucket(bucket_name)
     for blob in bucket.list_blobs():
         filepath = savepath / (blob.name.split("-")[-1] + ".csv.gz")
-        print(filepath)
         blob.download_to_filename(filepath)
 
 
@@ -441,7 +440,6 @@ def _join_files(tmp_savepath, savepath):
     files = list(tmp_savepath.glob("*.csv"))
     with savepath.open("a+") as targetfile:
         for i, file in enumerate(files):
-            print(file)
             with file.open("r") as f:
                 if i > 0:
                     next(f)
