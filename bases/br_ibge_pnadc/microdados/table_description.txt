@@ -13,6 +13,7 @@ Nome: Ricardo Dahis
 Código: 
 Website: www.ricardodahis.com
 Email: rdahis@basedosdados.org
+
 Tratado por
 -----------
 Nome: Ricardo Dahis
@@ -24,8 +25,8 @@ Email: rdahis@basedosdados.org
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
--  trimestre
--  sigla_uf
+- trimestre
+- sigla_uf
 
 
 Colunas identificando linhas unicamente
@@ -52,10 +53,7 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- continent
-- country
-- admin1
-- admin2
+- brasil
 
 
 
