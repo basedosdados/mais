@@ -22,7 +22,7 @@ save `dir_uf'
 
 !mkdir "output/microdados_estabelecimentos"
 
-foreach ano of numlist 1985(1)2019 {
+foreach ano of numlist 2019 2020 { // 2020 { // 1985(1)2019 {
 	
 	if `ano' >= 1985 & `ano' <= 2001	local arquivo ESTB`ano'
 	if `ano' == 2002					local arquivo consulta21554418
@@ -35,7 +35,7 @@ foreach ano of numlist 1985(1)2019 {
 	if `ano' >= 2009 & `ano' <= 2011	local arquivo ESTB`ano'
 	if `ano' == 2012					local arquivo Estb`ano'
 	if `ano' >= 2013 & `ano' <= 2017	local arquivo ESTB`ano'
-	if `ano' >= 2018 & `ano' <= 2019	local arquivo RAIS_ESTAB_PUB
+	if `ano' >= 2018                    local arquivo RAIS_ESTAB_PUB
 	
 	import delimited "input/`ano'/`arquivo'.txt", clear varn(nonames) delim(";") case(preserve) stringcols(_all)
 	
@@ -277,7 +277,7 @@ foreach ano of numlist 1985(1)2019 {
 		ren v21	tipo
 		
 	}
-	if `ano' >= 2014 & `ano' <= 2019 {
+	if `ano' >= 2014 {
 		
 		drop v20 v22
 		
