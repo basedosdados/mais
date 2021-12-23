@@ -51,30 +51,16 @@ def test_download_by_table():
     assert SAVEFILE.exists()
 
 
-def test_download_save_to_path():
+def test_download_large_file():
 
     download(
-        SAVEPATH,
-        dataset_id="br_ibge_pib",
-        table_id="municipio",
-        billing_project_id=TEST_PROJECT_ID,
-        from_file=True,
-        limit=10,
-    )
-
-    assert (SAVEPATH / "municipio.csv").exists()
-
-
-def test_download_query_save_to_path():
-
-    download(
-        SAVEPATH,
-        query="select * from `basedosdados.br_ibge_pib.municipio` limit 10",
+        SAVEFILE,
+        query="select * from basedosdados.br_me_rais.microdados_vinculos limit 10000000",
         billing_project_id=TEST_PROJECT_ID,
         from_file=True,
     )
 
-    assert (SAVEPATH / "query_result.csv").exists()
+    assert (SAVEFILE).exists()
 
 
 def test_download_no_query_or_table():
