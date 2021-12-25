@@ -103,9 +103,6 @@ list_dataset_tables <-
 #' @importFrom purrr pluck map reduce
 #' @importFrom dplyr bind_rows
 #' @return A tibble describing all columns in a table
-#'
-#'
-
 
 get_table_columns <-
   typed::Data.frame() ? function(
@@ -136,7 +133,6 @@ get_table_columns <-
 #' get_dataset_description("br_sp_alesp")
 #'
 #' @return A tibble describing the specified dataset
-#'
 
 get_dataset_description <- function(dataset_id = ? typed::Character(1)) {
 

@@ -3,6 +3,8 @@ require(typed)
 
 test_that("bd_request works", {
 
+  testthat::skip_on_cran()
+
   bd_request("search") %>%
     testthat::expect_s3_class("response")
 
@@ -10,6 +12,8 @@ test_that("bd_request works", {
 
 
 testthat::test_that("Basic dataset search", {
+
+  testthat::skip_on_cran()
 
   result <- dataset_search("agua")
 
@@ -25,6 +29,8 @@ testthat::test_that("Basic dataset search", {
 
 testthat::test_that("Different searches yield different results", {
 
+  testthat::skip_on_cran()
+
   dataset_search("educação") %>%
     waldo::compare(dataset_search("educação")) %>%
     length() %>%
@@ -39,6 +45,8 @@ testthat::test_that("Different searches yield different results", {
 
 testthat::test_that("Basic table column description works", {
 
+  testthat::skip_on_cran()
+
   result <- basedosdados::get_table_columns("br_sp_alesp", "deputado")
 
   testthat::expect_equal(nrow(result), 12)
@@ -46,6 +54,8 @@ testthat::test_that("Basic table column description works", {
 })
 
 testthat::test_that("List tables of a dataset works", {
+
+  testthat::skip_on_cran()
 
   result <- list_dataset_tables("br_sp_alesp")
 
@@ -56,6 +66,8 @@ testthat::test_that("List tables of a dataset works", {
 })
 
 testthat::test_that("Dataset description works", {
+
+  testthat::skip_on_cran()
 
   description <- get_dataset_description("br_sp_alesp")
 
@@ -70,6 +82,8 @@ testthat::test_that("Dataset description works", {
 
 testthat::test_that("Table description works", {
 
+  testthat::skip_on_cran()
+
   description <- get_table_description("br_sp_alesp", "deputado")
 
   testthat::expect_s3_class(description, "tbl")
@@ -79,6 +93,3 @@ testthat::test_that("Table description works", {
     testthat::expect_gt(0)
 
 })
-
-
-
