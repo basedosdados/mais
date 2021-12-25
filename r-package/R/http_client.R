@@ -10,6 +10,8 @@ bd_request <- function(
   httr::GET(
     target_endpoint,
     encode = 'json',
-    query = query)
+    query = query) %>%
+    httr::content() %>%
+    purrr::pluck("result")
 
 }

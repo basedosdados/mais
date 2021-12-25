@@ -9,6 +9,7 @@
 #' @importFrom purrr map_chr pluck
 #' @importFrom httr content
 #' @importFrom stringr str_replace_all
+#' @importFrom rlang .data
 #'
 #' @export
 #' @examples
@@ -27,9 +28,7 @@ dataset_search <-
     query = list(
       resource_type = "bdm_table",
       q = search_term,
-      page_size = 100)) %>%
-    httr::content() %>%
-    purrr::pluck("result") ->
+      page_size = 100)) ->
     search
 
   tibble::tibble(
@@ -45,10 +44,7 @@ dataset_search <-
       .f = ~ glue::glue("https://basedosdados.org/dataset/{purrr::pluck(.x, 'id')}")),
     title = purrr::map_chr(
       .x = search$datasets,
-      .f = ~ purrr::pluck(.x, "title")),
-    notes = purrr::map_chr(
-      .x = search$datasets,
-      .f = ~ purrr::pluck(.x, "notes")))
+      .f = ~ purrr::pluck(.x, "title")))
 
   }
 
@@ -64,9 +60,7 @@ list_dataset_tables <-
     bd_request(
       endpoint = "bdm_dataset_show",
       query = list(
-        dataset_id = dataset_id)) %>%
-      httr::content() %>%
-      purrr::pluck("result") ->
+        dataset_id = dataset_id)) ->
     results
 
     fetch_function <- purrr::possibly(
@@ -114,8 +108,6 @@ get_table_columns <-
     query = list(
       table_id = table_id,
       dataset_id = dataset_id)) %>%
-    httr::content() %>%
-    purrr::pluck("result") %>%
     purrr::pluck("columns") %>%
     purrr::map(tibble::as_tibble) %>%
     purrr::reduce(dplyr::bind_rows) %>%
@@ -139,9 +131,7 @@ get_dataset_description <- function(dataset_id = ? typed::Character(1)) {
   bd_request(
     endpoint = "bdm_dataset_show",
     query = list(
-      dataset_id = dataset_id)) %>%
-    httr::content() %>%
-    purrr::pluck("result") ->
+      dataset_id = dataset_id)) ->
     result
 
   tibble::tibble(
@@ -172,9 +162,7 @@ get_table_description <- function(
     endpoint = "bdm_table_show",
     query = list(
       dataset_id = dataset_id,
-      table_id = table_id)) %>%
-    httr::content() %>%
-    purrr::pluck("result") ->
+      table_id = table_id)) ->
     result
 
   tibble::tibble(

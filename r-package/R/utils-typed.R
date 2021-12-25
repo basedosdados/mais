@@ -1,4 +1,4 @@
 ## usethis namespace: start
-#' @importFrom typed "?"
+#' @importFrom typed "?" check_output check_arg
 ## usethis namespace: end
 NULL

@@ -1,16 +1,6 @@
 
 require(typed)
 
-test_that("bd_request works", {
-
-  testthat::skip_on_cran()
-
-  bd_request("search") %>%
-    testthat::expect_s3_class("response")
-
-})
-
-
 testthat::test_that("Basic dataset search", {
 
   testthat::skip_on_cran()
@@ -27,17 +17,20 @@ testthat::test_that("Basic dataset search", {
 
 })
 
-testthat::test_that("Different searches yield different results", {
+testthat::test_that("Different search terms yield different results", {
 
   testthat::skip_on_cran()
 
-  dataset_search("educação") %>%
-    waldo::compare(dataset_search("educação")) %>%
+  ed <- dataset_search("educação")
+  water <- dataset_search("água")
+
+  ed %>%
+    waldo::compare(ed) %>%
     length() %>%
     testthat::expect_equal(0)
 
-  dataset_search("educação") %>%
-    waldo::compare(dataset_search("água")) %>%
+  ed %>%
+    waldo::compare(water) %>%
     length() %>%
     testthat::expect_gt(0)
 
@@ -93,3 +86,4 @@ testthat::test_that("Table description works", {
     testthat::expect_gt(0)
 
 })
+
