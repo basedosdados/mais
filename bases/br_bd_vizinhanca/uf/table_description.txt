@@ -1,0 +1,69 @@
+Lista de pares de unidades da federação vizinhas por ano.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: 
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+Tratado por
+-----------
+Nome: Ricardo Dahis
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- sigla_uf_1
+- sigla_uf_2
+
+
+
+
+Cobertura Temporal
+------------------
+- 2000
+- 2001
+- 2010
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+
+
+
+
+Cobertura Espacial
+------------------
+
+
+
+
+Tratamento
+----------
+Geramos a matriz a partir dos shapefiles disponibilizados no pacote geobr.
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year

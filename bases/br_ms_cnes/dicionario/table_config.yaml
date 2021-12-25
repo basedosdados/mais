@@ -49,7 +49,7 @@ data_update_frequency: mes # REQUIRED
 #   - em portugues (ou seja, não use os nomes de colunas abaixo)
 # Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
 observation_level: #REQUIRED
-    - chave 
+    - chave
 
 # Quais colunas identificam uma linha unicamente?
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
@@ -108,7 +108,7 @@ partitions: # REQUIRED
 columns: # REQUIRED
   
     -   
-        name: id_tabela
+        name: id_tabela 
         description: Identificação da tabela correspondente 
         is_in_staging: True # Bool [True, False], whether the column is in the staging table
         is_partition: False # Bool [True, False], whether the column is a partition.

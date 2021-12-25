@@ -4,7 +4,6 @@ on:
   pull_request_target:
     types:
       - labeled
-
 jobs:
   guard:
     runs-on: ubuntu-latest
@@ -25,7 +24,6 @@ jobs:
           steps.changes.outputs.workflows == 'true' &&
           github.event.pull_request.head.repo.full_name != github.repository
         run: exit 1
-
   get-changes:
     needs: guard
     runs-on: ubuntu-latest
@@ -57,22 +55,22 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9.x'
+          python-version: "3.9.x"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install basedosdados==1.5.2 pyarrow pytest toml
-      - name: Set up basedosdados environment
-        run: |
-          cd .github/workflows/env-setup
-          python env_setup.py
+          pip install basedosdados==1.6.0 pyarrow pytest toml
+      - name: Set up base dos dados environment
         shell: bash
-        env:
-          BUCKET_NAME: basedosdados-dev
-          PROJECT_NAME_PROD: basedosdados-dev
-          PROJECT_NAME_STAGING: basedosdados-dev
+        env:     
+          BUCKET_NAME: basedosdados
+          PROJECT_NAME_PROD: basedosdados
+          PROJECT_NAME_STAGING: basedosdados-staging
           GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
           GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
+          CKAN_URL: "https://basedosdados.org"
+          CKAN_API_KEY: ${{ secrets.CKAN_PROD }}
+        run: python .github/workflows/env-setup/env_setup.py
       - name: Test data and fill report
         run: pytest -v .github/workflows/data-check
         shell: bash

@@ -1,0 +1,68 @@
+O Indicador classifica o docente segundo a adequação de sua formação inicial a cada disciplina que leciona na educação básica, levando-se em conta as normatizações legais nacionais vigentes. A tabela apresenta o percentual de docência na respectiva unidade da agregação classificadas em cada uma das categorias do indicador.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Lucas Moreira
+Email: lucas.moreira@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- id_escola
+- modalidade
+- grupo
+
+
+
+
+Cobertura Temporal
+------------------
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+
+
+
+
+Cobertura Espacial
+------------------
+- b
+- r
+- a
+
+
+
+
+Tratamento
+----------
+Reshape da base e adequação aos padrões da BD
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year

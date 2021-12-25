@@ -23,7 +23,7 @@ CREATE VIEW basedosdados-dev.br_inpe_prodes.desmatamento_municipio AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(area AS FLOAT64) area,
+SAFE_CAST(area AS INT64) area,
 SAFE_CAST(desmatado AS FLOAT64) desmatado,
 SAFE_CAST(incremento AS FLOAT64) incremento,
 SAFE_CAST(floresta AS FLOAT64) floresta,

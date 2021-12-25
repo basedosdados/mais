@@ -1,5 +1,5 @@
 
-# Colaborando com dados na BD+
+# Dados na BD+
 
 Nosso objetivo na Base dos Dados Mais (BD+) é criar um repositório de dados **universal** e de **alta qualidade**:
 
@@ -9,10 +9,11 @@ Nosso objetivo na Base dos Dados Mais (BD+) é criar um repositório de dados **
 
 Isso já é um desafio em projetos pequenos, e é ainda mais _em escala_. Por isso, desenvolvemos e seguimos uma série de padrões e procedimentos de controle de qualidade, e criamos uma infraestrutura para facilitar a subida de dados por qualquer pessoa ou instituição (do nosso time de dados ou colaboradores externos).
 
-**Quer subir dados na BD+ e nos ajudar a construir esse repositório?**
-Maravilha! Vamos seguir com os passos abaixo. Ao longo da explicação
-vamos seguir um exemplo já pronto com dados da
-[RAIS](https://basedosdados.org/dataset/br-me-rais).
+# Colaborando com Dados
+
+Quer subir dados na BD+ e nos ajudar a construir esse repositório? Maravilha! Vamos seguir com os passos abaixo.
+
+Ao longo da explicação, vamos sempre seguir um exemplo já pronto com dados da [RAIS](https://basedosdados.org/dataset/br-me-rais).
 
 !!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
 
@@ -25,17 +26,14 @@ vamos seguir um exemplo já pronto com dados da
 5. [Organizar arquivos auxiliares, se necessário](#5-organizar-arquivos-auxiliares-se-necessario).
 6. [Criar tabela dicionário, se necessário](#6-criar-tabela-dicionario-se-necessario).
 7. [Subir arquiteturas, dados e arquivos auxiliares no Google Cloud](#7-subir-arquiteturas-dados-e-arquivos-auxiliares-no-google-cloud).
-8. [Enviar tudo para revisão](#8-enviar-tudo-para-revisao).
+8. [Validar e publicar metadados](#8-validar-e-publicar-metadados).
+9. [Enviar tudo para revisão](#9-enviar-tudo-para-revisao).
 
-## 1. Informe seu interesse para a gente - TODO: MELHORAR!
+## 1. Informe seu interesse para a gente
 
-Mantemos metadados de bases que ainda não estão na BD+ em nossa [tabela de prioridade de bases](https://docs.google.com/spreadsheets/d/1jnmmG4V6Ugh_-lhVSMIVu_EaL05y1dX9Y0YW8G8e_Wo/edit?usp=sharing). Para subir uma base de seu interesse na BD+, adicione os seus metadados de acordo com as colunas da tabela.
+Mantemos a lista de bases que ainda não estão na BD+ no nosso [Github](https://github.com/basedosdados/mais/issues?q=is%3Aopen+is%3Aissue+label%3Adata+label%3Aenhancement). Para começar a subir uma base do seu interesse, basta abrir um [novo issue](https://github.com/basedosdados/mais/issues/new?assignees=&labels=data&template=br_novos_dados.md&title=%5Bdados%5D+%3Cdataset_id%3E) de dados e preencher as informações indicadas por lá.
 
-- **Inclua uma linha por tabela do conjunto de dados.**
-- **Preencha os campos cuidadosamente**. Além dos dados gerais sobre a tabela, adicione as classificações de `Facilidade` e `Importância` e o campo de `Prioridade` será gerado automaticamente.
-- Por fim, **crie um issue no Github com o [template "Novos dados"](https://github.com/basedosdados/mais/issues/new?assignees=rdahis&labels=data&template=br_novos_dados.md&title=%5Bdados%5D+%3Cadd+nome%2C+ex%3A+Censo+Escolar+INEP%3E)**
-
-!!! Info "Caso sua base já esteja listada, basta marcar seu usuário do Github na coluna `Pessoa responsável`."
+!!! Info "Caso sua base já esteja listada, basta marcar seu usuário do Github como `assignee`."
 
 !!! Info "Fique à vontade para conversar com a gente e tirar dúvidas direto no nosso servidor no [Discord](https://discord.gg/huKWpsVYx4)."
 
@@ -82,7 +80,7 @@ Perguntas que uma arquitetura deve responder:
 
 No exemplo da RAIS, [aqui](https://drive.google.com/drive/folders/1OtsucP_KhiUEJI6F6k_cagvXfwZCFZF2?usp=sharing) estão as tabelas de arquitetura já preenchidas. Sempre seguindo nosso [manual de estilo](/mais/style_data), nós renomeamos, definimos o tipo, preenchemos descrições, indicamos se há dicionário ou diretório, preenchemos campos (e.g. cobertura temporal e unidade de medida) e fizemos a compatibilização entre anos para todas as variáveis (colunas).
 
-A compatibilização entre anos, caso necessária, é feita criando novas colunas à direita chamadas `nome_original_YYYY`, em ordem temporal descendente (2021, 2020, 2019, ...). Nessas colunas incluímos _todas_ as variáveis de cada ano. Para as que forem eventualmente excluídas da versão em produção, deixamos seu nome como `(deletado)` e não preenchemos nenhum metadado.
+A compatibilização entre anos, caso necessária, é feita criando novas colunas à direita chamadas `nome_original_YYYY`, em ordem temporal descendente (e.g. 2022, 2021, 2020, ...). Nessas colunas incluímos _todas_ as variáveis de cada ano. Para as que forem eventualmente excluídas da versão em produção, deixamos seu nome como `(deletado)` e não preenchemos nenhum metadado.
 
 !!! Tip "Quando terminar de preencher as tabelas de arquitetura, entre em contato com a equipe da Base dos Dados ou nossa comunidade para validar tudo. É importante ter certeza que está fazendo sentido _antes_ de começar a escrever código."
 
@@ -188,7 +186,27 @@ Consulte também nossa [API](/mais/reference_api_cli) para mais detalhes de cada
 
 É sempre bom abrir o console do BigQuery e rodar algumas _queries_ para testar se foi tudo publicado corretamente. Estamos desenvolvendo testes automáticos para facilitar esse processo no futuro.
 
-## 8. Enviar tudo para revisão
+## 8. Validar e publicar metadados
+
+Para publicar os metadados preenchidos nos arquivos `dataset_config.yaml` e `table_config.yaml`, o processo é simples.
+
+Em primeiro lugar, é preciso colocar suas credenciais do CKAN no arquivo `~/.basedosdados/config.toml`, criado ao rodar o comando de configuração do cliente `basedosdados` descrito na [seção 7](#7-subir-arquiteturas-dados-e-arquivos-auxiliares-no-google-cloud). Para isso, basta preencher os campos `api_key` e `url` da seção `[ckan]` do arquivo.
+
+Em seguida, é preferencial validar os metadados a partir da API do website. Para validar metadados de bases, isso é feito através do comando `basedosdados metadata validate [DATASET_ID]`. Para validar metadados de tabelas, basta rodar `basedosdados metadata validate [DATASET_ID] [TABLE_ID]`.
+
+Por fim, para publicar esses metadados já preenchidos e validados, basta rodar `basedosdados metadata publish [DATASET_ID]` para bases e/ou `basedosdados metadata publish [DATASET_ID] [TABLE_ID]` para tabelas. Caso prefira publicar mudanças de um dataset e uma tabela de uma vez só, basta usar o comando da seguinte forma: `basedosdados metadata publish [DATASET_ID] [TABLE_ID] --all=True`.
+
+#### Atualizando metadados de bases ou tabelas já existentes
+
+Através do módulo `metadata` é possível também trabalhar com bases e tabelas já existentes na plataforma. Elas podem ser atualizadas a partir do procedimento que descrevemos a seguir.
+
+Primeiro, rodamos `basedosdados metadata create [DATASET_ID]` para trazer os metadados disponíveis do CKAN na forma do `dataset_config.yaml`, que, dessa vez, virá já preenchido. Fazemos o mesmo para gerar o `table_config.yaml` das tabelas que quisermos atualizar: `basedosdados metadata create [DATASET_ID] [TABLE_ID]`. Em seguida, preenchemos os novos valores dos metadados.
+
+Ao terminar o processo, para ter certeza que estamos trabalhando em cima de metadados atualizados, podemos rodar o seguinte comando: `basedosdados is_updated [DATASET_ID]` e/ou `basedosdados is_updated [DATASET_ID] [TABLE_ID]`.
+
+Por fim, basta rodar, mais uma vez, o `basedosdados metadata validate [DATASET_ID]` e/ou o `basedosdados metadata validate [DATASET_ID] [TABLE_ID]` e, em seguida, `basedosdados metadata publish [DATASET_ID]` e/ou `basedosdados metadata publish [DATASET_ID] [TABLE_ID]`.
+
+## 9. Enviar tudo para revisão
 
 Ufa, é isso! Agora só resta enviar tudo para revisão no [repositório](https://github.com/basedosdados/mais) da Base dos Dados.
 

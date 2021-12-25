@@ -1,3 +1,11 @@
+# test_select_all_works:
+#   id: {{ dataset_id }}/{{ table_id }}/1
+#   name: Check if select all  works
+#   query: |
+#     SELECT EXISTS (
+#         SELECT * 
+#         FROM `{{ project_id }}.{{ dataset_id }}.{{ table_id }}`
+#     ) AS sucess
 
 test_table_exists:
   id: {{ dataset_id }}/{{ table_id }}/0
@@ -6,7 +14,7 @@ test_table_exists:
     SELECT "{{ table_id }}" IN (
         SELECT `table_name`
         FROM `{{ project_id }}.{{ dataset_id }}.INFORMATION_SCHEMA.TABLES`
-    ) AS sucess
+    ) AS success
 
 test_table_has_no_null_column:
   id: {{ dataset_id }}/{{ table_id }}/2
@@ -26,14 +34,19 @@ test_table_has_no_null_column:
     SELECT col_name, nulls_count / total_count null_percent
     FROM n_nulls, n_total
 
-test_primary_key_has_unique_values:
+test_identifying_column_has_unique_values:
   id: {{ dataset_id }}/{{ table_id }}/3
-  name: Check if primary key has unique values
+  name: Check if identifying column has unique values
   query: |
-    {% if primary_keys is defined and primary_keys is not none -%}
+    {% if identifying_columns is defined and identifying_columns is not none -%}
     SELECT 
       COUNT(
-        DISTINCT CONCAT({{ primary_keys|join(", \"&\", ") }})
+        DISTINCT CONCAT(
+          {% for identifying_column in identifying_columns -%}
+            IFNULL(SAFE_CAST({{ identifying_column }} AS STRING), " "), "&",
+          {% endfor -%}
+          "EOF"
+        )
       ) / COUNT(*) unique_percentage 
     FROM `{{ project_id }}.{{ dataset_id }}.{{ table_id }}` t
     {% endif %}
