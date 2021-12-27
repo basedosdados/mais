@@ -16,6 +16,7 @@ TIPOS:
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
+
 CREATE VIEW basedosdados-dev.br_me_rais.microdados_estabelecimentos AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
@@ -24,10 +25,10 @@ SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(quantidade_vinculos_ativos AS INT64) quantidade_vinculos_ativos,
 SAFE_CAST(quantidade_vinculos_clt AS INT64) quantidade_vinculos_clt,
 SAFE_CAST(quantidade_vinculos_estatutarios AS INT64) quantidade_vinculos_estatutarios,
-SAFE_CAST(natureza_estabelecimento AS STRING) natureza_estabelecimento,
+SAFE_CAST(natureza AS STRING) natureza,
 SAFE_CAST(natureza_juridica AS STRING) natureza_juridica,
-SAFE_CAST(tamanho_estabelecimento AS STRING) tamanho_estabelecimento,
-SAFE_CAST(tipo_estabelecimento AS STRING) tipo_estabelecimento,
+SAFE_CAST(tamanho AS STRING) tamanho,
+SAFE_CAST(tipo AS STRING) tipo,
 SAFE_CAST(indicador_cei_vinculado AS INT64) indicador_cei_vinculado,
 SAFE_CAST(indicador_pat AS INT64) indicador_pat,
 SAFE_CAST(indicador_simples AS INT64) indicador_simples,
@@ -38,7 +39,7 @@ SAFE_CAST(cnae_2 AS STRING) cnae_2,
 SAFE_CAST(cnae_2_subclasse AS STRING) cnae_2_subclasse,
 SAFE_CAST(subsetor_ibge AS STRING) subsetor_ibge,
 SAFE_CAST(subatividade_ibge AS STRING) subatividade_ibge,
-SAFE_CAST(cep_estabelecimento AS STRING) cep_estabelecimento,
+SAFE_CAST(cep AS STRING) cep,
 SAFE_CAST(bairros_sp AS STRING) bairros_sp,
 SAFE_CAST(distritos_sp AS STRING) distritos_sp,
 SAFE_CAST(bairros_fortaleza AS STRING) bairros_fortaleza,

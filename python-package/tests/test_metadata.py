@@ -121,7 +121,7 @@ def test_create_partition_columns_from_existent_table(
     assert existent_metadata_path.exists()
 
     metadata_dict = existent_metadata.local_metadata
-    assert metadata_dict.get("partitions") == "ano, sigla_uf"
+    assert metadata_dict.get("partitions") == "ano, sigla_uf, id_municipio"
 
 
 def test_create_partition_columns_from_user_input(
