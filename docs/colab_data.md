@@ -1,215 +1,314 @@
 
-# Dados na BD+
+# Suba dados na BD+
 
-Nosso objetivo na Base dos Dados Mais (BD+) é criar um repositório de dados **universal** e de **alta qualidade**:
+## Por que minha organização deve subir dados na BD+?
 
-* **Universal**: Isso significa, em princípio, incluir todas as bases de dados do Brasil e do mundo. Pouco ambicioso né :-).
+- **Capacidade de cruzar suas bases com dados de diferentes
+  organizações** de forma simples e fácil. Já são centenas de conjuntos
+  dados públicos das maiores organizações do Brasil e do mundo presentes
+  no nossod *datalake*.
 
-* **Alta qualidade**: Ter alta qualidade significa manter todos nossos dados estruturados, limpos, bem documentados, consistentes entre si e atualizados.
+- **Compromisso com a transparência, qualidade dos dados e
+  desenvolvimento de melhores pesquisas, análises e soluções** para a
+  sociedade. Não só democratizamos o acesso a dados abertos, mas dados
+  de qualidade. Temos um time especializado que revisa e garante a qualidade dos
+  dados adicionados ao *datalake*.
 
-Isso já é um desafio em projetos pequenos, e é ainda mais _em escala_. Por isso, desenvolvemos e seguimos uma série de padrões e procedimentos de controle de qualidade, e criamos uma infraestrutura para facilitar a subida de dados por qualquer pessoa ou instituição (do nosso time de dados ou colaboradores externos).
+- **Participação de uma comunidade que cresce cada vez mais**: milhares
+  de jornalistas, pesquisadores(as), desenvolvedores(as), já utilizam e
+  acompanham a Base dos Dados.
+  <!-- TODO: Colocar aqui o link do nosso painel de audiencia quando tiver pronto :) -->
 
-# Colaborando com Dados
+## Passo a passo para subir dados
 
-Quer subir dados na BD+ e nos ajudar a construir esse repositório? Maravilha! Vamos seguir com os passos abaixo.
+Quer subir dados na BD+ e nos ajudar a construir esse repositório?
+*Maravilha!* Organizamos tudo o que você precisa no manual abaixo, em
+menos de 10 passos.
 
-Ao longo da explicação, vamos sempre seguir um exemplo já pronto com dados da [RAIS](https://basedosdados.org/dataset/br-me-rais).
+Para facilitar a explicação, vamos seguir um exemplo já pronto com dados da [RAIS](https://basedosdados.org/dataset/br-me-rais).
 
-!!! Tip "Sugerimos que entre em nosso [canal no Discord](https://discord.gg/huKWpsVYx4) para tirar dúvidas e interagir com outros(as) colaboradores(as)! :)"
+!!! Tip "Você pode navegar pelas etapas no menu à esquerda."
+    Sugerimos fortemente que entre em nosso [canal no
+    Discord](https://discord.gg/huKWpsVYx4) para tirar dúvidas e
+    interagir com a equipe e outros(as) colaboradores(as)! 😉
 
-## Qual o procedimento?
+### Antes de começar
 
-1. [Informe seu interesse para a gente](#1-informe-seu-interesse-para-a-gente).
-2. [Baixar nossa pasta _template_ para dados](#2-baixar-nossa-pasta-template-para-dados).
-3. [Preencher as tabelas de arquitetura](#3-preencher-as-tabelas-de-arquitetura).
-4. [Escrever código de captura e limpeza de dados](#4-escrever-codigo-de-captura-e-limpeza-de-dados).
-5. [Organizar arquivos auxiliares, se necessário](#5-organizar-arquivos-auxiliares-se-necessario).
-6. [Criar tabela dicionário, se necessário](#6-criar-tabela-dicionario-se-necessario).
-7. [Subir arquiteturas, dados e arquivos auxiliares no Google Cloud](#7-subir-arquiteturas-dados-e-arquivos-auxiliares-no-google-cloud).
-8. [Validar e publicar metadados](#8-validar-e-publicar-metadados).
-9. [Enviar tudo para revisão](#9-enviar-tudo-para-revisao).
+Alguns conhecimentos são necessárias para realizar esse processo:
 
-## 1. Informe seu interesse para a gente
+- **Python, R, SQL e/ou Stata**, para criar os códigos de captura e limpeza dos dados.
+- **Linha de comando**, para configurar seu ambiente local
+  e conexão com o Google Cloud.
+- **Github**, para subir seu código para revisão da
+  nossa equipe.
 
-Mantemos a lista de bases que ainda não estão na BD+ no nosso [Github](https://github.com/basedosdados/mais/issues?q=is%3Aopen+is%3Aissue+label%3Adata+label%3Aenhancement). Para começar a subir uma base do seu interesse, basta abrir um [novo issue](https://github.com/basedosdados/mais/issues/new?assignees=&labels=data&template=br_novos_dados.md&title=%5Bdados%5D+%3Cdataset_id%3E) de dados e preencher as informações indicadas por lá.
+!!! Tip "Não tem alguma dessas habilidades mas quer colaborar?"
+    Temos um time de dados que pode te ajudar, basta entrar no [nosso
+    Discord](https://discord.gg/huKWpsVYx4) e mandar uma mensagem em #quero-contribuir.
 
-!!! Info "Caso sua base já esteja listada, basta marcar seu usuário do Github como `assignee`."
+### 1. Informar seu interesse para a gente
 
-!!! Info "Fique à vontade para conversar com a gente e tirar dúvidas direto no nosso servidor no [Discord](https://discord.gg/huKWpsVYx4)."
+Mantemos a lista de conjuntos que ainda não estão na BD+ no nosso [Github](https://github.com/basedosdados/mais/issues?q=is%3Aopen+is%3Aissue+label%3Adata+label%3Aenhancement). Para começar a subir uma base do seu interesse, basta abrir um [novo issue](https://github.com/basedosdados/mais/issues/new?assignees=&labels=data&template=br_novos_dados.md&title=%5Bdados%5D+%3Cdataset_id%3E) de dados e preencher as informações indicadas por lá.
 
-## 2. Baixar nossa pasta _template_ para dados
+!!! Info "Caso sua base (conjunto) já esteja listada, basta marcar seu usuário do Github como `assignee`."
 
-Baixe [aqui](https://drive.google.com/drive/folders/1xXXon0vdjSKr8RCNcymRdOKgq64iqfS5?usp=sharing) a nossa pasta _template_ para colaboração de dados, e renomeie ela para `<dataset_id>`. Ela facilita todos os passos daqui pra frente.
+### 2. Baixar nossa pasta _template_ para dados
 
-Sua estrutura é bem simples:
+[Baixe aqui a pasta
+_template_](https://drive.google.com/drive/folders/1xXXon0vdjSKr8RCNcymRdOKgq64iqfS5?usp=sharing)
+e renomeie para o nome do seu conjunto de dados, `<dataset_id>`
+([veja aqui como nomear seu conjunto](../style_data)). Ela facilita todos os
+passos daqui pra frente. Sua
+estrutura é a seguinte:
 
-- `/<dataset_id>`
-  - `/code`
-      - Contém todos os _scripts_ (códigos) necessários à captura e limpeza dos dados (discutido no passo [4](#4-escrever-codigo-de-captura-e-limpeza-de-dados)).
-      - Nessa configuração, toda a estrutura de código será com atalhos _relativos_ à pasta raíz, usando as demais pastas criadas.
-  - `/input`
-      - Contém todos os arquivos com dados originais, exatamente como baixados da fonte primária.
-      - *Esses arquivos não devem jamais ser modificados.*
-  - `/output`
-      - Contém arquivos finais, já no formato pronto para subir na BD+.
-  - `/tmp`
-      - Contém quaisquer arquivos temporários criados pelo código em `/code` no processo de limpeza e tratamento.
-  - `/extra`
-      - `/architecture`
-          - Contém as tabelas de arquitetura (discutido no passo [3](#3-preencher-as-tabelas-de-arquitetura)).
-      - `/auxiliary_files`
-          - Contém quaisquer arquivos auxiliares aos dados (discutido no passo [5](#5-se-necessario-organizar-arquivos-auxiliares)).
-      - `dicionario.csv`
-          - Tabela dicionário mapeando chaves a valores para todas as tabelas da base (discutido no passo [6](#6-se-necessario-criar-tabela-dicionario)).
+- `<dataset_id>/`
+  - `code/`: Códigos necessários à **captura** e **limpeza** dos dados
+    ([vejo no passo
+    4](#4-escrever-codigo-de-captura-e-limpeza-de-dados)).
+  - `input/`: Contém todos os arquivos com dados originais, exatamente
+    como baixados da fonte primária **Esses arquivos não devem ser
+    modificados.**
+  - `output/`: Arquivos finais, já no formato pronto para subir na BD+.
+  - `tmp/`: Quaisquer arquivos temporários criados pelo código em `/code` no processo de limpeza e tratamento.
+  - `extra/`
+    - `architecture/`: Tabelas de arquitetura ([veja no passo 3](#3-preencher-as-tabelas-de-arquitetura)).
+    - `auxiliary_files/`: Arquivos auxiliares aos dados ([veja no passo 5](#5-caso-necessario-organizar-arquivos-auxiliares)).
+    - `dicionario.csv`: Tabela dicionário de todo o conjunto de dados ([veja no passo
+          6](#6-recomendado-criar-tabela-dicionario)).
 
-## 3. Preencher as tabelas de arquitetura
+### 3. Preencher as tabelas de arquitetura
 
-Definir e preencher as tabelas de arquitetura são partes fundamentais da colaboração de dados. É aqui que (1) definimos como estarão estruturadas as tabelas em produção, (2) discutimos nomeação e ordenamento de colunas, (3) preenchemos os metadados de colunas, e (4) compatibilizamos dados entre anos quando há inconsistências.
+As tabelas de arquitetura determinam **qual a estrutura de
+cada tabela do seu conjunto de dados**. Elas definem, por exemplo, o nome, ordem e metadados das colunas, e
+como uma coluna deve ser tratada quando há mudanças em versões (por
+exemplo, e uma coluna muda de nome de um ano para o outro).
 
-Cada base tem 1 ou mais tabelas de dados. Cada tabela de dados tem sua tabela de arquitetura.
+!!! Info "Cada tabela do conjunto de dados deve ter sua própria tabela de arquitetura (planilha), que pode ser preenchida no Google Drive ou localmente (Excel, editor de texto)."
 
-Tabelas de arquitetura podem ser preenchidas no Google Drive ou localmente (Excel, editor de texto).
-
+<!-- 
+TODO: Não vejo relação dessas perguntas com o exemplo dado
+da tabela de arquitetura da RAIS.
 Perguntas que uma arquitetura deve responder:
-
-- *Quais serão as tabelas finais na base?* Essas não precisam ser exatamente o que veio nos dados brutos.
-- *Qual é nível da observação de cada tabela?* O "nível da observação" é
+* *Quais serão as tabelas finais na base?* Essas não precisam ser
+  exatamente o que veio nos dados brutos. -> não tem isso no exemplo
+* *Qual é nível da observação de cada tabela?* O "nível da observação" é
   a menor unidade a que se refere cada linha na tabela (ex: municipio-ano, candidato,
-  estabelecimento-cnae).
-- *Será gerada alguma tabela derivada com agregações em cima dos dados originais?*
+  estabelecimento-cnae). -> não tem isso no exemplo
+* *Será gerada alguma tabela derivada com agregações em cima dos dados
+  originais?* -> não tem isso no exemplo -->
 
-No exemplo da RAIS, [aqui](https://drive.google.com/drive/folders/1OtsucP_KhiUEJI6F6k_cagvXfwZCFZF2?usp=sharing) estão as tabelas de arquitetura já preenchidas. Sempre seguindo nosso [manual de estilo](/mais/style_data), nós renomeamos, definimos o tipo, preenchemos descrições, indicamos se há dicionário ou diretório, preenchemos campos (e.g. cobertura temporal e unidade de medida) e fizemos a compatibilização entre anos para todas as variáveis (colunas).
+#### Exemplo: RAIS - Tabelas de arquitetura
 
-A compatibilização entre anos, caso necessária, é feita criando novas colunas à direita chamadas `nome_original_YYYY`, em ordem temporal descendente (e.g. 2022, 2021, 2020, ...). Nessas colunas incluímos _todas_ as variáveis de cada ano. Para as que forem eventualmente excluídas da versão em produção, deixamos seu nome como `(deletado)` e não preenchemos nenhum metadado.
+As tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://drive.google.com/drive/folders/1OtsucP_KhiUEJI6F6k_cagvXfwZCFZF2?usp=sharing). Seguindo nosso [manual de estilo](../style_data), nós renomeamos, definimos o tipo, preenchemos descrições, indicamos se há dicionário ou diretório, preenchemos campos (e.g. cobertura temporal e unidade de medida) e fizemos a compatibilização entre anos para todas as variáveis (colunas).
+
+Nas tabelas desse conjunto existiam colunas que deixaram de existir em
+determinados anos. Por isso, foi necessário compatibilizar:
+criamos colunas à direita chamadas `nome_original_YYYY`, em ordem descendente (e.g. 2022,
+2021, 2020, ...). Nessas colunas incluímos _todas_ as variáveis de cada
+ano.
+
+Para as que foram excluídas da versão em produção,
+deixamos seu nome como `(deletado)` e não preenchemos nenhum metadado.
+Por exemplo, a coluna `Municipio` da tabela `microdados_vinculos` não
+foi adicionada pois por padrão usamos somente o código IBGE para
+identificar municípios (seu nome fica numa tabela de
+[Diretórios](../style_data/#diretorios)). Logo, ela aparece com o nome
+`(deletado)` na respectiva tabela de arquitetura (penúltima linha).
 
 !!! Tip "Quando terminar de preencher as tabelas de arquitetura, entre em contato com a equipe da Base dos Dados ou nossa comunidade para validar tudo. É importante ter certeza que está fazendo sentido _antes_ de começar a escrever código."
 
-## 4. Escrever código de captura e limpeza de dados
+### 4. Escrever código de captura e limpeza de dados
 
-Depois de validadas as tabelas de arquitetura podemos escrever o código de captura e limpeza dos dados. Exigimos que tudo esteja escrito em [Python](https://www.python.org/), [R](https://www.r-project.org/), ou [Stata](https://www.stata.com/). Podem ser código padrão ou cadernos (Colab, Jupyter, Rmarkdown, etc).
+Após validadas as tabelas de arquitetura, podemos escrever os códigos de
+**captura** e **limpeza** dos dados.
 
-No exemplo da RAIS, temos todo o código escrito em Stata para consulta [aqui](https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code).
+- **Captura**: Códido que baixa automaticamente todos os dados originais e os salva em `/input`. Esses dados podem estar disponíveis em portais ou links FTP, podem ser raspados de sites, entre outros.
 
-#### Captura
+- **Limpeza**: Código que transforma os dados originais salvos em `/input` nos dados limpos prontos para serem subidos na BD+ salvos em `/output`, tudo baseado nas tabelas de arquitetura.
 
-Esse script baixa automaticamente todos os dados originais e os salva em `/input`. Esses dados podem estar disponíveis em portais ou links FTP, podem ser raspados de sites, entre outros.
+Cada tabela limpa para produção pode ser salva como um arquivo `.csv` único ou, caso seja muito grande (e.g. acima de 100-200 mb), ser particionada no formato [Hive](https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) em vários sub-arquivos `.csv`. Nossa recomendação é particionar tabelas por `ano`, `mes`, `sigla_uf`, ou no máximo por `id_municipio`.
 
-#### Limpeza
+!!! Tip "No pacote `basedosdados` você encontra funções úteis para limpeza dos dados"
+    Definimos funções para particionar tabelas de forma automática,
+    criar variáveis comuns (e.g. `sigla_uf` a partir de `id_uf`) e
+    outras. Veja em [Python](../api_reference_python) e [R](../api_reference_r)
 
-Esse script transforma os dados originais salvos em `/input` nos dados limpos prontos para serem subidos na BD+ salvos em `/output`, tudo baseado nas tabelas de arquitetura.
+#### Padrões necessários no código
 
-Cada tabela limpa para produção pode ser salva como um arquivo `.csv` único ou, caso seja muito grande (e.g. acima de 100-200 mb), ser particionada no formato [Hive](https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) em vários sub-arquivos `.csv`. Nossa recomendação é particionar tabelas por `ano`, `mes`, `sigla_uf`, ou no máximo por `id_municipio`. Para a tabela `microdados_vinculos` da RAIS nós particionamos por `ano` e `sigla_uf`, com a estrutura de pastas sendo `/microdados_vinculos/ano=YYYY/sigla_uf=XX`.
+- Devem ser escritos em [Python](https://www.python.org/),
+  [R](https://www.r-project.org/), ou [Stata](https://www.stata.com/) -
+  para que a revisão possa ser realizada pela equipe.
+- Pode estar em script (`.py`, `.r`, ...) ou *notebooks* (Google Colab, Jupyter, Rmarkdown, etc).
+- Os caminhos de arquivos devem ser atalhos _relativos_ à pasta raíz
+  (`<dataset_id>`), ou seja, não devem depender dos caminhos do seu
+  computador.
+- A limpeza deve seguir nosso [manual de estilo](../style_data) e as [melhores práticas de programação](https://en.wikipedia.org/wiki/Best_coding_practices).
 
-Nós já criamos funções úteis para limpeza nas nossas APIs de Python e R. Por exemplo, com o pacote `basedosdados` você pode ler tabelas muito grandes, particionar tabelas automaticamente, gerar certas variáveis comuns (e.g. `sigla_uf` a partir de `id_uf`), etc.
+#### Exemplo: RAIS - Código de limpeza
 
-Tudo nesse passo deve seguir nosso [manual de estilo](/mais/style_data) e as [melhores práticas de programação](https://en.wikipedia.org/wiki/Best_coding_practices).
+O código de limpeza foi construído em Stata e [pode ser consultado
+aqui](https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code).
 
-## 5. Se necessário, organizar arquivos auxiliares
+A tabela `microdados_vinculos` da RAIS é uma tabela muito grande
+(+250GB) por isso nós particionamos por `ano` e `sigla_uf`. O
+particionamento foi feito usando a estrutura de pastas
+`/microdados_vinculos/ano=YYYY/sigla_uf=XX`.
+
+### 5. (Caso necessário) Organizar arquivos auxiliares
 
 É comum bases de dados serem distribuídas com arquivos auxiliares. Esses podem incluir notas técnicas, descrições de coleta e amostragem, etc. Para ajudar usuários da Base dos Dados terem mais contexto e entenderem melhor os dados, organize todos esses arquivos auxiliares em `/extra/auxiliary_files`.
 
 Fique à vontade para estruturar sub-pastas como quiser lá dentro. O que importa é que fique claro o que são esses arquivos.
 
-## 6. Se necessário, criar tabela dicionário
+### 6. (Recomendado) Criar tabela dicionário
 
-É também comum que bases de dados grandes sejam estruturadas de forma a precisar de um dicionário. Para poupar espaço, variáveis STRING são convertidas em variáveis numéricas com cada chave mapeando um valor único. Muitas vezes, especialmente com bases antigas, há múltiplos dicionários em formatos Excel ou outros. Na Base dos Dados nós unificamos tudo em um único arquivo em formato `.csv`.
+Muitas vezes, especialmente com bases antigas, há múltiplos dicionários
+em formatos Excel ou outros. Na Base dos Dados nós unificamos tudo em um
+único arquivo em formato `.csv` - um único dicionário para todas as
+colunas de todas as tabelas do seu conjunto.
 
-Descrevemos nossas várias diretrizes para dicionários no nosso [manual de estilo](/mais/style_data). Por exemplo:
+!!! Info "Detalhes importantes de como construir seu dicionário estão no nosso [manual de estilo](../style_data/#dicionarios)."
 
-- Cada base inclui somente um dicionário (que cobre uma ou mais tabelas).
-- Para cada tabela, coluna e cobertura temporal, cada chave mapeia unicamente um valor.
-- Chaves não podem ter valores nulos.
-- Dicionários devem cobrir todas as chaves disponíveis nas tabelas originais.
-- Chaves não possuem zeros à esquerda. Exemplo: `01` deveria ser `1`.
-- Valores são padronizados: sem espaços extras, inicial maiúscula e resto minúsculo, etc.
+#### Exemplo: RAIS - Dicionário
 
-No exemplo da RAIS nós criamos um dicionário completo [aqui](https://docs.google.com/spreadsheets/d/12Wwp48ZJVux26rCotx43lzdWmVL54JinsNnLIV3jnyM/edit?usp=sharing).
+O dicionário completo [pode ser consultado
+aqui](https://docs.google.com/spreadsheets/d/12Wwp48ZJVux26rCotx43lzdWmVL54JinsNnLIV3jnyM/edit?usp=sharing).
+Ele já possui a estrutura padrão que utilizamos para dicionários.
 
-## 7. Subir arquiteturas, dados e arquivos auxiliares no Google Cloud
+### 7. Subir tudo no Google Cloud
 
-Tudo pronto! Agora só falta subir as coisas para o Google Cloud e depois enviar para revisão.
-
-Desenvolvemos um cliente `basedosdados` (disponível para linha de comando e Python por enquanto) para facilitar esse processo e indicar configurações básicas que devem ser preenchidas sobre os dados.
+Tudo pronto! Agora só falta subir para o Google Cloud e enviar para
+revisão. Para isso, vamos usar o cliente `basedosdados` (disponível em
+linha de comando e Python) que facilita as configurações e etapas do processo.
 
 #### Configure seu projeto no Google Cloud e um _bucket_ no Google Storage
 
 Os dados vão passar ao todo por 3 lugares no Google Cloud:
 
-1. Storage: local onde serão armazenados o arquivos (arquiteturas, dados, arquivos auxiliares).
-2. BigQuery: banco de dados do Google, dividido em 2 projetos/tipos de tabela:
-    - Staging: banco para teste e tratamento final do conjunto de dados
-    - Produção: banco oficial de publicação dos dados (`basedosdados`! ou o seu mesmo caso queira reproduzir o ambiente)
+1. **Storage**: local onde serão armazenados o arquivos "frios" (arquiteturas, dados, arquivos auxiliares).
+2. **BigQuery**: super banco de dados do Google, dividido em 2 projetos/tipos de tabela:
+    - *Staging*: banco para teste e tratamento final do conjunto de dados
+    - *Produção*: banco oficial de publicação dos dados (nosso projeto `basedosdados`! ou o seu mesmo caso queira reproduzir o ambiente)
 
-Para criar um projeto no Google Cloud basta ter um email cadastrado no Google. Seguindo o passo-a-passo:
+É necessário ter uma conta Google e um projeto (gratuito) no Google
+Cloud. Para criar seu projeto basta:
 
-- Acesse o [link](https://console.cloud.google.com/projectselector2/home/dashboard) e aceite o Termo de Serviços do Google Cloud.
-- Clique em `Create Project/Criar Projeto` - escolha um nome bacana para o seu projeto, ele terá também um `Project ID` que será utilizado para configuração local.
-- Depois de criado o projeto, vá até a funcionalidade de [Storage](https://console.cloud.google.com/storage) e crie uma pasta, seu _bucket_, para você subir os dados.
+1. Acessar o [link](https://console.cloud.google.com/projectselector2/home/dashboard) e aceitar o Termo de Serviços do Google Cloud.
+2. Clicar em `Create Project/Criar Projeto` - escolha um nome bacana para o seu projeto, ele terá também um `Project ID` que será utilizado para configuração local.
+3. Depois de criado o projeto, vá até a funcionalidade de
+   [Storage](https://console.cloud.google.com/storage) e crie uma pasta
+   (_bucket_) para subir os dados (pode ter o mesmo nome do projeto).
 
-#### Configure o CLI localmente, clone nosso repositório e abra uma nova _branch_
+#### Configure suas credenciais localmente e prepare o ambiente
 
 No seu terminal:
 
-- Instale nosso cliente: `pip install basedosdados`.
-- Rode `basedosdados config init` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
+1. Instale nosso cliente: `pip install basedosdados`.
+2. Rode `basedosdados config init` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
+
 > Caso seu ambiente de produção não permita o uso interativo do nosso cliente ou apresente alguma outra dificuldade relativa a esse modo de configuração, você pode configurar o `basedosdados` a partir de variáveis de ambiente da seguinte forma:
->```
+>
+>```bash
 > export BASEDOSDADOS_CONFIG=$(cat ~/.basedosdados/config.toml | base64)
 > export BASEDOSDADOS_CREDENTIALS_PROD=$(cat ~/.basedosdados/credentials/prod.json | base64)
 > export BASEDOSDADOS_CREDENTIALS_STAGING=$(cat ~/.basedosdados/credentials/staging.json | base64)
 >```
-- Clone um _fork_ do nosso [repositório](https://github.com/basedosdados/mais) localmente.
-- Dê um `cd` para a pasta local do repositório e abra uma nova branch com `git checkout -b [BRANCH_ID]`.
-
-Todas as adições e modificações serão feitas nessa _branch_.
+>
+3. Clone um _fork_ do nosso [repositório](https://github.com/basedosdados/mais) localmente.
+4. Dê um `cd` para a pasta local do repositório e abra uma nova branch
+   com `git checkout -b [BRANCH_ID]`. Todas as adições e modificações
+   serão feitas nessa _branch_.
 
 #### Suba e configure uma tabela no seu _bucket_
 
-Aqui são dois passos: primeiro publicamos uma base e depois publicamos tabelas.
+Aqui são dois passos: primeiro publicamos uma base (conjunto) e depois publicamos tabelas.
 
-- Publique uma base.
-    - Rode o comando `basedosdados dataset create [DATASET_ID]`.
-    - Preencha os arquivos de configuração da base:
-        - `README.md`: informações básicas da base de dados aparecendo no Github.
-        - `dataset_config.yaml`: informações específicas da base de dados.
-    - Rode o comando `basedosdados dataset update [DATASET_ID]` para atualizar a base com as configurações preenchidas.
-- Publique uma tabela (ou várias!) dentro da base
-    - Rode o comando `basedosdados table create [DATASET_ID] [TABLE_ID] --path '/[DATASET_ID]/output/[TABLE_ID]'`.
-    - Preencha os arquivos de configuração da tabela:
-        - `/[TABLE_ID]/table_config.yaml`: informações específicas da tabela.
-        - `/[TABLE_ID]/publish.sql`: aqui você pode fazer tratamentos finais na tabela `staging` em SQL para publicação. Exemplo: modificar a query para dar um JOIN em outra tabela da BD+ e selecionar variáveis.
-    - Rode o comando `basedosdados table publish [DATASET_ID] [TABLE_ID]` para publicar a tabela em produção.
+Para publicar uma **base (conjunto)**:
 
-Consulte também nossa [API](/mais/reference_api_cli) para mais detalhes de cada método.
+1. Crie a pasta do conjunto no *bucket* rodando:
 
-!!! Tip "Temos um [issue aberto no Github](https://github.com/basedosdados/mais/issues/496) para criar funcionalidades de upload de arquiteturas, arquivos originais e arquivos auxiliares. Você pode colaborar com a Base dos Dados resolvendo ele!"
+  ```bash
+  basedosdados dataset create [DATASET_ID]
+  ```
 
-É sempre bom abrir o console do BigQuery e rodar algumas _queries_ para testar se foi tudo publicado corretamente. Estamos desenvolvendo testes automáticos para facilitar esse processo no futuro.
+2. Preencha os arquivos de configuração criados em `<dataset_id>/`:
+    - `README.md`: informações úteis para quem for ver o código no Github.
+    - `dataset_config.yaml`: informações específicas do conjunto (já vem
+      com um modelo para preenchimento).
+3. Atualize as informações preenchidas do conjunto com:
 
-## 8. Validar e publicar metadados
+  ```bash
+  basedosdados dataset update [DATASET_ID]
+  ```
+
+Para publicar uma **tabela (ou várias!)**:
+
+1. Crie a tabela no *bucket*, indicando o caminho do arquivo no seu local, rodando:
+
+  ```bash
+  basedosdados table create [DATASET_ID] [TABLE_ID] --path '/[DATASET_ID]/output/[TABLE_ID]'.
+  ```
+
+2. Preencha os arquivos de configuração da tabela:
+
+- `/[TABLE_ID]/table_config.yaml`: informações específicas da tabela.
+- `/[TABLE_ID]/publish.sql`: aqui você pode indicar tratamentos finais
+    na tabela `staging` em SQL para publicação (ex: modificar a query para
+    dar um JOIN em outra tabela da BD+ e selecionar variáveis).
+
+3. Publique a tabela em produção:
+
+  ```bash
+  basedosdados table publish [DATASET_ID] [TABLE_ID]
+  ```
+
+Consulte também nossa [API](../api_reference_cli) para mais detalhes de cada método.
+
+!!! Tip "Abra o console do BigQuery e rode algumas _queries_ para testar se foi tudo publicado corretamente. Estamos desenvolvendo testes automáticos para facilitar esse processo no futuro."
+
+### 8. Validar e publicar metadados
 
 Para publicar os metadados preenchidos nos arquivos `dataset_config.yaml` e `table_config.yaml`, o processo é simples.
 
-Em primeiro lugar, é preciso colocar suas credenciais do CKAN no arquivo `~/.basedosdados/config.toml`, criado ao rodar o comando de configuração do cliente `basedosdados` descrito na [seção 7](#7-subir-arquiteturas-dados-e-arquivos-auxiliares-no-google-cloud). Para isso, basta preencher os campos `api_key` e `url` da seção `[ckan]` do arquivo.
+1. Coloque suas credenciais do CKAN no arquivo
+   `~/.basedosdados/config.toml`, preenchendo os campos `api_key` e
+   `url` em `[ckan]`. Este arquivo é criado automaticamente ao rodar
+   `basedosdados config init` [(veja no passo
+   7)](#7-subir-tudo-no-google-cloud).
 
-Em seguida, é preferencial validar os metadados a partir da API do website. Para validar metadados de bases, isso é feito através do comando `basedosdados metadata validate [DATASET_ID]`. Para validar metadados de tabelas, basta rodar `basedosdados metadata validate [DATASET_ID] [TABLE_ID]`.
+2. (Recomendado) Valide os metadados do conjunto através do comando `basedosdados metadata validate [DATASET_ID]`. Para validar metadados de tabelas, basta rodar `basedosdados metadata validate [DATASET_ID] [TABLE_ID]`.
 
-Por fim, para publicar esses metadados já preenchidos e validados, basta rodar `basedosdados metadata publish [DATASET_ID]` para bases e/ou `basedosdados metadata publish [DATASET_ID] [TABLE_ID]` para tabelas. Caso prefira publicar mudanças de um dataset e uma tabela de uma vez só, basta usar o comando da seguinte forma: `basedosdados metadata publish [DATASET_ID] [TABLE_ID] --all=True`.
+3. Publique os metadados do conjunto já preenchidos e validados com
+   `basedosdados metadata publish [DATASET_ID]`. Para publicar metadados
+   de tabelas, use `basedosdados metadata publish [DATASET_ID]
+   [TABLE_ID]`.
+
+> Para publicar metadados de ambos (conjunto e tabela), use
+> `basedosdados metadata publish [DATASET_ID] [TABLE_ID] --all=True`.
 
 #### Atualizando metadados de bases ou tabelas já existentes
 
 Através do módulo `metadata` é possível também trabalhar com bases e tabelas já existentes na plataforma. Elas podem ser atualizadas a partir do procedimento que descrevemos a seguir.
 
-Primeiro, rodamos `basedosdados metadata create [DATASET_ID]` para trazer os metadados disponíveis do CKAN na forma do `dataset_config.yaml`, que, dessa vez, virá já preenchido. Fazemos o mesmo para gerar o `table_config.yaml` das tabelas que quisermos atualizar: `basedosdados metadata create [DATASET_ID] [TABLE_ID]`. Em seguida, preenchemos os novos valores dos metadados.
+1. Rode `basedosdados metadata create [DATASET_ID]` para puxar os
+   metadados do conjunto disponíveis no site para o arquivo
+   `dataset_config.yaml`. Para puxar metadados de tabelas, use
+   `basedosdados metadata create [DATASET_ID] [TABLE_ID]`, que irá
+   atualizo arquivo `table_config.yaml`
+2. Preencha os novos valores de metadados nos respectivos arquivos.
+3. Rode `basedosdados metadata validate [DATASET_ID]` e para publicar os
+   metadados atualizados do conjutno use `basedosdados metadata publish [DATASET_ID]`. O mesmo pode ser feito
+   para tabela adicionando o parametro `[TABLE_ID]`
 
-Ao terminar o processo, para ter certeza que estamos trabalhando em cima de metadados atualizados, podemos rodar o seguinte comando: `basedosdados is_updated [DATASET_ID]` e/ou `basedosdados is_updated [DATASET_ID] [TABLE_ID]`.
+### 9. Enviar tudo para revisão
 
-Por fim, basta rodar, mais uma vez, o `basedosdados metadata validate [DATASET_ID]` e/ou o `basedosdados metadata validate [DATASET_ID] [TABLE_ID]` e, em seguida, `basedosdados metadata publish [DATASET_ID]` e/ou `basedosdados metadata publish [DATASET_ID] [TABLE_ID]`.
+Ufa, é isso! Agora só resta enviar tudo para revisão no
+[repositório](https://github.com/basedosdados/mais) da Base dos Dados.
+Crie os _commits_ necessários e rode `git push origin [BRANCH_ID]`.
+Depois é só abrir um _pull request_ (PR) no nosso repositório.
 
-## 9. Enviar tudo para revisão
-
-Ufa, é isso! Agora só resta enviar tudo para revisão no [repositório](https://github.com/basedosdados/mais) da Base dos Dados.
-
-Crie os _commits_ necessários e rode um `git push origin [BRANCH_ID]`. Depois é só abrir um _pull request_ (PR) no nosso repositório.
-
-Temos passos manuais e automáticos de revisão para dados e metadados. Pessoas do time da Base dos Dados entrarão em contato com você para pedir mudanças ou tirar dúvidas. Quando tudo estiver redondo nós fazemos um _merge_ e os dados são publicados na nossa plataforma.
+**E agora?** Nossa equipe irá revisar os dados e metadados submetidos
+via Github. Podemos entrar em contato para tirar dúvidas ou solicitar
+mudanças no código. Quando tudo estiver OK, fazemos um _merge_ do seu
+*pull request*, e os dados são automaticamente publicados na nossa
+plataforma!
