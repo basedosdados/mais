@@ -10,12 +10,12 @@ recursos importantes de diversos conjuntos de dados públicos**, como:
 - **Links externos**: Links com informações úteis para explorar mais
   sobre o conjunto de dados, como a fonte original e outros.
 
-!!! Info "Temos um time de Dados e voluntários(as) de todo o Brasil que ajudam a limpar e manter as tabelas tratadas BD+. [Saiba como fazer parte](/mais/colab)"
+!!! Info "Temos um time de Dados e voluntários(as) de todo o Brasil que ajudam a limpar e manter as tabelas tratadas BD+. [Saiba como fazer parte](../colab)"
 
 ## Acessando tabelas tratadas BD+
 
 No nosso site você encontra a lista de todas as tabelas tratadas de
-cada conjunto de dados. Aprensentamos também informações importantes de todas
+cada conjunto de dados. Apresentamos também informações importantes de todas
 as tabelas, como a lista de colunas, cobertura temporal, periodicidade, entre
 outras informações. Você pode consultar os dados das tabelas via:
 
