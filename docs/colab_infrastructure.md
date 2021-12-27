@@ -1,5 +1,10 @@
+# Infra da BD
 
-# Como funciona nossa infraestrutura
+Nosso time de infraestrutura cuida para que todos os pacotes e pipelines
+estejam funcionando da melhor forma para o público. Utilizamos o Github
+para gerir todo o código e mantê-lo organizado, onde você pode encontrar
+issues de novas features, bugs e melhorias que estamos trabalhando.
+## Como funciona nossa infraestrutura
 
 Nossa infraestrutura é composta de 3 frentes principais: 
 
