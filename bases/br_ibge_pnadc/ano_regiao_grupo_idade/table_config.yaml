@@ -31,7 +31,7 @@ update_frequency: one_year
 
 # Entidade representada por cada linha.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity: person
+entity:
 
 # A unidade temporal representada por cada linha.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -123,7 +123,7 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       is_in_staging: true 
       is_partition: false
@@ -175,7 +175,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
