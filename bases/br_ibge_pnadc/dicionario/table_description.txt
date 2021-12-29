@@ -1,4 +1,4 @@
-Microdados da PNAD Contínua.
+Dicionário
 
 Para saber mais acesse:
 Website: 
@@ -13,20 +13,12 @@ Nome: Ricardo Dahis
 Código: 
 Website: www.ricardodahis.com
 Email: rdahis@basedosdados.org
-
 Tratado por
 -----------
 Nome: Ricardo Dahis
-Website: 
 Email: rdahis@basedosdados.org
 
 
-
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-- ano
-- trimestre
-- sigla_uf
 
 
 Colunas identificando linhas unicamente
@@ -37,34 +29,17 @@ Colunas identificando linhas unicamente
 
 Cobertura Temporal
 ------------------
-- 2012
-- 2013
-- 2014
-- 2015
-- 2016
-- 2017
-- 2018
-- 2019
-- 2020
-- 2021
 
 
 
 
 Cobertura Espacial
 ------------------
-- brasil
 
 
 
 
-Tratamento
-----------
-- Tratamento e compatibilização feitos pelo pacote "PNADcIBGE" no R (disponibilizado pelo IBGE).
 
 
 
 
-Frequencia de Atualização
--------------------------
-quarter
