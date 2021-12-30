@@ -138,18 +138,24 @@ Mantemos nossas tabelas parcialmente [normalizadas](https://www.guru99.com/datab
 
 ## Cobertura temporal
 
-Preencher a coluna `cobertura_temporal` na tabela de arquitetura e dicionário segue o seguinte padrão.
+Preencher a coluna `cobertura_temporal` nos metadados de tabela, coluna e chave (em dicionários) segue o seguinte padrão.
 
-- Formato: `data_inicial(unidade_temporal)data_final`
+- Formato geral: `data_inicial(unidade_temporal)data_final`
     - `data_inicial` e `data_final` estão na correspondente unidade temporal.
         - Exemplo: tabela com unidade `ano` tem cobertura `2005(1)2018`.
         - Exemplo: tabela com unidade `mes` tem cobertura `2005-08(1)2018-12`.
         - Exemplo: tabela com unidade `dia` tem cobertura `2005-08-01(1)2018-12-31`.
-- Exceção: deixar `data_inicial` ou `data_final` vazios quando essas forem iguais às da tabela de dados.
-    - Suponha que a cobertura da tabela de dados seja `2005(1)2018`.
-        - Se uma coluna aparece só em 2012 e existe até 2018, preenchemos sua cobertura como `2012(1)`.
-        - Se uma coluna desaparece em 2013, preenchemos sua cobertura como `(1)2013`.
-        - Se uma coluna existe na mesma cobertura temporal da tabela, preenchemos sua cobertura como `(1)`.
+- Regras para preenchimento
+    - Metadados de tabela
+        - Preencher no formato geral.
+    - Metadados de coluna
+        - Preencher no formato geral, exceto quando a `data_inicial` ou `data_final` sejam iguais aos da tabela. Nesse caso deixe vazio.
+        - Exemplo: suponha que a cobertura da tabela seja `2005(1)2018`.
+            - Se uma coluna aparece só em 2012 e existe até 2018, preenchemos sua cobertura como `2012(1)`.
+            - Se uma coluna desaparece em 2013, preenchemos sua cobertura como `(1)2013`.
+            - Se uma coluna existe na mesma cobertura temporal da tabela, preenchemos sua cobertura como `(1)`.
+    - Metadados de chave
+        - Preencher no mesmo padrão de colunas, mas a referência sendo a coluna correspondente, e não a tabela.
 
 ## Limpando STRINGs
 
@@ -190,7 +196,7 @@ Pull requests no Github devem incluir no máximo uma base. Ou seja, podem envolv
 
 ## Diretórios
 
-Diretórios são as pedras fundamentais da estrutura do nosso repositório. Nossas regras para gerenciar diretórios são:
+Diretórios são as pedras fundamentais da estrutura do nosso _datalake_. Nossas regras para gerenciar diretórios são:
 
 - Diretórios representam _entidades_ do repositório que tenham chaves primárias (e.g. `uf`, `município`, `escola`) e unidades de data-tempo (e.g. `data`, `tempo`, `dia`, `mes`, `ano`).
 - Cada tabela de diretório tem ao menos uma chave primária com valores únicos e sem nulos. Exemplos: `municipio:id_municipio`, `uf:sigla_uf`.

@@ -62,18 +62,18 @@ passos daqui pra frente. Sua
 estrutura é a seguinte:
 
 - `<dataset_id>/`
-  - `code/`: Códigos necessários à **captura** e **limpeza** dos dados
+    - `code/`: Códigos necessários à **captura** e **limpeza** dos dados
     ([vejo no passo
     4](#4-escrever-codigo-de-captura-e-limpeza-de-dados)).
-  - `input/`: Contém todos os arquivos com dados originais, exatamente
+    - `input/`: Contém todos os arquivos com dados originais, exatamente
     como baixados da fonte primária **Esses arquivos não devem ser
     modificados.**
-  - `output/`: Arquivos finais, já no formato pronto para subir na BD+.
-  - `tmp/`: Quaisquer arquivos temporários criados pelo código em `/code` no processo de limpeza e tratamento.
-  - `extra/`
-    - `architecture/`: Tabelas de arquitetura ([veja no passo 3](#3-preencher-as-tabelas-de-arquitetura)).
-    - `auxiliary_files/`: Arquivos auxiliares aos dados ([veja no passo 5](#5-caso-necessario-organizar-arquivos-auxiliares)).
-    - `dicionario.csv`: Tabela dicionário de todo o conjunto de dados ([veja no passo
+    - `output/`: Arquivos finais, já no formato pronto para subir na BD+.
+    - `tmp/`: Quaisquer arquivos temporários criados pelo código em `/code` no processo de limpeza e tratamento.
+    - `extra/`
+        - `architecture/`: Tabelas de arquitetura ([veja no passo 3](#3-preencher-as-tabelas-de-arquitetura)).
+        - `auxiliary_files/`: Arquivos auxiliares aos dados ([veja no passo 5](#5-caso-necessario-organizar-arquivos-auxiliares)).
+        - `dicionario.csv`: Tabela dicionário de todo o conjunto de dados ([veja no passo
           6](#6-recomendado-criar-tabela-dicionario)).
 
 ### 3. Preencher as tabelas de arquitetura
@@ -160,7 +160,7 @@ particionamento foi feito usando a estrutura de pastas
 
 Fique à vontade para estruturar sub-pastas como quiser lá dentro. O que importa é que fique claro o que são esses arquivos.
 
-### 6. (Recomendado) Criar tabela dicionário
+### 6. (Caso necessário) Criar tabela dicionário
 
 Muitas vezes, especialmente com bases antigas, há múltiplos dicionários
 em formatos Excel ou outros. Na Base dos Dados nós unificamos tudo em um
@@ -227,9 +227,9 @@ Para publicar uma **base (conjunto)**:
 
 1. Crie a pasta do conjunto no *bucket* rodando:
 
-  ```bash
-  basedosdados dataset create [DATASET_ID]
-  ```
+    ```bash
+    basedosdados dataset create [DATASET_ID]
+    ```
 
 2. Preencha os arquivos de configuração criados em `<dataset_id>/`:
     - `README.md`: informações úteis para quem for ver o código no Github.
@@ -237,17 +237,17 @@ Para publicar uma **base (conjunto)**:
       com um modelo para preenchimento).
 3. Atualize as informações preenchidas do conjunto com:
 
-  ```bash
-  basedosdados dataset update [DATASET_ID]
-  ```
+    ```bash
+    basedosdados dataset update [DATASET_ID]
+    ```
 
 Para publicar uma **tabela (ou várias!)**:
 
 1. Crie a tabela no *bucket*, indicando o caminho do arquivo no seu local, rodando:
 
-  ```bash
-  basedosdados table create [DATASET_ID] [TABLE_ID] --path '/[DATASET_ID]/output/[TABLE_ID]'.
-  ```
+    ```bash
+    basedosdados table create [DATASET_ID] [TABLE_ID] --path '/[DATASET_ID]/output/[TABLE_ID]'.
+    ```
 
 2. Preencha os arquivos de configuração da tabela:
 
@@ -258,9 +258,9 @@ Para publicar uma **tabela (ou várias!)**:
 
 3. Publique a tabela em produção:
 
-  ```bash
-  basedosdados table publish [DATASET_ID] [TABLE_ID]
-  ```
+    ```bash
+    basedosdados table publish [DATASET_ID] [TABLE_ID]
+    ```
 
 Consulte também nossa [API](../api_reference_cli) para mais detalhes de cada método.
 
