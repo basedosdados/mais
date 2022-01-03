@@ -23,10 +23,18 @@
 ## Funções novas
 * `dataset_search` agora permite busca de bases por palavras-chave
 * `get_table_colums` devolve o esquema de uma tabela
+* `list_dataset_tables` lista as tabelas dentro de um dataset
+* `get_dataset_description` dá uma descrição mais aprofundada de um dataset
+* `get_table_description` descreve analogamente uma tabela dentro de um dataset
 
 ## Mudanças
-* Incrementamos o valor padrão de `page_size`, onde quer que apareça, para 100000. A performance da maioria das queries deve aumentar substancialmente.
-* `bd_collect`, `bd_write`, `bd_write_rds` e `bd_write_csv` agora aceitam o argumento `page_size`
+* O parâmetro `page_size` foi aposentado em todas as funções. Mais detalhes na seção de bugs abaixo.
+* Algumas validações dos argumentos do usuário que emitiam erros opacos foram retiradas ns funções `download` e `query`. A ideia é deixar que alguns erros importantes que estavam sendo mascarados pelo `basedosdados` sejam retornados no original. 
+* O pacote agora usa tipagem estática em _algumas_ funções (escolhidas aleatoriamente para que seja simples avaliar o impacto da mudança na ocorrência de bugs), pelo pacote [`typed`](https://github.com/moodymudskipper/typed). Esperamos alguns bugs novos por conta disso, mas acreditamos que os ganhos da tipagem estática compensam.
 
 ## Bugs
 * Incrementamos a versão mínima do `Rcpp` para `1.0.7`, resolvendo a [ausência de `Rcpp_previous_remove()`](https://stackoverflow.com/questions/68416435/rcpp-package-doesnt-include-rcpp-precious-remove)
+* Incrementamos a versão mínima do `bigrquery` para `1.4.0`, resolvendo os [bugs de paginação envolvendo o argumento `page_size`](https://bigrquery.r-dbi.org/news/index.html#bigrquery-1-4-0-2021-08-05). Uma discussão mais detalhada do bug pode ser encontrada no [issue #412 do `bigrquery`](https://github.com/r-dbi/bigrquery/issues/412) e no [PR #456 do `bigrquery`](https://github.com/r-dbi/bigrquery/pull/456).
+
+## Roadmap
+* A [pedidos da comunidade](https://twitter.com/KimJoaoUn/status/1469712592054669320), teremos ferramentas para autenticação não-interativa na GCP na `0.3.0`.

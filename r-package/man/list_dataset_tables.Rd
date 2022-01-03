@@ -2,7 +2,7 @@
 % Please edit documentation in R/metadata.R
 \name{list_dataset_tables}
 \alias{list_dataset_tables}
-\title{List all tables in a dataset}
+\title{List tables in a dataset}
 \usage{
 list_dataset_tables(dataset_id)
 }
@@ -13,5 +13,8 @@ list_dataset_tables(dataset_id)
 A tibble listing all tables in a given dataset
 }
 \description{
-List all tables in a dataset
+List tables in a dataset
+}
+\examples{
+list_dataset_tables("br_sp_alesp")
 }

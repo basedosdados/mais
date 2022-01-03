@@ -1,7 +1,4 @@
 #' Search for a dataset
-#'
-#'
-#' @name dataset_search
 #' @param search_term keyword for search
 #'
 #' @return A tibble with search results
@@ -48,11 +45,14 @@ dataset_search <-
 
   }
 
-#' @title List all tables in a dataset
+#' List tables in a dataset
 #' @param dataset_id a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `br_sp_alesp`
 #' @export
 #' @importFrom purrr pluck map_chr discard
+#' @importFrom dplyr bind_rows
 #' @return A tibble listing all tables in a given dataset
+#' @examples
+#' list_dataset_tables("br_sp_alesp")
 
 list_dataset_tables <-
   function(dataset_id) {
@@ -81,13 +81,9 @@ list_dataset_tables <-
 
   }
 
-
-
-#' @title List all columns in a table
-#'
+#' Get columns in a table
 #' @param dataset_id a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `br_sp_alesp`
 #' @param table_id a table name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `deputado`
-#'
 #'
 #' @export
 #' @examples
@@ -116,7 +112,7 @@ get_table_columns <-
   }
 
 
-#' @title Describe a dataset
+#' Describe a dataset
 #' @param dataset_id a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `br_sp_alesp`
 #'
 #' @export
@@ -142,7 +138,7 @@ get_dataset_description <- function(dataset_id = ? typed::Character(1)) {
 
 }
 
-#' @title Describe a table within a dataset
+#' Describe a table within a dataset
 #'
 #' @param dataset_id a dataset name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `br_sp_alesp`
 #' @param table_id a table name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `deputado`
