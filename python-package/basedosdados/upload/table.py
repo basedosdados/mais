@@ -7,6 +7,7 @@ from google.cloud import bigquery
 import datetime
 import textwrap
 import inspect
+from matplotlib.pyplot import table
 
 import ruamel.yaml as ryaml
 import requests
@@ -190,7 +191,9 @@ class Table(Base):
         for col in columns:
             name = col["name"]
             bigquery_type = (
-                "STRING" if col["bigquery_type"] is None else col["bigquery_type"]
+                "STRING"
+                if col["bigquery_type"] is None
+                else col["bigquery_type"].upper()
             )
 
             publish_txt += f"SAFE_CAST({name} AS {bigquery_type}) {name},\n"
@@ -214,6 +217,7 @@ class Table(Base):
             if_exists=if_table_config_exists,
             columns=partition_columns + columns,
             partition_columns=partition_columns,
+            table_only=False,
         )
 
         self._make_publish_sql()
@@ -336,7 +340,7 @@ class Table(Base):
                     )
 
                     col["bigquery_type"] = (
-                        col["bigquery_type"] if tipo == "NULL" else tipo
+                        col["bigquery_type"] if tipo == "NULL" else tipo.lower()
                     )
 
                     col["measurement_unit"] = (
