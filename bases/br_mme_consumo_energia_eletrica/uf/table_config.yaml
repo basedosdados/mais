@@ -1,5 +1,5 @@
 
-dataset_id: br_mme_consumo_energia_eletrica
+dataset_id: br-mme
 
 table_id: uf
 
@@ -37,7 +37,7 @@ temporal_coverage:
 update_frequency: month
 
 # Entidade representada por cada linha.
-entity: consumo
+entity:
 
 # A unidade temporal representada por cada linha.
 time_unit: month
@@ -80,7 +80,7 @@ data_cleaned_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description:
-  "Criação das colunas 'ano e 'Tipo de Consumo', muda formato de wide para long e une tabelas consumo e número de consumidores" 
+  Criação das colunas 'ano e 'Tipo de Consumo', muda formato de wide para long e une tabelas consumo e número de consumidores
 
 
 # Url dos dados originais no GCP Storage.
@@ -129,7 +129,7 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mes
       bigquery_type: int64
       description: Mês
@@ -142,7 +142,7 @@ columns:
       measurement_unit: month
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
@@ -155,7 +155,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: consumo
       bigquery_type: float64
       description: Consumo de energia elétrica na rede (MWh)
@@ -165,10 +165,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: megawatt
+      measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: tipo_consumo
       bigquery_type: string
       description: Tipo de Consumo
@@ -181,7 +181,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: numero_consumidores
       bigquery_type: int64
       description: Número de consumidores de energia elétrica atendidos pela rede
@@ -191,9 +191,9 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: no
+      is_partition: false
 
-metadata_modified:
+metadata_modified: '2021-12-17T18:39:25.470609'
