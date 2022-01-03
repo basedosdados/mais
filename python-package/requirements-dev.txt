@@ -15,6 +15,10 @@ poetry
 importlib_metadata>3.10
 flake8
 pandas_gbq
+mkdocs
+mkdocs-material
+mkdocstrings
+mkdocs-click
 ruamel.yaml
 requests
 pandas
