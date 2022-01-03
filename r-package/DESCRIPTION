@@ -6,7 +6,7 @@ Authors@R:
            family = "Cavalcante",
            role = c("aut", "cre"),
            email = "pedrocolrj@gmail.com")
-Description: An R interface to the 'Base dos Dados' API <https:basedosdados.github.io/mais/api_reference_python/>). Authenticate your project, query our tables, save data to disk and memory, all from R.
+Description: An R interface to the 'Base dos Dados' API <https:basedosdados.github.io/mais/py_reference_api/>). Authenticate your project, query our tables, save data to disk and memory, all from R.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
