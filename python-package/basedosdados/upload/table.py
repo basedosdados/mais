@@ -7,7 +7,6 @@ from google.cloud import bigquery
 import datetime
 import textwrap
 import inspect
-from matplotlib.pyplot import table
 
 import ruamel.yaml as ryaml
 import requests
