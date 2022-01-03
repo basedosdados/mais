@@ -1,7 +1,7 @@
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list=
-organization: ministerio-de-minas-e-energia
+organization: br-mme
 
 dataset_id: br_mme_consumo_energia_eletrica
 
