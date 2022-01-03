@@ -74,7 +74,7 @@ estrutura é a seguinte:
         - `architecture/`: Tabelas de arquitetura ([veja no passo 3](#3-preencher-as-tabelas-de-arquitetura)).
         - `auxiliary_files/`: Arquivos auxiliares aos dados ([veja no passo 5](#5-caso-necessario-organizar-arquivos-auxiliares)).
         - `dicionario.csv`: Tabela dicionário de todo o conjunto de dados ([veja no passo
-          6](#6-recomendado-criar-tabela-dicionario)).
+          6](#6-caso-necessario-criar-tabela-dicionario)).
 
 ### 3. Preencher as tabelas de arquitetura
 
