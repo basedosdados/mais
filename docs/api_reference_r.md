@@ -4,7 +4,7 @@ Esta API é composta somente de módulos para **requisição de dados**, ou
 seja, download e/ou carregamento de dados do projeto no seu ambiente de
 análise).
 Para fazer **gerenciamento de dados** no Google Cloud, busque as funções
-na API de [linha de comando](/mais/reference_api_cli) ou em [Python](/mais/reference_api_py/#classes-gerenciamento-de-dados).
+na API de [linha de comando](../api_reference_cli) ou em [Python](../api_reference_python/#classes-gerenciamento-de-dados).
 
 A documentação completa encontra-se na página do CRAN do projeto, e
 segue baixo.

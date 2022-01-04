@@ -28,7 +28,7 @@ theme:
     - navigation.sections
     - navigation.top
     - toc.integrate
-    # - navigation.tabs
+    - navigation.tabs
 
 repo_url: https://github.com/basedosdados/mais
 repo_name: basedosdados/mais
@@ -58,19 +58,26 @@ nav:
     - Aprenda sobre a BD: index.md
     - BigQuery: access_data_bq.md
     - Pacotes: access_data_packages.md
-    - Contribua: colab.md
+    - API:
+      - Python: api_reference_python.md
+      - R: api_reference_r.md
+      - CLI: api_reference_cli.md
+    - Contribua: 
+      - Dados: colab_data.md
+      - Infraestrutura: colab_infrastructure.md
+      - Manual de estilo: style_data.md
     #   - Como citar a Base dos Dados: index.md # TODO
 
 markdown_extensions:
   - admonition
   - pymdownx.details
+  - mkdocs-click
   - attr_list
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.tabbed
   - pymdownx.superfences
-  - mkdocs-click
 
 extra_javascript:
 - js/termynal.js
