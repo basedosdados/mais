@@ -788,16 +788,12 @@ def cli_validate_metadata(ctx, dataset_id, table_id):
 @click.option(
     "--if_exists",
     default="raise",
-    help=(
-        "Define what to do in case metadata already exists in CKAN."
-    )
+    help=("Define what to do in case metadata already exists in CKAN."),
 )
 @click.option(
     "--update_locally",
     default=False,
-    help=(
-        "Update local metadata with the new CKAN metadata on publish."
-    )
+    help=("Update local metadata with the new CKAN metadata on publish."),
 )
 @click.pass_context
 def cli_publish_metadata(
@@ -807,7 +803,7 @@ def cli_publish_metadata(
     all,
     if_exists,
     update_locally,
-    ):
+):
     m = Metadata(dataset_id, table_id, **ctx.obj)
 
     try:
@@ -850,15 +846,21 @@ def init_refresh_templates(ctx):
 
 @click.command(
     name="download",
-    help="Download data. "
-    "You can add extra arguments accepted by `pandas.to_csv`.\n\n"
-    "Examples: --delimiter='|', --index=False",
-    context_settings=dict(
-        ignore_unknown_options=True,
-        allow_extra_args=True,
+    help=(
+        "Downloads data do SAVEPATH. SAVEPATH must point to a .csv file.\n\n"
+        "Example: \n\n"
+        'basedosdados download data.csv  --query="select * from basedosdados.br_ibge_pib.municipio limit 10" \ --billing_project_id=basedosdados-dev'
     ),
 )
-@click.argument("savepath", type=click.Path(exists=False))
+@click.argument(
+    "savepath",
+    type=click.Path(exists=False),
+)
+@click.option(
+    "--query",
+    default=None,
+    help="A SQL Standard query to download data from BigQuery",
+)
 @click.option(
     "--dataset_id",
     default=None,
@@ -868,11 +870,6 @@ def init_refresh_templates(ctx):
     "--table_id",
     default=None,
     help="Table_id, enter with dataset_id to download table ",
-)
-@click.option(
-    "--query",
-    default=None,
-    help="A SQL Standard query to download data from BigQuery",
 )
 @click.option(
     "--query_project_id",
@@ -892,20 +889,16 @@ def init_refresh_templates(ctx):
 @click.pass_context
 def cli_download(
     ctx,
-    dataset_id,
-    table_id,
     savepath,
     query,
+    dataset_id,
+    table_id,
     query_project_id,
     billing_project_id,
     limit,
 ):
 
-    pandas_kwargs = dict()
-    for item in ctx.args:
-        pandas_kwargs.update([item.replace("--", "").split("=")])
-
-    download(
+    bd.download(
         savepath=savepath,
         dataset_id=dataset_id,
         table_id=table_id,
@@ -913,7 +906,6 @@ def cli_download(
         query_project_id=query_project_id,
         billing_project_id=billing_project_id,
         limit=limit,
-        **pandas_kwargs,
     )
 
     click.echo(
@@ -924,11 +916,21 @@ def cli_download(
     )
 
 
+@click.command(
+    name="reauth",
+    help="Reauthorize credentials.",
+)
+def cli_reauth():
+
+    bd.reauth()
+
+
 cli.add_command(cli_dataset)
 cli.add_command(cli_table)
 cli.add_command(cli_storage)
 cli.add_command(cli_config)
 cli.add_command(cli_download)
+cli.add_command(cli_reauth)
 cli.add_command(cli_list)
 cli.add_command(cli_get)
 cli.add_command(cli_metadata)
