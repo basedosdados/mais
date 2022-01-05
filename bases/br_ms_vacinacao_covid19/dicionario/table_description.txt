@@ -2,8 +2,8 @@ Dicionário da base des vacinação de COVID-19.
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-ms-vacinacao-covid19
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,18 +11,15 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19/code
+Código: 
 Website: www.ricardodahis.com
-Email: rdahis@basedosdados.orgTratado por
+Email: rdahis@basedosdados.org
+Tratado por
 -----------
-Nome: <nome>
+Nome: None
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- tabela
-- coluna
-- chave
-- cobertura temporal
+
+
 
 Colunas identificando linhas unicamente
 -------------------
@@ -31,18 +28,26 @@ Colunas identificando linhas unicamente
 - chave
 - cobertura_temporal
 
+
+
+
 Cobertura Temporal
 ------------------
 
+
+
+
 Cobertura Espacial
 ------------------
+
+
+
 
 Tratamento
 ----------
 - Coletamos valores da base original e de arquivos auxiliares.
 
-Frequencia de Atualização
--------------------------
-único
+
+
 
 
