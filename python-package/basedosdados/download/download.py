@@ -1,15 +1,16 @@
-from google.cloud.bigquery import dataset
-import pandas_gbq
 from pathlib import Path
-import pydata_google_auth
-from pydata_google_auth.exceptions import PyDataCredentialsError
-from google.cloud import bigquery
-from google.cloud import bigquery_storage_v1
 from functools import partialmethod
 import re
-import pandas as pd
-from basedosdados.upload.base import Base
-from functools import partialmethod
+import time
+import shutil
+import os
+from pydata_google_auth.exceptions import PyDataCredentialsError
+from google.cloud import bigquery_storage_v1
+from google.cloud import bigquery
+import pandas_gbq
+
+
+from basedosdados.download.base import google_client, credentials
 from basedosdados.exceptions import (
     BaseDosDadosException,
     BaseDosDadosAccessDeniedException,
@@ -18,135 +19,6 @@ from basedosdados.exceptions import (
     BaseDosDadosNoBillingProjectIDException,
 )
 from pandas_gbq.gbq import GenericGBQException
-
-
-def credentials(from_file=False, reauth=False):
-
-    if from_file:
-        return Base()._load_credentials(mode="prod")
-
-    SCOPES = [
-        "https://www.googleapis.com/auth/cloud-platform",
-    ]
-
-    if reauth:
-        return pydata_google_auth.get_user_credentials(
-            SCOPES, credentials_cache=pydata_google_auth.cache.REAUTH
-        )
-    else:
-        return pydata_google_auth.get_user_credentials(
-            SCOPES,
-        )
-
-
-def download(
-    savepath,
-    query=None,
-    dataset_id=None,
-    table_id=None,
-    query_project_id="basedosdados",
-    billing_project_id=None,
-    limit=None,
-    from_file=False,
-    reauth=False,
-    use_bqstorage_api=False,
-    **pandas_kwargs,
-):
-    """Download table or query result from basedosdados BigQuery (or other).
-
-    * Using a **query**:
-
-        `download('select * from `basedosdados.br_suporte.diretorio_municipios` limit 10')`
-
-    * Using **dataset_id & table_id**:
-
-        `download(dataset_id='br_suporte', table_id='diretorio_municipios')`
-
-    You can also add arguments to modify save parameters:
-
-    `download(dataset_id='br_suporte', table_id='diretorio_municipios', index=False, sep='|')`
-
-
-    Args:
-        savepath (str, pathlib.PosixPath):
-            If savepath is a folder, it saves a file as `savepath / table_id.csv` or
-            `savepath / query_result.csv` if table_id not available.
-            If savepath is a file, saves data to file.
-        query (str): Optional.
-            Valid SQL Standard Query to basedosdados. If query is available,
-            dataset_id and table_id are not required.
-        dataset_id (str): Optional.
-            Dataset id available in basedosdados. It should always come with table_id.
-        table_id (str): Optional.
-            Table id available in basedosdados.dataset_id.
-            It should always come with dataset_id.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
-        billing_project_id (str): Optional.
-            Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
-        limit (int): Optional
-            Number of rows.
-        from_file (boolean): Optional.
-            Uses the credentials from file, located in `~/.basedosdados/credentials/
-        reauth (boolean): Optional.
-            Re-authorize Google Cloud Project in case you need to change user or reset configurations.
-        use_bqstorage_api (boolean): Optional.
-            Use the BigQuery Storage API to download query results quickly, but at an increased cost(https://cloud.google.com/bigquery/docs/reference/storage/).
-            To use this API, first enable it in the Cloud Console(https://console.cloud.google.com/apis/library/bigquerystorage.googleapis.com).
-            You must also have the bigquery.readsessions.create permission on the project you are billing queries to.
-        pandas_kwargs ():
-            Extra arguments accepted by [pandas.to_csv](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html)
-
-    Raises:
-        Exception: If either table_id or dataset_id were are empty.
-    """
-
-    savepath = Path(savepath)
-
-    # make sure that path exists
-    if savepath.is_dir():
-        savepath.mkdir(parents=True, exist_ok=True)
-    else:
-        savepath.parent.mkdir(parents=True, exist_ok=True)
-
-    if (dataset_id is not None) and (table_id is not None):
-        table = read_table(
-            dataset_id,
-            table_id,
-            query_project_id=query_project_id,
-            billing_project_id=billing_project_id,
-            limit=limit,
-            reauth=reauth,
-            from_file=from_file,
-            use_bqstorage_api=use_bqstorage_api,
-        )
-
-    elif query is not None:
-
-        query += f" limit {limit}" if limit is not None else ""
-
-        table = read_sql(
-            query,
-            billing_project_id=billing_project_id,
-            from_file=from_file,
-            reauth=reauth,
-            use_bqstorage_api=use_bqstorage_api,
-        )
-
-    else:
-        raise BaseDosDadosException(
-            "Either table_id, dataset_id or query should be filled."
-        )
-
-    if savepath.is_dir():
-        if table_id is not None:
-            savepath = savepath / (table_id + ".csv")
-        else:
-            savepath = savepath / ("query_result.csv")
-
-    pandas_kwargs["index"] = pandas_kwargs.get("index", False)
-
-    table.to_csv(savepath, **pandas_kwargs)
 
 
 def read_sql(
@@ -270,325 +142,39 @@ def read_table(
     )
 
 
-def _get_header(text):
-    """Gets first paragraph of a text
-
-    Args:
-        text (str or None): Text to be split
-
-    Returns:
-        str: First paragraph
-    """
-
-    if isinstance(text, str):
-        return text.split("\n")[0]
-    elif text is None:
-        return ""
-
-
-def _fix_size(s, step=80):
-
-    final = ""
-
-    for l in s.split(" "):
-        final += (l + " ") if len(final.split("\n")[-1]) < step else "\n"
-
-    return final
-
-
-def _print_output(df):
-    """Prints dataframe contents as print blocks
-
-    Args:
-        df (pd.DataFrame): table to be printed
-    """
-
-    columns = df.columns
-    step = 80
-    print()
-    for i, row in df.iterrows():
-        for c in columns:
-            print(_fix_size(f"{c}: \n\t{row[c]}"))
-        print("-" * (step + 15))
-    print()
-
-    # func = lambda lista, final, step: (
-    # func(lista[1:],
-    #     (final + lista[0] + ' ')
-    #         if len(final.split('\n')[-1]) <= step
-    #         else final + '\n',
-    #      step
-    #        ) if len(lista) else final)
-
-
-def _handle_output(verbose, output_type, df, col_name=None):
-    """Handles datasets and tables listing outputs based on user's choice.
-    Either prints it to the screen or returns it as a `list` object.
-    Args:
-        verbose (bool): amount of verbosity
-        output_type (str): type of output
-        df (pd.DataFrame, bigquery.Dataset or bigquery.Table): table containing datasets metadata
-        col_name (str): name of column with id's data
-    """
-
-    df_is_dataframe = type(df) == pd.DataFrame
-    df_is_bq_dataset_or_table = type(df) == bigquery.Table
-    df_is_bq_dataset_or_table |= type(df) == bigquery.Dataset
-
-    if verbose == True and df_is_dataframe:
-        _print_output(df)
-
-    elif verbose == True and df_is_bq_dataset_or_table:
-        print(df.description)
-
-    elif verbose == False:
-        if output_type == "list":
-            return df[col_name].to_list()
-        elif output_type == "str":
-            return df.description
-        elif output_type == "records":
-            return df.to_dict("records")
-        else:
-            msg = '`output_type` argument must be set to "list", "str" or "records".'
-            raise ValueError(msg)
-
-    else:
-        raise TypeError("`verbose` argument must be of `bool` type.")
-
-    return None
-
-
-def list_datasets(
-    query_project_id="basedosdados",
-    filter_by=None,
-    with_description=False,
-    from_file=False,
-    verbose=True,
-):
-    """Fetch the dataset_id of datasets available at query_project_id. Prints information on
-    screen or returns it as a list.
-
-    Args:
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
-        filter_by (str): Optional
-            String to be matched in dataset_id.
-        with_description (bool): Optional
-            If True, fetch short dataset description for each dataset.
-        verbose (bool): Optional.
-            If set to True, information is printed to the screen. If set to False, a list object is returned.
-
-
-    Example:
-        list_datasets(
-        filter_by='sp',
-        with_description=True,
-        )
-    """
-
-    client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=query_project_id
-    )
-
-    datasets_list = list(client.list_datasets())
-
-    datasets = pd.DataFrame(
-        [dataset.dataset_id for dataset in datasets_list], columns=["dataset_id"]
-    )
-
-    if filter_by:
-
-        datasets = datasets.loc[datasets["dataset_id"].str.contains(filter_by)]
-
-    if with_description:
-
-        datasets["description"] = [
-            _get_header(client.get_dataset(dataset).description)
-            for dataset in datasets["dataset_id"]
-        ]
-
-    return _handle_output(
-        verbose=verbose,
-        output_type="list",
-        df=datasets,
-        col_name="dataset_id",
-    )
-
-
-def list_dataset_tables(
-    dataset_id,
-    query_project_id="basedosdados",
-    from_file=False,
-    filter_by=None,
-    with_description=False,
-    verbose=True,
-):
-    """Fetch table_id for tables available at the specified dataset_id. Prints the information
-    on screen or returns it as a list.
-
-    Args:
-        dataset_id (str): Optional.
-            Dataset id available in basedosdados.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
-        filter_by (str): Optional
-            String to be matched in the table_id.
-        with_description (bool): Optional
-             If True, fetch short table descriptions for each table that match the search criteria.
-        verbose (bool): Optional.
-            If set to True, information is printed to the screen. If set to False, a list object is returned.
-
-    Example:
-        list_dataset_tables(
-        dataset_id='br_ibge_censo2010'
-        filter_by='renda',
-        with_description=True,
-        )
-    """
-    client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=query_project_id
-    )
-
-    dataset = client.get_dataset(dataset_id)
-
-    tables_list = list(client.list_tables(dataset))
-
-    tables = pd.DataFrame(
-        [table.table_id for table in tables_list], columns=["table_id"]
-    )
-
-    if filter_by:
-
-        tables = tables.loc[tables["table_id"].str.contains(filter_by)]
-
-    if with_description:
-
-        tables["description"] = [
-            _get_header(client.get_table(f"{dataset_id}.{table}").description)
-            for table in tables["table_id"]
-        ]
-
-    return _handle_output(
-        verbose=verbose,
-        output_type="list",
-        df=tables,
-        col_name="table_id",
-    )
-
-
-def get_dataset_description(
-    dataset_id=None,
-    query_project_id="basedosdados",
-    from_file=False,
-    verbose=True,
-):
-    """Prints the full dataset description.
-
-    Args:
-        dataset_id (str): Optional.
-            Dataset id available in basedosdados.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
-        verbose (bool): Optional.
-            If set to True, information is printed to the screen. If set to False, data is returned as a `str`.
-    """
-
-    client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=query_project_id
-    )
-
-    dataset = client.get_dataset(dataset_id)
-
-    return _handle_output(verbose=verbose, output_type="str", df=dataset)
-
-
-def get_table_description(
+def download(
+    savepath,
+    query=None,
     dataset_id=None,
     table_id=None,
     query_project_id="basedosdados",
+    billing_project_id=None,
+    limit=None,
     from_file=False,
-    verbose=True,
+    reauth=False,
+    compression="GZIP",
 ):
-    """Prints the full table description.
+    """Download table or query result from basedosdados BigQuery (or other).
+
+    * Using a **query**:
+
+        `download('select * from `basedosdados.br_suporte.diretorio_municipios` limit 10')`
+
+    * Using **dataset_id & table_id**:
+
+        `download(dataset_id='br_suporte', table_id='diretorio_municipios')`
+
+    You can also add arguments to modify save parameters:
+
+    `download(dataset_id='br_suporte', table_id='diretorio_municipios', index=False, sep='|')`
+
 
     Args:
-        dataset_id (str): Optional.
-            Dataset id available in basedosdados. It should always come with table_id.
-        table_id (str): Optional.
-            Table id available in basedosdados.dataset_id.
-            It should always come with dataset_id.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
-        verbose (bool): Optional.
-            If set to True, information is printed to the screen. If set to False, data is returned as a `str`.
-    """
-
-    client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=query_project_id
-    )
-
-    table = client.get_table(f"{dataset_id}.{table_id}")
-
-    return _handle_output(verbose=verbose, output_type="str", df=table)
-
-
-def get_table_columns(
-    dataset_id=None,
-    table_id=None,
-    query_project_id="basedosdados",
-    from_file=False,
-    verbose=True,
-):
-
-    """Fetch the names, types and descriptions for the columns in the specified table. Prints
-    information on screen.
-
-    Args:
-        dataset_id (str): Optional.
-            Dataset id available in basedosdados. It should always come with table_id.
-        table_id (str): Optional.
-            Table id available in basedosdados.dataset_id.
-            It should always come with dataset_id.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
-        verbose (bool): Optional.
-            If set to True, information is printed to the screen. If set to False, data is returned as a `list` of `dict`s.
-    Example:
-        get_table_columns(
-        dataset_id='br_ibge_censo2010',
-        table_id='pessoa_renda_setor_censitario'
-        )
-    """
-
-    client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=query_project_id
-    )
-
-    table_ref = client.get_table(f"{dataset_id}.{table_id}")
-
-    columns = [
-        (field.name, field.field_type, field.description) for field in table_ref.schema
-    ]
-
-    description = pd.DataFrame(columns, columns=["name", "field_type", "description"])
-
-    return _handle_output(verbose=verbose, output_type="records", df=description)
-
-
-def get_table_size(
-    dataset_id,
-    table_id,
-    billing_project_id,
-    query_project_id="basedosdados",
-    from_file=False,
-    verbose=True,
-):
-    """Use a query to get the number of rows and size (in Mb) of a table query
-    from BigQuery. Prints information on screen in markdown friendly format.
-
-    WARNING: this query may cost a lot depending on the table.
-
-    Args:
+        savepath (str, pathlib.PosixPath):
+            savepath must be a file path. Only supports `.csv`.
+        query (str): Optional.
+            Valid SQL Standard Query to basedosdados. If query is available,
+            dataset_id and table_id are not required.
         dataset_id (str): Optional.
             Dataset id available in basedosdados. It should always come with table_id.
         table_id (str): Optional.
@@ -598,37 +184,315 @@ def get_table_size(
             Which project the table lives. You can change this you want to query different projects.
         billing_project_id (str): Optional.
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
-        verbose (bool): Optional.
-            If set to True, information is printed to the screen. If set to False, data is returned as a `list` of `dict`s.
-    Example:
-        get_table_size(
-        dataset_id='br_ibge_censo2010',
-        table_id='pessoa_renda_setor_censitario',
-        billing_project_id='yourprojectid'
-        )
+        limit (int): Optional
+            Number of rows.
+        from_file (boolean): Optional.
+            Uses the credentials from file, located in `~/.basedosdados/credentials/
+        reauth (boolean): Optional.
+            Re-authorize Google Cloud Project in case you need to change user or reset configurations.
+        compression (str): Optional.
+            Compression type. Only `GZIP` is available for now.
+    Raises:
+        Exception: If either table_id, dataset_id or query are empty.
     """
-    billing_client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=billing_project_id
+
+    if (query is None) and ((table_id is None) or (dataset_id is None)):
+        raise BaseDosDadosException(
+            "Either table_id, dataset_id or query should be filled."
+        )
+
+    client = google_client(query_project_id, billing_project_id, from_file, reauth)
+
+    # makes sure that savepath is a filepath and not a folder
+    savepath = _sets_savepath(savepath)
+
+    # if query is not defined (so it won't be overwritten) and if
+    # table is a view or external or if limit is specified,
+    # convert it to a query.
+    if not query and (
+        not _is_table(client, dataset_id, table_id, query_project_id) or limit
+    ):
+        query = f"""
+        SELECT * 
+          FROM {query_project_id}.{dataset_id}.{table_id}
+        """
+
+        if limit is not None:
+            query += f" limit {limit}"
+
+    if query:
+        # sql queries produces anonymous tables, whose names
+        # can be found within `job._properties`
+        job = client["bigquery"].query(query)
+
+        # views may take longer: wait for job to finish.
+        _wait_for(job)
+
+        dest_table = job._properties["configuration"]["query"]["destinationTable"]
+
+        project_id = dest_table["projectId"]
+        dataset_id = dest_table["datasetId"]
+        table_id = dest_table["tableId"]
+
+    _direct_download(client, dataset_id, table_id, savepath, project_id, compression)
+
+
+def _direct_download(
+    client,
+    dataset_id,
+    table_id,
+    savepath,
+    project_id="basedosdados",
+    compression="GZIP",
+    extract=True,
+):
+    """
+    Download file to disk without the requirement of loading it in memory.
+    Creates a temporary file based on the `table_id` and the time of
+    execution. Also create a temporary bucket using the `dataset_id`
+    and the time of execution. Move the table to the temporary file and
+    download it to disk. In the end, remove the temporary bucket.
+    Args:
+        client (dict of google.cloud.bigquery.client.Client):
+            BigQuery and Storage clients.
+        dataset_id (str):
+            Dataset id available in project_id.
+        table_id (str):
+            Table id available in project_id.dataset_id.
+        savepath (str, `pathlib.PosixPath`):
+            Local path in which file should be stored in disk.
+        project_id (str, optional):
+            In case you want to use to query another project, by default 'basedosdados'
+        compression (str, optional):
+            Compression type to use for exported files.
+            Can be one of ["NONE"|"GZIP"]. Defaults to GZIP.
+        extract (bool, optional):
+            Whether to extract the gzip file.
+    """
+    time_hash = str(hash(time.time()))
+
+    # Bucket names must start and end with a number or letter.
+    tmp_file_name = table_id
+    tmp_bucket_name = _clean_name(dataset_id + "_" + time_hash)
+    blob_path = f"gs://{tmp_bucket_name}/{tmp_file_name}-*"
+
+    # Creates temporary savepath
+    tmp_savepath = savepath.parent / "tmp"
+    tmp_savepath.mkdir(parents=True, exist_ok=True)
+
+    try:
+        # create temporary bucket
+        _create_bucket(client, tmp_bucket_name)
+
+        # move table to temporary file inside temporary bucket
+        _move_table_to_bucket(
+            client, dataset_id, table_id, blob_path, project_id, compression
+        )
+
+        # download file from bucket directly to disk
+        _download_blob_from_bucket(client, tmp_bucket_name, tmp_savepath)
+
+        if compression == "GZIP" and extract:
+            _gzip_extract(tmp_savepath)
+
+        _join_files(tmp_savepath, savepath)
+
+    except Exception as err:
+        # TODO handle exceptions for 404 (not found), 403 (forbidden)
+        raise Exception(err)
+    finally:
+        # delete temporary bucket (even in the case of crashing)
+        _delete_bucket(client, tmp_bucket_name)
+        # delete temporary savepath
+        shutil.rmtree(tmp_savepath)
+
+
+def _download_blob_from_bucket(client, bucket_name, savepath):
+    """
+    Download a blob from a bucket to the path specified.
+    Args:
+        client (dict of google.cloud.bigquery.client.Client):
+            BigQuery and Storage clients.
+        bucket_name (str):
+            Name of the bucket for the file to be stored.
+        blob_name (str):
+            Name of the file to be downloaded from bucket.
+        savepath (str):
+            Local path in which file should be stored in disk.
+    """
+
+    bucket = client["storage"].bucket(bucket_name)
+    for blob in bucket.list_blobs():
+        filepath = savepath / (blob.name.split("-")[-1] + ".csv.gz")
+        blob.download_to_filename(filepath)
+
+
+def _create_bucket(client, bucket_name):
+    """
+    Create a new buket in a specific location with standard storage class
+    Args:
+        client (dict of google.cloud.bigquery.client.Client):
+            BigQuery and Storage clients.
+        bucket_name (str):
+            Name of the bucket to be created.
+    """
+    storage_client = client["storage"]
+    bucket = storage_client.bucket(bucket_name)
+
+    # standard storage class are adequate for data
+    # stored for only brief periods of time
+    bucket.storage_class = "STANDARD"
+
+    storage_client.create_bucket(bucket, location="US")
+
+
+def _delete_bucket(client, bucket_name):
+    """
+    Forceably deletes a bucket.
+    This method deletes all blobs from a bucket.
+    Args:
+        client (dict of google.cloud.bigquery.client.Client):
+            BigQuery and Storage clients.
+        bucket_name (str):
+            Name of the bucket to be deleted.
+    """
+    MAX_BLOBS = 256
+
+    storage_client = client["storage"]
+    bucket = storage_client.get_bucket(bucket_name)
+
+    # NOTE: force=True implementation will not delete
+    # the temporary bucket if n_blobs >= 256
+    n_blobs = len(list(storage_client.list_blobs(bucket_name)))
+    if n_blobs >= MAX_BLOBS:
+        raise Exception(
+            f"""Your temporary bucket contains more than {MAX_BLOBS}. 
+    You should manually delete it (force=True will not be able to delete it.)."""
+        )
+
+    bucket.delete(force=True)
+
+
+def _move_table_to_bucket(
+    client,
+    dataset_id,
+    table_id,
+    blob_path,
+    project_id="basedosdados",
+    compression="GZIP",
+):
+    """
+    Move table from BigQuery to bucket
+    Args:
+        client (dict of google.cloud.bigquery.client.Client):
+            BigQuery and Storage clients.
+        dataset_id (str):
+            Dataset id available in project_id.
+        table_id (str):
+            Table id available in project_id.dataset_id.
+        blob_path (str):
+            Path in bucket where the table will be stored.
+            Called ``destination_uri`` in the documentation in the form of
+            ``gs://<bucket_name>/<file_name.csv>``
+        project_id (str, optional):
+            In case you want to use to query another
+            project, defaults to 'basedosdados'
+        compression (str, optional):
+            Compression type to use for exported files.
+            Can be one of ["NONE"|"GZIP"]
+    """
+    client = client["bigquery"]
+    dataset_ref = bigquery.DatasetReference(project_id, dataset_id)
+    table_ref = dataset_ref.table(table_id)
+
+    job_config = bigquery.job.ExtractJobConfig(compression=compression)
+
+    # perform transfer from bq to bucket
+    extract_job = client.extract_table(
+        table_ref,
+        blob_path,
+        location="US",
+        job_config=job_config,
     )
+    # wait for API results
+    extract_job.result()
 
-    query = f"""SELECT COUNT(*) FROM {query_project_id}.{dataset_id}.{table_id}"""
 
-    job = billing_client.query(query, location="US")
+def _gzip_extract(savepath):
+    """Extracts and replace gzip file"""
+    import gzip
+    import shutil
 
-    num_rows = job.to_dataframe().loc[0, "f0_"]
+    try:
+        for file in savepath.glob("*"):
+            with gzip.open(file, "rb") as f_in:
+                with open(file.with_suffix(""), "wb") as f_out:
+                    shutil.copyfileobj(f_in, f_out)
 
-    size_mb = round(job.total_bytes_processed / 1024 / 1024, 2)
+            os.remove(file)
+    except:
+        raise Exception("GZIP file could not be extracted.")
 
-    table_data = pd.DataFrame(
-        [
-            {
-                "project_id": query_project_id,
-                "dataset_id": dataset_id,
-                "table_id": table_id,
-                "num_rows": num_rows,
-                "size_mb": size_mb,
-            }
-        ]
-    )
 
-    return _handle_output(verbose=verbose, output_type="records", df=table_data)
+def _join_files(tmp_savepath, savepath):
+    """Joins all files in savepath"""
+
+    files = list(tmp_savepath.glob("*.csv"))
+    with savepath.open("a+") as targetfile:
+        for i, file in enumerate(files):
+            with file.open("r") as f:
+                if i > 0:
+                    next(f)
+                for line in f:
+                    targetfile.write(line)
+
+            os.remove(file)
+
+
+def _is_table(client, dataset_id, table_id, project_id):
+    """Check whether a `table_id` is a view or not."""
+
+    if (dataset_id is None) or (table_id is None):
+        return False
+
+    dataset_ref = bigquery.DatasetReference(project_id, dataset_id)
+    table_ref = dataset_ref.table(table_id)
+
+    table = client["bigquery"].get_table(table_ref)
+
+    return table.table_type == "TABLE"
+
+
+def _clean_name(string):
+    """Remove anything not a number or letter"""
+
+    pattern = r"[^a-zA-Z0-9]+"
+    replace = ""
+    return re.sub(pattern, replace, string)
+
+
+def _wait_for(job):
+    """Wait for bigquery job to finish.
+    Args:
+        job (`bigquery.job`): bigquery job object from a
+        ``bigquery.Client().query()`` call.
+    """
+    while not job.done():
+        time.sleep(1)
+
+
+def _sets_savepath(savepath):
+    """Sets savepath accordingly"""
+
+    savepath = Path(savepath)
+
+    if savepath.suffix == ".csv":
+        # make sure that path exists
+        savepath.parent.mkdir(parents=True, exist_ok=True)
+    else:
+        raise BaseDosDadosException(
+            "Only .csv files are supported, "
+            f"your filename has a diferent extension: {savepath.suffix}"
+        )
+
+    return savepath
