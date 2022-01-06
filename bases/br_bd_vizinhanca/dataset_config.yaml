@@ -1,0 +1,29 @@
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list=
+organization: br-bd
+
+dataset_id: br_bd_vizinhanca
+
+title: Matrizes de Vizinhança
+
+# exemplo: descrição e anotações úteis sobre os dados.
+description: Matrizes de vizinhança de entidades geográficas no Brasil.
+
+# Quais grupos caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+groups:
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+
+ckan_url:
+
+github_url:
+
+metadata_modified:

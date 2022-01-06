@@ -1,4 +1,3 @@
-
 dataset_id: br_me_rais
 
 table_id: microdados_vinculos
@@ -10,12 +9,14 @@ table_id: microdados_vinculos
 description: "Microdados públicos dos vínculos de emprego na RAIS. Base desidentificada,\
     \ isto é, que não inclui identificadores únicos de linha. Cada linha representa\
     \ um vínculo - por isso indicamos este como nível de observação mesmo que não\
-    \ conste como coluna.\n"
+    \ conste como coluna.\n" 
 
 # A máxima unidade espacial que a tabela cobre.
 spatial_coverage:
 
 # Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplo: 1995(1)2019.
 temporal_coverage:
     - 1985
     - 1986
@@ -54,16 +55,20 @@ temporal_coverage:
     - 2019
 
 # A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: one_year
 
 # Entidade representada por cada linha.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 entity:
 
 # A unidade temporal representada por cada linha.
-time_unit:
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+time_unit: one_year
 
 # O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
+# Preencha com os nomes de colunas.
+# Exemplos: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 identifying_columns:
 
@@ -72,15 +77,17 @@ last_updated:
     data:
     release:
 
-version: ''
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
     github_user: rdahis
-    ckan_user: rdahis
     website: www.ricardodahis.com
+    ckan_user: rdahis
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -94,10 +101,8 @@ data_cleaned_by:
     code_url:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "- Unificamos todos os anos.\n
-    - Padronizamos nomes de variáveis.\n
-    - Limpamos valores errados de células.\n
-    - Renomeamos municípios nulos para 'NA'."
+data_cleaning_description: "- Unificamos todos os anos.\n - Padronizamos nomes de\
+    \ variáveis.\n - Limpamos valores errados de células."
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -108,6 +113,8 @@ auxiliary_files_url:
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
 
+# A tabela tem colunas que precisam de dicionário?
+# Opções: yes, no.
 covered_by_dictionary:
 
 source_bucket_name: basedosdados-dev
@@ -120,7 +127,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: ano, sigla_uf, id_municipio
+partitions: ano, sigla_uf
 
 bdm_file_size:
 
@@ -171,7 +178,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: true
+      is_partition: false
     - name: tipo_vinculo
       bigquery_type: string
       description: Tipo do Vínculo
@@ -189,7 +196,7 @@ columns:
       bigquery_type: int64
       description: Vínculo Ativo no dia 31/12
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -199,10 +206,10 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: tipo_admissao
-      bigquery_type: string
+      bigquery_type:
       description: Tipo da Admissão
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -341,15 +348,15 @@ columns:
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: id_municipio_6_trabalho
+    - name: id_municipio_trabalho
       bigquery_type: string
-      description: ID Município de Trabalho - IBGE 6 Dígitos
+      description: ID Município de Trabalho - IBGE 7 Dígitos
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
-          column_name: id_municipio_6
+          column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
@@ -432,16 +439,16 @@ columns:
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_media_nominal
+    - name: valor_remuneracao_media
       bigquery_type: float64
-      description: Valor da Remuneração Média (Nominal)
+      description: Valor da Remuneração Média
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
@@ -471,159 +478,159 @@ columns:
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_janeiro_nominal
+    - name: valor_remuneracao_janeiro
       bigquery_type: float64
-      description: Valor da Remuneração em Janeiro (Nominal)
+      description: Valor da Remuneração em Janeiro
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_fevereiro_nominal
+    - name: valor_remuneracao_fevereiro
       bigquery_type: float64
-      description: Valor da Remuneração em Fevereiro (Nominal)
+      description: Valor da Remuneração em Fevereiro
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_marco_nominal
+    - name: valor_remuneracao_marco
       bigquery_type: float64
-      description: Valor da Remuneração em Março (Nominal)
+      description: Valor da Remuneração em Março
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_abril_nominal
+    - name: valor_remuneracao_abril
       bigquery_type: float64
-      description: Valor da Remuneração em Abril (Nominal)
+      description: Valor da Remuneração em Abril
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_maio_nominal
+    - name: valor_remuneracao_maio
       bigquery_type: float64
-      description: Valor da Remuneração em Maio (Nominal)
+      description: Valor da Remuneração em Maio
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_junho_nominal
+    - name: valor_remuneracao_junho
       bigquery_type: float64
-      description: Valor da Remuneração em Junho (Nominal)
+      description: Valor da Remuneração em Junho
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_julho_nominal
+    - name: valor_remuneracao_julho
       bigquery_type: float64
-      description: Valor da Remuneração em Julho (Nominal)
+      description: Valor da Remuneração em Julho
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_agosto_nominal
+    - name: valor_remuneracao_agosto
       bigquery_type: float64
-      description: Valor da Remuneração em Agosto (Nominal)
+      description: Valor da Remuneração em Agosto
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_setembro_nominal
+    - name: valor_remuneracao_setembro
       bigquery_type: float64
-      description: Valor da Remuneração em Setembro (Nominal)
+      description: Valor da Remuneração em Setembro
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_outubro_nominal
+    - name: valor_remuneracao_outubro
       bigquery_type: float64
-      description: Valor da Remuneração em Outubro (Nominal)
+      description: Valor da Remuneração em Outubro
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_novembro_nominal
+    - name: valor_remuneracao_novembro
       bigquery_type: float64
-      description: Valor da Remuneração em Novembro (Nominal)
+      description: Valor da Remuneração em Novembro
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: valor_remuneracao_dezembro_nominal
+    - name: valor_remuneracao_dezembro
       bigquery_type: float64
-      description: Valor da Remuneração em Dezembro (Nominal)
+      description: Valor da Remuneração em Dezembro
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
@@ -649,7 +656,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
@@ -685,8 +692,8 @@ columns:
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
-          dataset_id:
-          table_id:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: cbo_1994
           column_name:
       measurement_unit:
       has_sensitive_data: no
@@ -698,8 +705,8 @@ columns:
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
-          dataset_id:
-          table_id:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: cbo_2002
           column_name:
       measurement_unit:
       has_sensitive_data: no
@@ -711,8 +718,8 @@ columns:
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
-          dataset_id:
-          table_id:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: cnae_1
           column_name:
       measurement_unit:
       has_sensitive_data: no
@@ -724,8 +731,8 @@ columns:
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
-          dataset_id:
-          table_id:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: cnae_2
           column_name:
       measurement_unit:
       has_sensitive_data: no
@@ -766,7 +773,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
@@ -870,7 +877,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
@@ -902,7 +909,7 @@ columns:
       is_partition: false
     - name: natureza_juridica
       bigquery_type: string
-      description: Natureza Jurídica
+      description: Natureza Jurídica do Estabelecimento
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -992,4 +999,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2021-11-02T14:24:45.321768'
+metadata_modified: '2021-12-04T17:21:43.333385'

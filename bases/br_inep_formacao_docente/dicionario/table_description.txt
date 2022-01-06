@@ -1,0 +1,51 @@
+Dicionário da dados de Adequação da Formação Docente (AFD)
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Lucas Moreira
+Email: lucas.moreira@basedosdados.org
+
+
+
+
+Colunas identificando linhas unicamente
+-------------------
+- id_tabela
+- coluna
+- chave
+- cobertura_temporal
+
+
+
+
+Cobertura Temporal
+------------------
+
+
+
+
+Cobertura Espacial
+------------------
+
+
+
+
+Tratamento
+----------
+Criação do dicionário a partir de notas técnicas do INEP
+
+
+
+

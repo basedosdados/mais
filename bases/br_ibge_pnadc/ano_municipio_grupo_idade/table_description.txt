@@ -1,0 +1,64 @@
+População residente, por sexo e grupos de idade.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Crislane Alves
+Código: 
+Email: crislanealves@basedosdados.org
+Tratado por
+-----------
+Nome: Crislane Alves
+Email: crislanealves@basedosdados.org
+
+
+
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- id_municipio
+- sexo
+- grupo_idade
+
+
+
+
+Cobertura Temporal
+------------------
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+
+
+
+Cobertura Espacial
+------------------
+- b
+- r
+- a
+
+
+
+
+Tratamento
+----------
+Tratamento para consistência
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year

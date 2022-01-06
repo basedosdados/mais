@@ -27,7 +27,6 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
 -  sigla_uf
--  id_municipio
 
 
 Colunas identificando linhas unicamente
@@ -91,7 +90,6 @@ Tratamento
 - Unificamos todos os anos.
  - Padronizamos nomes de variáveis.
  - Limpamos valores errados de células.
- - Renomeamos municípios nulos para 'NA'.
 
 
 

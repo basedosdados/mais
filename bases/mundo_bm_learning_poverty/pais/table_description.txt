@@ -1,0 +1,72 @@
+Learning Poverty é um indicador do Banco Mundial que traduz a incapacidade de uma criança de 10 anos ler e compreender um texto simples. Este indicador reúne dados de escolaridade e aprendizagem entre as crianças que não alcançaram a proficiência mínima de leitura (medida nas escolas) e é ajustado pela proporção de crianças que estão fora da escola (e se presume que não sabem ler com proficiência).
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gustavo Aires
+Código: 
+Website: https://github.com/gustavoairestiago
+Email: gustavo.tiago@basedosdados.org
+Tratado por
+-----------
+Nome: Gustavo Aires
+Código: https://github.com/basedosdados/mais/tree/master/bases/mundo_bm_learning_poverty/code
+Website: https://github.com/gustavoairestiago
+Email: gustavo.tiago@basedosdados.org
+
+
+
+
+Colunas identificando linhas unicamente
+-------------------
+- year
+- country_code
+
+
+
+
+Cobertura Temporal
+------------------
+- 2001
+- 2003
+- 2006
+- 2007
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+
+
+
+
+Cobertura Espacial
+------------------
+- a
+- l
+- l
+
+
+
+
+Tratamento
+----------
+Download dos dados 
+ Renomeação das colunas 
+
+
+
+
+Frequencia de Atualização
+-------------------------
+recurring
