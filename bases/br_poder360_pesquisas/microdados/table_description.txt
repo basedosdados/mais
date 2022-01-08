@@ -25,6 +25,8 @@ Email: rdahis@basedosdados.org
 Colunas identificando linhas unicamente
 -------------------
 - id_pesquisa
+- id_cenario
+- id_candidato
 
 
 
@@ -66,7 +68,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-['Excluímos colunas dos dados originais que simplesmente listavam os IDs de cargo, município, instituto, etc.', 'Reordenamos colunas para facilitar entendimento.']
+- Excluímos colunas dos dados originais que simplesmente listavam os IDs de cargo, município, instituto, etc. - Reordenamos colunas para facilitar entendimento.
 
 
 

@@ -209,7 +209,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: data_referencia
-      bigquery_type: date
+      bigquery_type: string
       description: Data de referência
       temporal_coverage:
       covered_by_dictionary: no
@@ -274,7 +274,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: quantidade_entrevistas
-      bigquery_type: int64
+      bigquery_type: float64
       description: Quantidade de entrevistas
       temporal_coverage:
       covered_by_dictionary: no
@@ -287,7 +287,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: margem_mais
-      bigquery_type: int64
+      bigquery_type: float64
       description: Margem a mais
       temporal_coverage:
       covered_by_dictionary: no
@@ -300,7 +300,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: margem_menos
-      bigquery_type: int64
+      bigquery_type: float64
       description: Margem a menos
       temporal_coverage:
       covered_by_dictionary: no
