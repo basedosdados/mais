@@ -58,6 +58,8 @@ time_unit:
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 identifying_columns:
   - id_pesquisa
+  - id_cenario
+  - id_candidato
 
 last_updated:
     metadata:
