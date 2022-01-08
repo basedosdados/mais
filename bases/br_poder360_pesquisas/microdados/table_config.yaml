@@ -59,7 +59,7 @@ time_unit:
 identifying_columns:
   - id_pesquisa
   - id_cenario
-  - id_candidato
+  - id_candidato_poder360
 
 last_updated:
     metadata:
