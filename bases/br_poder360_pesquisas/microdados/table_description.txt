@@ -26,7 +26,7 @@ Colunas identificando linhas unicamente
 -------------------
 - id_pesquisa
 - id_cenario
-- id_candidato
+- id_candidato_poder360
 
 
 
