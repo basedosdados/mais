@@ -39,13 +39,14 @@ class Dataset(Base):
             for m in mode
         )
 
-    def _setup_dataset_object(self, dataset_id):
+    def _setup_dataset_object(self, dataset_id, location=None):
 
         dataset = bigquery.Dataset(dataset_id)
         ## TODO: not being used since 1.6.0 - need to redo the description tha goes to bigquery
         # dataset.description = self._render_template(
         #     Path("dataset/dataset_description.txt"), self.dataset_config
         # )
+        dataset.location = location
 
         return dataset
 
@@ -109,10 +110,6 @@ class Dataset(Base):
             mode (bool): Which dataset to create [prod|staging|all].
         """
 
-        ### add a layer of control, if make_pulbic = True then stays the same as now.
-        ### else if make_public = False then not git allUsers acess.
-        ## default should be make_pulbic = True?
-
         for m in self._loop_modes(mode):
 
             dataset = m["client"].get_dataset(m["id"])
@@ -141,7 +138,7 @@ class Dataset(Base):
 
             m["client"].update_dataset(dataset, ["access_entries"])
 
-    def create(self, mode="all", if_exists="raise"):
+    def create(self, mode="all", if_exists="raise", location=None):
         """Creates BigQuery datasets given `dataset_id`.
 
         It can create two datasets:
@@ -160,6 +157,10 @@ class Dataset(Base):
                 * update : Update dataset description
                 * pass : Do nothing
 
+            location (str): Optional. Location of dataset data.
+                List of possible region names locations: https://cloud.google.com/bigquery/docs/locations
+
+
         Raises:
             Warning: Dataset already exists and if_exists is set to `raise`
         """
@@ -175,7 +176,7 @@ class Dataset(Base):
         for m in self._loop_modes(mode):
 
             # Construct a full Dataset object to send to the API.
-            dataset_obj = self._setup_dataset_object(m["id"])
+            dataset_obj = self._setup_dataset_object(m["id"], location=location)
 
             # Send the dataset to the API for creation, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
@@ -203,11 +204,14 @@ class Dataset(Base):
 
             m["client"].delete_dataset(m["id"], delete_contents=True, not_found_ok=True)
 
-    def update(self, mode="all"):
+    def update(self, mode="all", location=None):
         """Update dataset description. Toogle mode to choose which dataset to update.
 
         Args:
             mode (str): Optional. Which dataset to update [prod|staging|all]
+            location (str): Optional. Location of dataset data.
+                List of possible region names locations: https://cloud.google.com/bigquery/docs/locations
+
         """
 
         for m in self._loop_modes(mode):
@@ -216,5 +220,7 @@ class Dataset(Base):
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             dataset = m["client"].update_dataset(
-                self._setup_dataset_object(m["id"]), fields=["description"]
+                self._setup_dataset_object(m["id"]),
+                fields=["description"],
+                location=location,
             )  # Make an API request.

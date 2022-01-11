@@ -543,6 +543,7 @@ class Table(Base):
         if_table_config_exists="raise",
         source_format="csv",
         columns_config_url=None,
+        location=None,
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -594,6 +595,9 @@ class Table(Base):
                 The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
                 The sheet must contain the column name: "coluna" and column description: "descricao"
 
+            location (str): Optional. Location of dataset data.
+                List of possible region names locations: https://cloud.google.com/bigquery/docs/locations
+
         """
 
         if path is None:
@@ -632,7 +636,7 @@ class Table(Base):
             except FileExistsError:
                 pass
 
-            dataset_obj.create(if_exists="pass")
+            dataset_obj.create(if_exists="pass", location=location)
 
         self.init(
             data_sample_path=path,
