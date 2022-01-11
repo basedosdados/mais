@@ -12,7 +12,7 @@ Pronto(a) para começar? Nesta página você encontra:
 
 - [Primeiros passos](#primeiros-passos)
 - [Tutoriais](#tutoriais)
-- [Manuais de referência](#manuais-de-referencia)
+- [Manuais de referência](#manuais-de-referencia-api)
 
 ## Primeiros passos
 
@@ -24,8 +24,8 @@ fazer queries em nosso *datalake* público.
 
 1. **[Acesse o Google Cloud](https://console.cloud.google.com/projectselector2/home/dashboard)**.
    Caso for a sua primeira vez, aceite o Termo de Serviços.
-3. **Clique em `Create Project/Criar Projeto`**. Escolha um nome bacana para o projeto.
-5. **Clique em `Create/Criar`**
+2. **Clique em `Create Project/Criar Projeto`**. Escolha um nome bacana para o projeto.
+3. **Clique em `Create/Criar`**
 
 ??? Info "Por que eu preciso criar um projeto no Google Cloud?"
     A Google fornece 1 TB gratuito por mês de uso do BigQuery para cada
@@ -52,12 +52,7 @@ RStudio ou editor de sua preferência.
     ```
 
 === "Stata"
-    ```bash
-    # Ainda não temos suporte :( 
-    # Seja a primeira pessoa a contribuir (veja Issue #83 no GitHub)!
-    ```
-
-
+    **Em desenvolvimento!** [Acompanhe e colabore aqui](https://github.com/basedosdados/mais/pull/754)
 ### Configurando o pacote
 
 Uma vez com seu projeto, você precisa configurar o pacote para usar o ID
@@ -65,7 +60,7 @@ desse projeto nas consultas ao *datalake*. Para isso, você deve usar o
 `Project ID/ID do projeto` que a Google fornece para você assim que o
 projeto é criado.
 
-![](images/project_id_example.png)
+![Exemplo de ID do Projeto no BigQuery](images/project_id_example.png)
 
 === "R"
     *Uma vez com o `Project ID/ID do projeto`, você deve passar essa
@@ -78,7 +73,7 @@ projeto é criado.
     *Não é necessário configurar o projeto de antemão. Assim que você
     roda a 1ª consulta, o pacote irá indicar os passos para configuração.*
 
-### Faça sua primeira consulta!
+### Faça sua primeira consulta
 
 Um exemplo simples para começar a explorar o *datalake* é puxar informações cadastrais de
 municípios direto na nossa base de [Diretórios Brasileiros (tabela `municipio`)](https://basedosdados.org/dataset/br-bd-diretorios-brasil). Para isso, vamos usar a
@@ -92,8 +87,8 @@ função `download`, baixando os dados direto para nossa máquina.
     data <- download(query, file.path(dir, "municipio.csv"))
     ```
 
-    *Para entender mais sobre a função `download`, leia o [manual de referência](/mais/reference_api_r).*
-    
+    *Para entender mais sobre a função `download`, leia o [manual de referência](../api_reference_r).*
+
 === "Python"
     ```python
     import basedosdados as bd
@@ -101,16 +96,17 @@ função `download`, baixando os dados direto para nossa máquina.
     dataset_id="br-bd-diretorios-brasil", table_id="municipio")
     ```
 
-    *Para entender mais sobre a função `download`, leia o [manual de referência](/mais/reference_api_py).*
+    *Para entender mais sobre a função `download`, leia o [manual de referência](../api_reference_python).*
 
 === "CLI"
     ```bash
     basedosdados download "where/to/save/file" \
     --billing_project_id <YOUR_PROJECT_ID> \
-    --query 'SELECT * FROM `basedosdados.br_bd_diretorios_brasil.municipio`'
+    --query 'SELECT * FROM
+    `basedosdados.br_bd_diretorios_brasil.municipio`'
     ```
-    *Para entender mais sobre a função `download`, leia o [manual de referência](/mais/reference_api_cli).*
-    
+    *Para entender mais sobre a função `download`, leia o [manual de referência](../api_reference_cli).*
+
 ## Tutoriais
 
 ### Como usar os pacotes
@@ -128,8 +124,7 @@ para você começar a usá-los.
     Vídeos:
 
     - [Workshop: Aprenda a acessar dados públicos em R](https://www.youtube.com/watch?v=M9ayiseIjvI&t=250s)
-    
-    
+
 === "Python"
     Blog:
 
@@ -139,12 +134,9 @@ para você começar a usá-los.
     Vídeos:
 
     - [Workshop: Aplicações em Python](https://www.youtube.com/watch?v=wI2xEioDPgM)
-    
 
-## Manuais de referência
+## Manuais de referência (API)
 
-#### [:material-language-r: R](/reference_api_r)
-
-#### [:material-language-python: Python](/reference_api_py)
-
-#### [:octicons-terminal-16: CLI](/reference_api_cli)
+* [:material-language-r: R](../api_reference_r)
+* [:material-language-python: Python](../api_reference_python)
+* [:octicons-terminal-16: CLI](../api_reference_cli)

@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -16,10 +15,10 @@ TIPOS:
     - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-
 */
+
 CREATE VIEW basedosdados-dev.br_tse_eleicoes.despesas_candidato AS
-SELECT
+SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(turno AS INT64) turno,
 SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
@@ -46,8 +45,11 @@ SAFE_CAST(tipo_prestacao_contas AS STRING) tipo_prestacao_contas,
 SAFE_CAST(data_prestacao_contas AS DATE) data_prestacao_contas,
 SAFE_CAST(sequencial_prestador_contas AS STRING) sequencial_prestador_contas,
 SAFE_CAST(cnpj_prestador_contas AS STRING) cnpj_prestador_contas,
+SAFE_CAST(cnpj_candidato AS STRING) cnpj_candidato,
 SAFE_CAST(tipo_documento AS STRING) tipo_documento,
 SAFE_CAST(numero_documento AS STRING) numero_documento,
+SAFE_CAST(especie_recurso AS STRING) especie_recurso,
+SAFE_CAST(fonte_recurso AS STRING) fonte_recurso,
 SAFE_CAST(cpf_cnpj_fornecedor AS STRING) cpf_cnpj_fornecedor,
 SAFE_CAST(nome_fornecedor AS STRING) nome_fornecedor,
 SAFE_CAST(nome_fornecedor_rf AS STRING) nome_fornecedor_rf,
@@ -63,4 +65,4 @@ SAFE_CAST(numero_partido_fornecedor AS STRING) numero_partido_fornecedor,
 SAFE_CAST(sigla_partido_fornecedor AS STRING) sigla_partido_fornecedor,
 SAFE_CAST(nome_partido_fornecedor AS STRING) nome_partido_fornecedor,
 SAFE_CAST(cargo_fornecedor AS STRING) cargo_fornecedor
-from basedosdados-dev.br_tse_eleicoes_staging.despesas_candidato as t
+FROM basedosdados-dev.br_tse_eleicoes_staging.despesas_candidato AS t

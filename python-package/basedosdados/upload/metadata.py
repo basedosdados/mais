@@ -304,11 +304,11 @@ class Metadata(Base):
                 ckan_metadata["columns"] = [{"name": c} for c in columns]
 
             yaml_obj = build_yaml_object(
-                self.dataset_id,
-                self.table_id,
-                self.config,
-                self.metadata_schema,
-                ckan_metadata,
+                dataset_id=self.dataset_id,
+                table_id=self.table_id,
+                config=self.config,
+                schema=self.metadata_schema,
+                metadata=ckan_metadata,
                 columns_schema=self.columns_schema,
                 partition_columns=partition_columns,
             )
@@ -491,6 +491,8 @@ def handle_data(k, schema, data, local_default=None):
         list: a list of metadata values
     """
 
+    # If no data is None then return a empty dict
+    data = data if data is not None else {}
     # If no data is found for that key, uses local default
     selected = data.get(k, local_default)
 
@@ -536,10 +538,11 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
     d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
     if "properties" in definitions[d].keys():
         for dk, dv in definitions[d]["properties"].items():
+
             yaml_obj[k][dk] = handle_data(
-                dk,
-                definitions[d]["properties"],
-                data.get(k, {}),
+                k=dk,
+                schema=definitions[d]["properties"],
+                data=data.get(k, {}),
             )
 
     return yaml_obj
@@ -575,17 +578,17 @@ def add_yaml_property(
         if goal_was_reached:
             if "allOf" in property:
                 yaml = handle_complex_fields(
-                    yaml,
-                    key,
-                    properties,
-                    definitions,
-                    metadata,
+                    yaml_obj=yaml,
+                    k=key,
+                    properties=properties,
+                    definitions=definitions,
+                    data=metadata,
                 )
 
                 if yaml[key] == ordereddict():
-                    yaml[key] = handle_data(key, properties, metadata)
+                    yaml[key] = handle_data(k=key, schema=properties, data=metadata)
             else:
-                yaml[key] = handle_data(key, properties, metadata)
+                yaml[key] = handle_data(k=key, schema=properties, data=metadata)
 
             # Add comments
             comment = None
@@ -610,10 +613,10 @@ def add_yaml_property(
         updated_props = deepcopy(properties)
         updated_props.pop(key)
         return add_yaml_property(
-            yaml,
-            updated_props,
-            definitions,
-            metadata,
+            yaml=yaml,
+            properties=updated_props,
+            definitions=definitions,
+            metadata=metadata,
             goal=id_after,
             has_column=has_column,
         )
@@ -655,10 +658,10 @@ def build_yaml_object(
 
     # Add properties
     yaml = add_yaml_property(
-        ryaml.CommentedMap(),
-        properties,
-        definitions,
-        metadata,
+        yaml=ryaml.CommentedMap(),
+        properties=properties,
+        definitions=definitions,
+        metadata=metadata,
     )
 
     # Add columns
@@ -666,10 +669,10 @@ def build_yaml_object(
         yaml["columns"] = []
         for metadatum in metadata.get("columns"):
             properties = add_yaml_property(
-                ryaml.CommentedMap(),
-                columns_schema["properties"],
-                columns_schema["definitions"],
-                metadatum,
+                yaml=ryaml.CommentedMap(),
+                properties=columns_schema["properties"],
+                definitions=columns_schema["definitions"],
+                metadata=metadatum,
                 has_column=True,
             )
             yaml["columns"].append(properties)
