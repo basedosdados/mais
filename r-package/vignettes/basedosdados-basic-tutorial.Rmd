@@ -1,0 +1,170 @@
+---
+title: "basedosdados-basic-tutorial"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{basedosdados-basic-tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(basedosdados)
+```
+
+{basedosdados} is an incredibly powerful R package that makes hundreds of tidy
+datasets available easily. We have uploaded data for a variety of thematics,
+ranging from education, to jobs, the environment and even most common names by
+municipality. All of these datasets are available at Google Cloud,the R package 
+is just a tool to access them.
+
+### Our one requisite
+##### Google Project ID
+The only requirement for using our package is having a Google project id. Our platform uses Google Cloud to store all our data. In order to access it, you 
+need to have a Project on Cloud so that Google knows who is using their service.
+You will not pay anything without being consulted first: you have 200 gigabytes
+to use monthly for free. There is a whole tutorial on how to set up a Google 
+Project in English [here](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
+
+### Setting up your Base dos Dados environment
+Once you have a Google project ID, you will be able to access our datasets. 
+There are two ways of plugging in the id. In both of them, you should always 
+enter the project ID as a string.
+
+1. First way is through our function designed to store the id in the 
+session. You just call the function `set_billing_id()` and put your project id
+as a string as the only argument. In the examples, we use a simulation of a
+Google project ID:
+
+```{r, eval = FALSE}
+basedosdados::set_billing_id('<your_billing_id>')
+```
+
+2. The second way is by using a argument present in all our functions called
+`billing_project_id`. In this case, you have to call this argument everytime you 
+use one of our functions that retrieves datasets:
+
+```{r, eval = FALSE}
+basedosdados::read_sql("SELECT * FROM `basedosdados.br_ibge_inflacao.ipca`",
+                       billing_project_id = '<your_billing_id>')
+```
+
+
+### Basic functions: `read_sql()` and `download()`
+
+#### Reading SQL queries into datasets
+
+Nowadays we have about 7 different functions, though the most basic one, our
+go-to function is without a doubt `basedosdados::read_sql()`.
+
+This allows us to access a dataset and open it in our R session by inputing the
+SQL query (and a project id in case you haven't used `set_billing_id`). Breaking
+down the arguments in more detail, we have:
+
+`The first argument` is `query`, precisely a SQL query to retrieve the dataset 
+from the Cloud platform into your R session.The most important verbs here are
+`SELECT` and `FROM` which tell the Cloud platform which columns you are 
+**selecting**, and from **which dataset**.
+
+Managing these two main verbs gives you a good all around functionality of the
+package. As an in-depth example, lets work with the inflation dataset on 
+different levels, showcasing the strength of SQL language.
+
+#### Examples on `read_sql()`
+
+The chosen dataset for our example is called 'br_ibge_populacao.municipio'. A dataset about brazilian population throughout different municipalities and
+throughout the years.
+
+##### Opening the most basic dataset
+We can just open the dataset without any subsetting or agregation and with
+all its columns. That would be the most basic way of accessing a dataset.
+
+```{r, eval=FALSE}
+basedosdados::read_sql('SELECT * FROM `basedosdados.br_ibge_populacao.municipio`')
+```
+
+Despite being able to open the whole dataset and filter and aggregate it on R,
+it would be more efficient to already request a **filtered** or an **aggregated** 
+dataset.
+
+##### Opening a column-selected dataset
+
+Instead of opening the whole dataset, you could be interested in a specific
+subgroup of columns. In the following chunk, we choose not to select the state
+identifier column. We do that by replacing the * for the name of the columns
+we want.
+
+```{r, eval = FALSE}
+basedosdados::read_sql('SELECT ano, id_municipio, populacao
+                       FROM `basedosdados.br_ibge_populacao.municipio`')
+```
+
+In this specific case, as the table is not so big, it would not be much of an
+advantage. There are, though, a lot of cases in which tables have more than
+10 columns. If one is interested in only 3 or 4 variables, this is of huge help.
+
+The main advantage of selecting specific columns is reducing the total size
+of the table.
+
+##### Opening an aggregated table
+
+Instead of opening a column-specific table, we can also choose to aggregate our
+table in a specific way. This is a game changer as you do **not need** to open
+the whole table only to later on aggregate it. You can directly aggregate a 
+table on Cloud and open the already aggregated version.
+
+This saves a treamendous ammount of storage and machine capacity as you don't 
+need to deal with a huge table.
+
+In the following example we aggregate by year and by state, using the 
+`GROUP BY` command for these two variables. Note how we also use the `SUM()`
+function around 'populacao' (population) as the dataset is aggregated, the
+other variables must be aggregated somehow as well.
+
+```{r, eval  = FALSE}
+basedosdados::read_sql('SELECT sigla_uf, ano, SUM(populacao) as populacao
+                       FROM `basedosdados.br_ibge_populacao.municipio`
+                       GROUP BY sigla_uf, ano')
+```
+
+Other interesting possibilities here include aggregating by year only, instead 
+of by year and state. In this case, we would have as the following chunk:
+
+```{r, eval = FALSE}
+basedosdados::read_sql('SELECT ano, SUM(populacao) as populacao
+                       FROM `basedosdados.br_ibge_populacao.municipio`
+                       GROUP BY ano')
+```
+
+
+All around it is possible to completely change the structure of the query,
+resulting in completely different results.
+
+#### Downloading datasets from queries
+
+The `download()` is rather similar to our `read_sql()` but instead of opening
+a dataset in the current R session, `download()` actually **downloads** (gasp)
+the data to a specific directory in your computer.
+
+In order to do that, it requires **not only** a query (and the project id in case
+you have not been using `set_billing_id()`) **but also** a path, so that it 
+knows where to download the dataset to. In case we wanted to download the last
+already aggregated dataset for example, we would have:
+```{r, eval=FALSE}
+basedosdados::download(query = 'SELECT ano, SUM(populacao) as populacao
+                       FROM `basedosdados.br_ibge_populacao.municipio`
+                       GROUP BY ano',
+                       path = "my_user/documents/examples")
+```
+
+
+
+
+
+
