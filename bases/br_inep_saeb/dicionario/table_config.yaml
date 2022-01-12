@@ -34,7 +34,7 @@ time_unit:
 # Exemplos: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 identifying_columns:
-    - table_id
+    - id_tabela
     - coluna
     - chave
     - cobertura_temporal

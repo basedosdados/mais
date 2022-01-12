@@ -42,14 +42,15 @@ class Dataset(Base):
     def _setup_dataset_object(self, dataset_id):
 
         dataset = bigquery.Dataset(dataset_id)
-        dataset.description = self._render_template(
-            Path("dataset/dataset_description.txt"), self.dataset_config
-        )
+        ## TODO: not being used since 1.6.0 - need to redo the description tha goes to bigquery
+        # dataset.description = self._render_template(
+        #     Path("dataset/dataset_description.txt"), self.dataset_config
+        # )
 
         return dataset
-    
+
     def _write_readme_file(self):
-        
+
         readme_content = (
             f"Como capturar os dados de {self.dataset_id}?\n\nPara cap"
             f"turar esses dados, basta verificar o link dos dados orig"
@@ -61,9 +62,7 @@ class Dataset(Base):
             f"//basedosdados.org/dataset/{self.dataset_id.replace('_','-')}"
         )
 
-        readme_path = Path(
-            self.metadata_path / self.dataset_id / 'README.md'
-        )
+        readme_path = Path(self.metadata_path / self.dataset_id / "README.md")
 
         with open(readme_path, "w") as readmefile:
             readmefile.write(readme_content)
