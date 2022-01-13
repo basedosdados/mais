@@ -10,7 +10,7 @@ Description: An R interface to the 'Base dos Dados' API <https:basedosdados.gith
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports: 
     purrr (>= 0.3.4),
     dplyr (>= 1.0.6),
@@ -23,7 +23,7 @@ Imports:
     stringr (>= 1.4.0),
     dotenv (>= 1.0.2),
     bigrquery (>= 1.4.0),
-    glue (>= 1.4.2),
+    glue (>= 1.6.0),
     rlang (>= 0.4.0),
     writexl (>= 1.4.0),
     fs (>= 1.5.0),
@@ -35,3 +35,5 @@ Suggests:
     knitr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Remotes:  
+    tidyverse/glue
