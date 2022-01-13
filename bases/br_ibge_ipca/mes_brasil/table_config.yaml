@@ -87,7 +87,7 @@ identifying_columns:
 
 last_updated:
     metadata:
-    data:
+    data: 2022_01_12
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
