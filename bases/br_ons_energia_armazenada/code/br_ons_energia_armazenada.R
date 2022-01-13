@@ -21,10 +21,15 @@ list_rename = c('data' = 'data',
 
 #Limpa e salva dados
 
-df = ONS_EAR_subsistemas(2000, 2021) %>% 
+df = ONS_EAR_subsistemas(2000) %>% 
   as_tibble()%>%
   rename(list_rename)
 
 
-write.csv(df, "~/basedosdados/tratamento/br_ons_energia_armazenada/output/microdados.csv", na = " ", 
-                   row.names = F, fileEncoding = "UTF-8")
+write.csv(
+  df,
+  "~/output/microdados.csv",
+  na = " ",
+  row.names = F,
+  fileEncoding = "UTF-8"
+)
