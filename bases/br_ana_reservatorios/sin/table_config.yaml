@@ -144,9 +144,9 @@ columns:
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: codigo_reservatorio
+    - name: id_reservatorio
       bigquery_type: string
-      description: Código do reservatório segundo o SAR-ANA
+      description: ID do reservatório segundo o SAR-ANA
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -157,7 +157,7 @@ columns:
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: reservatorio
+    - name: nome_reservatorio
       bigquery_type: string
       description: Nome do reservatório
       temporal_coverage:
@@ -179,7 +179,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: m 
+      measurement_unit: meter
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false

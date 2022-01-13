@@ -20,8 +20,8 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_ana_reservatorios.sin AS
 SELECT 
 SAFE_CAST(data AS DATE) data,
-SAFE_CAST(codigo_reservatorio AS STRING) codigo_reservatorio,
-SAFE_CAST(reservatorio AS STRING) reservatorio,
+SAFE_CAST(id_reservatorio AS STRING) id_reservatorio,
+SAFE_CAST(nome_reservatorio AS STRING) nome_reservatorio,
 SAFE_CAST(cota AS FLOAT64) cota,
 SAFE_CAST(afluencia AS FLOAT64) afluencia,
 SAFE_CAST(defluencia AS FLOAT64) defluencia,
