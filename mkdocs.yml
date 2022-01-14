@@ -62,6 +62,8 @@ nav:
       - Python: api_reference_python.md
       - R: api_reference_r.md
       - CLI: api_reference_cli.md
+    - Perguntas frequentes: 
+      - Erros: faq_error.md
     - Contribua: 
       - Dados: colab_data.md
       - Infraestrutura: colab_infrastructure.md
