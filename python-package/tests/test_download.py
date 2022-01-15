@@ -205,7 +205,7 @@ def test_read_table():
     )
 
 
-def test_list_datasets_default(capsys):
+def test_list_datasets_simple_verbose(capsys):
 
     out = list_datasets(
         query="trabalho", limit=10, with_description=False, verbose=True
@@ -217,7 +217,7 @@ def test_list_datasets_default(capsys):
         search(query="trabalho", order_by="name")
 
 
-def test_list_datasets_noverbose():
+def test_list_datasets_simple_list():
 
     out = list_datasets(
         query="", limit=12, with_description=False, verbose=False
@@ -248,42 +248,36 @@ def test_list_datasets_complete_verbose(capsys):
     assert "description" in out
 
 
-def test_list_dataset_tables(capsys):
+def test_list_dataset_tables_simple_verbose(capsys):
 
-    list_dataset_tables(dataset_id="br_ibge_censo_demografico", from_file=True)
+    list_dataset_tables(dataset_id="br-sp-alesp", with_description=False, verbose=True)
     out, err = capsys.readouterr()  # Capture prints
     assert "table_id" in out
 
 
-def test_list_dataset_tables_complete(capsys):
+def test_list_dataset_tables_simple_list():
 
-    list_dataset_tables(
-        dataset_id="br_ibge_censo_demografico",
-        filter_by="renda",
-        with_description=True,
-        from_file=True,
-    )
+    out = list_dataset_tables(dataset_id="br-sp-alesp", with_description=False, verbose=False)
+
+    assert type(out) == list
+    assert len(out) > 0
+
+
+def test_list_dataset_tables_complete_verbose(capsys):
+
+    list_dataset_tables(dataset_id="br-sp-alesp", with_description=True, verbose=True)
+
     out, err = capsys.readouterr()  # Capture prints
     assert "table_id" in out
     assert "description" in out
-    assert "renda" in out
 
 
-def test_list_dataset_tables_all_descriptions(capsys):
-    list_dataset_tables(
-        dataset_id="br_ibge_censo_demografico", with_description=True, from_file=True
-    )
-    out, err = capsys.readouterr()  # Capture prints
-    assert len(out) > 0
+def test_list_dataset_tables_complete_list():
 
+    out = list_dataset_tables(dataset_id="br-sp-alesp", with_description=True, verbose=False)
 
-def test_list_dataset_tables_verbose_false():
-
-    out = list_dataset_tables(
-        dataset_id="br_ibge_censo_demografico", from_file=True, verbose=False
-    )
-    assert type(out) == list
-    assert len(out) > 0
+    assert type(out)==list
+    assert type(out[0])==dict
 
 
 def test_get_dataset_description(capsys):

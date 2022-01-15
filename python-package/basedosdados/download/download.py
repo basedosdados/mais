@@ -364,7 +364,7 @@ def list_datasets(query, limit=10, with_description=False, verbose=True):
 
     Args:
         query (str):
-            String to search in datasets and tables' metadata.
+            String to search in datasets' metadata.
         limit (int):
             Field to limit the number of results
         with_description (bool): Optional
@@ -383,7 +383,7 @@ def list_datasets(query, limit=10, with_description=False, verbose=True):
         response = requests.get(url)
         response.raise_for_status()
     except requests.exceptions.HTTPError as err:
-        print(err)
+        return err
 
     json_response = response.json()
 
@@ -413,30 +413,28 @@ def list_datasets(query, limit=10, with_description=False, verbose=True):
                 "dataset_id": dataset_dict["dataset_id"][k],
                 "description": dataset_dict["description"][k],
             }
-            for k in range(len(dataset_dict.keys()))
+            for k in range(len(dataset_dict["dataset_id"]))
         ]
+
 
 def list_dataset_tables(
     dataset_id,
-    query_project_id="basedosdados",
-    from_file=False,
-    filter_by=None,
     with_description=False,
     verbose=True,
 ):
     """Fetch table_id for tables available at the specified dataset_id. Prints the information
     on screen or returns it as a list.
+
     Args:
         dataset_id (str): Optional.
-            Dataset id available in basedosdados.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
-        filter_by (str): Optional
-            String to be matched in the table_id.
+            Dataset id returned by list_datasets function
+        limit (int):
+            Field to limit the number of results
         with_description (bool): Optional
              If True, fetch short table descriptions for each table that match the search criteria.
         verbose (bool): Optional.
             If set to True, information is printed to the screen. If set to False, a list object is returned.
+
     Example:
         list_dataset_tables(
         dataset_id='br_ibge_censo2010'
@@ -444,35 +442,45 @@ def list_dataset_tables(
         with_description=True,
         )
     """
-    client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=query_project_id
-    )
 
-    dataset = client.get_dataset(dataset_id)
+    url = f"https://basedosdados.org/api/3/action/bd_dataset_search?&resource_type=bdm_table"
 
-    tables_list = list(client.list_tables(dataset))
+    # validate url
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as err:
+        return err
 
-    tables = pd.DataFrame(
-        [table.table_id for table in tables_list], columns=["table_id"]
-    )
+    json_response = response.json()
 
-    if filter_by:
+    #this dict has all information need to output the function
+    table_dict = {
+        "table_id": [
+            dataset['resources'][k]["name"] for dataset in json_response["result"]["datasets"] for k in range(len(dataset['resources'])) if dataset['name']==dataset_id
+        ],
+        "description": [
+            dataset['resources'][k]["description"] for dataset in json_response["result"]["datasets"] for k in range(len(dataset['resources'])) if dataset['name']==dataset_id
+        ],
+    }
 
-        tables = tables.loc[tables["table_id"].str.contains(filter_by)]
-
-    if with_description:
-
-        tables["description"] = [
-            _get_header(client.get_table(f"{dataset_id}.{table}").description)
-            for table in tables["table_id"]
+    # #select desired output using table_id info. Note that the output is either a standardized string or a list
+    if verbose & (with_description == False):
+        return _print_output(pd.DataFrame.from_dict(table_dict)[["table_id"]])
+    elif verbose & with_description:
+        return _print_output(
+            pd.DataFrame.from_dict(table_dict)[["table_id", "description"]]
+        )
+    elif (verbose == False) & (with_description == False):
+        return table_dict["table_id"]
+    elif (verbose == False) & with_description:
+        return [
+            {
+                "table_id": table_dict["table_id"][k],
+                "description": table_dict["description"][k],
+            }
+            for k in range(len(table_dict["table_id"]))
         ]
-
-    return _handle_output(
-        verbose=verbose,
-        output_type="list",
-        df=tables,
-        col_name="table_id",
-    )
 
 
 def get_dataset_description(
