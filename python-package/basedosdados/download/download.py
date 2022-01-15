@@ -358,62 +358,69 @@ def _handle_output(verbose, output_type, df, col_name=None):
     return None
 
 
-def list_datasets(
-    query_project_id="basedosdados",
-    filter_by=None,
-    with_description=False,
-    from_file=False,
-    verbose=True,
-):
-    """Fetch the dataset_id of datasets available at query_project_id. Prints information on
-    screen or returns it as a list.
+def list_datasets(query, order_by, with_description=False, verbose=True):
+    """This function uses `bd_dataset_search` website API
+    enpoint to retrieve a list of available datasets.
 
     Args:
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
-        filter_by (str): Optional
-            String to be matched in dataset_id.
+        query (str):
+            String to search in datasets and tables' metadata.
+        order_by (str): score|popular|recent
+            Field by which the results will be ordered.
         with_description (bool): Optional
             If True, fetch short dataset description for each dataset.
         verbose (bool): Optional.
             If set to True, information is printed to the screen. If set to False, a list object is returned.
 
-
-    Example:
-        list_datasets(
-        filter_by='sp',
-        with_description=True,
-        )
+    Returns:
+        list | string of datasets
     """
 
-    client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=query_project_id
-    )
+    # validate order_by input
+    if order_by not in ["score", "popular", "recent"]:
+        raise ValueError(
+            f'order_by must be score, popular or recent. Received "{order_by}"'
+        )
 
-    datasets_list = list(client.list_datasets())
+    url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q={query}&order_by={order_by}&resource_type=bdm_table"
 
-    datasets = pd.DataFrame(
-        [dataset.dataset_id for dataset in datasets_list], columns=["dataset_id"]
-    )
+    # validate url
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as err:
+        print(err)
 
-    if filter_by:
+    json_response = response.json()
 
-        datasets = datasets.loc[datasets["dataset_id"].str.contains(filter_by)]
+    # this dict has all information we need to output the function
+    dataset_dict = {
+        "dataset_id": [
+            dataset["name"] for dataset in json_response["result"]["datasets"]
+        ],
+        "description": [
+            dataset["notes"] if "notes" in dataset.keys() else None
+            for dataset in json_response["result"]["datasets"]
+        ],
+    }
 
-    if with_description:
-
-        datasets["description"] = [
-            _get_header(client.get_dataset(dataset).description)
-            for dataset in datasets["dataset_id"]
+    # select desired output using dataset_id info. Note that the output is either a standardized string or a list
+    if verbose & (with_description == False):
+        return _print_output(pd.DataFrame.from_dict(dataset_dict)[["dataset_id"]])
+    elif verbose & with_description:
+        return _print_output(
+            pd.DataFrame.from_dict(dataset_dict)[["dataset_id", "description"]]
+        )
+    elif (verbose == False) & (with_description == False):
+        return dataset_dict["dataset_id"]
+    elif (verbose == False) & with_description:
+        return [
+            {
+                "dataset_id": dataset_dict["dataset_id"][k],
+                "description": dataset_dict["description"][k],
+            }
+            for k in range(len(dataset_dict.keys()))
         ]
-
-    return _handle_output(
-        verbose=verbose,
-        output_type="list",
-        df=datasets,
-        col_name="dataset_id",
-    )
-
 
 def list_dataset_tables(
     dataset_id,
@@ -655,16 +662,14 @@ def search(query, order_by):
             f'order_by must be score, popular or recent. Received "{order_by}"'
         )
 
-    base_url = "https://basedosdados.org/api/3/action/bd_dataset_search"
     url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q={query}&order_by={order_by}&resource_type=bdm_table"
-    response = requests.get(url)
-    status_code = response.status_code
 
     # validate url
-    if status_code != 200:
-        raise ValueError(
-            f"The API endpoint doesn't look to be available. Please, check if any change has occurred at url {base_url}"
-        )
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as err:
+        print(err)
 
     json_response = response.json()
 

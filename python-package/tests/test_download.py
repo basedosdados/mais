@@ -205,26 +205,48 @@ def test_read_table():
     )
 
 
-def test_list_datasets(capsys):
+def test_list_datasets_default(capsys):
 
-    list_datasets(from_file=True)
+    out = list_datasets(
+        query="trabalho", order_by="score", with_description=False, verbose=True
+    )
     out, err = capsys.readouterr()  # Capture prints
     assert "dataset_id" in out
+    # check input error
+    with pytest.raises(ValueError):
+        search(query="trabalho", order_by="name")
 
 
-def test_list_datasets_complete(capsys):
+def test_list_datasets_noverbose():
 
-    list_datasets(with_description=True, filter_by="ibge", from_file=True)
+    out = list_datasets(
+        query="trabalho", order_by="score", with_description=False, verbose=False
+    )
+    # check if function returns list
+    assert isinstance(out, list)
+
+
+def test_list_datasets_complete_list():
+
+    out = list_datasets(
+        query="trabalho", order_by="score", with_description=True, verbose=False
+    )
+    # check if function returns list
+    assert isinstance(out, list)
+    assert "dataset_id" in out[0].keys()
+    assert "description" in out[0].keys()
+
+
+def test_list_datasets_complete_verbose(capsys):
+
+    list_datasets(
+        query="trabalho", order_by="score", with_description=True, verbose=True
+    )
     out, err = capsys.readouterr()  # Capture prints
     assert "dataset_id" in out
     assert "description" in out
 
 
-def test_list_datasets_all_descriptions(capsys):
-
-    list_datasets(with_description=True, from_file=True)
-    out, err = capsys.readouterr()  # Capture prints
-    assert len(out) > 0
 
 
 def test_list_datasets_verbose_false():
