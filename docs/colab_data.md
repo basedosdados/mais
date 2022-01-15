@@ -225,17 +225,23 @@ Aqui são dois passos: primeiro publicamos uma base (conjunto) e depois publicam
 
 Para publicar uma **base (conjunto)**:
 
-1. Crie a pasta do conjunto no *bucket* rodando:
+1. Inicialize o conjunto no seu repositório local:
+
+    ```bash
+   basedosdados dataset init [DATASET_ID]
+    ```
+
+4. Crie o conjunto no *BigQuery* rodando:
 
     ```bash
     basedosdados dataset create [DATASET_ID]
     ```
 
-2. Preencha os arquivos de configuração criados em `<dataset_id>/`:
+5. Preencha os arquivos de configuração criados em `<dataset_id>/`:
     - `README.md`: informações úteis para quem for ver o código no Github.
     - `dataset_config.yaml`: informações específicas do conjunto (já vem
       com um modelo para preenchimento).
-3. Atualize as informações preenchidas do conjunto com:
+6. Atualize as informações preenchidas do conjunto com:
 
     ```bash
     basedosdados dataset update [DATASET_ID]
