@@ -257,7 +257,9 @@ def test_list_dataset_tables_simple_verbose(capsys):
 
 def test_list_dataset_tables_simple_list():
 
-    out = list_dataset_tables(dataset_id="br-sp-alesp", with_description=False, verbose=False)
+    out = list_dataset_tables(
+        dataset_id="br-sp-alesp", with_description=False, verbose=False
+    )
 
     assert type(out) == list
     assert len(out) > 0
@@ -274,10 +276,12 @@ def test_list_dataset_tables_complete_verbose(capsys):
 
 def test_list_dataset_tables_complete_list():
 
-    out = list_dataset_tables(dataset_id="br-sp-alesp", with_description=True, verbose=False)
+    out = list_dataset_tables(
+        dataset_id="br-sp-alesp", with_description=True, verbose=False
+    )
 
-    assert type(out)==list
-    assert type(out[0])==dict
+    assert type(out) == list
+    assert type(out[0]) == dict
 
 
 def test_get_dataset_description(capsys):

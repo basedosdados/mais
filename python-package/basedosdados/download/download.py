@@ -454,13 +454,19 @@ def list_dataset_tables(
 
     json_response = response.json()
 
-    #this dict has all information need to output the function
+    # this dict has all information need to output the function
     table_dict = {
         "table_id": [
-            dataset['resources'][k]["name"] for dataset in json_response["result"]["datasets"] for k in range(len(dataset['resources'])) if dataset['name']==dataset_id
+            dataset["resources"][k]["name"]
+            for dataset in json_response["result"]["datasets"]
+            for k in range(len(dataset["resources"]))
+            if dataset["name"] == dataset_id
         ],
         "description": [
-            dataset['resources'][k]["description"] for dataset in json_response["result"]["datasets"] for k in range(len(dataset['resources'])) if dataset['name']==dataset_id
+            dataset["resources"][k]["description"]
+            for dataset in json_response["result"]["datasets"]
+            for k in range(len(dataset["resources"]))
+            if dataset["name"] == dataset_id
         ],
     }
 
