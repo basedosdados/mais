@@ -208,7 +208,7 @@ def test_read_table():
 def test_list_datasets_default(capsys):
 
     out = list_datasets(
-        query="trabalho", order_by="score", with_description=False, verbose=True
+        query="trabalho", limit=10, with_description=False, verbose=True
     )
     out, err = capsys.readouterr()  # Capture prints
     assert "dataset_id" in out
@@ -220,16 +220,17 @@ def test_list_datasets_default(capsys):
 def test_list_datasets_noverbose():
 
     out = list_datasets(
-        query="trabalho", order_by="score", with_description=False, verbose=False
+        query="", limit=12, with_description=False, verbose=False
     )
     # check if function returns list
     assert isinstance(out, list)
+    assert len(out) == 12
 
 
 def test_list_datasets_complete_list():
 
     out = list_datasets(
-        query="trabalho", order_by="score", with_description=True, verbose=False
+        query="trabalho", limit=12, with_description=True, verbose=False
     )
     # check if function returns list
     assert isinstance(out, list)
@@ -240,20 +241,11 @@ def test_list_datasets_complete_list():
 def test_list_datasets_complete_verbose(capsys):
 
     list_datasets(
-        query="trabalho", order_by="score", with_description=True, verbose=True
+        query="trabalho", limit=10, with_description=True, verbose=True
     )
     out, err = capsys.readouterr()  # Capture prints
     assert "dataset_id" in out
     assert "description" in out
-
-
-
-
-def test_list_datasets_verbose_false():
-
-    out = list_datasets(from_file=True, verbose=False)
-    assert type(out) == list
-    assert len(out) > 0
 
 
 def test_list_dataset_tables(capsys):

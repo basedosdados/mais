@@ -358,15 +358,15 @@ def _handle_output(verbose, output_type, df, col_name=None):
     return None
 
 
-def list_datasets(query, order_by, with_description=False, verbose=True):
+def list_datasets(query, limit=10, with_description=False, verbose=True):
     """This function uses `bd_dataset_search` website API
     enpoint to retrieve a list of available datasets.
 
     Args:
         query (str):
             String to search in datasets and tables' metadata.
-        order_by (str): score|popular|recent
-            Field by which the results will be ordered.
+        limit (int):
+            Field to limit the number of results
         with_description (bool): Optional
             If True, fetch short dataset description for each dataset.
         verbose (bool): Optional.
@@ -376,13 +376,7 @@ def list_datasets(query, order_by, with_description=False, verbose=True):
         list | string of datasets
     """
 
-    # validate order_by input
-    if order_by not in ["score", "popular", "recent"]:
-        raise ValueError(
-            f'order_by must be score, popular or recent. Received "{order_by}"'
-        )
-
-    url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q={query}&order_by={order_by}&resource_type=bdm_table"
+    url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q={query}&page_size={limit}&resource_type=bdm_table"
 
     # validate url
     try:
@@ -432,7 +426,6 @@ def list_dataset_tables(
 ):
     """Fetch table_id for tables available at the specified dataset_id. Prints the information
     on screen or returns it as a list.
-
     Args:
         dataset_id (str): Optional.
             Dataset id available in basedosdados.
@@ -444,7 +437,6 @@ def list_dataset_tables(
              If True, fetch short table descriptions for each table that match the search criteria.
         verbose (bool): Optional.
             If set to True, information is printed to the screen. If set to False, a list object is returned.
-
     Example:
         list_dataset_tables(
         dataset_id='br_ibge_censo2010'
