@@ -324,7 +324,7 @@ class Metadata(Base):
             # if `dataset_config.yaml` doesn't exist but user wants to create
             # it alongside `table_config.yaml`
             dataset_config_exists = (
-                self.metadata_path / "dataset_config.yaml"
+                self.metadata_path / self.dataset_id / "dataset_config.yaml"
             ).exists()
             if self.table_id and not table_only and not dataset_config_exists:
                 self.dataset_metadata_obj.create(if_exists=if_exists)
