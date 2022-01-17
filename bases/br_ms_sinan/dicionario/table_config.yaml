@@ -7,8 +7,7 @@ table_id: dicionario
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description:
-    Dicionário do SINAN
+description: Dicionário do SINAN
 
 # A máxima unidade espacial que a tabela cobre.
 spatial_coverage:
@@ -35,44 +34,29 @@ identifying_columns:
 
 last_updated:
     metadata:
-        - 2021-09-22
     data:
-        - 2021-09-22
     release:
-        - 2021-09-22
 
-version:
-    - 1.0
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name:
-        - Filipe Cavalcati
-    email:
-        - f.matheus.cavalcanti@gmail.com
-    github_user:
-        - filipemsc
-    website:
-        - https://github.com/filipemsc
+    name: Filipe Cavalcati
+    email: f.matheus.cavalcanti@gmail.com
+    github_user: filipemsc
+    website: https://github.com/filipemsc
     ckan_user:
-        -
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name:
-        - Filipe Cavalcanti
-    email:
-        - f.matheus.cavalcanti@gmail.com
-    github_user:
-        - filipemsc
+    name: Filipe Cavalcanti
+    email: f.matheus.cavalcanti@gmail.com
+    github_user: filipemsc
     ckan_user:
-        - 
-    website:
-        - https://github.com/filipemsc
+    website: https://github.com/filipemsc
     code_url:
-        
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description:
@@ -112,9 +96,9 @@ bdm_file_size:
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: id_tabela
-      bigquery_type:
-      description: Id da Tabela no SINAN
-      temporal_coverage: 2009(1)2019
+      bigquery_type: string
+      description: ID da tabela
+      temporal_coverage: #2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -125,9 +109,9 @@ columns:
       is_in_staging: true
       is_partition: true
     - name: coluna
-      bigquery_type:
-      description: Nome da variável
-      temporal_coverage: 2009(1)2019
+      bigquery_type: string
+      description: Nome da coluna
+      temporal_coverage: #2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: 
@@ -138,9 +122,9 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: chave
-      bigquery_type:
+      bigquery_type: string
       description: Valor que a variável assume
-      temporal_coverage: 2009(1)2019
+      temporal_coverage: #2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: 
@@ -151,9 +135,9 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: cobertura_temporal
-      bigquery_type:
+      bigquery_type: string
       description: Cobertura temporal da variável
-      temporal_coverage: 2009(1)2019
+      temporal_coverage: #2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: 
@@ -164,9 +148,9 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: valor
-      bigquery_type:
+      bigquery_type: string
       description: Significado da variável para aquela dada chave
-      temporal_coverage: 2009(1)2019
+      temporal_coverage: #2009(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: 
@@ -177,4 +161,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: 2021-09-22
+metadata_modified:

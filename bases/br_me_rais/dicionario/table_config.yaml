@@ -7,7 +7,7 @@ table_id: dicionario
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Dicionário dos dados da Relação Anual de Informações Sociais (RAIS)
+description: Dicionário dos dados da Relação Anual de Informações Sociais (RAIS). 
 
 # A máxima unidade espacial que a tabela cobre.
 spatial_coverage:
@@ -38,7 +38,7 @@ last_updated:
     data:
     release:
 
-version: v1.0
+version: v1.0.1
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -162,4 +162,4 @@ columns:
       is_in_staging: True
       is_partition: False
 
-metadata_modified: '2021-11-02T14:24:45.313240'
+metadata_modified: '2021-11-04T00:35:24.074965'

@@ -1,78 +1,25 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: subsistemas # AUTO GENERATED
-dataset_id: br_ons_energia_armazenada # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-ons-energia-armazenada # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ons_energia_armazenada # AUTO GENERATED
+dataset_id: br_ons_energia_armazenada
 
-version: v1.0 # REQUIRED
-
-last_updated: 2021-09-29 # AUTO GENERATED
+table_id: subsistemas
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    Dados das grandezas de energia armazenada em periodicidade diária por subsistemas.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Dados das grandezas de energia armazenada em periodicidade diária por subsistemas.
 
-# Quem está completando esse arquivo config?
-published_by:
-    name: Crislane A. Souza  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ons_energia_armazenada/code # REQUIRED
-    website: https://github.com/crislanealves
-    email: crislanealves@basedosdados.org
+# A máxima unidade espacial que a tabela cobre.
+spatial_coverage:
+    continent:
+        - south_america
+    country:
+        - bra
 
-# Qual organização/departamento/pessoa tratou os dados?
-# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
-# Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: Bruno Mioto 
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ons_energia_armazenada/code 
-    website: brunomioto.com.br
-    email: brunomioto97@gmail.com
-
-# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    - Limpeza para consistência 
-
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: dia # REQUIRED 
-
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - dia
-
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-    - data
-    - subsistema
-
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - brasil
-
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplo: 1995(1)2019.
+temporal_coverage:
     - 2000
     - 2001
     - 2002
@@ -95,12 +42,85 @@ coverage_time:
     - 2019
     - 2020
     - 2021
+    - 2022
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: day
+
+# Entidade representada por cada linha.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+entity: 
+
+# A unidade temporal representada por cada linha.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+time_unit: day
+
+# O conjunto mínimo de colunas identificando cada linha unicamente.
+# Preencha com os nomes de colunas.
+# Exemplos: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+identifying_columns:
+    - data
+    - subsistema
+
+last_updated:
+    metadata:
+    data:
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.1
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Crislane A. Souza
+    email: crislanealves@basedosdados.org
+    github_user: https://github.com/crislanealves
+    website:
+    ckan_user: crislanealves
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Bruno Mioto 
+    email: brunomioto97@gmail.com
+    github_user:
+    ckan_user:
+    website: brunomioto.com.br
+    code_url:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Limpeza para consistência 
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+# A tabela tem colunas que precisam de dicionário?
+# Opções: yes, no.
+covered_by_dictionary: no 
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
+partitions:
+
+bdm_file_size:
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -110,34 +130,72 @@ partitions: # REQUIRED
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: data
-        description: Data
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: subsistema
-        description: Nome do subsistema
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: energia_armazenada_maxima
-        description: Valor de energia armazenada máxima por subsistema
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: energia_armazenada_verificada
-        description: Valor de energia armazenada verificada no dia por subsistema
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: proporcao_energia_armazenada_verificada
-        description: Porcentagem de energia armazenada verificada no dia por subsistema
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+columns:
+    - name: data
+      bigquery_type: date
+      description: Data
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column: 
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: data
+          column_name: data
+      measurement_unit: day
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: subsistema
+      bigquery_type: string
+      description: Nome do subsistema
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: energia_armazenada_maxima
+      bigquery_type: float64
+      description: Valor de energia armazenada máxima por subsistema (MWmês)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: megawatt
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: energia_armazenada_verificada
+      bigquery_type: float64
+      description: Valor de energia armazenada verificada no dia por subsistema (MWmês)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: megawatt
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_energia_armazenada_verificada
+      bigquery_type: float64
+      description: Porcentagem de energia armazenada verificada no dia por subsistema
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+      
+
+metadata_modified: '2021-12-06T13:54:02.927052'

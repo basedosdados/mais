@@ -10,30 +10,15 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: <nome [você]>
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/codeTratado por
------------
 Nome: Ricardo Dahis
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- CBO2002
 
-Colunas identificando linhas unicamente
--------------------
-- cbo_2002
 
-Cobertura Temporal
-------------------
 
-Cobertura Espacial
-------------------
 
-Frequencia de Atualização
--------------------------
-único
+
+
+
 
 
