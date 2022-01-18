@@ -2,8 +2,8 @@ Produto Interno Bruto (PIB) municipal a preços correntes.
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-ibge-pib
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pib
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,23 +11,26 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pib/code
+Código: 
 Website: www.ricardodahis.com
-Email: rdahis@basedosdados.orgTratado por
+Email: rdahis@basedosdados.org
+Tratado por
 -----------
 Nome: Ricardo Dahis
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pib/code
+Website: www.ricardodahis.com
 Email: rdahis@basedosdados.org
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- municipio
-- ano
+
+
 
 Colunas identificando linhas unicamente
 -------------------
 - id_municipio
 - ano
+
+
+
 
 Cobertura Temporal
 ------------------
@@ -48,17 +51,27 @@ Cobertura Temporal
 - 2016
 - 2017
 - 2018
+- 2019
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- b
+- r
+- a
+
+
+
 
 Tratamento
 ----------
 Mudamos a unidade de medida para R$1.
 
+
+
+
 Frequencia de Atualização
 -------------------------
-1 ano
-
-
+one_year

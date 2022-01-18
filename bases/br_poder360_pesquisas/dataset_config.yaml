@@ -1,0 +1,42 @@
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization: br-poder360
+
+dataset_id: br_poder360_pesquisas
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Pesquisas Eleitorais
+
+# Descrição e anotações úteis sobre os dados.
+description: Banco de pesquisas eleitorais de eleições federais, estaduais, e municipais no Brasil.
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+  - politica
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+
+# Url completa do CKAN já contendo o dataset-id
+# Exemplo: https://basedosdados.org/dataset/<dataset-id>
+ckan_url: https://basedosdados.org/dataset/br_poder360_pesquisas
+
+# Url completa do Github já contendo o dataset_id
+# Exemplo: https://github.com/basedosdados/mais/tree/master/bases/<dataset_id>
+github_url: https://github.com/basedosdados/mais/tree/master/bases/br_poder360_pesquisas
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified:

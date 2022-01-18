@@ -1,10 +1,9 @@
-import shutil
-from pathlib import Path
-
 import pytest
-from basedosdados import Storage
-from google.api_core.exceptions import NotFound
+from pathlib import Path
 from google.cloud import storage
+import shutil
+from google.api_core.exceptions import NotFound
+from basedosdados import Storage
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"

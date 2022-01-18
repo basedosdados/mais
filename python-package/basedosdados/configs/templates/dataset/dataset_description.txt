@@ -19,13 +19,8 @@ Apoia-se: https://apoia.se/basedosdados
 Instituição (Quem mantém os dados oficiais?)
 -----------
 Nome: {{ organization -}}
-{% call input(author.name) %}
-Autor: {{ author.name }}
-{%- endcall -%}
-{% call input(author.name) %}
-Email: {{ author.email }}
-{%- endcall %}
 
+{% if website is defined %}
 {% call input(website[0]) -%}
 Onde encontrar os dados
 -----------------------
@@ -35,6 +30,7 @@ Onde encontrar os dados
 {% endfor -%}
 {%- endif %}
 {% endcall -%}
+{% endif %}
 
 {% call input(groups[0]) -%}
 Grupos
@@ -45,21 +41,3 @@ Grupos
 {% endfor -%}
 {%- endif %}
 {% endcall -%}
-
-{% call input(languages[0]) -%}
-Idiomas
-------
-{% if (languages is not none) -%}
-{% for partition in languages -%}
-- {{ partition }}
-{% endfor -%}
-{%- endif %}
-{% endcall -%}
-
-
-Licença
--------
-Nome: {{ license.name }}
-{% call input(license.url) %}
-Website: {{ license.url }}
-{% endcall %}

@@ -855,7 +855,7 @@ foreach ano of numlist 2002(2)2020 {
 // unifica header
 //--------------------//
 
-foreach ano of numlist 2016 2020 { // 2002(2)2020 {
+foreach ano of numlist 2002(2)2020 {
 	
 	use "output/despesas_candidato_`ano'.dta", clear
 	
@@ -867,8 +867,8 @@ foreach ano of numlist 2016 2020 { // 2002(2)2020 {
 }
 *
 
-use `c2016', clear
-foreach ano of numlist 2020 { // 2004(2)2020 {
+use `c2002', clear
+foreach ano of numlist 2004(2)2020 {
 	append using `c`ano''
 }
 *
@@ -907,7 +907,7 @@ save `candidatos_mod2_presid'
 
 !mkdir "output/despesas_candidato"
 
-foreach ano of numlist 2016 2020 { // 2002(2)2020 {
+foreach ano of numlist 2002(2)2020 {
 	
 	!mkdir "output/despesas_candidato/ano=`ano'"
 	
@@ -961,8 +961,9 @@ foreach ano of numlist 2016 2020 { // 2002(2)2020 {
 	order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
 		numero_candidato cpf_candidato sequencial_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
 		sequencial_despesa data_despesa tipo_despesa descricao_despesa origem_despesa valor_despesa ///
-		tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas ///
+		tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas cnpj_candidato ///
 		tipo_documento numero_documento ///
+		especie_recurso fonte_recurso ///
 		cpf_cnpj_fornecedor nome_fornecedor nome_fornecedor_rf cnae_2_fornecedor descricao_cnae_2_fornecedor ///
 		tipo_fornecedor esfera_partidaria_fornecedor sigla_uf_fornecedor ///
 		id_municipio_tse_fornecedor sequencial_candidato_fornecedor numero_candidato_fornecedor ///

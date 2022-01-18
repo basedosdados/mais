@@ -2,8 +2,8 @@ Inflação - Índice Nacional de Preços ao Consumidor Amplo - IPCA
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-ibge-inflacao
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao
+Website: https://basedosdados.org/dataset/br-ibge-ipca
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,11 +11,11 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Gustavo Aires Tiago
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao/code
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
 Email: gustavo.tiago@basedosdados.orgTratado por
 -----------
 Nome: Gustavo Aires Tiago
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inflacao/code
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
 Email: gustavo.tiago@basedosdados.org
 
 Nível da Observação (i.e. a granularidade da linha)

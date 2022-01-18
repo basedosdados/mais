@@ -1,0 +1,57 @@
+name: metadata-validate
+
+on:
+  push:
+    paths:
+      - 'bases/**'
+jobs:
+  get-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check file changes
+        id: file_changes
+        uses: trilom/file-changes-action@v1.2.4
+      - name: Copy file changes
+        run: cp $HOME/files.json files.json
+      - name: Upload file changes
+        uses: actions/upload-artifact@v2
+        with:
+          name: push-changes
+          path: files.json
+
+  metadata-validate:
+    needs: get-changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Download changes
+        uses: actions/download-artifact@v2
+        with:
+          name: push-changes
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9.x"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install basedosdados==1.6.0 toml
+      - name: Set up base dos dados environment
+        run: python .github/workflows/env-setup/env_setup.py
+        shell: bash
+        env:
+          BUCKET_NAME: basedosdados
+          PROJECT_NAME_PROD: basedosdados
+          PROJECT_NAME_STAGING: basedosdados-staging
+          GCP_BD_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
+          GCP_BD_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
+          CKAN_URL: "https://basedosdados.org"
+          CKAN_API_KEY: ${{ secrets.CKAN_PROD }}
+      - name: Metadata validate
+        run: python -u .github/workflows/metadata-validate/metadata_validate.py
+        shell: bash
+        env:
+          PROJECT_ID: ${{ secrets.GCP_MAIN_PROJECT_ID }}
+          BUCKET_NAME_BACKUP: basedosdados-backup
+          BUCKET_NAME_DESTINATION: basedosdados

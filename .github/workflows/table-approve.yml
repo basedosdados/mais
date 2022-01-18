@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - fix-table-approve-metadata-publish-2
 jobs:
   get-changes:
     runs-on: ubuntu-latest
@@ -18,7 +19,6 @@ jobs:
         with:
           name: push-changes
           path: files.json
-
   table-approve:
     needs: get-changes
     runs-on: ubuntu-latest
@@ -32,15 +32,15 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9.x'
+          python-version: "3.9.x"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install basedosdados==1.5.2 toml
+          pip install basedosdados==1.6.0 toml
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@master
         with:
-          version: '290.0.1'
+          version: "290.0.1"
           project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY_TASK_CALLER }}
           export_default_credentials: true
@@ -53,14 +53,15 @@ jobs:
           PROJECT_NAME_STAGING: basedosdados-staging
           GCP_BD_PROD: ${{ secrets.GCP_TABLE_APPROVE_PROD }}
           GCP_BD_STAGING: ${{ secrets.GCP_TABLE_APPROVE_STAGING }}
+          CKAN_URL: "https://basedosdados.org"
+          CKAN_API_KEY: ${{ secrets.CKAN_PROD }}
       - name: Table approve
-        run: python .github/workflows/table-approve/table_approve.py
+        run: python -u .github/workflows/table-approve/table_approve.py
         shell: bash
         env:
           PROJECT_ID: ${{ secrets.GCP_MAIN_PROJECT_ID }}
           BUCKET_NAME_BACKUP: basedosdados-backup
           BUCKET_NAME_DESTINATION: basedosdados
-
   gcloud-tasks-add:
     needs: table-approve
     runs-on: ubuntu-latest
@@ -74,7 +75,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9.x'
+          python-version: "3.9.x"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -82,7 +83,7 @@ jobs:
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@master
         with:
-          version: '290.0.1'
+          version: "290.0.1"
           project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY_TASK_CALLER }}
           export_default_credentials: true
@@ -111,11 +112,11 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9.x'
+          python-version: "3.9.x"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install basedosdados==1.5.2 pyarrow pytest toml
+          pip install basedosdados==1.6.0 pyarrow pytest toml
       - name: Set up basedosdados environment
         run: |
           cd .github/workflows/env-setup
@@ -127,6 +128,8 @@ jobs:
           PROJECT_NAME_STAGING: basedosdados-staging
           GCP_BD_PROD: ${{ secrets.GCP_BD_DEV_PROD }}
           GCP_BD_STAGING: ${{ secrets.GCP_BD_DEV_STAGING }}
+          CKAN_URL: "https://basedosdados.org"
+          CKAN_API_KEY: ${{ secrets.CKAN_PROD }}
       - name: Test data and fill report
         run: pytest -v .github/workflows/data-check --skipfile .github/DATA_CHECK_SKIP.csv
         shell: bash
@@ -139,6 +142,5 @@ jobs:
           name: data-check-report
           path: report.md
           retention-days: 7
-
 # Reference
 # https://github.com/google-github-actions/setup-gcloud/blob/master/setup-gcloud/README.md
