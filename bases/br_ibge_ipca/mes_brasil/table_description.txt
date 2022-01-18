@@ -1,8 +1,9 @@
 Inflação - Índice Nacional de Preços ao Consumidor Amplo - IPCA
 
+
 Para saber mais acesse:
-Website: 
-Github: 
+Website: https://basedosdados.org/dataset/br-ibge-ipca
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -10,25 +11,22 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Gustavo Aires Tiago
-Código: 
-Email: gustavo.tiago@basedosdados.org
-Tratado por
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
+Email: gustavo.tiago@basedosdados.orgTratado por
 -----------
 Nome: Gustavo Aires Tiago
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
-Website: 
-Email: gustago.tiago@basedosdados.org
+Email: gustavo.tiago@basedosdados.org
 
-
-
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- mes
+- pais
 
 Colunas identificando linhas unicamente
 -------------------
 - ano
 - mes
-
-
-
 
 Cobertura Temporal
 ------------------
@@ -76,23 +74,17 @@ Cobertura Temporal
 - 2020
 - 2021
 
-
-
-
 Cobertura Espacial
 ------------------
-- continent
-- country
-
-
-
+- brasil
 
 Tratamento
 ----------
-- Descompactação do arquivo - Renomeação das colunas
-
-
+- Descompactação do arquivo
+- Renomeação das colunas
 
 Frequencia de Atualização
 -------------------------
-month
+mes
+
+
