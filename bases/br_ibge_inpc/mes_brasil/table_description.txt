@@ -1,32 +1,33 @@
 Inflação - Índice Nacional de Preços ao Consumidor - INPC
 
-
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-ibge-inpc
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_inpc
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Gustavo Aires Tiago
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
-Email: gustavo.tiago@basedosdados.orgTratado por
+Nome:  Gustavo Aires Tiago
+Código: 
+Email: gustavo.tiago@basedosdados.org
+Tratado por
 -----------
-Nome: Gustavo Aires Tiago
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
+Nome:  Gustavo Aires Tiago
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code 
 Email: gustavo.tiago@basedosdados.org
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- mes
-- pais
+
+
 
 Colunas identificando linhas unicamente
 -------------------
 - ano
 - mes
+
+
+
 
 Cobertura Temporal
 ------------------
@@ -50,7 +51,7 @@ Cobertura Temporal
 - 1996
 - 1997
 - 1998
-- 1999
+- 1998
 - 2000
 - 2001
 - 2002
@@ -74,17 +75,24 @@ Cobertura Temporal
 - 2020
 - 2021
 
+
+
+
 Cobertura Espacial
 ------------------
-- brasil
+- b
+- r
+- a
+
+
+
 
 Tratamento
 ----------
-- Descompactação do arquivo
-- Renomeação das colunas
+- Descompactação do arquivo - Renomeação das colunas
+
+
 
 Frequencia de Atualização
 -------------------------
-mes
-
-
+month
