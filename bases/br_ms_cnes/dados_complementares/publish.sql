@@ -1,0 +1,117 @@
+/*
+Query para publicar a tabela.
+
+Esse é o lugar para:
+    - modificar nomes, ordem e tipos de colunas
+    - dar join com outras tabelas
+    - criar colunas extras (e.g. logs, proporções, etc.)
+
+Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
+
+# Além disso, sinta-se à vontade para alterar alguns nomes obscuros
+# para algo um pouco mais explícito.
+
+TIPOS:
+    - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
+    - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
+    - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
+*/
+
+CREATE VIEW basedosdados-dev.br_ms_cnes.dados_complementares AS
+SELECT 
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(mes AS INT64) mes,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(id_municipio_6 AS STRING) id_municipio_6,
+SAFE_CAST(id_estabelecimento_cnes AS STRING) id_estabelecimento_cnes,
+SAFE_CAST(cns_medico_responsavel_administrador_responsavel_tecnico AS STRING) cns_medico_responsavel_administrador_responsavel_tecnico,
+SAFE_CAST(cns_medico_responsavel_oncologista__pediatrico AS STRING) cns_medico_responsavel_oncologista__pediatrico,
+SAFE_CAST(cns_medico_responsavel_cirurgia_oncologica AS STRING) cns_medico_responsavel_cirurgia_oncologica,
+SAFE_CAST(cns_medico_responsavel_oncologista_clinico AS STRING) cns_medico_responsavel_oncologista_clinico,
+SAFE_CAST(cns_medico_responsavel_radioterapeuta AS STRING) cns_medico_responsavel_radioterapeuta,
+SAFE_CAST(cns_medico_responsavel_fisico_nuclear AS STRING) cns_medico_responsavel_fisico_nuclear,
+SAFE_CAST(cns_medico_nefrologista_responsavel AS STRING) cns_medico_nefrologista_responsavel,
+SAFE_CAST(cns_medico_responsavel_hemoterapeuta AS STRING) cns_medico_responsavel_hemoterapeuta,
+SAFE_CAST(cns_medico_responsavel_hematologista AS STRING) cns_medico_responsavel_hematologista,
+SAFE_CAST(cns_medico_capacitado_responsavel AS STRING) cns_medico_capacitado_responsavel,
+SAFE_CAST(cns_responsavel_tecnico_sorologia AS STRING) cns_responsavel_tecnico_sorologia,
+SAFE_CAST(quantidade_salas_hbsag_positivo AS INT64) quantidade_salas_hbsag_positivo,
+SAFE_CAST(quantidade_salas_hbsag_negativo AS INT64) quantidade_salas_hbsag_negativo,
+SAFE_CAST(quantidade_salas_dpi AS INT64) quantidade_salas_dpi,
+SAFE_CAST(quantidade_salas_dpac AS INT64) quantidade_salas_dpac,
+SAFE_CAST(quantidade_salas_reuso_hbsag_positivo AS INT64) quantidade_salas_reuso_hbsag_positivo,
+SAFE_CAST(quantidade_salas_reuso_hbsag_negativo AS INT64) quantidade_salas_reuso_hbsag_negativo,
+SAFE_CAST(quantidade_salas_reuso_hcv_positivo AS INT64) quantidade_salas_reuso_hcv_positivo,
+SAFE_CAST(quantidade_maquinas_proporcao AS INT64) quantidade_maquinas_proporcao,
+SAFE_CAST(quantidade_outras_maquinas AS INT64) quantidade_outras_maquinas,
+SAFE_CAST(tratamento_agua_filtro_areia AS STRING) tratamento_agua_filtro_areia,
+SAFE_CAST(tratamento_agua_filtro_carvao AS STRING) tratamento_agua_filtro_carvao,
+SAFE_CAST(tratamento_agua_abrandador AS STRING) tratamento_agua_abrandador,
+SAFE_CAST(tratamento_agua_deionizador AS STRING) tratamento_agua_deionizador,
+SAFE_CAST(tratamento_agua_maquina_osmose AS STRING) tratamento_agua_maquina_osmose,
+SAFE_CAST(tratamento_agua_outros_equipamentos AS STRING) tratamento_agua_outros_equipamentos,
+SAFE_CAST(existencia_algum_requisito_dialise  AS STRING) existencia_algum_requisito_dialise ,
+SAFE_CAST(quantidade_salas_simulacao_radioterapia AS INT64) quantidade_salas_simulacao_radioterapia,
+SAFE_CAST(quantidade_salas_planejamento_radioterapia AS INT64) quantidade_salas_planejamento_radioterapia,
+SAFE_CAST(quantidade_salas_armazenamento_fontes_radioterapia AS INT64) quantidade_salas_armazenamento_fontes_radioterapia,
+SAFE_CAST(quantidade_salas_confeccao_masc_radioterapia AS INT64) quantidade_salas_confeccao_masc_radioterapia,
+SAFE_CAST(quantidade_salas_molde_radioterapia AS INT64) quantidade_salas_molde_radioterapia,
+SAFE_CAST(quantidade_salas_bloco_personalizado_radioterapia AS INT64) quantidade_salas_bloco_personalizado_radioterapia,
+SAFE_CAST(quantidade_salas_armazenagem AS INT64) quantidade_salas_armazenagem,
+SAFE_CAST(quantidade_salas_preparo AS INT64) quantidade_salas_preparo,
+SAFE_CAST(salas_equipamentos_quimio_curta_duracao AS INT64) salas_equipamentos_quimio_curta_duracao,
+SAFE_CAST(salas_equipamentos_quimio_longa_duracao AS INT64) salas_equipamentos_quimio_longa_duracao,
+SAFE_CAST(salas_equipamentos_capela_fluxo_laminar AS INT64) salas_equipamentos_capela_fluxo_laminar,
+SAFE_CAST(quantidade_simuladores AS INT64) quantidade_simuladores,
+SAFE_CAST(quantidade_acelerador_linear_ate_6_mev AS INT64) quantidade_acelerador_linear_ate_6_mev,
+SAFE_CAST(quantidade_acelerador_linear_maior_6_mev_sem_eletrons AS INT64) quantidade_acelerador_linear_maior_6_mev_sem_eletrons,
+SAFE_CAST(quantidade_acelerador_linear_maior_6_mev_com_eletrons AS INT64) quantidade_acelerador_linear_maior_6_mev_com_eletrons,
+SAFE_CAST(quantidade_equipamentos_ortovoltagem_10_50_kv AS INT64) quantidade_equipamentos_ortovoltagem_10_50_kv,
+SAFE_CAST(quantidade_equipamentos_ortovoltagem_50_150_kv AS INT64) quantidade_equipamentos_ortovoltagem_50_150_kv,
+SAFE_CAST(quantidade_equipamentos_ortovoltagem_150_500_kv AS INT64) quantidade_equipamentos_ortovoltagem_150_500_kv,
+SAFE_CAST(quantidade_unidade_cobalto AS INT64) quantidade_unidade_cobalto,
+SAFE_CAST(quantidade_equipamentos_braquiterapia_baixa AS INT64) quantidade_equipamentos_braquiterapia_baixa,
+SAFE_CAST(quantidade_equipamentos_braquiterapia_media AS INT64) quantidade_equipamentos_braquiterapia_media,
+SAFE_CAST(quantidade_equipamentos_braquiterapia_alta AS INT64) quantidade_equipamentos_braquiterapia_alta,
+SAFE_CAST(quantidade_monitor_area AS INT64) quantidade_monitor_area,
+SAFE_CAST(quantidade_monitor_individual AS INT64) quantidade_monitor_individual,
+SAFE_CAST(quantidade_sistema_computacao_planejamento AS INT64) quantidade_sistema_computacao_planejamento,
+SAFE_CAST(quantidade_dosimetro_clinico AS INT64) quantidade_dosimetro_clinico,
+SAFE_CAST(quantidade_fontes_seladas AS INT64) quantidade_fontes_seladas,
+SAFE_CAST(existencia_requisito_quimio_radio AS STRING) existencia_requisito_quimio_radio,
+SAFE_CAST(quantidade_salas_recepcao AS INT64) quantidade_salas_recepcao,
+SAFE_CAST(quantidade_salas_triagem_hematologica AS INT64) quantidade_salas_triagem_hematologica,
+SAFE_CAST(quantidade_salas_triagem_clinica AS INT64) quantidade_salas_triagem_clinica,
+SAFE_CAST(quantidade_salas_coleta AS INT64) quantidade_salas_coleta,
+SAFE_CAST(quantidade_salas_aferese AS INT64) quantidade_salas_aferese,
+SAFE_CAST(quantidade_salas_pre_estoque AS INT64) quantidade_salas_pre_estoque,
+SAFE_CAST(quantidade_salas_processamento AS INT64) quantidade_salas_processamento,
+SAFE_CAST(quantidade_salas_estoque AS INT64) quantidade_salas_estoque,
+SAFE_CAST(quantidade_salas_distribuicao AS INT64) quantidade_salas_distribuicao,
+SAFE_CAST(quantidade_salas_sorologia AS INT64) quantidade_salas_sorologia,
+SAFE_CAST(quantidade_salas_imunohematologia AS INT64) quantidade_salas_imunohematologia,
+SAFE_CAST(quantidade_salas_pre_transfusionais AS INT64) quantidade_salas_pre_transfusionais,
+SAFE_CAST(quantidade_salas_hemostasia AS INT64) quantidade_salas_hemostasia,
+SAFE_CAST(quantidade_salas_controle_qualidade AS INT64) quantidade_salas_controle_qualidade,
+SAFE_CAST(quantidade_salas_biologia_molecular AS INT64) quantidade_salas_biologia_molecular,
+SAFE_CAST(quantidade_salas_imunofenotipagem AS INT64) quantidade_salas_imunofenotipagem,
+SAFE_CAST(quantidade_salas_transfusao AS INT64) quantidade_salas_transfusao,
+SAFE_CAST(quantidade_salas_seguimento_doador AS INT64) quantidade_salas_seguimento_doador,
+SAFE_CAST(quantidade_cadeiras_reclinaveis AS INT64) quantidade_cadeiras_reclinaveis,
+SAFE_CAST(quantidade_centrifugas_refrigeradas AS INT64) quantidade_centrifugas_refrigeradas,
+SAFE_CAST(quantidade_refrigeradores_guarda_sangue AS INT64) quantidade_refrigeradores_guarda_sangue,
+SAFE_CAST(quantidade_congeladores_rapidos AS INT64) quantidade_congeladores_rapidos,
+SAFE_CAST(quantidade_extratores_automaticos_plasma AS INT64) quantidade_extratores_automaticos_plasma,
+SAFE_CAST(quantidade_freezers_18_graus_celsius AS INT64) quantidade_freezers_18_graus_celsius,
+SAFE_CAST(quantidade_freezers_30_graus_celsius AS INT64) quantidade_freezers_30_graus_celsius,
+SAFE_CAST(quantidade_agitadores_plaquetas AS INT64) quantidade_agitadores_plaquetas,
+SAFE_CAST(quantidade_seladoras AS INT64) quantidade_seladoras,
+SAFE_CAST(quantidade_irradiadores_hemocomponentes AS INT64) quantidade_irradiadores_hemocomponentes,
+SAFE_CAST(quantidade_aglutinoscopio AS INT64) quantidade_aglutinoscopio,
+SAFE_CAST(quantidade_maquinas_aferese AS INT64) quantidade_maquinas_aferese,
+SAFE_CAST(quantidade_refrigeradores_reagentes AS INT64) quantidade_refrigeradores_reagentes,
+SAFE_CAST(quantidade_refrigeradores_amostras_sangue AS INT64) quantidade_refrigeradores_amostras_sangue,
+SAFE_CAST(quantidade_capelas_fluxo_laminar AS INT64) quantidade_capelas_fluxo_laminar,
+SAFE_CAST(existencia_requisito_hemoterapia AS STRING) existencia_requisito_hemoterapia
+FROM basedosdados-dev.br_ms_cnes_staging.dados_complementares AS t

@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -16,7 +15,6 @@ TIPOS:
     - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-
 */
 
 CREATE VIEW basedosdados-dev.br_ms_cnes.profissional AS
@@ -31,14 +29,14 @@ SAFE_CAST(cns AS STRING) cns,
 SAFE_CAST(cbo_2002 AS STRING) cbo_2002,
 SAFE_CAST(codigo_registro_conselho AS STRING) codigo_registro_conselho,
 SAFE_CAST(codigo_conselho AS STRING) codigo_conselho,
-SAFE_CAST(estabelecimento_terceiro AS INT64) estabelecimento_terceiro,
+SAFE_CAST(estabelecimento_terceiro AS STRING) estabelecimento_terceiro,
 SAFE_CAST(codigo_vinculo AS STRING) codigo_vinculo,
-SAFE_CAST(vinculo_contratado_sus AS INT64) vinculo_contratado_sus,
-SAFE_CAST(vinculo_autonomo_sus AS INT64) vinculo_autonomo_sus,
-SAFE_CAST(vinculo_outros AS INT64) vinculo_outros,
-SAFE_CAST(atende_sus AS INT64) atende_sus,
-SAFE_CAST(atende_nao_sus AS INT64) atende_nao_sus,
+SAFE_CAST(vinculo_contratado_sus AS STRING) vinculo_contratado_sus,
+SAFE_CAST(vinculo_autonomo_sus AS STRING) vinculo_autonomo_sus,
+SAFE_CAST(vinculo_outros AS STRING) vinculo_outros,
+SAFE_CAST(atende_sus AS STRING) atende_sus,
+SAFE_CAST(atende_nao_sus AS STRING) atende_nao_sus,
 SAFE_CAST(carga_horaria_outros AS INT64) carga_horaria_outros,
 SAFE_CAST(carga_horaria_hospitalar AS INT64) carga_horaria_hospitalar,
 SAFE_CAST(carga_horaria_ambulatorial AS INT64) carga_horaria_ambulatorial
-from basedosdados-dev.br_ms_cnes_staging.profissional as t
+FROM basedosdados-dev.br_ms_cnes_staging.profissional AS t

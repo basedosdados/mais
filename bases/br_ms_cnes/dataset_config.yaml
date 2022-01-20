@@ -1,72 +1,46 @@
-dataset_id: br_ms_cnes # AUTO GENERATED
-
-url_ckan: https://basedosdados.org/dataset/br-ms-cnes
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_cnes
-
-# Descreva a base.
-# Ela é sobre o que?
-# Quais as principais fontes de dados?
-# Há links para FAQs e explicações?
-description: | # REQUIRED
-    O Cadastro Nacional de Estabelecimentos de Saúde (CNES) é o sistema de informação oficial de cadastramento de informações de todos os estabelecimentos de saúde no país, independente de sua natureza jurídica ou de integrarem o Sistema Único de Saúde(SUS)
-    O CNES contêm informações sobre a capacidade instalada e mão de obra de assistência à saúde dos estabelecimentos de saúde públicos e privados no Brasil.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: Ministério da Saúde # REQUIRED
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - br-ms
 
-# Qual departamento/grupo/pessoa mantém os dados originais?
-author:
-    name: Ministério da Saúde
-    email: cnes@saude.gov.br
+dataset_id: br_ms_cnes
 
-# Onde encontrar os dados originais e mais informações?
-website:
-    - http://cnes.datasus.gov.br/
-    - http://cnes.datasus.gov.br/pages/downloads/documentacao.jsp
-    - https://wiki.saude.gov.br/cnes/index.php/P%C3%A1gina_principal#Principais_T.C3.B3picos_do_CNES
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Cadastro Nacional de Estabelecimentos de Saúde (CNES)
 
-# Quais grupos caracterizam a base?
+# Descrição e anotações úteis sobre os dados.
+description:
+
+# Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
 groups:
     - saude
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
 # Caso crie etiquetas novas, as regras são:
-#   - letras minúsculas
-#   - sem acentos
-#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
+    - diretorio
     - hospital
+    - leito
 
-# Em quais línguas a base (ou a fonte original) está disponível?
-# Regras: minúsculo, sem acentos.
-# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
-languages:
-    - portugues
+# Url completa do CKAN já contendo o dataset-id
+# Exemplo: https://basedosdados.org/dataset/<dataset-id>
+ckan_url:
 
-# Os dados originais estão disponíveis de graça?
-free: sim
+# Url completa do Github já contendo o dataset_id
+# Exemplo: https://github.com/basedosdados/mais/tree/master/bases/<dataset_id>
+github_url:
 
-# Are microdata available for download?
-microdata: sim
-
-# Existe uma API na fonte original?
-API: não
-
-# É necessário registrar um usuário para baixar os dados originais?
-registration: não
-
-# Como os dados originais estão disponibilizados?
-availability: online
-
-# A fonte original requer IP brasileiro para acesso?
-brazilian_IP: não
-
-# Essa base está sob qual licença?
-# A licença MIT se aplica a bases públicas.
-# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
-license: 
-    name: MIT # REQUIRED
-    url: 
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2022-01-20T17:59:12.271438'

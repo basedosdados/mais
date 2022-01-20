@@ -1,6 +1,6 @@
 dataset_id: br_ms_cnes
 
-table_id: profissional
+table_id: equipamento
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -209,6 +209,32 @@ columns:
       is_in_staging: false
       is_partition: true
       
+    - name: id_municipio
+      bigquery_type: string
+      description: ID Município IBGE - 7 Dígitos
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: id_municipio_6
+      bigquery_type: string
+      description: ID Município IBGE - 6 Dígitos
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_6
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
     - name: id_estabelecimento_cnes
       bigquery_type: string
       description: ID Estabelecimento - CNES
@@ -222,74 +248,9 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: id_municipio_residencia
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: nome
+    - name: tipo_equipamento
       bigquery_type: string
-      description: Nome
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: cns
-      bigquery_type: string
-      description: CNS (Cartão Nacional de Saúde) do profissional
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: cbo_2002
-      bigquery_type: string
-      description: Código da especialidade do profissional
-      temporal_coverage:
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: cbo_2002
-          column_name: cbo_2002
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: codigo_registro_conselho
-      bigquery_type: string
-      description: Número do registro no conselho de classe
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: codigo_conselho
-      bigquery_type: string
-      description: Código do conselho de classe
+      description: Código do tipo do equipamento
       temporal_coverage:
       covered_by_dictionary: yes
       directory_column:
@@ -300,9 +261,9 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: estabelecimento_terceiro
+    - name: equipamento
       bigquery_type: string
-      description: O estabelecimento é terceiro
+      description: Código do equipamento
       temporal_coverage:
       covered_by_dictionary: yes
       directory_column:
@@ -313,123 +274,57 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: codigo_vinculo
-      bigquery_type: string
-      description: Código do vínculo empregatício com o estabelecimento
-      temporal_coverage:
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: vinculo_contratado_sus
-      bigquery_type: string
-      description: 'Vínculo empregatício com o estabelecimento: Contratado SUS'
-      temporal_coverage:
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: vinculo_autonomo_sus
-      bigquery_type: string
-      description: 'Vínculo empregatício com o estabelecimento: Autônomo SUS'
-      temporal_coverage:
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: vinculo_outros
-      bigquery_type: string
-      description: 'Vínculo empregatício com o estabelecimento: Vínculo não identificado
-          (registros de profissionais não SUS e outras situações anômalas)'
-      temporal_coverage:
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: atende_sus
-      bigquery_type: string
-      description: Realiza Atendimento SUS
-      temporal_coverage:
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: atende_nao_sus
-      bigquery_type: string
-      description: Realiza Atendimento Não-SUS
-      temporal_coverage:
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: carga_horaria_outros
+    - name: quantidade_existente_equipamento
       bigquery_type: int64
-      description: Carga horária não ambulatorial, nem hospitalar
+      description: Quantidade existente do equipamento
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: hour
+      measurement_unit:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: carga_horaria_hospitalar
+    - name: quantidade_uso_equipamento
       bigquery_type: int64
-      description: Carga horária hospitalar
+      description: Quantidade em uso do equipamento
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: hour
+      measurement_unit:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: carga_horaria_ambulatorial
-      bigquery_type: int64
-      description: Carga horária Ambulatorial
+    - name: disponibilidade_sus
+      bigquery_type: string
+      description: Indicador de disponibilidade para o SUS
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: hour
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: equipamento_nao_disponivel_sus
+      bigquery_type: string
+      description: Indicador de Equipamento não disponível para o SUS
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
 
-metadata_modified: '2022-01-20T16:58:19.693966'
+metadata_modified: '2022-01-20T16:49:00.644088'

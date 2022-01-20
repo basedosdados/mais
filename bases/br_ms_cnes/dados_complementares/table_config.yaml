@@ -1,0 +1,1411 @@
+dataset_id: br_ms_cnes
+
+table_id: dados_complementares
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description:
+
+# A máxima unidade espacial que a tabela cobre.
+spatial_coverage:
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplo: 1995(1)2019.
+temporal_coverage:
+          - 2005
+          - 2006
+          - 2007
+          - 2008
+          - 2009
+          - 2010
+          - 2011
+          - 2012
+          - 2013
+          - 2014
+          - 2015
+          - 2016
+          - 2017
+          - 2018
+          - 2019
+          - 2020
+          - 2021
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency:
+
+# Entidade representada por cada linha.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+entity:
+
+# A unidade temporal representada por cada linha.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+time_unit:
+
+# O conjunto mínimo de colunas identificando cada linha unicamente.
+# Preencha com os nomes de colunas.
+# Exemplos: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+identifying_columns:
+
+last_updated:
+    metadata:
+    data:
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: ''
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name:
+    email:
+    github_user:
+    website:
+    ckan_user:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name:
+    email:
+    github_user:
+    ckan_user:
+    website:
+    code_url:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+# A tabela tem colunas que precisam de dicionário?
+# Opções: yes, no.
+covered_by_dictionary:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: ano,mes,sigla_uf
+
+bdm_file_size:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - 2005
+          - 2006
+          - 2007
+          - 2008
+          - 2009
+          - 2010
+          - 2011
+          - 2012
+          - 2013
+          - 2014
+          - 2015
+          - 2016
+          - 2017
+          - 2018
+          - 2019
+          - 2020
+          - 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      is_in_staging: false
+      is_partition: true
+    - name: mes
+      bigquery_type: int64
+      description: Mes
+      temporal_coverage:
+          - 2005
+          - 2006
+          - 2007
+          - 2008
+          - 2009
+          - 2010
+          - 2011
+          - 2012
+          - 2013
+          - 2014
+          - 2015
+          - 2016
+          - 2017
+          - 2018
+          - 2019
+          - 2020
+          - 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
+      has_sensitive_data: no
+      is_in_staging: false
+      is_partition: true
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - 2005
+          - 2006
+          - 2007
+          - 2008
+          - 2009
+          - 2010
+          - 2011
+          - 2012
+          - 2013
+          - 2014
+          - 2015
+          - 2016
+          - 2017
+          - 2018
+          - 2019
+          - 2020
+          - 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla_uf
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: false
+      is_partition: true
+      
+    - name: id_municipio
+      bigquery_type: string
+      description: ID Município IBGE - 7 Dígitos
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: id_municipio_6
+      bigquery_type: string
+      description: ID Município IBGE - 6 Dígitos
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_6
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: id_estabelecimento_cnes
+      bigquery_type: string
+      description: ID Estabelecimento - CNES
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cns_medico_responsavel_administrador_responsavel_tecnico
+      bigquery_type: string
+      description: CNS do médico responsável - Administrador ou Responsável Técnico
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cns_medico_responsavel_oncologista__pediatrico
+      bigquery_type: string
+      description: 'CNS do médico responsável - Oncologista Pediátrico '
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cns_medico_responsavel_cirurgia_oncologica
+      bigquery_type: string
+      description: 'CNS do médico responsável - Cirurgia Oncológica '
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cns_medico_responsavel_oncologista_clinico
+      bigquery_type: string
+      description: CNS do médico responsável - Oncologista Clínico
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cns_medico_responsavel_radioterapeuta
+      bigquery_type: string
+      description: 'CNS do médico responsável - Radioterapeuta '
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cns_medico_responsavel_fisico_nuclear
+      bigquery_type: string
+      description: 'CNS do médico responsável - Físico Nuclear '
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cns_medico_nefrologista_responsavel
+      bigquery_type: string
+      description: CNS do médico nefrologista responsável
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cns_medico_responsavel_hemoterapeuta
+      bigquery_type: string
+      description: CNS do médico responsável - Hemoterapeuta
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cns_medico_responsavel_hematologista
+      bigquery_type: string
+      description: CNS do médico responsável - Hematologista
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cns_medico_capacitado_responsavel
+      bigquery_type: string
+      description: CNS do médico capacitado responsável
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cns_responsavel_tecnico_sorologia
+      bigquery_type: string
+      description: CNS do responsável Técnico/Sorologia
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_hbsag_positivo
+      bigquery_type: int64
+      description: Quantidade de salas HBsAG positivo
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_hbsag_negativo
+      bigquery_type: int64
+      description: Quantidade de salas HBsAG negativo
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_dpi
+      bigquery_type: int64
+      description: Quantidade de salas DPI
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_dpac
+      bigquery_type: int64
+      description: Quantidade de salas DPAC
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_reuso_hbsag_positivo
+      bigquery_type: int64
+      description: Quantidade de salas de reuso de HBsAG positivo
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_reuso_hbsag_negativo
+      bigquery_type: int64
+      description: Quantidade de salas de reuso de HBsAG negativo
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_reuso_hcv_positivo
+      bigquery_type: int64
+      description: Quantidade de Salas de reuso de HCV positivo
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_maquinas_proporcao
+      bigquery_type: int64
+      description: Quantidade de máquinas de proporção
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_outras_maquinas
+      bigquery_type: int64
+      description: Quantidade de outras máquinas
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: tratamento_agua_filtro_areia
+      bigquery_type: string
+      description: Indica se faz tratamento de água com filtro de areia
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: tratamento_agua_filtro_carvao
+      bigquery_type: string
+      description: Indica se faz tratamento de água com filtro de carvão
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: tratamento_agua_abrandador
+      bigquery_type: string
+      description: Indica se faz tratamento de água com abrandador
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: tratamento_agua_deionizador
+      bigquery_type: string
+      description: Indica se faz tratamento de água com deionizador
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: tratamento_agua_maquina_osmose
+      bigquery_type: string
+      description: Indica se faz tratamento de água com máquina de osmose reversa
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: tratamento_agua_outros_equipamentos
+      bigquery_type: string
+      description: Indica se faz tratamento de água com outros tipos de equipamento
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: existencia_algum_requisito_dialise
+      bigquery_type: string
+      description: Indica a existência de algum requisito de diálise para este CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_simulacao_radioterapia
+      bigquery_type: int64
+      description: Quantidade de salas simulação - Radioterapia
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_planejamento_radioterapia
+      bigquery_type: int64
+      description: Quantidade de salas de Planejamento - Radioterapia
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_armazenamento_fontes_radioterapia
+      bigquery_type: int64
+      description: Quantidade de salas de armazenamento de fontes - Radioterapia
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_confeccao_masc_radioterapia
+      bigquery_type: int64
+      description: Quantidade de salas confecção masc - Radioterapia
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_molde_radioterapia
+      bigquery_type: int64
+      description: Quantidade de salas de salas de molde - Radioterapia
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_bloco_personalizado_radioterapia
+      bigquery_type: int64
+      description: Quantidade de salas de bloco personalizado - Radioterapia
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_armazenagem
+      bigquery_type: int64
+      description: Quantidade de salas de armazenagem
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_preparo
+      bigquery_type: int64
+      description: Quantidade de salas de preparo
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: salas_equipamentos_quimio_curta_duracao
+      bigquery_type: int64
+      description: Quantidade de Salas/Equipamentos de Quimio Curta duração
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: salas_equipamentos_quimio_longa_duracao
+      bigquery_type: int64
+      description: Quantidade de Salas/Equipamentos de Quimio de Longa Duração
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: salas_equipamentos_capela_fluxo_laminar
+      bigquery_type: int64
+      description: Quantidade de Salas/Equipamentos de Capela Fluxo Laminar
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_simuladores
+      bigquery_type: int64
+      description: Quantidade de Simuladores
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_acelerador_linear_ate_6_mev
+      bigquery_type: int64
+      description: Quantidade de Acelerador Linear até 6 MeV
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_acelerador_linear_maior_6_mev_sem_eletrons
+      bigquery_type: int64
+      description: Quantidade de Acelerador Linear maior 6 MeV - sem elétrons
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_acelerador_linear_maior_6_mev_com_eletrons
+      bigquery_type: int64
+      description: Quantidade de acelerador linear maior 6 MeV - com elétrons
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_equipamentos_ortovoltagem_10_50_kv
+      bigquery_type: int64
+      description: Quantidade de Equipamentos de Ortovoltagem 10-50 KV
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_equipamentos_ortovoltagem_50_150_kv
+      bigquery_type: int64
+      description: Quantidade de Equipamentos de Ortovoltagem 50-150 KV
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_equipamentos_ortovoltagem_150_500_kv
+      bigquery_type: int64
+      description: Quantidade de Equipamentos de Ortovoltagem 150-500 KV
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_unidade_cobalto
+      bigquery_type: int64
+      description: Quantidade de Unidade de Cobalto
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_equipamentos_braquiterapia_baixa
+      bigquery_type: int64
+      description: Quantidade de Equipamentos de Braquiterapia Baixa
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_equipamentos_braquiterapia_media
+      bigquery_type: int64
+      description: Quantidade de Equipamentos de Braquiterapia Média
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_equipamentos_braquiterapia_alta
+      bigquery_type: int64
+      description: Quantidade de Equipamentos de Braquiterapia Alta
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_monitor_area
+      bigquery_type: int64
+      description: Quantidade de Monitor de Área
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_monitor_individual
+      bigquery_type: int64
+      description: Quantidade de Monitor Individual
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sistema_computacao_planejamento
+      bigquery_type: int64
+      description: Quantidade de sistema de Computação para Planejamento
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_dosimetro_clinico
+      bigquery_type: int64
+      description: Quantidade de dosímetro clínico
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_fontes_seladas
+      bigquery_type: int64
+      description: Quantidade de fontes seladas
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: existencia_requisito_quimio_radio
+      bigquery_type: string
+      description: Indica a existência de algum requisito de quimio/rádio para este
+          CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_recepcao
+      bigquery_type: int64
+      description: Quantidade de salas de recepção
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_triagem_hematologica
+      bigquery_type: int64
+      description: Quantidade de salas de triagem hematológica
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_triagem_clinica
+      bigquery_type: int64
+      description: Quantidade de salas de triagem clínica
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_coleta
+      bigquery_type: int64
+      description: Quantidade de salas de coleta
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_aferese
+      bigquery_type: int64
+      description: Quantidade de salas de aférese
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_pre_estoque
+      bigquery_type: int64
+      description: Quantidade de salas de pré-estoque
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_processamento
+      bigquery_type: int64
+      description: Quantidade de salas de processamento
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_estoque
+      bigquery_type: int64
+      description: Quantidade de salas de estoque
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_distribuicao
+      bigquery_type: int64
+      description: Quantidade de salas de distribuição
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_sorologia
+      bigquery_type: int64
+      description: Quantidade de salas de sorologia
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_imunohematologia
+      bigquery_type: int64
+      description: Quantidade de salas de imunohematologia
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_pre_transfusionais
+      bigquery_type: int64
+      description: Quantidade de salas pré-transfusionais
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_hemostasia
+      bigquery_type: int64
+      description: Quantidade de salas hemostasia
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_controle_qualidade
+      bigquery_type: int64
+      description: Quantidade de salas de controle de qualidade
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_biologia_molecular
+      bigquery_type: int64
+      description: Quantidade de salas de biologia molecular
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_imunofenotipagem
+      bigquery_type: int64
+      description: Quantidade de salas de imunofenotipágem
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_transfusao
+      bigquery_type: int64
+      description: Quantidade de salas de transfusão
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_salas_seguimento_doador
+      bigquery_type: int64
+      description: Quantidade de salas seguimento doador
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_cadeiras_reclinaveis
+      bigquery_type: int64
+      description: Quantidade de cadeiras reclináveis
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_centrifugas_refrigeradas
+      bigquery_type: int64
+      description: Quantidade de centrífugas refrigeradas
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_refrigeradores_guarda_sangue
+      bigquery_type: int64
+      description: Quantidade de refrigeradores para guarda de sangue
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_congeladores_rapidos
+      bigquery_type: int64
+      description: Quantidade de congeladores rápidos
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_extratores_automaticos_plasma
+      bigquery_type: int64
+      description: Quantidade de extratores automáticos de plasma
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_freezers_18_graus_celsius
+      bigquery_type: int64
+      description: Quantidade de freezers de 18º C
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_freezers_30_graus_celsius
+      bigquery_type: int64
+      description: Quantidade de freezers de 30º C
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_agitadores_plaquetas
+      bigquery_type: int64
+      description: Quantidade de agitadores de plaquetas
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_seladoras
+      bigquery_type: int64
+      description: Quantidade de seladoras
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_irradiadores_hemocomponentes
+      bigquery_type: int64
+      description: Quantidade de irradiadores de hemocomponentes
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_aglutinoscopio
+      bigquery_type: int64
+      description: Quantidade de aglutinoscópio
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_maquinas_aferese
+      bigquery_type: int64
+      description: Quantidade de máquinas de aférese
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_refrigeradores_reagentes
+      bigquery_type: int64
+      description: Quantidade de refrigeradores para guarda de reagentes
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_refrigeradores_amostras_sangue
+      bigquery_type: int64
+      description: Quantidade de refrigeradores para guarda de amostras de sangue
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_capelas_fluxo_laminar
+      bigquery_type: int64
+      description: Quantidade de capelas fluxo laminar
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: existencia_requisito_hemoterapia
+      bigquery_type: string
+      description: Indica a existência de algum requisito de hemoterapia para este
+          CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+
+metadata_modified: '2022-01-20T16:16:58.730378'

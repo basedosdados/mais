@@ -1,6 +1,6 @@
 dataset_id: br_ms_cnes
 
-table_id: profissional
+table_id: equipe
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -208,75 +208,36 @@ columns:
       has_sensitive_data: no
       is_in_staging: false
       is_partition: true
-      
-    - name: id_estabelecimento_cnes
+
+    - name: id_municipio
       bigquery_type: string
-      description: ID Estabelecimento - CNES
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: id_municipio_residencia
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: nome
-      bigquery_type: string
-      description: Nome
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: cns
-      bigquery_type: string
-      description: CNS (Cartão Nacional de Saúde) do profissional
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: cbo_2002
-      bigquery_type: string
-      description: Código da especialidade do profissional
+      description: ID Município IBGE - 7 Dígitos
       temporal_coverage:
       covered_by_dictionary: yes
       directory_column:
           dataset_id: br_bd_diretorios_brasil
-          table_id: cbo_2002
-          column_name: cbo_2002
+          table_id: municipio
+          column_name: id_municipio
       measurement_unit:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: codigo_registro_conselho
+    - name: id_municipio_6
       bigquery_type: string
-      description: Número do registro no conselho de classe
+      description: ID Município IBGE - 6 Dígitos
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_6
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: id_estabelecimento_cnes
+      bigquery_type: string
+      description: Número nacional do estabelecimento de saúde
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -287,9 +248,35 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: codigo_conselho
+    - name: natureza_juridica
       bigquery_type: string
-      description: Código do conselho de classe
+      description: Natureza Jurídica
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: id_equipe
+      bigquery_type: string
+      description: 'Código do Município, Área e Sequencial da Equipe '
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: tipo_equipe
+      bigquery_type: string
+      description: Tipo de Equipe
       temporal_coverage:
       covered_by_dictionary: yes
       directory_column:
@@ -300,9 +287,22 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: estabelecimento_terceiro
+    - name: equipe
       bigquery_type: string
-      description: O estabelecimento é terceiro
+      description: Nome da Equipe
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: area_equipe
+      bigquery_type: string
+      description: Código da Área da Equipe
       temporal_coverage:
       covered_by_dictionary: yes
       directory_column:
@@ -313,9 +313,22 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: codigo_vinculo
+    - name: area
       bigquery_type: string
-      description: Código do vínculo empregatício com o estabelecimento
+      description: Nome da Área
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: segmento
+      bigquery_type: string
+      description: Código do Segmento
       temporal_coverage:
       covered_by_dictionary: yes
       directory_column:
@@ -326,9 +339,22 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: vinculo_contratado_sus
+    - name: descricao_segmento
       bigquery_type: string
-      description: 'Vínculo empregatício com o estabelecimento: Contratado SUS'
+      description: Descrição do Segmento
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: tipo_segmento
+      bigquery_type: string
+      description: Tipo do Segmento
       temporal_coverage:
       covered_by_dictionary: yes
       directory_column:
@@ -339,97 +365,161 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: vinculo_autonomo_sus
-      bigquery_type: string
-      description: 'Vínculo empregatício com o estabelecimento: Autônomo SUS'
-      temporal_coverage:
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: vinculo_outros
-      bigquery_type: string
-      description: 'Vínculo empregatício com o estabelecimento: Vínculo não identificado
-          (registros de profissionais não SUS e outras situações anômalas)'
-      temporal_coverage:
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: atende_sus
-      bigquery_type: string
-      description: Realiza Atendimento SUS
-      temporal_coverage:
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: atende_nao_sus
-      bigquery_type: string
-      description: Realiza Atendimento Não-SUS
-      temporal_coverage:
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition:
-    - name: carga_horaria_outros
+    - name: ano_ativacao_equipe
       bigquery_type: int64
-      description: Carga horária não ambulatorial, nem hospitalar
+      description: Ano de ativação da Equipe
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: hour
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: carga_horaria_hospitalar
+    - name: mes_ativacao_equipe
       bigquery_type: int64
-      description: Carga horária hospitalar
+      description: Mês de ativação da Equipe
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: hour
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: carga_horaria_ambulatorial
-      bigquery_type: int64
-      description: Carga horária Ambulatorial
+    - name: motivo_desativacao_equipe
+      bigquery_type: string
+      description: Código do Motivo de Desativação da Equipe
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: hour
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: tipo_desativacao_equipe
+      bigquery_type: string
+      description: Código do Tipo de Desativação da Equipe
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: ano_desativacao_equipe
+      bigquery_type: int64
+      description: Ano de desativação da Equipe
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: mes_desativacao_equipe
+      bigquery_type: int64
+      description: Mês de desativação da Equipe
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atende_populacao_assistida_quilombolas
+      bigquery_type: string
+      description: Atende População Assistida Quilombolas
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atende_populacao_assistida_assentados
+      bigquery_type: string
+      description: Atende População Assistida Assentados
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atende_populacao_assistida_geral
+      bigquery_type: string
+      description: Atende População Assistida Geral
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atende_populacao_assistida_escolares
+      bigquery_type: string
+      description: Atende População Assistida Escolares
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atende_populacao_assistida_indigena
+      bigquery_type: string
+      description: Atende População Assistida Indigena
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atende_populacao_assistida_pronasci
+      bigquery_type: string
+      description: Atende População Assistida PronasciI
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
 
-metadata_modified: '2022-01-20T16:58:19.693966'
+metadata_modified: '2022-01-20T15:21:07.129692'
