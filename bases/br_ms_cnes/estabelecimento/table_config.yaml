@@ -1,0 +1,2925 @@
+dataset_id: br_ms_cnes
+
+table_id: estabelecimento
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description:
+
+# A máxima unidade espacial que a tabela cobre.
+spatial_coverage:
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplo: 1995(1)2019.
+temporal_coverage:
+          - 2005
+          - 2006
+          - 2007
+          - 2008
+          - 2009
+          - 2010
+          - 2011
+          - 2012
+          - 2013
+          - 2014
+          - 2015
+          - 2016
+          - 2017
+          - 2018
+          - 2019
+          - 2020
+          - 2021
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency:
+
+# Entidade representada por cada linha.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+entity:
+
+# A unidade temporal representada por cada linha.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+time_unit:
+
+# O conjunto mínimo de colunas identificando cada linha unicamente.
+# Preencha com os nomes de colunas.
+# Exemplos: id_municipio, ano.
+# Pode ser vazio pois certas tabelas não possuem identificadores.
+identifying_columns:
+
+last_updated:
+    metadata:
+    data:
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: ''
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name:
+    email:
+    github_user:
+    website:
+    ckan_user:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name:
+    email:
+    github_user:
+    ckan_user:
+    website:
+    code_url:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+# A tabela tem colunas que precisam de dicionário?
+# Opções: yes, no.
+covered_by_dictionary:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions: ano,mes,sigla_uf
+
+bdm_file_size:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - 2005
+          - 2006
+          - 2007
+          - 2008
+          - 2009
+          - 2010
+          - 2011
+          - 2012
+          - 2013
+          - 2014
+          - 2015
+          - 2016
+          - 2017
+          - 2018
+          - 2019
+          - 2020
+          - 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      is_in_staging: false
+      is_partition: true
+    - name: mes
+      bigquery_type: int64
+      description: Mes
+      temporal_coverage:
+          - 2005
+          - 2006
+          - 2007
+          - 2008
+          - 2009
+          - 2010
+          - 2011
+          - 2012
+          - 2013
+          - 2014
+          - 2015
+          - 2016
+          - 2017
+          - 2018
+          - 2019
+          - 2020
+          - 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
+      has_sensitive_data: no
+      is_in_staging: false
+      is_partition: true
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - 2005
+          - 2006
+          - 2007
+          - 2008
+          - 2009
+          - 2010
+          - 2011
+          - 2012
+          - 2013
+          - 2014
+          - 2015
+          - 2016
+          - 2017
+          - 2018
+          - 2019
+          - 2020
+          - 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla_uf
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: false
+      is_partition: true
+    - name: id_municipio
+      
+      bigquery_type: string
+      description: Id município IBGE - 7 dígitos
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: id_municipio_6
+      bigquery_type: string
+      description: Id município IBGE - 6 dígitos
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_6
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: id_estabelecimento_cnes
+      bigquery_type: string
+      description: Id estabelecimento - CNES
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: regiao_saude
+      bigquery_type: string
+      description: Código da região de saúde NOAS
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: microrregiao_saude
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: distrito_sanitario
+      bigquery_type: string
+      description: Código do distrito sanitário
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: distrito_administrativo
+      bigquery_type: string
+      description: Inicialmente chamado distrito administrativo, atualmente código
+          do módulo assistencial conforme tabela local, em conformidade com o plano
+          diretor de regionalização do estado/município
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cep
+      bigquery_type: string
+      description: Código do CEP do estabelecimento
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cpf_cnpj
+      bigquery_type: string
+      description: CPF do estabelecimento, caso pessoa física ou CNPJ, caso pessoa
+          jurídica
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: indicador_pessoa
+      bigquery_type: string
+      description: Indicador de pessoa
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: grau_dependencia
+      bigquery_type: string
+      description: Grau de dependência
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: cnpj_mantenedora
+      bigquery_type: string
+      description: CNPJ da mantenedora do estabelecimento
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: codigo_ir
+      bigquery_type: string
+      description: Indica o tipo de retenção de tributos da mantenedora
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: vinculo_sus
+      bigquery_type: string
+      description: Vínculo com sus
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: tipo_gestao
+      bigquery_type: string
+      description: Gestão de saúde
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: esfera_administrativa
+      bigquery_type: string
+      description: Código da esfera administrativa
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: retencao_tributos
+      bigquery_type: string
+      description: Código de retenção de tributos.
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atividade_ensino_pesquisa
+      bigquery_type: string
+      description: Código da atividade de ensino/pesquisa
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: natureza_administrativa
+      bigquery_type: string
+      description: Código da natureza da organização
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: fluxo_atendimento
+      bigquery_type: string
+      description: Código de fluxo da clientela
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: tipo_unidade
+      bigquery_type: string
+      description: Tipo de unidade (estabelecimento)
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: turno
+      bigquery_type: string
+      description: Código de turno de atendimento
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: nivel_hierarquia
+      bigquery_type: string
+      description: Código do nível de hierarquia
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: tipo_prestador
+      bigquery_type: string
+      description: Tipo de prestador
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: codigo_banco
+      bigquery_type: string
+      description: Código do banco do estabelecimento
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: codigo_agencia
+      bigquery_type: string
+      description: Código da agência do estabelecimento
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: conta_corrente
+      bigquery_type: string
+      description: Código da conta corrente do estabelecimento
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: contrato_municipio_sus
+      bigquery_type: string
+      description: Número do contrato/convênio municipal do vínculo com o sus
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: data_publicacao_contrato_municipal
+      bigquery_type: date
+      description: Ano e mês de publicação do contrato /convênio municipal
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: contrato_estado_sus
+      bigquery_type: string
+      description: Número do contrato/convênio estadual do vínculo com o sus
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: data_publicacao_contrato_estadual
+      bigquery_type: date
+      description: Ano e mês de publicação do contrato /convênio estadual
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: numero_alvara
+      bigquery_type: string
+      description: Número do alvará
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: data_expedicao_alvara
+      bigquery_type: date
+      description: Ano e mês de da expedição do alvará
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: orgao_expedidor
+      bigquery_type: string
+      description: Órgão expedidor do alvará
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: avaliacao_acreditacao_hospitalar
+      bigquery_type: string
+      description: Indica se o estabelecimento foi avaliado segundo o manual de acreditação
+          hospitalar do MS
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: classificacao_acreditacao_hospitalar
+      bigquery_type: string
+      description: Classificação da avaliação do estabelecimento segundo o manual
+          de acreditação hospitalar do MS
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: data_acreditacao_mes
+      bigquery_type: int64
+      description: Mês da acreditação
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: data_acreditacao_ano
+      bigquery_type: int64
+      description: Ano da acreditação
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: avaliacao_pnass
+      bigquery_type: string
+      description: Indica se o estabelecimento foi avaliado segundo o programa nacional
+          de serviços de saúde - PNASS
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: data_avaliacao_pnass_ano
+      bigquery_type: int64
+      description: Ano da avaliação PNASS
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: data_avaliacao_pnass_mes
+      bigquery_type: int64
+      description: Mês da avaliação PNASS
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: gestao_basica_amb_estadual
+      bigquery_type: string
+      description: Indicador se a gestão da atividade atenção básica do nível de atenção
+          ambulatorial é estadual
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: gestao_basica_amb_municipal
+      bigquery_type: string
+      description: Indicador se a gestão da atividade atenção básica do nível de atenção
+          ambulatorial é municipal
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: gestao_media_amb_estadual
+      bigquery_type: string
+      description: Indicador se a gestão da atividade média complexidade do nível
+          de atenção ambulatorial é estadual
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: gestao_media_amb_municipal
+      bigquery_type: string
+      description: Indicador se a gestão da atividade média complexidade do nível
+          de atenção ambulatorial é municipal
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: gestao_alta_amb_estadual
+      bigquery_type: string
+      description: Indicador se a gestão da atividade alta complexidade do nível de
+          atenção ambulatorial é estadual
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: gestao_alta_amb_municipal
+      bigquery_type: string
+      description: Indicador se a gestão da atividade alta complexidade do nível de
+          atenção ambulatorial é municipal
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atencao_amb
+      bigquery_type: string
+      description: Indica a existência de nível de atenção ambulatorial, de gestão
+          municipal/estadual, para este CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: gestao_estadual
+      bigquery_type: string
+      description: Indicador se a gestão do programa cód. 03 é estadual
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: gestao_municipal
+      bigquery_type: string
+      description: Indicador se a gestão do programa cód. 03 é municipal
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: gestao_media_hosp_estadual
+      bigquery_type: string
+      description: Indicador se a gestão da atividade média complexidade do nível
+          de atenção hospitalar é estadual
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: gestao_media_hosp_municipal
+      bigquery_type: string
+      description: Indicador se a gestão da atividade média complexidade do nível
+          de atenção hospitalar é municipal
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: gestao_alta_hosp_estadual
+      bigquery_type: string
+      description: Indicador se a gestão da atividade alta complexidade do nível de
+          atenção hospitalar é estadual
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: gestao_alta_hosp_municipal
+      bigquery_type: string
+      description: Indicador se a gestão da atividade alta complexidade do nível de
+          atenção hospitalar é municipal
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atencao_hosp
+      bigquery_type: string
+      description: Indica a existência de nível de atenção hospitalar, de gestão municipal/estadual,
+          para este CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leitos_cirurgico
+      bigquery_type: int64
+      description: Quantidade de leitos tipo 1 (cirúrgico) existentes
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leitos_clinico
+      bigquery_type: int64
+      description: Quantidade de leitos tipo 2 (clínico) existentes
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leitos_complementar
+      bigquery_type: int64
+      description: Quantidade de leitos tipo 3 (complem.) Existentes
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: indicador_leitos_hosp
+      bigquery_type: string
+      description: Indica a existência de leitos hospitalares-cirúrgicos, clínicos
+          e complementares para este CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_consultorio_pediatrico
+      bigquery_type: int64
+      description: Quantidade de salas/consultórios de atendimento pediátrico (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_consultorio_feminino
+      bigquery_type: int64
+      description: Quantidade de salas/consultórios de atendimento feminino (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_consultorio_masculino
+      bigquery_type: int64
+      description: Quantidade de salas/consultórios de atendimento masculino (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_consultorio_indiferenciado
+      bigquery_type: int64
+      description: Quantidade de salas/consultórios de atendimento indiferenciado
+          (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_repouso_pediatrico_urgencia
+      bigquery_type: int64
+      description: Quantidade de salas de repouso/observação pediátrico (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_repouso_feminino_urgencia
+      bigquery_type: int64
+      description: Quantidade de salas de repouso/observação feminino (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_repouso_masculino_urgencia
+      bigquery_type: int64
+      description: Quantidade de salas de repouso/observação masculino (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_repouso_indiferenciado_urgencia
+      bigquery_type: int64
+      description: Quantidade de salas de repouso/observação indiferenciado (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_consultorio_odontologia_urgencia
+      bigquery_type: int64
+      description: Quantidade de consultórios de odontologia (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_higienizacao_urgencia
+      bigquery_type: int64
+      description: Quantidade de salas de higienização (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_gesso_urgencia
+      bigquery_type: int64
+      description: Quantidade de salas de gesso (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_curativo_urgencia
+      bigquery_type: int64
+      description: Quantidade de salas de curativos (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_pequena_cirurgia_urgencia
+      bigquery_type: int64
+      description: Quantidade de salas de pequenas cirurgias (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_consultorio_medico_urgencia
+      bigquery_type: int64
+      description: Quantidade de consultórios médicos (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: indicador_instalacao_urgencia
+      bigquery_type: string
+      description: Indica a existência de instalação física de urgência/emergência
+          para este CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_consultorio_clinica_basica
+      bigquery_type: int64
+      description: Quantidade de consultórios de clínica básica (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_consultorio_clinica_especializada
+      bigquery_type: int64
+      description: Quantidade de consultórios de clínica especializada (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_consultorio_clinica_indiferenciada
+      bigquery_type: int64
+      description: Quantidade de consultórios de clínica indiferenciada (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_consultorio_nao_medico
+      bigquery_type: int64
+      description: Quantidade de consultórios não médicos (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_repouso_feminino_amb
+      bigquery_type: int64
+      description: Quantidade de salas de repouso/observação feminino (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_repouso_masculino_amb
+      bigquery_type: int64
+      description: Quantidade de salas de repouso/observação masculino (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_repouso_pediatrico_amb
+      bigquery_type: int64
+      description: Quantidade de salas de repouso/observação pediátrico (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_repouso_indiferenciado_amb
+      bigquery_type: int64
+      description: Quantidade de salas de repouso/observação indiferenciado (atend.
+          Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_consultorio_odontologia_amb
+      bigquery_type: int64
+      description: Quantidade de consultórios de odontologia (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_pequena_cirurgia_amb
+      bigquery_type: int64
+      description: Quantidade de salas de pequenas cirurgias (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_enfermagem_amb
+      bigquery_type: int64
+      description: Quantidade de salas de enfermagem (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_imunizacao_amb
+      bigquery_type: int64
+      description: Quantidade de salas de imunização (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_nebulizacao_amb
+      bigquery_type: int64
+      description: Quantidade de salas de nebulização (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_gesso_amb
+      bigquery_type: int64
+      description: Quantidade de salas de gesso (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_curativo_amb
+      bigquery_type: int64
+      description: Quantidade de salas de curativos (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_cirurgia_amb
+      bigquery_type: int64
+      description: Quantidade de salas de cirurgia ambulatorial (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: indicador_instalcao_ambulatorial
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_cirurgia
+      bigquery_type: int64
+      description: Quantidade de salas de cirurgias (centro cirúrgico)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_recuperacao
+      bigquery_type: int64
+      description: Quantidade de salas de recuperação (centro cirúrgico)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_cirurgia_amb_centro_cirurgico
+      bigquery_type: int64
+      description: Quantidade de salas de cirurgia ambulatorial (centro cirúrgico)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: indicador_instalacao_centro_cirurgico
+      bigquery_type: string
+      description: Indica a existência de instalação física de atendimento hospitalar-
+          centro cirúrgico para este CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_pre_parto
+      bigquery_type: int64
+      description: Quantidade de salas de pré-parto (centro obstétrico)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_parto_normal
+      bigquery_type: int64
+      description: Quantidade de salas de parto normal (centro obstétrico)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_curetagem
+      bigquery_type: int64
+      description: Quantidade de salas de curetagem (centro obstétrico)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_sala_cirurgia_centro_obstetrico
+      bigquery_type: int64
+      description: Quantidade de salas de cirurgias (centro obstétrico)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: indicador_instalacao_centro_obstetrico
+      bigquery_type: string
+      description: Indica a existência de instalação física de atendimento hospitalar-
+          centro obstétrico para este CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_repouso_pediatrico_urgencia
+      bigquery_type: int64
+      description: Quantidade de leitos de repouso/observação pediátrico (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_repouso_feminino_urgencia
+      bigquery_type: int64
+      description: Quantidade de leitos de repouso/observação feminino (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_repouso_masculino_urgencia
+      bigquery_type: int64
+      description: Quantidade de leitos de repouso/observação masculino (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_repouso_indiferenciado_urgencia
+      bigquery_type: int64
+      description: Quantidade de leitos de repouso/observação indiferenciado (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_equipos_odontologia_urgencia
+      bigquery_type: int64
+      description: Quantidade de equipos de odontologia (urgência/emergência)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_repouso_feminino_amb
+      bigquery_type: int64
+      description: Quantidade de leitos de repouso/observação feminino (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_repouso_masculino_amb
+      bigquery_type: int64
+      description: Quantidade de leitos de repouso/observação masculino (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_repouso_pediatrico_amb
+      bigquery_type: int64
+      description: Quantidade de leitos de repouso/observação pediátrico (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_repouso_indiferenciado_amb
+      bigquery_type: int64
+      description: Quantidade de leitos de repouso/observação indiferenciado (atend.
+          Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_equipos_odontologia_amb
+      bigquery_type: int64
+      description: Quantidade de equipos de odontologia (atend. Ambulatorial)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_recuperacao_centro_cirurgico
+      bigquery_type: int64
+      description: Quantidade de leitos de recuperação (centro cirúrgico)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_pre_parto
+      bigquery_type: int64
+      description: Quantidade de leitos de pré-parto (centro obstétrico)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_recem_nascido_normal
+      bigquery_type: int64
+      description: Quantidade de leitos de recém-nascido normal (unid. neonatal)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_recem_nascido_patologico
+      bigquery_type: int64
+      description: Quantidade de leitos de recém-nascido patológico (unid. neonatal)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: quantidade_leito_conjunto_neonatal
+      bigquery_type: int64
+      description: Quantidade de leitos de alojamento conjunto (unid. neonatal)
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: indicador_instalacao_neonatal
+      bigquery_type: string
+      description: Indica a existência de instalação física de atendimento hospitalar-
+          unidade neonatal para este CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: indicador_instalaco_hospitalar
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_apoio_proprio
+      bigquery_type: string
+      description: Serviço de apoio s.a.m.e. ou s.p.p. próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_apoio_terceirizado
+      bigquery_type: string
+      description: Serviço de apoio s.a.m.e. ou s.p.p. terceirizado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_social_proprio
+      bigquery_type: string
+      description: Serviço de apoio serviço social próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_social_terceirizado
+      bigquery_type: string
+      description: Serviço de apoio serviço social terceirizado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_farmacia_proprio
+      bigquery_type: string
+      description: Serviço de apoio farmácia próprio,
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_farmacia_terceirizado
+      bigquery_type: string
+      description: Serviço de apoio farmácia terceirizado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_esterilizacao_proprio
+      bigquery_type: string
+      description: Serviço de apoio esterilização de materiais próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_esterilizacao_terceirizado
+      bigquery_type: string
+      description: Serviço de apoio esterilização de materiais terceirizado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_nutricao_proprio
+      bigquery_type: string
+      description: Serviço de apoio nutrição/dietética (s.n.d.) próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_nutricao_terceirizado
+      bigquery_type: string
+      description: Serviço de apoio nutrição/dietética (s.n.d.) terceirizado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_lactario_proprio
+      bigquery_type: string
+      description: Serviço de apoio lactário próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_lactario_terceirizado
+      bigquery_type: string
+      description: Serviço de apoio lactário terceirizado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_banco_leite_proprio
+      bigquery_type: string
+      description: Serviço de apoio banco de leite próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_banco_leite_terceirizado
+      bigquery_type: string
+      description: Serviço de apoio banco de leite terceirizado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_lavanderia_proprio
+      bigquery_type: string
+      description: Serviço de apoio lavanderia próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_lavanderia_terceirizado
+      bigquery_type: string
+      description: Serviço de apoio lavanderia terceirizado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_manutencao_proprio
+      bigquery_type: string
+      description: Serviço de apoio manutenção de equipamento próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_manutencao_terceirizado
+      bigquery_type: string
+      description: Serviço de apoio manutenção de equipamento terceirizado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_ambulancia_proprio
+      bigquery_type: string
+      description: Serviço de apoio ambulância próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_ambulancia_terceirizado
+      bigquery_type: string
+      description: Serviço de apoio ambulância terceirizado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_necroterio_proprio
+      bigquery_type: string
+      description: Serviço de apoio necrotério próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: servico_necroterio_terceirizado
+      bigquery_type: string
+      description: Serviço de apoio necrotério terceirizado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: indicador_servico_apoio
+      bigquery_type: string
+      description: Indica a existência de algum serviço de apoio para este CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: coleta_residuo_biologico
+      bigquery_type: string
+      description: Existe coleta de resíduo biológico
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: coleta_residuo_quimico
+      bigquery_type: string
+      description: Existe coleta de resíduo químico
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: coleta_rejeito_radioativo
+      bigquery_type: string
+      description: Existe coleta de rejeitos radioativos
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: coleta_rejeito_comum
+      bigquery_type: string
+      description: Existe coleta de rejeitos comum
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: indicador_coleta_residuo
+      bigquery_type: string
+      description: Indica a existência de alguma coleta de resíduo para este CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: comissao_etica_medica
+      bigquery_type: string
+      description: Existe comissão de ética médica
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: comissao_etica_enfermagem
+      bigquery_type: string
+      description: Existe comissão de ética de enfermagem
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: comissao_farmacia_terapeutica
+      bigquery_type: string
+      description: Existe comissão de farmácia e terapêutica
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: comissao_controle_infeccao
+      bigquery_type: string
+      description: Existe comissão de controle de infecção hospitalar
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: comissao_apropriacao_custos
+      bigquery_type: string
+      description: Existe comissão de apropriação de custos
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: comissao_cipa
+      bigquery_type: string
+      description: Existe comissão de CIPA
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: comissao_revisao_prontuario
+      bigquery_type: string
+      description: Existe comissão de revisão de prontuários
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: comissao_revisao_documentacao
+      bigquery_type: string
+      description: Existe comissão de revisão de documentação médica e estatística
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: comissao_analise_obito_biopisias
+      bigquery_type: string
+      description: Existe comissão de análise de óbitos e biopsias
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: comissao_investigacao_epidemiologica
+      bigquery_type: string
+      description: Existe comissão de investigação epidemiológica
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: comissao_notificacao_doencas
+      bigquery_type: string
+      description: Existe comissão de notificação de doenças
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: comissao_zoonose_vetores
+      bigquery_type: string
+      description: Existe comissão de controle de zoonoses e vetores
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: indicador_comissao
+      bigquery_type: string
+      description: Indica a existência de alguma comissão para este CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_internacao_sus
+      bigquery_type: string
+      description: Atendimento prestado internação/convenio sus
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_internacao_particular
+      bigquery_type: string
+      description: Atendimento prestado internação/convenio particular
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_internacao_plano_seguro_proprio
+      bigquery_type: string
+      description: Atendimento prestado internação/convenio plano-seguro próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_internacao_plano_seguro_terceiro
+      bigquery_type: string
+      description: Atendimento prestado internação/convenio plano-seguro terceiro
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_internacao_plano_saude_publico
+      bigquery_type: string
+      description: Atendimento prestado internação/ convenio plano de saúde publico
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_internacao_plano_saude_privado
+      bigquery_type: string
+      description: Atendimento prestado internação/convenio plano de saúde privado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_amb_sus
+      bigquery_type: string
+      description: Atendimento prestado atendimento ambulatorial/convenio sus
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_amb_particular
+      bigquery_type: string
+      description: Atendimento prestado atendimento ambulatorial/convenio particular
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_amb_plano_seguro_proprio
+      bigquery_type: string
+      description: Atendimento prestado atendimento ambulatorial/convenio plano- seguro
+          próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_amb_plano_seguro_terceiro
+      bigquery_type: string
+      description: Atendimento prestado atendimento ambulatorial/convenio plano- seguro
+          terceiro
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_amb_plano_saude_publico
+      bigquery_type: string
+      description: Atendimento prestado atendimento ambulatorial/convenio plano de
+          saúde publico
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_amb_plano_saude_privado
+      bigquery_type: string
+      description: Atendimento prestado atendimento ambulatorial/convenio plano de
+          saúde privado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_sadt_sus
+      bigquery_type: string
+      description: Atendimento prestado sadt/ convenio sus
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_sadt_privado
+      bigquery_type: string
+      description: Atendimento prestado sadt/ convenio particular
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_sadt_plano_seguro_proprio
+      bigquery_type: string
+      description: Atendimento prestado sadt/ convenio plano-seguro próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_sadt_plano_seguro_terceiro
+      bigquery_type: string
+      description: Atendimento prestado sadt/ convenio plano-seguro terceiro
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_sadt_plano_saude_publico
+      bigquery_type: string
+      description: Atendimento prestado sadt/ convenio plano de saúde publico
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_sadt_plano_saude_privado
+      bigquery_type: string
+      description: Atendimento prestado sadt/ convenio plano de saúde privado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_urgencia_sus
+      bigquery_type: string
+      description: Atendimento prestado urgência/ convenio sus
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_urgencia_privado
+      bigquery_type: string
+      description: Atendimento prestado urgência/ convenio particular
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_urgencia_plano_seguro_proprio
+      bigquery_type: string
+      description: Atendimento prestado urgência/ convenio plano-seguro proprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_urgencia_plano_seguro_terceiro
+      bigquery_type: string
+      description: Atendimento prestado urgência/ convenio plano-seguro terceiro
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_urgencia_plano_saude_publico
+      bigquery_type: string
+      description: Atendimento prestado urgência/ convenio plano de saúde publico
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_urgencia_plano_saude_privado
+      bigquery_type: string
+      description: Atendimento prestado urgência/convenio plano de saude privado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_outros_sus
+      bigquery_type: string
+      description: Atendimento prestado outros/ convenio sus
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_outros_privado
+      bigquery_type: string
+      description: Atendimento prestado outros/convenio particular
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_outros_plano_seguro_proprio
+      bigquery_type: string
+      description: Atendimento prestado outros/convenio plano-seguro próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_outros_plano_seguro_terceiro
+      bigquery_type: string
+      description: Atendimento prestado outros/convenio plano-seguro terceiro
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_outros_plano_saude_publico
+      bigquery_type: string
+      description: Atendimento prestado outros/convenio plano de saúde publico
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_outros_plano_saude_privado
+      bigquery_type: string
+      description: Atendimento prestado outros/convenio plano de saúde privado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_vigilancia_sus
+      bigquery_type: string
+      description: Atendimento prestado vigilância em saúde/convenio sus
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_vigilancia_privado
+      bigquery_type: string
+      description: Atendimento prestado vigilância em saúde/convenio particular
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_vigilancia_plano_seguro_proprio
+      bigquery_type: string
+      description: Atendimento prestado vigilância em saúde/convenio plano-seguro
+          próprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_vigilancia_plano_seguro_terceiro
+      bigquery_type: string
+      description: Atendimento prestado vigilância em saúde/convenio plano-seguro
+          terceiro
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_vigilancia_plano_saude_publico
+      bigquery_type: string
+      description: Atendimento prestado vigilância em saúde/convenio plano de saúde
+          publico
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_vigilancia_plano_saude_privado
+      bigquery_type: string
+      description: Atendimento prestado vigilância em saúde/convenio plano de saúde
+          privado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_regulacao_sus
+      bigquery_type: string
+      description: Atendimento prestado regulação/convenio sus
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_regulacao_privado
+      bigquery_type: string
+      description: Atendimento prestado regulação/convenio particular
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_regulacao_plano_seguro_proprio
+      bigquery_type: string
+      description: Atendimento prestado regulação/convenio plano-seguro proprio
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_regulacao_plano_seguro_terceiro
+      bigquery_type: string
+      description: Atendimento prestado regulação/convenio plano-seguro terceiro
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_regulacao_plano_saude_publico
+      bigquery_type: string
+      description: Atendimento prestado regulação/convenio plano de saude publico
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: atendimento_regulacao_plano_saude_privado
+      bigquery_type: string
+      description: Atendimento prestado regulação/convenio plano de saude privado
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: indicador_atendimento_prestado
+      bigquery_type: string
+      description: Indica a existência de algum atendimento prestado para este CNES
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: data_atualizacao_ano
+      bigquery_type: int64
+      description: Ano de atualização da informação pelo estabelecimento
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: data_atualizacao_mes
+      bigquery_type: int64
+      description: Mês de atualização da informação pelo estabelecimento
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: data_competencia_ano
+      bigquery_type: int64
+      description: Ano de competência da informação
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: data_competencia_mes
+      bigquery_type: int64
+      description: Mês de competência da informação
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: natureza_juridica
+      bigquery_type: string
+      description: Natureza jurídica
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+
+metadata_modified: '2022-01-20T18:40:47.984442'
