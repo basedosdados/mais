@@ -209,6 +209,32 @@ columns:
       is_in_staging: false
       is_partition: true
       
+    - name: id_municipio
+      bigquery_type: string
+      description: ID Município IBGE - 7 Dígitos
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
+    - name: id_municipio_6
+      bigquery_type: string
+      description: ID Município IBGE - 6 Dígitos
+      temporal_coverage:
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_6
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition:
     - name: id_estabelecimento_cnes
       bigquery_type: string
       description: ID Estabelecimento - CNES
@@ -222,15 +248,15 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition:
-    - name: id_municipio_residencia
-      bigquery_type:
-      description:
+    - name: id_municipio_6_residencia
+      bigquery_type: string
+      description: ID Município da residência do profissional - IBGE 6 Dígitos
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: yes
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_6
       measurement_unit:
       has_sensitive_data:
       is_in_staging: true
@@ -328,7 +354,7 @@ columns:
       is_partition:
     - name: vinculo_contratado_sus
       bigquery_type: string
-      description: 'Vínculo empregatício com o estabelecimento: Contratado SUS'
+      description: Vínculo empregatício com o estabelecimento- Contratado SUS
       temporal_coverage:
       covered_by_dictionary: yes
       directory_column:
@@ -341,7 +367,7 @@ columns:
       is_partition:
     - name: vinculo_autonomo_sus
       bigquery_type: string
-      description: 'Vínculo empregatício com o estabelecimento: Autônomo SUS'
+      description: Vínculo empregatício com o estabelecimento- Autônomo SUS
       temporal_coverage:
       covered_by_dictionary: yes
       directory_column:
@@ -354,8 +380,8 @@ columns:
       is_partition:
     - name: vinculo_outros
       bigquery_type: string
-      description: 'Vínculo empregatício com o estabelecimento: Vínculo não identificado
-          (registros de profissionais não SUS e outras situações anômalas)'
+      description: Vínculo empregatício com o estabelecimento- Vínculo não identificado
+          (registros de profissionais não SUS e outras situações anômalas)
       temporal_coverage:
       covered_by_dictionary: yes
       directory_column:
@@ -432,4 +458,4 @@ columns:
       is_in_staging: true
       is_partition:
 
-metadata_modified: '2022-01-20T16:58:19.693966'
+metadata_modified: '2022-01-20T20:37:19.200105'
