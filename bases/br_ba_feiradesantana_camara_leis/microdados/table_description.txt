@@ -29,7 +29,6 @@ Colunas identificando linhas unicamente
 
 Cobertura Temporal
 ------------------
-- 2019
 
 
 
