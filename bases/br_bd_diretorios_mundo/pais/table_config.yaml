@@ -15,7 +15,7 @@ spatial_coverage: all
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplo: 1995(1)2019.
-temporal_coverage: 
+temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -23,7 +23,8 @@ update_frequency: unique
 
 # Entidade representada por cada linha.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity: country
+entity:
+    - country
 
 # A unidade temporal representada por cada linha.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -64,8 +65,8 @@ data_cleaned_by:
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_mundo/code
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "Extração dos dados do site da FAO \n
-    Padronização sob as diretrizes da BasedosDados"
+data_cleaning_description: "Extração dos dados do site da FAO \n Padronização sob\
+    \ as diretrizes da BasedosDados"
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -128,7 +129,7 @@ columns:
       measurement_unit:
       has_sensitive_data:
       is_in_staging: true
-      is_partition: false 
+      is_partition: false
     - name: id_pais_gaul
       bigquery_type: string
       description: ID País - GAUL
@@ -154,7 +155,7 @@ columns:
       measurement_unit:
       has_sensitive_data:
       is_in_staging: true
-      is_partition: false 
+      is_partition: false
     - name: sigla_pais_iso2
       bigquery_type: string
       description: Sigla do País - ISO2
@@ -171,7 +172,7 @@ columns:
     - name: sigla_pais_pnud
       bigquery_type: string
       description: Sigla do País - PNUD
-      temporal_coverage: 
+      temporal_coverage:
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -193,7 +194,7 @@ columns:
       measurement_unit:
       has_sensitive_data:
       is_in_staging: true
-      is_partition: yes
+      is_partition: true
     - name: nome_ingles
       bigquery_type: string
       description: Nome do país (em inglês)
@@ -234,4 +235,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified:
+metadata_modified: '2021-12-21T12:35:23.790563'
