@@ -52,11 +52,31 @@ Mantemos a lista de conjuntos que ainda não estão na BD+ no nosso [Github](htt
 
 !!! Info "Caso sua base (conjunto) já esteja listada, basta marcar seu usuário do Github como `assignee`."
 
-### 2. Baixar nossa pasta _template_ para dados
+### 2. Configure suas credenciais localmente e prepare o ambiente
+
+No seu terminal:
+
+1. Instale nosso cliente: `pip install basedosdados`.
+2. Rode `basedosdados config init` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
+
+> Caso seu ambiente de produção não permita o uso interativo do nosso cliente ou apresente alguma outra dificuldade relativa a esse modo de configuração, você pode configurar o `basedosdados` a partir de variáveis de ambiente da seguinte forma:
+>
+>```bash
+> export BASEDOSDADOS_CONFIG=$(cat ~/.basedosdados/config.toml | base64)
+> export BASEDOSDADOS_CREDENTIALS_PROD=$(cat ~/.basedosdados/credentials/prod.json | base64)
+> export BASEDOSDADOS_CREDENTIALS_STAGING=$(cat ~/.basedosdados/credentials/staging.json | base64)
+>```
+>
+3. Clone um _fork_ do nosso [repositório](https://github.com/basedosdados/mais) localmente.
+4. Dê um `cd` para a pasta local do repositório e abra uma nova branch
+   com `git checkout -b [BRANCH_ID]`. Todas as adições e modificações
+   serão feitas nessa _branch_.
+
+### 3. Baixar nossa pasta _template_ para dados
 
 [Baixe aqui a pasta
 _template_](https://drive.google.com/drive/folders/1xXXon0vdjSKr8RCNcymRdOKgq64iqfS5?usp=sharing)
-e renomeie para o nome do seu conjunto de dados, `<dataset_id>`
+para a apsta ``dados`` e renomeie para o nome do seu conjunto de dados, `<dataset_id>`
 ([veja aqui como nomear seu conjunto](../style_data)). Ela facilita todos os
 passos daqui pra frente. Sua
 estrutura é a seguinte:
@@ -76,7 +96,9 @@ estrutura é a seguinte:
         - `dicionario.csv`: Tabela dicionário de todo o conjunto de dados ([veja no passo
           6](#6-caso-necessario-criar-tabela-dicionario)).
 
-### 3. Preencher as tabelas de arquitetura
+!!! info "As pastas input, output e tmp não serão commitadas para o seu projeto e existirão apenas localmente"
+
+### 4. Preencher as tabelas de arquitetura
 
 As tabelas de arquitetura determinam **qual a estrutura de
 cada tabela do seu conjunto de dados**. Elas definem, por exemplo, o nome, ordem e metadados das colunas, e
@@ -84,6 +106,8 @@ como uma coluna deve ser tratada quando há mudanças em versões (por
 exemplo, e uma coluna muda de nome de um ano para o outro).
 
 !!! Info "Cada tabela do conjunto de dados deve ter sua própria tabela de arquitetura (planilha), que pode ser preenchida no Google Drive ou localmente (Excel, editor de texto)."
+!!! Info "As planilhas no Google Drive não podem ser incluídas no projeto, assim, caso queira que elas sejam commitadas,
+baixe uma cópia local"
 
 <!-- 
 TODO: Não vejo relação dessas perguntas com o exemplo dado
@@ -122,7 +146,7 @@ identificar municípios (seu nome fica numa tabela de
 Após validadas as tabelas de arquitetura, podemos escrever os códigos de
 **captura** e **limpeza** dos dados.
 
-- **Captura**: Códido que baixa automaticamente todos os dados originais e os salva em `/input`. Esses dados podem estar disponíveis em portais ou links FTP, podem ser raspados de sites, entre outros.
+- **Captura**: Código que baixa automaticamente todos os dados originais e os salva em `/input`. Esses dados podem estar disponíveis em portais ou links FTP, podem ser raspados de sites, entre outros.
 
 - **Limpeza**: Código que transforma os dados originais salvos em `/input` nos dados limpos prontos para serem subidos na BD+ salvos em `/output`, tudo baseado nas tabelas de arquitetura.
 
@@ -167,6 +191,19 @@ em formatos Excel ou outros. Na Base dos Dados nós unificamos tudo em um
 único arquivo em formato `.csv` - um único dicionário para todas as
 colunas de todas as tabelas do seu conjunto.
 
+O uso de dicionários tem seus prós e contras. É bem comum, para quem trabalha
+com bancos de dados relacionais (como SQLite, MySQL, MariaDB ou Postgres) o uso
+de modelos relacionados para campos de categorias (como, por exemplo, na tabela da RAIS 
+o campo tipo_admissao). Vejamos as vantagens e desvantagens:
+
+- vantagens:
+  - caso o usuário queira uma lista de valores únicos, ele pode percorrer apenas a tabela dicionário, não precisando percorrer toda a tabela de microdados
+  - no momento do tratamento é mais simples detectar erros de digitação em uma determinada categoria, o que causa uma duplicidade incorreta
+  - caso o usuário queira exportar os dados ele obterá um arquivo bem menor, otimizando os seus custos de transferência
+- desvantagens:
+  - quando o usuário precisa fazer uma consulta simples, terá que usar ``JOINS`` para buscar os nomes das categorias
+  - ao trabalhar com tais bases, o usuário precisará construir o modelo localmente
+
 !!! Info "Detalhes importantes de como construir seu dicionário estão no nosso [manual de estilo](../style_data/#dicionarios)."
 
 #### Exemplo: RAIS - Dicionário
@@ -199,29 +236,14 @@ Cloud. Para criar seu projeto basta:
    [Storage](https://console.cloud.google.com/storage) e crie uma pasta
    (_bucket_) para subir os dados (pode ter o mesmo nome do projeto).
 
-#### Configure suas credenciais localmente e prepare o ambiente
 
-No seu terminal:
-
-1. Instale nosso cliente: `pip install basedosdados`.
-2. Rode `basedosdados config init` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
-
-> Caso seu ambiente de produção não permita o uso interativo do nosso cliente ou apresente alguma outra dificuldade relativa a esse modo de configuração, você pode configurar o `basedosdados` a partir de variáveis de ambiente da seguinte forma:
->
->```bash
-> export BASEDOSDADOS_CONFIG=$(cat ~/.basedosdados/config.toml | base64)
-> export BASEDOSDADOS_CREDENTIALS_PROD=$(cat ~/.basedosdados/credentials/prod.json | base64)
-> export BASEDOSDADOS_CREDENTIALS_STAGING=$(cat ~/.basedosdados/credentials/staging.json | base64)
->```
->
-3. Clone um _fork_ do nosso [repositório](https://github.com/basedosdados/mais) localmente.
-4. Dê um `cd` para a pasta local do repositório e abra uma nova branch
-   com `git checkout -b [BRANCH_ID]`. Todas as adições e modificações
-   serão feitas nessa _branch_.
 
 #### Suba e configure uma tabela no seu _bucket_
 
-Aqui são dois passos: primeiro publicamos uma base (conjunto) e depois publicamos tabelas.
+Aqui são dois passos: primeiro publicamos uma base (conjunto) e depois publicamos tabelas. Este processo
+está automatizado na criação das tabelas, conforme abaixo.
+
+<!--
 
 Para publicar uma **base (conjunto)**:
 
@@ -246,14 +268,17 @@ Para publicar uma **base (conjunto)**:
     ```bash
     basedosdados dataset update [DATASET_ID]
     ```
+-->
 
-Para publicar uma **tabela (ou várias!)**:
+Para publicar o dataset e a(s) **tabela (s)**:
 
 1. Crie a tabela no *bucket*, indicando o caminho do arquivo no seu local, rodando:
 
     ```bash
     basedosdados table create [DATASET_ID] [TABLE_ID] --path '/[DATASET_ID]/output/[TABLE_ID]'.
     ```
+   
+!!! Info "se o projeto não existir do BigQuery, ele será autmaticamente criado, junto com os arquivos README.md e dataset_config.yaml, que deverão ser preenchidos, segundo o modelo já criado"
 
 2. Preencha os arquivos de configuração da tabela:
 
@@ -272,18 +297,20 @@ Consulte também nossa [API](../api_reference_cli) para mais detalhes de cada m�
 
 !!! Tip "Abra o console do BigQuery e rode algumas _queries_ para testar se foi tudo publicado corretamente. Estamos desenvolvendo testes automáticos para facilitar esse processo no futuro."
 
-### 8. Validar e publicar metadados
+### 8. Validar os metadados para publicação
 
-Para publicar os metadados preenchidos nos arquivos `dataset_config.yaml` e `table_config.yaml`, o processo é simples.
+Para validar os metadados preenchidos nos arquivos `dataset_config.yaml` e `table_config.yaml`, o processo é simples.
 
+<!--
 1. Coloque suas credenciais do CKAN no arquivo
    `~/.basedosdados/config.toml`, preenchendo os campos `api_key` e
    `url` em `[ckan]`. Este arquivo é criado automaticamente ao rodar
    `basedosdados config init` [(veja no passo
    7)](#7-subir-tudo-no-google-cloud).
-
-2. (Recomendado) Valide os metadados do conjunto através do comando `basedosdados metadata validate [DATASET_ID]`. Para validar metadados de tabelas, basta rodar `basedosdados metadata validate [DATASET_ID] [TABLE_ID]`.
-
+-->
+1. Valide os metadados do conjunto através do comando `basedosdados metadata validate [DATASET_ID]`. Para validar metadados de tabelas, basta rodar `basedosdados metadata validate [DATASET_ID] [TABLE_ID]`.
+2. Após a revisão da nossa equipe, os dados serão publicados no CKAN
+<!--
 3. Publique os metadados do conjunto já preenchidos e validados com
    `basedosdados metadata publish [DATASET_ID]`. Para publicar metadados
    de tabelas, use `basedosdados metadata publish [DATASET_ID]
@@ -291,6 +318,7 @@ Para publicar os metadados preenchidos nos arquivos `dataset_config.yaml` e `tab
 
 > Para publicar metadados de ambos (conjunto e tabela), use
 > `basedosdados metadata publish [DATASET_ID] [TABLE_ID] --all=True`.
+-->
 
 #### Atualizando metadados de bases ou tabelas já existentes
 
@@ -302,9 +330,9 @@ Através do módulo `metadata` é possível também trabalhar com bases e tabela
    `basedosdados metadata create [DATASET_ID] [TABLE_ID]`, que irá
    atualizo arquivo `table_config.yaml`
 2. Preencha os novos valores de metadados nos respectivos arquivos.
-3. Rode `basedosdados metadata validate [DATASET_ID]` e para publicar os
+3. Rode `basedosdados metadata validate [DATASET_ID]` <!-- e para publicar os
    metadados atualizados do conjutno use `basedosdados metadata publish [DATASET_ID]`. O mesmo pode ser feito
-   para tabela adicionando o parametro `[TABLE_ID]`
+   para tabela adicionando o parametro `[TABLE_ID]` -->
 
 ### 9. Enviar tudo para revisão
 
