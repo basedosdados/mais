@@ -7,28 +7,28 @@ table_id: etnia_indigena
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Diretório das etnias indígenas nos Sistemas de Informação Ambulatorial e Hospitalar - SIA/SUS e SIH/SUS
-    - 'https://bvsms.saude.gov.br/bvs/saudelegis/sas/2010/prt0508_28_09_2010.html'
+description: Diretório das etnias indígenas nos Sistemas de Informação Ambulatorial
+    e Hospitalar - SIA/SUS e SIH/SUS - 'https://bvsms.saude.gov.br/bvs/saudelegis/sas/2010/prt0508_28_09_2010.html'
 
 # A máxima unidade espacial que a tabela cobre.
-spatial_coverage: 
+spatial_coverage:
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplo: 1995(1)2019.
 temporal_coverage:
-          - 2010
-          - 2011
-          - 2012
-          - 2013
-          - 2014
-          - 2015
-          - 2016
-          - 2017
-          - 2018
-          - 2019
-          - 2020
-          - 2021
+    - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
+    - 2020
+    - 2021
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -36,7 +36,8 @@ update_frequency: unique
 
 # Entidade representada por cada linha.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity: race
+entity:
+    - race
 
 # A unidade temporal representada por cada linha.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -46,7 +47,7 @@ time_unit:
 # Preencha com os nomes de colunas.
 # Exemplos: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns: 
+identifying_columns:
     - id_etnia_indigena
 
 last_updated:
@@ -73,8 +74,8 @@ data_cleaned_by:
     name: Gustavo Aires Tiago
     email: gustavo.tiago@basedosdados.org
     github_user:
-    website:
     ckan_user: gustavoairestiago
+    website:
     code_url:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
@@ -143,4 +144,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-01-24T01:27:43.000805'
+metadata_modified: '2022-01-24T19:10:17.569420'
