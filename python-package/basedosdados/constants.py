@@ -3,6 +3,13 @@ __all__ = ["constants"]
 from enum import Enum
 
 
+@dataclass
+class config:
+    verbose: bool = True
+    billing_project_id: str = None
+    project_config_path: str = None
+
+
 class constants(Enum):
     ENV_CONFIG: str = "BASEDOSDADOS_CONFIG"
     ENV_CREDENTIALS_PREFIX: str = "BASEDOSDADOS_CREDENTIALS_"
