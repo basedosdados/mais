@@ -196,6 +196,10 @@ Caso encontre algum problema no pacote e queira ajudar, basta documentar o probl
 
 ## Desenvolvimento
 
+### Roadmap
+
+- [Primeiro semestre 2022](https://github.com/basedosdados/mais/milestone/2)
+
 ### Documentação
 
 Para rodar a documentação localmente:

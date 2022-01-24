@@ -30,4 +30,4 @@ SAFE_CAST(VA_agropecuaria AS INT64) va_agropecuaria,
 SAFE_CAST(VA_industria AS INT64) va_industria,
 SAFE_CAST(VA_servicos AS INT64) va_servicos,
 SAFE_CAST(VA_ADESPSS AS INT64) va_adespss
-from basedosdados-dev.br_ibge_pib_staging.municipio as t
+FROM basedosdados-dev.br_ibge_pib_staging.municipio AS t
