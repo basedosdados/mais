@@ -1,13 +1,13 @@
 
-dataset_id: br_cvm_oferta_publica_distribuicao
+dataset_id: br_cvm_administradores_carteira
 
-table_id: dia
+table_id: pessoa_juridica
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Dados diários.
+description: Administradores pessoa jurídica.
 
 # A máxima unidade espacial que a tabela cobre.
 spatial_coverage:
@@ -54,6 +54,7 @@ temporal_coverage:
     - 2019
     - 2020
     - 2021
+    - 2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -61,7 +62,7 @@ update_frequency: day
 
 # Entidade representada por cada linha.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity:
+entity: person
 
 # A unidade temporal representada por cada linha.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -72,13 +73,7 @@ time_unit:
 # Exemplos: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 identifying_columns:
-    - numero_processo
-    - numero_registro_oferta
-    - tipo_ativo
-    - emissao
-    - serie
-    - nome_lider
-    - classe_ativo
+    - cnpj
 
 last_updated:
     metadata:
@@ -110,7 +105,6 @@ data_cleaned_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description:
-    "- Conversão de 'N' e 'S' para 'Não' e 'Sim'."
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -148,74 +142,9 @@ bdm_file_size:
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: numero_processo
+    - name: cnpj
       bigquery_type: string
-      description: Número do processo administrativo
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: numero_registro_oferta
-      bigquery_type: string
-      description: Número de registro da oferta
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: tipo_oferta
-      bigquery_type: string
-      description: Tipo da oferta
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: tipo_componente_oferta_mista
-      bigquery_type: string
-      description: Tipo do componente de uma oferta mista
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: tipo_ativo
-      bigquery_type: string
-      description: Tipo do ativo (valor mobiliário)
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: cnpj_emissor
-      bigquery_type: string
-      description: CNPJ do emissor
+      description: Cadastro Nacional de Pessoas Jurídicas (CNPJ)
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -226,9 +155,9 @@ columns:
       has_sensitive_data: yes
       is_in_staging: true
       is_partition: false
-    - name: nome_emissor
+    - name: denominacao_social
       bigquery_type: string
-      description: Nome do emissor
+      description: Denominação social
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -239,9 +168,9 @@ columns:
       has_sensitive_data: yes
       is_in_staging: true
       is_partition: false
-    - name: cnpj_lider
+    - name: denominacao_comercial
       bigquery_type: string
-      description: CNPJ do líder
+      description: Denominação comercial
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -252,9 +181,126 @@ columns:
       has_sensitive_data: yes
       is_in_staging: true
       is_partition: false
-    - name: nome_lider
+    - name: data_registro
+      bigquery_type: date
+      description: Data de registro
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: data
+          column_name: data
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: data_cancelamento
+      bigquery_type: date
+      description: Data de cancelamento
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: data
+          column_name: data
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: motivo_cancelamento
       bigquery_type: string
-      description: Nome do líder
+      description: Motivo de cancelamento
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: situacao
+      bigquery_type: string
+      description: Situação
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: data_inicio_situacao
+      bigquery_type: date
+      description: Data de início da situação
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: data
+          column_name: data
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: categoria_registro
+      bigquery_type: string
+      description: Categoria de registro
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: subcategoria_registro
+      bigquery_type: string
+      description: Subcategoria de registro
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: controle_acionario
+      bigquery_type: string
+      description: Controle acionário
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_endereco
+      bigquery_type: string
+      description: Tipo de endereço
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: logradouro
+      bigquery_type: string
+      description: Logradouro
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -265,9 +311,9 @@ columns:
       has_sensitive_data: yes
       is_in_staging: true
       is_partition: false
-    - name: nome_vendedor
+    - name: complemento
       bigquery_type: string
-      description: Nome do vendedor
+      description: Complemento
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -278,9 +324,9 @@ columns:
       has_sensitive_data: yes
       is_in_staging: true
       is_partition: false
-    - name: cnpj_ofertante
+    - name: bairro
       bigquery_type: string
-      description: CNPJ do ofertante
+      description: Bairro
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -291,9 +337,35 @@ columns:
       has_sensitive_data: yes
       is_in_staging: true
       is_partition: false
-    - name: nome_ofertante
+    - name: municipio
       bigquery_type: string
-      description: Nome do ofertante
+      description: Município
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: cep
+      bigquery_type: string
+      description: CEP
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -304,9 +376,9 @@ columns:
       has_sensitive_data: yes
       is_in_staging: true
       is_partition: false
-    - name: rito_oferta
+    - name: ddd
       bigquery_type: string
-      description: Rito seguido para a realização da oferta
+      description: Código DDD
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -317,9 +389,22 @@ columns:
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: modalidade_registro_oferta
+    - name: telefone
       bigquery_type: string
-      description: Modalidade de registro da oferta. Aplicável a ofertas registradas.
+      description: Telefone
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      is_in_staging: true
+      is_partition: false
+    - name: valor_patrimonial_liquido
+      bigquery_type: string
+      description: Valor Patrimonial Líquido
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -330,87 +415,22 @@ columns:
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: modalidade_dispensa_oferta
-      bigquery_type: string
-      description: Modalidade de dispensa da oferta. Aplicável a ofertas dispensadas de registro.
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: data_abertura_processo
+    - name: data_patrimonio_liquido
       bigquery_type: date
-      description: Data de abertura do processo administrativo
+      description: Data Patrimônio Líquido
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
+          dataset_id: br_bd_diretorios_brasil
           table_id: data
           column_name: data
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: data_protocolo
-      bigquery_type: date
-      description: Data do protocolo
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: data
-          column_name: data
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: data_dispensa_oferta
-      bigquery_type: date
-      description: Data de dispensa da oferta
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: data
-          column_name: data
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: data_registro_oferta
-      bigquery_type: date
-      description: Data de registro da oferta
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: data
-          column_name: data
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: data_encerramento_oferta
-      bigquery_type: date
-      description: Data de encerramento da oferta
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: data
-          column_name: data
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: emissao
+    - name: email
       bigquery_type: string
-      description: Emissão
+      description: Email
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -418,220 +438,12 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data: yes
       is_in_staging: true
       is_partition: false
-    - name: classe_ativo
+    - name: website
       bigquery_type: string
-      description: Classe do ativo
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: serie
-      bigquery_type: string
-      description: Série
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: especie_ativo
-      bigquery_type: string
-      description: Espécie do ativo (valor mobiliário) objeto da oferta
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: forma_ativo
-      bigquery_type: string
-      description: Forma do ativo (valor mobiliário) objeto da oferta.
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: data_emissao
-      bigquery_type: date
-      description: Data da emissão
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: data
-          column_name: data
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: data_vencimento
-      bigquery_type: date
-      description: Data do vencimento
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: data
-          column_name: data
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: quantidade_sem_lote_suplementar
-      bigquery_type: int64
-      description: Quantidade sem lote suplementar
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: quantidade_no_lote_suplementar
-      bigquery_type: int64
-      description: Quantidade no lote suplementar
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: quantidade_total
-      bigquery_type: int64
-      description: Quantidade total
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: preco_unitario
-      bigquery_type: float64
-      description: Preço unitário
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: brl
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: valor_total
-      bigquery_type: float64
-      description: Valor total
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: brl
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: oferta_inicial
-      bigquery_type: string
-      description: Oferta inicial (IPO)
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: oferta_incentivo_fiscal
-      bigquery_type: string
-      description: Indica se a oferta é elegível ao incentivo previsto na Lei nº 12.431/11.
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: oferta_regime_fiduciario
-      bigquery_type: string
-      description: Indica se os créditos que lastream a emissão dos ativos (valores mobiliários) objeto da oferta contam com regime fiduciário
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: atualizacao_monetaria
-      bigquery_type: string
-      description: Atualização monetária
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: juros
-      bigquery_type: string
-      description: Taxa de juros
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: percent
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: projeto_audiovisual
-      bigquery_type: string
-      description: Projeto audiovisual
+      description: Website
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -643,4 +455,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified:
+metadata_modified: '2022-01-26T20:13:19.449142'

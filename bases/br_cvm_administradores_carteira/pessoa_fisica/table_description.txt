@@ -1,4 +1,4 @@
-Dados diários.
+Administradores de pessoa física.
 
 Para saber mais acesse:
 Website: 
@@ -24,13 +24,8 @@ Email: rdahis@basedosdados.org
 
 Colunas identificando linhas unicamente
 -------------------
-- numero_processo
-- numero_registro_oferta
-- tipo_ativo
-- emissao
-- serie
-- nome_lider
-- classe_ativo
+- nome
+- data_registro
 
 
 
@@ -71,6 +66,7 @@ Cobertura Temporal
 - 2019
 - 2020
 - 2021
+- 2022
 
 
 
@@ -83,9 +79,6 @@ Cobertura Espacial
 
 
 
-Tratamento
-----------
-- Conversão de 'N' e 'S' para 'Não' e 'Sim'.
 
 
 
