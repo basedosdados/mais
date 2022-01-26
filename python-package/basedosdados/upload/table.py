@@ -677,8 +677,7 @@ class Table(Base):
 
         self.client["bigquery_staging"].create_table(table)
 
-        if config.verbose:
-            logger.info("Success! Table was created.")
+        logger.success("Success! Table was created.")
 
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
@@ -722,8 +721,7 @@ class Table(Base):
                 self.client[f"bigquery_{m}"].update_table(
                     table, fields=["description", "schema"]
                 )
-        if config.verbose:
-            logger.info("Success! Table was updated.")
+        logger.success("Success! Table was updated.")
 
     def publish(self, if_exists="raise"):
         """Creates BigQuery table at production dataset.
