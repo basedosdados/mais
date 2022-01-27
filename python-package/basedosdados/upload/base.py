@@ -29,6 +29,7 @@ class Base:
         self.config_path = Path.home() / config_path
         self._init_config(force=overwrite_cli_config)
         self.config = self._load_config()
+        self._config_log(constants.config.verbose)
 
         self.templates = Path(templates or self.config["templates_path"])
         self.metadata_path = Path(metadata_path or self.config["metadata_path"])
@@ -294,6 +295,13 @@ class Base:
             c_file["templates_path"] = str(Path.home() / ".basedosdados" / "templates")
 
             config_file.open("w", encoding="utf-8").write(tomlkit.dumps(c_file))
+
+
+    def _config_log(self, verbose: bool):
+        logger.remove(0) # remove o default handler
+        logger_level = 'INFO' if verbose else 'ERROR'
+        logger.add(sys.stderr, format="<level>{message}</level>", level=logger_level)
+
 
     def _load_config(self):
 
