@@ -22,7 +22,6 @@ from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
 from basedosdados.upload.metadata import Metadata
 from basedosdados.exceptions import BaseDosDadosException
-from basedosdados.constants import config
 
 
 class Table(Base):
