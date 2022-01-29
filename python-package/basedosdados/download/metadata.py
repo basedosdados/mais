@@ -421,7 +421,7 @@ def search(query, order_by):
     # first loop identify the number of the tables in each datasets
     for dataset in json_response["result"]["datasets"]:
         tables_dfs = []
-        n_tables = len(dataset["resources"])
+        len(dataset["resources"])
         # second loop extracts tables' information for each dataset
         for table in dataset["resources"]:
             data_table = pd.DataFrame(

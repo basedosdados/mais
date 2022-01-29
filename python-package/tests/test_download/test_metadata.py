@@ -1,4 +1,3 @@
-from os import read
 import pytest
 from pathlib import Path
 import pandas as pd
