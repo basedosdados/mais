@@ -1,0 +1,57 @@
+O  Indicador de Nível Socioeconômico (INSE)  trata-se de uma medida cujo objetivo é situar o conjunto dos alunos atendidos por cada escola em um estrato, definido pela posse de bens domésticos, renda e contratação de serviços pela família dos alunos e pelo nível de escolaridade de seus pais.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Lucas Moreira
+Email: lucas.moreira@basedosdados.org
+
+
+
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- id_escola
+
+
+
+
+Cobertura Temporal
+------------------
+- 2013
+- 2015
+- 2019
+
+
+
+
+Cobertura Espacial
+------------------
+- b
+- r
+- a
+
+
+
+
+Tratamento
+----------
+Renomeei as colunas, compatibilizei a escala do INSE e agrupei todos os anos
+
+
+
+Frequencia de Atualização
+-------------------------
+uncertain

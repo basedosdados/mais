@@ -126,7 +126,7 @@ import basedosdados as bd
 bd.list_datasets()
 ```
 
-Para saber mais, veja os [exemplos](https://github.com/basedosdados/analises/tree/main/artigos) ou a [documentação da API](https://basedosdados.github.io/mais/reference_api_py/)
+Para saber mais, veja os [exemplos](https://github.com/basedosdados/analises/tree/main/artigos) ou a [documentação da API](https://basedosdados.github.io/mais/api_reference_python/)
 
 ## Usando em R
 
@@ -195,6 +195,10 @@ Caso encontre algum problema no pacote e queira ajudar, basta documentar o probl
 > Se possível, armazene suas credenciais em um arquivo `dotenv`, em bash o comando é `"billing_project_id=<suas_credenciais_do_projeto>" >> .env`. [Veja aqui como criar um arquivo dotenv](https://towardsdatascience.com/using-dotenv-to-hide-sensitive-information-in-r-8b878fa72020).
 
 ## Desenvolvimento
+
+### Roadmap
+
+- [Primeiro semestre 2022](https://github.com/basedosdados/mais/milestone/2)
 
 ### Documentação
 
