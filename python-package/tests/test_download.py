@@ -23,20 +23,23 @@ from basedosdados.exceptions import (
     BaseDosDadosInvalidProjectIDException,
 )
 
-
 TEST_PROJECT_ID = "basedosdados-dev"
 SAVEFILE = Path(__file__).parent / "tmp_bases" / "test.csv"
 SAVEPATH = Path(__file__).parent / "tmp_bases"
 shutil.rmtree(SAVEPATH, ignore_errors=True)
 
-#TESTS DESIGNED FOR SEARCH FUNCTION
+
+# TESTS DESIGNED FOR SEARCH FUNCTION
 def test_search_query_type():
-    result = search("agua","popular")
+    result = search("agua", "popular")
     assert type(result["data"]) == type(pd.DataFrame())
 
+
 def test_search_query_status():
-    result = search("agua","popular")
+    result = search("agua", "popular")
     assert result["status"] == True
+
+
 """
 def test_download_by_query():
 

@@ -11,6 +11,7 @@ from basedosdados.upload.metadata import Metadata
 from basedosdados.download.download import (
     read_sql,
     download,
+    search,
     read_table,
     list_datasets,
     list_dataset_tables,

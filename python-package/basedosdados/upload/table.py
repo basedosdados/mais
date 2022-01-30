@@ -1,8 +1,10 @@
+from tabnanny import verbose
 from jinja2 import Template
 from pathlib import Path, PosixPath
 import json
 import csv
 from copy import deepcopy
+from loguru import logger
 from google.cloud import bigquery
 import datetime
 import textwrap
@@ -14,13 +16,13 @@ from io import StringIO
 import pandas as pd
 
 import google.api_core.exceptions
-
 from basedosdados.upload.base import Base
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
 from basedosdados.upload.metadata import Metadata
 from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.constants import config
 
 
 class Table(Base):
@@ -672,6 +674,9 @@ class Table(Base):
 
         self.client["bigquery_staging"].create_table(table)
 
+        if config.verbose:
+            logger.info("Success! The table was created.")
+
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
 
@@ -714,6 +719,8 @@ class Table(Base):
                 self.client[f"bigquery_{m}"].update_table(
                     table, fields=["description", "schema"]
                 )
+        if config.verbose:
+            logger.info("Success! The table was updated.")
 
     def publish(self, if_exists="raise"):
         """Creates BigQuery table at production dataset.
@@ -748,6 +755,9 @@ class Table(Base):
         ).result()
 
         self.update("prod")
+
+    # if config.billing_project_id == None:
+    #     logger.info("Success! The table was published.")
 
     def delete(self, mode):
         """Deletes table in BigQuery.

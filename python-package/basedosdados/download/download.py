@@ -1,5 +1,3 @@
-import popular as popular
-import recent as recent
 import requests
 from google.cloud.bigquery import dataset
 import pandas_gbq
