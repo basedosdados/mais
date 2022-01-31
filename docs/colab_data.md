@@ -106,8 +106,8 @@ como uma coluna deve ser tratada quando há mudanças em versões (por
 exemplo, e uma coluna muda de nome de um ano para o outro).
 
 !!! Info "Cada tabela do conjunto de dados deve ter sua própria tabela de arquitetura (planilha), que pode ser preenchida no Google Drive ou localmente (Excel, editor de texto)."
-!!! Info "As planilhas no Google Drive não podem ser incluídas no projeto, assim, caso queira que elas sejam commitadas,
-baixe uma cópia local"
+
+!!! Info "As planilhas no Google Drive não podem ser incluídas no projeto, assim, caso queira que elas sejam commitadas, baixe uma cópia local"
 
 <!-- 
 TODO: Não vejo relação dessas perguntas com o exemplo dado
@@ -124,6 +124,20 @@ Perguntas que uma arquitetura deve responder:
 #### Exemplo: RAIS - Tabelas de arquitetura
 
 As tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://drive.google.com/drive/folders/1OtsucP_KhiUEJI6F6k_cagvXfwZCFZF2?usp=sharing). Seguindo nosso [manual de estilo](../style_data), nós renomeamos, definimos o tipo, preenchemos descrições, indicamos se há dicionário ou diretório, preenchemos campos (e.g. cobertura temporal e unidade de medida) e fizemos a compatibilização entre anos para todas as variáveis (colunas).
+
+!!! Info "As colunas a seguir são obrigatórias, caso você use uma planilha do Google Sheets como modelo da arquitetura:"
+
+- **nome:** Nome da coluna
+- **tipo:** tipo de dado do BigQuery (veja quais são no nosso [manual de estilo](../style_data/#tipos-de-variaveis))
+- **descricao:** Descrição dos dados que estão nesta coluna 
+- **unidade_medida:** em qual unidade (no caso de variáveis numéricas) os dados estão
+- **dicionario:** podem ser 3 opções
+    - diretorio: caso se refira a uma tabela de diretório da BD
+    - local: caso se refira a um dicionario no dataset
+    - se não houver um dicionário, deixar em branco
+- **nome_diretorio:** se a coluna for coberta por um dicionário da BD, usar o formato [DATASET_ID].[TABLE]:[COLUNA]. Caso contrário, deixe em branco
+
+<!-- nos exemplos os nomes de colunas estão diferentes do que o pacote Python testa como obrigatórias -->
 
 Nas tabelas desse conjunto existiam colunas que deixaram de existir em
 determinados anos. Por isso, foi necessário compatibilizar:
@@ -197,12 +211,12 @@ de modelos relacionados para campos de categorias (como, por exemplo, na tabela 
 o campo tipo_admissao). Vejamos as vantagens e desvantagens:
 
 - vantagens:
-  - caso o usuário queira uma lista de valores únicos, ele pode percorrer apenas a tabela dicionário, não precisando percorrer toda a tabela de microdados
-  - no momento do tratamento é mais simples detectar erros de digitação em uma determinada categoria, o que causa uma duplicidade incorreta
-  - caso o usuário queira exportar os dados ele obterá um arquivo bem menor, otimizando os seus custos de transferência
+    - caso o usuário queira uma lista de valores únicos, ele pode percorrer apenas a tabela dicionário, não precisando percorrer toda a tabela de microdados
+    - no momento do tratamento é mais simples detectar erros de digitação em uma determinada categoria, o que causa uma duplicidade incorreta
+    - caso o usuário queira exportar os dados ele obterá um arquivo bem menor, otimizando os seus custos de transferência
 - desvantagens:
-  - quando o usuário precisa fazer uma consulta simples, terá que usar ``JOINS`` para buscar os nomes das categorias
-  - ao trabalhar com tais bases, o usuário precisará construir o modelo localmente
+    - quando o usuário precisa fazer uma consulta simples, terá que usar ``JOINS`` para buscar os nomes das categorias
+    - ao trabalhar com tais bases, o usuário precisará construir o modelo localmente
 
 !!! Info "Detalhes importantes de como construir seu dicionário estão no nosso [manual de estilo](../style_data/#dicionarios)."
 
@@ -270,14 +284,64 @@ Para publicar uma **base (conjunto)**:
     ```
 -->
 
-Para publicar o dataset e a(s) **tabela (s)**:
+Para publicar o dataset e a(s) **tabela(s)**:
 
-1. Crie a tabela no *bucket*, indicando o caminho do arquivo no seu local, rodando:
+1. Crie a tabela no *bucket*, indicando o caminho do arquivo no seu local, rodando o seguinte comando no seu terminal:
 
     ```bash
-    basedosdados table create [DATASET_ID] [TABLE_ID] --path '/[DATASET_ID]/output/[TABLE_ID]'.
+    basedosdados table create [DATASET_ID] [TABLE_ID] --path <caminho_para_os_dados> --force_dataset False --if_table_exists raise --if_storage_data_exists raise --if_table_config_exists raise --columns_config_url <url_da_planilha_google>
     ```
+
+    Se preferir, você pode usar a API do Python, da seguinte forma:
+
+    ```python
+    import basedosdados as bd
+    
+    tb = bd.Table(dataset_id=<dataset_id>, table_id=<table_id>)
+    tb.create(
+        path='caminho_para_os_dados',
+        force_dataset=False,
+        if_table_exists='raise',
+        if_storage_data_exists='raise',
+        if_table_config_exists='raise',
+    )
+    ```
+
+    Os seguintes parâmetros podem ser usados (no terminal ou no Python):
+
+    ```bash
+    --path [Obrigatório] o caminho completo do arquivo no seu computador, como:
+       '/Users/<seu_usuario>/projetos/basedosdados/mais/bases/[DATASET_ID]/output/microdados[.csv]'    
+       caso seus dados sejam particionados, o caminho deve apontar para a pasta onde estão as partições.
+       caso contrário, deve apontar para um arquivo csv (por exemplo, microdados.csv)
    
+    --force_dataset [True|False] cria os arquivos de configuração do dataset locais e no BigQuery
+       True: os arquivos de configuração do dataset serão criados no seu projeto e, caso ele não exista
+             no BigQuery, será criado automaticamente. se você já tiver criado e configurado o dataset,
+             NÃO USE ESTA OPÇÃO, POIS IRÁ SOBRESCREVER SEUS ARQUIVOS!!!!!
+       False: o dataset não será recriado e, se não existir, será criado automaticamente
+   
+    --if_table_exists [raise|replace|pass] o que fazer se a tabela já existir
+       raise: retorna um erro
+       replace: substitui a tabela atual
+       pass: não faz nada
+
+    --if_storage_data_exists [raise|replace|pass] o que fazer se os dados já existirem no Google Cloud Storage
+       raise: retorna um erro
+       replace: substitui os dados existentes
+       pass: não faz nada
+   
+    --if_table_config_exists [raise|replace|pass]
+       raise: retorna mensagem de erro
+       replace: substitui as configurações da tabela existentes
+       pass: não faz nada
+   
+    --columns_config_url [google sheets url]
+       a url da planilha do Google com a arquitetura. deve estar no formato 
+       https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
+       certifique-se de que a planilha está compartilhada com a opção "qualquer pessoa com o link pode ver"
+
+    ```
 !!! Info "se o projeto não existir do BigQuery, ele será autmaticamente criado, junto com os arquivos README.md e dataset_config.yaml, que deverão ser preenchidos, segundo o modelo já criado"
 
 2. Preencha os arquivos de configuração da tabela:
