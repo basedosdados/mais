@@ -296,12 +296,10 @@ class Base:
 
             config_file.open("w", encoding="utf-8").write(tomlkit.dumps(c_file))
 
-
     def _config_log(self, verbose: bool):
-        logger.remove(0) # remove o default handler
-        logger_level = 'INFO' if verbose else 'ERROR'
+        logger.remove(0)  # remove o default handler
+        logger_level = "INFO" if verbose else "ERROR"
         logger.add(sys.stderr, format="<level>{message}</level>", level=logger_level)
-
 
     def _load_config(self):
 
