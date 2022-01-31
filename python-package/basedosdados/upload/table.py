@@ -719,7 +719,8 @@ class Table(Base):
                 self.client[f"bigquery_{m}"].update_table(
                     table, fields=["description", "schema"]
                 )
-        logger.success("Success! Table was updated.")
+            if m == "staging":
+                logger.success("Success! Table was updated.")
 
     def publish(self, if_exists="raise"):
         """Creates BigQuery table at production dataset.
