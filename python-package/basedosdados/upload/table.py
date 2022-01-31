@@ -22,7 +22,6 @@ from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
 from basedosdados.upload.metadata import Metadata
 from basedosdados.exceptions import BaseDosDadosException
-from basedosdados.constants import config
 
 
 class Table(Base):
@@ -669,13 +668,9 @@ class Table(Base):
                 )
 
         if if_table_exists == "replace":
-
-            self.delete(mode="staging")
-
+            self.delete(mode="prod")
         self.client["bigquery_staging"].create_table(table)
-
-        if config.verbose:
-            logger.info("Success! The table was created.")
+        logger.success("Success! The table was created.")
 
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
@@ -719,8 +714,6 @@ class Table(Base):
                 self.client[f"bigquery_{m}"].update_table(
                     table, fields=["description", "schema"]
                 )
-        if config.verbose:
-            logger.info("Success! The table was updated.")
 
     def publish(self, if_exists="raise"):
         """Creates BigQuery table at production dataset.
@@ -746,7 +739,6 @@ class Table(Base):
 
             * Check if all required fields are filled
         """
-
         if if_exists == "replace":
             self.delete(mode="prod")
 
@@ -754,10 +746,8 @@ class Table(Base):
             (self.table_folder / "publish.sql").open("r", encoding="utf-8").read()
         ).result()
 
-        self.update("prod")
-
-    # if config.billing_project_id == None:
-    #     logger.info("Success! The table was published.")
+        self.update(mode="prod")
+        logger.success("Success! Table was published.")
 
     def delete(self, mode):
         """Deletes table in BigQuery.
@@ -775,6 +765,8 @@ class Table(Base):
             self.client[f"bigquery_{mode}"].delete_table(
                 self.table_full_name[mode], not_found_ok=True
             )
+            if mode == "staging":
+                logger.info("Info! The table was deleted.")
 
     def append(self, filepath, partitions=None, if_exists="replace", **upload_args):
         """Appends new data to existing BigQuery table.
