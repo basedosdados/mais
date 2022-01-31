@@ -1,5 +1,6 @@
 from google.cloud import bigquery, storage
 from google.oauth2 import service_account
+from loguru import logger
 import yaml
 from jinja2 import Template
 from pathlib import Path
@@ -7,9 +8,10 @@ import shutil
 import tomlkit
 import warnings
 import json
+import sys
 import base64
 from os import getenv
-from basedosdados import constants
+from basedosdados.constants import config, constants
 
 from functools import lru_cache
 
@@ -29,7 +31,7 @@ class Base:
         self.config_path = Path.home() / config_path
         self._init_config(force=overwrite_cli_config)
         self.config = self._load_config()
-        self._config_log(constants.config.verbose)
+        self._config_log(config.verbose)
 
         self.templates = Path(templates or self.config["templates_path"])
         self.metadata_path = Path(metadata_path or self.config["metadata_path"])
@@ -297,9 +299,13 @@ class Base:
             config_file.open("w", encoding="utf-8").write(tomlkit.dumps(c_file))
 
     def _config_log(self, verbose: bool):
-        logger.remove(0)  # remove o default handler
+        logger.remove()  # remove o default handler
         logger_level = "INFO" if verbose else "ERROR"
-        logger.add(sys.stderr, format="<level>{message}</level>", level=logger_level)
+        logger.add(
+            sys.stderr,
+            level=logger_level,
+            format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
+        )
 
     def _load_config(self):
 
