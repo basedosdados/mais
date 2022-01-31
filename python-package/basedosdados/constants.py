@@ -1,7 +1,7 @@
-__all__ = ["constants"]
+__all__ = ["config", "constants"]
 
 from enum import Enum
-from loguru import logger
+from dataclasses import dataclass
 
 
 @dataclass
@@ -9,6 +9,7 @@ class config:
     verbose: bool = True
     billing_project_id: str = None
     project_config_path: str = None
+
 
 class constants(Enum):
     ENV_CONFIG: str = "BASEDOSDADOS_CONFIG"
