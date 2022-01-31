@@ -5,9 +5,11 @@ testthat::test_that("Basic dataset search", {
 
   testthat::skip_on_cran()
 
-  result <- dataset_search("agua")
+  result <- basedosdados::dataset_search("agua")
 
   testthat::expect_gt(nrow(result), 0)
+
+  testthat::expect_s3_class(result, "tbl")
 
   # busca por água encontra o ana-atlas?
   result %>%

@@ -1,4 +1,4 @@
-#' Search for a dataset
+#' @title Search for a dataset
 #' @param search_term keyword for search
 #'
 #' @return A tibble with search results
@@ -107,7 +107,7 @@ get_table_columns <-
     purrr::pluck("columns") %>%
     purrr::map(tibble::as_tibble) %>%
     purrr::reduce(dplyr::bind_rows) %>%
-    dplyr::select(- .data$is_in_staging)
+    dplyr::select(- c(.data$is_in_staging, .data$is_partition))
 
   }
 
