@@ -1,3 +1,4 @@
+from grpc import Status
 from jinja2 import Template
 from pathlib import Path, PosixPath
 from loguru import logger
@@ -672,10 +673,10 @@ class Table(Base):
 
         if if_table_exists == "replace":
 
-            self.delete(mode="prod")
+            self.delete(mode="staging")
 
         self.client["bigquery_staging"].create_table(table)
-        logger.success("Success! Table was created.")
+        logger.success("Table {table} was created!", table=self.table_id)
 
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
@@ -713,14 +714,13 @@ class Table(Base):
                 encoding="utf-8",
             ).write(table.description)
 
-            if m == "prod":
+            if m == "staging":
                 table.schema = self._load_schema(m)
 
                 self.client[f"bigquery_{m}"].update_table(
                     table, fields=["description", "schema"]
                 )
-            if m == "staging":
-                logger.success("Success! Table was updated.")
+        logger.success("Table {table} was updated!", table=self.table_id)
 
     def publish(self, if_exists="raise"):
         """Creates BigQuery table at production dataset.
@@ -754,8 +754,8 @@ class Table(Base):
             (self.table_folder / "publish.sql").open("r", encoding="utf-8").read()
         ).result()
 
-        self.update(mode="prod")
-        logger.success("Success! Table was published.")
+        self.update()
+        logger.success("Table {table} was published!", table=self.table_id)
 
     def delete(self, mode):
         """Deletes table in BigQuery.
@@ -769,12 +769,13 @@ class Table(Base):
         if mode == "all":
             for m, n in self.table_full_name[mode].items():
                 self.client[f"bigquery_{m}"].delete_table(n, not_found_ok=True)
+            logger.info("Table {table} was deleted!", table=self.table_id)
         else:
             self.client[f"bigquery_{mode}"].delete_table(
                 self.table_full_name[mode], not_found_ok=True
             )
-            if mode == "staging":
-                logger.info("Info! The table was deleted.")
+
+            logger.info("Table {table} was deleted!", table=self.table_id)
 
     def append(self, filepath, partitions=None, if_exists="replace", **upload_args):
         """Appends new data to existing BigQuery table.
@@ -808,3 +809,4 @@ class Table(Base):
                 if_exists=if_exists,
                 **upload_args,
             )
+            logger.success("Data was appended to Table {table}!", table=self.table_id)
