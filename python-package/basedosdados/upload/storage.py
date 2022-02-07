@@ -7,6 +7,7 @@ import sys
 
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
+from loguru import logger
 
 from google.api_core import exceptions
 from google.api_core.retry import Retry
@@ -228,6 +229,14 @@ class Storage(Base):
                         "to 'replace' to overwrite data."
                     )
 
+        logger.success(
+            " {object} {filename}_{mode} was {action}!",
+            filename=filepath.name,
+            mode=mode,
+            object="File",
+            action="uploaded",
+        )
+
     def download(
         self,
         filename="*",
@@ -311,6 +320,14 @@ class Storage(Base):
             # download blob to savepath
             blob.download_to_filename(filename=f"{savepath}/{blob.name}")
 
+        logger.success(
+            " {object} {object_id}_{mode} was {action}!",
+            object_id=self.dataset_id,
+            mode=mode,
+            object="File",
+            action="downloaded",
+        )
+
     def delete_file(self, filename, mode, partitions=None, not_found_ok=False):
         """Deletes file from path `<bucket_name>/<mode>/<dataset_id>/<table_id>/<partitions>/<filename>`.
 
@@ -346,6 +363,14 @@ class Storage(Base):
                 blob.delete(retry=Retry(predicate=_is_retryable))
             else:
                 return
+
+        logger.success(
+            " {object} {filename}_{mode} was {action}!",
+            filename=filename,
+            mode=mode,
+            object="File",
+            action="deleted",
+        )
 
     def delete_table(self, mode="staging", bucket_name=None, not_found_ok=False):
         """Deletes a table from storage, sends request in batches.
@@ -408,6 +433,13 @@ class Storage(Base):
                         time.sleep(5)
                         counter += 1
                         traceback.print_exc(file=sys.stderr)
+        logger.success(
+            " {object} {object_id}_{mode} was {action}!",
+            object_id=self.table_id,
+            mode=mode,
+            object="Table",
+            action="deleted",
+        )
 
     def copy_table(
         self,
@@ -478,3 +510,10 @@ class Storage(Base):
                     counter += 1
                     time.sleep(5)
                     traceback.print_exc(file=sys.stderr)
+        logger.success(
+            " {object} {object_id}_{mode} was {action}!",
+            object_id=self.table_id,
+            mode=mode,
+            object="Table",
+            action="copied",
+        )
