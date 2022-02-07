@@ -676,7 +676,13 @@ class Table(Base):
             self.delete(mode="staging")
 
         self.client["bigquery_staging"].create_table(table)
-        logger.success("Table {table} was created!", table=self.table_id)
+
+        logger.success(
+            "{object} {object_id} was {action}!",
+            object_id=self.table_id,
+            object="Table",
+            action="created",
+        )
 
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
@@ -720,7 +726,12 @@ class Table(Base):
                 self.client[f"bigquery_{m}"].update_table(
                     table, fields=["description", "schema"]
                 )
-        logger.success("Table {table} was updated!", table=self.table_id)
+        logger.success(
+            " {object} {object_id} was {action}!",
+            object_id=self.table_id,
+            object="Table",
+            action="updated",
+        )
 
     def publish(self, if_exists="raise"):
         """Creates BigQuery table at production dataset.
@@ -755,7 +766,12 @@ class Table(Base):
         ).result()
 
         self.update()
-        logger.success("Table {table} was published!", table=self.table_id)
+        logger.success(
+            " {object} {object_id} was {action}!",
+            object_id=self.table_id,
+            object="Table",
+            action="published",
+        )
 
     def delete(self, mode):
         """Deletes table in BigQuery.
@@ -769,13 +785,25 @@ class Table(Base):
         if mode == "all":
             for m, n in self.table_full_name[mode].items():
                 self.client[f"bigquery_{m}"].delete_table(n, not_found_ok=True)
-            logger.info("Table {table} was deleted!", table=self.table_id)
+            logger.info(
+                " {object} {object_id}_{mode} was {action}!",
+                object_id=self.table_id,
+                mode=mode,
+                object="Table",
+                action="deleted",
+            )
         else:
             self.client[f"bigquery_{mode}"].delete_table(
                 self.table_full_name[mode], not_found_ok=True
             )
 
-            logger.info("Table {table} was deleted!", table=self.table_id)
+            logger.info(
+                " {object} {object_id}_{mode} was {action}!",
+                object_id=self.table_id,
+                mode=mode,
+                object="Table",
+                action="deleted",
+            )
 
     def append(self, filepath, partitions=None, if_exists="replace", **upload_args):
         """Appends new data to existing BigQuery table.
@@ -809,4 +837,9 @@ class Table(Base):
                 if_exists=if_exists,
                 **upload_args,
             )
-            logger.success("Data was appended to Table {table}!", table=self.table_id)
+            logger.success(
+                " {object} {object_id} was {action}!",
+                object_id=self.table_id,
+                object="Table",
+                action="appended",
+            )
