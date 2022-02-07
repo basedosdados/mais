@@ -1,5 +1,7 @@
 from google.cloud import bigquery
 import csv
+import pandas as pd
+import pandavro
 
 
 class Datatype:
@@ -19,11 +21,19 @@ class Datatype:
     def header(self, data_sample_path):
 
         if self.source_format == "csv":
-
             return next(csv.reader(open(data_sample_path, "r", encoding="utf-8")))
+
+        elif self.source_format == "avro":
+            dataframe = pandavro.read_avro(str(data_sample_path))
+            return list(dataframe.columns.values)
+
+        elif self.source_format == "parquet":
+            dataframe = pd.read_parquet(str(data_sample_path))
+            return list(dataframe.columns.values)
+
         else:
             raise NotImplementedError(
-                "Base dos Dados just supports comma separated csv files"
+                "Base dos Dados just supports comma separated csv, avro and parquet files"
             )
 
     def partition(self):
@@ -48,12 +58,18 @@ class Datatype:
             _external_config.autodetect = False
             _external_config.schema = self.table_obj._load_schema(self.mode)
 
-        # You can add new formats here
+        elif self.source_format == "avro":
+
+            _external_config = bigquery.ExternalConfig("AVRO")
+
+        elif self.source_format == "parquet":
+
+            _external_config = bigquery.ExternalConfig("PARQUET")
 
         else:
 
             raise NotImplementedError(
-                "Base dos Dados just supports comma separated csv files"
+                "Base dos Dados just supports comma separated csv, avro and parquet files"
             )
 
         _external_config.source_uris = f"gs://{self.table_obj.bucket_name}/staging/{self.table_obj.dataset_id}/{self.table_obj.table_id}/*"

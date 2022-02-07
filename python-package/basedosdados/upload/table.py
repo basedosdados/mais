@@ -417,7 +417,8 @@ class Table(Base):
         Args:
             data_sample_path (str, pathlib.PosixPath): Optional.
                 Data sample path to auto complete columns names
-                It supports Comma Delimited CSV.
+                It supports Comma Delimited CSV, Apache Avro and
+                Apache Parquet.
             if_folder_exists (str): Optional.
                 What to do if table folder exists
 
@@ -431,7 +432,8 @@ class Table(Base):
                 * 'replace' : Replace files with blank template
                 * 'pass' : Do nothing
             source_format (str): Optional
-                Data source format. Only 'csv' is supported. Defaults to 'csv'.
+                Data source format. Only 'csv', 'avro' and 'parquet'
+                are supported. Defaults to 'csv'.
 
             columns_config_url (str): google sheets URL.
                 The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
@@ -479,7 +481,7 @@ class Table(Base):
                 data_sample_path = [
                     f
                     for f in data_sample_path.glob("**/*")
-                    if f.is_file() and f.suffix == ".csv"
+                    if f.is_file() and f.suffix == f".{source_format}"
                 ][0]
 
                 partition_columns = [
@@ -558,6 +560,8 @@ class Table(Base):
         It currently supports the types:
 
         - Comma Delimited CSV
+        - Apache Avro
+        - Apache Parquet
 
         Data can also be partitioned following the hive partitioning scheme
         `<key1>=<value1>/<key2>=<value2>` - for instance,
@@ -588,7 +592,8 @@ class Table(Base):
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
             source_format (str): Optional
-                Data source format. Only 'csv' is supported. Defaults to 'csv'.
+                Data source format. Only 'csv', 'avro' and 'parquet'
+                are supported. Defaults to 'csv'.
 
             columns_config_url (str): google sheets URL.
                 The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
@@ -639,6 +644,7 @@ class Table(Base):
             if_folder_exists="replace",
             if_table_config_exists=if_table_config_exists,
             columns_config_url=columns_config_url,
+            source_format=source_format,
         )
 
         table = bigquery.Table(self.table_full_name["staging"])
