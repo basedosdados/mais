@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from functools import lru_cache
+from loguru import logger
 
 import requests
 import ruamel.yaml as ryaml
@@ -329,6 +330,13 @@ class Metadata(Base):
             if self.table_id and not table_only and not dataset_config_exists:
                 self.dataset_metadata_obj.create(if_exists=if_exists)
 
+            logger.success(
+                " {object} {object_id} was {action}!",
+                object_id=self.table_id,
+                object="Metadata",
+                action="created",
+            )
+
         return self
 
     def validate(self) -> bool:
@@ -353,6 +361,13 @@ class Metadata(Base):
             error = {self.ckan_data_dict.get("name"): response["errors"]}
             message = f"{self.filepath} has validation errors: {error}"
             raise BaseDosDadosException(message)
+
+        logger.success(
+            " {object} {object_id} was {action}!",
+            object_id=self.table_id,
+            object="Metadata",
+            action="validated",
+        )
 
         return True
 
@@ -450,6 +465,13 @@ class Metadata(Base):
             # recreate local metadata YAML file with the published data
             if published and update_locally:
                 self.create(if_exists="replace")
+
+            logger.success(
+                " {object} {object_id} was {action}!",
+                object_id=data_dict,
+                object="Metadata",
+                action="published",
+            )
 
             return published
 
