@@ -2,8 +2,8 @@ Diretório ligando diversos códigos institucionais de municípios brasileiros: 
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-bd-diretorios-brasil
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,36 +11,48 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code
+Código: 
 Website: www.ricardodahis.com
-Email: rdahis@basedosdados.orgTratado por
+Email: rdahis@basedosdados.org
+Tratado por
 -----------
 Nome: Ricardo Dahis
 Código: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code
 Email: rdahis@basedosdados.org
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- municipio
+
+
 
 Colunas identificando linhas unicamente
 -------------------
 - id_municipio
 
+
+
+
 Cobertura Temporal
 ------------------
 
+
+
+
 Cobertura Espacial
 ------------------
-- brasil
+- b
+- r
+- a
+
+
+
 
 Tratamento
 ----------
 - Fizemos o cruzamento e checagem dos códigos (1) manualmente e (2) checando com string matching.
 - Dados de comarcas fornecidos pelo Ipea.
 
+
+
+
 Frequencia de Atualização
 -------------------------
-recorrente
-
-
+recurring
