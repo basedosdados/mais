@@ -22,8 +22,7 @@
 ## Passo a passo para subir dados
 
 Quer subir dados na BD+ e nos ajudar a construir esse repositório?
-*Maravilha!* Organizamos tudo o que você precisa no manual abaixo, em
-menos de 10 passos.
+*Maravilha!* Organizamos tudo o que você precisa no manual abaixo, em 10 passos.
 
 Para facilitar a explicação, vamos seguir um exemplo já pronto com dados da [RAIS](https://basedosdados.org/dataset/br-me-rais).
 
@@ -76,25 +75,25 @@ No seu terminal:
 
 [Baixe aqui a pasta
 _template_](https://drive.google.com/drive/folders/1xXXon0vdjSKr8RCNcymRdOKgq64iqfS5?usp=sharing)
-para a apsta ``dados`` e renomeie para o nome do seu conjunto de dados, `<dataset_id>`
+para a pasta ``dados`` e renomeie para o nome do seu conjunto de dados, `<dataset_id>`
 ([veja aqui como nomear seu conjunto](../style_data)). Ela facilita todos os
 passos daqui pra frente. Sua
 estrutura é a seguinte:
 
 - `<dataset_id>/`
     - `code/`: Códigos necessários à **captura** e **limpeza** dos dados
-    ([vejo no passo
-    4](#4-escrever-codigo-de-captura-e-limpeza-de-dados)).
+    ([veja no passo
+    5](#5-escrever-codigo-de-captura-e-limpeza-de-dados)).
     - `input/`: Contém todos os arquivos com dados originais, exatamente
     como baixados da fonte primária **Esses arquivos não devem ser
     modificados.**
     - `output/`: Arquivos finais, já no formato pronto para subir na BD+.
     - `tmp/`: Quaisquer arquivos temporários criados pelo código em `/code` no processo de limpeza e tratamento.
     - `extra/`
-        - `architecture/`: Tabelas de arquitetura ([veja no passo 3](#3-preencher-as-tabelas-de-arquitetura)).
-        - `auxiliary_files/`: Arquivos auxiliares aos dados ([veja no passo 5](#5-caso-necessario-organizar-arquivos-auxiliares)).
+        - `architecture/`: Tabelas de arquitetura ([veja no passo 4](#4-preencher-as-tabelas-de-arquitetura)).
+        - `auxiliary_files/`: Arquivos auxiliares aos dados ([veja no passo 6](#6-caso-necessario-organizar-arquivos-auxiliares)).
         - `dicionario.csv`: Tabela dicionário de todo o conjunto de dados ([veja no passo
-          6](#6-caso-necessario-criar-tabela-dicionario)).
+          7](#7-caso-necessario-criar-tabela-dicionario)).
 
 !!! info "As pastas input, output e tmp não serão commitadas para o seu projeto e existirão apenas localmente"
 
@@ -106,8 +105,6 @@ como uma coluna deve ser tratada quando há mudanças em versões (por
 exemplo, e uma coluna muda de nome de um ano para o outro).
 
 !!! Info "Cada tabela do conjunto de dados deve ter sua própria tabela de arquitetura (planilha), que pode ser preenchida no Google Drive ou localmente (Excel, editor de texto)."
-
-!!! Info "As planilhas no Google Drive não podem ser incluídas no projeto, assim, caso queira que elas sejam commitadas, baixe uma cópia local"
 
 <!-- 
 TODO: Não vejo relação dessas perguntas com o exemplo dado
@@ -124,8 +121,6 @@ Perguntas que uma arquitetura deve responder:
 #### Exemplo: RAIS - Tabelas de arquitetura
 
 As tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://drive.google.com/drive/folders/1OtsucP_KhiUEJI6F6k_cagvXfwZCFZF2?usp=sharing). Seguindo nosso [manual de estilo](../style_data), nós renomeamos, definimos o tipo, preenchemos descrições, indicamos se há dicionário ou diretório, preenchemos campos (e.g. cobertura temporal e unidade de medida) e fizemos a compatibilização entre anos para todas as variáveis (colunas).
-
-!!! Info "As colunas a seguir são obrigatórias, caso você use uma planilha do Google Sheets como modelo da arquitetura:"
 
 - **nome:** Nome da coluna
 - **tipo:** tipo de dado do BigQuery (veja quais são no nosso [manual de estilo](../style_data/#tipos-de-variaveis))
@@ -155,7 +150,7 @@ identificar municípios (seu nome fica numa tabela de
 
 !!! Tip "Quando terminar de preencher as tabelas de arquitetura, entre em contato com a equipe da Base dos Dados ou nossa comunidade para validar tudo. É importante ter certeza que está fazendo sentido _antes_ de começar a escrever código."
 
-### 4. Escrever código de captura e limpeza de dados
+### 5. Escrever código de captura e limpeza de dados
 
 Após validadas as tabelas de arquitetura, podemos escrever os códigos de
 **captura** e **limpeza** dos dados.
@@ -192,13 +187,13 @@ A tabela `microdados_vinculos` da RAIS é uma tabela muito grande
 particionamento foi feito usando a estrutura de pastas
 `/microdados_vinculos/ano=YYYY/sigla_uf=XX`.
 
-### 5. (Caso necessário) Organizar arquivos auxiliares
+### 6. (Caso necessário) Organizar arquivos auxiliares
 
 É comum bases de dados serem distribuídas com arquivos auxiliares. Esses podem incluir notas técnicas, descrições de coleta e amostragem, etc. Para ajudar usuários da Base dos Dados terem mais contexto e entenderem melhor os dados, organize todos esses arquivos auxiliares em `/extra/auxiliary_files`.
 
 Fique à vontade para estruturar sub-pastas como quiser lá dentro. O que importa é que fique claro o que são esses arquivos.
 
-### 6. (Caso necessário) Criar tabela dicionário
+### 7. (Caso necessário) Criar tabela dicionário
 
 Muitas vezes, especialmente com bases antigas, há múltiplos dicionários
 em formatos Excel ou outros. Na Base dos Dados nós unificamos tudo em um
@@ -226,7 +221,7 @@ O dicionário completo [pode ser consultado
 aqui](https://docs.google.com/spreadsheets/d/12Wwp48ZJVux26rCotx43lzdWmVL54JinsNnLIV3jnyM/edit?usp=sharing).
 Ele já possui a estrutura padrão que utilizamos para dicionários.
 
-### 7. Subir tudo no Google Cloud
+### 8. Subir tudo no Google Cloud
 
 Tudo pronto! Agora só falta subir para o Google Cloud e enviar para
 revisão. Para isso, vamos usar o cliente `basedosdados` (disponível em
@@ -342,7 +337,7 @@ Para publicar o dataset e a(s) **tabela(s)**:
        certifique-se de que a planilha está compartilhada com a opção "qualquer pessoa com o link pode ver"
 
     ```
-!!! Info "se o projeto não existir do BigQuery, ele será autmaticamente criado, junto com os arquivos README.md e dataset_config.yaml, que deverão ser preenchidos, segundo o modelo já criado"
+!!! Info "se o projeto não existir no BigQuery, ele será autmaticamente criado, junto com os arquivos README.md e dataset_config.yaml, que deverão ser preenchidos, segundo o modelo já criado"
 
 2. Preencha os arquivos de configuração da tabela:
 
@@ -361,7 +356,7 @@ Consulte também nossa [API](../api_reference_cli) para mais detalhes de cada m�
 
 !!! Tip "Abra o console do BigQuery e rode algumas _queries_ para testar se foi tudo publicado corretamente. Estamos desenvolvendo testes automáticos para facilitar esse processo no futuro."
 
-### 8. Validar os metadados para publicação
+### 9. Validar os metadados para publicação
 
 Para validar os metadados preenchidos nos arquivos `dataset_config.yaml` e `table_config.yaml`, o processo é simples.
 
@@ -398,7 +393,7 @@ Através do módulo `metadata` é possível também trabalhar com bases e tabela
    metadados atualizados do conjutno use `basedosdados metadata publish [DATASET_ID]`. O mesmo pode ser feito
    para tabela adicionando o parametro `[TABLE_ID]` -->
 
-### 9. Enviar tudo para revisão
+### 10. Enviar tudo para revisão
 
 Ufa, é isso! Agora só resta enviar tudo para revisão no
 [repositório](https://github.com/basedosdados/mais) da Base dos Dados.
