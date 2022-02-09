@@ -223,9 +223,9 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: regiao_saude
+    - name: nome_regiao_saude
       bigquery_type: string
-      description: Região de Saúde
+      description: Nome da Região de Saúde
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -249,9 +249,9 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: regiao_imediata
+    - name: nome_regiao_imediata
       bigquery_type: string
-      description: Região Imediata
+      description: Nome da Região Imediata
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -275,9 +275,9 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: regiao_intermediaria
+    - name: nome_regiao_intermediaria
       bigquery_type: string
-      description: Região Intermediária
+      description: Nome da Região Intermediária
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -301,9 +301,9 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: microrregiao
+    - name: nome_microrregiao
       bigquery_type: string
-      description: Microrregião
+      description: Nome da Microrregião
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -327,9 +327,9 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: mesorregiao
+    - name: nome_mesorregiao
       bigquery_type: string
-      description: Mesorregião
+      description: Nome da Mesorregião
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -394,7 +394,7 @@ columns:
       is_partition: false
     - name: nome_regiao
       bigquery_type: string
-      description: Nome da Região
+      description: Nome da Grande Região Brasileira
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -406,4 +406,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2021-10-31T18:22:50.554188'
+metadata_modified: '2022-02-09T19:13:26.735365'
