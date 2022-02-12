@@ -207,7 +207,7 @@ class Metadata(Base):
 
         dataset_url = f"{self.CKAN_URL}/api/3/action/bd_dataset_schema"
         dataset_schema = requests.get(dataset_url).json().get("result")
-
+        
         return dataset_schema
 
     def exists_in_ckan(self) -> bool:
@@ -347,7 +347,7 @@ class Metadata(Base):
 
         ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=None)
         response = ckan.action.bd_dataset_validate(**self.ckan_data_dict)
-
+        
         if response.get("errors"):
             error = {self.ckan_data_dict.get("name"): response["errors"]}
             message = f"{self.filepath} has validation errors: {error}"
@@ -420,7 +420,7 @@ class Metadata(Base):
             )
 
             data_dict = self.ckan_data_dict.copy()
-
+            
             if self.table_id:
 
                 # publish dataset metadata first if user wants to publish both
@@ -689,9 +689,9 @@ def build_yaml_object(
     if yaml.get("partitions") == "":
         yaml["partitions"] = None
 
-    # Add dataset_id and table_id
-    yaml["dataset_id"] = dataset_id
     if table_id:
+        # Add dataset_id and table_id
+        yaml["dataset_id"] = dataset_id
         yaml["table_id"] = table_id
 
         # Add gcloud config variables
