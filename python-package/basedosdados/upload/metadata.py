@@ -695,7 +695,7 @@ def build_yaml_object(
     if table_id:
         yaml["table_id"] = table_id
 
-        # Add gcloud config    variables
+        # Add gcloud config variables
         yaml["source_bucket_name"] = str(config.get("bucket_name"))
         yaml["project_id_prod"] = str(
             config.get("gcloud-projects", {}).get("prod", {}).get("name")
