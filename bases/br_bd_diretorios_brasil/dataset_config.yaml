@@ -1,78 +1,48 @@
-dataset_id: br_bd_diretorios_brasil # AUTO GENERATED
-
-url_ckan: https://basedosdados.org/dataset/br-bd-diretorios-brasil
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil
-
-# Descreva a base.
-# Ela é sobre o que?
-# Quais as principais fontes de dados?
-# Há links para FAQs e explicações?
-description: | # REQUIRED
-    Conjunto de diretórios brasileiros compilados pela Base dos Dados para cruzar informações de diferentes instituições.
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: 
-    - "instituto-brasileiro-de-geografia-e-estatistica"
-    - "ministerio-da-educacao-e-cultura-mec"
-    - "secretaria-de-educacao-de-sao-paulo" # REQUIRED
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - br-bd
 
-# Qual departamento/grupo/pessoa mantém os dados originais?
-author:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
+dataset_id: br_bd_diretorios_brasil
 
-# Onde encontrar os dados originais e mais informações?
-website:
-    - https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html
-    - https://dados.educacao.sp.gov.br/story/idesp
-    - http://bve.cibec.inep.gov.br/web/guest/dados
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Diretórios Brasileiros
 
-# Quais grupos caracterizam a base?
+# Descrição e anotações úteis sobre os dados.
+description:
+
+# Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
 groups:
-    - "territorio"
-    - "educacao"
-    - "ciencia-tec-inov"
+    - ciencia-tec-inov
+    - educacao
+    - territorio
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
 # Caso crie etiquetas novas, as regras são:
-#   - letras minúsculas
-#   - sem acentos
-#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
     - diretorio
-    - municipios
     - escolas
+    - municipios
 
-# Em quais línguas a base (ou a fonte original) está disponível?
-# Regras: minúsculo, sem acentos.
-# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
-languages:
-    - portugues
+# Url completa do CKAN já contendo o dataset-id
+# Exemplo: https://basedosdados.org/dataset/<dataset-id>
+ckan_url:
 
-# Os dados originais estão disponíveis de graça?
-free: sim
+# Url completa do Github já contendo o dataset_id
+# Exemplo: https://github.com/basedosdados/mais/tree/master/bases/<dataset_id>
+github_url:
 
-# Are microdata available for download?
-microdata: não
-
-# Existe uma API na fonte original?
-API: não
-
-# É necessário registrar um usuário para baixar os dados originais?
-registration: não
-
-# Como os dados originais estão disponibilizados?
-availability: online
-
-# A fonte original requer IP brasileiro para acesso?
-brazilian_IP: não
-
-# Essa base está sob qual licença?
-# A licença MIT se aplica a bases públicas.
-# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
-license: 
-    name: MIT # REQUIRED
-    url: <url>
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2022-01-24T01:27:43.000805'
