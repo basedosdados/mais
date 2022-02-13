@@ -115,6 +115,7 @@ class Dataset(Base):
 
             dataset = m["client"].get_dataset(m["id"])
             entries = dataset.access_entries
+            # TODO https://github.com/basedosdados/mais/pull/1020
             if dataset_is_public and "staging" not in dataset.dataset_id:
                 print(dataset)
                 entries.extend(
