@@ -2,22 +2,23 @@
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 # Exemplos: br-ibge, br-tse, br-rj-gov
-organization:
-    - acaps
+organization: br-ana
 
-dataset_id: test_dataset
+dataset_id: br_ana_reservatorios
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title:
+title: Reservatórios Brasileiros
 
 # Descrição e anotações úteis sobre os dados.
-description:
+description: Dados operativos dos reservatórios do Brasil, disponibilizados pela Agência Nacional de Águas (ANA). 
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
-groups: []
+groups:
+  - energia
+  - meio-ambiente
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -27,7 +28,12 @@ groups: []
 #    - sem acentos
 #    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
-tags: []
+tags:
+  - agua
+  - reservatorio
+  - bacia
+  - usina 
+  
 
 # Url completa do CKAN já contendo o dataset-id
 # Exemplo: https://basedosdados.org/dataset/<dataset-id>
