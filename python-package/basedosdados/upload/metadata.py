@@ -134,7 +134,9 @@ class Metadata(Base):
                 {
                     "key": "dataset_args",
                     "value": {
-                        "short_description": self.local_metadata.get("short_description"),
+                        "short_description": self.local_metadata.get(
+                            "short_description"
+                        ),
                         "description": self.local_metadata.get("description"),
                         "ckan_url": self.local_metadata.get("ckan_url"),
                         "github_url": self.local_metadata.get("github_url"),
@@ -164,8 +166,12 @@ class Metadata(Base):
                     "data_cleaning_description": self.local_metadata.get(
                         "data_cleaning_description"
                     ),
-                    "data_cleaning_code_url": self.local_metadata.get("data_cleaning_code_url"),
-                    "partner_organization": self.local_metadata.get("partner_organization"),
+                    "data_cleaning_code_url": self.local_metadata.get(
+                        "data_cleaning_code_url"
+                    ),
+                    "partner_organization": self.local_metadata.get(
+                        "partner_organization"
+                    ),
                     "raw_files_url": self.local_metadata.get("raw_files_url"),
                     "auxiliary_files_url": self.local_metadata.get(
                         "auxiliary_files_url"
@@ -175,8 +181,12 @@ class Metadata(Base):
                     "project_id_prod": self.local_metadata.get("project_id_prod"),
                     "project_id_staging": self.local_metadata.get("project_id_staging"),
                     "partitions": self.local_metadata.get("partitions"),
-                    "uncompressed_file_size": self.local_metadata.get("uncompressed_file_size"),
-                    "compressed_file_size": self.local_metadata.get("compressed_file_size"),
+                    "uncompressed_file_size": self.local_metadata.get(
+                        "uncompressed_file_size"
+                    ),
+                    "compressed_file_size": self.local_metadata.get(
+                        "compressed_file_size"
+                    ),
                     "columns": self.local_metadata.get("columns"),
                     "metadata_modified": self.local_metadata.get("metadata_modified"),
                     "package_id": ckan_dataset.get("id"),
@@ -207,7 +217,7 @@ class Metadata(Base):
 
         dataset_url = f"{self.CKAN_URL}/api/3/action/bd_dataset_schema"
         dataset_schema = requests.get(dataset_url).json().get("result")
-        
+
         return dataset_schema
 
     def exists_in_ckan(self) -> bool:
@@ -347,7 +357,7 @@ class Metadata(Base):
 
         ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=None)
         response = ckan.action.bd_dataset_validate(**self.ckan_data_dict)
-        
+
         if response.get("errors"):
             error = {self.ckan_data_dict.get("name"): response["errors"]}
             message = f"{self.filepath} has validation errors: {error}"
@@ -420,7 +430,7 @@ class Metadata(Base):
             )
 
             data_dict = self.ckan_data_dict.copy()
-            
+
             if self.table_id:
 
                 # publish dataset metadata first if user wants to publish both
@@ -449,6 +459,7 @@ class Metadata(Base):
             # recreate local metadata YAML file with the published data
             if published and update_locally:
                 self.create(if_exists="replace")
+                self.dataset_metadata_obj.create(if_exists="replace")
 
             return published
 
@@ -683,7 +694,7 @@ def build_yaml_object(
             for remote_column in yaml["columns"]:
                 if remote_column["name"] == local_column:
                     remote_column["is_partition"] = True
-        yaml["partitions"] = ", ".join(partition_columns)
+        yaml["partitions"] = partition_columns
 
     # Nullify `partitions` field in case of other-than-None empty values
     if yaml.get("partitions") == "":
