@@ -540,6 +540,7 @@ class Table(Base):
         if_table_config_exists="raise",
         source_format="csv",
         columns_config_url=None,
+        dataset_is_public=True,
         location=None,
     ):
         """Creates BigQuery table at staging dataset.
@@ -592,6 +593,8 @@ class Table(Base):
                 The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
                 The sheet must contain the column name: "coluna" and column description: "descricao"
 
+            dataset_is_public (bool): Control if prod dataset is public or not. By default staging datasets like `dataset_id_staging` are not public.
+
             location (str): Optional. Location of dataset data.
                 List of possible region names locations: https://cloud.google.com/bigquery/docs/locations
 
@@ -633,7 +636,9 @@ class Table(Base):
             except FileExistsError:
                 pass
 
-            dataset_obj.create(if_exists="pass", location=location)
+            dataset_obj.create(
+                if_exists="pass", location=location, dataset_is_public=dataset_is_public
+            )
 
         self.init(
             data_sample_path=path,

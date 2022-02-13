@@ -48,8 +48,8 @@ Email: {{ data_cleaned_by.email }}
 {% call input(partitions) -%}
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
-{% if (partitions.split(',') is not none) -%}
-{% for partition in partitions.split(',') -%}
+{% if (partitions is not none) -%}
+{% for partition in partitions -%}
 - {{ partition }}
 {% endfor -%}
 {%- endif %}

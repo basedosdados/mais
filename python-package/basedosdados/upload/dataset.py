@@ -103,42 +103,46 @@ class Dataset(Base):
 
         return self
 
-    def publicize(self, mode="all"):
+    def publicize(self, mode="all", dataset_is_public=True):
         """Changes IAM configuration to turn BigQuery dataset public.
 
         Args:
             mode (bool): Which dataset to create [prod|staging|all].
+            dataset_is_public (bool): Control if prod dataset is public or not. By default staging datasets like `dataset_id_staging` are not public.
         """
 
         for m in self._loop_modes(mode):
 
             dataset = m["client"].get_dataset(m["id"])
             entries = dataset.access_entries
-
-            entries.extend(
-                [
-                    bigquery.AccessEntry(
-                        role="roles/bigquery.dataViewer",
-                        entity_type="iamMember",
-                        entity_id="allUsers",
-                    ),
-                    bigquery.AccessEntry(
-                        role="roles/bigquery.metadataViewer",
-                        entity_type="iamMember",
-                        entity_id="allUsers",
-                    ),
-                    bigquery.AccessEntry(
-                        role="roles/bigquery.user",
-                        entity_type="iamMember",
-                        entity_id="allUsers",
-                    ),
-                ]
-            )
-            dataset.access_entries = entries
+            if dataset_is_public and "staging" not in dataset.dataset_id:
+                print(dataset)
+                entries.extend(
+                    [
+                        bigquery.AccessEntry(
+                            role="roles/bigquery.dataViewer",
+                            entity_type="iamMember",
+                            entity_id="allUsers",
+                        ),
+                        bigquery.AccessEntry(
+                            role="roles/bigquery.metadataViewer",
+                            entity_type="iamMember",
+                            entity_id="allUsers",
+                        ),
+                        bigquery.AccessEntry(
+                            role="roles/bigquery.user",
+                            entity_type="iamMember",
+                            entity_id="allUsers",
+                        ),
+                    ]
+                )
+                dataset.access_entries = entries
 
             m["client"].update_dataset(dataset, ["access_entries"])
 
-    def create(self, mode="all", if_exists="raise", location=None):
+    def create(
+        self, mode="all", if_exists="raise", dataset_is_public=True, location=None
+    ):
         """Creates BigQuery datasets given `dataset_id`.
 
         It can create two datasets:
@@ -156,6 +160,8 @@ class Dataset(Base):
                 * replace : Drop all tables and replace dataset
                 * update : Update dataset description
                 * pass : Do nothing
+
+            dataset_is_public (bool): Control if prod dataset is public or not. By default staging datasets like `dataset_id_staging` are not public.
 
             location (str): Optional. Location of dataset data.
                 List of possible region names locations: https://cloud.google.com/bigquery/docs/locations
@@ -191,7 +197,7 @@ class Dataset(Base):
                     raise Conflict(f"Dataset {self.dataset_id} already exists")
 
         # Make prod dataset public
-        self.publicize()
+        self.publicize(dataset_is_public=dataset_is_public)
 
     def delete(self, mode="all"):
         """Deletes dataset in BigQuery. Toogle mode to choose which dataset to delete.
