@@ -3,9 +3,13 @@ from pathlib import Path
 from google.cloud import bigquery
 import shutil
 from google.api_core.exceptions import NotFound
+from loguru import logger
 
-from basedosdados import Dataset, Table, Storage
+from basedosdados import Dataset
+from basedosdados import Table
+from basedosdados import Storage
 from basedosdados.exceptions import BaseDosDadosException
+from tests.test_dataset import dataset_exists
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
@@ -40,7 +44,7 @@ def sample_data(metadatadir):
 @pytest.fixture
 def data_path(sample_data):
     return sample_data / "municipio.csv"
-    
+
 
 def check_files(folder):
 
@@ -153,6 +157,16 @@ def test_delete(table):
 
     assert not table_exists(table, mode="staging")
     assert not table_exists(table, mode="prod")
+
+
+def test_delete_dataset(dataset):
+
+    if dataset_exists(dataset):
+        logger.info("DATASET WAS NOT DELETED!")
+        return False
+    else:
+        logger.info("DATASET WAS DELETED!")
+        return True
 
 
 def test_create_no_path_error(table, metadatadir, data_path, sample_data):
