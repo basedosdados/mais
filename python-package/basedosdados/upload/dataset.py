@@ -42,8 +42,8 @@ class Dataset(Base):
     def _setup_dataset_object(self, dataset_id, location=None):
 
         dataset = bigquery.Dataset(dataset_id)
-        ## TODO: not being used since 1.6.0 - need to redo the description tha goes to bigquery
 
+        ## TODO: not being used since 1.6.0 - need to redo the description tha goes to bigquery
         dataset.description = "Para saber mais acesse https://basedosdados.org/"
         # dataset.description = self._render_template(
         #     Path("dataset/dataset_description.txt"), self.dataset_config
