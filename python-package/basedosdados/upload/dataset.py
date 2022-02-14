@@ -43,9 +43,12 @@ class Dataset(Base):
 
         dataset = bigquery.Dataset(dataset_id)
         ## TODO: not being used since 1.6.0 - need to redo the description tha goes to bigquery
+
+        dataset.description = "Para saber mais acesse https://basedosdados.org/"
         # dataset.description = self._render_template(
         #     Path("dataset/dataset_description.txt"), self.dataset_config
         # )
+
         dataset.location = location
 
         return dataset
