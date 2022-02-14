@@ -485,9 +485,9 @@ class Table(Base):
             source_format (str): Optional
                 Data source format. Only 'csv' is supported. Defaults to 'csv'.
 
-            columns_config_url_or_path (str): google sheets URL.
-                The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
-                The sheet must contain the column name: "coluna" and column description: "descricao"
+            columns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.
+                Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.
+                Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
 
         Raises:
             FileExistsError: If folder exists and replace is False.
@@ -644,9 +644,9 @@ class Table(Base):
             source_format (str): Optional
                 Data source format. Only 'csv' is supported. Defaults to 'csv'.
 
-            columns_config_url_or_path (str): google sheets URL.
-                The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
-                The sheet must contain the column name: "coluna" and column description: "descricao"
+            columns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.
+                Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.
+                Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
 
             dataset_is_public (bool): Control if prod dataset is public or not. By default staging datasets like `dataset_id_staging` are not public.
 

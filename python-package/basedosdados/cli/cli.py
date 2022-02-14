@@ -77,6 +77,16 @@ def mode_text(mode, verb, obj_id):
     default="raise",
     help="[raise|update|replace|pass] if dataset alread exists",
 )
+@click.option(
+    "--dataset_is_public",
+    default=True,
+    help="Control if prod dataset is public or not. By default staging datasets like `dataset_id_staging` are not public.",
+)
+@click.option(
+    "--location",
+    default=None,
+    help="Location of dataset data. List of possible region names locations: https://cloud.google.com/bigquery/docs/locations",
+)
 @click.pass_context
 def create_dataset(ctx, dataset_id, mode, if_exists, dataset_is_public, location):
 
@@ -115,6 +125,11 @@ def update_dataset(ctx, dataset_id, mode, location):
 
 @cli_dataset.command(name="publicize", help="Make a dataset public")
 @click.argument("dataset_id")
+@click.option(
+    "--dataset_is_public",
+    default=True,
+    help="Control if prod dataset is public or not. By default staging datasets like `dataset_id_staging` are not public.",
+)
 @click.pass_context
 def publicize_dataset(ctx, dataset_id, dataset_is_public):
 
@@ -173,6 +188,11 @@ def cli_table():
     "--if_table_config_exists",
     default="raise",
     help="[raise|replace|pass] actions if table config files already exist",
+)
+@click.option(
+    "--source_format",
+    default="csv",
+    help="Data source format. Only 'csv' is supported. Defaults to 'csv'.",
 )
 @click.option(
     "--columns_config_url_or_path",
@@ -241,9 +261,24 @@ def init_table(
     help="[raise|replace|pass] actions if table config files already exist",
 )
 @click.option(
+    "--source_format",
+    default="csv",
+    help="Data source format. Only 'csv' is supported. Defaults to 'csv'.",
+)
+@click.option(
     "--columns_config_url_or_path",
     default=None,
-    help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>",
+    help="Path to the local architeture file or a public google sheets URL. Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats. Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.",
+)
+@click.option(
+    "--dataset_is_public",
+    default=True,
+    help="Control if prod dataset is public or not. By default staging datasets like `dataset_id_staging` are not public.",
+)
+@click.option(
+    "--location",
+    default=None,
+    help="Location of dataset data. List of possible region names locations: https://cloud.google.com/bigquery/docs/locations",
 )
 @click.pass_context
 def create_table(
@@ -314,14 +349,23 @@ def update_table(ctx, dataset_id, table_id, mode):
 @click.option(
     "--columns_config_url_or_path",
     default=None,
-    help="""\nGoogle sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. 
-\nThe sheet must contain the columns:\n
-    - nome: column name\n
-    - descricao: column description\n
-    - tipo: column bigquery type\n
-    - unidade_medida: column mesurement unit\n
-    - dicionario: column related dictionary\n
-    - nome_diretorio: column related directory in the format <dataset_id>.<table_id>:<column_name>
+    help="""\nFills columns in table_config.yaml automatically using a public google sheets URL or a local file. Also regenerate
+        \npublish.sql and autofill type using bigquery_type.\n
+
+    \nThe sheet must contain the columns:\n
+        - name: column name\n
+        - description: column description\n
+        - bigquery_type: column bigquery type\n
+        - measurement_unit: column mesurement unit\n
+        - covered_by_dictionary: column related dictionary\n
+        - directory_column: column related directory in the format <dataset_id>.<table_id>:<column_name>\n
+        - temporal_coverage: column temporal coverage\n
+        - has_sensitive_data: the column has sensitive data\n
+        - observations: column observations\n
+    \nArgs:\n
+    \ncolumns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.\n
+        Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.\n
+        Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.\n
 """,
 )
 @click.pass_context
