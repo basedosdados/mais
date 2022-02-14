@@ -1,4 +1,5 @@
-
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: test_dataset
 
 table_id: test_table
@@ -7,35 +8,25 @@ table_id: test_table
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: table-approve passou por aqui v1.0 -> teste com retries  
+description: this is a test-dataset
 
 # A máxima unidade espacial que a tabela cobre.
+# Exemplo:
+#   - continent: south_america
+#     country: br
 spatial_coverage:
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency:
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity:
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit:
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns:
-    - ano
-    - sigla_uf
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
 
 last_updated:
     metadata:
@@ -51,8 +42,8 @@ published_by:
     name:
     email:
     github_user:
-    website:
     ckan_user:
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -63,10 +54,17 @@ data_cleaned_by:
     github_user:
     ckan_user:
     website:
-    code_url:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description:
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url:
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -76,10 +74,6 @@ auxiliary_files_url:
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
-
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary:
 
 source_bucket_name: basedosdados-dev
 
@@ -91,9 +85,10 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: ano, sigla_uf, mes
-
-bdm_file_size:
+partitions:
+    - ano
+    - mes
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -105,56 +100,60 @@ bdm_file_size:
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
-      bigquery_type:
-      description: testenado table-approve
-      temporal_coverage:
-      covered_by_dictionary:
+      bigquery_type: int64
+      description: ano
+      temporal_coverage: 2009-01(1)2020-3
+      covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
       measurement_unit:
-      has_sensitive_data:
-      is_in_staging:
-      is_partition: true
-    - name: sigla_uf
-      bigquery_type:
-      description: testenado testando table-approve
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations: kkkkk
       is_in_staging:
       is_partition: true
     - name: mes
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      bigquery_type: int64
+      description: mes
+      temporal_coverage: 2009-01(1)2020-3
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit:
+      has_sensitive_data: no
+      observations: asdasdasd
+      is_in_staging:
+      is_partition: true
+    - name: sigla_uf
+      bigquery_type: string
+      description: uf
+      temporal_coverage: 2009-01(1)2020-3
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations: asdsadasdasd
       is_in_staging:
       is_partition: true
     - name: dado
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      bigquery_type: string
+      description: data
+      temporal_coverage: 2009-01(1)2020-3
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations: asdasdsadasdasd
       is_in_staging:
       is_partition:
 
-metadata_modified: 
+metadata_modified:
