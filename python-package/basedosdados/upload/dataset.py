@@ -226,7 +226,9 @@ class Dataset(Base):
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             dataset = m["client"].update_dataset(
-                self._setup_dataset_object(m["id"]),
+                self._setup_dataset_object(
+                    m["id"],
+                    location=location,
+                ),
                 fields=["description"],
-                location=location,
             )  # Make an API request.
