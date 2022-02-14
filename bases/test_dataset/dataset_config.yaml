@@ -19,7 +19,7 @@ notes:
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
-groups:
+groups: []
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -29,8 +29,8 @@ groups:
 #    - sem acentos
 #    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
-tags:
+tags: []
 
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.
-metadata_modified: '2022-02-14T03:28:30.842591'
+metadata_modified: '2022-02-14T04:00:44.762070'

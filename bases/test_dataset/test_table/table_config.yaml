@@ -8,7 +8,7 @@ table_id: test_table
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: this is a test-dataset
+description: this is a test-dataset --> tb-approve passou por aqui
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
@@ -103,6 +103,7 @@ columns:
       bigquery_type: int64
       description: ano
       temporal_coverage:
+          - 2009-01(1)2020-3
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -116,7 +117,8 @@ columns:
     - name: mes
       bigquery_type: int64
       description: mes
-      temporal_coverage: 
+      temporal_coverage:
+          - 2009-01(1)2020-3
       covered_by_dictionary: yes
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -130,7 +132,8 @@ columns:
     - name: sigla_uf
       bigquery_type: string
       description: uf
-      temporal_coverage: 
+      temporal_coverage:
+          - 2009-01(1)2020-3
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -145,6 +148,7 @@ columns:
       bigquery_type: string
       description: data
       temporal_coverage:
+          - 2009-01(1)2020-3
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -156,4 +160,4 @@ columns:
       is_in_staging:
       is_partition:
 
-metadata_modified: '2022-02-14T03:28:30.842591'
+metadata_modified: '2022-02-14T04:00:44.770556'
