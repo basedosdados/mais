@@ -1,18 +1,20 @@
 
-# Qual organização disponibiliza os dados originais?
-# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-# Exemplos: br-ibge, br-tse, br-rj-gov
-organization:
-    - acaps
-
-dataset_id: test_dataset
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: test-dataset
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
 title:
 
-# Descrição e anotações úteis sobre os dados.
-description:
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - br-bd
+
+# Descrição do conjunto
+notes:
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
@@ -29,14 +31,6 @@ groups: []
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags: []
 
-# Url completa do CKAN já contendo o dataset-id
-# Exemplo: https://basedosdados.org/dataset/<dataset-id>
-ckan_url:
-
-# Url completa do Github já contendo o dataset_id
-# Exemplo: https://github.com/basedosdados/mais/tree/master/bases/<dataset_id>
-github_url:
-
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.
-metadata_modified:
+metadata_modified: '2022-02-14T03:28:30.842591'
