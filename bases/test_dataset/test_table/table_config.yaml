@@ -102,7 +102,7 @@ columns:
     - name: ano
       bigquery_type: int64
       description: ano
-      temporal_coverage: 2009-01(1)2020-3
+      temporal_coverage:
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -116,7 +116,7 @@ columns:
     - name: mes
       bigquery_type: int64
       description: mes
-      temporal_coverage: 2009-01(1)2020-3
+      temporal_coverage: 
       covered_by_dictionary: yes
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -130,7 +130,7 @@ columns:
     - name: sigla_uf
       bigquery_type: string
       description: uf
-      temporal_coverage: 2009-01(1)2020-3
+      temporal_coverage: 
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -144,7 +144,7 @@ columns:
     - name: dado
       bigquery_type: string
       description: data
-      temporal_coverage: 2009-01(1)2020-3
+      temporal_coverage:
       covered_by_dictionary: no
       directory_column:
           dataset_id:
