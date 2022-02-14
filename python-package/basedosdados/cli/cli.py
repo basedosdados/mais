@@ -78,9 +78,14 @@ def mode_text(mode, verb, obj_id):
     help="[raise|update|replace|pass] if dataset alread exists",
 )
 @click.pass_context
-def create_dataset(ctx, dataset_id, mode, if_exists):
+def create_dataset(ctx, dataset_id, mode, if_exists, dataset_is_public, location):
 
-    Dataset(dataset_id=dataset_id, **ctx.obj).create(mode=mode, if_exists=if_exists)
+    Dataset(dataset_id=dataset_id, **ctx.obj).create(
+        mode=mode,
+        if_exists=if_exists,
+        dataset_is_public=dataset_is_public,
+        location=location,
+    )
 
     click.echo(
         click.style(
@@ -96,9 +101,9 @@ def create_dataset(ctx, dataset_id, mode, if_exists):
     "--mode", "-m", default="all", help="What datasets to create [prod|staging|all]"
 )
 @click.pass_context
-def update_dataset(ctx, dataset_id, mode):
+def update_dataset(ctx, dataset_id, mode, location):
 
-    Dataset(dataset_id=dataset_id, **ctx.obj).update(mode=mode)
+    Dataset(dataset_id=dataset_id, **ctx.obj).update(mode=mode, location=location)
 
     click.echo(
         click.style(
@@ -111,9 +116,11 @@ def update_dataset(ctx, dataset_id, mode):
 @cli_dataset.command(name="publicize", help="Make a dataset public")
 @click.argument("dataset_id")
 @click.pass_context
-def publicize_dataset(ctx, dataset_id):
+def publicize_dataset(ctx, dataset_id, dataset_is_public):
 
-    Dataset(dataset_id=dataset_id, **ctx.obj).publicize()
+    Dataset(dataset_id=dataset_id, **ctx.obj).publicize(
+        dataset_is_public=dataset_is_public
+    )
 
     click.echo(
         click.style(
@@ -168,7 +175,7 @@ def cli_table():
     help="[raise|replace|pass] actions if table config files already exist",
 )
 @click.option(
-    "--columns_config_url",
+    "--columns_config_url_or_path",
     default=None,
     help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. The sheet must contain the column name: 'coluna' and column description: 'descricao'.",
 )
@@ -180,14 +187,16 @@ def init_table(
     data_sample_path,
     if_folder_exists,
     if_table_config_exists,
-    columns_config_url,
+    source_format,
+    columns_config_url_or_path,
 ):
 
     t = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).init(
         data_sample_path=data_sample_path,
         if_folder_exists=if_folder_exists,
         if_table_config_exists=if_table_config_exists,
-        columns_config_url=columns_config_url,
+        source_format=source_format,
+        columns_config_url_or_path=columns_config_url_or_path,
     )
 
     click.echo(
@@ -232,7 +241,7 @@ def init_table(
     help="[raise|replace|pass] actions if table config files already exist",
 )
 @click.option(
-    "--columns_config_url",
+    "--columns_config_url_or_path",
     default=None,
     help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>",
 )
@@ -247,7 +256,10 @@ def create_table(
     force_dataset,
     if_storage_data_exists,
     if_table_config_exists,
-    columns_config_url,
+    source_format,
+    columns_config_url_or_path,
+    dataset_is_public,
+    location,
 ):
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).create(
@@ -257,7 +269,10 @@ def create_table(
         force_dataset=force_dataset,
         if_storage_data_exists=if_storage_data_exists,
         if_table_config_exists=if_table_config_exists,
-        columns_config_url=columns_config_url,
+        source_format=source_format,
+        columns_config_url_or_path=columns_config_url_or_path,
+        dataset_is_public=dataset_is_public,
+        location=location,
     )
 
     click.echo(
@@ -297,7 +312,7 @@ def update_table(ctx, dataset_id, table_id, mode):
 @click.argument("dataset_id")
 @click.argument("table_id")
 @click.option(
-    "--columns_config_url",
+    "--columns_config_url_or_path",
     default=None,
     help="""\nGoogle sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. 
 \nThe sheet must contain the columns:\n
@@ -310,10 +325,10 @@ def update_table(ctx, dataset_id, table_id, mode):
 """,
 )
 @click.pass_context
-def update_columns(ctx, dataset_id, table_id, columns_config_url):
+def update_columns(ctx, dataset_id, table_id, columns_config_url_or_path):
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).update_columns(
-        columns_config_url=columns_config_url,
+        columns_config_url_or_path=columns_config_url_or_path,
     )
 
     click.echo(
