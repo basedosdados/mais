@@ -393,7 +393,7 @@ class Table(Base):
                     col["temporal_coverage"] = (
                         col["temporal_coverage"]
                         if temporal_coverage == "NULL"
-                        else temporal_coverage
+                        else [temporal_coverage]
                     )
 
                     col["observations"] = (
