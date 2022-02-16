@@ -50,6 +50,10 @@ def read_sql(
             Query result
     """
 
+    # standard billing_project_id configuration
+    if billing_project_id is None:
+        billing_project_id == config.billing_project_id
+
     try:
         # Set a two hours timeout
         bigquery_storage_v1.client.BigQueryReadClient.read_rows = partialmethod(
@@ -122,6 +126,10 @@ def read_table(
         pd.DataFrame:
             Query result
     """
+
+    # standard billing_project_id configuration
+    if billing_project_id is None:
+        billing_project_id == config.billing_project_id
 
     if (dataset_id is not None) and (table_id is not None):
         query = f"""
@@ -202,6 +210,7 @@ def download(
             "Either table_id, dataset_id or query should be filled."
         )
 
+    # standard billing_project_id configuration
     if billing_project_id is None:
         billing_project_id == config.billing_project_id
 
