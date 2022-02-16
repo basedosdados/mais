@@ -28,6 +28,10 @@ class Base:
         overwrite_cli_config=False,
     ):
 
+        # standard config_path configuration
+        if config_path is None:
+            config_path == config.config_path
+
         self.config_path = Path.home() / config_path
         self._init_config(force=overwrite_cli_config)
         self.config = self._load_config()
