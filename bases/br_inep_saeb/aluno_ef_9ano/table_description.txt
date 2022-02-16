@@ -1,0 +1,63 @@
+Microdados do SAEB com respostas dos alunos para as avaliações e questionário socioeconômico
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+
+
+
+Cobertura Temporal
+------------------
+- 1
+- 9
+- 9
+- 5
+- (
+- 2
+- )
+- 2
+- 0
+- 1
+- 9
+
+
+
+
+Cobertura Espacial
+------------------
+- country
+
+
+
+
+Tratamento
+----------
+Compatibilização entre bases. Altera o formato de wide para long baseado em disciplina. Altera formato de variáveis. Inclui variável de desempenho do aluno conforme escala de aprendizagem adequada. Inclui variável idade. Particiona dados por ano e uf.
+
+
+
+Frequencia de Atualização
+-------------------------
+two_years
