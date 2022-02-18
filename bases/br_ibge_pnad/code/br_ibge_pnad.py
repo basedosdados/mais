@@ -297,4 +297,4 @@ for ano in list_anos:
       df_partition = df[df['sigla_uf'] == uf]
       df_partition.drop(['sigla_uf', 'ano'], axis=1, inplace=True)
       partition_path = path_dados + 'output/microdados_compatibilizado_datazoom/ano={}/sigla_uf={}/microdados_dz.csv'.format(ano,uf)
-      df_partition.to_csv(partition_path, index=False, encoding='utf-8', na_rep='', float_format= '%.0f')
+      df_partition.to_csv(partition_path, index=False, encoding='utf-8', na_rep='')

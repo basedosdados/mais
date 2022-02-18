@@ -17,13 +17,12 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_ibge_pnad.microdados_compatibilizado_datazoom AS
+CREATE VIEW basedosdados-dev.br_ibge_pnad.microdados_compatibilizados_datazoom AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_uf AS STRING) id_uf,
 SAFE_CAST(id_regiao AS STRING) id_regiao,
-SAFE_CAST(id_regiao_metropolitana AS STRING) id_regiao_metropolitana,
+SAFE_CAST(id_uf AS STRING) id_uf,
 SAFE_CAST(id_domicilio AS STRING) id_domicilio,
 SAFE_CAST(zona_urbana AS STRING) zona_urbana,
 SAFE_CAST(tipo_zona_domicilio AS STRING) tipo_zona_domicilio,
@@ -59,6 +58,7 @@ SAFE_CAST(renda_mensal_domiciliar_compativel_1992_deflacionada AS FLOAT64) renda
 SAFE_CAST(aluguel_deflacionado AS FLOAT64) aluguel_deflacionado,
 SAFE_CAST(prestacao_deflacionado AS FLOAT64) prestacao_deflacionado,
 SAFE_CAST(numero_familia AS INT64) numero_familia,
+SAFE_CAST(id_regiao_metropolitana AS STRING) id_regiao_metropolitana,
 SAFE_CAST(sexo AS STRING) sexo,
 SAFE_CAST(condicao_domicilio AS STRING) condicao_domicilio,
 SAFE_CAST(condicao_familia AS STRING) condicao_familia,
@@ -122,4 +122,4 @@ SAFE_CAST(valor_pensao_deflacionado AS FLOAT64) valor_pensao_deflacionado,
 SAFE_CAST(valor_abono_deflacionado AS FLOAT64) valor_abono_deflacionado,
 SAFE_CAST(valor_aluguel_deflacionado AS FLOAT64) valor_aluguel_deflacionado,
 SAFE_CAST(rendas_outras_deflacionado AS FLOAT64) rendas_outras_deflacionado
-FROM basedosdados-dev.br_ibge_pnad_staging.microdados_compatibilizado_datazoom AS t
+FROM basedosdados-dev.br_ibge_pnad_staging.microdados_compatibilizados_datazoom AS t
