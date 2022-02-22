@@ -1,4 +1,4 @@
-Dados sobre países com identificadores segundo instituições internacionais, além de siglas e nomes.
+Dados com identificadores dos continentes segundo instituições internacionais, além de siglas e os nomes.
 
 Para saber mais acesse:
 Website: 
@@ -40,6 +40,4 @@ Cobertura Espacial
 
 
 
-Frequencia de Atualização
--------------------------
-unique
+

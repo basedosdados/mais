@@ -17,17 +17,9 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_bd_diretorios_mundo.pais AS
+CREATE VIEW basedosdados-dev.br_bd_diretorios_mundo.continente AS
 SELECT 
-SAFE_CAST(id_pais_ocde AS STRING) id_pais_ocde,
-SAFE_CAST(id_pais_fao AS STRING) id_pais_fao,
-SAFE_CAST(id_pais_gaul AS STRING) id_pais_gaul,
-SAFE_CAST(sigla_iso3 AS STRING) sigla_iso3,
-SAFE_CAST(sigla_iso2 AS STRING) sigla_iso2,
-SAFE_CAST(sigla_pnud AS STRING) sigla_pnud,
+SAFE_CAST(sigla AS STRING) sigla,
 SAFE_CAST(nome_pt AS STRING) nome_pt,
-SAFE_CAST(nome_en AS STRING) nome_en,
-SAFE_CAST(nome_oficial_en AS STRING) nome_oficial_en,
-SAFE_CAST(nacionalidade AS STRING) nacionalidade,
-SAFE_CAST(sigla_continente AS STRING) sigla_continente
-FROM basedosdados-dev.br_bd_diretorios_mundo_staging.pais AS t
+SAFE_CAST(nome_en AS STRING) nome_en
+FROM basedosdados-dev.br_bd_diretorios_mundo_staging.continente AS t
