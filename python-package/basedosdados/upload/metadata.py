@@ -121,7 +121,8 @@ class Metadata(Base):
             "private": ckan_dataset.get("private") or False,
             "owner_org": self.owner_org,
             "resources": ckan_dataset.get("resources", [])
-            or [{"resource_type": "external_link", "name": ""}],
+            or [{"resource_type": "external_link", "name": ""}]
+            or [{"resource_type": "information_request", "name": ""}],
             "groups": [
                 {"name": group} for group in self.local_metadata.get("groups", []) or []
             ],
@@ -133,6 +134,9 @@ class Metadata(Base):
                 {
                     "key": "dataset_args",
                     "value": {
+                        "short_description": self.local_metadata.get(
+                            "short_description"
+                        ),
                         "description": self.local_metadata.get("description"),
                         "ckan_url": self.local_metadata.get("ckan_url"),
                         "github_url": self.local_metadata.get("github_url"),
@@ -154,30 +158,35 @@ class Metadata(Base):
                     "spatial_coverage": self.local_metadata.get("spatial_coverage"),
                     "temporal_coverage": self.local_metadata.get("temporal_coverage"),
                     "update_frequency": self.local_metadata.get("update_frequency"),
-                    "entity": self.local_metadata.get("entity"),
-                    "time_unit": self.local_metadata.get("time_unit"),
-                    "identifying_columns": self.local_metadata.get(
-                        "identifying_columns"
-                    ),
+                    "observation_level": self.local_metadata.get("observation_level"),
                     "last_updated": self.local_metadata.get("last_updated"),
+                    "version": self.local_metadata.get("version"),
                     "published_by": self.local_metadata.get("published_by"),
                     "data_cleaned_by": self.local_metadata.get("data_cleaned_by"),
                     "data_cleaning_description": self.local_metadata.get(
                         "data_cleaning_description"
+                    ),
+                    "data_cleaning_code_url": self.local_metadata.get(
+                        "data_cleaning_code_url"
+                    ),
+                    "partner_organization": self.local_metadata.get(
+                        "partner_organization"
                     ),
                     "raw_files_url": self.local_metadata.get("raw_files_url"),
                     "auxiliary_files_url": self.local_metadata.get(
                         "auxiliary_files_url"
                     ),
                     "architecture_url": self.local_metadata.get("architecture_url"),
-                    "covered_by_dictionary": self.local_metadata.get(
-                        "covered_by_dictionary"
-                    ),
                     "source_bucket_name": self.local_metadata.get("source_bucket_name"),
                     "project_id_prod": self.local_metadata.get("project_id_prod"),
                     "project_id_staging": self.local_metadata.get("project_id_staging"),
                     "partitions": self.local_metadata.get("partitions"),
-                    "bdm_file_size": self.local_metadata.get("bdm_file_size"),
+                    "uncompressed_file_size": self.local_metadata.get(
+                        "uncompressed_file_size"
+                    ),
+                    "compressed_file_size": self.local_metadata.get(
+                        "compressed_file_size"
+                    ),
                     "columns": self.local_metadata.get("columns"),
                     "metadata_modified": self.local_metadata.get("metadata_modified"),
                     "package_id": ckan_dataset.get("id"),
@@ -414,7 +423,7 @@ class Metadata(Base):
             self.validate()
 
             assert self.is_updated(), (
-                f"Could not publish metadata due to out of date config file. "
+                f"Could not publish metadata due to out-of-date config file. "
                 f"Please run `basedosdados metadata create {self.dataset_id} "
                 f"{self.table_id or ''}` to get the most recently updated met"
                 f"adata and apply your changes to it."
@@ -450,6 +459,7 @@ class Metadata(Base):
             # recreate local metadata YAML file with the published data
             if published and update_locally:
                 self.create(if_exists="replace")
+                self.dataset_metadata_obj.create(if_exists="replace")
 
             return published
 
@@ -684,15 +694,15 @@ def build_yaml_object(
             for remote_column in yaml["columns"]:
                 if remote_column["name"] == local_column:
                     remote_column["is_partition"] = True
-        yaml["partitions"] = ", ".join(partition_columns)
+        yaml["partitions"] = partition_columns
 
     # Nullify `partitions` field in case of other-than-None empty values
     if yaml.get("partitions") == "":
         yaml["partitions"] = None
 
-    # Add dataset_id and table_id
-    yaml["dataset_id"] = dataset_id
     if table_id:
+        # Add dataset_id and table_id
+        yaml["dataset_id"] = dataset_id
         yaml["table_id"] = table_id
 
         # Add gcloud config variables

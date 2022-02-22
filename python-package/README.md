@@ -37,3 +37,10 @@ Publique nova versão
 poetry version [patch|minor|major]
 poetry publish --build
 ```
+
+Versão Alpha e Beta
+
+```
+version = "1.6.2-alpha.3"
+version = "1.6.2-beta.3"
+```

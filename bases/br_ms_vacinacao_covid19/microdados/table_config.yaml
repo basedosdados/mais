@@ -39,7 +39,7 @@ identifying_columns:
     - id_documento
 
 last_updated:
-    metadata: '2022-01-15'
+    metadata: '2022-01-23'
     data:
     release:
 

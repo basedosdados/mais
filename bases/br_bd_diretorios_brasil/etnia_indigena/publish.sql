@@ -17,10 +17,8 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.test_dataset.test_table AS
+CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.etnia_indigena AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(mes AS STRING) mes,
-SAFE_CAST(dado AS STRING) dado
-FROM basedosdados-dev.test_dataset_staging.test_table AS t
+SAFE_CAST(id_etnia_indigena AS STRING) id_etnia_indigena,
+SAFE_CAST(nome AS STRING) nome
+FROM basedosdados-dev.br_bd_diretorios_brasil_staging.etnia_indigena AS t
