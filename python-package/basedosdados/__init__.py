@@ -21,4 +21,5 @@ from basedosdados.download.metadata import (
     get_dataset_description,
     get_table_columns,
     get_table_size,
+    search
 )

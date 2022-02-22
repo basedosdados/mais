@@ -12,9 +12,10 @@ from basedosdados import (
     get_table_description,
     get_table_columns,
     get_table_size,
-    search
+    search,
 )
 
+from basedosdados.download.metadata import _safe_fetch
 
 TEST_PROJECT_ID = "basedosdados-dev"
 SAVEFILE = Path(__file__).parent / "tmp_bases" / "test.csv"
@@ -144,31 +145,6 @@ def test_get_table_columns_verbose_false():
     assert type(out) == list
     assert len(out) > 0
 
-
-def test_get_table_size(capsys):
-    get_table_size(
-        dataset_id="br_ibge_censo_demografico",
-        table_id="setor_censitario_basico_2010",
-        billing_project_id=TEST_PROJECT_ID,
-        from_file=True,
-    )
-    out, err = capsys.readouterr()
-    assert "num_rows" in out
-    assert "size_mb" in out
-
-
-def test_get_table_size_verbose_false():
-    out = get_table_size(
-        dataset_id="br_ibge_censo_demografico",
-        table_id="setor_censitario_basico_2010",
-        billing_project_id=TEST_PROJECT_ID,
-        from_file=True,
-        verbose=False,
-    )
-    assert type(out) == list
-    assert len(out) > 0
-
-
 def test_search():
     out = search(query="agua", order_by="score")
     # check if function returns pd.DataFrame
@@ -183,21 +159,15 @@ def test_get_table_size(capsys):
     get_table_size(
         dataset_id="br_ibge_censo_demografico",
         table_id="setor_censitario_basico_2010",
-        billing_project_id=TEST_PROJECT_ID,
-        from_file=True,
     )
     out, err = capsys.readouterr()
-    assert "num_rows" in out
-    assert "size_mb" in out
+    assert "not available" in out
 
+def test__safe_fetch(capsys):
 
-def test_get_table_size_verbose_false():
-    out = get_table_size(
-        dataset_id="br_ibge_censo_demografico",
-        table_id="setor_censitario_basico_2010",
-        billing_project_id=TEST_PROJECT_ID,
-        from_file=True,
-        verbose=False,
-    )
-    assert type(out) == list
-    assert len(out) > 0
+    _safe_fetch("https://www.lkajsdhgfal.com.br")
+    out, err = capsys.readouterr()  # Capture prints
+    assert "HTTPSConnection" in out
+
+    response = _safe_fetch("https://basedosdados.org/api/3/action/bd_dataset_search?q=agua&page_size=10&resource_type=bdm_table")
+    assert type(response.json())==dict

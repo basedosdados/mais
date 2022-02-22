@@ -4,20 +4,22 @@ import requests
 
 from basedosdados.download.base import credentials
 
-
-def _get_header(text):
-    """Gets first paragraph of a text
-    Args:
-        text (str or None): Text to be split
-    Returns:
-        str: First paragraph
+def _safe_fetch(url:str):
     """
-
-    if isinstance(text, str):
-        return text.split("\n")[0]
-    elif text is None:
-        return ""
-
+    Safely fetchs urls and, if somehting goes wrong, informs user what is the possible cause
+    """
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return response
+    except requests.exceptions.RequestException as err:
+        print ("This url doesn't appear to exists:",err)
+    except requests.exceptions.HTTPError as errh:
+        print ("Http Error:",errh)
+    except requests.exceptions.ConnectionError as errc:
+        print ("Error Connecting:",errc)
+    except requests.exceptions.Timeout as errt:
+        print ("Timeout Error:",errt)   
 
 def _fix_size(s, step=80):
 
@@ -43,14 +45,6 @@ def _print_output(df):
             print(_fix_size(f"{c}: \n\t{row[c]}"))
         print("-" * (step + 15))
     print()
-
-    # func = lambda lista, final, step: (
-    # func(lista[1:],
-    #     (final + lista[0] + ' ')
-    #         if len(final.split('\n')[-1]) <= step
-    #         else final + '\n',
-    #      step
-    #        ) if len(lista) else final)
 
 
 def _handle_output(verbose, output_type, df, col_name=None):
@@ -110,12 +104,7 @@ def list_datasets(query, limit=10, with_description=False, verbose=True):
 
     url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q={query}&page_size={limit}&resource_type=bdm_table"
 
-    # validate url
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        return err
+    response = _safe_fetch(url)
 
     json_response = response.json()
 
@@ -171,14 +160,11 @@ def list_dataset_tables(
         stdout | list
     """
 
+    dataset_id = dataset_id.replace("-","_") #The dataset_id pattern in the bd_dataset_search endpoint response uses a hyphen as a separator, while in the endpoint urls that specify the dataset_id parameter the separator used is an underscore. See issue #1079
+
     url = f"https://basedosdados.org/api/3/action/bd_bdm_dataset_show?dataset_id={dataset_id}"
 
-    # validate url
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        return err
+    response = _safe_fetch(url)
 
     json_response = response.json()
 
@@ -230,12 +216,7 @@ def get_dataset_description(
     """
     url = f"https://basedosdados.org/api/3/action/bd_bdm_dataset_show?dataset_id={dataset_id}"
 
-    # validate url
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        return err
+    response = _safe_fetch(url)
 
     json_response = response.json()
 
@@ -269,12 +250,7 @@ def get_table_description(
 
     url = f"https://basedosdados.org/api/3/action/bd_bdm_table_show?dataset_id={dataset_id}&table_id={table_id}"
 
-    # validate url
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        return err
+    response = _safe_fetch(url)
 
     json_response = response.json()
 
@@ -309,12 +285,7 @@ def get_table_columns(
 
     url = f"https://basedosdados.org/api/3/action/bd_bdm_table_show?dataset_id={dataset_id}&table_id={table_id}"
 
-    # validate url
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        return err
+    response = _safe_fetch(url)
 
     json_response = response.json()
 
@@ -329,13 +300,9 @@ def get_table_columns(
 def get_table_size(
     dataset_id,
     table_id,
-    billing_project_id,
-    query_project_id="basedosdados",
-    from_file=False,
     verbose=True,
 ):
-    """Use a query to get the number of rows and size (in Mb) of a table query
-    from BigQuery. Prints information on screen in markdown friendly format.
+    """Use a query to get the number of rows and size (in Mb) of a table.
 
     WARNING: this query may cost a lot depending on the table.
 
@@ -345,45 +312,24 @@ def get_table_size(
         table_id (str): Optional.
             Table id available in basedosdados.dataset_id.
             It should always come with dataset_id.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
-        billing_project_id (str): Optional.
-            Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
         verbose (bool): Optional.
             If set to True, information is printed to the screen. If set to False, data is returned as a `list` of `dict`s.
-    Example:
-        get_table_size(
-        dataset_id='br_ibge_censo2010',
-        table_id='pessoa_renda_setor_censitario',
-        billing_project_id='yourprojectid'
-        )
     """
-    billing_client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=billing_project_id
-    )
+    url = f"https://basedosdados.org/api/3/action/bd_bdm_table_show?dataset_id={dataset_id}&table_id={table_id}"
 
-    query = f"""SELECT COUNT(*) FROM {query_project_id}.{dataset_id}.{table_id}"""
+    response = _safe_fetch(url)
 
-    job = billing_client.query(query, location="US")
+    json_response = response.json()
 
-    num_rows = job.to_dataframe().loc[0, "f0_"]
+    size = json_response["result"]["size"]
 
-    size_mb = round(job.total_bytes_processed / 1024 / 1024, 2)
-
-    table_data = pd.DataFrame(
-        [
-            {
-                "project_id": query_project_id,
-                "dataset_id": dataset_id,
-                "table_id": table_id,
-                "num_rows": num_rows,
-                "size_mb": size_mb,
-            }
-        ]
-    )
-
-    return _handle_output(verbose=verbose, output_type="records", df=table_data)
-
+    if size==None:
+        print("Size not available")
+    else:
+        if verbose:
+            _print_output(pd.DataFrame(size))
+        else:
+            return size
 def search(query, order_by):
     """This function works as a wrapper to the `bd_dataset_search` website API
     enpoint.
@@ -408,12 +354,7 @@ def search(query, order_by):
 
     url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q={query}&order_by={order_by}&resource_type=bdm_table"
 
-    # validate url
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        print(err)
+    response = _safe_fetch(url)
 
     json_response = response.json()
 
@@ -435,4 +376,3 @@ def search(query, order_by):
     df = dataset_dfs[0].append(dataset_dfs[1:]).reset_index(drop=True)
 
     return df
-
