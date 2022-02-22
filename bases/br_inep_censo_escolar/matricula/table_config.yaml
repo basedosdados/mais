@@ -1,4 +1,6 @@
 
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_inep_censo_escolar
 
 table_id: matricula
@@ -10,45 +12,26 @@ table_id: matricula
 description: Dados de matrícula.
 
 # A máxima unidade espacial que a tabela cobre.
+# Exemplo:
+#   - continent: south_america
+#     country: br
 spatial_coverage:
+    - continent: south_america
+      country: br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-  - 2007
-  - 2008
-  - 2009
-  - 2010
-  - 2011
-  - 2012
-  - 2013
-  - 2014
-  - 2015
-  - 2016
-  - 2017
-  - 2018
-  - 2019
-  - 2020
+    - 2007(1)2020
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency:
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity:
-  - person
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit: one_year
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns:
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: person
 
 last_updated:
     metadata:
@@ -64,8 +47,8 @@ published_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
     github_user: rdahis
-    website: www.ricardodahis.com
     ckan_user: rdahis
+    website: www.ricardodahis.com
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -74,12 +57,19 @@ data_cleaned_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
     github_user: rdahis
-    website: www.ricardodahis.com
     ckan_user: rdahis
-    code_url:
+    website: www.ricardodahis.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description:
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url:
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: ''
+    organization_id: ''
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -89,10 +79,6 @@ auxiliary_files_url:
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
-
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary: no
 
 source_bucket_name: basedosdados-dev
 
@@ -104,9 +90,9 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: ano, sigla_uf
-
-bdm_file_size:
+partitions:
+    - ano
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -120,7 +106,7 @@ columns:
     - name: ano
       bigquery_type: int64
       description: Ano
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -128,12 +114,13 @@ columns:
           column_name: ano
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: true
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da unidade da federação
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -141,12 +128,13 @@ columns:
           column_name: sigla
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: true
     - name: id_municipio
       bigquery_type: string
       description: ID município - IBGE 7 Dígitos
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -154,12 +142,13 @@ columns:
           column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_distrito
       bigquery_type: string
       description: ID distrito - IBGE
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -167,12 +156,13 @@ columns:
           column_name: id_distrito
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_escola
       bigquery_type: string
       description: ID escola - Inep
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -180,12 +170,13 @@ columns:
           column_name: id_escola
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: rede
       bigquery_type: string
       description: Rede escolar
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -193,12 +184,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_turma
       bigquery_type: string
       description: ID turma - Inep
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -206,12 +198,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_aluno
       bigquery_type: string
       description: ID aluno - Inep
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -219,12 +212,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_pessoa_fisica
       bigquery_type: string
       description: ID pessoa física - Inep
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -232,12 +226,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_matricula
       bigquery_type: string
       description: ID matrícula - Inep
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -245,12 +240,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: dia_nascimento
       bigquery_type: int64
       description: Dia de nascimento
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -258,12 +254,13 @@ columns:
           column_name: dia
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: mes_nascimento
       bigquery_type: int64
       description: Mês de nascimento
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -271,12 +268,13 @@ columns:
           column_name: mes
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: ano_nascimento
       bigquery_type: int64
       description: Ano de nascimento
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -284,12 +282,14 @@ columns:
           column_name: ano
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: idade_referencia
       bigquery_type: int64
-      description: Idade do aluno pelo mês unificado de referência do Censo Escolar (31 de Maio)
-      temporal_coverage:
+      description: Idade do aluno pelo mês unificado de referência do Censo Escolar
+          (31 de Maio)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -297,12 +297,13 @@ columns:
           column_name:
       measurement_unit: year
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: idade
       bigquery_type: int64
       description: Idade calculada pelo ano de nascimento do aluno
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -310,12 +311,13 @@ columns:
           column_name:
       measurement_unit: year
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sexo
       bigquery_type: string
       description: Sexo
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -323,12 +325,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: raca_cor
       bigquery_type: string
       description: Raça ou cor
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -336,12 +339,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nacionalidade
       bigquery_type: string
       description: Nacionalidade
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -349,25 +353,27 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_pais_origem
       bigquery_type: string
-      description: ID país de origem
-      temporal_coverage:
+      description: ID país da ocde (br_bd_diretorios_mundo.pais.id_pais_ocde)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_mundo
           table_id: pais
-          column_name: id_pais
+          column_name: id_pais_ocde
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_uf_nascimento
       bigquery_type: string
       description: ID unidade da federação de nascimento - IBGE 2 dígitos
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -375,12 +381,13 @@ columns:
           column_name: id_uf
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio_nascimento
       bigquery_type: string
       description: ID município de nascimento - IBGE 7 dígitos
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -388,12 +395,13 @@ columns:
           column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_uf_endereco
       bigquery_type: string
       description: ID unidade da federação de endereço - IBGE 2 dígitos
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -401,12 +409,13 @@ columns:
           column_name: id_uf
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio_endereco
       bigquery_type: string
       description: ID município de endereço - IBGE 7 dígitos
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -414,12 +423,13 @@ columns:
           column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: zona_residencial
-      bigquery_type: string
+      bigquery_type: int64
       description: Zona da residência
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -427,12 +437,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: local_residencia_diferenciada
-      bigquery_type: string
+      bigquery_type: int64
       description: Local de residência diferenciada
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -440,12 +451,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: outro_local_aula
-      bigquery_type: string
+      bigquery_type: int64
       description: Outro local para aula
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -453,12 +465,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: duracao_turma
-      bigquery_type: string
+      bigquery_type: int64
       description: Tempo de permanência na turma
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -466,12 +479,14 @@ columns:
           column_name:
       measurement_unit: minute
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: duracao_ativ_comp_mesma_rede
       bigquery_type: int64
-      description: Tempo de permanência na turma de Atividade Complementar na mesma rede da turma de escolarização
-      temporal_coverage:
+      description: Tempo de permanência na turma de Atividade Complementar na mesma
+          rede da turma de escolarização
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -479,12 +494,14 @@ columns:
           column_name:
       measurement_unit: minute
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: duracao_ativ_comp_outras_redes
       bigquery_type: int64
-      description: Tempo de permanência na turma de Atividade Complementar em outras redes
-      temporal_coverage:
+      description: Tempo de permanência na turma de Atividade Complementar em outras
+          redes
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -492,12 +509,14 @@ columns:
           column_name:
       measurement_unit: minute
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: duracao_aee_comp_mesma_rede
       bigquery_type: int64
-      description: Tempo de permanência na turma de atendimento educacional especializando (AEE) na mesma rede da turma de escolarização
-      temporal_coverage:
+      description: Tempo de permanência na turma de atendimento educacional especializando
+          (AEE) na mesma rede da turma de escolarização
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -505,12 +524,14 @@ columns:
           column_name:
       measurement_unit: minute
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: duracao_aee_comp_outras_redes
       bigquery_type: int64
-      description: Tempo de permanência na turma de atendimento educacional especializando (AEE) em outras redes
-      temporal_coverage:
+      description: Tempo de permanência na turma de atendimento educacional especializando
+          (AEE) em outras redes
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -518,12 +539,13 @@ columns:
           column_name:
       measurement_unit: minute
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: dias_atividade
-      bigquery_type: string
+      bigquery_type: int64
       description: Dias de atividade
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -531,12 +553,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transporte_publico
-      bigquery_type: string
+      bigquery_type: int64
       description: Transporte escolar público
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -544,12 +567,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: responsavel_transporte
-      bigquery_type: string
+      bigquery_type: int64
       description: Poder público responsável pelo transporte escolar
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -557,12 +581,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transporte_bicicleta
-      bigquery_type: string
+      bigquery_type: int64
       description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Bicicleta)
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -570,12 +595,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transporte_micro_onibus
-      bigquery_type: string
+      bigquery_type: int64
       description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Micro-ônibus)
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -583,12 +609,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transporte_onibus
-      bigquery_type: string
+      bigquery_type: int64
       description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Ônibus)
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -596,12 +623,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transporte_tr_animal
-      bigquery_type: string
-      description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Tração Animal)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Tração
+          Animal)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -609,12 +638,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transporte_vans_kombi
-      bigquery_type: string
-      description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Vans/VW Kombi)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Vans/VW
+          Kombi)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -622,12 +653,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transporte_outro_veiculo
-      bigquery_type: string
-      description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Outro tipo de veículo rodoviário)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de veículo utilizado no transporte escolar - Rodoviário (Outro
+          tipo de veículo rodoviário)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -635,12 +668,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transporte_embarcacao_ate5
-      bigquery_type: string
-      description: Tipo de veículo utilizado no transporte escolar Aquaviário/Embarcação (Capacidade de até 5 alunos)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de veículo utilizado no transporte escolar Aquaviário/Embarcação
+          (Capacidade de até 5 alunos)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -648,12 +683,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transporte_embarcacao_5a15
-      bigquery_type: string
-      description: Tipo de veículo utilizado no transporte escolar Aquaviário/Embarcação (Capacidade de 5 a 15 alunos)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de veículo utilizado no transporte escolar Aquaviário/Embarcação
+          (Capacidade de 5 a 15 alunos)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -661,12 +698,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transporte_embarcacao_15a35
-      bigquery_type: string
-      description: Tipo de veículo utilizado no transporte escolar Aquaviário/Embarcação (Capacidade de 15 a 35 alunos)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de veículo utilizado no transporte escolar Aquaviário/Embarcação
+          (Capacidade de 15 a 35 alunos)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -674,12 +713,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transporte_embarcacao_35
-      bigquery_type: string
-      description: Tipo de veículo utilizado no transporte escolar Aquaviário/Embarcação (Capacidade acima de 35 alunos)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de veículo utilizado no transporte escolar Aquaviário/Embarcação
+          (Capacidade acima de 35 alunos)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -687,12 +728,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transporte_trem_metro
-      bigquery_type: string
+      bigquery_type: int64
       description: Tipo de veículo utilizado no transporte escolar Ferroviário (Trem/Metrô)
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -700,12 +742,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: necessidade_especial
-      bigquery_type: string
-      description: Aluno com deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação
-      temporal_coverage:
+      bigquery_type: int64
+      description: Aluno com deficiência, transtorno global do desenvolvimento ou
+          altas habilidades/ superdotação
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -713,12 +757,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: baixa_visao
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (baixa visão)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (baixa visão)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -726,12 +772,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: cegueira
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (cegueira)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (cegueira)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -739,12 +787,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: deficiencia_auditiva
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (deficiência auditiva)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (deficiência auditiva)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -752,12 +802,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: deficiencia_fisica
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (deficiência física)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (deficiência física)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -765,12 +817,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: deficiencia_intelectual
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (deficiência intelectual)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (deficiência intelectual)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -778,12 +832,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: surdez
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (surdez)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (surdez)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -791,12 +847,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: surdocegueira
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (surdocegueira)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (surdocegueira)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -804,12 +862,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: deficiencia_multipla
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (deficiência múltipla)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (deficiência múltipla)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -817,12 +877,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: autismo
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (Autismo infantil)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (Autismo infantil)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -830,12 +892,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sindrome_asperger
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (Síndrome de Asperger)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (Síndrome de Asperger)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -843,12 +907,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sindrome_rett
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (Síndrome de Rett)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (Síndrome de Rett)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -856,12 +922,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: transtorno_di
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (Transtorno Desintegrativo da Infância)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (Transtorno Desintegrativo da Infância)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -869,12 +937,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: superdotacao
-      bigquery_type: string
-      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas habilidades/ superdotação (altas habilidades/ superdotação)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Tipo de deficiência, transtorno global do desenvolvimento ou altas
+          habilidades/ superdotação (altas habilidades/ superdotação)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -882,12 +952,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_ledor
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Auxílio Ledor
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - Auxílio Ledor
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -895,12 +967,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_transcricao
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Auxílio-Transcrição
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - Auxílio-Transcrição
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -908,12 +982,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_interprete
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Guia-Intérprete
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - Guia-Intérprete
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -921,12 +997,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_libras
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Intérprete de Libras
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - Intérprete de Libras
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -934,12 +1012,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_labial
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Leitura Labial
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - Leitura Labial
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -947,12 +1027,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_ampliada_16
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Prova Ampliada (Fonte tamanho 16)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - Prova Ampliada (Fonte tamanho 16)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -960,12 +1042,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_ampliada_18
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Prova Ampliada (Fonte tamanho 18)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - Prova Ampliada (Fonte tamanho 18)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -973,12 +1057,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_ampliada_20
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Prova Ampliada (Fonte tamanho 20)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - Prova Ampliada (Fonte tamanho 20)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -986,12 +1072,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_ampliada_24
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Prova Ampliada (Fonte tamanho 24)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - Prova Ampliada (Fonte tamanho 24)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -999,12 +1087,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_cd_audio
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - CD de áudio
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - CD de áudio
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1012,12 +1102,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_prova_portugues
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Prova de português
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - Prova de português
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1025,12 +1117,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_video_libras
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - vídeo libras
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - vídeo libras
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1038,12 +1132,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_braille
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Prova em Braille
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - Prova em Braille
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1051,12 +1147,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: recurso_nenhum
-      bigquery_type: string
-      description: Recursos necessários para a participação do aluno em avaliações do Inep (Prova Brasil, Saeb, outros) - Nenhum
-      temporal_coverage:
+      bigquery_type: int64
+      description: Recursos necessários para a participação do aluno em avaliações
+          do Inep (Prova Brasil, Saeb, outros) - Nenhum
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1064,12 +1162,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: aee_libras
-      bigquery_type: string
+      bigquery_type: int64
       description: AEE - Libras
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1077,12 +1176,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: aee_lingua_portuguesa
-      bigquery_type: string
+      bigquery_type: int64
       description: AEE - Prova de português
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1090,12 +1190,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: aee_informatica_acessivel
-      bigquery_type: string
+      bigquery_type: int64
       description: AEE - Informática acessível
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1103,12 +1204,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: aee_braille
-      bigquery_type: string
+      bigquery_type: int64
       description: AEE - Braille
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1116,12 +1218,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: aee_caa
-      bigquery_type: string
+      bigquery_type: int64
       description: AEE - CAA
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1129,12 +1232,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: aee_soroban
-      bigquery_type: string
+      bigquery_type: int64
       description: AEE - Soroban
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1142,12 +1246,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: aee_vida_autonoma
-      bigquery_type: string
+      bigquery_type: int64
       description: AEE - Vida autônoma
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1155,12 +1260,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: aee_opticos_nao_opticos
-      bigquery_type: string
+      bigquery_type: int64
       description: AEE - Ópticos não ópticos
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1168,12 +1274,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: aee_enriquecimento_curricular
-      bigquery_type: string
+      bigquery_type: int64
       description: AEE - Enriquecimento curricular
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1181,12 +1288,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: aee_desenvolvimento_cognitivo
-      bigquery_type: string
+      bigquery_type: int64
       description: AEE - Desenvolvimento cognitivo
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1194,12 +1302,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: aee_mobilidade
-      bigquery_type: string
+      bigquery_type: int64
       description: AEE mobilidade
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1207,12 +1316,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: ingresso_federais
-      bigquery_type: string
-      description: Forma de ingresso do aluno (apenas alunos de escolas federais das Etapas)
-      temporal_coverage:
+      bigquery_type: int64
+      description: Forma de ingresso do aluno (apenas alunos de escolas federais das
+          Etapas)
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1220,12 +1331,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino
-      bigquery_type: string
+      bigquery_type: int64
       description: Etapa/nível de ensino
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -1233,12 +1345,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: especial_exclusiva
-      bigquery_type: string
+      bigquery_type: int64
       description: Matrícula especial exclusiva
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1246,12 +1359,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: regular
-      bigquery_type: string
+      bigquery_type: int64
       description: Matrícula regular
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1259,12 +1373,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: eja
-      bigquery_type: string
+      bigquery_type: int64
       description: Matrícula EJA
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1272,12 +1387,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: profissionalizante
-      bigquery_type: string
+      bigquery_type: int64
       description: Matrícula profissionalizante
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1285,12 +1401,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_curso_educ_profissional
-      bigquery_type: string
+      bigquery_type: int64
       description: ID curso de educação profissional
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1298,12 +1415,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: mediacao_didatico_pedagogica
-      bigquery_type: string
+      bigquery_type: int64
       description: Mediação didático-pedagógica
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1311,12 +1429,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: unificada
-      bigquery_type: string
+      bigquery_type: int64
       description: Turma unificada, multieapa, multi ou correção de fluxo
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1324,12 +1443,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: tipo_atendimento_turma
       bigquery_type: string
       description: Tipo de atendimento da turma
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1337,12 +1457,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: tipo_local_turma
       bigquery_type: string
       description: Tipo do local da turma
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1350,12 +1471,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: tipo_turma
       bigquery_type: string
       description: Tipo da turma
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1363,7 +1485,8 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-02-04T17:46:01.704919'
+metadata_modified: '2022-02-22T11:59:58.063696'

@@ -1,18 +1,34 @@
 
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-inep-censo-escolar
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Censo Escolar
+
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 # Exemplos: br-ibge, br-tse, br-rj-gov
 organization:
     - br-inep
 
-dataset_id: br_inep_censo_escolar
-
-# Título do conjunto, a ser exibido no mecanismo de busca.
-# Exemplo: População brasileira
-title: Censo Escolar
-
-# Descrição e anotações úteis sobre os dados.
-description:
+# Descrição do conjunto
+notes: "O Censo Escolar é o principal instrumento de coleta de informações da educação\
+    \ básica e a mais importante pesquisa estatística educacional brasileira. É coordenado\
+    \ pelo Inep e realizado em regime de colaboração entre as secretarias estaduais\
+    \ e municipais de educação e com a participação de todas as escolas públicas e\
+    \ privadas do país.\r\n\r\nEle abrange as diferentes etapas e modalidades da educação\
+    \ básica e profissional:\r\n- Ensino regular (educação infantil, ensino fundamental\
+    \ e médio);\r\n- Educação especial – modalidade substitutiva;\r\n- Educação de\
+    \ Jovens e Adultos (EJA);\r\n- Educação profissional (cursos técnicos e cursos\
+    \ de formação inicial continuada ou qualificação profissional).\r\n\r\nA coleta\
+    \ de dados das escolas tem caráter declaratório e é dividida em duas etapas. A\
+    \ primeira etapa consiste no preenchimento da Matrícula Inicial, quando ocorre\
+    \ a coleta de informações sobre os estabelecimentos de ensino, gestores, turmas,\
+    \ alunos e profissionais escolares em sala de aula. A segunda etapa ocorre com\
+    \ o preenchimento de informações sobre a Situação do Aluno, e considera os dados\
+    \ sobre o movimento e rendimento escolar dos alunos, ao final do ano letivo."
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
@@ -38,14 +54,6 @@ tags:
     - indicadores educacionais
     - indicadores socioeconomicos
 
-# Url completa do CKAN já contendo o dataset-id
-# Exemplo: https://basedosdados.org/dataset/<dataset-id>
-ckan_url:
-
-# Url completa do Github já contendo o dataset_id
-# Exemplo: https://github.com/basedosdados/mais/tree/master/bases/<dataset_id>
-github_url:
-
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.
-metadata_modified: '2022-02-04T17:46:01.704919'
+metadata_modified: '2022-02-22T12:02:09.386344'
