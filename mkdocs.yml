@@ -71,7 +71,7 @@ nav:
 markdown_extensions:
   - admonition
   - pymdownx.details
-  - mkdocs-click
+  - mkdocs_click
   - attr_list
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji

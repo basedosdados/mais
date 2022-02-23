@@ -1,10 +1,55 @@
 # Linha de comando (CLI)
 
-::: mkdocs_click
-    :module: python-package.basedosdados.cli.cli
-    :command: dataset
-    :depth: 2
+::: mkdocs-click
+    :module: basedosdados.cli.cli
+    :command: cli_config
+    :depth: 1
     :style: table
 
-<!-- ::: mkdocs-click
-    :module: blablabla -->
+::: mkdocs-click
+    :module: basedosdados.cli.cli
+    :command: cli_dataset
+    :depth: 1
+    :style: table
+
+::: mkdocs-click
+    :module: basedosdados.cli.cli
+    :command: cli_download
+    :depth: 1
+    :style: table
+
+::: mkdocs-click
+    :module: basedosdados.cli.cli
+    :command: cli_get
+    :depth: 1
+    :style: table
+
+::: mkdocs-click
+    :module: basedosdados.cli.cli
+    :command: cli_list
+    :depth: 1
+    :style: table
+
+::: mkdocs-click
+    :module: basedosdados.cli.cli
+    :command: cli_metadata
+    :depth: 1
+    :style: table
+
+::: mkdocs-click
+    :module: basedosdados.cli.cli
+    :command: cli_reauth
+    :depth: 1
+    :style: table
+
+::: mkdocs-click
+    :module: basedosdados.cli.cli
+    :command: cli_storage
+    :depth: 1
+    :style: table
+
+::: mkdocs-click
+    :module: basedosdados.cli.cli
+    :command: cli_table
+    :depth: 1
+    :style: table
