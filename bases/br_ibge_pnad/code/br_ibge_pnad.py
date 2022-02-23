@@ -1,19 +1,30 @@
 #--------------------#
-# path 
+# setup
 #--------------------#
+
+global path_dados
+global path_credenciais
 
 path = "/content/gdrive/MyDrive/Base dos Dados/Dados/" 
-path_dados = path + "Bases/br_ibge_pnad/"
 
-#--------------------#
-# pacotes
-#--------------------#
+path_dados       = path + "Bases/br_ibge_pnad/"
+path_credenciais = path + "Credenciais/basedosdados-colab/"
 
 !pip install unidecode
 import unidecode as un
 
 import pandas as pd
 import numpy as np
+import os
+import glob
+
+from google.colab import drive
+drive.mount('/content/gdrive')
+!cp -r "{path_credenciais}" "/root/.basedosdados/"
+
+#--------------------#
+# listas
+#--------------------#
 
 #cria pastas ano e UF 
 
@@ -73,14 +84,14 @@ list_rename = {
              'parede':'tipo_parede',
              'cobertura':'tipo_cobertura',
              'agua_rede':'possui_agua_rede',
-             'esgoto':'tipo_esgoto',
+             'esgoto'   :'tipo_esgoto',
              'sanit_excl':'possui_sanitario_exclusivo',
              'lixo':'lixo_coletado',
              'ilum_eletr':'possui_iluminacao_eletrica',
              'comodos':'quantidade_comodos',
              'dormit':'quantidade_dormitorios',
              'sanit':'possui_sanitario',
-             'posse_dom':'posse_domocilio',
+             'posse_dom':'posse_domicilio',
              'filtro':'possui_filtro',
              'fogao':'possui_fogao',
              'geladeira':'possui_geladeira',
@@ -107,7 +118,7 @@ list_rename = {
              'idade':'idade',
              'ler_escrever':'sabe_ler_escrever',
              'serie_freq':'serie_frequentada',
-             'grau_freq':'grau_frequentada',
+             'grau_freq':'grau_frequentado',
              'serie_nao_freq':'ultima_seria_frequentada',
              'grau_nao_freq':'ultimo_grau_frequentado',
              'tinha_outro_trab':'tinha_outro_trabalho',
@@ -187,7 +198,7 @@ list_ordem = ['ano',
 'quantidade_comodos',
 'quantidade_dormitorios',
 'possui_sanitario',
-'posse_domocilio',
+'posse_domicilio',
 'possui_filtro',
 'possui_fogao',
 'possui_geladeira',
@@ -214,7 +225,7 @@ list_ordem = ['ano',
 'idade',
 'sabe_ler_escrever',
 'serie_frequentada',
-'grau_frequentada',
+'grau_frequentado',
 'ultima_seria_frequentada',
 'ultimo_grau_frequentado',
 'tinha_outro_trabalho',
@@ -270,18 +281,14 @@ list_ordem = ['ano',
 'rendas_outras_deflacionado']
 
 #--------------------#
-# cria particoes
+# tratamento e output
 #--------------------#
 
 # for i in list_anos:  
 #   for uf in ufs:
 #     directory = path_dados + 'output/microdados_compatibilizado_datazoom/ano={}/sigla_uf={}'.format(i, uf)
 #     if not os.path.exists(directory):
-#       os.makedirs(directory)      
-
-#--------------------#
-# tratamento
-#--------------------#
+#       os.makedirs(directory)
 
 dfs1 = []
 
@@ -297,4 +304,4 @@ for ano in list_anos:
       df_partition = df[df['sigla_uf'] == uf]
       df_partition.drop(['sigla_uf', 'ano'], axis=1, inplace=True)
       partition_path = path_dados + 'output/microdados_compatibilizado_datazoom/ano={}/sigla_uf={}/microdados_dz.csv'.format(ano,uf)
-      df_partition.to_csv(partition_path, index=False, encoding='utf-8', na_rep='', float_format= '%.0f')
+      df_partition.to_csv(partition_path, index=False, encoding='utf-8', na_rep='',  float_format='%.0f')
