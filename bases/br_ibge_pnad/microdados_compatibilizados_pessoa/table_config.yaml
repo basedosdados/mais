@@ -25,10 +25,11 @@ temporal_coverage:
     - 1981(1)2015
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: one_year
+update_frequency: unique
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
+    - entity: person
 
 last_updated:
     metadata:
