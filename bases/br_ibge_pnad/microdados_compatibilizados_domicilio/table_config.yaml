@@ -8,7 +8,7 @@ table_id: microdados_compatibilizados_domicilio
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Microdados da PNAD a nível de domicílio 
+description: Microdados da PNAD a nível de domicílio
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
@@ -62,7 +62,6 @@ data_cleaned_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: Tratamento e compatibilização feitos pelo pacote "datazoom_pnad" no Stata. E, posteriormente, adicionado ao padrão da Base dos Dados.
-
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url:
@@ -134,21 +133,6 @@ columns:
       observations:
       is_in_staging: true
       is_partition: true
-    - name: id_uf
-      bigquery_type: string
-      description: ID Unidade da Federação - IBGE
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: uf
-          column_name: id_uf
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: id_regiao
       bigquery_type: string
       description: ID da Região - IBGE
@@ -164,16 +148,16 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: id_regiao_metropolitana
+    - name: id_uf
       bigquery_type: string
-      description: ID da Região Metropolitana
+      description: ID Unidade da Federação - IBGE
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
-          table_id: id_regiao_metropolitana
-          column_name: id_regiao_metropolitana
+          table_id: uf
+          column_name: id_uf
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -182,6 +166,21 @@ columns:
     - name: id_domicilio
       bigquery_type: string
       description: Número de identificação do domicílio
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regiao_metropolitana
+      bigquery_type: int64
+      description: Região Metropolitana (0 = Não e 1 = Sim)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no

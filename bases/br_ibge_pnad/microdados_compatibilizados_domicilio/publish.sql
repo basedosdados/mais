@@ -20,11 +20,11 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_ibge_pnad.microdados_compatibilizados_domicilio AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(id_uf AS STRING) id_uf,
 SAFE_CAST(id_regiao AS STRING) id_regiao,
+SAFE_CAST(id_uf AS STRING) id_uf,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_regiao_metropolitana AS STRING) id_regiao_metropolitana,
 SAFE_CAST(id_domicilio AS STRING) id_domicilio,
+SAFE_CAST(regiao_metropolitana AS INT64) regiao_metropolitana,
 SAFE_CAST(zona_urbana AS STRING) zona_urbana,
 SAFE_CAST(tipo_zona_domicilio AS STRING) tipo_zona_domicilio,
 SAFE_CAST(total_pessoas AS INT64) total_pessoas,

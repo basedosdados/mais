@@ -49,4 +49,4 @@ Tratamento e compatibilização feitos pelo pacote "datazoom_pnad" no Stata. E, 
 
 Frequencia de Atualização
 -------------------------
-one_year
+unique
