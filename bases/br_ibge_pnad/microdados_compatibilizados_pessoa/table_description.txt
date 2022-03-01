@@ -1,4 +1,4 @@
-Microdados da Pesquisa Nacional por Amostra de Domicílios - PNAD.
+Microdados da PNAD a nível de pessoa
 
 Para saber mais acesse:
 Website: 
@@ -14,8 +14,8 @@ Código:
 Email: crislanealves@basedosdados.org
 Tratado por
 -----------
-Nome: Crislane Alves
-Email: crislanealves@basedosdados.org
+Nome: Ricardo Dahis
+Email: rdahis@basedosdados.org
 
 
 
@@ -43,10 +43,10 @@ Cobertura Espacial
 
 Tratamento
 ----------
-ratamento e compatibilização feitos pelo pacote "datazoom_pnad" no Stata. E, posteriormente, adicionado ao padrão da Base dos Dados.
+Tratamento e compatibilização feitos pelo pacote "datazoom_pnad" no Stata. E, posteriormente, adicionado ao padrão da Base dos Dados.
 
 
 
 Frequencia de Atualização
 -------------------------
-one_year
+unique

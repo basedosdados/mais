@@ -20,7 +20,7 @@ spatial_coverage:
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 
+temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -168,4 +168,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-02-18T02:19:58.763555'
+metadata_modified: '2022-02-23T13:11:26.721317'
