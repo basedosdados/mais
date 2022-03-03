@@ -52,7 +52,7 @@ class Table(Base):
     def _is_partitioned(self):
         ## check if the table are partitioned, need the split because of a change in the type of partitions in pydantic
         partitions = self.table_config["partitions"]
-        if partitions is None:
+        if not partitions:
             return False
 
         elif isinstance(partitions, list):
@@ -703,7 +703,6 @@ class Table(Base):
         )
 
         table = bigquery.Table(self.table_full_name["staging"])
-
         table.external_data_configuration = Datatype(
             self, source_format, "staging", partitioned=self._is_partitioned()
         ).external_config
