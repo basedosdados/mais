@@ -64,7 +64,7 @@ def test_table_exists(configs):
 
     store_log(config)
 
-    assert result.sucess.values == True
+    assert result.success.values == True
 
 
 def test_table_has_no_null_column(configs):
@@ -83,8 +83,8 @@ def test_table_has_no_null_column(configs):
     assert result.empty or (result.null_percent.max() < 1)
 
 
-def test_primary_key_has_unique_values(configs):
-    config = configs["test_primary_key_has_unique_values"]
+def test_identifying_column_has_unique_values(configs):
+    config = configs["test_identifying_column_has_unique_values"]
     result = fetch_data(config)
 
     result = result.unique_percentage.values[0]

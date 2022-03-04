@@ -10,12 +10,12 @@ recursos importantes de diversos conjuntos de dados públicos**, como:
 - **Links externos**: Links com informações úteis para explorar mais
   sobre o conjunto de dados, como a fonte original e outros.
 
-!!! Info "Temos um time de Dados e voluntários(as) de todo o Brasil que ajudam a limpar e manter as tabelas tratadas BD+. [Saiba como fazer parte](/mais/colab)"
+!!! Info "Temos um time de Dados e voluntários(as) de todo o Brasil que ajudam a limpar e manter as tabelas tratadas BD+. [Saiba como fazer parte](colab_data)"
 
 ## Acessando tabelas tratadas BD+
 
 No nosso site você encontra a lista de todas as tabelas tratadas de
-cada conjunto de dados. Aprensentamos também informações importantes de todas
+cada conjunto de dados. Apresentamos também informações importantes de todas
 as tabelas, como a lista de colunas, cobertura temporal, periodicidade, entre
 outras informações. Você pode consultar os dados das tabelas via:
 
@@ -48,11 +48,14 @@ hover="background-color: var(--md-primary-fg-color--dark)">
 ### Pacotes
 
 Os pacotes da Base dos Dados permitem o acesso ao *datalake* público
-direto do seu computador ou ambiente de desenvolvimento. Atualmente disponíveis em:
+direto do seu computador ou ambiente de desenvolvimento. Outra forma
+de acessar os recursos da BD é diretamente pelos endpoints, conforme
+documentado em [BD Open API](https://basedosdados.org/openapi).
+Os pacotes atualmente disponíveis são:
 
+- **:octicons-terminal-16: CLI (Terminal)**
 - **:material-language-python: Python**
 - **:material-language-r: R**
-- **:octicons-terminal-16: CLI (terminal)**
 
 <a
 href="access_data_packages"

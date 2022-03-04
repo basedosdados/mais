@@ -1,10 +1,10 @@
-import shutil
-from pathlib import Path
-
 import pytest
-from basedosdados import Dataset
-from google.api_core.exceptions import Conflict
+from pathlib import Path
 from google.cloud import bigquery
+import shutil
+from google.api_core.exceptions import Conflict
+
+from basedosdados import Dataset
 
 DATASET_ID = "pytest"
 

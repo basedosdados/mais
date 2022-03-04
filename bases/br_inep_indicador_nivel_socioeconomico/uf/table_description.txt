@@ -1,0 +1,55 @@
+A tabela indica o  Indicador de Nível Socioeconômico (INSE)  ao nível do estado a partir das informações de posse de bens domésticos, renda e contratação de serviços pela família dos alunos e pelo nível de escolaridade de seus pais nas respostas do questionário socioeconômico de exames como SAEB e ENEM.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Lucas Moreira
+Email: lucas.moreira@basedosdados.org
+
+
+
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- sigla_uf
+
+
+
+
+Cobertura Temporal
+------------------
+- 2019
+
+
+
+
+Cobertura Espacial
+------------------
+- b
+- r
+- a
+
+
+
+
+Tratamento
+----------
+Padronização da base conforme as diretrizes da BD
+
+
+
+Frequencia de Atualização
+-------------------------
+uncertain

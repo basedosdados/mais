@@ -1,0 +1,75 @@
+Dados das grandezas de energia armazenada em periodicidade diária por subsistemas.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Crislane Alves
+Código: 
+Email: crislanealves@basedosdados.org
+Tratado por
+-----------
+Nome: Bruno Mioto
+Código: https://github.com/brunomioto/reservatoriosBR
+Website: brunomioto.com.br
+Email: brunomioto97@gmail.com
+
+
+
+
+Colunas identificando linhas unicamente
+-------------------
+- data
+- subsistema
+
+
+
+
+Cobertura Temporal
+------------------
+- 2000
+- 2001
+- 2002
+- 2003
+- 2004
+- 2005
+- 2006
+- 2007
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+
+
+
+Cobertura Espacial
+------------------
+
+
+
+
+Tratamento
+----------
+Limpeza para consistência
+
+
+
+Frequencia de Atualização
+-------------------------
+day

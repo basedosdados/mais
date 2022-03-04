@@ -1,69 +1,36 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: ncm_exportacao # AUTO GENERATED
-dataset_id: br_me_comex_stat # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-me-comex-stat # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_comex_stat # AUTO GENERATED
+dataset_id: br_me_comex_stat
 
-version: v1.0
-
-last_updated: 2021-03-10 # AUTO GENERATED
+table_id: ncm_exportacao
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    Base de dados detalhada de exportação por NCM.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: "Base de dados detalhada de exportação por NCM.\n\nOs arquivos auxiliares\
+    \ com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.\n"
 
-    Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
+# A máxima unidade espacial que a tabela cobre.
+spatial_coverage: bra
 
-# Quem está completando esse arquivo config?
-published_by:
-    name: Ricardo Dahis
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_comex_stat/code # REQUIRED
-    website: www.ricardodahis.com
-    email: rdahis@basedosdados.org
+# Anos cobertos pela tabela.
+temporal_coverage: []
 
-# Qual organização/departamento/pessoa tratou os dados?
-# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
-# Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: Ricardo Dahis
-    code_url: <onde encontrar código de tratamento>
-    website: www.ricardodahis.com
-    email: rdahis@basedosdados.org
+# A unidade temporal com qual a tabela é atualizada.
+update_frequency: month
 
-# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    - Limpeza simples dos dados.
+# Entidade representada por cada linha.
+entity:
+    - country
+    - state
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: mes
+# A unidade temporal representada por cada linha.
+time_unit:
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - categoria NCM
-    - tipo de unidade
-    - pais
-    - unidade da federação
-    - via de transporte
-    - urf
-    - ano
-    - mes
-
-# Quais colunas identificam uma linha unicamente?
+# O conjunto mínimo de colunas identificando cada linha unicamente.
 # Preencha com os nomes de colunas. Ex: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
+identifying_columns:
     - id_ncm
     - id_unidade
     - id_pais
@@ -73,30 +40,59 @@ primary_keys:
     - ano
     - mes
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - brasil
+last_updated:
+    metadata:
+    data:
+    release:
 
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
-    - 1997-2021
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Ricardo Dahis
+    email: rdahis@basedosdados.org
+    github_user:
+    website: www.ricardodahis.com
+    ckan_user:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Ricardo Dahis
+    email: rdahis@basedosdados.org
+    github_user:
+    ckan_user:
+    website: www.ricardodahis.com
+    code_url:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: "- Limpeza simples dos dados.\n"
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+covered_by_dictionary:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED  
-    - ano  
-    - mes
+partitions: ano, mes
+
+bdm_file_size: 307803676
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -106,70 +102,149 @@ partitions: # REQUIRED
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: id_ncm
-        description: ID Produto - Nomenclatura Comum do Mercosul
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_unidade
-        description: ID Unidade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_pais
-        description: ID País
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sigla_uf_ncm
-        description: Sigla da Unidade da Federação - Nomenclatura Comum do Mercosul
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_via
-        description: ID Via de Transporte
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_urf
-        description: ID da URF de embarque/desembarque
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: quantidade_estatistica
-        description: Quantidade Estatística
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: peso_liquido_kg
-        description: Peso Líquido (kg)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: valor_fob_dolar
-        description: Valor Livre a Bordo (dólar)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: mes
-        description: Mês
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
+columns:
+    - name: id_ncm
+      bigquery_type:
+      description: ID Produto - Nomenclatura Comum do Mercosul
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: id_unidade
+      bigquery_type:
+      description: ID Unidade
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: id_pais
+      bigquery_type:
+      description: ID País
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf_ncm
+      bigquery_type:
+      description: Sigla da Unidade da Federação - Nomenclatura Comum do Mercosul
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: id_via
+      bigquery_type:
+      description: ID Via de Transporte
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: id_urf
+      bigquery_type:
+      description: ID da URF de embarque/desembarque
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_estatistica
+      bigquery_type:
+      description: Quantidade Estatística
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: peso_liquido_kg
+      bigquery_type:
+      description: Peso Líquido (kg)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_fob_dolar
+      bigquery_type:
+      description: Valor Livre a Bordo (dólar)
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: false
+    - name: ano
+      bigquery_type:
+      description: Ano
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: true
+    - name: mes
+      bigquery_type:
+      description: Mês
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      is_in_staging: true
+      is_partition: true
+
+metadata_modified: '2021-09-12T23:20:58.852751'

@@ -29,79 +29,79 @@ Website: {{ published_by.website }}
 Email: {{ published_by.email }}
 {%- endcall -%}
 
+{% if data_cleaned_by is defined %}
 Tratado por
 -----------
-Nome: {{ treated_by.name -}}
-{% call input(treated_by.code_url) %}
-Código: {{ treated_by.code_url }}
+Nome: {{ data_cleaned_by.name -}}
+{% call input(data_cleaned_by.code_url) %}
+Código: {{ data_cleaned_by.code_url }}
 {%- endcall -%}
-{% call input(treated_by.website) %}
-Website: {{ treated_by.website }}
+{% call input(data_cleaned_by.website) %}
+Website: {{ data_cleaned_by.website }}
 {%- endcall -%}
-{% call input(treated_by.email) %}
-Email: {{ treated_by.email }}
+{% call input(data_cleaned_by.email) %}
+Email: {{ data_cleaned_by.email }}
 {%- endcall %}
+{% endif %}
+
 
 {% call input(partitions) -%}
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
-{% if (partitions is not none) -%}
-{% for partition in partitions -%}
+{% if (partitions.split(',') is not none) -%}
+{% for partition in partitions.split(',') -%}
 - {{ partition }}
 {% endfor -%}
 {%- endif %}
 {% endcall -%}
 
-{% call input(observation_level[0]) -%}
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-{% if (observation_level is not none) -%}
-{% for partition in observation_level -%}
-- {{ partition }}
-{% endfor -%}
-{%- endif %}
-{% endcall -%}
-
-{% call input(primary_keys[0]) -%}
+{% if identifying_columns is defined %}
+{% call input(identifying_columns[0]) -%}
 Colunas identificando linhas unicamente
 -------------------
-{% if (primary_keys is not none) -%}
-{% for partition in primary_keys -%}
+{% if (identifying_columns is not none) -%}
+{% for partition in identifying_columns -%}
 - {{ partition }}
 {% endfor -%}
 {%- endif %}
 {% endcall -%}
+{% endif %}
 
-{% call input(coverage_time[0]) -%}
+{% if temporal_coverage is defined %}
+{% call input(temporal_coverage[0]) -%}
 Cobertura Temporal
 ------------------
-{% if (coverage_time is not none) -%}
-{% for partition in coverage_time -%}
+{% if (temporal_coverage is not none) -%}
+{% for partition in temporal_coverage -%}
 - {{ partition }}
 {% endfor -%}
 {%- endif %}
 {% endcall -%}
+{% endif %}
 
-{% call input(coverage_geo[0]) -%}
+{% if spatial_coverage is defined %}
+{% call input(spatial_coverage[0]) -%}
 Cobertura Espacial
 ------------------
-{% if (coverage_geo is not none) -%}
-{% for partition in coverage_geo -%}
+{% if (spatial_coverage is not none) -%}
+{% for partition in spatial_coverage -%}
 - {{ partition }}
 {% endfor -%}
 {%- endif %}
 {% endcall -%}
+{% endif %}
 
-{% call input(treatment_description) -%}
+{% if data_cleaning_description is defined %}
+{% call input(data_cleaning_description) -%}
 Tratamento
 ----------
-{{ treatment_description }}
+{{ data_cleaning_description }}
 {% endcall %}
+{% endif %}
 
-{%- call input(data_update_frequency) -%}
+{% if update_frequency is defined %}
+{%- call input(update_frequency) -%}
 Frequencia de Atualização
 -------------------------
-{{ data_update_frequency }}{% endcall %}
-
-
-
+{{ update_frequency }}{% endcall %}
+{% endif %}

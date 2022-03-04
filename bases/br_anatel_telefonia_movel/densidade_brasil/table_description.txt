@@ -1,0 +1,64 @@
+Total de acessos e densidade por pessoa da telefonia móvel no Brasil por mês e ano desde fevereiro de 2005
+
+
+Para saber mais acesse:
+Website: https://basedosdados.org/dataset/br-anatel-telefonia-movel
+Github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
+Email: lucas.moreira@basedosdados.orgTratado por
+-----------
+Nome: Lucas Nascimento Moreira
+Código: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_telefonia_movel/code
+Email: lucas.moreira@basedosdados.org
+
+Nível da Observação (i.e. a granularidade da linha)
+-------------------
+- ano
+- mes
+
+Colunas identificando linhas unicamente
+-------------------
+- ano
+- mes
+
+Cobertura Temporal
+------------------
+- 2005
+- 2006
+- 2007
+- 2008
+- 2009
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+Cobertura Espacial
+------------------
+- brasil
+
+Tratamento
+----------
+- Agrupamento do total de acessos a nível nacional;
+- Merge com a base de densidade 
+
+Frequencia de Atualização
+-------------------------
+mes
+
+

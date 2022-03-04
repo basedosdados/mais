@@ -1,0 +1,36 @@
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list=
+organization: br-ons
+
+dataset_id: br_ons_energia_armazenada
+
+title: Reservatório de Energia Armazenada 
+
+# exemplo: descrição e anotações úteis sobre os dados.
+description:
+    Dados das grandezas de energia armazenada (EAR) em periodicidade diária. A Energia Armazenada (EAR) representa a energia associada ao volume de água disponível nos reservatórios que pode ser convertido em geração na própria usina e em todas as usinas à jusante na cascata. A grandeza de EAR leva em conta nível verificado nos reservatórios na data de referência. 
+
+# Quais grupos caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+groups:
+  - energia
+  - meio-ambiente
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - agua
+    - apagao
+    - chuva
+    - usinas
+
+ckan_url:
+
+github_url:
+
+metadata_modified:

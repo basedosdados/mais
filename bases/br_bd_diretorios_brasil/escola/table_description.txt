@@ -1,47 +1,53 @@
-A tabela contém uma compatibilização de códigos nacionais e estaduais e nomes de escolas.
-
+Tabela contendo informações de escolas originais do Catálogo de Escolas do Inep.
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-bd-diretorios-brasil
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Matheus Valentim de Barros
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
-Website: https://github.com/mavalentim
-Email: mavalentim.b@gmail.comTratado por
+Nome: Ricardo Dahis
+Código: 
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+Tratado por
 -----------
-Nome: None
+Nome: Ricardo Dahis
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- escola
+
+
 
 Colunas identificando linhas unicamente
 -------------------
 - id_escola
 
+
+
+
 Cobertura Temporal
 ------------------
-- 2019
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- b
+- r
+- a
+
+
+
 
 Tratamento
 ----------
-Juntei dados de diferentes bases para criar um diretório de compatibilização. Em maior detalhe, peguei, através da BigQuery da Base dos Dados, a identificação
-de todas as escolas, o id_escola. Para conseguir tal, acessei a base do INEP que disponibiliza IDEB a nível escolar. Com esses valores, fiz um left_join 
-com os dados tratados provenientes da Secretaria de Educação de São Paulo. O join foi feito pela id_escola, variável que identifica um código para cada escola 
-a nível nacional.
+Limpamos o Catálogo de Escolas do Inep e adicionamos a coluna id_municipio.
 
-Frequencia de Atualização
--------------------------
-1 ano
+
 
 
