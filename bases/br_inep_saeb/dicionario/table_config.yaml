@@ -1,4 +1,6 @@
 
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_inep_saeb
 
 table_id: dicionario
@@ -7,37 +9,25 @@ table_id: dicionario
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Dicionário da tabela de proficiência do SAEB para os anos de 1995 a 2019
+description: Dicionário para as tabelas do SAEB
 
 # A máxima unidade espacial que a tabela cobre.
-spatial_coverage:
+# Exemplo:
+#   - continent: south_america
+#     country: br
+spatial_coverage: 
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
-temporal_coverage:
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage: 1995(2)2019
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency:
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity:
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit:
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns:
-    - id_tabela
-    - coluna
-    - chave
-    - cobertura_temporal
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
 
 last_updated:
     metadata:
@@ -46,15 +36,15 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.0
+version: v1.1.2
 
 # Quem está preenchendo esses metadados?
 published_by:
     name: Lucas Moreira
     email: lucas.moreira@basedosdados.org
     github_user: lucasnascm
-    website:
     ckan_user: lucasnascm
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -65,10 +55,17 @@ data_cleaned_by:
     github_user: lucasnascm
     ckan_user: lucasnascm
     website:
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Compatibizaliação de todos os dicionários da série temporal do SAEB
+data_cleaning_description: Compatibilização dos dicionários
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: 
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -78,10 +75,6 @@ auxiliary_files_url:
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
-
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary:
 
 source_bucket_name: basedosdados-dev
 
@@ -95,8 +88,6 @@ project_id_staging: basedosdados-dev
 # Se não houver partições, não modifique abaixo.
 partitions:
 
-bdm_file_size:
-
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
@@ -108,68 +99,73 @@ bdm_file_size:
 columns:
     - name: id_tabela
       bigquery_type: string
-      description: ID Tabela
+      description: ID da tabela
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
-      is_in_staging: yes
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
       is_partition: no
     - name: coluna
       bigquery_type: string
       description: Coluna
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
-      is_in_staging: yes
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
       is_partition: no
     - name: chave
       bigquery_type: string
       description: Chave
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
-      is_in_staging: yes
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
       is_partition: no
     - name: cobertura_temporal
       bigquery_type: string
       description: Cobertura Temporal
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
-      is_in_staging: yes
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
       is_partition: no
     - name: valor
       bigquery_type: string
       description: Valor
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
-      is_in_staging: yes
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
       is_partition: no
 
 metadata_modified:
