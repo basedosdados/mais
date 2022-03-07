@@ -9,7 +9,7 @@ table_id: ano
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Variação anual do custo de vida (ICV) na cidade de São Paulo 
+description: Variação anual do custo de vida (ICV) na cidade de São Paulo
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
@@ -64,7 +64,8 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: 'Coleta dos dados a partir da API ipeadatapy. Exclusão e renomeação de variáveis segundo diretrizes da BD. Junção dos dataframes'
+data_cleaning_description: Coleta dos dados a partir da API ipeadatapy. Exclusão e
+    renomeação de variáveis segundo diretrizes da BD. Junção dos dataframes
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sp_saopaulo_dieese_icv/code
@@ -135,4 +136,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-02-21T18:45:02.715646'
+metadata_modified: '2022-02-23T13:31:40.939906'
