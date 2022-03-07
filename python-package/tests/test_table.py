@@ -40,7 +40,7 @@ def sample_data(metadatadir):
 @pytest.fixture
 def data_path(sample_data):
     return sample_data / "municipio.csv"
-    
+
 
 def check_files(folder):
 
@@ -220,6 +220,18 @@ def test_create_if_table_exist_replace(table, metadatadir, data_path, sample_dat
         if_table_exists="replace",
         if_storage_data_exists="pass",
         if_table_config_exists="pass",
+    )
+    assert table_exists(table, "staging")
+
+
+def table_create_all_implemented_source_format(table, path, source_format):
+    table.delete(mode="all")
+
+    table.create(
+        path=path,
+        if_storage_data_exists="pass",
+        if_table_config_exists="pass",
+        source_format=source_format,
     )
     assert table_exists(table, "staging")
 
