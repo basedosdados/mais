@@ -20,8 +20,8 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_inep_saeb.proficiencia AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_regiao AS STRING) id_regiao,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(id_escola AS STRING) id_escola,
 SAFE_CAST(rede AS STRING) rede,
