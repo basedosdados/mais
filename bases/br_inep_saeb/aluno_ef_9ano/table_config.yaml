@@ -143,7 +143,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
@@ -173,7 +173,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: area
       bigquery_type: string
       description: Área em relação ao município
@@ -188,7 +188,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mascara
       bigquery_type: string
       description: Número gerado como código de acesso aos Estabelecimentos de Ensino
@@ -206,7 +206,7 @@ columns:
       observations: Usando a combinação ANO_MASCARA + MASCARA é possível obter os
           dados estatísticos da instituição
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: ano_mascara
       bigquery_type: int64
       description: Ano da Máscara
@@ -221,7 +221,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: id_escola
       bigquery_type: string
       description: ID escola - INEP
@@ -236,7 +236,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: rede
       bigquery_type: string
       description: Rede Escolar
@@ -251,7 +251,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: localizacao
       bigquery_type: string
       description: Localização da escola
@@ -266,7 +266,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: id_turma
       bigquery_type: string
       description: ID Turma
@@ -281,7 +281,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: turno
       bigquery_type: string
       description: Turno
@@ -296,7 +296,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: serie
       bigquery_type: int64
       description: Série
@@ -311,7 +311,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: id_aluno
       bigquery_type: string
       description: ID Aluno
@@ -326,7 +326,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: situacao_censo
       bigquery_type: int64
       description: Indicador de compatibilização com o Censo Escolar
@@ -341,7 +341,7 @@ columns:
       has_sensitive_data: yes
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: disciplina
       bigquery_type: string
       description: Disciplina
@@ -356,7 +356,7 @@ columns:
       has_sensitive_data: yes
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: preenchimento_caderno
       bigquery_type: int64
       description: Indicador de preenchimento da prova
@@ -371,7 +371,7 @@ columns:
       has_sensitive_data: yes
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: presenca
       bigquery_type: int64
       description: Indicador de presença na prova
@@ -386,7 +386,7 @@ columns:
       has_sensitive_data: yes
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: caderno
       bigquery_type: string
       description: Número do caderno de prova
@@ -401,7 +401,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: bloco_1
       bigquery_type: string
       description: Identificador do Bloco 1
@@ -416,7 +416,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: bloco_2
       bigquery_type: string
       description: Identificador do Bloco 2
@@ -431,7 +431,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: bloco_3
       bigquery_type: string
       description: Identificador do Bloco 3
@@ -446,7 +446,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: bloco_1_aberto
       bigquery_type: string
       description: Identificador do Bloco Aberto 1
@@ -461,7 +461,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: bloco_2_aberto
       bigquery_type: string
       description: Identificador do Bloco Aberto 2
@@ -476,7 +476,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: respostas_bloco_1
       bigquery_type: string
       description: Respostas do aluno ao Bloco 1 da prova
@@ -491,7 +491,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: respostas_bloco_2
       bigquery_type: string
       description: Respostas do aluno ao Bloco 2 da prova
@@ -506,7 +506,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: respostas_bloco_3
       bigquery_type: string
       description: Respostas do aluno ao Bloco 3 da prova
@@ -521,7 +521,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: conceito_q1
       bigquery_type: string
       description: Conceito questão 1
@@ -536,7 +536,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: conceito_q2
       bigquery_type: string
       description: Conceito questão 2
@@ -551,7 +551,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: gabarito_bloco_1
       bigquery_type: string
       description: Gabarito do Bloco 1 do caderno de provas
@@ -566,7 +566,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: gabarito_bloco_2
       bigquery_type: string
       description: Gabarito do Bloco 2 do caderno de provas
@@ -581,7 +581,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: gabarito_bloco_3
       bigquery_type: string
       description: Gabarito do Bloco 3 do caderno de provas
@@ -596,7 +596,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: indicador_proficiencia
       bigquery_type: int64
       description: Indicador para cálculo da proficiência (no mínimo três itens respondidos
@@ -612,7 +612,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: indicador_prova_brasil
       bigquery_type: int64
       description: Indicador de participação na Prova Brasil
@@ -627,7 +627,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: amostra
       bigquery_type: int64
       description: Indicador de participação da amostra
@@ -642,7 +642,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: estrato
       bigquery_type: int64
       description: Descrição dos estratos
@@ -657,7 +657,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: peso_escola
       bigquery_type: float64
       description: Peso da escola
@@ -672,7 +672,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: peso_turma
       bigquery_type: float64
       description: Peso da turma
@@ -687,7 +687,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: peso_aluno_turma
       bigquery_type: float64
       description: Peso do aluno na turma
@@ -702,7 +702,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: peso_aluno
       bigquery_type: float64
       description: Peso do aluno
@@ -717,7 +717,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: proficiencia
       bigquery_type: float64
       description: Proficiência do aluno na escala única do SAEB com média = 0 e desvio
@@ -733,7 +733,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: erro_padrao
       bigquery_type: float64
       description: Erro padrão da proficiência
@@ -748,7 +748,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: proficiencia_saeb
       bigquery_type: float64
       description: Proficiência do aluno na escala única do SAEB com média = 750 e
@@ -764,7 +764,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: erro_padrao_saeb
       bigquery_type: float64
       description: Erro padrão da proficiência transformada
@@ -779,7 +779,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: desempenho_aluno
       bigquery_type: string
       description: Estágio de desempenho
@@ -795,7 +795,7 @@ columns:
       observations: Criada com base em critérios estabelecidos pela organização Todos
           Pela Educação para níveis de aprendizagem em língua portuguesa e matemática
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: preenchimento_questionario
       bigquery_type: int64
       description: Indicador de preenchimento do questionário
@@ -810,7 +810,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: sexo
       bigquery_type: string
       description: Sexo
@@ -825,7 +825,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: raca_cor
       bigquery_type: string
       description: Raça ou Cor
@@ -840,7 +840,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mes_nascimento
       bigquery_type: int64
       description: Mês de nascimento
@@ -855,7 +855,7 @@ columns:
       has_sensitive_data: no
       observations: Transformação das opções do dicionário em valor int64
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: ano_nascimento
       bigquery_type: int64
       description: Ano de nascimento
@@ -870,7 +870,7 @@ columns:
       has_sensitive_data: no
       observations: Transformação das opções do dicionário em valor int64
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: idade
       bigquery_type: int64
       description: Idade
@@ -885,7 +885,7 @@ columns:
       has_sensitive_data: no
       observations: Calculada pelo ano do SAEB menos a variável ano_nascimento
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: faixa_etaria
       bigquery_type: string
       description: Faixa etária para alunos com 19 anos ou mais ou com 12 anos ou
@@ -902,7 +902,7 @@ columns:
       observations: Opção que contempla alunos de 19 anos ou mais e 12 anos ou menos
           com base na transformação do dicionário para anos de nascimento
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: estado_civil
       bigquery_type: string
       description: Estado civil
@@ -917,7 +917,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_filhos
       bigquery_type: string
       description: Quantos filhos você tem?
@@ -932,7 +932,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: com_quem_mora
       bigquery_type: string
       description: Você mora com quem?
@@ -947,7 +947,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mora_mae
       bigquery_type: string
       description: Normalmente, quem mora na sua casa? - Mãe (mães ou madrasta).
@@ -962,7 +962,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mora_pai
       bigquery_type: string
       description: Normalmente, quem mora na sua casa? - Pai (pais ou padrasto).
@@ -977,7 +977,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mora_irmaos
       bigquery_type: string
       description: Normalmente, quem mora na sua casa? - Irmão(s) ou irmã(s).
@@ -992,7 +992,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mora_avos
       bigquery_type: string
       description: Normalmente, quem mora na sua casa? - Avô ou avó.
@@ -1007,7 +1007,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mora_conjuge
       bigquery_type: string
       description: Normalmente, quem mora na sua casa? - Sua esposa/seu marido
@@ -1022,7 +1022,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mora_filhos
       bigquery_type: string
       description: Normalmente, quem mora na sua casa? - Suas filhas/seus filhos
@@ -1037,7 +1037,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mora_outros_parentes
       bigquery_type: string
       description: Normalmente, quem mora na sua casa? - Outros parentes (tios, primos
@@ -1053,7 +1053,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mora_amigos
       bigquery_type: string
       description: Normalmente, quem mora na sua casa? - Amigos
@@ -1068,7 +1068,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: idioma_domicilio
       bigquery_type: string
       description: Qual língua você fala com mais frequência em sua casa?
@@ -1083,7 +1083,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: quantidade_pessoas_domicilio
       bigquery_type: string
       description: Incluindo você, quantas pessoas vivem atualmente em sua casa?
@@ -1098,7 +1098,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: quantidade_pessoas_despesas_domicilio
       bigquery_type: string
       description: Quantas pessoas ajudam a pagar as despesas da casa?
@@ -1113,7 +1113,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: situacao_economica
       bigquery_type: string
       description: Como é sua situação econômica?
@@ -1128,7 +1128,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_trabalho
       bigquery_type: string
       description: Você trabalha fora de casa? Se sim, qual a carga horária?
@@ -1143,7 +1143,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: turma_bolsa_escola
       bigquery_type: string
       description: A turma tem aluno Bolsa Escola?
@@ -1158,7 +1158,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: aluno_bolsa_escola
       bigquery_type: string
       description: O aluno tem Bolsa Escola?
@@ -1173,7 +1173,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_moradia_rua_urbanizada
       bigquery_type: string
       description: 'Na região que você mora tem: - Rua pavimentada (asfalto ou calçamento).'
@@ -1188,7 +1188,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_agua_encanada
       bigquery_type: string
       description: 'Na região que você mora tem: - Água tratada da rua/Água encanada'
@@ -1203,7 +1203,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_eletrecidade
       bigquery_type: string
       description: 'Na região que você mora tem: - Iluminação na rua.'
@@ -1218,7 +1218,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_eletrodomestico_sem_eletricidade
       bigquery_type: string
       description: Não tem eletricidade, mas tem eletrodomestico em casa?
@@ -1233,7 +1233,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_casa_dormitorio
       bigquery_type: string
       description: 'Na sua casa tem:  - Quartos para dormir.'
@@ -1248,7 +1248,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_casa_quarto_individual
       bigquery_type: string
       description: 'Na sua casa tem:  - Um quarto só seu.'
@@ -1263,7 +1263,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_casa_cozinha
       bigquery_type: string
       description: 'Na sua casa tem:  - Cozinha'
@@ -1278,7 +1278,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_casa_banheiro
       bigquery_type: string
       description: 'Na sua casa tem:  - Banheiro.'
@@ -1293,7 +1293,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_casa_sala
       bigquery_type: string
       description: 'Na sua casa tem: - Sala'
@@ -1308,7 +1308,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_automovel
       bigquery_type: string
       description: 'Na sua casa tem:  - Carro.'
@@ -1323,7 +1323,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_casa_garagem
       bigquery_type: string
       description: 'Na sua casa tem:  - Garagem'
@@ -1338,7 +1338,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_geladeira
       bigquery_type: string
       description: 'Na sua casa tem:  - Geladeira.'
@@ -1353,7 +1353,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_geladeira_freezer
       bigquery_type: string
       description: 'Na sua casa tem: - Freezer (parte da geladeira duplex).'
@@ -1368,7 +1368,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_freezer
       bigquery_type: string
       description: 'Na sua casa tem: - Freezer (independente ou segunda porta da geladeira).'
@@ -1383,7 +1383,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_microondas
       bigquery_type: string
       description: 'Na sua casa tem: - Forno de microondas.'
@@ -1398,7 +1398,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_maquina_lavar_roupa
       bigquery_type: string
       description: 'Na sua casa tem: - Máquina de lavar roupa.'
@@ -1413,7 +1413,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_aspirador_po
       bigquery_type: string
       description: 'Na sua casa tem: - Aspirador de pó.'
@@ -1428,7 +1428,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_radio
       bigquery_type: string
       description: 'Na sua casa tem: - Aparelho de rádio'
@@ -1443,7 +1443,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_tv
       bigquery_type: string
       description: 'Na sua casa tem:  - Televisão.'
@@ -1458,7 +1458,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_tv_assinatura
       bigquery_type: string
       description: 'Na sua casa tem: - Tv a cabo (Ex.:Net©, Sky© etc.).'
@@ -1473,7 +1473,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_videocassete_dvd
       bigquery_type: string
       description: 'Na sua casa tem: - Videocassete e/ou DVD'
@@ -1488,7 +1488,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_internet
       bigquery_type: string
       description: 'Na sua casa tem: - Internet/Rede Wi-Fi.'
@@ -1503,7 +1503,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_computador
       bigquery_type: string
       description: 'Na sua casa tem:  - Computador (ou notebook)'
@@ -1518,7 +1518,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_computador_sem_internet
       bigquery_type: string
       description: 'Na sua casa tem:  - Computador (ou notebook) sem internet'
@@ -1533,7 +1533,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_tablet
       bigquery_type: string
       description: 'Na sua casa tem:  - Tablet.'
@@ -1548,7 +1548,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_telefone
       bigquery_type: string
       description: 'Na sua casa tem: - Telefone residencial'
@@ -1563,7 +1563,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_celular
       bigquery_type: string
       description: 'Na sua casa tem: - Telefone celular'
@@ -1578,7 +1578,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_escrivaninha
       bigquery_type: string
       description: 'Na sua casa tem: - Mesa para estudar (ou escrivaninha).'
@@ -1593,7 +1593,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_enciclopedia
       bigquery_type: string
       description: 'Na sua casa tem:  - Enciclopédia'
@@ -1608,7 +1608,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_atlas
       bigquery_type: string
       description: 'Na sua casa tem: - Atlas'
@@ -1623,7 +1623,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_dicionario
       bigquery_type: string
       description: 'Na sua casa tem:  - Dicionário'
@@ -1638,7 +1638,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_calculadora
       bigquery_type: string
       description: 'Na sua casa tem: - Calculadora'
@@ -1653,7 +1653,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_empregada_domestica
       bigquery_type: string
       description: Na sua casa trabalha alguma empregada doméstica?
@@ -1669,7 +1669,7 @@ columns:
       observations: Em 2019, o questionário perguntava "Com que frequência sua família
           paga alguém para auxiliar nos trabalhos domésticos (faxina ou limpeza)?"
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_empregada_domestica_cinco_dias
       bigquery_type: string
       description: Em sua casa trabalha empregado(a) doméstico(a) pelo menos cinco
@@ -1685,7 +1685,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: escolaridade_mae
       bigquery_type: string
       description: Qual é a maior escolaridade da sua mãe (ou mulher responsável por
@@ -1701,7 +1701,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mae_sabe_ler_escrever
       bigquery_type: string
       description: Sua mãe, ou a mulher responsável por você, sabe ler e escrever?
@@ -1716,7 +1716,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: mae_le
       bigquery_type: string
       description: Você vê sua mãe, ou mulher responsável por você, lendo?
@@ -1731,7 +1731,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: ocupacao_mae
       bigquery_type: string
       description: Sua mãe, ou a mulher responsável por você, está trabalhando atualmente?
@@ -1746,7 +1746,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: escolaridade_pai
       bigquery_type: string
       description: Qual é a maior escolaridade de seu pai (ou homem responsável por
@@ -1762,7 +1762,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: pai_sabe_ler_escrever
       bigquery_type: string
       description: Seu pai, ou homem responsável por você, sabe ler e escrever?
@@ -1777,7 +1777,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: pai_le
       bigquery_type: string
       description: Você vê o seu pai, ou homem responsável por você, lendo?
@@ -1792,7 +1792,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: ocupacao_pai
       bigquery_type: string
       description: Seu pai, ou homem responsável por você, está trabalhando atualmente
@@ -1807,7 +1807,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: pessoa_acompanha_vida_escolar
       bigquery_type: string
       description: Quem é a pessoa que acompanha mais de perto sua vida escolar?
@@ -1822,7 +1822,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: escolaridade_pessoa
       bigquery_type: string
       description: Até que série a pessoa indicada acima estudou?
@@ -1837,7 +1837,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conhecem_diretor
       bigquery_type: string
       description: 'Seu pai ou sua mãe conhecem: - O diretor da sua escola?'
@@ -1852,7 +1852,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conhecem_professor
       bigquery_type: string
       description: 'Seu pai ou sua mãe conhecem: - Seu(sua) professor(a)?'
@@ -1867,7 +1867,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_professor_diretor
       bigquery_type: string
       description: Quantas vezes seus pais vieram a escola para conversar com professores/diretor?
@@ -1882,7 +1882,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_diretor
       bigquery_type: string
       description: Com que frequencia seus pais conversam com o diretor da escola?
@@ -1897,7 +1897,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_professor
       bigquery_type: string
       description: Com que frequencia seus pais conversam com os seus professores?
@@ -1912,7 +1912,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conhecem_amigo
       bigquery_type: string
       description: 'Seu pai ou sua mãe conhecem: - Algum amigo seu?'
@@ -1927,7 +1927,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conhecem_responsavel_amigo
       bigquery_type: string
       description: 'Seu pai ou sua mãe conhecem: - Algum pai/mãe de amigo seu?'
@@ -1942,7 +1942,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_almocam_jantam_contigo
       bigquery_type: string
       description: Seus pais ou responsáves almoçam ou jantam com você?
@@ -1957,7 +1957,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_ouvem_musica_contigo
       bigquery_type: string
       description: Seus pais ou responsáveis ouvem música com você?
@@ -1972,7 +1972,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_livros_contigo
       bigquery_type: string
       description: Seus pais ou responsáveis conversam sobre livros com você?
@@ -1987,7 +1987,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_filmes_contigo
       bigquery_type: string
       description: Seus pais ou responsáveis conversam sobre filmes com você?
@@ -2002,7 +2002,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_programas_tv_contigo
       bigquery_type: string
       description: Seus pais ou responsáveis conversam sobre programas de TV com você?
@@ -2017,7 +2017,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_amigos
       bigquery_type: string
       description: Seus pais ou responsáveis conversam com seus amigos?
@@ -2032,7 +2032,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_amigos_escola
       bigquery_type: string
       description: Seus pais ou responsáveos conversam com seus amigos/colegas de
@@ -2048,7 +2048,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_responsaveis_amigo
       bigquery_type: string
       description: Com que frequencia seus pais tem conversado com pai/mae/responsável
@@ -2064,7 +2064,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_outros_assuntos_contigo
       bigquery_type: string
       description: Com que frequencia seus pais conversam sobre outros assuntos com
@@ -2080,7 +2080,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_escola
       bigquery_type: string
       description: 'Com que frequência seus pais ou responsáveis costumam: - Conversar
@@ -2096,7 +2096,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_boletim
       bigquery_type: string
       description: Quantas vezes seus pais vieram a escola para conversar sobre seu
@@ -2112,7 +2112,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_conversam_comportamento
       bigquery_type: string
       description: Quantas vezes seus pais vieram a escola para atender a chamados
@@ -2128,7 +2128,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_cobram_realizacao_tarefa_casa
       bigquery_type: string
       description: 'Com que frequência seus pais ou responsáveis costumam: - Cobram
@@ -2144,7 +2144,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_ajudam_realizacao_tarefa_casa
       bigquery_type: string
       description: Com que frequencia seus pais ajudam a fazer lição de casa?
@@ -2159,7 +2159,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_incentivam_realizacao_licao_casa
       bigquery_type: string
       description: 'Com que frequência seus pais ou responsáveis costumam: - Incentivar
@@ -2175,7 +2175,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_incentivam_estudos
       bigquery_type: string
       description: 'Com que frequência seus pais ou responsáveis costumam: - Incentivar
@@ -2191,7 +2191,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_incentivam_leitura
       bigquery_type: string
       description: Seus pais ou responsáveis incentivam você a ler?
@@ -2206,7 +2206,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_incentivam_comparecer_aulas
       bigquery_type: string
       description: 'Com que frequência seus pais ou responsáveis costumam: - Incentivar
@@ -2222,7 +2222,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_incentivam_pontualidade
       bigquery_type: string
       description: Com que frequencia seus pais procuram fazer com que não chegue
@@ -2238,7 +2238,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_incentivam_boas_notas
       bigquery_type: string
       description: 'Com que frequência seus pais ou responsáveis costumam: - Incentivar
@@ -2254,7 +2254,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_comparecem_reuniao_pais
       bigquery_type: string
       description: 'Com que frequência seus pais ou responsáveis costumam: - Ir às
@@ -2270,7 +2270,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_participam_festas_escola
       bigquery_type: string
       description: Quantas vezes seus pais vieram a escola para festas na escola?
@@ -2285,7 +2285,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: responsaveis_participam_trabalho_voluntario
       bigquery_type: string
       description: Quantas vezes seus pais vieram a escola para trabalho voluntário?
@@ -2300,7 +2300,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: tempo_chegada_escola
       bigquery_type: string
       description: Quanto tempo você demora para chegar à sua escola?
@@ -2315,7 +2315,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: forma_chegada_escola
       bigquery_type: string
       description: Considerando a maior distância percorrida, normalmente de que forma
@@ -2331,7 +2331,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: inicio_estudos
       bigquery_type: string
       description: Quando você começou a estudar?
@@ -2346,7 +2346,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: quantos_anos_primeiro_grau
       bigquery_type: string
       description: Há quantos anos você está no 1º grau?
@@ -2361,7 +2361,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: quantos_anos_segundo_grau
       bigquery_type: string
       description: Se você está cursando o 2º grau, há quantos anos você o frequenta?
@@ -2376,7 +2376,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: idade_entrada_escola
       bigquery_type: string
       description: Com que idade você entrou na escola?
@@ -2391,7 +2391,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: quantidade_mudancas_escola
       bigquery_type: string
       description: Desde o 6º ano, quantas vezes você já mudou de escola?
@@ -2406,7 +2406,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: presenca_professor
       bigquery_type: string
       description: 'Do 6º ao 9º ano, você teve professor da disciplina:'
@@ -2421,7 +2421,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: supletivo_ef
       bigquery_type: string
       description: Voce concluiu o 1º grau no ensino supletivo?
@@ -2436,7 +2436,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: rede_ef
       bigquery_type: string
       description: A partir do sexto ano do ensino fundamental, em que tipo de escola
@@ -2452,7 +2452,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: reprovacao
       bigquery_type: string
       description: Você já foi reprovado?
@@ -2467,7 +2467,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: evasao_escolar_ate_final_ano
       bigquery_type: string
       description: Alguma vez você abandonou a escola deixando de frequentá-la até
@@ -2483,7 +2483,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: evasao_escolar_temporaria
       bigquery_type: string
       description: Você abandonou a escola durante algum tempo?
@@ -2498,7 +2498,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: motivo_evasao_escolar
       bigquery_type: string
       description: Caso você tenha deixado a escola por algum período, qual foi o
@@ -2514,7 +2514,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: faltas_aula
       bigquery_type: string
       description: Você faltou as aulas neste ano?
@@ -2529,7 +2529,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: motivo_faltas
       bigquery_type: string
       description: Qual o motivo de suas faltas neste ano?
@@ -2544,7 +2544,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: desempenho_prejudicado_falta
       bigquery_type: string
       description: O seu desempenho na disciplina é prejudicado quando você falta
@@ -2560,7 +2560,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: tempo_lazer
       bigquery_type: string
       description: 'Fora da escola em dias de aula, quanto tempo você usa para: -
@@ -2576,7 +2576,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: tipo_programacao_tv
       bigquery_type: string
       description: A que tipo de programaçaõ de televisão você mais assiste?
@@ -2591,7 +2591,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: tempo_cursos
       bigquery_type: string
       description: 'Fora da escola em dias de aula, quanto tempo você usa para: -
@@ -2607,7 +2607,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: tempo_trabalho_domestico
       bigquery_type: string
       description: 'Fora da escola em dias de aula, quanto tempo você usa para: -
@@ -2623,7 +2623,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: tempo_estudos
       bigquery_type: string
       description: 'Fora da escola em dias de aula, quanto tempo você usa para: -
@@ -2639,7 +2639,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: quantidade_livros
       bigquery_type: string
       description: Além dos livros escolares, quantos livros têm em sua casa?
@@ -2654,7 +2654,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: recebe_jornais
       bigquery_type: string
       description: Na sua casa chega jornal para ler?
@@ -2669,7 +2669,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: recebe_revistas
       bigquery_type: string
       description: Na sua casa chegam revistas de informação geral (Veja, Época)?
@@ -2684,7 +2684,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: leitura_jornais
       bigquery_type: string
       description: Leu jornais este ano?
@@ -2699,7 +2699,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: leitura_noticias
       bigquery_type: string
       description: 'Com que frequência você costuma: - Ler notícias (jornais, revistas,
@@ -2715,7 +2715,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: leitura_livros_geral
       bigquery_type: string
       description: 'Com que frequência você costuma: - Ler livros que não sejam das
@@ -2731,7 +2731,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: leitura_literatura
       bigquery_type: string
       description: Leu livros de ficção, romances este ano?
@@ -2746,7 +2746,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: leitura_literatura_infantojuvenil
       bigquery_type: string
       description: 'Com que frequência você costuma: - Ler literatura infanto-juvenil,
@@ -2762,7 +2762,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: leitura_historia_quadrinhos
       bigquery_type: string
       description: Leu ou costuma ler revistas em quadrinhos (mangás, gibis, etc.)?
@@ -2777,7 +2777,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: leitura_revistas_tematicas
       bigquery_type: string
       description: Leu revistas sobre esportes, música, automóveis, etc. esse ano?
@@ -2792,7 +2792,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: leitura_revista_comportamento
       bigquery_type: string
       description: 'Com qual frequência você lê: Revistas de comportamento, celebridades,
@@ -2808,7 +2808,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: leitura_revistas_geral
       bigquery_type: string
       description: Leu ou costuma ler revistas em geral
@@ -2823,7 +2823,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: leitura_internet
       bigquery_type: string
       description: 'Com qual frequência você lê: Notícias na internet (ex.: blog,
@@ -2839,7 +2839,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: leitura_outros_materiais
       bigquery_type: string
       description: Leu outros materiais de leitura este ano?
@@ -2854,7 +2854,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: frequenta_biblioteca
       bigquery_type: string
       description: 'Com qual frequência você costuma ir à/ao: Biblioteca.'
@@ -2869,7 +2869,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: frequenta_cinema
       bigquery_type: string
       description: 'Com qual frequência você costuma ir à/ao: Cinema.'
@@ -2884,7 +2884,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: frequenta_espetaculo_exposicao
       bigquery_type: string
       description: 'Com qual frequência você costuma ir à/ao: Espetáculo ou exposição
@@ -2900,7 +2900,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: frequenta_teatro
       bigquery_type: string
       description: 'Com qual frequência você costuma ir à/ao: Ver apresentações teatrais'
@@ -2915,7 +2915,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: frequenta_show
       bigquery_type: string
       description: 'Com qual frequência você costuma ir à/ao: Ver apresentações musicais
@@ -2931,7 +2931,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: frequenta_festas_comunidade
       bigquery_type: string
       description: Com qual frequência você participa de festas na sua vizinhaça ou
@@ -2947,7 +2947,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_gremio_escolar
       bigquery_type: string
       description: Você participa de outras atividades promovidas pelo Grêmio Escolar?
@@ -2962,7 +2962,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_associacao_desportiva
       bigquery_type: string
       description: Você participa de outras atividades promovidas pela Associação
@@ -2978,7 +2978,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_associacao_moradores
       bigquery_type: string
       description: Você participa de outras atividades promovidas pela Associação
@@ -2994,7 +2994,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_sindicato
       bigquery_type: string
       description: Você participa de outras atividades promovidas pelo Sindicato?
@@ -3009,7 +3009,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_movimento_religioso
       bigquery_type: string
       description: Você participa de outras atividades promovidas por movimento religioso?
@@ -3024,7 +3024,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_partido_politico
       bigquery_type: string
       description: Você participa de outras atividades promovidas por partido político?
@@ -3039,7 +3039,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_ong
       bigquery_type: string
       description: Você participa de outras atividades promovidas por organizações
@@ -3055,7 +3055,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: nao_participa
       bigquery_type: string
       description: Você participa de outras atividades promovidas por nenhum destes?
@@ -3070,7 +3070,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_atividades_esporte
       bigquery_type: string
       description: Além das aulas, você participa de atividades como esportes?
@@ -3085,7 +3085,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_atividades_artisticas
       bigquery_type: string
       description: Além das aulas, você participa de atividades como musica, teatro,
@@ -3101,7 +3101,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_trabalho_solidario
       bigquery_type: string
       description: Além das aulas, você participa de atividades como trabalho solidário?
@@ -3116,7 +3116,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_reforco_escolar
       bigquery_type: string
       description: Além das aulas, você participa de atividades como aulas de reforço
@@ -3132,7 +3132,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_excursao_acampamento
       bigquery_type: string
       description: Além das aulas, você participa de atividades como excursões e acampamentos?
@@ -3147,7 +3147,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: participa_festas
       bigquery_type: string
       description: Além das aulas, você participa de atividades como festas e outras
@@ -3163,7 +3163,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: curso_atividades_artisticas
       bigquery_type: string
       description: Você já fez ou está fazendo curso de música, teatro, dança, artes
@@ -3179,7 +3179,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: curso_reforco_escolar
       bigquery_type: string
       description: Você já fez ou está fazendo aula de reforço escolar?
@@ -3194,7 +3194,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: curso_idioma_externo
       bigquery_type: string
       description: Você já fez ou está fazendo curso de língua estrangeira?
@@ -3209,7 +3209,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: curso_informatica
       bigquery_type: string
       description: Você já fez ou está fazendo curso de computação?
@@ -3224,7 +3224,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: curso_outros
       bigquery_type: string
       description: Você já fez ou está fazendo algum outro curso?
@@ -3239,7 +3239,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: quando_nao_entende_materia
       bigquery_type: string
       description: 'Quando você não entende a matéria:'
@@ -3254,7 +3254,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: gosta_estudar_disciplina
       bigquery_type: string
       description: Você gosta de estudar esta disciplina?
@@ -3269,7 +3269,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: entendimento_ensino
       bigquery_type: string
       description: Você entende o que o professor ensina nas aulas?
@@ -3284,7 +3284,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: disciplina_auxilia_compreensao
       bigquery_type: string
       description: As aulas da disciplina ajudam você a compreender melhor as outras
@@ -3300,7 +3300,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: professor_disciplina
       bigquery_type: string
       description: 'O professor da disciplina:'
@@ -3315,7 +3315,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: faz_licao_casa
       bigquery_type: string
       description: Você faz o dever de casa da disciplina?
@@ -3330,7 +3330,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: tempo_licao_casa
       bigquery_type: string
       description: Quanto tempo você gasta para fazer as lições de casa?
@@ -3345,7 +3345,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: fez_redacao
       bigquery_type: string
       description: Este ano você fez redação?
@@ -3360,7 +3360,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: professor_leitura_livros_licao_casa
       bigquery_type: string
       description: O professor da disciplina costuma passar leitura de livros e revistas
@@ -3376,7 +3376,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: correcao_licao_casa
       bigquery_type: string
       description: O(A) professor(a) corrige o dever de casa?
@@ -3391,7 +3391,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: correcao_licao_casa_alunos
       bigquery_type: string
       description: O seu professor corrige a lição de casa na sala de aula com os
@@ -3407,7 +3407,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: consulta_jornais_revistas_licao_casa
       bigquery_type: string
       description: Você susa jornais e revistas para fazer suas lições de casa?
@@ -3422,7 +3422,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: utiliza_computador_licao_casa
       bigquery_type: string
       description: Você usa computador para lição/trabalho da disciplina?
@@ -3437,7 +3437,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: utiliza_computador
       bigquery_type: string
       description: Você sabe usar computador?
@@ -3452,7 +3452,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: utiliza_computador_escola
       bigquery_type: string
       description: Você usa computador na escola?
@@ -3467,7 +3467,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: utiliza_biblioteca_escola
       bigquery_type: string
       description: Você utiliza a biblioteca ou sala de leitura da sua escola?
@@ -3482,7 +3482,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: utiliza_biblioteca_externa
       bigquery_type: string
       description: Você lê ou faz consulta na biblioteca fora da escola?
@@ -3497,7 +3497,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: existe_lugar_calmo_estudos
       bigquery_type: string
       description: Existe um lugar calmo para estudar em sua casa?
@@ -3512,7 +3512,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: comparacao_colegas_disciplina
       bigquery_type: string
       description: Na disciplina, como você se compara com os seus colegas de turma?
@@ -3527,7 +3527,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: boas_notas_disciplina
       bigquery_type: string
       description: Neste ano, você teve boas notas ou conceitos nesta disciplina?
@@ -3542,7 +3542,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: desempenho_disciplina
       bigquery_type: string
       description: Como você considera seu desempenho em ciências?
@@ -3557,7 +3557,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: professor_importa_voce_diz
       bigquery_type: string
       description: Seu professor dá importância ao que você diz?
@@ -3572,7 +3572,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: professor_conversa_avaliacao
       bigquery_type: string
       description: Seu professor conversa com os alunos sobre avaliação?
@@ -3587,7 +3587,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: professor_elogia_merecimento
       bigquery_type: string
       description: Seus professores elogiam ou dão parabéns quando você tira boas
@@ -3603,7 +3603,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: professor_ajuda_se_necessario
       bigquery_type: string
       description: Seu professor dá uma força para você estudar mais quando não tira
@@ -3619,7 +3619,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: professor_atende_prontamente
       bigquery_type: string
       description: Quando você precisa de ajuda, o professor está sempre pronto para
@@ -3635,7 +3635,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: professor_esforca_aprendizado
       bigquery_type: string
       description: Seu professor se esforça para que você aprenda a disciplina
@@ -3650,7 +3650,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: professor_utiliza_espacos_externos
       bigquery_type: string
       description: O seu professor costuma utilizar outros espaços além da sala de
@@ -3666,7 +3666,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: professor_espera_silencio
       bigquery_type: string
       description: Os profesores têm que esperar muito para que os alunos fiquem quietos
@@ -3682,7 +3682,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: professor_cobra
       bigquery_type: string
       description: Você acha que seu professor pega no seu pé?
@@ -3697,7 +3697,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: brigou_professor
       bigquery_type: string
       description: Você brigou com algum professor este ano?
@@ -3712,7 +3712,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: turma_exclui
       bigquery_type: string
       description: Na sua turma, você se sente deixado de lado?
@@ -3727,7 +3727,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: familia_avisada_falta
       bigquery_type: string
       description: Quando você falta às aulas, sua família é avisada?
@@ -3742,7 +3742,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: alunos_desordeiros
       bigquery_type: string
       description: Os alunos fazem barulho e desordem na sua sala de aula?
@@ -3757,7 +3757,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: alunos_atentos
       bigquery_type: string
       description: Os alunos prestam atenção no que o professor diz na sua sala de
@@ -3773,7 +3773,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: alunos_obedientes
       bigquery_type: string
       description: Os alunos fazem o que o professor pede na sua sala de aula?
@@ -3788,7 +3788,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: possui_amigos_sala
       bigquery_type: string
       description: Você tem muitos amigos na sua sala de aula?
@@ -3803,7 +3803,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: estuda_habitualmente
       bigquery_type: string
       description: Você estuda habitualmente?
@@ -3818,7 +3818,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: motivo_estar_escola
       bigquery_type: string
       description: 'Você está na escola porque:'
@@ -3833,7 +3833,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: utiliza_aprendizado_diariamente
       bigquery_type: string
       description: Você usa o que aprende da disciplina na escola, no seu dia a dia?
@@ -3848,7 +3848,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: pretensao_futura
       bigquery_type: string
       description: 'Quando você terminar o 9º ano(8ª série) você pretende:'
@@ -3863,7 +3863,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: opiniao_teste
       bigquery_type: string
       description: 'Você achou o teste:'
@@ -3878,7 +3878,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: opiniao_frase_1
       bigquery_type: string
       description: 'Dê sua opinião sobre a frase: "O professor se esforça para que
@@ -3894,7 +3894,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: opiniao_frase_2
       bigquery_type: string
       description: 'Dê sua opinião sobre a frase: "Eu gosto de ler"'
@@ -3909,7 +3909,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: opiniao_frase_3
       bigquery_type: string
       description: 'Dê sua opinião sobre a frase: "A leitura me ajuda a viver no mundo
@@ -3925,6 +3925,6 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
 
 metadata_modified:
