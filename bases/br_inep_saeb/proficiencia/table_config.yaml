@@ -142,7 +142,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
@@ -172,7 +172,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: id_escola
       bigquery_type: string
       description: ID Escola - INEP
@@ -187,7 +187,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: rede
       bigquery_type: string
       description: Rede Escolar
@@ -202,7 +202,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: localizacao
       bigquery_type: string
       description: Localização
@@ -217,7 +217,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: serie
       bigquery_type: string
       description: Série/Ano
@@ -232,7 +232,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: turno
       bigquery_type: string
       description: Turno
@@ -247,7 +247,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: disciplina
       bigquery_type: string
       description: Disciplina
@@ -262,7 +262,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: id_turma
       bigquery_type: string
       description: ID Turma no SAEB
@@ -277,7 +277,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: id_aluno
       bigquery_type: string
       description: ID Aluno no SAEB
@@ -292,7 +292,7 @@ columns:
       has_sensitive_data: no
       observations: Entre 1995 a 2005 tem-se a junção da variável 'mascara' + 'aluno'
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: sexo
       bigquery_type: string
       description: Sexo
@@ -307,7 +307,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: raca_cor
       bigquery_type: string
       description: Raça/Cor
@@ -322,7 +322,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: estrato
       bigquery_type: int64
       description: Estrato
@@ -337,7 +337,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: amostra
       bigquery_type: int64
       description: Amostra
@@ -352,7 +352,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: peso_aluno
       bigquery_type: float64
       description: Peso do aluno
@@ -367,7 +367,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: proficiencia
       bigquery_type: float64
       description: Proficiência do aluno em Língua Portuguesa calculada na escala única do SAEB, com média = 0 e desvio = 1 na população de referência
@@ -382,7 +382,7 @@ columns:
       has_sensitive_data:
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: erro_padrao
       bigquery_type: float64
       description: Erro padrão da proficiência em Língua Portuguesa
@@ -397,7 +397,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: proficiencia_saeb
       bigquery_type: float64
       description: Proficiência em Língua Portuguesa transformada na escala única
@@ -413,7 +413,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: erro_padrao_saeb
       bigquery_type: float64
       description: Erro padrão da proficiência em Língua Portuguesa transformado
@@ -428,6 +428,6 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
 
 metadata_modified:
