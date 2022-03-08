@@ -110,7 +110,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: coluna
       bigquery_type: string
       description: Coluna
@@ -124,7 +124,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: chave
       bigquery_type: string
       description: Chave
@@ -138,7 +138,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: cobertura_temporal
       bigquery_type: string
       description: Cobertura Temporal
@@ -152,7 +152,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: valor
       bigquery_type: string
       description: Valor
@@ -166,6 +166,6 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
 
 metadata_modified:
