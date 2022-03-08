@@ -200,7 +200,7 @@ columns:
       is_partition: false
     - name: capacidade_backhaul
       bigquery_type: string
-      description: Capaidade total da transmissão
+      description: Capacidade total da transmissão
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
