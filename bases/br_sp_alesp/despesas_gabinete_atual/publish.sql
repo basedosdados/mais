@@ -19,12 +19,12 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_sp_alesp.despesas_gabinete_atual AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
-SAFE_CAST(mes AS STRING) mes,
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(matricula AS STRING) matricula,
 SAFE_CAST(nome_deputado AS STRING) nome_deputado,
 SAFE_CAST(cpf_cnpj AS STRING) cpf_cnpj,
 SAFE_CAST(fornecedor AS STRING) fornecedor,
 SAFE_CAST(tipo AS STRING) tipo,
-SAFE_CAST(valor AS STRING) valor
+SAFE_CAST(valor AS FLOAT64) valor
 FROM basedosdados-dev.br_sp_alesp_staging.despesas_gabinete_atual AS t
