@@ -2,15 +2,23 @@
 
 ## Desenvolvimento
 
-#### Suba o ambiente localmente
+### Linux e Mac:
+
+Clone o repositório principal:
+
+```sh
+git clone https://github.com/basedosdados/mais.git
+```
+Entre na pasta local do repositório usando `cd mais/` e suba o ambiente localmente:
 
 ```sh
 make create-env
 . .mais/bin/activate
+cd python-package/
 python setup.py develop
 ```
 
-### Desenvolva uma nova feature
+#### Desenvolva uma nova feature
 
 1. Abra uma branch com o nome issue-<X>
 2. Faça as modificações necessárias
@@ -19,7 +27,7 @@ python setup.py develop
 4. O nome do PR deve seguir o padrão
   `[infra] <titulo explicativo>`
 
-### O que uma modificação precisa ter
+#### O que uma modificação precisa ter
   
 - Resolver o problema
 - Lista de modificações efetuadas
