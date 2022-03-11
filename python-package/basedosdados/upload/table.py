@@ -52,10 +52,7 @@ class Table(Base):
     def _is_partitioned(self):
         ## check if the table are partitioned, need the split because of a change in the type of partitions in pydantic
         partitions = self.table_config["partitions"]
-        if partitions:
-            partitions = partitions.split(",")
-
-        if partitions is None:
+        if not partitions:
             return False
 
         elif isinstance(partitions, list):
@@ -681,9 +678,9 @@ class Table(Base):
 
         self.client["bigquery_staging"].create_table(table)
 
+
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
-
         Args:
             mode (str): Optional.
                 Table of which table to update [prod|staging|all]
