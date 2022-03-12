@@ -87,7 +87,8 @@ foreach outcome in	insuficiente_lp_publica basico_lp_publica proficiente_lp_publ
 					insuficiente_mt_publica basico_mt_publica proficiente_mt_publica avancado_mt_publica ///
 					adequado_lp_publica adequado_lp_publica_pretos ///
 					adequado_mt_publica adequado_mt_publica_pretos ///
-					ideb {
+					ideb ///
+					atu_ef_9_ano had_ef_9_ano tdi_ef_9_ano taxa_aprovacao_ef_9_ano taxa_reprovacao_ef_9_ano taxa_abandono_ef_9_ano tnr_ef_9_ano {
 	
 	//------------------------//
 	// average, adjusted
@@ -304,6 +305,7 @@ keep if (ano >= 2011 & ano <= 2033)
 
 collapse (mean) ///
 	insuficiente_* basico_* proficiente_* avancado_* adequado_* ideb_* ///
+	atu_ef_9_ano_* had_ef_9_ano_* tdi_ef_9_ano_* taxa_aprovacao_ef_9_ano_* taxa_reprovacao_ef_9_ano_* taxa_abandono_ef_9_ano_* tnr_ef_9_ano_* ///
 	[aw=populacao_NA], ///
 	by(ano)
 
@@ -311,7 +313,8 @@ export delimited "output/data/brasil.csv", replace datafmt
 
 foreach outcome in	adequado_lp_publica adequado_lp_publica_pretos ///
 					adequado_mt_publica adequado_mt_publica_pretos ///
-					ideb {
+					ideb ///
+					atu_ef_9_ano had_ef_9_ano tdi_ef_9_ano taxa_aprovacao_ef_9_ano taxa_reprovacao_ef_9_ano taxa_abandono_ef_9_ano tnr_ef_9_ano {
 					//insuficiente_lp_publica basico_lp_publica proficiente_lp_publica avancado_lp_publica ///
 					//insuficiente_mt_publica basico_mt_publica proficiente_mt_publica avancado_mt_publica ///
 	
@@ -322,6 +325,14 @@ foreach outcome in	adequado_lp_publica adequado_lp_publica_pretos ///
 	if substr("`outcome'", 1, 8) == "adequado"		local lab % Aprendizagem Adequada
 	if substr("`outcome'", 1, 4) == "ideb"			local lab Ideb
 	
+	if "`outcome'" == "atu_ef_9_ano"				local lab Média de Alunos por Turma
+	if "`outcome'" == "had_ef_9_ano"				local lab Média de Horas-Aula diária
+	if "`outcome'" == "tdi_ef_9_ano"				local lab Taxa de distorção idade-série
+	if "`outcome'" == "taxa_aprovacao_ef_9_ano"		local lab Taxa de Aprovação
+	if "`outcome'" == "taxa_reprovacao_ef_9_ano"	local lab Taxa de Reprovação
+	if "`outcome'" == "taxa_abandono_ef_9_ano"		local lab Taxa de Abandono
+	if "`outcome'" == "tnr_ef_9_ano"				local lab Taxa de Não Resposta
+	
 	line `outcome'_A `outcome'_BS `outcome'_WS ano, ///
 		msymbol(D) ///
 		ytitle("`lab'") xtitle("Ano") ///
@@ -331,7 +342,7 @@ foreach outcome in	adequado_lp_publica adequado_lp_publica_pretos ///
 	graph display, xsize(7.5)
 	graph export "output/figures/brasil/cenarios_`outcome'.png", replace
 	
-	if !inlist("`outcome'", "ideb") {
+	if substr("`outcome'", 1, 8) == "adequado" {
 		
 		foreach c in pb sp {
 			
@@ -344,6 +355,7 @@ foreach outcome in	adequado_lp_publica adequado_lp_publica_pretos ///
 			graph display, xsize(7.5)
 			graph export "output/figures/brasil/cenarios_pandemia_temporario_`c'_`outcome'.png", replace
 			
+			/*
 			line `outcome'_`c'2 ano, ///
 				msymbol(D) ///
 				ytitle("`lab'") xtitle("Ano") ///
@@ -352,6 +364,7 @@ foreach outcome in	adequado_lp_publica adequado_lp_publica_pretos ///
 				graphregion(fcolor(white) lcolor(white))
 			graph display, xsize(7.5)
 			graph export "output/figures/brasil/cenarios_pandemia_estrutural_`c'_`outcome'.png", replace
+			*/
 			
 		}
 		
@@ -359,6 +372,7 @@ foreach outcome in	adequado_lp_publica adequado_lp_publica_pretos ///
 	}
 }
 
+/*
 foreach k in lp mt {
 	
 	gen razao_adequado_`k'_publica_A = 100 * adequado_`k'_publica_pretos_A / adequado_`k'_publica_A

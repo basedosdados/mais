@@ -1,11 +1,11 @@
 
 # Nome (slug) do conjunto no CKAN
 # Exemplos: br-ibge-populacao, br-tse-eleicoes
-name: br-fundacao-lemann-projecoes-saeb
+name: br-fundacao-lemann-projecoes
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title: Projeções SAEB
+title: Projeções da educação brasileira
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
@@ -13,7 +13,7 @@ title: Projeções SAEB
 organization: br-fundacao-lemann
 
 # Descrição do conjunto
-notes: Projeções de indicadores do SAEB feitas pela Base dos Dados para a Fundação Lemann.
+notes: Projeções sobre educação no Brasil feitas pela Base dos Dados para a Fundação Lemann.
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
@@ -30,8 +30,6 @@ groups:
 #    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-  - COVID19
-  - educacao basica
 
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.

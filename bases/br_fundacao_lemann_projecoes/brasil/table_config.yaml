@@ -1,7 +1,7 @@
 
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: br_fundacao_lemann_projecoes_saeb
+dataset_id: br_fundacao_lemann_projecoes
 
 table_id: brasil
 
@@ -9,7 +9,7 @@ table_id: brasil
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Projeções de SAEB para os próximos 10-12 anos a nível de Brasil. 
+description: Projeções para os próximos 10-12 anos a nível de Brasil.
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
@@ -104,24 +104,24 @@ partitions:
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
-      bigquery_type: int64
-      description: Ano
+      bigquery_type:
+      description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: ano
-          column_name: ano
-      measurement_unit: year
-      has_sensitive_data: no
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: insuficiente_lp_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -129,13 +129,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: insuficiente_mt_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -143,13 +143,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: insuficiente_lp_publica_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -157,13 +157,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: insuficiente_lp_publica_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -171,13 +171,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: insuficiente_lp_publica_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -185,13 +185,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: insuficiente_mt_publica_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -199,13 +199,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: insuficiente_mt_publica_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -213,13 +213,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: insuficiente_mt_publica_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -227,13 +227,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: basico_lp_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -241,13 +241,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: basico_mt_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -255,13 +255,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: basico_lp_publica_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -269,13 +269,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: basico_lp_publica_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -283,13 +283,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: basico_lp_publica_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -297,13 +297,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: basico_mt_publica_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -311,13 +311,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: basico_mt_publica_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -325,13 +325,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: basico_mt_publica_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -339,13 +339,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: proficiente_lp_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -353,13 +353,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: proficiente_mt_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -367,13 +367,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: proficiente_lp_publica_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -381,13 +381,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: proficiente_lp_publica_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -395,13 +395,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: proficiente_lp_publica_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -409,13 +409,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: proficiente_mt_publica_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -423,13 +423,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: proficiente_mt_publica_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -437,13 +437,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: proficiente_mt_publica_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -451,13 +451,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: avancado_lp_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -465,13 +465,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: avancado_mt_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -479,13 +479,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: avancado_lp_publica_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -493,13 +493,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: avancado_lp_publica_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -507,13 +507,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: avancado_lp_publica_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -521,13 +521,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: avancado_mt_publica_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -535,13 +535,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: avancado_mt_publica_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -549,13 +549,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: avancado_mt_publica_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -563,13 +563,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_moderna_lp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -577,13 +577,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_moderna_mt
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -591,13 +591,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -605,13 +605,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -619,13 +619,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_pretos
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -633,13 +633,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_pretos
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -647,13 +647,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_pb_lp_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -661,13 +661,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_pb_mt_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -675,13 +675,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_sp_lp_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -689,13 +689,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_sp_mt_publica
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -703,13 +703,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_pb_lp_publica_pretos
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -717,13 +717,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_pb_mt_publica_pretos
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -731,13 +731,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_sp_lp_publica_pretos
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -745,13 +745,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_sp_mt_publica_pretos
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -759,13 +759,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -773,13 +773,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -787,13 +787,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -801,13 +801,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_pretos_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -815,13 +815,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_pretos_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -829,13 +829,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_pretos_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -843,13 +843,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -857,13 +857,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -871,13 +871,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -885,13 +885,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_pretos_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -899,13 +899,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_pretos_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -913,13 +913,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_pretos_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -927,13 +927,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_A_pb
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -941,13 +941,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_BS_pb
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -955,13 +955,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_WS_pb
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -969,13 +969,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_A_sp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -983,13 +983,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_BS_sp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -997,13 +997,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_WS_sp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1011,13 +1011,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_pretos_A_pb
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1025,13 +1025,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_pretos_BS_pb
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1039,13 +1039,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_pretos_WS_pb
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1053,13 +1053,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_pretos_A_sp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1067,13 +1067,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_pretos_BS_sp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1081,13 +1081,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_lp_publica_pretos_WS_sp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1095,13 +1095,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_A_pb
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1109,13 +1109,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_BS_pb
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1123,13 +1123,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_WS_pb
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1137,13 +1137,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_A_sp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1151,13 +1151,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_BS_sp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1165,13 +1165,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_WS_sp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1179,13 +1179,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_pretos_A_pb
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1193,13 +1193,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_pretos_BS_pb
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1207,13 +1207,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_pretos_WS_pb
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1221,13 +1221,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_pretos_A_sp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1235,13 +1235,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_pretos_BS_sp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1249,13 +1249,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: adequado_mt_publica_pretos_WS_sp
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1263,13 +1263,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: ideb_A
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1277,13 +1277,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: ideb_BS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1291,13 +1291,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: ideb_WS
-      bigquery_type: float64
+      bigquery_type:
       description:
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
@@ -1305,7 +1305,301 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
+    - name: atu_ef_9_ano_A
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: atu_ef_9_ano_BS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: atu_ef_9_ano_WS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: had_ef_9_ano_A
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: had_ef_9_ano_BS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: had_ef_9_ano_WS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: tdi_ef_9_ano_A
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: tdi_ef_9_ano_BS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: tdi_ef_9_ano_WS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: taxa_aprovacao_ef_9_ano_A
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: taxa_aprovacao_ef_9_ano_BS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: taxa_aprovacao_ef_9_ano_WS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: taxa_reprovacao_ef_9_ano_A
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: taxa_reprovacao_ef_9_ano_BS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: taxa_reprovacao_ef_9_ano_WS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: taxa_abandono_ef_9_ano_A
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: taxa_abandono_ef_9_ano_BS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: taxa_abandono_ef_9_ano_WS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: tnr_ef_9_ano_A
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: tnr_ef_9_ano_BS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: tnr_ef_9_ano_WS
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
 
 metadata_modified:

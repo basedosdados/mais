@@ -17,7 +17,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_fundacao_lemann_projecoes_saeb.brasil AS
+CREATE VIEW basedosdados-dev.br_fundacao_lemann_projecoes.brasil AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(insuficiente_lp_publica AS FLOAT64) insuficiente_lp_publica,
@@ -104,5 +104,26 @@ SAFE_CAST(adequado_mt_publica_pretos_BS_sp AS FLOAT64) adequado_mt_publica_preto
 SAFE_CAST(adequado_mt_publica_pretos_WS_sp AS FLOAT64) adequado_mt_publica_pretos_WS_sp,
 SAFE_CAST(ideb_A AS FLOAT64) ideb_A,
 SAFE_CAST(ideb_BS AS FLOAT64) ideb_BS,
-SAFE_CAST(ideb_WS AS FLOAT64) ideb_WS
-FROM basedosdados-dev.br_fundacao_lemann_projecoes_saeb_staging.brasil AS t
+SAFE_CAST(ideb_WS AS FLOAT64) ideb_WS,
+SAFE_CAST(atu_ef_9_ano_A AS FLOAT64) atu_ef_9_ano_A,
+SAFE_CAST(atu_ef_9_ano_BS AS FLOAT64) atu_ef_9_ano_BS,
+SAFE_CAST(atu_ef_9_ano_WS AS FLOAT64) atu_ef_9_ano_WS,
+SAFE_CAST(had_ef_9_ano_A AS FLOAT64) had_ef_9_ano_A,
+SAFE_CAST(had_ef_9_ano_BS AS FLOAT64) had_ef_9_ano_BS,
+SAFE_CAST(had_ef_9_ano_WS AS FLOAT64) had_ef_9_ano_WS,
+SAFE_CAST(tdi_ef_9_ano_A AS FLOAT64) tdi_ef_9_ano_A,
+SAFE_CAST(tdi_ef_9_ano_BS AS FLOAT64) tdi_ef_9_ano_BS,
+SAFE_CAST(tdi_ef_9_ano_WS AS FLOAT64) tdi_ef_9_ano_WS,
+SAFE_CAST(taxa_aprovacao_ef_9_ano_A AS FLOAT64) taxa_aprovacao_ef_9_ano_A,
+SAFE_CAST(taxa_aprovacao_ef_9_ano_BS AS FLOAT64) taxa_aprovacao_ef_9_ano_BS,
+SAFE_CAST(taxa_aprovacao_ef_9_ano_WS AS FLOAT64) taxa_aprovacao_ef_9_ano_WS,
+SAFE_CAST(taxa_reprovacao_ef_9_ano_A AS FLOAT64) taxa_reprovacao_ef_9_ano_A,
+SAFE_CAST(taxa_reprovacao_ef_9_ano_BS AS FLOAT64) taxa_reprovacao_ef_9_ano_BS,
+SAFE_CAST(taxa_reprovacao_ef_9_ano_WS AS FLOAT64) taxa_reprovacao_ef_9_ano_WS,
+SAFE_CAST(taxa_abandono_ef_9_ano_A AS FLOAT64) taxa_abandono_ef_9_ano_A,
+SAFE_CAST(taxa_abandono_ef_9_ano_BS AS FLOAT64) taxa_abandono_ef_9_ano_BS,
+SAFE_CAST(taxa_abandono_ef_9_ano_WS AS FLOAT64) taxa_abandono_ef_9_ano_WS,
+SAFE_CAST(tnr_ef_9_ano_A AS FLOAT64) tnr_ef_9_ano_A,
+SAFE_CAST(tnr_ef_9_ano_BS AS FLOAT64) tnr_ef_9_ano_BS,
+SAFE_CAST(tnr_ef_9_ano_WS AS FLOAT64) tnr_ef_9_ano_WS
+FROM basedosdados-dev.br_fundacao_lemann_projecoes_staging.brasil AS t

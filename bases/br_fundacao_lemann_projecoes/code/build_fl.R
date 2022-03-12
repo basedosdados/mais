@@ -58,6 +58,20 @@ query = "
       )
     )
   ),
+  indicadores AS (
+    SELECT
+      ano,
+      sigla_uf,
+      atu_ef_9_ano,
+      had_ef_9_ano,
+      tdi_ef_9_ano,
+      taxa_aprovacao_ef_9_ano,
+      taxa_reprovacao_ef_9_ano,
+      taxa_abandono_ef_9_ano,
+      tnr_ef_9_ano
+    FROM `basedosdados.br_inep_indicadores_educacionais.uf`
+    WHERE localizacao = 'total' AND rede = 'publica'
+  ),
   pop AS (
     SELECT *
     FROM `basedosdados.br_ibge_populacao.uf`
@@ -68,6 +82,7 @@ query = "
       aprendizagem_adequada.ano,
       aprendizagem_adequada_pretos.ano,
       matriculas.ano,
+      indicadores.ano,
       pib_pc.ano,
       pop.ano
     ) AS ano,
@@ -75,6 +90,7 @@ query = "
       aprendizagem_adequada.sigla_uf,
       aprendizagem_adequada_pretos.sigla_uf,
       matriculas.sigla_uf,
+      indicadores.sigla_uf,
       pib_pc.sigla_uf,
       pop.sigla_uf
     ) AS sigla_uf,
@@ -100,6 +116,7 @@ query = "
     aprendizagem_adequada_pretos.adequado_pandemia_SP_MT_publica_pretos AS adequado_SP_MT_publica_pretos,
     ideb.ideb,
     matriculas.* except (sigla_uf, ano),
+    indicadores.* except (sigla_uf, ano),
     pib_pc.pib_pc,
     pop.populacao,
     pbf.familias_beneficiarias_pbf
@@ -116,6 +133,10 @@ query = "
     ON
       aprendizagem_adequada.sigla_uf = matriculas.sigla_uf AND
       aprendizagem_adequada.ano = matriculas.ano
+  LEFT JOIN indicadores
+    ON
+      aprendizagem_adequada.sigla_uf = indicadores.sigla_uf AND
+      aprendizagem_adequada.ano = indicadores.ano
   LEFT JOIN `basedosdados-projetos.fundacao_lemann.pib-per-capita-uf` AS pib_pc
     ON
       aprendizagem_adequada.sigla_uf = pib_pc.sigla_uf AND
