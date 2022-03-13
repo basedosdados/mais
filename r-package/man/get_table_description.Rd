@@ -21,7 +21,7 @@ A tibble describing the specified table
 Describe a table within a dataset
 }
 \examples{
-
+\dontrun{
 get_table_description("br_sp_alesp", "deputado")
-
+}
 }

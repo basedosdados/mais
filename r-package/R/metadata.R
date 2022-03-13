@@ -11,8 +11,12 @@
 #' @export
 #' @examples
 #'
+#' \dontrun{
+#'
 #' dataset_search("agua")
 #' dataset_search("educação")
+#'
+#'}
 #'
 #'
 
@@ -52,7 +56,9 @@ dataset_search <-
 #' @importFrom dplyr bind_rows
 #' @return A tibble listing all tables in a given dataset
 #' @examples
+#' \dontrun{
 #' list_dataset_tables("br_sp_alesp")
+#' }
 
 list_dataset_tables <-
   function(dataset_id) {
@@ -87,8 +93,9 @@ list_dataset_tables <-
 #'
 #' @export
 #' @examples
-#'
+#' \dontrun{
 #' get_table_columns("br_sp_alesp", "deputado")
+#' }
 #' @importFrom httr content
 #' @importFrom purrr pluck map reduce
 #' @importFrom dplyr bind_rows
@@ -118,8 +125,10 @@ get_table_columns <-
 #' @export
 #' @examples
 #'
-#' get_dataset_description("br_sp_alesp")
+#' \dontrun{
 #'
+#' get_dataset_description("br_sp_alesp")
+#' }
 #' @return A tibble describing the specified dataset
 
 get_dataset_description <- function(dataset_id = ? typed::Character(1)) {
@@ -144,9 +153,9 @@ get_dataset_description <- function(dataset_id = ? typed::Character(1)) {
 #' @param table_id a table name e.g. if addressing table "br_sp_alesp.deputado" then table_id is `deputado`
 #' @export
 #' @examples
-#'
+#' \dontrun{
 #' get_table_description("br_sp_alesp", "deputado")
-#'
+#' }
 #' @return A tibble describing the specified table
 #'
 

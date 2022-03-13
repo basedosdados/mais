@@ -17,6 +17,8 @@ Describe a dataset
 }
 \examples{
 
-get_dataset_description("br_sp_alesp")
+\dontrun{
 
+get_dataset_description("br_sp_alesp")
+}
 }

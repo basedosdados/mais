@@ -16,5 +16,7 @@ A tibble listing all tables in a given dataset
 List tables in a dataset
 }
 \examples{
+\dontrun{
 list_dataset_tables("br_sp_alesp")
+}
 }
