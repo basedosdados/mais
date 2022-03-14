@@ -1,5 +1,6 @@
 from pathlib import Path
 from google.cloud import bigquery
+from loguru import logger
 
 from google.api_core.exceptions import Conflict
 
@@ -142,6 +143,13 @@ class Dataset(Base):
                 dataset.access_entries = entries
 
             m["client"].update_dataset(dataset, ["access_entries"])
+        logger.success(
+            " {object} {object_id}_{mode} was {action}!",
+            object_id=self.dataset_id,
+            mode=mode,
+            object="Dataset",
+            action="publicized",
+        )
 
     def create(
         self, mode="all", if_exists="raise", dataset_is_public=True, location=None
@@ -192,6 +200,14 @@ class Dataset(Base):
             # exists within the project.
             try:
                 job = m["client"].create_dataset(dataset_obj)  # Make an API request.
+                logger.success(
+                    " {object} {object_id}_{mode} was {action}!",
+                    object_id=self.dataset_id,
+                    mode=mode,
+                    object="Dataset",
+                    action="created",
+                )
+
             except Conflict:
 
                 if if_exists == "pass":
@@ -212,6 +228,13 @@ class Dataset(Base):
         for m in self._loop_modes(mode):
 
             m["client"].delete_dataset(m["id"], delete_contents=True, not_found_ok=True)
+        logger.info(
+            " {object} {object_id}_{mode} was {action}!",
+            object_id=self.dataset_id,
+            mode=mode,
+            object="Dataset",
+            action="deleted",
+        )
 
     def update(self, mode="all", location=None):
         """Update dataset description. Toogle mode to choose which dataset to update.
@@ -235,3 +258,11 @@ class Dataset(Base):
                 ),
                 fields=["description"],
             )  # Make an API request.
+
+        logger.success(
+            " {object} {object_id}_{mode} was {action}!",
+            object_id=self.dataset_id,
+            mode=mode,
+            object="Dataset",
+            action="updated",
+        )
