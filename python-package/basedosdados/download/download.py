@@ -18,6 +18,7 @@ from basedosdados.exceptions import (
     BaseDosDadosInvalidProjectIDException,
     BaseDosDadosNoBillingProjectIDException,
 )
+from basedosdados.constants import config, constants
 from pandas_gbq.gbq import GenericGBQException
 
 
@@ -48,6 +49,10 @@ def read_sql(
         pd.DataFrame:
             Query result
     """
+
+    # standard billing_project_id configuration
+    if billing_project_id is None:
+        billing_project_id == config.billing_project_id
 
     try:
         # Set a two hours timeout
@@ -86,8 +91,8 @@ def read_sql(
 def read_table(
     dataset_id,
     table_id,
-    query_project_id="basedosdados",
     billing_project_id=None,
+    query_project_id="basedosdados",
     limit=None,
     from_file=False,
     reauth=False,
@@ -101,10 +106,10 @@ def read_table(
         table_id (str): Optional.
             Table id available in basedosdados.dataset_id.
             It should always come with dataset_id.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
         billing_project_id (str): Optional.
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
+        query_project_id (str): Optional.
+            Which project the table lives. You can change this you want to query different projects.
         limit (int): Optional.
             Number of rows to read from table.
         from_file (boolean): Optional.
@@ -121,6 +126,10 @@ def read_table(
         pd.DataFrame:
             Query result
     """
+
+    # standard billing_project_id configuration
+    if billing_project_id is None:
+        billing_project_id == config.billing_project_id
 
     if (dataset_id is not None) and (table_id is not None):
         query = f"""
@@ -147,8 +156,8 @@ def download(
     query=None,
     dataset_id=None,
     table_id=None,
-    query_project_id="basedosdados",
     billing_project_id=None,
+    query_project_id="basedosdados",
     limit=None,
     from_file=False,
     reauth=False,
@@ -180,10 +189,10 @@ def download(
         table_id (str): Optional.
             Table id available in basedosdados.dataset_id.
             It should always come with dataset_id.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
         billing_project_id (str): Optional.
             Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
+        query_project_id (str): Optional.
+            Which project the table lives. You can change this you want to query different projects.
         limit (int): Optional
             Number of rows.
         from_file (boolean): Optional.
@@ -200,6 +209,10 @@ def download(
         raise BaseDosDadosException(
             "Either table_id, dataset_id or query should be filled."
         )
+
+    # standard billing_project_id configuration
+    if billing_project_id is None:
+        billing_project_id == config.billing_project_id
 
     client = google_client(query_project_id, billing_project_id, from_file, reauth)
 
