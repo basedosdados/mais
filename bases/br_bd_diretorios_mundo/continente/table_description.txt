@@ -1,4 +1,4 @@
-Dados de matrícula.
+Dados com identificadores dos continentes segundo instituições internacionais, além de siglas e os nomes.
 
 Para saber mais acesse:
 Website: 
@@ -16,39 +16,17 @@ Email: rdahis@basedosdados.org
 Tratado por
 -----------
 Nome: Ricardo Dahis
+Código: 
 Website: www.ricardodahis.com
 Email: rdahis@basedosdados.org
 
 
-
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-- ano
--  sigla_uf
-
-
-Colunas identificando linhas unicamente
--------------------
 
 
 
 
 Cobertura Temporal
 ------------------
-- 2007
-- 2008
-- 2009
-- 2010
-- 2011
-- 2012
-- 2013
-- 2014
-- 2015
-- 2016
-- 2017
-- 2018
-- 2019
-- 2020
 
 
 

@@ -1,30 +1,43 @@
-dataset_id: br_ms_vacinacao_covid19
 
-table_id: microdados_estabelecimento
+dataset_id: br_bd_diretorios_brasil
+
+table_id: etnia_indigena
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: "Microdados normalizados de estabelecimentos.\n"
+description: Diretório das etnias indígenas nos Sistemas de Informação Ambulatorial
+    e Hospitalar - SIA/SUS e SIH/SUS - 'https://bvsms.saude.gov.br/bvs/saudelegis/sas/2010/prt0508_28_09_2010.html'
 
 # A máxima unidade espacial que a tabela cobre.
-spatial_coverage: bra
+spatial_coverage:
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplo: 1995(1)2019.
 temporal_coverage:
+    - 2010
+    - 2011
+    - 2012
+    - 2013
+    - 2014
+    - 2015
+    - 2016
+    - 2017
+    - 2018
+    - 2019
     - 2020
     - 2021
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: day
+update_frequency: unique
 
 # Entidade representada por cada linha.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity: []
+entity:
+    - race
 
 # A unidade temporal representada por cada linha.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -35,38 +48,38 @@ time_unit:
 # Exemplos: id_municipio, ano.
 # Pode ser vazio pois certas tabelas não possuem identificadores.
 identifying_columns:
-    - id_estabelecimento
+    - id_etnia_indigena
 
 last_updated:
-    metadata: '2022-01-23'
+    metadata:
     data:
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.0
+version: ''
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
+    name: Gustavo Aires Tiago
+    email: gustavo.tiago@basedosdados.org
     github_user:
-    website: www.ricardodahis.com
-    ckan_user:
+    website:
+    ckan_user: gustavoairestiago
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Ricardo Dahis
-    email:
+    name: Gustavo Aires Tiago
+    email: gustavo.tiago@basedosdados.org
     github_user:
-    ckan_user:
+    ckan_user: gustavoairestiago
     website:
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_vacinacao_covid19/code
+    code_url:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "- Normalizamos a tabela original.\n"
+data_cleaning_description: Definição do nome das colunas
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -79,7 +92,7 @@ architecture_url:
 
 # A tabela tem colunas que precisam de dicionário?
 # Opções: yes, no.
-covered_by_dictionary:
+covered_by_dictionary: no
 
 source_bucket_name: basedosdados-dev
 
@@ -91,7 +104,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: sigla_uf
+partitions:
 
 bdm_file_size:
 
@@ -104,9 +117,9 @@ bdm_file_size:
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: id_municipio
-      bigquery_type:
-      description: ID Município - IBGE 7 Dígitos
+    - name: id_etnia_indigena
+      bigquery_type: string
+      description: ID da etnia indígena
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -117,9 +130,9 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: id_estabelecimento
-      bigquery_type:
-      description: ID Estabelecimento - CNES
+    - name: nome
+      bigquery_type: string
+      description: Nome da etnia indígena
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -130,44 +143,5 @@ columns:
       has_sensitive_data:
       is_in_staging: true
       is_partition: false
-    - name: razao_social
-      bigquery_type:
-      description: Razão Social
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: nome_fantasia
-      bigquery_type:
-      description: Nome Fantasia
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: sigla_uf
-      bigquery_type:
-      description: Sigla da Unidade da Federação
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: true
 
-metadata_modified: '2021-09-12T23:20:55.742830'
+metadata_modified: '2022-01-24T19:10:17.569420'

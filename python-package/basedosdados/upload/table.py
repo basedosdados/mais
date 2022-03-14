@@ -54,10 +54,7 @@ class Table(Base):
     def _is_partitioned(self):
         ## check if the table are partitioned, need the split because of a change in the type of partitions in pydantic
         partitions = self.table_config["partitions"]
-        if partitions:
-            partitions = partitions.split(",")
-
-        if partitions is None:
+        if not partitions:
             return False
 
         elif isinstance(partitions, list):
@@ -223,8 +220,8 @@ class Table(Base):
 
         self._make_publish_sql()
 
-    def _sheet_to_df(self, columns_config_url):
-        url = columns_config_url.replace("edit#gid=", "export?format=csv&gid=")
+    def _sheet_to_df(self, columns_config_url_or_path):
+        url = columns_config_url_or_path.replace("edit#gid=", "export?format=csv&gid=")
         try:
             return pd.read_csv(StringIO(requests.get(url).content.decode("utf-8")))
         except:
@@ -249,22 +246,26 @@ class Table(Base):
         else:
             return False
 
-    def update_columns(self, columns_config_url):
+    def update_columns(self, columns_config_url_or_path=None):
         """
-        Fills columns in table_config.yaml automatically using a public google sheets URL. Also regenerate
+        Fills columns in table_config.yaml automatically using a public google sheets URL or a local file. Also regenerate
         publish.sql and autofill type using bigquery_type.
 
-        The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
         The sheet must contain the columns:
-            - nome: column name
-            - descricao: column description
-            - tipo: column bigquery type
-            - unidade_medida: column mesurement unit
-            - dicionario: column related dictionary
-            - nome_diretorio: column related directory in the format <dataset_id>.<table_id>:<column_name>
-
+            - name: column name
+            - description: column description
+            - bigquery_type: column bigquery type
+            - measurement_unit: column mesurement unit
+            - covered_by_dictionary: column related dictionary
+            - directory_column: column related directory in the format <dataset_id>.<table_id>:<column_name>
+            - temporal_coverage: column temporal coverage
+            - has_sensitive_data: the column has sensitive data
+            - observations: column observations
         Args:
-            columns_config_url (str): google sheets URL.
+            columns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.
+                Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.
+                Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
+
         """
         ruamel = ryaml.YAML()
         ruamel.preserve_quotes = True
@@ -272,66 +273,99 @@ class Table(Base):
         table_config_yaml = ruamel.load(
             (self.table_folder / "table_config.yaml").open(encoding="utf-8")
         )
-        if (
-            "edit#gid=" not in columns_config_url
-            or "https://docs.google.com/spreadsheets/d/" not in columns_config_url
-            or not columns_config_url.split("=")[1].isdigit()
-        ):
+
+        if "https://docs.google.com/spreadsheets/d/" in columns_config_url_or_path:
+            if (
+                "edit#gid=" not in columns_config_url_or_path
+                or "https://docs.google.com/spreadsheets/d/"
+                not in columns_config_url_or_path
+                or not columns_config_url_or_path.split("=")[1].isdigit()
+            ):
+                raise BaseDosDadosException(
+                    "The Google sheet url not in correct format."
+                    "The url must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>"
+                )
+            df = self._sheet_to_df(columns_config_url_or_path)
+        else:
+            file_type = columns_config_url_or_path.split(".")[-1]
+            if file_type == "csv":
+                df = pd.read_csv(columns_config_url_or_path, encoding="utf-8")
+            elif file_type in ["xls", "xlsx", "xlsm", "xlsb", "odf", "ods", "odt"]:
+                df = pd.read_excel(columns_config_url_or_path)
+            else:
+                raise BaseDosDadosException(
+                    "File not suported. Only csv, xls, xlsx, xlsm, xlsb, odf, ods, odt are supported."
+                )
+
+        if "name" not in df.columns.tolist():
             raise BaseDosDadosException(
-                "The Google sheet url not in correct format."
-                "The url must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>"
+                "Column 'name' not found in Google the google sheet. "
+                "The sheet must contain the column name: 'name'"
+            )
+        elif "description" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'description' not found in Google the google sheet. "
+                "The sheet must contain the column description: 'description'"
+            )
+        elif "bigquery_type" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'bigquery_type' not found in Google the google sheet. "
+                "The sheet must contain the column type: 'bigquery_type'"
+            )
+        elif "measurement_unit" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'measurement_unit' not found in Google the google sheet. "
+                "The sheet must contain the column measurement unit: 'measurement_unit'"
+            )
+        elif "directory_column" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'directory_column' not found in Google the google sheet. "
+                "The sheet must contain the column dictionary: 'directory_column'"
+            )
+        elif "directory_column" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'directory_column' not found in Google the google sheet. "
+                "The sheet must contain the column dictionary name: 'directory_column'"
+            )
+        elif "temporal_coverage" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'temporal_coverage' not found in Google the google sheet. "
+                "The sheet must contain the column dictionary name: 'temporal_coverage'"
+            )
+        elif "has_sensitive_data" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'temporal_coverage' not found in Google the google sheet. "
+                "The sheet must contain the column dictionary name: 'temporal_coverage'"
+            )
+        elif "observations" not in df.columns.tolist():
+            raise BaseDosDadosException(
+                "Column 'observations' not found in Google the google sheet. "
+                "The sheet must contain the column dictionary name: 'observations'"
             )
 
-        df = self._sheet_to_df(columns_config_url)
         df = df.fillna("NULL")
-
-        if "nome" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'nome' not found in Google the google sheet. "
-                "The sheet must contain the column name: 'nome'"
-            )
-        elif "descricao" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'descricao' not found in Google the google sheet. "
-                "The sheet must contain the column description: 'descricao'"
-            )
-        elif "tipo" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'tipo' not found in Google the google sheet. "
-                "The sheet must contain the column type: 'tipo'"
-            )
-        elif "unidade_medida" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'unidade_medida' not found in Google the google sheet. "
-                "The sheet must contain the column measurement unit: 'unidade_medida'"
-            )
-        elif "dicionario" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'dicionario' not found in Google the google sheet. "
-                "The sheet must contain the column dictionary: 'dicionario'"
-            )
-        elif "nome_diretorio" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'nome_diretorio' not found in Google the google sheet. "
-                "The sheet must contain the column dictionary name: 'nome_diretorio'"
-            )
-
         columns_parameters = zip(
-            df["nome"].tolist(),
-            df["descricao"].tolist(),
-            df["tipo"].tolist(),
-            df["unidade_medida"].tolist(),
-            df["dicionario"].tolist(),
-            df["nome_diretorio"].tolist(),
+            df["name"].tolist(),
+            df["description"].tolist(),
+            df["bigquery_type"].tolist(),
+            df["measurement_unit"].tolist(),
+            df["covered_by_dictionary"].tolist(),
+            df["directory_column"].tolist(),
+            df["temporal_coverage"].tolist(),
+            df["has_sensitive_data"].tolist(),
+            df["observations"].tolist(),
         )
 
         for (
             name,
             description,
-            tipo,
-            unidade_medida,
-            dicionario,
-            nome_diretorio,
+            bigquery_type,
+            measurement_unit,
+            covered_by_dictionary,
+            directory_column,
+            temporal_coverage,
+            has_sensitive_data,
+            observations,
         ) in columns_parameters:
             for col in table_config_yaml["columns"]:
                 if col["name"] == name:
@@ -341,34 +375,52 @@ class Table(Base):
                     )
 
                     col["bigquery_type"] = (
-                        col["bigquery_type"] if tipo == "NULL" else tipo.lower()
+                        col["bigquery_type"]
+                        if bigquery_type == "NULL"
+                        else bigquery_type.lower()
                     )
 
                     col["measurement_unit"] = (
                         col["measurement_unit"]
-                        if unidade_medida == "NULL"
-                        else unidade_medida
+                        if measurement_unit == "NULL"
+                        else measurement_unit
                     )
 
                     col["covered_by_dictionary"] = (
-                        "no" if dicionario == "NULL" else "yes"
+                        "no"
+                        if covered_by_dictionary == "NULL"
+                        else covered_by_dictionary
                     )
 
-                    dataset = nome_diretorio.split(".")[0]
+                    col["temporal_coverage"] = (
+                        col["temporal_coverage"]
+                        if temporal_coverage == "NULL"
+                        else [temporal_coverage]
+                    )
+
+                    col["observations"] = (
+                        col["observations"] if observations == "NULL" else observations
+                    )
+
+                    col["has_sensitive_data"] = (
+                        "no" if has_sensitive_data == "NULL" else has_sensitive_data
+                    )
+
+                    dataset = directory_column.split(".")[0]
                     col["directory_column"]["dataset_id"] = (
                         col["directory_column"]["dataset_id"]
                         if dataset == "NULL"
                         else dataset
                     )
 
-                    table = nome_diretorio.split(".")[-1].split(":")[0]
+                    table = directory_column.split(".")[-1].split(":")[0]
                     col["directory_column"]["table_id"] = (
                         col["directory_column"]["table_id"]
                         if table == "NULL"
                         else table
                     )
 
-                    column = nome_diretorio.split(".")[-1].split(":")[-1]
+                    column = directory_column.split(".")[-1].split(":")[-1]
                     col["directory_column"]["column_name"] = (
                         col["directory_column"]["column_name"]
                         if column == "NULL"
@@ -405,7 +457,7 @@ class Table(Base):
         if_folder_exists="raise",
         if_table_config_exists="raise",
         source_format="csv",
-        columns_config_url=None,
+        columns_config_url_or_path=None,
     ):
         """Initialize table folder at metadata_path at `metadata_path/<dataset_id>/<table_id>`.
 
@@ -419,7 +471,8 @@ class Table(Base):
         Args:
             data_sample_path (str, pathlib.PosixPath): Optional.
                 Data sample path to auto complete columns names
-                It supports Comma Delimited CSV.
+                It supports Comma Delimited CSV, Apache Avro and
+                Apache Parquet.
             if_folder_exists (str): Optional.
                 What to do if table folder exists
 
@@ -433,11 +486,12 @@ class Table(Base):
                 * 'replace' : Replace files with blank template
                 * 'pass' : Do nothing
             source_format (str): Optional
-                Data source format. Only 'csv' is supported. Defaults to 'csv'.
+                Data source format. Only 'csv', 'avro' and 'parquet'
+                are supported. Defaults to 'csv'.
 
-            columns_config_url (str): google sheets URL.
-                The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
-                The sheet must contain the column name: "coluna" and column description: "descricao"
+            columns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.
+                Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.
+                Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
 
         Raises:
             FileExistsError: If folder exists and replace is False.
@@ -481,7 +535,7 @@ class Table(Base):
                 data_sample_path = [
                     f
                     for f in data_sample_path.glob("**/*")
-                    if f.is_file() and f.suffix == ".csv"
+                    if f.is_file() and f.suffix == f".{source_format}"
                 ][0]
 
                 partition_columns = [
@@ -530,8 +584,8 @@ class Table(Base):
             # Raise: without a path to data sample, should not replace config files with empty template
             self._make_template(columns, partition_columns, if_table_config_exists)
 
-        if columns_config_url is not None:
-            self.update_columns(columns_config_url)
+        if columns_config_url_or_path is not None:
+            self.update_columns(columns_config_url_or_path)
 
         return self
 
@@ -544,7 +598,9 @@ class Table(Base):
         if_storage_data_exists="raise",
         if_table_config_exists="raise",
         source_format="csv",
-        columns_config_url=None,
+        columns_config_url_or_path=None,
+        dataset_is_public=True,
+        location=None,
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -560,6 +616,8 @@ class Table(Base):
         It currently supports the types:
 
         - Comma Delimited CSV
+        - Apache Avro
+        - Apache Parquet
 
         Data can also be partitioned following the hive partitioning scheme
         `<key1>=<value1>/<key2>=<value2>` - for instance,
@@ -590,11 +648,17 @@ class Table(Base):
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
             source_format (str): Optional
-                Data source format. Only 'csv' is supported. Defaults to 'csv'.
+                Data source format. Only 'csv', 'avro' and 'parquet'
+                are supported. Defaults to 'csv'.
 
-            columns_config_url (str): google sheets URL.
-                The URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
-                The sheet must contain the column name: "coluna" and column description: "descricao"
+            columns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.
+                Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.
+                Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
+
+            dataset_is_public (bool): Control if prod dataset is public or not. By default staging datasets like `dataset_id_staging` are not public.
+
+            location (str): Optional. Location of dataset data.
+                List of possible region names locations: https://cloud.google.com/bigquery/docs/locations
 
         """
 
@@ -634,17 +698,19 @@ class Table(Base):
             except FileExistsError:
                 pass
 
-            dataset_obj.create(if_exists="pass")
+            dataset_obj.create(
+                if_exists="pass", location=location, dataset_is_public=dataset_is_public
+            )
 
         self.init(
             data_sample_path=path,
             if_folder_exists="replace",
             if_table_config_exists=if_table_config_exists,
-            columns_config_url=columns_config_url,
+            columns_config_url_or_path=columns_config_url_or_path,
+            source_format=source_format,
         )
 
         table = bigquery.Table(self.table_full_name["staging"])
-
         table.external_data_configuration = Datatype(
             self, source_format, "staging", partitioned=self._is_partitioned()
         ).external_config
@@ -677,6 +743,7 @@ class Table(Base):
 
         self.client["bigquery_staging"].create_table(table)
 
+        
         logger.success(
             "{object} {object_id} was {action}!",
             object_id=self.table_id,
@@ -684,9 +751,9 @@ class Table(Base):
             action="created",
         )
 
+
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
-
         Args:
             mode (str): Optional.
                 Table of which table to update [prod|staging|all]

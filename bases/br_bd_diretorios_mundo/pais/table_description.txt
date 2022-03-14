@@ -1,4 +1,4 @@
-A tabela contém dados com identificadores dos países segundo instituições internacionais, além de siglas e os nomes
+Dados sobre países com identificadores segundo instituições internacionais, além de siglas e nomes.
 
 Para saber mais acesse:
 Website: 
@@ -9,22 +9,18 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Gustavo Aires
+Nome: Ricardo Dahis
 Código: 
-Website: https://github.com/gustavoairestiago
-Email: gustavo.tiago@basedosdados.org
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
 Tratado por
 -----------
-Nome: Gustavo Aires
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_mundo/code
-Website: https://github.com/gustavoairestiago
-Email: gustavo.tiago@basedosdados.org
+Nome: Ricardo Dahis
+Código: 
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
 
 
-
-
-Colunas identificando linhas unicamente
--------------------
 
 
 
@@ -37,17 +33,10 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- a
-- l
-- l
 
 
 
 
-Tratamento
-----------
-Extração dos dados do site da FAO 
- Padronização sob as diretrizes da BasedosDados
 
 
 
