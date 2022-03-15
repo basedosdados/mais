@@ -219,7 +219,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: serie
-      bigquery_type: string
+      bigquery_type: int64
       description: Série/Ano
       temporal_coverage:
           - (2)
