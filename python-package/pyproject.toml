@@ -34,6 +34,8 @@ pandas= "1.2.4"
 'ruamel.yaml'= "0.17.10"
 pyarrow = "6.0.0"
 pandavro = "^1.6.0"
+loguru = "^0.6.0"
+toml = "^0.10.2"
 
 [tool.poetry.dev-dependencies]
 Jinja2 = "3.0.3"
