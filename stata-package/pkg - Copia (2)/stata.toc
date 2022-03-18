@@ -1,0 +1,8 @@
+v 1
+d Materials by Base dos Dados
+d isabellahelter@gmail.com | rdahis@econ.puc-rio.br
+d https://basedosdados.org/
+
+d 'basedosdados': The basedosdados package enables access to more than 70 Brazilian databases already cleaned and compatibilized, available in the public datalake BD+ from the Base dos Dados organization. The package consists of 7 commands. The commands give the possibility to list all available datasets from BD+ datalake and downloading or analyzing them directly from Stata. The package aims to provide access to clean, compatible and high-quality public data.
+
+p basedosdados
