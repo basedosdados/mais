@@ -6,6 +6,7 @@ direto do seu computador ou ambiente de desenvolvimento. Atualmente disponíveis
 
 - **:material-language-python: Python**
 - **:material-language-r: R**
+- **:material-language-stata: Stata**
 - **:octicons-terminal-16: CLI (terminal)**
 
 Pronto(a) para começar? Nesta página você encontra:
@@ -41,37 +42,51 @@ Para instalação do pacote em Python e linha de comando, você pode usar o
 `pip` direto do seu terminal. Em R, basta instalar diretamente no
 RStudio ou editor de sua preferência.
 
-=== "R"
-    ```R
-    install.packages("basedosdados")
-    ```
-
 === "Python/CLI"
     ```bash
     pip install basedosdados
     ```
 
+=== "R"
+    ```R
+    install.packages("basedosdados")
+    ```
+
 === "Stata"
-    **Em desenvolvimento!** [Acompanhe e colabore aqui](https://github.com/basedosdados/mais/pull/754)
+
+    Requerimentos
+    1. Garantir que seu Stata seja a __versão 16+__
+    2. Garantir que o Python esteja instalado no seu computador.
+
+    Com os requerimentos satisfeitos, rodar os comandos abaixo:
+    ```stata
+    net install github, from("https://haghish.github.io/github/")
+    github install basedosdados/stata-package
+    ```
+
 ### Configurando o pacote
 
 Uma vez com seu projeto, você precisa configurar o pacote para usar o ID
 desse projeto nas consultas ao *datalake*. Para isso, você deve usar o
-`Project ID/ID do projeto` que a Google fornece para você assim que o
+`project_id` que a Google fornece para você assim que o
 projeto é criado.
 
 ![Exemplo de ID do Projeto no BigQuery](images/project_id_example.png)
 
+=== "Python/CLI"
+    *Não é necessário configurar o projeto de antemão. Assim que você
+    roda a 1ª consulta, o pacote irá indicar os passos para configuração.*
+
 === "R"
-    *Uma vez com o `Project ID/ID do projeto`, você deve passar essa
+    *Uma vez com o `project_id`, você deve passar essa
     informação para o pacote usando a função `set_billing_id`.*
     ```R
     set_billing_id("<YOUR_PROJECT_ID>")
     ```
 
-=== "Python/CLI"
-    *Não é necessário configurar o projeto de antemão. Assim que você
-    roda a 1ª consulta, o pacote irá indicar os passos para configuração.*
+=== "Stata"
+    *É necessário especificar o `project_id` a cada vez que usar o pacote.*
+
 
 ### Faça sua primeira consulta
 
@@ -79,24 +94,32 @@ Um exemplo simples para começar a explorar o *datalake* é puxar informações 
 municípios direto na nossa base de [Diretórios Brasileiros (tabela `municipio`)](https://basedosdados.org/dataset/br-bd-diretorios-brasil). Para isso, vamos usar a
 função `download`, baixando os dados direto para nossa máquina.
 
+=== "Python"
+    ```python
+    import basedosdados as bd
+    bd.download(savepath="<PATH>",
+    dataset_id="br-bd-diretorios-brasil", table_id="municipio")
+    ```
+
+    *Para entender mais sobre a função `download`, leia o [manual de referência](../api_reference_python).*
+
 === "R"
     ```R
     library("basedosdados")
     query <- "SELECT * FROM `basedosdados.br_bd_diretorios_brasil.municipio`"
     dir <- tempdir()
-    data <- download(query, file.path(dir, "municipio.csv"))
+    data <- download(query, "<PATH>")
     ```
 
     *Para entender mais sobre a função `download`, leia o [manual de referência](../api_reference_r).*
 
-=== "Python"
-    ```python
-    import basedosdados as bd
-    bd.download(savepath="where/to/save/file",
-    dataset_id="br-bd-diretorios-brasil", table_id="municipio")
+=== "Stata"
+    ```stata
+    bd_read_sql, ///
+        path("<PATH>") ///
+        query("SELECT * FROM `basedosdados.br_bd_diretorios_brasil.municipio`") ///
+        billing_project_id("<PROJECT_ID>")
     ```
-
-    *Para entender mais sobre a função `download`, leia o [manual de referência](../api_reference_python).*
 
 === "CLI"
     ```bash
@@ -114,6 +137,16 @@ função `download`, baixando os dados direto para nossa máquina.
 Preparamos tutoriais apresentando as principais funções de cada pacote
 para você começar a usá-los.
 
+=== "Python"
+    Blog:
+
+    - [Introdução ao pacote Python](https://dev.to/basedosdados/base-dos-dados-python-101-44lc)
+    - [Introdução ao pacote Python (cont.)](https://dev.to/basedosdados/base-dos-dados-python-102-50k0)
+    
+    Vídeos:
+
+    - [Workshop: Aplicações em Python](https://www.youtube.com/watch?v=wI2xEioDPgM)
+
 === "R"
     Blog:
 
@@ -125,18 +158,14 @@ para você começar a usá-los.
 
     - [Workshop: Aprenda a acessar dados públicos em R](https://www.youtube.com/watch?v=M9ayiseIjvI&t=250s)
 
-=== "Python"
-    Blog:
+=== "Stata"
+    Documentação:
 
-    - [Introdução ao pacote Python](https://dev.to/basedosdados/base-dos-dados-python-101-44lc)
-    - [Introdução ao pacote Python (cont.)](https://dev.to/basedosdados/base-dos-dados-python-102-50k0)
-    
-    Vídeos:
-
-    - [Workshop: Aplicações em Python](https://www.youtube.com/watch?v=wI2xEioDPgM)
+    - [GitHub](https://github.com/basedosdados/stata-package)
 
 ## Manuais de referência (API)
 
-* [:material-language-r: R](../api_reference_r)
 * [:material-language-python: Python](../api_reference_python)
+* [:material-language-r: R](../api_reference_r)
+* [:material-language-stata: Stata](../api_reference_stata)
 * [:octicons-terminal-16: CLI](../api_reference_cli)

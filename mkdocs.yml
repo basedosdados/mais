@@ -61,6 +61,7 @@ nav:
     - API:
       - Python: api_reference_python.md
       - R: api_reference_r.md
+      - Python: api_reference_stata.md
       - CLI: api_reference_cli.md
     - Contribua: 
       - Dados: colab_data.md

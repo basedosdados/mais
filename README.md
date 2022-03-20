@@ -42,18 +42,19 @@ missão de universalizar o acesso a dados de qualidade para todes.
 
 ### Versões atuais
 
-| **R** | **Python** | **Stata**
+| **Python** | **R** | **Stata**
 |-----|-----|-----|
-| `install.packages("basedosdados")` | `pip install basedosdados` | - |
-| <a href="https://CRAN.R-project.org/package=basedosdados" target="_blank"><img src="https://www.r-pkg.org/badges/version/basedosdados"></a> | <a href="https://pypi.org/project/basedosdados" target="_blank"><img src="https://badge.fury.io/py/basedosdados.svg"></a> | <a href="https://github.com/basedosdados/mais/pull/754" target="_blank"><img src="https://img.shields.io/badge/development-0.1.0-yellow"></a>
-| <a href="https://CRAN.R-project.org/package=basedosdados" target="_blank"><img src="http://cranlogs.r-pkg.org/badges/basedosdados"></a> | <a href="https://pypi.org/project/basedosdados" target="_blank"><img src="https://img.shields.io/pypi/dm/basedosdados?color=blue"></a> |
-| <a href="https://github.com/basedosdados/mais/labels/R" target="_blank"><img src="https://img.shields.io/github/issues/basedosdados/mais/R"></a> | <a href="https://github.com/basedosdados/mais/labels/python" target="_blank"><img src="https://img.shields.io/github/issues/basedosdados/mais/Python"></a> |
+| `pip install basedosdados` | `install.packages("basedosdados")` | `github install basedosdados/stata-package` |
+| <a href="https://pypi.org/project/basedosdados" target="_blank"><img src="https://badge.fury.io/py/basedosdados.svg"></a> | <a href="https://CRAN.R-project.org/package=basedosdados" target="_blank"><img src="https://www.r-pkg.org/badges/version/basedosdados"></a> | <a href="https://github.com/basedosdados/stata-package" target="_blank"><img src="https://img.shields.io/badge/development-0.1.0-yellow"></a>
+| <a href="https://pypi.org/project/basedosdados" target="_blank"><img src="https://img.shields.io/pypi/dm/basedosdados?color=blue"></a> | <a href="https://CRAN.R-project.org/package=basedosdados" target="_blank"><img src="http://cranlogs.r-pkg.org/badges/basedosdados"></a> | |
+| <a href="https://github.com/basedosdados/mais/labels/python" target="_blank"><img src="https://img.shields.io/github/issues/basedosdados/mais/Python"></a> | <a href="https://github.com/basedosdados/mais/labels/R" target="_blank"><img src="https://img.shields.io/github/issues/basedosdados/mais/R"></a> | <a href="https://github.com/basedosdados/mais/labels/Stata" target="_blank"><img src="https://img.shields.io/github/issues/basedosdados/mais/Stata"></a> |
 
 ## Encontre aqui
 
 - 📝 [Como citar o projeto](#como-citar-o-projeto)
 - 🐍 [Usando em Python](#usando-em-python)
 - <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/r/r.png" width="15"> [Usando em R](#usando-em-r)
+- [Usando em Stata](#usando-em-stata)
 - Análises e tutoriais:
   - <img
     src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Color/Github.png?raw=true"
@@ -187,6 +188,29 @@ Ou use o nosso backend para o `dplyr` e faça queries com código, sem SQL.
 O argumento `.write_fn` espera uma função que receba como argumento um tibble e um endereço de escrita, compatível com a interface convencional da língua para escrever arquivos em disco. A princípio, _toda_ função `write_*` disponível no CRAN deve funcionar. 
 
 Caso encontre algum problema no pacote e queira ajudar, basta documentar o problema em um [exemplo mínimo reprodutível](https://pt.stackoverflow.com/questions/264168/quais-as-principais-fun%C3%A7%C3%B5es-para-se-criar-um-exemplo-m%C3%ADnimo-reproduz%C3%ADvel-em-r) e abrir uma issue. 
+
+## Usando em Stata
+
+### Instale
+
+Requerimentos
+1. Garantir que seu Stata seja a __versão 16+__
+2. Garantir que o Python esteja instalado no seu computador.
+
+Com os requerimentos satisfeitos, rodar os comandos abaixo:
+```stata
+net install github, from("https://haghish.github.io/github/")
+github install basedosdados/stata-package
+```
+
+### Acesse uma tabela
+
+```stata
+bd_read_sql, ///
+    path("<PATH>") ///
+    query("SELECT * FROM `basedosdados.br_ibge_pib.municipio`") ///
+    billing_project_id("<PROJECT_ID>")
+```
 
 ### Atenção
 
