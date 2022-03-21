@@ -39,9 +39,50 @@ python setup.py develop
   
 #### Versionamento
 
-Publique nova versão
+Para publicar uma nova versão do pacote é preciso seguir os seguintes passos:
 
-```sh
-poetry version [patch|minor|major]
+1. Fazer o pull da branch:
+
+```bash
+git pull origin [python-version]
+```
+
+Onde `[python-version]` é a branch da nova versão do pacote.
+
+2. Editar `pyproject.toml`:
+
+O arquivo `pyproject.toml` contém, entre outras informações, a versão do pacote em python da **BD**. Segue excerto do arquivo:
+
+```toml
+description = "Organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery."
+homepage = "https://github.com/base-dos-dados/bases"
+license = "MIT"
+name = "basedosdados"
+packages = [
+  {include = "basedosdados"},
+]
+readme = "README.md"
+repository = "https://github.com/base-dos-dados/bases"
+version = "1.6.1-beta.2"
+```
+
+O campo `version` deve ser alterado para o número da versão sendo lançada.
+
+3. Push para branch:
+
+```bash
+git push origin [python-version]
+```
+
+4. Publicação do pacote no PyPI (exige usuário e senha):
+
+Para publicar o pacote no PyPI, use:
+
+```bash
+poetry version [python-version]
 poetry publish --build
 ```
+
+5. Faz merge da branch para a master
+6. Faz release usando a UI do GitHub
+7. Atualizar versão do pacote usada internamente
