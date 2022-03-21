@@ -63,20 +63,20 @@ version: v1.0
 # Quem está preenchendo esses metadados?
 published_by:
     name: Lucas Nascimento Moreira
-    email: lucas.nasc.m@gmail.com
-    github_user: ''
-    ckan_user: ''
-    website: https://br.linkedin.com/in/moreiranlucas
+    email: lucas.moreira@basedosdados.org
+    github_user: lucasnascm
+    ckan_user: lucasnascm
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
     name: Lucas Nascimento Moreira
-    email: lucas.nasc.m@gmail.com
-    github_user: ''
-    ckan_user: ''
-    website: https://br.linkedin.com/in/moreiranlucas
+    email: lucas.moreira@basedosdados.org
+    github_user: lucasnascm
+    ckan_user: lucasnascm
+    website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: "Download da base em https://informacoes.anatel.gov.br/paineis/acessos/banda-larga-fixa;\n\

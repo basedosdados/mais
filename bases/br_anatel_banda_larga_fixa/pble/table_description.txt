@@ -1,5 +1,4 @@
-Dados disponibilizados pela Lei de Acesso a Informação com dados da evolução ao longo dos anos (2008-2018) da instalação de infraestrutura ligada ao plano de expansão da banda larga fixa no país desde a implementação do Programa Banda Larga nas Escolas (Decreto nº 6.424/2008)
-
+Dados da implementação de internet banda larga nas escolas através do Programa Banda Larga nas Escolas (PBLE, Decreto 6.424/2008)
 
 Para saber mais acesse:
 Website: 
@@ -12,7 +11,7 @@ Publicado por
 -------------
 Nome: Lucas Nascimento Moreira
 Código: 
-Email: lucsas.moreira@basedosdados.org
+Email: lucas.moreira@basedosdados.org
 Tratado por
 -----------
 Nome: Lucas Nascimento Moreira
@@ -29,7 +28,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 2008(1)2018
+- 2008(1)2021
 
 
 
@@ -43,12 +42,15 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Padronização dos dados sob as diretrizes da BD+;
-Substituição do preenchimento por asteriscos de algumas variáveis por null em municípios com infraestrutura instalada antes de 2008
+Download da base em https://dados.gov.br/dataset/pble;
+Padronização das variáveis sob as diretrizes da BD+;
+Ajuste do formato data e id_escola;
+Inclusão de id_municipio;
+Organização das variáveis.
 
 
 
 
 Frequencia de Atualização
 -------------------------
-unique
+one_year

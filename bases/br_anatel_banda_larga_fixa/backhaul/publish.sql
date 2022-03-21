@@ -25,7 +25,7 @@ SAFE_CAST(situacao AS STRING) situacao,
 SAFE_CAST(ano_atendimento AS INT64) ano_atendimento,
 SAFE_CAST(concessionaria AS STRING) concessionaria,
 SAFE_CAST(tecnologia AS STRING) tecnologia,
-SAFE_CAST(capacidade_backhaul AS STRING) capacidade_backhaul,
-SAFE_CAST(capacidade_ocupada AS STRING) capacidade_ocupada,
-SAFE_CAST(capacidade_disponivel AS STRING) capacidade_disponivel
+SAFE_CAST(capacidade_backhaul AS INT64) capacidade_backhaul,
+SAFE_CAST(capacidade_ocupada AS FLOAT64) capacidade_ocupada,
+SAFE_CAST(capacidade_disponivel AS FLOAT64) capacidade_disponivel
 FROM basedosdados-dev.br_anatel_banda_larga_fixa_staging.backhaul AS t
