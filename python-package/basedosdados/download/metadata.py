@@ -172,11 +172,11 @@ def list_dataset_tables(
     # this dict has all information need to output the function
     table_dict = {
         "table_id": [
-            dataset["resources"][k]["name"] for k in range(len(dataset["resources"]))
+            dataset["resources"][k]["name"] for k in range(len(dataset["resources"])) if dataset['resources'][k]['resource_type']=='bdm_table'
         ],
         "description": [
             dataset["resources"][k]["description"]
-            for k in range(len(dataset["resources"]))
+            for k in range(len(dataset["resources"])) if dataset['resources'][k]['resource_type']=='bdm_table'
         ],
     }
     # select desired output using table_id info. Note that the output is either a standardized string or a list
