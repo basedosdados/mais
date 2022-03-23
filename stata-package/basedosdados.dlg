@@ -1,0 +1,37 @@
+VERSION 2.0
+SYNCHRONOUS_ONLY
+
+POSITION . . 240 90
+
+DIALOG main, label("Pacote BD")
+BEGIN
+	
+	BUTTON btn_anual			50 10 120 25, label("Primeiro uso") onpush(script child_primeiro)
+	
+	BUTTON btn_trimestral			50 52 120 25, label("Já utilizou") onpush(program child_segundo) 
+	
+	FRAME fr_anual   			0  0 400 45
+
+	FRAME fr_trimestral   			0  43 400 45
+
+END
+
+CANCEL can1, label("Cancel")
+HELP hlp1,   view("help basedosdados")
+RESET res1
+
+SCRIPT PREINIT_SCRIPT
+   BEGIN
+      create STRING nomeDialog
+      nomeDialog.storeDialogClassName
+   END
+
+SCRIPT child_primeiro
+   BEGIN
+      create CHILD instrucoes, allowsubmit
+   END   
+ 
+PROGRAM child_segundo
+BEGIN
+close
+END

@@ -1,0 +1,41 @@
+* VERSION 1.0
+VERSION 10.0
+SYNCHRONOUS_ONLY
+
+POSITION . . 630 140
+
+DIALOG main, label("Atenção: Instruções primeiro uso") tabtitle("Main")
+BEGIN
+******************************************************************************   
+GROUPBOX caixaAnos 10 30 610 100, label("Siga as intruções abaixo:")
+
+   CHECKBOX    ck05 +14 +20 490  ., label("Baixe o python no seu computador e marque 'add to path' durante a instalação.")  option(05)
+   CHECKBOX    ck06 @ +24 590    ., label("Após a instalação, procure por 'prompt' no seu computador e digite 'pip install basedosdados==1.6.2' ENTER")  option(06)
+   CHECKBOX    ck07 @ +24 590    ., label("Digite 'basedosdados reauth' no prompt e autorize a autenticação do google")  option(07)	
+   
+END
+
+
+******************************************************************************
+
+OK ok1,      label("OK")
+SUBMIT sub1
+CANCEL can1, label("Cancel")
+HELP hlp1,   view("help basedosdados")
+RESET res1
+
+******************************************************************************
+
+	
+
+PROGRAM command
+	BEGIN
+		put "basedosdados"
+		beginoptions
+			/*Parte da syntax: check*/
+			put "months("
+			option main.ck05 main.ck06 main.ck07
+			put ") "
+		endoptions
+		stata
+	END

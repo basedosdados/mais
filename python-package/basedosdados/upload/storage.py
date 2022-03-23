@@ -7,22 +7,12 @@ import sys
 
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
+from loguru import logger
 
 from google.api_core import exceptions
 from google.api_core.retry import Retry
 
 # google retryble exceptions. References: https://googleapis.dev/python/storage/latest/retry_timeout.html#module-google.cloud.storage.retry
-_MY_RETRIABLE_TYPES = [
-    exceptions.TooManyRequests,  # 429
-    exceptions.InternalServerError,  # 500
-    exceptions.BadGateway,  # 502
-    exceptions.ServiceUnavailable,  # 503
-    exceptions.from_http_response,
-]
-
-
-def _is_retryable(exc):
-    return isinstance(exc, _MY_RETRIABLE_TYPES)
 
 
 class Storage(Base):
@@ -228,6 +218,14 @@ class Storage(Base):
                         "to 'replace' to overwrite data."
                     )
 
+        logger.success(
+            " {object} {filename}_{mode} was {action}!",
+            filename=filepath.name,
+            mode=mode,
+            object="File",
+            action="uploaded",
+        )
+
     def download(
         self,
         filename="*",
@@ -311,6 +309,14 @@ class Storage(Base):
             # download blob to savepath
             blob.download_to_filename(filename=f"{savepath}/{blob.name}")
 
+        logger.success(
+            " {object} {object_id}_{mode} was {action}!",
+            object_id=self.dataset_id,
+            mode=mode,
+            object="File",
+            action="downloaded",
+        )
+
     def delete_file(self, filename, mode, partitions=None, not_found_ok=False):
         """Deletes file from path `<bucket_name>/<mode>/<dataset_id>/<table_id>/<partitions>/<filename>`.
 
@@ -336,16 +342,23 @@ class Storage(Base):
             if mode == "all"
             else [mode]
         )
-        # define retry policy for google cloud storage exceptions
 
         for m in mode:
 
             blob = self.bucket.blob(self._build_blob_name(filename, m, partitions))
 
             if blob.exists() or not blob.exists() and not not_found_ok:
-                blob.delete(retry=Retry(predicate=_is_retryable))
+                blob.delete()
             else:
                 return
+
+        logger.success(
+            " {object} {filename}_{mode} was {action}!",
+            filename=filename,
+            mode=mode,
+            object="File",
+            action="deleted",
+        )
 
     def delete_table(self, mode="staging", bucket_name=None, not_found_ok=False):
         """Deletes a table from storage, sends request in batches.
@@ -395,11 +408,11 @@ class Storage(Base):
                 tqdm(table_blobs_chunks, desc="Delete Table Chunk")
             ):
                 counter = 0
-                while counter < 100:
+                while counter < 10:
                     try:
                         with self.client["storage_staging"].batch():
                             for blob in source_table:
-                                blob.delete(retry=Retry(predicate=_is_retryable))
+                                blob.delete()
                         break
                     except Exception as e:
                         print(
@@ -408,6 +421,13 @@ class Storage(Base):
                         time.sleep(5)
                         counter += 1
                         traceback.print_exc(file=sys.stderr)
+        logger.success(
+            " {object} {object_id}_{mode} was {action}!",
+            object_id=self.table_id,
+            mode=mode,
+            object="Table",
+            action="deleted",
+        )
 
     def copy_table(
         self,
@@ -461,14 +481,13 @@ class Storage(Base):
             tqdm(source_table_ref_chunks, desc="Copy Table Chunk")
         ):
             counter = 0
-            while counter < 100:
+            while counter < 10:
                 try:
                     with self.client["storage_staging"].batch():
                         for blob in source_table:
                             self.bucket.copy_blob(
                                 blob,
                                 destination_bucket=destination_bucket,
-                                retry=Retry(predicate=_is_retryable),
                             )
                     break
                 except Exception as e:
@@ -478,3 +497,10 @@ class Storage(Base):
                     counter += 1
                     time.sleep(5)
                     traceback.print_exc(file=sys.stderr)
+        logger.success(
+            " {object} {object_id}_{mode} was {action}!",
+            object_id=self.table_id,
+            mode=mode,
+            object="Table",
+            action="copied",
+        )

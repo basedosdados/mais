@@ -1,24 +1,25 @@
 from google.cloud import bigquery
 import pandas as pd
+import requests
 
 from basedosdados.download.base import credentials
 
-
-def _get_header(text):
-    """Gets first paragraph of a text
-
-    Args:
-        text (str or None): Text to be split
-
-    Returns:
-        str: First paragraph
+def _safe_fetch(url:str):
     """
-
-    if isinstance(text, str):
-        return text.split("\n")[0]
-    elif text is None:
-        return ""
-
+    Safely fetchs urls and, if somehting goes wrong, informs user what is the possible cause
+    """
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return response
+    except requests.exceptions.RequestException as err:
+        print ("This url doesn't appear to exists:",err)
+    except requests.exceptions.HTTPError as errh:
+        print ("Http Error:",errh)
+    except requests.exceptions.ConnectionError as errc:
+        print ("Error Connecting:",errc)
+    except requests.exceptions.Timeout as errt:
+        print ("Timeout Error:",errt)   
 
 def _fix_size(s, step=80):
 
@@ -32,7 +33,6 @@ def _fix_size(s, step=80):
 
 def _print_output(df):
     """Prints dataframe contents as print blocks
-
     Args:
         df (pd.DataFrame): table to be printed
     """
@@ -45,14 +45,6 @@ def _print_output(df):
             print(_fix_size(f"{c}: \n\t{row[c]}"))
         print("-" * (step + 15))
     print()
-
-    # func = lambda lista, final, step: (
-    # func(lista[1:],
-    #     (final + lista[0] + ' ')
-    #         if len(final.split('\n')[-1]) <= step
-    #         else final + '\n',
-    #      step
-    #        ) if len(lista) else final)
 
 
 def _handle_output(verbose, output_type, df, col_name=None):
@@ -91,234 +83,226 @@ def _handle_output(verbose, output_type, df, col_name=None):
 
     return None
 
-
-def list_datasets(
-    query_project_id="basedosdados",
-    filter_by=None,
-    with_description=False,
-    from_file=False,
-    verbose=True,
-):
-    """Fetch the dataset_id of datasets available at query_project_id. Prints information on
-    screen or returns it as a list.
+def list_datasets(query, limit=10, with_description=False, verbose=True):
+    """
+    This function uses `bd_dataset_search` website API
+    enpoint to retrieve a list of available datasets.
 
     Args:
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
-        filter_by (str): Optional
-            String to be matched in dataset_id.
+        query (str):
+            String to search in datasets' metadata.
+        limit (int):
+            Field to limit the number of results
         with_description (bool): Optional
             If True, fetch short dataset description for each dataset.
         verbose (bool): Optional.
             If set to True, information is printed to the screen. If set to False, a list object is returned.
 
-
-    Example:
-        list_datasets(
-        filter_by='sp',
-        with_description=True,
-        )
+    Returns:
+        list | stdout
     """
 
-    client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=query_project_id
-    )
+    url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q={query}&page_size={limit}&resource_type=bdm_table"
 
-    datasets_list = list(client.list_datasets())
+    response = _safe_fetch(url)
 
-    datasets = pd.DataFrame(
-        [dataset.dataset_id for dataset in datasets_list], columns=["dataset_id"]
-    )
+    json_response = response.json()
 
-    if filter_by:
+    # this dict has all information we need to output the function
+    dataset_dict = {
+        "dataset_id": [
+            dataset["name"] for dataset in json_response["result"]["datasets"]
+        ],
+        "description": [
+            dataset["notes"] if "notes" in dataset.keys() else None
+            for dataset in json_response["result"]["datasets"]
+        ],
+    }
 
-        datasets = datasets.loc[datasets["dataset_id"].str.contains(filter_by)]
-
-    if with_description:
-
-        datasets["description"] = [
-            _get_header(client.get_dataset(dataset).description)
-            for dataset in datasets["dataset_id"]
+    # select desired output using dataset_id info. Note that the output is either a standardized string or a list
+    if verbose & (with_description == False):
+        return _print_output(pd.DataFrame.from_dict(dataset_dict)[["dataset_id"]])
+    elif verbose & with_description:
+        return _print_output(
+            pd.DataFrame.from_dict(dataset_dict)[["dataset_id", "description"]]
+        )
+    elif (verbose == False) & (with_description == False):
+        return dataset_dict["dataset_id"]
+    elif (verbose == False) & with_description:
+        return [
+            {
+                "dataset_id": dataset_dict["dataset_id"][k],
+                "description": dataset_dict["description"][k],
+            }
+            for k in range(len(dataset_dict["dataset_id"]))
         ]
-
-    return _handle_output(
-        verbose=verbose,
-        output_type="list",
-        df=datasets,
-        col_name="dataset_id",
-    )
 
 
 def list_dataset_tables(
     dataset_id,
-    query_project_id="basedosdados",
-    from_file=False,
-    filter_by=None,
     with_description=False,
     verbose=True,
 ):
-    """Fetch table_id for tables available at the specified dataset_id. Prints the information
-    on screen or returns it as a list.
+    """
+    Fetch table_id for tables available at the specified dataset_id. Prints the information on screen or returns it as a list.
 
     Args:
         dataset_id (str): Optional.
-            Dataset id available in basedosdados.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
-        filter_by (str): Optional
-            String to be matched in the table_id.
+            Dataset id returned by list_datasets function
+        limit (int):
+            Field to limit the number of results
         with_description (bool): Optional
              If True, fetch short table descriptions for each table that match the search criteria.
         verbose (bool): Optional.
             If set to True, information is printed to the screen. If set to False, a list object is returned.
 
-    Example:
-        list_dataset_tables(
-        dataset_id='br_ibge_censo2010'
-        filter_by='renda',
-        with_description=True,
-        )
+    Returns:
+        stdout | list
     """
-    client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=query_project_id
-    )
 
-    dataset = client.get_dataset(dataset_id)
+    dataset_id = dataset_id.replace("-","_") #The dataset_id pattern in the bd_dataset_search endpoint response uses a hyphen as a separator, while in the endpoint urls that specify the dataset_id parameter the separator used is an underscore. See issue #1079
 
-    tables_list = list(client.list_tables(dataset))
+    url = f"https://basedosdados.org/api/3/action/bd_bdm_dataset_show?dataset_id={dataset_id}"
 
-    tables = pd.DataFrame(
-        [table.table_id for table in tables_list], columns=["table_id"]
-    )
+    response = _safe_fetch(url)
 
-    if filter_by:
+    json_response = response.json()
 
-        tables = tables.loc[tables["table_id"].str.contains(filter_by)]
-
-    if with_description:
-
-        tables["description"] = [
-            _get_header(client.get_table(f"{dataset_id}.{table}").description)
-            for table in tables["table_id"]
+    dataset = json_response["result"]
+    # this dict has all information need to output the function
+    table_dict = {
+        "table_id": [
+            dataset["resources"][k]["name"] for k in range(len(dataset["resources"]))
+        ],
+        "description": [
+            dataset["resources"][k]["description"]
+            for k in range(len(dataset["resources"]))
+        ],
+    }
+    # select desired output using table_id info. Note that the output is either a standardized string or a list
+    if verbose & (with_description == False):
+        return _print_output(pd.DataFrame.from_dict(table_dict)[["table_id"]])
+    elif verbose & with_description:
+        return _print_output(
+            pd.DataFrame.from_dict(table_dict)[["table_id", "description"]]
+        )
+    elif (verbose == False) & (with_description == False):
+        return table_dict["table_id"]
+    elif (verbose == False) & with_description:
+        return [
+            {
+                "table_id": table_dict["table_id"][k],
+                "description": table_dict["description"][k],
+            }
+            for k in range(len(table_dict["table_id"]))
         ]
-
-    return _handle_output(
-        verbose=verbose,
-        output_type="list",
-        df=tables,
-        col_name="table_id",
-    )
 
 
 def get_dataset_description(
-    dataset_id=None,
-    query_project_id="basedosdados",
-    from_file=False,
+    dataset_id,
     verbose=True,
 ):
-    """Prints the full dataset description.
+    """
+    Prints the full dataset description.
 
     Args:
-        dataset_id (str): Optional.
-            Dataset id available in basedosdados.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
+        dataset_id (str): Required.
+            Dataset id available in list_datasets.
         verbose (bool): Optional.
             If set to True, information is printed to the screen. If set to False, data is returned as a `str`.
+
+    Returns:
+        stdout | str
     """
+    url = f"https://basedosdados.org/api/3/action/bd_bdm_dataset_show?dataset_id={dataset_id}"
 
-    client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=query_project_id
-    )
+    response = _safe_fetch(url)
 
-    dataset = client.get_dataset(dataset_id)
+    json_response = response.json()
 
-    return _handle_output(verbose=verbose, output_type="str", df=dataset)
+    description = json_response["result"]["notes"]
+
+    if verbose:
+        print(description)
+    else:
+        return description
 
 
 def get_table_description(
-    dataset_id=None,
-    table_id=None,
-    query_project_id="basedosdados",
-    from_file=False,
+    dataset_id,
+    table_id,
     verbose=True,
 ):
-    """Prints the full table description.
+    """
+    Prints the full table description.
 
     Args:
-        dataset_id (str): Optional.
-            Dataset id available in basedosdados. It should always come with table_id.
-        table_id (str): Optional.
-            Table id available in basedosdados.dataset_id.
-            It should always come with dataset_id.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
+        dataset_id (str): Required.
+            Dataset id available in list_datasets.
+        table_id (str): Required.
+            Table id available in list_dataset_tables
         verbose (bool): Optional.
             If set to True, information is printed to the screen. If set to False, data is returned as a `str`.
+
+    Returns:
+        stdout | str
     """
 
-    client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=query_project_id
-    )
+    url = f"https://basedosdados.org/api/3/action/bd_bdm_table_show?dataset_id={dataset_id}&table_id={table_id}"
 
-    table = client.get_table(f"{dataset_id}.{table_id}")
+    response = _safe_fetch(url)
 
-    return _handle_output(verbose=verbose, output_type="str", df=table)
+    json_response = response.json()
+
+    description = json_response["result"]["description"]
+
+    if verbose:
+        print(description)
+    else:
+        return description
 
 
 def get_table_columns(
-    dataset_id=None,
-    table_id=None,
-    query_project_id="basedosdados",
-    from_file=False,
+    dataset_id,
+    table_id,
     verbose=True,
 ):
 
-    """Fetch the names, types and descriptions for the columns in the specified table. Prints
-    information on screen.
-
+    """
+        Fetch the names, types and descriptions for the columns in the specified table. Prints
+        information on screen.
     Args:
-        dataset_id (str): Optional.
-            Dataset id available in basedosdados. It should always come with table_id.
-        table_id (str): Optional.
-            Table id available in basedosdados.dataset_id.
-            It should always come with dataset_id.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
+        dataset_id (str): Required.
+            Dataset id available in list_datasets.
+        table_id (str): Required.
+            Table id available in list_dataset_tables
         verbose (bool): Optional.
             If set to True, information is printed to the screen. If set to False, data is returned as a `list` of `dict`s.
-    Example:
-        get_table_columns(
-        dataset_id='br_ibge_censo2010',
-        table_id='pessoa_renda_setor_censitario'
-        )
+
+    Returns:
+        stdout | list
     """
 
-    client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=query_project_id
-    )
+    url = f"https://basedosdados.org/api/3/action/bd_bdm_table_show?dataset_id={dataset_id}&table_id={table_id}"
 
-    table_ref = client.get_table(f"{dataset_id}.{table_id}")
+    response = _safe_fetch(url)
 
-    columns = [
-        (field.name, field.field_type, field.description) for field in table_ref.schema
-    ]
+    json_response = response.json()
 
-    description = pd.DataFrame(columns, columns=["name", "field_type", "description"])
+    columns = json_response["result"]["columns"]
 
-    return _handle_output(verbose=verbose, output_type="records", df=description)
+    if verbose:
+        _print_output(pd.DataFrame(columns))
+    else:
+        return columns
 
 
 def get_table_size(
     dataset_id,
     table_id,
-    billing_project_id,
-    query_project_id="basedosdados",
-    from_file=False,
     verbose=True,
 ):
-    """Use a query to get the number of rows and size (in Mb) of a table query
-    from BigQuery. Prints information on screen in markdown friendly format.
+    """Use a query to get the number of rows and size (in Mb) of a table.
 
     WARNING: this query may cost a lot depending on the table.
 
@@ -328,41 +312,67 @@ def get_table_size(
         table_id (str): Optional.
             Table id available in basedosdados.dataset_id.
             It should always come with dataset_id.
-        query_project_id (str): Optional.
-            Which project the table lives. You can change this you want to query different projects.
-        billing_project_id (str): Optional.
-            Project that will be billed. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard
         verbose (bool): Optional.
             If set to True, information is printed to the screen. If set to False, data is returned as a `list` of `dict`s.
-    Example:
-        get_table_size(
-        dataset_id='br_ibge_censo2010',
-        table_id='pessoa_renda_setor_censitario',
-        billing_project_id='yourprojectid'
-        )
     """
-    billing_client = bigquery.Client(
-        credentials=credentials(from_file=from_file), project=billing_project_id
-    )
+    url = f"https://basedosdados.org/api/3/action/bd_bdm_table_show?dataset_id={dataset_id}&table_id={table_id}"
 
-    query = f"""SELECT COUNT(*) FROM {query_project_id}.{dataset_id}.{table_id}"""
+    response = _safe_fetch(url)
 
-    job = billing_client.query(query, location="US")
+    json_response = response.json()
 
-    num_rows = job.to_dataframe().loc[0, "f0_"]
+    size = json_response["result"]["size"]
 
-    size_mb = round(job.total_bytes_processed / 1024 / 1024, 2)
+    if size==None:
+        print("Size not available")
+    else:
+        if verbose:
+            _print_output(pd.DataFrame(size))
+        else:
+            return size
+def search(query, order_by):
+    """This function works as a wrapper to the `bd_dataset_search` website API
+    enpoint.
 
-    table_data = pd.DataFrame(
-        [
-            {
-                "project_id": query_project_id,
-                "dataset_id": dataset_id,
-                "table_id": table_id,
-                "num_rows": num_rows,
-                "size_mb": size_mb,
-            }
-        ]
-    )
+    Args:
+        query (str):
+            String to search in datasets and tables' metadata.
+        order_by (str): score|popular|recent
+            Field by which the results will be ordered.
 
-    return _handle_output(verbose=verbose, output_type="records", df=table_data)
+    Returns:
+        pd.DataFrame:
+            Response from the API presented as a pandas DataFrame. Each row is
+            a table. Each column is a field identifying the table.
+    """
+
+    # validate order_by input
+    if order_by not in ["score", "popular", "recent"]:
+        raise ValueError(
+            f'order_by must be score, popular or recent. Received "{order_by}"'
+        )
+
+    url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q={query}&order_by={order_by}&resource_type=bdm_table"
+
+    response = _safe_fetch(url)
+
+    json_response = response.json()
+
+    dataset_dfs = []
+    # first loop identify the number of the tables in each datasets
+    for dataset in json_response["result"]["datasets"]:
+        tables_dfs = []
+        len(dataset["resources"])
+        # second loop extracts tables' information for each dataset
+        for table in dataset["resources"]:
+            data_table = pd.DataFrame(
+                {k: str(table[k]) for k in list(table.keys())}, index=[0]
+            )
+            tables_dfs.append(data_table)
+        # append tables' dataframes for each dataset
+        data_ds = tables_dfs[0].append(tables_dfs[1:]).reset_index(drop=True)
+        dataset_dfs.append(data_ds)
+    # append datasets' dataframes
+    df = dataset_dfs[0].append(dataset_dfs[1:]).reset_index(drop=True)
+
+    return df
