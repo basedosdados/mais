@@ -1,9 +1,9 @@
-from basedosdados.constants import constants, config
 import sys
 import os
 
-sys.path.append(os.getcwd() + "/python-package")
+sys.path.append(f"{os.getcwd()}/python-package")
 
+from basedosdados.constants import constants, config
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.table import Table
