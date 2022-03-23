@@ -126,7 +126,7 @@ import basedosdados as bd
 bd.list_datasets()
 ```
 
-### Como modificar configurações do pacote
+### Como definir paramêtros utilizando as configurações do pacote
 
 ```py
 import basedosdados as bd
