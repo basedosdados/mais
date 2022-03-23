@@ -38,7 +38,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install basedosdados==1.6.3b1 toml loguru
       - name: Set up gcloud
-        uses: google-github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@v0
         with:
           version: "290.0.1"
           project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
