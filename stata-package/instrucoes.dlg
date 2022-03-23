@@ -1,5 +1,4 @@
 * VERSION 1.0
-VERSION 10.0
 SYNCHRONOUS_ONLY
 
 POSITION . . 630 140
@@ -30,12 +29,6 @@ RESET res1
 
 PROGRAM command
 	BEGIN
-		put "basedosdados"
-		beginoptions
-			/*Parte da syntax: check*/
-			put "months("
-			option main.ck05 main.ck06 main.ck07
-			put ") "
-		endoptions
+		put "bd_list_datasets"
 		stata
 	END

@@ -25,7 +25,7 @@ already exist and the file should end with the `.csv` extension {p_end}
 {opth query(SQL)}: valid SQL Standard Query to basedosdados. If query is available, dataset_id and table_id are not required.{p_end}
 
 {phang}
-{opth billing_project_id(project_id)}: string containing your billing project id. Find your Project ID here https://console.cloud.google.com/projectselector2/home/dashboard{p_end}
+{opth billing_project_id(project_id)}: string containing your billing project id. Find your Project ID here {browse "https://console.cloud.google.com/projectselector2/home/dashboard": https://console.cloud.google.com/projectselector2/home/dashboard} {p_end}
 
 {synoptline}
 
@@ -35,7 +35,7 @@ already exist and the file should end with the `.csv` extension {p_end}
 {pstd}
 
 {pstd} To use {cmd:bd_read_sql} you must have Stata version 16+ and the Python {it:`basedosdados`} package installed and configured. If not, 
-run {it:`pip install basedosdados`} and configure following the instructions at {browse "https://basedosdados.github.io/mais/":https://basedosdados.github.io/mais/}.
+run {it:`pip install basedosdados`} and configure following the instructions at {browse "https://github.com/basedosdados/stata-package":https://github.com/basedosdados/stata-package}.
 
 {pstd} Base dos Dados (BD) is a nonprofit with the mission to make access to high-quality data universal. You can support the project at {browse "https://apoia.se/basedosdados":https://apoia.se/basedosdados}. We also welcome collaboration and 
 suggestions, so feel free to open issues on our Github page {browse "https://github.com/basedosdados/": https://github.com/basedosdados/} or get in touch 
@@ -58,5 +58,5 @@ Stata also has other commands for manipulating basedosdados's data; see
 
 {title: Author}
 
-{phang2} Base dos Dados at {browse "https://basedosdados.org/":https://basedosdados.org/}. Email: contato@basedosdados.org.
+{phang2} Base dos Dados at {browse "https://basedosdados.org/":https://basedosdados.org/}. Email: E-mail: rdahis@econ.puc-rio.br or isabellahelter@gmail.com
 {p_end}
