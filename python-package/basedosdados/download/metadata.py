@@ -1,6 +1,8 @@
 from google.cloud import bigquery
 import pandas as pd
 import requests
+from collections import defaultdict
+import math
 
 from basedosdados.download.base import credentials
 
@@ -19,7 +21,23 @@ def _safe_fetch(url:str):
     except requests.exceptions.ConnectionError as errc:
         print ("Error Connecting:",errc)
     except requests.exceptions.Timeout as errt:
-        print ("Timeout Error:",errt)   
+        print ("Timeout Error:",errt)  
+
+def _dict_from_page(json_response):
+    """
+    Generate a dict from BD's API response with dataset_id and description as keys
+    """
+    temp_dict = {
+        "dataset_id": [
+            dataset["name"] for dataset in json_response["result"]["datasets"]
+        ],
+        "description": [
+            dataset["notes"] if "notes" in dataset.keys() else None
+            for dataset in json_response["result"]["datasets"]
+        ],
+    }
+
+    return temp_dict
 
 def _fix_size(s, step=80):
 
@@ -83,16 +101,12 @@ def _handle_output(verbose, output_type, df, col_name=None):
 
     return None
 
-def list_datasets(query, limit=10, with_description=False, verbose=True):
+def list_datasets(with_description=False, verbose=True):
     """
     This function uses `bd_dataset_search` website API
     enpoint to retrieve a list of available datasets.
 
     Args:
-        query (str):
-            String to search in datasets' metadata.
-        limit (int):
-            Field to limit the number of results
         with_description (bool): Optional
             If True, fetch short dataset description for each dataset.
         verbose (bool): Optional.
@@ -101,34 +115,46 @@ def list_datasets(query, limit=10, with_description=False, verbose=True):
     Returns:
         list | stdout
     """
-
-    url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q={query}&page_size={limit}&resource_type=bdm_table"
-
+    # first request is made separately since we need to now the number of pages before the iteration
+    page_size = 100  # this function will only made more than one requisition if there are more than 100 datasets in the API response #pylint: disable=C0301
+    url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q=&resource_type=bdm_table&page=1&page_size={page_size}"  # pylint: disable=C0301
     response = _safe_fetch(url)
-
     json_response = response.json()
+    n_datasets = json_response["result"]["count"]
+    n_pages = math.ceil(n_datasets / page_size)
+    temp_dict = _dict_from_page(json_response)
 
-    # this dict has all information we need to output the function
-    dataset_dict = {
-        "dataset_id": [
-            dataset["name"] for dataset in json_response["result"]["datasets"]
-        ],
-        "description": [
-            dataset["notes"] if "notes" in dataset.keys() else None
-            for dataset in json_response["result"]["datasets"]
-        ],
-    }
+    temp_dicts = [temp_dict]
+    for page in range(2, n_pages + 1):
+        url = f"https://basedosdados.org/api/3/action/bd_dataset_search?q=&resource_type=bdm_table&page={page}&page_size={page_size}"  # pylint: disable=C0301
+        response = _safe_fetch(url)
+        json_response = response.json()
+        temp_dict = _dict_from_page(json_response)
+        temp_dicts.append(temp_dict)
 
-    # select desired output using dataset_id info. Note that the output is either a standardized string or a list
-    if verbose & (with_description == False):
+    dataset_dict = defaultdict(list)
+
+    for d in temp_dicts:  # pylint: disable=C0103
+        for key, value in d.items():
+            dataset_dict[key].append(value)
+
+    # flat inner lists
+    dataset_dict["dataset_id"] = [
+        item for sublist in dataset_dict["dataset_id"] for item in sublist
+    ]  # pylint: disable=C0301
+    dataset_dict["description"] = [
+        item for sublist in dataset_dict["description"] for item in sublist
+    ]  # pylint: disable=C0301
+    # select desired output using dataset_id info. Note that the output is either a standardized string or a list #pylint: disable=C0301
+    if verbose & (with_description is False):
         return _print_output(pd.DataFrame.from_dict(dataset_dict)[["dataset_id"]])
     elif verbose & with_description:
         return _print_output(
             pd.DataFrame.from_dict(dataset_dict)[["dataset_id", "description"]]
         )
-    elif (verbose == False) & (with_description == False):
+    elif (verbose is False) & (with_description is False):
         return dataset_dict["dataset_id"]
-    elif (verbose == False) & with_description:
+    elif (verbose is False) & with_description:
         return [
             {
                 "dataset_id": dataset_dict["dataset_id"][k],
@@ -136,7 +162,6 @@ def list_datasets(query, limit=10, with_description=False, verbose=True):
             }
             for k in range(len(dataset_dict["dataset_id"]))
         ]
-
 
 def list_dataset_tables(
     dataset_id,
@@ -172,11 +197,11 @@ def list_dataset_tables(
     # this dict has all information need to output the function
     table_dict = {
         "table_id": [
-            dataset["resources"][k]["name"] for k in range(len(dataset["resources"]))
+            dataset["resources"][k]["name"] for k in range(len(dataset["resources"])) if dataset['resources'][k]['resource_type']=='bdm_table'
         ],
         "description": [
             dataset["resources"][k]["description"]
-            for k in range(len(dataset["resources"]))
+            for k in range(len(dataset["resources"])) if dataset['resources'][k]['resource_type']=='bdm_table'
         ],
     }
     # select desired output using table_id info. Note that the output is either a standardized string or a list

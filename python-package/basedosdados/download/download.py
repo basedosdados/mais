@@ -22,6 +22,16 @@ from basedosdados.constants import config, constants
 from pandas_gbq.gbq import GenericGBQException
 
 
+def _set_config_variables(billing_project_id, from_file):
+
+    # standard billing_project_id configuration
+    billing_project_id = billing_project_id or config.billing_project_id
+    # standard from_file configuration
+    from_file = from_file or config.from_file
+
+    return billing_project_id, from_file
+
+
 def read_sql(
     query,
     billing_project_id=None,
@@ -50,9 +60,9 @@ def read_sql(
             Query result
     """
 
-    # standard billing_project_id configuration
-    if billing_project_id is None:
-        billing_project_id == config.billing_project_id
+    billing_project_id, from_file = _set_config_variables(
+        billing_project_id=billing_project_id, from_file=from_file
+    )
 
     try:
         # Set a two hours timeout
@@ -127,9 +137,9 @@ def read_table(
             Query result
     """
 
-    # standard billing_project_id configuration
-    if billing_project_id is None:
-        billing_project_id == config.billing_project_id
+    billing_project_id, from_file = _set_config_variables(
+        billing_project_id=billing_project_id, from_file=from_file
+    )
 
     if (dataset_id is not None) and (table_id is not None):
         query = f"""
@@ -205,14 +215,14 @@ def download(
         Exception: If either table_id, dataset_id or query are empty.
     """
 
+    billing_project_id, from_file = _set_config_variables(
+        billing_project_id=billing_project_id, from_file=from_file
+    )
+
     if (query is None) and ((table_id is None) or (dataset_id is None)):
         raise BaseDosDadosException(
             "Either table_id, dataset_id or query should be filled."
         )
-
-    # standard billing_project_id configuration
-    if billing_project_id is None:
-        billing_project_id == config.billing_project_id
 
     client = google_client(query_project_id, billing_project_id, from_file, reauth)
 

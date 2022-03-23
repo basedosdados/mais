@@ -22,31 +22,26 @@ SAVEFILE = Path(__file__).parent / "tmp_bases" / "test.csv"
 SAVEPATH = Path(__file__).parent / "tmp_bases"
 shutil.rmtree(SAVEPATH, ignore_errors=True)
 
+
 def test_list_datasets_simple_verbose(capsys):
 
-    out = list_datasets(
-        query="trabalho", limit=10, with_description=False, verbose=True
-    )
+    out = list_datasets(with_description=False, verbose=True)
     out, err = capsys.readouterr()  # Capture prints
     assert "dataset_id" in out
-    # check input error
-    with pytest.raises(ValueError):
-        search(query="trabalho", order_by="name")
 
 
 def test_list_datasets_simple_list():
 
-    out = list_datasets(query="", limit=12, with_description=False, verbose=False)
+    out = list_datasets(with_description=False, verbose=False)
     # check if function returns list
     assert isinstance(out, list)
-    assert len(out) == 12
+    # check if list all datasets in API
+    assert len(out) >= 84
 
 
 def test_list_datasets_complete_list():
 
-    out = list_datasets(
-        query="trabalho", limit=12, with_description=True, verbose=False
-    )
+    out = list_datasets(with_description=True, verbose=False)
     # check if function returns list
     assert isinstance(out, list)
     assert "dataset_id" in out[0].keys()
@@ -55,7 +50,7 @@ def test_list_datasets_complete_list():
 
 def test_list_datasets_complete_verbose(capsys):
 
-    list_datasets(query="trabalho", limit=10, with_description=True, verbose=True)
+    list_datasets(with_description=True, verbose=True)
     out, err = capsys.readouterr()  # Capture prints
     assert "dataset_id" in out
     assert "description" in out
@@ -145,6 +140,7 @@ def test_get_table_columns_verbose_false():
     assert type(out) == list
     assert len(out) > 0
 
+
 def test_search():
     out = search(query="agua", order_by="score")
     # check if function returns pd.DataFrame
@@ -155,6 +151,7 @@ def test_search():
     with pytest.raises(ValueError):
         search(query="agua", order_by="name")
 
+
 def test_get_table_size(capsys):
     get_table_size(
         dataset_id="br_ibge_censo_demografico",
@@ -163,11 +160,14 @@ def test_get_table_size(capsys):
     out, err = capsys.readouterr()
     assert "not available" in out
 
+
 def test__safe_fetch(capsys):
 
     _safe_fetch("https://www.lkajsdhgfal.com.br")
     out, err = capsys.readouterr()  # Capture prints
     assert "HTTPSConnection" in out
 
-    response = _safe_fetch("https://basedosdados.org/api/3/action/bd_dataset_search?q=agua&page_size=10&resource_type=bdm_table")
-    assert type(response.json())==dict
+    response = _safe_fetch(
+        "https://basedosdados.org/api/3/action/bd_dataset_search?q=agua&page_size=10&resource_type=bdm_table"
+    )
+    assert type(response.json()) == dict

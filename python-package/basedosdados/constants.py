@@ -9,6 +9,7 @@ class config:
     verbose: bool = True
     billing_project_id: str = None
     project_config_path: str = None
+    from_file: bool = False
 
 
 class constants(Enum):
