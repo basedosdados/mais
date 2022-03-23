@@ -27,10 +27,12 @@ class Base:
         metadata_path=None,
         overwrite_cli_config=False,
     ):
-
         # standard config_path configuration
-        if config_path is None:
-            config_path == config.config_path
+        config_path = (
+            config.project_config_path
+            if config.project_config_path is not None
+            else config_path
+        )
 
         self.config_path = Path.home() / config_path
         self._init_config(force=overwrite_cli_config)

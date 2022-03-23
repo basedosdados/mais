@@ -1,4 +1,4 @@
-from basedosdados.constants import constants
+from basedosdados.constants import constants, config
 import sys
 import os
 
@@ -21,5 +21,5 @@ from basedosdados.download.metadata import (
     get_dataset_description,
     get_table_columns,
     get_table_size,
-    search
+    search,
 )
