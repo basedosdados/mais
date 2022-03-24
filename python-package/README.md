@@ -2,15 +2,23 @@
 
 ## Desenvolvimento
 
-#### Suba o ambiente localmente
+### Linux e Mac:
+
+Clone o repositório principal:
+
+```sh
+git clone https://github.com/basedosdados/mais.git
+```
+Entre na pasta local do repositório usando `cd mais/` e suba o ambiente localmente:
 
 ```sh
 make create-env
 . .mais/bin/activate
+cd python-package/
 python setup.py develop
 ```
 
-### Desenvolva uma nova feature
+#### Desenvolva uma nova feature
 
 1. Abra uma branch com o nome issue-<X>
 2. Faça as modificações necessárias
@@ -19,7 +27,7 @@ python setup.py develop
 4. O nome do PR deve seguir o padrão
   `[infra] <titulo explicativo>`
 
-### O que uma modificação precisa ter
+#### O que uma modificação precisa ter
   
 - Resolver o problema
 - Lista de modificações efetuadas
@@ -31,16 +39,50 @@ python setup.py develop
   
 #### Versionamento
 
-Publique nova versão
+Para publicar uma nova versão do pacote é preciso seguir os seguintes passos:
 
-```sh
-poetry version [patch|minor|major]
+1. Fazer o pull da branch:
+
+```bash
+git pull origin [python-version]
+```
+
+Onde `[python-version]` é a branch da nova versão do pacote.
+
+2. Editar `pyproject.toml`:
+
+O arquivo `pyproject.toml` contém, entre outras informações, a versão do pacote em python da **BD**. Segue excerto do arquivo:
+
+```toml
+description = "Organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery."
+homepage = "https://github.com/base-dos-dados/bases"
+license = "MIT"
+name = "basedosdados"
+packages = [
+  {include = "basedosdados"},
+]
+readme = "README.md"
+repository = "https://github.com/base-dos-dados/bases"
+version = "1.6.1-beta.2"
+```
+
+O campo `version` deve ser alterado para o número da versão sendo lançada.
+
+3. Push para branch:
+
+```bash
+git push origin [python-version]
+```
+
+4. Publicação do pacote no PyPI (exige usuário e senha):
+
+Para publicar o pacote no PyPI, use:
+
+```bash
+poetry version [python-version]
 poetry publish --build
 ```
 
-Versão Alpha e Beta
-
-```
-version = "1.6.2-alpha.3"
-version = "1.6.2-beta.3"
-```
+5. Faz merge da branch para a master
+6. Faz release usando a UI do GitHub
+7. Atualizar versão do pacote usada internamente

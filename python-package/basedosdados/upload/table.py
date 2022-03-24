@@ -743,14 +743,12 @@ class Table(Base):
 
         self.client["bigquery_staging"].create_table(table)
 
-        
         logger.success(
             "{object} {object_id} was {action}!",
             object_id=self.table_id,
             object="Table",
             action="created",
         )
-
 
     def update(self, mode="all", not_found_ok=True):
         """Updates BigQuery schema and description.
@@ -787,12 +785,11 @@ class Table(Base):
                 encoding="utf-8",
             ).write(table.description)
 
-            if m == "staging":
-                table.schema = self._load_schema(m)
+            # when mode is staging the table schema already exists
+            table.schema = self._load_schema(m)
+            fields = ["description", "schema"] if m == "prod" else ["description"]
+            self.client[f"bigquery_{m}"].update_table(table, fields=fields)
 
-                self.client[f"bigquery_{m}"].update_table(
-                    table, fields=["description", "schema"]
-                )
         logger.success(
             " {object} {object_id} was {action}!",
             object_id=self.table_id,

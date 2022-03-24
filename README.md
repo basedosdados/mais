@@ -126,6 +126,23 @@ import basedosdados as bd
 bd.list_datasets()
 ```
 
+### Como definir paramêtros utilizando as configurações do pacote
+
+```py
+import basedosdados as bd
+
+# seta o billing_project_id global
+bd.config.billing_project_id =  '<billing-project-id>'
+
+query = """
+SELECT 
+    * 
+FROM `basedosdados.br_bd_diretorios_brasil.municipio`
+"""
+
+df = bd.read_sql(query=query)
+```
+
 Para saber mais, veja os [exemplos](https://github.com/basedosdados/analises/tree/main/artigos) ou a [documentação da API](https://basedosdados.github.io/mais/api_reference_python/)
 
 ## Usando em R
