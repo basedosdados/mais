@@ -6,7 +6,7 @@ direto do seu computador ou ambiente de desenvolvimento. Atualmente disponíveis
 
 - **:material-language-python: Python**
 - **:material-language-r: R**
-- **:material-language-stata: Stata**
+- **Stata**
 - **:octicons-terminal-16: CLI (terminal)**
 
 Pronto(a) para começar? Nesta página você encontra:
@@ -42,27 +42,27 @@ Para instalação do pacote em Python e linha de comando, você pode usar o
 `pip` direto do seu terminal. Em R, basta instalar diretamente no
 RStudio ou editor de sua preferência.
 
-=== "Python/CLI"
+=== "**Python/CLI**"
     ```bash
     pip install basedosdados
     ```
 
-=== "R"
+=== "**R**"
     ```R
     install.packages("basedosdados")
     ```
 
-=== "Stata"
+=== "**Stata**"
 
-    Requerimentos
-    1. Garantir que seu Stata seja a __versão 16+__
-    2. Garantir que o Python esteja instalado no seu computador.
+Requerimentos:
 
-    Com os requerimentos satisfeitos, rodar os comandos abaixo:
-    ```stata
-    net install github, from("https://haghish.github.io/github/")
-    github install basedosdados/stata-package
-    ```
+1. Garantir que seu Stata seja a __versão 16+__
+2. Garantir que o Python esteja instalado no seu computador.
+
+Com os requerimentos satisfeitos, rodar os comandos abaixo:
+```stata
+net install basedosdados, from("https://raw.githubusercontent.com/basedosdados/mais/master/stata-package")
+```
 
 ### Configurando o pacote
 
@@ -137,7 +137,7 @@ função `download`, baixando os dados direto para nossa máquina.
 Preparamos tutoriais apresentando as principais funções de cada pacote
 para você começar a usá-los.
 
-=== "Python"
+=== "**Python**"
     Blog:
 
     - [Introdução ao pacote Python](https://dev.to/basedosdados/base-dos-dados-python-101-44lc)
@@ -147,7 +147,7 @@ para você começar a usá-los.
 
     - [Workshop: Aplicações em Python](https://www.youtube.com/watch?v=wI2xEioDPgM)
 
-=== "R"
+=== "**R**"
     Blog:
 
     - [Introdução ao pacote R](https://dev.to/basedosdados/como-usar-a-biblioteca-basedosdados-no-r-capitulo-1-46kb)
@@ -158,14 +158,14 @@ para você começar a usá-los.
 
     - [Workshop: Aprenda a acessar dados públicos em R](https://www.youtube.com/watch?v=M9ayiseIjvI&t=250s)
 
-=== "Stata"
+=== "**Stata**"
     Documentação:
 
-    - [GitHub](https://github.com/basedosdados/stata-package)
+    - [GitHub](https://github.com/basedosdados/mais/tree/master/stata-package)
 
 ## Manuais de referência (API)
 
 * [:material-language-python: Python](../api_reference_python)
 * [:material-language-r: R](../api_reference_r)
-* [:material-language-stata: Stata](../api_reference_stata)
+* [Stata](../api_reference_stata)
 * [:octicons-terminal-16: CLI](../api_reference_cli)

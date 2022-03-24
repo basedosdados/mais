@@ -55,7 +55,7 @@ Os pacotes atualmente disponíveis são:
 
 - **:material-language-python: Python**
 - **:material-language-r: R**
-- **:material-language-stata: Stata**
+- **Stata**
 - **:octicons-terminal-16: CLI (Terminal)**
 
 <a

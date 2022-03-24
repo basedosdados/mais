@@ -15,7 +15,7 @@ Esta API é composta por funções com 2 tipos de funcionalidade:
 
 ## Módulos (Requisição de dados)
 
-::: basedosdados.download.download
+::: basedosdados.download
     handler: python
     rendering:
             show_root_heading: no
