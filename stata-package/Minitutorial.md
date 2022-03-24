@@ -2,7 +2,7 @@
 
 # 1. Introdução
 
-Esse Mini Tutorial tem como público alvo os novos usuários do pacote de [Stata](https://github.com/basedosdados/stata-package) da Base dos Dados. 
+Esse Mini Tutorial tem como público alvo os novos usuários do pacote de [Stata](https://github.com/basedosdados/mais/tree/master/stata-package) da Base dos Dados. 
 O tutorial é rápido e tem como objetivo mostrar como instalar o Python e autorizar seu projeto do Google - requirimentos obrigatórios para uso do pacote do Stata.
 > <img src="https://raw.githubusercontent.com/haghish/markdoc/master/Resources/images/attention.png" width="20px" height="20px"  align="left" hspace="0" vspace="0"> __Porque instalar o Python é necessário?__
 > A meta futura é que o pacote tenha sua dependência no próprio Stata, porém essa primeira versão ainda é um _wrapper_ do pacote do Python. Por outro lado, isso não significa que você precisa saber Python para usá-lo, pelo contrário. Seguindo os passos abaixo, não será necessário nem abrir o software para configurar o pacote do Stata.  
