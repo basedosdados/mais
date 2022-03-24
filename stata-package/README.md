@@ -17,14 +17,14 @@ O pacote `basedosdados` no Stata possibilita o acesso a [centenas de tabelas tra
 
 A instalação do pacote `basedosdados` no Stata consiste basicamente na execução desses 2 passos: 
 1. Garantir que seu Stata seja a __versão 16+__
-2. Garantir que o Python esteja instalado no seu computador - você pode se guiar pelo nosso Mini Tutorial de Python [aqui](https://github.com/basedosdados/stata-package/blob/main/Minitutorial.md). Nesse tutorial você também vai descobrir como autenticar seu projeto pelo prompt do seu computador (__importante!__).
+2. Garantir que o Python esteja instalado no seu computador - você pode se guiar pelo nosso Mini Tutorial de Python [aqui](https://github.com/basedosdados/mais/blob/master/stata-package/Minitutorial.md). Nesse tutorial você também vai descobrir como autenticar seu projeto pelo prompt do seu computador (__importante!__).
 
 > <img src="https://raw.githubusercontent.com/haghish/markdoc/master/Resources/images/attention.png" width="20px" height="20px"  align="left" hspace="0" vspace="0"> Caso esteja utilizando os dados da BD pela primeira vez, é necessário criar um projeto para que você possa fazer as queries no nosso repositório. Ter um projeto é de graça e basta ter uma conta Google (seu gmail por exemplo). [Veja aqui como criar um projeto no Google Cloud](https://basedosdados.github.io/mais/access_data_local/#criando-um-projeto-no-google-cloud).
 
 Após garantir esses dois requerimentos __obrigatórios__, você pode finalmente instalar o pacote digitando o seguinte comando no seu Stata: 
 
 ```stata
-net install basedosdados, from("https://raw.githubusercontent.com/basedosdados/stata-package/master/")
+net install basedosdados, from("https://raw.githubusercontent.com/basedosdados/mais/master/stata-package")
 ```
 
 # 3. Sintaxe
@@ -67,7 +67,7 @@ keep if ano == 2018
 tempfile pib_pc
 save `pib_pc'
 
-//------------------------///
+//------------------------//
 // TRATAMENTO E ANÁLISE
 //------------------------//
 
@@ -91,7 +91,7 @@ spmap pib_pc using brasilcoor.dta, id(id) name(m2019, replace) cln(5) ocolor(bla
 
 :point_right: Mais sobre fazer mapas no stata [aqui](https://medium.com/the-stata-guide/maps-in-stata-ii-fcb574270269).
 <p align="center">
-    <a href="https://github.com/basedosdados/stata-package/blob/main/examples/m2018-1.png">
+    <a href="https://github.com/basedosdados/mais/blob/master/stata-package/blob/main/examples/m2018-1.png">
     <img src="examples/m2018-1.png" width="500" alt="Base dos Dados Mais">
     </a>
 </p>
@@ -132,7 +132,7 @@ spmap nota_em using brasilcoor.dta, id(id) name(m2019, replace) cln(5) ocolor(bl
 ```
 
 <p align="center">
-    <a href="https://github.com/basedosdados/stata-package/blob/main/examples/idesp_mapa.png">
+    <a href=https://github.com/basedosdados/mais/blob/master/stata-package/blob/main/examples/idesp_mapa.png">
     <img src="examples/idesp_mapa.png" width="500" alt="Base dos Dados Mais">
     </a>
 </p>
