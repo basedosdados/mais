@@ -86,3 +86,7 @@ poetry publish --build
 5. Faz merge da branch para a master
 6. Faz release usando a UI do GitHub
 7. Atualizar versão do pacote usada internamente
+
+### Gerar novo requirements a partir do poetry
+
+`poetry export -f requirements.txt --output requirements-dev.txt --dev --without-hashes`
