@@ -9,7 +9,6 @@ download(
   table = NULL,
   path,
   billing_project_id = get_billing_id(),
-  page_size = 1e+05,
   .na = " "
 )
 }
@@ -21,8 +20,6 @@ download(
 \item{path}{String with the output file's name. If running an R Project relative location can be provided. Passed to \code{readr::write_csv}'s \code{file} argument.}
 
 \item{billing_project_id}{a string containing your billing project id. If you've run \code{set_billing_id} then feel free to leave this empty.}
-
-\item{page_size}{\code{bigrquery} internal, how many rows per page should there be.}
 
 \item{.na}{how should missing values be written in the resulting file? Value passed to \code{na} argument of \code{readr::write_csv}. Defaults to a whitespace.}
 }
