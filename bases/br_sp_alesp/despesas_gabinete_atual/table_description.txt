@@ -2,8 +2,8 @@ Despesas com verba de gabinete dos deputados estaduais da da legislação atual
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-sp-alesp
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_sp_alesp
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,39 +11,43 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Diego Oliveira
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_alesp/code
+Código: 
 Website: github.com/d116626
-Email: ds.oliveira404@gmail.comTratado por
+Email: ds.oliveira404@gmail.com
+Tratado por
 -----------
 Nome: Diego Oliveira
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_sp_alesp/code
+Código: 
 Website: github.com/d116626
 Email: ds.oliveira404@gmail.com
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- deputado
-- fornecedor
 
-Colunas identificando linhas unicamente
--------------------
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+
+
+
 
 Cobertura Temporal
 ------------------
-- 2019
-- 2020
+- 2019(1)2020
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
-- SP
+- {'continent': 'south_america', 'country': 'br', 'admin1': 'id_uf_35'}
+
+
+
 
 Tratamento
 ----------
 Padronização do nome das colunas, remoção de textos e logos, unificação das bases
 
-Frequencia de Atualização
--------------------------
-1 mes
+
+
 
 

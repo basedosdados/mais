@@ -7,10 +7,10 @@ recursos importantes de diversos conjuntos de dados públicos**, como:
 - **Tabelas tratadas BD+**: Tabelas completas, já tratadas e prontas
   para análise, disponíveis no nosso datalake público.
   
-- **Links externos**: Links com informações úteis para explorar mais
+- **Dados originais**: Links com informações úteis para explorar mais
   sobre o conjunto de dados, como a fonte original e outros.
 
-!!! Info "Temos um time de Dados e voluntários(as) de todo o Brasil que ajudam a limpar e manter as tabelas tratadas BD+. [Saiba como fazer parte](../colab)"
+!!! Info "Temos um time de Dados e voluntários(as) de todo o Brasil que ajudam a limpar e manter as tabelas tratadas BD+. [Saiba como fazer parte](colab_data)"
 
 ## Acessando tabelas tratadas BD+
 
@@ -53,9 +53,10 @@ de acessar os recursos da BD é diretamente pelos endpoints, conforme
 documentado em [BD Open API](https://basedosdados.org/openapi).
 Os pacotes atualmente disponíveis são:
 
-- **:octicons-terminal-16: CLI (Terminal)**
 - **:material-language-python: Python**
 - **:material-language-r: R**
+- **Stata**
+- **:octicons-terminal-16: CLI (Terminal)**
 
 <a
 href="access_data_packages"

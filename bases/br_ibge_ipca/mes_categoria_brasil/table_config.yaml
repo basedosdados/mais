@@ -16,6 +16,8 @@ spatial_coverage:
         - south_america
     country:
         - bra
+    admin1:
+    admin2:
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
@@ -48,7 +50,7 @@ identifying_columns:
 
 last_updated:
     metadata:
-    data:
+    data: '2022-01-12T00:00:00+00:00'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -61,7 +63,7 @@ published_by:
     email: gustavo.tiago@basedosdados.org
     github_user: https://github.com/gustavoairestiago
     website:
-    ckan_user: ''
+    ckan_user: gustavoairestiago
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -70,7 +72,7 @@ data_cleaned_by:
     name: Gustavo Aires Tiago
     email: gustago.tiago@basedosdados.org
     github_user: https://github.com/gustavoairestiago
-    ckan_user: ''
+    ckan_user: gustavoairestiago
     website: ''
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
 
@@ -127,7 +129,7 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: mes
       bigquery_type: int64
       description: Mês
@@ -140,7 +142,7 @@ columns:
       measurement_unit: month
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: id_categoria
       bigquery_type: string
       description: Código identificador grupo
@@ -153,7 +155,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: id_categoria_bd
       bigquery_type: string
       description: Código identificador grupo - Base dos dados - Baseado em id_categoria
@@ -167,7 +169,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: categoria
       bigquery_type: string
       description: Descrição da categoria
@@ -180,7 +182,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: peso_mensal
       bigquery_type: float64
       description: Peso percentual mensal do item
@@ -193,7 +195,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: variacao_mensal
       bigquery_type: float64
       description: Variação percentual mensal
@@ -206,9 +208,9 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: variacao_anual
-      bigquery_type:
+      bigquery_type: float64
       description: Variação percentual acumulada no ano
       temporal_coverage:
       covered_by_dictionary: no
@@ -219,7 +221,7 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: variacao_doze_meses
       bigquery_type: float64
       description: Variação percentual acumulada em doze meses
@@ -232,6 +234,6 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
 
-metadata_modified: '2021-10-25T21:54:06.190418'
+metadata_modified: '2022-01-18T16:15:07.529728'

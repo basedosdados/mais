@@ -1,5 +1,6 @@
 from pathlib import Path
 from google.cloud import bigquery
+from loguru import logger
 
 from google.api_core.exceptions import Conflict
 
@@ -39,13 +40,17 @@ class Dataset(Base):
             for m in mode
         )
 
-    def _setup_dataset_object(self, dataset_id):
+    def _setup_dataset_object(self, dataset_id, location=None):
 
         dataset = bigquery.Dataset(dataset_id)
+
         ## TODO: not being used since 1.6.0 - need to redo the description tha goes to bigquery
+        dataset.description = "Para saber mais acesse https://basedosdados.org/"
         # dataset.description = self._render_template(
         #     Path("dataset/dataset_description.txt"), self.dataset_config
         # )
+
+        dataset.location = location
 
         return dataset
 
@@ -102,42 +107,53 @@ class Dataset(Base):
 
         return self
 
-    def publicize(self, mode="all"):
+    def publicize(self, mode="all", dataset_is_public=True):
         """Changes IAM configuration to turn BigQuery dataset public.
 
         Args:
             mode (bool): Which dataset to create [prod|staging|all].
+            dataset_is_public (bool): Control if prod dataset is public or not. By default staging datasets like `dataset_id_staging` are not public.
         """
 
         for m in self._loop_modes(mode):
 
             dataset = m["client"].get_dataset(m["id"])
             entries = dataset.access_entries
-
-            entries.extend(
-                [
-                    bigquery.AccessEntry(
-                        role="roles/bigquery.dataViewer",
-                        entity_type="iamMember",
-                        entity_id="allUsers",
-                    ),
-                    bigquery.AccessEntry(
-                        role="roles/bigquery.metadataViewer",
-                        entity_type="iamMember",
-                        entity_id="allUsers",
-                    ),
-                    bigquery.AccessEntry(
-                        role="roles/bigquery.user",
-                        entity_type="iamMember",
-                        entity_id="allUsers",
-                    ),
-                ]
-            )
-            dataset.access_entries = entries
+            # TODO https://github.com/basedosdados/mais/pull/1020
+            if dataset_is_public and "staging" not in dataset.dataset_id:
+                entries.extend(
+                    [
+                        bigquery.AccessEntry(
+                            role="roles/bigquery.dataViewer",
+                            entity_type="iamMember",
+                            entity_id="allUsers",
+                        ),
+                        bigquery.AccessEntry(
+                            role="roles/bigquery.metadataViewer",
+                            entity_type="iamMember",
+                            entity_id="allUsers",
+                        ),
+                        bigquery.AccessEntry(
+                            role="roles/bigquery.user",
+                            entity_type="iamMember",
+                            entity_id="allUsers",
+                        ),
+                    ]
+                )
+                dataset.access_entries = entries
 
             m["client"].update_dataset(dataset, ["access_entries"])
+        logger.success(
+            " {object} {object_id}_{mode} was {action}!",
+            object_id=self.dataset_id,
+            mode=mode,
+            object="Dataset",
+            action="publicized",
+        )
 
-    def create(self, mode="all", if_exists="raise"):
+    def create(
+        self, mode="all", if_exists="raise", dataset_is_public=True, location=None
+    ):
         """Creates BigQuery datasets given `dataset_id`.
 
         It can create two datasets:
@@ -156,6 +172,12 @@ class Dataset(Base):
                 * update : Update dataset description
                 * pass : Do nothing
 
+            dataset_is_public (bool): Control if prod dataset is public or not. By default staging datasets like `dataset_id_staging` are not public.
+
+            location (str): Optional. Location of dataset data.
+                List of possible region names locations: https://cloud.google.com/bigquery/docs/locations
+
+
         Raises:
             Warning: Dataset already exists and if_exists is set to `raise`
         """
@@ -171,13 +193,21 @@ class Dataset(Base):
         for m in self._loop_modes(mode):
 
             # Construct a full Dataset object to send to the API.
-            dataset_obj = self._setup_dataset_object(m["id"])
+            dataset_obj = self._setup_dataset_object(m["id"], location=location)
 
             # Send the dataset to the API for creation, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             try:
                 job = m["client"].create_dataset(dataset_obj)  # Make an API request.
+                logger.success(
+                    " {object} {object_id}_{mode} was {action}!",
+                    object_id=self.dataset_id,
+                    mode=mode,
+                    object="Dataset",
+                    action="created",
+                )
+
             except Conflict:
 
                 if if_exists == "pass":
@@ -186,7 +216,7 @@ class Dataset(Base):
                     raise Conflict(f"Dataset {self.dataset_id} already exists")
 
         # Make prod dataset public
-        self.publicize()
+        self.publicize(dataset_is_public=dataset_is_public)
 
     def delete(self, mode="all"):
         """Deletes dataset in BigQuery. Toogle mode to choose which dataset to delete.
@@ -198,12 +228,22 @@ class Dataset(Base):
         for m in self._loop_modes(mode):
 
             m["client"].delete_dataset(m["id"], delete_contents=True, not_found_ok=True)
+        logger.info(
+            " {object} {object_id}_{mode} was {action}!",
+            object_id=self.dataset_id,
+            mode=mode,
+            object="Dataset",
+            action="deleted",
+        )
 
-    def update(self, mode="all"):
+    def update(self, mode="all", location=None):
         """Update dataset description. Toogle mode to choose which dataset to update.
 
         Args:
             mode (str): Optional. Which dataset to update [prod|staging|all]
+            location (str): Optional. Location of dataset data.
+                List of possible region names locations: https://cloud.google.com/bigquery/docs/locations
+
         """
 
         for m in self._loop_modes(mode):
@@ -212,5 +252,17 @@ class Dataset(Base):
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             dataset = m["client"].update_dataset(
-                self._setup_dataset_object(m["id"]), fields=["description"]
+                self._setup_dataset_object(
+                    m["id"],
+                    location=location,
+                ),
+                fields=["description"],
             )  # Make an API request.
+
+        logger.success(
+            " {object} {object_id}_{mode} was {action}!",
+            object_id=self.dataset_id,
+            mode=mode,
+            object="Dataset",
+            action="updated",
+        )

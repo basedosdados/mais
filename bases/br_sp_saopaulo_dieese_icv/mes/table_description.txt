@@ -1,0 +1,48 @@
+Variação mensal do custo de vida (ICV) na cidade de São Paulo
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Crislane Alves
+Código: 
+Email: crislanealves@basedosdados.org
+Tratado por
+-----------
+Nome: Crislane Alves
+Código: 
+Email: crislanealves@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 1959(1)2018
+
+
+
+
+Cobertura Espacial
+------------------
+- {'country': 'br', 'admin1': 'id_uf_35', 'admin2': 'id_municipio_3550308'}
+
+
+
+
+Tratamento
+----------
+Coleta dos dados a partir da API ipeadatapy. Exclusão e renomeação de variáveis segundo diretrizes da BD.Junção dos dataframes.
+
+
+
+Frequencia de Atualização
+-------------------------
+recurring

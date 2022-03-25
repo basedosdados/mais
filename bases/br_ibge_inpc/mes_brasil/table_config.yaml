@@ -36,7 +36,6 @@ temporal_coverage:
     - 1996
     - 1997
     - 1998
-    - 1998
     - 2000
     - 2001
     - 2002
@@ -83,7 +82,7 @@ identifying_columns:
 
 last_updated:
     metadata:
-    data:
+    data: 
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -106,14 +105,14 @@ data_cleaned_by:
     email: gustavo.tiago@basedosdados.org
     github_user: github.com/gustavoairestiago
     ckan_user: gustavoairestiago
-    website:
+    website: ''
     code_url: 'https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code '
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: '- Descompactação do arquivo - Renomeação das colunas'
 
 # Url dos dados originais no GCP Storage.
-raw_files_url:
+raw_files_url: https://console.cloud.google.com/storage/browser/basedosdados-dev/staging/br_ibge_inpc/mes_brasil
 
 # Url dos arquivos auxiliares no GCP Storage.
 auxiliary_files_url:
@@ -153,14 +152,14 @@ columns:
       description: Ano
       temporal_coverage:
       covered_by_dictionary: yes
-      directory_column: 
+      directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
       measurement_unit: year
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: mes
       bigquery_type: int64
       description: Mês
@@ -173,7 +172,7 @@ columns:
       measurement_unit: month
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: indice
       bigquery_type: float64
       description: Número índice (dez 1993 = 100)
@@ -186,7 +185,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: variacao_mensal
       bigquery_type: float64
       description: Variação percentual mensal
@@ -199,7 +198,7 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: variacao_trimestral
       bigquery_type: float64
       description: Variação percentual trimestral
@@ -212,7 +211,7 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: variacao_semestral
       bigquery_type: float64
       description: Variação percentual semestral
@@ -225,7 +224,7 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: variacao_anual
       bigquery_type: float64
       description: Variação percentual anual
@@ -238,7 +237,7 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: variacao_doze_meses
       bigquery_type: float64
       description: Variação percentual doze meses
@@ -251,6 +250,6 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
 
-metadata_modified: '2021-10-24T23:42:37.499972'
+metadata_modified: '2022-01-18T21:01:54.487259'

@@ -1,0 +1,47 @@
+
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-sp-saopaulo-dieese-icv
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Índice do Custo de Vida (ICV)
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - br-dieese
+
+# Descrição do conjunto
+notes: 'O Índice do Custo de Vida do Departamento Intersindical de Estatística e Estudos
+    Socioeconômicos (ICV-DIEESE) abrange todos os domicílios e faixas de renda e busca
+    mensurar a variação dos preços dentro do município de São Paulo. Ele é calculado
+    com base na cesta de bens e serviços definida pela Pesquisa de Orçamento Familiar
+    (POF), para que o cálculo acompanhe as mudanças de consumo das famílias paulistanas
+    ao longo do tempo. Os grupos utilizados para este cálculo são: Alimentação, Habitação,
+    Equipamentos Domésticos, Transporte, Vestuário, Educação e Leitura, Saúde, Recreação,
+    Despesas Pessoais e Despesas Diversas.'
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+    - economia
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - cesta basica
+    - custo de vida
+    - inflacao
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2022-03-03T20:31:21.384290'

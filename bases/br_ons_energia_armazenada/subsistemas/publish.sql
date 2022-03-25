@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -16,7 +15,6 @@ TIPOS:
     - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-
 */
 
 CREATE VIEW basedosdados-dev.br_ons_energia_armazenada.subsistemas AS
@@ -26,4 +24,4 @@ SAFE_CAST(subsistema AS STRING) subsistema,
 SAFE_CAST(energia_armazenada_maxima AS FLOAT64) energia_armazenada_maxima,
 SAFE_CAST(energia_armazenada_verificada AS FLOAT64) energia_armazenada_verificada,
 SAFE_CAST(proporcao_energia_armazenada_verificada AS FLOAT64) proporcao_energia_armazenada_verificada
-from basedosdados-dev.br_ons_energia_armazenada_staging.subsistemas as t
+FROM basedosdados-dev.br_ons_energia_armazenada_staging.subsistemas AS t
