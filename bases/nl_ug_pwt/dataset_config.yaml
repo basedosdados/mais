@@ -5,7 +5,7 @@ name: nl-ug-pwt
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title: Penn World Table version 10.0
+title: Penn World Table (PWT)
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
@@ -13,7 +13,7 @@ title: Penn World Table version 10.0
 organization: nl-ug
 
 # Descrição do conjunto
-notes: Dados da Penn World Table (PWT) sobre renda, produção, insumos e produtividade. A base fornece contas de paridade do poder de compra e renda nacional convertidas a preços internacionais para 183 países de 1950 a 2019.
+notes: Dados da Penn World Table (PWT), versão 10.0, sobre renda, produção, insumos e produtividade. A base fornece contas de paridade do poder de compra e renda nacional convertidas a preços internacionais para 183 países de 1950 a 2019.
 
 
 # Quais temas caracterizam a base?
