@@ -1,95 +1,103 @@
-source_bucket_name: br_anatel
-project_id_staging: input-dados
-project_id_prod: input-dados
-table_id: backhaul # AUTO GENERATED
-dataset_id: br_anatel_banda_larga_fixa # AUTO GENERATED
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_anatel_banda_larga_fixa
 
-url_ckan: https://basedosdados.org/dataset/br-anatel-banda-larga-fixa # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa # AUTO GENERATED
-
-version: <v1.0> # REQUIRED
-
-last_updated: 2021-06-10 # AUTO GENERATED
+table_id: backhaul
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    Dados disponibilizados pela Lei de Acesso a Informação com dados da evolução ao longo dos anos (2008-2018) da instalação de infraestrutura ligada ao plano de expansão da banda larga fixa no país desde a implementação do Programa Banda Larga nas Escolas (Decreto nº 6.424/2008)
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: "Dados disponibilizados pela Lei de Acesso a Informação com dados da\
+    \ evolução ao longo dos anos (2008-2018) da instalação de infraestrutura ligada\
+    \ ao plano de expansão da banda larga fixa no país desde a implementação do Programa\
+    \ Banda Larga nas Escolas (Decreto nº 6.424/2008)\n"
 
-# Quem está completando esse arquivo config?
+# A máxima unidade espacial que a tabela cobre.
+# Exemplo:
+#   - continent: south_america
+#     country: br
+spatial_coverage:
+    - continent: south_america
+      country: br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2008(1)2018
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: unique
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - country: br
+      entity: municipality
+      column:
+          - id_municipio
+
+last_updated:
+    metadata: '2022-03-28'
+    data: '2022-03-28'
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.1
+
+# Quem está preenchendo esses metadados?
 published_by:
-    name: Lucas Nascimento Moreira  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa/code # REQUIRED
-    website: <website>
-    email: lucsas.nasc.m@gmail.com
+    name: Lucas Nascimento Moreira
+    email: lucsas.moreira@basedosdados.org
+    github_user: lucasnascm
+    ckan_user: lucasnascm
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: Gerência de Universalização e Ampliação do Acesso
-    code_url: <onde encontrar código de tratamento>
-    website: https://www.gov.br/anatel/pt-br/regulado/universalizacao/plano-nacional-de-banda-larga
-    email: pruv@anatel.gov.br
+data_cleaned_by:
+    name: Lucas Nascimento Moreira
+    email: lucas.moreira@basedosdados.org
+    github_user: lucasnascm
+    ckan_user: lucasnascm
+    website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    Padronização dos dados sob as diretrizes da BD+;
-    Substituição do preenchimento por asteriscos de algumas variáveis por null em municípios com infraestrutura instalada antes de 2008
+data_cleaning_description: "Padronização dos dados sob as diretrizes da BD+;\nSubstituição\
+    \ do preenchimento por asteriscos de algumas variáveis por null em municípios\
+    \ com infraestrutura instalada antes de 2008\n"
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: unico # REQUIRED 
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa/code
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - municipio
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
 
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-    - id_municipio
+# Url dos dados originais no GCP Storage.
+raw_files_url:
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - Brasil
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
 
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
+partitions: []
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -99,58 +107,141 @@ partitions: # REQUIRED
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: sigla_uf
-        description: Sigla da Unidade da Federação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: situacao
-        description: Fornecimento de infraestrutura de backhaul ao município
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ano_atendimento
-        description: Ano de Atendimento
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: concessionaria
-        description: Empresa ofertante do serviço
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tecnologia
-        description: Padrão de tecnologia e conectividade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: capacidade_backhaul
-        description: Capaidade total da transmissão
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: capacidade_ocupada
-        description: Capacidade ocupada no terminal
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: capacidade_disponivel
-        description: Capacidade disponível no terminal
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+columns:
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio
+      bigquery_type: string
+      description: ID Município - IBGE 7 Dígitos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: situacao
+      bigquery_type: string
+      description: Fornecimento de infraestrutura de backhaul ao município
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ano_atendimento
+      bigquery_type: int64
+      description: Ano de Atendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: concessionaria
+      bigquery_type: string
+      description: Empresa ofertante do serviço
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tecnologia
+      bigquery_type: string
+      description: Padrão de tecnologia e conectividade
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: capacidade_backhaul
+      bigquery_type: int64
+      description: Capaidade total da transmissão
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: capacidade_ocupada
+      bigquery_type: float64
+      description: Capacidade ocupada no terminal
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: capacidade_disponivel
+      bigquery_type: float64
+      description: Capacidade disponível no terminal
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+metadata_modified: '2022-02-14T01:23:36.668606'
