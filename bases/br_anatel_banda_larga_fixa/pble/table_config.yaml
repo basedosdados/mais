@@ -44,9 +44,9 @@ observation_level:
           - id_escola
 
 last_updated:
-    metadata:
-    data:
-    release:
+    metadata: '2022-03-28'
+    data: '2022-03-28'
+    release: ''
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3

@@ -39,8 +39,8 @@ observation_level:
           - id_municipio
 
 last_updated:
-    metadata:
-    data:
+    metadata: '2022-03-28'
+    data: '2022-03-28'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
