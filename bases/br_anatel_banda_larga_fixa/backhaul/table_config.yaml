@@ -29,7 +29,7 @@ temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: unique
+update_frequency:
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
@@ -45,12 +45,12 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.1
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
     name: Lucas Nascimento Moreira
-    email: lucsas.moreira@basedosdados.org
+    email: lucas.moreira@basedosdados.org
     github_user: lucasnascm
     ckan_user: lucasnascm
     website:
@@ -63,7 +63,7 @@ data_cleaned_by:
     email: lucas.moreira@basedosdados.org
     github_user: lucasnascm
     ckan_user: lucasnascm
-    website:
+    website: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: "Padronização dos dados sob as diretrizes da BD+;\nSubstituição\
@@ -71,12 +71,12 @@ data_cleaning_description: "Padronização dos dados sob as diretrizes da BD+;\n
     \ com infraestrutura instalada antes de 2008\n"
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_anatel_banda_larga_fixa/code
+data_cleaning_code_url:
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
-    name:
-    organization_id:
+    name: ''
+    organization_id: ''
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -200,7 +200,7 @@ columns:
       is_partition: false
     - name: capacidade_backhaul
       bigquery_type: int64
-      description: Capaidade total da transmissão
+      description: Capacidade total da transmissão
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -244,4 +244,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-02-14T01:23:36.668606'
+metadata_modified: '2022-03-21T18:53:14.625707'

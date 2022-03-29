@@ -12,7 +12,7 @@ Publicado por
 -------------
 Nome: Lucas Nascimento Moreira
 Código: 
-Email: lucsas.moreira@basedosdados.org
+Email: lucas.moreira@basedosdados.org
 Tratado por
 -----------
 Nome: Lucas Nascimento Moreira
@@ -49,6 +49,4 @@ Substituição do preenchimento por asteriscos de algumas variáveis por null em
 
 
 
-Frequencia de Atualização
--------------------------
-unique
+
