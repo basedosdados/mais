@@ -297,99 +297,54 @@ class Table(Base):
                     "File not suported. Only csv, xls, xlsx, xlsm, xlsb, odf, ods, odt are supported."
                 )
 
-        if "name" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'name' not found in Google the google sheet. "
-                "The sheet must contain the column name: 'name'"
-            )
-        elif "description" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'description' not found in Google the google sheet. "
-                "The sheet must contain the column description: 'description'"
-            )
-        elif "bigquery_type" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'bigquery_type' not found in Google the google sheet. "
-                "The sheet must contain the column type: 'bigquery_type'"
-            )
-        elif "measurement_unit" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'measurement_unit' not found in Google the google sheet. "
-                "The sheet must contain the column measurement unit: 'measurement_unit'"
-            )
-        elif "directory_column" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'directory_column' not found in Google the google sheet. "
-                "The sheet must contain the column dictionary: 'directory_column'"
-            )
-        elif "directory_column" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'directory_column' not found in Google the google sheet. "
-                "The sheet must contain the column dictionary name: 'directory_column'"
-            )
-        elif "temporal_coverage" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'temporal_coverage' not found in Google the google sheet. "
-                "The sheet must contain the column dictionary name: 'temporal_coverage'"
-            )
-        elif "has_sensitive_data" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'temporal_coverage' not found in Google the google sheet. "
-                "The sheet must contain the column dictionary name: 'temporal_coverage'"
-            )
-        elif "observations" not in df.columns.tolist():
-            raise BaseDosDadosException(
-                "Column 'observations' not found in Google the google sheet. "
-                "The sheet must contain the column dictionary name: 'observations'"
-            )
-
         df = df.fillna("NULL")
-        columns_parameters = zip(
-            df["name"].tolist(),
-            df["description"].tolist(),
-            df["bigquery_type"].tolist(),
-            df["measurement_unit"].tolist(),
-            df["covered_by_dictionary"].tolist(),
-            df["directory_column"].tolist(),
-            df["temporal_coverage"].tolist(),
-            df["has_sensitive_data"].tolist(),
-            df["observations"].tolist(),
-        )
 
+        required_columns = [
+            "name",
+            "bigquery_type",
+            "description",
+            "temporal_coverage",
+            "covered_by_dictionary",
+            "directory_column",
+            "measurement_unit",
+            "has_sensitive_data",
+            "observations",
+        ]
+
+        not_found_columns = required_columns.copy()
+        for sheet_column in df.columns.tolist():
+            for required_column in required_columns:
+                if sheet_column == required_column:
+                    not_found_columns.remove(required_column)
+        if not_found_columns != []:
+            raise BaseDosDadosException(
+                f"The following required columns are not found: {', '.join(not_found_columns)}."
+            )
+
+        columns_parameters = zip(
+            *[df[required_column].tolist() for required_column in required_columns]
+        )
         for (
             name,
-            description,
             bigquery_type,
-            measurement_unit,
+            description,
+            temporal_coverage,
             covered_by_dictionary,
             directory_column,
-            temporal_coverage,
+            measurement_unit,
             has_sensitive_data,
             observations,
         ) in columns_parameters:
             for col in table_config_yaml["columns"]:
                 if col["name"] == name:
-
-                    col["description"] = (
-                        col["description"] if description == "NULL" else description
-                    )
-
                     col["bigquery_type"] = (
                         col["bigquery_type"]
                         if bigquery_type == "NULL"
                         else bigquery_type.lower()
                     )
 
-                    col["measurement_unit"] = (
-                        col["measurement_unit"]
-                        if measurement_unit == "NULL"
-                        else measurement_unit
-                    )
-
-                    col["covered_by_dictionary"] = (
-                        "no"
-                        if covered_by_dictionary == "NULL"
-                        else covered_by_dictionary
+                    col["description"] = (
+                        col["description"] if description == "NULL" else description
                     )
 
                     col["temporal_coverage"] = (
@@ -398,12 +353,10 @@ class Table(Base):
                         else [temporal_coverage]
                     )
 
-                    col["observations"] = (
-                        col["observations"] if observations == "NULL" else observations
-                    )
-
-                    col["has_sensitive_data"] = (
-                        "no" if has_sensitive_data == "NULL" else has_sensitive_data
+                    col["covered_by_dictionary"] = (
+                        "no"
+                        if covered_by_dictionary == "NULL"
+                        else covered_by_dictionary
                     )
 
                     dataset = directory_column.split(".")[0]
@@ -425,6 +378,19 @@ class Table(Base):
                         col["directory_column"]["column_name"]
                         if column == "NULL"
                         else column
+                    )
+                    col["measurement_unit"] = (
+                        col["measurement_unit"]
+                        if measurement_unit == "NULL"
+                        else measurement_unit
+                    )
+
+                    col["has_sensitive_data"] = (
+                        "no" if has_sensitive_data == "NULL" else has_sensitive_data
+                    )
+
+                    col["observations"] = (
+                        col["observations"] if observations == "NULL" else observations
                     )
 
         ruamel.dump(
