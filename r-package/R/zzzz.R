@@ -1,6 +1,5 @@
 .onLoad <- function(libname, pkgname) {
 
-
   if(Sys.getenv("billing_project_id") == "") {
 
     Sys.setenv(billing_project_set = FALSE)

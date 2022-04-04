@@ -36,7 +36,7 @@ SAFE_CAST(raca_cor AS STRING) raca_cor,
 SAFE_CAST(estrato AS INT64) estrato,
 SAFE_CAST(amostra AS INT64) amostra,
 SAFE_CAST(peso_aluno AS FLOAT64) peso_aluno,
-SAFE_CAST(proficiencia AS FLOAT64) proficiencia,
+SAFE_CAST(proficiencia AS STRING) proficiencia,
 SAFE_CAST(erro_padrao AS FLOAT64) erro_padrao,
 SAFE_CAST(proficiencia_saeb AS FLOAT64) proficiencia_saeb,
 SAFE_CAST(erro_padrao_saeb AS FLOAT64) erro_padrao_saeb

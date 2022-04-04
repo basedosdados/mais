@@ -1,4 +1,5 @@
-
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar 
 dataset_id: br_inep_saeb
 
 table_id: proficiencia
@@ -10,47 +11,37 @@ table_id: proficiencia
 description: A tabela resume a proficiencia na avaliação SAEB proporcionando uma série histórica e compatibilizada à partir de 1995 com informações sobre o aluno, a escola e o resultado do exame
 
 # A máxima unidade espacial que a tabela cobre.
-spatial_coverage: bra
+# Exemplo:
+#   - continent: south_america
+#     country: br
+spatial_coverage:
+    country: 
+        - br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
-temporal_coverage:
-    - 1995
-    - 1997
-    - 1999
-    - 2001
-    - 2003
-    - 2005
-    - 2007
-    - 2009
-    - 2011
-    - 2013
-    - 2015
-    - 2017
-    - 2019
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage: 1995(2)2019
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: two_years
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity: person
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit: two_years
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns:
-    - ano
-    - sigla_uf
-    - id_aluno
-    - disciplina
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: year
+      columns:
+         - ano 
+    - country: br
+      entity: state
+      columns:
+         - sigla_uf
+    - entity: exam
+      columns: 
+         - disciplina
+    - entity: person
+      columns:
+         - id_aluno
 
 last_updated:
     metadata:
@@ -59,15 +50,15 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.0
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
     name: Lucas Moreira
     email: lucas.moreira@basedosdados.org
     github_user: lucasnascm
-    website: 
     ckan_user: lucasnascm
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -76,12 +67,19 @@ data_cleaned_by:
     name: Lucas Moreira
     email: lucas.moreira@basedosdados.org
     github_user: lucasnascm
-    ckan_user:
+    ckan_user: lucasnascm
     website:
-    code_url: lucasnascm
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: Compatibizalicação das bases
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -91,10 +89,6 @@ auxiliary_files_url:
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
-
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary: yes
 
 source_bucket_name: basedosdados-dev
 
@@ -106,9 +100,9 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: ano, sigla_uf
-
-bdm_file_size:
+partitions:
+    - ano
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -121,8 +115,9 @@ bdm_file_size:
 columns:
     - name: ano
       bigquery_type: int64
-      description: Ano
+      description: Ano de aplicação do Saeb
       temporal_coverage:
+          - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -130,267 +125,308 @@ columns:
           column_name: ano
       measurement_unit: year
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: true
     - name: id_regiao
       bigquery_type: string
       description: ID Região
       temporal_coverage:
+          - (2)
       covered_by_dictionary: yes
-      directory_column: 
-          dataset_id: 
-          table_id: 
+      directory_column:
+          dataset_id:
+          table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
+          - (2)
       covered_by_dictionary: no
-      directory_column: 
+      directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: uf
           column_name: sigla
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: true
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
+          - 2007(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
-          column_name: id-municipio
-      measurement_unit: 
+          column_name: id_municipio
+      measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_escola
       bigquery_type: string
       description: ID Escola - INEP
       temporal_coverage:
-      covered_by_dictionary: no 
+          - 2007(2)
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: escola
           column_name: id_escola
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: rede
       bigquery_type: string
       description: Rede Escolar
       temporal_coverage:
-      covered_by_dictionary: yes
-      directory_column: 
-          dataset_id:
-          table_id:
-          column_name:
+          - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: escola
+          column_name: dependencia_administrativa
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: localizacao
       bigquery_type: string
-      description: Localização 
+      description: Localização
       temporal_coverage:
+          - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: escola
+          column_name: localizacao
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: serie
+      bigquery_type: int64
+      description: Série/Ano
+      temporal_coverage:
+          - (2)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: serie
-      bigquery_type: int64
-      description: Série/Ano escolar
-      temporal_coverage:
-      covered_by_dictionary: yes 
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: turno
       bigquery_type: string
       description: Turno
       temporal_coverage:
+          - (2)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: disciplina
       bigquery_type: string
       description: Disciplina
       temporal_coverage:
+          - (2)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_turma
       bigquery_type: string
-      description: ID Turma
+      description: ID Turma no SAEB
       temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: id_aluno
-      bigquery_type: string
-      description: ID Aluno
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: sexo
-      bigquery_type: string
-      description: Sexo
-      temporal_coverage:
-      covered_by_dictionary: yes 
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: raca_cor
-      bigquery_type: string
-      description: Raça/Cor
-      temporal_coverage:
-      covered_by_dictionary: yes 
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: estrato
-      bigquery_type: int64
-      description: Estrato
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: amostra
-      bigquery_type: int64
-      description: Amostra
-      temporal_coverage:
-      covered_by_dictionary: no 
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: peso_aluno
-      bigquery_type: float64
-      description: Peso do aluno
-      temporal_coverage:
-      covered_by_dictionary: no 
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: proficiencia
-      bigquery_type: float64
-      description: Proficiência do aluno calculada na escala única do SAEB, com média = 0 e desvio = 1 na população de referência
-      temporal_coverage:
-      covered_by_dictionary: no 
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: erro_padrao
-      bigquery_type: float64
-      description: Erro padrão da proficiência
-      temporal_coverage:
-      covered_by_dictionary: no 
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: proficiencia_saeb
-      bigquery_type: float64
-      description: Proficiência do aluno transformada na escala única do SAEB, com média = 250, desvio = 50
-      temporal_coverage:
-      covered_by_dictionary: no 
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: erro_padrao_saeb
-      bigquery_type: float64
-      description: Erro padrão da proficiência transformada
-      temporal_coverage:
+          - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
- 
+    - name: id_aluno
+      bigquery_type: string
+      description: ID Aluno no SAEB
+      temporal_coverage:
+          - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Entre 1995 a 2005 tem-se a junção da variável 'mascara' + 'aluno'
+      is_in_staging: true
+      is_partition: false
+    - name: sexo
+      bigquery_type: string
+      description: Sexo
+      temporal_coverage:
+          - (2)2017
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: raca_cor
+      bigquery_type: string
+      description: Raça/Cor
+      temporal_coverage:
+          - (2)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estrato
+      bigquery_type: int64
+      description: Estrato
+      temporal_coverage:
+          - (2)2003, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: amostra
+      bigquery_type: int64
+      description: Amostra
+      temporal_coverage:
+          - (2)2005, 2011
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: peso_aluno
+      bigquery_type: float64
+      description: Peso do aluno
+      temporal_coverage:
+          - (2)2005, 2011(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proficiencia
+      bigquery_type: float64
+      description: Proficiência do aluno calculada na escala única do SAEB, com média = 0 e desvio = 1 na população de referência
+      temporal_coverage:
+          - 2007(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: erro_padrao
+      bigquery_type: float64
+      description: Erro padrão da proficiência na escala única do SAEB
+      temporal_coverage:
+          - 2007(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proficiencia_saeb
+      bigquery_type: float64
+      description: Proficiência transformada na escala única do SAEB, com média = 250, desvio = 50 (do SAEB/97)
+      temporal_coverage:
+          - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: erro_padrao_saeb
+      bigquery_type: float64
+      description: Erro padrão da proficiência transformado
+      temporal_coverage:
+          - 2007(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
 metadata_modified:

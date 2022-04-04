@@ -59,10 +59,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install basedosdados==1.6.2a8 pyarrow pytest toml
+          pip install basedosdados==1.6.3 pyarrow pytest toml 
       - name: Set up base dos dados environment
         shell: bash
-        env:     
+        env:
           BUCKET_NAME: basedosdados
           PROJECT_NAME_PROD: basedosdados
           PROJECT_NAME_STAGING: basedosdados-staging

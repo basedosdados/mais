@@ -1,6 +1,15 @@
-__all__ = ["constants"]
+__all__ = ["config", "constants"]
 
 from enum import Enum
+from dataclasses import dataclass
+
+
+@dataclass
+class config:
+    verbose: bool = True
+    billing_project_id: str = None
+    project_config_path: str = None
+    from_file: bool = False
 
 
 class constants(Enum):

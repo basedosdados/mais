@@ -43,7 +43,7 @@ jobs:
           cd bases/br_me_caged/code/caged_novo/
           pip install -r requirements_caged_novo.txt   
       - name: Set up gcloud
-        uses: google-github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@v0
         with:
           version: '290.0.1'
           project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
