@@ -16,12 +16,13 @@ description: Índice de Preços ao Produtor das Indústrias de extração
 #     country: br
 spatial_coverage:
 - continent: south_america
-country: br
+    country: br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 2010-1(1)2022-2
+temporal_coverage: 
+    - '2010-1(1)2022-2'
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -31,9 +32,9 @@ update_frequency: month
 observation_level:
 
 last_updated:
-    metadata:
-    data:
-    release:
+    metadata: '2022-04-05'
+    data: '2022-04-05'
+    release: '2022-02-28'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
@@ -44,7 +45,7 @@ published_by:
     name: Laura Amaral
     email: laura.amaral@basedosdados.org
     github_user: laura-l-amaral
-    ckan_user: ''
+    ckan_user: laura-amaral
     website: ''
 
 # Qual organização/departamento/pessoa tratou os dados?
@@ -54,14 +55,14 @@ data_cleaned_by:
     name: Laura Amaral
     email: laura.amaral@basedosdados.org
     github_user: laura-l-amaral
-    ckan_user: ''
+    ckan_user: laura-amaral
     website: ''
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: 'Separação de colunas de Ano e Mês - Exclusão de linhas vazias'
+data_cleaning_description: '1. Ajustes nos títulos das colunas. Quebra de coluna de data para coluna ano e mês. Exclusão de linhas vazias'
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url:
+data_cleaning_code_url: 'https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipp/code'
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -139,7 +140,8 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: 'no '
+      has_sensitive_data: temporal_coverage: 
+no
       observations:
       is_in_staging: true
       is_partition: false
@@ -154,7 +156,8 @@ columns:
           table_id:
           column_name:
       measurement_unit: percent
-      has_sensitive_data: 'no '
+      has_sensitive_data: temporal_coverage: 
+no
       observations:
       is_in_staging: true
       is_partition: false
@@ -169,7 +172,8 @@ columns:
           table_id:
           column_name:
       measurement_unit: percent
-      has_sensitive_data: 'no '
+      has_sensitive_data: temporal_coverage: 
+no
       observations:
       is_in_staging: true
       is_partition: false
@@ -184,7 +188,8 @@ columns:
           table_id:
           column_name:
       measurement_unit: percent
-      has_sensitive_data: 'no '
+      has_sensitive_data: temporal_coverage: 
+no
       observations:
       is_in_staging: true
       is_partition: false

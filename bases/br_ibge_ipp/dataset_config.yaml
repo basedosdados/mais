@@ -13,12 +13,13 @@ title: Índice de Preços ao Produtor
 organization: br-ibge
 
 # Descrição do conjunto
-notes: Índice de Preços ao Produtor - IPP - Índice Geral para o Brasil (a partir de janeiro/2022)
+notes: Índice de Preços ao Produtor (IPP). Índice Geral para o Brasil, a partir de janeiro/2022.
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
-groups: economia
+groups: 
+  - economia
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -28,7 +29,10 @@ groups: economia
 #    - sem acentos
 #    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
-tags: preco, inflacao, producao
+tags: 
+  - preco
+  - inflacao
+  - producao
 
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.
