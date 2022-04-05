@@ -1,22 +1,26 @@
 
-# Qual organização disponibiliza os dados originais?
-# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-# Exemplos: br-ibge, br-tse, br-rj-gov
-organization: br-mme
-
-dataset_id: br_mme_consumo_energia_eletrica
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-mme-consumo-energia-eletrica
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
 title: Consumo de energia elétrica no Brasil
 
-# Descrição e anotações úteis sobre os dados.
-description: Dados mensais do consumo de energia elétrica na rede (MWh) em nível nacional e separado por classes. 
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - br-mme
+
+# Descrição do conjunto
+notes: Dados mensais do consumo de energia elétrica na rede (MWh) em nível nacional
+    e separado por classes.
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
-groups: 
+groups:
     - energia
     - economia
     - meio-ambiente
@@ -33,17 +37,9 @@ tags:
     - consumo 
     - eletricidade
     - usina
-    - megawatts
+    - megawatt
     - iluminacao publica
-
-# Url completa do CKAN já contendo o dataset-id
-# Exemplo: https://basedosdados.org/dataset/<dataset-id>
-ckan_url:
-
-# Url completa do Github já contendo o dataset_id
-# Exemplo: https://github.com/basedosdados/mais/tree/master/bases/<dataset_id>
-github_url:
 
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.
-metadata_modified: '2021-12-17T18:39:25.460696'
+metadata_modified: '2022-02-14T01:23:54.356333'
