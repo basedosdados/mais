@@ -27,4 +27,4 @@ SAFE_CAST(taxa_bruta_mat_pre_escola AS FLOAT64) taxa_bruta_mat_pre_escola,
 SAFE_CAST(abs_bruta_mat_pre_escola AS INT64) abs_bruta_mat_pre_escola,
 SAFE_CAST(taxa_liquida_mat_pre_escola AS FLOAT64) taxa_liquida_mat_pre_escola,
 SAFE_CAST(abs_liquida_mat_pre_escola AS INT64) abs_liquida_mat_pre_escola
-from basedosdados-dev.br_abrinq_oca_staging.primeira_infancia_municipio as t
+FROM basedosdados-dev.br_abrinq_oca_staging.primeira_infancia_municipio AS t
