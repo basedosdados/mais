@@ -1,4 +1,6 @@
 
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_abrinq_oca
 
 table_id: primeira_infancia_municipio
@@ -10,47 +12,36 @@ table_id: primeira_infancia_municipio
 description: Dados de primeira infância a nível de município.
 
 # A máxima unidade espacial que a tabela cobre.
-spatial_coverage: bra
+# Exemplo:
+#   - continent: south_america
+#     country: br
+spatial_coverage:
+    - continent: south_america
+      country: br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
+    - 2010(1)2019
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: one_year
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity:
-    - municipality
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit: one_year
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns:
-    - id_municipio
-    - ano
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - country: br
+      entity: municipality
+      column:
+          - id_municipio
+    - entity: year
+      columns:
+          - ano
 
 last_updated:
-    metadata:
-    data:
+    metadata: '2022-04-05'
+    data: '2022-04-05'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -62,8 +53,8 @@ published_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
     github_user:
-    website: www.ricardodahis.com
     ckan_user:
+    website: www.ricardodahis.com
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -74,10 +65,17 @@ data_cleaned_by:
     github_user:
     ckan_user:
     website: www.ricardodahis.com
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_abrinq_oca/code
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: Limpeza para consistência
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_abrinq_oca/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: ''
+    organization_id: ''
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -87,10 +85,6 @@ auxiliary_files_url:
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
-
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary:
 
 source_bucket_name: basedosdados-dev
 
@@ -102,9 +96,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions:
-
-bdm_file_size:
+partitions: []
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -118,7 +110,7 @@ columns:
     - name: ano
       bigquery_type: int64
       description: Ano
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -126,72 +118,78 @@ columns:
           column_name: ano
       measurement_unit: year
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
           column_name: id_municipio
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: taxa_bruta_mat_pre_escola
       bigquery_type: float64
       description: Taxa Bruta de Matrícula em Pré-Escolas
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: []
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: abs_bruta_mat_pre_escola
       bigquery_type: int64
       description: Número Absoluto Bruto de Matrícula em Pré-Escolas
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: taxa_liquida_mat_pre_escola
-      bigquery_type: float64
-      description: Taxa Líquida de Matrícula em Pré-Escolas
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: percent
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: abs_liquida_mat_pre_escola
-      bigquery_type: int64
-      description: Número Absoluto Líquido de Matrícula em Pré-Escolas
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: []
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_liquida_mat_pre_escola
+      bigquery_type: float64
+      description: Taxa Líquida de Matrícula em Pré-Escolas
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: abs_liquida_mat_pre_escola
+      bigquery_type: int64
+      description: Número Absoluto Líquido de Matrícula em Pré-Escolas
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2021-09-12T23:15:30.713497'
+metadata_modified: '2022-02-14T01:23:42.276414'
