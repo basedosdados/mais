@@ -140,8 +140,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: temporal_coverage: 
-no
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -156,8 +155,7 @@ no
           table_id:
           column_name:
       measurement_unit: percent
-      has_sensitive_data: temporal_coverage: 
-no
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -172,8 +170,7 @@ no
           table_id:
           column_name:
       measurement_unit: percent
-      has_sensitive_data: temporal_coverage: 
-no
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -188,8 +185,7 @@ no
           table_id:
           column_name:
       measurement_unit: percent
-      has_sensitive_data: temporal_coverage: 
-no
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
