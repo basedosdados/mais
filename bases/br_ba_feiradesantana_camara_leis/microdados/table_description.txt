@@ -11,33 +11,30 @@ Publicado por
 -------------
 Nome: Crislane Alves
 Código: 
+Website: https://github.com/crislanealves
 Email: crislanealves@basedosdados.org
 Tratado por
 -----------
 Nome: Ana Paula Gomes
+Código: 
 Website: https://www.dadosabertosdefeira.com.br
 Email: dadosabertosdefeira@gmail.com
 
 
 
 
-Colunas identificando linhas unicamente
--------------------
-
-
 
 
 Cobertura Temporal
 ------------------
+- 2019
 
 
 
 
 Cobertura Espacial
 ------------------
-- b
-- r
-- a
+- {'continent': 'south_america', 'country': 'br', 'admin1': 'id_uf_29', 'admin': 'id_municipio_2910800'}
 
 
 

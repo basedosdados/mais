@@ -1,4 +1,6 @@
 
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_ba_feiradesantana_camara_leis
 
 table_id: microdados
@@ -7,66 +9,74 @@ table_id: microdados
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description:
-    Todas as leis do município de Feira de Santana até 2019.
+description: Todas as leis do município de Feira de Santana até 2019.
 
 # A máxima unidade espacial que a tabela cobre.
-spatial_coverage: bra
+# Exemplo:
+#   - continent: south_america
+#     country: br
+spatial_coverage:
+    - continent: south_america
+      country: br
+      admin1: id_uf_29
+      admin: id_municipio_2910800
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
+    - '2019'
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: unique
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity:
-- law
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit: unique
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns:
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: law
+      columns:
+          - titulo
+          - categoria
+          - resumo
+          - texto
 
 last_updated:
-    metadata:
-    data:
-    release:
+    metadata: '2022-04-03'
+    data: '2022-04-03'
+    release: ''
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.0
+version: v2.0
 
 # Quem está preenchendo esses metadados?
 published_by:
     name: Crislane Alves
     email: crislanealves@basedosdados.org
     github_user: crislanealves
-    website:
-    ckan_user: 
+    ckan_user: crislanealves
+    website: https://github.com/crislanealves
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Ana Paula Gomes
+    name:  Ana Paula Gomes
     email: dadosabertosdefeira@gmail.com
-    github_user: anapaulagomes
-    ckan_user:
+    github_user: https://github.com/dadosAbertosDeFeira/leis-municipais
+    ckan_user: ''
     website: https://www.dadosabertosdefeira.com.br
-    code_url: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: Conversão de JSON para CSV.
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ba_feiradesantana_camara_leis/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -76,10 +86,6 @@ auxiliary_files_url:
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
-
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary: no
 
 source_bucket_name: basedosdados-dev
 
@@ -93,8 +99,6 @@ project_id_staging: basedosdados-dev
 # Se não houver partições, não modifique abaixo.
 partitions:
 
-bdm_file_size:
-
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
@@ -107,20 +111,23 @@ columns:
     - name: titulo
       bigquery_type: string
       description: Nome da lei
-      temporal_coverage:
-      covered_by_dictionary: no 
+      temporal_coverage: 
+        - '2019'
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: categoria
       bigquery_type: string
       description: Qual a categoria da lei (e.g. Lei Ordinária, Lei Complementar)
       temporal_coverage:
+        - '2019'
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -128,12 +135,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: resumo
       bigquery_type: string
       description: Um resumo da lei (geralmente o que aparece no site antes da visualização completa).
       temporal_coverage:
+        - '2019'
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -141,12 +150,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: texto
       bigquery_type: string
       description: O texto completo da lei.
       temporal_coverage:
+        - '2019'
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -154,7 +165,8 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
-      is_partition: false
+      is_partition: false  
 
-metadata_modified: '2022-01-23T13:55:36.160841'
+metadata_modified: '2022-04-03T12:34:14.700115'
