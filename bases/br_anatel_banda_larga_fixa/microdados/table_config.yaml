@@ -1,3 +1,4 @@
+
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_anatel_banda_larga_fixa
@@ -52,8 +53,8 @@ observation_level:
           - velocidade
 
 last_updated:
-    metadata: '2022-03-28'
-    data: '2022-03-28'
+    metadata: '2022-04-07'
+    data: '2022-04-07'
     release: ''
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
