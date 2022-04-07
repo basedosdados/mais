@@ -20,8 +20,8 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_anatel_banda_larga_fixa.microdados AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(mes AS INT64) mes,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(cnpj AS STRING) cnpj,
 SAFE_CAST(empresa AS STRING) empresa,
