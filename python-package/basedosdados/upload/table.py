@@ -567,6 +567,7 @@ class Table(Base):
         columns_config_url_or_path=None,
         dataset_is_public=True,
         location=None,
+        chunk_size=None,
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -651,7 +652,10 @@ class Table(Base):
         ):
 
             Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
-                path, mode="staging", if_exists=if_storage_data_exists
+                path,
+                mode="staging",
+                if_exists=if_storage_data_exists,
+                chunk_size=chunk_size,
             )
 
         # Create Dataset if it doesn't exist
