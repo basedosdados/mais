@@ -12,7 +12,7 @@ description: | # REQUIRED
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: ministerio-da-saude # REQUIRED
+organization: br-ms # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:
