@@ -8,7 +8,8 @@ cap log close
 set more off
 set varabbrev off
 
-cap cd "~/Dropbox/basedosdados/mais/bases/br_tse_eleicoes"
+//cd "~/Dropbox/Academic/Data/Brazil/Eleicoes"
+cd "~/Downloads/dados_TSE"
 
 do "code/fnc/clean_string.do"
 do "code/fnc/limpa_tipo_eleicao.do"
@@ -16,9 +17,7 @@ do "code/fnc/limpa_instrucao.do"
 do "code/fnc/limpa_estado_civil.do"
 do "code/fnc/limpa_resultado.do"
 do "code/fnc/limpa_partido.do"
-
-//cd "~/Dropbox/Academic/Data/Brazil/Eleicoes"
-cd "~/Downloads/dados_TSE"
+do "code/fnc/limpa_candidato.do"
 
 //----------------------------------------------------------------------------//
 // build

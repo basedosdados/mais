@@ -7,6 +7,10 @@
 // candidatos
 //-------------------------------------------------//
 
+//----------------------//
+// 1. append anos
+//----------------------//
+
 use "output/candidatos_1994.dta", clear
 foreach ano of numlist 1996(2)2020 {
 	append using "output/candidatos_`ano'.dta"
@@ -20,7 +24,6 @@ drop turno resultado
 duplicates drop */
 
 drop if turno == 2
-drop if ano == .
 drop turno resultado
 
 merge m:1 cpf titulo_eleitoral nome using "output/id_candidato_bd.dta"
@@ -32,10 +35,9 @@ gen aux_id = _n	// id auxiliar para merge
 tempfile candidatos
 save `candidatos'
 
-//------------//
-// limpando
-// duplicadas
-//------------//
+//----------------------//
+// 2. limpando duplicadas
+//----------------------//
 
 keep if id_candidato_bd != .
 
@@ -59,9 +61,10 @@ duplicates drop `vars', force
 
 save "output/norm_candidatos.dta", replace
 
-//------------//
-// particiona
-//------------//
+//----------------------//
+// 3. limpa erros na 
+// tabela final
+//----------------------//
 
 use `candidatos'
 
@@ -70,6 +73,49 @@ drop _merge aux_id
 
 drop coligacao composicao
 
+egen aux = tag(ano tipo_eleicao id_candidato_bd cargo)
+bys ano tipo_eleicao id_candidato_bd: egen N_cargo = sum(aux)
+drop aux
+
+egen aux = tag(ano tipo_eleicao id_candidato_bd numero)
+bys ano tipo_eleicao id_candidato_bd: egen N_numero = sum(aux)
+drop aux
+
+bys ano tipo_eleicao id_candidato_bd: egen N_deferido = sum(situacao == "deferido")
+
+duplicates tag ano tipo_eleicao id_candidato_bd if id_candidato_bd != ., gen(dup)
+
+foreach k in nome cpf titulo_eleitoral {
+	egen aux = tag(ano tipo_eleicao id_candidato_bd `k')
+	bys ano tipo_eleicao id_candidato_bd: egen N_`k' = sum(aux)
+	drop aux
+}
+
+// deletando linhas, seguindo critérios em ordem crescente de detalhamento
+
+// consequencia: perder informação sobre motivo exato do não-deferimento e sobre qual cargo/número exato a pessoa concorreu
+duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0 & N_deferido == 0, force
+
+// consequencia: perde casos onde não-deferimento é potencialmente interessante de se observar
+drop                                             if dup != . & dup > 0 & N_deferido == 1 & situacao != "deferido"
+
+// consequencia: não consertar casos onde `nome_urna` claramente está trocado/errado
+duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0 & N_deferido > 1  & N_numero == 1 & N_cargo == 1, force
+
+// consequencia: perder alguma informação sobre exatamente qual foi a candidatura "observada"
+duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0 & N_deferido > 1  & N_numero > 1  & N_cargo == 1 & N_nome == 1, force
+
+// consequencia: perder alguma informação sobre exatamente qual foi a candidatura "observada"
+duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0 & N_deferido > 1  & N_numero > 1  & N_cargo > 1  & N_nome == 1, force
+
+// último passo!
+// não há mais o que fazer senão checar manualmente o que está sobrando de erros
+drop dup
+duplicates tag ano tipo_eleicao id_candidato_bd if id_candidato_bd != ., gen(dup)
+duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0, force
+
+drop N_* dup
+
 order ano tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
 	id_candidato_bd cpf titulo_eleitoral sequencial numero nome nome_urna numero_partido sigla_partido cargo
 
@@ -77,6 +123,13 @@ compress
 
 tempfile candidatos
 save `candidatos'
+
+
+//----------------------//
+// 4. particiona
+//----------------------//
+
+use `candidatos'
 
 !mkdir "output/candidatos"
 
