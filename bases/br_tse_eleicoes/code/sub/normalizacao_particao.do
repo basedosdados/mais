@@ -7,6 +7,10 @@
 // candidatos
 //-------------------------------------------------//
 
+//----------------------//
+// 1. append anos
+//----------------------//
+
 use "output/candidatos_1994.dta", clear
 foreach ano of numlist 1996(2)2020 {
 	append using "output/candidatos_`ano'.dta"
@@ -20,7 +24,6 @@ drop turno resultado
 duplicates drop */
 
 drop if turno == 2
-drop if ano == .
 drop turno resultado
 
 merge m:1 cpf titulo_eleitoral nome using "output/id_candidato_bd.dta"
@@ -32,10 +35,9 @@ gen aux_id = _n	// id auxiliar para merge
 tempfile candidatos
 save `candidatos'
 
-//------------//
-// limpando
-// duplicadas
-//------------//
+//----------------------//
+// 2. limpando duplicadas
+//----------------------//
 
 keep if id_candidato_bd != .
 
@@ -59,9 +61,10 @@ duplicates drop `vars', force
 
 save "output/norm_candidatos.dta", replace
 
-//------------//
-// particiona
-//------------//
+//----------------------//
+// 3. limpa erros na 
+// tabela final
+//----------------------//
 
 use `candidatos'
 
@@ -69,6 +72,49 @@ merge 1:1 aux_id using "output/norm_candidatos.dta"
 drop _merge aux_id
 
 drop coligacao composicao
+
+egen aux = tag(ano tipo_eleicao id_candidato_bd cargo)
+bys ano tipo_eleicao id_candidato_bd: egen N_cargo = sum(aux)
+drop aux
+
+egen aux = tag(ano tipo_eleicao id_candidato_bd numero)
+bys ano tipo_eleicao id_candidato_bd: egen N_numero = sum(aux)
+drop aux
+
+bys ano tipo_eleicao id_candidato_bd: egen N_deferido = sum(situacao == "deferido")
+
+duplicates tag ano tipo_eleicao id_candidato_bd if id_candidato_bd != ., gen(dup)
+
+foreach k in nome cpf titulo_eleitoral {
+	egen aux = tag(ano tipo_eleicao id_candidato_bd `k')
+	bys ano tipo_eleicao id_candidato_bd: egen N_`k' = sum(aux)
+	drop aux
+}
+
+// deletando linhas, seguindo critérios em ordem crescente de detalhamento
+
+// consequencia: perder informação sobre motivo exato do não-deferimento e sobre qual cargo/número exato a pessoa concorreu
+duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0 & N_deferido == 0, force
+
+// consequencia: perde casos onde não-deferimento é potencialmente interessante de se observar
+drop                                             if dup != . & dup > 0 & N_deferido == 1 & situacao != "deferido"
+
+// consequencia: não consertar casos onde `nome_urna` claramente está trocado/errado
+duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0 & N_deferido > 1  & N_numero == 1 & N_cargo == 1, force
+
+// consequencia: perder alguma informação sobre exatamente qual foi a candidatura "observada"
+duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0 & N_deferido > 1  & N_numero > 1  & N_cargo == 1 & N_nome == 1, force
+
+// consequencia: perder alguma informação sobre exatamente qual foi a candidatura "observada"
+duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0 & N_deferido > 1  & N_numero > 1  & N_cargo > 1  & N_nome == 1, force
+
+// último passo!
+// não há mais o que fazer senão checar manualmente o que está sobrando de erros
+drop dup
+duplicates tag ano tipo_eleicao id_candidato_bd if id_candidato_bd != ., gen(dup)
+duplicates drop ano tipo_eleicao id_candidato_bd if dup != . & dup > 0, force
+
+drop N_* dup
 
 order ano tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
 	id_candidato_bd cpf titulo_eleitoral sequencial numero nome nome_urna numero_partido sigla_partido cargo
@@ -78,26 +124,25 @@ compress
 tempfile candidatos
 save `candidatos'
 
+
+//----------------------//
+// 4. particiona
+//----------------------//
+
+use `candidatos'
+
 !mkdir "output/candidatos"
 
 levelsof ano, l(anos)
 foreach ano in `anos' {
 	
-	use `candidatos' if ano == `ano', clear
-	
 	!mkdir "output/candidatos/ano=`ano'"
 	
-	levelsof sigla_uf, l(estados_`ano')
-	foreach sigla_uf in `estados_`ano'' {
-		
-		!mkdir "output/candidatos/ano=`ano'/sigla_uf=`sigla_uf'"
-		
-		preserve
-			keep if ano == `ano' & sigla_uf == "`sigla_uf'"
-			drop ano sigla_uf
-			export delimited "output/candidatos/ano=`ano'/sigla_uf=`sigla_uf'/candidatos.csv", replace
-		restore
-	}
+	// particiona só por ano para poder deixar sigla_uf='' para cargo == 'presidente' / 'vice-presidente'
+	use `candidatos' if ano == `ano', clear
+	drop ano
+	export delimited "output/candidatos/ano=`ano'/candidatos.csv", replace
+	
 }
 *
 
@@ -911,10 +956,12 @@ foreach ano of numlist 2002(2)2020 {
 	
 	!mkdir "output/despesas_candidato/ano=`ano'"
 	
-	use `vazio', clear
-	append using "output/despesas_candidato_`ano'.dta"
+	// passo extra para otimizar partição. sem isso estava batendo 18+ GB de RAM
+	use "output/despesas_candidato_`ano'.dta", clear
 	
 	ren numero_candidato numero
+	
+	cap gen tipo_eleicao = ""
 	
 	if mod(`ano', 4) == 0 {
 		
@@ -958,31 +1005,34 @@ foreach ano of numlist 2002(2)2020 {
 	
 	ren numero numero_candidato
 	
-	order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
-		numero_candidato cpf_candidato sequencial_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
-		sequencial_despesa data_despesa tipo_despesa descricao_despesa origem_despesa valor_despesa ///
-		tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas cnpj_candidato ///
-		tipo_documento numero_documento ///
-		especie_recurso fonte_recurso ///
-		cpf_cnpj_fornecedor nome_fornecedor nome_fornecedor_rf cnae_2_fornecedor descricao_cnae_2_fornecedor ///
-		tipo_fornecedor esfera_partidaria_fornecedor sigla_uf_fornecedor ///
-		id_municipio_tse_fornecedor sequencial_candidato_fornecedor numero_candidato_fornecedor ///
-		numero_partido_fornecedor sigla_partido_fornecedor nome_partido_fornecedor cargo_fornecedor
-	
-	//--------------//
-	// particiona
-	//--------------//
+	tempfile despesas
+	save `despesas'
 	
 	levelsof sigla_uf, l(ufs)
 	foreach uf in `ufs' {
 		
+		use `despesas' if sigla_uf == "`uf'", clear
+	
+		append using `vazio'
+		
+		order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
+			numero_candidato cpf_candidato sequencial_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
+			sequencial_despesa data_despesa tipo_despesa descricao_despesa origem_despesa valor_despesa ///
+			tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas cnpj_candidato ///
+			tipo_documento numero_documento ///
+			especie_recurso fonte_recurso ///
+			cpf_cnpj_fornecedor nome_fornecedor nome_fornecedor_rf cnae_2_fornecedor descricao_cnae_2_fornecedor ///
+			tipo_fornecedor esfera_partidaria_fornecedor sigla_uf_fornecedor ///
+			id_municipio_tse_fornecedor sequencial_candidato_fornecedor numero_candidato_fornecedor ///
+			numero_partido_fornecedor sigla_partido_fornecedor nome_partido_fornecedor cargo_fornecedor
+		
+		//--------------//
+		// particiona
+		//--------------//
+	
 		!mkdir "output/despesas_candidato/ano=`ano'/sigla_uf=`uf'"
 		
-		preserve
-			keep if ano == `ano' & sigla_uf == "`uf'"
-			drop ano sigla_uf
-			export delimited "output/despesas_candidato/ano=`ano'/sigla_uf=`uf'/despesas_candidato.csv", replace
-		restore
+		export delimited "output/despesas_candidato/ano=`ano'/sigla_uf=`uf'/despesas_candidato.csv", replace
 		
 	}
 	
