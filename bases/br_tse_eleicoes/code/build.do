@@ -8,7 +8,6 @@ cap log close
 set more off
 set varabbrev off
 
-//cd "~/Dropbox/Academic/Data/Brazil/Eleicoes"
 cd "~/Downloads/dados_TSE"
 
 do "code/fnc/clean_string.do"

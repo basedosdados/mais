@@ -136,21 +136,13 @@ use `candidatos'
 levelsof ano, l(anos)
 foreach ano in `anos' {
 	
-	use `candidatos' if ano == `ano', clear
-	
 	!mkdir "output/candidatos/ano=`ano'"
 	
-	levelsof sigla_uf, l(estados_`ano')
-	foreach sigla_uf in `estados_`ano'' {
-		
-		!mkdir "output/candidatos/ano=`ano'/sigla_uf=`sigla_uf'"
-		
-		preserve
-			keep if ano == `ano' & sigla_uf == "`sigla_uf'"
-			drop ano sigla_uf
-			export delimited "output/candidatos/ano=`ano'/sigla_uf=`sigla_uf'/candidatos.csv", replace
-		restore
-	}
+	// particiona só por ano para poder deixar sigla_uf='' para cargo == 'presidente' / 'vice-presidente'
+	use `candidatos' if ano == `ano', clear
+	drop ano
+	export delimited "output/candidatos/ano=`ano'/candidatos.csv", replace
+	
 }
 *
 
@@ -964,10 +956,12 @@ foreach ano of numlist 2002(2)2020 {
 	
 	!mkdir "output/despesas_candidato/ano=`ano'"
 	
-	use `vazio', clear
-	append using "output/despesas_candidato_`ano'.dta"
+	// passo extra para otimizar partição. sem isso estava batendo 18+ GB de RAM
+	use "output/despesas_candidato_`ano'.dta", clear
 	
 	ren numero_candidato numero
+	
+	cap gen tipo_eleicao = ""
 	
 	if mod(`ano', 4) == 0 {
 		
@@ -1011,31 +1005,34 @@ foreach ano of numlist 2002(2)2020 {
 	
 	ren numero numero_candidato
 	
-	order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
-		numero_candidato cpf_candidato sequencial_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
-		sequencial_despesa data_despesa tipo_despesa descricao_despesa origem_despesa valor_despesa ///
-		tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas cnpj_candidato ///
-		tipo_documento numero_documento ///
-		especie_recurso fonte_recurso ///
-		cpf_cnpj_fornecedor nome_fornecedor nome_fornecedor_rf cnae_2_fornecedor descricao_cnae_2_fornecedor ///
-		tipo_fornecedor esfera_partidaria_fornecedor sigla_uf_fornecedor ///
-		id_municipio_tse_fornecedor sequencial_candidato_fornecedor numero_candidato_fornecedor ///
-		numero_partido_fornecedor sigla_partido_fornecedor nome_partido_fornecedor cargo_fornecedor
-	
-	//--------------//
-	// particiona
-	//--------------//
+	tempfile despesas
+	save `despesas'
 	
 	levelsof sigla_uf, l(ufs)
 	foreach uf in `ufs' {
 		
+		use `despesas' if sigla_uf == "`uf'", clear
+	
+		append using `vazio'
+		
+		order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
+			numero_candidato cpf_candidato sequencial_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
+			sequencial_despesa data_despesa tipo_despesa descricao_despesa origem_despesa valor_despesa ///
+			tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas cnpj_candidato ///
+			tipo_documento numero_documento ///
+			especie_recurso fonte_recurso ///
+			cpf_cnpj_fornecedor nome_fornecedor nome_fornecedor_rf cnae_2_fornecedor descricao_cnae_2_fornecedor ///
+			tipo_fornecedor esfera_partidaria_fornecedor sigla_uf_fornecedor ///
+			id_municipio_tse_fornecedor sequencial_candidato_fornecedor numero_candidato_fornecedor ///
+			numero_partido_fornecedor sigla_partido_fornecedor nome_partido_fornecedor cargo_fornecedor
+		
+		//--------------//
+		// particiona
+		//--------------//
+	
 		!mkdir "output/despesas_candidato/ano=`ano'/sigla_uf=`uf'"
 		
-		preserve
-			keep if ano == `ano' & sigla_uf == "`uf'"
-			drop ano sigla_uf
-			export delimited "output/despesas_candidato/ano=`ano'/sigla_uf=`uf'/despesas_candidato.csv", replace
-		restore
+		export delimited "output/despesas_candidato/ano=`ano'/sigla_uf=`uf'/despesas_candidato.csv", replace
 		
 	}
 	
