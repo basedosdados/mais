@@ -21,7 +21,7 @@ spatial_coverage:
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+# Exemplos: ['1995(2)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
     - 1994(2)2020
 
@@ -108,7 +108,7 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -123,7 +123,7 @@ columns:
       bigquery_type: string
       description: Tipo da Eleição
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -138,7 +138,7 @@ columns:
       bigquery_type: string
       description: Sigla da unidade da federação
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -146,14 +146,14 @@ columns:
           column_name: sigla
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: Pode ser nulos porque foi utilizada a cobertura espacial de onde os candidatos concorrem.
       is_in_staging: true
       is_partition: false
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -161,14 +161,14 @@ columns:
           column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: Pode ser nulos porque foi utilizada a cobertura espacial de onde os candidatos concorrem.
       is_in_staging: true
       is_partition: false
     - name: id_municipio_tse
       bigquery_type: string
       description: ID Município - TSE
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -183,7 +183,7 @@ columns:
       bigquery_type: string
       description: ID Candidato - Base dos Dados
       temporal_coverage: 
-        - (1)
+        - 1998(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -198,14 +198,14 @@ columns:
       bigquery_type: string
       description: CPF
       temporal_coverage: 
-        - (1)
+        - 1998(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data: yes
       observations:
       is_in_staging: true
       is_partition: false
@@ -213,14 +213,14 @@ columns:
       bigquery_type: string
       description: Título eleitoral
       temporal_coverage: 
-        - (1)
+        - 1998(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
+      has_sensitive_data: yes
       observations:
       is_in_staging: true
       is_partition: false
@@ -228,7 +228,7 @@ columns:
       bigquery_type: string
       description: Sequencial
       temporal_coverage: 
-        - (1)
+        - 1998(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -243,7 +243,7 @@ columns:
       bigquery_type: string
       description: Número
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -258,7 +258,7 @@ columns:
       bigquery_type: string
       description: Nome
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -273,7 +273,7 @@ columns:
       bigquery_type: string
       description: Nome de urna
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -288,7 +288,7 @@ columns:
       bigquery_type: string
       description: Número do partido
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -303,7 +303,7 @@ columns:
       bigquery_type: string
       description: Sigla do partido
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -318,7 +318,7 @@ columns:
       bigquery_type: string
       description: Cargo
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -333,7 +333,7 @@ columns:
       bigquery_type: string
       description: Situação
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -348,7 +348,7 @@ columns:
       bigquery_type: string
       description: Ocupação
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -363,7 +363,7 @@ columns:
       bigquery_type: date
       description: Data de nascimento
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -378,7 +378,7 @@ columns:
       bigquery_type: int64
       description: Idade
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -393,7 +393,7 @@ columns:
       bigquery_type: string
       description: Gênero
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -408,7 +408,7 @@ columns:
       bigquery_type: string
       description: Instrução
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -423,7 +423,7 @@ columns:
       bigquery_type: string
       description: Estado civil
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -438,7 +438,7 @@ columns:
       bigquery_type: string
       description: Nacionalidade
       temporal_coverage: 
-        - (1)
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -453,7 +453,7 @@ columns:
       bigquery_type: string
       description: Sigla da unidade da federação de nascimento
       temporal_coverage: 
-        - (1)
+        - 1998(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -468,7 +468,7 @@ columns:
       bigquery_type: string
       description: Município de nascimento
       temporal_coverage: 
-        - (1)
+        - 1998(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -483,7 +483,7 @@ columns:
       bigquery_type: string
       description: Email
       temporal_coverage: 
-        - (1)
+        - 2012(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -498,7 +498,7 @@ columns:
       bigquery_type: string
       description: Raça ou cor
       temporal_coverage: 
-        - (1)
+        - 2014(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
