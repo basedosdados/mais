@@ -24,7 +24,7 @@ spatial_coverage:
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: []
+temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -32,7 +32,6 @@ update_frequency: unique
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-    - columns: []
 
 last_updated:
     metadata: '2022-04-19'
@@ -162,7 +161,7 @@ columns:
     - name: nome
       bigquery_type: string
       description: Nome da Região
-      temporal_coverage:
+      temporal_coverage: 
       covered_by_dictionary: no
       directory_column:
           dataset_id:
