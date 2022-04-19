@@ -218,6 +218,20 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
+name = "db-dtypes"
+version = "1.0.0"
+description = "Pandas Data Types for SQL systems (BigQuery, Spanner)"
+category = "main"
+optional = false
+python-versions = ">=3.6, <3.11"
+
+[package.dependencies]
+numpy = ">=1.16.6,<2.0dev"
+packaging = ">=17.0"
+pandas = ">=0.24.2,<2.0dev"
+pyarrow = ">=3.0.0,<8.0dev"
+
+[[package]]
 name = "decorator"
 version = "5.1.1"
 description = "Decorators for Humans"
@@ -1063,17 +1077,22 @@ test = ["pytest (>=5.0.1)", "pytest-xdist", "hypothesis (>=3.58)"]
 
 [[package]]
 name = "pandas-gbq"
-version = "0.13.2"
-description = "Pandas interface to Google BigQuery"
+version = "0.17.4"
+description = "Google BigQuery connector for pandas"
 category = "main"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.7, <3.11"
 
 [package.dependencies]
-google-auth = "*"
-google-auth-oauthlib = "*"
-google-cloud-bigquery = ">=1.11.1"
-pandas = ">=0.19.0"
+db-dtypes = ">=0.3.1,<2.0.0"
+google-api-core = ">=1.31.5,<2.0.0 || >2.3.0,<3.0.0dev"
+google-auth = ">=1.25.0"
+google-auth-oauthlib = ">=0.0.1"
+google-cloud-bigquery = ">=1.27.2,<2.4.0 || >=2.5.0,<4.0.0dev"
+google-cloud-bigquery-storage = ">=1.1.0,<3.0.0dev"
+numpy = ">=1.16.6"
+pandas = ">=0.24.2"
+pyarrow = ">=3.0.0,<8.0dev"
 pydata-google-auth = "*"
 
 [package.extras]
@@ -1750,7 +1769,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7.1,<3.11"
-content-hash = "5259926bab717885279ac21899983decd28f0e97dc35ebf1eeac20b7a7ca0c61"
+content-hash = "2a3f9318810b2aa1032c38b9af360db0ccad3fd0fe04839357391df3f99a3c7d"
 
 [metadata.files]
 appdirs = [
@@ -1893,6 +1912,10 @@ click = [
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
     {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
+]
+db-dtypes = [
+    {file = "db-dtypes-1.0.0.tar.gz", hash = "sha256:3070d1a8d86ff0b5d9b16f15c5fab9c18893c6b3d5723cd95ee397b169049454"},
+    {file = "db_dtypes-1.0.0-py2.py3-none-any.whl", hash = "sha256:66f6c1b87161814292a2856d1acc17fd4af1b7055853dc7d11af33dc5b94f64e"},
 ]
 decorator = [
     {file = "decorator-5.1.1-py3-none-any.whl", hash = "sha256:b8c3f85900b9dc423225913c5aace94729fe1fa9763b38939a95226f02d37186"},
@@ -2304,8 +2327,8 @@ pandas = [
     {file = "pandas-1.2.4.tar.gz", hash = "sha256:649ecab692fade3cbfcf967ff936496b0cfba0af00a55dfaacd82bdda5cb2279"},
 ]
 pandas-gbq = [
-    {file = "pandas-gbq-0.13.2.tar.gz", hash = "sha256:bc3a615c92df76490be33ae1efe60e82b8affd196e39f4f6c9c76d67c32e3d46"},
-    {file = "pandas_gbq-0.13.2-py3-none-any.whl", hash = "sha256:858539f397dcadf1e2792db49ac9a010098009f47859252d4aeaf03d530ea290"},
+    {file = "pandas-gbq-0.17.4.tar.gz", hash = "sha256:70ac57cc6ebf9d1e1c1c810f5ccac710163acd4c3d13e8badea27bb66fae19f7"},
+    {file = "pandas_gbq-0.17.4-py2.py3-none-any.whl", hash = "sha256:3b3714167bdc4b1a6013ff6286a452727efbceb412922a2ca39aa996e8e8b129"},
 ]
 pandavro = [
     {file = "pandavro-1.6.0.tar.gz", hash = "sha256:d098da34529fbb20de5fd1a6f231918d1b60941b25bea5dc87897ef0d472cb6f"},
