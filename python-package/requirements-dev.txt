@@ -137,7 +137,6 @@ webencodings==0.5.1; python_version >= "3.7"
 widgetsnbextension==3.6.0
 win32-setctime==1.1.0; sys_platform == "win32" and python_version >= "3.5"
 zipp==3.7.0; python_version < "3.8" and python_version >= "3.7"
-Jinja2==2.11.2
 poetry
 importlib_metadata>3.10
 flake8
