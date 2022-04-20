@@ -19,9 +19,9 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.regiao_metropolitana AS
 SELECT 
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_regiao_metropolitana AS STRING) id_regiao_metropolitana,
+SAFE_CAST(nome AS STRING) nome,
 SAFE_CAST(tipo AS STRING) tipo,
-SAFE_CAST(nome_regiao AS STRING) nome_regiao,
-SAFE_CAST(nome AS STRING) nome
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(nome_regiao AS STRING) nome_regiao
 FROM basedosdados-dev.br_bd_diretorios_brasil_staging.regiao_metropolitana AS t
