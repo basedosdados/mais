@@ -1,7 +1,9 @@
 from ast import Raise
+from genericpath import exists
 from logging import raiseExceptions
 import os
 import re
+from tracemalloc import stop
 from webbrowser import get
 import unidecode
 from ftplib import FTP
@@ -58,14 +60,14 @@ def get_ftp(url_path):
     ftp.login()
     ftp.encoding = "latin1"
     path = "/pdet/microdados/NOVO CAGED/" + url_path
+
     ftp.cwd(path)
     return ftp
 
 
 ################################################################
 # GET THE DOWNLOAD LINKS
-################################################################
-
+###############################################################
 
 def get_download_links():
     years = [2020,2021,2022]
@@ -75,22 +77,17 @@ def get_download_links():
         year_str = str(year)
         month_url = get_ftp(year_str).nlst()
         
-        
         for month in month_url:
-            try:
-                path = "/pdet/microdados/NOVO CAGED/" + year_str + "/" + month + "/"
-                file_name = f"CAGEDMOD" + month + ".7z"
-                file_url = path + file_name
-            
-                download_dict[year] = file_url
-                
-            except:
-                raiseExceptions("Month not found.")
+
+            path = year_str + "/" + month + "/"
+            file_name = f"CAGEDMOV" + month + ".7z"
+            file_url = path + file_name
+            year_month = f'{month}'
+            download_dict[year_month] = file_url
 
     return download_dict
 
-
-## get the blobs from basedosdados storage and filter what needs to be downloaded
+    ## get the blobs from basedosdados storage and filter what needs to be downloaded
 def get_filtered_download_dict(tipo, download_dict, bucket_name="basedosdados"):
     def get_year_month(b):
         ano = b.split("ano=")[1].split("/")[0]
@@ -103,6 +100,7 @@ def get_filtered_download_dict(tipo, download_dict, bucket_name="basedosdados"):
         .bucket(bucket_name)
         .list_blobs(prefix=f"staging/{tb.dataset_id}/{tb.table_id}/")
     )
+
 
     blobs = list(set([get_year_month(b.name) for b in blobs]))
 
@@ -158,23 +156,23 @@ def get_trigger_and_download_opt(download_opt, tipo):
 
     return trigger, download_links
 
-
 ################################################################
 # DOWNLOAD FILES
 ################################################################
 
-
 def download_data(save_path, download_url):
     ## download do arquivo
-    path_url = "/".join(download_url.split("/")[:-1])
-    ftp = get_ftp(path_url)
-
-    file_name = download_url.split("/")[-1]
+    #path_url = "/".join(download_url.split("/")[:-1])
+    
+    
+    file_name=download_url.split('/')[-1]
+    ftp = get_ftp(download_url.replace(file_name,''))
     creat_path_tree(save_path)
     if not os.path.isfile(save_path + file_name):
         with open(save_path + file_name, "wb") as f:
             ftp.retrbinary("RETR " + file_name, f.write)
-
+    
+        
 
 ################################################################
 # FILES AND FOLDES MANIPULATION
@@ -244,28 +242,9 @@ def clean_csvs(file_path, file_name):
 ################################################################
 
 
-def rename_add_orginaze_columns(file_path, file_name, tipo, municipios):
+def rename_add_orginaze_columns(file_path, file_name, municipios):
 
     df = pd.read_csv(f"{file_path}{file_name}.csv", dtype="str")
-
-    colunas_estabelecimento = {
-        "sigla_uf": "sigla_uf",
-        "id_municipio": "id_municipio",
-        "município": "id_municipio_6",
-        "cnae_2": "cnae_2",
-        "subclasse": "cnae_2_subclasse",
-        "seção": "cnae_2_secao",
-        "admitidos": "admitidos",
-        "desligados": "desligados",
-        "fonte_desl": "fonte_desligamento",
-        "saldomovimentação": "saldo_movimentacao",
-        "tipoempregador": "tipo_empregador",
-        "tipoestabelecimento": "tipo_estabelecimento",
-        "tamestabjan": "tamanho_estabelecimento_janeiro",
-        "competência": "",
-        "região": "",
-        "uf": "",
-    }
 
     colunas_movimentacoes = {
         "sigla_uf": "sigla_uf",
@@ -296,12 +275,10 @@ def rename_add_orginaze_columns(file_path, file_name, tipo, municipios):
         "região": "",
         "uf": "",
     }
-    if tipo == "estabelecimentos":
-        col_dict = colunas_estabelecimento
-    else:
-        col_dict = colunas_movimentacoes
-        df["cbo2002ocupação"] = df["cbo2002ocupação"].apply(
-            lambda x: (6 - len(x)) * "0" + x
+  
+    col_dict = colunas_movimentacoes
+    df["cbo2002ocupação"] = df["cbo2002ocupação"].apply(
+        lambda x: (6 - len(x)) * "0" + x
         )
 
     df["subclasse"] = df["subclasse"].apply(lambda x: (7 - len(x)) * "0" + x)
@@ -342,71 +319,3 @@ def upload_to_bd(tipo, filepath):
         tb = bd.Table(table_id="microdados_movimentacoes", dataset_id="br_me_caged")
 
     tb.append(filepath, if_exists="replace")
-
-
-if __name__ == "__main__":
-    # GET MUNICIPIOS FROM BD
-    print("====== ", today, " ======")
-    query = """
-    SELECT 
-        sigla_uf,
-        id_municipio,
-        id_municipio_6
-    FROM `basedosdados.br_bd_diretorios_brasil.municipio` 
-    """
-
-    municipios = bd.read_sql(query, billing_project_id="basedosdados-dev")
-    print("\n")
-
-    # deleta pasta
-    if os.path.isdir(CLEAN_PATH):
-        shutil.rmtree(CLEAN_PATH)
-    if os.path.isdir(RAW_PATH):
-        shutil.rmtree(RAW_PATH)
-
-    print("Get download links")
-    download_dict = get_download_links()
-    print("\n")
-
-    for tipo in list(download_dict.keys()):
-
-        download_opt = get_filtered_download_dict(
-            tipo=tipo, download_dict=download_dict, bucket_name="basedosdados-dev"
-        )
-
-        print(f"Filter download links {tipo}")
-
-        trigger, download_opt = get_trigger_and_download_opt(download_opt, tipo)
-
-        if trigger:
-            for year_month_path in list(download_opt.keys()):
-                print(tipo, ": ", year_month_path)
-                ## download data
-                save_path = RAW_PATH + f"{tipo}/" + year_month_path
-                download_data(save_path, download_opt[year_month_path])
-
-                # create some vars
-                file_name = download_opt[year_month_path].split("/")[-1].split(".")[0]
-                file_path = RAW_PATH + f"{tipo}/" + year_month_path
-
-                # upload raw data to storage
-                upload_to_raw(tipo=tipo, save_raw_path=f"{save_path}{file_name}.7z")
-
-                # extrai arquivo
-                extract_file(file_path, file_name, save_rows=None)
-
-                # load e organiza os dados
-                df = rename_add_orginaze_columns(file_path, file_name, tipo, municipios)
-
-                # salva no formato de particao
-                save_clean_path = CLEAN_PATH + f"{tipo}/"
-                creat_partition(df, save_clean_path, year_month_path)
-
-                # upload basedosdados
-                upload_to_bd(tipo, save_clean_path)
-
-                # deleta pasta
-                shutil.rmtree(CLEAN_PATH + f"{tipo}/")
-                shutil.rmtree(RAW_PATH + f"{tipo}/")
-
-        print("\n")
