@@ -48,36 +48,34 @@ if os.path.isdir(RAW_PATH):
 
 print("Get download links")
 download_dict = caged_novo.get_download_links()
+
 tb = bd.Table(dataset_id="br_me_caged", table_id=f"microdados_movimentacoes")
 st = bd.Storage(table_id="microdados_movimentacoes", dataset_id="br_me_caged")
 
-def teste():
-    if download_dict != {}:
-        for year_month_path in list(download_dict.keys()):
-
-            save_path = RAW_PATH + "movimentacoes/" + str(year_month_path)
-            caged_novo.download_data(save_path, download_dict[year_month_path])
-            
-            file_name = download_dict[year_month_path].split("/")[-1].split(".")[0]
-            file_path = RAW_PATH + "movimentacoes" + str(year_month_path)
+for year_month in list(download_dict.keys()):
+    
+    year = year_month[0:4]
+    save_path = "/media/isadorabugarin/Data/BasesdosDados/downloads/"
+    
+    caged_novo.download_data(save_path, f'{download_dict[year_month]}')
+      
+    file_name = download_dict[year_month].split("/")[-1].split(".")[0]
+    file_path = "/media/isadorabugarin/Data/BasesdosDados/downloads/"
              
-            caged_novo.extract_file(file_path, file_name, save_rows=None)
+    caged_novo.extract_file(file_path, file_name, save_rows=None)
 
-            municipios = get_municipios
-            df = caged_novo.rename_add_orginaze_columns(file_path, file_name, municipios)
+    municipios = get_municipios()
+    df = caged_novo.rename_add_orginaze_columns(file_path, file_name, municipios)
 
-            save_clean_path = CLEAN_PATH + "movimentacoes/"
-            caged_novo.creat_partition(df, save_clean_path, year_month_path)
+    save_clean_path = "/media/isadorabugarin/Data/BasesdosDados/downloads/"
+    caged_novo.creat_partition(df, save_clean_path, year_month)
 
-
-teste()
 #CREATE TABLE AND FILL METADATA
-print('IM HERE')
+
 tb = bd.Table(table_id = 'microdados_movimentacoes', dataset_id = 'br_me_caged')
-print('IM HERE')
 st = bd.Storage('br_me_caged','microdados_movimentacoes')
-print('IM HERE')
-#st.delete_table(bucket_name='basedosdados-dev')
+
+st.delete_table(bucket_name='basedosdados-dev')
 tb.create(path='../data/caged_novo/clean/movimentacoes/',
           if_table_config_exists='pass',
           if_storage_data_exists='replace',
