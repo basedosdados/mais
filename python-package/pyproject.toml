@@ -13,7 +13,7 @@ packages = [
 ]
 readme = "README.md"
 repository = "https://github.com/base-dos-dados/bases"
-version = "1.6.3-beta.2"
+version = "1.6.4-beta.2"
 
 [tool.poetry.scripts]
 basedosdados = 'basedosdados.cli.cli:cli'

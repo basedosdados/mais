@@ -627,6 +627,10 @@ class Table(Base):
             location (str): Optional. Location of dataset data.
                 List of possible region names locations: https://cloud.google.com/bigquery/docs/locations
 
+            chunk_size (int): Optional
+                The size of a chunk of data whenever iterating (in bytes).
+                This must be a multiple of 256 KB per the API specification.
+                If not specified, the chunk_size of the blob itself is used. If that is not specified, a default value of 40 MB is used.
         """
 
         if path is None:
@@ -839,7 +843,14 @@ class Table(Base):
                 action="deleted",
             )
 
-    def append(self, filepath, partitions=None, if_exists="replace", **upload_args):
+    def append(
+        self,
+        filepath,
+        partitions=None,
+        if_exists="replace",
+        chunk_size=None,
+        **upload_args,
+    ):
         """Appends new data to existing BigQuery table.
 
         As long as the data has the same schema. It appends the data in the
@@ -858,6 +869,10 @@ class Table(Base):
                 * 'raise' : Raises Conflict exception
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
+            chunk_size (int): Optional
+                The size of a chunk of data whenever iterating (in bytes).
+                This must be a multiple of 256 KB per the API specification.
+                If not specified, the chunk_size of the blob itself is used. If that is not specified, a default value of 40 MB is used.
         """
         if not self.table_exists("staging"):
             raise BaseDosDadosException(
@@ -869,6 +884,7 @@ class Table(Base):
                 mode="staging",
                 partitions=partitions,
                 if_exists=if_exists,
+                chunk_size=chunk_size,
                 **upload_args,
             )
             logger.success(
