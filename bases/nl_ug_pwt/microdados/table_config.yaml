@@ -1,6 +1,6 @@
 
 # Igual ao dataset.name mas como lower case.
-# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar 
 dataset_id: nl_ug_pwt
 
 table_id: microdados
