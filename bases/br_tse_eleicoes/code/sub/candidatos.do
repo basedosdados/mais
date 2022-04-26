@@ -893,6 +893,7 @@ foreach ano of numlist 1994(2)2020 {
 		
 		limpa_tipo_eleicao	`ano'
 		limpa_partido		`ano' sigla_partido
+		limpa_candidato
 		limpa_instrucao
 		limpa_estado_civil
 		limpa_resultado
@@ -911,6 +912,8 @@ foreach ano of numlist 1994(2)2020 {
 		cap replace raca = "" 					if raca == "nao divulgavel"
 		
 		replace resultado = "" 					if inlist(resultado, "-1", "1", "4")
+		
+		replace sigla_uf = "" 					if cargo == "presidente" | cargo == "vice-presidente"
 		
 		//------------------//
 		// limpa data_nascimento

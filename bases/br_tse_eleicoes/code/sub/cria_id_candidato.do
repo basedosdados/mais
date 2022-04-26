@@ -9,17 +9,18 @@ foreach ano of numlist 2000(2)2020 {
 }
 *
 
-//--------------------//
+//------------------------------//
 // limpa entradas erradas
-//--------------------//
+//------------------------------//
 
 drop if cpf == "" | cpf == "#NULO#" | cpf == "000000000-4" | cpf == "0" | cpf == "00000000000" | cpf == "NR_CPF_CANDIDATO"
 drop if titulo_eleitoral == "000000000000" | titulo_eleitoral == "#NI#"
 
-//--------------------//
-// 1a rodada
+//------------------------------//
+// rodada 1
 // usa cpf and titulo_eleitoral
-//--------------------//
+// mantém só linhas identificadas unicamente
+//------------------------------//
 
 keep nome cpf titulo_eleitoral
 duplicates drop
@@ -33,6 +34,10 @@ replace id_candidato_bd = aux_id_number_cpf
 bys titulo_eleitoral: egen aux_id_number_TE = max(id_candidato_bd)
 replace id_candidato_bd = aux_id_number_TE
 
+tostring id_candidato_bd, replace
+gen id_candidato_bd_str = "1 " + id_candidato_bd
+destring id_candidato_bd, replace
+
 egen aux_cpf = tag(id_candidato_bd cpf)
 bys id_candidato_bd: egen N_cpf = sum(aux_cpf)
 
@@ -41,26 +46,22 @@ bys id_candidato_bd: egen N_TE = sum(aux_TE)
 
 drop aux*
 
-duplicates tag id_cand, gen(dup)
-
-order    id_candidato_bd N_cpf N_TE cpf titulo_eleitoral nome
-sort dup id_candidato_bd N_cpf N_TE cpf titulo_eleitoral
-
 preserve
-	keep if N_cpf > 1 & N_TE > 1
+	keep if N_cpf > 1 | N_TE > 1
 	save "tmp/para_2a_rodada.dta", replace
 restore
 
-keep if N_cpf == 1 | N_TE == 1
+keep if N_cpf == 1 & N_TE == 1
 
-keep id_candidato_bd cpf titulo_eleitoral nome
+order id_candidato_bd_str cpf titulo_eleitoral nome
+keep  id_candidato_bd_str cpf titulo_eleitoral nome
 
 save "tmp/1a_rodada.dta", replace
 
-//--------------------//
-// 2a rodada
+//------------------------------//
+// rodada 2
 // separar por nomes
-//--------------------//
+//------------------------------//
 
 use "tmp/para_2a_rodada.dta", clear
 
@@ -68,7 +69,7 @@ gen nome_limpo = nome
 clean_string nome_limpo
 
 gen aux_primeira = word(nome_limpo, 1)
-gen aux_ultima = word(nome_limpo, -1)
+gen aux_ultima   = word(nome_limpo, -1)
 
 // consertando strings erradas identificadas no olho
 replace aux_primeira = "elves"		if aux_primeira == "elvis" & aux_ultima == "leite"
@@ -87,37 +88,68 @@ replace aux_ultima = "paula"		if aux_primeira == "nuncia" & aux_ultima == "souza
 replace aux_ultima = "silva"		if aux_primeira == "custodia" & aux_ultima == "sessim"
 replace aux_ultima = "soares"		if aux_primeira == "rosangela" & aux_ultima == "dantas"
 
-egen aux_nomes = tag(id_candidato_bd aux_primeira aux_ultima)
-bys id_candidato_bd: egen N_nomes = sum(aux_nomes)
+egen aux_nomes = tag(id_candidato_bd_str aux_primeira aux_ultima)
+bys id_candidato_bd_str: egen N_nomes = sum(aux_nomes)
+drop aux_nomes
 
-egen aux_id = group(id_candidato_bd aux_primeira aux_ultima)
-replace id_candidato_bd = 100000000 + aux_id	// para diferenciar de id_candidato em linhas
-format id_candidato_bd %20.0g
+preserve
+	keep if N_nomes > 1
+	save "tmp/para_3a_rodada.dta", replace
+restore
 
 keep if N_nomes == 1	// excluindo candidatos nao-identificados unicamente
 
-keep id_candidato_bd cpf titulo_eleitoral nome
+egen aux_id = group(id_candidato_bd_str aux_primeira aux_ultima)
+tostring aux_id, replace
+replace id_candidato_bd_str = "2 " + aux_id
+drop aux_id
+
+keep id_candidato_bd_str cpf titulo_eleitoral nome
 
 save "tmp/2a_rodada.dta", replace
 
-//--------------------//
+/*
+COMENTADO POIS AINDA GERA CASOS ERRADOS COM MESMAS INICIAIS MAS NOMES MUITO DIFERENTES
+ESCOLHENDO SER MAIS CONSERVADOR PARA (TENTAR) GARANTIR UNICIDADE VERDADEIRA NOS IDs
+
+//------------------------------//
+// rodada 3
+// mesmas iniciais
+//------------------------------//
+
+use "tmp/para_3a_rodada.dta", clear
+
+gen aux_inicial_primeira = substr(aux_primeira, 1, 1)
+gen aux_inicial_ultima   = substr(aux_ultima, 1, 1)
+
+egen aux_tag_inicial_primeira = tag(id_candidato_bd aux_inicial_primeira)
+egen aux_tag_inicial_ultima   = tag(id_candidato_bd aux_inicial_ultima)
+
+bys id_candidato_bd_str: egen N_iniciais_primeira = sum(aux_tag_inicial_primeira)
+bys id_candidato_bd_str: egen N_iniciais_ultima   = sum(aux_tag_inicial_ultima)
+
+preserve
+	keep if N_iniciais_primeira > 1 | N_iniciais_ultima > 1
+	save "tmp/para_4a_rodada.dta", replace
+restore
+
+keep if N_iniciais_primeira == 1 & N_iniciais_ultima == 1
+
+keep id_candidato_bd_str cpf titulo_eleitoral nome
+
+save "tmp/3a_rodada.dta", replace
+*/
+
+
+//------------------------------//
 // append
-//--------------------//
+//------------------------------//
 
 use "tmp/1a_rodada.dta", clear
 append using "tmp/2a_rodada.dta"
 
-ren  id_candidato_bd aux_id
-egen id_candidato_bd = group(aux_id)
+egen id_candidato_bd = group(id_candidato_bd_str)
 la var id_candidato_bd "ID Candidato - Base dos Dados"
-
-egen aux_cpf = tag(id_candidato_bd cpf)
-bys id_candidato_bd: egen N_cpf = sum(aux_cpf)
-
-egen aux_TE = tag(id_candidato_bd titulo_eleitoral)
-bys id_candidato_bd: egen N_TE = sum(aux_TE)
-
-drop if N_cpf > 2 | N_TE > 2	// excluindo candidatos com possibilidade de erro grande demais (>2)
 
 sort  id_candidato_bd
 order id_candidato_bd cpf titulo_eleitoral nome
@@ -126,3 +158,6 @@ keep  id_candidato_bd cpf titulo_eleitoral nome
 compress
 
 save "output/id_candidato_bd.dta", replace
+
+
+

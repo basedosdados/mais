@@ -152,6 +152,8 @@ foreach ano of numlist 1994(2)2020 {
 				limpa_partido		`ano' sigla_partido
 				limpa_resultado
 				
+				cap limpa_candidato
+				
 				merge m:1 id_municipio_tse using `diretorio'
 				drop if _merge == 2
 				drop _merge

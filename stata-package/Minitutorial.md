@@ -16,7 +16,7 @@ O tutorial é rápido e tem como objetivo mostrar como instalar o Python e autor
     </a>
 </p>
 
-__Passo 2.__ Após instalar o Python, abra o menu iniciar, digite "cmd" e abra. Na tela do "Prompt de Comando" que aparecerá, digite `pip install basedosdados==1.6.3` e dê enter.
+__Passo 2.__ Após instalar o Python, abra o menu iniciar, digite "cmd" e abra. Na tela do "Prompt de Comando" que aparecerá, digite `pip install basedosdados -U` e dê enter.
 
 <p align="left">
     <a href="https://github.com/basedosdados/mais/blob/master/stata-package/blob/main/examples/prompt.png">

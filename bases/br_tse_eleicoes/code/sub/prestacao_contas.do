@@ -1097,7 +1097,7 @@ foreach ano of numlist 2002(2)2020 {
 	if `ano' == 2002 {
 		
 		import delimited "input/prestacao_contas/prestacao_contas_2002/2002/Candidato/Despesa/DespesaCandidato.csv", ///
-			clear varnames(nonames) delim(";") stringc(_all) // rowr(1:1000) // bindquote(strict)
+			clear varnames(nonames) delim(";") stringc(_all)
 		
 		drop in 1
 		drop v9
@@ -1147,7 +1147,7 @@ foreach ano of numlist 2002(2)2020 {
 	if `ano' == 2004 {
 		
 		import delimited "input/prestacao_contas/prestacao_contas_2004/2004/Candidato/Despesa/DespesaCandidato.csv", ///
-			clear varnames(nonames) delim(";") stringc(_all) // rowr(1:1000) // bindquote(strict)
+			clear varnames(nonames) delim(";") stringc(_all) bindquote(nobind) stripquotes(yes)
 		
 		drop in 1
 		drop v3 v6 v13 v15 v18 v21 v22
@@ -1200,7 +1200,7 @@ foreach ano of numlist 2002(2)2020 {
 	if `ano' == 2006 {
 		
 		import delimited "input/prestacao_contas/prestacao_contas_2006/2006/Candidato/Despesa/DespesaCandidato.csv", ///
-			clear varnames(nonames) delim(";") stringc(_all) // rowr(1:1000)
+			clear varnames(nonames) delim(";") stringc(_all)
 		
 		drop in 1
 		drop v4 v13 v15 v18 v21 v22
@@ -1254,7 +1254,7 @@ foreach ano of numlist 2002(2)2020 {
 	if `ano' == 2008 {
 		
 		import delimited "input/prestacao_contas/prestacao_contas_2008/despesas_candidatos_2008_brasil.csv", ///
-			clear varnames(nonames) delim(";") stringc(_all) // rowr(1:1000)
+			clear varnames(nonames) delim(";") stringc(_all)
 		
 		drop in 1
 		drop v4 v7 v15 v17 v20 v23 v24 v25 v26 v27 v28 v29
@@ -1313,7 +1313,7 @@ foreach ano of numlist 2002(2)2020 {
 		foreach estado in `estados' {
 			
 			import delimited "input/prestacao_contas/prestacao_contas_2010/candidato/`estado'/DespesasCandidatos.txt", ///
-				clear varnames(nonames) delim(";") stringc(_all) // rowr(1:1000)
+				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
 			drop v1 v9
@@ -1392,7 +1392,7 @@ foreach ano of numlist 2002(2)2020 {
 		foreach estado in `estados' {
 			
 			import delimited "input/prestacao_contas/prestacao_final_2012/despesas_candidatos_`ano'_`estado'.txt", ///
-				clear varnames(nonames) delim(";") stringc(_all) // rowr(1:1000)
+				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
 			drop v1 v5
@@ -1516,7 +1516,7 @@ foreach ano of numlist 2002(2)2020 {
 		foreach estado in `estados' {
 			
 			import delimited "input/prestacao_contas/prestacao_final_2014/despesas_candidatos_`ano'_`estado'.txt", ///
-				clear varnames(nonames) delim(";") stringc(_all) // rowr(1:1000)
+				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
 			drop v1 v3
@@ -1650,7 +1650,7 @@ foreach ano of numlist 2002(2)2020 {
 		foreach estado in `estados' {
 			
 			import delimited "input/prestacao_contas/prestacao_contas_final_2016/despesas_candidatos_prestacao_contas_final_`ano'_`estado'.txt", ///
-				clear varnames(nonames) delim(";") stringc(_all) // rowr(1:1000)
+				clear varnames(nonames) delim(";") stringc(_all)
 			
 			drop in 1
 			drop v1 v3 v8

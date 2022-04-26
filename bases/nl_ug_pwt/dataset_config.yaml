@@ -1,29 +1,26 @@
 
 # Nome (slug) do conjunto no CKAN
 # Exemplos: br-ibge-populacao, br-tse-eleicoes
-name: br-mme-consumo-energia-eletrica
+name: nl-ug-pwt
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title: Consumo de energia elétrica no Brasil
+title: Penn World Table (PWT)
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 # Exemplos: br-ibge, br-tse, br-rj-gov
-organization:
-    - br-mme
+organization: nl-ug
 
 # Descrição do conjunto
-notes: Dados mensais do consumo de energia elétrica na rede (MWh) em nível nacional
-    e separado por classes.
+notes: Dados da Penn World Table (PWT), versão 10.0, sobre renda, produção, insumos e produtividade. A base fornece contas de paridade do poder de compra e renda nacional convertidas a preços internacionais para 183 países de 1950 a 2019.
+
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
 groups:
-    - energia
-    - economia
-    - meio-ambiente
+  - economia
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -33,13 +30,15 @@ groups:
 #    - sem acentos
 #    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
-tags: 
-    - consumo 
-    - eletricidade
-    - usina
-    - megawatt
-    - iluminacao publica
+tags:
+  - pib
+  - emprego
+  - atividade economica
+  - crescimento
+  - renda
+  - produtividade
+  - cambio
 
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.
-metadata_modified: '2022-02-14T01:23:54.356333'
+metadata_modified:
