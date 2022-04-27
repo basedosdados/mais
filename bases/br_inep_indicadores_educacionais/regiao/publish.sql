@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -16,7 +15,6 @@ TIPOS:
     - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-
 */
 
 CREATE VIEW basedosdados-dev.br_inep_indicadores_educacionais.regiao AS
@@ -47,7 +45,7 @@ SAFE_CAST(atu_em_2_ano AS FLOAT64) atu_em_2_ano,
 SAFE_CAST(atu_em_3_ano AS FLOAT64) atu_em_3_ano,
 SAFE_CAST(atu_em_4_ano AS FLOAT64) atu_em_4_ano,
 SAFE_CAST(atu_em_nao_seriado AS FLOAT64) atu_em_nao_seriado,
-SAFE_CAST(had_ei AS FLOAT64) had_ei,
+SAFE_CAST(had_ei AS STRING) had_ei,
 SAFE_CAST(had_ei_creche AS FLOAT64) had_ei_creche,
 SAFE_CAST(had_ei_pre_escola AS FLOAT64) had_ei_pre_escola,
 SAFE_CAST(had_ef AS FLOAT64) had_ef,
@@ -236,4 +234,4 @@ SAFE_CAST(icg_nivel_3 AS FLOAT64) icg_nivel_3,
 SAFE_CAST(icg_nivel_4 AS FLOAT64) icg_nivel_4,
 SAFE_CAST(icg_nivel_5 AS FLOAT64) icg_nivel_5,
 SAFE_CAST(icg_nivel_6 AS FLOAT64) icg_nivel_6
-from basedosdados-dev.br_inep_indicadores_educacionais_staging.regiao as t
+FROM basedosdados-dev.br_inep_indicadores_educacionais_staging.regiao AS t

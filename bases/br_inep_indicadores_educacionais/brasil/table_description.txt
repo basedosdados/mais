@@ -2,8 +2,8 @@ Indicadores educacionais do Inep.
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-inep-indicadores-educacionais
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,48 +11,35 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Hevilyn Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
-Website: https://github.com/Hevilyn
-Email: hevilynsouza12@hotmail.comTratado por
+Código: 
+Email: hevilynsouza12@hotmail.com
+Tratado por
 -----------
 Nome: Hevilyn Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
-Website: https://basedosdados.org/
+Código: 
 Email: hevilynsouza12@hotmail.com
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- ano
-- localização
-- rede
 
-Colunas identificando linhas unicamente
--------------------
-- ano
-- localizacao
-- rede
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+
+
+
 
 Cobertura Temporal
 ------------------
-- 2006
-- 2007
-- 2008
-- 2009
-- 2010
-- 2011
-- 2012
-- 2013
-- 2014
-- 2015
-- 2016
-- 2017
-- 2018
-- 2019
-- 2020
+- 2006(1)2021
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- {'continent': 'south_america', 'country': 'br'}
+
+
+
 
 Tratamento
 ----------
@@ -60,8 +47,9 @@ Tratamento
 - Palavras sem acento e minúsculas.
 - Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
 
+
+
+
 Frequencia de Atualização
 -------------------------
-1 ano
-
-
+one_year
