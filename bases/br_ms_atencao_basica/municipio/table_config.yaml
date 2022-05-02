@@ -67,7 +67,7 @@ data_cleaning_description:
     - Ajuste nos nomes das colunas
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url: https://drive.google.com/file/d/1tSQtzeeLhkKYWbtqa23Q_aBhIODhae5W/view?usp=sharing
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_atencao_basica/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -158,7 +158,7 @@ columns:
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
-          column_name: id_municipio_7
+          column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -321,15 +321,15 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       observations: Considera-se o parâmetro de 3.450 indivíduos cobertos por equipe
           de saúde da família
       is_in_staging: true
       is_partition: false
-    - name: porcentagem_cobertura_estrategia_saude_familia
+    - name: proporcao_cobertura_estrategia_saude_familia
       bigquery_type: float64
-      description: Percentual da população coberta pela Estratégia Saúde da Família
+      description: Proporção da população coberta pela Estratégia Saúde da Família
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -352,7 +352,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       observations: População coberta por equipes da Estratégia Saúde da Família e
           por equipes de Atenção Básica tradicional equivalentes e parametrizadas
@@ -362,9 +362,9 @@ columns:
           por equipe de saúde da família.
       is_in_staging: true
       is_partition: false
-    - name: porcentagem_cobertura_total_atencao_basica
+    - name: proporcao_cobertura_total_atencao_basica
       bigquery_type: float64
-      description: Percentual da população coberta pela atenção básica
+      description: Proporção  da população coberta pela atenção básica
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
