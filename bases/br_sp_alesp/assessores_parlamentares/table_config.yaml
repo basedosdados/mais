@@ -1,5 +1,5 @@
 
-# Igual ao dataset.name mas como lower case. 
+# Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_sp_alesp
 
@@ -189,4 +189,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-02-14T01:23:48.222298'
+metadata_modified: '2022-03-08T13:42:04.056160'
