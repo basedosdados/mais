@@ -34,8 +34,8 @@ observation_level:
     - município
 
 last_updated:
-    metadata:
-    data:
+    metadata: 2022-05-03
+    data: 2022-05-03
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -47,8 +47,8 @@ published_by:
     name: Laura Lopes Amaral
     email: laura.amaral@basedosdados.org
     github_user: https://github.com/laura-l-amaral
-    ckan_user: ''
-    website: ''
+    ckan_user: laura-amaral
+    website: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -57,8 +57,8 @@ data_cleaned_by:
     name: Laura Lopes Amaral
     email: laura.amaral@basedosdados.org
     github_user: https://github.com/laura-l-amaral
-    ckan_user: ''
-    website: ''
+    ckan_user: laura-amaral
+    website: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: 
