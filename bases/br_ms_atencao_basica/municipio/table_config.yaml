@@ -14,10 +14,8 @@ description: Cobertura populacional estimada de equipes de saúde da família (e
 #   - continent: south_america
 #     country: br
 spatial_coverage:
-    continent:
-        - south_america
-    country:
-        - br
+    - continent: south_america
+      country: br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
@@ -31,11 +29,10 @@ update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-    - município
 
 last_updated:
-    metadata: 2022-05-03
-    data: 2022-05-03
+    metadata: '2022-05-03'
+    data: '2022-05-03'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -61,10 +58,7 @@ data_cleaned_by:
     website: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: 
-    - Criação da coluna 'id_municipio' padrão 7 dígitos IBGE
-    - Separação das colunas de ano-mes
-    - Ajuste nos nomes das colunas
+data_cleaning_description: 1. Criação da coluna 'id_municipio' padrão 7 dígitos IBGE 2. Separação das colunas de ano-mes 3. Ajuste nos nomes das colunas
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_atencao_basica/code
