@@ -1,4 +1,4 @@
-Índice de Preços ao Produtor para Indústria Geral
+None
 
 Para saber mais acesse:
 Website: 
@@ -9,16 +9,12 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Laura amaral
+Nome: None
 Código: 
-Website: 
-Email: laura.amaral@basedosdados.org
 Tratado por
 -----------
-Nome: Laura amaral
+Nome: None
 Código: 
-Website: 
-Email: laura.amaral@basedosdados.org
 
 
 
@@ -27,38 +23,17 @@ Email: laura.amaral@basedosdados.org
 
 Cobertura Temporal
 ------------------
-- 2
-- 0
-- 1
-- 4
-- -
-- 1
-- (
-- 1
-- )
-- 2
-- 0
-- 2
-- 2
-- -
-- 1
 
 
 
 
 Cobertura Espacial
 ------------------
-- {'continent': 'south_america'}
 
 
 
 
-Tratamento
-----------
-ajustes nos títulos das colunas, quebra de coluna de data para coluna ano e mes
 
 
 
-Frequencia de Atualização
--------------------------
-month
+

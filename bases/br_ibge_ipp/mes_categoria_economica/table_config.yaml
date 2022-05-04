@@ -1,8 +1,12 @@
+
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_ibge_ipp
 
 table_id: mes_categoria_economica
+
+# Título da tabela.
+title:
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -15,18 +19,18 @@ description: Índice de Preços ao Produtor por categoria econômica
 #   - continent: south_america
 #     country: br
 spatial_coverage:
-- continent: south_america
-    country: br
+    - continent: south_america
+      country: br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 
-    - '2014-01(1)2022-02'
+temporal_coverage:
+    - 2014-01(1)2022-02
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: month 
+update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
@@ -59,10 +63,11 @@ data_cleaned_by:
     website: ''
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: '1. Ajustes nos títulos das colunas. Quebra de coluna de data para coluna ano e mês.'
+data_cleaning_description: 1. Ajustes nos títulos das colunas. Quebra de coluna de
+    data para coluna ano e mês.
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url: 'https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipp/code'
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipp/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -220,4 +225,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified:
+metadata_modified: '2022-05-04T14:43:58.117030'

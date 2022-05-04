@@ -1,4 +1,4 @@
-Índice de Preços ao Produtor das Indústrias de transformação
+None
 
 Para saber mais acesse:
 Website: 
@@ -9,16 +9,12 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Laura Lopes Amaral
+Nome: None
 Código: 
-Website: 
-Email: laura.amaral@basedosdados.org
 Tratado por
 -----------
-Nome: Laura Lopes Amaral
+Nome: None
 Código: 
-Website: 
-Email: laura.amaral@basedosdados.org
 
 
 
@@ -27,40 +23,17 @@ Email: laura.amaral@basedosdados.org
 
 Cobertura Temporal
 ------------------
-- 2
-- 0
-- 1
-- 4
-- -
-- 0
-- 1
-- (
-- 1
-- )
-- 2
-- 0
-- 2
-- 2
-- -
-- 0
-- 1
 
 
 
 
 Cobertura Espacial
 ------------------
-- {'continent': 'south_america'}
 
 
 
 
-Tratamento
-----------
-Separação de colunas de Ano e Mês - Exclusão de linhas vazias
 
 
 
-Frequencia de Atualização
--------------------------
-month
+
