@@ -229,7 +229,7 @@ columns:
       is_partition: false
     - name: area_lavoura_peramenente
       bigquery_type: float64
-      description: Area total de lavoura permanente
+      description: Área total de lavoura permanente
       temporal_coverage: 
         - (10)
       covered_by_dictionary:
@@ -402,14 +402,14 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: ton
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: area_cafe
       bigquery_type: float64
-      description: Área destinada a platio de Café
+      description: Área destinada ao plantio de Café
       temporal_coverage: 
         - (10)
       covered_by_dictionary:
@@ -447,7 +447,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -485,7 +485,7 @@ columns:
       is_partition: false
     - name: quantidade_bovinos_garrote
       bigquery_type: int64
-      description: Efetivos Total de Animais Bovinos Novilho Garrote  em Estabelecimentos
+      description: Efetivos Total de Animais Bovinos Novilho Garrote em Estabelecimentos
           Agropecuários
       temporal_coverage:
         - '1985, 2006'
@@ -514,7 +514,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: quantidade_bovinos_trab
+    - name: quantidade_bovinos_trabalho
       bigquery_type: int64
       description: Efetivo Total de Animais Bovinos de Trabalho
       temporal_coverage: 
@@ -726,7 +726,7 @@ columns:
       is_partition: false
     - name: numero_estabelecimentos_arrendatario
       bigquery_type: int64
-      description: Numero de Estabelecimentos na Condição de Arrendatário
+      description: Número de Estabelecimentos na Condição de Arrendatário
       temporal_coverage: 
         - (10)
       covered_by_dictionary:
@@ -786,7 +786,7 @@ columns:
       is_partition: false
     - name: numero_estabelecimentos_nenhuma
       bigquery_type: int64
-      description: Número de Estabelecimentos  Agropecuários na condição Nenhuma
+      description: Número de Estabelecimentos Agropecuários na condição Nenhuma
       temporal_coverage:
         - '1985, 2006'
       covered_by_dictionary: no
@@ -801,7 +801,7 @@ columns:
       is_partition: false
     - name: numero_estabelecimentos_cooperativas
       bigquery_type: int64
-      description: Numero de Estabelecimentos Agropecuarios na Orientação de Cooperativa de Crédito
+      description: Número de Estabelecimentos Agropecuarios na Orientação de Cooperativa
       temporal_coverage: 
         - '1985,2006'
       covered_by_dictionary:
@@ -864,7 +864,7 @@ columns:
       is_partition: false
     - name: quantidade_tratores
       bigquery_type: int64
-      description: 'Número absoluto de Tratores '
+      description: Número absoluto de Tratores
       temporal_coverage:
         - (10)
       covered_by_dictionary: no
@@ -879,7 +879,7 @@ columns:
       is_partition: false
     - name: quantidade_maquina_colheita
       bigquery_type: int64
-      description: Número absoluto de Maquina de Colheita
+      description: Número absoluto de Máquina de Colheita
       temporal_coverage:
         - (10)
       covered_by_dictionary: no
@@ -894,7 +894,7 @@ columns:
       is_partition: false
     - name: quantidade_maquinas_plantio
       bigquery_type: int64 
-      description: Numero absoluto de máquinas de plantio
+      description: Número absoluto de máquinas de plantio
       temporal_coverage:
         - (10)
       covered_by_dictionary:
@@ -1040,7 +1040,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1055,12 +1055,12 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
-    - name: valor_total_producao_anigrand
+    - name: valor_total_producao_animal_grande
       bigquery_type: float64
       description: Valor total da produção de animal grande
       temporal_coverage:
@@ -1070,14 +1070,14 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: valor_total_producao_animal_medio
       bigquery_type: float64
-      description: Valor total da produção de animal medio
+      description: Valor total da produção de animal médio
       temporal_coverage:
         - (10)
       covered_by_dictionary:
@@ -1205,7 +1205,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: ton
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1287,7 +1287,7 @@ columns:
       is_partition: false
     - name: producao_total_cana
       bigquery_type: float64
-      description: Produção em Cana de Açúcar em Toneladas
+      description: Produção de Cana de Açúcar em Toneladas
       temporal_coverage:
         - (10)
       covered_by_dictionary: no
@@ -1332,7 +1332,7 @@ columns:
       is_partition: false
     - name: area_feijao
       bigquery_type: float64
-      description: Área  destinada a Plantio de Feijão
+      description: Área destinada a Plantio de Feijão
       temporal_coverage:
         - (10)
       covered_by_dictionary: no
@@ -1347,7 +1347,7 @@ columns:
       is_partition: false
     - name: area_milho
       bigquery_type: float64
-      description: Área  destinada a Plantio de Milho
+      description: Área destinada a Plantio de Milho
       temporal_coverage:
         - (10)
       covered_by_dictionary: no
@@ -1452,7 +1452,7 @@ columns:
       is_partition: false
     - name: numero_estabelecimentos_feijao
       bigquery_type: int64
-      description: Número de Estabelecimentos destinados à produção de Feijao
+      description: Número de Estabelecimentos destinados à produção de Feijão
       temporal_coverage:
         - (10)
       covered_by_dictionary: no
@@ -1512,7 +1512,7 @@ columns:
       is_partition: false
     - name: numero_estabelecimentos_algodao
       bigquery_type: int64
-      description: Número de Estabelecimentos destinados à produção de Algodao
+      description: Número de Estabelecimentos destinados à produção de Algodão
       temporal_coverage:
         - (10)
       covered_by_dictionary: no
