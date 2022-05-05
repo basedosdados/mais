@@ -28,8 +28,8 @@ temporal_coverage:
 update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
-observation_level: 
-    - municipio
+observation_level:
+    - entity: municipality
 
 last_updated:
     metadata: '2022-05-03T10:20:23.711465'
@@ -373,4 +373,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified:
+metadata_modified: 
