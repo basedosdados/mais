@@ -32,8 +32,8 @@ observation_level:
     - entity: country
 
 last_updated:
-    metadata: '2022-05-03'
-    data: '2022-05-03'
+    metadata: '2022-05-05'
+    data: '2022-05-05T10:05'
     release: 
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
