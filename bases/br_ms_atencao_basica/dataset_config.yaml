@@ -30,8 +30,8 @@ groups:
 #    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - municipios
-    - SUS
+    - municipio
+    - sus
     - atencao basica
 
 
