@@ -1,47 +1,47 @@
-
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_ana_atlas_esgotos
 
 table_id: municipio
+
+# Título da tabela.
+title: "Munícipio"
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: "Tabela do Atlas Esgotos a nível de município.\n"
+description: Tabela do Atlas Esgotos a nível de município.
 
 # A máxima unidade espacial que a tabela cobre.
-spatial_coverage: bra
+# Exemplo:
+#   - continent: south_america
+#     country: br
+spatial_coverage:
+  - continent: south_america
+    country: br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2013
+  - "2013"
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: recurring
+update_frequency: unique
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity:
-    - municipality
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit: recurring
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns:
-    - id_municipio
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+  - country: br
+    entity: municipality
+    column:
+      - id_municipio
 
 last_updated:
-    metadata:
-    data:
-    release:
+  metadata: "2022-05-05T11:30"
+  data: "2022-05-05T11:30"
+  release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
@@ -49,38 +49,41 @@ version: v2.0
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
-    github_user:
-    website: www.ricardodahis.com
-    ckan_user:
+  name: Ricardo Dahis
+  email: rdahis@basedosdados.org
+  github_user: ""
+  ckan_user: ""
+  website: www.ricardodahis.com
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
-    github_user:
-    ckan_user:
-    website: http://atlasesgotos.ana.gov.br/
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ana_atlas_esgotos/code
+  name: Ricardo Dahis
+  email: rdahis@basedosdados.org
+  github_user: ""
+  ckan_user: ""
+  website: http://atlasesgotos.ana.gov.br/
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "Mudamos nomes de variáveis.\n"
+data_cleaning_description: Mudamos nomes de variáveis
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ana_atlas_esgotos/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+  name:
+  organization_id:
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
 
 # Url dos arquivos auxiliares no GCP Storage.
-auxiliary_files_url: ''
+auxiliary_files_url: ""
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
-
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary:
 
 source_bucket_name: basedosdados-dev
 
@@ -92,9 +95,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions:
-
-bdm_file_size:
+partitions: []
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -105,533 +106,605 @@ bdm_file_size:
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: id_municipio
-      bigquery_type: string
-      description: ID Município - IBGE 7 Dígitos
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column: 
-          dataset_id: br_bd_diretorios_brasil
-          table_id: municipio
-          column_name: id_municipio
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: sigla_uf
-      bigquery_type: string
-      description: Sigla Unidade da Federação
-      temporal_coverage:
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: uf
-          column_name: sigla
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: populacao_urbana_2013
-      bigquery_type: int64
-      description: População Urbana (2013)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: person
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: populacao_urbana_2035
-      bigquery_type: int64
-      description: População Urbana (2035)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: person
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: prestador_servico_esgoto
-      bigquery_type: string
-      description: Prestador de Serviço de Esgotamento Sanitário
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: sigla_prestador
-      bigquery_type: string
-      description: Sigla do Prestador
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: indice_sem_atend
-      bigquery_type: float64
-      description: Índice sem atendimento - sem Coleta e sem Tratamento (2013)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: indice_atend_solucao_ind
-      bigquery_type: float64
-      description: Índice de Atendimento por Solução Individual (2013)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: indice_atend_col_sem_trat
-      bigquery_type: float64
-      description: Índice de Atendimento com Coleta e sem Tratamento (2013)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: indice_atend_col_trat
-      bigquery_type: float64
-      description: Índice de Atendimento com Coleta e com Tratamento (2013)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: vazao_sem_col_sem_trat
-      bigquery_type: float64
-      description: Vazão - sem Coleta e sem Tratamento (L/s) (2013)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: vazao_solucao_ind
-      bigquery_type: float64
-      description: Vazão - Solução Individual (L/s) (2013)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: vazao_col_sem_trat
-      bigquery_type: float64
-      description: Vazão - com Coleta e sem Tratamento (L/s) (2013)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: vazao_col_trat
-      bigquery_type: float64
-      description: Vazão - com Coleta e com Tratamento (L/s) (2013)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: vazao_total
-      bigquery_type: float64
-      description: Vazão Total em 2013 (L/s)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: parcela_carga_sem_col_sem_trat
-      bigquery_type: float64
-      description: Parcela da Carga Gerada em 2013 sem Coleta e sem Tratamento (Kg
-          DBO/dia)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: parcela_carga_solucao_ind
-      bigquery_type: float64
-      description: Parcela da Carga Gerada em 2013 Encaminhada para Solução Individual
-          (Kg DBO/dia)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: parcela_carga_col_sem_trat
-      bigquery_type: float64
-      description: Parcela da Carga Gerada em 2013 com Coleta e sem Tratamento (Kg
-          DBO/dia)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: parcela_carga_col_trat
-      bigquery_type: float64
-      description: Parcela da Carga Gerada em 2013 com Coleta e com Tratamento (Kg
-          DBO/dia)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: carga_gerada
-      bigquery_type: float64
-      description: Carga Gerada Total em 2013 (Kg DBO/dia)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: carga_lancada_sem_col_sem_trat
-      bigquery_type: float64
-      description: Parcela da Carga Lançada em 2013 sem Coleta e sem Tratamento (Kg
-          DBO/dia)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: carga_lancada_solucao_ind
-      bigquery_type: float64
-      description: Parcela da Carga Lançada em 2013 proveniente de Solução Individual
-          (Kg DBO/dia)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: carga_lancada_col_sem_trat
-      bigquery_type: float64
-      description: Parcela da Carga Lançada em 2013 com Coleta e sem Tratamento (Kg
-          DBO/dia)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: carga_lancada_col_trat
-      bigquery_type: float64
-      description: Parcela da Carga Lançada em 2013 com Coleta e com Tratamento (Kg
-          DBO/dia)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: carga_lancada
-      bigquery_type: float64
-      description: Carga Lançada Total em 2013 (Kg DBO/dia)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: indice_atend_etes_avaliado_2035
-      bigquery_type: float64
-      description: Índice de Atendimento com ETEs Avaliado (2035)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: indice_atend_solucao_ind_2035
-      bigquery_type: float64
-      description: Índice de Atendimento Solução Individual Avaliado (2035)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: carga_gerada_2035
-      bigquery_type: float64
-      description: Carga Gerada Total (Kg DBO/dia) (2035)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: carga_afluente_ete_2035
-      bigquery_type: float64
-      description: Carga Afluente ETE (Kg DBO/dia) (2035)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: carga_efluente_ete_2035
-      bigquery_type: float64
-      description: Carga Efluente ETE (Kg DBO/dia) (2035)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: carga_afluente_solucao_ind_2035
-      bigquery_type: float64
-      description: Carga Afluente Solução Individual (Kg DBO/dia) (2035)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: carga_efluente_solucao_ind_2035
-      bigquery_type: float64
-      description: Carga Efluente Solução Individual (Kg DBO/dia) (2035)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: populacao_atendida_2035
-      bigquery_type: int64
-      description: População Atendida Estimada (2035)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: investimento_col
-      bigquery_type: float64
-      description: Investimentos em Coleta (R$)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: investimento_trat
-      bigquery_type: float64
-      description: Investimentos em Tratamento (R$)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: investimento_col_trat
-      bigquery_type: float64
-      description: Investimentos em Coleta e Tratamento (R$)
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: necessidade_remocao_dbo
-      bigquery_type: string
-      description: Necessidade de Remoção de DBO
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: tipologia_solucao
-      bigquery_type: string
-      description: Tipologia de Solução
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: atencao_fosforo
-      bigquery_type: string
-      description: Atenção ao Fósforo
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: atencao_nitrogenio
-      bigquery_type: string
-      description: Atenção ao Nitrogênio
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
+  - name: id_municipio
+    bigquery_type: string
+    description: ID Município - IBGE 7 Dígitos
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id: br_bd_diretorios_brasil
+      table_id: municipio
+      column_name: id_municipio
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: sigla_uf
+    bigquery_type: string
+    description: Sigla Unidade da Federação
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id: br_bd_diretorios_brasil
+      table_id: uf
+      column_name: sigla
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: populacao_urbana_2013
+    bigquery_type: int64
+    description: População Urbana (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit: person
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: populacao_urbana_2035
+    bigquery_type: int64
+    description: População Urbana (2035)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit: person
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: prestador_servico_esgotamento_sanitario
+    bigquery_type: string
+    description: Prestador de Serviço de Esgotamento Sanitário
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: sigla_prestador
+    bigquery_type: string
+    description: Sigla do Prestador
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: indice_sem_atendimento_sem_coleta_sem_tratamento
+    bigquery_type: float64
+    description: Índice sem atendimento - sem Coleta e sem Tratamento (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: indice_atendimento_solucao_individual
+    bigquery_type: float64
+    description: Índice de Atendimento por Solução Individual (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: indice_atendimento_com_coleta_sem_tratamento
+    bigquery_type: float64
+    description: Índice de Atendimento com Coleta e sem Tratamento (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: indice_atendimento_com_coleta_com_tratamento
+    bigquery_type: float64
+    description: Índice de Atendimento com Coleta e com Tratamento (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: vazao_sem_coleta_sem_tratamento
+    bigquery_type: float64
+    description: Vazão - sem Coleta e sem Tratamento (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit: litre/second
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: vazao_solucao_individual
+    bigquery_type: float64
+    description: Vazão - Solução Individual (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit: litre/second
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: vazao_com_coleta_sem_tratamento
+    bigquery_type: float64
+    description: Vazão - Com Coleta e sem Tratamento (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit: litre/second
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: vazao_com_coleta_com_tratamento
+    bigquery_type: float64
+    description: Vazão - Com coleta e com Tratamento (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit: litre/second
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: vazao_total
+    bigquery_type: float64
+    description: Vazão Total (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit: litre/second
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_gerada_sem_coleta_sem_tratamento
+    bigquery_type: float64
+    description: Parcela da Carga Gerada em 2013 sem Coleta e sem Tratamento (Kg DBO/dia)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_gerada_encaminhada_solucao_individual
+    bigquery_type: float64
+    description: Parcela da Carga Gerada - Encaminhada para Solução Individual (Kg DBO/dia) (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_gerada_com_coleta_sem_tratamento
+    bigquery_type: float64
+    description: Parcela da Carga Gerada - Com Coleta e sem Tratamento (Kg DBO/dia) (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_gerada_com_coleta_com_tratamento
+    bigquery_type: float64
+    description: Parcela da Carga Gerada - Com Coleta e com Tratamento (Kg DBO/dia) (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_gerada_total
+    bigquery_type: float64
+    description: Carga Gerada Total (Kg DBO/dia) (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_lancada_sem_coleta_sem_tratamento
+    bigquery_type: float64
+    description: Parcela da Carga Lançada - Sem Coleta e sem Tratamento (Kg DBO/dia) (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_lancada_proveniente_solucao_individual
+    bigquery_type: float64
+    description: Parcela da Carga Lançada - Proveniente de Solução Individual (Kg DBO/dia) (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_lancada_com_coleta_sem_tratamento
+    bigquery_type: float64
+    description: Parcela da Carga Lançada - Com Coleta e sem Tratamento (Kg DBO/dia) (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_lancada_com_coleta_com_tratamento
+    bigquery_type: float64
+    description: Parcela da Carga Lançada - Com Coleta e com Tratamento (Kg DBO/dia) (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_lancada_total
+    bigquery_type: float64
+    description: Carga Lançada Total (Kg DBO/dia) (2013)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: indice_atendimento_etes_2035
+    bigquery_type: float64
+    description: Índice de Atendimento com ETEs Avaliado (2035)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: indice_atendimento_solucao_individual_2035
+    bigquery_type: float64
+    description: Índice de Atendimento Solução Individual Avaliado (2035)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_gerada_total_2035
+    bigquery_type: float64
+    description: Carga Gerada Total (Kg DBO/dia) (2035)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_afluente_ete_2035
+    bigquery_type: float64
+    description: Carga Afluente ETE (Kg DBO/dia) (2035)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_efluente_ete_2035
+    bigquery_type: float64
+    description: Carga Efluente ETE (Kg DBO/dia) (2035)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_afluente_solucao_individual_2035
+    bigquery_type: float64
+    description: Carga Afluente Solução Individual (Kg DBO/dia) (2035)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: carga_efluente_solucao_individual_2035
+    bigquery_type: float64
+    description: Carga Efluente Solução Individual (Kg DBO/dia) (2035)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: populacao_atendida_2035
+    bigquery_type: int64
+    description: População Atendida Estimada (2035)
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: investimento_coleta
+    bigquery_type: float64
+    description: Investimentos em Coleta
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit: brl
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: investimento_tratamento
+    bigquery_type: float64
+    description: Investimentos em Tratamento
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit: brl
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: investimento_coleta_tratatamento
+    bigquery_type: float64
+    description: Investimentos em Coleta e Tratamento
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit: brl
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: necessidade_remocao_dbo
+    bigquery_type: string
+    description: Necessidade de Remoção de DBO
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: tipologia_solucao
+    bigquery_type: string
+    description: Tipologia de Solução
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: atencao_fosforo
+    bigquery_type: string
+    description: Atenção ao Fósforo
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
+  - name: atencao_nitrogenio
+    bigquery_type: string
+    description: Atenção ao Nitrogênio
+    temporal_coverage:
+      - "2013"
+    covered_by_dictionary: no
+    directory_column:
+      dataset_id:
+      table_id:
+      column_name:
+    measurement_unit:
+    has_sensitive_data: no
+    observations:
+    is_in_staging: true
+    is_partition: false
 
-metadata_modified: '2021-09-12T23:21:15.021505'
+metadata_modified: "2022-02-14T01:23:35.322100"
