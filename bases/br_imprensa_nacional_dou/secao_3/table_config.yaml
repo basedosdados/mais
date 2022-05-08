@@ -1,114 +1,100 @@
-source_bucket_name: gabinete-compartilhado
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: secao_3 # AUTO GENERATED
-dataset_id: br_imprensa_nacional_dou # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-imprensa-nacional-dou # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_imprensa_nacional_dou # AUTO GENERATED
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_imprensa_nacional_dou
 
-version: v1.0
+table_id: secao_3
 
-last_updated: 2021-02-26 # AUTO GENERATED
+# Título da tabela.
+title: Seção 3
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    Esta tabela contém todo o conteúdo textual da seção 3 (contratos, editais, licitações,
-    etc.) do Diário Oficial da União. No momento, a data mais antiga presente na tabela é
-    do dia 12 de abril de 2019.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Esta tabela contém todo o conteúdo textual da seção 3 (contratos, editais, licitações, etc). A data mais antiga presente na tabela é do dia 12 de abril de 2019. As edições ordinárias do DOU são publicadas tipicamente uma vez por dia, perto das 4h da manhã.Entretanto, esses horários não são rígidos e podem variar, e as seções, ou partes delas, podem ser publicadas em horários diferentes. Além disso, é possível que sejam publicadas edições extras, geralmente uma ou duas, ao longo do dia. Por esse motivo esta tabela é atualizada uma vez por dia com as matérias do dia anterior, ou seja, constam aqui as matérias mais recentes.
 
-    O Diário Oficial da União é tipicamente publicado uma vez por dia (edições ordinárias)
-    de madrugada (perto das 4h da manhã), mas pode atrasar bastante (tipicamente, até às
-    11h da manhã). Entretanto, esses horários não são rígidos e podem variar, e as seções
-    (ou partes das seções) podem ser publicadas em horários diferentes. Além disso, é
-    possível (e comum) que sejam publicadas edições extras (tipicamente uma ou duas)
-    ao longo do dia. Por esse motivo, esta tabela é atualizada uma vez por dia com as
-    matérias do dia anterior (ou seja, essas são as matérias mais recentes).
+# A máxima unidade espacial que a tabela cobre.
+# Exemplo:
+#   - continent: south_america
+#     country: br
+spatial_coverage:
+    - continent: south_america
+      country: br
 
-# Quem está completando esse arquivo config?
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2019(1)2022
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: day
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - columns:
+          - url
+
+last_updated:
+    metadata: '2022-05-08'
+    data: '2022-05-08:10:35'
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.1
+
+# Quem está preenchendo esses metadados?
 published_by:
-    name: Henrique Xavier  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_imprensa_nacional_dou/code # REQUIRED
-    website: http://henriquexavier.net/
+    name: Henrique Xavier
     email: hsxavier@gmail.com
+    github_user:
+    ckan_user:
+    website: http://henriquexavier.net/
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: Henrique Xavier  # REQUIRED
-    code_url: https://github.com/gabinete-compartilhado-acredito/DOUTOR # REQUIRED
-    website: http://henriquexavier.net/
+data_cleaned_by:
+    name: Henrique Xavier
     email: hsxavier@gmail.com
+    github_user:
+    ckan_user:
+    website: http://henriquexavier.net/
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    O código de extração dos dados chamado DOUTOR armazena os dados no formato JSON,
-    sendo um arquivo por matéria do DOU. Cada JSON contém uma lista de dicionários
-    com algumas chaves específicas como 'capture_date' e 'api_url'. As demais chaves de
-    cada dicionário são 'key' e 'value'. As keys são tags de HTML presentes na matéria,
-    e as values são os conteúdos. Ou seja: a maior parte das informações de cada matéria
-    são armazenadas no formato 'key-value-pairs'. Em caso de tags que se repetem (como
-    títulos, eventualmente), o conteúdo de todas elas é agregado numa única string, com
-    o separador ' | '.
+data_cleaning_description: "O código de extração dos dados chamado DOUTOR armazena os dados no formato JSON, sendo um arquivo por matéria do DOU. Cada JSON contém uma lista de dicionários com algumas chaves específicas como 'capture_date' e 'api_url'. As demais chaves do dicionário são 'key' e 'value'. As keys são tags de HTML presentes na matéria, e as values são os conteúdos. Ou seja: a maior parte das informações de cada matéria são armazenadas no formato 'key-value-pairs'. Em caso de tags que se repetem (como títulos, eventualmente), o conteúdo de todas elas é agregado numa única string, como separador ' | '. Através de SQL, os 'key-value-pairs' mais relevantes são selecionados como colunas para serem apresentadas na tabela (campos como 'titulo', 'orgao', 'secao', etc). As datas são colocadas no formato de data. Uma das colunas mais importantes é a 'texto_completo', que contém todo conteúdo textual da página HTML da matéria, inclusive rodapés, links, título e nome do órgão. A partir dessa coluna, são geradas duas novas (originalmente não identificadas com tags de HTML, como acontece com a ementa, o título e o órgão, por exemplo):  'texto_principal' e ao 'excerto'. Estas são seleções de trechos do 'texto_completo' feitas com SQL."
 
-    Através de SQL, os 'key-value-pairs' mais relevantes são selecionados como colunas
-    para serem apresentadas na tabela (campos como 'titulo', 'orgao', 'secao', etc).
-    As datas são colocadas no formato de data.
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/gabinete-compartilhado-acredito/DOUTOR
 
-    Uma das colunas mais importantes é a 'texto_completo', que contém todo o conteúdo
-    textual da página HTML da matéria, inclusive rodapés, links, título e nome do órgão.
-    A partir dessa coluna, são geradas duas novas (originalmente não identificadas com
-    tags de HTML, como acontece com a ementa, o título e o órgão, por exemplo): a
-    'texto_principal' e a 'excerto'. Estas são seleções de trechos do 'texto_completo'
-    feitas com SQL.
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: ''
+    organization_id: ''
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: dia
+# Url dos dados originais no GCP Storage.
+raw_files_url:
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - publicacao
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
 
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-    - url
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - brasil
+source_bucket_name: basedosdados-dev
 
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
-    - 2019
-    - 2020
-    - 2021
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
+partitions:
     - data_publicacao_particao
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
@@ -119,106 +105,261 @@ partitions: # REQUIRED
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: titulo
-        description: Título da matéria (e.g. DECRETO Nº 10.555, DE 26 DE NOVEMBRO DE 2020, AVISO DE REVOGAÇÃO, etc). Pode ser mais de um concatenado por ' | ', caso a página web da matéria contenha vários atos.
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: orgao
-        description: Órgão (com dependências hierárquicas separadas por /) responsável pela matéria (e.g. Ministério das Comunicações/Secretaria de Radiodifusão).
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ementa
-        description: Ementa da matéria, quando existente (matérias da seção 2 tipicamente não possuem ementa).
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: excerto
-        description: Parte do texto completo que começa com "resolve:" ou outros termos comuns que precedem a parte que descreve do que se trata a matéria.
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: texto_principal
-        description: Texto principal da matéria, isto é, o texto completo excluídas as informações presentes em outras colunas (e.g. título, ementa, data de publicação, etc). 
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: texto_completo
-        description: Todo o texto da matéria presente na página HTML do DOU. Inclui cabeçalhos, título, órgão, data e rodapé.
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-    
-    -   
-        name: assinatura
-        description: Nome de quem assina o ato. Note que algumas matérias não possuem assinatura ou a assinatura não estava identificada com a devida tag de HTML. Em caso de mais de uma pessoa assinando, os nomes aparecem separados por ' | '.
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cargo
-        description: Cargo de quem assinou o ato. Essa coluna foi extraída de uma tag de HTML que nem sempre é especificada. 
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: secao
-        description: Inteiro que pode assumir os valores 1, 2 ou 3. Identifica a seção da matéria (1 - Atos normativos; 2 - Atos de pessoal; 3 - Licitações e Contratos).
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: edicao
-        description: String que identifica a edição do DOU na qual a matéria foi publicada. Se a edição é ordinária, é um número. Se for edição extra, é a edição do dia (o número) seguido de uma letra que identifica a edição extra (A, B, C...).
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_edicao
-        description: Identifica se a edição na qual a matéria foi publicada é ordinária ou extra. Essa diferenciação é feita pela presença de uma letra na coluna 'edicao'.
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: pagina
-        description: Número da página (inteiro) do DOU físico (ou em formato PDF) na qual a matéria em questão aparece. 
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_publicacao
-        description: Data de publicação da matéria, de acordo com a tag de HTML correspondente. Em geral é posterior à data do ato em si (e.g. DECRETO Nº 10.555, DE 26 DE NOVEMBRO DE 2020).
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: url
-        description: URL que leva a materia no site da Imprensa Nacional. É único e serve como identificador da matéria.
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: url_versao_certificada
-        description: URL que leva à página da versão diagramada do DOU (tipo um PDF) na qual foi publicada a matéria. Seu conteúdo é o considerado certificado (ao contrário do texto da página HTML).
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_captura
-        description: Data na qual as informações sobre a matéria em questão presentes na tabela foram capturadas do site da Imprensa Nacional.
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_publicacao_particao
-        description: Data para a qual a matéria aparece no site da Imprensa Nacional. Os dados estão particionados por essa coluna. Com raríssimas exceções, esta data é igual à da coluna 'data_publicacao'; quando há diferenças, elas são de 1 dia.
-        is_in_staging: False # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
+columns:
+    - name: titulo
+      bigquery_type: string
+      description: Título da matéria
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Por Exemplo, DECRETO Nº 10.555, DE 26 DE NOVEMBRO DE 2020, AVISO DE REVOGAÇÃO, etc). Pode ser mais de concatenado por '|', caso a página web da matéria contenha vários atos.
+      is_in_staging: false
+      is_partition: false
+    - name: orgao
+      bigquery_type: string
+      description: Órgão responsável pela matéria
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Com dependências hierárquicas separadas por '/' (e.g. Ministério das Comunicações/Secretaria de Radiodifusão).
+      is_in_staging: false
+      is_partition: false
+    - name: ementa
+      bigquery_type: string
+      description: Ementa da matéria
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Pode não existir. Matérias da seção 2 tipicamente não possuem ementa, por exemplo.
+      is_in_staging: false
+      is_partition: false
+    - name: excerto
+      bigquery_type: string
+      description: Parte do texto completo que começa com "resolve:" ou outros termos comuns que precedem a parte que descreve do que se trata a matéria.
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: texto_principal
+      bigquery_type: string
+      description: Texto principal da matéria
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: O texto completo excluídas as informações presentes em outras colunas (e.g. título, ementa, data de publicação, etc).
+      is_in_staging: false
+      is_partition: false
+    - name: texto_completo
+      bigquery_type: string
+      description: Todo o texto da matéria
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Inclui cabeçalhos, título, órgão, data e rodapé.
+      is_in_staging: false
+      is_partition: false
+    - name: assinatura
+      bigquery_type: string
+      description: Nome de quem assina o ato
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Algumas matérias não possuem assinatura ou a assinatura não estava identificada com a devida tag de HTML. Em caso de mais de uma pessoa assinando, os nomes aparecem separados por '|'.
+      is_in_staging: false
+      is_partition: false
+    - name: cargo
+      bigquery_type: string
+      description: Cargo de quem assinou o ato
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Essa coluna foi extraída de uma tag de HTML que nem sempre é especificada.
+      is_in_staging: false
+      is_partition: false
+    - name: secao
+      bigquery_type: int64
+      description: Seção
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Pode assumir os valores 1, 2 ou 3. Identifica a seção da matéria (e.g. 1 - Atos normativos; 2 - Atos de pessoal; 3 - Licitações e Contratos).
+      is_in_staging: false
+      is_partition: false
+    - name: edicao
+      bigquery_type: string
+      description: Edição do DOU
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Identifica a edição do DOU na qual a matéria foi publicada. Se a edição é ordinária, é um número. Se for edição extra, é a edição do dia (o número) seguido de uma letra que identifica a edição extra (A, B, C, etc).
+      is_in_staging: false
+      is_partition: false
+    - name: tipo_edicao
+      bigquery_type: string
+      description: Tipo de Edição (Ordinária ou Extra)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Essa diferenciação é feita pela presença de uma letra na coluna 'edicao'.
+      is_in_staging: false
+      is_partition: false
+    - name: pagina
+      bigquery_type: int64
+      description: Número da página do DOU
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Aponta o número da página do DOU, na qual a matéria em questão aparece. Tanto no formato físico, quanto no PDF.
+      is_in_staging: false
+      is_partition: false
+    - name: data_publicacao
+      bigquery_type: date
+      description: Data de publicação da matéria
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Em geral é posterior à data do ato em si (e.g. DECRETO Nº 10.555, DE 26 DE NOVEMBRO DE 2020).
+      is_in_staging: false
+      is_partition: false
+    - name: url
+      bigquery_type: string
+      description: URL que leva a materia no site da Imprensa Nacional.
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: url_versao_certificada
+      bigquery_type: string
+      description: URL que leva à página da versão diagramada do DOU
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Seu conteúdo é o considerado certificado (ao contrário do texto da página HTML).
+      is_in_staging: false
+      is_partition: false
+    - name: data_captura
+      bigquery_type: datetime
+      description: Data de captura do site da Imprensa Nacional.
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Data na qual as informações sobre a matéria em questão presentes na tabela foram capturadas do site da Imprensa Nacional.
+      is_in_staging: false
+      is_partition: false
+    - name: data_publicacao_particao
+      bigquery_type: date
+      description: Data que a matéria aparece no site da Imprensa Nacional
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Os dados estão particionados por essa coluna. Com raríssimas exceções, esta data é igual à da  'data_publicacao'; quando há diferenças, elas são de 1 dia.
+      is_in_staging: false
+      is_partition: true
+
+metadata_modified: "2022-05-08T13:54:24.566132"
