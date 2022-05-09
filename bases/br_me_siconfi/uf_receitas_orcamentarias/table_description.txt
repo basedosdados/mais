@@ -1,4 +1,4 @@
-Tabela de receitas orçamentárias a nível de uf.
+Dados de receitas orcamentárias a nível de estados.
 
 Para saber mais acesse:
 Website: 
@@ -47,14 +47,14 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- country
+- {'continent': 'south_america', 'country': 'br'}
 
 
 
 
 Tratamento
 ----------
-Altera de wide para long. Cria novas colunas para compartilizar série temporal. Normaliza strings.
+Criação das colunas 'id_conta_bd', 'conta_bd' e 'estagio_bd' para compatilizar toda série temporal'
 
 
 
