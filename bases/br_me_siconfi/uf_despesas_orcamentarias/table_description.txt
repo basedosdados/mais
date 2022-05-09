@@ -1,0 +1,63 @@
+Dados de despesas orçamentárias a nível de estados.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Crislane Alves
+Código: 
+Email: crislanealves@basedosdados.org
+Tratado por
+-----------
+Nome: Crislane Alves
+Código: 
+Email: crislanealves@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+
+
+
+Cobertura Temporal
+------------------
+- 2
+- 0
+- 1
+- 3
+- (
+- 1
+- )
+- 2
+- 0
+- 2
+- 0
+
+
+
+
+Cobertura Espacial
+------------------
+- {'continent': 'south_america', 'country': 'br'}
+
+
+
+
+Tratamento
+----------
+Criação das colunas 'id_conta_bd', 'conta_bd' e 'estagio_bd' para compatilizar toda série temporal'
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
