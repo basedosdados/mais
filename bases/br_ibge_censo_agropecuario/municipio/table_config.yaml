@@ -666,7 +666,7 @@ columns:
       is_partition: false
     - name: areas_irrigacao
       bigquery_type: float64
-      description: Áreas Irrigadas
+      description: Áreas destinadas à irrigação
       temporal_coverage: 
         - (10)
       covered_by_dictionary:
