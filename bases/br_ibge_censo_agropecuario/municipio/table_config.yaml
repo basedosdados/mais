@@ -948,7 +948,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -980,7 +980,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -996,7 +996,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1010,7 +1010,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data:
       observations:
       is_in_staging: true
@@ -1025,7 +1025,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1100,7 +1100,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 1000 * brl
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1115,7 +1115,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 1000 * brl
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1130,7 +1130,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 1000 * brl
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1145,7 +1145,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 1000 * brl
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1160,7 +1160,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 1000 * brl
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1175,7 +1175,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 1000 * brl
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1190,7 +1190,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 1000 * brl
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1795,7 +1795,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: porcentagem_despesa_fertilizante
+    - name: proporcao_despesa_fertilizante
       bigquery_type: float64
       description: Porcentagem da despesa com fertilizantes
       temporal_coverage: 
@@ -1810,7 +1810,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: porcentagem_despesa_defensivos
+    - name: proporcao_despesa_defensivos
       bigquery_type: float64
       description: Porcentagem da despesa com defensivos agrícolas
       temporal_coverage:
@@ -1825,7 +1825,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: porcentagem_despesa_sementes
+    - name: proporcao_despesa_sementes
       bigquery_type: float64
       description: Porcentagem da despesa com sementes
       temporal_coverage: 
@@ -1840,7 +1840,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: porcentagem_despesa_salarios
+    - name: proporcao_despesa_salarios
       bigquery_type: float64
       description: Porcentagem da despesa com salários
       temporal_coverage: 
