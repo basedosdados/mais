@@ -9,8 +9,7 @@ table_id: municipio
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Estimativas anuais de população para os municípios, desagregadas por
-    sexo e grupos de idade.
+description: Estimativas anuais de população para os municípios, desagregadas por sexo e grupos de idade.
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
@@ -47,8 +46,8 @@ observation_level:
           - grupo_idade
 
 last_updated:
-    metadata: '2020-04-30'
-    data: '2020-04-30'
+    metadata: '2022-05-10'
+    data: '2022-05-10 04:15:54'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -74,19 +73,15 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: '- Download dos dados por municipio, ano, sexo e faixa
-    etária 2  - Divisão da coluna Município em id_municipio_6 - Exclusão da variável
-    Município e Total, além das últimas observações da base - Renomeação das variáveis
-    - Conversão de float pra int - Reshape do dataframe - Substituição de id_municipio_6
-    por id_municipio - Ordenação do dataframe'
+data_cleaning_description: '- Download dos dados por municipio, ano, sexo e faixa etária 2  - Divisão da coluna Município em id_municipio_6 - Exclusão da variável Município e Total, além das últimas observações da base - Renomeação das variáveis - Conversão de float pra int - Reshape do dataframe - Substituição de id_municipio_6 por id_municipio - Ordenação do dataframe'
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_populacao/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
-    name: ''
-    organization_id: ''
+    name: 
+    organization_id:
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -124,7 +119,7 @@ columns:
       description: Ano
       temporal_coverage:
         - (1)
-      covered_by_dictionary: yes
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
@@ -139,7 +134,7 @@ columns:
       description: ID do Município - IBGE 7 Dígitos
       temporal_coverage: 
         - (1)
-      covered_by_dictionary: yes
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
