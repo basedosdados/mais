@@ -1,0 +1,59 @@
+
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: mundo-bm-wdi
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: World Development Indicators (WDI)
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - mundo-bm
+
+# Descrição do conjunto
+notes: A principal coleção de indicadores de desenvolvimento do Banco Mundial, compilada
+    a partir de fontes internacionais oficialmente reconhecidas. Apresenta os dados
+    de desenvolvimento global mais atuais e precisos disponíveis e inclui estimativas
+    nacionais, regionais e globais.
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+    - economia
+    - populacao
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - atividade economica
+    - banco
+    - cambio
+    - comercio
+    - crescimento
+    - custo
+    - demografia
+    - desempenho
+    - desenvolvimento
+    - divida
+    - emprestimo
+    - financa
+    - finança pública
+    - governo
+    - investimento
+    - orcamento
+    - receita
+    - renda
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2022-03-15T11:44:13.316469'
