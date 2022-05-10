@@ -1,1 +1,1 @@
-*.ipynb linguist-documentation
+*.sql linguist-detectable=true
