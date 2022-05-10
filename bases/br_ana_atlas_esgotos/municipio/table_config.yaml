@@ -5,7 +5,7 @@ dataset_id: br_ana_atlas_esgotos
 table_id: municipio
 
 # Título da tabela.
-title: "Munícipio"
+title: "Município"
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -110,7 +110,7 @@ columns:
     bigquery_type: string
     description: ID Município - IBGE 7 Dígitos
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id: br_bd_diretorios_brasil
@@ -125,7 +125,7 @@ columns:
     bigquery_type: string
     description: Sigla Unidade da Federação
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id: br_bd_diretorios_brasil
@@ -140,7 +140,7 @@ columns:
     bigquery_type: int64
     description: População Urbana (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -155,7 +155,7 @@ columns:
     bigquery_type: int64
     description: População Urbana (2035)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -170,7 +170,7 @@ columns:
     bigquery_type: string
     description: Prestador de Serviço de Esgotamento Sanitário
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -185,7 +185,7 @@ columns:
     bigquery_type: string
     description: Sigla do Prestador
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -200,7 +200,7 @@ columns:
     bigquery_type: float64
     description: Índice sem atendimento - sem Coleta e sem Tratamento (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -215,7 +215,7 @@ columns:
     bigquery_type: float64
     description: Índice de Atendimento por Solução Individual (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -230,7 +230,7 @@ columns:
     bigquery_type: float64
     description: Índice de Atendimento com Coleta e sem Tratamento (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -245,7 +245,7 @@ columns:
     bigquery_type: float64
     description: Índice de Atendimento com Coleta e com Tratamento (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -260,7 +260,7 @@ columns:
     bigquery_type: float64
     description: Vazão - sem Coleta e sem Tratamento (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -275,7 +275,7 @@ columns:
     bigquery_type: float64
     description: Vazão - Solução Individual (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -290,7 +290,7 @@ columns:
     bigquery_type: float64
     description: Vazão - Com Coleta e sem Tratamento (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -305,7 +305,7 @@ columns:
     bigquery_type: float64
     description: Vazão - Com coleta e com Tratamento (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -320,7 +320,7 @@ columns:
     bigquery_type: float64
     description: Vazão Total (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -335,7 +335,7 @@ columns:
     bigquery_type: float64
     description: Parcela da Carga Gerada em 2013 sem Coleta e sem Tratamento (Kg DBO/dia)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -350,7 +350,7 @@ columns:
     bigquery_type: float64
     description: Parcela da Carga Gerada - Encaminhada para Solução Individual (Kg DBO/dia) (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -365,7 +365,7 @@ columns:
     bigquery_type: float64
     description: Parcela da Carga Gerada - Com Coleta e sem Tratamento (Kg DBO/dia) (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -380,7 +380,7 @@ columns:
     bigquery_type: float64
     description: Parcela da Carga Gerada - Com Coleta e com Tratamento (Kg DBO/dia) (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -395,7 +395,7 @@ columns:
     bigquery_type: float64
     description: Carga Gerada Total (Kg DBO/dia) (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -410,7 +410,7 @@ columns:
     bigquery_type: float64
     description: Parcela da Carga Lançada - Sem Coleta e sem Tratamento (Kg DBO/dia) (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -425,7 +425,7 @@ columns:
     bigquery_type: float64
     description: Parcela da Carga Lançada - Proveniente de Solução Individual (Kg DBO/dia) (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -440,7 +440,7 @@ columns:
     bigquery_type: float64
     description: Parcela da Carga Lançada - Com Coleta e sem Tratamento (Kg DBO/dia) (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -455,7 +455,7 @@ columns:
     bigquery_type: float64
     description: Parcela da Carga Lançada - Com Coleta e com Tratamento (Kg DBO/dia) (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -470,7 +470,7 @@ columns:
     bigquery_type: float64
     description: Carga Lançada Total (Kg DBO/dia) (2013)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -485,7 +485,7 @@ columns:
     bigquery_type: float64
     description: Índice de Atendimento com ETEs Avaliado (2035)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -500,7 +500,7 @@ columns:
     bigquery_type: float64
     description: Índice de Atendimento Solução Individual Avaliado (2035)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -515,7 +515,7 @@ columns:
     bigquery_type: float64
     description: Carga Gerada Total (Kg DBO/dia) (2035)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -530,7 +530,7 @@ columns:
     bigquery_type: float64
     description: Carga Afluente ETE (Kg DBO/dia) (2035)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -545,7 +545,7 @@ columns:
     bigquery_type: float64
     description: Carga Efluente ETE (Kg DBO/dia) (2035)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -560,7 +560,7 @@ columns:
     bigquery_type: float64
     description: Carga Afluente Solução Individual (Kg DBO/dia) (2035)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -575,7 +575,7 @@ columns:
     bigquery_type: float64
     description: Carga Efluente Solução Individual (Kg DBO/dia) (2035)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -590,7 +590,7 @@ columns:
     bigquery_type: int64
     description: População Atendida Estimada (2035)
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -605,7 +605,7 @@ columns:
     bigquery_type: float64
     description: Investimentos em Coleta
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -620,7 +620,7 @@ columns:
     bigquery_type: float64
     description: Investimentos em Tratamento
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -635,7 +635,7 @@ columns:
     bigquery_type: float64
     description: Investimentos em Coleta e Tratamento
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -650,7 +650,7 @@ columns:
     bigquery_type: string
     description: Necessidade de Remoção de DBO
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -665,7 +665,7 @@ columns:
     bigquery_type: string
     description: Tipologia de Solução
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -680,7 +680,7 @@ columns:
     bigquery_type: string
     description: Atenção ao Fósforo
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
@@ -695,7 +695,7 @@ columns:
     bigquery_type: string
     description: Atenção ao Nitrogênio
     temporal_coverage:
-      - "2013"
+      - (1)
     covered_by_dictionary: no
     directory_column:
       dataset_id:
