@@ -14,10 +14,7 @@ organization:
     - br-ms
 
 # Descrição do conjunto
-notes: Cobertura populacional estimada de equipes de saúde da família (eSF) e de equipes
-    de Atenção Básica (eAB) utilizada para o monitoramento do acesso aos serviços
-    de Atenção Básica, com vistas ao fortalecimento do planejamento do Sistema Único
-    de Saúde (SUS).
+notes: Cobertura populacional estimada de equipes de saúde da família (eSF) e de equipes de Atenção Básica (eAB) utilizada para o monitoramento do acesso aos serviços de Atenção Básica no nível municipal.
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
@@ -40,4 +37,4 @@ tags:
 
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.
-metadata_modified: 
+metadata_modified: "2022-05-13T21:12:21.547810"
