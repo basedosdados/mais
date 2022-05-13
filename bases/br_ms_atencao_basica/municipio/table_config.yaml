@@ -1,14 +1,19 @@
+
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_ms_atencao_basica
 
 table_id: municipio
 
+# Título da tabela.
+title: Município
+
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Cobertura populacional estimada de equipes de saúde da família (eSF) e de equipes de Atenção Básica (eAB) utilizada para o monitoramento do acesso aos serviços de Atenção Básica no nível municipal.
+description: Cobertura populacional estimada de equipes de saúde da família a nível de município
+
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
 #   - continent: south_america
@@ -20,7 +25,7 @@ spatial_coverage:
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 
+temporal_coverage:
     - 2007-07(1)2020-12
 
 # A unidade temporal com qual a tabela é atualizada.
@@ -46,7 +51,7 @@ published_by:
     email: laura.amaral@basedosdados.org
     github_user: https://github.com/laura-l-amaral
     ckan_user: laura-amaral
-    website: 
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -56,10 +61,11 @@ data_cleaned_by:
     email: laura.amaral@basedosdados.org
     github_user: https://github.com/laura-l-amaral
     ckan_user: laura-amaral
-    website: 
+    website: ''
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: 1. Criação da coluna 'id_municipio' padrão 7 dígitos IBGE 2. Separação das colunas de ano-mes 3. Ajuste nos nomes das colunas
+data_cleaning_description: 1. Criação da coluna 'id_municipio' padrão 7 dígitos IBGE
+    2. Separação das colunas de ano-mes 3. Ajuste nos nomes das colunas
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_atencao_basica/code
@@ -70,10 +76,10 @@ partner_organization:
     organization_id:
 
 # Url dos dados originais no GCP Storage.
-raw_files_url: 
+raw_files_url:
 
 # Url dos arquivos auxiliares no GCP Storage.
-auxiliary_files_url: 
+auxiliary_files_url:
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
@@ -373,4 +379,5 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: 
+metadata_modified: "2022-05-13T21:10:51.022011"
+
