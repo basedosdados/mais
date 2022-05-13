@@ -6,7 +6,7 @@ dataset_id: br_ms_atencao_basica
 table_id: municipio
 
 # Título da tabela.
-title: Município
+title: 'Município'
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
