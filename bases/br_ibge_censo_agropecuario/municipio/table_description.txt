@@ -1,4 +1,4 @@
-None
+Contém variáveis do Censo Agropecuário do Brasil nos anos de 1985, 1996, 2006 e 2017.
 
 Para saber mais acesse:
 Website: 
@@ -9,12 +9,15 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: None
+Nome: Gustavo Alcantara
 Código: 
+Email: gustavo.alcantara@basedosdados.org.br
 Tratado por
 -----------
-Nome: None
+Nome: Arthur Bragança
 Código: 
+Website: https://arthurbraganca.com/
+Email: arthurbraganca@gmail.com
 
 
 
@@ -23,17 +26,27 @@ Código:
 
 Cobertura Temporal
 ------------------
+- 1985
+- 1995
+- 2006
+- 2017
 
 
 
 
 Cobertura Espacial
 ------------------
+- {'continent': 'south_america', 'country': 'br'}
 
 
 
 
+Tratamento
+----------
+Padronização das variáveis nas diretrizes da Base dos Dados.
 
 
 
-
+Frequencia de Atualização
+-------------------------
+ten_years
