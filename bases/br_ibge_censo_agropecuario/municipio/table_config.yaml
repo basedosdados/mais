@@ -1862,4 +1862,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-05-16T19:50:46.786528'
+metadata_modified: "2022-05-16T19:50:46.786528"
