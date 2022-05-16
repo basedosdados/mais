@@ -1,3 +1,4 @@
+
 # Nome (slug) do conjunto no CKAN
 # Exemplos: br-ibge-populacao, br-tse-eleicoes
 name: br-ibge-censo-agropecuario
@@ -9,17 +10,17 @@ title: Censo Agropecuário
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 # Exemplos: br-ibge, br-tse, br-rj-gov
-organization: br-ibge
+organization:
+    - br-ibge
 
 # Descrição do conjunto
-notes: O Censo Agropecuário, realizado pelo Instituto Brasileiro de Geografia e Estatística (IBGE), é a principal e mais completa investigação estatística e territorial sobre a produção agropecuária do país. Visa obter informações sobre a estrutura, a dinâmica e o nível de produção da atividade agropecuária brasileira.
+notes: "O Censo Agropecuário, realizado pelo Instituto Brasileiro de Geografia e Estatística (IBGE) é a principal e mais completa investigação estatística e territoria sobre a produção agropecuária do país. Visa obter informações sobre a estrutura, a dinâmica e o nível de produção da atividade agropecuária brasileira. As informações geradas possibilitam a avaliação de políticas públicas como por exemplo, a de redistribuição de terras. Elas permitem, ainda, estudos a respeito da expansão das fronteiras agrícolas, da dinamização produtiva ditada pelas inovações tecnológicas, e enriquecem a produção de indicadores ambientais. Propiciam também análises sobre transformações decorrentes do processo de reestruturação e de ajustes na economia e de seus reflexos sobre o setor. Enquanto as pesquisas mensais e trimestrais sobre agricultura e pecuária disponibilizam dados referentes ao Brasil, Grandes Regiões e Unidades da Federação, os resultados do Censo Agro são referidos a municípios e a localidades, permitindo agregações e análises de diferentes recortes territoriais, como unidades de conservação ambiental, terras indígenas, bacias hidrográficas, Biomas, assentamentos fundiários, áreas remanescentes de quilombos, etc."
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
-groups: 
-  - agropecuaria
-  - economia
+groups:
+    - agropecuaria
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -30,10 +31,11 @@ groups:
 #    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-  - rebanho
-  - alimento
-  - produtividade agricola
+    - fazenda
+    - imovel
+    - propriedade
+    - uso da terra
 
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.
-metadata_modified: '2022-05-05T11:43:02.641535'
+metadata_modified: "2022-05-16T19:50:46.780064"

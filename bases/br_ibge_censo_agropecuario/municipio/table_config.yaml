@@ -1,36 +1,40 @@
+
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_ibge_censo_agropecuario
 
 table_id: municipio
 
+# Título da tabela.
+title: 'Município'
+
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Contém variáveis do Censo Agropecuário do Brasil nos anos de 1985, 1996, 2006 e 2017.
+description: Contém variáveis do Censo Agropecuário do Brasil nos anos de 1985, 1996,
+    2006 e 2017.
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
 #   - continent: south_america
 #     country: br
 spatial_coverage:
-        - continent: south_america
-          country: br
-
+    - continent: south_america
+      country: br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplos: ['1995(10)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 
-  - 1985(10)2017
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 1985(10)2017
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: ten_years
 
 # Nível de observação da tabela: o que representa cada linha.
-observation_level: 
+observation_level:
     - country: br
       entity: municipality
       column:
@@ -40,34 +44,34 @@ observation_level:
           - ano
 
 last_updated:
-    metadata: '2022-04-20'
-    data: '2022-04-20'
-    release: 
+    metadata: '2022-05-16'
+    data: '2022-05-16 17:00:37'
+    release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
 version: v1.0
 
 # Quem está preenchendo esses metadados?
-published_by: 
+published_by:
     name: Gustavo Alcantara
-    email: gustavo.alcantara@basedosdados.org.br 
+    email: gustavo.alcantara@basedosdados.org.br
     github_user: gustavoalcantara
     ckan_user: gustavoalcantara
-    website: 
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-data_cleaned_by: 
-    name: Arthur Bragança 
+data_cleaned_by:
+    name: Arthur Bragança
     email: arthurbraganca@gmail.com
     github_user: arthurbraganca7
-    ckan_user:
+    ckan_user: ''
     website: https://arthurbraganca.com/
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Padronização das variáveis nas diretrizes da Base dos Dados. 
+data_cleaning_description: Padronização das variáveis nas diretrizes da Base dos Dados.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_agropecuario/code
@@ -126,7 +130,7 @@ columns:
       bigquery_type: string
       description: Sigla da UF
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -141,7 +145,7 @@ columns:
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -156,7 +160,7 @@ columns:
       bigquery_type: float64
       description: Área Total
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -171,7 +175,7 @@ columns:
       bigquery_type: float64
       description: Área Total dos Estabelecimentos na Condição de Proprietário
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -186,7 +190,7 @@ columns:
       bigquery_type: float64
       description: Área Total dos Estabelecimentos na Condição de Arrendatário
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -201,7 +205,7 @@ columns:
       bigquery_type: float64
       description: Área Total dos Estabelecimentos na Condição de Parceiro
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -216,7 +220,7 @@ columns:
       bigquery_type: float64
       description: Área Total dos Estabelecimentos na Condição de Ocupante
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -230,8 +234,8 @@ columns:
     - name: area_lavoura_permanente
       bigquery_type: float64
       description: Área total de lavoura permanente
-      temporal_coverage: 
-        - (10)
+      temporal_coverage:
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -246,7 +250,7 @@ columns:
       bigquery_type: float64
       description: Área Total de Lavoura Temporária
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -261,7 +265,7 @@ columns:
       bigquery_type: float64
       description: Área Total de Pastagem Natural
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -276,7 +280,7 @@ columns:
       bigquery_type: float64
       description: Área Total de Pastagem Plantada
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -291,7 +295,7 @@ columns:
       bigquery_type: float64
       description: Área Total de Pastagem
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -306,7 +310,7 @@ columns:
       bigquery_type: float64
       description: Área Total de Mata Natural
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -321,7 +325,7 @@ columns:
       bigquery_type: float64
       description: Área Total de Mata Plantada
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -336,7 +340,7 @@ columns:
       bigquery_type: float64
       description: Área Total de Sistemas Agroflorestais
       temporal_coverage:
-        - '2017'
+          - '2017'
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -351,7 +355,7 @@ columns:
       bigquery_type: float64
       description: Área Total de Mata
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -366,7 +370,7 @@ columns:
       bigquery_type: float64
       description: Área Total não Utilizada
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -381,7 +385,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -396,7 +400,7 @@ columns:
       bigquery_type: float64
       description: Produção de Café em Toneladas
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -410,8 +414,8 @@ columns:
     - name: area_cafe
       bigquery_type: float64
       description: Área destinada ao plantio de Café
-      temporal_coverage: 
-        - (10)
+      temporal_coverage:
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -426,7 +430,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos destinados à produção de Café
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -441,7 +445,7 @@ columns:
       bigquery_type: float64
       description: Valor Total da produção de Café
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -456,7 +460,7 @@ columns:
       bigquery_type: int64
       description: Efetivos Total de Animais Bovinos em Estabelecimentos Agropecuários
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -472,7 +476,7 @@ columns:
       description: Efetivos Total de Animais Bovinos Bezerros em Estabelecimentos
           Agropecuários
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -488,7 +492,7 @@ columns:
       description: Efetivos Total de Animais Bovinos Novilho Garrote em Estabelecimentos
           Agropecuários
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -503,7 +507,7 @@ columns:
       bigquery_type: int64
       description: Efetivos Total de Animais Bovinos Vaca em Estabelecimentos Agropecuários
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -517,8 +521,8 @@ columns:
     - name: quantidade_bovinos_trabalho
       bigquery_type: int64
       description: Efetivo Total de Animais Bovinos de Trabalho
-      temporal_coverage: 
-        - '1985, 2006'
+      temporal_coverage:
+          - 1985, 2006
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -533,7 +537,7 @@ columns:
       bigquery_type: int64
       description: Efetivos Total de Animais Bovinos Touro
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -548,7 +552,7 @@ columns:
       bigquery_type: int64
       description: Número Total de Estabelecimentos que possuem energia Elétrica
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -563,7 +567,7 @@ columns:
       bigquery_type: float64
       description: Despesa Total
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -578,7 +582,7 @@ columns:
       bigquery_type: float64
       description: Despesa Total com Adubos
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -593,7 +597,7 @@ columns:
       bigquery_type: float64
       description: Despesa Total com Sementes
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -608,7 +612,7 @@ columns:
       bigquery_type: float64
       description: Despesa Total com Arrendamento
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -623,7 +627,7 @@ columns:
       bigquery_type: float64
       description: Despesa Total com Salários
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -638,7 +642,7 @@ columns:
       bigquery_type: float64
       description: Despesa Total com Defensivos
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -653,7 +657,7 @@ columns:
       bigquery_type: float64
       description: Despesa Total com Cotas
       temporal_coverage:
-        - '1985, 1996, 2006'
+          - 1985, 1996, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -667,8 +671,8 @@ columns:
     - name: areas_irrigacao
       bigquery_type: float64
       description: Áreas destinadas à irrigação
-      temporal_coverage: 
-        - (10)
+      temporal_coverage:
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -683,7 +687,7 @@ columns:
       bigquery_type: float64
       description: Produção de Leite (em mil litros)
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -696,9 +700,9 @@ columns:
       is_partition: false
     - name: numero_estabelecimentos_total
       bigquery_type: int64
-      description: Número de Estabelecimentos Agropecuários 
+      description: Número de Estabelecimentos Agropecuários
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -713,7 +717,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos Agropecuários na condição de Proprietário
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -727,8 +731,8 @@ columns:
     - name: numero_estabelecimentos_arrendatario
       bigquery_type: int64
       description: Número de Estabelecimentos na Condição de Arrendatário
-      temporal_coverage: 
-        - (10)
+      temporal_coverage:
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -743,7 +747,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos Agropecuários na condição de Parceiro
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -758,7 +762,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos Agropecuários na condição de Ocupante
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -773,7 +777,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos Agropecuários na condição Outros
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -788,7 +792,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos Agropecuários na condição Nenhuma
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -802,8 +806,8 @@ columns:
     - name: numero_estabelecimentos_cooperativas
       bigquery_type: int64
       description: Número de Estabelecimentos Agropecuarios na Orientação de Cooperativa
-      temporal_coverage: 
-        - '1985,2006'
+      temporal_coverage:
+          - 1985,2006
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -819,7 +823,7 @@ columns:
       description: Número de Estabelecimentos Agropecuários na Orientação de Cooperativa
           de Crédito
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -835,7 +839,7 @@ columns:
       description: Número de Estabelecimentos Agropecuários na Orientação de Cooperativa
           que possuem energia elétrica
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -851,7 +855,7 @@ columns:
       description: Número de Estabelecimentos Agropecuários na Orientação de Cooperativa
           Outras
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -866,7 +870,7 @@ columns:
       bigquery_type: int64
       description: Número absoluto de Tratores
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -881,7 +885,7 @@ columns:
       bigquery_type: int64
       description: Número absoluto de Máquina de Colheita
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -893,10 +897,10 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: quantidade_maquinas_plantio
-      bigquery_type: int64 
+      bigquery_type: int64
       description: Número absoluto de máquinas de plantio
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -909,9 +913,10 @@ columns:
       is_partition: false
     - name: quantidade_tratores_estabelecimentos_menor_10
       bigquery_type: int64
-      description: Número absoluto de tratores em estabelecimentos menores que 10 hectares
+      description: Número absoluto de tratores em estabelecimentos menores que 10
+          hectares
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -927,7 +932,7 @@ columns:
       description: Número absoluto de tratores em estabelecimentos maiores que 10
           ha
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -942,7 +947,7 @@ columns:
       bigquery_type: int64
       description: Pessoal ocupado em Estabelecimentos Agropecuários
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -958,7 +963,7 @@ columns:
       description: Pessoal ocupado em Estabelecimentos Agropecuários com laço de parentesco
           com o Produtor
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -974,7 +979,7 @@ columns:
       description: Pessoal ocupado em Estabelecimentos Agropecuários sem laço de parentesco
           com o Produtor
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -990,7 +995,7 @@ columns:
       description: Pessoal com 14 anos ou mais ocupado em Estabelecimentos Agropecuários
           com laço de parentesco com o Produtor
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1001,17 +1006,18 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: pessoal_14_mais_emp 
-      bigquery_type:
-      description:
+    - name: pessoal_14_mais_empregadas
+      bigquery_type: int64
+      description: Pessoal com 14 anos ou mais empregado em Estabelecimentos Agropecuários
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit: person
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -1019,7 +1025,7 @@ columns:
       bigquery_type: int64
       description: Pessoal com 14 anos ou mais ocupado em Estabelecimentos Agropecuários
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1033,8 +1039,8 @@ columns:
     - name: valor_producao_total
       bigquery_type: float64
       description: Valor Total da Produção Total
-      temporal_coverage: 
-        - (10)
+      temporal_coverage:
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -1046,10 +1052,10 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: valor_producao_total_animal
-      bigquery_type: float64 
+      bigquery_type: float64
       description: Valor total da Produção animal
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -1064,7 +1070,7 @@ columns:
       bigquery_type: float64
       description: Valor total da produção de animal grande
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -1079,7 +1085,7 @@ columns:
       bigquery_type: float64
       description: Valor total da produção de animal médio
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -1094,7 +1100,7 @@ columns:
       bigquery_type: float64
       description: Valor Total da Produção de Aves
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1107,9 +1113,9 @@ columns:
       is_partition: false
     - name: valor_total_producao_vegetal
       bigquery_type: float64
-      description: 'Valor Total da Produção Vegetal '
+      description: Valor Total da Produção Vegetal
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1122,9 +1128,9 @@ columns:
       is_partition: false
     - name: valor_total_producao_hortifruti
       bigquery_type: float64
-      description: 'Valor Total da Produção de Hortifruti e Floricultura '
+      description: Valor Total da Produção de Hortifruti e Floricultura
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1137,9 +1143,9 @@ columns:
       is_partition: false
     - name: valor_total_producao_silvicultura
       bigquery_type: float64
-      description: 'Valor Total da Produção na Silvicultura '
-      temporal_coverage: 
-        - (10)
+      description: Valor Total da Produção na Silvicultura
+      temporal_coverage:
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1152,9 +1158,9 @@ columns:
       is_partition: false
     - name: valor_total_producao_vegicultura
       bigquery_type: float64
-      description: 'Valor Total da Produção na Extração Vegetal '
+      description: Valor Total da Produção na Extração Vegetal
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1169,7 +1175,7 @@ columns:
       bigquery_type: float64
       description: Valor Total da Produção na Lavoura Temporária
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1184,7 +1190,7 @@ columns:
       bigquery_type: float64
       description: Valor Total da Produção na Lavoura Permanente
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1199,7 +1205,7 @@ columns:
       bigquery_type: float64
       description: Produção de Arroz em Toneladas
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1214,7 +1220,7 @@ columns:
       bigquery_type: float64
       description: Produção de Feijão em Toneladas
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1227,9 +1233,9 @@ columns:
       is_partition: false
     - name: producao_total_milho
       bigquery_type: float64
-      description: 'Produção de Milho em Toneladas '
+      description: Produção de Milho em Toneladas
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1244,7 +1250,7 @@ columns:
       bigquery_type: float64
       description: Produção de Mandioca em Toneladas
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1259,7 +1265,7 @@ columns:
       bigquery_type: float64
       description: Produção de Soja em Toneladas
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1274,7 +1280,7 @@ columns:
       bigquery_type: float64
       description: Produção de Algodão em Toneladas
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1289,7 +1295,7 @@ columns:
       bigquery_type: float64
       description: Produção de Cana de Açúcar em Toneladas
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1304,7 +1310,7 @@ columns:
       bigquery_type: float64
       description: Produção de Trigo em Toneladas
       temporal_coverage:
-        - '1996, 2006, 2017'
+          - 1996, 2006, 2017
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1319,7 +1325,7 @@ columns:
       bigquery_type: float64
       description: Área destinada a Plantio de Arroz
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1334,7 +1340,7 @@ columns:
       bigquery_type: float64
       description: Área destinada a Plantio de Feijão
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1349,7 +1355,7 @@ columns:
       bigquery_type: float64
       description: Área destinada a Plantio de Milho
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1364,7 +1370,7 @@ columns:
       bigquery_type: float64
       description: Área  destinada a Plantio de Mandioca
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1379,7 +1385,7 @@ columns:
       bigquery_type: float64
       description: Área  destinada a Plantio de Soja
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1394,7 +1400,7 @@ columns:
       bigquery_type: float64
       description: Área  destinada a Plantio de Algodão
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1409,7 +1415,7 @@ columns:
       bigquery_type: float64
       description: Área  destinada a Plantio de Cana
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1424,7 +1430,7 @@ columns:
       bigquery_type: float64
       description: Área  destinada a Plantio de Trigo
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1439,7 +1445,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos destinados à produção de Arroz
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1454,7 +1460,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos destinados à produção de Feijão
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1469,7 +1475,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos destinados à produção de Milho
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1484,7 +1490,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos destinados à produção de Mandioca
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1499,7 +1505,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos destinados à produção de Soja
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1514,7 +1520,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos destinados à produção de Algodão
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1529,7 +1535,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos destinados à produção de Cana
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1544,7 +1550,7 @@ columns:
       bigquery_type: int64
       description: Número de Estabelecimentos destinados à produção de Trigo
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1559,7 +1565,7 @@ columns:
       bigquery_type: float64
       description: Valor da produção de arroz
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1574,7 +1580,7 @@ columns:
       bigquery_type: float64
       description: Valor da produção de Feijão
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1589,7 +1595,7 @@ columns:
       bigquery_type: float64
       description: Valor da produção de Milho
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1604,7 +1610,7 @@ columns:
       bigquery_type: float64
       description: Valor da produção de Mandioca
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1619,7 +1625,7 @@ columns:
       bigquery_type: float64
       description: Valor da produção de Soja
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1634,7 +1640,7 @@ columns:
       bigquery_type: float64
       description: Valor da produção de Algodão
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1649,7 +1655,7 @@ columns:
       bigquery_type: float64
       description: Valor da produção de Cana
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1664,7 +1670,7 @@ columns:
       bigquery_type: float64
       description: Valor da produção de Trigo
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1679,7 +1685,7 @@ columns:
       bigquery_type: float64
       description: Valor da Produção Total
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1694,7 +1700,7 @@ columns:
       bigquery_type: float64
       description: Valor da Produção das Terras
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1709,7 +1715,7 @@ columns:
       bigquery_type: float64
       description: Valor do Total de Produção em Culturas Permanentes
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1724,7 +1730,7 @@ columns:
       bigquery_type: float64
       description: Valor do Total de Produção em Matas Plantadas
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1739,7 +1745,7 @@ columns:
       bigquery_type: float64
       description: Valor de Prédio e Benfeitorias
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1754,7 +1760,7 @@ columns:
       bigquery_type: float64
       description: Valor Total dos Animais
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1769,7 +1775,7 @@ columns:
       bigquery_type: float64
       description: Valor Total dos Animais de Transporte
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1784,7 +1790,7 @@ columns:
       bigquery_type: float64
       description: Valor Total das Maquinas de Transporte
       temporal_coverage:
-        - '1985, 2006'
+          - 1985, 2006
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1798,8 +1804,8 @@ columns:
     - name: proporcao_despesa_fertilizante
       bigquery_type: float64
       description: Porcentagem da despesa com fertilizantes
-      temporal_coverage: 
-        - (10)
+      temporal_coverage:
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -1814,7 +1820,7 @@ columns:
       bigquery_type: float64
       description: Porcentagem da despesa com defensivos agrícolas
       temporal_coverage:
-        - (10)
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -1828,8 +1834,8 @@ columns:
     - name: proporcao_despesa_sementes
       bigquery_type: float64
       description: Porcentagem da despesa com sementes
-      temporal_coverage: 
-        - (10)
+      temporal_coverage:
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -1843,8 +1849,8 @@ columns:
     - name: proporcao_despesa_salarios
       bigquery_type: float64
       description: Porcentagem da despesa com salários
-      temporal_coverage: 
-        - (10)
+      temporal_coverage:
+          - (10)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -1856,4 +1862,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-05-05T11:43:02.649984'
+metadata_modified: "2022-05-16T19:50:46.786528"
