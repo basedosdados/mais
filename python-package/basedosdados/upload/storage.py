@@ -161,7 +161,7 @@ class Storage(Base):
                 * 'pass' : Do nothing
             chunk_size (int): Optional
                 The size of a chunk of data whenever iterating (in bytes).
-                This must be a multiple of 256 KB per the API specification. 
+                This must be a multiple of 256 KB per the API specification.
                 If not specified, the chunk_size of the blob itself is used. If that is not specified, a default value of 40 MB is used.
 
             upload_args ():
@@ -174,7 +174,11 @@ class Storage(Base):
         path = Path(path)
 
         if path.is_dir():
-            paths = [f for f in path.glob("**/*") if f.is_file() and f.suffix == ".csv"]
+            paths = [
+                f
+                for f in path.glob("**/*")
+                if f.is_file() and f.suffix in [".csv", ".parquet", "parquet.gzip"]
+            ]
 
             parts = [
                 (
