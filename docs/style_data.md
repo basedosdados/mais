@@ -46,7 +46,7 @@ organização** que publica o conjunto:
 Por exemplo, o conjunto de dados do PIB do IBGE tem como `dataset_id`: `br_ibge_pib`
 
 !!! Tip "Não sabe como nomear a organização?"
-    Sugerimos que vá no site da mesma e veja como ela se autodenomina (ex: DETRAN-RJ seria `br-rj-detran`)
+    Sugerimos que vá no site da mesma e veja como ela se autodenomina (ex: DETRAN-RJ seria `br_rj_detran`)
 
 ### Tabelas
 
