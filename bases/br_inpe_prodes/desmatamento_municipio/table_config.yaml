@@ -6,7 +6,7 @@ dataset_id: br_inpe_prodes
 table_id: desmatamento_municipio
 
 # Título da tabela.
-title:
+title: desmatamento_municipio
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -49,7 +49,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.0
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -114,7 +114,7 @@ columns:
       bigquery_type:
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-        - - (1)
+        - (1)
       covered_by_dictionary: no
       directory_column:  
           dataset_id: br_bd_diretorios_data_tempo
@@ -135,7 +135,7 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -150,7 +150,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -165,7 +165,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -180,7 +180,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -195,7 +195,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -210,7 +210,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -240,7 +240,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -255,7 +255,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
