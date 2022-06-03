@@ -18,12 +18,13 @@ jobs:
           pip install -U pip poetry
       - name: Install flows
         run: |
+          cd python-packge
           pip install --prefer-binary .
       - name: Lint flows
         uses: gabriel-milan/action-pylint@v1
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          path: "python-package"
+          path: "python-package/"
           fail: true
           pr-message: true
       - name: Lint tests
