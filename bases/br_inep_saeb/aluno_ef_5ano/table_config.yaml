@@ -1,8 +1,8 @@
 # Igual ao dataset.name mas como lower case.
-# Exemplos: br_ibge_populacao, br_inep_censo_escolar 
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_inep_saeb
 
-table_id: aluno_ef_9ano
+table_id: aluno_ef_5ano
 
 # Título da tabela.
 title: Sistema de Avaliação da Educação Básica (Saeb)
@@ -11,7 +11,7 @@ title: Sistema de Avaliação da Educação Básica (Saeb)
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Microdados do SAEB com respostas dos alunos para as avaliações e questionário socioeconômico matriculados no 9º ano do Ensino Fundamental
+description: Microdados do SAEB com respostas dos alunos para as avaliações e questionário socioeconômico matriculados no 5º ano do Ensino Fundamental
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
@@ -30,7 +30,7 @@ temporal_coverage: ['1995(2)2019']
 update_frequency: two_years
 
 # Nível de observação da tabela: o que representa cada linha.
-observation_level:
+observation_level: 
     - entity: year
       columns:
          - ano 
@@ -44,11 +44,10 @@ observation_level:
     - entity: person
       columns:
          - id_aluno
-    
 
 last_updated:
     metadata: '2022-06-02'
-    data: '2022-06-02 09:00:00'
+    data: '2022-06-02 20:00:00'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -165,7 +164,7 @@ columns:
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-          - (2)
+          - 2007(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -180,7 +179,7 @@ columns:
       bigquery_type: string
       description: Área em relação ao município
       temporal_coverage:
-          - 2001(2)2005, 2011(2)
+          - (2)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -330,17 +329,17 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: situacao_censo
-      bigquery_type: int64
+      bigquery_type: string
       description: Indicador de compatibilização com o Censo Escolar
       temporal_coverage:
           - 2011(2)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -355,7 +354,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -363,14 +362,14 @@ columns:
       bigquery_type: int64
       description: Indicador de preenchimento da prova
       temporal_coverage:
-          - 2005(2)
-      covered_by_dictionary: no
+          - 2007(2)
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -379,13 +378,13 @@ columns:
       description: Indicador de presença na prova
       temporal_coverage:
           - 2017(2)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -393,7 +392,7 @@ columns:
       bigquery_type: string
       description: Número do caderno de prova
       temporal_coverage:
-          - (2)
+          - (2)2005, 2011(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -449,36 +448,6 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: bloco_1_aberto
-      bigquery_type: string
-      description: Identificador do Bloco Aberto 1
-      temporal_coverage:
-          - '2019'
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: bloco_2_aberto
-      bigquery_type: string
-      description: Identificador do Bloco Aberto 2
-      temporal_coverage:
-          - '2019'
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: respostas_bloco_1
       bigquery_type: string
       description: Respostas do aluno ao Bloco 1 da prova
@@ -514,36 +483,6 @@ columns:
       description: Respostas do aluno ao Bloco 3 da prova
       temporal_coverage:
           - (2)2005
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: conceito_q1
-      bigquery_type: string
-      description: Conceito questão 1
-      temporal_coverage:
-          - '2019'
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: conceito_q2
-      bigquery_type: string
-      description: Conceito questão 2
-      temporal_coverage:
-          - '2019'
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -605,7 +544,7 @@ columns:
           no caderno de prova)
       temporal_coverage:
           - 2011(2)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -619,8 +558,8 @@ columns:
       bigquery_type: int64
       description: Indicador de participação na Prova Brasil
       temporal_coverage:
-          - 2011(2)2017
-      covered_by_dictionary: no
+          - 2011(2)
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -631,7 +570,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: amostra
-      bigquery_type: int64
+      bigquery_type: string
       description: Indicador de participação da amostra
       temporal_coverage:
           - (2)2003, 2019
@@ -646,10 +585,10 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: estrato
-      bigquery_type: int64
+      bigquery_type: string
       description: Descrição dos estratos
       temporal_coverage:
-          - (2)2005, 2011
+          - (2)2005, 2013(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -783,7 +722,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: desempenho_aluno
-      bigquery_type: string
+      bigquery_type: float64
       description: Estágio de desempenho
       temporal_coverage:
           - (2)
@@ -803,7 +742,7 @@ columns:
       description: Indicador de preenchimento do questionário
       temporal_coverage:
           - 2011(2)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -832,7 +771,7 @@ columns:
       bigquery_type: string
       description: Raça ou Cor
       temporal_coverage:
-          - (2)2017
+          - (2)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -855,12 +794,12 @@ columns:
           column_name: mes
       measurement_unit: month
       has_sensitive_data: no
-      observations: Transformação das opções do dicionário em valor int64
+      observations:
       is_in_staging: true
       is_partition: false
     - name: ano_nascimento
       bigquery_type: int64
-      description: Ano de nascimento
+      description: 'Ano de nascimento '
       temporal_coverage:
           - (2)2017
       covered_by_dictionary: yes
@@ -870,7 +809,7 @@ columns:
           column_name: ano
       measurement_unit: year
       has_sensitive_data: no
-      observations: Transformação das opções do dicionário em valor int64
+      observations:
       is_in_staging: true
       is_partition: false
     - name: idade
@@ -880,18 +819,17 @@ columns:
           - (2)2017
       covered_by_dictionary: yes
       directory_column:
-          dataset_id: 
-          table_id: 
+          dataset_id:
+          table_id:
           column_name:
       measurement_unit: year
       has_sensitive_data: no
-      observations: Calculada pelo ano do SAEB menos a variável ano_nascimento
+      observations: Transformação de string para int com base na resposta do dicionário
       is_in_staging: true
       is_partition: false
     - name: faixa_etaria
       bigquery_type: string
-      description: Faixa etária para alunos com 19 anos ou mais ou com 12 anos ou
-          menos
+      description: Faixa etária para alunos com 15 anos ou mais ou com 8 anos ou menos
       temporal_coverage:
           - (2)2017
       covered_by_dictionary: yes
@@ -901,36 +839,21 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Opção que contempla alunos de 19 anos ou mais e 12 anos ou menos
-          com base na transformação do dicionário para anos de nascimento
+      observations: Opção que contempla alunos de 15 anos ou mais e 8 anos ou menos
+          com base na variável idade
       is_in_staging: true
       is_partition: false
-    - name: estado_civil
+    - name: aniversariante
       bigquery_type: string
-      description: Estado civil
+      description: Você ainda fará aniversário este ano?
       temporal_coverage:
-          - '1999'
+          - 2001(2)2005
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: possui_filhos
-      bigquery_type: string
-      description: Quantos filhos você tem?
-      temporal_coverage:
-          - '1999'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id: 
-          table_id: 
-          column_name: 
-      measurement_unit: person
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -954,7 +877,7 @@ columns:
       bigquery_type: string
       description: Normalmente, quem mora na sua casa? - Mãe (mães ou madrasta).
       temporal_coverage:
-          - 1999(2)
+          - (2)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -969,7 +892,7 @@ columns:
       bigquery_type: string
       description: Normalmente, quem mora na sua casa? - Pai (pais ou padrasto).
       temporal_coverage:
-          - 1999(2)
+          - (2)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -1000,36 +923,6 @@ columns:
       description: Normalmente, quem mora na sua casa? - Avô ou avó.
       temporal_coverage:
           - '2019'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: mora_conjuge
-      bigquery_type: string
-      description: Normalmente, quem mora na sua casa? - Sua esposa/seu marido
-      temporal_coverage:
-          - '1999'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: mora_filhos
-      bigquery_type: string
-      description: Normalmente, quem mora na sua casa? - Suas filhas/seus filhos
-      temporal_coverage:
-          - '1999'
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -1093,9 +986,9 @@ columns:
           - 1999(2)2017
       covered_by_dictionary: yes
       directory_column:
-          dataset_id: 
-          table_id: 
-          column_name: 
+          dataset_id:
+          table_id:
+          column_name:
       measurement_unit: person
       has_sensitive_data: no
       observations:
@@ -1108,25 +1001,10 @@ columns:
           - '1999'
       covered_by_dictionary: yes
       directory_column:
-          dataset_id: 
-          table_id: 
-          column_name: 
-      measurement_unit: person
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: situacao_economica
-      bigquery_type: string
-      description: Como é sua situação econômica?
-      temporal_coverage:
-          - 1997(2)1999
-      covered_by_dictionary: yes
-      directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1311,9 +1189,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: possui_automovel
+    - name: possui_casa_garagem
       bigquery_type: string
-      description: 'Na sua casa tem:  - Carro.'
+      description: 'Na sua casa tem:  - Garagem'
       temporal_coverage:
           - 1999(2)
       covered_by_dictionary: yes
@@ -1326,9 +1204,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: possui_casa_garagem
+    - name: possui_automovel
       bigquery_type: string
-      description: 'Na sua casa tem:  - Garagem'
+      description: 'Na sua casa tem:  - Carro.'
       temporal_coverage:
           - 1999(2)
       covered_by_dictionary: yes
@@ -1668,8 +1546,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Em 2019, o questionário perguntava "Com que frequência sua família
-          paga alguém para auxiliar nos trabalhos domésticos (faxina ou limpeza)?"
+      observations:
       is_in_staging: true
       is_partition: false
     - name: possui_empregada_domestica_cinco_dias
@@ -1870,51 +1747,6 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: responsaveis_conversam_professor_diretor
-      bigquery_type: string
-      description: Quantas vezes seus pais vieram a escola para conversar com professores/diretor?
-      temporal_coverage:
-          - '2001'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: responsaveis_conversam_diretor
-      bigquery_type: string
-      description: Com que frequencia seus pais conversam com o diretor da escola?
-      temporal_coverage:
-          - 2003(2)2005
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: responsaveis_conversam_professor
-      bigquery_type: string
-      description: Com que frequencia seus pais conversam com os seus professores?
-      temporal_coverage:
-          - 2003(2)2005
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: responsaveis_conhecem_amigo
       bigquery_type: string
       description: 'Seu pai ou sua mãe conhecem: - Algum amigo seu?'
@@ -1935,6 +1767,21 @@ columns:
       description: 'Seu pai ou sua mãe conhecem: - Algum pai/mãe de amigo seu?'
       temporal_coverage:
           - '1999'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: responsaveis_conversam_professor_diretor
+      bigquery_type: string
+      description: Quantas vezes seus pais vieram a escola para conversar com professores/diretor?
+      temporal_coverage:
+          - '2001'
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -2035,22 +1882,6 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: responsaveis_conversam_amigos_escola
-      bigquery_type: string
-      description: Seus pais ou responsáveos conversam com seus amigos/colegas de
-          escola?
-      temporal_coverage:
-          - 2003(2)2005
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: responsaveis_conversam_responsaveis_amigo
       bigquery_type: string
       description: Com que frequencia seus pais tem conversado com pai/mae/responsável
@@ -2131,7 +1962,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: responsaveis_cobram_realizacao_tarefa_casa
+    - name: responsaveis_cobram_realizacao_licao_casa
       bigquery_type: string
       description: 'Com que frequência seus pais ou responsáveis costumam: - Cobram
           você a fazer a tarefa de casa.'
@@ -2147,7 +1978,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: responsaveis_ajudam_realizacao_tarefa_casa
+    - name: responsaveis_ajudam_realizacao_licao_casa
       bigquery_type: string
       description: Com que frequencia seus pais ajudam a fazer lição de casa?
       temporal_coverage:
@@ -2359,22 +2190,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: quantos_anos_segundo_grau
-      bigquery_type: string
-      description: Se você está cursando o 2º grau, há quantos anos você o frequenta?
-      temporal_coverage:
-          - '1995'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -2396,7 +2212,7 @@ columns:
       is_partition: false
     - name: quantidade_mudancas_escola
       bigquery_type: string
-      description: Desde o 6º ano, quantas vezes você já mudou de escola?
+      description: Desde o 1º ano, quantas vezes você já mudou de escola?
       temporal_coverage:
           - 2001(2)2005
       covered_by_dictionary: yes
@@ -2409,42 +2225,27 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: presenca_professor
-      bigquery_type: string
-      description: 'Do 6º ao 9º ano, você teve professor da disciplina:'
-      temporal_coverage:
-          - 1997, 2001
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: supletivo_ef
-      bigquery_type: string
-      description: Voce concluiu o 1º grau no ensino supletivo?
-      temporal_coverage:
-          - '1995'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: rede_ef
       bigquery_type: string
-      description: A partir do sexto ano do ensino fundamental, em que tipo de escola
-          você estudou?
+      description: A partir do primeiro ano do ensino fundamental, em que tipo de
+          escola você estudou?
       temporal_coverage:
           - 1997(2)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estudos_mesma_escola
+      bigquery_type: string
+      description: Desde a primeira série, você estudou sempre nesta mesma escola?
+      temporal_coverage:
+          - 2007(2)2009
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -2547,22 +2348,6 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: desempenho_prejudicado_falta
-      bigquery_type: string
-      description: O seu desempenho na disciplina é prejudicado quando você falta
-          ou chega atrasado a aula?
-      temporal_coverage:
-          - '1997'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: tempo_lazer
       bigquery_type: string
       description: 'Fora da escola em dias de aula, quanto tempo você usa para: -
@@ -2632,6 +2417,36 @@ columns:
           Estudar (lição de casa, trabalhos escolares, etc.).'
       temporal_coverage:
           - 1997, 2003, 2019
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gosta_leitura
+      bigquery_type: string
+      description: Você gosta de ler?
+      temporal_coverage:
+          - '1997'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_leitura
+      bigquery_type: string
+      description: O que você mais gosta de ler?
+      temporal_coverage:
+          - '1997'
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -2887,12 +2702,27 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
+    - name: frequenta_museu
+      bigquery_type: string
+      description: 'Com qual frequência você costuma ir à/ao: Museu.'
+      temporal_coverage:
+          - 2003, 2013(2)2017
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: frequenta_espetaculo_exposicao
       bigquery_type: string
       description: 'Com qual frequência você costuma ir à/ao: Espetáculo ou exposição
           (teatro, museu, dança ou música).'
       temporal_coverage:
-          - 2003, 2013(2)2017
+          - 2003, 2011
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -2923,7 +2753,7 @@ columns:
       description: 'Com qual frequência você costuma ir à/ao: Ver apresentações musicais
           ou de dança'
       temporal_coverage:
-          - 2003, 2011
+          - 2011(2)2017
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -2939,130 +2769,7 @@ columns:
       description: Com qual frequência você participa de festas na sua vizinhaça ou
           comunidade?
       temporal_coverage:
-          - 2011(2)2017
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: participa_gremio_escolar
-      bigquery_type: string
-      description: Você participa de outras atividades promovidas pelo Grêmio Escolar?
-      temporal_coverage:
-          - '1999'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: participa_associacao_desportiva
-      bigquery_type: string
-      description: Você participa de outras atividades promovidas pela Associação
-          Desportiva?
-      temporal_coverage:
-          - '1999'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: participa_associacao_moradores
-      bigquery_type: string
-      description: Você participa de outras atividades promovidas pela Associação
-          de Moradores?
-      temporal_coverage:
-          - '1999'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: participa_sindicato
-      bigquery_type: string
-      description: Você participa de outras atividades promovidas pelo Sindicato?
-      temporal_coverage:
-          - '1999'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: participa_movimento_religioso
-      bigquery_type: string
-      description: Você participa de outras atividades promovidas por movimento religioso?
-      temporal_coverage:
-          - '1999'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: participa_partido_politico
-      bigquery_type: string
-      description: Você participa de outras atividades promovidas por partido político?
-      temporal_coverage:
-          - '1999'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: participa_ong
-      bigquery_type: string
-      description: Você participa de outras atividades promovidas por organizações
-          não-governamentais?
-      temporal_coverage:
-          - '1999'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: nao_participa
-      bigquery_type: string
-      description: Você participa de outras atividades promovidas por nenhum destes?
-      temporal_coverage:
-          - 1999(2)2001
+          - '2011'
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -3227,21 +2934,6 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: curso_outros
-      bigquery_type: string
-      description: Você já fez ou está fazendo algum outro curso?
-      temporal_coverage:
-          - '1999'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: quando_nao_entende_materia
       bigquery_type: string
       description: 'Quando você não entende a matéria:'
@@ -3275,22 +2967,6 @@ columns:
     - name: entendimento_ensino
       bigquery_type: string
       description: Você entende o que o professor ensina nas aulas?
-      temporal_coverage:
-          - '1997'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: disciplina_auxilia_compreensao
-      bigquery_type: string
-      description: As aulas da disciplina ajudam você a compreender melhor as outras
-          matérias?
       temporal_coverage:
           - '1997'
       covered_by_dictionary: yes
@@ -3425,6 +3101,127 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
+    - name: estuda_fazendo_licao_casa
+      bigquery_type: string
+      description: Você estuda habitualmente fazendo lição de casa?
+      temporal_coverage:
+          - '1997'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estuda_fazendo_resumos
+      bigquery_type: string
+      description: Você estuda habitualmente fazendo resumos?
+      temporal_coverage:
+          - '1997'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estuda_lendo_relendo_livros
+      bigquery_type: string
+      description: Você estuda habitualmente lendo/relendo os livros indicados pela
+          escola?
+      temporal_coverage:
+          - '1997'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estuda_refazendo_exercicios
+      bigquery_type: string
+      description: Você estuda habitualmente refazendo os exercícios de classe?
+      temporal_coverage:
+          - '1997'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estuda_fazendo_anotacoes
+      bigquery_type: string
+      description: Você estuda habitualmente fazendo anotações das aulas?
+      temporal_coverage:
+          - '1997'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estuda_lendo_anotacoes
+      bigquery_type: string
+      description: Você estuda habitualmente lendo anotações das aulas?
+      temporal_coverage:
+          - '1997'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estuda_somente_assistindo_aulas
+      bigquery_type: string
+      description: Você não estuda habitualmente, só assiste as aulas?
+      temporal_coverage:
+          - '1997'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estuda_fora_sala_aula
+      bigquery_type: string
+      description: Você tem tempo para estudar fora da sala de aula?
+      temporal_coverage:
+          - '1997'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: utiliza_computador_licao_casa
       bigquery_type: string
       description: Você usa computador para lição/trabalho da disciplina?
@@ -3545,21 +3342,6 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: desempenho_disciplina
-      bigquery_type: string
-      description: Como você considera seu desempenho em ciências?
-      temporal_coverage:
-          - '1997'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: professor_importa_voce_diz
       bigquery_type: string
       description: Seu professor dá importância ao que você diz?
@@ -3606,7 +3388,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: professor_ajuda_se_necessario
+    - name: professor_esforca_aprendizado
       bigquery_type: string
       description: Seu professor dá uma força para você estudar mais quando não tira
           notas boas?
@@ -3622,89 +3404,11 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: professor_atende_prontamente
+    - name: professor_trata_carinho
       bigquery_type: string
-      description: Quando você precisa de ajuda, o professor está sempre pronto para
-          lhe atender?
+      description: Seu professor te trata com carinho?
       temporal_coverage:
           - 2003(2)2005
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: professor_esforca_aprendizado
-      bigquery_type: string
-      description: Seu professor se esforça para que você aprenda a disciplina
-      temporal_coverage:
-          - 1997, 2001
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: professor_utiliza_espacos_externos
-      bigquery_type: string
-      description: O seu professor costuma utilizar outros espaços além da sala de
-          aula para o ensino da matéria?
-      temporal_coverage:
-          - '1997'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: professor_espera_silencio
-      bigquery_type: string
-      description: Os profesores têm que esperar muito para que os alunos fiquem quietos
-          na sua sala de aula?
-      temporal_coverage:
-          - 2003(2)2005
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: professor_cobra
-      bigquery_type: string
-      description: Você acha que seu professor pega no seu pé?
-      temporal_coverage:
-          - '2003'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: brigou_professor
-      bigquery_type: string
-      description: Você brigou com algum professor este ano?
-      temporal_coverage:
-          - '2003'
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -3720,21 +3424,6 @@ columns:
       description: Na sua turma, você se sente deixado de lado?
       temporal_coverage:
           - '2003'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: familia_avisada_falta
-      bigquery_type: string
-      description: Quando você falta às aulas, sua família é avisada?
-      temporal_coverage:
-          - 2003(2)2005
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -3806,21 +3495,6 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: estuda_habitualmente
-      bigquery_type: string
-      description: Você estuda habitualmente?
-      temporal_coverage:
-          - '1997'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: motivo_estar_escola
       bigquery_type: string
       description: 'Você está na escola porque:'
@@ -3840,7 +3514,7 @@ columns:
       bigquery_type: string
       description: Você usa o que aprende da disciplina na escola, no seu dia a dia?
       temporal_coverage:
-          - '1997'
+          - 1995(2)1997
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -3853,9 +3527,9 @@ columns:
       is_partition: false
     - name: pretensao_futura
       bigquery_type: string
-      description: 'Quando você terminar o 9º ano(8ª série) você pretende:'
+      description: 'Quando você terminar o 5º ano(4ª série) você pretende:'
       temporal_coverage:
-          - 2001(2)
+          - '2001'
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -3881,52 +3555,5 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: opiniao_frase_1
-      bigquery_type: string
-      description: 'Dê sua opinião sobre a frase: "O professor se esforça para que
-          eu aprenda a disciplina"'
-      temporal_coverage:
-          - '1995'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: opiniao_frase_2
-      bigquery_type: string
-      description: 'Dê sua opinião sobre a frase: "Eu gosto de ler"'
-      temporal_coverage:
-          - '1995'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: opiniao_frase_3
-      bigquery_type: string
-      description: 'Dê sua opinião sobre a frase: "A leitura me ajuda a viver no mundo
-          atual"'
-      temporal_coverage:
-          - '1995'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
 
-metadata_modified:
+metadata_modified: '2022-03-21T18:17:59.798990'
