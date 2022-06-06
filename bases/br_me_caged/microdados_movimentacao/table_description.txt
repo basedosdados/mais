@@ -31,7 +31,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 2020(1)2022
+- 2020-01(1)2022-03
 
 
 
