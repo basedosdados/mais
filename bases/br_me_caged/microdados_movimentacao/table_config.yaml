@@ -11,7 +11,7 @@ title: Movimentação (Microdados)
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Contém dados de movimentações declaradas dentro do prazo com competência de declaração. 
+description: Contém dados de movimentações declaradas dentro do prazo com competência de declaração.
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
@@ -34,8 +34,8 @@ update_frequency: month
 observation_level:
 
 last_updated: 
-    metadata: "2022-05-31"
-    data: "2022-06-01 07:32:37"
+    metadata: "2022-06-05"
+    data: "2022-06-05 09:46:37"
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -164,9 +164,24 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
+    - name: id_municipio_6
+      bigquery_type: string
+      description: ID Município - IBGE 6 Dígitos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_6
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: cnae_2_secao
       bigquery_type: string
-      description: Classificação Nacional de Atividades Econômicas (CNAE) 2.0 Seção
+      description: Classificação Nacional de Atividades Econômicas (CNAE 2.0 - Seção) 
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -480,4 +495,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: "2022-06-01T13:11:33.612619"
+metadata_modified: '2022-06-01T13:11:33.612619'
