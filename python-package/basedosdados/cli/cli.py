@@ -40,6 +40,9 @@ def cli(ctx, templates, bucket_name, metadata_path):
 @click.group(name="dataset")
 @click.pass_context
 def cli_dataset(ctx):
+    '''
+    Command to manage datasets.
+    '''
 
     pass
 
@@ -194,6 +197,9 @@ def delete_dataset(ctx, dataset_id, mode):
 
 @click.group(name="table")
 def cli_table():
+    '''
+    Command to manage tables.
+    '''
     pass
 
 
