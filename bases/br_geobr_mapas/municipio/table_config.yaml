@@ -23,7 +23,8 @@ spatial_coverage:
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: ['2020']
+temporal_coverage: 
+    - 2020
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -36,9 +37,9 @@ observation_level:
       column:
           - id_municipio
 
-last_updated:
-    metadata:
-    data:
+last_updated: 
+    metadata: '2022-06-06'
+    data: '2022-06-06 13:00:37'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -67,7 +68,7 @@ data_cleaned_by:
 data_cleaning_description:
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url:
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_geobr_mapas/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -117,8 +118,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade de Federação
@@ -132,8 +133,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: geometria
       bigquery_type: string
       description: Multipoligono
@@ -147,7 +148,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
 
 metadata_modified: '2022-02-14T01:23:48.759115'
