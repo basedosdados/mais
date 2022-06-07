@@ -5,7 +5,7 @@ dataset_id: mundo_bm_wdi
 table_id: country
 
 # Título da tabela.
-title: World Development Indicators (WDI)
+title: Country
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -104,7 +104,7 @@ columns:
       bigquery_type: string
       description: Defines the region of the world the country belongs
       temporal_coverage:
-          - (1) 
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -113,8 +113,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true 
-      is_partition: false 
+      is_in_staging: true
+      is_partition: false
     - name: country_id
       bigquery_type: string
       description: Code that represents the country
@@ -124,7 +124,7 @@ columns:
       directory_column:
           dataset_id: br_bd_diretorios_mundo
           table_id: pais
-          column_name: id_pais
+          column_name: sigla_pais_iso3
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -154,7 +154,7 @@ columns:
       directory_column:
           dataset_id: br_bd_diretorios_mundo
           table_id: pais
-          column_name: sigla_iso2
+          column_name: sigla_pais_iso2
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -216,13 +216,13 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: national_accounts_reference_year
-      bigquery_type: float
+      bigquery_type: int64
       description: National accounts reference year
       temporal_coverage:
           - (1)
@@ -231,7 +231,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -313,7 +313,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: ppp_survey_year
-      bigquery_type: string
+      bigquery_type: int64
       description: Purchasing power parity survey year
       temporal_coverage:
           - (1)
@@ -412,7 +412,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -427,22 +427,23 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: most_recent_income_and_expenditure_data
-      bigquery_type:
+      bigquery_type: string
       description: Source of most recent Income and expenditure data
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -471,13 +472,13 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: latest_industrial_data
-      bigquery_type: float
+      bigquery_type: int64
       description: Year of the latest industrial data
       temporal_coverage:
           - (1)
@@ -492,7 +493,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: latest_trade_data
-      bigquery_type: float
+      bigquery_type: int64
       description: Year of the latest trade data
       temporal_coverage:
           - (1)
