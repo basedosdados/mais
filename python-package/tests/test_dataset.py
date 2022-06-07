@@ -1,5 +1,5 @@
 """
-Tests for the dataset class
+Tests for the Dataset class
 """
 # pylint: disable=protected-access
 from pathlib import Path
