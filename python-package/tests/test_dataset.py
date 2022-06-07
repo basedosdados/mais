@@ -1,8 +1,13 @@
-import pytest
+"""
+Tests for the dataset class
+"""
+# pylint: disable=protected-access
 from pathlib import Path
-from google.cloud import bigquery
 import shutil
-from google.api_core.exceptions import Conflict
+
+import pytest
+from google.cloud import bigquery
+import google.api_core.exceptions as google_exceptions
 
 from basedosdados import Dataset
 
@@ -11,25 +16,56 @@ DATASET_ID = "pytest"
 DATASET_FILES = ["code", "dataset_config.yaml", "README.md"]
 
 
-@pytest.fixture
-def metadatadir(tmpdir_factory):
-    (Path(__file__).parent / "tmp_bases").mkdir(exist_ok=True)
-    return Path(__file__).parent / "tmp_bases"
+@pytest.fixture(name="folder")
+def fixture_folder():
+    """
+    Fixture for the folder
+    """
+    return Path(__file__).parent / "tmp_bases" / DATASET_ID
 
 
-@pytest.fixture
-def dataset(metadatadir):
+@pytest.fixture(name="metadatadir")
+def fixture_metadatadir(folder):
+    """
+    Fixture for the metadata directory
+    """
+    (Path(__file__).parent / folder).mkdir(exist_ok=True)
+    return Path(__file__).parent / folder
+
+
+@pytest.fixture(name="dataset")
+def fixture_dataset(metadatadir):
+    """
+    Fixture for the dataset class
+    """
     return Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir)
 
 
-def check_files(folder):
-
+def _check_files(folder):
+    """
+    Check if the files are in the folder
+    """
     for file in DATASET_FILES:
         assert (folder / file).exists()
 
 
-def test_init(dataset, metadatadir):
+def _dataset_exists(dataset):
+    """
+    Check if the dataset exists
+    """
+    try:
+        bq_datasets = [
+            m["client"].get_dataset(m["id"]) for m in dataset._loop_modes("all")
+        ]
+        return isinstance(bq_datasets[0], bigquery.Dataset)
+    except google_exceptions.NotFound:
+        return False
 
+
+def test_init(dataset, metadatadir):
+    """
+    Test the init function
+    """
     # remove folder
     shutil.rmtree(Path(metadatadir))
 
@@ -38,39 +74,34 @@ def test_init(dataset, metadatadir):
     dataset.init()
     assert folder.exists()
 
-    check_files(folder)
+    _check_files(folder)
 
     dataset.init(replace=True)
     assert folder.exists()
 
-    check_files(folder)
-
-
-def dataset_exists(dataset):
-
-    try:
-        [m["client"].get_dataset(m["id"]) for m in dataset._loop_modes("all")]
-        return True
-    except:
-        return False
+    _check_files(folder)
 
 
 def test_delete(dataset):
-
+    """
+    Test the delete function
+    """
     dataset.delete(mode="all")
 
-    assert not dataset_exists(dataset)
+    assert not _dataset_exists(dataset)
 
 
 def test_create(dataset):
-
+    """
+    Test the create function
+    """
     dataset.delete(mode="all")
 
     dataset.create()
 
-    assert dataset_exists(dataset)
+    assert _dataset_exists(dataset)
 
-    with pytest.raises(Conflict):
+    with pytest.raises(google_exceptions.Conflict):
         dataset.create(if_exists="raise")
 
     dataset.create(if_exists="replace")
@@ -79,27 +110,33 @@ def test_create(dataset):
 
     dataset.create(if_exists="pass")
 
-    assert dataset_exists(dataset)
+    assert _dataset_exists(dataset)
 
 
 def test_update(dataset):
-
+    """
+    Test the update function
+    """
     dataset.create(if_exists="pass")
 
-    assert dataset_exists(dataset)
+    assert _dataset_exists(dataset)
 
     dataset.update()
 
 
 def test_publicize(dataset):
-
+    """
+    Test the publicize function
+    """
     dataset.create(if_exists="pass")
 
     dataset.publicize()
 
 
 def test_loop_modes(dataset):
-
+    """
+    Test the loop_modes function
+    """
     assert len(list(dataset._loop_modes(mode="all"))) == 2
     assert len(list(dataset._loop_modes(mode="staging"))) == 1
     assert "staging" in next(dataset._loop_modes(mode="staging"))["id"]
