@@ -21,7 +21,7 @@ def fixture_folder():
     """
     Fixture for the folder
     """
-    return Path(__file__).parent / "tmp_bases" / DATASET_ID
+    return "tmp_bases"
 
 
 @pytest.fixture(name="metadatadir")
@@ -29,8 +29,8 @@ def fixture_metadatadir(folder):
     """
     Fixture for the metadata directory
     """
-    (Path(__file__).parent / folder).mkdir(exist_ok=True)
-    return Path(__file__).parent / folder
+    (Path(__file__).parent / folder / DATASET_ID).mkdir(exist_ok=True)
+    return Path(__file__).parent / folder / DATASET_ID
 
 
 @pytest.fixture(name="dataset")

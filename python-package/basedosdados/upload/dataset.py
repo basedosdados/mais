@@ -1,7 +1,11 @@
+"""
+Module for manage dataset to the server.
+"""
+# pylint: disable=line-too-long, fixme, invalid-name
 from pathlib import Path
-from google.cloud import bigquery
 from loguru import logger
 
+from google.cloud import bigquery
 from google.api_core.exceptions import Conflict
 
 from basedosdados.upload.base import Base
@@ -22,12 +26,18 @@ class Dataset(Base):
 
     @property
     def dataset_config(self):
+        """
+        Dataset config file.
+        """
 
         return self._load_yaml(
             self.metadata_path / self.dataset_id / "dataset_config.yaml"
         )
 
     def _loop_modes(self, mode="all"):
+        """
+        Loop modes.
+        """
 
         mode = ["prod", "staging"] if mode == "all" else [mode]
         dataset_tag = lambda m: f"_{m}" if m == "staging" else ""
@@ -40,7 +50,11 @@ class Dataset(Base):
             for m in mode
         )
 
-    def _setup_dataset_object(self, dataset_id, location=None):
+    @staticmethod
+    def _setup_dataset_object(dataset_id, location=None):
+        """
+        Setup dataset object.
+        """
 
         dataset = bigquery.Dataset(dataset_id)
 
@@ -55,6 +69,9 @@ class Dataset(Base):
         return dataset
 
     def _write_readme_file(self):
+        """
+        Write README.md file.
+        """
 
         readme_content = (
             f"Como capturar os dados de {self.dataset_id}?\n\nPara cap"
@@ -69,7 +86,7 @@ class Dataset(Base):
 
         readme_path = Path(self.metadata_path / self.dataset_id / "README.md")
 
-        with open(readme_path, "w") as readmefile:
+        with open(readme_path, "w", encoding="utf-8") as readmefile:
             readmefile.write(readme_content)
 
     def init(self, replace=False):
@@ -90,11 +107,11 @@ class Dataset(Base):
         # Create dataset folder
         try:
             self.dataset_folder.mkdir(exist_ok=replace, parents=True)
-        except FileExistsError:
+        except FileExistsError as e:
             raise FileExistsError(
                 f"Dataset {str(self.dataset_folder.stem)} folder does not exists. "
                 "Set replace=True to replace current files."
-            )
+            ) from e
 
         # create dataset_config.yaml with metadata
         self.metadata.create(if_exists="replace")
@@ -199,7 +216,7 @@ class Dataset(Base):
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
             try:
-                job = m["client"].create_dataset(dataset_obj)  # Make an API request.
+                m["client"].create_dataset(dataset_obj)  # Make an API request.
                 logger.success(
                     " {object} {object_id}_{mode} was {action}!",
                     object_id=self.dataset_id,
@@ -208,12 +225,10 @@ class Dataset(Base):
                     action="created",
                 )
 
-            except Conflict:
-
+            except Conflict as e:
                 if if_exists == "pass":
                     return
-                else:
-                    raise Conflict(f"Dataset {self.dataset_id} already exists")
+                raise Conflict(f"Dataset {self.dataset_id} already exists") from e
 
         # Make prod dataset public
         self.publicize(dataset_is_public=dataset_is_public)
@@ -251,7 +266,7 @@ class Dataset(Base):
             # Send the dataset to the API to update, with an explicit timeout.
             # Raises google.api_core.exceptions.Conflict if the Dataset already
             # exists within the project.
-            dataset = m["client"].update_dataset(
+            m["client"].update_dataset(
                 self._setup_dataset_object(
                     m["id"],
                     location=location,
