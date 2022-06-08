@@ -7,29 +7,31 @@ jobs:
   docker_lint:
     name: Lint Python
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./python-package
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: "3.9.x"
-      - name: Set up Poetry and upgrade pip
+      - name: Setup env
         run: |
-          pip install -U pip poetry
-      - name: Install flows
-        run: |
-          pip install --prefer-binary .
-      - name: Lint flows
+          cd ..
+          make create-env
+          . .mais/bin/activate
+      - name: Lint python-package
         uses: gabriel-milan/action-pylint@v1
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          path: "python-package"
+          path: "python-package/"
           fail: true
-          pr-message: true
-      - name: Lint tests
+          pr-message: false
+      - name: Lint bases
         uses: gabriel-milan/action-pylint@v1
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           path: "bases/"
           fail: true
-          pr-message: true
+          pr-message: false
