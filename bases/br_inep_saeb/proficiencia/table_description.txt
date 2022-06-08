@@ -15,7 +15,7 @@ Email: lucas.moreira@basedosdados.org
 Tratado por
 -----------
 Nome: Lucas Moreira
-Código: lucasnascm
+Código: 
 Email: lucas.moreira@basedosdados.org
 
 
@@ -23,43 +23,21 @@ Email: lucas.moreira@basedosdados.org
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
--  sigla_uf
-
-
-Colunas identificando linhas unicamente
--------------------
-- ano
 - sigla_uf
-- id_aluno
-- disciplina
 
 
 
 
 Cobertura Temporal
 ------------------
-- 1995
-- 1997
-- 1999
-- 2001
-- 2003
-- 2005
-- 2007
-- 2009
-- 2011
-- 2013
-- 2015
-- 2017
-- 2019
+- 1995(2)2019
 
 
 
 
 Cobertura Espacial
 ------------------
-- b
-- r
-- a
+- sa.br
 
 
 

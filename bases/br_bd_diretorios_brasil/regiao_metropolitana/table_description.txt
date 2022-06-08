@@ -1,47 +1,48 @@
-A tabela contém os códigos identificadores e nomes de Região Metropolitana (RM), Aglomeração Urbana (AGLO) e Região Integrada de Desenvolvimento (RIDE) do Brasil reunidas pelo IBGE
-
+ A tabela contém os códigos identificadores e nomes de Região Metropolitana (RM), Aglomeração Urbana (AGLO) e Região Integrada de Desenvolvimento (RIDE) do Brasil reunidas pelo IBGE
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-bd-diretorios-brasil
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Gustavo Aires Tiago
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
-Website: https://github.com/gustavoairestiago
-Email: gustavo.tiago@basedosdados.orgTratado por
+Nome: Crislane Alves
+Código: 
+Email: crislanealves@basedodados.org
+Tratado por
 -----------
-Nome: Gustavo Aires Tiago
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_brasil/code
-Website: https://github.com/gustavoairestiago
-Email: gustavo.tiago@basedosdados.org
+Nome: Crislane Alves
+Código: 
+Website: 
+Email: crislanealves@basedodados.org
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- regiao metropolitana
 
-Colunas identificando linhas unicamente
--------------------
-- id_regiao_metropolitana
+
+
+
 
 Cobertura Temporal
 ------------------
-- unico
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- {'continent': 'south_america', 'country': 'br'}
+
+
+
 
 Tratamento
 ----------
--Nomeação das colunas
+Limpeza para consistência 
+
+
 
 Frequencia de Atualização
 -------------------------
-unico
-
-
+unique

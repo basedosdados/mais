@@ -6,11 +6,22 @@
 \alias{bd_write_csv}
 \title{Writes the result of operations with \code{\link[=bdplyr]{bdplyr()}} to disk}
 \usage{
-bd_write(.lazy_tbl, .write_fn, path, overwrite = FALSE, ...)
+bd_write(
+  .lazy_tbl,
+  .write_fn = `?`(typed::Function()),
+  path = `?`(typed::Character(length = 1)),
+  overwrite = `?`(FALSE, typed::Logical(1)),
+  ...
+)
 
 bd_write_rds(.lazy_tbl, path, overwrite = FALSE, compress = "none", ...)
 
-bd_write_csv(.lazy_tbl, path, overwrite = FALSE, ...)
+bd_write_csv(
+  .lazy_tbl,
+  path = `?`(typed::Character(1)),
+  overwrite = `?`(FALSE, typed::Logical(1)),
+  ...
+)
 }
 \arguments{
 \item{.lazy_tbl}{A lazy tibble, tipically the output of \code{\link[=bdplyr]{bdplyr()}}.}

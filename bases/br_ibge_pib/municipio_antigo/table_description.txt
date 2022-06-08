@@ -1,0 +1,47 @@
+Produto Interno Bruto (PIB) municipal a preços base de 2002. Série encerrada do IBGE. Tabela 21 do SIDRA.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: 
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+Tratado por
+-----------
+Nome: Ricardo Dahis
+Código: 
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 1999(1)2012
+
+
+
+
+Cobertura Espacial
+------------------
+- {'continent': 'south_america', 'country': 'br'}
+
+
+
+
+
+
+
+Frequencia de Atualização
+-------------------------
+unique

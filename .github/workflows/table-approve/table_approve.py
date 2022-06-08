@@ -247,6 +247,7 @@ def push_table_to_bq(
         if_table_exists="replace",
         if_storage_data_exists="pass",
         if_table_config_exists="pass",
+        dataset_is_public=True,
     )
 
     # publish the table in prod bigquery

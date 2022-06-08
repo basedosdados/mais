@@ -1,0 +1,41 @@
+
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-inep-saeb
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Sistema de Avaliação da Educação Básica (Saeb)
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - br-inep
+
+# Descrição do conjunto
+notes:
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+    - educacao
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - aprendizagem
+    - avaliacao
+    - ensino fundamental
+    - ensino medio
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2022-03-21T18:17:59.798990'
