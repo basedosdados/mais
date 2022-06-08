@@ -16,8 +16,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.9.x"
-      - name: Set up Poetry and upgrade pip
-        run: pip install -U pip poetry
+      - name: Setup env
+        run: |
+          cd ..
+          make create-env
+          . .mais/bin/activate
       - name: Lint python-package
         uses: gabriel-milan/action-pylint@v1
         with:
