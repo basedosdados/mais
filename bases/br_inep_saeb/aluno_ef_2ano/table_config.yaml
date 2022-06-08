@@ -5,7 +5,7 @@ dataset_id: br_inep_saeb
 table_id: aluno_ef_2ano
 
 # Título da tabela.
-title: Sistema de Avaliação da Educação Básica (Saeb)
+title: Aluno do 2º ano do Ensino Fundamental
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -24,7 +24,7 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019(2)'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - '2019'
+    - 2019
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
