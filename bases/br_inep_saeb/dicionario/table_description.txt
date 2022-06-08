@@ -25,17 +25,7 @@ Email: lucas.moreira@basedosdados.org
 
 Cobertura Temporal
 ------------------
-- 1
-- 9
-- 9
-- 5
-- (
-- 2
-- )
-- 2
-- 0
-- 1
-- 9
+- 1995(2)2019
 
 
 
@@ -52,4 +42,6 @@ Compatibilização dos dicionários
 
 
 
-
+Frequencia de Atualização
+-------------------------
+unique
