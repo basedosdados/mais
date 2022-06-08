@@ -10,26 +10,17 @@ title: Sistema de Avaliação da Educação Básica (Saeb)
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 # Exemplos: br-ibge, br-tse, br-rj-gov
-organization: br-inep
+organization:
+    - br-inep
 
 # Descrição do conjunto
-notes: 
-  O Sistema de Avaliação da Educação Básica (Saeb) é composto por um conjunto de avaliações externas em larga escala que permitem ao Inep realizar um diagnóstico da educação básica brasileira e de alguns fatores que possam interferir no desempenho do estudante, fornecendo um indicativo sobre a qualidade do ensino ofertado. 
-
-  Por meio de provas e questionários, aplicados periodicamente pelo Inep, o Saeb permite que os diversos níveis governamentais avaliem a qualidade da educação praticada no país, de modo a oferecer subsídios para a elaboração, o monitoramento e o aprimoramento de políticas com base em evidências. 
-
-  As médias de desempenho do Saeb, juntamente com os dados sobre aprovação, obtidos no Censo Escolar, compõem o Índice de Desenvolvimento da Educação Básica (Ideb). 
-  Desde 1990, quando foi criado, o Saeb teve algumas reestruturações. Em 2005, passou a ser composto por duas avaliações (1) a Avaliação Nacional da Educação Básica (Aneb), que manteve as características, os objetivos e os procedimentos da avaliação efetuada até aquele momento, e (2) a Avaliação Nacional do Rendimento Escolar (Anresc), conhecida como Prova Brasil, criada com o objetivo de avaliar a qualidade do ensino ministrado nas escolas das redes públicas.
-
-  Em 2013, a Avaliação Nacional da Alfabetização (ANA) foi incorporada ao Saeb para melhor aferir os níveis de alfabetização e letramento em Língua Portuguesa (leitura e escrita) e Matemática. Em 2017, não só as escolas públicas do ensino fundamental, mas também as de ensino médio, públicas e privadas, passaram a ter resultados no Saeb e, consequentemente, no Índice de Desenvolvimento da Educação Básica (Ideb).
-
-  Em 2019, as siglas ANA, Aneb e Anresc deixarão de existir e todas as avaliações passarão a ser identificadas pelo nome Saeb, acompanhado das etapas, áreas de conhecimento e tipos de instrumentos envolvidos. As aplicações se concentrarão nos anos ímpares e a divulgação dos resultados, nos anos pares. Um dos destaques da reestruturação é a afirmação de dimensões da qualidade educacional que extrapolam a aferição de proficiências em testes cognitivos. As condições de acesso e oferta das instituições de Educação Infantil passarão a ser avaliadas. Mesmo com as alterações, o sistema não perderá a comparabilidade entre edições.
+notes:
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
-groups: 
-  - educacao
+groups:
+    - educacao
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -39,12 +30,12 @@ groups:
 #    - sem acentos
 #    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
-tags: 
-  - aprendizagem
-  - avaliacao
-  - ensino fundamental
-  - ensino medio
+tags:
+    - aprendizagem
+    - avaliacao
+    - ensino fundamental
+    - ensino medio
 
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.
-metadata_modified:
+metadata_modified: '2022-03-21T18:17:59.798990'

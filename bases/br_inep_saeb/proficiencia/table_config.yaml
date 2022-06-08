@@ -4,6 +4,9 @@ dataset_id: br_inep_saeb
 
 table_id: proficiencia
 
+# Título da tabela.
+title: Proficiência
+
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
@@ -15,13 +18,13 @@ description: A tabela resume a proficiencia na avaliação SAEB proporcionando u
 #   - continent: south_america
 #     country: br
 spatial_coverage:
-    country: 
-        - br
+    - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 1995(2)2019
+temporal_coverage: 
+    - 1995(2)2019
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -44,8 +47,8 @@ observation_level:
          - id_aluno
 
 last_updated:
-    metadata:
-    data:
+    metadata: '2022-06-02'
+    data: '2022-06-02 09:00:00'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.

@@ -1,70 +1,49 @@
-dataset_id: br_ana_atlas_esgotos # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-ana-atlas-esgotos
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ana_atlas_esgotos
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-ana-atlas-esgotos
 
-# Descreva a base.
-# Ela é sobre o que?
-# Quais as principais fontes de dados?
-# Há links para FAQs e explicações?
-description: | # REQUIRED
-    O ATLAS Esgotos é o resultado de um trabalho conjunto, desenvolvido sob a coordenação da Agência Nacional de Águas (ANA) em parceria com a Secretaria Nacional de Saneamento Ambiental do Ministério das Cidades (SNSA/MCidades) e com a colaboração de instituições federais, estaduais e municipais de todo o Brasil. Trazendo o olhar da gestão dos recursos hídricos, reúne e apresenta informações, diagnósticos e propostas de soluções para todas as 5.570 sedes municipais do País, amparados na avaliação da situação da coleta e tratamento dos esgotos e do impacto do lançamento desses efluentes nos corpos hídricos, com uma visão sistêmica por bacia hidrográfica. As propostas de soluções foram elaboradas para o horizonte de 2035, com foco na proteção dos recursos hídricos, no seu uso sustentável para depuração de efluentes urbanos e na racionalização dos investimentos.
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Atlas Esgotos
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: agencia-nacional-de-aguas-ana
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - br-ana
 
-# Qual departamento/grupo/pessoa mantém os dados originais?
-author:
-    name: Sistema Nacional de Informações sobre Recursos Hídricos (SNIRH)
-    email: <email>
+# Descrição do conjunto
+notes: O Atlas Esgotos é o resultado de um trabalho conjunto, desenvolvido sob a coordenação
+    da Agência Nacional de Águas (ANA) em parceria com a Secretaria Nacional de Saneamento
+    Ambiental do Ministério das Cidades (SNSA/MCidades) e com a colaboração de instituições
+    federais, estaduais e municipais de todo o Brasil. Trazendo o olhar da gestão
+    dos recursos hídricos, reúne e apresenta informações, diagnósticos e propostas
+    de soluções para todas as 5.570 sedes municipais do País, amparados na avaliação
+    da situação da coleta e tratamento dos esgotos e do impacto do lançamento desses
+    efluentes nos corpos hídricos, com uma visão sistêmica por bacia hidrográfica.
+    As propostas de soluções foram elaboradas para o horizonte de 2035, com foco na
+    proteção dos recursos hídricos, no seu uso sustentável para depuração de efluentes
+    urbanos e na racionalização dos investimentos.
 
-# Onde encontrar os dados originais e mais informações?
-website:
-    - http://atlasesgotos.ana.gov.br/
-
-# Quais grupos caracterizam a base?
+# Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
 groups:
     - infra-transp
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
 # Caso crie etiquetas novas, as regras são:
-#   - letras minúsculas
-#   - sem acentos
-#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - saneamento
     - esgoto
+    - saneamento
 
-# Em quais línguas a base (ou a fonte original) está disponível?
-# Regras: minúsculo, sem acentos.
-# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
-languages:
-    - portugues
-
-# Os dados originais estão disponíveis de graça?
-free: sim
-
-# Are microdata available for download?
-microdata: sim
-
-# Existe uma API na fonte original?
-API: nao
-
-# É necessário registrar um usuário para baixar os dados originais?
-registration: nao
-
-# Como os dados originais estão disponibilizados?
-availability: online
-
-# A fonte original requer IP brasileiro para acesso?
-brazilian_IP: nao
-
-# Essa base está sob qual licença?
-# A licença MIT se aplica a bases públicas.
-# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
-license: 
-    name: MIT # REQUIRED
-    url: <url>
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: "2022-02-14T01:23:35.315636"
