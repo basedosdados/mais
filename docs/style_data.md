@@ -125,6 +125,8 @@ A regra é manter variáveis com suas unidades de medida originais, com a exceç
 
 Catalogamos unidades de medida em formato padrão na tabela de arquitetura. Exemplos: `m`, `km/h`, `BRL`.
 
+Para colunas financeiras deflacionadas, listamos a moeda com o ano base. Exemplo: uma coluna medida em reais de 2010 tem unidade `BRL_2010`.
+
 Variáveis devem ter sempre unidades de medida com base 1. Ou seja, ter `BRL` ao invés de `1000 BRL`, ou `pessoa` ao invés de `1000 pessoas`. Essa informação, como outros metadados de colunas, são registradas na tabela de arquitetura da tabela.
 
 ## Quais variáveis manter, quais adicionar e quais remover
