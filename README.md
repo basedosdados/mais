@@ -121,7 +121,7 @@ df = bd.read_sql(query, billing_project_id="<YOUR-PROJECT>")
 ### Veja todos os datasets disponíveis
 
 ```python
-import basedosdados as bd
+import basedosdados as bd 
 
 bd.list_datasets()
 ```
