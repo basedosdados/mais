@@ -1,4 +1,4 @@
-Microdados do SAEB com respostas dos alunos para as avaliações e questionário socioeconômico matriculados no 9º ano do Ensino Fundamental
+Microdados do SAEB com respostas dos alunos para as avaliações e questionário socioeconômico matriculados no 2º ano do Ensino Fundamental
 
 Para saber mais acesse:
 Website: 
@@ -30,7 +30,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 1995(2)2019
+- 2019
 
 
 
@@ -44,7 +44,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Compatibilização entre bases. Altera o formato de wide para long baseado em disciplina. Altera formato de variáveis. Inclui variável de desempenho do aluno conforme escala de aprendizagem adequada. Inclui variável idade. Particiona dados por ano e uf.
+Padronização sob as diretrizes da BD
 
 
 
