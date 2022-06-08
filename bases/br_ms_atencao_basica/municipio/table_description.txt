@@ -1,4 +1,4 @@
-None
+Cobertura populacional estimada de equipes de saúde da família a nível de município
 
 Para saber mais acesse:
 Website: 
@@ -9,12 +9,15 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: None
+Nome: Laura Lopes Amaral
 Código: 
+Email: laura.amaral@basedosdados.org
 Tratado por
 -----------
-Nome: None
+Nome: Laura Lopes Amaral
 Código: 
+Website: 
+Email: laura.amaral@basedosdados.org
 
 
 
@@ -23,17 +26,24 @@ Código:
 
 Cobertura Temporal
 ------------------
+- 2007-07(1)2020-12
 
 
 
 
 Cobertura Espacial
 ------------------
+- {'continent': 'south_america', 'country': 'br'}
 
 
 
 
+Tratamento
+----------
+1. Criação da coluna 'id_municipio' padrão 7 dígitos IBGE 2. Separação das colunas de ano-mes 3. Ajuste nos nomes das colunas
 
 
 
-
+Frequencia de Atualização
+-------------------------
+month

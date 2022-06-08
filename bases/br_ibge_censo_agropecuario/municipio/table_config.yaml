@@ -1,0 +1,1865 @@
+
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_ibge_censo_agropecuario
+
+table_id: municipio
+
+# Título da tabela.
+title: 'Município'
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Contém variáveis do Censo Agropecuário do Brasil nos anos de 1985, 1996,
+    2006 e 2017.
+
+# A máxima unidade espacial que a tabela cobre.
+# Exemplo:
+#   - continent: south_america
+#     country: br
+spatial_coverage:
+    - continent: south_america
+      country: br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 1985(10)2017
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: ten_years
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - country: br
+      entity: municipality
+      column:
+          - id_municipio
+    - entity: year
+      columns:
+          - ano
+
+last_updated:
+    metadata: '2022-05-16'
+    data: '2022-05-16 17:00:37'
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Gustavo Alcantara
+    email: gustavo.alcantara@basedosdados.org.br
+    github_user: gustavoalcantara
+    ckan_user: gustavoalcantara
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Arthur Bragança
+    email: arthurbraganca@gmail.com
+    github_user: arthurbraganca7
+    ckan_user: ''
+    website: https://arthurbraganca.com/
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Padronização das variáveis nas diretrizes da Base dos Dados.
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_censo_agropecuario/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da UF
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla_uf
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio
+      bigquery_type: string
+      description: ID Município - IBGE 7 Dígitos
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_total
+      bigquery_type: float64
+      description: Área Total
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_proprietario
+      bigquery_type: float64
+      description: Área Total dos Estabelecimentos na Condição de Proprietário
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_arrendatario
+      bigquery_type: float64
+      description: Área Total dos Estabelecimentos na Condição de Arrendatário
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_parceiro
+      bigquery_type: float64
+      description: Área Total dos Estabelecimentos na Condição de Parceiro
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_ocupante
+      bigquery_type: float64
+      description: Área Total dos Estabelecimentos na Condição de Ocupante
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_lavoura_permanente
+      bigquery_type: float64
+      description: Área total de lavoura permanente
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_lavoura_temporaria
+      bigquery_type: float64
+      description: Área Total de Lavoura Temporária
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_pastagem_natural
+      bigquery_type: float64
+      description: Área Total de Pastagem Natural
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_pastagem_plantada
+      bigquery_type: float64
+      description: Área Total de Pastagem Plantada
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_pastagem
+      bigquery_type: float64
+      description: Área Total de Pastagem
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_mata_natural
+      bigquery_type: float64
+      description: Área Total de Mata Natural
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_mata_plantada
+      bigquery_type: float64
+      description: Área Total de Mata Plantada
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_sistema_agroflorestal
+      bigquery_type: float64
+      description: Área Total de Sistemas Agroflorestais
+      temporal_coverage:
+          - '2017'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_mata
+      bigquery_type: float64
+      description: Área Total de Mata
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_nao_utilizada
+      bigquery_type: float64
+      description: Área Total não Utilizada
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_estabelecimentos
+      bigquery_type: int64
+      description: Número de Estabelecimentos
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: producao_cafe
+      bigquery_type: float64
+      description: Produção de Café em Toneladas
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ton
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_cafe
+      bigquery_type: float64
+      description: Área destinada ao plantio de Café
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_estabelecimentos_cafe
+      bigquery_type: int64
+      description: Número de Estabelecimentos destinados à produção de Café
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_producao_cafe
+      bigquery_type: float64
+      description: Valor Total da produção de Café
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_bovinos_total
+      bigquery_type: int64
+      description: Efetivos Total de Animais Bovinos em Estabelecimentos Agropecuários
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_bezerros
+      bigquery_type: int64
+      description: Efetivos Total de Animais Bovinos Bezerros em Estabelecimentos
+          Agropecuários
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_bovinos_garrote
+      bigquery_type: int64
+      description: Efetivos Total de Animais Bovinos Novilho Garrote em Estabelecimentos
+          Agropecuários
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_bovinos_vaca
+      bigquery_type: int64
+      description: Efetivos Total de Animais Bovinos Vaca em Estabelecimentos Agropecuários
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_bovinos_trabalho
+      bigquery_type: int64
+      description: Efetivo Total de Animais Bovinos de Trabalho
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_bovinos_touro
+      bigquery_type: int64
+      description: Efetivos Total de Animais Bovinos Touro
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_estabelecimentos_energia_eletrica
+      bigquery_type: int64
+      description: Número Total de Estabelecimentos que possuem energia Elétrica
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_total
+      bigquery_type: float64
+      description: Despesa Total
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_adubos
+      bigquery_type: float64
+      description: Despesa Total com Adubos
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_sementes
+      bigquery_type: float64
+      description: Despesa Total com Sementes
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_arrendamentos
+      bigquery_type: float64
+      description: Despesa Total com Arrendamento
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_salarios
+      bigquery_type: float64
+      description: Despesa Total com Salários
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_defensivos
+      bigquery_type: float64
+      description: Despesa Total com Defensivos
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_cotas
+      bigquery_type: float64
+      description: Despesa Total com Cotas
+      temporal_coverage:
+          - 1985, 1996, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: areas_irrigacao
+      bigquery_type: float64
+      description: Áreas destinadas à irrigação
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: producao_leite
+      bigquery_type: float64
+      description: Produção de Leite (em mil litros)
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: meter^3
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_total
+      bigquery_type: int64
+      description: Número de Estabelecimentos Agropecuários
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_proprietario
+      bigquery_type: int64
+      description: Número de Estabelecimentos Agropecuários na condição de Proprietário
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_arrendatario
+      bigquery_type: int64
+      description: Número de Estabelecimentos na Condição de Arrendatário
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_parceiros
+      bigquery_type: int64
+      description: Número de Estabelecimentos Agropecuários na condição de Parceiro
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_ocupantes
+      bigquery_type: int64
+      description: Número de Estabelecimentos Agropecuários na condição de Ocupante
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_outros
+      bigquery_type: int64
+      description: Número de Estabelecimentos Agropecuários na condição Outros
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_nenhuma
+      bigquery_type: int64
+      description: Número de Estabelecimentos Agropecuários na condição Nenhuma
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_cooperativas
+      bigquery_type: int64
+      description: Número de Estabelecimentos Agropecuarios na Orientação de Cooperativa
+      temporal_coverage:
+          - 1985,2006
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_cooperativas_credito
+      bigquery_type: int64
+      description: Número de Estabelecimentos Agropecuários na Orientação de Cooperativa
+          de Crédito
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_cooperativa_energia_eletrica
+      bigquery_type: int64
+      description: Número de Estabelecimentos Agropecuários na Orientação de Cooperativa
+          que possuem energia elétrica
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_cooperativa_energia_outras
+      bigquery_type: int64
+      description: Número de Estabelecimentos Agropecuários na Orientação de Cooperativa
+          Outras
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_tratores
+      bigquery_type: int64
+      description: Número absoluto de Tratores
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_maquina_colheita
+      bigquery_type: int64
+      description: Número absoluto de Máquina de Colheita
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_maquinas_plantio
+      bigquery_type: int64
+      description: Número absoluto de máquinas de plantio
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_tratores_estabelecimentos_menor_10
+      bigquery_type: int64
+      description: Número absoluto de tratores em estabelecimentos menores que 10
+          hectares
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_tratores_estabelecimentos_maior_10
+      bigquery_type: int64
+      description: Número absoluto de tratores em estabelecimentos maiores que 10
+          ha
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pessoal_ocupado_total
+      bigquery_type: int64
+      description: Pessoal ocupado em Estabelecimentos Agropecuários
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pessoal_ocupado_parentesco_produtor
+      bigquery_type: int64
+      description: Pessoal ocupado em Estabelecimentos Agropecuários com laço de parentesco
+          com o Produtor
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pessoal_14_mais_sem_parentesco
+      bigquery_type: int64
+      description: Pessoal ocupado em Estabelecimentos Agropecuários sem laço de parentesco
+          com o Produtor
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pessoal_14_mais_com_parentesco_produtor
+      bigquery_type: int64
+      description: Pessoal com 14 anos ou mais ocupado em Estabelecimentos Agropecuários
+          com laço de parentesco com o Produtor
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pessoal_14_mais_empregadas
+      bigquery_type: int64
+      description: Pessoal com 14 anos ou mais empregado em Estabelecimentos Agropecuários
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pessoal_14_mais_ocupado
+      bigquery_type: int64
+      description: Pessoal com 14 anos ou mais ocupado em Estabelecimentos Agropecuários
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_producao_total
+      bigquery_type: float64
+      description: Valor Total da Produção Total
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_producao_total_animal
+      bigquery_type: float64
+      description: Valor total da Produção animal
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_producao_animal_grande
+      bigquery_type: float64
+      description: Valor total da produção de animal grande
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_producao_animal_medio
+      bigquery_type: float64
+      description: Valor total da produção de animal médio
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_producao_aves
+      bigquery_type: float64
+      description: Valor Total da Produção de Aves
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_producao_vegetal
+      bigquery_type: float64
+      description: Valor Total da Produção Vegetal
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_producao_hortifruti
+      bigquery_type: float64
+      description: Valor Total da Produção de Hortifruti e Floricultura
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_producao_silvicultura
+      bigquery_type: float64
+      description: Valor Total da Produção na Silvicultura
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_producao_vegicultura
+      bigquery_type: float64
+      description: Valor Total da Produção na Extração Vegetal
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_producao_lavoura_temporaria
+      bigquery_type: float64
+      description: Valor Total da Produção na Lavoura Temporária
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_producao_lavoura_permanente
+      bigquery_type: float64
+      description: Valor Total da Produção na Lavoura Permanente
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: producao_total_arroz
+      bigquery_type: float64
+      description: Produção de Arroz em Toneladas
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ton
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: producao_total_feijao
+      bigquery_type: float64
+      description: Produção de Feijão em Toneladas
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: producao_total_milho
+      bigquery_type: float64
+      description: Produção de Milho em Toneladas
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: producao_total_mandioca
+      bigquery_type: float64
+      description: Produção de Mandioca em Toneladas
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: producao_total_soja
+      bigquery_type: float64
+      description: Produção de Soja em Toneladas
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: producao_total_algodao
+      bigquery_type: float64
+      description: Produção de Algodão em Toneladas
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: producao_total_cana
+      bigquery_type: float64
+      description: Produção de Cana de Açúcar em Toneladas
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: producao_total_trigo
+      bigquery_type: float64
+      description: Produção de Trigo em Toneladas
+      temporal_coverage:
+          - 1996, 2006, 2017
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_arroz
+      bigquery_type: float64
+      description: Área destinada a Plantio de Arroz
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_feijao
+      bigquery_type: float64
+      description: Área destinada a Plantio de Feijão
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_milho
+      bigquery_type: float64
+      description: Área destinada a Plantio de Milho
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_mandioca
+      bigquery_type: float64
+      description: Área  destinada a Plantio de Mandioca
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_soja
+      bigquery_type: float64
+      description: Área  destinada a Plantio de Soja
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_algodao
+      bigquery_type: float64
+      description: Área  destinada a Plantio de Algodão
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_cana
+      bigquery_type: float64
+      description: Área  destinada a Plantio de Cana
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_trigo
+      bigquery_type: float64
+      description: Área  destinada a Plantio de Trigo
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: ha
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_arroz
+      bigquery_type: int64
+      description: Número de Estabelecimentos destinados à produção de Arroz
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_feijao
+      bigquery_type: int64
+      description: Número de Estabelecimentos destinados à produção de Feijão
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_milho
+      bigquery_type: int64
+      description: Número de Estabelecimentos destinados à produção de Milho
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_mandioca
+      bigquery_type: int64
+      description: Número de Estabelecimentos destinados à produção de Mandioca
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_soja
+      bigquery_type: int64
+      description: Número de Estabelecimentos destinados à produção de Soja
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_algodao
+      bigquery_type: int64
+      description: Número de Estabelecimentos destinados à produção de Algodão
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_cana
+      bigquery_type: int64
+      description: Número de Estabelecimentos destinados à produção de Cana
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_estabelecimentos_trigo
+      bigquery_type: int64
+      description: Número de Estabelecimentos destinados à produção de Trigo
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_arroz
+      bigquery_type: float64
+      description: Valor da produção de arroz
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_feijao
+      bigquery_type: float64
+      description: Valor da produção de Feijão
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_milho
+      bigquery_type: float64
+      description: Valor da produção de Milho
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_mandioca
+      bigquery_type: float64
+      description: Valor da produção de Mandioca
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_soja
+      bigquery_type: float64
+      description: Valor da produção de Soja
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_algodao
+      bigquery_type: float64
+      description: Valor da produção de Algodão
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_cana
+      bigquery_type: float64
+      description: Valor da produção de Cana
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_trigo
+      bigquery_type: float64
+      description: Valor da produção de Trigo
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total
+      bigquery_type: float64
+      description: Valor da Produção Total
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_terras
+      bigquery_type: float64
+      description: Valor da Produção das Terras
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_cultura_permanente
+      bigquery_type: float64
+      description: Valor do Total de Produção em Culturas Permanentes
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_matas_plantadas
+      bigquery_type: float64
+      description: Valor do Total de Produção em Matas Plantadas
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_predios_benfeitorias
+      bigquery_type: float64
+      description: Valor de Prédio e Benfeitorias
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_animais
+      bigquery_type: float64
+      description: Valor Total dos Animais
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_animais_transporte
+      bigquery_type: float64
+      description: Valor Total dos Animais de Transporte
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_total_maquinas_transporte
+      bigquery_type: float64
+      description: Valor Total das Maquinas de Transporte
+      temporal_coverage:
+          - 1985, 2006
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_despesa_fertilizante
+      bigquery_type: float64
+      description: Porcentagem da despesa com fertilizantes
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_despesa_defensivos
+      bigquery_type: float64
+      description: Porcentagem da despesa com defensivos agrícolas
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_despesa_sementes
+      bigquery_type: float64
+      description: Porcentagem da despesa com sementes
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_despesa_salarios
+      bigquery_type: float64
+      description: Porcentagem da despesa com salários
+      temporal_coverage:
+          - (10)
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+metadata_modified: "2022-05-16T19:50:46.786528"
