@@ -7,7 +7,7 @@ table_id: despesas_gabinete_atual
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
-# como usar os dados. 
+# como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
 description: "Despesas com verba de gabinete dos deputados estaduais da da legislação\
     \ atual\n"
@@ -216,4 +216,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-02-14T01:23:48.222126'
+metadata_modified: '2022-03-08T13:42:40.267651'

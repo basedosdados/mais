@@ -9,7 +9,8 @@ table_id: pais
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Dados sobre países com identificadores segundo instituições internacionais, além de siglas e nomes.
+description: A tabela contém dados com identificadores dos países segundo instituições
+    internacionais, além de siglas e os nomes
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
@@ -20,7 +21,7 @@ spatial_coverage:
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage:
+temporal_coverage: []
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -28,47 +29,46 @@ update_frequency: unique
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-  - entity: country
-    columns:
-      - sigla_iso2
+    - entity: country
 
 last_updated:
-    metadata:
-    data:
-    release:
+    metadata: '2022-05-05'
+    data: '2022-05-05T10:05'
+    release: 
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: 'v0.2'
+version: v1.2
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
-    github_user: rdahis
-    ckan_user: rdahis
-    website: www.ricardodahis.com
+    name: Ingrid de Sales Rabelo
+    email: ingrid.rabelo@basedosdados.org
+    github_user: IngridSRabelo
+    ckan_user: ingrid_rabelo
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
-    github_user: rdahis
-    ckan_user: rdahis
-    website: www.ricardodahis.com
+    name: Ingrid de Sales Rabelo
+    email: ingrid.rabelo@basedosdados.org
+    github_user: IngridSRabelo
+    ckan_user: ingrid_rabelo
+    website: ''
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
+data_cleaning_description: Extração dos dados dos sites da FAO, ISO e our world in
+    data para preencher os códigos dos países de acordo com diferentes padronizações.
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url:
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_mundo/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
-    name:
-    organization_id:
+    name: ''
+    organization_id: ''
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -89,7 +89,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions:
+partitions: []
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -100,10 +100,10 @@ partitions:
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: id_pais_ocde
+    - name: id_pais_m49
       bigquery_type: string
-      description: ID País - OCDE
-      temporal_coverage:
+      description: ID País - M49/PNUD
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -112,12 +112,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: id_pais_fao
       bigquery_type: string
       description: ID País - FAO
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -126,12 +126,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: id_pais_gaul
       bigquery_type: string
       description: ID País - GAUL
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -140,12 +140,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
-    - name: sigla_iso3
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_pais_iso3
       bigquery_type: string
-      description: Sigla - ISO3
-      temporal_coverage:
+      description: Sigla do País - ISO3
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -154,12 +154,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
-    - name: sigla_iso2
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_pais_iso2
       bigquery_type: string
-      description: Sigla - ISO2
-      temporal_coverage:
+      description: Sigla do País - ISO2
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -168,12 +168,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
-    - name: sigla_pnud
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_pais_pnud
       bigquery_type: string
-      description: Sigla - PNUD
-      temporal_coverage:
+      description: Sigla do País - PNUD
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -182,12 +182,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
-    - name: nome_pt
+      is_in_staging: true
+      is_partition: false
+    - name: nome
       bigquery_type: string
-      description: Nome (português)
-      temporal_coverage:
+      description: Nome do país em português
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -196,12 +196,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
-    - name: nome_en
+      is_in_staging: true
+      is_partition: false
+    - name: nome_ingles
       bigquery_type: string
-      description: Nome (inglês)
-      temporal_coverage:
+      description: Nome do país em inglês
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -210,12 +210,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
-    - name: nome_oficial_en
+      is_in_staging: true
+      is_partition: false
+    - name: nome_oficial_ingles
       bigquery_type: string
-      description: Nome oficial (inglês)
-      temporal_coverage:
+      description: Nome oficial do país em inglês
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -224,12 +224,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: nacionalidade
       bigquery_type: string
       description: Nacionalidade
-      temporal_coverage:
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -238,21 +238,21 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: sigla_continente
       bigquery_type: string
-      description: Sigla do continente
-      temporal_coverage:
+      description: Sigla do continente do país
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_mundo
+          table_id: continente
+          column_name: sigla
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
 
-metadata_modified: '2022-02-17T19:34:56.509239'
+metadata_modified: '2022-02-18T10:20:23.711465'

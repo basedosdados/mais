@@ -1,4 +1,4 @@
-Dados sobre países com identificadores segundo instituições internacionais, além de siglas e nomes.
+A tabela contém dados com identificadores dos países segundo instituições internacionais, além de siglas e os nomes
 
 Para saber mais acesse:
 Website: 
@@ -9,18 +9,20 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Ricardo Dahis
+Nome: Ingrid de Sales Rabelo
 Código: 
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org
+Email: ingrid.rabelo@basedosdados.org
 Tratado por
 -----------
-Nome: Ricardo Dahis
+Nome: Ingrid de Sales Rabelo
 Código: 
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org
+Website: 
+Email: ingrid.rabelo@basedosdados.org
 
 
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
 
 
 
@@ -37,6 +39,9 @@ Cobertura Espacial
 
 
 
+Tratamento
+----------
+Extração dos dados dos sites da FAO, ISO e our world in data para preencher os códigos dos países de acordo com diferentes padronizações.
 
 
 

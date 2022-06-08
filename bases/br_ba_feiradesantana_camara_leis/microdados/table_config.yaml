@@ -1,84 +1,103 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: microdados # AUTO GENERATED
-dataset_id: br_ba_feiradesantana_camara_leis # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-ba-feiradesantana-camara-leis # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ba_feiradesantana-camara_leis # AUTO GENERATED
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_ba_feiradesantana_camara_leis
 
-version: v1.0
-
-last_updated: 2021-03-14 # AUTO GENERATED
+table_id: microdados
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    Todas as leis do município de Feira de Santana até 2019.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Todas as leis do município de Feira de Santana até 2019.
 
-# Quem está completando esse arquivo config?
+# A máxima unidade espacial que a tabela cobre.
+# Exemplo:
+#   - continent: south_america
+#     country: br
+spatial_coverage:
+    - continent: south_america
+      country: br
+      admin1: id_uf_29
+      admin: id_municipio_2910800
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - '2019'
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: unique
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: law
+      columns:
+          - titulo
+          - categoria
+          - resumo
+          - texto
+
+last_updated:
+    metadata: '2022-04-03'
+    data: '2022-04-03'
+    release: ''
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v2.0
+
+# Quem está preenchendo esses metadados?
 published_by:
-    name: Ana Paula Gomes  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ba_feiradesantana_camara_leis/code # REQUIRED
-    website: https://www.dadosabertosdefeira.com.br
-    email: dadosabertosdefeira@gmail.com
+    name: Crislane Alves
+    email: crislanealves@basedosdados.org
+    github_user: crislanealves
+    ckan_user: crislanealves
+    website: https://github.com/crislanealves
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: Ana Paula Gomes
-    code_url: https://github.com/dadosAbertosDeFeira/leis-municipais
-    website: https://www.dadosabertosdefeira.com.br
+data_cleaned_by:
+    name:  Ana Paula Gomes
     email: dadosabertosdefeira@gmail.com
+    github_user: https://github.com/dadosAbertosDeFeira/leis-municipais
+    ckan_user: ''
+    website: https://www.dadosabertosdefeira.com.br
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    Conversão de JSON para CSV.
+data_cleaning_description: Conversão de JSON para CSV.
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: único
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ba_feiradesantana_camara_leis/code
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - lei
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
 
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
+# Url dos dados originais no GCP Storage.
+raw_files_url:
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - brasil
-    - BA
-    - Feira de Santana
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
 
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
+partitions:
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -88,28 +107,66 @@ partitions: # REQUIRED
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: titulo
-        description: Nome da lei
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: categoria
-        description: Qual a categoria da lei (e.g. Lei Ordinária, Lei Complementar)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: resumo
-        description: Um resumo da lei (geralmente o que aparece no site antes da visualização completa).
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: texto
-        description: O texto completo da lei.
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+columns:
+    - name: titulo
+      bigquery_type: string
+      description: Nome da lei
+      temporal_coverage: 
+        - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: categoria
+      bigquery_type: string
+      description: Qual a categoria da lei (e.g. Lei Ordinária, Lei Complementar)
+      temporal_coverage:
+        - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: resumo
+      bigquery_type: string
+      description: Um resumo da lei (geralmente o que aparece no site antes da visualização completa).
+      temporal_coverage:
+        - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: texto
+      bigquery_type: string
+      description: O texto completo da lei.
+      temporal_coverage:
+        - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false  
+
+metadata_modified: '2022-04-03T12:34:14.700115'
