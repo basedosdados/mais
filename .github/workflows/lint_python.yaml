@@ -27,11 +27,11 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           path: "python-package/"
           fail: true
-          pr-message: true
+          pr-message: false
       - name: Lint bases
         uses: gabriel-milan/action-pylint@v1
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           path: "bases/"
           fail: true
-          pr-message: true
+          pr-message: false
