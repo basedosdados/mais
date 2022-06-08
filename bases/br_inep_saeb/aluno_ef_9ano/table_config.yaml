@@ -5,7 +5,7 @@ dataset_id: br_inep_saeb
 table_id: aluno_ef_9ano
 
 # Título da tabela.
-title: Aluno do 9º ano do Ensino Fundamental
+title: Aluno do 9º ano do Ensino Fundamental 
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
