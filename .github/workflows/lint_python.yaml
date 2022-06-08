@@ -3,7 +3,8 @@ name: Lint Python
 on:
   pull_request:
     branches:    
-      - 'fix-pylint'
+      - fix-pylint
+
 jobs:
   docker_lint:
     name: Lint Python
