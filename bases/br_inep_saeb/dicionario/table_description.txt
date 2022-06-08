@@ -1,4 +1,4 @@
-Dicionário da tabela de proficiência do SAEB para os anos de 1995 a 2019
+Dicionário para as tabelas do SAEB
 
 Para saber mais acesse:
 Website: 
@@ -15,24 +15,17 @@ Email: lucas.moreira@basedosdados.org
 Tratado por
 -----------
 Nome: Lucas Moreira
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
+Código: 
 Email: lucas.moreira@basedosdados.org
 
 
-
-
-Colunas identificando linhas unicamente
--------------------
-- id_tabela
-- coluna
-- chave
-- cobertura_temporal
 
 
 
 
 Cobertura Temporal
 ------------------
+- 1995(2)2019
 
 
 
@@ -45,8 +38,10 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Compatibizaliação de todos os dicionários da série temporal do SAEB
+Compatibilização dos dicionários
 
 
 
-
+Frequencia de Atualização
+-------------------------
+unique

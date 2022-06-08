@@ -126,6 +126,23 @@ import basedosdados as bd
 bd.list_datasets()
 ```
 
+### Defina paramêtros utilizando as configurações do pacote
+
+```py
+import basedosdados as bd
+
+# seta o billing_project_id global
+bd.config.billing_project_id =  '<billing-project-id>'
+
+query = """
+SELECT 
+    * 
+FROM `basedosdados.br_bd_diretorios_brasil.municipio`
+"""
+
+df = bd.read_sql(query=query)
+```
+
 Para saber mais, veja os [exemplos](https://github.com/basedosdados/analises/tree/main/artigos) ou a [documentação da API](https://basedosdados.github.io/mais/api_reference_python/)
 
 ## Usando em R
@@ -188,7 +205,17 @@ O argumento `.write_fn` espera uma função que receba como argumento um tibble 
 
 Caso encontre algum problema no pacote e queira ajudar, basta documentar o problema em um [exemplo mínimo reprodutível](https://pt.stackoverflow.com/questions/264168/quais-as-principais-fun%C3%A7%C3%B5es-para-se-criar-um-exemplo-m%C3%ADnimo-reproduz%C3%ADvel-em-r) e abrir uma issue. 
 
-### Atenção
+## Metadados e buscas
+
+Você pode fazer buscas por tabelas usando palavras-chave ou buscar descrições de conjuntos e tabelas:
+
+```r
+dataset_search("educação")
+get_dataset_description("br_sp_alesp")
+get_table_description("br_sp_alesp", "deputado")
+```
+
+## Atenção
 
 > Caso esteja acessando da primeira vez, vão aparecer alguns passos na tela para autenticar seu projeto com sua conta google e possivelmente na [Tidyverse API](https://www.tidyverse.org/google_privacy_policy/) - basta segui-los! As credenciais ficam armazenadas no computador então usuários com mais de uma máquina talvez precisem autenticar mais de uma vez.
 > É necessário criar um projeto para que você possa fazer as queries no nosso repositório. Ter um projeto é de graça e basta ter uma conta Google (seu gmail por exemplo). [Veja aqui como criar um projeto no Google Cloud](https://basedosdados.github.io/mais/access_data_local/#criando-um-projeto-no-google-cloud).

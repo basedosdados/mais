@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -16,7 +15,6 @@ TIPOS:
     - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-
 */
 
 CREATE VIEW basedosdados-dev.br_anatel_banda_larga_fixa.densidade_uf AS
@@ -26,4 +24,4 @@ SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(acessos AS INT64) acessos,
 SAFE_CAST(densidade AS FLOAT64) densidade
-from basedosdados-dev.br_anatel_banda_larga_fixa_staging.densidade_uf as t
+FROM basedosdados-dev.br_anatel_banda_larga_fixa_staging.densidade_uf AS t

@@ -5,7 +5,6 @@
 #' @param query a string containing a valid SQL query.
 #' @param table defaults to `NULL`. If a table name is provided then it'll be concatenated with "basedosdados." and the whole table will be returned.
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
-#' @param page_size `bigrquery` internal, how many rows per page should there be.
 #' @param path String with the output file's name. If running an R Project relative location can be provided. Passed to `readr::write_csv`'s `file` argument.
 #' @param .na how should missing values be written in the resulting file? Value passed to `na` argument of `readr::write_csv`. Defaults to a whitespace.
 #'
@@ -49,7 +48,6 @@ download <- function(
   table = NULL,
   path,
   billing_project_id = get_billing_id(),
-  page_size = 100000,
   .na = " ") {
 
   if(!stringr::str_detect(path, ".csv")) {
@@ -80,9 +78,7 @@ download <- function(
   bigrquery::bq_project_query(
     billing_project_id,
     query = query) %>%
-    bigrquery::bq_table_download(
-      page_size = page_size,
-      bigint = "integer64") %>%
+    bigrquery::bq_table_download(bigint = "integer64") %>%
     readr::write_csv(
       file = path,
       na = .na)
@@ -98,7 +94,6 @@ download <- function(
 #'
 #' @param query a string containing a valid SQL query.
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
-#' @param page_size `bigrquery` internal, how many rows per page should there be. Defaults to 10000, consider increasing if running into performance issues or big queries.
 #'
 #' @return A tibble containing the query's output.
 #'
@@ -141,8 +136,7 @@ download <- function(
 
 read_sql <- function(
   query,
-  billing_project_id = get_billing_id(),
-  page_size = 100000) {
+  billing_project_id = get_billing_id()) {
 
   if(billing_project_id == FALSE) {
 
@@ -159,9 +153,7 @@ read_sql <- function(
   bigrquery::bq_project_query(
     billing_project_id,
     query = query) %>%
-    bigrquery::bq_table_download(
-      page_size = page_size,
-      bigint = "integer64")
+    bigrquery::bq_table_download(bigint = "integer64")
 
 }
 
@@ -173,7 +165,6 @@ read_sql <- function(
 #'
 #' @param table defaults to `NULL`. If a table name is provided then it'll be concatenated with "basedosdados." and the whole table will be returned.
 #' @param billing_project_id a string containing your billing project id. If you've run `set_billing_id` then feel free to leave this empty.
-#' @param page_size `bigrquery` internal, how many rows per page should there be. Defaults to 10000, consider increasing if running into performance issues or big queries.
 #' @param project which project should be consulted. Defaults to "basedosdados", but can be used to query custom versions of the datalake.
 #'
 #'
@@ -195,7 +186,6 @@ read_sql <- function(
 # read_table <- function(
 #   table,
 #   billing_project_id = get_billing_id(),
-#   page_size = 100000,
 #   project = "basedosdados") {
 #
 #   if(billing_project_id == FALSE) {

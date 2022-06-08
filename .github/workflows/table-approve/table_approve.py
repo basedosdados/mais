@@ -247,6 +247,7 @@ def push_table_to_bq(
         if_table_exists="replace",
         if_storage_data_exists="pass",
         if_table_config_exists="pass",
+        dataset_is_public=True,
     )
 
     # publish the table in prod bigquery
@@ -256,7 +257,7 @@ def push_table_to_bq(
     tb.update("prod")
 
     # updates the dataset description
-    Dataset(dataset_id).update("prod")
+    Dataset(dataset_id).update(mode="prod")
 
     ### save table header in storage
     save_header_files(dataset_id, table_id)
@@ -315,16 +316,16 @@ def table_approve():
         try:
             # create table metadata object
             md = Metadata(dataset_id=dataset_id, table_id=table_id)
-            
-            # check if correspondent dataset metadata already exists in CKAN 
+
+            # check if correspondent dataset metadata already exists in CKAN
             if not md.dataset_metadata_obj.exists_in_ckan():
                 # validate dataset metadata
                 md.dataset_metadata_obj.validate()
                 tprint(f"SUCESS VALIDATE {dataset_id}")
-                
+
                 # publish dataset metadata to CKAN
                 md.dataset_metadata_obj.publish()
-                
+
                 # run multiple tries to get published dataset metadata from
                 # ckan till it is published: dataset metadata must be
                 # accessible for table metadata to be published too
@@ -334,8 +335,9 @@ def table_approve():
                 while not md.dataset_metadata_obj.exists_in_ckan():
                     time.sleep(15)
                     retry_count += 1
-                    if retry_count >= MAX_RETRIES: break
-                
+                    if retry_count >= MAX_RETRIES:
+                        break
+
                 if md.dataset_metadata_obj.exists_in_ckan():
                     tprint(f"SUCESS PUBLISH {dataset_id}")
                 else:

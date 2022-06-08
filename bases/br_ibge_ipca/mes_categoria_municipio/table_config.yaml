@@ -20,12 +20,12 @@ spatial_coverage:
     admin1:
         - id_uf_12
     admin2:
-        - id_municipio_5002704
         - id_municipio_2800308
-        - id_municipio_5300108
-        - id_municipio_1200401
         - id_municipio_5208707
+        - id_municipio_5300108
         - id_municipio_2111300
+        - id_municipio_5002704
+        - id_municipio_1200401
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
@@ -59,7 +59,7 @@ identifying_columns:
 
 last_updated:
     metadata:
-    data:
+    data: '2022-01-12T00:00:00+00:00'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -72,7 +72,7 @@ published_by:
     email: gustavo.tiago@basedosdados.org
     github_user: https://github.com/gustavoairestiago
     website:
-    ckan_user:
+    ckan_user: gustavoairestiago
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -81,8 +81,8 @@ data_cleaned_by:
     name: Gustavo Aires Tiago
     email: gustago.tiago@basedosdados.org
     github_user: https://github.com/gustavoairestiago
-    ckan_user:
-    website:
+    ckan_user: gustavoairestiago
+    website: ''
     code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
@@ -149,7 +149,7 @@ columns:
       measurement_unit: month
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: id_municipio
       bigquery_type: string
       description: ID do Município IBGE - 7 Dígitos
@@ -162,7 +162,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: id_categoria
       bigquery_type: string
       description: Código identificador grupo
@@ -175,7 +175,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: id_categoria_bd
       bigquery_type: string
       description: Código identificador grupo - Base dos dados - Baseado em id_categoria
@@ -189,7 +189,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: categoria
       bigquery_type: string
       description: Descrição da categoria
@@ -199,10 +199,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 
+      measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: peso_mensal
       bigquery_type: float64
       description: Peso percentual mensal do item
@@ -212,10 +212,10 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: percent
+      measurement_unit:
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: variacao_mensal
       bigquery_type: float64
       description: Variação percentual mensal
@@ -228,7 +228,7 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: variacao_anual
       bigquery_type: float64
       description: Variação percentual acumulada no ano
@@ -241,7 +241,7 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
     - name: variacao_doze_meses
       bigquery_type: float64
       description: Variação percentual acumulada em doze meses
@@ -254,6 +254,6 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       is_in_staging: true
-      is_partition: false
+      is_partition:
 
-metadata_modified: '2021-10-25T21:52:05.451035'
+metadata_modified: '2022-01-18T16:15:18.741658'

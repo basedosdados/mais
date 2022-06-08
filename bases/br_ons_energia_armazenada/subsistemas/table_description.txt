@@ -1,33 +1,34 @@
 Dados das grandezas de energia armazenada em periodicidade diária por subsistemas.
 
-
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-ons-energia-armazenada
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_ons_energia_armazenada
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Crislane A. Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ons_energia_armazenada/code
-Website: https://github.com/crislanealves
-Email: crislanealves@basedosdados.orgTratado por
+Nome: Crislane Alves
+Código: 
+Email: crislanealves@basedosdados.org
+Tratado por
 -----------
 Nome: Bruno Mioto
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ons_energia_armazenada/code
+Código: https://github.com/brunomioto/reservatoriosBR
 Website: brunomioto.com.br
 Email: brunomioto97@gmail.com
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- dia
+
+
 
 Colunas identificando linhas unicamente
 -------------------
 - data
-- subsistemas
+- subsistema
+
+
+
 
 Cobertura Temporal
 ------------------
@@ -54,16 +55,21 @@ Cobertura Temporal
 - 2020
 - 2021
 
+
+
+
 Cobertura Espacial
 ------------------
-- brasil
+
+
+
 
 Tratamento
 ----------
-- Limpeza para consistência 
+Limpeza para consistência
+
+
 
 Frequencia de Atualização
 -------------------------
-dia
-
-
+day

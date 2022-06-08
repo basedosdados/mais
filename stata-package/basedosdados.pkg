@@ -1,0 +1,28 @@
+v 1
+d 'BASEDOSDADOS': Base dos Dados
+d 
+d The basedosdados package enables access to more than 70 Brazilian databases already cleaned and compatibilized, available in the public datalake BD+ from the Base dos Dados organization. The package consists of 7 commands. The commands give the possibility to list all available datasets from BD+ datalake and downloading or analyzing them directly from Stata. The package aims to provide access to clean, compatible and high-quality public data.
+d 
+d Distribution-Date:   20220318
+d License: The Unlicense
+d Requires: Stata version 16 and python
+d
+d E-mail: rdahis@econ.puc-rio.br | isabellahelter@gmail.com 
+d https://basedosdados.org/
+d
+F basedosdados.dlg
+F bd_download.ado
+F bd_download.sthlp
+F bd_get_table_columns.ado
+F bd_get_table_columns.sthlp
+F bd_get_table_description.ado
+F bd_get_table_description.sthlp
+F bd_list_dataset_tables.ado
+F bd_list_dataset_tables.sthlp
+F bd_list_datasets.ado
+F bd_list_datasets.sthlp
+F bd_read_sql.ado
+F bd_read_sql.sthlp
+F bd_read_table.ado
+F bd_read_table.sthlp
+F instrucoes.dlg

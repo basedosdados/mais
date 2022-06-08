@@ -1,4 +1,3 @@
-
 dataset_id: br_ms_vacinacao_covid19
 
 table_id: microdados_paciente
@@ -38,7 +37,7 @@ identifying_columns:
     - id_paciente
 
 last_updated:
-    metadata:
+    metadata: '2022-01-23'
     data:
     release:
 

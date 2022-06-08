@@ -61,6 +61,7 @@ nav:
     - API:
       - Python: api_reference_python.md
       - R: api_reference_r.md
+      - Stata: api_reference_stata.md
       - CLI: api_reference_cli.md
     - Contribua: 
       - Dados: colab_data.md
@@ -71,7 +72,7 @@ nav:
 markdown_extensions:
   - admonition
   - pymdownx.details
-  - mkdocs-click
+  - mkdocs_click
   - attr_list
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji

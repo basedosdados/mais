@@ -9,22 +9,20 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Gustavo Aires
+Nome: Ingrid de Sales Rabelo
 Código: 
-Website: https://github.com/gustavoairestiago
-Email: gustavo.tiago@basedosdados.org
+Email: ingrid.rabelo@basedosdados.org
 Tratado por
 -----------
-Nome: Gustavo Aires
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_bd_diretorios_mundo/code
-Website: https://github.com/gustavoairestiago
-Email: gustavo.tiago@basedosdados.org
+Nome: Ingrid de Sales Rabelo
+Código: 
+Website: 
+Email: ingrid.rabelo@basedosdados.org
 
 
 
-
-Colunas identificando linhas unicamente
--------------------
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
 
 
 
@@ -37,17 +35,13 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- a
-- l
-- l
 
 
 
 
 Tratamento
 ----------
-Extração dos dados do site da FAO 
- Padronização sob as diretrizes da BasedosDados
+Extração dos dados dos sites da FAO, ISO e our world in data para preencher os códigos dos países de acordo com diferentes padronizações.
 
 
 

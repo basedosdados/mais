@@ -1,0 +1,62 @@
+Diretório das etnias indígenas nos Sistemas de Informação Ambulatorial e Hospitalar - SIA/SUS e SIH/SUS - 'https://bvsms.saude.gov.br/bvs/saudelegis/sas/2010/prt0508_28_09_2010.html'
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gustavo Aires Tiago
+Código: 
+Email: gustavo.tiago@basedosdados.org
+Tratado por
+-----------
+Nome: Gustavo Aires Tiago
+Email: gustavo.tiago@basedosdados.org
+
+
+
+
+Colunas identificando linhas unicamente
+-------------------
+- id_etnia_indigena
+
+
+
+
+Cobertura Temporal
+------------------
+- 2010
+- 2011
+- 2012
+- 2013
+- 2014
+- 2015
+- 2016
+- 2017
+- 2018
+- 2019
+- 2020
+- 2021
+
+
+
+
+Cobertura Espacial
+------------------
+
+
+
+
+Tratamento
+----------
+Definição do nome das colunas
+
+
+
+Frequencia de Atualização
+-------------------------
+unique
