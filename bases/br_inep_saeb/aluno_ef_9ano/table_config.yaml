@@ -4,6 +4,9 @@ dataset_id: br_inep_saeb
 
 table_id: aluno_ef_9ano
 
+# Título da tabela.
+title: Aluno do 9º ano do Ensino Fundamental
+
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
@@ -15,13 +18,13 @@ description: Microdados do SAEB com respostas dos alunos para as avaliações e 
 #   - continent: south_america
 #     country: br
 spatial_coverage:
-    country: 
-        - br
+    - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 1995(2)2019
+temporal_coverage: 
+    - 1995(2)2019
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -45,8 +48,8 @@ observation_level:
     
 
 last_updated:
-    metadata:
-    data:
+    metadata: '2022-06-02'
+    data: '2022-06-02 09:00:00'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -848,10 +851,10 @@ columns:
           - (2)2017
       covered_by_dictionary: yes
       directory_column:
-          dataset_id: month
-          table_id: month
-          column_name: month
-      measurement_unit:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
       has_sensitive_data: no
       observations: Transformação das opções do dicionário em valor int64
       is_in_staging: true
@@ -863,10 +866,10 @@ columns:
           - (2)2017
       covered_by_dictionary: yes
       directory_column:
-          dataset_id: year
-          table_id: year
-          column_name: year
-      measurement_unit:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
       has_sensitive_data: no
       observations: Transformação das opções do dicionário em valor int64
       is_in_staging: true
@@ -878,10 +881,10 @@ columns:
           - (2)2017
       covered_by_dictionary: yes
       directory_column:
-          dataset_id: year
-          table_id: year
-          column_name: year
-      measurement_unit:
+          dataset_id: 
+          table_id: 
+          column_name:
+      measurement_unit: year
       has_sensitive_data: no
       observations: Calculada pelo ano do SAEB menos a variável ano_nascimento
       is_in_staging: true
@@ -925,10 +928,10 @@ columns:
           - '1999'
       covered_by_dictionary: yes
       directory_column:
-          dataset_id: person
-          table_id: person
-          column_name: person
-      measurement_unit:
+          dataset_id: 
+          table_id: 
+          column_name: 
+      measurement_unit: person
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1091,10 +1094,10 @@ columns:
           - 1999(2)2017
       covered_by_dictionary: yes
       directory_column:
-          dataset_id: person
-          table_id: person
-          column_name: person
-      measurement_unit:
+          dataset_id: 
+          table_id: 
+          column_name: 
+      measurement_unit: person
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1106,10 +1109,10 @@ columns:
           - '1999'
       covered_by_dictionary: yes
       directory_column:
-          dataset_id: person
-          table_id: person
-          column_name: person
-      measurement_unit:
+          dataset_id: 
+          table_id: 
+          column_name: 
+      measurement_unit: person
       has_sensitive_data: no
       observations:
       is_in_staging: true

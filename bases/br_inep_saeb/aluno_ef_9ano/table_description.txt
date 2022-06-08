@@ -30,24 +30,14 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 1
-- 9
-- 9
-- 5
-- (
-- 2
-- )
-- 2
-- 0
-- 1
-- 9
+- 1995(2)2019
 
 
 
 
 Cobertura Espacial
 ------------------
-- country
+- sa.br
 
 
 

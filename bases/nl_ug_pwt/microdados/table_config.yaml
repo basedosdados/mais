@@ -1,5 +1,6 @@
+
 # Igual ao dataset.name mas como lower case.
-# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar 
 dataset_id: nl_ug_pwt
 
 table_id: microdados
@@ -8,7 +9,9 @@ table_id: microdados
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Dados da Penn World Table (PWT) sobre renda, produção, insumos e produtividade. A base fornece contas de paridade do poder de compra e renda nacional convertidas a preços internacionais para 183 países de 1950 a 2019.
+description: Dados da Penn World Table (PWT) sobre renda, produção, insumos e produtividade.
+    A base fornece contas de paridade do poder de compra e renda nacional convertidas
+    a preços internacionais para 183 países de 1950 a 2019.
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
@@ -29,12 +32,12 @@ temporal_coverage:
 update_frequency: uncertain
 
 # Nível de observação da tabela: o que representa cada linha.
-observation_level: 
-     - entity: country
-       column:
+observation_level:
+    - entity: country
+      column:
           - country
-     - entity: year
-       column:
+    - entity: year
+      column:
           - year
 
 last_updated:
@@ -65,7 +68,8 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Tratamento feito para corrigir as variáveis (nomes, ordem, grandeza) a fim de gerar uma base no padrão Base dos Dados.
+data_cleaning_description: Tratamento feito para corrigir as variáveis (nomes, ordem,
+    grandeza) a fim de gerar uma base no padrão Base dos Dados.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/nl_ug_pwt/code
@@ -344,7 +348,7 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations: Value in millions 2017USD in original database
-      is_in_staging: true 
+      is_in_staging: true
       is_partition: false
     - name: real_capital_stock_na
       bigquery_type: float64
@@ -896,4 +900,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-03-28T22:43:27.539182'
+metadata_modified: '2022-04-04T19:27:42.445984'
