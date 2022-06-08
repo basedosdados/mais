@@ -7,7 +7,7 @@ table_id: aluno_ef_2ano
 # Título da tabela.
 title: Aluno do 2º ano do Ensino Fundamental
 
-# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver. 
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
