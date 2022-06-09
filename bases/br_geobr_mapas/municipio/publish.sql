@@ -19,7 +19,7 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_geobr_mapas.municipio AS
 SELECT 
-SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(id_municipio AS STRING ) id_municipio,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE.ST_GEOGFROMTEXT(geometria) geometria
+SAFE_CAST(geometria AS STRING) geometria
 FROM basedosdados-dev.br_geobr_mapas_staging.municipio AS t

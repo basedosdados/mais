@@ -14,7 +14,7 @@ Código:
 Email: gustavo.alcantara@basedosdados.org
 Tratado por
 -----------
-Nome: Rafael H. M. Pereira
+Nome: Rafael H.M Pereira
 Código: 
 Website: https://github.com/ipeaGIT/geobr
 Email: rafael.pereira@ipea.gov.br
@@ -33,15 +33,14 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- s
-- a
-- .
-- b
-- r
+- sa.br
 
 
 
 
+Tratamento
+----------
+etl dos dados, rename e select para o Padrão da Base dos Dados.
 
 
 

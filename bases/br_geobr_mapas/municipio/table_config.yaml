@@ -5,7 +5,7 @@ dataset_id: br_geobr_mapas
 table_id: municipio
 
 # Título da tabela.
-title: Município
+title: Municípios
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -13,18 +13,18 @@ title: Município
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
 description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
 
-# A máxima unidade espacial que a tabela cobre.
+# As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - continent: south_america
-#     country: br
+#   - sa.br
 spatial_coverage:
     - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 
+temporal_coverage:
     - 2020
+
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -38,9 +38,10 @@ observation_level:
           - id_municipio
 
 last_updated: 
-    metadata: '2022-06-06'
-    data: '2022-06-06 13:00:37'
+    metadata: '2022-06-09'
+    data: '2022-06-09 14:32:37'
     release:
+
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
@@ -58,17 +59,17 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Rafael H. M. Pereira
+    name: Rafael H.M Pereira
     email: rafael.pereira@ipea.gov.br
     github_user: rafaelpereirabr
     ckan_user:
     website: https://github.com/ipeaGIT/geobr
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
+data_cleaning_description: etl dos dados, rename e select para o Padrão da Base dos Dados. 
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_geobr_mapas/code
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_geobr_mapas/code/municipio
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
