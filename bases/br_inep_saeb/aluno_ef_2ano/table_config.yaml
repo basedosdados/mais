@@ -1,17 +1,17 @@
 # Igual ao dataset.name mas como lower case.
-# Exemplos: br_ibge_populacao, br_inep_censo_escolar 
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_inep_saeb
 
-table_id: proficiencia
+table_id: aluno_ef_2ano
 
 # Título da tabela.
-title: Proficiência
+title: Aluno do 2º ano do Ensino Fundamental
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver. 
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: A tabela resume a proficiencia na avaliação SAEB proporcionando uma série histórica e compatibilizada à partir de 1995 com informações sobre o aluno, a escola e o resultado do exame
+description: Microdados do SAEB com respostas dos alunos para as avaliações e questionário socioeconômico matriculados no 2º ano do Ensino Fundamental
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
@@ -22,9 +22,9 @@ spatial_coverage:
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 
-    - 1995(2)2019
+# Exemplos: ['1995(1)2019(2)'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2019
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -74,7 +74,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Compatibizalicação das bases
+data_cleaning_description: Padronização sob as diretrizes da BD
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
@@ -118,9 +118,9 @@ partitions:
 columns:
     - name: ano
       bigquery_type: int64
-      description: Ano de aplicação do Saeb
+      description: Ano
       temporal_coverage:
-          - (2)
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -135,7 +135,7 @@ columns:
       bigquery_type: string
       description: ID Região
       temporal_coverage:
-          - (2)
+          - 2019(2)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -150,7 +150,7 @@ columns:
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-          - (2)
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -165,7 +165,7 @@ columns:
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-          - 2007(2)
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -176,11 +176,26 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
+    - name: area
+      bigquery_type: string
+      description: Área em relação ao município
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: id_escola
       bigquery_type: string
-      description: ID Escola - INEP
+      description: ID escola - INEP
       temporal_coverage:
-          - 2007(2)
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -195,7 +210,7 @@ columns:
       bigquery_type: string
       description: Rede Escolar
       temporal_coverage:
-          - (2)
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -208,9 +223,9 @@ columns:
       is_partition: false
     - name: localizacao
       bigquery_type: string
-      description: Localização
+      description: Localização da escola
       temporal_coverage:
-          - (2)
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -221,12 +236,12 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: serie
-      bigquery_type: int64
-      description: Série/Ano
+    - name: id_turma
+      bigquery_type: string
+      description: ID Turma
       temporal_coverage:
-          - (2)
-      covered_by_dictionary: yes
+          - 2019(2)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -240,7 +255,52 @@ columns:
       bigquery_type: string
       description: Turno
       temporal_coverage:
-          - (2)
+          - 2019(2)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: serie
+      bigquery_type: int64
+      description: Série
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_aluno
+      bigquery_type: string
+      description: ID Aluno
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: situacao_censo
+      bigquery_type: int64
+      description: Indicador de compatibilização com o Censo Escolar 2019(2)
+      temporal_coverage:
+          - 2019(2)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -255,7 +315,7 @@ columns:
       bigquery_type: string
       description: Disciplina
       temporal_coverage:
-          - (2)
+          - 2019(2)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -263,74 +323,255 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: Variável criada com base na disciplina indicada por LP ou MT
       is_in_staging: true
       is_partition: false
-    - name: id_turma
-      bigquery_type: string
-      description: ID Turma no SAEB
-      temporal_coverage:
-          - (2)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: id_aluno
-      bigquery_type: string
-      description: ID Aluno no SAEB
-      temporal_coverage:
-          - (2)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Entre 1995 a 2005 tem-se a junção da variável 'mascara' + 'aluno'
-      is_in_staging: true
-      is_partition: false
-    - name: sexo
-      bigquery_type: string
-      description: Sexo
-      temporal_coverage:
-          - (2)2017
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: raca_cor
-      bigquery_type: string
-      description: Raça/Cor
-      temporal_coverage:
-          - (2)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: estrato
+    - name: preenchimento_caderno
       bigquery_type: int64
-      description: Estrato
+      description: Indicador de preenchimento da prova
       temporal_coverage:
-          - (2)2003, 2019
+          - 2019(2)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: presenca
+      bigquery_type: int64
+      description: Indicador de presença na prova
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: caderno
+      bigquery_type: string
+      description: Número do caderno de prova
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: bloco_1
+      bigquery_type: string
+      description: Identificador do Bloco 1
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: bloco_2
+      bigquery_type: string
+      description: Identificador do Bloco 2
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: bloco_1_aberto
+      bigquery_type: string
+      description: Identificador do Bloco 1 de resposta construída
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: bloco_2_aberto
+      bigquery_type: string
+      description: Identificador do Bloco 2 de resposta construída
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: respostas_bloco_1
+      bigquery_type: string
+      description: Respostas do aluno ao Bloco 1 da prova
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: respostas_bloco_2
+      bigquery_type: string
+      description: Respostas do aluno ao Bloco 2 da prova
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conceito_q1
+      bigquery_type: string
+      description: Conceito obtido na questão 1 de resposta construída
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conceito_q2
+      bigquery_type: string
+      description: Conceito obtido na questão 2 de resposta construída
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: resposta_texto
+      bigquery_type: string
+      description: Análise da Produção Textual
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conceito_proposito
+      bigquery_type: string
+      description: Conceito obtido para propósito na produção de texto
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conceito_elemento
+      bigquery_type: string
+      description: Conceito obtido para elemento na produção de texto
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conceito_segmentacao
+      bigquery_type: string
+      description: Conceito obtido para segmentação na produção de texto
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: texto_grafia
+      bigquery_type: string
+      description: Conceito obtido para grafia na produção de texto
+      temporal_coverage:
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: indicador_proficiencia
+      bigquery_type: string
+      description: Indicador para cálculo da proficiência (no mínimo três itens respondidos
+          no caderno de prova)
+      temporal_coverage:
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -342,10 +583,25 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: amostra
-      bigquery_type: int64
-      description: Amostra
+      bigquery_type: string
+      description: Indicador de participação da amostra
       temporal_coverage:
-          - (2)2005, 2011
+          - 2019(2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estrato
+      bigquery_type: string
+      description: Descrição dos estratos
+      temporal_coverage:
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -360,7 +616,7 @@ columns:
       bigquery_type: float64
       description: Peso do aluno
       temporal_coverage:
-          - (2)2005, 2011(2)
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -373,9 +629,10 @@ columns:
       is_partition: false
     - name: proficiencia
       bigquery_type: float64
-      description: Proficiência do aluno calculada na escala única do SAEB, com média = 0 e desvio = 1 na população de referência
+      description: Proficiência do aluno na escala única do SAEB com média = 0 e desvio
+          = 1 na população de referência
       temporal_coverage:
-          - 2007(2)
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -388,9 +645,9 @@ columns:
       is_partition: false
     - name: erro_padrao
       bigquery_type: float64
-      description: Erro padrão da proficiência na escala única do SAEB
+      description: Erro padrão da proficiência
       temporal_coverage:
-          - 2007(2)
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -403,9 +660,10 @@ columns:
       is_partition: false
     - name: proficiencia_saeb
       bigquery_type: float64
-      description: Proficiência transformada na escala única do SAEB, com média = 250, desvio = 50 (do SAEB/97)
+      description: Proficiência do aluno na escala única do SAEB com média = 750 e
+          desvio = 50 na população de referência
       temporal_coverage:
-          - (2)
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -418,9 +676,9 @@ columns:
       is_partition: false
     - name: erro_padrao_saeb
       bigquery_type: float64
-      description: Erro padrão da proficiência transformado
+      description: Erro padrão da proficiência transformada
       temporal_coverage:
-          - 2007(2)
+          - 2019(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -432,4 +690,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified:
+metadata_modified: '2022-03-21T18:17:59.798990'

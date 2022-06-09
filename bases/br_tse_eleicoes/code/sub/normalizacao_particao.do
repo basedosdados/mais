@@ -1032,6 +1032,8 @@ foreach ano of numlist 2002(2)2020 {
 	
 		!mkdir "output/despesas_candidato/ano=`ano'/sigla_uf=`uf'"
 		
+		drop ano sigla_uf
+		
 		export delimited "output/despesas_candidato/ano=`ano'/sigla_uf=`uf'/despesas_candidato.csv", replace
 		
 	}

@@ -46,7 +46,7 @@ organização** que publica o conjunto:
 Por exemplo, o conjunto de dados do PIB do IBGE tem como `dataset_id`: `br_ibge_pib`
 
 !!! Tip "Não sabe como nomear a organização?"
-    Sugerimos que vá no site da mesma e veja como ela se autodenomina (ex: DETRAN-RJ seria `br-rj-detran`)
+    Sugerimos que vá no site da mesma e veja como ela se autodenomina (ex: DETRAN-RJ seria `br_rj_detran`)
 
 ### Tabelas
 
@@ -124,6 +124,8 @@ Quando escolher:
 A regra é manter variáveis com suas unidades de medida originais, com a exceção de variáveis financeiras onde convertermos moedas antigas para as atuais (e.g. Cruzeiro para Real).
 
 Catalogamos unidades de medida em formato padrão na tabela de arquitetura. Exemplos: `m`, `km/h`, `BRL`.
+
+Para colunas financeiras deflacionadas, listamos a moeda com o ano base. Exemplo: uma coluna medida em reais de 2010 tem unidade `BRL_2010`.
 
 Variáveis devem ter sempre unidades de medida com base 1. Ou seja, ter `BRL` ao invés de `1000 BRL`, ou `pessoa` ao invés de `1000 pessoas`. Essa informação, como outros metadados de colunas, são registradas na tabela de arquitetura da tabela.
 
