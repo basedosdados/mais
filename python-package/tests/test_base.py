@@ -6,6 +6,7 @@ import pytest
 from google.cloud import storage, bigquery
 
 from basedosdados.upload.base import Base
+from pathlib import Path
 
 
 def test_bucket_name():
@@ -38,3 +39,10 @@ def test_config():
     assert "gcloud-projects" in config_keys
     assert "user" in config_keys
     assert "ckan" in config_keys
+
+def test_config_path():
+    """
+    Test the config_path function
+    """
+    base = Base()
+    assert isinstance(base.config_path, Path)
