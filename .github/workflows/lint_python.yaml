@@ -1,9 +1,7 @@
 name: Lint Python
 
 on:
-  push:
-    branches:    
-      - fix-pylint
+  pull_request:
 
 jobs:
   docker_lint:
