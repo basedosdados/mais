@@ -5,7 +5,7 @@ name: br-abrinq-oca
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title: Dados do Observatório da Criança e do Adolescente
+title: Observatório da Criança e do Adolescente (OCA)
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
@@ -14,17 +14,7 @@ organization:
     - br-abrinq
 
 # Descrição do conjunto
-notes: O Observatório da Criança e do Adolescente é um espaço virtual que possibilita
-    a consulta, em um mesmo lugar, dos principais indicadores sociais relacionados
-    direta e indiretamente à infância e adolescência no Brasil. Seu objetivo é organizar
-    as informações e facilitar o acesso a bases de dados de diversas fontes púbicas
-    e privadas sobre população, qualidade de vida e bem-estar de crianças e adolescentes
-    com idades ente zero e 18 anos, permitindo uma análise da evolução das principais
-    políticas, dos desafios e das desigualdades regionais. Destina-se a formadores
-    de opinião, representantes da sociedade civil, pesquisadores, gestores públicos
-    e quaisquer pessoas que queiram, a partir de um simples mecanismo de busca online,
-    conhecer a realidade e os problemas sociais que mais afetam as crianças e os adolescentes
-    no país.
+notes: O Observatório da Criança e do Adolescente é um espaço virtual que possibilita a consulta, em um mesmo lugar, dos principais indicadores sociais relacionados direta e indiretamente à infância e adolescência no Brasil. Seu objetivo é organizar as informações e facilitar o acesso a bases de dados de diversas fontes púbicas e privadas sobre população qualidade de vida e bem-estar de crianças e adolescentes com idades ente zero e 18 anos permitindo uma análise da evolução das principais políticas, dos desafios e das desigualdades regionais. Destina-se a formadores de opinião, representantes da sociedade civil, pesquisadores gestores públicos e quaisquer pessoas que queiram, a partir de um simples mecanismo de busca online, conhecer a realidade e os problemas sociais que mais afetam as crianças e os adolescentes no país.
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
@@ -58,4 +48,4 @@ tags:
 
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.
-metadata_modified: '2022-02-14T01:23:42.267594'
+metadata_modified: "2022-06-03T19:16:22.077130"
