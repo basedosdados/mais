@@ -46,3 +46,14 @@ def test_config_path():
     """
     base = Base()
     assert isinstance(base.config_path, Path)
+
+def test_main_vars():
+    """
+    Test the main_vars function
+    """
+    base = Base()
+    main_vars_keys = base.main_vars.keys()
+    assert "bucket_name" in main_vars_keys
+    assert "metadata_path" in main_vars_keys
+    assert "templates" in main_vars_keys
+
