@@ -22,13 +22,11 @@ author:
 # Onde encontrar os dados originais e mais informações?
 website:
     - http://terrabrasilis.dpi.inpe.br/en/home-page/
-    - <website 2>
 
 # Quais grupos caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 groups:
     - meio-ambiente
-    - <grupo 2>
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
