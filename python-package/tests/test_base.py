@@ -22,6 +22,19 @@ def test_client():
     base = Base()
     client_dict = base.client
     assert isinstance(client_dict, dict)
-    assert isinstance(client_dict["storage"], storage.Client)
-    assert isinstance(client_dict["bigquery"], bigquery.Client)
     assert isinstance(client_dict["bigquery_prod"], bigquery.Client)
+    assert isinstance(client_dict["bigquery_staging"], bigquery.Client)
+    assert isinstance(client_dict["storage_staging"], storage.Client)
+
+def test_config():
+    """
+    Test the config function
+    """
+    base = Base()
+    config_keys = base.config.keys()
+    assert "metadata_path" in config_keys
+    assert "bucket_name" in config_keys
+    assert "templates_path" in config_keys
+    assert "gcloud-projects" in config_keys
+    assert "user" in config_keys
+    assert "ckan" in config_keys
