@@ -3,10 +3,10 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_me_pensionistas
 
-table_id: _table_id_
+table_id: microdados
 
 # Título da tabela.
-title: Gestão de Pessoas (Executivo Federal) - Pensionistas
+title: 'Gestão de Pessoas (Executivo Federal) - Pensionistas'
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -19,14 +19,14 @@ Destacamos que todas as pensões acima do teto do funcionalismo público estão 
 #   - continent: south_america
 #     country: br
 spatial_coverage:
-    - continent: south_america
-        country: br
+  - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 
-    - 1994 (1) 2021
+temporal_coverage:
+    - 1994(1)2021
+
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -45,7 +45,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.0.1
+version: v1.1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -69,7 +69,7 @@ data_cleaned_by:
 data_cleaning_description: Transformamos valores de CPF e datas de "00000000" para vazio
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url: https://github.com/basedosdados/mais/blob/master/bases/br_me_pensionistas/code/build.do
+data_cleaning_code_url: https://github.com/basedosdados/mais/blob/master/bases/br_me_pensionistas/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -104,12 +104,13 @@ partitions:
 # preencherá automaticamente as colunas.
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
-# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition: false como True.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition: true como True.
 columns:
     - name: ano
       bigquery_type: int64
       description: Ano
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column: 
           dataset_id: br_bd_diretorios_data_tempo
@@ -119,11 +120,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false
-    - name: mês
+      is_partition: true
+    - name: mes
       bigquery_type: int64
       description: Mês
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -133,11 +135,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false
+      is_partition: true
     - name: nome_servidor
       bigquery_type: string
       description: Nome do Servidor Instituidor
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -147,11 +150,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: cpf_servidor
       bigquery_type: string
       description: Cpf do Servidor Instituidor
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -161,11 +165,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: data_nascimento_servidor
       bigquery_type: date
       description: Data de nascimento do servidor instituidor
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -175,11 +180,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: data_falecimento_servidor
       bigquery_type: date
       description: Data de falecimento do servidor instituidor
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -189,11 +195,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: matricula_servidor
       bigquery_type: string
       description: Matrícula do servidor instituidor
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -203,11 +210,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: nome_orgao
       bigquery_type: string
       description: Nome do Órgão
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -217,11 +225,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: sigla_orgao
       bigquery_type: string
       description: Sigla do Órgão
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -231,11 +240,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: codigo_orgao_superior
       bigquery_type: string
       description: Código do órgão superior
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -245,11 +255,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: cargo_servidor
       bigquery_type: string
       description: Cargo do servidor instituidor
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -259,11 +270,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: escolaridade_cargo
       bigquery_type: string
       description: Escolaridade do cargo
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -273,11 +285,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: classe_servidor
       bigquery_type: int64
       description: Classe do servidor instituidor
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -287,11 +300,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: padrao_servidor
       bigquery_type: string
       description: Padrão do servidor instituidor
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -301,11 +315,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: referencia_servidor
       bigquery_type: string
       description: Referencia do servidor instituidor
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -315,11 +330,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: nivel_servidor
       bigquery_type: string
       description: Nível do servidor instituidor
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -329,11 +345,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: ocorrencia_isp_servidor
       bigquery_type: string
       description: Ocorrência de ingresso no setor público do servidor instituidor
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -343,11 +360,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: data_ocorrencia_isp_servidor
       bigquery_type: date
       description: Data de ocorrência de ingresso no setor público do servidor instituidor 
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -357,11 +375,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: nome_beneficiario
       bigquery_type: string
       description: Nome do beneficiário(a)
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -371,11 +390,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: cpf_beneficiario
       bigquery_type: string
       description: CPF do(a) beneficiário(a)
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -385,11 +405,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: data_nascimento_beneficiario
       bigquery_type: date
       description: Data de nascimento do(a) beneficiário(a)
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -399,11 +420,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: sigla_uf_upag_vinculacao
       bigquery_type: string
       description: Sigla da unidade da federação UPAG de vinculação
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -413,11 +435,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: tipo_beneficiario
       bigquery_type: string
       description: Tipo do(a) beneficiário(a)
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -427,11 +450,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: tipo_pensao
       bigquery_type: string
       description: Tipo da pensão
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -441,11 +465,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: natureza_pensao
       bigquery_type: string
       description: Natureza da pensão
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -455,11 +480,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: data_inicio_beneficio
       bigquery_type: date
       description: Data de início do benefício
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -469,11 +495,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false  
+      is_partition: true  
     - name: data_fim_beneficio
       bigquery_type: date
       description: Data do fim do benefício
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -483,11 +510,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false
+      is_partition: true
     - name: rendimento_bruto
       bigquery_type: float64
       description: Rendimento bruto
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -497,11 +525,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false
+      is_partition: true
     - name: rendimento_liquido
       bigquery_type: float64
       description: Rendimento liquido
-      temporal_coverage: 1994(1)2021
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: 
       directory_column:
           dataset_id:
@@ -511,5 +540,5 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false
+      is_partition: true
 metadata_modified: '2022-02-14T01:25:04.248378'
