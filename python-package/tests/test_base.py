@@ -1,59 +1,111 @@
 '''
 Tests for Base class
 '''
-
+import re
 import pytest
 from google.cloud import storage, bigquery
 
 from basedosdados.upload.base import Base
 from pathlib import Path
 
+@pytest.fixture(name="base")
+def fixture_base():
+    """
+    Fixture for the base class
+    """
+    return Base()
 
-def test_bucket_name():
+@pytest.fixture(name="config_file_exists")
+def fixture_config_file_exists(base):
+    config_file = base.config_path / "config.toml"
+    return config_file.exists()
+
+def test_bucket_name(base, config_file_exists, capsys):
     """
     Test the bucket_name function
     """
-    base = Base()
-    assert isinstance(base.bucket_name, str)
+    if config_file_exists:
+        assert isinstance(base.bucket_name, str)
+    else:
+        out, err = capsys.readouterr()
+        assert "Apparently, that is the first time that you are using" in out
 
-def test_client():
+def test_client(base, config_file_exists, capsys):
     """
     Test the client function
     """
-    base = Base()
-    client_dict = base.client
-    assert isinstance(client_dict, dict)
-    assert isinstance(client_dict["bigquery_prod"], bigquery.Client)
-    assert isinstance(client_dict["bigquery_staging"], bigquery.Client)
-    assert isinstance(client_dict["storage_staging"], storage.Client)
+    if config_file_exists:
+        client_dict = base.client
+        assert isinstance(client_dict, dict)
+        assert isinstance(client_dict["bigquery_prod"], bigquery.Client)
+        assert isinstance(client_dict["bigquery_staging"], bigquery.Client)
+        assert isinstance(client_dict["storage_staging"], storage.Client)
+    else:
+        out, err = capsys.readouterr()
+        assert "Apparently, that is the first time that you are using" in out
 
-def test_config():
+def test_config(base, config_file_exists, capsys):
     """
     Test the config function
     """
-    base = Base()
-    config_keys = base.config.keys()
-    assert "metadata_path" in config_keys
-    assert "bucket_name" in config_keys
-    assert "templates_path" in config_keys
-    assert "gcloud-projects" in config_keys
-    assert "user" in config_keys
-    assert "ckan" in config_keys
+    if config_file_exists:
+        config_keys = base.config.keys()
+        assert "metadata_path" in config_keys
+        assert "bucket_name" in config_keys
+        assert "templates_path" in config_keys
+        assert "gcloud-projects" in config_keys
+        assert "user" in config_keys
+        assert "ckan" in config_keys
+    else:
+        out, err = capsys.readouterr()
+        assert "Apparently, that is the first time that you are using" in out
 
-def test_config_path():
+def test_config_path(base, config_file_exists, capsys):
     """
     Test the config_path function
     """
-    base = Base()
-    assert isinstance(base.config_path, Path)
+    if config_file_exists:
+        assert isinstance(base.config_path, Path)
+    else:
+        out, err = capsys.readouterr()
+        assert "Apparently, that is the first time that you are using" in out
 
-def test_main_vars():
+def test_main_vars(base, config_file_exists, capsys):
     """
     Test the main_vars function
     """
-    base = Base()
-    main_vars_keys = base.main_vars.keys()
-    assert "bucket_name" in main_vars_keys
-    assert "metadata_path" in main_vars_keys
-    assert "templates" in main_vars_keys
+    if config_file_exists:
+        main_vars_keys = base.main_vars.keys()
+        assert "bucket_name" in main_vars_keys
+        assert "metadata_path" in main_vars_keys
+        assert "templates" in main_vars_keys
 
+def test_metadata_path(base, config_file_exists, capsys):
+    """
+    Test the metadata_path function
+    """
+    if config_file_exists:
+        assert isinstance(base.metadata_path, Path)
+    else:
+        out, err = capsys.readouterr()
+        assert "Apparently, that is the first time that you are using" in out
+
+def test_templates(base, config_file_exists, capsys):
+    """
+    Test the templates_path function
+    """
+    if config_file_exists:
+        assert isinstance(base.templates, Path)
+    else:
+        out, err = capsys.readouterr()
+        assert "Apparently, that is the first time that you are using" in out
+
+def test_uri(base, config_file_exists, capsys):
+    """
+    Test the uri function
+    """
+    if config_file_exists:
+        assert bool(re.match(r'gs://.*',base.uri))
+    else:
+        out, err = capsys.readouterr()
+        assert "Apparently, that is the first time that you are using" in out
