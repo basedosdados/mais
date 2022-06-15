@@ -1,12 +1,15 @@
-'''
+"""
 Tests for Base class
-'''
+"""
+# pylint: disable=unused-variable
+
 import re
+from pathlib import Path
+
 import pytest
 from google.cloud import storage, bigquery
-
 from basedosdados.upload.base import Base
-from pathlib import Path
+
 
 @pytest.fixture(name="base")
 def fixture_base():
@@ -15,10 +18,15 @@ def fixture_base():
     """
     return Base()
 
+
 @pytest.fixture(name="config_file_exists")
 def fixture_config_file_exists(base):
+    '''
+    Fixture for the config_file_exists value
+    '''
     config_file = base.config_path / "config.toml"
     return config_file.exists()
+
 
 def test_bucket_name(base, config_file_exists, capsys):
     """
@@ -29,6 +37,7 @@ def test_bucket_name(base, config_file_exists, capsys):
     else:
         out, err = capsys.readouterr()
         assert "Apparently, that is the first time that you are using" in out
+
 
 def test_client(base, config_file_exists, capsys):
     """
@@ -43,6 +52,7 @@ def test_client(base, config_file_exists, capsys):
     else:
         out, err = capsys.readouterr()
         assert "Apparently, that is the first time that you are using" in out
+
 
 def test_config(base, config_file_exists, capsys):
     """
@@ -60,6 +70,7 @@ def test_config(base, config_file_exists, capsys):
         out, err = capsys.readouterr()
         assert "Apparently, that is the first time that you are using" in out
 
+
 def test_config_path(base, config_file_exists, capsys):
     """
     Test the config_path function
@@ -70,6 +81,7 @@ def test_config_path(base, config_file_exists, capsys):
         out, err = capsys.readouterr()
         assert "Apparently, that is the first time that you are using" in out
 
+
 def test_main_vars(base, config_file_exists, capsys):
     """
     Test the main_vars function
@@ -79,6 +91,9 @@ def test_main_vars(base, config_file_exists, capsys):
         assert "bucket_name" in main_vars_keys
         assert "metadata_path" in main_vars_keys
         assert "templates" in main_vars_keys
+    else:
+        out, err = capsys.readouterr()
+        assert "Apparently, that is the first time that you are using" in out
 
 def test_metadata_path(base, config_file_exists, capsys):
     """
@@ -90,6 +105,7 @@ def test_metadata_path(base, config_file_exists, capsys):
         out, err = capsys.readouterr()
         assert "Apparently, that is the first time that you are using" in out
 
+
 def test_templates(base, config_file_exists, capsys):
     """
     Test the templates_path function
@@ -100,12 +116,13 @@ def test_templates(base, config_file_exists, capsys):
         out, err = capsys.readouterr()
         assert "Apparently, that is the first time that you are using" in out
 
+
 def test_uri(base, config_file_exists, capsys):
     """
     Test the uri function
     """
     if config_file_exists:
-        assert bool(re.match(r'gs://.*',base.uri))
+        assert bool(re.match(r"gs://.*", base.uri))
     else:
         out, err = capsys.readouterr()
         assert "Apparently, that is the first time that you are using" in out
