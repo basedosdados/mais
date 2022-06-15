@@ -4,7 +4,7 @@ name: br-me-pensionistas
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title: Gestão de Pessoas (Executivo Federal) - Pensionistas
+title: microdados
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
