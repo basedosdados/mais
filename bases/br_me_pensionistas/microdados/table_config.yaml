@@ -104,7 +104,7 @@ partitions:
 # preencherá automaticamente as colunas.
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
-# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition: true como True.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition: false true como True.
 columns:
     - name: ano
       bigquery_type: int64
@@ -127,10 +127,10 @@ columns:
       temporal_coverage: 
         - (1)
       covered_by_dictionary: 
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+      directory_column: 
+          dataset_id: br_bd_diretorios_data_tempo 
+          table_id: mes
+          column_name: mes
       measurement_unit: month
       has_sensitive_data: no
       observations:
@@ -150,7 +150,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false   
     - name: cpf_servidor
       bigquery_type: string
       description: Cpf do Servidor Instituidor
@@ -165,7 +165,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false 
     - name: data_nascimento_servidor
       bigquery_type: date
       description: Data de nascimento do servidor instituidor
@@ -180,7 +180,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false 
     - name: data_falecimento_servidor
       bigquery_type: date
       description: Data de falecimento do servidor instituidor
@@ -195,7 +195,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false 
     - name: matricula_servidor
       bigquery_type: string
       description: Matrícula do servidor instituidor
@@ -210,7 +210,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: nome_orgao
       bigquery_type: string
       description: Nome do Órgão
@@ -225,7 +225,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: sigla_orgao
       bigquery_type: string
       description: Sigla do Órgão
@@ -240,7 +240,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: codigo_orgao_superior
       bigquery_type: string
       description: Código do órgão superior
@@ -255,7 +255,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: cargo_servidor
       bigquery_type: string
       description: Cargo do servidor instituidor
@@ -270,7 +270,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: escolaridade_cargo
       bigquery_type: string
       description: Escolaridade do cargo
@@ -285,7 +285,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: classe_servidor
       bigquery_type: int64
       description: Classe do servidor instituidor
@@ -300,7 +300,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: padrao_servidor
       bigquery_type: string
       description: Padrão do servidor instituidor
@@ -315,7 +315,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: referencia_servidor
       bigquery_type: string
       description: Referencia do servidor instituidor
@@ -330,7 +330,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: nivel_servidor
       bigquery_type: string
       description: Nível do servidor instituidor
@@ -345,7 +345,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: ocorrencia_isp_servidor
       bigquery_type: string
       description: Ocorrência de ingresso no setor público do servidor instituidor
@@ -360,7 +360,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: data_ocorrencia_isp_servidor
       bigquery_type: date
       description: Data de ocorrência de ingresso no setor público do servidor instituidor 
@@ -375,7 +375,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: nome_beneficiario
       bigquery_type: string
       description: Nome do beneficiário(a)
@@ -390,7 +390,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: cpf_beneficiario
       bigquery_type: string
       description: CPF do(a) beneficiário(a)
@@ -405,7 +405,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: data_nascimento_beneficiario
       bigquery_type: date
       description: Data de nascimento do(a) beneficiário(a)
@@ -420,7 +420,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false
     - name: sigla_uf_upag_vinculacao
       bigquery_type: string
       description: Sigla da unidade da federação UPAG de vinculação
@@ -435,7 +435,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false false
     - name: tipo_beneficiario
       bigquery_type: string
       description: Tipo do(a) beneficiário(a)
@@ -450,7 +450,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false true  
     - name: tipo_pensao
       bigquery_type: string
       description: Tipo da pensão
@@ -465,7 +465,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false true  
     - name: natureza_pensao
       bigquery_type: string
       description: Natureza da pensão
@@ -480,7 +480,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false true  
     - name: data_inicio_beneficio
       bigquery_type: date
       description: Data de início do benefício
@@ -495,7 +495,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true  
+      is_partition: false true  
     - name: data_fim_beneficio
       bigquery_type: date
       description: Data do fim do benefício
@@ -510,7 +510,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true
+      is_partition: false true
     - name: rendimento_bruto
       bigquery_type: float64
       description: Rendimento bruto
@@ -525,7 +525,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true
+      is_partition: false true
     - name: rendimento_liquido
       bigquery_type: float64
       description: Rendimento liquido
@@ -540,5 +540,5 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true
+      is_partition: false true
 metadata_modified: '2022-02-14T01:25:04.248378'
