@@ -1,70 +1,41 @@
-dataset_id: br_me_caged # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-me-caged
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-me-caged
 
-# Descreva a base.
-# Ela é sobre o que?
-# Quais as principais fontes de dados?
-# Há links para FAQs e explicações?
-description: | # REQUIRED
-    Dados do Cadastro Geral de Empregados e Desempregados (CAGED)
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Cadastro Geral de Empregados e Desempregados (CAGED)
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: ministerio-da-economia # REQUIRED
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - br-me
 
-# Qual departamento/grupo/pessoa mantém os dados originais?
-author:
-    name: Secretaria Especial de Previdência e Trabalho
-    email: trabalho@mte.gov.br
+# Descrição do conjunto
+notes: O Cadastro Geral de Empregados e Desempregados – CAGED, constitui fonte de informação de âmbito  nacional e de periodicidade mensal. Foi criado como instrumento de acompanhamento e de fiscalização do processo de admissão e de dispensa de trabalhadores regidos pela CLT, com o objetivo de assistir os desempregados e de apoiar medidas contra o desemprego. Os aperfeiçoamentos ocorridos no sistema CAGED e também na metodologia de tratamento dos dados tornaram esse registro administrativo uma das principais fontes de informações estatísticas sobre o mercado de trabalho conjuntural. O CAGED apresenta desagregações idênticas às da RAIS, em termos geográficos, setoriais e ocupacionais, possibilitando  a realização de estudos que indicam as tendências mais atuais. No espectro conjuntural, é a única fonte de informação com tal nível de desagregação, sendo, portanto, imprescindível para o balizamento das intervenções dos formuladores de políticas na esfera do mercado de trabalho, aumentando a eficácia e eficiência das políticas de emprego que possibilitam o aumento do número e da qualidade de postos de trabalho e, por conseguinte, a redução da desigualdade social. 
 
-# Onde encontrar os dados originais e mais informações?
-website:
-    - http://pdet.mte.gov.br/microdados-rais-e-caged
-
-# Quais grupos caracterizam a base?
+# Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
 groups:
     - economia
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
 # Caso crie etiquetas novas, as regras são:
-#   - letras minúsculas
-#   - sem acentos
-#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - trabalho
     - emprego
+    - empresa
+    - firma
+    - trabalho
 
-# Em quais línguas a base (ou a fonte original) está disponível?
-# Regras: minúsculo, sem acentos.
-# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
-languages:
-    - portugues
-
-# Os dados originais estão disponíveis de graça?
-free: sim
-
-# Are microdata available for download?
-microdata: sim
-
-# Existe uma API na fonte original?
-API: não
-
-# É necessário registrar um usuário para baixar os dados originais?
-registration: não
-
-# Como os dados originais estão disponibilizados?
-availability: online
-
-# A fonte original requer IP brasileiro para acesso?
-brazilian_IP: sim
-
-# Essa base está sob qual licença?
-# A licença MIT se aplica a bases públicas.
-# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
-license: 
-    name: MIT # REQUIRED
-    url: <url>
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2022-06-01T13:11:33.601741'

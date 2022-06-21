@@ -1,7 +1,9 @@
 name: Lint Python
 
 on:
-  pull_request:
+  push:
+    branches: 
+     - 'fix-pylint'
 
 jobs:
   docker_lint:
@@ -16,22 +18,21 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.9.x"
-      - name: Setup env
+      - name: Install requirements
         run: |
-          cd ..
-          make create-env
-          . .mais/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
       - name: Lint python-package
         uses: gabriel-milan/action-pylint@v1
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           path: "python-package/"
           fail: true
-          pr-message: false
+          pr-message: true
       - name: Lint bases
         uses: gabriel-milan/action-pylint@v1
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           path: "bases/"
           fail: true
-          pr-message: false
+          pr-message: true
