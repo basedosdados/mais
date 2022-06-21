@@ -1,100 +1,99 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: microdados_antigos # AUTO GENERATED
-dataset_id: br_me_caged # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-me-caged # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged # AUTO GENERATED
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_me_caged
 
-version: v1.0 # REQUIRED
+table_id: microdados_antigos
 
-last_updated: 2021-10-09 # AUTO GENERATED
+# Título da tabela.
+title:
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    Microdados públicos do CAGED
-    Dicionario de dados: https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_caged.zip
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Microdados públicos do CAGED (2007-2019)
 
-# Quem está completando esse arquivo config?
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2007(1)2019
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: month
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level: []
+
+last_updated:
+    metadata:
+    data:
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
 published_by:
-    name: Diego Oliveira  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code # REQUIRED
-    website: ftp://ftp.mtps.gov.br/pdet/microdados/CAGED/
+    name: Diego Oliveira
     email: ds.oliveira404@gmail.com
+    github_user: ''
+    ckan_user: ''
+    website: ftp://ftp.mtps.gov.br/pdet/microdados/CAGED/
 
-# Qual organização/departamento/pessoa tratou os dados? 
+# Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
+data_cleaned_by:
     name: Diego Oliveira
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code # REQUIRED
-    website: <onde encontrar os dados tratados>
     email: ds.oliveira404@gmail.com
+    github_user: ''
+    ckan_user: ''
+    website: ''
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    Unificação de todos os anos e meses, padronização do nomes de colunas, erros de valores, etc.
+data_cleaning_description: "Unificação de todos os anos e meses, padronização do nomes\
+    \ de colunas, erros de valores, etc.\n"
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: 1 mes # REQUIRED 
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_caged/code
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - movimentação
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: ''
+    organization_id: ''
 
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-    - <primeira coluna>
-    - <segunda coluna>
+# Url dos dados originais no GCP Storage.
+raw_files_url:
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - brasil
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url: ''
 
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
-    - 2007
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED  
-    - ano  
-    - mes  
+partitions:
+    - ano
+    - mes
     - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
@@ -105,249 +104,587 @@ partitions: # REQUIRED
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-    -   
-        name: ano
-        description: Ano em que a movimentação foi declarada
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: mes
-        description: Mês em que a movimentação foi declarada
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sigla_uf
-        description: Sigla da Unidade da Federação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
+columns:
+    - name: ano
+      bigquery_type:
+      description: Ano em que a movimentação foi declarada
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: mes
+      bigquery_type:
+      description: Mês em que a movimentação foi declarada
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: sigla_uf
+      bigquery_type:
+      description: Sigla da Unidade da Federação
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: id_municipio
+      bigquery_type:
+      description: ID Município - IBGE 7 Dígitos
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_6
+      bigquery_type:
+      description: ID Município - IBGE 6 Dígitos
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: admitidos_desligados
+      bigquery_type:
+      description: Admissão ou Desligamento (1 para admissão e 2 para desligamento)
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_estabelecimento
+      bigquery_type:
+      description: Tipo de estabelecimento
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_movimentacao_desagregado
+      bigquery_type:
+      description: Tipo de movimentação
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: faixa_emprego_inicio_janeiro
+      bigquery_type:
+      description: Tamanho do estabelecimento em janeiro do ano de referência
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tempo_emprego
+      bigquery_type:
+      description: Tempo de emprego do trabalhador (quando acumulada representa a
+          soma dos meses)
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_horas_contratadas
+      bigquery_type:
+      description: Quantidade de horas contratuais por semana
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: salario_mensal
+      bigquery_type:
+      description: Salário mensal em moeda corrente (R$)
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: saldo_movimentacao
+      bigquery_type:
+      description: Saldo de movimentação (1 para admissão e -1 para desligamento)
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: indicador_aprendiz
+      bigquery_type:
+      description: Indicador de movimentação referente a contrato de aprendizagem
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: indicador_trabalho_intermitente
+      bigquery_type:
+      description: Indicador de movimentação referente a contrato parcial (a partir
+          de 052018 - devendo retroagir a partir de 11/2017)
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: indicador_trabalho_parcial
+      bigquery_type:
+      description: Indicador de movimentação referente a contrato parcial (a partir
+          de 052018 - devendo retroagir a partir de 11/2017)
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: indicador_portador_deficiencia
+      bigquery_type:
+      description: Indicador se o empregado/servidor de portador de deficiência habilitado
+          ou beneficiário reabilitado
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_deficiencia
+      bigquery_type:
+      description: Tipo de deficiência/Beneficiário habilitado
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cnae_1
+      bigquery_type:
+      description: Classe de Atividade Econômica segundo a classificação CNAE/95,
+          convertida a partir da Classe CNAE 20, disponível a partir de 01/2008
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cbo_2002
+      bigquery_type:
+      description: Classificação Brasileira de Ocupações, criada em 2002
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cnae_2
+      bigquery_type:
+      description: Classe de Atividade Econômica, segundo classificação CNAE - versão
+          2.0
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cnae_2_subclasse
+      bigquery_type:
+      description: Subclasse de Atividade Econômica, segundo classificação CNAE -
+          versão 2.0 a partir de 2006
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: grau_instrucao
+      bigquery_type:
+      description: Grau de instrução ou escolaridade
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: idade
+      bigquery_type:
+      description: Idade do trabalhador (quando acumulada representa a soma das idades)
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sexo
+      bigquery_type:
+      description: Sexo
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: raca_cor
+      bigquery_type:
+      description: Raça e Cor do Trabalhador - disponível a partir de 01/2007
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: subsetor_ibge
+      bigquery_type:
+      description: Subsetor Econômico segundo IBGE
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: bairros_sp
+      bigquery_type:
+      description: Bairros do Municipio de São Paulo
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: bairros_fortaleza
+      bigquery_type:
+      description: Bairros do município de Fortaleza
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: bairros_rj
+      bigquery_type:
+      description: Bairros do município do Rio de Janeiro
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: distritos_sp
+      bigquery_type:
+      description: Distritos do município de São Paulo
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regiao_administrativas_df
+      bigquery_type:
+      description: Regiões Administrativas do Distrito Federal
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regiao_administrativas_rj
+      bigquery_type:
+      description: Regiões Administrativas do Rio de Janeiro
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regiao_administrativas_sp
+      bigquery_type:
+      description: Regiões Administrativas de São Paulo
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regiao_corede
+      bigquery_type:
+      description: Região Corede
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regiao_corede_04
+      bigquery_type:
+      description: Região Corede 04
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regiao_gov_sp
+      bigquery_type:
+      description: Região Governo de SP
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regiao_senac_pr
+      bigquery_type:
+      description: Região Senac PR
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regiao_senai_pr
+      bigquery_type:
+      description: Região Senai PR
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regiao_senai_sp
+      bigquery_type:
+      description: Região Senai SP
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: subregiao_senai_pr
+      bigquery_type:
+      description: Sub-região Senai PR
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
 
-    -   
-        name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio_6
-        description: ID Município - IBGE 6 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: admitidos_desligados
-        description: Admissão ou Desligamento (01 para admissão e 02 para desligamento)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_estabelecimento
-        description: Tipo de estabelecimento
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_movimentacao_desagregado
-        description: Tipo de movimentação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: faixa_emprego_inicio_janeiro
-        description: Tamanho do estabelecimento em janeiro do ano de referência
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tempo_emprego
-        description: Tempo de emprego do trabalhador (quando acumulada representa a soma dos meses)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: quantidade_horas_contratadas
-        description: Quantidade de horas contratuais por semana
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: salario_mensal
-        description: Salário mensal em moeda corrente (R$)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: saldo_movimentacao
-        description: Saldo de movimentação (1 para admissão e -1 para desligamento)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: indicador_aprendiz
-        description: Indicador de movimentação referente a contrato de aprendizagem
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: indicador_trabalho_intermitente
-        description: Indicador de movimentação referente a contrato parcial (a partir de 052018 - devendo retroagir a partir de 11/2017)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: indicador_trabalho_parcial
-        description: Indicador de movimentação referente a contrato parcial (a partir de 052018 - devendo retroagir a partir de 11/2017)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: indicador_portador_deficiencia
-        description: Indicador se o empregado/servidor de portador de deficiência habilitado ou beneficiário reabilitado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_deficiencia
-        description: Tipo de deficiência/Beneficiário habilitado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cnae_1
-        description: Classe de Atividade Econômica segundo a classificação CNAE/95, convertida a partir da Classe CNAE 20, disponível a partir de 01/2008
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cbo_2002
-        description: Classificação Brasileira de Ocupações, criada em 2002
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cnae_2
-        description: Classe de Atividade Econômica, segundo classificação CNAE - versão 2.0
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cnae_2_subclasse
-        description: Subclasse de Atividade Econômica, segundo classificação CNAE - versão 2.0 a partir de 2006
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: grau_instrucao
-        description: Grau de instrução ou escolaridade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: idade
-        description: Idade do trabalhador (quando acumulada representa a soma das idades)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sexo
-        description: Sexo (01 - Homem, 02 - Mulher e -1 - Não Identificado)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: raca_cor
-        description: Raça e Cor do Trabalhador - disponível a partir de 01/2007
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: subsetor_ibge
-        description: Subsetor Econômico segundo IBGE
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: bairros_sp
-        description: Bairros do Municipio de São Paulo
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: bairros_fortaleza
-        description: Bairros do município de Fortaleza
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: bairros_rj
-        description: Bairros do município do Rio de Janeiro
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: distritos_sp
-        description: Distritos do município de São Paulo
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: regiao_administrativas_df
-        description: Regiões Administrativas do Distrito Federal
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: regiao_administrativas_rj
-        description: Regiões Administrativas do Rio de Janeiro
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: regiao_administrativas_sp
-        description: Regiões Administrativas de São Paulo
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: regiao_corede
-        description: Região Corede
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: regiao_corede_04
-        description: Região Corede 04
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: regiao_gov_sp
-        description: Região Governo de SP
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: regiao_senac_pr
-        description: Região Senac PR
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: regiao_senai_pr
-        description: Região Senai PR
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: regiao_senai_sp
-        description: Região Senai SP
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: subregiao_senai_pr
-        description: Sub-região Senai PR
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+metadata_modified: '2022-02-14T01:23:33.476119'
