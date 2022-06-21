@@ -22,9 +22,6 @@ Email: rdahis@basedosdados.org
 
 
 
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-
 
 
 
@@ -37,7 +34,7 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- {'continent': 'south_america', 'country': 'br'}
+- sa.br
 
 
 
