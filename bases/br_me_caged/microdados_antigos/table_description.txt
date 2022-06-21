@@ -57,5 +57,3 @@ Unificação de todos os anos e meses, padronização do nomes de colunas, erros
 Frequencia de Atualização
 -------------------------
 1 mes
-
-
