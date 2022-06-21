@@ -117,7 +117,7 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       observations:
-      is_in_staging: true true
+      is_in_staging: true
       is_partition: true
     - name: mes
       bigquery_type: int64
@@ -201,9 +201,9 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: cnae_2
-          column_name: grupo
+          dataset_id: 
+          table_id: 
+          column_name: 
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -244,7 +244,7 @@ columns:
       description: Categoria de trabalhador
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -259,7 +259,7 @@ columns:
       description: Grau de instrução ou escolaridade
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -279,7 +279,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: person
+      measurement_unit: year
       has_sensitive_data: no
       observations: Quando acumulada representa a soma das idades
       is_in_staging: true
@@ -339,7 +339,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: minimum_wage
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -379,7 +379,7 @@ columns:
       description: Tipo de movimentação
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -394,7 +394,7 @@ columns:
       description: Tipo de deficiência/Beneficiário habilitado
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -436,10 +436,10 @@ columns:
       is_partition: false
     - name: tamanho_estabelecimento_janeiro
       bigquery_type: string
-      description: Faixa de tamanho do estabelecimento no início do ano
+      description: Faixa de tamanho do estabelecimento em relação ao total de vínculos no início do ano
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -469,7 +469,7 @@ columns:
       description: Origem da Informação
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
