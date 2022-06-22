@@ -1,0 +1,50 @@
+Dados de primeira infância a nível de município.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ricardo Dahis
+Código: 
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+Tratado por
+-----------
+Nome: Ricardo Dahis
+Código: 
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2010(1)2019
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Limpeza para consistência
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year

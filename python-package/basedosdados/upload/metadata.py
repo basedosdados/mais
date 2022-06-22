@@ -212,14 +212,10 @@ class Metadata(Base):
 
         if self.table_id:
             table_url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_schema"
-            table_schema = requests.get(table_url).json().get("result")
-
-            return table_schema
+            return requests.get(table_url).json().get("result")["schema"]
 
         dataset_url = f"{self.CKAN_URL}/api/3/action/bd_dataset_schema"
-        dataset_schema = requests.get(dataset_url).json().get("result")
-
-        return dataset_schema
+        return requests.get(dataset_url).json().get("result")
 
     def exists_in_ckan(self) -> bool:
         """Check if Metadata object refers to an existing CKAN package or reso

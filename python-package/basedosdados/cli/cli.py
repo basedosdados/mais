@@ -308,6 +308,11 @@ def init_table(
     default=None,
     help="Location of dataset data. List of possible region names locations: https://cloud.google.com/bigquery/docs/locations",
 )
+@click.option(
+    "--chunk_size",
+    default=None,
+    help="The size of a chunk of data whenever iterating (in bytes). This must be a multiple of 256 KB per the API specification.",
+)
 @click.pass_context
 def create_table(
     ctx,
@@ -323,6 +328,7 @@ def create_table(
     columns_config_url_or_path,
     dataset_is_public,
     location,
+    chunk_size,
 ):
 
     """
@@ -340,6 +346,7 @@ def create_table(
         columns_config_url_or_path=columns_config_url_or_path,
         dataset_is_public=dataset_is_public,
         location=location,
+        chunk_size=chunk_size,
     )
 
     click.echo(
@@ -472,14 +479,22 @@ def delete_table(ctx, dataset_id, table_id, mode):
     default="raise",
     help="[raise|replace|pass] if file alread exists",
 )
+@click.option(
+    "--chunk_size",
+    default=None,
+    help="The size of a chunk of data whenever iterating (in bytes). This must be a multiple of 256 KB per the API specification.",
+)
 @click.pass_context
-def upload_table(ctx, dataset_id, table_id, filepath, partitions, if_exists):
-    """
-    Upload new data to existing table.
-    """
+def upload_table(
+    ctx, dataset_id, table_id, filepath, partitions, if_exists, chunk_size
+):
 
-    Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).append(
-        filepath=filepath, partitions=partitions, if_exists=if_exists
+    blob_name = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).append(
+        filepath=filepath,
+        partitions=partitions,
+        if_exists=if_exists,
+        chunk_size=chunk_size,
+        feat/refactor-update-columns
     )
 
     click.echo(
@@ -544,15 +559,24 @@ def init_storage(ctx, bucket_name, replace, very_sure):
     default="raise",
     help="[raise|replace|pass] if file alread exists",
 )
+@click.option(
+    "--chunk_size",
+    default=None,
+    help="The size of a chunk of data whenever iterating (in bytes). This must be a multiple of 256 KB per the API specification.",
+)
 @click.pass_context
-def upload_storage(ctx, dataset_id, table_id, filepath, mode, partitions, if_exists):
-    """
-    Upload file to bucket.
-    """
+def upload_storage(
+    ctx, dataset_id, table_id, filepath, mode, partitions, if_exists, chunk_size
+):
 
     ctx.obj.pop("bucket_name")
-    Storage(dataset_id, table_id, **ctx.obj).upload(
-        filepath=filepath, mode=mode, partitions=partitions, if_exists=if_exists
+    blob_name = Storage(dataset_id, table_id, **ctx.obj).upload(
+        filepath=filepath,
+        mode=mode,
+        partitions=partitions,
+        if_exists=if_exists,
+        chunk_size=chunk_size,
+        feat/refactor-update-columns
     )
 
     click.echo(
