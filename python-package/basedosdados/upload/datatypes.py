@@ -1,10 +1,18 @@
-from google.cloud import bigquery
+'''
+Class for define external and partiton configs for each datatype
+'''
+# pylint: disable=protected-access
 import csv
+
+from google.cloud import bigquery
 import pandas as pd
 import pandavro
 
 
 class Datatype:
+    '''
+    Manage external and partition config
+    '''
     def __init__(
         self,
         table_obj,
@@ -19,6 +27,9 @@ class Datatype:
         self.partitioned = partitioned
 
     def header(self, data_sample_path):
+        '''
+        Retrieve the header of the data sample
+        '''
 
         if self.source_format == "csv":
             return next(csv.reader(open(data_sample_path, "r", encoding="utf-8")))
