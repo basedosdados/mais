@@ -16,31 +16,176 @@ TABLE_ID = "pytest"
 METADATA_FILES = {"dataset": "dataset_config.yaml", "table": "table_config.yaml"}
 
 
-@pytest.fixture
-def metadatadir(tmpdir_factory):
+@pytest.fixture(name="metadatadir")
+def fixture_metadatadir(tmpdir_factory):
     (Path(__file__).parent / "tmp_bases").mkdir(exist_ok=True)
     return Path(__file__).parent / "tmp_bases"
 
 
-@pytest.fixture
-def dataset_metadata(metadatadir):
+@pytest.fixture(name="dataset_metadata")
+def fixture_dataset_metadata(metadatadir):
     return Metadata(dataset_id=DATASET_ID, metadata_path=metadatadir)
 
 
-@pytest.fixture
-def table_metadata(metadatadir):
+@pytest.fixture(name="table_metadata")
+def fixture_table_metadata(metadatadir):
     return Metadata(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir)
 
 
-@pytest.fixture
-def dataset_metadata_path(metadatadir):
+@pytest.fixture(name="dataset_metadata_path")
+def fixture_dataset_metadata_path(metadatadir):
     return Path(metadatadir) / DATASET_ID
 
 
-@pytest.fixture
-def table_metadata_path(metadatadir):
+@pytest.fixture(name="table_metadata_path")
+def fixture_table_metadata_path(metadatadir):
     return Path(metadatadir) / DATASET_ID / TABLE_ID
 
+
+@pytest.fixture(name="invalid_dataset_metadata")
+def invalid_dataset_metadata(metadatadir):
+    invalid_dataset_metadata = Metadata(
+        dataset_id="br_ibge_pib",
+        metadata_path=metadatadir,
+    )
+    invalid_dataset_metadata.create(if_exists="replace")
+
+    invalid_config = invalid_dataset_metadata.local_metadata
+    invalid_config["title"] = {"this_title": "is_not_valid"}
+
+    print(invalid_dataset_metadata.filepath)
+
+    with open(invalid_dataset_metadata.filepath, "w", encoding="utf-8") as file:
+        ryaml.dump(invalid_config, file)
+
+    return invalid_dataset_metadata
+
+
+@pytest.fixture(name="invalid_table_metadata")
+def fixture_invalid_table_metadata(metadatadir):
+    invalid_dataset_metadata = Metadata(
+        dataset_id="br_ibge_pib",
+        table_id="municipio",
+        metadata_path=metadatadir,
+    )
+    invalid_dataset_metadata.create(if_exists="replace")
+
+    invalid_config = invalid_dataset_metadata.local_metadata
+    invalid_config["table_id"] = None
+
+    with open(invalid_dataset_metadata.filepath, "w", encoding="utf-8") as file:
+        ryaml.dump(invalid_config, file)
+
+    return invalid_dataset_metadata
+
+@pytest.fixture(name="valid_metadata_dataset")
+def valid_metadata_dataset(metadatadir):
+    dataset_metadata = Metadata(dataset_id="br_ibge_pib", metadata_path=metadatadir)
+    dataset_metadata.create(if_exists="replace")
+    dataset_metadata.CKAN_API_KEY = "valid-key"
+    return dataset_metadata
+
+
+@pytest.fixture(name="valid_metadata_table")
+def valid_metadata_table(metadatadir, dataset_metadata):
+    table_metadata = Metadata(
+        dataset_id="br_ibge_pib",
+        table_id="municipio",
+        metadata_path=metadatadir,
+    )
+    table_metadata.create(if_exists="replace")
+    dataset_metadata.CKAN_API_KEY = "valid-key"
+    return table_metadata
+
+@pytest.fixture(name="existent_metadata")
+def fixture_existent_metadata(metadatadir):
+    table_metadata_obj = Metadata(
+        dataset_id="br_me_rais",
+        table_id="microdados_vinculos",
+        metadata_path=metadatadir,
+    )
+    return table_metadata_obj
+
+
+@pytest.fixture(name="existent_metadata_path")
+def fixture_existent_metadata_path(metadatadir):
+    return Path(metadatadir) / "br_me_rais" / "microdados_vinculos"
+
+@pytest.fixture(name="out_of_date_metadata_obj")
+def fixture_out_of_date_metadata_obj(metadatadir):
+    out_of_date_metadata = Metadata(dataset_id="br_me_caged", metadata_path=metadatadir)
+    out_of_date_metadata.create(if_exists="replace")
+
+    out_of_date_config = out_of_date_metadata.local_metadata
+    out_of_date_config["metadata_modified"] = "old_date"
+    ryaml.dump(
+        out_of_date_config, open(out_of_date_metadata.filepath, "w", encoding="utf-8")
+    )
+
+    return out_of_date_metadata
+
+
+@pytest.fixture(name="updated_metadata_obj")
+def fixture_updated_metadata_obj(metadatadir):
+    updated_metadata = Metadata(dataset_id="br_me_caged", metadata_path=metadatadir)
+    updated_metadata.create(if_exists="replace")
+
+    updated_config = updated_metadata.local_metadata
+    updated_config["metadata_modified"] = updated_metadata.ckan_metadata[
+        "metadata_modified"
+    ]
+    ryaml.dump(updated_config, open(updated_metadata.filepath, "w", encoding="utf-8"))
+
+    return updated_metadata
+
+@pytest.fixture(name="pytest_dataset")
+def fixture_pytest_dataset(metadatadir):
+    shutil.rmtree(metadatadir, ignore_errors=True)
+    pytest_dataset = Metadata(
+        dataset_id="pytest",
+        metadata_path=metadatadir
+    )
+    pytest_dataset.create(if_exists="replace")
+    
+    # fill dataset metadata for it to be publishable
+    pytest_dataset_metadata = pytest_dataset.local_metadata
+    pytest_dataset_metadata["organization"] = "acaps" # set valid organization
+    
+    # materialize metadata file
+    ryaml.dump(
+        pytest_dataset_metadata,
+        open(pytest_dataset.filepath, "w", encoding="utf-8")
+    )
+
+    return pytest_dataset
+
+
+@pytest.fixture(name="pytest_table")
+def fixture_pytest_table(metadatadir):
+    shutil.rmtree(metadatadir, ignore_errors=True)
+    pytest_table = Metadata(
+        dataset_id="pytest",
+        table_id="pytest"
+    )
+    pytest_table.create(if_exists="replace")
+    return pytest_table
+
+
+@pytest.fixture(name="invalid_organization_dataset")
+def fixture_invalid_organization_dataset(metadatadir):
+    invalid_organization_dataset = Metadata(
+        dataset_id="br_ibge_pib",
+        metadata_path=metadatadir,
+    )
+    invalid_organization_dataset.create(if_exists="replace")
+
+    invalid_config = invalid_organization_dataset.local_metadata
+    invalid_config["organization"] = "not-a-valid-organization"
+
+    with open(invalid_organization_dataset.filepath, "w", encoding="utf-8") as file:
+        ryaml.dump(invalid_config, file)
+
+    return invalid_organization_dataset
 
 def test_create_from_dataset_id(dataset_metadata, dataset_metadata_path):
     shutil.rmtree(dataset_metadata_path, ignore_errors=True)
@@ -96,19 +241,6 @@ def test_create_columns(table_metadata, table_metadata_path):
     assert (table_metadata_path / METADATA_FILES["table"]).exists()
 
 
-@pytest.fixture
-def existent_metadata(metadatadir):
-    table_metadata_obj = Metadata(
-        dataset_id="br_me_rais",
-        table_id="microdados_vinculos",
-        metadata_path=metadatadir,
-    )
-    return table_metadata_obj
-
-
-@pytest.fixture
-def existent_metadata_path(metadatadir):
-    return Path(metadatadir) / "br_me_rais" / "microdados_vinculos"
 
 
 def test_create_partition_columns_from_existent_table(
@@ -121,7 +253,7 @@ def test_create_partition_columns_from_existent_table(
     assert existent_metadata_path.exists()
 
     metadata_dict = existent_metadata.local_metadata
-    assert metadata_dict.get("partitions") == "ano, sigla_uf, id_municipio"
+    assert metadata_dict.get("partitions") == ["ano", "sigla_uf"]
 
 
 def test_create_partition_columns_from_user_input(
@@ -134,7 +266,7 @@ def test_create_partition_columns_from_user_input(
     assert existent_metadata_path.exists()
 
     metadata_dict = existent_metadata.local_metadata
-    assert metadata_dict.get("partitions") == "id_municipio"
+    assert metadata_dict.get("partitions") == ["id_municipio"]
 
 
 def test_create_force_columns_is_true(
@@ -185,32 +317,6 @@ def test_create_table_only_is_false(
     assert (dataset_metadata_path / METADATA_FILES["dataset"]).exists()
 
 
-@pytest.fixture
-def out_of_date_metadata_obj(metadatadir):
-    out_of_date_metadata = Metadata(dataset_id="br_me_caged", metadata_path=metadatadir)
-    out_of_date_metadata.create(if_exists="replace")
-
-    out_of_date_config = out_of_date_metadata.local_metadata
-    out_of_date_config["metadata_modified"] = "old_date"
-    ryaml.dump(
-        out_of_date_config, open(out_of_date_metadata.filepath, "w", encoding="utf-8")
-    )
-
-    return out_of_date_metadata
-
-
-@pytest.fixture
-def updated_metadata_obj(metadatadir):
-    updated_metadata = Metadata(dataset_id="br_me_caged", metadata_path=metadatadir)
-    updated_metadata.create(if_exists="replace")
-
-    updated_config = updated_metadata.local_metadata
-    updated_config["metadata_modified"] = updated_metadata.ckan_metadata[
-        "metadata_modified"
-    ]
-    ryaml.dump(updated_config, open(updated_metadata.filepath, "w", encoding="utf-8"))
-
-    return updated_metadata
 
 
 def test_is_updated_is_true(updated_metadata_obj):
@@ -221,24 +327,6 @@ def test_is_updated_is_false(out_of_date_metadata_obj):
     assert out_of_date_metadata_obj.is_updated() == False
 
 
-@pytest.fixture
-def valid_metadata_dataset(metadatadir):
-    dataset_metadata = Metadata(dataset_id="br_ibge_pib", metadata_path=metadatadir)
-    dataset_metadata.create(if_exists="replace")
-    dataset_metadata.CKAN_API_KEY = "valid-key"
-    return dataset_metadata
-
-
-@pytest.fixture
-def valid_metadata_table(metadatadir):
-    table_metadata = Metadata(
-        dataset_id="br_ibge_pib",
-        table_id="municipio",
-        metadata_path=metadatadir,
-    )
-    table_metadata.create(if_exists="replace")
-    dataset_metadata.CKAN_API_KEY = "valid-key"
-    return table_metadata
 
 
 def test_validate_is_succesful(
@@ -248,41 +336,6 @@ def test_validate_is_succesful(
     assert valid_metadata_table.validate() == True
 
 
-@pytest.fixture
-def invalid_dataset_metadata(metadatadir):
-    invalid_dataset_metadata = Metadata(
-        dataset_id="br_ibge_pib",
-        metadata_path=metadatadir,
-    )
-    invalid_dataset_metadata.create(if_exists="replace")
-
-    invalid_config = invalid_dataset_metadata.local_metadata
-    invalid_config["title"] = {"this_title": "is_not_valid"}
-
-    print(invalid_dataset_metadata.filepath)
-
-    with open(invalid_dataset_metadata.filepath, "w", encoding="utf-8") as file:
-        ryaml.dump(invalid_config, file)
-
-    return invalid_dataset_metadata
-
-
-@pytest.fixture
-def invalid_table_metadata(metadatadir):
-    invalid_dataset_metadata = Metadata(
-        dataset_id="br_ibge_pib",
-        table_id="municipio",
-        metadata_path=metadatadir,
-    )
-    invalid_dataset_metadata.create(if_exists="replace")
-
-    invalid_config = invalid_dataset_metadata.local_metadata
-    invalid_config["table_id"] = None
-
-    with open(invalid_dataset_metadata.filepath, "w", encoding="utf-8") as file:
-        ryaml.dump(invalid_config, file)
-
-    return invalid_dataset_metadata
 
 
 def test_validate_is_not_succesful(
@@ -296,22 +349,6 @@ def test_validate_is_not_succesful(
         invalid_dataset_metadata.validate()
 
 
-@pytest.fixture
-def invalid_organization_dataset(metadatadir):
-    invalid_organization_dataset = Metadata(
-        dataset_id="br_ibge_pib",
-        metadata_path=metadatadir,
-    )
-    invalid_organization_dataset.create(if_exists="replace")
-
-    invalid_config = invalid_organization_dataset.local_metadata
-    invalid_config["organization"] = "not-a-valid-organization"
-
-    with open(invalid_organization_dataset.filepath, "w", encoding="utf-8") as file:
-        ryaml.dump(invalid_config, file)
-
-    return invalid_organization_dataset
-
 
 def test_validate_organization_not_found(invalid_organization_dataset):
     with pytest.raises(BaseDosDadosException, match="Organization not found"):
@@ -319,39 +356,6 @@ def test_validate_organization_not_found(invalid_organization_dataset):
 
 
 # TODO: Mock ckan server to activate publish tests
-@pytest.fixture
-def pytest_dataset(metadatadir):
-    shutil.rmtree(metadatadir, ignore_errors=True)
-    pytest_dataset = Metadata(
-        dataset_id="pytest",
-        metadata_path=metadatadir
-    )
-    pytest_dataset.create(if_exists="replace")
-    
-    # fill dataset metadata for it to be publishable
-    pytest_dataset_metadata = pytest_dataset.local_metadata
-    pytest_dataset_metadata["organization"] = "acaps" # set valid organization
-    
-    # materialize metadata file
-    ryaml.dump(
-        pytest_dataset_metadata,
-        open(pytest_dataset.filepath, "w", encoding="utf-8")
-    )
-
-    return pytest_dataset
-
-
-@pytest.fixture
-def pytest_table(metadatadir):
-    shutil.rmtree(metadatadir, ignore_errors=True)
-    pytest_table = Metadata(
-        dataset_id="pytest",
-        table_id="pytest"
-    )
-    pytest_table.create(if_exists="replace")
-    return pytest_table
-
-
 @pytest.mark.skip(
     reason="This test requires a mocked CKAN server and a test dataset/table.")
 def test_publish_is_successful(
