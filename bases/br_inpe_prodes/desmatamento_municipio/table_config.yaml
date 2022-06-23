@@ -116,7 +116,7 @@ columns:
         - (1)
       covered_by_dictionary: no
       directory_column:  
-          dataset_id: br_bd_diretorios_data_tempo
+          dataset_id: br_bd_diretorios_brasil
           table_id: municipio
           column_name: id_municipio
       measurement_unit: 
@@ -138,7 +138,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false
+      is_partition: true
     - name: area
       bigquery_type: int64
       description: Área
