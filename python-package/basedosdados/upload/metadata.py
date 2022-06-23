@@ -1,3 +1,7 @@
+'''
+Class to handle Base dos Dados metadata.
+'''
+# pylint: disable=fixme, invalid-name
 from __future__ import annotations
 
 from copy import deepcopy
@@ -89,12 +93,11 @@ class Metadata(Base):
             return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
 
         # in case `self` refers to a new table's metadata
-        elif self.table_id and not self.exists_in_ckan():
+        if self.table_id and not self.exists_in_ckan():
             if self.dataset_metadata_obj.exists_in_ckan():
                 return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
-            else:
-                # mock `owner_org` for validation
-                return "3626e93d-165f-42b8-bde1-2e0972079694"
+            # mock `owner_org` for validation
+            return "3626e93d-165f-42b8-bde1-2e0972079694"
 
         # for datasets, `owner_org` must come from the YAML file
         organization_id = "".join(self.local_metadata.get("organization") or [])
@@ -161,7 +164,6 @@ class Metadata(Base):
                     "update_frequency": self.local_metadata.get("update_frequency"),
                     "observation_level": self.local_metadata.get("observation_level"),
                     "last_updated": self.local_metadata.get("last_updated"),
-                    "version": self.local_metadata.get("version"),
                     "published_by": self.local_metadata.get("published_by"),
                     "data_cleaned_by": self.local_metadata.get("data_cleaned_by"),
                     "data_cleaning_description": self.local_metadata.get(
@@ -230,9 +232,9 @@ class Metadata(Base):
             url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_show?"
             url += f"dataset_id={self.dataset_id}&table_id={self.table_id}"
         else:
-            id = self.dataset_id.replace("_", "-")
+            ds_id = self.dataset_id.replace("_", "-")
             # TODO: use `bd_bdm_dataset_show` when it's available for empty packages
-            url = f"{self.CKAN_URL}/api/3/action/package_show?id={id}"
+            url = f"{self.CKAN_URL}/api/3/action/package_show?id={ds_id}"
 
         exists_in_ckan = requests.get(url).json().get("success")
 
@@ -248,17 +250,16 @@ class Metadata(Base):
         """
 
         if not self.local_metadata.get("metadata_modified"):
-            return True if not self.exists_in_ckan() else False
-        else:
-            ckan_modified = self.ckan_metadata.get("metadata_modified")
-            local_modified = self.local_metadata.get("metadata_modified")
-            return ckan_modified == local_modified
+            return bool(not self.exists_in_ckan())
+        ckan_modified = self.ckan_metadata.get("metadata_modified")
+        local_modified = self.local_metadata.get("metadata_modified")
+        return ckan_modified == local_modified
 
     def create(
         self,
         if_exists: str = "raise",
-        columns: list = [],
-        partition_columns: list = [],
+        columns: list = None,
+        partition_columns: list = None,
         force_columns: bool = False,
         table_only: bool = True,
     ) -> Metadata:
