@@ -1,7 +1,6 @@
 import pytest
 from pathlib import Path
 from google.cloud import storage
-import shutil
 from google.api_core.exceptions import NotFound
 from basedosdados import Storage
 
@@ -10,38 +9,26 @@ TABLE_ID = "pytest"
 SAVEPATH = Path(__file__).parent / "tmp_bases"
 TABLE_FILES = ["publish.sql", "table_config.yaml"]
 
-
-@pytest.fixture
-def metadatadir(tmpdir_factory):
-    (Path(__file__).parent / "tmp_bases").mkdir(exist_ok=True)
-    return Path(__file__).parent / "tmp_bases"
-
-
-@pytest.fixture
-def storage(metadatadir):
-    return Storage(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir)
-
-
-def test_upload(storage, metadatadir):
+def test_upload(storage, sample_data):
 
     storage.delete_file("municipio.csv", "staging", not_found_ok=True)
 
-    storage.upload(metadatadir / "municipio.csv", mode="staging")
+    storage.upload(sample_data / "municipio.csv", mode="staging")
 
     with pytest.raises(Exception):
-        storage.upload(metadatadir / "municipio.csv", mode="staging")
+        storage.upload(sample_data / "municipio.csv", mode="staging")
 
-    storage.upload(metadatadir / "municipio.csv", mode="staging", if_exists="replace")
+    storage.upload(sample_data / "municipio.csv", mode="staging", if_exists="replace")
 
     storage.upload(
-        metadatadir / "municipio.csv",
+        sample_data / "municipio.csv",
         mode="staging",
         if_exists="replace",
         partitions="key1=value1/key2=value2",
     )
 
     storage.upload(
-        metadatadir / "municipio.csv",
+        sample_data / "municipio.csv",
         mode="staging",
         if_exists="replace",
         partitions={"key1": "value1", "key2": "value1"},
@@ -49,7 +36,7 @@ def test_upload(storage, metadatadir):
 
     with pytest.raises(Exception):
         storage.upload(
-            metadatadir / "municipio.csv",
+            sample_data / "municipio.csv",
             mode="staging",
             if_exists="replace",
             partitions=["key1", "value1", "key2", "value1"],

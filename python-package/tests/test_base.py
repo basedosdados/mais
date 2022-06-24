@@ -6,26 +6,7 @@ Tests for Base class
 import re
 from pathlib import Path
 
-import pytest
 from google.cloud import storage, bigquery
-from basedosdados.upload.base import Base
-
-
-@pytest.fixture(name="base")
-def fixture_base():
-    """
-    Fixture for the base class
-    """
-    return Base()
-
-
-@pytest.fixture(name="config_file_exists")
-def fixture_config_file_exists(base):
-    '''
-    Fixture for the config_file_exists value
-    '''
-    config_file = base.config_path / "config.toml"
-    return config_file.exists()
 
 
 def test_bucket_name(base, config_file_exists, capsys):

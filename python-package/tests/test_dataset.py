@@ -9,44 +9,17 @@ import pytest
 from google.cloud import bigquery
 import google.api_core.exceptions as google_exceptions
 
-from basedosdados import Dataset
-
 DATASET_ID = "pytest"
 
 DATASET_FILES = ["code", "dataset_config.yaml", "README.md"]
 
 
-@pytest.fixture(name="folder")
-def fixture_folder():
-    """
-    Fixture for the folder
-    """
-    return "tmp_bases"
-
-
-@pytest.fixture(name="metadatadir")
-def fixture_metadatadir(folder):
-    """
-    Fixture for the metadata directory
-    """
-    (Path(__file__).parent / folder / DATASET_ID).mkdir(exist_ok=True)
-    return Path(__file__).parent / folder / DATASET_ID
-
-
-@pytest.fixture(name="dataset")
-def fixture_dataset(metadatadir):
-    """
-    Fixture for the dataset class
-    """
-    return Dataset(dataset_id=DATASET_ID, metadata_path=metadatadir)
-
-
-def _check_files(folder):
+def _check_files(testdir):
     """
     Check if the files are in the folder
     """
     for file in DATASET_FILES:
-        assert (folder / file).exists()
+        assert (testdir / file).exists()
 
 
 def _dataset_exists(dataset):
@@ -62,14 +35,14 @@ def _dataset_exists(dataset):
         return False
 
 
-def test_init(dataset, metadatadir):
+def test_init(dataset, testdir):
     """
     Test the init function
     """
     # remove folder
-    shutil.rmtree(Path(metadatadir))
+    shutil.rmtree(Path(testdir))
 
-    folder = Path(metadatadir) / DATASET_ID
+    folder = Path(testdir) / DATASET_ID
 
     dataset.init()
     assert folder.exists()

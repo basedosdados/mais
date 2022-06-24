@@ -3,57 +3,12 @@ Tests for DataType class
 """
 # pylint: disable=too-many-arguments, invalid-name
 
-from pathlib import Path
-
-import pytest
 from google.cloud.bigquery.external_config import (
     ExternalConfig,
     HivePartitioningOptions,
 )
 import basedosdados as bd
 from basedosdados.upload.datatypes import Datatype
-
-
-@pytest.fixture(name="metadatadir")
-def fixture_metadatadir():
-    """
-    Fixture for metadatadir
-    """
-    (Path(__file__).parent / "tmp_bases").mkdir(exist_ok=True)
-    return Path(__file__).parent / "tmp_bases"
-
-
-@pytest.fixture(name="sample_data")
-def fixture_sample_data(metadatadir):
-    """
-    Fixture for sample_data
-    """
-    return metadatadir.parent / "sample_data" / "table"
-
-
-@pytest.fixture(name="data_csv_path")
-def fixture_data_csv_path(sample_data):
-    """
-    Fixture for data_csv_path
-    """
-    return sample_data / "municipio.csv"
-
-
-@pytest.fixture(name="data_parquet_path")
-def fixture_data_parquet_path(sample_data):
-    """
-    Fixture for data_parquet_path
-    """
-    return sample_data / "municipio.parquet"
-
-
-@pytest.fixture(name="data_avro_path")
-def fixture_data_avro_path(sample_data):
-    """
-    Fixture for data_avro_path
-    """
-    return sample_data / "municipio.avro"
-
 
 def test_header_avro(data_avro_path):
     """
