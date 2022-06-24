@@ -1,7 +1,7 @@
 """
 Class to handle Base dos Dados metadata.
 """
-# pylint: disable=fixme, invalid-name, too-many-arguments, redefined-builtin
+# pylint: disable=fixme, invalid-name, too-many-arguments, redefined-builtin, undefined-loop-variable
 from __future__ import annotations
 
 from copy import deepcopy
@@ -294,6 +294,10 @@ class Metadata(Base):
             dy exists and `if_exists` is set to `"raise"`.
         """
 
+        # see: https://docs.python.org/3/reference/compound_stmts.html#function-definitions
+        columns = [] if columns is None else columns
+        partition_columns = [] if partition_columns is None else partition_columns
+
         if self.filepath.exists() and if_exists == "raise":
             raise FileExistsError(
                 f"{self.filepath} already exists."
@@ -307,7 +311,7 @@ class Metadata(Base):
             # 1. columns is empty and
             # 2. force_columns is True
 
-            # TODO: Is this sufficient to add columns?
+            # TODO: Is it sufficient to add columns?
             if self.table_id and (force_columns or not ckan_metadata.get("columns")):
                 ckan_metadata["columns"] = [{"name": c} for c in columns]
 
@@ -571,7 +575,6 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
 
             yaml_obj[k][dk] = handle_data(
                 k=dk,
-                schema=definitions[d]["properties"],
                 data=data.get(k, {}),
             )
 
@@ -599,6 +602,11 @@ def add_yaml_property(
         has_column (bool): If the goal is a column, no comments are written.
     """
 
+    # see: https://docs.python.org/3/reference/compound_stmts.html#function-definitions
+    properties = {} if properties is None else properties
+    definitions = {} if definitions is None else definitions
+    metadata = {} if metadata is None else metadata
+
     # Looks for the key
     # If goal is none has to look for id_before == None
     for key, property in properties.items():
@@ -616,9 +624,9 @@ def add_yaml_property(
                 )
 
                 if yaml[key] == ordereddict():
-                    yaml[key] = handle_data(k=key, schema=properties, data=metadata)
+                    yaml[key] = handle_data(k=key, data=metadata)
             else:
-                yaml[key] = handle_data(k=key, schema=properties, data=metadata)
+                yaml[key] = handle_data(k=key, data=metadata)
 
             # Add comments
             comment = None
@@ -628,29 +636,29 @@ def add_yaml_property(
             yaml.yaml_set_comment_before_after_key(key, before=comment)
             break
 
-        # Return a ruaml object when property doesn't point to any other property
-        id_after = properties[key]["yaml_order"]["id_after"]
+    # Return a ruaml object when property doesn't point to any other property
+    id_after = properties[key]["yaml_order"]["id_after"]
 
-        if id_after is None:
-            return yaml
+    if id_after is None:
+        return yaml
 
-        if id_after not in properties.keys():
-            raise BaseDosDadosException(
-                f"Inconsistent YAML ordering: {id_after} is pointed to by {key}"
-                f" but doesn't have itself a `yaml_order` field in the JSON S"
-                f"chema."
-            )
-
-        updated_props = deepcopy(properties)
-        updated_props.pop(key)
-        return add_yaml_property(
-            yaml=yaml,
-            properties=updated_props,
-            definitions=definitions,
-            metadata=metadata,
-            goal=id_after,
-            has_column=has_column,
+    if id_after not in properties.keys():
+        raise BaseDosDadosException(
+            f"Inconsistent YAML ordering: {id_after} is pointed to by {key}"
+            f" but doesn't have itself a `yaml_order` field in the JSON S"
+            f"chema."
         )
+
+    updated_props = deepcopy(properties)
+    updated_props.pop(key)
+    return add_yaml_property(
+        yaml=yaml,
+        properties=updated_props,
+        definitions=definitions,
+        metadata=metadata,
+        goal=id_after,
+        has_column=has_column,
+    )
 
 
 def build_yaml_object(
@@ -658,9 +666,9 @@ def build_yaml_object(
     table_id: str,
     config: dict,
     schema: dict,
-    metadata: dict,
-    columns_schema: dict,
-    partition_columns: list,
+    metadata: dict = None,
+    columns_schema: dict = None,
+    partition_columns: list = None,
 ):
     """Build a dataset_config.yaml or table_config.yaml
 
@@ -678,6 +686,10 @@ def build_yaml_object(
     Returns:
         CommentedMap: A YAML object with the dataset or table metadata.
     """
+    # see: https://docs.python.org/3/reference/compound_stmts.html#function-definitions
+    metadata = {} if metadata is None else metadata
+    columns_schema = {} if columns_schema is None else columns_schema
+    partition_columns = [] if partition_columns is None else partition_columns
 
     properties: dict = schema["properties"]
     definitions: dict = schema["definitions"]
