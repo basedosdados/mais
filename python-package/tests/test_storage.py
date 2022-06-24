@@ -1,6 +1,10 @@
-import pytest
+'''
+Tests for the Storage class
+'''
+
 from pathlib import Path
-from google.cloud import storage
+
+import pytest
 from google.api_core.exceptions import NotFound
 from basedosdados import Storage
 
@@ -10,6 +14,9 @@ SAVEPATH = Path(__file__).parent / "tmp_bases"
 TABLE_FILES = ["publish.sql", "table_config.yaml"]
 
 def test_upload(storage, sample_data):
+    '''
+    Test the upload method
+    '''
 
     storage.delete_file("municipio.csv", "staging", not_found_ok=True)
 
@@ -44,6 +51,9 @@ def test_upload(storage, sample_data):
 
 
 def test_download_not_found(storage):
+    '''
+    Test the download method when the file does not exist
+    '''
 
     with pytest.raises(FileNotFoundError):
         storage.download(filename="not_found", savepath=SAVEPATH)
@@ -53,6 +63,9 @@ def test_download_not_found(storage):
 
 
 def test_download_filename(storage):
+    '''
+    Test the download method with a filename
+    '''
 
     storage.download(filename="municipio.csv", savepath=SAVEPATH, mode="staging")
 
@@ -62,6 +75,9 @@ def test_download_filename(storage):
 
 
 def test_download_partitions(storage):
+    '''
+    Test the download method with partitions
+    '''
 
     storage.download(
         savepath=SAVEPATH,
@@ -97,6 +113,9 @@ def test_download_partitions(storage):
 
 
 def test_download_default(storage):
+    '''
+    Test the download method with the default mode
+    '''
     storage.download(savepath=SAVEPATH, mode="staging")
 
     assert (
@@ -109,6 +128,9 @@ def test_download_default(storage):
 
 
 def test_delete_file(storage):
+    '''
+    Test the delete_file method
+    '''
 
     storage.delete_file("municipio.csv", "staging")
 
@@ -118,7 +140,10 @@ def test_delete_file(storage):
     storage.delete_file("municipio.csv", "staging", not_found_ok=True)
 
 
-def test_copy_table(storage):
+def test_copy_table():
+    '''
+    Test the copy_table method
+    '''
 
     Storage("br_ibge_pib", "municipio").copy_table()
 
@@ -130,7 +155,10 @@ def test_copy_table(storage):
     )
 
 
-def test_delete_table(storage):
+def test_delete_table():
+    '''
+    Test the delete_table method
+    '''
 
     Storage("br_ibge_pib", "municipio").delete_table(bucket_name="basedosdados-dev")
 

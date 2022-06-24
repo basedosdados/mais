@@ -250,8 +250,8 @@ def fixture_invalid_organization_dataset(testdir):
     return invalid_organization_dataset
 
 
-@pytest.fixture
-def storage(testdir):
+@pytest.fixture(name="storage")
+def fixture_storage(testdir):
     """
     Fixture for storage object.
     """
