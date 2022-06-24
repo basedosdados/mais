@@ -1,7 +1,7 @@
-'''
+"""
 Class to handle Base dos Dados metadata.
-'''
-# pylint: disable=fixme, invalid-name
+"""
+# pylint: disable=fixme, invalid-name, too-many-arguments, redefined-builtin
 from __future__ import annotations
 
 from copy import deepcopy
@@ -299,7 +299,8 @@ class Metadata(Base):
                 f"{self.filepath} already exists."
                 + " Set the arg `if_exists` to `replace` to replace it."
             )
-        elif if_exists != "pass":
+
+        if if_exists != "pass":
             ckan_metadata = self.ckan_metadata
 
             # Add local columns if
@@ -426,7 +427,7 @@ class Metadata(Base):
                     f"{self.dataset_id or self.table_id} already exists in CKAN."
                     f" Set the arg `if_exists` to `replace` to replace it."
                 )
-            elif if_exists == "pass":
+            if if_exists == "pass":
                 return {}
 
         ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=self.CKAN_API_KEY)
@@ -488,7 +489,7 @@ class Metadata(Base):
                 f"e see the traceback below to get information on how to corr"
                 f"ect it.\n\n{repr(e)}"
             )
-            raise BaseDosDadosException(message)
+            raise BaseDosDadosException(message) from e
 
         except NotAuthorized as e:
             message = (
@@ -498,7 +499,7 @@ class Metadata(Base):
                 "n authorized user to publish modifications to a dataset or t"
                 "able's metadata."
             )
-            raise BaseDosDadosException(message)
+            raise BaseDosDadosException(message) from e
 
 
 ###############################################################################
@@ -506,7 +507,7 @@ class Metadata(Base):
 ###############################################################################
 
 
-def handle_data(k, schema, data, local_default=None):
+def handle_data(k, data, local_default=None):
     """Parse API's response data so that it is used in the YAML configuration
     files.
 
@@ -566,7 +567,7 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
     # To get PublishedBy
     d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
     if "properties" in definitions[d].keys():
-        for dk, dv in definitions[d]["properties"].items():
+        for dk, _ in definitions[d]["properties"].items():
 
             yaml_obj[k][dk] = handle_data(
                 k=dk,
@@ -579,9 +580,9 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
 
 def add_yaml_property(
     yaml: CommentedMap,
-    properties: dict = {},
-    definitions: dict = {},
-    metadata: dict = {},
+    properties: dict = None,
+    definitions: dict = None,
+    metadata: dict = None,
     goal=None,
     has_column=False,
 ):
@@ -602,7 +603,7 @@ def add_yaml_property(
     # If goal is none has to look for id_before == None
     for key, property in properties.items():
         goal_was_reached = key == goal
-        goal_was_reached |= property["yaml_order"]["id_before"] == None
+        goal_was_reached |= property["yaml_order"]["id_before"] is None
 
         if goal_was_reached:
             if "allOf" in property:
@@ -627,18 +628,19 @@ def add_yaml_property(
             yaml.yaml_set_comment_before_after_key(key, before=comment)
             break
 
-    # Return a ruaml object when property doesn't point to any other property
-    id_after = properties[key]["yaml_order"]["id_after"]
+        # Return a ruaml object when property doesn't point to any other property
+        id_after = properties[key]["yaml_order"]["id_after"]
 
-    if id_after is None:
-        return yaml
-    elif id_after not in properties.keys():
-        raise BaseDosDadosException(
-            f"Inconsistent YAML ordering: {id_after} is pointed to by {key}"
-            f" but doesn't have itself a `yaml_order` field in the JSON S"
-            f"chema."
-        )
-    else:
+        if id_after is None:
+            return yaml
+
+        if id_after not in properties.keys():
+            raise BaseDosDadosException(
+                f"Inconsistent YAML ordering: {id_after} is pointed to by {key}"
+                f" but doesn't have itself a `yaml_order` field in the JSON S"
+                f"chema."
+            )
+
         updated_props = deepcopy(properties)
         updated_props.pop(key)
         return add_yaml_property(
@@ -656,9 +658,9 @@ def build_yaml_object(
     table_id: str,
     config: dict,
     schema: dict,
-    metadata: dict = dict(),
-    columns_schema: dict = dict(),
-    partition_columns: list = list(),
+    metadata: dict,
+    columns_schema: dict,
+    partition_columns: list,
 ):
     """Build a dataset_config.yaml or table_config.yaml
 
