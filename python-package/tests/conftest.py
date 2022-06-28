@@ -8,7 +8,7 @@ import shutil
 import pytest
 import ruamel.yaml as ryaml
 
-from basedosdados import Metadata, Storage, Dataset
+from basedosdados import Metadata, Storage, Dataset, Table
 from basedosdados.upload.base import Base
 
 
@@ -282,6 +282,13 @@ def fixture_data_csv_path(sample_data):
     """
     return sample_data / "municipio.csv"
 
+# @pytest.fixture(name="data_csv_path_partitioned")
+# def fixture_data_csv_path_partitioned(testdir):
+#     """
+#     Fixture for partitioned data_csv_path
+#     """
+#     return Path(testdir) / "staging/pytest/pytest/key1=value1/key2=value1/municipio.csv"
+
 
 @pytest.fixture(name="data_parquet_path")
 def fixture_data_parquet_path(sample_data):
@@ -297,3 +304,15 @@ def fixture_data_avro_path(sample_data):
     Fixture for data_avro_path
     """
     return sample_data / "municipio.avro"
+
+@pytest.fixture(name="table")
+def fixture_table(testdir):
+
+    t = Table(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=testdir)
+    t._refresh_templates()
+    return t
+
+
+@pytest.fixture(name="folder")
+def fixture_folder(testdir):
+    return testdir / DATASET_ID / TABLE_ID

@@ -7,50 +7,13 @@ from google.api_core.exceptions import NotFound
 import basedosdados as bd
 from basedosdados import Dataset, Table, Storage
 from basedosdados.exceptions import BaseDosDadosException
+import pandas as pd
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
 
 TABLE_FILES = ["publish.sql", "table_config.yaml"]
 
-
-@pytest.fixture
-def testdir(tmpdir_factory):
-    (Path(__file__).parent / "tmp_bases").mkdir(exist_ok=True)
-    return Path(__file__).parent / "tmp_bases"
-
-
-@pytest.fixture
-def table(testdir):
-
-    t = Table(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=testdir)
-    t._refresh_templates()
-    return t
-
-
-@pytest.fixture
-def folder(testdir):
-    return testdir / DATASET_ID / TABLE_ID
-
-
-@pytest.fixture
-def sample_data(testdir):
-    return testdir.parent / "sample_data" / "table"
-
-
-@pytest.fixture
-def data_csv_path(sample_data):
-    return sample_data / "municipio.csv"
-
-
-@pytest.fixture
-def data_parquet_path(sample_data):
-    return sample_data / "municipio.parquet"
-
-
-@pytest.fixture
-def data_avro_path(sample_data):
-    return sample_data / "municipio.avro"
 
 def check_files(folder):
 
@@ -234,22 +197,8 @@ def test_create_if_table_exist_replace(table, testdir, data_csv_path, sample_dat
     assert table_exists(table, "staging")
 
 
-def test_table_create_avro_implemented_source_format(data_avro_path):
-    table = bd.Table("ds_test", "tb_test")
-    # table.delete(mode="all")
-    table.create(
-        path=data_avro_path,
-        if_table_exists="replace",
-        if_storage_data_exists="pass",
-        if_table_config_exists="replace",
-        source_format="avro",
-    )
-    assert table_exists(table, "staging")
-
-
 def test_table_create_parquet_implemented_source_format(data_parquet_path):
     table = bd.Table("ds_test", "tb_test")
-    # table.delete(mode="all")
     table.create(
         path=data_parquet_path,
         if_table_exists="replace",
@@ -268,6 +217,19 @@ def test_table_create_csv_implemented_source_format(data_csv_path):
         if_storage_data_exists="replace",
         if_table_config_exists="replace",
         source_format="csv",
+    )
+    assert table_exists(table, "staging")
+
+
+@pytest.mark.skip(reason="External configuration not fully implemented")
+def test_table_create_avro_implemented_source_format(data_avro_path):
+    table = bd.Table("ds_test", "tb_test")
+    table.create(
+        path=data_avro_path,
+        if_table_exists="replace",
+        if_storage_data_exists="pass",
+        if_table_config_exists="replace",
+        source_format="avro",
     )
     assert table_exists(table, "staging")
 
@@ -399,14 +361,6 @@ def test_create_auto_partitions(testdir, data_csv_path, sample_data):
         metadata_path=testdir,
     )
 
-    table_part.delete("all")
-
-    table_part.init(
-        data_sample_path=data_csv_path,
-        if_folder_exists="replace",
-        if_table_config_exists="replace",
-    )
-
     Path(testdir / "partitions").mkdir()
 
     shutil.copy(
@@ -425,14 +379,14 @@ def test_create_auto_partitions(testdir, data_csv_path, sample_data):
         )
 
     table_part.create(
-        testdir / "partitions",
+        path = testdir / "partitions",
         if_table_exists="replace",
-        if_table_config_exists="pass",
+        if_table_config_exists="replace",
         if_storage_data_exists="replace",
     )
     assert table_exists(table_part, "staging")
 
-    table_part.publish()
+    table_part.publish(if_exists="replace")
 
     assert table_exists(table_part, "prod")
 
@@ -465,7 +419,7 @@ def test_update_raises(testdir, sample_data, capsys):
     )
 
     with pytest.raises(Exception):
-        table.update("all")
+        table_part.update("all")
         assert "table_config.yaml" in out
 
 

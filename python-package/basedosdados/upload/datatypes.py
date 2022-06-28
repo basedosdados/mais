@@ -73,7 +73,7 @@ class Datatype:
             _external_config = bigquery.ExternalConfig("PARQUET")
         else:
             raise NotImplementedError(
-                "Base dos Dados just supports comma separated csv, avro and parquet files"
+                "Base dos Dados just supports csv, avro and parquet files"
             )
 
         _external_config.source_uris = f"gs://{self.table_obj.bucket_name}/staging/{self.table_obj.dataset_id}/{self.table_obj.table_id}/*"
