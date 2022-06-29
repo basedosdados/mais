@@ -77,13 +77,13 @@ data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/b
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
     name: 
-    organization_id: ''
+    organization_id: 
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
 
 # Url dos arquivos auxiliares no GCP Storage.
-auxiliary_files_url: ''
+auxiliary_files_url: 
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
@@ -98,7 +98,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: []
+partitions: ano
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
