@@ -1,74 +1,61 @@
-dataset_id: br_inpe_prodes # AUTO GENERATED
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-inpe-prodes
 
-url_ckan: https://basedosdados.org/dataset/br-inpe-prodes
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inpe_prodes
-
-# Descreva a base.
-# Ela é sobre o que?
-# Quais as principais fontes de dados?
-# Há links para FAQs e explicações?
-description: | # REQUIRED
-    Dados de desmatamento do projeto PRODES do Instituto Nacional de Pesquisas Espaciais (INPE).
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Desmatamento PRODES
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: instituto-nacional-de-pesquisas-espaciais
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - br-inpe
 
-# Qual departamento/grupo/pessoa mantém os dados originais?
-author:
-    name: <nome>
-    email: <email>
+# Descrição do conjunto
+notes: "O projeto PRODES realiza o monitoramento por satélites do desmatamento por\
+    \ corte raso na Amazônia Legal e produz, desde 1988, as taxas anuais de desmatamento\
+    \ na região, que são usadas pelo governo brasileiro para o estabelecimento de\
+    \ políticas públicas. As taxas anuais são estimadas a partir dos incrementos de\
+    \ desmatamento identificados em cada imagem de satélite que cobre a Amazônia Legal.\
+    \ A primeira apresentação dos dados é realizada para dezembro de cada ano, na\
+    \ forma de estimativa. Os dados consolidados são apresentados no primeiro semestre\
+    \ do ano seguinte.\r\n\r\nO PRODES utiliza imagens de satélites da classe LANDSAT\
+    \ (20 a 30 metros de resolução espacial e taxa de revisita de 16 dias) numa combinação\
+    \ que busca minimizar o problema da cobertura de nuvens e garantir critérios de\
+    \ interoperabilidade. As imagens do satélite americano LANDSAT-5/TM foram, historicamente,\
+    \ as mais utilizadas pelo projeto, mas as imagens do sensor CCD a bordo do CBERS-2/2B,\
+    \ satélites do programa sino-brasileiro de sensoriamento remoto, foram bastante\
+    \ usadas. O PRODES também fez uso de imagens LISS-3 do satélite indiano IRS-1\
+    \ e também das imagens do satélite inglês UK-DMC2. Atualmente faz uso massivo\
+    \ das imagens do LANDSAT 8/OLI, CBERS 4 e IRS-2. Independente do instrumento utilizado,\
+    \ a área mínima mapeada pelo PRODES é de 6,25 hectares.\r\n\r\nAs estimativas\
+    \ do PRODES são consideradas confiáveis pelos cientistas nacionais e internacionais\
+    \ (Kintish, 2007). Esse sistema tem demonstrado ser de grande importância para\
+    \ ações e planejamento de políticas públicas da Amazônia. Resultados recentes,\
+    \ a partir de análises realizadas com especialistas independentes, indicam nível\
+    \ de precisão próximo a 95%."
 
-# Onde encontrar os dados originais e mais informações?
-website:
-    - http://terrabrasilis.dpi.inpe.br/en/home-page/
-    - <website 2>
-
-# Quais grupos caracterizam a base?
+# Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
 groups:
     - meio-ambiente
-    - <grupo 2>
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
 # Caso crie etiquetas novas, as regras são:
-#   - letras minúsculas
-#   - sem acentos
-#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - desmatamento
-    - uso da terra
     - conservacao
+    - desmatamento
     - mudancas climaticas
+    - uso da terra
 
-# Em quais línguas a base (ou a fonte original) está disponível?
-# Regras: minúsculo, sem acentos.
-# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
-languages:
-    - portugues
-
-# Os dados originais estão disponíveis de graça?
-free: sim
-
-# Are microdata available for download?
-microdata: sim
-
-# Existe uma API na fonte original?
-API: não
-
-# É necessário registrar um usuário para baixar os dados originais?
-registration: não
-
-# Como os dados originais estão disponibilizados?
-availability: online
-
-# A fonte original requer IP brasileiro para acesso?
-brazilian_IP: não
-
-# Essa base está sob qual licença?
-# A licença MIT se aplica a bases públicas.
-# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
-license: 
-    name: MIT # REQUIRED
-    url: <url>
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2022-06-08T17:59:23.824842'
