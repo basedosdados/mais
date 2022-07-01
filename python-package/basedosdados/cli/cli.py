@@ -494,7 +494,6 @@ def upload_table(
         partitions=partitions,
         if_exists=if_exists,
         chunk_size=chunk_size,
-        feat/refactor-update-columns
     )
 
     click.echo(
@@ -576,7 +575,6 @@ def upload_storage(
         partitions=partitions,
         if_exists=if_exists,
         chunk_size=chunk_size,
-        feat/refactor-update-columns
     )
 
     click.echo(
