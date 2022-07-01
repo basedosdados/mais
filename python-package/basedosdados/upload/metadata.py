@@ -212,7 +212,7 @@ class Metadata(Base):
 
         if self.table_id:
             table_url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_schema"
-            return requests.get(table_url).json().get("result")["schema"]
+            return requests.get(table_url).json().get("result")
 
         dataset_url = f"{self.CKAN_URL}/api/3/action/bd_dataset_schema"
         return requests.get(dataset_url).json().get("result")
