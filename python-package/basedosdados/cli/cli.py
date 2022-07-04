@@ -2,7 +2,7 @@
 CLI package for the application.
 """
 
-# pylint: disable=locally-disabled, multiple-statements, fixme, line-too-long, too-many-arguments, invalid-name, too-many-lines, protected-access
+# pylint: disable=locally-disabled, multiple-statements, fixme, line-too-long, too-many-arguments, invalid-name, too-many-lines, protected-access, unused-argument, no-value-for-parameter, redefined-builtin
 
 import click
 from basedosdados.upload.base import Base
@@ -40,6 +40,7 @@ def cli_dataset(ctx):
     """
     Command to manage datasets.
     """
+
 
 @cli_dataset.command(name="init", help="Initialize metadata files of dataset")
 @click.argument("dataset_id")
@@ -194,6 +195,7 @@ def cli_table():
     """
     Command to manage tables.
     """
+
 
 @cli_table.command(name="init", help="Create metadata files")
 @click.argument("dataset_id")
@@ -460,9 +462,9 @@ def publish_table(ctx, dataset_id, table_id, if_exists):
 @click.option("--mode", help="Which table to delete [prod|staging]", required=True)
 @click.pass_context
 def delete_table(ctx, dataset_id, table_id, mode):
-    '''
+    """
     Delete BigQuery table.
-    '''
+    """
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).delete(
         mode=mode,
@@ -489,7 +491,10 @@ def upload_table(
     ctx, dataset_id, table_id, filepath, partitions, if_exists, chunk_size
 ):
 
-    blob_name = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).append(
+    """
+    Upload data to BigQuery table.
+    """
+    Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).append(
         filepath=filepath,
         partitions=partitions,
         if_exists=if_exists,
@@ -506,9 +511,10 @@ def upload_table(
 
 @click.group(name="storage")
 def cli_storage():
-    '''
+    """
     Commands for Google Cloud Storage.
-    '''
+    """
+
 
 @cli_storage.command(name="init", help="Create bucket and initial folders")
 @click.option("--bucket_name", default="basedosdados", help="Bucket name")
@@ -568,8 +574,12 @@ def upload_storage(
     ctx, dataset_id, table_id, filepath, mode, partitions, if_exists, chunk_size
 ):
 
+    '''
+    Upload file to bucket.
+    '''
+
     ctx.obj.pop("bucket_name")
-    blob_name = Storage(dataset_id, table_id, **ctx.obj).upload(
+    Storage(dataset_id, table_id, **ctx.obj).upload(
         filepath=filepath,
         mode=mode,
         partitions=partitions,
@@ -579,7 +589,7 @@ def upload_storage(
 
     click.echo(
         click.style(
-            f"Data was added to `{blob_name}`",
+            "Data was added",
             fg="green",
         )
     )
@@ -693,6 +703,7 @@ def cli_list():
     CLI list commands.
     """
 
+
 @cli_list.command(name="datasets", help="List datasets available at given project_id")
 @click.option(
     "--project_id",
@@ -711,9 +722,9 @@ def cli_list():
 )
 @click.pass_context
 def cli_list_datasets(ctx, project_id, filter_by, with_description):
-    '''
+    """
     List datasets available at given project_id
-    '''
+    """
     bd.list_datasets(
         query_project_id=project_id,
         filter_by=filter_by,
@@ -757,6 +768,7 @@ def cli_get():
     Get commands.
     """
 
+
 @cli_get.command(
     name="dataset_description", help="Get the full description for given dataset"
 )
@@ -768,9 +780,9 @@ def cli_get():
 )
 @click.pass_context
 def cli_get_dataset_description(ctx, dataset_id, project_id):
-    '''
+    """
     Get the full description for given dataset
-    '''
+    """
     bd.get_dataset_description(
         dataset_id=dataset_id,
         query_project_id=project_id,
@@ -789,9 +801,9 @@ def cli_get_dataset_description(ctx, dataset_id, project_id):
 )
 @click.pass_context
 def cli_get_table_description(ctx, dataset_id, table_id, project_id):
-    '''
+    """
     Get the full description for given table
-    '''
+    """
     bd.get_table_description(
         dataset_id=dataset_id,
         table_id=table_id,
@@ -817,9 +829,9 @@ def cli_get_table_columns(
     table_id,
     project_id,
 ):
-    '''
+    """
     Get fields names,types and description for columns at given table
-    '''
+    """
     bd.get_table_columns(
         dataset_id=dataset_id,
         table_id=table_id,
@@ -1001,6 +1013,7 @@ def cli_config():
     CLI config commands.
     """
 
+
 @cli_config.command(name="init", help="Initialize configuration")
 @click.option(
     "--overwrite",
@@ -1019,11 +1032,12 @@ def init(ctx, overwrite):
 @cli_config.command(name="refresh_template", help="Overwrite current templates")
 @click.pass_context
 def init_refresh_templates(ctx):
-    '''
+    """
     Initialize configuration.
-    '''
+    """
 
     Base(**ctx.obj)._refresh_templates()
+
 
 # Allow anomalous backslash in string: '\ ' (it's used in gcloud sdk)
 # pylint: disable=W1401

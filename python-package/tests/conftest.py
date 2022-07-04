@@ -1,9 +1,11 @@
 """
 Share fixtures for tests.
 """
-
+# pylint: disable=invalid-name, protected-access
 from pathlib import Path
 import shutil
+import sys
+import re
 
 import pytest
 import ruamel.yaml as ryaml
@@ -298,9 +300,12 @@ def fixture_data_avro_path(sample_data):
     """
     return sample_data / "municipio.avro"
 
+
 @pytest.fixture(name="table")
 def fixture_table(testdir):
-
+    '''
+    Fixture for table object.
+    '''
     t = Table(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=testdir)
     t._refresh_templates()
     return t
@@ -308,4 +313,32 @@ def fixture_table(testdir):
 
 @pytest.fixture(name="folder")
 def fixture_folder(testdir):
+    '''
+    Fixture for folder object.
+    '''
     return testdir / DATASET_ID / TABLE_ID
+
+
+@pytest.fixture(name="python_path")
+def fixture_python_path():
+    '''
+    Fixture for python_path
+    '''
+    paths = "\n".join(sys.path)
+    python_paths = re.findall(r".*python3.\d(?=\n)", paths)
+
+    if len(python_paths) == 0:
+        sys.exit("Cannot find Python 3 in your path")
+    else:
+        python_path = python_paths[0].split("/")[-1]
+
+    return python_path
+
+
+@pytest.fixture(name="default_metadata_path")
+def fixture_default_matadata_path():
+    '''
+    Fixture for default_metadata_path
+    '''
+    mt = Metadata(dataset_id=DATASET_ID, table_id=TABLE_ID)
+    return mt.metadata_path
