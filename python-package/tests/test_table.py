@@ -490,11 +490,11 @@ def test_create_auto_partitions(testdir, data_csv_path, sample_data):
 
     shutil.copy(
         sample_data / "table_config_part.yaml",
-        Path(table_part.table_folder / "table_config.yaml"),
+        Path(testdir / "partitions" / "table_config.yaml"),
     )
     shutil.copy(
         sample_data / "publish_part.sql",
-        table_part.table_folder / "publish.sql",
+        testdir / "partitions" / "publish.sql",
     )
     for n in [1, 2]:
         Path(testdir / "partitions" / f"keys={n}").mkdir()

@@ -1,3 +1,6 @@
+'''
+Tests for metadata download fuunctions
+'''
 import pytest
 from pathlib import Path
 import pandas as pd
@@ -24,6 +27,9 @@ shutil.rmtree(SAVEPATH, ignore_errors=True)
 
 
 def test_list_datasets_simple_verbose(capsys):
+    '''
+    Test if list_datasets function works with verbose=True
+    '''
 
     out = list_datasets(with_description=False, verbose=True)
     out, err = capsys.readouterr()  # Capture prints
