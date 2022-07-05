@@ -1,13 +1,15 @@
-from os import read
-import pytest
+"""
+Tests for the `download` class.
+"""
+
 from pathlib import Path
+import shutil
+
+import pytest
 import pandas as pd
 from pandas_gbq.gbq import GenericGBQException
-import shutil
-from pydata_google_auth.exceptions import PyDataCredentialsError
 
 from basedosdados import (
-    reauth,
     download,
     read_sql,
     read_table,
@@ -26,6 +28,9 @@ shutil.rmtree(SAVEPATH, ignore_errors=True)
 
 
 def test_download_by_query():
+    """
+    Test for the `download` function when the query is provided.
+    """
 
     download(
         SAVEFILE,
@@ -38,6 +43,9 @@ def test_download_by_query():
 
 
 def test_download_by_table():
+    """
+    Test for the `download` function when the table and dataset ids are provided.
+    """
 
     download(
         SAVEFILE,
@@ -51,7 +59,11 @@ def test_download_by_table():
     assert SAVEFILE.exists()
 
 
+@pytest.mark.skip(reason="Takes long time to run. Better run isolated.")
 def test_download_large_file():
+    """
+    Test for the `download` function for a large file when the query is provided.
+    """
 
     download(
         SAVEFILE,
@@ -64,6 +76,9 @@ def test_download_large_file():
 
 
 def test_download_no_query_or_table():
+    """
+    Test if the `download` function raises an error when neither the query nor the table are provided.
+    """
 
     with pytest.raises(BaseDosDadosException):
         download(
@@ -73,6 +88,9 @@ def test_download_no_query_or_table():
 
 
 def test_read_sql():
+    """
+    Tests if read_sql returns a pandas DataFrame.
+    """
 
     assert isinstance(
         read_sql(
@@ -85,6 +103,9 @@ def test_read_sql():
 
 
 def test_read_sql_no_billing_project_id():
+    """
+    Test if the `read_sql` function raises an error when the billing project id is not provided.
+    """
 
     with pytest.raises(BaseDosDadosNoBillingProjectIDException) as excinfo:
         read_sql(
@@ -97,6 +118,9 @@ def test_read_sql_no_billing_project_id():
 
 
 def test_read_sql_invalid_billing_project_id():
+    """
+    Test if the `read_sql` function raises an error when the billing project id is not valid.
+    """
 
     pattern = r"You are using an invalid `billing_project_id`"
 
@@ -109,6 +133,9 @@ def test_read_sql_invalid_billing_project_id():
 
 
 def test_read_sql_inexistent_project():
+    """
+    Test if the `read_sql` function raises an error when the billing project id is not valid.
+    """
 
     with pytest.raises(GenericGBQException) as excinfo:
         read_sql(
@@ -121,6 +148,9 @@ def test_read_sql_inexistent_project():
 
 
 def test_read_sql_inexistent_dataset():
+    """
+    Test if the `read_sql` function raises an error when the dataset id is not valid.
+    """
 
     with pytest.raises(GenericGBQException) as excinfo:
         read_sql(
@@ -133,6 +163,9 @@ def test_read_sql_inexistent_dataset():
 
 
 def test_read_sql_inexistent_table():
+    """
+    Test if the `read_sql` function raises an error when the table id is not valid.
+    """
 
     with pytest.raises(GenericGBQException) as excinfo:
         read_sql(
@@ -145,6 +178,9 @@ def test_read_sql_inexistent_table():
 
 
 def test_read_sql_syntax_error():
+    """
+    Test if the `read_sql` function raises an error when the query is not valid.
+    """
 
     with pytest.raises(GenericGBQException) as excinfo:
         read_sql(
@@ -157,6 +193,9 @@ def test_read_sql_syntax_error():
 
 
 def test_read_sql_out_of_bound_date():
+    """
+    Test if the `read_sql` function raises an error when the date is out of bound.
+    """
 
     read_sql(
         query="select DATE('1000-01-01')",
@@ -166,6 +205,9 @@ def test_read_sql_out_of_bound_date():
 
 
 def test_read_table():
+    """
+    Tests if read_table returns a pandas DataFrame.
+    """
 
     assert isinstance(
         read_table(
@@ -177,12 +219,3 @@ def test_read_table():
         ),
         pd.DataFrame,
     )
-
-
-def test_reauth(monkeypatch):
-
-    with pytest.raises(PyDataCredentialsError):
-
-        monkeypatch.setattr("builtins.input", lambda _: "Error")
-
-        reauth()

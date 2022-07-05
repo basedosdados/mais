@@ -1,3 +1,7 @@
+"""
+Class to manage the metadata of datasets and tables
+"""
+# pylint: disable=fixme, invalid-name, redefined-builtin, too-many-arguments, undefined-loop-variable
 from __future__ import annotations
 
 from copy import deepcopy
@@ -89,12 +93,11 @@ class Metadata(Base):
             return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
 
         # in case `self` refers to a new table's metadata
-        elif self.table_id and not self.exists_in_ckan():
+        if self.table_id and not self.exists_in_ckan():
             if self.dataset_metadata_obj.exists_in_ckan():
                 return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
-            else:
-                # mock `owner_org` for validation
-                return "3626e93d-165f-42b8-bde1-2e0972079694"
+            # mock `owner_org` for validation
+            return "3626e93d-165f-42b8-bde1-2e0972079694"
 
         # for datasets, `owner_org` must come from the YAML file
         organization_id = "".join(self.local_metadata.get("organization") or [])
@@ -161,7 +164,6 @@ class Metadata(Base):
                     "update_frequency": self.local_metadata.get("update_frequency"),
                     "observation_level": self.local_metadata.get("observation_level"),
                     "last_updated": self.local_metadata.get("last_updated"),
-                    "version": self.local_metadata.get("version"),
                     "published_by": self.local_metadata.get("published_by"),
                     "data_cleaned_by": self.local_metadata.get("data_cleaned_by"),
                     "data_cleaning_description": self.local_metadata.get(
@@ -248,17 +250,16 @@ class Metadata(Base):
         """
 
         if not self.local_metadata.get("metadata_modified"):
-            return True if not self.exists_in_ckan() else False
-        else:
-            ckan_modified = self.ckan_metadata.get("metadata_modified")
-            local_modified = self.local_metadata.get("metadata_modified")
-            return ckan_modified == local_modified
+            return bool(not self.exists_in_ckan())
+        ckan_modified = self.ckan_metadata.get("metadata_modified")
+        local_modified = self.local_metadata.get("metadata_modified")
+        return ckan_modified == local_modified
 
     def create(
         self,
         if_exists: str = "raise",
-        columns: list = [],
-        partition_columns: list = [],
+        columns: list = None,
+        partition_columns: list = None,
         force_columns: bool = False,
         table_only: bool = True,
     ) -> Metadata:
@@ -293,12 +294,16 @@ class Metadata(Base):
             dy exists and `if_exists` is set to `"raise"`.
         """
 
+        # see: https://docs.python.org/3/reference/compound_stmts.html#function-definitions
+        columns = [] if columns is None else columns
+        partition_columns = [] if partition_columns is None else partition_columns
+
         if self.filepath.exists() and if_exists == "raise":
             raise FileExistsError(
                 f"{self.filepath} already exists."
                 + " Set the arg `if_exists` to `replace` to replace it."
             )
-        elif if_exists != "pass":
+        if if_exists != "pass":
             ckan_metadata = self.ckan_metadata
 
             # Add local columns if
@@ -425,7 +430,7 @@ class Metadata(Base):
                     f"{self.dataset_id or self.table_id} already exists in CKAN."
                     f" Set the arg `if_exists` to `replace` to replace it."
                 )
-            elif if_exists == "pass":
+            if if_exists == "pass":
                 return {}
 
         ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=self.CKAN_API_KEY)
@@ -487,7 +492,7 @@ class Metadata(Base):
                 f"e see the traceback below to get information on how to corr"
                 f"ect it.\n\n{repr(e)}"
             )
-            raise BaseDosDadosException(message)
+            raise BaseDosDadosException(message) from e
 
         except NotAuthorized as e:
             message = (
@@ -497,7 +502,7 @@ class Metadata(Base):
                 "n authorized user to publish modifications to a dataset or t"
                 "able's metadata."
             )
-            raise BaseDosDadosException(message)
+            raise BaseDosDadosException(message) from e
 
 
 ###############################################################################
@@ -505,7 +510,7 @@ class Metadata(Base):
 ###############################################################################
 
 
-def handle_data(k, schema, data, local_default=None):
+def handle_data(k, data, local_default=None):
     """Parse API's response data so that it is used in the YAML configuration
     files.
 
@@ -565,11 +570,10 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
     # To get PublishedBy
     d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
     if "properties" in definitions[d].keys():
-        for dk, dv in definitions[d]["properties"].items():
+        for dk, _ in definitions[d]["properties"].items():
 
             yaml_obj[k][dk] = handle_data(
                 k=dk,
-                schema=definitions[d]["properties"],
                 data=data.get(k, {}),
             )
 
@@ -578,9 +582,9 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
 
 def add_yaml_property(
     yaml: CommentedMap,
-    properties: dict = {},
-    definitions: dict = {},
-    metadata: dict = {},
+    properties: dict = None,
+    definitions: dict = None,
+    metadata: dict = None,
     goal=None,
     has_column=False,
 ):
@@ -597,11 +601,16 @@ def add_yaml_property(
         has_column (bool): If the goal is a column, no comments are written.
     """
 
+    # see: https://docs.python.org/3/reference/compound_stmts.html#function-definitions
+    properties = {} if properties is None else properties
+    definitions = {} if definitions is None else definitions
+    metadata = {} if metadata is None else metadata
+
     # Looks for the key
     # If goal is none has to look for id_before == None
     for key, property in properties.items():
         goal_was_reached = key == goal
-        goal_was_reached |= property["yaml_order"]["id_before"] == None
+        goal_was_reached |= property["yaml_order"]["id_before"] is None
 
         if goal_was_reached:
             if "allOf" in property:
@@ -614,9 +623,9 @@ def add_yaml_property(
                 )
 
                 if yaml[key] == ordereddict():
-                    yaml[key] = handle_data(k=key, schema=properties, data=metadata)
+                    yaml[key] = handle_data(k=key, data=metadata)
             else:
-                yaml[key] = handle_data(k=key, schema=properties, data=metadata)
+                yaml[key] = handle_data(k=key, data=metadata)
 
             # Add comments
             comment = None
@@ -631,23 +640,22 @@ def add_yaml_property(
 
     if id_after is None:
         return yaml
-    elif id_after not in properties.keys():
+    if id_after not in properties.keys():
         raise BaseDosDadosException(
             f"Inconsistent YAML ordering: {id_after} is pointed to by {key}"
             f" but doesn't have itself a `yaml_order` field in the JSON S"
             f"chema."
         )
-    else:
-        updated_props = deepcopy(properties)
-        updated_props.pop(key)
-        return add_yaml_property(
-            yaml=yaml,
-            properties=updated_props,
-            definitions=definitions,
-            metadata=metadata,
-            goal=id_after,
-            has_column=has_column,
-        )
+    updated_props = deepcopy(properties)
+    updated_props.pop(key)
+    return add_yaml_property(
+        yaml=yaml,
+        properties=updated_props,
+        definitions=definitions,
+        metadata=metadata,
+        goal=id_after,
+        has_column=has_column,
+    )
 
 
 def build_yaml_object(
@@ -655,9 +663,9 @@ def build_yaml_object(
     table_id: str,
     config: dict,
     schema: dict,
-    metadata: dict = dict(),
-    columns_schema: dict = dict(),
-    partition_columns: list = list(),
+    metadata: dict = None,
+    columns_schema: dict = None,
+    partition_columns: list = None,
 ):
     """Build a dataset_config.yaml or table_config.yaml
 
@@ -675,6 +683,11 @@ def build_yaml_object(
     Returns:
         CommentedMap: A YAML object with the dataset or table metadata.
     """
+
+    # see: https://docs.python.org/3/reference/compound_stmts.html#function-definitions
+    metadata = {} if metadata is None else metadata
+    columns_schema = {} if columns_schema is None else columns_schema
+    partition_columns = [] if partition_columns is None else partition_columns
 
     properties: dict = schema["properties"]
     definitions: dict = schema["definitions"]
