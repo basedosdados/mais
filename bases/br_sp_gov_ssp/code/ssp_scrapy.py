@@ -1,20 +1,24 @@
-import typing
-import scrapy
-import json
-import pandas as pd
-import time
-import numpy as np
-import csv
+"""
+Code for scraping data from ssp_atividade_policial
+"""
+# pylint: disable=invalid-name, too-many-arguments, arguments-differ
 import os
 import datetime
 import shutil
-
 from pathlib import Path
+import csv
+
+import scrapy
+import pandas as pd
+import numpy as np
 
 FILE_PAH = str(Path(__file__).parent)
 
 
 def get_years():
+    """
+    Get all years from ssp_atividade_policial
+    """
     ## years to scrapy
 
     current_year = datetime.datetime.now().strftime("%Y")
@@ -25,6 +29,9 @@ def get_years():
 
 
 def normalize_cols(df):
+    '''
+    Normalize columns names
+    '''
     return (
         df.str.normalize("NFKD")
         .str.encode("ascii", errors="ignore")
@@ -42,6 +49,9 @@ def normalize_cols(df):
 
 
 def padronize_atividade(df):
+    '''
+    Padronize columns names for ssp_atividade_policial
+    '''
     df = df.rename(
         columns={
             "ocorrencias_de_apreensao_de_entorpecentes1": "ocorrencias_de_apreensao_de_entorpecentes",
@@ -85,6 +95,9 @@ def padronize_atividade(df):
 
 
 def padronize_ocorrencias(df):
+    '''
+    Padronize columns names for ssp_ocorrencias
+    '''
     df = df.rename(
         columns={
             "geocodigo": "id_municipio",
@@ -134,6 +147,9 @@ def padronize_ocorrencias(df):
 
 
 def padronize_data(df, file):
+    '''
+    Padronize columns names for ssp_data
+    '''
     ibge_code = pd.read_csv(FILE_PAH + "/dados/utils/ssp_codigo_ibge.csv")
     mes_dict = {
         "Jan": 1,
@@ -165,6 +181,9 @@ def padronize_data(df, file):
 
 
 def append_to_csv(df, file, ano):
+    '''
+    Append data to csv file
+    '''
     ## define file_name and path
     file_pre = FILE_PAH + "/dados/model_data/" + file + "_MODELO.csv"
     file_pre_final = FILE_PAH + "/dados/model_data/" + file + "_MODELO_FINAL.csv"
@@ -180,7 +199,7 @@ def append_to_csv(df, file, ano):
         df_modelo_final.to_csv(save_file, index=False, header=True, encoding="utf-8")
 
     ## get the correct order of original data
-    with open(file_pre) as f:
+    with open(file_pre, encoding="utf-8") as f:
         header = next(csv.reader(f))
     columns = df.columns
     for column in set(header) - set(columns):
@@ -195,6 +214,9 @@ def append_to_csv(df, file, ano):
 
 
 def parse_page(response, file_name):
+    '''
+    Parse page and get data
+    '''
     cols = response.xpath(
         '//*[@id="conteudo_repAnos_divGrid_0"]//th/font/text()'
     ).extract()
@@ -207,7 +229,7 @@ def parse_page(response, file_name):
         if row_to_add != []:
             try:
                 df.loc[len(df), :] = row_to_add
-            except:
+            except Exception:
                 df.loc[len(df), :] = [np.nan for i in range(len(cols))]
 
     cols_name = ["mes"] + df["Natureza"].tolist()
@@ -236,6 +258,9 @@ def parse_page(response, file_name):
 
 
 def get_config(response, year, regiao, municipipo, delegacia, page):
+    '''
+    Get config for the next page
+    '''
     EVENTVALIDATION = response.xpath(
         "//*[@id='__EVENTVALIDATION']/@value"
     ).extract_first()
@@ -260,6 +285,9 @@ def get_config(response, year, regiao, municipipo, delegacia, page):
 
 
 def delete_years(file, years):
+    '''
+    Delete years from csv file
+    '''
     ## delete file of respective year
     for ano in years:
         save_file = f"dados/{file}/ano={ano}/"
@@ -268,6 +296,9 @@ def delete_years(file, years):
 
 
 class SSP_AtividadeSpider(scrapy.Spider):
+    '''
+    SSP_AtividadeSpider
+    '''
     name = "atividade"
     site_url = "http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx"
     # allowed_domains = ['www.fazenda.sp.gov.br/RepasseConsulta/Consulta/repasse.aspx']
@@ -292,9 +323,9 @@ class SSP_AtividadeSpider(scrapy.Spider):
         for municipipo in municipipos:
             for year in years:
                 (
-                    EVENTVALIDATION,
-                    VIEWSTATE,
-                    VIEWSTATEGENERATOR,
+                    _,
+                    _,
+                    _,
                     data,
                     header,
                 ) = get_config(response, year, regiao, municipipo, delegacia, page)
@@ -308,10 +339,16 @@ class SSP_AtividadeSpider(scrapy.Spider):
                 )
 
     def parse_months(self, response):
+        '''
+        Parse months
+        '''
         parse_page(response, self.file_name)
 
 
 class SSP_OcorrenciaSpider(scrapy.Spider):
+    '''
+    SSP_OcorrenciaSpider
+    '''
     name = "ocorrencias"
     site_url = "http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx"
     # allowed_domains = ['www.fazenda.sp.gov.br/RepasseConsulta/Consulta/repasse.aspx']
@@ -319,6 +356,9 @@ class SSP_OcorrenciaSpider(scrapy.Spider):
     file_name = "ssp_ocorrencias_registradas"
 
     def parse(self, response):
+        '''
+        Parse page and get data
+        '''
         ## get the years to scrapy
         years = get_years()
         print("SSP_OcorrenciaSpider", years)
@@ -335,9 +375,9 @@ class SSP_OcorrenciaSpider(scrapy.Spider):
         for municipipo in municipipos:
             for year in years:
                 (
-                    EVENTVALIDATION,
-                    VIEWSTATE,
-                    VIEWSTATEGENERATOR,
+                    _,
+                    _,
+                    _,
                     data,
                     header,
                 ) = get_config(response, year, regiao, municipipo, delegacia, page)
@@ -351,6 +391,9 @@ class SSP_OcorrenciaSpider(scrapy.Spider):
                 )
 
     def parse_months(self, response):
+        '''
+        Parse months
+        '''
         parse_page(response, self.file_name)
 
 

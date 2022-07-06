@@ -1,16 +1,17 @@
-import enum
-from pathlib import Path
-from tqdm import tqdm
+'''
+Class for managing the files in cloud storage.
+'''
+# pylint: disable=invalid-name, too-many-arguments, undefined-loop-variable
 import time
-import traceback
+from pathlib import Path
 import sys
+import traceback
+
+from tqdm import tqdm
+from loguru import logger
 
 from basedosdados.upload.base import Base
 from basedosdados.exceptions import BaseDosDadosException
-from loguru import logger
-
-from google.api_core import exceptions
-from google.api_core.retry import Retry
 
 # google retryble exceptions. References: https://googleapis.dev/python/storage/latest/retry_timeout.html#module-google.cloud.storage.retry
 
@@ -27,13 +28,14 @@ class Storage(Base):
         self.dataset_id = dataset_id.replace("-", "_")
         self.table_id = table_id.replace("-", "_")
 
-    def _resolve_partitions(self, partitions):
+    @staticmethod
+    def _resolve_partitions(partitions):
 
         if isinstance(partitions, dict):
 
             return "/".join(f"{k}={v}" for k, v in partitions.items()) + "/"
 
-        elif isinstance(partitions, str):
+        if isinstance(partitions, str):
 
             if partitions.endswith("/"):
                 partitions = partitions[:-1]
@@ -46,16 +48,17 @@ class Storage(Base):
             try:
                 # check if it fits rule
                 {b.split("=")[0]: b.split("=")[1] for b in partitions.split("/")}
-            except IndexError:
-                raise Exception(f"The path {partitions} is not a valid partition")
+            except IndexError as e:
+                raise Exception(f"The path {partitions} is not a valid partition") from e
 
             return partitions + "/"
 
-        else:
-
-            raise Exception(f"Partitions format or type not accepted: {partitions}")
+        raise Exception(f"Partitions format or type not accepted: {partitions}")
 
     def _build_blob_name(self, filename, mode, partitions=None):
+        '''
+        Builds the blob name.
+        '''
 
         # table folder
         blob_name = f"{mode}/{self.dataset_id}/{self.table_id}/"
@@ -98,8 +101,7 @@ class Storage(Base):
                     "If yes, add the flag --very_sure\n"
                     "********************************************************"
                 )
-            else:
-                self.bucket.delete(force=True)
+            self.bucket.delete(force=True)
 
         self.client["storage_staging"].create_bucket(self.bucket)
 
@@ -297,11 +299,10 @@ class Storage(Base):
         blob_list = list(self.bucket.list_blobs(prefix=prefix))
 
         # if there are no blobs matching the search raise FileNotFoundError or return
-        if blob_list == []:
+        if not blob_list:
             if if_not_exists == "raise":
                 raise FileNotFoundError(f"Could not locate files at {prefix}")
-            else:
-                return
+            return
 
         # download all blobs matching the search to given savepath
         for blob in tqdm(blob_list, desc="Download Blob"):
@@ -399,37 +400,34 @@ class Storage(Base):
 
             table_blobs = list(self.bucket.list_blobs(prefix=prefix))
 
-        if table_blobs == []:
+        if not table_blobs:
             if not_found_ok:
                 return
-            else:
-                raise FileNotFoundError(
-                    f"Could not find the requested table {self.dataset_id}.{self.table_id}"
-                )
+            raise FileNotFoundError(
+                f"Could not find the requested table {self.dataset_id}.{self.table_id}"
+            )
+        # Divides table_blobs list for maximum batch request size
+        table_blobs_chunks = [
+            table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)
+        ]
 
-        else:
-            # Divides table_blobs list for maximum batch request size
-            table_blobs_chunks = [
-                table_blobs[i : i + 999] for i in range(0, len(table_blobs), 999)
-            ]
-
-            for i, source_table in enumerate(
-                tqdm(table_blobs_chunks, desc="Delete Table Chunk")
-            ):
-                counter = 0
-                while counter < 10:
-                    try:
-                        with self.client["storage_staging"].batch():
-                            for blob in source_table:
-                                blob.delete()
-                        break
-                    except Exception as e:
-                        print(
-                            f"Delete Table Chunk {i} | Attempt {counter}: delete operation starts again in 5 seconds...",
-                        )
-                        time.sleep(5)
-                        counter += 1
-                        traceback.print_exc(file=sys.stderr)
+        for i, source_table in enumerate(
+            tqdm(table_blobs_chunks, desc="Delete Table Chunk")
+        ):
+            counter = 0
+            while counter < 10:
+                try:
+                    with self.client["storage_staging"].batch():
+                        for blob in source_table:
+                            blob.delete()
+                    break
+                except Exception:
+                    print(
+                        f"Delete Table Chunk {i} | Attempt {counter}: delete operation starts again in 5 seconds...",
+                    )
+                    time.sleep(5)
+                    counter += 1
+                    traceback.print_exc(file=sys.stderr)
         logger.success(
             " {object} {object_id}_{mode} was {action}!",
             object_id=self.table_id,
@@ -466,7 +464,7 @@ class Storage(Base):
             .list_blobs(prefix=f"{mode}/{self.dataset_id}/{self.table_id}/")
         )
 
-        if source_table_ref == []:
+        if not source_table_ref:
             raise FileNotFoundError(
                 f"Could not find the requested table {self.dataset_id}.{self.table_id}"
             )
@@ -499,7 +497,7 @@ class Storage(Base):
                                 destination_bucket=destination_bucket,
                             )
                     break
-                except Exception as e:
+                except Exception:
                     print(
                         f"Copy Table Chunk {i} | Attempt {counter}: copy operation starts again in 5 seconds...",
                     )
