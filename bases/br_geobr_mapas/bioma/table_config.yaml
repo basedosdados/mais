@@ -12,9 +12,7 @@ title: Bioma
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: "Polígonos de todos o biomas presentes no território brasileiro e área\
-    \ costeira.\n\nOs dados de 2019 estão na estala 1:250.000. Os dados de 2004 estão\
-    \ na escala\n1:5.000.000.\n\nDados originais do IBGE. Saiba mais em https://www.ibge.gov.br/apps/biomas/\n"
+description: Polígonos de todos o biomas presentes no território brasileiro e área costeira. Os dados de 2019 estão na escala 1:250.000. Os dados de 2004 estão na escala 1:5.000.000. Dados originais do IBGE. Saiba mais em https://www.ibge.gov.br/apps/biomas/
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -26,7 +24,7 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2004(15)2019
+    - 2004, 2019
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -40,7 +38,7 @@ observation_level:
       columns:
           - ano
 
-ast_updated:
+last_updated:
     metadata: '2022-06-20'
     data: '2022-06-20 11:16:37'
     release:
@@ -140,7 +138,7 @@ columns:
       is_partition: false
     - name: geometria
       bigquery_type: string
-      description: Geometria
+      description: Polígono dos Biomas Brasileiros
       temporal_coverage: 
         - (1)
       covered_by_dictionary: no
