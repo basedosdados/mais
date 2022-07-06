@@ -36,11 +36,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-<<<<<<< HEAD
           pip install basedosdados==1.6.4 toml
-=======
-          pip install basedosdados==1.6.4b5 toml
->>>>>>> 2f72888a3d2403a08c1e1f7e89bacb524c2a380c
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v0
         with:
