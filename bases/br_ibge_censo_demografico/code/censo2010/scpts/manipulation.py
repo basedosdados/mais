@@ -1,8 +1,12 @@
-import pandas as pd
-import numpy as np
+'''
+Define function to normalize columns.
+'''
 
-
+# pylint: disable=invalid-name
 def normalize_cols(df):
+    '''
+    Normaliza os valores de uma coluna.
+    '''
     return (
         df.str.normalize("NFKD")
         .str.encode("ascii", errors="ignore")

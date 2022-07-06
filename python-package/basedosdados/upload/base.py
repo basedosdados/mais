@@ -1,24 +1,33 @@
+"""
+Module for manage dataset using local credentials and config files
+"""
+# pylint: disable=line-too-long, invalid-name, too-many-arguments, invalid-envvar-value
+from pathlib import Path
+import sys
+from os import getenv
+import shutil
+import warnings
+import base64
+import json
+from functools import lru_cache
+
 from google.cloud import bigquery, storage
 from google.oauth2 import service_account
 from loguru import logger
 import yaml
 from jinja2 import Template
-from pathlib import Path
-import shutil
 import tomlkit
-import warnings
-import json
-import sys
-import base64
-from os import getenv
-from basedosdados.constants import config, constants
 
-from functools import lru_cache
+from basedosdados.constants import config, constants
 
 warnings.filterwarnings("ignore")
 
 
 class Base:
+    """
+    Base class for all datasets
+    """
+
     def __init__(
         self,
         config_path=".basedosdados",
@@ -27,6 +36,9 @@ class Base:
         metadata_path=None,
         overwrite_cli_config=False,
     ):
+        """
+        Initialize the class
+        """
         # standard config_path configuration
         config_path = (
             config.project_config_path
@@ -46,9 +58,15 @@ class Base:
 
     @staticmethod
     def _decode_env(env: str) -> str:
+        """
+        Decode environment variable
+        """
         return base64.b64decode(getenv(env).encode("utf-8")).decode("utf-8")
 
     def _load_credentials(self, mode: str):
+        """
+        Load credentials from config file
+        """
 
         if getenv(f"{constants.ENV_CREDENTIALS_PREFIX.value}{mode.upper()}"):
             info = json.loads(
@@ -59,15 +77,18 @@ class Base:
             return service_account.Credentials.from_service_account_info(
                 info, scopes=["https://www.googleapis.com/auth/cloud-platform"]
             )
-        else:
-            return service_account.Credentials.from_service_account_file(
-                self.config["gcloud-projects"][mode]["credentials_path"],
-                scopes=["https://www.googleapis.com/auth/cloud-platform"],
-            )
+
+        return service_account.Credentials.from_service_account_file(
+            self.config["gcloud-projects"][mode]["credentials_path"],
+            scopes=["https://www.googleapis.com/auth/cloud-platform"],
+        )
 
     @property
     @lru_cache(256)
     def client(self):
+        """
+        Client for BigQuery
+        """
 
         return dict(
             bigquery_prod=bigquery.Client(
@@ -86,7 +107,9 @@ class Base:
 
     @property
     def main_vars(self):
-
+        """
+        Variables for main templates
+        """
         return dict(
             templates=self.templates,
             metadata_path=self.metadata_path,
@@ -95,6 +118,9 @@ class Base:
 
     @staticmethod
     def _input_validator(context, default="", with_lower=True):
+        """
+        Validate input
+        """
 
         var = input(context)
 
@@ -103,8 +129,8 @@ class Base:
 
         if var:
             return to_lower(var.strip())
-        else:
-            return to_lower(default.strip())
+
+        return to_lower(default.strip())
 
     def _selection_yn(
         self,
@@ -115,6 +141,9 @@ class Base:
         default_no="",
         with_lower=True,
     ):
+        """
+        Selection with yes/no
+        """
 
         while True:
 
@@ -122,18 +151,22 @@ class Base:
 
             if res == "y":
                 return default_return
-            elif res == "n":
-                return self._input_validator(no_question, default_no, with_lower)
-            else:
-                print(f"{res} is not accepted as an awnser. Try y or n.\n")
 
+            if res == "n":
+                return self._input_validator(no_question, default_no, with_lower)
+
+            print(f"{res} is not accepted as an awnser. Try y or n.\n")
+
+    @staticmethod
     def _check_credentials(
-        self,
         project_id,
         mode,
         credentials_path,
         credentials_url="https://console.cloud.google.com/apis/credentials/serviceaccountkey?project=",
     ):
+        """
+        Check if credentials are valid
+        """
 
         input(
             f"1. Go to the following link: {credentials_url}{project_id}\n"
@@ -149,14 +182,16 @@ class Base:
             if (credentials_path / f"{mode}.json").exists():
                 print("We found it :)")
                 break
-            else:
-                input(
-                    "\nWe couldn't find it :( \nMake sure that the file has the following name:"
-                    f"\n\n{mode} filename: {credentials_path}/{mode}.json"
-                    "\n\n[Press enter to check if data is correctly saved]"
-                )
+            input(
+                "\nWe couldn't find it :( \nMake sure that the file has the following name:"
+                f"\n\n{mode} filename: {credentials_path}/{mode}.json"
+                "\n\n[Press enter to check if data is correctly saved]"
+            )
 
     def _init_config(self, force):
+        """
+        Initialize config file
+        """
 
         # Create config folder
         self.config_path.mkdir(exist_ok=True, parents=True)
@@ -304,7 +339,11 @@ class Base:
 
             config_file.open("w", encoding="utf-8").write(tomlkit.dumps(c_file))
 
-    def _config_log(self, verbose: bool):
+    @staticmethod
+    def _config_log(verbose: bool):
+        """
+        Logging configuration
+        """
         logger.remove()  # remove o default handler
         logger_level = "INFO" if verbose else "ERROR"
         logger.add(
@@ -314,17 +353,23 @@ class Base:
         )
 
     def _load_config(self):
+        """
+        Loads the configuration file
+        """
 
         if getenv(constants.ENV_CONFIG.value):
             return tomlkit.parse(self._decode_env(constants.ENV_CONFIG.value))
-        else:
-            return tomlkit.parse(
-                (Path.home() / ".basedosdados" / "config.toml")
-                .open("r", encoding="utf-8")
-                .read()
-            )
+        return tomlkit.parse(
+            (Path.home() / ".basedosdados" / "config.toml")
+            .open("r", encoding="utf-8")
+            .read()
+        )
 
-    def _load_yaml(self, file):
+    @staticmethod
+    def _load_yaml(file):
+        """
+        Loads a yaml file
+        """
 
         try:
             return yaml.load(open(file, "r", encoding="utf-8"), Loader=yaml.SafeLoader)
@@ -332,12 +377,19 @@ class Base:
             return None
 
     def _render_template(self, template_file, kargs):
+        """
+        Render a template file
+        """
 
         return Template(
             (self.templates / template_file).open("r", encoding="utf-8").read()
         ).render(**kargs)
 
-    def _check_mode(self, mode):
+    @staticmethod
+    def _check_mode(mode):
+        """
+        Checks if the mode is valid
+        """
         ACCEPTED_MODES = [
             "all",
             "staging",
@@ -349,14 +401,17 @@ class Base:
         ]
         if mode in ACCEPTED_MODES:
             return True
-        else:
-            raise Exception(
-                f"Argument {mode} not supported. "
-                f"Enter one of the following: "
-                f'{",".join(ACCEPTED_MODES)}'
-            )
+
+        raise Exception(
+            f"Argument {mode} not supported. "
+            f"Enter one of the following: "
+            f'{",".join(ACCEPTED_MODES)}'
+        )
 
     def _refresh_templates(self):
+        """
+        Refreshes the templates
+        """
         shutil.rmtree((self.config_path / "templates"), ignore_errors=True)
         shutil.copytree(
             (Path(__file__).resolve().parents[1] / "configs" / "templates"),

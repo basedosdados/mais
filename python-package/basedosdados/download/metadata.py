@@ -1,27 +1,33 @@
-from google.cloud import bigquery
-import pandas as pd
-import requests
+'''
+Functions to get metadata from BD's API
+'''
+# pylint: disable=invalid-name,use-maxsplit-arg
 from collections import defaultdict
 import math
 
-from basedosdados.download.base import credentials
+from google.cloud import bigquery
+import pandas as pd
+import requests
 
-def _safe_fetch(url:str):
+def _safe_fetch(url: str):
     """
     Safely fetchs urls and, if somehting goes wrong, informs user what is the possible cause
     """
+    response = None
     try:
         response = requests.get(url)
         response.raise_for_status()
-        return response
-    except requests.exceptions.RequestException as err:
-        print ("This url doesn't appear to exists:",err)
     except requests.exceptions.HTTPError as errh:
-        print ("Http Error:",errh)
+        print("Http Error:", errh)
     except requests.exceptions.ConnectionError as errc:
-        print ("Error Connecting:",errc)
+        print("Error Connecting:", errc)
     except requests.exceptions.Timeout as errt:
-        print ("Timeout Error:",errt)  
+        print("Timeout Error:", errt)
+    except requests.exceptions.RequestException as err:
+        print("This url doesn't appear to exists:", err)
+
+    return response
+
 
 def _dict_from_page(json_response):
     """
@@ -38,6 +44,7 @@ def _dict_from_page(json_response):
     }
 
     return temp_dict
+
 
 def _fix_size(s, step=80):
 
@@ -58,7 +65,7 @@ def _print_output(df):
     columns = df.columns
     step = 80
     print()
-    for i, row in df.iterrows():
+    for _, row in df.iterrows():
         for c in columns:
             print(_fix_size(f"{c}: \n\t{row[c]}"))
         print("-" * (step + 15))
@@ -75,31 +82,26 @@ def _handle_output(verbose, output_type, df, col_name=None):
         col_name (str): name of column with id's data
     """
 
-    df_is_dataframe = type(df) == pd.DataFrame
-    df_is_bq_dataset_or_table = type(df) == bigquery.Table
-    df_is_bq_dataset_or_table |= type(df) == bigquery.Dataset
+    df_is_dataframe = isinstance(df,pd.DataFrame)
+    df_is_bq_dataset_or_table = isinstance(df, bigquery.Table)
+    df_is_bq_dataset_or_table |= isinstance(df, bigquery.Dataset)
 
-    if verbose == True and df_is_dataframe:
+    if verbose is True and df_is_dataframe:
         _print_output(df)
 
-    elif verbose == True and df_is_bq_dataset_or_table:
+    elif verbose is True and df_is_bq_dataset_or_table:
         print(df.description)
 
-    elif verbose == False:
+    elif verbose is False:
         if output_type == "list":
             return df[col_name].to_list()
-        elif output_type == "str":
+        if output_type == "str":
             return df.description
-        elif output_type == "records":
+        if output_type == "records":
             return df.to_dict("records")
-        else:
-            msg = '`output_type` argument must be set to "list", "str" or "records".'
-            raise ValueError(msg)
-
-    else:
-        raise TypeError("`verbose` argument must be of `bool` type.")
-
-    return None
+        msg = '`output_type` argument must be set to "list", "str" or "records".'
+        raise ValueError(msg)
+    raise TypeError("`verbose` argument must be of `bool` type.")
 
 def list_datasets(with_description=False, verbose=True):
     """
@@ -148,13 +150,13 @@ def list_datasets(with_description=False, verbose=True):
     # select desired output using dataset_id info. Note that the output is either a standardized string or a list #pylint: disable=C0301
     if verbose & (with_description is False):
         return _print_output(pd.DataFrame.from_dict(dataset_dict)[["dataset_id"]])
-    elif verbose & with_description:
+    if verbose & with_description:
         return _print_output(
             pd.DataFrame.from_dict(dataset_dict)[["dataset_id", "description"]]
         )
-    elif (verbose is False) & (with_description is False):
+    if (verbose is False) & (with_description is False):
         return dataset_dict["dataset_id"]
-    elif (verbose is False) & with_description:
+    if (verbose is False) & with_description:
         return [
             {
                 "dataset_id": dataset_dict["dataset_id"][k],
@@ -162,6 +164,8 @@ def list_datasets(with_description=False, verbose=True):
             }
             for k in range(len(dataset_dict["dataset_id"]))
         ]
+    raise ValueError("`verbose` and `with_description` argument must be of `bool` type.")
+
 
 def list_dataset_tables(
     dataset_id,
@@ -185,7 +189,9 @@ def list_dataset_tables(
         stdout | list
     """
 
-    dataset_id = dataset_id.replace("-","_") #The dataset_id pattern in the bd_dataset_search endpoint response uses a hyphen as a separator, while in the endpoint urls that specify the dataset_id parameter the separator used is an underscore. See issue #1079
+    dataset_id = dataset_id.replace(
+        "-", "_"
+    )  # The dataset_id pattern in the bd_dataset_search endpoint response uses a hyphen as a separator, while in the endpoint urls that specify the dataset_id parameter the separator used is an underscore. See issue #1079
 
     url = f"https://basedosdados.org/api/3/action/bd_bdm_dataset_show?dataset_id={dataset_id}"
 
@@ -197,23 +203,26 @@ def list_dataset_tables(
     # this dict has all information need to output the function
     table_dict = {
         "table_id": [
-            dataset["resources"][k]["name"] for k in range(len(dataset["resources"])) if dataset['resources'][k]['resource_type']=='bdm_table'
+            dataset["resources"][k]["name"]
+            for k in range(len(dataset["resources"]))
+            if dataset["resources"][k]["resource_type"] == "bdm_table"
         ],
         "description": [
             dataset["resources"][k]["description"]
-            for k in range(len(dataset["resources"])) if dataset['resources'][k]['resource_type']=='bdm_table'
+            for k in range(len(dataset["resources"]))
+            if dataset["resources"][k]["resource_type"] == "bdm_table"
         ],
     }
     # select desired output using table_id info. Note that the output is either a standardized string or a list
-    if verbose & (with_description == False):
+    if verbose & (with_description is False):
         return _print_output(pd.DataFrame.from_dict(table_dict)[["table_id"]])
-    elif verbose & with_description:
+    if verbose & with_description:
         return _print_output(
             pd.DataFrame.from_dict(table_dict)[["table_id", "description"]]
         )
-    elif (verbose == False) & (with_description == False):
+    if (verbose is False) & (with_description is False):
         return table_dict["table_id"]
-    elif (verbose == False) & with_description:
+    if (verbose is False) & with_description:
         return [
             {
                 "table_id": table_dict["table_id"][k],
@@ -221,6 +230,8 @@ def list_dataset_tables(
             }
             for k in range(len(table_dict["table_id"]))
         ]
+
+    raise ValueError("`verbose` and `with_description` argument must be of `bool` type.")
 
 
 def get_dataset_description(
@@ -248,9 +259,8 @@ def get_dataset_description(
     description = json_response["result"]["notes"]
 
     if verbose:
-        print(description)
-    else:
-        return description
+        return print(description)
+    return description
 
 
 def get_table_description(
@@ -282,9 +292,8 @@ def get_table_description(
     description = json_response["result"]["description"]
 
     if verbose:
-        print(description)
-    else:
-        return description
+        return print(description)
+    return description
 
 
 def get_table_columns(
@@ -317,9 +326,8 @@ def get_table_columns(
     columns = json_response["result"]["columns"]
 
     if verbose:
-        _print_output(pd.DataFrame(columns))
-    else:
-        return columns
+        return _print_output(pd.DataFrame(columns))
+    return columns
 
 
 def get_table_size(
@@ -348,13 +356,13 @@ def get_table_size(
 
     size = json_response["result"]["size"]
 
-    if size==None:
-        print("Size not available")
-    else:
-        if verbose:
-            _print_output(pd.DataFrame(size))
-        else:
-            return size
+    if size is None:
+        return print("Size not available")
+    if verbose:
+        return _print_output(pd.DataFrame(size))
+    return size
+
+
 def search(query, order_by):
     """This function works as a wrapper to the `bd_dataset_search` website API
     enpoint.
