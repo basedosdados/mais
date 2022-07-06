@@ -1,12 +1,15 @@
-
+'''
+Download files from url
+'''
+# pylint: disable=invalid-name,redefined-outer-name
 #---------------------------------------------------------------#
 # preface
 #---------------------------------------------------------------#
 
 import os
-import requests
-from time import time
 from multiprocessing.pool import ThreadPool
+
+import requests
 
 ROOT = "path/dados_EDA_industrializados"
 
@@ -22,6 +25,9 @@ os.chdir(ROOT)
 # source: https://likegeeks.com/downloading-files-using-python/#Download_multiple_files_Parallelbulk_download
 
 def url_response(url):
+    '''
+    Url response
+    '''
 
     path, url = url
     r = requests.get(url, stream = True)

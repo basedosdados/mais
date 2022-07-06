@@ -1,5 +1,6 @@
-import os
-import sys
+'''
+Config paths
+'''
 
 import sys
 
