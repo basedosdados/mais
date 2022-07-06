@@ -1,16 +1,19 @@
+'''
+Code for downloading data from PWT
+'''
+# pylint: disable=invalid-name, redefined-builtin
 #--------------------#
 # setup
 #--------------------#
 
 import os.path
 import pandas as pd
-import numpy as np
-import basedosdados
+
 
 dir = os.path.dirname(__file__)
 path = os.path.abspath(os.path.join(dir, '..', 'input'))
 path_data = os.path.join(path, 'pwt100.xlsx')
-if (not os.path.isdir(path)):
+if not os.path.isdir(path):
     os.mkdir(path)
 df = pd.read_excel(path_data, sheet_name='Data', na_filter=False)
 
@@ -21,7 +24,7 @@ df = pd.read_excel(path_data, sheet_name='Data', na_filter=False)
 # tabela de arquitetura
 out_dir = os.path.abspath(os.path.join(dir, '..', 'extra\\architecture'))
 arq_data_path = os.path.join(out_dir, 'microdados.xlsx')
-if (not os.path.isdir(out_dir)):
+if not os.path.isdir(out_dir):
     os.mkdir(out_dir)
 arq_data = pd.read_excel(arq_data_path, sheet_name='microdados')
 
@@ -44,6 +47,6 @@ df[variables_to_transform] = df[variables_to_transform].mul(1000000)
 # output
 path_out = os.path.abspath(os.path.join(dir, '..', 'output'))
 path_data_out = os.path.join(path_out, 'microdados.csv')
-if (not os.path.isdir(path_out)):
+if not os.path.isdir(path_out):
     os.mkdir(path_out)
 df.to_csv(path_data_out, index=False, encoding='utf-8', na_rep='')

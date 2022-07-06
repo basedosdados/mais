@@ -1,18 +1,23 @@
+'''
+Parser ALESP
+'''
+# pylint: disable=invalid-name,too-many-locals,too-many-statements,import-error
 import os
 
 import pandas as pd
 import numpy as np
-
 import untangle
 import requests
-
-import scripts.manipulation as manipulation
+from manipulation import normalize_cols, normalize
 
 
 mais_path = "../../bd+/mais_projects/data/alesp"
 
 
 def parse_deputados(download=True):  # sourcery no-metrics
+    '''
+    Parser para os dados do site da ALESP
+    '''
     if download:
         r = requests.get(
             "https://www.al.sp.gov.br/repositorioDados/deputados/deputados.xml"
@@ -46,7 +51,7 @@ def parse_deputados(download=True):  # sourcery no-metrics
             c = obj.Deputados.Deputado[i].Aniversario.cdata
             try:
                 e = obj.Deputados.Deputado[i].Partido.cdata
-            except:
+            except Exception:
                 e = np.nan
             #     i = obj.Deputados.Deputado[i].Telefone
             f = obj.Deputados.Deputado[i].Situacao.cdata
@@ -54,30 +59,30 @@ def parse_deputados(download=True):  # sourcery no-metrics
 
             try:
                 h = obj.Deputados.Deputado[i].Sala.cdata
-            except:
+            except Exception:
                 h = np.nan
             #     i = obj.Deputados.Deputado[i].Telefone
 
             try:
                 j = obj.Deputados.Deputado[i].PlacaVeiculo.cdata
-            except:
+            except Exception:
                 j = np.nan
 
             k = obj.Deputados.Deputado[i].Biografia.cdata
 
             try:
                 l = obj.Deputados.Deputado[i].HomePage.cdata
-            except:
+            except Exception:
                 l = np.nan
 
             try:
                 m = obj.Deputados.Deputado[i].Andar.cdata
-            except:
+            except Exception:
                 m = np.nan
 
             try:
                 n = obj.Deputados.Deputado[i].Fax.cdata
-            except:
+            except Exception:
                 n = np.nan
 
             o = obj.Deputados.Deputado[i].Matricula.cdata
@@ -129,7 +134,7 @@ def parse_deputados(download=True):  # sourcery no-metrics
         "PAULO CORREA JR.": "PAULO CORREA JR"
     }
 
-    deputados["nomeParlamentar"] = manipulation.normalize(
+    deputados["nomeParlamentar"] = normalize(
         deputados["nomeParlamentar"]
     ).replace(rename)
 
@@ -160,6 +165,9 @@ def parse_deputados(download=True):  # sourcery no-metrics
 
 
 def parse_servidores():
+    '''
+    Parser para os dados de servidores do ALESP
+    '''
     url = "https://www.al.sp.gov.br/servidor/lista/?todos=true"
     html = requests.get(url).content
     df_list = pd.read_html(html)
@@ -183,7 +191,7 @@ def parse_servidores():
     servidores["CARGO"] = (
         servidores["CARGO"].str.split(" - ").apply(lambda x: x[0]).str.strip()
     )
-    servidores.columns = manipulation.normalize(servidores.columns)
+    servidores.columns = normalize(servidores.columns)
     mask = servidores["LOTACAO"].str.contains("GABINETE DEP.")
 
     rename_cols = {
@@ -195,13 +203,13 @@ def parse_servidores():
         mask, servidores["LOTACAO"].str.replace("GABINETE DEP.", ""), np.nan
     )
     for col in servidores.columns:
-        servidores[col] = manipulation.normalize(servidores[col])
+        servidores[col] = normalize(servidores[col])
 
     demais_servidores = servidores[servidores["nome_deputado"].isnull()]
 
     servidores = servidores[servidores["nome_deputado"].notnull()]
 
-    servidores.columns = manipulation.normalize_cols(servidores.columns)
+    servidores.columns = normalize_cols(servidores.columns)
 
     ### Merge servidores e partidos
     deputados = pd.read_csv("../data/servidores/deputados_alesp.csv")
@@ -249,7 +257,7 @@ def parse_servidores():
     )
     # liderancas.columns = liderancas.columns.str.title()
     liderancas = liderancas.drop(["nome_deputado"], 1)
-    liderancas.columns = manipulation.normalize_cols(liderancas.columns)
+    liderancas.columns = normalize_cols(liderancas.columns)
     rename_cols = {
         "partido": "sigla_partido",
     }
@@ -274,6 +282,9 @@ def parse_servidores():
 
 
 def parse_despesas(download=True):
+    '''
+    Parser para os dados de despesas do ALESP
+    '''
     if download:
         url = (
             "http://www.al.sp.gov.br/repositorioDados/deputados/despesas_gabinetes.xml"
@@ -308,7 +319,7 @@ def parse_despesas(download=True):
             d = obj[i].Valor.cdata
             try:
                 e = obj[i].CNPJ.cdata
-            except:
+            except Exception:
                 e = np.nan
 
             f = obj[i].Deputado.cdata
@@ -357,7 +368,7 @@ def parse_despesas(download=True):
     ]
     despesas_all = despesas_all[cols]
     despesas_all["CNPJ"] = despesas_all["CNPJ"].astype(str).str.replace(".0", "")
-    despesas_all.columns = manipulation.normalize_cols(despesas_all.columns)
+    despesas_all.columns = normalize_cols(despesas_all.columns)
     despesas_all = despesas_all.drop(["data"], 1)
     rename_cols = {
         "partido": "sigla_partido",
@@ -374,7 +385,7 @@ def parse_despesas(download=True):
         dd = despesas_all[mask]
 
         partitioned_path += f"ano={ano}/"
-        if os.path.isdir(partitioned_path) == False:
+        if os.path.isdir(partitioned_path) is False:
             os.makedirs(partitioned_path)
 
         dd = dd.drop("ano", 1)
@@ -412,8 +423,6 @@ def parse_despesas(download=True):
 
     df_ano_mes = df_ano_mes[mask]
 
-    df_ano_mes
-
     df_ano_mes["Data"] = pd.to_datetime(
         df_ano_mes["Ano"].astype(str) + "-" + df_ano_mes["Mes"].astype(str)
     )
@@ -435,7 +444,7 @@ def parse_despesas(download=True):
 
     despesas_final = despesas_final.drop(["Data"], 1)
     despesas_final = despesas_final.rename(columns={"Deputado": "nome_deputado"})
-    despesas_final.columns = manipulation.normalize_cols(despesas_final.columns)
+    despesas_final.columns = normalize_cols(despesas_final.columns)
     despesas_final = pd.merge(
         despesas_final.drop(["nome_deputado"], 1),
         deputados[["matricula", "nome_deputado"]],
