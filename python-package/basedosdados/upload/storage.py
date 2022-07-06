@@ -113,6 +113,7 @@ class Storage(Base):
         mode="all",
         partitions=None,
         if_exists="raise",
+        chunk_size=None,
         **upload_args,
     ):
         """Upload to storage at `<bucket_name>/<mode>/<dataset_id>/<table_id>`. You can:
@@ -158,6 +159,10 @@ class Storage(Base):
                 * 'raise' : Raises Conflict exception
                 * 'replace' : Replace table
                 * 'pass' : Do nothing
+            chunk_size (int): Optional
+                The size of a chunk of data whenever iterating (in bytes).
+                This must be a multiple of 256 KB per the API specification.
+                If not specified, the chunk_size of the blob itself is used. If that is not specified, a default value of 40 MB is used.
 
             upload_args ():
                 Extra arguments accepted by [`google.cloud.storage.blob.Blob.upload_from_file`](https://googleapis.dev/python/storage/latest/blobs.html?highlight=upload_from_filename#google.cloud.storage.blob.Blob.upload_from_filename)
@@ -169,7 +174,11 @@ class Storage(Base):
         path = Path(path)
 
         if path.is_dir():
-            paths = [f for f in path.glob("**/*") if f.is_file() and f.suffix == ".csv"]
+            paths = [
+                f
+                for f in path.glob("**/*")
+                if f.is_file() and f.suffix in [".csv", ".parquet", "parquet.gzip"]
+            ]
 
             parts = [
                 (
@@ -197,7 +206,7 @@ class Storage(Base):
 
                 blob_name = self._build_blob_name(filepath.name, m, part)
 
-                blob = self.bucket.blob(blob_name)
+                blob = self.bucket.blob(blob_name, chunk_size=chunk_size)
 
                 if not blob.exists() or if_exists == "replace":
 
