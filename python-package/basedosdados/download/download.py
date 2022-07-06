@@ -1,14 +1,19 @@
+"""
+Functions for managing downloads
+"""
+# pylint: disable=too-many-arguments, fixme, invalid-name, protected-access
 from pathlib import Path
 from functools import partialmethod
 import re
 import time
 import shutil
 import os
+import gzip
+
 from pydata_google_auth.exceptions import PyDataCredentialsError
 from google.cloud import bigquery_storage_v1
 from google.cloud import bigquery
 import pandas_gbq
-
 
 from basedosdados.download.base import google_client, credentials
 from basedosdados.exceptions import (
@@ -18,11 +23,14 @@ from basedosdados.exceptions import (
     BaseDosDadosInvalidProjectIDException,
     BaseDosDadosNoBillingProjectIDException,
 )
-from basedosdados.constants import config, constants
+from basedosdados.constants import config
 from pandas_gbq.gbq import GenericGBQException
 
 
 def _set_config_variables(billing_project_id, from_file):
+    """
+    Set billing_project_id and from_file variables
+    """
 
     # standard billing_project_id configuration
     billing_project_id = billing_project_id or config.billing_project_id
@@ -80,21 +88,21 @@ def read_sql(
 
     except GenericGBQException as e:
         if "Reason: 403" in str(e):
-            raise BaseDosDadosAccessDeniedException
+            raise BaseDosDadosAccessDeniedException from e
 
-        elif re.match("Reason: 400 POST .* [Pp]roject[ ]*I[Dd]", str(e)):
-            raise BaseDosDadosInvalidProjectIDException
+        if re.match("Reason: 400 POST .* [Pp]roject[ ]*I[Dd]", str(e)):
+            raise BaseDosDadosInvalidProjectIDException from e
 
         raise
 
     except PyDataCredentialsError as e:
-        raise BaseDosDadosAuthorizationException
+        raise BaseDosDadosAuthorizationException from e
 
     except (OSError, ValueError) as e:
         no_billing_id = "Could not determine project ID" in str(e)
         no_billing_id |= "reading from stdin while output is captured" in str(e)
         if no_billing_id:
-            raise BaseDosDadosNoBillingProjectIDException
+            raise BaseDosDadosNoBillingProjectIDException from e
         raise
 
 
@@ -224,7 +232,7 @@ def download(
             "Either table_id, dataset_id or query should be filled."
         )
 
-    client = google_client(query_project_id, billing_project_id, from_file, reauth)
+    client = google_client(billing_project_id, from_file, reauth)
 
     # makes sure that savepath is a filepath and not a folder
     savepath = _sets_savepath(savepath)
@@ -322,7 +330,7 @@ def _direct_download(
 
     except Exception as err:
         # TODO handle exceptions for 404 (not found), 403 (forbidden)
-        raise Exception(err)
+        raise Exception(err) from err
     finally:
         # delete temporary bucket (even in the case of crashing)
         _delete_bucket(client, tmp_bucket_name)
@@ -389,8 +397,7 @@ def _delete_bucket(client, bucket_name):
     n_blobs = len(list(storage_client.list_blobs(bucket_name)))
     if n_blobs >= MAX_BLOBS:
         raise Exception(
-            f"""Your temporary bucket contains more than {MAX_BLOBS}. 
-    You should manually delete it (force=True will not be able to delete it.)."""
+            f"""Your temporary bucket contains more than {MAX_BLOBS}. You should manually delete it (force=True will not be able to delete it.)."""
         )
 
     bucket.delete(force=True)
@@ -443,9 +450,6 @@ def _move_table_to_bucket(
 
 def _gzip_extract(savepath):
     """Extracts and replace gzip file"""
-    import gzip
-    import shutil
-
     try:
         for file in savepath.glob("*"):
             with gzip.open(file, "rb") as f_in:
@@ -453,8 +457,8 @@ def _gzip_extract(savepath):
                     shutil.copyfileobj(f_in, f_out)
 
             os.remove(file)
-    except:
-        raise Exception("GZIP file could not be extracted.")
+    except Exception as e:
+        raise Exception("GZIP file could not be extracted.") from e
 
 
 def _join_files(tmp_savepath, savepath):

@@ -20,7 +20,7 @@ secrets
 docs/site
 TODO
 
-tests/tmp_bases/
+python-package/tests/tmp_bases
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

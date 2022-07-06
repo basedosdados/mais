@@ -1,7 +1,10 @@
-import click
-import os
-import time
+"""
+CLI package for the application.
+"""
 
+# pylint: disable=locally-disabled, multiple-statements, fixme, line-too-long, too-many-arguments, invalid-name, too-many-lines, protected-access, unused-argument, no-value-for-parameter, redefined-builtin
+
+import click
 from basedosdados.upload.base import Base
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.table import Table
@@ -20,6 +23,9 @@ from ckanapi import CKANAPIError
 @click.version_option(package_name="basedosdados")
 @click.pass_context
 def cli(ctx, templates, bucket_name, metadata_path):
+    """
+    Function to define the CLI.
+    """
 
     ctx.obj = dict(
         templates=templates,
@@ -31,8 +37,9 @@ def cli(ctx, templates, bucket_name, metadata_path):
 @click.group(name="dataset")
 @click.pass_context
 def cli_dataset(ctx):
-
-    pass
+    """
+    Command to manage datasets.
+    """
 
 
 @cli_dataset.command(name="init", help="Initialize metadata files of dataset")
@@ -44,6 +51,9 @@ def cli_dataset(ctx):
 )
 @click.pass_context
 def init_dataset(ctx, dataset_id, replace):
+    """
+    Initialize metadata files of dataset.
+    """
 
     d = Dataset(dataset_id=dataset_id, **ctx.obj).init(replace=replace)
 
@@ -56,6 +66,9 @@ def init_dataset(ctx, dataset_id, replace):
 
 
 def mode_text(mode, verb, obj_id):
+    """
+    Returns a specific text for each mode.
+    """
 
     if mode == "all":
         text = f"Datasets `{obj_id}` and `{obj_id}_staging` were {verb} in BigQuery"
@@ -89,6 +102,9 @@ def mode_text(mode, verb, obj_id):
 )
 @click.pass_context
 def create_dataset(ctx, dataset_id, mode, if_exists, dataset_is_public, location):
+    """
+    Create dataset on BigQuery.
+    """
 
     Dataset(dataset_id=dataset_id, **ctx.obj).create(
         mode=mode,
@@ -112,6 +128,9 @@ def create_dataset(ctx, dataset_id, mode, if_exists, dataset_is_public, location
 )
 @click.pass_context
 def update_dataset(ctx, dataset_id, mode, location):
+    """
+    Update dataset on BigQuery.
+    """
 
     Dataset(dataset_id=dataset_id, **ctx.obj).update(mode=mode, location=location)
 
@@ -132,6 +151,9 @@ def update_dataset(ctx, dataset_id, mode, location):
 )
 @click.pass_context
 def publicize_dataset(ctx, dataset_id, dataset_is_public):
+    """
+    Publicize dataset.
+    """
 
     Dataset(dataset_id=dataset_id, **ctx.obj).publicize(
         dataset_is_public=dataset_is_public
@@ -152,6 +174,9 @@ def publicize_dataset(ctx, dataset_id, dataset_is_public):
 )
 @click.pass_context
 def delete_dataset(ctx, dataset_id, mode):
+    """
+    Delete dataset.
+    """
 
     if click.confirm(f"Are you sure you want to delete `{dataset_id}`?"):
 
@@ -167,7 +192,9 @@ def delete_dataset(ctx, dataset_id, mode):
 
 @click.group(name="table")
 def cli_table():
-    pass
+    """
+    Command to manage tables.
+    """
 
 
 @cli_table.command(name="init", help="Create metadata files")
@@ -210,6 +237,9 @@ def init_table(
     source_format,
     columns_config_url_or_path,
 ):
+    """
+    Initialize table metadata.
+    """
 
     t = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).init(
         data_sample_path=data_sample_path,
@@ -303,6 +333,10 @@ def create_table(
     chunk_size,
 ):
 
+    """
+    Create staging table in BigQuery.
+    """
+
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).create(
         path=path,
         job_config_params=job_config_params,
@@ -335,6 +369,9 @@ def create_table(
 )
 @click.pass_context
 def update_table(ctx, dataset_id, table_id, mode):
+    """
+    Update tables in BigQuery.
+    """
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).update(
         mode=mode,
@@ -377,6 +414,9 @@ def update_table(ctx, dataset_id, table_id, mode):
 )
 @click.pass_context
 def update_columns(ctx, dataset_id, table_id, columns_config_url_or_path):
+    """
+    Update columns fields in tables_config.yaml
+    """
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).update_columns(
         columns_config_url_or_path=columns_config_url_or_path,
@@ -400,6 +440,9 @@ def update_columns(ctx, dataset_id, table_id, columns_config_url_or_path):
 )
 @click.pass_context
 def publish_table(ctx, dataset_id, table_id, if_exists):
+    """
+    Publish staging table to prod.
+    """
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).publish(
         if_exists=if_exists,
@@ -419,6 +462,9 @@ def publish_table(ctx, dataset_id, table_id, if_exists):
 @click.option("--mode", help="Which table to delete [prod|staging]", required=True)
 @click.pass_context
 def delete_table(ctx, dataset_id, table_id, mode):
+    """
+    Delete BigQuery table.
+    """
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).delete(
         mode=mode,
@@ -445,7 +491,14 @@ def upload_table(
     ctx, dataset_id, table_id, filepath, partitions, if_exists, chunk_size
 ):
 
+<<<<<<< HEAD
+    """
+    Upload data to BigQuery table.
+    """
+    Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).append(
+=======
     blob_name = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).append(
+>>>>>>> master
         filepath=filepath,
         partitions=partitions,
         if_exists=if_exists,
@@ -462,7 +515,9 @@ def upload_table(
 
 @click.group(name="storage")
 def cli_storage():
-    pass
+    """
+    Commands for Google Cloud Storage.
+    """
 
 
 @cli_storage.command(name="init", help="Create bucket and initial folders")
@@ -479,6 +534,9 @@ def cli_storage():
 )
 @click.pass_context
 def init_storage(ctx, bucket_name, replace, very_sure):
+    """
+    Initialize bucket and folders.
+    """
 
     # TODO: Create config file to store bucket_name, etc...
     ctx.obj.pop("bucket_name")
@@ -520,8 +578,12 @@ def upload_storage(
     ctx, dataset_id, table_id, filepath, mode, partitions, if_exists, chunk_size
 ):
 
+    '''
+    Upload file to bucket.
+    '''
+
     ctx.obj.pop("bucket_name")
-    blob_name = Storage(dataset_id, table_id, **ctx.obj).upload(
+    Storage(dataset_id, table_id, **ctx.obj).upload(
         filepath=filepath,
         mode=mode,
         partitions=partitions,
@@ -531,7 +593,7 @@ def upload_storage(
 
     click.echo(
         click.style(
-            f"Data was added to `{blob_name}`",
+            "Data was added",
             fg="green",
         )
     )
@@ -563,6 +625,9 @@ def upload_storage(
 def download_storage(
     ctx, dataset_id, table_id, filename, savepath, partitions, mode, if_not_exists
 ):
+    """
+    Download file from bucket.
+    """
     Storage(dataset_id, table_id, **ctx.obj).download(
         filename, savepath, partitions, mode, if_not_exists
     )
@@ -593,6 +658,9 @@ def download_storage(
 @click.option("--not_found_ok", default=False, help="what to do if table not found")
 @click.pass_context
 def storage_delete_table(ctx, dataset_id, table_id, mode, not_found_ok, bucket_name):
+    """
+    Delete table from bucket.
+    """
     Storage(dataset_id, table_id, **ctx.obj).delete_table(
         mode=mode, not_found_ok=not_found_ok, bucket_name=bucket_name
     )
@@ -623,6 +691,9 @@ def storage_delete_table(ctx, dataset_id, table_id, mode, not_found_ok, bucket_n
 def storage_copy_table(
     ctx, dataset_id, table_id, source_bucket_name, dst_bucket_name, mode
 ):
+    """
+    Copy table from another bucket.
+    """
     Storage(dataset_id, table_id, **ctx.obj).copy_table(
         source_bucket_name=source_bucket_name,
         destination_bucket_name=dst_bucket_name,
@@ -632,7 +703,9 @@ def storage_copy_table(
 
 @click.group(name="list")
 def cli_list():
-    pass
+    """
+    CLI list commands.
+    """
 
 
 @cli_list.command(name="datasets", help="List datasets available at given project_id")
@@ -653,6 +726,9 @@ def cli_list():
 )
 @click.pass_context
 def cli_list_datasets(ctx, project_id, filter_by, with_description):
+    """
+    List datasets available at given project_id
+    """
     bd.list_datasets(
         query_project_id=project_id,
         filter_by=filter_by,
@@ -679,6 +755,9 @@ def cli_list_datasets(ctx, project_id, filter_by, with_description):
 )
 @click.pass_context
 def cli_list_dataset_tables(ctx, dataset_id, project_id, filter_by, with_description):
+    """
+    List tables available at given dataset.
+    """
     bd.list_dataset_tables(
         dataset_id=dataset_id,
         query_project_id=project_id,
@@ -689,7 +768,9 @@ def cli_list_dataset_tables(ctx, dataset_id, project_id, filter_by, with_descrip
 
 @click.group(name="get")
 def cli_get():
-    pass
+    """
+    Get commands.
+    """
 
 
 @cli_get.command(
@@ -703,6 +784,9 @@ def cli_get():
 )
 @click.pass_context
 def cli_get_dataset_description(ctx, dataset_id, project_id):
+    """
+    Get the full description for given dataset
+    """
     bd.get_dataset_description(
         dataset_id=dataset_id,
         query_project_id=project_id,
@@ -721,6 +805,9 @@ def cli_get_dataset_description(ctx, dataset_id, project_id):
 )
 @click.pass_context
 def cli_get_table_description(ctx, dataset_id, table_id, project_id):
+    """
+    Get the full description for given table
+    """
     bd.get_table_description(
         dataset_id=dataset_id,
         table_id=table_id,
@@ -746,6 +833,9 @@ def cli_get_table_columns(
     table_id,
     project_id,
 ):
+    """
+    Get fields names,types and description for columns at given table
+    """
     bd.get_table_columns(
         dataset_id=dataset_id,
         table_id=table_id,
@@ -755,7 +845,9 @@ def cli_get_table_columns(
 
 @click.group(name="metadata")
 def cli_metadata():
-    pass
+    """
+    CLI metadata commands.
+    """
 
 
 @cli_metadata.command(name="create", help="Creates new metadata config file")
@@ -802,6 +894,9 @@ def cli_create_metadata(
     force_columns,
     table_only,
 ):
+    """
+    Creates new metadata config file.
+    """
 
     m = Metadata(dataset_id, table_id, **ctx.obj).create(
         if_exists=if_exists,
@@ -826,6 +921,9 @@ def cli_create_metadata(
 @click.argument("table_id", required=False)
 @click.pass_context
 def cli_is_updated_metadata(ctx, dataset_id, table_id):
+    """
+    Check if user's local metadata is updated.
+    """
     m = Metadata(dataset_id, table_id, **ctx.obj)
 
     if m.is_updated():
@@ -846,6 +944,9 @@ def cli_is_updated_metadata(ctx, dataset_id, table_id):
 @click.argument("table_id", required=False)
 @click.pass_context
 def cli_validate_metadata(ctx, dataset_id, table_id):
+    """
+    Validate user's local metadata.
+    """
     m = Metadata(dataset_id, table_id, **ctx.obj)
 
     try:
@@ -891,6 +992,9 @@ def cli_publish_metadata(
     if_exists,
     update_locally,
 ):
+    """
+    Publish user's local metadata.
+    """
     m = Metadata(dataset_id, table_id, **ctx.obj)
 
     try:
@@ -909,7 +1013,9 @@ def cli_publish_metadata(
 
 @click.group(name="config")
 def cli_config():
-    pass
+    """
+    CLI config commands.
+    """
 
 
 @cli_config.command(name="init", help="Initialize configuration")
@@ -920,6 +1026,9 @@ def cli_config():
 )
 @click.pass_context
 def init(ctx, overwrite):
+    """
+    Initialize configuration.
+    """
 
     Base(overwrite_cli_config=overwrite, **ctx.obj)
 
@@ -927,10 +1036,15 @@ def init(ctx, overwrite):
 @cli_config.command(name="refresh_template", help="Overwrite current templates")
 @click.pass_context
 def init_refresh_templates(ctx):
+    """
+    Initialize configuration.
+    """
 
     Base(**ctx.obj)._refresh_templates()
 
 
+# Allow anomalous backslash in string: '\ ' (it's used in gcloud sdk)
+# pylint: disable=W1401
 @click.command(
     name="download",
     help=(
@@ -984,6 +1098,9 @@ def cli_download(
     billing_project_id,
     limit,
 ):
+    """
+    Download data from BigQuery.
+    """
 
     bd.download(
         savepath=savepath,
@@ -1008,6 +1125,9 @@ def cli_download(
     help="Reauthorize credentials.",
 )
 def cli_reauth():
+    """
+    Reauthorize credentials.
+    """
 
     bd.reauth()
 

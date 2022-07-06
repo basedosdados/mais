@@ -1,11 +1,15 @@
+'''
+Code for downloading the Brazilian atlas esgoto dataset.
+'''
+# pylint: disable=invalid-name
 ################################################################
 # Pacotes + paths
 ################################################################
 
 import pandas as pd
 
-path        = "/content/drive/MyDrive/br_ana_atlas_esgotos/"
-path_input  = path + "input/"
+path = "/content/drive/MyDrive/br_ana_atlas_esgotos/"
+path_input = path + "input/"
 path_output = path + "output/"
 
 ################################################################

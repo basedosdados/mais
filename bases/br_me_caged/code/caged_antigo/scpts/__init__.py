@@ -1,1 +1,0 @@
-from scpts.manipulation import normalize_cols
