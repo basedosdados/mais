@@ -1,10 +1,14 @@
-import pandas as pd
-import numpy as np
-import geopandas as gpd
+'''
+Cleaning data from ALESP
+'''
+# pylint: disable=invalid-name
 import unicodedata
 
 
 def normalize_cols(df):
+    '''
+    Normalize columns
+    '''
     return (
         df.str.normalize("NFKD")
         .str.replace("$", "")
@@ -18,6 +22,9 @@ def normalize_cols(df):
 
 
 def normalize(df, remove_words=0):
+    '''
+    Normalize dataframe
+    '''
 
     dd = (
         df.str.normalize("NFKD")
@@ -49,6 +56,9 @@ def normalize(df, remove_words=0):
 
 
 def remove_acentos(s):
+    '''
+    Remove non ascii characters
+    '''
     ss = "".join(
         c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn"
     )

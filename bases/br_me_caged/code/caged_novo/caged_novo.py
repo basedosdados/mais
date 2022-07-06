@@ -1,11 +1,15 @@
+"""
+Extract and transform data from caged_novo
+"""
+# pylint: disable=invalid-name,fixme,too-many-locals,redefined-outer-name
 import os
 import re
-import unidecode
-from ftplib import FTP
 from datetime import datetime
-
-import py7zr
 import shutil
+from ftplib import FTP
+
+import unidecode
+import py7zr
 import numpy as np
 import pandas as pd
 import basedosdados as bd
@@ -49,6 +53,9 @@ month_name_dict = {
 
 
 def get_ftp(url_path):
+    """
+    Get the ftp connection
+    """
     # source = ("1.33.213.199", 0)
     # discover how to use a proxy to acess the ftp --> source_address
     ftp = FTP("ftp.mtps.gov.br")
@@ -65,6 +72,9 @@ def get_ftp(url_path):
 
 
 def get_download_links():
+    """
+    Get the links to download
+    """
     tipos = [tipo for tipo in get_ftp("").nlst() if ".pdf" not in tipo]
     download_dict = {}
 
@@ -154,6 +164,10 @@ def get_download_links():
 
 ## get the blobs from basedosdados storage and filter what needs to be downloaded
 def get_filtered_download_dict(tipo, download_dict, bucket_name="basedosdados"):
+    """
+    Get the blobs from basedosdados storage and filter what needs to be downloaded
+    """
+
     def get_year_month(b):
         ano = b.split("ano=")[1].split("/")[0]
         mes = b.split("mes=")[1].split("/")[0]
@@ -166,16 +180,7 @@ def get_filtered_download_dict(tipo, download_dict, bucket_name="basedosdados"):
         .list_blobs(prefix=f"staging/{tb.dataset_id}/{tb.table_id}/")
     )
 
-    blobs = list(set([get_year_month(b.name) for b in blobs]))
-
-    check_download_pop = [
-        d for d in download_dict[tipo]["check_download"] if d in blobs
-    ]
-
-    [
-        download_dict[tipo]["check_download"].pop(year_month, None)
-        for year_month in check_download_pop
-    ]
+    blobs = list({get_year_month(b.name) for b in blobs})
 
     must_download_pop = [
         d for d in download_dict[tipo]["must_download"] if d not in blobs
@@ -190,6 +195,9 @@ def get_filtered_download_dict(tipo, download_dict, bucket_name="basedosdados"):
 
 ## logic to trigger the downloads
 def get_trigger_and_download_opt(download_opt, tipo):
+    """
+    Get the trigger and download opts to trigger the downloads
+    """
     # TODO: etapa de filtragem do que n deve ser baixado
     if (
         download_opt[tipo]["check_download"] == {}
@@ -227,6 +235,9 @@ def get_trigger_and_download_opt(download_opt, tipo):
 
 
 def download_data(save_path, download_url):
+    """
+    Download the file
+    """
     ## download do arquivo
     path_url = "/".join(download_url.split("/")[:-1])
     ftp = get_ftp(path_url)
@@ -242,6 +253,9 @@ def download_data(save_path, download_url):
 # FILES AND FOLDES MANIPULATION
 ################################################################
 def creat_path_tree(path):
+    """
+    Create the path tree if it doesn't exist
+    """
     current_path = ""
     for folder in path.split("/"):
         current_path += f"{folder}/"
@@ -250,8 +264,11 @@ def creat_path_tree(path):
 
 
 def extract_file(file_path, file_name, save_rows=10):
+    """
+    Extract the file
+    """
     if not os.path.exists(f"{file_path}{file_name}.csv"):
-        archive = py7zr.SevenZipFile(f"{file_path}{file_name}.7z", mode="r").extractall(
+        py7zr.SevenZipFile(f"{file_path}{file_name}.7z", mode="r").extractall(
             path=file_path
         )
         filename_txt = [
@@ -276,6 +293,9 @@ def extract_file(file_path, file_name, save_rows=10):
 
 
 def creat_partition(df, save_clean_path, year_month_path):
+    """
+    Create the partition
+    """
     valid_ufs = [uf for uf in df["sigla_uf"].unique() if uf is not np.nan]
     for uf in valid_ufs:
         ano = year_month_path.split("/")[0]
@@ -295,9 +315,12 @@ def creat_partition(df, save_clean_path, year_month_path):
 
 
 def clean_csvs(file_path, file_name):
+    """
+    Clean the csv
+    """
     try:
         os.remove(f"{file_path}{file_name}.csv")
-    except:
+    except Exception:
         pass
 
 
@@ -307,6 +330,9 @@ def clean_csvs(file_path, file_name):
 
 
 def rename_add_orginaze_columns(file_path, file_name, tipo, municipios):
+    """
+    Rename and add columns
+    """
 
     df = pd.read_csv(f"{file_path}{file_name}.csv", dtype="str")
 
@@ -375,7 +401,7 @@ def rename_add_orginaze_columns(file_path, file_name, tipo, municipios):
     df = df.rename(columns=col_dict)
     df = df.merge(municipios, on="id_municipio_6", how="left")
 
-    col_order = [col_dict[col] for col in col_dict if col not in remove_cols]
+    col_order = [value for col, value in col_dict.items() if col not in remove_cols]
     df = df[col_order]
 
     return df
@@ -387,6 +413,9 @@ def rename_add_orginaze_columns(file_path, file_name, tipo, municipios):
 
 
 def upload_to_raw(tipo, save_raw_path):
+    """
+    Upload to raw
+    """
     if tipo == "estabelecimentos":
         st = bd.Storage(
             table_id="microdados_estabelecimentos", dataset_id="br_me_caged"
@@ -398,6 +427,9 @@ def upload_to_raw(tipo, save_raw_path):
 
 
 def upload_to_bd(tipo, filepath):
+    """
+    Upload to bd
+    """
     if tipo == "estabelecimentos":
         tb = bd.Table(table_id="microdados_estabelecimentos", dataset_id="br_me_caged")
     else:

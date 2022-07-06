@@ -1,10 +1,15 @@
-import pandas as pd
-import numpy as np
+'''
+Code for cleaning and organizing cennsus data
+'''
+# pylint: disable=invalid-name,redefined-outer-name
 import os
 import shutil
 
 
 def file_table_reference():
+    '''
+    Reference for files
+    '''
     folders = [
         "alfabetizacao_homens_mulheres",
         "alfabetizacao_total",
@@ -67,6 +72,9 @@ def file_table_reference():
 
 
 def make_dirs(path, folder):
+    '''
+    Make directories
+    '''
     if not os.path.exists(f"{path}/{folder}"):
         os.mkdir(f"{path}/{folder}")
 
@@ -74,6 +82,9 @@ def make_dirs(path, folder):
 def create_dataset_folders(
     file_table_reference, path="../data/censo/bases/tratado/organized"
 ):
+    '''
+    Create dataset folders
+    '''
     # shutil.rmtree(path)
     if not os.path.exists(path):
         os.mkdir(path)
@@ -83,13 +94,14 @@ def create_dataset_folders(
 
 
 def rename_and_move_files(xls_files, datasets_path):
+    '''
+    Rename and move files
+    '''
     for xls_file in xls_files:
         try:
-            tipo = uf_folder = xls_file.split("/")[-1].split("_")[1][2:]
             uf_folder = xls_file.split("/")[-1].split("_")[1][-6:][:2]
             filename = xls_file.split("/")[-1].split("_")[0]
-        except:
-            tipo = uf_folder = xls_file.split("/")[-1].split("-")[1][2:]
+        except Exception:
             uf_folder = xls_file.split("/")[-1].split("-")[1][:2]
             filename = xls_file.split("/")[-1].split("-")[0]
 
