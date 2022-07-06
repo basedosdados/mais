@@ -1,20 +1,19 @@
-from grpc import Status
-from jinja2 import Template
-from pathlib import Path, PosixPath
-from loguru import logger
+"""
+Class for manage tables in Storage and Big Query
+"""
+# pylint: disable=invalid-name, too-many-locals, too-many-branches, too-many-arguments
+from pathlib import Path
 import json
-import csv
 from copy import deepcopy
-from google.cloud import bigquery
-import datetime
 import textwrap
 import inspect
+from io import StringIO
 
+from loguru import logger
+from google.cloud import bigquery
 import ruamel.yaml as ryaml
 import requests
-from io import StringIO
 import pandas as pd
-
 import google.api_core.exceptions
 
 from basedosdados.upload.base import Base
@@ -46,22 +45,33 @@ class Table(Base):
 
     @property
     def table_config(self):
+        """
+        Load table_config.yaml
+        """
         return self._load_yaml(self.table_folder / "table_config.yaml")
 
     def _get_table_obj(self, mode):
+        """
+        Get table object from BigQuery
+        """
         return self.client[f"bigquery_{mode}"].get_table(self.table_full_name[mode])
 
     def _is_partitioned(self):
+        """
+        Check if table is partitioned
+        """
         ## check if the table are partitioned, need the split because of a change in the type of partitions in pydantic
         partitions = self.table_config["partitions"]
-        if not partitions:
+        if partitions is None:
             return False
 
-        elif isinstance(partitions, list):
+        if isinstance(partitions, list):
             # check if any None inside list.
             # False if it is the case Ex: [None, 'partition']
             # True otherwise          Ex: ['partition1', 'partition2']
             return all(item is not None for item in partitions)
+
+        raise ValueError("Partitions must be a list or None")
 
     def _load_schema(self, mode="staging"):
         """Load schema from table_config.yaml
@@ -115,7 +125,7 @@ class Table(Base):
                 )
 
             # raise if field is not in schema
-            elif not_in_schema:
+            if not_in_schema:
                 raise BaseDosDadosException(
                     "Column {error_columns} was not found in publish.sql. Are you sure that "
                     "all your column names between table_config.yaml, publish.sql and "
@@ -127,14 +137,13 @@ class Table(Base):
                     )
                 )
 
-            else:
-                # if field is in schema, get field_type and field_mode
-                for c in columns:
-                    for s in schema:
-                        if c["name"] == s.name:
-                            c["type"] = s.field_type
-                            c["mode"] = s.mode
-                            break
+            # if field is in schema, get field_type and field_mode
+            for c in columns:
+                for s in schema:
+                    if c["name"] == s.name:
+                        c["type"] = s.field_type
+                        c["mode"] = s.mode
+                        break
         ## force utf-8, write schema_{mode}.json
         json.dump(columns, (json_path).open("w", encoding="utf-8"))
 
@@ -220,14 +229,18 @@ class Table(Base):
 
         self._make_publish_sql()
 
-    def _sheet_to_df(self, columns_config_url_or_path):
+    @staticmethod
+    def _sheet_to_df(columns_config_url_or_path):
+        """
+        Convert sheet to dataframe
+        """
         url = columns_config_url_or_path.replace("edit#gid=", "export?format=csv&gid=")
         try:
             return pd.read_csv(StringIO(requests.get(url).content.decode("utf-8")))
-        except:
+        except Exception as e:
             raise BaseDosDadosException(
                 "Check if your google sheet Share are: Anyone on the internet with this link can view"
-            )
+            ) from e
 
     def table_exists(self, mode):
         """Check if table exists in BigQuery.
@@ -241,10 +254,7 @@ class Table(Base):
         except google.api_core.exceptions.NotFound:
             ref = None
 
-        if ref:
-            return True
-        else:
-            return False
+        return bool(ref)
 
     def update_columns(self, columns_config_url_or_path=None):
         """
@@ -393,29 +403,11 @@ class Table(Base):
                         col["observations"] if observations == "NULL" else observations
                     )
 
-        ruamel.dump(
-            table_config_yaml,
-            open(self.table_folder / "table_config.yaml", "w", encoding="utf-8"),
-        )
+        with open(self.table_folder / "table_config.yaml", "w", encoding="utf-8") as f:
+            ruamel.dump(table_config_yaml, f)
 
         # regenerate publish.sql
         self._make_publish_sql()
-
-    def table_exists(self, mode):
-        """Check if table exists in BigQuery.
-
-        Args:
-            mode (str): Which dataset to check [prod|staging|all].
-        """
-        try:
-            ref = self._get_table_obj(mode=mode)
-        except google.api_core.exceptions.NotFound:
-            ref = None
-
-        if ref:
-            return True
-        else:
-            return False
 
     def init(
         self,
@@ -472,12 +464,12 @@ class Table(Base):
 
         try:
             self.table_folder.mkdir(exist_ok=(if_folder_exists == "replace"))
-        except FileExistsError:
+        except FileExistsError as e:
             if if_folder_exists == "raise":
                 raise FileExistsError(
                     f"Table folder already exists for {self.table_id}. "
-                )
-            elif if_folder_exists == "pass":
+                ) from e
+            if if_folder_exists == "pass":
                 return self
 
         if not data_sample_path and if_table_config_exists != "pass":
@@ -543,8 +535,7 @@ class Table(Base):
                     f"table_config.yaml and publish.sql already exists at {self.table_folder}"
                 )
             # if config files don't exist, create them
-            else:
-                self._make_template(columns, partition_columns, if_table_config_exists)
+            self._make_template(columns, partition_columns, if_table_config_exists)
 
         else:
             # Raise: without a path to data sample, should not replace config files with empty template
@@ -558,7 +549,6 @@ class Table(Base):
     def create(
         self,
         path=None,
-        job_config_params=None,
         force_dataset=True,
         if_table_exists="raise",
         if_storage_data_exists="raise",
@@ -705,7 +695,7 @@ class Table(Base):
 
                 return None
 
-            elif if_table_exists == "raise":
+            if if_table_exists == "raise":
 
                 raise FileExistsError(
                     "Table already exists, choose replace if you want to overwrite it"
@@ -723,8 +713,9 @@ class Table(Base):
             object="Table",
             action="created",
         )
+        return None
 
-    def update(self, mode="all", not_found_ok=True):
+    def update(self, mode="all"):
         """Updates BigQuery schema and description.
         Args:
             mode (str): Optional.
@@ -750,14 +741,16 @@ class Table(Base):
             )
 
             # save table description
-            open(
+            with  open(
                 self.metadata_path
                 / self.dataset_id
                 / self.table_id
                 / "table_description.txt",
                 "w",
                 encoding="utf-8",
-            ).write(table.description)
+            ) as f:
+                f.write(table.description)
+
 
             # when mode is staging the table schema already exists
             table.schema = self._load_schema(m)
@@ -878,18 +871,17 @@ class Table(Base):
             raise BaseDosDadosException(
                 "You cannot append to a table that does not exist"
             )
-        else:
-            Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
-                filepath,
-                mode="staging",
-                partitions=partitions,
-                if_exists=if_exists,
-                chunk_size=chunk_size,
-                **upload_args,
-            )
-            logger.success(
-                " {object} {object_id} was {action}!",
-                object_id=self.table_id,
-                object="Table",
-                action="appended",
-            )
+        Storage(self.dataset_id, self.table_id, **self.main_vars).upload(
+            filepath,
+            mode="staging",
+            partitions=partitions,
+            if_exists=if_exists,
+            chunk_size=chunk_size,
+            **upload_args,
+        )
+        logger.success(
+            " {object} {object_id} was {action}!",
+            object_id=self.table_id,
+            object="Table",
+            action="appended",
+        )
