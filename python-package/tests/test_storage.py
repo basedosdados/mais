@@ -1,7 +1,10 @@
-import pytest
+'''
+Tests for the Storage class
+'''
+
 from pathlib import Path
-from google.cloud import storage
-import shutil
+
+import pytest
 from google.api_core.exceptions import NotFound
 from basedosdados import Storage
 
@@ -10,38 +13,29 @@ TABLE_ID = "pytest"
 SAVEPATH = Path(__file__).parent / "tmp_bases"
 TABLE_FILES = ["publish.sql", "table_config.yaml"]
 
-
-@pytest.fixture
-def metadatadir(tmpdir_factory):
-    (Path(__file__).parent / "tmp_bases").mkdir(exist_ok=True)
-    return Path(__file__).parent / "tmp_bases"
-
-
-@pytest.fixture
-def storage(metadatadir):
-    return Storage(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=metadatadir)
-
-
-def test_upload(storage, metadatadir):
+def test_upload(storage, sample_data):
+    '''
+    Test the upload method
+    '''
 
     storage.delete_file("municipio.csv", "staging", not_found_ok=True)
 
-    storage.upload(metadatadir / "municipio.csv", mode="staging")
+    storage.upload(sample_data / "municipio.csv", mode="staging")
 
     with pytest.raises(Exception):
-        storage.upload(metadatadir / "municipio.csv", mode="staging")
+        storage.upload(sample_data / "municipio.csv", mode="staging")
 
-    storage.upload(metadatadir / "municipio.csv", mode="staging", if_exists="replace")
+    storage.upload(sample_data / "municipio.csv", mode="staging", if_exists="replace")
 
     storage.upload(
-        metadatadir / "municipio.csv",
+        sample_data / "municipio.csv",
         mode="staging",
         if_exists="replace",
         partitions="key1=value1/key2=value2",
     )
 
     storage.upload(
-        metadatadir / "municipio.csv",
+        sample_data / "municipio.csv",
         mode="staging",
         if_exists="replace",
         partitions={"key1": "value1", "key2": "value1"},
@@ -49,7 +43,7 @@ def test_upload(storage, metadatadir):
 
     with pytest.raises(Exception):
         storage.upload(
-            metadatadir / "municipio.csv",
+            sample_data / "municipio.csv",
             mode="staging",
             if_exists="replace",
             partitions=["key1", "value1", "key2", "value1"],
@@ -57,6 +51,9 @@ def test_upload(storage, metadatadir):
 
 
 def test_download_not_found(storage):
+    '''
+    Test the download method when the file does not exist
+    '''
 
     with pytest.raises(FileNotFoundError):
         storage.download(filename="not_found", savepath=SAVEPATH)
@@ -66,6 +63,9 @@ def test_download_not_found(storage):
 
 
 def test_download_filename(storage):
+    '''
+    Test the download method with a filename
+    '''
 
     storage.download(filename="municipio.csv", savepath=SAVEPATH, mode="staging")
 
@@ -75,6 +75,9 @@ def test_download_filename(storage):
 
 
 def test_download_partitions(storage):
+    '''
+    Test the download method with partitions
+    '''
 
     storage.download(
         savepath=SAVEPATH,
@@ -110,6 +113,9 @@ def test_download_partitions(storage):
 
 
 def test_download_default(storage):
+    '''
+    Test the download method with the default mode
+    '''
     storage.download(savepath=SAVEPATH, mode="staging")
 
     assert (
@@ -122,6 +128,9 @@ def test_download_default(storage):
 
 
 def test_delete_file(storage):
+    '''
+    Test the delete_file method
+    '''
 
     storage.delete_file("municipio.csv", "staging")
 
@@ -131,7 +140,10 @@ def test_delete_file(storage):
     storage.delete_file("municipio.csv", "staging", not_found_ok=True)
 
 
-def test_copy_table(storage):
+def test_copy_table():
+    '''
+    Test the copy_table method
+    '''
 
     Storage("br_ibge_pib", "municipio").copy_table()
 
@@ -143,7 +155,10 @@ def test_copy_table(storage):
     )
 
 
-def test_delete_table(storage):
+def test_delete_table():
+    '''
+    Test the delete_table method
+    '''
 
     Storage("br_ibge_pib", "municipio").delete_table(bucket_name="basedosdados-dev")
 

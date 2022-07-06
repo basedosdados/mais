@@ -1,3 +1,7 @@
+"""
+Code for downloading data from camara de leis
+"""
+# pylint: disable=invalid-name
 import argparse
 import csv
 import json
@@ -5,10 +9,13 @@ import pathlib
 
 
 def from_json_to_csv(filepath):
-    laws = json.load(open(filepath))
-
+    """
+    Transform json file to csv file
+    """
+    with open(filepath, "r", encoding="utf-8") as f:
+        laws = json.load(f)
     with open(
-        "bases/br_ba_feiradesantana_leis/output/leis.csv", "w", newline=""
+        "bases/br_ba_feiradesantana_leis/output/leis.csv", "w", newline="", encoding="utf-8"
     ) as csvfile:
         fieldnames = list(laws[0].keys())
         # remove `documento` porque essa url não é acessível publicamente
