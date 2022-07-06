@@ -150,7 +150,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: id_municipio
-      bigquery_type: string
+      bigquery_type: int64
       description: Identificador do município IBGE
       temporal_coverage: 
         - (1)
@@ -211,7 +211,7 @@ columns:
       is_partition: false
     - name: id_subdistrito
       bigquery_type: string
-      description: Identificador do substrito
+      description: Identificador do subdistrito
       temporal_coverage: 
         - (1)
       covered_by_dictionary: no
