@@ -1,9 +1,11 @@
-import pytest
+'''
+Tests for metadata download fuunctions
+'''
 from pathlib import Path
-import pandas as pd
-from pandas_gbq.gbq import GenericGBQException
 import shutil
-import requests
+
+import pytest
+import pandas as pd
 
 from basedosdados import (
     list_datasets,
@@ -24,13 +26,19 @@ shutil.rmtree(SAVEPATH, ignore_errors=True)
 
 
 def test_list_datasets_simple_verbose(capsys):
+    '''
+    Test if list_datasets function works with verbose=True
+    '''
 
     out = list_datasets(with_description=False, verbose=True)
-    out, err = capsys.readouterr()  # Capture prints
+    out, _ = capsys.readouterr()  # Capture prints
     assert "dataset_id" in out
 
 
 def test_list_datasets_simple_list():
+    '''
+    Test if list_datasets function works with verbose=False
+    '''
 
     out = list_datasets(with_description=False, verbose=False)
     # check if function returns list
@@ -40,6 +48,9 @@ def test_list_datasets_simple_list():
 
 
 def test_list_datasets_complete_list():
+    '''
+    Test if list_datasets function works with verbose=False and with_description=True
+    '''
 
     out = list_datasets(with_description=True, verbose=False)
     # check if function returns list
@@ -49,99 +60,135 @@ def test_list_datasets_complete_list():
 
 
 def test_list_datasets_complete_verbose(capsys):
+    '''
+    Test list_datasets with complete output
+    '''
 
     list_datasets(with_description=True, verbose=True)
-    out, err = capsys.readouterr()  # Capture prints
+    out, _ = capsys.readouterr()  # Capture prints
     assert "dataset_id" in out
     assert "description" in out
 
 
 def test_list_dataset_tables_simple_verbose(capsys):
+    '''
+    Test list_dataset_tables function with verbose=True and with_description=False
+    '''
 
     list_dataset_tables(dataset_id="br_me_caged", with_description=False, verbose=True)
-    out, err = capsys.readouterr()  # Capture prints
+    out, _ = capsys.readouterr()  # Capture prints
     assert "table_id" in out
 
 
 def test_list_dataset_tables_simple_list():
+    '''
+    Test list_dataset_tables function with verbose=False and with_description=False
+    '''
 
     out = list_dataset_tables(
         dataset_id="br_me_caged", with_description=False, verbose=False
     )
 
-    assert type(out) == list
+    assert isinstance(out, list)
     assert len(out) > 0
 
 
 def test_list_dataset_tables_complete_verbose(capsys):
+    '''
+    Test list_dataset_tables function with verbose=True and with_description=True
+    '''
 
     list_dataset_tables(dataset_id="br_me_caged", with_description=True, verbose=True)
 
-    out, err = capsys.readouterr()  # Capture prints
+    out, _ = capsys.readouterr()  # Capture prints
     assert "table_id" in out
     assert "description" in out
 
 
 def test_list_dataset_tables_complete_list():
+    '''
+    Test list_dataset_tables function with verbose=False and with_description=True
+    '''
 
     out = list_dataset_tables(
         dataset_id="br_me_caged", with_description=True, verbose=False
     )
 
-    assert type(out) == list
-    assert type(out[0]) == dict
+    assert isinstance(out, list)
+    assert isinstance(out[0], dict)
 
 
 def test_get_dataset_description(capsys):
+    '''
+    Test get_dataset_description function with verbose=False
+    '''
 
     get_dataset_description("br_me_caged", verbose=True)
-    out, err = capsys.readouterr()  # Capture prints
+    out, _ = capsys.readouterr()  # Capture prints
     assert len(out) > 0
 
 
 def test_get_dataset_description_verbose_false():
+    '''
+    Test get_dataset_description function with verbose=False
+    '''
     out = get_dataset_description("br_me_caged", verbose=False)
-    assert type(out) == str
+    assert isinstance(out, str)
     assert len(out) > 0
 
 
 def test_get_table_description(capsys):
+    '''
+    Test get_table_description function with verbose=False
+    '''
     get_table_description("br_me_caged", "microdados_antigos")
-    out, err = capsys.readouterr()  # Capture prints
+    out, _ = capsys.readouterr()  # Capture prints
     assert len(out) > 0
 
 
 def test_get_table_description_verbose_false():
+    '''
+    Test get_table_description function with verbose=False
+    '''
     out = get_table_description(
         dataset_id="br_me_caged",
         table_id="microdados_antigos",
         verbose=False,
     )
-    assert type(out) == str
+    assert isinstance(out, str)
     assert len(out) > 0
 
 
 def test_get_table_columns(capsys):
+    '''
+    Test get_table_columns function with verbose=False
+    '''
     get_table_columns(
         dataset_id="br_me_caged",
         table_id="microdados_antigos",
     )
-    out, err = capsys.readouterr()  # Capture prints
+    out, _ = capsys.readouterr()  # Capture prints
     assert "name" in out
     assert "description" in out
 
 
 def test_get_table_columns_verbose_false():
+    '''
+    Test get_table_columns function with verbose=False
+    '''
     out = get_table_columns(
         dataset_id="br_me_caged",
         table_id="microdados_antigos",
         verbose=False,
     )
-    assert type(out) == list
+    assert isinstance(out, list)
     assert len(out) > 0
 
 
 def test_search():
+    '''
+    Test search function with verbose=False
+    '''
     out = search(query="agua", order_by="score")
     # check if function returns pd.DataFrame
     assert isinstance(out, pd.DataFrame)
@@ -153,21 +200,26 @@ def test_search():
 
 
 def test_get_table_size(capsys):
+    '''
+    Test get_table_size function with verbose=False
+    '''
     get_table_size(
         dataset_id="br_ibge_censo_demografico",
         table_id="setor_censitario_basico_2010",
     )
-    out, err = capsys.readouterr()
+    out, _ = capsys.readouterr()
     assert "not available" in out
 
 
 def test__safe_fetch(capsys):
-
+    '''
+    Test _safe_fetch function with verbose=False
+    '''
     _safe_fetch("https://www.lkajsdhgfal.com.br")
-    out, err = capsys.readouterr()  # Capture prints
+    out, _ = capsys.readouterr()  # Capture prints
     assert "HTTPSConnection" in out
 
     response = _safe_fetch(
         "https://basedosdados.org/api/3/action/bd_dataset_search?q=agua&page_size=10&resource_type=bdm_table"
     )
-    assert type(response.json()) == dict
+    assert isinstance(response.json(), dict)

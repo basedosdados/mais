@@ -1,6 +1,7 @@
 """Esse script faz o download dos dados de pessoal terceirizado de órgãos do Poder Executivo Federal
 incluindo autarquias e fundações públicas; e padroniza as colunas para o padrão da Base dos Dados.
 """
+# pylint: disable=invalid-name
 from io import BytesIO
 import requests
 

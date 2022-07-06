@@ -1,23 +1,25 @@
+"""
+Extract and clean CAGED data
+"""
+# pylint: disable=invalid-name,unnecessary-comprehension,import-error
 import sys
-
-sys.path.insert(0, "../")
-
 import time
 import os
+import shutil
+from contextlib import closing
+from urllib import request
 
 import pandas as pd
 import numpy as np
+import manipulation
 
-import shutil
-import urllib.request as request
-from contextlib import closing
-
-import py7zr
-
-from scpts import manipulation
+sys.path.insert(0, "../")
 
 
 def create_folder_structure():
+    """
+    Create folder structure for CAGED data
+    """
     ### cria pasta data caso n exista
     if not os.path.exists("../data"):
         os.mkdir("../data")
@@ -44,6 +46,9 @@ def create_folder_structure():
 
 
 def download_data(download_link, download_path, filename):
+    """
+    Download data from link and save it in path
+    """
     ## download do arquivo
     with closing(request.urlopen(download_link)) as r:
         with open(os.path.join(download_path, filename), "wb") as f:
@@ -83,7 +88,7 @@ def download_caged_normal(download_link, download_path_year, ano, mes):
             download_data(download_link, download_path_month, filename)
             t = time.strftime("%M:%S", time.gmtime((time.time() - ti)))
             print(f"{mes}/{ano} | criado em {t}")
-        except:
+        except Exception:
             print(f"{mes}/{ano} | não conseguiu baixar")
 
 
@@ -107,11 +112,14 @@ def download_caged_ajustes_2002a2009(download_link, download_path_year, ano):
             download_data(download_link, download_path_year, filename)
             t = time.strftime("%M:%S", time.gmtime((time.time() - ti)))
             print(f"{ano} | criado em {t}")
-        except:
+        except Exception:
             print(f"{ano} | não conseguiu baixar")
 
 
 def download_caged_file(download_link, ano=None, mes=None, raw_path=None):
+    """
+    Download CAGED file
+    """
     # cria estrutura de pastas
     create_folder_structure()
 
@@ -125,9 +133,11 @@ def download_caged_file(download_link, ano=None, mes=None, raw_path=None):
 
 
 def caged_antigo_download():
+    """
+    Download CAGED antigo
+    """
     ## define caminhos
     raw_path = "../data/caged/raw/caged_antigo"
-    clean_path = "../data/caged/clean/caged_antigo"
 
     # seleciona anos e meses a serem baixados
     anos = [i for i in range(2007, 2020)]
@@ -142,9 +152,11 @@ def caged_antigo_download():
 
 
 def caged_antigo_ajustes_download():
+    """
+    Download CAGED antigo ajustes
+    """
     ## define caminhos
     raw_path = "../data/caged/raw/caged_antigo_ajustes"
-    clean_path = "../data/caged/clean/caged_antigo_ajustes"
 
     # seleciona anos e meses a serem baixados
     anos = [i for i in range(2010, 2020)]
@@ -159,8 +171,10 @@ def caged_antigo_ajustes_download():
 
 
 def caged_antigo_ajustes_2002a2009_download():
+    """
+    Ajustes CAGED antigo
+    """
     raw_path = "../data/caged/raw/caged_antigo_ajustes"
-    clean_path = "../data/caged/clean/caged_antigo_ajustes"
 
     anos = [str(i) for i in range(2007, 2010)]
 
@@ -214,11 +228,10 @@ def caged_antigo_ajustes_2002a2009_extract_organize(folders, force_remove_csv=Fa
 
 
 def extract_file(path_month, filename, save_rows=10):
+    """
+    Extrai arquivo .7z
+    """
     if not os.path.exists(f"{path_month}{filename}.csv"):
-        archive = py7zr.SevenZipFile(f"{path_month}{filename}.7z", mode="r").extractall(
-            path=path_month
-        )
-
         filename_txt = [
             file for file in os.listdir(path_month) if ".txt" in file.lower()
         ][0]
@@ -231,7 +244,7 @@ def extract_file(path_month, filename, save_rows=10):
                 nrows=save_rows,
                 dtype="str",
             )
-        except:
+        except Exception:
             ## caso de erro de bad lines por conter um ; extra no arquivo txt
             with open(
                 f"{path_month}{filename_txt}",
@@ -239,7 +252,7 @@ def extract_file(path_month, filename, save_rows=10):
             ) as f:
                 newText = f.read().replace(";99;", ";99")
 
-            with open(f"{path_month}{filename_txt}", "w") as f:
+            with open(f"{path_month}{filename_txt}", "w", encoding="latin-1") as f:
                 f.write(newText)
 
             df = pd.read_csv(
@@ -258,27 +271,36 @@ def extract_file(path_month, filename, save_rows=10):
 
 
 def get_file_names_and_clean_residues(path_month, force_remove_csv=True):
+    """
+    Get file names and clean residues
+    """
     filename_txt = [file for file in os.listdir(path_month) if ".txt" in file.lower()]
     filename_csv = [file for file in os.listdir(path_month) if ".csv" in file]
     try:
         filename_7z = [file for file in os.listdir(path_month) if ".7z" in file][0][:-3]
-    except:
+    except Exception:
         filename_7z = filename_csv[0][:-4]
 
     if filename_txt != []:
         os.remove(f"{path_month}{filename_txt[0]}")
-    if filename_csv != [] and force_remove_csv == True:
+    if filename_csv != [] and force_remove_csv is True:
         os.remove(f"{path_month}{filename_csv[0][:-4]}.csv")
 
     return filename_7z
 
 
 def make_dirs(path, folder, var):
+    """
+    Make dirs
+    """
     if not os.path.exists(f"{path}{var}={folder}/"):
         os.mkdir(f"{path}{var}={folder}/")
 
 
 def make_folder_tree(clean_path, ano, mes, uf="SP"):
+    """
+    Make folder tree
+    """
     make_dirs(clean_path, ano, var="ano")
     path_ano = f"{clean_path}/ano={ano}/"
     make_dirs(path_ano, mes, var="mes")
@@ -288,6 +310,9 @@ def make_folder_tree(clean_path, ano, mes, uf="SP"):
 
 
 def save_partitioned_file(df, clean_save_path, ano, mes, file_name):
+    """
+    Save partitioned file
+    """
     for uf in df.sigla_uf.unique():
         ## filtra apenas o estado de interesse
         df_uf = df[df["sigla_uf"] == uf]
@@ -302,6 +327,9 @@ def save_partitioned_file(df, clean_save_path, ano, mes, file_name):
 def caged_antigo_padronize_and_partitioned(
     folders, clean_save_path, municipios, force_remove_csv=True
 ):
+    """
+    Padroniza e particiona arquivos CAGED
+    """
     # all_cols = pd.DataFrame()
     for folder in folders:
 
@@ -372,6 +400,9 @@ def caged_antigo_padronize_and_partitioned(
 
 
 def clean_caged(df, municipios):
+    """
+    Clean CAGED
+    """
     ## cria coluna ano e mes apartir da competencia declarada
     df["competencia_declarada"] = df["competencia_declarada"].apply(
         lambda x: str(x)[:4] + "-" + str(x)[4:]
@@ -408,6 +439,9 @@ def clean_caged(df, municipios):
 
 #####======================= PADRONIZA DADOS CAGED AJUSTES =======================#####
 def padroniza_caged_antigo_ajustes(df, municipios):
+    """
+    Padroniza dados CAGED ajustes
+    """
     ## cria colunas que nao existem em outros arquivos
     check_cols = ["ind_trab_parcial", "ind_trab_intermitente"]
     create_cols = [col for col in check_cols if col not in df.columns.tolist()]
@@ -542,6 +576,9 @@ def padroniza_caged_antigo_ajustes(df, municipios):
 
 #####======================= PADRONIZA DADOS CAGED ANTIGO =======================#####
 def padroniza_caged_antigo(df, municipios):
+    """
+    Padroniza dados do CAGED antigo
+    """
     ## cria colunas que nao existem em outros arquivos
     check_cols = ["ind_trab_parcial", "ind_trab_intermitente"]
     create_cols = [col for col in check_cols if col not in df.columns.tolist()]
@@ -686,6 +723,9 @@ def padroniza_caged_antigo(df, municipios):
 
 
 def padroniza_caged_novo(df, municipios):
+    """
+    Padroniza dados do CAGED novo
+    """
     ## cria coluna ano e mes apartir da competencia declarada
     df["ano"] = df["competencia_declarada"].apply(lambda x: int(str(x)[:4]))
     df["mes"] = df["competencia_declarada"].apply(lambda x: int(str(x)[4:]))
@@ -702,6 +742,9 @@ def padroniza_caged_novo(df, municipios):
 
 
 def rename_caged_novo(df, option):
+    """
+    Renomeia colunas do CAGED novo
+    """
     rename_cols_estabelecimentos = {
         "competaancia": "competencia_declarada",
         "regiao": "regiao",
