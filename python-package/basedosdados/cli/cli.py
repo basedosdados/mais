@@ -491,10 +491,14 @@ def upload_table(
     ctx, dataset_id, table_id, filepath, partitions, if_exists, chunk_size
 ):
 
+<<<<<<< HEAD
     """
     Upload data to BigQuery table.
     """
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).append(
+=======
+    blob_name = Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).append(
+>>>>>>> master
         filepath=filepath,
         partitions=partitions,
         if_exists=if_exists,
