@@ -120,28 +120,39 @@ class Dataset(Base):
             dataset = m["client"].get_dataset(m["id"])
             entries = dataset.access_entries
             # TODO https://github.com/basedosdados/mais/pull/1020
-            if dataset_is_public and "staging" not in dataset.dataset_id:
-                entries.extend(
-                    [
-                        bigquery.AccessEntry(
-                            role="roles/bigquery.dataViewer",
-                            entity_type="iamMember",
-                            entity_id="allUsers",
-                        ),
-                        bigquery.AccessEntry(
-                            role="roles/bigquery.metadataViewer",
-                            entity_type="iamMember",
-                            entity_id="allUsers",
-                        ),
-                        bigquery.AccessEntry(
-                            role="roles/bigquery.user",
-                            entity_type="iamMember",
-                            entity_id="allUsers",
-                        ),
-                    ]
-                )
+            # TODO if staging dataset is private, the prod view can't acess it: if dataset_is_public and "staging" not in dataset.dataset_id:
+            if dataset_is_public:
+                if "staging" not in dataset.dataset_id:
+                    entries.extend(
+                        [
+                            bigquery.AccessEntry(
+                                role="roles/bigquery.dataViewer",
+                                entity_type="iamMember",
+                                entity_id="allUsers",
+                            ),
+                            bigquery.AccessEntry(
+                                role="roles/bigquery.metadataViewer",
+                                entity_type="iamMember",
+                                entity_id="allUsers",
+                            ),
+                            bigquery.AccessEntry(
+                                role="roles/bigquery.user",
+                                entity_type="iamMember",
+                                entity_id="allUsers",
+                            ),
+                        ]
+                    )
+                else:
+                    entries.extend(
+                        [
+                            bigquery.AccessEntry(
+                                role="roles/bigquery.dataViewer",
+                                entity_type="iamMember",
+                                entity_id="allUsers",
+                            ),
+                        ]
+                    )
                 dataset.access_entries = entries
-
             m["client"].update_dataset(dataset, ["access_entries"])
         logger.success(
             " {object} {object_id}_{mode} was {action}!",
