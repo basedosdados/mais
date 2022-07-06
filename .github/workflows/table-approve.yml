@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install basedosdados==1.6.4b4 toml
+          pip install basedosdados==1.6.4 toml
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v0
         with:
@@ -116,7 +116,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install basedosdados==1.6.4b4 pyarrow pytest toml
+          pip install basedosdados==1.6.4 pyarrow pytest toml
       - name: Set up basedosdados environment
         run: |
           cd .github/workflows/env-setup
