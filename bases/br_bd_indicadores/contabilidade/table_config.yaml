@@ -35,11 +35,10 @@ observation_level:
   - entity: year
     columns:
       - ano_competencia
-      - ano_caixa
+      
   - entity: month
     columns:
       - mes_competencia
-      - mes_caixa
 
 last_updated:
     metadata:
