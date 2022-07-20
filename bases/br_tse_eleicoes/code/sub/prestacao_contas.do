@@ -5,8 +5,8 @@
 
 foreach ano of numlist 2006(2)2020 {
 	
-	if mod(`ano', 4) == 0 local estados AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-	if mod(`ano', 4) == 2 local estados AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+	if mod(`ano', 4) == 0 local estados AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+	if mod(`ano', 4) == 2 local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 	
 	foreach estado in `estados' {
 		
@@ -67,6 +67,8 @@ foreach ano of numlist 2006(2)2020 {
 		*
 		
 		drop if ano == .	// casos de leitura problematica do csv
+		
+		replace sigla_uf = "" if sigla_uf == "BR"
 		
 		compress
 		
@@ -1308,7 +1310,7 @@ foreach ano of numlist 2002(2)2020 {
 	}
 	if `ano' == 2010 {
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
@@ -1511,7 +1513,7 @@ foreach ano of numlist 2002(2)2020 {
 		// final
 		//---------------//
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
@@ -1827,7 +1829,7 @@ foreach ano of numlist 2002(2)2020 {
 	}
 	if `ano' == 2018 {
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local estados AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			

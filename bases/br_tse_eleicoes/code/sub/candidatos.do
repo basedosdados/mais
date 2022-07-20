@@ -949,7 +949,7 @@ foreach ano of numlist 1994(2)2020 {
 		}
 		*
 		
-		replace data_nascimento = substr(data_nascimento, 5, 4) + "-" + substr(data_nascimento, 3, 2) + "-" + substr(data_nascimento, 1, 2)
+		replace data_nascimento = substr(data_nascimento, 5, 4) + "-" + substr(data_nascimento, 3, 2) + "-" + substr(data_nascimento, 1, 2) if data_nascimento != ""
 		
 		replace data_nascimento = "" if real(substr(data_nascimento, 1, 4)) < 1900
 		

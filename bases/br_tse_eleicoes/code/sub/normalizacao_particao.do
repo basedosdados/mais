@@ -740,9 +740,16 @@ foreach ano of numlist 2006(2)2020 {
 	
 	order ano tipo_eleicao sigla_uf sequencial_candidato id_candidato_bd id_tipo_item tipo_item descricao_item valor_item
 	
-	tempfile bens
-	save `bens'
+	//tempfile bens
+	//save `bens'
 	
+	//use `bens', clear
+	//keep if ano == `ano' & sigla_uf == "`uf'"
+	
+	drop ano
+	export delimited "output/bens_candidato/ano=`ano'/bens_candidato.csv", replace
+	
+	/*
 	levelsof sigla_uf, l(ufs)
 	foreach uf in `ufs' {
 		!mkdir "output/bens_candidato/ano=`ano'/sigla_uf=`uf'"
@@ -751,6 +758,8 @@ foreach ano of numlist 2006(2)2020 {
 		drop ano sigla_uf
 		export delimited "output/bens_candidato/ano=`ano'/sigla_uf=`uf'/bens_candidato.csv", replace
 	}
+	*/
+	
 }
 *
 
@@ -876,6 +885,10 @@ foreach ano of numlist 2002(2)2020 {
 	// particiona
 	//--------------//
 	
+	drop ano
+	export delimited "output/receitas_candidato/ano=`ano'/receitas_candidato.csv", replace
+	
+	/*
 	levelsof sigla_uf, l(ufs)
 	foreach uf in `ufs' {
 		
@@ -888,6 +901,7 @@ foreach ano of numlist 2002(2)2020 {
 		restore
 		
 	}
+	*/
 	
 }
 *
@@ -1008,6 +1022,30 @@ foreach ano of numlist 2002(2)2020 {
 	tempfile despesas
 	save `despesas'
 	
+	//--------------//
+	// particiona
+	//--------------//
+
+	use `despesas', clear
+	
+	append using `vazio'
+	
+	order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
+		numero_candidato cpf_candidato sequencial_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
+		sequencial_despesa data_despesa tipo_despesa descricao_despesa origem_despesa valor_despesa ///
+		tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas cnpj_candidato ///
+		tipo_documento numero_documento ///
+		especie_recurso fonte_recurso ///
+		cpf_cnpj_fornecedor nome_fornecedor nome_fornecedor_rf cnae_2_fornecedor descricao_cnae_2_fornecedor ///
+		tipo_fornecedor esfera_partidaria_fornecedor sigla_uf_fornecedor ///
+		id_municipio_tse_fornecedor sequencial_candidato_fornecedor numero_candidato_fornecedor ///
+		numero_partido_fornecedor sigla_partido_fornecedor nome_partido_fornecedor cargo_fornecedor
+	
+	drop ano
+	
+	export delimited "output/despesas_candidato/ano=`ano'/despesas_candidato.csv", replace
+	
+	/*
 	levelsof sigla_uf, l(ufs)
 	foreach uf in `ufs' {
 		
@@ -1037,6 +1075,7 @@ foreach ano of numlist 2002(2)2020 {
 		export delimited "output/despesas_candidato/ano=`ano'/sigla_uf=`uf'/despesas_candidato.csv", replace
 		
 	}
+	*/
 	
 }
 *
