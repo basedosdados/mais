@@ -20,7 +20,8 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_bd_indicadores.equipes AS
 SELECT 
 SAFE_CAST(id_pessoa AS STRING) id_pessoa,
-SAFE_CAST(nome_pessoa AS STRING) nome_pessoa,
+SAFE_CAST(data_inicio AS STRING) data_inicio,
+SAFE_CAST(data_fim AS STRING) data_fim,
 SAFE_CAST(equipe AS STRING) equipe,
 SAFE_CAST(cargo AS STRING) cargo
 FROM basedosdados-dev.br_bd_indicadores_staging.equipes AS t
