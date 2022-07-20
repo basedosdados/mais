@@ -33,8 +33,8 @@ update_frequency: one_year
 observation_level:
 
 last_updated:
-    metadata: '2022-07-13'
-    data: '2022-07-13 13:02:37'
+    metadata: '2022-07-20'
+    data: '2022-07-20 15:02:37'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -109,22 +109,7 @@ columns:
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
-          column_name: id_regiao_saude
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: nome_regiao_saude
-      bigquery_type: string
-      description: Nome da Região de Saúde
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: municipio
-          column_name: nome_regiao_saude
+          column_name: 
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -139,7 +124,7 @@ columns:
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: uf
-          column_name: id_uf
+          column_name: 
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -154,7 +139,7 @@ columns:
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
-          column_name: sigla_uf
+          column_name: 
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -176,4 +161,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-06-10T01:15:50.948252'
+metadata_modified: '2022-07-20T02:59:17.880159'

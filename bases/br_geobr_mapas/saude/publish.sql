@@ -20,7 +20,6 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_geobr_mapas.saude AS
 SELECT 
 SAFE_CAST(id_regiao_saude AS STRING) id_regiao_saude,
-SAFE_CAST(nome_regiao_saude AS STRING) nome_regiao_saude,
 SAFE_CAST(id_uf AS STRING) id_uf,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(geometria AS STRING) geometria
