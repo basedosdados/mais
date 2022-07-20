@@ -124,7 +124,7 @@ columns:
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: uf
-          column_name: sigla
+          column_name:
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -137,9 +137,9 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorios_municipio
-          table_id: id_municipio
-          column_name: id_microrregiao
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: 
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -152,9 +152,9 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorios_municipio
-          table_id: id_municipio
-          column_name: nome_microrregiao
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: 
       measurement_unit:
       has_sensitive_data: no
       observations:
