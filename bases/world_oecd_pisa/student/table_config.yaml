@@ -18,11 +18,12 @@ description: This table includes contextual information, estimates of student pe
 # Exemplo:
 #   - sa.br
 spatial_coverage:
+    - world
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 
+temporal_coverage:
     - 2015(3)2018
 
 # A unidade temporal com qual a tabela é atualizada.
@@ -39,8 +40,8 @@ observation_level:
         - id_student
 
 last_updated:
-    metadata: '2022-07-12'
-    data: '2022-07-12 08:30:07'
+    metadata: '2022-07-21'
+    data: '2022-07-21 08:30:07'
     release: '2020-10-01'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -66,8 +67,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: 'Rename columns, break WLE columns into WLE values and
-    WLE missing labels'
+data_cleaning_description: 'Rename and select columns'
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_oecd_pisa/code
@@ -98,7 +98,7 @@ project_id_staging: basedosdados-dev
 # Se não houver partições, não modifique abaixo.
 partitions:
     - year
-    - id_country_iso3
+    - id_country_iso_3
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -124,7 +124,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: true
-    - name: id_country_iso3
+    - name: id_country_iso_3
       bigquery_type: string
       description: Country ID ISO3
       temporal_coverage:
@@ -139,7 +139,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: true
-    - name: id_pais_m49
+    - name: id_country_m49
       bigquery_type: string
       description: Country Identifier
       temporal_coverage:
@@ -190,7 +190,7 @@ columns:
           MS/FT)
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -248,7 +248,7 @@ columns:
       is_partition: false
     - name: oecd
       bigquery_type: string
-      description: OECD country
+      description: Boolean variable for OECD country
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -353,7 +353,7 @@ columns:
       is_partition: false
     - name: year_birth
       bigquery_type: int64
-      description: Student (Standardized) Birth -Year
+      description: Student (Standardized) Birth - Year
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -381,9 +381,39 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: schooling_level_mother
+    - name: effort_put_into_test
       bigquery_type: string
-      description: Highest level of schooling completed student's mother
+      description: How much effort did you put into this test?
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: effort_would_have_invested
+      bigquery_type: int64
+      description: How much effort would you have invested?
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: occupation_mother
+      bigquery_type: string
+      description: ISCO-08 Occupation code - Mother
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -396,9 +426,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: mother_qualification_6
+    - name: occupation_father
       bigquery_type: string
-      description: Does your mother have this qualification? ISCED level 6
+      description: ISCO-08 Occupation code - Father
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -411,9 +441,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: mother_qualification_5a
+    - name: occupation_self
       bigquery_type: string
-      description: Does your mother have this qualification? ISCED level 5A
+      description: ISCO-08 Occupation code - Self
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -426,10 +456,39 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: mother_qualification_5b
+    - name: grade_compared
+      bigquery_type: int64
+      description: Grade compared to modal grade in country
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: age
+      bigquery_type: float64
+      description: Age
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: national_study_programme
       bigquery_type: string
-      description: Does your mother have any of the following qualifications? ISCED
-          level 5B
+      description: Unique national study programme code
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -442,10 +501,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: mother_qualification_4
+    - name: country_birth_self
       bigquery_type: string
-      description: Does your mother have any of the following qualifications? ISCED
-          level 4
+      description: Country of Birth National Categories- Self
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -458,9 +516,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: schooling_level_father
+    - name: country_birth_mother
       bigquery_type: string
-      description: Highest level of schooling completed by student's father
+      description: Country of Birth National Categories- Mother
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -473,9 +531,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: father_qualification_6
+    - name: country_birth_father
       bigquery_type: string
-      description: Does your father have this qualification? ISCED level 6
+      description: Country of Birth National Categories- Father
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -488,9 +546,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: father_qualification_5a
+    - name: language_home
       bigquery_type: string
-      description: Does your father have this qualification? ISCED level 5A
+      description: Language at home (3-digit code)
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -503,10 +561,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: father_qualification_5b
+    - name: isced_level
       bigquery_type: string
-      description: Does your father have any of the following qualifications? ISCED
-          level 5B
+      description: ISCED level
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -519,13 +576,448 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: father_qualification_4
+    - name: isced_designation
       bigquery_type: string
-      description: Does your father have any of the following qualifications? ISCED
-          level 4
+      description: ISCED designation
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: isced_orientation
+      bigquery_type: string
+      description: ISCED orientation
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: mother_isced
+      bigquery_type: string
+      description: Mothers Education (ISCED)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: father_isced
+      bigquery_type: string
+      description: Fathers Education (ISCED)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: highest_parent_isced
+      bigquery_type: string
+      description: Highest Education of parents (ISCED)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: index_highest_parent_years_schooling
+      bigquery_type: int64
+      description: Index highest parental education in years of schooling
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: mother_isced_alternate_definition
+      bigquery_type: string
+      description: Mothers Education - alternate definition (ISCED)
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: father_isced_alternate_definition
+      bigquery_type: string
+      description: Fathers Education - alternate definition (ISCED)
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: highest_parent_isced_alternate_definition
+      bigquery_type: string
+      description: Highest Education of parents - alternate definition (ISCED)
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: index_highest_parent_international_years_schooling
+      bigquery_type: int64
+      description: Index highest parental education (international years of schooling
+          scale)
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: mother_isei
+      bigquery_type: float64
+      description: ISEI of mother
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: father_isei
+      bigquery_type: float64
+      description: ISEI of father
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: index_highest_parent_occupation
+      bigquery_type: float64
+      description: Index highest parental occupational status
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: index_immigration_status
+      bigquery_type: string
+      description: Index Immigration status
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: duration_early_childhood_education_care
+      bigquery_type: string
+      description: Duration in early childhood education and care
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: grade_repetition
+      bigquery_type: string
+      description: Grade Repetition
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: student_occupational_status
+      bigquery_type: float64
+      description: Students expected occupational status (SEI)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: learning_time_mathematics
+      bigquery_type: int64
+      description: Learning time (minutes per week) - <Mathematics>
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: minute
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: learning_time_language
+      bigquery_type: int64
+      description: Learning time (minutes per week) - <test language>
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: minute
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: learning_time_science
+      bigquery_type: int64
+      description: Learning time (minutes per week) - <science>
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: minute
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: learning_time_total
+      bigquery_type: int64
+      description: Learning time (minutes per week) - in total
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: minute
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: school_change
+      bigquery_type: string
+      description: Number of school changes
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: number_educational_change
+      bigquery_type: int64
+      description: Number of changes in educational biography (Sum)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: body_mass_index
+      bigquery_type: float64
+      description: Body mass index of student
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: index_economic_social_cultural_status
+      bigquery_type: float64
+      description: Index of economic, social and cultural status
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: meta_cognition_understanding_remembering
+      bigquery_type: float64
+      description: 'Meta-cognition: understanding and remembering'
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: meta_cognition_summarising
+      bigquery_type: float64
+      description: 'Meta-cognition: summarising'
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: meta_cognition_assess_credibility
+      bigquery_type: float64
+      description: 'Meta-cognition: assess credibility'
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ict_home
+      bigquery_type: int64
+      description: ICT available at home
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ict_school
+      bigquery_type: int64
+      description: ICT available at school
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -851,9 +1343,10 @@ columns:
       observations: Values of the index correspond to Warm likelihood estimates (WLE)
       is_in_staging: true
       is_partition: false
-    - name: wle_disciplinay_climate_language_lessons
+    - name: wle_disciplinay_climate_specific_domain
       bigquery_type: float64
-      description: Disciplinary climate in test language lessons (WLE)
+      description: Disciplinary climate in specific domain (mathematics,science or
+          language) lessons (WLE)
       temporal_coverage:
           - '2018'
       covered_by_dictionary: no
@@ -1519,996 +2012,6 @@ columns:
       temporal_coverage:
           - '2018'
       covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_home_possessions_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_cultural_possessions_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_home_educational_resources_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_family_wealth_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_ict_resources_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_teacher_support_language_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_perceived_feedback_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_perceived_parents_emotional_support_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_subjective_well_being_sense_belonging_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_ict_use_outside_school_leisure_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_ict_use_outside_school_work_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_ict_use_at_school_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_ict_interest_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_ict_competence_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_ict_autonomy_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_ict_social_interaction_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_parental_support_learning_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_parents_emotional_support_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_parents_perceived_school_quality_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_school_policies_parental_involvement_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_previous_parental_support_learning_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_disciplinay_climate_language_lessons_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_teacher_directed_instruction_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_teacher_stimulation_reading_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_adaptation_instruction_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_perceived_teachers_interest_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_joy_reading_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_reading_self_concept_competence_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_reading_self_concept_difficulty_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_pisa_test_difficulty_perception_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_competitiveness_perception_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_cooperation_perception_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_attitude_towards_school_learning_activities_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_competitiveness_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_work_mastery_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_general_fear_failure_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_eudaemonia_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_subjective_well_being_positive_affect_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_resilence_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_mastery_goal_orientation_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_self_efficacy_regarding_global_issues_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_students_awareness_global_issues_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_students_attitudes_towards_immigrants_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_students_interest_learning_other_cultures_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_perspective_taking_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_cognitive_flexibility_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_respect_people_from_other_cultures_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_intercultural_communication_awareness_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_global_mindedness_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_discriminating_school_climate_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_students_experience_being_bullied_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_ict_use_during_lessons_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_ict_use_outside_lessons_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_carrer_information_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_labour_market_information_by_school_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_labour_market_information_outside_school_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_financial_matters_confidence_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_financial_matters_confidence_digital_devices_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_financial_education_school_lessons_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_parents_involvement_financial_literacy_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_parents_reading_enjoyment_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_parents_attitudes_towards_immigrants_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_parents_interest_learking_other_cultures_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_parents_awareness_global_issues_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_body_image_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations: Values of the index correspond to Warm likelihood estimates (WLE)
-      is_in_staging: true
-      is_partition: false
-    - name: wle_parents_social_connections_missing_label
-      bigquery_type: string
-      description: Indicates why the WLE value is missing
-      temporal_coverage:
-          - '2018'
-      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -3894,7 +3397,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: randomly_assigned_unit_number
-      bigquery_type: float64
+      bigquery_type: int64
       description: Randomly assigned unit number
       temporal_coverage:
           - (1)
@@ -3909,7 +3412,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: randomized_final_variance_stratum
-      bigquery_type: float64
+      bigquery_type: int64
       description: Randomized final variance stratum
       temporal_coverage:
           - (1)
@@ -4402,6 +3905,6 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
 metadata_modified:

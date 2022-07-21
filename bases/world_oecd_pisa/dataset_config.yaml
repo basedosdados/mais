@@ -5,7 +5,7 @@ name: world-oecd-pisa
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title: Pisa - Programme for International Student Assessment
+title: Programme for International Student Assessment (PISA)
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list

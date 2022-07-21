@@ -23,7 +23,7 @@ Email: laura.amaral@basedosdados.org
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - year
-- id_country_iso3
+- id_country_iso_3
 
 
 
@@ -37,13 +37,14 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
+- world
 
 
 
 
 Tratamento
 ----------
-Rename columns, break WLE columns into WLE values and WLE missing labels
+Rename and select columns
 
 
 
