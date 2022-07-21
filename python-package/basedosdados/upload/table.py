@@ -62,7 +62,7 @@ class Table(Base):
         """
         ## check if the table are partitioned, need the split because of a change in the type of partitions in pydantic
         partitions = self.table_config["partitions"]
-        if partitions is None:
+        if partitions is None or len(partitions) == 0:
             return False
 
         if isinstance(partitions, list):
@@ -741,7 +741,7 @@ class Table(Base):
             )
 
             # save table description
-            with  open(
+            with open(
                 self.metadata_path
                 / self.dataset_id
                 / self.table_id
@@ -750,7 +750,6 @@ class Table(Base):
                 encoding="utf-8",
             ) as f:
                 f.write(table.description)
-
 
             # when mode is staging the table schema already exists
             table.schema = self._load_schema(m)
