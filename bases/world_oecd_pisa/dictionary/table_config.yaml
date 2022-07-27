@@ -101,9 +101,9 @@ partitions:
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: id_tabela
+    - name: table_id
       bigquery_type: string
-      description: ID da tabela
+      description: Table's ID
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -114,9 +114,9 @@ columns:
       has_sensitive_data: no
       is_in_staging: True
       is_partition: False
-    - name: coluna
+    - name: column
       bigquery_type: string
-      description: Nome da coluna
+      description: column's name
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -127,9 +127,9 @@ columns:
       has_sensitive_data: no
       is_in_staging: True
       is_partition: False
-    - name: chave
+    - name: key
       bigquery_type: string
-      description: Chave
+      description: Key
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -140,9 +140,9 @@ columns:
       has_sensitive_data: no
       is_in_staging: True
       is_partition: False
-    - name: cobertura_temporal
+    - name: temporal_coverage
       bigquery_type: string
-      description: Cobertura temporal
+      description: Temporal coverage
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -153,9 +153,9 @@ columns:
       has_sensitive_data: no
       is_in_staging: True
       is_partition: False
-    - name: valor
+    - name: value
       bigquery_type: string
-      description: Valor
+      description: Value
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
