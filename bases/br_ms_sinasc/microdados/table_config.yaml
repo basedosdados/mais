@@ -15,8 +15,7 @@ description: Microdados de Nascidos Vivos a nível municipal considerando a loca
 #   - continent: south_america
 #     country: br
 spatial_coverage:
-    - continent: south_america
-      country: br
+    - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
@@ -46,12 +45,12 @@ observation_level:
 
 last_updated:
     metadata: '2020-04-30'
-    data: '2020-04-30'
-    release:
+    data: '2020-04-30 15:00:16'
+    release: '2022-02-14'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.0
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
