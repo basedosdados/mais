@@ -21,6 +21,7 @@ notes: Os dados disponíveis são oriundos do Sistema de Informações sobre Nas
 # Importante: preencher com a chave, e não o valor.
 groups:
     - saude
+    - populacao
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -31,7 +32,7 @@ groups:
 #    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - fertilidade
+    - fecundidade
     - nascimento
 
 # Não altere esse campo.
