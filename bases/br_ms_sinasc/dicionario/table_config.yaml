@@ -9,15 +9,13 @@ table_id: dicionario
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Dicionário da base de Nascidos Vivos - SINASC
+description: Dicionário para a base do Sistema de Informações de Nascidos Vivos (SINASC)
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
 #   - continent: south_america
 #     country: br
 spatial_coverage:
-    - continent: south_america
-      country: br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
@@ -33,8 +31,8 @@ observation_level:
 
 last_updated:
     metadata: '2022-04-30'
-    data: '2022-04-30'
-    release:
+    data: '2022-04-30 14:56:10'
+    release: '2022-02-14'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
@@ -59,7 +57,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Coleta de dados de diferentes dados do Ministério da Saúde
+data_cleaning_description: Coleta de dados de diferentes arquivos do Ministério da Saúde
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url:
