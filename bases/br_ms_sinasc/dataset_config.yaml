@@ -5,7 +5,7 @@ name: br-ms-sinasc
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title: Nascidos Vivos (SINASC)
+title: Sistema de Informações sobre Nascidos Vivos (SINASC)
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
@@ -14,18 +14,7 @@ organization:
     - br-ms
 
 # Descrição do conjunto
-notes: "Os dados disponíveis são oriundos do Sistema de Informações sobre Nascidos\
-    \ Vivos (SINASC), sistema este gerido pelo Departamento de Análise de Situação\
-    \ de Saúde, da Secretaria de Vigilância em Saúde, em conjunto com as Secretarias\
-    \ Estaduais e Municipais de Saúde.\r\n\r\nAs Secretarias de Saúde coletam as Declarações\
-    \ de Nascidos Vivos (DN) nos estabelecimentos de saúde e nos cartórios (para partos\
-    \ domiciliares) e entram, no SINASC, as informações nelas contidas.\r\n\r\nDe\
-    \ uma maneira geral, as Secretarias Estaduais de Saúde enviam a sua Base de Dados\
-    \ para o Ministério da Saúde, quando consideram a coleta completa. O MS só pode\
-    \ considerar a Base Nacional completa quando todas as UF enviaram seus dados.\
-    \ A partir daí, é feita a consolidação, inclusive com a redistribuição dos dados\
-    \ pelo local de residência, a qual é a forma tradicional de apresentar os dados\
-    \ de Nascidos Vivos. Eventualmente, são feitas algumas correções nas informações."
+notes: Os dados disponíveis são oriundos do Sistema de Informações sobre Nascidos Vivos (SINASC), sistema este gerido pelo Departamento de Análise de Situação de Saúde, da Secretaria de Vigilância em Saúde, em conjunto com as Secretarias Estaduais e Municipais de Saúde ao coletarem todas as declarações de Nascidos Vivos (DN) nos estabelecimentos de saúde e nos cartórios
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
