@@ -5,7 +5,7 @@ dataset_id: br_me_caged
 table_id: microdados_movimentacao_fora_prazo
 
 # Título da tabela.
-title: Movimentação fora do prazo (Microdados)
+title: Microdados - Movimentação fora do prazo
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -24,7 +24,7 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2020-01(1)2022-03
+    - 2020-01(1)2022-05
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -32,10 +32,25 @@ update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
+    - country: br
+      entity: state
+      columns:
+          - sigla_uf
+    - country: br
+      entity: municipality
+      columns:
+          - id_municipio
+          - id_municipio_6
+    - entity: year
+      columns:
+          - ano
+    - entity: month
+      columns:
+          - mes
 
 last_updated: 
-    metadata: "2022-06-05"
-    data: "2022-06-05 10:01:37"
+    metadata: "2022-07-14"
+    data: "2022-07-14 22:39:27"
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -279,7 +294,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: year
+      measurement_unit: person
       has_sensitive_data: no
       observations: Quando acumulada representa a soma das idades
       is_in_staging: true
@@ -495,4 +510,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-06-01T13:11:33.601741'
+metadata_modified: "2022-06-21T12:37:02.019826"

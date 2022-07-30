@@ -17,9 +17,11 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_bd_diretorios_brasil.natureza_juridica AS
+CREATE VIEW basedosdados-dev.br_bd_indicadores.equipes AS
 SELECT 
-SAFE_CAST(id_natureza_juridica AS STRING) id_natureza_juridica,
-SAFE_CAST(descricao AS STRING) descricao,
-SAFE_CAST(escopo AS STRING) escopo
-FROM basedosdados-dev.br_bd_diretorios_brasil_staging.natureza_juridica AS t
+SAFE_CAST(id_pessoa AS STRING) id_pessoa,
+SAFE_CAST(data_inicio AS DATE) data_inicio,
+SAFE_CAST(data_fim AS DATE) data_fim,
+SAFE_CAST(equipe AS STRING) equipe,
+SAFE_CAST(cargo AS STRING) cargo
+FROM basedosdados-dev.br_bd_indicadores_staging.equipes AS t
