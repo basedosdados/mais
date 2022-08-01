@@ -90,7 +90,7 @@ partner_organization:
 raw_files_url:
 
 # Url dos arquivos auxiliares no GCP Storage.
-auxiliary_files_url:
+auxiliary_files_url: https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
