@@ -46,7 +46,7 @@ version: v1.0
 # Quem está preenchendo esses metadados?
 published_by:
     name: Lucas Moreira
-    email: lucas.moreira@basedosdados.org.br
+    email: lucas.moreira@basedosdados.org
     github_user: lucasnascm
     ckan_user: lucasnascm
     website:
