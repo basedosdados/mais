@@ -1,116 +1,107 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: microdados # AUTO GENERATED
-dataset_id: br_ms_sinasc # AUTO GENERATED
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_ms_sinasc
 
-url_ckan: https://basedosdados.org/dataset/br-ms-sinasc # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinasc # AUTO GENERATED
-
-version: v1.0 # REQUIRED
-
-last_updated: 2021-09-09 # AUTO GENERATED
+table_id: microdados
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    O Sistema de Informações sobre Nascidos Vivos (SINASC) reúne informações epidemiológicas referentes aos nascimentos informados em todo território nacional
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Microdados de Nascidos Vivos a nível municipal considerando a localidade de ocorrência a partir de 1994
 
-# Quem está completando esse arquivo config?
+# A máxima unidade espacial que a tabela cobre.
+# Exemplo:
+#   - continent: south_america
+#     country: br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 1994(1)2020
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: one_year
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: year
+      columns:
+          - ano
+    - entity: other
+    - columns:
+          - sequencial_nascimento
+    - country: br
+    - entity: municipality
+    - columns:
+          - id_municipio_nascimento
+    - entity: day
+    - columns:
+          - data_nascimento
+
+last_updated:
+    metadata: '2020-04-30'
+    data: '2020-04-30 15:00:16'
+    release: '2022-02-14'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.1
+
+# Quem está preenchendo esses metadados?
 published_by:
-    name: Lucas Nascimento Moreira  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinasc/code # REQUIRED
-    website: <website>
+    name: Lucas Moreira
     email: lucas.moreira@basedosdados.org
+    github_user: lucasnascm
+    ckan_user: lucasnascm
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: Lucas Nascimento Moreira  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinasc/code # REQUIRED
-    website: <website>
+data_cleaned_by:
+    name: Lucas Moreira
     email: lucas.moreira@basedosdados.org
+    github_user: lucasnascm
+    ckan_user: lucasnascm
+    website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    - Download dos dados usando a biblioteca no R
-    - Compatibilização dos dataframes para o período 1994-2019
-    - Renomeação das variáveis
-    - Padronização dos formatos das variáveis
-    - Ordenação das variáveis
+data_cleaning_description: Download dos arquivos .dbc, formatação de dados e id_municipio, padronização das variáveis e partição por ano e sigla_uf
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: 1 ano # REQUIRED 
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinasc/code
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - nascimento
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
 
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-    - ano
-    - sequencial_nascimento
-    - id_municipio_nascimento
+# Url dos dados originais no GCP Storage.
+raw_files_url:
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - brasil
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
 
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
-    - 1994
-    - 1995
-    - 1996
-    - 1997
-    - 1998
-    - 1999
-    - 2000
-    - 2001
-    - 2002
-    - 2003
-    - 2004
-    - 2005
-    - 2006
-    - 2007
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
 
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED  
-    - ano  
+partitions:
+    - ano
     - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
@@ -121,400 +112,999 @@ partitions: # REQUIRED
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: sequencial_nascimento
-        description: Sequencial do Nascimento
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio_nascimento
-        description: ID do município de nascimento - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: local_nascimento
-        description: Local onde ocorreu o nascimento
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: codigo_estabelecimento
-        description: Código do Cadastro Nacional de estabelecimento onde ocorreu o nascimento
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_nascimento
-        description: Data do nascimento do recém nascido
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: hora_nascimento
-        description: Horário exato ou aproximado do nascimento do recém nascido
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sexo
-        description: Sexo
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: peso
-        description: Peso (g)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: raca_cor
-        description: Raça/Cor
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: apgar1
-        description: Valor do Índice de Apgar, medido no 1º minuto de vida
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: apgar5
-        description: Valor do Índice de Apgar, medido no 5º minuto de vida
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_anomalia
-        description: Anomalia congênita identificada no momento do nascimento
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: codigo_anomalia
-        description: Descrição de anomalia congênita
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: semana_gestacao
-        description: Número de semanas de gestação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: semana_gestacao_estimada
-        description: Método utilizado para verificar n° de semanas de gestação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: gestacao_agr
-        description: Semanas de gestação agrupado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_gravidez
-        description: Tipo de gravidez
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_parto
-        description: Tipo de parto
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: inicio_pre_natal
-        description: Mês de gestação em que iniciou o pré‐natal
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: pre_natal
-        description: Número de consultas pré‐natal por semana de gestação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: pre_natal_agr
-        description: Número de consultas de pré‐natal agrupada
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: classificacao_pre_natal
-        description: Códigos de classificação de adequação ao pré natal, gerado pelo sistema
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: quantidade_filhos_vivos
-        description: Número de filhos vivos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: quantidade_filhos_mortos
-        description: Número de perdas fetais e abortos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_pais_mae
-        description: Se a mãe for estrangeira, constará o código do país de nascimento
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_uf_mae
-        description: Código da UF de naturalidade da mãe
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio_mae
-        description: Código do município de naturalidade da mãe - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_pais_residencia
-        description: Código do país de residência
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio_residencia
-        description: ID Município de Residência - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_nascimento_mae
-        description: Data de nascimento da mãe
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: idade_mae
-        description: Idade da mãe
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: escolaridade_mae
-        description: Escolaridade, em anos de estudo concluídos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: serie_escolar_mae
-        description: Última série escolar concluída da mãe
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: escolaridade_2010_mae
-        description: Escolaridade 2010
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: escolaridade_2010_agr_mae
-        description: Escolaridade 2010 agregada da mãe
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: estado_civil_mae
-        description: Situação conjugal da mãe
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ocupacao_mae
-        description: Ocupação da mãe conforme CBO
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: raca_cor_mae
-        description: Tipo de raça e cor da mãe
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: gestacoes_ant
-        description: Número de gestações anteriores
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: quantidade_parto_normal
-        description: Número de partos vaginais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: quantidade_parto_cesareo
-        description: Número de partos cesáreos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_ultima_menstruacao
-        description: Data da última menstruação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_apresentacao
-        description: Tipo de apresentação do recém nascido
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: inducao_parto
-        description: Houve indução do Trabalho de parto?
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cesarea_antes_parto
-        description: Cesárea ocorreu antes do trabalho de parto iniciar
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_robson
-        description: Código do Grupo de Robson, gerado pelo sistema
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: idade_pai
-        description: Idade do pai
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cartorio
-        description: Identificação do cartório
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: registro_cartorio
-        description: Identificação do registro realizado em cartório
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_registro_cartorio
-        description: Data de registro do recém nascido no cartório
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: origem
-        description: Banco de dados de Origem
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: numero_lote
-        description: Número do lote
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: versao_sistema
-        description: Versão do sistema
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_cadastro
-        description: Data da declaração do nascido vivo no sistema
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_recebimento
-        description: Data do último recebimento do lote (Sisnet)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_recebimento_original
-        description: Data de recebimento original calculado pelo sistema
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: diferenca_data
-        description: Diferença entre a data de óbito e data do recebimento original da DO
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: data_declaracao
-        description: Data do preenchimento da declaração
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: funcao_responsavel
-        description: Função exercida pelo responsável pelo preenchimento da declaração
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: documento_responsavel
-        description: Tipo de documento do responsável pelo preenchimento da declaração
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: formacao_profissional_responsavel
-        description: Formação da pessoa que assistiu ao parto
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: status_dn
-        description: Status de Declaração de Nascido Vivo Epidemiológica
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: status_dn_nova
-        description: Status de Declaração de Nascido Vivo Nova
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: paridade
-        description: Variável calculada pelo sistema
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sigla_uf
-        description: Sigla da Unidade da Federação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: sigla_uf
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: sequencial_nascimento
+      bigquery_type: string
+      description: Sequencial do Nascimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_nascimento
+      bigquery_type: string
+      description: ID do município de nascimento - IBGE 7 Dígitos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: local_nascimento
+      bigquery_type: string
+      description: Local onde ocorreu o nascimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: codigo_estabelecimento
+      bigquery_type: string
+      description: Código do Cadastro Nacional de estabelecimento onde ocorreu o nascimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_nascimento
+      bigquery_type: date
+      description: Data do nascimento do recém nascido
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: day
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: hora_nascimento
+      bigquery_type: time
+      description: Horário exato ou aproximado do nascimento do recém nascido
+      temporal_coverage:
+          - 1999, 2006(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sexo
+      bigquery_type: string
+      description: Sexo
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: peso
+      bigquery_type: int64
+      description: Peso
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: gram
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: raca_cor
+      bigquery_type: string
+      description: Raça/Cor
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: apgar1
+      bigquery_type: int64
+      description: Valor do Índice de Apgar, medido no 1º minuto de vida
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: apgar5
+      bigquery_type: int64
+      description: Valor do Índice de Apgar, medido no 5º minuto de vida
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_anomalia
+      bigquery_type: string
+      description: Anomalia congênita identificada no momento do nascimento
+      temporal_coverage:
+          - 1997, 1999(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: codigo_anomalia
+      bigquery_type: string
+      description: Descrição de anomalia congênita
+      temporal_coverage:
+          - 1996(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: cid-10
+          column_name: subcategoria
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: semana_gestacao
+      bigquery_type: int64
+      description: Número de semanas de gestação
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: week
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: semana_gestacao_estimada
+      bigquery_type: string
+      description: Método utilizado para verificar n° de semanas de gestação
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: week
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestacao_agr
+      bigquery_type: string
+      description: Semanas de gestação agrupado
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: week
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_gravidez
+      bigquery_type: string
+      description: Tipo de gravidez
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_parto
+      bigquery_type: string
+      description: Tipo de parto
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: inicio_pre_natal
+      bigquery_type: string
+      description: Mês de gestação em que iniciou o pré‐natal
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: month
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pre_natal
+      bigquery_type: int64
+      description: Número de consultas pré‐natal por semana de gestação
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pre_natal_agr
+      bigquery_type: string
+      description: Número de consultas de pré‐natal agrupada
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: classificacao_pre_natal
+      bigquery_type: string
+      description: Códigos de classificação de adequação ao pré natal, gerado pelo
+          sistema
+      temporal_coverage:
+          - 2014(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_filhos_vivos
+      bigquery_type: int64
+      description: Número de filhos vivos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_filhos_mortos
+      bigquery_type: int64
+      description: Número de perdas fetais e abortos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: A variável aborto é somada com a quantidade de filhos mortos para
+          1994 e 1995
+      is_in_staging: true
+      is_partition: false
+    - name: id_pais_mae
+      bigquery_type: string
+      description: Se a mãe for estrangeira, constará o código do país de nascimento
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_uf_mae
+      bigquery_type: string
+      description: Código da UF de naturalidade da mãe
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: id_uf
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_mae
+      bigquery_type: string
+      description: Código do município de naturalidade da mãe
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_pais_residencia
+      bigquery_type: string
+      description: Código do país de residência
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_residencia
+      bigquery_type: string
+      description: ID Município de Residência - IBGE 7 Dígitos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_nascimento_mae
+      bigquery_type: date
+      description: Data de nascimento da mãe
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: day
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: idade_mae
+      bigquery_type: int64
+      description: Idade da mãe
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: escolaridade_mae
+      bigquery_type: string
+      description: Escolaridade, em anos de estudo concluídos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: serie_escolar_mae
+      bigquery_type: string
+      description: Última série escolar concluída da mãe
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: escolaridade_2010_mae
+      bigquery_type: string
+      description: Escolaridade 2010
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: escolaridade_2010_agr_mae
+      bigquery_type: string
+      description: Escolaridade 2010 agregada
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estado_civil_mae
+      bigquery_type: string
+      description: Situação conjugal da mãe
+      temporal_coverage:
+          - 1996(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ocupacao_mae
+      bigquery_type: string
+      description: Ocupação da mãe conforme CBO
+      temporal_coverage:
+          - 1996(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: cbo_2002
+          column_name: cbo_2002
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: raca_cor_mae
+      bigquery_type: string
+      description: Tipo de raça e cor da mãe
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestacoes_ant
+      bigquery_type: int64
+      description: Número de gestações anteriores
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_parto_normal
+      bigquery_type: int64
+      description: Número de partos vaginais
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_parto_cesareo
+      bigquery_type: int64
+      description: Número de partos cesáreos
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_ultima_menstruacao
+      bigquery_type: date
+      description: Data da última menstruação (DUM)
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: day
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_apresentacao
+      bigquery_type: string
+      description: Tipo de apresentação do recém nascido
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: inducao_parto
+      bigquery_type: string
+      description: Houve indução do trabalho de parto?
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cesarea_antes_parto
+      bigquery_type: string
+      description: Cesárea ocorreu antes do trabalho de parto iniciar
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_robson
+      bigquery_type: string
+      description: Código do Grupo de Robson, gerado pelo sistema
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: idade_pai
+      bigquery_type: int64
+      description: Idade do pai
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cartorio
+      bigquery_type: string
+      description: Identificação do cartório
+      temporal_coverage:
+          - 1994(1)1995, 2010(1)2013
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: registro_cartorio
+      bigquery_type: string
+      description: Identificação do registro realizado em cartório
+      temporal_coverage:
+          - 2010(1)2013
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_registro_cartorio
+      bigquery_type: date
+      description: Data de registro do recém nascido no cartório
+      temporal_coverage:
+          - 1994(1)1995, 2010(1)2013
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: day
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: origem
+      bigquery_type: string
+      description: Banco de dados de Origem
+      temporal_coverage:
+          - 2006(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_lote
+      bigquery_type: int64
+      description: Número do lote
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: versao_sistema
+      bigquery_type: string
+      description: Versão do sistema
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_cadastro
+      bigquery_type: date
+      description: Data da declaração do nascido vivo no sistema
+      temporal_coverage:
+          - 2006(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: day
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_recebimento
+      bigquery_type: date
+      description: Data do último recebimento do lote (Sisnet)
+      temporal_coverage:
+          - 2006(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: day
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_recebimento_original
+      bigquery_type: date
+      description: Data de recebimento original calculado pelo sistema
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: day
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: diferenca_data
+      bigquery_type: int64
+      description: Diferença entre a data de óbito e data do recebimento original
+          da DO
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: day
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_declaracao
+      bigquery_type: date
+      description: Data do preenchimento da declaração
+      temporal_coverage:
+          - 2014(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: day
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: funcao_responsavel
+      bigquery_type: string
+      description: Função exercida pelo responsável pelo preenchimento da declaração
+      temporal_coverage:
+          - 2014(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: documento_responsavel
+      bigquery_type: string
+      description: Tipo de documento do responsável pelo preenchimento da declaração
+      temporal_coverage:
+          - 2014(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: formacao_profissional_responsavel
+      bigquery_type: string
+      description: Formação da pessoa que assistiu ao parto
+      temporal_coverage:
+        - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: status_dn
+      bigquery_type: string
+      description: Status de Declaração de Nascido Vivo Epidemiológica
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: status_dn_nova
+      bigquery_type: string
+      description: Status de Declaração de Nascido Vivo Nova
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: paridade
+      bigquery_type: string
+      description: Variável calculada pelo sistema
+      temporal_coverage:
+          - 2014(1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+metadata_modified: '2022-02-14T01:23:55.722335'
