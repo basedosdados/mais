@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -16,13 +15,12 @@ TIPOS:
     - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-
 */
 
 CREATE VIEW basedosdados-dev.br_ms_sinasc.microdados AS
-SELECT
+SELECT 
 SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf, 
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(sequencial_nascimento AS STRING) sequencial_nascimento,
 SAFE_CAST(id_municipio_nascimento AS STRING) id_municipio_nascimento,
 SAFE_CAST(local_nascimento AS STRING) local_nascimento,
@@ -32,8 +30,8 @@ SAFE_CAST(hora_nascimento AS TIME) hora_nascimento,
 SAFE_CAST(sexo AS STRING) sexo,
 SAFE_CAST(peso AS INT64) peso,
 SAFE_CAST(raca_cor AS STRING) raca_cor,
-SAFE_CAST(apgar1 AS STRING) apgar1,
-SAFE_CAST(apgar5 AS STRING) apgar5,
+SAFE_CAST(apgar1 AS INT64) apgar1,
+SAFE_CAST(apgar5 AS INT64) apgar5,
 SAFE_CAST(id_anomalia AS STRING) id_anomalia,
 SAFE_CAST(codigo_anomalia AS STRING) codigo_anomalia,
 SAFE_CAST(semana_gestacao AS INT64) semana_gestacao,
@@ -74,7 +72,7 @@ SAFE_CAST(cartorio AS STRING) cartorio,
 SAFE_CAST(registro_cartorio AS STRING) registro_cartorio,
 SAFE_CAST(data_registro_cartorio AS DATE) data_registro_cartorio,
 SAFE_CAST(origem AS STRING) origem,
-SAFE_CAST(numero_lote AS STRING) numero_lote,
+SAFE_CAST(numero_lote AS INT64) numero_lote,
 SAFE_CAST(versao_sistema AS STRING) versao_sistema,
 SAFE_CAST(data_cadastro AS DATE) data_cadastro,
 SAFE_CAST(data_recebimento AS DATE) data_recebimento,
@@ -87,4 +85,4 @@ SAFE_CAST(formacao_profissional_responsavel AS STRING) formacao_profissional_res
 SAFE_CAST(status_dn AS STRING) status_dn,
 SAFE_CAST(status_dn_nova AS STRING) status_dn_nova,
 SAFE_CAST(paridade AS STRING) paridade
-from basedosdados-dev.br_ms_sinasc_staging.microdados as t
+FROM basedosdados-dev.br_ms_sinasc_staging.microdados AS t
