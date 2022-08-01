@@ -1,7 +1,4 @@
-Base de dados detalhada por município da empresa exportadora e Posição do Sistema Harmonizado (SH4).
-
-Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
-
+Base de dados detalhada por município da empresa exportadora e Posição do Sistema Harmonizado (SH4)
 
 Para saber mais acesse:
 Website: 
@@ -19,6 +16,7 @@ Email: rdahis@basedosdados.org
 Tratado por
 -----------
 Nome: Ricardo Dahis
+Código: 
 Website: www.ricardodahis.com
 Email: rdahis@basedosdados.org
 
@@ -27,31 +25,22 @@ Email: rdahis@basedosdados.org
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
--  mes
-
-
-Colunas identificando linhas unicamente
--------------------
-- id_sh4
-- id_pais
-- id_municipio
-- ano
 - mes
+- sigla_uf
 
 
 
 
 Cobertura Temporal
 ------------------
+- 1997-01(1)2022-06
 
 
 
 
 Cobertura Espacial
 ------------------
-- b
-- r
-- a
+- sa.br
 
 
 

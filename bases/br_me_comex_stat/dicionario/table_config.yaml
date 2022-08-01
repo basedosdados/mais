@@ -1,20 +1,22 @@
 
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: br_ms_sinasc
+dataset_id: br_me_comex_stat
 
 table_id: dicionario
+
+# Título da tabela.
+title: Dicionário
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Dicionário para a base do Sistema de Informações de Nascidos Vivos (SINASC)
+description: Dicionário da base de Comércio Exterior
 
-# A máxima unidade espacial que a tabela cobre.
+# As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - continent: south_america
-#     country: br
+#   - sa.br
 spatial_coverage:
 
 # Anos cobertos pela tabela.
@@ -24,15 +26,16 @@ temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: unique
+update_frequency:
+    - unique
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
 
 last_updated:
-    metadata: '2022-04-30'
-    data: '2022-04-30 14:56:10'
-    release: '2022-02-14'
+    metadata: '2022-07-30'
+    data: '2022-07-30 08:42:11'
+    release: '2022-07-30'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
@@ -57,7 +60,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Coleta de dados de diferentes arquivos do Ministério da Saúde
+data_cleaning_description: Compatibilização de dicionários para alguma das variáveis
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url:
@@ -99,68 +102,73 @@ partitions:
 columns:
     - name: id_tabela
       bigquery_type: string
-      description: ID da tabela
+      description: ID Tabela
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      is_in_staging: True
-      is_partition: False
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: coluna
       bigquery_type: string
-      description: Nome da coluna
+      description: Coluna
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      is_in_staging: True
-      is_partition: False
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: chave
       bigquery_type: string
       description: Chave
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      is_in_staging: True
-      is_partition: False
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: cobertura_temporal
       bigquery_type: string
-      description: Cobertura temporal
+      description: Cobertura Temporal
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      is_in_staging: True
-      is_partition: False
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: valor
       bigquery_type: string
       description: Valor
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      is_in_staging: True
-      is_partition: False
+      observations:
+      is_in_staging: true
+      is_partition: false
 
-metadata_modified: '2022-02-14T01:23:55.722335'
+metadata_modified: '2022-07-28T22:50:51.556718'

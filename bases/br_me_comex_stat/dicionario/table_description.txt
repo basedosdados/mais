@@ -1,4 +1,4 @@
-Microdados de Nascidos Vivos a nível municipal considerando a localidade de ocorrência a partir de 1994
+Dicionário da base de Comércio Exterior
 
 Para saber mais acesse:
 Website: 
@@ -20,34 +20,27 @@ Email: lucas.moreira@basedosdados.org
 
 
 
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-- ano
-- sigla_uf
-
 
 
 
 Cobertura Temporal
 ------------------
-- 1994(1)2020
 
 
 
 
 Cobertura Espacial
 ------------------
-- {'continent': 'south_america', 'country': 'br'}
 
 
 
 
 Tratamento
 ----------
-Download dos arquivos .dbc, formatação de dados e id_municipio, padronização das variáveis e partição por ano e sigla_uf
+Compatbilização de dicionários para alguma das variáveis
 
 
 
 Frequencia de Atualização
 -------------------------
-one_year
+['unique']
