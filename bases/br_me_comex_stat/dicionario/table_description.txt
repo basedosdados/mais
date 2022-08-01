@@ -1,0 +1,46 @@
+Dicionário da base de Comércio Exterior
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+
+
+
+
+Cobertura Espacial
+------------------
+
+
+
+
+Tratamento
+----------
+Compatbilização de dicionários para alguma das variáveis
+
+
+
+Frequencia de Atualização
+-------------------------
+['unique']
