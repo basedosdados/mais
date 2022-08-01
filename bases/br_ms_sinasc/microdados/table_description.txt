@@ -1,80 +1,53 @@
-O Sistema de Informações sobre Nascidos Vivos (SINASC) reúne informações epidemiológicas referentes aos nascimentos informados em todo território nacional
-
+Microdados de Nascidos Vivos a nível municipal considerando a localidade de ocorrência a partir de 1994
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-ms-sinasc
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinasc
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Lucas Nascimento Moreira
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinasc/code
-Email: lucas.moreira@basedosdados.orgTratado por
------------
-Nome: Lucas Nascimento Moreira
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_ms_sinasc/code
+Nome: Lucas Moreira
+Código: 
 Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+
+
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
 - sigla_uf
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- nascimento
 
-Colunas identificando linhas unicamente
--------------------
-- ano
-- sequencial_nascimento
-- id_municipio_nascimento
+
 
 Cobertura Temporal
 ------------------
-- 1994
-- 1995
-- 1996
-- 1997
-- 1998
-- 1999
-- 2000
-- 2001
-- 2002
-- 2003
-- 2004
-- 2005
-- 2006
-- 2007
-- 2008
-- 2009
-- 2010
-- 2011
-- 2012
-- 2013
-- 2015
-- 2016
-- 2017
-- 2018
-- 2019
+- 1994(1)2020
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- {'continent': 'south_america', 'country': 'br'}
+
+
+
 
 Tratamento
 ----------
-- Download dos dados usando a biblioteca no R
-- Compatibilização dos dataframes para o período 1994-2019
-- Renomeação das variáveis
-- Padronização dos formatos das variáveis
-- Ordenação das variáveis
+Download dos arquivos .dbc, formatação de dados e id_municipio, padronização das variáveis e partição por ano e sigla_uf
+
+
 
 Frequencia de Atualização
 -------------------------
-1 ano
-
-
+one_year
