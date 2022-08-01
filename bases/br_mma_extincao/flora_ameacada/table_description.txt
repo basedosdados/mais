@@ -1,0 +1,48 @@
+A tabela mostra a lista oficial de espécies da flora brasileira ameaçadas de extinçãoo segundo o anexo da portaria nº 148 (junho/2022) do Ministério do Meio Ambiente
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org.br
+Tratado por
+-----------
+Nome: Bruno Mioto
+Código: 
+Email: brunomioto97@gmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2022
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Extração dos dados em pdf disponibilizados pelo Ministério
+
+
+
+Frequencia de Atualização
+-------------------------
+uncertain
