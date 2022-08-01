@@ -1,7 +1,4 @@
-Base de dados detalhada de exportação por NCM.
-
-Os arquivos auxiliares com todos os dicionários e valores de variáveis se encontram em https://storage.googleapis.com/basedosdados/auxiliary_files/br_me_comex_stat.zip.
-
+Base de dados dos produtos exportados pelo Brasil segundo a Nomenclatura Comum do Mercosul
 
 Para saber mais acesse:
 Website: 
@@ -19,6 +16,7 @@ Email: rdahis@basedosdados.org
 Tratado por
 -----------
 Nome: Ricardo Dahis
+Código: 
 Website: www.ricardodahis.com
 Email: rdahis@basedosdados.org
 
@@ -27,18 +25,6 @@ Email: rdahis@basedosdados.org
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
--  mes
-
-
-Colunas identificando linhas unicamente
--------------------
-- id_ncm
-- id_unidade
-- id_pais
-- sigla_uf_ncm
-- id_via
-- id_urf
-- ano
 - mes
 
 
@@ -46,23 +32,21 @@ Colunas identificando linhas unicamente
 
 Cobertura Temporal
 ------------------
+- 1997-01(1)2022-06
 
 
 
 
 Cobertura Espacial
 ------------------
-- b
-- r
-- a
+- sa.br
 
 
 
 
 Tratamento
 ----------
-- Limpeza simples dos dados.
-
+Limpeza simples dos dados
 
 
 
