@@ -33,7 +33,6 @@ update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-    - entity: country
     - entity: year
       columns:
           - ano
@@ -44,7 +43,7 @@ observation_level:
           - id_categoria_bd
 
 last_updated:
-    metadata: 2022/03/11
+    metadata: '2022-03-11'
     data: '2022-05-31 20:10:05'
     release:
 
@@ -127,7 +126,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: mes
       bigquery_type: int64
       description: Mês
@@ -142,7 +141,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_categoria
       bigquery_type: string
       description: Código identificador grupo
@@ -157,7 +156,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_categoria_bd
       bigquery_type: string
       description: Código identificador grupo - Base dos dados - Baseado em id_categoria
@@ -173,7 +172,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: categoria
       bigquery_type: string
       description: Descrição da categoria
@@ -188,7 +187,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso_mensal
       bigquery_type: float64
       description: Peso percentual mensal do item
@@ -203,7 +202,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_mensal
       bigquery_type: float64
       description: Variação percentual mensal
@@ -218,7 +217,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_anual
       bigquery_type: float64
       description: Variação percentual acumulada no ano
@@ -233,7 +232,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_doze_meses
       bigquery_type: float64
       description: Variação percentual acumulada em doze meses
@@ -248,7 +247,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
 number_rows:
 
