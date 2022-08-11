@@ -4,8 +4,11 @@ Functions for manage auth and credentials
 # pylint: disable=redefined-outer-name, protected-access
 from functools import lru_cache
 
+import google.auth
+
 from google.cloud import bigquery, storage
 import pydata_google_auth
+
 
 from basedosdados.upload.base import Base
 
@@ -26,19 +29,24 @@ def reauth():
 
 def credentials(from_file=False, reauth=False):
     '''
-    Get user credentials
+    Get user credentials with google.auth
     '''
 
     if from_file:
         return Base()._load_credentials(mode="prod")
 
     if reauth:
-        return pydata_google_auth.get_user_credentials(
-            SCOPES, credentials_cache=pydata_google_auth.cache.REAUTH
+        credentials_, _ = google.auth.default(
+            scopes=SCOPES,
+            # credentials_cache=None,
         )
-    return pydata_google_auth.get_user_credentials(
-        SCOPES,
+        return credentials_
+
+    credentials_, _ = google.auth.default(
+        scopes=SCOPES
     )
+    return credentials_
+
 
 
 @lru_cache(256)
