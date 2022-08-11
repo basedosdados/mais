@@ -5,7 +5,6 @@ Functions for manage auth and credentials
 from functools import lru_cache
 
 import google.auth
-
 from google.cloud import bigquery, storage
 import pydata_google_auth
 
