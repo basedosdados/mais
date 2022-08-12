@@ -1,11 +1,14 @@
 '''
 Functions for manage auth and credentials
 '''
-# pylint: disable=redefined-outer-name, protected-access
+# pylint: disable=redefined-outer-name, protected-access, no-name-in-module, import-error
 from functools import lru_cache
 
-import google.auth
+import sys
+
 from google.cloud import bigquery, storage
+from google.colab import auth
+
 import pydata_google_auth
 
 
@@ -28,23 +31,25 @@ def reauth():
 
 def credentials(from_file=False, reauth=False):
     '''
-    Get user credentials with google.auth
+    Get user credentials
     '''
+
+    #check if is running in colab
+    if "google.colab" in sys.modules:
+        auth.authenticate_user()
+        return None
 
     if from_file:
         return Base()._load_credentials(mode="prod")
 
     if reauth:
-        credentials_, _ = google.auth.default(
-            scopes=SCOPES,
-            # credentials_cache=None,
+        return pydata_google_auth.get_user_credentials(
+            SCOPES, credentials_cache=pydata_google_auth.cache.REAUTH
         )
-        return credentials_
 
-    credentials_, _ = google.auth.default(
-        scopes=SCOPES
+    return pydata_google_auth.get_user_credentials(
+            SCOPES,
     )
-    return credentials_
 
 
 
