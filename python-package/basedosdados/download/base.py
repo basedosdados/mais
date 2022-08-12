@@ -29,33 +29,27 @@ def reauth():
 
 def credentials(from_file=False, reauth=False):
     '''
-    Get user credentials with google.auth
+    Get user credentials
     '''
 
-    # check if is running in colab
+    #check if is running in colab
     if "google.colab" in sys.modules:
-        # authenticate from google colab
-
-        # pylint: disable=no-name-in-module, import-outside-toplevel, import-error
+        print("Autenticando via Colab")
         from google.colab import auth
         auth.authenticate_user()
         return None
+    else:
+        if from_file:
+            return Base()._load_credentials(mode="prod")
 
-    #Authenticate from PyData, for compatibility reasons
-    if from_file:
-        return Base()._load_credentials(mode="prod")
+        if reauth:
+            return pydata_google_auth.get_user_credentials(
+                SCOPES, credentials_cache=pydata_google_auth.cache.REAUTH
+            )
 
-    if reauth:
-        credentials_, _ = google.auth.default(
-            scopes=SCOPES,
-            # credentials_cache=None,
+        return pydata_google_auth.get_user_credentials(
+                SCOPES,
         )
-
-    return pydata_google_auth.get_user_credentials(
-            SCOPES,
-
-    )
-    return credentials_
 
 
 
