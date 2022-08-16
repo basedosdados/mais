@@ -36,6 +36,7 @@ def credentials(from_file=False, reauth=False):
     #check if is running in colab
     if "google.colab" in sys.modules:
         from google.colab import auth  # pylint: disable=import-outside-toplevel
+
         auth.authenticate_user()
         return None
 
