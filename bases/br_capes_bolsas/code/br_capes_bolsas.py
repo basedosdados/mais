@@ -16,10 +16,13 @@ path_input = "/home/crislane/Desktop/br_capes_bolsas/input/"
 path_output = "/home/crislane/Desktop/br_capes_bolsas/output/"
 
 for ano_inicial in [*range(2005, 2020)]:
-  for mes_inicial in [*range(1, 13)]:
-    directory = path_output + f'mobilidade_internacional/ano_inicial={ano_inicial}/mes_inicial={mes_inicial}'
-    if not os.path.exists(directory):
-      os.makedirs(directory) 
+    for mes_inicial in [*range(1, 13)]:
+        directory = (
+            path_output
+            + f"mobilidade_internacional/ano_inicial={ano_inicial}/mes_inicial={mes_inicial}"
+        )
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 
 # lists + treatment
 
@@ -145,19 +148,22 @@ list_ordem = [
     "valor_recebido_total",
 ]
 
-files = sorted(glob(path_input + "mi*.csv", low_memory=False))
+files = sorted(glob(path_input + "mi*.csv"))
 df = pd.concat((pd.read_csv(x) for x in files), ignore_index=True).rename(
     columns=list_rename
 )[list_ordem]
 
 for ano_inicial in [*range(2005, 2020)]:
-  for mes_inicial in [*range(1, 13)]:
-    print(f'Particionando {ano_inicial}-{mes_inicial}')
-    df_partition = df[df['ano_inicial'] == ano_inicial].copy()
-    df_partition = df_partition[df_partition['mes_inicial'] == mes_inicial]
-    df_partition.drop(['ano_inicial', 'mes_inicial'], axis=1, inplace=True)
-    partition_path = path_output + f'mobilidade_internacional/ano_inicial={ano_inicial}/mes_inicial={mes_inicial}/mobile_internacional.csv'
-    df_partition.to_csv(partition_path, index=False, encoding='utf-8', na_rep='')
+    for mes_inicial in [*range(1, 13)]:
+        print(f"Particionando {ano_inicial}-{mes_inicial}")
+        df_partition = df[df["ano_inicial"] == ano_inicial].copy()
+        df_partition = df_partition[df_partition["mes_inicial"] == mes_inicial]
+        df_partition.drop(["ano_inicial", "mes_inicial"], axis=1, inplace=True)
+        partition_path = (
+            path_output
+            + f"mobilidade_internacional/ano_inicial={ano_inicial}/mes_inicial={mes_inicial}/mobile_internacional.csv"
+        )
+        df_partition.to_csv(partition_path, index=False, encoding="utf-8", na_rep="")
 
 
 tb = bd.Table(dataset_id="br_capes_bolsas", table_id="mobilidade_internacional")
