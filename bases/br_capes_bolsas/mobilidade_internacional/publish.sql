@@ -19,7 +19,7 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_capes_bolsas.mobilidade_internacional AS
 SELECT 
-SAFE_CAST(ano_inicial AS STRING) ano_inicial,
+SAFE_CAST(ano_inicial AS INT64) ano_inicial,
 SAFE_CAST(mes_inicial AS INT64 ) mes_inicial,
 SAFE_CAST(ano_final AS INT64 ) ano_final,
 SAFE_CAST(mes_final AS INT64 ) mes_final,
