@@ -24,11 +24,11 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-  - 2020(1)2022
+  - 2020-01(1)2022-07
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: uncertain
+update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
