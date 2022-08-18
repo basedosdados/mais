@@ -29,6 +29,7 @@ temporal_coverage:
     - 2019
     - 2020
     - 2021
+    - 2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -61,20 +62,20 @@ version: ''
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Gustavo Aires Tiago
-    email: gustavo.tiago@basedosdados.org
+    name: Filipe Cavalcanti
+    email: f.matheus.cavalcanti@gmail.com
     github_user:
     website:
-    ckan_user: gustavoairestiago
+    ckan_user: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Gustavo Aires Tiago
-    email: gustavo.tiago@basedosdados.org
+    name: Filipe Cavalcanti
+    email: f.matheus.cavalcanti@gmail.com
     github_user:
-    ckan_user: gustavoairestiago
+    ckan_user: 
     website:
     code_url:
 
@@ -94,11 +95,11 @@ architecture_url:
 # Opções: yes, no.
 covered_by_dictionary: no
 
-source_bucket_name: basedosdados-dev
+source_bucket_name: bd-projetos
 
-project_id_prod: basedosdados-dev
+project_id_prod: datasus-356120
 
-project_id_staging: basedosdados-dev
+project_id_staging: datasus-356120
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
@@ -144,4 +145,4 @@ columns:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-01-24T19:10:17.569420'
+metadata_modified: '2022-08-18T19:10:17.569420'
