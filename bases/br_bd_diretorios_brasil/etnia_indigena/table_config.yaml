@@ -17,19 +17,7 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplo: 1995(1)2019.
 temporal_coverage:
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
-    - 2020
-    - 2021
-    - 2022
+    - 2010(1)2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -64,7 +52,7 @@ version: ''
 published_by:
     name: Filipe Cavalcanti
     email: f.matheus.cavalcanti@gmail.com
-    github_user:
+    github_user: filipemsc
     website:
     ckan_user: 
 
@@ -74,7 +62,7 @@ published_by:
 data_cleaned_by:
     name: Filipe Cavalcanti
     email: f.matheus.cavalcanti@gmail.com
-    github_user:
+    github_user: filipemsc
     ckan_user: 
     website:
     code_url:
