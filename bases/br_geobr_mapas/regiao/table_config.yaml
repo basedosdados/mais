@@ -31,6 +31,9 @@ update_frequency: one_year
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
+    - entity: municipality
+      columns:
+      - id_municipio
 
 last_updated:
     metadata: '2022-08-10'
