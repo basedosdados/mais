@@ -24,7 +24,8 @@ spatial_coverage: sa.br
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2010(1)2021
+    - (1)
+
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -47,6 +48,7 @@ published_by:
     name: Filipe Cavalcanti
     email: f.matheus.cavalcanti@gmail.com
     github_user: filipemsc
+    website:
     ckan_user: 
     website:
 
