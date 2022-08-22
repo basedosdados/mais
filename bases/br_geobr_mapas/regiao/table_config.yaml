@@ -31,9 +31,9 @@ update_frequency: one_year
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-    - entity: municipality
+    - entity: region
       columns:
-      - id_municipio
+      - id_regiao
 
 last_updated:
     metadata: '2022-08-10'
@@ -42,7 +42,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.0.0
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -149,6 +149,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows:
+number_rows: 5
 
 metadata_modified: '2022-08-08T21:00:12.693353'
