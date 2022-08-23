@@ -34,6 +34,12 @@ update_frequency: unique
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
 
+# Entidade representada por cada linha.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+entity: other 
+columns: 
+        - id_etnia_indigena
+
 last_updated:
     metadata: '2022-08-19'
     data: '2022-08-16 16:09:00'
