@@ -1,0 +1,989 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_capes_bolsas
+
+table_id: mobilidade_internacional
+
+# Título da tabela.
+title: Mobilidade Internacional
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Bolsas Capes de programas de Mobilidade Internacional.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2005-01(1)2023-09
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: one_year
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: month
+      columns:
+        - mes_inicial
+        - mes_final
+    - entity: year
+      columns:
+        - ano_inicial
+        - ano_final
+    - entity: person
+      columns:
+      - beneficiario
+
+last_updated:
+    metadata: '2022-08-17'
+    data: '2022-08-17 19:14:07'
+    release: '2021-08-05'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Crislane Alves
+    email: crislanealves@basedosdados.org
+    github_user: crislanealves
+    ckan_user: crislanealves
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Crislane Alves
+    email: crislanealves@basedosdados.org
+    github_user: crislanealves
+    ckan_user: crislanealves
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: "- Compatibilização entre anos e renomeação das colunas"
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_capes_bolsas/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+    - ano_inicial
+    - mes_inicial
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano_inicial
+      bigquery_type: int64
+      description: Ano de início da vigência
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: mes_inicial
+      bigquery_type: int64
+      description: Mês de início da vigência
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: ano_final
+      bigquery_type: int64
+      description: Ano fim da vigência
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: mes_final
+      bigquery_type: int64
+      description: Mês fim da vigência
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_processo_concessao
+      bigquery_type: string
+      description: Identificação do processo de concessão
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cpf
+      bigquery_type: string
+      description: CPF descaracterizado
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: beneficiario
+      bigquery_type: string
+      description: Nome do beneficiário
+      temporal_coverage: 
+            - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: programa_capes
+      bigquery_type: string
+      description: Nome do Programa
+      temporal_coverage:
+            - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pais_destino
+      bigquery_type: string
+      description: Nome do país de destino
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_mundo
+          table_id: pais
+          column_name: nome
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_moeda
+      bigquery_type: string
+      description: Sigla da Moeda de Pagamento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_avaliacao
+      bigquery_type: string
+      description: Área de avaliação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_conhecimento
+      bigquery_type: string
+      description: Área do conhecimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: grande_area_conhecimento
+      bigquery_type: string
+      description: Grande área do conhecimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: nivel_ensino
+      bigquery_type: string
+      description: Nível de Ensino
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 'Exemplo: Graduação, doutorado, pós-dourado, etc'
+      is_in_staging: true
+      is_partition: false
+    - name: uf_instituicao_origem
+      bigquery_type: string
+      description: Unidade da Federação da instituição de origem
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: 
+          table_id: 
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: instituicao_ensino_origem
+      bigquery_type: string
+      description: Nome da instituição de origem
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: instituicao_ensino_principal
+      bigquery_type: string
+      description: Instituição de ensino principal
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: instituicao_ensino
+      bigquery_type: string
+      description: Instituição de ensino
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: deducao_mensalidade_programa_atracao_jovens
+      bigquery_type: float64
+      description: Dedução dos valores pagos de mensalidade (Programa de Atração de Jovens)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Pago a talentos que tiveram nomeação em quadro permanente da Administração Pública
+      is_in_staging: true
+      is_partition: false
+    - name: valor_adicional_pagos_doutorado_pleno_dependentes
+      bigquery_type: float64
+      description: Valor adicional pagos para doutorandos pleno com dependentes cadastrados
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_deslocamento
+      bigquery_type: float64
+      description: Valor recebido de auxílio deslocamento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_deslocamento_demanda
+      bigquery_type: float64
+      description: Valor recebido de auxílio deslocamento de demanda
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_deslocamento_pesquisa
+      bigquery_type: float64
+      description: Valor recebido de auxílio deslocamento de pesquisa
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_deslocamento_retorno
+      bigquery_type: float64
+      description: Valor recebido de auxílio deslocamento de retorno
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_despesas_instalacao
+      bigquery_type: float64
+      description: Valor recebido de diferenças/reembolsos para despesas realizadas com auxílio instalação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_instalacao_dependente
+      bigquery_type: float64
+      description: Valor adicional recebido de auxílio instalação com dependentes cadastrados
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Pagos para bolsistas de doutorado pleno com dependentes cadastrados
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_instalacao
+      bigquery_type: float64
+      description: Valor recebido de auxílio instalação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_seguro_saude_anual
+      bigquery_type: float64
+      description: Valor recebido de seguro-saúde (parcela anual)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_seguro_saude_capes_setec
+      bigquery_type: float64
+      description: Valor recebido de auxílio seguro-saúde (CAPES/SETEC)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_seguro_saude_demanda
+      bigquery_type: float64
+      description: Valor recebido de seguro-saúde de demanda
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_seguro_saude_dependente
+      bigquery_type: float64
+      description: Valor adicional recebido de auxílio seguro-saúde com dependentes cadastrados
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Pagos para bolsistas de doutorado pleno com dependentes cadastrados
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_seguro_saude
+      bigquery_type: float64
+      description: Valor recebido de auxílio seguro-saúde
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_moradia
+      bigquery_type: float64
+      description: Valor recebido de auxílio moradia
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_auxilio_material_didatico
+      bigquery_type: float64
+      description: Valor recebido de auxílio material didático (Programa Ciência Sem Fronteiras)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_bolsa
+      bigquery_type: float64
+      description: Valor recebido de bolsa
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_adicional_localidade
+      bigquery_type: float64
+      description: Valor recebido de adicional localidade
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_ajuda_custo
+      bigquery_type: float64
+      description: Valor recebido de ajuda de custo
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_ajuda_custo_capes_mtur
+      bigquery_type: float64
+      description: Valor recebido de ajuda de custo (CAPES/MTUR)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_ajuda_custo_capes_setec
+      bigquery_type: float64
+      description: Valor recebido de ajuda de custo (CAPES/SETEC)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_custeio_taxas_escolares_menores
+      bigquery_type: float64
+      description: Valor recebido para o custeio de taxas escolares de pequeno valor
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Referente a tuitions e fees
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_reembolso_taxas_escolares
+      bigquery_type: float64
+      description: Valor recebido para o reembolso de taxas escolares pagas pelo beneficiário
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Referente a tuitions e fees
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_custeio_taxas_escolares
+      bigquery_type: float64
+      description: Valor recebido para o custeio de taxas escolares
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Referente a tuitions e fees
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_despesas_adicional_dependente
+      bigquery_type: float64
+      description: Valor recebido de diferenças/reembolsos para despesas realizadas com adicional dependente
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_despesas_auxilio_deslocamento
+      bigquery_type: float64
+      description: Valor recebido diferenças/reembolsos para despesas realizadas com deslocamento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_despesas_extraordinarias
+      bigquery_type: float64
+      description: Valor recebido para o pagamento de despesas extraordinárias
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_despesas_mensalidade
+      bigquery_type: float64
+      description: Valor recebido de diferenças/reembolsos para despesas realizadas com mensalidade
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_despesas_seguro_saude
+      bigquery_type: float64
+      description: Valor recebido de diferenças/reembolsos para despesas realizadas com seguro-saúde
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_seguro_saude
+      bigquery_type: float64
+      description: Valor recebido de seguro-saúde
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_diarias
+      bigquery_type: float64
+      description: Valor recebido de diárias
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_escola_altos_estudos
+      bigquery_type: float64
+      description: Valor recebido de bolsa (Programa Escola de Altos Estudos)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_licenca_maternidade
+      bigquery_type: float64
+      description: Valor recebido de mensalidade durante licença maternidade
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_mensalidade
+      bigquery_type: float64
+      description: Valor recebido de mensalidade
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_mensalidade_agendadas
+      bigquery_type: float64
+      description: Valor recebido de mensalidade agendadas
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_mensalidade_demanda
+      bigquery_type: float64
+      description: Valor recebido de mensalidade de demanda
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_outros_debitos
+      bigquery_type: float64
+      description: Valor recebido de diferenças/reembolsos para outros débitos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_passagem_aerea
+      bigquery_type: float64
+      description: Valor recebido de diferenças/reembolsos para passagem aérea
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_capital
+      bigquery_type: float64
+      description: Valor recebido de capital
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valor_recebido_total
+      bigquery_type: float64
+      description: Valor total recebido
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 146036
+
+metadata_modified:
