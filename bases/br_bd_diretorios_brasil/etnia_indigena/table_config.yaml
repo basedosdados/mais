@@ -38,7 +38,7 @@ observation_level:
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 entity: other 
 columns: 
-        - id_etnia_indigena
+    - id_etnia_indigena
 
 last_updated:
     metadata: '2022-08-19'
