@@ -1,7 +1,7 @@
 
 # Nome (slug) do conjunto no CKAN
 # Exemplos: br-ibge-populacao, br-tse-eleicoes
-name: br_inep_sinopse_estatistica_educacao_basica
+name: br-inep-sinopse-estatistica-educacao-basica
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
