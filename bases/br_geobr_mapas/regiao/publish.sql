@@ -17,9 +17,9 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_geobr_mapas.regioes AS
+CREATE VIEW basedosdados-dev.br_geobr_mapas.regiao AS
 SELECT 
 SAFE_CAST(id_regiao AS STRING) id_regiao,
 SAFE_CAST(nome_regiao AS STRING) nome_regiao,
 SAFE_CAST(geometria AS STRING) geometria
-FROM basedosdados-dev.br_geobr_mapas_staging.regioes AS t
+FROM basedosdados-dev.br_geobr_mapas_staging.regiao AS t
