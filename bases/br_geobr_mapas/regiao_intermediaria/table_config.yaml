@@ -116,8 +116,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade de Federação
@@ -131,8 +131,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: id_regiao_intermediaria
       bigquery_type: string
       description: ID da Região Intermediária - IBGE
@@ -146,8 +146,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: geometria
       bigquery_type: string
       description: Polígono da microrregião
@@ -161,8 +161,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
 
 number_rows: 135
 
