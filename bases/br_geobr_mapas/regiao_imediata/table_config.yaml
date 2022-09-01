@@ -34,6 +34,9 @@ observation_level:
     - entity: region
       columns:
       - id_regiao_imediata
+    - entity: region
+      columns:
+      - id_uf
 
 last_updated:
     metadata: '2022-08-22'
@@ -116,8 +119,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade de Federação
@@ -126,13 +129,13 @@ columns:
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
-          table_id: uf
+          table_id: municipio
           column_name: sigla_uf
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true 
+      is_partition: false
     - name: id_regiao_imediata
       bigquery_type: string
       description: ID da Região Imediata - IBGE
@@ -146,8 +149,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: geometria
       bigquery_type: string
       description: Polígono da região imediata
@@ -161,8 +164,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
 
 number_rows: 510
 
