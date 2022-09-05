@@ -23,7 +23,7 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2005(1)2020
+    - 2005(1)2019
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -34,7 +34,8 @@ observation_level:
     - entity: year
       columns:
       - ano
-    - entity: state
+    - country: br
+      entity: state
       columns:
       - sigla_uf
     - entity: municipality
@@ -44,15 +45,21 @@ observation_level:
     - entity: person
       columns:
       - cpf
+    - entity: sex
+      columns:
       - sexo
+    - entity: race
+      columns:
       - raca_cor
-      - beneficiario_deficiente
     - entity: date
       columns:
       - data_nascimento
     - entity: school
       columns:
       - id_ies
+    - entity: other
+      columns:
+      - beneficiario_deficiente
       - campus
       - curso
       - turno
@@ -229,7 +236,7 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: data
           column_name: data
-      measurement_unit: day
+      measurement_unit:
       has_sensitive_data: yes
       observations: Transformado para o formato 'YYYY-MM-DD'
       is_in_staging: true
