@@ -34,37 +34,15 @@ observation_level:
     - entity: year
       columns:
       - ano
-    - country: br
-      entity: state
-      columns:
-      - sigla_uf
-    - entity: municipality
-      columns:
-      - id_municipio
-      - id_municipio_ies
     - entity: person
       columns:
       - cpf
-    - entity: sex
-      columns:
-      - sexo
-    - entity: race
-      columns:
-      - raca_cor
-    - entity: date
-      columns:
-      - data_nascimento
     - entity: school
       columns:
       - id_ies
     - entity: other
       columns:
-      - beneficiario_deficiente
-      - campus
       - curso
-      - turno
-      - tipo_bolsa
-      - modalidade_ensino
 
 last_updated:
     metadata: '2022-09-04'
