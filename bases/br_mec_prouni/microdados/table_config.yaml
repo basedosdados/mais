@@ -79,8 +79,8 @@ version: v1.0
 published_by:
     name: Lucas Moreira
     email: lucas.moreira@basedosdados.org
-    github_user: 
-    ckan_user:
+    github_user: lucasnascm
+    ckan_user: lucasnascm
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
