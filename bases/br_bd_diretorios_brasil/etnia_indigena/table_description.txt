@@ -9,13 +9,13 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Gustavo Aires Tiago
+Nome: Filipe Cavalcanti
 Código: 
-Email: gustavo.tiago@basedosdados.org
+Email: f.matheus.cavalcanti@gmail.com
 Tratado por
 -----------
-Nome: Gustavo Aires Tiago
-Email: gustavo.tiago@basedosdados.org
+Nome: Filipe Cavalcanti
+Email: f.matheus.cavalcanti@gmail.com
 
 
 
@@ -41,6 +41,7 @@ Cobertura Temporal
 - 2019
 - 2020
 - 2021
+- 2022
 
 
 
