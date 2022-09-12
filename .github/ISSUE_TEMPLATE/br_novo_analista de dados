@@ -1,0 +1,19 @@
+
+---
+name: PTBR | Novos dados
+about: Onboarding de novos analistas de dados
+title: '[dados] Onboarding'
+labels: data
+assignees: 
+---
+
+
+**Atividades para completar o onboarding**
+
+- [ ] Ler a documentação de infra e de dados [aqui](https://basedosdados.github.io/mais)
+- [ ] Subir uma base [Conectar issue aqui]
+- [ ] Corrigir um PR
+- [ ] Subir uma base particionada
+- [ ] Indexar uma nova base
+- [ ] Participar de uma rodada de qualidade de dados
+- [ ] Fazer uma análise para comunicação
