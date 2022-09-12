@@ -1,19 +1,22 @@
 
 ---
-name: PTBR | Novos dados
+name: PTBR | Onboard de dados BD Core
 about: Onboarding de novos analistas de dados
 title: '[dados] Onboarding'
 labels: data
 assignees: 
 ---
 
+Lista de atividades que realizamos frequentemente na área
 
 **Atividades para completar o onboarding**
 
-- [ ] Ler a documentação de infra e de dados [aqui](https://basedosdados.github.io/mais)
-- [ ] Subir uma base [Conectar issue aqui]
-- [ ] Corrigir um PR
-- [ ] Subir uma base particionada
-- [ ] Indexar uma nova base
-- [ ] Participar de uma rodada de qualidade de dados
-- [ ] Fazer uma análise para comunicação
+- [ ] Ler a documentação de infra e de dados [documentação](https://basedosdados.github.io/mais)
+- [ ] Subir uma base [documentação](https://basedosdados.github.io/mais/colab_data)
+- [ ] Subir uma base particionada [doumentação](https://github.com/basedosdados/.github/wiki/Dados#particionamento-de-tabelas)
+- [ ] Corrigir um PR [documentação](https://github.com/basedosdados/.github/wiki/Dados#como-fazer-code-review)
+- [ ] Indexar bases via ckan (apenas fonte externa) [documentação](https://docs.google.com/document/d/1nuAlbyLbxHwbk5HT9dIPsfuZlICqCKIdj7dgdJCYlrQ/edit?usp=sharing)
+- [ ] Participar de uma rodada de qualidade de dados [documentação](https://docs.google.com/document/d/1mNxLeTkh0-6pO1tpZrRslUkiRnWDAM1COa-qsqmoYiY/edit?usp=sharing)
+- [ ] Fazer uma análise para comunicação [documentação a fazer]
+- [ ] Usar a API para consultar/alterar informações [documentação a fazer]
+- [ ] Fazer um fluxo via DBT e pipelines
