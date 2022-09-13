@@ -19,13 +19,13 @@ description: |
 # Exemplo:
 #   - sa.br
 spatial_coverage:
-    - sa.br
+  - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 1969(1)2022
+  - 1969(1)2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -62,7 +62,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
+data_cleaning_description: |
   - Coleta dos dados a partir da API ipeadatapy;
   - Renomeação das variáveis segundo as diretrizes da BD;
   - Cálculo de valores acumulados e variações, quando couber

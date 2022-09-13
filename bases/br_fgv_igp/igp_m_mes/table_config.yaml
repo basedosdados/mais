@@ -13,19 +13,19 @@ title: IGP-M mensal
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
 description: |
-    - O Índice Geral de Preços do Mercado (IGP-M) é um indicador do movimento de preços que cobre todo o processo produtivo, desde preços de matérias-primas agrícolas e industriais, passando pelos preços de produtos intermediários até os de bens e serviços finais. É composto pela média ponderada do Índice de Preços ao Produtor Amplo do Mercado (IPA-M) (60%), do Índice de Preços ao Consumidor do Mercado (IPC-M) (30%) e do Índice Nacional de Custo da Construção do Mercado (INCC-M) (10%). Para efeito de coleta de preços, o IGP-M mede a evolução de preços no período compreendido entre os dias 21 do mês anterior e o dia 20 do mês de referência. Nota: Na época de transição para o Real (R$) - Julho e Agosto de 1994 - a FGV calculou o IGP-2, uma variante do IGP-M mas calculado com valores na nova moeda. O IGP-M reflete a comparação dos preços praticados na nova moeda (R$) com os preços praticados ainda em CR$ convertidos para Reais pela paridade R$ = 2750 CR$. O IGP-2 reflete a comparação dos preços praticados em R$ com os preços praticados ainda em CR$ porém convertidos para Reais pela cotação diária da URV. As 2 formas apresentam resultados distintos.
+  - O Índice Geral de Preços do Mercado (IGP-M) é um indicador do movimento de preços que cobre todo o processo produtivo, desde preços de matérias-primas agrícolas e industriais, passando pelos preços de produtos intermediários até os de bens e serviços finais. É composto pela média ponderada do Índice de Preços ao Produtor Amplo do Mercado (IPA-M) (60%), do Índice de Preços ao Consumidor do Mercado (IPC-M) (30%) e do Índice Nacional de Custo da Construção do Mercado (INCC-M) (10%). Para efeito de coleta de preços, o IGP-M mede a evolução de preços no período compreendido entre os dias 21 do mês anterior e o dia 20 do mês de referência. Nota: Na época de transição para o Real (R$) - Julho e Agosto de 1994 - a FGV calculou o IGP-2, uma variante do IGP-M mas calculado com valores na nova moeda. O IGP-M reflete a comparação dos preços praticados na nova moeda (R$) com os preços praticados ainda em CR$ convertidos para Reais pela paridade R$ = 2750 CR$. O IGP-2 reflete a comparação dos preços praticados em R$ com os preços praticados ainda em CR$ porém convertidos para Reais pela cotação diária da URV. As 2 formas apresentam resultados distintos.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
 #   - sa.br
 spatial_coverage:
-    - sa.br
+  - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 1989-06(1)2022-08
+  - 1989-06(1)2022-08
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -62,7 +62,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
+data_cleaning_description: |
   - Coleta dos dados a partir da API ipeadatapy;
   - Renomeação das variáveis segundo as diretrizes da BD;
   - Cálculo de valores acumulados e variações, quando couber
