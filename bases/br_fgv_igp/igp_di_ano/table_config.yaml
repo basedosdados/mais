@@ -72,7 +72,7 @@ data_cleaning_description: |
   - Junção de dataframes com períodos distintos de coleta
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url:
+data_cleaning_code_url: https://github.com/basedosdados/pipelines/blob/master/pipelines/datasets/br_fgv_igp/utils.py
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
