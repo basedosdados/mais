@@ -36,9 +36,6 @@ observation_level:
   - entity: year
     columns:
       - ano
-  - entity: month
-    columns:
-      - mes
 
 last_updated:
     metadata:
