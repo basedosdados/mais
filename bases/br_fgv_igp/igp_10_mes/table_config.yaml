@@ -6,7 +6,7 @@ dataset_id: br_fgv_igp
 table_id: igp_10_mes
 
 # Título da tabela.
-title: IGP 10 Anual
+title: IGP 10 Mensal
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
