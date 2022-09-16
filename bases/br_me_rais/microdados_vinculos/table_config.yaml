@@ -168,7 +168,7 @@ columns:
       description: Vínculo Ativo no dia 31/12
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -183,7 +183,7 @@ columns:
       description: Tipo da Admissão
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -228,7 +228,7 @@ columns:
       description: Motivo do Desligamento
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -243,7 +243,7 @@ columns:
       description: Causa 1 do Desligamento
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -258,7 +258,7 @@ columns:
       description: Causa 2 do Desligamento
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -273,7 +273,7 @@ columns:
       description: Causa 3 do Desligamento
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -318,7 +318,7 @@ columns:
       description: Faixa Horas Contratadas
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -338,7 +338,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: hour
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -368,7 +368,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: day
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -378,7 +378,7 @@ columns:
       description: Indicador CEI Vinculado
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -393,7 +393,7 @@ columns:
       description: Indicador Trabalho Parcial
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -408,7 +408,7 @@ columns:
       description: Indicador Trabalho Intermitente
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -423,7 +423,7 @@ columns:
       description: Faixa Remuneração Média (Salários Mínimos)
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -443,7 +443,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: minimum_wage
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -468,7 +468,7 @@ columns:
       description: Faixa Remuneração em Dezembro (Salários Mínimos)
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -488,7 +488,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: minimum_wage
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -678,7 +678,7 @@ columns:
       description: Tipo do Salário
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -813,7 +813,7 @@ columns:
       description: Faixa Etária
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -843,7 +843,7 @@ columns:
       description: Grau de Instrução 1985-2005
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -858,7 +858,7 @@ columns:
       description: Grau de Instrução Após 2005
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -873,7 +873,7 @@ columns:
       description: Nacionalidade
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -888,7 +888,7 @@ columns:
       description: Sexo
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -903,7 +903,7 @@ columns:
       description: Raça ou Cor
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -918,7 +918,7 @@ columns:
       description: Indicador de Portador de Deficiência
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -933,7 +933,7 @@ columns:
       description: Tipo da Deficiência
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -963,7 +963,7 @@ columns:
       description: Tamanho do Estabelecimento
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -978,7 +978,7 @@ columns:
       description: Tipo do Estabelecimento
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -1008,7 +1008,7 @@ columns:
       description: Indicador do Simples
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
