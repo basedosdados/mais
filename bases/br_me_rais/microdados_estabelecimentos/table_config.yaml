@@ -159,8 +159,8 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data: yes
+      measurement_unit: person
+      has_sensitive_data: no
       observations: Quando acumulada representa a soma dos vinculos ativos
       is_in_staging: true
       is_partition: false
@@ -174,8 +174,8 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data: yes
+      measurement_unit: person
+      has_sensitive_data: no
       observations: Quando acumulada representa a soma dos vinculos ativos
       is_in_staging: true
       is_partition: false
@@ -189,8 +189,8 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data: yes
+      measurement_unit: person
+      has_sensitive_data: no
       observations: Quando acumulada representa a soma dos vinculos ativos
       is_in_staging: true
       is_partition: false
@@ -205,7 +205,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -220,7 +220,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -235,7 +235,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -250,7 +250,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -265,7 +265,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -280,7 +280,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -295,7 +295,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -310,7 +310,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -325,7 +325,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -340,7 +340,7 @@ columns:
           table_id: cnae_1
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -355,7 +355,7 @@ columns:
           table_id: cnae_2
           column_name: cnae_2
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -370,7 +370,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -385,7 +385,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -400,7 +400,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -415,7 +415,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -430,7 +430,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -445,7 +445,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -460,7 +460,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -490,7 +490,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
