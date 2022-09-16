@@ -199,7 +199,7 @@ columns:
       description: Natureza
       temporal_coverage:
         - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -229,7 +229,7 @@ columns:
       description: Tamanho - empregados ativos em 31/12.
       temporal_coverage:
         - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -244,7 +244,7 @@ columns:
       description: Tipo
       temporal_coverage:
         - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -379,7 +379,7 @@ columns:
       description: Subsetor IBGE
       temporal_coverage:
         - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
