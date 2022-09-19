@@ -17,8 +17,13 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW datasus-356120.br_bd_diretorios_brasil.etnia_indigena AS
+CREATE VIEW basedosdados-dev.br_inep_sinopse_estatistica_educacao_basica.municipio_matricula_localizacao_rede AS
 SELECT 
-SAFE_CAST(id_etnia_indigena AS STRING) id_etnia_indigena,
-SAFE_CAST(nome AS STRING) nome
-FROM datasus-356120.br_bd_diretorios_brasil_staging.etnia_indigena AS t
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(localizacao AS STRING) localizacao,
+SAFE_CAST(rede AS STRING) rede,
+SAFE_CAST(etapa_ensino AS STRING) etapa_ensino,
+SAFE_CAST(quantidade_matricula AS INT64) quantidade_matricula
+FROM basedosdados-dev.br_inep_sinopse_estatistica_educacao_basica_staging.municipio_matricula_localizacao_rede AS t
