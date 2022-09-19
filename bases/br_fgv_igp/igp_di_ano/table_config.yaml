@@ -25,11 +25,11 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 1944-01(1)2022-08
+    - 1944(1)2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: month
+update_frequency: one_year
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
@@ -38,9 +38,9 @@ observation_level:
       - ano
 
 last_updated:
-    metadata:
-    data: '2022-09-12'
-    release:
+    metadata: '2022-09-12T00:00:00.000000'
+    data: '2022-09-12T00:00:00.000000'
+    release: '2022-09-12T00:00:00.000000'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
