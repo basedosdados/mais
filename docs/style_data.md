@@ -110,7 +110,6 @@ Quando escolher:
     - Chaves de variáveis categóricas com dicionário ou diretório
 - `INT64`:
     - Variáveis de números inteiros com as quais é possível fazer contas (adição, subtração)
-    - Chaves de variáveis booleanas com dicionário ou não
 - `FLOAT64`:
     - Variáveis de números com casas decimais com as quais é possível fazer contas (adição, subtração)
 - `DATE`:
