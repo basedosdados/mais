@@ -19,9 +19,9 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_fgv_igp.igp_og_ano AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
-SAFE_CAST(indice_medio AS STRING) indice_medio,
-SAFE_CAST(indice AS STRING) indice,
-SAFE_CAST(variacao_anual AS STRING) variacao_anual,
-SAFE_CAST(indice_fechamento_anual AS STRING) indice_fechamento_anual
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(indice_medio AS FLOAT64) indice_medio,
+SAFE_CAST(indice AS FLOAT64) indice,
+SAFE_CAST(variacao_anual AS FLOAT64) variacao_anual,
+SAFE_CAST(indice_fechamento_anual AS FLOAT64) indice_fechamento_anual
 FROM basedosdados-dev.br_fgv_igp_staging.igp_og_ano AS t
