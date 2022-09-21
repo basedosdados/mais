@@ -27,11 +27,11 @@ Os principais erros encontrados do pacote da Base dos Dados no Rstudio são deri
 Portanto, se alguns erro aparecer para você, por favor, tente primeiro checar se ele está relacionado a esses dois fatores.
 
 ### Autenticação
-A maioria dos erros do nosso pacote estão relacionados a problemas de autenticação. É preciso que o usuário forneça todas as autenticações requeridas pela função `basedosdados::set_billing_id`, inclusive aquelas que aparecem como optativas. Por isso, é necessário estar atento se você marcou todas as caixinhas de seleção quando o Rstudio disponibiliza essa tela no navegador:
+A maioria dos erros do nosso pacote estão relacionados a problemas de autenticação. O pacote `basedosdados` requer que o usuário forneça todas as autenticações solicitadas pela função `basedosdados::set_billing_id`, inclusive aquelas que aparecem como optativas. Por isso, é necessário estar atento se você marcou todas as caixinhas de seleção quando o Rstudio disponibiliza essa tela no navegador:
 
 ![Capturar](https://user-images.githubusercontent.com/26544494/190700064-1326a74c-8de0-4254-a562-32f9aa10ae07.PNG)
 
-Note que é preciso marcar inclusive as duas últimas "caixinhas", que aparecem como opcionais. Caso você tenha esquecido de marcar, todas as outras funções do pacote não irão funcionar posteriormente. 
+*Note que é preciso marcar inclusive as duas últimas "caixinhas", que aparecem como opcionais*. Caso você tenha esquecido de marcá-las, todas as outras funções do pacote não irão funcionar posteriormente. 
 
 Caso você já tenha autenticado com autorização incompleta, é preciso repetir o processo de autenticação. Você pode fazer isso rodando `gargle::gargle_oauth_sitrep()`. Você deverá checar a pasta em que estão salvas as autenticações do seu R, entrar nesta pasta e deletar aquela referente ao Google Cloud/Bigquery. Feito isso, ao rodar `basedosdados::set_billing_id` você poderá autenticar novamente.  
 
