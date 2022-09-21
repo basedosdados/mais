@@ -61,3 +61,4 @@ para um downgrade do pacote bdplyr. Feito isso, diante de todas as nossas docume
 
 É válido também visitar as `issues` que estão atribuídas com o a etiqueta `R` em nosso github. 
 [Veja aqui](https://github.com/basedosdados/mais/issues?q=is%3Aissue+is%3Aclosed)
+
