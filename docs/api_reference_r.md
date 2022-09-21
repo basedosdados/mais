@@ -21,6 +21,7 @@ segue baixo.
 Os principais erros encontrados do pacote da Base dos Dados no Rstudio são dois:
 
     * Autenticação
+    
     * Bibliotecas atualizadas que crasham com a utilização do pacote.
 
 Portanto, se alguns destes erros aparecer para você, por favor, siga o passo a passo listado aqui embaixo.
