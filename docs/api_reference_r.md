@@ -41,6 +41,5 @@ Outro problema está relacionado ao uso do `bdplyr`. Nosso pacote em R foi const
 
 Você pode checar a função do `dbplyr` rodando a função `utils::packageVersion("dbplyr")`. Caso ela seja diferente de 2.1.1, você precisa dar um _downgrade_ para essa versão. Para isso, você pode rodar `devtools::install_version("dbplyr", version = "2.1.1", repos = "http://cran.us.r-project.org"`
 
-
 ### Outros erros
 Caso os erros persistam, você pode abrir uma Issue no nosso Github clicando [aqui](https://github.com/basedosdados/mais/issues). Você também visitar as `issues` que já foram resolvidas e estão atribuídas com o a etiqueta `R` em nosso Github [aqui](https://github.com/basedosdados/mais/issues?q=is%3Aissue+is%3Aclosed). 
