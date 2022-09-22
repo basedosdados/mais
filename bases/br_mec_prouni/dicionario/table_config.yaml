@@ -110,7 +110,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      is_in_staging: true
+      is_in_staging: truetrue
       is_partition: false
     - name: nome_coluna
       bigquery_type: string
@@ -123,7 +123,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      is_in_staging: true
+      is_in_staging: truetrue
       is_partition: false
     - name: chave
       bigquery_type: string
@@ -136,7 +136,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      is_in_staging: true
+      is_in_staging: truetrue
       is_partition: false
     - name: cobertura_temporal
       bigquery_type: string
@@ -149,7 +149,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      is_in_staging: true
+      is_in_staging: truetrue
       is_partition: false
     - name: valor
       bigquery_type: string
@@ -162,7 +162,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      is_in_staging: true
+      is_in_staging: truetrue
       is_partition: false
 
 number_rows: 20
