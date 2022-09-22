@@ -1,0 +1,53 @@
+Apresenta o registro dos recursos liberados pelas instituições financeiras no decorrer de uma operação de crédito, durante 2013 a julho de 2022. A liberação obedece o cronograma de liberação de recursos estipulado no ato da assinatura do contrato que formaliza a operação de crédito rural. Por meio desta base é possível descobrir o montante de recursos efetivamente liberado bem como o status da operação de crédito. Recomenda-se que seja utilizado em conjunto com a tabela de Operações (microdados_operações) e de Saldos (microdados_saldos) a depender das necessidades de análise.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: pisagabriel09@gmail.com
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- mes
+
+
+
+
+Cobertura Temporal
+------------------
+- 2013(1)2022
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Renomear colunas; formatar as datas e particionar os dados por ano e mês.
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year

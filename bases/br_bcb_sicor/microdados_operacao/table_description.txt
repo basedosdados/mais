@@ -1,0 +1,54 @@
+A tabela de Operações contém os microdados das contratações de crédito de cada estado brasileiro, realizadas durante 2013 e julho de 2022. Nela, estão presentes principais informações (categoria de produtor; fonte de recursos; instituição credora; produto financiado e etc) das mais de 19 milhôes de operações de crédito rural registradas no SICOR no período. É importante salientar que cada linha não necessariamente representa uma operação completa. É possível que uma unica operação (identificada pelo id_referencia_bacen) contenha diversos itens e, portanto, seja subdividida em ordems. A coluna nu_ordem indica justamente o número de ordems que uma determinada operação possui.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: pisagabriel09@gmail.com
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- mes
+- sigla_uf
+
+
+
+
+Cobertura Temporal
+------------------
+- 2013(1)2022
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Renomear colunas; formatar as datas; criar as variáveis ano_safra_emissao e ano_safra vencimento; particionar os dados por ano, mês e uf
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
