@@ -34,9 +34,6 @@ observation_level:
     - entity: region
       columns:
       - id_regiao_imediata
-    - entity: region
-      columns:
-      - id_uf
 
 last_updated:
     metadata: '2022-08-22'
@@ -52,7 +49,7 @@ published_by:
     name: Gustavo Alcântara
     email: gustavo.alcantara@basedosdados.org
     github_user: gustavoalcantara
-    ckan_user:
+    ckan_user: gustavoalcantara
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
