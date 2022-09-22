@@ -17,8 +17,11 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW datasus-356120.br_bd_diretorios_brasil.etnia_indigena AS
+CREATE VIEW basedosdados-dev.br_mec_prouni.dicionario AS
 SELECT 
-SAFE_CAST(id_etnia_indigena AS STRING) id_etnia_indigena,
-SAFE_CAST(nome AS STRING) nome
-FROM datasus-356120.br_bd_diretorios_brasil_staging.etnia_indigena AS t
+SAFE_CAST(id_tabela AS STRING) id_tabela,
+SAFE_CAST(nome_coluna AS STRING) nome_coluna,
+SAFE_CAST(chave AS STRING) chave,
+SAFE_CAST(cobertura_temporal AS STRING) cobertura_temporal,
+SAFE_CAST(valor AS STRING) valor
+FROM basedosdados-dev.br_mec_prouni_staging.dicionario AS t

@@ -1,7 +1,12 @@
 
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_bd_diretorios_brasil
 
 table_id: etnia_indigena
+
+# Título da tabela.
+title: Etnia Indígena
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -10,76 +15,64 @@ table_id: etnia_indigena
 description: Diretório das etnias indígenas nos Sistemas de Informação Ambulatorial
     e Hospitalar - SIA/SUS e SIH/SUS - 'https://bvsms.saude.gov.br/bvs/saudelegis/sas/2010/prt0508_28_09_2010.html'
 
-# A máxima unidade espacial que a tabela cobre.
-spatial_coverage:
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage: 
+    - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
-temporal_coverage:
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
-    - 2020
-    - 2021
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage: 
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: unique
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity:
-    - race
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit:
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns:
-    - id_etnia_indigena
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: other
+    - columns:
+          - id_etnia_indigena
 
 last_updated:
-    metadata:
-    data:
-    release:
+    metadata: '2022-07-28T22:51:00.839330'
+    data: '2022-07-28T22:51:00.839330'
+    release: '2022-07-28T22:51:00.839330'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: ''
+version: v.1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Gustavo Aires Tiago
-    email: gustavo.tiago@basedosdados.org
-    github_user:
+    name: Filipe Cavalcanti
+    email: f.matheus.cavalcanti@gmail.com
+    github_user: filipemsc
+    ckan_user: 
     website:
-    ckan_user: gustavoairestiago
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Gustavo Aires Tiago
-    email: gustavo.tiago@basedosdados.org
-    github_user:
-    ckan_user: gustavoairestiago
+    name: Filipe Cavalcanti
+    email: f.matheus.cavalcanti@gmail.com
+    github_user: filipemsc
+    ckan_user:
     website:
-    code_url:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: Definição do nome das colunas
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url:
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: ''
+    organization_id: ''
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -90,23 +83,17 @@ auxiliary_files_url:
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
 
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary: no
+source_bucket_name: bd-projetos
 
-source_bucket_name: basedosdados-dev
+project_id_prod: datasus-356120
 
-project_id_prod: basedosdados-dev
-
-project_id_staging: basedosdados-dev
+project_id_staging: datasus-356120
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions:
-
-bdm_file_size:
+partitions: []
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -120,28 +107,32 @@ columns:
     - name: id_etnia_indigena
       bigquery_type: string
       description: ID da etnia indígena
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: []
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome
       bigquery_type: string
       description: Nome da etnia indígena
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: []
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-01-24T19:10:17.569420'
+number_rows: 405
+
+metadata_modified: '2022-07-28T22:51:00.839330'
