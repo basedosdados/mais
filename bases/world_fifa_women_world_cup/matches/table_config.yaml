@@ -11,7 +11,7 @@ title: Matches
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Microdados dos jogos da copa do mundo feminina, a partir de 1991.
+description: Microdados referente as partidas dos jogos da copa do mundo feminina, a partir de 1991.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -66,7 +66,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Scrapping das partidas dos jogos da Copa do Mundo Feminina, do site oficial da FIFA. Padronização das variáveis pelas normas da BD.
+data_cleaning_description: Scraping das partidas dos jogos da Copa do Mundo Feminina, do site oficial da FIFA. Padronização das variáveis pelas normas da BD.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_fifa_women_world_cup/code
@@ -228,7 +228,7 @@ columns:
       is_partition: false
     - name: country_name
       bigquery_type: string
-      description: Name of the host country
+      description: Official name given by FIFA of the host country. 
       temporal_coverage:
           - (4)
       covered_by_dictionary: no
@@ -238,7 +238,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Official name given by FIFA
+      observations: 
       is_in_staging: true 
       is_partition: false
     - name: country_id_iso_3
@@ -288,7 +288,7 @@ columns:
       is_partition: false
     - name: team_a_name
       bigquery_type: string
-      description: Team A name
+      description: Official name given by FIFA of the team A
       temporal_coverage:
           - (4)
       covered_by_dictionary: no
@@ -298,7 +298,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Official name given by FIFA
+      observations: 
       is_in_staging: true 
       is_partition: false
     - name: team_b_id_iso_3
@@ -318,7 +318,7 @@ columns:
       is_partition: false
     - name: team_b_name
       bigquery_type: string
-      description: Team B name
+      description: Official name given by FIFA of the team B
       temporal_coverage:
           - (4)
       covered_by_dictionary: no
@@ -328,7 +328,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Official name given by FIFA
+      observations: 
       is_in_staging: true 
       is_partition: false
     - name: score
