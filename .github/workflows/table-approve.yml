@@ -62,42 +62,6 @@ jobs:
           PROJECT_ID: ${{ secrets.GCP_MAIN_PROJECT_ID }}
           BUCKET_NAME_BACKUP: basedosdados-backup
           BUCKET_NAME_DESTINATION: basedosdados
-  gcloud-tasks-add:
-    needs: table-approve
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-      - name: Download changes
-        uses: actions/download-artifact@v2
-        with:
-          name: push-changes
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.9.x"
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install google-cloud-tasks
-      - name: Set up gcloud
-        uses: google-github-actions/setup-gcloud@v0
-        with:
-          version: "290.0.1"
-          project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY_TASK_CALLER }}
-          export_default_credentials: true
-      - name: Add to gcloud tasks
-        run: |
-          cd .github/workflows/table-approve
-          python gcloud_tasks_add.py
-        shell: bash
-        env:
-          PROJECT_ID: ${{ secrets.GCP_MAIN_PROJECT_ID }}
-          QUEUE: ${{ secrets.GCP_ONECLICK_QUEUE }}
-          LOCATION: ${{ secrets.GCP_LOCATION }}
-          TASKURL: ${{ secrets.GCP_ONECLICK_URL }}
-          SERVICE_ACCOUNT: ${{ secrets.GCP_ONECLICK_EMAIL }}
 
 # Reference
 # https://github.com/google-github-actions/setup-gcloud/blob/master/setup-gcloud/README.md
