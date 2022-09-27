@@ -69,7 +69,7 @@ data_cleaned_by:
 data_cleaning_description: Scraping das partidas dos jogos da Copa do Mundo Feminina, do site oficial da FIFA. Padronização das variáveis pelas normas da BD.
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_fifa_women_world_cup/code
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_fifa_women_world_cup/code/tratamento_dados_matches.ipynb
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
