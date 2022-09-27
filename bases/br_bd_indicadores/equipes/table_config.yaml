@@ -24,7 +24,7 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2020(1)2022
+    - 2020-01(1)2022-09
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -49,10 +49,10 @@ version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Crislane Alves
-    email: crislanealves@basedosdados.org
-    github_user: crislanealves
-    ckan_user: crislanealves
+    name: Laura Amaral
+    email: laura.amaral@basedosdados.org
+    github_user: laura-l-amaral
+    ckan_user: laura-l-amaral
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
