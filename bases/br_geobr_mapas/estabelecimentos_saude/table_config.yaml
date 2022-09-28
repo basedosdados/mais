@@ -5,7 +5,7 @@ dataset_id: br_geobr_mapas
 table_id: estabelecimentos_saude
 
 # Título da tabela.
-title:
+title: Estabelecimentos de Saúde
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -112,7 +112,7 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-          - 2015
+          - '2015'
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -127,7 +127,7 @@ columns:
       bigquery_type: string
       description: Sigla da Unidade de Federação
       temporal_coverage:
-          - 2015
+          - '2015'
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -142,7 +142,7 @@ columns:
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-          - 2015
+          - '2015'
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -157,7 +157,7 @@ columns:
       bigquery_type: string
       description: Id estabelecimento - CNES
       temporal_coverage:
-          - 2015
+          - '2015'
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -172,7 +172,7 @@ columns:
       bigquery_type: string
       description: Coordenadas do Estabelecimento de Saúde
       temporal_coverage:
-          - 2015
+          - '2015'
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -184,6 +184,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows:
+number_rows: 360177
 
 metadata_modified: '2022-09-28T16:06:27.133326'
