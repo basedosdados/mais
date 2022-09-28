@@ -1,0 +1,45 @@
+Número de usuários no site
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: None
+Código: 
+Tratado por
+-----------
+Nome: None
+Código: 
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- reference_date
+
+
+
+
+Cobertura Temporal
+------------------
+- 2022-09-12(1)2022-09-19
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+
+
+
+
