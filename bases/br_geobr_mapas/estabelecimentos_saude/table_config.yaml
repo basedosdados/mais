@@ -35,20 +35,7 @@ update_frequency: uncertain
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-    - country: br
-      entity: state
-      columns:
-          - sigla_uf
-    - country: br
-      entity: municipality
-      columns:
-          - id_municipio
-    - country: br
-      entity: year
-      columns:
-          - ano
-    - country: br
-      entity: other
+    - entity: other
       columns:
           - id_cnes
           
