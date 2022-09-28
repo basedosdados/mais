@@ -24,7 +24,7 @@ Os principais erros encontrados do pacote da Base dos Dados no Rstudio são deri
 
     * Versão do pacote `dbplyr`
 
-Portanto, se alguns erro aparecer para você, por favor, tente primeiro checar se ele está relacionado a esses dois fatores.
+Portanto, se algum erro aparecer para você, por favor, tente primeiro checar se ele está relacionado a esses dois fatores.
 
 ### Autenticação
 A maioria dos erros do nosso pacote estão relacionados a problemas de autenticação. O pacote `basedosdados` requer que o usuário forneça todas as autenticações solicitadas pela função `basedosdados::set_billing_id`, inclusive aquelas que aparecem como optativas. Por isso, é necessário estar atento se você marcou todas as caixinhas de seleção quando o Rstudio disponibiliza essa tela no navegador:
