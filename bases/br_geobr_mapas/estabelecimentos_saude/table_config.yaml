@@ -5,14 +5,17 @@ dataset_id: br_geobr_mapas
 table_id: estabelecimentos_saude
 
 # Título da tabela.
-title: Estabelecimentos de Saúde
+title:
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
-
+description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente
+    os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros
+    conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade
+    de conjuntos de dados geográficos como recursos simples, disponíveis em várias
+    escalas geográficas e por vários anos.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -24,8 +27,7 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2015
-
+    - '2015'
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -33,12 +35,12 @@ update_frequency: uncertain
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-    - country: 
+    - country:
       entity: other
       column:
           - id_cnes
 
-last_updated: 
+last_updated:
     metadata: '2022-09-28'
     data: '2022-09-28 12:34:00'
     release:
@@ -53,7 +55,7 @@ published_by:
     email: arthur.gusmao@basedosdados.org
     github_user: arthurfg
     ckan_user:
-    website: 
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -66,7 +68,8 @@ data_cleaned_by:
     website: https://github.com/ipeaGIT/geobr
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: etl dos dados, rename e select para o Padrão da Base dos Dados. 
+data_cleaning_description: etl dos dados, rename e select para o Padrão da Base dos
+    Dados.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_geobr_mapas/code/
@@ -110,7 +113,7 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-          - '2015'
+          - 2015
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -119,13 +122,13 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       observations:
-      is_in_staging: true 
+      is_in_staging: true
       is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade de Federação
       temporal_coverage:
-          - '2015'
+          - 2015
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -140,7 +143,7 @@ columns:
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-          - '2015'
+          - 2015
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -153,9 +156,9 @@ columns:
       is_partition: false
     - name: id_cnes
       bigquery_type: string
-      description: ID estabelecimento - CNES
+      description: Id estabelecimento - CNES
       temporal_coverage:
-          - '2015'
+          - 2015
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -170,7 +173,7 @@ columns:
       bigquery_type: string
       description: Coordenadas do Estabelecimento de Saúde
       temporal_coverage:
-          - '2015'
+          - 2015
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -184,4 +187,4 @@ columns:
 
 number_rows: 360177
 
-metadata_modified: '2022-09-12T22:32:55.662123'
+metadata_modified: '2022-09-28T16:06:27.133326'
