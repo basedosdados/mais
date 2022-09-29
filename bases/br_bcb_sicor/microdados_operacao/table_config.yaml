@@ -34,6 +34,9 @@ observation_level:
   - entity: contract
   - columns:
     - id_referencia_bacen
+  - entity: other
+  - columns:
+    - numero_ordem
 
 last_updated:
     metadata: '2022-09-20'
@@ -408,7 +411,7 @@ columns:
       is_partition: false
     - name: cnpj_agente_investimento
       bigquery_type: string
-      description: Concedente da operação de investimento
+      description: CNPJ do concedente da operação de investimento
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
