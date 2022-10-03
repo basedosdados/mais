@@ -51,7 +51,7 @@ hover="background-color: var(--md-primary-fg-color--dark)">
 
 Agora você precisa fixar o projeto da BD no seu BigQuery, é bem simples, veja:
 
-![](images/bq_access_project_new.gif){ width=100% }
+![](images/bq_access_project_new.gif)
 
 Dentro do projeto existem dois níveis de organização dos dados,
 <strong>*datasets*</strong> (conjuntos de dados) e
