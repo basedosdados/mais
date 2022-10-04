@@ -41,7 +41,7 @@ class Base:
         """
         # standard config_path configuration
         config_path = (
-            config.project_config_path
+            Path(config.project_config_path)
             if config.project_config_path is not None
             else Path.home() / config_path
         )
