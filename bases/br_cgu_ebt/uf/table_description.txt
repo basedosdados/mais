@@ -1,0 +1,48 @@
+Rankeamento dos estados baseado em critérios de divulgação dos dados do executivo estadual
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Patrick Teixeira
+Código: 
+Email: patrick.tx@hotmail.com.br
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2020(1)2021
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Seleção de algumas variáveis, criação da variável ano, junção dos anos de cobertura, renomeação das variáveis, substituição do nome das UFs por sigla_uf, distinção das bases por uf e município
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
