@@ -1,7 +1,12 @@
 
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_ibge_ipca
 
 table_id: mes_categoria_brasil
+
+# Título da tabela.
+title: Variação da Inflação no Brasil
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -10,76 +15,73 @@ table_id: mes_categoria_brasil
 description: Tabela com as variações da inflação (IPCA) e peso dos produtos e serviços
     na cesta de inflação do IBGE (a partir de janeiro/2020)
 
-# A máxima unidade espacial que a tabela cobre.
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
 spatial_coverage:
-    continent:
-        - south_america
-    country:
-        - bra
-    admin1:
-    admin2:
+    - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2020
-    - 2021
+    - 2020-01(1)2022-08
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: month
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity:
-    - country
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit: month
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns:
-    - ano
-    - mes
-    - id_categoria_bd
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: year
+      columns:
+          - ano
+    - entity: month
+      columns:
+          - mes
+    - entity: other
+      columns:
+          - id_categoria_bd
 
 last_updated:
-    metadata:
-    data: '2022-01-12T00:00:00+00:00'
-    release:
+    metadata: '2022-10-05 20:10:05'
+    data: '2022-05-31 20:10:05'
+    release: '2022-10-05 20:10:05'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.0
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Gustavo Aires Tiago
-    email: gustavo.tiago@basedosdados.org
-    github_user: https://github.com/gustavoairestiago
+    name: Laura Lopes Amaral
+    email: laura.amaral@basedosdados.org
+    github_user: https://github.com/laura-l-amaral
+    ckan_user: laura-amaral
     website:
-    ckan_user: gustavoairestiago
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Gustavo Aires Tiago
-    email: gustago.tiago@basedosdados.org
-    github_user: https://github.com/gustavoairestiago
-    ckan_user: gustavoairestiago
-    website: ''
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_ipca/code
+    name: Lucas Rodrigues
+    email: lucas.rodrigues@basedosdados.org
+    github_user: lucascr91
+    ckan_user:
+    website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: '- Separação em coluna de Ano e Mês - Parametrização da
     coluna id_categoria identificadora de produtos ou serviços para uma estrutura
     de árvore hierárquica em id_categoria_bd'
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/pipelines/tree/master/pipelines/datasets/br_ibge_ipca
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: ''
+    organization_id: ''
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -89,10 +91,6 @@ auxiliary_files_url:
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
-
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary: no
 
 source_bucket_name: basedosdados-dev
 
@@ -105,8 +103,6 @@ project_id_staging: basedosdados-dev
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions:
-
-bdm_file_size:
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -121,32 +117,37 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-      covered_by_dictionary: yes
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
       measurement_unit: year
       has_sensitive_data: no
+      observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: mes
       bigquery_type: int64
       description: Mês
       temporal_coverage:
-      covered_by_dictionary: yes
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: mes
           column_name: mes
       measurement_unit: month
       has_sensitive_data: no
+      observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_categoria
       bigquery_type: string
       description: Código identificador grupo
       temporal_coverage:
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -154,13 +155,15 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_categoria_bd
       bigquery_type: string
       description: Código identificador grupo - Base dos dados - Baseado em id_categoria
           para criação de estrutura hierárquica
       temporal_coverage:
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -168,12 +171,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: categoria
       bigquery_type: string
       description: Descrição da categoria
       temporal_coverage:
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -181,25 +186,29 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso_mensal
       bigquery_type: float64
       description: Peso percentual mensal do item
       temporal_coverage:
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: percent
       has_sensitive_data: no
+      observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_mensal
       bigquery_type: float64
       description: Variação percentual mensal
       temporal_coverage:
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -207,12 +216,14 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
+      observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_anual
       bigquery_type: float64
       description: Variação percentual acumulada no ano
       temporal_coverage:
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -220,12 +231,14 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
+      observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: variacao_doze_meses
       bigquery_type: float64
       description: Variação percentual acumulada em doze meses
       temporal_coverage:
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -233,7 +246,10 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
+      observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
-metadata_modified: '2022-01-18T16:15:07.529728'
+number_rows: 513
+
+metadata_modified: '2022-09-23T15:11:11.391421'
