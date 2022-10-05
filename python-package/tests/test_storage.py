@@ -7,6 +7,10 @@ from pathlib import Path
 import pytest
 from google.api_core.exceptions import NotFound
 from basedosdados import Storage
+from google.cloud import storage as storage_gcloud
+import os
+import basedosdados as bd
+
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
@@ -122,10 +126,6 @@ def test_download_default(storage):
         Path(SAVEPATH) / "staging" / DATASET_ID / TABLE_ID / "municipio.csv"
     ).is_file()
 
-    assert (
-        Path(SAVEPATH) / "staging" / DATASET_ID / TABLE_ID / "municipio2.csv"
-    ).is_file()
-
 
 def test_delete_file(storage):
     '''
@@ -164,3 +164,37 @@ def test_delete_table():
 
     with pytest.raises(FileNotFoundError):
         Storage("br_ibge_pib", "municipio").delete_table()
+
+
+def test_change_path_credentials(storage):
+    '''
+    Test the change_path_credentials method
+    '''
+
+    # check if .basedosdados folder exists
+    if not Path.home().joinpath(".basedosdados").exists():
+        raise FileNotFoundError("You need to run the init command first")
+
+    # get home dir
+    home = str(Path.home())
+
+    os.system(f'mkdir {home}/.testcredentials')
+    os.system(f'cp -r {home}/.basedosdados/* .testcredentials')
+
+    bd.config.project_config_path=f'{home}/.testcredentials'
+
+    storage.copy_table(source_bucket_name='basedosdados-dev', destination_bucket_name='basedosdados-dev-backup')
+    os.system(f'rm -r {home}/.testcredentials')
+
+    # check if file exist in new bucket
+    client = storage_gcloud.Client()
+    files = [blob.name for blob in client.list_blobs('basedosdados-dev-backup')]
+
+    # delete file from new bucket
+    bucket = client.get_bucket('basedosdados-dev-backup')
+    blob = bucket.blob(f'staging/{DATASET_ID}/{TABLE_ID}/municipio.csv')
+    blob.delete()
+
+    assert f'staging/{DATASET_ID}/{TABLE_ID}/municipio.csv' in files
+
+
