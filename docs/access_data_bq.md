@@ -49,10 +49,9 @@ hover="background-color: var(--md-primary-fg-color--dark)">
     Ir para BigQuery :material-arrow-right:
 </a>
 
-Na sua tela deverá aparecer o projeto fixado no menu lateral esquerdo,
-como na imagem abaixo.
+Agora você precisa fixar o projeto da BD no seu BigQuery, é bem simples, veja:
 
-![](images/bq_access_project.png){ width=100% }
+![](images/bq_access_project_new.gif)
 
 Dentro do projeto existem dois níveis de organização dos dados,
 <strong>*datasets*</strong> (conjuntos de dados) e
