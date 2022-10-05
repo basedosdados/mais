@@ -26,7 +26,7 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2020-01(1)2022-06
+    - 2020-01(1)2022-08
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -43,24 +43,25 @@ observation_level:
     - entity: month
       columns:
           - mes
-    - columns:
+    - entity: other
+      columns:
           - id_categoria_bd
 
 last_updated:
-    metadata: '2022-04-25'
-    data: '2022-07-25 01:48:47'
-    release:
+    metadata: '2022-10-05 16:14:59'
+    data: '2022-08-20 16:14:59'
+    release: '2022-08-20 16:14:59'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.0
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Gustavo Aires Tiago
-    email: gustavo.tiago@basedosdados.org
-    github_user: https://github.com/gustavoairestiago
-    ckan_user: gustavoairestiago
+    name: Laura Lopes Amaral
+    email: laura.amaral@basedosdados.org
+    github_user: https://github.com/laura-l-amaral
+    ckan_user: laura-amaral
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
@@ -103,7 +104,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: []
+partitions: 
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -119,7 +120,7 @@ columns:
       description: Ano
       temporal_coverage:
         - (1)
-      covered_by_dictionary: yes
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
@@ -134,7 +135,7 @@ columns:
       description: Mês
       temporal_coverage:
         - (1)
-      covered_by_dictionary: yes
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: mes
@@ -149,7 +150,7 @@ columns:
       description: ID do Município IBGE - 7 Dígitos
       temporal_coverage:
         - (1)
-      covered_by_dictionary: yes
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
@@ -215,7 +216,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: percent
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -266,6 +267,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows:
+number_rows: 87744
 
-metadata_modified: '2022-07-28T22:50:53.461478'
+metadata_modified: '2022-09-23T15:13:40.711253'
