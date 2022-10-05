@@ -184,7 +184,7 @@ def test_change_path_credentials(storage, sample_data):
     home = str(Path.home())
 
     os.system(f"mkdir {home}/.testcredentials")
-    os.system(f"cp -r {home}/.basedosdados/* .testcredentials")
+    os.system(f"mv -r {home}/.basedosdados/* .testcredentials")
 
     bd.config.project_config_path = f"{home}/.testcredentials"
 
@@ -192,7 +192,6 @@ def test_change_path_credentials(storage, sample_data):
         source_bucket_name="basedosdados-dev",
         destination_bucket_name="basedosdados-dev-backup",
     )
-    os.system(f"rm -r {home}/.testcredentials")
 
     # check if file exist in new bucket
     client = storage_gcloud.Client()
@@ -203,5 +202,9 @@ def test_change_path_credentials(storage, sample_data):
     bucket = client.get_bucket("basedosdados-dev-backup")
     blob = bucket.blob(file)
     blob.delete()
+
+    # move again .basedosdados folder
+    os.system(f"mv -r {home}/.testcredentials/* .basedosdados")
+    os.system(f"rm -r {home}/.testcredentials")
 
     assert file in files
