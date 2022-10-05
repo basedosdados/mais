@@ -167,10 +167,14 @@ def test_delete_table():
         Storage("br_ibge_pib", "municipio").delete_table()
 
 
-def test_change_path_credentials(storage):
+def test_change_path_credentials(storage, sample_data):
     """
     Test the change_path_credentials method
     """
+
+    storage.delete_file("municipio.csv", "staging", not_found_ok=True)
+
+    storage.upload(sample_data / "municipio.csv", mode="staging")
 
     # check if .basedosdados folder exists
     if not Path.home().joinpath(".basedosdados").exists():
@@ -195,8 +199,9 @@ def test_change_path_credentials(storage):
     files = [blob.name for blob in client.list_blobs("basedosdados-dev-backup")]
 
     # delete file from new bucket
+    file =f'staging/{DATASET_ID}/{TABLE_ID}/municipio.csv'
     bucket = client.get_bucket("basedosdados-dev-backup")
-    blob = bucket.blob(f"staging/{DATASET_ID}/{TABLE_ID}/municipio.csv")
+    blob = bucket.blob(file)
     blob.delete()
 
-    assert f"staging/{DATASET_ID}/{TABLE_ID}/municipio.csv" in files
+    assert file in files
