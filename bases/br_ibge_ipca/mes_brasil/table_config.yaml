@@ -32,7 +32,6 @@ update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-    - entity: country
     - entity: year
       columns:
           - ano
