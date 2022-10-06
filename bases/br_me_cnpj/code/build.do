@@ -1,61 +1,17 @@
 
-cd "~/Downloads/2022-08-13"
+cd "~/Downloads/br_me_cnpj"
 
-//---------------------------//
-// socios
-//---------------------------//
-
-foreach j of numlist 0(1)9 {
-	
-	import delimited "input/K3241.K03200Y`j'.D20813.SOCIOCSV", clear stringcols(_all) //rowr(1:100000)
-	
-	ren v1  cnpj_basico
-	ren v2  tipo
-	ren v3  nome
-	ren v4  documento
-	ren v5  qualificacao
-	ren v6  data_entrada_sociedade
-	ren v7  id_pais
-	ren v8  cpf_representante_legal
-	ren v9  nome_representante_legal
-	ren v10 qualificacao_representante_legal
-	ren v11 faixa_etaria
-	
-	foreach k in qualificacao qualificacao_representante_legal {
-		replace `k' = "0" if `k' == "00"
-		replace `k' = "5" if `k' == "05"
-		replace `k' = "6" if `k' == "06"
-		replace `k' = "8" if `k' == "08"
-		replace `k' = "9" if `k' == "09"
-	}
-	
-	replace cpf_representante_legal = "" if cpf_representante_legal == "***000000**"
-	
-	foreach k of varlist data_* {
-		replace `k' = substr(`k', 1, 4) + "-" + substr(`k', 5, 2) + "-" + substr(`k', 7, 2) if `k' != ""
-	}
-	
-	tempfile socios_`j'
-	save `socios_`j''
-	
-}
-
-use `socios_0'
-foreach j of numlist 1(1)9 {
-	append using `socios_`j''
-}
-
-!mkdir -p "output/socios/data=2022-08-13"
-
-export delimited "output/socios/data=2022-08-13/socios.csv", replace
+local subpath "D20910"
 
 //---------------------------//
 // empresas
 //---------------------------//
 
+!mkdir -p "output/empresas"
+
 foreach j of numlist 0(1)9 {
 	
-	import delimited "input/K3241.K03200Y0.D20813.EMPRECSV", clear stringcols(_all) //rowr(1:100000)
+	import delimited "input/K3241.K03200Y`j'.`subpath'.EMPRECSV", clear stringcols(_all) //rowr(1:10000)
 	
 	ren v1 cnpj_basico
 	ren v2 razao_social
@@ -72,34 +28,24 @@ foreach j of numlist 0(1)9 {
 	replace porte = "3" if porte == "03"
 	replace porte = "5" if porte == "05"
 	
-	tempfile empresas_`j'
-	save `empresas_`j''
+	export delimited "output/empresas/empresas_`j'.csv", replace
 	
 }
-
-use `empresas_0'
-foreach j of numlist 1(1)9 {
-	append using `empresas_`j''
-}
-
-!mkdir -p "output/empresas/data=2022-08-13"
-
-export delimited "output/empresas/data=2022-08-13/empresas.csv", replace
 
 //---------------------------//
 // estabelecimentos
 //---------------------------//
+
+!mkdir -p "output/estabelecimentos"
 
 import delimited "input/municipio.csv", clear varn(1) encoding("utf-8")
 keep id_municipio id_municipio_rf
 tempfile municipio
 save `municipio'
 
-!mkdir -p "output/estabelecimentos/data=2022-08-13"
-
 foreach j of numlist 0(1)9 {
 	
-	import delimited "input/K3241.K03200Y`j'.D20813.ESTABELE", clear stringcols(_all) //rowr(1:100000)
+	import delimited "input/K3241.K03200Y`j'.`subpath'.ESTABELE", clear stringcols(_all) //rowr(1:200000)
 	
 	ren v1  cnpj_basico
 	ren v2  cnpj_ordem
@@ -148,7 +94,12 @@ foreach j of numlist 0(1)9 {
 		replace `k' = "9" if `k' == "09"
 	}
 	
+	destring id_pais, replace	// remove zeros to the left
+	tostring id_pais, replace
+	replace id_pais = "" if id_pais == "."
+	
 	foreach k of varlist data_* {
+		replace `k' = "" if `k' == "0"
 		replace `k' = substr(`k', 1, 4) + "-" + substr(`k', 5, 2) + "-" + substr(`k', 7, 2) if `k' != ""
 	}
 	
@@ -160,23 +111,68 @@ foreach j of numlist 0(1)9 {
 	drop _merge
 	order id_municipio, b(id_municipio_rf)
 	
+	order sigla_uf id_municipio id_municipio_rf, b(tipo_logradouro)
+	
 	levelsof sigla_uf, l(ufs)
 	foreach uf in `ufs' {
-		!mkdir -p "output/estabelecimentos/data=2022-08-13/sigla_uf=`uf'"
+		!mkdir -p "output/estabelecimentos/sigla_uf=`uf'"
 		preserve
 			keep if sigla_uf == "`uf'"
 			drop sigla_uf
-			export delimited "output/estabelecimentos/data=2022-08-13/sigla_uf=`uf'/estabelecimentos_`j'.csv", replace
+			export delimited "output/estabelecimentos/sigla_uf=`uf'/estabelecimentos_`j'.csv", replace
 		restore
 	}
 	
 }
 
 //---------------------------//
+// socios
+//---------------------------//
+
+!mkdir -p "output/socios"
+
+foreach j of numlist 0(1)9 {
+
+	import delimited "input/K3241.K03200Y`j'.`subpath'.SOCIOCSV", clear stringcols(_all) //rowr(1:100000)
+	
+	ren v1  cnpj_basico
+	ren v2  tipo
+	ren v3  nome
+	ren v4  documento
+	ren v5  qualificacao
+	ren v6  data_entrada_sociedade
+	ren v7  id_pais
+	ren v8  cpf_representante_legal
+	ren v9  nome_representante_legal
+	ren v10 qualificacao_representante_legal
+	ren v11 faixa_etaria
+	
+	foreach k in qualificacao qualificacao_representante_legal {
+		replace `k' = "0" if `k' == "00"
+		replace `k' = "5" if `k' == "05"
+		replace `k' = "6" if `k' == "06"
+		replace `k' = "8" if `k' == "08"
+		replace `k' = "9" if `k' == "09"
+	}
+	
+	replace cpf_representante_legal = "" if cpf_representante_legal == "***000000**"
+	
+	foreach k of varlist data_* {
+		replace `k' = "" if `k' == "0"
+		replace `k' = substr(`k', 1, 4) + "-" + substr(`k', 5, 2) + "-" + substr(`k', 7, 2) if `k' != ""
+	}
+	
+	export delimited "output/socios/socios_`j'.csv", replace
+
+}
+
+//---------------------------//
 // simples
 //---------------------------//
 
-import delimited "input/F.K03200.W.SIMPLES.CSV.D20813", clear stringcols(_all) //rowr(1:100000)
+!mkdir -p "output/simples"
+
+import delimited "input/F.K03200.W.SIMPLES.CSV.`subpath'", clear stringcols(_all) //rowr(1:100000)
 
 ren v1 cnpj_basico
 ren v2 opcao_simples
@@ -193,13 +189,11 @@ replace opcao_mei = "0" if opcao_mei == "N"
 replace opcao_mei = "1" if opcao_mei == "S"
 
 foreach k of varlist data_* {
-	replace `k' = "" if `k' == "00000000"
+	replace `k' = "" if `k' == "0" | `k' == "00000000"
 	replace `k' = substr(`k', 1, 4) + "-" + substr(`k', 5, 2) + "-" + substr(`k', 7, 2) if `k' != ""
 }
 
-!mkdir -p "output/simples/data=2022-08-13"
-
-export delimited "output/simples/data=2022-08-13/simples.csv", replace
+export delimited "output/simples/simples.csv", replace
 
 
 

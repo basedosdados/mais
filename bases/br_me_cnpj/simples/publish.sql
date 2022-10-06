@@ -19,7 +19,6 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_me_cnpj.simples AS
 SELECT 
-SAFE_CAST(data AS DATE) data,
 SAFE_CAST(cnpj_basico AS STRING) cnpj_basico,
 SAFE_CAST(opcao_simples AS INT64) opcao_simples,
 SAFE_CAST(data_opcao_simples AS DATE) data_opcao_simples,
