@@ -6,7 +6,7 @@ dataset_id: br_ibge_nomes_brasil
 table_id: quantidade_municipio_nome_2010
 
 # Título da tabela.
-title: 'Quantidade de pessoas nascidas - 2010'
+title: 'Quantidade de pessoas nascidas até 2010'
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -148,7 +148,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       observations:
       is_in_staging: true
