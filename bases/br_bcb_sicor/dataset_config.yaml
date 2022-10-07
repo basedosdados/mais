@@ -10,7 +10,7 @@ title: Microdados do Sistema de Operações do Crédito Rural e do Proagro (Sico
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 # Exemplos: br-ibge, br-tse, br-rj-gov
-organization: br-bacen
+organization: br-bcb
 
 # Descrição do conjunto
 notes: O crédito rural é o financiamento destinado ao segmento rural. Os produtores rurais utilizam os recursos concedidos pelas instituições financeiras nessa linha de crédito de diversas maneiras na sua propriedade. Por exemplo, podem investir em novos equipamentos e animais ou custear matéria prima para o cultivo. Podem ainda utilizar esses recursos para comercializar e industrializar a produção. São as chamadas finalidades do crédito rural.
