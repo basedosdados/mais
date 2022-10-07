@@ -1,7 +1,7 @@
 '''
 Functions to get metadata from BD's API
 '''
-# pylint: disable=invalid-name,use-maxsplit-arg
+# pylint: disable=invalid-name,use-maxsplit-arg,line-too-long
 from collections import defaultdict
 import math
 
@@ -15,7 +15,7 @@ def _safe_fetch(url: str):
     """
     response = None
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
         response.raise_for_status()
     except requests.exceptions.HTTPError as errh:
         print("Http Error:", errh)

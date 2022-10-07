@@ -1,7 +1,7 @@
 """
 Class for manage tables in Storage and Big Query
 """
-# pylint: disable=invalid-name, too-many-locals, too-many-branches, too-many-arguments
+# pylint: disable=invalid-name, too-many-locals, too-many-branches, too-many-arguments,line-too-long,R0801,consider-using-f-string
 from pathlib import Path
 import json
 from copy import deepcopy
@@ -236,7 +236,7 @@ class Table(Base):
         """
         url = columns_config_url_or_path.replace("edit#gid=", "export?format=csv&gid=")
         try:
-            return pd.read_csv(StringIO(requests.get(url).content.decode("utf-8")))
+            return pd.read_csv(StringIO(requests.get(url, timeout=10).content.decode("utf-8")))
         except Exception as e:
             raise BaseDosDadosException(
                 "Check if your google sheet Share are: Anyone on the internet with this link can view"
@@ -326,7 +326,7 @@ class Table(Base):
             for required_column in required_columns:
                 if sheet_column == required_column:
                     not_found_columns.remove(required_column)
-        if not_found_columns != []:
+        if not_found_columns:
             raise BaseDosDadosException(
                 f"The following required columns are not found: {', '.join(not_found_columns)}."
             )
