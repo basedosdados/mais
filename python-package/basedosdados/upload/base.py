@@ -1,7 +1,7 @@
 """
 Module for manage dataset using local credentials and config files
 """
-# pylint: disable=line-too-long, invalid-name, too-many-arguments, invalid-envvar-value
+# pylint: disable=line-too-long, invalid-name, too-many-arguments, invalid-envvar-value,line-too-long
 from pathlib import Path
 import sys
 from os import getenv
@@ -41,12 +41,12 @@ class Base:
         """
         # standard config_path configuration
         config_path = (
-            config.project_config_path
+            Path(config.project_config_path)
             if config.project_config_path is not None
-            else config_path
+            else Path.home() / config_path
         )
 
-        self.config_path = Path.home() / config_path
+        self.config_path =  config_path
         self._init_config(force=overwrite_cli_config)
         self.config = self._load_config()
         self._config_log(config.verbose)
@@ -199,7 +199,7 @@ class Base:
         config_file = self.config_path / "config.toml"
 
         # Create credentials folder
-        credentials_folder = Path.home() / self.config_path / "credentials"
+        credentials_folder = self.config_path / "credentials"
         credentials_folder.mkdir(exist_ok=True, parents=True)
 
         # Create template folder
@@ -259,7 +259,7 @@ class Base:
 
             ############# STEP 2 - CREDENTIALS PATH ######################
 
-            credentials_path = Path.home() / ".basedosdados" / "credentials"
+            credentials_path = self.config_path / "credentials"
             credentials_path = Path(
                 self._selection_yn(
                     first_question=(
@@ -335,7 +335,7 @@ class Base:
 
             ############# STEP 6 - SET TEMPLATES #######################
 
-            c_file["templates_path"] = str(Path.home() / ".basedosdados" / "templates")
+            c_file["templates_path"] = str(self.config_path / "templates")
 
             config_file.open("w", encoding="utf-8").write(tomlkit.dumps(c_file))
 
@@ -360,7 +360,7 @@ class Base:
         if getenv(constants.ENV_CONFIG.value):
             return tomlkit.parse(self._decode_env(constants.ENV_CONFIG.value))
         return tomlkit.parse(
-            (Path.home() / ".basedosdados" / "config.toml")
+            (self.config_path / "config.toml")
             .open("r", encoding="utf-8")
             .read()
         )
