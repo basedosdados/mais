@@ -62,6 +62,6 @@ SAFE_CAST(taxa_juro_encargo_financeiro_posfixado AS FLOAT64) taxa_juro_encargo_f
 SAFE_CAST(valor_percentual_risco_stn AS FLOAT64) valor_percentual_risco_stn,
 SAFE_CAST(valor_percentual_custo_efetivo_total AS FLOAT64) valor_percentual_custo_efetivo_total,
 SAFE_CAST(valor_percentual_risco_fundo_constitucional AS FLOAT64) valor_percentual_risco_fundo_constitucional,
-SAFE_CAST(ano_safra_emissao AS STRING) ano_safra_emissao,
-SAFE_CAST(ano_safra_vencimento AS STRING) ano_safra_vencimento
+SAFE_CAST(ano_safra_emissao AS INT64) ano_safra_emissao,
+SAFE_CAST(ano_safra_vencimento AS INT64) ano_safra_vencimento
 FROM basedosdados-dev.br_bcb_sicor_staging.microdados_operacao AS t

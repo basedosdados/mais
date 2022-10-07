@@ -40,10 +40,10 @@ update_frequency: one_year
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
     - entity: contract
-    - columns:
+      columns:
           - id_referencia_bacen
     - entity: other
-    - columns:
+      columns:
           - numero_ordem
 
 last_updated:
@@ -766,7 +766,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: ano_safra_emissao
-      bigquery_type: string
+      bigquery_type: int64
       description: Ano safra de vencimento da operação
       temporal_coverage:
           - (1)
@@ -781,7 +781,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: ano_safra_vencimento
-      bigquery_type: string
+      bigquery_type: int64
       description: Ano safra de emissao da operação
       temporal_coverage:
           - (1)
