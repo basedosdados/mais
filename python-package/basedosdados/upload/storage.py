@@ -1,7 +1,7 @@
 '''
 Class for managing the files in cloud storage.
 '''
-# pylint: disable=invalid-name, too-many-arguments, undefined-loop-variable
+# pylint: disable=invalid-name, too-many-arguments, undefined-loop-variable,line-too-long,broad-except,R0801
 import time
 from pathlib import Path
 import sys
