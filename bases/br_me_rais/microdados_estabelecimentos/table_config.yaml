@@ -1,77 +1,42 @@
+
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_me_rais
 
 table_id: microdados_estabelecimentos
+
+# Título da tabela.
+title: 'Microdados - Estabelecimentos'
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: "Microdados de estabelecimentos da RAIS." 
+description: "Microdados de estabelecimentos da RAIS."
 
-# A máxima unidade espacial que a tabela cobre.
-spatial_coverage: bra
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 1985
-    - 1986
-    - 1987
-    - 1988
-    - 1989
-    - 1990
-    - 1991
-    - 1992
-    - 1993
-    - 1994
-    - 1995
-    - 1996
-    - 1997
-    - 1998
-    - 1999
-    - 2000
-    - 2001
-    - 2002
-    - 2003
-    - 2004
-    - 2005
-    - 2006
-    - 2007
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
+    - 1985(1)2020
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: one_year
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity: []
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit: one_year
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns:
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: company
 
 last_updated:
-    metadata:
-    data:
+    metadata: '2022-09-04'
+    data: '2022-09-04 20:57:07'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -83,8 +48,8 @@ published_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
     github_user: rdahis
-    website: www.ricardodahis.com
     ckan_user: rdahis
+    website: www.ricardodahis.com
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -95,11 +60,17 @@ data_cleaned_by:
     github_user: rdahis
     ckan_user: rdahis
     website: www.ricardodahis.com
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "- Unificamos todos os anos.\n - Padronizamos nomes de\
-    \ variáveis.\n - Limpamos valores errados de células."
+data_cleaning_description: "- Unificamos todos os anos | Padronizamos nomes de variáveis | Limpamos valores errados de células."
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: ''
+    organization_id: ''
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -109,10 +80,6 @@ auxiliary_files_url:
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
-
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary: yes
 
 source_bucket_name: basedosdados-dev
 
@@ -124,9 +91,9 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: ano, sigla_uf
-
-bdm_file_size:
+partitions:
+    - ano
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -141,343 +108,393 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
       measurement_unit: year
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: true
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: uf
-          column_name: sigla_uf
+          column_name: sigla
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: true
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
           column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: quantidade_vinculos_ativos
       bigquery_type: int64
-      description: Estoque de vínculos ativos em 31/12 (quando acumulada representa
-          a soma dos vinculos ativos).
+      description: Estoque de vínculos ativos em 31/12.
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Quando acumulada representa a soma dos vinculos ativos
       is_in_staging: true
       is_partition: false
     - name: quantidade_vinculos_clt
       bigquery_type: int64
       description: Estoque de vínculos, sob o regime CLT e Outros, ativos em 31/12
-          (quando acumulada representa a soma dos vinculos ativos).
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Quando acumulada representa a soma dos vinculos ativos
       is_in_staging: true
       is_partition: false
     - name: quantidade_vinculos_estatutarios
       bigquery_type: int64
       description: Estoque de vínculos, sob o regime estatutário, ativos em 31/12
-          (quando acumulada representa a soma dos vinculos ativos).
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Quando acumulada representa a soma dos vinculos ativos
       is_in_staging: true
       is_partition: false
     - name: natureza
       bigquery_type: string
       description: Natureza
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: natureza_juridica
       bigquery_type: string
       description: Natureza jurídica (CONCLA/2002)
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: tamanho
       bigquery_type: string
       description: Tamanho - empregados ativos em 31/12.
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: tipo
       bigquery_type: string
       description: Tipo
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: indicador_cei_vinculado
       bigquery_type: int64
       description: Indicador de CEI vinculado.
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: indicador_pat
       bigquery_type: int64
       description: Indicador de estabelecimento pertencente ao PAT.
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: indicador_simples
       bigquery_type: int64
       description: Indicador de optante pelo SIMPLES.
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: indicador_rais_negativa
       bigquery_type: int64
       description: Indicador de Rais Negativa.
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: indicador_atividade_ano
       bigquery_type: int64
-      description: Indicador de estabelecimento/entidade que exerceu atividade durante
-          o ano de referência.
+      description: Indicador de estabelecimento/entidade que exerceu atividade durante o ano de referência.
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: cnae_1
       bigquery_type: string
       description: Código Nacional de Atividades Econômicas 1.0
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: cnae_1
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: cnae_2
       bigquery_type: string
       description: Código Nacional de Atividades Econômicas 2.0
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: cnae_2
           column_name: cnae_2
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: cnae_2_subclasse
       bigquery_type: string
       description: Subclasse do Código Nacional de Atividades Econômicas 2.0
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: subsetor_ibge
       bigquery_type: string
       description: Subsetor IBGE
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: subatividade_ibge
       bigquery_type: string
       description: Subatividade IBGE
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: cep
       bigquery_type: string
       description: Código de Endereçamento Postal
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: bairros_sp
       bigquery_type: string
       description: Bairros do Municipio de São Paulo
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: distritos_sp
       bigquery_type: string
       description: Distritos do município de São Paulo
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: bairros_fortaleza
       bigquery_type: string
       description: Bairros do município de Fortaleza
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: bairros_rj
       bigquery_type: string
       description: Bairros do município do Rio de Janeiro
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: regioes_administrativas_df
       bigquery_type: string
       description: Regiões Administrativas do Distrito Federal
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2021-11-17T12:33:50.358664'
+number_rows: 189912136
+
+metadata_modified: '2022-09-12T22:53:22.271251'
