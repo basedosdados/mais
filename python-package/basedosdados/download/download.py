@@ -1,7 +1,7 @@
 """
 Functions for managing downloads
 """
-# pylint: disable=too-many-arguments, fixme, invalid-name, protected-access
+# pylint: disable=too-many-arguments, fixme, invalid-name, protected-access,line-too-long
 from pathlib import Path
 from functools import partialmethod
 import re
@@ -14,6 +14,7 @@ from pydata_google_auth.exceptions import PyDataCredentialsError
 from google.cloud import bigquery_storage_v1
 from google.cloud import bigquery
 import pandas_gbq
+from pandas_gbq.gbq import GenericGBQException
 
 from basedosdados.download.base import google_client, credentials
 from basedosdados.exceptions import (
@@ -24,7 +25,6 @@ from basedosdados.exceptions import (
     BaseDosDadosNoBillingProjectIDException,
 )
 from basedosdados.constants import config
-from pandas_gbq.gbq import GenericGBQException
 
 
 def _set_config_variables(billing_project_id, from_file):
