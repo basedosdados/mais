@@ -24,6 +24,6 @@ jobs:
         uses: gabriel-milan/action-pylint@v1
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          path: "python-package/"
+          path: "python-package/basedosdados/"
           fail: true
           pr-message: true
