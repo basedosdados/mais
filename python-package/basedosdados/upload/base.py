@@ -1,7 +1,7 @@
 """
 Module for manage dataset using local credentials and config files
 """
-# pylint: disable=line-too-long, invalid-name, too-many-arguments, invalid-envvar-value
+# pylint: disable=line-too-long, invalid-name, too-many-arguments, invalid-envvar-value,line-too-long
 from pathlib import Path
 import sys
 from os import getenv
