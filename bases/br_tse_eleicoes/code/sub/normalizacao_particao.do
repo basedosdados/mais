@@ -12,7 +12,7 @@
 //----------------------//
 
 use "output/candidatos_1994.dta", clear
-foreach ano of numlist 1996(2)2020 {
+foreach ano of numlist 1996(2)2022 {
 	append using "output/candidatos_`ano'.dta"
 }
 *
@@ -151,7 +151,7 @@ foreach ano in `anos' {
 //-------------------------------------------------//
 
 use "output/partidos_1990.dta", clear
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	append using "output/partidos_`ano'.dta"
 }
 *
@@ -170,7 +170,7 @@ save "output/norm_partidos.dta", replace
 
 !mkdir "output/partidos"
 
-foreach ano of numlist 1990 1994(2)2020 {
+foreach ano of numlist 1990 1994(2)2022 {
 	
 	!mkdir "output/partidos/ano=`ano'"
 	
@@ -222,7 +222,7 @@ save `candidatos_mod2_presid'
 !mkdir "output/resultados_candidato_municipio_zona"
 !mkdir "output/resultados_partido_municipio_zona"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	//---------------------//
 	// candidato-municipio-zona
@@ -376,7 +376,7 @@ save `candidatos_mod2_presid'
 !mkdir "output/resultados_candidato_secao"
 !mkdir "output/resultados_partido_secao"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 2018(2)2022 { // 1994(2)2022 {
 	
 	//---------------------//
 	// candidato
@@ -507,7 +507,7 @@ foreach ano of numlist 1994(2)2020 {
 
 !mkdir "output/perfil_eleitorado_municipio_zona"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/perfil_eleitorado_municipio_zona/ano=`ano'"
 	
@@ -533,7 +533,7 @@ foreach ano of numlist 1994(2)2020 {
 
 !mkdir "output/perfil_eleitorado_local_votacao"
 
-foreach ano of numlist 2016(2)2020 {
+foreach ano of numlist 2016(2)2022 {
 	
 	!mkdir "output/perfil_eleitorado_local_votacao/ano=`ano'"
 	
@@ -561,7 +561,7 @@ foreach ano of numlist 2016(2)2020 {
 
 !mkdir "output/perfil_eleitorado_secao"
 
-foreach ano of numlist 2008(2)2020 {
+foreach ano of numlist 2008(2)2022 {
 	
 	!mkdir "output/perfil_eleitorado_secao/ano=`ano'"
 	
@@ -588,7 +588,7 @@ foreach ano of numlist 2008(2)2020 {
 
 !mkdir "output/detalhes_votacao_municipio_zona"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/detalhes_votacao_municipio_zona/ano=`ano'"
 	
@@ -615,7 +615,7 @@ foreach ano of numlist 1994(2)2020 {
 
 !mkdir "output/detalhes_votacao_secao"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/detalhes_votacao_secao/ano=`ano'"
 	
@@ -641,7 +641,7 @@ foreach ano of numlist 1994(2)2020 {
 //-------------------------------------------------//
 
 use "output/vagas_1994.dta", clear
-foreach ano of numlist 1996(2)2020 {
+foreach ano of numlist 1996(2)2022 {
 	append using "output/vagas_`ano'.dta"
 }
 save "output/norm_vagas.dta", replace
@@ -724,7 +724,7 @@ save `candidatos'
 
 !mkdir "output/bens_candidato"
 
-foreach ano of numlist 2006(2)2020 {
+foreach ano of numlist 2006(2)2022 {
 	
 	!mkdir "output/bens_candidato/ano=`ano'"
 	
@@ -762,7 +762,7 @@ foreach ano of numlist 2006(2)2020 {
 // unifica header
 //--------------------//
 
-foreach ano of numlist 2002(2)2020 {
+foreach ano of numlist 2002(2)2022 {
 	
 	use "output/receitas_candidato_`ano'.dta", clear
 	
@@ -775,7 +775,7 @@ foreach ano of numlist 2002(2)2020 {
 *
 
 use `c2002', clear
-foreach ano of numlist 2004(2)2020 {
+foreach ano of numlist 2004(2)2022 {
 	append using `c`ano''
 }
 *
@@ -814,7 +814,7 @@ save `candidatos_mod2_presid'
 
 !mkdir "output/receitas_candidato"
 
-foreach ano of numlist 2002(2)2020 {
+foreach ano of numlist 2002(2)2022 {
 	
 	!mkdir "output/receitas_candidato/ano=`ano'"
 	
@@ -900,7 +900,7 @@ foreach ano of numlist 2002(2)2020 {
 // unifica header
 //--------------------//
 
-foreach ano of numlist 2002(2)2020 {
+foreach ano of numlist 2002(2)2022 {
 	
 	use "output/despesas_candidato_`ano'.dta", clear
 	
@@ -913,7 +913,7 @@ foreach ano of numlist 2002(2)2020 {
 *
 
 use `c2002', clear
-foreach ano of numlist 2004(2)2020 {
+foreach ano of numlist 2004(2)2022 {
 	append using `c`ano''
 }
 *
@@ -952,7 +952,7 @@ save `candidatos_mod2_presid'
 
 !mkdir "output/despesas_candidato"
 
-foreach ano of numlist 2002(2)2020 {
+foreach ano of numlist 2002(2)2022 {
 	
 	!mkdir "output/despesas_candidato/ano=`ano'"
 	
