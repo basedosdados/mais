@@ -109,19 +109,19 @@ Quando escolher:
     - Variáveis de texto
     - Chaves de variáveis categóricas com dicionário ou diretório
 - `INT64`:
-    - Variáveis de números inteiros com as quais é possível fazer contas (adição, subtração).
+    - Variáveis de números inteiros com as quais é possível fazer contas (adição, subtração)
 - `FLOAT64`:
-    - Variáveis de números com casas decimais com as quais é possível fazer contas (adição, subtração).
+    - Variáveis de números com casas decimais com as quais é possível fazer contas (adição, subtração)
 - `DATE`:
-    - Variáveis de data no formato `YYYY-MM-DD`.
+    - Variáveis de data no formato `YYYY-MM-DD`
 - `TIME`:
-    - Variáveis de tempo no formato `HH:MM:SS`.
+    - Variáveis de tempo no formato `HH:MM:SS`
 - `GEOGRAPHY`:
-    - Variáveis de geografia.
+    - Variáveis de geografia
 
 ## Unidades de medida
 
-A regra é manter variáveis com suas unidades de medida originais, com a exceção de variáveis financeiras onde convertermos moedas antigas para as atuais (e.g. Cruzeiro para Real).
+A regra é manter variáveis com suas unidades de medida originais listadas nesse [código](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py), com a exceção de variáveis financeiras onde convertermos moedas antigas para as atuais (e.g. Cruzeiro para Real).
 
 Catalogamos unidades de medida em formato padrão na tabela de arquitetura. [Lista completa aqui](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py) Exemplos: `m`, `km/h`, `BRL`.
 
