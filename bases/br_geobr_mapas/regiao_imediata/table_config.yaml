@@ -34,9 +34,6 @@ observation_level:
     - entity: region
       columns:
       - id_regiao_imediata
-    - entity: region
-      columns:
-      - id_uf
 
 last_updated:
     metadata: '2022-08-22'
