@@ -381,7 +381,7 @@ save `candidatos_mod2_presid'
 !mkdir "output/resultados_candidato_secao"
 !mkdir "output/resultados_partido_secao"
 
-foreach ano of numlist 1994(2)2022 {
+foreach ano of numlist 2022 { // 1994(2)2022 {
 	
 	//---------------------//
 	// candidato
@@ -871,7 +871,7 @@ foreach ano of numlist 2002(2)2022 {
 	ren numero numero_candidato
 	
 	order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
-		numero_candidato cpf_candidato cnpj_candidato titulo_eleitor_candidato sequencial_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido nome_partido sigla_partido cargo ///
+		sequencial_candidato numero_candidato cpf_candidato cnpj_candidato titulo_eleitor_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido nome_partido sigla_partido cargo ///
 		sequencial_receita data_receita fonte_receita origem_receita natureza_receita especie_receita situacao_receita descricao_receita valor_receita ///
 		sequencial_candidato_doador cpf_cnpj_doador sigla_uf_doador id_municipio_tse_doador nome_doador nome_doador_rf cargo_candidato_doador numero_partido_doador sigla_partido_doador nome_partido_doador esfera_partidaria_doador numero_candidato_doador cnae_2_doador descricao_cnae_2_doador ///
 		cpf_cnpj_doador_orig nome_doador_orig nome_doador_orig_rf tipo_doador_orig descricao_cnae_2_doador_orig ///
@@ -1021,7 +1021,7 @@ foreach ano of numlist 2002(2)2022 {
 		append using `vazio'
 		
 		order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
-			numero_candidato cpf_candidato sequencial_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
+			sequencial_candidato numero_candidato cpf_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
 			sequencial_despesa data_despesa tipo_despesa descricao_despesa origem_despesa valor_despesa ///
 			tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas cnpj_candidato ///
 			tipo_documento numero_documento ///
