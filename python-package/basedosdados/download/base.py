@@ -1,7 +1,7 @@
 '''
 Functions for manage auth and credentials
 '''
-# pylint: disable=redefined-outer-name, protected-access, no-name-in-module, import-error
+# pylint: disable=redefined-outer-name, protected-access, no-name-in-module, import-error,line-too-long
 from functools import lru_cache
 
 import sys
