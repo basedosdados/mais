@@ -268,9 +268,6 @@ def init_table(
     help="Path of data folder or file.",
 )
 @click.option(
-    "--job_config_params", default=None, help="File to advanced load config params "
-)
-@click.option(
     "--if_table_exists",
     default="raise",
     help="[raise|replace|pass] actions if table exists",
@@ -321,7 +318,6 @@ def create_table(
     dataset_id,
     table_id,
     path,
-    job_config_params,
     if_table_exists,
     force_dataset,
     if_storage_data_exists,
@@ -339,7 +335,6 @@ def create_table(
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).create(
         path=path,
-        job_config_params=job_config_params,
         if_table_exists=if_table_exists,
         force_dataset=force_dataset,
         if_storage_data_exists=if_storage_data_exists,

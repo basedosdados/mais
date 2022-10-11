@@ -9,13 +9,14 @@ from functools import lru_cache
 from loguru import logger
 
 import requests
-import ruamel.yaml as ryaml
-from basedosdados.exceptions import BaseDosDadosException
-from basedosdados.upload.base import Base
 from ckanapi import RemoteCKAN
 from ckanapi.errors import NotAuthorized, ValidationError
 from ruamel.yaml.comments import CommentedMap
 from ruamel.yaml.compat import ordereddict
+import ruamel.yaml as ryaml
+
+from basedosdados.exceptions import BaseDosDadosException
+from basedosdados.upload.base import Base
 
 
 class Metadata(Base):
@@ -68,7 +69,7 @@ class Metadata(Base):
         dataset_id = self.dataset_id.replace("_", "-")
         url = f"{self.CKAN_URL}/api/3/action/package_show?id={dataset_id}"
 
-        ckan_response = requests.get(url).json()
+        ckan_response = requests.get(url, timeout=10).json()
         dataset = ckan_response.get("result")
 
         if not ckan_response.get("success"):
@@ -102,7 +103,7 @@ class Metadata(Base):
         # for datasets, `owner_org` must come from the YAML file
         organization_id = "".join(self.local_metadata.get("organization") or [])
         url = f"{self.CKAN_URL}/api/3/action/organization_show?id={organization_id}"
-        response = requests.get(url).json()
+        response = requests.get(url, timeout=10).json()
 
         if not response.get("success"):
             raise BaseDosDadosException("Organization not found")
@@ -205,7 +206,7 @@ class Metadata(Base):
 
         url = f"{self.CKAN_URL}/api/3/action/bd_bdm_columns_schema"
 
-        return requests.get(url).json().get("result")
+        return requests.get(url, timeout=10).json().get("result")
 
     @property
     @lru_cache(256)
@@ -214,10 +215,10 @@ class Metadata(Base):
 
         if self.table_id:
             table_url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_schema"
-            return requests.get(table_url).json().get("result")
+            return requests.get(table_url, timeout=10).json().get("result")
 
         dataset_url = f"{self.CKAN_URL}/api/3/action/bd_dataset_schema"
-        return requests.get(dataset_url).json().get("result")
+        return requests.get(dataset_url, timeout=10).json().get("result")
 
     def exists_in_ckan(self) -> bool:
         """Check if Metadata object refers to an existing CKAN package or reso
@@ -236,7 +237,7 @@ class Metadata(Base):
             # TODO: use `bd_bdm_dataset_show` when it's available for empty packages
             url = f"{self.CKAN_URL}/api/3/action/package_show?id={id}"
 
-        exists_in_ckan = requests.get(url).json().get("success")
+        exists_in_ckan = requests.get(url, timeout=10).json().get("success")
 
         return exists_in_ckan
 

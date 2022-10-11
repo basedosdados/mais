@@ -63,7 +63,7 @@ missão de universalizar o acesso a dados de qualidade para todes.
     src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Color/Medium.png?raw=true"
     width="15">  [Medium ↗](http://dev.to/basedosdados)
 - [⚙️ Desenvolvimento](#desenvolvimento)
-- [👥 Como contribuir ↗](https://basedosdados.github.io/mais/colab/)
+- [👥 Como contribuir ↗](https://basedosdados.github.io/mais/colab_data/)
 - [💚 Apoie o projeto! ↗](https://apoia.se/basedosdados)
 
 ## Como citar o projeto

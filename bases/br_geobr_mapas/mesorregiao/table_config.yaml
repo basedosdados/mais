@@ -1,18 +1,17 @@
-
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: br_ibge_nomes_brasil
+dataset_id: br_geobr_mapas
 
-table_id: quantidade_municipio_nome_2010
+table_id: mesorregiao
 
 # Título da tabela.
-title: 'Quantidade de pessoas nascidas até 2010'
+title: Mesorregião
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: "Dados de quantidade de pessoas nascidas até 31 de julho de 2010 por município-nome."
+description: O geobr é um pacote R e Python que permite que os usuários acessem facilmente os shapefiles do Instituto Brasileiro de Geografia e Estatística (IBGE) e outros conjuntos oficiais de dados espaciais do Brasil. O pacote inclui uma ampla variedade de conjuntos de dados geográficos como recursos simples, disponíveis em várias escalas geográficas e por vários anos.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -24,59 +23,55 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - '2010'
+    - 2020
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: ten_years
+update_frequency: one_year
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-    - entity: name
+    - entity: region
       columns:
-          - nome
-    - country: br
-      entity: municipality
-      columns:
-          - id_municipio
+      - id_mesorregiao
 
 last_updated:
-    metadata: '2022-09-04'
-    data: '2022-09-04 21:50:07'
-    release:
+    metadata: '2022-08-22'
+    data: '2022-08-22 14:25:30'
+    release: '2022-08-22 14:25:30'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v2.0
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
-    github_user: ''
-    ckan_user: ''
-    website: www.ricardodahis.com
+    name: Gustavo Alcântara
+    email: gustavo.alcantara@basedosdados.org
+    github_user: gustavoalcantara
+    ckan_user: gustavoalcantara
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
-    github_user: ''
-    ckan_user: ''
-    website: www.ricardodahis.com
+    name: Rafael H.M Pereira
+    email: rafael.pereira@ipea.gov.br
+    github_user: rafaelpereirabr
+    ckan_user: 
+    website: https://github.com/ipeaGIT/geobr
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "Nomes foram padronizados para primeira maiúscula e resto minúsculo."
+data_cleaning_description: etl dos dados, rename e select para o Padrão da Base dos Dados.
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_nomes_brasil/code
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_geobr_mapas/code/mesorregiao
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
-    name: ''
-    organization_id: ''
+    name:
+    organization_id:
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -97,7 +92,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: []
+partitions:
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -108,24 +103,54 @@ partitions: []
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: id_municipio
+    - name: id_uf
       bigquery_type: string
-      description: ID Município - IBGE 7 Dígitos
+      description: ID da Unidade da Federação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: id_uf
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true 
+      is_partition: false
+    - name: id_mesorregiao
+      bigquery_type: string
+      description: ID da Mesorregião - IBGE
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
-          column_name: id_municipio
+          column_name: id_mesorregiao
       measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
-    - name: nome
+    - name: geometria
       bigquery_type: string
-      description: Nome
+      description: Polígono da Mesorregião
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -138,22 +163,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: quantidade_nascimentos_ate_2010
-      bigquery_type: int64
-      description: Quantidade de Nascimentos Até 31 de Julho de 2010
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: person
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
 
-number_rows: 1959116
+number_rows: 137
 
-metadata_modified: "2022-09-12T23:06:56.376444"
+metadata_modified: 
