@@ -124,7 +124,6 @@ compress
 tempfile candidatos
 save `candidatos'
 
-
 //----------------------//
 // 4. particiona
 //----------------------//
@@ -145,6 +144,7 @@ foreach ano in `anos' {
 	
 }
 *
+
 
 //-------------------------------------------------//
 // norm_partidos
@@ -170,24 +170,29 @@ save "output/norm_partidos.dta", replace
 
 !mkdir "output/partidos"
 
+use "output/partidos_1990.dta", clear
+foreach ano of numlist 1994(2)2022 {
+	append using "output/partidos_`ano'.dta"
+}
+*
+
+keep if tipo_eleicao == "eleicao ordinaria"
+
+order sequencial_coligacao nome_coligacao composicao_coligacao, a(tipo_agremiacao)
+
+compress
+
+tempfile partidos
+save `partidos'
+
 foreach ano of numlist 1990 1994(2)2022 {
 	
 	!mkdir "output/partidos/ano=`ano'"
 	
-	use "output/partidos_`ano'.dta", clear
+	use `partidos' if ano == `ano', clear
+	drop ano
+	export delimited "output/partidos/ano=`ano'/partidos.csv", replace
 	
-	levelsof sigla_uf, l(estados)
-	
-	foreach sigla_uf in `estados' {
-		
-		!mkdir "output/partidos/ano=`ano'/sigla_uf=`sigla_uf'"
-		
-		use "output/partidos_`ano'.dta", clear
-		keep if ano == `ano' & sigla_uf == "`sigla_uf'"
-		drop ano sigla_uf
-		export delimited "output/partidos/ano=`ano'/sigla_uf=`sigla_uf'/partidos.csv", replace
-		
-	}
 }
 *
 
@@ -274,9 +279,9 @@ foreach ano of numlist 1994(2)2022 {
 	
 	ren numero numero_candidato
 	
-	drop nome_candidato nome_urna_candidato coligacao composicao
+	drop nome_candidato nome_urna_candidato //coligacao composicao
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado votos
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado votos
 	
 	order `vars'
 	sort  `vars'
@@ -311,9 +316,9 @@ foreach ano of numlist 1994(2)2022 {
 	
 	use "output/resultados_partido_municipio_zona_`ano'.dta", clear
 	
-	drop coligacao composicao
+	//drop coligacao composicao
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo sigla_partido
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo numero_partido sigla_partido
 	
 	order `vars'
 	sort  `vars'
@@ -352,7 +357,7 @@ foreach ano of numlist 1994(2)2022 {
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 0
-keep id_candidato_bd ano tipo_eleicao sigla_uf id_municipio_tse cargo sequencial numero sigla_partido
+keep id_candidato_bd ano tipo_eleicao sigla_uf id_municipio_tse cargo sequencial numero numero_partido sigla_partido
 
 tempfile candidatos_mod0
 save `candidatos_mod0'
@@ -360,7 +365,7 @@ save `candidatos_mod0'
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 2 & cargo != "presidente"
-keep id_candidato_bd ano tipo_eleicao sigla_uf cargo sequencial numero sigla_partido
+keep id_candidato_bd ano tipo_eleicao sigla_uf cargo sequencial numero numero_partido sigla_partido
 
 tempfile candidatos_mod2_estadual
 save `candidatos_mod2_estadual'
@@ -368,7 +373,7 @@ save `candidatos_mod2_estadual'
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 2 & cargo == "presidente"
-keep id_candidato_bd ano tipo_eleicao cargo sequencial numero sigla_partido
+keep id_candidato_bd ano tipo_eleicao cargo sequencial numero numero_partido sigla_partido
 
 tempfile candidatos_mod2_presid
 save `candidatos_mod2_presid'
@@ -376,7 +381,7 @@ save `candidatos_mod2_presid'
 !mkdir "output/resultados_candidato_secao"
 !mkdir "output/resultados_partido_secao"
 
-foreach ano of numlist 2018(2)2022 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
 	
 	//---------------------//
 	// candidato
@@ -429,7 +434,7 @@ foreach ano of numlist 2018(2)2022 { // 1994(2)2022 {
 	ren sequencial	sequencial_candidato
 	ren numero		numero_candidato
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo sigla_partido numero_candidato sequencial_candidato id_candidato_bd votos
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd votos
 	
 	order `vars'
 	sort  `vars'
@@ -469,10 +474,10 @@ foreach ano of numlist 2018(2)2022 { // 1994(2)2022 {
 	drop if _merge == 2
 	drop _merge
 	
-	drop numero
-	ren sigla sigla_partido
+	ren numero numero_partido
+	ren sigla  sigla_partido
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio_tse zona secao cargo sigla_partido
+	local vars ano turno tipo_eleicao sigla_uf id_municipio_tse zona secao cargo numero_partido sigla_partido
 	
 	order `vars'
 	sort  `vars'

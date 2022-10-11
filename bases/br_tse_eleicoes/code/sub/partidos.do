@@ -22,6 +22,7 @@ local estados_2014	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ R
 local estados_2016	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2018	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2022	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 
 //------------------------//
 // loops
@@ -32,8 +33,8 @@ keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
 
-foreach ano of numlist 1990 1994(2)2020 {
-
+foreach ano of numlist 1990 1994(2)2022 {
+	
 	foreach estado in `estados_`ano'' {
 		
 		cap import delimited "input/consulta_coligacao/CONSULTA_LEGENDA_`ano'/CONSULTA_LEGENDA_`ano'_`estado'.txt",     delim(";") varn(nonames) stringcols(_all) clear
@@ -45,7 +46,7 @@ foreach ano of numlist 1990 1994(2)2020 {
 		
 		if `ano' <= 2012 {
 			
-			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v18
+			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v17 v18
 			
 			ren v3	ano
 			ren v4	turno
@@ -54,18 +55,19 @@ foreach ano of numlist 1990 1994(2)2020 {
 			ren v7	id_municipio_tse
 			ren v10	cargo
 			ren v11	tipo_agremiacao
-			ren v12	numero //_partido
-			ren v13	sigla //_partido
-			ren v14	nome //_partido
-			ren v16	coligacao
+			ren v12	numero
+			ren v13	sigla
+			ren v14	nome
+			ren v16	nome_coligacao
+			ren v17 composicao_coligacao
 			ren v18	sequencial_coligacao
 			
 		}
-		else if `ano' >= 2014 {
+		else if `ano' >= 2014 & `ano' <= 2020 {
 			
 			drop in 1
 			
-			keep v3 v5 v6 v10 v11 v14 v15 v16 v17 v18 v19 v20 
+			keep v3 v5 v6 v10 v11 v14 v15 v16 v17 v18 v19 v20 v21
 			
 			ren v3	ano
 			ren v5	tipo_eleicao
@@ -78,14 +80,39 @@ foreach ano of numlist 1990 1994(2)2020 {
 			ren v17	sigla
 			ren v18	nome
 			ren v19	sequencial_coligacao
-			ren v20	coligacao
+			ren v20	nome_coligacao
+			ren v21 composicao_coligacao
+			
+		}
+		else if `ano' >= 2022 {
+			
+			drop in 1
+			
+			keep v3 v5 v6 v10 v11 v14 v15 v16 v17 v18 v19 v20 v21 v22 v23 v24 v25 v27
+			
+			ren v3	ano
+			ren v5	tipo_eleicao
+			ren v6	turno
+			ren v10	sigla_uf
+			ren v11	id_municipio_tse
+			ren v14	cargo
+			ren v15	tipo_agremiacao
+			ren v16	numero
+			ren v17	sigla
+			ren v18	nome
+			ren v19 numero_federacao
+			ren v20 nome_federacacao
+			ren v21 sigla_federacao
+			ren v22 composicao_federacao
+			ren v23	sequencial_coligacao
+			ren v24	nome_coligacao
+			ren v25 composicao_coligacao
+			ren v27 situacao_legenda
 			
 		}
 		*
 		
-		destring ano turno id_municipio_tse numero sequencial_coligacao, replace force
-		
-		replace sequencial_coligacao = . if inlist(sequencial_coligacao, -3, -1)
+		destring ano turno id_municipio_tse numero, replace force // sequencial_coligacao
 		
 		merge m:1 id_municipio_tse using `diretorio'
 		drop if _merge == 2
@@ -96,19 +123,23 @@ foreach ano of numlist 1990 1994(2)2020 {
 		// limpa strings
 		//------------------//
 		
-		replace coligacao = "" if coligacao == "#NE#" | coligacao == "#NULO#"
+		replace sequencial_coligacao = "" if inlist(sequencial_coligacao, "-3", "-1")
+		if `ano' >= 2022 {
+			replace numero_federacao = "" if inlist(numero_federacao, "-3", "-1")
+		}
 		
-		foreach k in tipo_eleicao cargo tipo_agremiacao {
+		foreach k in nome_coligacao nome_federacacao sigla_federacao composicao_federacao nome_coligacao {
+			cap replace `k' = "" if `k' == "#NE#" | `k' == "#NULO#"
+		}
+		
+		foreach k in tipo_eleicao cargo tipo_agremiacao situacao_legenda {
 			cap clean_string `k'
 		}
-		foreach k in nome coligacao {
-			cap replace `k' = ustrtitle(`k')
-		}
-		*
 		
-		limpa_tipo_eleicao `ano'
-		limpa_partido `ano' sigla
+		limpa_tipo_eleicao	`ano'
+		limpa_partido		`ano' sigla
 		
+		order tipo_agremiacao, a(nome)
 		order ano turno tipo_eleicao
 		
 		tempfile partidos_`estado'_`ano'

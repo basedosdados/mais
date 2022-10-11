@@ -37,7 +37,7 @@ keep id_municipio_tse sigla_uf
 tempfile diretorio_ufs
 save `diretorio_ufs'
 
-foreach ano of numlist 2022 { // 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
 		

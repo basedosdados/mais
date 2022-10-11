@@ -12,7 +12,7 @@ save `diretorio'
 // loops
 //------------------------//
 
-foreach ano of numlist 2016(2)2020 {
+foreach ano of numlist 2016(2)2022 {
 	
 	cap import delimited "input/perfil_eleitorado_local_votacao/eleitorado_local_votacao_`ano'/eleitorado_local_votacao_`ano'.txt", delim(";") stringcols(_all) varn(nonames) clear
 	cap import delimited "input/perfil_eleitorado_local_votacao/eleitorado_local_votacao_`ano'/eleitorado_local_votacao_`ano'.csv", delim(";") stringcols(_all) varn(nonames) clear

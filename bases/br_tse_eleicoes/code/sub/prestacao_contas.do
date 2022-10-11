@@ -3,7 +3,7 @@
 // build: bens declarados
 //----------------------------------------------------------------------------//
 
-foreach ano of numlist 2006(2)2020 {
+foreach ano of numlist 2006(2)2022 {
 	
 	if mod(`ano', 4) == 0 local estados AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 	if mod(`ano', 4) == 2 local estados AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
@@ -61,7 +61,7 @@ foreach ano of numlist 2006(2)2020 {
 			replace descricao_item = "" if descricao_item == "#NULO#"
 			
 			replace valor_item = subinstr(valor_item, ",", ".", .)
-			destring ano sequencial_candidato id_tipo_item valor_item, replace force
+			destring ano id_tipo_item valor_item, replace force // sequencial_candidato
 			
 		}
 		*
