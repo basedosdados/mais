@@ -32,7 +32,7 @@ update_frequency: one_year
 # Nível de observação da tabela: o que representa cada linha.
 observation_level: 
     - entity: property
-    - columns:
+      columns:
         - id_empreendimento
 
 last_updated:
