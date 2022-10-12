@@ -1,110 +1,115 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: detalhes_votacao_secao # AUTO GENERATED
-dataset_id: br_tse_eleicoes # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-tse-eleicoes # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes # AUTO GENERATED
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_tse_eleicoes
 
-version: v1.1
+table_id: detalhes_votacao_secao
 
-last_updated: 2021-07-02 # AUTO GENERATED
+# Título da tabela.
+title:
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    Dados de detalhes de votação em eleições brasileiras a nível de seção eleitoral.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: "Dados de detalhes de votação em eleições brasileiras a nível de seção\
+    \ eleitoral.\n"
 
-# Quem está completando esse arquivo config?
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 1994(2)2022
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: two_years
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - country: br
+      entity: municipality
+    - columns:
+          - turno
+    - columns:
+          - tipo_eleicao
+    - columns:
+          - municipio
+    - columns:
+          - zona
+    - columns:
+          - secao
+    - columns:
+          - cargo
+    - entity: year
+      columns:
+          - ano
+
+last_updated:
+    metadata:
+    data:
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.1
+
+# Quem está preenchendo esses metadados?
 published_by:
     name: Ricardo Dahis
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code # REQUIRED
-    website: www.ricardodahis.com
     email: rdahis@basedosdados.org
+    github_user: rdahis
+    ckan_user: rdahis
+    website: www.ricardodahis.com
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
+data_cleaned_by:
     name: Ricardo Dahis
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code # REQUIRED
-    website: <onde encontrar os dados tratados>
     email: rdahis@basedosdados.org
+    github_user: rdahis
+    ckan_user: rdahis
+    website: www.ricardodahis.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    Limpei os dados para consistência e gerei variáveis extras.
+data_cleaning_description: "Limpei os dados para consistência e gerei variáveis extras.\n"
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: 2 anos
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - turno
-    - tipo de eleicao
-    - municipio
-    - zona
-    - secao
-    - cargo
-    - ano
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: ''
+    organization_id: ''
 
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-    - turno
-    - tipo_eleicao
-    - municipio
-    - zona
-    - secao
-    - cargo
-    - ano
+# Url dos dados originais no GCP Storage.
+raw_files_url:
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - brasil
-    
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
-    - 1994
-    - 1996
-    - 1998
-    - 2000
-    - 2002
-    - 2004
-    - 2006
-    - 2008
-    - 2010
-    - 2012
-    - 2014
-    - 2016
-    - 2018
-    - 2020
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED  
-    - ano  
+partitions:
+    - ano
     - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
@@ -115,142 +120,353 @@ partitions: # REQUIRED
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: turno
-        description: Turno
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tipo_eleicao
-        description: Tipo da eleição
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio
-        description: ID Município - IBGE 7 Dígitos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_municipio_tse
-        description: ID Município - TSE
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: zona
-        description: Zona eleitoral
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: secao
-        description: Seção eleitoral
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cargo
-        description: Cargo
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: aptos
-        description: Número de eleitores aptos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: comparecimento
-        description: Número de comparecimentos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: abstencoes
-        description: Número de abstenções
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: votos_nominais
-        description: Número de votos nominais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: votos_brancos
-        description: Número de votos brancos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: votos_nulos
-        description: Número de votos nulos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: votos_coligacao
-        description: Número de votos em coligações
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: votos_nulos_apu_sep
-        description: Votos nulos apurados separadamente
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: votos_pendentes
-        description: Votos pendentes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: proporcao_comparecimento
-        description: Proporção de comparecimento (%)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: proporcao_votos_nominais
-        description: Proporção de votos nominais (%)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: proporcao_votos_coligacao
-        description: Proporção de votos em coligação (%)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: proporcao_votos_brancos
-        description: Proporção de votos brancos (%)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: proporcao_votos_nulos
-        description: Proporção de votos nulos (%)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sigla_uf
-        description: Sigla da unidade da federação
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: turno
+      bigquery_type: int64
+      description: Turno
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_eleicao
+      bigquery_type: string
+      description: Tipo da eleição
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da unidade da federação
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: id_municipio
+      bigquery_type: string
+      description: ID Município - IBGE 7 Dígitos
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_tse
+      bigquery_type: string
+      description: ID Município - TSE
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_tse
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: zona
+      bigquery_type: int64
+      description: Zona eleitoral
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: secao
+      bigquery_type: int64
+      description: Seção eleitoral
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cargo
+      bigquery_type: string
+      description: Cargo
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: aptos
+      bigquery_type: int64
+      description: Número de eleitores aptos
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comparecimento
+      bigquery_type: int64
+      description: Número de comparecimentos
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: abstencoes
+      bigquery_type: int64
+      description: Número de abstenções
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: votos_nominais
+      bigquery_type: int64
+      description: Número de votos nominais
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: votos_brancos
+      bigquery_type: int64
+      description: Número de votos brancos
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: votos_nulos
+      bigquery_type: int64
+      description: Número de votos nulos
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: votos_coligacao
+      bigquery_type: int64
+      description: Número de votos em coligações
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: votos_nulos_apu_sep
+      bigquery_type: int64
+      description: Votos nulos apurados separadamente
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: votos_pendentes
+      bigquery_type: int64
+      description: Votos pendentes
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_comparecimento
+      bigquery_type: float64
+      description: Proporção de comparecimento
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_votos_nominais
+      bigquery_type: float64
+      description: Proporção de votos nominais
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_votos_coligacao
+      bigquery_type: float64
+      description: Proporção de votos em coligação
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_votos_brancos
+      bigquery_type: float64
+      description: Proporção de votos brancos
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_votos_nulos
+      bigquery_type: float64
+      description: Proporção de votos nulos
+      temporal_coverage:
+        - (2)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows:
+
+metadata_modified:
