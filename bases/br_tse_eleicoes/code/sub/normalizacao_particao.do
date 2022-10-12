@@ -12,7 +12,7 @@
 //----------------------//
 
 use "output/candidatos_1994.dta", clear
-foreach ano of numlist 1996(2)2020 {
+foreach ano of numlist 1996(2)2022 {
 	append using "output/candidatos_`ano'.dta"
 }
 *
@@ -124,7 +124,6 @@ compress
 tempfile candidatos
 save `candidatos'
 
-
 //----------------------//
 // 4. particiona
 //----------------------//
@@ -146,12 +145,13 @@ foreach ano in `anos' {
 }
 *
 
+
 //-------------------------------------------------//
 // norm_partidos
 //-------------------------------------------------//
 
 use "output/partidos_1990.dta", clear
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	append using "output/partidos_`ano'.dta"
 }
 *
@@ -170,24 +170,29 @@ save "output/norm_partidos.dta", replace
 
 !mkdir "output/partidos"
 
-foreach ano of numlist 1990 1994(2)2020 {
+use "output/partidos_1990.dta", clear
+foreach ano of numlist 1994(2)2022 {
+	append using "output/partidos_`ano'.dta"
+}
+*
+
+keep if tipo_eleicao == "eleicao ordinaria"
+
+order sequencial_coligacao nome_coligacao composicao_coligacao, a(tipo_agremiacao)
+
+compress
+
+tempfile partidos
+save `partidos'
+
+foreach ano of numlist 1990 1994(2)2022 {
 	
 	!mkdir "output/partidos/ano=`ano'"
 	
-	use "output/partidos_`ano'.dta", clear
+	use `partidos' if ano == `ano', clear
+	drop ano
+	export delimited "output/partidos/ano=`ano'/partidos.csv", replace
 	
-	levelsof sigla_uf, l(estados)
-	
-	foreach sigla_uf in `estados' {
-		
-		!mkdir "output/partidos/ano=`ano'/sigla_uf=`sigla_uf'"
-		
-		use "output/partidos_`ano'.dta", clear
-		keep if ano == `ano' & sigla_uf == "`sigla_uf'"
-		drop ano sigla_uf
-		export delimited "output/partidos/ano=`ano'/sigla_uf=`sigla_uf'/partidos.csv", replace
-		
-	}
 }
 *
 
@@ -222,7 +227,7 @@ save `candidatos_mod2_presid'
 !mkdir "output/resultados_candidato_municipio_zona"
 !mkdir "output/resultados_partido_municipio_zona"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	//---------------------//
 	// candidato-municipio-zona
@@ -274,9 +279,9 @@ foreach ano of numlist 1994(2)2020 {
 	
 	ren numero numero_candidato
 	
-	drop nome_candidato nome_urna_candidato coligacao composicao
+	drop nome_candidato nome_urna_candidato //coligacao composicao
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado votos
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado votos
 	
 	order `vars'
 	sort  `vars'
@@ -311,9 +316,9 @@ foreach ano of numlist 1994(2)2020 {
 	
 	use "output/resultados_partido_municipio_zona_`ano'.dta", clear
 	
-	drop coligacao composicao
+	//drop coligacao composicao
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo sigla_partido
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona cargo numero_partido sigla_partido
 	
 	order `vars'
 	sort  `vars'
@@ -352,7 +357,7 @@ foreach ano of numlist 1994(2)2020 {
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 0
-keep id_candidato_bd ano tipo_eleicao sigla_uf id_municipio_tse cargo sequencial numero sigla_partido
+keep id_candidato_bd ano tipo_eleicao sigla_uf id_municipio_tse cargo sequencial numero numero_partido sigla_partido
 
 tempfile candidatos_mod0
 save `candidatos_mod0'
@@ -360,7 +365,7 @@ save `candidatos_mod0'
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 2 & cargo != "presidente"
-keep id_candidato_bd ano tipo_eleicao sigla_uf cargo sequencial numero sigla_partido
+keep id_candidato_bd ano tipo_eleicao sigla_uf cargo sequencial numero numero_partido sigla_partido
 
 tempfile candidatos_mod2_estadual
 save `candidatos_mod2_estadual'
@@ -368,7 +373,7 @@ save `candidatos_mod2_estadual'
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 2 & cargo == "presidente"
-keep id_candidato_bd ano tipo_eleicao cargo sequencial numero sigla_partido
+keep id_candidato_bd ano tipo_eleicao cargo sequencial numero numero_partido sigla_partido
 
 tempfile candidatos_mod2_presid
 save `candidatos_mod2_presid'
@@ -376,7 +381,7 @@ save `candidatos_mod2_presid'
 !mkdir "output/resultados_candidato_secao"
 !mkdir "output/resultados_partido_secao"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 2022 { // 1994(2)2022 {
 	
 	//---------------------//
 	// candidato
@@ -429,7 +434,7 @@ foreach ano of numlist 1994(2)2020 {
 	ren sequencial	sequencial_candidato
 	ren numero		numero_candidato
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo sigla_partido numero_candidato sequencial_candidato id_candidato_bd votos
+	local vars ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse zona secao cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd votos
 	
 	order `vars'
 	sort  `vars'
@@ -469,10 +474,10 @@ foreach ano of numlist 1994(2)2020 {
 	drop if _merge == 2
 	drop _merge
 	
-	drop numero
-	ren sigla sigla_partido
+	ren numero numero_partido
+	ren sigla  sigla_partido
 	
-	local vars ano turno tipo_eleicao sigla_uf id_municipio_tse zona secao cargo sigla_partido
+	local vars ano turno tipo_eleicao sigla_uf id_municipio_tse zona secao cargo numero_partido sigla_partido
 	
 	order `vars'
 	sort  `vars'
@@ -507,7 +512,7 @@ foreach ano of numlist 1994(2)2020 {
 
 !mkdir "output/perfil_eleitorado_municipio_zona"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 2022 { // 1994(2)2022 {
 	
 	!mkdir "output/perfil_eleitorado_municipio_zona/ano=`ano'"
 	
@@ -528,12 +533,43 @@ foreach ano of numlist 1994(2)2020 {
 *
 
 //-------------------------------------------------//
+// perfil eleitorado - secao eleitoral
+//-------------------------------------------------//
+
+!mkdir "output/perfil_eleitorado_secao"
+
+local estados_2008	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2010	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2012	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2014	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2016	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2018	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO ZZ
+local estados_2020	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2022	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO ZZ
+
+foreach ano of numlist 2008(2)2022 {
+	
+	!mkdir "output/perfil_eleitorado_secao/ano=`ano'"
+	
+	foreach sigla_uf in `estados_`ano'' {
+		
+		!mkdir "output/perfil_eleitorado_secao/ano=`ano'/sigla_uf=`sigla_uf'"
+		
+		use "output/perfil_eleitorado_secao_`ano'.dta" if sigla_uf == "`sigla_uf'", clear
+		drop ano sigla_uf
+		export delimited "output/perfil_eleitorado_secao/ano=`ano'/sigla_uf=`sigla_uf'/perfil_eleitorado_secao.csv", replace
+		
+	}
+}
+*
+
+//-------------------------------------------------//
 // perfil eleitorado - local votacao
 //-------------------------------------------------//
 
 !mkdir "output/perfil_eleitorado_local_votacao"
 
-foreach ano of numlist 2016(2)2020 {
+foreach ano of numlist 2016(2)2022 {
 	
 	!mkdir "output/perfil_eleitorado_local_votacao/ano=`ano'"
 	
@@ -556,39 +592,12 @@ foreach ano of numlist 2016(2)2020 {
 *
 
 //-------------------------------------------------//
-// perfil eleitorado - secao eleitoral
-//-------------------------------------------------//
-
-!mkdir "output/perfil_eleitorado_secao"
-
-foreach ano of numlist 2008(2)2020 {
-	
-	!mkdir "output/perfil_eleitorado_secao/ano=`ano'"
-	
-	use "output/perfil_eleitorado_secao_`ano'.dta", clear
-	levelsof sigla_uf, l(estados)
-	
-	foreach sigla_uf in `estados' {
-		
-		!mkdir "output/perfil_eleitorado_secao/ano=`ano'/sigla_uf=`sigla_uf'"
-		
-		preserve
-			keep if sigla_uf == "`sigla_uf'"
-			drop ano sigla_uf
-			export delimited "output/perfil_eleitorado_secao/ano=`ano'/sigla_uf=`sigla_uf'/perfil_eleitorado_secao.csv", replace
-		restore
-		
-	}
-}
-*
-
-//-------------------------------------------------//
 // detalhes votacao municipio-zona
 //-------------------------------------------------//
 
 !mkdir "output/detalhes_votacao_municipio_zona"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/detalhes_votacao_municipio_zona/ano=`ano'"
 	
@@ -615,7 +624,7 @@ foreach ano of numlist 1994(2)2020 {
 
 !mkdir "output/detalhes_votacao_secao"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/detalhes_votacao_secao/ano=`ano'"
 	
@@ -641,7 +650,7 @@ foreach ano of numlist 1994(2)2020 {
 //-------------------------------------------------//
 
 use "output/vagas_1994.dta", clear
-foreach ano of numlist 1996(2)2020 {
+foreach ano of numlist 1996(2)2022 {
 	append using "output/vagas_`ano'.dta"
 }
 save "output/norm_vagas.dta", replace
@@ -724,7 +733,7 @@ save `candidatos'
 
 !mkdir "output/bens_candidato"
 
-foreach ano of numlist 2006(2)2020 {
+foreach ano of numlist 2006(2)2022 {
 	
 	!mkdir "output/bens_candidato/ano=`ano'"
 	
@@ -762,7 +771,7 @@ foreach ano of numlist 2006(2)2020 {
 // unifica header
 //--------------------//
 
-foreach ano of numlist 2002(2)2020 {
+foreach ano of numlist 2002(2)2022 {
 	
 	use "output/receitas_candidato_`ano'.dta", clear
 	
@@ -775,7 +784,7 @@ foreach ano of numlist 2002(2)2020 {
 *
 
 use `c2002', clear
-foreach ano of numlist 2004(2)2020 {
+foreach ano of numlist 2004(2)2022 {
 	append using `c`ano''
 }
 *
@@ -814,7 +823,7 @@ save `candidatos_mod2_presid'
 
 !mkdir "output/receitas_candidato"
 
-foreach ano of numlist 2002(2)2020 {
+foreach ano of numlist 2002(2)2022 {
 	
 	!mkdir "output/receitas_candidato/ano=`ano'"
 	
@@ -866,7 +875,7 @@ foreach ano of numlist 2002(2)2020 {
 	ren numero numero_candidato
 	
 	order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
-		numero_candidato cpf_candidato cnpj_candidato titulo_eleitor_candidato sequencial_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido nome_partido sigla_partido cargo ///
+		sequencial_candidato numero_candidato cpf_candidato cnpj_candidato titulo_eleitor_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido nome_partido sigla_partido cargo ///
 		sequencial_receita data_receita fonte_receita origem_receita natureza_receita especie_receita situacao_receita descricao_receita valor_receita ///
 		sequencial_candidato_doador cpf_cnpj_doador sigla_uf_doador id_municipio_tse_doador nome_doador nome_doador_rf cargo_candidato_doador numero_partido_doador sigla_partido_doador nome_partido_doador esfera_partidaria_doador numero_candidato_doador cnae_2_doador descricao_cnae_2_doador ///
 		cpf_cnpj_doador_orig nome_doador_orig nome_doador_orig_rf tipo_doador_orig descricao_cnae_2_doador_orig ///
@@ -900,7 +909,7 @@ foreach ano of numlist 2002(2)2020 {
 // unifica header
 //--------------------//
 
-foreach ano of numlist 2002(2)2020 {
+foreach ano of numlist 2002(2)2022 {
 	
 	use "output/despesas_candidato_`ano'.dta", clear
 	
@@ -913,7 +922,7 @@ foreach ano of numlist 2002(2)2020 {
 *
 
 use `c2002', clear
-foreach ano of numlist 2004(2)2020 {
+foreach ano of numlist 2004(2)2022 {
 	append using `c`ano''
 }
 *
@@ -952,7 +961,7 @@ save `candidatos_mod2_presid'
 
 !mkdir "output/despesas_candidato"
 
-foreach ano of numlist 2002(2)2020 {
+foreach ano of numlist 2002(2)2022 {
 	
 	!mkdir "output/despesas_candidato/ano=`ano'"
 	
@@ -1016,7 +1025,7 @@ foreach ano of numlist 2002(2)2020 {
 		append using `vazio'
 		
 		order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
-			numero_candidato cpf_candidato sequencial_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
+			sequencial_candidato numero_candidato cpf_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
 			sequencial_despesa data_despesa tipo_despesa descricao_despesa origem_despesa valor_despesa ///
 			tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas cnpj_candidato ///
 			tipo_documento numero_documento ///

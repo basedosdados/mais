@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -16,8 +15,8 @@ TIPOS:
     - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-
 */
+
 CREATE VIEW basedosdados-dev.br_tse_eleicoes.candidatos AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
@@ -46,5 +45,5 @@ SAFE_CAST(nacionalidade AS STRING) nacionalidade,
 SAFE_CAST(sigla_uf_nascimento AS STRING) sigla_uf_nascimento,
 SAFE_CAST(municipio_nascimento AS STRING) municipio_nascimento,
 SAFE_CAST(email AS STRING) email,
-SAFE_CAST(raca AS STRING) raca
+SAFE_CAST(raca AS STRING) raca,
 FROM basedosdados-dev.br_tse_eleicoes_staging.candidatos AS t

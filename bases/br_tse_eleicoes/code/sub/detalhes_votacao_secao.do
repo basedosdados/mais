@@ -21,6 +21,7 @@ local estados_2014	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ R
 local estados_2016	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2018	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2022	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 
 //------------------------//
 // loops
@@ -31,9 +32,11 @@ keep id_municipio id_municipio_tse
 tempfile municipio
 save `municipio'
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
+		
+		di "Ano: `ano' - UF: `estado'"
 		
 		cap import delimited using "input/detalhe_votacao_secao/detalhe_votacao_secao_`ano'/detalhe_votacao_secao_`ano'_`estado'.txt", delimiter(";") varn(nonames) stringcols(_all) clear
 		cap import delimited using "input/detalhe_votacao_secao/detalhe_votacao_secao_`ano'/detalhe_votacao_secao_`ano'_`estado'.csv", delimiter(";") varn(nonames) stringcols(_all) clear
