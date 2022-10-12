@@ -512,7 +512,7 @@ foreach ano of numlist 2022 { // 1994(2)2022 {
 
 !mkdir "output/perfil_eleitorado_municipio_zona"
 
-foreach ano of numlist 1994(2)2022 {
+foreach ano of numlist 2022 { // 1994(2)2022 {
 	
 	!mkdir "output/perfil_eleitorado_municipio_zona/ano=`ano'"
 	
@@ -527,6 +527,37 @@ foreach ano of numlist 1994(2)2022 {
 		keep if sigla_uf == "`sigla_uf'"
 		drop ano sigla_uf
 		export delimited "output/perfil_eleitorado_municipio_zona/ano=`ano'/sigla_uf=`sigla_uf'/perfil_eleitorado_municipio_zona.csv", replace
+		
+	}
+}
+*
+
+//-------------------------------------------------//
+// perfil eleitorado - secao eleitoral
+//-------------------------------------------------//
+
+!mkdir "output/perfil_eleitorado_secao"
+
+local estados_2008	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2010	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2012	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2014	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2016	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2018	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO ZZ
+local estados_2020	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2022	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO ZZ
+
+foreach ano of numlist 2008(2)2022 {
+	
+	!mkdir "output/perfil_eleitorado_secao/ano=`ano'"
+	
+	foreach sigla_uf in `estados_`ano'' {
+		
+		!mkdir "output/perfil_eleitorado_secao/ano=`ano'/sigla_uf=`sigla_uf'"
+		
+		use "output/perfil_eleitorado_secao_`ano'.dta" if sigla_uf == "`sigla_uf'", clear
+		drop ano sigla_uf
+		export delimited "output/perfil_eleitorado_secao/ano=`ano'/sigla_uf=`sigla_uf'/perfil_eleitorado_secao.csv", replace
 		
 	}
 }
@@ -554,33 +585,6 @@ foreach ano of numlist 2016(2)2022 {
 			keep if sigla_uf == "`sigla_uf'"
 			drop ano sigla_uf
 			export delimited "output/perfil_eleitorado_local_votacao/ano=`ano'/sigla_uf=`sigla_uf'/perfil_eleitorado_local_votacao.csv", replace
-		restore
-		
-	}
-}
-*
-
-//-------------------------------------------------//
-// perfil eleitorado - secao eleitoral
-//-------------------------------------------------//
-
-!mkdir "output/perfil_eleitorado_secao"
-
-foreach ano of numlist 2008(2)2022 {
-	
-	!mkdir "output/perfil_eleitorado_secao/ano=`ano'"
-	
-	use "output/perfil_eleitorado_secao_`ano'.dta", clear
-	levelsof sigla_uf, l(estados)
-	
-	foreach sigla_uf in `estados' {
-		
-		!mkdir "output/perfil_eleitorado_secao/ano=`ano'/sigla_uf=`sigla_uf'"
-		
-		preserve
-			keep if sigla_uf == "`sigla_uf'"
-			drop ano sigla_uf
-			export delimited "output/perfil_eleitorado_secao/ano=`ano'/sigla_uf=`sigla_uf'/perfil_eleitorado_secao.csv", replace
 		restore
 		
 	}

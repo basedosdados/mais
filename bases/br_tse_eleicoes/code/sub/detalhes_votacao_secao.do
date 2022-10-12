@@ -32,9 +32,11 @@ keep id_municipio id_municipio_tse
 tempfile municipio
 save `municipio'
 
-foreach ano of numlist 2022 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
+		
+		di "Ano: `ano' - UF: `estado'"
 		
 		cap import delimited using "input/detalhe_votacao_secao/detalhe_votacao_secao_`ano'/detalhe_votacao_secao_`ano'_`estado'.txt", delimiter(";") varn(nonames) stringcols(_all) clear
 		cap import delimited using "input/detalhe_votacao_secao/detalhe_votacao_secao_`ano'/detalhe_votacao_secao_`ano'_`estado'.csv", delimiter(";") varn(nonames) stringcols(_all) clear
