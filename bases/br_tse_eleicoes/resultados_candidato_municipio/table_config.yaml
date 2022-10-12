@@ -329,6 +329,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 23308865
+number_rows:
 
-metadata_modified: '2022-10-11T01:44:04.286627'
+metadata_modified: "2022-09-20T14:09:28.096542"

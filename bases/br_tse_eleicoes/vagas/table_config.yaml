@@ -34,7 +34,7 @@ update_frequency: two_years
 observation_level:
     - country: br
       entity: municipality
-      column:
+      columns:
           - id_municipio
     - columns:
           - tipo_eleicao
@@ -223,4 +223,4 @@ columns:
 
 number_rows:
 
-metadata_modified:
+metadata_modified: "2022-09-12T22:27:51.259276"
