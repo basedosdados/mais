@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -16,8 +15,8 @@ TIPOS:
     - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-
 */
+
 CREATE VIEW basedosdados-dev.br_tse_eleicoes.receitas_candidato AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
@@ -26,11 +25,11 @@ SAFE_CAST(tipo_eleicao AS STRING) tipo_eleicao,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(id_municipio_tse AS STRING) id_municipio_tse,
+SAFE_CAST(sequencial_candidato AS STRING) sequencial_candidato,
 SAFE_CAST(numero_candidato AS STRING) numero_candidato,
 SAFE_CAST(cpf_candidato AS STRING) cpf_candidato,
 SAFE_CAST(cnpj_candidato AS STRING) cnpj_candidato,
 SAFE_CAST(titulo_eleitor_candidato AS STRING) titulo_eleitor_candidato,
-SAFE_CAST(sequencial_candidato AS STRING) sequencial_candidato,
 SAFE_CAST(id_candidato_bd AS STRING) id_candidato_bd,
 SAFE_CAST(nome_candidato AS STRING) nome_candidato,
 SAFE_CAST(cpf_vice_suplente AS STRING) cpf_vice_suplente,
@@ -73,7 +72,7 @@ SAFE_CAST(numero_documento AS STRING) numero_documento,
 SAFE_CAST(numero_recibo_doacao AS STRING) numero_recibo_doacao,
 SAFE_CAST(numero_documento_doacao AS STRING) numero_documento_doacao,
 SAFE_CAST(tipo_prestacao_contas AS STRING) tipo_prestacao_contas,
-SAFE_CAST(data_prestacao_contas AS STRING) data_prestacao_contas,
+SAFE_CAST(data_prestacao_contas AS DATE) data_prestacao_contas,
 SAFE_CAST(sequencial_prestador_contas AS STRING) sequencial_prestador_contas,
 SAFE_CAST(cnpj_prestador_contas AS STRING) cnpj_prestador_contas,
 SAFE_CAST(entrega_conjunto AS STRING) entrega_conjunto

@@ -13,7 +13,7 @@
 
 !mkdir "output/resultados_candidato_municipio"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/resultados_candidato_municipio/ano=`ano'"
 	
@@ -27,7 +27,7 @@ foreach ano of numlist 1994(2)2020 {
 		import delimited "output/resultados_candidato_municipio_zona/ano=`ano'/sigla_uf=`sigla_uf'/resultados_candidato_municipio_zona.csv", ///
 			clear varn(1) encoding("utf-8") case(preserve)
 		
-		collapse (sum) votos, by(turno tipo_eleicao id_municipio id_municipio_tse cargo sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado)
+		collapse (sum) votos, by(turno tipo_eleicao id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado)
 		
 		export delimited "output/resultados_candidato_municipio/ano=`ano'/sigla_uf=`sigla_uf'/resultados_candidato_municipio.csv", replace
 		
@@ -41,7 +41,7 @@ foreach ano of numlist 1994(2)2020 {
 
 !mkdir "output/resultados_partido_municipio"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/resultados_partido_municipio/ano=`ano'"
 	
@@ -54,7 +54,7 @@ foreach ano of numlist 1994(2)2020 {
 		
 		import delimited "output/resultados_partido_municipio_zona/ano=`ano'/sigla_uf=`sigla_uf'/resultados_partido_municipio_zona.csv", clear varn(1) encoding("utf-8") case(preserve)
 		
-		collapse (sum) votos*, by(turno tipo_eleicao id_municipio id_municipio_tse cargo sigla_partido)
+		collapse (sum) votos*, by(turno tipo_eleicao id_municipio id_municipio_tse cargo numero_partido sigla_partido)
 		
 		export delimited "output/resultados_partido_municipio/ano=`ano'/sigla_uf=`sigla_uf'/resultados_partido_municipio.csv", replace
 		
@@ -69,7 +69,7 @@ foreach ano of numlist 1994(2)2020 {
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 0
-keep id_candidato_bd ano tipo_eleicao sigla_uf id_municipio_tse cargo numero sigla_partido
+keep id_candidato_bd ano tipo_eleicao sigla_uf id_municipio_tse cargo numero numero_partido sigla_partido
 
 tempfile candidatos_mod0
 save `candidatos_mod0'
@@ -77,7 +77,7 @@ save `candidatos_mod0'
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 2 & cargo != "presidente"
-keep id_candidato_bd ano tipo_eleicao sigla_uf cargo numero sigla_partido
+keep id_candidato_bd ano tipo_eleicao sigla_uf cargo numero numero_partido sigla_partido
 
 tempfile candidatos_mod2_estadual
 save `candidatos_mod2_estadual'
@@ -85,14 +85,14 @@ save `candidatos_mod2_estadual'
 use "output/norm_candidatos.dta", clear
 
 keep if mod(ano, 4) == 2 & cargo == "presidente"
-keep id_candidato_bd ano tipo_eleicao cargo numero sigla_partido
+keep id_candidato_bd ano tipo_eleicao cargo numero numero_partido sigla_partido
 
 tempfile candidatos_mod2_presid
 save `candidatos_mod2_presid'
 
 !mkdir "output/resultados_candidato"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/resultados_candidato/ano=`ano'"
 	
@@ -151,9 +151,9 @@ foreach ano of numlist 1994(2)2020 {
 	replace id_municipio = .		if mod(ano, 4) == 2
 	replace id_municipio_tse = .	if mod(ano, 4) == 2
 	
-	collapse (sum) votos, by(turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo sigla_partido sequencial_candidato numero_candidato id_candidato_bd resultado)
+	collapse (sum) votos, by(turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido sequencial_candidato numero_candidato id_candidato_bd resultado)
 	
-	order turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado votos
+	order turno tipo_eleicao sigla_uf id_municipio id_municipio_tse cargo numero_partido sigla_partido numero_candidato sequencial_candidato id_candidato_bd resultado votos
 	
 	export delimited "output/resultados_candidato/ano=`ano'/resultados_candidato.csv", replace
 	
@@ -166,7 +166,7 @@ foreach ano of numlist 1994(2)2020 {
 
 !mkdir "output/detalhes_votacao_municipio"
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/detalhes_votacao_municipio/ano=`ano'"
 	
