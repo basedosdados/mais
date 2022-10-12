@@ -21,6 +21,7 @@ local estados_2014	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ R
 local estados_2016	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2018	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2020	AC AL AM AP BA    CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2022	AC AL AM AP BA BR CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 
 //------------------------//
 // loops
@@ -31,11 +32,12 @@ keep id_municipio id_municipio_tse
 tempfile municipio
 save `municipio'
 
-foreach ano of numlist 1994(2)2020 {
+foreach ano of numlist 2022 { // 1994(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
 		
 		di "`ano'_`estado'_candidatos"
+		
 		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.txt", ///
 			delim(";") varn(nonames) stripquotes(yes) bindquotes(nobind) stringcols(_all) clear
 		cap import delimited "input/consulta_cand/consulta_cand_`ano'/consulta_cand_`ano'_`estado'.csv", ///
@@ -43,7 +45,7 @@ foreach ano of numlist 1994(2)2020 {
 		
 		if `ano' == 1994 & "`estado'" == "BR" {
 			
-			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v24 v25 v27 v28 v29 v32 v34 v36 v38 v39 v41 v44
+			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v27 v28 v29 v32 v34 v36 v38 v39 v41 v44
 			
 			ren v3 ano
 			ren v4 turno
@@ -59,8 +61,8 @@ foreach ano of numlist 1994(2)2020 {
 			ren v17 situacao
 			ren v18 numero_partido
 			ren v19 sigla_partido
-			ren v24 composicao
-			ren v25 coligacao
+			//ren v24 composicao
+			//ren v25 coligacao
 			ren v27 ocupacao
 			ren v28 data_nascimento
 			ren v29 titulo_eleitoral
@@ -75,7 +77,7 @@ foreach ano of numlist 1994(2)2020 {
 		}
 		else if (`ano' <= 1998 | (`ano' >= 2002 & `ano' <= 2006) | `ano' == 2010) & !(`ano' == 1994 & "`estado'" == "BR") {
 			
-			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
+			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
 			
 			ren v3 ano
 			ren v4 turno
@@ -91,8 +93,8 @@ foreach ano of numlist 1994(2)2020 {
 			ren v17 situacao
 			ren v18 numero_partido
 			ren v19 sigla_partido
-			ren v23 composicao
-			ren v24 coligacao
+			//ren v23 composicao
+			//ren v24 coligacao
 			ren v26 ocupacao
 			ren v27 data_nascimento
 			ren v28 titulo_eleitoral
@@ -121,7 +123,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 == "" & v45 == ""
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
 						
 						ren v3 ano
 						ren v4 turno
@@ -137,8 +139,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v17 situacao
 						ren v18 numero_partido
 						ren v19 sigla_partido
-						ren v23 composicao
-						ren v24 coligacao
+						//ren v23 composicao
+						//ren v24 coligacao
 						ren v26 ocupacao
 						ren v27 data_nascimento
 						ren v28 titulo_eleitoral
@@ -162,7 +164,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 != "" & v45 == "" //& !inlist(v14, "69254800082")
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v18 v19 v20 v24 v25 v27 v28 v29 v32 v34 v36 v38 v39 v41 v44
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v18 v19 v20 v27 v28 v29 v32 v34 v36 v38 v39 v41 v44
 						
 						ren v3 ano
 						ren v4 turno
@@ -178,8 +180,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v18 situacao
 						ren v19 numero_partido
 						ren v20 sigla_partido
-						ren v24 composicao
-						ren v25 coligacao
+						//ren v24 composicao
+						//ren v25 coligacao
 						ren v27 ocupacao
 						ren v28 data_nascimento
 						ren v29 titulo_eleitoral
@@ -203,7 +205,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 != "" & v45 != "" & usubstr(v45, 1, 8) != "CASSAÇÃO"
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v19 v20 v21 v25 v26 v28 v29 v30 v33 v35 v37 v39 v40 v42 v45
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v19 v20 v21 v28 v29 v30 v33 v35 v37 v39 v40 v42 v45
 						
 						ren v3 ano
 						ren v4 turno
@@ -219,8 +221,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v19 situacao
 						ren v20 numero_partido
 						ren v21 sigla_partido
-						ren v25 composicao
-						ren v26 coligacao
+						//ren v25 composicao
+						//ren v26 coligacao
 						ren v28 ocupacao
 						ren v29 data_nascimento
 						ren v30 titulo_eleitoral
@@ -244,7 +246,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 != "" & v45 != "" & usubstr(v45, 1, 8) == "CASSAÇÃO"
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
 						
 						ren v3 ano
 						ren v4 turno
@@ -260,8 +262,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v17 situacao
 						ren v18 numero_partido
 						ren v19 sigla_partido
-						ren v23 composicao
-						ren v24 coligacao
+						//ren v23 composicao
+						//ren v24 coligacao
 						ren v26 ocupacao
 						ren v27 data_nascimento
 						ren v28 titulo_eleitoral
@@ -294,7 +296,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 == ""
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
 						
 						ren v3 ano
 						ren v4 turno
@@ -310,8 +312,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v17 situacao
 						ren v18 numero_partido
 						ren v19 sigla_partido
-						ren v23 composicao
-						ren v24 coligacao
+						//ren v23 composicao
+						//ren v24 coligacao
 						ren v26 ocupacao
 						ren v27 data_nascimento
 						ren v28 titulo_eleitoral
@@ -335,7 +337,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 != "" & !inlist(v14, "51358891168")
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v18 v19 v20 v24 v25 v27 v28 v29 v32 v34 v36 v38 v39 v41 v44
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v18 v19 v20 v27 v28 v29 v32 v34 v36 v38 v39 v41 v44
 						
 						ren v3 ano
 						ren v4 turno
@@ -351,8 +353,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v18 situacao
 						ren v19 numero_partido
 						ren v20 sigla_partido
-						ren v24 composicao
-						ren v25 coligacao
+						//ren v24 composicao
+						//ren v25 coligacao
 						ren v27 ocupacao
 						ren v28 data_nascimento
 						ren v29 titulo_eleitoral
@@ -376,7 +378,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 != "" & inlist(v14, "51358891168")
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v44
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v44
 						
 						ren v3 ano
 						ren v4 turno
@@ -392,8 +394,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v17 situacao
 						ren v18 numero_partido
 						ren v19 sigla_partido
-						ren v23 composicao
-						ren v24 coligacao
+						//ren v23 composicao
+						//ren v24 coligacao
 						ren v26 ocupacao
 						ren v27 data_nascimento
 						ren v28 titulo_eleitoral
@@ -418,7 +420,7 @@ foreach ano of numlist 1994(2)2020 {
 			}
 			else {
 				
-				keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
+				keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
 				
 				ren v3 ano
 				ren v4 turno
@@ -434,8 +436,8 @@ foreach ano of numlist 1994(2)2020 {
 				ren v17 situacao
 				ren v18 numero_partido
 				ren v19 sigla_partido
-				ren v23 composicao
-				ren v24 coligacao
+				//ren v23 composicao
+				//ren v24 coligacao
 				ren v26 ocupacao
 				ren v27 data_nascimento
 				ren v28 titulo_eleitoral
@@ -466,7 +468,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 == "" & v45 == ""
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
 						
 						ren v3 ano
 						ren v4 turno
@@ -482,8 +484,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v17 situacao
 						ren v18 numero_partido
 						ren v19 sigla_partido
-						ren v23 composicao
-						ren v24 coligacao
+						//ren v23 composicao
+						//ren v24 coligacao
 						ren v26 ocupacao
 						ren v27 data_nascimento
 						ren v28 titulo_eleitoral
@@ -507,7 +509,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 != "" & v45 == "" & !inlist(v14, "69254800082")
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v18 v19 v20 v24 v25 v27 v28 v29 v32 v34 v36 v38 v39 v41 v44
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v18 v19 v20 v27 v28 v29 v32 v34 v36 v38 v39 v41 v44
 						
 						ren v3 ano
 						ren v4 turno
@@ -523,8 +525,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v18 situacao
 						ren v19 numero_partido
 						ren v20 sigla_partido
-						ren v24 composicao
-						ren v25 coligacao
+						//ren v24 composicao
+						//ren v25 coligacao
 						ren v27 ocupacao
 						ren v28 data_nascimento
 						ren v29 titulo_eleitoral
@@ -548,7 +550,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 != "" & v45 == "" & inlist(v14, "69254800082")
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v44
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v44
 						
 						ren v3 ano
 						ren v4 turno
@@ -564,8 +566,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v17 situacao
 						ren v18 numero_partido
 						ren v19 sigla_partido
-						ren v23 composicao
-						ren v24 coligacao
+						//ren v23 composicao
+						//ren v24 coligacao
 						ren v26 ocupacao
 						ren v27 data_nascimento
 						ren v28 titulo_eleitoral
@@ -589,7 +591,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 != "" & v45 != ""
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v19 v20 v21 v25 v26 v28 v29 v30 v33 v35 v37 v39 v40 v42 v45
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v19 v20 v21 v28 v29 v30 v33 v35 v37 v39 v40 v42 v45
 						
 						ren v3 ano
 						ren v4 turno
@@ -605,8 +607,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v19 situacao
 						ren v20 numero_partido
 						ren v21 sigla_partido
-						ren v25 composicao
-						ren v26 coligacao
+						//ren v25 composicao
+						//ren v26 coligacao
 						ren v28 ocupacao
 						ren v29 data_nascimento
 						ren v30 titulo_eleitoral
@@ -639,7 +641,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 == ""
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
 						
 						ren v3 ano
 						ren v4 turno
@@ -655,8 +657,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v17 situacao
 						ren v18 numero_partido
 						ren v19 sigla_partido
-						ren v23 composicao
-						ren v24 coligacao
+						//ren v23 composicao
+						//ren v24 coligacao
 						ren v26 ocupacao
 						ren v27 data_nascimento
 						ren v28 titulo_eleitoral
@@ -680,7 +682,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 != "" & !inlist(v14, "31988130506")
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v18 v19 v20 v24 v25 v27 v28 v29 v32 v34 v36 v38 v39 v41 v44
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v16 v18 v19 v20 v27 v28 v29 v32 v34 v36 v38 v39 v41 v44
 						
 						ren v3 ano
 						ren v4 turno
@@ -696,8 +698,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v18 situacao
 						ren v19 numero_partido
 						ren v20 sigla_partido
-						ren v24 composicao
-						ren v25 coligacao
+						//ren v24 composicao
+						//ren v25 coligacao
 						ren v27 ocupacao
 						ren v28 data_nascimento
 						ren v29 titulo_eleitoral
@@ -721,7 +723,7 @@ foreach ano of numlist 1994(2)2020 {
 						
 						keep if v44 != "" & inlist(v14, "31988130506")
 						
-						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v44
+						keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v44
 						
 						ren v3 ano
 						ren v4 turno
@@ -737,8 +739,8 @@ foreach ano of numlist 1994(2)2020 {
 						ren v17 situacao
 						ren v18 numero_partido
 						ren v19 sigla_partido
-						ren v23 composicao
-						ren v24 coligacao
+						//ren v23 composicao
+						//ren v24 coligacao
 						ren v26 ocupacao
 						ren v27 data_nascimento
 						ren v28 titulo_eleitoral
@@ -763,7 +765,7 @@ foreach ano of numlist 1994(2)2020 {
 			}
 			else {
 				
-				keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
+				keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43
 				
 				ren v3 ano
 				ren v4 turno
@@ -779,8 +781,8 @@ foreach ano of numlist 1994(2)2020 {
 				ren v17 situacao
 				ren v18 numero_partido
 				ren v19 sigla_partido
-				ren v23 composicao
-				ren v24 coligacao
+				//ren v23 composicao
+				//ren v24 coligacao
 				ren v26 ocupacao
 				ren v27 data_nascimento
 				ren v28 titulo_eleitoral
@@ -797,7 +799,7 @@ foreach ano of numlist 1994(2)2020 {
 		}
 		else if `ano' == 2012 {
 			
-			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v23 v24 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43 v44
+			keep v3 v4 v5 v6 v7 v10 v11 v12 v13 v14 v15 v17 v18 v19 v26 v27 v28 v31 v33 v35 v37 v38 v40 v43 v44
 			
 			ren v3 ano
 			ren v4 turno
@@ -813,8 +815,8 @@ foreach ano of numlist 1994(2)2020 {
 			ren v17 situacao
 			ren v18 numero_partido
 			ren v19 sigla_partido
-			ren v23 composicao
-			ren v24 coligacao
+			//ren v23 composicao
+			//ren v24 coligacao
 			ren v26 ocupacao
 			ren v27 data_nascimento
 			ren v28 titulo_eleitoral
@@ -828,9 +830,9 @@ foreach ano of numlist 1994(2)2020 {
 			ren v44 email
 			
 		}
-		else if `ano' >= 2014 {
+		else if `ano' >= 2014 & `ano' <= 2020 {
 			
-			keep v3 v6 v8 v11 v12 v15 v16 v17 v18 v19 v21 v22 v26 v28 v29 v32 v33 v35 v36 v38 v39 v41 v43 v45 v47 v49 v51 v54
+			keep v3 v6 v8 v11 v12 v15 v16 v17 v18 v19 v21 v22 v26 v28 v29 v35 v36 v38 v39 v41 v43 v45 v47 v49 v51 v54
 			
 			ren v3 ano
 			ren v6 turno
@@ -847,8 +849,8 @@ foreach ano of numlist 1994(2)2020 {
 			ren v26 situacao
 			ren v28 numero_partido
 			ren v29 sigla_partido
-			ren v32 coligacao
-			ren v33 composicao
+			//ren v32 coligacao
+			//ren v33 composicao
 			ren v35 nacionalidade
 			ren v36 sigla_uf_nascimento
 			ren v38 municipio_nascimento
@@ -862,13 +864,45 @@ foreach ano of numlist 1994(2)2020 {
 			ren v54 resultado
 			
 		}
+		else if `ano' >= 2022 {
+			
+			keep v3 v6 v8 v11 v12 v15 v16 v17 v18 v19 v21 v22 v26 v28 v29 v39 v40 v42 v43 v45 v47 v49 v51 v53 v55 v58
+			
+			ren v3  ano
+			ren v6  turno
+			ren v8  tipo_eleicao
+			ren v11 sigla_uf
+			ren v12 id_municipio_tse
+			ren v15 cargo
+			ren v16 sequencial
+			ren v17 numero
+			ren v18 nome
+			ren v19 nome_urna
+			ren v21 cpf
+			ren v22 email
+			ren v26 situacao
+			ren v28 numero_partido
+			ren v29 sigla_partido
+			//ren v32 coligacao
+			//ren v33 composicao
+			ren v39 nacionalidade
+			ren v40 sigla_uf_nascimento
+			ren v42 municipio_nascimento
+			ren v43 data_nascimento
+			ren v45 titulo_eleitoral
+			ren v47 genero
+			ren v49 instrucao
+			ren v51 estado_civil
+			ren v53 raca
+			ren v55 ocupacao
+			ren v58 resultado
+			
+		}
 		*
 		
-		if `ano' == 2020 drop in 1
+		if `ano' >= 2020 drop in 1
 		
-		destring ano id_municipio_tse turno sequencial numero numero_partido, replace force
-		replace sequencial = . if sequencial == -1
-		
+		destring id_municipio_tse, replace force //sequencial
 		merge m:1 id_municipio_tse using `municipio'
 		drop if _merge == 2
 		drop _merge
@@ -878,8 +912,11 @@ foreach ano of numlist 1994(2)2020 {
 		// limpa strings
 		//------------------//
 		
+		destring ano id_municipio_tse turno numero numero_partido, replace force //sequencial
+		replace sequencial = "" if sequencial == "-1"
+		
 		foreach k of varlist _all {
-			cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE", "##VERIFICAR BASE 1994##")
+			cap replace `k' = ""  if inlist(`k', "#NULO#", "#NULO", "#NE#", "#NE", "##VERIFICAR BASE 1994##", "NÃO DIVULGÁVEL")
 		}
 		*
 		
@@ -928,7 +965,7 @@ foreach ano of numlist 1994(2)2020 {
 			replace data_nascimento = subinstr(data_nascimento, "/", "", .)
 			replace data_nascimento = substr(data_nascimento, 1, 4) + "19" + substr(data_nascimento, 5, 6)
 		}
-		else if inlist(`ano', 2006, 2008, 2012, 2014, 2016, 2018, 2020) {
+		else if inlist(`ano', 2006, 2008, 2012, 2014, 2016, 2018, 2020, 2022) {
 			replace data_nascimento = subinstr(data_nascimento, "/", "", .)
 		}
 		else if inlist(`ano', 2010) {
