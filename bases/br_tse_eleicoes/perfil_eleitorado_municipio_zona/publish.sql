@@ -19,7 +19,7 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_tse_eleicoes.perfil_eleitorado_municipio_zona AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
+SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(id_municipio_tse AS STRING) id_municipio_tse,
