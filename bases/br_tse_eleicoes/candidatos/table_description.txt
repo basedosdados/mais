@@ -32,14 +32,14 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 1994(2)2020
+- 1994(1)2022
 
 
 
 
 Cobertura Espacial
 ------------------
-- {'continent': 'south_america', 'country': 'br'}
+- sa.br
 
 
 
