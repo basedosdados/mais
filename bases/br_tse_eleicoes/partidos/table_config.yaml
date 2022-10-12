@@ -32,20 +32,21 @@ update_frequency: two_years
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-    - entity: state
-      column:
+    - country: br
+      entity: state
+      columns:
           - sigla_uf
     - country: br
       entity: municipality
-      column:
+      columns:
           - id_municipio
     - entity: party
+      columns:
+          - sigla
     - columns:
           - turno
     - columns:
           - tipo_eleicao
-    - columns:
-          - sigla
 
 last_updated:
     metadata:
@@ -404,4 +405,4 @@ columns:
 
 number_rows:
 
-metadata_modified:
+metadata_modified: "2022-10-12T17:53:23.483912"

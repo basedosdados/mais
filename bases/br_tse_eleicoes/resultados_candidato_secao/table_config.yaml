@@ -36,8 +36,6 @@ observation_level:
       entity: municipality
       columns:
           - id_municipio
-      column:
-          - id_municipio
     - columns:
           - turno
     - columns:
@@ -48,7 +46,7 @@ observation_level:
           - secao
     - entity: person
       columns:
-          - numero_candidato
+          - id_candidato_bd
     - entity: year
       columns:
           - ano
@@ -134,7 +132,7 @@ columns:
           table_id: ano
           column_name: ano
       measurement_unit: year
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: true
@@ -149,7 +147,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -164,7 +162,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -179,7 +177,7 @@ columns:
           table_id: uf
           column_name: sigla
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: true
@@ -194,7 +192,7 @@ columns:
           table_id: municipio
           column_name: id_municipio
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -209,7 +207,7 @@ columns:
           table_id: municipio
           column_name: id_municipio_tse
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -224,7 +222,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -239,7 +237,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -254,7 +252,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -269,7 +267,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -284,7 +282,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -299,7 +297,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -314,7 +312,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -329,7 +327,7 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -344,11 +342,11 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
 
 number_rows:
 
-metadata_modified:
+metadata_modified: "2022-10-07T12:35:07.953994"

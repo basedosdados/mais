@@ -36,11 +36,6 @@ observation_level:
       entity: municipality
       columns:
           - id_municipio
-      column:
-          - id_municipio
-    - entity: party
-      columns:
-          - sigla_partido
     - columns:
           - turno
     - columns:
@@ -49,6 +44,9 @@ observation_level:
           - zona
     - columns:
           - secao
+    - entity: party
+      columns:
+          - sigla_partido
     - entity: year
       columns:
           - ano
@@ -321,4 +319,4 @@ columns:
 
 number_rows:
 
-metadata_modified:
+metadata_modified: "2022-10-07T12:33:39.403789"
