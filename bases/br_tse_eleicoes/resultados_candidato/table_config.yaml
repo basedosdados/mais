@@ -32,23 +32,16 @@ update_frequency: two_years
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
+    - entity: year
+      columns:
+          - ano
     - columns:
           - turno
     - columns:
           - tipo_eleicao
-    - country: br
-      entity: state
+    - entity: person
       columns:
-          - sigla_uf
-    - country: br
-      entity: municipality
-      columns:
-          - id_municipio
-    - columns:
-          - numero_candidato
-    - entity: year
-      columns:
-          - ano
+          - id_candidato_bd
 
 last_updated:
     metadata:
@@ -122,7 +115,8 @@ columns:
     - name: ano
       bigquery_type: int64
       description: Ano
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -136,7 +130,8 @@ columns:
     - name: turno
       bigquery_type: int64
       description: Turno
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -150,7 +145,8 @@ columns:
     - name: tipo_eleicao
       bigquery_type: string
       description: Tipo da eleição
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -164,7 +160,8 @@ columns:
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da unidade da federação
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -178,7 +175,8 @@ columns:
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -192,7 +190,8 @@ columns:
     - name: id_municipio_tse
       bigquery_type: string
       description: ID Município - TSE
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -206,7 +205,8 @@ columns:
     - name: cargo
       bigquery_type: string
       description: Cargo
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -220,7 +220,8 @@ columns:
     - name: numero_partido
       bigquery_type: string
       description: Número do partido
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -234,7 +235,8 @@ columns:
     - name: sigla_partido
       bigquery_type: string
       description: Sigla do partido
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -248,7 +250,8 @@ columns:
     - name: numero_candidato
       bigquery_type: string
       description: Número do candidato
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -262,7 +265,8 @@ columns:
     - name: sequencial_candidato
       bigquery_type: string
       description: Sequencial do candidato
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -276,7 +280,8 @@ columns:
     - name: id_candidato_bd
       bigquery_type: string
       description: ID Candidato - Base dos Dados
-      temporal_coverage: []
+      temporal_coverage:
+        - 1998(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -290,7 +295,8 @@ columns:
     - name: resultado
       bigquery_type: string
       description: Resultado
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -304,7 +310,8 @@ columns:
     - name: votos
       bigquery_type: int64
       description: Número de votos
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -318,4 +325,4 @@ columns:
 
 number_rows:
 
-metadata_modified:
+metadata_modified: "2022-09-12T22:24:31.494232"
