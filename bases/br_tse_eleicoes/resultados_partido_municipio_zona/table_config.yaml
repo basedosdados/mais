@@ -34,9 +34,8 @@ update_frequency: two_years
 observation_level:
     - country: br
       entity: municipality
-      column:
+      columns:
           - id_municipio
-    - entity: party
     - columns:
           - turno
     - columns:
@@ -45,7 +44,8 @@ observation_level:
           - zona
     - columns:
           - cargo
-    - columns:
+    - entity: party
+      columns:
           - sigla_partido
     - entity: year
       columns:
@@ -124,13 +124,14 @@ columns:
     - name: ano
       bigquery_type: int64
       description: Ano
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -138,7 +139,8 @@ columns:
     - name: turno
       bigquery_type: int64
       description: Turno
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -152,7 +154,8 @@ columns:
     - name: tipo_eleicao
       bigquery_type: string
       description: Tipo da eleição
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -166,12 +169,13 @@ columns:
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da unidade da federação
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -180,12 +184,13 @@ columns:
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -194,12 +199,13 @@ columns:
     - name: id_municipio_tse
       bigquery_type: string
       description: ID Município - TSE
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_tse
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -208,7 +214,8 @@ columns:
     - name: zona
       bigquery_type: int64
       description: Zona eleitoral
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -222,7 +229,8 @@ columns:
     - name: cargo
       bigquery_type: string
       description: Cargo
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -235,8 +243,9 @@ columns:
       is_partition: false
     - name: numero_partido
       bigquery_type: string
-      description: Sigla do partido
-      temporal_coverage: []
+      description: Número do partido
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -250,7 +259,8 @@ columns:
     - name: sigla_partido
       bigquery_type: string
       description: Sigla do partido
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -264,7 +274,8 @@ columns:
     - name: votos_nominais
       bigquery_type: int64
       description: Número de votos nominais
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -278,7 +289,8 @@ columns:
     - name: votos_nao_nominais
       bigquery_type: int64
       description: Número de votos não-nominais
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -292,4 +304,4 @@ columns:
 
 number_rows:
 
-metadata_modified:
+metadata_modified: "2022-09-12T22:27:01.074410"

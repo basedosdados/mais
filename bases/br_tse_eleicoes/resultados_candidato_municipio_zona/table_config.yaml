@@ -34,7 +34,7 @@ update_frequency: two_years
 observation_level:
     - country: br
       entity: municipality
-      column:
+      columns:
           - id_municipio
     - columns:
           - turno
@@ -42,8 +42,9 @@ observation_level:
           - tipo_eleicao
     - columns:
           - zona
-    - columns:
-          - numero_candidato
+    - entity: person
+      columns:
+          - id_candidato_bd
     - entity: year
       columns:
           - ano
@@ -121,214 +122,229 @@ columns:
     - name: ano
       bigquery_type: int64
       description: Ano
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: true
     - name: turno
       bigquery_type: int64 
       description: Turno
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: tipo_eleicao
       bigquery_type: string
       description: Tipo da eleição
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da unidade da federação
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: true
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio_tse
       bigquery_type: string
       description: ID Município - TSE
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_tse
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: zona
       bigquery_type: int64
       description: Zona eleitoral
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: cargo
       bigquery_type: string
       description: Cargo
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: numero_partido
       bigquery_type: string
       description: Número do partido
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: sigla_partido
       bigquery_type: string
       description: Sigla do partido
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: numero_candidato
       bigquery_type: string
       description: Número do candidato
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: sequencial_candidato
       bigquery_type: string
       description: Sequencial do candidato
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: id_candidato_bd
       bigquery_type: string
       description: ID Candidato - Base dos Dados
-      temporal_coverage: []
+      temporal_coverage:
+        - 1998(2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: resultado
       bigquery_type: string
       description: Resultado
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
     - name: votos
       bigquery_type: int64
       description: Número de votos
-      temporal_coverage: []
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: yes
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
 
 number_rows:
 
-metadata_modified:
+metadata_modified: "2022-09-12T22:25:20.608716"
