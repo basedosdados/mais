@@ -196,7 +196,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: person
+      measurement_unit:
       has_sensitive_data: no
       observations: Nulo para 1994 e 1996 porque não tem CPF.
       is_in_staging: true
@@ -519,4 +519,4 @@ columns:
 
 number_rows:
 
-metadata_modified:
+metadata_modified: '2022-10-11T09:46:36.413024'
