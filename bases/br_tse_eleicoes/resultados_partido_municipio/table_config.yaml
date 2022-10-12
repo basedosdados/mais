@@ -34,16 +34,16 @@ update_frequency: two_years
 observation_level:
     - country: br
       entity: municipality
-      column:
+      columns:
           - id_municipio
-    - entity: party
     - columns:
           - turno
     - columns:
           - tipo_eleicao
     - columns:
           - cargo
-    - columns:
+    - entity: party
+      columns:
           - sigla_partido
     - entity: year
       columns:
@@ -129,7 +129,7 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -287,4 +287,4 @@ columns:
 
 number_rows:
 
-metadata_modified:
+metadata_modified: "2022-09-12T22:26:47.120449"
