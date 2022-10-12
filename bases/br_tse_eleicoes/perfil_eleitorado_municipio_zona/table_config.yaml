@@ -178,11 +178,10 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: zona
-      bigquery_type: int64
-      description: Zona eleitoral
-      temporal_coverage:
-        - (2)
+    - name: situacao_biometria
+      bigquery_type: string
+      description: Situação da biometria
+      temporal_coverage: []
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -193,10 +192,11 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: situacao_biometria
-      bigquery_type: string
-      description: Situação da biometria
-      temporal_coverage: []
+    - name: zona
+      bigquery_type: int64
+      description: Zona eleitoral
+      temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -306,6 +306,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 20057103
+number_rows:
 
-metadata_modified: '2022-10-11T01:44:04.286120'
+metadata_modified: "2022-09-12T22:23:51.280264"
