@@ -17,6 +17,8 @@ Email: rdahis@basedosdados.org
 Tratado por
 -----------
 Nome: Ricardo Dahis
+Código: 
+Website: www.ricardodahis.com
 Email: rdahis@basedosdados.org
 
 
@@ -24,35 +26,21 @@ Email: rdahis@basedosdados.org
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
--  sigla_uf
-
-
-Colunas identificando linhas unicamente
--------------------
+- sigla_uf
 
 
 
 
 Cobertura Temporal
 ------------------
-- 2002
-- 2004
-- 2006
-- 2008
-- 2010
-- 2012
-- 2014
-- 2016
-- 2018
-- 2020
+- 2002(2)2022
 
 
 
 
 Cobertura Espacial
 ------------------
-- continent
-- country
+- sa.br
 
 
 
