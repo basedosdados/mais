@@ -407,7 +407,7 @@ columns:
       is_partition: false
     - name: complemento
       bigquery_type: string
-      description: Comlemento
+      description: Complemento
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
