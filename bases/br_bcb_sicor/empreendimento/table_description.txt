@@ -1,0 +1,48 @@
+A tabela de empreendimentos é um catálogo do que foi e do que é financiado. Recomenda-se que ela seja utilizada em conjunto com os microdadados de operações de crédito (microdados_operacao) para se ter uma visão completa dos produtos, atividades e demais atributos da operação de crédito que foram alvo de financiamento.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: pisagabriel09@gmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2013(1)2022
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Renomear colunas; retirar acentos das observações; formatar as datas
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
