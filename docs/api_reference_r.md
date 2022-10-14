@@ -33,7 +33,11 @@ A maioria dos erros do nosso pacote estão relacionados a problemas de autentica
 
 **Note que é preciso marcar inclusive as duas últimas "caixinhas", que aparecem como opcionais**. Caso você tenha esquecido de marcá-las, todas as outras funções do pacote não irão funcionar posteriormente. 
 
-Caso você já tenha autenticado com autorização incompleta, é preciso repetir o processo de autenticação. Você pode fazer isso rodando `gargle::gargle_oauth_sitrep()`. Você deverá checar a pasta em que estão salvas as autenticações do seu R, entrar nesta pasta e deletar aquela referente ao Google Cloud/Bigquery. Feito isso, ao rodar `basedosdados::set_billing_id` você poderá autenticar novamente.  
+Caso você já tenha autenticado com autorização incompleta, é preciso repetir o processo de autenticação. Você pode fazer isso rodando `gargle::gargle_oauth_sitrep()`. Você deverá checar a pasta em que estão salvas as autenticações do seu R, entrar nesta pasta e deletar aquela referente ao Google Cloud/Bigquery. Feito isso, ao rodar `basedosdados::set_billing_id` você poderá autenticar novamente.
+
+Veja como é simples:
+
+![gif_gargle](https://user-images.githubusercontent.com/62671380/194094167-99dadbd7-f7de-46f9-ac88-fb464e646e6c.gif)
 
 Realizados todos esses procedimentos, é bem provável que os erros anteriores não ocorram mais. 
 
