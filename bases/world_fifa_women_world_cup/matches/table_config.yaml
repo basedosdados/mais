@@ -31,11 +31,8 @@ update_frequency: four_years
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-    - entity: year
-    - columns:
-          - year
-    - entity: other
-    - columns:
+    - entity: match
+      columns:
           - match_id
 
 last_updated:
