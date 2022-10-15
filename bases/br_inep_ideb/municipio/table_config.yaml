@@ -34,17 +34,19 @@ update_frequency: two_years
 observation_level:
     - country: br
       entity: municipality
-      column:
+      columns:
           - id_municipio
-    - columns:
-          - rede
-    - columns:
-          - ensino
     - entity: year
       columns:
           - anos_escolares
-      column:
           - ano
+    - entity: other
+      columns:
+          - rede
+    - entity: other
+      columns:
+          - ensino
+
 
 last_updated:
     metadata: '2022-10-14'
@@ -59,7 +61,7 @@ version: v1.1
 published_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
-    github_user:
+    github_user: https://github.com/rdahis
     ckan_user:
     website: www.ricardodahis.com
 
@@ -69,9 +71,9 @@ published_by:
 data_cleaned_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
-    github_user:
+    github_user: https://github.com/rdahis
     ckan_user:
-    website:
+    website: www.ricardodahis.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: Dados foram organizados e separados para consistência
@@ -312,4 +314,4 @@ columns:
 
 number_rows: 294504
 
-metadata_modified: '2022-09-12T23:10:34.312302'
+metadata_modified: '2022-10-10T15:46:35.086856'
