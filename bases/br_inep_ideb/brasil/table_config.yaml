@@ -35,7 +35,6 @@ observation_level:
     - entity: year
       columns:
           - ano
-      column:
           - anos_escolares
     - columns:
           - rede
@@ -55,7 +54,7 @@ version: v1.1
 published_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
-    github_user:
+    github_user: https://github.com/rdahis
     ckan_user:
     website: www.ricardodahis.com
 
@@ -65,7 +64,7 @@ published_by:
 data_cleaned_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
-    github_user:
+    github_user: https://github.com/rdahis
     ckan_user:
     website:
 
@@ -278,4 +277,4 @@ columns:
 
 number_rows: 126
 
-metadata_modified: '2022-09-12T23:09:30.746161'
+metadata_modified: '2022-10-10T15:46:16.523153'
