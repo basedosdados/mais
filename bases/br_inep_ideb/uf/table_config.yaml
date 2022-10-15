@@ -33,7 +33,7 @@ update_frequency: two_years
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
     - entity: state
-      column:
+      columns:
           - sigla_uf
     - columns:
           - rede
@@ -42,7 +42,6 @@ observation_level:
     - entity: year
       columns:
           - anos_escolares
-      column:
           - ano
 
 last_updated:
@@ -58,7 +57,7 @@ version: v1.1
 published_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
-    github_user:
+    github_user: https://github.com/rdahis
     ckan_user:
     website: www.ricardodahis.com
 
@@ -68,7 +67,7 @@ published_by:
 data_cleaned_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
-    github_user:
+    github_user: https://github.com/rdahis
     ckan_user:
     website:
 
