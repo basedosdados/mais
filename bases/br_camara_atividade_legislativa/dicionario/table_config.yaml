@@ -3,7 +3,7 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_camara_atividade_legislativa
 
-table_id: dicionario
+table_id: Dicionário
 
 # Título da tabela.
 title: Atividade Legislativa da Câmara dos Deputados
@@ -63,7 +63,7 @@ data_cleaned_by:
 data_cleaning_description: Criação baseado nos dados da câmara
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url:
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_camara_atividade_legislativa/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
