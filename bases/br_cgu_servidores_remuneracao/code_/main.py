@@ -24,8 +24,8 @@ def transform_files(
     :param kind: the situation of the employee (ativos or inativos)
     :param division: the division of the civilians (BACEN or SIAPE)
     """
-    if career == "militares":
-        for kind in ["ativos", "inativos"]:
+    if career == "militar":
+        for kind in ["ativo", "reservista"]:
             get_career_df(career, kind)
     else:
         """Script for civilians"""
@@ -33,13 +33,13 @@ def transform_files(
 
 
 @app.command()
-def download_file(year: str, month: str, career: str, kind: str = "ativos") -> str:
+def download_file(year: str, month: str, career: str, kind: str = "ativo") -> str:
     """
     Download the files and save zip file to tmp directory
     :param year: year to download
     :param month: month to download
-    :param career: the career of the employee (militares or civis)
-    :param kind: the situation of the employee (ativos or inativos)
+    :param career: the career of the employee (militar or civil)
+    :param kind: the situation of the employee (ativo or reservista)
     :return: the name of the file downloaded
     """
 
@@ -50,7 +50,7 @@ def download_file(year: str, month: str, career: str, kind: str = "ativos") -> s
     for file_ in CGU_FILES[career][kind]:
         url = f"{URL_CGU_DOWNLOADS}/{year}{month}_{file_}"
         try:
-            division = file_.split("_")[-1].lower() if career == "civis" else None
+            division = file_.split("_")[-1].lower() if career == "civil" else None
             if not file_exists(year, month, career, kind, division):
                 print(f"Downloading {url}")
                 sleep(10)
@@ -67,6 +67,7 @@ def download_file(year: str, month: str, career: str, kind: str = "ativos") -> s
                 )
                 downloaded_files.append(unzipped_file)
             else:
+                print(f"Arquivo {url} já existe")
                 existing_files.append(file_)
             res = f"Arquivos baixados: {', '.join(downloaded_files)} \nArquivos existentes: {', '.join(existing_files)}"  # pylint: disable=line-too-long  # noqa
         except requests.exceptions.ConnectionError as err:
@@ -83,7 +84,7 @@ def download_file(year: str, month: str, career: str, kind: str = "ativos") -> s
 
 
 @app.command()
-def download_career(career: str = "militares") -> None:
+def download_career(career: str = "militar") -> None:
     """
     Download all files for a career
     :param career:
@@ -91,7 +92,7 @@ def download_career(career: str = "militares") -> None:
     """
     years = [str(y) for y in range(2013, 2023)]
     months = [str(m).zfill(2) for m in range(1, 13)]
-    kinds = ["ativos", "inativos"]
+    kinds = ["ativo", "reservista"]
     for year in years:
         for month in months:
             for kind in kinds:

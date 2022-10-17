@@ -6,10 +6,10 @@ from pathlib import Path
 
 URL_CGU_DOWNLOADS = "http://www.portaltransparencia.gov.br/download-de-dados/servidores"
 CGU_FILES = {
-    "militares": {"ativos": ["Militares"], "inativos": ["Reserva_Reforma_Militares"]},
-    "civis": {
-        "ativos": ["Servidores_BACEN", "Servidores_SIAPE"],
-        "inativos": ["Aposentados_BACEN", "Aposentados_SIAPE"],
+    "militar": {"ativo": ["Militares"], "reservista": ["Reserva_Reforma_Militares"]},
+    "civil": {
+        "ativo": ["Servidores_BACEN", "Servidores_SIAPE"],
+        "inativo": ["Aposentados_BACEN", "Aposentados_SIAPE"],
     },
 }
 
