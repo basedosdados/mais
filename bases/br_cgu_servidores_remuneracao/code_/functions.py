@@ -50,9 +50,7 @@ def unzip_salary_file(
     file_to_unzip = f"{year}{month}_Remuneracao.csv"
     with zipfile.ZipFile(filepath) as zip_file:
         if not division:
-            zip_file.extract(
-                file_to_unzip, path=IN_DIR / career.lower() / kind.lower()
-            )
+            zip_file.extract(file_to_unzip, path=IN_DIR / career.lower() / kind.lower())
         else:
             zip_file.extract(
                 file_to_unzip,
@@ -75,11 +73,7 @@ def save_file(filename: str, content: bytes) -> Path:
 
 
 def file_exists(
-        year: str,
-        month: str,
-        career: str,
-        kind: str = None,
-        division: str = None
+    year: str, month: str, career: str, kind: str = None, division: str = None
 ) -> bool:
     """
     Check if the file exists in the input folder.

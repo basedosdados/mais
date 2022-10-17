@@ -8,9 +8,28 @@ import requests
 import typer
 
 from functions import file_exists, save_file, unzip_salary_file
+from processing_functions import get_career_df
 from settings import CGU_FILES, URL_CGU_DOWNLOADS
 
 app = typer.Typer()
+
+
+@app.command()
+def transform_files(
+    career: str = typer.Option(..., help="Career of the employee"),
+):
+    """
+    Transform the files to the final format.
+    :param career: the career of the employee (milirares or civis)
+    :param kind: the situation of the employee (ativos or inativos)
+    :param division: the division of the civilians (BACEN or SIAPE)
+    """
+    if career == "militares":
+        for kind in ["ativos", "inativos"]:
+            get_career_df(career, kind)
+    else:
+        """Script for civilians"""
+        pass
 
 
 @app.command()
@@ -38,7 +57,9 @@ def download_file(year: str, month: str, career: str, kind: str = "ativos") -> s
                 req = requests.get(url, stream=True, timeout=30)
                 req.raise_for_status()
                 filename = (
-                    req.headers.get("Content-Disposition").split("=")[-1].replace('"', "")
+                    req.headers.get("Content-Disposition")
+                    .split("=")[-1]
+                    .replace('"', "")
                 )
                 saved = save_file(filename, req.content)
                 unzipped_file = unzip_salary_file(

@@ -6,9 +6,30 @@ Tests for the the functions.
 
 from unittest.mock import Mock
 
-from code_.main import download_file
+import pandas as pd
+import pytest
+
+from main import download_file
+from processing_functions import clean_observation_lines
 
 requests = Mock()
+
+
+@pytest.fixture
+def df_test():
+    dff = pd.DataFrame(
+        [["2016", "02", "blabla"], ["2016", "02", "bleble"], ["(*) xxxxx", 2, "blibli"]],
+        columns=["ano", "mes", "nome"]
+    )
+    return dff
+
+
+def test_clean_observations(df_test):
+    """
+    Test if the function clean_observations is working.
+    :return: None
+    """
+    assert clean_observation_lines(df_test).shape == (2, 3)
 
 
 def test_download_file_does_not_exists():
