@@ -1,0 +1,277 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_camara_atividade_legislativa
+
+table_id: evento
+
+# Título da tabela.
+title: Atividade Legislativa da Câmara dos Deputados
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Lista com identificadores e informações diversas sobre as reuniões, sessões, audiências, seminários e outros eventos realizados pelos diversos órgãos legislativos da Câmara, inclusive eventos já agendados e não ocorridos. 
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 1991(1)2022
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: day
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: act
+      columns:
+        - id_evento
+
+last_updated:
+    metadata: '2022-10-12'
+    data: '2022-10-12 17:35:00'
+    release: '2022-10-12 17:35:00'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Joao Pedro Donasolo
+    email: jpdonasolo@gmail.com
+    github_user: jpdonasolo
+    ckan_user:
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Joao Pedro Donasolo
+    email: jpdonasolo@gmail.com
+    github_user: jpdonasolo
+    ckan_user:
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Padronização da BD e customização de colunas
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_camara_atividade_legislativa/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-364117
+
+project_id_prod: basedosdados-364117
+
+project_id_staging: basedosdados-364117
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: id_evento
+      bigquery_type: string
+      description: Id do evento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_inicio
+      bigquery_type: date
+      description: Data de início
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: data
+          column_name: data
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: hora_inicio
+      bigquery_type: time
+      description: Hora de início
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: hora
+          column_name: hora
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_fim
+      bigquery_type: date
+      description: Data de encerramento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: data
+          column_name: data
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: hora_fim
+      bigquery_type: time
+      description: Hora de encerramento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: hora
+          column_name: hora
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: link_pauta
+      bigquery_type: string
+      description: Link para pauta do evento
+      temporal_coverage:
+          - 1999(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: descricao
+      bigquery_type: string
+      description: Descrição do evento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: É simplesmente a pauta disponível em 'link_pauta'. Mas, como alguns registros não tem o link, a coluna foi mantida
+      is_in_staging: true
+      is_partition: false
+    - name: situacao
+      bigquery_type: string
+      description: Situação do evento (e.g. Encerrada, Cancelada, etc)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo
+      bigquery_type: string
+      description: Tipo do evento (e.g. Reunião deliberativa, Palestra, etc)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: externo
+      bigquery_type: int64
+      description: Indica se evento foi realizado em local externo
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: local
+      bigquery_type: string
+      description: Local onde foi realizado o evento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Junção das colunas 'localExterno" e "localCamara.nome". Coluna
+          preenchida conforme diferentes padrões ao longo dos anos. Os plenários dos
+          anexos, por exemplo, eram considerados local externo no início da série,
+          mas não eram no final.
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 51624
+
+metadata_modified:
