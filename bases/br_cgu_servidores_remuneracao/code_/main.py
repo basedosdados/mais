@@ -1,9 +1,10 @@
 """
 Main module of the project.
 """
-
+from pathlib import Path
 from time import sleep
 
+import basedosdados as bd
 import requests
 import typer
 
@@ -97,6 +98,25 @@ def download_career(career: str = "militar") -> None:
         for month in months:
             for kind in kinds:
                 download_file(year, month, career, kind)
+
+
+@app.command()
+def create_table(table_id: str) -> None:
+    """
+    Create the table in BigQuery
+    :return: None
+    """
+    base_path = Path.cwd().parent
+
+    tb = bd.Table(dataset_id="br_cgu_servidores_remuneracao", table_id=table_id)
+    tb.create(
+        path=str(base_path / "output/microdados_militar_reservista"),
+        force_dataset=True,
+        if_table_exists='raise',
+        if_storage_data_exists='raise',
+        if_table_config_exists='raise',
+        columns_config_url_or_path=str(base_path / "extra/architecture/militar_reservista.csv"),
+    )
 
 
 if __name__ == "__main__":
