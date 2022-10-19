@@ -1,0 +1,352 @@
+
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_tse_eleicoes
+
+table_id: local_secao
+
+# Título da tabela.
+title:
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: "Geolocalização da seção de votação.\n\nTrabalho realizado por Pindorama\
+    \ https://pindograma.com.br/\n\nVários métodos foram utilizados para geolocalizar\
+    \ as urnas. Veja uma\ndescrição da metodologia aqui: https://github.com/ipeaGIT/geobr/issues/184\n"
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2008(2)2022
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: two_years
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - country: br
+      entity: municipality
+
+last_updated:
+    metadata:
+    data:
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: João Carabetta
+    email: joao.carabetta@gmail.com
+    github_user:
+    ckan_user:
+    website: www.basedosdados.org
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Pindograma
+    email: redacao@pindograma.com.br
+    github_user:
+    ckan_user:
+    website: https://pindograma.com.br/
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: "Diversos métodos foram utilizados para geolocalizar as\
+    \ urnas\n"
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/pindograma/mapa
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: ''
+    organization_id: ''
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+    - ano
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type:
+      description: Ano
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: sigla_uf
+      bigquery_type:
+      description: Sigla Unidade da Federação
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio
+      bigquery_type:
+      description: ID Município - IBGE 7 Dígitos
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: zona
+      bigquery_type:
+      description: Zona Eleitoral
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: secao
+      bigquery_type:
+      description: Seção Eleitoral
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: melhor_urbano
+      bigquery_type:
+      description: Melhor estimativa urbana
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: melhor_rural
+      bigquery_type:
+      description: Melhor estimativa rural
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: tse_recente
+      bigquery_type:
+      description: Localização do TSE em 2018 e 2020
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: tse_distribuido
+      bigquery_type:
+      description: Localização do TSE em 2020 redistribuido para anos anteriores
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: escolas_inep
+      bigquery_type:
+      description: Localização das escolas no INEP
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: escolas_municipais
+      bigquery_type:
+      description: Localização das escolas em bases estaduais e municipais
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: ibge_cnefe_endereco
+      bigquery_type:
+      description: Centróide do setor censitário do CNEFE por endereço
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: ibge_cnefe_local
+      bigquery_type:
+      description: Centróide do setor censitário do CNEFE por local
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: google
+      bigquery_type:
+      description: Resultado do Google Maps API na precisão ROOFTOP e RANGE_INTERPOLATED
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: google_relaxado
+      bigquery_type:
+      description: Resultado do Google API Places selecionados manualmente
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: google_centro_geometrico
+      bigquery_type:
+      description: Resultado do Google Maps API na precisão GEOMETRIC_CENTER
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: false
+      is_partition: false
+    - name: ibge_povoados
+      bigquery_type:
+      description: Localização de povoados rurais isolados do BC250 IBGE
+      temporal_coverage: []
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: false
+      is_partition: false
+
+
+number_rows: 
+
+metadata_modified: 

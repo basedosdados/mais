@@ -1,0 +1,60 @@
+Geolocalização da seção de votação.
+
+Trabalho realizado por Pindorama https://pindograma.com.br/
+
+Vários métodos foram utilizados para geolocalizar as urnas. Veja uma
+descrição da metodologia aqui: https://github.com/ipeaGIT/geobr/issues/184
+
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: João Carabetta
+Código: 
+Email: joao.carabetta@gmail.com
+Tratado por
+-----------
+Nome: Pindograma
+Código: 
+Website: https://pindograma.com.br/
+Email: redacao@pindograma.com.br
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+
+
+
+
+Cobertura Temporal
+------------------
+- 2008(2)2022
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Diversos métodos foram utilizados para geolocalizar as urnas
+
+
+
+
+Frequencia de Atualização
+-------------------------
+two_years
