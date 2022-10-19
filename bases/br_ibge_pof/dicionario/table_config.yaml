@@ -61,8 +61,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: |
-    Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
+data_cleaning_description: Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pof/code
@@ -116,7 +115,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: nome_coluna
       bigquery_type: string
       description: Nome da Coluna
@@ -131,7 +130,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: chave
       bigquery_type: string
       description: Chave presente na tabela da BD
@@ -146,7 +145,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: cobertura_temporal
       bigquery_type: string
       description: Cobertura Temporal da Variável
@@ -161,7 +160,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: valor
       bigquery_type: string
       description: Valor que corresponde à chave presente na tabela da BD
@@ -176,8 +175,8 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
-number_rows:
+number_rows: 755
 
 metadata_modified:

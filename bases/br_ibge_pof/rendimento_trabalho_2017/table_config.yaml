@@ -61,8 +61,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: |
-    Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
+data_cleaning_description: Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pof/code
@@ -133,7 +132,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_estrato
       bigquery_type: string
       description: Identificador dos estratos do plano amostral da pesquisa
@@ -148,7 +147,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_primaria_amostragem
       bigquery_type: string
       description: Código da Unidade Primária de Amostragem
@@ -163,7 +162,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_domicilio
       bigquery_type: string
       description: Identificador do Domicílio
@@ -178,7 +177,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_consumo
       bigquery_type: string
       description: Identificador da Unidade de Consumo
@@ -193,7 +192,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_informante
       bigquery_type: string
       description: Indicador do Informante
@@ -208,7 +207,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_quadro
       bigquery_type: string
       description: Número do quadro que o item de despesa/aquisição foi registrado
@@ -223,7 +222,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_sub_quadro
       bigquery_type: string
       description: Identifica o tipo de trabalho que o informante exerceu, no período
@@ -239,7 +238,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_codigo_5_bd
       bigquery_type: string
       description: Código de 5 dígitos do item
@@ -254,7 +253,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9001
       bigquery_type: string
       description: Código do tipo de rendimento
@@ -269,7 +268,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V5302
       bigquery_type: string
       description: Identificador do tipo de trabalho do informante
@@ -284,7 +283,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V53021
       bigquery_type: string
       description: Identificador do tipo de trabalhador não remunerado em ajuda a
@@ -300,7 +299,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V5303
       bigquery_type: string
       description: Identifica se o informante era servidor público estatutário
@@ -315,7 +314,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V5304
       bigquery_type: string
       description: Identifica se o informante tinha carteira de trabalho assinada
@@ -330,7 +329,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V5305
       bigquery_type: string
       description: Identifica se o informante era contribuinte de instituto de previdência
@@ -345,7 +344,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V5307
       bigquery_type: string
       description: Identifica a forma de pagamento do último rendimento bruto mensal
@@ -361,7 +360,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V5314
       bigquery_type: int64
       description: Quantidade de horas trabalhadas, normalmente, por semana, no trabalho
@@ -376,7 +375,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V5315
       bigquery_type: string
       description: Duração habitual do deslocamento para o trabalho
@@ -391,7 +390,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9010
       bigquery_type: string
       description: Último mês que o rendimento foi recebido pelo informante, no período
@@ -407,7 +406,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9011
       bigquery_type: int64
       description: Número de meses que o rendimento foi recebido pelo informante,
@@ -423,7 +422,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V53011
       bigquery_type: string
       description: Código da ocupação que o informante exercia habitualmente no trabalho
@@ -438,7 +437,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V53061
       bigquery_type: string
       description: Código da principal atividade exercida no trabalho (CNAE 2.0)
@@ -453,7 +452,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: indicador_imputacao_valor
       bigquery_type: int64
       description: Indica se o valor do rendimento foi imputado
@@ -468,7 +467,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: fator_anualizacao
       bigquery_type: int64
       description: Número utilizado para anualizar as despesas/aquisições, em função
@@ -484,7 +483,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: deflator
       bigquery_type: float64
       description: Fator de multiplicação para o tratamento do efeito inflacionário
@@ -500,7 +499,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V8500
       bigquery_type: float64
       description: Valor do rendimento bruto recebido pelo informante no período de
@@ -516,7 +515,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V531112
       bigquery_type: float64
       description: Valor da dedução com previdência pública que incide sobre o rendimento
@@ -532,7 +531,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V531122
       bigquery_type: float64
       description: Valor da dedução com imposto de renda que incide sobre o rendimento
@@ -548,7 +547,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V531132
       bigquery_type: float64
       description: Valor da dedução com ISS e outros impostos que incide sobre o rendimento
@@ -564,7 +563,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V8500_deflacionado
       bigquery_type: float64
       description: Valor do rendimento deflacionado
@@ -579,7 +578,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V531112_deflacionado
       bigquery_type: float64
       description: Valor da dedução com previdência pública deflacionado
@@ -594,7 +593,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V531122_deflacionado
       bigquery_type: float64
       description: Valor da deduçao com imposto de renda deflacionado
@@ -609,7 +608,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V531132_deflacionado
       bigquery_type: float64
       description: Valor da dedução com ISS e outros impostos deflacionado
@@ -624,7 +623,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: renda_total
       bigquery_type: float64
       description: Valor do rendimento bruto total mensal da Unidade de Consumo
@@ -639,7 +638,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso
       bigquery_type: float64
       description: Fator de expansão atribuído ao domicílio pertencente a uma Unidade
@@ -655,7 +654,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso_final
       bigquery_type: float64
       description: Fator de expansão (peso) ajustado às estimativas populacionais
@@ -671,8 +670,8 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
-number_rows:
+number_rows: 97075
 
 metadata_modified:

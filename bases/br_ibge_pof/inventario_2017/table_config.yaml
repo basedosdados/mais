@@ -61,8 +61,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: |
-    Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
+data_cleaning_description: Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pof/code
@@ -132,7 +131,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_estrato
       bigquery_type: string
       description: Identificador dos estratos do plano amostral da pesquisa
@@ -147,7 +146,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_primaria_amostragem
       bigquery_type: string
       description: Código da Unidade Primária de Amostragem
@@ -162,7 +161,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_domicilio
       bigquery_type: string
       description: Identificador do Domicílio
@@ -177,7 +176,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_consumo
       bigquery_type: string
       description: Identificador da Unidade de Consumo
@@ -192,7 +191,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_quadro
       bigquery_type: string
       description: Número do quadro que o item de despesa/aquisição foi registrado
@@ -207,7 +206,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_codigo_5_bd
       bigquery_type: string
       description: Código de 5 dígitos do item
@@ -222,7 +221,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9001
       bigquery_type: string
       description: Código do tipo de bem durável
@@ -237,7 +236,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9005
       bigquery_type: int64
       description: Quantidade do bem durável existente no domicílio principal da UC
@@ -252,7 +251,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9002
       bigquery_type: string
       description: Forma de aquisição do bem durável
@@ -267,7 +266,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V1404
       bigquery_type: int64
       description: Ano da última aquisição do bem durável
@@ -282,7 +281,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9012
       bigquery_type: string
       description: Estado da última aquisição do bem durável
@@ -297,7 +296,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso
       bigquery_type: float64
       description: Fator de expansão atribuído ao domicílio pertencente a uma Unidade
@@ -313,7 +312,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso_final
       bigquery_type: float64
       description: Fator de expansão (peso) ajustado às estimativas populacionais
@@ -330,8 +329,8 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
-number_rows:
+number_rows: 870354
 
 metadata_modified:

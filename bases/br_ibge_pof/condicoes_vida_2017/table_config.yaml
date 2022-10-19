@@ -61,8 +61,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: |
-    Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
+data_cleaning_description: Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pof/code
@@ -132,7 +131,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_estrato
       bigquery_type: string
       description: Identificador dos estratos do plano amostral da pesquisa
@@ -147,7 +146,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_primaria_amostragem
       bigquery_type: string
       description: Código da Unidade Primária de Amostragem
@@ -162,7 +161,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_domicilio
       bigquery_type: string
       description: 'Identificador do Domicílio '
@@ -177,7 +176,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_consumo
       bigquery_type: string
       description: Identificador da Unidade de Consumo
@@ -192,7 +191,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_informante
       bigquery_type: string
       description: Identificador do Informante
@@ -207,7 +206,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61041
       bigquery_type: string
       description: Avaliação, segundo o informante, do padrão de vida da família relação
@@ -223,7 +222,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61042
       bigquery_type: string
       description: Avaliação, segundo o informante, do padrão de vida da família em
@@ -239,7 +238,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61043
       bigquery_type: string
       description: Avaliação, segundo o informante, do padrão de vida da família em
@@ -255,7 +254,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61044
       bigquery_type: string
       description: Avaliação, segundo o informante, do padrão de vida da família em
@@ -271,7 +270,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61045
       bigquery_type: string
       description: Avaliação, segundo o informante, do padrão de vida da família em
@@ -287,7 +286,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61046
       bigquery_type: string
       description: Avaliação, segundo o informante, do padrão de vida da família em
@@ -303,7 +302,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61051
       bigquery_type: string
       description: Avaliação, segundo o informante, das condições de moradia da família
@@ -319,7 +318,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61052
       bigquery_type: string
       description: Avaliação, segundo o informante, das condições de moradia da família
@@ -335,7 +334,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61053
       bigquery_type: string
       description: Avaliação, segundo o informante, das condições de moradia da família
@@ -351,7 +350,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61054
       bigquery_type: string
       description: Avaliação, segundo o informante, das condições de moradia da família
@@ -367,7 +366,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61055
       bigquery_type: string
       description: Avaliação, segundo o informante, das condições de moradia da família
@@ -383,7 +382,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61056
       bigquery_type: string
       description: Avaliação, segundo o informante, das condições de moradia da família
@@ -399,7 +398,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61057
       bigquery_type: string
       description: Avaliação, segundo o informante, das condições de moradia da família
@@ -415,7 +414,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61058
       bigquery_type: string
       description: Avaliação, segundo o informante, das condições de moradia da família
@@ -431,7 +430,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61061
       bigquery_type: string
       description: Indica se, segundo o informante, o domicílio possui problema de
@@ -447,7 +446,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61062
       bigquery_type: string
       description: Indica se, segundo o informante, o domicílio possui pouca iluminação
@@ -463,7 +462,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61063
       bigquery_type: string
       description: Indica se, segundo o informante, o domicílio possui problema de
@@ -479,7 +478,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61064
       bigquery_type: string
       description: Indica se, segundo o informante, o domicílio possui problema de
@@ -495,7 +494,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61065
       bigquery_type: string
       description: Indica se, segundo o informante, o domicílio possui problema de
@@ -511,7 +510,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61066
       bigquery_type: string
       description: Indica se, segundo o informante, o domicílio possui problema de
@@ -527,7 +526,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61067
       bigquery_type: string
       description: Indica se, segundo o informante, o domicílio possui problema de
@@ -544,7 +543,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61068
       bigquery_type: string
       description: Indica se, segundo o informante, o domicílio possui problema de
@@ -560,7 +559,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61069
       bigquery_type: string
       description: Indica se, segundo o informante, o domicílio possui problema de
@@ -576,7 +575,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V610610
       bigquery_type: string
       description: Indica se, segundo o informante, o domicílio possui problema de
@@ -592,7 +591,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V610611
       bigquery_type: string
       description: Indica se, segundo o informante, o domicílio possui problema de
@@ -608,7 +607,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61071
       bigquery_type: string
       description: Indica se, segundo o informante, no período de referência de 12
@@ -625,7 +624,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61072
       bigquery_type: string
       description: Indica se, segundo o informante, no período de referência de 12
@@ -642,7 +641,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V61073
       bigquery_type: string
       description: Indica se, segundo o informante, no período de referência de 12
@@ -659,7 +658,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6108
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses os moradores
@@ -676,7 +675,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6109
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses os alimentos
@@ -693,7 +692,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6110
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses os moradores
@@ -709,7 +708,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6111
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses os moradores
@@ -726,7 +725,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6112
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses algum morador
@@ -743,7 +742,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6113
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses algum morador
@@ -760,7 +759,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6114
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses algum morador
@@ -777,7 +776,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6115
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses algum morador
@@ -794,7 +793,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6116
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses algum morador
@@ -811,7 +810,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6117
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses algum morador
@@ -828,7 +827,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6118
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses alguma
@@ -845,7 +844,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6119
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses alguma
@@ -862,7 +861,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6120
       bigquery_type: string
       description: Indica se, segundo o informante, nos últimos três meses algum morador
@@ -879,7 +878,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6121
       bigquery_type: string
       description: Indica se, segundo o informante, nos últmos três meses algum morador
@@ -896,7 +895,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6101
       bigquery_type: string
       description: Indica se, na opinão do informante, o rendimento total da família
@@ -912,7 +911,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6102
       bigquery_type: float64
       description: Rendimento mensal familiar que, na opinão do informante, seria
@@ -928,7 +927,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6103
       bigquery_type: float64
       description: 'Valor mensal mínimo que, na opinião do informante, seria necessário
@@ -944,7 +943,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso
       bigquery_type: float64
       description: Fator de expansão atribuído ao domicílio pertencente a uma UPA
@@ -959,7 +958,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso_final
       bigquery_type: float64
       description: Fator de expansão (peso) ajustado às estimativas populacionais
@@ -975,8 +974,8 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
-number_rows:
+number_rows: 58039
 
 metadata_modified:

@@ -1,4 +1,4 @@
-None
+Dicionário das Variáveis
 
 Para saber mais acesse:
 Website: 
@@ -9,12 +9,14 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: None
+Nome: Arthur de Figueiredo Gusmão
 Código: 
+Email: arthur.gusmao@basedosdados.org
 Tratado por
 -----------
-Nome: None
+Nome: Arthur de Figueiredo Gusmão
 Código: 
+Email: arthur.gusmao@basedosdados.org
 
 
 
@@ -23,17 +25,24 @@ Código:
 
 Cobertura Temporal
 ------------------
+- 2017(1)2018
 
 
 
 
 Cobertura Espacial
 ------------------
+- sa.br
 
 
 
 
+Tratamento
+----------
+Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
 
 
 
-
+Frequencia de Atualização
+-------------------------
+['ten_years']

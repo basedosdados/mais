@@ -47,7 +47,6 @@ Renomeação e ordenamento das variáveis, criação de identificadores de Unida
 
 
 
-
 Frequencia de Atualização
 -------------------------
 ['ten_years']

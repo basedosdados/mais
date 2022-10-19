@@ -61,8 +61,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: |
-    Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
+data_cleaning_description: Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pof/code
@@ -132,7 +131,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_estrato
       bigquery_type: string
       description: Identificador dos estratos do plano amostral da pesquisa
@@ -147,7 +146,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_primaria_amostragem
       bigquery_type: string
       description: Código da Unidade Primária de Amostragem
@@ -162,7 +161,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_domicilio
       bigquery_type: string
       description: 'Identificador do domicílio '
@@ -177,7 +176,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_consumo
       bigquery_type: string
       description: Identificador da Unidade de Consumo
@@ -192,7 +191,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_informante
       bigquery_type: string
       description: Indicador do informante
@@ -207,7 +206,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: dia_nascimento
       bigquery_type: int64
       description: Dia de Nascimento
@@ -222,7 +221,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: mes_nascimento
       bigquery_type: int64
       description: Mês de Nascimento
@@ -237,7 +236,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: ano_nascimento
       bigquery_type: int64
       description: Ano de Nascimento
@@ -252,7 +251,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: idade
       bigquery_type: int64
       description: Idade
@@ -267,7 +266,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: sexo
       bigquery_type: string
       description: Sexo
@@ -282,7 +281,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: raca_cor
       bigquery_type: string
       description: Cor ou raça
@@ -297,7 +296,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: anos_estudo
       bigquery_type: int64
       description: Anos de estudo
@@ -312,7 +311,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: renda_total
       bigquery_type: float64
       description: Rendimento bruto total mensal da Unidade de Consumo
@@ -327,7 +326,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: nivel_instrucao
       bigquery_type: string
       description: Nível de instrução da pessoa de referência da Unidade de Consumo
@@ -342,7 +341,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: composicao_familiar
       bigquery_type: string
       description: Composição familiar da Unidade de Consumo
@@ -357,7 +356,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0306
       bigquery_type: string
       description: Condição na unidade de consumo
@@ -372,7 +371,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0401
       bigquery_type: string
       description: Condição de presença no momento da pesquisa
@@ -387,7 +386,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0406
       bigquery_type: string
       description: Identifica se o morador possui plano ou seguro-saúde
@@ -402,7 +401,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0407
       bigquery_type: string
       description: Identifica se o morador teve algum tipo de rendimento ou executou
@@ -418,7 +417,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0408
       bigquery_type: string
       description: Identifica se o morador tem o hábito de realizar despesas ou aquisições
@@ -434,7 +433,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0409
       bigquery_type: int64
       description: Quantidade de cartões de créditos do morador
@@ -449,7 +448,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0410
       bigquery_type: int64
       description: Quantidade de contas correntes do morador
@@ -464,7 +463,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0411
       bigquery_type: int64
       description: Quantidade de cheques especiais do morador
@@ -479,7 +478,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0412
       bigquery_type: string
       description: Identifica se o morador usou cheque especial nos últimos 90 dias
@@ -494,7 +493,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0413
       bigquery_type: int64
       description: Quantidade de cadernetas de poupança do morador
@@ -509,7 +508,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0414
       bigquery_type: string
       description: Identifica se o morador sabe ler ou escrever
@@ -524,7 +523,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0415
       bigquery_type: string
       description: Identifica se o morador frequenta escola ou creche
@@ -539,7 +538,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0416
       bigquery_type: int64
       description: Quantidade de vezes por semana que o morador frequenta escola ou
@@ -555,7 +554,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V041711
       bigquery_type: string
       description: Identifica se o morador costuma realizar diariamente café da manhã
@@ -571,7 +570,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V041712
       bigquery_type: string
       description: Identifica se o café da manhã é fornecido pela escola ou creche,
@@ -587,7 +586,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V041721
       bigquery_type: string
       description: Identifica se o morador costuma realizar diariamente lanche na
@@ -603,7 +602,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V041722
       bigquery_type: string
       description: Identifica se o lanche é fornecido pela escola ou creche, sem custo
@@ -618,7 +617,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V041731
       bigquery_type: string
       description: Identifica se o morador costuma realizar diariamente almoço na
@@ -634,7 +633,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V041732
       bigquery_type: string
       description: Identifica se o almoço é fornecido pela escola ou creche, sem custo
@@ -649,7 +648,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V041741
       bigquery_type: string
       description: Identifica se o morador costuma realizar diariamente jantar na
@@ -665,7 +664,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V041742
       bigquery_type: string
       description: Identifica se o jantar é fornecido pela escola ou creche, sem custo
@@ -680,7 +679,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0418
       bigquery_type: string
       description: Rede da escola frequentada
@@ -695,7 +694,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0419
       bigquery_type: string
       description: Tipo de curso frequentado
@@ -710,7 +709,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0420
       bigquery_type: string
       description: Duração do curso frequentado
@@ -725,7 +724,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0421
       bigquery_type: string
       description: Tipo de organização do curso
@@ -740,7 +739,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0422
       bigquery_type: string
       description: Ano/Semestre/Série frequentado
@@ -755,7 +754,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0423
       bigquery_type: string
       description: Identifica se o morador já concluiu algum outro curso superior
@@ -771,7 +770,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0424
       bigquery_type: string
       description: Identifica se o morador, anteriormente, já frequentou escola ou
@@ -787,7 +786,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0425
       bigquery_type: string
       description: Curso mais elevado frequentado pelo morador anteriormente
@@ -802,7 +801,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0426
       bigquery_type: string
       description: Duração do curso frequentado anteriormente
@@ -817,7 +816,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0427
       bigquery_type: string
       description: Tipo de organização do curso frequentado anteriormente
@@ -832,7 +831,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0428
       bigquery_type: string
       description: Identifica se o morador concluiu, com aprovação, pelo menos o primeiro
@@ -848,7 +847,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0429
       bigquery_type: string
       description: Ultimo ano/semestre/série que o morador concluiu, com aprovação,
@@ -864,7 +863,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0430
       bigquery_type: string
       description: Identifica se o morador concluiu o curso frequentado anteriormente
@@ -879,7 +878,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso
       bigquery_type: float64
       description: Fator de expansão atribuído ao domicílio pertencente a uma UPA
@@ -894,7 +893,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso_final
       bigquery_type: float64
       description: Fator de expansão (peso) ajustado às estimativas populacionais
@@ -910,7 +909,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: deducao_per_capita
       bigquery_type: float64
       description: Dedução familiar per capita
@@ -925,7 +924,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: renda_nao_monetaria_per_capita
       bigquery_type: float64
       description: Renda não monetária familiar per capita
@@ -940,7 +939,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: renda_monetaria_per_capita
       bigquery_type: float64
       description: Renda monetária familiar per capita
@@ -955,7 +954,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: renda_disponivel_per_capita
       bigquery_type: float64
       description: Renda disponível familiar per capita
@@ -970,8 +969,8 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
-number_rows:
+number_rows: 178431
 
 metadata_modified:

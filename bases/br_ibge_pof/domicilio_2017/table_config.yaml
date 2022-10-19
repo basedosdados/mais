@@ -61,8 +61,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: |
-    Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
+data_cleaning_description: Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pof/code
@@ -132,7 +131,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_estrato
       bigquery_type: string
       description: Identificador dos estratos do plano amostral da pesquisa
@@ -147,7 +146,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_primaria_amostragem
       bigquery_type: string
       description: Código da Unidade Primária de Amostragem
@@ -162,7 +161,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_domicilio
       bigquery_type: string
       description: 'Identificador do domicílio '
@@ -177,7 +176,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0201
       bigquery_type: string
       description: Tipo do domicílio
@@ -192,7 +191,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0202
       bigquery_type: string
       description: Material predominante na construção das paredes externas do domicílio
@@ -207,7 +206,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0203
       bigquery_type: string
       description: Material predominante na cobertura (telhado) do domicílio
@@ -222,7 +221,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0204
       bigquery_type: string
       description: Material predominante no piso do domicílio
@@ -237,7 +236,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0205
       bigquery_type: int64
       description: Número de cômodos
@@ -252,7 +251,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0206
       bigquery_type: int64
       description: Número de cômodos servindo permanentemente de dormitórios para
@@ -268,7 +267,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0207
       bigquery_type: string
       description: Forma principal de abastecimento de água no domicílio
@@ -283,7 +282,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0208
       bigquery_type: string
       description: Frequência de disponibilidade de água da rede geral no últimos
@@ -299,7 +298,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0209
       bigquery_type: string
       description: 'Forma de chegada da água no domicílio '
@@ -314,7 +313,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02101
       bigquery_type: string
       description: Presença de água canalizada aquecida por energia elétrica no domicílio
@@ -329,7 +328,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02102
       bigquery_type: string
       description: Presença de água canalizada aquecida por gás no domicílio
@@ -344,7 +343,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02103
       bigquery_type: string
       description: 'Presença de água canalizada aquecida por energia solar no domicílio '
@@ -359,7 +358,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02104
       bigquery_type: string
       description: Presença de água canalizada aquecida por lenha ou carvão no domicílio
@@ -374,7 +373,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02105
       bigquery_type: string
       description: Presença de água canalizada aquecida por outra forma no domicílio
@@ -389,7 +388,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02111
       bigquery_type: int64
       description: Quantidade de banheiros (com chuveiro e vaso sanitário) de uso
@@ -405,7 +404,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02112
       bigquery_type: int64
       description: Quantidade de banheiros de uso comum a mais de um domicílio no
@@ -421,7 +420,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02113
       bigquery_type: string
       description: Presença de sanitário ou buraco para dejeções, inclusive os localizados
@@ -437,7 +436,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0212
       bigquery_type: string
       description: Forma de escoamento dos banheiros, sanitários ou buracos para dejeções
@@ -452,7 +451,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0213
       bigquery_type: string
       description: Principal destino dado ao lixo
@@ -467,7 +466,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02141
       bigquery_type: string
       description: Presença de energia elétrica proveniente da rede geral
@@ -482,7 +481,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02142
       bigquery_type: string
       description: Presença de energia elétrica proveniente de outra origem (gerador,
@@ -498,7 +497,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0215
       bigquery_type: string
       description: Frequência de disponibilidade de água da rede geral no últimos
@@ -514,7 +513,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02161
       bigquery_type: string
       description: Utilização de gás de botijão ou encanado para a preparação de alimentos
@@ -530,7 +529,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02162
       bigquery_type: string
       description: Utilização de lenha ou carvão para a preparação de alimentos no
@@ -546,7 +545,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02163
       bigquery_type: string
       description: Utilização de energia elétrica para a preparação de alimentos no
@@ -562,7 +561,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V02164
       bigquery_type: string
       description: Utilização de outro combustível (óleo, querosene, etc) para a preparação
@@ -578,7 +577,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0217
       bigquery_type: string
       description: Tipo de condição do domicílio (alugado, próprio, etc)
@@ -593,7 +592,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0219
       bigquery_type: string
       description: Tipo do contrato de aluguel
@@ -608,7 +607,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0220
       bigquery_type: string
       description: Presença de pavimentação na rua do domicílio
@@ -623,7 +622,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V0221
       bigquery_type: string
       description: Tipo de serviço de distribuição dos correios para o domicílio
@@ -638,7 +637,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V6199
       bigquery_type: string
       description: Situação de segurança alimentar do domicílio
@@ -653,7 +652,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso
       bigquery_type: float64
       description: Fator de expansão atribuído ao domicílio pertencente a uma UPA
@@ -668,7 +667,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso_final
       bigquery_type: float64
       description: Fator de expansão (peso) ajustado às estimativas populacionais
@@ -684,8 +683,8 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
-number_rows:
+number_rows: 57920
 
 metadata_modified:

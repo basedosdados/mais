@@ -61,8 +61,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: |
-    Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
+data_cleaning_description: Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pof/code
@@ -132,7 +131,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_estrato
       bigquery_type: string
       description: Identificador dos estratos do plano amostral da pesquisa
@@ -147,7 +146,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_primaria_amostragem
       bigquery_type: string
       description: Código da Unidade Primária de Amostragem
@@ -162,7 +161,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_domicilio
       bigquery_type: string
       description: 'Identificador do domicílio '
@@ -177,7 +176,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_consumo
       bigquery_type: string
       description: Identificador da Unidade de Consumo
@@ -192,7 +191,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_quadro
       bigquery_type: string
       description: Número do quadro que o item de despesa/aquisição foi registrado
@@ -207,7 +206,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_codigo_5_bd
       bigquery_type: string
       description: Código de 5 dígitos do item
@@ -222,7 +221,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9001
       bigquery_type: string
       description: Código do tipo de despesa/aquisição
@@ -237,7 +236,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9002
       bigquery_type: string
       description: Forma de aquisição
@@ -252,7 +251,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9004
       bigquery_type: string
       description: Código do local de aquisição
@@ -267,7 +266,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9007
       bigquery_type: string
       description: Código da Unidade de Medida pela qual o produto foi adquirido,
@@ -283,7 +282,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9009
       bigquery_type: string
       description: Código do Peso/Volume referente a Unidade de Medida pela qual o
@@ -299,7 +298,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V9005
       bigquery_type: float64
       description: Quantidade do produto adquirido, aplicável apenas para alimentos
@@ -315,7 +314,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: quantidade_final
       bigquery_type: float64
       description: Quantidade final em Kg, aplicável para Alimentos e Bebidas
@@ -330,7 +329,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: indicador_imputacao_valor
       bigquery_type: int64
       description: Indica se o valor da despesa/aquisição foi imputado
@@ -345,7 +344,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: fator_anualizacao
       bigquery_type: int64
       description: Número utilizado para anualizar as despesas/aquisições, em função
@@ -361,7 +360,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: deflator
       bigquery_type: float64
       description: Fator de multiplicação para o tratamento do efeito inflacionário
@@ -377,7 +376,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V8000
       bigquery_type: float64
       description: Valor da despesa/aquisição realizada pela Unidade de Consumo no
@@ -393,7 +392,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: V8000_deflacionado
       bigquery_type: float64
       description: Valor da despesa/aquisição deflacionado
@@ -408,7 +407,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: renda_total
       bigquery_type: float64
       description: Valor do rendimento bruto total mensal da Unidade de Consumo
@@ -423,7 +422,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso
       bigquery_type: float64
       description: Fator de expansão atribuído ao domicílio pertencente a uma Unidade
@@ -439,7 +438,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: peso_final
       bigquery_type: float64
       description: Fator de expansão (peso) ajustado às estimativas populacionais
@@ -455,8 +454,8 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
-number_rows:
+number_rows: 789995
 
 metadata_modified:
