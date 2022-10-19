@@ -25,7 +25,7 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-  2020(Y)2022
+  - 2020-01(1)2022-08
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -34,7 +34,15 @@ update_frequency:
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-  - servidor
+  - entity: year
+    columns:
+      - ano
+  - entity: month
+    columns:
+      - mes
+  - entity: person
+    columns:
+      - id_servidor_portal
 
 last_updated:
     metadata:
@@ -113,7 +121,7 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -122,13 +130,13 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       observations:
-      is_in_staging:
+      is_in_staging: true
       is_partition: true
     - name: mes
       bigquery_type: int64
       description: Mês
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -137,7 +145,7 @@ columns:
       measurement_unit: month
       has_sensitive_data: no
       observations:
-      is_in_staging:
+      is_in_staging: true
       is_partition: true
     - name: id_servidor_portal
       bigquery_type: string
@@ -152,13 +160,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: cpf
       bigquery_type: string
       description: 'CPF do servidor anonimizado '
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -167,13 +175,13 @@ columns:
       measurement_unit:
       has_sensitive_data: yes
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nome
       bigquery_type: string
       description: 'Nome '
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -182,13 +190,13 @@ columns:
       measurement_unit:
       has_sensitive_data: yes
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: remuneracao_bruta_brl
       bigquery_type: float64
       description: Remuneração bruta gasta em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -197,13 +205,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: remuneracao_bruta_usd
       bigquery_type: float64
       description: 'Remuneração bruta gasta em Dólar '
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -212,13 +220,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: abate_teto_brl
       bigquery_type: float64
       description: Abate em relação ao valor do teto em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -227,13 +235,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: abate_teto_usd
       bigquery_type: float64
       description: Abate em relação ao valor do teto em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -242,13 +250,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: gratificao_natalina_brl
       bigquery_type: float64
       description: Gratificação Natalina em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -257,13 +265,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: gratificao_natalina_usd
       bigquery_type: float64
       description: Gratificação Natalina em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -272,13 +280,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: abate_teto_gratificacao_natalina_brl
       bigquery_type: float64
       description: Abate do teto na Gratificação Natalina em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -287,13 +295,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: abate_teto_gratificacao_natalina_usd
       bigquery_type: float64
       description: Abate do teto na Gratificação Natalina em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -302,13 +310,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: ferias_brl
       bigquery_type: float64
       description: Remuneração de férias em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -317,13 +325,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: ferias_usd
       bigquery_type: float64
       description: Remuneração de férias em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -332,13 +340,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: outras_remuneracoes_brl
       bigquery_type: float64
       description: Outras remunerações eventuais em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -347,13 +355,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: outras_remuneracoes_usd
       bigquery_type: float64
       description: Outras remunerações eventuais em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -362,13 +370,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: irrf_brl
       bigquery_type: float64
       description: Imposto de Renda Retido na Fonte (IRRF) em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -377,13 +385,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: irrf_usd
       bigquery_type: float64
       description: Imposto de Renda Retido na Fonte (IRRF) em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -392,14 +400,14 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: pss_rgps_brl
       bigquery_type: float64
       description: Plano de Seguridade Social (PSS) ou Regime Geral de Previdência
           Social  (RGPS) em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -408,14 +416,14 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: pss_rgps_usd
       bigquery_type: float64
       description: Plano de Seguridade Social (PSS) ou Regime Geral de Previdência
           Social  (RGPS) em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -424,13 +432,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: demais_deducoes_brl
       bigquery_type: float64
       description: Demais deduções em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -439,13 +447,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: demais_deducoes_usd
       bigquery_type: float64
       description: Demais deduções em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -454,13 +462,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: pensao_militar_brl
       bigquery_type: float64
       description: Pensão militar em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -469,13 +477,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: pensao_militar_usd
       bigquery_type: float64
       description: Pensão militar em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -484,13 +492,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: fundo_saude_brl
       bigquery_type: float64
       description: Fundo de Saúde Militar em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -499,13 +507,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: fundo_saude_usd
       bigquery_type: float64
       description: Fundo de Saúde Militar em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -514,13 +522,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: taxa_ocupacao_imovel_funcional_brl
       bigquery_type: float64
       description: Taxa de ocupação imóvel funcional em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -529,13 +537,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: taxa_ocupacao_imovel_funcional_usd
       bigquery_type: float64
       description: Taxa de ocupação imóvel funcional em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -544,13 +552,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: remuneracao_liquida_militar_brl
       bigquery_type: float64
       description: Remuneração após deduções obrigatória em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -559,13 +567,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: remuneracao_liquida_militar_usd
       bigquery_type: float64
       description: Remuneração após deduções obrigatória em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -574,14 +582,14 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: verba_indenizatoria_civil_brl
       bigquery_type: float64
       description: 'Verba indenizatória registradas em sistemas de pessoal - civil
           em Real '
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -590,14 +598,14 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: verba_indenizatoria_civil_usd
       bigquery_type: float64
       description: 'Verba indenizatória registradas em sistemas de pessoal - civil
           em Dólar '
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -606,14 +614,14 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: verba_indenizatoria_militar_brl
       bigquery_type: float64
       description: 'Verba indenizatória registradas em sistemas de pessoal - militar
           em Real '
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -622,14 +630,14 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: verba_indenizatoria_militar_usd
       bigquery_type: float64
       description: 'Verba indenizatória registradas em sistemas de pessoal - militar
           em Dólar '
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -638,13 +646,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: verba_indenizatoria_deslig_voluntario_brl
       bigquery_type: float64
       description: Verba indenizatória programa desligamento voluntário em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -653,13 +661,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: verba_indenizatoria_deslig_voluntario_usd
       bigquery_type: float64
       description: 'Verba indenizatória programa desligamento voluntário em Dólar '
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -668,13 +676,13 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: total_verba_indenizatoria_brl
       bigquery_type: float64
       description: Total da verba indenizatória em Real
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -683,13 +691,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: total_verba_indenizatoria_usd
       bigquery_type: float64
       description: Total da verba indenizatória em Dólar
       temporal_coverage:
-          - 2013-01(1)2022-08
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -698,8 +706,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
 
 number_rows:
 
