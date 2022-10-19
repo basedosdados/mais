@@ -1,0 +1,57 @@
+
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-ibge-pof
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Pesquisa de Orçamentos Familiares (POF)
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization: 
+    - br-ibge
+
+# Descrição do conjunto
+notes: 'A Pesquisa de Orçamentos Familiares (POF) avalia as estruturas de consumo, de gastos, de rendimentos e parte da variação patrimonial
+        das famílias, oferecendo um perfil das condições de vida da população a partir da análise dos
+        orçamentos domésticos. Além das informações diretamente associadas à estrutura orçamentária, várias
+        características dos domicílios e das famílias são também investigadas, incluindo a autoavaliação
+        subjetiva sobre qualidade de vida. Os resultados da pesquisa possibilitam, ainda, estudar a
+        composição dos gastos das famílias segundo as classes de rendimentos, as disparidades regionais, as situações urbana
+        e rural, a difusão e o volume das transferências entre as diferentes classes de renda, bem como a
+        dimensão do mercado consumidor para grupos de produtos e serviços.  A pesquisa tem como unidade de
+        investigação o domicílio e é realizada por amostragem.'
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+    - economia
+    - educacao
+    - populacao
+    - saude
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - emprego
+    - informalidade
+    - ocupacao
+    - trabalho
+    - alimentacao
+    - seguran\u00e7a alimentar
+    - consumo
+    - pobreza -renda
+    - renda
+    - orcamento
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified:

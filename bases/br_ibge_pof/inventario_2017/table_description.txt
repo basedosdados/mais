@@ -1,0 +1,53 @@
+Microdados do Registro de Inventário da Pesquisa de Orçamentos Familiares.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Arthur de Figueiredo Gusmão
+Código: 
+Email: arthur.gusmao@basedosdados.org
+Tratado por
+-----------
+Nome: Arthur de Figueiredo Gusmão
+Código: 
+Email: arthur.gusmao@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- sigla_uf
+
+
+
+
+Cobertura Temporal
+------------------
+- 2017(1)2018
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
+
+
+
+
+Frequencia de Atualização
+-------------------------
+['ten_years']
