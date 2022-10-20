@@ -35,7 +35,6 @@ def unzip_salary_file(
     month: str,
     career: str,
     kind: str = None,
-    division: str = None,
 ) -> str:
     """
     Unzip the file and returns the name of the unzipped file.
@@ -44,18 +43,29 @@ def unzip_salary_file(
     :param month: month to download
     :param career: career of the employee (milirares or civis)
     :param kind: situation of the employee (ativos or inativos)
-    :param division: division of the civilians (BACEN or SIAPE)
     :return: the name of file to unzip
     """
+    division = str(filepath).rsplit("_", maxsplit=1)[-1]
+    division = division.split(".")[0].lower()
+    if division not in ["bacen", "siape"]:
+        division = None
+    else:
+        division = f"_{division}"
+
     file_to_unzip = f"{year}{month}_Remuneracao.csv"
+    path_to_unzip = IN_DIR / career.lower() / kind.lower()
+    filename_to_unzip = f"{year}{month}_Remuneracao{division}.csv"
+
     with zipfile.ZipFile(filepath) as zip_file:
-        if not division:
-            zip_file.extract(file_to_unzip, path=IN_DIR / career.lower() / kind.lower())
-        else:
-            zip_file.extract(
-                file_to_unzip,
-                path=IN_DIR / career.lower() / kind.lower() / division.lower(),
-            )
+        zip_file.extract(
+            file_to_unzip,
+            path=path_to_unzip,
+        )
+
+        if division:
+            (path_to_unzip / file_to_unzip).rename(path_to_unzip / filename_to_unzip)
+            return filename_to_unzip
+
     return file_to_unzip
 
 
@@ -87,6 +97,7 @@ def file_exists(
     print("Checking if file exists...\n")
     file_to_check = IN_DIR / career.lower() / kind.lower()
     if division:
-        file_to_check = file_to_check / division.lower()
-    file_to_check = file_to_check / f"{year}{month}_Remuneracao.csv"
+        file_to_check = file_to_check / f"{year}{month}_Remuneracao_{division.lower()}.csv"
+    else:
+        file_to_check = file_to_check / f"{year}{month}_Remuneracao.csv"
     return file_to_check.exists()

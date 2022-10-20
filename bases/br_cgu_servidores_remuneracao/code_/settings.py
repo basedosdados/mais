@@ -2,6 +2,8 @@
 Settings for the project.
 """
 
+# pylint: disable=invalid-name
+
 from pathlib import Path
 
 URL_CGU_DOWNLOADS = "http://www.portaltransparencia.gov.br/download-de-dados/servidores"
@@ -9,7 +11,7 @@ CGU_FILES = {
     "militar": {"ativo": ["Militares"], "reservista": ["Reserva_Reforma_Militares"]},
     "civil": {
         "ativo": ["Servidores_BACEN", "Servidores_SIAPE"],
-        "inativo": ["Aposentados_BACEN", "Aposentados_SIAPE"],
+        "aposentado": ["Aposentados_BACEN", "Aposentados_SIAPE"],
     },
 }
 
@@ -17,7 +19,7 @@ TMP_DIR = Path.cwd().resolve().parent / "tmp"
 IN_DIR = Path.cwd().resolve().parent / "input"
 OUT_DIR = Path.cwd().resolve().parent / "output"
 
-REMUNERACAO_MILITARES_COLUMNS = [
+REMUNERACAO_COLUMNS = [
     "ano",
     "mes",
     "id_servidor_portal",
