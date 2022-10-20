@@ -121,9 +121,12 @@ def create_table(
     test: bool = typer.Option(False, help="Whether it is a test or not")
 ) -> None:
     """
-    Create the table in BigQuery
+    Create the table in BigQuery. Remember to check if columns config (CSV) has the same name as table_id
     """
     base_path = Path.cwd().parent
+    architecture_file = base_path / f"extra/architecture/{table_id}.csv"
+    if not architecture_file.exists():
+        raise FileNotFoundError(f"Arquivo {architecture_file} não encontrado")
 
     tbl = bd.Table(dataset_id="br_cgu_servidores_remuneracao", table_id=table_id)
     output_path = f"output/{table_id}" if not test else f"output/test/{table_id}_test"
