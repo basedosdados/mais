@@ -1,4 +1,4 @@
-Número de usuários no site
+Número de usuários que acessaram o site
 
 Para saber mais acesse:
 Website: 
@@ -9,12 +9,15 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: None
+Nome: Laura amaral
 Código: 
+Website: 
+Email: laura.amaral@basedosdados.org
 Tratado por
 -----------
-Nome: None
+Nome: Lucas Rodrigues
 Código: 
+Email: lucas.rodrigues@basedosdados.org
 
 
 
@@ -27,7 +30,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 2022-09-12(1)2022-09-19
+- 2022-09-12(1)2022-10-21
 
 
 
@@ -42,4 +45,6 @@ Cobertura Espacial
 
 
 
-
+Frequencia de Atualização
+-------------------------
+day
