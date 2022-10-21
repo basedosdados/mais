@@ -27,8 +27,8 @@ assignees:
 
 - [ ] Baixar a pasta template
 - [ ] Preencher as tabelas de arquitetura
-- [ ] Escrever código de captura e limpeza de dados.
-- [ ] Organizar arquivos auxiliares, se necessário.
-- [ ] Criar tabela dicionário, se necessário.
-- [ ] Subir arquiteturas, dados e arquivos auxiliares no Google Cloud.
-- [ ] Enviar tudo para revisão.
+- [ ] Escrever código de captura e limpeza de dados
+- [ ] Organizar arquivos auxiliares, se necessário
+- [ ] Criar tabela dicionário, se necessário
+- [ ] Fazer uma revisão seguindo o [nosso guia](https://github.com/basedosdados/.github/wiki/Dados#como-fazer-code-review) (apenas Passo 2 e Passo 3)
+- [ ] Abrir PR para que outros usuários façam a revisão
