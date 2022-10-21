@@ -24,7 +24,7 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2022-09-12(1)2022-09-26
+    - 2022-09-12(1)2022-10-21
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -210,7 +210,22 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
+    - name: active_users
+      bigquery_type: int64
+      description: Number of active users in that date
+      temporal_coverage:
+          - 2022-10-21(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
 
-number_rows: 2
+number_rows:
 
-metadata_modified: '2022-09-27T13:49:45.532217'
+metadata_modified: '2022-10-10T00:00:29.743290'
