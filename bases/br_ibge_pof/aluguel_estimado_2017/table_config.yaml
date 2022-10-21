@@ -118,16 +118,17 @@ columns:
       is_in_staging: true
       is_partition: true
     - name: situacao
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: Situação do Domicílio
       temporal_coverage:
-      covered_by_dictionary:
+          - 2017(1)2018
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
