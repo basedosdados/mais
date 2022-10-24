@@ -27,7 +27,7 @@ Após esses passos, seu ambiente estará configurado e você pode criar uma nova
 
 <p align="left">
     <a href="https://github.com/basedosdados/mais/blob/master/stata-package/blob/main/examples/python1.png">
-    <img src="examples/python1.png" width="400" alt="Base dos Dados Mais">
+    <img src="stata-package/examples/python1.png" width="400" alt="Base dos Dados Mais">
     </a>
 </p>
 
@@ -35,7 +35,7 @@ __Passo 2.__ Após instalar o Python, abra o menu iniciar, digite "cmd" e abra. 
 
 <p align="left">
     <a href="https://github.com/basedosdados/mais/blob/master/stata-package/blob/main/examples/prompt.png">
-    <img src="examples/prompt.png" width="400" alt="Base dos Dados Mais">
+    <img src="stata-package/examples/prompt.png" width="400" alt="Base dos Dados Mais">
     </a>
 </p>
 
@@ -44,3 +44,5 @@ __Passo 3.__ Após concluir a instalação do pacote basedosdados, digite `based
 > <img src="https://raw.githubusercontent.com/haghish/markdoc/master/Resources/images/attention.png" width="20px" height="20px"  align="left" hspace="0" vspace="0"> Caso esteja utilizando os dados da BD pela primeira vez, é necessário criar um projeto para que você possa fazer as queries no nosso repositório. Ter um projeto é de graça e basta ter uma conta Google (seu gmail por exemplo). [Veja aqui como criar um projeto no Google Cloud](https://basedosdados.github.io/mais/access_data_bq/#antes-de-comecar-crie-o-seu-projeto-no-google-cloud).
 
 Após finalizar esses 3 passos, já será possível abrir o Stata e começar a usar o pacote. Para saber mais sobre os comandos do pacote, leia esse manual [aqui](https://github.com/basedosdados/mais/tree/master/stata-package). 
+
+Com a conclusão da configuração do ambiente, você pode criar uma nova branch para desenvolver uma nova feature..
