@@ -31,7 +31,13 @@ update_frequency:
     - ten_years
 
 # Nível de observação da tabela: o que representa cada linha.
-observation_level: 
+observation_level:
+    - entity: household
+      columns:
+        - id_unidade_consumo
+    - entity: item
+      columns:
+        - id_codigo_5_bd 
 
 last_updated:
     metadata: '2022-10-19'
