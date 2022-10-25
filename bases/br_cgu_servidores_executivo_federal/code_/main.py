@@ -128,7 +128,7 @@ def create_table(
     if not architecture_file.exists():
         raise FileNotFoundError(f"Arquivo {architecture_file} não encontrado")
 
-    tbl = bd.Table(dataset_id="br_cgu_servidores_remuneracao", table_id=table_id)
+    tbl = bd.Table(dataset_id="br-cgu-servidores-executivo-federal", table_id=table_id)
     output_path = f"output/{table_id}" if not test else f"output/test/{table_id}_test"
     tbl.create(  # pylint: disable=no-value-for-parameter
         path=str(base_path / output_path),
@@ -152,7 +152,7 @@ def replace_data(
     """
     base_path = Path.cwd().parent
 
-    tbl = bd.Table(dataset_id="br_cgu_servidores_remuneracao", table_id=table_id)
+    tbl = bd.Table(dataset_id="br_cgu_servidores_executivo_federal", table_id=table_id)
     output_path = f"output/{table_id}" if not test else f"output/test/{table_id}_test"
     tbl.create(  # pylint: disable=no-value-for-parameter
         path=str(base_path / output_path),
