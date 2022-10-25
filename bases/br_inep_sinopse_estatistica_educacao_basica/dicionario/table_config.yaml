@@ -27,8 +27,7 @@ temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency:
-    - unique
+update_frequency: unique
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
