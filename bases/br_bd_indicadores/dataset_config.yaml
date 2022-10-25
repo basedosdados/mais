@@ -19,8 +19,7 @@ notes: Indicadores da Base dos Dados enquanto organização sem fins lucrativos.
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
-groups: 
-    - economia
+groups: []
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
@@ -30,12 +29,8 @@ groups:
 #    - sem acentos
 #    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
-tags: 
-    - contabilidade
-    - financa
-    - pessoa
-    - equipe
+tags: []
 
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.
-metadata_modified: '2022-10-21T00:00:22.797486'
+metadata_modified: '2022-10-25T00:00:53.597503'
