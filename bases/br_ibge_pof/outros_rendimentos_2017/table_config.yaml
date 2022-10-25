@@ -323,7 +323,7 @@ columns:
       is_partition: false
     - name: deflator
       bigquery_type: float64
-      description: Fator de multiplicação para o tratamento do efeito inflacionário
+      description: Fator de multiplicação para o tratamento do efeito inflacionário (Data de Referência - 5 de janeiro de 2018)
           sobre os valores monetários e não monetários
       temporal_coverage:
           - 2017(1)2018
@@ -355,7 +355,7 @@ columns:
       is_partition: false
     - name: V8500_deflacionado
       bigquery_type: float64
-      description: Valor do rendimento deflacionado
+      description: Valor do rendimento deflacionado (Data de Referência - 5 de janeiro de 2018)
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -386,7 +386,7 @@ columns:
       is_partition: false
     - name: V8501_deflacionado
       bigquery_type: float64
-      description: Valor da dedução deflacionado
+      description: Valor da dedução deflacionado (Data de Referência - 5 de janeiro de 2018)
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no

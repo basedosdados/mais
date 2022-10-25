@@ -269,7 +269,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: month
+      measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -323,7 +323,7 @@ columns:
       is_partition: false
     - name: deflator
       bigquery_type: float64
-      description: Fator de multiplicação para o tratamento do efeito inflacionário
+      description: Fator de multiplicação para o tratamento do efeito inflacionário (Data de Referência - 5 de janeiro de 2018)
           sobre os valores monetários e não monetários
       temporal_coverage:
           - 2017(1)2018
@@ -355,7 +355,7 @@ columns:
       is_partition: false
     - name: V8000_deflacionado
       bigquery_type: float64
-      description: Valor da despesa/aquisição deflacionado
+      description: Valor da despesa/aquisição deflacionado (Data de Referência - 5 de janeiro de 2018)
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no

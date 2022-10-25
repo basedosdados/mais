@@ -388,7 +388,7 @@ columns:
       bigquery_type: float64
       description: Fator de multiplicação para o tratamento do efeito inflacionário
           sobre os valores monetários e não monetários correntes das aquisições de
-          bens e serviços e rendimentos
+          bens e serviços e rendimentos (Data de Referência - 5 de janeiro de 2018)
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -420,7 +420,7 @@ columns:
     - name: V8000_deflacionado
       bigquery_type: float64
       description: Valor da despesa/aquisição realizada pelo informante, no período
-          de referência, deflacionado
+          de referência, deflacionado (Data de Referência - 5 de janeiro de 2018)
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
