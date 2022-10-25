@@ -136,7 +136,7 @@ columns:
       is_partition: false
     - name: populacao_economicamente_ativa
       bigquery_type: int64
-      description: População Economicamente Ativa
+      description: População economicamente ativa (PEA), considerando pessoas de 14 anos até 65 anos de idade (Mil pessoas), por condição em relação à força de trabalho
       temporal_coverage:
           - 2012(1)
       covered_by_dictionary: no
