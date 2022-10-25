@@ -130,7 +130,7 @@ columns:
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: uf
-          column_name: uf
+          column_name: sigla
       measurement_unit:
       has_sensitive_data: no
       observations:
