@@ -33,11 +33,11 @@ def get_career_df(career: str, kind: str) -> None:
                     division = None
                 out_dir = (
                     OUT_DIR
-                    / f"microdados_{career}_{kind}"
+                    / f"servidor_{career}_{kind}"
                     / f"ano={yearmonth[:4]}"
                     / f"mes={yearmonth[4:]}"
                 )
-                out_file = out_dir / f"microdados_{career}_{kind}.csv"
+                out_file = out_dir / f"servidor_{career}_{kind}.csv"
 
                 df_career = pd.read_csv(
                     file,

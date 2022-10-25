@@ -76,6 +76,8 @@ def save_file(filename: str, content: bytes) -> Path:
     :param content: content of the file to save
     :return: tha path of the file to be saved
     """
+    if not TMP_DIR.exists():
+        TMP_DIR.mkdir(parents=True)
     with open(TMP_DIR / filename, "wb") as fname:
         fname.write(content)
 
