@@ -37,7 +37,8 @@ observation_level:
         - id_unidade_consumo
     - entity: item
       columns:
-        - id_codigo_5_bd  
+        - id_codigo_5_bd
+        - id_codigo_7_bd
 
 last_updated:
     metadata: '2022-10-19'
@@ -217,7 +218,7 @@ columns:
       bigquery_type: string
       description: Código de 5 dígitos do item
       temporal_coverage:
-          - 2017-2019
+          - 2017(1)2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -225,7 +226,22 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: Na POF, os itens são registrados em um código de 7 dígitos, visto na variável V9001. No entanto, em certos registros alguns códigos possuem menos que 7 dígitos, a correção foi feita transformando-os em códigos de 7 dígitos. O código de 5 dígitos foi criado com a finalidade de agrupar itens semelhantes, pois os dois últimos dígitos são usados para agregar itens muito parecidos.
+      is_in_staging: true
+      is_partition: false
+    - name: id_codigo_7_bd
+      bigquery_type: string
+      description: Código de 7 dígitos do item
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Na POF, os itens são registrados em um código de 7 dígitos, visto na variável V9001. No entanto, em certos registros alguns códigos possuem menos que 7 dígitos, a correção foi feita transformando-os em códigos de 7 dígitos.
       is_in_staging: true
       is_partition: false
     - name: V9001
@@ -263,7 +279,7 @@ columns:
       description: Código do local de aquisição
       temporal_coverage:
           - 2017(1)2018
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:

@@ -1,4 +1,4 @@
-Microdados do Registro de Serviços Não Monetários - POF2 da Pesquisa de Orçamentos Familiares.
+None
 
 Para saber mais acesse:
 Website: 
@@ -9,14 +9,12 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Arthur de Figueiredo Gusmão
+Nome: None
 Código: 
-Email: arthur.gusmao@basedosdados.org
 Tratado por
 -----------
-Nome: Arthur de Figueiredo Gusmão
+Nome: None
 Código: 
-Email: arthur.gusmao@basedosdados.org
 
 
 
@@ -29,24 +27,17 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 2017(1)2018
 
 
 
 
 Cobertura Espacial
 ------------------
-- sa.br
 
 
 
 
-Tratamento
-----------
-Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
 
 
 
-Frequencia de Atualização
--------------------------
-['ten_years']
+

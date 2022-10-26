@@ -37,7 +37,8 @@ observation_level:
         - id_unidade_consumo
     - entity: item
       columns:
-        - id_codigo_5_bd 
+        - id_codigo_5_bd
+        - id_codigo_7_bd
 
 last_updated:
     metadata: '2022-10-19'
@@ -49,17 +50,17 @@ last_updated:
 version: v1.0
 
 # Quem está preenchendo esses metadados?
-published_by: 
+published_by:
     name: Arthur de Figueiredo Gusmão
     email: arthur.gusmao@basedosdados.org
     github_user: arthurfg
     ckan_user: arthurfg
-    website: 
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-data_cleaned_by: 
+data_cleaned_by:
     name: Arthur de Figueiredo Gusmão
     email: arthur.gusmao@basedosdados.org
     github_user: arthurfg
@@ -218,7 +219,22 @@ columns:
       bigquery_type: string
       description: Código de 5 dígitos do item
       temporal_coverage:
-          - 2017-2019
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_codigo_7_bd
+      bigquery_type: string
+      description: Código de 7 dígitos do item
+      temporal_coverage:
+          - 2017(1)2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
