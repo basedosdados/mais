@@ -42,7 +42,7 @@ observation_level:
 last_updated:
     metadata: '2022-10-19'
     data: '2022-05-19 12:00:00'
-    release:
+    release: '2022-05-19 13:00:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
@@ -125,7 +125,7 @@ columns:
       is_partition: true
     - name: situacao
       bigquery_type: string
-      description: 'Situação do Domicílio '
+      description: Situação do Domicílio
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: yes
@@ -170,7 +170,7 @@ columns:
       is_partition: false
     - name: id_domicilio
       bigquery_type: string
-      description: 'Identificador do domicílio '
+      description: Identificador do domicílio
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -285,7 +285,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: month
       has_sensitive_data: no
       observations:
       is_in_staging: true

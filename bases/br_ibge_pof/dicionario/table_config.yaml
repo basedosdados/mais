@@ -36,7 +36,7 @@ observation_level:
 last_updated:
     metadata: '2022-10-19'
     data: '2022-05-19 12:00:00'
-    release:
+    release: '2022-05-19 13:00:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
