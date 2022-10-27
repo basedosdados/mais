@@ -6,7 +6,7 @@ dataset_id: br_bd_indicadores
 table_id: website_user
 
 # Título da tabela.
-title:
+title: Usuários do site
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
