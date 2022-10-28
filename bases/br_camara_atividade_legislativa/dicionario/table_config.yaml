@@ -3,10 +3,10 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_camara_atividade_legislativa
 
-table_id: Dicionário
+table_id: dicionario
 
 # Título da tabela.
-title: Atividade Legislativa da Câmara dos Deputados
+title: Dicionário
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de

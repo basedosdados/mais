@@ -145,6 +145,36 @@ df = bd.read_sql(query=query)
 
 Para saber mais, veja os [exemplos](https://github.com/basedosdados/analises/tree/main/artigos) ou a [documentação da API](https://basedosdados.github.io/mais/api_reference_python/)
 
+## Criando múltiplas configurações
+
+Caso você precise ter uma configuração adicional, com uma `service account` diferente, você pode criar uma configuração e utilizá-la em conjunto com a default, apenas alterando um atributo. Você deverá fazer o processo abaixo usando o terminal, mas esta forma só funcionará no Python.
+
+Para isso, siga os seguintes passos:
+
+1. Renomeie a pasta com o comando abaixo (pode ser o nome que quiser)
+    ```bash
+    mv ~/.basedosdados ~/.basedosdados_default
+   ```
+2. Neste momento, o pacote não terá a configuração padrão. Assim, ao rodar o comando
+    ```bash 
+      basedosdados config init
+    ```
+    ele irá criar uma nova configuração padrão, que será salva na pasta `~/.basedosdados` (que será recriada). Lembre-se de, no passo em que é oferecido um link do Google Cloud Platform (GCP) para criar a nova `service account`, observar que seu navegador esteja logado com a conta que você deseja utilizar.
+3. Faça todo o processo como anteriormete, passando os parâmetros que deseja utilizar com esta nova conta, como o `path` dos metadados, o nome do `bucket` do Google Cloud Storage, etc.
+4. Ao salvar as novas `service accounts` (prod e staging), certifique-se de salvar na pasta `.basedosdados` criada no passo 1. Na verdade, esta é apenas a repetição do processo de criação de uma nova configuração.
+5. Renomeie a pasta criada no passo 1 para o nome que desejar, como `~/.bd_minha_nova_conta`.
+6. Caso você queira que a primeira configuração seja a padrão, retorne o nome da pasta modificada anterioremnte (`.basedosdados_default`) para o valor utilizado como padrão pelo pacote `basedosdados`, usando o comando `mv ~/.basedosdados_default ~/.basedosdados`.
+7. A partir de agora, você poderá usar a nova conta (no Python), bastando utilizar o seguinte processo:
+    ```py
+    import basedosdados as bd
+    bd.config.project_config_path = f"{home}/.bd_minha_nova_conta"
+    ```
+    e, se quiser voltar para a configuração padrão, basta utilizar o comando
+    ```py
+    bd.config.project_config_path = f"{home}/.basedosdados"
+    ```
+    Importante observar que, ao alterar o path de configuração do Python ele valerá para a sessão. Então é recomendável que ele seja usado com cuidado, evitanto trocas numa mesma sessão - especialmente quando estiver usando `Jupyter Notebook` onde é comum a reutilização de células anteriores, sem redefinição de variáveis e atributos anteriormente setados.
+
 ## Usando em R
 
 ### Instalação

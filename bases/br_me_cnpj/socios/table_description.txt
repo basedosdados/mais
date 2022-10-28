@@ -1,4 +1,4 @@
-Número de usuários que acessaram o site
+Sócios
 
 Para saber mais acesse:
 Website: 
@@ -9,28 +9,25 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Laura amaral
+Nome: Ricardo Dahis
 Código: 
-Website: 
-Email: laura.amaral@basedosdados.org
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
 Tratado por
 -----------
-Nome: Lucas Rodrigues
+Nome: Ricardo Dahis
 Código: 
-Email: lucas.rodrigues@basedosdados.org
+Website: www.ricardodahis.com
+Email: rdahis@basedosdados.org
 
 
-
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-- reference_date
 
 
 
 
 Cobertura Temporal
 ------------------
-- 2022-09-12(1)2022-10-21
+- 2007-01(1)2022-09
 
 
 
@@ -47,4 +44,4 @@ Cobertura Espacial
 
 Frequencia de Atualização
 -------------------------
-day
+month

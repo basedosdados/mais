@@ -1,65 +1,60 @@
 
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: br_bd_indicadores
+dataset_id: br_me_cnpj
 
-table_id: website_user
+table_id: dicionario
 
 # Título da tabela.
-title: Usuários do site
+title:
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Número de usuários que acessaram o site
+description: Dicionário
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
 #   - sa.br
 spatial_coverage:
-    - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2022-09-12(1)2022-10-21
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: day
+update_frequency:
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-    - entity: day
-      columns:
-          - reference_date
 
 last_updated:
     metadata:
-    data: '2022-10-04 00:38:10'
+    data:
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: '1.0'
+version:
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Laura amaral
-    email: laura.amaral@basedosdados.org
-    github_user: laura-l-amaral
-    ckan_user: laura-amaral
-    website: ''
+    name:
+    email:
+    github_user:
+    ckan_user:
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Lucas Rodrigues
-    email: lucas.rodrigues@basedosdados.org
-    github_user: lucascr91
+    name:
+    email:
+    github_user:
     ckan_user:
     website:
 
@@ -94,7 +89,6 @@ project_id_staging: basedosdados-dev
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions:
-    - reference_date
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -105,112 +99,77 @@ partitions:
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: reference_date
-      bigquery_type: date
-      description: Reference date
+    - name: id_tabela
+      bigquery_type: string
+      description: ID Tabela
       temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: true
-    - name: users_1_day
-      bigquery_type: int64
-      description: Number of users in 1 day
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: person
-      has_sensitive_data: no
+      has_sensitive_data:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: users_7_days
-      bigquery_type: int64
-      description: Number of users in the last 7 days
+    - name: nome_coluna
+      bigquery_type: string
+      description: Nome da coluna
       temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: person
-      has_sensitive_data: no
+      measurement_unit:
+      has_sensitive_data:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: users_14_days
-      bigquery_type: int64
-      description: Number of users in the last 14 days
+    - name: chave
+      bigquery_type: string
+      description: Chave
       temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: person
-      has_sensitive_data: no
+      measurement_unit:
+      has_sensitive_data:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: users_28_days
-      bigquery_type: int64
-      description: Number of users in the last 28 days
+    - name: cobertura_temporal
+      bigquery_type: string
+      description: Cobertura temporal
       temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: person
-      has_sensitive_data: no
+      measurement_unit:
+      has_sensitive_data:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: users_30_days
-      bigquery_type: int64
-      description: Number of users in the last 30 days
+    - name: valor
+      bigquery_type: string
+      description: Valor
       temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary:
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: person
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: new_users
-      bigquery_type: int64
-      description: Number of new users in that date
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: person
-      has_sensitive_data: no
+      measurement_unit:
+      has_sensitive_data:
       observations:
       is_in_staging: true
       is_partition: false
 
 number_rows:
 
-metadata_modified: '2022-10-24T00:00:49.491144'
+metadata_modified: '2022-10-03T19:36:37.115695'
