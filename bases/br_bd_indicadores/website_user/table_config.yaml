@@ -37,8 +37,8 @@ observation_level:
           - reference_date
 
 last_updated:
-    metadata: 
-    data:
+    metadata:
+    data: '2022-10-04 00:38:10'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -210,22 +210,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: active_users
-      bigquery_type: int64
-      description: Number of active users in that date
-      temporal_coverage:
-          - 2022-10-21(1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: person
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
 
 number_rows:
 
-metadata_modified: '2022-10-10T00:00:29.743290'
+metadata_modified: '2022-10-24T00:00:49.491144'
