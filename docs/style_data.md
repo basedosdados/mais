@@ -286,6 +286,13 @@ Diretórios são as pedras fundamentais da estrutura do nosso _datalake_. Nossas
 
 Veja todas as [tabelas já disponíveis aqui.](https://basedosdados.org/dataset?organization=br-bd&order_by=score&q=%22diret%C3%B3rios%22)
 
+## Fontes Originais
+
+O campo se refere aos dados na fonte original, que ainda não passaram pela metodologia de tratamento da Base dos Dados, ou seja, nosso `_input_`. Ao clicar nele, a ideia é redirecionar o usuário para a página da fonte original dos dados. As regras para gerenciar as Fontes Originais são: 
+
+- Incluir o nome do link externo que leva à fonte original. Como padrão, esse nome deve ser da organização ou do portal que armazenena os dados. Exemplos: `Sinopses Estatísticas da Educação Básica: Dados Abertos do Inep`, `Penn World Tables: Groningen Growth and Development Centre`.
+- Preencher os metadados de Fontes Originais: Descrição, URL, Língua, Tem Dados Estruturados, Tem uma API, É de Graça, Requer Registro, Disponibilidade, Requer IP de Algum País, Tipo de Licença, Cobertura Temporal, Cobertura Espacial e Nível da Observação.
+
 ## **Pensou em melhorias para os padrões definidos?**
 
 Abra um [issue no nosso Github](https://github.com/basedosdados/mais/labels/docs) ou mande uma mensagem no [Discord](https://discord.gg/huKWpsVYx4) para conversarmos :)
