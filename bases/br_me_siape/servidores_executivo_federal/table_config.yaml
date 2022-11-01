@@ -1,0 +1,248 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_me_siape
+
+table_id: servidores_executivo_federal
+
+# Título da tabela.
+title: Servidores do Executivo Federal
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: A base traz informações sobre o funcionalismo público federal de acordo com o órgão em que o indivíduo está lotado, gênero, raça/cor declarado, além da atividade que exerce dentro de sua função
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+     - '2022'
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: uncertain
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: date
+      columns: 
+        - data_admissao
+
+last_updated:
+    metadata: '2022-11-01'
+    data: '2022-11-01 08:45:00'
+    release: '2022-11-01 08:45:00'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Lucas Moreira
+    email: lucas.moreira@basedosdados.org.br
+    github_user: lucasnascm
+    ckan_user: lucasnascm
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Lucas Moreira
+    email: lucas.moreira@basedosdados.org.br
+    github_user: lucasnascm
+    ckan_user: lucasnascm
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Renomeação da base segundo as diretrizes da BD+
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_siape/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: orgao_superior
+      bigquery_type: string
+      description: Nome do órgão superior (unidade da administração direta, e.g. ministérios)
+          onde o servidor está lotado (i.e. vinculado administrativamente)
+      temporal_coverage:
+          - '2022'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: orgao
+      bigquery_type: string
+      description: Nome do órgão (parte do órgão superior) onde o servidor está efetivamente
+          em exercício (em caso de servidores cedidos, por ex., pode ser diferente
+          da lotação)
+      temporal_coverage:
+          - '2022'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sexo
+      bigquery_type: string
+      description: Sexo
+      temporal_coverage:
+          - '2022'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: raca_cor
+      bigquery_type: string
+      description: Raça/Cor
+      temporal_coverage:
+          - '2022'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: situacao_vinculo
+      bigquery_type: string
+      description: Situação do vínculo do servidor com o órgão de lotação e/ou de
+          exercício
+      temporal_coverage:
+          - '2022'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: funcao
+      bigquery_type: string
+      description: Descrição da função ocupada pelo servidor
+      temporal_coverage:
+          - '2022'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: nivel_funcao
+      bigquery_type: string
+      description: Nível da função ocupada pelo servidor
+      temporal_coverage:
+          - '2022'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atividade
+      bigquery_type: string
+      description: Descrição da atividade exercida pelo servidor
+      temporal_coverage:
+          - '2022'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_admissao
+      bigquery_type: date
+      description: Data de admissão do funcionário na carreira pública
+      temporal_coverage:
+          - '2022'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 358869
+
+metadata_modified:
