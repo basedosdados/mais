@@ -22,7 +22,7 @@ spatial_coverage:
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage:
+temporal_coverage: 
     - 2010(1)2021
 
 # A unidade temporal com qual a tabela é atualizada.
@@ -36,13 +36,13 @@ observation_level:
         - ano
     - entity: municipality
       columns:
-      - id_municipio
+        - id_municipio
     - entity: other
       columns:
-      - localizacao
+        - localizacao
     - entity: other
       columns:
-      - rede
+        - rede
 
 last_updated:
     metadata: '2022-08-16'
@@ -222,4 +222,4 @@ columns:
 
 number_rows: 4811400
 
-metadata_modified:
+metadata_modified: "2022-10-06T12:11:19.706687"
