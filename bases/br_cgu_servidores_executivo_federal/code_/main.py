@@ -5,6 +5,8 @@ from pathlib import Path
 from time import sleep
 
 import basedosdados as bd
+import numpy as np
+import pandas as pd
 import requests
 import typer
 
@@ -160,6 +162,33 @@ def replace_data(
         if_storage_data_exists="replace",
         if_table_config_exists="pass"
     )
+
+
+@app.command()
+def add_origin_column(
+    kind: str = typer.Option(..., help="The kind of the employee (ativo, inativo)"),
+) -> None:
+    """
+    Add the origin column to the military career table
+    """
+    new_kind = "reservista" if kind == "inativo" else "ativo"
+    base_path = Path.cwd().parent
+    if kind == "inativo":
+        start_year = 2020
+    else:
+        start_year = 2013
+    for year in range(start_year, 2023):
+        for month in range(1, 13):
+            output_file = f"output/remuneracao_{kind}/carreira=militar/ano={year}/mes={str(month).zfill(2)}/servidor_militar_{new_kind}_remuneracao.csv"
+            if not (base_path / output_file).exists():
+                continue
+            print(f"Adicionando coluna de origem para {output_file}")
+            df_original = pd.read_csv(base_path / output_file, sep=",", encoding="utf-8")
+            if not "origem" in df_original.columns:
+                if "origin" in df_original.columns:
+                    df_original.drop(columns=["origin"], inplace=True)
+                df_original["origem"] = ""
+                df_original.to_csv(base_path / output_file, index=False, encoding="utf-8", sep=",", na_rep=np.nan)
 
 
 if __name__ == "__main__":
