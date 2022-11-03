@@ -6,11 +6,10 @@ import pandas as pd
 import basedosdados as bd
 from basedosdados.exceptions import BaseDosDadosException
 
-def update_columns(table: bd.Table, columns_config_url_or_path: str =None)-> None:
+def update_columns(table_obj: bd.Table, columns_config_url_or_path=None):
     """
     Fills columns in table_config.yaml automatically using a public google sheets URL or a local file. Also regenerate
     publish.sql and autofill type using bigquery_type.
-
     The sheet must contain the columns:
         - name: column name
         - description: column description
@@ -25,13 +24,12 @@ def update_columns(table: bd.Table, columns_config_url_or_path: str =None)-> Non
         columns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.
             Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.
             Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
-
     """
     ruamel = ryaml.YAML()
     ruamel.preserve_quotes = True
     ruamel.indent(mapping=4, sequence=6, offset=4)
     table_config_yaml = ruamel.load(
-        (table.table_folder / "table_config.yaml").open(encoding="utf-8")
+        (table_obj.table_folder / "table_config.yaml").open(encoding="utf-8")
     )
 
     if "https://docs.google.com/spreadsheets/d/" in columns_config_url_or_path:
@@ -45,7 +43,7 @@ def update_columns(table: bd.Table, columns_config_url_or_path: str =None)-> Non
                 "The Google sheet url not in correct format."
                 "The url must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>"
             )
-        df = table._sheet_to_df(columns_config_url_or_path)
+        df = table_obj._sheet_to_df(columns_config_url_or_path)
     else:
         file_type = columns_config_url_or_path.split(".")[-1]
         if file_type == "csv":
@@ -153,8 +151,8 @@ def update_columns(table: bd.Table, columns_config_url_or_path: str =None)-> Non
                     col["observations"] if observations == "NULL" else observations
                 )
 
-    with open(table.table_folder / "table_config.yaml", "w", encoding="utf-8") as f:
+    with open(table_obj.table_folder / "table_config.yaml", "w", encoding="utf-8") as f:
         ruamel.dump(table_config_yaml, f)
 
     # regenerate publish.sql
-    table._make_publish_sql()
+    table_obj._make_publish_sql()

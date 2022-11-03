@@ -16,11 +16,11 @@ TABLE_ID = "pytest"
 TABLE_FILES = ["publish.sql", "table_config.yaml"]
 
 
-def test_update_columns(sample_data, testdir):
+def test_update_columns(sample_data, testdir, table):
     """
     Test the update_columns utility.
     """
-    table = bd.Table(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=testdir)
+    # table = bd.Table(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=testdir)
     table.create(sample_data, if_table_exists='replace', if_table_config_exists='replace', if_storage_data_exists='replace')
 
     table_config_path = testdir / DATASET_ID / TABLE_ID / "table_config.yaml"
@@ -33,7 +33,7 @@ def test_update_columns(sample_data, testdir):
     # get path as string
     path_arq = str(path_arq)
 
-    update_columns(table=table, columns_config_url_or_path=path_arq)
+    update_columns(table_obj=table, columns_config_url_or_path=path_arq)
 
     assert table_config_path.stat().st_mtime > last_modified
     assert publish_path.stat().st_mtime > last_modified_publish
