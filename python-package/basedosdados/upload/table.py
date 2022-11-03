@@ -11,7 +11,6 @@ from io import StringIO
 
 from loguru import logger
 from google.cloud import bigquery
-import ruamel.yaml as ryaml
 import requests
 import pandas as pd
 import google.api_core.exceptions
