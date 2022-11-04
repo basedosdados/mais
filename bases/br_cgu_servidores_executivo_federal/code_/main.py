@@ -184,7 +184,7 @@ def add_origin_column(
                 continue
             print(f"Adicionando coluna de origem para {output_file}")
             df_original = pd.read_csv(base_path / output_file, sep=",", encoding="utf-8")
-            if not "origem" in df_original.columns:
+            if "origem" not in df_original.columns:
                 if "origin" in df_original.columns:
                     df_original.drop(columns=["origin"], inplace=True)
                 df_original["origem"] = ""
