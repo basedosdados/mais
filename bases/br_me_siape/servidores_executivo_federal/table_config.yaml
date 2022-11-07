@@ -103,7 +103,7 @@ partitions:
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: orgao_superior
+    - name: orgao_vinculacao
       bigquery_type: string
       description: Nome do órgão superior (unidade da administração direta, e.g. ministérios)
           onde o servidor está lotado (i.e. vinculado administrativamente)
@@ -117,9 +117,9 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
-    - name: orgao
+      is_in_staging:
+      is_partition:
+    - name: orgao_exercicio
       bigquery_type: string
       description: Nome do órgão (parte do órgão superior) onde o servidor está efetivamente
           em exercício (em caso de servidores cedidos, por ex., pode ser diferente
@@ -134,8 +134,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: sexo
       bigquery_type: string
       description: Sexo
@@ -149,8 +149,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: raca_cor
       bigquery_type: string
       description: Raça/Cor
@@ -164,8 +164,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: situacao_vinculo
       bigquery_type: string
       description: Situação do vínculo do servidor com o órgão de lotação e/ou de
@@ -180,11 +180,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: funcao
       bigquery_type: string
-      description: Descrição da função ocupada pelo servidor
+      description: Descrição da função ocupada pelo servidor.
       temporal_coverage:
           - '2022'
       covered_by_dictionary: no
@@ -195,8 +195,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: nivel_funcao
       bigquery_type: string
       description: Nível da função ocupada pelo servidor
@@ -210,8 +210,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: atividade
       bigquery_type: string
       description: Descrição da atividade exercida pelo servidor
@@ -225,8 +225,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
     - name: data_admissao
       bigquery_type: date
       description: Data de admissão do funcionário na carreira pública
@@ -240,9 +240,9 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: true
-      is_partition: false
+      is_in_staging:
+      is_partition:
 
-number_rows: 358869
+number_rows:
 
 metadata_modified:

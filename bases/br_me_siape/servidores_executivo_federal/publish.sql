@@ -19,8 +19,8 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_me_siape.servidores_executivo_federal AS
 SELECT 
-SAFE_CAST(orgao_superior AS STRING) orgao_superior,
-SAFE_CAST(orgao AS STRING) orgao,
+SAFE_CAST(orgao_vinculacao AS STRING) orgao_vinculacao,
+SAFE_CAST(orgao_exercicio AS STRING) orgao_exercicio,
 SAFE_CAST(sexo AS STRING) sexo,
 SAFE_CAST(raca_cor AS STRING) raca_cor,
 SAFE_CAST(situacao_vinculo AS STRING) situacao_vinculo,
