@@ -117,8 +117,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: orgao_exercicio
       bigquery_type: string
       description: Nome do órgão (parte do órgão superior) onde o servidor está efetivamente
@@ -134,8 +134,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: sexo
       bigquery_type: string
       description: Sexo
@@ -149,8 +149,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: raca_cor
       bigquery_type: string
       description: Raça/Cor
@@ -164,8 +164,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: situacao_vinculo
       bigquery_type: string
       description: Situação do vínculo do servidor com o órgão de lotação e/ou de
@@ -180,8 +180,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: funcao
       bigquery_type: string
       description: Descrição da função ocupada pelo servidor.
@@ -195,8 +195,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_funcao
       bigquery_type: string
       description: Nível da função ocupada pelo servidor
@@ -210,8 +210,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: atividade
       bigquery_type: string
       description: Descrição da atividade exercida pelo servidor
@@ -225,8 +225,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: data_admissao
       bigquery_type: date
       description: Data de admissão do funcionário na carreira pública
@@ -240,9 +240,9 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
 
-number_rows:
+number_rows: 358869
 
 metadata_modified:
