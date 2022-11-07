@@ -222,6 +222,11 @@ def cli_table():
     help="Data source format. Only 'csv' is supported. Defaults to 'csv'.",
 )
 @click.option(
+    "--force_columns",
+    default=False,
+    help="Overwrite columns with local columns.",
+)
+@click.option(
     "--columns_config_url_or_path",
     default=None,
     help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. The sheet must contain the column name: 'coluna' and column description: 'descricao'.",
@@ -235,6 +240,7 @@ def init_table(
     if_folder_exists,
     if_table_config_exists,
     source_format,
+    force_columns,
     columns_config_url_or_path,
 ):
     """
@@ -246,6 +252,7 @@ def init_table(
         if_folder_exists=if_folder_exists,
         if_table_config_exists=if_table_config_exists,
         source_format=source_format,
+        force_columns=force_columns,
         columns_config_url_or_path=columns_config_url_or_path,
     )
 
@@ -293,6 +300,11 @@ def init_table(
     help="Data source format. Only 'csv' is supported. Defaults to 'csv'.",
 )
 @click.option(
+    "--force_columns",
+    default=False,
+    help="Overwrite columns with local columns.",
+)
+@click.option(
     "--columns_config_url_or_path",
     default=None,
     help="Path to the local architeture file or a public google sheets URL. Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats. Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.",
@@ -323,6 +335,7 @@ def create_table(
     if_storage_data_exists,
     if_table_config_exists,
     source_format,
+    force_columns,
     columns_config_url_or_path,
     dataset_is_public,
     location,
@@ -340,6 +353,7 @@ def create_table(
         if_storage_data_exists=if_storage_data_exists,
         if_table_config_exists=if_table_config_exists,
         source_format=source_format,
+        force_columns=force_columns,
         columns_config_url_or_path=columns_config_url_or_path,
         dataset_is_public=dataset_is_public,
         location=location,
