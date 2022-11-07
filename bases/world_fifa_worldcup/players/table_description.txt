@@ -1,0 +1,48 @@
+This dataset records all players who have participated in a World Cup match, including players on the bench. There is one observation per player. It includes their name and their birth date. Note that it does not include their team, as a small number of players represent different countries in different tournaments.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Ana Paula Dames
+Código: 
+Email: apdames@gmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 1930(4)2018
+
+
+
+
+Cobertura Espacial
+------------------
+- world
+
+
+
+
+Tratamento
+----------
+remove columns
+
+
+
+Frequencia de Atualização
+-------------------------
+four_years

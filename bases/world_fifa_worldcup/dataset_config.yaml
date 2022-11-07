@@ -13,7 +13,7 @@ title: Worldcup
 organization: world-fifa
 
 # Descrição do conjunto
-notes: The Fjelstul World Cup Database is a comprehensive database about the FIFA World Cup created by Joshua C. Fjelstul, Ph.D. that covers all 21 World Cup tournaments (1930-2018). The database includes 27 datasets (approximately 1.1 million data points) that cover all aspects of the World Cup. The data has been extensively cleaned and cross-validated.
+notes: The Fjelstul World Cup Database is a comprehensive database about the FIFA World Cup created by Joshua C. Fjelstul, Ph.D. that covers all 21 World Cup tournaments (1930-2018). The database includes 27 datasets (approximately 1.1 million data points) that cover all aspects of the World Cup. The data has been extensively cleaned and cross-validated. The collected data are from https://github.com/jfjelstul/worldcup/tree/master/data-csv
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
@@ -31,7 +31,7 @@ groups: esportes
 tags: 
   - copa do mundo
   - futebol
-  
+
 
 # Não altere esse campo.
 # Data da última modificação dos metadados gerada automaticamente pelo CKAN.
