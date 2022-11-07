@@ -4,11 +4,14 @@ Tests for the upload utilities.
 # pylint: disable=invalid-name
 from pathlib import Path
 import shutil
-
-import basedosdados as bd
-from basedosdados.upload.utils import update_columns
+import os
 
 import pytest
+import pandas as pd
+
+import basedosdados as bd
+from basedosdados.upload.utils import update_columns, to_partitions
+
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
@@ -37,4 +40,19 @@ def test_update_columns(sample_data, testdir, table):
 
     assert table_config_path.stat().st_mtime > last_modified
     assert publish_path.stat().st_mtime > last_modified_publish
+
+
+def test_to_partitions(sample_data, testdir):
+    """
+    Test the to_partitions utility.
+    """
+    os.makedirs(testdir / "municipio_partitioned", exist_ok=True)
+
+    df = pd.read_csv(sample_data / "municipio.csv")
+    to_partitions(df, ['ano'], testdir / "municipio_partitioned")
+
+    # asserti if the files were created from 2002 to 2011
+    for i in range(2002, 2012):
+        assert os.path.exists(testdir / "municipio_partitioned" / f"ano={i}" / "data.csv")
+
     
