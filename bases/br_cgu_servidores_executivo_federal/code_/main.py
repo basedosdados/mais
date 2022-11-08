@@ -135,9 +135,9 @@ def create_table(
     tbl.create(  # pylint: disable=no-value-for-parameter
         path=str(base_path / output_path),
         force_dataset=True,
-        if_table_exists="raise",
-        if_storage_data_exists="raise",
-        if_table_config_exists="raise",
+        if_table_exists="replace",
+        if_storage_data_exists="pass",
+        if_table_config_exists="replace",
         columns_config_url_or_path=str(
             base_path / f"extra/architecture/{table_id}.csv"
         ),

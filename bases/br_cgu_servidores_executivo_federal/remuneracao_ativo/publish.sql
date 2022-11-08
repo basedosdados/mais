@@ -22,6 +22,7 @@ SELECT
 SAFE_CAST(carreira AS STRING) carreira,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
+SAFE_CAST(origem AS STRING) origem,
 SAFE_CAST(id_servidor_portal AS STRING) id_servidor_portal,
 SAFE_CAST(cpf AS STRING) cpf,
 SAFE_CAST(nome AS STRING) nome,

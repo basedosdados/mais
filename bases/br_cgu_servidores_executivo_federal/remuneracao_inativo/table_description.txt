@@ -1,5 +1,4 @@
-Remuneração de militares reservistas e reformados do Executivo Federal, com 
-o nome do militar, o valor da remuneração, entre outras informações.
+Tabela com remuneração dos servidores civis e militares inativos do Executivo Federal.
 
 
 Para saber mais acesse:
@@ -24,6 +23,7 @@ Email: mauricio.fagundes@gmail.com
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
+- carreira
 - ano
 - mes
 

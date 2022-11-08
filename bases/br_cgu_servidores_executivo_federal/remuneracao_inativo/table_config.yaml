@@ -5,60 +5,73 @@ dataset_id: br_cgu_servidores_executivo_federal
 table_id: remuneracao_inativo
 
 # Título da tabela.
-title: Registros de Servidores Públicos do Executivo Federal
+title: Registros de Servidores Civis e Militares Inativos do Executivo Federal
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description:
+description: | # REQUIRED
+    Tabela com remuneração dos servidores civis e militares inativos do Executivo Federal.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
 #   - sa.br
 spatial_coverage:
+    - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
+  - 2020-01(1)2022-08
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency:
+update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
+  - entity: year
+    columns:
+      - ano
+  - entity: month
+    columns:
+      - mes
+  - entity: person
+    columns:
+      - id_servidor_portal
 
 last_updated:
     metadata:
-    data:
+    data: 2022-10-20T14:15
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: ''
+version: 'v.1.0.0'
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name:
-    email:
-    github_user:
-    ckan_user:
+    name: Maurício Fagundes
+    email: mauricio.fagundes@gmail.com
+    github_user: mfagundes
+    ckan_user: mfagundes
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name:
-    email:
-    github_user:
-    ckan_user:
+    name: Maurício Fagundes
+    email: mauricio.fagundes@gmail.com
+    github_user: mfagundes
+    ckan_user: mfagundes
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
+data_cleaning_description: |
+  - Download dos dados da CGU com tratamento para compatibilização de valores com o formato da Base dos Dados
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url:
@@ -102,18 +115,19 @@ partitions:
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: carreira
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: Carreira do servidor
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
-      is_in_staging:
+      is_in_staging: true
       is_partition: true
     - name: ano
       bigquery_type: int64
@@ -128,7 +142,7 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       observations:
-      is_in_staging:
+      is_in_staging: true
       is_partition: true
     - name: mes
       bigquery_type: int64
@@ -143,8 +157,23 @@ columns:
       measurement_unit: month
       has_sensitive_data: no
       observations:
-      is_in_staging:
+      is_in_staging: true
       is_partition: true
+    - name: origem
+      bigquery_type: string
+      description: Origem dos dados
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: id_servidor_portal
       bigquery_type: string
       description: 'ID do servidor no Portal da Transparência '
@@ -158,8 +187,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: cpf
       bigquery_type: string
       description: 'CPF do servidor anonimizado '
@@ -173,8 +202,8 @@ columns:
       measurement_unit:
       has_sensitive_data: yes
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nome
       bigquery_type: string
       description: 'Nome '
@@ -188,8 +217,8 @@ columns:
       measurement_unit:
       has_sensitive_data: yes
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: remuneracao_bruta_brl
       bigquery_type: float64
       description: Remuneração bruta gasta em Real
@@ -203,8 +232,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: remuneracao_bruta_usd
       bigquery_type: float64
       description: 'Remuneração bruta gasta em Dólar '
@@ -218,8 +247,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: abate_teto_brl
       bigquery_type: float64
       description: Abate em relação ao valor do teto em Real
@@ -233,8 +262,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: abate_teto_usd
       bigquery_type: float64
       description: Abate em relação ao valor do teto em Dólar
@@ -248,8 +277,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: gratificao_natalina_brl
       bigquery_type: float64
       description: Gratificação Natalina em Real
@@ -263,8 +292,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: gratificao_natalina_usd
       bigquery_type: float64
       description: Gratificação Natalina em Dólar
@@ -278,8 +307,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: abate_teto_gratificacao_natalina_brl
       bigquery_type: float64
       description: Abate do teto na Gratificação Natalina em Real
@@ -293,8 +322,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: abate_teto_gratificacao_natalina_usd
       bigquery_type: float64
       description: Abate do teto na Gratificação Natalina em Dólar
@@ -308,8 +337,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: ferias_brl
       bigquery_type: float64
       description: Remuneração de férias em Real
@@ -323,8 +352,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: ferias_usd
       bigquery_type: float64
       description: Remuneração de férias em Dólar
@@ -338,8 +367,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: outras_remuneracoes_brl
       bigquery_type: float64
       description: Outras remunerações eventuais em Real
@@ -353,8 +382,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: outras_remuneracoes_usd
       bigquery_type: float64
       description: Outras remunerações eventuais em Dólar
@@ -368,8 +397,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: irrf_brl
       bigquery_type: float64
       description: Imposto de Renda Retido na Fonte (IRRF) em Real
@@ -383,8 +412,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: irrf_usd
       bigquery_type: float64
       description: Imposto de Renda Retido na Fonte (IRRF) em Dólar
@@ -398,8 +427,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: pss_rgps_brl
       bigquery_type: float64
       description: Plano de Seguridade Social (PSS) ou Regime Geral de Previdência
@@ -414,8 +443,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: pss_rgps_usd
       bigquery_type: float64
       description: Plano de Seguridade Social (PSS) ou Regime Geral de Previdência
@@ -430,8 +459,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: demais_deducoes_brl
       bigquery_type: float64
       description: Demais deduções em Real
@@ -445,8 +474,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: demais_deducoes_usd
       bigquery_type: float64
       description: Demais deduções em Dólar
@@ -460,8 +489,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: pensao_militar_brl
       bigquery_type: float64
       description: Pensão militar em Real
@@ -475,8 +504,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: pensao_militar_usd
       bigquery_type: float64
       description: Pensão militar em Dólar
@@ -490,8 +519,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: fundo_saude_brl
       bigquery_type: float64
       description: Fundo de Saúde Militar em Real
@@ -505,8 +534,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: fundo_saude_usd
       bigquery_type: float64
       description: Fundo de Saúde Militar em Dólar
@@ -520,8 +549,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: taxa_ocupacao_imovel_funcional_brl
       bigquery_type: float64
       description: Taxa de ocupação imóvel funcional em Real
@@ -535,8 +564,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: taxa_ocupacao_imovel_funcional_usd
       bigquery_type: float64
       description: Taxa de ocupação imóvel funcional em Dólar
@@ -550,8 +579,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: remuneracao_liquida_militar_brl
       bigquery_type: float64
       description: Remuneração após deduções obrigatória em Real
@@ -565,8 +594,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: remuneracao_liquida_militar_usd
       bigquery_type: float64
       description: Remuneração após deduções obrigatória em Dólar
@@ -580,8 +609,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: verba_indenizatoria_civil_brl
       bigquery_type: float64
       description: 'Verba indenizatória registradas em sistemas de pessoal - civil
@@ -596,8 +625,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: verba_indenizatoria_civil_usd
       bigquery_type: float64
       description: 'Verba indenizatória registradas em sistemas de pessoal - civil
@@ -612,8 +641,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: verba_indenizatoria_militar_brl
       bigquery_type: float64
       description: 'Verba indenizatória registradas em sistemas de pessoal - militar
@@ -628,8 +657,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: verba_indenizatoria_militar_usd
       bigquery_type: float64
       description: 'Verba indenizatória registradas em sistemas de pessoal - militar
@@ -644,8 +673,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: verba_indenizatoria_deslig_voluntario_brl
       bigquery_type: float64
       description: Verba indenizatória programa desligamento voluntário em Real
@@ -659,8 +688,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: verba_indenizatoria_deslig_voluntario_usd
       bigquery_type: float64
       description: 'Verba indenizatória programa desligamento voluntário em Dólar '
@@ -674,8 +703,8 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: total_verba_indenizatoria_brl
       bigquery_type: float64
       description: Total da verba indenizatória em Real
@@ -689,8 +718,8 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: total_verba_indenizatoria_usd
       bigquery_type: float64
       description: Total da verba indenizatória em Dólar
@@ -704,9 +733,9 @@ columns:
       measurement_unit: usd
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
 
 number_rows:
 
-metadata_modified: '2022-10-23T22:50:23.226783'
+metadata_modified:

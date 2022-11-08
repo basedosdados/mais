@@ -1,4 +1,4 @@
-Tabela com remuneração dos servidores militares ativos do Executivo Federal.
+Remuneração dos servidores civis e militares ativos do Executivo Federal
 
 
 Para saber mais acesse:
@@ -23,6 +23,7 @@ Email: mauricio.fagundes@gmail.com
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
+- carreira
 - ano
 - mes
 
@@ -45,8 +46,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-- Download dos dados da CGU com tratamento para compatibilização de valores com o formato da Base dos Dados
-
+Download dos dados da CGU com tratamento para compatibilização de valores com o formato da Base dos Dados
 
 
 
