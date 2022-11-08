@@ -22,7 +22,6 @@ SELECT
 SAFE_CAST(carreira AS STRING) carreira,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
-SAFE_CAST(origem AS STRING) origem,
 SAFE_CAST(id_servidor_portal AS STRING) id_servidor_portal,
 SAFE_CAST(cpf AS STRING) cpf,
 SAFE_CAST(nome AS STRING) nome,
@@ -59,5 +58,6 @@ SAFE_CAST(verba_indenizatoria_militar_usd AS FLOAT64) verba_indenizatoria_milita
 SAFE_CAST(verba_indenizatoria_deslig_voluntario_brl AS FLOAT64) verba_indenizatoria_deslig_voluntario_brl,
 SAFE_CAST(verba_indenizatoria_deslig_voluntario_usd AS FLOAT64) verba_indenizatoria_deslig_voluntario_usd,
 SAFE_CAST(total_verba_indenizatoria_brl AS FLOAT64) total_verba_indenizatoria_brl,
-SAFE_CAST(total_verba_indenizatoria_usd AS FLOAT64) total_verba_indenizatoria_usd
+SAFE_CAST(total_verba_indenizatoria_usd AS FLOAT64) total_verba_indenizatoria_usd,
+SAFE_CAST(origem AS STRING) origem
 FROM basedosdados-dev.br_cgu_servidores_executivo_federal_staging.remuneracao_inativo AS t
