@@ -1,0 +1,55 @@
+Remuneração dos servidores civis e militares ativos do Executivo Federal
+
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Maurício Fagundes
+Código: 
+Email: mauricio.fagundes@gmail.com
+Tratado por
+-----------
+Nome: Maurício Fagundes
+Código: 
+Email: mauricio.fagundes@gmail.com
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- carreira
+- ano
+- mes
+
+
+
+
+Cobertura Temporal
+------------------
+- 2013-01(1)2022-08
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Download dos dados da CGU com tratamento para compatibilização de valores com o formato da Base dos Dados
+
+
+
+Frequencia de Atualização
+-------------------------
+month
