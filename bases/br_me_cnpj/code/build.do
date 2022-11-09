@@ -1,7 +1,7 @@
 
 cd "~/Downloads/br_me_cnpj"
 
-local subpath "D20910"
+local subpath "D21008"
 
 //---------------------------//
 // empresas
@@ -45,7 +45,7 @@ save `municipio'
 
 foreach j of numlist 0(1)9 {
 	
-	import delimited "input/K3241.K03200Y`j'.`subpath'.ESTABELE", clear stringcols(_all) //rowr(1:200000)
+	import delimited "input/K3241.K03200Y`j'.`subpath'.ESTABELE", clear stringcols(_all) //rowr(1:100000)
 	
 	ren v1  cnpj_basico
 	ren v2  cnpj_ordem
