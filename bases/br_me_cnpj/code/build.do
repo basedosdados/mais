@@ -1,4 +1,3 @@
-
 cd "~/Downloads/br_me_cnpj"
 
 local subpath "D21008"
