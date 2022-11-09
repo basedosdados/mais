@@ -2,6 +2,7 @@
 # pylint: disable=invalid-name,too-many-arguments,too-many-locals,too-many-branches,too-many-statements, protected-access,line-too-long
 from typing import List
 from pathlib import Path
+import os
 
 import ruamel.yaml as ryaml
 import pandas as pd
@@ -221,3 +222,25 @@ def to_partitions(data: pd.DataFrame, partition_columns: List[str], savepath: st
             )
     else:
         raise BaseException("Data need to be a pandas DataFrame")
+
+
+def break_file(filepath: str, columns: list, chunksize: int = 1000000)-> None:
+    '''
+    Break a file into smaller files, given a list of columns to be used as a key.
+    Args:
+        filepath (str, pathlib.PosixPath): file path to be broken.
+        columns (list): list of columns to be used as a key.
+        chunksize (int): number of rows to be read at a time.
+    Returns:
+        None
+    '''
+    reader = pd.read_csv(filepath, chunksize=chunksize, usecols=columns)
+    for i, chunk in enumerate(reader):
+        folder = os.path.dirname(filepath)
+        filename = os.path.basename(filepath)
+        subfolder = os.path.join(folder, filename.split('.')[0])
+        # create subfolder
+        if not os.path.exists(subfolder):
+            os.makedirs(subfolder)
+        # save chunk
+        chunk.to_csv(os.path.join(subfolder, f'{filename.split(".")[0]}_{i}.csv'), index=False)

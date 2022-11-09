@@ -5,12 +5,13 @@ Tests for the upload utilities.
 from pathlib import Path
 import shutil
 import os
+from glob import glob
 
 import pytest
 import pandas as pd
 
 import basedosdados as bd
-from basedosdados.upload.utils import update_columns, to_partitions
+from basedosdados.upload.utils import update_columns, to_partitions, break_file
 
 
 DATASET_ID = "pytest"
@@ -51,8 +52,35 @@ def test_to_partitions(sample_data, testdir):
     df = pd.read_csv(sample_data / "municipio.csv")
     to_partitions(df, ['ano'], testdir / "municipio_partitioned")
 
-    # asserti if the files were created from 2002 to 2011
+    # assert if the files were created from 2002 to 2011
     for i in range(2002, 2012):
         assert os.path.exists(testdir / "municipio_partitioned" / f"ano={i}" / "data.csv")
+
+
+def test_break_file(sample_data, testdir):
+    """
+    Test the break_file utility.
+    """
+    os.makedirs(testdir / "municipio_files", exist_ok=True)
+    # copy municipio.csv to municipio_files
+    shutil.copy(sample_data / "municipio.csv", testdir / "municipio_files")
+    # get path as string
+    path = str(testdir / "municipio_files" / "municipio.csv")
+    break_file(filepath = path, columns = ['ano','id_municipio','pib','impostos_liquidos','va','va_agropecuaria'], chunksize=100)
+
+    output_path = str(testdir / "municipio_files" / "municipio")
+
+    files = glob(output_path+'*.csv')
+
+    # check if the summed rows number of the files is equal to the original file
+    assert sum([len(pd.read_csv(file)) for file in files]) == len(pd.read_csv(sample_data / "municipio.csv"))
+
+    # remove municipio folder
+    shutil.rmtree(sample_data / "municipio")
+
+
+
+
+
 
     
