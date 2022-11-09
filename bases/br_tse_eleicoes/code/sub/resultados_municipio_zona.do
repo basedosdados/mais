@@ -329,6 +329,7 @@ foreach ano of numlist 1994(2)2022 {
 					drop if _merge == 2
 					drop _merge
 					replace sigla_uf_orig = sigla_uf if sigla_uf_orig == "BR"
+					replace sigla_uf_orig = "ZZ"     if sigla_uf_orig == ""
 					drop sigla_uf
 					ren sigla_uf_orig sigla_uf
 				}
@@ -351,7 +352,14 @@ foreach ano of numlist 1994(2)2022 {
 				drop _merge
 				order id_municipio, b(id_municipio_tse)
 				
-				duplicates drop
+				// para 2006 e cargo=presidente, dados originais tem problemas: sigla_uf=BR duplica números, sigla_uf=DF tem votos x4
+				// e outros erros que não consegui encontrar
+				// solução: usar *só* o arquivo sigla_uf=BR, que vem correto
+				if `ano' == 2006 & "`estado'" != "BR" {
+					drop if cargo == "presidente"
+				}
+				
+				cap duplicates drop
 				
 				tempfile resultados_part_`estado'_`ano'
 				save `resultados_part_`estado'_`ano''
