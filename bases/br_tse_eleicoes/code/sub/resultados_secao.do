@@ -43,6 +43,8 @@ foreach ano of numlist 1994(2)2022 {
 		
 		di "`ano'_`estado'"
 		
+		local ano 2022
+		local estado AC
 		if `ano' == 2012 {
 			
 			import delimited "input/votacao_secao/votacao_secao_`ano'_`estado'_1t/votacao_secao_`ano'_`estado'.txt", delim(";") varn(nonames) stringcols(_all) clear
