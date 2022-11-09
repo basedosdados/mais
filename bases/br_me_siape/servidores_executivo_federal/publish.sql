@@ -17,9 +17,15 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_ibge_populacao.brasil AS
+CREATE VIEW basedosdados-dev.br_me_siape.servidores_executivo_federal AS
 SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(populacao AS INT64) populacao,
-SAFE_CAST(populacao_economicamente_ativa AS INT64) populacao_economicamente_ativa
-FROM basedosdados-dev.br_ibge_populacao_staging.brasil AS t
+SAFE_CAST(orgao_vinculacao AS STRING) orgao_vinculacao,
+SAFE_CAST(orgao_exercicio AS STRING) orgao_exercicio,
+SAFE_CAST(sexo AS STRING) sexo,
+SAFE_CAST(raca_cor AS STRING) raca_cor,
+SAFE_CAST(situacao_vinculo AS STRING) situacao_vinculo,
+SAFE_CAST(funcao AS STRING) funcao,
+SAFE_CAST(nivel_funcao AS STRING) nivel_funcao,
+SAFE_CAST(atividade AS STRING) atividade,
+SAFE_CAST(data_admissao AS DATE) data_admissao
+FROM basedosdados-dev.br_me_siape_staging.servidores_executivo_federal AS t

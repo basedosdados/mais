@@ -1,4 +1,5 @@
-Dados de população do Brasil do IBGE. Os dados vem de estimativas de população feitas pelo IBGE, exceto em anos de Censo ou contagem.
+Remuneração dos servidores civis e militares ativos do Executivo Federal
+
 
 Para saber mais acesse:
 Website: 
@@ -9,28 +10,29 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Ricardo Dahis
+Nome: Maurício Fagundes
 Código: 
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org
+Email: mauricio.fagundes@gmail.com
 Tratado por
 -----------
-Nome: Ricardo Dahis
+Nome: Maurício Fagundes
 Código: 
-Website: 
-Email: rdahis@basedosdados.org
+Email: mauricio.fagundes@gmail.com
 
 
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
+- carreira
+- ano
+- mes
 
 
 
 
 Cobertura Temporal
 ------------------
-- 1991(1)2020
+- 2013-01(1)2022-08
 
 
 
@@ -44,10 +46,10 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Coletei os dados dos Censos e de todas as estimativas disponíveis. Limpei para consistência. Agreguei os dados a nível de UF.
+Download dos dados da CGU com tratamento para compatibilização de valores com o formato da Base dos Dados
 
 
 
 Frequencia de Atualização
 -------------------------
-one_year
+month

@@ -17,9 +17,11 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_ibge_populacao.brasil AS
+CREATE VIEW basedosdados-dev.br_siorg_cargos.remuneracao AS
 SELECT 
-SAFE_CAST(ano AS INT64) ano,
-SAFE_CAST(populacao AS INT64) populacao,
-SAFE_CAST(populacao_economicamente_ativa AS INT64) populacao_economicamente_ativa
-FROM basedosdados-dev.br_ibge_populacao_staging.brasil AS t
+SAFE_CAST(sigla_cargo_funcao AS STRING) sigla_cargo_funcao,
+SAFE_CAST(nome_cargo_funcao AS STRING) nome_cargo_funcao,
+SAFE_CAST(nivel_cargo_funcao AS STRING) nivel_cargo_funcao,
+SAFE_CAST(remuneracao AS FLOAT64) remuneracao,
+SAFE_CAST(cce_unitario AS FLOAT64) cce_unitario
+FROM basedosdados-dev.br_siorg_cargos_staging.remuneracao AS t
