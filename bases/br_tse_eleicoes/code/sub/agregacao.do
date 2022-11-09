@@ -41,7 +41,7 @@ foreach ano of numlist 1994(2)2022 {
 
 !mkdir "output/resultados_partido_municipio"
 
-foreach ano of numlist 2006 { // 1994(2)2022 {
+foreach ano of numlist 1994(2)2022 {
 	
 	!mkdir "output/resultados_partido_municipio/ano=`ano'"
 	
