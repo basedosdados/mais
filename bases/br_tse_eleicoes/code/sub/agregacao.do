@@ -7,9 +7,9 @@
 // resultados
 //---------------------------------//
 
-//--------------//
+//---------------------//
 // candidato-municipio
-//--------------//
+//---------------------//
 
 !mkdir "output/resultados_candidato_municipio"
 
@@ -35,9 +35,9 @@ foreach ano of numlist 1994(2)2022 {
 }
 *
 
-//--------------//
+//---------------------//
 // partido-municipio
-//--------------//
+//---------------------//
 
 !mkdir "output/resultados_partido_municipio"
 
@@ -62,9 +62,9 @@ foreach ano of numlist 1994(2)2022 {
 }
 *
 
-//--------------//
+//---------------------//
 // candidato
-//--------------//
+//---------------------//
 
 use "output/norm_candidatos.dta", clear
 
