@@ -8,7 +8,7 @@ table_id: microdados
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Microdados de Nascidos Vivos a nível municipal considerando a localidade de ocorrência a partir de 1994
+description: Microdados de Nascidos Vivos a nível municipal considerando a localidade de ocorrência a partir de 1994.
 
 # A máxima unidade espacial que a tabela cobre.
 # Exemplo:
