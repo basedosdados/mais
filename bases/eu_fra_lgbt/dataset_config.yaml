@@ -1,74 +1,47 @@
-dataset_id: eu_fra_lgbt # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/eu-fra-lgbt
-url_github: https://github.com/basedosdados/mais/tree/master/bases/eu_fra_lgbt
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: eu-fra-lgbt
 
-# Descreva a base.
-# Ela é sobre o que?
-# Quais as principais fontes de dados?
-# Há links para FAQs e explicações?
-description: | # REQUIRED
-    O dataset contém tabelas relacionadas a uma ampla pesquisa online sobre e para a comunidade LGBT, conduzida em 2012 em quase todos os países europeus. A pesquisa continha diferentes grupos de questões, que motivaram as diferentes tabelas criadas. Cada tabela abrange uma temática e contém perguntas dessa temática. São exemplos: discriminação, direitos e cotidiano.
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Pesquisa Online Sobre a Comunidade LGBT (Fundamental Rights Agency)
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: Fundamental Rights Agency # REQUIRED
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - eu-fra
 
-# Qual departamento/grupo/pessoa mantém os dados originais?
-author:
-    name: <nome>
-    email: <email>
+# Descrição do conjunto
+notes: "O dataset contém tabelas relacionadas a uma ampla pesquisa online sobre e\
+    \ para a comunidade LGBT, conduzida em 2012 em quase todos os países europeus.\
+    \ A pesquisa continha diferentes grupos de questões, que motivaram as diferentes\
+    \ tabelas criadas. Cada tabela abrange uma temática e contém perguntas dessa temática.\
+    \ São exemplos: discriminação, direitos e cotidiano.\n"
 
-# Onde encontrar os dados originais e mais informações?
-website:
-    - https://www.kaggle.com/ruslankl/european-union-lgbt-survey-2012
-
-# Quais grupos caracterizam a base?
+# Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
 groups:
     - diversidade
     - populacao
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
 # Caso crie etiquetas novas, as regras são:
-#   - letras minúsculas
-#   - sem acentos
-#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - LGBT
     - Homofobia
+    - LGBT
     - LGBTfobia
     - Lesbofobia
     - Pessoas trans
 
-# Em quais línguas a base (ou a fonte original) está disponível?
-# Regras: minúsculo, sem acentos.
-# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
-languages:
-    - ingles
-
-# Os dados originais estão disponíveis de graça?
-free: sim
-
-# Are microdata available for download?
-microdata: sim
-
-# Existe uma API na fonte original?
-API: não
-
-# É necessário registrar um usuário para baixar os dados originais?
-registration: não
-
-# Como os dados originais estão disponibilizados?
-availability: online
-
-# A fonte original requer IP brasileiro para acesso?
-brazilian_IP: não
-
-# Essa base está sob qual licença?
-# A licença MIT se aplica a bases públicas.
-# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
-license: 
-    name: MIT # REQUIRED
-    url: <url>
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2022-07-28T23:00:37.592620'
