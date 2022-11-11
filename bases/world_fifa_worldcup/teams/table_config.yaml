@@ -109,7 +109,7 @@ columns:
       bigquery_type: string
       description: The unique ID number for the team
       temporal_coverage:
-        - (1)
+        - (4)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -124,7 +124,7 @@ columns:
       bigquery_type: string
       description: The name of the team
       temporal_coverage:
-        - (1)
+        - (4)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -139,7 +139,7 @@ columns:
       bigquery_type: string
       description: The 3-letter code for the team
       temporal_coverage:
-        - (1)
+        - (4)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -154,7 +154,7 @@ columns:
       bigquery_type: string
       description: The name of the team’s federation
       temporal_coverage:
-        - (1)
+        - (4)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -169,7 +169,7 @@ columns:
       bigquery_type: string
       description: The name of the region that the country is located in
       temporal_coverage:
-        - (1)
+        - (4)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -184,7 +184,7 @@ columns:
       bigquery_type: string
       description: The unique ID number for the confederation
       temporal_coverage:
-        - (1)
+        - (4)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -199,7 +199,7 @@ columns:
       bigquery_type: string
       description: The name of the confederation
       temporal_coverage:
-        - (1)
+        - (4)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -214,7 +214,7 @@ columns:
       bigquery_type: string
       description: The abbreviation for the confederation
       temporal_coverage:
-        - (1)
+        - (4)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
