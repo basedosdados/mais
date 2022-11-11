@@ -1,0 +1,366 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: world_fifa_worldcup
+
+table_id: tournaments
+
+# Título da tabela.
+title: Tournaments
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: This dataset records all World Cup tournaments. There is one observation per tournament. It includes the host of the tournament, the winner of the tournament, the start and end dates of the tournament, and information about the format of the tournament.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - world
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 1930(4)2018
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: four_years
+
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: other
+      columns:
+          - tournament_id
+
+
+last_updated:
+    metadata: '2022-09-09'
+    data: '2022-09-09 08:30:07'
+    release: '2022-09-09'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Lucas Moreira
+    email: lucas.moreira@basedosdados.org
+    github_user: lucasnascm
+    ckan_user: lucasnascm
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Ana Paula Dames
+    email: apdames@gmail.com
+    github_user: Apdames01
+    ckan_user:
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: rename columns, remove columns
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_fifa_worldcup/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: tournament_id
+      bigquery_type: string
+      description: The ID number of the tournament
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tournament_name
+      bigquery_type: string
+      description: The name of the tournament
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: year
+      bigquery_type: int64
+      description: The year of the tournament
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: data
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: start_date
+      bigquery_type: date
+      description: The start date of the tournament
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: data
+          column_name: data
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: end_date
+      bigquery_type: date
+      description: The end date of the tournament
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: data
+          column_name: data
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: country_name
+      bigquery_type: string
+      description: The official FIFA's name for the country that hosted the tournament
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: winner
+      bigquery_type: string
+      description: The official FIFA's name for the team that won the tournament
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: host_won
+      bigquery_type: int64
+      description: Whether one of the host countries won the tournament
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: count_teams
+      bigquery_type: int64
+      description: The number of teams that participated in the tournament
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: group_stage
+      bigquery_type: int64
+      description: Whether the match is a group stage match
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: second_group_stage
+      bigquery_type: int64
+      description: Whether there was a second group stage
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: final_round
+      bigquery_type: int64
+      description: Whether there was a final round
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: round_of_16
+      bigquery_type: int64
+      description: Whether there was a round of 16 stage
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quarter_finals
+      bigquery_type: int64
+      description: Whether there was a quarter-finals stage
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: semi_finals
+      bigquery_type: int64
+      description: Whether there was a semi-finals stage
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: third_place_match
+      bigquery_type: int64
+      description: Whether there was a third-place match
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: final
+      bigquery_type: int64
+      description: Whether there was a final match
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 21
+
+metadata_modified:
