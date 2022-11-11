@@ -121,7 +121,7 @@ columns:
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
-          table_id: data
+          table_id: ano
           column_name: ano
       measurement_unit:
       has_sensitive_data: no
@@ -225,7 +225,7 @@ columns:
           - (4)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorio_data_tempo
+          dataset_id: br_bd_diretorios_data_tempo
           table_id: data
           column_name: data
       measurement_unit:
@@ -240,8 +240,8 @@ columns:
           - (4)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorio_data_tempo
-          table_id: data
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: hora
           column_name: hora
       measurement_unit:
       has_sensitive_data: no
