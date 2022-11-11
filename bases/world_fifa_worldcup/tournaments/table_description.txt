@@ -1,0 +1,48 @@
+This dataset records all World Cup tournaments. There is one observation per tournament. It includes the host of the tournament, the winner of the tournament, the start and end dates of the tournament, and information about the format of the tournament.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Ana Paula Dames
+Código: 
+Email: apdames@gmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 1930(4)2018
+
+
+
+
+Cobertura Espacial
+------------------
+- world
+
+
+
+
+Tratamento
+----------
+rename columns, remove columns
+
+
+
+Frequencia de Atualização
+-------------------------
+four_years

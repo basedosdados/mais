@@ -1,0 +1,48 @@
+This dataset records all World Cup matches. There is one observation per match per tournament. It includes the home team, the away team, the date of the match, the country, city, and stadium that the match was played in, the final score, the score margin for each team, whether the match went to extra time, whether there was a penalty shootout, the number of penalties scored in the shootout (if applicable), the result of the match (home team win, away team win, draw, replayed), and the winner (if applicable).
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Laura Amaral
+Código: 
+Email: laura.amaral@basedosdados.org
+Tratado por
+-----------
+Nome: Ana Paula Dames
+Código: 
+Email: apdames@gmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 1930(4)2018
+
+
+
+
+Cobertura Espacial
+------------------
+- world
+
+
+
+
+Tratamento
+----------
+rename columns, remove columns, replace 'Not Applicable' cells to empty cells
+
+
+
+Frequencia de Atualização
+-------------------------
+four_years
