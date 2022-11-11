@@ -1,0 +1,599 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: world_fifa_worldcup
+
+table_id: matches
+
+# Título da tabela.
+title: Matches
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: This dataset records all World Cup matches. There is one observation
+    per match per tournament. It includes the home team, the away team, the date of
+    the match, the country, city, and stadium that the match was played in, the final
+    score, the score margin for each team, whether the match went to extra time, whether
+    there was a penalty shootout, the number of penalties scored in the shootout (if
+    applicable), the result of the match (home team win, away team win, draw, replayed),
+    and the winner (if applicable).
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - world
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 1930(4)2018
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: four_years
+
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: other
+      columns:
+          - match_id
+
+
+last_updated:
+    metadata: '2022-09-09'
+    data: '2022-09-09 08:30:07'
+    release: '2022-09-09'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Laura Amaral
+    email: laura.amaral@basedosdados.org
+    github_user: https://github.com/laura-l-amaral
+    ckan_user: laura-amaral
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Ana Paula Dames
+    email: apdames@gmail.com
+    github_user: https://github.com/Apdames01
+    ckan_user:
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: rename columns, remove columns, replace 'Not Applicable'
+    cells to empty cells
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_fifa_worldcup/code
+
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: year
+      bigquery_type: int64
+      description: Year of the tournament
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: data
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tournament_id
+      bigquery_type: string
+      description: ID number for the tournament
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: match_id
+      bigquery_type: string
+      description: ID number for the match
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: stage_name
+      bigquery_type: string
+      description: The stage of the tournament
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: group_name
+      bigquery_type: string
+      description: The name of the group
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: replayed
+      bigquery_type: int64
+      description: Whether the match was replayed
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: only happened at the 1938 World Cup
+      is_in_staging: true
+      is_partition: false
+    - name: replay
+      bigquery_type: int64
+      description: Whether the match was replay
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: only happened at the 1938 World Cup
+      is_in_staging: true
+      is_partition: false
+    - name: match_date
+      bigquery_type: date
+      description: The date of the match
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorio_data_tempo
+          table_id: data
+          column_name: data
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: match_time
+      bigquery_type: time
+      description: The time of the match
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorio_data_tempo
+          table_id: data
+          column_name: hora
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Country local time
+      is_in_staging: true
+      is_partition: false
+    - name: stadium_id
+      bigquery_type: string
+      description: ID number of the stadium
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: stadium_name
+      bigquery_type: string
+      description: The name of the stadium
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: city_name
+      bigquery_type: string
+      description: The name of the city in which the match was played
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: country_name
+      bigquery_type: string
+      description: Official name given by FIFA of the host country
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_a_id
+      bigquery_type: string
+      description: ID number for the A team
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_a_name
+      bigquery_type: string
+      description: Official name given by FIFA of the team A
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_a_code
+      bigquery_type: string
+      description: The 3-letter code for the A team
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_b_id
+      bigquery_type: string
+      description: ID number for the B team
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_b_name
+      bigquery_type: string
+      description: Official name given by FIFA of the team B
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_b_id_code
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: score
+      bigquery_type: string
+      description: The score of the match
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_a_score
+      bigquery_type: int64
+      description: The score of the A team
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_b_score
+      bigquery_type: int64
+      description: The score of the B team
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_a_score_margin
+      bigquery_type: int64
+      description: The score margin of the A team
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_b_score_margin
+      bigquery_type: int64
+      description: The score margin of the B team
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: extra_time
+      bigquery_type: int64
+      description: Whether the match went a extra time
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: penalty_shootout
+      bigquery_type: int64
+      description: Whether the match ended in a penalty shootout
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: score_penalties
+      bigquery_type: string
+      description: The score of the penalty
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_a_score_penalties
+      bigquery_type: int64
+      description: The score of the A team in the penalty shootout
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_b_score_penalties
+      bigquery_type: int64
+      description: The score of the A team in the penalty shootout
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_a_win
+      bigquery_type: int64
+      description: Whether the A team won the match
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: team_b_win
+      bigquery_type: int64
+      description: Whether the B team won the match
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: draw
+      bigquery_type: int64
+      description: Whether the match ended in a draw
+      temporal_coverage:
+          - (4)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+
+number_rows: 900
+
+metadata_modified:

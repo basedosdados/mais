@@ -1,0 +1,38 @@
+
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: world-fifa-worldcup
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: World cup
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization: world-fifa
+
+# Descrição do conjunto
+notes: The Fjelstul World Cup Database is a comprehensive database about the FIFA World Cup created by Joshua C. Fjelstul, Ph.D. that covers all 21 World Cup tournaments (1930-2018). The database includes 27 datasets (approximately 1.1 million data points) that cover all aspects of the World Cup. The data has been extensively cleaned and cross-validated. The collected data are from https://github.com/jfjelstul/worldcup/tree/master/data-csv
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups: esportes
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags: 
+  - copa do mundo
+  - futebol
+
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified:
