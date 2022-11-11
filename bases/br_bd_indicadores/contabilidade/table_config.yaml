@@ -6,7 +6,7 @@ dataset_id: br-bd-indicadores
 table_id: contabilidade
 
 # Título da tabela.
-title: Contabilidade
+title: Contabilidade 
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
