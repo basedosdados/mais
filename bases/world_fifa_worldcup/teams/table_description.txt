@@ -1,0 +1,48 @@
+This dataset records all teams who have participated in a World Cup match. There is one observation per team. It includes information about each country's national federation and FIFA confederation.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Ana Paula Dames
+Código: 
+Email: apdames@gmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 1930(4)2018
+
+
+
+
+Cobertura Espacial
+------------------
+- world
+
+
+
+
+Tratamento
+----------
+remove columns
+
+
+
+Frequencia de Atualização
+-------------------------
+four_years

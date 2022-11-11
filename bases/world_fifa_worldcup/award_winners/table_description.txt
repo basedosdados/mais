@@ -1,0 +1,48 @@
+This dataset records all world cup award winners. There is one observation per player per award per tournament. Some awards are shared by multiple players. It indicates the name of the award, the player(s) who won the award, the team of the player(s) who won the award, and whether the award was shared.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Ana Paula Dames
+Código: 
+Email: apdames@gmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 1930(4)2018
+
+
+
+
+Cobertura Espacial
+------------------
+- world
+
+
+
+
+Tratamento
+----------
+remove columns
+
+
+
+Frequencia de Atualização
+-------------------------
+four_years
