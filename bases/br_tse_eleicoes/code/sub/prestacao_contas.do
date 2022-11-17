@@ -104,7 +104,7 @@ keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
 
-foreach ano of numlist 2014(2)2022 { // 2002(2)2022 {
+foreach ano of numlist 2002(2)2022 {
 	
 	if `ano' == 2002 {
 		
@@ -959,7 +959,8 @@ foreach ano of numlist 2014(2)2022 { // 2002(2)2022 {
 	}
 	if `ano' >= 2020 {
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2020 local estados AC AL AM AP BA    CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2022 local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
@@ -1933,7 +1934,8 @@ foreach ano of numlist 2002(2)2022 {
 	*
 	if `ano' >= 2020 {
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2020 local estados AC AL AM AP BA    CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2022 local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
