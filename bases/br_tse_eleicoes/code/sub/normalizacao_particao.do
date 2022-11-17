@@ -683,37 +683,6 @@ foreach ano in `anos' {
 *
 
 //-------------------------------------------------//
-// filiacao partidaria
-//-------------------------------------------------//
-
-!mkdir "output/filiacao_partidaria"
-!mkdir "output/filiacao_partidaria/microdados"
-
-local ufs AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RO RR RS SC SE SP TO ZZ
-foreach uf in `ufs' {
-	
-	!mkdir "output/filiacao_partidaria/microdados/sigla_uf=`uf'"
-	
-	use "output/filiacao_partidaria.dta" if sigla_uf == "`uf'", clear
-	
-	levelsof sigla_partido, l(partidos)
-	foreach partido in `partidos' {
-		
-		!mkdir "output/filiacao_partidaria/microdados/sigla_uf=`uf'/sigla_partido=`partido'"
-		
-		preserve
-			
-			keep if sigla_partido == "`partido'"
-			drop sigla_uf sigla_partido
-			export delimited "output/filiacao_partidaria/microdados/sigla_uf=`uf'/sigla_partido=`partido'/microdados.csv", replace
-			
-		restore
-	
-	}
-}
-*
-
-//-------------------------------------------------//
 // bens - candidato
 //-------------------------------------------------//
 
@@ -749,17 +718,9 @@ foreach ano of numlist 2006(2)2022 {
 	
 	order ano tipo_eleicao sigla_uf sequencial_candidato id_candidato_bd id_tipo_item tipo_item descricao_item valor_item
 	
-	tempfile bens
-	save `bens'
+	drop ano
+	export delimited "output/bens_candidato/ano=`ano'/bens_candidato.csv", replace
 	
-	levelsof sigla_uf, l(ufs)
-	foreach uf in `ufs' {
-		!mkdir "output/bens_candidato/ano=`ano'/sigla_uf=`uf'"
-		use `bens', clear
-		keep if ano == `ano' & sigla_uf == "`uf'"
-		drop ano sigla_uf
-		export delimited "output/bens_candidato/ano=`ano'/sigla_uf=`uf'/bens_candidato.csv", replace
-	}
 }
 *
 
@@ -885,18 +846,8 @@ foreach ano of numlist 2002(2)2022 {
 	// particiona
 	//--------------//
 	
-	levelsof sigla_uf, l(ufs)
-	foreach uf in `ufs' {
-		
-		!mkdir "output/receitas_candidato/ano=`ano'/sigla_uf=`uf'"
-		
-		preserve
-			keep if ano == `ano' & sigla_uf == "`uf'"
-			drop ano sigla_uf
-			export delimited "output/receitas_candidato/ano=`ano'/sigla_uf=`uf'/receitas_candidato.csv", replace
-		restore
-		
-	}
+	drop ano
+	export delimited "output/receitas_candidato/ano=`ano'/receitas_candidato.csv", replace
 	
 }
 *
@@ -1014,40 +965,54 @@ foreach ano of numlist 2002(2)2022 {
 	
 	ren numero numero_candidato
 	
-	tempfile despesas
-	save `despesas'
+	append using `vazio'
 	
-	levelsof sigla_uf, l(ufs)
-	foreach uf in `ufs' {
-		
-		use `despesas' if sigla_uf == "`uf'", clear
+	order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
+		sequencial_candidato numero_candidato cpf_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
+		sequencial_despesa data_despesa tipo_despesa descricao_despesa origem_despesa valor_despesa ///
+		tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas cnpj_candidato ///
+		tipo_documento numero_documento ///
+		especie_recurso fonte_recurso ///
+		cpf_cnpj_fornecedor nome_fornecedor nome_fornecedor_rf cnae_2_fornecedor descricao_cnae_2_fornecedor ///
+		tipo_fornecedor esfera_partidaria_fornecedor sigla_uf_fornecedor ///
+		id_municipio_tse_fornecedor sequencial_candidato_fornecedor numero_candidato_fornecedor ///
+		numero_partido_fornecedor sigla_partido_fornecedor nome_partido_fornecedor cargo_fornecedor
 	
-		append using `vazio'
-		
-		order ano turno tipo_eleicao sigla_uf id_municipio id_municipio_tse ///
-			sequencial_candidato numero_candidato cpf_candidato id_candidato_bd nome_candidato cpf_vice_suplente numero_partido sigla_partido nome_partido cargo ///
-			sequencial_despesa data_despesa tipo_despesa descricao_despesa origem_despesa valor_despesa ///
-			tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas cnpj_candidato ///
-			tipo_documento numero_documento ///
-			especie_recurso fonte_recurso ///
-			cpf_cnpj_fornecedor nome_fornecedor nome_fornecedor_rf cnae_2_fornecedor descricao_cnae_2_fornecedor ///
-			tipo_fornecedor esfera_partidaria_fornecedor sigla_uf_fornecedor ///
-			id_municipio_tse_fornecedor sequencial_candidato_fornecedor numero_candidato_fornecedor ///
-			numero_partido_fornecedor sigla_partido_fornecedor nome_partido_fornecedor cargo_fornecedor
-		
-		//--------------//
-		// particiona
-		//--------------//
-	
-		!mkdir "output/despesas_candidato/ano=`ano'/sigla_uf=`uf'"
-		
-		drop ano sigla_uf
-		
-		export delimited "output/despesas_candidato/ano=`ano'/sigla_uf=`uf'/despesas_candidato.csv", replace
-		
-	}
+	drop ano
+	export delimited "output/despesas_candidato/ano=`ano'/despesas_candidato.csv", replace
 	
 }
 *
 
 
+
+//-------------------------------------------------//
+// filiacao partidaria
+//-------------------------------------------------//
+
+!mkdir "output/filiacao_partidaria"
+!mkdir "output/filiacao_partidaria/microdados"
+
+local ufs AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RO RR RS SC SE SP TO ZZ
+foreach uf in `ufs' {
+	
+	!mkdir "output/filiacao_partidaria/microdados/sigla_uf=`uf'"
+	
+	use "output/filiacao_partidaria.dta" if sigla_uf == "`uf'", clear
+	
+	levelsof sigla_partido, l(partidos)
+	foreach partido in `partidos' {
+		
+		!mkdir "output/filiacao_partidaria/microdados/sigla_uf=`uf'/sigla_partido=`partido'"
+		
+		preserve
+			
+			keep if sigla_partido == "`partido'"
+			drop sigla_uf sigla_partido
+			export delimited "output/filiacao_partidaria/microdados/sigla_uf=`uf'/sigla_partido=`partido'/microdados.csv", replace
+			
+		restore
+	
+	}
+}
+*
