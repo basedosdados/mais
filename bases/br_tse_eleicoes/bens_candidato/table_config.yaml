@@ -35,7 +35,7 @@ observation_level: []
 
 last_updated:
     metadata:
-    data: '2022-09-29 19:51:29'
+    data: '2022-11-01 15:57:08'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -93,7 +93,6 @@ project_id_staging: basedosdados-dev
 # Se não houver partições, não modifique abaixo.
 partitions:
     - ano
-    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -108,7 +107,7 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-        - (2)
+          - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -123,7 +122,7 @@ columns:
       bigquery_type: string
       description: Tipo da Eleição
       temporal_coverage:
-        - (2)
+          - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -138,7 +137,7 @@ columns:
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-        - (2)
+          - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -148,12 +147,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true
+      is_partition: false
     - name: sequencial_candidato
       bigquery_type: string
       description: Sequencial do Candidato
       temporal_coverage:
-        - (2)
+          - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -168,7 +167,7 @@ columns:
       bigquery_type: string
       description: ID Candidato - Base dos Dados
       temporal_coverage:
-        - (2)
+          - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -183,7 +182,7 @@ columns:
       bigquery_type: string
       description: ID Tipo Item
       temporal_coverage:
-        - (2)
+          - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -198,7 +197,7 @@ columns:
       bigquery_type: string
       description: Tipo Item
       temporal_coverage:
-        - (2)
+          - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -213,7 +212,7 @@ columns:
       bigquery_type: string
       description: Descrição do Item
       temporal_coverage:
-        - (2)
+          - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -228,7 +227,7 @@ columns:
       bigquery_type: float64
       description: Valor do Item
       temporal_coverage:
-        - (2)
+          - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -240,6 +239,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows:
+number_rows: 4025904
 
-metadata_modified: '2022-10-12T10:01:21.187466'
+metadata_modified: '2022-11-02T10:00:56.622554'
