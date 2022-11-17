@@ -26,7 +26,6 @@ Email: rdahis@basedosdados.org
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
-- sigla_uf
 
 
 
