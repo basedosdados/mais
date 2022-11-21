@@ -1,9 +1,8 @@
 A tabela contém dados da pesquisa europeia a comunidade LGBT, com recorte para direitos da comunidade LGBT e a consciência da comunidade a respeito deles.
 
-
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/eu-fra-lgbt
-Github: https://github.com/basedosdados/mais/tree/master/bases/eu_fra_lgbt
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,43 +10,41 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Matheus Valentim
-Código: https://github.com/basedosdados/mais/tree/master/bases/eu_fra_lgbt/code
+Código: 
 Website: https://github.com/mavalentim
-Email: mavalentim.b@gmail.comTratado por
+Email: mavalentim.b@gmail.com
+Tratado por
 -----------
 Nome: Matheus Valentim
-Código: https://github.com/basedosdados/mais/tree/master/bases/eu_fra_lgbt/code
+Código: 
 Website: https://github.com/mavalentim
 Email: mavalentim.b@gmail.com
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- pais
-- grupo LGBT
-- pergunta
-- resposta
 
-Colunas identificando linhas unicamente
--------------------
-- pais_ingles
-- grupo
-- pergunta
-- resposta
+
+
+
 
 Cobertura Temporal
 ------------------
 - 2012
 
+
+
+
 Cobertura Espacial
 ------------------
-- europa
+- eu
+
+
+
 
 Tratamento
 ----------
 O tratamento da base consistiu em alternar nome e ordem de colunas.
 
+
+
 Frequencia de Atualização
 -------------------------
-unico
-
-
+unique
