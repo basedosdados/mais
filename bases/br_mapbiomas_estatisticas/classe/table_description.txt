@@ -1,5 +1,4 @@
-Dados de transição de cobertura do solo a nível de municipio-de_classe-para_classe-ano.
-
+Dicionário de colunas classe.
 
 Para saber mais acesse:
 Website: 
@@ -23,34 +22,22 @@ Email: rdahis@basedosdados.org
 
 
 
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-- ano
-
 
 
 
 Cobertura Temporal
 ------------------
-- 1986(1)2021
 
 
 
 
 Cobertura Espacial
 ------------------
-- sa.br
 
 
 
 
-Tratamento
-----------
-Limpei os dados para uso imediato. Isso incluiu padronizar os níveis das classes, e separar as diferentes periodicidades em arquivos separados.
 
 
 
 
-Frequencia de Atualização
--------------------------
-one_year
