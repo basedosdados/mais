@@ -34,7 +34,7 @@ update_frequency: one_year
 observation_level:
     - country: br
       entity: municipality
-      column:
+      columns:
           - id_municipio
     - columns:
           - id_classe
@@ -49,14 +49,14 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.0
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
-    github_user:
-    ckan_user:
+    github_user: rdahis
+    ckan_user: rdahis
     website: www.ricardodahis.com
 
 # Qual organização/departamento/pessoa tratou os dados?
@@ -65,9 +65,9 @@ published_by:
 data_cleaned_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
-    github_user:
-    ckan_user:
-    website:
+    github_user: rdahis
+    ckan_user: rdahis
+    website: www.ricardodahis.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: "Limpei os dados para consistência.\n"

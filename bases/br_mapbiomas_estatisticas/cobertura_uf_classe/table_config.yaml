@@ -44,21 +44,21 @@ version:
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name:
-    email:
-    github_user:
-    ckan_user:
-    website:
+    name: Ricardo Dahis
+    email: rdahis@basedosdados.org
+    github_user: rdahis
+    ckan_user: rdahis
+    website: www.ricardodahis.com
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name:
-    email:
-    github_user:
-    ckan_user:
-    website:
+    name: Ricardo Dahis
+    email: rdahis@basedosdados.org
+    github_user: rdahis
+    ckan_user: rdahis
+    website: www.ricardodahis.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description:
@@ -144,9 +144,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: false
+      observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: area
       bigquery_type: float64
       description: Área
@@ -165,4 +165,4 @@ columns:
 
 number_rows:
 
-metadata_modified: '2022-11-18T20:25:41.016729'
+metadata_modified: '2022-11-21T21:49:12.438521'
