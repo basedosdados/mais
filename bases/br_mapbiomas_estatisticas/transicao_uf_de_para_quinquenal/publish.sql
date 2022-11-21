@@ -17,12 +17,11 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_mapbiomas_estatisticas.transicao_municipio_de_para_decenal AS
+CREATE VIEW basedosdados-dev.br_mapbiomas_estatisticas.transicao_uf_de_para_quinquenal AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(id_classe_de AS STRING) id_classe_de,
 SAFE_CAST(id_classe_para AS STRING) id_classe_para,
 SAFE_CAST(area AS FLOAT64) area
-FROM basedosdados-dev.br_mapbiomas_estatisticas_staging.transicao_municipio_de_para_decenal AS t
+FROM basedosdados-dev.br_mapbiomas_estatisticas_staging.transicao_uf_de_para_quinquenal AS t
