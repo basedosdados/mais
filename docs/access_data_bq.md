@@ -60,7 +60,7 @@ Dentro do projeto existem dois níveis de organização dos dados,
 - **Todas as tabelas estão organizadas dentro de cojuntos de dados**, que
   representaam sua organização/tema (ex: o conjunto
   `br_ibge_populacao` contém uma tabela `municipio` com a série
-  históricac de população a
+  histórica de população a
   nível municipal)
 - **Cada tabela pertence a um único conjunto de dados** (ex: a tabela
   `municipio` em `br_ibge_populacao` é diferente de `municipio` em `br_bd_diretorios`)
