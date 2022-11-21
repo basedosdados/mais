@@ -1,0 +1,714 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_ibge_pof
+
+table_id: cadastro_de_produtos_2017
+
+# Título da tabela.
+title: Cadastro de Produtos
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Tabela que possui o cadastro de todos os items presentes na POF 2017-2018, identificados pela variável V9001.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2017(1)2018
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency:
+    - ten_years
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: item
+      columns:
+        - id_codigo_5_bd  
+
+last_updated:
+    metadata: '2022-10-19'
+    data: '2022-05-19 12:00:00'
+    release: '2022-05-19 13:00:00'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by: 
+    name: Arthur de Figueiredo Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
+    website: 
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by: 
+    name: Arthur de Figueiredo Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Padronização do código dos produtos para os 5 dígitos e join com as tabelas auxiliares o IBGE, chamadas de Tradutores, para os itens de despesa, rendimento, consumo alimentar e aquisição alimentar.
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pof/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: id_quadro
+      bigquery_type: string
+      description: Número do quadro que o item de despesa/aquisição foi registrado
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: id_codigo_5_bd
+      bigquery_type: string
+      description: Código de 5 dígitos do item
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: id_codigo_7_bd
+      bigquery_type: string
+      description: Código de 7 dígitos do item
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: v9001
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_do_produto
+      bigquery_type: string
+      description: Quantidade final consumida em kwh, apenas para o item energia elétrica
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: variavel_despesa
+      bigquery_type: string
+      description: Variável que representa cada item de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_0_despesa
+      bigquery_type: string
+      description: Primeiro nível de desagregação dos itens de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_1_despesa
+      bigquery_type: string
+      description: Segundo nível de desagregação dos itens de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_2_despesa
+      bigquery_type: string
+      description: Terceiro nível de desagregação dos itens de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_3_despesa
+      bigquery_type: string
+      description: Quarto nível de desagregação dos itens de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_4_despesa
+      bigquery_type: string
+      description: Quinto nível de desagregação dos itens de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_5_despesa
+      bigquery_type: string
+      description: Sexto nível de desagregação dos itens de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_0_rendimento
+      bigquery_type: string
+      description: Primeiro nível de desagregação dos itens de rendimentos
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_1_rendimento
+      bigquery_type: string
+      description: Segundo nível de desagregação dos itens de rendimentos
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_2_rendimento
+      bigquery_type: string
+      description: Terceiro nível de desagregação dos itens de rendimentos
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_3_rendimento
+      bigquery_type: string
+      description: Quarto nível de desagregação dos itens de rendimentos
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_0_alimentacao
+      bigquery_type: string
+      description: Primeiro nível de desagregação dos itens de despesa com alimentação
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_1_alimentacao
+      bigquery_type: string
+      description: Segundo nível de desagregação dos itens de despesa com alimentação
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_2_alimentacao
+      bigquery_type: string
+      description: Terceiro nível de desagregação dos itens de despesa com alimentação
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_3_alimentacao
+      bigquery_type: string
+      description: Quarto nível de desagregação dos itens de despesa com alimentação
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_1_aquisicao_alimentar
+      bigquery_type: string
+      description: Primeiro nível de desagregação dos itens de aquisição alimentar
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_2_aquisicao_alimentar
+      bigquery_type: string
+      description: Segundo nível de desagregação dos itens de aquisição alimentar
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: nivel_3_aquisicao_alimentar
+      bigquery_type: string
+      description: Terceiro nível de desagregação dos itens de aquisição alimentar
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_0_despesa
+      bigquery_type: string
+      description: Descriçao do Primeiro nível de desagregação dos itens de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_1_despesa
+      bigquery_type: string
+      description: Descriçao do Segundo nível de desagregação dos itens de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_2_despesa
+      bigquery_type: string
+      description: Descriçao do Terceiro nível de desagregação dos itens de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_3_despesa
+      bigquery_type: string
+      description: Descriçao do Quarto nível de desagregação dos itens de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_4_despesa
+      bigquery_type: string
+      description: Descriçao do Quinto nível de desagregação dos itens de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_5_despesa
+      bigquery_type: string
+      description: Descriçao do Sexto nível de desagregação dos itens de despesa
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_0_rendimento
+      bigquery_type: string
+      description: Descriçao do Primeiro nível de desagregação dos itens de rendimentos
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_1_rendimento
+      bigquery_type: string
+      description: Descriçao do Segundo nível de desagregação dos itens de rendimentos
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_2_rendimento
+      bigquery_type: string
+      description: Descriçao do Terceiro nível de desagregação dos itens de rendimentos
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_3_rendimento
+      bigquery_type: string
+      description: Descriçao do Quarto nível de desagregação dos itens de rendimentos
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_0_alimentacao
+      bigquery_type: string
+      description: Descriçao do Primeiro nível de desagregação dos itens de despesa
+          com alimentação
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_1_alimentacao
+      bigquery_type: string
+      description: Descriçao do Segundo nível de desagregação dos itens de despesa
+          com alimentação
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_2_alimentacao
+      bigquery_type: string
+      description: Descriçao do Terceiro nível de desagregação dos itens de despesa
+          com alimentação
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_3_alimentacao
+      bigquery_type: string
+      description: Descriçao do Quarto nível de desagregação dos itens de despesa
+          com alimentação
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_1_aquisicao_alimentar
+      bigquery_type: string
+      description: Descriçao do Primeiro nível de desagregação dos itens de aquisição
+          alimentar
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_2_aquisicao_alimentar
+      bigquery_type: string
+      description: Descriçao do Segundo nível de desagregação dos itens de aquisição
+          alimentar
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: descricao_3_aquisicao_alimentar
+      bigquery_type: string
+      description: Descriçao do Terceiro nível de desagregação dos itens de aquisição
+          alimentar
+      temporal_coverage:
+          - 2017(1)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+
+number_rows:
+
+metadata_modified:
