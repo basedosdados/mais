@@ -2,8 +2,8 @@ Dados de transição de cobertura do solo a nível de municipio-de_classe-para_c
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-mapbiomas-estatisticas
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_map_biomas_estatisticas
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,47 +11,46 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_mapbiomas_estatisticas/code
+Código: 
 Website: www.ricardodahis.com
-Email: rdahis@basedosdados.orgTratado por
+Email: rdahis@basedosdados.org
+Tratado por
 -----------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_mapbiomas_estatisticas/code
+Código: 
+Website: www.ricardodahis.com
 Email: rdahis@basedosdados.org
+
+
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
-- estado_abrev
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- municipio
-- classe
-- ano
 
-Colunas identificando linhas unicamente
--------------------
-- id_municipio
-- de_id_classe
-- para_id_classe
-- ano
+
 
 Cobertura Temporal
 ------------------
-- 2000
-- 2010
+- 2000(10)2020
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- sa.br
+
+
+
 
 Tratamento
 ----------
 Limpei os dados para uso imediato. Isso incluiu padronizar os níveis das classes, e separar as diferentes periodicidades em arquivos separados.
 
+
+
+
 Frequencia de Atualização
 -------------------------
-10 anos
-
-
+ten_years
