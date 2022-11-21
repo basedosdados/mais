@@ -1,5 +1,4 @@
-Dados de transição de cobertura do solo a nível de municipio-de_classe-para_classe-quinquênio.
-
+None
 
 Para saber mais acesse:
 Website: 
@@ -32,7 +31,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 1990(5)2020
+- 2000(10)2020
 
 
 
@@ -43,10 +42,6 @@ Cobertura Espacial
 
 
 
-
-Tratamento
-----------
-Limpei os dados para uso imediato. Isso incluiu padronizar os níveis das classes, e separar as diferentes periodicidades em arquivos separados.
 
 
 
