@@ -101,22 +101,23 @@ A ordem de variáveis em tabelas é padronizada para manter uma consistência no
 
 ## Tipos de variáveis
 
-Nós utilizamos algumas das opções de [tipos do BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types): `STRING`, `INT64`, `FLOAT64`, `DATE`, `TIME`, `GEOGRAPHY`.
+Nós utilizamos algumas das opções de [tipos do BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types): `string`, `int64`, `float64`, `date`, `time`, `geography`.
 
 Quando escolher:
 
-- `STRING`:
+- `string`:
     - Variáveis de texto
     - Chaves de variáveis categóricas com dicionário ou diretório
-- `INT64`:
-    - Variáveis de números inteiros com as quais é possível fazer contas (adição, subtração)
-- `FLOAT64`:
+- `int64`:
+    - Variáveis de números inteiros com as quais é possível fazer contas (adição, subtração) 
+    - Variáveis do tipo booleanas que preenchemos com 0 ou 1 
+- `float64`:
     - Variáveis de números com casas decimais com as quais é possível fazer contas (adição, subtração)
-- `DATE`:
+- `date`:
     - Variáveis de data no formato `YYYY-MM-DD`
-- `TIME`:
+- `time`:
     - Variáveis de tempo no formato `HH:MM:SS`
-- `GEOGRAPHY`:
+- `geography`:
     - Variáveis de geografia
 
 ## Unidades de medida
