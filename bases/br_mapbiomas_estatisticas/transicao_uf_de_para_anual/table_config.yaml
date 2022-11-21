@@ -3,7 +3,7 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_mapbiomas_estatisticas
 
-table_id: cobertura_municipio_classe
+table_id: transicao_uf_de_para_anual
 
 # Título da tabela.
 title:
@@ -12,7 +12,7 @@ title:
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: "Estatísticas de cobertura agregadas por municipio-classe.\n"
+description:
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -33,11 +33,13 @@ update_frequency: one_year
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
     - country: br
-      entity: municipality
+      entity: state
       columns:
-          - id_municipio
+          - sigla_uf
     - columns:
-          - id_classe
+          - id_classe_de
+    - columns:
+          - id_classe_para
     - entity: year
       columns:
           - ano
@@ -70,15 +72,15 @@ data_cleaned_by:
     website: www.ricardodahis.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "Limpei os dados para consistência.\n"
+data_cleaning_description:
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_mapbiomas_estatisticas/code
+data_cleaning_code_url:
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
-    name: ''
-    organization_id: ''
+    name:
+    organization_id:
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -115,12 +117,12 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-          - (1)
+        - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
       measurement_unit: year
       has_sensitive_data: no
       observations:
@@ -130,7 +132,7 @@ columns:
       bigquery_type: string
       description: Sigla da unidade da federação
       temporal_coverage:
-          - (1)
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -141,26 +143,26 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: id_municipio
+    - name: id_classe_de
       bigquery_type: string
-      description: ID Município - IBGE 7 Dígitos
+      description: ID Classe - De
       temporal_coverage:
-          - (1)
+        - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: municipio
-          column_name: id_municipio
+          dataset_id:
+          table_id:
+          column_name:
       measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
-    - name: id_classe
+    - name: id_classe_para
       bigquery_type: string
-      description: ID Classe
+      description: ID Classe - Para
       temporal_coverage:
-          - (1)
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -175,7 +177,6 @@ columns:
       bigquery_type: float64
       description: Área
       temporal_coverage:
-          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -187,6 +188,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 2025450
+number_rows:
 
-metadata_modified: '2022-11-18T20:19:49.202719'
+metadata_modified: '2022-11-21T22:05:53.972942'

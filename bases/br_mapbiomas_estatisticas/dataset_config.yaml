@@ -1,72 +1,45 @@
-dataset_id: br_mapbiomas_estatisticas # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-mapbiomas-estatisticas
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_mapbiomas_estatisticas
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-mapbiomas-estatisticas
 
-# Descreva a base.
-# Ela é sobre o que?
-# Quais as principais fontes de dados?
-# Há links para FAQs e explicações?
-description: | # REQUIRED
-    O Projeto de Mapeamento Anual da Cobertura e Uso do Solo do Brasil é uma iniciativa que envolve uma rede colaborativa com especialistas nos biomas, usos da terra, sensoriamento remoto, SIG e ciência da computação que utiliza processamento em nuvem e classificadores automatizados desenvolvidos e operados a partir da plataforma Google Earth Engine para gerar uma série histórica de mapas anuais de cobertura e uso da terra do Brasil.
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: MapBiomas Estatísticas
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: mapbiomas
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - br-mapbiomas
 
-# Qual departamento/grupo/pessoa mantém os dados originais?
-author:
-    name: <nome>
-    email: <email>
+# Descrição do conjunto
+notes: O Projeto de Mapeamento Anual da Cobertura e Uso do Solo do Brasil é uma iniciativa
+    que envolve uma rede colaborativa com especialistas nos biomas, usos da terra,
+    sensoriamento remoto, SIG e ciência da computação que utiliza processamento em
+    nuvem e classificadores automatizados desenvolvidos e operados a partir da plataforma
+    Google Earth Engine para gerar uma série histórica de mapas anuais de cobertura
+    e uso da terra do Brasil.
 
-# Onde encontrar os dados originais e mais informações?
-website:
-    - https://mapbiomas.org/
-
-# Quais grupos caracterizam a base?
+# Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
 groups:
-    - meio-ambiente
     - agropecuaria
+    - meio-ambiente
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
 # Caso crie etiquetas novas, as regras são:
-#   - letras minúsculas
-#   - sem acentos
-#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
     - desmatamento
     - uso da terra
 
-# Em quais línguas a base (ou a fonte original) está disponível?
-# Regras: minúsculo, sem acentos.
-# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
-languages:
-    - portugues
-    - ingles
-
-# Os dados originais estão disponíveis de graça?
-free: sim
-
-# Are microdata available for download?
-microdata: sim
-
-# Existe uma API na fonte original?
-API: nao
-
-# É necessário registrar um usuário para baixar os dados originais?
-registration: nao
-
-# Como os dados originais estão disponibilizados?
-availability: online
-
-# A fonte original requer IP brasileiro para acesso?
-brazilian_IP: nao
-
-# Essa base está sob qual licença?
-# A licença MIT se aplica a bases públicas.
-# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
-license: 
-    name: MIT # REQUIRED
-    url: <url>
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2022-11-18T20:25:41.016729'
