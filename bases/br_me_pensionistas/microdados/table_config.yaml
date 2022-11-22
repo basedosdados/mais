@@ -105,7 +105,7 @@ partitions:
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: nome_servidor
-      bigquery_type:
+      bigquery_type: string
       description: Nome do servidor instituidor
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -119,7 +119,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: cpf_servidor
-      bigquery_type:
+      bigquery_type: string
       description: CPF do servidor instituidor
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -133,7 +133,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: data_nascimento_servidor
-      bigquery_type:
+      bigquery_type: date
       description: Data de nascimento do servidor instituidor
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -147,7 +147,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: data_falecimento_servidor
-      bigquery_type:
+      bigquery_type: date
       description: Data de falecimento do servidor instituidor
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -161,7 +161,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: matricula_servidor
-      bigquery_type:
+      bigquery_type: string
       description: Matrícula do servidor instituidor
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -175,7 +175,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: nome_orgao
-      bigquery_type:
+      bigquery_type: string
       description: Nome do órgão
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -189,7 +189,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: sigla_orgao
-      bigquery_type:
+      bigquery_type: string
       description: Sigla do órgão
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -203,7 +203,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: codigo_orgao_superior
-      bigquery_type:
+      bigquery_type: string
       description: Código do órgão superior
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -217,7 +217,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: cargo_servidor
-      bigquery_type:
+      bigquery_type: string
       description: Cargo do servidor instituidor
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -231,7 +231,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: escolaridade_cargo
-      bigquery_type:
+      bigquery_type: string
       description: Escolaridade do cargo
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -245,7 +245,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: classe_servidor
-      bigquery_type:
+      bigquery_type: string
       description: Classe do servidor instituidor
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -259,7 +259,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: padrao_servidor
-      bigquery_type:
+      bigquery_type: string
       description: Padrão do servidor instituidor
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -273,7 +273,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: referencia_servidor
-      bigquery_type:
+      bigquery_type: string
       description: Referência do servidor instituidor
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -287,7 +287,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: nivel_servidor
-      bigquery_type:
+      bigquery_type: string
       description: Nível do servidor instituidor
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -301,7 +301,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: ocorrencia_isp_servidor
-      bigquery_type:
+      bigquery_type: string
       description: Ocorrência de ingresso no setor público do servidor instituidor
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -315,7 +315,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: data_ocorrencia_isp_servidor
-      bigquery_type:
+      bigquery_type: date
       description: Data de ocorrência de ingresso no setor público do servidor instituidor
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -329,7 +329,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: nome_beneficiario
-      bigquery_type:
+      bigquery_type: string
       description: Nome do(a) beneficiário(a)
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -343,7 +343,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: cpf_beneficiario
-      bigquery_type:
+      bigquery_type: string
       description: CPF do(a) beneficiário(a)
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -357,7 +357,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: data_nascimento_beneficiario
-      bigquery_type:
+      bigquery_type: date
       description: Data de nascimento do(a) beneficiário(a)
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -371,7 +371,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: sigla_uf_upag_vinculacao
-      bigquery_type:
+      bigquery_type: string
       description: Sigla da unidade da federação UPAG de vinculação
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -385,7 +385,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: tipo_beneficiario
-      bigquery_type:
+      bigquery_type: string
       description: Tipo do(a) beneficiário(a)
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -399,7 +399,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: tipo_pensao
-      bigquery_type:
+      bigquery_type: string
       description: Tipo da pensão
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -413,7 +413,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: natureza_pensao
-      bigquery_type:
+      bigquery_type: string
       description: Natureza da pensão
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -427,7 +427,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: data_inicio_beneficio
-      bigquery_type:
+      bigquery_type: date
       description: Data de início do benefício
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -441,7 +441,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: data_fim_beneficio
-      bigquery_type:
+      bigquery_type: date
       description: Data do fim do benefício
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -455,7 +455,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: rendimento_bruto
-      bigquery_type:
+      bigquery_type: float64
       description: Rendimento bruto
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -469,7 +469,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: rendimento_liquido
-      bigquery_type:
+      bigquery_type: float64
       description: Rendimento líquido
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -483,7 +483,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: pagamento_suspenso
-      bigquery_type:
+      bigquery_type: string
       description: Pagamento suspenso
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -497,7 +497,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: ano
-      bigquery_type:
+      bigquery_type: int64
       description: Ano
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
@@ -511,7 +511,7 @@ columns:
       is_in_staging: true
       is_partition: true
     - name: mes
-      bigquery_type:
+      bigquery_type: int64
       description: Mês
       temporal_coverage: ['1994(1)2001' ,'2003(1)2021']
       covered_by_dictionary: no
