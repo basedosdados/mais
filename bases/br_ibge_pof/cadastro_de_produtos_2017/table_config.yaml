@@ -2,16 +2,16 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_ibge_pof
 
-table_id: cadastro_de_produtos_2017
+table_id: caderneta_coletiva_2017
 
 # Título da tabela.
-title: Cadastro de Produtos
+title: Caderneta Coletiva
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Tabela que possui o cadastro de todos os items presentes na POF 2017-2018, identificados pela variável V9001.
+description: Microdados do Registro de Caderneta Coletiva da Pesquisa de Orçamentos Familiares.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -24,12 +24,17 @@ spatial_coverage:
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
     - 2017(1)2018
+
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency:
     - ten_years
+
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
+    - entity: household
+      columns:
+        - id_unidade_consumo
     - entity: item
       columns:
         - id_codigo_5_bd  
@@ -62,7 +67,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Padronização do código dos produtos para os 5 dígitos e join com as tabelas auxiliares o IBGE, chamadas de Tradutores, para os itens de despesa, rendimento, consumo alimentar e aquisição alimentar.
+data_cleaning_description: Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pof/code
@@ -92,6 +97,7 @@ project_id_staging: basedosdados-dev
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions:
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -115,8 +121,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: id_codigo_5_bd
       bigquery_type: string
       description: Código de 5 dígitos do item
@@ -130,8 +136,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: id_codigo_7_bd
       bigquery_type: string
       description: Código de 7 dígitos do item
@@ -145,8 +151,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: v9001
       bigquery_type:
       description:
@@ -159,11 +165,11 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_do_produto
       bigquery_type: string
-      description: Quantidade final consumida em kwh, apenas para o item energia elétrica
+      description: Descrição do produto
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -174,8 +180,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: variavel_despesa
       bigquery_type: string
       description: Variável que representa cada item de despesa
@@ -189,11 +195,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_0_despesa
       bigquery_type: string
-      description: Primeiro nível de desagregação dos itens de despesa
+      description: Nível 0 de desagregação dos itens de despesa
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -204,11 +210,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_1_despesa
       bigquery_type: string
-      description: Segundo nível de desagregação dos itens de despesa
+      description: Nível 1 de desagregação dos itens de despesa
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -219,11 +225,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_2_despesa
       bigquery_type: string
-      description: Terceiro nível de desagregação dos itens de despesa
+      description: Nível 2 de desagregação dos itens de despesa
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -234,11 +240,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_3_despesa
       bigquery_type: string
-      description: Quarto nível de desagregação dos itens de despesa
+      description: Nível 3 de desagregação dos itens de despesa
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -249,11 +255,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_4_despesa
       bigquery_type: string
-      description: Quinto nível de desagregação dos itens de despesa
+      description: Nível 4 de desagregação dos itens de despesa
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -264,11 +270,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_5_despesa
       bigquery_type: string
-      description: Sexto nível de desagregação dos itens de despesa
+      description: Nível 5 de desagregação dos itens de despesa
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -279,11 +285,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_0_rendimento
       bigquery_type: string
-      description: Primeiro nível de desagregação dos itens de rendimentos
+      description: Nível 0 de desagregação dos itens de rendimentos
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -294,11 +300,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_1_rendimento
       bigquery_type: string
-      description: Segundo nível de desagregação dos itens de rendimentos
+      description: Nível 1 de desagregação dos itens de rendimentos
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -309,11 +315,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_2_rendimento
       bigquery_type: string
-      description: Terceiro nível de desagregação dos itens de rendimentos
+      description: Nível 2 de desagregação dos itens de rendimentos
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -324,11 +330,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_3_rendimento
       bigquery_type: string
-      description: Quarto nível de desagregação dos itens de rendimentos
+      description: Nível 3 de desagregação dos itens de rendimentos
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -339,11 +345,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_0_alimentacao
       bigquery_type: string
-      description: Primeiro nível de desagregação dos itens de despesa com alimentação
+      description: Nível 0 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -354,11 +360,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_1_alimentacao
       bigquery_type: string
-      description: Segundo nível de desagregação dos itens de despesa com alimentação
+      description: Nível 1 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -369,11 +375,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_2_alimentacao
       bigquery_type: string
-      description: Terceiro nível de desagregação dos itens de despesa com alimentação
+      description: Nível 2 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -384,11 +390,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_3_alimentacao
       bigquery_type: string
-      description: Quarto nível de desagregação dos itens de despesa com alimentação
+      description: Nível 3 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -399,11 +405,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_1_aquisicao_alimentar
       bigquery_type: string
-      description: Primeiro nível de desagregação dos itens de aquisição alimentar
+      description: Nível 1 de desagregação dos itens de aquisição alimentar
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -414,11 +420,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_2_aquisicao_alimentar
       bigquery_type: string
-      description: Segundo nível de desagregação dos itens de aquisição alimentar
+      description: Nível 2 de desagregação dos itens de aquisição alimentar
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -429,11 +435,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: nivel_3_aquisicao_alimentar
       bigquery_type: string
-      description: Terceiro nível de desagregação dos itens de aquisição alimentar
+      description: Nível 3 de desagregação dos itens de aquisição alimentar
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -444,11 +450,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_0_despesa
       bigquery_type: string
-      description: Descriçao do Primeiro nível de desagregação dos itens de despesa
+      description: Descrição do Nível 0 de desagregação dos itens de despesa
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -459,11 +465,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_1_despesa
       bigquery_type: string
-      description: Descriçao do Segundo nível de desagregação dos itens de despesa
+      description: Descrição do Nível 1 de desagregação dos itens de despesa
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -474,11 +480,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_2_despesa
       bigquery_type: string
-      description: Descriçao do Terceiro nível de desagregação dos itens de despesa
+      description: Descrição do Nível 2 de desagregação dos itens de despesa
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -489,11 +495,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_3_despesa
       bigquery_type: string
-      description: Descriçao do Quarto nível de desagregação dos itens de despesa
+      description: Descrição do Nível 3 de desagregação dos itens de despesa
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -504,11 +510,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_4_despesa
       bigquery_type: string
-      description: Descriçao do Quinto nível de desagregação dos itens de despesa
+      description: Descrição do Nível 4 de desagregação dos itens de despesa
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -519,11 +525,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_5_despesa
       bigquery_type: string
-      description: Descriçao do Sexto nível de desagregação dos itens de despesa
+      description: Descrição do Nível 5 de desagregação dos itens de despesa
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -534,11 +540,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_0_rendimento
       bigquery_type: string
-      description: Descriçao do Primeiro nível de desagregação dos itens de rendimentos
+      description: Descrição do Nível 0 de desagregação dos itens de rendimentos
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -549,11 +555,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_1_rendimento
       bigquery_type: string
-      description: Descriçao do Segundo nível de desagregação dos itens de rendimentos
+      description: Descrição do Nível 1 de desagregação dos itens de rendimentos
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -564,11 +570,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_2_rendimento
       bigquery_type: string
-      description: Descriçao do Terceiro nível de desagregação dos itens de rendimentos
+      description: Descrição do Nível 2 de desagregação dos itens de rendimentos
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -579,11 +585,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_3_rendimento
       bigquery_type: string
-      description: Descriçao do Quarto nível de desagregação dos itens de rendimentos
+      description: Descrição do Nível 3 de desagregação dos itens de rendimentos
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -594,12 +600,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_0_alimentacao
       bigquery_type: string
-      description: Descriçao do Primeiro nível de desagregação dos itens de despesa
-          com alimentação
+      description: Descrição do Nível 0 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -610,12 +615,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_1_alimentacao
       bigquery_type: string
-      description: Descriçao do Segundo nível de desagregação dos itens de despesa
-          com alimentação
+      description: Descrição do Nível 1 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -626,12 +630,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_2_alimentacao
       bigquery_type: string
-      description: Descriçao do Terceiro nível de desagregação dos itens de despesa
-          com alimentação
+      description: Descrição do Nível 2 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -642,12 +645,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_3_alimentacao
       bigquery_type: string
-      description: Descriçao do Quarto nível de desagregação dos itens de despesa
-          com alimentação
+      description: Descrição do Nível 3 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -658,12 +660,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_1_aquisicao_alimentar
       bigquery_type: string
-      description: Descriçao do Primeiro nível de desagregação dos itens de aquisição
-          alimentar
+      description: Descrição do Nível 1 de desagregação dos itens de aquisição alimentar
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -674,12 +675,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_2_aquisicao_alimentar
       bigquery_type: string
-      description: Descriçao do Segundo nível de desagregação dos itens de aquisição
-          alimentar
+      description: Descrição do Nível 2 de desagregação dos itens de aquisição alimentar
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -690,12 +690,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: descricao_3_aquisicao_alimentar
       bigquery_type: string
-      description: Descriçao do Terceiro nível de desagregação dos itens de aquisição
-          alimentar
+      description: Descrição do Nível 3 de desagregação dos itens de aquisição alimentar
       temporal_coverage:
           - 2017(1)2018
       covered_by_dictionary: no
@@ -706,8 +705,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
 
 number_rows:
 
