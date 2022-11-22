@@ -2,16 +2,16 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_ibge_pof
 
-table_id: caderneta_coletiva_2017
+table_id: cadastro_de_produtos_2017
 
 # Título da tabela.
-title: Caderneta Coletiva
+title: Cadastro de Produtos
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Microdados do Registro de Caderneta Coletiva da Pesquisa de Orçamentos Familiares.
+description: Tabela que possui o cadastro de todos os items presentes na POF 2017-2018, identificados pela variável V9001.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -32,12 +32,9 @@ update_frequency:
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
-    - entity: household
-      columns:
-        - id_unidade_consumo
     - entity: item
       columns:
-        - id_codigo_5_bd  
+        - id_codigo_5_bd 
 
 last_updated:
     metadata: '2022-10-19'
@@ -67,7 +64,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
+data_cleaning_description: Padronização do código dos produtos para os 5 dígitos e join com as tabelas auxiliares o IBGE, chamadas de Tradutores, para os itens de despesa, rendimento, consumo alimentar e aquisição alimentar.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pof/code
@@ -97,7 +94,7 @@ project_id_staging: basedosdados-dev
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions:
-    - sigla_uf
+
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
