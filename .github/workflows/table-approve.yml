@@ -5,6 +5,8 @@ on:
     branches:
       - master
       - fix-table-approve-metadata-publish-2
+  workflow_dispatch:
+
 jobs:
   get-changes:
     runs-on: ubuntu-latest
