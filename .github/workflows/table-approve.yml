@@ -5,6 +5,9 @@ on:
     branches:
       - master
       - fix-table-approve-metadata-publish-2
+      - mfagundes-patch-1
+  workflow_dispatch:
+
 jobs:
   get-changes:
     runs-on: ubuntu-latest
@@ -38,9 +41,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install basedosdados==1.6.9b4 toml
       - name: Set up gcloud
-        uses: google-github-actions/setup-gcloud@v0
+        uses: google-github-actions/setup-gcloud@v1
         with:
-          version: "290.0.1"
           project_id: ${{ secrets.GCP_MAIN_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY_TASK_CALLER }}
           export_default_credentials: true
