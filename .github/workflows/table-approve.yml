@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - fix-table-approve-metadata-publish-2
+      - mfagundes-patch-1
   workflow_dispatch:
 
 jobs:
