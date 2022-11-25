@@ -64,11 +64,11 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name:
-    email:
+    name: Ricardo Dahis
+    email: rdahis@basedosdados.org
     github_user:
     ckan_user:
-    website:
+    website: www.ricardodahis.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: Transformamos valores de CPF e datas de "00000000" para vazio
