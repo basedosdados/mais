@@ -276,6 +276,11 @@ Pull requests no Github devem incluir no máximo um conjunto, mas pode incluir m
     - Para outros casos, como por exemplo `br_inep_censo_escolar.turma:etapa_ensino`, nós excluimos os zeros à esquerda. Ou seja, mudamos `01` para `1`.
 - Valores são padronizados: sem espaços extras, inicial maiúscula e resto minúsculo, etc.
 
+### **Como preencher os metadados da tabela dicionário?**
+- Não preencher o *`spatial_coverage`* (`cobertura_espacial`), ou seja, deixar o campo vazio.
+- Não preencher o *`temporal_coverage`* (`cobertura_temporal`), ou seja, deixar o campo vazio.
+- Não preencher o *`observation_level`* (`nivel_observacao`), ou seja, deixar o campo vazio.
+
 ## Diretórios
 
 Diretórios são as pedras fundamentais da estrutura do nosso _datalake_. Nossas regras para gerenciar diretórios são:
@@ -286,6 +291,12 @@ Diretórios são as pedras fundamentais da estrutura do nosso _datalake_. Nossas
   primárias de entidades.
 
 Veja todas as [tabelas já disponíveis aqui.](https://basedosdados.org/dataset?organization=br-bd&order_by=score&q=%22diret%C3%B3rios%22)
+
+### **Como preencher os metadados das tabelas de diretório?**
+- Preencher o *`spatial_coverage`* (`cobertura_espacial`), que é a máxima unidade espacial que a tabela cobre. Exemplo: sa.br, que significa que o nível de agregação espacial da tabela é o Brasil.
+- Não preencher o *`temporal_coverage`* (`cobertura_temporal`), ou seja, deixar o campo vazio.
+- Preencher o *`observation_level`* (`nivel_observacao`), que consiste no nível de observação da tabela, ou seja, o que representa cada linha. 
+- Não preencher o *`temporal_coverage`* (`cobertura_temporal`) das colunas da tabela, ou seja, deixar o campo vazio.
 
 ## Fontes Originais
 
