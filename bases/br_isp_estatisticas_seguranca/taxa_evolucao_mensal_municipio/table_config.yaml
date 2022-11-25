@@ -18,7 +18,7 @@ description: 'Estatísticas de segurança: série histórica mensal por municíp
 # Exemplo:
 #   - sa.br
 spatial_coverage:
-    - sa.br
+    - sa.br.rj
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
@@ -33,7 +33,7 @@ update_frequency: month
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
     - country: br
-    - entity: municipality
+      entity: municipality
       column:
           - id_municipio
     - entity: year
@@ -991,6 +991,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows:
+number_rows: 644
 
 metadata_modified: '2022-07-28T23:00:34.444044'
