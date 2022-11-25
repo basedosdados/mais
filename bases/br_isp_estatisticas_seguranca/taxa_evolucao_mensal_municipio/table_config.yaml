@@ -1,95 +1,106 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: taxa_evolucao_mensal_municipio # AUTO GENERATED
-dataset_id: br_isp_estatisticas_seguranca # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-isp-estatisticas-seguranca # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_isp_estatisticas_seguranca # AUTO GENERATED
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_isp_estatisticas_seguranca
 
-version: v1.0 # REQUIRED
+table_id: taxa_evolucao_mensal_municipio
 
-last_updated: 2021-07-26 # AUTO GENERATED
+# Título da tabela.
+title:  Taxa de evolução mensal por Município
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    Estatísticas de segurança: série histórica mensal por município desde 01/2014 (taxas por 100 mil habitantes)
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: 'Estatísticas de segurança: série histórica mensal por município desde 01/2014 (taxas por 100 mil habitantes)'
 
-# Quem está completando esse arquivo config?
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br.rj
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2014(1)2021
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: month
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - country: br
+      entity: municipality
+      column:
+          - id_municipio
+    - entity: year
+      columns:
+          - ano
+    - entity: month
+      columns:
+          - mes
+
+last_updated:
+    metadata: '2021-07-26'
+    data: '2021-07-26 14:32:37'
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
 published_by:
-    name: Hevilyn Souza  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_isp_estatisticas_seguranca/code # REQUIRED
-    website: <website>
+    name: Hevilyn Souza
     email: hevilynsouza@basedosdados.org
+    github_user:
+    ckan_user:
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
+data_cleaned_by:
     name: Hevilyn Souza
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_isp_estatisticas_seguranca/code
-    website: http://www.isp.rj.gov.br/
     email: hevilynsouza@basedosdados.org
+    github_user:
+    ckan_user:
+    website: http://www.isp.rj.gov.br/
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    Renomeei variáveis para consistência.
+data_cleaning_description: "Renomeação das variáveis para consistência."
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: mes # REQUIRED 
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_isp_estatisticas_seguranca/code
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - municipio
-    - ano
-    - mes
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: 
+    organization_id: 
 
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-    - id_municipio
-    - ano
-    - mes
+# Url dos dados originais no GCP Storage.
+raw_files_url:
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - brasil
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
 
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
-    - 2020
-    - 2021
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
+partitions:
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -99,350 +110,887 @@ partitions: # REQUIRED
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: id_municipio
-        description: Código IBGE de 7 dígitos do município
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: municipio
-        description: Nome do município
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: mes
-        description: Mês
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: mes_ano
-        description: Mês e ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: regiao_rj
-        description: Região do Rio de Janeiro
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: hom_doloso
-        description: Taxa de Homicídio doloso por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: lesao_corp_morte
-        description: Taxa de Lesão corporal seguida de morte por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: latrocinio
-        description: Taxa de Latrocínio (roubo seguido de morte) por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: hom_por_interv_policial
-        description: Taxa de Morte por intervenção de agente do Estado por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: letalidade_violenta
-        description: Taxa de Letalidade violenta por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tentat_hom
-        description: Taxa de Tentativa de homicídio por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: lesao_corp_dolosa
-        description: Taxa de Lesão corporal dolosa por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: estupro
-        description: Taxa de Estupro por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: hom_culposo
-        description: Taxa de Homicídio culposo (trânsito) por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: lesao_corp_culposa
-        description: Taxa de Lesão corporal culposa (trânsito) por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: roubo_comercio
-        description: Taxa de Roubo a estabelecimento comercial por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: roubo_residencia
-        description: Taxa de Roubo a residência por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: roubo_veiculo
-        description: Taxa de Roubo de veículo por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: roubo_carga
-        description: Taxa de Roubo de carga por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: roubo_transeunte
-        description: Taxa de Roubo a transeunte por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: roubo_em_coletivo
-        description: Taxa de Roubo em coletivo por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: roubo_banco
-        description: Taxa de Roubo a banco por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: roubo_cx_eletronico
-        description: Taxa de Roubo de caixa eletrônico por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: mes
+      bigquery_type: int64
+      description: Mês
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: mes_ano
+      bigquery_type: string
+      description: Mês e ano
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regiao_rj
+      bigquery_type: string
+      description: Região do Rio de Janeiro
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio
+      bigquery_type: string
+      description: Código IBGE de 7 dígitos do município
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: municipio
+      bigquery_type: string
+      description: Nome do município
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: hom_doloso
+      bigquery_type: float64
+      description: Taxa de Homicídio doloso por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: lesao_corp_morte
+      bigquery_type: float64
+      description: Taxa de Lesão corporal seguida de morte por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: latrocinio
+      bigquery_type: float64
+      description: Taxa de Latrocínio (roubo seguido de morte) por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: hom_por_interv_policial
+      bigquery_type: float64
+      description: Taxa de Morte por intervenção de agente do Estado por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: letalidade_violenta
+      bigquery_type: float64
+      description: Taxa de Letalidade violenta por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tentat_hom
+      bigquery_type: float64
+      description: Taxa de Tentativa de homicídio por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: lesao_corp_dolosa
+      bigquery_type: float64
+      description: Taxa de Lesão corporal dolosa por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estupro
+      bigquery_type: float64
+      description: Taxa de Estupro por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: hom_culposo
+      bigquery_type: float64
+      description: Taxa de Homicídio culposo (trânsito) por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: lesao_corp_culposa
+      bigquery_type: float64
+      description: Taxa de Lesão corporal culposa (trânsito) por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cvli
+      bigquery_type: float64
+      description: Taxa de Crimes Violentos Letais Intencionais por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: roubo_rua
+      bigquery_type: float64
+      description: Taxa de Roubo de Rua por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false    
+    - name: roubo_comercio
+      bigquery_type: float64
+      description: Taxa de Roubo a estabelecimento comercial por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: roubo_residencia
+      bigquery_type: float64
+      description: Taxa de Roubo a residência por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: roubo_veiculo
+      bigquery_type: float64
+      description: Taxa de Roubo de veículo por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: roubo_carga
+      bigquery_type: float64
+      description: Taxa de Roubo de carga por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: roubo_transeunte
+      bigquery_type: float64
+      description: Taxa de Roubo a transeunte por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: roubo_em_coletivo
+      bigquery_type: float64
+      description: Taxa de Roubo em coletivo por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: roubo_banco
+      bigquery_type: float64
+      description: Taxa de Roubo a banco por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: roubo_cx_eletronico
+      bigquery_type: float64
+      description: Taxa de Roubo de caixa eletrônico por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: roubo_celular
+      bigquery_type: float64
+      description: Taxa de Roubo de telefone celular por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: roubo_conducao_saque
+      bigquery_type: float64
+      description: Taxa de Roubo com condução da vítima para saque em instituição
+          financeira por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: roubo_apos_saque
+      bigquery_type: float64
+      description: Taxa de Roubo após saque em instituição financeira por 100 mil
+          habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: roubo_bicicleta
+      bigquery_type: float64
+      description: Taxa de Roubo de bicicleta por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: outros_roubos
+      bigquery_type: float64
+      description: Taxa de Outros roubos que não os listados acima por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: total_roubos
+      bigquery_type: float64
+      description: Taxa de Total de roubos por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: furto_veiculos
+      bigquery_type: float64
+      description: Taxa de Furto de veículo por 100 mil veículos
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: furto_transeunte
+      bigquery_type: float64
+      description: Taxa de Furto a transeunte por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: furto_coletivo
+      bigquery_type: float64
+      description: Taxa de Furto em coletivo por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: furto_celular
+      bigquery_type: float64
+      description: Taxa de Furto de telefone celular por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: furto_bicicleta
+      bigquery_type: float64
+      description: Taxa de Furto de bicicleta por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: outros_furtos
+      bigquery_type: float64
+      description: Taxa de Outros furtos que não os listados acima por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: total_furtos
+      bigquery_type: float64
+      description: Taxa de Total de furtos por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sequestro
+      bigquery_type: float64
+      description: Taxa de Extorsão mediante sequestro (sequestro clássico) por 100
+          mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: extorsao
+      bigquery_type: float64
+      description: Taxa de Extorsão por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sequestro_relampago
+      bigquery_type: float64
+      description: Taxa de Extorsão com momentânea privação da liberdade (sequestro
+          relâmpago) por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estelionato
+      bigquery_type: float64
+      description: Taxa de Estelionato por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: apreensao_drogas
+      bigquery_type: float64
+      description: Taxa de Apreensão de drogas por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: posse_drogas
+      bigquery_type: float64
+      description: Taxa de Apreensão de drogas (apenas registros que possuem algum
+          título referente a posse de drogas) por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: trafico_drogas
+      bigquery_type: float64
+      description: Taxa de Apreensão de drogas (apenas registros que possuem algum
+          título referente a tráfico de drogas) por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: apreensao_drogas_sem_autor
+      bigquery_type: float64
+      description: Taxa de Apreensão de drogas (apenas registros que possuem algum
+          título referente a apreensão de drogas sem autor) por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: recuperacao_veiculos
+      bigquery_type: float64
+      description: Taxa de Recuperação de veículo por 100 mil veículos
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: apf
+      bigquery_type: float64
+      description: Taxa de Auto de Prisão em Flagrante por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: aaapai
+      bigquery_type: float64
+      description: Taxa de Auto de Apreensão de Adolescente por Prática de Ato Infracional
+          por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cmp
+      bigquery_type: float64
+      description: Taxa de Cumprimento de Mandado de Prisão por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cmba
+      bigquery_type: float64
+      description: Taxa de Cumprimento de Mandado de Busca e Apreensão por 100 mil
+          habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ameaca
+      bigquery_type: float64
+      description: Taxa de Ameaça por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pessoas_desaparecidas
+      bigquery_type: float64
+      description: Taxa de Pessoas desaparecidas por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: encontro_cadaver
+      bigquery_type: float64
+      description: Taxa de Encontro de cadáver por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: encontro_ossada
+      bigquery_type: float64
+      description: Taxa de Encontro de ossada por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: registro_ocorrencias
+      bigquery_type: float64
+      description: Taxa de Registro de ocorrências por 100 mil habitantes
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: fase
+      bigquery_type: float64
+      description: 2 - Consolidado sem errata    3 - Consolidado com errata
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
 
-    -   
-        name: roubo_celular
-        description: Taxa de Roubo de telefone celular por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: roubo_conducao_saque
-        description: Taxa de Roubo com condução da vítima para saque em instituição financeira por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: roubo_apos_saque
-        description: Taxa de Roubo após saque em instituição financeira por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: roubo_bicicleta
-        description: Taxa de Roubo de bicicleta por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: outros_roubos
-        description: Taxa de Outros roubos que não os listados acima por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: total_roubos
-        description: Taxa de Total de roubos por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: furto_veiculos
-        description: Taxa de Furto de veículo por 100 mil veículos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: furto_transeunte
-        description: Taxa de Furto a transeunte por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: furto_coletivo
-        description: Taxa de Furto em coletivo por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: furto_celular
-        description: Taxa de Furto de telefone celular por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: furto_bicicleta
-        description: Taxa de Furto de bicicleta por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: outros_furtos
-        description: Taxa de Outros furtos que não os listados acima por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: total_furtos
-        description: Taxa de Total de furtos por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sequestro
-        description: Taxa de Extorsão mediante sequestro (sequestro clássico) por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: extorsao
-        description: Taxa de Extorsão por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: sequestro_relampago
-        description: Taxa de Extorsão com momentânea privação da liberdade (sequestro relâmpago) por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: estelionato
-        description: Taxa de Estelionato por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: apreensao_drogas
-        description: Taxa de Apreensão de drogas por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: posse_drogas
-        description: Taxa de Apreensão de drogas (apenas registros que possuem algum título referente a posse de drogas) por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: trafico_drogas
-        description: Taxa de Apreensão de drogas (apenas registros que possuem algum título referente a tráfico de drogas) por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: apreensao_drogas_sem_autor
-        description: Taxa de Apreensão de drogas (apenas registros que possuem algum título referente a apreensão de drogas sem autor) por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-    -   
-        name: recuperacao_veiculos
-        description: Taxa de Recuperação de veículo por 100 mil veículos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: apf
-        description: Taxa de Auto de Prisão em Flagrante por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: aaapai
-        description: Taxa de Auto de Apreensão de Adolescente por Prática de Ato Infracional por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cmp
-        description: Taxa de Cumprimento de Mandado de Prisão por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name:  cmba
-        description: Taxa de Cumprimento de Mandado de Busca e Apreensão por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ameaca
-        description: Taxa de Ameaça por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: pessoas_desaparecidas
-        description: Taxa de Pessoas desaparecidas por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: encontro_cadaver
-        description: Taxa de Encontro de cadáver por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-    -   
-        name: encontro_ossada
-        description: Taxa de Encontro de ossada por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cvli
-        description: Taxa de Crimes Violentos Letais Intencionais por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: roubo_rua
-        description: Taxa de Roubo de Rua por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: registro_ocorrencias
-        description: Taxa de Registro de ocorrências por 100 mil habitantes
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: fase
-        description: 2 - Consolidado sem errata    3 - Consolidado com errata
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+number_rows: 644
+
+metadata_modified: '2022-07-28T23:00:34.444044'
