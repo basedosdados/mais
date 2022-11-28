@@ -1,0 +1,55 @@
+
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-cgu-fef
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Programa de Fiscalização em Entes Federativos (FEF)
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - br-cgu
+
+# Descrição do conjunto
+notes: "O Programa de Fiscalização em Entes Federativos faz parte do aprimoramento\
+    \ dos instrumentos e processos de trabalho da Controladoria-Geral da União (CGU).\
+    \ Desde agosto de 2015, um novo método de controle está sendo aplicado na avaliação\
+    \ dos recursos públicos federais repassados a estados, municípios e Distrito Federal.\r\
+    \n\r\nA iniciativa incorporou o antigo Programa de Fiscalização por Sorteios Públicos,\
+    \ sendo que, agora, o programa possui três formas de seleção de entes: Censo,\
+    \ Matriz de Vulnerabilidade e Sorteios. Nesse contexto, já foram fiscalizados\
+    \ cerca de 2,5 mil municípios brasileiros desde 2003, englobando recursos públicos\
+    \ federais superiores ao montante de R$ 30 bilhões. \r\n\r\nQuando é utilizado\
+    \ o Censo, a fiscalização verifica a regularidade da aplicação dos recursos em\
+    \ todos os entes da amostragem. Já a Matriz agrega inteligência da informação,\
+    \ por meio da análise de indicadores, para identificar vulnerabilidades (situações\
+    \ locais críticas) e selecionar de forma analítica os entes a serem fiscalizados\
+    \ em determinada região. A metodologia de Sorteios permanece aleatória, ao incorporar\
+    \ as ações do antigo Programa de Fiscalização por Sorteios Públicos."
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+    - gov-fin-pub
+    - justica
+    - seguranca
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - auditoria
+    - corrupcao
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2022-11-21T15:39:40.085371'
