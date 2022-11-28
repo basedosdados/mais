@@ -35,7 +35,7 @@ observation_level: []
 
 last_updated:
     metadata:
-    data: '2022-09-29 19:51:29'
+    data: '2022-11-11 19:51:29'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -93,7 +93,6 @@ project_id_staging: basedosdados-dev
 # Se não houver partições, não modifique abaixo.
 partitions:
     - ano
-    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -163,7 +162,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: true
+      is_partition: false
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos

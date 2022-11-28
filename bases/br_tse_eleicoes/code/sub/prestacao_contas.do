@@ -104,7 +104,7 @@ keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
 
-foreach ano of numlist 2014(2)2022 { // 2002(2)2022 {
+foreach ano of numlist 2002(2)2022 {
 	
 	if `ano' == 2002 {
 		
@@ -959,7 +959,8 @@ foreach ano of numlist 2014(2)2022 { // 2002(2)2022 {
 	}
 	if `ano' >= 2020 {
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2020 local estados AC AL AM AP BA    CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2022 local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
@@ -1112,11 +1113,6 @@ foreach ano of numlist 2002(2)2022 {
 		ren v11	valor_despesa
 		ren v12	tipo_despesa
 		
-		foreach k in sigla_uf {
-			replace `k' = "" if `k' == "BR"
-		}
-		*
-		
 		foreach k of varlist tipo_despesa cpf_cnpj_fornecedor {
 			replace `k' = "" if inlist(`k', "#NULO#", "#NULO", "-1")
 		}
@@ -1166,11 +1162,6 @@ foreach ano of numlist 2002(2)2022 {
 		ren v19	nome_fornecedor
 		ren v20	cpf_cnpj_fornecedor
 		
-		foreach k in sigla_uf {
-			replace `k' = "" if `k' == "BR"
-		}
-		*
-		
 		foreach k of varlist ///
 			tipo_documento numero_documento tipo_despesa cpf_cnpj_fornecedor {
 			replace `k' = "" if inlist(`k', "#NULO#", "#NULO", "-1")
@@ -1219,11 +1210,6 @@ foreach ano of numlist 2002(2)2022 {
 		ren v17	tipo_documento
 		ren v19	nome_fornecedor
 		ren v20	cpf_cnpj_fornecedor
-		
-		foreach k in sigla_uf {
-			replace `k' = "" if `k' == "BR"
-		}
-		*
 		
 		foreach k of varlist ///
 			tipo_documento numero_documento tipo_despesa cpf_cnpj_fornecedor {
@@ -1275,11 +1261,6 @@ foreach ano of numlist 2002(2)2022 {
 		ren v21	nome_fornecedor
 		ren v22	cpf_cnpj_fornecedor
 		
-		foreach k in sigla_uf {
-			replace `k' = "" if `k' == "BR"
-		}
-		*
-		
 		foreach k of varlist ///
 			tipo_documento numero_documento tipo_despesa cpf_cnpj_fornecedor {
 			replace `k' = "" if inlist(`k', "#NULO#", "#NULO", "-1")
@@ -1306,7 +1287,7 @@ foreach ano of numlist 2002(2)2022 {
 	}
 	if `ano' == 2010 {
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
@@ -1344,11 +1325,6 @@ foreach ano of numlist 2002(2)2022 {
 			if "`estado'" != "AC" {
 				qui append using `f_`estado''
 			}
-		}
-		*
-		
-		foreach k in sigla_uf {
-			replace `k' = "" if `k' == "BR"
 		}
 		*
 		
@@ -1475,11 +1451,6 @@ foreach ano of numlist 2002(2)2022 {
 		append using `suplementar'
 		*/
 		
-		foreach k in sigla_uf {
-			replace `k' = "" if `k' == "BR"
-		}
-		*
-		
 		foreach k of varlist cpf_candidato ///
 			tipo_documento numero_documento descricao_despesa ///
 			cpf_cnpj_fornecedor ///
@@ -1509,7 +1480,7 @@ foreach ano of numlist 2002(2)2022 {
 		// final
 		//---------------//
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
@@ -1600,11 +1571,6 @@ foreach ano of numlist 2002(2)2022 {
 		use `final'
 		append using `suplementar'
 		*/
-		
-		foreach k in sigla_uf {
-			replace `k' = "" if `k' == "BR"
-		}
-		*
 		
 		foreach k of varlist cpf_candidato ///
 			tipo_documento numero_documento descricao_despesa ///
@@ -1787,11 +1753,6 @@ foreach ano of numlist 2002(2)2022 {
 		append using `suplementar'
 		*/
 		
-		foreach k in sigla_uf {
-			replace `k' = "" if `k' == "BR"
-		}
-		*
-		
 		foreach k of varlist cpf_candidato cpf_vice_suplente ///
 			tipo_documento numero_documento descricao_despesa ///
 			cpf_cnpj_fornecedor ///
@@ -1825,7 +1786,7 @@ foreach ano of numlist 2002(2)2022 {
 	}
 	if `ano' == 2018 {
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
@@ -1894,11 +1855,6 @@ foreach ano of numlist 2002(2)2022 {
 		//-----------------------//
 		// limpeza
 		//-----------------------//
-		
-		foreach k in sigla_uf {
-			replace `k' = "" if `k' == "BR"
-		}
-		*
 		
 		foreach k of varlist cpf_vice_suplente tipo_fornecedor cnae_2_fornecedor descricao_cnae_2_fornecedor ///
 			nome_fornecedor nome_fornecedor_rf esfera_partidaria_fornecedor sigla_uf_fornecedor ///
@@ -1933,7 +1889,8 @@ foreach ano of numlist 2002(2)2022 {
 	*
 	if `ano' >= 2020 {
 		
-		local estados AC AL AM AP BA CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2020 local estados AC AL AM AP BA    CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+		if `ano' == 2022 local estados AC AL AM AP BA BR CE ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 		
 		foreach estado in `estados' {
 			
@@ -2003,11 +1960,6 @@ foreach ano of numlist 2002(2)2022 {
 		// limpeza
 		//-----------------------//
 		
-		foreach k in sigla_uf {
-			replace `k' = "" if `k' == "BR"
-		}
-		*
-		
 		foreach k of varlist cpf_vice_suplente cpf_cnpj_fornecedor tipo_fornecedor cnae_2_fornecedor descricao_cnae_2_fornecedor ///
 			nome_fornecedor nome_fornecedor_rf esfera_partidaria_fornecedor sigla_uf_fornecedor ///
 			id_municipio_tse_fornecedor sequencial_candidato_fornecedor numero_candidato_fornecedor ///
@@ -2040,6 +1992,8 @@ foreach ano of numlist 2002(2)2022 {
 	}
 	*
 	
+	replace sigla_uf = "" if sigla_uf == "BR"
+	
 	cap gen id_municipio_tse = .
 	merge m:1 id_municipio_tse using `diretorio'
 	drop if _merge == 2
@@ -2054,4 +2008,3 @@ foreach ano of numlist 2002(2)2022 {
 	
 }
 *
-

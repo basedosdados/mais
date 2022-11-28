@@ -82,7 +82,7 @@ auxiliary_files_url:
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
 
-source_bucket_name: basedosdados-364117
+source_bucket_name: basedosdados-3641170
 
 project_id_prod: basedosdados-364117
 
@@ -274,4 +274,4 @@ columns:
 
 number_rows: 51624
 
-metadata_modified:
+metadata_modified: "2022-10-18T01:30:20.010429"

@@ -1,0 +1,48 @@
+A base traz informações sobre o funcionalismo público federal de acordo com o órgão em que o indivíduo está lotado, gênero, raça/cor declarado, além da atividade que exerce dentro de sua função
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org.br
+Tratado por
+-----------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org.br
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2022
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Renomeação da base segundo as diretrizes da BD+
+
+
+
+Frequencia de Atualização
+-------------------------
+uncertain

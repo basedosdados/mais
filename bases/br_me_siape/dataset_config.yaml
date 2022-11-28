@@ -1,0 +1,41 @@
+
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-me-siape
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Sistema Integrado de Administração de Pessoal (Siape)
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization: br-me
+
+# Descrição do conjunto
+notes: O SIAPE processa o pagamento de servidores, regidos tanto pelo Regime Jurídico Único Federal (Lei 8.112/90) quanto pela CLT e por outros regimes (Contratos Temporários, Estágios, Residência Médica, etc). Este público é composto por servidores ativos, aposentados e pensionistas e encontra-se distribuído por órgãos públicos federais em todo o território nacional.
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+  - economia
+  - politica
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+  - recursos humanos
+  - administracao
+  - executivo
+  - federal
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified:
