@@ -694,11 +694,13 @@ class Table(Base):
 
         table = bigquery.Table(self.table_full_name["staging"])
         table.external_data_configuration = Datatype(
-            self, source_format, "staging", partitioned=self._is_partitioned()
+            self, source_format, "staging", partitioned=self._is_partitioned(), biglake_connection_id=biglake_connection_id
         ).external_config
 
+        # When using BigLake tables, schema must be provided to the `Table` object
         if biglake_connection_id:
-            table.external_data_configuration.connection_id = biglake_connection_id
+            table.schema = self._load_schema("staging")
+            logger.info(f"Using BigLake connection {biglake_connection_id}")
 
         # Lookup if table alreay exists
         table_ref = None

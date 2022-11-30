@@ -19,12 +19,14 @@ class Datatype:
         source_format="csv",
         mode="staging",
         partitioned=False,
+        biglake_connection_id=None,
     ):
 
         self.table_obj = table_obj
         self.source_format = source_format
         self.mode = mode
         self.partitioned = partitioned
+        self.biglake_connection_id = biglake_connection_id
 
     def header(self, data_sample_path):
         '''
@@ -79,5 +81,11 @@ class Datatype:
         _external_config.source_uris = f"gs://{self.table_obj.bucket_name}/staging/{self.table_obj.dataset_id}/{self.table_obj.table_id}/*"
         if self.partitioned:
             _external_config.hive_partitioning = self.partition()
+
+        if self.biglake_connection_id:
+            _external_config.connection_id = self.biglake_connection_id
+            # When using BigLake tables, schema must be provided to the `Table` object, not the
+            # `ExternalConfig` object.
+            _external_config.schema = None
 
         return _external_config
