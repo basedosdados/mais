@@ -11,8 +11,9 @@ import base64
 import json
 from functools import lru_cache
 
-from google.cloud import bigquery, storage
+from google.cloud import bigquery, bigquery_connection_v1, storage
 from google.oauth2 import service_account
+import googleapiclient.discovery
 from loguru import logger
 import yaml
 from jinja2 import Template
@@ -95,9 +96,15 @@ class Base:
                 credentials=self._load_credentials("prod"),
                 project=self.config["gcloud-projects"]["prod"]["name"],
             ),
+            bigquery_connection_prod=bigquery_connection_v1.ConnectionServiceClient(
+                credentials=self._load_credentials("prod")
+            ),
             bigquery_staging=bigquery.Client(
                 credentials=self._load_credentials("staging"),
                 project=self.config["gcloud-projects"]["staging"]["name"],
+            ),
+            bigquery_connection_staging=bigquery_connection_v1.ConnectionServiceClient(
+                credentials=self._load_credentials("staging")
             ),
             storage_staging=storage.Client(
                 credentials=self._load_credentials("staging"),
@@ -417,3 +424,14 @@ class Base:
             (Path(__file__).resolve().parents[1] / "configs" / "templates"),
             (self.config_path / "templates"),
         )
+
+    def _get_project_number(self, mode: str) -> str:
+        """
+        Get the project number from project ID.
+        """
+        credentials = self._load_credentials(mode)
+        crm_service = googleapiclient.discovery.build(
+            "cloudresourcemanager", "v1", credentials=credentials
+        )
+        project_id = self.config["gcloud-projects"][mode]["name"]
+        return crm_service.projects().get(projectId=project_id).execute()["projectNumber"]

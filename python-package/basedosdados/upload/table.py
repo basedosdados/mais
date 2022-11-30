@@ -17,6 +17,7 @@ import pandas as pd
 import google.api_core.exceptions
 
 from basedosdados.upload.base import Base
+from basedosdados.upload.connection import Connection
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.datatypes import Datatype
@@ -565,7 +566,7 @@ class Table(Base):
         dataset_is_public=True,
         location=None,
         chunk_size=None,
-        biglake_connection_id=None,
+        biglake_table=False,
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -634,8 +635,8 @@ class Table(Base):
                 This must be a multiple of 256 KB per the API specification.
                 If not specified, the chunk_size of the blob itself is used. If that is not specified, a default value of 40 MB is used.
 
-            biglake_connection_id (str): Optional
-                Connection ID for using BigLake tables. BigLake tables allow end users to query from external data (such as GCS) even if
+            biglake_table (bool): Optional
+                Sets this as a BigLake table. BigLake tables allow end users to query from external data (such as GCS) even if
                 they don't have access to the source data. IAM is managed like any other BigQuery native table. See
                 https://cloud.google.com/bigquery/docs/biglake-intro for more on BigLake.
         """
@@ -692,13 +693,22 @@ class Table(Base):
             force_columns=force_columns
         )
 
+        biglake_connection_id: str = None
+        if biglake_table:
+            connection = Connection(name="biglake", location=location, mode="staging")
+            if not connection.exists:
+                logger.info("Creating BigLake connection")
+                connection.create()
+                logger.success("BigLake connection created")
+            biglake_connection_id = connection.connection_id
+
         table = bigquery.Table(self.table_full_name["staging"])
         table.external_data_configuration = Datatype(
             self, source_format, "staging", partitioned=self._is_partitioned(), biglake_connection_id=biglake_connection_id
         ).external_config
 
         # When using BigLake tables, schema must be provided to the `Table` object
-        if biglake_connection_id:
+        if biglake_table:
             table.schema = self._load_schema("staging")
             logger.info(f"Using BigLake connection {biglake_connection_id}")
 
