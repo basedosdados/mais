@@ -8,7 +8,7 @@ from typing import Union
 import google.auth
 from google.cloud import bigquery_connection_v1
 from google.cloud.bigquery_connection_v1.types import CloudResourceProperties
-from google.cloud.bigquery_connection_v1.types.connection import Connection
+from google.cloud.bigquery_connection_v1.types.connection import Connection as BQConnection
 
 from basedosdados.upload.base import Base
 
@@ -17,7 +17,7 @@ class Connection(Base):
     Manages BigQuery Connections.
     """
 
-    def __init__ (
+    def __init__ ( # pylint: disable=too-many-arguments
         self,
         name: str,
         location: str = None,
@@ -45,7 +45,7 @@ class Connection(Base):
         return False
 
     @property
-    def connection(self) -> Union[Connection, None]:
+    def connection(self) -> Union[BQConnection, None]:
         """
         Returns connection object.
         """
@@ -85,7 +85,7 @@ class Connection(Base):
             )
         )
         client.create_connection(request=request)
-    
+
     def delete(self):
         """
         Deletes a connection.

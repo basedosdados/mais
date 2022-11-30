@@ -434,4 +434,5 @@ class Base:
             "cloudresourcemanager", "v1", credentials=credentials
         )
         project_id = self.config["gcloud-projects"][mode]["name"]
+        # pylint: disable=no-member
         return crm_service.projects().get(projectId=project_id).execute()["projectNumber"]

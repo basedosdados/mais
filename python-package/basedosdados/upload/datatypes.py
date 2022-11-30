@@ -13,7 +13,7 @@ class Datatype:
     '''
     Manage external and partition config
     '''
-    def __init__(
+    def __init__( # pylint: disable=too-many-arguments
         self,
         table_obj,
         source_format="csv",
