@@ -565,6 +565,7 @@ class Table(Base):
         dataset_is_public=True,
         location=None,
         chunk_size=None,
+        biglake_connection_id=None,
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -632,6 +633,11 @@ class Table(Base):
                 The size of a chunk of data whenever iterating (in bytes).
                 This must be a multiple of 256 KB per the API specification.
                 If not specified, the chunk_size of the blob itself is used. If that is not specified, a default value of 40 MB is used.
+
+            biglake_connection_id (str): Optional
+                Connection ID for using BigLake tables. BigLake tables allow end users to query from external data (such as GCS) even if
+                they don't have access to the source data. IAM is managed like any other BigQuery native table. See
+                https://cloud.google.com/bigquery/docs/biglake-intro for more on BigLake.
         """
 
         if path is None:
@@ -690,6 +696,9 @@ class Table(Base):
         table.external_data_configuration = Datatype(
             self, source_format, "staging", partitioned=self._is_partitioned()
         ).external_config
+
+        if biglake_connection_id:
+            table.external_data_configuration.connection_id = biglake_connection_id
 
         # Lookup if table alreay exists
         table_ref = None
