@@ -1,0 +1,219 @@
+
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_tesouro_estoque_divida_publica
+
+table_id: br_tesouro_estoque_divida_publica
+
+# Título da tabela.
+title: Estoque da Dívida Pública
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description:
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage: ['2017(1)2022']
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency:
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+
+last_updated:
+    metadata:
+    data:
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version:
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: André Alvarenga Guimarães
+    email: andre.alvguim@gmail.com  
+    github_user: 
+    ckan_user:
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name:
+    email:
+    github_user:
+    ckan_user:
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description:
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url:
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+    - ano
+    - mes
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano de Referência do Estoque
+      temporal_coverage: (1)
+      covered_by_dictionary: no
+      directory_column: br_bd_diretorios_data_tempo.ano:ano
+          dataset_id: 
+          table_id: 
+          column_name: 
+      measurement_unit: year
+      has_sensitive_data: no
+      observations: 
+      is_in_staging:
+      is_partition: true
+    - name: mes
+      bigquery_type: int64
+      description: Mês de Referência do Estoque
+      temporal_coverage: (1)
+      covered_by_dictionary: no
+      directory_column: br_bd_diretorios_data_tempo.mes:mes
+          dataset_id: 
+          table_id: 
+          column_name: 
+      measurement_unit: month
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition: true
+    - name: id_divida
+      bigquery_type: string
+      description: Código do Título Público ou Contrato
+      temporal_coverage: (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: vencimento_divida
+      bigquery_type: date
+      description: Data do Vencimento do Título Público ou Contrato
+      temporal_coverage: (1)
+      covered_by_dictionary: no
+      directory_column: br_bd_diretorio_data_tempo.data:data
+          dataset_id: 
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: tipo_divida
+      bigquery_type: string
+      description: Tipo da Dívida
+      temporal_coverage: (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: classe_carteira
+      bigquery_type: string
+      description: Classe da Carteira de Títulos ou Contratos
+      temporal_coverage: (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: valor_estoque
+      bigquery_type: float64
+      description: Valor do Estoque de Títulos ou Contratos
+      temporal_coverage: (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: quantidade_estoque
+      bigquery_type: int64
+      description: Quantidade do Estoque de Títulos ou Contratos
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging:
+      is_partition:
+
+number_rows:
+
+metadata_modified:
