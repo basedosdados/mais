@@ -1,0 +1,48 @@
+A pesquisa fornece informações variadas na área de comunicação e informática a nível estadual.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2014(5)2019
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Padronização e criação de colunas com o obejtivo de indicar as respostas em que os estados não souberam informar os dados para a pergunta em questão
+
+
+
+Frequencia de Atualização
+-------------------------
+five_years

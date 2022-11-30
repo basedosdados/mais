@@ -1,0 +1,1435 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_ibge_estadic
+
+table_id: recursos_humanos
+
+# Título da tabela.
+title: Recursos Humanos
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: A pesquisa fornece informações variadas relacionadas a recursos humanos das administrações públicas a nível estadual.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2012(1)2014
+    - 2017(1)2020
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: one_year
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: state
+      columns:
+          - sigla_uf 
+
+last_updated:
+    metadata: '2022-11-30'
+    data: '2022-11-30 15:30:13'
+    release: '2022-11-30 15:30:33'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Gabrielle Carvalho
+    email: gabrielle.carvalho@basedosdados.org
+    github_user: gabrielle-carv
+    ckan_user: gabs_carvalho
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Gabrielle Carvalho
+    email: gabrielle.carvalho@basedosdados.org
+    github_user: gabrielle-carv
+    ckan_user: gabs_carvalho
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Padronização e criação de colunas com o obejtivo de indicar as respostas em que os estados não souberam informar os dados para a pergunta em questão
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_estadic/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: adm_direta
+      bigquery_type: int64
+      description: Total de funcionários ativos da administração direta
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os funcionários sem declaração de escolaridade também são contabilizados
+      is_in_staging: true
+      is_partition: false
+    - name: adm_direta_sem_instrucao
+      bigquery_type: int64
+      description: Número de funcionários ativos da administração direta - Sem instrução
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Pessoa que não frequentou escola ou, se frequentou, não concluiu
+          a o 2º ano do Ensino Fundamental
+      is_in_staging: true
+      is_partition: false
+    - name: adm_direta_ensino_fundamental
+      bigquery_type: int64
+      description: Número de funcionários ativos da administração direta - Ensino
+          fundamental
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: A declaração de escolaridade referente ao ensino fundamental refere-se
+          ao primeiro grau completo ou incompleto
+      is_in_staging: true
+      is_partition: false
+    - name: adm_direta_ensino_medio
+      bigquery_type: int64
+      description: Número de funcionários ativos da administração direta - Ensino
+          médio
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: adm_direta_ensino_superior
+      bigquery_type: int64
+      description: Número de funcionários ativos da administração direta - Ensino
+          superior
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: adm_direta_pos_graduacao
+      bigquery_type: int64
+      description: Número de funcionários ativos da administração direta - Pós-graduação
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estatutario_adm_direta
+      bigquery_type: int64
+      description: Total de funcionários ativos com vínculo Estatutário da administração
+          direta
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os funcionários sem declaração de escolaridade também são contabilizados
+      is_in_staging: true
+      is_partition: false
+    - name: estatutario_adm_direta_sem_instrucao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo Estatutário da administração
+          direta - Sem instrução
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Pessoa que não frequentou escola ou, se frequentou, não concluiu
+          a o 2º ano do Ensino Fundamental
+      is_in_staging: true
+      is_partition: false
+    - name: estatutario_adm_direta_ensino_fundamental
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo Estatutário da administração
+          direta - Ensino fundamental
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: A declaração de escolaridade referente ao ensino fundamental refere-se
+          ao primeiro grau completo ou incompleto
+      is_in_staging: true
+      is_partition: false
+    - name: estatutario_adm_direta_ensino_medio
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo Estatutário da administração
+          direta - Ensino médio
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estatutario_adm_direta_ensino_superior
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo Estatutário da administração
+          direta - Ensino superior
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estatutario_adm_direta_pos_graduacao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo Estatutário da administração
+          direta - Pós-graduação
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: clt_adm_direta
+      bigquery_type: int64
+      description: Total de funcionários ativos com vínculo CLT da administração direta
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os funcionários sem declaração de escolaridade também são contabilizados
+      is_in_staging: true
+      is_partition: false
+    - name: clt_adm_direta_sem_instrucao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo CLT da administração
+          direta - Sem instrução
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Pessoa que não frequentou escola ou, se frequentou, não concluiu
+          a o 2º ano do Ensino Fundamental
+      is_in_staging: true
+      is_partition: false
+    - name: clt_adm_direta_ensino_fundamental
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo CLT da administração
+          direta - Ensino fundamental
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: A declaração de escolaridade referente ao ensino fundamental refere-se
+          ao primeiro grau completo ou incompleto
+      is_in_staging: true
+      is_partition: false
+    - name: clt_adm_direta_ensino_medio
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo CLT da administração
+          direta - Ensino médio
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: clt_adm_direta_ensino_superior
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo CLT da administração
+          direta - Ensino superior
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: clt_adm_direta_pos_graduacao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo CLT da administração
+          direta - Pós-graduação
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_adm_direta
+      bigquery_type: int64
+      description: Total de funcionários ativos com vínculo somente Comissionado da
+          administração direta
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os funcionários sem declaração de escolaridade também são contabilizados
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_adm_direta_sem_instrucao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo somente Comissionado
+          da administração direta - Sem instrução
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Pessoa que não frequentou escola ou, se frequentou, não concluiu
+          a o 2º ano do Ensino Fundamental
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_adm_direta_ensino_fundamental
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo somente Comissionado
+          da administração direta - Ensino fundamental
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: A declaração de escolaridade referente ao ensino fundamental refere-se
+          ao primeiro grau completo ou incompleto
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_adm_direta_ensino_medio
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo somente Comissionado
+          da administração direta - Ensino médio
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_adm_direta_ensino_superior
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo somente Comissionado
+          da administração direta - Ensino superior
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_adm_direta_pos_graduacao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo somente Comissionado
+          da administração direta - Pós-graduação
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estagio_adm_direta
+      bigquery_type: int64
+      description: Total de funcionários ativos com vínculo de Estagiário da administração
+          direta
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os funcionários sem declaração de escolaridade também são contabilizados
+      is_in_staging: true
+      is_partition: false
+    - name: estagio_adm_direta_ensino_fundamental
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo de Estagiário da administração
+          direta - Ensino fundamental
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estagio_adm_direta_ensino_medio
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo de Estagiário da administração
+          direta - Ensino médio
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estagio_adm_direta_ensino_superior
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo de Estagiário da administração
+          direta - Ensino superior
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estagio_adm_direta_pos_graduacao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo de Estagiário da administração
+          direta - Pós-graduação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sem_vinculo_permanente_adm_direta
+      bigquery_type: int64
+      description: Total de funcionários ativos sem vínculo permanente da administração
+          direta
+      temporal_coverage:
+          - 2012(1)2014, 2017(1)2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os funcionários sem declaração de escolaridade também são contabilizados.
+          Sem vínculo permanente são os cedidos por outros órgãos, os prestadores
+          de serviços autônomos, os voluntários, os contratados por tempo determinado
+          entre outros
+      is_in_staging: true
+      is_partition: false
+    - name: sem_vinculo_permanente_adm_direta_sem_instrucao
+      bigquery_type: int64
+      description: Número de funcionários ativos sem vínculo permanente da administração
+          direta - Sem instrução
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Pessoa que não frequentou escola ou, se frequentou, não concluiu
+          a o 2º ano do Ensino Fundamental
+      is_in_staging: true
+      is_partition: false
+    - name: sem_vinculo_permanente_adm_direta_ensino_fundamental
+      bigquery_type: int64
+      description: Número de funcionários ativos sem vínculo permanente da administração
+          direta - Ensino fundamental
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: A declaração de escolaridade referente ao ensino fundamental refere-se
+          ao primeiro grau completo ou incompleto
+      is_in_staging: true
+      is_partition: false
+    - name: sem_vinculo_permanente_adm_direta_ensino_medio
+      bigquery_type: int64
+      description: Número de funcionários ativos sem vínculo permanente da administração
+          direta - Ensino médio
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sem_vinculo_permanente_adm_direta_ensino_superior
+      bigquery_type: int64
+      description: Número de funcionários ativos sem vínculo permanente da administração
+          direta - Ensino superior
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sem_vinculo_permanente_adm_direta_pos_graduacao
+      bigquery_type: int64
+      description: Número de funcionários ativos sem vínculo permanente da administração
+          direta - Pós-graduação
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: unidade_adm_direta
+      bigquery_type: int64
+      description: Número de unidades administrativas na administração direta
+      temporal_coverage:
+          - '2012'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: unidade_chefiada_mulher_adm_direta
+      bigquery_type: int64
+      description: Número de unidades administrativas chefiadas por mulheres na administração
+          direta
+      temporal_coverage:
+          - '2012'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: existencia_registro_deficiencia_adm_direta
+      bigquery_type: int64
+      description: Existência de registro na administração direta de forma a identificar
+          a quantidade de pessoas com deficiência
+      temporal_coverage:
+          - 2012, 2014
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: registro_deficiencia_adm_direta
+      bigquery_type: int64
+      description: Número de funcionarios com deficiência na administração direta
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Com excessão dos estados da Paraíba e do Distrito Federal os valores
+          nulos retratam que a pergunta não se aplica ao estado
+      is_in_staging: true
+      is_partition: false
+    - name: existencia_adm_indireta
+      bigquery_type: int64
+      description: Existência administração indireta
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: adm_indireta
+      bigquery_type: int64
+      description: Total de funcionários ativos da administração indireta
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os funcionários sem declaração de escolaridade também são contabilizados
+      is_in_staging: true
+      is_partition: false
+    - name: adm_indireta_sem_instrucao
+      bigquery_type: int64
+      description: Número de funcionários ativos da administração indireta - Sem instrução
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Pessoa que não frequentou escola ou, se frequentou, não concluiu
+          a o 2º ano do Ensino Fundamental
+      is_in_staging: true
+      is_partition: false
+    - name: adm_indireta_ensino_fundamental
+      bigquery_type: int64
+      description: Número de funcionários ativos da administração indireta - Ensino
+          fundamental
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: A declaração de escolaridade referente ao ensino fundamental refere-se
+          ao primeiro grau completo ou incompleto
+      is_in_staging: true
+      is_partition: false
+    - name: adm_indireta_ensino_medio
+      bigquery_type: int64
+      description: Número de funcionários ativos da administração indireta - Ensino
+          médio
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: adm_indireta_ensino_superior
+      bigquery_type: int64
+      description: Número de funcionários ativos da administração indireta - Ensino
+          superior
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: adm_indireta_pos_graduacao
+      bigquery_type: int64
+      description: Número de funcionários ativos da administração indireta - Pós-graduação
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estatutario_adm_indireta
+      bigquery_type: int64
+      description: Total de funcionários ativos com vínculo Estatutário da administração
+          indireta
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os funcionários sem declaração de escolaridade também são contabilizados
+      is_in_staging: true
+      is_partition: false
+    - name: estatutario_adm_indireta_sem_instrucao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo Estatutário da administração
+          indireta - Sem instrução
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Pessoa que não frequentou escola ou, se frequentou, não concluiu
+          a o 2º ano do Ensino Fundamental
+      is_in_staging: true
+      is_partition: false
+    - name: estatutario_adm_indireta_ensino_fundamental
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo Estatutário da administração
+          indireta - Ensino fundamental
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: A declaração de escolaridade referente ao ensino fundamental refere-se
+          ao primeiro grau completo ou incompleto
+      is_in_staging: true
+      is_partition: false
+    - name: estatutario_adm_indireta_ensino_medio
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo Estatutário da administração
+          indireta - Ensino médio
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estatutario_adm_indireta_ensino_superior
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo Estatutário da administração
+          indireta - Ensino superior
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estatutario_adm_indireta_pos_graduacao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo Estatutário da administração
+          indireta - Pós-graduação
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: clt_adm_indireta
+      bigquery_type: int64
+      description: Total de funcionários ativos com vínculo CLT da administração indireta
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os funcionários sem declaração de escolaridade também são contabilizados
+      is_in_staging: true
+      is_partition: false
+    - name: clt_adm_indireta_sem_instrucao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo CLT da administração
+          indireta - Sem instrução
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Pessoa que não frequentou escola ou, se frequentou, não concluiu
+          a o 2º ano do Ensino Fundamental
+      is_in_staging: true
+      is_partition: false
+    - name: clt_adm_indireta_ensino_fundamental
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo CLT da administração
+          indireta - Ensino fundamental
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: A declaração de escolaridade referente ao ensino fundamental refere-se
+          ao primeiro grau completo ou incompleto
+      is_in_staging: true
+      is_partition: false
+    - name: clt_adm_indireta_ensino_medio
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo CLT da administração
+          indireta - Ensino médio
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: clt_adm_indireta_ensino_superior
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo CLT da administração
+          indireta - Ensino superior
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: clt_adm_indireta_pos_graduacao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo CLT da administração
+          indireta - Pós-graduação
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_adm_indireta
+      bigquery_type: int64
+      description: Total de funcionários ativos com vínculo somente Comissionado da
+          administração indireta
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os funcionários sem declaração de escolaridade também são contabilizados
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_adm_indireta_sem_instrucao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo somente Comissionado
+          da administração indireta - Sem instrução
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Pessoa que não frequentou escola ou, se frequentou, não concluiu
+          a o 2º ano do Ensino Fundamental
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_adm_indireta_ensino_fundamental
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo somente Comissionado
+          da administração indireta - Ensino fundamental
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: A declaração de escolaridade referente ao ensino fundamental refere-se
+          ao primeiro grau completo ou incompleto
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_adm_indireta_ensino_medio
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo somente Comissionado
+          da administração indireta - Ensino médio
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_adm_indireta_ensino_superior
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo somente Comissionado
+          da administração indireta - Ensino superior
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_adm_indireta_pos_graduacao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo somente Comissionado
+          da administração indireta - Pós-graduação
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estagio_adm_indireta
+      bigquery_type: int64
+      description: Total de funcionários ativos com vínculo de Estagiário da administração
+          indireta
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os funcionários sem declaração de escolaridade também são contabilizados
+      is_in_staging: true
+      is_partition: false
+    - name: estagio_adm_indireta_ensino_fundamental
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo de Estagiário da administração
+          indireta - Ensino fundamental
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estagio_adm_indireta_ensino_medio
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo de Estagiário da administração
+          indireta - Ensino médio
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estagio_adm_indireta_ensino_superior
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo de Estagiário da administração
+          indireta - Ensino superior
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estagio_adm_indireta_pos_graduacao
+      bigquery_type: int64
+      description: Número de funcionários ativos com vínculo de Estagiário da administração
+          indireta - Pós-graduação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sem_vinculo_permanente_adm_indireta
+      bigquery_type: int64
+      description: Total de funcionários ativos sem vínculo permanente da administração
+          indireta
+      temporal_coverage:
+          - (1)2014, 2017(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os funcionários sem declaração de escolaridade também são contabilizados.
+          Sem vínculo permanente são os cedidos por outros órgãos, os prestadores
+          de serviços autônomos, os voluntários, os contratados por tempo determinado
+          entre outros
+      is_in_staging: true
+      is_partition: false
+    - name: sem_vinculo_permanente_adm_indireta_sem_instrucao
+      bigquery_type: int64
+      description: Número de funcionários ativos sem vínculo permanente da administração
+          indireta - Sem instrução
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Pessoa que não frequentou escola ou, se frequentou, não concluiu
+          a o 2º ano do Ensino Fundamental
+      is_in_staging: true
+      is_partition: false
+    - name: sem_vinculo_permanente_adm_indireta_ensino_fundamental
+      bigquery_type: int64
+      description: Número de funcionários ativos sem vínculo permanente da administração
+          indireta - Ensino fundamental
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: A declaração de escolaridade referente ao ensino fundamental refere-se
+          ao primeiro grau completo ou incompleto
+      is_in_staging: true
+      is_partition: false
+    - name: sem_vinculo_permanente_adm_indireta_ensino_medio
+      bigquery_type: int64
+      description: Número de funcionários ativos sem vínculo permanente da administração
+          indireta - Ensino médio
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sem_vinculo_permanente_adm_indireta_ensino_superior
+      bigquery_type: int64
+      description: Número de funcionários ativos sem vínculo permanente da administração
+          indireta - Ensino superior
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sem_vinculo_permanente_adm_indireta_pos_graduacao
+      bigquery_type: int64
+      description: Número de funcionários ativos sem vínculo permanente da administração
+          indireta - Pós-graduação
+      temporal_coverage:
+          - 2012, 2014, 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: existencia_realizacao_concurso_24_meses
+      bigquery_type: int64
+      description: Existência de realização de concurso nos últimos 24 meses
+      temporal_coverage:
+          - '2012'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: existencia_reserva_pessoa_deficiente_concurso
+      bigquery_type: int64
+      description: 'Existência da reserva de cargo para pessoas com deficiência '
+      temporal_coverage:
+          - '2012'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 'Os valores nulos para os estados do Maranhão e Alagoas retratam
+          que a pergunta não se aplica ao estado '
+      is_in_staging: true
+      is_partition: false
+    - name: existencia_reserva_pessoa_negra_concurso
+      bigquery_type: int64
+      description: 'Existência de legislação estadual específica que garante vagas
+          para população negra ou afrodescendente em concursos públicos '
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: existencia_contratacao_adm_direta_24_meses
+      bigquery_type: int64
+      description: Existência de contratação pela administração direta nos últimos
+          24 meses
+      temporal_coverage:
+          - '2012'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: existencia_priorizacao_cargo_mulher
+      bigquery_type: int64
+      description: Existência política de priorização de cargos para mulheres em chefia
+          e assessoramento
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 189
+
+metadata_modified:
