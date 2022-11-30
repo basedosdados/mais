@@ -63,7 +63,7 @@ data_cleaned_by:
     email: ingrid.rabelo@basedosdados.org
     github_user: IngridSRabelo
     ckan_user:
-    website: https://github.com/mavalentim
+    website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: O tratamento consistiu em renomear as colunas, padronizar as variáveis tipo data para o formato tipo DATE do BigQuery e padronizar as variáveis tipo bool, para gerar resultados tipo 0 ou 1.
