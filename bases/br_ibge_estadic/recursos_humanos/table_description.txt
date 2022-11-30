@@ -40,7 +40,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Padronização e criação de colunas com o obejtivo de indicar as respostas em que os estados não souberam informar os dados para a pergunta em questão
+Padronização e compatibilização das colunas ao longo do tempo.
 
 
 
