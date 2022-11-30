@@ -2171,7 +2171,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: ano_decreto_lai
@@ -2187,7 +2187,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: publicacao_lai_diario_ofical_impresso
@@ -2202,7 +2202,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: publicacao_lai_diario_oficial_internet
@@ -2217,7 +2217,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: regulamentacao_lai_prazo
@@ -2234,7 +2234,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: regulamentacao_lai_informacao_sigilosa
@@ -2250,7 +2250,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: regulamentacao_lai_autoridade_monitoramento
@@ -2266,7 +2266,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: regulamentacao_lai_orgao_monitoramento
@@ -2282,7 +2282,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: regulamentacao_lai_relatorio_monitoramento
@@ -2298,7 +2298,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: regulamentacao_lai_instancia_recursal_interna
@@ -2314,7 +2314,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: regulamentacao_lai_instancia_recursal_autonoma
@@ -2331,7 +2331,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: regulamentacao_lai_omissao_resposta
@@ -2347,7 +2347,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: acesso_informacao_publica
@@ -2378,7 +2378,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: informacao_publica_internet
@@ -2393,7 +2393,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: informacao_publica_telefone
@@ -2408,7 +2408,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: informacao_publica_carta
@@ -2423,7 +2423,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: informacao_publica_outro
@@ -2438,7 +2438,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: solicitacao_recebida
@@ -2453,7 +2453,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: solicitacao_recebida_nao_soube_informar
@@ -2485,7 +2485,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: solicitacao_recebida_atendida_nao_soube_informar
@@ -2517,7 +2517,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: solicitacao_recebida_parcialmente_atendida_nao_soube_informar
@@ -2549,7 +2549,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: solicitacao_recebida_negada_nao_soube_informar
@@ -2581,7 +2581,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: solicitacao_recebida_nao_conhecida_nao_soube_informar
@@ -2644,7 +2644,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: pagina_internet_estrutura_organizacional
@@ -2659,7 +2659,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: pagina_internet_endereco_telefone
@@ -2675,7 +2675,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: pagina_internet_horario_atendimento
@@ -2706,7 +2706,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: pagina_internet_registro_despesa
@@ -2737,7 +2737,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: pagina_internet_acompanhamento_programa
@@ -2753,7 +2753,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: pagina_internet_resposta
@@ -2769,7 +2769,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: dado_municipal_publicado_aberto
