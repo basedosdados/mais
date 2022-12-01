@@ -69,6 +69,16 @@ class Connection(Base):
         project_number = self._get_project_number(self._mode)
         return f"{project_number}.{self._location.lower()}.{self._name}"
 
+    @property
+    def service_account(self) -> str:
+        """
+        Returns the service account associated with the connection.
+        """
+        conn = self.connection
+        if conn:
+            return conn.cloud_resource.service_account_id # pylint: disable=no-member
+        raise ValueError("Connection does not exist.")
+
     def create(self):
         """
         Creates a new connection.
