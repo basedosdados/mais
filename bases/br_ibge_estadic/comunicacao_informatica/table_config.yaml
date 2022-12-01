@@ -11,7 +11,7 @@ title: Comunicação e Informática
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: A pesquisa fornece informações variadas na área de comunicação e informática a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios pelo motivo do estado não saber informar a resposta. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta.
+description: A pesquisa fornece informações variadas na área de comunicação e informática a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios pelo motivo de que o estado não sabia informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta feita pelo indicador.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
