@@ -453,7 +453,7 @@ class Base:
             "cloudresourcemanager", "v1", credentials=credentials
         )
         policy = (
-            service.projects()
+            service.projects() # pylint: disable=no-member
             .getIamPolicy(
                 resource=self._get_project_id(mode),
                 body={"options": {"requestedPolicyVersion": 1}},
@@ -470,7 +470,7 @@ class Base:
         service = googleapiclient.discovery.build(
             "cloudresourcemanager", "v1", credentials=credentials
         )
-        service.projects().setIamPolicy(
+        service.projects().setIamPolicy( # pylint: disable=no-member
             resource=self._get_project_id(mode), body={"policy": policy}
         ).execute()
 
