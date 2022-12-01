@@ -1,0 +1,1313 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_cnj_estatisticas_poder_judiciario
+
+table_id: recursos_financeiros
+
+# Título da tabela.
+title: Recursos Financeiros
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description:
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2009(1)2021
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: one_year
+
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: other
+      columns:
+          - id_tribunal
+
+last_updated:
+    metadata:
+    data:
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Arthur Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Arthur Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Seleção e renomeação das variáveis que correspondem aos indicadores de recursos financeiros, padronização dos valores e criação da coluna sigla_uf.
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url:  https://github.com/basedosdados/mais/tree/master/bases/br_cnj_estatisticas_poder_judiciario/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ramo_justica
+      bigquery_type: string
+      description: Ramo de Justiça
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_tribunal
+      bigquery_type: string
+      description: Identificador do Tribunal
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_tribunal
+      bigquery_type: string
+      description: Sigla do Tribunal
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_beneficios
+      bigquery_type: float64
+      description: Despesas com Benefícios
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_beneficios_quadro_ativo
+      bigquery_type: float64
+      description: Despesas com Benefícios do Pessoal do Quadro Ativo
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_beneficios_quadro_ativo_segundo_grau
+      bigquery_type: float64
+      description: Despesas com Benefícios do Quadro Ativo no 2º grau
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_beneficios_quadro_ativo_adm
+      bigquery_type: float64
+      description: Despesas com Benefícios do Quadro Ativo na área administrativa
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_beneficios_quadro_ativo_primeiro_grau
+      bigquery_type: float64
+      description: Despesas com Benefícios do Quadro Ativo no 1º grau, Turmas Recursais
+          e Juizados Especiais
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_beneficios_quadro_inativo
+      bigquery_type: float64
+      description: Despesas com Benefícios do Quadro Inativo
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_cargos_comissao
+      bigquery_type: float64
+      description: Despesas com Cargos em Comissão
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_cargos_comissao_segundo_grau
+      bigquery_type: float64
+      description: Despesas com Cargos em Comissão na área judiciária do 2º grau
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_cargos_comissao_adm
+      bigquery_type: float64
+      description: Despesas com Cargos em Comissão na área administrativa
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_cargos_comissao_primeiro_grau
+      bigquery_type: float64
+      description: Despesas com Cargos em Comissão na área judiciária do 1º grau,
+          das Turmas Recursais e dos Juizados Especiais
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: saldo_depositos_judiciais
+      bigquery_type: float64
+      description: Saldo de Depósitos Judiciais
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_estagiarios
+      bigquery_type: float64
+      description: Despesas com Estagiários
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_funcao_confianca
+      bigquery_type: float64
+      description: Despesas com Função de Confiança
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_funcao_confianca_primeiro_grau
+      bigquery_type: float64
+      description: Despesas com Funções de Confiança na área judiciária do 1º grau,
+          das Turmas Recursais e dos Juizados Especiais
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_funcao_confianca_segundo_grau
+      bigquery_type: float64
+      description: Despesas com Funções de Confiança na área judiciária do 2º grau
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_funcao_confianca_adm
+      bigquery_type: float64
+      description: Despesas com Funções de Confiança na área administrativa
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_aquisicao_ti_comunicacao
+      bigquery_type: float64
+      description: Despesa com Aquisições em Tecnologia de Informação e Comunicação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_custeio_ti_comunicacao
+      bigquery_type: float64
+      description: Despesa com Custeio da Tecnologia de Informação e Comunicação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_outras_idenizatorias_indiretas_rh
+      bigquery_type: float64
+      description: Outras Despesas Indenizatórias e Indiretas com Recursos Humanos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_outras_idenizatorias_indiretas_rh_segundo_grau
+      bigquery_type: float64
+      description: Outras Despesas Indenizatórias Indiretas com Recursos Humanos no
+          2º grau
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_outras_idenizatorias_indiretas_rh_adm
+      bigquery_type: float64
+      description: Outras Despesas Indenizatórias Indiretas com Recursos Humanos na
+          área administrativa
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_outras_idenizatorias_indiretas_rh_primeiro_grau
+      bigquery_type: float64
+      description: Outras Despesas Indenizatórias Indiretas com Recursos Humanos no
+          1º grau, Turmas Recursais e Juizados Especiais
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_capital
+      bigquery_type: float64
+      description: Despesa de Capital
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_rh_magistrados
+      bigquery_type: float64
+      description: Despesa com Recursos Humanos de Magistrados
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_projetos_construcao_obras
+      bigquery_type: float64
+      description: Despesas com Projetos de Construção e Obras
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_pessoal_encargos
+      bigquery_type: float64
+      description: Despesa com Pessoal e Encargos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_pessoal_encargos_quadro_ativo
+      bigquery_type: float64
+      description: Despesa com Pessoal e Encargos do Quadro Ativo
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_pessoal_encargos_quadro_ativo_primeiro_grau
+      bigquery_type: float64
+      description: Despesas com Pessoal e Encargos do Quadro Ativo no 1º grau, nas
+          Turmas Recursais e nos Juizados Especiais
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_pessoal_encargos_quadro_ativo_segundo_grau
+      bigquery_type: float64
+      description: Despesas com Pessoal e Encargos do Quadro Ativo no 2º grau
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_pessoal_encargos_quadro_ativo_adm
+      bigquery_type: float64
+      description: Despesas com Pessoal e Encargos do Quadro Ativo na área administrativa
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_pessoal_encargos_quadro_inativo
+      bigquery_type: float64
+      description: Despesas com Pessoal e Encargos do Quadro Inativo
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_total_justica_estadual
+      bigquery_type: float64
+      description: Despesa Total da Justiça Estadual
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_rh
+      bigquery_type: float64
+      description: Despesa com Recursos Humanos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_rh_servidores
+      bigquery_type: float64
+      description: Despesa com Recursos Humanos de Servidores
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_terceirizados
+      bigquery_type: float64
+      description: Despesas com Terceirizados
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: execucao_orcamentaria_despesa_pessoal_encargos
+      bigquery_type: float64
+      description: Execução Orçamentária das Despesas com Pessoal e Encargos
+      temporal_coverage:
+          - 2015(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: execucao_orcamentaria_despesa_capital
+      bigquery_type: float64
+      description: Execução Orçamentária das Despesas de Capital
+      temporal_coverage:
+          - 2015(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: execucao_orcamentaria_outras_despesa_correntes
+      bigquery_type: float64
+      description: Execução Orçamentária de Outras Despesas Correntes
+      temporal_coverage:
+          - 2015(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_total_pib
+      bigquery_type: float64
+      description: Despesa Total da Justiça em relação ao PIB
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_media_magistrado
+      bigquery_type: float64
+      description: Despesa média por Magistrado
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_media_servidor
+      bigquery_type: float64
+      description: Despesa média por Servidor
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_media_terceirizado
+      bigquery_type: float64
+      description: Despesa média por Terceirizado
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_media_estagiario
+      bigquery_type: float64
+      description: Despesa média por Estagiário
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_despesa_total_dp
+      bigquery_type: float64
+      description: Despesa Total da Justiça em relação à Despesa Pública (DP)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_despesa_rh_dtj
+      bigquery_type: float64
+      description: Despesa com Recursos Humanos em relação à Despesa Total da Justiça
+          (DTJ)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_despesa_bens_servicos_capital_dtj
+      bigquery_type: float64
+      description: Despesa com Bens e Serviços e de Capital em relação à Despesa Total
+          da Justiça (DTJ)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_despesa_pessoal_encargos_quadro_permanente_dtj
+      bigquery_type: float64
+      description: Despesa com Pessoal e Encargos do Quadro Permanente em relação
+          à Despesa Total da Justiça (DTJ)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_despesa_pessoal_ativo_encargos_dtj
+      bigquery_type: float64
+      description: Despesa com Pessoal Ativo e Encargos em relação à Despesa Total
+          da Justiça (DTJ)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_despesa_pessoal_inativo_pensao_dtj
+      bigquery_type: float64
+      description: Despesa com Pessoal Inativo e Instituidores de Pensão em relação
+          à Despesa Total da Justiça (DTJ)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_despesa_custeio_capital_dtj
+      bigquery_type: float64
+      description: Despesa com Custeio e Capital em relação à Despesa Total da Justiça
+          (DTJ)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_total_justica_pc
+      bigquery_type: float64
+      description: Despesa Total da Justiça por Habitante
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl / person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_despesa_pleitos_eleitorais_dt
+      bigquery_type: float64
+      description: Despesas com Pleitos Eleitorais em relação à Despesa Total (DT)
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_pleito_eleitoral_eleitor
+      bigquery_type: float64
+      description: Despesas com Pleitos Eleitorais por Eleitor
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl / person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gastos_totais
+      bigquery_type: float64
+      description: Gastos Totais
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_arrecadacao_custas_emolumentos_dtj
+      bigquery_type: float64
+      description: Arrecadação com Custas e Emolumentos em relação à Despesa Total
+          da Justiça (DTJ)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_arrecadacao_receitas_execucao_fiscal_dtj
+      bigquery_type: float64
+      description: Arrecadação com Receitas de Execução Fiscal em Relação à Despesa
+          Total da Justiça (DTJ)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_valores_pagos_jurisdicionados_dtj
+      bigquery_type: float64
+      description: Valores Pagos aos Jurisdicionados em relação à Despesa Total da
+          Justiça (DTJ)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: proporcao_saldo_depositos_judiciais_pendentes_dtj
+      bigquery_type: float64
+      description: Saldo de Depósitos Judiciais Pendentes em relação à Despesa Total
+          da Justiça (DTJ)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_ti_comunicacao_relacao_dtj
+      bigquery_type: float64
+      description: Despesa com Tecnologia da Informação e Comunicação em relação à
+          Despesa Total da Justiça (DTJ)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: magistrados_inativos_instituidores_pensao
+      bigquery_type: int64
+      description: Magistrados Inativos e Instituidores de Pensão
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cargos_magistrados_providos
+      bigquery_type: int64
+      description: Número de cargos de Magistrado Providos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_outras_correntes
+      bigquery_type: float64
+      description: Outras Despesas Correntes
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: despesa_outras_correntes_capital
+      bigquery_type: float64
+      description: Outras Despesas Correntes e de Capital
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: orcamento_despesa_pessoal_encargos
+      bigquery_type: float64
+      description: Orçamento para Despesas de Pessoal e Encargos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: orcamento_despesa_capital
+      bigquery_type: float64
+      description: Orçamento para Despesas de Capital
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: orcamento_despesa_outras_correntes
+      bigquery_type: float64
+      description: Orçamento para Outras Despesas Correntes
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: recolhimentos_diversos
+      bigquery_type: float64
+      description: Recolhimentos Diversos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: receita_corrente_execucoes_fiscais
+      bigquery_type: float64
+      description: Receita decorrente de Execuções Fiscais
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_servidores
+      bigquery_type: int64
+      description: Total de servidores
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_servidores_inativos_instituidores_pensao
+      bigquery_type: int64
+      description: Total de Servidores Inativos e Instituidores de Pensão
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_estagiarios
+      bigquery_type: int64
+      description: Total da Força de Trabalho Auxiliar - Estagiários
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_terceirizados
+      bigquery_type: int64
+      description: Total da Força de Trabalho Auxiliar - Terceirizados
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_pessoal_saiu_cessao_requisicao
+      bigquery_type: int64
+      description: Total de Pessoal que saiu por cessão ou requisição
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valores_pagos_jurisdicionados
+      bigquery_type: float64
+      description: Valores Pagos aos Jurisdicionados
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 1189
+
+metadata_modified:
