@@ -13,7 +13,7 @@ packages = [
 ]
 readme = "README.md"
 repository = "https://github.com/base-dos-dados/bases"
-version = "1.6.9"
+version = "1.7.0-beta.1"
 
 [tool.poetry.scripts]
 basedosdados = 'basedosdados.cli.cli:cli'
@@ -22,7 +22,9 @@ basedosdados = 'basedosdados.cli.cli:cli'
 Jinja2 = "3.0.3"
 ckanapi = "4.6"
 click = "8.0.3"
+google-api-python-client = "^2.66.0"
 google-cloud-bigquery = "2.30.1"
+google-cloud-bigquery-connection = "^1.7.3"
 google-cloud-bigquery-storage = "1.1.0"
 google-cloud-storage = "1.42.3"
 importlib-metadata = "^4.11.3"
@@ -37,8 +39,6 @@ python = ">=3.7.1,<3.11"
 toml = "^0.10.2"
 tomlkit = "0.7.0"
 tqdm = "4.50.2"
-google-cloud-bigquery-connection = "^1.7.3"
-google-api-python-client = "^2.66.0"
 
 [tool.black]
 # Use the more relaxed max line length permitted in PEP8.
