@@ -69,7 +69,7 @@ data_cleaned_by:
 data_cleaning_description: Compatibilização dos dados entre os anos e criação de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta. 
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_estadic/code 
+data_cleaning_code_url: 
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
