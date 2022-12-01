@@ -96,10 +96,48 @@ class Connection(Base):
         )
         client.create_connection(request=request)
 
+    def set_biglake_permissions(self):
+        """
+        Grants all needed roles to the connection service account to be able to
+        access BigLake:
+
+        - roles/storage.objectViewer (for staging)
+        """
+        try:
+            self._grant_role(
+                role="roles/storage.objectViewer",
+                member=f"serviceAccount:{self.service_account}",
+                mode=self._mode,
+            )
+        except Exception as e:
+            error_message = 'Failed to grant "roles/storage.objectViewer" role to '
+            error_message += f"service account {self.service_account} "
+            error_message += f"for project {self._project}. Maybe you don't have "
+            error_message += "permissions to grant roles?"
+            raise Exception(error_message) from e
+
+    def revoke_biglake_permissions(self):
+        """
+        Revokes all roles from the connection service account.
+        """
+        try:
+            self._revoke_role(
+                role="roles/storage.objectViewer",
+                member=f"serviceAccount:{self.service_account}",
+                mode=self._mode,
+            )
+        except Exception as e:
+            error_message = 'Failed to revoke "roles/storage.objectViewer" role from '
+            error_message += f"service account {self.service_account} "
+            error_message += f"for project {self._project}. Maybe you don't have "
+            error_message += "permissions to revoke roles?"
+            raise Exception(error_message) from e
+
     def delete(self):
         """
         Deletes a connection.
         """
+        self.revoke_biglake_permissions()
         client = self.client[f"bigquery_connection_{self._mode}"]
         request = bigquery_connection_v1.DeleteConnectionRequest(
             name=f"{self._parent}/connections/{self._name}"

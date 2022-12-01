@@ -699,7 +699,10 @@ class Table(Base):
             if not connection.exists:
                 logger.info("Creating BigLake connection")
                 connection.create()
-                logger.success("BigLake connection created")
+                logger.success("BigLake connection created!")
+                logger.info("Setting permissions for BigLake service account...")
+                connection.set_biglake_permissions()
+                logger.success("Permissions set successfully!")
             biglake_connection_id = connection.connection_id
 
         table = bigquery.Table(self.table_full_name["staging"])
