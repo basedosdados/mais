@@ -10,6 +10,7 @@ import warnings
 import base64
 import json
 from functools import lru_cache
+from typing import Dict, List, Union
 
 from google.cloud import bigquery, bigquery_connection_v1, storage
 from google.oauth2 import service_account
@@ -425,6 +426,12 @@ class Base:
             (self.config_path / "templates"),
         )
 
+    def _get_project_id(self, mode: str) -> str:
+        """
+        Get the project ID.
+        """
+        return self.config["gcloud-projects"][mode]["name"]
+
     def _get_project_number(self, mode: str) -> str:
         """
         Get the project number from project ID.
@@ -433,6 +440,64 @@ class Base:
         crm_service = googleapiclient.discovery.build(
             "cloudresourcemanager", "v1", credentials=credentials
         )
-        project_id = self.config["gcloud-projects"][mode]["name"]
+        project_id = self._get_project_id(mode)
         # pylint: disable=no-member
         return crm_service.projects().get(projectId=project_id).execute()["projectNumber"]
+
+    def _get_project_iam_policy(self, mode: str) -> Dict[str, Union[str, int, List[Dict[str, Union[str, List[str]]]]]]:
+        """
+        Get the project IAM policy.
+        """
+        credentials = self._load_credentials(mode)
+        service = googleapiclient.discovery.build(
+            "cloudresourcemanager", "v1", credentials=credentials
+        )
+        policy = (
+            service.projects()
+            .getIamPolicy(
+                resource=self._get_project_id(mode),
+                body={"options": {"requestedPolicyVersion": 1}},
+            )
+            .execute()
+        )
+        return policy
+
+    def _set_project_iam_policy(self, policy: Dict[str, Union[str, int, List[Dict[str, Union[str, List[str]]]]]], mode: str):
+        """
+        Set the project IAM policy.
+        """
+        credentials = self._load_credentials(mode)
+        service = googleapiclient.discovery.build(
+            "cloudresourcemanager", "v1", credentials=credentials
+        )
+        service.projects().setIamPolicy(
+            resource=self._get_project_id(mode), body={"policy": policy}
+        ).execute()
+
+    def _grant_role(self, role: str, member: str, mode: str):
+        """
+        Grant a role to a member.
+        """
+        policy = self._get_project_iam_policy(mode)
+        try:
+            binding = next(b for b in policy["bindings"] if b["role"] == role)
+        except StopIteration:
+            binding = {"role": role, "members": []}
+            policy["bindings"].append(binding)
+        if member not in binding["members"]:
+            binding["members"].append(member)
+        self._set_project_iam_policy(policy, mode)
+
+    def _revoke_role(self, role: str, member: str, mode: str):
+        """
+        Revoke a role from a member.
+        """
+        policy = self._get_project_iam_policy(mode)
+        try:
+            binding = next(b for b in policy["bindings"] if b["role"] == role)
+        except StopIteration:
+            return
+        else:
+            if member in binding["members"]:
+                binding["members"].remove(member)
+        self._set_project_iam_policy(policy, mode)
