@@ -553,7 +553,7 @@ class Table(Base):
 
         return self
 
-    def create(
+    def create( # pylint: disable=too-many-statements
         self,
         path=None,
         force_dataset=True,
@@ -567,6 +567,7 @@ class Table(Base):
         location=None,
         chunk_size=None,
         biglake_table=False,
+        set_biglake_connection_permissions=True,
     ):
         """Creates BigQuery table at staging dataset.
 
@@ -639,6 +640,9 @@ class Table(Base):
                 Sets this as a BigLake table. BigLake tables allow end users to query from external data (such as GCS) even if
                 they don't have access to the source data. IAM is managed like any other BigQuery native table. See
                 https://cloud.google.com/bigquery/docs/biglake-intro for more on BigLake.
+
+            set_biglake_connection_permissions (bool): Optional
+                If set to `True`, attempts to grant the BigLake connection service account access to the table's data in GCS.
         """
 
         if path is None:
@@ -697,12 +701,63 @@ class Table(Base):
         if biglake_table:
             connection = Connection(name="biglake", location=location, mode="staging")
             if not connection.exists:
-                logger.info("Creating BigLake connection")
-                connection.create()
-                logger.success("BigLake connection created!")
-                logger.info("Setting permissions for BigLake service account...")
-                connection.set_biglake_permissions()
-                logger.success("Permissions set successfully!")
+                try:
+                    logger.info("Creating BigLake connection")
+                    connection.create()
+                    logger.success("BigLake connection created!")
+                except google.api_core.exceptions.Forbidden as exc:
+                    logger.error(
+                        "You don't have permission to create a BigLake connection. "
+                        "Please contact an admin to create one for you."
+                    )
+                    raise BaseDosDadosException(
+                        "You don't have permission to create a BigLake connection. "
+                        "Please contact an admin to create one for you."
+                    ) from exc
+                except Exception as exc:
+                    logger.error(
+                        "Something went wrong while creating the BigLake connection. "
+                        "Please contact an admin to create one for you."
+                    )
+                    raise BaseDosDadosException(
+                        "Something went wrong while creating the BigLake connection. "
+                        "Please contact an admin to create one for you."
+                    ) from exc
+            if set_biglake_connection_permissions:
+                try:
+                    logger.info("Setting permissions for BigLake service account...")
+                    connection.set_biglake_permissions()
+                    logger.success("Permissions set successfully!")
+                except google.api_core.exceptions.Forbidden as exc:
+                    logger.error(
+                        "Could not set permissions for BigLake service account. "
+                        "Please make sure you have permissions to grant roles/storage.objectViewer"
+                        f" to the BigLake service account. ({connection.service_account})."
+                        " If you don't, please ask an admin to do it for you or set "
+                        "set_biglake_connection_permissions=False."
+                    )
+                    raise BaseDosDadosException(
+                        "Could not set permissions for BigLake service account. "
+                        "Please make sure you have permissions to grant roles/storage.objectViewer"
+                        f" to the BigLake service account. ({connection.service_account})."
+                        " If you don't, please ask an admin to do it for you or set "
+                        "set_biglake_connection_permissions=False."
+                    ) from exc
+                except Exception as exc:
+                    logger.error(
+                        "Something went wrong while setting permissions for BigLake service account. "
+                        "Please make sure you have permissions to grant roles/storage.objectViewer"
+                        f" to the BigLake service account. ({connection.service_account})."
+                        " If you don't, please ask an admin to do it for you or set "
+                        "set_biglake_connection_permissions=False."
+                    )
+                    raise BaseDosDadosException(
+                        "Something went wrong while setting permissions for BigLake service account. "
+                        "Please make sure you have permissions to grant roles/storage.objectViewer"
+                        f" to the BigLake service account. ({connection.service_account})."
+                        " If you don't, please ask an admin to do it for you or set "
+                        "set_biglake_connection_permissions=False."
+                    ) from exc
             biglake_connection_id = connection.connection_id
 
         table = bigquery.Table(self.table_full_name["staging"])
@@ -741,7 +796,24 @@ class Table(Base):
 
             self.delete(mode="staging")
 
-        self.client["bigquery_staging"].create_table(table)
+        try:
+            self.client["bigquery_staging"].create_table(table)
+        except google.api_core.exceptions.Forbidden as exc:
+            if biglake_table:
+                raise BaseDosDadosException(
+                    "Permission denied. The service account used to create the BigLake connection"
+                    " does not have permission to read data from the source bucket. Please grant"
+                    f" the service account {connection.service_account} the Storage Object Viewer"
+                    " (roles/storage.objectViewer) role on the source bucket (or on the project)."
+                    " Or, you can try running this again with set_biglake_connection_permissions=True."
+                ) from exc
+            raise BaseDosDadosException(
+                "Something went wrong when creating the table. Please check the logs for more information."
+            ) from exc
+        except Exception as exc:
+            raise BaseDosDadosException(
+                "Something went wrong when creating the table. Please check the logs for more information."
+            ) from exc
 
         logger.success(
             "{object} {object_id} was {action}!",
