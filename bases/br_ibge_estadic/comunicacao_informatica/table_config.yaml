@@ -11,7 +11,7 @@ title: Comunicação e Informática
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: A pesquisa fornece informações variadas na área de comunicação e informática a nível estadual.
+description: A pesquisa fornece informações variadas na área de comunicação e informática a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios pelo motivo do estado não saber informar a resposta. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -31,6 +31,9 @@ update_frequency: five_years
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
+    - entity: year
+      column:
+          - ano
     - entity: state
       columns:
           - sigla_uf 
@@ -63,7 +66,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Padronização e criação de colunas com o obejtivo de indicar as respostas em que os estados não souberam informar os dados para a pergunta em questão
+data_cleaning_description: Compatibilização dos dados entre os anos e criação de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta. 
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_estadic/code 
