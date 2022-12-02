@@ -19,12 +19,12 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_tesouro_estoque_divida_publica.br_tesouro_estoque_divida_publica AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
-SAFE_CAST(mes AS STRING) mes,
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(id_divida AS STRING) id_divida,
-SAFE_CAST(vencimento_divida AS STRING) vencimento_divida,
+SAFE_CAST(vencimento_divida AS DATE) vencimento_divida,
 SAFE_CAST(tipo_divida AS STRING) tipo_divida,
 SAFE_CAST(classe_carteira AS STRING) classe_carteira,
-SAFE_CAST(valor_estoque AS STRING) valor_estoque,
-SAFE_CAST(quantidade_estoque AS STRING) quantidade_estoque
+SAFE_CAST(valor_estoque AS FLOAT64) valor_estoque,
+SAFE_CAST(quantidade_estoque AS INT64) quantidade_estoque
 FROM basedosdados-dev.br_tesouro_estoque_divida_publica_staging.br_tesouro_estoque_divida_publica AS t

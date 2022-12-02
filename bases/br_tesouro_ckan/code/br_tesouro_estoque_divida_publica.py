@@ -57,5 +57,5 @@ for ano in [*range(2017, 2023)]:
     df_particao = df[df['ano'] == ano].copy() 
     df_particao = df_particao[df_particao['mes'] == mes]
     df_particao.drop(['ano', 'mes'], axis=1, inplace=True) 
-    particao = f'output/ano={ano}/mes={mes}/estoque_divida_publica_{ano}_{mes}.csv'
+    particao = f'output/ano={ano}/mes={mes}/br_tesouro_ckan_estoque_divida_publica_{ano}_{mes}.csv'
     df_particao.to_csv(particao, index=False, encoding='utf-8', na_rep='')

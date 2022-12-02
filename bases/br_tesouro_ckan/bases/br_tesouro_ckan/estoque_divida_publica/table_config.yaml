@@ -1,9 +1,9 @@
 
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: br_tesouro_estoque_divida_publica
+dataset_id: br_tesouro_ckan
 
-table_id: br_tesouro_estoque_divida_publica
+table_id: estoque_divida_publica
 
 # Título da tabela.
 title: Estoque da Dívida Pública
@@ -13,23 +13,35 @@ title: Estoque da Dívida Pública
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
 description:
+Dados sobre títulos públicos e contratos que compõe a dívida pública federal, com base nos dados disponibilizados pelo Tesouro Nacional através da CKAN.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
 #   - sa.br
 spatial_coverage:
+    -sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: ['2017(1)2022']
+temporal_coverage: 
+    -2017(1)2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency:
+update_frequency: one_year
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
+  - entity: year
+    columns:
+      - ano
+  - entity: month
+    columns:
+      - mes
+  - entity: other
+    columns:
+     - id_divida
 
 last_updated:
     metadata:
@@ -38,31 +50,33 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version:
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
     name: André Alvarenga Guimarães
     email: andre.alvguim@gmail.com  
-    github_user: 
+    github_user: andrealvguim
     ckan_user:
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-data_cleaned_by:
-    name:
-    email:
-    github_user:
+data_cleaned_by: andrealvguim
+    name: André Alvarenga Guimarães
+    email: andre.alvguim@gmail.com
+    github_user: andrealvguim
     ckan_user:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
+data_cleaning_description: 
+    -Substituição dos "," por "." nas colunas de valor e quantidade de estoque
+    -Formatação das colunas da data de vencimento e tipo da dívida para o padrão da BD
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url:
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_tesouro_estoque_divida_publica/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -104,7 +118,8 @@ columns:
     - name: ano
       bigquery_type: int64
       description: Ano de Referência do Estoque
-      temporal_coverage: (1)
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: no
       directory_column: br_bd_diretorios_data_tempo.ano:ano
           dataset_id: 
@@ -113,12 +128,13 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       observations: 
-      is_in_staging:
+      is_in_staging: yes
       is_partition: true
     - name: mes
       bigquery_type: int64
       description: Mês de Referência do Estoque
-      temporal_coverage: (1)
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: no
       directory_column: br_bd_diretorios_data_tempo.mes:mes
           dataset_id: 
@@ -127,12 +143,13 @@ columns:
       measurement_unit: month
       has_sensitive_data: no
       observations:
-      is_in_staging:
+      is_in_staging: yes
       is_partition: true
     - name: id_divida
       bigquery_type: string
       description: Código do Título Público ou Contrato
-      temporal_coverage: (1)
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -141,12 +158,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: yes
+      is_partition: false
     - name: vencimento_divida
       bigquery_type: date
       description: Data do Vencimento do Título Público ou Contrato
-      temporal_coverage: (1)
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: no
       directory_column: br_bd_diretorio_data_tempo.data:data
           dataset_id: 
@@ -155,12 +173,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: yes
+      is_partition: false
     - name: tipo_divida
       bigquery_type: string
       description: Tipo da Dívida
-      temporal_coverage: (1)
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -169,12 +188,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: yes
+      is_partition: false
     - name: classe_carteira
       bigquery_type: string
       description: Classe da Carteira de Títulos ou Contratos
-      temporal_coverage: (1)
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -183,12 +203,13 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: yes
+      is_partition: false
     - name: valor_estoque
       bigquery_type: float64
       description: Valor do Estoque de Títulos ou Contratos
-      temporal_coverage: (1)
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -197,12 +218,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: yes
+      is_partition: false
     - name: quantidade_estoque
       bigquery_type: int64
       description: Quantidade do Estoque de Títulos ou Contratos
-      temporal_coverage:
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -211,9 +233,9 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: yes
+      is_partition: false
 
-number_rows:
+number_rows: 124419
 
 metadata_modified:
