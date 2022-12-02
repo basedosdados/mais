@@ -1,4 +1,4 @@
-A pesquisa fornece informações variadas relacionadas a recursos humanos das administrações públicas a nível estadual.
+A pesquisa fornece informações variadas relacionadas a recursos humanos das administrações públicas a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios pelo motivo de que o estado não sabia informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta feita pelo indicador.
 
 Para saber mais acesse:
 Website: 
@@ -40,8 +40,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Padronização e compatibilização das colunas ao longo do tempo.
-
+Compatibilização dos dados entre os anos e criação de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta.
 
 
 Frequencia de Atualização

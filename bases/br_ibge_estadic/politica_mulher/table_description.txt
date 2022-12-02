@@ -1,6 +1,4 @@
-A pesquisa fornece informações variadas sobre políticas para mulheres a nível estadual.
-
-Para saber mais acesse:
+A pesquisa fornece informações variadas sobre políticas para mulheres a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios pelo motivo de que o estado não sabia informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta feita pelo indicador.
 Website: 
 Github: 
 
@@ -39,7 +37,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Padronização e criação de colunas com o obejtivo de indicar as respostas em que os estados não souberam informar os dados para a pergunta em questão
+Padronização e criação de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta.
 
 
 
