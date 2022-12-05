@@ -5,18 +5,19 @@ dataset_id: br_inpe_prodes
 table_id: desmatamento_municipio
 
 # Título da tabela.
-title: Desmatamento PRODES
+title: Desmatamento por Municipio
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Apresenta o desmatamento dos municipios e outras variáveis na Amazônia Legal a partir do ano 2000.
+description: Apresenta o desmatamento dos municipios e outras variáveis na Amazônia
+    Legal a partir do ano 2000
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
 #   - sa.br
-spatial_coverage: 
+spatial_coverage:
     - sa.br
 
 # Anos cobertos pela tabela.
@@ -33,22 +34,25 @@ update_frequency: one_year
 observation_level:
     - country: br
       entity: municipality
-      column:
+      columns:
           - id_municipio
+    - entity: year
+      columns:
+          - ano
 
 last_updated:
-    metadata: 
-    data:
+    metadata: '2022-12-05'
+    data: '2022-12-05 13:45:30'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.1
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
     name: Gustavo Alcântara
-    email: gustavo.alcantara@basedosdados.org
+    email: gustavoalcantara@basedosdados.org
     github_user: gustavoalcantara
     ckan_user: gustavoalcantara
     website:
@@ -57,17 +61,17 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Instituto Nacional de Pesquisas Espaciais
-    email: 
-    github_user:
-    ckan_user:
-    website: http://www.dpi.inpe.br/prodesdigital/prodesmunicipal.php
+    name: Gustavo Alcântara
+    email: gustavoalcantara@basedosdados.org
+    github_user: gustavoalcantara
+    ckan_user: gustavoalcantara
+    website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Renomeação e seleção da ordem das variáveis para a Base dos Dados. 
+data_cleaning_description: Seleção e renomeação de variáveis.
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url:  https://github.com/basedosdados/mais/tree/master/bases/br_inpe_prodes/code/desmatamento_municipio
+data_cleaning_code_url:
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -94,6 +98,7 @@ project_id_staging: basedosdados-dev
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions:
+    - ano
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -106,7 +111,7 @@ partitions:
 columns:
     - name: ano
       bigquery_type: int64
-      description: Ano 
+      description: Ano
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -118,7 +123,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false
+      is_partition: true
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
@@ -144,7 +149,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -159,7 +164,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -174,7 +179,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -189,7 +194,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -204,7 +209,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -219,7 +224,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -234,7 +239,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -249,7 +254,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: kilometer
+      measurement_unit: kilometer^2
       has_sensitive_data: no
       observations:
       is_in_staging: true
