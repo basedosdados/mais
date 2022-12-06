@@ -702,7 +702,7 @@ class Table(Base):
             connection = Connection(name="biglake", location=location, mode="staging")
             if not connection.exists:
                 try:
-                    logger.info("Creating BigLake connection")
+                    logger.info("Creating BigLake connection...")
                     connection.create()
                     logger.success("BigLake connection created!")
                 except google.api_core.exceptions.Forbidden as exc:
