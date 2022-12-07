@@ -40,7 +40,8 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Compatibilização dos dados entre os anos e criação de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta.
+Compatibilização dos dados ao longo do tempo e criação de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta.
+
 
 
 Frequencia de Atualização
