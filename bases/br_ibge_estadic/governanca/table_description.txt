@@ -1,4 +1,4 @@
-A pesquisa fornece informações variadas sobre a governança pública estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios pelo motivo de que o estado não sabe informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta.
+A pesquisa fornece informações variadas sobre a governança pública estadual como, os meios de acesso a informação sobre o estado, características do controle interno e do conselho de transparência. A tabela inclui colunas indicando os espaços que foram deixados vazios devido ao fato de que os estados não souberam informar o dado. Com isso, valores nulos sem indicadores nesta coluna passam a representar a não aplicabilidade da pergunta feita ao estado.
 
 Para saber mais acesse:
 Website: 

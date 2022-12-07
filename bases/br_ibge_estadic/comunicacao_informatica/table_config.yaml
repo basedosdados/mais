@@ -11,7 +11,7 @@ title: Comunicação e Informática
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: A pesquisa fornece informações variadas na área de comunicação e informática a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios pelo motivo de que o estado não sabia informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta feita pelo indicador.
+description: A pesquisa fornece informações na área de comunicação e informática como, pedido de acesso a informação, dados digitalizados, formas de atendimento, execução orçamentária, mídias online, etc, a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios devido ao fato de que os estados não souberam informar o dado. Com isso, valores nulos sem indicadores nesta coluna passam a representar a não aplicabilidade da pergunta feita ao estado.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -23,17 +23,19 @@ spatial_coverage:
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2014(5)2019
+    - 2014
+    - 2019
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: five_years
+update_frequency: uncertain
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
     - entity: year
       columns:
           - ano
+    - country: br
     - entity: state
       columns:
           - sigla_uf 
@@ -66,7 +68,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Compatibilização dos dados entre os anos e criação de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta. 
+data_cleaning_description: Compatibilização dos dados entre os anos, substituição das respostas 'Sim' por resultado binário numérico, padronização por valores em branco para respostas não sabidas ou ainda não aplicáveis, criação de dicionário e de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, os valores nulos passam a representar unicamente a não aplicabilidade da pergunta.
 
 # Url do código de limpeza dos dados.
 data_cleaning_code_url: 
@@ -110,7 +112,7 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -125,7 +127,7 @@ columns:
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -245,7 +247,7 @@ columns:
       bigquery_type: int64
       description: Possui computadores em funcionamento
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -260,7 +262,7 @@ columns:
       bigquery_type: string
       description: Panorama dos computadores em funcionamento ligados a rede
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -305,7 +307,7 @@ columns:
       bigquery_type: int64
       description: Possui intranet
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -494,7 +496,7 @@ columns:
       bigquery_type: string
       description: Status da página do governo estadual na internet
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -509,7 +511,7 @@ columns:
       bigquery_type: string
       description: Endereço da página na internet
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -539,7 +541,7 @@ columns:
       bigquery_type: int64
       description: Disponibilidade na página da internet - Serviços informativos
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -554,7 +556,7 @@ columns:
       bigquery_type: int64
       description: 'Disponibilidade na página da internet - Acesso a documentos '
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -570,7 +572,7 @@ columns:
       description: Disponibilidade na página da internet - Informações gerais sobre
           licitações
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -586,7 +588,7 @@ columns:
       description: 'Disponibilidade na página da internet - Ouvidoria e serviços de
           atendimento ao cidadão '
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -633,7 +635,7 @@ columns:
       description: Disponibilidade na página da internet - Consulta a processos/acompanhamento
           de protocolos
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -648,7 +650,7 @@ columns:
       bigquery_type: int64
       description: Disponibilidade na página da internet - Delegacia eletrônica
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -664,7 +666,7 @@ columns:
       description: Disponibilidade na página da internet - Diário oficial, legislação
           estadual e finanças públicas
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -679,7 +681,7 @@ columns:
       bigquery_type: int64
       description: 'Disponibilidade na página da internet - Concurso público '
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -710,7 +712,7 @@ columns:
       description: Disponibilidade na página da internet - Emissão de certidão negativa
           de débito
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -741,7 +743,7 @@ columns:
       description: 'Disponibilidade na página da internet - Matrícula escolar na rede
           pública online '
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -757,7 +759,7 @@ columns:
       description: Disponibilidade na página da internet - Agendamento de consulta
           na rede pública de saúde
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1218,7 +1220,7 @@ columns:
       bigquery_type: int64
       description: Desenvolve programa ou ação de inclusão digital
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1233,7 +1235,7 @@ columns:
       bigquery_type: int64
       description: Parcerias para os programas e ações com o Governo federal
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1278,7 +1280,7 @@ columns:
       bigquery_type: int64
       description: Parcerias para os programas e ações com Iniciativa privada
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1294,7 +1296,7 @@ columns:
       description: Parcerias para os programas e ações com Iniciativa exclusiva do
           governo estadual
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1309,7 +1311,7 @@ columns:
       bigquery_type: int64
       description: Parcerias para os programas e ações com Outros
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1325,7 +1327,7 @@ columns:
       description: Ações implementadas que disponibiliza acesso público e gratuito
           à Internet através de centros de acesso
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1341,7 +1343,7 @@ columns:
       description: Ações implementadas de Informações e serviços de órgãos públicos
           disponibilizados em quiosque ou balcão informatizado
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1358,7 +1360,7 @@ columns:
           a m de promover o acesso à Internet e aos computadores aos indivíduos menos
           favorecidosquiosque ou balcão informatizado
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1405,7 +1407,7 @@ columns:
       description: Ações implementadas de Instalação de computadores na rede pública
           de ensino com acesso à Internet para utilização de alunos e professores
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1452,7 +1454,7 @@ columns:
       bigquery_type: int64
       description: Ações implementadas - Outras
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1467,7 +1469,7 @@ columns:
       bigquery_type: int64
       description: Disponibiliza acesso por conexão wi-fi para a população
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1482,7 +1484,7 @@ columns:
       bigquery_type: string
       description: O acesso de conexão wi-fi é do tipo gratuito e/ou cobrado
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -1497,7 +1499,7 @@ columns:
       bigquery_type: int64
       description: Conexão wi-fi atende a Capital
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1512,7 +1514,7 @@ columns:
       bigquery_type: int64
       description: Conexão wi-fi atende a Outros municípios
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1527,7 +1529,7 @@ columns:
       bigquery_type: int64
       description: 'Quantidade de municípios com conexão wi-fi '
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1543,7 +1545,7 @@ columns:
       description: 'O estado não soube informar - Quantidade de municípios com conexão
           wi-fi '
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2166,7 +2168,7 @@ columns:
       description: Legislação específica com procedimentos e providências para Lei
           de Acesso à Informação
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2182,7 +2184,7 @@ columns:
       description: Ano da lei ou decreto da Legislação específica com procedimentos
           e providências para Lei de Acesso à Informação
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2197,7 +2199,7 @@ columns:
       bigquery_type: int64
       description: 'Local de publicação sobre a LAI - Diário Oficial impresso '
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2212,7 +2214,7 @@ columns:
       bigquery_type: int64
       description: 'Local de publicação sobre a LAI - Diário Oficial na Internet '
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2229,7 +2231,7 @@ columns:
           atendimento de pedido de acesso à informação pública igual ou inferior a
           20 dias corridos
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2245,7 +2247,7 @@ columns:
       description: Legislação municipal que regulamenta a LAI - Institui procedimentos
           de classificação de informação sigilosa em âmbito municipal
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2261,7 +2263,7 @@ columns:
       description: Legislação municipal que regulamenta a LAI - Prevê autoridade de
           monitoramento para implementação da Lei de Acesso à Informação pública
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2277,7 +2279,7 @@ columns:
       description: Legislação municipal que regulamenta a LAI - Prevê órgão central
           de monitoramento das ações relativas ao acesso à informação pública
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2293,7 +2295,7 @@ columns:
       description: Legislação municipal que regulamenta a LAI - Prevê a divulgação
           de relatório de monitoramento com informações estatísticas dos pedidos
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2309,7 +2311,7 @@ columns:
       description: Legislação municipal que regulamenta a LAI - Prevê mais de uma
           instância recursal interna ao órgão ou entidade demandado
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2326,7 +2328,7 @@ columns:
           recursal autônoma e independente em relação à autoridade que proferiu a
           decisão impugnada
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2342,7 +2344,7 @@ columns:
       description: Legislação municipal que regulamenta a LAI - Estabelece procedimento
           em caso de omissão de resposta a pedidos de informação pública
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2373,7 +2375,7 @@ columns:
       description: 'Disponibiliza meio de acesso a informação pública via - Serviço
           de Informação ao Cidadão (SIC) '
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2388,7 +2390,7 @@ columns:
       bigquery_type: int64
       description: Disponibiliza meio de acesso a informação pública via - Internet
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2403,7 +2405,7 @@ columns:
       bigquery_type: int64
       description: Disponibiliza meio de acesso a informação pública via - Telefone
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2418,7 +2420,7 @@ columns:
       bigquery_type: int64
       description: Disponibiliza meio de acesso a informação pública via - Carta
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2433,7 +2435,7 @@ columns:
       bigquery_type: int64
       description: Disponibiliza meio de acesso a informação pública via - Outro
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2448,7 +2450,7 @@ columns:
       bigquery_type: int64
       description: 'Solicitações recebidas pela governo estadual com base no ano anterior '
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2464,7 +2466,7 @@ columns:
       description: 'O estado não soube informar - Solicitações recebidas pela governo
           estadual com base no ano anterior '
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2480,7 +2482,7 @@ columns:
       description: Solicitações recebidas pela governo estadual com base no ano anterior
           - Atendidas
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2496,7 +2498,7 @@ columns:
       description: O estado não soube informar - Solicitações recebidas pela governo
           estadual com base no ano anterior, atendidas
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2512,7 +2514,7 @@ columns:
       description: Solicitações recebidas pela governo estadual com base no ano anterior
           - Parcialmente atendidas
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2528,7 +2530,7 @@ columns:
       description: O estado não soube informar - Solicitações recebidas pela governo
           estadual com base no ano anterior, parcialmente atendidas
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2544,7 +2546,7 @@ columns:
       description: Solicitações recebidas pela governo estadual com base no ano anterior
           - Negadas
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2560,7 +2562,7 @@ columns:
       description: O estado não soube informar - Solicitações recebidas pela governo
           estadual com base no ano anterior, negadas
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2576,7 +2578,7 @@ columns:
       description: Solicitações recebidas pela governo estadual com base no ano anterior
           - Não conhecidas
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2592,7 +2594,7 @@ columns:
       description: O estado não soube informar - Solicitações recebidas pela governo
           estadual com base no ano anterior, não conhecidas
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2639,7 +2641,7 @@ columns:
       bigquery_type: int64
       description: Possui na página na internet - Registro das competências
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2654,7 +2656,7 @@ columns:
       bigquery_type: int64
       description: Possui na página na internet - Estrutura organizacional
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2670,7 +2672,7 @@ columns:
       description: Possui na página na internet - Endereços e telefones das unidades
           organizacionais
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2685,7 +2687,7 @@ columns:
       bigquery_type: int64
       description: Possui na página na internet - Horários de atendimento ao público
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2701,7 +2703,7 @@ columns:
       description: Possui na página na internet - Registros de quaisquer repasses
           ou transferências de recursos financeiros
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2732,7 +2734,7 @@ columns:
       description: 'Possui na página na internet - Informações concernentes a procedimentos
           licitatórios '
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2748,7 +2750,7 @@ columns:
       description: Possui na página na internet - Dados gerais para o acompanhamento
           de programas, ações, projetos e obras de órgãos e entidades
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2764,7 +2766,7 @@ columns:
       description: Possui na página na internet - Respostas às perguntas mais frequentes
           da sociedade
       temporal_coverage:
-          - (5)
+          - 2014, 2019
       covered_by_dictionary: no
       directory_column:
           dataset_id:

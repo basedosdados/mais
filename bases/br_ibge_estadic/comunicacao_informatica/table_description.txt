@@ -1,4 +1,4 @@
-A pesquisa fornece informações variadas na área de comunicação e informática a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios pelo motivo de que o estado não sabia informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta feita pelo indicador.
+A pesquisa fornece informações na área de comunicação e informática como, pedido de acesso a informação, dados digitalizados, formas de atendimento, execução orçamentária, mídias online, etc, a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios devido ao fato de que os estados não souberam informar o dado. Com isso, valores nulos sem indicadores nesta coluna passam a representar a não aplicabilidade da pergunta feita ao estado.
 
 Para saber mais acesse:
 Website: 

@@ -1,4 +1,4 @@
-A pesquisa fornece informações variadas relacionadas a recursos humanos das administrações públicas a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios pelo motivo de que o estado não sabia informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta feita pelo indicador.
+A pesquisa fornece informações variadas relacionadas a recursos humanos no que tange o quantitiativo de funcionários públicos em diferentes modalidades de contratação das administrações públicas a nível estadual. Os valores nulos na tabela correspondem ao fato de que os estados não soubeream informar o dado, com exceção das colunas correspondentes ao número de funcionarios com deficiência na administração direta e a de existência da reserva de cargo para pessoas com deficiência, que contam com a não aplicabilidade da pergunta sobre alguns estados.
 
 Para saber mais acesse:
 Website: 
