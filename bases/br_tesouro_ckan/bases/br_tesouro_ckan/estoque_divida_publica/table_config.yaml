@@ -29,7 +29,7 @@ temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: one_year
+update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
@@ -44,9 +44,9 @@ observation_level:
      - id_divida
 
 last_updated:
-    metadata:
-    data:
-    release:
+    metadata: "2022-12-01"
+    data: "2022-12-01 08:20:00"
+    release: "2022-12-01 08:20:00"
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
