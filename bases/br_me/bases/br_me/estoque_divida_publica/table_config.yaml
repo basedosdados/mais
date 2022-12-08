@@ -1,7 +1,7 @@
 
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: br_tesouro_ckan
+dataset_id: br_me
 
 table_id: estoque_divida_publica
 

@@ -1,7 +1,7 @@
 
 # Nome (slug) do conjunto no CKAN
 # Exemplos: br-ibge-populacao, br-tse-eleicoes
-name: br_tesouro_estoque_divida_publica
+name: br-me
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
@@ -10,7 +10,7 @@ title: Estoque da Dívida Pública
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 # Exemplos: br-ibge, br-tse, br-rj-gov
-organization: tesouro-nacional
+organization: br-me
 
 # Descrição do conjunto
 notes: Dados extraídos do site do tesouro nacional sobre as dívidas do governo federal
@@ -18,7 +18,9 @@ notes: Dados extraídos do site do tesouro nacional sobre as dívidas do governo
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
-groups: economia, gov-fin-pub
+groups: 
+-economia
+-gov-fin-pub
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
