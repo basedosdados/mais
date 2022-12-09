@@ -19,8 +19,8 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_tesouro_custo_transferencia.br_tesouro_custo_transferencia AS
 SELECT 
-SAFE_CAST(ano AS STRING) ano,
-SAFE_CAST(mes AS STRING) mes,
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(id_unidade_organizacional_nivel_0 AS STRING) id_unidade_organizacional_nivel_0,
 SAFE_CAST(id_unidade_organizacional_nivel_1 AS STRING) id_unidade_organizacional_nivel_1,
 SAFE_CAST(id_unidade_organizacional_nivel_2 AS STRING) id_unidade_organizacional_nivel_2,
@@ -28,5 +28,5 @@ SAFE_CAST(id_unidade_organizacional_nivel_3 AS STRING) id_unidade_organizacional
 SAFE_CAST(id_natureza_juridica AS STRING) id_natureza_juridica,
 SAFE_CAST(id_esfera_orcamentaria AS STRING) id_esfera_orcamentaria,
 SAFE_CAST(id_resultado_primario AS STRING) id_resultado_primario,
-SAFE_CAST(valor_custo_transferencia AS STRING) valor_custo_transferencia
+SAFE_CAST(valor_custo_transferencia AS FLOAT64) valor_custo_transferencia
 FROM basedosdados-dev.br_tesouro_custo_transferencia_staging.br_tesouro_custo_transferencia AS t
