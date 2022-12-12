@@ -14,6 +14,10 @@ jobs:
           python-version: 3.7
       - run: pip install -r ${{ github.workspace }}/python-package/requirements-dev.txt 
       - run: python ${{ github.workspace }}/python-package/setup.py develop
+      - run: |
+          pip install poetry
+          poetry export -r requirements.txt --output requirements.txt --without-hashes
+          pip install -r ${{ github.workspace }}/requirements.txt
       - env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
         run: mkdocs build
