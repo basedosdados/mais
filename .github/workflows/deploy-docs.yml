@@ -15,6 +15,10 @@ jobs:
           cd ${{ github.workspace }}/python-package/
           pip install -r requirements-dev.txt 
           python setup.py develop
+      - run: |
+          pip install poetry
+          poetry export -f requirements.txt --output requirements.txt --without-hashes
+          pip install -r ${{ github.workspace }}/requirements.txt
       - env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
         run: mkdocs gh-deploy --force
