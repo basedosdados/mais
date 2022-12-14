@@ -1,6 +1,6 @@
-'''
+"""
 Class for managing the files in cloud storage.
-'''
+"""
 # pylint: disable=invalid-name, too-many-arguments, undefined-loop-variable,line-too-long,broad-except,R0801
 import time
 from pathlib import Path
@@ -49,16 +49,18 @@ class Storage(Base):
                 # check if it fits rule
                 {b.split("=")[0]: b.split("=")[1] for b in partitions.split("/")}
             except IndexError as e:
-                raise Exception(f"The path {partitions} is not a valid partition") from e
+                raise Exception(
+                    f"The path {partitions} is not a valid partition"
+                ) from e
 
             return partitions + "/"
 
         raise Exception(f"Partitions format or type not accepted: {partitions}")
 
     def _build_blob_name(self, filename, mode, partitions=None):
-        '''
+        """
         Builds the blob name.
-        '''
+        """
 
         # table folder
         blob_name = f"{mode}/{self.dataset_id}/{self.table_id}/"
@@ -441,6 +443,7 @@ class Storage(Base):
         source_bucket_name="basedosdados",
         destination_bucket_name=None,
         mode="staging",
+        new_table_id=None,
     ):
         """Copies table from a source bucket to your bucket, sends request in batches.
 
@@ -456,6 +459,8 @@ class Storage(Base):
 
             mode (str): Folder of which dataset to update [raw|staging|header|auxiliary_files|architecture]
                 Folder of which dataset to update. Defaults to "staging".
+            new_table_id (str): Optional.
+                New table id to be copied to. If None, defaults to the table id initialized when instantiating the Storage object.
         """
 
         source_table_ref = list(
@@ -492,9 +497,15 @@ class Storage(Base):
                 try:
                     with self.client["storage_staging"].batch():
                         for blob in source_table:
+                            new_name = None
+                            if new_table_id:
+                                new_name = blob.name.replace(
+                                    self.table_id, new_table_id
+                                )
                             self.bucket.copy_blob(
                                 blob,
                                 destination_bucket=destination_bucket,
+                                new_name=new_name,
                             )
                     break
                 except Exception:
@@ -505,8 +516,9 @@ class Storage(Base):
                     time.sleep(5)
                     traceback.print_exc(file=sys.stderr)
         logger.success(
-            " {object} {object_id}_{mode} was {action}!",
+            " {object} {object_id}_{mode} was {action} to {new_object_id}_{mode}!",
             object_id=self.table_id,
+            new_object_id=new_table_id if new_table_id else self.table_id,
             mode=mode,
             object="Table",
             action="copied",
