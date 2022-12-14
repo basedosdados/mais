@@ -1,6 +1,6 @@
-'''
+"""
 Importing the module will automatically import the submodules.
-'''
+"""
 
 
 import sys
@@ -11,7 +11,7 @@ __version__ = version("basedosdados")
 
 sys.path.append(f"{os.getcwd()}/python-package")
 
-#pylint: disable=C0413
+# pylint: disable=C0413
 
 from basedosdados.constants import constants, config
 from basedosdados.upload.dataset import Dataset
