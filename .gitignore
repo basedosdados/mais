@@ -3,6 +3,7 @@
 .mais
 bases/pytest/*
 bases/test/
+test/
 
 # NEW repo name
 .mais
