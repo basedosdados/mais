@@ -5705,6 +5705,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 6550488
+number_rows: 3400645
 
-metadata_modified: '2022-11-18T19:14:35.465271'
+metadata_modified: '2022-12-08T21:09:29.466119'
