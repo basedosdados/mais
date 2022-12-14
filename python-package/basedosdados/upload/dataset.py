@@ -1,7 +1,7 @@
 """
 Module for manage dataset to the server.
 """
-# pylint: disable=line-too-long, fixme, invalid-name,line-too-long,unnecessary-lambda-assignment
+# pylint: disable=line-too-long, fixme, invalid-name,line-too-long
 from pathlib import Path
 from loguru import logger
 

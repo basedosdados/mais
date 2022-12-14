@@ -1,4 +1,4 @@
-''' Utilities functions for Upload sub-module'''
+""" Utilities functions for Upload sub-module"""
 # pylint: disable=invalid-name,too-many-arguments,too-many-locals,too-many-branches,too-many-statements, protected-access,line-too-long
 from typing import List
 from pathlib import Path
@@ -9,6 +9,7 @@ import pandas as pd
 
 import basedosdados as bd
 from basedosdados.exceptions import BaseDosDadosException
+
 
 def update_columns(table_obj: bd.Table, columns_config_url_or_path=None):
     """
@@ -116,9 +117,7 @@ def update_columns(table_obj: bd.Table, columns_config_url_or_path=None):
                 )
 
                 col["covered_by_dictionary"] = (
-                    "no"
-                    if covered_by_dictionary == "NULL"
-                    else covered_by_dictionary
+                    "no" if covered_by_dictionary == "NULL" else covered_by_dictionary
                 )
 
                 dataset = directory_column.split(".")[0]
@@ -130,9 +129,7 @@ def update_columns(table_obj: bd.Table, columns_config_url_or_path=None):
 
                 table = directory_column.split(".")[-1].split(":")[0]
                 col["directory_column"]["table_id"] = (
-                    col["directory_column"]["table_id"]
-                    if table == "NULL"
-                    else table
+                    col["directory_column"]["table_id"] if table == "NULL" else table
                 )
 
                 column = directory_column.split(".")[-1].split(":")[-1]
@@ -224,8 +221,8 @@ def to_partitions(data: pd.DataFrame, partition_columns: List[str], savepath: st
         raise BaseException("Data need to be a pandas DataFrame")
 
 
-def break_file(filepath: str, columns: list, chunksize: int = 1000000)-> None:
-    '''
+def break_file(filepath: str, columns: list, chunksize: int = 1000000) -> None:
+    """
     Break a file into smaller files, given a list of columns to be used as a key.
     Args:
         filepath (str, pathlib.PosixPath): file path to be broken.
@@ -233,14 +230,16 @@ def break_file(filepath: str, columns: list, chunksize: int = 1000000)-> None:
         chunksize (int): number of rows to be read at a time.
     Returns:
         None
-    '''
+    """
     reader = pd.read_csv(filepath, chunksize=chunksize, usecols=columns)
     for i, chunk in enumerate(reader):
         folder = os.path.dirname(filepath)
         filename = os.path.basename(filepath)
-        subfolder = os.path.join(folder, filename.split('.')[0])
+        subfolder = os.path.join(folder, filename.split(".")[0])
         # create subfolder
         if not os.path.exists(subfolder):
             os.makedirs(subfolder)
         # save chunk
-        chunk.to_csv(os.path.join(subfolder, f'{filename.split(".")[0]}_{i}.csv'), index=False)
+        chunk.to_csv(
+            os.path.join(subfolder, f'{filename.split(".")[0]}_{i}.csv'), index=False
+        )

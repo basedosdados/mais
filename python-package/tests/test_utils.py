@@ -2,15 +2,12 @@
 Tests for the upload utilities.
 """
 # pylint: disable=invalid-name
-from pathlib import Path
 import shutil
 import os
 from glob import glob
 
-import pytest
 import pandas as pd
 
-import basedosdados as bd
 from basedosdados.upload.utils import update_columns, to_partitions, break_file
 
 
@@ -25,7 +22,12 @@ def test_update_columns(sample_data, testdir, table):
     Test the update_columns utility.
     """
     # table = bd.Table(dataset_id=DATASET_ID, table_id=TABLE_ID, metadata_path=testdir)
-    table.create(sample_data, if_table_exists='replace', if_table_config_exists='replace', if_storage_data_exists='replace')
+    table.create(
+        sample_data,
+        if_table_exists="replace",
+        if_table_config_exists="replace",
+        if_storage_data_exists="replace",
+    )
 
     table_config_path = testdir / DATASET_ID / TABLE_ID / "table_config.yaml"
     last_modified = table_config_path.stat().st_mtime
@@ -50,11 +52,13 @@ def test_to_partitions(sample_data, testdir):
     os.makedirs(testdir / "municipio_partitioned", exist_ok=True)
 
     df = pd.read_csv(sample_data / "municipio.csv")
-    to_partitions(df, ['ano'], testdir / "municipio_partitioned")
+    to_partitions(df, ["ano"], testdir / "municipio_partitioned")
 
     # assert if the files were created from 2002 to 2011
     for i in range(2002, 2012):
-        assert os.path.exists(testdir / "municipio_partitioned" / f"ano={i}" / "data.csv")
+        assert os.path.exists(
+            testdir / "municipio_partitioned" / f"ano={i}" / "data.csv"
+        )
 
 
 def test_break_file(sample_data, testdir):
@@ -66,21 +70,27 @@ def test_break_file(sample_data, testdir):
     shutil.copy(sample_data / "municipio.csv", testdir / "municipio_files")
     # get path as string
     path = str(testdir / "municipio_files" / "municipio.csv")
-    break_file(filepath = path, columns = ['ano','id_municipio','pib','impostos_liquidos','va','va_agropecuaria'], chunksize=100)
+    break_file(
+        filepath=path,
+        columns=[
+            "ano",
+            "id_municipio",
+            "pib",
+            "impostos_liquidos",
+            "va",
+            "va_agropecuaria",
+        ],
+        chunksize=100,
+    )
 
     output_path = str(testdir / "municipio_files" / "municipio")
 
-    files = glob(output_path+'*.csv')
+    files = glob(output_path + "*.csv")
 
     # check if the summed rows number of the files is equal to the original file
-    assert sum([len(pd.read_csv(file)) for file in files]) == len(pd.read_csv(sample_data / "municipio.csv"))
+    assert sum([len(pd.read_csv(file)) for file in files]) == len(
+        pd.read_csv(sample_data / "municipio.csv")
+    )
 
     # remove municipio folder
     shutil.rmtree(sample_data / "municipio")
-
-
-
-
-
-
-    
