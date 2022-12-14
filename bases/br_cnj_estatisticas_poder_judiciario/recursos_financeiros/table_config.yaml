@@ -11,7 +11,7 @@ title: Recursos Financeiros
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description:
+description: Estatísticas referentes aos recursos financeiros do poder judiciário brasileiro.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -32,13 +32,16 @@ update_frequency: one_year
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
+    - entity: year
+      columns:
+          - ano
     - entity: other
       columns:
-          - id_tribunal
+          - sigla_tribunal
 
 last_updated:
-    metadata:
-    data:
+    metadata: '2022-12-14'
+    data: 2022-12-14 10:00:00'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
