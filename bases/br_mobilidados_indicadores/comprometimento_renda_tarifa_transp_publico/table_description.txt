@@ -1,9 +1,8 @@
-Comprometimento da renda com a tarifa de transporte público.
-
+Comprometimento da renda com a tarifa de transporte público
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-mobilidados-indicadores
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,54 +10,41 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Crislane A. Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_mobilidados_indicadores/code
+Código: 
 Website: https://github.com/crislanealves
-Email: crislanealves@protonmail.comTratado por
+Email: crislanealves@protonmail.com
+Tratado por
 -----------
 Nome: Crislane A. Souza
+Código: 
 Website: https://github.com/crislanealves
 Email: crislanealves@protonmail.com
 
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-- None
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- municipio
-- ano
 
-Colunas identificando linhas unicamente
--------------------
-- id_municipio
-- ano
+
+
 
 Cobertura Temporal
 ------------------
-- 2005
-- 2006
-- 2007
-- 2008
-- 2009
-- 2010
-- 2011
-- 2012
-- 2013
-- 2014
-- 2015
-- 2016
-- 2017
+- 2005(1)2017
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- sa.br
+
+
+
 
 Tratamento
 ----------
-- Unificação das tabelas: tarifa de transporte nas capitais; comprometimento do salário mínimo; e, comprometimento da renda para trabalhadoras domésticas negras.
+Unificação das tabelas: tarifa de transporte nas capitais; comprometimento do salário mínimo; e, comprometimento da renda para trabalhadoras domésticas negras.
+
+
 
 Frequencia de Atualização
 -------------------------
-1 ano
-
-
+one_year

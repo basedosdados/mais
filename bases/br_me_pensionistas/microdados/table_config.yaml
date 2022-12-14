@@ -12,30 +12,36 @@ title: 'Gestão de Pessoas (Executivo Federal) - Pensionistas'
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: As informações disponibilizadas referem-se ao pagamento (rendimento bruto) recebido por pensionistas de servidores instituidores de pensão, constantes no Sistema Integrado de Administração de Pessoal (Siape). Cabe ressaltar que o Ministério da Economia é responsável pelas informações dos servidores instituidores de pensão e pensionistas do Poder Executivo Federal, não incluindo dados dos poderes Judiciário e Legislativo. Também não constam nos arquivos, dados relativos aos servidores do Banco Central do Brasil (1), Ministério da Defesa (2) (com exceção de militares de ex-territórios ou que assumiram cargos civis no Poder Executivo Federal) e Governo do Distrito Federal (3) (Fundo Constitucional), responsáveis pela publicação dos seus dados em portais próprios. Em relação à Agência Brasileira de Inteligência (Abin), os dados funcionais de pessoal são protegidos pela legislação vigente Lei nº 9883 (4) e Portaria Conjunta n° 5, de 05/08/2015/MPOG (5). Destacamos que todas as pensões acima do teto do funcionalismo público estão sujeitas ao abate-teto. Aos pensionistas com mais de um benefício, aplica-se o abate-teto em cima da soma das pensões, considerando os valores proporcionais a cada uma.    
-# A máxima unidade espacial que a tabela cobre.
+description: As informações disponibilizadas referem-se ao pagamento (rendimento bruto) recebido por pensionistas de servidores instituidores de pensão, constantes no Sistema Integrado de Administração de Pessoal (Siape). Cabe ressaltar que o Ministério da Economia é responsável pelas informações dos servidores instituidores de pensão e pensionistas do Poder Executivo Federal, não incluindo dados dos poderes Judiciário e Legislativo. Também não constam nos arquivos, dados relativos aos servidores do Banco Central do Brasil (1), Ministério da Defesa (2) (com exceção de militares de ex-territórios ou que assumiram cargos civis no Poder Executivo Federal) e Governo do Distrito Federal (3) (Fundo Constitucional), responsáveis pela publicação dos seus dados em portais próprios. Em relação à Agência Brasileira de Inteligência (Abin), os dados funcionais de pessoal são protegidos pela legislação vigente Lei nº 9883 (4) e Portaria Conjunta n° 5, de 05/08/2015/MPOG (5). Destacamos que todas as pensões acima do teto do funcionalismo público estão sujeitas ao abate-teto. Aos pensionistas com mais de um benefício, aplica-se o abate-teto em cima da soma das pensões, considerando os valores proporcionais a cada uma.
+
+# As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - continent: south_america
-#     country: br
+#   - sa.br
 spatial_coverage:
-  - sa.br
+    - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 1994(1)2021
-
+    - 1994(1)2001
+    - 2003(1)2021
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: one_year
+update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
-observation_level:
-    entity: year
-    columns:
+observation_level: 
+    - entity: year
+      columns:
         - ano
+    - entity: month
+      columns:
+        - mes
+    - entity: person
+      columns:
+        - cpf_servidor
 
 last_updated:
     metadata: '2022-06-10'
@@ -44,25 +50,25 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.1.0
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Gustavo Alcântara
-    email: gustavo.alcantara@basedosdados.org
-    github_user: gustavoalcantara
-    ckan_user: 
-    website: 
+    name: Ricardo Dahis
+    email: rdahis@basedosdados.org
+    github_user:
+    ckan_user:
+    website: www.ricardodahis.com
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-data_cleaned_by: 
-    name: Ricardo Dahis 
+data_cleaned_by:
+    name: Ricardo Dahis
     email: rdahis@basedosdados.org
-    github_user: rdahis
+    github_user:
     ckan_user:
-    website: https://www.ricardodahis.com/
+    website: www.ricardodahis.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: Transformamos valores de CPF e datas de "00000000" para vazio
@@ -72,14 +78,14 @@ data_cleaning_code_url: https://github.com/basedosdados/mais/blob/master/bases/b
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
-    name:
-    organization_id:
+    name: 
+    organization_id: 
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
 
 # Url dos arquivos auxiliares no GCP Storage.
-auxiliary_files_url:
+auxiliary_files_url: 
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
@@ -95,6 +101,8 @@ project_id_staging: basedosdados-dev
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
 partitions:
+    - ano
+    - mes
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -103,19 +111,19 @@ partitions:
 # preencherá automaticamente as colunas.
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
-# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition: false true como True.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
       bigquery_type: int64
       description: Ano
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
-      directory_column: 
+      covered_by_dictionary: no
+      directory_column:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
-      measurement_unit: year
+      measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -123,39 +131,24 @@ columns:
     - name: mes
       bigquery_type: int64
       description: Mês
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
-      directory_column: 
-          dataset_id: br_bd_diretorios_data_tempo 
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
           table_id: mes
           column_name: mes
-      measurement_unit: month
+      measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: true
     - name: nome_servidor
       bigquery_type: string
-      description: Nome do Servidor Instituidor
-      temporal_coverage: 
+      description: Nome do servidor instituidor
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: 
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false   
-    - name: cpf_servidor
-      bigquery_type: string
-      description: Cpf do Servidor Instituidor
-      temporal_coverage: 
-        - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -164,13 +157,28 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false 
+      is_partition: false
+    - name: cpf_servidor
+      bigquery_type: string
+      description: CPF do servidor instituidor
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: data_nascimento_servidor
       bigquery_type: date
       description: Data de nascimento do servidor instituidor
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -179,13 +187,13 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false 
+      is_partition: false
     - name: data_falecimento_servidor
       bigquery_type: date
       description: Data de falecimento do servidor instituidor
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -194,13 +202,13 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false 
+      is_partition: false
     - name: matricula_servidor
       bigquery_type: string
       description: Matrícula do servidor instituidor
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -212,10 +220,10 @@ columns:
       is_partition: false
     - name: nome_orgao
       bigquery_type: string
-      description: Nome do Órgão
-      temporal_coverage: 
+      description: Nome do órgão
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -227,10 +235,10 @@ columns:
       is_partition: false
     - name: sigla_orgao
       bigquery_type: string
-      description: Sigla do Órgão
-      temporal_coverage: 
+      description: Sigla do órgão
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -243,9 +251,9 @@ columns:
     - name: codigo_orgao_superior
       bigquery_type: string
       description: Código do órgão superior
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -258,9 +266,9 @@ columns:
     - name: cargo_servidor
       bigquery_type: string
       description: Cargo do servidor instituidor
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -273,9 +281,9 @@ columns:
     - name: escolaridade_cargo
       bigquery_type: string
       description: Escolaridade do cargo
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -286,11 +294,11 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: classe_servidor
-      bigquery_type: int64
+      bigquery_type: string
       description: Classe do servidor instituidor
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -303,9 +311,9 @@ columns:
     - name: padrao_servidor
       bigquery_type: string
       description: Padrão do servidor instituidor
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -317,10 +325,10 @@ columns:
       is_partition: false
     - name: referencia_servidor
       bigquery_type: string
-      description: Referencia do servidor instituidor
-      temporal_coverage: 
+      description: Referência do servidor instituidor
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -333,14 +341,14 @@ columns:
     - name: nivel_servidor
       bigquery_type: string
       description: Nível do servidor instituidor
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 
+      measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -348,9 +356,9 @@ columns:
     - name: ocorrencia_isp_servidor
       bigquery_type: string
       description: Ocorrência de ingresso no setor público do servidor instituidor
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -362,10 +370,10 @@ columns:
       is_partition: false
     - name: data_ocorrencia_isp_servidor
       bigquery_type: date
-      description: Data de ocorrência de ingresso no setor público do servidor instituidor 
-      temporal_coverage: 
+      description: Data de ocorrência de ingresso no setor público do servidor instituidor
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -377,10 +385,10 @@ columns:
       is_partition: false
     - name: nome_beneficiario
       bigquery_type: string
-      description: Nome do beneficiário(a)
-      temporal_coverage: 
+      description: Nome do(a) beneficiário(a)
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -393,9 +401,9 @@ columns:
     - name: cpf_beneficiario
       bigquery_type: string
       description: CPF do(a) beneficiário(a)
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -408,9 +416,9 @@ columns:
     - name: data_nascimento_beneficiario
       bigquery_type: date
       description: Data de nascimento do(a) beneficiário(a)
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -423,9 +431,9 @@ columns:
     - name: sigla_uf_upag_vinculacao
       bigquery_type: string
       description: Sigla da unidade da federação UPAG de vinculação
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -434,13 +442,13 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false false
+      is_partition: false
     - name: tipo_beneficiario
       bigquery_type: string
       description: Tipo do(a) beneficiário(a)
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -449,13 +457,13 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false true  
+      is_partition: false
     - name: tipo_pensao
       bigquery_type: string
       description: Tipo da pensão
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -464,28 +472,28 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false true  
+      is_partition: false
     - name: natureza_pensao
       bigquery_type: string
       description: Natureza da pensão
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: 
+      measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false true  
+      is_partition: false
     - name: data_inicio_beneficio
       bigquery_type: date
       description: Data de início do benefício
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -494,13 +502,13 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false true  
+      is_partition: false
     - name: data_fim_beneficio
       bigquery_type: date
       description: Data do fim do benefício
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -509,35 +517,53 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false true
+      is_partition: false
     - name: rendimento_bruto
       bigquery_type: float64
       description: Rendimento bruto
-      temporal_coverage: 
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: BRL
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false true
+      is_partition: false
     - name: rendimento_liquido
       bigquery_type: float64
-      description: Rendimento liquido
-      temporal_coverage: 
+      description: Rendimento líquido
+      temporal_coverage:
         - (1)
-      covered_by_dictionary: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: BRL
+      measurement_unit: brl
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false true
-metadata_modified: '2022-02-14T01:25:04.248378'
+      is_partition: false
+    - name: pagamento_suspenso
+      bigquery_type: string
+      description: Pagamento suspenso
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+      
+number_rows:
+
+metadata_modified: '2022-07-28T22:59:24.821947'
