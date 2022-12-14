@@ -1,9 +1,9 @@
 
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: br_me
+dataset_id: br_me_estoque_divida_publica
 
-table_id: estoque_divida_publica
+table_id: microdados
 
 # Título da tabela.
 title: Estoque da Dívida Pública
@@ -12,20 +12,19 @@ title: Estoque da Dívida Pública
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description:
-Dados sobre títulos públicos e contratos que compõe a dívida pública federal, com base nos dados disponibilizados pelo Tesouro Nacional através da CKAN.
+description: Dados sobre títulos públicos e contratos que compõe a dívida pública federal, com base nos dados disponibilizados pelo Tesouro Nacional através da CKAN.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
 #   - sa.br
 spatial_coverage:
-    -sa.br
+  - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage: 
-    -2017(1)2022
+  - 2017-09(1)2022-10
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -63,7 +62,7 @@ published_by:
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-data_cleaned_by: andrealvguim
+data_cleaned_by: 
     name: André Alvarenga Guimarães
     email: andre.alvguim@gmail.com
     github_user: andrealvguim
@@ -71,12 +70,10 @@ data_cleaned_by: andrealvguim
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: 
-    -Substituição dos "," por "." nas colunas de valor e quantidade de estoque
-    -Formatação das colunas da data de vencimento e tipo da dívida para o padrão da BD
+data_cleaning_description: Substituição dos "," por "." nas colunas de valor e quantidade de estoque; Formatação das colunas da data de vencimento e tipo da dívida para o padrão da BD
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_tesouro_estoque_divida_publica/code
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_estoque_divida_publica/microdados/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -121,14 +118,14 @@ columns:
       temporal_coverage: 
         - (1)
       covered_by_dictionary: no
-      directory_column: br_bd_diretorios_data_tempo.ano:ano
-          dataset_id: 
-          table_id: 
-          column_name: 
+      directory_column: 
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
       measurement_unit: year
       has_sensitive_data: no
       observations: 
-      is_in_staging: yes
+      is_in_staging: true
       is_partition: true
     - name: mes
       bigquery_type: int64
@@ -136,14 +133,14 @@ columns:
       temporal_coverage: 
         - (1)
       covered_by_dictionary: no
-      directory_column: br_bd_diretorios_data_tempo.mes:mes
-          dataset_id: 
-          table_id: 
-          column_name: 
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
       measurement_unit: month
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
+      is_in_staging: true
       is_partition: true
     - name: id_divida
       bigquery_type: string
@@ -158,7 +155,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
+      is_in_staging: true
       is_partition: false
     - name: vencimento_divida
       bigquery_type: date
@@ -166,14 +163,14 @@ columns:
       temporal_coverage: 
         - (1)
       covered_by_dictionary: no
-      directory_column: br_bd_diretorio_data_tempo.data:data
-          dataset_id: 
-          table_id:
-          column_name:
+      directory_column: 
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: data
+          column_name: data
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
+      is_in_staging: true
       is_partition: false
     - name: tipo_divida
       bigquery_type: string
@@ -188,7 +185,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
+      is_in_staging: true
       is_partition: false
     - name: classe_carteira
       bigquery_type: string
@@ -203,7 +200,7 @@ columns:
       measurement_unit: brl
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
+      is_in_staging: true
       is_partition: false
     - name: valor_estoque
       bigquery_type: float64
@@ -218,7 +215,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
+      is_in_staging: true
       is_partition: false
     - name: quantidade_estoque
       bigquery_type: int64
@@ -233,7 +230,7 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
+      is_in_staging: true
       is_partition: false
 
 number_rows: 124419

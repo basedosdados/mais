@@ -45,6 +45,8 @@ df.insert(0, 'ano', df.pop('ano'))
 df.insert(1, 'mes', df.pop('mes'))
 df["tipo_divida"] = df["tipo_divida"].str.capitalize()
 df = df[["id_divida","vencimento_divida","tipo_divida","classe_carteira","valor_estoque","quantidade_estoque","ano","mes"]]
+df["quantidade_estoque"] = df["quantidade_estoque"].astype(float)
+df["quantidade_estoque"] = df["quantidade_estoque"].astype(int)
 
 for ano in [*range(2017, 2023)]:
   for mes in [*range(1, 13)]:

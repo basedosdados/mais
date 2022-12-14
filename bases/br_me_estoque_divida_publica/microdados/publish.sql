@@ -17,7 +17,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_tesouro_estoque_divida_publica.br_tesouro_estoque_divida_publica AS
+CREATE VIEW basedosdados-dev.br_me_estoque_divida_publica.microdados AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
@@ -27,4 +27,4 @@ SAFE_CAST(tipo_divida AS STRING) tipo_divida,
 SAFE_CAST(classe_carteira AS STRING) classe_carteira,
 SAFE_CAST(valor_estoque AS FLOAT64) valor_estoque,
 SAFE_CAST(quantidade_estoque AS INT64) quantidade_estoque
-FROM basedosdados-dev.br_tesouro_estoque_divida_publica_staging.br_tesouro_estoque_divida_publica AS t
+FROM basedosdados-dev.br_me_estoque_divida_publica_staging.microdados AS t
