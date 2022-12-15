@@ -1,0 +1,101 @@
+/*
+Query para publicar a tabela.
+
+Esse é o lugar para:
+    - modificar nomes, ordem e tipos de colunas
+    - dar join com outras tabelas
+    - criar colunas extras (e.g. logs, proporções, etc.)
+
+Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
+
+# Além disso, sinta-se à vontade para alterar alguns nomes obscuros
+# para algo um pouco mais explícito.
+
+TIPOS:
+    - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
+    - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
+    - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
+*/
+
+CREATE VIEW basedosdados-dev.br_cnj_estatisticas_poder_judiciario.recursos_financeiros AS
+SELECT 
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(ramo_justica AS STRING) ramo_justica,
+SAFE_CAST(id_tribunal AS STRING) id_tribunal,
+SAFE_CAST(sigla_tribunal AS STRING) sigla_tribunal,
+SAFE_CAST(despesa_beneficios AS FLOAT64) despesa_beneficios,
+SAFE_CAST(despesa_beneficios_quadro_ativo AS FLOAT64) despesa_beneficios_quadro_ativo,
+SAFE_CAST(despesa_beneficios_quadro_ativo_segundo_grau AS FLOAT64) despesa_beneficios_quadro_ativo_segundo_grau,
+SAFE_CAST(despesa_beneficios_quadro_ativo_adm AS FLOAT64) despesa_beneficios_quadro_ativo_adm,
+SAFE_CAST(despesa_beneficios_quadro_ativo_primeiro_grau AS FLOAT64) despesa_beneficios_quadro_ativo_primeiro_grau,
+SAFE_CAST(despesa_beneficios_quadro_inativo AS FLOAT64) despesa_beneficios_quadro_inativo,
+SAFE_CAST(despesa_cargos_comissao AS FLOAT64) despesa_cargos_comissao,
+SAFE_CAST(despesa_cargos_comissao_segundo_grau AS FLOAT64) despesa_cargos_comissao_segundo_grau,
+SAFE_CAST(despesa_cargos_comissao_adm AS FLOAT64) despesa_cargos_comissao_adm,
+SAFE_CAST(despesa_cargos_comissao_primeiro_grau AS FLOAT64) despesa_cargos_comissao_primeiro_grau,
+SAFE_CAST(saldo_depositos_judiciais AS FLOAT64) saldo_depositos_judiciais,
+SAFE_CAST(despesa_estagiarios AS FLOAT64) despesa_estagiarios,
+SAFE_CAST(despesa_funcao_confianca AS FLOAT64) despesa_funcao_confianca,
+SAFE_CAST(despesa_funcao_confianca_primeiro_grau AS FLOAT64) despesa_funcao_confianca_primeiro_grau,
+SAFE_CAST(despesa_funcao_confianca_segundo_grau AS FLOAT64) despesa_funcao_confianca_segundo_grau,
+SAFE_CAST(despesa_funcao_confianca_adm AS FLOAT64) despesa_funcao_confianca_adm,
+SAFE_CAST(despesa_aquisicao_ti_comunicacao AS FLOAT64) despesa_aquisicao_ti_comunicacao,
+SAFE_CAST(despesa_custeio_ti_comunicacao AS FLOAT64) despesa_custeio_ti_comunicacao,
+SAFE_CAST(despesa_outras_idenizatorias_indiretas_rh AS FLOAT64) despesa_outras_idenizatorias_indiretas_rh,
+SAFE_CAST(despesa_outras_idenizatorias_indiretas_rh_segundo_grau AS FLOAT64) despesa_outras_idenizatorias_indiretas_rh_segundo_grau,
+SAFE_CAST(despesa_outras_idenizatorias_indiretas_rh_adm AS FLOAT64) despesa_outras_idenizatorias_indiretas_rh_adm,
+SAFE_CAST(despesa_outras_idenizatorias_indiretas_rh_primeiro_grau AS FLOAT64) despesa_outras_idenizatorias_indiretas_rh_primeiro_grau,
+SAFE_CAST(despesa_capital AS FLOAT64) despesa_capital,
+SAFE_CAST(despesa_rh_magistrados AS FLOAT64) despesa_rh_magistrados,
+SAFE_CAST(despesa_projetos_construcao_obras AS FLOAT64) despesa_projetos_construcao_obras,
+SAFE_CAST(despesa_pessoal_encargos AS FLOAT64) despesa_pessoal_encargos,
+SAFE_CAST(despesa_pessoal_encargos_quadro_ativo AS FLOAT64) despesa_pessoal_encargos_quadro_ativo,
+SAFE_CAST(despesa_pessoal_encargos_quadro_ativo_primeiro_grau AS FLOAT64) despesa_pessoal_encargos_quadro_ativo_primeiro_grau,
+SAFE_CAST(despesa_pessoal_encargos_quadro_ativo_segundo_grau AS FLOAT64) despesa_pessoal_encargos_quadro_ativo_segundo_grau,
+SAFE_CAST(despesa_pessoal_encargos_quadro_ativo_adm AS FLOAT64) despesa_pessoal_encargos_quadro_ativo_adm,
+SAFE_CAST(despesa_pessoal_encargos_quadro_inativo AS FLOAT64) despesa_pessoal_encargos_quadro_inativo,
+SAFE_CAST(despesa_total_justica_estadual AS FLOAT64) despesa_total_justica_estadual,
+SAFE_CAST(despesa_rh AS FLOAT64) despesa_rh,
+SAFE_CAST(despesa_rh_servidores AS FLOAT64) despesa_rh_servidores,
+SAFE_CAST(despesa_terceirizados AS FLOAT64) despesa_terceirizados,
+SAFE_CAST(execucao_orcamentaria_despesa_pessoal_encargos AS FLOAT64) execucao_orcamentaria_despesa_pessoal_encargos,
+SAFE_CAST(execucao_orcamentaria_despesa_capital AS FLOAT64) execucao_orcamentaria_despesa_capital,
+SAFE_CAST(execucao_orcamentaria_outras_despesa_correntes AS FLOAT64) execucao_orcamentaria_outras_despesa_correntes,
+SAFE_CAST(despesa_total_pib AS FLOAT64) despesa_total_pib,
+SAFE_CAST(despesa_media_magistrado AS FLOAT64) despesa_media_magistrado,
+SAFE_CAST(despesa_media_servidor AS FLOAT64) despesa_media_servidor,
+SAFE_CAST(despesa_media_terceirizado AS FLOAT64) despesa_media_terceirizado,
+SAFE_CAST(despesa_media_estagiario AS FLOAT64) despesa_media_estagiario,
+SAFE_CAST(proporcao_despesa_total_dp AS FLOAT64) proporcao_despesa_total_dp,
+SAFE_CAST(proporcao_despesa_rh_dtj AS FLOAT64) proporcao_despesa_rh_dtj,
+SAFE_CAST(proporcao_despesa_bens_servicos_capital_dtj AS FLOAT64) proporcao_despesa_bens_servicos_capital_dtj,
+SAFE_CAST(proporcao_despesa_pessoal_encargos_quadro_permanente_dtj AS FLOAT64) proporcao_despesa_pessoal_encargos_quadro_permanente_dtj,
+SAFE_CAST(proporcao_despesa_pessoal_ativo_encargos_dtj AS FLOAT64) proporcao_despesa_pessoal_ativo_encargos_dtj,
+SAFE_CAST(proporcao_despesa_pessoal_inativo_pensao_dtj AS FLOAT64) proporcao_despesa_pessoal_inativo_pensao_dtj,
+SAFE_CAST(proporcao_despesa_custeio_capital_dtj AS FLOAT64) proporcao_despesa_custeio_capital_dtj,
+SAFE_CAST(despesa_total_justica_pc AS FLOAT64) despesa_total_justica_pc,
+SAFE_CAST(proporcao_despesa_pleitos_eleitorais_dt AS FLOAT64) proporcao_despesa_pleitos_eleitorais_dt,
+SAFE_CAST(despesa_pleito_eleitoral_eleitor AS FLOAT64) despesa_pleito_eleitoral_eleitor,
+SAFE_CAST(gastos_totais AS FLOAT64) gastos_totais,
+SAFE_CAST(proporcao_arrecadacao_custas_emolumentos_dtj AS FLOAT64) proporcao_arrecadacao_custas_emolumentos_dtj,
+SAFE_CAST(proporcao_arrecadacao_receitas_execucao_fiscal_dtj AS FLOAT64) proporcao_arrecadacao_receitas_execucao_fiscal_dtj,
+SAFE_CAST(proporcao_valores_pagos_jurisdicionados_dtj AS FLOAT64) proporcao_valores_pagos_jurisdicionados_dtj,
+SAFE_CAST(proporcao_saldo_depositos_judiciais_pendentes_dtj AS FLOAT64) proporcao_saldo_depositos_judiciais_pendentes_dtj,
+SAFE_CAST(despesa_ti_comunicacao_relacao_dtj AS FLOAT64) despesa_ti_comunicacao_relacao_dtj,
+SAFE_CAST(magistrados_inativos_instituidores_pensao AS INT64) magistrados_inativos_instituidores_pensao,
+SAFE_CAST(cargos_magistrados_providos AS INT64) cargos_magistrados_providos,
+SAFE_CAST(despesa_outras_correntes AS FLOAT64) despesa_outras_correntes,
+SAFE_CAST(despesa_outras_correntes_capital AS FLOAT64) despesa_outras_correntes_capital,
+SAFE_CAST(orcamento_despesa_pessoal_encargos AS FLOAT64) orcamento_despesa_pessoal_encargos,
+SAFE_CAST(orcamento_despesa_capital AS FLOAT64) orcamento_despesa_capital,
+SAFE_CAST(orcamento_despesa_outras_correntes AS FLOAT64) orcamento_despesa_outras_correntes,
+SAFE_CAST(recolhimentos_diversos AS FLOAT64) recolhimentos_diversos,
+SAFE_CAST(receita_corrente_execucoes_fiscais AS FLOAT64) receita_corrente_execucoes_fiscais,
+SAFE_CAST(quantidade_servidores AS INT64) quantidade_servidores,
+SAFE_CAST(quantidade_servidores_inativos_instituidores_pensao AS INT64) quantidade_servidores_inativos_instituidores_pensao,
+SAFE_CAST(quantidade_estagiarios AS INT64) quantidade_estagiarios,
+SAFE_CAST(quantidade_terceirizados AS INT64) quantidade_terceirizados,
+SAFE_CAST(quantidade_pessoal_saiu_cessao_requisicao AS INT64) quantidade_pessoal_saiu_cessao_requisicao,
+SAFE_CAST(valores_pagos_jurisdicionados AS FLOAT64) valores_pagos_jurisdicionados
+FROM basedosdados-dev.br_cnj_estatisticas_poder_judiciario_staging.recursos_financeiros AS t
