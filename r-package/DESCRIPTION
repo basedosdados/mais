@@ -10,7 +10,7 @@ Description: An R interface to the 'Base dos Dados' API <https:basedosdados.gith
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Imports: 
     purrr (>= 0.3.4),
     dplyr (>= 1.0.6),
@@ -27,7 +27,7 @@ Imports:
     rlang (>= 0.4.0),
     writexl (>= 1.4.0),
     fs (>= 1.5.0),
-    dbplyr (>= 2.1.1),
+    dbplyr (>= 2.1.0),
     scales (>= 1.1.1),
     DBI (>= 1.1.1),
     typed (>= 0.0.1),

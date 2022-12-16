@@ -1,4 +1,3 @@
-#' @title Search for a dataset
 #' @param search_term keyword for search
 #'
 #' @return A tibble with search results
