@@ -1,0 +1,386 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: world_gsps_consortium_gsps
+
+table_id: global_indicators
+
+# Título da tabela.
+title: Global Indicators
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: An international research initiative to better understand how public services work and to help governments manage public servants
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+  - world
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage: 
+  - 2010(2)2016
+  - 2017(1)2019 
+  - 2021
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: uncertain
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level: 
+  - entity: year
+    columns:
+      - year
+  - entity: country
+    columns:
+      - country
+  - entity: other
+    columns:
+      - indicator
+
+last_updated:
+    metadata: '2022-11-30'
+    data: '2022-11-30 20:30:15'
+    release: '2022-01-01 20:30:16'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Laura Amaral
+    email: laura.amaral@basedosdados.org
+    github_user: laura-l-amaral
+    ckan_user: laura-amaral
+    website: ''
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Patrick Teixeira
+    email: patrick.tx@hotmail.com.br
+    github_user: tricktx
+    ckan_user: 
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: rename and organize columns and replace in the harmonize column
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_gsps_consortium_gsps/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: year
+      bigquery_type: int64
+      description: Year
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: country
+      bigquery_type: string
+      description: Country
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_mundo
+          table_id: pais
+          column_name: nome_ingles
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: institutions_number
+      bigquery_type: int64
+      description: Number of institutions
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: respondents
+      bigquery_type: int64
+      description: Respondents
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: response_rate
+      bigquery_type: string
+      description: Percentage response rate
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: section_org
+      bigquery_type: string
+      description: Organization section
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: topic
+      bigquery_type: string
+      description: Question topic
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: indicator
+      bigquery_type: string
+      description: Indicator that will be measured
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: group
+      bigquery_type: string
+      description: Group addressed in the research
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: category
+      bigquery_type: string
+      description: Category of the analyzed group
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: mode
+      bigquery_type: string
+      description: How the search was done
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: question_text
+      bigquery_type: string
+      description: The question in text form
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: harmonize
+      bigquery_type: string
+      description: Institution's assessment method
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: scale
+      bigquery_type: string
+      description: Scale
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: mean
+      bigquery_type: float64
+      description: Average value
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: lower_ci
+      bigquery_type: float64
+      description: Lowest grade
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: upper_ci
+      bigquery_type: float64
+      description: Highest grade
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: source
+      bigquery_type: string
+      description: Website link
+      temporal_coverage:
+          - 2010(2)2016, 2017(1)2019, 2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 152275
+
+metadata_modified:
