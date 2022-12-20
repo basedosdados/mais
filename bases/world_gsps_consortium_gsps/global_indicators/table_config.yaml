@@ -36,6 +36,12 @@ observation_level:
   - entity: year
     columns:
       - year
+  - entity: country
+    columns:
+      - country
+  - entity: other
+    columns:
+      - indicator
 
 last_updated:
     metadata: '2022-11-30'
