@@ -73,7 +73,7 @@ data_cleaned_by:
 data_cleaning_description: rename and organize columns and replace in the harmonize column
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url: 
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_gsps_consortium_gsps/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
