@@ -19,7 +19,8 @@ notes: The Global Survey of Public Servants Consortium has collected surveys of 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
-groups: gov-fin-pub
+groups: 
+  - gov-fin-pub
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
