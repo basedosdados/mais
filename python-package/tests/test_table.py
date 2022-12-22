@@ -494,8 +494,8 @@ def test_create_if_force_columns_true(testdir):
         if_table_config_exists="replace",
         force_columns=True,
     )
-    
-    assert tb.table_config['columns'][0]['description']==None
+
+    assert tb.table_config['columns'][0]['description'] is None
 
 
 def test_create_if_force_columns_false(testdir):
@@ -519,7 +519,7 @@ def test_create_if_force_columns_false(testdir):
         if_table_config_exists="replace",
         force_columns=False,
     )
-    
+
     assert tb.table_config['columns'][0]['description']=='Nome'
 
 
