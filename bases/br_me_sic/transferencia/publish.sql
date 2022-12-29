@@ -17,7 +17,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_tesouro_custo_transferencia.br_tesouro_custo_transferencia AS
+CREATE VIEW basedosdados-dev.br_me_sic.transferencia AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
@@ -29,4 +29,4 @@ SAFE_CAST(id_natureza_juridica AS STRING) id_natureza_juridica,
 SAFE_CAST(id_esfera_orcamentaria AS STRING) id_esfera_orcamentaria,
 SAFE_CAST(id_resultado_primario AS STRING) id_resultado_primario,
 SAFE_CAST(valor_custo_transferencia AS FLOAT64) valor_custo_transferencia
-FROM basedosdados-dev.br_tesouro_custo_transferencia_staging.br_tesouro_custo_transferencia AS t
+FROM basedosdados-dev.br_me_sic_staging.transferencia AS t

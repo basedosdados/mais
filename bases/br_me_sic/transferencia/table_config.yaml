@@ -1,12 +1,12 @@
 
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: br_tesouro_custo_transferencia
+dataset_id: br_me_sic
 
-table_id: br_tesouro_custo_transferencia
+table_id: transferencia
 
 # Título da tabela.
-title: Custos com transferências a estados e municípios do Governo Federal
+title: Custos com transferências
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -23,19 +23,27 @@ spatial_coverage:
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 2015(1)2022
+temporal_coverage: 
+  - 2015(1)2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
-observation_level: Consumo de recursos para produção de bens ou serviços
+observation_level:
+  - entity: year
+    columns:
+      - ano
+  - entity: month
+    columns:
+      - mes
+  - entity: transfer
 
-last_updated: 01/12/2022
-    metadata:
-    data:
-    release:
+last_updated:
+    metadata: '2022-12-16'
+    data: '2022-12-16'
+    release: '2022-12-16'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
@@ -64,7 +72,7 @@ data_cleaning_description: Os dados foram baixados através da API do Tesouro Fe
 
 
 # Url do código de limpeza dos dados.
-data_cleaning_code_url: https://github.com/rlgabbay/mais/blob/master/bases/br_tesouro_custo_transferencia/code/custos_transferencias.py
+data_cleaning_code_url: https://github.com/basedosdados/mais/blob/master/bases/br_me_sic/code/custos_transferencias.py
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -106,12 +114,13 @@ columns:
     - name: ano
       bigquery_type: int64
       description: Ano do lançamento contábil
-      temporal_coverage: (1)
+      temporal_coverage:
+          - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
       measurement_unit: year
       has_sensitive_data: no
       observations:
@@ -120,12 +129,13 @@ columns:
     - name: mes
       bigquery_type: int64
       description: Mês do lançamento contávil
-      temporal_coverage: (1)
+      temporal_coverage:
+          - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
       measurement_unit: month
       has_sensitive_data: no
       observations:
@@ -134,7 +144,8 @@ columns:
     - name: id_unidade_organizacional_nivel_0
       bigquery_type: string
       description: Código da Unidade organizacional um nível acima dos Ministérios e da AGU, conforme codificação SIORG
-      temporal_coverage: (1)
+      temporal_coverage:
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -144,11 +155,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_organizacional_nivel_1
       bigquery_type: string
       description: Código da Unidade organizacional no nível dos Ministérios e da AGU, conforme codificação SIORG
-      temporal_coverage: (1)
+      temporal_coverage:
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -158,11 +170,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_organizacional_nivel_2
       bigquery_type: string
       description: Código da Unidade organizacional a um nível abaixo dos Ministérios e da AGU, conforme codificação SIORG
-      temporal_coverage: (1)
+      temporal_coverage:
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -172,11 +185,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_unidade_organizacional_nivel_3
       bigquery_type: string
       description: Código da Unidade organizacional a dois níveis abaixo dos Ministérios e da AGU, conforme codificação SIORG
-      temporal_coverage: (1)
+      temporal_coverage:
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -186,25 +200,27 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_natureza_juridica
       bigquery_type: string
       description: Código da natureza jurídica do Órgão
-      temporal_coverage: (1)
+      temporal_coverage:
+          - (1)
       covered_by_dictionary: yes
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: natureza_juridica
+          column_name: id_natureza_juridica
       measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_esfera_orcamentaria
       bigquery_type: string
       description: Código da esfera orçamentária do custo
-      temporal_coverage: (1)
+      temporal_coverage:
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -214,11 +230,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: id_resultado_primario
       bigquery_type: string
       description: Código da classificação da despesa orçamentária por indicador de resultado primário
-      temporal_coverage: (1)
+      temporal_coverage:
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -228,11 +245,12 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
     - name: valor_custo_transferencia
       bigquery_type: float64
       description: Valor do custo com transferências
-      temporal_coverage: (1)
+      temporal_coverage:
+          - (1)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -242,7 +260,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition:
+      is_partition: false
 
 number_rows: 24380
 

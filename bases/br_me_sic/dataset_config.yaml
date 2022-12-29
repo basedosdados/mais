@@ -1,19 +1,19 @@
 
 # Nome (slug) do conjunto no CKAN
 # Exemplos: br-ibge-populacao, br-tse-eleicoes
-name: br-tesouro-custo-transferencia
+name: br-me-sic
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title: Custos com transferências para estados e municípios do Governo Federal
+title: Sistema de Informações de Custos do Governo Federal (SIC)
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
 # Exemplos: br-ibge, br-tse, br-rj-gov
-organization: tesouro-nacional
+organization: br-me
 
 # Descrição do conjunto
-notes: O conjunto engloba uma tabela com as informações de custos com transferências para estados e municípios do Governo Federal
+notes: Dados de Custos advindo do Sistema de Informações de Custos do Governo Federal (SIC)
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list

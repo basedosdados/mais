@@ -8,7 +8,7 @@ import numpy as np
 import string
 import basedosdados as bd
 
-output = "br_tesouro_custo_transferencia/output/"
+output = "transferencia/output/"
 # Download
 todays_year = datetime.date.today().year;
 year_range = list(range(2015,todays_year+1));
@@ -18,18 +18,18 @@ first_time_flag = True;
 # natureza jurídica) tem 194 observações. É uma margem segura? Se não repensar como fazer
 api_response = requests.get('https://apidatalake.tesouro.gov.br/ords/custos/tt/transferencias?ano=2020&mes=10&natureza_juridica=3').text;
 
-custos_transf_dict = json.loads(api_response);
-custo_transferencia_esp = pd.json_normalize(custos_transf_dict['items']);
+transf_dict = json.loads(api_response);
+transferencia_esp = pd.json_normalize(transf_dict['items']);
 for ano in [str(x)for x in list(range(2015,todays_year+1))]:
     for mes in [str(x)for x in list(range(1,13))]:
-        for org in [str(x)for x in list(range(1,7))]:
-            api_response = requests.get('https://apidatalake.tesouro.gov.br/ords/custos/tt/transferencias?ano='+ano+'&mes='+mes+'&natureza_juridica='+org).text;
+        for natur in [str(x)for x in list(range(1,7))]:
+            api_response = requests.get('https://apidatalake.tesouro.gov.br/ords/custos/tt/transferencias?ano='+ano+'&mes='+mes+'&natureza_juridica='+natur).text;
     
-            custos_transf_dict = json.loads(api_response);
-            custo_transferencia_esp = pd.json_normalize(custos_transf_dict['items']);
+            transf_dict = json.loads(api_response);
+            transferencia_esp = pd.json_normalize(transf_dict['items']);
             
             # Renomear variáveis com nomes inadequados
-            custo_transferencia_esp = custo_transferencia_esp.rename(columns={'an_lanc':'ano_lancamento',
+            transferencia_esp = transferencia_esp.rename(columns={'an_lanc':'ano_lancamento',
                                         'me_lanc':'mes_lancamento',
                                         'ds_organizacao_n0':'nome_unidade_organizacional_nivel_0',
                                         'ds_organizacao_n1':'nome_unidade_organizacional_nivel_1',
@@ -48,20 +48,20 @@ for ano in [str(x)for x in list(range(2015,todays_year+1))]:
                                         'co_resultado_eof':'id_resultado_primario',
                                         'ds_resultado_eof':'nome_resultado_primario',
                                         'va_custo_transferencias':'valor_custo_transferencia'});
-            if len(custo_transferencia_esp) == 250:
+            if len(transferencia_esp) == 250:
                 raise Exception('Single request reached 250 observations, the maximum allowed by the Tesouro API. Probably missing data, code fix needed');
             
             if first_time_flag:
-                custo_transferencia = custo_transferencia_esp
+                transferencia = transferencia_esp
                 first_time_flag = False;
             else:
-                custo_transferencia = pd.concat([custo_transferencia, custo_transferencia_esp],axis=0);
+                transferencia = pd.concat([transferencia, transferencia_esp],axis=0);
 
 # Remover 0s iniciais
 
-id_idx = [col.startswith('id') for col in list(custo_transferencia.columns.values)]
+id_idx = [col.startswith('id') for col in list(transferencia.columns.values)]
 
-custo_transferencia.loc[:,id_idx] = custo_transferencia.loc[:,id_idx].astype(int).astype(str)
+transferencia.loc[:,id_idx] = transferencia.loc[:,id_idx].astype(int).astype(str)
 
 # Criar dicionário
 
@@ -96,35 +96,40 @@ vars_dict = [['id_unidade_organizacional_nivel_0', 'nome_unidade_organizacional_
                      ['id_esfera_orcamentaria', 'nome_esfera_orcamentaria'],
                      ['id_resultado_primario','nome_resultado_primario']];
 
-dicionario = create_dictionary(custo_transferencia,vars_dict,'ano_lancamento','br_tesouro_custo_transferencia')
-
-dicionario.to_csv('br_tesouro_custo_transferencia_dicionario.csv')
+dicionario = create_dictionary(transferencia,vars_dict,'ano_lancamento','transferencia')
+dicionario_path = output +'dicionario_transferencia'
+os.makedirs(dicionario_path)
+dicionario.to_csv(dicionario_path+'/dicionario_transferencia.csv',index = False)
 
 # Remove descrições       
-custo_transferencia = custo_transferencia[['ano_lancamento','mes_lancamento','id_unidade_organizacional_nivel_0',
+transferencia = transferencia[['ano_lancamento','mes_lancamento','id_unidade_organizacional_nivel_0',
                      'id_unidade_organizacional_nivel_1','id_unidade_organizacional_nivel_2',
                      'id_unidade_organizacional_nivel_3','id_natureza_juridica','id_esfera_orcamentaria',
                      'id_resultado_primario','valor_custo_transferencia']]
 
 # Cria as partições e coloca os arquivos respectivos dentro delas
-# Onde armazenar os arquivos?
 
-for ano in [*range(2005, todays_year+1)]:
+for ano in [*range(2015, todays_year+1)]:
   for mes in [*range(1, 13)]:
-    particao = output + f'br_tesouro_custo_transferencia/ano={ano}/mes={mes}'
+    particao = output + f'transferencia/ano={ano}/mes={mes}'
     if not os.path.exists(particao):
       os.makedirs(particao)
-for ano in [*range(2005, todays_year+1)]:
+for ano in [*range(2015, todays_year+1)]:
   for mes in [*range(1, 13)]:
-    df_particao = custo_transferencia[custo_transferencia['ano_lancamento'] == ano].copy() # O .copy não é necessário é apenas uma boa prática
+    df_particao = transferencia[transferencia['ano_lancamento'] == ano].copy() # O .copy não é necessário é apenas uma boa prática
     df_particao = df_particao[df_particao['mes_lancamento'] == mes]
     df_particao.drop(['ano_lancamento', 'mes_lancamento'], axis=1, inplace=True) # É preciso excluir as colunas utilizadas para partição 
-    particao = output + f'br_tesouro_custo_transferencia/ano={ano}/mes={mes}/tabela.csv'
+    particao = output + f'transferencia/ano={ano}/mes={mes}/transferencia.csv'
     df_particao.to_csv(particao, index=False, encoding='utf-8', na_rep='')
 
-# Publicar a tabela
-t = bd.Table(dataset_id = 'br_tesouro_custo_transferencia', table_id = 'br_tesouro_custo_transferencia')
-t.create(path = 'br_tesouro_custo_transferencia/output/br_tesouro_custo_transferencia',if_storage_data_exists= 'replace')
+# Publicar a tabela de transferencia
+t = bd.Table(dataset_id = 'br_me_sic', table_id = 'transferencia')
+t.create(path = 'transferencia/output/transferencia',if_storage_data_exists= 'replace')
+t.publish(if_exists = 'replace')
+
+# Publicar o dicionário
+t = bd.Table(dataset_id = 'br_me_sic', table_id = 'dicionario_transferencia')
+t.create(path = 'transferencia/output/dicionario_transferencia',if_storage_data_exists= 'replace')
 t.publish(if_exists = 'replace')
 
 
