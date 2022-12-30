@@ -55,6 +55,7 @@ ren countrycode country_id
 ren seriescode  indicator_id
 
 replace year = substr(year, 3, 4)
+destring year, replace
 
 tempfile footnote
 save `footnote'
@@ -70,6 +71,46 @@ foreach year in `years' {
 	export delimited "output/footnote/year=`year'/footnote.csv", replace datafmt
 	
 }
+
+//----------------------//
+// series
+//----------------------//
+
+import delimited "input/WDI_csv/WDISeries.csv", clear varn(1) stringcols(_all) bindquotes(strict) encoding("utf-8") maxquotedrows(100)
+
+drop indicatorname
+drop v21
+
+ren seriescode                       indicator_id
+ren topic                            topic
+ren shortdefinition                  short_definition
+ren longdefinition                   long_definition
+ren unitofmeasure                    measurement_unit
+ren periodicity                      periodicity
+ren baseperiod                       base_period
+ren othernotes                       other_notes 
+ren aggregationmethod                aggregation_method
+ren limitationsandexceptions         limitations_exceptions
+ren notesfromoriginalsource          notes_from_original_source
+ren generalcomments                  general_comments
+ren source                           source
+ren statisticalconceptandmethodology statistical_concept_methodology
+ren developmentrelevance             development_relevance
+ren relatedsourcelinks               related_source_links
+ren otherweblinks                    other_web_links
+ren relatedindicators                related_indicators
+ren licensetype                      license_type
+
+export delimited "output/indicators.csv", replace datafmt
+
+
+
+
+
+
+
+
+
 
 
 //----------------------//
