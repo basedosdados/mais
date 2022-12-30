@@ -131,36 +131,9 @@ destring year, replace
 
 export delimited "output/indicator_time.csv", replace datafmt
 
-
-
-
-
-
-
 //----------------------//
 // country
 //----------------------//
 
 import delimited "input/WDI_csv/WDICountry.csv", clear varn(1) encoding("utf-8") stringcols(_all) bindquotes(strict)
 
-drop v67
-
-ren countrycode   country_id_iso3
-ren indicatorname indicator_name
-ren indicatorcode indicator_id
-
-preserve
-	keep indicator_id indicator_name
-	duplicates drop
-	order indicator_id indicator_name
-	export excel "dicionario_indicators.xlsx", replace 
-restore
-
-drop indicator_name
-
-reshape long v, i(country_id_iso3 indicator_id) j(year)
-
-ren v value
-replace year = year + 1955
-
-export delimited "country.csv", replace
