@@ -120,7 +120,7 @@ columns:
       bigquery_type: string
       description: Indicator ID
       temporal_coverage:
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
