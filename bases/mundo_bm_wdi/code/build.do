@@ -116,6 +116,21 @@ ren seriescode  indicator_id
 
 export delimited "output/country_indicator.csv", replace datafmt
 
+//----------------------//
+// series-time
+//----------------------//
+
+import delimited "input/WDI_csv/WDISeries-Time.csv", clear varn(1) encoding("utf-8") stringcols(_all) bindquotes(strict)
+
+drop v4
+
+ren seriescode  indicator_id
+
+replace year = substr(year, 3, 4)
+destring year, replace
+
+export delimited "output/indicator_time.csv", replace datafmt
+
 
 
 
