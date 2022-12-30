@@ -44,6 +44,35 @@ foreach year in `years' {
 }
 
 //----------------------//
+// footnote
+//----------------------//
+
+import delimited "input/WDI_csv/WDIFootNote.csv", clear varn(1) bindquotes(strict) encoding("utf-8")
+
+drop v5
+
+ren countrycode country_id
+ren seriescode  indicator_id
+
+replace year = substr(year, 3, 4)
+
+tempfile footnote
+save `footnote'
+
+!mkdir -p "output/footnote"
+
+levelsof year, l(years)
+foreach year in `years' {
+	
+	!mkdir -p "output/footnote/year=`year'"
+	use `footnote' if year == `year', clear
+	drop year
+	export delimited "output/footnote/year=`year'/footnote.csv", replace datafmt
+	
+}
+
+
+//----------------------//
 // country
 //----------------------//
 
