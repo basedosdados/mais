@@ -103,9 +103,18 @@ ren licensetype                      license_type
 
 export delimited "output/indicators.csv", replace datafmt
 
+//----------------------//
+// country-series
+//----------------------//
 
+import delimited "input/WDI_csv/WDICountry-Series.csv", clear varn(1) encoding("utf-8") stringcols(_all) bindquotes(strict)
 
+drop v4
 
+ren countrycode country_id
+ren seriescode  indicator_id
+
+export delimited "output/country_indicator.csv", replace datafmt
 
 
 
@@ -117,9 +126,8 @@ export delimited "output/indicators.csv", replace datafmt
 // country
 //----------------------//
 
-import delimited "input/WDI_csv/WDICountry.csv", clear varn(1) bindquotes(strict)
+import delimited "input/WDI_csv/WDICountry.csv", clear varn(1) encoding("utf-8") stringcols(_all) bindquotes(strict)
 
-drop ïcountryname
 drop v67
 
 ren countrycode   country_id_iso3
