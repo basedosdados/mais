@@ -1,4 +1,4 @@
-set_billing_id(readline("Insira um billing project id: "))
+basedosdados::set_billing_id(readline("Insira um billing project id: "))
 
 require(magrittr)
 

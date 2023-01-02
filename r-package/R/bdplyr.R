@@ -128,6 +128,7 @@ bdplyr <- function(
   if (how_many_dots < 1 | how_many_dots > 2) {
 
     rlang::abort("`table` is invalid. Please use the pattern: `<project_name>.<dataset_name>.<table_name>` OR `<dataset_name>.<table_name>' if the parameter `query_project_id' is informed.")
+
   }
 
   # checks if is a valid query_project_id string
@@ -142,21 +143,13 @@ bdplyr <- function(
 
     table_full_name <- glue::glue("{query_project_id}.{table}")
 
-  }
-
-  if (how_many_dots == 2 ) {
+  } else if (how_many_dots == 2 ) {
 
     table_full_name <- table
-  }
 
+    }
 
   # checks if is a valid table at Google Big Query
-
-  if(bigrquery::bq_table_exists(table_full_name) == FALSE) {
-
-    rlang::abort(glue::glue("The table {table_full_name} doesn't have a valid name or was not found at {query_project_id}."))
-
-  }
 
   # creates the connection
 
@@ -166,23 +159,7 @@ bdplyr <- function(
     billing = billing_project_id)
 
   # calls the connection through dplyr and keeps it in a objects
-  tibble_connection <- dplyr::tbl(con, table_full_name)
-
-
-  # checks if the connection was successfully
-  if (is_tbl_lazy(tibble_connection) == TRUE) {
-
-    # prevent returning an empty table
-    tibble_connection <- tibble_connection %>%
-      dplyr::select(dplyr::everything())
-
-    rlang::inform(glue::glue("Successfully connected to table `{table_full_name}`."))
-    return (tibble_connection)
-
-  } else {
-
-    rlang::abort(glue::glue("It was not possible to connect to the remote table `{table_full_name}`"))
-  }
+  dplyr::tbl(con, table_full_name)
 
 }
 
