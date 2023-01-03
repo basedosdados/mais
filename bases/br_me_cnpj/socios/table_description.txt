@@ -22,12 +22,16 @@ Email: rdahis@basedosdados.org
 
 
 
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- data
+
 
 
 
 Cobertura Temporal
 ------------------
-- 2007-01(1)2022-09
+- 2021-11(1)2022-11
 
 
 
