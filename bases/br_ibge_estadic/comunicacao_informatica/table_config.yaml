@@ -1,0 +1,2859 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_ibge_estadic
+
+table_id: comunicacao_informatica
+
+# Título da tabela.
+title: Comunicação e Informática
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: A pesquisa fornece informações na área de comunicação e informática como, pedido de acesso a informação, dados digitalizados, formas de atendimento, execução orçamentária, mídias online, etc, a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios devido ao fato de que os estados não souberam informar o dado. Com isso, valores nulos sem indicadores nesta coluna passam a representar a não aplicabilidade da pergunta feita ao estado.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2014, 2019
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: uncertain
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: year
+      columns:
+          - ano
+    - country: br
+      entity: state
+      columns:
+          - sigla_uf 
+
+last_updated:
+    metadata: '2022-11-30'
+    data: '2022-11-30 15:10:13'
+    release: '2022-11-30 15:10:33'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Gabrielle Carvalho
+    email: gabrielle.carvalho@basedosdados.org
+    github_user: gabrielle-carv
+    ckan_user: gabs_carvalho
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Gabrielle Carvalho
+    email: gabrielle.carvalho@basedosdados.org
+    github_user: gabrielle-carv
+    ckan_user: gabs_carvalho
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Compatibilização dos dados entre os anos, substituição das respostas 'Sim' por resultado binário numérico, padronização por valores em branco para respostas não sabidas ou ainda não aplicáveis, criação de dicionário e de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, os valores nulos passam a representar unicamente a não aplicabilidade da pergunta.
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: 
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_atendimento_distancia_correio
+      bigquery_type: int64
+      description: Disponibiliza formas de atendimento a distância via correio
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_atendimento_distancia_fax
+      bigquery_type: int64
+      description: Disponibiliza formas de atendimento a distância via fax
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_atendimento_distancia_jornal
+      bigquery_type: int64
+      description: Disponibiliza formas de atendimento a distância via jornais
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_atendimento_distancia_internet
+      bigquery_type: int64
+      description: Disponibiliza formas de atendimento a distância via internet
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_atendimento_distancia_telefone
+      bigquery_type: int64
+      description: Disponibiliza formas de atendimento a distância via telefone
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_atendimento_distancia_telefone_exclusivo
+      bigquery_type: int64
+      description: Disponibiliza formas de atendimento a distância via telefone exclusivo
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_atendimento_distancia_outra_via
+      bigquery_type: int64
+      description: Disponibiliza formas de atendimento a distância outras vias
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: computador_funcional
+      bigquery_type: int64
+      description: Possui computadores em funcionamento
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: panorama_computador_ligado_rede
+      bigquery_type: string
+      description: Panorama dos computadores em funcionamento ligados a rede
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_conexao_internet
+      bigquery_type: string
+      description: Tipo de conexão com a internet
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: panorama_computador_acesso_internet
+      bigquery_type: string
+      description: 'Panorama computadores com acesso a internet '
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: intranet
+      bigquery_type: int64
+      description: Possui intranet
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estrutura_organizacional_tic
+      bigquery_type: int64
+      description: Existência de uma estrutura organizacional para a área de Tecnologia
+          da Informação e Comunicação (TIC)
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: funcionario_efetivo_ti
+      bigquery_type: int64
+      description: 'Pessoas que trabalham na área de TI - Funcionários efetivos do
+          próprio governo estadual que trabalham na área de Tecnologia da Informação '
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: servidor_cedido_ti
+      bigquery_type: int64
+      description: Pessoas que trabalham na área de TI - Servidores cedidos de outro
+          órgão público que trabalham na área de Tecnologia da Informação
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estagiario_ti
+      bigquery_type: int64
+      description: Pessoas que trabalham na área de TI - Estagiários que trabalham
+          na área de Tecnologia da Informação
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comissionado_ti
+      bigquery_type: int64
+      description: Pessoas que trabalham na área de TI - Cargo(s) Comissionado(s)
+          de livre nomeação que trabalham na área de Tecnologia da Informação
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: terceirizado_ti
+      bigquery_type: int64
+      description: Pessoas que trabalham na área de TI - Terceirizados que trabalham
+          na área de Tecnologia da Informação
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: consultor_ti
+      bigquery_type: int64
+      description: Pessoas que trabalham na área de TI - Consultores que trabalham
+          na área de Tecnologia da Informação
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: outro_vinculo_ti
+      bigquery_type: int64
+      description: Pessoas que trabalham na área de TI - Outros tipos de vínculos
+          que trabalham na área de Tecnologia da Informação
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: nao_informado_ti
+      bigquery_type: int64
+      description: Pessoas que trabalham na área de TI - Não sabe informar o vínculo
+          de trabalho na área de Tecnologia da Informação
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: centro_processamento_dado
+      bigquery_type: int64
+      description: Existência centro de processamento de dados (CPD)
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: desenvolvimento_software
+      bigquery_type: int64
+      description: Desenvolveu software para atender necessidade específica
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: status_pagina
+      bigquery_type: string
+      description: Status da página do governo estadual na internet
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: endereco_pagina
+      bigquery_type: string
+      description: Endereço da página na internet
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: classificacao_pagina
+      bigquery_type: string
+      description: Classificação da página
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_servico_informativo
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Serviços informativos
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_acesso_documento
+      bigquery_type: int64
+      description: 'Disponibilidade na página da internet - Acesso a documentos '
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_informacao_licitacao
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Informações gerais sobre
+          licitações
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_ouvidoria
+      bigquery_type: int64
+      description: 'Disponibilidade na página da internet - Ouvidoria e serviços de
+          atendimento ao cidadão '
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_pregao_eletronico
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Pregão eletrônico
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_download_documentos
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Fazer download de documentos
+          ou formulários
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_consulta_acompanhamento
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Consulta a processos/acompanhamento
+          de protocolos
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_delegacia_eletronica
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Delegacia eletrônica
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_diario_ofical
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Diário oficial, legislação
+          estadual e finanças públicas
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_concurso_publico
+      bigquery_type: int64
+      description: 'Disponibilidade na página da internet - Concurso público '
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_cadastramento_fornecedor
+      bigquery_type: int64
+      description: 'Disponibilidade na página da internet - Cadastramento de fornecedores '
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_certidao_negativa_debito
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Emissão de certidão negativa
+          de débito
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_nota_fiscal_eletronica
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Emissão nota fiscal eletrônica
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_matricula_escola_publica
+      bigquery_type: int64
+      description: 'Disponibilidade na página da internet - Matrícula escolar na rede
+          pública online '
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_agendamento_consulta_saude_publica
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Agendamento de consulta
+          na rede pública de saúde
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_pagamento_tributo
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Emitir guia de pagamento
+          de tributos
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_emissao_documento
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Emissão de documentos como
+          licenças, certidões, permissões e outros documentos
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_pesquisa_satisfacao
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Pesquisa de satisfação
+          relacionada aos serviços prestados pelo estado
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_outro_servico
+      bigquery_type: int64
+      description: Disponibilidade na página da internet - Outros serviços
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: perfil_facebook
+      bigquery_type: int64
+      description: Existência de perfil ou conta do governo estadual em redes sociais
+          - Facebook
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: perfil_instagram
+      bigquery_type: int64
+      description: Existência de perfil ou conta do governo estadual em redes sociais
+          - Instagram
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: perfil_youtube
+      bigquery_type: int64
+      description: Existência de perfil ou conta do governo estadual em redes sociais
+          - Youtube
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: perfil_vimeo
+      bigquery_type: int64
+      description: Existência de perfil ou conta do governo estadual em redes sociais
+          - Vimeo
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: perfil_telegram
+      bigquery_type: int64
+      description: Existência de perfil ou conta do governo estadual em redes sociais
+          - Telegran
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: perfil_whatsapp
+      bigquery_type: int64
+      description: Existência de perfil ou conta do governo estadual em redes sociais
+          - Whatsapp
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: perfil_flirck
+      bigquery_type: int64
+      description: Existência de perfil ou conta do governo estadual em redes sociais
+          - Flirck
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: perfil_blogspot
+      bigquery_type: int64
+      description: Existência de perfil ou conta do governo estadual em redes sociais
+          - Blogspot
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: perfil_twitter
+      bigquery_type: int64
+      description: Existência de perfil ou conta do governo estadual em redes sociais
+          - Twiter
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: perfil_nao_possui
+      bigquery_type: int64
+      description: Existência de perfil ou conta do governo estadual em redes sociais
+          - Não possui
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atividade_rede_noticia
+      bigquery_type: int64
+      description: Existência de atividade nas redes sociais - postar notícias sobre
+          o governo
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atividade_rede_resposta_duvida
+      bigquery_type: int64
+      description: Existência de atividade nas redes sociais - responder a comentários
+          e dúvidas dos cidadãos
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atividade_rede_consulta_publica
+      bigquery_type: int64
+      description: Existência de atividade nas redes sociais - realizar consulta pública
+          ou enquetes
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atividade_rede_divulgacao
+      bigquery_type: int64
+      description: Existência de atividade nas redes sociais - divulgar serviços ou
+          campanhas
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atividade_rede_nao_realizada
+      bigquery_type: int64
+      description: Existência de atividade nas redes sociais - não realizou nenhuma
+          das atividades
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atividade_rede_nao_sabe
+      bigquery_type: int64
+      description: Existência de atividade nas redes sociais - não sabe
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: frequencia_atualizacao_rede_social
+      bigquery_type: string
+      description: 'Frequência da atualização do conteúdo rede sociais '
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_distancia_envio_sms
+      bigquery_type: int64
+      description: Existência de disponibilidade de atendimento à distância - Envio
+          de sms para o cidadão
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_distancia_recebimento_sms
+      bigquery_type: int64
+      description: Existência de disponibilidade de atendimento à distância - Recebimento
+          de sms do cidadão
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_distancia_aplicativo_gov_estadual
+      bigquery_type: int64
+      description: Existência de disponibilidade de atendimento à distância - Aplicativos
+          criados pelo governo estadual
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_distancia_aplicativo_outro_organismo
+      bigquery_type: int64
+      description: Existência de disponibilidade de atendimento à distância - Aplicativos
+          criados por outros organismos ou cidadãos a partir de informações ou dados
+          disponibilizados pelo governo
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_distancia_mobile
+      bigquery_type: int64
+      description: Existência de disponibilidade de atendimento à distância - Website
+          adaptado para dispositivos móveis ou desenhado em versão mobile
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_distancia_pagamento
+      bigquery_type: int64
+      description: Existência de disponibilidade de atendimento à distância - Emitir
+          boletos de tributos ou outras guias de pagamento
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_distancia_nao_disponibilizado
+      bigquery_type: int64
+      description: Existência de disponibilidade de atendimento à distância - Não
+          disponibilizou
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: programa_inclusao_digital
+      bigquery_type: int64
+      description: Desenvolve programa ou ação de inclusão digital
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: parceria_gov_federal
+      bigquery_type: int64
+      description: Parcerias para os programas e ações com o Governo federal
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: parceria_outro_gov_estado
+      bigquery_type: int64
+      description: Parcerias para os programas e ações com outro governo do estado
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: parceria_municipio
+      bigquery_type: int64
+      description: Parcerias para os programas e ações com o Município
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: parceria_iniciativa_privada
+      bigquery_type: int64
+      description: Parcerias para os programas e ações com Iniciativa privada
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: parceira_iniciativa_gov_estadual
+      bigquery_type: int64
+      description: Parcerias para os programas e ações com Iniciativa exclusiva do
+          governo estadual
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: parceira_outro
+      bigquery_type: int64
+      description: Parcerias para os programas e ações com Outros
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_acesso_gratuito_internet
+      bigquery_type: int64
+      description: Ações implementadas que disponibiliza acesso público e gratuito
+          à Internet através de centros de acesso
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_informacao_quiosque
+      bigquery_type: int64
+      description: Ações implementadas de Informações e serviços de órgãos públicos
+          disponibilizados em quiosque ou balcão informatizado
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_ponte_parceiro_comunidade
+      bigquery_type: int64
+      description: Ações implementadas de Ponte entre parceiros e as comunidades carentes,
+          a m de promover o acesso à Internet e aos computadores aos indivíduos menos
+          favorecidosquiosque ou balcão informatizado
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_telecentro
+      bigquery_type: int64
+      description: Ações implementadas de Criação de Telecentros
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_curso_capacitacao_informatica
+      bigquery_type: int64
+      description: Ações implementadas de Cursos de capacitação em informática para
+          a população
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_instalacao_computador_rede_publica
+      bigquery_type: int64
+      description: Ações implementadas de Instalação de computadores na rede pública
+          de ensino com acesso à Internet para utilização de alunos e professores
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_inclusao_digital_educacao
+      bigquery_type: int64
+      description: Ações implementadas de Unidades de inclusão digital e de popularização
+          da ciência voltados à educação
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_intalacao_wifi_rede_publica_esatdual
+      bigquery_type: int64
+      description: Ações implementadas de instalação de rede wi-fi rede pública estadual
+          de ensino para acesso de professores e alunos
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_outro
+      bigquery_type: int64
+      description: Ações implementadas - Outras
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: disponibiliza_wifi_populacao
+      bigquery_type: int64
+      description: Disponibiliza acesso por conexão wi-fi para a população
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_acesso_wifi
+      bigquery_type: string
+      description: O acesso de conexão wi-fi é do tipo gratuito e/ou cobrado
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conexao_wifi_capital
+      bigquery_type: int64
+      description: Conexão wi-fi atende a Capital
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conexao_wifi_outro_municipio
+      bigquery_type: int64
+      description: Conexão wi-fi atende a Outros municípios
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: municipio_conexao_wifi
+      bigquery_type: int64
+      description: 'Quantidade de municípios com conexão wi-fi '
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: municipio_conexao_wifi_nao_soube_informar
+      bigquery_type: int64
+      description: 'O estado não soube informar - Quantidade de municípios com conexão
+          wi-fi '
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: consulta_publica
+      bigquery_type: int64
+      description: Consulta pública on line para que cidadãos possam enviar contribuições
+          para leis, orçamentos e planos
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: consulta_publica_website_gov_estadual
+      bigquery_type: int64
+      description: Consulta pública on line para que cidadãos possam enviar contribuições
+          para leis, orçamentos e planos - Website do governo estadual
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: consulta_publica_website_outro_orgao
+      bigquery_type: int64
+      description: Consulta pública on line para que cidadãos possam enviar contribuições
+          para leis, orçamentos e planos - Website outro órgão público
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: consulta_publica_rede_social
+      bigquery_type: int64
+      description: Consulta pública on line para que cidadãos possam enviar contribuições
+          para leis, orçamentos e planos - Redes sociais
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: consulta_publica_outro_website
+      bigquery_type: int64
+      description: Consulta pública on line para que cidadãos possam enviar contribuições
+          para leis, orçamentos e planos - Outro website
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: grupo_discussao
+      bigquery_type: int64
+      description: Grupos de discussão como fóruns ou comunidades pela internet
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: grupo_discussao_website_gov_estadual
+      bigquery_type: int64
+      description: Grupos de discussão como fóruns ou comunidades pela internet -
+          Website do governo estadual
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: grupo_discussao_website_outro_orgao
+      bigquery_type: int64
+      description: Grupos de discussão como fóruns ou comunidades pela internet -
+          Website outro órgão público
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: grupo_discussao_rede_social
+      bigquery_type: int64
+      description: Grupos de discussão como fóruns ou comunidades pela internet -
+          Redes sociais
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: grupo_discussao_outro_website
+      bigquery_type: int64
+      description: Grupos de discussão como fóruns ou comunidades pela internet -
+          Outro website
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: enquete_online
+      bigquery_type: int64
+      description: 'Enquete on line sobre assuntos de interesse do governo estadual '
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: enquete_online_website_gov_estadual
+      bigquery_type: int64
+      description: Enquete on line sobre assuntos de interesse do governo estadual
+          - Website do governo estadual
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: enquete_online_website_outro_orgao
+      bigquery_type: int64
+      description: Enquete on line sobre assuntos de interesse do governo estadual
+          - Website outro órgão público
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: enquete_online_rede_social
+      bigquery_type: int64
+      description: Enquete on line sobre assuntos de interesse do governo estadual
+          - Redes sociais
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: enquete_online_outro_website
+      bigquery_type: int64
+      description: Enquete on line sobre assuntos de interesse do governo estadual
+          - Outro website
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: votacao_online
+      bigquery_type: int64
+      description: 'Votação on line para orientar a tomada de decisão sobre políticas
+          públicas, orçamento, etc. '
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: votacao_online_website_gov
+      bigquery_type: int64
+      description: Votação on line para orientar a tomada de decisão sobre políticas
+          públicas, orçamento, etc. - Website do governo
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: votacao_online_website_outro_orgao
+      bigquery_type: int64
+      description: Votação on line para orientar a tomada de decisão sobre políticas
+          públicas, orçamento, etc. - Website outro órgão público
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: votacao_online_rede_social
+      bigquery_type: int64
+      description: Votação on line para orientar a tomada de decisão sobre políticas
+          públicas, orçamento, etc. - Redes sociais
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: votacao_online_outro_website
+      bigquery_type: int64
+      description: Votação on line para orientar a tomada de decisão sobre políticas
+          públicas, orçamento, etc. - Outro website
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: participacao_intenet_nao_disponibiliza
+      bigquery_type: int64
+      description: Formas de participação do cidadão pela internet não disponibilizou
+          nenhuma das formas mencionadas acima
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gov_estadual_bilhete_unico
+      bigquery_type: int64
+      description: O governo estadual - instituiu o bilhete único para uso de transporte
+          público
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gov_estadual_espaco_inovacao
+      bigquery_type: int64
+      description: O governo estadual - Mantém espaços de inovação, coworking ou espaços
+          compartilhados de trabalho para micro e pequenas empresas atualmente em
+          funcionamento
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gov_estadual_capacitacao_empreendedor_digital_12_meses
+      bigquery_type: int64
+      description: O governo estadual - Forneceu capacitação para empreendedorismo
+          digital nos últimos 12 meses
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gov_estadual_recurso_empresa_inovadora_12_meses
+      bigquery_type: int64
+      description: O governo estadual - Instituiu (sozinho ou em parceria) prêmio
+          ou edital para destinar recursos a empresas inovadoras/projetos criativos
+          nos últimos 12 meses
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estado_portal_transparencia
+      bigquery_type: int64
+      description: O estado conta atualmente com Portal da transparência
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estado_dado_aberto
+      bigquery_type: int64
+      description: O estado conta atualmente com Portal de dados abertos
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: estado_transparencia_nao_sabe_informar
+      bigquery_type: int64
+      description: Não sabe informar com o que o estado conta como transparência
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_gov_estadual_acesso_sem_mouse
+      bigquery_type: int64
+      description: A página na internet e os serviços eletrônicos disponibilizados
+          pelo governo estadual - Permitem navegação por todos os itens interativos
+          da página sem necessidade do mouse
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_gov_estadual_saltar_item_repetido
+      bigquery_type: int64
+      description: A página na internet e os serviços eletrônicos disponibilizados
+          pelo governo estadual - Permitem ao usuário de tecnologia assistiva saltar
+          itens repetidos na página
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_gov_estadual_descreve_imagem
+      bigquery_type: int64
+      description: A página na internet e os serviços eletrônicos disponibilizados
+          pelo governo estadual - Descrevem conteúdo das imagens
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_gov_estadual_libras
+      bigquery_type: int64
+      description: A página na internet e os serviços eletrônicos disponibilizados
+          pelo governo estadual - Inclui tradução para LIBRAS
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_gov_estadual_descricao_texto
+      bigquery_type: int64
+      description: A página na internet e os serviços eletrônicos disponibilizados
+          pelo governo estadual - Descrevem o conteúdo das páginas com o texto que
+          aparece na aba do navegador
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_gov_estadual_captcha
+      bigquery_type: int64
+      description: A página na internet e os serviços eletrônicos disponibilizados
+          pelo governo estadual - Usam CAPTCHA para solicitações
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_gov_estadual_nao_fornecida
+      bigquery_type: int64
+      description: A página na internet e os serviços eletrônicos disponibilizados
+          pelo governo estadual - Não possui página na internet e/ou serviços eletrônicos
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_gov_estadual_nao_sabe_informar
+      bigquery_type: int64
+      description: A página na internet e os serviços eletrônicos disponibilizados
+          pelo governo estadual - Não sabe informar
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_gov_estadual_nenhuma_alternativa
+      bigquery_type: int64
+      description: A página na internet e os serviços eletrônicos disponibilizados
+          pelo governo estadual - Nenhuma das alternativas
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acessibilidade_website_portal
+      bigquery_type: string
+      description: Modelo de acessibilidade usado no website ou portal
+      temporal_coverage:
+          - '2019'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: legislacao_lai
+      bigquery_type: int64
+      description: Legislação específica com procedimentos e providências para Lei
+          de Acesso à Informação
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: ano_decreto_lai
+      bigquery_type: int64
+      description: Ano da lei ou decreto da Legislação específica com procedimentos
+          e providências para Lei de Acesso à Informação
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: publicacao_lai_diario_ofical_impresso
+      bigquery_type: int64
+      description: 'Local de publicação sobre a LAI - Diário Oficial impresso '
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: publicacao_lai_diario_oficial_internet
+      bigquery_type: int64
+      description: 'Local de publicação sobre a LAI - Diário Oficial na Internet '
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_prazo
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Estabelece prazo de
+          atendimento de pedido de acesso à informação pública igual ou inferior a
+          20 dias corridos
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_informacao_sigilosa
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Institui procedimentos
+          de classificação de informação sigilosa em âmbito municipal
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_autoridade_monitoramento
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Prevê autoridade de
+          monitoramento para implementação da Lei de Acesso à Informação pública
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_orgao_monitoramento
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Prevê órgão central
+          de monitoramento das ações relativas ao acesso à informação pública
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_relatorio_monitoramento
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Prevê a divulgação
+          de relatório de monitoramento com informações estatísticas dos pedidos
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_instancia_recursal_interna
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Prevê mais de uma
+          instância recursal interna ao órgão ou entidade demandado
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_instancia_recursal_autonoma
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Estabelece instância
+          recursal autônoma e independente em relação à autoridade que proferiu a
+          decisão impugnada
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_omissao_resposta
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Estabelece procedimento
+          em caso de omissão de resposta a pedidos de informação pública
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: acesso_informacao_publica
+      bigquery_type: int64
+      description: Disponibiliza meios para solicitação de acesso à informação pública
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_publica_sic
+      bigquery_type: int64
+      description: 'Disponibiliza meio de acesso a informação pública via - Serviço
+          de Informação ao Cidadão (SIC) '
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_publica_internet
+      bigquery_type: int64
+      description: Disponibiliza meio de acesso a informação pública via - Internet
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_publica_telefone
+      bigquery_type: int64
+      description: Disponibiliza meio de acesso a informação pública via - Telefone
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_publica_carta
+      bigquery_type: int64
+      description: Disponibiliza meio de acesso a informação pública via - Carta
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_publica_outro
+      bigquery_type: int64
+      description: Disponibiliza meio de acesso a informação pública via - Outro
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida
+      bigquery_type: int64
+      description: 'Solicitações recebidas pela governo estadual com base no ano anterior '
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_nao_soube_informar
+      bigquery_type: int64
+      description: 'O estado não soube informar - Solicitações recebidas pela governo
+          estadual com base no ano anterior '
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_atendida
+      bigquery_type: int64
+      description: Solicitações recebidas pela governo estadual com base no ano anterior
+          - Atendidas
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_atendida_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar - Solicitações recebidas pela governo
+          estadual com base no ano anterior, atendidas
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_parcialmente_atendida
+      bigquery_type: int64
+      description: Solicitações recebidas pela governo estadual com base no ano anterior
+          - Parcialmente atendidas
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_parcialmente_atendida_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar - Solicitações recebidas pela governo
+          estadual com base no ano anterior, parcialmente atendidas
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_negada
+      bigquery_type: int64
+      description: Solicitações recebidas pela governo estadual com base no ano anterior
+          - Negadas
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_negada_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar - Solicitações recebidas pela governo
+          estadual com base no ano anterior, negadas
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_nao_conhecida
+      bigquery_type: int64
+      description: Solicitações recebidas pela governo estadual com base no ano anterior
+          - Não conhecidas
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_nao_conhecida_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar - Solicitações recebidas pela governo
+          estadual com base no ano anterior, não conhecidas
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_orcamento_tempo_real
+      bigquery_type: int64
+      description: Disponibiliza na página na internet, em tempo real, informações
+          sobre execução orçamentária e financeira
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: endereco_pagina_orcamento
+      bigquery_type: string
+      description: Endereço na internet em que disponibiliza informações sobre execução
+          orçamentária e financeira
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_registro_competencia
+      bigquery_type: int64
+      description: Possui na página na internet - Registro das competências
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_estrutura_organizacional
+      bigquery_type: int64
+      description: Possui na página na internet - Estrutura organizacional
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_endereco_telefone
+      bigquery_type: int64
+      description: Possui na página na internet - Endereços e telefones das unidades
+          organizacionais
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_horario_atendimento
+      bigquery_type: int64
+      description: Possui na página na internet - Horários de atendimento ao público
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_repasse_transferencia
+      bigquery_type: int64
+      description: Possui na página na internet - Registros de quaisquer repasses
+          ou transferências de recursos financeiros
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_registro_despesa
+      bigquery_type: int64
+      description: Possui na página na internet - Registros das despesas
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_processo_licitatorio
+      bigquery_type: int64
+      description: 'Possui na página na internet - Informações concernentes a procedimentos
+          licitatórios '
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_acompanhamento_programa
+      bigquery_type: int64
+      description: Possui na página na internet - Dados gerais para o acompanhamento
+          de programas, ações, projetos e obras de órgãos e entidades
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_resposta
+      bigquery_type: int64
+      description: Possui na página na internet - Respostas às perguntas mais frequentes
+          da sociedade
+      temporal_coverage:
+          - 2014, 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
+      is_in_staging: true
+      is_partition: false
+    - name: dado_municipal_publicado_aberto
+      bigquery_type: int64
+      description: Dados gerais e atos da gestão municipal que são publicados na página
+          na internet - Publicados em formato aberto
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_municipal_atualizado
+      bigquery_type: int64
+      description: Dados gerais e atos da gestão municipal que são publicados na página
+          na internet - Há atualização de dados
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_municipal_periodicidade_atualizacao
+      bigquery_type: string
+      description: Dados gerais e atos da gestão municipal que são publicados na página
+          na internet - Periodicidade da atualização dos dados
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pagina_internet_acessivel
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_digital_acessibilidade
+      bigquery_type: string
+      description: Política de governo digital prevê acessibilidade
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 54
+
+metadata_modified:
