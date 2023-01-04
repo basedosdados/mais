@@ -17,11 +17,11 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_me_siconfi.uf_ranking_qualidade_informacao_fiscal_contabil AS
+CREATE VIEW basedosdados-dev.br_me_siconfi.municipio_ranking_qualidade AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
-SAFE_CAST(id_uf AS STRING) id_uf,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(indicador_qualidade_informacao_contabil_fiscal AS STRING) indicador_qualidade_informacao_contabil_fiscal,
 SAFE_CAST(posicao_ranking AS INT64) posicao_ranking,
 SAFE_CAST(quantidade_acertos_total AS FLOAT64) quantidade_acertos_total,
@@ -30,4 +30,4 @@ SAFE_CAST(dimensao_I AS FLOAT64) dimensao_I,
 SAFE_CAST(dimensao_II AS INT64) dimensao_II,
 SAFE_CAST(dimensao_III AS INT64) dimensao_III,
 SAFE_CAST(dimensao_IV AS INT64) dimensao_IV
-FROM basedosdados-dev.br_me_siconfi_staging.uf_ranking_qualidade_informacao_fiscal_contabil AS t
+FROM basedosdados-dev.br_me_siconfi_staging.municipio_ranking_qualidade AS t

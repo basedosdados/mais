@@ -20,6 +20,7 @@ capitais <- read_delim("~/Downloads/Capitais_sintetico_bspn.csv",
                          trim_ws = TRUE)
 ## Tidying and exporting
 
+
 estados %>%
   rename(ano = VA_EXERCICIO,
          sigla_uf = SG_ESTADO,

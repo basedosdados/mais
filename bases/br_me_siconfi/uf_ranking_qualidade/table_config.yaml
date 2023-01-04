@@ -2,7 +2,7 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_me_siconfi
 
-table_id: capitais_ranking_qualidade_informacao_fiscal_contabil
+table_id: uf_ranking_qualidade
 
 # Título da tabela.
 title: Sistema de Informações Contábeis e Fiscais do Setor Público Brasileiro (SICONFI)
@@ -56,6 +56,7 @@ observation_level:
       entity: state
       columns:
         - sigla_uf
+        
 last_updated:
     metadata: '2023-01-03'
     data: '2023-01-03 12:00:00'
@@ -89,26 +90,6 @@ data_cleaning_description: Renomeação das variáveis.
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi/code
 
-# Organização que ajudou institucionalmente na disponibilização dos dados.
-partner_organization:
-    name:
-    organization_id:
-
-# Url dos dados originais no GCP Storage.
-raw_files_url:
-
-# Url dos arquivos auxiliares no GCP Storage.
-auxiliary_files_url:
-
-# Url da tabela de arquitetura no GCP Storage.
-architecture_url:
-
-source_bucket_name: basedosdados-dev
-
-project_id_prod: basedosdados-dev
-
-project_id_staging: basedosdados-dev
-
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
@@ -137,16 +118,31 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: id_municipio
+    - name: sigla_uf
       bigquery_type: string
-      description: ID Município - IBGE 7 Dígitos
+      description: Sigla da Unidade da Federação
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
-          table_id: municipio
-          column_name: id_municipio
+          table_id: uf
+          column_name: sigla_uf
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_uf
+      bigquery_type: string
+      description: ID da Unidade da Federação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: id_uf
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -274,6 +270,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 78
+number_rows: 81
 
-metadata_modified: '2022-12-30T14:55:08.785786'
+metadata_modified: 
