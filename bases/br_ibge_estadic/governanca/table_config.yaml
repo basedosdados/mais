@@ -1,0 +1,2728 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_ibge_estadic
+
+table_id: governanca
+
+# Título da tabela.
+title: Governança
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: A pesquisa fornece informações variadas sobre a governança pública estadual como, os meios de acesso a informação sobre o estado, características do controle interno e do conselho de transparência. A tabela inclui colunas indicando os espaços que foram deixados vazios devido ao fato de que os estados não souberam informar o dado. Com isso, valores nulos sem indicadores nesta coluna passam a representar a não aplicabilidade da pergunta feita ao estado.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage: 
+    - 2019
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: uncertain
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - country: br
+      entity: state
+      columns:
+          - sigla_uf 
+
+last_updated:
+    metadata: '2022-11-30'
+    data: '2022-11-30 14:10:13'
+    release: '2022-11-30 14:10:33'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by: 
+    name: Gabrielle Carvalho
+    email: gabrielle.carvalho@basedosdados.org
+    github_user: gabrielle-carv
+    ckan_user: gabs_carvalho
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Gabrielle Carvalho
+    email: gabrielle.carvalho@basedosdados.org
+    github_user: gabrielle-carv
+    ckan_user: gabs_carvalho
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Substituição das respostas 'Sim' por resultado binário numérico, padronização por valores em branco para respostas não sabidas ou ainda não aplicáveis, criação de dicionário e de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, os valores nulos passam a representar unicamente a não aplicabilidade da pergunta. 
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: 
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: legislacao_lai
+      bigquery_type: int64
+      description: Legislação estadual para garantir direito de acesso à informação
+          pública em conformidade com a Lei de Acesso à Informação
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: lei_criacao_lai
+      bigquery_type: int64
+      description: Lei de criação com procedimentos e providências para Lei de Acesso
+          à Informação
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ano_decreto_lai
+      bigquery_type: int64
+      description: Ano da lei ou decreto com procedimentos e providências para Lei
+          de Acesso à Informação
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: publicacao_lai_diario_ofical_impresso
+      bigquery_type: int64
+      description: 'Local de publicação sobre a LAI - Diário Oficial impresso '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: publicacao_lai_diario_oficial_internet
+      bigquery_type: int64
+      description: 'Local de publicação sobre a LAI - Diário Oficial na Internet '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_prazo
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Estabelece prazo de
+          atendimento de pedido de acesso à informação pública igual ou inferior a
+          20 dias corridos
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_informacao_sigilosa
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Institui procedimentos
+          de classificação de informação sigilosa em âmbito municipal
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_autoridade_monitoramento
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Prevê autoridade de
+          monitoramento para implementação da Lei de Acesso à Informação pública
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_orgao_monitoramento
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Prevê órgão central
+          de monitoramento das ações relativas ao acesso à informação pública
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_relatorio_monitoramento
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Prevê a divulgação
+          de relatório de monitoramento com informações estatísticas dos pedidos
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_instancia_recursal_interna
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Prevê mais de uma
+          instância recursal interna ao órgão ou entidade demandado
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_instancia_recursal_autonoma
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Estabelece instância
+          recursal autônoma e independente em relação à autoridade que proferiu a
+          decisão impugnada
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: regulamentacao_lai_omissao_resposta
+      bigquery_type: int64
+      description: Legislação municipal que regulamenta a LAI - Estabelece procedimento
+          em caso de omissão de resposta a pedidos de informação pública
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_publica_sic
+      bigquery_type: int64
+      description: 'Disponibiliza meio de acesso a informação pública via - Serviço
+          de Informação ao Cidadão (SIC) '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_publica_internet
+      bigquery_type: int64
+      description: Disponibiliza meio de acesso a informação pública via - Internet
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_publica_telefone
+      bigquery_type: int64
+      description: Disponibiliza meio de acesso a informação pública via - Telefone
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_publica_carta
+      bigquery_type: int64
+      description: Disponibiliza meio de acesso a informação pública via - Carta
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_publica_outro
+      bigquery_type: int64
+      description: Disponibiliza meio de acesso a informação pública via - Outro
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_publica_nao_disponibiliza
+      bigquery_type: int64
+      description: Disponibiliza meio de acesso a informação pública via - Não disponibiliza
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida
+      bigquery_type: int64
+      description: 'Existência de solicitações recebidas pela governo estadual com
+          base no ano anterior '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_atendida
+      bigquery_type: int64
+      description: Solicitações recebidas pela governo estadual com base no ano anterior
+          - Atendidas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_atendida_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar - quantidade de solicitações recebidas
+          pela governo estadual com base no ano anterior, atendidas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_parcialmente_atendida
+      bigquery_type: int64
+      description: Solicitações recebidas pela governo estadual com base no ano anterior
+          - Parcialmente atendidas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_parcialmente_atendida_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar - quantidade de solicitações recebidas
+          pela governo estadual com base no ano anterior, parcialmente atendidas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_negada
+      bigquery_type: int64
+      description: Solicitações recebidas pela governo estadual com base no ano anterior
+          - Negadas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_negada_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar - quantidade de solicitações recebidas
+          pela governo estadual com base no ano anterior, negadas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_nao_conhecida
+      bigquery_type: int64
+      description: Solicitações recebidas pela governo estadual com base no ano anterior
+          - Não conhecidas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_recebida_nao_conhecida_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar - quantidade de solicitações recebidas
+          pela governo estadual com base no ano anterior, não conhecidas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_total_recebida
+      bigquery_type: int64
+      description: Solicitações recebidas pela governo estadual com base no ano anterior
+          - Total recebidas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: solicitacao_total_recebida_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar - quantidade de solicitações recebidas
+          pela governo estadual com base no ano anterior, total recebidas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: publica_pergunta_resposta
+      bigquery_type: string
+      description: Publica para acesso ao público perguntas e respostas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_execucao_orcamentaria
+      bigquery_type: int64
+      description: Existência de disponibilização de informações sobre execução orçamentária
+          e financeira (em atendimento à Lei Complementar 131/2009)
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_execucao_orcamentaria_tempo_real
+      bigquery_type: int64
+      description: Disponibiliza informações sobre execução orçamentária e financeira
+          em tempo real
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_execucao_orcamentaria_pagina_internet
+      bigquery_type: int64
+      description: Local da disponibilização de informações sobre execução orçamentária
+          e financeira - Página na internet
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_execucao_orcamentaria_portal_transparencia
+      bigquery_type: int64
+      description: Local da disponibilização de informações sobre execução orçamentária
+          e financeira - Portal transparência
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_execucao_orcamentaria_outro_website
+      bigquery_type: int64
+      description: Local da disponibilização de informações sobre execução orçamentária
+          e financeira - Outro website
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_orcamento_csv_etc
+      bigquery_type: int64
+      description: Dados de orçamentos são publicados em - CVS, ODS, XLS, DOC
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_orcamento_pdf_imagem
+      bigquery_type: int64
+      description: Dados de orçamentos são publicados em - PDF ou imagem
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_orcamento_outro_arquivo
+      bigquery_type: int64
+      description: Dados de orçamentos são publicados em - Outro tipo de arquivo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_orcamento_tempo_real
+      bigquery_type: int64
+      description: Dados de orçamentos são publicados em - Tempo real
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_receita_csv_etc
+      bigquery_type: int64
+      description: Dados de receitas são publicados em - CVS, ODS, XLS, DOC
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_receita_pdf_imagem
+      bigquery_type: int64
+      description: Dados de receitas são publicados em - PDF ou imagem
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_receita_outro_arquivo
+      bigquery_type: int64
+      description: Dados de receitas são publicados em - Outro tipo de arquivo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_receita_tempo_real
+      bigquery_type: int64
+      description: Dados de receitas são publicados em - Publicados em tempo real
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_despesa_csv_etc
+      bigquery_type: int64
+      description: Dados de despesas são publicados em - CVS, ODS, XLS, DOC
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_despesa_pdf_imagem
+      bigquery_type: int64
+      description: Dados de despesas são publicados em - PDF ou imagem
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_despesa_outro_arquivo
+      bigquery_type: int64
+      description: Dados de despesas são publicados em - Outro tipo de arquivo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_despesa_tempo_real
+      bigquery_type: int64
+      description: Dados de despesas são publicados em - Publicados em tempo real
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_balanco_csv_etc
+      bigquery_type: int64
+      description: Dados de balanços são publicados em - CVS, ODS, XLS, DOC
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_balanco_pdf_imagem
+      bigquery_type: int64
+      description: Dados de balanços são publicados em - PDF ou imagem
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_balanco_outro_arquivo
+      bigquery_type: int64
+      description: Dados de balanços são publicados em - Outro tipo de arquivo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_balanco_tempo_real
+      bigquery_type: int64
+      description: Dados de balanços são publicados em - Publicados em tempo real
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_prestacao_conta_csv_etc
+      bigquery_type: int64
+      description: Dados de prestação de contas da Lei de Responsabilidade Fiscal
+          são publicados em - CVS, ODS, XLS, DOC
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_prestacao_conta_pdf_imagem
+      bigquery_type: int64
+      description: Dados de prestação de contas da Lei de Responsabilidade Fiscal
+          são publicados em - PDF ou imagem
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_prestacao_conta_outro_arquivo
+      bigquery_type: int64
+      description: Dados de prestação de contas da Lei de Responsabilidade Fiscal
+          são publicados em - Outro tipo de arquivo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_prestacao_conta_tempo_real
+      bigquery_type: int64
+      description: Dados de prestação de contas da Lei de Responsabilidade Fiscal
+          são publicados em - Publicados em tempo real
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_compra_licitacao_csv_etc
+      bigquery_type: int64
+      description: Dados de compras e licitações são publicados em - CVS, ODS, XLS,
+          DOC
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_compra_licitacao_pdf_imagem
+      bigquery_type: int64
+      description: Dados de compras e licitações são publicados em - PDF ou imagem
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_compra_licitacao_outro_arquivo
+      bigquery_type: int64
+      description: Dados de compras e licitações são publicados em - Outro tipo de
+          arquivo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_compra_licitacao_tempo_real
+      bigquery_type: int64
+      description: Dados de compras e licitações são publicados em - Publicados em
+          tempo real
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_remuneracao_servidor_csv_etc
+      bigquery_type: int64
+      description: Dados individualizados das remunerações de servidores são publicados
+          em - CVS, ODS, XLS, DOC
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_remuneracao_servidor_pdf_imagem
+      bigquery_type: int64
+      description: Dados individualizados das remunerações de servidores são publicados
+          em - PDF ou imagem
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_remuneracao_servidor_outro_arquivo
+      bigquery_type: int64
+      description: Dados individualizados das remunerações de servidores são publicados
+          em - Outro tipo de arquivo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dado_remuneracao_servidor_tempo_real
+      bigquery_type: int64
+      description: Dados individualizados das remunerações de servidores são publicados
+          em - Publicados em tempo real
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: internet_portal_transparencia_registro_competencia
+      bigquery_type: int64
+      description: Conteúdo da página na internet e/ou portal da transparência - Registro
+          competências
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: internet_portal_transparencia_estrutura_organizacional
+      bigquery_type: int64
+      description: Conteúdo da página na internet e/ou portal da transparência - Estrutura
+          organizacional
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: internet_portal_transparencia_endereco_telefone
+      bigquery_type: int64
+      description: Conteúdo da página na internet e/ou portal da transparência - Endereços
+          e telefones das unidades
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: internet_portal_transparencia_horario_atendimento
+      bigquery_type: int64
+      description: Conteúdo da página na internet e/ou portal da transparência - Horários
+          atendimento ao público
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: internet_portal_transparencia_vinculo
+      bigquery_type: int64
+      description: Conteúdo da página na internet e/ou portal da transparência - Quantitativo
+          de pessoal por vínculo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: internet_portal_transparencia_acompanhamento_programa
+      bigquery_type: int64
+      description: Conteúdo da página na internet e/ou portal da transparência - Dados
+          gerais para acompanhamento de programas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: internet_portal_transparencia_processo_licitatorio
+      bigquery_type: int64
+      description: Conteúdo da página na internet e/ou portal da transparência - Informações
+          sobre processos licitatórios
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: internet_portal_transparencia_resposta
+      bigquery_type: int64
+      description: Conteúdo da página na internet e/ou portal da transparência - Respostas
+          a perguntas frequentes FAQ
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: internet_portal_transparencia_repasse_transferencia
+      bigquery_type: int64
+      description: Conteúdo da página na internet e/ou portal da transparência - Registro
+          de repasses ou transferências
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_estrutura_organizacional
+      bigquery_type: int64
+      description: Existe estrutura organizacional para a área responsável pelo controle
+          interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_instrumento_legal
+      bigquery_type: string
+      description: Qual instrumento legal para controle interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_numero_instrumento_legal
+      bigquery_type: int64
+      description: Número do instrumento legal para controle interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_ano_instrumento_legal
+      bigquery_type: int64
+      description: Ano do instrumento legal para controle interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_caracterizacao_estrutura_organizacional
+      bigquery_type: string
+      description: Caracterização da estrutura organizacional do controle interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_secretaria_subordinada_administracao
+      bigquery_type: int64
+      description: A que secretaria está associada ou subordinada - Administração
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_secretaria_subordinada_orcamento
+      bigquery_type: int64
+      description: A que secretaria está associada ou subordinada - Finanças/Fazenda/Orçamento
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_secretaria_subordinada_planejamento
+      bigquery_type: int64
+      description: A que secretaria está associada ou subordinada - Planejamento/Gestão
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_secretaria_subordinada_contabilidade
+      bigquery_type: int64
+      description: A que secretaria está associada ou subordinada - Contabilidade
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_secretaria_subordinada_justica
+      bigquery_type: int64
+      description: A que secretaria está associada ou subordinada - Justiça
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_secretaria_subordinada_outra
+      bigquery_type: int64
+      description: A que secretaria está associada ou subordinada - Outra
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: orgao_controle_interno
+      bigquery_type: string
+      description: 'Nome do órgão responsável pela área de controle interno '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_pessoal_ocupado
+      bigquery_type: int64
+      description: Existência de pessoal ocupado especificamente controle interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_total_pessoal_ocupado
+      bigquery_type: int64
+      description: Total pessoal ocupado especificamente controle interno total
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_vinculo_responsavel
+      bigquery_type: string
+      description: Vínculo do responsável pela área de controle interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_formacao_responsavel
+      bigquery_type: string
+      description: Formação do(a) responsável pela área de controle interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controlador_interno_carreira_especifica_auditor
+      bigquery_type: int64
+      description: Existência de carreira específica de auditor/controlador interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_concurso_24_meses
+      bigquery_type: int64
+      description: Realização de concurso nos últimos 24 meses para a área de controle
+          interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_efetivou_concursado
+      bigquery_type: int64
+      description: Efetivou concursado para a área de controle interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_receita
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Receitas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_despesa
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Despesas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_administracao_pessoal
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Administração de pessoal
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_estoque
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Estoques e almoxarifados
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_administracao_patrimonio
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Administração do patrimônio
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_ppa_programa_gov_orcamento
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Cumprimento das metas
+          do PPA e a execução dos programas de governo e dos orçamentos (LOA e LDO)
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_meta_fiscal
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Cumprimento das metas
+          fiscais, físicas e de resultados dos programas de governo, no que tange
+          à eficiência, eficácia e efetividade
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_recurso_publico_direito_publico
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Aplicação de recursos
+          públicos por entidades de direito público
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_recurso_publico_direito_privado
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Aplicação de recursos
+          públicos por entidades de direito privado
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_limite_inscricao_despesa
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Limites e condições
+          para a inscrição de despesas em restos a pagar
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_cumprimento_legislacao
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Cumprimento da legislação
+          concernente a licitações e fiscalização de contratos
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_cumprimento_gasto
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Cumprimento do limite
+          de gastos totais por parte do legislativo estadual, inclusive no que se
+          refere ao atingimento de metas fiscais (Gestão Fiscal)
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_transferencia_legislativo_estadual
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Transferências para
+          legislativo estadual
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_contabilidade
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Contabilidade
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_combate_corrupcao
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Prevenção e combate
+          à corrupção
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_transparencia
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Transparência
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_acesso_lai
+      bigquery_type: int64
+      description: Atuação e atividades do controle interno - Conformidade ao acesso
+          à informação (LAI)
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_auditoria_governamental
+      bigquery_type: int64
+      description: Funções do sistema de controle interno - Auditoria governamental
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_controladoria
+      bigquery_type: int64
+      description: Funções do sistema de controle interno - Controladoria
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_corregedoria
+      bigquery_type: int64
+      description: Funções do sistema de controle interno - Corregedoria
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_ouvidoria
+      bigquery_type: int64
+      description: Funções do sistema de controle interno - Ouvidoria
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_promocao_combate_corrupcao
+      bigquery_type: int64
+      description: Funções do sistema de controle interno - Promoção da integridade/prevenção
+          e combate à corrupção
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_24_meses_controle_previo
+      bigquery_type: int64
+      description: Características das ações de controle nos últimos 24 meses - Controle
+          prévio
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_24_meses_controle_concomitante
+      bigquery_type: int64
+      description: Características das ações de controle nos últimos 24 meses - Controle
+          concomitante
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_24_meses_controle_posterior
+      bigquery_type: int64
+      description: Características das ações de controle nos últimos 24 meses - Controle
+          posterior
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: irregularidade_24_meses_tribunal_contas
+      bigquery_type: int64
+      description: 'Controle interno procedeu, nos últimos 24 meses, com alguma comunicação
+          de irregularidade - Tribunal de contas '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: irregularidade_24_meses_ministerio_publico
+      bigquery_type: int64
+      description: Controle interno procedeu, nos últimos 24 meses, com alguma comunicação
+          de irregularidade - Ministério público
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: irregularidade_24_meses_nao_procedeu
+      bigquery_type: int64
+      description: Controle interno procedeu, nos últimos 24 meses, com alguma comunicação
+          de irregularidade - Não procedeu
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_24_meses_pad
+      bigquery_type: int64
+      description: 'Controle interno, nos últimos 24 meses, PAD '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_24_meses_pad_iniciou
+      bigquery_type: int64
+      description: 'Controle interno, nos últimos 24 meses, PAD - Iniciou '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_24_meses_pad_terminou
+      bigquery_type: int64
+      description: Controle interno, nos últimos 24 meses, PAD - Finalizou
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_24_meses_par
+      bigquery_type: int64
+      description: 'Controle interno, nos últimos 24 meses, PAR '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_24_meses_par_iniciou
+      bigquery_type: int64
+      description: 'Controle interno, nos últimos 24 meses, PAR - Iniciou '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_24_meses_par_finalizou
+      bigquery_type: int64
+      description: Controle interno, nos últimos 24 meses, PAR - Finalizou
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_24_meses_tce
+      bigquery_type: int64
+      description: 'Controle interno, nos últimos 24 meses, TCE '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_24_meses_tce_iniciou
+      bigquery_type: int64
+      description: 'Controle interno, nos últimos 24 meses, TCE - Iniciou '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_24_meses_tce_finalizou
+      bigquery_type: int64
+      description: Controle interno, nos últimos 24 meses, TCE - Finalizou
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pad_par_tce_nao_iniciou_finalizou
+      bigquery_type: int64
+      description: Não inicializou nem finalizou PAD, PAR, TCE
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: controle_interno_informacao_internet
+      bigquery_type: int64
+      description: Controle interno possui informação na internet
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_internet_estrutura_administrativa
+      bigquery_type: int64
+      description: Informações disponibilizadas na internet - Estrutura administrativa
+          do órgão de controle interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_internet_institucional
+      bigquery_type: int64
+      description: Informações disponibilizadas na internet - Informações institucionais
+          do órgão de controle interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_internet_consulta_processo_disciplinar
+      bigquery_type: int64
+      description: Informações disponibilizadas na internet - Consulta a estatísticas
+          de processos disciplinares
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_internet_denuncia_anonima
+      bigquery_type: int64
+      description: Informações disponibilizadas na internet - Mecanismos para realização
+          de denúncias anônimas
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_internet_acompanhamento_denuncia
+      bigquery_type: int64
+      description: Informações disponibilizadas na internet - Consulta para acompanhamento
+          de denúncia
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_internet_indicador_desempenho
+      bigquery_type: int64
+      description: Informações disponibilizadas na internet - Consulta de indicadores
+          de desempenho do governo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_internet_produto
+      bigquery_type: int64
+      description: Informações disponibilizadas na internet - Produtos gerados pelo
+          órgão de controle interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: informacao_internet_legislacao_especifica
+      bigquery_type: int64
+      description: Informações disponibilizadas na internet - Legislação específica
+          na área de controle interno
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_12_meses_multa_servidor
+      bigquery_type: int64
+      description: Ações originadas no controle interno nos últimos 12 meses que levaram
+          a ocorrências - Aplicação de multas a servidor(es)
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_12_meses_sancao_administrativa
+      bigquery_type: int64
+      description: Ações originadas no controle interno nos últimos 12 meses que levaram
+          a ocorrências - Aplicação de sanções administrativas a servidor(es)
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_12_meses_exoneracao_servidor
+      bigquery_type: int64
+      description: Ações originadas no controle interno nos últimos 12 meses que levaram
+          a ocorrências - Exoneração de servidor(es)
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_12_meses_ressarcimento_erario_estadual
+      bigquery_type: int64
+      description: Ações originadas no controle interno nos últimos 12 meses que levaram
+          a ocorrências - Ressarcimento ao erário estadual
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_12_meses_nenhuma_ocorrencia
+      bigquery_type: int64
+      description: Ações originadas no controle interno nos últimos 12 meses que levaram
+          a ocorrências - Nenhuma ocorrência registrada
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_estadual_transparencia
+      bigquery_type: int64
+      description: 'Existência Conselho Estadual de Transparência ou similar '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: lei_conselho_estadual_transparencia
+      bigquery_type: int64
+      description: 'Lei de criação do Conselho Estadual de Transparência ou similar '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ano_conselho_estadual_transparencia
+      bigquery_type: int64
+      description: 'Ano de criação do Conselho Estadual de Transparência ou similar '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: formacao_conselho_estadual_transparencia
+      bigquery_type: string
+      description: 'Formação do Conselho Estadual de Transparência ou similar '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: carater_conselho_estadual_transparencia_consultivo
+      bigquery_type: int64
+      description: Conselho Estadual de Transparência ou similar, caráter - Consultivo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: carater_conselho_estadual_transparencia_deliberativo
+      bigquery_type: int64
+      description: Conselho Estadual de Transparência ou similar, caráter - Deliberativo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: carater_conselho_estadual_transparencia_normativo
+      bigquery_type: int64
+      description: Conselho Estadual de Transparência ou similar, caráter - Normativo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: carater_conselho_estadual_transparencia_fiscalizador
+      bigquery_type: int64
+      description: Conselho Estadual de Transparência ou similar, caráter - Fiscalizador
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: reuniao_12_meses_conselho_estadual_transparencia
+      bigquery_type: int64
+      description: 'Quantidade de reuniões nos últimos 12 meses, do Conselho Estadual
+          de Transparência ou similar '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: intergrante_conselho_estadual_transparencia
+      bigquery_type: int64
+      description: 'Número de integrantes, do Conselho Estadual de Transparência ou
+          similar '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: capacitacao_conselho_estadual_transparencia_periodicamente
+      bigquery_type: int64
+      description: 'Periodicidade da capacitação dos membros, do Conselho Estadual
+          de Transparência ou similar - Periodicamente '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: capacitacao_conselho_estadual_transparencia_ocasionalmente
+      bigquery_type: int64
+      description: Periodicidade da capacitação dos membros, do Conselho Estadual
+          de Transparência ou similar - Ocasionalmente
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: capacitacao_conselho_estadual_transparencia_nao_realiza
+      bigquery_type: int64
+      description: Periodicidade da capacitação dos membros, do Conselho Estadual
+          de Transparência ou similar - Não realiza
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infra_conselho_estadual_transparencia
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho Estadual de
+          Transparência ou similar
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infra_conselho_estadual_transparencia_sala
+      bigquery_type: int64
+      description: 'Estado disponibiliza infraestrutura para o Conselho Estadual de
+          Transparência ou similar - Sala '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infra_conselho_estadual_transparencia_computador
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho Estadual de
+          Transparência ou similar - Computador
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infra_conselho_estadual_transparencia_impressora
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho Estadual de
+          Transparência ou similar - Impressora
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infra_conselho_estadual_transparencia_acesso_internet
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho Estadual de
+          Transparência ou similar - Acesso à internet
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infra_conselho_estadual_transparencia_veiculo
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho Estadual de
+          Transparência ou similar - Veículo
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infra_conselho_estadual_transparencia_telefone
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho Estadual de
+          Transparência ou similar - Telefone
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infra_conselho_estadual_transparencia_diaria
+      bigquery_type: int64
+      description: 'Estado disponibiliza infraestrutura para o Conselho Estadual de
+          Transparência ou similar - Diárias '
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infra_conselho_estadual_transparencia_dotacao_orcamento
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho Estadual de
+          Transparência ou similar - Dotação orçamentária própria
+      temporal_coverage:
+          - 2019
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 27
+
+metadata_modified:
