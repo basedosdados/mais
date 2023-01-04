@@ -1,0 +1,47 @@
+A pesquisa fornece informações variadas sobre a governança pública estadual como, os meios de acesso a informação sobre o estado, características do controle interno e do conselho de transparência. A tabela inclui colunas indicando os espaços que foram deixados vazios devido ao fato de que os estados não souberam informar o dado. Com isso, valores nulos sem indicadores nesta coluna passam a representar a não aplicabilidade da pergunta feita ao estado.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2019
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Padronização e criação de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta. 
+
+
+Frequencia de Atualização
+-------------------------
+unique
