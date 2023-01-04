@@ -1,0 +1,104 @@
+/*
+Query para publicar a tabela.
+
+Esse é o lugar para:
+    - modificar nomes, ordem e tipos de colunas
+    - dar join com outras tabelas
+    - criar colunas extras (e.g. logs, proporções, etc.)
+
+Qualquer coluna definida aqui deve também existir em `table_config.yaml`.
+
+# Além disso, sinta-se à vontade para alterar alguns nomes obscuros
+# para algo um pouco mais explícito.
+
+TIPOS:
+    - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
+    - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
+    - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
+*/
+
+CREATE VIEW basedosdados-dev.br_ibge_estadic.recursos_humanos AS
+SELECT 
+SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(adm_direta AS INT64) adm_direta,
+SAFE_CAST(adm_direta_sem_instrucao AS INT64) adm_direta_sem_instrucao,
+SAFE_CAST(adm_direta_ensino_fundamental AS INT64) adm_direta_ensino_fundamental,
+SAFE_CAST(adm_direta_ensino_medio AS INT64) adm_direta_ensino_medio,
+SAFE_CAST(adm_direta_ensino_superior AS INT64) adm_direta_ensino_superior,
+SAFE_CAST(adm_direta_pos_graduacao AS INT64) adm_direta_pos_graduacao,
+SAFE_CAST(estatutario_adm_direta AS INT64) estatutario_adm_direta,
+SAFE_CAST(estatutario_adm_direta_sem_instrucao AS INT64) estatutario_adm_direta_sem_instrucao,
+SAFE_CAST(estatutario_adm_direta_ensino_fundamental AS INT64) estatutario_adm_direta_ensino_fundamental,
+SAFE_CAST(estatutario_adm_direta_ensino_medio AS INT64) estatutario_adm_direta_ensino_medio,
+SAFE_CAST(estatutario_adm_direta_ensino_superior AS INT64) estatutario_adm_direta_ensino_superior,
+SAFE_CAST(estatutario_adm_direta_pos_graduacao AS INT64) estatutario_adm_direta_pos_graduacao,
+SAFE_CAST(clt_adm_direta AS INT64) clt_adm_direta,
+SAFE_CAST(clt_adm_direta_sem_instrucao AS INT64) clt_adm_direta_sem_instrucao,
+SAFE_CAST(clt_adm_direta_ensino_fundamental AS INT64) clt_adm_direta_ensino_fundamental,
+SAFE_CAST(clt_adm_direta_ensino_medio AS INT64) clt_adm_direta_ensino_medio,
+SAFE_CAST(clt_adm_direta_ensino_superior AS INT64) clt_adm_direta_ensino_superior,
+SAFE_CAST(clt_adm_direta_pos_graduacao AS INT64) clt_adm_direta_pos_graduacao,
+SAFE_CAST(comissionado_adm_direta AS INT64) comissionado_adm_direta,
+SAFE_CAST(comissionado_adm_direta_sem_instrucao AS INT64) comissionado_adm_direta_sem_instrucao,
+SAFE_CAST(comissionado_adm_direta_ensino_fundamental AS INT64) comissionado_adm_direta_ensino_fundamental,
+SAFE_CAST(comissionado_adm_direta_ensino_medio AS INT64) comissionado_adm_direta_ensino_medio,
+SAFE_CAST(comissionado_adm_direta_ensino_superior AS INT64) comissionado_adm_direta_ensino_superior,
+SAFE_CAST(comissionado_adm_direta_pos_graduacao AS INT64) comissionado_adm_direta_pos_graduacao,
+SAFE_CAST(estagio_adm_direta AS INT64) estagio_adm_direta,
+SAFE_CAST(estagio_adm_direta_ensino_fundamental AS INT64) estagio_adm_direta_ensino_fundamental,
+SAFE_CAST(estagio_adm_direta_ensino_medio AS INT64) estagio_adm_direta_ensino_medio,
+SAFE_CAST(estagio_adm_direta_ensino_superior AS INT64) estagio_adm_direta_ensino_superior,
+SAFE_CAST(estagio_adm_direta_pos_graduacao AS INT64) estagio_adm_direta_pos_graduacao,
+SAFE_CAST(sem_vinculo_permanente_adm_direta AS INT64) sem_vinculo_permanente_adm_direta,
+SAFE_CAST(sem_vinculo_permanente_adm_direta_sem_instrucao AS INT64) sem_vinculo_permanente_adm_direta_sem_instrucao,
+SAFE_CAST(sem_vinculo_permanente_adm_direta_ensino_fundamental AS INT64) sem_vinculo_permanente_adm_direta_ensino_fundamental,
+SAFE_CAST(sem_vinculo_permanente_adm_direta_ensino_medio AS INT64) sem_vinculo_permanente_adm_direta_ensino_medio,
+SAFE_CAST(sem_vinculo_permanente_adm_direta_ensino_superior AS INT64) sem_vinculo_permanente_adm_direta_ensino_superior,
+SAFE_CAST(sem_vinculo_permanente_adm_direta_pos_graduacao AS INT64) sem_vinculo_permanente_adm_direta_pos_graduacao,
+SAFE_CAST(unidade_adm_direta AS INT64) unidade_adm_direta,
+SAFE_CAST(unidade_chefiada_mulher_adm_direta AS INT64) unidade_chefiada_mulher_adm_direta,
+SAFE_CAST(existencia_registro_deficiencia_adm_direta AS INT64) existencia_registro_deficiencia_adm_direta,
+SAFE_CAST(registro_deficiencia_adm_direta AS INT64) registro_deficiencia_adm_direta,
+SAFE_CAST(existencia_adm_indireta AS INT64) existencia_adm_indireta,
+SAFE_CAST(adm_indireta AS INT64) adm_indireta,
+SAFE_CAST(adm_indireta_sem_instrucao AS INT64) adm_indireta_sem_instrucao,
+SAFE_CAST(adm_indireta_ensino_fundamental AS INT64) adm_indireta_ensino_fundamental,
+SAFE_CAST(adm_indireta_ensino_medio AS INT64) adm_indireta_ensino_medio,
+SAFE_CAST(adm_indireta_ensino_superior AS INT64) adm_indireta_ensino_superior,
+SAFE_CAST(adm_indireta_pos_graduacao AS INT64) adm_indireta_pos_graduacao,
+SAFE_CAST(estatutario_adm_indireta AS INT64) estatutario_adm_indireta,
+SAFE_CAST(estatutario_adm_indireta_sem_instrucao AS INT64) estatutario_adm_indireta_sem_instrucao,
+SAFE_CAST(estatutario_adm_indireta_ensino_fundamental AS INT64) estatutario_adm_indireta_ensino_fundamental,
+SAFE_CAST(estatutario_adm_indireta_ensino_medio AS INT64) estatutario_adm_indireta_ensino_medio,
+SAFE_CAST(estatutario_adm_indireta_ensino_superior AS INT64) estatutario_adm_indireta_ensino_superior,
+SAFE_CAST(estatutario_adm_indireta_pos_graduacao AS INT64) estatutario_adm_indireta_pos_graduacao,
+SAFE_CAST(clt_adm_indireta AS INT64) clt_adm_indireta,
+SAFE_CAST(clt_adm_indireta_sem_instrucao AS INT64) clt_adm_indireta_sem_instrucao,
+SAFE_CAST(clt_adm_indireta_ensino_fundamental AS INT64) clt_adm_indireta_ensino_fundamental,
+SAFE_CAST(clt_adm_indireta_ensino_medio AS INT64) clt_adm_indireta_ensino_medio,
+SAFE_CAST(clt_adm_indireta_ensino_superior AS INT64) clt_adm_indireta_ensino_superior,
+SAFE_CAST(clt_adm_indireta_pos_graduacao AS INT64) clt_adm_indireta_pos_graduacao,
+SAFE_CAST(comissionado_adm_indireta AS INT64) comissionado_adm_indireta,
+SAFE_CAST(comissionado_adm_indireta_sem_instrucao AS INT64) comissionado_adm_indireta_sem_instrucao,
+SAFE_CAST(comissionado_adm_indireta_ensino_fundamental AS INT64) comissionado_adm_indireta_ensino_fundamental,
+SAFE_CAST(comissionado_adm_indireta_ensino_medio AS INT64) comissionado_adm_indireta_ensino_medio,
+SAFE_CAST(comissionado_adm_indireta_ensino_superior AS INT64) comissionado_adm_indireta_ensino_superior,
+SAFE_CAST(comissionado_adm_indireta_pos_graduacao AS INT64) comissionado_adm_indireta_pos_graduacao,
+SAFE_CAST(estagio_adm_indireta AS INT64) estagio_adm_indireta,
+SAFE_CAST(estagio_adm_indireta_ensino_fundamental AS INT64) estagio_adm_indireta_ensino_fundamental,
+SAFE_CAST(estagio_adm_indireta_ensino_medio AS INT64) estagio_adm_indireta_ensino_medio,
+SAFE_CAST(estagio_adm_indireta_ensino_superior AS INT64) estagio_adm_indireta_ensino_superior,
+SAFE_CAST(estagio_adm_indireta_pos_graduacao AS INT64) estagio_adm_indireta_pos_graduacao,
+SAFE_CAST(sem_vinculo_permanente_adm_indireta AS INT64) sem_vinculo_permanente_adm_indireta,
+SAFE_CAST(sem_vinculo_permanente_adm_indireta_sem_instrucao AS INT64) sem_vinculo_permanente_adm_indireta_sem_instrucao,
+SAFE_CAST(sem_vinculo_permanente_adm_indireta_ensino_fundamental AS INT64) sem_vinculo_permanente_adm_indireta_ensino_fundamental,
+SAFE_CAST(sem_vinculo_permanente_adm_indireta_ensino_medio AS INT64) sem_vinculo_permanente_adm_indireta_ensino_medio,
+SAFE_CAST(sem_vinculo_permanente_adm_indireta_ensino_superior AS INT64) sem_vinculo_permanente_adm_indireta_ensino_superior,
+SAFE_CAST(sem_vinculo_permanente_adm_indireta_pos_graduacao AS INT64) sem_vinculo_permanente_adm_indireta_pos_graduacao,
+SAFE_CAST(existencia_realizacao_concurso_24_meses AS INT64) existencia_realizacao_concurso_24_meses,
+SAFE_CAST(existencia_reserva_pessoa_deficiente_concurso AS INT64) existencia_reserva_pessoa_deficiente_concurso,
+SAFE_CAST(existencia_reserva_pessoa_negra_concurso AS INT64) existencia_reserva_pessoa_negra_concurso,
+SAFE_CAST(existencia_contratacao_adm_direta_24_meses AS INT64) existencia_contratacao_adm_direta_24_meses,
+SAFE_CAST(existencia_priorizacao_cargo_mulher AS INT64) existencia_priorizacao_cargo_mulher
+FROM basedosdados-dev.br_ibge_estadic_staging.recursos_humanos AS t
