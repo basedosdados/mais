@@ -5,7 +5,7 @@ name: br-cnj-estatisticas-poder-judiciario
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title: Estatísticas do Poder Judiciário
+title: Estatísticas do Poder Judiciário 
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
