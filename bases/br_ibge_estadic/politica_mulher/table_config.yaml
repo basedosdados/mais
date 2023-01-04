@@ -1,0 +1,2179 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_ibge_estadic
+
+table_id: politica_mulher
+
+# Título da tabela.
+title: Política para Mulheres
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: A pesquisa fornece informações variadas sobre políticas para mulheres como, dados do conselho e fundo estadual de direitos das mulheres, sua estrutura e serviços, levantamento de informações sobre as mulheres em situação de violência, etc, a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios devido ao fato de que os estados não souberam informar o dado. Com isso, valores nulos sem indicadores nesta coluna passam a representar a não aplicabilidade da pergunta feita ao estado.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2018
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: uncertain
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - country: br
+      entity: state
+      columns:
+          - sigla_uf 
+
+last_updated:
+    metadata: '2022-11-30'
+    data: '2022-11-30 14:50:13'
+    release: '2022-11-30 14:50:33'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Gabrielle Carvalho
+    email: gabrielle.carvalho@basedosdados.org
+    github_user: gabrielle-carv
+    ckan_user: gabs_carvalho
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Gabrielle Carvalho
+    email: gabrielle.carvalho@basedosdados.org
+    github_user: gabrielle-carv
+    ckan_user: gabs_carvalho
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description:  Substituição das respostas 'Sim' por resultado binário numérico, padronização por valores em branco para respostas não sabidas ou ainda não aplicáveis, criação de dicionário e de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, os valores nulos passam a representar unicamente a não aplicabilidade da pergunta.
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url:
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: organismo_executivo_politica_mulher
+      bigquery_type: int64
+      description: 'Existência organismo executivo de políticas para as mulheres '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: caracterizacao_organismo_executivo_politica_mulher
+      bigquery_type: string
+      description: 'Caracterização do organismo executivo de políticas para as mulheres '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: setor_subordinado_assistencia_social
+      bigquery_type: int64
+      description: Secretaria ou setor a qual está associada ou subordinada - Assistência
+          social
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: setor_subordinado_direito_humano
+      bigquery_type: int64
+      description: Secretaria ou setor a qual está associada ou subordinada - Direitos
+          humanos
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: setor_subordinado_justica
+      bigquery_type: int64
+      description: Secretaria ou setor a qual está associada ou subordinada - Justiça
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: setor_subordinado_seguranca
+      bigquery_type: int64
+      description: Secretaria ou setor a qual está associada ou subordinada - Segurança
+          pública
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: setor_subordinado_saude
+      bigquery_type: int64
+      description: Secretaria ou setor a qual está associada ou subordinada - Saúde
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: setor_subordinado_outra
+      bigquery_type: int64
+      description: Secretaria ou setor a qual está associada ou subordinada - Outra
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: nome_organismo_executivo_politica_mulher
+      bigquery_type: string
+      description: Nome do organismo executivo da política para mulheres
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_sexo
+      bigquery_type: string
+      description: Sexo do gestor do organismo executivo de políticas para as mulheres
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_idade
+      bigquery_type: int64
+      description: Idade do gestor do organismo executivo de políticas para as mulheres
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: years
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_raca_cor
+      bigquery_type: string
+      description: Cor/raça do gestor do organismo executivo de políticas para as
+          mulheres
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_raca_cor_autodeclarado
+      bigquery_type: int64
+      description: Cor/raça respondido por autodeclararão do gestor do organismo executivo
+          de políticas para as mulheres
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_escolaridade
+      bigquery_type: string
+      description: Escolaridade do gestor do organismo executivo de políticas para
+          as mulheres
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_grupo_especifico_mulher
+      bigquery_type: int64
+      description: Órgão é responsável por executar ações para grupos específicos
+          de mulheres, além de desenvolver políticas para as mulheres
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_mulher_idosa
+      bigquery_type: int64
+      description: Órgão executa ações para o grupo específico de Mulheres Idosas
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_mulher_lesbica
+      bigquery_type: int64
+      description: Órgão executa ações para o grupo específico de Lésbicas
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_mulher_negra
+      bigquery_type: int64
+      description: Órgão executa ações para o grupo específico de Mulheres negras
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_mulher_deficiencia
+      bigquery_type: int64
+      description: Órgão executa ações para o grupo específico de Mulheres com deficiência
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_mulher_indigena
+      bigquery_type: int64
+      description: Órgão executa ações para o grupo específico de Mulheres indígenas
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_mulher_quilombola
+      bigquery_type: int64
+      description: Órgão executa ações para o grupo específico de Mulheres quilombolas
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acao_outra
+      bigquery_type: int64
+      description: Órgão executa ações para o grupo específico de Outras mulheres
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: capacitacao_genero_outra_area_governo
+      bigquery_type: int64
+      description: Principal área de atuação do órgão está em - Promover capacitação
+          em gênero para outras áreas do governo
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: incorpora_genero_formulacao_politica
+      bigquery_type: int64
+      description: Principal área de atuação do órgão está em - Articular com outros
+          órgãos estaduais a incorporação da questão de gênero na formulação e/ou
+          implementação de políticas
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_area_educacao
+      bigquery_type: int64
+      description: Incorporação sobre a questão de gênero na formulação de políticas
+          em diferentes áreas - Educação
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_area_trabalho
+      bigquery_type: int64
+      description: Incorporação sobre a questão de gênero na formulação de políticas
+          em diferentes áreas - Trabalho
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_area_cultura
+      bigquery_type: int64
+      description: Incorporação sobre a questão de gênero na formulação de políticas
+          em diferentes áreas - Cultura
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_area_servico_especializado
+      bigquery_type: int64
+      description: Incorporação sobre a questão de gênero na formulação de políticas
+          em diferentes áreas - Serviços especializados de atendimento à violência
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_area_esporte
+      bigquery_type: int64
+      description: Incorporação sobre a questão de gênero na formulação de políticas
+          em diferentes áreas - Esporte
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_area_assistencia_social
+      bigquery_type: int64
+      description: Incorporação sobre a questão de gênero na formulação de políticas
+          em diferentes áreas - Assistência social
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_area_seguranca_publica
+      bigquery_type: int64
+      description: Incorporação sobre a questão de gênero na formulação de políticas
+          em diferentes áreas - Segurança pública
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_area_justica
+      bigquery_type: int64
+      description: Incorporação sobre a questão de gênero na formulação de políticas
+          em diferentes áreas - Justiça
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_area_comunicacao
+      bigquery_type: int64
+      description: Incorporação sobre a questão de gênero na formulação de políticas
+          em diferentes áreas - Comunicação
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_area_meio_ambiente
+      bigquery_type: int64
+      description: Incorporação sobre a questão de gênero na formulação de políticas
+          em diferentes áreas - Meio ambiente
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_area_saude
+      bigquery_type: int64
+      description: Incorporação sobre a questão de gênero na formulação de políticas
+          em diferentes áreas - Saúde
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_area_outra
+      bigquery_type: int64
+      description: Incorporação sobre a questão de gênero na formulação de políticas
+          em diferentes áreas - Outra
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_promocao_igualdade_genero
+      bigquery_type: int64
+      description: Executar diretamente políticas para a promoção e igualdade de gênero
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_enfrentamento_violencia
+      bigquery_type: int64
+      description: Executar diretamente políticas para o enfrentamento da violência
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: politica_promocao_autonomia_mulher
+      bigquery_type: int64
+      description: Executar diretamente políticas para a promoção da autonomia das
+          mulheres (geração de renda e fomento ao empreendedorismo)
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: plano_estadual_politica_mulher
+      bigquery_type: int64
+      description: 'Existência Plano estadual de políticas para as mulheres '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: plano_estadual_politica_mulher_instrumento
+      bigquery_type: string
+      description: 'Por qual instrumento existe um plano estadual de políticas para
+          as mulheres '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: plano_estadual_politica_mulher_ultimo_ano
+      bigquery_type: int64
+      description: 'Último ano de vigência do plano estadual de políticas para as
+          mulheres '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comite_plano_estadual_politica_mulher
+      bigquery_type: int64
+      description: 'O estado instituiu Comitê para o acompanhamento e monitoramento
+          do Plano estadual de políticas para as mulheres '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comite_orgao_gestor_politica_mulher
+      bigquery_type: int64
+      description: O Comitê para o acompanhamento é composto por um - Órgão gestor
+          da política para mulheres
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comite_orgao_gestor_assistencia_social
+      bigquery_type: int64
+      description: O Comitê para o acompanhamento é composto por um - Órgão gestor
+          da assistência social
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comite_orgao_gestor_saude
+      bigquery_type: int64
+      description: O Comitê para o acompanhamento é composto por um - Órgão gestor
+          da saúde
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comite_orgao_gestor_cultura
+      bigquery_type: int64
+      description: O Comitê para o acompanhamento é composto por um - Órgão gestor
+          da cultura
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comite_orgao_gestor_educacao
+      bigquery_type: int64
+      description: O Comitê para o acompanhamento é composto por um - Órgão gestor
+          da educação
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comite_orgao_gestor_justica
+      bigquery_type: int64
+      description: O Comitê para o acompanhamento é composto por um - Órgão gestor
+          da justiça
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comite_orgao_gestor_politica_emprego
+      bigquery_type: int64
+      description: O Comitê para o acompanhamento é composto por um - Órgão gestor
+          responsável por políticas de fomento a geração de trabalho e renda
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comite_orgao_gestor_seguranca_publica
+      bigquery_type: int64
+      description: O Comitê para o acompanhamento é composto por um - Órgão gestor
+          da segurança pública
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comite_outra_secretaria
+      bigquery_type: int64
+      description: O Comitê para o acompanhamento é composto por - Outras secretarias
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: comite_sociedade_civil
+      bigquery_type: int64
+      description: O Comitê para o acompanhamento é composto por - Sociedade civil
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_direito_mulher
+      bigquery_type: int64
+      description: Existência do Conselho estadual de direitos da mulher
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_direito_mulher_lei
+      bigquery_type: int64
+      description: Lei de criação do Conselho estadual de direitos da mulher
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_direito_mulher_ano
+      bigquery_type: int64
+      description: Ano de criação do Conselho estadual de direitos da mulher
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_direito_mulher_formacao
+      bigquery_type: string
+      description: Formação do Conselho estadual de direitos da mulher
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_direito_mulher_reuniao_12_meses
+      bigquery_type: int64
+      description: Quantidade de reuniões nos últimos 12 meses do Conselho estadual
+          de direitos da mulher
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_direito_mulher_reuniao_12_meses_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar a quantidade - Quantidade de reuniões
+          nos últimos 12 meses do Conselho estadual de direitos da mulher
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_direito_mulher_numero_conselheiro
+      bigquery_type: int64
+      description: Número de conselheiros (titulares e suplentes) dentro do Conselho
+          estadual de direitos da mulher
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_capacitacao_membro_continua
+      bigquery_type: int64
+      description: 'Conselho estadual de direitos da mulher realiza capacitação para
+          os membros - Continuada  '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_capacitacao_membro_eventual
+      bigquery_type: int64
+      description: Conselho estadual de direitos da mulher realiza capacitação para
+          os membros - Eventualmente
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_capacitacao_membro_nao_realizada
+      bigquery_type: int64
+      description: Conselho estadual de direitos da mulher realiza capacitação para
+          os membros - Não realiza
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_direito_mulher_infraestrutura
+      bigquery_type: int64
+      description: Conselho estadual de direitos da mulher disponibiliza infraestrutura
+          para o funcionamento
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infraestrutura_conselho_sala_propria
+      bigquery_type: int64
+      description: Disponibiliza infraestrutura para o funcionamento, dentro do Conselho
+          estadual de direitos da mulher - Sala própria
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infraestrutura_conselho_computador
+      bigquery_type: int64
+      description: Disponibiliza infraestrutura para o funcionamento, dentro do Conselho
+          estadual de direitos da mulher - Computador
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infraestrutura_conselho_impressora
+      bigquery_type: int64
+      description: Disponibiliza infraestrutura para o funcionamento, dentro do Conselho
+          estadual de direitos da mulher - Impressora
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infraestrutura_conselho_internet
+      bigquery_type: int64
+      description: Disponibiliza infraestrutura para o funcionamento, dentro do Conselho
+          estadual de direitos da mulher - Acesso à internet
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infraestrutura_conselho_veiculo_proprio
+      bigquery_type: int64
+      description: Disponibiliza infraestrutura para o funcionamento, dentro do Conselho
+          estadual de direitos da mulher - Veículo próprio
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infraestrutura_conselho_telefone
+      bigquery_type: int64
+      description: Disponibiliza infraestrutura para o funcionamento, dentro do Conselho
+          estadual de direitos da mulher - Telefone
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infraestrutura_conselho_diaria
+      bigquery_type: int64
+      description: Disponibiliza infraestrutura para o funcionamento, dentro do Conselho
+          estadual de direitos da mulher - Diárias
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: infraestrutura_conselho_dotacao_orcamentaria
+      bigquery_type: int64
+      description: Disponibiliza infraestrutura para o funcionamento, dentro do Conselho
+          estadual de direitos da mulher - Dotação orçamentária própria
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_direito_mulher_vinculado_adm
+      bigquery_type: string
+      description: O Conselho estadual de direitos da mulher é vinculado administrativamente
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conselho_direito_mulher_presidente
+      bigquery_type: string
+      description: Quem preside o conselho estadual de direitos da mulher
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_mulher_risco_morte
+      bigquery_type: int64
+      description: 'Casa(s)/Abrigo para atendimento a mulheres em situação de violência
+          e risco de morte '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_quantidade
+      bigquery_type: int64
+      description: 'Quantidade de casa(s)/Abrigo para atendimento a mulheres em situação
+          de violência e risco de morte '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_endereco_sigiloso
+      bigquery_type: string
+      description: 'O endereço é sigiloso da casa ou abrigo para mulheres em situação
+          de violência e risco de morte '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_atendimento_psicologico_individual
+      bigquery_type: int64
+      description: 'Atividade realizada dentro da casa ou abrigo - Atendimento psicológico
+          individual '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_atendimento_psicologico_grupo
+      bigquery_type: int64
+      description: Atividade realizada dentro da casa ou abrigo - Atendimento psicológico
+          em grupo
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_atividade_cultural_educativa
+      bigquery_type: int64
+      description: Atividade realizada dentro da casa ou abrigo - Atividades culturais
+          e educativas
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_atividade_profissional
+      bigquery_type: int64
+      description: Atividade realizada dentro da casa ou abrigo - Atividades profissionalizantes
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_atendimento_social
+      bigquery_type: int64
+      description: Atividade realizada dentro da casa ou abrigo - Atendimento social
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_atendimento_juridico
+      bigquery_type: int64
+      description: Atividade realizada dentro da casa ou abrigo - Atendimento jurídico
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_atendimento_medico
+      bigquery_type: int64
+      description: Atividade realizada dentro da casa ou abrigo - Atendimento médico
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_acompanhamento_pedagogico_crianca
+      bigquery_type: int64
+      description: Atividade realizada dentro da casa ou abrigo - Acompanhamento pedagógico
+          das crianças
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_programa_emprego
+      bigquery_type: int64
+      description: Atividade realizada dentro da casa ou abrigo - Encaminhamento para
+          programas de emprego e geração de renda
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_permanencia_crianca_escola
+      bigquery_type: int64
+      description: Atividade realizada dentro da casa ou abrigo - Garantia de inserção/permanência
+          das crianças na escola
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_creche
+      bigquery_type: int64
+      description: Atividade realizada dentro da casa ou abrigo - Creche
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: casa_abrigo_outra_atividade
+      bigquery_type: int64
+      description: Atividade realizada dentro da casa ou abrigo - Outras atividades
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: servico_especializado_enfrentamento_violencia_mulher
+      bigquery_type: int64
+      description: Existência de serviços especializados de enfrentamento à violência
+          contra mulheres no estado
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: servico_ceam_cram_niam
+      bigquery_type: int64
+      description: 'Serviços especializados existentes - Centro Especializado de Atendimento
+          à Mulher (CEAM)/Centro de Referência e Atendimento à Mulher (CRAM)/Núcleos
+          Integrados de Atendimento às Mulheres em Situação de Violência (NIAM) '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_ceam_cram_niam
+      bigquery_type: int64
+      description: 'Quantos Centro Especializado de Atendimento à Mulher (CEAM)/Centro
+          de Referência e Atendimento à Mulher (CRAM)/Núcleos Integrados de Atendimento
+          às Mulheres em Situação de Violência (NIAM) '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: servico_delegacia_atendimento_mulher
+      bigquery_type: int64
+      description: Serviços especializados existentes - Delegacia Especializada de
+          Atendimento ás Mulheres
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_delegacia_atendimento_mulher
+      bigquery_type: int64
+      description: Quantas Delegacia Especializada de Atendimento ás Mulheres
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: servico_nucleo_mulher_delegacia_comum
+      bigquery_type: int64
+      description: Serviços especializados existentes - Núcleo especializado para
+          atendimento à mulher nas delegacias comuns
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_nucleo_mulher_delegacia_comum
+      bigquery_type: int64
+      description: Quantos Núcleo especializado para atendimento à mulher nas delegacias
+          comuns
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: nucleo_mulher_delegacia_comum_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar a quantidade - Núcleo especializado
+          para atendimento à mulher nas delegacias comuns
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: servico_juizado_violencia_domestica_mulher
+      bigquery_type: int64
+      description: Serviços especializados existentes - Juizado ou vara especial de
+          violência doméstica e familiar contra a mulher
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_juizado_violencia_domestica_mulher
+      bigquery_type: int64
+      description: Quantos Juizado ou vara especial de violência doméstica e familiar
+          contra a mulher
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: juizado_violencia_domestica_mulher_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar a quantidade - Juizado ou vara especial
+          de violência doméstica e familiar contra a mulher
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: servico_nucleo_genero_ministerio_publico
+      bigquery_type: int64
+      description: Serviços especializados existentes - Promotorias Especializadas/Núcleos
+          de Gênero do Ministério Público
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_nucleo_genero_ministerio_publico
+      bigquery_type: int64
+      description: Quantas Promotorias Especializadas/Núcleos de Gênero do Ministério
+          Público
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: nucleo_genero_ministerio_publico_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar a quantidade - Promotorias Especializadas/Núcleos
+          de Gênero do Ministério Público
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: servico_nudem
+      bigquery_type: int64
+      description: Serviços especializados existentes - Defensorias da Mulher ou Núcleo
+          Especial de Defesa dos Direitos da Mulher (Nudem)
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_nudem
+      bigquery_type: int64
+      description: Quantas Defensorias da Mulher ou Núcleo Especial de Defesa dos
+          Direitos da Mulher (Nudem)
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: nudem_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar a quantidade - Defensorias da Mulher
+          ou Núcleo Especial de Defesa dos Direitos da Mulher (Nudem)
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: servico_atendimento_violencia_sexual
+      bigquery_type: int64
+      description: Serviços especializados existentes - Serviços Especializados para
+          o Atendimento à Violência Sexual
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_atendimento_violencia_sexual
+      bigquery_type: int64
+      description: Quantos Serviços Especializados para o Atendimento à Violência
+          Sexual
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_violencia_sexual_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar a quantidade - Serviços Especializados
+          para o Atendimento à Violência Sexual
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: servico_presidio_exclusivo_feminino
+      bigquery_type: int64
+      description: Serviços especializados existentes - Presídio exclusivamente feminino
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_presidio_exclusivo_feminino
+      bigquery_type: int64
+      description: Quantos Presídio exclusivamente feminino
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: presidio_exclusivo_feminino_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar a quantidade - Presídio exclusivamente
+          feminino
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: servico_instituto_medico_legal
+      bigquery_type: int64
+      description: Serviços especializados existentes - Instituto médico legal
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_instituto_medico_legal
+      bigquery_type: int64
+      description: Quantos Instituto médico legal
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: instituto_medico_legal_nao_soube_informar
+      bigquery_type: int64
+      description: O estado não soube informar a quantidade - Instituto médico legal
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_mulher_ceam_cram_niam_levantamento
+      bigquery_type: string
+      description: 'Existência de levantamento do quantitativo de mulheres atendidas
+          pelo CEAM/CRAM/NIAM '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_mulher_ceam_cram_niam_divulgacao
+      bigquery_type: int64
+      description: 'Quantitativo é divuldado sobre mulheres atendidas pelo CEAM/CRAM/NIAM '
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_mulher_ceam_cram_niam_2017
+      bigquery_type: int64
+      description: Quantos atendimentos pelo CEAM/CRAM/NIAM foram feitos em 2017
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ceam_cram_niam_atendimento_psicologico_individual
+      bigquery_type: int64
+      description: Principais atividades do CEAM/CRAM/NIAM - Atendimento psicológico
+          individual
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ceam_cram_niam_atendimento_psicologico_grupo
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ceam_cram_niam_cultural_educativa_profissional
+      bigquery_type: int64
+      description: Principais atividades do CEAM/CRAM/NIAM - Atividades culturais,
+          educativas e profissionais
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ceam_cram_niam_programa_social
+      bigquery_type: int64
+      description: Principais atividades do CEAM/CRAM/NIAM - Atendimento social que
+          encaminha para programas sociais do governo
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ceam_cram_niam_atendimento_juridico
+      bigquery_type: int64
+      description: Principais atividades do CEAM/CRAM/NIAM - Atendimento jurídico
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ceam_cram_niam_programa_emprego
+      bigquery_type: int64
+      description: Principais atividades do CEAM/CRAM/NIAM - Encaminhamento para programas
+          de emprego e geração de renda
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ceam_cram_niam_outras
+      bigquery_type: int64
+      description: Principais atividades do CEAM/CRAM/NIAM - Outras atividades
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ceam_cram_niam_nao_soube_informar
+      bigquery_type: int64
+      description: Principais atividades do CEAM/CRAM/NIAM - Não sabe informar
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_seguranca_publica_levantamento
+      bigquery_type: int64
+      description: Existência do levantamento do quantitativo de mulheres atendidas
+          pelos serviços especializados de segurança pública para mulheres em situação
+          de violência
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_seguranca_publica_informacao_violencia
+      bigquery_type: int64
+      description: Existe informações acerca do tipo de violência/agressão das mulheres
+          atendidas pelos serviços especializados de segurança pública
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_saude_levantamento
+      bigquery_type: int64
+      description: Existência do levantamento do quantitativo de mulheres atendidas
+          pelos serviços especializados de saúde para mulheres em situação de violência
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atendimento_saude_informacao_violencia
+      bigquery_type: int64
+      description: Existe informações acerca do tipo de violência/agressão das mulheres
+          atendidas pelos serviços especializados de saúde
+      temporal_coverage:
+          - 2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 27
+
+metadata_modified:
