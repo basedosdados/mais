@@ -48,9 +48,6 @@ update_frequency: unique
 #       columns:
 #           - sigla_uf
 observation_level:
-    - entity: year
-      columns:
-        - ano
     - country: br    
       entity: municipality
       columns:
