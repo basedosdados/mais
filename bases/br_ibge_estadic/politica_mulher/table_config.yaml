@@ -32,7 +32,7 @@ update_frequency: uncertain
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
     - country: br
-    - entity: state
+      entity: state
       columns:
           - sigla_uf 
 
