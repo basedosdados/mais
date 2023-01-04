@@ -11,7 +11,7 @@ title: Country
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: This dataset contains the Corruption Perception Index for countries since of 2012.
+description: This dataset contains the Corruption Perception Index for 180 countries.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -51,6 +51,9 @@ observation_level:
       - entity: year
         columns:
            - year
+      - entity: country
+        columns:
+           - country_id_iso_3
 
 last_updated:
     metadata: '2023-01-03'
@@ -80,7 +83,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Standarization for Base dos Dados and Merge for ISO3 Countries in 2013.
+data_cleaning_description: Standarization and include ISO3code.
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_ti_corruption_perception/code
