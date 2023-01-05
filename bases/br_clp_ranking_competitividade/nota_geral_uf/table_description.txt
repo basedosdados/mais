@@ -1,0 +1,48 @@
+O Ranking de Competitividade é uma ferramenta que busca pautar a atuação dos líderes públicos brasileiros na melhoria da competitividade dos seus estados. A partir da análise do conjunto de 10 pilares, o Ranking fornece uma visão sistêmica da gestão pública estadual.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2015(1)2022
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Extração da tabela de Dados Normalizados e da tabela Posições, na base original. Unificação das tabelas, e padronização das variáveis pelas normas da BD.
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
