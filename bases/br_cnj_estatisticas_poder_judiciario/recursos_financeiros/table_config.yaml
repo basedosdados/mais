@@ -5,7 +5,7 @@ dataset_id: br_cnj_estatisticas_poder_judiciario
 table_id: recursos_financeiros
 
 # Título da tabela.
-title: Recursos Financeiros
+title: Recursos Financeiros 
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
