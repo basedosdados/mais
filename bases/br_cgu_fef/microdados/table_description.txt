@@ -1,0 +1,43 @@
+Microdados a nível de constatação.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: None
+Código: 
+Tratado por
+-----------
+Nome: None
+Código: 
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2006(1)2018
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+
+
+
+Frequencia de Atualização
+-------------------------
+['uncertain']

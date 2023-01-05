@@ -153,6 +153,8 @@ foreach ano of numlist 2002(2)2022 {
 		
 		destring numero_candidato, replace force
 		
+		gen tipo_eleicao = "eleicao ordinaria"
+		
 	}
 	if `ano' == 2004 {
 		
@@ -209,6 +211,8 @@ foreach ano of numlist 2002(2)2022 {
 		
 		destring numero_candidato id_municipio_tse*, replace force
 		
+		gen tipo_eleicao = "eleicao ordinaria"
+		
 	}
 	if `ano' == 2006 {
 		
@@ -261,6 +265,8 @@ foreach ano of numlist 2002(2)2022 {
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
 		destring numero_candidato, replace force
+		
+		gen tipo_eleicao = "eleicao ordinaria"
 		
 	}
 	if `ano' == 2008 {
@@ -320,6 +326,8 @@ foreach ano of numlist 2002(2)2022 {
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
 		destring numero_candidato id_municipio_tse*, replace force
+		
+		gen tipo_eleicao = "eleicao ordinaria"
 		
 	}
 	if `ano' == 2010 {
@@ -397,6 +405,8 @@ foreach ano of numlist 2002(2)2022 {
 		
 		destring numero_candidato, replace force
 		
+		gen tipo_eleicao = "eleicao ordinaria"
+		
 	}
 	if `ano' == 2012 {
 		
@@ -473,6 +483,8 @@ foreach ano of numlist 2002(2)2022 {
 		replace valor_receita = subinstr(valor_receita, ",", ".", .)
 		
 		destring numero_candidato id_municipio_tse*, replace force
+		
+		gen tipo_eleicao = "eleicao ordinaria"
 		
 	}
 	if `ano' == 2014 {

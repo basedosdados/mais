@@ -1,18 +1,15 @@
 """
 Share fixtures for tests.
 """
-# pylint: disable=invalid-name, protected-access
-from pathlib import Path
 import shutil
 import sys
-import re
+# pylint: disable=invalid-name, protected-access
+from pathlib import Path
 
 import pytest
 import ruamel.yaml as ryaml
-
 from basedosdados import Metadata, Storage, Dataset, Table
 from basedosdados.upload.base import Base
-
 
 DATASET_ID = "pytest"
 TABLE_ID = "pytest"
@@ -324,13 +321,10 @@ def fixture_python_path():
     '''
     Fixture for python_path
     '''
-    paths = "\n".join(sys.path)
-    python_paths = re.findall(r".*python3.\d(?=\n)", paths)
+    python_path = sys.executable
 
-    if len(python_paths) == 0:
+    if "python" not in python_path:
         sys.exit("Cannot find Python 3 in your path")
-    else:
-        python_path = python_paths[0].split("/")[-1]
 
     return python_path
 
