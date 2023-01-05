@@ -1,0 +1,44 @@
+
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-clp-ranking-competitividade
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Ranking de Competitividade
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Se a organização não estiver na lista acima ou o nome não estiver conforme o manual de estilo
+# criar ou renomear a organização em https://basedosdados.org/organization/
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization: br-clp
+
+# Descrição do conjunto
+
+notes: O Ranking de Competitividade é uma ferramenta para balizar as ações dos governos estaduais e apoiar a elaboração de políticas baseadas em evidências. A análise ocorre através do estudo dos resultados de diversos indicadores nas mais distintas áreas, a nível estadual e municipal.
+
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+  - politica
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos:
+#    - fertilidade
+#    - preco
+#    - desmatamento
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+  - ranking
+  - competitividade
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified:
