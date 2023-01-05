@@ -19,7 +19,7 @@ organization: br-clp
 notes: O Ranking de Competitividade é uma ferramenta para balizar as ações dos governos estaduais e apoiar a elaboração de políticas baseadas em evidências. A análise ocorre através do estudo dos resultados de diversos indicadores nas mais distintas áreas, a nível estadual e municipal.
 
 
-# Quais temas caracterizam a base?
+# Quais temas caracterizam a base ?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
 groups:
