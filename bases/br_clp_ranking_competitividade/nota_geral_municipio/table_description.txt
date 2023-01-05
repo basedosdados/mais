@@ -1,0 +1,48 @@
+A terceira edição do Ranking de Competitividade dos Municípios analisa um total de 415 municípios brasileiros, com o objetivo de apoiar os líderes públicos nas tomadas de decisões, com foco na melhoria da gestão das cidades. O estudo é feito a partir de 65 indicadores, organizados em 13 pilares temáticos e 3 dimensões (instituições, sociedade e economia).
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2022
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Extração na tabela Detalhamento - Pilares e Dimensões, os dados das colunas de Nota e Posição. Padronização das variáveis pelas normas da BD.
+
+
+
+Frequencia de Atualização
+-------------------------
+unique
