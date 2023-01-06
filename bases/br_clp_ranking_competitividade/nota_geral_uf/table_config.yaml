@@ -7,7 +7,7 @@ table_id: nota_geral_uf
 # Título da tabela.
 title: Nota Geral das Unidades Federativas
 
-# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver .
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
