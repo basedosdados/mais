@@ -1,0 +1,52 @@
+The table includes 302 indicators that are estimated from microdata drawn from the labor force and household welfare surveys and augmented with administrative data for 202 economies in five categories (the demographics of the private and public sector workforces; public sector wage premiums; relative wages and pay compression ratios, gender pay gaps; and the public sector wage bill).
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- year
+
+
+
+
+Cobertura Temporal
+------------------
+- 2000(1)2020
+
+
+
+
+Cobertura Espacial
+------------------
+- world
+
+
+
+
+Tratamento
+----------
+The year columns were pivoted in the original table, creating a single column containing all the scores and another corresponding to the years.
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
