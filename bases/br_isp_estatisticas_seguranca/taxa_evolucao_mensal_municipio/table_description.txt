@@ -1,9 +1,8 @@
 Estatísticas de segurança: série histórica mensal por município desde 01/2014 (taxas por 100 mil habitantes)
 
-
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-isp-estatisticas-seguranca
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_isp_estatisticas_seguranca
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,47 +10,40 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Hevilyn Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_isp_estatisticas_seguranca/code
-Email: hevilynsouza@basedosdados.orgTratado por
+Código: 
+Email: hevilynsouza@basedosdados.org
+Tratado por
 -----------
 Nome: Hevilyn Souza
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_isp_estatisticas_seguranca/code
+Código: 
 Website: http://www.isp.rj.gov.br/
 Email: hevilynsouza@basedosdados.org
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- municipio
-- ano
-- mes
 
-Colunas identificando linhas unicamente
--------------------
-- id_municipio
-- ano
-- mes
+
+
+
 
 Cobertura Temporal
 ------------------
-- 2014
-- 2015
-- 2016
-- 2017
-- 2018
-- 2019
-- 2020
-- 2021
+- 2014(1)2021
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- sa.br.rj
+
+
+
 
 Tratamento
 ----------
-Renomeei variáveis para consistência.
+Renomeação das variáveis para consistência.
+
+
 
 Frequencia de Atualização
 -------------------------
-mes
-
-
+month
