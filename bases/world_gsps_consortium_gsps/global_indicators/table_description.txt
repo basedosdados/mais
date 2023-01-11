@@ -1,0 +1,51 @@
+An international research initiative to better understand how public services work and to help governments manage public servants
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Laura Amaral
+Código: 
+Website: 
+Email: laura.amaral@basedosdados.org
+Tratado por
+-----------
+Nome: Patrick Teixeira
+Código: 
+Email: patrick.tx@hotmail.com.br
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2010(2)2016
+- 2017(1)2019
+- 2021
+
+
+
+
+Cobertura Espacial
+------------------
+- world
+
+
+
+
+Tratamento
+----------
+rename and organize columns and replace in the harmonize column
+
+
+
+Frequencia de Atualização
+-------------------------
+uncertain

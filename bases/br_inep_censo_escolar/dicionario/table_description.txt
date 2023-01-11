@@ -1,4 +1,4 @@
-None
+Dicionário das tabelas do Censo Escolar.
 
 Para saber mais acesse:
 Website: 
@@ -9,9 +9,9 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Crislane Alves
+Nome: Ingrid de Sales Rabelo
 Código: 
-Email: crislanealves@basedosdados.org
+Email: ingrid.rabelo@basedosdados.org
 Tratado por
 -----------
 Nome: Crislane Alves
@@ -25,14 +25,12 @@ Email: crislanealves@basedosdados.org
 
 Cobertura Temporal
 ------------------
-- 2007(1)2020
 
 
 
 
 Cobertura Espacial
 ------------------
-- {'continent': 'south_america', 'country': 'br'}
 
 
 
@@ -42,4 +40,4 @@ Cobertura Espacial
 
 Frequencia de Atualização
 -------------------------
-one_year
+unique

@@ -98,6 +98,3 @@ python setup.py develop
 7. Faz merge da branch para a master
 8. Faz release usando a UI do GitHub
 9. Atualizar versão do pacote usada internamente
-
-
-
