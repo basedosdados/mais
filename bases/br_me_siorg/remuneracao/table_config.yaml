@@ -6,7 +6,7 @@ dataset_id: br_me_siorg
 table_id: remuneracao
 
 # Título da tabela.
-title:
+title: Remuneração
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -199,4 +199,4 @@ columns:
 
 number_rows: 258
 
-metadata_modified: '2022-11-25T20:39:31.189443'
+metadata_modified: '2023-01-11T19:51:49.183996'
