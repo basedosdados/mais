@@ -3,16 +3,16 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_me_sic
 
-table_id: dicionario_transferencia
+table_id: dicionario
 
 # Título da tabela.
-title: Dicionário de transferências
+title: Dicionário
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Dicionário da tabela de custos com transferências do governo federal
+description: Dicionário do Sistemas de Informações de Custos 
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -31,10 +31,11 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
+    - 2015(1)2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency:
+update_frequency: uncertain
 
 # Nível de observação da tabela: o que representa cada linha.
 # A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -49,13 +50,13 @@ update_frequency:
 observation_level:
 
 last_updated:
-    metadata:
-    data:
-    release:
+    metadata: '2023-01-12'
+    data: '2023-01-12 16:54:00'
+    release: '2023-01-12 16:54:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version:
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -69,17 +70,17 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name:
-    email:
-    github_user:
+    name: Rafael Gabbay
+    email: rafael.lopes.gabbay@gmail.com
+    github_user: rlgabbay
     ckan_user:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
+data_cleaning_description: Dicionário é criado automaticamente a partir dos pares código-descrição das colunas com as unidades organizacionais, esfera orçamentária e resultado primário.
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url:
+data_cleaning_code_url: https://github.com/basedosdados/mais/blob/master/bases/br_me_sic/code/custos_transferencias.py
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -185,6 +186,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows:
+number_rows: 649
 
 metadata_modified:

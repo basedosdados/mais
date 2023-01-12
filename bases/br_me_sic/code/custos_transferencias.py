@@ -92,13 +92,12 @@ vars_dict = [['id_unidade_organizacional_nivel_0', 'nome_unidade_organizacional_
                      ['id_unidade_organizacional_nivel_1', 'nome_unidade_organizacional_nivel_1'],
                      ['id_unidade_organizacional_nivel_2', 'nome_unidade_organizacional_nivel_2'],
                      ['id_unidade_organizacional_nivel_3', 'nome_unidade_organizacional_nivel_3'],
-                     ['id_natureza_juridica', 'nome_natureza_juridica'],
                      ['id_esfera_orcamentaria', 'nome_esfera_orcamentaria'],
                      ['id_resultado_primario','nome_resultado_primario']];
 
 dicionario = create_dictionary(transferencia,vars_dict,'ano_lancamento','transferencia')
 dicionario_path = output +'dicionario_transferencia'
-os.makedirs(dicionario_path)
+os.makedirs(dicionario_path, exist_ok=True)
 dicionario.to_csv(dicionario_path+'/dicionario_transferencia.csv',index = False)
 
 # Remove descrições       
@@ -128,11 +127,9 @@ t.create(path = 'transferencia/output/transferencia',if_storage_data_exists= 're
 t.publish(if_exists = 'replace')
 
 # Publicar o dicionário
-t = bd.Table(dataset_id = 'br_me_sic', table_id = 'dicionario_transferencia')
+t = bd.Table(dataset_id = 'br_me_sic', table_id = 'dicionario')
 t.create(path = 'transferencia/output/dicionario_transferencia',if_storage_data_exists= 'replace')
 t.publish(if_exists = 'replace')
-
-
 
 
 

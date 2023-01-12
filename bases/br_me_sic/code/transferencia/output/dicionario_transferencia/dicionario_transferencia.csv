@@ -1,0 +1,648 @@
+id_tabela,nome_coluna,chave,cobertura_temporal,valor
+transferencia,id_unidade_organizacional_nivel_0,26,2015(1)2023,PRESIDENCIA DA REPUBLICA
+transferencia,id_unidade_organizacional_nivel_1,1988,2015(1)2019,"MINISTERIO DA CIENCIA, TECNOLOGIA E INOVACAO"
+transferencia,id_unidade_organizacional_nivel_1,14,2015(1)2023,"MINISTERIO DA AGRICULTURA, PECUARIA E ABASTECIMENTO"
+transferencia,id_unidade_organizacional_nivel_1,42670,2015(1)2018,MINISTERIO DA INTEGRACAO NACIONAL
+transferencia,id_unidade_organizacional_nivel_1,2846,2015(1)2022,MINISTERIO DOS TRANSPORTES
+transferencia,id_unidade_organizacional_nivel_1,2852,2015(1)2023,MINISTERIO DE MINAS E ENERGIA
+transferencia,id_unidade_organizacional_nivel_1,244,2015(1)2023,MINISTERIO DA EDUCACAO
+transferencia,id_unidade_organizacional_nivel_1,1926,2015(1)2018,MINISTERIO DA CULTURA
+transferencia,id_unidade_organizacional_nivel_1,304,2015(1)2023,MINISTERIO DA SAUDE
+transferencia,id_unidade_organizacional_nivel_1,1927,2015(1)2022,MINISTERIO DO MEIO AMBIENTE
+transferencia,id_unidade_organizacional_nivel_1,-9,2015(1)2022,NAO SE APLICA
+transferencia,id_unidade_organizacional_nivel_1,1945,2015(1)2018,MINISTERIO DO DESENVOLVIMENTO SOCIAL E COMBATE A FOME
+transferencia,id_unidade_organizacional_nivel_1,2844,2015(1)2018,MINISTERIO DO TRABALHO E PREVIDENCIA SOCIAL
+transferencia,id_unidade_organizacional_nivel_1,316,2015(1)2018,MINISTERIO DA JUSTICA
+transferencia,id_unidade_organizacional_nivel_1,208423,2015(1)2015,"MINISTERIO DAS MULHERES, DA IGUALDADE RACIAL E DOS DIREITOS HUMANOS"
+transferencia,id_unidade_organizacional_nivel_1,3162,2015(1)2018,"MINISTERIO DO DESENVOLVIMENTO, INDUSTRIA E COMERCIO EXTERIOR"
+transferencia,id_unidade_organizacional_nivel_1,17125,2015(1)2015,MINISTERIO DO DESENVOLVIMENTO AGRARIO
+transferencia,id_unidade_organizacional_nivel_1,41066,2015(1)2023,MINISTERIO DA DEFESA
+transferencia,id_unidade_organizacional_nivel_1,1929,2015(1)2018,MINISTERIO DA FAZENDA
+transferencia,id_unidade_organizacional_nivel_1,263,2015(1)2022,MINISTERIO DAS RELACOES EXTERIORES
+transferencia,id_unidade_organizacional_nivel_1,72084,2015(1)2022,MINISTERIO DO TURISMO
+transferencia,id_unidade_organizacional_nivel_1,115257,2015(1)2015,SECRETARIA DE AVIACAO CIVIL DA PRESIDENCIA DA REPUBLICA
+transferencia,id_unidade_organizacional_nivel_1,2981,2015(1)2018,"MINISTERIO DO PLANEJAMENTO, ORCAMENTO E GESTAO"
+transferencia,id_unidade_organizacional_nivel_1,52303,2015(1)2015,CONTROLADORIA-GERAL DA UNIAO
+transferencia,id_unidade_organizacional_nivel_1,42673,2015(1)2019,SECRETARIA DE GOVERNO DA PRESIDENCIA DA REPUBLICA
+transferencia,id_unidade_organizacional_nivel_1,1930,2015(1)2015,MINISTERIO DA PREVIDENCIA SOCIAL
+transferencia,id_unidade_organizacional_nivel_1,42672,2015(1)2018,MINISTERIO DAS CIDADES
+transferencia,id_unidade_organizacional_nivel_1,92748,2015(1)2015,SECRETARIA DE PORTOS DA PRESIDENCIA DA REPUBLICA
+transferencia,id_unidade_organizacional_nivel_1,94285,2015(1)2015,SECRETARIA DE ASSUNTOS ESTRATEGICOS DA PRESIDENCIA DA REPUBLICA
+transferencia,id_unidade_organizacional_nivel_1,1988,2015(1)2019,"MINISTERIO DA CIENCIA, TECNOLOGIA E INOVACAO E COMUNICACOES"
+transferencia,id_unidade_organizacional_nivel_1,2844,2015(1)2018,MINISTERIO DO TRABALHO
+transferencia,id_unidade_organizacional_nivel_1,214460,2016(1)2022,"MINISTERIO DA TRANSPARENCIA, FISCALIZACAO E CONTROLADORIA-GERAL DA UNIAO"
+transferencia,id_unidade_organizacional_nivel_1,1945,2015(1)2018,MINISTERIO DO DESENVOLVIMENTO SOCIAL E AGRARIO
+transferencia,id_unidade_organizacional_nivel_1,316,2015(1)2018,MINISTERIO DA JUSTICA E CIDADANIA
+transferencia,id_unidade_organizacional_nivel_1,2837,2016(1)2018,CASA CIVIL DA PRESIDENCIA DA REPUBLICA
+transferencia,id_unidade_organizacional_nivel_1,3162,2015(1)2018,"MINISTERIO DA INDUSTRIA, COMERCIO EXTERIOR E SERVICOS"
+transferencia,id_unidade_organizacional_nivel_1,2846,2015(1)2022,"MINISTERIO DOS TRANSPORTES, PORTOS E AVIACAO CIVIL"
+transferencia,id_unidade_organizacional_nivel_1,2981,2015(1)2018,"MINISTERIO DO PLANEJAMENTO, DESENVOLVIMENTO E GESTAO"
+transferencia,id_unidade_organizacional_nivel_1,216627,2016(1)2016,SECRETARIA DO PROGRAMA DE PARCERIAS DE INVESTIMENTOS
+transferencia,id_unidade_organizacional_nivel_1,1988,2015(1)2019,"MINISTERIO DA CIENCIA, TECNOLOGIA, INOVACOES E COMUNICACOES"
+transferencia,id_unidade_organizacional_nivel_1,316,2015(1)2018,MINISTERIO DA JUSTICA E SEGURANCA PUBLICA
+transferencia,id_unidade_organizacional_nivel_1,1945,2015(1)2018,MINISTERIO DO DESENVOLVIMENTO SOCIAL
+transferencia,id_unidade_organizacional_nivel_1,219925,2017(1)2022,MINISTERIO DOS DIREITOS HUMANOS
+transferencia,id_unidade_organizacional_nivel_1,36670,2017(1)2018,MINISTERIO DO ESPORTE
+transferencia,id_unidade_organizacional_nivel_1,219924,2017(1)2022,SECRETARIA-GERAL DA PRESIDENCIA DA REPUBLICA
+transferencia,id_unidade_organizacional_nivel_1,214460,2016(1)2022,MINISTERIO DA TRANSPARENCIA E CONTROLADORIA-GERAL DA UNIAO
+transferencia,id_unidade_organizacional_nivel_1,226241,2018(1)2018,MINISTERIO DA SEGURANCA PUBLICA
+transferencia,id_unidade_organizacional_nivel_1,235880,2019(1)2023,MINISTERIO DO DESENVOLVIMENTO REGIONAL
+transferencia,id_unidade_organizacional_nivel_1,2846,2015(1)2022,MINISTERIO DA INFRAESTRUTURA
+transferencia,id_unidade_organizacional_nivel_1,235876,2019(1)2023,MINISTERIO DA ECONOMIA
+transferencia,id_unidade_organizacional_nivel_1,235874,2019(1)2022,MINISTERIO DA CIDADANIA
+transferencia,id_unidade_organizacional_nivel_1,219925,2017(1)2022,"MINISTERIO DA MULHER, DA FAMILIA E DOS DIREITOS HUMANOS"
+transferencia,id_unidade_organizacional_nivel_1,235881,2019(1)2023,MINISTERIO DA JUSTICA E SEGURANCA PUBLICA
+transferencia,id_unidade_organizacional_nivel_1,214460,2016(1)2022,CONTROLADORIA-GERAL DA UNIAO
+transferencia,id_unidade_organizacional_nivel_1,267175,2020(1)2022,"MINISTERIO DA CIENCIA, TECNOLOGIA E INOVACOES"
+transferencia,id_unidade_organizacional_nivel_1,264359,2020(1)2022,MINISTERIO DAS COMUNICACOES
+transferencia,id_unidade_organizacional_nivel_1,46,2020(1)2020,ADVOCACIA-GERAL DA UNIAO
+transferencia,id_unidade_organizacional_nivel_1,89,2021(1)2022,BANCO CENTRAL DO BRASIL
+transferencia,id_unidade_organizacional_nivel_1,276368,2021(1)2022,MINISTERIO DO TRABALHO E PREVIDENCIA
+transferencia,id_unidade_organizacional_nivel_1,1927,2015(1)2022,MINISTERIO DO MEIO AMBIENTE E MUDANCA DO CLIMA
+transferencia,id_unidade_organizacional_nivel_1,27,2022(1)2022,GABINETE DE SEGURANCA INSTITUCIONAL DA PRESIDENCIA DA REPUBLICA
+transferencia,id_unidade_organizacional_nivel_2,1,2015(1)2022,FINANCIADORA DE ESTUDOS E PROJETOS
+transferencia,id_unidade_organizacional_nivel_2,25,2015(1)2022,EMPRESA BRASILEIRA DE PESQUISA AGROPECUARIA
+transferencia,id_unidade_organizacional_nivel_2,169,2015(1)2023,COMPANHIA DE DESENVOLVIMENTO DOS VALES DO SAO FRANCISCO E DO PARNAIBA
+transferencia,id_unidade_organizacional_nivel_2,119672,2015(1)2022,EMPRESA DE PLANEJAMENTO E LOGISTICA S.A.
+transferencia,id_unidade_organizacional_nivel_2,76608,2015(1)2022,EMPRESA DE PESQUISA ENERGETICA
+transferencia,id_unidade_organizacional_nivel_2,970,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DE CIENCIAS DA SAUDE DE PORTO ALEGRE
+transferencia,id_unidade_organizacional_nivel_2,1782,2015(1)2022,FUNDACAO CULTURAL PALMARES
+transferencia,id_unidade_organizacional_nivel_2,473,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DE OURO PRETO
+transferencia,id_unidade_organizacional_nivel_2,477,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DE PELOTAS
+transferencia,id_unidade_organizacional_nivel_2,2330,2015(1)2022,FUNDACAO NACIONAL DE ARTES
+transferencia,id_unidade_organizacional_nivel_2,827,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL
+transferencia,id_unidade_organizacional_nivel_2,250,2015(1)2023,COORDENACAO DE APERFEICOAMENTO DE PESSOAL DE NIVEL SUPERIOR
+transferencia,id_unidade_organizacional_nivel_2,315,2015(1)2022,FUNDACAO OSWALDO CRUZ
+transferencia,id_unidade_organizacional_nivel_2,2207,2015(1)2023,FUNDACAO NACIONAL DE SAUDE
+transferencia,id_unidade_organizacional_nivel_2,92930,2015(1)2018,SECRETARIA DE EXTRATIVISMO E DESENVOLVIMENTO RURAL SUSTENTAVEL
+transferencia,id_unidade_organizacional_nivel_2,40127,2015(1)2018,SECRETARIA DE FOMENTO E INCENTIVO A CULTURA
+transferencia,id_unidade_organizacional_nivel_2,-9,2015(1)2022,NAO SE APLICA
+transferencia,id_unidade_organizacional_nivel_2,38238,2015(1)2018,SECRETARIA NACIONAL DE ASSISTENCIA SOCIAL
+transferencia,id_unidade_organizacional_nivel_2,3273,2015(1)2023,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,75234,2015(1)2022,SECRETARIA DE DESENVOLVIMENTO TECNOLOGICO E INOVACAO
+transferencia,id_unidade_organizacional_nivel_2,334,2015(1)2022,ARQUIVO NACIONAL
+transferencia,id_unidade_organizacional_nivel_2,3520,2015(1)2022,SECRETARIA DO PRODUTOR RURAL E COOPERATIVISMO
+transferencia,id_unidade_organizacional_nivel_2,766,2015(1)2022,SECRETARIA DE EDUCACAO SUPERIOR
+transferencia,id_unidade_organizacional_nivel_2,3231,2015(1)2016,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,77782,2015(1)2018,SECRETARIA NACIONAL DE SEGURANCA ALIMENTAR E NUTRICIONAL
+transferencia,id_unidade_organizacional_nivel_2,3662,2015(1)2018,SECRETARIA DO AUDIOVISUAL
+transferencia,id_unidade_organizacional_nivel_2,102521,2015(1)2018,SECRETARIA DA CIDADANIA E DA DIVERSIDADE CULTURAL
+transferencia,id_unidade_organizacional_nivel_2,10,2015(1)2022,INSTITUTO NACIONAL DE PESQUISAS ESPACIAIS
+transferencia,id_unidade_organizacional_nivel_2,89539,2015(1)2022,SERVICO FLORESTAL BRASILEIRO
+transferencia,id_unidade_organizacional_nivel_2,3234,2015(1)2022,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,38348,2015(1)2023,SECRETARIA NACIONAL DE PROTECAO E DEFESA CIVIL
+transferencia,id_unidade_organizacional_nivel_2,42802,2015(1)2022,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,75229,2015(1)2015,SECRETARIA DE CIENCIA E TECNOLOGIA PARA INCLUSAO SOCIAL
+transferencia,id_unidade_organizacional_nivel_2,43032,2015(1)2022,SECRETARIA DE INFRAESTRUTURA HIDRICA
+transferencia,id_unidade_organizacional_nivel_2,73212,2015(1)2016,SECRETARIA ESPECIAL DE POLITICAS DE PROMOCAO DA IGUALDADE RACIAL
+transferencia,id_unidade_organizacional_nivel_2,3270,2015(1)2018,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,44987,2015(1)2015,SECRETARIA DA AGRICULTURA FAMILIAR
+transferencia,id_unidade_organizacional_nivel_2,48,2015(1)2022,COMANDO DA AERONAUTICA
+transferencia,id_unidade_organizacional_nivel_2,1801,2015(1)2016,SECRETARIA ESPECIAL DE DIREITOS HUMANOS
+transferencia,id_unidade_organizacional_nivel_2,68487,2015(1)2022,SECRETARIA ESPECIAL DE POLITICAS PARA AS MULHERES
+transferencia,id_unidade_organizacional_nivel_2,72104,2015(1)2020,SECRETARIA DE DESENVOLVIMENTO REGIONAL
+transferencia,id_unidade_organizacional_nivel_2,75313,2015(1)2018,SECRETARIA NACIONAL DE ECONOMIA SOLIDARIA
+transferencia,id_unidade_organizacional_nivel_2,428,2015(1)2022,UNIVERSIDADE FEDERAL DO PARANA
+transferencia,id_unidade_organizacional_nivel_2,430,2015(1)2022,UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL
+transferencia,id_unidade_organizacional_nivel_2,2045,2015(1)2022,INSTITUTO DO PATRIMONIO HISTORICO E ARTISTICO NACIONAL
+transferencia,id_unidade_organizacional_nivel_2,67671,2015(1)2022,UNIVERSIDADE FEDERAL DE CAMPINA GRANDE
+transferencia,id_unidade_organizacional_nivel_2,423,2015(1)2022,UNIVERSIDADE FEDERAL DE MINAS GERAIS
+transferencia,id_unidade_organizacional_nivel_2,57682,2015(1)2022,AGENCIA NACIONAL DO CINEMA
+transferencia,id_unidade_organizacional_nivel_2,100584,2015(1)2022,INSTITUTO BRASILEIRO DE MUSEUS
+transferencia,id_unidade_organizacional_nivel_2,249,2015(1)2022,INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA
+transferencia,id_unidade_organizacional_nivel_2,253,2015(1)2023,FUNDO NACIONAL DE DESENVOLVIMENTO DA EDUCACAO
+transferencia,id_unidade_organizacional_nivel_2,445,2015(1)2022,CENTRO FEDERAL DE EDUCACAO TECNOLOGICA DE MINAS GERAIS
+transferencia,id_unidade_organizacional_nivel_2,100901,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO NORTE DE MINAS GERAIS"
+transferencia,id_unidade_organizacional_nivel_2,91842,2015(1)2022,INSTITUTO CHICO MENDES DE CONSERVACAO DA BIODIVERSIDADE
+transferencia,id_unidade_organizacional_nivel_2,1799,2015(1)2023,INSTITUTO NACIONAL DE COLONIZACAO E REFORMA AGRARIA
+transferencia,id_unidade_organizacional_nivel_2,21089,2015(1)2023,AGENCIA NACIONAL DE ENERGIA ELETRICA
+transferencia,id_unidade_organizacional_nivel_2,166,2015(1)2021,SUPERINTENDENCIA DA ZONA FRANCA DE MANAUS
+transferencia,id_unidade_organizacional_nivel_2,240,2015(1)2023,"INSTITUTO NACIONAL DE METROLOGIA, QUALIDADE E TECNOLOGIA"
+transferencia,id_unidade_organizacional_nivel_2,91138,2015(1)2023,SUPERINTENDENCIA DO DESENVOLVIMENTO DA AMAZONIA
+transferencia,id_unidade_organizacional_nivel_2,54844,2015(1)2022,DEPARTAMENTO NACIONAL DE INFRAESTRUTURA DE TRANSPORTES
+transferencia,id_unidade_organizacional_nivel_2,223,2015(1)2022,COMISSAO NACIONAL DE ENERGIA NUCLEAR
+transferencia,id_unidade_organizacional_nivel_2,227,2015(1)2022,COMPANHIA DE PESQUISA DE RECURSOS MINERAIS
+transferencia,id_unidade_organizacional_nivel_2,1710,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DO AMAPA
+transferencia,id_unidade_organizacional_nivel_2,94739,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DO PAMPA
+transferencia,id_unidade_organizacional_nivel_2,468,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DO PIAUI
+transferencia,id_unidade_organizacional_nivel_2,470,2015(1)2022,FUNDACAO UNIVERSIDADE DE BRASILIA
+transferencia,id_unidade_organizacional_nivel_2,173,2015(1)2021,FUNDACAO NACIONAL DO INDIO
+transferencia,id_unidade_organizacional_nivel_2,8,2015(1)2022,CONSELHO NACIONAL DE DESENVOLVIMENTO CIENTIFICO E TECNOLOGICO
+transferencia,id_unidade_organizacional_nivel_2,3413,2015(1)2020,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,9053,2015(1)2022,SECRETARIA NACIONAL DE SEGURANCA PUBLICA
+transferencia,id_unidade_organizacional_nivel_2,2058,2015(1)2018,SECRETARIA DE POLITICA DE INFORMATICA
+transferencia,id_unidade_organizacional_nivel_2,24712,2015(1)2021,MUSEU PARAENSE EMILIO GOELDI
+transferencia,id_unidade_organizacional_nivel_2,3412,2015(1)2020,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,429,2015(1)2022,UNIVERSIDADE FEDERAL DE SANTA CATARINA
+transferencia,id_unidade_organizacional_nivel_2,89,2015(1)2020,BANCO CENTRAL DO BRASIL
+transferencia,id_unidade_organizacional_nivel_2,431,2015(1)2022,UNIVERSIDADE FEDERAL DE SANTA MARIA
+transferencia,id_unidade_organizacional_nivel_2,415,2015(1)2022,UNIVERSIDADE FEDERAL DO PARA
+transferencia,id_unidade_organizacional_nivel_2,94430,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE BRASILIA"
+transferencia,id_unidade_organizacional_nivel_2,417,2015(1)2022,UNIVERSIDADE FEDERAL DO RIO GRANDE DO NORTE
+transferencia,id_unidade_organizacional_nivel_2,418,2015(1)2022,UNIVERSIDADE FEDERAL DE PERNAMBUCO
+transferencia,id_unidade_organizacional_nivel_2,424,2015(1)2023,UNIVERSIDADE FEDERAL DE JUIZ DE FORA
+transferencia,id_unidade_organizacional_nivel_2,458,2015(1)2022,UNIVERSIDADE FEDERAL RURAL DO SEMI-ARIDO
+transferencia,id_unidade_organizacional_nivel_2,105793,2015(1)2022,UNIVERSIDADE FEDERAL DA INTEGRACAO LATINO-AMERICANA
+transferencia,id_unidade_organizacional_nivel_2,367,2015(1)2022,DEPARTAMENTO NACIONAL DE OBRAS CONTRA AS SECAS
+transferencia,id_unidade_organizacional_nivel_2,91144,2015(1)2022,SUPERINTENDENCIA DO DESENVOLVIMENTO DO NORDESTE
+transferencia,id_unidade_organizacional_nivel_2,100113,2015(1)2022,SUPERINTENDENCIA DE DESENVOLVIMENTO DO CENTRO-OESTE
+transferencia,id_unidade_organizacional_nivel_2,260,2015(1)2022,UNIVERSIDADE FEDERAL DO ESTADO DO RIO DE JANEIRO
+transferencia,id_unidade_organizacional_nivel_2,84712,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DA GRANDE DOURADOS
+transferencia,id_unidade_organizacional_nivel_2,471,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DE MATO GROSSO
+transferencia,id_unidade_organizacional_nivel_2,3243,2015(1)2022,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,2847,2015(1)2015,GABINETE DO MINISTRO
+transferencia,id_unidade_organizacional_nivel_2,1956,2015(1)2022,DEPARTAMENTO PENITENCIARIO NACIONAL
+transferencia,id_unidade_organizacional_nivel_2,2034,2015(1)2022,SECRETARIA-GERAL DAS RELACOES EXTERIORES
+transferencia,id_unidade_organizacional_nivel_2,44988,2015(1)2015,SECRETARIA DE REORDENAMENTO AGRARIO
+transferencia,id_unidade_organizacional_nivel_2,44813,2015(1)2015,SECRETARIA EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,432,2015(1)2022,UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO
+transferencia,id_unidade_organizacional_nivel_2,461,2015(1)2022,UNIVERSIDADE FEDERAL DE ALFENAS
+transferencia,id_unidade_organizacional_nivel_2,426,2015(1)2022,UNIVERSIDADE FEDERAL DO RIO DE JANEIRO
+transferencia,id_unidade_organizacional_nivel_2,427,2015(1)2022,UNIVERSIDADE FEDERAL FLUMINENSE
+transferencia,id_unidade_organizacional_nivel_2,241,2015(1)2019,INSTITUTO BRASILEIRO DE TURISMO
+transferencia,id_unidade_organizacional_nivel_2,2030,2015(1)2020,INSTITUTO NACIONAL DE METEOROLOGIA
+transferencia,id_unidade_organizacional_nivel_2,77415,2015(1)2015,SECRETARIA DE DESENVOLVIMENTO TERRITORIAL
+transferencia,id_unidade_organizacional_nivel_2,1919,2015(1)2015,SECRETARIA DE ENERGIA ELETRICA
+transferencia,id_unidade_organizacional_nivel_2,104667,2015(1)2022,UNIVERSIDADE FEDERAL DO OESTE DO PARA
+transferencia,id_unidade_organizacional_nivel_2,4243,2015(1)2022,AGENCIA ESPACIAL BRASILEIRA
+transferencia,id_unidade_organizacional_nivel_2,86144,2015(1)2022,AGENCIA NACIONAL DE AVIACAO CIVIL
+transferencia,id_unidade_organizacional_nivel_2,117267,2015(1)2020,EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES
+transferencia,id_unidade_organizacional_nivel_2,1605,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DE RORAIMA
+transferencia,id_unidade_organizacional_nivel_2,475,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DE SAO CARLOS
+transferencia,id_unidade_organizacional_nivel_2,7,2015(1)2022,FUNDACAO INSTITUTO DE PESQUISA ECONOMICA APLICADA
+transferencia,id_unidade_organizacional_nivel_2,956,2015(1)2022,FUNDACAO ESCOLA NACIONAL DE ADMINISTRACAO PUBLICA
+transferencia,id_unidade_organizacional_nivel_2,72571,2015(1)2022,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,3205,2015(1)2022,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,38337,2015(1)2017,SECRETARIA DE BIODIVERSIDADE E FLORESTAS
+transferencia,id_unidade_organizacional_nivel_2,185,2015(1)2022,COMANDO DA MARINHA
+transferencia,id_unidade_organizacional_nivel_2,478,2015(1)2022,COMISSAO DE VALORES MOBILIARIOS
+transferencia,id_unidade_organizacional_nivel_2,444,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DA BAHIA"
+transferencia,id_unidade_organizacional_nivel_2,100903,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO TRIANGULO MINEIRO"
+transferencia,id_unidade_organizacional_nivel_2,459,2015(1)2022,UNIVERSIDADE FEDERAL DO TRIANGULO MINEIRO
+transferencia,id_unidade_organizacional_nivel_2,100918,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO RIO GRANDE DO SUL"
+transferencia,id_unidade_organizacional_nivel_2,984,2015(1)2022,FUNDACAO BIBLIOTECA NACIONAL
+transferencia,id_unidade_organizacional_nivel_2,3433,2015(1)2018,SECRETARIA DE ASSUNTOS INTERNACIONAIS
+transferencia,id_unidade_organizacional_nivel_2,88353,2015(1)2022,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,121813,2015(1)2018,SECRETARIA ESPECIAL DA MICRO E PEQUENA EMPRESA
+transferencia,id_unidade_organizacional_nivel_2,109912,2015(1)2022,UNIVERSIDADE DA INTEGRACAO INTERNACIONAL DA LUSOFONIA AFRO-BRASILEIRA
+transferencia,id_unidade_organizacional_nivel_2,235,2015(1)2022,SUPERINTENDENCIA DE SEGUROS PRIVADOS
+transferencia,id_unidade_organizacional_nivel_2,1934,2015(1)2022,INSTITUTO NACIONAL DO SEGURO SOCIAL
+transferencia,id_unidade_organizacional_nivel_2,448,2015(1)2022,CENTRO FEDERAL DE EDUCACAO TECNOLOGICA - CELSO SUCKOW DA FONSECA -
+transferencia,id_unidade_organizacional_nivel_2,100912,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO ESPIRITO SANTO"
+transferencia,id_unidade_organizacional_nivel_2,1734,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DE SAO JOAO DEL REI
+transferencia,id_unidade_organizacional_nivel_2,469,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DE SERGIPE
+transferencia,id_unidade_organizacional_nivel_2,1696,2015(1)2018,SECRETARIA DO TESOURO NACIONAL
+transferencia,id_unidade_organizacional_nivel_2,1975,2015(1)2022,SECRETARIA DE EDUCACAO BASICA
+transferencia,id_unidade_organizacional_nivel_2,38336,2015(1)2016,SECRETARIA DE MUDANCAS CLIMATICAS E QUALIDADE AMBIENTAL
+transferencia,id_unidade_organizacional_nivel_2,419,2015(1)2021,UNIVERSIDADE FEDERAL DA PARAIBA
+transferencia,id_unidade_organizacional_nivel_2,421,2015(1)2022,UNIVERSIDADE FEDERAL DA BAHIA
+transferencia,id_unidade_organizacional_nivel_2,1800,2015(1)2022,"VALEC - ENGENHARIA, CONSTRUCOES E FERROVIAS S.A."
+transferencia,id_unidade_organizacional_nivel_2,3,2015(1)2022,FUNDACAO INSTITUTO BRASILEIRO DE GEOGRAFIA E ESTATISTICA
+transferencia,id_unidade_organizacional_nivel_2,92934,2015(1)2018,SECRETARIA DE ARTICULACAO INSTITUCIONAL E CIDADANIA AMBIENTAL
+transferencia,id_unidade_organizacional_nivel_2,74024,2015(1)2015,SECRETARIA NACIONAL DE ACESSIBILIDADE E PROGRAMAS URBANOS
+transferencia,id_unidade_organizacional_nivel_2,49103,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO PARANA"
+transferencia,id_unidade_organizacional_nivel_2,439,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO RIO GRANDE DO NORTE"
+transferencia,id_unidade_organizacional_nivel_2,455,2015(1)2016,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE SANTA CATARINA"
+transferencia,id_unidade_organizacional_nivel_2,100902,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA SUDESTE DE MINAS GERAIS"
+transferencia,id_unidade_organizacional_nivel_2,100908,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE TOCANTINS"
+transferencia,id_unidade_organizacional_nivel_2,54843,2015(1)2022,AGENCIA NACIONAL DE TRANSPORTES AQUAVIARIOS
+transferencia,id_unidade_organizacional_nivel_2,116389,2015(1)2016,SECRETARIA EXTRAORDINARIA DE SEGURANCA PARA GRANDES EVENTOS
+transferencia,id_unidade_organizacional_nivel_2,256,2015(1)2022,COLEGIO PEDRO II
+transferencia,id_unidade_organizacional_nivel_2,451,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE GOIAS"
+transferencia,id_unidade_organizacional_nivel_2,454,2015(1)2022,UNIVERSIDADE TECNOLOGICA FEDERAL DO PARANA
+transferencia,id_unidade_organizacional_nivel_2,100904,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO MATO GROSSO DO SUL"
+transferencia,id_unidade_organizacional_nivel_2,100906,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE FARROUPILHA"
+transferencia,id_unidade_organizacional_nivel_2,100915,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO SUL DE MINAS GERAIS"
+transferencia,id_unidade_organizacional_nivel_2,100917,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO PARA"
+transferencia,id_unidade_organizacional_nivel_2,100930,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO RIO DE JANEIRO"
+transferencia,id_unidade_organizacional_nivel_2,100931,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA FLUMINENSE"
+transferencia,id_unidade_organizacional_nivel_2,52702,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DO TOCANTINS
+transferencia,id_unidade_organizacional_nivel_2,474,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DE VICOSA
+transferencia,id_unidade_organizacional_nivel_2,476,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DO RIO GRANDE
+transferencia,id_unidade_organizacional_nivel_2,2791,2015(1)2015,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DE GOIAS"
+transferencia,id_unidade_organizacional_nivel_2,2797,2015(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DE PERNAMBUCO"
+transferencia,id_unidade_organizacional_nivel_2,8838,2015(1)2016,SECRETARIA DE RECURSOS HIDRICOS E AMBIENTE URBANO
+transferencia,id_unidade_organizacional_nivel_2,36687,2015(1)2022,AGENCIA NACIONAL DE VIGILANCIA SANITARIA
+transferencia,id_unidade_organizacional_nivel_2,122378,2015(1)2022,UNIVERSIDADE FEDERAL DO SUL DA BAHIA
+transferencia,id_unidade_organizacional_nivel_2,122391,2015(1)2022,UNIVERSIDADE FEDERAL DO CARIRI
+transferencia,id_unidade_organizacional_nivel_2,457,2015(1)2021,UNIVERSIDADE FEDERAL RURAL DA AMAZONIA
+transferencia,id_unidade_organizacional_nivel_2,100919,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA CATARINENSE"
+transferencia,id_unidade_organizacional_nivel_2,100922,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE PERNAMBUCO"
+transferencia,id_unidade_organizacional_nivel_2,1209,2015(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DE RONDONIA
+transferencia,id_unidade_organizacional_nivel_2,40125,2015(1)2017,SECRETARIA DE ARTICULACAO INSTITUCIONAL
+transferencia,id_unidade_organizacional_nivel_2,75694,2015(1)2015,SECRETARIA DE POLITICAS CULTURAIS
+transferencia,id_unidade_organizacional_nivel_2,2788,2015(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DA BAHIA"
+transferencia,id_unidade_organizacional_nivel_2,2789,2015(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DO CEARA"
+transferencia,id_unidade_organizacional_nivel_2,2803,2015(1)2015,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DO PIAUI"
+transferencia,id_unidade_organizacional_nivel_2,3235,2015(1)2015,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,74015,2015(1)2017,SECRETARIA NACIONAL DE SANEAMENTO AMBIENTAL
+transferencia,id_unidade_organizacional_nivel_2,3561,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE RORAIMA"
+transferencia,id_unidade_organizacional_nivel_2,94427,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO ACRE"
+transferencia,id_unidade_organizacional_nivel_2,462,2015(1)2022,UNIVERSIDADE FEDERAL DE ITAJUBA
+transferencia,id_unidade_organizacional_nivel_2,122386,2015(1)2022,UNIVERSIDADE FEDERAL DO OESTE DA BAHIA
+transferencia,id_unidade_organizacional_nivel_2,434,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO PIAUI"
+transferencia,id_unidade_organizacional_nivel_2,453,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE SAO PAULO"
+transferencia,id_unidade_organizacional_nivel_2,100907,2015(1)2020,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE RONDONIA"
+transferencia,id_unidade_organizacional_nivel_2,100910,2015(1)2020,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO AMAZONAS"
+transferencia,id_unidade_organizacional_nivel_2,100913,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA GOIANO"
+transferencia,id_unidade_organizacional_nivel_2,100916,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE MATO GROSSO"
+transferencia,id_unidade_organizacional_nivel_2,100921,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO MARANHAO"
+transferencia,id_unidade_organizacional_nivel_2,77,2015(1)2022,SECRETARIA DA RECEITA FEDERAL DO BRASIL
+transferencia,id_unidade_organizacional_nivel_2,74383,2015(1)2016,COMISSAO DE ANISTIA
+transferencia,id_unidade_organizacional_nivel_2,2776,2015(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DO PARANA"
+transferencia,id_unidade_organizacional_nivel_2,2783,2015(1)2015,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DE SAO PAULO"
+transferencia,id_unidade_organizacional_nivel_2,2816,2015(1)2015,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DE RORAIMA"
+transferencia,id_unidade_organizacional_nivel_2,757,2015(1)2022,SECRETARIA DE DEFESA AGROPECUARIA
+transferencia,id_unidade_organizacional_nivel_2,2055,2015(1)2022,SECRETARIA DE POLITICAS E PROGRAMAS DE PESQUISA E DESENVOLVIMENTO
+transferencia,id_unidade_organizacional_nivel_2,84710,2015(1)2022,UNIVERSIDADE FEDERAL DO RECONCAVO DA BAHIA
+transferencia,id_unidade_organizacional_nivel_2,45013,2015(1)2022,AGENCIA NACIONAL DE SAUDE SUPLEMENTAR
+transferencia,id_unidade_organizacional_nivel_2,322,2015(1)2022,CONSELHO ADMINISTRATIVO DE DEFESA ECONOMICA
+transferencia,id_unidade_organizacional_nivel_2,122381,2015(1)2022,UNIVERSIDADE FEDERAL DO SUL E SUDESTE DO PARA
+transferencia,id_unidade_organizacional_nivel_2,100905,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DA PARAIBA"
+transferencia,id_unidade_organizacional_nivel_2,456,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA SUL-RIO-GRANDENSE"
+transferencia,id_unidade_organizacional_nivel_2,100920,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA BAIANO"
+transferencia,id_unidade_organizacional_nivel_2,3520,2015(1)2022,"SECRETARIA DE MOBILIDADE SOCIAL, DO PRODUTOR RURAL E DO COOPERATIVISMO"
+transferencia,id_unidade_organizacional_nivel_2,2779,2016(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DO RIO GRANDE DO SUL"
+transferencia,id_unidade_organizacional_nivel_2,2781,2016(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DE SANTA CATARINA"
+transferencia,id_unidade_organizacional_nivel_2,2793,2016(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DO MATO GROSSO"
+transferencia,id_unidade_organizacional_nivel_2,2796,2016(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DA PARAIBA"
+transferencia,id_unidade_organizacional_nivel_2,2808,2016(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DO RIO GRANDE DO NORTE"
+transferencia,id_unidade_organizacional_nivel_2,2818,2016(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DE TOCANTINS"
+transferencia,id_unidade_organizacional_nivel_2,75313,2015(1)2018,SECRETARIA DE ECONOMIA SOLIDARIA
+transferencia,id_unidade_organizacional_nivel_2,463,2016(1)2022,UNIVERSIDADE FEDERAL DE LAVRAS
+transferencia,id_unidade_organizacional_nivel_2,228,2016(1)2022,INDUSTRIAS NUCLEARES DO BRASIL S/A
+transferencia,id_unidade_organizacional_nivel_2,12,2016(1)2022,INSTITUTO BRASILEIRO DE INFORMACAO EM CIENCIA E TECNOLOGIA
+transferencia,id_unidade_organizacional_nivel_2,74019,2016(1)2016,SECRETARIA NACIONAL DE TRANSPORTE E DA MOBILIDADE URBANA
+transferencia,id_unidade_organizacional_nivel_2,460,2016(1)2022,UNIVERSIDADE FEDERAL DOS VALES DO JEQUITINHONHA E MUCURI
+transferencia,id_unidade_organizacional_nivel_2,84703,2016(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DO ABC
+transferencia,id_unidade_organizacional_nivel_2,214528,2016(1)2022,SECRETARIA ESPECIAL DE AGRICULTURA FAMILIAR E DO DESENVOLVIMENTO AGRARIO
+transferencia,id_unidade_organizacional_nivel_2,68554,2016(1)2021,CONSELHO NACIONAL DOS DIREITOS DO IDOSO
+transferencia,id_unidade_organizacional_nivel_2,40125,2015(1)2017,SECRETARIA DE ARTICULACAO E DESENVOLVIMENTO INSTITUCIONAL
+transferencia,id_unidade_organizacional_nivel_2,100906,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA FARROUPILHA"
+transferencia,id_unidade_organizacional_nivel_2,465,2016(1)2023,FUNDACAO UNIVERSIDADE DO AMAZONAS
+transferencia,id_unidade_organizacional_nivel_2,42767,2016(1)2022,ESCRITORIO FINANCEIRO EM NOVA YORK
+transferencia,id_unidade_organizacional_nivel_2,100914,2016(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE MINAS GERAIS"
+transferencia,id_unidade_organizacional_nivel_2,94428,2016(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO AMAPA"
+transferencia,id_unidade_organizacional_nivel_2,103730,2016(1)2022,UNIVERSIDADE FEDERAL DA FRONTEIRA SUL
+transferencia,id_unidade_organizacional_nivel_2,100900,2016(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE ALAGOAS"
+transferencia,id_unidade_organizacional_nivel_2,72573,2016(1)2018,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,2798,2016(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DO ACRE"
+transferencia,id_unidade_organizacional_nivel_2,2802,2016(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO DISTRITO FEDERAL"
+transferencia,id_unidade_organizacional_nivel_2,420,2016(1)2022,UNIVERSIDADE FEDERAL DE ALAGOAS
+transferencia,id_unidade_organizacional_nivel_2,69624,2016(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DO VALE DO SAO FRANCISCO
+transferencia,id_unidade_organizacional_nivel_2,119553,2016(1)2018,SECRETARIA DE ECONOMIA DA CULTURA
+transferencia,id_unidade_organizacional_nivel_2,464,2016(1)2022,UNIVERSIDADE FEDERAL DE SAO PAULO
+transferencia,id_unidade_organizacional_nivel_2,48739,2016(1)2022,NUCLEBRAS EQUIPAMENTOS PESADOS S/A
+transferencia,id_unidade_organizacional_nivel_2,472,2016(1)2022,UNIVERSIDADE FEDERAL DE UBERLANDIA
+transferencia,id_unidade_organizacional_nivel_2,2773,2016(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DE MINAS GERAIS"
+transferencia,id_unidade_organizacional_nivel_2,2800,2016(1)2016,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DO AMAZONAS"
+transferencia,id_unidade_organizacional_nivel_2,11,2016(1)2022,INSTITUTO NACIONAL DE PESQUISAS DA AMAZONIA
+transferencia,id_unidade_organizacional_nivel_2,250,2015(1)2023,FUNDACAO COORDENACAO DE APERFEICOAMENTO DE PESSOAL DE NIVEL SUPERIOR
+transferencia,id_unidade_organizacional_nivel_2,216446,2017(1)2017,SECRETARIA DE INFRAESTRUTURA CULTURAL
+transferencia,id_unidade_organizacional_nivel_2,68487,2015(1)2022,SECRETARIA NACIONAL DE POLITICAS PARA AS MULHERES
+transferencia,id_unidade_organizacional_nivel_2,75313,2015(1)2018,SUBSECRETARIA DE ECONOMIA SOLIDARIA
+transferencia,id_unidade_organizacional_nivel_2,100911,2017(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO CEARA"
+transferencia,id_unidade_organizacional_nivel_2,261,2017(1)2022,FUNDACAO CASA DE RUI BARBOSA
+transferencia,id_unidade_organizacional_nivel_2,3200,2017(1)2022,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,214534,2017(1)2017,SECRETARIA
+transferencia,id_unidade_organizacional_nivel_2,74079,2017(1)2018,SECRETARIA NACIONAL DE ESPORTE DE ALTO RENDIMENTO
+transferencia,id_unidade_organizacional_nivel_2,46876,2017(1)2022,AGENCIA NACIONAL DE AGUAS
+transferencia,id_unidade_organizacional_nivel_2,119553,2016(1)2018,SECRETARIA DA ECONOMIA DA CULTURA
+transferencia,id_unidade_organizacional_nivel_2,324,2017(1)2022,DEPARTAMENTO DE POLICIA FEDERAL
+transferencia,id_unidade_organizacional_nivel_2,81128,2017(1)2022,SECRETARIA NACIONAL DE JUVENTUDE
+transferencia,id_unidade_organizacional_nivel_2,201371,2017(1)2018,SECRETARIA DO CONSELHO DE DESENVOLVIMENTO ECONOMICO E SOCIAL
+transferencia,id_unidade_organizacional_nivel_2,38337,2015(1)2017,SECRETARIA DE BIODIVERSIDADE
+transferencia,id_unidade_organizacional_nivel_2,211159,2017(1)2022,SECRETARIA DE AQUICULTURA E PESCA
+transferencia,id_unidade_organizacional_nivel_2,92748,2017(1)2022,SECRETARIA NACIONAL DE PORTOS
+transferencia,id_unidade_organizacional_nivel_2,94,2017(1)2022,COMANDO DO EXERCITO
+transferencia,id_unidade_organizacional_nivel_2,68554,2016(1)2021,CONSELHO NACIONAL DOS DIREITOS DA PESSOA IDOSA
+transferencia,id_unidade_organizacional_nivel_2,119553,2016(1)2018,SECRETARIA DA ECONOMIA CRIATIVA
+transferencia,id_unidade_organizacional_nivel_2,102521,2015(1)2018,SECRETARIA DA DIVERSIDADE CULTURAL
+transferencia,id_unidade_organizacional_nivel_2,3517,2018(1)2018,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,2058,2015(1)2018,SECRETARIA DE POLITICAS DIGITAIS
+transferencia,id_unidade_organizacional_nivel_2,73537,2018(1)2020,SECRETARIA DE TELECOMUNICACOES
+transferencia,id_unidade_organizacional_nivel_2,230553,2018(1)2018,DEPARTAMENTO DE ASSUNTOS INTERNACIONAIS
+transferencia,id_unidade_organizacional_nivel_2,219930,2018(1)2019,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,211159,2017(1)2022,SECRETARIA ESPECIAL DA AQUICULTURA E DA PESCA
+transferencia,id_unidade_organizacional_nivel_2,100908,2015(1)2022,"INSTITUTO FEDERAL DO EDUCACAO, CIENCIA E TECNOLOGIA DE TOCANTINS"
+transferencia,id_unidade_organizacional_nivel_2,1986,2018(1)2018,SECRETARIA DO PATRIMONIO DA UNIAO
+transferencia,id_unidade_organizacional_nivel_2,25064,2018(1)2022,AGENCIA NACIONAL DE TELECOMUNICACOES
+transferencia,id_unidade_organizacional_nivel_2,86567,2019(1)2021,EMPRESA BRASIL DE COMUNICACAO S.A.
+transferencia,id_unidade_organizacional_nivel_2,7,2015(1)2022,INSTITUTO DE PESQUISA ECONOMICA APLICADA
+transferencia,id_unidade_organizacional_nivel_2,3520,2015(1)2022,"SECRETARIA DE INOVACAO, DESENVOLVIMENTO RURAL E IRRIGACAO"
+transferencia,id_unidade_organizacional_nivel_2,3236,2019(1)2022,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,43032,2015(1)2022,SECRETARIA NACIONAL DE SEGURANCA HIDRICA
+transferencia,id_unidade_organizacional_nivel_2,72104,2015(1)2020,SECRETARIA NACIONAL DE DESENVOLVIMENTO REGIONAL E URBANO
+transferencia,id_unidade_organizacional_nivel_2,120851,2019(1)2023,SECRETARIA-GERAL
+transferencia,id_unidade_organizacional_nivel_2,81128,2017(1)2022,SECRETARIA NACIONAL DA JUVENTUDE
+transferencia,id_unidade_organizacional_nivel_2,1945,2019(1)2022,SECRETARIA ESPECIAL DO DESENVOLVIMENTO SOCIAL
+transferencia,id_unidade_organizacional_nivel_2,36670,2019(1)2022,SECRETARIA ESPECIAL DO ESPORTE
+transferencia,id_unidade_organizacional_nivel_2,214528,2016(1)2022,SECRETARIA DE AGRICULTURA FAMILIAR E COOPERATIVISMO
+transferencia,id_unidade_organizacional_nivel_2,1926,2019(1)2020,SECRETARIA ESPECIAL DE CULTURA
+transferencia,id_unidade_organizacional_nivel_2,77,2015(1)2022,SECRETARIA ESPECIAL DA RECEITA FEDERAL DO BRASIL
+transferencia,id_unidade_organizacional_nivel_2,324,2017(1)2022,POLICIA FEDERAL
+transferencia,id_unidade_organizacional_nivel_2,75234,2015(1)2022,SECRETARIA DE EMPREENDEDORISMO E INOVACAO
+transferencia,id_unidade_organizacional_nivel_2,2055,2015(1)2022,SECRETARIA DE POLITICAS PARA FORMACAO E ACOES ESTRATEGICAS
+transferencia,id_unidade_organizacional_nivel_2,92748,2017(1)2022,SECRETARIA NACIONAL DE PORTOS E TRANSPORTES AQUAVIARIOS
+transferencia,id_unidade_organizacional_nivel_2,211159,2017(1)2022,SECRETARIA DE AQUICULTURA E DA PESCA
+transferencia,id_unidade_organizacional_nivel_2,100909,2019(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE SERGIPE"
+transferencia,id_unidade_organizacional_nivel_2,9518,2019(1)2022,SECRETARIA NACIONAL DE JUSTICA
+transferencia,id_unidade_organizacional_nivel_2,1929,2019(1)2022,SECRETARIA ESPECIAL DE FAZENDA
+transferencia,id_unidade_organizacional_nivel_2,72567,2019(1)2020,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,263749,2020(1)2023,SECRETARIA DE GESTAO E ENSINO EM SEGURANCA PUBLICA
+transferencia,id_unidade_organizacional_nivel_2,2055,2015(1)2022,SECRETARIA DE PESQUISA E FORMACAO CIENTIFICA
+transferencia,id_unidade_organizacional_nivel_2,1812,2020(1)2022,INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS
+transferencia,id_unidade_organizacional_nivel_2,119335,2020(1)2020,SECRETARIA NACIONAL DO CONSUMIDOR
+transferencia,id_unidade_organizacional_nivel_2,46876,2017(1)2022,AGENCIA NACIONAL DE AGUAS E SANEAMENTO BASICO
+transferencia,id_unidade_organizacional_nivel_2,74710,2020(1)2022,"SECRETARIA DE FOMENTO, PLANEJAMENTO E PARCERIAS"
+transferencia,id_unidade_organizacional_nivel_2,75,2020(1)2022,TELECOMUNICACOES BRASILEIRAS S.A.
+transferencia,id_unidade_organizacional_nivel_2,239882,2020(1)2020,SECRETARIA DE ALFABETIZACAO
+transferencia,id_unidade_organizacional_nivel_2,73565,2020(1)2020,SECRETARIA NACIONAL DE DESENVOLVIMENTO E COMPETITIVIDADE DO TURISMO
+transferencia,id_unidade_organizacional_nivel_2,70352,2020(1)2020,SECRETARIA-GERAL DE ADMINISTRACAO
+transferencia,id_unidade_organizacional_nivel_2,3520,2015(1)2022,"SECRETARIA DE INOVACAO, DESENVOLVIMENTO SUSTENTAVEL E IRRIGACAO"
+transferencia,id_unidade_organizacional_nivel_2,74378,2021(1)2022,SECRETARIA NACIONAL DE PROTECAO GLOBAL
+transferencia,id_unidade_organizacional_nivel_2,73235,2021(1)2022,SECRETARIA NACIONAL DE POLITICAS DE PROMOCAO DA IGUALDADE RACIAL
+transferencia,id_unidade_organizacional_nivel_2,74380,2021(1)2022,SECRETARIA NACIONAL DOS DIREITOS DA CRIANCA E DO ADOLESCENTE
+transferencia,id_unidade_organizacional_nivel_2,100113,2015(1)2022,SUPERINTENDENCIA DO DESENVOLVIMENTO DO CENTRO-OESTE
+transferencia,id_unidade_organizacional_nivel_2,244460,2021(1)2022,SECRETARIA ESPECIAL DE ADMINISTRACAO
+transferencia,id_unidade_organizacional_nivel_2,223030,2021(1)2022,SECRETARIA NACIONAL DOS DIREITOS DA PESSOA COM DEFICIENCIA
+transferencia,id_unidade_organizacional_nivel_2,223039,2021(1)2022,SECRETARIA NACIONAL DE PROMOCAO E DEFESA DOS DIREITOS DA PESSOA IDOSA
+transferencia,id_unidade_organizacional_nivel_2,100904,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE MATO GROSSO DO SUL"
+transferencia,id_unidade_organizacional_nivel_2,75510,2021(1)2022,SECRETARIA DE MODALIDADES ESPECIALIZADAS DE EDUCACAO
+transferencia,id_unidade_organizacional_nivel_2,448,2015(1)2022,CENTRO FEDERAL DE EDUCACAO TECNOLOGICA - CELSO SUCKOW DA FONSECA
+transferencia,id_unidade_organizacional_nivel_2,100902,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO SUDESTE DE MINAS GERAIS"
+transferencia,id_unidade_organizacional_nivel_2,100908,2015(1)2022,"INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DO TOCANTINS"
+transferencia,id_unidade_organizacional_nivel_2,265884,2021(1)2022,SECRETARIA-EXECUTIVA
+transferencia,id_unidade_organizacional_nivel_2,235974,2021(1)2021,"SECRETARIA ESPECIAL DE DESESTATIZACAO, DESINVESTIMENTO E MERCADOS"
+transferencia,id_unidade_organizacional_nivel_2,236116,2021(1)2022,SECRETARIA NACIONAL DA FAMILIA
+transferencia,id_unidade_organizacional_nivel_2,257,2022(1)2022,FUNDACAO JOAQUIM NABUCO
+transferencia,id_unidade_organizacional_nivel_2,467,2022(1)2022,FUNDACAO UNIVERSIDADE FEDERAL DO MARANHAO
+transferencia,id_unidade_organizacional_nivel_2,24752,2022(1)2022,CENTRO DE TECNOLOGIA MINERAL
+transferencia,id_unidade_organizacional_nivel_2,1929,2019(1)2022,SECRETARIA ESPECIAL DO TESOURO E ORCAMENTO
+transferencia,id_unidade_organizacional_nivel_2,74011,2022(1)2022,SECRETARIA NACIONAL DE HABITACAO
+transferencia,id_unidade_organizacional_nivel_2,227868,2022(1)2022,UNIVERSIDADE FEDERAL DO AGRESTE DE PERNAMBUCO
+transferencia,id_unidade_organizacional_nivel_3,36554,2015(1)2022,FUNDO NACIONAL DE DESENVOLVIMENTO CIENTIFICO E TECNOLOGICO
+transferencia,id_unidade_organizacional_nivel_3,-9,2015(1)2023,NAO SE APLICA
+transferencia,id_unidade_organizacional_nivel_3,86246,2015(1)2018,DIRETORIA-EXECUTIVA DO FUNDO NACIONAL DE ASSISTENCIA SOCIAL
+transferencia,id_unidade_organizacional_nivel_3,9073,2015(1)2022,SUBSECRETARIA DE ASSUNTOS ADMINISTRATIVOS
+transferencia,id_unidade_organizacional_nivel_3,46664,2015(1)2023,DIRETORIA-EXECUTIVA DO FUNDO NACIONAL DE SAUDE
+transferencia,id_unidade_organizacional_nivel_3,201090,2015(1)2018,"DIRETORIA DE LIVRO, LEITURA, LITERATURA E BIBLIOTECAS"
+transferencia,id_unidade_organizacional_nivel_3,47229,2015(1)2018,SUBSECRETARIA DE COORDENACAO DAS UNIDADES DE PESQUISA
+transferencia,id_unidade_organizacional_nivel_3,73883,2015(1)2018,DEPARTAMENTO DE GESTAO INTERNA
+transferencia,id_unidade_organizacional_nivel_3,8904,2015(1)2018,"SUBSECRETARIA DE PLANEJAMENTO, ORCAMENTO E ADMINISTRACAO"
+transferencia,id_unidade_organizacional_nivel_3,58527,2015(1)2016,DEPARTAMENTO DE CONTROLE DO ESPACO AEREO
+transferencia,id_unidade_organizacional_nivel_3,12536,2015(1)2017,REITORIA
+transferencia,id_unidade_organizacional_nivel_3,11748,2015(1)2018,REITORIA
+transferencia,id_unidade_organizacional_nivel_3,42753,2015(1)2018,SUPERINTENDENCIA ESTADUAL DO IPHAN EM GOIAS
+transferencia,id_unidade_organizacional_nivel_3,102607,2015(1)2022,DEPARTAMENTO DE PLANEJAMENTO E GESTAO INTERNA
+transferencia,id_unidade_organizacional_nivel_3,42745,2015(1)2022,SUPERINTENDENCIA ESTADUAL DO IPHAN NO RIO DE JANEIRO
+transferencia,id_unidade_organizacional_nivel_3,42751,2015(1)2021,SUPERINTENDENCIA ESTADUAL DO IPHAN NO RIO GRANDE DO SUL
+transferencia,id_unidade_organizacional_nivel_3,4038,2015(1)2020,SUPERINTENDENCIA REGIONAL NO ESTADO DE MATO GROSSO
+transferencia,id_unidade_organizacional_nivel_3,4025,2015(1)2023,SUPERINTENDENCIA REGIONAL NO ESTADO DO PARA
+transferencia,id_unidade_organizacional_nivel_3,4146,2015(1)2019,SUPERINTENDENCIA REGIONAL NO ESTADO DO PIAUI
+transferencia,id_unidade_organizacional_nivel_3,27615,2015(1)2022,SUPERINTENDENCIA REGIONAL DO SUL DO PARA
+transferencia,id_unidade_organizacional_nivel_3,46538,2015(1)2020,SUPERINTENDENCIA REGIONAL DO MEDIO SAO FRANCISCO
+transferencia,id_unidade_organizacional_nivel_3,4036,2015(1)2022,SUPERINTENDENCIA REGIONAL NO ESTADO DO RIO GRANDE DO SUL
+transferencia,id_unidade_organizacional_nivel_3,4037,2015(1)2022,SUPERINTENDENCIA REGIONAL NO ESTADO DO MARANHAO
+transferencia,id_unidade_organizacional_nivel_3,228,2015(1)2015,INDUSTRIAS NUCLEARES DO BRASIL S/A
+transferencia,id_unidade_organizacional_nivel_3,87887,2015(1)2021,MUSEU DO INDIO - RIO DE JANEIRO
+transferencia,id_unidade_organizacional_nivel_3,8953,2015(1)2015,"SUBSECRETARIA DE PLANEJAMENTO, ORCAMENTO E ADMINISTRACAO"
+transferencia,id_unidade_organizacional_nivel_3,68554,2015(1)2015,CONSELHO NACIONAL DOS DIREITOS DO IDOSO
+transferencia,id_unidade_organizacional_nivel_3,8956,2015(1)2018,SUBSECRETARIA DE ASSUNTOS ADMINISTRATIVOS
+transferencia,id_unidade_organizacional_nivel_3,42742,2015(1)2022,SUPERINTENDENCIA ESTADUAL DO IPHAN NO MARANHAO
+transferencia,id_unidade_organizacional_nivel_3,40523,2015(1)2018,HOSPITAL UNIVERSITARIO JOAO DE BARROS BARRETO
+transferencia,id_unidade_organizacional_nivel_3,13327,2015(1)2021,CENTRO DE CIENCIAS DA SAUDE
+transferencia,id_unidade_organizacional_nivel_3,13061,2015(1)2015,CENTRO DE CIENCIAS EXATAS E DA NATUREZA
+transferencia,id_unidade_organizacional_nivel_3,42752,2015(1)2022,SUPERINTENDENCIA ESTADUAL DO IPHAN EM MINAS GERAIS
+transferencia,id_unidade_organizacional_nivel_3,4141,2015(1)2022,SUPERINTENDENCIA REGIONAL NO ESTADO DO RIO GRANDE DO NORTE
+transferencia,id_unidade_organizacional_nivel_3,4147,2015(1)2022,SUPERINTENDENCIA REGIONAL NO ESTADO DE RORAIMA
+transferencia,id_unidade_organizacional_nivel_3,16605,2015(1)2015,CAMPUS DE TRES LAGOAS
+transferencia,id_unidade_organizacional_nivel_3,87876,2015(1)2015,DIRETORIA DE PROTECAO TERRITORIAL
+transferencia,id_unidade_organizacional_nivel_3,8928,2015(1)2022,SUBSECRETARIA DE ASSUNTOS ADMINISTRATIVOS
+transferencia,id_unidade_organizacional_nivel_3,89690,2015(1)2022,DIRETORIA DE POLITICAS PENITENCIARIAS
+transferencia,id_unidade_organizacional_nivel_3,91109,2015(1)2018,"SUBSECRETARIA-GERAL DE COOPERACAO, CULTURA E PROMOCAO COMERCIAL"
+transferencia,id_unidade_organizacional_nivel_3,8882,2015(1)2015,"SUBSECRETARIA DE PLANEJAMENTO, ORCAMENTO E ADMINISTRACAO"
+transferencia,id_unidade_organizacional_nivel_3,45593,2015(1)2016,"SUBSECRETARIA DE PLANEJAMENTO, ORCAMENTO E ADMINISTRACAO"
+transferencia,id_unidade_organizacional_nivel_3,77545,2015(1)2020,SUPERINTENDENCIA ESTADUAL DO IPHAN NO MATO GROSSO
+transferencia,id_unidade_organizacional_nivel_3,42750,2015(1)2019,SUPERINTENDENCIA ESTADUAL DO IPHAN EM SANTA CATARINA
+transferencia,id_unidade_organizacional_nivel_3,14069,2015(1)2020,REITORIA
+transferencia,id_unidade_organizacional_nivel_3,4033,2015(1)2021,SUPERINTENDENCIA REGIONAL NO ESTADO DE SAO PAULO
+transferencia,id_unidade_organizacional_nivel_3,53,2015(1)2022,DEPARTAMENTO DE CIENCIA E TECNOLOGIA AEROESPACIAL
+transferencia,id_unidade_organizacional_nivel_3,2206,2015(1)2015,DEPARTAMENTO DE MONITORAMENTO DO SISTEMA ELETRICO
+transferencia,id_unidade_organizacional_nivel_3,42741,2015(1)2022,SUPERINTENDENCIA ESTADUAL DO IPHAN NO PARA
+transferencia,id_unidade_organizacional_nivel_3,42743,2015(1)2022,SUPERINTENDENCIA ESTADUAL DO IPHAN NO CEARA
+transferencia,id_unidade_organizacional_nivel_3,42748,2015(1)2022,SUPERINTENDENCIA ESTADUAL DO IPHAN EM SAO PAULO
+transferencia,id_unidade_organizacional_nivel_3,4035,2015(1)2017,SUPERINTENDENCIA REGIONAL NO ESTADO DE SANTA CATARINA
+transferencia,id_unidade_organizacional_nivel_3,119478,2015(1)2015,DIRETORIA DE PROGRAMAS ESPECIAIS DE INFRAESTRUTURA CULTURAL
+transferencia,id_unidade_organizacional_nivel_3,38207,2015(1)2022,"SUBSECRETARIA DE PLANEJAMENTO, ORCAMENTO E ADMINISTRACAO"
+transferencia,id_unidade_organizacional_nivel_3,199,2015(1)2016,DIRETORIA-GERAL DO MATERIAL DA MARINHA
+transferencia,id_unidade_organizacional_nivel_3,4137,2015(1)2022,SUPERINTENDENCIA REGIONAL NO ESTADO DO AMAZONAS
+transferencia,id_unidade_organizacional_nivel_3,4026,2015(1)2022,SUPERINTENDENCIA REGIONAL NO ESTADO DO CEARA
+transferencia,id_unidade_organizacional_nivel_3,4034,2015(1)2022,SUPERINTENDENCIA REGIONAL NO ESTADO DO PARANA
+transferencia,id_unidade_organizacional_nivel_3,4143,2015(1)2016,SUPERINTENDENCIA REGIONAL NO ESTADO DO AMAPA
+transferencia,id_unidade_organizacional_nivel_3,2959,2015(1)2022,COORDENACAO-GERAL DE PLANEJAMENTO E ADMINISTRACAO
+transferencia,id_unidade_organizacional_nivel_3,88721,2015(1)2022,DIRETORIA DE GESTAO INTERNA
+transferencia,id_unidade_organizacional_nivel_3,41133,2015(1)2018,"DIRETORIA DE ORCAMENTO, FINANCAS E LOGISTICA"
+transferencia,id_unidade_organizacional_nivel_3,14131,2015(1)2022,CENTRO DE FILOSOFIA E CIENCIAS HUMANAS
+transferencia,id_unidade_organizacional_nivel_3,4148,2015(1)2016,SUPERINTENDENCIA REGIONAL NO ESTADO DO TOCANTINS
+transferencia,id_unidade_organizacional_nivel_3,95194,2015(1)2017,DIRETORIA DE RELACOES INTERNACIONAIS
+transferencia,id_unidade_organizacional_nivel_3,748,2015(1)2017,SECRETARIA DA COMISSAO INTERMINISTERIAL PARA OS RECURSOS DO MAR
+transferencia,id_unidade_organizacional_nivel_3,13022,2015(1)2020,HOSPITAL DE CLINICAS
+transferencia,id_unidade_organizacional_nivel_3,12100,2015(1)2020,REITORIA
+transferencia,id_unidade_organizacional_nivel_3,4138,2015(1)2022,SUPERINTENDENCIA REGIONAL NO ESTADO DE MATO GROSSO DO SUL
+transferencia,id_unidade_organizacional_nivel_3,13073,2015(1)2015,CENTRO DE TECNOLOGIA E GEOCIENCIAS
+transferencia,id_unidade_organizacional_nivel_3,14106,2015(1)2015,CENTRO DE LETRAS E ARTES
+transferencia,id_unidade_organizacional_nivel_3,4039,2015(1)2018,SUPERINTENDENCIA REGIONAL NO ESTADO DO ACRE
+transferencia,id_unidade_organizacional_nivel_3,4139,2015(1)2020,SUPERINTENDENCIA REGIONAL NO ESTADO DE RONDONIA
+transferencia,id_unidade_organizacional_nivel_3,4030,2015(1)2022,SUPERINTENDENCIA REGIONAL NO ESTADO DA BAHIA
+transferencia,id_unidade_organizacional_nivel_3,42744,2015(1)2022,SUPERINTENDENCIA ESTADUAL DO IPHAN EM PERNAMBUCO
+transferencia,id_unidade_organizacional_nivel_3,4145,2015(1)2019,SUPERINTENDENCIA REGIONAL NO ESTADO DE SERGIPE
+transferencia,id_unidade_organizacional_nivel_3,89668,2015(1)2015,DIRETORIA DO SISTEMA PENITENCIARIO FEDERAL
+transferencia,id_unidade_organizacional_nivel_3,71043,2015(1)2015,CENTRO DE CIENCIAS E TECNOLOGIA
+transferencia,id_unidade_organizacional_nivel_3,38235,2015(1)2015,SUBSECRETARIA DE ORCAMENTO E ADMINISTRACAO
+transferencia,id_unidade_organizacional_nivel_3,105389,2015(1)2020,REITORIA
+transferencia,id_unidade_organizacional_nivel_3,4027,2015(1)2022,SUPERINTENDENCIA REGIONAL NO ESTADO DE PERNAMBUCO
+transferencia,id_unidade_organizacional_nivel_3,4144,2015(1)2020,SUPERINTENDENCIA REGIONAL NO ESTADO DE ALAGOAS
+transferencia,id_unidade_organizacional_nivel_3,87847,2015(1)2019,DIRETORIA DE PROMOCAO AO DESENVOLVIMENTO SUSTENTAVEL
+transferencia,id_unidade_organizacional_nivel_3,99395,2015(1)2018,SUBSECRETARIA DE GESTAO CORPORATIVA
+transferencia,id_unidade_organizacional_nivel_3,13059,2015(1)2019,REITORIA
+transferencia,id_unidade_organizacional_nivel_3,48739,2015(1)2015,NUCLEBRAS EQUIPAMENTOS PESADOS S/A
+transferencia,id_unidade_organizacional_nivel_3,47229,2015(1)2018,DIRETORIA DE GESTAO DAS UNIDADES DE PESQUISA E ORGANIZACOES SOCIAIS
+transferencia,id_unidade_organizacional_nivel_3,210964,2016(1)2020,SUBSECRETARIA DE ADMINISTRACAO
+transferencia,id_unidade_organizacional_nivel_3,77551,2016(1)2018,SUPERINTENDENCIA ESTADUAL DO IPHAN NO PIAUI
+transferencia,id_unidade_organizacional_nivel_3,201090,2015(1)2018,"DEPARTAMENTO DE LIVRO, LEITURA, LITERATURA E BIBLIOTECAS"
+transferencia,id_unidade_organizacional_nivel_3,44987,2016(1)2017,SUBSECECRETARIA DA AGRICULTURA FAMILIAR
+transferencia,id_unidade_organizacional_nivel_3,91109,2015(1)2018,"SUBSECRETARIA-GERAL DE COOPERACAO INTERNACIONAL, PROMOCAO COMERCIAL E TEMAS CULTURAIS"
+transferencia,id_unidade_organizacional_nivel_3,44988,2016(1)2016,SUBSECRETARIA DE REORDENAMENTO AGRARIO
+transferencia,id_unidade_organizacional_nivel_3,45593,2015(1)2016,SUBSECRETARIA DE PLANEJAMENTO E GESTAO
+transferencia,id_unidade_organizacional_nivel_3,77415,2016(1)2016,SUBSCECRETARIA DE DESENVOLVIMENTO RURAL
+transferencia,id_unidade_organizacional_nivel_3,120455,2016(1)2017,CAMPUS UBERLANDIA
+transferencia,id_unidade_organizacional_nivel_3,95194,2015(1)2017,DEPARTAMENTO DE PROMOCAO INTERNACIONAL
+transferencia,id_unidade_organizacional_nivel_3,4031,2016(1)2022,SUPERINTENDENCIA REGIONAL NO ESTADO DE MINAS GERAIS
+transferencia,id_unidade_organizacional_nivel_3,73970,2016(1)2018,"SUBSECRETARIA DE PLANEJAMENTO, ORCAMENTO E ADMINISTRACAO"
+transferencia,id_unidade_organizacional_nivel_3,69300,2016(1)2022,SUPERINTENDENCIA REGIONAL DO DNIT NO ESTADO DO PIAUI
+transferencia,id_unidade_organizacional_nivel_3,102755,2016(1)2019,SUPERINTENDENCIA ESTADUAL DO IPHAN EM RIO GRANDE DO NORTE
+transferencia,id_unidade_organizacional_nivel_3,14139,2016(1)2022,CENTRO DE CIENCIAS JURIDICAS E ECONOMICAS
+transferencia,id_unidade_organizacional_nivel_3,42747,2016(1)2019,SUPERINTENDENCIA ESTADUAL DO IPHAN EM SERGIPE
+transferencia,id_unidade_organizacional_nivel_3,16542,2016(1)2016,NUCLEO DE HOSPITAL UNIVERSITARIO
+transferencia,id_unidade_organizacional_nivel_3,95586,2017(1)2022,DIRETORIA-GERAL DE DESENVOLVIMENTO NUCLEAR E TECNOLOGICO DA MARINHA
+transferencia,id_unidade_organizacional_nivel_3,22125,2017(1)2022,SUPERINTENDENCIA REGIONAL DE SANTAREM
+transferencia,id_unidade_organizacional_nivel_3,2787,2017(1)2017,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DE ALAGOAS"
+transferencia,id_unidade_organizacional_nivel_3,11806,2017(1)2022,BIBLIOTECA UNIVERSITARIA
+transferencia,id_unidade_organizacional_nivel_3,60373,2017(1)2022,EDITORA UNIVERSITARIA
+transferencia,id_unidade_organizacional_nivel_3,101531,2017(1)2022,ESCOLA DE EDUCACAO BASICA E PROFISSIONAL
+transferencia,id_unidade_organizacional_nivel_3,29008,2017(1)2021,SUPERINTENDENCIA REGIONAL DO DISTRITO FEDERAL E ENTORNO
+transferencia,id_unidade_organizacional_nivel_3,11811,2017(1)2022,MUSEU DE HISTORIA NATURAL E JARDIM BOTANICO
+transferencia,id_unidade_organizacional_nivel_3,6099,2017(1)2018,INSTITUTO DE TECNOLOGIA EM IMUNOBIOLOGICOS
+transferencia,id_unidade_organizacional_nivel_3,2803,2017(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DO PIAUI"
+transferencia,id_unidade_organizacional_nivel_3,11763,2017(1)2022,ESCOLA DE ENGENHARIA
+transferencia,id_unidade_organizacional_nivel_3,11754,2017(1)2022,ESCOLA DE ARQUITETURA
+transferencia,id_unidade_organizacional_nivel_3,2816,2017(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DE RORAIMA"
+transferencia,id_unidade_organizacional_nivel_3,209977,2017(1)2021,CAMPUS DE MACAE
+transferencia,id_unidade_organizacional_nivel_3,2797,2017(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DE PERNAMBUCO"
+transferencia,id_unidade_organizacional_nivel_3,1599,2017(1)2019,COMANDO MILITAR DO NORDESTE
+transferencia,id_unidade_organizacional_nivel_3,89249,2017(1)2018,DIRETORIA DE DESENVOLVIMENTO DE PROJETOS DE ASSENTAMENTO
+transferencia,id_unidade_organizacional_nivel_3,42747,2016(1)2019,SUPERINTENDENCIA DO IPHAN NO ESTADO DE SERGIPE
+transferencia,id_unidade_organizacional_nivel_3,32900,2018(1)2021,CAMPUS CORNELIO PROCOPIO
+transferencia,id_unidade_organizacional_nivel_3,200100,2018(1)2018,SUBSECRETARIA DE ASSUNTOS ADMINISTRATIVOS
+transferencia,id_unidade_organizacional_nivel_3,115227,2018(1)2021,COORDENACAO DE BIODIVERSIDADE
+transferencia,id_unidade_organizacional_nivel_3,42748,2015(1)2022,SUPERINTENDENCIA DO IPHAN NO ESTADO DE SAO PAULO
+transferencia,id_unidade_organizacional_nivel_3,42753,2015(1)2018,SUPERINTENDENCIA DO IPHAN NO ESTADO DE GOIAS
+transferencia,id_unidade_organizacional_nivel_3,75394,2018(1)2022,DIRETORIA DE ADMINISTRACAO E LOGISTICA POLICIAL
+transferencia,id_unidade_organizacional_nivel_3,11788,2018(1)2022,FACULDADE DE FILOSOFIA E CIENCIAS HUMANAS
+transferencia,id_unidade_organizacional_nivel_3,11784,2018(1)2022,FACULDADE DE MEDICINA
+transferencia,id_unidade_organizacional_nivel_3,11786,2018(1)2022,FACULDADE DE ODONTOLOGIA
+transferencia,id_unidade_organizacional_nivel_3,40653,2018(1)2018,HOSPITAL UNIVERSITARIO BETINA FERRO DE SOUZA
+transferencia,id_unidade_organizacional_nivel_3,77551,2016(1)2018,SUPERINTENDENCIA DO IPHAN NO ESTADO DO PIAUI
+transferencia,id_unidade_organizacional_nivel_3,42744,2015(1)2022,SUPERINTENDENCIA DO IPHAN NO ESTADO DE PERNAMBUCO
+transferencia,id_unidade_organizacional_nivel_3,2788,2018(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DA BAHIA"
+transferencia,id_unidade_organizacional_nivel_3,2800,2018(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DO AMAZONAS"
+transferencia,id_unidade_organizacional_nivel_3,217152,2018(1)2022,DIRETORIA DE GESTAO ESTRATEGICA
+transferencia,id_unidade_organizacional_nivel_3,42752,2015(1)2022,SUPERINTENDENCIA DO IPHAN NO ESTADO DE MINAS GERAIS
+transferencia,id_unidade_organizacional_nivel_3,42741,2015(1)2022,SUPERINTENDENCIA DO IPHAN NO ESTADO DO PARA
+transferencia,id_unidade_organizacional_nivel_3,2793,2018(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DO MATO GROSSO"
+transferencia,id_unidade_organizacional_nivel_3,42750,2015(1)2019,SUPERINTENDENCIA DO IPHAN NO ESTADO DE SANTA CATARINA
+transferencia,id_unidade_organizacional_nivel_3,4029,2018(1)2022,SUPERINTENDENCIA REGIONAL NO ESTADO DE GOIAS
+transferencia,id_unidade_organizacional_nivel_3,42746,2018(1)2022,SUPERINTENDENCIA DO IPHAN NO ESTADO DA BAHIA
+transferencia,id_unidade_organizacional_nivel_3,39263,2018(1)2019,SECRETARIA DE ADMINISTRACAO
+transferencia,id_unidade_organizacional_nivel_3,103731,2018(1)2020,REITORIA
+transferencia,id_unidade_organizacional_nivel_3,42743,2015(1)2022,SUPERINTENDENCIA DO IPHAN NO ESTADO DO CEARA
+transferencia,id_unidade_organizacional_nivel_3,11766,2018(1)2022,FACULDADE DE CIENCIAS ECONOMICAS
+transferencia,id_unidade_organizacional_nivel_3,42751,2015(1)2021,SUPERINTENDENCIA DO IPHAN NO ESTADO DO RIO GRANDE DO SUL
+transferencia,id_unidade_organizacional_nivel_3,77545,2015(1)2020,SUPERINTENDENCIA DO IPHAN NO ESTADO DO MATO GROSSO
+transferencia,id_unidade_organizacional_nivel_3,25572,2018(1)2019,CENTRO NACIONAL DE FOLCLORE E CULTURA POPULAR
+transferencia,id_unidade_organizacional_nivel_3,237447,2019(1)2021,SECRETARIA DE COMERCIO EXTERIOR E ASSUNTOS ECONOMICOS
+transferencia,id_unidade_organizacional_nivel_3,237327,2019(1)2022,SECRETARIA DE GESTAO CORPORATIVA
+transferencia,id_unidade_organizacional_nivel_3,237191,2019(1)2022,SECRETARIA DE GESTAO DE FUNDOS E TRANSFERENCIAS
+transferencia,id_unidade_organizacional_nivel_3,73878,2019(1)2019,SUBSECRETARIA DE PLANEJAMENTO E ORCAMENTO
+transferencia,id_unidade_organizacional_nivel_3,115639,2019(1)2023,DEPARTAMENTO DO PROGRAMA CALHA NORTE
+transferencia,id_unidade_organizacional_nivel_3,77782,2019(1)2022,SECRETARIA NACIONAL DE INCLUSAO SOCIAL E PRODUTIVA RURAL
+transferencia,id_unidade_organizacional_nivel_3,74079,2019(1)2022,SECRETARIA NACIONAL DE ESPORTE DE ALTO RENDIMENTO
+transferencia,id_unidade_organizacional_nivel_3,23295,2019(1)2022,PRO-REITORIA DE ADMINISTRACAO
+transferencia,id_unidade_organizacional_nivel_3,204128,2019(1)2020,CAMPUS AVANCADO ITABIRITO
+transferencia,id_unidade_organizacional_nivel_3,3662,2019(1)2020,SECRETARIA DO AUDIOVISUAL
+transferencia,id_unidade_organizacional_nivel_3,40127,2019(1)2020,SECRETARIA DE FOMENTO E INCENTIVO A CULTURA
+transferencia,id_unidade_organizacional_nivel_3,102521,2019(1)2020,SECRETARIA DA DIVERSIDADE CULTURAL
+transferencia,id_unidade_organizacional_nivel_3,119553,2019(1)2020,SECRETARIA DA ECONOMIA CRIATIVA
+transferencia,id_unidade_organizacional_nivel_3,200695,2019(1)2019,EBSERH - FILIAL MATERNIDADE ESCOLA JANUARIO CICCO
+transferencia,id_unidade_organizacional_nivel_3,236554,2019(1)2022,SUBSECRETARIA-GERAL DA RECEITA FEDERAL DO BRASIL
+transferencia,id_unidade_organizacional_nivel_3,23297,2019(1)2022,PRO-REITORIA DE PESQUISA
+transferencia,id_unidade_organizacional_nivel_3,33349,2019(1)2022,PRO-REITORIA DE PESQUISA E POS-GRADUACAO E INOVACAO
+transferencia,id_unidade_organizacional_nivel_3,8955,2019(1)2020,"SUBSECRETARIA DE PLANEJAMENTO, ORCAMENTO E ADMINISTRACAO"
+transferencia,id_unidade_organizacional_nivel_3,217152,2018(1)2022,DEPARTAMENTO DE GOVERNANCA INSTITUCIONAL
+transferencia,id_unidade_organizacional_nivel_3,216446,2019(1)2019,SECRETARIA DE DIFUSAO E INFRAESTRUTURA CULTURAL
+transferencia,id_unidade_organizacional_nivel_3,102755,2016(1)2019,SUPERINTENDENCIA DO IPHAN NO ESTADO DO RIO GRANDE DO NORTE
+transferencia,id_unidade_organizacional_nivel_3,14143,2019(1)2020,CENTRO DE CIENCIAS DA SAUDE
+transferencia,id_unidade_organizacional_nivel_3,54897,2019(1)2022,DIRETORIA DE GESTAO DE PESSOAS E ADMINISTRACAO
+transferencia,id_unidade_organizacional_nivel_3,2776,2019(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO ESTADO DO PARANA"
+transferencia,id_unidade_organizacional_nivel_3,103224,2019(1)2020,HOSPITAL MATERNIDADE VICTOR FERREIRA DO AMARAL
+transferencia,id_unidade_organizacional_nivel_3,2802,2019(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO NO DISTRITO FEDERAL"
+transferencia,id_unidade_organizacional_nivel_3,74560,2019(1)2020,DIRETORIA DE  ADMINISTRACAO
+transferencia,id_unidade_organizacional_nivel_3,1696,2019(1)2022,SECRETARIA DO TESOURO NACIONAL
+transferencia,id_unidade_organizacional_nivel_3,210164,2019(1)2019,"SUBSECRETARIA DE PLANEJAMENTO, ORCAMENTO E ADMINISTRACAO"
+transferencia,id_unidade_organizacional_nivel_3,195,2019(1)2021,SECRETARIA-GERAL DA MARINHA
+transferencia,id_unidade_organizacional_nivel_3,46751,2019(1)2019,DIRETORIA DE GESTAO ADMINISTRATIVA
+transferencia,id_unidade_organizacional_nivel_3,40127,2019(1)2020,SECRETARIA NACIONAL DE FOMENTO E INCENTIVO A CULTURA
+transferencia,id_unidade_organizacional_nivel_3,74560,2019(1)2020,DIRETORIA DE GESTAO
+transferencia,id_unidade_organizacional_nivel_3,77782,2019(1)2022,SECRETARIA NACIONAL DE INCLUSAO SOCIAL E PRODUTIVA
+transferencia,id_unidade_organizacional_nivel_3,252432,2020(1)2022,SECRETARIA DE COORDENACAO ESTRUTURAL E GESTAO CORPORATIVA
+transferencia,id_unidade_organizacional_nivel_3,119553,2019(1)2020,SECRETARIA NACIONAL DA ECONOMIA CRIATIVA E DIVERSIDADE CULTURAL
+transferencia,id_unidade_organizacional_nivel_3,3418,2020(1)2022,DEPARTAMENTO DO PATRIMONIO IMATERIAL
+transferencia,id_unidade_organizacional_nivel_3,2798,2020(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DO ACRE"
+transferencia,id_unidade_organizacional_nivel_3,2791,2020(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DE GOIAS"
+transferencia,id_unidade_organizacional_nivel_3,2817,2020(1)2021,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DE SERGIPE"
+transferencia,id_unidade_organizacional_nivel_3,2818,2020(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DO TOCANTINS"
+transferencia,id_unidade_organizacional_nivel_3,8156,2020(1)2020,CONSELHO FEDERAL GESTOR DO FUNDO DE DEFESA DOS DIREITOS DIFUSOS
+transferencia,id_unidade_organizacional_nivel_3,3662,2019(1)2020,SECRETARIA NACIONAL DO AUDIOVISUAL
+transferencia,id_unidade_organizacional_nivel_3,42745,2015(1)2022,SUPERINTENDENCIA DO IPHAN NO ESTADO DO RIO DE JANEIRO
+transferencia,id_unidade_organizacional_nivel_3,201446,2020(1)2020,EBSERH - FILIAL HOSPITAL DE CLINICAS DA UFPR
+transferencia,id_unidade_organizacional_nivel_3,2776,2019(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DO PARANA"
+transferencia,id_unidade_organizacional_nivel_3,210166,2020(1)2020,SUBSECRETARIA DE GESTAO ESTRATEGICA
+transferencia,id_unidade_organizacional_nivel_3,21368,2020(1)2020,GABINETE DO REITOR
+transferencia,id_unidade_organizacional_nivel_3,2779,2020(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DO RIO GRANDE DO SUL"
+transferencia,id_unidade_organizacional_nivel_3,102752,2020(1)2022,SUPERINTENDENCIA DO IPHAN NO ESTADO DE RORAIMA
+transferencia,id_unidade_organizacional_nivel_3,2816,2017(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DE RORAIMA"
+transferencia,id_unidade_organizacional_nivel_3,23296,2020(1)2022,PRO-REITORIA DE EXTENSAO
+transferencia,id_unidade_organizacional_nivel_3,2773,2020(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DE MINAS GERAIS"
+transferencia,id_unidade_organizacional_nivel_3,2800,2018(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DO AMAZONAS"
+transferencia,id_unidade_organizacional_nivel_3,2788,2018(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DA BAHIA"
+transferencia,id_unidade_organizacional_nivel_3,217151,2020(1)2022,DEPARTAMENTO DE ADMINISTRACAO
+transferencia,id_unidade_organizacional_nivel_3,70917,2020(1)2020,DIRETORIA DE GESTAO E DESENVOLVIMENTO DE PESSOAS
+transferencia,id_unidade_organizacional_nivel_3,21378,2020(1)2020,PRO-REITORIA DE PESQUISA E POS-GRADUACAO
+transferencia,id_unidade_organizacional_nivel_3,34835,2020(1)2022,INSTITUTO DE CIENCIAS AGRARIAS
+transferencia,id_unidade_organizacional_nivel_3,12166,2020(1)2021,CENTRO DE CIENCIAS MEDICAS
+transferencia,id_unidade_organizacional_nivel_3,4140,2020(1)2020,SUPERINTENDENCIA REGIONAL NO ESTADO DA PARAIBA
+transferencia,id_unidade_organizacional_nivel_3,58,2021(1)2021,COMANDO DE PREPARO
+transferencia,id_unidade_organizacional_nivel_3,2793,2018(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DE MATO GROSSO"
+transferencia,id_unidade_organizacional_nivel_3,68,2021(1)2022,COMANDO-GERAL DE APOIO
+transferencia,id_unidade_organizacional_nivel_3,84156,2021(1)2022,DEPARTAMENTO DE CIENCIA E TECNOLOGIA
+transferencia,id_unidade_organizacional_nivel_3,209977,2017(1)2021,CENTRO MULTIDISCIPLINAR UFRJ-MACAE
+transferencia,id_unidade_organizacional_nivel_3,18,2021(1)2022,COMISSAO EXECUTIVA DO PLANO DA LAVOURA CACAUEIRA
+transferencia,id_unidade_organizacional_nivel_3,266830,2021(1)2022,SUBSECRETARIA DE ORCAMENTO E ADMINISTRACAO
+transferencia,id_unidade_organizacional_nivel_3,33421,2021(1)2021,PRO-REITORIA DE POS-GRADUACAO E PESQUISA
+transferencia,id_unidade_organizacional_nivel_3,1986,2021(1)2021,SECRETARIA DE COORDENACAO E GOVERNANCA DO PATRIMONIO DA UNIAO
+transferencia,id_unidade_organizacional_nivel_3,2803,2017(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DO PIAUI"
+transferencia,id_unidade_organizacional_nivel_3,2808,2021(1)2021,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DO RIO GRANDE DO NORTE"
+transferencia,id_unidade_organizacional_nivel_3,228365,2021(1)2021,DIRETORIA DE DESENVOLVIMENTO FLORESTAL
+transferencia,id_unidade_organizacional_nivel_3,263750,2022(1)2023,GABINETE
+transferencia,id_unidade_organizacional_nivel_3,4036,2015(1)2022,SUPERINTENDENCIA REGIONAL DO RIO GRANDE DO SUL
+transferencia,id_unidade_organizacional_nivel_3,4025,2015(1)2023,SUPERINTENDENCIA REGIONAL DO NORDESTE DO PARA
+transferencia,id_unidade_organizacional_nivel_3,4037,2015(1)2022,SUPERINTENDENCIA REGIONAL DO MARANHAO
+transferencia,id_unidade_organizacional_nivel_3,2797,2017(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DE PERNAMBUCO"
+transferencia,id_unidade_organizacional_nivel_3,307497,2022(1)2022,"COORDENACAO-GERAL DE PESQUISA, CAPACITACAO E EXTENSAO"
+transferencia,id_unidade_organizacional_nivel_3,13068,2022(1)2022,CENTRO DE CIENCIAS SOCIAIS APLICADAS
+transferencia,id_unidade_organizacional_nivel_3,4141,2015(1)2022,SUPERINTENDENCIA REGIONAL DO RIO GRANDE DO NORTE
+transferencia,id_unidade_organizacional_nivel_3,2780,2022(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DO RIO DE JANEIRO"
+transferencia,id_unidade_organizacional_nivel_3,2802,2019(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DO DISTRITO FEDERAL"
+transferencia,id_unidade_organizacional_nivel_3,4137,2015(1)2022,SUPERINTENDENCIA REGIONAL DO AMAZONAS
+transferencia,id_unidade_organizacional_nivel_3,11768,2022(1)2022,FACULDADE DE EDUCACAO
+transferencia,id_unidade_organizacional_nivel_3,4026,2015(1)2022,SUPERINTENDENCIA REGIONAL DO CEARA
+transferencia,id_unidade_organizacional_nivel_3,4147,2015(1)2022,SUPERINTENDENCIA REGIONAL DE RORAIMA
+transferencia,id_unidade_organizacional_nivel_3,293292,2022(1)2022,"SECRETARIA DE ASSUNTOS CONSULARES, COOPERACAO E CULTURA"
+transferencia,id_unidade_organizacional_nivel_3,88721,2015(1)2022,DIRETORIA DE GESTAO CORPORATIVA
+transferencia,id_unidade_organizacional_nivel_3,252432,2020(1)2022,SECRETARIA DE COORDENACAO E GESTAO
+transferencia,id_unidade_organizacional_nivel_3,4138,2015(1)2022,SUPERINTENDENCIA REGIONAL DE MATO GROSSO DO SUL
+transferencia,id_unidade_organizacional_nivel_3,4034,2015(1)2022,SUPERINTENDENCIA REGIONAL DO PARANA
+transferencia,id_unidade_organizacional_nivel_3,27615,2015(1)2022,SUPERINTENDENCIA REGIONAL DO SUDESTE DO PARA
+transferencia,id_unidade_organizacional_nivel_3,54897,2019(1)2022,"DIRETORIA DE ORCAMENTO, FINANCAS E LOGISTICA"
+transferencia,id_unidade_organizacional_nivel_3,2792,2022(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DO MARANHAO"
+transferencia,id_unidade_organizacional_nivel_3,4030,2015(1)2022,SUPERINTENDENCIA REGIONAL DA BAHIA
+transferencia,id_unidade_organizacional_nivel_3,4031,2016(1)2022,SUPERINTENDENCIA REGIONAL DE MINAS GERAIS
+transferencia,id_unidade_organizacional_nivel_3,2799,2022(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DO AMAPA"
+transferencia,id_unidade_organizacional_nivel_3,22125,2017(1)2022,SUPERINTENDENCIA REGIONAL DO OESTE DO PARA
+transferencia,id_unidade_organizacional_nivel_3,11755,2022(1)2022,ESCOLA DE CIENCIA DA INFORMACAO
+transferencia,id_unidade_organizacional_nivel_3,2789,2022(1)2022,"SUPERINTENDENCIA FEDERAL DE AGRICULTURA, PECUARIA E ABASTECIMENTO DO CEARA"
+transferencia,id_unidade_organizacional_nivel_3,192,2022(1)2022,COMANDO-GERAL DO CORPO DE FUZILEIROS NAVAIS
+transferencia,id_unidade_organizacional_nivel_3,11762,2022(1)2022,ESCOLA DE ENFERMAGEM
+transferencia,id_unidade_organizacional_nivel_3,4027,2015(1)2022,SUPERINTENDENCIA REGIONAL DE PERNAMBUCO
+transferencia,id_unidade_organizacional_nivel_3,42742,2015(1)2022,SUPERINTENDENCIA DO IPHAN NO ESTADO DO MARANHAO
+transferencia,id_unidade_organizacional_nivel_3,4029,2018(1)2022,SUPERINTENDENCIA REGIONAL DE GOIAS
+transferencia,id_esfera_orcamentaria,1,2015(1)2023,ORCAMENTO FISCAL
+transferencia,id_esfera_orcamentaria,2,2015(1)2023,ORCAMENTO DE SEGURIDADE SOCIAL
+transferencia,id_resultado_primario,2,2015(1)2023,PRIMARIO DISCRICIONARIO
+transferencia,id_resultado_primario,3,2015(1)2022,PRIMARIO SEM IMPACTO FISCAL
+transferencia,id_resultado_primario,6,2015(1)2022,DESPESA DISCRICIONARIA DECORRENTE DE EMENDA INDIVIDUAL
+transferencia,id_resultado_primario,7,2017(1)2022,DESPESA DISCRICIONARIA DECORRENTE DE EMENDA DE BANCADA
+transferencia,id_resultado_primario,9,2020(1)2022,"DESP.DISC.DECORRENTE DE EMENDA DIR.GERAL PLOA,EXC.ORDEM TEC"
+transferencia,id_resultado_primario,8,2020(1)2022,"DESP.DISC.DECORRENTE DE EMENDA SF,CD E COMISSAO MISTA CN"
+transferencia,id_resultado_primario,-7,2023(1)2023,CODIGO INVALIDO

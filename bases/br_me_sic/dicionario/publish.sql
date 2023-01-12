@@ -17,11 +17,11 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_me_sic.dicionario_transferencia AS
+CREATE VIEW basedosdados-dev.br_me_sic.dicionario AS
 SELECT 
 SAFE_CAST(id_tabela AS STRING) id_tabela,
 SAFE_CAST(nome_coluna AS STRING) nome_coluna,
 SAFE_CAST(chave AS STRING) chave,
 SAFE_CAST(cobertura_temporal AS STRING) cobertura_temporal,
 SAFE_CAST(valor AS STRING) valor
-FROM basedosdados-dev.br_me_sic_staging.dicionario_transferencia AS t
+FROM basedosdados-dev.br_me_sic_staging.dicionario AS t
