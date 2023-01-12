@@ -6,7 +6,7 @@ Importing the module will automatically import the submodules.
 import sys
 import os
 
-__version__ = "1.6.10-beta.1"
+__version__ = "1.6.10"
 
 sys.path.append(f"{os.getcwd()}/python-package")
 
