@@ -1,0 +1,45 @@
+Despesas com cartão de pagamento do Governo Federal executadas em mandatos presidenciais anteriores
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Arthur Gusmão
+Código: 
+Email: arthur.gusmao@basedosdados.org
+Tratado por
+-----------
+Nome: Gustavo Alcântara
+Código: 
+Email: gustavo.alcantara@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2003(1)2022
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
