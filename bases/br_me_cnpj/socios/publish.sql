@@ -19,6 +19,7 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.br_me_cnpj.socios AS
 SELECT 
+SAFE_CAST(data AS DATE) data,
 SAFE_CAST(cnpj_basico AS STRING) cnpj_basico,
 SAFE_CAST(tipo AS STRING) tipo,
 SAFE_CAST(nome AS STRING) nome,

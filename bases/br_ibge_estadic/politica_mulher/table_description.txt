@@ -1,0 +1,46 @@
+A pesquisa fornece informações variadas sobre políticas para mulheres como, dados do conselho e fundo estadual de direitos das mulheres, sua estrutura e serviços, levantamento de informações sobre as mulheres em situação de violência, etc, a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios devido ao fato de que os estados não souberam informar o dado. Com isso, valores nulos sem indicadores nesta coluna passam a representar a não aplicabilidade da pergunta feita ao estado.
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2018
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Padronização e criação de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta.
+
+
+
+Frequencia de Atualização
+-------------------------
+unique
