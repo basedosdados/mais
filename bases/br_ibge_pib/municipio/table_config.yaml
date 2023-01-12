@@ -51,7 +51,7 @@ update_frequency: one_year
 observation_level:
     - country: br
       entity: municipality
-      column:
+      columns:
           - id_municipio
     - entity: year
       columns:
