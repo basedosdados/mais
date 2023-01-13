@@ -1,4 +1,5 @@
 ## @arthurfg
+## creditos ao @Athospd pelo gist. https://gist.github.com/Athospd/d374b306dd7289102f82e9b1142660ad
 ## 13/01/2023
 
 ## libs
