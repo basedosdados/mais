@@ -1,7 +1,12 @@
 
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_tse_eleicoes
 
 table_id: despesas_candidato
+
+# Título da tabela.
+title:
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -9,49 +14,28 @@ table_id: despesas_candidato
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
 description: "Dados de despesas em campanhas eleitorais a nível de despesa.\n"
 
-# A máxima unidade espacial que a tabela cobre.
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
 spatial_coverage:
-    continent:
-        - south_america
-    country:
-        - bra
+    - sa.br
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
 temporal_coverage:
-    - 2002
-    - 2004
-    - 2006
-    - 2008
-    - 2010
-    - 2012
-    - 2014
-    - 2016
-    - 2018
-    - 2020
+    - 2002(2)2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: two_years
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity: []
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit: two_years
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns: []
+# Nível de observação da tabela: o que representa cada linha.
+observation_level: []
 
 last_updated:
     metadata:
-    data:
+    data: '2022-11-11 19:51:29'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -63,8 +47,8 @@ published_by:
     name: Ricardo Dahis
     email: rdahis@basedosdados.org
     github_user: rdahis
-    website: www.ricardodahis.com
     ckan_user: rdahis
+    website: www.ricardodahis.com
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -74,12 +58,19 @@ data_cleaned_by:
     email: rdahis@basedosdados.org
     github_user: rdahis
     ckan_user: rdahis
-    website: 
-    code_url:
+    website: www.ricardodahis.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: "- Unificamos diferentes layouts entre anos em um arquivo\
     \ só.\n"
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url:
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: ''
+    organization_id: ''
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -89,10 +80,6 @@ auxiliary_files_url:
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
-
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary:
 
 source_bucket_name: basedosdados-dev
 
@@ -104,9 +91,8 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: ano, sigla_uf
-
-bdm_file_size:
+partitions:
+    - ano
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -121,6 +107,7 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -128,12 +115,14 @@ columns:
           column_name: ano
       measurement_unit: year
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: true
     - name: turno
       bigquery_type: int64
       description: Turno
       temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -141,12 +130,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: tipo_eleicao
       bigquery_type: string
       description: Tipo da eleição
       temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -154,12 +145,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da unidade da federação
       temporal_coverage:
+        - (2)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -167,23 +160,26 @@ columns:
           column_name: sigla
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
-      is_partition: true
+      is_partition: false
     - name: id_municipio
-      bigquery_type:
+      bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-      covered_by_dictionary:
+        - (2)
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
           column_name: id_municipio
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio_tse
-      bigquery_type:
+      bigquery_type: string
       description: ID Município - TSE
       temporal_coverage:
       covered_by_dictionary: no
@@ -193,305 +189,329 @@ columns:
           column_name: id_municipio_tse
       measurement_unit:
       has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: numero_candidato
-      bigquery_type:
-      description: Número do candidato
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      is_in_staging: true
-      is_partition: false
-    - name: cpf_candidato
-      bigquery_type: string
-      description: CPF do candidato
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sequencial_candidato
       bigquery_type: string
       description: Sequencial do candidato
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: numero_candidato
+      bigquery_type: string
+      description: Número do candidato
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cpf_candidato
+      bigquery_type: string
+      description: CPF do candidato
+      temporal_coverage:
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_candidato_bd
       bigquery_type: string
       description: ID Candidato - Base dos Dados
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome_candidato
       bigquery_type: string
       description: Nome do candidato
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: cpf_vice_suplente
       bigquery_type: string
       description: CPF do vice ou suplente
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: numero_partido
       bigquery_type: string
       description: Número do partido
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sigla_partido
       bigquery_type: string
       description: Sigla do partido
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome_partido
       bigquery_type: string
       description: Nome do partido
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: cargo
       bigquery_type: string
       description: Cargo
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sequencial_despesa
       bigquery_type: string
       description: Sequencial da despesa
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: data_despesa
       bigquery_type: date
       description: Data da despesa
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: tipo_despesa
       bigquery_type: string
       description: Tipo da despesa
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: descricao_despesa
       bigquery_type: string
       description: Descrição da despesa
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: origem_despesa
-      bigquery_type:
+      bigquery_type: string
       description: Origem da despesa
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: valor_despesa
-      bigquery_type:
+      bigquery_type: float64
       description: Valor da despesa
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: tipo_prestacao_contas
-      bigquery_type:
+      bigquery_type: string
       description: Tipo de prestação de contas
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: data_prestacao_contas
       bigquery_type: date
       description: Data de prestação de contas
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sequencial_prestador_contas
       bigquery_type: string
       description: Sequencial do prestador de contas
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: cnpj_prestador_contas
       bigquery_type: string
       description: CNPJ do prestador de contas
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: cnpj_candidato
       bigquery_type: string
       description: CNPJ do candidato
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
       has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: tipo_documento
       bigquery_type: string
       description: Tipo do documento
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: numero_documento
       bigquery_type: string
       description: Número do documento
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: especie_recurso
@@ -504,7 +524,8 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: fonte_recurso
@@ -517,7 +538,8 @@ columns:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: cpf_cnpj_fornecedor
@@ -531,6 +553,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome_fornecedor
@@ -544,6 +567,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome_fornecedor_rf
@@ -557,6 +581,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: cnae_2_fornecedor
@@ -570,6 +595,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: descricao_cnae_2_fornecedor
@@ -584,19 +610,21 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: tipo_fornecedor
       bigquery_type: string
       description: Tipo do fornecedor
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: esfera_partidaria_fornecedor
@@ -610,6 +638,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sigla_uf_fornecedor
@@ -623,32 +652,35 @@ columns:
           column_name: sigla_uf
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio_tse_fornecedor
       bigquery_type: string
       description: ID Município do fornecedor - TSE
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: municipio
           column_name: id_municipio_tse
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sequencial_candidato_fornecedor
       bigquery_type: string
       description: Sequencial do candidato fornecedor
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: numero_candidato_fornecedor
@@ -662,6 +694,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: numero_partido_fornecedor
@@ -675,32 +708,35 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sigla_partido_fornecedor
       bigquery_type: string
       description: Sigla do partido do fornecedor
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome_partido_fornecedor
       bigquery_type: string
       description: Nome do partido do fornecedor
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: cargo_fornecedor
@@ -714,7 +750,10 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2021-12-10T02:15:33.742267'
+number_rows:
+
+metadata_modified: '2022-10-12T10:25:07.095366'

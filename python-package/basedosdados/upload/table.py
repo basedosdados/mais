@@ -1,7 +1,7 @@
 """
 Class for manage tables in Storage and Big Query
 """
-# pylint: disable=invalid-name, too-many-locals, too-many-branches, too-many-arguments
+# pylint: disable=invalid-name, too-many-locals, too-many-branches, too-many-arguments,line-too-long,R0801,consider-using-f-string
 from pathlib import Path
 import json
 from copy import deepcopy
@@ -218,12 +218,13 @@ class Table(Base):
             publish_txt
         )
 
-    def _make_template(self, columns, partition_columns, if_table_config_exists):
+    def _make_template(self, columns, partition_columns, if_table_config_exists, force_columns):
         # create table_config.yaml with metadata
         self.metadata.create(
             if_exists=if_table_config_exists,
             columns=partition_columns + columns,
             partition_columns=partition_columns,
+            force_columns=force_columns,
             table_only=False,
         )
 
@@ -236,7 +237,7 @@ class Table(Base):
         """
         url = columns_config_url_or_path.replace("edit#gid=", "export?format=csv&gid=")
         try:
-            return pd.read_csv(StringIO(requests.get(url).content.decode("utf-8")))
+            return pd.read_csv(StringIO(requests.get(url, timeout=10).content.decode("utf-8")))
         except Exception as e:
             raise BaseDosDadosException(
                 "Check if your google sheet Share are: Anyone on the internet with this link can view"
@@ -326,7 +327,7 @@ class Table(Base):
             for required_column in required_columns:
                 if sheet_column == required_column:
                     not_found_columns.remove(required_column)
-        if not_found_columns != []:
+        if not_found_columns:
             raise BaseDosDadosException(
                 f"The following required columns are not found: {', '.join(not_found_columns)}."
             )
@@ -415,8 +416,9 @@ class Table(Base):
         if_folder_exists="raise",
         if_table_config_exists="raise",
         source_format="csv",
+        force_columns = False,
         columns_config_url_or_path=None,
-    ):
+    ):  # sourcery skip: low-code-quality
         """Initialize table folder at metadata_path at `metadata_path/<dataset_id>/<table_id>`.
 
         The folder should contain:
@@ -446,7 +448,11 @@ class Table(Base):
             source_format (str): Optional
                 Data source format. Only 'csv', 'avro' and 'parquet'
                 are supported. Defaults to 'csv'.
-
+            force_columns (bool): Optional.
+                If set to `True`, overwrite CKAN's columns with the ones provi
+                ded.
+                If set to `False`, keep CKAN's columns instead of the ones pro
+                vided.
             columns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.
                 Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.
                 Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
@@ -521,7 +527,7 @@ class Table(Base):
                     "You must provide a path to correctly create config files"
                 )
             else:
-                self._make_template(columns, partition_columns, if_table_config_exists)
+                self._make_template(columns, partition_columns, if_table_config_exists, force_columns=force_columns)
 
         elif if_table_config_exists == "raise":
 
@@ -535,11 +541,11 @@ class Table(Base):
                     f"table_config.yaml and publish.sql already exists at {self.table_folder}"
                 )
             # if config files don't exist, create them
-            self._make_template(columns, partition_columns, if_table_config_exists)
+            self._make_template(columns, partition_columns, if_table_config_exists, force_columns=force_columns)
 
         else:
             # Raise: without a path to data sample, should not replace config files with empty template
-            self._make_template(columns, partition_columns, if_table_config_exists)
+            self._make_template(columns, partition_columns, if_table_config_exists, force_columns=force_columns)
 
         if columns_config_url_or_path is not None:
             self.update_columns(columns_config_url_or_path)
@@ -554,6 +560,7 @@ class Table(Base):
         if_storage_data_exists="raise",
         if_table_config_exists="raise",
         source_format="csv",
+        force_columns=False,
         columns_config_url_or_path=None,
         dataset_is_public=True,
         location=None,
@@ -607,7 +614,11 @@ class Table(Base):
             source_format (str): Optional
                 Data source format. Only 'csv', 'avro' and 'parquet'
                 are supported. Defaults to 'csv'.
-
+            force_columns (bool): Optional.
+                If set to `True`, overwrite CKAN's columns with the ones provi
+                ded.
+                If set to `False`, keep CKAN's columns instead of the ones pro
+                vided.
             columns_config_url_or_path (str): Path to the local architeture file or a public google sheets URL.
                 Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats.
                 Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.
@@ -672,6 +683,7 @@ class Table(Base):
             if_table_config_exists=if_table_config_exists,
             columns_config_url_or_path=columns_config_url_or_path,
             source_format=source_format,
+            force_columns=force_columns
         )
 
         table = bigquery.Table(self.table_full_name["staging"])

@@ -1,139 +1,104 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: igp_og_ano # AUTO GENERATED
-dataset_id: br_fgv_igp # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-fgv-igp # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_fgv_igp # AUTO GENERATED
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_fgv_igp
 
-version: v1.0 # REQUIRED
+table_id: igp_og_ano
 
-last_updated: 2021-10-15 # AUTO GENERATED
+# Título da tabela.
+title: IGP-OG Anual
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    O Índice Geral de Preços - Oferta Global (IGP-OG) é um indicador do movimento de preços que cobre todo o processo produtivo, desde preços de matérias-primas agrícolas e industriais, passando pelos preços de produtos intermediários até os de bens e serviços finais. É composto pela média aritmética ponderada do Índice de Preços ao Produtor Amplo (IPA) (60%), do Índice de Preços ao Consumidor (IPC) (30%) e do Índice Nacional de Custo da Construção (INCC) (10%). Para efeito de coleta de preços, o IGP-OG mede a evolução de preços no período compreendido entre o primeiro ao último dia do mês de referência. O conceito de Oferta Global (OG) refere-se à produção de bens e serviços tanto os produzidos internamente e exportados, quanto os importados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: |
+  O Índice Geral de Preços - Oferta Global (IGP-OG) é um indicador do movimento de preços  que cobre todo o processo produtivo, desde preços de matérias-primas agrícolas e industriais, passando pelos preços de produtos intermediários até os de bens e serviços finais. É composto pela média aritmética ponderada do Índice de Preços ao Produtor Amplo (IPA) (60%), do Índice de Preços ao Consumidor (IPC) (30%) e do Índice Nacional de Custo da Construção (INCC) (10%). Para efeito de coleta de preços, o IGP-OG mede a evolução de preços no período compreendido entre o primeiro ao último dia do mês de referência. O conceito de Oferta Global (OG) refere-se à produção de bens e serviços tanto os produzidos internamente e exportados, quanto os importados.
 
-# Quem está completando esse arquivo config?
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+  - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+  - 1969(1)2022
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: one_year
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+  - entity: year
+    columns:
+      - ano
+
+last_updated:
+    metadata: '2022-09-12T00:00:00.000000'
+    data: '2022-09-12T00:00:00.000000'
+    release: '2022-09-12T00:00:00.000000'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
 published_by:
-    name: Lucas Nascimento Moreira # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_fgv_igp/code # REQUIRED
-    website: <website>
-    email: lucas.moreira@basedosdados.org
+    name: Maurício Fagundes
+    email: mauricio.fagundes@basedosdados.org
+    github_user: mfagundes
+    ckan_user: mfagundes
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: Lucas Nascimento Moreira
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_fgv_igp/code
-    website: <onde encontrar os dados tratados>
-    email: lucas.moreira@basedosdados.org
-
+data_cleaned_by:
+    name: Maurício Fagundes
+    email: mauricio.fagundes@basedosdados.org
+    github_user: mfagundes
+    ckan_user: mfagundes
+    website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    - Coleta dos dados a partir da API ipeadatapy;
-    - Exclusão e renomeação de variáveis segundo diretrizes da BD;
-    - Junção dos dataframes
+data_cleaning_description: |
+  - Coleta dos dados a partir da API ipeadatapy;
+  - Renomeação das variáveis segundo as diretrizes da BD;
+  - Cálculo de valores acumulados e variações, quando couber
+  - Junção de dataframes com períodos distintos de coleta
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: ano # REQUIRED 
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/pipelines/blob/master/pipelines/datasets/br_fgv_igp/utils.py
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - ano
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
 
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-    - ano
+# Url dos dados originais no GCP Storage.
+raw_files_url:
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - brasil
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
 
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
-    - 1970
-    - 1971
-    - 1972
-    - 1973
-    - 1974
-    - 1975
-    - 1976
-    - 1977
-    - 1978
-    - 1979
-    - 1980
-    - 1981
-    - 1982
-    - 1983
-    - 1984
-    - 1985
-    - 1986
-    - 1987
-    - 1988
-    - 1989
-    - 1990
-    - 1991
-    - 1992
-    - 1993
-    - 1994
-    - 1995
-    - 1996
-    - 1997
-    - 1998
-    - 1999
-    - 2000
-    - 2001
-    - 2002
-    - 2003
-    - 2004
-    - 2005
-    - 2006
-    - 2007
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
-    - 2020
-    - 2021
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
 
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados
+
+project_id_staging: basedosdados-staging
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
+partitions:
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -143,22 +108,83 @@ partitions: # REQUIRED
 # Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
 # Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: indice
-        description: Número índice (ago 1994 = 100)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: variacao_anual
-        description: Variação percentual anual
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: indice_medio
+      bigquery_type: float64
+      description: Média dos índices mensais (Ipeadata)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: indice
+      bigquery_type: float64
+      description: Valor do índice do IGP-OG no último dia do ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: variacao_anual
+      bigquery_type: float64
+      description: Variação do índice no ano
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: indice_fechamento_anual
+      bigquery_type: float64
+      description: Elaboração Ipeadata - calculado a partir da média geométrica dos valores dos meses corrente e seguinte da série original do IGP-DI
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 53
+
+metadata_modified:

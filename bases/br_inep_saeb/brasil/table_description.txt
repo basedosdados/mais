@@ -1,0 +1,48 @@
+Tabela resumo dos dados do SAEB com a média e percentual de alunos dentro de cada nível de aprendizado segundo o Inep a nível Brasil
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 1995(2)2021
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Compatibilização dos resultados a partir da tabela proficiencia e enquadramento das variáveis de 2021 segundo o padrão BD
+
+
+
+Frequencia de Atualização
+-------------------------
+two_years

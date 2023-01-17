@@ -1,0 +1,48 @@
+Lista com identificadores e informações diversas sobre as reuniões, sessões, audiências, seminários e outros eventos realizados pelos diversos órgãos legislativos da Câmara, inclusive eventos já agendados e não ocorridos.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Joao Pedro Donasolo
+Código: 
+Email: jpdonasolo@gmail.com
+Tratado por
+-----------
+Nome: Joao Pedro Donasolo
+Código: 
+Email: jpdonasolo@gmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 1991(1)2022
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Padronização da BD e customização de colunas
+
+
+
+Frequencia de Atualização
+-------------------------
+day

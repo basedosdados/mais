@@ -1,7 +1,7 @@
 '''
 Class for define external and partiton configs for each datatype
 '''
-# pylint: disable=protected-access
+# pylint: disable=protected-access,line-too-long
 import csv
 
 from google.cloud import bigquery

@@ -101,29 +101,30 @@ A ordem de variáveis em tabelas é padronizada para manter uma consistência no
 
 ## Tipos de variáveis
 
-Nós utilizamos algumas das opções de [tipos do BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types): `STRING`, `INT64`, `FLOAT64`, `DATE`, `TIME`, `GEOGRAPHY`.
+Nós utilizamos algumas das opções de [tipos do BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types): `string`, `int64`, `float64`, `date`, `time`, `geography`.
 
 Quando escolher:
 
-- `STRING`:
+- `string`:
     - Variáveis de texto
     - Chaves de variáveis categóricas com dicionário ou diretório
-- `INT64`:
-    - Variáveis de números inteiros com as quais é possível fazer contas (adição, subtração).
-- `FLOAT64`:
-    - Variáveis de números com casas decimais com as quais é possível fazer contas (adição, subtração).
-- `DATE`:
-    - Variáveis de data no formato `YYYY-MM-DD`.
-- `TIME`:
-    - Variáveis de tempo no formato `HH:MM:SS`.
-- `GEOGRAPHY`:
-    - Variáveis de geografia.
+- `int64`:
+    - Variáveis de números inteiros com as quais é possível fazer contas (adição, subtração) 
+    - Variáveis do tipo booleanas que preenchemos com 0 ou 1 
+- `float64`:
+    - Variáveis de números com casas decimais com as quais é possível fazer contas (adição, subtração)
+- `date`:
+    - Variáveis de data no formato `YYYY-MM-DD`
+- `time`:
+    - Variáveis de tempo no formato `HH:MM:SS`
+- `geography`:
+    - Variáveis de geografia
 
 ## Unidades de medida
 
-A regra é manter variáveis com suas unidades de medida originais, com a exceção de variáveis financeiras onde convertermos moedas antigas para as atuais (e.g. Cruzeiro para Real).
+A regra é manter variáveis com suas unidades de medida originais listadas nesse [código](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py), com a exceção de variáveis financeiras onde convertermos moedas antigas para as atuais (e.g. Cruzeiro para Real).
 
-Catalogamos unidades de medida em formato padrão na tabela de arquitetura. Exemplos: `m`, `km/h`, `BRL`.
+Catalogamos unidades de medida em formato padrão na tabela de arquitetura. [Lista completa aqui](https://github.com/basedosdados/website/blob/master/ckanext-basedosdados/ckanext/basedosdados/validator/available_options/measurement_unit.py) Exemplos: `m`, `km/h`, `BRL`.
 
 Para colunas financeiras deflacionadas, listamos a moeda com o ano base. Exemplo: uma coluna medida em reais de 2010 tem unidade `BRL_2010`.
 
@@ -175,15 +176,94 @@ Preencher a coluna `cobertura_temporal` nos metadados de tabela, coluna e chave 
 
 ## Particionamento de tabelas
 
-Uma tabela particionada é uma tabela especial dividida em segmentos, chamados de partições, que facilitam o gerenciamento e a consulta de seus dados. Ao dividir uma grande tabela em partições menores, você pode melhorar o desempenho da consulta e pode controlar os custos reduzindo o número de bytes lidos por uma consulta. Por isso, sempre recomendamos que tabelas grandes sejam particionadas. Leia mais a respeito na [documentação da Google Cloud](https://cloud.google.com/bigquery/docs/partitioned-tables).
+### **O que é particionamento e qual seu objetivo ?**
 
-Note que ao particionar uma tabela é preciso excluir a coluna correspondente. Exemplo: é preciso excluir a coluna `ano` ao particionar por `ano`.
+De forma resumida, particionar uma tabela é dividi-la em vários blocos/partes. O objetivo central é diminuir os custos financeiros e aumentar a perfomance, visto que, quanto maior o volume de dados, consequentemente será maior o custo de armazenamento e consulta. 
 
-Colunas comuns para usar como partição: `ano`, `mes`, `sigla_uf`, `id_municipio`.
+A redução de custos e o aumento de perfomance acontece, principalmente, porque a partição permite a reorganização do conjunto de dados em pequenos **blocos agrupados**. Na prática, realizando o particionamento, é possível evitar que uma consulta percorra toda a tabela só para trazer um pequeno recorte de dados.   
+
+Um exemplo prático da nossa querida RAIS:
+
+- Sem utilizar filtro de partição:
+
+Para esse caso o Bigquery varreu todas (*) as colunas e linhas do conjunto. Vale salientar que esse custo ainda não é tão grande, visto que a base já foi particionada. Caso esse conjunto não tivesse passado pelo processo de particionamento, essa consulta custaria muito mais dinheiro e tempo, já que se trata de um volume considerável de dados. 
+
+![image](https://user-images.githubusercontent.com/58278652/185815101-68ed5797-fff8-4968-84e2-e6a47bba58d0.png)
+
+- Com filtro de partição: 
+
+Aqui, filtramos pelas colunas particionadas `ano` e `sigla_uf`. Dessa forma, o Bigquery só **consulta** e **retorna** os valores da pasta **ano** e da subpasta **sigla_uf**. 
+
+![image](https://user-images.githubusercontent.com/58278652/185815135-fb012a2c-535b-457e-af2a-7984961168b3.png)
+
+### **Quando particionar uma tabela?**
+
+A primeira pergunta que surge quando se trata de particionamento é: _a partir de qual quantidade de linhas uma tabela deve ser particionada?_ A documentação do [GCP ](https://cloud.google.com/bigquery/docs/partitioned-tables?hl=pt-br) não define uma quantidade _x_ ou _y_  de linhas que deve ser particionada. O ideal é que as tabelas sejam particionadas, com poucas exceções. Por exemplo, tabelas com menos de 10.000 linhas, que não receberão mais ingestão de dados, não tem um custo de armazenamento e processamento altos e, portanto, não há necessidade de serem particionadas.
+
+### **Como particionar uma tabela?**
+
+Se os dados estão guardados localmente, é necessário:
+
+1. Criar as pastas particionadas na sua pasta de `/output`, na linguagem que você estiver utilizando.
+
+Exemplo de uma tabela particionada por `ano` e `mes`, utilizando `python`:
+
+```python
+for ano in [*range(2005, 2020)]:
+  for mes in [*range(1, 13)]:
+    particao = output + f'table_id/ano={ano}/mes={mes}'
+    if not os.path.exists(particao):
+      os.makedirs(particao)
+```
+2. Salvar os arquivos particionados.
+
+```python
+for ano in [*range(2005, 2020)]:
+  for mes in [*range(1, 13)]:
+    df_particao = df[df['ano'] == ano].copy() # O .copy não é necessário é apenas uma boa prática
+    df_particao = df_particao[df_particao['mes'] == mes]
+    df_particao.drop(['ano', 'mes'], axis=1, inplace=True) # É preciso excluir as colunas utilizadas para partição 
+    particao = output + f'table_id/ano={ano}/mes={mes}/tabela.csv'
+    df_particao.to_csv(particao, index=False, encoding='utf-8', na_rep='')
+```
+
+Exemplos de tabelas particionadas em `R`:
+
+- [PNADC](https://github.com/basedosdados/mais/blob/master/bases/br_ibge_pnadc/code/microdados.R)
+- [PAM](https://github.com/basedosdados/mais/blob/master/bases/br_ibge_pam/code/permanentes_usando_api.R)
+
+Exemplo de como particionar uma tabela em `SQL`:
+
+```sql
+CREATE TABLE `dataset_id.table_id` as (
+    ano  INT64,
+    mes  INT64,
+    col1 STRING,
+    col1 STRING 
+) PARTITION BY ano, mes
+OPTIONS (Description='Descrição da tabela') 
+``` 
+
+### **Regras importantes de particionamento.**
+
+- Os tipos de colunas que o BigQuery aceita como partição são:
+
+  * **Coluna de unidade de tempo**: as tabelas são particionadas com base em uma coluna de `TIMESTAMP`, `DATE` ou `DATETIME`.
+  * **Tempo de processamento**: as tabelas são particionadas com base no carimbo de `data/hora` quando o BigQuery processa os dados.
+  * **Intervalo de números inteiros**: as tabelas são particionadas com base em uma coluna de números inteiros.
+
+- Os tipos de colunas que o BigQuery **não** aceita como partição são: `BOOL`, `FLOAT64`, `BYTES`, etc.
+
+- O BigQuery aceita no máximo 4.000 partições por tabela.
+
+- Aqui na BD as tabelas geralmente são particionadas por: `ano`, `mes`, `trimestre` e `sigla_uf`.
+
+- Note que ao particionar uma tabela é preciso excluir a coluna correspondente. Exemplo: é preciso excluir a coluna `ano` ao particionar por `ano`.
+
 
 ## Número de bases por _pull request_
 
-Pull requests no Github devem incluir no máximo uma base. Ou seja, podem envolver uma ou mais tabela intra-base.
+Pull requests no Github devem incluir no máximo um conjunto, mas pode incluir mais de uma base. Ou seja, podem envolver uma ou mais tabela dentro do mesmo conjunto.
 
 ## Dicionários
 
@@ -196,6 +276,11 @@ Pull requests no Github devem incluir no máximo uma base. Ou seja, podem envolv
     - Para outros casos, como por exemplo `br_inep_censo_escolar.turma:etapa_ensino`, nós excluimos os zeros à esquerda. Ou seja, mudamos `01` para `1`.
 - Valores são padronizados: sem espaços extras, inicial maiúscula e resto minúsculo, etc.
 
+### **Como preencher os metadados da tabela dicionário?**
+- Não preencher o *`spatial_coverage`* (`cobertura_espacial`), ou seja, deixar o campo vazio.
+- Não preencher o *`temporal_coverage`* (`cobertura_temporal`), ou seja, deixar o campo vazio.
+- Não preencher o *`observation_level`* (`nivel_observacao`), ou seja, deixar o campo vazio.
+
 ## Diretórios
 
 Diretórios são as pedras fundamentais da estrutura do nosso _datalake_. Nossas regras para gerenciar diretórios são:
@@ -206,6 +291,19 @@ Diretórios são as pedras fundamentais da estrutura do nosso _datalake_. Nossas
   primárias de entidades.
 
 Veja todas as [tabelas já disponíveis aqui.](https://basedosdados.org/dataset?organization=br-bd&order_by=score&q=%22diret%C3%B3rios%22)
+
+### **Como preencher os metadados das tabelas de diretório?**
+- Preencher o *`spatial_coverage`* (`cobertura_espacial`), que é a máxima unidade espacial que a tabela cobre. Exemplo: sa.br, que significa que o nível de agregação espacial da tabela é o Brasil.
+- Não preencher o *`temporal_coverage`* (`cobertura_temporal`), ou seja, deixar o campo vazio.
+- Preencher o *`observation_level`* (`nivel_observacao`), que consiste no nível de observação da tabela, ou seja, o que representa cada linha. 
+- Não preencher o *`temporal_coverage`* (`cobertura_temporal`) das colunas da tabela, ou seja, deixar o campo vazio.
+
+## Fontes Originais
+
+O campo se refere aos dados na fonte original, que ainda não passaram pela metodologia de tratamento da Base dos Dados, ou seja, nosso `_input_`. Ao clicar nele, a ideia é redirecionar o usuário para a página da fonte original dos dados. As regras para gerenciar as Fontes Originais são: 
+
+- Incluir o nome do link externo que leva à fonte original. Como padrão, esse nome deve ser da organização ou do portal que armazenena os dados. Exemplos: `Sinopses Estatísticas da Educação Básica: Dados Abertos do Inep`, `Penn World Tables: Groningen Growth and Development Centre`.
+- Preencher os metadados de Fontes Originais: Descrição, URL, Língua, Tem Dados Estruturados, Tem uma API, É de Graça, Requer Registro, Disponibilidade, Requer IP de Algum País, Tipo de Licença, Cobertura Temporal, Cobertura Espacial e Nível da Observação.
 
 ## **Pensou em melhorias para os padrões definidos?**
 

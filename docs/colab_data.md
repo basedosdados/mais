@@ -1,4 +1,5 @@
 
+
 # Suba dados na BD+
 
 ## Por que minha organização deve subir dados na BD+?
@@ -51,27 +52,8 @@ Mantemos a lista de conjuntos que ainda não estão na BD+ no nosso [Github](htt
 
 !!! Info "Caso sua base (conjunto) já esteja listada, basta marcar seu usuário do Github como `assignee`."
 
-### 2. Configure suas credenciais localmente e prepare o ambiente
 
-No seu terminal:
-
-1. Instale nosso cliente: `pip install basedosdados`.
-2. Rode `basedosdados config init` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
-
-> Caso seu ambiente de produção não permita o uso interativo do nosso cliente ou apresente alguma outra dificuldade relativa a esse modo de configuração, você pode configurar o `basedosdados` a partir de variáveis de ambiente da seguinte forma:
->
->```bash
-> export BASEDOSDADOS_CONFIG=$(cat ~/.basedosdados/config.toml | base64)
-> export BASEDOSDADOS_CREDENTIALS_PROD=$(cat ~/.basedosdados/credentials/prod.json | base64)
-> export BASEDOSDADOS_CREDENTIALS_STAGING=$(cat ~/.basedosdados/credentials/staging.json | base64)
->```
->
-3. Clone um _fork_ do nosso [repositório](https://github.com/basedosdados/mais) localmente.
-4. Dê um `cd` para a pasta local do repositório e abra uma nova branch
-   com `git checkout -b [BRANCH_ID]`. Todas as adições e modificações
-   serão feitas nessa _branch_.
-
-### 3. Baixar nossa pasta _template_ para dados
+### 2. Baixar nossa pasta _template_ para dados
 
 [Baixe aqui a pasta
 _template_](https://drive.google.com/drive/folders/1xXXon0vdjSKr8RCNcymRdOKgq64iqfS5?usp=sharing)
@@ -97,7 +79,7 @@ estrutura é a seguinte:
 
 !!! info "As pastas `input`, `output` e `tmp` não serão commitadas para o seu projeto e existirão apenas localmente."
 
-### 4. Preencher as tabelas de arquitetura
+### 3. Preencher as tabelas de arquitetura
 
 As tabelas de arquitetura determinam **qual a estrutura de
 cada tabela do seu conjunto de dados**. Elas definem, por exemplo, o nome, ordem e metadados das colunas, e
@@ -120,7 +102,7 @@ Perguntas que uma arquitetura deve responder:
 
 #### Exemplo: RAIS - Tabelas de arquitetura
 
-As tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://drive.google.com/drive/folders/1OtsucP_KhiUEJI6F6k_cagvXfwZCFZF2?usp=sharing). Seguindo nosso [manual de estilo](../style_data), nós renomeamos, definimos os tipos, preenchemos descrições, indicamos se há dicionário ou diretório, preenchemos campos (e.g. cobertura temporal e unidade de medida) e fizemos a compatibilização entre anos para todas as variáveis (colunas).
+As tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://docs.google.com/spreadsheets/d/1dPLUCeE4MSjs0ykYUDsFd-e7-9Nk6LVV/edit?usp=sharing&ouid=103008455637924805982&rtpof=true&sd=true). Seguindo nosso [manual de estilo](../style_data), nós renomeamos, definimos os tipos, preenchemos descrições, indicamos se há dicionário ou diretório, preenchemos campos (e.g. cobertura temporal e unidade de medida) e fizemos a compatibilização entre anos para todas as variáveis (colunas).
 
 - `name`: nome da coluna.
 
@@ -154,7 +136,7 @@ identificar municípios (seu nome fica numa tabela de
 
 !!! Tip "Quando terminar de preencher as tabelas de arquitetura, entre em contato com a equipe da Base dos Dados ou nossa comunidade para validar tudo. É importante ter certeza que está fazendo sentido _antes_ de começar a escrever código."
 
-### 5. Escrever código de captura e limpeza de dados
+### 4. Escrever código de captura e limpeza de dados
 
 Após validadas as tabelas de arquitetura, podemos escrever os códigos de
 **captura** e **limpeza** dos dados.
@@ -187,13 +169,13 @@ O código de limpeza foi construído em R e [pode ser consultado
 aqui](https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pnadc/code).
 
 
-### 6. (Caso necessário) Organizar arquivos auxiliares
+### 5. (Caso necessário) Organizar arquivos auxiliares
 
 É comum bases de dados serem disponibilizadas com arquivos auxiliares. Esses podem incluir notas técnicas, descrições de coleta e amostragem, etc. Para ajudar usuários da Base dos Dados terem mais contexto e entenderem melhor os dados, organize todos esses arquivos auxiliares em `/extra/auxiliary_files`.
 
 Fique à vontade para estruturar sub-pastas como quiser lá dentro. O que importa é que fique claro o que são esses arquivos.
 
-### 7. (Caso necessário) Criar tabela dicionário
+### 6. (Caso necessário) Criar tabela dicionário
 
 Muitas vezes, especialmente com bases antigas, há múltiplos dicionários
 em formatos Excel ou outros. Na Base dos Dados nós unificamos tudo em um
@@ -208,6 +190,26 @@ colunas de todas as tabelas do seu conjunto.
 O dicionário completo [pode ser consultado
 aqui](https://docs.google.com/spreadsheets/d/12Wwp48ZJVux26rCotx43lzdWmVL54JinsNnLIV3jnyM/edit?usp=sharing).
 Ele já possui a estrutura padrão que utilizamos para dicionários.
+
+### 7. Configure suas credenciais localmente e prepare o ambiente
+
+No seu terminal:
+
+1. Instale nosso cliente: `pip install basedosdados`.
+2. Rode `basedosdados config init` e siga o passo a passo para configurar localmente com as credenciais de seu projeto no Google Cloud.
+
+> Caso seu ambiente de produção não permita o uso interativo do nosso cliente ou apresente alguma outra dificuldade relativa a esse modo de configuração, você pode configurar o `basedosdados` a partir de variáveis de ambiente da seguinte forma:
+>
+>```bash
+> export BASEDOSDADOS_CONFIG=$(cat ~/.basedosdados/config.toml | base64)
+> export BASEDOSDADOS_CREDENTIALS_PROD=$(cat ~/.basedosdados/credentials/prod.json | base64)
+> export BASEDOSDADOS_CREDENTIALS_STAGING=$(cat ~/.basedosdados/credentials/staging.json | base64)
+>```
+>
+3. Clone um _fork_ do nosso [repositório](https://github.com/basedosdados/mais) localmente.
+4. Dê um `cd` para a pasta local do repositório e abra uma nova branch
+   com `git checkout -b [BRANCH_ID]`. Todas as adições e modificações
+   serão incluídas nessa _branch_.
 
 ### 8. Subir tudo no Google Cloud
 

@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "mais"
+version = "0.1.0"
+description = "Dependências do BD+, retiradas do pacote python"
+authors = ["Mauricio Fagundes <mauricio.fagundes@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+mkdocs = "^1.2.3"
+mkdocs-click = "^0.5.0"
+mkdocs-material = "^8.2.7"
+mkdocstrings = "^0.18.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

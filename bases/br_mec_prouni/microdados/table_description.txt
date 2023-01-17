@@ -1,0 +1,53 @@
+Detalhamento das bolsas concedidas pelo Prouni por ano, contendo a região; UF; município; instituição de educação superior; curso; modalidade de ensino (presencial ou EAD); turno e tipo de bolsa. Detalhamento do perfil dos beneficiários do Prouni por sexo; raça/cor; data de nascimento e pessoas com deficiência.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Lucas Passos Barreto
+Código: 
+Email: lucaspassosbarreto@hotmail.com
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+
+
+
+Cobertura Temporal
+------------------
+- 2005(1)2019
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Criação do dicionário para variáveis categóricas, padronização das variáveis segundo as diretrizes da BD, substituição do nome por id_municipio e decodificação das strings
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year

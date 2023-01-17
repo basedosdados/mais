@@ -1,74 +1,42 @@
-dataset_id: br_inep_sinopse_estatistica_educacao_basica # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-inep-sinopse-estatistica-educacao-basica
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_sinopse_estatistica_educacao_basica
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-inep-sinopse-estatistica-educacao-basica
 
-# Descreva a base.
-# Ela é sobre o que?
-# Quais as principais fontes de dados?
-# Há links para FAQs e explicações?
-description: | # REQUIRED
-    As Sinopses Estatísticas da Educação Básica, até 2006, apresentam dados referentes a estabelecimento, matrícula, função docente, movimento e rendimento escolar, para as diferentes modalidades de ensino brasileiras: Ensino Regular (Educação Infantil e Ensino Fundamental e Médio), Educação Especial e Educação de Jovens e Adultos. Os dados estão distribuídos de acordo com as regiões brasileiras e suas respectivas unidades da federação.
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Sinopse Estatística da Educação Básica
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: INEP # REQUIRED
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization: br-inep
 
-# Qual departamento/grupo/pessoa mantém os dados originais?
-author:
-    name: <nome>
-    email: <email>
+# Descrição do conjunto
+notes: As Sinopses Estatísticas do Inep correspondem a um conjunto de tabelas com dados recolhidos por suas pesquisas estatísticas, avaliações e exames. Elaborada anualmente pela Diretoria de Estatísticas Educacionais (Deed), a Sinopse Estatística traz um resumo dos principais dados coletados no Censo Escolar da Educação Básica.
 
-# Onde encontrar os dados originais e mais informações?
-website:
-    - http://inep.gov.br/sinopses-estatisticas-da-educacao-basica
-
-# Quais grupos caracterizam a base?
+# Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
 groups:
-    - educacao
+  - educacao
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
 # Caso crie etiquetas novas, as regras são:
-#   - letras minúsculas
-#   - sem acentos
-#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - educacao
-    - escola
-    - ensino fundamental
-    - ensino medio
-    - educacao infantil
+  - aprendizagem
+  - escola
+  - indicadores educacionais
+  - educacao basica
+  - matricula
+  - aluno
 
-
-# Em quais línguas a base (ou a fonte original) está disponível?
-# Regras: minúsculo, sem acentos.
-# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
-languages:
-    - portugues
-
-# Os dados originais estão disponíveis de graça?
-free: sim
-
-# Are microdata available for download?
-microdata: sim
-
-# Existe uma API na fonte original?
-API: sim
-
-# É necessário registrar um usuário para baixar os dados originais?
-registration: não
-
-# Como os dados originais estão disponibilizados?
-availability: online
-
-# A fonte original requer IP brasileiro para acesso?
-brazilian_IP: não
-
-# Essa base está sob qual licença?
-# A licença MIT se aplica a bases públicas.
-# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
-license: 
-    name: MIT # REQUIRED
-    url: <url>
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified:

@@ -4,7 +4,7 @@
 //----------------------------------------------------------------------------//
 
 use "output/candidatos_1998.dta", clear
-foreach ano of numlist 2000(2)2020 {
+foreach ano of numlist 2000(2)2022 {
 	append using "output/candidatos_`ano'.dta"
 }
 *
@@ -13,7 +13,7 @@ foreach ano of numlist 2000(2)2020 {
 // limpa entradas erradas
 //------------------------------//
 
-drop if cpf == "" | cpf == "#NULO#" | cpf == "000000000-4" | cpf == "0" | cpf == "00000000000" | cpf == "NR_CPF_CANDIDATO"
+drop if cpf == "" | cpf == "#NULO#" | cpf == "000000000-4" | cpf == "0" | cpf == "-4" | cpf == "00000000000" | cpf == "NR_CPF_CANDIDATO"
 drop if titulo_eleitoral == "000000000000" | titulo_eleitoral == "#NI#"
 
 //------------------------------//

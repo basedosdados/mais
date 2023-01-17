@@ -25,10 +25,12 @@ assignees:
 
 **Tarefas** (seguindo os passos da documentação [aqui](https://basedosdados.github.io/mais/colab_data/))
 
-- [ ] Baixar a pasta template
-- [ ] Preencher as tabelas de arquitetura
-- [ ] Escrever código de captura e limpeza de dados.
-- [ ] Organizar arquivos auxiliares, se necessário.
-- [ ] Criar tabela dicionário, se necessário.
-- [ ] Subir arquiteturas, dados e arquivos auxiliares no Google Cloud.
-- [ ] Enviar tudo para revisão.
+- [ ] Baixar a pasta template e os dados originais
+- [ ] Preencher as tabelas de arquitetura - Marcar a equipe de dados na issue avisando quando finalizar
+- [ ] Escrever código de captura e limpeza de dados
+- [ ] Organizar arquivos auxiliares, se necessário
+- [ ] Criar tabela dicionário, se necessário
+- [ ] Subir tabelas no BigQuery
+- [ ] Criar e preencher table_config e dataset_config
+- [ ] Fazer uma revisão seguindo o [nosso guia](https://github.com/basedosdados/.github/wiki/Dados#como-fazer-code-review)
+- [ ] Abrir o PR

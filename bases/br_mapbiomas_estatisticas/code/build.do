@@ -9,7 +9,7 @@ set more off
 cap log close
 set excelxlsxlargefile on
 
-cd "path/to/MapBiomas"
+cd "~/Dropbox/Academic/Data/Brazil/MapBiomas"
 
 do "src/fnc/clean_string.do"
 do "src/fnc/limpa_nivel.do"

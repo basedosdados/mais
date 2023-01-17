@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -16,7 +15,6 @@ TIPOS:
     - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-
 */
 
 CREATE VIEW basedosdados-dev.br_fgv_igp.igp_di_mes AS
@@ -25,5 +23,7 @@ SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(mes AS INT64) mes,
 SAFE_CAST(indice AS FLOAT64) indice,
 SAFE_CAST(variacao_mensal AS FLOAT64) variacao_mensal,
+SAFE_CAST(variacao_12_meses AS FLOAT64) variacao_12_meses,
+SAFE_CAST(variacao_acumulada_ano AS FLOAT64) variacao_acumulada_ano,
 SAFE_CAST(indice_fechamento_mensal AS FLOAT64) indice_fechamento_mensal
-from basedosdados-dev.br_fgv_igp_staging.igp_di_mes as t
+FROM basedosdados-dev.br_fgv_igp_staging.igp_di_mes AS t

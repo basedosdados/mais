@@ -1,78 +1,53 @@
-O Índice Geral de Preços do Mercado (IGP-M) é um indicador do movimento de preços que cobre todo o processo produtivo, desde preços de matérias-primas agrícolas e industriais, passando pelos preços de produtos intermediários até os de bens e serviços finais. É composto pela média ponderada do Índice de Preços ao Produtor Amplo do Mercado (IPA-M) (60%), do Índice de Preços ao Consumidor do Mercado (IPC-M) (30%) e do Índice Nacional de Custo da Construção do Mercado (INCC-M) (10%). Para efeito de coleta de preços, o IGP-M mede a evolução de preços no período compreendido entre os dias 21 do mês anterior e o dia 20 do mês de referência.
+- O Índice Geral de Preços do Mercado (IGP-M) é um indicador do movimento de preços que cobre todo o processo produtivo, desde preços de matérias-primas agrícolas e industriais, passando pelos preços de produtos intermediários até os de bens e serviços finais. É composto pela média ponderada do Índice de Preços ao Produtor Amplo do Mercado (IPA-M) (60%), do Índice de Preços ao Consumidor do Mercado (IPC-M) (30%) e do Índice Nacional de Custo da Construção do Mercado (INCC-M) (10%). Para efeito de coleta de preços, o IGP-M mede a evolução de preços no período compreendido entre os dias 21 do mês anterior e o dia 20 do mês de referência. Nota: Na época de transição para o Real (R$) - Julho e Agosto de 1994 - a FGV calculou o IGP-2, uma variante do IGP-M mas calculado com valores na nova moeda. O IGP-M reflete a comparação dos preços praticados na nova moeda (R$) com os preços praticados ainda em CR$ convertidos para Reais pela paridade R$ = 2750 CR$. O IGP-2 reflete a comparação dos preços praticados em R$ com os preços praticados ainda em CR$ porém convertidos para Reais pela cotação diária da URV. As 2 formas apresentam resultados distintos.
 
 
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-fgv-igp
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_fgv_igp
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Lucas Nascimento Moreira
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_fgv_igp/code
-Email: lucas.moreira@basedosdados.orgTratado por
+Nome: Maurício Fagundes
+Código: 
+Email: mauricio.fagundes@basedosdados.org
+Tratado por
 -----------
-Nome: Lucas Nascimento Moreira
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_fgv_igp/code
-Email: lucas.moreira@basedosdados.org
+Nome: Maurício Fagundes
+Código: 
+Email: mauricio.fagundes@basedosdados.org
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- ano
 
-Colunas identificando linhas unicamente
--------------------
-- ano
+
+
+
 
 Cobertura Temporal
 ------------------
-- 1990
-- 1991
-- 1992
-- 1993
-- 1994
-- 1995
-- 1996
-- 1997
-- 1998
-- 1999
-- 2000
-- 2001
-- 2002
-- 2003
-- 2004
-- 2005
-- 2006
-- 2007
-- 2008
-- 2009
-- 2010
-- 2011
-- 2012
-- 2013
-- 2014
-- 2015
-- 2016
-- 2017
-- 2018
-- 2019
-- 2020
-- 2021
+- 1989(1)2022
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- sa.br
+
+
+
 
 Tratamento
 ----------
 - Coleta dos dados a partir da API ipeadatapy;
-- Exclusão e renomeação de variáveis segundo diretrizes da BD;
-- Junção dos dataframes
+- Renomeação das variáveis segundo as diretrizes da BD;
+- Cálculo de valores acumulados e variações, quando couber
+- Junção de dataframes com períodos distintos de coleta
+
+
+
 
 Frequencia de Atualização
 -------------------------
-ano
-
-
+one_year
