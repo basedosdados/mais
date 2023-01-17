@@ -1,0 +1,3612 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_ibge_estadic
+
+table_id: educacao
+
+# Título da tabela.
+title: Estadic - Educação
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: A pesquisa fornece informações variadas sobre a gestão pública estadual, incluindo a legislação vigente e os instrumentos de planejamento existentes nessa esfera da administração; organização do governo estadual; composição do quadro de pessoal por vínculo empregatício, tanto na administração direta quanto na indireta; recursos financeiros utilizados para a gestão; políticas públicas setoriais no âmbito das áreas pesquisadas (habitação, transporte, agropecuária, meio ambiente etc.), entre outros aspectos
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage: sa.br
+
+# Anos cobertos pela tabela.
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage: 
+    - 2014(2)2018
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency:
+    - four_years
+
+# Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+
+     - entity: year
+       columns:
+           - ano
+     - country: br
+       entity: state
+       columns:
+           - sigla_uf
+
+last_updated:
+    metadata: '2023-01-16'
+    data: '2023-01-16 23:39:42'
+    release:
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplos: v1.0, v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by: 
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user:
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user:
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description:
+    - Coluna foi criada
+    - Unificação das duas tabelas
+    - replace
+    - drop nas colunas 'nome', 'regiao', '(deletado)'
+
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url:
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: years
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes yes
+      is_partition: no
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: caracterizacao_orgao_gestor
+      bigquery_type: string
+      description: Caracterização do órgão gestor
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: gestor_sexo
+      bigquery_type: string
+      description: Sexo do gestor da Educação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: gestor_idade
+      bigquery_type: int64
+      description: Idade do gestor da Educação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: gestor_raca_cor
+      bigquery_type: string
+      description: Cor/raça do gestor da Educação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: raca_cor_autoclarado
+      bigquery_type: int64
+      description: Cor/raça respondido por autodeclaração do gestor da Educação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: gestor_escolaridade
+      bigquery_type: string
+      description: Escolaridade do gestor da Educação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: gestor_escolaridade_formacao
+      bigquery_type: string
+      description: Formação de nível superior do gestor da Educação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Agrupa informação da variável com as outras opções especificadas
+          na variável EEDU07111 (2018)
+      is_in_staging: yes
+      is_partition: no
+    - name: capacitacao_gestao_educacional
+      bigquery_type: int64
+      description: Indica se o gestor concluiu, nos últimos 5 anos, curso de capacitação
+          em gestão educacional
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: programa_curso
+      bigquery_type: string
+      description: Especificação do programa de gestão educacional oferecido na capacitação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: recursos_humanos_educacao_total
+      bigquery_type: int64
+      description: Recursos humanos da área da Educação - Total
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: recursos_educacao_estatutario
+      bigquery_type: int64
+      description: Recursos humanos da área da Educação - Estatutários
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: recursos_educacao_celetista
+      bigquery_type: int64
+      description: Recursos humanos da área da Educação - Celetistas
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: recursos_educacao_comissionado
+      bigquery_type: int64
+      description: Recursos humanos da área da Educação - Somente Comissionados
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: recursos_educacao_estagiario
+      bigquery_type: int64
+      description: Recursos humanos da área da Educação - Estagiários
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: recursos_educacao_sem_vinculo_permanente
+      bigquery_type: int64
+      description: Recursos humanos da área da Educação - Sem vínculo permanente
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: recursos_educacao_total_professor
+      bigquery_type: int64
+      description: Recursos humanos da área da Educação - Total Professores
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: recursos_educacao_professor_infantil
+      bigquery_type: int64
+      description: Recursos humanos da área da Educação destinado a Professoras da
+          educação infantil
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: recursos_educacao_professor_fundamental
+      bigquery_type: int64
+      description: Recursos humanos da área da Educação destinado a Professoras da
+          educação fundamental
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: recursos_educacao_professor_ensino_medio
+      bigquery_type: int64
+      description: Recursos humanos da área da Educação destinado a Professoras de
+          ensino médio
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: creche_mantida_exclusivamente_estado
+      bigquery_type: int64
+      description: Existe no estado Creche - Mantida exclusivamente pelo estado
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: creche_integrada_sistema_estadual_federal
+      bigquery_type: int64
+      description: Existe no estado Creche - Integrada ao sistema estadual ou federal
+          de ensino
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: creche_recebe_pcd
+      bigquery_type: int64
+      description: Existe no estado Creche - Apta a receber pessoa com deficiência
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: pre_escola_mantida_exclusivamente_estado
+      bigquery_type: int64
+      description: Existe no estado Pré-escola - Mantida exclusivamente pelo estado
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: pre_escola_integrada_sistema_estadual_federal
+      bigquery_type: int64
+      description: Existe no estado Pré-escola - Integrada ao sistema estadual ou
+          federal de ensino
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: pre_escola_recebe_pcd
+      bigquery_type: int64
+      description: Existe no estado Pré-escola - Apta a receber pessoa com deficiência
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ensino_fundamental_mantida_exclusivamente_estado
+      bigquery_type: int64
+      description: 'Existe no estado Ensino fundamental - Mantida exclusivamente pelo
+          estado '
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ensino_fundamental_integrada_sistema_estadual_federal
+      bigquery_type: int64
+      description: Existe no estado Ensino fundamental -  Integrada ao sistema estadual
+          ou federal de ensino
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ensino_fundamental_recebe_pcd
+      bigquery_type: int64
+      description: Existe no estado Ensino fundamental - Apta a receber pessoa com
+          deficiência
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ensino_medio_mantida_exclusivamente_estado
+      bigquery_type: int64
+      description: Existe no estado Ensino médio - Mantida exclusivamente pelo estado
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ensino_medio_integrada_sistema_estadual_federal
+      bigquery_type: int64
+      description: Existe no estado Ensino médio - Integrada ao sistema estadual ou
+          federal de ensino
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ensino_medio_recebe_pcd
+      bigquery_type: int64
+      description: Existe no estado Ensino médio - Apta a receber pessoa com deficiência
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ensino_superior_mantida_exclusivamente_estado
+      bigquery_type: int64
+      description: Existe no estado Ensino superior - Mantida exclusivamente pelo
+          estado
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ensino_superior_integrada_sistema_estadual_federal
+      bigquery_type: int64
+      description: Existe no estado Ensino superior - Integrada ao sistema estadual
+          ou federal de ensino
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ensino_superior_recebe_pcd
+      bigquery_type: int64
+      description: Existe no estado Ensino superior - Apta a receber pessoa com deficiência
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_acessibilidade
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Melhoria das condições
+          físicas de acessibilidade nas escolas
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_sala_recurso_multifuncional
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Criação/manutenção
+          de salas de recursos multifuncionais
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_elevacao_escolaridade_professor
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Elevação da escolaridade
+          dos professores
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_formacao_continuada_professor
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Formação continuada
+          para professores
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_concurso_publico
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Concurso público
+          para contratação de professores
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_participacao_comunidade_gestao_escolar
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Participação da
+          comunidade na gestão da escola
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_organizacao_administrativa
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Melhoria da organização
+          administrativa da escola
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_saude_escolar
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Saúde escolar
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_inclusao_aluno_deficiencia
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Inclusão de alunos
+          com deficiência nas escolas regulares
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_combate_discriminacao
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Combate à discriminação
+          nas escolas
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_combate_violencia_escola
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Combate à violência
+          nas escolas
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_constituicao_conselho_escolar
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Constituição e
+          manutenção de conselhos escolares
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_integracao_escola_comunidade
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Integração escola-comunidade
+          (abertura das escolas à comunidade, uso de espaços coletivos para ações
+          rotineiras da escola, entre outras ações)
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_formacao_docente
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Formação inicial
+          de docentes e formação complementar para adequação entre formação de nível
+          superior e as disciplinas que lecionam
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_constituicao_gremio_estudantil
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Constituição e
+          manutenção de grêmios estudantis e/ou associações de pais
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_reducao_falta_docente
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Redução de falta/ausência
+          dos docentes
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_enfrentamento_atraso_escolar
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Adequação entre
+          a idade dos alunos em relação à série/etapa em que estudam (enfrentamento
+          do atraso escolar)
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_alfabetizacao_idade_certa
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Alfabetização
+          na idade certa
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_melhoria_alimentacao_escolar
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Melhoria da alimentação
+          escolar
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_melhoria_transporte_escolar
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Melhoria do transporte
+          escolar
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_elevacao_desempenho_avaliacao_nacional
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Elevação do desempenho
+          dos alunos nas avaliações nacionais de larga escala
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_educacao_direitos_humanos
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Educação em Direitos
+          Humanos nas escolas
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_educacao_campo_indigena_quilombola
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Projetos voltados
+          para a educação do campo, indígena e quilombola
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_educacao_jovem_adulto
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Projetos voltados
+          para a educação de jovens e adultos
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_educacao_profissional
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Projetos voltados
+          para a educação profissional
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_acompanhamento_avaliacao_creche_pre_escola
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Acompanhamento
+          e avaliação de creches e pré-escolas
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_diminuicao_evasao_escolar
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Diminuição no
+          abandono e evasão escolar (busca ativa de alunos)
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_chamada_publica_matricula
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Chamamento público
+          para matrícula
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_ampliacao_jornada_escolar
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Ampliação da jornada
+          escolar
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_uso_tecnologia
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Uso de Tecnologias
+          de Informação e Comunicação (TIC) no processo ensino-aprendizagem
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_combate_bulliyng
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Combate ao bulliyng
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: prioridade_programa_mediacao_resolucao_conflito_escolar
+      bigquery_type: int64
+      description: Tema prioritário em adoção de medidas ou ações - Programa para
+          mediação e resolução de conflitos escolares
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: combate_discriminacao_racial
+      bigquery_type: int64
+      description: Órgão gestor da educação adota medidas para o combate a - Discriminação
+          racial
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: combate_discriminacao_religiosa
+      bigquery_type: int64
+      description: Órgão gestor da educação adota medidas para o combate a - Discriminação
+          religiosa
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: combate_homofobia
+      bigquery_type: int64
+      description: Órgão gestor da educação adota medidas para o combate a - Homofobia
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: combate_outros_tipos_discriminacao
+      bigquery_type: int64
+      description: Órgão gestor da educação adota medidas para o combate a - Outros
+          tipos de discriminação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: nenhum_tipo_combate
+      bigquery_type: int64
+      description: Órgão gestor da educação adota medidas para o combate a - Nenhum
+          dos itens citados
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: projeto_educacao_campo
+      bigquery_type: int64
+      description: Órgão gestor da educação possui - Projetos voltados para a educação
+          no campo
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: projeto_educacao_indigena
+      bigquery_type: int64
+      description: Órgão gestor da educação possui - Projetos voltados para a educação
+          de povos indígenas
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: projeto_comunidade_quilombola
+      bigquery_type: int64
+      description: Órgão gestor da educação possui - Projetos voltados para a educação
+          de comunidades quilombolas
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: projeto_comunidade_tradicional
+      bigquery_type: int64
+      description: Órgão gestor da educação possui - Projetos voltados para a educação
+          de outros povos e comunidades tradicionais
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: nenhum_projeto_educacional
+      bigquery_type: int64
+      description: Órgão gestor da educação possui - Nenhum dos itens citados
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: plano_estadual_educacao
+      bigquery_type: int64
+      description: Existência de um Plano Estadual de Educação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: lei_atual_pee
+      bigquery_type: int64
+      description: Lei do atual Plano Estadual de Educação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ano_atual_pee
+      bigquery_type: int64
+      description: Ano do atual Plano Estadual de Educação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: constituicao_forum_permanente_educacao
+      bigquery_type: int64
+      description: Instituiu/constituiu Fórum Permanente de Educação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ano_constituicao_forum_permanente_educacao
+      bigquery_type: int64
+      description: Ano em que instituiu/constituiu o Fórum Permanente de Educação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: instrumento_constituicao
+      bigquery_type: string
+      description: Por meio de que instrumento instituiu/constituiu o Fórum Permanente
+          de Educação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: plano_carreira_magisterio
+      bigquery_type: int64
+      description: Existência de um Plano de Carreira para o Magistério
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: lei_criacao_plano_carreira_magisterio
+      bigquery_type: int64
+      description: Lei de criação do Plano de Carreira para o Magistério
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ano_criacao_plano_carreira_magisterio
+      bigquery_type: int64
+      description: Ano de criação do Plano de Carreira para Magistério
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: criterio_tempo_efetivo
+      bigquery_type: int64
+      description: Critérios de progressão/promoção/ascensão são utilizados no plano
+          de carreira do magistério - Tempo de efetivo exercício no cargo
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: criterio_avaliacao_desempenho
+      bigquery_type: int64
+      description: Critérios de progressão/promoção/ascensão são utilizados no plano
+          de carreira do magistério - Avaliação de desempenho
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: criterio_qualificacao
+      bigquery_type: int64
+      description: Critérios de progressão/promoção/ascensão são utilizados no plano
+          de carreira do magistério - Qualificação ou titulação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: criterio_qualificacao_licenciatura
+      bigquery_type: int64
+      description: Critérios de progressão/promoção/ascensão são utilizados no plano
+          de carreira do magistério - Licenciatura
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: criterio_qualificacao_curso_aperfeicoamento
+      bigquery_type: int64
+      description: Critérios de progressão/promoção/ascensão são utilizados no plano
+          de carreira do magistério - Cursos de atualização/aperfeiçoamento com carga
+          horária inferior a 360 horas
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: criterio_qualificacao_especializacao
+      bigquery_type: int64
+      description: Critérios de progressão/promoção/ascensão são utilizados no plano
+          de carreira do magistério - Especialização com carga horária mínima de 360
+          horas
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: criterio_qualificacao_mestrado
+      bigquery_type: int64
+      description: Critérios de progressão/promoção/ascensão são utilizados no plano
+          de carreira do magistério - Mestrado
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: criterio_qualificacao_doutorado
+      bigquery_type: int64
+      description: Critérios de progressão/promoção/ascensão são utilizados no plano
+          de carreira do magistério - Doutorado
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: criterio_desempenho_prova_conhecimento
+      bigquery_type: int64
+      description: Critérios de progressão/promoção/ascensão são utilizados no plano
+          de carreira do magistério - Desempenho em prova de conhecimentos na área
+          curricular de atuação docente e de conhecimentos pedagógicos
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: criterio_desempenho_aluno
+      bigquery_type: int64
+      description: Critérios de progressão/promoção/ascensão são utilizados no plano
+          de carreira do magistério - Desempenho dos alunos em avaliação externa
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: criterio_incorporacao_permanente_remuneracao
+      bigquery_type: int64
+      description: Critérios de progressão/promoção/ascensão são utilizados no plano
+          de carreira do magistério - Incorporação permanente de remuneração por ocupação
+          de cargo em comissão
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: criterio_outro
+      bigquery_type: int64
+      description: Critérios de progressão/promoção/ascensão são utilizados no plano
+          de carreira do magistério - Outros
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: lei_carga_horaria_interacao_aluno
+      bigquery_type: int64
+      description: Lei do Plano de Carreira prevê expressamente o limite de 2/3 (dois
+          terços) da carga horária para o desempenho das atividades de interação com
+          os educandos
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carga_horaria_semanal_opcao_1
+      bigquery_type: int64
+      description: Jornada de trabalho contratada conforme o plano de carreira do
+          magistério - Opção 1 de carga horária semanal
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carga_horaria_semanal_opcao_2
+      bigquery_type: int64
+      description: Jornada de trabalho contratada conforme o plano de carreira do
+          magistério - Opção 2 de carga horária semanal
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carga_horaria_semanal_opcao_3
+      bigquery_type: int64
+      description: Jornada de trabalho contratada conforme o plano de carreira do
+          magistério - Opção 3 de carga horária semanal
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carga_horaria_semanal_opcao_4
+      bigquery_type: int64
+      description: Jornada de trabalho contratada conforme o plano de carreira do
+          magistério - Opção 4 de carga horária semanal
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carga_horaria_semanal_opcao_5
+      bigquery_type: int64
+      description: Jornada de trabalho contratada conforme o plano de carreira do
+          magistério - Opção 5 de carga horária semanal
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: piso_salarial_definido_magisterio_publico
+      bigquery_type: int64
+      description: Piso salarial da carreira do magistério público está definido em
+          lei estadual
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: plano_carreira_nao_docente
+      bigquery_type: int64
+      description: Plano de Carreira vigente para os profissionais da educação não
+          docentes
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: lei_plano_carreira_nao_docente
+      bigquery_type: int64
+      description: Lei de criação do plano de carreira para profissionais da educação
+          não docentes
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ano_plano_carreira_nao_docente
+      bigquery_type: int64
+      description: Ano de criação do plano de carreira para profissionais da educação
+          não docentes
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao
+      bigquery_type: int64
+      description: Existência do Conselho Estadual de Educação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: lei_criacao_conselho_educacao
+      bigquery_type: int64
+      description: Lei de criação do Conselho Estadual de Educação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ano_criacao_conselho_educacao
+      bigquery_type: int64
+      description: Ano de criação do Conselho Estadual de Educação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: formacao_conselho_educacao
+      bigquery_type: string
+      description: Formação do Conselho Estadual de Educação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carater_conselho_educacao_consultivo
+      bigquery_type: int64
+      description: Caráter do Conselhor Estadual de Educação - Consultivo
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carater_conselho_educacao_deliberativo
+      bigquery_type: int64
+      description: Caráter do Conselhor Estadual de Educação - Deliberativo
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carater_conselho_educacao_normativo
+      bigquery_type: int64
+      description: Caráter do Conselhor Estadual de Educação - Normativo
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carater_conselho_educacao_fiscalizador
+      bigquery_type: int64
+      description: Caráter do Conselhor Estadual de Educação - Fiscalizador
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_reuniao_12_meses
+      bigquery_type: int64
+      description: Conselho Estadual de Educação - Quantidade de reuniões nos últimos
+          12 meses
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_integrante
+      bigquery_type: int64
+      description: Número de integrantes do Conselho Estadual de Educação (suplentes
+          e titulares)
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_capacitacao_periodicamente
+      bigquery_type: int64
+      description: Conselho Estadual de Educação realiza capacitação continuada
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_capacitacao_ocasionalmente
+      bigquery_type: int64
+      description: Conselho Estadual de Educação realiza capacitação eventualmente
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_nao_realiza_capacitacao
+      bigquery_type: int64
+      description: Conselho Estadual de Educação não realiza capacitação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_infraestrutura
+      bigquery_type: int64
+      description: Existência disponibilização pelo estado de infraestrutura para
+          o Conselho
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_infraestrutura_sala
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho - Sala
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_infraestrutura_computador
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho - Computador
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_infraestrutura_impressora
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho - Impressora
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_infraestrutura_acesso_internet
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho - Acesso à
+          internet
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_infraestrutura_veiculo
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho - Veículo próprio
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_infraestrutura_telefone
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho - Telefone
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_infraestrutura_diarias
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho - Diárias
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_educacao_infraestrutura_dotacao_orcamentaria_propria
+      bigquery_type: int64
+      description: Estado disponibiliza infraestrutura para o Conselho - Dotação orçamentária
+          própria
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_pais_alunos
+      bigquery_type: int64
+      description: Composição do Conselho - Representante de pais e alunos
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_assembleia_legislativa
+      bigquery_type: int64
+      description: Composição do Conselho - Representante da Assembléia Legislativa
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_diretor_escola_rede_estadual
+      bigquery_type: int64
+      description: Composição do Conselho - Representante dos diretores das escolas
+          da rede estadual de ensino
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_servidor_escola_rede_estadual
+      bigquery_type: int64
+      description: Composição do Conselho - Representante dos servidores das escolas
+          da rede estadual de ensino
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_conselho_tutelar
+      bigquery_type: int64
+      description: Composição do Conselho - Representante do Conselho de Direitos
+          da Criança e do Adolescente e/ou Conselho Tutelar
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_escola_privada
+      bigquery_type: int64
+      description: Composição do Conselho - Representante das escolas da rede privada
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_instituicao_ensino_superior
+      bigquery_type: int64
+      description: Composição do Conselho - Representante de instituição de ensino
+          superior
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_sindicato_educacao
+      bigquery_type: int64
+      description: Composição do Conselho - Representante de sindicato/associação
+          de profissionais da educação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_secretaria_educacao
+      bigquery_type: int64
+      description: Composição do Conselho - Representante do poder executivo/secretaria
+          de educação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_movimento_negro
+      bigquery_type: int64
+      description: Composição do Conselho - Representante do movimento negro
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_comunidade_quilombola
+      bigquery_type: int64
+      description: Composição do Conselho - Representante de comunidades quilombolas
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_povo_indigena
+      bigquery_type: int64
+      description: Composição do Conselho - Representante de povos indígenas
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_comunidade_tradicional
+      bigquery_type: int64
+      description: Composição do Conselho - Representante de outros povos e comunidades
+          tradicionais
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: composicao_conselho_educacao_outro
+      bigquery_type: int64
+      description: Composição do Conselho - Outros
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: funcao_gestor_educacao_conselho_educacao
+      bigquery_type: string
+      description: Função do gestor da educação no Conselho Estadual de Educação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb
+      bigquery_type: int64
+      description: Existencia do Conselho de controle e acompanhamento social do FUNDEB
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: lei_criacao_conselho_fundeb
+      bigquery_type: int64
+      description: Lei de criação do conselho do controle de acompanhamento social
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ano_criacao_conselho_fundeb
+      bigquery_type: int64
+      description: Ano de criação do conselho do controle de acompanhamento social
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: formacao_conselho_fundeb
+      bigquery_type: string
+      description: Formação do conselho do controle de acompanhamento social
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_reuniao_12_meses
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social - Quantidade de reuniões
+          nos últimos 12 meses
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_integrantes
+      bigquery_type: int64
+      description: Número de conselheiros do conselho do controle de acompanhamento
+          social (titulares e suplentes)
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_capacitacao_periodicamente
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social realiza capacitação
+          continuada
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_capacitacao_ocasionalmente
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social realiza capacitação
+          eventualmente
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_nao_realiza_capacitacao
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social não realiza capacitação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_infraestrutura
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social disponibiliza infraestrutura
+          para o funcionamento
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_infraestrutura_sala_propria
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social disponibiliza infraestrutura
+          para o funcionamento - Sala própria
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_infraestrutura_computador
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social disponibiliza infraestrutura
+          para o funcionamento - Computador
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_infraestrutura_impressora
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social disponibiliza infraestrutura
+          para o funcionamento - Impressora
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_infraestrutura_acesso_internet
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social disponibiliza infraestrutura
+          para o funcionamento - Acesso à internet
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_infraestrutura_veiculo
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social disponibiliza infraestrutura
+          para o funcionamento - Veículo próprio
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_infraestrutura_telefone
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social disponibiliza infraestrutura
+          para o funcionamento - Telefone
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_infraestrutura_diarias
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social disponibiliza infraestrutura
+          para o funcionamento - Diárias
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_fundeb_infraestrutura_dotacao_orcamentaria_propria
+      bigquery_type: int64
+      description: Conselho do controle de acompanhamento social disponibiliza infraestrutura
+          para o funcionamento - Dotação orçamentária própria
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar
+      bigquery_type: int64
+      description: Existencia do Conselho de alimentação escolar
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: lei_criacao_conselho_alimentacao_escolar
+      bigquery_type: int64
+      description: Lei de criação do Conselho de alimentação escolar
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ano_criacao_conselho_alimentacao_escolar
+      bigquery_type: int64
+      description: Ano de criação do Conselho de alimentação escolar
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: formacao_alimentacao_escolar
+      bigquery_type: string
+      description: Formação do Conselho de alimentação escolar
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carater_conselho_alimentacao_escolar_consultivo
+      bigquery_type: int64
+      description: Caráter do Conselho de alimentação escolar - Consultivo
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carater_conselho_alimentacao_escolar_deliberativo
+      bigquery_type: int64
+      description: Caráter do Conselho de alimentação escolar - Deliberativo
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carater_conselho_alimentacao_escolar_normativo
+      bigquery_type: int64
+      description: Caráter do Conselho de alimentação escolar - Normativo
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carater_conselho_alimentacao_escolar_fiscalizador
+      bigquery_type: int64
+      description: Caráter do Conselho de alimentação escolar - Fiscalizador
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_reuniao_12_meses
+      bigquery_type: int64
+      description: Conselho de alimentação escolar - Quantidade de reuniões nos últimos
+          12 meses
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_integrantes
+      bigquery_type: int64
+      description: Número de conselheiros do conselho de alimentação escolar (titulares
+          e suplentes)
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_capacitacao_periodicamente
+      bigquery_type: int64
+      description: Conselho de alimentação escolar realiza capacitação continuada
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_capacitacao_ocasionalmente
+      bigquery_type: int64
+      description: Conselho de alimentação escolar realiza capacitação eventualmente
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_nao_realiza_capacitacao
+      bigquery_type: int64
+      description: Conselho de alimentação escolar não realiza capacitação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_infraestrutura
+      bigquery_type: int64
+      description: Conselho de alimentação escolar disponibiliza infraestrutura para
+          o funcionamento
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_infraestrutura_sala_propria
+      bigquery_type: int64
+      description: Conselho de alimentação escolar disponibiliza infraestrutura para
+          o funcionamento - Sala própria
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_infraestrutura_computador
+      bigquery_type: int64
+      description: Conselho de alimentação escolar disponibiliza infraestrutura para
+          o funcionamento - Computador
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_infraestrutura_impressora
+      bigquery_type: int64
+      description: Conselho de alimentação escolar disponibiliza infraestrutura para
+          o funcionamento - Impressora
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_infraestrutura_acesso_internet
+      bigquery_type: int64
+      description: Conselho de alimentação escolar disponibiliza infraestrutura para
+          o funcionamento - Acesso à internet
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_infraestrutura_veiculo
+      bigquery_type: int64
+      description: Conselho de alimentação escolar disponibiliza infraestrutura para
+          o funcionamento - Veículo próprio
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_infraestrutura_telefone
+      bigquery_type: int64
+      description: Conselho de alimentação escolar disponibiliza infraestrutura para
+          o funcionamento - Telefone
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_infraestrutura_diarias
+      bigquery_type: int64
+      description: Conselho de alimentação escolar disponibiliza infraestrutura para
+          o funcionamento - Diárias
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_alimentacao_escolar_infraestrutura_dotacao_orcamentaria_propria
+      bigquery_type: int64
+      description: Conselho de alimentação escolar disponibiliza infraestrutura para
+          o funcionamento - Dotação orçamentária própria
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar
+      bigquery_type: int64
+      description: Existência do Conselho de transporte escolar
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: lei_criacao_conselho_transporte_escolar
+      bigquery_type: int64
+      description: Lei de criação do Conselho de transporte escolar
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ano_criacao_conselho_transporte_escolar
+      bigquery_type: int64
+      description: Ano de criação do Conselho de transporte escolar
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: formacao_conselho_transporte_escolar
+      bigquery_type: string
+      description: Formação do Conselho de transporte escolar
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carater_conselho_transporte_escolar_consultivo
+      bigquery_type: int64
+      description: Caráter do Conselho de transporte escolar - Consultivo
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carater_conselho_transporte_escolar_deliberativo
+      bigquery_type: int64
+      description: Caráter do Conselho de transporte escolar - Deliberativo
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carater_conselho_transporte_escolar_normativo
+      bigquery_type: int64
+      description: Caráter do Conselho de transporte escolar - Normativo
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: carater_conselho_transporte_escolar_fiscalizador
+      bigquery_type: int64
+      description: Caráter do Conselho de transporte escolar - Fiscalizador
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_reuniao_12_meses
+      bigquery_type: int64
+      description: Conselho de transporte escolar - Quantidade de reuniões nos últimos
+          12 meses
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_integrantes
+      bigquery_type: int64
+      description: Número de conselheiros no Conselho de transporte escolar (titulares
+          e suplentes)
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_capacitacao_periodicamente
+      bigquery_type: int64
+      description: Conselho de transporte escolar realiza capacitação continuada
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_capacitacao_ocasionalmente
+      bigquery_type: int64
+      description: Conselho de transporte escolar realiza capacitação eventualmente
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_nao_realiza_capacitacao
+      bigquery_type: int64
+      description: Conselho de transporte escolar não realiza capacitação
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_infraestrutura
+      bigquery_type: int64
+      description: Conselho de transporte escolar disponibiliza infraestrutura para
+          o funcionamento
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_infraestrutura_sala_propria
+      bigquery_type: int64
+      description: Conselho de transporte escolar disponibiliza infraestrutura para
+          o funcionamento - Sala própria
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_infraestrutura_computador
+      bigquery_type: int64
+      description: Conselho de transporte escolar disponibiliza infraestrutura para
+          o funcionamento - Computador
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_infraestrutura_impressora
+      bigquery_type: int64
+      description: Conselho de transporte escolar disponibiliza infraestrutura para
+          o funcionamento - Impressora
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_infraestrutura_acesso_internet
+      bigquery_type: int64
+      description: Conselho de transporte escolar disponibiliza infraestrutura para
+          o funcionamento - Acesso à internet
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_infraestrutura_veiculo_proprio
+      bigquery_type: int64
+      description: Conselho de transporte escolar disponibiliza infraestrutura para
+          o funcionamento - Veículo próprio
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_infraestrutura_telefone
+      bigquery_type: int64
+      description: Conselho de transporte escolar disponibiliza infraestrutura para
+          o funcionamento - Telefone
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_infraestrutura_diarias
+      bigquery_type: int64
+      description: Conselho de transporte escolar disponibiliza infraestrutura para
+          o funcionamento - Diárias
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: conselho_transporte_escolar_infraestrutura_dotacao_orcamentaria_propria
+      bigquery_type: int64
+      description: Conselho de transporte escolar disponibiliza infraestrutura para
+          o funcionamento - Dotação orçamentária própria
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: percentual_receita_municipio_destinado_ensino
+      bigquery_type: int64
+      description: Constituição estadual define o percentual da receita do município
+          destinado ao ensino público municipal
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: responsabilidade_recurso_financeiro
+      bigquery_type: string
+      description: A gestão dos recursos financeiros está sob a responsabilidade
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: lei_estadual_criacao_conselho_escolar
+      bigquery_type: int64
+      description: Existe lei estadual que estabelece a criação de conselhos escolares
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: lei_conselho_escolar
+      bigquery_type: int64
+      description: Lei de criação do Conselho Escolar
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ano_conselho_escolar
+      bigquery_type: int64
+      description: Ano de criação do Conselho Escolar
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: formacao_conselho_escolar
+      bigquery_type: string
+      description: Formação do Conselho Escolar
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: ordenacao_despesas_educacao
+      bigquery_type:
+      description:
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data:
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: nomeacao_diretor_concurso_publico
+      bigquery_type: int64
+      description: Nomeação de diretor(a) da escola estadual occore por - Concurso
+          Público (para carreira de diretor escolar constituída por cargo público
+          específico de diretor escolar)
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: nomeacao_diretor_livre
+      bigquery_type: int64
+      description: Nomeação de diretor(a) da escola estadual occore por - Livre nomeação
+          (para cargo ou função comissionada)
+      temporal_coverage:
+          - '2018'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: nomeacao_diretor_indicacao
+      bigquery_type: int64
+      description: Nomeação de diretor(a) da escola estadual occore por - Indicação
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: nomeacao_diretor_eleicao
+      bigquery_type: int64
+      description: Nomeação de diretor(a) da escola estadual occore por - Eleição
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: nomeacao_diretor_processo_seletivo
+      bigquery_type: int64
+      description: Nomeação de diretor(a) da escola estadual occore por - Processo
+          seletivo
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: nomeacao_diretor_outro
+      bigquery_type: int64
+      description: Nomeação de diretor(a) da escola estadual occore por - Outro
+      temporal_coverage:
+          - 2014(2)2018
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: programa_formacao_gestao_escolar_exercer_cargo
+      bigquery_type: string
+      description: Necessário a participação do programa de formação em gestão escolar
+          para exercer o cargo
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+    - name: tipo_programa
+      bigquery_type: string
+      description: Tipo de programa
+      temporal_coverage:
+          - '2014'
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: yes
+      is_partition: no
+
+number_rows:
+
+metadata_modified:
