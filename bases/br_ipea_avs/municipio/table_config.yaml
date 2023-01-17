@@ -11,7 +11,7 @@ title: Atlas da Vulnerabilidade Social
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: A plataforma oferece um panorama da vulnerabilidade e da exclusão social dos municípios e estados. Sua relevância vem justamente da capacidade de fornecer informações sobre a unidade político-administrativa mais próxima do cotidiano dos cidadão, o município. Além disso, o AVS permite conhecer as desigualdades a nível intramunicipal das diversas espacialidades de uma mesma região metropolitana.
+description: A tabela oferece um panorama da vulnerabilidade e da exclusão social dos municípios e estados.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -20,7 +20,8 @@ description: A plataforma oferece um panorama da vulnerabilidade e da exclusão 
 #    - sa.br.sp
 #  
 #    - world
-spatial_coverage: sa.br
+spatial_coverage: 
+    - sa.br
 
 # Anos cobertos pela tabela.
 # Exemplos:
@@ -30,7 +31,7 @@ spatial_coverage: sa.br
 #     - 2016
 #     - 2020
 temporal_coverage:
-      - 2000, 2010
+      - 2000(10)2010
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -51,14 +52,14 @@ observation_level:
        columns: 
             - ano
      - country: br
-       entity: state       
+       entity: municipality      
        columns:
-           - sigla_uf
+           - id_municipio
 
 last_updated:
     metadata: '2023-01-15'
     data: '2023-01-15 11:03:15'
-    release:
+    release: '2023-01-15 11:03:15'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
@@ -69,8 +70,8 @@ published_by:
     name: Patrick Teixeira
     email: patrick.teixeira@basedosdados.org
     github_user: tricktx
-    ckan_user:
-    website:
+    ckan_user: patrickteixeira
+    website: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -79,17 +80,14 @@ data_cleaned_by:
     name: Patrick Teixeira
     email: patrick.teixeira@basedosdados.org
     github_user: tricktx
-    ckan_user:
+    ckan_user: patrickteixeira
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
-    - Replace para substituir os valores faltantes
-    - Função map para que a coluna sigla_uf esteja com a sigla de cada estado representado.
-    - Drop nas colunas 'id', 'nivel', 'regiao', 'nome_regiao', 'uf', 'rm', 'nome_rm', 'id_municipio_6', 'nome_municipio_uf', 'udh', 'nome_udh', 'brasil'
+data_cleaning_description: Padronização para as normas da BD.
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url:
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_avs/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -128,7 +126,7 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -137,13 +135,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade Federativa
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -152,13 +150,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -167,13 +165,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: raca_cor
       bigquery_type: string
       description: Raça/Cor
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -182,13 +180,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: sexo
       bigquery_type: string
       description: Sexo
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -197,13 +195,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: localizacao
       bigquery_type: string
       description: Situação do domicílio
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -212,13 +210,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: ivs
       bigquery_type: float64
       description: Índice de Vulnerabilidade Social
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -228,13 +226,13 @@ columns:
       has_sensitive_data: no
       observations: 'Média aritmética dos índices das dimensões: IVS Infraestrutura
           Urbana, IVS Capital Humano e IVS Renda e Trabalho.'
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: ivs_infraestrutura_urbana
       bigquery_type: float64
       description: Índice da dimensão Infraestrutura Urbana
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -243,13 +241,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: ivs_capital_humano
       bigquery_type: float64
       description: Índice de Vulnerabilidade Social - Dimensão Capital Humano
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -258,13 +256,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: ivs_renda_trabalho
       bigquery_type: float64
       description: Índice de Vulnerabilidade Social - Dimensão Renda e Trabalho
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -273,13 +271,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: idhm
       bigquery_type: float64
       description: Índice de Desenvolvimento Humano Municipal
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -289,13 +287,13 @@ columns:
       has_sensitive_data: no
       observations: Média geométrica dos índices das dimensões Renda, Educação e Longevidade,
           com pesos iguais.
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: idhm_l
       bigquery_type: float64
       description: Índice de Desenvolvimento Humano Municipal - Dimensão Longevidade
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -304,13 +302,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: idhm_e
       bigquery_type: float64
       description: Índice de Desenvolvimento Humano Municipal - Dimensão Educação
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -319,13 +317,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: idhm_r
       bigquery_type: float64
       description: Índice de Desenvolvimento Humano Municipal - Dimensão Renda
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -334,8 +332,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: idhm_e_subescolaridade
       bigquery_type:
       description:
@@ -348,27 +346,13 @@ columns:
       measurement_unit:
       has_sensitive_data:
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: idhm_e_subfrequencia
-      bigquery_type:
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data:
-      observations:
-      is_in_staging: yes
-      is_partition: no
-    - name: prosperidade_social
-      bigquery_type: string
-      description: Prosperidade Social
-      temporal_coverage:
-          - 2000, 2010
+      bigquery_type: float64
+      description: Índice de Desenvolvimento Humano Municipal - Dimensão Frequência Escolar
+      temporal_coverage: 
+        - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -377,14 +361,29 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
+    - name: prosperidade_social
+      bigquery_type: string
+      description: Prosperidade Social
+      temporal_coverage: 
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_in_staging: false
     - name: porporcao_vulnerabilidade_socioeconomica
       bigquery_type: float64
       description: Porcentagem das pessoas com renda per capita inferior a meio salario
           mínimo e gastam mais de uma hora até o trabalho
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -393,13 +392,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: propocao_energia_eletrica
       bigquery_type: float64
       description: Porcentagem da população em domicílios com energia elétrica
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -408,14 +407,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
-    - name: proporcao_domicilio_densidade
+      is_in_staging: true
+      is_in_staging: false
+    - name: proporcao_pessoa_domicilio_densidade
       bigquery_type: float64
-      description: Porcentagem da população em domicílios com densidade maior que
-          2
+      description: Proporção da população em domicílios com densidade maior que 2
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -424,13 +422,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
-    - name: proporcao_sem_agua_esgoto
+      is_in_staging: true
+      is_in_staging: false
+    - name: proporcao_pessoa_sem_agua_esgoto
       bigquery_type: float64
-      description: Pessoas com abastecimento de água e esgoto inadequado
+      description: Proporção de pessoas com abastecimento de água e esgoto inadequado
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -439,13 +437,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
-    - name: proporcao_sem_coleta
+      is_in_staging: true
+      is_in_staging: false
+    - name: proporcao_pessoa_sem_coleta
       bigquery_type: float64
-      description: Pessoas sem o serviço de coleta de lixo
+      description: Proporção de pessoas sem o serviço de coleta de lixo
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -454,13 +452,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: renda_per_capita
       bigquery_type: float64
       description: Renda per capita
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -469,14 +467,14 @@ columns:
       measurement_unit: BRL / person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: renda_media_18_mais
       bigquery_type: float64
-      description: Porcentagem dos ocupados com ensino superior completo - 18 anos
+      description: Proporção dos ocupados com ensino superior completo com 18 anos
           ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -485,13 +483,13 @@ columns:
       measurement_unit: BRL_2010
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_sem_renda_18_mais
       bigquery_type: float64
-      description: Porcentagem dos ocupados sem rendimento - 18 anos ou mais
+      description: Proporção dos ocupados sem rendimento com 18 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -500,13 +498,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: renda_trabalho
       bigquery_type: float64
       description: Porcentagem da renda proveniente de rendimentos do trabalho
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -515,13 +513,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: renda_per_capita_vulneravel
       bigquery_type: float64
       description: Renda per capita dos vulneráveis à pobreza
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -530,14 +528,14 @@ columns:
       measurement_unit: BRL_2010
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
-    - name: proporcao_vulneravel
+      is_in_staging: true
+      is_in_staging: false
+    - name: proporcao_pessoa_vulneravel
       bigquery_type: float64
       description: Proporção de pessoas com renda domiciliar per capita igual ou inferior
           a meio salário mínimo (de 2010)
       temporal_coverage:
-          - '2010'
+          - 2010
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -546,13 +544,13 @@ columns:
       measurement_unit: BRL_2010 / percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
-    - name: proporcao_vulneravel_15_24
+      is_in_staging: true
+      is_in_staging: false
+    - name: proporcao_pessoa_vulneravel_15_24
       bigquery_type: int64
-      description: População vulnerável de 15 a 24 anos
+      description: Proporção de pessoas vulneráveis de 15 a 24 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -561,14 +559,14 @@ columns:
       measurement_unit: BRL_2010 / person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
-    - name: proporcao_vulneravel_dependente_idoso
+      is_in_staging: true
+      is_in_staging: false
+    - name: proporcao_pessoa_vulneravel_dependente_idoso
       bigquery_type: float64
-      description: Porcentagem de pessoas em domicílios com renda per capita inferior
+      description: Proporção de pessoas em domicílios com renda per capita inferior
           a meio salário mínimo (de 2010) e dependentes de idosos
       temporal_coverage:
-          - '2010'
+          - 2010
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -577,13 +575,13 @@ columns:
       measurement_unit: BRL_2010 / percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_vulneravel_e_idoso
       bigquery_type: int64
       description: População em domicílios vulneráveis e com idoso
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -592,13 +590,13 @@ columns:
       measurement_unit: BRL_2010 / person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: razao_dependencia
       bigquery_type: float64
       description: Razão de dependência
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -608,13 +606,13 @@ columns:
       has_sensitive_data: no
       observations: Percentual da população de menos de 14 anos ou menos e da população
           de 65 anos mais em relação à população de 15 a 64 anos
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: fecundidade_total
       bigquery_type: float64
       description: Taxa de fecundidade total
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -623,13 +621,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: taxa_envelhecimento
       bigquery_type: float64
       description: Taxa de envelhecimento
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -639,13 +637,13 @@ columns:
       has_sensitive_data: no
       observations: Percentual da população de 65 anos ou mais de idade em relação
           à população total
-      is_in_staging: yes
-      is_partition: no
-    - name: proporcao_mortalidade_1_menos
+      is_in_staging: true
+      is_in_staging: false
+    - name: mortalidade_1_menos
       bigquery_type: float64
-      description: "Mortalidade até 1 ano de idade\n"
+      description: Mortalidade até 1 ano de idade
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -654,13 +652,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_mortalidade_5_menos
       bigquery_type: float64
       description: Mortalidade até 5 anos de idade
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -669,13 +667,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_crianca_fora_escola_0_5
       bigquery_type: float64
-      description: Porcentagem de crianças de 0 a 5 anos que não frequentam a escola
+      description: Proporção de crianças de 0 a 5 anos que não frequentam a escola
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -684,13 +682,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_escola_5_6
       bigquery_type: float64
-      description: Porcentagem de 5 a 6 anos na escola
+      description: Proporção de 5 a 6 anos na escola
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -699,13 +697,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_crianca_fora_escola_6_14
       bigquery_type: float64
-      description: Porcentagem de crianças de 6 a 14 anos que não frequentam a escola
+      description: Proporção de crianças de 6 a 14 anos que não frequentam a escola
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -714,13 +712,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_maternidade_10_17
       bigquery_type: float64
-      description: Porcentagem de mulheres de 10 a 17 anos que tiveram filhos
+      description: Proporção de mulheres de 10 a 17 anos que tiveram filhos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -729,28 +727,29 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
-    - name: proporcao_maternidade_crianca_15_menos
-      bigquery_type:
-      description:
+      is_in_staging: true
+      is_in_staging: false
+    - name: maternidade_crianca_15_menos
+      bigquery_type: int64
+      description: Mulheres chefes de família e com filhos menores de 15 anos
       temporal_coverage:
-      covered_by_dictionary:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: person
+      has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_maternidade_fundamental_incompleto_crianca_15_menos
       bigquery_type: float64
-      description: Porcentagem de mães chefes de família, sem fundamental completo
+      description: Proporção de mães chefes de família, sem fundamental completo
           e com filho menor de 15 anos de idade
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -759,13 +758,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_analfabetismo_15_mais
       bigquery_type: float64
-      description: Taxa de analfabetismo - 15 anos ou mais
+      description: Proporção de analfabetismo - 15 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -774,13 +773,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_analfabetismo_18_mais
       bigquery_type: float64
-      description: Taxa de analfabetismo - 18 anos ou mais
+      description: Proporção de analfabetismo - 18 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -789,13 +788,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_analfabetismo_25_mais
       bigquery_type: float64
       description: Taxa de analfabetismo - 25 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -804,14 +803,14 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_responsavel_fundamental_incompleto
       bigquery_type: float64
-      description: Porcentagem de crianças que vivem em domicílios em que nenhum dos
+      description: proporção de crianças que vivem em domicílios em que nenhum dos
           moradores tem o ensino fundamental completo
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -820,14 +819,14 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_anos_finais_11_13
       bigquery_type: float64
-      description: Porcentagem de 11 a 13 anos nos anos finais do fundamental ou com
+      description: Proporção de 11 a 13 anos nos anos finais do fundamental ou com
           fundamental completo
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -836,13 +835,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_fundamental_completo_15_17
       bigquery_type: float64
-      description: Porcentagem de 15 a 17 anos com fundamental completo
+      description: Proporção de 15 a 17 anos com fundamental completo
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -851,13 +850,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_fundamental_completo_18_mais
       bigquery_type: float64
-      description: Porcentagem de 18 anos ou mais com fundamental completo
+      description: Proporção de 18 anos ou mais com fundamental completo
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -866,13 +865,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_medio_completo_18_20
       bigquery_type: float64
-      description: Porcentagem de 18 a 20 anos com médio completo
+      description: Proporção de 18 a 20 anos com médio completo
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -881,14 +880,14 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_ocupada_trabalho
       bigquery_type: int64
       description: População ocupada vulnerável à pobreza que retorna diariamente
           do trabalho
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -897,14 +896,14 @@ columns:
       measurement_unit: BRL_2010 / person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_ocupado_fundamental_18_mais
       bigquery_type: float64
-      description: Porcentagem dos ocupados com ensino fundamental completo - 18 anos
+      description: Porporção dos ocupados com ensino fundamental completo com 18 anos
           ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -913,14 +912,14 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_ocupado_medio_18_mais
       bigquery_type: float64
-      description: Porcentagem dos ocupados com ensino médio completo - 18 anos ou
+      description: Proporção dos ocupados com ensino médio completo com 18 anos ou
           mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -929,14 +928,14 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_ocupado_superior_18_mais
       bigquery_type: float64
-      description: Porcentagem dos ocupados com ensino médio completo - 18 anos ou
+      description: Proporção dos ocupados com ensino médio completo com 18 anos ou
           mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -945,15 +944,15 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_desocupado_15_24
       bigquery_type: float64
-      description: Porcentagem de pessoas de 15 a 24 anos que não estudam, não trabalham
+      description: Proporção de pessoas de 15 a 24 anos que não estudam, não trabalham
           e possuem renda domiciliar per capita igual ou inferior a meio salário mínimo
           (de 2010)
       temporal_coverage:
-          - '2010'
+          - 2010
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -962,13 +961,13 @@ columns:
       measurement_unit: BRL_2010 / percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_desocupado_18_mais
       bigquery_type: float64
-      description: Taxa de desocupação da população de 18 anos ou mais de idade
+      description: Proporção de desocupação da população de 18 anos ou mais de idade
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -977,14 +976,14 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_ocupados_informal_18_mais
       bigquery_type: float64
-      description: Porcentagem de pessoas de 18 anos ou mais sem fundamental completo
+      description: Proporção de pessoas de 18 anos ou mais sem fundamental completo
           e em ocupação informal
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -993,13 +992,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_carteira_18_mais
       bigquery_type: float64
-      description: Porcentagem de empregados com carteira - 18 anos ou mais
+      description: Proporção de empregados com carteira com 18 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1008,13 +1007,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_sem_carteira_18_mais
       bigquery_type: float64
-      description: Porcentagem de empregados sem carteira - 18 anos ou mais
+      description: Proporção de empregados sem carteira com 18 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1023,13 +1022,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_setor_publico_18_mais
       bigquery_type: float64
-      description: Porcentagem de trabalhadores do setor público - 18 anos ou mais
+      description: Proporção de trabalhadores do setor público com 18 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1038,13 +1037,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_empreendedor_18_mais
       bigquery_type: float64
-      description: Porcentagem de trabalhadores por conta própria - 18 anos ou mais
+      description: Proporção de trabalhadores por conta própria com 18 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1053,13 +1052,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_empregador_18_mais
       bigquery_type: float64
-      description: Porcentagem de empregadores - 18 anos ou mais
+      description: Proporção de empregadores com 18 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1068,13 +1067,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_mercado_formal_18_mais
       bigquery_type: float64
-      description: Grau de formalização dos ocupados - 18 anos ou mais
+      description: Proporção do grau formalização dos ocupados com 18 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1083,13 +1082,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: proporcao_atividade_10_14
       bigquery_type: float64
-      description: Taxa de atividade das pessoas de 10 a 14 anos de idade
+      description: Proporção de atividade das pessoas de 10 a 14 anos de idade
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1098,13 +1097,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: pea_10_mais
       bigquery_type: int64
-      description: População Economicamente Ativa (PEA) - 10 anos ou mais
+      description: População Economicamente Ativa (PEA) com 10 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1113,13 +1112,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: pea_10_14
       bigquery_type: int64
-      description: População Economicamente Ativa (PEA) - 10 a 14 anos
+      description: População Economicamente Ativa (PEA) com 10 a 14 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1128,13 +1127,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: pea_15_17
       bigquery_type: int64
-      description: População Economicamente Ativa (PEA) - 15 a 17 anos
+      description: População Economicamente Ativa (PEA) com 15 a 17 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1143,13 +1142,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: pea_18_mais
       bigquery_type: int64
-      description: População Economicamente Ativa (PEA) - 18 anos ou mais
+      description: População Economicamente Ativa (PEA) com 18 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1158,13 +1157,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: expectativa_vida
       bigquery_type: float64
       description: Expectativa de vida
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1175,13 +1174,13 @@ columns:
       observations: Número médio de anos que as pessoas deverão viver a partir do
           nascimento, se permanecerem constantes ao longo da vida o nível e o padrão
           de mortalidade por idade prevalecentes no ano do Censo.
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: indice_gini
       bigquery_type: float64
       description: Índice de Gini
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1191,13 +1190,13 @@ columns:
       has_sensitive_data: no
       observations: Mede o grau de desigualdade existente na distribuição de indivíduos
           segundo a renda domiciliar per capita
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_0_1
       bigquery_type: int64
       description: População de até 1 ano
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1206,13 +1205,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_1_3
       bigquery_type: int64
       description: População de 1 a 3 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1221,13 +1220,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_4
       bigquery_type: int64
       description: População de 4 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1236,13 +1235,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_5
       bigquery_type: int64
       description: População de 5 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1251,13 +1250,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_6
       bigquery_type: int64
       description: População de 6 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1266,13 +1265,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_6_10
       bigquery_type: int64
       description: População de 6 a 10 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1281,13 +1280,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_6_17
       bigquery_type: int64
       description: População de 6 a 17 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1296,13 +1295,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_11_13
       bigquery_type: int64
       description: População de 11 a 13 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1311,13 +1310,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_11_14
       bigquery_type: int64
       description: População de 11 a 14 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1326,13 +1325,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_12_14
       bigquery_type: int64
       description: População de 12 a 14 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1341,13 +1340,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_15_mais
       bigquery_type: int64
       description: População de 15 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1356,13 +1355,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_15_17
       bigquery_type: int64
       description: População de 15 a 17 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1371,13 +1370,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_15_24
       bigquery_type: int64
       description: População de 15 a 24 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1386,13 +1385,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_16_18
       bigquery_type: int64
       description: População de 16 a 18 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1401,13 +1400,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_18_mais
       bigquery_type: int64
       description: População de 18 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1416,13 +1415,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_18_20
       bigquery_type: int64
       description: População de 18 a 20 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1431,13 +1430,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_18_24
       bigquery_type: int64
       description: População de 18 a 24 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1446,13 +1445,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_19_21
       bigquery_type: int64
       description: População de 19 a 21 anos
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1461,13 +1460,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_25_mais
       bigquery_type: int64
       description: População de 25 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1476,13 +1475,13 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
     - name: populacao_65_mais
       bigquery_type: int64
       description: População de 65 anos ou mais
       temporal_coverage:
-          - 2000, 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1491,8 +1490,8 @@ columns:
       measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging: yes
-      is_partition: no
+      is_in_staging: true
+      is_in_staging: false
 
 number_rows: 319681
 
