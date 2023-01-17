@@ -49,10 +49,9 @@ hover="background-color: var(--md-primary-fg-color--dark)">
     Ir para BigQuery :material-arrow-right:
 </a>
 
-Na sua tela deverá aparecer o projeto fixado no menu lateral esquerdo,
-como na imagem abaixo.
+Agora você precisa fixar o projeto da BD no seu BigQuery, é bem simples, veja:
 
-![](images/bq_access_project.png){ width=100% }
+![](images/bq_access_project_new.gif)
 
 Dentro do projeto existem dois níveis de organização dos dados,
 <strong>*datasets*</strong> (conjuntos de dados) e
@@ -61,7 +60,7 @@ Dentro do projeto existem dois níveis de organização dos dados,
 - **Todas as tabelas estão organizadas dentro de cojuntos de dados**, que
   representaam sua organização/tema (ex: o conjunto
   `br_ibge_populacao` contém uma tabela `municipio` com a série
-  históricac de população a
+  histórica de população a
   nível municipal)
 - **Cada tabela pertence a um único conjunto de dados** (ex: a tabela
   `municipio` em `br_ibge_populacao` é diferente de `municipio` em `br_bd_diretorios`)

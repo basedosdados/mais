@@ -1,9 +1,8 @@
 Dados de votação em eleições brasileiras a nível candidato-município-zona.
 
-
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-tse-eleicoes
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,62 +10,47 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
+Código: 
 Website: www.ricardodahis.com
-Email: rdahis@basedosdados.orgTratado por
+Email: rdahis@basedosdados.org
+Tratado por
 -----------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_tse_eleicoes/code
+Código: 
+Website: www.ricardodahis.com
 Email: rdahis@basedosdados.org
+
+
 
 Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 ---------
 - ano
 - sigla_uf
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- turno
-- tipo da eleição
-- municipio
-- zona
-- candidato
-- ano
 
-Colunas identificando linhas unicamente
--------------------
-- turno
-- tipo_eleicao
-- id_municipio
-- zona
-- numero_candidato
-- ano
+
 
 Cobertura Temporal
 ------------------
-- 1998
-- 2000
-- 2002
-- 2004
-- 2006
-- 2008
-- 2010
-- 2012
-- 2014
-- 2016
-- 2018
-- 2020
+- 1998(2)2022
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- sa.br
+
+
+
 
 Tratamento
 ----------
 Limpamos os dados para consistência e adicionei o ID candidato.
 
+
+
+
 Frequencia de Atualização
 -------------------------
-2 anos
-
-
+two_years

@@ -12,8 +12,9 @@ local estados_2010	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN R
 local estados_2012	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2014	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
 local estados_2016	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
-local estados_2018	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO	ZZ
+local estados_2018	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO ZZ
 local estados_2020	AC AL AM AP BA CE    ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO
+local estados_2022	AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO ZZ
 
 //------------------------//
 // loops
@@ -24,7 +25,7 @@ keep id_municipio id_municipio_tse
 tempfile diretorio
 save `diretorio'
 
-foreach ano of numlist 2014(2)2020 { //2008(2)2020 {
+foreach ano of numlist 2022 { //2008(2)2022 {
 	
 	foreach estado in `estados_`ano'' {
 		
@@ -110,6 +111,8 @@ foreach ano of numlist 2014(2)2020 { //2008(2)2020 {
 				
 			}
 			else {
+				
+				if `ano' == 2022 ren ds_mun_sit_biometrica ds_mun_sit_biometria
 				
 				keep ano_eleicao sg_uf cd_municipio ds_mun_sit_biometria nr_zona nr_secao ///
 					ds_genero ds_estado_civil ds_faixa_etaria ds_grau_escolaridade ///

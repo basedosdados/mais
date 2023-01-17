@@ -1,0 +1,334 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_bcb_sicor
+
+table_id: empreendimento
+
+# Título da tabela.
+title: Empreendimento
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: A tabela de empreendimentos é um catálogo do que foi e do que é financiado. Recomenda-se que ela seja utilizada em conjunto com os microdadados de operações de crédito (microdados_operacao) para se ter uma visão completa dos produtos, atividades e demais atributos da operação de crédito que foram alvo de financiamento. 
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage: 
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage: 
+    - 2013(1)2022
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: one_year
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level: 
+    - entity: property
+      columns:
+        - id_empreendimento
+
+last_updated:
+    metadata: '2022-09-20'
+    data: '2022-09-20 19:15:35'
+    release: '2022-09-20 19:15:40'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Lucas Moreira
+    email: lucas.moreira@basedosdados.org
+    github_user: lucasnascm
+    ckan_user: lucasnascm
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by: 
+    name: Gabriel Pisa Folhes
+    email: pisagabriel09@gmail.com
+    github_user: folhesgabriel
+    ckan_user:
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Renomear colunas; retirar acentos das observações; formatar as datas
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/folhesgabriel/code_br_bcb_sicor/blob/main/wrang_br_bcb_sicor_empreendimento.R
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: id_empreendimento
+      bigquery_type: string
+      description: Código do empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: o código do empreendimento se origina da junção de 9 variáves as quais caracterizam, dentre outras, as atividades, finalidades e produtos que foram financiados. Em termos técnicos, o id_empreendimento é a concatenação dos códigos das respectivas variávei -> atividade, finalidade, modalidade, produto, subproduto/variedade de produto, consórcio, cesta de safras e Zoneamento Agrícola de Risco Climático (Zarc) disponíveis nas tabelas do SICOR (https://www.bcb.gov.br/estabilidadefinanceira/creditorural?modalAberto=tabelas_sicor)
+      is_in_staging: true
+      is_partition: false
+    - name: data_inicio_empreendimento
+      bigquery_type: date
+      description: Data de criação do empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: data
+          column_name: data
+      measurement_unit: 
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_fim_empreendimento
+      bigquery_type: date
+      description: Data de fim do empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: data
+          column_name: data
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: finalidade
+      bigquery_type: string
+      description: Finalidade do empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atividade
+      bigquery_type: string
+      description: Atividade do empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: modalidade
+      bigquery_type: string
+      description: Modalidade do empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: produto
+      bigquery_type: string
+      description: Produto do empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: variedade
+      bigquery_type: string
+      description: Variedade do empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cesta_safra
+      bigquery_type: string
+      description: Cesta de safras do empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: zoneamento
+      bigquery_type: string
+      description: Zoneamento do empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: unidade_medida
+      bigquery_type: string
+      description: Unidade de medida do produto financiado no empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: A unidade de medida varia a depender do produto que está sendo financiado e de outros atributos do empreendimento, como a atividade, finalidade e a variedade - dentre outros. Ex. O financiamento de Açaí pode ser medido em pés, o de gados Nelore em cabeças.
+      is_in_staging: true
+      is_partition: false
+    - name: unidade_medida_previsao_producao
+      bigquery_type: string
+      description: A unidade de medida da previsão de produção varia a depender do produto que está sendo financiado e de outros atributos do empreendimento, como a atividade, finalidade e a variedade. Ex. A previsão de produção do financiamento de gados Nelore para produção de carne pode ser medida em arrobas, já o de vacas Girolando para a produção de leite em litros.
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: consorcio
+      bigquery_type: string
+      description: Consórcio do empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cedula_mae
+      bigquery_type: string
+      description: Indica se o empreendimento refere-se a uma cédula mãe
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_tipo_cultura
+      bigquery_type: string
+      description: Código do tipo de cultura do empreendimento
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 3033
+
+metadata_modified:

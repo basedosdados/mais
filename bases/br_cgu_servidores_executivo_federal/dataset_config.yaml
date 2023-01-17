@@ -14,7 +14,7 @@ description: | # REQUIRED
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: controladoria-geral-da-uniao # REQUIRED
+organization: br-cgu # REQUIRED
 
 # Qual departamento/grupo/pessoa mantém os dados originais?
 author:

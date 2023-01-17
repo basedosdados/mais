@@ -473,6 +473,55 @@ def test_create_if_storage_data_raise(table, testdir, data_csv_path):
             if_storage_data_exists="raise",
         )
 
+def test_create_if_force_columns_true(testdir):
+    """
+    Test create when if_force_columns is True
+    """
+    dataset_id='br_cvm_administradores_carteira'
+    table_id='pessoa_fisica'
+
+    tb = bd.Table(dataset_id=dataset_id, table_id=table_id, metadata_path=testdir)
+
+    client =Storage(dataset_id=dataset_id, table_id=table_id)
+    client.download('bd_pessoa_fisica.csv', testdir, mode='staging')
+
+    filepath = testdir / 'staging' / 'br_cvm_administradores_carteira' / 'pessoa_fisica' / 'bd_pessoa_fisica.csv'
+
+    tb.create(
+        filepath,
+        if_table_exists="replace",
+        if_storage_data_exists="replace",
+        if_table_config_exists="replace",
+        force_columns=True,
+    )
+
+    assert tb.table_config['columns'][0]['description'] is None
+
+
+def test_create_if_force_columns_false(testdir):
+    """
+    Test create when if_force_columns is True
+    """
+    dataset_id='br_cvm_administradores_carteira'
+    table_id='pessoa_fisica'
+
+    tb = bd.Table(dataset_id=dataset_id, table_id=table_id, metadata_path=testdir)
+
+    client =Storage(dataset_id=dataset_id, table_id=table_id)
+    client.download('bd_pessoa_fisica.csv', testdir, mode='staging')
+
+    filepath = testdir / 'staging' / 'br_cvm_administradores_carteira' / 'pessoa_fisica' / 'bd_pessoa_fisica.csv'
+
+    tb.create(
+        filepath,
+        if_table_exists="replace",
+        if_storage_data_exists="replace",
+        if_table_config_exists="replace",
+        force_columns=False,
+    )
+
+    assert tb.table_config['columns'][0]['description']=='Nome'
+
 
 def test_create_auto_partitions(testdir, data_csv_path, sample_data):
     """

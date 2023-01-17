@@ -1,0 +1,46 @@
+Dicionário para a base do ProUni
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Lucas Moreira
+Código: 
+Email: lucas.moreira@basedosdados.org
+Tratado por
+-----------
+Nome: Lucas Passos Barreto
+Código: 
+Email: lucaspassosbarreto@hotmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+
+
+
+
+Cobertura Espacial
+------------------
+
+
+
+
+Tratamento
+----------
+Criação de dicionário baseado nas strings dos dados originais
+
+
+
+Frequencia de Atualização
+-------------------------
+unique

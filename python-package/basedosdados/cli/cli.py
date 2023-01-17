@@ -222,6 +222,11 @@ def cli_table():
     help="Data source format. Only 'csv' is supported. Defaults to 'csv'.",
 )
 @click.option(
+    "--force_columns",
+    default=False,
+    help="Overwrite columns with local columns.",
+)
+@click.option(
     "--columns_config_url_or_path",
     default=None,
     help="google sheets URL. Must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>. The sheet must contain the column name: 'coluna' and column description: 'descricao'.",
@@ -235,6 +240,7 @@ def init_table(
     if_folder_exists,
     if_table_config_exists,
     source_format,
+    force_columns,
     columns_config_url_or_path,
 ):
     """
@@ -246,6 +252,7 @@ def init_table(
         if_folder_exists=if_folder_exists,
         if_table_config_exists=if_table_config_exists,
         source_format=source_format,
+        force_columns=force_columns,
         columns_config_url_or_path=columns_config_url_or_path,
     )
 
@@ -266,9 +273,6 @@ def init_table(
     type=click.Path(exists=True),
     default=None,
     help="Path of data folder or file.",
-)
-@click.option(
-    "--job_config_params", default=None, help="File to advanced load config params "
 )
 @click.option(
     "--if_table_exists",
@@ -296,6 +300,11 @@ def init_table(
     help="Data source format. Only 'csv' is supported. Defaults to 'csv'.",
 )
 @click.option(
+    "--force_columns",
+    default=False,
+    help="Overwrite columns with local columns.",
+)
+@click.option(
     "--columns_config_url_or_path",
     default=None,
     help="Path to the local architeture file or a public google sheets URL. Path only suports csv, xls, xlsx, xlsm, xlsb, odf, ods, odt formats. Google sheets URL must be in the format https://docs.google.com/spreadsheets/d/<table_key>/edit#gid=<table_gid>.",
@@ -321,12 +330,12 @@ def create_table(
     dataset_id,
     table_id,
     path,
-    job_config_params,
     if_table_exists,
     force_dataset,
     if_storage_data_exists,
     if_table_config_exists,
     source_format,
+    force_columns,
     columns_config_url_or_path,
     dataset_is_public,
     location,
@@ -339,12 +348,12 @@ def create_table(
 
     Table(table_id=table_id, dataset_id=dataset_id, **ctx.obj).create(
         path=path,
-        job_config_params=job_config_params,
         if_table_exists=if_table_exists,
         force_dataset=force_dataset,
         if_storage_data_exists=if_storage_data_exists,
         if_table_config_exists=if_table_config_exists,
         source_format=source_format,
+        force_columns=force_columns,
         columns_config_url_or_path=columns_config_url_or_path,
         dataset_is_public=dataset_is_public,
         location=location,

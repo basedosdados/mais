@@ -1,0 +1,44 @@
+Dicionário da base Sinopse Estatística da Educação Básica.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Ingrid de Sales Rabelo
+Código: 
+Email: ingrid.rabelo@basedosdados.org
+Tratado por
+-----------
+Nome: Ingrid de Sales Rabelo
+Código: 
+Email: ingrid.rabelo@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+
+
+
+Frequencia de Atualização
+-------------------------
+['unique']

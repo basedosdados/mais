@@ -1,0 +1,47 @@
+Dicionário dos dados da camara dos deputados
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: João Pedro Donasolo
+Código: 
+Email: jpdonasolo@gmail.com
+Tratado por
+-----------
+Nome: João Pedro Donasolo
+Código: 
+Email: jpdonasolo@gmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Criação baseado nos dados da câmara
+
+
+
+Frequencia de Atualização
+-------------------------
+unique
