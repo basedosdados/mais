@@ -1,0 +1,52 @@
+A tabela fornece informações sobre a quantidade de funcionários em diferentes tipos de vínculo administrativo, a nível municipal.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+
+
+
+
+Cobertura Temporal
+------------------
+- 2018(1)2021
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Compatibilização dos dados entre os anos, criação de colunas com o objetivo de indicar os tipos diferentes de vínculo administrativo e informar quando houve a recusa do município de fornecer informações.
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year

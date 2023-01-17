@@ -1,0 +1,52 @@
+A tabela fornece informações sobre as características dos gestores de diferentes áreas de atuação como Meio Ambiente, Saúde, Educação e etc., a nível municipal.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+
+
+
+
+Cobertura Temporal
+------------------
+- 2018(1)2021
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Compatibilização dos dados entre os anos e criação de colunas (Tema, Recusa e Sem titular; com o objetivo de indicar as áreas de atuação dos gestores, representar o cenário em que houve a recusa do município de fornecer informações, e quando não há gestor encarregado, respectivamente).
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
