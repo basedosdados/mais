@@ -31,7 +31,6 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
-    - 2015(1)2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
