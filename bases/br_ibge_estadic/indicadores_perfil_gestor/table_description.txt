@@ -1,4 +1,4 @@
-None
+A tabela fornece informações sobre as características dos gestores de diferentes áreas de atuação como Meio Ambiente, Saúde, Educação e etc., a nível estadual.
 
 Para saber mais acesse:
 Website: 
@@ -9,12 +9,14 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: None
+Nome: Gabrielle Carvalho
 Código: 
+Email: gabrielle.carvalho@basedosdados.org
 Tratado por
 -----------
-Nome: None
+Nome: Gabrielle Carvalho
 Código: 
+Email: gabrielle.carvalho@basedosdados.org
 
 
 
@@ -35,6 +37,9 @@ Cobertura Espacial
 
 
 
+Tratamento
+----------
+Compatibilização dos dados entre os anos e padronização para as normas da BD.
 
 
 

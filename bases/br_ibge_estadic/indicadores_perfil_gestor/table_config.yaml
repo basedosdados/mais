@@ -84,7 +84,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Compatibilização dos dados entre os anos e criação de colunas.
+data_cleaning_description: Compatibilização dos dados entre os anos e padronização para as normas da BD.
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url:
