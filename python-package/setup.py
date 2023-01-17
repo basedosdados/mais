@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="basedosdados",
-    version="1.6.10",
+    version="1.7.0",
     packages=find_packages(),
     include_package_data=True,
     install_requires=[

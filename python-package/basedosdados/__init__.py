@@ -5,11 +5,8 @@ Importing the module will automatically import the submodules.
 
 import sys
 import os
-from importlib.metadata import version
 
-__version__ = version("basedosdados")
-
-__version__ = "1.6.10"
+__version__ = "1.7.0"
 
 sys.path.append(f"{os.getcwd()}/python-package")
 
