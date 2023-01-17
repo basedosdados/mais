@@ -11,7 +11,7 @@ title: Estabelecimentos
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Esta tabela apresenta o conjunto de estabalecimentos cadastrados na Receita Federal (RF), que realizaram atividades de exportação e/ou importação no ano de referência. 
+description: Esta tabela apresenta o conjunto de estabelecimentos cadastrados na Receita Federal (RF), que realizaram atividades de exportação e/ou importação no ano de referência. 
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -56,9 +56,9 @@ observation_level:
       
 
 last_updated: 
-    metadata: '2023-01-11'
-    data: '2023-01-11 10:00' 
-    release: 
+    metadata: '2023-01-17 11:17:00'
+    data: '2023-01-17 11:17:00' 
+    release: '2023-01-17 11:17:00' 
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3

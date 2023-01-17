@@ -15,7 +15,11 @@ title: estabelecimentos
 organization: br-me
 
 # Descrição do conjunto
-notes:
+notes: Este conjunto de dados é produzido pela Subsecretaria de Inteligência e Estatísticas de Comércio Exterior (SECEX)
+integrante da Secretaria Especial de Comércio Exterior e Assuntos Internacionais (SITEC). Consiste em uma lista de estabelecimentos
+de empresas que realizaram atividades de importação, importação ou ambas durante o ano de referência.
+
+
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
