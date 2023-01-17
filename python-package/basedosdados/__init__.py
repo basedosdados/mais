@@ -9,6 +9,8 @@ from importlib.metadata import version
 
 __version__ = version("basedosdados")
 
+__version__ = "1.6.10"
+
 sys.path.append(f"{os.getcwd()}/python-package")
 
 # pylint: disable=C0413

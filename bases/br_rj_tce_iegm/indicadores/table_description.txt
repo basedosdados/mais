@@ -1,0 +1,48 @@
+O Índice de Efetividade da Gestão Municipal (IEGM) é composto por uma avaliação realizada em sete indicadores envolvendo boas práticas nas temáticas de educação, saúde, planejamento, gestão fiscal, meio ambiente, proteção das cidades e governança da tecnologia da informação.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2019
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br.rj
+
+
+
+
+Tratamento
+----------
+Padronização das variáveis pelas normas da BD.
+
+
+
+Frequencia de Atualização
+-------------------------
+unique
