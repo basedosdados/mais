@@ -5,7 +5,7 @@ dataset_id: br_ibge_estadic
 table_id: indicadores_perfil_gestor
 
 # Título da tabela.
-title: Pesquisa de Informações Básicas Estaduais - ESTADIC
+title: Indicadores sobre o Perfil do Gestor
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de

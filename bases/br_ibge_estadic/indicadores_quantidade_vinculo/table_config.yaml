@@ -5,7 +5,7 @@ dataset_id: br_ibge_estadic
 table_id: indicadores_quantidade_vinculo
 
 # Título da tabela.
-title: Pesquisa de Informações Básicas Estaduais - ESTADIC
+title: Indicadores sobre a Quantidade de Vínculos
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
