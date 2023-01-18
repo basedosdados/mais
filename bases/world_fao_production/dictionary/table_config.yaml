@@ -52,8 +52,8 @@ observation_level:
 
 last_updated:
     metadata: '2023-01-17'
-    data: '2023-01-17 10:00'
-    release:
+    data: '2023-01-18 10:00:00'
+    release: '2023-01-18 10:00:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
@@ -132,7 +132,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: column_name
       bigquery_type: string
       description: Indicates the column name of the key and value.
@@ -147,7 +147,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: key
       bigquery_type:
       description: A column id related to the given table_id and column_name.
@@ -162,7 +162,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: temporal_coverage
       bigquery_type:
       description: temporal coverage 
@@ -177,7 +177,7 @@ columns:
       has_sensitive_data:
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: value
       bigquery_type: string
       description: An id description related to the given key, column_name and table_id. 
@@ -192,7 +192,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
 
 number_rows: 22
 

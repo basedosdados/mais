@@ -54,8 +54,8 @@ observation_level:
 
 last_updated:
     metadata: '2023-01-17'
-    data: '2023-01-17 10:00'
-    release:
+    data: '2023-01-18 10:00:00'
+    release: '2023-01-18 10:00:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
@@ -134,7 +134,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: item
       bigquery_type: string
       description: Item name
@@ -149,7 +149,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: item_description
       bigquery_type: string
       description: Item description
@@ -164,7 +164,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: hs07_id
       bigquery_type: string
       description: hs07 code
@@ -179,7 +179,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: hs12_id
       bigquery_type: string
       description: hs12 code
@@ -194,7 +194,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
     - name: cpc_id
       bigquery_type: string
       description: cpc code
@@ -209,7 +209,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: no
+      is_partition: false
 
 number_rows: 740
 
