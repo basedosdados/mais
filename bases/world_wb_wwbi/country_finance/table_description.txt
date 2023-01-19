@@ -1,0 +1,48 @@
+The table corresponds to data from 202 countries on forms of trade system and economic characteristics. Functioning as an auxiliary table of country indicators.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2022
+
+
+
+
+Cobertura Espacial
+------------------
+- world
+
+
+
+
+Tratamento
+----------
+Renaming of columns and transformation of answers into boolean type filled with 0 or 1 in the column corresponding to Completed vital registration.
+
+
+
+Frequencia de Atualização
+-------------------------
+uncertain
