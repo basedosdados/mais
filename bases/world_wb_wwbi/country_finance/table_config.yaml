@@ -80,7 +80,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Renaming of columns and transformation of answers into boolean type filled with 0 or 1 in the column corresponding to Completed vital registration.
+data_cleaning_description: Renaming of columns and transformation of answers into boolean type filled with 0 or 1 in the column corresponding to Vital registration complete.
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_wb_wwbi/code
