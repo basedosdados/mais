@@ -31,7 +31,7 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
-      - (1)
+      - 2000(10)2010
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -139,7 +139,7 @@ columns:
       is_in_staging: false
     - name: sigla_uf
       bigquery_type: string
-      description: Sigla da Unidade Federativa
+      description: Sigla da Unidade da Federação
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -199,7 +199,7 @@ columns:
       is_in_staging: false
     - name: localizacao
       bigquery_type: string
-      description: Situação do domicílio
+      description: Localização (e.g. zona urbana, zona rural)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -230,7 +230,7 @@ columns:
       is_in_staging: false
     - name: ivs_infraestrutura_urbana
       bigquery_type: float64
-      description: Índice da dimensão Infraestrutura Urbana
+      description: Índice de Vulnerabilidade Social - Dimensão Infraestrutura Urbana
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -334,21 +334,22 @@ columns:
       observations:
       is_in_staging: true
       is_in_staging: false
-    - name: idhm_e_subescolaridade
-      bigquery_type:
-      description:
+    - name: idhm_subescolaridade
+      bigquery_type: float64
+      description: Índice de Desenvolvimento Humano Municipal - Dimensão Sub Escolaridade
       temporal_coverage:
-      covered_by_dictionary:
+        - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_in_staging: false
-    - name: idhm_e_subfrequencia
+    - name: idhm_subfrequencia
       bigquery_type: float64
       description: Índice de Desenvolvimento Humano Municipal - Dimensão Frequência Escolar
       temporal_coverage: 
@@ -380,7 +381,7 @@ columns:
       is_in_staging: false
     - name: porporcao_vulnerabilidade_socioeconomica
       bigquery_type: float64
-      description: Porcentagem das pessoas com renda per capita inferior a meio salario
+      description: Proporção das pessoas com renda per capita inferior a meio salario
           mínimo e gastam mais de uma hora até o trabalho
       temporal_coverage:
           - (1)
@@ -396,7 +397,7 @@ columns:
       is_in_staging: false
     - name: propocao_energia_eletrica
       bigquery_type: float64
-      description: Porcentagem da população em domicílios com energia elétrica
+      description: Proporção da população em domicílios com energia elétrica
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -409,7 +410,7 @@ columns:
       observations:
       is_in_staging: true
       is_in_staging: false
-    - name: proporcao_pessoa_domicilio_densidade
+    - name: proporcao_domicilio_densidade
       bigquery_type: float64
       description: Proporção da população em domicílios com densidade maior que 2
       temporal_coverage:
@@ -424,7 +425,7 @@ columns:
       observations:
       is_in_staging: true
       is_in_staging: false
-    - name: proporcao_pessoa_sem_agua_esgoto
+    - name: proporcao_sem_agua_esgoto
       bigquery_type: float64
       description: Proporção de pessoas com abastecimento de água e esgoto inadequado
       temporal_coverage:
@@ -439,7 +440,7 @@ columns:
       observations:
       is_in_staging: true
       is_in_staging: false
-    - name: proporcao_pessoa_sem_coleta
+    - name: proporcao_sem_coleta
       bigquery_type: float64
       description: Proporção de pessoas sem o serviço de coleta de lixo
       temporal_coverage:
@@ -464,15 +465,14 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: BRL / person
+      measurement_unit: BRL_2010 / person
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_in_staging: false
     - name: renda_media_18_mais
       bigquery_type: float64
-      description: Proporção dos ocupados com ensino superior completo com 18 anos
-          ou mais
+      description: Proporção dos ocupados com ensino superior completo com 18 anos ou mais
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -502,7 +502,7 @@ columns:
       is_in_staging: false
     - name: renda_trabalho
       bigquery_type: float64
-      description: Porcentagem da renda proveniente de rendimentos do trabalho
+      description: Proporção da renda proveniente de rendimentos do trabalho
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -527,15 +527,15 @@ columns:
           column_name:
       measurement_unit: BRL_2010
       has_sensitive_data: no
-      observations:
+      observations: Renda per capital igual ou inferior a R$ 255,00 mensais, valor baseado em 2010
       is_in_staging: true
       is_in_staging: false
-    - name: proporcao_pessoa_vulneravel
+    - name: proporcao_vulneravel
       bigquery_type: float64
       description: Proporção de pessoas com renda domiciliar per capita igual ou inferior
-          a meio salário mínimo (de 2010)
+          a meio salário mínimo
       temporal_coverage:
-          - 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -543,12 +543,12 @@ columns:
           column_name:
       measurement_unit: BRL_2010 / percent
       has_sensitive_data: no
-      observations:
+      observations: Salário base referente ao ano de 2010
       is_in_staging: true
       is_in_staging: false
-    - name: proporcao_pessoa_vulneravel_15_24
+    - name: populacao_vulneravel_15_24
       bigquery_type: int64
-      description: Proporção de pessoas vulneráveis de 15 a 24 anos
+      description: Pessoas vulneráveis de 15 a 24 anos
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -561,12 +561,12 @@ columns:
       observations:
       is_in_staging: true
       is_in_staging: false
-    - name: proporcao_pessoa_vulneravel_dependente_idoso
+    - name: proporcao_vulneravel_dependente_idoso
       bigquery_type: float64
       description: Proporção de pessoas em domicílios com renda per capita inferior
-          a meio salário mínimo (de 2010) e dependentes de idosos
+          a meio salário mínimo e dependentes de idosos
       temporal_coverage:
-          - 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -574,7 +574,7 @@ columns:
           column_name:
       measurement_unit: BRL_2010 / percent
       has_sensitive_data: no
-      observations:
+      observations: Salário base referente ao ano de 2010
       is_in_staging: true
       is_in_staging: false
     - name: populacao_vulneravel_e_idoso
@@ -656,7 +656,7 @@ columns:
       is_in_staging: false
     - name: proporcao_mortalidade_5_menos
       bigquery_type: float64
-      description: Mortalidade até 5 anos de idade
+      description: Proporção referente a mortalidade de crianças até 5 anos de idade
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -664,7 +664,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: person
+      measurement_unit: percent
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -686,7 +686,7 @@ columns:
       is_in_staging: false
     - name: proporcao_escola_5_6
       bigquery_type: float64
-      description: Proporção de 5 a 6 anos na escola
+      description: Proporção de crianças de 5 a 6 anos na escola
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -807,7 +807,7 @@ columns:
       is_in_staging: false
     - name: proporcao_responsavel_fundamental_incompleto
       bigquery_type: float64
-      description: proporção de crianças que vivem em domicílios em que nenhum dos
+      description: Proporção de crianças que vivem em domicílios em que nenhum dos
           moradores tem o ensino fundamental completo
       temporal_coverage:
           - (1)
@@ -823,8 +823,7 @@ columns:
       is_in_staging: false
     - name: proporcao_anos_finais_11_13
       bigquery_type: float64
-      description: Proporção de 11 a 13 anos nos anos finais do fundamental ou com
-          fundamental completo
+      description: Proporção de alunos de 11 a 13 anos nos anos finais do fundamental ou com fundamental completo
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -839,7 +838,7 @@ columns:
       is_in_staging: false
     - name: proporcao_fundamental_completo_15_17
       bigquery_type: float64
-      description: Proporção de 15 a 17 anos com fundamental completo
+      description: Proporção de alunos de 15 a 17 anos com fundamental completo
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -854,7 +853,7 @@ columns:
       is_in_staging: false
     - name: proporcao_fundamental_completo_18_mais
       bigquery_type: float64
-      description: Proporção de 18 anos ou mais com fundamental completo
+      description: Proporção de alunos de 18 anos ou mais com fundamental completo
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -869,7 +868,7 @@ columns:
       is_in_staging: false
     - name: proporcao_medio_completo_18_20
       bigquery_type: float64
-      description: Proporção de 18 a 20 anos com médio completo
+      description: Proporção de alunos de 18 a 20 anos com médio completo
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -895,7 +894,7 @@ columns:
           column_name:
       measurement_unit: BRL_2010 / person
       has_sensitive_data: no
-      observations:
+      observations: Salário base referente ao ano de 2010
       is_in_staging: true
       is_in_staging: false
     - name: proporcao_ocupado_fundamental_18_mais
@@ -950,9 +949,8 @@ columns:
       bigquery_type: float64
       description: Proporção de pessoas de 15 a 24 anos que não estudam, não trabalham
           e possuem renda domiciliar per capita igual ou inferior a meio salário mínimo
-          (de 2010)
       temporal_coverage:
-          - 2010
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -960,7 +958,7 @@ columns:
           column_name:
       measurement_unit: BRL_2010 / percent
       has_sensitive_data: no
-      observations:
+      observations: Salário base referente ao ano de 2010
       is_in_staging: true
       is_in_staging: false
     - name: proporcao_desocupado_18_mais
@@ -996,7 +994,7 @@ columns:
       is_in_staging: false
     - name: proporcao_carteira_18_mais
       bigquery_type: float64
-      description: Proporção de empregados com carteira com 18 anos ou mais
+      description: Proporção de empregados com carteira assinada com 18 anos ou mais
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1011,7 +1009,7 @@ columns:
       is_in_staging: false
     - name: proporcao_sem_carteira_18_mais
       bigquery_type: float64
-      description: Proporção de empregados sem carteira com 18 anos ou mais
+      description: Proporção de empregados sem carteira assinada com 18 anos ou mais
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
