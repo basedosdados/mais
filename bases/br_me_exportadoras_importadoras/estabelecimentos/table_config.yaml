@@ -45,13 +45,12 @@ update_frequency: one_year
 #       columns:
 #           - sigla_uf
 observation_level: 
-    - entity: company 
-      columns:
-            - cnpj
     - entity: year
       columns:
             - ano        
-
+    - entity: company 
+      columns:
+            - cnpj
             
       
 
