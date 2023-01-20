@@ -136,7 +136,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
@@ -151,7 +151,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
@@ -166,7 +166,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: raca_cor
       bigquery_type: string
       description: Raça/Cor
@@ -181,7 +181,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: sexo
       bigquery_type: string
       description: Sexo
@@ -196,7 +196,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: localizacao
       bigquery_type: string
       description: Localização (e.g. zona urbana, zona rural)
@@ -211,7 +211,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: ivs
       bigquery_type: float64
       description: Índice de Vulnerabilidade Social
@@ -227,7 +227,7 @@ columns:
       observations: 'Média aritmética dos índices das dimensões: IVS Infraestrutura
           Urbana, IVS Capital Humano e IVS Renda e Trabalho.'
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: ivs_infraestrutura_urbana
       bigquery_type: float64
       description: Índice de Vulnerabilidade Social - Dimensão Infraestrutura Urbana
@@ -242,7 +242,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: ivs_capital_humano
       bigquery_type: float64
       description: Índice de Vulnerabilidade Social - Dimensão Capital Humano
@@ -257,7 +257,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: ivs_renda_trabalho
       bigquery_type: float64
       description: Índice de Vulnerabilidade Social - Dimensão Renda e Trabalho
@@ -272,7 +272,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: idhm
       bigquery_type: float64
       description: Índice de Desenvolvimento Humano Municipal
@@ -288,7 +288,7 @@ columns:
       observations: Média geométrica dos índices das dimensões Renda, Educação e Longevidade,
           com pesos iguais.
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: idhm_l
       bigquery_type: float64
       description: Índice de Desenvolvimento Humano Municipal - Dimensão Longevidade
@@ -303,7 +303,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: idhm_e
       bigquery_type: float64
       description: Índice de Desenvolvimento Humano Municipal - Dimensão Educação
@@ -318,7 +318,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: idhm_r
       bigquery_type: float64
        description: Índice de Desenvolvimento Humano Municipal - Dimensão Renda
@@ -333,7 +333,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: idhm_subescolaridade
       bigquery_type: float64
       description: Índice de Desenvolvimento Humano Municipal - Dimensão Sub Escolaridade
@@ -348,7 +348,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: idhm_subfrequencia
       bigquery_type: float64
       description: Índice de Desenvolvimento Humano Municipal - Dimensão Frequência Escolar
@@ -363,7 +363,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: prosperidade_social
       bigquery_type: string
       description: Prosperidade Social
@@ -378,7 +378,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: porporcao_vulnerabilidade_socioeconomica
       bigquery_type: float64
       description: Proporção das pessoas com renda per capita inferior a meio salario
@@ -394,7 +394,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: propocao_energia_eletrica
       bigquery_type: float64
       description: Proporção da população em domicílios com energia elétrica
@@ -409,7 +409,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_domicilio_densidade
       bigquery_type: float64
       description: Proporção da população em domicílios com densidade maior que 2
@@ -424,7 +424,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_sem_agua_esgoto
       bigquery_type: float64
       description: Proporção de pessoas com abastecimento de água e esgoto inadequado
@@ -439,7 +439,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_sem_coleta
       bigquery_type: float64
       description: Proporção de pessoas sem o serviço de coleta de lixo
@@ -454,7 +454,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: renda_per_capita
       bigquery_type: float64
       description: Renda per capita
@@ -469,7 +469,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: renda_media_18_mais
       bigquery_type: float64
       description: Proporção dos ocupados com ensino superior completo com 18 anos ou mais
@@ -484,7 +484,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_sem_renda_18_mais
       bigquery_type: float64
       description: Proporção dos ocupados sem rendimento com 18 anos ou mais
@@ -499,7 +499,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: renda_trabalho
       bigquery_type: float64
       description: Proporção da renda proveniente de rendimentos do trabalho
@@ -514,7 +514,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: renda_per_capita_vulneravel
       bigquery_type: float64
       description: Renda per capita dos vulneráveis à pobreza
@@ -529,7 +529,7 @@ columns:
       has_sensitive_data: no
       observations: Renda per capital igual ou inferior a R$ 255,00 mensais, valor baseado em 2010
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_vulneravel
       bigquery_type: float64
       description: Proporção de pessoas com renda domiciliar per capita igual ou inferior
@@ -545,7 +545,7 @@ columns:
       has_sensitive_data: no
       observations: Salário base referente ao ano de 2010
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_vulneravel_15_24
       bigquery_type: int64
       description: Pessoas vulneráveis de 15 a 24 anos
@@ -560,7 +560,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_vulneravel_dependente_idoso
       bigquery_type: float64
       description: Proporção de pessoas em domicílios com renda per capita inferior
@@ -576,7 +576,7 @@ columns:
       has_sensitive_data: no
       observations: Salário base referente ao ano de 2010
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_vulneravel_e_idoso
       bigquery_type: int64
       description: População em domicílios vulneráveis e com idoso
@@ -591,7 +591,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: razao_dependencia
       bigquery_type: float64
       description: Razão de dependência
@@ -607,7 +607,7 @@ columns:
       observations: Percentual da população de menos de 14 anos ou menos e da população
           de 65 anos mais em relação à população de 15 a 64 anos
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: fecundidade_total
       bigquery_type: float64
       description: Taxa de fecundidade total
@@ -622,7 +622,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: taxa_envelhecimento
       bigquery_type: float64
       description: Taxa de envelhecimento
@@ -638,7 +638,7 @@ columns:
       observations: Percentual da população de 65 anos ou mais de idade em relação
           à população total
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: mortalidade_1_menos
       bigquery_type: float64
       description: Mortalidade até 1 ano de idade
@@ -653,7 +653,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_mortalidade_5_menos
       bigquery_type: float64
       description: Proporção referente a mortalidade de crianças até 5 anos de idade
@@ -668,7 +668,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_crianca_fora_escola_0_5
       bigquery_type: float64
       description: Proporção de crianças de 0 a 5 anos que não frequentam a escola
@@ -683,7 +683,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_escola_5_6
       bigquery_type: float64
       description: Proporção de crianças de 5 a 6 anos na escola
@@ -698,7 +698,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_crianca_fora_escola_6_14
       bigquery_type: float64
       description: Proporção de crianças de 6 a 14 anos que não frequentam a escola
@@ -713,7 +713,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_maternidade_10_17
       bigquery_type: float64
       description: Proporção de mulheres de 10 a 17 anos que tiveram filhos
@@ -728,7 +728,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: maternidade_crianca_15_menos
       bigquery_type: int64
       description: Mulheres chefes de família e com filhos menores de 15 anos
@@ -743,7 +743,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_maternidade_fundamental_incompleto_crianca_15_menos
       bigquery_type: float64
       description: Proporção de mães chefes de família, sem fundamental completo
@@ -759,7 +759,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_analfabetismo_15_mais
       bigquery_type: float64
       description: Proporção de analfabetismo - 15 anos ou mais
@@ -774,7 +774,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_analfabetismo_18_mais
       bigquery_type: float64
       description: Proporção de analfabetismo - 18 anos ou mais
@@ -789,7 +789,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_analfabetismo_25_mais
       bigquery_type: float64
       description: Taxa de analfabetismo - 25 anos ou mais
@@ -804,7 +804,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_responsavel_fundamental_incompleto
       bigquery_type: float64
       description: Proporção de crianças que vivem em domicílios em que nenhum dos
@@ -820,7 +820,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_anos_finais_11_13
       bigquery_type: float64
       description: Proporção de alunos de 11 a 13 anos nos anos finais do fundamental ou com fundamental completo
@@ -835,7 +835,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_fundamental_completo_15_17
       bigquery_type: float64
       description: Proporção de alunos de 15 a 17 anos com fundamental completo
@@ -850,7 +850,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_fundamental_completo_18_mais
       bigquery_type: float64
       description: Proporção de alunos de 18 anos ou mais com fundamental completo
@@ -865,7 +865,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_medio_completo_18_20
       bigquery_type: float64
       description: Proporção de alunos de 18 a 20 anos com médio completo
@@ -880,7 +880,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_ocupada_trabalho
       bigquery_type: int64
       description: População ocupada vulnerável à pobreza que retorna diariamente
@@ -896,7 +896,7 @@ columns:
       has_sensitive_data: no
       observations: Salário base referente ao ano de 2010
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_ocupado_fundamental_18_mais
       bigquery_type: float64
       description: Porporção dos ocupados com ensino fundamental completo com 18 anos
@@ -912,7 +912,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_ocupado_medio_18_mais
       bigquery_type: float64
       description: Proporção dos ocupados com ensino médio completo com 18 anos ou
@@ -928,7 +928,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_ocupado_superior_18_mais
       bigquery_type: float64
       description: Proporção dos ocupados com ensino médio completo com 18 anos ou
@@ -944,7 +944,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_desocupado_15_24
       bigquery_type: float64
       description: Proporção de pessoas de 15 a 24 anos que não estudam, não trabalham
@@ -960,7 +960,7 @@ columns:
       has_sensitive_data: no
       observations: Salário base referente ao ano de 2010
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_desocupado_18_mais
       bigquery_type: float64
       description: Proporção de desocupação da população de 18 anos ou mais de idade
@@ -975,7 +975,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_ocupados_informal_18_mais
       bigquery_type: float64
       description: Proporção de pessoas de 18 anos ou mais sem fundamental completo
@@ -991,7 +991,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_carteira_18_mais
       bigquery_type: float64
       description: Proporção de empregados com carteira assinada com 18 anos ou mais
@@ -1006,7 +1006,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_sem_carteira_18_mais
       bigquery_type: float64
       description: Proporção de empregados sem carteira assinada com 18 anos ou mais
@@ -1021,7 +1021,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_setor_publico_18_mais
       bigquery_type: float64
       description: Proporção de trabalhadores do setor público com 18 anos ou mais
@@ -1036,7 +1036,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_empreendedor_18_mais
       bigquery_type: float64
       description: Proporção de trabalhadores por conta própria com 18 anos ou mais
@@ -1051,7 +1051,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_empregador_18_mais
       bigquery_type: float64
       description: Proporção de empregadores com 18 anos ou mais
@@ -1066,7 +1066,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_mercado_formal_18_mais
       bigquery_type: float64
       description: Proporção do grau formalização dos ocupados com 18 anos ou mais
@@ -1081,7 +1081,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: proporcao_atividade_10_14
       bigquery_type: float64
       description: Proporção de atividade das pessoas de 10 a 14 anos de idade
@@ -1096,7 +1096,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: pea_10_mais
       bigquery_type: int64
       description: População Economicamente Ativa (PEA) com 10 anos ou mais
@@ -1111,7 +1111,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: pea_10_14
       bigquery_type: int64
       description: População Economicamente Ativa (PEA) com 10 a 14 anos
@@ -1126,7 +1126,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: pea_15_17
       bigquery_type: int64
       description: População Economicamente Ativa (PEA) com 15 a 17 anos
@@ -1141,7 +1141,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: pea_18_mais
       bigquery_type: int64
       description: População Economicamente Ativa (PEA) com 18 anos ou mais
@@ -1156,7 +1156,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: expectativa_vida
       bigquery_type: float64
       description: Expectativa de vida
@@ -1173,7 +1173,7 @@ columns:
           nascimento, se permanecerem constantes ao longo da vida o nível e o padrão
           de mortalidade por idade prevalecentes no ano do Censo.
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: indice_gini
       bigquery_type: float64
       description: Índice de Gini
@@ -1189,7 +1189,7 @@ columns:
       observations: Mede o grau de desigualdade existente na distribuição de indivíduos
           segundo a renda domiciliar per capita
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_0_1
       bigquery_type: int64
       description: População de até 1 ano
@@ -1204,7 +1204,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_1_3
       bigquery_type: int64
       description: População de 1 a 3 anos
@@ -1219,7 +1219,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_4
       bigquery_type: int64
       description: População de 4 anos
@@ -1234,7 +1234,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_5
       bigquery_type: int64
       description: População de 5 anos
@@ -1249,7 +1249,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_6
       bigquery_type: int64
       description: População de 6 anos
@@ -1264,7 +1264,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_6_10
       bigquery_type: int64
       description: População de 6 a 10 anos
@@ -1279,7 +1279,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_6_17
       bigquery_type: int64
       description: População de 6 a 17 anos
@@ -1294,7 +1294,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_11_13
       bigquery_type: int64
       description: População de 11 a 13 anos
@@ -1309,7 +1309,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_11_14
       bigquery_type: int64
       description: População de 11 a 14 anos
@@ -1324,7 +1324,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_12_14
       bigquery_type: int64
       description: População de 12 a 14 anos
@@ -1339,7 +1339,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_15_mais
       bigquery_type: int64
       description: População de 15 anos ou mais
@@ -1354,7 +1354,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_15_17
       bigquery_type: int64
       description: População de 15 a 17 anos
@@ -1369,7 +1369,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_15_24
       bigquery_type: int64
       description: População de 15 a 24 anos
@@ -1384,7 +1384,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_16_18
       bigquery_type: int64
       description: População de 16 a 18 anos
@@ -1399,7 +1399,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_18_mais
       bigquery_type: int64
       description: População de 18 anos ou mais
@@ -1414,7 +1414,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_18_20
       bigquery_type: int64
       description: População de 18 a 20 anos
@@ -1429,7 +1429,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_18_24
       bigquery_type: int64
       description: População de 18 a 24 anos
@@ -1444,7 +1444,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_19_21
       bigquery_type: int64
       description: População de 19 a 21 anos
@@ -1459,7 +1459,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_25_mais
       bigquery_type: int64
       description: População de 25 anos ou mais
@@ -1474,7 +1474,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
     - name: populacao_65_mais
       bigquery_type: int64
       description: População de 65 anos ou mais
@@ -1489,7 +1489,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_in_staging: false
+      is_partition: false
 
 number_rows: 319681
 
