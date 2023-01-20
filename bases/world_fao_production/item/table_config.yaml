@@ -48,7 +48,7 @@ update_frequency: one_year
 #       columns:
 #           - sigla_uf
 observation_level: 
-    - entity: other
+    - entity: item
       columns:
         - item_id
 
