@@ -1,0 +1,48 @@
+A tabela fornece informações sobre o bem-estar organizacional, contendo a visão da área e da empresa acerca das perguntas realizadas para todos os servidores civis públicos federais da Administração Pública Federal direta, autárquica e fundacional, abordadas por meio de diferentes recortes de classes e subclasses, considerando quebras de idade, gênero, órgão, entre outros.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2020
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Pivotagem da tabela, agregação dos recortes fornecidos por classe e subclasse e padronização das variáveis seguindo as normas da BD.
+
+
+
+Frequencia de Atualização
+-------------------------
+unique
