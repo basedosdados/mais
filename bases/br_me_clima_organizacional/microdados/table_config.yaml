@@ -11,7 +11,11 @@ title: Microdados
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: A tabela fornece informações sobre o bem-estar organizacional, contendo a visão da área e da empresa acerca das perguntas realizadas para todos os servidores civis públicos federais da Administração Pública Federal direta, autárquica e fundacional, abordadas por meio de diferentes recortes de classes e subclasses, considerando quebras de idade, gênero, órgão, entre outros. 
+description: A tabela fornece informações sobre o bem-estar organizacional, contendo
+    a visão da área e da empresa acerca das perguntas realizadas para todos os servidores
+    civis públicos federais da Administração Pública Federal direta, autárquica e
+    fundacional, abordadas por meio de diferentes recortes de classes e subclasses,
+    considerando quebras de idade, gênero, órgão, entre outros.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -31,11 +35,11 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
-     - 2020
+    - 2020
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: unique 
+update_frequency: unique
 
 # Nível de observação da tabela: o que representa cada linha.
 # A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -50,10 +54,10 @@ update_frequency: unique
 observation_level:
     - entity: other
       columns:
-        - area_empresa
+          - area_empresa
     - entity: item
       columns:
-        - subclasse
+          - subclasse
 
 last_updated:
     metadata: '2023-01-24'
@@ -82,7 +86,8 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Pivotagem da tabela, agregação dos recortes fornecidos por classe e subclasse e padronização das variáveis seguindo as normas da BD.
+data_cleaning_description: Pivotagem da tabela, agregação dos recortes fornecidos
+    por classe e subclasse e padronização das variáveis seguindo as normas da BD.
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_clima_organizacional/code
@@ -139,7 +144,7 @@ columns:
     - name: subclasse
       bigquery_type: string
       description: Subclasse a quem a pergunta é atribuída, relacionadas as subquebras
-          de cada classe respectivamente 
+          de cada classe respectivamente
       temporal_coverage:
           - 2020
       covered_by_dictionary: no
@@ -168,7 +173,7 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: quantidade_resposta
-      bigquery_type: float64
+      bigquery_type: int64
       description: Número de respostas
       temporal_coverage:
           - 2020

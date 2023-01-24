@@ -22,7 +22,7 @@ SELECT
 SAFE_CAST(classe AS STRING) classe,
 SAFE_CAST(subclasse AS STRING) subclasse,
 SAFE_CAST(area_empresa AS STRING) area_empresa,
-SAFE_CAST(quantidade_resposta AS FLOAT64) quantidade_resposta,
+SAFE_CAST(quantidade_resposta AS INT64) quantidade_resposta,
 SAFE_CAST(media_geral AS FLOAT64) media_geral,
 SAFE_CAST(credibilidade AS FLOAT64) credibilidade,
 SAFE_CAST(respeito AS FLOAT64) respeito,
