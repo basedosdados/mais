@@ -61,6 +61,9 @@ observation_level:
     - entity: other
       columns: 
         - tipo_vinculo
+    - entity: other
+      columns: 
+        - escolaridade
     
 
 last_updated:
@@ -208,7 +211,7 @@ columns:
       bigquery_type: string
       description: Tipo de escolaridade por vínculo
       temporal_coverage:
-          - '2018'
+          - 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
