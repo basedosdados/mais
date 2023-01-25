@@ -467,3 +467,30 @@ class Base:
             print("Test endpoint failed")
             print(response.json())
 
+    def _get_dataset_id_from_slug(self, dataset_slug):
+        """
+        Get dataset_id from dataset_slug
+        """
+        query = '''
+            query {
+              allDataset(slug: "''' + dataset_slug + '''") {
+                edges {
+                  node {
+                    _id,
+                    namePt,
+                    slug
+                  }
+                }
+              }
+            }
+        '''
+
+        try:
+            return requests.get(
+                self.api_graphql,
+                json={'query': query}
+            ).json()['data']['allDataset']['edges'][0]['node']['_id']
+        except IndexError as e:
+            print(e)
+
+        return None

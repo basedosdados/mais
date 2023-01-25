@@ -161,3 +161,13 @@ def test_refresh_token(base):
 
     assert base.token_file.exists()
     assert not base.verify_token(token["access"])
+
+
+def test_get_dataset_id_from_slug(base):
+    """
+    Test graphql_request function by getting the
+    id (UUID) from the slug
+    TODO: This test depends on a mock of the API
+    """
+    dataset_id = base._get_dataset_id_from_slug("dados_mestres")
+    assert dataset_id == 'ba8fb30a-a978-4495-875a-5f268fab4ef5'
