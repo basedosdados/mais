@@ -1,6 +1,7 @@
 """
 Tests for Base class
 """
+import os
 # pylint: disable=unused-variable
 
 import re
@@ -107,3 +108,56 @@ def test_uri(base, config_file_exists, capsys):
     else:
         out, err = capsys.readouterr()
         assert "Apparently, that is the first time that you are using" in out
+
+
+############################################
+# NEW API AUTHENTICATION TESTS
+# a separate configuration directory is
+# used for these tests (.basedosdados_teste)
+############################################
+def test_load_no_token(base):
+    """
+    Test get_token function
+    """
+    if base.token_file.exists():
+        base.token_file.unlink()
+    access_token = base.load_token().get("access")
+    assert not access_token
+
+
+def test_get_new_token(base):
+    """
+    Test get_token function
+    """
+    token = base.load_token()
+    if token["access"] == "":  # file does not exist or access token is empty
+        username = base.config["user"]["email"]
+        # Password must be declared as an environment variable
+        password = os.getenv("API_PASSWORD")
+        token = base.get_token(username, password)
+        try:
+            base.test_endpoint(token["access"])
+            base.save_token(token)
+        except Exception as e:
+            print(e)
+
+    assert base.token_file.exists()
+    assert token["access"].startswith("eyJ")
+
+
+def test_refresh_token(base):
+    """
+    Test refresh_token function.
+    TODO: This test still depends on previous one. Should use a mock?
+    """
+    token = base.load_token()
+    if base.verify_token(token["refresh"]) == {}:  # file exists
+        token = base.refresh_token(token["refresh"])
+        try:
+            base.test_endpoint(token["access"])
+            base.save_token(token)
+        except Exception as e:
+            print(e)
+
+    assert base.token_file.exists()
+    assert not base.verify_token(token["access"])

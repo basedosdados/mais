@@ -262,7 +262,8 @@ def fixture_base():
     """
     Fixture for the base class
     """
-    return Base()
+    config_path = Path.home() / ".basedosdados_teste"
+    return Base(config_path=config_path)
 
 
 @pytest.fixture(name="config_file_exists")

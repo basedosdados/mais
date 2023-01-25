@@ -17,6 +17,8 @@ from loguru import logger
 import yaml
 from jinja2 import Template
 import tomlkit
+import requests
+import pwinput
 
 from basedosdados.constants import config, constants
 
@@ -55,6 +57,15 @@ class Base:
         self.metadata_path = Path(metadata_path or self.config["metadata_path"])
         self.bucket_name = bucket_name or self.config["bucket_name"]
         self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
+
+        self.base_url = self.config["ckan"]["url"]
+        self.token_url = self.base_url + "/api/token/"
+        self.refresh_token_url = self.base_url + "/api/token/refresh/"
+        self.verify_token_url = self.base_url + "/api/token/verify/"
+        self.test_api_endpoint = self.base_url + "/api/v1/private/bigquerytypes/"
+        self.token_file = Path(self.config_path) / ".token.json"
+
+        self.api_graphql = self.base_url + "/api/v1/graphql#query"
 
     @staticmethod
     def _decode_env(env: str) -> str:
@@ -417,3 +428,42 @@ class Base:
             (Path(__file__).resolve().parents[1] / "configs" / "templates"),
             (self.config_path / "templates"),
         )
+
+    def load_token(self):
+        if not self.token_file.exists():
+            return {"access": "", "refresh": ""}
+        with open(self.token_file) as f:
+            token = json.load(f)
+        return token
+
+    def save_token(self, token):
+        with open(self.token_file, "w") as f:
+            json.dump(token, f)
+
+    def get_token(self, username, password=None):
+        if password is None:
+            password = pwinput.pwinput("Password: ")
+        data = {"username": username, "password": password}
+        response = requests.post(self.token_url, data=data)
+        return response.json()
+
+    def refresh_token(self, refresh_token):
+        data = {"refresh": refresh_token}
+        response = requests.post(self.refresh_token_url, data=data)
+        return response.json()
+
+    def verify_token(self, token):
+        data = {"token": token}
+        response = requests.post(self.verify_token_url, data=data)
+        return response.json()
+
+    def test_endpoint(self, token):
+        headers = {"Authorization": f"Bearer {token}"}
+        response = requests.get(self.test_api_endpoint, headers=headers)
+        try:
+            assert response.status_code == 200
+            print("Test endpoint OK")
+        except AssertionError:
+            print("Test endpoint failed")
+            print(response.json())
+

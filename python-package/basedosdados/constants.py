@@ -27,3 +27,8 @@ class constants(Enum):
     ENV_CREDENTIALS_PREFIX: str = "BASEDOSDADOS_CREDENTIALS_"
     ENV_CREDENTIALS_PROD: str = "BASEDOSDADOS_CREDENTIALS_PROD"
     ENV_CREDENTIALS_STAGING: str = "BASEDOSDADOS_CREDENTIALS_STAGING"
+    TOKEN_FILE: str = ".token.json"
+    TOKEN_URL: str = "/api/token/"
+    REFRESH_TOKEN_URL: str = "/api/token/refresh/"
+    VERIFY_TOKEN_URL: str = "/api/token/verify/"
+    TEST_ENDPOINT: str = "/api/v1/private/bigquerytypes/"
