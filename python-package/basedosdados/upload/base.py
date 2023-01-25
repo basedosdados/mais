@@ -472,8 +472,8 @@ class Base:
         Get dataset_id from dataset_slug
         """
         query = '''
-            query {
-              allDataset(slug: "''' + dataset_slug + '''") {
+            query ($slug: String!){
+              allDataset(slug: $slug) {
                 edges {
                   node {
                     _id,
@@ -485,10 +485,12 @@ class Base:
             }
         '''
 
+        variables = {"slug": dataset_slug}
+
         try:
             return requests.get(
                 self.api_graphql,
-                json={'query': query}
+                json={'query': query, 'variables': variables}
             ).json()['data']['allDataset']['edges'][0]['node']['_id']
         except IndexError as e:
             print(e)
@@ -500,13 +502,13 @@ class Base:
         Get table_id from table_slug
         """
         query = '''
-            query {
-                allDataset(slug: "''' + dataset_slug + '''") {
+            query ($dataset_slug: String!, $table_slug: String!){
+                allDataset(slug: $dataset_slug) {
                     edges {
                         node {
                             _id,
                             slug,
-                            tables(slug: "''' + table_slug + '''") {
+                            tables(slug: $table_slug) {
                                 edges {
                                     node {
                                         dataset{
@@ -523,11 +525,11 @@ class Base:
                 }
             }
         '''
-
+        variables = {"dataset_slug": dataset_slug, "table_slug": table_slug}
         try:
             return requests.get(
                 self.api_graphql,
-                json={'query': query}
+                json={'query': query, 'variables': variables}
             ).json()['data']['allDataset']['edges'][0]['node']['tables']['edges'][0]['node']['_id']
         except IndexError as e:
             print(e)
