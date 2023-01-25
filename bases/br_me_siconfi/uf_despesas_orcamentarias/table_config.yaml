@@ -5,13 +5,13 @@ dataset_id: br_me_siconfi
 table_id: uf_despesas_orcamentarias
 
 # Título da tabela.
-title: Sistema de Informações Contábeis e Fiscais do Setor Público Brasileiro (SICONFI)
+title: Despesas Orçamentárias
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description:
+description: Tabela de despesas orçamentárias a nível de UF.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -55,6 +55,9 @@ observation_level:
       entity: state
       columns:
         - sigla_uf
+    - entity: item
+      columns:
+          - conta
 
 last_updated:
     metadata: '2023-01-24'
@@ -84,7 +87,7 @@ data_cleaned_by:
     website: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
+data_cleaning_description: Renomeação das variáveis, separação da coluna conta em duas novas colunas (conta e portaria) e criação das colunas de compatibilização entre os anos (todas com o sufixo _bd).
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_siconfi/code

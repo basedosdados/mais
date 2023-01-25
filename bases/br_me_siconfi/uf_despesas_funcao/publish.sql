@@ -28,5 +28,5 @@ SAFE_CAST(conta AS STRING) conta,
 SAFE_CAST(estagio_bd AS STRING) estagio_bd,
 SAFE_CAST(id_conta_bd AS STRING) id_conta_bd,
 SAFE_CAST(conta_bd AS STRING) conta_bd,
-SAFE_CAST(valor AS STRING) valor
+SAFE_CAST(valor AS FLOAT64) valor
 FROM basedosdados-dev.br_me_siconfi_staging.uf_despesas_funcao AS t
