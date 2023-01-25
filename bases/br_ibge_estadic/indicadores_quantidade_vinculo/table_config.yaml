@@ -48,13 +48,20 @@ update_frequency: one_year
 #       columns:
 #           - sigla_uf
 observation_level:
-     - entity: year
-       columns:
-           - ano
-     - country: br
-       entity: state
-       columns:
-           - sigla_uf
+    - entity: year
+      columns:
+        - ano
+    - country: br
+      entity: state
+      columns:
+        - sigla_uf
+    - entity: other
+      columns:
+        - tipo_administracao
+    - entity: other
+      columns: 
+        - tipo_vinculo
+    
 
 last_updated:
     metadata: '2023-01-17'
