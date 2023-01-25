@@ -20,12 +20,12 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_ibge_munic.indicadores_quantidade_vinculo AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(recusa AS INT64) recusa,
 SAFE_CAST(tipo_administracao AS STRING) tipo_administracao,
 SAFE_CAST(existencia_adm_indireta AS INT64) existencia_adm_indireta,
 SAFE_CAST(tipo_vinculo AS STRING) tipo_vinculo,
 SAFE_CAST(escolaridade AS STRING) escolaridade,
-SAFE_CAST(quantidade_vinculo AS INT64) quantidade_vinculo,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf
+SAFE_CAST(quantidade_vinculo AS INT64) quantidade_vinculo
 FROM basedosdados-dev.br_ibge_munic_staging.indicadores_quantidade_vinculo AS t

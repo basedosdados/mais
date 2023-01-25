@@ -5,13 +5,13 @@ dataset_id: br_ibge_munic
 table_id: indicadores_quantidade_vinculo
 
 # Título da tabela.
-title: Indicadores sobre a Quantidade de Vínculos 
+title: Indicadores sobre a Quantidade de Vínculos
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: A tabela fornece informações sobre a quantidade de funcionários em diferentes tipos de vínculo administrativo, a nível municipal. 
+description: A tabela fornece informações sobre a quantidade de funcionários em diferentes tipos de vínculo administrativo, a nível municipal.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -30,7 +30,7 @@ spatial_coverage:
 #     - 2002(2)2010
 #     - 2016
 #     - 2020
-temporal_coverage: 
+temporal_coverage:
     - 2018(1)2021
 
 # A unidade temporal com qual a tabela é atualizada.
@@ -48,13 +48,22 @@ update_frequency: one_year
 #       columns:
 #           - sigla_uf
 observation_level:
-     - entity: year
-       columns:
-           - ano
-     - country: br
-       entity: municipality
-       columns:
-           - id_municipio
+    - entity: year
+      columns:
+        - ano
+    - country: br
+      entity: municipality
+      columns:
+        - id_municipio
+    - entity: other
+      columns:
+        - tipo_administracao
+    - entity: other
+      columns:
+        - tipo_vinculo
+    - entity: other 
+      columns:
+        - escolaridade
 
 last_updated:
     metadata: '2023-01-17'
@@ -87,7 +96,7 @@ data_cleaned_by:
 data_cleaning_description: Compatibilização dos dados entre os anos, criação de colunas com o objetivo de indicar os tipos diferentes de vínculo administrativo e informar quando houve a recusa do município de fornecer informações.
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_munic/code 
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_munic/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -217,7 +226,7 @@ columns:
       bigquery_type: string
       description: Tipo de escolaridade por vínculo
       temporal_coverage:
-          - '2018'
+          - 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:

@@ -20,6 +20,7 @@ TIPOS:
 CREATE VIEW basedosdados-dev.br_ibge_munic.indicadores_perfil_gestor AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(tema AS STRING) tema,
 SAFE_CAST(recusa AS INT64) recusa,
