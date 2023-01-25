@@ -418,7 +418,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: industrial_date
+    - name: industrial_data
       bigquery_type: int64
       description: Latest industrial data
       temporal_coverage:
