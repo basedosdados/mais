@@ -1,70 +1,52 @@
-dataset_id: br_ibge_pib # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-ibge-pib
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pib
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-ibge-pib
 
-# Descreva a base.
-# Ela é sobre o que?
-# Quais as principais fontes de dados?
-# Há links para FAQs e explicações?
-description: | # REQUIRED
-    Dados sobre Produto Interno Bruto do IBGE.
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Produto Interno Bruto do Brasil
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: instituto-brasileiro-de-geografia-e-estatistica
+# Se a organização não estiver na lista acima ou o nome não estiver conforme o manual de estilo
+# criar ou renomear a organização em https://basedosdados.org/organization/
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - br-ibge
 
-# Qual departamento/grupo/pessoa mantém os dados originais?
-author:
-    name: <nome>
-    email: <email>
+# Descrição do conjunto
+notes: Um sistema de indicadores municipais com informações econômicas e sociais é
+    importante instrumento para o planejamento de políticas públicas. Com a promulgação
+    da Constituição Federal de 1988, que deu mais responsabilidade e autonomia aos
+    municípios, ampliaram-se as demandas por informações econômicas padronizadas e
+    comparáveis em nível municipal, tanto por parte de agentes públicos e privados,
+    quanto por estudiosos da economia, e pela sociedade em geral. os resultados do
+    PIB dos Municípios permitem identificar as áreas de geração de renda, produzindo
+    informações que captam as especifidades do País.
 
-# Onde encontrar os dados originais e mais informações?
-website:
-    - https://www.ibge.gov.br/explica/pib.php
-
-# Quais grupos caracterizam a base?
+# Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
 groups:
     - economia
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos:
+#    - fertilidade
+#    - preco
+#    - desmatamento
 # Caso crie etiquetas novas, as regras são:
-#   - letras minúsculas
-#   - sem acentos
-#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
     - PIB
+    - crescimento
     - renda
 
-# Em quais línguas a base (ou a fonte original) está disponível?
-# Regras: minúsculo, sem acentos.
-# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
-languages:
-    - portugues
-
-# Os dados originais estão disponíveis de graça?
-free: sim
-
-# Are microdata available for download?
-microdata: sim
-
-# Existe uma API na fonte original?
-API: não
-
-# É necessário registrar um usuário para baixar os dados originais?
-registration: não
-
-# Como os dados originais estão disponibilizados?
-availability: online
-
-# A fonte original requer IP brasileiro para acesso?
-brazilian_IP: não
-
-# Essa base está sob qual licença?
-# A licença MIT se aplica a bases públicas.
-# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
-license: 
-    name: MIT # REQUIRED
-    url: <url>
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2022-12-20T18:46:39.675199'
