@@ -138,7 +138,10 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: As classes incluem quebras de Médias, Idade, Gênero, Unidade
+          da Federação, Tempo de trabalho no orgão, Cor/Etnia, Escolaridade, Quantidade
+          de oportunidade para desenvolver novas e melhores formas de trabalhar, Função,
+          Órgão
       is_in_staging: true
       is_partition: false
     - name: subclasse
