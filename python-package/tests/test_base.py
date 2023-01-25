@@ -2,6 +2,7 @@
 Tests for Base class
 """
 import os
+
 # pylint: disable=unused-variable
 
 import re
@@ -76,6 +77,7 @@ def test_main_vars(base, config_file_exists, capsys):
     else:
         out, err = capsys.readouterr()
         assert "Apparently, that is the first time that you are using" in out
+
 
 def test_metadata_path(base, config_file_exists, capsys):
     """
@@ -170,4 +172,14 @@ def test_get_dataset_id_from_slug(base):
     TODO: This test depends on a mock of the API
     """
     dataset_id = base._get_dataset_id_from_slug("dados_mestres")
-    assert dataset_id == 'ba8fb30a-a978-4495-875a-5f268fab4ef5'
+    assert dataset_id == "ba8fb30a-a978-4495-875a-5f268fab4ef5"
+
+
+def test_get_table_id_from_slug(base):
+    """
+    Test graphql_request function by getting the
+    id (UUID) from the slugs of dataset and table
+    TODO: This test depends on a mock of the API
+    """
+    table_id = base._get_table_id_from_slug("dados_mestres", "bairro")
+    assert table_id == "4f536063-9938-4d95-a0d1-4ec25fc1923b"

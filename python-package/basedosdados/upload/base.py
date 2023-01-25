@@ -494,3 +494,42 @@ class Base:
             print(e)
 
         return None
+
+    def _get_table_id_from_slug(self, dataset_slug, table_slug):
+        """
+        Get table_id from table_slug
+        """
+        query = '''
+            query {
+                allDataset(slug: "''' + dataset_slug + '''") {
+                    edges {
+                        node {
+                            _id,
+                            slug,
+                            tables(slug: "''' + table_slug + '''") {
+                                edges {
+                                    node {
+                                        dataset{
+                                            _id,
+                                            slug
+                                        },
+                                        _id,
+                                        slug
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        '''
+
+        try:
+            return requests.get(
+                self.api_graphql,
+                json={'query': query}
+            ).json()['data']['allDataset']['edges'][0]['node']['tables']['edges'][0]['node']['_id']
+        except IndexError as e:
+            print(e)
+
+        return None
