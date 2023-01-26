@@ -6,6 +6,7 @@ import os
 # pylint: disable=unused-variable
 
 import re
+import time
 from pathlib import Path
 
 from google.cloud import storage, bigquery
@@ -131,20 +132,18 @@ def test_get_new_token(base):
     """
     Test get_token function
     """
-    token = base.load_token()
-    if token["access"] == "":  # file does not exist or access token is empty
-        username = base.config["user"]["email"]
-        # Password must be declared as an environment variable
-        password = os.getenv("API_PASSWORD")
-        token = base.get_token(username, password)
-        try:
-            base.test_endpoint(token["access"])
-            base.save_token(token)
-        except Exception as e:
-            print(e)
+
+    username = base.config["user"]["email"]
+    # Password must be declared as an environment variable
+    password = os.getenv("API_PASSWORD")
+    token = base.get_token(username, password)
+    try:
+        base.save_token(token)
+    except Exception as e:
+        print(e)
 
     assert base.token_file.exists()
-    assert token["access"].startswith("eyJ")
+    assert base.verify_token(token) is True
 
 
 def test_refresh_token(base):
@@ -153,16 +152,14 @@ def test_refresh_token(base):
     TODO: This test still depends on previous one. Should use a mock?
     """
     token = base.load_token()
-    if base.verify_token(token["refresh"]) == {}:  # file exists
-        token = base.refresh_token(token["refresh"])
-        try:
-            base.test_endpoint(token["access"])
-            base.save_token(token)
-        except Exception as e:
-            print(e)
-
+    time.sleep(5)  # without this, the token is not refreshed
+    new_token = base.refresh_token(token)
+    try:
+        base.save_token(new_token)
+    except Exception as e:
+        print(e)
     assert base.token_file.exists()
-    assert not base.verify_token(token["access"])
+    assert token["access"] != new_token["access"]
 
 
 def test_get_dataset_id_from_slug(base):

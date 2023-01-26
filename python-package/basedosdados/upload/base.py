@@ -1,6 +1,7 @@
 """
 Module for manage dataset using local credentials and config files
 """
+from datetime import datetime
 # pylint: disable=line-too-long, invalid-name, too-many-arguments, invalid-envvar-value,line-too-long
 from pathlib import Path
 import sys
@@ -429,43 +430,69 @@ class Base:
             (self.config_path / "templates"),
         )
 
-    def load_token(self):
+    def load_token(self) -> dict:
         if not self.token_file.exists():
-            return {"access": "", "refresh": ""}
+            return {"access": ""}
         with open(self.token_file) as f:
             token = json.load(f)
         return token
 
-    def save_token(self, token):
+    def save_token(self, token) -> None:
         with open(self.token_file, "w") as f:
             json.dump(token, f)
 
-    def get_token(self, username, password=None):
+    def get_token(self, username, password=None) -> dict:
         if password is None:
             password = pwinput.pwinput("Password: ")
-        data = {"username": username, "password": password}
-        response = requests.post(self.token_url, data=data)
-        return response.json()
 
-    def refresh_token(self, refresh_token):
-        data = {"refresh": refresh_token}
-        response = requests.post(self.refresh_token_url, data=data)
-        return response.json()
+        query = '''
+            mutation tokenAuth($username: String!, $password: String!) {
+                tokenAuth(
+                    username: $username, 
+                    password: $password
+                ) {
+                    payload,
+                    refreshExpiresIn,
+                    token
+                }
+            }
+        '''
+        variables = {"username": username, "password": password}
+        r = requests.post(self.api_graphql, headers={"Content-Type": "application/json"}, json={"query": query, "variables": variables})
+        r.raise_for_status()
+        return {"access": r.json()["data"]["tokenAuth"]["token"]}
 
-    def verify_token(self, token):
-        data = {"token": token}
-        response = requests.post(self.verify_token_url, data=data)
-        return response.json()
+    def refresh_token(self, token: dict) -> dict:
+        query = '''
+            mutation refreshToken($token: String!) {
+                refreshToken(token: $token) {
+                    payload,
+                    refreshExpiresIn,
+                    token
+                }
+            }
+        '''
+        variables = {"token": token["access"]}
+        r = requests.post(self.api_graphql, headers={"Content-Type": "application/json"}, json={"query": query, "variables": variables})
+        r.raise_for_status()
+        return {"access": r.json()["data"]["refreshToken"]["token"]}
 
-    def test_endpoint(self, token):
-        headers = {"Authorization": f"Bearer {token}"}
-        response = requests.get(self.test_api_endpoint, headers=headers)
-        try:
-            assert response.status_code == 200
-            print("Test endpoint OK")
-        except AssertionError:
-            print("Test endpoint failed")
-            print(response.json())
+    def verify_token(self, token) -> bool:
+        if token == "":
+            return False
+        query = '''
+            mutation verifyToken($token: String!) {
+                verifyToken(token: $token) {
+                    payload
+                }
+            }
+        '''
+        variables = {"token": token["access"]}
+        r = requests.post(self.api_graphql, headers={"Content-Type": "application/json"}, json={"query": query, "variables": variables})
+        current_datetime_unix = int(datetime.now().timestamp())
+        if current_datetime_unix > r.json()["data"]["verifyToken"]["payload"]["exp"]:
+            return False
+        return True
 
     def _get_dataset_id_from_slug(self, dataset_slug):
         """
