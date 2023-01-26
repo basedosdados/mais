@@ -88,7 +88,7 @@ data_cleaned_by:
 data_cleaning_description: Compatibilização dos dados entre os anos e padronização para as normas da BD.
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_avs/code
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_avs/educacao/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -133,7 +133,7 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
-      measurement_unit: years
+      measurement_unit: year
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -3458,16 +3458,17 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: ordenacao_despesas_educacao
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: Responsabilidade da ordenação de despesas da educação
       temporal_coverage:
-      covered_by_dictionary:
+          - 2018
+      covered_by_dictionary: no 
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
