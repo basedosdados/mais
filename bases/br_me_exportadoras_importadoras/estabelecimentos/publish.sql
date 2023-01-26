@@ -27,7 +27,7 @@ SAFE_CAST(cnae_2_primaria AS STRING) cnae_2_primaria,
 SAFE_CAST(id_natureza_juridica AS STRING) id_natureza_juridica,
 SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(id_municipio AS STRING) id_municipio,
-SAFE_CAST(cep AS INT64) cep,
+SAFE_CAST(cep AS STRING) cep,
 SAFE_CAST(bairro AS STRING) bairro,
 SAFE_CAST(endereco AS STRING) endereco,
 SAFE_CAST(numero AS INT64) numero
