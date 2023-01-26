@@ -84,11 +84,23 @@ Nomes de variáveis devem respeitar algumas regras:
 - Só ter o prefixo `id_` quando a variável representar chaves primárias de entidades (que eventualmente teriam uma tabela de diretório).
     - Exemplos que tem: `id_municipio`, `id_uf`, `id_escola`, `id_pessoa`.
     - Exemplos que não tem: `rede`, `localizacao`.
+    - **Importante**: quando a base está em inglês id vira um sufixo
 - Só ter sufixos de entidade quando a entidade da coluna for diferente da entidade da tabela.
     - Exemplos que tem: numa tabela com entidade `pessoa`, uma coluna sobre PIB municipal se chamaria `pib_municipio`.
     - Exemplos que não tem: numa tabela com entidade `pessoa`, características da pessoa se chamariam `nome`, `idade`, `sexo`, etc.
 - Lista de **prefixos permitidos**
-    - `nome_`, `data_`, `numero_`, `quantidade_`, `proporcao_` (variáveis de porcentagem 0-100%), `taxa_`, `razao_`,  `indice_`, `indicador_`, `tipo_`, `sigla_`, `sequencial_`.
+    - `nome_`, 
+    - `data_`, 
+    - `numero_`, 
+    - `quantidade_`, 
+    - `proporcao_` (variáveis de porcentagem 0-100%), 
+    - `taxa_`, 
+    - `razao_`,  
+    - `indice_`, 
+    - `indicador_` (variáveis do tipo booleano), 
+    - `tipo_`, 
+    - `sigla_`, 
+    - `sequencial_`.
 - Lista de **sufixos comuns**
     - `_pc` (per capita)
 
