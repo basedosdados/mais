@@ -39,7 +39,7 @@ SAFE_CAST(government_accounting AS STRING) government_accounting,
 SAFE_CAST(population_census AS STRING) population_census,
 SAFE_CAST(agricultural_census AS STRING) agricultural_census,
 SAFE_CAST(household_survey AS STRING) household_survey,
-SAFE_CAST(industrial_date AS INT64) industrial_date,
+SAFE_CAST(industrial_data AS INT64) industrial_data,
 SAFE_CAST(source_income_expenditure AS STRING) source_income_expenditure,
 SAFE_CAST(vital_registration_complete AS INT64) vital_registration_complete
 FROM basedosdados-dev.world_wb_wwbi_staging.country_finance AS t

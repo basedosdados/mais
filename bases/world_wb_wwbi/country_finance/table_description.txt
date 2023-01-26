@@ -39,7 +39,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Renaming of columns and transformation of answers into boolean type filled with 0 or 1 in the column corresponding to Completed vital registration.
+Renaming of columns and transformation of answers into boolean type filled with 0 or 1 in the column corresponding to Vital registration complete.
 
 
 

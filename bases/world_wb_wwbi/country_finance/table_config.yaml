@@ -385,7 +385,8 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: Responses can appear in the format of temporal coverage, single
+          year or even with the name of the survey along with the year
       is_in_staging: true
       is_partition: false
     - name: agricultural_census
@@ -400,7 +401,8 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: Responses can appear in the format of temporal coverage, single
+          year or even with the name of the survey along with the year
       is_in_staging: true
       is_partition: false
     - name: household_survey
@@ -415,12 +417,12 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: Responses contain the name of the survey and the most recent year
       is_in_staging: true
       is_partition: false
     - name: industrial_data
       bigquery_type: int64
-      description: Latest industrial data
+      description: Year of the Latest industrial data
       temporal_coverage:
           - 2022
       covered_by_dictionary: no
@@ -445,7 +447,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: Responses contain the name of the survey and the most recent year
       is_in_staging: true
       is_partition: false
     - name: vital_registration_complete
@@ -466,4 +468,4 @@ columns:
 
 number_rows: 202
 
-metadata_modified: '2023-01-06T19:23:01.878959'
+metadata_modified:
