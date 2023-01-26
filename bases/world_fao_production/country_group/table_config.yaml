@@ -48,9 +48,6 @@ update_frequency: one_year
 #       columns:
 #           - sigla_uf
 observation_level:
-    - entity: continent
-      columns:
-          - fao_area_group_id
     - entity: country
       columns:
           - fao_area_id
@@ -84,7 +81,7 @@ data_cleaned_by:
 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Renomeei colunas.
+data_cleaning_description: 1- Download FAOSTAT directories datasets using R selenium; 2- Rename columns; 3- Drop columns; 4- Change data types
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_fao_production/code

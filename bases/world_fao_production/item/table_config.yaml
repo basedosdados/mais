@@ -5,7 +5,7 @@ dataset_id: world_fao_production
 table_id: item
 
 # Título da tabela.
-title: item
+title: Item
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -81,7 +81,7 @@ data_cleaned_by:
 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Renomeei colunas.
+data_cleaning_description: 1- Download FAOSTAT directories datasets using R selenium; 2- Rename columns; 3- Drop columns; 4- Change data types
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_fao_production/code
@@ -167,7 +167,7 @@ columns:
       is_partition: false
     - name: hs07_id
       bigquery_type: string
-      description: hs07 code
+      description: Harmonized System (HS07) Code code
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -182,7 +182,7 @@ columns:
       is_partition: false
     - name: hs12_id
       bigquery_type: string
-      description: hs12 code
+      description: Harmonized System (HS12) Code
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -197,7 +197,7 @@ columns:
       is_partition: false
     - name: cpc_id
       bigquery_type: string
-      description: cpc code
+      description: Customs Procedure Code
       temporal_coverage:
           - (1)
       covered_by_dictionary: no

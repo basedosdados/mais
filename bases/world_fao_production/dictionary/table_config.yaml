@@ -6,7 +6,7 @@ dataset_id: world_fao_production
 table_id: dictionary
 
 # Título da tabela.
-title: dictionary
+title: Dictionary
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -79,7 +79,8 @@ data_cleaned_by:
 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Renomeei colunas.
+data_cleaning_description: 1- Rename columns; 2- Drop columns; 3- Change data types
+
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_fao_production/code
