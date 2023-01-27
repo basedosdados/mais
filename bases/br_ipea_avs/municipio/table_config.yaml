@@ -132,7 +132,7 @@ columns:
           dataset_id: br_bd_diretorios_data_tempo
           table_id: ano
           column_name: ano
-      measurement_unit:
+      measurement_unit: year
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -1167,7 +1167,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: years
+      measurement_unit: year
       has_sensitive_data: no
       observations: Número médio de anos que as pessoas deverão viver a partir do
           nascimento, se permanecerem constantes ao longo da vida o nível e o padrão
