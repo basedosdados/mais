@@ -11,7 +11,7 @@ title: Atlas da Vulnerabilidade Social
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: A tabela oferece um panorama da vulnerabilidade e da exclusão social dos municípios e estados.
+description: A tabela oferece um panorama da vulnerabilidade e da exclusão social dos municípios brasileiros nos anos dos últimos Censos (2000 e 2010). O índice de vulnerabilidade social é gerado a partir da análise de variáveis socioeconômicas, tais como, escolaridade, mortalidade, expectativa de vida, etc.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -113,7 +113,9 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions:
+partitions: 
+    - ano 
+    - sigla_uf
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -136,7 +138,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false
+      is_partition: true
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
@@ -151,7 +153,7 @@ columns:
       has_sensitive_data: no
       observations:
       is_in_staging: true
-      is_partition: false
+      is_partition: true
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
