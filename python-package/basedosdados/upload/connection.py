@@ -6,25 +6,30 @@ Module for managing BigQuery Connections.
 from typing import Union
 
 import google.auth
-from google.cloud import bigquery_connection_v1
 from google.cloud.bigquery_connection_v1.types import CloudResourceProperties
-from google.cloud.bigquery_connection_v1.types.connection import Connection as BQConnection
+from google.cloud.bigquery_connection_v1.types.connection import (
+    Connection as BQConnection,
+    CreateConnectionRequest,
+    DeleteConnectionRequest,
+    GetConnectionRequest,
+)
 
 from basedosdados.upload.base import Base
+
 
 class Connection(Base):
     """
     Manages BigQuery Connections.
     """
 
-    def __init__ ( # pylint: disable=too-many-arguments
+    def __init__(  # pylint: disable=too-many-arguments
         self,
         name: str,
         location: str = None,
         mode: str = "staging",
         friendly_name: str = None,
         description: str = None,
-        **kwargs
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self._name = name
@@ -32,7 +37,7 @@ class Connection(Base):
         self._mode = mode
         self._friendly_name = friendly_name
         self._description = description
-        self._project = self.config['gcloud-projects'][self._mode]['name']
+        self._project = self.config["gcloud-projects"][self._mode]["name"]
         self._parent = f"projects/{self._project}/locations/{self._location}"
 
     @property
@@ -50,9 +55,7 @@ class Connection(Base):
         Returns connection object.
         """
         client = self.client[f"bigquery_connection_{self._mode}"]
-        request = bigquery_connection_v1.GetConnectionRequest(
-            name=f"{self._parent}/connections/{self._name}"
-        )
+        request = GetConnectionRequest(name=f"{self._parent}/connections/{self._name}")
         try:
             return client.get_connection(request=request)
         except google.api_core.exceptions.NotFound:
@@ -76,7 +79,7 @@ class Connection(Base):
         """
         conn = self.connection
         if conn:
-            return conn.cloud_resource.service_account_id # pylint: disable=no-member
+            return conn.cloud_resource.service_account_id  # pylint: disable=no-member
         raise ValueError("Connection does not exist.")
 
     def create(self):
@@ -84,15 +87,15 @@ class Connection(Base):
         Creates a new connection.
         """
         client = self.client[f"bigquery_connection_{self._mode}"]
-        request = bigquery_connection_v1.CreateConnectionRequest(
+        request = CreateConnectionRequest(
             parent=self._parent,
             connection_id=self._name,
-            connection=bigquery_connection_v1.Connection(
+            connection=BQConnection(
                 name=self._name,
                 friendly_name=self._friendly_name or self._name,
                 description=self._description or self._name,
                 cloud_resource=CloudResourceProperties(),
-            )
+            ),
         )
         client.create_connection(request=request)
 
@@ -139,7 +142,7 @@ class Connection(Base):
         """
         self.revoke_biglake_permissions()
         client = self.client[f"bigquery_connection_{self._mode}"]
-        request = bigquery_connection_v1.DeleteConnectionRequest(
+        request = DeleteConnectionRequest(
             name=f"{self._parent}/connections/{self._name}"
         )
         client.delete_connection(request=request)
