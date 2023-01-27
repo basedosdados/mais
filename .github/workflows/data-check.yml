@@ -59,7 +59,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install basedosdados==1.6.9 pyarrow pytest toml
+          pip install basedosdados==1.6.10 pyarrow pytest toml
       - name: Set up base dos dados environment
         shell: bash
         env:

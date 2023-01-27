@@ -185,7 +185,7 @@ def test_change_path_credentials(storage, sample_data):
 
     os.system(f"mkdir {home}/.testcredentials")
     os.system(f"mv -r {home}/.basedosdados/* .testcredentials")
-    os.system("sed -i 's/\/.basedosdados\//\/.testcredentials\//g' config.toml")
+    os.system("sed -i 's/\/.basedosdados\//\/.testcredentials\//g' config.toml")  # pylint: disable=W1401
 
     bd.config.project_config_path = f"{home}/.testcredentials"
 
@@ -207,7 +207,7 @@ def test_change_path_credentials(storage, sample_data):
     # move again .basedosdados folder
     os.system(f"mv -r {home}/.testcredentials/* .basedosdados")
     # replace path in config.toml
-    os.system("sed -i 's/\/.testcredentials\//\/.basedosdados\//g' config.toml")
+    os.system("sed -i 's/\/.testcredentials\//\/.basedosdados\//g' config.toml")  # pylint: disable=W1401
 
     os.system(f"rm -r {home}/.testcredentials")
 

@@ -502,7 +502,7 @@ def test_create_if_force_columns_true(testdir):
         force_columns=True,
     )
 
-    assert tb.table_config["columns"][0]["description"] is None
+    assert tb.table_config['columns'][0]['description'] is None
 
 
 def test_create_if_force_columns_false(testdir):
@@ -533,7 +533,11 @@ def test_create_if_force_columns_false(testdir):
         force_columns=False,
     )
 
+<<<<<<< HEAD
     assert tb.table_config["columns"][0]["description"] == "Nome"
+=======
+    assert tb.table_config['columns'][0]['description']=='Nome'
+>>>>>>> cb7721e2300e8e0cdeac65f3aa0b839b64ae2fb3
 
 
 def test_create_auto_partitions(testdir, data_csv_path, sample_data):
