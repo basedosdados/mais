@@ -244,7 +244,7 @@ class Storage(Base):
         filename="*",
         savepath=".",
         partitions=None,
-        mode="raw",
+        mode="staging",
         if_not_exists="raise",
     ):
 
