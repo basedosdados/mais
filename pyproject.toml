@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mais"
-version = "0.1.0"
+version = "1.6.11-b1"
 description = "Dependências do BD+, retiradas do pacote python"
 authors = ["Mauricio Fagundes <mauricio.fagundes@gmail.com>"]
 readme = "README.md"
