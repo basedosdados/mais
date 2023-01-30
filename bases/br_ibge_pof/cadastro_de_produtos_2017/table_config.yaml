@@ -109,7 +109,7 @@ columns:
       bigquery_type: string
       description: Número do quadro que o item de despesa/aquisição foi registrado
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -124,7 +124,7 @@ columns:
       bigquery_type: string
       description: Código de 5 dígitos do item
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -139,7 +139,7 @@ columns:
       bigquery_type: string
       description: Código de 7 dígitos do item
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -154,6 +154,7 @@ columns:
       bigquery_type:
       description:
       temporal_coverage:
+          - (1)
       covered_by_dictionary:
       directory_column:
           dataset_id:
@@ -168,7 +169,7 @@ columns:
       bigquery_type: string
       description: Descrição do produto
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -183,7 +184,7 @@ columns:
       bigquery_type: string
       description: Variável que representa cada item de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -198,7 +199,7 @@ columns:
       bigquery_type: string
       description: Nível 0 de desagregação dos itens de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -213,7 +214,7 @@ columns:
       bigquery_type: string
       description: Nível 1 de desagregação dos itens de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -228,7 +229,7 @@ columns:
       bigquery_type: string
       description: Nível 2 de desagregação dos itens de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -243,7 +244,7 @@ columns:
       bigquery_type: string
       description: Nível 3 de desagregação dos itens de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -258,7 +259,7 @@ columns:
       bigquery_type: string
       description: Nível 4 de desagregação dos itens de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -273,7 +274,7 @@ columns:
       bigquery_type: string
       description: Nível 5 de desagregação dos itens de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -288,7 +289,7 @@ columns:
       bigquery_type: string
       description: Nível 0 de desagregação dos itens de rendimentos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -303,7 +304,7 @@ columns:
       bigquery_type: string
       description: Nível 1 de desagregação dos itens de rendimentos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -318,7 +319,7 @@ columns:
       bigquery_type: string
       description: Nível 2 de desagregação dos itens de rendimentos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -333,7 +334,7 @@ columns:
       bigquery_type: string
       description: Nível 3 de desagregação dos itens de rendimentos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -348,7 +349,7 @@ columns:
       bigquery_type: string
       description: Nível 0 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -363,7 +364,7 @@ columns:
       bigquery_type: string
       description: Nível 1 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -378,7 +379,7 @@ columns:
       bigquery_type: string
       description: Nível 2 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -393,7 +394,7 @@ columns:
       bigquery_type: string
       description: Nível 3 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -408,7 +409,7 @@ columns:
       bigquery_type: string
       description: Nível 1 de desagregação dos itens de aquisição alimentar
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -423,7 +424,7 @@ columns:
       bigquery_type: string
       description: Nível 2 de desagregação dos itens de aquisição alimentar
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -438,7 +439,7 @@ columns:
       bigquery_type: string
       description: Nível 3 de desagregação dos itens de aquisição alimentar
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -453,7 +454,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 0 de desagregação dos itens de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -468,7 +469,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 1 de desagregação dos itens de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -483,7 +484,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 2 de desagregação dos itens de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -498,7 +499,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 3 de desagregação dos itens de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -513,7 +514,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 4 de desagregação dos itens de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -528,7 +529,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 5 de desagregação dos itens de despesa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -543,7 +544,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 0 de desagregação dos itens de rendimentos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -558,7 +559,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 1 de desagregação dos itens de rendimentos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -573,7 +574,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 2 de desagregação dos itens de rendimentos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -588,7 +589,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 3 de desagregação dos itens de rendimentos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -603,7 +604,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 0 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -618,7 +619,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 1 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -633,7 +634,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 2 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -648,7 +649,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 3 de desagregação dos itens de despesa com alimentação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -663,7 +664,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 1 de desagregação dos itens de aquisição alimentar
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -678,7 +679,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 2 de desagregação dos itens de aquisição alimentar
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -693,7 +694,7 @@ columns:
       bigquery_type: string
       description: Descrição do Nível 3 de desagregação dos itens de aquisição alimentar
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -705,6 +706,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows:
+number_rows: 13515
 
 metadata_modified:
