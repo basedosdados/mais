@@ -337,3 +337,54 @@ def fixture_default_matadata_path():
     '''
     mt = Metadata(dataset_id=DATASET_ID, table_id=TABLE_ID)
     return mt.metadata_path
+
+
+############################################################
+# Conftest por new api
+############################################################
+
+API_DATASET_ID = "dados_mestres"
+API_TABLE_ID = "bairro"
+
+
+@pytest.fixture(name="api_dataset")
+def fixture_api_dataset(testdir):
+    """
+    Fixture for the dataset class
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Dataset(dataset_id=API_DATASET_ID, metadata_path=testdir, config_path=config_path)
+
+
+@pytest.fixture(name="api_dataset_metadata_path")
+def fixture_api_dataset_metadata_path(testdir):
+    """
+    Fixture that returns the path to the dataset metadata file.
+    """
+    return Path(testdir) / API_DATASET_ID
+
+
+@pytest.fixture(name="api_table_metadata_path")
+def fixture_api_table_metadata_path(testdir):
+    """
+    Fixture that returns the path to the table metadata file.
+    """
+    return Path(testdir) / API_DATASET_ID / API_TABLE_ID
+
+
+@pytest.fixture(name="api_dataset_metadata")
+def fixture_api_dataset_metadata(testdir):
+    """
+    Fixture that returns a `Metadata` object for the dataset.
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Metadata(dataset_id=API_DATASET_ID, metadata_path=testdir, config_path=config_path)
+
+
+@pytest.fixture(name="api_table_metadata")
+def fixture_api_table_metadata(testdir):
+    """
+    Fixture that returns a `Metadata` object for the table.
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Metadata(dataset_id=API_DATASET_ID, table_id=API_TABLE_ID, metadata_path=testdir, config_path=config_path)

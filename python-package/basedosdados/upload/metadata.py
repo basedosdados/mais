@@ -6,6 +6,8 @@ from __future__ import annotations
 
 from copy import deepcopy
 from functools import lru_cache
+from typing import Tuple, Dict, Any
+
 from loguru import logger
 
 import requests
@@ -27,10 +29,13 @@ class Metadata(Base):
     def __init__(self, dataset_id, table_id=None, **kwargs):
         super().__init__(**kwargs)
 
+        self.dataset_uuid = self._get_dataset_id_from_slug(dataset_id)
+
         self.table_id = table_id
         self.dataset_id = dataset_id
 
         if self.table_id:
+            self.table_uuid = self._get_table_id_from_slug(dataset_id, table_id)
             self.dataset_metadata_obj = Metadata(self.dataset_id, **kwargs)
 
         url = "https://basedosdados.org"
@@ -57,14 +62,86 @@ class Metadata(Base):
 
     @property
     def ckan_metadata(self) -> dict:
-        """Load dataset or table metadata from Base dos Dados CKAN"""
+        """Load dataset or table metadata from Base dos Dados CKAN (DEPRECATED)"""
 
         ckan_dataset, ckan_table = self.ckan_metadata_extended
         return ckan_table or ckan_dataset
 
     @property
+    def api_metadata(self) -> dict:
+        """Load dataset or table metadata from Base dos Dados API"""
+
+        api_dataset, api_table = self.api_metadata_extended
+        return api_table or api_dataset
+
+    @property
+    def api_metadata_extended(self) -> Tuple[dict, dict]:
+        """Load dataset or table metadata from Base dos Dados API"""
+
+        query = '''
+            query ($id: ID!) {
+              allDataset(id: $id) {
+                edges{
+                  node{
+                    _id
+                    slug
+                    namePt
+                    __typename
+                    organization{
+                      _id
+                      slug
+                    }
+                    tables{
+                      edges{
+                        node{
+                          _id
+                          namePt
+                          __typename
+                          cloudTables{
+                            edges{
+                              node{
+                                id
+                                gcpTableId
+                              }
+                            }
+                          }
+                          columns{
+                            edges{
+                              node{
+                                nameEn
+                                bigqueryType{
+                                  id
+                                  name
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+        '''
+        variables = {"id": self.dataset_uuid}
+        api_response = requests.post(self.api_graphql, json={"query": query, "variables": variables}, timeout=90).json()
+        dataset = api_response.get("data", {}).get("allDataset", {}).get("edges", [{}])[0].get("node", {})
+        # tables = dataset.get("tables", {}).get("edges", [])
+        if len(dataset) == 0:
+            return {}, {}
+
+        if self.table_uuid:
+            for table in dataset["tables"]["edges"]:
+                if table["node"]["_id"] == self.table_uuid:
+                    return dataset, table["node"]
+
+        return dataset, {}
+
+
+    @property
     def ckan_metadata_extended(self) -> dict:
-        """Load dataset and table metadata from Base dos Dados CKAN"""
+        """Load dataset and table metadata from Base dos Dados CKAN" (DEPRECATED)"""
 
         dataset_id = self.dataset_id.replace("_", "-")
         url = f"{self.CKAN_URL}/api/3/action/package_show?id={dataset_id}"
@@ -113,8 +190,73 @@ class Metadata(Base):
         return owner_org
 
     @property
+    def api_data_dict(self) -> Dict[str, Any]:
+        """Helper function that structures local metadata"""
+
+        api_dataset, api_table = self.api_metadata_extended
+
+        metadata = {
+            "id": self.dataset_uuid,
+            "name": api_dataset.get("namePt"),
+            "namePt": api_dataset.get("namePt"),
+            "type": api_dataset.get("_typename"),
+            "title": self.local_metadata.get("title"),
+            "private": False,  # TODO: check public/private
+            "owner_org": api_dataset.get("organization", {}).get("_id"),
+            "resources": [],  #TODO: how to handle resources?
+            "groups": [
+                {"name": group} for group in self.local_metadata.get("groups", []) or []
+            ],  #TODO: this is specific to CKAN?
+            "tags": [
+                {"name": tag} for tag in self.local_metadata.get("tags", []) or []
+            ], # TODO: not implemented yet
+            "organization": {"name": self.local_metadata.get("organization")},
+            "description": api_dataset.get("description"),  # TODO: not implemented yet
+            "ckan_url": None,  #TODO: change for the new url
+            "github_url": None,  #TODO: change for the new url
+            "tables": [],
+        }
+
+        if self.table_id:
+            metadata["tables"].append(
+                {
+                    "id": self.table_uuid,
+                    "description": api_table.get("description"),
+                    "namePt": self.local_metadata.get("namePt"),
+                    "name": api_table.get("title"),
+                    "resource_type": api_table.get("__typename"),
+                    "version": api_table.get("version"),  # TODO: not implemented yet
+                    "dataset_id": self.dataset_id,  # TODO: check if is id or uuid
+                    "table_id": self.table_id,  #TODO: check if is id or uuid
+                    "spacial_coverage": api_table.get("spacialCoverage"),  # TODO: not implemented yet
+                    "temporal_coverage": api_table.get("temporalCoverage"),  # TODO: not implemented yet
+                    "update_frequency": api_table.get("updateFrequency"),  # TODO: not implemented yet
+                    "observation_level": api_table.get("observationLevel"),  # TODO: not implemented yet
+                    "last_updated": api_table.get("updatedAt"),
+                    "published_by": api_table.get("publishedBy"),  # TODO: not implemented yet
+                    "data_cleaned_by": api_table.get("dataCleanedBy"),  # TODO: not implemented yet
+                    "data_cleaning_description": api_table.get("dataCleaningDescription"),  # TODO: not implemented yet
+                    "data_cleaning_code_url": api_table.get("dataCleaningCodeUrl"),  # TODO: not implemented yet
+                    "partner_organization": api_table.get("partnerOrganization"),  # TODO: not implemented yet
+                    "raw_files_url": api_table.get("rawFilesUrl"),  # TODO: not implemented yet
+                    "auxiliary_files_url": api_table.get("auxiliaryFilesUrl"),  # TODO: not implemented yet
+                    "architecture_url": api_table.get("architectureUrl"),  # TODO: not implemented yet
+                    "source_bucket_name": api_table.get("sourceBucketName"),  # TODO: not implemented yet
+                    "proect_id_prod": api_table.get("projectIdProd"),  # TODO: not implemented yet
+                    "project_id_staging": api_table.get("projectIdStaging"),  # TODO: not implemented yet
+                    "partitions": api_table.get("partitions"),  # TODO: not implemented yet
+                    "uncompressed_file_size": api_table.get("uncompressedFileSize"),  # TODO: not implemented yet
+                    "compressed_file_size": api_table.get("compressedFileSize"),  # TODO: not implemented yet
+                    "metadata_modified": api_table.get("metadataModified"),  # TODO: not implemented yet
+                    "package_id": self.dataset_id,  # TODO: check if is id or uuid
+                    "columns": api_table.get("columns"),
+                }
+            )
+
+        return metadata
+    @property
     def ckan_data_dict(self) -> dict:
-        """Helper function that structures local metadata for validation"""
+        """Helper function that structures local metadata for validation (DEPRECATED)"""
 
         ckan_dataset, ckan_table = self.ckan_metadata_extended
 
@@ -202,7 +344,7 @@ class Metadata(Base):
     @property
     @lru_cache(256)
     def columns_schema(self) -> dict:
-        """Returns a dictionary with the schema of the columns"""
+        """Returns a dictionary with the schema of the columns (DEPRECATED)"""
 
         url = f"{self.CKAN_URL}/api/3/action/bd_bdm_columns_schema"
 
@@ -211,7 +353,7 @@ class Metadata(Base):
     @property
     @lru_cache(256)
     def metadata_schema(self) -> dict:
-        """Get metadata schema from CKAN API endpoint"""
+        """Get metadata schema from CKAN API endpoint (DEPRECATED)"""
 
         if self.table_id:
             table_url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_schema"
