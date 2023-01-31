@@ -1,0 +1,1377 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_me_clima_organizacional
+
+table_id: microdados
+
+# Título da tabela.
+title: Microdados
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: A tabela fornece informações sobre o bem-estar organizacional, contendo
+    a visão da área e da empresa acerca das perguntas realizadas para todos os servidores
+    civis públicos federais da Administração Pública Federal direta, autárquica e
+    fundacional, abordadas por meio de diferentes recortes de classes e subclasses,
+    considerando quebras de idade, gênero, órgão, entre outros.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+    - 2020
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: unique
+
+# Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+    - entity: other
+      columns:
+          - area_empresa
+    - entity: item
+      columns:
+          - subclasse
+
+last_updated:
+    metadata: '2023-01-24'
+    data: '2023-01-24 11:30:13'
+    release: '2023-01-24 11:30:33'
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplos: v1.0, v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Gabrielle Carvalho
+    email: gabrielle.carvalho@basedosdados.org
+    github_user: gabrielle-carv
+    ckan_user: gabs_carvalho
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Gabrielle Carvalho
+    email: gabrielle.carvalho@basedosdados.org
+    github_user: gabrielle-carv
+    ckan_user: gabs_carvalho
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Pivotagem da tabela, agregação dos recortes fornecidos
+    por classe e subclasse e padronização das variáveis seguindo as normas da BD.
+
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_clima_organizacional/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: República.org
+    organization_id: republica-org
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: classe
+      bigquery_type: string
+      description: Classe a quem a pergunta é atribuída, incluindo quebras de idade,
+          gênero, órgão e etc.
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: As classes incluem quebras de Médias, Idade, Gênero, Unidade
+          da Federação, Tempo de trabalho no orgão, Cor/Etnia, Escolaridade, Quantidade
+          de oportunidade para desenvolver novas e melhores formas de trabalhar, Função,
+          Órgão
+      is_in_staging: true
+      is_partition: false
+    - name: subclasse
+      bigquery_type: string
+      description: Subclasse a quem a pergunta é atribuída, relacionadas as subquebras
+          de cada classe respectivamente
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: area_empresa
+      bigquery_type: string
+      description: Visão em que as respostas são analisadas, via empresa ou área
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: quantidade_resposta
+      bigquery_type: int64
+      description: Número de respostas
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Os valores apresentados correspondem à quantidade de funcionários
+          que responderam
+      is_in_staging: true
+      is_partition: false
+    - name: media_geral
+      bigquery_type: float64
+      description: Média Geral
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Valores não divulgados quando a quantidade de respondentes é menor
+          que 5
+      is_in_staging: true
+      is_partition: false
+    - name: credibilidade
+      bigquery_type: float64
+      description: Média da área - Credibilidade
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: respeito
+      bigquery_type: float64
+      description: Média da área - Respeito
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: imparcialidade
+      bigquery_type: float64
+      description: Média da área - Imparcialidade
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: orgulho
+      bigquery_type: float64
+      description: Média da área - Orgulho
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: camaradagem
+      bigquery_type: float64
+      description: Média da área - Camaradagem
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestao
+      bigquery_type: float64
+      description: Média da área - Gestão (GPTW)
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: adicionais
+      bigquery_type: float64
+      description: Média da área - Adicionais
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_atualizacao_informacao
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - Os gestores me mantêm
+          informado sobre assuntos importantes e sobre mudanças na organização
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_expectativa_clara
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - Os gestores deixam
+          claras suas expectativas
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_resposta_direta
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - Posso fazer qualquer
+          pergunta razoável aos gestores e obter respostas diretas
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_facil_proximidade
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - É fácil se aproximar
+          dos gestores e é também fácil falar com eles
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_competente
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - Os gestores são competentes
+          para tocar as atividades
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_boa_selecao
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - Os gestores selecionam
+          pessoas que se enquadram bem aqui
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_coordenacao_tarefa
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - Os gestores sabem coordenar
+          pessoas e distribuir tarefas adequadamente
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_confianca_trabalho
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - Os gestores confiam
+          que as pessoas fazem um bom trabalho sem precisar controlá-las
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_autonomia
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - Os gestores aqui dão
+          autonomia às pessoas
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_visao_clara
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - Os gestores têm uma
+          visão clara para onde estamos indo e como fazer para chegar lá
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_cumprimento_promessa
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - Os gestores cumprem
+          o que prometem
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_coerencia_acao
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - Os gestores agem de
+          acordo com o que falam
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_honestidade_etica
+      bigquery_type: float64
+      description: Nota da pergunta na área de Credibilidade - Os gestores são honestos
+          e éticos na condução das atividades
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: oferta_desenvolvimento_profissional
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - A organização me oferece
+          treinamento ou outras formas de desenvolvimento para o meu crescimento profissional
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: equipamento_necessario_fornecido
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - Eu recebo os equipamentos
+          e recursos necessários para realizar meu trabalho
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_agradecimento
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - Os gestores agradecem o
+          bom trabalho e o esforço extra
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_compreensao_erro
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - Os gestores reconhecem erros
+          não intencionais como parte das atividades
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_incentivo_ideia
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - Os gestores incentivam ideias
+          e sugestões e as levam em consideração de forma sincera
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_envolvimento_decisao
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - Os gestores envolvem as
+          pessoas em decisões que afetam suas atividades e seu ambiente de trabalho
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ambiente_fisicamente_seguro
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - Este é um lugar fisicamente
+          seguro para trabalhar
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ambiente_psicologicamente_saudavel
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - Este é um lugar psicológica
+          e emocionalmente saudável para trabalhar
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: instalacao_bom_ambiente
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - Nossas instalações contribuem
+          para um bom ambiente de trabalho
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: possibilidade_ausentar
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - Posso me ausentar do trabalho
+          quando necessário
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: equilibrio_profissional_pessoal
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - As pessoas são encorajadas
+          a equilibrar sua vida profissional e pessoal
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_interesse_pessoal
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - Os gestores mostram interesse
+          sincero por mim como pessoa e não somente como servidor
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: beneficio_diferenciado
+      bigquery_type: float64
+      description: Nota da pergunta na área de Respeito - Temos benefícios especiais
+          e diferenciados aqui
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: remuneracao_adequada
+      bigquery_type: float64
+      description: Nota da pergunta na área de Imparcialidade - As pessoas aqui são
+          pagas adequadamente pelo serviço que fazem
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: oportunidade_reconhecimento
+      bigquery_type: float64
+      description: Nota da pergunta na área de Imparcialidade - Todos aqui têm a oportunidade
+          de receber um reconhecimento especial
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: importancia_posicao_neutra
+      bigquery_type: float64
+      description: Nota da pergunta na área de Imparcialidade - Eu sou considerado
+          importante independentemente de minha posição na organização
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: promocao_merito
+      bigquery_type: float64
+      description: Nota da pergunta na área de Imparcialidade - As promoções são dadas
+          às pessoas que realmente mais merecem
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_sem_favoritismo
+      bigquery_type: float64
+      description: Nota da pergunta na área de Imparcialidade - Os gestores evitam
+          o favoritismo
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: evitar_intriga
+      bigquery_type: float64
+      description: Nota da pergunta na área de Imparcialidade - As pessoas evitam
+          fazer "politicagem" e intrigas como forma de obter resultados
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tratada_bem_idade
+      bigquery_type: float64
+      description: Nota da pergunta na área de Imparcialidade - As pessoas aqui são
+          bem tratadas independentemente de sua idade
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tratada_bem_etnia_raca
+      bigquery_type: float64
+      description: Nota da pergunta na área de Imparcialidade - As pessoas aqui são
+          bem tratadas independentemente de sua cor ou etnia
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tratada_bem_genero
+      bigquery_type: float64
+      description: Nota da pergunta na área de Imparcialidade - As pessoas aqui são
+          bem tratadas independentemente de seu gênero
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tratada_bem_orientacao_sexual
+      bigquery_type: float64
+      description: Nota da pergunta na área de Imparcialidade - As pessoas aqui são
+          bem tratadas independentemente de sua orientação sexual
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ser_ouvido_efetivamente
+      bigquery_type: float64
+      description: Nota da pergunta na área de Imparcialidade - Se eu for tratado
+          injustamente, acredito que serei ouvido e acabarei recebendo um tratamento
+          justo
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: disposicao_trabalho
+      bigquery_type: float64
+      description: Nota da pergunta na área de Orgulho - As pessoas aqui estão dispostas
+          a dar mais de si para concluir um trabalho
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: continuar_trabalho
+      bigquery_type: float64
+      description: Nota da pergunta na área de Orgulho - Pretendo trabalhar aqui por
+          muito tempo
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: vontade_trabalho
+      bigquery_type: float64
+      description: Nota da pergunta na área de Orgulho - As pessoas aqui têm vontade
+          de vir para o trabalho
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: realizacao_contribuicao_comunidade
+      bigquery_type: float64
+      description: Nota da pergunta na área de Orgulho - Eu me sinto bem com a forma
+          pela qual contribuímos para a comunidade
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: liberdade_ser
+      bigquery_type: float64
+      description: Nota da pergunta na área de Camaradagem - Posso ser eu mesmo por
+          aqui
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: outra_pessoa_importa
+      bigquery_type: float64
+      description: Nota da pergunta na área de Camaradagem - Aqui as pessoas se importam
+          umas com as outras
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ambiente_descontraido
+      bigquery_type: float64
+      description: Nota da pergunta na área de Camaradagem - Este é um lugar descontraído
+          para trabalhar
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acolhimento_entrada
+      bigquery_type: float64
+      description: Nota da pergunta na área de Camaradagem - Quando se entra nesta
+          organização, fazem você se sentir bem-vindo
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: acolhimento_mudanca_funcao
+      bigquery_type: float64
+      description: Nota da pergunta na área de Camaradagem - Quando as pessoas mudam
+          de função ou de área, a organização faz com que se sintam rapidamente "em
+          casa"
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sentimento_equipe
+      bigquery_type: float64
+      description: Nota da pergunta na área de Camaradagem - Existe um sentimento
+          de equipe por aqui
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: grupo_colaborativo
+      bigquery_type: float64
+      description: Nota da pergunta na área de Camaradagem - Pode-se contar com a
+          colaboração das pessoas por aqui
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ambiente_excelente_trabalho
+      bigquery_type: float64
+      description: Nota da pergunta na área de Gestão - Levando-se tudo em conta,
+          eu diria que este é um excelente lugar para trabalhar
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: gestor_representa_orgao
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Nossos gestores representam
+          plenamente os valores e comportamentos de nosso órgão
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: valoriza_inovacao
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Nós valorizamos pessoas
+          que tentam fazer as coisas de formas novas e melhores, independentemente
+          do resultado alcançado
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: adaptacao_rapida_mudanca
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Aqui, as pessoas se adaptam
+          rapidamente às mudanças que são necessárias para o sucesso do órgão
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: recomendacao_trabalho_orgao
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Com certeza, eu recomendaria
+          meu órgão para amigos e família como um excelente lugar para trabalhar
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: produto_classificado_excelente
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Nosso público-alvo classifica
+          nossos serviços e/ou produtos como excelente
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: entrega_alta_qualidade
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Este órgão entrega ao
+          seu público-alvo aquilo que promete com alta qualidade
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tratada_bem_deficiencia
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - As pessoas aqui são bem
+          tratadas independentemente de serem pessoas com deficiência
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: trabalho_satisfacao_geral
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - De maneira geral, eu estou
+          satisfeito com meu trabalho.
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: trabalho_inspira
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Meu trabalho me inspira.
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: trabalho_realizacao
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - O trabalho que desempenho
+          me dá o sentimento de realização
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: conexao_pessoal_orgao
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Eu sinto uma forte conexão
+          pessoal com meu órgão
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: identificacao_missao_orgao
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Me identifico com a missão
+          do meu órgão
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: contribuicao_bem_comum
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - É importante para mim
+          que meu trabalho contribua para o bem comum
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: orgao_preocupacao_acessibilidade
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Acredito que este órgão
+          se preocupa com a acessibilidade das pessoas com deficiência
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: entidade_representativa
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Eu me sinto representado
+          por minha entidade representativa
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: clareza_competencia_geral
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Estão claras as competências
+          gerais que todos os servidores devem possuir
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: avaliacao_desempenho_justa
+      bigquery_type: float64
+      description: Nota da pergunta na área de Adicionais - Acredito que as avaliações
+          de desempenho, de modo geral, são justas e refletem genuinamente o desempenho
+          do avaliado
+      temporal_coverage:
+          - 2020
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 16436
+
+metadata_modified:
