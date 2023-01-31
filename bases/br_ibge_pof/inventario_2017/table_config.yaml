@@ -112,7 +112,7 @@ columns:
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -127,7 +127,7 @@ columns:
       bigquery_type: string
       description: Situação do Domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -142,7 +142,7 @@ columns:
       bigquery_type: string
       description: Identificador dos estratos do plano amostral da pesquisa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -157,7 +157,7 @@ columns:
       bigquery_type: string
       description: Código da Unidade Primária de Amostragem
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -172,7 +172,7 @@ columns:
       bigquery_type: string
       description: Identificador do Domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -187,7 +187,7 @@ columns:
       bigquery_type: string
       description: Identificador da Unidade de Consumo
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -202,7 +202,7 @@ columns:
       bigquery_type: string
       description: Número do quadro que o item de despesa/aquisição foi registrado
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -217,7 +217,7 @@ columns:
       bigquery_type: string
       description: Código de 5 dígitos do item
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -232,7 +232,7 @@ columns:
       bigquery_type: string
       description: Código do tipo de bem durável
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -247,7 +247,7 @@ columns:
       bigquery_type: int64
       description: Quantidade do bem durável existente no domicílio principal da UC
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -262,7 +262,7 @@ columns:
       bigquery_type: string
       description: Forma de aquisição do bem durável
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -277,7 +277,7 @@ columns:
       bigquery_type: int64
       description: Ano da última aquisição do bem durável
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -292,7 +292,7 @@ columns:
       bigquery_type: string
       description: Estado da última aquisição do bem durável
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -308,7 +308,7 @@ columns:
       description: Fator de expansão atribuído ao domicílio pertencente a uma Unidade
           Primária de Amostragem
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -325,7 +325,7 @@ columns:
           de 15 de janeiro de 2018, segundo cada Unidade da Federação e pós estratos
           definidos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:

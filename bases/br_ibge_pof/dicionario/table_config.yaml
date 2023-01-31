@@ -105,7 +105,7 @@ columns:
       bigquery_type: string
       description: Identificador da Tabela
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -120,7 +120,7 @@ columns:
       bigquery_type: string
       description: Nome da Coluna
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -135,7 +135,7 @@ columns:
       bigquery_type: string
       description: Chave presente na tabela da BD
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -150,7 +150,7 @@ columns:
       bigquery_type: string
       description: Cobertura Temporal da Variável
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -165,7 +165,7 @@ columns:
       bigquery_type: string
       description: Valor que corresponde à chave presente na tabela da BD
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:

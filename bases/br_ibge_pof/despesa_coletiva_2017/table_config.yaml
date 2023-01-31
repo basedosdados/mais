@@ -113,7 +113,7 @@ columns:
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -128,7 +128,7 @@ columns:
       bigquery_type: string
       description: Situação do Domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -143,7 +143,7 @@ columns:
       bigquery_type: string
       description: Identificador dos estratos do plano amostral da pesquisa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -158,7 +158,7 @@ columns:
       bigquery_type: string
       description: Código da Unidade Primária de Amostragem
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -173,7 +173,7 @@ columns:
       bigquery_type: string
       description: Identificador do Domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -188,7 +188,7 @@ columns:
       bigquery_type: string
       description: Identificador da Unidade de Consumo
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -203,7 +203,7 @@ columns:
       bigquery_type: string
       description: Número do quadro que o item de despesa/aquisição foi registrado
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -218,7 +218,7 @@ columns:
       bigquery_type: string
       description: Código de 5 dígitos do item
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -233,7 +233,7 @@ columns:
       bigquery_type: string
       description: Código de 7 dígitos do item
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -248,7 +248,7 @@ columns:
       bigquery_type: string
       description: Código do tipo de despesa/aquisição
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -263,7 +263,7 @@ columns:
       bigquery_type: string
       description: Forma de aquisição
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -278,7 +278,7 @@ columns:
       bigquery_type: string
       description: Código do local de aquisição
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -293,7 +293,7 @@ columns:
       bigquery_type: int64
       description: Quantidade final consumida em kwh, apenas para o item energia elétrica
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -309,7 +309,7 @@ columns:
       description: Último mês que a respectiva despesa/aquisição foi realizada pela
           Unidade de Consumo, no período de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -325,7 +325,7 @@ columns:
       description: Número de meses que a despesa/aquisição foi realizada pela Unidade
           de Consumo, no período de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -341,7 +341,7 @@ columns:
       description: Estado do produto adquirido pela Unidade de Consumo, no período
           de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -357,7 +357,7 @@ columns:
       description: Tipo de serviço doméstico contratado pela Unidade de Consumo, no
           período de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -372,7 +372,7 @@ columns:
       bigquery_type: int64
       description: Indica se o valor da despesa/aquisição foi imputado
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -387,7 +387,7 @@ columns:
       bigquery_type: int64
       description: Indica se a quantidade consumida em kwh foi imputada
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -403,7 +403,7 @@ columns:
       description: Número utilizado para anualizar as despesas/aquisições, em função
           do período de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -419,7 +419,7 @@ columns:
       description: Fator de multiplicação para o tratamento do efeito inflacionário (Data de Referência - 5 de janeiro de 2018)
           sobre os valores monetários e não monetários
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -435,7 +435,7 @@ columns:
       description: Valor da despesa/aquisição realizada pela Unidade de Consumo no
           período de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -451,7 +451,7 @@ columns:
       description: Valor da despesa com "INSS e Outras Contribuições Recolhidas" realizada
           pela Unidade de Consumo, no período de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -466,7 +466,7 @@ columns:
       bigquery_type: float64
       description: Valor da despesa/aquisição deflacionado (Data de Referência - 5 de janeiro de 2018)
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -481,7 +481,7 @@ columns:
       bigquery_type: float64
       description: Valor da despesa com "INSS e Outras Contribuições Recolhidas" deflacionado (Data de Referência - 5 de janeiro de 2018)
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -496,7 +496,7 @@ columns:
       bigquery_type: float64
       description: Valor do rendimento bruto total mensal da Unidade de Consumo
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -512,7 +512,7 @@ columns:
       description: Fator de expansão atribuído ao domicílio pertencente a uma Unidade
           Primária de Amostragem
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -528,7 +528,7 @@ columns:
       description: Fator de expansão (peso) ajustado às estimativas populacionais
           de 15 de janeiro de 2018, segundo cada UF e pós estratos definidos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:

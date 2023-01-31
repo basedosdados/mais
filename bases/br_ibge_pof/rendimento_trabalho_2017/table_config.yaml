@@ -113,7 +113,7 @@ columns:
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -128,7 +128,7 @@ columns:
       bigquery_type: string
       description: Situação do Domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -143,7 +143,7 @@ columns:
       bigquery_type: string
       description: Identificador dos estratos do plano amostral da pesquisa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -158,7 +158,7 @@ columns:
       bigquery_type: string
       description: Código da Unidade Primária de Amostragem
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -173,7 +173,7 @@ columns:
       bigquery_type: string
       description: Identificador do Domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -188,7 +188,7 @@ columns:
       bigquery_type: string
       description: Identificador da Unidade de Consumo
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -203,7 +203,7 @@ columns:
       bigquery_type: string
       description: Indicador do Informante
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -218,7 +218,7 @@ columns:
       bigquery_type: string
       description: Número do quadro que o item de despesa/aquisição foi registrado
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -234,7 +234,7 @@ columns:
       description: Identifica o tipo de trabalho que o informante exerceu, no período
           de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -249,7 +249,7 @@ columns:
       bigquery_type: string
       description: Código de 5 dígitos do item
       temporal_coverage:
-          - 2017-2019
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -264,7 +264,7 @@ columns:
       bigquery_type: string
       description: Código do tipo de rendimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -279,7 +279,7 @@ columns:
       bigquery_type: string
       description: Identificador do tipo de trabalho do informante
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -295,7 +295,7 @@ columns:
       description: Identificador do tipo de trabalhador não remunerado em ajuda a
           membro do domicílio ou parente
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -310,7 +310,7 @@ columns:
       bigquery_type: string
       description: Identifica se o informante era servidor público estatutário
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -325,7 +325,7 @@ columns:
       bigquery_type: string
       description: Identifica se o informante tinha carteira de trabalho assinada
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -340,7 +340,7 @@ columns:
       bigquery_type: string
       description: Identifica se o informante era contribuinte de instituto de previdência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -356,7 +356,7 @@ columns:
       description: Identifica a forma de pagamento do último rendimento bruto mensal
           recebido no trabalho
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -371,7 +371,7 @@ columns:
       bigquery_type: int64
       description: Quantidade de horas trabalhadas, normalmente, por semana, no trabalho
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -386,7 +386,7 @@ columns:
       bigquery_type: string
       description: Duração habitual do deslocamento para o trabalho
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -402,7 +402,7 @@ columns:
       description: Último mês que o rendimento foi recebido pelo informante, no período
           de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -418,7 +418,7 @@ columns:
       description: Número de meses que o rendimento foi recebido pelo informante,
           no período de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -433,7 +433,7 @@ columns:
       bigquery_type: string
       description: Código da ocupação que o informante exercia habitualmente no trabalho
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id: 
@@ -448,7 +448,7 @@ columns:
       bigquery_type: string
       description: Código da principal atividade exercida no trabalho (CNAE 2.0)
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -463,7 +463,7 @@ columns:
       bigquery_type: int64
       description: Indica se o valor do rendimento foi imputado
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -479,7 +479,7 @@ columns:
       description: Número utilizado para anualizar as despesas/aquisições, em função
           do período de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -495,7 +495,7 @@ columns:
       description: Fator de multiplicação para o tratamento do efeito inflacionário (Data de Referência - 5 de janeiro de 2018)
           sobre os valores monetários e não monetários
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -511,7 +511,7 @@ columns:
       description: Valor do rendimento bruto recebido pelo informante no período de
           referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -527,7 +527,7 @@ columns:
       description: Valor da dedução com previdência pública que incide sobre o rendimento
           recebido pelo informante, no período de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -543,7 +543,7 @@ columns:
       description: Valor da dedução com imposto de renda que incide sobre o rendimento
           recebido pelo informante, no período de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -559,7 +559,7 @@ columns:
       description: Valor da dedução com ISS e outros impostos que incide sobre o rendimento
           recebido pelo informante, no período de referência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -574,7 +574,7 @@ columns:
       bigquery_type: float64
       description: Valor do rendimento deflacionado (Data de Referência - 5 de janeiro de 2018)
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -589,7 +589,7 @@ columns:
       bigquery_type: float64
       description: Valor da dedução com previdência pública deflacionado (Data de Referência - 5 de janeiro de 2018)
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -604,7 +604,7 @@ columns:
       bigquery_type: float64
       description: Valor da deduçao com imposto de renda deflacionado (Data de Referência - 5 de janeiro de 2018)
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -619,7 +619,7 @@ columns:
       bigquery_type: float64
       description: Valor da dedução com ISS e outros impostos deflacionado (Data de Referência - 5 de janeiro de 2018)
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -634,7 +634,7 @@ columns:
       bigquery_type: float64
       description: Valor do rendimento bruto total mensal da Unidade de Consumo
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -650,7 +650,7 @@ columns:
       description: Fator de expansão atribuído ao domicílio pertencente a uma Unidade
           Primária de Amostragem
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -666,7 +666,7 @@ columns:
       description: Fator de expansão (peso) ajustado às estimativas populacionais
           de 15 de janeiro de 2018, segundo cada UF e pós estratos definidos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:

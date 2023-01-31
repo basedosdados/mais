@@ -112,7 +112,7 @@ columns:
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -127,7 +127,7 @@ columns:
       bigquery_type: string
       description: Situação do Domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -142,7 +142,7 @@ columns:
       bigquery_type: string
       description: Identificador dos estratos do plano amostral da pesquisa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -157,7 +157,7 @@ columns:
       bigquery_type: string
       description: Código da Unidade Primária de Amostragem
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -172,7 +172,7 @@ columns:
       bigquery_type: string
       description: Identificador do Domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -187,7 +187,7 @@ columns:
       bigquery_type: string
       description: Identificador da Unidade de Consumo
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -202,7 +202,7 @@ columns:
       bigquery_type: string
       description: Identificador do Informante
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -217,7 +217,7 @@ columns:
       bigquery_type: string
       description: Número do quadro que o item consumido foi registrado
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -232,7 +232,7 @@ columns:
       bigquery_type: string
       description: Código de 5 dígitos do item
       temporal_coverage:
-          - 2017-2019
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -247,7 +247,7 @@ columns:
       bigquery_type: float64
       description: Quantidade do alimento consumido, segundo a unidade de medida associada
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -262,7 +262,7 @@ columns:
       bigquery_type: string
       description: Código da unidade de medida pela qual o alimento foi consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -277,7 +277,7 @@ columns:
       bigquery_type: string
       description: Código do tipo de alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -292,7 +292,7 @@ columns:
       bigquery_type: string
       description: Horário mais próximo àquele em que se deu o consumo do alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -307,7 +307,7 @@ columns:
       bigquery_type: string
       description: Código da forma de preparação do alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -322,7 +322,7 @@ columns:
       bigquery_type: string
       description: Código da ocasião de consumo
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -337,7 +337,7 @@ columns:
       bigquery_type: string
       description: Código do local de refeição
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -352,7 +352,7 @@ columns:
       bigquery_type: int64
       description: Indica se houve adição de azeite no alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -367,7 +367,7 @@ columns:
       bigquery_type: int64
       description: Indica se houve adição de Manteiga/Margarina no alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -382,7 +382,7 @@ columns:
       bigquery_type: int64
       description: Indica se houve adição de açúcar no alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -397,7 +397,7 @@ columns:
       bigquery_type: int64
       description: Indica se houve adição de adoçante no alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -412,7 +412,7 @@ columns:
       bigquery_type: int64
       description: Indica se houve adição de mel no alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -427,7 +427,7 @@ columns:
       bigquery_type: int64
       description: Indica se houve adição de melado no alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -442,7 +442,7 @@ columns:
       bigquery_type: int64
       description: Indica se houve adição de maionese (molho) no alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -457,7 +457,7 @@ columns:
       bigquery_type: int64
       description: Indica se houve adição de ketchup no alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -472,7 +472,7 @@ columns:
       bigquery_type: int64
       description: Indica se houve adição de mostarda (molho) no alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -487,7 +487,7 @@ columns:
       bigquery_type: int64
       description: Indica se houve adição de molho shoyu no alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -502,7 +502,7 @@ columns:
       bigquery_type: int64
       description: Indica se houve adição de queijo ralado no alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -517,7 +517,7 @@ columns:
       bigquery_type: int64
       description: Indica se houve adição de creme de leite no alimento consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -533,7 +533,7 @@ columns:
       description: Código da unidade de medida imputada, efetivamente utilizada na
           construção dos resultados
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -549,7 +549,7 @@ columns:
       description: Código da forma de preparação imputada, efetivamente utilizada
           na construção dos resultados
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -564,7 +564,7 @@ columns:
       bigquery_type: float64
       description: Gramatura de cada alimento de acordo com a unidade de medida imputada
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -580,7 +580,7 @@ columns:
       description: Quantidade consumida para cada alimento de acordo com a variável
           gramatura_alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -596,7 +596,7 @@ columns:
       description: Código do alimento na tabela brasileira de composição dos alimentos
           da USP (TBCA 7.0)
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -611,7 +611,7 @@ columns:
       bigquery_type: float64
       description: Energia em Kcal
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -626,7 +626,7 @@ columns:
       bigquery_type: float64
       description: Energia em Kj
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -641,7 +641,7 @@ columns:
       bigquery_type: float64
       description: Proteínas
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -656,7 +656,7 @@ columns:
       bigquery_type: float64
       description: Carboidratos totais
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -671,7 +671,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de fibra no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -686,7 +686,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de lipidios no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -701,7 +701,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de colesterol no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -716,7 +716,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de acidos_graxos_saturados no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -731,7 +731,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de acidos_graxos_mono no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -746,7 +746,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de acidos_graxos_poli no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -761,7 +761,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de acidos_graxos_trans no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -776,7 +776,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de calcio no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -791,7 +791,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de ferro no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -806,7 +806,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de sodio no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -821,7 +821,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de magnesio no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -836,7 +836,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de fosforo no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -851,7 +851,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de potassio no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -866,7 +866,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de cobre no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -881,7 +881,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de zinco no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -896,7 +896,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de vitamina_a no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -911,7 +911,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de vitamina_b1 no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -926,7 +926,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de vitamina_b2 no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -941,7 +941,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de vitamina_b3 no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -956,7 +956,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de vitamina_b6 no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -971,7 +971,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de vitamina_b12 no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -986,7 +986,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de vitamina_d no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1001,7 +1001,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de vitamina_e no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1016,7 +1016,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de vitamina_c no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1031,7 +1031,7 @@ columns:
       bigquery_type: float64
       description: Quantidade de folato no alimento
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1046,7 +1046,7 @@ columns:
       bigquery_type: string
       description: Dia da semana que o alimento foi consumido
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -1061,7 +1061,7 @@ columns:
       bigquery_type: string
       description: Indica se foi um dia atípico da alimentação do informante
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -1076,7 +1076,7 @@ columns:
       bigquery_type: float64
       description: Fator de expansão atribuído ao domicílio pertencente a uma UPA
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1092,7 +1092,7 @@ columns:
       description: Fator de expansão (peso) ajustado às estimativas populacionais
           de 15 de janeiro de 2018, segundo cada UF e pós estratos definidos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:

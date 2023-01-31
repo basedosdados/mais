@@ -109,7 +109,7 @@ columns:
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -124,7 +124,7 @@ columns:
       bigquery_type: string
       description: Situação do Domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -139,7 +139,7 @@ columns:
       bigquery_type: string
       description: Identificador dos estratos do plano amostral da pesquisa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -154,7 +154,7 @@ columns:
       bigquery_type: string
       description: Código da Unidade Primária de Amostragem
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -169,7 +169,7 @@ columns:
       bigquery_type: string
       description: Identificador do Domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -184,7 +184,7 @@ columns:
       bigquery_type: string
       description: Identificador da Unidade de Consumo
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -199,7 +199,7 @@ columns:
       bigquery_type: string
       description: Identificador do informante
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -214,7 +214,7 @@ columns:
       bigquery_type: string
       description: Identifica se o informante utiliza tais produtos com frequência
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -230,7 +230,7 @@ columns:
       description: Identifica se o informante tem o hábito de adicionar sal ao prato
           de comida
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -246,7 +246,7 @@ columns:
       description: Identifica se o informante utilizou nos últimos 30 dias multivitaminas/complexo
           multivitaminico
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -262,7 +262,7 @@ columns:
       description: Identifica se o informante utilizou nos últimos 30 dias, ferro,
           sulfato ferroso
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -278,7 +278,7 @@ columns:
       description: Identifica se o informante utilizou nos últimos 30 dias vitaminas
           do complexo B
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -291,10 +291,9 @@ columns:
       is_partition: false
     - name: V71034
       bigquery_type: string
-      description: Identifica se o informante utilizou nos últimos 30 dias vitamina
-          C
+      description: Identifica se o informante utilizou nos últimos 30 dias vitamina C
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -310,7 +309,7 @@ columns:
       description: Identifica se o informante utilizou nos últimos 30 dias ômega 3,
           óleo de peixe
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -326,7 +325,7 @@ columns:
       description: Identifica se o informante utilizou nos últimos 30 dias cálcio,
           cálcio com vitamina
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -342,7 +341,7 @@ columns:
       description: Identifica se o informante utilizou nos últimos 30 dias proteína,
           creatina, outro suplemento para atleta
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -358,7 +357,7 @@ columns:
       description: Identifica se o informante utilizou nos últimos 30 dias outros
           suplementos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -373,7 +372,7 @@ columns:
       bigquery_type: string
       description: Identifica se o informante fez alguma dieta
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -388,7 +387,7 @@ columns:
       bigquery_type: string
       description: Identifica se a dieta foi para emagrecer
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -403,7 +402,7 @@ columns:
       bigquery_type: string
       description: Identifica se a dieta foi para pressão alta
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -418,7 +417,7 @@ columns:
       bigquery_type: string
       description: Identifica se a dieta foi para colesterol
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -433,7 +432,7 @@ columns:
       bigquery_type: string
       description: Identifica se a dieta foi para diabetes
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -448,7 +447,7 @@ columns:
       bigquery_type: string
       description: Identifica se a dieta foi para doença no coração
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -463,7 +462,7 @@ columns:
       bigquery_type: string
       description: Identifica se a dieta foi para outra necessidade
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -478,7 +477,7 @@ columns:
       bigquery_type: string
       description: Identifica se a informante está grávida
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -493,7 +492,7 @@ columns:
       bigquery_type: string
       description: Identifica se a informante está amamentando
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -508,7 +507,7 @@ columns:
       bigquery_type: int64
       description: Peso em Kg do informante
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -523,7 +522,7 @@ columns:
       bigquery_type: int64
       description: Altura em Cm do informante
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -539,7 +538,7 @@ columns:
       description: Fator de expansão atribuído ao domicílio pertencente a uma Unidade
           Primária de Amostragem
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -556,7 +555,7 @@ columns:
           de 15 de janeiro de 2018, segundo cada Unidade da Federação e pós estratos
           definidos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:

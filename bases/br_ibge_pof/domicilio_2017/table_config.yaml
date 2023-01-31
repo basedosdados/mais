@@ -109,7 +109,7 @@ columns:
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -124,7 +124,7 @@ columns:
       bigquery_type: string
       description: Situação do Domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -139,7 +139,7 @@ columns:
       bigquery_type: string
       description: Identificador dos estratos do plano amostral da pesquisa
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -154,7 +154,7 @@ columns:
       bigquery_type: string
       description: Código da Unidade Primária de Amostragem
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -169,7 +169,7 @@ columns:
       bigquery_type: string
       description: Identificador do domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -184,7 +184,7 @@ columns:
       bigquery_type: string
       description: Tipo do domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -199,7 +199,7 @@ columns:
       bigquery_type: string
       description: Material predominante na construção das paredes externas do domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -214,7 +214,7 @@ columns:
       bigquery_type: string
       description: Material predominante na cobertura (telhado) do domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -229,7 +229,7 @@ columns:
       bigquery_type: string
       description: Material predominante no piso do domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -244,7 +244,7 @@ columns:
       bigquery_type: int64
       description: Número de cômodos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -260,7 +260,7 @@ columns:
       description: Número de cômodos servindo permanentemente de dormitórios para
           os moradores do domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -275,7 +275,7 @@ columns:
       bigquery_type: string
       description: Forma principal de abastecimento de água no domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -291,7 +291,7 @@ columns:
       description: Frequência de disponibilidade de água da rede geral no últimos
           30 dias
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -306,7 +306,7 @@ columns:
       bigquery_type: string
       description: Forma de chegada da água no domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -321,7 +321,7 @@ columns:
       bigquery_type: string
       description: Presença de água canalizada aquecida por energia elétrica no domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -336,7 +336,7 @@ columns:
       bigquery_type: string
       description: Presença de água canalizada aquecida por gás no domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -351,7 +351,7 @@ columns:
       bigquery_type: string
       description: Presença de água canalizada aquecida por energia solar no domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -366,7 +366,7 @@ columns:
       bigquery_type: string
       description: Presença de água canalizada aquecida por lenha ou carvão no domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -381,7 +381,7 @@ columns:
       bigquery_type: string
       description: Presença de água canalizada aquecida por outra forma no domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -397,7 +397,7 @@ columns:
       description: Quantidade de banheiros (com chuveiro e vaso sanitário) de uso
           exclusivo dos moradores, incluindo os localizados no terreno ou na propriedade
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -413,7 +413,7 @@ columns:
       description: Quantidade de banheiros de uso comum a mais de um domicílio no
           terreno ou na propriedade
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -429,7 +429,7 @@ columns:
       description: Presença de sanitário ou buraco para dejeções, inclusive os localizados
           no terreno ou na propriedade
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -444,7 +444,7 @@ columns:
       bigquery_type: string
       description: Forma de escoamento dos banheiros, sanitários ou buracos para dejeções
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -459,7 +459,7 @@ columns:
       bigquery_type: string
       description: Principal destino dado ao lixo
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -474,7 +474,7 @@ columns:
       bigquery_type: string
       description: Presença de energia elétrica proveniente da rede geral
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -490,7 +490,7 @@ columns:
       description: Presença de energia elétrica proveniente de outra origem (gerador,
           placa solar, eólica e etc)
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -506,7 +506,7 @@ columns:
       description: Frequência de disponibilidade de água da rede geral no últimos
           30 dias
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -522,7 +522,7 @@ columns:
       description: Utilização de gás de botijão ou encanado para a preparação de alimentos
           no domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -538,7 +538,7 @@ columns:
       description: Utilização de lenha ou carvão para a preparação de alimentos no
           domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -554,7 +554,7 @@ columns:
       description: Utilização de energia elétrica para a preparação de alimentos no
           domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -570,7 +570,7 @@ columns:
       description: Utilização de outro combustível (óleo, querosene, etc) para a preparação
           de alimentos no domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -585,7 +585,7 @@ columns:
       bigquery_type: string
       description: Tipo de condição do domicílio (alugado, próprio, etc)
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -600,7 +600,7 @@ columns:
       bigquery_type: string
       description: Tipo do contrato de aluguel
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -615,7 +615,7 @@ columns:
       bigquery_type: string
       description: Presença de pavimentação na rua do domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -630,7 +630,7 @@ columns:
       bigquery_type: string
       description: Tipo de serviço de distribuição dos correios para o domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -645,7 +645,7 @@ columns:
       bigquery_type: string
       description: Situação de segurança alimentar do domicílio
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: yes
       directory_column:
           dataset_id:
@@ -660,7 +660,7 @@ columns:
       bigquery_type: float64
       description: Fator de expansão atribuído ao domicílio pertencente a uma UPA
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -676,7 +676,7 @@ columns:
       description: Fator de expansão (peso) ajustado às estimativas populacionais
           de 15 de janeiro de 2018, segundo cada UF e pós estratos definidos
       temporal_coverage:
-          - 2017(1)2018
+          - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
