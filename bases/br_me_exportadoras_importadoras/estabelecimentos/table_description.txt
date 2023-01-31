@@ -1,0 +1,52 @@
+Esta tabela apresenta o conjunto de estabalecimentos cadastrados na Receita Federal (RF), que realizaram atividades de exportação e/ou importação no ano de referência.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+Tratado por
+-----------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+
+
+
+
+Cobertura Temporal
+------------------
+- 1997(1)2021
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Renomeei colunas, corrigi nomes de município e corrigi códigos cnae.
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
