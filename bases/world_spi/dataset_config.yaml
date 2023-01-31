@@ -1,0 +1,50 @@
+
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: 
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Social Progress Index
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Se a organização não estiver na lista acima ou o nome não estiver conforme o manual de estilo
+# criar ou renomear a organização em https://basedosdados.org/organization/
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization: world-spi
+
+# Descrição do conjunto
+notes: The Social Progress Index insights visualization gives you a holistic understanding of world progress from 2011-2022, as well as a granular set of information.
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+    - economia
+    - educacao
+    - politica
+    - saude
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos:
+#    - fertilidade
+#    - preco
+#    - desmatamento
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - agua
+    - crianca
+    - ar
+    - escola
+    - mortalidade
+    - saude
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified:

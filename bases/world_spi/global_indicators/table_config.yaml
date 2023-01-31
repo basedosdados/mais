@@ -1,0 +1,1351 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: world_spi
+
+table_id: global_indicators
+
+# Título da tabela.
+title: Social Progress Index
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: The Social Progress Index insights visualization gives you a holistic understanding of world progress from 2011-2022, as well as a granular set of information.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
+    - world
+
+# Anos cobertos pela tabela.
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+    - 2011(1)2022
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: one_year
+
+# Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+    - entity: year
+      columns:
+        - year
+    - entity: country
+      columns:
+        - country 
+
+last_updated:
+    metadata: '2023-01-30'
+    data: '2023-01-30 16:25:15'
+    release: '2023-01-30 16:25:15'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplos: v1.0, v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Padronização segundo as normas da BD
+
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/word_spi/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: year
+      bigquery_type: int64
+      description: Year
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: country
+      bigquery_type: string
+      description: Country
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_mundo
+          table_id: pais
+          column_name: nome_ingles
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: country_id_iso_3
+      bigquery_type: string
+      description: Sigla do País - ISO3
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_mundo
+          table_id: pais
+          column_name: sigla_pais_iso3
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: rank
+      bigquery_type: int64
+      description: Rank
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: status
+      bigquery_type: string
+      description: Status (i.e. extra, partial, ranked)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: social_progress_index
+      bigquery_type: float64
+      description: Social Progress Index
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: basic_human_needs
+      bigquery_type: float64
+      description: Basic Human Needs
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: wellbeing
+      bigquery_type: float64
+      description: Wellbeing
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: opportunity
+      bigquery_type: float64
+      description: Opportunity
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: nutrition_basic_medical_care
+      bigquery_type: float64
+      description: Nutrition and Basic Medical Care
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: water_sanitation
+      bigquery_type: float64
+      description: Water and Sanitation
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: shelter
+      bigquery_type: float64
+      description: Shelter
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: personal_safety
+      bigquery_type: float64
+      description: Personal Safety
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: access_basic_knowledge
+      bigquery_type: float64
+      description: Access to Basic Knowledge
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: access_infomation_communication
+      bigquery_type: float64
+      description: Access to Information & Communications
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: health_wellness
+      bigquery_type: float64
+      description: Health & Wellness
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: environmental_quality
+      bigquery_type: float64
+      description: Environmental Quality
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: personal_rights
+      bigquery_type: float64
+      description: Personal Rights
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: personal_freedom_choice
+      bigquery_type: float64
+      description: Personal Freedom & Choice
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: inclusiveness
+      bigquery_type: float64
+      description: Inclusiveness
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: access_advanced_education
+      bigquery_type: float64
+      description: Access to Advanced Education
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: child_stunting
+      bigquery_type: float64
+      description: Child stunting
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = low risk; 100 = high risk
+      is_in_staging: True
+      is_partition: False
+    - name: infectious_diseases
+      bigquery_type: float64
+      description: Age-standardized Disability-Adjusted Life Years (DALYs) and other
+          infectious diseases per 100,000 people
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Age-standardized Disability-Adjusted Life Years (DALYs)
+      is_in_staging: True
+      is_partition: False
+    - name: maternal_mortality_rate
+      bigquery_type: float64
+      description: Maternal mortality rate per 100,000 live births
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Deaths/100,000 live births
+      is_in_staging: True
+      is_partition: False
+    - name: child_mortality_rate
+      bigquery_type: float64
+      description: Child mortality rate per 100,000 live births
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Deaths/1,000 live births
+      is_in_staging: True
+      is_partition: False
+    - name: undernourishment
+      bigquery_type: float64
+      description: Undernourishment
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Population percent
+      is_in_staging: True
+      is_partition: False
+    - name: diet_low_fruit_vegetable
+      bigquery_type: float64
+      description: Diet low in fruits and vegetables
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = low risk; 100 = high risk
+      is_in_staging: True
+      is_partition: False
+    - name: unsafe_water_sanitation_hygiene
+      bigquery_type: float64
+      description: Unsafe water, sanitation and hygiene
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: DALYs/100,000
+      is_in_staging: True
+      is_partition: False
+    - name: access_improved_sanitation
+      bigquery_type: float64
+      description: Proportion of people with access to improved sanitation
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Proportion of population
+      is_in_staging: True
+      is_partition: False
+    - name: access_improved_water_source
+      bigquery_type: float64
+      description: Proportion of people with access to improved water source
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Proportion of population
+      is_in_staging: True
+      is_partition: False
+    - name: satisfaction_water_quality
+      bigquery_type: float64
+      description: proportion of people satisfied with water quality
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Proportion of population
+      is_in_staging: True
+      is_partition: False
+    - name: household_air_pollution
+      bigquery_type: float64
+      description: Age-standardized Disability-Adjusted Life Years (DALYs) rate caused
+          by household air pollution from solid fuels per 100,000 people
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: DALYs/100,000
+      is_in_staging: True
+      is_partition: False
+    - name: dissatisfaction_housing_affordability
+      bigquery_type: float64
+      description: Proportion of people dissatisfied with housing accessibility
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Proportion of population
+      is_in_staging: True
+      is_partition: False
+    - name: access_electricity
+      bigquery_type: float64
+      description: Access to electricity
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Population percent
+      is_in_staging: True
+      is_partition: False
+    - name: usage_clean_fuels_technology_cooking
+      bigquery_type: float64
+      description: Usage of clean fuels and technology for cooking
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Population percent
+      is_in_staging: True
+      is_partition: False
+    - name: political_killings_torture
+      bigquery_type: float64
+      description: Political killings and torture
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = low freedom; 1 = high freedom
+      is_in_staging: True
+      is_partition: False
+    - name: interpesoal_violence
+      bigquery_type: float64
+      description: Age-standardized Disability-Adjusted Life Years (DALYs) per 100,000
+          people from interpersonal violence
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: DALYs/100,000
+      is_in_staging: True
+      is_partition: False
+    - name: transportation_related_injuries
+      bigquery_type: float64
+      description: Age-standardized Disability-Adjusted Life Years (DALYs) per 100,000
+          people due to injuries related to transportation
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: DALYs/100,000
+      is_in_staging: True
+      is_partition: False
+    - name: intimate_partner_violence
+      bigquery_type: float64
+      description: Intimate Partner Violence
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Women over 15 years old
+      is_in_staging: True
+      is_partition: False
+    - name: money_stolen
+      bigquery_type: float64
+      description: Money Stolen
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Proportion of population
+      is_in_staging: True
+      is_partition: False
+    - name: equal_access_quality_education
+      bigquery_type: float64
+      description: Equal access to quality education
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = unequal; 4 = equal
+      is_in_staging: True
+      is_partition: False
+    - name: population_no_schooling
+      bigquery_type: float64
+      description: Proportion of people without schooling
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Proportion of population
+      is_in_staging: True
+      is_partition: False
+    - name: secondary_school_attainment
+      bigquery_type: float64
+      description: Secondary school attainment
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Over 25 years old
+      is_in_staging: True
+      is_partition: False
+    - name: primary_school_enrollment
+      bigquery_type: float64
+      description: Primary school enrollment
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Children percent
+      is_in_staging: True
+      is_partition: False
+    - name: gender_parity_secondary_attainment
+      bigquery_type: float64
+      description: Gender parity in secondary attainment
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Distance from parity
+      is_in_staging: True
+      is_partition: False
+    - name: alternative_source_information_index
+      bigquery_type: float64
+      description: Alternative sources of information index
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = low; 1 = high
+      is_in_staging: True
+      is_partition: False
+    - name: mobile_telephone_subscription
+      bigquery_type: float64
+      description: Mobile telephone subscriptions
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: subscriptions/1,000 people
+      is_in_staging: True
+      is_partition: False
+    - name: internet_user
+      bigquery_type: float64
+      description: Internet users
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Population percent
+      is_in_staging: True
+      is_partition: False
+    - name: access_online_governance
+      bigquery_type: float64
+      description: Access to online governance
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = low;  1 = high
+      is_in_staging: True
+      is_partition: False
+    - name: equal_access_quality_healthcare
+      bigquery_type: float64
+      description: Equal access to quality healthcare
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = unequal; 4 = equal
+      is_in_staging: True
+      is_partition: False
+    - name: life_expectancy_60
+      bigquery_type: float64
+      description: Life expectancy at 60
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: year
+      has_sensitive_data: no
+      observations: Years
+      is_in_staging: True
+      is_partition: False
+    - name: premature_death_non_communicable_disease
+      bigquery_type: float64
+      description: Premature deaths from non-communicable diseases per 100,000 live
+          births
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: deaths/100,000
+      is_in_staging: True
+      is_partition: False
+    - name: access_essential_health_service
+      bigquery_type: float64
+      description: Access to essential health services
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = none; 100 = full coverage
+      is_in_staging: True
+      is_partition: False
+    - name: satisfaction_availability_quality_healthcare
+      bigquery_type: float64
+      description: Proportion of people satisfied with the availability of quality
+          health care
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Proportion of population
+      is_in_staging: True
+      is_partition: False
+    - name: outdoor_air_pollution
+      bigquery_type: float64
+      description: Age-standardized Disability-Adjusted Life Years (DALYs) per 100,000
+          people resulting from ambient particulate matter pollution
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: DALYs/100,000
+      is_in_staging: True
+      is_partition: False
+    - name: lead_exposure
+      bigquery_type: float64
+      description: Age-standardized Disability-Adjusted Life Years (DALYs) per 100,000
+          people attributable to lead exposure
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: DALYs/100,000
+      is_in_staging: True
+      is_partition: False
+    - name: particulate_matter_pollution
+      bigquery_type: float64
+      description: Particulate matter pollution
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: miligram
+      has_sensitive_data: no
+      observations: Mean annual exposure, µg/m3
+      is_in_staging: True
+      is_partition: False
+    - name: specie_protection
+      bigquery_type: float64
+      description: Species protection
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = low; 100 = high
+      is_in_staging: True
+      is_partition: False
+    - name: freedom_religion
+      bigquery_type: float64
+      description: Freedom of religion
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = no freedom; 4 = full freedom
+      is_in_staging: True
+      is_partition: False
+    - name: property_rights_women
+      bigquery_type: float64
+      description: Property rights for women
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = no rights; 5 = full rights
+      is_in_staging: True
+      is_partition: False
+    - name: freedom_peaceful_assembly
+      bigquery_type: float64
+      description: Freedom of peaceful assembly
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = no freedom; 4 = full freedom
+      is_in_staging: True
+      is_partition: False
+    - name: access_justice
+      bigquery_type: float64
+      description: Access to justice
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = nonexistent; 1 = observed
+      is_in_staging: True
+      is_partition: False
+    - name: freedom_discussion
+      bigquery_type: float64
+      description: Freedom of discussion
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = low; 1 = high
+      is_in_staging: True
+      is_partition: False
+    - name: political_right
+      bigquery_type: float64
+      description: Political rights
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 and lower = no rights; 40 = full rights
+      is_in_staging: True
+      is_partition: False
+    - name: freedom_domestic_movement
+      bigquery_type: float64
+      description: Freedom of domestic movement
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0 = low; 1 = high
+      is_in_staging: True
+      is_partition: False
+    - name: early_marriage
+      bigquery_type: float64
+      description: Early marriage
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Married women aged 15-19
+      is_in_staging: True
+      is_partition: False
+    - name: satisfied_demand_contraception
+      bigquery_type: float64
+      description: Satisfied demand for contraception
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Satisfied demand
+      is_in_staging: True
+      is_partition: False
+    - name: young_not_education_employment_training
+      bigquery_type: float64
+      description: Young people not in education, employment or training
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: vulnerable_employment
+      bigquery_type: float64
+      description: Vulnerable employment
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: True
+      is_partition: False
+    - name: perception_corruption
+      bigquery_type: float64
+      description: Perception of corruption
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0=high corruption; 100=low corruption
+      is_in_staging: True
+      is_partition: False
+    - name: equal_protection_index
+      bigquery_type: float64
+      description: Equal protection index
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0=low; 1=high
+      is_in_staging: True
+      is_partition: False
+    - name: equal_access_index
+      bigquery_type: float64
+      description: Equal access index
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0=low; 1=high
+      is_in_staging: True
+      is_partition: False
+    - name: power_distributed_sexual_orientation
+      bigquery_type: float64
+      description: Power distributed by sexual orientation
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0=extremely unequal; 3=equal
+      is_in_staging: True
+      is_partition: False
+    - name: access_public_service_social_group
+      bigquery_type: float64
+      description: Access to public services distributed by social group
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0=extremely unequal; 4=equal
+      is_in_staging: True
+      is_partition: False
+    - name: acceptance_gay_lesbian
+      bigquery_type: float64
+      description: Proportion of population accepting gays and lesbians
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Proportion of population
+      is_in_staging: True
+      is_partition: False
+    - name: discrimination_violence_against_minority
+      bigquery_type: float64
+      description: Discrimination and violence against minorities
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0=low; 10=high
+      is_in_staging: True
+      is_partition: False
+    - name: academic_freedom
+      bigquery_type: float64
+      description: Academic freedom
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: 0=low; 1=high
+      is_in_staging: True
+      is_partition: False
+    - name: women_advanced_education
+      bigquery_type: float64
+      description: Proportion of women with advanced education
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Proportion of females
+      is_in_staging: True
+      is_partition: False
+    - name: expected_year_tertiary_schooling
+      bigquery_type: float64
+      description: Expected years of tertiary schooling
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: year
+      has_sensitive_data: no
+      observations: Year
+      is_in_staging: True
+      is_partition: False
+    - name: citable_document
+      bigquery_type: float64
+      description: "Citable documents (i.e.  articles, reviews and conference papers)\
+          \ per 1,000 population.\n"
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Documents/1,000 people
+      is_in_staging: True
+      is_partition: False
+    - name: quality_weighted_university
+      bigquery_type: float64
+      description: Quality weighted universities
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Points
+      is_in_staging: True
+      is_partition: False
+
+number_rows: 2352
+
+metadata_modified:
