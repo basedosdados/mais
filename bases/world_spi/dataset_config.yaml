@@ -1,7 +1,7 @@
 
 # Nome (slug) do conjunto no CKAN
 # Exemplos: br-ibge-populacao, br-tse-eleicoes
-name: 
+name: world_spi
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
