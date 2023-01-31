@@ -94,8 +94,8 @@ data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/b
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
-    name:
-    organization_id:
+    name: República.org
+    organization_id: republica-org
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
