@@ -59,7 +59,7 @@ observation_level:
 
 last_updated:
     metadata: '2023-01-11'
-    data: 2023-01-11 18:00
+    data: '2023-01-11 18:00'
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
