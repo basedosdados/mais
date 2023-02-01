@@ -22,7 +22,6 @@ SELECT
 SAFE_CAST(id_municipio AS STRING) id_municipio,
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(pib AS INT64) pib,
-SAFE_CAST(pib_pc AS INT64) pib_pc,
 SAFE_CAST(impostos_liquidos AS INT64) impostos_liquidos,
 SAFE_CAST(va AS INT64) va,
 SAFE_CAST(va_agropecuaria AS INT64) va_agropecuaria,
