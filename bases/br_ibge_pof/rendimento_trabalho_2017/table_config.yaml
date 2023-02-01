@@ -27,8 +27,7 @@ temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency:
-    - ten_years
+update_frequency: ten_years
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
@@ -82,7 +81,7 @@ partner_organization:
 raw_files_url:
 
 # Url dos arquivos auxiliares no GCP Storage.
-auxiliary_files_url:
+auxiliary_files_url: https://console.cloud.google.com/storage/browser/basedosdados-dev/auxiliary_files/br_ibge_pof/rendimento_trabalho_2017?pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&authuser=3&project=basedosdados-dev
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
