@@ -37,3 +37,31 @@ def test_dataset_schema(api_dataset_metadata):
 
     assert metadata.get("id") == api_dataset_metadata.dataset_uuid
     assert "themes" in metadata
+
+
+def test_dataset_does_not_exists_in_api(api_new_dataset_metadata):
+    """
+    Test if dataset exists in API.
+    """
+    assert api_new_dataset_metadata.exists_in_api() is False
+
+
+def test_dataset_exists_in_api(api_dataset_metadata):
+    """
+    Test if dataset does not exists in API.
+    """
+    assert api_dataset_metadata.exists_in_api() is True
+
+
+def test_dataset_table_does_not_exists_in_api(api_new_dataset_metadata):
+    """
+    Test if table does not exists in API.
+    """
+    assert api_new_dataset_metadata.exists_in_api() is False
+
+
+def test_dataset_table_exists_in_api(api_table_metadata):
+    """
+    Test if table exists in API.
+    """
+    assert api_table_metadata.exists_in_api() is True

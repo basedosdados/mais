@@ -429,7 +429,7 @@ class Metadata(Base):
 
     def exists_in_ckan(self) -> bool:
         """Check if Metadata object refers to an existing CKAN package or reso
-        urce.
+        urce. [DEPRECATED]
 
         Returns:
             bool: The existence condition of the metadata in CKAN. `True` if i
@@ -447,6 +447,45 @@ class Metadata(Base):
         exists_in_ckan = requests.get(url, timeout=10).json().get("success")
 
         return exists_in_ckan
+
+    def exists_in_api(self) -> bool:
+        """Check if Metadata object refers to an existing dataset or table.
+
+        Returns:
+            bool: The existence condition of the metadata in the API. `True` if i
+            t exists, `False` otherwise.
+        """
+        query = '''
+            query ($dataset_id: String!, $table_id: String) {
+              allDataset(slug: $dataset_id) {
+                edges {
+                  node {
+                    id
+                    namePt
+                    tables (slug: $table_id) {
+                      edges {
+                        node {
+                          id
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+        '''
+        variables = {"dataset_id": self.dataset_id, "table_id": self.table_id}
+
+        response = requests.post(self.api_graphql, json={'query': query, 'variables': variables}, timeout=90).json()
+
+        if self.table_id:
+            table = response.get("data").get("allDataset").get("edges")[0].get("node").get("tables")
+            exists_in_api = len(table.get("edges")) > 0
+        else:
+            dataset = response.get("data").get("allDataset").get("edges")
+            exists_in_api = len(dataset) > 0
+
+        return exists_in_api
 
     def is_updated(self) -> bool:
         """Check if a dataset or table is updated

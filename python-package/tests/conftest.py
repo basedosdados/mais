@@ -345,7 +345,8 @@ def fixture_default_matadata_path():
 
 API_DATASET_ID = "dados_mestres"
 API_TABLE_ID = "bairro"
-
+API_NEW_DATASET_ID = "new_dataset"
+API_NEW_TABLE_ID = "new_table"
 
 @pytest.fixture(name="api_dataset")
 def fixture_api_dataset(testdir):
@@ -381,6 +382,15 @@ def fixture_api_dataset_metadata(testdir):
     return Metadata(dataset_id=API_DATASET_ID, metadata_path=testdir, config_path=config_path)
 
 
+@pytest.fixture(name="api_new_dataset_metadata")
+def fixture_new_dataset_metadata(testdir):
+    """
+    Fixture that returns a `Metadata` object for a new dataset.
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Metadata(dataset_id=API_NEW_DATASET_ID, metadata_path=testdir, config_path=config_path)
+
+
 @pytest.fixture(name="api_table_metadata")
 def fixture_api_table_metadata(testdir):
     """
@@ -388,3 +398,12 @@ def fixture_api_table_metadata(testdir):
     """
     config_path = Path.home() / ".basedosdados_teste"
     return Metadata(dataset_id=API_DATASET_ID, table_id=API_TABLE_ID, metadata_path=testdir, config_path=config_path)
+
+
+@pytest.fixture(name="api_new_table_metadata")
+def fixture_new_table_metadata(testdir):
+    """
+    Fixture that returns a `Metadata` object for a new table.
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Metadata(dataset_id=API_NEW_DATASET_ID, table_id=API_NEW_TABLE_ID, metadata_path=testdir, config_path=config_path)
