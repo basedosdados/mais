@@ -21,7 +21,7 @@ description: A tabela fornece informações sobre a quantidade de funcionários 
 #  
 #    - world
 spatial_coverage:
-    - sa.br
+  - sa.br
 
 # Anos cobertos pela tabela.
 # Exemplos:
@@ -31,7 +31,7 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
-    - 2018(1)2021
+  - 2018(1)2021
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -48,22 +48,22 @@ update_frequency: one_year
 #       columns:
 #           - sigla_uf
 observation_level:
-    - entity: year
-      columns:
-        - ano
-    - country: br
-      entity: municipality
-      columns:
-        - id_municipio
-    - entity: other
-      columns:
-        - tipo_administracao
-    - entity: other
-      columns:
-        - tipo_vinculo
-    - entity: other 
-      columns:
-        - escolaridade
+  - entity: year
+    columns:
+      - ano
+  - country: br
+    entity: municipality
+    columns:
+      - id_municipio
+  - entity: other
+    columns:
+      - tipo_administracao
+  - entity: other
+    columns:
+      - tipo_vinculo
+  - entity: other 
+    columns:
+      - escolaridade
 
 last_updated:
     metadata: '2023-01-17'
@@ -147,6 +147,21 @@ columns:
       observations:
       is_in_staging: true
       is_partition: true
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
@@ -248,21 +263,6 @@ columns:
           table_id:
           column_name:
       measurement_unit: person
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: sigla_uf
-      bigquery_type: string
-      description: Sigla da Unidade da Federação
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: uf
-          column_name: sigla
-      measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
