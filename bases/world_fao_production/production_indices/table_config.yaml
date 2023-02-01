@@ -129,7 +129,7 @@ partitions:
 # preencherá automaticamente as colunas.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: ano
+    - name: year
       bigquery_type: int64
       description: year
       temporal_coverage:

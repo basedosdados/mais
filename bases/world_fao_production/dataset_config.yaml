@@ -12,7 +12,7 @@ title: Crop and Livestock Production
 # Se a organização não estiver na lista acima ou o nome não estiver conforme o manual de estilo
 # criar ou renomear a organização em https://basedosdados.org/organization/
 # Exemplos: br-ibge, br-tse, br-rj-gov
-organization: food-and-agriculture-organization-fao
+organization: world-fao
 
 # Descrição do conjunto
 notes: These datasets are originally elaborated by the Food and Agriculture Organization of the United Nations (FAO), and are freely accessible on FAOSTAT portal. Here you can find Crop and Livestock data for more than 245 countries and territories, regarding 278 products from 1961 until 2021.    

@@ -1,1 +1,182 @@
-[{"name": "fao_area_id", "bigquery_type": "string", "description": "Identifies FAO's area types (Eg. countries, continents, economic blocks...)", "temporal_coverage": ["(1)"], "covered_by_dictionary": false, "directory_column": {"dataset_id": null, "table_id": null, "column_name": null}, "measurement_unit": null, "has_sensitive_data": false, "observations": null, "is_in_staging": null, "is_partition": null, "type": "STRING"}, {"name": "fao_area", "bigquery_type": null, "description": "FAO's area types (Eg. countries, continents, economic blocks...)", "temporal_coverage": ["(1)"], "covered_by_dictionary": false, "directory_column": {"dataset_id": null, "table_id": null, "column_name": null}, "measurement_unit": null, "has_sensitive_data": false, "observations": null, "is_in_staging": null, "is_partition": null, "type": "STRING"}, {"name": "item_id", "bigquery_type": "string", "description": "Identifies the Itens present in a dataset (Eg. Wheat, Oat, Crops Primary)", "temporal_coverage": ["(1)"], "covered_by_dictionary": false, "directory_column": {"dataset_id": null, "table_id": null, "column_name": null}, "measurement_unit": null, "has_sensitive_data": false, "observations": null, "is_in_staging": null, "is_partition": null, "type": "STRING"}, {"name": "item", "bigquery_type": null, "description": "Itens present in a dataset (Eg. Wheat, Oat, Crops Primary)", "temporal_coverage": ["(1)"], "covered_by_dictionary": false, "directory_column": {"dataset_id": null, "table_id": null, "column_name": null}, "measurement_unit": null, "has_sensitive_data": false, "observations": null, "is_in_staging": null, "is_partition": null, "type": "STRING"}, {"name": "element_id", "bigquery_type": "string", "description": "Identifies the attributes of a Item (Eg. Area Harvested, Production)", "temporal_coverage": ["(1)"], "covered_by_dictionary": false, "directory_column": {"dataset_id": null, "table_id": null, "column_name": null}, "measurement_unit": null, "has_sensitive_data": false, "observations": null, "is_in_staging": null, "is_partition": null, "type": "STRING"}, {"name": "element", "bigquery_type": null, "description": "attributes of a Item (Eg. Area Harvested, Production)", "temporal_coverage": ["(1)"], "covered_by_dictionary": false, "directory_column": {"dataset_id": null, "table_id": null, "column_name": null}, "measurement_unit": null, "has_sensitive_data": false, "observations": null, "is_in_staging": null, "is_partition": null, "type": "STRING"}, {"name": "unit_id", "bigquery_type": "string", "description": " Measurement unit of a specific id_item (Eg. Oat) and its id_element (Area Harvested)", "temporal_coverage": ["(1)"], "covered_by_dictionary": true, "directory_column": {"dataset_id": null, "table_id": null, "column_name": null}, "measurement_unit": null, "has_sensitive_data": false, "observations": null, "is_in_staging": null, "is_partition": null, "type": "STRING"}, {"name": "value", "bigquery_type": "float64", "description": "value", "temporal_coverage": ["(1)"], "covered_by_dictionary": false, "directory_column": {"dataset_id": null, "table_id": null, "column_name": null}, "measurement_unit": null, "has_sensitive_data": false, "observations": null, "is_in_staging": null, "is_partition": null, "type": "STRING"}, {"name": "flag_id", "bigquery_type": "string", "description": "Identifies the source of the data", "temporal_coverage": ["(1)"], "covered_by_dictionary": true, "directory_column": {"dataset_id": null, "table_id": null, "column_name": null}, "measurement_unit": null, "has_sensitive_data": false, "observations": null, "is_in_staging": null, "is_partition": null, "type": "STRING"}]
+[
+    {
+        "name": "fao_area_id",
+        "bigquery_type": "string",
+        "description": "Identifies FAO's area types (Eg. countries, continents, economic blocks...)",
+        "temporal_coverage": [
+            "(1)"
+        ],
+        "covered_by_dictionary": false,
+        "directory_column": {
+            "dataset_id": null,
+            "table_id": null,
+            "column_name": null
+        },
+        "measurement_unit": null,
+        "has_sensitive_data": false,
+        "observations": null,
+        "is_in_staging": null,
+        "is_partition": null,
+        "type": "STRING"
+    },
+    {
+        "name": "fao_area",
+        "bigquery_type": null,
+        "description": "FAO's area types (Eg. countries, continents, economic blocks...)",
+        "temporal_coverage": [
+            "(1)"
+        ],
+        "covered_by_dictionary": false,
+        "directory_column": {
+            "dataset_id": null,
+            "table_id": null,
+            "column_name": null
+        },
+        "measurement_unit": null,
+        "has_sensitive_data": false,
+        "observations": null,
+        "is_in_staging": null,
+        "is_partition": null,
+        "type": "STRING"
+    },
+    {
+        "name": "item_id",
+        "bigquery_type": "string",
+        "description": "Identifies the Itens present in a dataset (Eg. Wheat, Oat, Crops Primary)",
+        "temporal_coverage": [
+            "(1)"
+        ],
+        "covered_by_dictionary": false,
+        "directory_column": {
+            "dataset_id": null,
+            "table_id": null,
+            "column_name": null
+        },
+        "measurement_unit": null,
+        "has_sensitive_data": false,
+        "observations": null,
+        "is_in_staging": null,
+        "is_partition": null,
+        "type": "STRING"
+    },
+    {
+        "name": "item",
+        "bigquery_type": null,
+        "description": "Itens present in a dataset (Eg. Wheat, Oat, Crops Primary)",
+        "temporal_coverage": [
+            "(1)"
+        ],
+        "covered_by_dictionary": false,
+        "directory_column": {
+            "dataset_id": null,
+            "table_id": null,
+            "column_name": null
+        },
+        "measurement_unit": null,
+        "has_sensitive_data": false,
+        "observations": null,
+        "is_in_staging": null,
+        "is_partition": null,
+        "type": "STRING"
+    },
+    {
+        "name": "element_id",
+        "bigquery_type": "string",
+        "description": "Identifies the attributes of a Item (Eg. Area Harvested, Production)",
+        "temporal_coverage": [
+            "(1)"
+        ],
+        "covered_by_dictionary": false,
+        "directory_column": {
+            "dataset_id": null,
+            "table_id": null,
+            "column_name": null
+        },
+        "measurement_unit": null,
+        "has_sensitive_data": false,
+        "observations": null,
+        "is_in_staging": null,
+        "is_partition": null,
+        "type": "STRING"
+    },
+    {
+        "name": "element",
+        "bigquery_type": null,
+        "description": "attributes of a Item (Eg. Area Harvested, Production)",
+        "temporal_coverage": [
+            "(1)"
+        ],
+        "covered_by_dictionary": false,
+        "directory_column": {
+            "dataset_id": null,
+            "table_id": null,
+            "column_name": null
+        },
+        "measurement_unit": null,
+        "has_sensitive_data": false,
+        "observations": null,
+        "is_in_staging": null,
+        "is_partition": null,
+        "type": "STRING"
+    },
+    {
+        "name": "unit_id",
+        "bigquery_type": "string",
+        "description": " Measurement unit of a specific id_item (Eg. Oat) and its id_element (Area Harvested)",
+        "temporal_coverage": [
+            "(1)"
+        ],
+        "covered_by_dictionary": true,
+        "directory_column": {
+            "dataset_id": null,
+            "table_id": null,
+            "column_name": null
+        },
+        "measurement_unit": null,
+        "has_sensitive_data": false,
+        "observations": null,
+        "is_in_staging": null,
+        "is_partition": null,
+        "type": "STRING"
+    },
+    {
+        "name": "value",
+        "bigquery_type": "float64",
+        "description": "value",
+        "temporal_coverage": [
+            "(1)"
+        ],
+        "covered_by_dictionary": false,
+        "directory_column": {
+            "dataset_id": null,
+            "table_id": null,
+            "column_name": null
+        },
+        "measurement_unit": null,
+        "has_sensitive_data": false,
+        "observations": null,
+        "is_in_staging": null,
+        "is_partition": null,
+        "type": "STRING"
+    },
+    {
+        "name": "flag_id",
+        "bigquery_type": "string",
+        "description": "Identifies the source of the data",
+        "temporal_coverage": [
+            "(1)"
+        ],
+        "covered_by_dictionary": true,
+        "directory_column": {
+            "dataset_id": null,
+            "table_id": null,
+            "column_name": null
+        },
+        "measurement_unit": null,
+        "has_sensitive_data": false,
+        "observations": null,
+        "is_in_staging": null,
+        "is_partition": null,
+        "type": "STRING"
+    }
+]

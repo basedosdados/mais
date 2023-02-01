@@ -19,7 +19,7 @@ TIPOS:
 
 CREATE VIEW basedosdados-dev.world_fao_production.value_agricultural_production AS
 SELECT 
-SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(year AS INT64) year,
 SAFE_CAST(fao_area_id AS STRING) fao_area_id,
 SAFE_CAST(fao_area AS STRING) fao_area,
 SAFE_CAST(item_id AS STRING) item_id,
