@@ -1,0 +1,48 @@
+This dataset contains the elements description, code and measurement unit of the 3 main datasets (crop_livestock;production_indices;value_agricultural_production) of FAO's data production domain. In FAOSTAT's production domain the data is presented in the long format, therefore the elements are simply the attributes of the crop and livestock products. Eg. area_harvested and yield for the crop_livestock_production dataset.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+Tratado por
+-----------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- (1)
+
+
+
+
+Cobertura Espacial
+------------------
+- world
+
+
+
+
+Tratamento
+----------
+Renomeei colunas.
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
