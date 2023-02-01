@@ -5,8 +5,9 @@ Class to manage the metadata of datasets and tables
 from __future__ import annotations
 
 from copy import deepcopy
+from datetime import datetime
 from functools import lru_cache
-from typing import Tuple, Dict, Any
+from typing import Tuple, Dict, Any, List
 
 from loguru import logger
 
@@ -30,6 +31,7 @@ class Metadata(Base):
         super().__init__(**kwargs)
 
         self.dataset_uuid = self._get_dataset_id_from_slug(dataset_id)
+        self.table_uuid = None
 
         self.table_id = table_id
         self.dataset_id = dataset_id
@@ -41,6 +43,28 @@ class Metadata(Base):
         url = "https://basedosdados.org"
         self.CKAN_API_KEY = self.config.get("ckan", {}).get("api_key")
         self.CKAN_URL = self.config.get("ckan", {}).get("url", "") or url
+
+    def _get_nodes_from_edges(
+            self,
+            key: str,
+            edge: Dict[str, Any],
+    ) -> List[dict]:
+        """
+        Helper function to get nodes from edges and return a list
+        of nodes with the given key.
+        Args:
+            key (str): Key to get from nodes.
+            edge (Dict[str, Any]): Edge to get nodes from.
+        Returns:
+            List[dict]: List of nodes with the given key.
+        """
+        if not edge or not key:
+            return []
+
+        return [node["node"].get(key)
+                for _, nodes in edge.items()
+                for node in nodes
+                ]
 
     @property
     def filepath(self) -> str:
@@ -91,12 +115,47 @@ class Metadata(Base):
                       _id
                       slug
                     }
+                    description
+                    themes{
+                      edges{
+                        node{
+                          slug
+                        }
+                      }
+                    }
+                    tags{
+                      edges{
+                        node{
+                          slug
+                        }
+                      }
+                    }  
                     tables{
                       edges{
                         node{
                           _id
                           namePt
+                          slug
                           __typename
+                          description
+                          coverages{
+                            edges{
+                              node{
+                                area{
+                                  slug
+                                }
+                                temporalCoverage
+                              }
+                            }
+                          }
+                          updateFrequency{
+                            number
+                            timeUnit{
+                              namePt
+                            }
+                          }
+                          createdAt
+                          updatedAt
                           cloudTables{
                             edges{
                               node{
@@ -191,29 +250,33 @@ class Metadata(Base):
 
     @property
     def api_data_dict(self) -> Dict[str, Any]:
-        """Helper function that structures local metadata"""
+        """
+        Helper function that structures local metadata
+        TODO: must be adapted to use translation. Also needed to check the difference between `namePt` and `title` in the YAML file.
+        """
 
         api_dataset, api_table = self.api_metadata_extended
 
         metadata = {
             "id": self.dataset_uuid,
+            "slug": api_dataset.get("slug"),
             "name": api_dataset.get("namePt"),
             "namePt": api_dataset.get("namePt"),
             "type": api_dataset.get("_typename"),
             "title": self.local_metadata.get("title"),
-            "private": False,  # TODO: check public/private
-            "owner_org": api_dataset.get("organization", {}).get("_id"),
-            "resources": [],  #TODO: how to handle resources?
-            "groups": [
-                {"name": group} for group in self.local_metadata.get("groups", []) or []
-            ],  #TODO: this is specific to CKAN?
+            # "private": False,  [DEPRECATED]
+            "owner_org": api_dataset.get("organization", {}).get("_id"),  #TODO: check cases in owner_org
+            # "resources": [],  [DEPRECATED]
+            "themes": [
+                {"name": theme} for theme in self._get_nodes_from_edges(key="slug", edge=api_dataset.get("themes", [])) or []
+            ],  # groups in CKAN hierarchy
             "tags": [
-                {"name": tag} for tag in self.local_metadata.get("tags", []) or []
-            ], # TODO: not implemented yet
-            "organization": {"name": self.local_metadata.get("organization")},
-            "description": api_dataset.get("description"),  # TODO: not implemented yet
-            "ckan_url": None,  #TODO: change for the new url
-            "github_url": None,  #TODO: change for the new url
+                {"name": tag} for tag in self._get_nodes_from_edges(key="slug", edge=api_dataset.get("tags", [])) or []
+            ],
+            "organization": {"name": api_dataset.get("organization")},
+            "description": api_dataset.get("description"),
+            # "ckan_url": self.local_metadata.get("url_ckan"),  [DEPRECATED]
+            # "github_url": self.local_metadata.get("url_github"),  [DEPRECATED]
             "tables": [],
         }
 
@@ -222,13 +285,13 @@ class Metadata(Base):
                 {
                     "id": self.table_uuid,
                     "description": api_table.get("description"),
-                    "namePt": self.local_metadata.get("namePt"),
-                    "name": api_table.get("title"),
+                    "namePt": api_table.get("namePt"),
+                    "name": self.local_metadata.get("title"),
                     "resource_type": api_table.get("__typename"),
-                    "version": api_table.get("version"),  # TODO: not implemented yet
+                    # "version": api_table.get("version"),  # [DEPRECATED]
                     "dataset_id": self.dataset_id,  # TODO: check if is id or uuid
                     "table_id": self.table_id,  #TODO: check if is id or uuid
-                    "spacial_coverage": api_table.get("spacialCoverage"),  # TODO: not implemented yet
+                    "spatial_coverage": api_table.get("spatialCoverage"),  # TODO: not implemented yet
                     "temporal_coverage": api_table.get("temporalCoverage"),  # TODO: not implemented yet
                     "update_frequency": api_table.get("updateFrequency"),  # TODO: not implemented yet
                     "observation_level": api_table.get("observationLevel"),  # TODO: not implemented yet
@@ -247,7 +310,9 @@ class Metadata(Base):
                     "partitions": api_table.get("partitions"),  # TODO: not implemented yet
                     "uncompressed_file_size": api_table.get("uncompressedFileSize"),  # TODO: not implemented yet
                     "compressed_file_size": api_table.get("compressedFileSize"),  # TODO: not implemented yet
-                    "metadata_modified": api_table.get("metadataModified"),  # TODO: not implemented yet
+                    "metadata_modified": api_table.get("updatedAt"),  # TODO: check the correct times
+                    "created_at": datetime.fromisoformat(api_table.get("createdAt")).strftime("%Y-%m-%d %H:%M:%S"),
+                    "updated_at": datetime.fromisoformat(api_table.get("updatedAt")).strftime("%Y-%m-%d %H:%M:%S"),
                     "package_id": self.dataset_id,  # TODO: check if is id or uuid
                     "columns": api_table.get("columns"),
                 }
