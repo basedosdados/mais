@@ -6,13 +6,13 @@ dataset_id: br_ibge_pib
 table_id: municipio
 
 # Título da tabela.
-title:
+title: Município
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: 
+description: Produto Interno Bruto (PIB) municipal a preços correntes
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -32,7 +32,7 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
-    - 2002(1)2021
+    - 2002(1)2020
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -153,7 +153,7 @@ columns:
       is_partition: false
     - name: pib
       bigquery_type: int64
-      description: Produto Interno Bruto a preços correntes (R$ 1000)
+      description: Produto Interno Bruto a preços correntes
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -167,7 +167,7 @@ columns:
       is_partition: false
     - name: impostos_liquidos
       bigquery_type: int64
-      description: Impostos, líquidos de subsídios, sobre produtos a preços correntes (R$ 1000)
+      description: Impostos, líquidos de subsídios, sobre produtos a preços correntes
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -180,7 +180,7 @@ columns:
       is_partition: false
     - name: va
       bigquery_type: int64
-      description: Valor adicionado bruto a preços correntes total (R$ 1000)
+      description: Valor adicionado bruto a preços correntes total
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -193,7 +193,7 @@ columns:
       is_partition: false
     - name: va_agropecuaria
       bigquery_type: int64
-      description: Valor adicionado bruto a preços correntes da agropecuária (R$ 1000)
+      description: Valor adicionado bruto a preços correntes da agropecuária
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -206,7 +206,7 @@ columns:
       is_partition: false
     - name: va_industria
       bigquery_type: int64
-      description: Valor adicionado bruto a preços correntes da indústria (R$ 1000)
+      description: Valor adicionado bruto a preços correntes da indústria
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -220,7 +220,7 @@ columns:
     - name: va_servicos
       bigquery_type: int64
       description: Valor adicionado bruto a preços correntes dos serviços, exclusive
-          administração, defesa, educação e saúde públicas e seguridade social (R$ 1000)
+          administração, defesa, educação e saúde públicas e seguridade social
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -234,7 +234,7 @@ columns:
     - name: va_adespss
       bigquery_type: int64
       description: Valor adicionado bruto a preços correntes da administração, defesa,
-          educação e saúde públicas e seguridade social (R$ 1000)
+          educação e saúde públicas e seguridade social
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
