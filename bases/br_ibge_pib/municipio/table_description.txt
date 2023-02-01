@@ -1,5 +1,4 @@
-Produto Interno Bruto (PIB) municipal a preços correntes.
-
+None
 
 Para saber mais acesse:
 Website: 
@@ -28,7 +27,7 @@ Email: rdahis@basedosdados.org
 
 Cobertura Temporal
 ------------------
-- 2002(1)2020
+- 2002(1)2021
 
 
 

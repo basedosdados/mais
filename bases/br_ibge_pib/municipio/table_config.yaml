@@ -6,13 +6,13 @@ dataset_id: br_ibge_pib
 table_id: municipio
 
 # Título da tabela.
-title: PIB
+title:
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: "Produto Interno Bruto (PIB) municipal a preços correntes.\n"
+description: 
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -32,7 +32,7 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
-    - 2002(1)2020
+    - 2002(1)2021
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -59,7 +59,7 @@ observation_level:
 
 last_updated:
     metadata: '2023-01-11'
-    data: '2023-01-11 18:00'
+    data: 2023-01-11 18:00
     release:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
@@ -68,31 +68,31 @@ version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
-    github_user: rdahis
-    ckan_user: rdahis
-    website: www.ricardodahis.com
+    name: Arthur Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
+    website: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
-    github_user: rdahis
-    ckan_user: rdahis
-    website: www.ricardodahis.com
+    name: Arthur Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
+    website: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "Mudamos a unidade de medida para R$1.\n"
+data_cleaning_description: 
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pib/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
-    name: 
+    name:
     organization_id:
 
 # Url dos dados originais no GCP Storage.
@@ -153,7 +153,7 @@ columns:
       is_partition: false
     - name: pib
       bigquery_type: int64
-      description: Produto Interno Bruto a preços correntes
+      description: Produto Interno Bruto a preços correntes (R$ 1000)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -165,23 +165,9 @@ columns:
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
-    - name: pib_pc
-      bigquery_type:
-      description: Produto Interno Bruto per capita, a preços correntes
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: brl / person
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
     - name: impostos_liquidos
       bigquery_type: int64
-      description: Impostos, líquidos de subsídios, sobre produtos a preços correntes
+      description: Impostos, líquidos de subsídios, sobre produtos a preços correntes (R$ 1000)
       temporal_coverage:
       covered_by_dictionary:
       directory_column:
@@ -194,7 +180,7 @@ columns:
       is_partition: false
     - name: va
       bigquery_type: int64
-      description: Valor adicionado bruto a preços correntes total
+      description: Valor adicionado bruto a preços correntes total (R$ 1000)
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -207,7 +193,7 @@ columns:
       is_partition: false
     - name: va_agropecuaria
       bigquery_type: int64
-      description: Valor adicionado bruto a preços correntes da agropecuária
+      description: Valor adicionado bruto a preços correntes da agropecuária (R$ 1000)
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -220,7 +206,7 @@ columns:
       is_partition: false
     - name: va_industria
       bigquery_type: int64
-      description: Valor adicionado bruto a preços correntes da indústria
+      description: Valor adicionado bruto a preços correntes da indústria (R$ 1000)
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -234,7 +220,7 @@ columns:
     - name: va_servicos
       bigquery_type: int64
       description: Valor adicionado bruto a preços correntes dos serviços, exclusive
-          administração, defesa, educação e saúde públicas e seguridade social
+          administração, defesa, educação e saúde públicas e seguridade social (R$ 1000)
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -248,7 +234,7 @@ columns:
     - name: va_adespss
       bigquery_type: int64
       description: Valor adicionado bruto a preços correntes da administração, defesa,
-          educação e saúde públicas e seguridade social
+          educação e saúde públicas e seguridade social (R$ 1000)
       temporal_coverage:
       covered_by_dictionary: no
       directory_column:
@@ -262,4 +248,5 @@ columns:
 
 number_rows: 105756
 
-metadata_modified: '2022-12-15T00:07:32.625246'
+
+metadata_modified: '2023-01-27T09:46:24.365178'
