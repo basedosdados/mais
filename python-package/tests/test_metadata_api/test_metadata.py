@@ -65,3 +65,12 @@ def test_dataset_table_exists_in_api(api_table_metadata):
     Test if table exists in API.
     """
     assert api_table_metadata.exists_in_api() is True
+
+
+def test_dataset_is_not_updated(api_dataset_metadata):
+    """
+    Test if dataset is updated.
+    TODO: Create a deterministic test to return True.
+    """
+
+    assert api_dataset_metadata.is_updated() is False

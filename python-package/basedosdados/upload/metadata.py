@@ -1,7 +1,7 @@
 """
 Class to manage the metadata of datasets and tables
 """
-# pylint: disable=fixme, invalid-name, redefined-builtin, too-many-arguments, undefined-loop-variable
+# pylint: disable=fixme, invalid-name, redefined-builtin, too-many-arguments, undefined-loop-variable, too-many-lines
 from __future__ import annotations
 
 from copy import deepcopy
@@ -129,7 +129,9 @@ class Metadata(Base):
                           slug
                         }
                       }
-                    }  
+                    }
+                    createdAt
+                    updatedAt  
                     tables{
                       edges{
                         node{
@@ -277,6 +279,8 @@ class Metadata(Base):
             "description": api_dataset.get("description"),
             # "ckan_url": self.local_metadata.get("url_ckan"),  [DEPRECATED]
             # "github_url": self.local_metadata.get("url_github"),  [DEPRECATED]
+            "created_at": datetime.fromisoformat(api_dataset.get("createdAt")).strftime("%Y-%m-%d %H:%M:%S"),
+            "updated_at": datetime.fromisoformat(api_dataset.get("updatedAt")).strftime("%Y-%m-%d %H:%M:%S"),
             "tables": [],
         }
 
@@ -487,20 +491,35 @@ class Metadata(Base):
 
         return exists_in_api
 
+    # def is_updated(self) -> bool:
+    #     """Check if a dataset or table is updated
+    #
+    #     Returns:
+    #         bool: The update condition of local metadata. `True` if it corresp
+    #         onds to the most recent version of the given table or dataset's me
+    #         tadata in CKAN, `False` otherwise.
+    #     """
+    #
+    #     if not self.local_metadata.get("metadata_modified"):
+    #         return bool(not self.exists_in_ckan())
+    #     ckan_modified = self.ckan_metadata.get("metadata_modified")
+    #     local_modified = self.local_metadata.get("metadata_modified")
+    #     return ckan_modified == local_modified
+
     def is_updated(self) -> bool:
         """Check if a dataset or table is updated
 
         Returns:
             bool: The update condition of local metadata. `True` if it corresp
             onds to the most recent version of the given table or dataset's me
-            tadata in CKAN, `False` otherwise.
+            tadata in API, `False` otherwise.
         """
 
         if not self.local_metadata.get("metadata_modified"):
-            return bool(not self.exists_in_ckan())
-        ckan_modified = self.ckan_metadata.get("metadata_modified")
-        local_modified = self.local_metadata.get("metadata_modified")
-        return ckan_modified == local_modified
+            return bool(not self.exists_in_api())
+        api_modified = self.api_data_dict.get("updated_at")
+        local_modified = self.local_metadata.get("metadata_modified").strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+        return api_modified == local_modified
 
     def create(
         self,
