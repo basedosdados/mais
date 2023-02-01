@@ -1,0 +1,471 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: world_wb_wwbi
+
+table_id: country_finance
+
+# Título da tabela.
+title: Country Finance
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: The table corresponds to data from 202 countries on forms of trade system and economic characteristics. Functioning as an auxiliary table of country indicators.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
+    - world
+
+# Anos cobertos pela tabela.
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+    - 2022
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: uncertain
+
+# Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+    - entity: country
+      columns:
+          - country_code
+
+last_updated:
+    metadata: '2023-01-19'
+    data: '2023-01-19 11:10:13'
+    release: '2023-01-19 11:10:23'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplos: v1.0, v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Gabrielle Carvalho
+    email: gabrielle.carvalho@basedosdados.org
+    github_user: gabrielle-carv
+    ckan_user: gabs_carvalho
+    website:
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Gabrielle Carvalho
+    email: gabrielle.carvalho@basedosdados.org
+    github_user: gabrielle-carv
+    ckan_user: gabs_carvalho
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Renaming of columns and transformation of answers into boolean type filled with 0 or 1 in the column corresponding to Vital registration complete.
+
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_wb_wwbi/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: country_name
+      bigquery_type: string
+      description: Name of the country
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_mundo
+          table_id: pais
+          column_name: nome_ingles
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: country_code
+      bigquery_type: string
+      description: Country 3-letter ISO code
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_mundo
+          table_id: pais
+          column_name: sigla_pais_iso3
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: currency_unit
+      bigquery_type: string
+      description: Country Currency Unit
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: special_note
+      bigquery_type: string
+      description: Special notes given by the World Bank
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: region
+      bigquery_type: string
+      description: Country Region
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: income_group
+      bigquery_type: string
+      description: Country Income Group
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: national_accounts_base_year
+      bigquery_type: string
+      description: National accounts base year
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: national_accounts_reference_year
+      bigquery_type: int64
+      description: National accounts reference year
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: lending_category
+      bigquery_type: string
+      description: Lending category
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: other_groups
+      bigquery_type: string
+      description: Other groups for financing
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sna_price_valuation
+      bigquery_type: string
+      description: The System of National Accounts (SNA) price valuation
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sna_methodology
+      bigquery_type: string
+      description: Methodology of the System of National Accounts (SNA) used
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: imf_dissemination_standard
+      bigquery_type: string
+      description: International Monetary Fund (IMF) data dissemination standard
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: trade_system
+      bigquery_type: string
+      description: Type of trade system
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: balance_payments_manual
+      bigquery_type: string
+      description: Balance of Payments Manual in use
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: external_debt_reporting
+      bigquery_type: string
+      description: External debt Reporting status
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: government_accounting
+      bigquery_type: string
+      description: Government Accounting concept
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: population_census
+      bigquery_type: string
+      description: Latest population census
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Responses can appear in the format of temporal coverage, single
+          year or even with the name of the survey along with the year
+      is_in_staging: true
+      is_partition: false
+    - name: agricultural_census
+      bigquery_type: string
+      description: Latest agricultural census
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Responses can appear in the format of temporal coverage, single
+          year or even with the name of the survey along with the year
+      is_in_staging: true
+      is_partition: false
+    - name: household_survey
+      bigquery_type: string
+      description: Latest household survey
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Responses contain the name of the survey and the most recent year
+      is_in_staging: true
+      is_partition: false
+    - name: industrial_data
+      bigquery_type: int64
+      description: Year of the Latest industrial data
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: source_income_expenditure
+      bigquery_type: string
+      description: Source of most recent Income and expenditure data
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Responses contain the name of the survey and the most recent year
+      is_in_staging: true
+      is_partition: false
+    - name: vital_registration_complete
+      bigquery_type: int64
+      description: Vital registration complete
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 202
+
+metadata_modified:
