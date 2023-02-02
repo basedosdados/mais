@@ -1,0 +1,50 @@
+Despesas por função a nível de UF
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Arthur de Figueiredo Gusmão
+Código: 
+Email: arthur.gusmao@basedosdados.org
+Tratado por
+-----------
+Nome: Arthur de Figueiredo Gusmão
+Código: 
+Email: arthur.gusmao@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- sigla_uf
+
+
+
+
+Cobertura Temporal
+------------------
+- 2013(1)2021
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
