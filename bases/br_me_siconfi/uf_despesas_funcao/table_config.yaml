@@ -58,6 +58,9 @@ observation_level:
     - entity: item
       columns:
           - conta
+    - entity: other
+      columns:
+          - estagio 
 
 last_updated:
     metadata: '2023-01-24'
@@ -281,4 +284,4 @@ columns:
 
 number_rows: 131766
 
-metadata_modified: '2022-12-30T14:55:08.785786'
+metadata_modified:
