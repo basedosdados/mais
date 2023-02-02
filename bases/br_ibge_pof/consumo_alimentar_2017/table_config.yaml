@@ -616,7 +616,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: kcal
       has_sensitive_data: no
       observations:
       is_in_staging: true
