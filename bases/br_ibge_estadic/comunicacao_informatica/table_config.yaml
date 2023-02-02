@@ -33,11 +33,11 @@ update_frequency: uncertain
 observation_level:
     - entity: year
       columns:
-          - ano
+        - ano
     - country: br
       entity: state
       columns:
-          - sigla_uf 
+        - sigla_uf
 
 last_updated:
     metadata: '2022-11-30'
@@ -2694,7 +2694,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Para o ano de 2019, corresponde aos dados da tebala de Governança
+      observations: Para o ano de 2019, corresponde aos dados da tabela de Governança
       is_in_staging: true
       is_partition: false
     - name: pagina_internet_repasse_transferencia
@@ -2825,16 +2825,18 @@ columns:
       is_in_staging: true
       is_partition: false
     - name: pagina_internet_acessivel
-      bigquery_type:
-      description:
+      bigquery_type: string
+      description: Página na internet e serviços eletrônicos são acessíveis a pessoas
+          com deficiência
       temporal_coverage:
-      covered_by_dictionary:
+          - '2014'
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
@@ -2856,4 +2858,4 @@ columns:
 
 number_rows: 54
 
-metadata_modified:
+metadata_modified: "2023-01-04T20:16:32.393612"
