@@ -25,7 +25,7 @@ Email: gabrielle.carvalho@basedosdados.org
 
 Cobertura Temporal
 ------------------
-- 2014(5)2019
+- 2014, 2019
 
 
 
@@ -39,10 +39,10 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Compatibilização dos dados entre os anos e criação de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta.
+Compatibilização dos dados entre os anos, substituição das respostas 'Sim' por resultado binário numérico, padronização por valores em branco para respostas não sabidas ou ainda não aplicáveis, criação de dicionário e de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, os valores nulos passam a representar unicamente a não aplicabilidade da pergunta.
 
 
 
 Frequencia de Atualização
 -------------------------
-five_years
+uncertain

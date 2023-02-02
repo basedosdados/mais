@@ -1,4 +1,6 @@
 A pesquisa fornece informações variadas sobre políticas para mulheres como, dados do conselho e fundo estadual de direitos das mulheres, sua estrutura e serviços, levantamento de informações sobre as mulheres em situação de violência, etc, a nível estadual. A tabela inclui colunas indicando os espaços que foram deixados vazios devido ao fato de que os estados não souberam informar o dado. Com isso, valores nulos sem indicadores nesta coluna passam a representar a não aplicabilidade da pergunta feita ao estado.
+
+Para saber mais acesse:
 Website: 
 Github: 
 
@@ -37,10 +39,10 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Padronização e criação de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, valores nulos passam a representar a não aplicabilidade da pergunta.
+Substituição das respostas 'Sim' por resultado binário numérico, padronização por valores em branco para respostas não sabidas ou ainda não aplicáveis, criação de dicionário e de colunas com o objetivo de indicar as respostas em que os estados não souberam informar os dados. Com isso, os valores nulos passam a representar unicamente a não aplicabilidade da pergunta.
 
 
 
 Frequencia de Atualização
 -------------------------
-unique
+uncertain
