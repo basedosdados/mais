@@ -165,6 +165,8 @@ bdplyr <- function(
     project = query_project_id,
     billing = billing_project_id)
 
+  class(con) <- "BaseDosDadosConnection"
+
   # calls the connection through dplyr and keeps it in a objects
   tibble_connection <- dplyr::tbl(con, table_full_name)
 
