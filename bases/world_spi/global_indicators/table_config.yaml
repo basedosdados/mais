@@ -1,6 +1,6 @@
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: world_spi
+dataset_id: world_spi_spi
 
 table_id: global_indicators
 
@@ -11,7 +11,7 @@ title: Social Progress Index
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: The Social Progress Index insights visualization gives you a holistic understanding of world progress from 2011-2022, as well as a granular set of information.
+description: The table uses 12 components and 60 indicators to measure the social performance of 169 countries fully and an additional 27 countries partially.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -153,7 +153,7 @@ columns:
       is_partition: False
     - name: country_id_iso_3
       bigquery_type: string
-      description: Sigla do País - ISO3
+      description: Country 3-letter ISO code
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -479,7 +479,7 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: Deaths/100,000 live births
+      observations:
       is_in_staging: True
       is_partition: False
     - name: child_mortality_rate
@@ -494,7 +494,7 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: Deaths/1,000 live births
+      observations:
       is_in_staging: True
       is_partition: False
     - name: undernourishment
@@ -539,7 +539,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: DALYs/100,000
+      observations:
       is_in_staging: True
       is_partition: False
     - name: access_improved_sanitation
@@ -600,7 +600,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: DALYs/100,000
+      observations:
       is_in_staging: True
       is_partition: False
     - name: dissatisfaction_housing_affordability
@@ -676,7 +676,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: DALYs/100,000
+      observations:
       is_in_staging: True
       is_partition: False
     - name: transportation_related_injuries
@@ -692,7 +692,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: DALYs/100,000
+      observations:
       is_in_staging: True
       is_partition: False
     - name: intimate_partner_violence
@@ -827,7 +827,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: subscriptions/1,000 people
+      observations:
       is_in_staging: True
       is_partition: False
     - name: internet_user
@@ -903,7 +903,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: deaths/100,000
+      observations:
       is_in_staging: True
       is_partition: False
     - name: access_essential_health_service
@@ -950,7 +950,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: DALYs/100,000
+      observations:
       is_in_staging: True
       is_partition: False
     - name: lead_exposure
@@ -966,7 +966,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: DALYs/100,000
+      observations:
       is_in_staging: True
       is_partition: False
     - name: particulate_matter_pollution
@@ -1327,7 +1327,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Documents/1,000 people
+      observations:
       is_in_staging: True
       is_partition: False
     - name: quality_weighted_university
