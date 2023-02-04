@@ -27,11 +27,11 @@ spatial_coverage:
 # Exemplos:
 #     - 1995(1)2019
 # Caso a cobertura não seja contínua:
-#     - 2002(2)2010
+#     - 20022014, 20182010
 #     - 2016
 #     - 2020
 temporal_coverage: 
-    - 2014(2)2018
+    - 2014, 2018
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -127,7 +127,7 @@ columns:
       bigquery_type: int64
       description: Ano
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -142,7 +142,7 @@ columns:
       bigquery_type: string
       description: Sigla da Unidade da Federação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
@@ -157,7 +157,7 @@ columns:
       bigquery_type: string
       description: Caracterização do órgão gestor
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -172,7 +172,7 @@ columns:
       bigquery_type: string
       description: Sexo do gestor da Educação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -187,7 +187,7 @@ columns:
       bigquery_type: int64
       description: Idade do gestor da Educação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -232,7 +232,7 @@ columns:
       bigquery_type: string
       description: Escolaridade do gestor da Educação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -247,7 +247,7 @@ columns:
       bigquery_type: string
       description: Formação de nível superior do gestor da Educação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -263,7 +263,7 @@ columns:
       description: Indica se o gestor concluiu, nos últimos 5 anos, curso de capacitação
           em gestão educacional
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -278,7 +278,7 @@ columns:
       bigquery_type: string
       description: Especificação do programa de gestão educacional oferecido na capacitação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -680,7 +680,7 @@ columns:
       description: Tema prioritário em adoção de medidas ou ações - Melhoria das condições
           físicas de acessibilidade nas escolas
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -696,7 +696,7 @@ columns:
       description: Tema prioritário em adoção de medidas ou ações - Criação/manutenção
           de salas de recursos multifuncionais
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -728,7 +728,7 @@ columns:
       description: Tema prioritário em adoção de medidas ou ações - Formação continuada
           para professores
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -807,7 +807,7 @@ columns:
       description: Tema prioritário em adoção de medidas ou ações - Inclusão de alunos
           com deficiência nas escolas regulares
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -839,7 +839,7 @@ columns:
       description: Tema prioritário em adoção de medidas ou ações - Combate à violência
           nas escolas
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -933,7 +933,7 @@ columns:
           a idade dos alunos em relação à série/etapa em que estudam (enfrentamento
           do atraso escolar)
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -949,7 +949,7 @@ columns:
       description: Tema prioritário em adoção de medidas ou ações - Alfabetização
           na idade certa
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -997,7 +997,7 @@ columns:
       description: Tema prioritário em adoção de medidas ou ações - Elevação do desempenho
           dos alunos nas avaliações nacionais de larga escala
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1093,7 +1093,7 @@ columns:
       description: Tema prioritário em adoção de medidas ou ações - Diminuição no
           abandono e evasão escolar (busca ativa de alunos)
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1109,7 +1109,7 @@ columns:
       description: Tema prioritário em adoção de medidas ou ações - Chamamento público
           para matrícula
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1345,7 +1345,7 @@ columns:
       bigquery_type: int64
       description: Existência de um Plano Estadual de Educação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1375,7 +1375,7 @@ columns:
       bigquery_type: int64
       description: Ano do atual Plano Estadual de Educação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -1436,7 +1436,7 @@ columns:
       bigquery_type: int64
       description: Existência de um Plano de Carreira para o Magistério
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1466,7 +1466,7 @@ columns:
       bigquery_type: int64
       description: Ano de criação do Plano de Carreira para Magistério
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -1838,7 +1838,7 @@ columns:
       bigquery_type: int64
       description: Existência do Conselho Estadual de Educação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1853,7 +1853,7 @@ columns:
       bigquery_type: int64
       description: Lei de criação do Conselho Estadual de Educação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1883,7 +1883,7 @@ columns:
       bigquery_type: string
       description: Formação do Conselho Estadual de Educação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1898,7 +1898,7 @@ columns:
       bigquery_type: int64
       description: Caráter do Conselhor Estadual de Educação - Consultivo
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1913,7 +1913,7 @@ columns:
       bigquery_type: int64
       description: Caráter do Conselhor Estadual de Educação - Deliberativo
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1928,7 +1928,7 @@ columns:
       bigquery_type: int64
       description: Caráter do Conselhor Estadual de Educação - Normativo
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1943,7 +1943,7 @@ columns:
       bigquery_type: int64
       description: Caráter do Conselhor Estadual de Educação - Fiscalizador
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1959,7 +1959,7 @@ columns:
       description: Conselho Estadual de Educação - Quantidade de reuniões nos últimos
           12 meses
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2173,7 +2173,7 @@ columns:
       bigquery_type: int64
       description: Composição do Conselho - Representante de pais e alunos
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2188,7 +2188,7 @@ columns:
       bigquery_type: int64
       description: Composição do Conselho - Representante da Assembléia Legislativa
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2204,7 +2204,7 @@ columns:
       description: Composição do Conselho - Representante dos diretores das escolas
           da rede estadual de ensino
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2220,7 +2220,7 @@ columns:
       description: Composição do Conselho - Representante dos servidores das escolas
           da rede estadual de ensino
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2236,7 +2236,7 @@ columns:
       description: Composição do Conselho - Representante do Conselho de Direitos
           da Criança e do Adolescente e/ou Conselho Tutelar
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2251,7 +2251,7 @@ columns:
       bigquery_type: int64
       description: Composição do Conselho - Representante das escolas da rede privada
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2267,7 +2267,7 @@ columns:
       description: Composição do Conselho - Representante de instituição de ensino
           superior
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2283,7 +2283,7 @@ columns:
       description: Composição do Conselho - Representante de sindicato/associação
           de profissionais da educação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2375,7 +2375,7 @@ columns:
       bigquery_type: int64
       description: Composição do Conselho - Outros
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2405,7 +2405,7 @@ columns:
       bigquery_type: int64
       description: Existencia do Conselho de controle e acompanhamento social do FUNDEB
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2435,7 +2435,7 @@ columns:
       bigquery_type: int64
       description: Ano de criação do conselho do controle de acompanhamento social
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -2466,7 +2466,7 @@ columns:
       description: Conselho do controle de acompanhamento social - Quantidade de reuniões
           nos últimos 12 meses
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2688,7 +2688,7 @@ columns:
       bigquery_type: int64
       description: Existencia do Conselho de alimentação escolar
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2718,7 +2718,7 @@ columns:
       bigquery_type: int64
       description: Ano de criação do Conselho de alimentação escolar
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -2733,7 +2733,7 @@ columns:
       bigquery_type: string
       description: Formação do Conselho de alimentação escolar
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2748,7 +2748,7 @@ columns:
       bigquery_type: int64
       description: Caráter do Conselho de alimentação escolar - Consultivo
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2763,7 +2763,7 @@ columns:
       bigquery_type: int64
       description: Caráter do Conselho de alimentação escolar - Deliberativo
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2778,7 +2778,7 @@ columns:
       bigquery_type: int64
       description: Caráter do Conselho de alimentação escolar - Normativo
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2793,7 +2793,7 @@ columns:
       bigquery_type: int64
       description: Caráter do Conselho de alimentação escolar - Fiscalizador
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2809,7 +2809,7 @@ columns:
       description: Conselho de alimentação escolar - Quantidade de reuniões nos últimos
           12 meses
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3029,7 +3029,7 @@ columns:
       bigquery_type: int64
       description: Existência do Conselho de transporte escolar
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3059,7 +3059,7 @@ columns:
       bigquery_type: int64
       description: Ano de criação do Conselho de transporte escolar
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
@@ -3074,7 +3074,7 @@ columns:
       bigquery_type: string
       description: Formação do Conselho de transporte escolar
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3089,7 +3089,7 @@ columns:
       bigquery_type: int64
       description: Caráter do Conselho de transporte escolar - Consultivo
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3104,7 +3104,7 @@ columns:
       bigquery_type: int64
       description: Caráter do Conselho de transporte escolar - Deliberativo
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3119,7 +3119,7 @@ columns:
       bigquery_type: int64
       description: Caráter do Conselho de transporte escolar - Normativo
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3134,7 +3134,7 @@ columns:
       bigquery_type: int64
       description: Caráter do Conselho de transporte escolar - Fiscalizador
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3150,7 +3150,7 @@ columns:
       description: Conselho de transporte escolar - Quantidade de reuniões nos últimos
           12 meses
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3509,7 +3509,7 @@ columns:
       bigquery_type: int64
       description: Nomeação de diretor(a) da escola estadual occore por - Indicação
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3524,7 +3524,7 @@ columns:
       bigquery_type: int64
       description: Nomeação de diretor(a) da escola estadual occore por - Eleição
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3540,7 +3540,7 @@ columns:
       description: Nomeação de diretor(a) da escola estadual occore por - Processo
           seletivo
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -3555,7 +3555,7 @@ columns:
       bigquery_type: int64
       description: Nomeação de diretor(a) da escola estadual occore por - Outro
       temporal_coverage:
-          - (2)
+          - 2014, 2018
       covered_by_dictionary: no
       directory_column:
           dataset_id:
