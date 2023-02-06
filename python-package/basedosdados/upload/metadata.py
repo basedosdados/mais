@@ -186,7 +186,7 @@ class Metadata(Base):
             }
         '''
         variables = {"id": self.dataset_uuid}
-        api_response = requests.post(self.api_graphql, json={"query": query, "variables": variables}, timeout=90).json()
+        api_response = self._get_graphql(query, variables)
         dataset = api_response.get("data", {}).get("allDataset", {}).get("edges", [{}])[0].get("node", {})
         # tables = dataset.get("tables", {}).get("edges", [])
         if len(dataset) == 0:
@@ -480,7 +480,7 @@ class Metadata(Base):
         '''
         variables = {"dataset_id": self.dataset_id, "table_id": self.table_id}
 
-        response = requests.post(self.api_graphql, json={'query': query, 'variables': variables}, timeout=90).json()
+        response = self._get_graphql(query, variables)
 
         if self.table_id:
             table = response.get("data").get("allDataset").get("edges")[0].get("node").get("tables")
@@ -570,22 +570,22 @@ class Metadata(Base):
                 + " Set the arg `if_exists` to `replace` to replace it."
             )
         if if_exists != "pass":
-            ckan_metadata = self.ckan_metadata
+            api_metadata = self.api_metadata
 
             # Add local columns if
             # 1. columns is empty and
             # 2. force_columns is True
 
             # TODO: Is this sufficient to add columns?
-            if self.table_id and (force_columns or not ckan_metadata.get("columns")):
-                ckan_metadata["columns"] = [{"name": c} for c in columns]
+            if self.table_id and (force_columns or not api_metadata.get("columns")):
+                api_metadata["columns"] = [{"name": c} for c in columns]
 
             yaml_obj = build_yaml_object(
                 dataset_id=self.dataset_id,
                 table_id=self.table_id,
                 config=self.config,
                 schema=self.metadata_schema,
-                metadata=ckan_metadata,
+                metadata=api_metadata,
                 columns_schema=self.columns_schema,
                 partition_columns=partition_columns,
             )

@@ -26,7 +26,7 @@ from basedosdados.constants import config, constants
 warnings.filterwarnings("ignore")
 
 
-class Base:
+class Base:  # pylint: disable=too-many-instance-attributes
     """
     Base class for all datasets
     """
@@ -430,7 +430,32 @@ class Base:
             (self.config_path / "templates"),
         )
 
+    def _get_graphql(
+            self,
+            query: str = None,
+            variables: dict = None,
+            headers: dict = None
+    ) -> dict:
+        """
+        Gets the graphql object
+        Args:
+            query: the query to be used
+            variables: the variables to be used
+        Returns:
+            dict: the graphql response
+        """
+        if headers is None:
+            headers = {}
+        graphql_json = {"query": query, "variables": variables}
+        return requests.post(
+            self.api_graphql,
+            headers=headers,
+            json=graphql_json,
+            timeout=90
+        ).json()
+
     def load_token(self) -> dict:
+        """Load token from configuration file of the user"""
         if not self.token_file.exists():
             return {"access": ""}
         with open(self.token_file) as f:
@@ -438,10 +463,19 @@ class Base:
         return token
 
     def save_token(self, token) -> None:
+        """Save token to configuration file of the user"""
         with open(self.token_file, "w") as f:
             json.dump(token, f)
 
     def get_token(self, username, password=None) -> dict:
+        """
+        Get token using username and password passed via CLI
+        Args:
+            username: username
+            password: password
+        Returns:
+            dict: token
+        """
         if password is None:
             password = pwinput.pwinput("Password: ")
 
@@ -463,6 +497,9 @@ class Base:
         return {"access": r.json()["data"]["tokenAuth"]["token"]}
 
     def refresh_token(self, token: dict) -> dict:
+        """
+        If token is expired, refresh it
+        """
         query = '''
             mutation refreshToken($token: String!) {
                 refreshToken(token: $token) {
@@ -478,6 +515,7 @@ class Base:
         return {"access": r.json()["data"]["refreshToken"]["token"]}
 
     def verify_token(self, token) -> bool:
+        """Verify if token is valid using unix timestamp"""
         if token == "":
             return False
         query = '''
