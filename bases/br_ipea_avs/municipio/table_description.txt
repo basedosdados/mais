@@ -1,4 +1,4 @@
-None
+A tabela oferece um panorama da vulnerabilidade e da exclusão social dos municípios brasileiros nos anos dos últimos Censos (2000 e 2010). O índice de vulnerabilidade social é gerado a partir da análise de variáveis socioeconômicas, tais como, escolaridade, mortalidade, expectativa de vida, etc.
 
 Para saber mais acesse:
 Website: 
@@ -9,12 +9,14 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: None
+Nome: Patrick Teixeira
 Código: 
+Email: patrick.teixeira@basedosdados.org
 Tratado por
 -----------
-Nome: None
+Nome: Patrick Teixeira
 Código: 
+Email: patrick.teixeira@basedosdados.org
 
 
 
@@ -28,17 +30,24 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
+- 2000(10)2010
 
 
 
 
 Cobertura Espacial
 ------------------
+- sa.br
 
 
 
 
+Tratamento
+----------
+Padronização para as normas da BD.
 
 
 
-
+Frequencia de Atualização
+-------------------------
+ten_years
