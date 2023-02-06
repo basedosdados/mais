@@ -9,10 +9,12 @@ import string
 from pprint import pprint
 
 import pytest
+import requests
 import ruamel.yaml as ryaml
 
 from basedosdados import Metadata
 from basedosdados.exceptions import BaseDosDadosException
+from loguru import logger
 
 METADATA_FILES = {"dataset": "dataset_config.yaml", "table": "table_config.yaml"}
 
@@ -74,3 +76,15 @@ def test_dataset_is_not_updated(api_dataset_metadata):
     """
 
     assert api_dataset_metadata.is_updated() is False
+
+
+def test_create_table(api_new_table_metadata):
+    """
+    Test if table is created.
+    """
+    try:
+        res = api_new_table_metadata.create()
+    except BaseException as e:
+        logger.error(f"Error: {e}")
+
+    assert False

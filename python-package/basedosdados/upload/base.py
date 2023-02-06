@@ -558,7 +558,10 @@ class Base:  # pylint: disable=too-many-instance-attributes
                 json={'query': query, 'variables': variables}
             ).json()['data']['allDataset']['edges'][0]['node']['_id']
         except IndexError as e:
-            print(e)
+            logger.error(
+                f"Dataset {dataset_slug} not found",
+                exc_info=e,
+            )
 
         return None
 
@@ -597,6 +600,9 @@ class Base:  # pylint: disable=too-many-instance-attributes
                 json={'query': query, 'variables': variables}
             ).json()['data']['allDataset']['edges'][0]['node']['tables']['edges'][0]['node']['_id']
         except IndexError as e:
-            print(e)
+            logger.error(
+                f"Table {table_slug} not found",
+                exc_info=e,
+            )
 
         return None
