@@ -2,10 +2,15 @@ Package: basedosdados
 Title: 'Base Dos Dados' R Client
 Version: 0.2.0
 Authors@R: 
-    person(given = "Pedro",
+    c(person(given = "Pedro",
            family = "Cavalcante",
            role = c("aut", "cre"),
-           email = "pedrocolrj@gmail.com")
+           email = "pedrocolrj@gmail.com"),
+      person(given = "Daniel",
+             family = "Herszenhut",
+             role = c("aut"),
+             email = "dhersz@gmail.com",
+             comment = c(ORCID = "0000-0001-8066-1105")))
 Description: An R interface to the 'Base dos Dados' API <https:basedosdados.github.io/mais/py_reference_api/>). Authenticate your project, query our tables, save data to disk and memory, all from R.
 License: MIT + file LICENSE
 Encoding: UTF-8
