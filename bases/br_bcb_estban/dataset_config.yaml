@@ -20,7 +20,8 @@ notes: O conjunto ESTBAN tem origem num subsistema do sistema COSIF (Padrão Con
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
 # Importante: preencher com a chave, e não o valor.
-groups: economia
+groups: 
+  - economia
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list

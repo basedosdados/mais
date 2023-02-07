@@ -22,7 +22,7 @@ description: Dicionário de dados das tabelas de agencia e municipio do conjunto
 #  
 #    - world
 spatial_coverage:
-    - sa.br
+    
 
 # Anos cobertos pela tabela.
 # Exemplos:

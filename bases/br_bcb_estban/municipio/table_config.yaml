@@ -31,7 +31,7 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
-    - 1988(1)2022
+    - 1988-08(1)2022-10
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -65,7 +65,7 @@ observation_level:
 
 last_updated:
     metadata: '2023-02-02'
-    data: '2023-02-02' 
+    data: '2023-02-02 16:40:00' 
     release: '2023-02-02 14:40:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
