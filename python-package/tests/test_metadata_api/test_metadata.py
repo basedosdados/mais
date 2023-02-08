@@ -13,6 +13,8 @@ import requests
 import ruamel.yaml as ryaml
 
 from basedosdados import Metadata
+from basedosdados.upload.metadata import convert_snake_and_camel_case
+
 from basedosdados.exceptions import BaseDosDadosException
 from loguru import logger
 
@@ -124,3 +126,34 @@ def test_update_table(api_table_metadata):
     """
     res = api_table_metadata.create(if_exists="replace")
     assert isinstance(res, Metadata)
+
+
+def test_convert_case_keys_in_indexes(api_table_metadata):
+    """
+    Test if case is converted in indexes.
+    """
+    query = '''
+                query ($id: ID!) {
+                  allDataset(id: $id) {
+                    edges{
+                      node{
+                        _id
+                        slug
+                        name
+                        description
+                        createdAt
+                        updatedAt  
+                      }
+                    }
+                  }
+                }
+            '''
+    variables = {"id": api_table_metadata.dataset_uuid}
+    res = api_table_metadata._get_graphql(query, variables)
+    old_dataset = res.get("data").get("allDataset").get("edges")[0].get("node")
+
+    snake_dataset = dict((convert_snake_and_camel_case(k, to="snake"), v) for k, v in old_dataset.items())
+    camel_dataset = dict((convert_snake_and_camel_case(k, to="camel"), v) for k, v in snake_dataset.items())
+
+    assert "created_at" in snake_dataset
+    assert "createdAt" in camel_dataset

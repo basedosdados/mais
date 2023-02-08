@@ -5,6 +5,7 @@ Class to manage the metadata of datasets and tables
 from __future__ import annotations
 
 import json
+import re
 from copy import deepcopy
 from datetime import datetime
 from functools import lru_cache
@@ -1046,3 +1047,23 @@ def build_yaml_object(
         )
 
     return yaml
+
+
+def convert_snake_and_camel_case(key_name: str, to: str = "snake") -> str:
+    """Converts the case of a snake_case string to camelCase and vice versa.
+
+    Args:
+        key_name (str): The string to be converted.
+        to (str, optional): The case to convert to. Defaults to "snake".
+
+    Returns:
+        str: The string with the desired case.
+    """
+    if to == "snake":
+        pattern = re.compile(r'(?<!^)(?=[A-Z])')
+        return pattern.sub('_', key_name).lower()
+    elif to == "camel":
+        new_key = ''.join(word.title() for word in key_name.split('_'))
+        return new_key[0].lower() + new_key[1:]
+    else:
+        raise ValueError("to must be either snake or camel")
