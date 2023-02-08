@@ -78,13 +78,49 @@ def test_dataset_is_not_updated(api_dataset_metadata):
     assert api_dataset_metadata.is_updated() is False
 
 
-def test_create_table(api_new_table_metadata):
+def test_columns_schema(api_table_metadata):
     """
-    Test if table is created.
+    Test columns schema.
     """
-    try:
-        res = api_new_table_metadata.create()
-    except BaseException as e:
-        logger.error(f"Error: {e}")
+    columns_schema = api_table_metadata.columns_schema
+    assert "directory_column" in columns_schema.get("properties")
 
-    assert False
+
+def test_table_metadata_schema(api_table_metadata):
+    """
+    Test metadata schema.
+    """
+    metadata_schema = api_table_metadata.metadata_schema
+    resource_type = metadata_schema.get("properties").get("resource_type").get("enum")[0]
+    assert resource_type == "bdm_table"
+
+
+def test_dataset_metadata_schema(api_dataset_metadata):
+    """
+    Test metadata schema.
+    """
+    metadata_schema = api_dataset_metadata.metadata_schema
+    resource_type = metadata_schema.get("properties").get("type").get("enum")[0]
+    assert resource_type == "dataset"
+
+
+def test_create_new_table(api_new_table_metadata):
+    """
+    Test if table is created. To be reproducible,
+    the test first deletes the table if it exists.
+    """
+    if api_new_table_metadata.filepath.exists():
+        api_new_table_metadata.filepath.unlink()
+
+    res = api_new_table_metadata.create()
+
+    assert api_new_table_metadata.filepath.exists() is True
+    assert isinstance(res, Metadata)
+
+
+def test_update_table(api_table_metadata):
+    """
+    Test if table is updated.
+    """
+    res = api_table_metadata.create(if_exists="replace")
+    assert isinstance(res, Metadata)

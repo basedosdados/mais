@@ -4,9 +4,11 @@ Class to manage the metadata of datasets and tables
 # pylint: disable=fixme, invalid-name, redefined-builtin, too-many-arguments, undefined-loop-variable, too-many-lines
 from __future__ import annotations
 
+import json
 from copy import deepcopy
 from datetime import datetime
 from functools import lru_cache
+from pathlib import Path
 from typing import Tuple, Dict, Any, List
 
 from loguru import logger
@@ -109,7 +111,7 @@ class Metadata(Base):
                   node{
                     _id
                     slug
-                    namePt
+                    name
                     __typename
                     organization{
                       _id
@@ -136,7 +138,7 @@ class Metadata(Base):
                       edges{
                         node{
                           _id
-                          namePt
+                          name
                           slug
                           __typename
                           description
@@ -156,6 +158,9 @@ class Metadata(Base):
                               namePt
                             }
                           }
+                          dataCleaningDescription
+                          dataCleaningCodeUrl
+                          architectureUrl
                           createdAt
                           updatedAt
                           cloudTables{
@@ -169,7 +174,7 @@ class Metadata(Base):
                           columns{
                             edges{
                               node{
-                                nameEn
+                                name
                                 bigqueryType{
                                   id
                                   name
@@ -413,44 +418,59 @@ class Metadata(Base):
     @property
     @lru_cache(256)
     def columns_schema(self) -> dict:
-        """Returns a dictionary with the schema of the columns (DEPRECATED)"""
+        """
+        Returns a dictionary with the schema of the columns
+        To keep compatibility with the old metadata schema, the schema is
+        read from a local file. In the future, this should be read from
+        the API endpoint.
+        """
 
-        url = f"{self.CKAN_URL}/api/3/action/bd_bdm_columns_schema"
+        json_path = Path(__file__).parent.parent / "schemas/columns_schema.json"
+        with open(json_path, "r", encoding="utf-8") as f:
+            schema = json.loads(f.read())
 
-        return requests.get(url, timeout=10).json().get("result")
+        return schema.get("result")
 
     @property
     @lru_cache(256)
     def metadata_schema(self) -> dict:
-        """Get metadata schema from CKAN API endpoint (DEPRECATED)"""
-
-        if self.table_id:
-            table_url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_schema"
-            return requests.get(table_url, timeout=10).json().get("result")
-
-        dataset_url = f"{self.CKAN_URL}/api/3/action/bd_dataset_schema"
-        return requests.get(dataset_url, timeout=10).json().get("result")
-
-    def exists_in_ckan(self) -> bool:
-        """Check if Metadata object refers to an existing CKAN package or reso
-        urce. [DEPRECATED]
-
-        Returns:
-            bool: The existence condition of the metadata in CKAN. `True` if i
-            t exists, `False` otherwise.
+        """
+        Returns a dictionary with the schema of the metadata (table or dataset)
+        To keep compatibility with the old metadata schema, the schema is
+        read from a local file. In the future, this should be read from
+        the API endpoint.
         """
 
         if self.table_id:
-            url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_show?"
-            url += f"dataset_id={self.dataset_id}&table_id={self.table_id}"
+            json_path = Path(__file__).parent.parent / "schemas/table_schema.json"
         else:
-            id = self.dataset_id.replace("_", "-")
-            # TODO: use `bd_bdm_dataset_show` when it's available for empty packages
-            url = f"{self.CKAN_URL}/api/3/action/package_show?id={id}"
+            json_path = Path(__file__).parent.parent / "schemas/dataset_schema.json"
 
-        exists_in_ckan = requests.get(url, timeout=10).json().get("success")
+        with open(json_path, "r", encoding="utf-8") as f:
+            schema = json.loads(f.read())
 
-        return exists_in_ckan
+        return schema.get("result")
+
+    # def exists_in_ckan(self) -> bool:
+    #     """Check if Metadata object refers to an existing CKAN package or reso
+    #     urce. [DEPRECATED]
+    #
+    #     Returns:
+    #         bool: The existence condition of the metadata in CKAN. `True` if i
+    #         t exists, `False` otherwise.
+    #     """
+    #
+    #     if self.table_id:
+    #         url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_show?"
+    #         url += f"dataset_id={self.dataset_id}&table_id={self.table_id}"
+    #     else:
+    #         id = self.dataset_id.replace("_", "-")
+    #         # TODO: use `bd_bdm_dataset_show` when it's available for empty packages
+    #         url = f"{self.CKAN_URL}/api/3/action/package_show?id={id}"
+    #
+    #     exists_in_ckan = requests.get(url, timeout=10).json().get("success")
+    #
+    #     return exists_in_ckan
 
     def exists_in_api(self) -> bool:
         """Check if Metadata object refers to an existing dataset or table.
@@ -581,8 +601,10 @@ class Metadata(Base):
                 api_metadata["columns"] = [{"name": c} for c in columns]
 
             yaml_obj = build_yaml_object(
-                dataset_id=self.dataset_id,
-                table_id=self.table_id,
+                dataset_id=self.dataset_uuid,
+                dataset_slug=self.dataset_id,
+                table_id=self.table_uuid,
+                table_slug=self.table_id,
                 config=self.config,
                 schema=self.metadata_schema,
                 metadata=api_metadata,
@@ -791,7 +813,8 @@ def handle_data(k, data, local_default=None):
     """
 
     # If no data is None then return a empty dict
-    data = data if data is not None else {}
+    # Hack to remove edges from GraphQL
+    data = data if data is not None and data != "edges" else {}
     # If no data is found for that key, uses local default
     selected = data.get(k, local_default)
 
@@ -837,6 +860,8 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
     d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
     if "properties" in definitions[d].keys():
         for dk, _ in definitions[d]["properties"].items():
+            if data == 'edges':  # Hack to remove edges from GraphQL
+                continue
 
             yaml_obj[k][dk] = handle_data(
                 k=dk,
@@ -926,18 +951,23 @@ def add_yaml_property(
 
 def build_yaml_object(
     dataset_id: str,
+    dataset_slug: str,
     table_id: str,
+    table_slug: str,
     config: dict,
     schema: dict,
     metadata: dict = None,
     columns_schema: dict = None,
     partition_columns: list = None,
 ):
-    """Build a dataset_config.yaml or table_config.yaml
+    """Build a dataset_config.yaml or table_config.yaml. Ids are now UUIDs.
+    To keep compatibility with BigQuery, we use the previous id as the slug.
 
     Args:
         dataset_id (str): The dataset id.
+        dataset_slug (str): The dataset slug.
         table_id (str): The table id.
+        table_slug (str): The table slug.
         config (dict): A dict with the `basedosdados` client configurations.
         schema (dict): A dict with the JSON Schema of the dataset or table.
         metadata (dict): A dict with the metadata of the dataset or table.
@@ -999,8 +1029,12 @@ def build_yaml_object(
 
     if table_id:
         # Add dataset_id and table_id
+        # FIXME: dataset and table slugs are not being used in new tables
         yaml["dataset_id"] = dataset_id
+        yaml["dataset_slug"] = dataset_slug
         yaml["table_id"] = table_id
+        yaml["table_slug"] = table_slug
+        yaml["title"] = metadata.get("name")
 
         # Add gcloud config variables
         yaml["source_bucket_name"] = str(config.get("bucket_name"))

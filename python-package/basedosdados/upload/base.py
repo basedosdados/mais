@@ -492,7 +492,12 @@ class Base:  # pylint: disable=too-many-instance-attributes
             }
         '''
         variables = {"username": username, "password": password}
-        r = requests.post(self.api_graphql, headers={"Content-Type": "application/json"}, json={"query": query, "variables": variables})
+        r = requests.post(
+            self.api_graphql,
+            headers={"Content-Type": "application/json"},
+            json={"query": query, "variables": variables},
+            timeout=90
+        )
         r.raise_for_status()
         return {"access": r.json()["data"]["tokenAuth"]["token"]}
 
@@ -510,7 +515,12 @@ class Base:  # pylint: disable=too-many-instance-attributes
             }
         '''
         variables = {"token": token["access"]}
-        r = requests.post(self.api_graphql, headers={"Content-Type": "application/json"}, json={"query": query, "variables": variables})
+        r = requests.post(
+            self.api_graphql,
+            headers={"Content-Type": "application/json"},
+            json={"query": query, "variables": variables},
+            timeout=90
+        )
         r.raise_for_status()
         return {"access": r.json()["data"]["refreshToken"]["token"]}
 
@@ -526,7 +536,12 @@ class Base:  # pylint: disable=too-many-instance-attributes
             }
         '''
         variables = {"token": token["access"]}
-        r = requests.post(self.api_graphql, headers={"Content-Type": "application/json"}, json={"query": query, "variables": variables})
+        r = requests.post(
+            self.api_graphql,
+            headers={"Content-Type": "application/json"},
+            json={"query": query, "variables": variables},
+            timeout=90
+        )
         current_datetime_unix = int(datetime.now().timestamp())
         if current_datetime_unix > r.json()["data"]["verifyToken"]["payload"]["exp"]:
             return False
@@ -555,10 +570,11 @@ class Base:  # pylint: disable=too-many-instance-attributes
         try:
             return requests.get(
                 self.api_graphql,
-                json={'query': query, 'variables': variables}
+                json={'query': query, 'variables': variables},
+                timeout=90
             ).json()['data']['allDataset']['edges'][0]['node']['_id']
         except IndexError as e:
-            logger.error(
+            logger.warning(
                 f"Dataset {dataset_slug} not found",
                 exc_info=e,
             )
@@ -597,10 +613,11 @@ class Base:  # pylint: disable=too-many-instance-attributes
         try:
             return requests.get(
                 self.api_graphql,
-                json={'query': query, 'variables': variables}
+                json={'query': query, 'variables': variables},
+                timeout=90
             ).json()['data']['allDataset']['edges'][0]['node']['tables']['edges'][0]['node']['_id']
         except IndexError as e:
-            logger.error(
+            logger.warning(
                 f"Table {table_slug} not found",
                 exc_info=e,
             )
