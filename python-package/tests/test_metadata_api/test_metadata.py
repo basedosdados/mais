@@ -13,7 +13,6 @@ import requests
 import ruamel.yaml as ryaml
 
 from basedosdados import Metadata
-from basedosdados.upload.metadata import convert_snake_and_camel_case
 
 from basedosdados.exceptions import BaseDosDadosException
 from loguru import logger
@@ -128,32 +127,101 @@ def test_update_table(api_table_metadata):
     assert isinstance(res, Metadata)
 
 
-def test_convert_case_keys_in_indexes(api_table_metadata):
+def test_simplify_graphql_empty_query(api_table_metadata):
     """
-    Test if case is converted in indexes.
+    Test if empty query is returned.
     """
     query = '''
-                query ($id: ID!) {
-                  allDataset(id: $id) {
-                    edges{
-                      node{
-                        _id
-                        slug
-                        name
-                        description
-                        createdAt
-                        updatedAt  
+    '''
+    variables = {}
+    cleaned_res = api_table_metadata._get_graphql(query, variables)
+    assert cleaned_res == {}
+
+
+def test_simplify_graphql_response(api_table_metadata):
+    """
+    Test if edges and nodes are removed from graphql response.
+    """
+    query = '''
+        query DatasetTableBySlug ($dataset_id: String!, $table_id: String!) {
+          allDataset(slug: $dataset_id) {
+            edges{
+              node{
+                _id
+                name
+                __typename
+                slug
+                organization{
+                  _id
+                  slug
+                }
+                themes{
+                  edges{
+                    node{
+                      id
+                      name
+                      slug
+                    }
+                  }
+                }
+                tables (slug: $table_id){
+                  edges{
+                    node{
+                      _id
+                      name
+                      slug
+                      __typename
+                      description
+                      coverages{
+                        edges{
+                          node{
+                            area{
+                              slug
+                            }
+                            temporalCoverage
+                          }
+                        }
+                      }
+                      updateFrequency{
+                        number
+                        timeUnit{
+                          namePt
+                        }
+                      }
+                      data_cleaning_description: dataCleaningDescription
+                      data_cleaning_code_url: dataCleaningCodeUrl
+                      architecture_url: architectureUrl
+                      number_rows: numberRows
+                      created_at: createdAt
+                      updatedAt
+                      cloud_tables: cloudTables{
+                        edges{
+                          node{
+                            id
+                            gcpTableId
+                          }
+                        }
+                      }
+                      columns{
+                        edges{
+                          node{
+                            name
+                            bigqueryType{
+                              __typename
+                              _id
+                              name
+                            }
+                          }
+                        }
                       }
                     }
                   }
                 }
-            '''
-    variables = {"id": api_table_metadata.dataset_uuid}
-    res = api_table_metadata._get_graphql(query, variables)
-    old_dataset = res.get("data").get("allDataset").get("edges")[0].get("node")
-
-    snake_dataset = dict((convert_snake_and_camel_case(k, to="snake"), v) for k, v in old_dataset.items())
-    camel_dataset = dict((convert_snake_and_camel_case(k, to="camel"), v) for k, v in snake_dataset.items())
-
-    assert "created_at" in snake_dataset
-    assert "createdAt" in camel_dataset
+              }
+            }
+          }
+        }
+        '''
+    variables = {"dataset_id": api_table_metadata.dataset_id, "table_id": api_table_metadata.table_id}
+    cleaned_res = api_table_metadata._get_graphql(query, variables)
+    assert cleaned_res["allDataset"][0]["_id"] == api_table_metadata.dataset_uuid

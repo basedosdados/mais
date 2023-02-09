@@ -5,7 +5,7 @@ Class to manage the metadata of datasets and tables
 from __future__ import annotations
 
 import json
-import re
+
 from copy import deepcopy
 from datetime import datetime
 from functools import lru_cache
@@ -133,8 +133,8 @@ class Metadata(Base):
                         }
                       }
                     }
-                    createdAt
-                    updatedAt  
+                    created_at: createdAt
+                    updated_at: updatedAt  
                     tables{
                       edges{
                         node{
@@ -163,7 +163,7 @@ class Metadata(Base):
                           data_cleaning_code_url: dataCleaningCodeUrl
                           architecture_url: architectureUrl
                           number_rows: numberRows
-                          createdAt
+                          created_at: createdAt
                           metadata_modified: updatedAt
                           cloudTables{
                             edges{
@@ -194,17 +194,16 @@ class Metadata(Base):
         '''
         variables = {"id": self.dataset_uuid}
         api_response = self._get_graphql(query, variables)
-        dataset = api_response.get("data", {}).get("allDataset", {}).get("edges", [{}])[0].get("node", {})
-        # tables = dataset.get("tables", {}).get("edges", [])
-        if len(dataset) == 0:
+        dataset = api_response.get("allDataset")
+        if not dataset or len(dataset) == 0:
             return {}, {}
 
         if self.table_uuid:
-            for table in dataset["tables"]["edges"]:
-                if table["node"]["_id"] == self.table_uuid:
-                    return dataset, table["node"]
+            for table in dataset[0]["tables"]:
+                if table["_id"] == self.table_uuid:
+                    return dataset[0], table
 
-        return dataset, {}
+        return dataset[0], {}
 
 
     @property
@@ -276,18 +275,14 @@ class Metadata(Base):
             # "private": False,  [DEPRECATED]
             "owner_org": api_dataset.get("organization", {}).get("_id"),  #TODO: check cases in owner_org
             # "resources": [],  [DEPRECATED]
-            "themes": [
-                {"name": theme} for theme in self._get_nodes_from_edges(key="slug", edge=api_dataset.get("themes", [])) or []
-            ],  # groups in CKAN hierarchy
-            "tags": [
-                {"name": tag} for tag in self._get_nodes_from_edges(key="slug", edge=api_dataset.get("tags", [])) or []
-            ],
+            "themes": api_dataset.get("themes", {}),
+            "tags": api_dataset.get("tags", {}),
             "organization": {"name": api_dataset.get("organization")},
             "description": api_dataset.get("description"),
             # "ckan_url": self.local_metadata.get("url_ckan"),  [DEPRECATED]
             # "github_url": self.local_metadata.get("url_github"),  [DEPRECATED]
-            "created_at": datetime.fromisoformat(api_dataset.get("createdAt")).strftime("%Y-%m-%d %H:%M:%S"),
-            "updated_at": datetime.fromisoformat(api_dataset.get("updatedAt")).strftime("%Y-%m-%d %H:%M:%S"),
+            "created_at": datetime.fromisoformat(api_dataset.get("created_at")).strftime("%Y-%m-%d %H:%M:%S"),
+            "updated_at": datetime.fromisoformat(api_dataset.get("updated_at")).strftime("%Y-%m-%d %H:%M:%S"),
             "tables": [],
         }
 
@@ -322,8 +317,8 @@ class Metadata(Base):
                     "uncompressed_file_size": api_table.get("uncompressedFileSize"),  # TODO: not implemented yet
                     "compressed_file_size": api_table.get("compressedFileSize"),  # TODO: not implemented yet
                     "metadata_modified": api_table.get("updatedAt"),  # TODO: check the correct times
-                    "created_at": datetime.fromisoformat(api_table.get("createdAt")).strftime("%Y-%m-%d %H:%M:%S"),
-                    "updated_at": datetime.fromisoformat(api_table.get("updatedAt")).strftime("%Y-%m-%d %H:%M:%S"),
+                    "created_at": datetime.fromisoformat(api_table.get("created_at")).strftime("%Y-%m-%d %H:%M:%S"),
+                    "updated_at": datetime.fromisoformat(api_table.get("created_at")).strftime("%Y-%m-%d %H:%M:%S"),
                     "package_id": self.dataset_id,  # TODO: check if is id or uuid
                     "columns": api_table.get("columns"),
                 }
@@ -505,11 +500,10 @@ class Metadata(Base):
         response = self._get_graphql(query, variables)
 
         if self.table_id:
-            table = response.get("data").get("allDataset").get("edges")[0].get("node").get("tables")
-            exists_in_api = len(table.get("edges")) > 0
+            table = response.get("allDataset")[0].get("tables")
+            exists_in_api = len(table) > 0
         else:
-            dataset = response.get("data").get("allDataset").get("edges")
-            exists_in_api = len(dataset) > 0
+            exists_in_api = len(response.get("allDataset")) > 0
 
         return exists_in_api
 
@@ -1048,23 +1042,3 @@ def build_yaml_object(
         )
 
     return yaml
-
-
-def convert_snake_and_camel_case(key_name: str, to: str = "snake") -> str:
-    """Converts the case of a snake_case string to camelCase and vice versa.
-
-    Args:
-        key_name (str): The string to be converted.
-        to (str, optional): The case to convert to. Defaults to "snake".
-
-    Returns:
-        str: The string with the desired case.
-    """
-    if to == "snake":
-        pattern = re.compile(r'(?<!^)(?=[A-Z])')
-        return pattern.sub('_', key_name).lower()
-    if to == "camel":
-        new_key = ''.join(word.title() for word in key_name.split('_'))
-        return new_key[0].lower() + new_key[1:]
-
-    raise ValueError("to must be either snake or camel")

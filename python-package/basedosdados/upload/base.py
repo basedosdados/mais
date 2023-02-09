@@ -447,12 +447,42 @@ class Base:  # pylint: disable=too-many-instance-attributes
         if headers is None:
             headers = {}
         graphql_json = {"query": query, "variables": variables}
-        return requests.post(
+        response = requests.post(
             self.api_graphql,
             headers=headers,
             json=graphql_json,
             timeout=90
         ).json()
+
+        if "data" not in response:
+            return {}
+
+        return self._simplify_graphql_response(response["data"])
+
+    def _simplify_graphql_response(self, response: dict) -> dict:
+        """
+        Simplify the graphql response
+        Args:
+            response: the graphql response
+        Returns:
+            dict: the simplified graphql response
+        """
+        if response == {}:  # pragma: no cover
+            return {}
+
+        output_ = {}
+
+        for key in response:
+            try:
+                if isinstance(response[key], dict) and response[key].get("edges") is not None:
+                    output_[key] = [v.get("node") for v in list(map(self._simplify_graphql_response, response[key]["edges"]))]
+                elif isinstance(response[key], dict):
+                    output_[key] = self._simplify_graphql_response(response[key])
+                else:
+                    output_[key] = response[key]
+            except TypeError as e:
+                logger.error(f"Erro({e}): {key} - {response[key]}")
+        return output_
 
     def load_token(self) -> dict:
         """Load token from configuration file of the user"""
