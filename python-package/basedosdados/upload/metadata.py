@@ -159,11 +159,12 @@ class Metadata(Base):
                               namePt
                             }
                           }
-                          dataCleaningDescription
-                          dataCleaningCodeUrl
-                          architectureUrl
+                          data_cleaning_description: dataCleaningDescription
+                          data_cleaning_code_url: dataCleaningCodeUrl
+                          architecture_url: architectureUrl
+                          number_rows: numberRows
                           createdAt
-                          updatedAt
+                          metadata_modified: updatedAt
                           cloudTables{
                             edges{
                               node{
@@ -1062,8 +1063,8 @@ def convert_snake_and_camel_case(key_name: str, to: str = "snake") -> str:
     if to == "snake":
         pattern = re.compile(r'(?<!^)(?=[A-Z])')
         return pattern.sub('_', key_name).lower()
-    elif to == "camel":
+    if to == "camel":
         new_key = ''.join(word.title() for word in key_name.split('_'))
         return new_key[0].lower() + new_key[1:]
-    else:
-        raise ValueError("to must be either snake or camel")
+
+    raise ValueError("to must be either snake or camel")
