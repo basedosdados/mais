@@ -31,7 +31,7 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage: 
-    - 2014, 2018
+    - (1)
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -88,7 +88,7 @@ data_cleaned_by:
 data_cleaning_description: Compatibilização dos dados entre os anos e padronização para as normas da BD.
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ipea_avs/educacao/code
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_estadic/educacao/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -213,7 +213,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: raca_cor_autoclarado
+    - name: raca_cor_autodeclarado
       bigquery_type: int64
       description: Cor/raça respondido por autodeclaração do gestor da Educação
       temporal_coverage:

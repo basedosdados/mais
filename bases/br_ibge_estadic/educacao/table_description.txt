@@ -1,4 +1,4 @@
-A tabela fornece informações variadas sobre a gestão pública estadual sobre educação, recursos financeiros e humanos disponibilizados para ações, entre outros aspectos.
+None
 
 Para saber mais acesse:
 Website: 
@@ -9,14 +9,12 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Patrick Teixeira
+Nome: None
 Código: 
-Email: patrick.teixeira@basedosdados.org
 Tratado por
 -----------
-Nome: Patrick Teixeira
+Nome: None
 Código: 
-Email: patrick.teixeira@basedosdados.org
 
 
 
@@ -25,24 +23,17 @@ Email: patrick.teixeira@basedosdados.org
 
 Cobertura Temporal
 ------------------
-- 2014, 2018
 
 
 
 
 Cobertura Espacial
 ------------------
-- sa.br
 
 
 
 
-Tratamento
-----------
-Compatibilização dos dados entre os anos e padronização para as normas da BD.
 
 
 
-Frequencia de Atualização
--------------------------
-uncertain
+
