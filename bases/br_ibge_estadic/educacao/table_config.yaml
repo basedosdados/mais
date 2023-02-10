@@ -158,7 +158,7 @@ columns:
       description: Caracterização do órgão gestor
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -173,7 +173,7 @@ columns:
       description: Sexo do gestor da Educação
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -218,7 +218,7 @@ columns:
       description: Cor/raça respondido por autodeclaração do gestor da Educação
       temporal_coverage:
           - 2018
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -233,7 +233,7 @@ columns:
       description: Escolaridade do gestor da Educação
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -248,7 +248,7 @@ columns:
       description: Formação de nível superior do gestor da Educação
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -279,7 +279,7 @@ columns:
       description: Especificação do programa de gestão educacional oferecido na capacitação
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -1422,7 +1422,7 @@ columns:
           de Educação
       temporal_coverage:
           - 2018
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -1884,7 +1884,7 @@ columns:
       description: Formação do Conselho Estadual de Educação
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -2391,7 +2391,7 @@ columns:
       description: Função do gestor da educação no Conselho Estadual de Educação
       temporal_coverage:
           - 2018
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -2451,7 +2451,7 @@ columns:
       description: Formação do conselho do controle de acompanhamento social
       temporal_coverage:
           - 2018
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -2734,7 +2734,7 @@ columns:
       description: Formação do Conselho de alimentação escolar
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -3387,7 +3387,7 @@ columns:
       description: A gestão dos recursos financeiros está sob a responsabilidade
       temporal_coverage:
           - 2014
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -3447,7 +3447,7 @@ columns:
       description: Formação do Conselho Escolar
       temporal_coverage:
           - 2018
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -3457,12 +3457,12 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: ordenacao_despesas_educacao
+    - name: ordenacao_despesa_educacao
       bigquery_type: string
       description: Responsabilidade da ordenação de despesas da educação
       temporal_coverage:
           - 2018
-      covered_by_dictionary: no 
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -3587,7 +3587,7 @@ columns:
       description: Tipo de programa
       temporal_coverage:
           - 2014
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:

@@ -233,7 +233,7 @@ SAFE_CAST(lei_estadual_criacao_conselho_escolar AS INT64) lei_estadual_criacao_c
 SAFE_CAST(lei_conselho_escolar AS INT64) lei_conselho_escolar,
 SAFE_CAST(ano_conselho_escolar AS INT64) ano_conselho_escolar,
 SAFE_CAST(formacao_conselho_escolar AS STRING) formacao_conselho_escolar,
-SAFE_CAST(ordenacao_despesas_educacao AS STRING) ordenacao_despesas_educacao,
+SAFE_CAST(ordenacao_despesa_educacao AS STRING) ordenacao_despesa_educacao,
 SAFE_CAST(nomeacao_diretor_concurso_publico AS INT64) nomeacao_diretor_concurso_publico,
 SAFE_CAST(nomeacao_diretor_livre AS INT64) nomeacao_diretor_livre,
 SAFE_CAST(nomeacao_diretor_indicacao AS INT64) nomeacao_diretor_indicacao,
