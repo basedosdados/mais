@@ -1,6 +1,6 @@
 Package: basedosdados
 Title: 'Base Dos Dados' R Client
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     c(person(given = "Pedro",
              family = "Cavalcante",
