@@ -1,0 +1,52 @@
+The Food and Agriculture Organization of the United Nations (FAO) was born in 1945, after the ending of the World War II. FAO's part of the United Nations (UN) system focused on leading internacional efforts to defeat hunger. integrates FAO's production data domain and gathers annual data of crop statistics indices, recorded for 173 products since 1961,  including almost all countries of the world and geographical aggregates (Economic Blocks, Continents) according to the United Nations M-49 list.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+Tratado por
+-----------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+
+
+
+
+Cobertura Temporal
+------------------
+- 1961(1)2020
+
+
+
+
+Cobertura Espacial
+------------------
+- world
+
+
+
+
+Tratamento
+----------
+Renomeei colunas.
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
