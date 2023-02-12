@@ -1,0 +1,118 @@
+query ($id: ID!) {
+  allDataset(id: $id) {
+    edges{
+      node{
+        _id
+        name
+        slug
+        __typename
+        organization{
+          _id
+          slug
+        }
+        description
+        themes{
+          edges{
+            node{
+              name
+              slug
+            }
+          }
+        }
+        tags{
+          edges{
+            node{
+              name
+              slug
+            }
+          }
+        }
+        created_at: createdAt
+        updated_at: updatedAt
+        tables{
+          edges{
+            node{
+              _id
+              name
+              slug
+              __typename
+              description
+              coverages{
+                edges{
+                  node{
+                    area{
+                      slug
+                    }
+                    temporalCoverages{
+                      edges{
+                        node{
+                          temporal_coverage: slug
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              updateFrequency{
+                number
+                entity{
+                  update_frequency: slug
+                }
+              }
+              data_cleaning_description: dataCleaningDescription
+              data_cleaning_code_url: dataCleaningCodeUrl
+              architecture_url: architectureUrl
+              number_rows: numberRows
+              created_at: createdAt
+              metadata_modified: updatedAt
+              cloudTables{
+                edges{
+                  node{
+                    id
+                    gcpTableId
+                  }
+                }
+              }
+              columns{
+                edges{
+                  node{
+                    name
+                    description
+                    bigquery_type: bigqueryType{
+                      title: name
+                    }
+                    description
+                    coverages{
+                      edges{
+                        node{
+                          temporalCoverages{
+                            edges{
+                              node{
+                                temporal_coverage: slug
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                    measurement_unit: measurementUnit
+                    covered_by_dictionary: coveredByDictionary
+                    directory_column: directoryPrimaryKey{
+                      _id
+                    }
+                    is_partition: isPartition
+                    measurementUnit
+                    has_sensitive_data: containsSensitiveData
+                    observations
+                    is_in_staging: isInStaging
+                    is_partition: isPartition
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

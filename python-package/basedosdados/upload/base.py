@@ -66,6 +66,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
         self.test_api_endpoint = self.base_url + "/api/v1/private/bigquerytypes/"
         self.token_file = Path(self.config_path) / ".token.json"
 
+        self.graphql_queries_path = Path(__file__).parent.parent / "queries"
         self.api_graphql = self.base_url + "/api/v1/graphql#query"
 
     @staticmethod
@@ -453,6 +454,9 @@ class Base:  # pylint: disable=too-many-instance-attributes
             json=graphql_json,
             timeout=90
         ).json()
+        # FIXME when a error raises it is cleaning local metadata
+        if "errors" in response:
+            logger.error(response["errors"])
 
         if "data" not in response:
             return {}

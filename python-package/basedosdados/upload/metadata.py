@@ -105,93 +105,9 @@ class Metadata(Base):
     def api_metadata_extended(self) -> Tuple[dict, dict]:
         """Load dataset or table metadata from Base dos Dados API"""
 
-        query = '''
-            query ($id: ID!) {
-              allDataset(id: $id) {
-                edges{
-                  node{
-                    _id
-                    slug
-                    name
-                    __typename
-                    organization{
-                      _id
-                      slug
-                    }
-                    description
-                    themes{
-                      edges{
-                        node{
-                          slug
-                        }
-                      }
-                    }
-                    tags{
-                      edges{
-                        node{
-                          slug
-                        }
-                      }
-                    }
-                    created_at: createdAt
-                    updated_at: updatedAt  
-                    tables{
-                      edges{
-                        node{
-                          _id
-                          name
-                          slug
-                          __typename
-                          description
-                          coverages{
-                            edges{
-                              node{
-                                area{
-                                  slug
-                                }
-                                temporalCoverage
-                              }
-                            }
-                          }
-                          updateFrequency{
-                            number
-                            timeUnit{
-                              namePt
-                            }
-                          }
-                          data_cleaning_description: dataCleaningDescription
-                          data_cleaning_code_url: dataCleaningCodeUrl
-                          architecture_url: architectureUrl
-                          number_rows: numberRows
-                          created_at: createdAt
-                          metadata_modified: updatedAt
-                          cloudTables{
-                            edges{
-                              node{
-                                id
-                                gcpTableId
-                              }
-                            }
-                          }
-                          columns{
-                            edges{
-                              node{
-                                name
-                                bigqueryType{
-                                  id
-                                  name
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-        '''
+        with open(self.graphql_queries_path / "dataset_table_by_id.graphql", "r", encoding="utf-8") as file:
+            query = file.read()
+
         variables = {"id": self.dataset_uuid}
         api_response = self._get_graphql(query, variables)
         dataset = api_response.get("allDataset")
@@ -809,8 +725,7 @@ def handle_data(k, data, local_default=None):
     """
 
     # If no data is None then return a empty dict
-    # Hack to remove edges from GraphQL
-    data = data if data is not None and data != "edges" else {}
+    data = data if data is not None else {}
     # If no data is found for that key, uses local default
     selected = data.get(k, local_default)
 
@@ -856,8 +771,6 @@ def handle_complex_fields(yaml_obj, k, properties, definitions, data):
     d = properties[k]["allOf"][0]["$ref"].split("/")[-1]
     if "properties" in definitions[d].keys():
         for dk, _ in definitions[d]["properties"].items():
-            if data == 'edges':  # Hack to remove edges from GraphQL
-                continue
 
             yaml_obj[k][dk] = handle_data(
                 k=dk,

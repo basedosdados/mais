@@ -39,7 +39,7 @@
         "description": "Descrição do conjunto",
         "yaml_order": {
           "id_before": "organization",
-          "id_after": "groups"
+          "id_after": "themes"
         },
         "type": "string"
       },
@@ -142,7 +142,7 @@
           ]
         }
       },
-      "groups": {
+      "themes": {
         "title": "Temas",
         "description": "Quais temas caracterizam a base?\nOpções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list\nImportante: preencher com a chave, e não o valor.",
         "yaml_order": {
@@ -171,7 +171,7 @@
         "title": "Etiquetas",
         "description": "Quais etiquetas caracterizam a base?\nOpções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list\nExemplos:\n   - fertilidade\n   - preco\n   - desmatamento\nCaso crie etiquetas novas, as regras são:\n   - letras minúsculas\n   - sem acentos\n   - sempre no singular\n   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)",
         "yaml_order": {
-          "id_before": "groups",
+          "id_before": "themes",
           "id_after": "metadata_modified"
         }
       },
