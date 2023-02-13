@@ -16,15 +16,14 @@ Email: rdahis@basedosdados.org
 Tratado por
 -----------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_me_rais/code
+Código: 
 Website: ricardodahis.com
 Email: rdahis@basedosdados.org
 
 
 
-
-Colunas identificando linhas unicamente
--------------------
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
 
 
 
@@ -37,8 +36,6 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- continent
-- country
 
 
 
