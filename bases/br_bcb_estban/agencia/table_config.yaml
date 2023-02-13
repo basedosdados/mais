@@ -60,7 +60,6 @@ observation_level:
      - entity: agency
        columns:
            - cnpj_agencia        
-     - country: br
             
                
 
@@ -156,7 +155,7 @@ columns:
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_data_tempo
-          table_id: ano
+          table_id: mes
           column_name: mes
       measurement_unit: month
       has_sensitive_data: no
@@ -190,7 +189,7 @@ columns:
           column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
-      observations: Das 422.034.993 milhões de linhas com id_municipio, existem 3.682.911 (0,87%) que possuiam a coluna de id_municipio, do IBGE de 7 dígitos ou o id_municipio do Banco Central preenchida com valores nulos. Estas linhas foram mantidas.
+      observations: "Do total de observações, em 0,87% (em relação ao tratamento feito até o dia 02-02-2023) não constavam a informação com o código do município de 7 dígitos nem do código do município do banco central nos dados originais"
       is_in_staging: true
       is_partition: false
     - name: cnpj_basico
@@ -265,7 +264,7 @@ columns:
           column_name:
       measurement_unit: brl
       has_sensitive_data: no
-      observations:
+      observations: O Real (R$) foi implementado como unidade monetária corrente em julho de 1994. Para transformar os valores em outras unidades monetárias foi empregado o fator de conversão para R$ na coluna de valor, para todas as observações anteriores a julho de 1994, de acordo com os fatores de conversão disponibilizados pelo IPEA (http://ipeadata.gov.br/iframe_histmoedas.aspx)
       is_in_staging: true
       is_partition: false
 
