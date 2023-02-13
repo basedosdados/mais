@@ -1,0 +1,54 @@
+A tabela de Estatísticas Bancárias (ESTBAN) por agência se refere a posição mensal dos saldos das principais rubricas de balancetes dos bancos comerciais e dos bancos múltiplos com carteira comercial, agregadas por agência bancária. A ESTBAN tem origem num subsistema do sistema COSIF (Padrão Contábil das Instituições Reguladas pelo Banco Central do Brasil) com atualização mensal.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+Tratado por
+-----------
+Nome: Gabriel Pisa Folhes
+Código: 
+Email: gabriel.pisa@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- ano
+- mes
+- sigla_uf
+
+
+
+
+Cobertura Temporal
+------------------
+- 1988(1)2022
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+1. retirar acentos da coluna de instituicoes; 2. criar coluna id_municipio; 3. Dropar colunas 'MUNICIPIO', 'CODMUN_IBGE', 'CODMUN' originais da base descenessarias ou substituidas; 4. Tranformar a base do formato wide para o formato long para transformar 55 colunas de verbetes em uma única; 5. Corrigir unidades monetárias; 6. Criar regex para extrair identificador dos verbetes; 7. Criar colunas de ano e mês
+
+
+
+Frequencia de Atualização
+-------------------------
+month
