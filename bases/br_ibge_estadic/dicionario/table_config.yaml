@@ -40,7 +40,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1.2
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -177,6 +177,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 187
+number_rows: 182
 
 metadata_modified:
