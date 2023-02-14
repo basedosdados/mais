@@ -1,4 +1,3 @@
-
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_sgp_informacao
@@ -66,7 +65,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version: v1.0.1
+version: v1.0.2
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -83,14 +82,14 @@ data_cleaned_by:
     name: Gustavo Alcântara
     email: gustavo.alcantara@basedosdados.org
     github_user: gustavoalcantara
-    ckan_user: 
-    website: 
+    ckan_user:
+    website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
+data_cleaning_description: Renomeação de colunas para o padrão da BD.
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url:
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_sgp_informacao/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -145,6 +144,21 @@ columns:
       description: 'Presidente '
       temporal_coverage:
           - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: indicador_gastos_vice_presidencia
+      bigquery_type: int64
+      description: Indica se os gastos do cartão corporativo são da Vice-Presidência
+      temporal_coverage:
+          - 2019(1)2022
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -276,6 +290,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 113340
+number_rows: 116795
 
-metadata_modified: '2023-01-13T14:40:23.008141'
+metadata_modified: '2023-01-16T16:29:10.322248'
