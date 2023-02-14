@@ -1,11 +1,11 @@
 
 # Nome (slug) do conjunto no CKAN
 # Exemplos: br-ibge-populacao, br-tse-eleicoes
-name: world_spi
+name: world-spi
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title: Social Progress Index
+title: Global Indicators
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list

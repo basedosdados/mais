@@ -1,11 +1,11 @@
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: world_spi_spi
+dataset_id: world-spi-spi
 
 table_id: global_indicators
 
 # Título da tabela.
-title: Social Progress Index
+title: Global Indicators
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -134,8 +134,8 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: country
       bigquery_type: string
       description: Country
@@ -149,8 +149,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: country_id_iso_3
       bigquery_type: string
       description: Country 3-letter ISO code
@@ -164,8 +164,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: rank
       bigquery_type: int64
       description: Rank
@@ -179,8 +179,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: status
       bigquery_type: string
       description: Status (i.e. extra, partial, ranked)
@@ -194,8 +194,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: social_progress_index
       bigquery_type: float64
       description: Social Progress Index
@@ -209,8 +209,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: basic_human_needs
       bigquery_type: float64
       description: Basic Human Needs
@@ -224,8 +224,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: wellbeing
       bigquery_type: float64
       description: Wellbeing
@@ -239,8 +239,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: opportunity
       bigquery_type: float64
       description: Opportunity
@@ -254,8 +254,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: nutrition_basic_medical_care
       bigquery_type: float64
       description: Nutrition and Basic Medical Care
@@ -269,8 +269,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: water_sanitation
       bigquery_type: float64
       description: Water and Sanitation
@@ -284,8 +284,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: shelter
       bigquery_type: float64
       description: Shelter
@@ -299,8 +299,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: personal_safety
       bigquery_type: float64
       description: Personal Safety
@@ -314,8 +314,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: access_basic_knowledge
       bigquery_type: float64
       description: Access to Basic Knowledge
@@ -329,8 +329,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: access_infomation_communication
       bigquery_type: float64
       description: Access to Information & Communications
@@ -344,8 +344,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: health_wellness
       bigquery_type: float64
       description: Health & Wellness
@@ -359,8 +359,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: environmental_quality
       bigquery_type: float64
       description: Environmental Quality
@@ -374,8 +374,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: personal_rights
       bigquery_type: float64
       description: Personal Rights
@@ -389,8 +389,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: personal_freedom_choice
       bigquery_type: float64
       description: Personal Freedom & Choice
@@ -404,8 +404,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: inclusiveness
       bigquery_type: float64
       description: Inclusiveness
@@ -418,9 +418,10 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Country experts' aggregated evaluation of the question, "How equal
+          is the protection of rights and freedoms across social groups by the state?"
+      is_in_staging: true
+      is_partition: false
     - name: access_advanced_education
       bigquery_type: float64
       description: Access to Advanced Education
@@ -433,9 +434,10 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Citable documents - articles, reviews and conference papers -
+          per 1,000 population.
+      is_in_staging: true
+      is_partition: false
     - name: child_stunting
       bigquery_type: float64
       description: Child stunting
@@ -449,8 +451,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = low risk; 100 = high risk
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: infectious_diseases
       bigquery_type: float64
       description: Age-standardized Disability-Adjusted Life Years (DALYs) and other
@@ -465,8 +467,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: Age-standardized Disability-Adjusted Life Years (DALYs)
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: maternal_mortality_rate
       bigquery_type: float64
       description: Maternal mortality rate per 100,000 live births
@@ -479,9 +481,9 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Maternal deaths per 100,000 livebirths in women aged 10-54 years.
+      is_in_staging: true
+      is_partition: false
     - name: child_mortality_rate
       bigquery_type: float64
       description: Child mortality rate per 100,000 live births
@@ -494,9 +496,10 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Probability of dying between birth and exactly 5 years of age,
+          expressed per 1,000 live births.
+      is_in_staging: true
+      is_partition: false
     - name: undernourishment
       bigquery_type: float64
       description: Undernourishment
@@ -509,9 +512,15 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: Population percent
-      is_in_staging: True
-      is_partition: False
+      observations: The prevalence of undernourishment expresses the probability that
+          a randomly selected individual from the population consumes an amount of
+          calories that is insufficient to cover her/his energy requirement for an
+          active and healthy life. The indicator is computed by comparing a probability
+          distribution of habitual daily dietary energy consumption with a threshold
+          level called the minimum dietary energy requirement. Both are based on the
+          notion of an average individual in the reference population.
+      is_in_staging: true
+      is_partition: false
     - name: diet_low_fruit_vegetable
       bigquery_type: float64
       description: Diet low in fruits and vegetables
@@ -525,8 +534,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = low risk; 100 = high risk
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: unsafe_water_sanitation_hygiene
       bigquery_type: float64
       description: Unsafe water, sanitation and hygiene
@@ -539,9 +548,10 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Age-standardized Disability-Adjusted Life Years (DALYs) rate attributable
+          to unsafe water, sanitation and hygiene per 100,000 people.
+      is_in_staging: true
+      is_partition: false
     - name: access_improved_sanitation
       bigquery_type: float64
       description: Proportion of people with access to improved sanitation
@@ -554,9 +564,10 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Proportion of population
-      is_in_staging: True
-      is_partition: False
+      observations: Proportion of population with access to improved toilet types
+          as defined by the Joint Monitoring Program (JMP).
+      is_in_staging: true
+      is_partition: false
     - name: access_improved_water_source
       bigquery_type: float64
       description: Proportion of people with access to improved water source
@@ -569,12 +580,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Proportion of population
-      is_in_staging: True
-      is_partition: False
+      observations: Proportion of population with access to improved water sources
+          as defined by the Joint Monitoring Program (JMP).
+      is_in_staging: true
+      is_partition: false
     - name: satisfaction_water_quality
       bigquery_type: float64
-      description: proportion of people satisfied with water quality
+      description: Proportion of people satisfied with water quality
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -584,9 +596,11 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Proportion of population
-      is_in_staging: True
-      is_partition: False
+      observations: The proportion of respondents answering 'satisfied' to the question,
+          "In the city or area where you live, are you satisfied or dissatisfied with
+          the quality of water?"
+      is_in_staging: true
+      is_partition: false
     - name: household_air_pollution
       bigquery_type: float64
       description: Age-standardized Disability-Adjusted Life Years (DALYs) rate caused
@@ -600,9 +614,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Age-standardized Disability-Adjusted Life Years (DALYs) rate caused
+          by household air pollution from solid fuels per 100,000 people. Household
+          air pollution includes exposure to particulate matter less than 2.5 microns
+          in diameter (PM2.5) due to the use of solid fuels for cooking, including
+          coal, charcoal, wood, agricultural residue, and animal dung.
+      is_in_staging: true
+      is_partition: false
     - name: dissatisfaction_housing_affordability
       bigquery_type: float64
       description: Proportion of people dissatisfied with housing accessibility
@@ -615,9 +633,11 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Proportion of population
-      is_in_staging: True
-      is_partition: False
+      observations: The proportion of respondents answering 'dissatisfied' to the
+          question, “In the city or area where you live, are you satisfied or dissatisfied
+          with the availability of good, affordable housing?”
+      is_in_staging: true
+      is_partition: false
     - name: access_electricity
       bigquery_type: float64
       description: Access to electricity
@@ -630,9 +650,9 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: Population percent
-      is_in_staging: True
-      is_partition: False
+      observations: The percentage of the population with access to electricity
+      is_in_staging: true
+      is_partition: false
     - name: usage_clean_fuels_technology_cooking
       bigquery_type: float64
       description: Usage of clean fuels and technology for cooking
@@ -645,9 +665,10 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: Population percent
-      is_in_staging: True
-      is_partition: False
+      observations: The proportion of  population primarily using clean cooking fuels
+          and technologies for cooking.
+      is_in_staging: true
+      is_partition: false
     - name: political_killings_torture
       bigquery_type: float64
       description: Political killings and torture
@@ -661,8 +682,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = low freedom; 1 = high freedom
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: interpesoal_violence
       bigquery_type: float64
       description: Age-standardized Disability-Adjusted Life Years (DALYs) per 100,000
@@ -676,9 +697,11 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Interpersonal violence is defined as death or disability from
+          intentional use of physical force or power, threatened or actual, from another
+          person or group not including military or police forces.
+      is_in_staging: true
+      is_partition: false
     - name: transportation_related_injuries
       bigquery_type: float64
       description: Age-standardized Disability-Adjusted Life Years (DALYs) per 100,000
@@ -692,9 +715,11 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: These injuries include road injuries (death or disability due
+          to unintentional interaction with an automobile, motorcycle, pedal cycle,
+          or other vehicles) as well as other transport injuries.
+      is_in_staging: true
+      is_partition: false
     - name: intimate_partner_violence
       bigquery_type: float64
       description: Intimate Partner Violence
@@ -707,9 +732,11 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: Women over 15 years old
-      is_in_staging: True
-      is_partition: False
+      observations: Age-standardised prevalence of ever-partnered women aged 15 years
+          and older who experienced physical or sexual violence by a current or former
+          intimate partner in the last 12 months (%).
+      is_in_staging: true
+      is_partition: false
     - name: money_stolen
       bigquery_type: float64
       description: Money Stolen
@@ -722,9 +749,11 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Proportion of population
-      is_in_staging: True
-      is_partition: False
+      observations: The proportion of respondents answering 'yes' to the question,
+          "Within the last 12 months, have you had money or property stolen from you
+          or another household member?"
+      is_in_staging: true
+      is_partition: false
     - name: equal_access_quality_education
       bigquery_type: float64
       description: Equal access to quality education
@@ -738,8 +767,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = unequal; 4 = equal
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: population_no_schooling
       bigquery_type: float64
       description: Proportion of people without schooling
@@ -753,8 +782,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: Proportion of population
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: secondary_school_attainment
       bigquery_type: float64
       description: Secondary school attainment
@@ -767,9 +796,9 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: Over 25 years old
-      is_in_staging: True
-      is_partition: False
+      observations: Population with at least some secondary education
+      is_in_staging: true
+      is_partition: false
     - name: primary_school_enrollment
       bigquery_type: float64
       description: Primary school enrollment
@@ -782,9 +811,11 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: Children percent
-      is_in_staging: True
-      is_partition: False
+      observations: Total number of students of official primary school age who are
+          enrolled in any level of education, expressed as a percentage of the total
+          population of official primary school age.
+      is_in_staging: true
+      is_partition: false
     - name: gender_parity_secondary_attainment
       bigquery_type: float64
       description: Gender parity in secondary attainment
@@ -797,9 +828,10 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Distance from parity
-      is_in_staging: True
-      is_partition: False
+      observations: The absolute deviation from parity (=1) in secondary education
+          attainment of women and men.
+      is_in_staging: true
+      is_partition: false
     - name: alternative_source_information_index
       bigquery_type: float64
       description: Alternative sources of information index
@@ -813,8 +845,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = low; 1 = high
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: mobile_telephone_subscription
       bigquery_type: float64
       description: Mobile telephone subscriptions
@@ -827,9 +859,12 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Subscriptions to a public mobile telephone service using cellular
+           technology, including the number of pre-paid SIM cards active during the
+           past three months, expressed as the number of mobile telephone subscriptions
+           per 100 inhabitants.
+      is_in_staging: true
+      is_partition: false
     - name: internet_user
       bigquery_type: float64
       description: Internet users
@@ -842,9 +877,11 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: Population percent
-      is_in_staging: True
-      is_partition: False
+      observations: The estimated number of Internet users out of the total population,
+          using the Internet from any device (including mobile phones) in the last
+          12 months.
+      is_in_staging: true
+      is_partition: false
     - name: access_online_governance
       bigquery_type: float64
       description: Access to online governance
@@ -858,8 +895,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = low;  1 = high
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: equal_access_quality_healthcare
       bigquery_type: float64
       description: Equal access to quality healthcare
@@ -873,8 +910,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = unequal; 4 = equal
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: life_expectancy_60
       bigquery_type: float64
       description: Life expectancy at 60
@@ -887,9 +924,13 @@ columns:
           column_name:
       measurement_unit: year
       has_sensitive_data: no
-      observations: Years
-      is_in_staging: True
-      is_partition: False
+      observations: The average number of years that a person of 60 to 64 years of
+          age could expect to live, if he or she were to pass through life exposed
+          to the sex- and age-specific death rates prevailing at the time of his or
+          her 60 years, for a specific year, in a given country, territory, or geographic
+          area.
+      is_in_staging: true
+      is_partition: false
     - name: premature_death_non_communicable_disease
       bigquery_type: float64
       description: Premature deaths from non-communicable diseases per 100,000 live
@@ -903,9 +944,10 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Mortality rate due to cardiovascular diseases, cancers, diabetes,
+          and chronic respiratory diseases among populations aged 30–70 years.
+      is_in_staging: true
+      is_partition: false
     - name: access_essential_health_service
       bigquery_type: float64
       description: Access to essential health services
@@ -919,8 +961,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = none; 100 = full coverage
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: satisfaction_availability_quality_healthcare
       bigquery_type: float64
       description: Proportion of people satisfied with the availability of quality
@@ -934,9 +976,11 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Proportion of population
-      is_in_staging: True
-      is_partition: False
+      observations: The proportion of respondents answering 'satisfied' to the question,
+          In the city or area where you live, are you satisfied or dissatisfied with
+          the availability of quality healthcare?
+      is_in_staging: true
+      is_partition: false
     - name: outdoor_air_pollution
       bigquery_type: float64
       description: Age-standardized Disability-Adjusted Life Years (DALYs) per 100,000
@@ -950,9 +994,10 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Resulting from ambient particulate matter pollution, including
+          emissions from industrial activity, households, cars and trucks.
+      is_in_staging: true
+      is_partition: false
     - name: lead_exposure
       bigquery_type: float64
       description: Age-standardized Disability-Adjusted Life Years (DALYs) per 100,000
@@ -966,9 +1011,11 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Lead exposure is defined as acute exposure, measured by micrograms
+          of lead per decilitre of blood, and chronic exposure, measured by micrograms
+          of lead per gram of bone.
+      is_in_staging: true
+      is_partition: false
     - name: particulate_matter_pollution
       bigquery_type: float64
       description: Particulate matter pollution
@@ -981,9 +1028,12 @@ columns:
           column_name:
       measurement_unit: miligram
       has_sensitive_data: no
-      observations: Mean annual exposure, µg/m3
-      is_in_staging: True
-      is_partition: False
+      observations: Population-weighted mean levels of annual exposure to suspended
+          particles smaller than 2.5 microns in aerodynamic diameter (PM2.5), which
+          are capable of penetrating deep into the respiratory tract and causing severe
+          health damage.
+      is_in_staging: true
+      is_partition: false
     - name: specie_protection
       bigquery_type: float64
       description: Species protection
@@ -997,8 +1047,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = low; 100 = high
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: freedom_religion
       bigquery_type: float64
       description: Freedom of religion
@@ -1012,8 +1062,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = no freedom; 4 = full freedom
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: property_rights_women
       bigquery_type: float64
       description: Property rights for women
@@ -1027,8 +1077,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = no rights; 5 = full rights
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: freedom_peaceful_assembly
       bigquery_type: float64
       description: Freedom of peaceful assembly
@@ -1042,8 +1092,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = no freedom; 4 = full freedom
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: access_justice
       bigquery_type: float64
       description: Access to justice
@@ -1057,8 +1107,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = nonexistent; 1 = observed
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: freedom_discussion
       bigquery_type: float64
       description: Freedom of discussion
@@ -1072,8 +1122,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = low; 1 = high
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: political_right
       bigquery_type: float64
       description: Political rights
@@ -1087,8 +1137,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 and lower = no rights; 40 = full rights
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: freedom_domestic_movement
       bigquery_type: float64
       description: Freedom of domestic movement
@@ -1102,8 +1152,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0 = low; 1 = high
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: early_marriage
       bigquery_type: float64
       description: Early marriage
@@ -1116,12 +1166,12 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: Married women aged 15-19
-      is_in_staging: True
-      is_partition: False
+      observations: The percentage of women aged 15-19 years who are married or in-union.
+      is_in_staging: true
+      is_partition: false
     - name: satisfied_demand_contraception
       bigquery_type: float64
-      description: Satisfied demand for contraception
+      description: Percent Satisfied demand for contraception
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1131,12 +1181,13 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: Satisfied demand
-      is_in_staging: True
-      is_partition: False
+      observations: The percentage of total demand for family planning among married
+          or in-union women aged 15 to 49 that is satisfied with modern methods.
+      is_in_staging: true
+      is_partition: false
     - name: young_not_education_employment_training
       bigquery_type: float64
-      description: Young people not in education, employment or training
+      description: Percent Young people not in education, employment or training
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1146,12 +1197,12 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Youth are defined as persons between the ages of 15 and 24 years.
+      is_in_staging: true
+      is_partition: false
     - name: vulnerable_employment
       bigquery_type: float64
-      description: Vulnerable employment
+      description: Percentage of Vulnerable Employees
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1161,9 +1212,10 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Contributing family workers and own-account workers as a percentage
+          of total employment.
+      is_in_staging: true
+      is_partition: false
     - name: perception_corruption
       bigquery_type: float64
       description: Perception of corruption
@@ -1177,8 +1229,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0=high corruption; 100=low corruption
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: equal_protection_index
       bigquery_type: float64
       description: Equal protection index
@@ -1192,8 +1244,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0=low; 1=high
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: equal_access_index
       bigquery_type: float64
       description: Equal access index
@@ -1207,8 +1259,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0=low; 1=high
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: power_distributed_sexual_orientation
       bigquery_type: float64
       description: Power distributed by sexual orientation
@@ -1222,8 +1274,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0=extremely unequal; 3=equal
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: access_public_service_social_group
       bigquery_type: float64
       description: Access to public services distributed by social group
@@ -1237,8 +1289,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0=extremely unequal; 4=equal
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: acceptance_gay_lesbian
       bigquery_type: float64
       description: Proportion of population accepting gays and lesbians
@@ -1252,8 +1304,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: Proportion of population
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: discrimination_violence_against_minority
       bigquery_type: float64
       description: Discrimination and violence against minorities
@@ -1267,8 +1319,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0=low; 10=high
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: academic_freedom
       bigquery_type: float64
       description: Academic freedom
@@ -1282,8 +1334,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 0=low; 1=high
-      is_in_staging: True
-      is_partition: False
+      is_in_staging: true
+      is_partition: false
     - name: women_advanced_education
       bigquery_type: float64
       description: Proportion of women with advanced education
@@ -1296,9 +1348,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Proportion of females
-      is_in_staging: True
-      is_partition: False
+      observations: Proportion of females (age-standardized) with 12–18 years of education.
+      is_in_staging: true
+      is_partition: false
     - name: expected_year_tertiary_schooling
       bigquery_type: float64
       description: Expected years of tertiary schooling
@@ -1311,13 +1363,13 @@ columns:
           column_name:
       measurement_unit: year
       has_sensitive_data: no
-      observations: Year
-      is_in_staging: True
-      is_partition: False
+      observations: Number of years a person of tertiary school entrance age can expect
+          to spend within tertiary education.
+      is_in_staging: true
+      is_partition: false
     - name: citable_document
       bigquery_type: float64
-      description: "Citable documents (i.e.  articles, reviews and conference papers)\
-          \ per 1,000 population.\n"
+      description: Citable documents (i.e.  articles, reviews and conference papers) per 1,000 population.
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1327,9 +1379,10 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
-      is_in_staging: True
-      is_partition: False
+      observations: Citable documents - articles, reviews and conference papers -
+          per 1,000 population.
+      is_in_staging: true
+      is_partition: false
     - name: quality_weighted_university
       bigquery_type: float64
       description: Quality weighted universities
@@ -1342,9 +1395,13 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Points
-      is_in_staging: True
-      is_partition: False
+      observations: The number of universities in a country weighted by the quality
+          of universities, measured by university rankings on any of the three most
+          widely used international assessments. Universities in the top 400 on any
+          list are given double weight. Not ranked universities are given 5% weight
+          of the top ranked universities.
+      is_in_staging: true
+      is_partition: false
 
 number_rows: 2352
 
