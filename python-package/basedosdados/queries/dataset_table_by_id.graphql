@@ -3,7 +3,8 @@ query ($id: ID!) {
     edges{
       node{
         _id
-        name
+        name: slug
+        title: name
         slug
         __typename
         organization{
@@ -14,7 +15,6 @@ query ($id: ID!) {
         themes{
           edges{
             node{
-              name
               slug
             }
           }
@@ -22,13 +22,12 @@ query ($id: ID!) {
         tags{
           edges{
             node{
-              name
               slug
             }
           }
         }
         created_at: createdAt
-        updated_at: updatedAt
+        metadata_modified: updatedAt
         tables{
           edges{
             node{
@@ -41,7 +40,7 @@ query ($id: ID!) {
                 edges{
                   node{
                     area{
-                      slug
+                      spatial_coverage: slug
                     }
                     temporalCoverages{
                       edges{
@@ -53,14 +52,36 @@ query ($id: ID!) {
                   }
                 }
               }
-              updateFrequency{
+              update_frequency: updateFrequency{
                 number
-                entity{
-                  update_frequency: slug
+                period: entity{
+                  name
+                }
+              }
+              observation_level: observationLevel{
+                edges{
+                  node{
+                    entity: entity{
+                      name
+                    }
+                    columns{
+                      edges{
+                        node{
+                          name
+                        }
+                      }
+                    }
+                  }
                 }
               }
               data_cleaning_description: dataCleaningDescription
               data_cleaning_code_url: dataCleaningCodeUrl
+              partner_organization: partnerOrganization{
+                name
+                organization_id: _id
+              }
+              raw_files_url: rawDataUrl
+              auxiliary_files_url: auxiliaryFilesUrl
               architecture_url: architectureUrl
               number_rows: numberRows
               created_at: createdAt
@@ -70,6 +91,13 @@ query ($id: ID!) {
                   node{
                     id
                     gcpTableId
+                  }
+                }
+              }
+              partitions: columns(isPartition: true){
+                edges{
+                  node{
+                    name
                   }
                 }
               }

@@ -1,7 +1,7 @@
 """
 Tests for the Metadata class with new API
 """
-# pylint: disable=fixme, unused-import
+# pylint: disable=fixme, unused-import, protected-access
 from pathlib import Path
 import random
 import shutil
@@ -116,6 +116,15 @@ def test_create_new_table(api_new_table_metadata):
     res = api_new_table_metadata.create()
 
     assert api_new_table_metadata.filepath.exists() is True
+    assert isinstance(res, Metadata)
+
+
+def test_update_dataset(api_dataset_metadata):
+    """
+    Test if dataset is updated.
+    """
+    print(api_dataset_metadata.dataset_id)
+    res = api_dataset_metadata.create(if_exists="replace")
     assert isinstance(res, Metadata)
 
 
