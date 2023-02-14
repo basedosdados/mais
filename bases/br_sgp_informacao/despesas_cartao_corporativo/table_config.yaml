@@ -156,7 +156,7 @@ columns:
       is_partition: false
     - name: indicador_gastos_vice_presidencia
       bigquery_type: int64
-      description: Indica se os gastos do cartão corporativo são da Vice-Presidência
+      description: Se for igual a 1, indica que os gastos do cartão corporativo são da Vice-Presidência.
       temporal_coverage:
           - 2019(1)2022
       covered_by_dictionary: no
