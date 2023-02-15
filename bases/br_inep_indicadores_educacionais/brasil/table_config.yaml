@@ -54,6 +54,7 @@ observation_level:
     - entity: other
     - columns:
           - localizacao
+    - entity: other
     - columns:
           - rede
 
