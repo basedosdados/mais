@@ -56,10 +56,10 @@ observation_level:
       columns:
           - ano
     - entity: other
-    - columns:
+      columns:
           - localizacao
     - entity: other
-    - columns:
+      columns:
           - rede
 
 last_updated:
