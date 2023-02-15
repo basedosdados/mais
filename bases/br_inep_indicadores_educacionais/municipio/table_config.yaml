@@ -56,10 +56,11 @@ observation_level:
       columns:
           - ano
     - entity: other
-    - columns:
-          - rede
-    - columns:
+      columns:
           - localizacao
+    - entity: other
+      columns:
+          - rede
 
 last_updated:
     metadata: '2023-02-12'
