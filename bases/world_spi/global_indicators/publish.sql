@@ -17,7 +17,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.world_spi.global_indicators AS
+CREATE VIEW basedosdados-dev.world_spi_spi.global_indicators AS
 SELECT 
 SAFE_CAST(year AS INT64) year,
 SAFE_CAST(country AS STRING) country,
@@ -100,4 +100,4 @@ SAFE_CAST(women_advanced_education AS FLOAT64) women_advanced_education,
 SAFE_CAST(expected_year_tertiary_schooling AS FLOAT64) expected_year_tertiary_schooling,
 SAFE_CAST(citable_document AS FLOAT64) citable_document,
 SAFE_CAST(quality_weighted_university AS FLOAT64) quality_weighted_university
-FROM basedosdados-dev.world_spi_staging.global_indicators AS t
+FROM basedosdados-dev.world_spi_spi_staging.global_indicators AS t

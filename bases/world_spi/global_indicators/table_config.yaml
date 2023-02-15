@@ -1,11 +1,11 @@
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: world_spi
+dataset_id: world_spi_spi
 
 table_id: global_indicators
 
 # Título da tabela.
-title: Global Indicators
+title: Social Progress Index
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
