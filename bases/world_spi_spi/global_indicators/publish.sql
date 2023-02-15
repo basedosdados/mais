@@ -1,4 +1,4 @@
-/*   
+/*    
 Query para publicar a tabela.
 
 Esse é o lugar para:
