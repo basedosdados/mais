@@ -21,7 +21,7 @@ class Storage(Base):
     Manage files on Google Cloud Storage.
     """
 
-    def __init__(self, dataset_id=None, table_id=None, **kwargs):
+    def __init__(self, dataset_id, table_id, **kwargs):
         super().__init__(**kwargs)
 
         self.bucket = self.client["storage_staging"].bucket(self.bucket_name)
