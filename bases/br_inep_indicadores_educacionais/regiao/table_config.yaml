@@ -1,1404 +1,3473 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: regiao # AUTO GENERATED
-dataset_id: br_inep_indicadores_educacionais # AUTO GENERATED
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_inep_indicadores_educacionais
 
-url_ckan: https://basedosdados.org/dataset/br-inep-indicadores-educacionais # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais # AUTO GENERATED
+table_id: regiao
 
-version: v1.0 # REQUIRED
-
-last_updated: 2021-02-23 # AUTO GENERATED
+# Título da tabela.
+title: Região
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    Indicadores educacionais do Inep.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Indicadores educacionais do Inep a nível de região
 
-# Quem está completando esse arquivo config?
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+    - 2006(1)2022
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: one_year
+
+# Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+    - entity: year
+      columns:
+          - ano
+    - country: br
+      entity: region
+      columns:
+          - regiao
+    - entity: other
+    - columns:
+          - localizacao
+    - columns:
+          - rede
+
+last_updated:
+    metadata: '2023-02-12'
+    data: '2023-02-12 6:27:00'
+    release: '2023-02-12 6:27:00'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplos: v1.0, v1.1.3
+version: v1.2
+
+# Quem está preenchendo esses metadados?
 published_by:
-    name: Hevilyn Souza  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code # REQUIRED
-    website: https://github.com/Hevilyn
+    name: Hevilyn Souza
     email: hevilynsouza12@hotmail.com
+    github_user:
+    ckan_user:
+    website: https://github.com/Hevilyn
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: Hevilyn Souza
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
-    website: https://basedosdados.org/
-    email: hevilynsouza12@hotmail.com
+data_cleaned_by:
+    name: Lucas Moreira
+    email: lucas.moreira@basedosdados.org
+    github_user: lucasnascm
+    ckan_user: lucasnascm
+    website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    - Padronização dos nomes das colunas.
-    - Exclusão das colunas Região, Nome do Município e UF.
-    - Palavras sem acento e minúsculas.
-    - Palavras 'publico' e 'particular' se tornaram 'publica' e 'privada'
+data_cleaning_description: Coleta dos dados diretamente do site do Inep. Padronização
+    dos nomes das colunas. Retirada de acentos das palavras 'pública' e nível, além
+    de padronização no formato lower.
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: 1 ano # REQUIRED 
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_indicadores_educacionais/code
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - ano
-    - regiao
-    - localizacao
-    - rede
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
 
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-    - ano
-    - regiao
-    - localizacao
-    - rede
+# Url dos dados originais no GCP Storage.
+raw_files_url:
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - brasil
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
 
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
-    - 2006
-    - 2007
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
-    - 2020
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
+partitions:
+    - ano
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: regiao
-        description: Região
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: localizacao
-        description: Localização
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: rede
-        description: Rede Escolar
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ei
-        description: Média de Alunos por Turma - Educação Infantil
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ei_creche
-        description: Média de Alunos por Turma - Educação Infantil - Creche
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ei_pre_escola
-        description: Média de Alunos por Turma - Educação Infantil - Pré escola
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef
-        description: Média de Alunos por Turma - Ensino Fundamental (Turmas Unificadas inclusas no cálculo do indicador a partir de 2017)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef_anos_iniciais
-        description: Média de Alunos por Turma - Ensino Fundamental Anos Iniciais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef_anos_finais
-        description: Média de Alunos por Turma - Ensino Fundamental Anos Finais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef_1_ano
-        description: Média de Alunos por Turma - Ensino Fundamental 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef_2_ano
-        description: Média de Alunos por Turma - Ensino Fundamental 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef_3_ano
-        description: Média de Alunos por Turma - Ensino Fundamental 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef_4_ano
-        description: Média de Alunos por Turma - Ensino Fundamental 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef_5_ano
-        description: Média de Alunos por Turma - Ensino Fundamental 5º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef_6_ano
-        description: Média de Alunos por Turma - Ensino Fundamental 6º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef_7_ano
-        description: Média de Alunos por Turma - Ensino Fundamental 7º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef_8_ano
-        description: Média de Alunos por Turma - Ensino Fundamental 8º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef_9_ano
-        description: Média de Alunos por Turma - Ensino Fundamental 9º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_ef_turmas_unif_multi_fluxo
-        description: Média de Alunos por Turma - Ensino Fundamental - Turmas Unificadas, Multi, Multietapa e Correção de fluxo (Turmas unificadas foram retiradas do cálculo a partir de 2017)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_em
-        description: Média de Alunos por Turma - Ensino Médio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_em_1_ano
-        description: Média de Alunos por Turma - Ensino Médio 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_em_2_ano
-        description: Média de Alunos por Turma - Ensino Médio 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_em_3_ano
-        description: Média de Alunos por Turma - Ensino Médio 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_em_4_ano
-        description: Média de Alunos por Turma - Ensino Médio 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: atu_em_nao_seriado
-        description: Média de Alunos por Turma - Ensino Médio Não Seriado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ei
-        description: Média de Horas-Aula diária - Educação Infantil
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ei_creche
-        description: Média de Horas-Aula diária - Educação Infantil Creche
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ei_pre_escola
-        description: Média de Horas-Aula diária - Educação Infantil Pré-escola
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ef
-        description: Média de Horas-Aula diária - Ensino Fundamental
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ef_anos_iniciais
-        description: Média de Horas-Aula diária - Ensino Fundamental Anos Iniciais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ef_anos_finais
-        description: Média de Horas-Aula diária - Ensino Fundamental Anos Finais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ef_1_ano
-        description: Média de Horas-Aula diária - Ensino Fundamental 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ef_2_ano
-        description: Média de Horas-Aula diária - Ensino Fundamental 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ef_3_ano
-        description: Média de Horas-Aula diária - Ensino Fundamental 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ef_4_ano
-        description: Média de Horas-Aula diária - Ensino Fundamental 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ef_5_ano
-        description: Média de Horas-Aula diária - Ensino Fundamental 5º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ef_6_ano
-        description: Média de Horas-Aula diária - Ensino Fundamental 6º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ef_7_ano
-        description: Média de Horas-Aula diária - Ensino Fundamental 7º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ef_8_ano
-        description: Média de Horas-Aula diária - Ensino Fundamental 8º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_ef_9_ano
-        description: Média de Horas-Aula diária - Ensino Fundamental 9º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_em
-        description: Média de Horas-Aula diária - Ensino Médio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_em_1_ano
-        description: Média de Horas-Aula diária - Ensino Médio 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_em_2_ano
-        description: Média de Horas-Aula diária - Ensino Médio 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_em_3_ano
-        description: Média de Horas-Aula diária - Ensino Médio 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: regiao
+      bigquery_type: string
+      description: Região
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: regiao
+          column_name: nome
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: localizacao
+      bigquery_type: string
+      description: Localização
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: rede
+      bigquery_type: string
+      description: Rede Escolar
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ei
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Educação Infantil
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ei_creche
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Educação Infantil Creche
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ei_pre_escola
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Educação Infantil Pré escola
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Turmas Unificadas inclusas no cálculo do indicador a partir de
+          2017
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef_anos_iniciais
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental Anos Iniciais
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef_anos_finais
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental Anos Finais
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef_1_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental 1º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef_2_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental 2º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef_3_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental 3º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef_4_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental 4º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef_5_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental 5º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef_6_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental 6º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef_7_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental 7º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef_8_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental 8º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef_9_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental 9º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_ef_turmas_unif_multi_fluxo
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Fundamental Turmas Unificadas,
+          Multi, Multietapa e Correção de fluxo
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations: Turmas unificadas foram retiradas do cálculo a partir de 2017
+      is_in_staging: true
+      is_partition: false
+    - name: atu_em
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Médio
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_em_1_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Médio 1º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_em_2_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Médio 2º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_em_3_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Médio 3º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_em_4_ano
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Médio 4º ano
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: atu_em_nao_seriado
+      bigquery_type: float64
+      description: Média de Alunos por Turma - Ensino Médio Não Seriado
+      temporal_coverage:
+          - 2007(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: person
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ei
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Educação Infantil
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ei_creche
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Educação Infantil Creche
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ei_pre_escola
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Educação Infantil Pré-escola
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ef
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Fundamental
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ef_anos_iniciais
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Fundamental Anos Iniciais
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ef_anos_finais
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Fundamental Anos Finais
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ef_1_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Fundamental 1º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ef_2_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Fundamental 2º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ef_3_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Fundamental 3º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ef_4_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Fundamental 4º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ef_5_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Fundamental 5º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ef_6_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Fundamental 6º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ef_7_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Fundamental 7º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ef_8_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Fundamental 8º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_ef_9_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Fundamental 9º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_em
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Médio
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_em_1_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Médio 1º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_em_2_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Médio 2º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_em_3_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Médio 3º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_em_4_ano
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Médio 4º ano
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: had_em_nao_seriado
+      bigquery_type: float64
+      description: Média de Horas-Aula diária - Ensino Médio Não Seriado
+      temporal_coverage:
+          - 2010(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: hour
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_ef
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Fundamental
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_ef_anos_iniciais
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Fundamental Anos Iniciais
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_ef_anos_finais
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Fundamental Anos Finais
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_ef_1_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Fundamental 1º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_ef_2_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Fundamental 2º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_ef_3_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Fundamental 3º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_ef_4_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Fundamental 4º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_ef_5_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Fundamental 5º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_ef_6_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Fundamental 6º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_ef_7_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Fundamental 7º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_ef_8_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Fundamental 8º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_ef_9_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Fundamental 9º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_em
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Médio
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_em_1_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Médio 1º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_em_2_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Médio 2º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_em_3_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Médio 3º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tdi_em_4_ano
+      bigquery_type: float64
+      description: Taxa de distorção idade-série - Ensino Médio 4º ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_ef
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Fundamental
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_ef_anos_iniciais
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Fundamental Anos Iniciais
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_ef_anos_finais
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Fundamental Anos Finais
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_ef_1_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Fundamental 1º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_ef_2_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Fundamental 2º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_ef_3_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Fundamental 3º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_ef_4_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Fundamental 4º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_ef_5_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Fundamental 5º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_ef_6_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Fundamental 6º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_ef_7_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Fundamental 7º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_ef_8_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Fundamental 8º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_ef_9_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Fundamental 9º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_em
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Médio
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_em_1_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Médio 1º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_em_2_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Médio 2º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_em_3_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Médio 3º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_em_4_ano
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Médio 4º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_aprovacao_em_nao_seriado
+      bigquery_type: float64
+      description: Taxa de Aprovação - Ensino Médio Não Seriado
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_ef
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Fundamental
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_ef_anos_iniciais
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Fundamental Anos Iniciais
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_ef_anos_finais
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Fundamental Anos Finais
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_ef_1_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Fundamental 1º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_ef_2_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Fundamental 2º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_ef_3_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Fundamental 3º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_ef_4_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Fundamental 4º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_ef_5_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Fundamental 5º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_ef_6_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Fundamental 6º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_ef_7_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Fundamental 7º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_ef_8_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Fundamental 8º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_ef_9_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Fundamental 9º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_em
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Médio
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_em_1_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Médio 1º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_em_2_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Médio 2º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_em_3_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Médio 3º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_em_4_ano
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Médio 4º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_reprovacao_em_nao_seriado
+      bigquery_type: float64
+      description: Taxa de Reprovação - Ensino Médio Não Seriado
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_ef
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Fundamental
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_ef_anos_iniciais
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Fundamental Anos Iniciais
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_ef_anos_finais
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Fundamental Anos Finais
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_ef_1_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Fundamental 1º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_ef_2_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Fundamental 2º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_ef_3_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Fundamental 3º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_ef_4_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Fundamental 4º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_ef_5_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Fundamental 5º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_ef_6_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Fundamental 6º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_ef_7_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Fundamental 7º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_ef_8_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Fundamental 8º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_ef_9_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Fundamental 9º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_em
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Médio
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_em_1_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Médio 1º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_em_2_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Médio 2º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_em_3_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Médio 3º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_em_4_ano
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Médio 4º ano
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: taxa_abandono_em_nao_seriado
+      bigquery_type: float64
+      description: Taxa de Abandono - Ensino Médio Não seriado
+      temporal_coverage:
+          - 2007(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_ef
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Fundamental
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_ef_anos_iniciais
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Fundamental Anos Iniciais
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_ef_anos_finais
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Fundamental Anos Finais
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_ef_1_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Fundamental 1º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_ef_2_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Fundamental 2º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_ef_3_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Fundamental 3º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_ef_4_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Fundamental 4º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_ef_5_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Fundamental 5º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_ef_6_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Fundamental 6º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_ef_7_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Fundamental 7º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_ef_8_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Fundamental 8º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_ef_9_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Fundamental 9º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_em
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Médio
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_em_1_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Médio 1º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_em_2_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Médio 2º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_em_3_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Médio 3º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_em_4_ano
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Médio 4º ano
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tnr_em_nao_seriado
+      bigquery_type: float64
+      description: Taxa de Não Resposta - Ensino Médio Não Seriado
+      temporal_coverage:
+          - 2010(1)2021
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dsu_ei
+      bigquery_type: float64
+      description: Percentual de Docentes com Curso Superior - Educação Infantil
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dsu_ei_creche
+      bigquery_type: float64
+      description: Percentual de Docentes com Curso Superior - Educação Infantil Creche
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dsu_ei_pre_escola
+      bigquery_type: float64
+      description: Percentual de Docentes com Curso Superior - Educação Infantil Pré-escola
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dsu_ef
+      bigquery_type: float64
+      description: Percentual de Docentes com Curso Superior - Ensino Fundamental
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dsu_ef_anos_iniciais
+      bigquery_type: float64
+      description: Percentual de Docentes com Curso Superior - Ensino Fundamental
+          Anos Iniciais
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dsu_ef_anos_finais
+      bigquery_type: float64
+      description: Percentual de Docentes com Curso Superior - Ensino Fundamental
+          Anos Finais
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dsu_em
+      bigquery_type: float64
+      description: Percentual de Docentes com Curso Superior - Ensino Médio
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dsu_ep
+      bigquery_type: float64
+      description: Percentual de Docentes com Curso Superior - Educação Profissional
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dsu_eja
+      bigquery_type: float64
+      description: Percentual de Docentes com Curso Superior - Educação Jovens Adultos
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: dsu_ee
+      bigquery_type: float64
+      description: Percentual de Docentes com Curso Superior - Educação Especial
+      temporal_coverage:
+          - 2011(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ei_grupo_1
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Infantil Grupo 1
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 1 atribui-se a docentes com formação superior de licenciatura
+          na mesma disciplina que lecionam, ou bacharelado na mesma disciplina com
+          curso de complementação pedagógica concluído
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ei_grupo_2
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Infantil Grupo 2
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 2 atribui-se a docentes com formação superior de bacharelado
+          na disciplina correspondente, mas sem licenciatura ou complementação pedagógica
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ei_grupo_3
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Infantil Grupo 3
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 3 atribui-se a docentes com licenciatura em área diferente
+          daquela que leciona, ou com bacharelado nas disciplinas da base curricular
+          comum e complementação pedagógica concluída em área diferente daquela que
+          leciona
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ei_grupo_4
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Infantil Grupo 4
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 4 atribui-se a docentes com outra formação superior não
+          considerada nas categorias anteriores
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ei_grupo_5
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Infantil Grupo 5
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 5 atribui-se a docentes que não possuem curso superior
+          completo
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_grupo_1
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Grupo 1
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 1 atribui-se a docentes com formação superior de licenciatura
+          na mesma disciplina que lecionam, ou bacharelado na mesma disciplina com
+          curso de complementação pedagógica concluído
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_grupo_2
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Grupo 2
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 2 atribui-se a docentes com formação superior de bacharelado
+          na disciplina correspondente, mas sem licenciatura ou complementação pedagógica
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_grupo_3
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Grupo 3
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 3 atribui-se a docentes com licenciatura em área diferente
+          daquela que leciona, ou com bacharelado nas disciplinas da base curricular
+          comum e complementação pedagógica concluída em área diferente daquela que
+          leciona
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_grupo_4
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Grupo 4
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 4 atribui-se a docentes com outra formação superior não
+          considerada nas categorias anteriores
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_grupo_5
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Grupo 5
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 5 atribui-se a docentes que não possuem curso superior
+          completo
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_anos_iniciais_grupo_1
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais
+          Grupo 1
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 1 atribui-se a docentes com formação superior de licenciatura
+          na mesma disciplina que lecionam, ou bacharelado na mesma disciplina com
+          curso de complementação pedagógica concluído
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_anos_iniciais_grupo_2
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais
+          Grupo 2
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 2 atribui-se a docentes com formação superior de bacharelado
+          na disciplina correspondente, mas sem licenciatura ou complementação pedagógica
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_anos_iniciais_grupo_3
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais
+          Grupo 3
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 3 atribui-se a docentes com licenciatura em área diferente
+          daquela que leciona, ou com bacharelado nas disciplinas da base curricular
+          comum e complementação pedagógica concluída em área diferente daquela que
+          leciona
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_anos_iniciais_grupo_4
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais
+          Grupo 4
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 4 atribui-se a docentes com outra formação superior não
+          considerada nas categorias anteriores
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_anos_iniciais_grupo_5
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais
+          Grupo 5
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 5 atribui-se a docentes que não possuem curso superior
+          completo
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_anos_finais_grupo_1
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Anos Finais
+          Grupo 1
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 1 atribui-se a docentes com formação superior de licenciatura
+          na mesma disciplina que lecionam, ou bacharelado na mesma disciplina com
+          curso de complementação pedagógica concluído
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_anos_finais_grupo_2
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Anos Finais
+          Grupo 2
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 2 atribui-se a docentes com formação superior de bacharelado
+          na disciplina correspondente, mas sem licenciatura ou complementação pedagógica
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_anos_finais_grupo_3
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Anos Finais
+          Grupo 3
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 3 atribui-se a docentes com licenciatura em área diferente
+          daquela que leciona, ou com bacharelado nas disciplinas da base curricular
+          comum e complementação pedagógica concluída em área diferente daquela que
+          leciona
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_anos_finais_grupo_4
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Anos Finais
+          Grupo 4
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 4 atribui-se a docentes com outra formação superior não
+          considerada nas categorias anteriores
+      is_in_staging: true
+      is_partition: false
+    - name: afd_ef_anos_finais_grupo_5
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Fundamental Anos Finais
+          Grupo 5
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 5 atribui-se a docentes que não possuem curso superior
+          completo
+      is_in_staging: true
+      is_partition: false
+    - name: afd_em_grupo_1
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Médio Grupo 1
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 1 atribui-se a docentes com formação superior de licenciatura
+          na mesma disciplina que lecionam, ou bacharelado na mesma disciplina com
+          curso de complementação pedagógica concluído
+      is_in_staging: true
+      is_partition: false
+    - name: afd_em_grupo_2
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Médio Grupo 2
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 2 atribui-se a docentes com formação superior de bacharelado
+          na disciplina correspondente, mas sem licenciatura ou complementação pedagógica
+      is_in_staging: true
+      is_partition: false
+    - name: afd_em_grupo_3
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Médio Grupo 3
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 3 atribui-se a docentes com licenciatura em área diferente
+          daquela que leciona, ou com bacharelado nas disciplinas da base curricular
+          comum e complementação pedagógica concluída em área diferente daquela que
+          leciona
+      is_in_staging: true
+      is_partition: false
+    - name: afd_em_grupo_4
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Médio Grupo 4
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 4 atribui-se a docentes com outra formação superior não
+          considerada nas categorias anteriores
+      is_in_staging: true
+      is_partition: false
+    - name: afd_em_grupo_5
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Ensino Médio Grupo 5
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 5 atribui-se a docentes que não possuem curso superior
+          completo
+      is_in_staging: true
+      is_partition: false
+    - name: afd_eja_fundamental_grupo_1
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino
+          Fundamental Grupo 1
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 1 atribui-se a docentes com formação superior de licenciatura
+          na mesma disciplina que lecionam, ou bacharelado na mesma disciplina com
+          curso de complementação pedagógica concluído
+      is_in_staging: true
+      is_partition: false
+    - name: afd_eja_fundamental_grupo_2
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino
+          Fundamental Grupo 2
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 2 atribui-se a docentes com formação superior de bacharelado
+          na disciplina correspondente, mas sem licenciatura ou complementação pedagógica
+      is_in_staging: true
+      is_partition: false
+    - name: afd_eja_fundamental_grupo_3
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino
+          Fundamental Grupo 3
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 3 atribui-se a docentes com licenciatura em área diferente
+          daquela que leciona, ou com bacharelado nas disciplinas da base curricular
+          comum e complementação pedagógica concluída em área diferente daquela que
+          leciona
+      is_in_staging: true
+      is_partition: false
+    - name: afd_eja_fundamental_grupo_4
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino
+          Fundamental Grupo 4
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 4 atribui-se a docentes com outra formação superior não
+          considerada nas categorias anteriores
+      is_in_staging: true
+      is_partition: false
+    - name: afd_eja_fundamental_grupo_5
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino
+          Fundamental Grupo 5
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 5 atribui-se a docentes que não possuem curso superior
+          completo
+      is_in_staging: true
+      is_partition: false
+    - name: afd_eja_medio_grupo_1
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino
+          Médio Grupo 1
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 1 atribui-se a docentes com formação superior de licenciatura
+          na mesma disciplina que lecionam, ou bacharelado na mesma disciplina com
+          curso de complementação pedagógica concluído
+      is_in_staging: true
+      is_partition: false
+    - name: afd_eja_medio_grupo_2
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino
+          Médio Grupo 2
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 2 atribui-se a docentes com formação superior de bacharelado
+          na disciplina correspondente, mas sem licenciatura ou complementação pedagógica
+      is_in_staging: true
+      is_partition: false
+    - name: afd_eja_medio_grupo_3
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino
+          Médio Grupo 3
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 3 atribui-se a docentes com licenciatura em área diferente
+          daquela que leciona, ou com bacharelado nas disciplinas da base curricular
+          comum e complementação pedagógica concluída em área diferente daquela que
+          leciona
+      is_in_staging: true
+      is_partition: false
+    - name: afd_eja_medio_grupo_4
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino
+          Médio Grupo 4
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 4 atribui-se a docentes com outra formação superior não
+          considerada nas categorias anteriores
+      is_in_staging: true
+      is_partition: false
+    - name: afd_eja_medio_grupo_5
+      bigquery_type: float64
+      description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino
+          Médio Grupo 5
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O grupo 5 atribui-se a docentes que não possuem curso superior
+          completo
+      is_in_staging: true
+      is_partition: false
+    - name: ird_baixa_regularidade
+      bigquery_type: float64
+      description: Regularidade do Corpo Docente - Baixa Regularidade
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ird_media_baixa
+      bigquery_type: float64
+      description: Regularidade do Corpo Docente - Média a Baixa Regularidade
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ird_media_alta
+      bigquery_type: float64
+      description: Regularidade do Corpo Docente - Média a Alta Regularidade
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ird_alta
+      bigquery_type: float64
+      description: Regularidade do Corpo Docente - Alta Regularidade
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_nivel_1
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Nível 1
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 1 atribui-se ao docente que tem até 25 alunos e atua em
+          um único turno, escola e etapa
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_nivel_2
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Nível 2
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 2 atribui-se ao docente que tem entre 25 e 150 alunos
+          e atua em um único turno, escola e etapa
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_nivel_3
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Nível 3
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 3 atribui-se ao docente que tem entre 25 e 300 alunos
+          e atua em um ou dois turnos em uma única escola e etapa
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_nivel_4
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Nível 4
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 4 atribui-se ao docente que tem entre 50 e 400 alunos
+          e atua em dois turnos, em uma ou duas escolas e em duas etapas
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_nivel_5
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Nível 5
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 5 atribui-se ao docente que tem mais de 300 alunos e atua
+          nos três turnos, em duas ou três escolas e em duas  etapas ou três etapas
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_nivel_6
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Nível 6
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 6 atribui-se ao docente que tem mais de 400 alunos e atua
+          nos três turnos, em duas ou três escolas e em duas etapas ou três etapas
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_anos_iniciais_nivel_1
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 1
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 1 atribui-se ao docente que tem até 25 alunos e atua em
+          um único turno, escola e etapa
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_anos_iniciais_nivel_2
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 2
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 2 atribui-se ao docente que tem entre 25 e 150 alunos
+          e atua em um único turno, escola e etapa
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_anos_iniciais_nivel_3
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 3
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 3 atribui-se ao docente que tem entre 25 e 300 alunos
+          e atua em um ou dois turnos em uma única escola e etapa
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_anos_iniciais_nivel_4
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 4
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 4 atribui-se ao docente que tem entre 50 e 400 alunos
+          e atua em dois turnos, em uma ou duas escolas e em duas etapas
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_anos_iniciais_nivel_5
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 5
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 5 atribui-se ao docente que tem mais de 300 alunos e atua
+          nos três turnos, em duas ou três escolas e em duas  etapas ou três etapas
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_anos_iniciais_nivel_6
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 6
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 6 atribui-se ao docente que tem mais de 400 alunos e atua
+          nos três turnos, em duas ou três escolas e em duas etapas ou três etapas
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_anos_finais_nivel_1
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Anos Finais Nível 1
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 1 atribui-se ao docente que tem até 25 alunos e atua em
+          um único turno, escola e etapa
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_anos_finais_nivel_2
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Anos Finais Nível 2
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 2 atribui-se ao docente que tem entre 25 e 150 alunos
+          e atua em um único turno, escola e etapa
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_anos_finais_nivel_3
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Anos Finais Nível 3
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 3 atribui-se ao docente que tem entre 25 e 300 alunos
+          e atua em um ou dois turnos em uma única escola e etapa
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_anos_finais_nivel_4
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Anos Finais Nível 4
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 4 atribui-se ao docente que tem entre 50 e 400 alunos
+          e atua em dois turnos, em uma ou duas escolas e em duas etapas
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_anos_finais_nivel_5
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Anos Finais Nível 5
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 5 atribui-se ao docente que tem mais de 300 alunos e atua
+          nos três turnos, em duas ou três escolas e em duas  etapas ou três etapas
+      is_in_staging: true
+      is_partition: false
+    - name: ied_ef_anos_finais_nivel_6
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Fundamental Anos Finais Nível 6
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 6 atribui-se ao docente que tem mais de 400 alunos e atua
+          nos três turnos, em duas ou três escolas e em duas etapas ou três etapas
+      is_in_staging: true
+      is_partition: false
+    - name: ied_em_nivel_1
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Médio Nível 1
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 1 atribui-se ao docente que tem até 25 alunos e atua em
+          um único turno, escola e etapa
+      is_in_staging: true
+      is_partition: false
+    - name: ied_em_nivel_2
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Médio Nível 2
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 2 atribui-se ao docente que tem entre 25 e 150 alunos
+          e atua em um único turno, escola e etapa
+      is_in_staging: true
+      is_partition: false
+    - name: ied_em_nivel_3
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Médio Nível 3
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 3 atribui-se ao docente que tem entre 25 e 300 alunos
+          e atua em um ou dois turnos em uma única escola e etapa
+      is_in_staging: true
+      is_partition: false
+    - name: ied_em_nivel_4
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Médio Nível 4
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 4 atribui-se ao docente que tem entre 50 e 400 alunos
+          e atua em dois turnos, em uma ou duas escolas e em duas etapas
+      is_in_staging: true
+      is_partition: false
+    - name: ied_em_nivel_5
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Médio Nível 5
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 5 atribui-se ao docente que tem mais de 300 alunos e atua
+          nos três turnos, em duas ou três escolas e em duas  etapas ou três etapas
+      is_in_staging: true
+      is_partition: false
+    - name: ied_em_nivel_6
+      bigquery_type: float64
+      description: Esforço Docente - Ensino Médio Nível 6
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: O nível 6 atribui-se ao docente que tem mais de 400 alunos e atua
+          nos três turnos, em duas ou três escolas e em duas etapas ou três etapas
+      is_in_staging: true
+      is_partition: false
+    - name: icg_nivel_1
+      bigquery_type: float64
+      description: Complexidade de Gestão da Escola Nível 1
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Porte inferior a 50 matrículas, operando em único turno e etapa
+          e apresentando a Educação Infantil ou Anos Iniciais como etapa mais elevada
+      is_in_staging: true
+      is_partition: false
+    - name: icg_nivel_2
+      bigquery_type: float64
+      description: Complexidade de Gestão da Escola Nível 2
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Porte entre 50 e 300 matrículas, operando em 2 turnos, com oferta
+          de até 2 etapas e apresentando a Educação Infantil ou Anos Iniciais como
+          etapa mais elevada
+      is_in_staging: true
+      is_partition: false
+    - name: icg_nivel_3
+      bigquery_type: float64
+      description: Complexidade de Gestão da Escola Nível 3
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Porte entre 50 e 500 matrículas, operando em 2 turnos, com 2 ou
+          3 etapas e apresentando os Anos Finais como etapa mais elevada
+      is_in_staging: true
+      is_partition: false
+    - name: icg_nivel_4
+      bigquery_type: float64
+      description: Complexidade de Gestão da Escola Nível 4
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Porte entre 150 e 1000 matrículas, operando em 2 ou 3 turnos,
+          com 2 ou 3 etapas, apresentando Ensino Médio/profissional ou a EJA como
+          etapa mais elevada
+      is_in_staging: true
+      is_partition: false
+    - name: icg_nivel_5
+      bigquery_type: float64
+      description: Complexidade de Gestão da Escola Nível 5
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Porte entre 150 e 1000 matrículas, operando em 3 turnos, com 2
+          ou 3 etapas, apresentando a EJA como etapa mais elevada
+      is_in_staging: true
+      is_partition: false
+    - name: icg_nivel_6
+      bigquery_type: float64
+      description: Complexidade de Gestão da Escola Nível 6
+      temporal_coverage:
+          - 2013(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: percent
+      has_sensitive_data: no
+      observations: Porte superior à 500 matrículas, operando em 3 turnos, com 4 ou
+          mais etapas, apresentando a EJA como etapa mais elevada
+      is_in_staging: true
+      is_partition: false
 
-    -    
-        name: had_em_4_ano
-        description: Média de Horas-Aula diária - Ensino Médio 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: had_em_nao_seriado
-        description: Média de Horas-Aula diária - Ensino Médio Não Seriado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_ef
-        description: Taxa de distorção idade-série - Ensino Fundamental
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_ef_anos_iniciais
-        description: Taxa de distorção idade-série - Ensino Fundamental Anos Iniciais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_ef_anos_finais
-        description: Taxa de distorção idade-série - Ensino Fundamental Anos Finais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_ef_1_ano
-        description: Taxa de distorção idade-série - Ensino Fundamental 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_ef_2_ano
-        description: Taxa de distorção idade-série - Ensino Fundamental 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_ef_3_ano
-        description: Taxa de distorção idade-série - Ensino Fundamental 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_ef_4_ano
-        description: Taxa de distorção idade-série - Ensino Fundamental 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_ef_5_ano
-        description: Taxa de distorção idade-série - Ensino Fundamental 5º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_ef_6_ano
-        description: Taxa de distorção idade-série - Ensino Fundamental 6º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_ef_7_ano
-        description: Taxa de distorção idade-série - Ensino Fundamental 7º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_ef_8_ano
-        description: Taxa de distorção idade-série - Ensino Fundamental 8º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_ef_9_ano
-        description: Taxa de distorção idade-série - Ensino Fundamental 9º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_em
-        description: Taxa de distorção idade-série - Ensino Médio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_em_1_ano
-        description: Taxa de distorção idade-série - Ensino Médio 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_em_2_ano
-        description: Taxa de distorção idade-série - Ensino Médio 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_em_3_ano
-        description: Taxa de distorção idade-série - Ensino Médio 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tdi_em_4_ano
-        description: Taxa de distorção idade-série - Ensino Médio 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_ef
-        description: Taxa de Aprovação - Ensino Fundamental
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_ef_anos_iniciais
-        description: Taxa de Aprovação - Ensino Fundamental Anos Iniciais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_ef_anos_finais
-        description: Taxa de Aprovação - Ensino Fundamental Anos Finais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_ef_1_ano
-        description: Taxa de Aprovação - Ensino Fundamental 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_ef_2_ano
-        description: Taxa de Aprovação - Ensino Fundamental 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_ef_3_ano
-        description: Taxa de Aprovação - Ensino Fundamental 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_ef_4_ano
-        description: Taxa de Aprovação - Ensino Fundamental 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_ef_5_ano
-        description: Taxa de Aprovação - Ensino Fundamental 5º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_ef_6_ano
-        description: Taxa de Aprovação - Ensino Fundamental 6º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_ef_7_ano
-        description: Taxa de Aprovação - Ensino Fundamental 7º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_ef_8_ano
-        description: Taxa de Aprovação - Ensino Fundamental 8º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_ef_9_ano
-        description: Taxa de Aprovação - Ensino Fundamental 9º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_em
-        description: Taxa de Aprovação - Ensino Médio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_em_1_ano
-        description: Taxa de Aprovação - Ensino Médio 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_em_2_ano
-        description: Taxa de Aprovação - Ensino Médio 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_em_3_ano
-        description: Taxa de Aprovação - Ensino Médio 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_em_4_ano
-        description: Taxa de Aprovação - Ensino Médio 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_aprovacao_em_nao_seriado
-        description: Taxa de Aprovação - Ensino Médio Não Seriado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_ef
-        description: Taxa de Reprovação - Ensino Fundamental
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_ef_anos_iniciais
-        description: Taxa de Reprovação - Ensino Fundamental Anos Iniciais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_ef_anos_finais
-        description: Taxa de Reprovação - Ensino Fundamental Anos Finais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_ef_1_ano
-        description: Taxa de Reprovação - Ensino Fundamental 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_ef_2_ano
-        description: Taxa de Reprovação - Ensino Fundamental 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_ef_3_ano
-        description: Taxa de Reprovação - Ensino Fundamental 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_ef_4_ano
-        description: Taxa de Reprovação - Ensino Fundamental 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_ef_5_ano
-        description: Taxa de Reprovação - Ensino Fundamental 5º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_ef_6_ano
-        description: Taxa de Reprovação - Ensino Fundamental 6º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_ef_7_ano
-        description: Taxa de Reprovação - Ensino Fundamental 7º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_ef_8_ano
-        description: Taxa de Reprovação - Ensino Fundamental 8º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_ef_9_ano
-        description: Taxa de Reprovação - Ensino Fundamental 9º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_em
-        description: Taxa de Reprovação - Ensino Médio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_em_1_ano
-        description: Taxa de Reprovação - Ensino Médio 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_em_2_ano
-        description: Taxa de Reprovação - Ensino Médio 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_em_3_ano
-        description: Taxa de Reprovação - Ensino Médio 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_em_4_ano
-        description: Taxa de Reprovação - Ensino Médio 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_reprovacao_em_nao_seriado
-        description: Taxa de Reprovação - Ensino Médio Não Seriado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_ef
-        description: Taxa de Abandono - Ensino Fundamental 
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_ef_anos_iniciais
-        description: Taxa de Abandono - Ensino Fundamental Anos Iniciais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_ef_anos_finais
-        description: Taxa de Abandono - Ensino Fundamental Anos Finais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_ef_1_ano
-        description: Taxa de Abandono - Ensino Fundamental 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_ef_2_ano
-        description: Taxa de Abandono - Ensino Fundamental 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_ef_3_ano
-        description: Taxa de Abandono - Ensino Fundamental 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_ef_4_ano
-        description: Taxa de Abandono - Ensino Fundamental 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_ef_5_ano
-        description: Taxa de Abandono - Ensino Fundamental 5º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_ef_6_ano
-        description: Taxa de Abandono - Ensino Fundamental 6º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_ef_7_ano
-        description: Taxa de Abandono - Ensino Fundamental 7º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_ef_8_ano
-        description: Taxa de Abandono - Ensino Fundamental 8º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_ef_9_ano
-        description: Taxa de Abandono - Ensino Fundamental 9º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_em
-        description: Taxa de Abandono - Ensino Médio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_em_1_ano
-        description: Taxa de Abandono - Ensino Médio 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_em_2_ano
-        description: Taxa de Abandono - Ensino Médio 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_em_3_ano
-        description: Taxa de Abandono - Ensino Médio 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_em_4_ano
-        description: Taxa de Abandono - Ensino Médio 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: taxa_abandono_em_nao_seriado
-        description: Taxa de Abandono - Ensino Médio Não seriado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_ef
-        description: Taxa de Não Resposta - Ensino Fundamental
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_ef_anos_iniciais
-        description: Taxa de Não Resposta - Ensino Fundamental Anos Iniciais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_ef_anos_finais
-        description: Taxa de Não Resposta - Ensino Fundamental Anos Finais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_ef_1_ano
-        description: Taxa de Não Resposta - Ensino Fundamental 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_ef_2_ano
-        description: Taxa de Não Resposta - Ensino Fundamental 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_ef_3_ano
-        description: Taxa de Não Resposta - Ensino Fundamental 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_ef_4_ano
-        description: Taxa de Não Resposta - Ensino Fundamental 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_ef_5_ano
-        description: Taxa de Não Resposta - Ensino Fundamental 5º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_ef_6_ano
-        description: Taxa de Não Resposta - Ensino Fundamental 6º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_ef_7_ano
-        description: Taxa de Não Resposta - Ensino Fundamental 7º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_ef_8_ano
-        description: Taxa de Não Resposta - Ensino Fundamental 8º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_ef_9_ano
-        description: Taxa de Não Resposta - Ensino Fundamental 9º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_em
-        description: Taxa de Não Resposta - Ensino Médio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_em_1_ano
-        description: Taxa de Não Resposta - Ensino Médio 1º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_em_2_ano
-        description: Taxa de Não Resposta - Ensino Médio 2º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_em_3_ano
-        description: Taxa de Não Resposta - Ensino Médio 3º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_em_4_ano
-        description: Taxa de Não Resposta - Ensino Médio 4º ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: tnr_em_nao_seriado
-        description: Taxa de Não Resposta - Ensino Médio Não Seriado
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dsu_ei
-        description: Percentual de Docentes com Curso Superior - Educação Infantil
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dsu_ei_creche
-        description: Percentual de Docentes com Curso Superior - Educação Infantil Creche
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dsu_ei_pre_escola
-        description: Percentual de Docentes com Curso Superior - Educação Infantil Pré-escola
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dsu_ef
-        description: Percentual de Docentes com Curso Superior - Ensino Fundamental
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dsu_ef_anos_iniciais
-        description: Percentual de Docentes com Curso Superior - Ensino Fundamental Anos Iniciais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dsu_ef_anos_finais
-        description: Percentual de Docentes com Curso Superior - Ensino Fundamental Anos Finais
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dsu_em
-        description: Percentual de Docentes com Curso Superior - Ensino Médio
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dsu_ep
-        description: Percentual de Docentes com Curso Superior - Educação Profissional
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dsu_eja
-        description: Percentual de Docentes com Curso Superior - Educação Jovens Adultos
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: dsu_ee
-        description: Percentual de Docentes com Curso Superior - Educação Especial
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ei_grupo_1
-        description: Adequação da Formação Docente - Educação Infantil Grupo 1
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ei_grupo_2
-        description: Adequação da Formação Docente - Educação Infantil Grupo 2
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ei_grupo_3
-        description: Adequação da Formação Docente - Educação Infantil Grupo 3
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ei_grupo_4
-        description: Adequação da Formação Docente - Educação Infantil Grupo 4
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ei_grupo_5
-        description: Adequação da Formação Docente - Educação Infantil Grupo 5
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_grupo_1
-        description: Adequação da Formação Docente - Ensino Fundamental Grupo 1
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_grupo_2
-        description: Adequação da Formação Docente - Ensino Fundamental Grupo 2 
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_grupo_3
-        description: Adequação da Formação Docente - Ensino Fundamental Grupo 3
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_grupo_4
-        description: Adequação da Formação Docente - Ensino Fundamental Grupo 4
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_grupo_5
-        description: Adequação da Formação Docente - Ensino Fundamental Grupo 5
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_anos_iniciais_grupo_1
-        description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais Grupo 1
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_anos_iniciais_grupo_2
-        description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais Grupo 2
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_anos_iniciais_grupo_3
-        description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais Grupo 3
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_anos_iniciais_grupo_4
-        description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais Grupo 4
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_anos_iniciais_grupo_5
-        description: Adequação da Formação Docente - Ensino Fundamental Anos Iniciais Grupo 5
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_anos_finais_grupo_1
-        description: Adequação da Formação Docente - Ensino Fundamental Anos Finais Grupo 1
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_anos_finais_grupo_2
-        description: Adequação da Formação Docente - Ensino Fundamental Anos Finais Grupo 2
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_anos_finais_grupo_3
-        description: Adequação da Formação Docente - Ensino Fundamental Anos Finais Grupo 3
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_anos_finais_grupo_4
-        description: Adequação da Formação Docente - Ensino Fundamental Anos Finais Grupo 4
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_ef_anos_finais_grupo_5
-        description: Adequação da Formação Docente - Ensino Fundamental Anos Finais Grupo 5
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_em_grupo_1
-        description: Adequação da Formação Docente - Ensino Médio Grupo 1
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_em_grupo_2
-        description: Adequação da Formação Docente - Ensino Médio Grupo 2
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_em_grupo_3
-        description: Adequação da Formação Docente - Ensino Médio Grupo 3
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_em_grupo_4
-        description: Adequação da Formação Docente - Ensino Médio Grupo 4
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_em_grupo_5
-        description: Adequação da Formação Docente - Ensino Médio Grupo 5
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_eja_fundamental_grupo_1
-        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Fundamental Grupo 1
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_eja_fundamental_grupo_2
-        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Fundamental Grupo 2
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_eja_fundamental_grupo_3
-        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Fundamental Grupo 3
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_eja_fundamental_grupo_4
-        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Fundamental Grupo 4
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_eja_fundamental_grupo_5
-        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Fundamental Grupo 5
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_eja_medio_grupo_1
-        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Médio Grupo 1
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_eja_medio_grupo_2
-        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Médio Grupo 2
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_eja_medio_grupo_3
-        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Médio Grupo 3
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_eja_medio_grupo_4
-        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Médio Grupo 4
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: afd_eja_medio_grupo_5
-        description: Adequação da Formação Docente - Educação Jovens Adultos - Ensino Médio Grupo 5
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ird_baixa_regularidade
-        description: Regularidade do Corpo Docente - Baixa Regularidade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ird_media_baixa
-        description: Regularidade do Corpo Docente - Média a Baixa Regularidade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ird_media_alta
-        description: Regularidade do Corpo Docente - Média a Alta Regularidade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ird_alta
-        description: Regularidade do Corpo Docente - Alta Regularidade
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_nivel_1
-        description: Esforço Docente - Ensino Fundamental Nível 1
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_nivel_2
-        description: Esforço Docente - Ensino Fundamental Nível 2
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_nivel_3
-        description: Esforço Docente - Ensino Fundamental Nível 3
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_nivel_4
-        description: Esforço Docente - Ensino Fundamental Nível 4
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_nivel_5
-        description: Esforço Docente - Ensino Fundamental Nível 5
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_nivel_6
-        description: Esforço Docente - Ensino Fundamental Nível 6
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_anos_iniciais_nivel_1
-        description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 1
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_anos_iniciais_nivel_2
-        description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 2
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_anos_iniciais_nivel_3
-        description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 3
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_anos_iniciais_nivel_4
-        description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 4
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_anos_iniciais_nivel_5
-        description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 5
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_anos_iniciais_nivel_6
-        description: Esforço Docente - Ensino Fundamental Anos Iniciais Nível 6
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_anos_finais_nivel_1
-        description: Esforço Docente - Ensino Fundamental Anos Finais Nível 1
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_anos_finais_nivel_2
-        description: Esforço Docente - Ensino Fundamental Anos Finais Nível 2
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_anos_finais_nivel_3
-        description: Esforço Docente - Ensino Fundamental Anos Finais Nível 3
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_anos_finais_nivel_4
-        description: Esforço Docente - Ensino Fundamental Anos Finais Nível 4
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_anos_finais_nivel_5
-        description: Esforço Docente - Ensino Fundamental Anos Finais Nível 5
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_ef_anos_finais_nivel_6
-        description: Esforço Docente - Ensino Fundamental Anos Finais Nível 6
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_em_nivel_1
-        description: Esforço Docente - Ensino Médio Nível 1
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_em_nivel_2
-        description: Esforço Docente - Ensino Médio Nível 2
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_em_nivel_3
-        description: Esforço Docente - Ensino Médio Nível 3
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_em_nivel_4
-        description: Esforço Docente - Ensino Médio Nível 4
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_em_nivel_5
-        description: Esforço Docente - Ensino Médio Nível 5
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: ied_em_nivel_6
-        description: Esforço Docente - Ensino Médio Nível 6
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: icg_nivel_1
-        description: Complexidade de Gestão da Escola Nível 1
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: icg_nivel_2
-        description: Complexidade de Gestão da Escola Nível 2
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: icg_nivel_3
-        description: Complexidade de Gestão da Escola Nível 3
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: icg_nivel_4
-        description: Complexidade de Gestão da Escola Nível 4
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: icg_nivel_5
-        description: Complexidade de Gestão da Escola Nível 5
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: icg_nivel_6
-        description: Complexidade de Gestão da Escola Nível 6
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+number_rows: 1620
+
+metadata_modified: '2022-11-25T10:16:33.068568'
