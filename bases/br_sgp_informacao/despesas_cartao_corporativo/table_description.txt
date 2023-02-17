@@ -1,4 +1,4 @@
-Despesas com cartão de pagamento do Governo Federal executadas em mandatos presidenciais anteriores
+Despesas com cartão de pagamento do Governo Federal executadas em mandatos presidenciais anteriores.
 
 Para saber mais acesse:
 Website: 
@@ -37,6 +37,9 @@ Cobertura Espacial
 
 
 
+Tratamento
+----------
+Renomeação de colunas para o padrão da BD.
 
 
 

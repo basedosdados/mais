@@ -21,7 +21,7 @@ class Storage(Base):
     Manage files on Google Cloud Storage.
     """
 
-    def __init__(self, dataset_id=None, table_id=None, **kwargs):
+    def __init__(self, dataset_id, table_id, **kwargs):
         super().__init__(**kwargs)
 
         self.bucket = self.client["storage_staging"].bucket(self.bucket_name)
@@ -242,7 +242,7 @@ class Storage(Base):
     def download(
         self,
         filename="*",
-        savepath="",
+        savepath=".",
         partitions=None,
         mode="raw",
         if_not_exists="raise",
@@ -319,14 +319,16 @@ class Storage(Base):
             (Path(savepath) / blob_folder).mkdir(parents=True, exist_ok=True)
 
             # download blob to savepath
-            blob.download_to_filename(filename=f"{savepath}/{blob.name}")
+            savepath = f"{savepath}/{blob.name}"
+            blob.download_to_filename(filename=savepath)
 
         logger.success(
-            " {object} {object_id}_{mode} was {action}!",
+            " {object} {object_id}_{mode} was {action} at: {path}!",
             object_id=self.dataset_id,
             mode=mode,
             object="File",
             action="downloaded",
+            path={str(savepath)}
         )
 
     def delete_file(self, filename, mode, partitions=None, not_found_ok=False):
