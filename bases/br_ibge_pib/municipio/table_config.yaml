@@ -6,13 +6,13 @@ dataset_id: br_ibge_pib
 table_id: municipio
 
 # Título da tabela.
-title: PIB
+title: Município
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: "Produto Interno Bruto (PIB) municipal a preços correntes.\n"
+description: Produto Interno Bruto (PIB) municipal a preços correntes
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -68,31 +68,31 @@ version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
-    github_user: rdahis
-    ckan_user: rdahis
-    website: www.ricardodahis.com
+    name: Arthur Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
+    website: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
-    github_user: rdahis
-    ckan_user: rdahis
-    website: www.ricardodahis.com
+    name: Arthur Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
+    website: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "Mudamos a unidade de medida para R$1.\n"
+data_cleaning_description: 
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pib/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
-    name: 
+    name:
     organization_id:
 
 # Url dos dados originais no GCP Storage.
@@ -162,20 +162,6 @@ columns:
           table_id:
           column_name:
       measurement_unit: brl
-      has_sensitive_data: no
-      is_in_staging: true
-      is_partition: false
-    - name: pib_pc
-      bigquery_type:
-      description: Produto Interno Bruto per capita, a preços correntes
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit: brl / person
       has_sensitive_data: no
       is_in_staging: true
       is_partition: false
@@ -262,4 +248,5 @@ columns:
 
 number_rows: 105756
 
-metadata_modified: '2022-12-15T00:07:32.625246'
+
+metadata_modified: '2023-01-27T09:46:24.365178'

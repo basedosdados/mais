@@ -1,0 +1,47 @@
+
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-me-clima-organizacional
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Pesquisa de Clima Organizacional 
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Se a organização não estiver na lista acima ou o nome não estiver conforme o manual de estilo
+# criar ou renomear a organização em https://basedosdados.org/organization/
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization: br-me
+
+# Descrição do conjunto
+notes:  A Pesquisa de Clima Organizacional tem como objetivo conhecer mais o dia a dia do trabalho, as práticas corporativas, os aspectos positivos da gestão de pessoas e as oportunidades de melhorias no ambiente de trabalho do servidor público federal. A iniciativa é inédita e está sendo realizada em parceria com o Great Place To Work (GPTW) e a Escola Nacional de Administração Pública (Enap), contando também com o apoio do Instituto República.
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+  - diversidade
+  - comunicacao
+  - politica
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos:
+#    - fertilidade
+#    - preco
+#    - desmatamento
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+  - pesquisa
+  - empresa
+  - avaliacao
+  - bem-estar
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified:
