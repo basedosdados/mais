@@ -99,6 +99,17 @@ class Metadata(Base):
         """Load dataset or table metadata from Base dos Dados API"""
 
         api_dataset, api_table = self.api_metadata_extended
+        if api_table:
+            api_table["update_frequency"] = f"{api_table['update_frequency']['number']} {api_table['update_frequency']['period']['name'].lower()}"
+            api_table["partitions"] = [partition["name"] for partition in api_table["partitions"]]
+            for idx, column in enumerate(api_table["columns"]):
+                api_table["columns"][idx]["bigquery_type"] = column["bigquery_type"]["title"].lower()
+        else:
+            api_dataset["organization"] = api_dataset["organization"]["slug"]
+            api_dataset["notes"] = api_dataset["description"]
+            api_dataset["themes"] = [theme["slug"] for theme in api_dataset["themes"]]
+            api_dataset["tags"] = [tag["slug"] for tag in api_dataset["tags"]]
+            api_dataset["metadata_modified"] = api_dataset["metadata_modified"].split("T")[0]
         return api_table or api_dataset
 
     @property
