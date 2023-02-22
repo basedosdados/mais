@@ -1,4 +1,4 @@
-Como capturar os dados de world_spi?
+Como capturar os dados de world_spi? 
 
 Para capturar esses dados, basta verificar o link dos dados originais indicado em dataset_config.yaml no item website.
 
