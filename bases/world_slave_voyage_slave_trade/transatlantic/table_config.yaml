@@ -1,17 +1,17 @@
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: world_slave_voyage_slave_trade
+dataset_id: world_slave_voyages_slave_trade
 
 table_id: transatlantic
 
 # Título da tabela.
-title: Slave Voyage
+title: Transatlantic
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: SlaveVoyages is a collaborative digital initiative that compiles and makes publicly accessible records of the largest slave trades in history. Search these records to learn about the broad origins and forced relocations of more than 12 million African people who were sent across the Atlantic in slave ships.
+description: For European societies located on either side of the Atlantic, the dataset contains information on ship construction and registration and relatively extensive records of owners’ and captains’ names. It will now be easier to pursue connections between the slave trade and other sectors of European and American economies. Researchers should be able to unravel trends in long-distance shipping activities, particularly important because no comparable body of data exists for other transoceanic trades. Data on crew mortality are abundant. The implications for new assessments of the social as well as the economic role of the slave trade in the regions where the slave voyage originated are obvious. In short, the major aim of this web resource is to facilitate and stimulate new research on the slave trade, the implications of which reach far beyond the slave trade itself.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -48,9 +48,9 @@ update_frequency: unique
 #       columns:
 #           - sigla_uf
 observation_level:
-     - entity: date
+     - entity: territorial_change
        columns:
-           - date_vessel_departed_captives
+           - id_voyage
 
 last_updated:
     metadata: '2023-02-17'

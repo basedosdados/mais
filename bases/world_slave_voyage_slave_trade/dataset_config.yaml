@@ -1,7 +1,7 @@
 
 # Nome (slug) do conjunto no CKAN
 # Exemplos: br-ibge-populacao, br-tse-eleicoes
-name: world-slave-voyage-slave-trade
+name: world-slave-voyages-slave-trade
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
@@ -12,7 +12,7 @@ title: transatlantic
 # Se a organização não estiver na lista acima ou o nome não estiver conforme o manual de estilo
 # criar ou renomear a organização em https://basedosdados.org/organization/
 # Exemplos: br-ibge, br-tse, br-rj-gov
-organization: world-slave-voyage
+organization: world-slave-voyages
 
 # Descrição do conjunto
 notes: The SlaveVoyages is a collaborative digital initiative that compiles and makes publicly accessible records of the largest slave trades in history. Search these records to learn about the broad origins and forced relocations of more than 12 million African people who were sent across the Atlantic in slave ships, and hundreds of thousands more who were trafficked within the Americas. Explore where they were taken, the numerous rebellions that occurred, the horrific loss of life during the voyages, the identities and nationalities of the perpetrators, and much more.
