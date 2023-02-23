@@ -970,6 +970,132 @@ foreach ano of numlist 2002(2)2022 {
 }
 *
 
+//-------------------------------------------------//
+// receitas - comite
+//-------------------------------------------------//
+
+//--------------------//
+// unifica header
+//--------------------//
+
+foreach ano of numlist 2002(2)2014 {
+	
+	use "output/receitas_comite_`ano'.dta", clear
+	
+	keep in 1/10
+	
+	tempfile c`ano'
+	save `c`ano''
+	
+}
+*
+
+use `c2002', clear
+foreach ano of numlist 2004(2)2014 {
+	append using `c`ano''
+}
+*
+drop if _n >= 1
+tempfile vazio
+save `vazio'
+
+//--------------------//
+// particiona
+//--------------------//
+
+!mkdir "output/receitas_comite"
+
+foreach ano of numlist 2002(2)2014 {
+	
+	!mkdir "output/receitas_comite/ano=`ano'"
+	
+	use `vazio', clear
+	append using "output/receitas_comite_`ano'.dta"
+	
+	if `ano' <= 2012 {
+		replace tipo_eleicao = "eleicao ordinaria" if tipo_eleicao == ""
+	}
+	
+	order ano tipo_eleicao sigla_uf id_municipio id_municipio_tse tipo_comite sequencial_comite numero_partido sigla_partido ///
+		data_receita valor_receita origem_receita fonte_receita natureza_receita situacao_receita descricao_receita ///
+		tipo_documento numero_documento ///
+		nome_membro cpf_membro ///
+		cnpj_prestador_contas ///
+		cpf_cnpj_doador sigla_uf_doador nome_doador nome_doador_rf descricao_cnae_2_doador cnpj_prestador_contas numero_partido_doador numero_candidato_doador cnae_2_doador cpf_cnpj_doador_orig nome_doador_orig tipo_doador_orig descricao_cnae_2_doador_orig nome_doador_orig_rf
+
+	//--------------//
+	// particiona
+	//--------------//
+	
+	drop ano
+	export delimited "output/receitas_comite/ano=`ano'/receitas_comite.csv", replace
+	
+}
+*
+
+//-------------------------------------------------//
+// receitas - orgao partidario
+//-------------------------------------------------//
+
+//--------------------//
+// unifica header
+//--------------------//
+
+foreach ano of numlist 2010(2)2022 {
+	
+	use "output/receitas_orgao_partidario_`ano'.dta", clear
+	
+	keep in 1/10
+	
+	tempfile c`ano'
+	save `c`ano''
+	
+}
+*
+
+use `c2010', clear
+foreach ano of numlist 2012(2)2022 {
+	append using `c`ano''
+}
+*
+drop if _n >= 1
+tempfile vazio
+save `vazio'
+
+//--------------------//
+// particiona
+//--------------------//
+
+!mkdir "output/receitas_orgao_partidario"
+
+foreach ano of numlist 2010(2)2022 {
+	
+	!mkdir "output/receitas_orgao_partidario/ano=`ano'"
+	
+	use `vazio', clear
+	append using "output/receitas_orgao_partidario_`ano'.dta"
+	
+	if `ano' <= 2012 {
+		replace tipo_eleicao = "eleicao ordinaria" if tipo_eleicao == ""
+	}
+	
+	order ano tipo_eleicao esfera_partidaria sigla_uf_diretorio id_municipio_diretorio id_municipio_tse_diretorio tipo_diretorio sequencial_diretorio numero_partido sigla_partido nome_partido ///
+	numero_recibo_eleitoral tipo_documento numero_documento ///
+	tipo_prestacao_contas data_prestacao_contas sequencial_prestador_contas cnpj_prestador_contas ///
+	data_receita valor_receita origem_receita fonte_receita natureza_receita especie_receita descricao_receita sequencial_receita ///
+	cnae_2_doador descricao_cnae_2_doador cpf_cnpj_doador nome_doador nome_doador_rf esfera_partidaria_doador sigla_uf_doador id_municipio_doador id_municipio_tse_doador sequencial_candidato_doador numero_candidato_doador cargo_candidato_doador numero_partido_doador sigla_partido_doador nome_partido_doador numero_recibo_doacao numero_documento_doacao ///
+	cpf_cnpj_doador_orig nome_doador_orig tipo_doador_orig descricao_cnae_2_doador_orig nome_doador_orig_rf
+	
+	
+	//--------------//
+	// particiona
+	//--------------//
+	
+	drop ano
+	export delimited "output/receitas_orgao_partidario/ano=`ano'/receitas_orgao_partidario.csv", replace
+	
+}
+*
 
 
 //-------------------------------------------------//
