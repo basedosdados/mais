@@ -17,7 +17,7 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.world_slave_voyage_slave_trade.transatlantic AS
+CREATE VIEW basedosdados-dev.world_slave_voyages_consortium_slave_trade.transatlantic AS
 SELECT 
 SAFE_CAST(id_voyage AS STRING) id_voyage,
 SAFE_CAST(date_vessel_departed_captives AS DATE) date_vessel_departed_captives,
@@ -74,4 +74,4 @@ SAFE_CAST(voyage_itinerary_imputed_port_began AS STRING) voyage_itinerary_impute
 SAFE_CAST(voyage_itinerary_imputed_slave_purchase AS STRING) voyage_itinerary_imputed_slave_purchase,
 SAFE_CAST(voyage_itinerary_imputed_slave_disembarkation_place AS STRING) voyage_itinerary_imputed_slave_disembarkation_place,
 SAFE_CAST(data_source AS STRING) data_source
-FROM basedosdados-dev.world_slave_voyage_slave_trade_staging.transatlantic AS t
+FROM basedosdados-dev.world_slave_voyages_consortium_slave_trade_staging.transatlantic AS t

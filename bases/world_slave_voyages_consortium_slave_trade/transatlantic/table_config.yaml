@@ -1,6 +1,6 @@
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
-dataset_id: world_slave_voyages_slave_trade
+dataset_id: world_slave_voyages_consortium_slave_trade
 
 table_id: transatlantic
 
@@ -80,7 +80,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Treatment according to BD standards
+data_cleaning_description: Treatment in accordance with the standards of the Data Base. I renamed the columns; I used the drop function to delete some columns; I rearranged the columns in terms of proximity; I adjusted the BigQuery Type Date, so it will only be YYYY/MM/DD
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/world_slave_voyage_slave_trade/code
