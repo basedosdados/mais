@@ -21,6 +21,7 @@ CREATE VIEW basedosdados-dev.br_sgp_informacao.despesas_cartao_corporativo AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(presidente AS STRING) presidente,
+SAFE_CAST(indicador_gastos_vice_presidencia AS INT64) indicador_gastos_vice_presidencia,
 SAFE_CAST(data_pagamento AS DATE) data_pagamento,
 SAFE_CAST(cpf_servidor AS STRING) cpf_servidor,
 SAFE_CAST(cpf_cnpj_fornecedor AS STRING) cpf_cnpj_fornecedor,
