@@ -30,7 +30,7 @@ SAFE_CAST(cbo_2002 AS STRING) cbo_2002,
 SAFE_CAST(saldo_movimentacao AS INT64) saldo_movimentacao,
 SAFE_CAST(categoria AS STRING) categoria,
 SAFE_CAST(grau_instrucao AS STRING) grau_instrucao,
-SAFE_CAST(idade AS INT64) idade,
+SAFE_CAST(REPLACE(idade,'.0','') AS INT64) idade,
 SAFE_CAST(horas_contratuais AS INT64) horas_contratuais,
 SAFE_CAST(raca_cor AS STRING) raca_cor,
 SAFE_CAST(sexo AS STRING) sexo,
@@ -44,5 +44,5 @@ SAFE_CAST(indicador_trabalho_parcial AS STRING) indicador_trabalho_parcial,
 SAFE_CAST(tamanho_estabelecimento_janeiro AS STRING) tamanho_estabelecimento_janeiro,
 SAFE_CAST(indicador_aprendiz AS STRING) indicador_aprendiz,
 SAFE_CAST(origem_informacao AS STRING) origem_informacao,
-SAFE_CAST(indicador_fora_prazo AS STRING) indicador_fora_prazo
+SAFE_CAST(indicador_fora_prazo AS INT64) indicador_fora_prazo
 FROM basedosdados-dev.br_me_caged_staging.microdados_movimentacao AS t
