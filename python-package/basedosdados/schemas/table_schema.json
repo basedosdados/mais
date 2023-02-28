@@ -99,7 +99,7 @@
       },
       "dataset_id": {
         "title": "ID Conjunto",
-        "description": "Igual ao dataset.name mas como lower case.\nExemplos: br_ibge_populacao, br_inep_censo_escolar",
+        "description": "UUID do conjunto de dados ao qual a tabela pertence (preenchido automaticamente).",
         "yaml_order": {
           "id_before": null,
           "id_after": "dataset_slug"
@@ -108,6 +108,7 @@
       },
       "dataset_slug": {
         "title": "Dataset Slug",
+        "description": "Slug do conjunto de dados ao qual a tabela pertence.",
         "type": "string",
         "yaml_order": {
           "id_before": "dataset_id",
@@ -116,6 +117,7 @@
       },
       "table_id": {
         "title": "ID Tabela",
+        "description": "UUID da tabela (será preenchido automaticamente)",
         "yaml_order": {
           "id_before": "dataset_slug",
           "id_after": "table_slug"
@@ -125,6 +127,7 @@
       "table_slug": {
         "title": "Table Slug",
         "type": "string",
+        "description": "Slug da tabela",
         "yaml_order": {
           "id_before": "table_id",
           "id_after": "title"

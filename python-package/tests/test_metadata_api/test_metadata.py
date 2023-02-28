@@ -113,7 +113,7 @@ def test_create_new_table(api_new_table_metadata):
     if api_new_table_metadata.filepath.exists():
         api_new_table_metadata.filepath.unlink()
 
-    res = api_new_table_metadata.create()
+    res = api_new_table_metadata.create(if_exists="replace", table_only=False)
 
     assert api_new_table_metadata.filepath.exists() is True
     assert isinstance(res, Metadata)
@@ -123,7 +123,6 @@ def test_update_dataset(api_dataset_metadata):
     """
     Test if dataset is updated.
     """
-    print(api_dataset_metadata.dataset_id)
     res = api_dataset_metadata.create(if_exists="replace")
     assert isinstance(res, Metadata)
 

@@ -9,9 +9,18 @@
         "title": "Id",
         "type": "string"
       },
-      "name": {
-        "title": "Nome",
-        "description": "Nome (slug) do conjunto no CKAN\nExemplos: br-ibge-populacao, br-tse-eleicoes",
+      "dataset_id": {
+        "title": "ID",
+        "description": "UUID do conjunto de dados (será preenchido automaticamente).",
+        "yaml_order": {
+          "id_before": null,
+          "id_after": "dataset_slug"
+        },
+        "type": "string"
+      },
+      "dataset_slug": {
+        "title": "Slug",
+        "description": "Nome (slug) do conjunto\nExemplos: br_ibge_populacao, br_tse_eleicoes",
         "yaml_order": {
           "id_before": null,
           "id_after": "title"
@@ -22,7 +31,7 @@
         "title": "Título",
         "description": "Título do conjunto, a ser exibido no mecanismo de busca.\nExemplo: População brasileira",
         "yaml_order": {
-          "id_before": "name",
+          "id_before": "dataset_id",
           "id_after": "organization"
         },
         "type": "string"

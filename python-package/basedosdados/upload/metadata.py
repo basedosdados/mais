@@ -105,6 +105,8 @@ class Metadata(Base):
             for idx, column in enumerate(api_table["columns"]):
                 api_table["columns"][idx]["bigquery_type"] = column["bigquery_type"]["title"].lower()
         else:
+            if not api_dataset:
+                return {}
             api_dataset["organization"] = api_dataset["organization"]["slug"]
             api_dataset["notes"] = api_dataset["description"]
             api_dataset["themes"] = [theme["slug"] for theme in api_dataset["themes"]]
@@ -115,6 +117,9 @@ class Metadata(Base):
     @property
     def api_metadata_extended(self) -> Tuple[dict, dict]:
         """Load dataset or table metadata from Base dos Dados API"""
+
+        if not self.dataset_uuid:
+            return {}, {}
 
         with open(self.graphql_queries_path / "dataset_table_by_id.graphql", "r", encoding="utf-8") as file:
             query = file.read()
@@ -553,7 +558,7 @@ class Metadata(Base):
 
             logger.success(
                 " {object} {object_id} was {action}!",
-                object_id=self.table_id,
+                object_id=self.table_id or self.dataset_id,
                 object="Metadata",
                 action="created",
             )
@@ -947,11 +952,12 @@ def build_yaml_object(
     if yaml.get("partitions") == "":
         yaml["partitions"] = None
 
+    yaml["dataset_id"] = dataset_id
+    yaml["dataset_slug"] = dataset_slug
+
     if table_id:
         # Add dataset_id and table_id
         # FIXME: dataset and table slugs are not being used in new tables
-        yaml["dataset_id"] = dataset_id
-        yaml["dataset_slug"] = dataset_slug
         yaml["table_id"] = table_id
         yaml["table_slug"] = table_slug
         yaml["title"] = metadata.get("name")
