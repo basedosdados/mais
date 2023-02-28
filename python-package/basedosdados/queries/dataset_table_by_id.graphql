@@ -36,22 +36,6 @@ query ($id: ID!) {
               slug
               __typename
               description
-              coverages{
-                edges{
-                  node{
-                    area{
-                      spatial_coverage: slug
-                    }
-                    temporalCoverages{
-                      edges{
-                        node{
-                          temporal_coverage: slug
-                        }
-                      }
-                    }
-                  }
-                }
-              }
               update_frequency: updateFrequency{
                 number
                 period: entity{
@@ -110,19 +94,6 @@ query ($id: ID!) {
                       title: name
                     }
                     description
-                    coverages{
-                      edges{
-                        node{
-                          temporalCoverages{
-                            edges{
-                              node{
-                                temporal_coverage: slug
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
                     measurement_unit: measurementUnit
                     covered_by_dictionary: coveredByDictionary
                     directory_column: directoryPrimaryKey{
