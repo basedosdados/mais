@@ -146,6 +146,31 @@ def test_simplify_graphql_empty_query(api_table_metadata):
     assert cleaned_res == {}
 
 
+def test_owner_org_table_exists(api_table_metadata):
+    """
+    Test if owner_org is returned.
+    """
+    owner_org = api_table_metadata.owner_org
+    assert owner_org == "c0b18195-ee44-464a-8b32-dfdfd9473c4d"
+
+
+def test_owner_org_dataset_exists(api_dataset_metadata):
+    """
+    Test if owner_org is returned.
+    """
+    owner_org = api_dataset_metadata.owner_org
+    assert owner_org == "c0b18195-ee44-464a-8b32-dfdfd9473c4d"
+
+
+def test_owner_org_new_table(api_new_table_metadata):
+    """
+    Test if no owner_org is returned.
+    """
+
+    with pytest.raises(BaseDosDadosException):
+        owner_org = api_new_table_metadata.owner_org  #pylint: disable=unused-variable
+
+
 def test_simplify_graphql_response(api_table_metadata):
     """
     Test if edges and nodes are removed from graphql response.

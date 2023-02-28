@@ -99,15 +99,16 @@ class Metadata(Base):
         """Load dataset or table metadata from Base dos Dados API"""
 
         api_dataset, api_table = self.api_metadata_extended
+        if not api_dataset:
+            return {}
+        api_dataset["organization_id"] = api_dataset["organization"]["_id"]
+        api_dataset["organization"] = api_dataset["organization"]["slug"]
         if api_table:
             api_table["update_frequency"] = f"{api_table['update_frequency']['number']} {api_table['update_frequency']['period']['name'].lower()}"
             api_table["partitions"] = [partition["name"] for partition in api_table["partitions"]]
             for idx, column in enumerate(api_table["columns"]):
                 api_table["columns"][idx]["bigquery_type"] = column["bigquery_type"]["title"].lower()
         else:
-            if not api_dataset:
-                return {}
-            api_dataset["organization"] = api_dataset["organization"]["slug"]
             api_dataset["notes"] = api_dataset["description"]
             api_dataset["themes"] = [theme["slug"] for theme in api_dataset["themes"]]
             api_dataset["tags"] = [tag["slug"] for tag in api_dataset["tags"]]
@@ -158,6 +159,36 @@ class Metadata(Base):
 
         return dataset, {}
 
+    # @property
+    # def owner_org(self):
+    #     """
+    #     Build `owner_org` field for each use case: table, dataset, new
+    #     or existing.
+    #     """
+    #
+    #     # in case `self` refers to a CKAN table's metadata
+    #     if self.table_id and self.exists_in_ckan():
+    #         return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
+    #
+    #     # in case `self` refers to a new table's metadata
+    #     if self.table_id and not self.exists_in_ckan():
+    #         if self.dataset_metadata_obj.exists_in_ckan():
+    #             return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
+    #         # mock `owner_org` for validation
+    #         return "3626e93d-165f-42b8-bde1-2e0972079694"
+    #
+    #     # for datasets, `owner_org` must come from the YAML file
+    #     organization_id = "".join(self.local_metadata.get("organization") or [])
+    #     url = f"{self.CKAN_URL}/api/3/action/organization_show?id={organization_id}"
+    #     response = requests.get(url, timeout=10).json()
+    #
+    #     if not response.get("success"):
+    #         raise BaseDosDadosException("Organization not found")
+    #
+    #     owner_org = response.get("result", {}).get("id")
+    #
+    #     return owner_org
+
     @property
     def owner_org(self):
         """
@@ -166,27 +197,41 @@ class Metadata(Base):
         """
 
         # in case `self` refers to a CKAN table's metadata
-        if self.table_id and self.exists_in_ckan():
-            return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
+        if self.table_id and self.exists_in_api():
+            return self.dataset_metadata_obj.api_metadata.get("organization_id")
 
         # in case `self` refers to a new table's metadata
-        if self.table_id and not self.exists_in_ckan():
-            if self.dataset_metadata_obj.exists_in_ckan():
-                return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
+        if self.table_id and not self.exists_in_api():
+            if self.dataset_metadata_obj.exists_in_api():
+                return self.dataset_metadata_obj.api_metadata.get("organization_id")
             # mock `owner_org` for validation
-            return "3626e93d-165f-42b8-bde1-2e0972079694"
+            # return "3626e93d-165f-42b8-bde1-2e0972079694"
 
         # for datasets, `owner_org` must come from the YAML file
         organization_id = "".join(self.local_metadata.get("organization") or [])
-        url = f"{self.CKAN_URL}/api/3/action/organization_show?id={organization_id}"
-        response = requests.get(url, timeout=10).json()
 
-        if not response.get("success"):
+        if not organization_id:
+            raise BaseDosDadosException("No organization found in YAML file.")
+
+        with open(self.graphql_queries_path / "organization_by_id.graphql", "r", encoding="utf-8") as file:
+            query = file.read()
+
+        variables = {"organization_id": organization_id}
+
+        response = self._get_graphql(
+            query=query,
+            variables=variables
+        )
+
+        if not response:
             raise BaseDosDadosException("Organization not found")
 
-        owner_org = response.get("result", {}).get("id")
+        owner_org = response.get("allOrganization")
 
-        return owner_org
+        if not owner_org:
+            raise BaseDosDadosException("Organization not found")
+
+        return owner_org[0].get("_id")
 
     @property
     def api_data_dict(self) -> Dict[str, Any]:
@@ -257,6 +302,7 @@ class Metadata(Base):
             )
 
         return metadata
+
     @property
     def ckan_data_dict(self) -> dict:
         """Helper function that structures local metadata for validation (DEPRECATED)"""
@@ -430,12 +476,17 @@ class Metadata(Base):
         variables = {"dataset_id": self.dataset_id, "table_id": self.table_id}
 
         response = self._get_graphql(query, variables)
+        dataset = response.get("allDataset")
+        if not dataset:
+            return False
 
         if self.table_id:
-            table = response.get("allDataset")[0].get("tables")
-            exists_in_api = len(table) > 0
+            tables = dataset[0].get("tables")
+            if not tables:
+                return False
+            exists_in_api = len(tables) > 0
         else:
-            exists_in_api = len(response.get("allDataset")) > 0
+            exists_in_api = len(dataset) > 0
 
         return exists_in_api
 

@@ -1,0 +1,10 @@
+query ($organization_id: String!) {
+  allOrganization(slug: $organization_id) {
+    edges {
+      node {
+        _id
+        name
+      }
+    }
+  }
+}
