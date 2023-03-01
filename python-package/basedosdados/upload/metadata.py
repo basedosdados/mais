@@ -14,8 +14,6 @@ from typing import Tuple, Dict, Any, List
 
 from loguru import logger
 
-import requests
-from ckanapi import RemoteCKAN
 from ckanapi.errors import NotAuthorized, ValidationError
 from ruamel.yaml.comments import CommentedMap
 from ruamel.yaml.compat import ordereddict
@@ -23,6 +21,7 @@ import ruamel.yaml as ryaml
 
 from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.base import Base
+from basedosdados.upload.remoteapi import RemoteAPI
 
 
 class Metadata(Base):
@@ -85,13 +84,6 @@ class Metadata(Base):
         return {}
 
     @property
-    def ckan_metadata(self) -> dict:
-        """Load dataset or table metadata from Base dos Dados CKAN (DEPRECATED)"""
-
-        ckan_dataset, ckan_table = self.ckan_metadata_extended
-        return ckan_table or ckan_dataset
-
-    @property
     def api_metadata(self) -> dict:
         """Load dataset or table metadata from Base dos Dados API"""
 
@@ -107,6 +99,7 @@ class Metadata(Base):
             api_table["partitions"] = [
                 partition["name"] for partition in api_table["partitions"]
             ]
+            api_table["metadata_modified"] = api_table["metadata_modified"].split("T")[0]
             for idx, column in enumerate(api_table["columns"]):
                 api_table["columns"][idx]["bigquery_type"] = column["bigquery_type"][
                     "title"
@@ -146,56 +139,6 @@ class Metadata(Base):
                     return dataset[0], table
 
         return dataset[0], {}
-
-    @property
-    def ckan_metadata_extended(self) -> dict:
-        """Load dataset and table metadata from Base dos Dados CKAN" (DEPRECATED)"""
-
-        dataset_id = self.dataset_id.replace("_", "-")
-        url = f"{self.CKAN_URL}/api/3/action/package_show?id={dataset_id}"
-
-        ckan_response = requests.get(url, timeout=10).json()
-        dataset = ckan_response.get("result")
-
-        if not ckan_response.get("success"):
-            return {}, {}
-
-        if self.table_id:
-            for resource in dataset["resources"]:
-                if resource["name"] == self.table_id:
-                    return dataset, resource
-
-        return dataset, {}
-
-    # @property
-    # def owner_org(self):
-    #     """
-    #     Build `owner_org` field for each use case: table, dataset, new
-    #     or existing.
-    #     """
-    #
-    #     # in case `self` refers to a CKAN table's metadata
-    #     if self.table_id and self.exists_in_ckan():
-    #         return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
-    #
-    #     # in case `self` refers to a new table's metadata
-    #     if self.table_id and not self.exists_in_ckan():
-    #         if self.dataset_metadata_obj.exists_in_ckan():
-    #             return self.dataset_metadata_obj.ckan_metadata.get("owner_org")
-    #         # mock `owner_org` for validation
-    #         return "3626e93d-165f-42b8-bde1-2e0972079694"
-    #
-    #     # for datasets, `owner_org` must come from the YAML file
-    #     organization_id = "".join(self.local_metadata.get("organization") or [])
-    #     url = f"{self.CKAN_URL}/api/3/action/organization_show?id={organization_id}"
-    #     response = requests.get(url, timeout=10).json()
-    #
-    #     if not response.get("success"):
-    #         raise BaseDosDadosException("Organization not found")
-    #
-    #     owner_org = response.get("result", {}).get("id")
-    #
-    #     return owner_org
 
     @property
     def owner_org(self):
@@ -365,93 +308,6 @@ class Metadata(Base):
         return metadata
 
     @property
-    def ckan_data_dict(self) -> dict:
-        """Helper function that structures local metadata for validation (DEPRECATED)"""
-
-        ckan_dataset, ckan_table = self.ckan_metadata_extended
-
-        metadata = {
-            "id": ckan_dataset.get("id"),
-            "name": ckan_dataset.get("name") or self.dataset_id.replace("_", "-"),
-            "type": ckan_dataset.get("type") or "dataset",
-            "title": self.local_metadata.get("title"),
-            "private": ckan_dataset.get("private") or False,
-            "owner_org": self.owner_org,
-            "resources": ckan_dataset.get("resources", [])
-            or [{"resource_type": "external_link", "name": ""}]
-            or [{"resource_type": "information_request", "name": ""}],
-            "groups": [
-                {"name": group} for group in self.local_metadata.get("groups", []) or []
-            ],
-            "tags": [
-                {"name": tag} for tag in self.local_metadata.get("tags", []) or []
-            ],
-            "organization": {"name": self.local_metadata.get("organization")},
-            "extras": [
-                {
-                    "key": "dataset_args",
-                    "value": {
-                        "short_description": self.local_metadata.get(
-                            "short_description"
-                        ),
-                        "description": self.local_metadata.get("description"),
-                        "ckan_url": self.local_metadata.get("ckan_url"),
-                        "github_url": self.local_metadata.get("github_url"),
-                    },
-                }
-            ],
-        }
-
-        if self.table_id:
-            metadata["resources"] = [
-                {
-                    "id": ckan_table.get("id"),
-                    "description": self.local_metadata.get("description"),
-                    "name": self.local_metadata.get("table_id"),
-                    "resource_type": ckan_table.get("resource_type") or "bdm_table",
-                    "version": self.local_metadata.get("version"),
-                    "dataset_id": self.local_metadata.get("dataset_id"),
-                    "table_id": self.local_metadata.get("table_id"),
-                    "spatial_coverage": self.local_metadata.get("spatial_coverage"),
-                    "temporal_coverage": self.local_metadata.get("temporal_coverage"),
-                    "update_frequency": self.local_metadata.get("update_frequency"),
-                    "observation_level": self.local_metadata.get("observation_level"),
-                    "last_updated": self.local_metadata.get("last_updated"),
-                    "published_by": self.local_metadata.get("published_by"),
-                    "data_cleaned_by": self.local_metadata.get("data_cleaned_by"),
-                    "data_cleaning_description": self.local_metadata.get(
-                        "data_cleaning_description"
-                    ),
-                    "data_cleaning_code_url": self.local_metadata.get(
-                        "data_cleaning_code_url"
-                    ),
-                    "partner_organization": self.local_metadata.get(
-                        "partner_organization"
-                    ),
-                    "raw_files_url": self.local_metadata.get("raw_files_url"),
-                    "auxiliary_files_url": self.local_metadata.get(
-                        "auxiliary_files_url"
-                    ),
-                    "architecture_url": self.local_metadata.get("architecture_url"),
-                    "source_bucket_name": self.local_metadata.get("source_bucket_name"),
-                    "project_id_prod": self.local_metadata.get("project_id_prod"),
-                    "project_id_staging": self.local_metadata.get("project_id_staging"),
-                    "partitions": self.local_metadata.get("partitions"),
-                    "uncompressed_file_size": self.local_metadata.get(
-                        "uncompressed_file_size"
-                    ),
-                    "compressed_file_size": self.local_metadata.get(
-                        "compressed_file_size"
-                    ),
-                    "columns": self.local_metadata.get("columns"),
-                    "metadata_modified": self.local_metadata.get("metadata_modified"),
-                    "package_id": ckan_dataset.get("id"),
-                }
-            ]
-
-        return metadata
-
-    @property
     @lru_cache(256)
     def columns_schema(self) -> dict:
         """
@@ -486,27 +342,6 @@ class Metadata(Base):
             schema = json.loads(f.read())
 
         return schema.get("result")
-
-    # def exists_in_ckan(self) -> bool:
-    #     """Check if Metadata object refers to an existing CKAN package or reso
-    #     urce. [DEPRECATED]
-    #
-    #     Returns:
-    #         bool: The existence condition of the metadata in CKAN. `True` if i
-    #         t exists, `False` otherwise.
-    #     """
-    #
-    #     if self.table_id:
-    #         url = f"{self.CKAN_URL}/api/3/action/bd_bdm_table_show?"
-    #         url += f"dataset_id={self.dataset_id}&table_id={self.table_id}"
-    #     else:
-    #         id = self.dataset_id.replace("_", "-")
-    #         # TODO: use `bd_bdm_dataset_show` when it's available for empty packages
-    #         url = f"{self.CKAN_URL}/api/3/action/package_show?id={id}"
-    #
-    #     exists_in_ckan = requests.get(url, timeout=10).json().get("success")
-    #
-    #     return exists_in_ckan
 
     def exists_in_api(self) -> bool:
         """Check if Metadata object refers to an existing dataset or table.
@@ -551,21 +386,6 @@ class Metadata(Base):
 
         return exists_in_api
 
-    # def is_updated(self) -> bool:
-    #     """Check if a dataset or table is updated
-    #
-    #     Returns:
-    #         bool: The update condition of local metadata. `True` if it corresp
-    #         onds to the most recent version of the given table or dataset's me
-    #         tadata in CKAN, `False` otherwise.
-    #     """
-    #
-    #     if not self.local_metadata.get("metadata_modified"):
-    #         return bool(not self.exists_in_ckan())
-    #     ckan_modified = self.ckan_metadata.get("metadata_modified")
-    #     local_modified = self.local_metadata.get("metadata_modified")
-    #     return ckan_modified == local_modified
-
     def is_updated(self) -> bool:
         """Check if a dataset or table is updated
 
@@ -577,10 +397,8 @@ class Metadata(Base):
 
         if not self.local_metadata.get("metadata_modified"):
             return bool(not self.exists_in_api())
-        api_modified = self.api_data_dict.get("updated_at")
-        local_modified = self.local_metadata.get("metadata_modified").strftime(
-            "%Y-%m-%dT%H:%M:%S.%fZ"
-        )
+        api_modified = self.api_metadata.get("metadata_modified")
+        local_modified = self.local_metadata.get("metadata_modified")
         return api_modified == local_modified
 
     def create(
@@ -774,8 +592,12 @@ class Metadata(Base):
             if if_exists == "pass":
                 return {}
 
-        # ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=self.CKAN_API_KEY)
-        #
+        remote_api = RemoteAPI(
+            self.api_graphql,
+            token=self.load_token(),
+            graphql_path=self.graphql_queries_path
+        )
+
         try:
             self.validate()
 
@@ -786,30 +608,29 @@ class Metadata(Base):
                 f"adata and apply your changes to it."
             )
 
-            data_dict = self.ckan_data_dict.copy()
+            data_dict = self.api_data_dict.copy()
 
             if self.table_id:
-
                 # publish dataset metadata first if user wants to publish both
                 if all:
                     self.dataset_metadata_obj.publish(if_exists=if_exists)
 
                 data_dict = data_dict["resources"][0]
 
-                published = ckan.call_action(
-                    action="resource_patch"
-                    if self.exists_in_ckan()
-                    else "resource_create",
+                published = remote_api.call_action(
+                    action="update_table"
+                    if self.exists_in_api()
+                    else "create_table",
                     data_dict=data_dict,
                 )
 
             else:
                 data_dict["resources"] = []
 
-                published = ckan.call_action(
-                    action="package_patch"
-                    if self.exists_in_ckan()
-                    else "package_create",
+                published = remote_api.call_action(
+                    action="update_dataset"
+                    if self.exists_in_api()
+                    else "create_dataset",
                     data_dict=data_dict,
                 )
 

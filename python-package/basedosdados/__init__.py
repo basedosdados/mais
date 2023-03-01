@@ -17,6 +17,7 @@ from basedosdados.upload.dataset import Dataset
 from basedosdados.upload.storage import Storage
 from basedosdados.upload.table import Table
 from basedosdados.upload.metadata import Metadata
+from basedosdados.upload.remoteapi import RemoteAPI
 from basedosdados.download.base import reauth
 from basedosdados.download.download import (
     read_sql,
