@@ -48,9 +48,9 @@ class Metadata(Base):
         self.CKAN_URL = self.config.get("ckan", {}).get("url", "") or url
 
     def _get_nodes_from_edges(
-            self,
-            key: str,
-            edge: Dict[str, Any],
+        self,
+        key: str,
+        edge: Dict[str, Any],
     ) -> List[dict]:
         """
         Helper function to get nodes from edges and return a list
@@ -64,10 +64,7 @@ class Metadata(Base):
         if not edge or not key:
             return []
 
-        return [node["node"].get(key)
-                for _, nodes in edge.items()
-                for node in nodes
-                ]
+        return [node["node"].get(key) for _, nodes in edge.items() for node in nodes]
 
     @property
     def filepath(self) -> str:
@@ -104,15 +101,23 @@ class Metadata(Base):
         api_dataset["organization_id"] = api_dataset["organization"]["_id"]
         api_dataset["organization"] = api_dataset["organization"]["slug"]
         if api_table:
-            api_table["update_frequency"] = f"{api_table['update_frequency']['number']} {api_table['update_frequency']['period']['name'].lower()}"
-            api_table["partitions"] = [partition["name"] for partition in api_table["partitions"]]
+            api_table[
+                "update_frequency"
+            ] = f"{api_table['update_frequency']['number']} {api_table['update_frequency']['period']['name'].lower()}"
+            api_table["partitions"] = [
+                partition["name"] for partition in api_table["partitions"]
+            ]
             for idx, column in enumerate(api_table["columns"]):
-                api_table["columns"][idx]["bigquery_type"] = column["bigquery_type"]["title"].lower()
+                api_table["columns"][idx]["bigquery_type"] = column["bigquery_type"][
+                    "title"
+                ].lower()
         else:
             api_dataset["notes"] = api_dataset["description"]
             api_dataset["themes"] = [theme["slug"] for theme in api_dataset["themes"]]
             api_dataset["tags"] = [tag["slug"] for tag in api_dataset["tags"]]
-            api_dataset["metadata_modified"] = api_dataset["metadata_modified"].split("T")[0]
+            api_dataset["metadata_modified"] = api_dataset["metadata_modified"].split(
+                "T"
+            )[0]
         return api_table or api_dataset
 
     @property
@@ -122,7 +127,11 @@ class Metadata(Base):
         if not self.dataset_uuid:
             return {}, {}
 
-        with open(self.graphql_queries_path / "dataset_table_by_id.graphql", "r", encoding="utf-8") as file:
+        with open(
+            self.graphql_queries_path / "dataset_table_by_id.graphql",
+            "r",
+            encoding="utf-8",
+        ) as file:
             query = file.read()
 
         variables = {"id": self.dataset_uuid}
@@ -137,7 +146,6 @@ class Metadata(Base):
                     return dataset[0], table
 
         return dataset[0], {}
-
 
     @property
     def ckan_metadata_extended(self) -> dict:
@@ -213,15 +221,16 @@ class Metadata(Base):
         if not organization_id:
             raise BaseDosDadosException("No organization found in YAML file.")
 
-        with open(self.graphql_queries_path / "organization_by_id.graphql", "r", encoding="utf-8") as file:
+        with open(
+            self.graphql_queries_path / "organization_by_id.graphql",
+            "r",
+            encoding="utf-8",
+        ) as file:
             query = file.read()
 
         variables = {"organization_id": organization_id}
 
-        response = self._get_graphql(
-            query=query,
-            variables=variables
-        )
+        response = self._get_graphql(query=query, variables=variables)
 
         if not response:
             raise BaseDosDadosException("Organization not found")
@@ -243,23 +252,33 @@ class Metadata(Base):
         api_dataset, api_table = self.api_metadata_extended
 
         metadata = {
-            "id": self.dataset_uuid,
-            "slug": api_dataset.get("slug"),
-            "name": api_dataset.get("namePt"),
+            "id": api_dataset.get("_id"),
+            "slug": api_dataset.get("slug") or self.local_metadata.get("dataset_slug"),
+            "name": api_dataset.get("title") or self.local_metadata.get("title"),
+            "type": api_dataset.get("__typename") or "Dataset",
             "namePt": api_dataset.get("namePt"),
-            "type": api_dataset.get("_typename"),
-            "title": self.local_metadata.get("title"),
+            # "title": self.local_metadata.get("title"),
             # "private": False,  [DEPRECATED]
-            "owner_org": api_dataset.get("organization", {}).get("_id"),  #TODO: check cases in owner_org
+            "owner_org": api_dataset.get("organization", {}).get(
+                "_id"
+            ),  # TODO: check cases in owner_org
             # "resources": [],  [DEPRECATED]
-            "themes": api_dataset.get("themes", {}),
-            "tags": api_dataset.get("tags", {}),
+            "themes": api_dataset.get("themes", {}) or self.local_metadata.get("themes"),
+            "tags": api_dataset.get("tags", {}) or self.local_metadata.get("tags"),
             "organization": {"name": api_dataset.get("organization")},
             "description": api_dataset.get("description"),
             # "ckan_url": self.local_metadata.get("url_ckan"),  [DEPRECATED]
             # "github_url": self.local_metadata.get("url_github"),  [DEPRECATED]
-            "created_at": datetime.fromisoformat(api_dataset.get("created_at")).strftime("%Y-%m-%d %H:%M:%S"),
-            "updated_at": datetime.fromisoformat(api_dataset.get("updated_at")).strftime("%Y-%m-%d %H:%M:%S"),
+            "created_at": datetime.fromisoformat(
+                api_dataset.get("created_at")
+            ).strftime("%Y-%m-%d %H:%M:%S")
+            if api_dataset.get("created_at")
+            else None,
+            "updated_at": datetime.fromisoformat(
+                api_dataset.get("updated_at")
+            ).strftime("%Y-%m-%d %H:%M:%S")
+            if api_dataset.get("updated_at")
+            else None,
             "tables": [],
         }
 
@@ -273,29 +292,71 @@ class Metadata(Base):
                     "resource_type": api_table.get("__typename"),
                     # "version": api_table.get("version"),  # [DEPRECATED]
                     "dataset_id": self.dataset_id,  # TODO: check if is id or uuid
-                    "table_id": self.table_id,  #TODO: check if is id or uuid
-                    "spatial_coverage": api_table.get("spatialCoverage"),  # TODO: not implemented yet
-                    "temporal_coverage": api_table.get("temporalCoverage"),  # TODO: not implemented yet
-                    "update_frequency": api_table.get("updateFrequency"),  # TODO: not implemented yet
-                    "observation_level": api_table.get("observationLevel"),  # TODO: not implemented yet
+                    "table_id": self.table_id,  # TODO: check if is id or uuid
+                    "spatial_coverage": api_table.get(
+                        "spatialCoverage"
+                    ),  # TODO: not implemented yet
+                    "temporal_coverage": api_table.get(
+                        "temporalCoverage"
+                    ),  # TODO: not implemented yet
+                    "update_frequency": api_table.get(
+                        "updateFrequency"
+                    ),  # TODO: not implemented yet
+                    "observation_level": api_table.get(
+                        "observationLevel"
+                    ),  # TODO: not implemented yet
                     "last_updated": api_table.get("updatedAt"),
-                    "published_by": api_table.get("publishedBy"),  # TODO: not implemented yet
-                    "data_cleaned_by": api_table.get("dataCleanedBy"),  # TODO: not implemented yet
-                    "data_cleaning_description": api_table.get("dataCleaningDescription"),  # TODO: not implemented yet
-                    "data_cleaning_code_url": api_table.get("dataCleaningCodeUrl"),  # TODO: not implemented yet
-                    "partner_organization": api_table.get("partnerOrganization"),  # TODO: not implemented yet
-                    "raw_files_url": api_table.get("rawFilesUrl"),  # TODO: not implemented yet
-                    "auxiliary_files_url": api_table.get("auxiliaryFilesUrl"),  # TODO: not implemented yet
-                    "architecture_url": api_table.get("architectureUrl"),  # TODO: not implemented yet
-                    "source_bucket_name": api_table.get("sourceBucketName"),  # TODO: not implemented yet
-                    "proect_id_prod": api_table.get("projectIdProd"),  # TODO: not implemented yet
-                    "project_id_staging": api_table.get("projectIdStaging"),  # TODO: not implemented yet
-                    "partitions": api_table.get("partitions"),  # TODO: not implemented yet
-                    "uncompressed_file_size": api_table.get("uncompressedFileSize"),  # TODO: not implemented yet
-                    "compressed_file_size": api_table.get("compressedFileSize"),  # TODO: not implemented yet
-                    "metadata_modified": api_table.get("updatedAt"),  # TODO: check the correct times
-                    "created_at": datetime.fromisoformat(api_table.get("created_at")).strftime("%Y-%m-%d %H:%M:%S"),
-                    "updated_at": datetime.fromisoformat(api_table.get("created_at")).strftime("%Y-%m-%d %H:%M:%S"),
+                    "published_by": api_table.get(
+                        "publishedBy"
+                    ),  # TODO: not implemented yet
+                    "data_cleaned_by": api_table.get(
+                        "dataCleanedBy"
+                    ),  # TODO: not implemented yet
+                    "data_cleaning_description": api_table.get(
+                        "dataCleaningDescription"
+                    ),  # TODO: not implemented yet
+                    "data_cleaning_code_url": api_table.get(
+                        "dataCleaningCodeUrl"
+                    ),  # TODO: not implemented yet
+                    "partner_organization": api_table.get(
+                        "partnerOrganization"
+                    ),  # TODO: not implemented yet
+                    "raw_files_url": api_table.get(
+                        "rawFilesUrl"
+                    ),  # TODO: not implemented yet
+                    "auxiliary_files_url": api_table.get(
+                        "auxiliaryFilesUrl"
+                    ),  # TODO: not implemented yet
+                    "architecture_url": api_table.get(
+                        "architectureUrl"
+                    ),  # TODO: not implemented yet
+                    "source_bucket_name": api_table.get(
+                        "sourceBucketName"
+                    ),  # TODO: not implemented yet
+                    "proect_id_prod": api_table.get(
+                        "projectIdProd"
+                    ),  # TODO: not implemented yet
+                    "project_id_staging": api_table.get(
+                        "projectIdStaging"
+                    ),  # TODO: not implemented yet
+                    "partitions": api_table.get(
+                        "partitions"
+                    ),  # TODO: not implemented yet
+                    "uncompressed_file_size": api_table.get(
+                        "uncompressedFileSize"
+                    ),  # TODO: not implemented yet
+                    "compressed_file_size": api_table.get(
+                        "compressedFileSize"
+                    ),  # TODO: not implemented yet
+                    "metadata_modified": api_table.get(
+                        "updatedAt"
+                    ),  # TODO: check the correct times
+                    "created_at": datetime.fromisoformat(
+                        api_table.get("created_at")
+                    ).strftime("%Y-%m-%d %H:%M:%S"),
+                    "updated_at": datetime.fromisoformat(
+                        api_table.get("created_at")
+                    ).strftime("%Y-%m-%d %H:%M:%S"),
                     "package_id": self.dataset_id,  # TODO: check if is id or uuid
                     "columns": api_table.get("columns"),
                 }
@@ -454,7 +515,7 @@ class Metadata(Base):
             bool: The existence condition of the metadata in the API. `True` if i
             t exists, `False` otherwise.
         """
-        query = '''
+        query = """
             query ($dataset_id: String!, $table_id: String) {
               allDataset(slug: $dataset_id) {
                 edges {
@@ -472,7 +533,7 @@ class Metadata(Base):
                 }
               }
             }
-        '''
+        """
         variables = {"dataset_id": self.dataset_id, "table_id": self.table_id}
 
         response = self._get_graphql(query, variables)
@@ -517,7 +578,9 @@ class Metadata(Base):
         if not self.local_metadata.get("metadata_modified"):
             return bool(not self.exists_in_api())
         api_modified = self.api_data_dict.get("updated_at")
-        local_modified = self.local_metadata.get("metadata_modified").strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+        local_modified = self.local_metadata.get("metadata_modified").strftime(
+            "%Y-%m-%dT%H:%M:%S.%fZ"
+        )
         return api_modified == local_modified
 
     def create(
@@ -621,6 +684,7 @@ class Metadata(Base):
         The yaml file should be located at
         metadata_path/dataset_id[/table_id/],
         as defined in your config.toml
+        TODO: check if any kind of validation is needed
 
         Returns:
             bool:
@@ -631,20 +695,20 @@ class Metadata(Base):
                 when the file has validation errors.
         """
 
-        ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=None)
-        response = ckan.action.bd_dataset_validate(**self.ckan_data_dict)
-
-        if response.get("errors"):
-            error = {self.ckan_data_dict.get("name"): response["errors"]}
-            message = f"{self.filepath} has validation errors: {error}"
-            raise BaseDosDadosException(message)
-
-        logger.success(
-            " {object} {object_id} was {action}!",
-            object_id=self.table_id,
-            object="Metadata",
-            action="validated",
-        )
+        # ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=None)
+        # response = ckan.action.bd_dataset_validate(**self.ckan_data_dict)
+        #
+        # if response.get("errors"):
+        #     error = {self.ckan_data_dict.get("name"): response["errors"]}
+        #     message = f"{self.filepath} has validation errors: {error}"
+        #     raise BaseDosDadosException(message)
+        #
+        # logger.success(
+        #     " {object} {object_id} was {action}!",
+        #     object_id=self.table_id,
+        #     object="Metadata",
+        #     action="validated",
+        # )
 
         return True
 
@@ -701,85 +765,85 @@ class Metadata(Base):
                 self.save_token(new_token)
 
         # check if metadata exists in API and handle if_exists options
-        # if self.exists_in_ckan():
-        #     if if_exists == "raise":
-        #         raise BaseDosDadosException(
-        #             f"{self.dataset_id or self.table_id} already exists in CKAN."
-        #             f" Set the arg `if_exists` to `replace` to replace it."
-        #         )
-        #     if if_exists == "pass":
-        #         return {}
-        #
+        if self.exists_in_api():
+            if if_exists == "raise":
+                raise BaseDosDadosException(
+                    f"{self.dataset_id or self.table_id} already exists in CKAN."
+                    f" Set the arg `if_exists` to `replace` to replace it."
+                )
+            if if_exists == "pass":
+                return {}
+
         # ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=self.CKAN_API_KEY)
         #
-        # try:
-        #     self.validate()
-        #
-        #     assert self.is_updated(), (
-        #         f"Could not publish metadata due to out-of-date config file. "
-        #         f"Please run `basedosdados metadata create {self.dataset_id} "
-        #         f"{self.table_id or ''}` to get the most recently updated met"
-        #         f"adata and apply your changes to it."
-        #     )
-        #
-        #     data_dict = self.ckan_data_dict.copy()
-        #
-        #     if self.table_id:
-        #
-        #         # publish dataset metadata first if user wants to publish both
-        #         if all:
-        #             self.dataset_metadata_obj.publish(if_exists=if_exists)
-        #
-        #         data_dict = data_dict["resources"][0]
-        #
-        #         published = ckan.call_action(
-        #             action="resource_patch"
-        #             if self.exists_in_ckan()
-        #             else "resource_create",
-        #             data_dict=data_dict,
-        #         )
-        #
-        #     else:
-        #         data_dict["resources"] = []
-        #
-        #         published = ckan.call_action(
-        #             action="package_patch"
-        #             if self.exists_in_ckan()
-        #             else "package_create",
-        #             data_dict=data_dict,
-        #         )
-        #
-        #     # recreate local metadata YAML file with the published data
-        #     if published and update_locally:
-        #         self.create(if_exists="replace")
-        #         self.dataset_metadata_obj.create(if_exists="replace")
-        #
-        #     logger.success(
-        #         " {object} {object_id} was {action}!",
-        #         object_id=data_dict,
-        #         object="Metadata",
-        #         action="published",
-        #     )
-        #
-        #     return published
-        #
-        # except (BaseDosDadosException, ValidationError) as e:
-        #     message = (
-        #         f"Could not publish metadata due to a validation error. Pleas"
-        #         f"e see the traceback below to get information on how to corr"
-        #         f"ect it.\n\n{repr(e)}"
-        #     )
-        #     raise BaseDosDadosException(message) from e
-        #
-        # except NotAuthorized as e:
-        #     message = (
-        #         "Could not publish metadata due to an authorization error. Pl"
-        #         "ease check if you set the `api_key` at the `[ckan]` section "
-        #         "of your ~/.basedosdados/config.toml correctly. You must be a"
-        #         "n authorized user to publish modifications to a dataset or t"
-        #         "able's metadata."
-        #     )
-        #     raise BaseDosDadosException(message) from e
+        try:
+            self.validate()
+
+            assert self.is_updated(), (
+                f"Could not publish metadata due to out-of-date config file. "
+                f"Please run `basedosdados metadata create {self.dataset_id} "
+                f"{self.table_id or ''}` to get the most recently updated met"
+                f"adata and apply your changes to it."
+            )
+
+            data_dict = self.ckan_data_dict.copy()
+
+            if self.table_id:
+
+                # publish dataset metadata first if user wants to publish both
+                if all:
+                    self.dataset_metadata_obj.publish(if_exists=if_exists)
+
+                data_dict = data_dict["resources"][0]
+
+                published = ckan.call_action(
+                    action="resource_patch"
+                    if self.exists_in_ckan()
+                    else "resource_create",
+                    data_dict=data_dict,
+                )
+
+            else:
+                data_dict["resources"] = []
+
+                published = ckan.call_action(
+                    action="package_patch"
+                    if self.exists_in_ckan()
+                    else "package_create",
+                    data_dict=data_dict,
+                )
+
+            # recreate local metadata YAML file with the published data
+            if published and update_locally:
+                self.create(if_exists="replace")
+                self.dataset_metadata_obj.create(if_exists="replace")
+
+            logger.success(
+                " {object} {object_id} was {action}!",
+                object_id=data_dict,
+                object="Metadata",
+                action="published",
+            )
+
+            return published
+
+        except (BaseDosDadosException, ValidationError) as e:
+            message = (
+                f"Could not publish metadata due to a validation error. Pleas"
+                f"e see the traceback below to get information on how to corr"
+                f"ect it.\n\n{repr(e)}"
+            )
+            raise BaseDosDadosException(message) from e
+
+        except NotAuthorized as e:
+            message = (
+                "Could not publish metadata due to an authorization error. Pl"
+                "ease check if you set the `api_key` at the `[ckan]` section "
+                "of your ~/.basedosdados/config.toml correctly. You must be a"
+                "n authorized user to publish modifications to a dataset or t"
+                "able's metadata."
+            )
+            raise BaseDosDadosException(message) from e
 
 
 ###############################################################################

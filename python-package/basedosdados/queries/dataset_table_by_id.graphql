@@ -3,6 +3,7 @@ query ($id: ID!) {
     edges{
       node{
         _id
+        __typename
         name: slug
         title: name
         slug
