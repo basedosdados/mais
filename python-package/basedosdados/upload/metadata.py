@@ -683,93 +683,103 @@ class Metadata(Base):
         """
 
         # alert user if they don't have an api_key set up yet
-        if not self.CKAN_API_KEY:
+        token = self.load_token()
+        if not self.base_url or not token:
             raise BaseDosDadosException(
                 "You can't use `Metadata.publish` without setting an `api_key`"
                 "in your ~/.basedosdados/config.toml. Please set it like this:"
                 '\n\n```\n[ckan]\nurl="<CKAN_URL>"\napi_key="<API_KEY>"\n```'
             )
+        if not self.verify_token(token):
+            # TODO: test in cli
+            try:
+                new_token = self.refresh_token(token)
+                self.save_token(new_token)
+            except Exception as e:
+                print(e)
+                new_token = self.get_token(username=self.username, password=None)
+                self.save_token(new_token)
 
-        # check if metadata exists in CKAN and handle if_exists options
-        if self.exists_in_ckan():
-            if if_exists == "raise":
-                raise BaseDosDadosException(
-                    f"{self.dataset_id or self.table_id} already exists in CKAN."
-                    f" Set the arg `if_exists` to `replace` to replace it."
-                )
-            if if_exists == "pass":
-                return {}
-
-        ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=self.CKAN_API_KEY)
-
-        try:
-            self.validate()
-
-            assert self.is_updated(), (
-                f"Could not publish metadata due to out-of-date config file. "
-                f"Please run `basedosdados metadata create {self.dataset_id} "
-                f"{self.table_id or ''}` to get the most recently updated met"
-                f"adata and apply your changes to it."
-            )
-
-            data_dict = self.ckan_data_dict.copy()
-
-            if self.table_id:
-
-                # publish dataset metadata first if user wants to publish both
-                if all:
-                    self.dataset_metadata_obj.publish(if_exists=if_exists)
-
-                data_dict = data_dict["resources"][0]
-
-                published = ckan.call_action(
-                    action="resource_patch"
-                    if self.exists_in_ckan()
-                    else "resource_create",
-                    data_dict=data_dict,
-                )
-
-            else:
-                data_dict["resources"] = []
-
-                published = ckan.call_action(
-                    action="package_patch"
-                    if self.exists_in_ckan()
-                    else "package_create",
-                    data_dict=data_dict,
-                )
-
-            # recreate local metadata YAML file with the published data
-            if published and update_locally:
-                self.create(if_exists="replace")
-                self.dataset_metadata_obj.create(if_exists="replace")
-
-            logger.success(
-                " {object} {object_id} was {action}!",
-                object_id=data_dict,
-                object="Metadata",
-                action="published",
-            )
-
-            return published
-
-        except (BaseDosDadosException, ValidationError) as e:
-            message = (
-                f"Could not publish metadata due to a validation error. Pleas"
-                f"e see the traceback below to get information on how to corr"
-                f"ect it.\n\n{repr(e)}"
-            )
-            raise BaseDosDadosException(message) from e
-
-        except NotAuthorized as e:
-            message = (
-                "Could not publish metadata due to an authorization error. Pl"
-                "ease check if you set the `api_key` at the `[ckan]` section "
-                "of your ~/.basedosdados/config.toml correctly. You must be a"
-                "n authorized user to publish modifications to a dataset or t"
-                "able's metadata."
-            )
-            raise BaseDosDadosException(message) from e
+        # check if metadata exists in API and handle if_exists options
+        # if self.exists_in_ckan():
+        #     if if_exists == "raise":
+        #         raise BaseDosDadosException(
+        #             f"{self.dataset_id or self.table_id} already exists in CKAN."
+        #             f" Set the arg `if_exists` to `replace` to replace it."
+        #         )
+        #     if if_exists == "pass":
+        #         return {}
+        #
+        # ckan = RemoteCKAN(self.CKAN_URL, user_agent="", apikey=self.CKAN_API_KEY)
+        #
+        # try:
+        #     self.validate()
+        #
+        #     assert self.is_updated(), (
+        #         f"Could not publish metadata due to out-of-date config file. "
+        #         f"Please run `basedosdados metadata create {self.dataset_id} "
+        #         f"{self.table_id or ''}` to get the most recently updated met"
+        #         f"adata and apply your changes to it."
+        #     )
+        #
+        #     data_dict = self.ckan_data_dict.copy()
+        #
+        #     if self.table_id:
+        #
+        #         # publish dataset metadata first if user wants to publish both
+        #         if all:
+        #             self.dataset_metadata_obj.publish(if_exists=if_exists)
+        #
+        #         data_dict = data_dict["resources"][0]
+        #
+        #         published = ckan.call_action(
+        #             action="resource_patch"
+        #             if self.exists_in_ckan()
+        #             else "resource_create",
+        #             data_dict=data_dict,
+        #         )
+        #
+        #     else:
+        #         data_dict["resources"] = []
+        #
+        #         published = ckan.call_action(
+        #             action="package_patch"
+        #             if self.exists_in_ckan()
+        #             else "package_create",
+        #             data_dict=data_dict,
+        #         )
+        #
+        #     # recreate local metadata YAML file with the published data
+        #     if published and update_locally:
+        #         self.create(if_exists="replace")
+        #         self.dataset_metadata_obj.create(if_exists="replace")
+        #
+        #     logger.success(
+        #         " {object} {object_id} was {action}!",
+        #         object_id=data_dict,
+        #         object="Metadata",
+        #         action="published",
+        #     )
+        #
+        #     return published
+        #
+        # except (BaseDosDadosException, ValidationError) as e:
+        #     message = (
+        #         f"Could not publish metadata due to a validation error. Pleas"
+        #         f"e see the traceback below to get information on how to corr"
+        #         f"ect it.\n\n{repr(e)}"
+        #     )
+        #     raise BaseDosDadosException(message) from e
+        #
+        # except NotAuthorized as e:
+        #     message = (
+        #         "Could not publish metadata due to an authorization error. Pl"
+        #         "ease check if you set the `api_key` at the `[ckan]` section "
+        #         "of your ~/.basedosdados/config.toml correctly. You must be a"
+        #         "n authorized user to publish modifications to a dataset or t"
+        #         "able's metadata."
+        #     )
+        #     raise BaseDosDadosException(message) from e
 
 
 ###############################################################################

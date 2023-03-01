@@ -12,6 +12,7 @@ import base64
 import json
 from functools import lru_cache
 
+from basedosdados.exceptions import BaseDosDadosException
 from google.cloud import bigquery, storage
 from google.oauth2 import service_account
 from loguru import logger
@@ -59,11 +60,8 @@ class Base:  # pylint: disable=too-many-instance-attributes
         self.bucket_name = bucket_name or self.config["bucket_name"]
         self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
 
-        self.base_url = self.config["ckan"]["url"]
-        self.token_url = self.base_url + "/api/token/"
-        self.refresh_token_url = self.base_url + "/api/token/refresh/"
-        self.verify_token_url = self.base_url + "/api/token/verify/"
-        self.test_api_endpoint = self.base_url + "/api/v1/private/bigquerytypes/"
+        self.base_url = self.config["api"]["url"]
+        self.username = self.config["api"]["username"]
         self.token_file = Path(self.config_path) / ".token.json"
 
         self.graphql_queries_path = Path(__file__).parent.parent / "queries"
@@ -556,6 +554,11 @@ class Base:  # pylint: disable=too-many-instance-attributes
             timeout=90
         )
         r.raise_for_status()
+        if "errors" in r.json():
+            message = r.json()["errors"][0]["message"]
+            raise BaseDosDadosException(
+                F"{message}. You must login again. "
+            )
         return {"access": r.json()["data"]["refreshToken"]["token"]}
 
     def verify_token(self, token) -> bool:
@@ -576,7 +579,10 @@ class Base:  # pylint: disable=too-many-instance-attributes
             json={"query": query, "variables": variables},
             timeout=90
         )
+
         current_datetime_unix = int(datetime.now().timestamp())
+        if "errors" in r.json():
+            return False
         if current_datetime_unix > r.json()["data"]["verifyToken"]["payload"]["exp"]:
             return False
         return True
