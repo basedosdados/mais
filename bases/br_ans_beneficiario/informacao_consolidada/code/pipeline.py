@@ -116,6 +116,7 @@ def process(df: pd.DataFrame):
     # df['cnpj'] = df['cnpj'].str.zfill(14)
     # df['cnpj'] = df['cnpj'].str.zfill(14)
 
+    # Using parquet, don't need external dictionary
     df['tipo_vigencia_plano'].replace({
         'P': 'Posterior à Lei 9656/1998 ou planos adaptados à lei',
         'A': 'Anterior à Lei 9656/1998'

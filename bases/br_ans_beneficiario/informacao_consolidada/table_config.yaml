@@ -1,0 +1,446 @@
+
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_ans_beneficiario
+
+table_id: informacao_consolidada
+
+# Título da tabela.
+title: Informações consolidadas de Beneficiários
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: O conjunto contém Informações consolidadas de beneficiários por competência. Este será alterado para inclusão de dados acima de 5 anos e melhorias na qualidade dos dados
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
+  - sa.br
+
+# Anos cobertos pela tabela.
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+  - 2014-08(1)2022-12
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: month
+# # Observação: as operadoras podem enviar dados que afetam informações das competências passadas. 
+# # A cada divulgação atualizamos os dados dos últimos 5 anos. 
+# # Portanto, os dados atualizados de competências já publicadas podem estar diferentes do divulgado anteriormente.
+
+# Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level: other
+  # O unico valor agregado é o numero de pessoas, todo o resto tá bem granularizado
+
+last_updated:
+    metadata: '2023-03-02'
+    data: '2022-10-11 17:33:30'
+    release: 
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplos: v1.0, v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by:
+    name: Guilherme Salustiano
+    email: guissalustiano@gmail.com
+    github_user: guissalustiano
+    ckan_user:
+    website: guissalustiano.dev
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by:
+    name: Guilherme Salustiano
+    email: guissalustiano@gmail.com
+    github_user: guissalustiano
+    ckan_user:
+    website: guissalustiano.dev
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description:
+  A coluna NM_MUNICIPIO, DT_CARGA e ID_CMPT_MOVEL foi apagada,
+  as demais colunas foram renomeadas em lowercase e snake_case,
+  A coluna TP_VIGENCIA_PLANO foi expandida
+
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/guissalustiano/mais/blob/38200e878adab55b3b0aea1a626ce45b43619057/bases/br_ans_beneficiario/informacao_consolidada/code/pipeline.py#L86-L123
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: Guilherme Salustiano
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url: https://console.cloud.google.com/storage/browser/basedosdados_stag_guissalustiano
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url: https://docs.google.com/spreadsheets/d/11hTzsBQja-bpM9dac9NkmGvSI39xqiW7TC8amQUUvzc/edit#gid=0
+
+source_bucket_name: basedosdados_stag_guissalustiano
+
+project_id_prod: basedosdados-379403
+
+project_id_staging: basedosdados-staging-379403
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+    - ano
+    - mes
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano da competência dos dados
+      temporal_coverage: 
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: ano
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: mes
+      bigquery_type: INT64
+      description: Mês da competência dos dados
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: mes
+          column_name: mes
+      measurement_unit: month
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: codigo_operadora
+      bigquery_type: string
+      description: Código de registro da operadora de plano de saúde na ANS
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging:
+      is_partition:
+    - name: razao_social
+      bigquery_type: string
+      description: Razão Social da Operadora
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: cnpj
+      bigquery_type: string
+      description: CNPJ da Operadora
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: modalidade_operadora
+      bigquery_type: string'
+      description: Classificação das operadoras de planos privados de assistência à saúde de acordo com seu estatuto jurídico
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: "'Administradora', 'Cooperativa Médica', 'Cooperativa odontológica', 'Autogestão', 'Medicina de Grupo', 'Odontologia de Grupo', 'Filantropia', 'Seguradora  Especializada em Saúde', 'Seguradora' or 'Administradora de Benefícios'"
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio_6
+      bigquery_type: string
+      description: ID do Município IBGE - 6 Dígitos
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio_6
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sexo
+      bigquery_type: string
+      description: Sexo 
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: "'M' or 'F'"
+      is_in_staging: true
+      is_partition: false
+    - name: faixa_etaria
+      bigquery_type: 'string'
+      description: 'Faixa etária do beneficiário'
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: age
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: faixa_etaria_reajuste
+      bigquery_type: string
+      description: Faixa etária do beneficiária utilizada para o reajuste do plano definida pela Lei 9.656
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: age
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: codigo_plano
+      bigquery_type: string
+      description: Código do plano registrado ou cadastrado na ANS no qual o beneficiário possui vínculo
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_vigencia_plano
+      bigquery_type: string
+      description: Início da vigência do plano para comercialização
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: "'Anterior à Lei 9656/1998' or 'Posterior à Lei 9656/1998 ou planos adaptados à lei'"
+      is_in_staging: true
+      is_partition: false
+    - name: contratacao_beneficiario
+      bigquery_type: string
+      description: Tipo de contratação do plano do beneficiário
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: "'Individual ou familiar', 'Coletivo empresarial', 'Coletivo por adesão', 'Individual ou Familiar + Coletivo Empresarial', 'Individual ou Familiar + Coletivo por Adesão', 'Coletivo Empresarial + Coletivo por Adesão' or 'Individual + Coletivo Empresarial + Coletivo por Adesão'"
+      is_in_staging: true
+      is_partition: false
+    - name: segmentacao_beneficiario
+      bigquery_type: string
+      description: Tipo de segmentação assistencial do plano do beneficiário
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: "'Ambulatorial (Ambulatorial)', 'Hospitalar com obstetrícia (Hosp c/ obst)', 'Hospitalar sem obstetrícia (Hosp s/ obst)', 'Odontológico (Odontológico)', 'Referência (Amb + hosp c/ obst)', 'Ambulatorial + Hospitalar com obstetrícia (Amb + hosp c/ obst)', 'Ambulatorial + Hospitalar sem obstetrícia (Amb + hosp s/ obst)', 'Ambulatorial + Odontológico (Ambulatorial)', 'Hosp c/ obstetrícia + Hosp s/ obstetrícia (Hosp c/s obst)', 'Hospitalar com obstetrícia + Odontológico (Hosp c/ obst)', 'Hospitalar sem obstetrícia + Odontológico (Hosp s/ obst)', 'Amb + Hosp c/s Obstetrícia (Amb + hosp c/s obst)', 'Ambulatorial + Hospitalar com obstetrícia + Odontológico (Amb + hosp c/ obst)', 'Ambulatorial + Hospitalar sem obstetrícia + Odontológico (Amb + hosp s/ obst)' or 'Hosp c/s  Obstetrícia + Odont (Hosp c/s obst)'"
+      is_in_staging: true
+      is_partition: false
+    - name: abrangencia_beneficiario
+      bigquery_type: string
+      description: Tipo de abrangência do plano do beneficiário
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: "'Nacional', 'Grupo de estados', 'Estadual', 'Grupo de municípios', 'Municipal' or 'Outras'"
+      is_in_staging: true
+      is_partition: false
+    - name: cobertura_assistencia_beneficiario
+      bigquery_type: string
+      description: Tipo de cobertura de plano do beneficiário
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: "'Médico-hospitalar com ou sem cobertura odontológica' or 'Exclusivamente Odontológica'"
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_vinculo
+      bigquery_type: string
+      description: Tipo de vinculo do beneficiário
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: people
+      has_sensitive_data: no
+      observations: "'Titular', 'Depedente' or 'Nao Informado'"
+      is_in_staging: true
+      is_partition: false
+    - name: qtd_beneficiario_ativo
+      bigquery_type: int64
+      description: Quantidade de beneficiários ativos na competência
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: people
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: qtd_beneficiario_aderido
+      bigquery_type: int64
+      description: Quantidade de beneficiários aderidos na competência
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: people
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: qtd_beneficiario_cancelado
+      bigquery_type: int64
+      description: Quantidade de beneficiários cancelados na competência
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: people
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows:
+
+metadata_modified:
