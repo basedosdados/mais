@@ -66,7 +66,7 @@ class Metadata(Base):
         return [node["node"].get(key) for _, nodes in edge.items() for node in nodes]
 
     @property
-    def filepath(self) -> str:
+    def filepath(self) -> Path:
         """Build the dataset or table filepath"""
 
         filename = "dataset_config.yaml"
@@ -204,7 +204,7 @@ class Metadata(Base):
             # "private": False,  [DEPRECATED]
             "owner_org": api_dataset.get("organization", {}).get(
                 "_id"
-            ),  # TODO: check cases in owner_org
+            ) or self.local_metadata.get("organization"),
             # "resources": [],  [DEPRECATED]
             "themes": api_dataset.get("themes", {}) or self.local_metadata.get("themes"),
             "tags": api_dataset.get("tags", {}) or self.local_metadata.get("tags"),
@@ -595,7 +595,6 @@ class Metadata(Base):
         remote_api = RemoteAPI(
             self.api_graphql,
             token=self.load_token(),
-            graphql_path=self.graphql_queries_path
         )
 
         try:
@@ -615,7 +614,7 @@ class Metadata(Base):
                 if all:
                     self.dataset_metadata_obj.publish(if_exists=if_exists)
 
-                data_dict = data_dict["resources"][0]
+                data_dict = data_dict["tables"][0]
 
                 published = remote_api.call_action(
                     action="update_table"
@@ -625,7 +624,7 @@ class Metadata(Base):
                 )
 
             else:
-                data_dict["resources"] = []
+                data_dict["tables"] = []
 
                 published = remote_api.call_action(
                     action="update_dataset"
@@ -637,7 +636,8 @@ class Metadata(Base):
             # recreate local metadata YAML file with the published data
             if published and update_locally:
                 self.create(if_exists="replace")
-                self.dataset_metadata_obj.create(if_exists="replace")
+                if self.table_id:
+                    self.dataset_metadata_obj.create(if_exists="replace")
 
             logger.success(
                 " {object} {object_id} was {action}!",
