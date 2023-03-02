@@ -139,7 +139,7 @@ if __name__ == '__main__':
 
             if input_path.exists():
                 logger.debug(f"reading input in {input_path}")
-                state_df = pd.read_csv(input_path, encoding="utf-8")
+                state_df = pd.read_csv(input_path, encoding="utf-8", dtype=RAW_COLLUNS_TYPE)
             else:
                 state_df = read_csv_zip_to_dataframe(state_path)
                 input_path.parent.mkdir(parents=True, exist_ok=True)
