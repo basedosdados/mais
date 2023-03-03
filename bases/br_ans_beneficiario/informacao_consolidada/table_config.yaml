@@ -56,7 +56,7 @@ observation_level: municipality
 last_updated:
     metadata: '2023-03-02'
     data: '2022-10-11 17:33:30'
-    release: 
+    release: '2022-10-11 17:33:30'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
