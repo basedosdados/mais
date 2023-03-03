@@ -51,8 +51,7 @@ update_frequency: month
 #       entity: state
 #       columns:
 #           - sigla_uf
-observation_level: other
-  # O unico valor agregado é o numero de pessoas, todo o resto tá bem granularizado
+observation_level: municipality
 
 last_updated:
     metadata: '2023-03-02'
