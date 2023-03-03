@@ -81,10 +81,7 @@ data_cleaned_by:
     website: guissalustiano.dev
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description:
-  A coluna NM_MUNICIPIO, DT_CARGA e ID_CMPT_MOVEL foi apagada,
-  as demais colunas foram renomeadas em lowercase e snake_case,
-  A coluna TP_VIGENCIA_PLANO foi expandida
+data_cleaning_description: A coluna NM_MUNICIPIO, DT_CARGA e ID_CMPT_MOVEL foi apagada, as demais colunas foram renomeadas em lowercase e snake_case, A coluna TP_VIGENCIA_PLANO foi expandida
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/guissalustiano/mais/blob/38200e878adab55b3b0aea1a626ce45b43619057/bases/br_ans_beneficiario/informacao_consolidada/code/pipeline.py#L86-L123
