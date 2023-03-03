@@ -1,138 +1,185 @@
-source_bucket_name: basedosdados-dev
-project_id_staging: basedosdados-dev
-project_id_prod: basedosdados-dev
-table_id: dicionario # AUTO GENERATED
-dataset_id: br_ms_cnes # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-ms-cnes # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_ms_cnes # AUTO GENERATED
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_ms_cnes
 
-version: v1.0 # REQUIRED
+table_id: dicionario
 
-last_updated: 2021-09-08 # AUTO GENERATED
+# Título da tabela.
+title: Dicionário
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    Tabela de dicionário das variáveis de estabelecimento do Cadastro Nacional de Estabelecimentos de Saúde(CNES)
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description:
 
-# Quem está completando esse arquivo config?
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
+
+# Anos cobertos pela tabela.
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: unique
+
+# Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+
+last_updated:
+    metadata: '2023-02-01'
+    data: '2023-02-01 18:32:10'
+    release: '2023-02-01 18:33:10'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplos: v1.0, v1.1.3
+version: ''
+
+# Quem está preenchendo esses metadados?
 published_by:
-    name: Gustavo Aires Tiago  # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno/code # REQUIRED
-    website: https://github.com/gustavoairestiago
-    email: gustavo.tiago@basedosdados.org
+    name: Gabriel Pisa Folhes
+    email: gabriel.pisa@basedosdados.org
+    github_user: folhesgabriel
+    ckan_user: pisa_gab
+    website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: Gustavo Aires Tiago
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_me_cno/code
-    website: https://basedosdados.org/dataset/br-me-cno
-    email: gustavo.tiago@basedosdados.org
+data_cleaned_by:
+    name: Gabriel Pisa Folhes
+    email: pisagabriel09@gmail.com
+    github_user: folhesgabriel
+    ckan_user:
+    website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    
+data_cleaning_description:
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: mes # REQUIRED 
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_cnes/code
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - chave
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
 
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-    - id_tabela
-    - nome_coluna
-    - chave
+# Url dos dados originais no GCP Storage.
+raw_files_url:
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
 
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
-    - 2005
-    - 2006
-    - 2007
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016
-    - 2017
-    - 2018
-    - 2019
-    - 2020
-    - 2021
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
 
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED
+partitions:
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
-  
-    -   
-        name: id_tabela 
-        description: Identificação da tabela correspondente 
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: nome_coluna
-        description: Identificação da coluna correspondente
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: chave
-        description: Identificação da chave correspondente
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: cobertura_temporal
-        description: Identificação da cobertura temporal
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: valor
-        description: Identificação do valor correspondente a chave
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+columns:
+    - name: id_tabela
+      bigquery_type: string
+      description: ID da tabela
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: nome_coluna
+      bigquery_type: string
+      description: Nome da coluna
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: chave
+      bigquery_type: string
+      description: Chave
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: cobertura_temporal
+      bigquery_type: string
+      description: Cobertura temporal
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+    - name: valor
+      bigquery_type: string
+      description: Valor
+      temporal_coverage:
+      covered_by_dictionary:
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      is_in_staging: true
+      is_partition: false
+
+number_rows:
+
+metadata_modified: '2022-12-23T10:24:34.821307'
