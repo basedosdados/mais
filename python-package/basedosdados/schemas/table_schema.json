@@ -130,7 +130,7 @@
         "description": "Slug da tabela",
         "yaml_order": {
           "id_before": "table_id",
-          "id_after": "title"
+          "id_after": "name"
         }
       },
       "spatial_coverage": {
@@ -345,9 +345,9 @@
           "$ref": "#/definitions/BdmColumns"
         }
       },
-      "title": {
-        "title": "Título",
-        "description": "Título da tabela.",
+      "name": {
+        "title": "Name",
+        "description": "Nome da tabela.",
         "yaml_order": {
           "id_before": "table_id",
           "id_after": "description"

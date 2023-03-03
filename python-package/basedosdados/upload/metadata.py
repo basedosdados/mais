@@ -197,7 +197,7 @@ class Metadata(Base):
         metadata = {
             "id": api_dataset.get("_id"),
             "slug": api_dataset.get("slug") or self.local_metadata.get("dataset_slug"),
-            "name": api_dataset.get("title") or self.local_metadata.get("title"),
+            "name": api_dataset.get("name") or self.local_metadata.get("name"),
             "type": api_dataset.get("__typename") or "Dataset",
             "namePt": api_dataset.get("namePt"),
             # "title": self.local_metadata.get("title"),
@@ -209,7 +209,7 @@ class Metadata(Base):
             "themes": api_dataset.get("themes", {}) or self.local_metadata.get("themes"),
             "tags": api_dataset.get("tags", {}) or self.local_metadata.get("tags"),
             "organization": {"name": api_dataset.get("organization")},
-            "description": api_dataset.get("description"),
+            "description": api_dataset.get("description") or self.local_metadata.get("description"),
             # "ckan_url": self.local_metadata.get("url_ckan"),  [DEPRECATED]
             # "github_url": self.local_metadata.get("url_github"),  [DEPRECATED]
             "created_at": datetime.fromisoformat(
@@ -229,13 +229,14 @@ class Metadata(Base):
             metadata["tables"].append(
                 {
                     "id": self.table_uuid,
-                    "description": api_table.get("description"),
-                    "namePt": api_table.get("namePt"),
-                    "name": self.local_metadata.get("title"),
+                    "dataset_slug": api_table.get("dataset_slug") or self.local_metadata.get("dataset_slug"),
+                    "table_slug": api_table.get("table_slug") or self.local_metadata.get("table_slug"),
+                    "name": api_table.get("name") or self.local_metadata.get("name"),
+                    "description": api_table.get("description") or self.local_metadata.get("description"),
                     "resource_type": api_table.get("__typename"),
                     # "version": api_table.get("version"),  # [DEPRECATED]
-                    "dataset_id": self.dataset_id,  # TODO: check if is id or uuid
-                    "table_id": self.table_id,  # TODO: check if is id or uuid
+                    "dataset_id": self.dataset_uuid,
+                    "table_id": self.table_id,
                     "spatial_coverage": api_table.get(
                         "spatialCoverage"
                     ),  # TODO: not implemented yet
@@ -249,42 +250,42 @@ class Metadata(Base):
                         "observationLevel"
                     ),  # TODO: not implemented yet
                     "last_updated": api_table.get("updatedAt"),
-                    "published_by": api_table.get(
-                        "publishedBy"
-                    ),  # TODO: not implemented yet
-                    "data_cleaned_by": api_table.get(
-                        "dataCleanedBy"
-                    ),  # TODO: not implemented yet
+                    # "published_by": api_table.get(
+                    #     "publishedBy"
+                    # ),  # TODO: not implemented yet
+                    # "data_cleaned_by": api_table.get(
+                    #     "dataCleanedBy"
+                    # ),  # TODO: not implemented yet
                     "data_cleaning_description": api_table.get(
                         "dataCleaningDescription"
-                    ),  # TODO: not implemented yet
+                    ) or self.local_metadata.get("data_cleaning_description"),
                     "data_cleaning_code_url": api_table.get(
                         "dataCleaningCodeUrl"
-                    ),  # TODO: not implemented yet
+                    ) or self.local_metadata.get("data_cleaning_code_url"),
                     "partner_organization": api_table.get(
                         "partnerOrganization"
                     ),  # TODO: not implemented yet
                     "raw_files_url": api_table.get(
                         "rawFilesUrl"
-                    ),  # TODO: not implemented yet
+                    ) or self.local_metadata.get("raw_files_url"),
                     "auxiliary_files_url": api_table.get(
                         "auxiliaryFilesUrl"
-                    ),  # TODO: not implemented yet
+                    ) or self.local_metadata.get("auxiliary_files_url"),
                     "architecture_url": api_table.get(
                         "architectureUrl"
-                    ),  # TODO: not implemented yet
+                    ) or self.local_metadata.get("architecture_url"),
                     "source_bucket_name": api_table.get(
                         "sourceBucketName"
-                    ),  # TODO: not implemented yet
-                    "proect_id_prod": api_table.get(
+                    ) or self.local_metadata.get("source_bucket_name"),
+                    "project_id_prod": api_table.get(
                         "projectIdProd"
-                    ),  # TODO: not implemented yet
+                    ) or self.local_metadata.get("project_id_prod"),
                     "project_id_staging": api_table.get(
                         "projectIdStaging"
-                    ),  # TODO: not implemented yet
+                    ) or self.local_metadata.get("project_id_staging"),
                     "partitions": api_table.get(
                         "partitions"
-                    ),  # TODO: not implemented yet
+                    ) or self.local_metadata.get("partitions"),
                     "uncompressed_file_size": api_table.get(
                         "uncompressedFileSize"
                     ),  # TODO: not implemented yet
@@ -295,13 +296,16 @@ class Metadata(Base):
                         "updatedAt"
                     ),  # TODO: check the correct times
                     "created_at": datetime.fromisoformat(
-                        api_table.get("created_at")
-                    ).strftime("%Y-%m-%d %H:%M:%S"),
+                        api_dataset.get("created_at")
+                    ).strftime("%Y-%m-%d %H:%M:%S")
+                    if api_dataset.get("created_at")
+                    else None,
                     "updated_at": datetime.fromisoformat(
-                        api_table.get("created_at")
-                    ).strftime("%Y-%m-%d %H:%M:%S"),
-                    "package_id": self.dataset_id,  # TODO: check if is id or uuid
-                    "columns": api_table.get("columns"),
+                        api_dataset.get("updated_at")
+                    ).strftime("%Y-%m-%d %H:%M:%S")
+                    if api_dataset.get("updated_at")
+                    else None,
+                    "columns": api_table.get("columns") or self.local_metadata.get("columns"),
                 }
             )
 
@@ -611,10 +615,14 @@ class Metadata(Base):
 
             if self.table_id:
                 # publish dataset metadata first if user wants to publish both
+                dataset_uuid = self.dataset_metadata_obj.api_data_dict["id"] or None
                 if all:
-                    self.dataset_metadata_obj.publish(if_exists=if_exists)
+                    ds_publish = self.dataset_metadata_obj.publish(if_exists=if_exists)
+                    if ds_publish and dataset_uuid is None:
+                        dataset_uuid = ds_publish.get("data")
 
                 data_dict = data_dict["tables"][0]
+                data_dict["dataset_id"] = dataset_uuid
 
                 published = remote_api.call_action(
                     action="update_table"
@@ -901,12 +909,10 @@ def build_yaml_object(
     yaml["dataset_id"] = dataset_id
     yaml["dataset_slug"] = dataset_slug
 
-    if table_id:
+    if table_id or table_slug:
         # Add dataset_id and table_id
-        # FIXME: dataset and table slugs are not being used in new tables
         yaml["table_id"] = table_id
         yaml["table_slug"] = table_slug
-        yaml["title"] = metadata.get("name")
 
         # Add gcloud config variables
         yaml["source_bucket_name"] = str(config.get("bucket_name"))

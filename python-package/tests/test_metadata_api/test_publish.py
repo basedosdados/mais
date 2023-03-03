@@ -142,3 +142,16 @@ def test_api_create_dataset(api_new_dataset_metadata):
     response = remote_api.call_action("create_dataset", api_new_dataset_metadata.api_data_dict)
     pprint(response)
     assert response["result"] == "not implemented yet"
+
+
+def test_api_create_table(api_new_table_metadata):
+    """
+    Test if api_data_dict is a dict.
+    """
+    make_login(api_new_table_metadata)
+    response = api_new_table_metadata.publish(
+        all=True,
+        if_exists="replace",
+    )
+    pprint(response)
+    assert response["result"] == "not implemented yet"

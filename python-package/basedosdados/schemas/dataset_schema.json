@@ -22,17 +22,34 @@
         "title": "Slug",
         "description": "Nome (slug) do conjunto\nExemplos: br_ibge_populacao, br_tse_eleicoes",
         "yaml_order": {
-          "id_before": null,
-          "id_after": "title"
+          "id_before": "dataset_id",
+          "id_after": "name"
         },
         "type": "string"
       },
-      "title": {
-        "title": "Título",
-        "description": "Título do conjunto, a ser exibido no mecanismo de busca.\nExemplo: População brasileira",
+      "name": {
+        "title": "Nome",
+        "description": "Nome do conjunto, a ser exibido no mecanismo de busca.\nExemplo: População brasileira",
         "yaml_order": {
-          "id_before": "dataset_id",
+          "id_before": "dataset_slug",
           "id_after": "organization"
+        },
+        "type": "string"
+      },
+      "organization": {
+        "title": "ID Organização",
+        "description": "Qual organização disponibiliza os dados originais?\nOpções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list\nSe a organização não estiver na lista acima ou o nome não estiver conforme o manual de estilo\ncriar ou renomear a organização em https://basedosdados.org/organization/\nExemplos: br-ibge, br-tse, br-rj-gov",
+        "yaml_order": {
+          "id_before": "name",
+          "id_after": "description"
+        }
+      },
+      "description": {
+        "title": "Descrição",
+        "description": "Descrição do conjunto",
+        "yaml_order": {
+          "id_before": "organization",
+          "id_after": "themes"
         },
         "type": "string"
       },
@@ -41,15 +58,6 @@
         "enum": [
           "dataset"
         ],
-        "type": "string"
-      },
-      "notes": {
-        "title": "Descrição",
-        "description": "Descrição do conjunto",
-        "yaml_order": {
-          "id_before": "organization",
-          "id_after": "themes"
-        },
         "type": "string"
       },
       "author": {
@@ -155,7 +163,7 @@
         "title": "Temas",
         "description": "Quais temas caracterizam a base?\nOpções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list\nImportante: preencher com a chave, e não o valor.",
         "yaml_order": {
-          "id_before": "notes",
+          "id_before": "description",
           "id_after": "tags"
         }
       },
@@ -163,14 +171,6 @@
         "title": "Owner Org",
         "type": "string",
         "format": "uuid"
-      },
-      "organization": {
-        "title": "ID Organização",
-        "description": "Qual organização disponibiliza os dados originais?\nOpções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list\nSe a organização não estiver na lista acima ou o nome não estiver conforme o manual de estilo\ncriar ou renomear a organização em https://basedosdados.org/organization/\nExemplos: br-ibge, br-tse, br-rj-gov",
-        "yaml_order": {
-          "id_before": "title",
-          "id_after": "notes"
-        }
       },
       "num_tags": {
         "title": "Num Tags",
@@ -202,11 +202,6 @@
       "short_description": {
         "title": "Descrição curta",
         "description": "Descrição curta (até 280 caracteres) do conjunto.",
-        "type": "string"
-      },
-      "description": {
-        "title": "Descrição",
-        "description": "Descrição do conjunto.",
         "type": "string"
       },
       "ckan_url": {

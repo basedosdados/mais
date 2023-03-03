@@ -1,7 +1,7 @@
 """
 An interface to make mutations to the remote API.
 """
-
+from pprint import pprint
 from typing import Tuple
 
 import requests
@@ -149,6 +149,7 @@ class RemoteAPI:
         Teste com a query:{query}\n
         Teste com os parâmetros:{mutation_parameters}
         """
+        response["data"] = "10279a86-53be-4291-986d-9ef1d68c2bda"  # mock a dataset_uuid
 
         # r = requests.post(
         #     self._url,
@@ -220,10 +221,10 @@ class RemoteAPI:
         data["tags"] = tags
 
         if data.get("slug") is None:
-            raise BaseDosDadosException("Slug is required.")
+            raise BaseDosDadosException("Dataset slug is required.")
 
         if data.get("name") is None:
-            raise BaseDosDadosException("Name is required.")
+            raise BaseDosDadosException("Dataset ame is required.")
 
         fields = self._prepare_fields(data)
         query, mutation_parameters = self.create_update("CreateUpdateDataset", fields)
@@ -249,6 +250,8 @@ class RemoteAPI:
         # Tables cannot be updated by dataset metatada update
         if "tables" in data:
             del data["tables"]
+        if "name" not in data:
+            raise BaseDosDadosException("Dataset name is required.")
         print("Updating dataset...", data["name"])
         print("Data from dict: ", data)
 
@@ -267,7 +270,47 @@ class RemoteAPI:
             dict: The response of the mutation.
 
         """
-        response = self._perform_mutation("", {})
+        pprint(data)
+        if "id" in data:
+            if data.get("id") is not None:
+                raise BaseDosDadosException(
+                    "Table already exists in API. Use update_table instead."
+                )
+            del data["id"]
+        print(f"Creating table {data['name']}...")
+
+        # mandatory fields for create_table
+        # dataset
+        if data.get("dataset_id") is None:
+            raise BaseDosDadosException("Dataset is required.")
+        # ambas
+        # observation_level
+        # coverage/area
+        # datetime_range
+
+        # somente para table
+        # license
+        # partner organization
+        # update_frequency
+        # pipeline
+        # slug
+        if not data.get("dataset_slug"):
+            raise BaseDosDadosException("Dataset slug is required.")
+        if not data.get("table_slug"):
+            raise BaseDosDadosException("Table slug is required.")
+        # name
+        if not data.get("name"):
+            raise BaseDosDadosException("Table name is required.")
+
+        # somente para colunas
+        # table_id
+        # bigquery_type
+        # name
+
+        fields = self._prepare_fields(data)
+        query, mutation_parameters = self.create_update("CreateUpdateTable", fields)
+        response = self._perform_mutation(query, mutation_parameters)
+
         return response
 
     def update_table(self, data):

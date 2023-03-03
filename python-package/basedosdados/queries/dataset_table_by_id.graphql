@@ -4,9 +4,8 @@ query ($id: ID!) {
       node{
         _id
         __typename
-        name: slug
-        title: name
-        slug
+        name
+        dataset_slug: slug
         __typename
         organization{
           _id
@@ -34,7 +33,7 @@ query ($id: ID!) {
             node{
               _id
               name
-              slug
+              table_slug: slug
               __typename
               description
               update_frequency: updateFrequency{

@@ -113,7 +113,11 @@ def test_create_new_table(api_new_table_metadata):
     if api_new_table_metadata.filepath.exists():
         api_new_table_metadata.filepath.unlink()
 
-    res = api_new_table_metadata.create(if_exists="replace", table_only=False)
+    res = api_new_table_metadata.create(
+        if_exists="replace",
+        table_only=False,
+        columns=['ano', 'sigla_uf', 'dados']
+    )
 
     assert api_new_table_metadata.filepath.exists() is True
     assert isinstance(res, Metadata)
@@ -175,86 +179,31 @@ def test_simplify_graphql_response(api_table_metadata):
     """
     Test if edges and nodes are removed from graphql response.
     """
-    query = '''
-        query DatasetTableBySlug ($dataset_id: String!, $table_id: String!) {
-          allDataset(slug: $dataset_id) {
-            edges{
-              node{
-                _id
-                name
-                __typename
-                slug
-                organization{
-                  _id
-                  slug
-                }
-                themes{
-                  edges{
-                    node{
-                      id
-                      name
-                      slug
+    query_res = {
+        "allDataset": {
+            "edges": [
+                {
+                    "node": {
+                        "_id": "c0b18195-ee44-464a-8b32-dfdfd9473c4d",
+                        "name": "br_ibge_pib",
+                        "title": "Produto Interno Bruto",
+                        "description": "Produto Interno Bruto",
+                        "themes": {
+                            "edges": [
+                                {
+                                    "node": {
+                                        "slug": "economia",
+                                        "name": "Economia"
+                                    }
+                                }
+                            ]
+                        },
                     }
-                  }
                 }
-                tables (slug: $table_id){
-                  edges{
-                    node{
-                      _id
-                      name
-                      slug
-                      __typename
-                      description
-                      coverages{
-                        edges{
-                          node{
-                            area{
-                              slug
-                            }
-                            temporalCoverage
-                          }
-                        }
-                      }
-                      updateFrequency{
-                        number
-                        timeUnit{
-                          namePt
-                        }
-                      }
-                      data_cleaning_description: dataCleaningDescription
-                      data_cleaning_code_url: dataCleaningCodeUrl
-                      architecture_url: architectureUrl
-                      number_rows: numberRows
-                      created_at: createdAt
-                      updatedAt
-                      cloud_tables: cloudTables{
-                        edges{
-                          node{
-                            id
-                            gcpTableId
-                          }
-                        }
-                      }
-                      columns{
-                        edges{
-                          node{
-                            name
-                            bigqueryType{
-                              __typename
-                              _id
-                              name
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+            ]
         }
-        '''
-    variables = {"dataset_id": api_table_metadata.dataset_id, "table_id": api_table_metadata.table_id}
-    cleaned_res = api_table_metadata._get_graphql(query, variables)
-    assert cleaned_res["allDataset"][0]["_id"] == api_table_metadata.dataset_uuid
+    }
+
+    cleaned_res = api_table_metadata._simplify_graphql_response(query_res)
+    assert cleaned_res["allDataset"][0]["_id"] == "c0b18195-ee44-464a-8b32-dfdfd9473c4d"
+    assert isinstance(cleaned_res["allDataset"][0]["themes"], list)
