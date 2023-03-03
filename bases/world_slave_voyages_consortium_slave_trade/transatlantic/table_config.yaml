@@ -48,9 +48,7 @@ update_frequency: unique
 #       columns:
 #           - sigla_uf
 observation_level:
-     - entity: territorial_change
-       columns:
-           - id_voyage
+     - entity: other
 
 last_updated:
     metadata: '2023-02-17'
@@ -268,36 +266,6 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: first_place_captives_landed
-      bigquery_type:
-      description: First place where captives were landed
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: first_place_captives_purchased
-      bigquery_type:
-      description: First place where captives were purchased
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: gun_mounted
       bigquery_type: int64
       description: Guns mounted
@@ -339,51 +307,6 @@ columns:
           table_id:
           column_name:
       measurement_unit: day
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: place_vessel_voyage_began
-      bigquery_type: string
-      description: Place where vessel's voyage began
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: principal_place_captives_purchased
-      bigquery_type: string
-      description: Principal place where captives were purchased
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: principal_place_captives_landed
-      bigquery_type: string
-      description: Principal place where captives were landed
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true

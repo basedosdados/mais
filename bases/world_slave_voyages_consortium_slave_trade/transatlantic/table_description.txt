@@ -39,7 +39,7 @@ Cobertura Espacial
 
 Tratamento
 ----------
-Treatment according to BD standards
+Treatment in accordance with the standards of the Data Base. I renamed the columns; I used the drop function to delete some columns; I rearranged the columns in terms of proximity; I adjusted the BigQuery Type Date, so it will only be YYYY/MM/DD
 
 
 
