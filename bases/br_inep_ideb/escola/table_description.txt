@@ -1,9 +1,8 @@
 Dados do Ideb agregados para o Brasil a nível de escola-ano.
 
-
 Para saber mais acesse:
-Website: https://basedosdados.org/dataset/br-inep-ideb
-Github: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ideb
+Website: 
+Github: 
 
 Ajude a manter o projeto :)
 Apoia-se: https://apoia.se/basedosdados
@@ -11,51 +10,43 @@ Apoia-se: https://apoia.se/basedosdados
 Publicado por
 -------------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ideb/code
+Código: 
 Website: www.ricardodahis.com
-Email: rdahis@basedosdados.orgTratado por
+Email: rdahis@basedosdados.org
+Tratado por
 -----------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_inep_ideb/code
+Código: 
 Email: rdahis@basedosdados.org
 
-Nível da Observação (i.e. a granularidade da linha)
--------------------
-- escola
-- rede
-- tipo de ensino
-- anos escolares
-- ano
 
-Colunas identificando linhas unicamente
--------------------
-- id_escola
-- rede
-- ensino
-- anos_escolares
-- ano
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+
+
+
 
 Cobertura Temporal
 ------------------
-- 2005
-- 2007
-- 2009
-- 2011
-- 2013
-- 2015
-- 2017
-- 2019
+- 2005(2)2021
+
+
+
 
 Cobertura Espacial
 ------------------
-- brasil
+- sa.br
+
+
+
 
 Tratamento
 ----------
-Dados foram organizados e separados para consistência.
+Dados foram organizados e separados para consistência
+
+
 
 Frequencia de Atualização
 -------------------------
-2 anos
-
-
+two_years
