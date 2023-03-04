@@ -35,13 +35,17 @@ observation_level:
     - entity: state
       columns:
           - sigla_uf
-    - columns:
+    - entity: other
+      columns:
           - rede
-    - columns:
+    - entity: other
+      columns:
           - ensino
+    - entity: other
+      columns:
+          - anos_escolares   
     - entity: year
       columns:
-          - anos_escolares
           - ano
 
 last_updated:
@@ -149,9 +153,9 @@ columns:
         - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: escola
-          column_name: dependencia_administrativa
+          dataset_id:
+          table_id:
+          column_name:
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -295,4 +299,4 @@ columns:
 
 number_rows: 2629
 
-metadata_modified: '2022-09-12T23:11:15.087366'
+metadata_modified: '2023-02-13T21:17:02.695897'
