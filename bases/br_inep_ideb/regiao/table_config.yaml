@@ -35,14 +35,19 @@ observation_level:
     - entity: region
       columns:
           - regiao
-    - columns:
+    - entity: other
+      columns:
           - rede
-    - columns:
+    - entity: other
+      columns:
           - ensino
     - entity: year
       columns:
-          - anos_escolares
           - ano
+    - entity: other
+      columns:
+          - anos_escolares
+      
 
 last_updated:
     metadata: '2022-10-14'
@@ -295,4 +300,4 @@ columns:
 
 number_rows: 495
 
-metadata_modified: '2022-09-12T23:10:56.179193'
+metadata_modified: '2023-02-13T21:16:49.606492'
