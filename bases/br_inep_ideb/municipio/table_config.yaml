@@ -163,14 +163,14 @@ columns:
       is_partition: false
     - name: rede
       bigquery_type: string
-      description: Rede Escolar
+      description: Rede Escolar (Dependência Administrativa)
       temporal_coverage:
         - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: escola
-          column_name: dependencia_administrativa
+          dataset_id:
+          table_id:
+          column_name:
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -216,7 +216,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: percent
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -314,4 +314,4 @@ columns:
 
 number_rows: 294504
 
-metadata_modified: '2022-09-12T23:10:34.312302'
+metadata_modified: '"2023-02-13T21:16:23.938973"'
