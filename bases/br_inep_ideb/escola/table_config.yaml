@@ -36,14 +36,11 @@ observation_level:
         - id_escola
     - entity: other
       columns:
-        - rede
-    - entity: other
-      columns:
         - ensino
-    - entity: year
+    - entity: other
       columns:
         - anos_escolares
-    - entity: other
+    - entity: year
       columns:
         - ano
 
@@ -104,7 +101,7 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: []
+partitions: 
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
@@ -328,4 +325,4 @@ columns:
 
 number_rows: 1030805
 
-metadata_modified: '2022-09-12T23:09:58.932369'
+metadata_modified: '2023-02-13T21:16:17.197663'
