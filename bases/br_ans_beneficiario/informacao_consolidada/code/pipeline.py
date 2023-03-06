@@ -13,6 +13,7 @@ import zipfile
 from functools import reduce
 
 host = FTPHost('ftp.dadosabertos.ans.gov.br', 'anonymous')
+host.keep_alive()
 
 TABLE_NAME = 'informacoes_consolidadas_de_beneficiarios'
 FTP_PATH = 'FTP/PDA/informacoes_consolidadas_de_beneficiarios'
@@ -51,7 +52,7 @@ def range_year_month(start: datetime, stop = datetime.now(), step = relativedelt
     yield from range_year_month(start + step, stop)
 
 def host_months_path():
-    for date in range_year_month(datetime(day=1, month=5, year=2014)):
+    for date in range_year_month(datetime(2014, 5, 1), datetime(2022, 12, 31)):
         month_path = date.strftime("%Y%m")
         yield FTP_PATH + '/' + month_path, date
 
@@ -113,8 +114,7 @@ def process(df: pd.DataFrame):
         'QT_BENEFICIARIO_CANCELADO': 'qtd_beneficiario_cancelado'
     }, inplace=True)
 
-    # df['cnpj'] = df['cnpj'].str.zfill(14)
-    # df['cnpj'] = df['cnpj'].str.zfill(14)
+    df['cnpj'] = df['cnpj'].str.zfill(14)
 
     # Using parquet, don't need external dictionary
     df['tipo_vigencia_plano'].replace({
@@ -141,6 +141,11 @@ if __name__ == '__main__':
                 logger.debug(f"reading input in {input_path}")
                 state_df = pd.read_csv(input_path, encoding="utf-8", dtype=RAW_COLLUNS_TYPE)
             else:
+                # Wtf, pq tem um repositorio aqui? 
+                # https://dadosabertos.ans.gov.br/FTP/PDA/informacoes_consolidadas_de_beneficiarios/201602/201607/
+                if not host.path.isfile(state_path):
+                    continue
+
                 state_df = read_csv_zip_to_dataframe(state_path)
                 input_path.parent.mkdir(parents=True, exist_ok=True)
                 state_df.to_csv(input_path, encoding="utf-8")
