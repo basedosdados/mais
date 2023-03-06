@@ -6,7 +6,7 @@
 \alias{dbplyr_edition.BaseDosDadosConnection}
 \title{Base dos dados specific connection to BigQuery}
 \usage{
-dbplyr_edition.BaseDosDadosConnection(con)
+\method{dbplyr_edition}{BaseDosDadosConnection}(con)
 }
 \arguments{
 \item{con}{A BaseDosDadosConnection object.}

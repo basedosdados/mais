@@ -12,7 +12,7 @@ methods::setClass("BaseDosDadosConnection", contains = "BigQueryConnection")
 #' @rdname BaseDosDadosConnection-class
 #'
 #' @param con A BaseDosDadosConnection object.
-#'
+#' @importFrom dbplyr dbplyr_edition
 #' @export
 
 dbplyr_edition.BaseDosDadosConnection <- function(con) 2L

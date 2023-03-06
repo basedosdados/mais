@@ -343,7 +343,7 @@ bd_collect <- function(
 #'
 #' @importFrom scales number_bytes
 #'
-#' @importFrom scales number_bytes
+#' @importFrom writexl write_xlsx
 #'
 #' @name bd_write
 #' @examples
