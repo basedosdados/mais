@@ -51,7 +51,7 @@ observation_level:
     - country: br
       entity: state
       columns:
-          - sigla_uf
+          - id_macrorregiao
     - entity: year
       columns:
           - ano
@@ -64,7 +64,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version: v.10
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
