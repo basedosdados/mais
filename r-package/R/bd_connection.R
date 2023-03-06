@@ -5,11 +5,14 @@
 #' this class and its method should probably be removed.
 #'
 #' @export
-setClass("BaseDosDadosConnection", contains = "BigQueryConnection")
+#' @importFrom methods setClass
+
+methods::setClass("BaseDosDadosConnection", contains = "BigQueryConnection")
 
 #' @rdname BaseDosDadosConnection-class
 #'
 #' @param con A BaseDosDadosConnection object.
 #'
 #' @export
+
 dbplyr_edition.BaseDosDadosConnection <- function(con) 2L
