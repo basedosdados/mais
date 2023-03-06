@@ -48,13 +48,13 @@ update_frequency: one_year
 #       columns:
 #           - sigla_uf
 observation_level:
-    - country: br
-      entity: state
-      columns:
-          - sigla_uf
     - entity: year
       columns:
           - ano
+    - country: br
+      entity: state
+      columns:
+           - id_regiao_saude
 
 last_updated:
     metadata: '2023-02-03'
