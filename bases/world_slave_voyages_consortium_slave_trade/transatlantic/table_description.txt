@@ -1,0 +1,48 @@
+For European societies located on either side of the Atlantic, the dataset contains information on ship construction and registration and relatively extensive records of owners’ and captains’ names. It will now be easier to pursue connections between the slave trade and other sectors of European and American economies. Researchers should be able to unravel trends in long-distance shipping activities, particularly important because no comparable body of data exists for other transoceanic trades. Data on crew mortality are abundant. The implications for new assessments of the social as well as the economic role of the slave trade in the regions where the slave voyage originated are obvious. In short, the major aim of this web resource is to facilitate and stimulate new research on the slave trade, the implications of which reach far beyond the slave trade itself.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Patrick Teixeira
+Código: 
+Email: Patrick.tx@hotmail.com.br
+Tratado por
+-----------
+Nome: Patrick Teixeira
+Código: 
+Email: Patrick.tx@hotmail.com.br
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 1514(1)1866
+
+
+
+
+Cobertura Espacial
+------------------
+- world
+
+
+
+
+Tratamento
+----------
+Treatment in accordance with the standards of the Data Base. I renamed the columns; I used the drop function to delete some columns; I rearranged the columns in terms of proximity; I adjusted the BigQuery Type Date, so it will only be YYYY/MM/DD
+
+
+
+Frequencia de Atualização
+-------------------------
+unique
