@@ -49,6 +49,8 @@ update_frequency: unique
 #           - sigla_uf
 observation_level:
      - entity: other
+       columns:
+           - id_voyage
 
 last_updated:
     metadata: '2023-02-17'
