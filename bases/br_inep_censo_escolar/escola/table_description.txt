@@ -9,9 +9,9 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Ingrid de Sales Rabelo
+Nome: Arthur de Figueiredo Gusmão
 Código: 
-Email: ingrid.rabelo@basedosdados.org
+Email: arthur.gusmao@basedosdados.org
 Tratado por
 -----------
 Nome: Ingrid de Sales Rabelo
@@ -30,7 +30,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 2007(1)2021
+- 2007(1)2022
 
 
 
