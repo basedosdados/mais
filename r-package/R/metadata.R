@@ -4,7 +4,6 @@
 #' @return A tibble with search results
 #'
 #' @importFrom purrr map_chr pluck
-#' @importFrom httr content
 #' @importFrom stringr str_replace_all
 #' @importFrom rlang .data
 #'

@@ -44,8 +44,9 @@
 #' @export
 #'
 #' @importFrom DBI dbConnect
-#'
-#' @importFrom DBI dbConnect
+#' @importFrom rlang abort inform
+#' @importFrom dplyr everything select tbl
+#' @importFrom stringr str_count
 #'
 #' @examples
 #'
@@ -486,6 +487,7 @@ bd_write <- function(
 # bd_write_rds e bd_write_csv ---------------------------------------------
 
 #' @rdname bd_write
+#' @importFrom scales number_bytes
 #' @export
 bd_write_rds <- function(
   .lazy_tbl,
