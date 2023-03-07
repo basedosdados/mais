@@ -12,7 +12,7 @@
 
 }
 
-.onAttatch(libname, pkgname) {
+.onAttatch <- function(libname, pkgname) {
 
   packageStartupMessage(
 
