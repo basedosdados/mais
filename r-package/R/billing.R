@@ -47,6 +47,7 @@ get_billing_id <- function() {
 #' If using in production or leaving code available at public repositories, `dotenv` is highly recommended.
 #'
 #' @importFrom rlang abort is_string inform
+#' @importFrom dotenv load_dot_env
 #'
 #' @export
 #'
