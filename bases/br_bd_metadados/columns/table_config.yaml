@@ -1,4 +1,3 @@
-
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_bd_metadados
@@ -12,17 +11,18 @@ title: Colunas na BD+
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description:
+description: Colunas na BD+
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
 #   - sa.br
 spatial_coverage:
+   - world
 
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage:
+temporal_coverage: 1954(1)2023
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -30,33 +30,36 @@ update_frequency: day
 
 # Nível de observação da tabela: o que representa cada linha.
 observation_level:
+    - entity: other
+      columns:
+            - table_id
 
-last_updated:
-    metadata:
-    data:
-    release:
+last_updated: 
+    metadata: '2023-03-07'
+    data: '2023-03-07 14:54:00'
+    release: '2023-03-07 14:54:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version:
+version: v1
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name:
-    email:
-    github_user:
-    ckan_user:
+    name: Patrick Teixeira
+    email: Patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name:
-    email:
-    github_user:
-    ckan_user:
-    website:
+    name: Ricardo Dahis
+    email: rdahis@basedosdados.org
+    github_user: rdahis
+    ckan_user: rdahis
+    website: www.ricardodahis.com
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description:
@@ -101,173 +104,173 @@ partitions:
 columns:
     - name: table_id
       bigquery_type: string
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      description: Table ID
+      temporal_coverage: (1) 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: name
       bigquery_type: string
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      description: Name
+      temporal_coverage: (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: bigquery_type
       bigquery_type: string
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      description: Bigquery type
+      temporal_coverage: (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: description
       bigquery_type: string
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      description: Description
+      temporal_coverage: (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: temporal_coverage
       bigquery_type: string
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      description: Temporal Coverage
+      temporal_coverage: (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
-      has_sensitive_data:
+      measurement_unit: year
+      has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: covered_by_dictionary
       bigquery_type: string
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      description: Covered by dictionary
+      temporal_coverage: (1)
+      covered_by_dictionary: no covered_by_dictionary
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: directory_column
       bigquery_type: string
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
-      directory_column:
+      description: Directory Column
+      temporal_coverage: (1)
+      covered_by_dictionary: no
+      directory_column: directory_column
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: measurement_unit
       bigquery_type: string
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      description: Measurement unit
+      temporal_coverage: (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: has_sensitive_data
       bigquery_type: string
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      description: Has sensitive data
+      temporal_coverage: (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: observations
       bigquery_type: string
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      description: Observations
+      temporal_coverage: (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: is_in_staging
       bigquery_type: string
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      description: Is in staging
+      temporal_coverage: (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
     - name: is_partition
       bigquery_type: string
-      description:
-      temporal_coverage:
-      covered_by_dictionary:
+      description: Is Partition
+      temporal_coverage: (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: true
+      is_partition: false
 
-number_rows:
+number_rows: 14880
 
 metadata_modified: '2022-09-19T14:07:24.192582'
