@@ -1,3 +1,5 @@
+#importFrom cli cli_inform cli_h1 cli_2 cli_li cli_end cli_h3
+
 .onLoad <- function(libname, pkgname) {
 
   if(Sys.getenv("billing_project_id") == "") {
@@ -33,14 +35,18 @@
       "YouTube: https://www.youtube.com/c/BasedosDados"))
   cli::cli_end()
 
-  cli::cli_h3(
+  cli::cli_inform(
     "Somos um projeto open-source e gratuito. Para nos mantermos e crescermos precisamos do seu apoio. Quanto valem as horas do seu trabalho que poupamos?
 
     Nos apoie em https://apoia.se/basedosdados.
 
     ")
 
-  cli::cli_h3(
-    "Usando o pacote para produzir um trabalho? Para nos citar basta rodar citation('basedosdados').")
+  cli::cli_inform(
+    "
+    Usando o pacote e dados para produzir um trabalho? O arquivo .cff com a citação está
+    disponível em https://github.com/basedosdados/mais/blob/master/CITATION.cff
+
+    Para acessar a citação do pacote basta rodar citation('basedosdados').")
 
 }
