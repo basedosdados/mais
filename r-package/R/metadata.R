@@ -1,10 +1,9 @@
-#' @title Search for a dataset
+#' Search for a dataset by keyword
 #' @param search_term keyword for search
 #'
 #' @return A tibble with search results
 #'
 #' @importFrom purrr map_chr pluck
-#' @importFrom httr content
 #' @importFrom stringr str_replace_all
 #' @importFrom rlang .data
 #'
@@ -21,8 +20,7 @@
 #'
 
 
-dataset_search <-
-  typed::Data.frame() ? function(search_term) {
+dataset_search <- function(search_term) {
 
   bd_request(
     endpoint = "dataset_search",
@@ -60,8 +58,7 @@ dataset_search <-
 #' list_dataset_tables("br_sp_alesp")
 #' }
 
-list_dataset_tables <-
-  function(dataset_id) {
+list_dataset_tables <- function(dataset_id) {
 
     bd_request(
       endpoint = "bdm_dataset_show",
@@ -101,10 +98,9 @@ list_dataset_tables <-
 #' @importFrom dplyr bind_rows
 #' @return A tibble describing all columns in a table
 
-get_table_columns <-
-  typed::Data.frame() ? function(
-  dataset_id = ? typed::Character(length = 1),
-  table_id = ? typed::Character(length = 1)) {
+get_table_columns <- function(
+  dataset_id,
+  table_id) {
 
   bd_request(
     endpoint = "bdm_table_show",
@@ -131,7 +127,7 @@ get_table_columns <-
 #' }
 #' @return A tibble describing the specified dataset
 
-get_dataset_description <- function(dataset_id = ? typed::Character(1)) {
+get_dataset_description <- function(dataset_id) {
 
   bd_request(
     endpoint = "bdm_dataset_show",
