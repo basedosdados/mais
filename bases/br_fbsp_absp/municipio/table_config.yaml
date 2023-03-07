@@ -1,28 +1,39 @@
+
 # Igual ao dataset.name mas como lower case.
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_fbsp_absp
 
-table_id: capital
+table_id: municipio
 
 # Título da tabela.
-title: Estatísticas Criminais por Capitais e Distrito Federal
+title:
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Trata-se de Estatísticas Criminais por capitais e Distrito Federal
-
+description: A base contempla as informações do Anuário de Segurança Pública a partir
+    de 2016 com as estatísticas criminais compatibilizadas entre anos, com informações
+    acerca dos homicídios, tráfico, furto e rouba, além da força policial, entre outros
+    ao nível das capitais brasileiras e distrito federal.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - sa.br
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
 spatial_coverage:
     - sa.br
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
 temporal_coverage:
     - 2016(1)2021
 
@@ -31,12 +42,23 @@ temporal_coverage:
 update_frequency: one_year
 
 # Nível de observação da tabela: o que representa cada linha.
-observation_level: 
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
     - entity: year
-        column: ano
+      column:
+          - ano
     - country: br
-        entity: municipality
-        column: id_municipio
+      entity: municipality
+      column:
+          - id_municipio
 
 last_updated:
     metadata: '2022-11-28'
@@ -44,7 +66,7 @@ last_updated:
     release: '2022-09-04 20:30:16'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
+# Exemplos: v1.0, v1.1.3
 version: v1.0
 
 # Quem está preenchendo esses metadados?
@@ -59,18 +81,21 @@ published_by:
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-  name: Bruno Moitinho Andrade de Souza
-  email: moitinhobr@gmail.com
-  github_user: https://github.com/brmoitinho
-  ckan_user:
-  website: https://www.linkedin.com/in/bruno-desouza/
+    name: Bruno Moitinho Andrade de Souza
+    email: moitinhobr@gmail.com
+    github_user: https://github.com/brmoitinho
+    ckan_user:
+    website: https://www.linkedin.com/in/bruno-desouza/
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Renomeei e ordenei as variáveis; exclui todas as linhas que possui NA no campo UF; retirei espaços em branco; substuí o hífen que significa que o fenômeno não existiu no dado ano na capital do estado por 0; substituí os três pontos que significam que a informação não está disponível por NAN; e uni todos os anos.
+data_cleaning_description: Renomeei e ordenei as variáveis; exclui todas as linhas
+    que possui NA no campo UF; retirei espaços em branco; substuí o hífen que significa
+    que o fenômeno não existiu no dado ano na capital do estado por 0; substituí os
+    três pontos que significam que a informação não está disponível por NAN; e uni
+    todos os anos.
 
-# Url do código de limpeza dos dados.
-data_cleaning_code_url:  https://github.com/basedosdados/mais/tree/master/bases/br_fbsp_absp/code/microdados
-
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_fbsp_absp/code/microdados
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -103,12 +128,40 @@ partitions:
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
-    - name: id_municipio
+    - name: ano
       bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio
+      bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
           - (1)
@@ -137,39 +190,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: sigla_uf
-      bigquery_type: string
-      description: Sigla da Unidade da Federação
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: uf
-          column_name: sigla_uf
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: ano
-      bigquery_type: int64
-      description: Ano
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: ano
-          column_name: ano
-      measurement_unit: year
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
     - name: quantidade_homicidio_doloso
       bigquery_type: int64
-      description: 'Quantidade de Homicídios Dolosos '
+      description: Quantidade de Homicídios Dolosos
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -184,7 +207,7 @@ columns:
       is_partition: false
     - name: quantidade_latrocinio
       bigquery_type: int64
-      description: 'Quantidade de Latrocínios '
+      description: Quantidade de Latrocínios
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -199,7 +222,7 @@ columns:
       is_partition: false
     - name: quantidade_lesao_corporal_morte
       bigquery_type: int64
-      description: 'Quantidade de Lesões Corporais Seguida de Morte '
+      description: Quantidade de Lesões Corporais Seguida de Morte
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -214,8 +237,8 @@ columns:
       is_partition: false
     - name: quantidade_mortes_policiais_confronto
       bigquery_type: int64
-      description: 'Quantidade de Policiais Civis e Militares Mortos em Situação de
-          Confronto '
+      description: Quantidade de Policiais Civis e Militares Mortos em Situação de
+          Confronto
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -230,8 +253,8 @@ columns:
       is_partition: false
     - name: quantidade_mortes_intervencao_policial
       bigquery_type: int64
-      description: 'Quantidade de Mortes Decorrentes de Intervenção Policial (em serviço
-          e fora de serviço) '
+      description: Quantidade de Mortes Decorrentes de Intervenção Policial (em serviço
+          e fora de serviço)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -310,7 +333,7 @@ columns:
       is_partition: false
     - name: quantidade_mortes_violentas_intencionais
       bigquery_type: int64
-      description: 'Quantidade de Mortes Violentas Intencionais '
+      description: Quantidade de Mortes Violentas Intencionais
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -492,7 +515,7 @@ columns:
       is_partition: false
     - name: quantidade_posse_uso_entorpecente
       bigquery_type: int64
-      description: 'Quantidade de Posse e Uso de Entorpecentes        '
+      description: Quantidade de Posse e Uso de Entorpecentes
       temporal_coverage:
           - 2018(1)2021
       covered_by_dictionary: no
@@ -507,7 +530,7 @@ columns:
       is_partition: false
     - name: quantidade_morte_policiais_civis_confronto_em_servico
       bigquery_type: int64
-      description: 'Quantidade de Policiais Civis mortos em confronto em serviço '
+      description: Quantidade de Policiais Civis mortos em confronto em serviço
       temporal_coverage:
           - (1)2018
       covered_by_dictionary: no
@@ -568,6 +591,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 163
+number_rows:
 
-metadata_modified:
+metadata_modified: '2023-03-07T11:52:12.561142'

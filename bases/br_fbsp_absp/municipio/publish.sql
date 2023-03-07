@@ -17,12 +17,12 @@ TIPOS:
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
 */
 
-CREATE VIEW basedosdados-dev.br_fbsp_absp.capital AS
+CREATE VIEW basedosdados-dev.br_fbsp_absp.municipio AS
 SELECT 
-SAFE_CAST(id_municipio AS INT64) id_municipio,
-SAFE_CAST(grupo AS STRING) grupo,
-SAFE_CAST(sigla_uf AS STRING) sigla_uf,
 SAFE_CAST(ano AS INT64) ano,
+SAFE_CAST(sigla_uf AS STRING) sigla_uf,
+SAFE_CAST(id_municipio AS STRING) id_municipio,
+SAFE_CAST(grupo AS STRING) grupo,
 SAFE_CAST(quantidade_homicidio_doloso AS INT64) quantidade_homicidio_doloso,
 SAFE_CAST(quantidade_latrocinio AS INT64) quantidade_latrocinio,
 SAFE_CAST(quantidade_lesao_corporal_morte AS INT64) quantidade_lesao_corporal_morte,
@@ -49,4 +49,4 @@ SAFE_CAST(quantidade_morte_policiais_civis_confronto_em_servico AS INT64) quanti
 SAFE_CAST(quantidade_morte_policiais_militares_confronto_em_servico AS INT64) quantidade_morte_policiais_militares_confronto_em_servico,
 SAFE_CAST(quantidade_morte_policiais_civis_fora_de_servico AS INT64) quantidade_morte_policiais_civis_fora_de_servico,
 SAFE_CAST(quantidade_morte_policiais_militares_fora_de_servico AS INT64) quantidade_morte_policiais_militares_fora_de_servico
-FROM basedosdados-dev.br_fbsp_absp_staging.capital AS t
+FROM basedosdados-dev.br_fbsp_absp_staging.municipio AS t
