@@ -26,7 +26,6 @@ Imports:
     dplyr (>= 1.0.6),
     tibble (>= 3.1.1),
     httr (>= 1.4.2),
-    googleAuthR (>= 1.4.0),
     cli (>= 2.5.0),
     magrittr (>= 2.0.1),
     readr (>= 1.4.0),

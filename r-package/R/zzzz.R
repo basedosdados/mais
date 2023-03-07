@@ -1,5 +1,3 @@
-#importFrom cli cli_inform cli_h1 cli_2 cli_li cli_end cli_h3
-
 .onLoad <- function(libname, pkgname) {
 
   if(Sys.getenv("billing_project_id") == "") {
@@ -42,11 +40,10 @@
 
     ")
 
-  cli::cli_inform(
-    "
-    Usando o pacote e dados para produzir um trabalho? O arquivo .cff com a citação está
-    disponível em https://github.com/basedosdados/mais/blob/master/CITATION.cff
+  "
+    Usando o pacote e dados para produzir um trabalho? Nos cite com o arquivo em https://github.com/basedosdados/mais/blob/master/CITATION.cff
 
-    Para acessar a citação do pacote basta rodar citation('basedosdados').")
+    Para citar o pacote basta rodar citation('basedosdados')." %>%
+    cli::cli_inform()
 
 }

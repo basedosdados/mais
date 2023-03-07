@@ -460,7 +460,7 @@ bd_write <- function(
    collected_table <- bd_collect(.lazy_tbl)
 
   # write the results using the indicated function
-    rlang::call2(.write_fn, collected_table, path, ...) %>%
+  rlang::call2(.write_fn, collected_table, path, ...) %>%
     rlang::eval_bare()
 
   # checks if the writing process was successfull
