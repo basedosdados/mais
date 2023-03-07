@@ -341,7 +341,7 @@ def fixture_default_matadata_path():
 
 
 ############################################################
-# Conftest por new api
+# Conftest for new api
 ############################################################
 
 API_DATASET_ID = "dados_mestres"
@@ -350,6 +350,8 @@ API_NEW_DATASET_ID = "new_dataset"
 API_NEW_TABLE_ID = "new_table"
 API_OUTDATED_DATASET_ID = "outdated_dataset"
 API_OUTDATED_TABLE_ID = "outdated_table"
+API_PUBLISH_DATASET_ID = "br_ipea_teste_avs"
+API_PUBLISH_TABLE_ID = "municipios"
 
 
 @pytest.fixture(name="api_dataset")
@@ -451,6 +453,24 @@ def fixture_outdated_table_metadata(testdir):
     return Metadata(
         dataset_id=API_OUTDATED_DATASET_ID,
         table_id=API_OUTDATED_TABLE_ID,
+        metadata_path=testdir,
+        config_path=config_path,
+    )
+
+
+@pytest.fixture(name="api_ipea_table_metadata")
+def fixture_ipea_table_metadata(testdir):
+    """
+    Fixture to test metadata created and filled by the user.
+    Args:
+        testdir (str): Path to the test directory.
+    Returns:
+        Metadata: Metadata object for the table.
+    """
+    config_path = Path.home() / ".basedosdados_teste"
+    return Metadata(
+        dataset_id=API_PUBLISH_DATASET_ID,
+        table_id=API_PUBLISH_TABLE_ID,
         metadata_path=testdir,
         config_path=config_path,
     )

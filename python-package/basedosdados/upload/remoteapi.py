@@ -1,6 +1,7 @@
 """
 An interface to make mutations to the remote API.
 """
+import re
 from pprint import pprint
 from typing import Tuple
 
@@ -43,23 +44,22 @@ class RemoteAPI:
         return response
 
     @staticmethod
-    def _prepare_fields(data: dict) -> dict:
+    def _prepare_fields(data: dict, model: str) -> dict:
         """
         Prepare fields to be sent to the API, removing createdAt and updatedAt
         and including $ in front of the keys, as they are query variables.
         """
-        if "createdAt" in data:
-            del data["createdAt"]
-        if "updatedAt" in data:
-            del data["updatedAt"]
-        input_dataset = {}
-        for key, value in data.items():
-            input_dataset.update(
-                {
-                    f"${key}": value
-                }
-            )
-        return input_dataset
+        if "created_at" in data:
+            del data["created_at"]
+        if "updated_at" in data:
+            del data["updated_at"]
+        if "owner_org" in data:
+            del data["owner_org"]
+        if model == "dataset":
+            if "tables" in data:
+                del data["tables"]
+
+        return data
 
     def get_id(self, query_class: str, slug: str) -> str:
         """
@@ -73,6 +73,7 @@ class RemoteAPI:
         Raises:
             BaseDosDadosException: If the object is not found.
         """
+        class_ = re.sub(r"^all", "", query_class)
         query = f"""query {{
             {query_class}(slug: "{slug}") {{
                 edges {{
@@ -91,7 +92,7 @@ class RemoteAPI:
 
         if "data" in res:
             if not res.get("data", {}).get(f"{query_class}", {}).get("edges") or "errors" in res:
-                raise BaseDosDadosException(f"Theme {slug} not found")
+                raise BaseDosDadosException(f"{class_} {slug} not found")
 
             id_ = res["data"][f"{query_class}"]["edges"][0]["node"]["_id"]
             return id_
@@ -143,12 +144,12 @@ class RemoteAPI:
         Raises:
             Exception: If the mutation fails.
         """
+        print(f"""
+        Mutation: {query} \n
+        Parameters: {mutation_parameters}
+        """)
         response = {}
         response["result"] = "not implemented yet"
-        response["message"] = f"""
-        Teste com a query:{query}\n
-        Teste com os parâmetros:{mutation_parameters}
-        """
         response["data"] = "10279a86-53be-4291-986d-9ef1d68c2bda"  # mock a dataset_uuid
 
         # r = requests.post(
@@ -226,7 +227,7 @@ class RemoteAPI:
         if data.get("name") is None:
             raise BaseDosDadosException("Dataset ame is required.")
 
-        fields = self._prepare_fields(data)
+        fields = self._prepare_fields(data, model="dataset")
         query, mutation_parameters = self.create_update("CreateUpdateDataset", fields)
         response = self._perform_mutation(query, mutation_parameters)
 
@@ -270,7 +271,6 @@ class RemoteAPI:
             dict: The response of the mutation.
 
         """
-        pprint(data)
         if "id" in data:
             if data.get("id") is not None:
                 raise BaseDosDadosException(
@@ -307,7 +307,7 @@ class RemoteAPI:
         # bigquery_type
         # name
 
-        fields = self._prepare_fields(data)
+        fields = self._prepare_fields(data, model="table")
         query, mutation_parameters = self.create_update("CreateUpdateTable", fields)
         response = self._perform_mutation(query, mutation_parameters)
 

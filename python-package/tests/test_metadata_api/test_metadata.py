@@ -70,6 +70,7 @@ def test_dataset_table_exists_in_api(api_table_metadata):
     assert api_table_metadata.exists_in_api() is True
 
 
+@pytest.mark.skip(reason="This test needs to mock an invalid dataset.")
 def test_dataset_is_not_updated(api_dataset_metadata):
     """
     Test if dataset is updated.

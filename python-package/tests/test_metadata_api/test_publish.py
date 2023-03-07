@@ -119,9 +119,9 @@ def test_api_prepare_fields(api_dataset_metadata):
     """
     make_login(api_dataset_metadata)
     remote_api = RemoteAPI(api_dataset_metadata.api_graphql, api_dataset_metadata.load_token())
-    fields = remote_api._prepare_fields({"id": api_dataset_metadata.dataset_uuid, "name": "Teste do nome"})
+    fields = remote_api._prepare_fields({"id": api_dataset_metadata.dataset_uuid, "name": "Teste do nome"}, model="dataset")
     pprint(fields)
-    assert "$id" in fields
+    assert "id" in fields
 
 
 def test_api_update_dataset(api_dataset_metadata):
@@ -144,14 +144,19 @@ def test_api_create_dataset(api_new_dataset_metadata):
     assert response["result"] == "not implemented yet"
 
 
-def test_api_create_table(api_new_table_metadata):
+def test_api_create_table(api_ipea_table_metadata):
     """
-    Test if api_data_dict is a dict.
+    Test creating table with dataset.
+    Args:
+        api_ipea_table_metadata (Metadata): Metadata object (copied from ineb)
+    Returns:
+        None
     """
-    make_login(api_new_table_metadata)
-    response = api_new_table_metadata.publish(
+    make_login(api_ipea_table_metadata)
+    response = api_ipea_table_metadata.publish(
         all=True,
         if_exists="replace",
+        update_locally=False,
     )
     pprint(response)
     assert response["result"] == "not implemented yet"
