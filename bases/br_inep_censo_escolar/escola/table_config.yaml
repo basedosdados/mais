@@ -11,48 +11,70 @@ title: Escola
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: A tabela contém dados do censo escolar ao nível de cada escola. Os dados são organizados em mais de 300 variáveis que traçam um perfil completo da escola, caracterizando desde a infraestrutura física disponível, a equipe pedagógica, a infraestrutura pedagógica, marcas do período letivo como seu começo e fim, além de várias informações sobre os estudantes da escola. É a única tabela do Censo Escolar liberada pelo Inep a partir de 2021.
+description: A tabela contém dados do censo escolar ao nível de cada escola. Os dados
+    são organizados em mais de 300 variáveis que traçam um perfil completo da escola,
+    caracterizando desde a infraestrutura física disponível, a equipe pedagógica,
+    a infraestrutura pedagógica, marcas do período letivo como seu começo e fim, além
+    de várias informações sobre os estudantes da escola. É a única tabela do Censo
+    Escolar liberada pelo Inep a partir de 2021.
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - sa.br
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
 spatial_coverage:
     - sa.br
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
 temporal_coverage:
-    - 2007(1)2021
+    - 2007(1)2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: one_year
 
 # Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
 observation_level:
     - entity: school
       columns:
-        - id_escola
+          - id_escola
     - entity: year
       columns:
-        - ano
+          - ano
 
 last_updated:
-    metadata: '2022-11-29'
-    data: '2022-11-29 09:19:30'
-    release: '2022-11-29 09:19:30'
+    metadata: '2023-03-03'
+    data: '2023-03-03 09:19:30'
+    release: '2023-03-03 09:19:30'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
-version: v2.1
+# Exemplos: v1.0, v1.1.3
+version: v3.0
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Ingrid de Sales Rabelo
-    email: ingrid.rabelo@basedosdados.org
-    github_user: IngridSRabelo
-    ckan_user:
+    name: Arthur de Figueiredo Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
@@ -66,14 +88,16 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: O tratamento consistiu em renomear as colunas, padronizar as variáveis tipo data para o formato tipo DATE do BigQuery e padronizar as variáveis tipo bool, para gerar resultados tipo 0 ou 1.
+data_cleaning_description: O tratamento consistiu em renomear as colunas, padronizar
+    as variáveis tipo data para o formato tipo DATE do BigQuery e padronizar as variáveis
+    tipo bool, para gerar resultados tipo 0 ou 1.
 
-# Url do código de limpeza dos dados.
+# Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_censo_escolar/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
-    name: 
+    name:
     organization_id:
 
 # Url dos dados originais no GCP Storage.
@@ -104,8 +128,6 @@ partitions:
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
@@ -290,7 +312,8 @@ columns:
       is_partition: false
     - name: vinculo_secretaria_educacao
       bigquery_type: int64
-      description: A escola pública está vinculada à Secretaria de Educação/Ministério da Educação
+      description: A escola pública está vinculada à Secretaria de Educação/Ministério
+          da Educação
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -305,7 +328,8 @@ columns:
       is_partition: false
     - name: vinculo_seguranca_publica
       bigquery_type: int64
-      description: A escola pública está vinculada à Secretaria de Segurança Pública/Forças Armadas/Militar
+      description: A escola pública está vinculada à Secretaria de Segurança Pública/Forças
+          Armadas/Militar
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -320,7 +344,8 @@ columns:
       is_partition: false
     - name: vinculo_secretaria_saude
       bigquery_type: int64
-      description: A escola pública está vinculada à Secretaria de Saúde/Ministério da Saúde
+      description: A escola pública está vinculada à Secretaria de Saúde/Ministério
+          da Saúde
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -335,10 +360,46 @@ columns:
       is_partition: false
     - name: vinculo_outro_orgao
       bigquery_type: int64
-      description: A escola pública está vinculada a outro órgão da administração pública
+      description: A escola pública está vinculada a outro órgão da administração
+          pública
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: poder_publico_parceria
+      bigquery_type: int64
+      description: Parceria ou convênio com o poder público (parceria ou convênio
+          firmado entre a Administração Pública e instituições privadas ou instituições
+          públicas de ensino, autarquias e fundações da administração indireta para
+          financiamento do atendimento educacional ou para a oferta do itinerário
+          de formação técnica e profissional do ensino médio)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_poder_publico_parceria
+      bigquery_type: string
+      description: Poder público responsável pela parceria ou convênio entre a Administração
+          Pública e outras instituições
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -369,6 +430,150 @@ columns:
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_contratacao_termo_colaboracao
+      bigquery_type: int64
+      description: Forma de contratação entre a Administração Pública e outras instituições
+          - Termo de colaboração (Lei nº 13.019/2014)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_contratacao_termo_fomento
+      bigquery_type: int64
+      description: Forma de contratação entre a Administração Pública e outras instituições
+          - Termo de fomento (Lei nº 13.019/2014)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_contratacao_acordo_cooperacao
+      bigquery_type: int64
+      description: Forma de contratação entre a Administração Pública e outras instituições
+          - Acordo de cooperação (Lei nº 13.019/2014)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_contratacao_prestacao_servico
+      bigquery_type: int64
+      description: Forma de contratação entre a Administração Pública e outras instituições
+          - Contrato de prestação de serviço
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_contratacao_cooperacao_tecnica_financeira
+      bigquery_type: int64
+      description: Forma de contratação entre a Administração Pública e outras instituições
+          - Termo de cooperação técnica e financeira
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: forma_contratacao_consorcio_publico
+      bigquery_type: int64
+      description: Forma de contratação entre a Administração Pública e outras instituições
+          - Contrato de consórcio público/Convênio de cooperação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_atendimento_escolarizacao
+      bigquery_type: int64
+      description: Tipo de atendimento ofertado por meio da parceria ou convênio -
+          Escolarização
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_atendimento_atividade_complementar
+      bigquery_type: int64
+      description: Tipo de atendimento ofertado por meio da parceria ou convênio -
+          Atividade Complementar
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: tipo_atendimento_aee
+      bigquery_type: int64
+      description: Tipo de atendimento ofertado por meio da parceria ou convênio -
+          Atendimento Educacional Especializado (AEE)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -410,7 +615,8 @@ columns:
       is_partition: false
     - name: mantenedora_escola_privada_oscip
       bigquery_type: int64
-      description: A mantenedora da escola privada é uma Organização da Sociedade Civil de Interesse Público (Oscip)
+      description: A mantenedora da escola privada é uma Organização da Sociedade
+          Civil de Interesse Público (Oscip)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -425,7 +631,8 @@ columns:
       is_partition: false
     - name: mantenedora_escola_privada_ong_oscip
       bigquery_type: int64
-      description: A mantenedora da escola privada é uma Organização da Sociedade Civil de Interesse Público (Oscip) ou uma ONG
+      description: A mantenedora da escola privada é uma Organização da Sociedade
+          Civil de Interesse Público (Oscip) ou uma ONG
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -455,7 +662,8 @@ columns:
       is_partition: false
     - name: mantenedora_escola_privada_sistema_s
       bigquery_type: int64
-      description: A mantenedora da escola privada é o sistema S (SENAI, SESI, SESC, entre outros)
+      description: A mantenedora da escola privada é o sistema S (SENAI, SESI, SESC,
+          entre outros)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -515,7 +723,8 @@ columns:
       is_partition: false
     - name: tipo_regulamentacao
       bigquery_type: string
-      description: A escola tem regulamentação/autorização no conselho ou órgão municipal, estadual ou federal de educação
+      description: A escola tem regulamentação/autorização no conselho ou órgão municipal,
+          estadual ou federal de educação
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -530,7 +739,8 @@ columns:
       is_partition: false
     - name: tipo_responsavel_regulamentacao
       bigquery_type: string
-      description: Esfera administrativa do conselho ou órgão responsável pela Regulamentação/Autorização da escola
+      description: Esfera administrativa do conselho ou órgão responsável pela Regulamentação/Autorização
+          da escola
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -605,7 +815,8 @@ columns:
       is_partition: false
     - name: local_funcionamento_sala_empresa
       bigquery_type: int64
-      description: O local de funcionamento da escola é um conjunto de salas de uma empresa
+      description: O local de funcionamento da escola é um conjunto de salas de uma
+          empresa
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -620,7 +831,8 @@ columns:
       is_partition: false
     - name: local_funcionamento_socioeducativo
       bigquery_type: int64
-      description: O local de funcionamento da escola é uma unidade de atendimento socioeducativo
+      description: O local de funcionamento da escola é uma unidade de atendimento
+          socioeducativo
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -650,7 +862,8 @@ columns:
       is_partition: false
     - name: local_funcionamento_prisional_socio
       bigquery_type: int64
-      description: O local de funcionamento da escola é unidade prisional ou unidade de atendimento socioeducativo
+      description: O local de funcionamento da escola é unidade prisional ou unidade
+          de atendimento socioeducativo
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -710,7 +923,8 @@ columns:
       is_partition: false
     - name: tipo_local_funcionamento_galpao
       bigquery_type: string
-      description: A forma de ocupação do galpão/rancho/paiol/barracão, e.g., próprio ou alugado
+      description: A forma de ocupação do galpão/rancho/paiol/barracão, e.g., próprio
+          ou alugado
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -755,7 +969,7 @@ columns:
       is_partition: false
     - name: predio_compartilhado
       bigquery_type: int64
-      description: O prédio é compartilhado com outra escola
+      description: O prédio compartilhado com outra escola
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -905,7 +1119,8 @@ columns:
       is_partition: false
     - name: energia_gerador_fossil
       bigquery_type: int64
-      description: O abastecimento de energia elétrica é por gerador movido a combustível fóssil
+      description: O abastecimento de energia elétrica é por gerador movido a combustível
+          fóssil
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -935,7 +1150,8 @@ columns:
       is_partition: false
     - name: energia_renovavel
       bigquery_type: int64
-      description: O abastecimento de energia elétrica é por fontes renováveis ou alternativas
+      description: O abastecimento de energia elétrica é por fontes renováveis ou
+          alternativas
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1085,7 +1301,8 @@ columns:
       is_partition: false
     - name: lixo_destino_final_publico
       bigquery_type: int64
-      description: O destino do lixo é uma destinação final financiada pelo poder público
+      description: O destino do lixo é uma destinação final financiada pelo poder
+          público
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1145,7 +1362,7 @@ columns:
       is_partition: false
     - name: lixo_reciclagem
       bigquery_type: int64
-      description: O destino do lixo é ser reciclado pela escola
+      description: O destino do lixo é ser reciclado pela escola realiza
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1175,7 +1392,7 @@ columns:
       is_partition: false
     - name: tratamento_lixo_reutilizacao
       bigquery_type: int64
-      description: O tratamento do lixo que a escola realiza é reaproveitamento/reutilização
+      description: O tratamento do lixo que a escola realiza é o reaproveitamento/reutilização
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1325,7 +1542,8 @@ columns:
       is_partition: false
     - name: banheiro_pne
       bigquery_type: int64
-      description: A escola possui banheiros adequados a pessoas com deficiência ou mobilidade reduzida
+      description: A escola possui banheiros adequados a pessoas com deficiência ou
+          mobilidade reduzida
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1491,6 +1709,22 @@ columns:
     - name: laboratorio_informatica
       bigquery_type: int64
       description: A escola possui laboratório de informática
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: laboratorio_educacao_profissional
+      bigquery_type: int64
+      description: Dependências físicas existentes e utilizadas na escola - Laboratório
+          específico para a Educação Profissional
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1683,6 +1917,22 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
+    - name: sala_oficinas_educacao_profissional
+      bigquery_type: int64
+      description: Dependências físicas existentes e utilizadas na escola - Salas
+          de oficinas da Educação Profissional
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
     - name: sala_diretoria
       bigquery_type: int64
       description: A escola possui sala de diretoria
@@ -1760,7 +2010,8 @@ columns:
       is_partition: false
     - name: sala_atendimento_especial
       bigquery_type: int64
-      description: A escola possui sala para atendimento educacional especializado (AEE)
+      description: A escola possui sala para atendimento educacional especializado
+          (AEE)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1805,7 +2056,8 @@ columns:
       is_partition: false
     - name: dependencia_pne
       bigquery_type: int64
-      description: A escola possui dependências e vias adequadas a alunos com deficiência ou mobilidade reduzida
+      description: A escola possui dependências e vias adequadas a alunos com deficiência
+          ou mobilidade reduzida
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1895,7 +2147,8 @@ columns:
       is_partition: false
     - name: acessibilidade_vao_livre
       bigquery_type: int64
-      description: A escola possui o recurso de acessibilidade portas com vão livre de no mínimo 80 cm
+      description: A escola possui o recurso de acessibilidade portas com vão livre
+          de no mínimo 80 cm
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -1970,7 +2223,8 @@ columns:
       is_partition: false
     - name: acessibilidade_inexistente
       bigquery_type: int64
-      description: A escola não possui nenhum dos recursos de acessibilidade listados nas variáveis
+      description: A escola não possui nenhum dos recursos de acessibilidade listados
+          nas variáveis
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -2000,7 +2254,8 @@ columns:
       is_partition: false
     - name: quantidade_sala_utilizada
       bigquery_type: int64
-      description: Número de salas de aula utilizadas na escola (dentro e fora do prédio)
+      description: Número de salas de aula utilizadas na escola (dentro e fora do
+          prédio)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -2060,7 +2315,8 @@ columns:
       is_partition: false
     - name: quantidade_sala_utilizada_acessivel
       bigquery_type: int64
-      description: Número de salas de aula  com acessibilidade para pessoas com deficiência ou mobilidade reduzida
+      description: Número de salas de aula  com acessibilidade para pessoas com deficiência
+          ou mobilidade reduzida
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -2225,7 +2481,8 @@ columns:
       is_partition: false
     - name: equipamento_nenhum
       bigquery_type: int64
-      description: A escola não possui nenhum dos equipamentos listados para uso técnico e administrativo
+      description: A escola não possui nenhum dos equipamentos listados para uso técnico
+          e administrativo
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -2265,7 +2522,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo de 4 equipamentos para cada 3 matrículas - foram marcados apenas valores>3)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo de 4 equipamentos para cada 3 matrículas - foram marcados
+          apenas valores>3)
       is_in_staging: true
       is_partition: false
     - name: equipamento_som
@@ -2295,7 +2554,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo de 4 equipamentos para cada 3 salas existentes - foram marcados apenas valores>3)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo de 4 equipamentos para cada 3 salas existentes - foram
+          marcados apenas valores>3)
       is_in_staging: true
       is_partition: false
     - name: equipamento_tv
@@ -2325,7 +2586,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo de 4 equipamentos para cada 3 salas existentes - foram marcados apenas valores>3)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo de 4 equipamentos para cada 3 salas existentes - foram
+          marcados apenas valores>3)
       is_in_staging: true
       is_partition: false
     - name: equipamento_lousa_digital
@@ -2355,7 +2618,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo de 4 equipamentos para cada 3 salas existentes - foram marcados apenas valores>3)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo de 4 equipamentos para cada 3 salas existentes - foram
+          marcados apenas valores>3)
       is_in_staging: true
       is_partition: false
     - name: equipamento_multimidia
@@ -2385,7 +2650,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo de 4 equipamentos para cada 3 salas existentes - foram marcados apenas valores>3)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo de 4 equipamentos para cada 3 salas existentes - foram
+          marcados apenas valores>3)
       is_in_staging: true
       is_partition: false
     - name: equipamento_videocassete
@@ -2550,7 +2817,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo de 4 equipamentos para cada 3 matrículas - foram marcados apenas valores>3)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo de 4 equipamentos para cada 3 matrículas - foram marcados
+          apenas valores>3)
       is_in_staging: true
       is_partition: false
     - name: computador_portatil_aluno
@@ -2580,7 +2849,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo de 4 equipamentos para cada 3 salas existentes - foram marcados apenas valores>3)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo de 4 equipamentos para cada 3 salas existentes - foram
+          marcados apenas valores>3)
       is_in_staging: true
       is_partition: false
     - name: tablet_aluno
@@ -2610,7 +2881,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo de 4 equipamentos para cada 3 salas existentes - foram marcados apenas valores>3)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo de 4 equipamentos para cada 3 salas existentes - foram
+          marcados apenas valores>3)
       is_in_staging: true
       is_partition: false
     - name: quantidade_computador
@@ -2690,7 +2963,8 @@ columns:
       is_partition: false
     - name: internet_aprendizagem
       bigquery_type: int64
-      description: A escola possui acesso à internet para uso nos processos de ensino e aprendizagem
+      description: A escola possui acesso à internet para uso nos processos de ensino
+          e aprendizagem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -2720,7 +2994,8 @@ columns:
       is_partition: false
     - name: acesso_internet_computador
       bigquery_type: int64
-      description: Os equipamentos de computador e tablet que os alunos usam possuem acesso à internet
+      description: Os equipamentos de computador e tablet que os alunos usam possuem
+          acesso à internet
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -2735,7 +3010,8 @@ columns:
       is_partition: false
     - name: acesso_internet_dispositivo_pessoal
       bigquery_type: int64
-      description: Os equipamentos de dispositivo pessoal que os alunos usam possuem acesso à internet
+      description: Os equipamentos de dispositivo pessoal que os alunos usam possuem
+          acesso à internet
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -2795,7 +3071,8 @@ columns:
       is_partition: false
     - name: profissional_administrativo
       bigquery_type: int64
-      description: A escola possui auxiliar de secretaria ou auxiliar administrativo, atendente
+      description: A escola possui auxiliar de secretaria ou auxiliar administrativo,
+          atendente
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -2810,7 +3087,8 @@ columns:
       is_partition: false
     - name: quantidade_profissional_administrativo
       bigquery_type: int64
-      description: Quantidade de auxiliar de secretaria ou auxiliar administrativo, atendente na escola
+      description: Quantidade de auxiliar de secretaria ou auxiliar administrativo,
+          atendente na escola
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -2820,7 +3098,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_servico_geral
@@ -2850,7 +3130,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_bibliotecario
@@ -2880,7 +3162,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_saude
@@ -2900,7 +3184,8 @@ columns:
       is_partition: false
     - name: quantidade_profissional_saude
       bigquery_type: int64
-      description: Quantidade de profissional de saúde (bombeiro, enfermeiro...) na escola
+      description: Quantidade de profissional de saúde (bombeiro, enfermeiro...) na
+          escola
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -2910,7 +3195,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_coordenador
@@ -2940,7 +3227,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_fonaudiologo
@@ -2970,7 +3259,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_nutricionista
@@ -3000,7 +3291,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_psicologo
@@ -3030,7 +3323,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_alimentacao
@@ -3050,7 +3345,8 @@ columns:
       is_partition: false
     - name: quantidade_profissional_alimentacao
       bigquery_type: int64
-      description: Quantidade de profissional de preparação e segurança alimentar na escola
+      description: Quantidade de profissional de preparação e segurança alimentar
+          na escola
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3060,7 +3356,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_pedagogia
@@ -3090,7 +3388,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_secretario
@@ -3120,7 +3420,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_seguranca
@@ -3150,7 +3452,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_monitor
@@ -3180,7 +3484,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_gestao
@@ -3210,7 +3516,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: profissional_assistente_social
@@ -3240,7 +3548,9 @@ columns:
           column_name:
       measurement_unit: person
       has_sensitive_data: no
-      observations: 88888 - registro com marcação de valor extremo (valor superior ao limite máximo definido com base na distribuição da razão de profissionais por matrícula)
+      observations: 88888 - registro com marcação de valor extremo (valor superior
+          ao limite máximo* definido com base na distribuição da razão de profissionais
+          por matrícula)
       is_in_staging: true
       is_partition: false
     - name: alimentacao
@@ -3260,7 +3570,8 @@ columns:
       is_partition: false
     - name: organizacao_serie_ano
       bigquery_type: int64
-      description: A escola possui como forma de organização do ensino série/ano (séries anuais)
+      description: A escola possui como forma de organização do ensino série/ano (séries
+          anuais)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3290,7 +3601,8 @@ columns:
       is_partition: false
     - name: organizacao_fundamental_ciclo
       bigquery_type: int64
-      description: A escola possui como forma de organização do ensino ciclo(s) do ensino fundamental
+      description: A escola possui como forma de organização do ensino ciclo(s) do
+          ensino fundamental
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3305,7 +3617,8 @@ columns:
       is_partition: false
     - name: organizacao_grupo_nao_seriado
       bigquery_type: int64
-      description: A escola possui como forma de organização do grupos não-seriados com base na idade ou competência (art. 23 LDB)
+      description: A escola possui como forma de organização do grupos não-seriados
+          com base na idade ou competência (art. 23 LDB)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3335,7 +3648,8 @@ columns:
       is_partition: false
     - name: organizacao_alternancia
       bigquery_type: int64
-      description: A escola possui como forma de organização do ensino alternância regular de períodos de estudos
+      description: A escola possui como forma de organização do ensino alternância
+          regular de períodos de estudos
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3350,7 +3664,8 @@ columns:
       is_partition: false
     - name: material_pedagogico_multimidia
       bigquery_type: int64
-      description: A escola possui acervo multimídia em uso para o desenvolvimento de atividades de aprendizagem
+      description: A escola possui acervo multimídia em uso para o desenvolvimento
+          de atividades de aprendizagem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3365,7 +3680,8 @@ columns:
       is_partition: false
     - name: material_pedagogico_infantil
       bigquery_type: int64
-      description: A escola possui brinquedos em uso para o desenvolvimento de atividades de aprendizagem
+      description: A escola possui brinquedos em uso para o desenvolvimento de atividades
+          de aprendizagem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3380,7 +3696,8 @@ columns:
       is_partition: false
     - name: material_pedagogico_cientifico
       bigquery_type: int64
-      description: A escola possui materiais científicos em uso para o desenvolvimento de atividades de aprendizagem
+      description: A escola possui materiais científicos em uso para o desenvolvimento
+          de atividades de aprendizagem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3395,7 +3712,8 @@ columns:
       is_partition: false
     - name: material_pedagogico_difusao
       bigquery_type: int64
-      description: A escola possui materiais de difusão de áudio em uso para o desenvolvimento de atividades de aprendizagem
+      description: A escola possui materiais de difusão de áudio em uso para o desenvolvimento
+          de atividades de aprendizagem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3410,7 +3728,8 @@ columns:
       is_partition: false
     - name: material_pedagogico_musical
       bigquery_type: int64
-      description: A escola possui materiais musicais em uso para o desenvolvimento de atividades de aprendizagem
+      description: A escola possui materiais musicais em uso para o desenvolvimento
+          de atividades de aprendizagem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3425,7 +3744,8 @@ columns:
       is_partition: false
     - name: material_pedagogico_jogo
       bigquery_type: int64
-      description: A escola possui jogos em uso para o desenvolvimento de atividades de aprendizagem
+      description: A escola possui jogos em uso para o desenvolvimento de atividades
+          de aprendizagem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3440,7 +3760,25 @@ columns:
       is_partition: false
     - name: material_pedagogico_artistica
       bigquery_type: int64
-      description: A escola possui materiais artísticos em uso para o desenvolvimento de atividades de aprendizagem
+      description: A escola possui materiais artísticos em uso para o desenvolvimento
+          de atividades de aprendizagem
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: material_pedagogico_profissional
+      bigquery_type: int64
+      description: Instrumentos e materiais socioculturais e/ou pedagógicos em uso
+          na escola para o desenvolvimento de atividades de ensino e aprendizagem
+          - Materiais para Educação Profissional
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3455,7 +3793,8 @@ columns:
       is_partition: false
     - name: material_pedagogico_desportiva
       bigquery_type: int64
-      description: A escola possui materiais desportivos em uso para o desenvolvimento de atividades de aprendizagem
+      description: A escola possui materiais desportivos em uso para o desenvolvimento
+          de atividades de aprendizagem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3470,7 +3809,8 @@ columns:
       is_partition: false
     - name: material_pedagogico_indigena
       bigquery_type: int64
-      description: A escola possui materiais para educação índigena em uso para o desenvolvimento de atividades de aprendizagem
+      description: A escola possui materiais para educação índigena em uso para o
+          desenvolvimento de atividades de aprendizagem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3485,7 +3825,8 @@ columns:
       is_partition: false
     - name: material_pedagogico_etnico
       bigquery_type: int64
-      description: A escola possui materiais da educação étnica em uso para o desenvolvimento de atividades de aprendizagem
+      description: A escola possui materiais da educação étnica em uso para o desenvolvimento
+          de atividades de aprendizagem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3500,7 +3841,8 @@ columns:
       is_partition: false
     - name: material_pedagogico_campo
       bigquery_type: int64
-      description: A escola possui materiais para educação no campo em uso para o desenvolvimento de atividades de aprendizagem
+      description: A escola possui materiais para educação no campo em uso para o
+          desenvolvimento de atividades de aprendizagem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3515,7 +3857,8 @@ columns:
       is_partition: false
     - name: material_pedagogico_nenhum
       bigquery_type: int64
-      description: A escola não possui materiais em uso para o desenvolvimento de atividades de aprendizagem
+      description: A escola não possui materiais em uso para o desenvolvimento de
+          atividades de aprendizagem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3530,7 +3873,8 @@ columns:
       is_partition: false
     - name: material_especifico_quilombola
       bigquery_type: int64
-      description: A escola usa materiais didáticos específicos para atendimento à diversidade sociocultural quilombola
+      description: A escola usa materiais didáticos específicos para atendimento à
+          diversidade sociocultural quilombola
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3545,7 +3889,8 @@ columns:
       is_partition: false
     - name: material_especifico_indigena
       bigquery_type: int64
-      description: A escola usa materiais didáticos específicos para atendimento à diversidade sociocultural indígena
+      description: A escola usa materiais didáticos específicos para atendimento à
+          diversidade sociocultural indígena
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3560,7 +3905,8 @@ columns:
       is_partition: false
     - name: material_especifico_nao_utiliza
       bigquery_type: int64
-      description: A escola não usa materiais didáticos específicos para atendimento à diversidade sociocultural
+      description: A escola não usa materiais didáticos específicos para atendimento
+          à diversidade sociocultural
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3695,7 +4041,8 @@ columns:
       is_partition: false
     - name: reserva_vaga_raca_cor
       bigquery_type: int64
-      description: A escola faz reserva de vagas por sistema de cotas para grupos - Autodeclarado preto, pardo ou indígena (PPI)
+      description: 'A escola faz reserva de vagas por sistema de cotas para grupos:
+          Autodeclarado preto, pardo ou indígena (PPI)'
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3710,7 +4057,8 @@ columns:
       is_partition: false
     - name: reserva_vaga_renda
       bigquery_type: int64
-      description: A escola faz reserva de vagas por sistema de cotas para grupos - Condição de renda
+      description: 'A escola faz reserva de vagas por sistema de cotas para grupos:
+          Condição de renda'
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3725,7 +4073,8 @@ columns:
       is_partition: false
     - name: reserva_vaga_publica
       bigquery_type: int64
-      description: A escola faz reserva de vagas por sistema de cotas para grupos - Oriundo de escola pública
+      description: 'A escola faz reserva de vagas por sistema de cotas para grupos:
+          Oriundo de escola pública'
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3740,7 +4089,8 @@ columns:
       is_partition: false
     - name: reserva_vaga_pcd
       bigquery_type: int64
-      description: A escola faz reserva de vagas por sistema de cotas para grupos - PCD
+      description: 'A escola faz reserva de vagas por sistema de cotas para grupos:
+          PCD'
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3755,7 +4105,8 @@ columns:
       is_partition: false
     - name: reserva_vaga_outros
       bigquery_type: int64
-      description: A escola faz reserva de vagas por sistema de cotas para grupos - Outros
+      description: 'A escola faz reserva de vagas por sistema de cotas para grupos:
+          Outros'
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3921,7 +4272,8 @@ columns:
       is_partition: false
     - name: tipo_proposta_pedagogica
       bigquery_type: string
-      description: O tipo de proposta pedagógica da escola atualizado nos últimos 12 meses até a data de referência
+      description: O tipo de proposta pedagógica da escola atualizado nos últimos
+          12 meses até a data de referência
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -3936,7 +4288,8 @@ columns:
       is_partition: false
     - name: tipo_aee
       bigquery_type: string
-      description: O tipo de Atendimento Educacional Especializado (AEE) que a escola oferece
+      description: O tipo de Atendimento Educacional Especializado (AEE) que a escola
+          oferece
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
@@ -3955,6 +4308,24 @@ columns:
       temporal_coverage:
           - (1)
       covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: escolarizacao
+      bigquery_type: int64
+      description: 'Escola possui uma ou mais matrículas de escolarização em alguma
+          das seguintes etapas de ensino: Creche, Pré-Escola, Ensino Fundamental,
+          Ensino Médio, Educação de Jovens e Adultos (EJA), Curso Técnico Concomitante,
+          Curso Técnico Subsequente, Curso FIC Concomitante'
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
@@ -3996,7 +4367,7 @@ columns:
       is_partition: false
     - name: mediacao_ead
       bigquery_type: int64
-      description: A escola oferece mediação didático-pedagógica à distância (EAD)
+      description: A escola oferece mediação didático-pedagógica ead
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4011,7 +4382,8 @@ columns:
       is_partition: false
     - name: regular
       bigquery_type: int64
-      description: A escola oferece metodologia de ensino em etapas consecutivas, da creche ao ensino médio
+      description: A escola oferece metodologia de ensino em etapas consecutivas,
+          da creche ao ensino médio
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4026,7 +4398,8 @@ columns:
       is_partition: false
     - name: diurno
       bigquery_type: int64
-      description: A escola possui turmas com horário de início da turma de escolarização entre 05h e 16h
+      description: A escola possui turmas com horário de início da turma de escolarização
+          entre 05h e 16h
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4041,7 +4414,8 @@ columns:
       is_partition: false
     - name: noturno
       bigquery_type: int64
-      description: A escola possui turmas com horário de início da turma de escolarização entre 17h e 04h
+      description: A escola possui turmas com horário de início da turma de escolarização
+          entre 17h e 04h
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4056,7 +4430,8 @@ columns:
       is_partition: false
     - name: ead
       bigquery_type: int64
-      description: A escola possui turmas semipresenciais ou de educação à distância (EAD)
+      description: A escola possui turmas semipresenciais ou de educação a distância
+          (EAD)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4146,7 +4521,8 @@ columns:
       is_partition: false
     - name: etapa_ensino_fundamental_anos_iniciais
       bigquery_type: int64
-      description: A escola possui uma ou mais matrículas no ensino fundamental - anos iniciais
+      description: A escola possui uma ou mais matrículas no ensino fundamental -
+          anos iniciais
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4161,7 +4537,8 @@ columns:
       is_partition: false
     - name: etapa_ensino_fundamental_anos_finais
       bigquery_type: int64
-      description: A escola possui uma ou mais matrículas no ensino fundamental - anos finais
+      description: A escola possui uma ou mais matrículas no ensino fundamental -
+          anos finais
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4206,7 +4583,8 @@ columns:
       is_partition: false
     - name: etapa_ensino_profissional_tecnica
       bigquery_type: int64
-      description: A escola possui uma ou mais matrículas em educação profissional técnica
+      description: A escola possui uma ou mais matrículas em educação profissional
+          técnica
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4221,7 +4599,8 @@ columns:
       is_partition: false
     - name: etapa_ensino_eja
       bigquery_type: int64
-      description: A escola possui uma ou mais matrículas em educação de jovens e adultos (EJA)
+      description: A escola possui uma ou mais matrículas em educação de jovens e
+          adultos (EJA)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4236,7 +4615,8 @@ columns:
       is_partition: false
     - name: etapa_ensino_eja_fundamental
       bigquery_type: int64
-      description: A escola possui uma ou mais matrículas en educação de jovens e adultos (EJA) - ensino fundamental
+      description: A escola possui uma ou mais matrículas en educação de jovens e
+          adultos (EJA) - ensino fundamental
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4251,7 +4631,8 @@ columns:
       is_partition: false
     - name: etapa_ensino_eja_medio
       bigquery_type: int64
-      description: A escola possui uma ou mais matrículas em educação de jovens e adultos (EJA) - ensino médio
+      description: A escola possui uma ou mais matrículas em educação de jovens e
+          adultos (EJA) - ensino médio
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4281,7 +4662,8 @@ columns:
       is_partition: false
     - name: etapa_ensino_especial_comum
       bigquery_type: int64
-      description: A escola possui uma ou mais matrículas em educação especial - classe comum
+      description: A escola possui uma ou mais matrículas em educação especial - classe
+          comum
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4296,7 +4678,9 @@ columns:
       is_partition: false
     - name: etapa_ensino_especial_exclusiva
       bigquery_type: int64
-      description: A escola possui uma ou mais matrículas em educação especial - classe exclusiva (ao menos uma turma exclusiva de alunos com deficiência, transtorno global do desenvolvimento ou altas habilidades/superdotação - Classes Especiais)
+      description: A escola possui uma ou mais matrículas em educação especial - classe
+          exclusiva (ao menos uma turma exclusiva de alunos com deficiência, transtorno
+          global do desenvolvimento ou altas habilidades/superdotação - Classes Especiais)
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4321,7 +4705,8 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_pre_escola_comum
@@ -4336,12 +4721,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_fundamental_anos_iniciais_comum
       bigquery_type: int64
-      description: A escola oferece anos iniciais do ensino fundamental em classes comuns do ensino regular
+      description: A escola oferece anos iniciais do ensino fundamental em classes
+          comuns do ensino regular
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4351,12 +4738,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_fundamental_anos_finais_comum
       bigquery_type: int64
-      description: A escola oferece anos finais do ensino fundamental em classes comuns do ensino regular
+      description: A escola oferece anos finais do ensino fundamental em classes comuns
+          do ensino regular
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4366,12 +4755,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_medio_comum
       bigquery_type: int64
-      description: A escola oferece ensino médio (médio propedêutico) em classes comuns do ensino regular
+      description: A escola oferece ensino médio (médio propedêutico) em classes comuns
+          do ensino regular
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4381,12 +4772,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_medio_integrado_comum
       bigquery_type: int64
-      description: A escola oferece curso técnico integrado ao ensino médio em classes comuns do ensino regular
+      description: A escola oferece curso técnico integrado ao ensino médio em classes
+          comuns do ensino regular
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4396,12 +4789,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_medio_normal_comum
       bigquery_type: int64
-      description: A escola oferece ensino médio (normal ou magistério) em classes comuns do ensino regular
+      description: A escola oferece ensino médio (normal ou magistério) em classes
+          comuns do ensino regular
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4411,12 +4806,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_profissional_comum
       bigquery_type: int64
-      description: A escola oferece educação profissional (curso técnico e/ou curso FIC) em classes comuns
+      description: A escola oferece educação profissional (curso técnico e/ou curso
+          FIC) em classes comuns
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4426,7 +4823,8 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_eja_fundamental_comum
@@ -4441,7 +4839,8 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_eja_medio_comum
@@ -4456,12 +4855,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_eja_profissional_comum
       bigquery_type: int64
-      description: A escola oferece educação profissional integrada em classes comuns da EJA
+      description: A escola oferece educação profissional integrada em classes comuns
+          da EJA
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4471,12 +4872,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_creche_especial_exclusiva
       bigquery_type: int64
-      description: A escola oferece creche em classes especiais exclusivas para alunos com condições especiais
+      description: A escola oferece creche em classes especiais exclusivas para alunos
+          com condições especiais
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4486,12 +4889,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_pre_escola_especial_exclusiva
       bigquery_type: int64
-      description: A escola oferece pré-escola em classes especiais exclusivas do ensino regular
+      description: A escola oferece pré-escola em classes especiais exclusivas do
+          ensino regular
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4501,12 +4906,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_fundamental_anos_iniciais_especial_exclusiva
       bigquery_type: int64
-      description: A escola oferece os anos iniciais do ensino fundamental em classes especiais
+      description: A escola oferece os anos iniciais do ensino fundamental em classes
+          especiais
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4516,12 +4923,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_fundamental_anos_finais_especial_exclusiva
       bigquery_type: int64
-      description: A escola oferece os anos finais do ensino fundamental em classes especiais
+      description: A escola oferece os anos finais do ensino fundamental em classes
+          especiais
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4531,7 +4940,8 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_medio_especial_exclusiva
@@ -4546,12 +4956,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_medio_integrado_especial_exclusiva
       bigquery_type: int64
-      description: A escola oferece curso técnico integrado ao ensino médio em classes especiais
+      description: A escola oferece curso técnico integrado ao ensino médio em classes
+          especiais
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4561,7 +4973,8 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_medio_normal_especial_exclusiva
@@ -4576,12 +4989,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_profissional_especial_exclusiva
       bigquery_type: int64
-      description: A escola oferece educação profissional - curso técnico concomitante e/ou susequente e/ou curso FIC concomitante em classes especiais
+      description: A escola oferece educação profissional - curso técnico concomitante
+          e/ou susequente e/ou curso FIC concomitante em classes especiais
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4591,12 +5006,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_eja_fundamental_especial_exclusiva
       bigquery_type: int64
-      description: A escola oferece ensino fundamental em classes especiais exclusivas da EJA
+      description: A escola oferece ensino fundamental em classes especiais exclusivas
+          da EJA
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4606,12 +5023,14 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: etapa_ensino_eja_medio_especial_exclusiva
       bigquery_type: int64
-      description: A escola oferece ensino médio em classes especiais exclusivas da EJA
+      description: A escola oferece ensino médio em classes especiais exclusivas da
+          EJA
       temporal_coverage:
           - 2009(1)2020
       covered_by_dictionary: no
@@ -4621,7 +5040,8 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: Variável presente nos microdados divulgados pelo Inep antes da LGPD. Os dados eram divulgados em outro formato.
+      observations: Variável presente nos microdados divulgados pelo Inep antes da
+          LGPD. Os dados eram divulgados em outro formato.
       is_in_staging: true
       is_partition: false
     - name: quantidade_matricula_educacao_basica
@@ -4791,7 +5211,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_eja_fundamental
       bigquery_type: int64
-      description: Quantidade de matrículas em educação de jovens e adultos (EJA) - ensino fundamental
+      description: Quantidade de matrículas em educação de jovens e adultos (EJA)
+          - ensino fundamental
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4806,7 +5227,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_eja_medio
       bigquery_type: int64
-      description: Quantidade de matrículas em educação de jovens e adultos (EJA) - ensino médio
+      description: Quantidade de matrículas em educação de jovens e adultos (EJA)
+          - ensino médio
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4866,7 +5288,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_feminino
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos do gênero feminino
+      description: Quantidade de matrículas na educação básica de alunos do gênero
+          feminino
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4881,7 +5304,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_masculino
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos do gênero masculino
+      description: Quantidade de matrículas na educação básica de alunos do gênero
+          masculino
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4896,7 +5320,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_nao_declarada
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos com cor/raça não declarada
+      description: Quantidade de matrículas na educação básica de alunos com cor/raça
+          não declarada
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4911,7 +5336,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_branca
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos com cor/raça branca
+      description: Quantidade de matrículas na educação básica de alunos com cor/raça
+          branca
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4926,7 +5352,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_preta
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos com cor/raça preta
+      description: Quantidade de matrículas na educação básica de alunos com cor/raça
+          preta
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4941,7 +5368,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_parda
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos com cor/raça parda
+      description: Quantidade de matrículas na educação básica de alunos com cor/raça
+          parda
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4956,7 +5384,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_amarela
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos com cor/raça amarela
+      description: Quantidade de matrículas na educação básica de alunos com cor/raça
+          amarela
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4971,7 +5400,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_indigena
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos com cor/raça indigena
+      description: Quantidade de matrículas na educação básica de alunos com cor/raça
+          indigena
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -4986,7 +5416,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_idade_0_3
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos até 3 anos de idade
+      description: Quantidade de matrículas na educação básica de alunos até 3 anos
+          de idade
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5001,7 +5432,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_idade_4_5
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos entre 4 e 5 anos de idade
+      description: Quantidade de matrículas na educação básica de alunos entre 4 e
+          5 anos de idade
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5016,7 +5448,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_idade_6_10
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos entre 6 e 10 anos de idade
+      description: Quantidade de matrículas na educação básica de alunos entre 6 e
+          10 anos de idade
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5031,7 +5464,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_idade_11_14
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos entre 11 e 14 anos de idade
+      description: Quantidade de matrículas na educação básica de alunos entre 11
+          e 14 anos de idade
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5046,7 +5480,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_idade_15_17
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos entre 15 e 17 anos de idade
+      description: Quantidade de matrículas na educação básica de alunos entre 15
+          e 17 anos de idade
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5061,7 +5496,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_idade_18
       bigquery_type: int64
-      description: Quantidade de matrículas na educação básica de alunos com 18 anos de idade ou mais
+      description: Quantidade de matrículas na educação básica de alunos com 18 anos
+          de idade ou mais
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5136,7 +5572,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_infantil_creche_integral
       bigquery_type: int64
-      description: Quantidade de matrículas em educação infantil (creche) - Tempo integral
+      description: Quantidade de matrículas em educação infantil (creche) - Tempo
+          integral
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5151,7 +5588,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_infantil_pre_escola_integral
       bigquery_type: int64
-      description: Quantidade de matrículas em educação infantil (pré-escola) - Tempo integral
+      description: Quantidade de matrículas em educação infantil (pré-escola) - Tempo
+          integral
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5181,7 +5619,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_fundamental_anos_iniciais_integral
       bigquery_type: int64
-      description: Quantidade de matrículas no ensino fundamental (anos iniciais) - Tempo integral
+      description: Quantidade de matrículas no ensino fundamental (anos iniciais)  -
+          Tempo integral
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5196,7 +5635,8 @@ columns:
       is_partition: false
     - name: quantidade_matricula_fundamental_anos_finais_integral
       bigquery_type: int64
-      description: Quantidade de matrículas no ensino fundamental (anos finais) - Tempo integral
+      description: Quantidade de matrículas no ensino fundamental (anos finais) -
+          Tempo integral
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5391,7 +5831,8 @@ columns:
       is_partition: false
     - name: quantidade_docente_eja_fundamental
       bigquery_type: int64
-      description: Quantidade de docentes da educação de jovens e adultos (EJA) - ensino fundamental
+      description: Quantidade de docentes da educação de jovens e adultos (EJA) -
+          ensino fundamental
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5406,7 +5847,8 @@ columns:
       is_partition: false
     - name: quantidade_docente_eja_medio
       bigquery_type: int64
-      description: Quantidade de docentes da educação de jovens e adultos (EJA) - ensino médio
+      description: Quantidade de docentes da educação de jovens e adultos (EJA) -
+          ensino médio
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5631,7 +6073,8 @@ columns:
       is_partition: false
     - name: quantidade_turma_eja_fundamental
       bigquery_type: int64
-      description: Quantidade de turmas de educação de jovens e adultos (EJA) - ensino fundamental
+      description: Quantidade de turmas de educação de jovens e adultos (EJA) - ensino
+          fundamental
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5646,7 +6089,8 @@ columns:
       is_partition: false
     - name: quantidade_turma_eja_medio
       bigquery_type: int64
-      description: Quantidade de turmas de educação de jovens e adultos (EJA) - ensino médio
+      description: Quantidade de turmas de educação de jovens e adultos (EJA) - ensino
+          médio
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -5705,6 +6149,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 3400645
+number_rows: 3625294
 
-metadata_modified: '2022-12-08T21:09:29.466119'
+metadata_modified: '2022-12-15T00:19:17.173852'
