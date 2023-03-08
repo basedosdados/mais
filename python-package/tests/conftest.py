@@ -23,7 +23,10 @@ def fixture_testdir():
     """
     Fixture that returns a temporary directory for the metadata files.
     """
-    (Path(__file__).parent / "tmp_bases").mkdir(exist_ok=True)
+    try:
+        (Path(__file__).parent / "tmp_bases").mkdir(exist_ok=False)
+    except Exception:
+        pass
     return Path(__file__).parent / "tmp_bases"
 
 
