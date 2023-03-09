@@ -1,7 +1,7 @@
 """
 Tests for the Metadata class with new API
 """
-# pylint: disable=fixme, unused-import, protected-access
+# pylint: disable=fixme, unused-import, protected-access, trailing-whitespace, too-many-branches
 from pathlib import Path
 import random
 import shutil
@@ -42,32 +42,32 @@ def test_dataset_schema(api_dataset_metadata):
     assert "themes" in metadata
 
 
-def test_dataset_does_not_exists_in_api(api_new_dataset_metadata):
+def test_dataset_does_not_exists(api_new_dataset_metadata):
     """
     Test if dataset exists in API.
     """
-    assert api_new_dataset_metadata.exists_in_api() is False
+    assert api_new_dataset_metadata.exists() is False
 
 
-def test_dataset_exists_in_api(api_dataset_metadata):
+def test_dataset_exists(api_dataset_metadata):
     """
     Test if dataset does not exists in API.
     """
-    assert api_dataset_metadata.exists_in_api() is True
+    assert api_dataset_metadata.exists() is True
 
 
-def test_dataset_table_does_not_exists_in_api(api_new_dataset_metadata):
+def test_dataset_table_does_not_exists(api_new_dataset_metadata):
     """
     Test if table does not exists in API.
     """
-    assert api_new_dataset_metadata.exists_in_api() is False
+    assert api_new_dataset_metadata.exists() is False
 
 
-def test_dataset_table_exists_in_api(api_table_metadata):
+def test_dataset_table_exists(api_table_metadata):
     """
     Test if table exists in API.
     """
-    assert api_table_metadata.exists_in_api() is True
+    assert api_table_metadata.exists() is True
 
 
 @pytest.mark.skip(reason="This test needs to mock an invalid dataset.")

@@ -351,8 +351,6 @@ API_DATASET_ID = "dados_mestres"
 API_TABLE_ID = "bairro"
 API_NEW_DATASET_ID = "new_dataset"
 API_NEW_TABLE_ID = "new_table"
-API_OUTDATED_DATASET_ID = "outdated_dataset"
-API_OUTDATED_TABLE_ID = "outdated_table"
 API_PUBLISH_DATASET_ID = "br_ipea_teste_avs"
 API_PUBLISH_TABLE_ID = "municipios"
 

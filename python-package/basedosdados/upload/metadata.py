@@ -148,12 +148,12 @@ class Metadata(Base):
         """
 
         # in case `self` refers to a CKAN table's metadata
-        if self.table_id and self.exists_in_api():
+        if self.table_id and self.exists():
             return self.dataset_metadata_obj.api_metadata.get("organization_id")
 
         # in case `self` refers to a new table's metadata
-        if self.table_id and not self.exists_in_api():
-            if self.dataset_metadata_obj.exists_in_api():
+        if self.table_id and not self.exists():
+            if self.dataset_metadata_obj.exists():
                 return self.dataset_metadata_obj.api_metadata.get("organization_id")
             # mock `owner_org` for validation
             # return "3626e93d-165f-42b8-bde1-2e0972079694"
@@ -347,8 +347,10 @@ class Metadata(Base):
 
         return schema.get("result")
 
-    def exists_in_api(self) -> bool:
+    def exists(self) -> bool:
         """Check if Metadata object refers to an existing dataset or table.
+
+        The method will fetch the api to check whether the dataset or table exists.
 
         Returns:
             bool: The existence condition of the metadata in the API. `True` if i
@@ -376,6 +378,7 @@ class Metadata(Base):
         variables = {"dataset_id": self.dataset_id, "table_id": self.table_id}
 
         response = self._get_graphql(query, variables)
+
         dataset = response.get("allDataset")
         if not dataset:
             return False
@@ -384,14 +387,13 @@ class Metadata(Base):
             tables = dataset[0].get("tables")
             if not tables:
                 return False
-            exists_in_api = len(tables) > 0
-        else:
-            exists_in_api = len(dataset) > 0
 
-        return exists_in_api
+        return True
 
     def is_updated(self) -> bool:
-        """Check if a dataset or table is updated
+        """Check if a dataset or table is updated.
+
+        The method will fetch the api to check whether the dataset or table is updated.
 
         Returns:
             bool: The update condition of local metadata. `True` if it corresp
@@ -399,10 +401,9 @@ class Metadata(Base):
             tadata in API, `False` otherwise.
         """
 
-        if not self.local_metadata.get("metadata_modified"):
-            return bool(not self.exists_in_api())
         api_modified = self.api_metadata.get("metadata_modified")
         local_modified = self.local_metadata.get("metadata_modified")
+
         return api_modified == local_modified
 
     def create(
@@ -587,7 +588,7 @@ class Metadata(Base):
                 self.save_token(new_token)
 
         # check if metadata exists in API and handle if_exists options
-        if self.exists_in_api():
+        if self.exists():
             if if_exists == "raise":
                 raise BaseDosDadosException(
                     f"{self.dataset_id or self.table_id} already exists in CKAN."
@@ -626,7 +627,7 @@ class Metadata(Base):
 
                 published = remote_api.call_action(
                     action="update_table"
-                    if self.exists_in_api()
+                    if self.exists()
                     else "create_table",
                     data_dict=data_dict,
                 )
@@ -636,7 +637,7 @@ class Metadata(Base):
 
                 published = remote_api.call_action(
                     action="update_dataset"
-                    if self.exists_in_api()
+                    if self.exists()
                     else "create_dataset",
                     data_dict=data_dict,
                 )
