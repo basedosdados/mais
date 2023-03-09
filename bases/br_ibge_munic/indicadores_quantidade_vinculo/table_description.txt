@@ -29,7 +29,7 @@ Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
 
 Cobertura Temporal
 ------------------
-- 2018(1)2021
+- 2018(1)
 
 
 
