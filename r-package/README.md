@@ -12,7 +12,7 @@ No caso de bugs, por favor, preencha a issue com um exemplo reprodutível [repre
 `usethis::create_from_github("https://github.com/basedosdados/mais/tree/master/r-package", fork = TRUE)`
 
 ### Instale as dependências de desenvolvimento 
-Instale as dependências de desenvolvimento com o comando `devtools::install_dev_deps()` e posteriormente rode `devtools::check()`. Tenha certeza que o pacote passou no `devtools::check()`. Caso não passe, é uma boa ideia nos contactar via [Discord](https://discord.gg/qjYE453a) ou via [site (https://basedosdados.org/contato).
+Instale as dependências de desenvolvimento com o comando `devtools::install_dev_deps()` e posteriormente rode `devtools::check()`. Tenha certeza que o pacote passou no `devtools::check()`. Caso não passe, é uma boa ideia nos contactar via [Discord](https://discord.com/invite/huKWpsVYx4) ou via [site (https://basedosdados.org/contato).
 
 ### Crie uma nova git branch
 Crie uma branch para seu Pull Request (PR) utilizando o comando `usethis::pr_init("breve_descricao_da_mudanca")`.
