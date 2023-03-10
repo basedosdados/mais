@@ -108,9 +108,7 @@ class Metadata(Base):
             api_dataset["notes"] = api_dataset["description"]
             api_dataset["themes"] = [theme["slug"] for theme in api_dataset["themes"]]
             api_dataset["tags"] = [tag["slug"] for tag in api_dataset["tags"]]
-            api_dataset["metadata_modified"] = api_dataset["metadata_modified"].split(
-                "T"
-            )[0]
+            api_dataset["metadata_modified"] = api_dataset["metadata_modified"]
         return api_table or api_dataset
 
     @property
