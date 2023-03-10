@@ -44,8 +44,9 @@
 #' @export
 #'
 #' @importFrom DBI dbConnect
-#'
-#' @importFrom DBI dbConnect
+#' @importFrom rlang abort inform
+#' @importFrom dplyr everything select tbl
+#' @importFrom stringr str_count
 #'
 #' @examples
 #'
@@ -164,6 +165,8 @@ bdplyr <- function(
     drv = bigrquery::bigquery(),
     project = query_project_id,
     billing = billing_project_id)
+
+  class(con) <- "BaseDosDadosConnection"
 
   # calls the connection through dplyr and keeps it in a objects
   tibble_connection <- dplyr::tbl(con, table_full_name)
@@ -340,7 +343,7 @@ bd_collect <- function(
 #'
 #' @importFrom scales number_bytes
 #'
-#' @importFrom scales number_bytes
+#' @importFrom writexl write_xlsx
 #'
 #' @name bd_write
 #' @examples
@@ -457,7 +460,7 @@ bd_write <- function(
    collected_table <- bd_collect(.lazy_tbl)
 
   # write the results using the indicated function
-    rlang::call2(.write_fn, collected_table, path, ...) %>%
+  rlang::call2(.write_fn, collected_table, path, ...) %>%
     rlang::eval_bare()
 
   # checks if the writing process was successfull
@@ -484,6 +487,7 @@ bd_write <- function(
 # bd_write_rds e bd_write_csv ---------------------------------------------
 
 #' @rdname bd_write
+#' @importFrom scales number_bytes
 #' @export
 bd_write_rds <- function(
   .lazy_tbl,

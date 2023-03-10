@@ -6,7 +6,7 @@ dataset_id: br_fbsp_absp
 table_id: municipio
 
 # Título da tabela.
-title:
+title: Município
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -591,6 +591,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows:
+number_rows: 162
 
-metadata_modified: '2023-03-07T11:52:12.561142'
+metadata_modified: 
