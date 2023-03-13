@@ -22,7 +22,7 @@ spatial_coverage:
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 1954(1)2023
+temporal_coverage: 2022-03-13
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -41,7 +41,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -132,7 +132,7 @@ columns:
       is_partition: false
     - name: bigquery_type
       bigquery_type: string
-      description: Bigquery type
+      description: Bigquery Type
       temporal_coverage: (1)
       covered_by_dictionary: no
       directory_column:
@@ -174,9 +174,8 @@ columns:
       is_partition: false
     - name: covered_by_dictionary
       bigquery_type: string
-      description: Covered by dictionary
+      description: Indicates if it is covered by dictionary
       temporal_coverage: (1)
-      covered_by_dictionary: no covered_by_dictionary
       directory_column:
           dataset_id:
           table_id:
@@ -202,7 +201,7 @@ columns:
       is_partition: false
     - name: measurement_unit
       bigquery_type: string
-      description: Measurement unit
+      description: Measurement Unit
       temporal_coverage: (1)
       covered_by_dictionary: no
       directory_column:
@@ -216,7 +215,7 @@ columns:
       is_partition: false
     - name: has_sensitive_data
       bigquery_type: string
-      description: Has sensitive data
+      description: Indicates if it has sensitive data
       temporal_coverage: (1)
       covered_by_dictionary: no
       directory_column:
@@ -273,4 +272,4 @@ columns:
 
 number_rows: 14880
 
-metadata_modified: '2022-09-19T14:07:24.192582'
+metadata_modified: 

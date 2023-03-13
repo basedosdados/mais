@@ -5,7 +5,7 @@ dataset_id: br_bd_metadados
 table_id: resources
 
 # Título da tabela.
-title: Recursos na BD+
+title: Recursos na BD+, incluindo tabelas, pedidos LAI e links externos
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
@@ -22,7 +22,7 @@ spatial_coverage:
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 2019-09-17(1)2023-03-06
+temporal_coverage: 2023-03-13
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -41,7 +41,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -146,7 +146,7 @@ columns:
       is_partition: false
     - name: date_created
       bigquery_type: date
-      description: Created date
+      description: Created Date
       temporal_coverage: (1)
       covered_by_dictionary: no
       directory_column:
@@ -189,4 +189,4 @@ columns:
 
 number_rows: 1648
 
-metadata_modified: '2022-09-19T14:26:30.770331'
+metadata_modified: 

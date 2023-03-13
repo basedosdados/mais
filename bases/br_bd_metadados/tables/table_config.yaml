@@ -23,7 +23,7 @@ spatial_coverage:
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 2020-10-13(1)2023-03-06
+temporal_coverage: 2023-03-2023
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -42,7 +42,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplo: v1.1.3
-version: v1
+version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -147,7 +147,7 @@ columns:
       is_partition: false
     - name: date_created
       bigquery_type: date
-      description:
+      description: Date Created
       temporal_coverage: (1)
       covered_by_dictionary: no
       directory_column:
@@ -161,7 +161,7 @@ columns:
       is_partition: false
     - name: date_last_modified
       bigquery_type: date
-      description: Last modified date
+      description: Last Modified Date
       temporal_coverage: (1)
       covered_by_dictionary: no
       directory_column:
@@ -175,7 +175,7 @@ columns:
       is_partition: false
     - name: spatial_coverage
       bigquery_type: string
-      description: Cobertura Espacial
+      description: Spatial Coverage
       temporal_coverage: (1)
       covered_by_dictionary: no
       directory_column:
@@ -203,7 +203,7 @@ columns:
       is_partition: false
     - name: update_frequency
       bigquery_type: string
-      description: update Frequency
+      description: Update Frequency
       temporal_coverage: (1)
       covered_by_dictionary: no
       directory_column:
@@ -217,7 +217,7 @@ columns:
       is_partition: false
     - name: observation_level
       bigquery_type: string
-      description: Observation level
+      description: Observation Level
       temporal_coverage: (1)
       covered_by_dictionary: no
       directory_column:
@@ -231,7 +231,7 @@ columns:
       is_partition: false
     - name: number_rows
       bigquery_type: int64
-      description: number rows
+      description: Number Rows
       temporal_coverage: (1)
       covered_by_dictionary: no
       directory_column:
@@ -272,6 +272,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 436
+number_rows: 435
 
-metadata_modified: '2022-09-19T23:31:26.152890'
+metadata_modified:
