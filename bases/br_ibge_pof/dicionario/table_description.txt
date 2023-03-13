@@ -1,0 +1,48 @@
+Dicionário das Variáveis
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Arthur de Figueiredo Gusmão
+Código: 
+Email: arthur.gusmao@basedosdados.org
+Tratado por
+-----------
+Nome: Arthur de Figueiredo Gusmão
+Código: 
+Email: arthur.gusmao@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2017(1)2018
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
+
+
+
+Frequencia de Atualização
+-------------------------
+['ten_years']
