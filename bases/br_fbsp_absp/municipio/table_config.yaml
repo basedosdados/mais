@@ -493,7 +493,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: person
+      measurement_unit: 
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -508,7 +508,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: person
+      measurement_unit: 
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -523,7 +523,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: person
+      measurement_unit: 
       has_sensitive_data: no
       observations:
       is_in_staging: true
