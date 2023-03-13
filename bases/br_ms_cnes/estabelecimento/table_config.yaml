@@ -11,8 +11,7 @@ title: Estabelecimentos
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Tabela que define as informações sobre administração do estabelecimento
-    de saúde e seu funcionamento.
+description: A tabela fornece informações sobre a gestão e operação dos estabelecimentos de saúde brasileiros.
 
 
 # As máximas unidades espaciais que a tabela cobre.
@@ -80,8 +79,8 @@ published_by:
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
     name: Gustavo Aires Tiago
-    email: gustavo.tiago@basedosdados.org
-    github_user:
+    email: 
+    github_user: gustavoairestiago
     ckan_user:
     website:
 
@@ -3333,4 +3332,4 @@ columns:
 
 number_rows: 47936405
 
-metadata_modified: '2022-12-16T23:10:08.965166'
+metadata_modified: '2023-03-07T19:00:00.561772'

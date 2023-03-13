@@ -55,7 +55,7 @@ last_updated:
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
-version: ''
+version: v1.1
 
 # Quem está preenchendo esses metadados?
 published_by:
@@ -182,4 +182,4 @@ columns:
 
 number_rows:
 
-metadata_modified: '2022-12-23T10:24:34.821307'
+metadata_modified: "2023-03-07T19:00:00.561772"
