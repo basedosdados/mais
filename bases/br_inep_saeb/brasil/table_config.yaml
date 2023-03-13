@@ -387,6 +387,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows:
+number_rows: 1156
 
 metadata_modified: '2022-10-10T15:46:16.523153'
