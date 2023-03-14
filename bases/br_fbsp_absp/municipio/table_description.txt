@@ -1,0 +1,50 @@
+A base contempla as informações do Anuário de Segurança Pública a partir de 2016 com as estatísticas criminais compatibilizadas entre anos, com informações acerca dos homicídios, tráfico, furto e rouba, além da força policial, entre outros ao nível das capitais brasileiras e distrito federal.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Laura amaral
+Código: 
+Website: 
+Email: laura.amaral@basedosdados.org
+Tratado por
+-----------
+Nome: Bruno Moitinho Andrade de Souza
+Código: 
+Website: https://www.linkedin.com/in/bruno-desouza/
+Email: moitinhobr@gmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2016(1)2021
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Renomeei e ordenei as variáveis; exclui todas as linhas que possui NA no campo UF; retirei espaços em branco; substuí o hífen que significa que o fenômeno não existiu no dado ano na capital do estado por 0; substituí os três pontos que significam que a informação não está disponível por NAN; e uni todos os anos.
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
