@@ -89,14 +89,13 @@ data_cleaned_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: Renomeei e ordenei as variáveis; exclui todas as linhas
-    que possui NA no campo UF; retirei espaços em branco; substuí o hífen que significa
+    que possui NA no campo UF; retirei espaços em branco; substituí o hífen que significa
     que o fenômeno não existiu no dado ano na capital do estado por 0; substituí os
     três pontos que significam que a informação não está disponível por NAN; e uni
     todos os anos.
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_fbsp_absp/code/microdados
-
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_fbsp_absp/code/br_fbsp_absp.ipynb
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
     name:
@@ -168,7 +167,7 @@ columns:
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_brasil
-          table_id: id_municipio
+          table_id: municipio
           column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
