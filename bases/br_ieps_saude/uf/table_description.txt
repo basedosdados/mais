@@ -1,0 +1,49 @@
+Indicadores do IEPS Data à nível de UF.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gustavo Alcântara
+Código: 
+Email: gustavo.alcantara@basedosdados.org
+Tratado por
+-----------
+Nome: IEPS Data
+Código: 
+Website: https://iepsdata.org.br/
+Email: iepsdata@ieps.org.br
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2020
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Renomeação e seleção da ordem das Variáveis para padrão da Base dos Dados.
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year
