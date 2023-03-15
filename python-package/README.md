@@ -82,11 +82,11 @@ python setup.py develop
 
 5. Editar `basedosdados/__init__.py`:
     
-        O arquivo `basedosdados/__init__.py` contém a versão do pacote em python da **BD**. Exemplo:
+    O arquivo `basedosdados/__init__.py` contém a versão do pacote em python da **BD**. Exemplo:
     
-        ```python
-        __version__ = "1.6.1-beta.2"
-        ```
+    ```python
+    __version__ = "1.6.1-beta.2"
+    ```
     
    O atributo `__version__` também deve ser alterado para o número da versão sendo lançada.
 
@@ -97,14 +97,12 @@ python setup.py develop
     ```
 
 7. Publicação do pacote no PyPI (exige usuário e senha):
+   Para publicar o pacote no PyPI, use:
 
-    Para publicar o pacote no PyPI, use:
-    
-    ```bash
+   ```bash
     poetry version [python-version]
     poetry publish --build
-    ```
-
+   ```
 8. Faz merge da branch para a master
 9. Faz release usando a UI do GitHub
 10. Atualizar versão do pacote usada internamente
