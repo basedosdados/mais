@@ -11,7 +11,7 @@ title: Macrorregião
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Indicadores de saúde à nível de Macrorregião
+description: Indicadores de saúde a nível de Macrorregião
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -49,7 +49,7 @@ update_frequency: one_year
 #           - sigla_uf
 observation_level:
     - country: br
-      entity: state
+      entity: region
       columns:
           - id_macrorregiao
     - entity: year
@@ -85,7 +85,7 @@ data_cleaned_by:
     website: https://iepsdata.org.br/
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Padronização das ordens das variáveis. 
+data_cleaning_description: Padronização da ordens das variáveis. 
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ieps_saude/code

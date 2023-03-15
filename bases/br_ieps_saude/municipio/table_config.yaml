@@ -11,7 +11,7 @@ title: Municipio
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: Indicadores de Saúde à nível de Município. 
+description: Indicadores de Saúde a nível de Município. 
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -84,7 +84,7 @@ data_cleaned_by:
     website: https://iepsdata.org.br/
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Padronização das ordens das variáveis.
+data_cleaning_description: Padronização da ordens das variáveis.
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ieps_saude/code
