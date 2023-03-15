@@ -33,6 +33,9 @@ observation_level:
     - entity: other
       columns:
             - table_id
+    - entity: other
+      columns:
+            - name
 
 last_updated: 
     metadata: '2023-03-07'
