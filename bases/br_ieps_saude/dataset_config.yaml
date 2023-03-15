@@ -1,0 +1,38 @@
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-ieps-saude
+
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: IEPS Data
+
+# Qual organização disponibiliza os dados originais?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization: br-ieps
+
+# Descrição do conjunto
+notes: O IEPS Data é O Instituto de Estudos para Políticas de Saúde (IEPS) é uma organização sem fins lucrativos, independente e apartidária, com escritórios em São Paulo e no Rio de Janeiro. Nosso objetivo é contribuir para o aprimoramento das políticas públicas para a saúde no Brasil. 
+
+# Quais temas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
+groups:
+    - saude
+
+# Quais etiquetas caracterizam a base?
+# Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos: fertilidade, preco, desmatamento.
+# Caso crie etiquetas novas, as regras são:
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+tags:
+    - politica publica
+    - sus
+    - vacina
+
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: 
