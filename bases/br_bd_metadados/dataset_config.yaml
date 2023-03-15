@@ -5,7 +5,7 @@ name: br-bd-metadados
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title: Metadados na BD+
+title: Metadados da Base dos Dados
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list

@@ -22,7 +22,8 @@ spatial_coverage:
 # Anos cobertos pela tabela.
 # Preencher como lista de intervalos.
 # Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 2022-03-13
+temporal_coverage: 
+   - '2023-03-15'
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -108,7 +109,8 @@ columns:
     - name: table_id
       bigquery_type: string
       description: Table ID
-      temporal_coverage: (1) 
+      temporal_coverage:
+            - (1) 
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -122,7 +124,8 @@ columns:
     - name: name
       bigquery_type: string
       description: Name
-      temporal_coverage: (1)
+      temporal_coverage:
+            - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -136,7 +139,8 @@ columns:
     - name: bigquery_type
       bigquery_type: string
       description: Bigquery Type
-      temporal_coverage: (1)
+      temporal_coverage:
+            - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -150,7 +154,8 @@ columns:
     - name: description
       bigquery_type: string
       description: Description
-      temporal_coverage: (1)
+      temporal_coverage:
+            - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -164,7 +169,8 @@ columns:
     - name: temporal_coverage
       bigquery_type: string
       description: Temporal Coverage
-      temporal_coverage: (1)
+      temporal_coverage:
+            - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -178,7 +184,8 @@ columns:
     - name: covered_by_dictionary
       bigquery_type: string
       description: Indicates if it is covered by dictionary
-      temporal_coverage: (1)
+      temporal_coverage:
+            - (1)
       directory_column:
           dataset_id:
           table_id:
@@ -191,7 +198,8 @@ columns:
     - name: directory_column
       bigquery_type: string
       description: Directory Column
-      temporal_coverage: (1)
+      temporal_coverage:
+            - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -205,7 +213,8 @@ columns:
     - name: measurement_unit
       bigquery_type: string
       description: Measurement Unit
-      temporal_coverage: (1)
+      temporal_coverage:
+            - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -219,7 +228,8 @@ columns:
     - name: has_sensitive_data
       bigquery_type: string
       description: Indicates if it has sensitive data
-      temporal_coverage: (1)
+      temporal_coverage:
+            - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -233,7 +243,8 @@ columns:
     - name: observations
       bigquery_type: string
       description: Observations
-      temporal_coverage: (1)
+      temporal_coverage:
+            - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -247,7 +258,8 @@ columns:
     - name: is_in_staging
       bigquery_type: string
       description: Is in staging
-      temporal_coverage: (1)
+      temporal_coverage:
+            - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -261,7 +273,8 @@ columns:
     - name: is_partition
       bigquery_type: string
       description: Is Partition
-      temporal_coverage: (1)
+      temporal_coverage:
+            - (1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
