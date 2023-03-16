@@ -16,9 +16,9 @@ description: Indicadores educacionais do Inep a nível de UF
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
 #    - sa.br
-#  
+#
 #    - sa.br.sp
-#  
+#
 #    - world
 spatial_coverage:
     - sa.br
