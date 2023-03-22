@@ -90,7 +90,7 @@ data_cleaned_by:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: Compatibilização dos resultados a partir da tabela proficiencia
-    e enquadramento das variáveis de 2021 segundo o padrão BD.
+    e enquadramento das variáveis de 2021 segundo o padrão BD
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inep_saeb/code
@@ -387,6 +387,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 1280
+number_rows: 1124
 
-metadata_modified: "2023-03-15T19:10:32.456649"
+metadata_modified: '2022-10-10T15:46:16.523153'
