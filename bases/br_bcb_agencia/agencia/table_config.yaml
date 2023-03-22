@@ -166,9 +166,9 @@ columns:
         - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla_uf
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -181,9 +181,9 @@ columns:
         - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: municipio
+          column_name: id_municipio
       measurement_unit:
       has_sensitive_data: no
       observations:
