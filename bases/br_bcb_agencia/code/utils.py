@@ -3,7 +3,7 @@ from lxml import html
 from io import BytesIO
 from zipfile import ZipFile
 from urllib.request import urlopen
-import basedosdados as pd
+import basedosdados as bd
 import os
 import pandas as pd
 import re
@@ -12,8 +12,20 @@ import unicodedata
 
 
 
+
+
 #---- functions to download data
 def extract_download_links(url, xpath):
+    """this function extract all download links from bcb agencias website
+
+    Args:
+        url (_type_): _description_
+        xpath (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """    
+
     """extract all download links from bcb agencias website
 
     Args:
@@ -102,6 +114,9 @@ def get_column_names(folder_path: str)-> dict:
     return files_column_names
 
 def count_list_values(dictionary:dict)-> dict:
+
+
+    
     """
     Counts the frequency of lists across keys in a dictionary. This function is used to
     find out the different patterns of col names and its repetitions
@@ -170,14 +185,14 @@ def read_file(file_path: str,file_name:str)-> pd.DataFrame:
     try:
         # skip all rows before the row containing the CNPJ value
         skiprows = find_cnpj_row_number(file_path=file_path)+1
-        #parece que retprma sempre 2 linhas acima
+       
         conv = get_conv_names(file_path = file_path, skiprows = skiprows)
-        df = pd.read_excel(file_path,  skiprows=skiprows, converters= conv)
+        df = pd.read_excel(file_path,  skiprows=skiprows,converters= conv,skipfooter=1)
         # todo: rethink logic. file_name param feeds another function create_year_month_cols
         df = create_year_month_cols(df = df, file = file_name)
     except:
         conv = get_conv_names(file_path = file_path, skiprows = 9)
-        df = pd.read_excel(file_path,  skiprows=9,dtype= object)
+        df = pd.read_excel(file_path,  skiprows=9, converters= conv)
         df = create_year_month_cols(df = df, file = file_name)
     return df
 
@@ -207,9 +222,9 @@ def clean_column_names(df: pd.DataFrame)-> pd.DataFrame:
 
 
 #---- functions to wrang data
-
 def create_year_month_cols(df: pd.DataFrame,file: str)-> pd.DataFrame:
-    """This function creates two new columns in the dataframe, one for the year and another for the month.
+    """This function creates two new columns in the dataframe, 
+    one for the year and another for the month.
 
 
     Args:
@@ -241,16 +256,21 @@ def check_and_create_column(df: pd.DataFrame, col_name:str)-> pd.DataFrame:
     Pandas DataFrame: The modified DataFrame.
     """
     if col_name not in df.columns:
-        df[col_name] = np.nan
+        df[col_name] = ''
     return df
 
 def rename_cols():
-    """Rename columns to a standard format"""
+    """this function renames the columns to a standard name
+
+    Returns:
+        _type_: it returns a dict with the old and new names
+    """    
     rename_dict  = {
                     'cnpj' : 'cnpj',      
                     'sequencial do cnpj': 'sequencial_cnpj',
                     'dv do cnpj': 'dv_do_cnpj',
-                    'nome instituicao':  'instituicao',                                                                                                                                                                                  
+                    'nome instituicao':  'instituicao',
+                    'nome da instituicao':  'instituicao',                                                                                                                                                                                                                                                                                                                         
                     'segmento':   'segmento',  
                     'segmentos': 'segmento',                                            
                     'cod compe ag':'id_compe_bcb_agencia',
@@ -278,6 +298,8 @@ def order_cols():
     """Reorder columns to a standard format"""
 
     cols_order = [
+            'sigla_uf',
+            'id_municipio',
             'data_inicio',
             'cnpj',
             'nome_agencia',
@@ -285,9 +307,6 @@ def order_cols():
             'segmento',
             'id_compe_bcb_agencia',
             'id_compe_bcb_instituicao',
-            
-            'sigla_uf',
-            'id_municipio',
             'cep',
             'endereco',
             'complemento',
@@ -327,8 +346,13 @@ def read_brazilian_municipallity_ids_from_base_dos_dados(billing_id: str)-> pd.D
                            billing_project_id= billing_id)
     return municipio
 
-# this output a series object df['cep'], to apply functions to it its necessary to use apply method.
-# define a function to remove non-numeric characters
+
+def remove_latin1_accents_from_df(df):
+    for col in df.columns:
+        df[col] = df[col].apply(lambda x: ''.join(c for c in unicodedata.normalize('NFD', str(x)) if unicodedata.category(c) != 'Mn'))
+    return df
+
+
 def remove_non_numeric_chars(s):
     """Remove non numeric chars from a pd.dataframe column"""
     return re.sub(r'\D', '', s)
@@ -390,5 +414,19 @@ def format_date(date_str):
         formatted_date = date_obj.strftime('%Y/%m/%d')
     # ! they are random numbers in date column that breaks the code
     except ValueError:
-        formatted_date = np.nan
+        formatted_date = ''
     return formatted_date
+
+def replace_nan_with_empty_set_coltypes_str(df: pd.DataFrame)-> pd.DataFrame:
+    """This function replace nan values with empty strings and set all columns as strings
+
+    Args:
+        df (pd.DataFrame): a dataframe
+
+    Returns:
+        pd.DataFrame: a datrafaame with all columns as strings and nan values as empty cels
+    """
+    for col in df.columns:
+        df[col] = df[col].astype(str)
+        df[col] = df[col].replace('nan', '')
+    return df

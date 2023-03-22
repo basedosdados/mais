@@ -159,6 +159,36 @@ columns:
       observations:
       is_in_staging: true
       is_partition: true
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação (UF)
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_municipio
+      bigquery_type: string
+      description: ID Município - IBGE 7 Dígitos
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false  
     - name: data_inicio
       bigquery_type: date
       description: Data de criação da agência
@@ -252,36 +282,6 @@ columns:
     - name: id_compe_bcb_instituicao
       bigquery_type: string
       description: Identificador do Sistema de Operações Monetárias e Compensações de Outros Papéis (COMPE) do Banco Central da instituição
-      temporal_coverage:
-        - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: sigla_uf
-      bigquery_type: string
-      description: Sigla da Unidade da Federação (UF)
-      temporal_coverage:
-        - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id:
-          table_id:
-          column_name:
-      measurement_unit:
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: id_municipio
-      bigquery_type: string
-      description: ID Município - IBGE 7 Dígitos
       temporal_coverage:
         - (1)
       covered_by_dictionary: no
