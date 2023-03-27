@@ -48,12 +48,12 @@ update_frequency:
 #       columns:
 #           - sigla_uf
 observation_level:
-    - entity: year
-     columns:
-        - year
-    - entity: country
+  - entity: year
     columns:
-        - country
+      - year
+  - entity: country
+    columns:
+      - country
         
 
 last_updated:
