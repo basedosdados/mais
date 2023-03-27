@@ -83,7 +83,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Renomeação de colunas
+data_cleaning_description: Renomeação de Colunas e Ordenamento de Variáveis.
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_cnpq_bolsas/code
