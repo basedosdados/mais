@@ -50,10 +50,13 @@ update_frequency: one_year
 observation_level:
     - entity: year
       columns:
-        - ano
+          - ano
     - entity: person
       columns:
-      - beneficiario
+          - beneficiario
+    - entity: transfer
+      columns:
+          - chamada
 
 last_updated:
     metadata: '2022-07-13'
@@ -474,9 +477,9 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: nome
-          column_name: nome
+          dataset_id: 
+          table_id: 
+          column_name: 
       measurement_unit:
       has_sensitive_data: no
       observations:
