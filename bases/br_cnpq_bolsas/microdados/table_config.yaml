@@ -15,21 +15,38 @@ description: Dados acerca dos pagamentos efetuados pelo CNPq para projetos de pe
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
-#   - sa.br
-spatial_coverage: 
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
     - sa.br
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
-temporal_coverage: 
-    - 2002(1)2021
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+    - 2002(1)2022
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: one_year
 
 # Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
 observation_level:
     - entity: year
       columns:
@@ -41,34 +58,34 @@ observation_level:
 last_updated:
     metadata: '2022-07-13'
     data: '2022-07-13 08:00:01'
-    release:
+    release: '2022-07-13 08:00:01'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
+# Exemplos: v1.0, v1.1.3
 version: v1.0
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Lucas Moreira
-    email: lucas.moreira@basedosdados.org
-    github_user: lucasnascm
-    ckan_user: lucasnascm
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
     website:
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
 data_cleaned_by:
-    name: Lucas Moreira
-    email: lucas.moreira@basedosdados.org
-    github_user: lucasnascm
-    ckan_user: lucasnascm
+    name: Patrick Teixeira
+    email: patrick.teixeira@basedosdados.org
+    github_user: tricktx
+    ckan_user: patrickteixeira
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: Renomeação de colunas
 
-# Url do código de limpeza dos dados.
+# Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_cnpq_bolsas/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
@@ -103,8 +120,6 @@ partitions:
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: ano
@@ -124,7 +139,7 @@ columns:
       is_partition: true
     - name: processo
       bigquery_type: string
-      description: Processo
+      description: Numero do processo
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -133,6 +148,36 @@ columns:
           table_id:
           column_name:
       measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_inicio_processo
+      bigquery_type: date
+      description: Data de início do processo
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: dia
+          column_name: dia
+      measurement_unit: day
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: data_fim_processo
+      bigquery_type: date
+      description: Data de término do processo
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: dia
+          column_name: dia
+      measurement_unit: day
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -148,6 +193,36 @@ columns:
           table_id:
           column_name:
       measurement_unit:
+      has_sensitive_data: yes
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: titulo_projeto
+      bigquery_type: string
+      description: Título do projeto da bolsa
+      temporal_coverage:
+          - 2021(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: palavra_chave
+      bigquery_type: string
+      description: Palavras Chave
+      temporal_coverage:
+          - 2021(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -157,7 +232,7 @@ columns:
       description: Linha de Fomento da bolsa
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -172,7 +247,7 @@ columns:
       description: Modalidade da bolsa
       temporal_coverage:
           - (1)
-      covered_by_dictionary: no
+      covered_by_dictionary: yes
       directory_column:
           dataset_id:
           table_id:
@@ -182,7 +257,7 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: categoria
+    - name: categoria_nivel
       bigquery_type: string
       description: Categoria/Nível
       temporal_coverage:
@@ -194,7 +269,7 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: Não conseguimos encontrar o dicionário desta variável. Por favor, entre em contato conosco se tiver informações relevantes.
       is_in_staging: true
       is_partition: false
     - name: chamada
@@ -272,16 +347,16 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: instituicao_origem
+    - name: pais_origem
       bigquery_type: string
-      description: Nome da Instituição de origem
+      description: País de origem
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id:
-          table_id:
-          column_name:
+          dataset_id: br_bd_diretorios_mundo
+          table_id: pais
+          column_name: sigla_pais_iso3
       measurement_unit:
       has_sensitive_data: no
       observations:
@@ -294,17 +369,47 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorios_brasil
-          table_id: uf
-          column_name: sigla
+          dataset_id:
+          table_id:
+          column_name:
       measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
-    - name: pais_origem
+    - name: instituicao_origem
       bigquery_type: string
-      description: País de origem
+      description: Nome da Instituição de origem
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: instituicao_ensino_superior
+          column_name: nome
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Não necessariamente todas as instituições de origem são brasileiras, mas muitas estão atreladas a projetos originários no Brasil
+      is_in_staging: true
+      is_partition: false
+    - name: pais_destino
+      bigquery_type: string
+      description: País de destino
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_mundo
+          table_id: pais
+          column_name: sigla_pais_iso3
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: sigla_uf_destino
+      bigquery_type: string
+      description: Sigla da Unidade da Federação de destino
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -317,9 +422,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: instituicao_destino
+    - name: municipio_destino
       bigquery_type: string
-      description: Instituição de destino
+      description: Nome do município de destino
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -347,9 +452,9 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: id_municipio_destino
+    - name: sigla_instituicao_macro
       bigquery_type: string
-      description: ID Município de destino - IBGE 7 Dígitos
+      description: Sigla da Instituição Macro
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -362,24 +467,84 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
-    - name: sigla_uf_destino
+    - name: instituicao_destino
       bigquery_type: string
-      description: Sigla da Unidade da Federação de destino
+      description: Instituição de destino
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
-      directory_column: 
+      directory_column:
           dataset_id: br_bd_diretorios_brasil
-          table_id: uf
-          column_name: sigla
+          table_id: nome
+          column_name: nome
       measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
-    - name: pais_destino
+    - name: plano_interno
       bigquery_type: string
-      description: País de destino
+      description: Plano interno
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Não conseguimos encontrar o dicionário desta variável. Por favor, entre em contato conosco se tiver informações relevantes.
+      is_in_staging: true
+      is_partition: false
+    - name: unidade_orcamentaria
+      bigquery_type: string
+      description: Unidade Orçamentária do recurso
+      temporal_coverage:
+          - 2021(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: fonte_recurso
+      bigquery_type: string
+      description: Fonte do recurso
+      temporal_coverage:
+          - 2022
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Não conseguimos encontrar o dicionário desta variável. Por favor, entre em contato conosco se tiver informações relevantes.
+      is_in_staging: true
+      is_partition: false
+    - name: natureza_despesa
+      bigquery_type: string
+      description: Natureza da despesa
+      temporal_coverage:
+          - 2021(1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Não conseguimos encontrar o dicionário desta variável. Por favor, entre em contato conosco se tiver informações relevantes.
+      is_in_staging: true
+      is_partition: false
+    - name: programa_ppa
+      bigquery_type: string
+      description: Programa Plano Plurianual
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -389,7 +554,22 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: Não conseguimos encontrar o dicionário desta variável. Por favor, entre em contato conosco se tiver informações relevantes.
+      is_in_staging: true
+      is_partition: false
+    - name: acao_ppa
+      bigquery_type: string
+      description: Ação Plano Plurianual
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations: Não conseguimos encontrar o dicionário desta variável. Por favor, entre em contato conosco se tiver informações relevantes.
       is_in_staging: true
       is_partition: false
     - name: valor
@@ -402,10 +582,12 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: blr
+      measurement_unit:
       has_sensitive_data: no
       observations:
       is_in_staging: true
       is_partition: false
+
+number_rows: 2774218
 
 metadata_modified:

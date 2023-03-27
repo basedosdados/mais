@@ -1,4 +1,4 @@
-Dados acerca dos pagamentos efetuados pelo CNPq para projetos de pesquisa
+Dicionário da tabela de microdados do CNPq
 
 Para saber mais acesse:
 Website: 
@@ -20,33 +20,24 @@ Email: patrick.teixeira@basedosdados.org
 
 
 
-Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
----------
-- ano
-
 
 
 
 Cobertura Temporal
 ------------------
-- 2002(1)2022
 
 
 
 
 Cobertura Espacial
 ------------------
-- sa.br
 
 
 
 
-Tratamento
-----------
-Renomeação de colunas
 
 
 
 Frequencia de Atualização
 -------------------------
-one_year
+unique

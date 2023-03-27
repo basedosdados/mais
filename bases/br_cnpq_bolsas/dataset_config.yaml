@@ -5,15 +5,17 @@ name: br-cnpq-bolsas
 
 # Título do conjunto, a ser exibido no mecanismo de busca.
 # Exemplo: População brasileira
-title: Bolsas e Auxílios Pagos - CNPq
+title: Bolsas e Auxílios Pagos pelo CNPq
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
+# Se a organização não estiver na lista acima ou o nome não estiver conforme o manual de estilo
+# criar ou renomear a organização em https://basedosdados.org/organization/
 # Exemplos: br-ibge, br-tse, br-rj-gov
 organization: br-cnpq
 
 # Descrição do conjunto
-notes: Bolsas e auxílios pagos pelo Centro Nacional de Pesquisa (CNPq) para indivíduos participantes de diferentes projetos nas diversas áreas do conhecimento
+notes: O CNPq concede bolsas para a formação de recursos humanos no campo da pesquisa científica e tecnológica, em universidades, institutos de pesquisa, centros tecnológicos e de formação profissional, tanto no Brasil como no exterior. Além de promover a formação de recursos humanos em áreas estratégicas para o desenvolvimento nacional, o CNPq aporta recursos financeiros para a implementação de projetos, programas e redes de Pesquisa e Desenvolvimento (P&D), diretamente ou em parceria com os Estados da Federação. O CNPq investe, ainda, em ações de divulgação científica e tecnológica com apoio financeiro à editoração e publicação de periódicos, à promoção de eventos científicos e à participação de estudantes e pesquisadores nos principais congressos e eventos nacionais e internacionais na área de ciência e tecnologia. Público Alvo: Jovens de ensino médio e superior, em nível de pós-graduação, interessados em atuar na pesquisa cientifica, e especialistas para atuarem em Pesquisa e Desenvolvimento (P&D) nas empresas e centros tecnológicos. Modalidades de bolsas: O CNPq oferece varias modalidades de bolsas de formação e fomento a pesquisa, a alunos de ensino médio, graduação, pós-graduação, recém-doutores e pesquisadores já experientes do País e do exterior. As bolsas são concedidas diretamente pelo CNPq ou por instituições de ensino e pesquisa para as quais o CNPq destina quotas de bolsas.
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
@@ -24,7 +26,10 @@ groups:
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
-# Exemplos: fertilidade, preco, desmatamento.
+# Exemplos:
+#    - fertilidade
+#    - preco
+#    - desmatamento
 # Caso crie etiquetas novas, as regras são:
 #    - letras minúsculas
 #    - sem acentos

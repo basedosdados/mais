@@ -2,6 +2,6 @@ Como capturar os dados de br_cnpq_bolsas?
 
 Para capturar esses dados, basta verificar o link dos dados originais indicado em dataset_config.yaml no item website.
 
-Caso tenha sido utilizado algum cÛdigo de captura ou tratamento, estes estar„o contidos em code/. Se o dado publicado for em sua vers„o bruta, n„o existir· a pasta code/.
+Caso tenha sido utilizado algum c√≥digo de captura ou tratamento, estes estar√£o contidos em code/. Se o dado publicado for em sua vers√£o bruta, n√£o existir√° a pasta code/.
 
-Os dados publicados est„o disponÌveis em: https://basedosdados.org/dataset/br-cnpq-bolsas
+Os dados publicados est√£o dispon√≠veis em: https://basedosdados.org/dataset/br-cnpq-bolsas
