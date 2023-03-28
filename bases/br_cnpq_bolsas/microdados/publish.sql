@@ -1,6 +1,6 @@
 /*
 Query para publicar a tabela.
-
+ 
 Esse é o lugar para:
     - modificar nomes, ordem e tipos de colunas
     - dar join com outras tabelas
