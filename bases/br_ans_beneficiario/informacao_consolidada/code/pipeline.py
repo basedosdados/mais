@@ -126,42 +126,38 @@ def process(df: pd.DataFrame):
 
 if __name__ == '__main__':
     for month_path, month_date in host_months_path():
-        output_path = Path('../output') / f'ano={month_date.strftime("%Y")}' / f'mes={month_date.strftime("%m")}' / f'ben{month_date.strftime("%Y%m")}.parquet'
-
-        if output_path.exists():
-            logger.info(f"Jumping path {output_path}. Already download")
-            continue
-
-        dfs = []
         for state_path in host_list(month_path):
             state = state_path.split("_")[-1].split(".")[0]
+
+            output_path = Path('../output') / f'ano={month_date.strftime("%Y")}' / f'mes={month_date.strftime("%m")}' / f'state={state}' / f'ben{month_date.strftime("%Y%m")}.parquet'
+
+            if output_path.exists():
+                logger.info(f"Jumping path {output_path}. Already download")
+                continue
+
             input_path = Path('../input') / f'ano={month_date.strftime("%Y")}' / f'mes={month_date.strftime("%m")}' / f'ben{month_date.strftime("%Y%m")}_{state}.csv'
 
             if input_path.exists():
                 logger.debug(f"reading input in {input_path}")
-                state_df = pd.read_csv(input_path, encoding="utf-8", dtype=RAW_COLLUNS_TYPE)
+                df = pd.read_csv(input_path, encoding="utf-8", dtype=RAW_COLLUNS_TYPE)
             else:
                 # Wtf, pq tem um repositorio aqui? 
                 # https://dadosabertos.ans.gov.br/FTP/PDA/informacoes_consolidadas_de_beneficiarios/201602/201607/
                 if not host.path.isfile(state_path):
                     continue
 
-                state_df = read_csv_zip_to_dataframe(state_path)
+                df = read_csv_zip_to_dataframe(state_path)
                 input_path.parent.mkdir(parents=True, exist_ok=True)
-                state_df.to_csv(input_path, encoding="utf-8")
-            dfs.append(state_df)
+                df.to_csv(input_path, encoding="utf-8")
 
-        logger.info("Concat states dataframes")
-        df = pd.concat(dfs)
+            logger.info("Cleaning dataset")
+            df = process(df)
 
-        logger.info("Cleaning dataset")
-        df = process(df)
+            output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        output_path.parent.mkdir(parents=True, exist_ok=True)
+            # delete partition columns
+            del df['ano']
+            del df['mes']
 
-        # delete partition columns
-        del df['ano']
-        del df['mes']
-
-        logger.info(f"Writing to output {output_path.as_posix()}")
-        df.to_parquet(output_path)
+            logger.info(f"Writing to output {output_path.as_posix()}")
+            df.to_parquet(output_path)
