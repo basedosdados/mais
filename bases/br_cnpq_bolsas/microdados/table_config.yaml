@@ -417,9 +417,9 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column: br_bd_diretorios_brasil
-          dataset_id: uf
-          table_id: sigla
-          column_name:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
       measurement_unit:
       has_sensitive_data: no
       observations:
