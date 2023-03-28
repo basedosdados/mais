@@ -399,7 +399,7 @@ columns:
       bigquery_type: string
       description: País de destino
       temporal_coverage:
-          - (1)
+          - (1) 
       covered_by_dictionary: no
       directory_column:
           dataset_id: br_bd_diretorios_mundo
