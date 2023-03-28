@@ -416,7 +416,7 @@ columns:
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
-      directory_column: br_bd_diretorios_brasil
+      directory_column:
           dataset_id: br_bd_diretorios_brasil
           table_id: uf
           column_name: sigla
