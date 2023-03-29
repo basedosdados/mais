@@ -12,10 +12,7 @@ title: Histórico de Dados Meteorológicos
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: "O BDMEP abriga dados meteorológicos diários em forma digital, de séries\
-    \ históricas das várias estações meteorológicas convencionais da rede de estações\
-    \ do INMET com milhões de informações, referentes às medições diárias, de acordo\
-    \ com as normas técnicas internacionais da Organização Meteorológica Mundial\n"
+description: "O BDMEP abriga dados meteorológicos diários em forma digital, de séries históricas das várias estações meteorológicas convencionais da rede de estações do INMET com milhões de informações, referentes às medições diárias, de acordo com as normas técnicas internacionais da Organização Meteorológica Mundial"
 
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
@@ -88,9 +85,7 @@ data_cleaned_by:
     website: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: "- Fazer download de todas as bases diretamente do site\
-    \ do INMET\n- Extrair informações de todas as estações \n- Concatenar as informações\
-    \ em uma tabela única\n"
+data_cleaning_description: "1- Fazer download de todas as bases diretamente do site do INMET. 2- Extrair informações de todas as estações. 3- Concatenar as informações em uma tabela única."
 
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdmep/code
@@ -199,7 +194,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: militre
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -379,7 +374,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: gram / (m * m * m)
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -394,7 +389,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: gram / (meter * meter * meter)
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -409,7 +404,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: kilometer / hour
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -424,7 +419,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: kilometer / hour
       has_sensitive_data: no
       observations:
       is_in_staging: true
@@ -439,7 +434,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: kilometer / hour
       has_sensitive_data: no
       observations:
       is_in_staging: true
