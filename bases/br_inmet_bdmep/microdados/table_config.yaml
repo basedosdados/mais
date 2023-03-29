@@ -374,7 +374,7 @@ columns:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit: gram / (m * m * m)
+      measurement_unit: gram / (meter * meter * meter)
       has_sensitive_data: no
       observations:
       is_in_staging: true
