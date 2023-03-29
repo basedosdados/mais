@@ -1,109 +1,125 @@
-source_bucket_name: bases-bd
-project_id_staging: projetos-bd
-project_id_prod: projetos-bd
-table_id: microdados # AUTO GENERATED
-dataset_id: br_inmet_bdmep # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-inmet-bdmep # AUTO GENERATED
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdmep # AUTO GENERATED
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_inmet_bdmep
 
-version: 1.0 # REQUIRED
+table_id: microdados
 
-last_updated: 2021-09-14 # AUTO GENERATED
-
+# Título da tabela.
+title: Histórico de Dados Meteorológicos
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
-# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.
-description: |  # REQUIRED
-    O BDMEP abriga dados meteorológicos diários em forma digital, de séries históricas das várias estações meteorológicas convencionais da rede de estações do INMET com milhões de informações, referentes às medições diárias, de acordo com as normas técnicas internacionais da Organização Meteorológica Mundial
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: "O BDMEP abriga dados meteorológicos diários em forma digital, de séries\
+    \ históricas das várias estações meteorológicas convencionais da rede de estações\
+    \ do INMET com milhões de informações, referentes às medições diárias, de acordo\
+    \ com as normas técnicas internacionais da Organização Meteorológica Mundial\n"
 
-# Quem está completando esse arquivo config?
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage:
+    - 2000(1)2022
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: quarter
+
+# Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+    - columns:
+          - id_estacao
+    - entity: date
+      columns:
+          - data
+    - columns:
+          - hora
+
+last_updated:
+    metadata: '2023-03-29'
+    data: '2023-03-29 17:20:10'
+    release: '2023-03-29 17:20:10'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplos: v1.0, v1.1.3
+version: v1.1
+
+# Quem está preenchendo esses metadados?
 published_by:
-    name: Filipe Cavalcanti # REQUIRED
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdmep/code # REQUIRED
-    website: https://github.com/filipemsc
-    email: f.matheus.cavalcanti@gmail.com
+    name: Arthur Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
+    website: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
 # Se essa pessoa é você, preencha abaixo com suas informações.
-treated_by:
-    name: Filipe Cavalcanti
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdmep/code
-    website: https://github.com/filipemsc
-    email: f.matheus.cavalcanti@gmail.com
+data_cleaned_by:
+    name: Arthur Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
+    website: 
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-treatment_description: | 
-    - Fazer download de todas as bases diretamente do site do INMET
-    - Extrair informações de todas as estações 
-    - Concatenar as informações em uma tabela única
+data_cleaning_description: "- Fazer download de todas as bases diretamente do site\
+    \ do INMET\n- Extrair informações de todas as estações \n- Concatenar as informações\
+    \ em uma tabela única\n"
 
-# Com qual frequência a base é atualizada?
-# Opções: hora | dia | semana | mes | 1 ano | 2 anos | 5 anos | 10 anos | unico | recorrente
-data_update_frequency: incerto # REQUIRED 
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdmep/code
 
-# Nível da observação (qual é a granularidade de cada linha na tabela)
-# Escolha todas as opções necessárias.
-# Regras:
-#   - minúsculo, sem acento, singular.
-#   - em portugues (ou seja, não use os nomes de colunas abaixo)
-# Exemplos: pais, estado, municipio, cidade, hora, dia, semana, mes, ano, etc.
-observation_level: #REQUIRED
-    - estação meteorológica
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: 
+    organization_id: 
 
-# Quais colunas identificam uma linha unicamente?
-# Preencha com os nomes de colunas. Ex: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-primary_keys:
-    - id_estacao
-    - data
-    - hora
+# Url dos dados originais no GCP Storage.
+raw_files_url:
 
-# Qual é a cobertura espacial da tabela?
-# Regras:
-#   - minúsculo, sem acento, singular
-#   - descer até o menor nível administrativo cuja cobertura abaixo seja 'todos'
-# Exemplo 1: tabela que cubra todos os municípios nos estados de SP e GO
-#   - brasil
-#   - SP, GO
-# Exemplo 2: tabela que cubra países inteiros na América Latina
-#   - brasil, argentina, peru, equador
-coverage_geo:
-    - brasil
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url:
 
-# Qual é a cobertura temporal (em anos) da tabela?
-# Opções: ..., 1990, 1991, ..., 1999, 2000, 2001, ..., 2019, 2020, ...
-coverage_time:
-    - 2000
-    - 2001
-    - 2002
-    - 2003
-    - 2004
-    - 2005
-    - 2006
-    - 2007
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    - 2012
-    - 2013
-    - 2014
-    - 2015
-    - 2016 
-    - 2017
-    - 2018 
-    - 2019
-    - 2020
-    - 2021
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
 # Liste as colunas da tabela que representam partições.
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions: # REQUIRED  
+partitions:
     - ano
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
@@ -111,133 +127,324 @@ partitions: # REQUIRED
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
-columns: # REQUIRED
+columns:
+    - name: ano
+      bigquery_type: int64
+      description: Ano
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: ano
+          column_name: ano
+      measurement_unit: year
+      has_sensitive_data: no
+      observations:
+      is_in_staging: false
+      is_partition: true
+    - name: data
+      bigquery_type: date
+      description: Data
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: data
+          column_name: data
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true 
+      is_partition: false
+    - name: hora
+      bigquery_type: time
+      description: Hora (UTC)
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column: 
+          dataset_id: br_bd_diretorios_data_tempo
+          table_id: tempo
+          column_name: tempo
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_estacao
+      bigquery_type: string
+      description: ID da estação meteorológica
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: precipitacao_total
+      bigquery_type: float64
+      description: Precipitação total, horária
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pressao_atm_hora
+      bigquery_type: float64
+      description: Pressão atmosférica ao nível da estação, horária
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pressao_atm_max
+      bigquery_type: float64
+      description: Pressão atmosférica máxima ao nível da estação, na hora anterior
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: pressao_atm_min
+      bigquery_type: float64
+      description: Pressão atmosférica mínima ao nível da estação, na hora anterior
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: radiacao_global
+      bigquery_type: float64
+      description: Radiação global
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: temperatura_bulbo_hora
+      bigquery_type: float64
+      description: Temperatura do ar - bulbo seco, horária
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: temperatura_orvalho_hora
+      bigquery_type: float64
+      description: Temperatura do ponto de orvalho, horária
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: temperatura_max
+      bigquery_type: float64
+      description: Temperatura máxima, hora anterior
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: temperatura_min
+      bigquery_type: float64
+      description: Temperatura mínima, hora anterior
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: temperatura_orvalho_max
+      bigquery_type: float64
+      description: Temperatura de orvalho máxima, hora anterior
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: temperatura_orvalho_min
+      bigquery_type: float64
+      description: Temperatura de orvalho mínima, hora anterior
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: umidade_rel_max
+      bigquery_type: float64
+      description: Umidade relativa máxima, hora anterior
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: umidade_rel_min
+      bigquery_type: float64
+      description: Umidade relativa mínima, hora anterior
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: umidade_rel_hora
+      bigquery_type: float64
+      description: Umidade relativa, horária
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: vento_direcao
+      bigquery_type: float64
+      description: Direção do vento
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: vento_rajada_max
+      bigquery_type: float64
+      description: Vento, rajada máxima
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: vento_velocidade
+      bigquery_type: float64
+      description:  Vento, velocidade horária
+      temporal_coverage:
+        - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
 
-    -   
-        name: ano
-        description: Ano
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: True # Bool [True, False], whether the column is a partition.
- 
-    -   
-        name: data
-        description: Data
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: hora
-        description: Hora (UTC)
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: id_estacao
-        description: ID da estação meteorológica
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.  
-  
-    -   
-        name: precipitacao_total
-        description: Precipitação total, horária
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: pressao_atm_hora
-        description: Pressão atmosférica ao nível da estação, horária
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: pressao_atm_max
-        description: Pressão atmosférica máxima ao nível da estação, na hora anterior
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: pressao_atm_min
-        description: Pressão atmosférica mínima ao nível da estação, na hora anterior
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: radiacao_global
-        description: Radiação global
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: temperatura_bulbo_hora
-        description: Temperatura do ar - bulbo seco, horária
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: temperatura_orvalho_hora
-        description: Temperatura do ponto de orvalho, horária
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: temperatura_max
-        description: Temperatura máxima, hora anterior
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: temperatura_min
-        description: Temperatura mínima, hora anterior
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: temperatura_orvalho_max
-        description: Temperatura de orvalho máxima, hora anterior
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: temperatura_orvalho_min
-        description: Temperatura de orvalho mínima, hora anterior
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: umidade_rel_max
-        description: Umidade relativa máxima, hora anterior
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: umidade_rel_min
-        description: Umidade relativa mínima, hora anterior
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: umidade_rel_hora
-        description: Umidade relativa, horária
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vento_direcao
-        description: Direção do vento
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vento_rajada_max
-        description: Vento, rajada máxima
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
-  
-    -   
-        name: vento_velocidade
-        description: Vento, velocidade horária
-        is_in_staging: True # Bool [True, False], whether the column is in the staging table
-        is_partition: False # Bool [True, False], whether the column is a partition.
+number_rows: 70113960
+
+metadata_modified: '2022-11-25T10:08:24.505249'
