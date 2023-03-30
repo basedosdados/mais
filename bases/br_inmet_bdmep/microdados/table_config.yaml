@@ -36,7 +36,7 @@ temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency: quarter
+update_frequency: month
 
 # Nível de observação da tabela: o que representa cada linha.
 # A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -49,13 +49,15 @@ update_frequency: quarter
 #       columns:
 #           - sigla_uf
 observation_level:
-    - columns:
-          - id_estacao
-    - entity: date
-      columns:
-          - data
-    - columns:
-          - hora
+     - entity: station
+       columns:
+           - id_estacao
+     - entity: date
+       columns:
+           - data
+     - entity: hour
+       columns:
+           - hora
 
 last_updated:
     metadata: '2023-03-29'

@@ -16,10 +16,7 @@ organization:
     - instituto-nacional-de-meteorologia-inmet
 
 # Descrição do conjunto
-notes: "O BDMEP abriga dados meteorológicos diários em forma digital, de séries históricas\
-    \ das várias estações meteorológicas convencionais da rede de estações do INMET\
-    \ com milhões de informações, referentes às medições diárias, de acordo com as\
-    \ normas técnicas internacionais da Organização Meteorológica Mundial.\n"
+notes: "O BDMEP abriga dados meteorológicos diários em forma digital, de séries históricas das várias estações meteorológicas convencionais da rede de estações do INMET com milhões de informações, referentes às medições diárias, de acordo com as normas técnicas internacionais da Organização Meteorológica Mundial."
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
@@ -40,7 +37,7 @@ groups:
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
     - clima
-    - radiação
+    - radiacao
     - temperatura
     - umidade
 
