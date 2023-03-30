@@ -2,17 +2,16 @@
 # Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: world_oecd_public_finance
 
-table_id: country_data
+table_id: country
 
 # Título da tabela.
-title: Country data
+title: Country
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: A tabela é um painel cross-country com dados de receitas e despesas governamentais, macroeconomia, indicadores políticos, indicadores de qualidade institucional, dados de regras de política fiscal, entre outros, provendo de várias fontes e compatibilizados segundo metodologia elaborada por pesquisadores da OCDE. São uma vasta fonte para pesquisa acadêmica sobre política fiscal.
-
+description: This table is a cross-country panel dataset with historical data on government revenues and expenditures, macroeconomics, politics, institutional quality, fiscal policy rules, among others. The data come from many sources and are made compatible following methods developed by OECD researchers. It is a rich source for academic research on fiscal policy.
 # As máximas unidades espaciais que a tabela cobre.
 # Exemplo:
 #    - sa.br
@@ -35,7 +34,7 @@ temporal_coverage:
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-update_frequency:
+update_frequency: uncertain
 
 # Nível de observação da tabela: o que representa cada linha.
 # A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
@@ -57,9 +56,9 @@ observation_level:
         
 
 last_updated:
-    metadata: '2023-03-27'
-    data: '2023-03-27'
-    release: '2023-03-27'
+    metadata: '2023-03-30'
+    data: '2023-03-30 15:22:00'
+    release: '2023-03-30 15:22:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
@@ -84,8 +83,7 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Os dados foram baixados manualmente do site da OCDE. Após isso, excluíram-se as colunas apenas com missing values e as colunas restantes foram renomeadas seguindo o manual de estilo da BD. A descrição das colunas é levemente adaptada a partir da descrição original.
-
+data_cleaning_description: The dataset was manually downloaded from OECD's website. After that, columns filled only with missing values were excluded while the remaining were renamed according to Base dos Dados style. Their description is slightly adapted from the original source.
 # Url do código de limpeza dos dados do github.
 data_cleaning_code_url: https://github.com/basedosdados/mais/blob/master/bases/world_oecd_public_finance/code/public_finance_cleaning.py
 
@@ -135,8 +133,8 @@ columns:
       measurement_unit: year
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: country
       bigquery_type: string
       description: Country
@@ -150,11 +148,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_personal_income_tax
       bigquery_type: float64
-      description: Personal Income Taxes
+      description: General government revenue from Personal Income Taxes
       temporal_coverage:
           - 1965(1)2016
       covered_by_dictionary: no
@@ -165,13 +163,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_social_security_contribution
       bigquery_type: float64
-      description: Social Security Contributions
+      description: General government revenue from Social Security Contributions
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -180,11 +178,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_corporate_tax
       bigquery_type: float64
-      description: Corporate Income Taxes
+      description: General government revenue from Corporate Income Taxes
       temporal_coverage:
           - 1965(1)2016
       covered_by_dictionary: no
@@ -195,11 +193,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_environmental_tax
       bigquery_type: float64
-      description: Environmental Taxes
+      description: General government revenue from Environmental Taxes
       temporal_coverage:
           - 1994(1)2015
       covered_by_dictionary: no
@@ -210,11 +208,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_other_consumption_tax
       bigquery_type: float64
-      description: Other Consumption Taxes
+      description: General government revenue from Other Consumption Taxes
       temporal_coverage:
           - 1994(1)2015
       covered_by_dictionary: no
@@ -225,11 +223,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_immovable_property_tax
       bigquery_type: float64
-      description: Taxes on Immovable Property
+      description: General government revenue from Taxes on Immovable Property
       temporal_coverage:
           - 1965(1)2016
       covered_by_dictionary: no
@@ -240,11 +238,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_other_property_tax
       bigquery_type: float64
-      description: Other Property Taxes
+      description: General government revenue from Other Property Taxes
       temporal_coverage:
           - 1965(1)2016
       covered_by_dictionary: no
@@ -255,11 +253,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_sales_goods_services_tax
       bigquery_type: float64
-      description: Sales of Goods & Services
+      description: General government revenue from Sales of Goods & Services
       temporal_coverage:
           - 1959(1)2017
       covered_by_dictionary: no
@@ -270,11 +268,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_other_non_property_tax
       bigquery_type: float64
-      description: Other Nonproperty Taxes
+      description: General government revenue from Other Nonproperty Taxes
       temporal_coverage:
           - 1994(1)2015
       covered_by_dictionary: no
@@ -285,13 +283,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_property_income
       bigquery_type: float64
-      description: Property Income
+      description: General government revenue from Property Income
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -300,13 +298,14 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_property_income_except_interest
       bigquery_type: float64
-      description: Property income received (except interest receipts)
+      description: General government revenue from Property income received (except
+          interest receipts)
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -315,11 +314,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_education
       bigquery_type: float64
-      description: Education
+      description: General government expenditure on Education
       temporal_coverage:
           - 1970(1)2017
       covered_by_dictionary: no
@@ -330,11 +329,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_health
       bigquery_type: float64
-      description: Health
+      description: General government expenditure on Health
       temporal_coverage:
           - 1970(1)2017
       covered_by_dictionary: no
@@ -345,11 +344,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_wage_intermediate_consumption
       bigquery_type: float64
-      description: Wages & Interm. Consumption
+      description: General government expenditure on Wages & Interm. Consumption
       temporal_coverage:
           - 1986(1)2017
       covered_by_dictionary: no
@@ -360,11 +359,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_pension
       bigquery_type: float64
-      description: Pensions
+      description: General government expenditure on Pensions
       temporal_coverage:
           - 1980(1)2017
       covered_by_dictionary: no
@@ -375,11 +374,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_sickness_disability
       bigquery_type: float64
-      description: Sickness & Disability
+      description: General government expenditure on Sickness & Disability Benefits
       temporal_coverage:
           - 1980(1)2017
       covered_by_dictionary: no
@@ -390,11 +389,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_unemployment_benefit
       bigquery_type: float64
-      description: Unemployment Benefits
+      description: General government expenditure on Unemployment Benefits
       temporal_coverage:
           - 1980(1)2017
       covered_by_dictionary: no
@@ -405,11 +404,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_family_children
       bigquery_type: float64
-      description: Family & Children
+      description: General government expenditure on Family & Children Benefits
       temporal_coverage:
           - 1980(1)2017
       covered_by_dictionary: no
@@ -420,11 +419,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_subsidies
       bigquery_type: float64
-      description: Subsidies
+      description: General government expenditure on Subsidies
       temporal_coverage:
           - 1949(1)2017
       covered_by_dictionary: no
@@ -435,13 +434,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_public_investment
       bigquery_type: float64
-      description: Public Investment
+      description: General government expenditure on Public Investment
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -450,11 +449,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_other_primary_expenditure
       bigquery_type: float64
-      description: Other primary expenditure
+      description: General government expenditure on Other primary expenditure
       temporal_coverage:
           - 1986(1)2017
       covered_by_dictionary: no
@@ -465,13 +464,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_property_income
       bigquery_type: float64
-      description: Property Income
+      description: General government expenditure on Property Income
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -480,13 +479,14 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
-    - name: expenditure_property_income_excep_interest
+      is_in_staging: True
+      is_partition: False
+    - name: expenditure_property_income_except_interest
       bigquery_type: float64
-      description: Property income paid (except interest payments)
+      description: General government expenditure on Property income paid (except
+          interest payments)
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -495,11 +495,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_personal_income_tax_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Personal Income Taxes
+      description: Cyclically-adjusted General government revenue from Personal Income
+          Taxes
       temporal_coverage:
           - 1970(1)2016
       covered_by_dictionary: no
@@ -510,13 +511,14 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_social_security_contribution_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Social Security Contributions
+      description: Cyclically-adjusted General government revenue from Social Security
+          Contributions
       temporal_coverage:
-          - 1970(1)2019
+          - 1970(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -525,11 +527,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_corporate_tax_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Corporate Income Taxes
+      description: Cyclically-adjusted General government revenue from Corporate Income
+          Taxes
       temporal_coverage:
           - 1970(1)2016
       covered_by_dictionary: no
@@ -540,11 +543,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_environmental_tax_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Environmental Taxes
+      description: Cyclically-adjusted General government revenue from Environmental
+          Taxes
       temporal_coverage:
           - 1994(1)2015
       covered_by_dictionary: no
@@ -555,11 +559,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_other_consumption_tax_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Other Consumption Taxes
+      description: Cyclically-adjusted General government revenue from Other Consumption
+          Taxes
       temporal_coverage:
           - 1994(1)2015
       covered_by_dictionary: no
@@ -570,11 +575,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_immovable_property_tax_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Taxes on Immovable Property
+      description: Cyclically-adjusted General government revenue from Taxes on Immovable
+          Property
       temporal_coverage:
           - 1994(1)2015
       covered_by_dictionary: no
@@ -585,11 +591,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_other_property_tax_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Other Property Taxes
+      description: Cyclically-adjusted General government revenue from Other Property
+          Taxes
       temporal_coverage:
           - 1994(1)2015
       covered_by_dictionary: no
@@ -600,11 +607,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_sales_goods_services_tax_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Sales of Goods & Services
+      description: Cyclically-adjusted General government revenue from Sales of Goods
+          & Services
       temporal_coverage:
           - 1959(1)2017
       covered_by_dictionary: no
@@ -615,11 +623,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_other_non_property_tax_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Other Nonproperty Taxes
+      description: Cyclically-adjusted General government revenue from Other Nonproperty
+          Taxes
       temporal_coverage:
           - 1994(1)2015
       covered_by_dictionary: no
@@ -630,13 +639,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_property_income_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Property Income
+      description: Cyclically-adjusted General government revenue from Property Income
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -645,13 +654,14 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: revenue_property_income_except_interest_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Property income received (except interest receipts)
+      description: Cyclically-adjusted General government revenue from Property income
+          received (except interest receipts)
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -660,11 +670,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_education_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Education
+      description: Cyclically-adjusted General government expenditure on Education
       temporal_coverage:
           - 1970(1)2017
       covered_by_dictionary: no
@@ -675,11 +685,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_health_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Health
+      description: Cyclically-adjusted General government expenditure on Health
       temporal_coverage:
           - 1970(1)2017
       covered_by_dictionary: no
@@ -690,11 +700,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_wage_intermediate_consumption_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Wages & Interm. Consumption
+      description: Cyclically-adjusted General government expenditure on Wages & Interm.
+          Consumption
       temporal_coverage:
           - 1986(1)2017
       covered_by_dictionary: no
@@ -705,11 +716,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_pension_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Pensions
+      description: Cyclically-adjusted General government expenditure on Pensions
       temporal_coverage:
           - 1980(1)2017
       covered_by_dictionary: no
@@ -720,11 +731,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_sickness_disability_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Sickness & Disability
+      description: Cyclically-adjusted General government expenditure on Sickness
+          & Disability Benefits
       temporal_coverage:
           - 1980(1)2017
       covered_by_dictionary: no
@@ -735,11 +747,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_unemployment_benefit_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Unemployment Benefits
+      description: Cyclically-adjusted General government expenditure on Unemployment
+          Benefits
       temporal_coverage:
           - 1980(1)2017
       covered_by_dictionary: no
@@ -750,11 +763,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_family_children_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Family & Children
+      description: Cyclically-adjusted General government expenditure on Family &
+          Children Benefits
       temporal_coverage:
           - 1980(1)2017
       covered_by_dictionary: no
@@ -765,11 +779,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_subsidies_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Subsidies
+      description: Cyclically-adjusted General government expenditure on Subsidies
       temporal_coverage:
           - 1949(1)2017
       covered_by_dictionary: no
@@ -780,13 +794,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_public_investment_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Public Investment
+      description: Cyclically-adjusted General government expenditure on Public Investment
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -795,11 +809,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_other_primary_expenditure_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Other primary expenditure
+      description: Cyclically-adjusted General government expenditure on Other primary
+          expenditure
       temporal_coverage:
           - 1986(1)2017
       covered_by_dictionary: no
@@ -810,13 +825,14 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_property_income_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Property Income
+      description: Cyclically-adjusted General government expenditure on Property
+          Income
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -825,13 +841,14 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
-    - name: expenditure_property_income_excep_interest_adjusted
+      is_in_staging: True
+      is_partition: False
+    - name: expenditure_property_income_except_interest_adjusted
       bigquery_type: float64
-      description: Cyclically-adjusted Property income paid (except interest payments)
+      description: Cyclically-adjusted General government expenditure on Property
+          income paid (except interest payments)
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -840,13 +857,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: current_receipt
       bigquery_type: float64
       description: General government current receipts
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -855,13 +872,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: current_receipt_except_interest
       bigquery_type: float64
       description: General government current receipts excluding gross interest receipts
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -870,13 +887,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: current_receipt_adjusted
       bigquery_type: float64
       description: Cyclically-adjusted general government current receipts
       temporal_coverage:
-          - 1985(1)2019
+          - 1985(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -885,13 +902,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: total_receipt
       bigquery_type: float64
       description: General government total receipts
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -900,13 +917,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: current_expenditure
       bigquery_type: float64
       description: General government current expenditures
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -915,14 +932,14 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: current_expenditure_except_interest
       bigquery_type: float64
       description: General government current expenditures, excluding gross interest
           payments
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -931,13 +948,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: current_expenditure_adjusted
       bigquery_type: float64
       description: Cyclically-adjusted general government current expenditures
       temporal_coverage:
-          - 1985(1)2019
+          - 1985(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -946,14 +963,14 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: current_expenditure_except_interest_adjusted
       bigquery_type: float64
       description: Cyclically-adjusted general government current expenditures, excluding
           gross interest payments
       temporal_coverage:
-          - 1985(1)2019
+          - 1985(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -962,13 +979,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: total_expenditure
       bigquery_type: float64
       description: General government total expenditures
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -977,13 +994,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: net_lending
       bigquery_type: float64
       description: General government net lending
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -992,13 +1009,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: primary_balance
       bigquery_type: float64
       description: General government primary balance
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1007,13 +1024,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: net_lending_adjusted
       bigquery_type: float64
       description: Cyclically-adjusted general government net lending
       temporal_coverage:
-          - 1970(1)2019
+          - 1970(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1022,13 +1039,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: primary_balance_adjusted
       bigquery_type: float64
       description: Cyclically-adjusted general government primary balance
       temporal_coverage:
-          - 1970(1)2019
+          - 1970(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1037,13 +1054,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: underlying_net_lending
       bigquery_type: float64
       description: Underlying general government net lending
       temporal_coverage:
-          - 1980(1)2019
+          - 1980(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1052,13 +1069,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: underlying_primary_balance
       bigquery_type: float64
       description: Underlying general government primary balance
       temporal_coverage:
-          - 1980(1)2019
+          - 1980(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1067,13 +1084,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: net_financial_liabilities
       bigquery_type: float64
       description: General government net financial liabilities
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1082,13 +1099,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: financial_assets
       bigquery_type: float64
-      description: General government financial assets, % GDP
+      description: General government financial assets, percent of GDP
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1097,13 +1114,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: gross_interest_paid
       bigquery_type: float64
       description: General government gross interest paid
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1112,13 +1129,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: gross_interest_received
       bigquery_type: float64
       description: General government gross interest received
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1127,13 +1144,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: net_interest_paid
       bigquery_type: float64
       description: General government net interest paid
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1142,13 +1159,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
-    - name: gdp_current_prices
+      is_in_staging: True
+      is_partition: False
+    - name: gross_domestic_product_current_prices
       bigquery_type: float64
-      description: GDP, current prices
+      description: Gross Domestic Product, current prices
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1157,13 +1174,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
-    - name: gdp_volume
+      is_in_staging: True
+      is_partition: False
+    - name: gross_domestic_product_volume
       bigquery_type: float64
-      description: GDP, volume
+      description: Gross Domestic Product, volume
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1172,13 +1189,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
-    - name: gdp_potential_current_prices
+      is_in_staging: True
+      is_partition: False
+    - name: gross_domestic_product_potential_current_prices
       bigquery_type: float64
-      description: GDP, potential, current prices
+      description: Gross Domestic Product, potential, current prices
       temporal_coverage:
-          - 1985(1)2019
+          - 1985(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1187,13 +1204,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
-    - name: gdp_potential_volume
+      is_in_staging: True
+      is_partition: False
+    - name: gross_domestic_product_potential_volume
       bigquery_type: float64
-      description: GDP, potential, volume
+      description: Gross Domestic Product, potential, volume
       temporal_coverage:
-          - 1985(1)2019
+          - 1985(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1202,13 +1219,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: output_gap
       bigquery_type: float64
       description: Output gap
       temporal_coverage:
-          - 1985(1)2019
+          - 1985(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1217,13 +1234,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: short_term_interest_rate
       bigquery_type: float64
       description: Short-term interest rate
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1232,13 +1249,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: long_term_interest_rate
       bigquery_type: float64
       description: Long-term interest rate on government bonds
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1247,13 +1264,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
-    - name: index_cpi
+      is_in_staging: True
+      is_partition: False
+    - name: consumer_price_index
       bigquery_type: float64
       description: Consumer price index
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1262,13 +1279,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: exchange_rate
       bigquery_type: float64
       description: Exchange rate, USD per national currency
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1277,13 +1294,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
-    - name: effective_exchange_rate
+      is_in_staging: True
+      is_partition: False
+    - name: nominal_effective_exchange_rate
       bigquery_type: float64
       description: Nominal effective exchange rate, chain-linked, overall weights
       temporal_coverage:
-          - 1970(1)2019
+          - 1970(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1292,13 +1309,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: real_effective_exchange_rate
       bigquery_type: float64
       description: Real effective exchange rate, constant trade weights
       temporal_coverage:
-          - 1995(1)2019
+          - 1995(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1307,58 +1324,58 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: total_employment
       bigquery_type: float64
       description: Total employment
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: government_employment
       bigquery_type: float64
-      description: Government employment
+      description: Government Employment
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: labor_force
       bigquery_type: float64
       description: Labour force
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
-      measurement_unit:
+      measurement_unit: person
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: unemployment_rate
       bigquery_type: float64
       description: Unemployment rate
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1367,13 +1384,13 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: export
       bigquery_type: float64
       description: Exports of goods and services, value
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1382,13 +1399,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: import
       bigquery_type: float64
       description: Imports of goods and services, value
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1397,13 +1414,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: deflator_export
       bigquery_type: float64
       description: Deflator, exports of goods and services
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1412,13 +1429,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: deflator_import
       bigquery_type: float64
       description: Deflator, imports of goods and services
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1427,13 +1444,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
-    - name: deflator_gdp
+      is_in_staging: True
+      is_partition: False
+    - name: deflator_gross_domestic_product
       bigquery_type: float64
-      description: Deflator, GDP
+      description: Deflator, Gross Domestic Product
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1442,13 +1459,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: government_fixed_capital_formation
       bigquery_type: float64
       description: Government fixed capital formation, value, appropriation account
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1457,13 +1474,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: capital_transfers
       bigquery_type: float64
       description: Capital Transfers paid and other capital payments, value
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1472,13 +1489,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: government_consumption_fixed_capital
       bigquery_type: float64
       description: Government consumption of fixed capital, value
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1487,13 +1504,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: capital_tax_transfers_receipts
       bigquery_type: float64
       description: Capital tax and transfers receipts, value
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1502,13 +1519,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: term_trade
       bigquery_type: float64
       description: Terms of trade
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1517,13 +1534,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: trade_openness_ratio
       bigquery_type: float64
       description: Trade openness ratio
       temporal_coverage:
-          - 1960(1)2019
+          - 1960(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1532,13 +1549,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: primary_total_expenditure_adjustred
       bigquery_type: float64
       description: Cyclically-adjusted primary total expenditure
       temporal_coverage:
-          - 1985(1)2019
+          - 1985(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1547,13 +1564,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: total_expenditure_adjusted
       bigquery_type: float64
       description: Cyclically-adjusted total expenditure
       temporal_coverage:
-          - 1985(1)2019
+          - 1985(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1562,13 +1579,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: total_receipt_adjusted
       bigquery_type: float64
       description: Cyclically-adjusted total receipts
       temporal_coverage:
-          - 1985(1)2019
+          - 1985(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1577,13 +1594,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: primary_total_receipt_adjusted
       bigquery_type: float64
       description: Cyclically-adjusted primary total receipts
       temporal_coverage:
-          - 1985(1)2019
+          - 1985(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -1592,8 +1609,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_labor_policy_active
       bigquery_type: float64
       description: Public expenditure in active labour market policy measures
@@ -1607,8 +1624,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_labor_policy_passive
       bigquery_type: float64
       description: Public expenditure in passive labour market policy measures
@@ -1622,8 +1639,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: size_municipalities
       bigquery_type: float64
       description: Size of municipalities
@@ -1637,8 +1654,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: share_women_parliament
       bigquery_type: float64
       description: Share of women parliamentarians
@@ -1652,8 +1669,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: share_women_minister
       bigquery_type: float64
       description: Share of women ministers
@@ -1667,8 +1684,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: government_confidence
       bigquery_type: float64
       description: Confidence in national government
@@ -1682,8 +1699,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: rule_of_law_limited_power
       bigquery_type: float64
       description: Rule of law, Limited government powers
@@ -1697,8 +1714,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: rule_of_law_rights
       bigquery_type: float64
       description: Rule of law, Fundamental rights
@@ -1712,8 +1729,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: expenditure_health_pc
       bigquery_type: float64
       description: Public health expenditure per capita
@@ -1727,8 +1744,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: judicial_confidence
       bigquery_type: float64
       description: Citizens confidence with the judicial system
@@ -1742,8 +1759,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: rule_of_law_justice_enforcement
       bigquery_type: float64
       description: Rule of law, Civil justice, Civil justice is effectively enforced
@@ -1757,8 +1774,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: rule_of_law_justice_government_influence
       bigquery_type: float64
       description: Rule of law, Civil justice, Civil justice is free of improper government
@@ -1773,11 +1790,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: index_ourdata
       bigquery_type: float64
-      description: 'OURdata Index: Open, Useful, Reusable Government Data'
+      description: OURdata Index- Open, Useful, Reusable Government Data
       temporal_coverage:
           - 2017(1)2017
       covered_by_dictionary: no
@@ -1788,8 +1805,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: internet_interaction_authoriries
       bigquery_type: float64
       description: Individuals using the internet to interact with public authorities
@@ -1804,8 +1821,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: average_income_tax_rate
       bigquery_type: float64
       description: Average income tax rate, Single person at 100% of average earnings,
@@ -1820,8 +1837,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: average_employee_social_security_rate
       bigquery_type: float64
       description: Average rate of employees' social security contributions, Single
@@ -1836,8 +1853,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: average_employer_social_security_rate
       bigquery_type: float64
       description: Average rate of employer's social security contributions, Single
@@ -1852,8 +1869,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: average_income_social_security_rate
       bigquery_type: float64
       description: Average rate of income tax and employees' social security contributions,
@@ -1868,8 +1885,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: net_personal_average_tax_rate
       bigquery_type: float64
       description: Net personal average tax rate, Single person at 100% of average
@@ -1884,8 +1901,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: average_tax_wedge
       bigquery_type: float64
       description: Average tax wedge, Single person at 100% of average earnings, no
@@ -1900,12 +1917,12 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: marginal_tax_wedge
       bigquery_type: float64
-      description: 'Marginal tax wedge: Principal earner, Single person at 100% of
-          average earnings, no child'
+      description: Marginal tax wedge, Principal earner, Single person at 100% of
+          average earnings, no child
       temporal_coverage:
           - 2000(1)2017
       covered_by_dictionary: no
@@ -1916,8 +1933,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: total_red_expenditure_intramural
       bigquery_type: float64
       description: Total R&D expenditure, total intra-mural
@@ -1931,8 +1948,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: total_red_expenditure_government
       bigquery_type: float64
       description: Total R&D expenditure, government, excluding higher education
@@ -1946,8 +1963,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: budget_aproppriation_red
       bigquery_type: float64
       description: Government budget appropriations on R&D
@@ -1961,8 +1978,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: basic_red_expenditure_intramural
       bigquery_type: float64
       description: Basic research R&D expenditure, total intra-mural
@@ -1976,8 +1993,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: basic_red_expenditure_government
       bigquery_type: float64
       description: Basic research R&D expenditure, government, excluding higher education
@@ -1991,8 +2008,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: female_labor_participation_rate
       bigquery_type: float64
       description: Female labour participation
@@ -2006,8 +2023,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: male_labor_participation_rate
       bigquery_type: float64
       description: Male labour participation
@@ -2021,8 +2038,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: fertility_rate
       bigquery_type: float64
       description: Fertility rate
@@ -2036,8 +2053,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: life_expectancy
       bigquery_type: float64
       description: Life expectancy at birth
@@ -2051,8 +2068,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: gini_disposable_income
       bigquery_type: float64
       description: Disposable income gini
@@ -2066,8 +2083,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: gini_market_income
       bigquery_type: float64
       description: Market income gini
@@ -2081,8 +2098,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: gini_government_income
       bigquery_type: float64
       description: Gross income gini
@@ -2096,8 +2113,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: poverty_rate
       bigquery_type: float64
       description: 'Poverty rate after taxes and transfers, poverty line 50% '
@@ -2111,11 +2128,12 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: pmr_market_regulation_indicator
       bigquery_type: float64
-      description: 'PMR:  Overall product market regulation indicator'
+      description: OECD Product Market Regulation Indicators -  Overall product market
+          regulation indicator
       temporal_coverage:
           - 1998(1)2013
       covered_by_dictionary: no
@@ -2126,11 +2144,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: pmr_state_control
       bigquery_type: float64
-      description: 'PMR: State control'
+      description: OECD Product Market Regulation Indicators - State control
       temporal_coverage:
           - 1998(1)2013
       covered_by_dictionary: no
@@ -2141,11 +2159,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: pmr_barriers_entrepeneurship
       bigquery_type: float64
-      description: 'PMR: Barriers to entrepreneurship'
+      description: OECD Product Market Regulation Indicators - Barriers to entrepreneurship
       temporal_coverage:
           - 1998(1)2013
       covered_by_dictionary: no
@@ -2156,11 +2174,12 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: pmr_barriers_trade_investment
       bigquery_type: float64
-      description: 'PMR: Barriers to trade and investment'
+      description: OECD Product Market Regulation Indicators - Barriers to trade and
+          investment
       temporal_coverage:
           - 1998(1)2013
       covered_by_dictionary: no
@@ -2171,8 +2190,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: employment_contract_protect_ex_collective_dismissal
       bigquery_type: float64
       description: Employment protection of regular contracts, excluding regulation
@@ -2187,8 +2206,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: employment_contract_protect_in_collective_dismissal
       bigquery_type: float64
       description: Employment protection of regular contracts, including regulation
@@ -2203,8 +2222,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: cabinet_right
       bigquery_type: float64
       description: Government composition - cabinet posts of right wing parties in
@@ -2218,9 +2237,9 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: 'Source: CPDS'
-      is_in_staging:
-      is_partition:
+      observations: Source - CPDS
+      is_in_staging: True
+      is_partition: False
     - name: cabinet_center
       bigquery_type: float64
       description: Government composition - cabinet posts of center parties in percentage
@@ -2234,9 +2253,9 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: 'Source: CPDS'
-      is_in_staging:
-      is_partition:
+      observations: Source - CPDS
+      is_in_staging: True
+      is_partition: False
     - name: cabinet_left
       bigquery_type: float64
       description: Government composition - cabinet posts of left wing parties in
@@ -2250,9 +2269,9 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: 'Source: CPDS'
-      is_in_staging:
-      is_partition:
+      observations: Source - CPDS
+      is_in_staging: True
+      is_partition: False
     - name: cabinet_composition
       bigquery_type: float64
       description: Cabinet composition
@@ -2265,9 +2284,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 'Source: CPDS'
-      is_in_staging:
-      is_partition:
+      observations: Source - CPDS
+      is_in_staging: True
+      is_partition: False
     - name: cabinet_ideological_composition
       bigquery_type: float64
       description: New ideological composition of cabinet
@@ -2280,9 +2299,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 'Source: CPDS'
-      is_in_staging:
-      is_partition:
+      observations: Source - CPDS
+      is_in_staging: True
+      is_partition: False
     - name: cabinet_ideological_gap
       bigquery_type: float64
       description: ‘Ideological gap’ between new and old cabinets
@@ -2295,9 +2314,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 'Source: CPDS'
-      is_in_staging:
-      is_partition:
+      observations: Source - CPDS
+      is_in_staging: True
+      is_partition: False
     - name: government_change
       bigquery_type: float64
       description: Number of changes in government per year
@@ -2310,9 +2329,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 'Source: CPDS'
-      is_in_staging:
-      is_partition:
+      observations: Source - CPDS
+      is_in_staging: True
+      is_partition: False
     - name: election_turnout
       bigquery_type: float64
       description: Voter turnout in election
@@ -2325,14 +2344,14 @@ columns:
           column_name:
       measurement_unit: percent
       has_sensitive_data: no
-      observations: 'Source: CPDS'
-      is_in_staging:
-      is_partition:
+      observations: Source - CPDS
+      is_in_staging: True
+      is_partition: False
     - name: budget_perspective_medium term
       bigquery_type: float64
       description: Use of medium term perspective in budget process
       temporal_coverage:
-          - 1947(1)2019
+          - 1947(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2341,13 +2360,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: performance_budget
       bigquery_type: float64
       description: perfomance budget
       temporal_coverage:
-          - 1947(1)2019
+          - 1947(1)
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2356,8 +2375,8 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: government_capital_stock
       bigquery_type: float64
       description: General government capital stock in billions of constant 2011 international
@@ -2371,10 +2390,10 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 'Source:  IMF'
-      is_in_staging:
-      is_partition:
-    - name: ppp_capital_stock
+      observations: Source -  IMF
+      is_in_staging: True
+      is_partition: False
+    - name: public_private_partnership_capital_stock
       bigquery_type: float64
       description: Public-private partnership (PPP) capital stock in billions of constant
           2011 international dollars
@@ -2387,9 +2406,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 'Source:  IMF'
-      is_in_staging:
-      is_partition:
+      observations: Source -  IMF
+      is_in_staging: True
+      is_partition: False
     - name: corporate_income_tax_rate
       bigquery_type: float64
       description: Corporate income tax, statutory rate
@@ -2403,8 +2422,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: vat_rate
       bigquery_type: float64
       description: VAT statutory rate
@@ -2418,8 +2437,8 @@ columns:
       measurement_unit: percent
       has_sensitive_data: no
       observations:
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: voice_accountability
       bigquery_type: float64
       description: Voice accountability
@@ -2432,9 +2451,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 'Source: WGI'
-      is_in_staging:
-      is_partition:
+      observations: Source - WGI
+      is_in_staging: True
+      is_partition: False
     - name: regulatory_quality
       bigquery_type: float64
       description: Regulatory quality
@@ -2447,9 +2466,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 'Source: WGI'
-      is_in_staging:
-      is_partition:
+      observations: Source - WGI
+      is_in_staging: True
+      is_partition: False
     - name: rule_of_law
       bigquery_type: float64
       description: Rule of law
@@ -2462,9 +2481,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 'Source: WGI'
-      is_in_staging:
-      is_partition:
+      observations: Source - WGI
+      is_in_staging: True
+      is_partition: False
     - name: political_stability
       bigquery_type: float64
       description: Political stability
@@ -2477,9 +2496,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 'Source: WGI'
-      is_in_staging:
-      is_partition:
+      observations: Source - WGI
+      is_in_staging: True
+      is_partition: False
     - name: government_effectiveness
       bigquery_type: float64
       description: Government effectiveness
@@ -2492,9 +2511,9 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 'Source: WGI'
-      is_in_staging:
-      is_partition:
+      observations: Source - WGI
+      is_in_staging: True
+      is_partition: False
     - name: corruption_control
       bigquery_type: float64
       description: Control of corruption
@@ -2507,12 +2526,12 @@ columns:
           column_name:
       measurement_unit:
       has_sensitive_data: no
-      observations: 'Source: WGI'
-      is_in_staging:
-      is_partition:
+      observations: Source - WGI
+      is_in_staging: True
+      is_partition: False
     - name: indicator_fiscal_rule_expenditure
       bigquery_type: int64
-      description: 'Fiscal rule: Expenditure rule'
+      description: Fiscal rule - Expenditure rule
       temporal_coverage:
           - 1985(1)2015
       covered_by_dictionary: no
@@ -2523,11 +2542,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 1=rule exists, 0=no rule
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: indicator_fiscal_rule_revenue
       bigquery_type: int64
-      description: 'Fiscal rule: Revenue rule'
+      description: Fiscal rule - Revenue rule
       temporal_coverage:
           - 1985(1)2015
       covered_by_dictionary: no
@@ -2538,11 +2557,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 1=rule exists, 0=no rule
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: indicator_fiscal_rule_balance
       bigquery_type: int64
-      description: 'Fiscal rule: Budget balance rule'
+      description: Fiscal rule - Budget balance rule
       temporal_coverage:
           - 1985(1)2015
       covered_by_dictionary: no
@@ -2553,11 +2572,11 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 1=rule exists, 0=no rule
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: indicator_fiscal_rule_debt
       bigquery_type: int64
-      description: 'Fiscal rule: Debt rule'
+      description: Fiscal rule - Debt rule
       temporal_coverage:
           - 1985(1)2015
       covered_by_dictionary: no
@@ -2568,13 +2587,13 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 1=rule exists, 0=no rule
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
     - name: indicator_fiscal_council
       bigquery_type: int64
       description: Fiscal council
       temporal_coverage:
-          - 1945(1)2015
+          - (1)2015
       covered_by_dictionary: no
       directory_column:
           dataset_id:
@@ -2583,9 +2602,9 @@ columns:
       measurement_unit:
       has_sensitive_data: no
       observations: 1=fiscal council exists, 0=no fiscal council
-      is_in_staging:
-      is_partition:
+      is_in_staging: True
+      is_partition: False
 
-number_rows: 2646
+number_rows:
 
 metadata_modified:

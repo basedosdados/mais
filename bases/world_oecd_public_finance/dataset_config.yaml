@@ -15,7 +15,7 @@ title: OECD Public Finance Dataset
 organization: world-oecd
 
 # Descrição do conjunto
-notes: Base criada com base em metodologia elaborada por Bloch, Fournier, Gonçalves e Pina (2016) no âmbito da OCDE que compila e compatibiliza dados de várias fontes de modo a criar um painel cross-country com dados sobre finanças públicas, bem como indicadores econômicos e políticos estruturais.
+notes: Dataset created based on a methodology developed by OECD researchers Bloch, Fournier, Gonçalves and Pina (2016) which combines and makes compatible data from various sources with the aim of creating a cross-country panel about public finance.
 
 # Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
@@ -37,7 +37,7 @@ groups:
 #    - sempre no singular
 #    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - finan\u00e7as p\u00fablicas
+    - financas publicas
     - politica fiscal
     - taxacao
     - imposto
