@@ -223,7 +223,7 @@ columns:
           column_name: sigla
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: Os dados originais anonimizados pela ANS fornecem informações onde a sigla_uf="XX"
       is_in_staging: true
       is_partition: false
     - name: id_municipio_6
@@ -238,7 +238,7 @@ columns:
           column_name: id_municipio_6
       measurement_unit:
       has_sensitive_data: no
-      observations:
+      observations: Os dados originais anonimizados pela ANS fornecem informações onde o id_municipio_6="-1"
       is_in_staging: true
       is_partition: false
     - name: sexo
