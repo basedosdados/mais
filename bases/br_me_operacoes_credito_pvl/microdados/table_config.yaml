@@ -48,12 +48,6 @@ update_frequency: day
 #       columns:
 #           - sigla_uf
 observation_level:
-  - entity: year
-    columns:
-        - ano
-  - entity: month
-    columns:
-        - mes
   - entity: day
     columns:
         - data
@@ -61,10 +55,6 @@ observation_level:
     entity: state
     columns:
         - sigla_uf
-        - id_estado
-    entity: municipality   
-    columns:
-        - id_municipio
 
 last_updated:
     metadata: '2023-03-31'
@@ -170,7 +160,7 @@ columns:
           - (1)
       covered_by_dictionary: no
       directory_column:
-          dataset_id: br_bd_diretorio_data_tempo
+          dataset_id: br_bd_diretorios_data_tempo
           table_id: data
           column_name: data
       measurement_unit:

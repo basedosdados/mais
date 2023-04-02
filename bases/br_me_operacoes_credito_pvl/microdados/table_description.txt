@@ -1,0 +1,48 @@
+Dados sobre a análise da contratação de crédito por Estados, Municípios, Distrito Federal e empresas estatais feitos por meio de pedidos de verificação de limites e condições (PVL)
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: André Alvarenga Guimarães
+Código: 
+Email: andre.alvguim@gmail.com
+Tratado por
+-----------
+Nome: André Alvarenga Guimarães
+Código: 
+Email: andre.alvguim@gmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2008(1)2021
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Os dados foram baixados do site do Tesouro Federal. As colunas foram renomeadas para colunas de acordo com a formatação da BD. As colunas com string, int e date foram formatadas para o modelo ideal. Foram criadas três colunas que não existiam anteriormente ano, mes e id_estado. A coluna id_estado foi criada porque anteriormente a coluna id_municipio armazenava o id dos municípios e dos estados.
+
+
+
+Frequencia de Atualização
+-------------------------
+day

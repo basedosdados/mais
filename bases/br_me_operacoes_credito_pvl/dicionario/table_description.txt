@@ -1,0 +1,46 @@
+Dicionário da Análise de Operações de Crédito entre Estados e Municípios
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: André Alvarenga Guimarães
+Código: 
+Email: andre.alvguim@gmail.com
+Tratado por
+-----------
+Nome: André Alvarenga Guimarães
+Código: 
+Email: andre.alvguim@gmail.com
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+
+
+
+
+Cobertura Espacial
+------------------
+
+
+
+
+Tratamento
+----------
+Dicionário foi feito a mão porque eram muito poucos tipos que precisavam de ser registrados
+
+
+
+Frequencia de Atualização
+-------------------------
+uncertain
