@@ -129,7 +129,7 @@ if __name__ == '__main__':
         for state_path in host_list(month_path):
             state = state_path.split("_")[-1].split(".")[0]
 
-            output_path = Path('../output') / f'ano={month_date.strftime("%Y")}' / f'mes={month_date.strftime("%m")}' / f'state={state}' / f'ben{month_date.strftime("%Y%m")}.parquet'
+            output_path = Path('../output') / f'ano={month_date.strftime("%Y")}' / f'mes={month_date.strftime("%m")}' / f'sigla_uf={state}' / f'ben{month_date.strftime("%Y%m")}-{state}.parquet'
 
             if output_path.exists():
                 logger.info(f"Jumping path {output_path}. Already download")
@@ -160,4 +160,4 @@ if __name__ == '__main__':
             del df['mes']
 
             logger.info(f"Writing to output {output_path.as_posix()}")
-            df.to_parquet(output_path)
+            df.to_parquet(output_path, index=False)
