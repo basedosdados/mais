@@ -1,59 +1,73 @@
-
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
 dataset_id: br_bd_diretorios_brasil
 
 table_id: municipio
+
+# Título da tabela.
+title: Municípios 
 
 # Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
 # Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
 # como usar os dados.
 # Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
-description: "Diretório ligando diversos códigos institucionais de municípios brasileiros:\
-    \ IBGE, Receita Federal, TSE, BCB, regiões, comarcas, região de saúde, etc.\n"
+description: "Diretório ligando diversos códigos institucionais de municípios brasileiros: IBGE, Receita Federal, TSE, BCB, regiões, comarcas, região de saúde, etc."
 
-# A máxima unidade espacial que a tabela cobre.
-spatial_coverage: bra
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#    - sa.br
+#  
+#    - sa.br.sp
+#  
+#    - world
+spatial_coverage:
+    - sa.br
 
 # Anos cobertos pela tabela.
-# Preencher como lista de intervalos.
-# Exemplo: 1995(1)2019.
-temporal_coverage:
+# Exemplos:
+#     - 1995(1)2019
+# Caso a cobertura não seja contínua:
+#     - 2002(2)2010
+#     - 2016
+#     - 2020
+temporal_coverage: 
 
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: recurring
 
-# Entidade representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-entity:
-    - municipality
-
-# A unidade temporal representada por cada linha.
-# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
-time_unit:
-
-# O conjunto mínimo de colunas identificando cada linha unicamente.
-# Preencha com os nomes de colunas.
-# Exemplos: id_municipio, ano.
-# Pode ser vazio pois certas tabelas não possuem identificadores.
-identifying_columns:
-    - id_municipio
+# Nível de observação da tabela: o que representa cada linha.
+# A combinação das colunas aqui deve construir uma chave única da tabelaOpções de entity em 'https://basedosdados.org/api/3/action/bd_available_options'
+# Caso a entidade seja espacial incluir a informação de 'country' Exemplos:
+#     - entity: year
+#       columns:
+#           - ano
+#     - country: br
+#       entity: state
+#       columns:
+#           - sigla_uf
+observation_level:
+    - country: br
+      entity: municipality
+      column:
+          - id_municipio
 
 last_updated:
-    metadata:
-    data:
-    release:
+    metadata: '2023-04-03'
+    data: '2023-04-03 16:40:35'
+    release: '2023-04-03 16:40:35'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
-# Exemplo: v1.1.3
-version: 1.1.3
+# Exemplos: v1.0, v1.1.3
+version: 1.1.4
 
 # Quem está preenchendo esses metadados?
 published_by:
-    name: Ricardo Dahis
-    email: rdahis@basedosdados.org
+    name: Gabriel Pisa
+    email: gabriel.pisa@basedosdados.org
     github_user:
-    website: www.ricardodahis.com
     ckan_user:
+    website: 
 
 # Qual organização/departamento/pessoa tratou os dados?
 # As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
@@ -64,11 +78,18 @@ data_cleaned_by:
     github_user:
     ckan_user:
     website:
-    code_url: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
 data_cleaning_description: "- Fizemos o cruzamento e checagem dos códigos (1) manualmente\
     \ e (2) checando com string matching.\n- Dados de comarcas fornecidos pelo Ipea.\n"
+
+# Url do código de limpeza dos dados do github.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name: 
+    organization_id: 
 
 # Url dos dados originais no GCP Storage.
 raw_files_url:
@@ -78,10 +99,6 @@ auxiliary_files_url:
 
 # Url da tabela de arquitetura no GCP Storage.
 architecture_url:
-
-# A tabela tem colunas que precisam de dicionário?
-# Opções: yes, no.
-covered_by_dictionary:
 
 source_bucket_name: basedosdados-dev
 
@@ -93,317 +110,338 @@ project_id_staging: basedosdados-dev
 # Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
 # Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
 # Se não houver partições, não modifique abaixo.
-partitions:
-
-bdm_file_size:
+partitions: 
 
 # Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
 # para saber sobre o que é a coluna.
 # Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
 # inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
 # preencherá automaticamente as colunas.
-# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
-# Para esses, defina is_in_staging como False.
 # Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
 columns:
     - name: id_municipio
       bigquery_type: string
       description: ID Município - IBGE 7 Dígitos
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio_6
       bigquery_type: string
       description: ID Município - IBGE 6 Dígitos
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio_tse
       bigquery_type: string
       description: ID Município - Tribunal Superior Eleitoral (TSE)
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio_rf
       bigquery_type: string
       description: ID Município - Receita Federal (RF)
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_municipio_bcb
       bigquery_type: string
       description: ID Município - Banco Central do Brasil (BCB)
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome
       bigquery_type: string
       description: Nome do Município
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: capital_uf
       bigquery_type: int64
       description: Município é a Capital da Unidade da Federação
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_comarca
       bigquery_type: string
       description: ID Sede Comarca
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_regiao_saude
       bigquery_type: string
       description: ID Região de Saúde
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome_regiao_saude
       bigquery_type: string
       description: Nome da Região de Saúde
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_regiao_imediata
       bigquery_type: string
       description: ID Região Imediata - IBGE
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome_regiao_imediata
       bigquery_type: string
       description: Nome da Região Imediata
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_regiao_intermediaria
       bigquery_type: string
       description: ID Região Intermediária - IBGE
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome_regiao_intermediaria
       bigquery_type: string
       description: Nome da Região Intermediária
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_microrregiao
       bigquery_type: string
       description: ID Microrregião - IBGE
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome_microrregiao
       bigquery_type: string
       description: Nome da Microrregião
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_mesorregiao
       bigquery_type: string
       description: ID Mesorregião - IBGE
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome_mesorregiao
       bigquery_type: string
       description: Nome da Mesorregião
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: ddd
       bigquery_type: string
       description: Código de Discagem Direta a Distância (DDD)
       temporal_coverage:
-      covered_by_dictionary:
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: id_uf
       bigquery_type: string
       description: ID da Unidade da Federação - IBGE
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: sigla_uf
       bigquery_type: string
       description: Sigla da Unidade da Federação
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: yes
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome_uf
       bigquery_type: string
       description: Nome da Unidade da Federação
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
     - name: nome_regiao
       bigquery_type: string
       description: Nome da Grande Região Brasileira
-      temporal_coverage:
-      covered_by_dictionary:
+      temporal_coverage: 
+      covered_by_dictionary: no
       directory_column:
           dataset_id:
           table_id:
           column_name:
       measurement_unit:
-      has_sensitive_data:
+      has_sensitive_data: no
+      observations:
       is_in_staging: true
       is_partition: false
 
-metadata_modified: '2022-02-09T21:03:24.793940'
+number_rows: 5570
+
+metadata_modified: '2022-11-15T19:23:19.012076'
