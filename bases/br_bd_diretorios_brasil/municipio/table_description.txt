@@ -1,6 +1,5 @@
 Diretório ligando diversos códigos institucionais de municípios brasileiros: IBGE, Receita Federal, TSE, BCB, regiões, comarcas, região de saúde, etc.
 
-
 Para saber mais acesse:
 Website: 
 Github: 
@@ -10,22 +9,16 @@ Apoia-se: https://apoia.se/basedosdados
 
 Publicado por
 -------------
-Nome: Ricardo Dahis
+Nome: Gabriel Pisa
 Código: 
-Website: www.ricardodahis.com
-Email: rdahis@basedosdados.org
+Email: gabriel.pisa@basedosdados.org
 Tratado por
 -----------
 Nome: Ricardo Dahis
-Código: https://github.com/basedosdados/mais/tree/master/bases/br_basedosdados_diretorios_brasil/code
+Código: 
 Email: rdahis@basedosdados.org
 
 
-
-
-Colunas identificando linhas unicamente
--------------------
-- id_municipio
 
 
 
@@ -38,9 +31,7 @@ Cobertura Temporal
 
 Cobertura Espacial
 ------------------
-- b
-- r
-- a
+- sa.br
 
 
 
