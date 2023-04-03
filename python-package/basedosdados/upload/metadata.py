@@ -7,21 +7,13 @@ from __future__ import annotations
 import json
 
 from copy import deepcopy
-from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
 from typing import Tuple, Dict, Any, List
 
 from loguru import logger
 
-from ckanapi.errors import NotAuthorized, ValidationError
-from ruamel.yaml.comments import CommentedMap
-from ruamel.yaml.compat import ordereddict
-import ruamel.yaml as ryaml
-
-from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.base import Base
-from basedosdados.upload.remoteapi import RemoteAPI
 
 
 class Metadata(Base):
@@ -64,24 +56,6 @@ class Metadata(Base):
             return []
 
         return [node["node"].get(key) for _, nodes in edge.items() for node in nodes]
-
-    @property
-    def filepath(self) -> Path:
-        """Build the dataset or table filepath"""
-
-        filename = "dataset_config.yaml"
-        if self.table_id:
-            filename = f"{self.table_id}/table_config.yaml"
-        return self.metadata_path / self.dataset_id / filename
-
-    @property
-    def local_metadata(self) -> dict:
-        """Load dataset or table local metadata"""
-
-        if self.filepath.exists():
-            with open(self.filepath, "r", encoding="utf-8") as file:
-                return ryaml.safe_load(file.read())
-        return {}
 
     @property
     def api_metadata(self) -> dict:
