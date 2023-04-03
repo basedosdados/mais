@@ -5,12 +5,7 @@ Class to manage the metadata of datasets and tables
 # pylint: disable=fixme, invalid-name, redefined-builtin, too-many-arguments, undefined-loop-variable, too-many-lines
 from __future__ import annotations
 
-import json
-
-from copy import deepcopy
-from functools import lru_cache
-from pathlib import Path
-from typing import Tuple, Dict, Any, List
+from typing import Dict, Any, List
 
 from loguru import logger
 
@@ -107,7 +102,7 @@ class Metadata(Base):
 #     def __init__(self):
 #         self.prop2 = 2
 #         self.__dict = self.get()
-        
+
 #     def __getattr__(self, name):
 #         return self.__dict[name]
 
@@ -115,6 +110,6 @@ class Metadata(Base):
 #     def     self):
 #         self.__dict['publish_sql']
 #         return "olá"
-        
+
 #     def get(self):
 #         return dict(publish_sql = "oi", prop1 = 1)
