@@ -5,28 +5,15 @@ Class to manage the metadata of datasets and tables
 # pylint: disable=fixme, invalid-name, redefined-builtin, too-many-arguments, undefined-loop-variable, too-many-lines
 from __future__ import annotations
 
+import json
+import requests
 from typing import Dict, Any, List
 
 from loguru import logger
 
+from basedosdados.exceptions import BaseDosDadosException
 from basedosdados.upload.base import Base
-
-# class Metadata:
-
-#     def __init__(self):
-#         self.prop2 = 2
-#         self.__dict = self.get()
-
-# def __getattr__(self, name):
-#     return self.__dict[name]
-
-#     @property
-#     def     self):
-#         self.__dict['publish_sql']
-#         return "olá"
-
-#     def get(self):
-#         return dict(publish_sql = "oi", prop1 = 1)
+import pwinput
 
 
 class Metadata(Base):
@@ -34,49 +21,91 @@ class Metadata(Base):
     Manage metadata in CKAN backend.
     """
 
-    def __init__(self, dataset_id, table_id=None, **kwargs):
+    def __init__(self, dataset_id, table_id=None, base_url=None, **kwargs):
         super().__init__(**kwargs)
-
-        self.dataset_uuid = self._get_dataset_id_from_slug(dataset_id)
-        self.table_uuid = self._get_table_id_from_slug(dataset_id, table_id)
 
         self.table_id = table_id
         self.dataset_id = dataset_id
 
-    def publish_sql(self):
+        self.url_graphql = base_url or f"{self.base_url}/api/v1/graphql"
+        self.dataset_uuid = self._get_dataset_id_from_slug(dataset_slug=dataset_id)
+        if table_id is not None:
+            self.table_uuid = self._get_table_id_from_slug(
+                dataset_slug=dataset_id, table_slug=table_id
+            )
+        else:
+            self.table_uuid = None
 
-        return True
+    def _get_graphql(self, query: str, variables: dict, headers: dict = None) -> dict:
+        if headers is None:
+            headers = {}
+        graphql_json = {"query": query, "variables": variables}
+        response = requests.post(
+            self.url_graphql, headers=headers, json=graphql_json, timeout=90
+        ).json()
 
-    def schema_pro_bq(self):
+        if "errors" in response:
+            logger.error(response["errors"])
 
-        return True
+        return response.get("data", {})
 
-    def table_description(self):
+    def _get_id_from_slug(self, query, variables):
+        response = self._get_graphql(query, variables)
+        dataset_edges = response["allDataset"]["edges"]
 
-        return True
+        if not dataset_edges:
+            raise BaseDosDadosException(f"Dataset {variables['slug']} not found")
 
-    def dataset_description(self):
+        dataset_node = dataset_edges[0]["node"]
 
-        return True
+        if not variables.get("table_slug", None):
+            return dataset_node["_id"]
 
-    def _get_nodes_from_edges(
-        self,
-        key: str,
-        edge: Dict[str, Any],
-    ) -> List[dict]:
+        table_edges = dataset_node["tables"]["edges"]
+
+        if not table_edges:
+            raise BaseDosDadosException(
+                f"Table {variables['table_slug']} not found in dataset {variables['dataset_slug']}"
+            )
+
+        return table_edges[0]["node"]["_id"]
+
+    def _get_dataset_id_from_slug(self, dataset_slug):
+        query = """
+            query ($slug: String!){
+              allDataset(slug: $slug) {
+                edges {
+                  node {
+                    _id,
+                  }
+                }
+              }
+            }
         """
-        Helper function to get nodes from edges and return a list
-        of nodes with the given key.
-        Args:
-            key (str): Key to get from nodes.
-            edge (Dict[str, Any]): Edge to get nodes from.
-        Returns:
-            List[dict]: List of nodes with the given key.
-        """
-        if not edge or not key:
-            return []
+        variables = {"slug": dataset_slug}
+        return self._get_id_from_slug(query, variables)
 
-        return [node["node"].get(key) for _, nodes in edge.items() for node in nodes]
+    def _get_table_id_from_slug(self, dataset_slug, table_slug):
+        query = """
+            query ($dataset_slug: String!, $table_slug: String!){
+                allDataset(slug: $dataset_slug) {
+                    edges {
+                        node {
+                            _id,
+                            tables(slug: $table_slug) {
+                                edges {
+                                    node {
+                                        _id,
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        """
+        variables = {"dataset_slug": dataset_slug, "table_slug": table_slug}
+        return self._get_id_from_slug(query, variables)
 
     def exists(self) -> bool:
         """Check if Metadata object refers to an existing dataset or table.
@@ -88,24 +117,24 @@ class Metadata(Base):
             t exists, `False` otherwise.
         """
         query = """
-            query ($dataset_id: String!, $table_id: String) {
-              allDataset(slug: $dataset_id) {
-                edges {
-                  node {
-                    id
-                    namePt
-                    tables (slug: $table_id) {
-                      edges {
-                        node {
-                          id
+              query ($dataset_id: String!, $table_id: String) {
+                allDataset(slug: $dataset_id) {
+                  edges {
+                    node {
+                      id
+                      namePt
+                      tables (slug: $table_id) {
+                        edges {
+                          node {
+                            id
+                          }
                         }
                       }
                     }
                   }
                 }
               }
-            }
-        """
+          """
         variables = {"dataset_id": self.dataset_id, "table_id": self.table_id}
 
         response = self._get_graphql(query, variables)

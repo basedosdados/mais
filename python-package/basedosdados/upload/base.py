@@ -2,6 +2,7 @@
 Module for manage dataset using local credentials and config files
 """
 from datetime import datetime
+
 # pylint: disable=line-too-long, invalid-name, too-many-arguments, invalid-envvar-value,line-too-long
 from pathlib import Path
 import sys
@@ -12,7 +13,6 @@ import base64
 import json
 from functools import lru_cache
 
-from basedosdados.exceptions import BaseDosDadosException
 from google.cloud import bigquery, storage
 from google.oauth2 import service_account
 from loguru import logger
@@ -20,7 +20,6 @@ import yaml
 from jinja2 import Template
 import tomlkit
 import requests
-import pwinput
 
 from basedosdados.constants import config, constants
 
@@ -50,7 +49,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
             else Path.home() / config_path
         )
 
-        self.config_path =  config_path
+        self.config_path = config_path
         self._init_config(force=overwrite_cli_config)
         self.config = self._load_config()
         self._config_log(config.verbose)
@@ -61,11 +60,6 @@ class Base:  # pylint: disable=too-many-instance-attributes
         self.uri = f"gs://{self.bucket_name}" + "/staging/{dataset}/{table}/*"
 
         self.base_url = self.config["api"]["url"]
-        self.username = self.config["api"]["username"]
-        self.token_file = Path(self.config_path) / ".token.json"
-
-        self.graphql_queries_path = Path(__file__).parent.parent / "queries"
-        self.api_graphql = self.base_url + "/api/v1/graphql#query"
 
     @staticmethod
     def _decode_env(env: str) -> str:
@@ -371,9 +365,7 @@ class Base:  # pylint: disable=too-many-instance-attributes
         if getenv(constants.ENV_CONFIG.value):
             return tomlkit.parse(self._decode_env(constants.ENV_CONFIG.value))
         return tomlkit.parse(
-            (self.config_path / "config.toml")
-            .open("r", encoding="utf-8")
-            .read()
+            (self.config_path / "config.toml").open("r", encoding="utf-8").read()
         )
 
     @staticmethod
@@ -428,238 +420,3 @@ class Base:  # pylint: disable=too-many-instance-attributes
             (Path(__file__).resolve().parents[1] / "configs" / "templates"),
             (self.config_path / "templates"),
         )
-
-    def _get_graphql(
-            self,
-            query: str = None,
-            variables: dict = None,
-            headers: dict = None
-    ) -> dict:
-        """
-        Gets the graphql object
-        Args:
-            query: the query to be used
-            variables: the variables to be used
-        Returns:
-            dict: the graphql response
-        """
-        if headers is None:
-            headers = {}
-        graphql_json = {"query": query, "variables": variables}
-        response = requests.post(
-            self.api_graphql,
-            headers=headers,
-            json=graphql_json,
-            timeout=90
-        ).json()
-        # FIXME when a error raises it is cleaning local metadata
-        if "errors" in response:
-            logger.error(response["errors"])
-
-        if "data" not in response:
-            return {}
-
-        return self._simplify_graphql_response(response["data"])
-
-    def _simplify_graphql_response(self, response: dict) -> dict:
-        """
-        Simplify the graphql response
-        Args:
-            response: the graphql response
-        Returns:
-            dict: the simplified graphql response
-        """
-        if response == {}:  # pragma: no cover
-            return {}
-
-        output_ = {}
-
-        for key in response:
-            try:
-                if isinstance(response[key], dict) and response[key].get("edges") is not None:
-                    output_[key] = [v.get("node") for v in list(map(self._simplify_graphql_response, response[key]["edges"]))]
-                elif isinstance(response[key], dict):
-                    output_[key] = self._simplify_graphql_response(response[key])
-                else:
-                    output_[key] = response[key]
-            except TypeError as e:
-                logger.error(f"Erro({e}): {key} - {response[key]}")
-        return output_
-
-    def load_token(self) -> dict:
-        """Load token from configuration file of the user"""
-        if not self.token_file.exists():
-            return {"access": ""}
-        with open(self.token_file) as f:
-            token = json.load(f)
-        return token
-
-    def save_token(self, token) -> None:
-        """Save token to configuration file of the user"""
-        with open(self.token_file, "w") as f:
-            json.dump(token, f)
-
-    def get_token(self, username, password=None) -> dict:
-        """
-        Get token using username and password passed via CLI
-        Args:
-            username: username
-            password: password
-        Returns:
-            dict: token
-        """
-        if password is None:
-            password = pwinput.pwinput("Password: ")
-
-        query = '''
-            mutation tokenAuth($username: String!, $password: String!) {
-                tokenAuth(
-                    username: $username, 
-                    password: $password
-                ) {
-                    payload,
-                    refreshExpiresIn,
-                    token
-                }
-            }
-        '''
-        variables = {"username": username, "password": password}
-        r = requests.post(
-            self.api_graphql,
-            headers={"Content-Type": "application/json"},
-            json={"query": query, "variables": variables},
-            timeout=90
-        )
-        r.raise_for_status()
-        return {"access": r.json()["data"]["tokenAuth"]["token"]}
-
-    def refresh_token(self, token: dict) -> dict:
-        """
-        If token is expired, refresh it
-        """
-        query = '''
-            mutation refreshToken($token: String!) {
-                refreshToken(token: $token) {
-                    payload,
-                    refreshExpiresIn,
-                    token
-                }
-            }
-        '''
-        variables = {"token": token["access"]}
-        r = requests.post(
-            self.api_graphql,
-            headers={"Content-Type": "application/json"},
-            json={"query": query, "variables": variables},
-            timeout=90
-        )
-        r.raise_for_status()
-        if "errors" in r.json():
-            message = r.json()["errors"][0]["message"]
-            raise BaseDosDadosException(
-                F"{message}. You must login again. "
-            )
-        return {"access": r.json()["data"]["refreshToken"]["token"]}
-
-    def verify_token(self, token) -> bool:
-        """Verify if token is valid using unix timestamp"""
-        if token == "":
-            return False
-        query = '''
-            mutation verifyToken($token: String!) {
-                verifyToken(token: $token) {
-                    payload
-                }
-            }
-        '''
-        variables = {"token": token["access"]}
-        r = requests.post(
-            self.api_graphql,
-            headers={"Content-Type": "application/json"},
-            json={"query": query, "variables": variables},
-            timeout=90
-        )
-
-        current_datetime_unix = int(datetime.now().timestamp())
-        if "errors" in r.json():
-            return False
-        if current_datetime_unix > r.json()["data"]["verifyToken"]["payload"]["exp"]:
-            return False
-        return True
-
-    def _get_dataset_id_from_slug(self, dataset_slug):
-        """
-        Get dataset_id from dataset_slug
-        """
-        query = '''
-            query ($slug: String!){
-              allDataset(slug: $slug) {
-                edges {
-                  node {
-                    _id,
-                    namePt,
-                    slug
-                  }
-                }
-              }
-            }
-        '''
-
-        variables = {"slug": dataset_slug}
-
-        try:
-            return requests.get(
-                self.api_graphql,
-                json={'query': query, 'variables': variables},
-                timeout=90
-            ).json()['data']['allDataset']['edges'][0]['node']['_id']
-        except IndexError as e:
-            logger.warning(
-                f"Dataset {dataset_slug} not found",
-                exc_info=e,
-            )
-
-        return None
-
-    def _get_table_id_from_slug(self, dataset_slug, table_slug):
-        """
-        Get table_id from table_slug
-        """
-        query = '''
-            query ($dataset_slug: String!, $table_slug: String!){
-                allDataset(slug: $dataset_slug) {
-                    edges {
-                        node {
-                            _id,
-                            slug,
-                            tables(slug: $table_slug) {
-                                edges {
-                                    node {
-                                        dataset{
-                                            _id,
-                                            slug
-                                        },
-                                        _id,
-                                        slug
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        '''
-        variables = {"dataset_slug": dataset_slug, "table_slug": table_slug}
-        try:
-            return requests.get(
-                self.api_graphql,
-                json={'query': query, 'variables': variables},
-                timeout=90
-            ).json()['data']['allDataset']['edges'][0]['node']['tables']['edges'][0]['node']['_id']
-        except IndexError as e:
-            logger.warning(
-                f"Table {table_slug} not found",
-                exc_info=e,
-            )
-
-        return None
