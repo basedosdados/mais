@@ -112,6 +112,9 @@ class Metadata(Base):
     def publish_sql(self):
         return True
 
+    def dataset_description(self):
+        return True
+
     def table_description_bq(self):
         return True
 
