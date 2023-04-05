@@ -54,6 +54,7 @@ class Metadata(Base):
         dataset_edges = response["allDataset"]["edges"]
 
         if not dataset_edges:
+            print("refireciona para formulario do front: dataset")
             raise BaseDosDadosException(f"Dataset {variables['slug']} not found")
 
         dataset_node = dataset_edges[0]["node"]
@@ -64,6 +65,7 @@ class Metadata(Base):
         table_edges = dataset_node["tables"]["edges"]
 
         if not table_edges:
+            print("refireciona para formulario do front: table")
             raise BaseDosDadosException(
                 f"Table {variables['table_slug']} not found in dataset {variables['dataset_slug']}"
             )
@@ -107,45 +109,14 @@ class Metadata(Base):
         variables = {"dataset_slug": dataset_slug, "table_slug": table_slug}
         return self._get_id_from_slug(query, variables)
 
-    def exists(self) -> bool:
-        """Check if Metadata object refers to an existing dataset or table.
+    def publish_sql(self):
+        return True
 
-        The method will fetch the api to check whether the dataset or table exists.
+    def table_description_bq(self):
+        return True
 
-        Returns:
-            bool: The existence condition of the metadata in the API. `True` if i
-            t exists, `False` otherwise.
-        """
-        query = """
-              query ($dataset_id: String!, $table_id: String) {
-                allDataset(slug: $dataset_id) {
-                  edges {
-                    node {
-                      id
-                      namePt
-                      tables (slug: $table_id) {
-                        edges {
-                          node {
-                            id
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-          """
-        variables = {"dataset_id": self.dataset_id, "table_id": self.table_id}
+    def schema_prod_bq(self):
+        return True
 
-        response = self._get_graphql(query, variables)
-
-        dataset = response.get("allDataset")
-        if not dataset:
-            return False
-
-        if self.table_id:
-            tables = dataset[0].get("tables")
-            if not tables:
-                return False
-
+    def schema_staging_bq(self):
         return True
