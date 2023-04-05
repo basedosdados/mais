@@ -11,6 +11,23 @@ from loguru import logger
 
 from basedosdados.upload.base import Base
 
+# class Metadata:
+
+#     def __init__(self):
+#         self.prop2 = 2
+#         self.__dict = self.get()
+
+# def __getattr__(self, name):
+#     return self.__dict[name]
+
+#     @property
+#     def     self):
+#         self.__dict['publish_sql']
+#         return "olá"
+
+#     def get(self):
+#         return dict(publish_sql = "oi", prop1 = 1)
+
 
 class Metadata(Base):
     """
@@ -21,18 +38,26 @@ class Metadata(Base):
         super().__init__(**kwargs)
 
         self.dataset_uuid = self._get_dataset_id_from_slug(dataset_id)
-        self.table_uuid = None
+        self.table_uuid = self._get_table_id_from_slug(dataset_id, table_id)
 
         self.table_id = table_id
         self.dataset_id = dataset_id
 
-        if self.table_id:
-            self.table_uuid = self._get_table_id_from_slug(dataset_id, table_id)
-            self.dataset_metadata_obj = Metadata(self.dataset_id, **kwargs)
+    def publish_sql(self):
 
-        url = "https://basedosdados.org"
-        # self.CKAN_API_KEY = self.config.get("ckan", {}).get("api_key")
-        # self.CKAN_URL = self.config.get("ckan", {}).get("url", "") or url
+        return True
+
+    def schema_pro_bq(self):
+
+        return True
+
+    def table_description(self):
+
+        return True
+
+    def dataset_description(self):
+
+        return True
 
     def _get_nodes_from_edges(
         self,
@@ -95,21 +120,3 @@ class Metadata(Base):
                 return False
 
         return True
-
-
-# class Metadata:
-
-#     def __init__(self):
-#         self.prop2 = 2
-#         self.__dict = self.get()
-
-#     def __getattr__(self, name):
-#         return self.__dict[name]
-
-#     @property
-#     def     self):
-#         self.__dict['publish_sql']
-#         return "olá"
-
-#     def get(self):
-#         return dict(publish_sql = "oi", prop1 = 1)
