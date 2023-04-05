@@ -1,5 +1,4 @@
 /*
-
 Query para publicar a tabela.
 
 Esse é o lugar para:
@@ -16,10 +15,9 @@ TIPOS:
     - Para modificar tipos de colunas, basta substituir STRING por outro tipo válido.
     - Exemplo: `SAFE_CAST(column_name AS NUMERIC) column_name`
     - Mais detalhes: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-
 */
 
-CREATE VIEW projetos-bd.br_inmet_bdmep.microdados AS
+CREATE VIEW basedosdados-dev.br_inmet_bdmep.microdados AS
 SELECT 
 SAFE_CAST(ano AS INT64) ano,
 SAFE_CAST(data AS DATE) data,
@@ -42,4 +40,4 @@ SAFE_CAST(umidade_rel_hora AS FLOAT64) umidade_rel_hora,
 SAFE_CAST(vento_direcao AS FLOAT64) vento_direcao,
 SAFE_CAST(vento_rajada_max AS FLOAT64) vento_rajada_max,
 SAFE_CAST(vento_velocidade AS FLOAT64) vento_velocidade
-from projetos-bd.br_inmet_bdmep_staging.microdados as t
+FROM basedosdados-dev.br_inmet_bdmep_staging.microdados AS t
