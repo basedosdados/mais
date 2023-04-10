@@ -49,6 +49,39 @@ class Metadata(Base):
 
         return response.get("data", {})
 
+    def _simplify_graphql_response(self, response: dict) -> dict:
+        """
+        Simplify the graphql response
+        Args:
+            response: the graphql response
+        Returns:
+            dict: the simplified graphql response
+        """
+        if response == {}:  # pragma: no cover
+            return {}
+
+        output_ = {}
+
+        for key in response:
+            try:
+                if (
+                    isinstance(response[key], dict)
+                    and response[key].get("edges") is not None
+                ):
+                    output_[key] = [
+                        v.get("node")
+                        for v in list(
+                            map(self._simplify_graphql_response, response[key]["edges"])
+                        )
+                    ]
+                elif isinstance(response[key], dict):
+                    output_[key] = self._simplify_graphql_response(response[key])
+                else:
+                    output_[key] = response[key]
+            except TypeError as e:
+                logger.error(f"Erro({e}): {key} - {response[key]}")
+        return output_
+
     def _get_id_from_slug(self, query, variables):
         response = self._get_graphql(query, variables)
         dataset_edges = response["allDataset"]["edges"]
@@ -110,7 +143,38 @@ class Metadata(Base):
         return self._get_id_from_slug(query, variables)
 
     def publish_sql(self):
-        return True
+        query = """
+            query{
+                allTable (id:"3b65f9c8-c50c-4e89-9c41-3a42eb357fd0"){
+                    edges {
+                    node {
+                        id
+                        slug
+                        dataset {
+                                    id
+                        slug
+                        }
+                        columns {
+                        edges {
+                            node {
+                            name
+                            isInStaging
+                            isPartition
+                            descriptionPt
+                            observations
+                            bigqueryType {
+                                name
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+            }
+        """
+        variables = {"table_uuid": self.table_uuid}
+        return self._simplify_graphql_response(self._get_graphql(query, variables))
 
     def dataset_description(self):
         return True
