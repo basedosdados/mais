@@ -31,7 +31,7 @@ spatial_coverage:
 #     - 2016
 #     - 2020
 temporal_coverage:
-    - 2005-08(1)2022-12
+    - 2005-08(1)2023-02
 # A unidade temporal com qual a tabela é atualizada.
 # Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
 update_frequency: month
@@ -58,9 +58,9 @@ observation_level:
 
 
 last_updated:
-    metadata: '2023-03-02'
-    data: '2023-03-02 22:24'
-    release: '2023-02-01 22:24:10'
+    metadata: '2023-04-11'
+    data: '2023-04-11 16:00'
+    release: '2023-04-1 16:00:00'
 
 # Versão da tabela. Seguindo o padrão de semantic versioning.
 # Exemplos: v1.0, v1.1.3
@@ -85,12 +85,12 @@ data_cleaned_by:
     website:
 
 # Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
-data_cleaning_description: Padronização de colunas; Exclusão de caracter '0'; Inclusão
-    de identificadores de id_municipio;Transformação de datas; Exclusão da Linha 4020
-    de Janeiro de 2006 - Rio de Janeiro por falta de informações
+data_cleaning_description: 1. Padronização de colunas;2. Exclusão de caracter '0'; 3. Inclusão
+    de identificadores de id_municipio; 4. Transformação de datas; 5. criação da coluna id_natureza_juridica para 
+    datas anteriores a 2012-05; 6. particionamento de dados
 
 # Url do código de limpeza dos dados do github.
-data_cleaning_code_url: ttps://github.com/basedosdados/mais/tree/master/bases/br_ms_cnes/code
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ms_cnes/code
 
 # Organização que ajudou institucionalmente na disponibilização dos dados.
 partner_organization:
@@ -191,36 +191,6 @@ columns:
     - name: mes_atualizacao
       bigquery_type: int64
       description: Mês de atualização da informação pelo estabelecimento
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: mes
-          column_name: mes
-      measurement_unit: month
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: ano_competencia
-      bigquery_type: int64
-      description: Ano de competência da informação
-      temporal_coverage:
-          - (1)
-      covered_by_dictionary: no
-      directory_column:
-          dataset_id: br_bd_diretorios_data_tempo
-          table_id: ano
-          column_name: ano
-      measurement_unit: year
-      has_sensitive_data: no
-      observations:
-      is_in_staging: true
-      is_partition: false
-    - name: mes_competencia
-      bigquery_type: int64
-      description: Mês de competência da informação
       temporal_coverage:
           - (1)
       covered_by_dictionary: no
@@ -3330,6 +3300,6 @@ columns:
       is_in_staging: true
       is_partition: false
 
-number_rows: 47936405
+number_rows: 55405739
 
-metadata_modified: '2023-03-07T19:00:00.561772'
+metadata_modified: '2023-03-21T19:33:03.679914'
