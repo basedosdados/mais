@@ -119,6 +119,21 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
+    - name: dataset_name
+      bigquery_type: string
+      description: Dataset Name
+      temporal_coverage:
+            - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false      
     - name: id
       bigquery_type: string
       description: ID
@@ -284,7 +299,97 @@ columns:
       observations:
       is_in_staging: true
       is_partition: false
+    - name: metadata
+      bigquery_type: date
+      description: Metadata Date
+      temporal_coverage:
+            - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false  
+    - name: data
+      bigquery_type: date
+      description: Date
+      temporal_coverage:
+            - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false   
+    - name: release
+      bigquery_type: date
+      description: Release Date
+      temporal_coverage:
+            - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: published_by
+      bigquery_type: string
+      description: Published By
+      temporal_coverage:
+            - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false  
+    - name: cleaned_by
+      bigquery_type: string
+      description: Cleaned By
+      temporal_coverage:
+            - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: missing_metadata
+      bigquery_type: string
+      description: Missing Metadata
+      temporal_coverage:
+            - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false                               
 
-number_rows: 435
+number_rows: 470
 
 metadata_modified:
