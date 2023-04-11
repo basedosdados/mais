@@ -1,72 +1,46 @@
-dataset_id: br_inmet_bdmep # AUTO GENERATED
 
-url_ckan: https://basedosdados.org/dataset/br-inmet-bdmep
-url_github: https://github.com/basedosdados/mais/tree/master/bases/br_inmet_bdmep
+# Nome (slug) do conjunto no CKAN
+# Exemplos: br-ibge-populacao, br-tse-eleicoes
+name: br-inmet-bdmep
 
-# Descreva a base.
-# Ela é sobre o que?
-# Quais as principais fontes de dados?
-# Há links para FAQs e explicações?
-description: | # REQUIRED
-    O BDMEP abriga dados meteorológicos diários em forma digital, de séries históricas das várias estações meteorológicas convencionais da rede de estações do INMET com milhões de informações, referentes às medições diárias, de acordo com as normas técnicas internacionais da Organização Meteorológica Mundial.
+# Título do conjunto, a ser exibido no mecanismo de busca.
+# Exemplo: População brasileira
+title: Banco de Dados Meteorológicos (BDMEP)
 
 # Qual organização disponibiliza os dados originais?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/organization_list
-organization: instituto-nacional-de-meteorologia-inmet # REQUIRED
+# Se a organização não estiver na lista acima ou o nome não estiver conforme o manual de estilo
+# criar ou renomear a organização em https://basedosdados.org/organization/
+# Exemplos: br-ibge, br-tse, br-rj-gov
+organization:
+    - instituto-nacional-de-meteorologia-inmet
 
-# Qual departamento/grupo/pessoa mantém os dados originais?
-author:
-    name: Filipe Cavalcanti
-    email: f.matheus.cavalcanti@gmail.com
+# Descrição do conjunto
+notes: "O BDMEP abriga dados meteorológicos diários em forma digital, de séries históricas das várias estações meteorológicas convencionais da rede de estações do INMET com milhões de informações, referentes às medições diárias, de acordo com as normas técnicas internacionais da Organização Meteorológica Mundial."
 
-# Onde encontrar os dados originais e mais informações?
-website:
-    - https://portal.inmet.gov.br/dadoshistoricos
-
-# Quais grupos caracterizam a base?
+# Quais temas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/group_list
+# Importante: preencher com a chave, e não o valor.
 groups:
-    - meio ambiente
+    - meio-ambiente
 
 # Quais etiquetas caracterizam a base?
 # Opções: escolher dessa lista -> https://basedosdados.org/api/3/action/tag_list
+# Exemplos:
+#    - fertilidade
+#    - preco
+#    - desmatamento
 # Caso crie etiquetas novas, as regras são:
-#   - letras minúsculas
-#   - sem acentos
-#   - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
+#    - letras minúsculas
+#    - sem acentos
+#    - sempre no singular
+#    - não repita nomes de grupos (ex. educacao, saude, meio ambiente, economia, etc.)
 tags:
-    - clima 
+    - clima
+    - radiacao
     - temperatura
-    - radiação
     - umidade
 
-# Em quais línguas a base (ou a fonte original) está disponível?
-# Regras: minúsculo, sem acentos.
-# Opções: portugues, ingles, espanhol, frances, chines, russo, hindi, alemao, etc.
-languages:
-    - português
-
-# Os dados originais estão disponíveis de graça?
-free: sim
-
-# Are microdata available for download?
-microdata: sim
-
-# Existe uma API na fonte original?
-API: não
-
-# É necessário registrar um usuário para baixar os dados originais?
-registration: não
-
-# Como os dados originais estão disponibilizados?
-availability: online
-
-# A fonte original requer IP brasileiro para acesso?
-brazilian_IP: sim
-
-# Essa base está sob qual licença?
-# A licença MIT se aplica a bases públicas.
-# Caso não seja pública, ver opções aqui: https://help.data.world/hc/en-us/articles/115006114287-Common-license-types-for-datasets
-license: 
-    name: MIT # REQUIRED
-    url: <url>
+# Não altere esse campo.
+# Data da última modificação dos metadados gerada automaticamente pelo CKAN.
+metadata_modified: '2022-12-20T18:47:40.263178'
