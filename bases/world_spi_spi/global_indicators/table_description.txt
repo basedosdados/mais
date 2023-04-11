@@ -1,0 +1,48 @@
+The table uses 12 components and 60 indicators to measure the social performance of 169 countries fully and an additional 27 countries partially.
+
+Para saber mais acesse:
+Website: 
+Github:  
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Patrick Teixeira
+Código: 
+Email: patrick.teixeira@basedosdados.org
+Tratado por
+-----------
+Nome: Patrick Teixeira
+Código: 
+Email: patrick.teixeira@basedosdados.org
+
+
+
+
+
+
+Cobertura Temporal
+------------------
+- 2011(1)2022
+
+
+
+
+Cobertura Espacial
+------------------
+- world
+
+
+
+
+Tratamento
+----------
+Padronização segundo as normas da BD
+
+
+
+Frequencia de Atualização
+-------------------------
+one_year

@@ -1,0 +1,486 @@
+# Igual ao dataset.name mas como lower case.
+# Exemplos: br_ibge_populacao, br_inep_censo_escolar
+dataset_id: br_ibge_pof
+
+table_id: servico_nao_monetario_pof4_2017
+
+# Título da tabela.
+title: Serviços Não Monetários - POF4
+
+# Descreva a tabela. Essas são as primeiras frases que um usuário vai ver.
+# Você não precisa ser muito conciso. Sinta-se a vontade para dar exemplos de
+# como usar os dados.
+# Se souber, liste também aplicações: pesquisa, apps, etc. que usem os dados.,
+description: Microdados do Registro de Serviços Não Monetários - POF4 da Pesquisa de Orçamentos Familiares.
+
+# As máximas unidades espaciais que a tabela cobre.
+# Exemplo:
+#   - sa.br
+spatial_coverage:
+    - sa.br
+
+# Anos cobertos pela tabela.
+# Preencher como lista de intervalos.
+# Exemplos: ['1995(1)2019'], ['2002(2)2010', '2016', '2020'].
+temporal_coverage:
+    - 2017(1)2018
+
+# A unidade temporal com qual a tabela é atualizada.
+# Opções em 'https://basedosdados.org/api/3/action/bd_available_options'
+update_frequency: ten_years
+
+# Nível de observação da tabela: o que representa cada linha.
+observation_level:
+    - entity: person
+      columns:
+        - id_informante
+    - entity: item
+      columns:
+        - id_codigo_5_bd 
+
+last_updated:
+    metadata: '2022-10-19'
+    data: '2022-05-19 12:00:00'
+    release: '2022-05-19 13:00:00'
+
+# Versão da tabela. Seguindo o padrão de semantic versioning.
+# Exemplo: v1.1.3
+version: v1.0
+
+# Quem está preenchendo esses metadados?
+published_by: 
+    name: Arthur de Figueiredo Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
+    website: 
+
+# Qual organização/departamento/pessoa tratou os dados?
+# As vezes há um ponto intermediário entre os dados originais e subir na Base dos Dados.
+# Se essa pessoa é você, preencha abaixo com suas informações.
+data_cleaned_by: 
+    name: Arthur de Figueiredo Gusmão
+    email: arthur.gusmao@basedosdados.org
+    github_user: arthurfg
+    ckan_user: arthurfg
+    website:
+
+# Se houve passos de tratamento, limpeza e manipulação de dados, descreva-os aqui.
+data_cleaning_description: Renomeação e ordenamento das variáveis, criação de identificadores de Unidade de Consumo, Domicilio e Informante, padronização do código dos produtos para os 5 dígitos.
+
+# Url do código de limpeza dos dados.
+data_cleaning_code_url: https://github.com/basedosdados/mais/tree/master/bases/br_ibge_pof/code
+
+
+# Organização que ajudou institucionalmente na disponibilização dos dados.
+partner_organization:
+    name:
+    organization_id:
+
+# Url dos dados originais no GCP Storage.
+raw_files_url:
+
+# Url dos arquivos auxiliares no GCP Storage.
+auxiliary_files_url: https://storage.googleapis.com/basedosdados-dev/auxiliary_files/br_ibge_pof/servico_nao_monetario_pof4_2017/auxiliary_files.zip
+
+# Url da tabela de arquitetura no GCP Storage.
+architecture_url:
+
+source_bucket_name: basedosdados-dev
+
+project_id_prod: basedosdados-dev
+
+project_id_staging: basedosdados-dev
+
+# Liste as colunas da tabela que representam partições.
+# Não esqueça de deletar essas colunas nas tabelas .csv na hora de subir para o BigQuery.
+# Isso poupará muito tempo e dinheiro às pessoas utilizando essa tabela.
+# Se não houver partições, não modifique abaixo.
+partitions:
+    - sigla_uf
+
+# Quais são as colunas? Certifique-se de escrever uma boa descrição, as pessoas vão gostar
+# para saber sobre o que é a coluna.
+# Adicionar todas as colunas manualmente pode ser bastante cansativo, por isso, quando
+# inicializando este arquivo de configuração, você pode apontar a função para uma amostra de dados que
+# preencherá automaticamente as colunas.
+# Algumas colunas existirão apenas na tabela final, você as construirá em `publish.sql`.
+# Para esses, defina is_in_staging como False.
+# Além disso, você deve adicionar as colunas de partição aqui e definir is_partition como True.
+columns:
+    - name: sigla_uf
+      bigquery_type: string
+      description: Sigla da Unidade da Federação
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id: br_bd_diretorios_brasil
+          table_id: uf
+          column_name: sigla
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: true
+    - name: situacao
+      bigquery_type: string
+      description: Situação do Domicílio
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_estrato
+      bigquery_type: string
+      description: Identificador dos estratos do plano amostral da pesquisa
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_unidade_primaria_amostragem
+      bigquery_type: string
+      description: Código da Unidade Primária de Amostragem
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_domicilio
+      bigquery_type: string
+      description: Identificador do Domicílio
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_unidade_consumo
+      bigquery_type: string
+      description: Identificador da Unidade de Consumo
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_informante
+      bigquery_type: string
+      description: Identificador do Informante
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_quadro
+      bigquery_type: string
+      description: Número do quadro que o item de despesa/aquisição foi registrado
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: id_codigo_5_bd
+      bigquery_type: string
+      description: Código de 5 dígitos do item
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: V9001
+      bigquery_type: string
+      description: Código do tipo de despesa/aquisição
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: V9002
+      bigquery_type: string
+      description: Forma de aquisição
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: V9010
+      bigquery_type: string
+      description: Último mês que a respectiva despesa/aquisição foi realizada pelo
+          informante, no período de referência
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: V9011
+      bigquery_type: int64
+      description: Número de meses que a despesa/aquisição foi realizada pelo informante,
+          no período de referência
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: month
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: V4104
+      bigquery_type: string
+      description: Principal motivo da viagem não rotineira associado a despesa/aquisição
+          realizada pelo informante
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: V4105
+      bigquery_type: string
+      description: Origem da despesa/aquisição relacionada a viagem não rotineira
+          realizada pelo informante
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: V9004
+      bigquery_type: string
+      description: Código do local de aquisição
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: yes
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: indicador_imputacao_valor
+      bigquery_type: int64
+      description: Indica se o valor da despesa/aquisição foi imputado
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: fator_anualizacao
+      bigquery_type: int64
+      description: Número utilizado para anualizar as despesas/aquisições, em função
+          do período de referência
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: deflator
+      bigquery_type: float64
+      description: Fator de multiplicação para o tratamento do efeito inflacionário
+          sobre os valores monetários e não monetários correntes das aquisições de
+          bens e serviços e rendimentos (Data de Referência - 5 de janeiro de 2018)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: V8000
+      bigquery_type: float64
+      description: Valor da despesa/aquisição realizada pelo informante, no período
+          de referência
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: V8000_deflacionado
+      bigquery_type: float64
+      description: Valor da despesa/aquisição realizada pelo informante, no período
+          de referência, deflacionado (Data de Referência - 5 de janeiro de 2018)
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: renda_total
+      bigquery_type: float64
+      description: Valor do rendimento bruto total mensal da Unidade de Consumo
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit: brl
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: peso
+      bigquery_type: float64
+      description: Fator de expansão atribuído ao domicílio pertencente a uma Unidade
+          Primária de Amostragem
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+    - name: peso_final
+      bigquery_type: float64
+      description: Fator de expansão (peso) ajustado às estimativas populacionais
+          de 15 de janeiro de 2018, segundo cada Unidade da Federação e pós estratos
+          definidos
+      temporal_coverage:
+          - (1)
+      covered_by_dictionary: no
+      directory_column:
+          dataset_id:
+          table_id:
+          column_name:
+      measurement_unit:
+      has_sensitive_data: no
+      observations:
+      is_in_staging: true
+      is_partition: false
+
+number_rows: 122684
+
+metadata_modified:
