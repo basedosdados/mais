@@ -1,0 +1,51 @@
+Na tabela, é possível encontrar a numeração dos CEPs juntamente com informações sobre suas localidades, tais como logradouros, bairros e cidades, além de complementos e identificação geográfica, compostos pela latitude e longitude. Os dados foram obtidos através de uma base aberta no kaggle.
+
+Para saber mais acesse:
+Website: 
+Github: 
+
+Ajude a manter o projeto :)
+Apoia-se: https://apoia.se/basedosdados
+
+Publicado por
+-------------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+Tratado por
+-----------
+Nome: Gabrielle Carvalho
+Código: 
+Email: gabrielle.carvalho@basedosdados.org
+
+
+
+Partições (Filtre a tabela por essas colunas para economizar dinheiro e tempo)
+---------
+- sigla_uf
+
+
+
+
+Cobertura Temporal
+------------------
+
+
+
+
+Cobertura Espacial
+------------------
+- sa.br
+
+
+
+
+Tratamento
+----------
+Organização e modificação dos nomes das colunas para os padrões da BD.
+
+
+
+Frequencia de Atualização
+-------------------------
+uncertain
